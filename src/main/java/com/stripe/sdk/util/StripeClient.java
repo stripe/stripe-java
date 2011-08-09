@@ -1,11 +1,14 @@
 package com.stripe.sdk.util;
 
 import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.net.HttpURLConnection;
 import java.net.URI;
 import java.net.URL;
+import java.util.Properties;
 
 import com.google.gson.Gson;
 import com.stripe.sdk.model.Charge;
@@ -24,12 +27,34 @@ import com.stripe.sdk.exception.StripeUnauthorizedException;
 
 public class StripeClient {
 
+	public static final String BUILD = getGitCommitId();
+
 	protected static final String ENDPOINT = "api.stripe.com";
 	protected static final String PROTOCOL = "https";
 	protected static final String BASEPATH = "/v1/";
+
 	protected static String key = "";
 
 	protected static Gson gson = new Gson();
+
+	private static String getGitCommitId() {
+		String result = "?";
+		Properties gitProperties = new Properties();
+		InputStream resource = StripeClient.class
+				.getResourceAsStream("/git.properties");
+
+		if (null != resource) {
+			try {
+				gitProperties.load(resource);
+				result = gitProperties.getProperty("git.commit.id.abbrev",
+						"?");
+			} catch (IOException e) {
+				// Fail silently.
+			}
+		}
+
+		return result;
+	}
 
 	public static Charge newCharge(long amount, String currency,
 			String customer, String card) throws Exception {
