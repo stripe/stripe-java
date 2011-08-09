@@ -64,8 +64,8 @@ public class StripeClient {
 	}
 
 	public static Charge refundCharge(String id) throws Exception {
-		String response = makeRequest("charges/" + id + "/refund", "POST", null,
-				null);
+		String response = makeRequest("charges/" + id + "/refund", "POST",
+				null, null);
 		return gson.fromJson(response, Charge.class);
 	}
 
@@ -83,7 +83,7 @@ public class StripeClient {
 		String[] values = { count + "", offset + "", customer };
 		String response = makeRequest("charges", "GET", params, values);
 		return gson.fromJson(response, Charge[].class);
-	}	
+	}
 
 	public static Customer newCustomer(String email, String description)
 			throws Exception {
@@ -113,10 +113,11 @@ public class StripeClient {
 				"card[address_line1]", "card[address_line2]",
 				"card[address_state]", "card[address_zip]",
 				"card[address_country]" };
-		String[] values = { coupon, email, description, plan, trialEnd == null ? null : trialEnd + "" ,
-				cardNumber, cardExpMonth, cardExpYear, cardCVC, cardName,
-				cardAddressLine1, cardAddressLine2, cardAddressState,
-				cardAddressZip, cardAddressCountry };
+		String[] values = { coupon, email, description, plan,
+				trialEnd == null ? null : trialEnd + "", cardNumber,
+				cardExpMonth, cardExpYear, cardCVC, cardName, cardAddressLine1,
+				cardAddressLine2, cardAddressState, cardAddressZip,
+				cardAddressCountry };
 		String response = makeRequest("customers", "POST", params, values);
 		return gson.fromJson(response, Customer.class);
 	}
@@ -263,8 +264,7 @@ public class StripeClient {
 			String[] params, String[] values) throws Exception {
 		String query = "";
 		String data = "";
-		String response = null;
-		if(params != null && values != null){
+		if (params != null && values != null) {
 			for (int i = 0; i < params.length; i++) {
 				if (values[i] != null) {
 					if (method == "POST") {
@@ -273,8 +273,8 @@ public class StripeClient {
 						query += "&" + params[i] + "=" + values[i];
 					}
 				}
-			}	
-		}		
+			}
+		}
 		URI uri = new URI(PROTOCOL, ENDPOINT, BASEPATH + path, query, null);
 		URL url = uri.toURL();
 
@@ -285,8 +285,8 @@ public class StripeClient {
 			throws Exception {
 		String ret = null;
 
-		HttpURLConnection conn = (HttpURLConnection) url.openConnection();		
-		
+		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+
 		conn.setRequestProperty("Authorization", "Basic " + key);
 		conn.setRequestMethod(method);
 		conn.setUseCaches(false);
@@ -313,7 +313,8 @@ public class StripeClient {
 
 		if (conn.getResponseCode() != HttpURLConnection.HTTP_OK) {
 			Gson gson = new Gson();
-			StripeErrorResponse err = gson.fromJson(ret, StripeErrorResponse.class);
+			StripeErrorResponse err = gson.fromJson(ret,
+					StripeErrorResponse.class);
 			StripeException ex = new StripeException();
 			switch (conn.getResponseCode()) {
 			case HttpURLConnection.HTTP_BAD_REQUEST:
@@ -347,6 +348,5 @@ public class StripeClient {
 
 		return ret;
 	}
-
 
 }
