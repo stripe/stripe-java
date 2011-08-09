@@ -1,11 +1,14 @@
 package com.stripe.sdk.exception;
 
 public class StripeBadRequestException extends StripeException {
-	public StripeBadRequestException(){
-		
+
+	private static final long serialVersionUID = -769959596755582241L;
+
+	public StripeBadRequestException() {
+
 	}
-	
-	public StripeBadRequestException(int statusCode, String message){
+
+	public StripeBadRequestException(int statusCode, String message) {
 		super(statusCode, message);
 	}
 }

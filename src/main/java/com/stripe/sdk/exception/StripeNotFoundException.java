@@ -1,10 +1,13 @@
 package com.stripe.sdk.exception;
 
 public class StripeNotFoundException extends StripeException {
-	public StripeNotFoundException(){		
+
+	private static final long serialVersionUID = 7327544733869018763L;
+
+	public StripeNotFoundException() {
 	}
-	
-	public StripeNotFoundException(int statusCode, String message){
+
+	public StripeNotFoundException(int statusCode, String message) {
 		super(statusCode, message);
 	}
 }
