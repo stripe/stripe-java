@@ -1,4 +1,4 @@
-package com.stripe.util;
+package com.stripe.sdk.util;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -8,19 +8,19 @@ import java.net.URI;
 import java.net.URL;
 
 import com.google.gson.Gson;
-import com.stripe.datamodel.Charge;
-import com.stripe.datamodel.Customer;
-import com.stripe.datamodel.DeleteResponse;
-import com.stripe.datamodel.Invoice;
-import com.stripe.datamodel.InvoiceItem;
-import com.stripe.datamodel.StripeErrorResponse;
-import com.stripe.datamodel.Subscription;
-import com.stripe.exceptions.StripeBadRequestException;
-import com.stripe.exceptions.StripeException;
-import com.stripe.exceptions.StripeNotFoundException;
-import com.stripe.exceptions.StripeRequestFailedException;
-import com.stripe.exceptions.StripeServerErrorException;
-import com.stripe.exceptions.StripeUnauthorizedException;
+import com.stripe.sdk.model.Charge;
+import com.stripe.sdk.model.Customer;
+import com.stripe.sdk.model.DeleteResponse;
+import com.stripe.sdk.model.Invoice;
+import com.stripe.sdk.model.InvoiceItem;
+import com.stripe.sdk.model.StripeErrorResponse;
+import com.stripe.sdk.model.Subscription;
+import com.stripe.sdk.exception.StripeBadRequestException;
+import com.stripe.sdk.exception.StripeException;
+import com.stripe.sdk.exception.StripeNotFoundException;
+import com.stripe.sdk.exception.StripeRequestFailedException;
+import com.stripe.sdk.exception.StripeServerErrorException;
+import com.stripe.sdk.exception.StripeUnauthorizedException;
 
 public class StripeClient {
 

@@ -1,4 +1,4 @@
-package com.stripe.exceptions;
+package com.stripe.sdk.exception;
 
 public class StripeException extends Exception {
 	protected int statusCode;

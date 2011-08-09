@@ -1,4 +1,4 @@
-package com.stripe.exceptions;
+package com.stripe.sdk.exception;
 
 public class StripeServerErrorException extends StripeException {
 	public StripeServerErrorException(){		

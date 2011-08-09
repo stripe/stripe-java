@@ -1,4 +1,4 @@
-package com.stripe.datamodel;
+package com.stripe.sdk.model;
 
 public class InvoiceReadyEvent {
 	protected long customer;
