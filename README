@@ -1,1 +1,3 @@
 These are beta, unofficial, untested, unexplored and unevaluated Java bindings. Use at your own risk.
+
+This library can now be built with Maven. Install Maven 2 or better, then type "mvn package" in this directory. You will find the resulting .jar in the /target directory after the build.
