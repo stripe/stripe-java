@@ -1,4 +1,4 @@
-package com.stripe.sdk.exception;
+package com.stripe.exception;
 
 public class StripeUnauthorizedException extends StripeException {
 

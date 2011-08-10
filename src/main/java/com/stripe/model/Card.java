@@ -1,4 +1,4 @@
-package com.stripe.sdk.model;
+package com.stripe.model;
 
 public class Card {
 	protected String type;

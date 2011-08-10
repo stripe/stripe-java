@@ -1,4 +1,4 @@
-package com.stripe.sdk.model;
+package com.stripe.model;
 
 public class Subscription {
 	protected long current_period_end, current_period_start, trial_end,
