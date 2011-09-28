@@ -11,19 +11,23 @@ import java.net.URL;
 import java.util.Properties;
 
 import com.google.gson.Gson;
-import com.stripe.model.Charge;
-import com.stripe.model.Customer;
-import com.stripe.model.DeleteResponse;
-import com.stripe.model.Invoice;
-import com.stripe.model.InvoiceItem;
-import com.stripe.model.StripeErrorResponse;
-import com.stripe.model.Subscription;
 import com.stripe.exception.StripeBadRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.exception.StripeNotFoundException;
 import com.stripe.exception.StripeRequestFailedException;
 import com.stripe.exception.StripeServerErrorException;
 import com.stripe.exception.StripeUnauthorizedException;
+import com.stripe.model.Charge;
+import com.stripe.model.ChargeResult;
+import com.stripe.model.Customer;
+import com.stripe.model.CustomerResult;
+import com.stripe.model.DeleteResponse;
+import com.stripe.model.Invoice;
+import com.stripe.model.InvoiceItem;
+import com.stripe.model.InvoiceItemResult;
+import com.stripe.model.InvoiceResult;
+import com.stripe.model.StripeErrorResponse;
+import com.stripe.model.Subscription;
 
 public class StripeClient {
 
@@ -36,6 +40,10 @@ public class StripeClient {
 	protected static String key = "";
 
 	protected static Gson gson = new Gson();
+	
+	public static String base64(String in) {
+		return new String(Base64.encodeToString(in.getBytes(), false));
+	}
 
 	private static String getGitCommitId() {
 		String result = "?";
@@ -94,20 +102,20 @@ public class StripeClient {
 		return gson.fromJson(response, Charge.class);
 	}
 
-	public static Charge[] getCharges() throws Exception {
+	public static ChargeResult getCharges() throws Exception {
 		return getCharges(10, 0);
 	}
 
-	public static Charge[] getCharges(int count, int offset) throws Exception {
+	public static ChargeResult getCharges(int count, int offset) throws Exception {
 		return getCharges(count, offset, null);
 	}
 
-	public static Charge[] getCharges(int count, int offset, String customer)
+	public static ChargeResult getCharges(int count, int offset, String customer)
 			throws Exception {
 		String[] params = { "count", "offset", "customer" };
 		String[] values = { count + "", offset + "", customer };
 		String response = makeRequest("charges", "GET", params, values);
-		return gson.fromJson(response, Charge[].class);
+		return gson.fromJson(response, ChargeResult.class);
 	}
 
 	public static Customer newCustomer(String email, String description)
@@ -163,16 +171,16 @@ public class StripeClient {
 		return gson.fromJson(response, DeleteResponse.class);
 	}
 
-	public static Customer[] getCustomers() throws Exception {
+	public static CustomerResult getCustomers() throws Exception {
 		return getCustomers(10, 0);
 	}
 
-	public static Customer[] getCustomers(int count, int offset)
+	public static CustomerResult getCustomers(int count, int offset)
 			throws Exception {
 		String[] params = { "count", "offset" };
 		String[] values = { count + "", offset + "" };
 		String response = makeRequest("customers", "GET", params, values);
-		return gson.fromJson(response, Customer[].class);
+		return gson.fromJson(response, CustomerResult.class);
 	}
 
 	public static Subscription updateSubscription(String customer, String plan,
@@ -234,22 +242,22 @@ public class StripeClient {
 		return gson.fromJson(response, InvoiceItem.class);
 	}
 
-	public static InvoiceItem[] getInvoiceItems(String customer)
+	public static InvoiceItemResult getInvoiceItems(String customer)
 			throws Exception {
 		return getInvoiceItems(customer, 10, 0);
 	}
 
-	public static InvoiceItem[] getInvoiceItems(int count, int offset)
+	public static InvoiceItemResult getInvoiceItems(int count, int offset)
 			throws Exception {
 		return getInvoiceItems(null, count, offset);
 	}
 
-	public static InvoiceItem[] getInvoiceItems(String customer, int count,
+	public static InvoiceItemResult getInvoiceItems(String customer, int count,
 			int offset) throws Exception {
 		String[] params = { "customer", "count", "offset" };
 		String[] values = { customer, count + "", offset + "" };
 		String response = makeRequest("invoiceitems", "GET", params, values);
-		return gson.fromJson(response, InvoiceItem[].class);
+		return gson.fromJson(response, InvoiceItemResult.class);
 	}
 
 	public static Invoice getInvoice(String id) throws Exception {
@@ -257,20 +265,20 @@ public class StripeClient {
 		return gson.fromJson(response, Invoice.class);
 	}
 
-	public static Invoice[] getInvoices(String customer) throws Exception {
+	public static InvoiceResult getInvoices(String customer) throws Exception {
 		return getInvoices(customer, 10, 0);
 	}
 
-	public static Invoice[] getInvoices(int count, int offset) throws Exception {
+	public static InvoiceResult getInvoices(int count, int offset) throws Exception {
 		return getInvoices(null, count, offset);
 	}
 
-	public static Invoice[] getInvoices(String customer, int count, int offset)
+	public static InvoiceResult getInvoices(String customer, int count, int offset)
 			throws Exception {
 		String[] params = { "customer", "count", "offset" };
 		String[] values = { customer, count + "", offset + "" };
 		String response = makeRequest("invoiceitems", "GET", params, values);
-		return gson.fromJson(response, Invoice[].class);
+		return gson.fromJson(response, InvoiceResult.class);
 	}
 
 	public static Invoice getUpcomingInvoice(String customer) throws Exception {
@@ -312,7 +320,7 @@ public class StripeClient {
 
 		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
 
-		conn.setRequestProperty("Authorization", "Basic " + key);
+		conn.setRequestProperty("Authorization", "Basic " + base64(key));
 		conn.setRequestMethod(method);
 		conn.setUseCaches(false);
 
