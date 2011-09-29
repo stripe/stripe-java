@@ -7,3 +7,5 @@ horrid, unpredictable ways for the next while.
 This library can now be built with Maven. Install Maven 2 or better, then type
 "mvn package" in this directory. You will find the resulting .jar in the
 /target directory after the build.
+
+See https://gist.github.com/1246816 for an example.
