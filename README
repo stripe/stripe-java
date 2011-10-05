@@ -1,8 +1,4 @@
-These are beta, unofficial, untested, unexplored and unevaluated Java bindings.
-Use at your own risk.
-
-WARNING: This SDK is in the process of being rebuilt. It WILL change in
-horrid, unpredictable ways for the next while.
+NOTE: This library is still alpha and can change in unpredictable ways in the future.
 
 This library can now be built with Maven. Install Maven 2 or better, then type
 "mvn package" in this directory. You will find the resulting .jar in the

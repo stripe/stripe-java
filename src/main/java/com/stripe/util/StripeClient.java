@@ -10,6 +10,8 @@ import java.net.URI;
 import java.net.URL;
 import java.util.Properties;
 
+import javax.net.ssl.HttpsURLConnection;
+
 import com.google.gson.Gson;
 import com.stripe.exception.StripeBadRequestException;
 import com.stripe.exception.StripeException;
@@ -316,11 +318,16 @@ public class StripeClient {
 
 	protected static String makeTheRequest(URL url, String method, String data)
 			throws Exception {
+		
+		if(key == null || key == "") {
+		      throw new Exception("No API key provided.  (HINT: set your API key using \"StripeClient.setKey(<API-KEY>)\". You can get your API keys from the Stripe web interface. See https://stripe.com/api for details or email support@stripe.com if you have any questions.");
+		}
 		String ret = null;
 
-		HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+		HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
 
 		conn.setRequestProperty("Authorization", "Basic " + base64(key));
+		conn.setRequestProperty("User-Agent", "Stripe/v1 Java Bindings/0.1");
 		conn.setRequestMethod(method);
 		conn.setUseCaches(false);
 
