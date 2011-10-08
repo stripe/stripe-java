@@ -42,7 +42,7 @@ public class StripeClient {
 	protected static String key = "";
 
 	protected static Gson gson = new Gson();
-	
+
 	public static String base64(String in) {
 		return new String(Base64.encodeToString(in.getBytes(), false));
 	}
@@ -132,7 +132,7 @@ public class StripeClient {
 
 	public static Customer newCustomer(String coupon, String email,
 			String description, String plan, Long trialEnd) throws Exception {
-		return newCustomer(coupon, email, description, plan, trialEnd, null,
+		return newCustomer(null, coupon, email, description, plan, trialEnd, null,
 				null, null, null, null, null, null, null, null, null);
 	}
 
@@ -142,13 +142,24 @@ public class StripeClient {
 			String cardName, String cardAddressLine1, String cardAddressLine2,
 			String cardAddressZip, String cardAddressState,
 			String cardAddressCountry) throws Exception {
-		String[] params = { "coupon", "email", "description", "plan",
+		return newCustomer(null, coupon, email, description, plan, trialEnd, cardNumber,
+				cardExpMonth, cardExpYear, cardCVC, cardName, cardAddressLine1,
+                cardAddressLine2, cardAddressZip, cardAddressState, cardAddressCountry);
+    }
+
+	public static Customer newCustomer(String cardToken, String coupon, String email,
+			String description, String plan, Long trialEnd, String cardNumber,
+			String cardExpMonth, String cardExpYear, String cardCVC,
+			String cardName, String cardAddressLine1, String cardAddressLine2,
+			String cardAddressZip, String cardAddressState,
+			String cardAddressCountry) throws Exception {
+		String[] params = { "card", "coupon", "email", "description", "plan",
 				"trial_end", "card[number]", "card[exp_month]",
 				"card[exp_year]", "card[cvc]", "card[name]",
 				"card[address_line1]", "card[address_line2]",
 				"card[address_state]", "card[address_zip]",
 				"card[address_country]" };
-		String[] values = { coupon, email, description, plan,
+		String[] values = { cardToken, coupon, email, description, plan,
 				trialEnd == null ? null : trialEnd + "", cardNumber,
 				cardExpMonth, cardExpYear, cardCVC, cardName, cardAddressLine1,
 				cardAddressLine2, cardAddressState, cardAddressZip,
@@ -318,7 +329,7 @@ public class StripeClient {
 
 	protected static String makeTheRequest(URL url, String method, String data)
 			throws Exception {
-		
+
 		if(key == null || key == "") {
 		      throw new Exception("No API key provided.  (HINT: set your API key using \"StripeClient.setKey(<API-KEY>)\". You can get your API keys from the Stripe web interface. See https://stripe.com/api for details or email support@stripe.com if you have any questions.");
 		}
