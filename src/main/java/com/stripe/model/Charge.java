@@ -1,77 +1,20 @@
 package com.stripe.model;
 
-public class Charge {
-	protected boolean attempted;
-	protected boolean refunded;
-	protected boolean paid;
-	protected long amount;
-	protected Card card;
-	protected String id;
-	protected boolean livemode;
-	protected String description;
-	protected String currency;
-	protected String object;
-	protected long created;
+import java.util.Map;
 
-	public Charge() {
-	}
+import com.stripe.exception.StripeException;
 
-	public Charge(boolean attempted, boolean refunded, boolean paid,
-			long amount, Card card, String id, boolean livemode,
-			String description, String currency, String object, long created) {
-		super();
-		this.attempted = attempted;
-		this.refunded = refunded;
-		this.paid = paid;
-		this.amount = amount;
-		this.card = card;
-		this.id = id;
-		this.livemode = livemode;
-		this.description = description;
-		this.currency = currency;
-		this.object = object;
-		this.created = created;
-	}
-
-	public boolean isAttempted() {
-		return attempted;
-	}
-
-	public void setAttempted(boolean attempted) {
-		this.attempted = attempted;
-	}
-
-	public boolean isRefunded() {
-		return refunded;
-	}
-
-	public void setRefunded(boolean refunded) {
-		this.refunded = refunded;
-	}
-
-	public boolean isPaid() {
-		return paid;
-	}
-
-	public void setPaid(boolean paid) {
-		this.paid = paid;
-	}
-
-	public long getAmount() {
-		return amount;
-	}
-
-	public void setAmount(long amount) {
-		this.amount = amount;
-	}
-
-	public Card getCard() {
-		return card;
-	}
-
-	public void setCard(Card card) {
-		this.card = card;
-	}
+public class Charge extends APIResource {
+	Integer amount;
+	Long created;
+	String currency;
+	String id;
+	String livemode;
+	Boolean paid;
+	Boolean refunded;
+	Integer fee;
+	String description;
+	Card card;
 
 	public String getId() {
 		return id;
@@ -81,20 +24,20 @@ public class Charge {
 		this.id = id;
 	}
 
-	public boolean isLivemode() {
-		return livemode;
+	public Integer getAmount() {
+		return amount;
 	}
 
-	public void setLivemode(boolean livemode) {
-		this.livemode = livemode;
+	public void setAmount(Integer amount) {
+		this.amount = amount;
 	}
 
-	public String getDescription() {
-		return description;
+	public Long getCreated() {
+		return created;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setCreated(Long created) {
+		this.created = created;
 	}
 
 	public String getCurrency() {
@@ -105,20 +48,70 @@ public class Charge {
 		this.currency = currency;
 	}
 
-	public String getObject() {
-		return object;
+	public String getLivemode() {
+		return livemode;
 	}
 
-	public void setObject(String object) {
-		this.object = object;
+	public void setLivemode(String livemode) {
+		this.livemode = livemode;
 	}
 
-	public long getCreated() {
-		return created;
+	public Boolean getPaid() {
+		return paid;
 	}
 
-	public void setCreated(long created) {
-		this.created = created;
+	public void setPaid(Boolean paid) {
+		this.paid = paid;
+	}
+
+	public Boolean getRefunded() {
+		return refunded;
+	}
+
+	public void setRefunded(Boolean refunded) {
+		this.refunded = refunded;
+	}
+
+	public Integer getFee() {
+		return fee;
+	}
+
+	public void setFee(Integer fee) {
+		this.fee = fee;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Card getCard() {
+		return card;
+	}
+
+	public void setCard(Card card) {
+		this.card = card;
+	}
+	
+	public static Charge create(Map<String, Object> params) throws StripeException {
+		return request(Method.POST, classURL(Charge.class), params, Charge.class);
+	}
+
+	public static Charge retrieve(String id) throws StripeException {
+		return request(Method.GET, instanceURL(Charge.class, id), null, Charge.class);
+	}
+	
+	public static ChargeCollection all(Map<String, Object> params) throws StripeException {
+		return request(Method.GET, classURL(Charge.class), params, ChargeCollection.class);
+	}
+	
+	public Charge refund() throws StripeException {
+		return request(Method.POST,
+				String.format("%s/refund", instanceURL(Charge.class, this.getId())),
+				null, Charge.class);
 	}
 
 }

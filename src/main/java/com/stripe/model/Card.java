@@ -1,31 +1,36 @@
 package com.stripe.model;
 
-public class Card {
-	protected String type;
-	protected String country;
-	protected String exp_month;
-	protected String exp_year;
-	protected String last4;
-	protected String id;
+
+public class Card extends StripeObject {
+	Integer expMonth;
+	Integer expYear;
+	String last4;
+	String country;
+	String type;
+	String name;
+	String addressLine1;
+	String addressLine2;
+	String addressZip;
+	String addressState;
+	String addressCountry;
 	
-	public Card(){		
+	public Integer getExpMonth() {
+		return expMonth;
 	}
-	
-	public Card(String type, String country, String exp_month, String exp_year,
-			String last4, String id) {
-		super();
-		this.type = type;
-		this.country = country;
-		this.exp_month = exp_month;
-		this.exp_year = exp_year;
+	public void setExpMonth(Integer expMonth) {
+		this.expMonth = expMonth;
+	}
+	public Integer getExpYear() {
+		return expYear;
+	}
+	public void setExpYear(Integer expYear) {
+		this.expYear = expYear;
+	}
+	public String getLast4() {
+		return last4;
+	}
+	public void setLast4(String last4) {
 		this.last4 = last4;
-		this.id = id;
-	}
-	public String getType() {
-		return type;
-	}
-	public void setType(String type) {
-		this.type = type;
 	}
 	public String getCountry() {
 		return country;
@@ -33,34 +38,46 @@ public class Card {
 	public void setCountry(String country) {
 		this.country = country;
 	}
-	public String getExp_month() {
-		return exp_month;
+	public String getType() {
+		return type;
 	}
-	public void setExp_month(String exp_month) {
-		this.exp_month = exp_month;
+	public void setType(String type) {
+		this.type = type;
 	}
-	public String getExp_year() {
-		return exp_year;
+	public String getName() {
+		return name;
 	}
-	public void setExp_year(String exp_year) {
-		this.exp_year = exp_year;
+	public void setName(String name) {
+		this.name = name;
 	}
-
-	public String getLast4() {
-		return last4;
+	public String getAddressLine1() {
+		return addressLine1;
 	}
-	
-	public void setLast4(String last4) {
-		this.last4 = last4;
+	public void setAddressLine1(String addressLine1) {
+		this.addressLine1 = addressLine1;
 	}
-	
-	public String getId() {
-		return id;
+	public String getAddressLine2() {
+		return addressLine2;
 	}
-	public void setId(String id) {
-		this.id = id;
+	public void setAddressLine2(String addressLine2) {
+		this.addressLine2 = addressLine2;
 	}
-	
-	
-	
+	public String getAddressZip() {
+		return addressZip;
+	}
+	public void setAddressZip(String addressZip) {
+		this.addressZip = addressZip;
+	}
+	public String getAddressState() {
+		return addressState;
+	}
+	public void setAddressState(String addressState) {
+		this.addressState = addressState;
+	}
+	public String getAddressCountry() {
+		return addressCountry;
+	}
+	public void setAddressCountry(String addressCountry) {
+		this.addressCountry = addressCountry;
+	}
 }

@@ -1,46 +1,38 @@
 package com.stripe.model;
 
-public class Invoice {
-	protected long created, subtotal, total;
-	protected String id;
-	protected Lines lines;
-	protected Discount discount;
+import java.util.Map;
 
-	public Invoice() {
-	}
+import com.stripe.exception.StripeException;
 
-	public Invoice(long created, long subtotal, long total, String id,
-			Lines lines, Discount discount) {
-		super();
-		this.created = created;
-		this.subtotal = subtotal;
-		this.total = total;
-		this.id = id;
-		this.lines = lines;
-		this.discount = discount;
-	}
-
-	public long getCreated() {
-		return created;
-	}
-
-	public void setCreated(long created) {
-		this.created = created;
-	}
-
-	public long getSubtotal() {
+public class Invoice extends APIResource {
+	Integer subtotal;
+	Integer total;
+	String id;
+	Long created;
+	Boolean attempted;
+	String charge;
+	Boolean closed;
+	String customer;
+	Long date;
+	Boolean paid;
+	Long periodStart;
+	Long periodEnd;
+	Discount discount;
+	InvoiceLines lines;
+	
+	public Integer getSubtotal() {
 		return subtotal;
 	}
 
-	public void setSubtotal(long subtotal) {
+	public void setSubtotal(Integer subtotal) {
 		this.subtotal = subtotal;
 	}
 
-	public long getTotal() {
+	public Integer getTotal() {
 		return total;
 	}
 
-	public void setTotal(long total) {
+	public void setTotal(Integer total) {
 		this.total = total;
 	}
 
@@ -52,19 +44,104 @@ public class Invoice {
 		this.id = id;
 	}
 
-	public Lines getLines() {
-		return lines;
+	public Long getCreated() {
+		return created;
 	}
 
-	public void setLines(Lines lines) {
-		this.lines = lines;
+	public void setCreated(Long created) {
+		this.created = created;
+	}
+
+	public Boolean getAttempted() {
+		return attempted;
+	}
+
+	public void setAttempted(Boolean attempted) {
+		this.attempted = attempted;
+	}
+
+	public String getCharge() {
+		return charge;
+	}
+
+	public void setCharge(String charge) {
+		this.charge = charge;
+	}
+
+	public Boolean getClosed() {
+		return closed;
+	}
+
+	public void setClosed(Boolean closed) {
+		this.closed = closed;
+	}
+
+	public String getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(String customer) {
+		this.customer = customer;
+	}
+
+	public Long getDate() {
+		return date;
+	}
+
+	public void setDate(Long date) {
+		this.date = date;
+	}
+
+	public Boolean getPaid() {
+		return paid;
+	}
+
+	public void setPaid(Boolean paid) {
+		this.paid = paid;
+	}
+
+	public Long getPeriodStart() {
+		return periodStart;
+	}
+
+	public void setPeriodStart(Long periodStart) {
+		this.periodStart = periodStart;
+	}
+
+	public Long getPeriodEnd() {
+		return periodEnd;
+	}
+
+	public void setPeriodEnd(Long periodEnd) {
+		this.periodEnd = periodEnd;
 	}
 
 	public Discount getDiscount() {
-		return this.discount;
+		return discount;
 	}
 
 	public void setDiscount(Discount discount) {
 		this.discount = discount;
+	}
+
+	public InvoiceLines getLines() {
+		return lines;
+	}
+
+	public void setLines(InvoiceLines lines) {
+		this.lines = lines;
+	}
+
+	public static Invoice retrieve(String id) throws StripeException {
+		return request(Method.GET, instanceURL(Invoice.class, id), null, Invoice.class);
+	}
+	
+	public static InvoiceCollection all(Map<String, Object> params) throws StripeException {
+		return request(Method.GET, classURL(Invoice.class), params, InvoiceCollection.class);
+	}
+		
+	public static Invoice upcoming(Map<String, Object> params) throws StripeException {
+		return request(Method.GET, String.format("%s/upcoming", classURL(Invoice.class)),
+				params, Invoice.class);
 	}
 }

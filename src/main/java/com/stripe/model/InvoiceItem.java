@@ -1,52 +1,23 @@
 package com.stripe.model;
 
-public class InvoiceItem {
-	protected long date, amount;
-	protected String description, currency, id;
+import java.util.Map;
 
-	public InvoiceItem() {
-	}
+import com.stripe.exception.StripeException;
 
-	public InvoiceItem(long date, long amount, String description,
-			String currency, String id) {
-		super();
-		this.date = date;
-		this.amount = amount;
-		this.description = description;
-		this.currency = currency;
-		this.id = id;
-	}
+public class InvoiceItem extends APIResource {
+	Integer amount;
+	String id;
+	String currency;
+	String description;
+	Long date;
+	String livemode;
 
-	public long getDate() {
-		return date;
-	}
-
-	public void setDate(long date) {
-		this.date = date;
-	}
-
-	public long getAmount() {
+	public Integer getAmount() {
 		return amount;
 	}
 
-	public void setAmount(long amount) {
+	public void setAmount(Integer amount) {
 		this.amount = amount;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getCurrency() {
-		return currency;
-	}
-
-	public void setCurrency(String currency) {
-		this.currency = currency;
 	}
 
 	public String getId() {
@@ -57,4 +28,55 @@ public class InvoiceItem {
 		this.id = id;
 	}
 
+	public String getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Long getDate() {
+		return date;
+	}
+
+	public void setDate(Long date) {
+		this.date = date;
+	}
+
+	public String getLivemode() {
+		return livemode;
+	}
+
+	public void setLivemode(String livemode) {
+		this.livemode = livemode;
+	}
+
+	public static InvoiceItem create(Map<String, Object> params) throws StripeException {
+		return request(Method.POST, classURL(InvoiceItem.class), params, InvoiceItem.class);
+	}
+
+	public static InvoiceItem retrieve(String id) throws StripeException {
+		return request(Method.GET, instanceURL(InvoiceItem.class, id), null, InvoiceItem.class);
+	}
+	
+	public static InvoiceItemCollection all(Map<String, Object> params) throws StripeException {
+		return request(Method.GET, classURL(InvoiceItem.class), params, InvoiceItemCollection.class);
+	}
+	
+	public InvoiceItem update(Map<String, Object> params) throws StripeException {
+		return request(Method.POST, instanceURL(InvoiceItem.class, this.id), params, InvoiceItem.class);
+	}
+	
+	public DeletedInvoiceItem delete() throws StripeException { 
+		return request(Method.DELETE, instanceURL(InvoiceItem.class, this.id), null, DeletedInvoiceItem.class);
+	}
 }

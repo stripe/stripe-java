@@ -1,40 +1,39 @@
 package com.stripe.model;
 
-public class Plan {
-	protected String id;
-	protected long amount;
-	protected String currency;
-	protected String interval;
-	protected int trial_period_days;
-	protected String identifier;
+import java.util.Map;
 
-	public Plan() {
+import com.stripe.exception.StripeException;
+
+public class Plan extends APIResource {
+	Integer amount;
+	String currency;
+	String id;
+	String interval;
+	String name;
+	String livemode;
+	Integer trialPeriodDays;
+	
+	public static Plan create(Map<String, Object> params) throws StripeException {
+		return request(Method.POST, classURL(Plan.class), params, Plan.class);
 	}
 
-	public Plan(String id, long amount, String currency, String interval,
-			int trial_period_days, String identifier) {
-		super();
-		this.id = id;
-		this.amount = amount;
-		this.currency = currency;
-		this.interval = interval;
-		this.trial_period_days = trial_period_days;
-		this.identifier = identifier;
+	public static Plan retrieve(String id) throws StripeException {
+		return request(Method.GET, instanceURL(Plan.class, id), null, Plan.class);
+	}
+	
+	public static PlanCollection all(Map<String, Object> params) throws StripeException {
+		return request(Method.GET, classURL(Plan.class), params, PlanCollection.class);
+	}
+	
+	public DeletedPlan delete() throws StripeException { 
+		return request(Method.DELETE, instanceURL(Plan.class, this.id), null, DeletedPlan.class);
 	}
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public long getAmount() {
+	public Integer getAmount() {
 		return amount;
 	}
 
-	public void setAmount(long amount) {
+	public void setAmount(Integer amount) {
 		this.amount = amount;
 	}
 
@@ -46,6 +45,14 @@ public class Plan {
 		this.currency = currency;
 	}
 
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public String getInterval() {
 		return interval;
 	}
@@ -54,19 +61,27 @@ public class Plan {
 		this.interval = interval;
 	}
 
-	public int getTrial_period_days() {
-		return trial_period_days;
+	public String getName() {
+		return name;
 	}
 
-	public void setTrial_period_days(int trial_period_days) {
-		this.trial_period_days = trial_period_days;
+	public void setName(String name) {
+		this.name = name;
 	}
 
-	public String getIdentifier() {
-		return identifier;
+	public String getLivemode() {
+		return livemode;
 	}
 
-	public void setIdentifier(String identifier) {
-		this.identifier = identifier;
+	public void setLivemode(String livemode) {
+		this.livemode = livemode;
+	}
+
+	public Integer getTrialPeriodDays() {
+		return trialPeriodDays;
+	}
+
+	public void setTrialPeriodDays(Integer trialPeriodDays) {
+		this.trialPeriodDays = trialPeriodDays;
 	}
 }

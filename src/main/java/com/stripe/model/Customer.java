@@ -1,52 +1,139 @@
 package com.stripe.model;
 
-public class Customer {
-	protected String description;
-	protected boolean livemode;
-	protected long created;
-	protected Card active_card;
-	protected String id;
-	
-	public Customer(){		
-	}
-	
-	public Customer(String description, boolean livemode, long created,
-			Card active_card, String id) {
-		super();
-		this.description = description;
-		this.livemode = livemode;
-		this.created = created;
-		this.active_card = active_card;
-		this.id = id;
-	}
-	public String getDescription() {
-		return description;
-	}
-	public void setDescription(String description) {
-		this.description = description;
-	}
-	public boolean isLivemode() {
-		return livemode;
-	}
-	public void setLivemode(boolean livemode) {
-		this.livemode = livemode;
-	}
-	public long getCreated() {
+import java.util.Map;
+
+import com.stripe.exception.StripeException;
+
+public class Customer extends APIResource {
+	Long created;
+	String id;
+	String livemode;
+	String description;
+	Card activeCard;
+	String email;
+	String plan;
+	Long trialEnd;
+	Discount discount;
+	NextRecurringCharge nextRecurringCharge;
+	Subscription subscription;
+
+	public Long getCreated() {
 		return created;
 	}
-	public void setCreated(long created) {
+
+	public void setCreated(Long created) {
 		this.created = created;
 	}
-	public Card getActive_card() {
-		return active_card;
-	}
-	public void setActive_card(Card active_card) {
-		this.active_card = active_card;
-	}
+
 	public String getId() {
 		return id;
 	}
+
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getLivemode() {
+		return livemode;
+	}
+
+	public void setLivemode(String livemode) {
+		this.livemode = livemode;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
+	public Card getActiveCard() {
+		return activeCard;
+	}
+
+	public void setActiveCard(Card activeCard) {
+		this.activeCard = activeCard;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getPlan() {
+		return plan;
+	}
+
+	public void setPlan(String plan) {
+		this.plan = plan;
+	}
+
+	public Long getTrialEnd() {
+		return trialEnd;
+	}
+
+	public void setTrialEnd(Long trialEnd) {
+		this.trialEnd = trialEnd;
+	}
+
+	public Discount getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(Discount discount) {
+		this.discount = discount;
+	}
+
+	public NextRecurringCharge getNextRecurringCharge() {
+		return nextRecurringCharge;
+	}
+
+	public void setNextRecurringCharge(NextRecurringCharge nextRecurringCharge) {
+		this.nextRecurringCharge = nextRecurringCharge;
+	}
+
+	public Subscription getSubscription() {
+		return subscription;
+	}
+
+	public void setSubscription(Subscription subscription) {
+		this.subscription = subscription;
+	}
+
+	public static Customer create(Map<String, Object> params) throws StripeException {
+		return request(Method.POST, classURL(Customer.class), params, Customer.class);
+	}
+
+	public static Customer retrieve(String id) throws StripeException {
+		return request(Method.GET, instanceURL(Customer.class, id), null, Customer.class);
+	}
+	
+	public static CustomerCollection all(Map<String, Object> params) throws StripeException {
+		return request(Method.GET, classURL(Customer.class), params, CustomerCollection.class);
+	}
+	
+	public Customer update(Map<String, Object> params) throws StripeException {
+		return request(Method.POST, instanceURL(Customer.class, this.id), params, Customer.class);
+	}
+	
+	public DeletedCustomer delete() throws StripeException { 
+		return request(Method.DELETE, instanceURL(Customer.class, this.id), null, DeletedCustomer.class);
+	}
+	
+	public Subscription updateSubscription(Map<String, Object> params) throws StripeException {
+		return request(Method.POST,
+				String.format("%s/subscription", instanceURL(Customer.class, this.id)),
+				params, Subscription.class);
+	}
+	
+	public Subscription cancelSubscription(Map<String, Object> params) throws StripeException {
+		return request(Method.DELETE,
+				String.format("%s/subscription", instanceURL(Customer.class, this.id)),
+				params, Subscription.class);
 	}
 }

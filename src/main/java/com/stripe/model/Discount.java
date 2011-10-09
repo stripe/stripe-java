@@ -1,32 +1,41 @@
 package com.stripe.model;
 
-public class Discount {
-	protected String code;
-	protected int percent_off;
 
-	public Discount() {
-	}
-
-	public Discount(String code, int percent_off) {
-		super();
-		this.code = code;
-		this.percent_off = percent_off;
-	}
-
+public class Discount extends StripeObject {
+	String code;
+	Long end;
+	String id;
+	Integer percentOff;
+	Long start;
+	
 	public String getCode() {
 		return code;
 	}
-
 	public void setCode(String code) {
 		this.code = code;
 	}
-
-	public int getPercent_off() {
-		return percent_off;
+	public Long getEnd() {
+		return end;
 	}
-
-	public void setPercent_off(int percent_off) {
-		this.percent_off = percent_off;
+	public void setEnd(Long end) {
+		this.end = end;
 	}
-
+	public String getId() {
+		return id;
+	}
+	public void setId(String id) {
+		this.id = id;
+	}
+	public Integer getPercentOff() {
+		return percentOff;
+	}
+	public void setPercentOff(Integer percentOff) {
+		this.percentOff = percentOff;
+	}
+	public Long getStart() {
+		return start;
+	}
+	public void setStart(Long start) {
+		this.start = start;
+	}
 }
