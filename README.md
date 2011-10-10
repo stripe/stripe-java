@@ -1,9 +1,11 @@
 # Stripe Java Bindings
 
+You can sign up for a Stripe account at https://stripe.com.
+
 Requirements
 ============
 
-Java 1.5 and later
+Java 1.5 and later.
 
 Installation
 ============
@@ -20,7 +22,7 @@ Add this dependency to your project's POM:
 
 ### Others
 
-Download the following JARs:
+You'll need to manually install the following JARs:
 
 * The packaged Stripe JAR from https://oss.sonatype.org/content/repositories/releases/com/stripe/stripe-java/
 * [Google Gson](http://code.google.com/p/google-gson/) from <http://google-gson.googlecode.com/files/google-gson-1.7.1-release.zip>.
