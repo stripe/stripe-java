@@ -29,4 +29,35 @@ Download the following JARs:
 Usage
 =====
 
-See [StripeTest.java](https://github.com/stripe/stripe-java/blob/master/src/test/java/com/stripe/StripeTest.java) for examples.
+StripeExample.java
+
+    import java.util.HashMap;
+    import java.util.Map;
+
+    import com.stripe.Stripe;
+    import com.stripe.exception.StripeException;
+    import com.stripe.model.Charge;
+
+    public class StripeExample {
+
+        public static void main(String[] args) {
+            Stripe.apiKey = "YOUR-SECRET-KEY";
+            Map<String, Object> chargeMap = new HashMap<String, Object>();
+            chargeMap.put("amount", 100);
+            chargeMap.put("currency", "usd");
+            Map<String, Object> cardMap = new HashMap<String, Object>();
+            cardMap.put("number", "4242424242424242");
+            cardMap.put("exp_month", 12);
+            cardMap.put("exp_year", 2012);
+            chargeMap.put("card", cardMap);
+            try {
+                Charge charge = Charge.create(chargeMap);
+                System.out.println(charge);
+            } catch (StripeException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+
+
+See [StripeTest.java](https://github.com/stripe/stripe-java/blob/master/src/test/java/com/stripe/StripeTest.java) for more examples.
