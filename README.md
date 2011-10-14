@@ -26,7 +26,6 @@ You'll need to manually install the following JARs:
 
 * The packaged Stripe JAR from https://oss.sonatype.org/content/repositories/releases/com/stripe/stripe-java/
 * [Google Gson](http://code.google.com/p/google-gson/) from <http://google-gson.googlecode.com/files/google-gson-1.7.1-release.zip>.
-* [Apache HttpClient](http://hc.apache.org/httpcomponents-client-ga/index.html) from <http://www.alliedquotes.com/mirrors/apache/httpcomponents/httpclient/binary/httpcomponents-client-4.1.2-bin.tar.gz>.
 
 Usage
 =====

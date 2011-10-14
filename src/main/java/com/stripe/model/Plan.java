@@ -3,6 +3,7 @@ package com.stripe.model;
 import java.util.Map;
 
 import com.stripe.exception.StripeException;
+import com.stripe.net.APIResource;
 
 public class Plan extends APIResource {
 	Integer amount;
@@ -14,19 +15,19 @@ public class Plan extends APIResource {
 	Integer trialPeriodDays;
 	
 	public static Plan create(Map<String, Object> params) throws StripeException {
-		return request(Method.POST, classURL(Plan.class), params, Plan.class);
+		return request(RequestMethod.POST, classURL(Plan.class), params, Plan.class);
 	}
 
 	public static Plan retrieve(String id) throws StripeException {
-		return request(Method.GET, instanceURL(Plan.class, id), null, Plan.class);
+		return request(RequestMethod.GET, instanceURL(Plan.class, id), null, Plan.class);
 	}
 	
 	public static PlanCollection all(Map<String, Object> params) throws StripeException {
-		return request(Method.GET, classURL(Plan.class), params, PlanCollection.class);
+		return request(RequestMethod.GET, classURL(Plan.class), params, PlanCollection.class);
 	}
 	
 	public DeletedPlan delete() throws StripeException { 
-		return request(Method.DELETE, instanceURL(Plan.class, this.id), null, DeletedPlan.class);
+		return request(RequestMethod.DELETE, instanceURL(Plan.class, this.id), null, DeletedPlan.class);
 	}
 
 	public Integer getAmount() {

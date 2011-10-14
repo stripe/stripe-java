@@ -15,7 +15,9 @@ import org.junit.Test;
 import com.stripe.exception.CardException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
+import com.stripe.model.Coupon;
 import com.stripe.model.Customer;
+import com.stripe.model.DeletedCoupon;
 import com.stripe.model.DeletedCustomer;
 import com.stripe.model.DeletedInvoiceItem;
 import com.stripe.model.DeletedPlan;
@@ -31,13 +33,22 @@ public class StripeTest
 	static Map<String, Object> defaultChargeParams = new HashMap<String, Object>();
 	static Map<String, Object> defaultCustomerParams = new HashMap<String, Object>();
 	static Map<String, Object> defaultPlanParams = new HashMap<String, Object>();
+	static Map<String, Object> defaultCouponParams = new HashMap<String, Object>();
 
 	static String getUniquePlanId() { return String.format("JAVA-BINDINGS-PLAN-%s", UUID.randomUUID()); }
-	
+	static String getUniqueCouponId() { return String.format("JAVA-BINDINGS-COUPON-%s", UUID.randomUUID()); }
+		
 	static Map<String, Object> getUniquePlanParams() {
 		Map<String, Object> uniqueParams = new HashMap<String, Object>();
 		uniqueParams.putAll(defaultPlanParams);
 		uniqueParams.put("id", getUniquePlanId());
+		return uniqueParams;
+	}
+	
+	static Map<String, Object> getUniqueCouponParams() {
+		Map<String, Object> uniqueParams = new HashMap<String, Object>();
+		uniqueParams.putAll(defaultCouponParams);
+		uniqueParams.put("id", getUniqueCouponId());
 		return uniqueParams;
 	}
 	
@@ -56,6 +67,7 @@ public class StripeTest
 		Customer customer = Customer.create(customerWithPlanParams);
 		return customer;
 	}
+	
 	@BeforeClass public static void setUp() { 
 		Stripe.apiKey = "vtUQeOtUnYr7PGCLQ96Ul4zqpDUO4sOE"; //stripe public test key
 
@@ -81,6 +93,9 @@ public class StripeTest
 		defaultPlanParams.put("currency", "usd");
 		defaultPlanParams.put("interval", "month");
 		defaultPlanParams.put("name", "Java Bindings Plan");
+		
+		defaultCouponParams.put("duration", "once");
+		defaultCouponParams.put("percent_off", 10);
 	}
 	
 	@Test public void testChargeCreate() throws StripeException {
@@ -292,5 +307,30 @@ public class StripeTest
 		Charge.create(chargeWithTokenParams);
 		Token retrievedToken = Token.retrieve(createdToken.getId());
 		assertTrue(retrievedToken.getUsed());
+	}
+	
+	@Test public void testCouponCreate() throws StripeException {
+		Coupon coupon = Coupon.create(getUniqueCouponParams());
+		assertEquals(coupon.getDuration(), "once");
+	}
+	
+	@Test public void testCouponRetrieve() throws StripeException {
+		Coupon createdCoupon = Coupon.create(getUniqueCouponParams());
+		Coupon retrievedCoupon = Coupon.retrieve(createdCoupon.getId());
+		assertEquals(createdCoupon.getId(), retrievedCoupon.getId());
+	}
+	
+	@Test public void testCouponList() throws StripeException {
+		Map<String, Object> listParams = new HashMap<String, Object>();
+		listParams.put("count", 1);
+		List<Coupon> Coupons = Coupon.all(listParams).getData();
+		assertEquals(Coupons.size(), 1);
+	}
+	
+	@Test public void testCouponDelete() throws StripeException {
+		Coupon createdCoupon = Coupon.create(getUniqueCouponParams());
+		DeletedCoupon deletedCoupon = createdCoupon.delete();
+		assertTrue(deletedCoupon.getDeleted());
+		assertEquals(deletedCoupon.getId(), createdCoupon.getId());
 	}
 }

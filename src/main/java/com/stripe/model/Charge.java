@@ -3,6 +3,7 @@ package com.stripe.model;
 import java.util.Map;
 
 import com.stripe.exception.StripeException;
+import com.stripe.net.APIResource;
 
 public class Charge extends APIResource {
 	Integer amount;
@@ -97,19 +98,19 @@ public class Charge extends APIResource {
 	}
 	
 	public static Charge create(Map<String, Object> params) throws StripeException {
-		return request(Method.POST, classURL(Charge.class), params, Charge.class);
+		return request(RequestMethod.POST, classURL(Charge.class), params, Charge.class);
 	}
 
 	public static Charge retrieve(String id) throws StripeException {
-		return request(Method.GET, instanceURL(Charge.class, id), null, Charge.class);
+		return request(RequestMethod.GET, instanceURL(Charge.class, id), null, Charge.class);
 	}
 	
 	public static ChargeCollection all(Map<String, Object> params) throws StripeException {
-		return request(Method.GET, classURL(Charge.class), params, ChargeCollection.class);
+		return request(RequestMethod.GET, classURL(Charge.class), params, ChargeCollection.class);
 	}
 	
 	public Charge refund() throws StripeException {
-		return request(Method.POST,
+		return request(RequestMethod.POST,
 				String.format("%s/refund", instanceURL(Charge.class, this.getId())),
 				null, Charge.class);
 	}

@@ -3,6 +3,7 @@ package com.stripe.model;
 import java.util.Map;
 
 import com.stripe.exception.StripeException;
+import com.stripe.net.APIResource;
 
 public class Token extends APIResource {
 	Integer amount;
@@ -70,10 +71,10 @@ public class Token extends APIResource {
 	}
 	
 	public static Token create(Map<String, Object> params) throws StripeException {
-		return request(Method.POST, classURL(Token.class), params, Token.class);
+		return request(RequestMethod.POST, classURL(Token.class), params, Token.class);
 	}
 
 	public static Token retrieve(String id) throws StripeException {
-		return request(Method.GET, instanceURL(Token.class, id), null, Token.class);
+		return request(RequestMethod.GET, instanceURL(Token.class, id), null, Token.class);
 	}
 }

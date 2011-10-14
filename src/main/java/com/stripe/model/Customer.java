@@ -3,6 +3,7 @@ package com.stripe.model;
 import java.util.Map;
 
 import com.stripe.exception.StripeException;
+import com.stripe.net.APIResource;
 
 public class Customer extends APIResource {
 	Long created;
@@ -106,33 +107,33 @@ public class Customer extends APIResource {
 	}
 
 	public static Customer create(Map<String, Object> params) throws StripeException {
-		return request(Method.POST, classURL(Customer.class), params, Customer.class);
+		return request(RequestMethod.POST, classURL(Customer.class), params, Customer.class);
 	}
 
 	public static Customer retrieve(String id) throws StripeException {
-		return request(Method.GET, instanceURL(Customer.class, id), null, Customer.class);
+		return request(RequestMethod.GET, instanceURL(Customer.class, id), null, Customer.class);
 	}
 	
 	public static CustomerCollection all(Map<String, Object> params) throws StripeException {
-		return request(Method.GET, classURL(Customer.class), params, CustomerCollection.class);
+		return request(RequestMethod.GET, classURL(Customer.class), params, CustomerCollection.class);
 	}
 	
 	public Customer update(Map<String, Object> params) throws StripeException {
-		return request(Method.POST, instanceURL(Customer.class, this.id), params, Customer.class);
+		return request(RequestMethod.POST, instanceURL(Customer.class, this.id), params, Customer.class);
 	}
 	
 	public DeletedCustomer delete() throws StripeException { 
-		return request(Method.DELETE, instanceURL(Customer.class, this.id), null, DeletedCustomer.class);
+		return request(RequestMethod.DELETE, instanceURL(Customer.class, this.id), null, DeletedCustomer.class);
 	}
 	
 	public Subscription updateSubscription(Map<String, Object> params) throws StripeException {
-		return request(Method.POST,
+		return request(RequestMethod.POST,
 				String.format("%s/subscription", instanceURL(Customer.class, this.id)),
 				params, Subscription.class);
 	}
 	
 	public Subscription cancelSubscription(Map<String, Object> params) throws StripeException {
-		return request(Method.DELETE,
+		return request(RequestMethod.DELETE,
 				String.format("%s/subscription", instanceURL(Customer.class, this.id)),
 				params, Subscription.class);
 	}

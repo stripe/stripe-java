@@ -3,6 +3,7 @@ package com.stripe.model;
 import java.util.Map;
 
 import com.stripe.exception.StripeException;
+import com.stripe.net.APIResource;
 
 public class InvoiceItem extends APIResource {
 	Integer amount;
@@ -61,22 +62,22 @@ public class InvoiceItem extends APIResource {
 	}
 
 	public static InvoiceItem create(Map<String, Object> params) throws StripeException {
-		return request(Method.POST, classURL(InvoiceItem.class), params, InvoiceItem.class);
+		return request(RequestMethod.POST, classURL(InvoiceItem.class), params, InvoiceItem.class);
 	}
 
 	public static InvoiceItem retrieve(String id) throws StripeException {
-		return request(Method.GET, instanceURL(InvoiceItem.class, id), null, InvoiceItem.class);
+		return request(RequestMethod.GET, instanceURL(InvoiceItem.class, id), null, InvoiceItem.class);
 	}
 	
 	public static InvoiceItemCollection all(Map<String, Object> params) throws StripeException {
-		return request(Method.GET, classURL(InvoiceItem.class), params, InvoiceItemCollection.class);
+		return request(RequestMethod.GET, classURL(InvoiceItem.class), params, InvoiceItemCollection.class);
 	}
 	
 	public InvoiceItem update(Map<String, Object> params) throws StripeException {
-		return request(Method.POST, instanceURL(InvoiceItem.class, this.id), params, InvoiceItem.class);
+		return request(RequestMethod.POST, instanceURL(InvoiceItem.class, this.id), params, InvoiceItem.class);
 	}
 	
 	public DeletedInvoiceItem delete() throws StripeException { 
-		return request(Method.DELETE, instanceURL(InvoiceItem.class, this.id), null, DeletedInvoiceItem.class);
+		return request(RequestMethod.DELETE, instanceURL(InvoiceItem.class, this.id), null, DeletedInvoiceItem.class);
 	}
 }

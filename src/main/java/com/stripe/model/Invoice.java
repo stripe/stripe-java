@@ -3,6 +3,7 @@ package com.stripe.model;
 import java.util.Map;
 
 import com.stripe.exception.StripeException;
+import com.stripe.net.APIResource;
 
 public class Invoice extends APIResource {
 	Integer subtotal;
@@ -133,15 +134,15 @@ public class Invoice extends APIResource {
 	}
 
 	public static Invoice retrieve(String id) throws StripeException {
-		return request(Method.GET, instanceURL(Invoice.class, id), null, Invoice.class);
+		return request(RequestMethod.GET, instanceURL(Invoice.class, id), null, Invoice.class);
 	}
 	
 	public static InvoiceCollection all(Map<String, Object> params) throws StripeException {
-		return request(Method.GET, classURL(Invoice.class), params, InvoiceCollection.class);
+		return request(RequestMethod.GET, classURL(Invoice.class), params, InvoiceCollection.class);
 	}
 		
 	public static Invoice upcoming(Map<String, Object> params) throws StripeException {
-		return request(Method.GET, String.format("%s/upcoming", classURL(Invoice.class)),
+		return request(RequestMethod.GET, String.format("%s/upcoming", classURL(Invoice.class)),
 				params, Invoice.class);
 	}
 }
