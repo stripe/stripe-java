@@ -10,6 +10,9 @@ public class Coupon extends APIResource {
 	String duration;
 	String id;
 	String livemode;
+	Integer durationInMonths;
+	Integer maxRedemptions;
+	Integer redeemBy;
 	
 	public static Coupon create(Map<String, Object> params) throws StripeException {
 		return request(RequestMethod.POST, classURL(Coupon.class), params, Coupon.class);
@@ -57,6 +60,30 @@ public class Coupon extends APIResource {
 
 	public void setLivemode(String livemode) {
 		this.livemode = livemode;
+	}
+
+	public Integer getDurationInMonths() {
+		return durationInMonths;
+	}
+
+	public void setDurationInMonths(Integer durationInMonths) {
+		this.durationInMonths = durationInMonths;
+	}
+
+	public Integer getMaxRedemptions() {
+		return maxRedemptions;
+	}
+
+	public void setMaxRedemptions(Integer maxRedemptions) {
+		this.maxRedemptions = maxRedemptions;
+	}
+
+	public Integer getRedeemBy() {
+		return redeemBy;
+	}
+
+	public void setRedeemBy(Integer redeemBy) {
+		this.redeemBy = redeemBy;
 	}
 
 	
