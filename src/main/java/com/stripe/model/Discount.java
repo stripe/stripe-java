@@ -7,6 +7,7 @@ public class Discount extends StripeObject {
 	String id;
 	Integer percentOff;
 	Long start;
+	Coupon coupon;
 	
 	public String getCode() {
 		return code;
@@ -37,5 +38,11 @@ public class Discount extends StripeObject {
 	}
 	public void setStart(Long start) {
 		this.start = start;
+	}
+	public Coupon getCoupon() {
+		return coupon;
+	}
+	public void setCoupon(Coupon coupon) {
+		this.coupon = coupon;
 	}
 }

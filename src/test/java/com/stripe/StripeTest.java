@@ -333,4 +333,12 @@ public class StripeTest
 		assertTrue(deletedCoupon.getDeleted());
 		assertEquals(deletedCoupon.getId(), createdCoupon.getId());
 	}
+	
+	@Test public void testCustomerCreateWithCoupon() throws StripeException {
+		Coupon coupon = Coupon.create(getUniqueCouponParams());
+		Map<String, Object> customerWithCouponParams = new HashMap<String, Object>();
+		customerWithCouponParams.put("coupon", coupon.getId());
+		Customer customer = Customer.create(customerWithCouponParams);
+		assertEquals(customer.getDiscount().getCoupon().getId(), coupon.getId());
+	}
 }
