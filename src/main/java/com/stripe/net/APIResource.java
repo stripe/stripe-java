@@ -251,9 +251,22 @@ public abstract class APIResource extends StripeObject {
 			Object httpMethod = requestMethodClass.getDeclaredField(method.name()).get(null);
 			
 			Class<?> fetchOptionsBuilderClass = Class.forName("com.google.appengine.api.urlfetch.FetchOptions$Builder");
-			Object fetchOptions = fetchOptionsBuilderClass.getDeclaredMethod("validateCertificate").invoke(null);
+			Object fetchOptions = null;
+			try {
+				fetchOptions = fetchOptionsBuilderClass.getDeclaredMethod("validateCertificate").invoke(null);
+			} catch (NoSuchMethodException e) {
+				System.err.println("Warning: this App Engine SDK version does not allow verification of SSL certificates;" +
+						"this exposes you to a MITM attack. Please upgrade your App Engine SDK to >=1.5.0. " +
+						"If you have questions, contact support@stripe.com.");
+				fetchOptions = fetchOptionsBuilderClass.getDeclaredMethod("withDefaults").invoke(null);
+			}
+			
 			
 			Class<?> fetchOptionsClass = Class.forName("com.google.appengine.api.urlfetch.FetchOptions");
+			
+		    // GAE requests can  time out after 60 seconds, so make sure we leave
+		    // some time for the application to handle a slow Stripe
+			fetchOptionsClass.getDeclaredMethod("setDeadline", java.lang.Double.class).invoke(fetchOptions, new Double(55));
 
 			Class<?> requestClass = Class.forName("com.google.appengine.api.urlfetch.HTTPRequest");
 			
