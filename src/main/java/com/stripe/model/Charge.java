@@ -15,6 +15,7 @@ public class Charge extends APIResource {
 	Boolean refunded;
 	Integer fee;
 	String description;
+	Integer amountRefunded;
 	Card card;
 
 	public String getId() {
@@ -88,7 +89,15 @@ public class Charge extends APIResource {
 	public void setDescription(String description) {
 		this.description = description;
 	}
+	
+	public Integer getAmountRefunded() {
+		return amountRefunded;
+	}
 
+	public void setAmountRefunded(Integer amountRefunded) {
+		this.amountRefunded = amountRefunded;
+	}
+	
 	public Card getCard() {
 		return card;
 	}
@@ -104,15 +113,18 @@ public class Charge extends APIResource {
 	public static Charge retrieve(String id) throws StripeException {
 		return request(RequestMethod.GET, instanceURL(Charge.class, id), null, Charge.class);
 	}
-	
+
 	public static ChargeCollection all(Map<String, Object> params) throws StripeException {
 		return request(RequestMethod.GET, classURL(Charge.class), params, ChargeCollection.class);
 	}
-	
+
 	public Charge refund() throws StripeException {
+        return this.refund(null); // full refund
+    }
+
+	public Charge refund(Map<String, Object> params) throws StripeException {
 		return request(RequestMethod.POST,
 				String.format("%s/refund", instanceURL(Charge.class, this.getId())),
-				null, Charge.class);
+				params, Charge.class);
 	}
-
 }

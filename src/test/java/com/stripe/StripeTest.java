@@ -81,48 +81,58 @@ public class StripeTest
 		defaultCardParams.put("address_zip", "94301");
 		defaultCardParams.put("address_state", "CA");
 		defaultCardParams.put("address_country", "USA");
-		
+
 		defaultChargeParams.put("amount", 100);
 		defaultChargeParams.put("currency", "usd");
 		defaultChargeParams.put("card", defaultCardParams);
-		
+
 		defaultCustomerParams.put("card", defaultCardParams);
 		defaultCustomerParams.put("description", "Java Bindings Customer");
-		
+
 		defaultPlanParams.put("amount", 100);
 		defaultPlanParams.put("currency", "usd");
 		defaultPlanParams.put("interval", "month");
 		defaultPlanParams.put("name", "Java Bindings Plan");
-		
+
 		defaultCouponParams.put("duration", "once");
 		defaultCouponParams.put("percent_off", 10);
 	}
-	
+
 	@Test public void testChargeCreate() throws StripeException {
 		Charge createdCharge = Charge.create(defaultChargeParams);
 		assertFalse(createdCharge.getRefunded());
 	}
-	
+
 	@Test public void testChargeRetrieve() throws StripeException {
 		Charge createdCharge = Charge.create(defaultChargeParams);
 		Charge retrievedCharge = Charge.retrieve(createdCharge.getId());
 		assertEquals(createdCharge.getCreated(), retrievedCharge.getCreated());
 		assertEquals(createdCharge.getId(), retrievedCharge.getId());
 	}
-	
+
 	@Test public void testChargeRefund() throws StripeException {
 		Charge createdCharge = Charge.create(defaultChargeParams);
 		Charge refundedCharge = createdCharge.refund();
 		assertTrue(refundedCharge.getRefunded());
 	}
-	
+
+	@Test public void testChargePartialRefund() throws StripeException {
+		Charge createdCharge = Charge.create(defaultChargeParams);
+        Map<String, Object> refundParams = new HashMap<String, Object>();
+        final Integer REFUND_AMOUNT = 50;
+        refundParams.put("amount", REFUND_AMOUNT);
+		Charge refundedCharge = createdCharge.refund(refundParams);
+		assertFalse(refundedCharge.getRefunded());
+		assertEquals(refundedCharge.getAmountRefunded(), REFUND_AMOUNT);
+	}
+
 	@Test public void testChargeList() throws StripeException {
 		Map<String, Object> listParams = new HashMap<String, Object>();
 		listParams.put("count", 1);
 		List<Charge> charges = Charge.all(listParams).getData();
 		assertEquals(charges.size(), 1);
 	}
-	
+
 	@Test(expected=CardException.class)
 	public void testInvalidCard() throws StripeException {
 		Map<String, Object> invalidChargeParams = new HashMap<String, Object>();
