@@ -10,6 +10,8 @@ public class Subscription extends StripeObject {
 	Long trialStart;
 	Long trialEnd;
 	Plan plan;
+	Long canceledAt;
+	Long endedAt;
 	
 	public Long getCurrentPeriodEnd() {
 		return currentPeriodEnd;
@@ -58,5 +60,17 @@ public class Subscription extends StripeObject {
 	}
 	public void setPlan(Plan plan) {
 		this.plan = plan;
+	}
+	public Long getCanceledAt() {
+		return canceledAt;
+	}
+	public void setCanceledAt(Long canceledAt) {
+		this.canceledAt = canceledAt;
+	}
+	public Long getEndedAt() {
+		return endedAt;
+	}
+	public void setEndedAt(Long endedAt) {
+		this.endedAt = endedAt;
 	}
 }

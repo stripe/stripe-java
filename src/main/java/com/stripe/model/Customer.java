@@ -132,6 +132,10 @@ public class Customer extends APIResource {
 				params, Subscription.class);
 	}
 	
+	public Subscription cancelSubscription() throws StripeException {
+		return cancelSubscription(null);
+	}
+	
 	public Subscription cancelSubscription(Map<String, Object> params) throws StripeException {
 		return request(RequestMethod.DELETE,
 				String.format("%s/subscription", instanceURL(Customer.class, this.id)),

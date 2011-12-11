@@ -224,7 +224,7 @@ public class StripeTest
 		Plan plan = Plan.create(getUniquePlanParams());
 		Customer customer = createDefaultCustomerWithPlan(plan);
 		assertEquals(customer.getSubscription().getStatus(), "active");
-		Subscription canceledSubscription = customer.cancelSubscription(null);
+		Subscription canceledSubscription = customer.cancelSubscription();
 		assertEquals(canceledSubscription.getStatus(), "canceled");
 	}
 	
