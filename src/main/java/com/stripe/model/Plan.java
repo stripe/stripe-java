@@ -21,6 +21,10 @@ public class Plan extends APIResource {
 	public static Plan retrieve(String id) throws StripeException {
 		return request(RequestMethod.GET, instanceURL(Plan.class, id), null, Plan.class);
 	}
+
+	public static Plan update(Map<String, Object> params) throws StripeException {
+		return request(RequestMethod.POST, instanceURL(Plan.class, this.id), params, Plan.class);
+	}
 	
 	public static PlanCollection all(Map<String, Object> params) throws StripeException {
 		return request(RequestMethod.GET, classURL(Plan.class), params, PlanCollection.class);
