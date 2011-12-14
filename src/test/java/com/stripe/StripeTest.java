@@ -35,8 +35,8 @@ public class StripeTest
 	static Map<String, Object> defaultPlanParams = new HashMap<String, Object>();
 	static Map<String, Object> defaultCouponParams = new HashMap<String, Object>();
 
-	static String getUniquePlanId() { return String.format("JAVA-BINDINGS-PLAN-%s", UUID.randomUUID()); }
-	static String getUniqueCouponId() { return String.format("JAVA-BINDINGS-COUPON-%s", UUID.randomUUID()); }
+	static String getUniquePlanId() { return String.format("JAVA-PLAN-%s", UUID.randomUUID()); }
+	static String getUniqueCouponId() { return String.format("JAVA-COUPON-%s", UUID.randomUUID()); }
 		
 	static Map<String, Object> getUniquePlanParams() {
 		Map<String, Object> uniqueParams = new HashMap<String, Object>();
@@ -182,6 +182,15 @@ public class StripeTest
 	@Test public void testPlanCreate() throws StripeException {
 		Plan plan = Plan.create(getUniquePlanParams());
 		assertEquals(plan.getInterval(), "month");
+	}
+	
+	@Test public void testPlanUpdate() throws StripeException {
+		Plan createdPlan = Plan.create(getUniquePlanParams());
+		System.out.println(createdPlan);
+		Map<String, Object> updateParams = new HashMap<String, Object>();
+		updateParams.put("name", "Updated Plan Name");
+		Plan updatedplan = createdPlan.update(updateParams);
+		assertEquals(updatedplan.getName(), "Updated Plan Name");
 	}
 	
 	@Test public void testPlanRetrieve() throws StripeException {

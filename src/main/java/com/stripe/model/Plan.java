@@ -22,7 +22,7 @@ public class Plan extends APIResource {
 		return request(RequestMethod.GET, instanceURL(Plan.class, id), null, Plan.class);
 	}
 
-	public static Plan update(Map<String, Object> params) throws StripeException {
+	public Plan update(Map<String, Object> params) throws StripeException {
 		return request(RequestMethod.POST, instanceURL(Plan.class, this.id), params, Plan.class);
 	}
 	
