@@ -7,12 +7,15 @@ public class NextRecurringCharge extends StripeObject {
 	public Integer getAmount() {
 		return amount;
 	}
+	
 	public void setAmount(Integer amount) {
 		this.amount = amount;
 	}
+	
 	public String getDate() {
 		return date;
 	}
+	
 	public void setDate(String date) {
 		this.date = date;
 	}

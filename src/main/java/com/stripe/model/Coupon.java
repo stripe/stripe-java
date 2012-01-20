@@ -9,7 +9,7 @@ public class Coupon extends APIResource {
 	Integer percentOff;
 	String duration;
 	String id;
-	String livemode;
+	Boolean livemode;
 	Integer durationInMonths;
 	Integer maxRedemptions;
 	Integer redeemBy;
@@ -54,11 +54,11 @@ public class Coupon extends APIResource {
 		this.id = id;
 	}
 
-	public String getLivemode() {
+	public Boolean getLivemode() {
 		return livemode;
 	}
 
-	public void setLivemode(String livemode) {
+	public void setLivemode(Boolean livemode) {
 		this.livemode = livemode;
 	}
 

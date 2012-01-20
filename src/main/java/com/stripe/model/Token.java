@@ -10,7 +10,7 @@ public class Token extends APIResource {
 	Long created;
 	String currency;
 	String id;
-	String livemode;
+	Boolean livemode;
 	Boolean used;
 	Card card;
 	
@@ -46,11 +46,11 @@ public class Token extends APIResource {
 		this.id = id;
 	}
 	
-	public String getLivemode() {
+	public Boolean getLivemode() {
 		return livemode;
 	}
 	
-	public void setLivemode(String livemode) {
+	public void setLivemode(Boolean livemode) {
 		this.livemode = livemode;
 	}
 	

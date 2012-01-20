@@ -17,14 +17,14 @@ Add this dependency to your project's POM:
     <dependency>
       <groupId>com.stripe</groupId>
       <artifactId>stripe-java</artifactId>
-      <version>1.0.9</version>
+      <version>RELEASE</version>
     </dependency>
 
 ### Others
 
 You'll need to manually install the following JARs:
 
-* The Stripe JAR from https://code.stripe.com/stripe-java-1.0.9.jar
+* The Stripe JAR from https://code.stripe.com/stripe-java-latest.jar
 * [Google Gson](http://code.google.com/p/google-gson/) from <http://google-gson.googlecode.com/files/google-gson-1.7.1-release.zip>.
 
 Usage

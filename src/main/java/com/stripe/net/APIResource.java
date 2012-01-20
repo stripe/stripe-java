@@ -25,6 +25,8 @@ import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
+import com.stripe.model.EventData;
+import com.stripe.model.EventDataDeserializer;
 import com.stripe.model.StripeObject;
 import com.stripe.util.Base64;
 
@@ -38,9 +40,11 @@ public abstract class APIResource extends StripeObject {
 
 	protected enum RequestMethod { GET, POST, DELETE }
 
-	private static final Gson gson = new GsonBuilder().setFieldNamingPolicy(
-			FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).create();
-
+	public static final Gson gson = new GsonBuilder().setFieldNamingPolicy(
+			FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).registerTypeAdapter(
+					EventData.class, new EventDataDeserializer()).create();
+	
+	
 	private static String base64(String in) {
 		return new String(Base64.encodeToString(in.getBytes(), false));
 	}

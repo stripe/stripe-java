@@ -10,7 +10,7 @@ public class Charge extends APIResource {
 	Long created;
 	String currency;
 	String id;
-	String livemode;
+	Boolean livemode;
 	Boolean paid;
 	Boolean refunded;
 	Integer fee;
@@ -50,11 +50,11 @@ public class Charge extends APIResource {
 		this.currency = currency;
 	}
 
-	public String getLivemode() {
+	public Boolean getLivemode() {
 		return livemode;
 	}
 
-	public void setLivemode(String livemode) {
+	public void setLivemode(Boolean livemode) {
 		this.livemode = livemode;
 	}
 

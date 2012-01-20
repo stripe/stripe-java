@@ -23,6 +23,7 @@ import com.stripe.model.DeletedInvoiceItem;
 import com.stripe.model.DeletedPlan;
 import com.stripe.model.Invoice;
 import com.stripe.model.InvoiceItem;
+import com.stripe.model.Event;
 import com.stripe.model.Plan;
 import com.stripe.model.Subscription;
 import com.stripe.model.Token;
@@ -68,7 +69,7 @@ public class StripeTest
 		return customer;
 	}
 	
-	@BeforeClass public static void setUp() { 
+	@BeforeClass public static void setUp() {
 		Stripe.apiKey = "vtUQeOtUnYr7PGCLQ96Ul4zqpDUO4sOE"; //stripe public test key
 
 		defaultCardParams.put("number", "4242424242424242");
@@ -186,7 +187,6 @@ public class StripeTest
 	
 	@Test public void testPlanUpdate() throws StripeException {
 		Plan createdPlan = Plan.create(getUniquePlanParams());
-		System.out.println(createdPlan);
 		Map<String, Object> updateParams = new HashMap<String, Object>();
 		updateParams.put("name", "Updated Plan Name");
 		Plan updatedplan = createdPlan.update(updateParams);
@@ -354,10 +354,25 @@ public class StripeTest
 	}
 	
 	@Test public void testCustomerCreateWithCoupon() throws StripeException {
-		Coupon coupon = Coupon.create(getUniqueCouponParams());
+		Coupon coupon = Coupon.create(getUniqueCouponParams());	
 		Map<String, Object> customerWithCouponParams = new HashMap<String, Object>();
 		customerWithCouponParams.put("coupon", coupon.getId());
 		Customer customer = Customer.create(customerWithCouponParams);
 		assertEquals(customer.getDiscount().getCoupon().getId(), coupon.getId());
+	}
+	
+	@Test public void testEventRetrieve() throws StripeException {
+		Map<String, Object> listParams = new HashMap<String, Object>();
+		listParams.put("count", 1);
+		Event event = Event.all(listParams).getData().get(0);
+		Event retrievedEvent = Event.retrieve(event.getId());
+		assertEquals(event.getId(), retrievedEvent.getId());
+	}
+	
+	@Test public void testEventList() throws StripeException {
+		Map<String, Object> listParams = new HashMap<String, Object>();
+		listParams.put("count", 1);
+		List<Event> events = Event.all(listParams).getData();
+		assertEquals(events.size(), 1);
 	}
 }

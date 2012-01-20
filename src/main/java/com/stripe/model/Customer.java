@@ -8,7 +8,7 @@ import com.stripe.net.APIResource;
 public class Customer extends APIResource {
 	Long created;
 	String id;
-	String livemode;
+	Boolean livemode;
 	String description;
 	Card activeCard;
 	String email;
@@ -34,11 +34,11 @@ public class Customer extends APIResource {
 		this.id = id;
 	}
 
-	public String getLivemode() {
+	public Boolean getLivemode() {
 		return livemode;
 	}
 
-	public void setLivemode(String livemode) {
+	public void setLivemode(Boolean livemode) {
 		this.livemode = livemode;
 	}
 

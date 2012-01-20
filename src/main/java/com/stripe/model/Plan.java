@@ -11,7 +11,7 @@ public class Plan extends APIResource {
 	String id;
 	String interval;
 	String name;
-	String livemode;
+	Boolean livemode;
 	Integer trialPeriodDays;
 	
 	public static Plan create(Map<String, Object> params) throws StripeException {
@@ -74,11 +74,11 @@ public class Plan extends APIResource {
 		this.name = name;
 	}
 
-	public String getLivemode() {
+	public Boolean getLivemode() {
 		return livemode;
 	}
 
-	public void setLivemode(String livemode) {
+	public void setLivemode(Boolean livemode) {
 		this.livemode = livemode;
 	}
 

@@ -1,7 +1,9 @@
 package com.stripe.model;
 
+import com.stripe.net.APIResource;
 
-public class Subscription extends StripeObject {
+
+public class Subscription extends APIResource {
 	Long currentPeriodEnd;
 	Long currentPeriodStart;
 	String customer;

@@ -2,14 +2,14 @@ package com.stripe.model;
 
 import java.util.List;
 
-public class NotificationCollection extends StripeObject {
-	List<Notification> data;
+public class EventCollection extends StripeObject {
+	List<Event> data;
 	Integer count;
 	
-	public List<Notification> getData() {
+	public List<Event> getData() {
 		return data;
 	}
-	public void setData(List<Notification> data) {
+	public void setData(List<Event> data) {
 		this.data = data;
 	}
 	public Integer getCount() {

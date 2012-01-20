@@ -11,7 +11,7 @@ public class InvoiceItem extends APIResource {
 	String currency;
 	String description;
 	Long date;
-	String livemode;
+	Boolean livemode;
 
 	public Integer getAmount() {
 		return amount;
@@ -53,11 +53,11 @@ public class InvoiceItem extends APIResource {
 		this.date = date;
 	}
 
-	public String getLivemode() {
+	public Boolean getLivemode() {
 		return livemode;
 	}
 
-	public void setLivemode(String livemode) {
+	public void setLivemode(Boolean livemode) {
 		this.livemode = livemode;
 	}
 
