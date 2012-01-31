@@ -14,6 +14,7 @@ import com.stripe.net.APIResource;
 
 public class EventDataDeserializer implements JsonDeserializer<EventData> {
 
+	@SuppressWarnings("rawtypes")
 	static Map<String, Class> objectMap = new HashMap<String, Class>();
     static {
         objectMap.put("charge", Charge.class);
@@ -26,6 +27,7 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
         objectMap.put("token", Token.class);
     }
 
+	@SuppressWarnings("unchecked")
 	public EventData deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
 			throws JsonParseException {
 		EventData eventData = new EventData();

@@ -2,34 +2,40 @@ package com.stripe.model;
 
 import java.lang.reflect.Field;
 
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+
 public abstract class StripeObject {
 	
-	// only for debugging
+	public static final Gson prettyPrintGson = new GsonBuilder().
+		setPrettyPrinting().
+		serializeNulls().
+		setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).
+		registerTypeAdapter(EventData.class, new EventDataDeserializer()).
+		create();
+	
 	@Override public String toString() {
-		StringBuilder result = new StringBuilder();
-		String newLine = System.getProperty("line.separator");
-		
-		result.append( this.getClass().getName() );
-		result.append( " Object {" );
-		result.append(newLine);
+		return String.format(
+			"<%s@%s id=%s> JSON: %s",
+			this.getClass().getName(),
+			System.identityHashCode(this),
+			this.getIdString(),
+			prettyPrintGson.toJson(this));
+	}
 
-		//determine fields declared in this class only (no fields of superclass)
-		Field[] fields = this.getClass().getDeclaredFields();
-
-		for ( Field field : fields) {
-			result.append("  ");
-			try {
-				result.append(field.getName());
-				result.append(": ");
-				//requires access to private field:
-				result.append(field.get(this));
-			}
-			catch (IllegalAccessException ex) {
-				System.out.println(ex);
-			}
-			result.append(newLine);
+	private Object getIdString() {
+		try {
+			Field idField = this.getClass().getDeclaredField("id");
+			return idField.get(this);
+		} catch (SecurityException e) {
+			return "";
+		} catch (NoSuchFieldException e) {
+			return "";
+		} catch (IllegalArgumentException e) {
+			return "";
+		} catch (IllegalAccessException e) {
+			return "";
 		}
-		result.append("}");
-		return result.toString();
 	}
 }

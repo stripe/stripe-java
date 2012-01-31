@@ -32,6 +32,11 @@ import com.stripe.util.Base64;
 
 public abstract class APIResource extends StripeObject {
 
+	public static final Gson gson = new GsonBuilder().
+			setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).
+			registerTypeAdapter(EventData.class, new EventDataDeserializer()).
+			create();
+	
 	private static String className(Class<?> clazz) { return clazz.getSimpleName().toLowerCase().replace("$",""); }
 	protected static String classURL(Class<?> clazz) { return String.format("%s/%ss", Stripe.API_BASE, className(clazz)); }
 	protected static String instanceURL(Class<?> clazz, String id) { return String.format("%s/%s", classURL(clazz), id); }
@@ -40,11 +45,6 @@ public abstract class APIResource extends StripeObject {
 
 	protected enum RequestMethod { GET, POST, DELETE }
 
-	public static final Gson gson = new GsonBuilder().setFieldNamingPolicy(
-			FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).registerTypeAdapter(
-					EventData.class, new EventDataDeserializer()).create();
-	
-	
 	private static String base64(String in) {
 		return new String(Base64.encodeToString(in.getBytes(), false));
 	}
@@ -225,7 +225,7 @@ public abstract class APIResource extends StripeObject {
 		if (rCode < 200 || rCode >= 300) {
 			handleAPIError(rBody, rCode);
 		}
-		return gson.fromJson(rBody, clazz);	
+		return gson.fromJson(rBody, clazz);
 	}
 	
 	private static void handleAPIError(String rBody, int rCode) throws StripeException {
