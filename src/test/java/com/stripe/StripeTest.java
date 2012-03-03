@@ -176,8 +176,10 @@ public class StripeTest
 	@Test public void testCustomerDelete() throws StripeException {
 		Customer createdCustomer = Customer.create(defaultCustomerParams);
 		DeletedCustomer deletedCustomer = createdCustomer.delete();
+		Customer deletedRetrievedCustomer = Customer.retrieve(createdCustomer.getId());
 		assertTrue(deletedCustomer.getDeleted());
 		assertEquals(deletedCustomer.getId(), createdCustomer.getId());
+		assertTrue(deletedRetrievedCustomer.getDeleted());
 	}
 	
 	@Test public void testPlanCreate() throws StripeException {

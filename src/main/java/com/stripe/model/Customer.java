@@ -9,6 +9,7 @@ public class Customer extends APIResource {
 	Long created;
 	String id;
 	Boolean livemode;
+	Boolean deleted;
 	String description;
 	Card activeCard;
 	String email;
@@ -106,6 +107,10 @@ public class Customer extends APIResource {
 		this.subscription = subscription;
 	}
 
+	public Boolean getDeleted() {
+		return deleted;
+	}
+
 	public static Customer create(Map<String, Object> params) throws StripeException {
 		return request(RequestMethod.POST, classURL(Customer.class), params, Customer.class);
 	}
@@ -141,4 +146,5 @@ public class Customer extends APIResource {
 				String.format("%s/subscription", instanceURL(Customer.class, this.id)),
 				params, Subscription.class);
 	}
+
 }
