@@ -17,7 +17,7 @@ Add this dependency to your project's POM:
     <dependency>
       <groupId>com.stripe</groupId>
       <artifactId>stripe-java</artifactId>
-      <version>RELEASE</version>
+      <version>1.0.13</version>
     </dependency>
 
 ### Others
