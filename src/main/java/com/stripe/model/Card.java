@@ -13,6 +13,10 @@ public class Card extends StripeObject {
 	String addressZip;
 	String addressState;
 	String addressCountry;
+	Boolean addressZipCheck;
+	Boolean addressLine1Check;
+	Boolean cvcCheck;
+	String fingerprint;
 	
 	public Integer getExpMonth() {
 		return expMonth;
@@ -79,5 +83,29 @@ public class Card extends StripeObject {
 	}
 	public void setAddressCountry(String addressCountry) {
 		this.addressCountry = addressCountry;
+	}
+	public Boolean getAddressZipCheck() {
+		return addressZipCheck;
+	}
+	public void setAddressZipCheck(Boolean addressZipCheck) {
+		this.addressZipCheck = addressZipCheck;
+	}
+	public Boolean getAddressLine1Check() {
+		return addressLine1Check;
+	}
+	public void setAddressLine1Check(Boolean addressLine1Check) {
+		this.addressLine1Check = addressLine1Check;
+	}
+	public Boolean getCvcCheck() {
+		return cvcCheck;
+	}
+	public void setCvcCheck(Boolean cvcCheck) {
+		this.cvcCheck = cvcCheck;
+	}
+	public String getFingerprint() {
+		return fingerprint;
+	}
+	public void setFingerprint(String fingerprint) {
+		this.fingerprint = fingerprint;
 	}
 }

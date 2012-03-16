@@ -18,6 +18,8 @@ public class Customer extends APIResource {
 	Discount discount;
 	NextRecurringCharge nextRecurringCharge;
 	Subscription subscription;
+	Boolean delinquent;
+	Integer accountBalance;
 
 	public Long getCreated() {
 		return created;
@@ -109,6 +111,22 @@ public class Customer extends APIResource {
 
 	public Boolean getDeleted() {
 		return deleted;
+	}
+
+	public Boolean getDelinquent() {
+		return delinquent;
+	}
+
+	public void setDelinquent(Boolean delinquent) {
+		this.delinquent = delinquent;
+	}
+	
+	public Integer getAccountBalance() {
+		return accountBalance;
+	}
+
+	public void setAccountBalance(Integer accountBalance) {
+		this.accountBalance = accountBalance;
 	}
 
 	public static Customer create(Map<String, Object> params) throws StripeException {
