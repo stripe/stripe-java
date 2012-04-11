@@ -4,9 +4,11 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.io.InputStream;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.UUID;
 
 import org.junit.BeforeClass;
@@ -377,4 +379,12 @@ public class StripeTest
 		List<Event> events = Event.all(listParams).getData();
 		assertEquals(events.size(), 1);
 	}
+	
+	@Test public void testWebhookEvents() throws StripeException {
+		InputStream jsonStream = StripeTest.class.getClassLoader().getResourceAsStream("webhook-events.json");
+		String json = new Scanner(jsonStream, "UTF-8").useDelimiter("\\A").next();		
+		Event[] events = Event.gson.fromJson(json, Event[].class);
+		assertEquals(events.length, 28);
+	}
+
 }
