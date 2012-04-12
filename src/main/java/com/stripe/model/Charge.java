@@ -17,6 +17,9 @@ public class Charge extends APIResource {
 	String description;
 	Integer amountRefunded;
 	Card card;
+	String customer;
+	String invoice;
+	Boolean disputed;
 
 	public String getId() {
 		return id;
@@ -104,6 +107,30 @@ public class Charge extends APIResource {
 
 	public void setCard(Card card) {
 		this.card = card;
+	}
+
+	public String getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(String customer) {
+		this.customer = customer;
+	}
+
+	public String getInvoice() {
+		return invoice;
+	}
+
+	public void setInvoice(String invoice) {
+		this.invoice = invoice;
+	}
+
+	public Boolean getDisputed() {
+		return disputed;
+	}
+
+	public void setDisputed(Boolean disputed) {
+		this.disputed = disputed;
 	}
 	
 	public static Charge create(Map<String, Object> params) throws StripeException {
