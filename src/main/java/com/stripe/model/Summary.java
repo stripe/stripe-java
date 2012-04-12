@@ -1,7 +1,5 @@
 package com.stripe.model;
 
-import java.util.Map;
-
 public class Summary extends StripeObject {
 	Integer chargeFees;
 	Integer net;
