@@ -29,6 +29,7 @@ import com.stripe.model.Event;
 import com.stripe.model.Plan;
 import com.stripe.model.Subscription;
 import com.stripe.model.Token;
+import com.stripe.model.Transfer;
 
 public class StripeTest
 {
@@ -379,7 +380,22 @@ public class StripeTest
 		List<Event> events = Event.all(listParams).getData();
 		assertEquals(events.size(), 1);
 	}
-	
+
+	@Test public void testTransferRetrieve() throws StripeException {
+		Map<String, Object> listParams = new HashMap<String, Object>();
+		listParams.put("count", 1);
+		Transfer transfer = Transfer.all(listParams).getData().get(0);
+		Transfer retrievedTransfer = Transfer.retrieve(transfer.getId());
+		assertEquals(transfer.getId(), retrievedTransfer.getId());
+	}
+
+	@Test public void testTransferList() throws StripeException {
+		Map<String, Object> listParams = new HashMap<String, Object>();
+		listParams.put("count", 1);
+		List<Transfer> transfers = Transfer.all(listParams).getData();
+		assertEquals(1, transfers.size());
+	}
+
 	@Test public void testWebhookEvents() throws StripeException {
 		InputStream jsonStream = StripeTest.class.getClassLoader().getResourceAsStream("webhook-events.json");
 		String json = new Scanner(jsonStream, "UTF-8").useDelimiter("\\A").next();		
