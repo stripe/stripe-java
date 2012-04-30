@@ -28,7 +28,6 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.EventData;
 import com.stripe.model.EventDataDeserializer;
 import com.stripe.model.StripeObject;
-import com.stripe.util.Base64;
 
 public abstract class APIResource extends StripeObject {
 
@@ -45,10 +44,6 @@ public abstract class APIResource extends StripeObject {
 
 	protected enum RequestMethod { GET, POST, DELETE }
 
-	private static String base64(String in) {
-		return new String(Base64.encodeToString(in.getBytes(), false));
-	}
-
 	private static String urlEncodePair(String k, String v) throws UnsupportedEncodingException {
 		return String.format("%s=%s", URLEncoder.encode(k, CHARSET), URLEncoder.encode(v, CHARSET));
 	}
@@ -57,7 +52,7 @@ public abstract class APIResource extends StripeObject {
 		Map<String, String> headers = new HashMap<String, String>();
 		headers.put("Accept-Charset", CHARSET);
 		headers.put("User-Agent", String.format("Stripe/v1 JavaBindings/%s", Stripe.VERSION));
-		headers.put("Authorization", String.format("Basic %s:", base64(Stripe.apiKey)));
+		headers.put("Authorization", String.format("Bearer %s", Stripe.apiKey));
 		//debug headers
 		String[] propertyNames = {"os.name", "os.version", "os.arch", "java.version", "java.vendor", "java.vm.version", "java.vm.vendor"};
 		Map<String, String> propertyMap = new HashMap<String, String>();
