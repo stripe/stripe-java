@@ -238,6 +238,17 @@ public class StripeTest
 		Subscription canceledSubscription = customer.cancelSubscription();
 		assertEquals(canceledSubscription.getStatus(), "canceled");
 	}
+
+	@Test public void testCancelSubscriptionAtPeriodEnd() throws StripeException {
+		Plan plan = Plan.create(getUniquePlanParams());
+		Customer customer = createDefaultCustomerWithPlan(plan);
+		assertEquals(customer.getSubscription().getStatus(), "active");
+		Map<String, Object> cancelParams = new HashMap<String, Object>();
+		cancelParams.put("at_period_end", true);
+		Subscription canceledSubscription = customer.cancelSubscription(cancelParams);
+		assertEquals(canceledSubscription.getStatus(), "active");
+		assertEquals(canceledSubscription.getCancelAtPeriodEnd(), true);
+	}
 	
 	@Test public void testInvoiceItemCreate() throws StripeException {
 		Customer customer = Customer.create(defaultCustomerParams);
