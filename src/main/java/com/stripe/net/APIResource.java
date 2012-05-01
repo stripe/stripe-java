@@ -100,8 +100,9 @@ public abstract class APIResource extends StripeObject {
 		return conn;
 	}
 
-	private static HttpsURLConnection createDeleteConnection(String url) throws IOException {
-		HttpsURLConnection conn = createStripeConnection(url);
+	private static HttpsURLConnection createDeleteConnection(String url, String query) throws IOException {
+		String deleteUrl = String.format("%s?%s", url, query);
+		HttpsURLConnection conn = createStripeConnection(deleteUrl);
 		conn.setRequestMethod("DELETE");
 		return conn;
 	}
@@ -162,7 +163,7 @@ public abstract class APIResource extends StripeObject {
 			switch(method) {
 				case GET: conn = createGetConnection(url, query); break;
 				case POST: conn = createPostConnection(url, query); break;
-				case DELETE: conn = createDeleteConnection(url); break;
+				case DELETE: conn = createDeleteConnection(url, query); break;
 				default: throw new APIConnectionException(String.format("Unrecognized HTTP method %s. " +
 						"This indicates a bug in the Stripe bindings. Please contact " +
 						"support@stripe.com for assistance.", method));
