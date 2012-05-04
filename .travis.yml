@@ -1,0 +1,2 @@
+language: java
+install: mvn install --quiet -DskipTests=true -Dgpg.skip=true
