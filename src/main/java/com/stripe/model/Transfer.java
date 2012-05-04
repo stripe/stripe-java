@@ -1,8 +1,12 @@
 package com.stripe.model;
 
 import java.util.List;
+import java.util.Map;
 
-public class Transfer extends StripeObject {
+import com.stripe.exception.StripeException;
+import com.stripe.net.APIResource;
+
+public class Transfer extends APIResource {
 	String id;
 	String status;
 	Long date;
@@ -65,5 +69,19 @@ public class Transfer extends StripeObject {
 
 	public void setOtherTransfers(List<String> otherTransfers) {
 		this.otherTransfers = otherTransfers;
+	}
+
+	public static Transfer retrieve(String id) throws StripeException {
+		return request(RequestMethod.GET, instanceURL(Transfer.class, id), null, Transfer.class);
+	}
+
+	public static TransferCollection all(Map<String, Object> params) throws StripeException {
+		return request(RequestMethod.GET, classURL(Transfer.class), params, TransferCollection.class);
+	}
+
+	public TransferTransactionCollection transactions(Map<String, Object> params) throws StripeException {
+		return request(RequestMethod.GET,
+			       String.format("%s/transactions", instanceURL(Transfer.class, this.getId())),
+			       params, TransferTransactionCollection.class);
 	}
 }
