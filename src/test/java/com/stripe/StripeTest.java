@@ -70,7 +70,7 @@ public class StripeTest
 	}
 	
 	@BeforeClass public static void setUp() {
-		Stripe.apiKey = "vtUQeOtUnYr7PGCLQ96Ul4zqpDUO4sOE"; //stripe public test key
+		Stripe.apiKey = "tGN0bIwXnHdwOa85VABjPdSn8nWY7G7I"; //stripe public test key
 
 		defaultCardParams.put("number", "4242424242424242");
 		defaultCardParams.put("exp_month", 12);
