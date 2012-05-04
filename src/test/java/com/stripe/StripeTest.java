@@ -276,7 +276,6 @@ public class StripeTest
 		Map<String, Object> updateParams = new HashMap<String, Object>();
 		updateParams.put("description", "Updated Description");
 		updateParams.put("amount", 200);
-		updateParams.put("currency", "usd");
 		InvoiceItem updatedInvoiceItem = createdInvoiceItem.update(updateParams);
 		assertTrue(updatedInvoiceItem.getAmount() == 200);
 		assertEquals(updatedInvoiceItem.getDescription(), "Updated Description");
