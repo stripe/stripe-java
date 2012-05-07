@@ -13,6 +13,7 @@ public class Coupon extends APIResource {
 	Integer durationInMonths;
 	Integer maxRedemptions;
 	Integer redeemBy;
+	Integer timesRedeemed;
 	
 	public static Coupon create(Map<String, Object> params) throws StripeException {
 		return request(RequestMethod.POST, classURL(Coupon.class), params, Coupon.class);
@@ -86,5 +87,11 @@ public class Coupon extends APIResource {
 		this.redeemBy = redeemBy;
 	}
 
-	
+	public Integer getTimesRedeemed() {
+		return timesRedeemed;
+	}
+
+	public void setTimesRedeemed(Integer timesRedeemed) {
+		this.timesRedeemed = timesRedeemed;
+	}
 }

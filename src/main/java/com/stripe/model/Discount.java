@@ -2,19 +2,12 @@ package com.stripe.model;
 
 
 public class Discount extends StripeObject {
-	String code;
 	Long end;
 	String id;
-	Integer percentOff;
 	Long start;
 	Coupon coupon;
+	String customer;
 	
-	public String getCode() {
-		return code;
-	}
-	public void setCode(String code) {
-		this.code = code;
-	}
 	public Long getEnd() {
 		return end;
 	}
@@ -27,12 +20,6 @@ public class Discount extends StripeObject {
 	public void setId(String id) {
 		this.id = id;
 	}
-	public Integer getPercentOff() {
-		return percentOff;
-	}
-	public void setPercentOff(Integer percentOff) {
-		this.percentOff = percentOff;
-	}
 	public Long getStart() {
 		return start;
 	}
@@ -44,5 +31,11 @@ public class Discount extends StripeObject {
 	}
 	public void setCoupon(Coupon coupon) {
 		this.coupon = coupon;
+	}
+	public String getCustomer() {
+		return customer;
+	}
+	public void setCustomer(String customer) {
+		this.customer = customer;
 	}
 }

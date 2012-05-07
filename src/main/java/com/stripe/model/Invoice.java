@@ -8,8 +8,12 @@ import com.stripe.net.APIResource;
 public class Invoice extends APIResource {
 	Integer subtotal;
 	Integer total;
+	Integer amountDue;
+	Integer startingBalance;
+	Integer endingBalance;
 	String id;
 	Long created;
+	Long nextPaymentAttempt;
 	Boolean attempted;
 	String charge;
 	Boolean closed;
@@ -20,6 +24,8 @@ public class Invoice extends APIResource {
 	Long periodEnd;
 	Discount discount;
 	InvoiceLines lines;
+	Boolean livemode;
+	Integer attemptCount;
 	
 	public Integer getSubtotal() {
 		return subtotal;
@@ -37,6 +43,30 @@ public class Invoice extends APIResource {
 		this.total = total;
 	}
 
+	public Integer getAmountDue() {
+		return amountDue;
+	}
+
+	public void setAmountDue(Integer amountDue) {
+		this.amountDue = amountDue;
+	}
+
+	public Integer getStartingBalance() {
+		return startingBalance;
+	}
+
+	public void setStartingBalance(Integer startingBalance) {
+		this.startingBalance = startingBalance;
+	}
+
+	public Integer getEndingBalance() {
+		return endingBalance;
+	}
+
+	public void setEndingBalance(Integer endingBalance) {
+		this.endingBalance = endingBalance;
+	}
+
 	public String getId() {
 		return id;
 	}
@@ -51,6 +81,14 @@ public class Invoice extends APIResource {
 
 	public void setCreated(Long created) {
 		this.created = created;
+	}
+
+	public Long getNextPaymentAttempt() {
+		return nextPaymentAttempt;
+	}
+
+	public void setNextPaymentAttempt(Long nextPaymentAttempt) {
+		this.nextPaymentAttempt = nextPaymentAttempt;
 	}
 
 	public Boolean getAttempted() {
@@ -131,6 +169,22 @@ public class Invoice extends APIResource {
 
 	public void setLines(InvoiceLines lines) {
 		this.lines = lines;
+	}
+
+	public Boolean getLivemode() {
+		return livemode;
+	}
+
+	public void setLivemode(Boolean livemode) {
+		this.livemode = livemode;
+	}
+
+	public Integer getAttemptCount() {
+		return attemptCount;
+	}
+
+	public void setAttemptCount(Integer attemptCount) {
+		this.attemptCount = attemptCount;
 	}
 
 	public static Invoice retrieve(String id) throws StripeException {

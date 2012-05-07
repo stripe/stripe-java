@@ -13,9 +13,13 @@ public class Charge extends APIResource {
 	Boolean livemode;
 	Boolean paid;
 	Boolean refunded;
+	Boolean disputed;
 	Integer fee;
 	String description;
+	String failureMessage;
 	Integer amountRefunded;
+	String customer;
+	String invoice;
 	Card card;
 
 	public String getId() {
@@ -74,6 +78,14 @@ public class Charge extends APIResource {
 		this.refunded = refunded;
 	}
 
+	public Boolean getDisputed() {
+		return disputed;
+	}
+
+	public void setDisputed(Boolean disputed) {
+		this.disputed = disputed;
+	}
+
 	public Integer getFee() {
 		return fee;
 	}
@@ -90,12 +102,36 @@ public class Charge extends APIResource {
 		this.description = description;
 	}
 	
+	public String getFailureMessage() {
+		return failureMessage;
+	}
+
+	public void setFailureMessage(String failureMessage) {
+		this.failureMessage = failureMessage;
+	}
+
 	public Integer getAmountRefunded() {
 		return amountRefunded;
 	}
 
 	public void setAmountRefunded(Integer amountRefunded) {
 		this.amountRefunded = amountRefunded;
+	}
+
+	public String getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(String customer) {
+		this.customer = customer;
+	}
+
+	public String getInvoice() {
+		return invoice;
+	}
+
+	public void setInvoice(String invoice) {
+		this.invoice = invoice;
 	}
 	
 	public Card getCard() {

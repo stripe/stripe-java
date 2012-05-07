@@ -11,6 +11,7 @@ public class Event extends APIResource {
 	Boolean livemode;
 	Long created;
 	EventData data;
+	Integer pendingWebhooks;
 
 	public static Event retrieve(String id) throws StripeException {
 		return request(RequestMethod.GET, instanceURL(Event.class, id), null, Event.class);
@@ -60,4 +61,11 @@ public class Event extends APIResource {
 		this.livemode = livemode;
 	}
 
+	public Integer getPendingWebhooks() {
+		return pendingWebhooks;
+	}
+
+	public void setPendingWebhooks(Integer pendingWebhooks) {
+		this.pendingWebhooks = pendingWebhooks;
+	}
 }

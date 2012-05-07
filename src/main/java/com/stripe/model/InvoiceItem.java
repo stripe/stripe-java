@@ -12,6 +12,8 @@ public class InvoiceItem extends APIResource {
 	String description;
 	Long date;
 	Boolean livemode;
+	String customer;
+	String invoice;
 
 	public Integer getAmount() {
 		return amount;
@@ -59,6 +61,22 @@ public class InvoiceItem extends APIResource {
 
 	public void setLivemode(Boolean livemode) {
 		this.livemode = livemode;
+	}
+
+	public String getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(String customer) {
+		this.customer = customer;
+	}
+
+	public String getInvoice() {
+		return invoice;
+	}
+
+	public void setInvoice(String invoice) {
+		this.invoice = invoice;
 	}
 
 	public static InvoiceItem create(Map<String, Object> params) throws StripeException {
