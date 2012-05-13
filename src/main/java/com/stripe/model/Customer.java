@@ -165,4 +165,9 @@ public class Customer extends APIResource {
 				params, Subscription.class);
 	}
 
+	public void deleteDiscount() throws StripeException {
+		request(RequestMethod.DELETE,
+			String.format("%s/discount", instanceURL(Customer.class, this.id)),
+			null, Discount.class);
+	}
 }

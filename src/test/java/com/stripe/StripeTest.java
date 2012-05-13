@@ -3,6 +3,7 @@ package com.stripe;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.assertNull;
 
 import java.util.HashMap;
 import java.util.List;
@@ -371,8 +372,11 @@ public class StripeTest
 		customerWithCouponParams.put("coupon", coupon.getId());
 		Customer customer = Customer.create(customerWithCouponParams);
 		assertEquals(customer.getDiscount().getCoupon().getId(), coupon.getId());
+
+		customer.deleteDiscount();
+		assertNull(Customer.retrieve(customer.getId()).getDiscount());
 	}
-	
+
 	@Test public void testEventRetrieve() throws StripeException {
 		Map<String, Object> listParams = new HashMap<String, Object>();
 		listParams.put("count", 1);
