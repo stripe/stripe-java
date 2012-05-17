@@ -1,0 +1,19 @@
+=== 1.1.0 2012-05-16
+
+* Change type of cvcCheck, addressZipCheck, and addressLine1Check
+  attributes on com.stripe.model.Card. Values of those fields will be
+  "pass", "fail", "unchecked", or null (github issue #11)
+
+* Remove code and percentOff attributes from
+  com.stripe.model.Discount. Stripe never returned these values for
+  Discount objects, so they would previously always be null
+
+* Add missing fields to Charge, Coupon, Discount, Event, and Invoice
+  models (github issue #12)
+
+* Include parameters passed to any object's delete method in actual
+  API requests (github issue #10)
+
+* Add new deleteDiscount method to com.stripe.model.Customer
+
+* Numerous test suite improvements
