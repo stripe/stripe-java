@@ -187,7 +187,7 @@ public abstract class APIResource extends StripeObject {
 	}
 	
 	protected static <T> T request(APIResource.RequestMethod method, String url, Map<String, Object> params, Class<T> clazz) throws StripeException {
-		if (Stripe.apiKey == null || Stripe.apiKey.isEmpty()) {
+		if (Stripe.apiKey == null || Stripe.apiKey.length() == 0) {
 			throw new AuthenticationException("No API key provided. (HINT: set your API key using 'Stripe.apiKey = <API-KEY>'. " +
 					"You can generate API keys from the Stripe web interface. " +
 					"See https://stripe.com/api for details or email support@stripe.com if you have questions.");
