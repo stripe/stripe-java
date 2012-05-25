@@ -1,3 +1,8 @@
+=== 1.1.1 2012-05-24
+
+* Use String.length() == 0 instead of String.isEmpty() for
+  compatibility with JDK 1.5 (needed for Android 2.2)
+
 === 1.1.0 2012-05-16
 
 * Change type of cvcCheck, addressZipCheck, and addressLine1Check
