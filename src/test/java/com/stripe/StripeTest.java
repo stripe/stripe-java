@@ -27,7 +27,7 @@ import com.stripe.model.InvoiceItem;
 import com.stripe.model.Event;
 import com.stripe.model.Plan;
 import com.stripe.model.Subscription;
-import com.stripe.model.Token;
+import com.stripe.model.Token; 
 
 public class StripeTest
 {
@@ -320,18 +320,33 @@ public class StripeTest
 	}
 	
 	@Test public void testTokenCreate() throws StripeException {
-		Token token = Token.create(defaultChargeParams);
+		
+		Map<String, Object> tokenParams = new HashMap<String, Object>(defaultChargeParams);
+		tokenParams.remove("amount");
+		tokenParams.remove("currency");
+		
+		Token token = Token.create(tokenParams);
 		assertFalse(token.getUsed());
 	}
 	
 	@Test public void testTokenRetrieve() throws StripeException {
-		Token createdToken = Token.create(defaultChargeParams);
+		
+		Map<String, Object> tokenParams = new HashMap<String, Object>(defaultChargeParams);
+		tokenParams.remove("amount");
+		tokenParams.remove("currency");
+
+		Token createdToken = Token.create(tokenParams);
 		Token retrievedToken = Token.retrieve(createdToken.getId());
 		assertEquals(createdToken.getId(), retrievedToken.getId());
 	}
 	
 	@Test public void testTokenUse() throws StripeException {
-		Token createdToken = Token.create(defaultChargeParams);
+		
+		Map<String, Object> tokenParams = new HashMap<String, Object>(defaultChargeParams);
+		tokenParams.remove("amount");
+		tokenParams.remove("currency");
+		
+		Token createdToken = Token.create(tokenParams);
 		Map<String, Object> chargeWithTokenParams = new HashMap<String, Object>();
 		chargeWithTokenParams.put("amount", 199);
 		chargeWithTokenParams.put("currency", "usd");

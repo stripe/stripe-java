@@ -14,11 +14,19 @@ public class Event extends APIResource {
 	Integer pendingWebhooks;
 
 	public static Event retrieve(String id) throws StripeException {
-		return request(RequestMethod.GET, instanceURL(Event.class, id), null, Event.class);
+		return retrieve(id, null);
 	}
 
 	public static EventCollection all(Map<String, Object> params) throws StripeException {
-		return request(RequestMethod.GET, classURL(Event.class), params, EventCollection.class);
+		return all(params, null);
+	}
+
+	public static Event retrieve(String id, String apiKey) throws StripeException {
+		return request(RequestMethod.GET, instanceURL(Event.class, id), null, Event.class, apiKey);
+	}
+
+	public static EventCollection all(Map<String, Object> params, String apiKey) throws StripeException {
+		return request(RequestMethod.GET, classURL(Event.class), params, EventCollection.class, apiKey);
 	}
 
 	public EventData getData() {

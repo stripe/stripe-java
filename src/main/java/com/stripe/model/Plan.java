@@ -15,23 +15,43 @@ public class Plan extends APIResource {
 	Integer trialPeriodDays;
 	
 	public static Plan create(Map<String, Object> params) throws StripeException {
-		return request(RequestMethod.POST, classURL(Plan.class), params, Plan.class);
+		return create(params, null);
 	}
 
 	public static Plan retrieve(String id) throws StripeException {
-		return request(RequestMethod.GET, instanceURL(Plan.class, id), null, Plan.class);
+		return retrieve(id, null);
 	}
 
 	public Plan update(Map<String, Object> params) throws StripeException {
-		return request(RequestMethod.POST, instanceURL(Plan.class, this.id), params, Plan.class);
+		return update(params, null);
 	}
 	
 	public static PlanCollection all(Map<String, Object> params) throws StripeException {
-		return request(RequestMethod.GET, classURL(Plan.class), params, PlanCollection.class);
+		return all(params, null);
 	}
 	
 	public DeletedPlan delete() throws StripeException { 
-		return request(RequestMethod.DELETE, instanceURL(Plan.class, this.id), null, DeletedPlan.class);
+		return delete(null);
+	}
+
+	public static Plan create(Map<String, Object> params, String apiKey) throws StripeException {
+		return request(RequestMethod.POST, classURL(Plan.class), params, Plan.class, apiKey);
+	}
+
+	public static Plan retrieve(String id, String apiKey) throws StripeException {
+		return request(RequestMethod.GET, instanceURL(Plan.class, id), null, Plan.class, apiKey);
+	}
+
+	public Plan update(Map<String, Object> params, String apiKey) throws StripeException {
+		return request(RequestMethod.POST, instanceURL(Plan.class, this.id), params, Plan.class, apiKey);
+	}
+	
+	public static PlanCollection all(Map<String, Object> params, String apiKey) throws StripeException {
+		return request(RequestMethod.GET, classURL(Plan.class), params, PlanCollection.class, apiKey);
+	}
+	
+	public DeletedPlan delete(String apiKey) throws StripeException { 
+		return request(RequestMethod.DELETE, instanceURL(Plan.class, this.id), null, DeletedPlan.class, apiKey);
 	}
 
 	public Integer getAmount() {

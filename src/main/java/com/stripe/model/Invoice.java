@@ -188,15 +188,28 @@ public class Invoice extends APIResource {
 	}
 
 	public static Invoice retrieve(String id) throws StripeException {
-		return request(RequestMethod.GET, instanceURL(Invoice.class, id), null, Invoice.class);
+		return retrieve(id, null);
 	}
 	
 	public static InvoiceCollection all(Map<String, Object> params) throws StripeException {
-		return request(RequestMethod.GET, classURL(Invoice.class), params, InvoiceCollection.class);
+		return all(params, null);
 	}
 		
 	public static Invoice upcoming(Map<String, Object> params) throws StripeException {
-		return request(RequestMethod.GET, String.format("%s/upcoming", classURL(Invoice.class)),
-				params, Invoice.class);
+		return upcoming(params, null);
 	}
+	
+	public static Invoice retrieve(String id, String apiKey) throws StripeException {
+		return request(RequestMethod.GET, instanceURL(Invoice.class, id), null, Invoice.class, apiKey);
+	}
+	
+	public static InvoiceCollection all(Map<String, Object> params, String apiKey) throws StripeException {
+		return request(RequestMethod.GET, classURL(Invoice.class), params, InvoiceCollection.class, apiKey);
+	}
+		
+	public static Invoice upcoming(Map<String, Object> params, String apiKey) throws StripeException {
+		return request(RequestMethod.GET, String.format("%s/upcoming", classURL(Invoice.class)),
+				params, Invoice.class, apiKey);
+	}
+
 }

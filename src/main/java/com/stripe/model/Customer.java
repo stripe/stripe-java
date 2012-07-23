@@ -130,44 +130,83 @@ public class Customer extends APIResource {
 	}
 
 	public static Customer create(Map<String, Object> params) throws StripeException {
-		return request(RequestMethod.POST, classURL(Customer.class), params, Customer.class);
+		return create(params, null);
 	}
 
 	public static Customer retrieve(String id) throws StripeException {
-		return request(RequestMethod.GET, instanceURL(Customer.class, id), null, Customer.class);
+		return retrieve(id, null);
 	}
 	
 	public static CustomerCollection all(Map<String, Object> params) throws StripeException {
-		return request(RequestMethod.GET, classURL(Customer.class), params, CustomerCollection.class);
+		return all(params, null);
 	}
 	
 	public Customer update(Map<String, Object> params) throws StripeException {
-		return request(RequestMethod.POST, instanceURL(Customer.class, this.id), params, Customer.class);
+		return update(params, null);
 	}
 	
 	public DeletedCustomer delete() throws StripeException { 
-		return request(RequestMethod.DELETE, instanceURL(Customer.class, this.id), null, DeletedCustomer.class);
+		return delete(null);
 	}
 	
 	public Subscription updateSubscription(Map<String, Object> params) throws StripeException {
-		return request(RequestMethod.POST,
-				String.format("%s/subscription", instanceURL(Customer.class, this.id)),
-				params, Subscription.class);
+		return updateSubscription(params, null);
 	}
 	
 	public Subscription cancelSubscription() throws StripeException {
-		return cancelSubscription(null);
+		return cancelSubscription(null, null);
 	}
 	
 	public Subscription cancelSubscription(Map<String, Object> params) throws StripeException {
-		return request(RequestMethod.DELETE,
-				String.format("%s/subscription", instanceURL(Customer.class, this.id)),
-				params, Subscription.class);
+		return cancelSubscription(params, null);
 	}
 
 	public void deleteDiscount() throws StripeException {
+		deleteDiscount(null);
+	}
+	
+	public static Customer create(Map<String, Object> params, String apiKey) throws StripeException {
+		return request(RequestMethod.POST, classURL(Customer.class), params, Customer.class, apiKey);
+	}
+
+	public static Customer retrieve(String id, String apiKey) throws StripeException {
+		return request(RequestMethod.GET, instanceURL(Customer.class, id), null, Customer.class, apiKey);
+	}
+	
+	public static CustomerCollection all(Map<String, Object> params, String apiKey) throws StripeException {
+		return request(RequestMethod.GET, classURL(Customer.class), params, CustomerCollection.class, apiKey);
+	}
+	
+	public Customer update(Map<String, Object> params, String apiKey) throws StripeException {
+		return request(RequestMethod.POST, instanceURL(Customer.class, this.id), params, Customer.class, apiKey);
+	}
+	
+	public DeletedCustomer delete(String apiKey) throws StripeException { 
+		return request(RequestMethod.DELETE, instanceURL(Customer.class, this.id), null, DeletedCustomer.class, apiKey);
+	}
+	
+	public Subscription updateSubscription(Map<String, Object> params, String apiKey) throws StripeException {
+		return request(RequestMethod.POST,
+				String.format("%s/subscription", instanceURL(Customer.class, this.id)),
+				params, Subscription.class, apiKey);
+	}
+	
+	public Subscription cancelSubscription(String apiKey) throws StripeException {
+		return cancelSubscription(null, apiKey);
+	}
+	
+	public Subscription cancelSubscription(Map<String, Object> params, String apiKey) throws StripeException {
+		return request(RequestMethod.DELETE,
+				String.format("%s/subscription", instanceURL(Customer.class, this.id)),
+				params, Subscription.class, apiKey);
+	}
+
+	public void deleteDiscount(String apiKey) throws StripeException {
 		request(RequestMethod.DELETE,
 			String.format("%s/discount", instanceURL(Customer.class, this.id)),
-			null, Discount.class);
+			null, Discount.class, apiKey);
 	}
+
+	
+	
 }
