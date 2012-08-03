@@ -143,24 +143,45 @@ public class Charge extends APIResource {
 	}
 	
 	public static Charge create(Map<String, Object> params) throws StripeException {
-		return request(RequestMethod.POST, classURL(Charge.class), params, Charge.class);
+		return create(params, null);
 	}
 
 	public static Charge retrieve(String id) throws StripeException {
-		return request(RequestMethod.GET, instanceURL(Charge.class, id), null, Charge.class);
+		return retrieve(id, null);
 	}
 
 	public static ChargeCollection all(Map<String, Object> params) throws StripeException {
-		return request(RequestMethod.GET, classURL(Charge.class), params, ChargeCollection.class);
+		return all(params, null);
 	}
 
 	public Charge refund() throws StripeException {
-        return this.refund(null); // full refund
+        return this.refund(null, null);
     }
 
 	public Charge refund(Map<String, Object> params) throws StripeException {
+		return this.refund(params, null);
+	}
+	
+	public static Charge create(Map<String, Object> params, String apiKey) throws StripeException {
+		return request(RequestMethod.POST, classURL(Charge.class), params, Charge.class, apiKey);
+	}
+
+	public static Charge retrieve(String id, String apiKey) throws StripeException {
+		return request(RequestMethod.GET, instanceURL(Charge.class, id), null, Charge.class, apiKey);
+	}
+
+	public static ChargeCollection all(Map<String, Object> params, String apiKey) throws StripeException {
+		return request(RequestMethod.GET, classURL(Charge.class), params, ChargeCollection.class, apiKey);
+	}
+
+	public Charge refund(String apiKey) throws StripeException {
+        return this.refund((Map<String,Object>)null, apiKey); // full refund
+    }
+
+	public Charge refund(Map<String, Object> params, String apiKey) throws StripeException {
 		return request(RequestMethod.POST,
 				String.format("%s/refund", instanceURL(Charge.class, this.getId())),
-				params, Charge.class);
+				params, Charge.class, apiKey);
 	}
+
 }
