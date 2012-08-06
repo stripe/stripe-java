@@ -16,19 +16,35 @@ public class Coupon extends APIResource {
 	Integer timesRedeemed;
 	
 	public static Coupon create(Map<String, Object> params) throws StripeException {
-		return request(RequestMethod.POST, classURL(Coupon.class), params, Coupon.class);
+		return create(params, null);
 	}
 
 	public static Coupon retrieve(String id) throws StripeException {
-		return request(RequestMethod.GET, instanceURL(Coupon.class, id), null, Coupon.class);
+		return retrieve(id, null);
 	}
 	
 	public static CouponCollection all(Map<String, Object> params) throws StripeException {
-		return request(RequestMethod.GET, classURL(Coupon.class), params, CouponCollection.class);
+		return all(params, null);
 	}
 	
 	public DeletedCoupon delete() throws StripeException { 
-		return request(RequestMethod.DELETE, instanceURL(Coupon.class, this.id), null, DeletedCoupon.class);
+		return delete(null);
+	}
+
+	public static Coupon create(Map<String, Object> params, String apiKey) throws StripeException {
+		return request(RequestMethod.POST, classURL(Coupon.class), params, Coupon.class, apiKey);
+	}
+
+	public static Coupon retrieve(String id, String apiKey) throws StripeException {
+		return request(RequestMethod.GET, instanceURL(Coupon.class, id), null, Coupon.class, apiKey);
+	}
+	
+	public static CouponCollection all(Map<String, Object> params, String apiKey) throws StripeException {
+		return request(RequestMethod.GET, classURL(Coupon.class), params, CouponCollection.class, apiKey);
+	}
+	
+	public DeletedCoupon delete(String apiKey) throws StripeException { 
+		return request(RequestMethod.DELETE, instanceURL(Coupon.class, this.id), null, DeletedCoupon.class, apiKey);
 	}
 
 	public Integer getPercentOff() {

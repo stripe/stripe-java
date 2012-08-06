@@ -72,16 +72,29 @@ public class Transfer extends APIResource {
 	}
 
 	public static Transfer retrieve(String id) throws StripeException {
-		return request(RequestMethod.GET, instanceURL(Transfer.class, id), null, Transfer.class);
+		return retrieve(id, null);
 	}
 
 	public static TransferCollection all(Map<String, Object> params) throws StripeException {
-		return request(RequestMethod.GET, classURL(Transfer.class), params, TransferCollection.class);
+		return all(params, null);
 	}
 
 	public TransferTransactionCollection transactions(Map<String, Object> params) throws StripeException {
+		return transactions(params, null);
+	}
+	
+	public static Transfer retrieve(String id, String apiKey) throws StripeException {
+		return request(RequestMethod.GET, instanceURL(Transfer.class, id), null, Transfer.class, apiKey);
+	}
+
+	public static TransferCollection all(Map<String, Object> params, String apiKey) throws StripeException {
+		return request(RequestMethod.GET, classURL(Transfer.class), params, TransferCollection.class, apiKey);
+	}
+
+	public TransferTransactionCollection transactions(Map<String, Object> params, String apiKey) throws StripeException {
 		return request(RequestMethod.GET,
 			       String.format("%s/transactions", instanceURL(Transfer.class, this.getId())),
-			       params, TransferTransactionCollection.class);
+			       params, TransferTransactionCollection.class, apiKey);
 	}
+	
 }

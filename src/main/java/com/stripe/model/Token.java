@@ -71,10 +71,18 @@ public class Token extends APIResource {
 	}
 	
 	public static Token create(Map<String, Object> params) throws StripeException {
-		return request(RequestMethod.POST, classURL(Token.class), params, Token.class);
+		return create(params, null);
 	}
 
 	public static Token retrieve(String id) throws StripeException {
-		return request(RequestMethod.GET, instanceURL(Token.class, id), null, Token.class);
+		return retrieve(id, null);
+	}
+	
+	public static Token create(Map<String, Object> params, String apiKey) throws StripeException {
+		return request(RequestMethod.POST, classURL(Token.class), params, Token.class, apiKey);
+	}
+
+	public static Token retrieve(String id, String apiKey) throws StripeException {
+		return request(RequestMethod.GET, instanceURL(Token.class, id), null, Token.class, apiKey);
 	}
 }
