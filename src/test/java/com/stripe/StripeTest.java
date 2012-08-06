@@ -324,20 +324,17 @@ public class StripeTest
 	}
 	
 	@Test public void testTokenCreate() throws StripeException {
-		
 		Token token = Token.create(defaultTokenParams);
 		assertFalse(token.getUsed());
 	}
 	
 	@Test public void testTokenRetrieve() throws StripeException {
-		
 		Token createdToken = Token.create(defaultTokenParams);
 		Token retrievedToken = Token.retrieve(createdToken.getId());
 		assertEquals(createdToken.getId(), retrievedToken.getId());
 	}
 	
 	@Test public void testTokenUse() throws StripeException {
-		
 		Token createdToken = Token.create(defaultTokenParams);
 		Map<String, Object> chargeWithTokenParams = new HashMap<String, Object>();
 		chargeWithTokenParams.put("amount", 199);
@@ -405,16 +402,14 @@ public class StripeTest
 	 * @throws StripeException
 	 */
 	@Test public void testPerCallAPIUsage() throws StripeException {
-
 		Charge createdCharge = Charge.create(defaultChargeParams, Stripe.apiKey);
 		assertFalse(createdCharge.getRefunded());
-		
 		try {
 			Charge.create(defaultChargeParams, "INVALID_KEY_HERE");
 			fail();
 		} catch (Exception e) {}
 	}
-	
+
 	@Test public void testChargeCreatePerCallAPIKey() throws StripeException {
 		Charge createdCharge = Charge.create(defaultChargeParams, Stripe.apiKey);
 		assertFalse(createdCharge.getRefunded());
@@ -635,20 +630,17 @@ public class StripeTest
 	}
 	
 	@Test public void testTokenCreatePerCallAPIKey() throws StripeException {
-		
 		Token token = Token.create(defaultTokenParams, Stripe.apiKey);
 		assertFalse(token.getUsed());
 	}
 	
 	@Test public void testTokenRetrievePerCallAPIKey() throws StripeException {
-		
 		Token createdToken = Token.create(defaultTokenParams, Stripe.apiKey);
 		Token retrievedToken = Token.retrieve(createdToken.getId(), Stripe.apiKey);
 		assertEquals(createdToken.getId(), retrievedToken.getId());
 	}
 	
 	@Test public void testTokenUsePerCallAPIKey() throws StripeException {
-		
 		Token createdToken = Token.create(defaultTokenParams, Stripe.apiKey);
 		Map<String, Object> chargeWithTokenParams = new HashMap<String, Object>();
 		chargeWithTokenParams.put("amount", 199);
