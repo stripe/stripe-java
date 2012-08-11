@@ -41,6 +41,8 @@ public abstract class APIResource extends StripeObject {
 	protected static String instanceURL(Class<?> clazz, String id) { return String.format("%s/%s", classURL(clazz), id); }
 	
 	public static final String CHARSET = "UTF-8";
+	
+	private static final String DNS_CACHE_TTL_PROPERTY_NAME = "networkaddress.cache.ttl";
 
 	protected enum RequestMethod { GET, POST, DELETE }
 
@@ -193,7 +195,32 @@ public abstract class APIResource extends StripeObject {
 	}
 	
 	protected static <T> T request(APIResource.RequestMethod method, String url, Map<String, Object> params, Class<T> clazz, String apiKey) throws StripeException {
+		String originalDNSCacheTTL = null;
+		Boolean allowedToSetTTL = true;
+		try {
+			originalDNSCacheTTL = java.security.Security.getProperty(DNS_CACHE_TTL_PROPERTY_NAME);
+			// disable DNS cache
+			java.security.Security.setProperty(DNS_CACHE_TTL_PROPERTY_NAME, "0");
+		} catch (SecurityException se) {
+			allowedToSetTTL = false;
+		}
+		
+		try {
+			return _request(method, url, params, clazz, apiKey);
+		} finally {
+			if (allowedToSetTTL) {
+				if (originalDNSCacheTTL == null) {
+					// value unspecified by implementation
+					java.security.Security.setProperty(DNS_CACHE_TTL_PROPERTY_NAME, "-1"); //cache forever
+				} else {
+					java.security.Security.setProperty(DNS_CACHE_TTL_PROPERTY_NAME, originalDNSCacheTTL);
+				}
+			}
+		}
+	}
 
+		
+	protected static <T> T _request(APIResource.RequestMethod method, String url, Map<String, Object> params, Class<T> clazz, String apiKey) throws StripeException {
 		if ((Stripe.apiKey == null || Stripe.apiKey.length() == 0) && (apiKey == null || apiKey.length() == 0)) {
 			throw new AuthenticationException("No API key provided. (HINT: set your API key using 'Stripe.apiKey = <API-KEY>'. " +
 					"You can generate API keys from the Stripe web interface. " +
