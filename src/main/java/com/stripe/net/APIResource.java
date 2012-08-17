@@ -37,7 +37,8 @@ public abstract class APIResource extends StripeObject {
 			create();
 	
 	private static String className(Class<?> clazz) { return clazz.getSimpleName().toLowerCase().replace("$",""); }
-	protected static String classURL(Class<?> clazz) { return String.format("%s/%ss", Stripe.API_BASE, className(clazz)); }
+	protected static String singleClassURL(Class<?> clazz) { return String.format("%s/%s", Stripe.API_BASE, className(clazz)); }
+	protected static String classURL(Class<?> clazz) { return String.format("%ss", singleClassURL(clazz)); }
 	protected static String instanceURL(Class<?> clazz, String id) { return String.format("%s/%s", classURL(clazz), id); }
 	
 	public static final String CHARSET = "UTF-8";

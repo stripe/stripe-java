@@ -16,6 +16,7 @@ import org.junit.Test;
 
 import com.stripe.exception.CardException;
 import com.stripe.exception.StripeException;
+import com.stripe.model.Account;
 import com.stripe.model.Charge;
 import com.stripe.model.Coupon;
 import com.stripe.model.Customer;
@@ -102,6 +103,18 @@ public class StripeTest
 
 		defaultCouponParams.put("duration", "once");
 		defaultCouponParams.put("percent_off", 10);
+	}
+
+	@Test public void testAccountRetrieve() throws StripeException {
+		Account retrievedAccount = Account.retrieve();
+		assertEquals("test+bindings@stripe.com", retrievedAccount.getEmail());
+		assertEquals(false, retrievedAccount.getChargeEnabled());
+		assertEquals(false, retrievedAccount.getDetailsSubmitted());
+		assertEquals(null, retrievedAccount.getStatementDescriptor());
+
+		List currencies = retrievedAccount.getCurrenciesSupported();
+		assertEquals(1, currencies.size());
+		assertEquals("USD", currencies.get(0));
 	}
 
 	@Test public void testChargeCreate() throws StripeException {
