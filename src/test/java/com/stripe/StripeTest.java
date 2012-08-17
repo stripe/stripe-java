@@ -110,6 +110,11 @@ public class StripeTest
 		assertEquals("test+bindings@stripe.com", retrievedAccount.getEmail());
 		assertEquals(false, retrievedAccount.getChargeEnabled());
 		assertEquals(false, retrievedAccount.getDetailsSubmitted());
+		assertEquals(null, retrievedAccount.getStatementDescriptor());
+
+		List currencies = retrievedAccount.getCurrenciesSupported();
+		assertEquals(1, currencies.size());
+		assertEquals("USD", currencies.get(0));
 	}
 
 	@Test public void testChargeCreate() throws StripeException {
