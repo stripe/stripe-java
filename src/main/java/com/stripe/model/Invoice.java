@@ -26,7 +26,7 @@ public class Invoice extends APIResource {
 	InvoiceLines lines;
 	Boolean livemode;
 	Integer attemptCount;
-	
+
 	public Integer getSubtotal() {
 		return subtotal;
 	}
@@ -190,26 +190,43 @@ public class Invoice extends APIResource {
 	public static Invoice retrieve(String id) throws StripeException {
 		return retrieve(id, null);
 	}
-	
+
 	public static InvoiceCollection all(Map<String, Object> params) throws StripeException {
 		return all(params, null);
 	}
-		
+
 	public static Invoice upcoming(Map<String, Object> params) throws StripeException {
 		return upcoming(params, null);
 	}
-	
+
+	public Invoice pay() throws StripeException {
+        return this.pay(null);
+    }
+
+    public Invoice update(Map<String, Object> params) throws StripeException {
+    	return update(params, null);
+    }
+
 	public static Invoice retrieve(String id, String apiKey) throws StripeException {
 		return request(RequestMethod.GET, instanceURL(Invoice.class, id), null, Invoice.class, apiKey);
 	}
-	
+
 	public static InvoiceCollection all(Map<String, Object> params, String apiKey) throws StripeException {
 		return request(RequestMethod.GET, classURL(Invoice.class), params, InvoiceCollection.class, apiKey);
 	}
-		
+
 	public static Invoice upcoming(Map<String, Object> params, String apiKey) throws StripeException {
 		return request(RequestMethod.GET, String.format("%s/upcoming", classURL(Invoice.class)),
 				params, Invoice.class, apiKey);
 	}
 
+	public Invoice update(Map<String, Object> params, String apiKey) throws StripeException {
+		return request(RequestMethod.POST, instanceURL(Invoice.class, this.id), params, Invoice.class, apiKey);
+	}
+
+	public Invoice pay(String apiKey) throws StripeException {
+		return request(RequestMethod.POST,
+				String.format("%s/pay", instanceURL(Invoice.class, this.getId())),
+				null, Invoice.class, apiKey);
+	}
 }
