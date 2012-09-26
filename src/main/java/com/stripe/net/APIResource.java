@@ -282,7 +282,7 @@ public abstract class APIResource extends StripeObject {
 		String unknownErrorMessage = "Sorry, an unknown error occurred while trying to use the " +
 				"Google App Engine runtime. Please contact support@stripe.com for assistance.";
 		try {
-			if (method == RequestMethod.GET) { url = String.format("%s?%s", url, query); }
+			if (method == RequestMethod.GET || method == RequestMethod.DELETE) { url = String.format("%s?%s", url, query); }
 			URL fetchURL = new URL(url);
 			
 			Class<?> requestMethodClass = Class.forName("com.google.appengine.api.urlfetch.HTTPMethod");
