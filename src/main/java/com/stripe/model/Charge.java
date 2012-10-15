@@ -1,6 +1,7 @@
 package com.stripe.model;
 
 import java.util.Map;
+import java.util.List;
 
 import com.stripe.exception.StripeException;
 import com.stripe.net.APIResource;
@@ -20,6 +21,7 @@ public class Charge extends APIResource {
 	Integer amountRefunded;
 	String customer;
 	String invoice;
+	List<Fee> feeDetails;
 	Card card;
 
 	public String getId() {
@@ -132,6 +134,14 @@ public class Charge extends APIResource {
 
 	public void setInvoice(String invoice) {
 		this.invoice = invoice;
+	}
+
+	public List<Fee> getFeeDetails() {
+		return feeDetails;
+	}
+
+	public void setFeeDetails(List<Fee> feeDetails) {
+		this.feeDetails = feeDetails;
 	}
 	
 	public Card getCard() {

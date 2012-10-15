@@ -27,6 +27,7 @@ import com.stripe.model.DeletedPlan;
 import com.stripe.model.Invoice;
 import com.stripe.model.InvoiceItem;
 import com.stripe.model.Event;
+import com.stripe.model.Fee;
 import com.stripe.model.Plan;
 import com.stripe.model.Subscription;
 import com.stripe.model.Token; 
@@ -120,6 +121,14 @@ public class StripeTest
 	@Test public void testChargeCreate() throws StripeException {
 		Charge createdCharge = Charge.create(defaultChargeParams);
 		assertFalse(createdCharge.getRefunded());
+
+		assertEquals(1, createdCharge.getFeeDetails().size());
+
+		Fee fee = createdCharge.getFeeDetails().get(0);
+		assertEquals("stripe_fee", fee.getType());
+		assertEquals(createdCharge.getFee(), fee.getAmount());
+		assertEquals(createdCharge.getCurrency(), fee.getCurrency());
+		assertEquals(null, fee.getApplication());
 	}
 
 	@Test public void testChargeRetrieve() throws StripeException {
