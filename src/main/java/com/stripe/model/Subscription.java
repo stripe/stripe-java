@@ -15,6 +15,7 @@ public class Subscription extends APIResource {
 	Plan plan;
 	Long canceledAt;
 	Long endedAt;
+	Integer quantity;
 	
 	public Long getCurrentPeriodEnd() {
 		return currentPeriodEnd;
@@ -81,5 +82,11 @@ public class Subscription extends APIResource {
 	}
 	public void setEndedAt(Long endedAt) {
 		this.endedAt = endedAt;
+	}
+	public Integer getQuantity() {
+		return quantity;
+	}
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 }
