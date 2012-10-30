@@ -25,6 +25,7 @@ import com.stripe.model.DeletedCustomer;
 import com.stripe.model.DeletedInvoiceItem;
 import com.stripe.model.DeletedPlan;
 import com.stripe.model.Invoice;
+import com.stripe.model.InvoiceLineItemCollection;
 import com.stripe.model.InvoiceItem;
 import com.stripe.model.Event;
 import com.stripe.model.Fee;
@@ -322,8 +323,11 @@ public class StripeTest
 		Map<String, Object> listParams = new HashMap<String, Object>();
 		listParams.put("count", 1);
 		Invoice createdInvoice = Invoice.all(listParams).getData().get(0);
-	    Invoice retrievedInvoice = Invoice.retrieve(createdInvoice.getId());
-	    assertEquals(createdInvoice.getId(), retrievedInvoice.getId());
+    Invoice retrievedInvoice = Invoice.retrieve(createdInvoice.getId());
+    assertEquals(createdInvoice.getId(), retrievedInvoice.getId());
+
+		InvoiceLineItemCollection lines = retrievedInvoice.getLines().all(listParams);
+		assertFalse(lines == null);
 	}
 	
 	@Test public void testInvoiceRetrieveForCustomer() throws StripeException {
@@ -343,6 +347,10 @@ public class StripeTest
 		upcomingParams.put("customer", customer.getId());
 		Invoice upcomingInvoice = Invoice.upcoming(upcomingParams);
 		assertFalse(upcomingInvoice.getAttempted());
+		
+		Map<String, Object> listParams = new HashMap<String, Object>();
+		InvoiceLineItemCollection lines = upcomingInvoice.getLines().all(listParams);
+		assertFalse(lines == null);
 	}
 	
 	@Test public void testTokenCreate() throws StripeException {
