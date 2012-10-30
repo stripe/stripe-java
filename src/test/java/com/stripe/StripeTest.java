@@ -347,10 +347,6 @@ public class StripeTest
 		upcomingParams.put("customer", customer.getId());
 		Invoice upcomingInvoice = Invoice.upcoming(upcomingParams);
 		assertFalse(upcomingInvoice.getAttempted());
-		
-		Map<String, Object> listParams = new HashMap<String, Object>();
-		InvoiceLineItemCollection lines = upcomingInvoice.getLines().all(listParams);
-		assertFalse(lines == null);
 	}
 	
 	@Test public void testTokenCreate() throws StripeException {
