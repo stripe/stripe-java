@@ -23,7 +23,7 @@ public class Invoice extends APIResource {
 	Long periodStart;
 	Long periodEnd;
 	Discount discount;
-	InvoiceLines lines;
+	InvoiceLineItemCollection lines;
 	Boolean livemode;
 	Integer attemptCount;
 
@@ -163,12 +163,8 @@ public class Invoice extends APIResource {
 		this.discount = discount;
 	}
 
-	public InvoiceLines getLines() {
+	public InvoiceLineItemCollection getLines() {
 		return lines;
-	}
-
-	public void setLines(InvoiceLines lines) {
-		this.lines = lines;
 	}
 
 	public Boolean getLivemode() {

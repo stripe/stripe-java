@@ -1,6 +1,6 @@
 package com.stripe.model;
 
-public class InvoiceLineSubscriptionPeriod extends StripeObject {
+public class InvoiceLineItemPeriod extends StripeObject {
 	Long start;
 	Long end;
 	
