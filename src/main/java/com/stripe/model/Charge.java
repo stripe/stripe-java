@@ -23,6 +23,7 @@ public class Charge extends APIResource {
 	String invoice;
 	List<Fee> feeDetails;
 	Card card;
+	Dispute dispute;
 
 	public String getId() {
 		return id;
@@ -103,7 +104,7 @@ public class Charge extends APIResource {
 	public void setDescription(String description) {
 		this.description = description;
 	}
-	
+
 	public String getFailureMessage() {
 		return failureMessage;
 	}
@@ -151,7 +152,15 @@ public class Charge extends APIResource {
 	public void setCard(Card card) {
 		this.card = card;
 	}
-	
+
+	public Dispute getDispute() {
+		return dispute;
+	}
+
+	public void setDispute(Dispute dispute) {
+		this.dispute = dispute;
+	}
+
 	public static Charge create(Map<String, Object> params) throws StripeException {
 		return create(params, null);
 	}
@@ -171,7 +180,7 @@ public class Charge extends APIResource {
 	public Charge refund(Map<String, Object> params) throws StripeException {
 		return this.refund(params, null);
 	}
-	
+
 	public static Charge create(Map<String, Object> params, String apiKey) throws StripeException {
 		return request(RequestMethod.POST, classURL(Charge.class), params, Charge.class, apiKey);
 	}
@@ -194,4 +203,9 @@ public class Charge extends APIResource {
 				params, Charge.class, apiKey);
 	}
 
+	public Dispute updateDispute(Map<String, Object> params, String apiKey) throws StripeException {
+		return request(RequestMethod.POST,
+				String.format("%s/dispute", instanceURL(Charge.class, this.id)),
+				params, Dispute.class, apiKey);
+	}
 }
