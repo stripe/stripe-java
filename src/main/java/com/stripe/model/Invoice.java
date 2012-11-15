@@ -26,6 +26,7 @@ public class Invoice extends APIResource {
 	InvoiceLineItemCollection lines;
 	Boolean livemode;
 	Integer attemptCount;
+	String currency;
 
 	public Integer getSubtotal() {
 		return subtotal;
@@ -182,6 +183,15 @@ public class Invoice extends APIResource {
 	public void setAttemptCount(Integer attemptCount) {
 		this.attemptCount = attemptCount;
 	}
+
+	public String getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
+
 
 	public static Invoice retrieve(String id) throws StripeException {
 		return retrieve(id, null);

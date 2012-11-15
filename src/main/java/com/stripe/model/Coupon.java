@@ -7,6 +7,8 @@ import com.stripe.net.APIResource;
 
 public class Coupon extends APIResource {
 	Integer percentOff;
+	Integer amountOff;
+	String currency;
 	String duration;
 	String id;
 	Boolean livemode;
@@ -53,6 +55,22 @@ public class Coupon extends APIResource {
 
 	public void setPercentOff(Integer percentOff) {
 		this.percentOff = percentOff;
+	}
+
+	public Integer getAmountOff() {
+		return amount;
+	}
+
+	public void setAmountOff(Integer amount) {
+		this.amount = amount;
+	}
+
+	public String getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
 	}
 
 	public String getDuration() {
