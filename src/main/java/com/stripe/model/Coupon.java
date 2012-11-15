@@ -58,11 +58,11 @@ public class Coupon extends APIResource {
 	}
 
 	public Integer getAmountOff() {
-		return amount;
+		return amountOff;
 	}
 
-	public void setAmountOff(Integer amount) {
-		this.amount = amount;
+	public void setAmountOff(Integer amountOff) {
+		this.amountOff = amountOff;
 	}
 
 	public String getCurrency() {
