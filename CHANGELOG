@@ -1,3 +1,6 @@
+=== 1.1.11 2012-11-17
+* Explict cast to javax.net.ssl.HttpsURLConnection to prevent issues with user imports
+
 === 1.1.10 2012-11-15
 * Add currency to Invoice resource
 * Add amountOff and currency to Coupon resource

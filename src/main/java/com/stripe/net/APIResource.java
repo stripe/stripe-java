@@ -35,14 +35,14 @@ public abstract class APIResource extends StripeObject {
 			setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).
 			registerTypeAdapter(EventData.class, new EventDataDeserializer()).
 			create();
-	
+
 	private static String className(Class<?> clazz) { return clazz.getSimpleName().toLowerCase().replace("$",""); }
 	protected static String singleClassURL(Class<?> clazz) { return String.format("%s/v1/%s", Stripe.API_BASE, className(clazz)); }
 	protected static String classURL(Class<?> clazz) { return String.format("%ss", singleClassURL(clazz)); }
 	protected static String instanceURL(Class<?> clazz, String id) { return String.format("%s/%s", classURL(clazz), id); }
-	
+
 	public static final String CHARSET = "UTF-8";
-	
+
 	private static final String DNS_CACHE_TTL_PROPERTY_NAME = "networkaddress.cache.ttl";
 
 	protected enum RequestMethod { GET, POST, DELETE }
@@ -50,15 +50,15 @@ public abstract class APIResource extends StripeObject {
 	private static String urlEncodePair(String k, String v) throws UnsupportedEncodingException {
 		return String.format("%s=%s", URLEncoder.encode(k, CHARSET), URLEncoder.encode(v, CHARSET));
 	}
-	
+
 	static Map<String, String> getHeaders(String apiKey) {
 		Map<String, String> headers = new HashMap<String, String>();
 		headers.put("Accept-Charset", CHARSET);
 		headers.put("User-Agent", String.format("Stripe/v1 JavaBindings/%s", Stripe.VERSION));
-		
+
 		if (apiKey == null)
 			apiKey = Stripe.apiKey;
-		
+
 		headers.put("Authorization", String.format("Bearer %s", apiKey));
 
 		//debug headers
@@ -73,29 +73,29 @@ public abstract class APIResource extends StripeObject {
 		headers.put("X-Stripe-Client-User-Agent", gson.toJson(propertyMap));
 		return headers;
 	}
-	
-	private static HttpsURLConnection createStripeConnection(String url, String apiKey) throws IOException {
+
+	private static javax.net.ssl.HttpsURLConnection createStripeConnection(String url, String apiKey) throws IOException {
 		URL stripeURL = new URL(url);
-		HttpsURLConnection conn = (HttpsURLConnection) stripeURL.openConnection(); //enforce SSL URLs
+		javax.net.ssl.HttpsURLConnection conn = (javax.net.ssl.HttpsURLConnection) stripeURL.openConnection(); //enforce SSL URLs
 		conn.setConnectTimeout(30000); // 30 seconds
 		conn.setReadTimeout(80000); // 80 seconds
 		conn.setUseCaches(false);
 		for(Map.Entry<String, String> header: getHeaders(apiKey).entrySet()) {
 			conn.setRequestProperty(header.getKey(), header.getValue());
 		}
-		
+
 		return conn;
 	}
-	
-	private static HttpsURLConnection createGetConnection(String url, String query, String apiKey) throws IOException {
+
+	private static javax.net.ssl.HttpsURLConnection createGetConnection(String url, String query, String apiKey) throws IOException {
 		String getURL = String.format("%s?%s", url, query);
-		HttpsURLConnection conn = createStripeConnection(getURL, apiKey);
+		javax.net.ssl.HttpsURLConnection conn = createStripeConnection(getURL, apiKey);
 		conn.setRequestMethod("GET");
 		return conn;
 	}
 
-	private static HttpsURLConnection createPostConnection(String url, String query, String apiKey) throws IOException {
-		HttpsURLConnection conn = createStripeConnection(url, apiKey);
+	private static javax.net.ssl.HttpsURLConnection createPostConnection(String url, String query, String apiKey) throws IOException {
+		javax.net.ssl.HttpsURLConnection conn = createStripeConnection(url, apiKey);
 		conn.setDoOutput(true);
 		conn.setRequestMethod("POST");
 		conn.setRequestProperty("Content-Type", String.format("application/x-www-form-urlencoded;charset=%s", CHARSET));
@@ -109,9 +109,9 @@ public abstract class APIResource extends StripeObject {
 		return conn;
 	}
 
-	private static HttpsURLConnection createDeleteConnection(String url, String query, String apiKey) throws IOException {
+	private static javax.net.ssl.HttpsURLConnection createDeleteConnection(String url, String query, String apiKey) throws IOException {
 		String deleteUrl = String.format("%s?%s", url, query);
-		HttpsURLConnection conn = createStripeConnection(deleteUrl, apiKey);
+		javax.net.ssl.HttpsURLConnection conn = createStripeConnection(deleteUrl, apiKey);
 		conn.setRequestMethod("DELETE");
 		return conn;
 	}
@@ -124,9 +124,9 @@ public abstract class APIResource extends StripeObject {
 			queryStringBuffer.append(urlEncodePair(entry.getKey(), entry.getValue()));
 		}
 		if (queryStringBuffer.length() > 0) queryStringBuffer.deleteCharAt(0);
-		return queryStringBuffer.toString();	
+		return queryStringBuffer.toString();
 	}
-	
+
 	private static Map<String, String> flattenParams(Map<String, Object> params) {
 		if (params == null) { return new HashMap<String, String>(); }
 		Map<String, String> flatParams = new HashMap<String, String>();
@@ -159,15 +159,15 @@ public abstract class APIResource extends StripeObject {
 		String code;
 		String param;
 	}
-	
+
 	private static String getResponseBody(InputStream responseStream) throws IOException {
 		String rBody = new Scanner(responseStream, CHARSET).useDelimiter("\\A").next(); // \A is the beginning of the stream boundary
 		responseStream.close();
 		return rBody;
 	}
-	
+
 	private static StripeResponse makeURLConnectionRequest(APIResource.RequestMethod method, String url, String query, String apiKey) throws APIConnectionException {
-		HttpsURLConnection conn = null;
+		javax.net.ssl.HttpsURLConnection conn = null;
 		try {
 			switch(method) {
 				case GET: conn = createGetConnection(url, query, apiKey); break;
@@ -194,7 +194,7 @@ public abstract class APIResource extends StripeObject {
 			if (conn != null) { conn.disconnect(); }
 		}
 	}
-	
+
 	protected static <T> T request(APIResource.RequestMethod method, String url, Map<String, Object> params, Class<T> clazz, String apiKey) throws StripeException {
 		String originalDNSCacheTTL = null;
 		Boolean allowedToSetTTL = true;
@@ -205,7 +205,7 @@ public abstract class APIResource extends StripeObject {
 		} catch (SecurityException se) {
 			allowedToSetTTL = false;
 		}
-		
+
 		try {
 			return _request(method, url, params, clazz, apiKey);
 		} finally {
@@ -220,26 +220,26 @@ public abstract class APIResource extends StripeObject {
 		}
 	}
 
-		
+
 	protected static <T> T _request(APIResource.RequestMethod method, String url, Map<String, Object> params, Class<T> clazz, String apiKey) throws StripeException {
 		if ((Stripe.apiKey == null || Stripe.apiKey.length() == 0) && (apiKey == null || apiKey.length() == 0)) {
 			throw new AuthenticationException("No API key provided. (HINT: set your API key using 'Stripe.apiKey = <API-KEY>'. " +
 					"You can generate API keys from the Stripe web interface. " +
 					"See https://stripe.com/api for details or email support@stripe.com if you have questions.");
 		}
-		
+
 		if (apiKey == null)
 			apiKey = Stripe.apiKey;
-		
+
 		String query;
-		
+
 		try {
 			query = createQuery(params);
 		} catch (UnsupportedEncodingException e) {
 			throw new InvalidRequestException("Unable to encode parameters to " + CHARSET +
 					". Please contact support@stripe.com for assistance.", null, e);
 		}
-		
+
 		StripeResponse response;
 		try {
 			// HTTPSURLConnection verifies SSL cert by default
@@ -261,11 +261,11 @@ public abstract class APIResource extends StripeObject {
 		}
 		return gson.fromJson(rBody, clazz);
 	}
-	
+
 	private static void handleAPIError(String rBody, int rCode) throws StripeException {
 		APIResource.Error error = gson.fromJson(rBody, APIResource.ErrorContainer.class).error;
 		switch(rCode) {
-		case 400: throw new InvalidRequestException(error.message, error.param, null); 
+		case 400: throw new InvalidRequestException(error.message, error.param, null);
 		case 404: throw new InvalidRequestException(error.message, error.param, null);
 		case 401: throw new AuthenticationException(error.message);
 		case 402: throw new CardException(error.message, error.code, error.param, null);
@@ -284,10 +284,10 @@ public abstract class APIResource extends StripeObject {
 		try {
 			if (method == RequestMethod.GET || method == RequestMethod.DELETE) { url = String.format("%s?%s", url, query); }
 			URL fetchURL = new URL(url);
-			
+
 			Class<?> requestMethodClass = Class.forName("com.google.appengine.api.urlfetch.HTTPMethod");
 			Object httpMethod = requestMethodClass.getDeclaredField(method.name()).get(null);
-			
+
 			Class<?> fetchOptionsBuilderClass = Class.forName("com.google.appengine.api.urlfetch.FetchOptions$Builder");
 			Object fetchOptions = null;
 			try {
@@ -298,37 +298,37 @@ public abstract class APIResource extends StripeObject {
 						"If you have questions, contact support@stripe.com.");
 				fetchOptions = fetchOptionsBuilderClass.getDeclaredMethod("withDefaults").invoke(null);
 			}
-			
-			
+
+
 			Class<?> fetchOptionsClass = Class.forName("com.google.appengine.api.urlfetch.FetchOptions");
-			
+
 		    // GAE requests can  time out after 60 seconds, so make sure we leave
 		    // some time for the application to handle a slow Stripe
 			fetchOptionsClass.getDeclaredMethod("setDeadline", java.lang.Double.class).invoke(fetchOptions, new Double(55));
 
 			Class<?> requestClass = Class.forName("com.google.appengine.api.urlfetch.HTTPRequest");
-			
+
 			Object request = requestClass.getDeclaredConstructor(URL.class, requestMethodClass, fetchOptionsClass)
 					.newInstance(fetchURL, httpMethod, fetchOptions);
-			
+
 			if (method == RequestMethod.POST) {
 				requestClass.getDeclaredMethod("setPayload", byte[].class).invoke(request, query.getBytes());
 			}
-			
+
 			for(Map.Entry<String, String> header: getHeaders(apiKey).entrySet()) {
 				Class<?> httpHeaderClass = Class.forName("com.google.appengine.api.urlfetch.HTTPHeader");
 				Object reqHeader = httpHeaderClass.getDeclaredConstructor(String.class, String.class)
 						.newInstance(header.getKey(), header.getValue());
 				requestClass.getDeclaredMethod("setHeader", httpHeaderClass).invoke(request, reqHeader);
 			}
-			
+
 			Class<?> urlFetchFactoryClass = Class.forName("com.google.appengine.api.urlfetch.URLFetchServiceFactory");
 			Object urlFetchService = urlFetchFactoryClass.getDeclaredMethod("getURLFetchService").invoke(null);
-			
+
 			Method fetchMethod = urlFetchService.getClass().getDeclaredMethod("fetch", requestClass);
 			fetchMethod.setAccessible(true);
 			Object response = fetchMethod.invoke(urlFetchService, request);
-			
+
 			int responseCode = (Integer) response.getClass().getDeclaredMethod("getResponseCode").invoke(response);
 			String body = new String((byte[]) response.getClass().getDeclaredMethod("getContent").invoke(response), CHARSET);
 			return new StripeResponse(responseCode, body);
