@@ -83,9 +83,10 @@ public class StripeTest
 		defaultCardParams.put("exp_year", 2015);
 		defaultCardParams.put("cvc", "123");
 		defaultCardParams.put("name", "Java Bindings Cardholder");
-		defaultCardParams.put("address_line1", "522 Ramona St");
-		defaultCardParams.put("address_line2", "Palo Alto");
-		defaultCardParams.put("address_zip", "94301");
+		defaultCardParams.put("address_line1", "140 2nd Street");
+		defaultCardParams.put("address_line2", "4th Floor");
+		defaultCardParams.put("address_city", "San Francisco");
+		defaultCardParams.put("address_zip", "94105");
 		defaultCardParams.put("address_state", "CA");
 		defaultCardParams.put("address_country", "USA");
 

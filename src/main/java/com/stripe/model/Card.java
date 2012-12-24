@@ -11,6 +11,7 @@ public class Card extends StripeObject {
 	String addressLine1;
 	String addressLine2;
 	String addressZip;
+	String addressCity;
 	String addressState;
 	String addressCountry;
 	String addressZipCheck;
@@ -65,6 +66,12 @@ public class Card extends StripeObject {
 	}
 	public void setAddressLine2(String addressLine2) {
 		this.addressLine2 = addressLine2;
+	}
+	public String getAddressCity() {
+		return addressCity;
+	}
+	public void setAddressCity(String addressCity) {
+		this.addressCity = addressCity;
 	}
 	public String getAddressZip() {
 		return addressZip;
