@@ -4,16 +4,16 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
+import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
+import java.net.URLStreamHandler;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
-
-import javax.net.ssl.HttpsURLConnection;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -45,6 +45,12 @@ public abstract class APIResource extends StripeObject {
 
 	private static final String DNS_CACHE_TTL_PROPERTY_NAME = "networkaddress.cache.ttl";
 
+	/*
+	 *  Set this property to override your environment's default URLStreamHandler;
+	 *  Settings the property should not be needed in most environments.
+	 */
+	private static final String CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME = "com.stripe.net.customURLStreamHandler";
+
 	protected enum RequestMethod { GET, POST, DELETE }
 
 	private static String urlEncodePair(String k, String v) throws UnsupportedEncodingException {
@@ -75,7 +81,33 @@ public abstract class APIResource extends StripeObject {
 	}
 
 	private static javax.net.ssl.HttpsURLConnection createStripeConnection(String url, String apiKey) throws IOException {
-		URL stripeURL = new URL(url);
+		URL stripeURL = null;
+		String customURLStreamHandlerClassName = System.getProperty(CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME, null);
+		if (customURLStreamHandlerClassName != null) {
+			// instantiate the custom handler provided
+			try {
+				Class<URLStreamHandler> clazz = (Class<URLStreamHandler>) Class.forName(customURLStreamHandlerClassName);
+				Constructor<URLStreamHandler> constructor = clazz.getConstructor();
+				URLStreamHandler customHandler = constructor.newInstance();
+				stripeURL = new URL(null, url, customHandler);
+			} catch (ClassNotFoundException e) {
+				throw new IOException(e);
+			} catch (SecurityException e) {
+				throw new IOException(e);
+			} catch (NoSuchMethodException e) {
+				throw new IOException(e);
+			} catch (IllegalArgumentException e) {
+				throw new IOException(e);
+			} catch (InstantiationException e) {
+				throw new IOException(e);
+			} catch (IllegalAccessException e) {
+				throw new IOException(e);
+			} catch (InvocationTargetException e) {
+				throw new IOException(e);
+			}
+		} else {
+			stripeURL = new URL(url);
+		}
 		javax.net.ssl.HttpsURLConnection conn = (javax.net.ssl.HttpsURLConnection) stripeURL.openConnection(); //enforce SSL URLs
 		conn.setConnectTimeout(30000); // 30 seconds
 		conn.setReadTimeout(80000); // 80 seconds
