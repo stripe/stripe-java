@@ -77,6 +77,8 @@ public abstract class APIResource extends StripeObject {
 		propertyMap.put("lang", "Java");
 		propertyMap.put("publisher", "Stripe");
 		headers.put("X-Stripe-Client-User-Agent", gson.toJson(propertyMap));
+		if (Stripe.apiVersion != null)
+			headers.put("Stripe-Version", Stripe.apiVersion);
 		return headers;
 	}
 
