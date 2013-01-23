@@ -102,6 +102,7 @@ public class StripeTest
 		defaultPlanParams.put("amount", 100);
 		defaultPlanParams.put("currency", "usd");
 		defaultPlanParams.put("interval", "month");
+		defaultPlanParams.put("interval_count", 2);
 		defaultPlanParams.put("name", "Java Bindings Plan");
 
 		defaultCouponParams.put("duration", "once");
@@ -214,6 +215,7 @@ public class StripeTest
 	@Test public void testPlanCreate() throws StripeException {
 		Plan plan = Plan.create(getUniquePlanParams());
 		assertEquals(plan.getInterval(), "month");
+		assertEquals(plan.getIntervalCount(), (Integer) 2);
 	}
 	
 	@Test public void testPlanUpdate() throws StripeException {
