@@ -3,7 +3,11 @@ package com.stripe.model;
 import java.util.List;
 import java.util.Map;
 
-import com.stripe.exception.StripeException;
+import com.stripe.exception.APIConnectionException;
+import com.stripe.exception.APIException;
+import com.stripe.exception.AuthenticationException;
+import com.stripe.exception.CardException;
+import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 
 public class Transfer extends APIResource {
@@ -71,30 +75,48 @@ public class Transfer extends APIResource {
 		this.otherTransfers = otherTransfers;
 	}
 
-	public static Transfer retrieve(String id) throws StripeException {
+	public static Transfer retrieve(String id) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
 		return retrieve(id, null);
 	}
 
-	public static TransferCollection all(Map<String, Object> params) throws StripeException {
+	public static TransferCollection all(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
 		return all(params, null);
 	}
 
-	public TransferTransactionCollection transactions(Map<String, Object> params) throws StripeException {
+	public TransferTransactionCollection transactions(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
 		return transactions(params, null);
 	}
-	
-	public static Transfer retrieve(String id, String apiKey) throws StripeException {
-		return request(RequestMethod.GET, instanceURL(Transfer.class, id), null, Transfer.class, apiKey);
+
+	public static Transfer retrieve(String id, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, instanceURL(Transfer.class, id),
+				null, Transfer.class, apiKey);
 	}
 
-	public static TransferCollection all(Map<String, Object> params, String apiKey) throws StripeException {
-		return request(RequestMethod.GET, classURL(Transfer.class), params, TransferCollection.class, apiKey);
+	public static TransferCollection all(Map<String, Object> params,
+			String apiKey) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return request(RequestMethod.GET, classURL(Transfer.class), params,
+				TransferCollection.class, apiKey);
 	}
 
-	public TransferTransactionCollection transactions(Map<String, Object> params, String apiKey) throws StripeException {
-		return request(RequestMethod.GET,
-			       String.format("%s/transactions", instanceURL(Transfer.class, this.getId())),
-			       params, TransferTransactionCollection.class, apiKey);
+	public TransferTransactionCollection transactions(
+			Map<String, Object> params, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(
+				RequestMethod.GET,
+				String.format("%s/transactions",
+						instanceURL(Transfer.class, this.getId())), params,
+				TransferTransactionCollection.class, apiKey);
 	}
-	
+
 }

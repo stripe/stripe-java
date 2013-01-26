@@ -1,9 +1,13 @@
 package com.stripe.model;
 
-import java.util.Map;
 import java.util.List;
+import java.util.Map;
 
-import com.stripe.exception.StripeException;
+import com.stripe.exception.APIConnectionException;
+import com.stripe.exception.APIException;
+import com.stripe.exception.AuthenticationException;
+import com.stripe.exception.CardException;
+import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 
 public class Charge extends APIResource {
@@ -144,7 +148,7 @@ public class Charge extends APIResource {
 	public void setFeeDetails(List<Fee> feeDetails) {
 		this.feeDetails = feeDetails;
 	}
-	
+
 	public Card getCard() {
 		return card;
 	}
@@ -161,50 +165,78 @@ public class Charge extends APIResource {
 		this.dispute = dispute;
 	}
 
-	public static Charge create(Map<String, Object> params) throws StripeException {
+	public static Charge create(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
 		return create(params, null);
 	}
 
-	public static Charge retrieve(String id) throws StripeException {
+	public static Charge retrieve(String id) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
 		return retrieve(id, null);
 	}
 
-	public static ChargeCollection all(Map<String, Object> params) throws StripeException {
+	public static ChargeCollection all(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
 		return all(params, null);
 	}
 
-	public Charge refund() throws StripeException {
-        return this.refund(null, null);
-    }
+	public Charge refund() throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return this.refund(null, null);
+	}
 
-	public Charge refund(Map<String, Object> params) throws StripeException {
+	public Charge refund(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
 		return this.refund(params, null);
 	}
 
-	public static Charge create(Map<String, Object> params, String apiKey) throws StripeException {
-		return request(RequestMethod.POST, classURL(Charge.class), params, Charge.class, apiKey);
+	public static Charge create(Map<String, Object> params, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.POST, classURL(Charge.class), params,
+				Charge.class, apiKey);
 	}
 
-	public static Charge retrieve(String id, String apiKey) throws StripeException {
-		return request(RequestMethod.GET, instanceURL(Charge.class, id), null, Charge.class, apiKey);
+	public static Charge retrieve(String id, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, instanceURL(Charge.class, id), null,
+				Charge.class, apiKey);
 	}
 
-	public static ChargeCollection all(Map<String, Object> params, String apiKey) throws StripeException {
-		return request(RequestMethod.GET, classURL(Charge.class), params, ChargeCollection.class, apiKey);
+	public static ChargeCollection all(Map<String, Object> params, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, classURL(Charge.class), params,
+				ChargeCollection.class, apiKey);
 	}
 
-	public Charge refund(String apiKey) throws StripeException {
-        return this.refund((Map<String,Object>)null, apiKey); // full refund
-    }
-
-	public Charge refund(Map<String, Object> params, String apiKey) throws StripeException {
-		return request(RequestMethod.POST,
-				String.format("%s/refund", instanceURL(Charge.class, this.getId())),
-				params, Charge.class, apiKey);
+	public Charge refund(String apiKey) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return this.refund((Map<String, Object>) null, apiKey); // full refund
 	}
 
-	public Dispute updateDispute(Map<String, Object> params, String apiKey) throws StripeException {
-		return request(RequestMethod.POST,
+	public Charge refund(Map<String, Object> params, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(
+				RequestMethod.POST,
+				String.format("%s/refund",
+						instanceURL(Charge.class, this.getId())), params,
+				Charge.class, apiKey);
+	}
+
+	public Dispute updateDispute(Map<String, Object> params, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(
+				RequestMethod.POST,
 				String.format("%s/dispute", instanceURL(Charge.class, this.id)),
 				params, Dispute.class, apiKey);
 	}
