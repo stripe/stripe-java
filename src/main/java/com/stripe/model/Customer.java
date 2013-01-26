@@ -2,7 +2,11 @@ package com.stripe.model;
 
 import java.util.Map;
 
-import com.stripe.exception.StripeException;
+import com.stripe.exception.APIConnectionException;
+import com.stripe.exception.APIException;
+import com.stripe.exception.AuthenticationException;
+import com.stripe.exception.CardException;
+import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 
 public class Customer extends APIResource {
@@ -120,7 +124,7 @@ public class Customer extends APIResource {
 	public void setDelinquent(Boolean delinquent) {
 		this.delinquent = delinquent;
 	}
-	
+
 	public Integer getAccountBalance() {
 		return accountBalance;
 	}
@@ -129,84 +133,133 @@ public class Customer extends APIResource {
 		this.accountBalance = accountBalance;
 	}
 
-	public static Customer create(Map<String, Object> params) throws StripeException {
+	public static Customer create(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
 		return create(params, null);
 	}
 
-	public static Customer retrieve(String id) throws StripeException {
+	public static Customer retrieve(String id) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
 		return retrieve(id, null);
 	}
-	
-	public static CustomerCollection all(Map<String, Object> params) throws StripeException {
+
+	public static CustomerCollection all(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
 		return all(params, null);
 	}
-	
-	public Customer update(Map<String, Object> params) throws StripeException {
+
+	public Customer update(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
 		return update(params, null);
 	}
-	
-	public DeletedCustomer delete() throws StripeException { 
+
+	public DeletedCustomer delete() throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
 		return delete(null);
 	}
-	
-	public Subscription updateSubscription(Map<String, Object> params) throws StripeException {
+
+	public Subscription updateSubscription(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
 		return updateSubscription(params, null);
 	}
-	
-	public Subscription cancelSubscription() throws StripeException {
+
+	public Subscription cancelSubscription() throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
 		return cancelSubscription(null, null);
 	}
-	
-	public Subscription cancelSubscription(Map<String, Object> params) throws StripeException {
+
+	public Subscription cancelSubscription(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
 		return cancelSubscription(params, null);
 	}
 
-	public void deleteDiscount() throws StripeException {
+	public void deleteDiscount() throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
 		deleteDiscount(null);
 	}
-	
-	public static Customer create(Map<String, Object> params, String apiKey) throws StripeException {
-		return request(RequestMethod.POST, classURL(Customer.class), params, Customer.class, apiKey);
+
+	public static Customer create(Map<String, Object> params, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.POST, classURL(Customer.class), params,
+				Customer.class, apiKey);
 	}
 
-	public static Customer retrieve(String id, String apiKey) throws StripeException {
-		return request(RequestMethod.GET, instanceURL(Customer.class, id), null, Customer.class, apiKey);
+	public static Customer retrieve(String id, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, instanceURL(Customer.class, id),
+				null, Customer.class, apiKey);
 	}
-	
-	public static CustomerCollection all(Map<String, Object> params, String apiKey) throws StripeException {
-		return request(RequestMethod.GET, classURL(Customer.class), params, CustomerCollection.class, apiKey);
+
+	public static CustomerCollection all(Map<String, Object> params,
+			String apiKey) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return request(RequestMethod.GET, classURL(Customer.class), params,
+				CustomerCollection.class, apiKey);
 	}
-	
-	public Customer update(Map<String, Object> params, String apiKey) throws StripeException {
-		return request(RequestMethod.POST, instanceURL(Customer.class, this.id), params, Customer.class, apiKey);
-	}
-	
-	public DeletedCustomer delete(String apiKey) throws StripeException { 
-		return request(RequestMethod.DELETE, instanceURL(Customer.class, this.id), null, DeletedCustomer.class, apiKey);
-	}
-	
-	public Subscription updateSubscription(Map<String, Object> params, String apiKey) throws StripeException {
+
+	public Customer update(Map<String, Object> params, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.POST,
-				String.format("%s/subscription", instanceURL(Customer.class, this.id)),
-				params, Subscription.class, apiKey);
+				instanceURL(Customer.class, this.id), params, Customer.class,
+				apiKey);
 	}
-	
-	public Subscription cancelSubscription(String apiKey) throws StripeException {
+
+	public DeletedCustomer delete(String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.DELETE,
+				instanceURL(Customer.class, this.id), null,
+				DeletedCustomer.class, apiKey);
+	}
+
+	public Subscription updateSubscription(Map<String, Object> params,
+			String apiKey) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return request(
+				RequestMethod.POST,
+				String.format("%s/subscription",
+						instanceURL(Customer.class, this.id)), params,
+				Subscription.class, apiKey);
+	}
+
+	public Subscription cancelSubscription(String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
 		return cancelSubscription(null, apiKey);
 	}
-	
-	public Subscription cancelSubscription(Map<String, Object> params, String apiKey) throws StripeException {
-		return request(RequestMethod.DELETE,
-				String.format("%s/subscription", instanceURL(Customer.class, this.id)),
-				params, Subscription.class, apiKey);
+
+	public Subscription cancelSubscription(Map<String, Object> params,
+			String apiKey) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return request(
+				RequestMethod.DELETE,
+				String.format("%s/subscription",
+						instanceURL(Customer.class, this.id)), params,
+				Subscription.class, apiKey);
 	}
 
-	public void deleteDiscount(String apiKey) throws StripeException {
+	public void deleteDiscount(String apiKey) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
 		request(RequestMethod.DELETE,
-			String.format("%s/discount", instanceURL(Customer.class, this.id)),
-			null, Discount.class, apiKey);
+				String.format("%s/discount",
+						instanceURL(Customer.class, this.id)), null,
+				Discount.class, apiKey);
 	}
 
-	
-	
 }

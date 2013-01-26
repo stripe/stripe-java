@@ -2,7 +2,11 @@ package com.stripe.model;
 
 import java.util.Map;
 
-import com.stripe.exception.StripeException;
+import com.stripe.exception.APIConnectionException;
+import com.stripe.exception.APIException;
+import com.stripe.exception.AuthenticationException;
+import com.stripe.exception.CardException;
+import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 
 public class InvoiceItem extends APIResource {
@@ -79,44 +83,72 @@ public class InvoiceItem extends APIResource {
 		this.invoice = invoice;
 	}
 
-	public static InvoiceItem create(Map<String, Object> params) throws StripeException {
+	public static InvoiceItem create(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
 		return create(params, null);
 	}
 
-	public static InvoiceItem retrieve(String id) throws StripeException {
+	public static InvoiceItem retrieve(String id)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
 		return retrieve(id, null);
 	}
-	
-	public static InvoiceItemCollection all(Map<String, Object> params) throws StripeException {
+
+	public static InvoiceItemCollection all(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
 		return all(params, null);
 	}
-	
-	public InvoiceItem update(Map<String, Object> params) throws StripeException {
+
+	public InvoiceItem update(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
 		return update(params, null);
 	}
-	
-	public DeletedInvoiceItem delete() throws StripeException { 
+
+	public DeletedInvoiceItem delete() throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
 		return delete(null);
 	}
-	
-	public static InvoiceItem create(Map<String, Object> params, String apiKey) throws StripeException {
-		return request(RequestMethod.POST, classURL(InvoiceItem.class), params, InvoiceItem.class, apiKey);
+
+	public static InvoiceItem create(Map<String, Object> params, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.POST, classURL(InvoiceItem.class), params,
+				InvoiceItem.class, apiKey);
 	}
 
-	public static InvoiceItem retrieve(String id, String apiKey) throws StripeException {
-		return request(RequestMethod.GET, instanceURL(InvoiceItem.class, id), null, InvoiceItem.class, apiKey);
+	public static InvoiceItem retrieve(String id, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, instanceURL(InvoiceItem.class, id),
+				null, InvoiceItem.class, apiKey);
 	}
-	
-	public static InvoiceItemCollection all(Map<String, Object> params, String apiKey) throws StripeException {
-		return request(RequestMethod.GET, classURL(InvoiceItem.class), params, InvoiceItemCollection.class, apiKey);
+
+	public static InvoiceItemCollection all(Map<String, Object> params,
+			String apiKey) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return request(RequestMethod.GET, classURL(InvoiceItem.class), params,
+				InvoiceItemCollection.class, apiKey);
 	}
-	
-	public InvoiceItem update(Map<String, Object> params, String apiKey) throws StripeException {
-		return request(RequestMethod.POST, instanceURL(InvoiceItem.class, this.id), params, InvoiceItem.class, apiKey);
+
+	public InvoiceItem update(Map<String, Object> params, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.POST,
+				instanceURL(InvoiceItem.class, this.id), params,
+				InvoiceItem.class, apiKey);
 	}
-	
-	public DeletedInvoiceItem delete(String apiKey) throws StripeException { 
-		return request(RequestMethod.DELETE, instanceURL(InvoiceItem.class, this.id), null, DeletedInvoiceItem.class, apiKey);
+
+	public DeletedInvoiceItem delete(String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.DELETE,
+				instanceURL(InvoiceItem.class, this.id), null,
+				DeletedInvoiceItem.class, apiKey);
 	}
-	
+
 }
