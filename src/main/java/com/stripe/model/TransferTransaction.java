@@ -1,10 +1,5 @@
 package com.stripe.model;
 
-import java.util.Map;
-
-import com.stripe.exception.StripeException;
-import com.stripe.net.APIResource;
-
 public class TransferTransaction extends StripeObject {
 	String id;
 	Long amount;
