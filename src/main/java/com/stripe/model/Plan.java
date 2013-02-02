@@ -14,6 +14,7 @@ public class Plan extends APIResource {
 	String currency;
 	String id;
 	String interval;
+	Integer intervalCount;
 	String name;
 	Boolean livemode;
 	Integer trialPeriodDays;
@@ -113,6 +114,14 @@ public class Plan extends APIResource {
 
 	public void setInterval(String interval) {
 		this.interval = interval;
+	}
+
+	public Integer getIntervalCount() {
+		return intervalCount;
+	}
+
+	public void setIntervalCount(Integer intervalCount) {
+		this.intervalCount = intervalCount;
 	}
 
 	public String getName() {
