@@ -2,7 +2,11 @@ package com.stripe.model;
 
 import java.util.Map;
 
-import com.stripe.exception.StripeException;
+import com.stripe.exception.APIConnectionException;
+import com.stripe.exception.APIException;
+import com.stripe.exception.AuthenticationException;
+import com.stripe.exception.CardException;
+import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 
 public class Plan extends APIResource {
@@ -13,45 +17,70 @@ public class Plan extends APIResource {
 	String name;
 	Boolean livemode;
 	Integer trialPeriodDays;
-	
-	public static Plan create(Map<String, Object> params) throws StripeException {
+
+	public static Plan create(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
 		return create(params, null);
 	}
 
-	public static Plan retrieve(String id) throws StripeException {
+	public static Plan retrieve(String id) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
 		return retrieve(id, null);
 	}
 
-	public Plan update(Map<String, Object> params) throws StripeException {
+	public Plan update(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
 		return update(params, null);
 	}
-	
-	public static PlanCollection all(Map<String, Object> params) throws StripeException {
+
+	public static PlanCollection all(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
 		return all(params, null);
 	}
-	
-	public DeletedPlan delete() throws StripeException { 
+
+	public DeletedPlan delete() throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
 		return delete(null);
 	}
 
-	public static Plan create(Map<String, Object> params, String apiKey) throws StripeException {
-		return request(RequestMethod.POST, classURL(Plan.class), params, Plan.class, apiKey);
+	public static Plan create(Map<String, Object> params, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.POST, classURL(Plan.class), params,
+				Plan.class, apiKey);
 	}
 
-	public static Plan retrieve(String id, String apiKey) throws StripeException {
-		return request(RequestMethod.GET, instanceURL(Plan.class, id), null, Plan.class, apiKey);
+	public static Plan retrieve(String id, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, instanceURL(Plan.class, id), null,
+				Plan.class, apiKey);
 	}
 
-	public Plan update(Map<String, Object> params, String apiKey) throws StripeException {
-		return request(RequestMethod.POST, instanceURL(Plan.class, this.id), params, Plan.class, apiKey);
+	public Plan update(Map<String, Object> params, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.POST, instanceURL(Plan.class, this.id),
+				params, Plan.class, apiKey);
 	}
-	
-	public static PlanCollection all(Map<String, Object> params, String apiKey) throws StripeException {
-		return request(RequestMethod.GET, classURL(Plan.class), params, PlanCollection.class, apiKey);
+
+	public static PlanCollection all(Map<String, Object> params, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, classURL(Plan.class), params,
+				PlanCollection.class, apiKey);
 	}
-	
-	public DeletedPlan delete(String apiKey) throws StripeException { 
-		return request(RequestMethod.DELETE, instanceURL(Plan.class, this.id), null, DeletedPlan.class, apiKey);
+
+	public DeletedPlan delete(String apiKey) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return request(RequestMethod.DELETE, instanceURL(Plan.class, this.id),
+				null, DeletedPlan.class, apiKey);
 	}
 
 	public Integer getAmount() {

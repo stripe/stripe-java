@@ -2,7 +2,11 @@ package com.stripe.model;
 
 import java.util.Map;
 
-import com.stripe.exception.StripeException;
+import com.stripe.exception.APIConnectionException;
+import com.stripe.exception.APIException;
+import com.stripe.exception.AuthenticationException;
+import com.stripe.exception.CardException;
+import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 
 public class Invoice extends APIResource {
@@ -192,55 +196,84 @@ public class Invoice extends APIResource {
 		this.currency = currency;
 	}
 
-
-	public static Invoice retrieve(String id) throws StripeException {
+	public static Invoice retrieve(String id) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
 		return retrieve(id, null);
 	}
 
-	public static Invoice create(Map<String, Object> params) throws StripeException {
+	public static Invoice create(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
 		return create(params, null);
 	}
 
-	public static InvoiceCollection all(Map<String, Object> params) throws StripeException {
+	public static InvoiceCollection all(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
 		return all(params, null);
 	}
 
-	public static Invoice upcoming(Map<String, Object> params) throws StripeException {
+	public static Invoice upcoming(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
 		return upcoming(params, null);
 	}
 
-	public Invoice pay() throws StripeException {
-        return this.pay(null);
-    }
-
-    public Invoice update(Map<String, Object> params) throws StripeException {
-    	return update(params, null);
-    }
-
-	public static Invoice retrieve(String id, String apiKey) throws StripeException {
-		return request(RequestMethod.GET, instanceURL(Invoice.class, id), null, Invoice.class, apiKey);
+	public Invoice pay() throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return this.pay(null);
 	}
 
-	public static Invoice create(Map<String, Object> params, String apiKey) throws StripeException {
-		return request(RequestMethod.POST, classURL(Invoice.class), params, Invoice.class, apiKey);
+	public Invoice update(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params, null);
 	}
 
-	public static Invoice upcoming(Map<String, Object> params, String apiKey) throws StripeException {
-		return request(RequestMethod.GET, String.format("%s/upcoming", classURL(Invoice.class)),
+	public static Invoice retrieve(String id, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, instanceURL(Invoice.class, id), null,
+				Invoice.class, apiKey);
+	}
+
+	public static Invoice create(Map<String, Object> params, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.POST, classURL(Invoice.class), params,
+				Invoice.class, apiKey);
+	}
+
+	public static Invoice upcoming(Map<String, Object> params, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET,
+				String.format("%s/upcoming", classURL(Invoice.class)), params,
+				Invoice.class, apiKey);
+	}
+
+	public static InvoiceCollection all(Map<String, Object> params,
+			String apiKey) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return request(RequestMethod.GET, classURL(Invoice.class), params,
+				InvoiceCollection.class, apiKey);
+	}
+
+	public Invoice update(Map<String, Object> params, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.POST, instanceURL(Invoice.class, this.id),
 				params, Invoice.class, apiKey);
 	}
 
-	public static InvoiceCollection all(Map<String, Object> params, String apiKey) throws StripeException {
-		return request(RequestMethod.GET, classURL(Invoice.class), params, InvoiceCollection.class, apiKey);
-	}
-
-	public Invoice update(Map<String, Object> params, String apiKey) throws StripeException {
-		return request(RequestMethod.POST, instanceURL(Invoice.class, this.id), params, Invoice.class, apiKey);
-	}
-
-	public Invoice pay(String apiKey) throws StripeException {
-		return request(RequestMethod.POST,
-				String.format("%s/pay", instanceURL(Invoice.class, this.getId())),
-				null, Invoice.class, apiKey);
+	public Invoice pay(String apiKey) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return request(RequestMethod.POST, String.format("%s/pay",
+				instanceURL(Invoice.class, this.getId())), null, Invoice.class,
+				apiKey);
 	}
 }

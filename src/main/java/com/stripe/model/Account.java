@@ -1,11 +1,13 @@
 package com.stripe.model;
 
-import java.util.Map;
-
-import com.stripe.exception.StripeException;
-import com.stripe.net.APIResource;
-
 import java.util.List;
+
+import com.stripe.exception.APIConnectionException;
+import com.stripe.exception.APIException;
+import com.stripe.exception.AuthenticationException;
+import com.stripe.exception.CardException;
+import com.stripe.exception.InvalidRequestException;
+import com.stripe.net.APIResource;
 
 public class Account extends APIResource {
 	String id;
@@ -39,11 +41,16 @@ public class Account extends APIResource {
 		return statementDescriptor;
 	}
 
-  public static Account retrieve() throws StripeException {
-    return retrieve(null);
+	public static Account retrieve() throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return retrieve(null);
 	}
 
-  public static Account retrieve(String apiKey) throws StripeException {
-		return request(RequestMethod.GET, singleClassURL(Account.class), null, Account.class, apiKey);
+	public static Account retrieve(String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, singleClassURL(Account.class), null,
+				Account.class, apiKey);
 	}
 }
