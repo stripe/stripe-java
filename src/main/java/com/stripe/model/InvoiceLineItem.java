@@ -1,7 +1,5 @@
 package com.stripe.model;
 
-import java.util.List;
-
 public class InvoiceLineItem extends StripeObject {
 	String id;
 	String type;
