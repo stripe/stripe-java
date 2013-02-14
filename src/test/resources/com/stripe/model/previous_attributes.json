@@ -1,0 +1,50 @@
+{"object":{
+    "id":"ch_1EqUp1gsDwETBV",
+    "object":"charge",
+    "created":1360113273,
+    "livemode":true,
+    "paid":true,
+    "amount":19200,
+    "currency":"usd",
+    "refunded":true,
+    "fee":0,
+    "fee_details":[
+        {
+            "amount":452,
+            "currency":"usd",
+            "type":"stripe_fee",
+            "description":"Stripe processing fees",
+            "application":null,
+            "amount_refunded":452
+        }
+    ],
+    "card":{
+        "object":"card",
+        "last4":"9999",
+        "type":"MasterCard",
+        "exp_month":1,
+        "exp_year":3000,
+        "fingerprint":"YTHoNT67aqtBzHev",
+        "country":"US",
+        "name":"xxxxx xxxxx",
+        "address_city":null,
+        "cvc_check":"pass"
+    },
+    "customer":"cus_1EqUMhiOJLbXyi",
+    "invoice":"in_1EqUCLGCSCuXyT",
+    "dispute":null,
+    "disputed":false
+}, "previous_attributes":{
+    "refunded":false,
+    "fee":452,
+    "fee_details":[
+        {
+            "amount":452,
+            "currency":"usd",
+            "type":"stripe_fee",
+            "description":"Stripe processing fees",
+            "application":null,
+            "amount_refunded":0
+        }
+    ]
+}}
