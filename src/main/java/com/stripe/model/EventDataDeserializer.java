@@ -48,7 +48,7 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
     	int i = 0;
     	while (elemIter.hasNext()) {
     		JsonElement elem = elemIter.next();
-    		elems[++i] = deserializeJsonElement(elem);
+    		elems[i++] = deserializeJsonElement(elem);
     	}
     	return elems;
     }
