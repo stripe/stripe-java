@@ -1,3 +1,6 @@
+=== 1.1.16 2013-02-15
+* Fix off-by-one error in deserializing events (github issue #27)
+
 === 1.1.15 2013-02-01
 * List all checked exceptions throws by methods.
 * Add support for plan interval count.
