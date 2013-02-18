@@ -12,6 +12,7 @@ import com.stripe.net.APIResource;
 public class Event extends APIResource {
 	String id;
 	String type;
+	String userId;
 	Boolean livemode;
 	Long created;
 	EventData data;
@@ -73,6 +74,14 @@ public class Event extends APIResource {
 
 	public void setType(String name) {
 		this.type = name;
+	}
+	
+	public String getUserId() {
+	    return userId;
+	}
+	
+	public void setUserId(String userId) {
+	    this.userId = userId;
 	}
 
 	public Boolean getLivemode() {
