@@ -8,6 +8,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 import static org.hamcrest.core.IsNull.notNullValue;
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 public class EventDataDeserializerTest {
@@ -23,7 +24,13 @@ public class EventDataDeserializerTest {
         assertThat(ed.getPreviousAttributes().get("fee"), notNullValue());
     }
 
+    @Test
+    public void deserializeAccountEvent() throws IOException {
+        String json = resource("account_event.json");
+        Event e = StripeObject.prettyPrintGson.fromJson(json, Event.class);
 
+        assertEquals(e.getType(), "account.updated");
+    }
 
     private String resource(String path) throws IOException {
         InputStream resource = getClass().getResourceAsStream(path);
