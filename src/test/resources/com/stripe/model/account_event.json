@@ -1,0 +1,23 @@
+{
+  "created":1326853478,
+  "livemode":false,
+  "id":"evt_00000000000000",
+  "type":"account.updated",
+  "object":"event",
+  "data":{
+    "object":{
+      "id":"vuJEYvcYMexPckSv0bsIJYJBPTK82lWJ_00000000000000",
+      "email":"test@stripe.com",
+      "statement_descriptor":"TEST",
+      "details_submitted":true,
+      "charge_enabled":true,
+      "currencies_supported":[
+        "CAD"
+      ],
+      "object":"account"
+    },
+    "previous_attributes":{
+      "details_submitted":false
+    }
+  }
+}
