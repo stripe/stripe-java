@@ -34,12 +34,12 @@ import com.stripe.model.Subscription;
 import com.stripe.model.Token;
 
 public class StripeTest {
-	static Map<String, Object> defaultCardParams = new HashMap<String, Object>();
-	static Map<String, Object> defaultChargeParams = new HashMap<String, Object>();
-	static Map<String, Object> defaultCustomerParams = new HashMap<String, Object>();
-	static Map<String, Object> defaultPlanParams = new HashMap<String, Object>();
-	static Map<String, Object> defaultCouponParams = new HashMap<String, Object>();
-	static Map<String, Object> defaultTokenParams = new HashMap<String, Object>();
+	static HashMap<String, Object> defaultCardParams = new HashMap<String, Object>();
+	static HashMap<String, Object> defaultChargeParams = new HashMap<String, Object>();
+	static HashMap<String, Object> defaultCustomerParams = new HashMap<String, Object>();
+	static HashMap<String, Object> defaultPlanParams = new HashMap<String, Object>();
+	static HashMap<String, Object> defaultCouponParams = new HashMap<String, Object>();
+	static HashMap<String, Object> defaultTokenParams = new HashMap<String, Object>();
 
 	static String getUniquePlanId() {
 		return String.format("JAVA-PLAN-%s", UUID.randomUUID());
@@ -157,6 +157,18 @@ public class StripeTest {
 		Charge createdCharge = Charge.create(defaultChargeParams);
 		Charge refundedCharge = createdCharge.refund();
 		assertTrue(refundedCharge.getRefunded());
+	}
+
+	@Test
+	public void testChargeCapture() throws StripeException {
+		HashMap<String, Object> options = (HashMap<String, Object>)defaultChargeParams.clone();
+		options.put("capture", false);
+
+		Charge created = Charge.create(options);
+		assertFalse(created.getCaptured());
+
+		Charge captured = created.capture();
+		assertTrue(captured.getCaptured());
 	}
 
 	@Test
@@ -480,7 +492,7 @@ public class StripeTest {
 	/**
 	 * Ensure the provided parameter for API key is actually being used. All
 	 * other PerCallAPIKey methods assume this part works.
-	 * 
+	 *
 	 * @throws StripeException
 	 */
 	@Test

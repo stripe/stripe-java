@@ -19,6 +19,7 @@ public class Charge extends APIResource {
 	Boolean paid;
 	Boolean refunded;
 	Boolean disputed;
+	Boolean captured;
 	Integer fee;
 	String description;
 	String failureMessage;
@@ -83,6 +84,14 @@ public class Charge extends APIResource {
 
 	public void setRefunded(Boolean refunded) {
 		this.refunded = refunded;
+	}
+
+	public Boolean getCaptured() {
+		return captured;
+	}
+
+	public void setCaptured(Boolean captured) {
+		this.captured = captured;
 	}
 
 	public Boolean getDisputed() {
@@ -189,10 +198,22 @@ public class Charge extends APIResource {
 		return this.refund(null, null);
 	}
 
+	public Charge capture() throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return this.capture(null, null);
+	}
+
 	public Charge refund(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return this.refund(params, null);
+	}
+
+	public Charge capture(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return this.capture(params, null);
 	}
 
 	public static Charge create(Map<String, Object> params, String apiKey)
@@ -222,12 +243,28 @@ public class Charge extends APIResource {
 		return this.refund((Map<String, Object>) null, apiKey); // full refund
 	}
 
+	public Charge capture(String apiKey) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return this.capture((Map<String, Object>) null, apiKey);
+	}
+
 	public Charge refund(Map<String, Object> params, String apiKey)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return request(
 				RequestMethod.POST,
 				String.format("%s/refund",
+						instanceURL(Charge.class, this.getId())), params,
+				Charge.class, apiKey);
+	}
+
+	public Charge capture(Map<String, Object> params, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(
+				RequestMethod.POST,
+				String.format("%s/capture",
 						instanceURL(Charge.class, this.getId())), params,
 				Charge.class, apiKey);
 	}
