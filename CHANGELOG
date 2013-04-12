@@ -1,3 +1,7 @@
+=== 1.2.0 2013-04-11
+* Allow Transfers to be creatable
+* Add new Recipient resource
+
 === 1.1.18 2013-03-19
 * Add support for charge capture.
 
