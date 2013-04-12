@@ -529,6 +529,7 @@ public class StripeTest {
 	public void testRecipientCreate() throws StripeException {
 		Recipient recipient = Recipient.create(defaultRecipientParams);
 		assertEquals(recipient.getActiveAccount().getLast4(), "6789");
+		assertTrue(recipient instanceof Recipient);
 	}
 
 	@Test
