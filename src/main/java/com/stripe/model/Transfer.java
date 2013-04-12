@@ -14,10 +14,17 @@ public class Transfer extends APIResource {
 	String id;
 	String status;
 	Long date;
+	Boolean livemode;
 	Summary summary;
 	String description;
+	String statementDescriptor;
 	Integer amount;
+	String currency;
 	List<String> otherTransfers;
+	String recipient;
+	Integer fee;
+	List<Fee> feeDetails;
+	BankAccount account;
 
 	public String getId() {
 		return id;
@@ -25,6 +32,14 @@ public class Transfer extends APIResource {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public Boolean getLivemode() {
+		return livemode;
+	}
+
+	public void setLivemode(Boolean livemode) {
+		this.livemode = livemode;
 	}
 
 	public String getStatus() {
@@ -59,6 +74,14 @@ public class Transfer extends APIResource {
 		this.description = description;
 	}
 
+	public String getStatementDescriptor() {
+		return statementDescriptor;
+	}
+
+	public void setStatementDescriptor(String statementDescriptor) {
+		this.statementDescriptor = statementDescriptor;
+	}
+
 	public Integer getAmount() {
 		return amount;
 	}
@@ -67,12 +90,58 @@ public class Transfer extends APIResource {
 		this.amount = amount;
 	}
 
+	public String getCurrency() {
+		return currency;
+	}
+
+	public Integer getFee() {
+		return fee;
+	}
+
+	public void setFee(Integer fee) {
+		this.fee = fee;
+	}
+
+	public List<Fee> getFeeDetails() {
+		return feeDetails;
+	}
+
+	public void setFeeDetails(List<Fee> feeDetails) {
+		this.feeDetails = feeDetails;
+	}
+
+	public String getRecipient() {
+		return recipient;
+	}
+
+	public void setRecipient(String recipient) {
+		this.recipient = recipient;
+	}
+
+	public BankAccount getAccount() {
+		return account;
+	}
+
+	public void setAccount(BankAccount account) {
+		this.account = account;
+	}
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
+
 	public List<String> getOtherTransfers() {
 		return otherTransfers;
 	}
 
 	public void setOtherTransfers(List<String> otherTransfers) {
 		this.otherTransfers = otherTransfers;
+	}
+
+	public static Transfer create(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return create(params, null);
 	}
 
 	public static Transfer retrieve(String id) throws AuthenticationException,
@@ -91,6 +160,13 @@ public class Transfer extends APIResource {
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return transactions(params, null);
+	}
+
+	public static Transfer create(Map<String, Object> params, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.POST, classURL(Transfer.class), params,
+				Transfer.class, apiKey);
 	}
 
 	public static Transfer retrieve(String id, String apiKey)
