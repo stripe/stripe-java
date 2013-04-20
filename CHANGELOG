@@ -1,3 +1,6 @@
+===1.2.1 2013-04-20
+* Fix TransferTransaction fee retrieval
+
 === 1.2.0 2013-04-11
 * Allow Transfers to be creatable
 * Add new Recipient resource
