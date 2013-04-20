@@ -7,7 +7,7 @@ public class TransferTransaction extends StripeObject {
 	String type;
 	Long created;
 	String description;
-	Long fees;
+	Long fee;
 
 	public String getId() {
 		return id;
@@ -57,11 +57,11 @@ public class TransferTransaction extends StripeObject {
 		this.description = description;
 	}
 
-	public Long getFees() {
-		return fees;
+	public Long getFee() {
+		return fee;
 	}
 
-	public void setFees(Long fees) {
-		this.fees = fees;
+	public void setFee(Long fee) {
+		this.fee = fee;
 	}
 }
