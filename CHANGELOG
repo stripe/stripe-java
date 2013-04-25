@@ -1,3 +1,6 @@
+===1.2.2 2013-04-25
+* Add more objects to Deserializer
+
 ===1.2.1 2013-04-20
 * Fix TransferTransaction fee retrieval
 
