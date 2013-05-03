@@ -27,10 +27,11 @@ import com.stripe.exception.InvalidRequestException;
 import com.stripe.model.EventData;
 import com.stripe.model.EventDataDeserializer;
 import com.stripe.model.StripeObject;
+import java.util.List;
 
 public abstract class APIResource extends StripeObject {
 
-	public static final Gson gson = new GsonBuilder()
+	public static final Gson GSON = new GsonBuilder()
 			.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
 			.registerTypeAdapter(EventData.class, new EventDataDeserializer())
 			.create();
@@ -95,7 +96,7 @@ public abstract class APIResource extends StripeObject {
 		propertyMap.put("bindings.version", Stripe.VERSION);
 		propertyMap.put("lang", "Java");
 		propertyMap.put("publisher", "Stripe");
-		headers.put("X-Stripe-Client-User-Agent", gson.toJson(propertyMap));
+		headers.put("X-Stripe-Client-User-Agent", GSON.toJson(propertyMap));
 		if (Stripe.apiVersion != null) {
 			headers.put("Stripe-Version", Stripe.apiVersion);
 		}
@@ -135,11 +136,9 @@ public abstract class APIResource extends StripeObject {
 			stripeURL = new URL(url);
 		}
 		javax.net.ssl.HttpsURLConnection conn = (javax.net.ssl.HttpsURLConnection) stripeURL
-				.openConnection(); // enforce
-									// SSL
-									// URLs
-		conn.setConnectTimeout(30000); // 30 seconds
-		conn.setReadTimeout(80000); // 80 seconds
+				.openConnection(); 
+		conn.setConnectTimeout(30 * 1000);
+		conn.setReadTimeout(80 * 1000);
 		conn.setUseCaches(false);
 		for (Map.Entry<String, String> header : getHeaders(apiKey).entrySet()) {
 			conn.setRequestProperty(header.getKey(), header.getValue());
@@ -189,14 +188,13 @@ public abstract class APIResource extends StripeObject {
 	private static String createQuery(Map<String, Object> params)
 			throws UnsupportedEncodingException {
 		Map<String, String> flatParams = flattenParams(params);
-		StringBuffer queryStringBuffer = new StringBuffer();
+		StringBuilder queryStringBuffer = new StringBuilder();
 		for (Map.Entry<String, String> entry : flatParams.entrySet()) {
-			queryStringBuffer.append("&");
+                        if (queryStringBuffer.length() > 0) {	
+                            queryStringBuffer.append("&");
+                        }
 			queryStringBuffer.append(urlEncodePair(entry.getKey(),
 					entry.getValue()));
-		}
-		if (queryStringBuffer.length() > 0) {
-			queryStringBuffer.deleteCharAt(0);
 		}
 		return queryStringBuffer.toString();
 	}
@@ -243,9 +241,12 @@ public abstract class APIResource extends StripeObject {
 
 	private static String getResponseBody(InputStream responseStream)
 			throws IOException {
-		String rBody = new Scanner(responseStream, CHARSET).useDelimiter("\\A")
-				.next(); // \A is the beginning of
-							// the stream boundary
+                //\A is the beginning of
+                // the stream boundary
+		String rBody = new Scanner(responseStream, CHARSET)
+                        .useDelimiter("\\A")
+			.next(); // 
+							
 		responseStream.close();
 		return rBody;
 	}
@@ -273,14 +274,18 @@ public abstract class APIResource extends StripeObject {
 										+ "support@stripe.com for assistance.",
 								method));
 			}
-			int rCode = conn.getResponseCode(); // triggers the request
+                        // trigger the request
+			int rCode = conn.getResponseCode(); 
 			String rBody = null;
+                        Map<String, List<String>> headers;
 			if (rCode >= 200 && rCode < 300) {
 				rBody = getResponseBody(conn.getInputStream());
+                                headers = conn.getHeaderFields();
 			} else {
 				rBody = getResponseBody(conn.getErrorStream());
+                                headers = conn.getHeaderFields();
 			}
-			return new StripeResponse(rCode, rBody);
+                        return new StripeResponse(rCode, rBody, headers);			
 		} catch (IOException e) {
 			throw new APIConnectionException(
 					String.format(
@@ -319,8 +324,9 @@ public abstract class APIResource extends StripeObject {
 			if (allowedToSetTTL) {
 				if (originalDNSCacheTTL == null) {
 					// value unspecified by implementation
+                                        // DNS_CACHE_TTL_PROPERTY_NAME of -1 = cache forever
 					java.security.Security.setProperty(
-							DNS_CACHE_TTL_PROPERTY_NAME, "-1"); // cache forever
+							DNS_CACHE_TTL_PROPERTY_NAME, "-1");
 				} else {
 					java.security.Security.setProperty(
 							DNS_CACHE_TTL_PROPERTY_NAME, originalDNSCacheTTL);
@@ -377,13 +383,13 @@ public abstract class APIResource extends StripeObject {
 		if (rCode < 200 || rCode >= 300) {
 			handleAPIError(rBody, rCode);
 		}
-		return gson.fromJson(rBody, clazz);
+		return GSON.fromJson(rBody, clazz);
 	}
 
 	private static void handleAPIError(String rBody, int rCode)
 			throws InvalidRequestException, AuthenticationException,
 			CardException, APIException {
-		APIResource.Error error = gson.fromJson(rBody,
+		APIResource.Error error = GSON.fromJson(rBody,
 				APIResource.ErrorContainer.class).error;
 		switch (rCode) {
 		case 400:

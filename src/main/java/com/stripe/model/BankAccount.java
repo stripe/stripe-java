@@ -4,8 +4,8 @@ package com.stripe.model;
 public class BankAccount extends StripeObject {
 	String country;
 	String last4;
-  String bankName;
-  Boolean valid;
+        String bankName;
+        Boolean valid;
 
 	public String getLast4() {
 		return last4;
