@@ -49,7 +49,7 @@ StripeExample.java
             Map<String, Object> cardMap = new HashMap<String, Object>();
             cardMap.put("number", "4242424242424242");
             cardMap.put("exp_month", 12);
-            cardMap.put("exp_year", 2012);
+            cardMap.put("exp_year", 2020);
             chargeMap.put("card", cardMap);
             try {
                 Charge charge = Charge.create(chargeMap);
