@@ -17,6 +17,7 @@ import org.junit.Test;
 import com.stripe.exception.CardException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Account;
+import com.stripe.model.BankAccount;
 import com.stripe.model.Charge;
 import com.stripe.model.Coupon;
 import com.stripe.model.Customer;
@@ -538,6 +539,8 @@ public class StripeTest {
 		Recipient retrievedRecipient = Recipient.retrieve(createdRecipient.getId());
 		assertEquals(createdRecipient.getCreated(), retrievedRecipient.getCreated());
 		assertEquals(createdRecipient.getId(), retrievedRecipient.getId());
+		assertEquals(true, retrievedRecipient.getActiveAccount() instanceof BankAccount);
+		assertEquals(false, retrievedRecipient.getActiveAccount().getValidated());
 	}
 
 	@Test

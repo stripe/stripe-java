@@ -4,8 +4,8 @@ package com.stripe.model;
 public class BankAccount extends StripeObject {
 	String country;
 	String last4;
-  String bankName;
-  Boolean valid;
+	String bankName;
+	Boolean validated;
 
 	public String getLast4() {
 		return last4;
@@ -31,11 +31,11 @@ public class BankAccount extends StripeObject {
 		this.bankName= bankName;
 	}
 
-	public Boolean getValid() {
-		return valid;
+	public Boolean getValidated() {
+		return validated;
 	}
 
-	public void setValid(Boolean valid) {
-		this.valid = valid;
+	public void setValidated(Boolean validated) {
+		this.validated = validated;
 	}
 }

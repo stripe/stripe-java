@@ -1,7 +1,11 @@
-===1.2.2 2013-04-25
+=== 1.2.3 2013-05-7
+
+* Rename BankAccount property `valid` to `validated`
+
+=== 1.2.2 2013-04-25
 * Add more objects to Deserializer
 
-===1.2.1 2013-04-20
+=== 1.2.1 2013-04-20
 * Fix TransferTransaction fee retrieval
 
 === 1.2.0 2013-04-11
