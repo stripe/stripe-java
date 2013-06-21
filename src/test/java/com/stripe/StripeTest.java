@@ -17,6 +17,7 @@ import org.junit.Test;
 import com.stripe.exception.CardException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Account;
+import com.stripe.model.Balance;
 import com.stripe.model.BankAccount;
 import com.stripe.model.Charge;
 import com.stripe.model.Coupon;
@@ -155,6 +156,14 @@ public class StripeTest {
 		List<String> currencies = retrievedAccount.getCurrenciesSupported();
 		assertEquals(1, currencies.size());
 		assertEquals("USD", currencies.get(0));
+	}
+
+	@Test
+	public void testBalanceRetrieve() throws StripeException {
+		Balance retrievedBalance = Balance.retrieve();
+		assertEquals(false, retrievedBalance.getLivemode());
+		assertEquals(1, retrievedBalance.getPending().size());
+		assertEquals(1, retrievedBalance.getAvailable().size());
 	}
 
 	@Test
