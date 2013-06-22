@@ -1,5 +1,6 @@
 package com.stripe.model;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.Map;
 
@@ -10,7 +11,10 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 
-public class Charge extends APIResource {
+public class Charge extends APIResource implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	Integer amount;
 	Long created;
 	String currency;

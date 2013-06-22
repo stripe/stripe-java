@@ -1,9 +1,13 @@
 package com.stripe.model;
 
+import java.io.Serializable;
+
 import com.stripe.net.APIResource;
 
+public class Subscription extends APIResource implements Serializable {
 
-public class Subscription extends APIResource {
+	private static final long serialVersionUID = 1L;
+
 	Long currentPeriodEnd;
 	Long currentPeriodStart;
 	Boolean cancelAtPeriodEnd;

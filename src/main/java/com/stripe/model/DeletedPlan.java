@@ -1,7 +1,11 @@
 package com.stripe.model;
 
+import java.io.Serializable;
 
-public class DeletedPlan extends StripeObject {
+public class DeletedPlan extends StripeObject implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	String id;
 	Boolean deleted;
 	

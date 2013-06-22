@@ -1,9 +1,12 @@
 package com.stripe.model;
 
+import java.io.Serializable;
 import java.util.List;
 
+public class CustomerCollection extends StripeObject implements Serializable {
 
-public class CustomerCollection extends StripeObject {
+	private static final long serialVersionUID = 1L;
+
 	List<Customer> data;
 	Integer count;
 	

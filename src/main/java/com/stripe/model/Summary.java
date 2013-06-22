@@ -1,6 +1,11 @@
 package com.stripe.model;
 
-public class Summary extends StripeObject {
+import java.io.Serializable;
+
+public class Summary extends StripeObject implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	Integer chargeFees;
 	Integer net;
 	Integer refundGross;

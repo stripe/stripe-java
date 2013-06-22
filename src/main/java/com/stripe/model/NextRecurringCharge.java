@@ -1,6 +1,11 @@
 package com.stripe.model;
 
-public class NextRecurringCharge extends StripeObject {
+import java.io.Serializable;
+
+public class NextRecurringCharge extends StripeObject implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	Integer amount;
 	String date;
 	

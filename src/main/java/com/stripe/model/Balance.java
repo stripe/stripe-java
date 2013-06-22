@@ -1,5 +1,6 @@
 package com.stripe.model;
 
+import java.io.Serializable;
 import java.util.List;
 import java.util.HashMap;
 
@@ -10,7 +11,10 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 
-public class Balance extends APIResource {
+public class Balance extends APIResource implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	Boolean livemode;
 	List<HashMap> pending;
 	List<HashMap> available;

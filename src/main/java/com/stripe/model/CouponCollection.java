@@ -1,9 +1,12 @@
 package com.stripe.model;
 
+import java.io.Serializable;
 import java.util.List;
 
+public class CouponCollection extends StripeObject implements Serializable {
 
-public class CouponCollection extends StripeObject {
+	private static final long serialVersionUID = 1L;
+
 	List<Coupon> data;
 	Integer count;
 	
