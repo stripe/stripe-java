@@ -1,8 +1,13 @@
 package com.stripe.model;
 
+import java.io.Serializable;
+
 import com.stripe.net.APIResource;
 
-public class Fee extends APIResource {
+public class Fee extends APIResource implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	String type;
 	String application;
 	Integer amount;

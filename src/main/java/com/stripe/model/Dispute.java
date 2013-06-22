@@ -1,6 +1,11 @@
 package com.stripe.model;
 
-public class Dispute extends StripeObject {
+import java.io.Serializable;
+
+public class Dispute extends StripeObject implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	String charge;
 	Integer amount;
 	String status;

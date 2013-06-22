@@ -1,8 +1,12 @@
 package com.stripe.model;
 
+import java.io.Serializable;
 import java.util.Map;
 
-public class EventData extends StripeObject {
+public class EventData extends StripeObject implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	Map<String, Object> previousAttributes;
 	StripeObject object;
 	

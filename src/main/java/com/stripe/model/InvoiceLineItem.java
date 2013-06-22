@@ -1,6 +1,11 @@
 package com.stripe.model;
 
-public class InvoiceLineItem extends StripeObject {
+import java.io.Serializable;
+
+public class InvoiceLineItem extends StripeObject implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	String id;
 	String type;
 	Boolean livemode;

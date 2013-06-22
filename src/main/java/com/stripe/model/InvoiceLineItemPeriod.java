@@ -1,6 +1,11 @@
 package com.stripe.model;
 
-public class InvoiceLineItemPeriod extends StripeObject {
+import java.io.Serializable;
+
+public class InvoiceLineItemPeriod extends StripeObject implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	Long start;
 	Long end;
 	

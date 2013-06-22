@@ -1,6 +1,11 @@
 package com.stripe.model;
 
-public class TransferTransaction extends StripeObject {
+import java.io.Serializable;
+
+public class TransferTransaction extends StripeObject implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	String id;
 	Long amount;
 	Long net;

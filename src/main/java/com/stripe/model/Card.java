@@ -1,7 +1,11 @@
 package com.stripe.model;
 
+import java.io.Serializable;
 
-public class Card extends StripeObject {
+public class Card extends StripeObject implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	Integer expMonth;
 	Integer expYear;
 	String last4;

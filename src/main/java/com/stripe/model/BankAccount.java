@@ -1,7 +1,11 @@
 package com.stripe.model;
 
+import java.io.Serializable;
 
-public class BankAccount extends StripeObject {
+public class BankAccount extends StripeObject implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	String country;
 	String last4;
 	String bankName;

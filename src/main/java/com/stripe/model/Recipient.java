@@ -1,5 +1,6 @@
 package com.stripe.model;
 
+import java.io.Serializable;
 import java.util.Map;
 
 import com.stripe.exception.APIConnectionException;
@@ -9,7 +10,10 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 
-public class Recipient extends APIResource {
+public class Recipient extends APIResource implements Serializable {
+
+	private static final long serialVersionUID = 1L;
+
 	Long created;
 	String id;
 	String type;
