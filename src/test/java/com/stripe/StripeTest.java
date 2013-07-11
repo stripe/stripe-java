@@ -241,7 +241,7 @@ public class StripeTest {
 	@Test
 	public void testCustomerCreate() throws StripeException {
 		Customer customer = Customer.create(defaultCustomerParams);
-		assertEquals(customer.getActiveCard().getLast4(), "4242");
+		assertEquals(customer.getDescription(), "Java Bindings Customer");
 	}
 
 	@Test
@@ -675,7 +675,7 @@ public class StripeTest {
 	public void testCustomerCreatePerCallAPIKey() throws StripeException {
 		Customer customer = Customer.create(defaultCustomerParams,
 				Stripe.apiKey);
-		assertEquals(customer.getActiveCard().getLast4(), "4242");
+		assertEquals(customer.getDescription(), "Java Bindings Customer");
 	}
 
 	@Test
