@@ -28,7 +28,7 @@ public class BankAccount extends StripeObject {
 	}
 
 	public void setBankName(String bankName) {
-		this.bankName= bankName;
+		this.bankName = bankName;
 	}
 
 	public Boolean getValidated() {
