@@ -27,12 +27,15 @@ import com.stripe.exception.InvalidRequestException;
 import com.stripe.model.EventData;
 import com.stripe.model.EventDataDeserializer;
 import com.stripe.model.StripeObject;
+import com.stripe.model.StripeRawJsonObject;
+import com.stripe.model.StripeRawJsonObjectDeserializer;
 
 public abstract class APIResource extends StripeObject {
 
 	public static final Gson gson = new GsonBuilder()
 			.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
 			.registerTypeAdapter(EventData.class, new EventDataDeserializer())
+			.registerTypeAdapter(StripeRawJsonObject.class, new StripeRawJsonObjectDeserializer())
 			.create();
 
 	private static String className(Class<?> clazz) {
