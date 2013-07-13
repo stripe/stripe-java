@@ -1,13 +1,23 @@
 package com.stripe.model;
 
+import java.util.Map;
 
-public class Card extends StripeObject {
+import com.stripe.exception.APIConnectionException;
+import com.stripe.exception.APIException;
+import com.stripe.exception.AuthenticationException;
+import com.stripe.exception.CardException;
+import com.stripe.exception.InvalidRequestException;
+import com.stripe.net.APIResource;
+
+public class Card extends APIResource {
 	Integer expMonth;
 	Integer expYear;
 	String last4;
 	String country;
 	String type;
 	String name;
+	String id;
+	String customer;
 	String addressLine1;
 	String addressLine2;
 	String addressZip;
@@ -18,7 +28,53 @@ public class Card extends StripeObject {
 	String addressLine1Check;
 	String cvcCheck;
 	String fingerprint;
-	
+
+	public Card update(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params, null);
+	}
+
+	public Card update(Map<String, Object> params, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.POST, this.getInstanceURL(), params, Card.class, apiKey);
+	}
+
+	public DeletedCard delete() throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return delete(null);
+	}
+
+	public DeletedCard delete(String apiKey) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return request(RequestMethod.DELETE,
+				this.getInstanceURL(), null, DeletedCard.class,
+				apiKey);
+	}
+
+	public String getInstanceURL() {
+		return String.format("%s/%s/cards/%s", classURL(Customer.class), this.getCustomer(), this.getId());
+	}
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(String customer) {
+		this.customer = customer;
+	}
+
 	public Integer getExpMonth() {
 		return expMonth;
 	}
