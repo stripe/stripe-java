@@ -1,3 +1,4 @@
+*.swp
 .classpath
 .project
 .settings
