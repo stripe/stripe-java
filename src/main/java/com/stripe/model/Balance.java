@@ -1,7 +1,6 @@
 package com.stripe.model;
 
 import java.util.List;
-import java.util.HashMap;
 
 import com.stripe.exception.APIConnectionException;
 import com.stripe.exception.APIException;
@@ -12,18 +11,18 @@ import com.stripe.net.APIResource;
 
 public class Balance extends APIResource {
 	Boolean livemode;
-	List<HashMap> pending;
-	List<HashMap> available;
+	List<Money> pending;
+	List<Money> available;
 
 	public Boolean getLivemode() {
 		return livemode;
 	}
 
-	public List<HashMap> getPending() {
+	public List<Money> getPending() {
 		return pending;
 	}
 
-	public List<HashMap> getAvailable() {
+	public List<Money> getAvailable() {
 		return available;
 	}
 
