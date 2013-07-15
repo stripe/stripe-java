@@ -19,6 +19,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Account;
 import com.stripe.model.Balance;
 import com.stripe.model.BankAccount;
+import com.stripe.model.Card;
 import com.stripe.model.Charge;
 import com.stripe.model.Coupon;
 import com.stripe.model.Customer;
@@ -241,7 +242,10 @@ public class StripeTest {
 	@Test
 	public void testCustomerCreate() throws StripeException {
 		Customer customer = Customer.create(defaultCustomerParams);
-		assertEquals(customer.getActiveCard().getLast4(), "4242");
+		assertEquals(customer.getDescription(), "Java Bindings Customer");
+		List<Card> customerCards = customer.getCards().getData();
+		assertEquals(1, customerCards.size());
+		assertEquals("4242", customerCards.get(0).getLast4());
 	}
 
 	@Test
@@ -675,7 +679,10 @@ public class StripeTest {
 	public void testCustomerCreatePerCallAPIKey() throws StripeException {
 		Customer customer = Customer.create(defaultCustomerParams,
 				Stripe.apiKey);
-		assertEquals(customer.getActiveCard().getLast4(), "4242");
+		assertEquals(customer.getDescription(), "Java Bindings Customer");
+		List<Card> customerCards = customer.getCards().getData();
+		assertEquals(1, customerCards.size());
+		assertEquals("4242", customerCards.get(0).getLast4());
 	}
 
 	@Test

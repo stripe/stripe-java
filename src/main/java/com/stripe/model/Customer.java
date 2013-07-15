@@ -15,7 +15,7 @@ public class Customer extends APIResource {
 	Boolean livemode;
 	Boolean deleted;
 	String description;
-	Card activeCard;
+	String defaultCard;
 	String email;
 	String plan;
 	Long trialEnd;
@@ -24,6 +24,7 @@ public class Customer extends APIResource {
 	Subscription subscription;
 	Boolean delinquent;
 	Integer accountBalance;
+	CustomerCardCollection cards;
 
 	public Long getCreated() {
 		return created;
@@ -57,12 +58,16 @@ public class Customer extends APIResource {
 		this.description = description;
 	}
 
-	public Card getActiveCard() {
-		return activeCard;
+	public String getDefaultCard() {
+		return defaultCard;
 	}
 
-	public void setActiveCard(Card activeCard) {
-		this.activeCard = activeCard;
+	public void setDefaultCard(String defaultCard) {
+		this.defaultCard = defaultCard;
+	}
+
+	public CustomerCardCollection getCards() {
+		return cards;
 	}
 
 	public String getEmail() {
