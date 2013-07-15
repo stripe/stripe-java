@@ -1,3 +1,17 @@
+=== 1.2.5 2013-07-15
+
+* Add support for new cards API.
+  - You will probably need to upgrade the Stripe API version on your
+    account to 2013-07-05 or explicitly specify an API version with
+    com.stripe.Stripe.apiVersion when you switch to this release of
+    the bindings. More information about the relevant changes can be
+    found at https://stripe.com/docs/upgrades#2013-07-05 and
+    http://bit.ly/13miHM8
+* Add a StripeRawJsonObject type for deserializing webhook events we
+  don't recognize
+* Add a Money class for representing account balances in individual
+  currencies
+
 === 1.2.4 2013-06-21
 
 * Add more Balance API resource, and add to deserializer.
