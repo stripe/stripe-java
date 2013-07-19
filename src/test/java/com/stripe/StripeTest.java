@@ -240,6 +240,42 @@ public class StripeTest {
 	}
 
 	@Test
+	public void testInvalidAddressZipTest() throws StripeException {
+		Map<String, Object> invalidChargeParams = new HashMap<String, Object>();
+		invalidChargeParams.putAll(defaultChargeParams);
+		Map<String, Object> invalidCardParams = new HashMap<String, Object>();
+		// See https://stripe.com/docs/testing
+		invalidCardParams.put("number", "4000000000000036");
+		invalidCardParams.put("address_zip", "94024");
+		invalidCardParams.put("address_line1", "42 Foo Street");
+		invalidCardParams.put("exp_month", 12);
+		invalidCardParams.put("exp_year", 2015);
+		invalidChargeParams.put("card", invalidCardParams);
+		Charge charge = Charge.create(invalidChargeParams);
+		assertEquals(charge.getPaid(), true);
+		assertEquals(charge.getCard().getAddressZipCheck(), "fail");
+		assertEquals(charge.getCard().getAddressLine1Check(), "pass");
+	}
+
+	@Test
+	public void testInvalidAddressLine1Test() throws StripeException {
+		Map<String, Object> invalidChargeParams = new HashMap<String, Object>();
+		invalidChargeParams.putAll(defaultChargeParams);
+		Map<String, Object> invalidCardParams = new HashMap<String, Object>();
+		// See https://stripe.com/docs/testing
+		invalidCardParams.put("number", "4000000000000028");
+		invalidCardParams.put("address_zip", "94024");
+		invalidCardParams.put("address_line1", "42 Foo Street");
+		invalidCardParams.put("exp_month", 12);
+		invalidCardParams.put("exp_year", 2015);
+		invalidChargeParams.put("card", invalidCardParams);
+		Charge charge = Charge.create(invalidChargeParams);
+		assertEquals(charge.getPaid(), true);
+		assertEquals(charge.getCard().getAddressZipCheck(), "pass");
+		assertEquals(charge.getCard().getAddressLine1Check(), "fail");
+	}
+
+	@Test
 	public void testCustomerCreate() throws StripeException {
 		Customer customer = Customer.create(defaultCustomerParams);
 		assertEquals(customer.getDescription(), "Java Bindings Customer");
