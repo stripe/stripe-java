@@ -1,5 +1,6 @@
 package com.stripe.model;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import com.stripe.exception.APIConnectionException;
@@ -166,6 +167,19 @@ public class Customer extends APIResource {
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return delete(null);
+	}
+
+	public Card createCard(Map<String, Object> params) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		Map<String, Object> postParams = new HashMap<String, Object>();
+		postParams.put("card", params);
+
+		return request(
+				RequestMethod.POST,
+				String.format("%s/cards",
+						instanceURL(Customer.class, this.id)), postParams,
+				Card.class, null);
 	}
 
 	public Subscription updateSubscription(Map<String, Object> params)
