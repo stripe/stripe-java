@@ -311,6 +311,14 @@ public class StripeTest {
 	}
 
 	@Test
+	public void testCustomerCardAddition() throws StripeException {
+		Customer createdCustomer = Customer.create(defaultCustomerParams);
+		createdCustomer.createCard(defaultCardParams);
+		Customer updatedCustomer = Customer.retrieve(createdCustomer.getId());
+		assertEquals((Integer) updatedCustomer.getCards().getData().size(), (Integer) 2);
+	}
+
+	@Test
 	public void testCustomerDelete() throws StripeException {
 		Customer createdCustomer = Customer.create(defaultCustomerParams);
 		DeletedCustomer deletedCustomer = createdCustomer.delete();
