@@ -319,6 +319,16 @@ public class StripeTest {
 	}
 
 	@Test
+	public void testCustomerCardUpdate() throws StripeException {
+		Customer customer = Customer.create(defaultCustomerParams);
+		Card originalCard = customer.getCards().getData().get(0);
+		Map<String, Object> updateParams = new HashMap<String, Object>();
+		updateParams.put("name", "Java Bindings Cardholder, Jr.");
+		Card updatedCard = originalCard.update(updateParams);
+		assertEquals(updatedCard.getName(), "Java Bindings Cardholder, Jr.");
+	}
+
+	@Test
 	public void testCustomerDelete() throws StripeException {
 		Customer createdCustomer = Customer.create(defaultCustomerParams);
 		DeletedCustomer deletedCustomer = createdCustomer.delete();
