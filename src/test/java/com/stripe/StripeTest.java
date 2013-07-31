@@ -314,8 +314,11 @@ public class StripeTest {
 	public void testCustomerCardAddition() throws StripeException {
 		Customer createdCustomer = Customer.create(defaultCustomerParams);
 		createdCustomer.createCard(defaultCardParams);
+		Token token = Token.create(defaultTokenParams);
+		createdCustomer.createCard(token.getId());
+
 		Customer updatedCustomer = Customer.retrieve(createdCustomer.getId());
-		assertEquals((Integer) updatedCustomer.getCards().getData().size(), (Integer) 2);
+		assertEquals((Integer) updatedCustomer.getCards().getData().size(), (Integer) 3);
 	}
 
 	@Test

@@ -169,7 +169,7 @@ public class Customer extends APIResource {
 		return delete(null);
 	}
 
-	public Card createCard(Map<String, Object> params) throws AuthenticationException,
+	public Card createCard(Object params) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		Map<String, Object> postParams = new HashMap<String, Object>();
