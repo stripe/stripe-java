@@ -4,7 +4,7 @@
     <groupId>com.stripe</groupId>
     <artifactId>stripe-java</artifactId>
     <packaging>jar</packaging>
-    <version>1.2.6</version>
+    <version>1.2.7</version>
     <name>stripe-java</name>
     <url>https://github.com/stripe/stripe-java</url>
     <dependencies>
