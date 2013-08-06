@@ -221,6 +221,12 @@ public abstract class APIResource extends StripeObject {
 							nestedEntry.getValue());
 				}
 				flatParams.putAll(flattenParams(flatNestedMap));
+			} else if ("".equals(value)) {
+			    throw new IllegalArgumentException("You cannot set '"+key+"' to an empty string. "+
+							       "We interpret empty strings as null in requests. "+
+							       "You may set '"+key+"' to null to delete the property.");
+			} else if (value == null) {
+				flatParams.put(key, "");
 			} else if (value != null) {
 				flatParams.put(key, value.toString());
 			}

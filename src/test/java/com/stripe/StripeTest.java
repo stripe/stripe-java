@@ -310,6 +310,23 @@ public class StripeTest {
 		assertEquals(updatedCustomer.getDescription(), "Updated Description");
 	}
 
+	@Test(expected=IllegalArgumentException.class)
+	public void testCustomerUpdateToBlank() throws StripeException {
+		Customer createdCustomer = Customer.create(defaultCustomerParams);
+		Map<String, Object> updateParams = new HashMap<String, Object>();
+		updateParams.put("description", "");
+		Customer updatedCustomer = createdCustomer.update(updateParams);
+	}
+
+	@Test
+	public void testCustomerUpdateToNull() throws StripeException {
+		Customer createdCustomer = Customer.create(defaultCustomerParams);
+		Map<String, Object> updateParams = new HashMap<String, Object>();
+		updateParams.put("description", null);
+		Customer updatedCustomer = createdCustomer.update(updateParams);
+		assertEquals(updatedCustomer.getDescription(), null);
+	}
+
 	@Test
 	public void testCustomerCardAddition() throws StripeException {
 		Customer createdCustomer = Customer.create(defaultCustomerParams);
