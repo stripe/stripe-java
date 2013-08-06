@@ -190,7 +190,7 @@ public abstract class APIResource extends StripeObject {
 	}
 
 	private static String createQuery(Map<String, Object> params)
-			throws UnsupportedEncodingException {
+	    throws UnsupportedEncodingException, InvalidRequestException {
 		Map<String, String> flatParams = flattenParams(params);
 		StringBuffer queryStringBuffer = new StringBuffer();
 		for (Map.Entry<String, String> entry : flatParams.entrySet()) {
@@ -204,7 +204,8 @@ public abstract class APIResource extends StripeObject {
 		return queryStringBuffer.toString();
 	}
 
-	private static Map<String, String> flattenParams(Map<String, Object> params) {
+	private static Map<String, String> flattenParams(Map<String, Object> params)
+			throws InvalidRequestException {
 		if (params == null) {
 			return new HashMap<String, String>();
 		}
@@ -222,9 +223,10 @@ public abstract class APIResource extends StripeObject {
 				}
 				flatParams.putAll(flattenParams(flatNestedMap));
 			} else if ("".equals(value)) {
-			    throw new IllegalArgumentException("You cannot set '"+key+"' to an empty string. "+
-							       "We interpret empty strings as null in requests. "+
-							       "You may set '"+key+"' to null to delete the property.");
+			    throw new InvalidRequestException("You cannot set '"+key+"' to an empty string. "+
+							      "We interpret empty strings as null in requests. "+
+							      "You may set '"+key+"' to null to delete the property.",
+							      key, null);
 			} else if (value == null) {
 				flatParams.put(key, "");
 			} else if (value != null) {
