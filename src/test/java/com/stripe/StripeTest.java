@@ -23,6 +23,7 @@ import com.stripe.model.Card;
 import com.stripe.model.Charge;
 import com.stripe.model.Coupon;
 import com.stripe.model.Customer;
+import com.stripe.model.DeletedCard;
 import com.stripe.model.DeletedCoupon;
 import com.stripe.model.DeletedCustomer;
 import com.stripe.model.DeletedInvoiceItem;
@@ -329,6 +330,22 @@ public class StripeTest {
 		updateParams.put("name", "Java Bindings Cardholder, Jr.");
 		Card updatedCard = originalCard.update(updateParams);
 		assertEquals(updatedCard.getName(), "Java Bindings Cardholder, Jr.");
+	}
+
+	@Test
+	public void testCustomerCardDelete() throws StripeException {
+		Customer customer = Customer.create(defaultCustomerParams);
+		customer.createCard(defaultCardParams);
+
+		Card card = customer.getCards().getData().get(0);
+		DeletedCard deletedCard = card.delete();
+		Customer retrievedCustomer = Customer.retrieve(customer.getId());
+
+		assertTrue(deletedCard.getDeleted());
+		assertEquals(deletedCard.getId(), card.getId());
+		for(Card retrievedCard : retrievedCustomer.getCards().getData()) {
+		    assertFalse("Card was not actually deleted: " + card.getId(), card.getId().equals(retrievedCard.getId()));
+		}
 	}
 
 	@Test
