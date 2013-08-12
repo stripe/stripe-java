@@ -16,6 +16,7 @@ import org.junit.Test;
 
 import com.stripe.exception.CardException;
 import com.stripe.exception.StripeException;
+import com.stripe.exception.InvalidRequestException;
 import com.stripe.model.Account;
 import com.stripe.model.Balance;
 import com.stripe.model.BankAccount;
@@ -309,6 +310,23 @@ public class StripeTest {
 		updateParams.put("description", "Updated Description");
 		Customer updatedCustomer = createdCustomer.update(updateParams);
 		assertEquals(updatedCustomer.getDescription(), "Updated Description");
+	}
+
+	@Test(expected=InvalidRequestException.class)
+	public void testCustomerUpdateToBlank() throws StripeException {
+		Customer createdCustomer = Customer.create(defaultCustomerParams);
+		Map<String, Object> updateParams = new HashMap<String, Object>();
+		updateParams.put("description", "");
+		Customer updatedCustomer = createdCustomer.update(updateParams);
+	}
+
+	@Test
+	public void testCustomerUpdateToNull() throws StripeException {
+		Customer createdCustomer = Customer.create(defaultCustomerParams);
+		Map<String, Object> updateParams = new HashMap<String, Object>();
+		updateParams.put("description", null);
+		Customer updatedCustomer = createdCustomer.update(updateParams);
+		assertEquals(updatedCustomer.getDescription(), null);
 	}
 
 	@Test
