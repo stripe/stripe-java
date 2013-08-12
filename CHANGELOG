@@ -1,3 +1,9 @@
+=== 1.2.8 2013-08-12
+
+* Add support for unsetting attributes by updating with a null value.
+  Setting properties to a blank string is now an error.
+* Attempting to set an object's id is now an error.
+
 === 1.2.7 2013-07-31
 
 * Enable createCard() to use a token
