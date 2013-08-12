@@ -1,6 +1,5 @@
 package com.stripe.model;
 
-import java.util.List;
 import java.util.Map;
 
 import com.stripe.exception.APIConnectionException;
@@ -20,15 +19,14 @@ public class Charge extends APIResource {
 	Boolean refunded;
 	Boolean disputed;
 	Boolean captured;
-	Integer fee;
 	String description;
 	String failureMessage;
 	Integer amountRefunded;
 	String customer;
 	String invoice;
-	List<Fee> feeDetails;
 	Card card;
 	Dispute dispute;
+	String balanceTransaction;
 
 	public String getId() {
 		return id;
@@ -102,14 +100,6 @@ public class Charge extends APIResource {
 		this.disputed = disputed;
 	}
 
-	public Integer getFee() {
-		return fee;
-	}
-
-	public void setFee(Integer fee) {
-		this.fee = fee;
-	}
-
 	public String getDescription() {
 		return description;
 	}
@@ -148,14 +138,6 @@ public class Charge extends APIResource {
 
 	public void setInvoice(String invoice) {
 		this.invoice = invoice;
-	}
-
-	public List<Fee> getFeeDetails() {
-		return feeDetails;
-	}
-
-	public void setFeeDetails(List<Fee> feeDetails) {
-		this.feeDetails = feeDetails;
 	}
 
 	public Card getCard() {

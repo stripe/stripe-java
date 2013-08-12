@@ -2,6 +2,7 @@ package com.stripe;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -19,6 +20,8 @@ import com.stripe.exception.StripeException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.model.Account;
 import com.stripe.model.Balance;
+import com.stripe.model.BalanceTransaction;
+import com.stripe.model.BalanceTransactionCollection;
 import com.stripe.model.BankAccount;
 import com.stripe.model.Card;
 import com.stripe.model.Charge;
@@ -30,7 +33,6 @@ import com.stripe.model.DeletedCustomer;
 import com.stripe.model.DeletedInvoiceItem;
 import com.stripe.model.DeletedPlan;
 import com.stripe.model.Event;
-import com.stripe.model.Fee;
 import com.stripe.model.Invoice;
 import com.stripe.model.InvoiceItem;
 import com.stripe.model.InvoiceLineItemCollection;
@@ -173,14 +175,20 @@ public class StripeTest {
 	public void testChargeCreate() throws StripeException {
 		Charge createdCharge = Charge.create(defaultChargeParams);
 		assertFalse(createdCharge.getRefunded());
+	}
 
-		assertEquals(1, createdCharge.getFeeDetails().size());
+	@Test
+	public void testBalanceTransactionRetrieve() throws StripeException {
+		Charge.create(defaultChargeParams);
+		BalanceTransactionCollection balanceTransactions = BalanceTransaction.all(null);
+		assertTrue(balanceTransactions.getCount() > 0);
+		assertFalse(balanceTransactions.getData().isEmpty());
+		BalanceTransaction first = balanceTransactions.getData().get(0);
+		assertNotNull(first.getStatus());
 
-		Fee fee = createdCharge.getFeeDetails().get(0);
-		assertEquals("stripe_fee", fee.getType());
-		assertEquals(createdCharge.getFee(), fee.getAmount());
-		assertEquals(createdCharge.getCurrency(), fee.getCurrency());
-		assertEquals(null, fee.getApplication());
+		HashMap<String, Object> fetchParams = new HashMap<String, Object>();
+		fetchParams.put("count", 2);
+		assertEquals(BalanceTransaction.all(fetchParams).getData().size(), 2);
 	}
 
 	@Test
@@ -610,7 +618,6 @@ public class StripeTest {
 		defaultTransferParams.put("recipient", recipient.getId());
 		Transfer createdTransfer = Transfer.create(defaultTransferParams);
 		assertEquals("pending", createdTransfer.getStatus());
-		assertEquals(1, createdTransfer.getFeeDetails().size());
 	}
 
 	@Test

@@ -22,8 +22,6 @@ public class Transfer extends APIResource {
 	String currency;
 	List<String> otherTransfers;
 	String recipient;
-	Integer fee;
-	List<Fee> feeDetails;
 	BankAccount account;
 
 	public String getId() {
@@ -92,22 +90,6 @@ public class Transfer extends APIResource {
 
 	public String getCurrency() {
 		return currency;
-	}
-
-	public Integer getFee() {
-		return fee;
-	}
-
-	public void setFee(Integer fee) {
-		this.fee = fee;
-	}
-
-	public List<Fee> getFeeDetails() {
-		return feeDetails;
-	}
-
-	public void setFeeDetails(List<Fee> feeDetails) {
-		this.feeDetails = feeDetails;
 	}
 
 	public String getRecipient() {
