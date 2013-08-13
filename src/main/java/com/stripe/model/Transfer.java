@@ -23,6 +23,7 @@ public class Transfer extends APIResource {
 	List<String> otherTransfers;
 	String recipient;
 	BankAccount account;
+	String balanceTransaction;
 
 	public String getId() {
 		return id;
@@ -118,6 +119,14 @@ public class Transfer extends APIResource {
 
 	public void setOtherTransfers(List<String> otherTransfers) {
 		this.otherTransfers = otherTransfers;
+	}
+
+	public String getBalanceTransaction() {
+		return balanceTransaction;
+	}
+
+	public void setBalanceTransaction(String balanceTransaction) {
+		this.balanceTransaction = balanceTransaction;
 	}
 
 	public static Transfer create(Map<String, Object> params)

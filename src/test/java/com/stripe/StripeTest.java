@@ -42,6 +42,7 @@ import com.stripe.model.Token;
 import com.stripe.model.Transfer;
 import com.stripe.model.Recipient;
 import com.stripe.model.DeletedRecipient;
+import com.stripe.model.Refund;
 
 public class StripeTest {
 	static HashMap<String, Object> defaultCardParams = new HashMap<String, Object>();
@@ -204,6 +205,9 @@ public class StripeTest {
 		Charge createdCharge = Charge.create(defaultChargeParams);
 		Charge refundedCharge = createdCharge.refund();
 		assertTrue(refundedCharge.getRefunded());
+		assertTrue(refundedCharge.getRefunds() instanceof List);
+		assertEquals(1, refundedCharge.getRefunds().size());
+		assertTrue(refundedCharge.getRefunds().get(0) instanceof Refund);
 	}
 
 	@Test

@@ -10,6 +10,7 @@ public class Dispute extends StripeObject {
 	String evidence;
 	Long evidenceDueBy;
 	String reason;
+	String balanceTransaction;
 
 	public Integer getAmount() {
 		return amount;
@@ -64,5 +65,11 @@ public class Dispute extends StripeObject {
 	}
 	public void setReason(String reason) {
 		this.reason = reason;
+	}
+	public String getBalanceTransaction() {
+		return balanceTransaction;
+	}
+	public void setBalanceTransaction(String balanceTransaction) {
+		this.balanceTransaction = balanceTransaction;
 	}
 }

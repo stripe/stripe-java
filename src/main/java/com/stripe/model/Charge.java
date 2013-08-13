@@ -1,6 +1,7 @@
 package com.stripe.model;
 
 import java.util.Map;
+import java.util.List;
 
 import com.stripe.exception.APIConnectionException;
 import com.stripe.exception.APIException;
@@ -24,6 +25,7 @@ public class Charge extends APIResource {
 	Integer amountRefunded;
 	String customer;
 	String invoice;
+	List<Refund> refunds;
 	Card card;
 	Dispute dispute;
 	String balanceTransaction;
@@ -154,6 +156,22 @@ public class Charge extends APIResource {
 
 	public void setDispute(Dispute dispute) {
 		this.dispute = dispute;
+	}
+
+	public List<Refund> getRefunds() {
+		return refunds;
+	}
+
+	public void setRefunds(List<Refund> refunds) {
+		this.refunds = refunds;
+	}
+
+	public String getBalanceTransaction() {
+		return balanceTransaction;
+	}
+
+	public void setBalanceTransaction(String balanceTransaction) {
+		this.balanceTransaction = balanceTransaction;
 	}
 
 	public static Charge create(Map<String, Object> params)
