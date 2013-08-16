@@ -172,14 +172,7 @@ public class Customer extends APIResource {
 	public Card createCard(Object params) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		Map<String, Object> postParams = new HashMap<String, Object>();
-		postParams.put("card", params);
-
-		return request(
-				RequestMethod.POST,
-				String.format("%s/cards",
-						instanceURL(Customer.class, this.id)), postParams,
-				Card.class, null);
+		return createCard(params, null);
 	}
 
 	public Subscription updateSubscription(Map<String, Object> params)
@@ -242,6 +235,20 @@ public class Customer extends APIResource {
 		return request(RequestMethod.DELETE,
 				instanceURL(Customer.class, this.id), null,
 				DeletedCustomer.class, apiKey);
+	}
+
+
+	public Card createCard(Object params, String apiKey) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		Map<String, Object> postParams = new HashMap<String, Object>();
+		postParams.put("card", params);
+
+		return request(
+				RequestMethod.POST,
+				String.format("%s/cards",
+						instanceURL(Customer.class, this.id)), postParams,
+				Card.class, apiKey);
 	}
 
 	public Subscription updateSubscription(Map<String, Object> params,
