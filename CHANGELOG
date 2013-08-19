@@ -1,3 +1,12 @@
+=== 1.3.0 2013-08-19
+
+* Add BalanceTransaction API resource
+* Add Refund resource
+* Resource updates
+       - Remove `fee`, `feeDetails` from Transfer and Charge resources
+       - Add `balanceTransaction` to Transfer, Charge, and Dispute resources
+       - Add `refunds` to Charge resource
+
 === 1.2.8 2013-08-12
 
 * Add support for unsetting attributes by updating with a null value.
