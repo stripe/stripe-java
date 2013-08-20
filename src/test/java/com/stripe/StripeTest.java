@@ -344,12 +344,19 @@ public class StripeTest {
 	@Test
 	public void testCustomerCardAddition() throws StripeException {
 		Customer createdCustomer = Customer.create(defaultCustomerParams);
-		createdCustomer.createCard(defaultCardParams);
+		String originalDefaultCard = createdCustomer.getDefaultCard();
+		Card addedCard = createdCustomer.createCard(defaultCardParams);
 		Token token = Token.create(defaultTokenParams);
 		createdCustomer.createCard(token.getId());
 
 		Customer updatedCustomer = Customer.retrieve(createdCustomer.getId());
 		assertEquals((Integer) updatedCustomer.getCards().getData().size(), (Integer) 3);
+		assertEquals(updatedCustomer.getDefaultCard(), originalDefaultCard);
+
+		Map<String, Object> updateParams = new HashMap<String, Object>();
+		updateParams.put("default_card", addedCard.getId());
+		Customer customerAfterDefaultCardUpdate = updatedCustomer.update(updateParams);
+		assertEquals(customerAfterDefaultCardUpdate.getDefaultCard(), addedCard.getId());
 	}
 
 	@Test
