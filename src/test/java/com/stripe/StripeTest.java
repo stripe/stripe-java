@@ -356,6 +356,7 @@ public class StripeTest {
 		Map<String, Object> updateParams = new HashMap<String, Object>();
 		updateParams.put("default_card", addedCard.getId());
 		Customer customerAfterDefaultCardUpdate = updatedCustomer.update(updateParams);
+		assertEquals((Integer) customerAfterDefaultCardUpdate.getCards().getData().size(), (Integer) 3);
 		assertEquals(customerAfterDefaultCardUpdate.getDefaultCard(), addedCard.getId());
 	}
 
