@@ -22,6 +22,7 @@ public class Charge extends APIResource {
 	Boolean captured;
 	String description;
 	String failureMessage;
+	String failureCode;
 	Integer amountRefunded;
 	String customer;
 	String invoice;
@@ -116,6 +117,14 @@ public class Charge extends APIResource {
 
 	public void setFailureMessage(String failureMessage) {
 		this.failureMessage = failureMessage;
+	}
+
+	public String getFailureCode() {
+		return failureCode;
+	}
+
+	public void setFailureCode(String failureCode) {
+		this.failureCode = failureCode;
 	}
 
 	public Integer getAmountRefunded() {
