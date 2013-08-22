@@ -1,3 +1,7 @@
+=== 1.3.1 2013-08-21
+
+* Patch release with missing field, added tests
+
 === 1.3.0 2013-08-19
 
 * Add BalanceTransaction API resource
