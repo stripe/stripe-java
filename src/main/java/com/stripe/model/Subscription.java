@@ -4,6 +4,7 @@ import com.stripe.net.APIResource;
 
 
 public class Subscription extends APIResource {
+	String id;
 	Long currentPeriodEnd;
 	Long currentPeriodStart;
 	Boolean cancelAtPeriodEnd;
@@ -16,7 +17,15 @@ public class Subscription extends APIResource {
 	Long canceledAt;
 	Long endedAt;
 	Integer quantity;
-	
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public Long getCurrentPeriodEnd() {
 		return currentPeriodEnd;
 	}

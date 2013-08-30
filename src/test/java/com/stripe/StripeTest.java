@@ -179,7 +179,7 @@ public class StripeTest {
 	}
 
 	@Test
-	public void testBalanceTransactionRetrieve() throws StripeException {
+	public void testBalanceTransactionRetrieval() throws StripeException {
 		Charge.create(defaultChargeParams);
 		BalanceTransactionCollection balanceTransactions = BalanceTransaction.all(null);
 		assertTrue(balanceTransactions.getCount() > 0);
@@ -190,6 +190,10 @@ public class StripeTest {
 		HashMap<String, Object> fetchParams = new HashMap<String, Object>();
 		fetchParams.put("count", 2);
 		assertEquals(BalanceTransaction.all(fetchParams).getData().size(), 2);
+
+		BalanceTransaction retrieved = BalanceTransaction.retrieve(first.getId());
+		assertEquals(retrieved.getId(), first.getId());
+		assertEquals(retrieved.getSource(), first.getSource());
 	}
 
 	@Test
