@@ -56,11 +56,11 @@ public class StripeTest {
 	static HashMap<String, Object> defaultRecipientParams = new HashMap<String, Object>();
 
 	static String getUniquePlanId() {
-		return String.format("JAVA-PLAN-%s", UUID.randomUUID());
+		return String.format("MY-J-PLAN-%s", UUID.randomUUID().toString().substring(24));
 	}
 
 	static String getUniqueCouponId() {
-		return String.format("JAVA-COUPON-%s", UUID.randomUUID());
+		return String.format("MY-J-COUPON-%s", UUID.randomUUID().toString().substring(24));
 	}
 
 	static Map<String, Object> getUniquePlanParams() {
@@ -112,7 +112,7 @@ public class StripeTest {
 		defaultCardParams.put("exp_month", 12);
 		defaultCardParams.put("exp_year", 2015);
 		defaultCardParams.put("cvc", "123");
-		defaultCardParams.put("name", "Java Bindings Cardholder");
+		defaultCardParams.put("name", "J Bindings Cardholder");
 		defaultCardParams.put("address_line1", "140 2nd Street");
 		defaultCardParams.put("address_line2", "4th Floor");
 		defaultCardParams.put("address_city", "San Francisco");
@@ -127,13 +127,13 @@ public class StripeTest {
 		defaultTokenParams.put("card", defaultCardParams);
 
 		defaultCustomerParams.put("card", defaultCardParams);
-		defaultCustomerParams.put("description", "Java Bindings Customer");
+		defaultCustomerParams.put("description", "J Bindings Customer");
 
 		defaultPlanParams.put("amount", 100);
 		defaultPlanParams.put("currency", "usd");
 		defaultPlanParams.put("interval", "month");
 		defaultPlanParams.put("interval_count", 2);
-		defaultPlanParams.put("name", "Java Bindings Plan");
+		defaultPlanParams.put("name", "J Bindings Plan");
 
 		defaultCouponParams.put("duration", "once");
 		defaultCouponParams.put("percent_off", 10);
@@ -142,7 +142,7 @@ public class StripeTest {
 		defaultBankAccountParams.put("routing_number", "110000000");
 		defaultBankAccountParams.put("account_number", "000123456789");
 
-		defaultRecipientParams.put("name", "Java Test");
+		defaultRecipientParams.put("name", "J Test");
 		defaultRecipientParams.put("type", "individual");
 		defaultRecipientParams.put("tax_id", "000000000");
 		defaultRecipientParams.put("bank_account", defaultBankAccountParams);
@@ -292,7 +292,7 @@ public class StripeTest {
 	@Test
 	public void testCustomerCreate() throws StripeException {
 		Customer customer = Customer.create(defaultCustomerParams);
-		assertEquals(customer.getDescription(), "Java Bindings Customer");
+		assertEquals(customer.getDescription(), "J Bindings Customer");
 		List<Card> customerCards = customer.getCards().getData();
 		assertEquals(1, customerCards.size());
 		assertEquals("4242", customerCards.get(0).getLast4());
@@ -365,9 +365,9 @@ public class StripeTest {
 		Customer customer = Customer.create(defaultCustomerParams);
 		Card originalCard = customer.getCards().getData().get(0);
 		Map<String, Object> updateParams = new HashMap<String, Object>();
-		updateParams.put("name", "Java Bindings Cardholder, Jr.");
+		updateParams.put("name", "J Bindings Cardholder, Jr.");
 		Card updatedCard = originalCard.update(updateParams);
-		assertEquals(updatedCard.getName(), "Java Bindings Cardholder, Jr.");
+		assertEquals(updatedCard.getName(), "J Bindings Cardholder, Jr.");
 	}
 
 	@Test
@@ -790,7 +790,7 @@ public class StripeTest {
 	public void testCustomerCreatePerCallAPIKey() throws StripeException {
 		Customer customer = Customer.create(defaultCustomerParams,
 				Stripe.apiKey);
-		assertEquals(customer.getDescription(), "Java Bindings Customer");
+		assertEquals(customer.getDescription(), "J Bindings Customer");
 		List<Card> customerCards = customer.getCards().getData();
 		assertEquals(1, customerCards.size());
 		assertEquals("4242", customerCards.get(0).getLast4());
