@@ -349,7 +349,11 @@ public class StripeTest {
 	public void testCustomerCardAddition() throws StripeException {
 		Customer createdCustomer = Customer.create(defaultCustomerParams);
 		String originalDefaultCard = createdCustomer.getDefaultCard();
-		Card addedCard = createdCustomer.createCard(defaultCardParams);
+
+		Map<String, Object> creationParams = new HashMap<String, Object>();
+		creationParams.put("card", defaultCardParams);
+		Card addedCard = createdCustomer.createCard(creationParams);
+
 		Token token = Token.create(defaultTokenParams);
 		createdCustomer.createCard(token.getId());
 
@@ -377,7 +381,9 @@ public class StripeTest {
 	@Test
 	public void testCustomerCardDelete() throws StripeException {
 		Customer customer = Customer.create(defaultCustomerParams);
-		customer.createCard(defaultCardParams);
+		Map<String, Object> creationParams = new HashMap<String, Object>();
+		creationParams.put("card", defaultCardParams);
+		customer.createCard(creationParams);
 
 		Card card = customer.getCards().getData().get(0);
 		DeletedCard deletedCard = card.delete();
