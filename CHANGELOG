@@ -1,3 +1,7 @@
+=== 1.4.1 2013-09-04
+
+* Fix return type of CustomerCardCollection.retrieve
+
 === 1.4.0 2013-09-03
 
 * Tweak card create to align it with docs
