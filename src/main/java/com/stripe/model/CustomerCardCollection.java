@@ -43,19 +43,19 @@ public class CustomerCardCollection extends APIResource {
         CustomerCardCollection.class, apiKey);
   }
 
-  public CustomerCardCollection retrieve(String id)
+  public Card retrieve(String id)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return retrieve(id, null);
   }
 
-  public CustomerCardCollection retrieve(String id, String apiKey) throws AuthenticationException,
+  public Card retrieve(String id, String apiKey) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
         // TODO: URL-encode!
     String url = String.format("%s%s/%s", Stripe.API_BASE, this.getURL(), id);
     return request(RequestMethod.GET, url, null,
-        CustomerCardCollection.class, apiKey);
+        Card.class, apiKey);
   }
 
   public CustomerCardCollection create(Map<String, Object> params)

@@ -366,6 +366,9 @@ public class StripeTest {
 		Customer customerAfterDefaultCardUpdate = updatedCustomer.update(updateParams);
 		assertEquals((Integer) customerAfterDefaultCardUpdate.getCards().getData().size(), (Integer) 3);
 		assertEquals(customerAfterDefaultCardUpdate.getDefaultCard(), addedCard.getId());
+
+		assertEquals(customerAfterDefaultCardUpdate.getCards().retrieve(originalDefaultCard).getId(), originalDefaultCard);
+		assertEquals(customerAfterDefaultCardUpdate.getCards().retrieve(addedCard.getId()).getId(), addedCard.getId());
 	}
 
 	@Test
