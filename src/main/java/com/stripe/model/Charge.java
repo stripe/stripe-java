@@ -286,4 +286,13 @@ public class Charge extends APIResource {
 				String.format("%s/dispute", instanceURL(Charge.class, this.id)),
 				params, Dispute.class, apiKey);
 	}
+
+	public Dispute closeDispute(String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(
+				RequestMethod.POST,
+				String.format("%s/dispute/close", instanceURL(Charge.class, this.id)),
+				null, Dispute.class, apiKey);
+	}
 }
