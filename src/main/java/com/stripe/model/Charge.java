@@ -213,6 +213,18 @@ public class Charge extends APIResource {
 		return this.capture(null, null);
 	}
 
+	public Dispute updateDispute(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return this.updateDispute(params, null);
+	}
+
+	public Dispute closeDispute() throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return this.closeDispute(null);
+	}
+
 	public Charge refund(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -285,5 +297,14 @@ public class Charge extends APIResource {
 				RequestMethod.POST,
 				String.format("%s/dispute", instanceURL(Charge.class, this.id)),
 				params, Dispute.class, apiKey);
+	}
+
+	public Dispute closeDispute(String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(
+				RequestMethod.POST,
+				String.format("%s/dispute/close", instanceURL(Charge.class, this.getId())),
+				null, Dispute.class, apiKey);
 	}
 }
