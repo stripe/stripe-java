@@ -10,7 +10,7 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 
-public class Transfer extends APIResource {
+public class Transfer extends APIResource implements MetadataStore<Transfer> {
 	String id;
 	String status;
 	Long date;
@@ -24,6 +24,7 @@ public class Transfer extends APIResource {
 	String recipient;
 	BankAccount account;
 	String balanceTransaction;
+	Map<String, String> metadata;
 
 	public String getId() {
 		return id;
@@ -129,6 +130,14 @@ public class Transfer extends APIResource {
 		this.balanceTransaction = balanceTransaction;
 	}
 
+	public Map<String, String> getMetadata() {
+		return metadata;
+	}
+
+	public void setMetadata(Map<String, String> metadata) {
+		this.metadata = metadata;
+	}
+
 	public static Transfer create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -139,6 +148,12 @@ public class Transfer extends APIResource {
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return retrieve(id, null);
+	}
+
+	public Transfer update(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params, null);
 	}
 
 	public static TransferCollection all(Map<String, Object> params)
@@ -158,6 +173,14 @@ public class Transfer extends APIResource {
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.POST, classURL(Transfer.class), params,
 				Transfer.class, apiKey);
+	}
+
+	public Transfer update(Map<String, Object> params, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.POST,
+				instanceURL(Transfer.class, this.id), params, Transfer.class,
+				apiKey);
 	}
 
 	public static Transfer retrieve(String id, String apiKey)

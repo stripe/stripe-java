@@ -10,7 +10,7 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 
-public class Charge extends APIResource {
+public class Charge extends APIResource implements MetadataStore<Charge> {
 	Integer amount;
 	Long created;
 	String currency;
@@ -30,6 +30,7 @@ public class Charge extends APIResource {
 	Card card;
 	Dispute dispute;
 	String balanceTransaction;
+	Map<String, String> metadata;
 
 	public String getId() {
 		return id;
@@ -183,6 +184,14 @@ public class Charge extends APIResource {
 		this.balanceTransaction = balanceTransaction;
 	}
 
+	public Map<String, String> getMetadata() {
+		return metadata;
+	}
+
+	public void setMetadata(Map<String, String> metadata) {
+		this.metadata = metadata;
+	}
+
 	public static Charge create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -193,6 +202,12 @@ public class Charge extends APIResource {
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return retrieve(id, null);
+	}
+
+	public Charge update(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params, null);
 	}
 
 	public static ChargeCollection all(Map<String, Object> params)
@@ -248,6 +263,13 @@ public class Charge extends APIResource {
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.GET, instanceURL(Charge.class, id), null,
+				Charge.class, apiKey);
+	}
+
+	public Charge update(Map<String, Object> params, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.POST, instanceURL(Charge.class, id), params,
 				Charge.class, apiKey);
 	}
 

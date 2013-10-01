@@ -36,6 +36,7 @@ import com.stripe.model.Event;
 import com.stripe.model.Invoice;
 import com.stripe.model.InvoiceItem;
 import com.stripe.model.InvoiceLineItemCollection;
+import com.stripe.model.MetadataStore;
 import com.stripe.model.Plan;
 import com.stripe.model.Subscription;
 import com.stripe.model.Token;
@@ -1115,4 +1116,65 @@ public class StripeTest {
 		assertEquals(events.size(), 1);
 	}
 
+	private void testMetadata(MetadataStore<?> object) throws StripeException {
+		assertTrue(object.getMetadata().isEmpty());
+
+		Map<String, String> initialMetadata = new HashMap<String, String>();
+		initialMetadata.put("foo", "bar");
+		initialMetadata.put("baz", "qux");
+		Map<String, Object> updateParams = new HashMap<String, Object>();
+		updateParams.put("metadata", initialMetadata);
+		object = object.update(updateParams);
+		assertFalse(object.getMetadata().isEmpty());
+		assertEquals("bar", object.getMetadata().get("foo"));
+		assertEquals("qux", object.getMetadata().get("baz"));
+
+		// Test update single key
+		Map<String, String> metadataUpdate = new HashMap<String, String>();
+		metadataUpdate.put("foo", "new-bar");
+		updateParams = new HashMap<String, Object>();
+		updateParams.put("metadata", metadataUpdate);
+		object = object.update(updateParams);
+		assertFalse(object.getMetadata().isEmpty());
+		assertEquals("new-bar", object.getMetadata().get("foo"));
+		assertEquals("qux", object.getMetadata().get("baz"));
+
+		// Test delete single key
+		metadataUpdate = new HashMap<String, String>();
+		metadataUpdate.put("foo", null);
+		updateParams = new HashMap<String, Object>();
+		updateParams.put("metadata", metadataUpdate);
+		object = object.update(updateParams);
+		assertFalse(object.getMetadata().isEmpty());
+		assertFalse(object.getMetadata().containsKey("foo"));
+		assertEquals("qux", object.getMetadata().get("baz"));
+
+		// Test delete all keys
+		updateParams = new HashMap<String, Object>();
+		updateParams.put("metadata", null);
+		object = object.update(updateParams);
+		assertTrue(object.getMetadata().isEmpty());
+	}
+
+	@Test
+	public void testChargeMetadata() throws StripeException {
+		testMetadata(Charge.create(defaultChargeParams));
+	}
+
+	@Test
+	public void testCustomerMetadata() throws StripeException {
+		testMetadata(Customer.create(defaultCustomerParams));
+	}
+
+	@Test
+	public void testTransferMetadata() throws StripeException {
+		Recipient recipient = Recipient.create(defaultRecipientParams);
+		defaultTransferParams.put("recipient", recipient.getId());
+		testMetadata(Transfer.create(defaultTransferParams));
+	}
+
+	@Test
+	public void testRecipientMetadata() throws StripeException {
+		testMetadata(Recipient.create(defaultRecipientParams));
+	}
 }

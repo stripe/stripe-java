@@ -9,7 +9,7 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 
-public class Recipient extends APIResource {
+public class Recipient extends APIResource implements MetadataStore<Recipient> {
 	Long created;
 	String id;
 	String type;
@@ -20,6 +20,7 @@ public class Recipient extends APIResource {
 	BankAccount activeAccount;
 	String email;
 	Boolean verified;
+	Map<String, String> metadata;
 
 	public Long getCreated() {
 		return created;
@@ -95,6 +96,14 @@ public class Recipient extends APIResource {
 
 	public Boolean getDeleted() {
 		return deleted;
+	}
+
+	public Map<String, String> getMetadata() {
+		return metadata;
+	}
+
+	public void setMetadata(Map<String, String> metadata) {
+		this.metadata = metadata;
 	}
 
 	public static Recipient create(Map<String, Object> params)

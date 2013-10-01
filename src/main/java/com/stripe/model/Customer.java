@@ -10,7 +10,7 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 
-public class Customer extends APIResource {
+public class Customer extends APIResource implements MetadataStore<Customer> {
 	Long created;
 	String id;
 	Boolean livemode;
@@ -26,6 +26,7 @@ public class Customer extends APIResource {
 	Boolean delinquent;
 	Integer accountBalance;
 	CustomerCardCollection cards;
+	Map<String, String> metadata;
 
 	public Long getCreated() {
 		return created;
@@ -137,6 +138,14 @@ public class Customer extends APIResource {
 
 	public void setAccountBalance(Integer accountBalance) {
 		this.accountBalance = accountBalance;
+	}
+
+	public Map<String, String> getMetadata() {
+		return metadata;
+	}
+
+	public void setMetadata(Map<String, String> metadata) {
+		this.metadata = metadata;
 	}
 
 	public static Customer create(Map<String, Object> params)
