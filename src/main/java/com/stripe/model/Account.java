@@ -13,6 +13,7 @@ public class Account extends APIResource {
 	String id;
 	Boolean chargeEnabled;
 	Boolean detailsSubmitted;
+	Boolean transferEnabled;
 	List<String> currenciesSupported;
 	String email;
 	String statementDescriptor;
@@ -27,6 +28,10 @@ public class Account extends APIResource {
 
 	public Boolean getDetailsSubmitted() {
 		return detailsSubmitted;
+	}
+
+	public Boolean getTransferEnabled() {
+		return transferEnabled;
 	}
 
 	public List<String> getCurrenciesSupported() {
