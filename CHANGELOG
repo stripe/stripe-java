@@ -1,3 +1,8 @@
+=== 1.5.1 2013-10-17
+
+* Added field transfer_enabled to Account API object
+  (thanks, kurguzov)
+
 === 1.5.0 2013-10-01
 
 * Add support for metadata API
