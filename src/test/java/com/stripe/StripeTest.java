@@ -159,6 +159,7 @@ public class StripeTest {
 		assertEquals(false, retrievedAccount.getChargeEnabled());
 		assertEquals(false, retrievedAccount.getDetailsSubmitted());
 		assertEquals(null, retrievedAccount.getStatementDescriptor());
+		assertEquals(false, retrievedAccount.getTransferEnabled());
 
 		List<String> currencies = retrievedAccount.getCurrenciesSupported();
 		assertEquals(1, currencies.size());
