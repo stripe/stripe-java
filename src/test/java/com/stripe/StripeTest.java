@@ -44,6 +44,8 @@ import com.stripe.model.Transfer;
 import com.stripe.model.Recipient;
 import com.stripe.model.DeletedRecipient;
 import com.stripe.model.Refund;
+import com.stripe.model.ApplicationFee;
+import com.stripe.model.FeeRefund;
 
 public class StripeTest {
 	static HashMap<String, Object> defaultCardParams = new HashMap<String, Object>();
@@ -707,6 +709,14 @@ public class StripeTest {
 		assertTrue(deletedRecipient.getDeleted());
 		assertEquals(deletedRecipient.getId(), createdRecipient.getId());
 		assertTrue(deletedRetrievedRecipient.getDeleted());
+	}
+
+	@Test
+	public void testApplicationFeeList() throws StripeException {
+		Map<String, Object> listParams = new HashMap<String, Object>();
+		listParams.put("count", 0);
+		List<ApplicationFee> fees = ApplicationFee.all(listParams).getData();
+		assertEquals(fees.size(), 0);
 	}
 
 	@Test
