@@ -163,7 +163,7 @@ public class StripeTest {
 
 		List<String> currencies = retrievedAccount.getCurrenciesSupported();
 		assertEquals(1, currencies.size());
-		assertEquals("USD", currencies.get(0));
+		assertEquals("usd", currencies.get(0));
 	}
 
 	@Test
