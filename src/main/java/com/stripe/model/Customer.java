@@ -21,6 +21,8 @@ public class Customer extends APIResource implements MetadataStore<Customer> {
 	Long trialEnd;
 	Discount discount;
 	NextRecurringCharge nextRecurringCharge;
+	/** BETA ONLY (contact jim@stripe with questions) */
+	CustomerSubscriptionCollection subscriptions;
 	Subscription subscription;
 	Boolean delinquent;
 	Integer accountBalance;
@@ -111,6 +113,11 @@ public class Customer extends APIResource implements MetadataStore<Customer> {
 		this.subscription = subscription;
 	}
 
+	/** BETA ONLY (contact jim@stripe with questions) */
+	public CustomerSubscriptionCollection getSubscriptions() {
+		return subscriptions;
+	}
+
 	public Boolean getDeleted() {
 		return deleted;
 	}
@@ -179,6 +186,13 @@ public class Customer extends APIResource implements MetadataStore<Customer> {
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return createCard(params, null);
+	}
+
+	/** BETA ONLY (contact jim@stripe with questions) */
+	public Subscription createSubscription(Map<String, Object> params) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+	return createSubscription(params, null);
 	}
 
 	public Subscription updateSubscription(Map<String, Object> params)
@@ -260,6 +274,17 @@ public class Customer extends APIResource implements MetadataStore<Customer> {
 				String.format("%s/cards",
 						instanceURL(Customer.class, this.id)), params,
 				Card.class, apiKey);
+	}
+
+	/** BETA ONLY (contact jim@stripe with questions) */
+	public Subscription createSubscription(Map<String, Object> params, String apiKey) throws AuthenticationException,
+		InvalidRequestException, APIConnectionException, CardException,
+		APIException {
+		return request(
+				RequestMethod.POST,
+				String.format("%s/subscriptions",
+						instanceURL(Customer.class, this.id)), params,
+				Subscription.class, apiKey);
 	}
 
 	public Subscription updateSubscription(Map<String, Object> params,
