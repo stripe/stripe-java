@@ -1,3 +1,7 @@
+=== 1.6.2 2014-01-08
+
+* Fix return type of Coupon.getRedeemBy
+
 === 1.6.1 2013-12-02
 
 * Add ApplicationFee API resource
