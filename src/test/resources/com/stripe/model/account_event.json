@@ -14,6 +14,7 @@
       "currencies_supported":[
         "CAD"
       ],
+      "default_currency":"CAD",
       "object":"account"
     },
     "previous_attributes":{

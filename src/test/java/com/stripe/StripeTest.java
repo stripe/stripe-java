@@ -162,6 +162,7 @@ public class StripeTest {
 		assertEquals(false, retrievedAccount.getDetailsSubmitted());
 		assertEquals(null, retrievedAccount.getStatementDescriptor());
 		assertEquals(false, retrievedAccount.getTransferEnabled());
+		assertEquals("CAD", retrievedAccount.getDefaultCurrency());
 
 		List<String> currencies = retrievedAccount.getCurrenciesSupported();
 		assertEquals(1, currencies.size());
