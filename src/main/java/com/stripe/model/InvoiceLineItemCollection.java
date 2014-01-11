@@ -38,7 +38,7 @@ public class InvoiceLineItemCollection extends APIResource {
 			String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		String url = String.format("%s%s", Stripe.API_BASE, this.getURL());
+		String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
 		return request(RequestMethod.GET, url, params,
 				InvoiceLineItemCollection.class, apiKey);
 	}

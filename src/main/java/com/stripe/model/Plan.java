@@ -9,7 +9,8 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 
-public class Plan extends APIResource {
+public class Plan extends APIResource implements MetadataStore<Plan> {
+
 	Integer amount;
 	String currency;
 	String id;
@@ -18,6 +19,7 @@ public class Plan extends APIResource {
 	String name;
 	Boolean livemode;
 	Integer trialPeriodDays;
+	Map<String, String> metadata;
 
 	public static Plan create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
@@ -29,6 +31,16 @@ public class Plan extends APIResource {
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return retrieve(id, null);
+	}
+
+	@Override
+	public Map<String, String> getMetadata() {
+		return metadata;
+	}
+
+	@Override
+	public void setMetadata(Map<String, String> metadata) {
+		this.metadata = metadata;
 	}
 
 	public Plan update(Map<String, Object> params)

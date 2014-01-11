@@ -44,7 +44,7 @@ public abstract class APIResource extends StripeObject {
 	}
 
 	protected static String singleClassURL(Class<?> clazz) {
-		return String.format("%s/v1/%s", Stripe.API_BASE, className(clazz));
+		return String.format("%s/v1/%s", Stripe.getApiBase(), className(clazz));
 	}
 
 	protected static String classURL(Class<?> clazz) {
@@ -305,7 +305,7 @@ public abstract class APIResource extends StripeObject {
 									+ "Please check your internet connection and try again. If this problem persists,"
 									+ "you should check Stripe's service status at https://twitter.com/stripestatus,"
 									+ " or let us know at support@stripe.com.",
-							Stripe.API_BASE), e);
+							Stripe.getApiBase()), e);
 		} finally {
 			if (conn != null) {
 				conn.disconnect();
