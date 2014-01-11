@@ -12,9 +12,9 @@
       "details_submitted":true,
       "charge_enabled":true,
       "currencies_supported":[
-        "CAD"
+        "cad"
       ],
-      "default_currency":"CAD",
+      "default_currency":"cad",
       "object":"account"
     },
     "previous_attributes":{
