@@ -17,6 +17,7 @@ public class Account extends APIResource {
 	List<String> currenciesSupported;
 	String email;
 	String statementDescriptor;
+  String defaultCurrency;
 
 	public String getId() {
 		return id;
@@ -45,6 +46,10 @@ public class Account extends APIResource {
 	public String getStatementDescriptor() {
 		return statementDescriptor;
 	}
+
+  public String getDefaultCurrency() {
+    return defaultCurrency;
+  }
 
 	public static Account retrieve() throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
