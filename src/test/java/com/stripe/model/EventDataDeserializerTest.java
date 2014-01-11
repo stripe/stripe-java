@@ -13,7 +13,7 @@ import static org.junit.Assert.assertThat;
 
 public class EventDataDeserializerTest {
 
-    private static Gson gson  = com.stripe.net.APIResource.gson;
+    private static Gson gson  = com.stripe.net.APIResource.GSON;
 
     @Test
     public void deserializePreviousAttributes() throws IOException {
@@ -27,7 +27,7 @@ public class EventDataDeserializerTest {
     @Test
     public void deserializeAccountEvent() throws IOException {
         String json = resource("account_event.json");
-        Event e = StripeObject.prettyPrintGson.fromJson(json, Event.class);
+        Event e = StripeObject.PRETTY_PRINT_GSON.fromJson(json, Event.class);
 
         assertEquals(e.getType(), "account.updated");
     }

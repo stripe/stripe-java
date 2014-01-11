@@ -40,7 +40,7 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
         objectMap.put("card", Card.class);
         objectMap.put("balance_transaction", BalanceTransaction.class);
     }
-    
+
     private Object deserializeJsonPrimitive(JsonPrimitive element) {
     	if (element.isBoolean()) {
     		return element.getAsBoolean();
@@ -50,7 +50,7 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
     		return element.getAsString();
     	}
     }
-    
+
     private Object[] deserializeJsonArray(JsonArray arr) {
     	Object[] elems = new Object[arr.size()];
     	Iterator<JsonElement> elemIter = arr.iterator();
@@ -61,7 +61,7 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
     	}
     	return elems;
     }
-    
+
     private Object deserializeJsonElement(JsonElement element) {
     	if (element.isJsonNull()) {
     		return null;
@@ -80,7 +80,7 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
 			return null;
 		}
 	}
-    
+
     private void populateMapFromJSONObject(Map<String, Object> objMap, JsonObject jsonObject) {
 		for(Map.Entry<String, JsonElement> entry: jsonObject.entrySet()) {
 			String key = entry.getKey();
@@ -104,7 +104,7 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
 			} else if ("object".equals(key)) {
 				String type = element.getAsJsonObject().get("object").getAsString();
 				Class<StripeObject> cl = objectMap.get(type);
-				StripeObject object = APIResource.gson.fromJson(entry.getValue(), cl != null ? cl : StripeRawJsonObject.class);
+				StripeObject object = APIResource.GSON.fromJson(entry.getValue(), cl != null ? cl : StripeRawJsonObject.class);
 				eventData.setObject(object);
 			}
 		}

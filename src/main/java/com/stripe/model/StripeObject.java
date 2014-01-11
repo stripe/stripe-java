@@ -8,7 +8,7 @@ import com.google.gson.GsonBuilder;
 
 public abstract class StripeObject {
 	
-	public static final Gson prettyPrintGson = new GsonBuilder().
+	public static final Gson PRETTY_PRINT_GSON = new GsonBuilder().
 		setPrettyPrinting().
 		serializeNulls().
 		setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).
@@ -21,7 +21,7 @@ public abstract class StripeObject {
 			this.getClass().getName(),
 			System.identityHashCode(this),
 			this.getIdString(),
-			prettyPrintGson.toJson(this));
+			PRETTY_PRINT_GSON.toJson(this));
 	}
 
 	private Object getIdString() {

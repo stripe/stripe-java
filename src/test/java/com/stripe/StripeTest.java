@@ -48,15 +48,15 @@ import com.stripe.model.ApplicationFee;
 import com.stripe.model.FeeRefund;
 
 public class StripeTest {
-	static HashMap<String, Object> defaultCardParams = new HashMap<String, Object>();
-	static HashMap<String, Object> defaultChargeParams = new HashMap<String, Object>();
-	static HashMap<String, Object> defaultCustomerParams = new HashMap<String, Object>();
-	static HashMap<String, Object> defaultPlanParams = new HashMap<String, Object>();
-	static HashMap<String, Object> defaultCouponParams = new HashMap<String, Object>();
-	static HashMap<String, Object> defaultTokenParams = new HashMap<String, Object>();
-	static HashMap<String, Object> defaultBankAccountParams = new HashMap<String, Object>();
-	static HashMap<String, Object> defaultTransferParams = new HashMap<String, Object>();
-	static HashMap<String, Object> defaultRecipientParams = new HashMap<String, Object>();
+	static Map<String, Object> defaultCardParams = new HashMap<String, Object>();
+	static Map<String, Object> defaultChargeParams = new HashMap<String, Object>();
+	static Map<String, Object> defaultCustomerParams = new HashMap<String, Object>();
+	static Map<String, Object> defaultPlanParams = new HashMap<String, Object>();
+	static Map<String, Object> defaultCouponParams = new HashMap<String, Object>();
+	static Map<String, Object> defaultTokenParams = new HashMap<String, Object>();
+	static Map<String, Object> defaultBankAccountParams = new HashMap<String, Object>();
+	static Map<String, Object> defaultTransferParams = new HashMap<String, Object>();
+	static Map<String, Object> defaultRecipientParams = new HashMap<String, Object>();
 
 	static String getUniquePlanId() {
 		return String.format("MY-J-PLAN-%s", UUID.randomUUID().toString().substring(24));
@@ -220,7 +220,7 @@ public class StripeTest {
 
 	@Test
 	public void testChargeCapture() throws StripeException {
-		HashMap<String, Object> options = (HashMap<String, Object>)defaultChargeParams.clone();
+		Map<String, Object> options = new HashMap<String, Object>(defaultChargeParams);
 		options.put("capture", false);
 
 		Charge created = Charge.create(options);
