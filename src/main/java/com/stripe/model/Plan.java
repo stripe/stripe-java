@@ -19,7 +19,7 @@ public class Plan extends APIResource implements MetadataStore<Plan> {
 	String name;
 	Boolean livemode;
 	Integer trialPeriodDays;
-    Map<String, String> metadata;
+	Map<String, String> metadata;
 
 	public static Plan create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
@@ -33,17 +33,17 @@ public class Plan extends APIResource implements MetadataStore<Plan> {
 		return retrieve(id, null);
 	}
 
-    @Override
-    public Map<String, String> getMetadata() {
-        return metadata;
-    }
+	@Override
+	public Map<String, String> getMetadata() {
+		return metadata;
+	}
 
-    @Override
-    public void setMetadata(Map<String, String> metadata) {
-        this.metadata = metadata;
-    }
+	@Override
+	public void setMetadata(Map<String, String> metadata) {
+		this.metadata = metadata;
+	}
 
-    public Plan update(Map<String, Object> params)
+	public Plan update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return update(params, null);
