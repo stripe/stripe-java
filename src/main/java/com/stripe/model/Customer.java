@@ -18,7 +18,6 @@ public class Customer extends APIResource implements MetadataStore<Customer> {
 	String description;
 	String defaultCard;
 	String email;
-	String plan;
 	Long trialEnd;
 	Discount discount;
 	NextRecurringCharge nextRecurringCharge;
@@ -78,14 +77,6 @@ public class Customer extends APIResource implements MetadataStore<Customer> {
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getPlan() {
-		return plan;
-	}
-
-	public void setPlan(String plan) {
-		this.plan = plan;
 	}
 
 	public Long getTrialEnd() {
