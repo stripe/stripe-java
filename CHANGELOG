@@ -1,3 +1,11 @@
+=== 1.6.3 2014-01-13
+
+* Support overriding base url (for testing) (user request)
+* Add default currency to Account object (fixes #46)
+* Add metadata to plan object (thanks, desirable-objects)
+* Remove plan from Customer (fixes #42)
+* Style improvements (see #30) (thanks, steve-nester-uk)
+
 === 1.6.2 2014-01-08
 
 * Fix return type of Coupon.getRedeemBy
