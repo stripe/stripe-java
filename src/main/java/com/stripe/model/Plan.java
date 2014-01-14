@@ -33,16 +33,6 @@ public class Plan extends APIResource implements MetadataStore<Plan> {
 		return retrieve(id, null);
 	}
 
-	@Override
-	public Map<String, String> getMetadata() {
-		return metadata;
-	}
-
-	@Override
-	public void setMetadata(Map<String, String> metadata) {
-		this.metadata = metadata;
-	}
-
 	public Plan update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -158,5 +148,13 @@ public class Plan extends APIResource implements MetadataStore<Plan> {
 
 	public void setTrialPeriodDays(Integer trialPeriodDays) {
 		this.trialPeriodDays = trialPeriodDays;
+	}
+
+	public Map<String, String> getMetadata() {
+		return metadata;
+	}
+
+	public void setMetadata(Map<String, String> metadata) {
+		this.metadata = metadata;
 	}
 }

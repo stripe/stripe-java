@@ -1189,4 +1189,9 @@ public class StripeTest {
 	public void testRecipientMetadata() throws StripeException {
 		testMetadata(Recipient.create(defaultRecipientParams));
 	}
+
+	@Test
+	public void testPlanMetadata() throws StripeException {
+		testMetadata(Plan.create(getUniquePlanParams()));
+	}
 }
