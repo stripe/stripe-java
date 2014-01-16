@@ -1,5 +1,7 @@
 package com.stripe.model;
 
+import java.util.Map;
+
 public class InvoiceLineItem extends StripeObject {
 	String id;
 	String type;
@@ -11,6 +13,7 @@ public class InvoiceLineItem extends StripeObject {
 	Integer quantity;
 	Plan plan;
 	String description;
+  Map<String, String> metadata;
 
 	public String getId() {
 		return this.id;
@@ -51,4 +54,8 @@ public class InvoiceLineItem extends StripeObject {
 	public String getDescription() {
 		return this.description;
 	}
+
+  public Map<String, String> getMetadata() {
+    return this.metadata;
+  }
 }
