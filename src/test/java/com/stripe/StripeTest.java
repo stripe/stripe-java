@@ -57,6 +57,7 @@ public class StripeTest {
 	static Map<String, Object> defaultBankAccountParams = new HashMap<String, Object>();
 	static Map<String, Object> defaultTransferParams = new HashMap<String, Object>();
 	static Map<String, Object> defaultRecipientParams = new HashMap<String, Object>();
+  static Map<String, Object> defaultInvoiceItemParams = new HashMap<String, Object>();
 
 	static String getUniquePlanId() {
 		return String.format("MY-J-PLAN-%s", UUID.randomUUID().toString().substring(24));
@@ -152,6 +153,9 @@ public class StripeTest {
 
 		defaultTransferParams.put("amount", 100);
 		defaultTransferParams.put("currency", "usd");
+
+    defaultInvoiceItemParams.put("amount", 100);
+    defaultInvoiceItemParams.put("currency", "usd");
 	}
 
 	@Test
@@ -1194,4 +1198,11 @@ public class StripeTest {
 	public void testPlanMetadata() throws StripeException {
 		testMetadata(Plan.create(getUniquePlanParams()));
 	}
+
+  @Test
+  public void testInvoiceItemMetadata() throws StripeException {
+		Customer customer = Customer.create(defaultCustomerParams);
+    defaultInvoiceItemParams.put("customer", customer.getId());
+    testMetadata(InvoiceItem.create(defaultInvoiceItemParams));
+  }
 }

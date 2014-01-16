@@ -9,7 +9,7 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 
-public class InvoiceItem extends APIResource {
+public class InvoiceItem extends APIResource implements MetadataStore<InvoiceItem> {
 	Integer amount;
 	String id;
 	String currency;
@@ -18,6 +18,7 @@ public class InvoiceItem extends APIResource {
 	Boolean livemode;
 	String customer;
 	String invoice;
+  Map<String, String> metadata;
 
 	public Integer getAmount() {
 		return amount;
@@ -81,6 +82,14 @@ public class InvoiceItem extends APIResource {
 
 	public void setInvoice(String invoice) {
 		this.invoice = invoice;
+	}
+
+	public Map<String, String> getMetadata() {
+		return metadata;
+	}
+
+	public void setMetadata(Map<String, String> metadata) {
+		this.metadata = metadata;
 	}
 
 	public static InvoiceItem create(Map<String, Object> params)
