@@ -55,9 +55,7 @@ public class StripeTest {
 	static Map<String, Object> defaultCouponParams = new HashMap<String, Object>();
 	static Map<String, Object> defaultTokenParams = new HashMap<String, Object>();
 	static Map<String, Object> defaultBankAccountParams = new HashMap<String, Object>();
-	static Map<String, Object> defaultTransferParams = new HashMap<String, Object>();
 	static Map<String, Object> defaultRecipientParams = new HashMap<String, Object>();
-  static Map<String, Object> defaultInvoiceItemParams = new HashMap<String, Object>();
 
 	static String getUniquePlanId() {
 		return String.format("MY-J-PLAN-%s", UUID.randomUUID().toString().substring(24));
@@ -80,6 +78,24 @@ public class StripeTest {
 		uniqueParams.put("id", getUniqueCouponId());
 		return uniqueParams;
 	}
+
+  static Map<String, Object> getInvoiceItemParams() throws StripeException {
+    Map<String, Object> params = new HashMap<String, Object>();
+		Customer customer = Customer.create(defaultCustomerParams);
+    params.put("amount", 100);
+    params.put("currency", "usd");
+    params.put("customer", customer.getId());
+    return params;
+  }
+
+  static Map<String, Object> getTransferParams() throws StripeException {
+    Map<String, Object> params = new HashMap<String, Object>();
+		Recipient recipient = Recipient.create(defaultRecipientParams);
+		params.put("amount", 100);
+		params.put("currency", "usd");
+		params.put("recipient", recipient.getId());
+    return params;
+  }
 
 	static InvoiceItem createDefaultInvoiceItem(Customer customer)
 			throws StripeException {
@@ -151,11 +167,7 @@ public class StripeTest {
 		defaultRecipientParams.put("tax_id", "000000000");
 		defaultRecipientParams.put("bank_account", defaultBankAccountParams);
 
-		defaultTransferParams.put("amount", 100);
-		defaultTransferParams.put("currency", "usd");
 
-    defaultInvoiceItemParams.put("amount", 100);
-    defaultInvoiceItemParams.put("currency", "usd");
 	}
 
 	@Test
@@ -648,17 +660,13 @@ public class StripeTest {
 
 	@Test
 	public void testTransferCreate() throws StripeException {
-		Recipient recipient = Recipient.create(defaultRecipientParams);
-		defaultTransferParams.put("recipient", recipient.getId());
-		Transfer createdTransfer = Transfer.create(defaultTransferParams);
+		Transfer createdTransfer = Transfer.create(getTransferParams());
 		assertEquals("pending", createdTransfer.getStatus());
 	}
 
 	@Test
 	public void testTransferRetrieve() throws StripeException {
-		Recipient recipient = Recipient.create(defaultRecipientParams);
-		defaultTransferParams.put("recipient", recipient.getId());
-		Transfer createdTransfer = Transfer.create(defaultTransferParams);
+		Transfer createdTransfer = Transfer.create(getTransferParams());
 		Transfer retrievedTransfer= Transfer.retrieve(createdTransfer.getId());
 		assertEquals(createdTransfer.getDate(), retrievedTransfer.getDate());
 		assertEquals(createdTransfer.getId(), retrievedTransfer.getId());
@@ -1184,9 +1192,7 @@ public class StripeTest {
 
 	@Test
 	public void testTransferMetadata() throws StripeException {
-		Recipient recipient = Recipient.create(defaultRecipientParams);
-		defaultTransferParams.put("recipient", recipient.getId());
-		testMetadata(Transfer.create(defaultTransferParams));
+		testMetadata(Transfer.create(getTransferParams()));
 	}
 
 	@Test
@@ -1201,8 +1207,6 @@ public class StripeTest {
 
   @Test
   public void testInvoiceItemMetadata() throws StripeException {
-		Customer customer = Customer.create(defaultCustomerParams);
-    defaultInvoiceItemParams.put("customer", customer.getId());
-    testMetadata(InvoiceItem.create(defaultInvoiceItemParams));
+    testMetadata(InvoiceItem.create(getInvoiceItemParams()));
   }
 }
