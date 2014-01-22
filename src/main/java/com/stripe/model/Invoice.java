@@ -31,6 +31,7 @@ public class Invoice extends APIResource {
 	Boolean livemode;
 	Integer attemptCount;
 	String currency;
+	String subscription;
 
 	public Integer getSubtotal() {
 		return subtotal;
@@ -194,6 +195,14 @@ public class Invoice extends APIResource {
 
 	public void setCurrency(String currency) {
 		this.currency = currency;
+	}
+
+	public String getSubscription() {
+		return subscription;
+	}
+
+	public void setSubscription(String subscription) {
+		this.subscription = subscription;
 	}
 
 	public static Invoice retrieve(String id) throws AuthenticationException,
