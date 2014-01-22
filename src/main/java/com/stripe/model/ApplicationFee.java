@@ -148,16 +148,14 @@ public class ApplicationFee extends APIResource {
 	public static ApplicationFee retrieve(String id, String apiKey)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		String url = String.format("%s/%s/%s", Stripe.getApiBase(), "v1/application_fees", id);
-		return request(RequestMethod.GET, url, null,
+		return request(RequestMethod.GET, instanceURL(ApplicationFee.class, id), null,
 				ApplicationFee.class, apiKey);
 	}
 
 	public static ApplicationFeeCollection all(Map<String, Object> params, String apiKey)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		String url = String.format("%s/%s", Stripe.getApiBase(), "v1/application_fees");
-		return request(RequestMethod.GET, url, params,
+		return request(RequestMethod.GET, classURL(ApplicationFee.class), params,
 				ApplicationFeeCollection.class, apiKey);
 	}
 
@@ -170,8 +168,10 @@ public class ApplicationFee extends APIResource {
 	public ApplicationFee refund(Map<String, Object> params, String apiKey)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		String url = String.format("%s/%s/%s/%s", Stripe.getApiBase(), "v1/application_fees", id, "refund");
-		return request(RequestMethod.POST, url, params,
+		return request(
+				RequestMethod.POST,
+				String.format("%s/refund",
+						instanceURL(ApplicationFee.class, this.getId())), params,
 				ApplicationFee.class, apiKey);
 	}
 }
