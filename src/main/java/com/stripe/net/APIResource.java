@@ -40,7 +40,15 @@ public abstract class APIResource extends StripeObject {
 			.create();
 
 	private static String className(Class<?> clazz) {
-		return clazz.getSimpleName().toLowerCase().replace("$", "");
+    String className = clazz.getSimpleName().toLowerCase().replace("$", " ");
+
+    // TODO: Delurk this, with invoiceitem being a valid url, we can't get too
+    // fancy yet.
+    if (className.equals("applicationfee")) {
+      return "application_fee";
+    } else {
+      return className;
+    }
 	}
 
 	protected static String singleClassURL(Class<?> clazz) {
