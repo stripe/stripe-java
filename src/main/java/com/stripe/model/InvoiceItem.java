@@ -18,7 +18,7 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
 	Boolean livemode;
 	String customer;
 	String invoice;
-  Map<String, String> metadata;
+	Map<String, String> metadata;
 
 	public Integer getAmount() {
 		return amount;
