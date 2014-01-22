@@ -170,7 +170,7 @@ public class ApplicationFee extends APIResource {
 	public ApplicationFee refund(Map<String, Object> params, String apiKey)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		String url = String.format("%s/%s/%s", Stripe.getApiBase(), "v1/application_fees", id);
+		String url = String.format("%s/%s/%s/%s", Stripe.getApiBase(), "v1/application_fees", id, "refund");
 		return request(RequestMethod.POST, url, params,
 				ApplicationFee.class, apiKey);
 	}
