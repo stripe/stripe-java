@@ -7,7 +7,8 @@ public class Discount extends StripeObject {
 	Long start;
 	Coupon coupon;
 	String customer;
-	
+	String subscription;
+
 	public Long getEnd() {
 		return end;
 	}
@@ -37,5 +38,11 @@ public class Discount extends StripeObject {
 	}
 	public void setCustomer(String customer) {
 		this.customer = customer;
+	}
+	public String getSubscription() {
+		return subscription;
+	}
+	public void setSubscription(String subscription) {
+		this.subscription = subscription;
 	}
 }

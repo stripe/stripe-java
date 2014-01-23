@@ -24,6 +24,7 @@ public class Subscription extends APIResource {
 	Long canceledAt;
 	Long endedAt;
 	Integer quantity;
+	String discount;
 
 	/** BETA ONLY (contact jim@stripe with questions) */
 	public Subscription update(Map<String, Object> params)
@@ -53,6 +54,20 @@ public class Subscription extends APIResource {
 		return request(RequestMethod.DELETE,
 				this.getInstanceURL(), params, Subscription.class,
 				apiKey);
+	}
+
+	public void deleteDiscount() throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		deleteDiscount(null);
+	}
+
+	public void deleteDiscount(String apiKey) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		request(RequestMethod.DELETE,
+				String.format("%s/discount", this.getInstanceURL()), null,
+				Discount.class, apiKey);
 	}
 
 	public String getInstanceURL() {
@@ -138,5 +153,11 @@ public class Subscription extends APIResource {
 	}
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
+	}
+	public String getDiscount() {
+		return discount;
+	}
+	public void setDiscount(String discount) {
+		this.discount = discount;
 	}
 }
