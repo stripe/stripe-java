@@ -39,7 +39,7 @@ public class CustomerSubscriptionCollection extends APIResource {
 	      String apiKey) throws AuthenticationException,
 	      InvalidRequestException, APIConnectionException, CardException,
 	      APIException {
-	    String url = String.format("%s%s", Stripe.API_BASE, this.getURL());
+	    String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
 	    return request(RequestMethod.GET, url, params,
 	        CustomerSubscriptionCollection.class, apiKey);
 	  }
@@ -54,7 +54,7 @@ public class CustomerSubscriptionCollection extends APIResource {
 	      InvalidRequestException, APIConnectionException, CardException,
 	      APIException {
 	        // TODO: URL-encode!
-	    String url = String.format("%s%s/%s", Stripe.API_BASE, this.getURL(), id);
+	    String url = String.format("%s%s/%s", Stripe.getApiBase(), this.getURL(), id);
 	    return request(RequestMethod.GET, url, null,
 	        Subscription.class, apiKey);
 	  }
@@ -69,7 +69,7 @@ public class CustomerSubscriptionCollection extends APIResource {
 	      String apiKey) throws AuthenticationException,
 	      InvalidRequestException, APIConnectionException, CardException,
 	      APIException {
-	    String url = String.format("%s%s", Stripe.API_BASE, this.getURL());
+	    String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
 	    return request(RequestMethod.POST, url, params,
 	        CustomerSubscriptionCollection.class, apiKey);
 	  }
