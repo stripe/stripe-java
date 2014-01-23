@@ -26,28 +26,24 @@ public class Subscription extends APIResource {
 	Integer quantity;
 	String discount;
 
-	/** BETA ONLY (contact jim@stripe with questions) */
 	public Subscription update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return update(params, null);
 	}
 
-	/** BETA ONLY (contact jim@stripe with questions) */
 	public Subscription update(Map<String, Object> params, String apiKey)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.POST, this.getInstanceURL(), params, Subscription.class, apiKey);
 	}
 
-	/** BETA ONLY (contact jim@stripe with questions) */
 	public Subscription cancel(Map<String, Object> params) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return cancel(null);
 	}
 
-	/** BETA ONLY (contact jim@stripe with questions) */
 	public Subscription cancel(Map<String, Object> params, String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {

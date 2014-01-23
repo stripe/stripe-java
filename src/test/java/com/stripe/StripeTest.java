@@ -511,40 +511,38 @@ public class StripeTest {
 		assertEquals(canceledSubscription.getCancelAtPeriodEnd(), true);
 	}
 
-	private static final String MULTI_SUBS_API_KEY = "sk_test_wl02TGO5CIpEU2UzQegaZ5e5";
-
 	@Test
 	public void testNewStyleSubscriptionAPI() throws StripeException {
-		Plan plan = Plan.create(getUniquePlanParams(), MULTI_SUBS_API_KEY);
-		Plan plan2 = Plan.create(getUniquePlanParams(), MULTI_SUBS_API_KEY);
-		Customer customer = Customer.create(defaultCustomerParams, MULTI_SUBS_API_KEY);
+		Plan plan = Plan.create(getUniquePlanParams());
+		Plan plan2 = Plan.create(getUniquePlanParams());
+		Customer customer = Customer.create(defaultCustomerParams);
 
 		// Create
 		Map<String, Object> subCreateParams = new HashMap<String, Object>();
 		subCreateParams.put("plan", plan.getId());
-		Subscription sub = customer.createSubscription(subCreateParams, MULTI_SUBS_API_KEY);
+		Subscription sub = customer.createSubscription(subCreateParams);
 		assertEquals(plan.getId(), sub.getPlan().getId());
-		customer = Customer.retrieve(customer.getId(), MULTI_SUBS_API_KEY);
+		customer = Customer.retrieve(customer.getId());
 		assertEquals(1, customer.getSubscriptions().getCount().intValue());
 		assertEquals(sub.getId(), customer.getSubscriptions().getData().get(0).getId());
 
 		// Retrieve
-		Subscription retrievedSub = customer.getSubscriptions().retrieve(sub.getId(), MULTI_SUBS_API_KEY);
+		Subscription retrievedSub = customer.getSubscriptions().retrieve(sub.getId());
 		assertEquals(sub.getId(), retrievedSub.getId());
 
 		// List
-		CustomerSubscriptionCollection list = customer.getSubscriptions().all(null, MULTI_SUBS_API_KEY);
+		CustomerSubscriptionCollection list = customer.getSubscriptions().all(null);
 		assertEquals(1, list.getCount().intValue());
 		assertEquals(sub.getId(), list.getData().get(0).getId());
 
 		// Update
 		Map<String, Object> subUpdateParams = new HashMap<String, Object>();
 		subUpdateParams.put("plan", plan2.getId());
-		sub = sub.update(subUpdateParams, MULTI_SUBS_API_KEY);
+		sub = sub.update(subUpdateParams);
 		assertEquals(plan2.getId(), sub.getPlan().getId());
 
 		// Cancel
-		sub = sub.cancel(null, MULTI_SUBS_API_KEY);
+		sub = sub.cancel(null);
 		assertNotNull(sub.getCanceledAt());
 	}
 

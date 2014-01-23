@@ -21,8 +21,8 @@ public class Customer extends APIResource implements MetadataStore<Customer> {
 	Long trialEnd;
 	Discount discount;
 	NextRecurringCharge nextRecurringCharge;
-	/** BETA ONLY (contact jim@stripe with questions) */
 	CustomerSubscriptionCollection subscriptions;
+	/** 1/2014: Legacy (from before multiple subscriptions per customer) */
 	Subscription subscription;
 	Boolean delinquent;
 	Integer accountBalance;
@@ -105,15 +105,16 @@ public class Customer extends APIResource implements MetadataStore<Customer> {
 		this.nextRecurringCharge = nextRecurringCharge;
 	}
 
+	/** 1/2014: Legacy (from before multiple subscriptions per customer) */
 	public Subscription getSubscription() {
 		return subscription;
 	}
 
+	/** 1/2014: Legacy (from before multiple subscriptions per customer) */
 	public void setSubscription(Subscription subscription) {
 		this.subscription = subscription;
 	}
 
-	/** BETA ONLY (contact jim@stripe with questions) */
 	public CustomerSubscriptionCollection getSubscriptions() {
 		return subscriptions;
 	}
@@ -188,25 +189,27 @@ public class Customer extends APIResource implements MetadataStore<Customer> {
 		return createCard(params, null);
 	}
 
-	/** BETA ONLY (contact jim@stripe with questions) */
 	public Subscription createSubscription(Map<String, Object> params) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 	return createSubscription(params, null);
 	}
 
+	/** 1/2014: Legacy (from before multiple subscriptions per customer) */
 	public Subscription updateSubscription(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return updateSubscription(params, null);
 	}
 
+	/** 1/2014: Legacy (from before multiple subscriptions per customer) */
 	public Subscription cancelSubscription() throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return cancelSubscription(null, null);
 	}
 
+	/** 1/2014: Legacy (from before multiple subscriptions per customer) */
 	public Subscription cancelSubscription(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -276,7 +279,6 @@ public class Customer extends APIResource implements MetadataStore<Customer> {
 				Card.class, apiKey);
 	}
 
-	/** BETA ONLY (contact jim@stripe with questions) */
 	public Subscription createSubscription(Map<String, Object> params, String apiKey) throws AuthenticationException,
 		InvalidRequestException, APIConnectionException, CardException,
 		APIException {
@@ -287,6 +289,7 @@ public class Customer extends APIResource implements MetadataStore<Customer> {
 				Subscription.class, apiKey);
 	}
 
+	/** 1/2014: Legacy (from before multiple subscriptions per customer) */
 	public Subscription updateSubscription(Map<String, Object> params,
 			String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
@@ -298,12 +301,14 @@ public class Customer extends APIResource implements MetadataStore<Customer> {
 				Subscription.class, apiKey);
 	}
 
+	/** 1/2014: Legacy (from before multiple subscriptions per customer) */
 	public Subscription cancelSubscription(String apiKey)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return cancelSubscription(null, apiKey);
 	}
 
+	/** 1/2014: Legacy (from before multiple subscriptions per customer) */
 	public Subscription cancelSubscription(Map<String, Object> params,
 			String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
