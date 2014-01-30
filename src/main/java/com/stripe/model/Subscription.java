@@ -1,5 +1,12 @@
 package com.stripe.model;
 
+import java.util.Map;
+
+import com.stripe.exception.APIConnectionException;
+import com.stripe.exception.APIException;
+import com.stripe.exception.AuthenticationException;
+import com.stripe.exception.CardException;
+import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 
 
@@ -17,6 +24,51 @@ public class Subscription extends APIResource {
 	Long canceledAt;
 	Long endedAt;
 	Integer quantity;
+	String discount;
+
+	public Subscription update(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params, null);
+	}
+
+	public Subscription update(Map<String, Object> params, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.POST, this.getInstanceURL(), params, Subscription.class, apiKey);
+	}
+
+	public Subscription cancel(Map<String, Object> params) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return cancel(null);
+	}
+
+	public Subscription cancel(Map<String, Object> params, String apiKey) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return request(RequestMethod.DELETE,
+				this.getInstanceURL(), params, Subscription.class,
+				apiKey);
+	}
+
+	public void deleteDiscount() throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		deleteDiscount(null);
+	}
+
+	public void deleteDiscount(String apiKey) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		request(RequestMethod.DELETE,
+				String.format("%s/discount", this.getInstanceURL()), null,
+				Discount.class, apiKey);
+	}
+
+	public String getInstanceURL() {
+		return String.format("%s/%s/subscriptions/%s", classURL(Customer.class), this.getCustomer(), this.getId());
+	}
 
 	public String getId() {
 		return id;
@@ -97,5 +149,11 @@ public class Subscription extends APIResource {
 	}
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
+	}
+	public String getDiscount() {
+		return discount;
+	}
+	public void setDiscount(String discount) {
+		this.discount = discount;
 	}
 }

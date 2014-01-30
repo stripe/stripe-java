@@ -19,6 +19,7 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
 	String customer;
 	String invoice;
 	Map<String, String> metadata;
+	String subscription;
 
 	public Integer getAmount() {
 		return amount;
@@ -90,6 +91,14 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
 
 	public void setMetadata(Map<String, String> metadata) {
 		this.metadata = metadata;
+	}
+
+	public String getSubscription() {
+		return subscription;
+	}
+
+	public void setSubscription(String subscription) {
+		this.subscription = subscription;
 	}
 
 	public static InvoiceItem create(Map<String, Object> params)

@@ -27,6 +27,7 @@ import com.stripe.model.Card;
 import com.stripe.model.Charge;
 import com.stripe.model.Coupon;
 import com.stripe.model.Customer;
+import com.stripe.model.CustomerSubscriptionCollection;
 import com.stripe.model.DeletedCard;
 import com.stripe.model.DeletedCoupon;
 import com.stripe.model.DeletedCustomer;
@@ -509,6 +510,42 @@ public class StripeTest {
 		assertEquals(canceledSubscription.getStatus(), "active");
 		assertEquals(canceledSubscription.getCancelAtPeriodEnd(), true);
 	}
+
+	@Test
+	public void testNewStyleSubscriptionAPI() throws StripeException {
+		Plan plan = Plan.create(getUniquePlanParams());
+		Plan plan2 = Plan.create(getUniquePlanParams());
+		Customer customer = Customer.create(defaultCustomerParams);
+
+		// Create
+		Map<String, Object> subCreateParams = new HashMap<String, Object>();
+		subCreateParams.put("plan", plan.getId());
+		Subscription sub = customer.createSubscription(subCreateParams);
+		assertEquals(plan.getId(), sub.getPlan().getId());
+		customer = Customer.retrieve(customer.getId());
+		assertEquals(1, customer.getSubscriptions().getCount().intValue());
+		assertEquals(sub.getId(), customer.getSubscriptions().getData().get(0).getId());
+
+		// Retrieve
+		Subscription retrievedSub = customer.getSubscriptions().retrieve(sub.getId());
+		assertEquals(sub.getId(), retrievedSub.getId());
+
+		// List
+		CustomerSubscriptionCollection list = customer.getSubscriptions().all(null);
+		assertEquals(1, list.getCount().intValue());
+		assertEquals(sub.getId(), list.getData().get(0).getId());
+
+		// Update
+		Map<String, Object> subUpdateParams = new HashMap<String, Object>();
+		subUpdateParams.put("plan", plan2.getId());
+		sub = sub.update(subUpdateParams);
+		assertEquals(plan2.getId(), sub.getPlan().getId());
+
+		// Cancel
+		sub = sub.cancel(null);
+		assertNotNull(sub.getCanceledAt());
+	}
+
 
 	@Test
 	public void testInvoiceItemCreate() throws StripeException {
