@@ -24,7 +24,7 @@ public class Subscription extends APIResource {
 	Long canceledAt;
 	Long endedAt;
 	Integer quantity;
-	String discount;
+	Discount discount;
 
 	public Subscription update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
@@ -150,10 +150,10 @@ public class Subscription extends APIResource {
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
 	}
-	public String getDiscount() {
+	public Discount getDiscount() {
 		return discount;
 	}
-	public void setDiscount(String discount) {
+	public void setDiscount(Discount discount) {
 		this.discount = discount;
 	}
 }
