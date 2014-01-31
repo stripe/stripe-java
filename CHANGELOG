@@ -1,3 +1,11 @@
+=== 1.7.1 2014-01-31
+
+* Fix Subscription cancel method call
+* Miscellaneous field fixups
+  - discount on Subscription is an expanded Discount, not string
+  - add missing application_fee_percent field on Subscription
+  - add missing application_fee field on Invoice
+
 === 1.7.0 2014-01-29
 
 * Add support for multiple subscriptions per customer
