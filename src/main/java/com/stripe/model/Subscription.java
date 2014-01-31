@@ -42,7 +42,7 @@ public class Subscription extends APIResource {
 	public Subscription cancel(Map<String, Object> params) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return cancel(null);
+		return cancel(params, null);
 	}
 
 	public Subscription cancel(Map<String, Object> params, String apiKey) throws AuthenticationException,
