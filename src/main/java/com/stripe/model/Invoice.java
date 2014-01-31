@@ -32,6 +32,7 @@ public class Invoice extends APIResource {
 	Integer attemptCount;
 	String currency;
 	String subscription;
+	Long applicationFee;
 
 	public Integer getSubtotal() {
 		return subtotal;
@@ -203,6 +204,14 @@ public class Invoice extends APIResource {
 
 	public void setSubscription(String subscription) {
 		this.subscription = subscription;
+	}
+
+	public Long getApplicationFee() {
+		return applicationFee;
+	}
+
+	public void setApplicationFee(Long applicationFee) {
+		this.applicationFee = applicationFee;
 	}
 
 	public static Invoice retrieve(String id) throws AuthenticationException,
