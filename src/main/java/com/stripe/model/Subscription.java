@@ -25,6 +25,7 @@ public class Subscription extends APIResource {
 	Long endedAt;
 	Integer quantity;
 	Discount discount;
+	Double applicationFeePercent;
 
 	public Subscription update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
@@ -155,5 +156,11 @@ public class Subscription extends APIResource {
 	}
 	public void setDiscount(Discount discount) {
 		this.discount = discount;
+	}
+	public Double getApplicationFeePercent() {
+		return applicationFeePercent;
+	}
+	public void setApplicationFeePercent(Double applicationFeePercent) {
+		this.applicationFeePercent = applicationFeePercent;
 	}
 }
