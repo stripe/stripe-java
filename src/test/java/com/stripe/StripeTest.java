@@ -180,10 +180,6 @@ public class StripeTest {
 		assertEquals(null, retrievedAccount.getStatementDescriptor());
 		assertEquals(false, retrievedAccount.getTransferEnabled());
 		assertEquals("usd", retrievedAccount.getDefaultCurrency());
-
-		List<String> currencies = retrievedAccount.getCurrenciesSupported();
-		assertEquals(1, currencies.size());
-		assertEquals("usd", currencies.get(0));
 	}
 
 	@Test
