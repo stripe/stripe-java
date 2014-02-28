@@ -20,6 +20,7 @@ public class Coupon extends APIResource {
 	Integer maxRedemptions;
 	Long redeemBy;
 	Integer timesRedeemed;
+	Boolean valid;
 
 	public static Coupon create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
@@ -152,5 +153,13 @@ public class Coupon extends APIResource {
 
 	public void setTimesRedeemed(Integer timesRedeemed) {
 		this.timesRedeemed = timesRedeemed;
+	}
+
+	public Boolean getValid() {
+		return valid;
+	}
+
+	public void setValid(Boolean valid) {
+		this.valid = valid;
 	}
 }
