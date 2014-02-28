@@ -1,3 +1,7 @@
+=== 1.7.2 2014-02-27
+
+* Add 'valid' field to coupon
+
 === 1.7.1 2014-01-31
 
 * Fix Subscription cancel method call
