@@ -59,8 +59,15 @@ public abstract class APIResource extends StripeObject {
 		return String.format("%ss", singleClassURL(clazz));
 	}
 
-	protected static String instanceURL(Class<?> clazz, String id) {
-		return String.format("%s/%s", classURL(clazz), id);
+	protected static String instanceURL(Class<?> clazz, String id) throws InvalidRequestException {
+		try {
+			return String.format("%s/%s", classURL(clazz), urlEncode(id));
+		} catch (UnsupportedEncodingException e) {
+			throw new InvalidRequestException("Unable to encode parameters to "
+					+ CHARSET
+					+ ". Please contact support@stripe.com for assistance.",
+					null, e);
+		}
 	}
 
 	public static final String CHARSET = "UTF-8";
@@ -78,10 +85,13 @@ public abstract class APIResource extends StripeObject {
 		GET, POST, DELETE
 	}
 
+	private static String urlEncode(String str) throws UnsupportedEncodingException {
+		return URLEncoder.encode(str, CHARSET);
+	}
+
 	private static String urlEncodePair(String k, String v)
 			throws UnsupportedEncodingException {
-		return String.format("%s=%s", URLEncoder.encode(k, CHARSET),
-				URLEncoder.encode(v, CHARSET));
+		return String.format("%s=%s", urlEncode(k), urlEncode(v));
 	}
 
 	static Map<String, String> getHeaders(String apiKey) {
