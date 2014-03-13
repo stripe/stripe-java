@@ -25,7 +25,7 @@ Add this dependency to your project's POM:
 You'll need to manually install the following JARs:
 
 * The Stripe JAR from https://code.stripe.com/stripe-java-latest.jar
-* [Google Gson](http://code.google.com/p/google-gson/) from <http://google-gson.googlecode.com/files/google-gson-2.2.2-release.zip>.
+* [Google Gson](http://code.google.com/p/google-gson/) from <http://google-gson.googlecode.com/files/google-gson-2.2.4-release.zip>.
 
 Usage
 =====
