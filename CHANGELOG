@@ -1,3 +1,8 @@
+=== 1.8.0 2014-03-12
+
+* Upgrade Google GSON to 2.2.4
+* URL-encode object ids (fixes #62)
+
 === 1.7.2 2014-02-27
 
 * Add 'valid' field to coupon
