@@ -197,6 +197,17 @@ public class StripeTest {
 	}
 
 	@Test
+	public void testChargeCreateWithStatementDescription() throws StripeException {
+		Map<String, Object> chargeWithStatementDescriptionParams = new HashMap<String, Object>();
+		chargeWithStatementDescriptionParams.putAll(defaultChargeParams);
+		chargeWithStatementDescriptionParams.put("description", "hahaha1234");
+		chargeWithStatementDescriptionParams.put("statement_description", "Stripe");
+
+		Charge createdCharge = Charge.create(chargeWithStatementDescriptionParams);
+		assertEquals("Stripe", createdCharge.getStatementDescription());
+	}
+
+	@Test
 	public void testBalanceTransactionRetrieval() throws StripeException {
 		Charge.create(defaultChargeParams);
 		BalanceTransactionCollection balanceTransactions = BalanceTransaction.all(null);
@@ -433,6 +444,14 @@ public class StripeTest {
 		Plan plan = Plan.create(getUniquePlanParams());
 		assertEquals(plan.getInterval(), "month");
 		assertEquals(plan.getIntervalCount(), (Integer) 2);
+	}
+
+	@Test
+	public void testPlanCreateWithStatementDescription() throws StripeException {
+		Map<String, Object> planParamsWithStatementDescription = getUniquePlanParams();
+		planParamsWithStatementDescription.put("statement_description", "Stripe");
+		Plan plan = Plan.create(planParamsWithStatementDescription);
+		assertEquals(plan.getStatementDescription(), "Stripe");
 	}
 
 	@Test

@@ -20,6 +20,7 @@ public class Plan extends APIResource implements MetadataStore<Plan> {
 	Boolean livemode;
 	Integer trialPeriodDays;
 	Map<String, String> metadata;
+	String statementDescription;
 
 	public static Plan create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
@@ -156,5 +157,13 @@ public class Plan extends APIResource implements MetadataStore<Plan> {
 
 	public void setMetadata(Map<String, String> metadata) {
 		this.metadata = metadata;
+	}
+
+	public String getStatementDescription() {
+		return statementDescription;
+	}
+
+	public void setStatementDescription(String statementDescription) {
+		this.statementDescription = statementDescription;
 	}
 }
