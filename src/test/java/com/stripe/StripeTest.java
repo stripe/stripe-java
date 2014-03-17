@@ -234,6 +234,17 @@ public class StripeTest {
 	}
 
 	@Test
+	public void testChargeRetrieveNullId() throws StripeException {
+		try {
+			Charge.retrieve(null);
+			assertTrue(false);
+		}
+		catch (InvalidRequestException e) {
+			// Expected
+		}
+	}
+
+	@Test
 	public void testChargeRefund() throws StripeException {
 		Charge createdCharge = Charge.create(defaultChargeParams);
 		Charge refundedCharge = createdCharge.refund();

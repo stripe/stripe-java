@@ -86,7 +86,14 @@ public abstract class APIResource extends StripeObject {
 	}
 
 	private static String urlEncode(String str) throws UnsupportedEncodingException {
-		return URLEncoder.encode(str, CHARSET);
+		// Preserve original behavior that passing null for an object id will lead
+		// to us actually making a request to /v1/foo/null
+		if (str == null) {
+			return null;
+		}
+		else {
+			return URLEncoder.encode(str, CHARSET);
+		}
 	}
 
 	private static String urlEncodePair(String k, String v)
