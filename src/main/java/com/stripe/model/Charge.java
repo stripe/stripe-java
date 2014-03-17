@@ -21,6 +21,7 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 	Boolean disputed;
 	Boolean captured;
 	String description;
+	String statementDescription;
 	String failureMessage;
 	String failureCode;
 	Integer amountRefunded;
@@ -110,6 +111,14 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getStatementDescription() {
+		return statementDescription;
+	}
+
+	public void setStatementDescription(String statementDescription) {
+		this.statementDescription = statementDescription;
 	}
 
 	public String getFailureMessage() {
