@@ -1,3 +1,8 @@
+=== 1.9.0 2014-03-17
+
+* Support for dynamic statement descriptions
+* Preserve original 'threaqd null ids through to requests' behavior
+
 === 1.8.0 2014-03-12
 
 * Upgrade Google GSON to 2.2.4
