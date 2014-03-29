@@ -1,6 +1,5 @@
 package com.stripe.model;
 
-import java.util.List;
 import java.util.Map;
 
 import com.stripe.Stripe;
@@ -9,26 +8,8 @@ import com.stripe.exception.APIException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
 
-/** BETA ONLY (contact jim@stripe with questions) */
-public class CustomerSubscriptionCollection extends APIResource {
-	  List<Subscription> data;
-	  Integer count;
-	  String url;
-
-	  public List<Subscription> getData() {
-	    return data;
-	  }
-
-	  public String getURL() {
-	    return url;
-	  }
-
-	  public Integer getCount() {
-	    return count;
-	  }
-
+public class CustomerSubscriptionCollection extends StripeColllectionAPIResource<Subscription> {
 	  public CustomerSubscriptionCollection all(Map<String, Object> params)
 	      throws AuthenticationException, InvalidRequestException,
 	      APIConnectionException, CardException, APIException {
