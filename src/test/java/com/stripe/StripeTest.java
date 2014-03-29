@@ -211,7 +211,6 @@ public class StripeTest {
 	public void testBalanceTransactionRetrieval() throws StripeException {
 		Charge.create(defaultChargeParams);
 		BalanceTransactionCollection balanceTransactions = BalanceTransaction.all(null);
-		assertTrue(balanceTransactions.getCount() > 0);
 		assertFalse(balanceTransactions.getData().isEmpty());
 		BalanceTransaction first = balanceTransactions.getData().get(0);
 		assertNotNull(first.getStatus());
@@ -549,7 +548,7 @@ public class StripeTest {
 		Subscription sub = customer.createSubscription(subCreateParams);
 		assertEquals(plan.getId(), sub.getPlan().getId());
 		customer = Customer.retrieve(customer.getId());
-		assertEquals(1, customer.getSubscriptions().getCount().intValue());
+		assertEquals(1, customer.getSubscriptions().getData().size());
 		assertEquals(sub.getId(), customer.getSubscriptions().getData().get(0).getId());
 
 		// Retrieve
@@ -558,7 +557,7 @@ public class StripeTest {
 
 		// List
 		CustomerSubscriptionCollection list = customer.getSubscriptions().all(null);
-		assertEquals(1, list.getCount().intValue());
+		assertEquals(1, list.getData().size());
 		assertEquals(sub.getId(), list.getData().get(0).getId());
 
 		// Update
