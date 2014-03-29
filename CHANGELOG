@@ -1,3 +1,8 @@
+=== 1.10.0 2014-03-28
+
+* Support for newstyle pagination API
+  (https://groups.google.com/a/lists.stripe.com/forum/#!topic/api-announce/29sLxmICA9E)
+
 === 1.9.0 2014-03-17
 
 * Support for dynamic statement descriptions
