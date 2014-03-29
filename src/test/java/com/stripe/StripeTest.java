@@ -46,7 +46,6 @@ import com.stripe.model.Recipient;
 import com.stripe.model.DeletedRecipient;
 import com.stripe.model.Refund;
 import com.stripe.model.ApplicationFee;
-import com.stripe.model.FeeRefund;
 
 public class StripeTest {
 	static Map<String, Object> defaultCardParams = new HashMap<String, Object>();
@@ -372,7 +371,7 @@ public class StripeTest {
 		Customer createdCustomer = Customer.create(defaultCustomerParams);
 		Map<String, Object> updateParams = new HashMap<String, Object>();
 		updateParams.put("description", "");
-		Customer updatedCustomer = createdCustomer.update(updateParams);
+		createdCustomer.update(updateParams);
 	}
 
 	@Test

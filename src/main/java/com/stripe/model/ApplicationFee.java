@@ -3,7 +3,6 @@ package com.stripe.model;
 import java.util.Map;
 import java.util.List;
 
-import com.stripe.Stripe;
 import com.stripe.exception.APIConnectionException;
 import com.stripe.exception.APIException;
 import com.stripe.exception.AuthenticationException;
