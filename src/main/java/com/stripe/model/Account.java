@@ -18,6 +18,9 @@ public class Account extends APIResource {
 	String email;
 	String statementDescriptor;
 	String defaultCurrency;
+	String country;
+	String timezone;
+	String displayName;
 
 	public String getId() {
 		return id;
@@ -49,6 +52,18 @@ public class Account extends APIResource {
 
 	public String getDefaultCurrency() {
 		return defaultCurrency;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public String getTimezone() {
+		return timezone;
+	}
+
+	public String getDisplayName() {
+		return displayName;
 	}
 
 	public static Account retrieve() throws AuthenticationException,
