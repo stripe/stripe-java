@@ -25,6 +25,7 @@ import com.stripe.model.BalanceTransactionCollection;
 import com.stripe.model.BankAccount;
 import com.stripe.model.Card;
 import com.stripe.model.Charge;
+import com.stripe.model.ChargeCollection;
 import com.stripe.model.Coupon;
 import com.stripe.model.Customer;
 import com.stripe.model.CustomerSubscriptionCollection;
@@ -281,6 +282,15 @@ public class StripeTest {
 		listParams.put("count", 1);
 		List<Charge> charges = Charge.all(listParams).getData();
 		assertEquals(charges.size(), 1);
+	}
+
+	@Test
+	public void testChargeListWithTotalCount() throws StripeException {
+		Map<String, Object> listParams = new HashMap<String, Object>();
+		listParams.put("include[]", "total_count");
+		ChargeCollection chargeCollection = Charge.all(listParams);
+		assertFalse(chargeCollection.getTotalCount() == null);
+		assertTrue(chargeCollection.getTotalCount() > 0);
 	}
 
 	@Test(expected = CardException.class)
