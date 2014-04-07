@@ -1,3 +1,8 @@
+=== 1.11.0 2014-04-07
+
+* upgrade customer, charge, and coupon collections to new pagination style
+* Add missing fields to Account object
+
 === 1.10.0 2014-03-28
 
 * Support for newstyle pagination API
