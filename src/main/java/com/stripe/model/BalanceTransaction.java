@@ -21,7 +21,7 @@ public class BalanceTransaction extends APIResource {
 	Long created;
 	Long availableOn;
 	String status;
-	Long fee;
+	Integer fee;
 	List<Fee> feeDetails;
 	String description;
 
@@ -97,11 +97,11 @@ public class BalanceTransaction extends APIResource {
 		this.status = status;
 	}
 
-	public Long getFee() {
+	public Integer getFee() {
 		return fee;
 	}
 
-	public void setFee(Long fee) {
+	public void setFee(Integer fee) {
 		this.fee = fee;
 	}
 
