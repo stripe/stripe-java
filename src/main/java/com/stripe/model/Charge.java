@@ -18,6 +18,7 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 	Boolean livemode;
 	Boolean paid;
 	Boolean refunded;
+	/** Legacy; use `dispute` field (https://stripe.com/docs/upgrades#2012-11-07) */
 	Boolean disputed;
 	Boolean captured;
 	String description;
