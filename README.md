@@ -1,4 +1,4 @@
-# Stripe Java Bindings
+# Stripe Java Bindings [![Build Status](https://travis-ci.org/stripe/stripe-java.svg?branch=master)](https://travis-ci.org/stripe/stripe-java)
 
 You can sign up for a Stripe account at https://stripe.com.
 
