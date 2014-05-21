@@ -1,5 +1,6 @@
 package com.stripe.model;
 
+import java.util.HashMap;
 import java.util.Map;
 
 import com.stripe.exception.APIConnectionException;
@@ -21,6 +22,8 @@ public class Recipient extends APIResource implements MetadataStore<Recipient> {
 	String email;
 	Boolean verified;
 	Map<String, String> metadata;
+	String defaultCard;
+	RecipientCardCollection cards;
 
 	public Long getCreated() {
 		return created;
@@ -68,6 +71,18 @@ public class Recipient extends APIResource implements MetadataStore<Recipient> {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getDefaultCard() {
+		return defaultCard;
+	}
+
+	public void setDefaultCard(String defaultCard) {
+		this.defaultCard = defaultCard;
+	}
+
+	public RecipientCardCollection getCards() {
+		return cards;
 	}
 
 	public BankAccount getActiveAccount() {
@@ -134,6 +149,37 @@ public class Recipient extends APIResource implements MetadataStore<Recipient> {
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return delete(null);
+	}
+
+	public Card createCard(String token) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return createCard(token, null);
+	}
+
+	public Card createCard(Map<String, Object> params) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return createCard(params, null);
+	}
+
+	public Card createCard(String token, String apiKey) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		Map<String, Object> postParams = new HashMap<String, Object>();
+		postParams.put("card", token);
+
+		return createCard(postParams, apiKey);
+	}
+
+	public Card createCard(Map<String, Object> params, String apiKey) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return request(
+				RequestMethod.POST,
+				String.format("%s/cards",
+						instanceURL(Recipient.class, this.id)), params,
+				Card.class, apiKey);
 	}
 
 	public static Recipient create(Map<String, Object> params, String apiKey)

@@ -42,9 +42,7 @@ public class EventDataDeserializerTest {
             os.write(buf,0,i);
         }
 
-
         return os.toString("utf8");
-
 
     }
 }

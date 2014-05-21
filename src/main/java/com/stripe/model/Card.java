@@ -18,6 +18,7 @@ public class Card extends APIResource {
 	String name;
 	String id;
 	String customer;
+	String recipient;
 	String addressLine1;
 	String addressLine2;
 	String addressZip;
@@ -56,7 +57,13 @@ public class Card extends APIResource {
 	}
 
 	public String getInstanceURL() {
-		return String.format("%s/%s/cards/%s", classURL(Customer.class), this.getCustomer(), this.getId());
+		if (this.getCustomer() != null) {
+			return String.format("%s/%s/cards/%s", classURL(Customer.class), this.getCustomer(), this.getId());
+		} else if (this.getRecipient() != null) {
+			return String.format("%s/%s/cards/%s", classURL(Recipient.class), this.getRecipient(), this.getId());
+		} else {
+			return null;
+		}
 	}
 
 	public String getId() {
@@ -73,6 +80,14 @@ public class Card extends APIResource {
 
 	public void setCustomer(String customer) {
 		this.customer = customer;
+	}
+
+	public String getRecipient() {
+		return recipient;
+	}
+
+	public void setRecipient(String recipient) {
+		this.recipient = recipient;
 	}
 
 	public Integer getExpMonth() {
