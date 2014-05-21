@@ -81,25 +81,25 @@ public class StripeTest {
 		uniqueParams.put("id", getUniqueCouponId());
 		return uniqueParams;
 	}
-	
-  static Map<String, Object> getInvoiceItemParams() throws StripeException {
-    Map<String, Object> params = new HashMap<String, Object>();
-		Customer customer = Customer.create(defaultCustomerParams);
-    params.put("amount", 100);
-    params.put("currency", "usd");
-    params.put("customer", customer.getId());
-    return params;
-  }
 
-  static Map<String, Object> getTransferParams() throws StripeException {
-    Map<String, Object> params = new HashMap<String, Object>();
-		Recipient recipient = Recipient.create(defaultRecipientParams);
+	static Map<String, Object> getInvoiceItemParams() throws StripeException {
+		Map<String, Object> params = new HashMap<String, Object>();
+			Customer customer = Customer.create(defaultCustomerParams);
 		params.put("amount", 100);
 		params.put("currency", "usd");
-		params.put("recipient", recipient.getId());
-		params.put("card", recipient.getDefaultCard());
-    return params;
-  }
+		params.put("customer", customer.getId());
+		return params;
+	}
+
+	static Map<String, Object> getTransferParams() throws StripeException {
+		Map<String, Object> params = new HashMap<String, Object>();
+			Recipient recipient = Recipient.create(defaultRecipientParams);
+			params.put("amount", 100);
+			params.put("currency", "usd");
+			params.put("recipient", recipient.getId());
+			params.put("card", recipient.getDefaultCard());
+		return params;
+	}
 
 	static InvoiceItem createDefaultInvoiceItem(Customer customer)
 			throws StripeException {
@@ -1346,8 +1346,8 @@ public class StripeTest {
 		testMetadata(Plan.create(getUniquePlanParams()));
 	}
 
-  @Test
-  public void testInvoiceItemMetadata() throws StripeException {
-    testMetadata(InvoiceItem.create(getInvoiceItemParams()));
-  }
+	@Test
+	public void testInvoiceItemMetadata() throws StripeException {
+		testMetadata(InvoiceItem.create(getInvoiceItemParams()));
+	}
 }
