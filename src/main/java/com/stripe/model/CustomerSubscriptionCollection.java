@@ -34,7 +34,6 @@ public class CustomerSubscriptionCollection extends StripeColllectionAPIResource
 	  public Subscription retrieve(String id, String apiKey) throws AuthenticationException,
 	      InvalidRequestException, APIConnectionException, CardException,
 	      APIException {
-	        // TODO: URL-encode!
 	    String url = String.format("%s%s/%s", Stripe.getApiBase(), this.getURL(), id);
 	    return request(RequestMethod.GET, url, null,
 	        Subscription.class, apiKey);

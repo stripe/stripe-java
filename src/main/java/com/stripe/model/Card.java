@@ -59,8 +59,10 @@ public class Card extends APIResource {
 	public String getInstanceURL() {
 		if (this.getCustomer() != null) {
 			return String.format("%s/%s/cards/%s", classURL(Customer.class), this.getCustomer(), this.getId());
-		} else {
+		} else if (this.getRecipient() != null) {
 			return String.format("%s/%s/cards/%s", classURL(Recipient.class), this.getRecipient(), this.getId());
+		} else {
+			return null;
 		}
 	}
 

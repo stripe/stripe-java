@@ -34,7 +34,6 @@ public class CustomerCardCollection extends StripeColllectionAPIResource<Card> {
   public Card retrieve(String id, String apiKey) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
-        // TODO: URL-encode!
     String url = String.format("%s%s/%s", Stripe.getApiBase(), this.getURL(), id);
     return request(RequestMethod.GET, url, null,
         Card.class, apiKey);
