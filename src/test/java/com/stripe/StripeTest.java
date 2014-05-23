@@ -770,6 +770,12 @@ public class StripeTest {
 		assertEquals("pending", createdTransfer.getStatus());
 	}
 
+	@Test(expected=InvalidRequestException.class)
+	public void testTransferCancel() throws StripeException {
+		Transfer createdTransfer = Transfer.create(getTransferParams());
+		createdTransfer.cancel();
+	}
+
 	@Test
 	public void testTransferRetrieve() throws StripeException {
 		Transfer createdTransfer = Transfer.create(getTransferParams());
