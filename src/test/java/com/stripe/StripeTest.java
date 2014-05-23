@@ -680,6 +680,25 @@ public class StripeTest {
 	}
 
 	@Test
+	public void testUpcomingInvoiceLines() throws Exception {
+		Customer customer = Customer.create(defaultCustomerParams);
+		InvoiceItem item = createDefaultInvoiceItem(customer);
+		Map<String, Object> upcomingParams = new HashMap<String, Object>();
+		upcomingParams.put("customer", customer.getId());
+		Invoice upcomingInvoice = Invoice.upcoming(upcomingParams);
+		assertFalse(upcomingInvoice.getAttempted());
+
+		InvoiceLineItemCollection lines = upcomingInvoice.getLines().all(null);
+		assertFalse(lines.getData().isEmpty());
+		assertEquals(item.getId(), lines.getData().get(0).getId());
+
+		Map<String, Object> fetchParams = new HashMap<String, Object>();
+		fetchParams.put("starting_after", item.getId());
+		InvoiceLineItemCollection linesAfterFirst = upcomingInvoice.getLines().all(fetchParams);
+		assertTrue(linesAfterFirst.getData().isEmpty());
+	}
+
+	@Test
 	public void testTokenCreate() throws StripeException {
 		Token token = Token.create(defaultTokenParams);
 		assertFalse(token.getUsed());
