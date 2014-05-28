@@ -775,7 +775,7 @@ public class StripeTest {
 		Transfer createdTransfer = Transfer.create(getTransferParams());
 		createdTransfer.cancel();
 
-		// post-cndition: we except a InvalidRequestException here (caught by JUnit) 
+		// post-condition: we expect an InvalidRequestException here (caught by JUnit),
 		// because in test mode, transfers are automatically sent
 	}
 
