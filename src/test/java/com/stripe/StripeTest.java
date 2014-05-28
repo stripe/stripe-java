@@ -770,6 +770,15 @@ public class StripeTest {
 		assertEquals("pending", createdTransfer.getStatus());
 	}
 
+	@Test(expected=InvalidRequestException.class)
+	public void testTransferCancel() throws StripeException {
+		Transfer createdTransfer = Transfer.create(getTransferParams());
+		createdTransfer.cancel();
+
+		// post-condition: we expect an InvalidRequestException here (caught by JUnit),
+		// because in test mode, transfers are automatically sent
+	}
+
 	@Test
 	public void testTransferRetrieve() throws StripeException {
 		Transfer createdTransfer = Transfer.create(getTransferParams());

@@ -150,6 +150,12 @@ public class Transfer extends APIResource implements MetadataStore<Transfer> {
 		return retrieve(id, null);
 	}
 
+	public Transfer cancel()
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return cancel(null);
+	}
+
 	public Transfer update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -180,6 +186,14 @@ public class Transfer extends APIResource implements MetadataStore<Transfer> {
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.POST,
 				instanceURL(Transfer.class, this.id), params, Transfer.class,
+				apiKey);
+	}
+
+	public Transfer cancel(String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.POST,
+				instanceURL(Transfer.class, this.id) + "/cancel", null, Transfer.class,
 				apiKey);
 	}
 
