@@ -9,7 +9,7 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 
-public class Invoice extends APIResource {
+public class Invoice extends APIResource implements MetadataStore<Invoice>{
 	Integer subtotal;
 	Integer total;
 	Integer amountDue;
@@ -33,6 +33,7 @@ public class Invoice extends APIResource {
 	String currency;
 	String subscription;
 	Long applicationFee;
+	Map<String, String> metadata;
 
 	public Integer getSubtotal() {
 		return subtotal;
@@ -293,5 +294,13 @@ public class Invoice extends APIResource {
 		return request(RequestMethod.POST, String.format("%s/pay",
 				instanceURL(Invoice.class, this.getId())), null, Invoice.class,
 				apiKey);
+	}
+
+	public Map<String, String> getMetadata() {
+		return metadata;
+	}
+
+	public void setMetadata(Map<String, String> metadata) {
+		this.metadata = metadata;
 	}
 }

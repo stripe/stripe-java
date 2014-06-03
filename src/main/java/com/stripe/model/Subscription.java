@@ -10,7 +10,7 @@ import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 
 
-public class Subscription extends APIResource {
+public class Subscription extends APIResource implements MetadataStore<Subscription>{
 	String id;
 	Long currentPeriodEnd;
 	Long currentPeriodStart;
@@ -26,6 +26,7 @@ public class Subscription extends APIResource {
 	Integer quantity;
 	Discount discount;
 	Double applicationFeePercent;
+	Map<String, String> metadata;
 
 	public Subscription update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
@@ -162,5 +163,14 @@ public class Subscription extends APIResource {
 	}
 	public void setApplicationFeePercent(Double applicationFeePercent) {
 		this.applicationFeePercent = applicationFeePercent;
+	}
+
+	public Map<String, String> getMetadata() {
+		return metadata;
+	}
+
+	public void setMetadata(Map<String, String> metadata) {
+		this.metadata = metadata;
+		
 	}
 }

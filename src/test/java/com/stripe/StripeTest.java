@@ -126,7 +126,15 @@ public class StripeTest {
 		Recipient recipient = Recipient.create(recipientParams);
 		return recipient;
 	}
-
+	
+	static Map<String, Object> getSubscriptionParams() throws StripeException {
+		Plan plan = Plan.create(getUniquePlanParams());
+		Map<String, Object> subscriptionParams = new HashMap<String, Object>();
+		subscriptionParams.put("plan", plan.getId());
+		return subscriptionParams;
+	}	
+	
+	
 	@BeforeClass
 	public static void setUp() {
 		Stripe.apiKey = "tGN0bIwXnHdwOa85VABjPdSn8nWY7G7I"; // stripe public
@@ -1378,4 +1386,19 @@ public class StripeTest {
 	public void testInvoiceItemMetadata() throws StripeException {
 		testMetadata(InvoiceItem.create(getInvoiceItemParams()));
 	}
+	
+	@Test
+	public void testInvoiceMetadata() throws StripeException {
+		InvoiceItem invItem = InvoiceItem.create(getInvoiceItemParams());
+		Map<String,Object> params = new HashMap<String,Object>();
+		params.put("customer", invItem.getCustomer());
+		testMetadata(Invoice.create(params));
+	}
+
+	@Test
+	public void testSubscriptionMetadata() throws StripeException {
+		Customer customer = Customer.create(defaultCustomerParams);
+		testMetadata(customer.createSubscription(getSubscriptionParams()));
+	}
+	
 }
