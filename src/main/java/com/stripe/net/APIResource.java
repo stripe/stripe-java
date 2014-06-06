@@ -136,7 +136,7 @@ public abstract class APIResource extends StripeObject {
 		return headers;
 	}
 
-	private static javax.net.ssl.HttpsURLConnection createStripeConnection(
+	private static java.net.HttpURLConnection createStripeConnection(
 			String url, String apiKey) throws IOException {
 		URL stripeURL = null;
 		String customURLStreamHandlerClassName = System.getProperty(
@@ -168,8 +168,7 @@ public abstract class APIResource extends StripeObject {
 		} else {
 			stripeURL = new URL(url);
 		}
-		javax.net.ssl.HttpsURLConnection conn = (javax.net.ssl.HttpsURLConnection) stripeURL
-				.openConnection();
+		java.net.HttpURLConnection conn = (java.net.HttpURLConnection) stripeURL.openConnection();
 		conn.setConnectTimeout(30 * 1000);
 		conn.setReadTimeout(80 * 1000);
 		conn.setUseCaches(false);
@@ -184,8 +183,15 @@ public abstract class APIResource extends StripeObject {
 		throw new APIConnectionException("Invalid server certificate. You tried to connect to a server that has a revoked SSL certificate, which means we cannot securely send data to that server. Please email support@stripe.com if you need help connecting to the correct API server.");
 	}
 
-	private static void checkSSLCert(javax.net.ssl.HttpsURLConnection conn) throws IOException, APIConnectionException {
-		conn.connect();
+	private static void checkSSLCert(java.net.HttpURLConnection hconn) throws IOException, APIConnectionException {
+		hconn.connect();
+
+		if (hconn.getURL().getProtocol() != "https") {
+			return;
+		}
+
+		javax.net.ssl.HttpsURLConnection conn = (javax.net.ssl.HttpsURLConnection) hconn;
+
 		Certificate[] certs = conn.getServerCertificates();
 
 		try {
@@ -218,10 +224,10 @@ public abstract class APIResource extends StripeObject {
 		}
 	}
 
-	private static javax.net.ssl.HttpsURLConnection createGetConnection(
+	private static java.net.HttpURLConnection createGetConnection(
 			String url, String query, String apiKey) throws IOException, APIConnectionException {
 		String getURL = formatURL(url, query);
-		javax.net.ssl.HttpsURLConnection conn = createStripeConnection(getURL,
+		java.net.HttpURLConnection conn = createStripeConnection(getURL,
 				apiKey);
 		conn.setRequestMethod("GET");
 
@@ -230,9 +236,9 @@ public abstract class APIResource extends StripeObject {
 		return conn;
 	}
 
-	private static javax.net.ssl.HttpsURLConnection createPostConnection(
+	private static java.net.HttpURLConnection createPostConnection(
 			String url, String query, String apiKey) throws IOException, APIConnectionException {
-		javax.net.ssl.HttpsURLConnection conn = createStripeConnection(url,
+		java.net.HttpURLConnection conn = createStripeConnection(url,
 				apiKey);
 
 		conn.setDoOutput(true);
@@ -254,10 +260,10 @@ public abstract class APIResource extends StripeObject {
 		return conn;
 	}
 
-	private static javax.net.ssl.HttpsURLConnection createDeleteConnection(
+	private static java.net.HttpURLConnection createDeleteConnection(
 			String url, String query, String apiKey) throws IOException, APIConnectionException {
 		String deleteUrl = formatURL(url, query);
-		javax.net.ssl.HttpsURLConnection conn = createStripeConnection(
+		java.net.HttpURLConnection conn = createStripeConnection(
 				deleteUrl, apiKey);
 		conn.setRequestMethod("DELETE");
 
@@ -343,7 +349,7 @@ public abstract class APIResource extends StripeObject {
 	private static StripeResponse makeURLConnectionRequest(
 			APIResource.RequestMethod method, String url, String query,
 			String apiKey) throws APIConnectionException {
-		javax.net.ssl.HttpsURLConnection conn = null;
+		java.net.HttpURLConnection conn = null;
 		try {
 			switch (method) {
 			case GET:
