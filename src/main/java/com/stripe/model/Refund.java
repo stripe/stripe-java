@@ -5,7 +5,11 @@ public class Refund extends StripeObject {
 	String currency;
 	Long created;
 	String balanceTransaction;
+	String id;
 
+	public String getId() {
+		return id;
+	}
 	public Integer getAmount() {
 		return amount;
 	}

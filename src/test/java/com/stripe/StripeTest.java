@@ -26,6 +26,7 @@ import com.stripe.model.BankAccount;
 import com.stripe.model.Card;
 import com.stripe.model.Charge;
 import com.stripe.model.ChargeCollection;
+import com.stripe.model.ChargeRefundCollection;
 import com.stripe.model.Coupon;
 import com.stripe.model.Customer;
 import com.stripe.model.CustomerSubscriptionCollection;
@@ -277,9 +278,10 @@ public class StripeTest {
 		Charge createdCharge = Charge.create(defaultChargeParams);
 		Charge refundedCharge = createdCharge.refund();
 		assertTrue(refundedCharge.getRefunded());
-		assertTrue(refundedCharge.getRefunds() instanceof List);
-		assertEquals(1, refundedCharge.getRefunds().size());
-		assertTrue(refundedCharge.getRefunds().get(0) instanceof Refund);
+		ChargeRefundCollection refunds = refundedCharge.getRefunds();
+		assertTrue(refunds.getData() instanceof List);
+		assertEquals(1, refunds.getData().size());
+		assertTrue(refunds.getData().get(0) instanceof Refund);
 	}
 
 	@Test
