@@ -7,6 +7,7 @@ public abstract class Stripe
 	public static volatile String apiKey;
 	public static volatile String apiVersion;
 
+	private static volatile boolean verifySSL = true;
 	private static volatile String apiBase = LIVE_API_BASE;
 
 	/**
@@ -16,6 +17,19 @@ public abstract class Stripe
 	 */
 	public static void overrideApiBase(final String overriddenApiBase) {
 		apiBase = overriddenApiBase;
+	}
+
+	/**
+	 * (FOR TESTING ONLY)
+	 * Only disable SSL verification if you're using your own (mocked) server.
+	 * Disabling verification on stripe.com is not supported
+	 */
+	public static void setVerifySSL(boolean verify) {
+		verifySSL = verify;
+	}
+
+	public static boolean getVerifySSL() {
+		return verifySSL;
 	}
 
 	public static String getApiBase() {

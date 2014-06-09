@@ -184,13 +184,12 @@ public abstract class APIResource extends StripeObject {
 	}
 
 	private static void checkSSLCert(java.net.HttpURLConnection hconn) throws IOException, APIConnectionException {
-		hconn.connect();
-
-		if (hconn.getURL().getProtocol() != "https") {
+		if (!Stripe.getVerifySSL() && !hconn.getURL().getHost().equals("api.stripe.com")) {
 			return;
 		}
 
 		javax.net.ssl.HttpsURLConnection conn = (javax.net.ssl.HttpsURLConnection) hconn;
+		conn.connect();
 
 		Certificate[] certs = conn.getServerCertificates();
 
