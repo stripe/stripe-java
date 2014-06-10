@@ -196,6 +196,11 @@ public class StripeTest {
 	}
 
 	@Test
+	public void testAPIBase() throws StripeException {
+		assertEquals("https://api.stripe.com", Stripe.getApiBase());
+	}
+
+	@Test
 	public void testAccountRetrieve() throws StripeException {
 		Account retrievedAccount = Account.retrieve();
 		assertEquals("test+bindings@stripe.com", retrievedAccount.getEmail());
