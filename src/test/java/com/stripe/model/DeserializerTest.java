@@ -13,12 +13,12 @@ import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
-public class EventDataDeserializerTest {
+public class DeserializerTest {
 
 	private static Gson gson  = com.stripe.net.APIResource.GSON;
 
 	@Test
-	public void deserializePreviousAttributes() throws IOException {
+	public void deserializeEventDataPreviousAttributes() throws IOException {
 
 		String json = resource("previous_attributes.json");
 		EventData ed = gson.fromJson(json,EventData.class);
@@ -27,7 +27,7 @@ public class EventDataDeserializerTest {
 	}
 
 	@Test
-	public void deserializeAccountEvent() throws IOException {
+	public void deserializeEventDataAccountEvent() throws IOException {
 		String json = resource("account_event.json");
 		Event e = StripeObject.PRETTY_PRINT_GSON.fromJson(json, Event.class);
 
