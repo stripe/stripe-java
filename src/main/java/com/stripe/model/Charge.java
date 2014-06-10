@@ -162,6 +162,9 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 	}
 
 	public ChargeRefundCollection getRefunds() {
+		if (refunds.getURL() == null) {
+			refunds.setURL(String.format("/v1/charges/%s/refunds", getId()));
+		}
 		return refunds;
 	}
 

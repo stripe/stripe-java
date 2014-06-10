@@ -39,18 +39,18 @@ public class ChargeRefundCollection extends StripeColllectionAPIResource<Refund>
 				Refund.class, apiKey);
 	}
 
-	public ChargeRefundCollection create(Map<String, Object> params)
+	public Refund create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return create(params, null);
 	}
 
-	public ChargeRefundCollection create(Map<String, Object> params,
+	public Refund create(Map<String, Object> params,
 			String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
 		return request(RequestMethod.POST, url, params,
-				ChargeRefundCollection.class, apiKey);
+				Refund.class, apiKey);
 	}
 }

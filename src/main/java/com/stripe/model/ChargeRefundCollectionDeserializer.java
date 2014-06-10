@@ -28,7 +28,7 @@ public class ChargeRefundCollectionDeserializer implements JsonDeserializer<Char
 			.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
 			.create();
 
-		// Before Version 2014-06-01, refunds was a JSON array instead of a sublist
+		// API versions 2014-05-19 and earlier render charge refunds as an array instead of an object
 		if (json.isJsonArray()) {
 			Type refundListType = new TypeToken<List<Refund>>() {}.getType();
 			List<Refund> refunds = gson.fromJson(json, refundListType);
