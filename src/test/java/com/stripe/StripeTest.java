@@ -444,6 +444,21 @@ public class StripeTest {
 	}
 
 	@Test
+	public void testCreateCardThroughCollection() throws StripeException {
+		Customer createdCustomer = Customer.create(defaultCustomerParams);
+
+		Map<String, Object> creationParams = new HashMap<String, Object>();
+		creationParams.put("card", defaultCardParams);
+		Card addedCard = createdCustomer.getCards().create(creationParams);
+
+		assertEquals(createdCustomer.getId(), addedCard.getCustomer());
+
+		Customer updatedCustomer = Customer.retrieve(createdCustomer.getId());
+		assertEquals((Integer) updatedCustomer.getCards().getData().size(), (Integer) 2);
+	}
+
+
+	@Test
 	public void testCustomerCardUpdate() throws StripeException {
 		Customer customer = Customer.create(defaultCustomerParams);
 		Card originalCard = customer.getCards().getData().get(0);
@@ -604,6 +619,23 @@ public class StripeTest {
 		assertNotNull(sub.getCanceledAt());
 	}
 
+	@Test
+	public void testCreateSubscriptionThroughCollection() throws StripeException {
+		Plan plan = Plan.create(getUniquePlanParams());
+		Customer customer = Customer.create(defaultCustomerParams);
+
+		// Create
+		Map<String, Object> subCreateParams = new HashMap<String, Object>();
+		subCreateParams.put("plan", plan.getId());
+
+		Subscription sub = customer.getSubscriptions().create(subCreateParams);
+		assertEquals(plan.getId(), sub.getPlan().getId());
+
+		// Verify
+		customer = Customer.retrieve(customer.getId());
+		assertEquals(1, customer.getSubscriptions().getData().size());
+		assertEquals(sub.getId(), customer.getSubscriptions().getData().get(0).getId());
+	}
 
 	@Test
 	public void testInvoiceItemCreate() throws StripeException {

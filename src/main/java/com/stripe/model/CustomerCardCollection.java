@@ -39,18 +39,18 @@ public class CustomerCardCollection extends StripeColllectionAPIResource<Card> {
         Card.class, apiKey);
   }
 
-  public CustomerCardCollection create(Map<String, Object> params)
+  public Card create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return create(params, null);
   }
 
-  public CustomerCardCollection create(Map<String, Object> params,
+  public Card create(Map<String, Object> params,
       String apiKey) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
     return request(RequestMethod.POST, url, params,
-        CustomerCardCollection.class, apiKey);
+        Card.class, apiKey);
   }
 }

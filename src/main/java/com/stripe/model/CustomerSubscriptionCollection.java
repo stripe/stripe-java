@@ -39,18 +39,18 @@ public class CustomerSubscriptionCollection extends StripeColllectionAPIResource
 	        Subscription.class, apiKey);
 	  }
 
-	  public CustomerSubscriptionCollection create(Map<String, Object> params)
+	  public Subscription create(Map<String, Object> params)
 	      throws AuthenticationException, InvalidRequestException,
 	      APIConnectionException, CardException, APIException {
 	    return create(params, null);
 	  }
 
-	  public CustomerSubscriptionCollection create(Map<String, Object> params,
+	  public Subscription create(Map<String, Object> params,
 	      String apiKey) throws AuthenticationException,
 	      InvalidRequestException, APIConnectionException, CardException,
 	      APIException {
 	    String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
 	    return request(RequestMethod.POST, url, params,
-	        CustomerSubscriptionCollection.class, apiKey);
+	        Subscription.class, apiKey);
 	  }
 }
