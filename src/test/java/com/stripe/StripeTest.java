@@ -26,6 +26,7 @@ import com.stripe.model.BankAccount;
 import com.stripe.model.Card;
 import com.stripe.model.Charge;
 import com.stripe.model.ChargeCollection;
+import com.stripe.model.ChargeRefundCollection;
 import com.stripe.model.Coupon;
 import com.stripe.model.Customer;
 import com.stripe.model.CustomerSubscriptionCollection;
@@ -277,10 +278,75 @@ public class StripeTest {
 		Charge createdCharge = Charge.create(defaultChargeParams);
 		Charge refundedCharge = createdCharge.refund();
 		assertTrue(refundedCharge.getRefunded());
-		assertTrue(refundedCharge.getRefunds() instanceof List);
-		assertEquals(1, refundedCharge.getRefunds().size());
-		assertTrue(refundedCharge.getRefunds().get(0) instanceof Refund);
+		ChargeRefundCollection refunds = refundedCharge.getRefunds();
+		assertTrue(refunds.getData() instanceof List);
+		assertEquals(1, refunds.getData().size());
+		assertTrue(refunds.getData().get(0) instanceof Refund);
 	}
+
+	@Test
+	public void testChargeRefundUpdateApiKey() throws StripeException {
+		Charge createdCharge = Charge.create(defaultChargeParams);
+		ChargeRefundCollection refunds = createdCharge.refund().getRefunds();
+		Refund refund = refunds.getData().get(0);
+
+		Map<String, String> metadata = new HashMap<String, String>();
+		metadata.put("foo", "bar");
+
+		Map<String, Object> updateParams = new HashMap<String, Object>();
+		updateParams.put("metadata", metadata);
+		refund = refund.update(updateParams, Stripe.apiKey);
+
+		assertEquals("bar", refund.getMetadata().get("foo"));
+	}
+
+	@Test
+	public void testChargeRefundCreate() throws StripeException {
+		Charge ch = Charge.create(defaultChargeParams);
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("amount", 10);
+		ChargeRefundCollection refunds = ch.getRefunds();
+		Refund created = refunds.create(params);
+		Refund retrieved = ch.getRefunds().retrieve(created.getId());
+		assertEquals(created.getId(), retrieved.getId());
+	}
+
+	@Test
+	public void testChargeRefundCreateApiKey() throws StripeException {
+		Charge ch = Charge.create(defaultChargeParams);
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("amount", 10);
+		Refund created = ch.getRefunds().create(params, Stripe.apiKey);
+		Refund retrieved = ch.getRefunds().retrieve(created.getId(), Stripe.apiKey);
+		assertEquals(created.getId(), retrieved.getId());
+	}
+
+	@Test
+	public void testChargeRefundListAndRetrieve()
+			throws StripeException {
+		Charge ch = Charge.create(defaultChargeParams);
+		ch = ch.refund();
+		Map<String, Object> listParams = new HashMap<String, Object>();
+		listParams.put("count", 1);
+		Refund created = ch.getRefunds().all(listParams).getData().get(0);
+		Refund retrieved = ch.getRefunds().retrieve(created.getId());
+		assertEquals(created.getId(), retrieved.getId());
+	}
+
+
+	@Test
+	public void testChargeRefundListAndRetrievePerCallAPIKey()
+			throws StripeException {
+		Charge ch = Charge.create(defaultChargeParams);
+		ch = ch.refund();
+		Map<String, Object> listParams = new HashMap<String, Object>();
+		listParams.put("count", 1);
+		Refund created = ch.getRefunds().all(listParams,
+				Stripe.apiKey).getData().get(0);
+		Refund retrieved = ch.getRefunds().retrieve(created.getId(), Stripe.apiKey);
+		assertEquals(created.getId(), retrieved.getId());
+	}
+
 
 	@Test
 	public void testChargeCapture() throws StripeException {
@@ -1437,5 +1503,12 @@ public class StripeTest {
 		Customer customer = Customer.create(defaultCustomerParams);
 		testMetadata(customer.createSubscription(getSubscriptionParams()));
 	}
-	
+
+	@Test
+	public void testRefundMetadata() throws StripeException {
+		Charge createdCharge = Charge.create(defaultChargeParams);
+		Charge refundedCharge = createdCharge.refund();
+		testMetadata(refundedCharge.getRefunds().getData().get(0));
+	}
+
 }

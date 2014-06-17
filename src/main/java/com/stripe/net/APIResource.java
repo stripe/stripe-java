@@ -32,6 +32,8 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.model.EventData;
 import com.stripe.model.EventDataDeserializer;
+import com.stripe.model.ChargeRefundCollection;
+import com.stripe.model.ChargeRefundCollectionDeserializer;
 import com.stripe.model.StripeObject;
 import com.stripe.model.StripeRawJsonObject;
 import com.stripe.model.StripeRawJsonObjectDeserializer;
@@ -41,19 +43,20 @@ public abstract class APIResource extends StripeObject {
 	public static final Gson GSON = new GsonBuilder()
 			.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
 			.registerTypeAdapter(EventData.class, new EventDataDeserializer())
+			.registerTypeAdapter(ChargeRefundCollection.class, new ChargeRefundCollectionDeserializer())
 			.registerTypeAdapter(StripeRawJsonObject.class, new StripeRawJsonObjectDeserializer())
 			.create();
 
 	private static String className(Class<?> clazz) {
-    String className = clazz.getSimpleName().toLowerCase().replace("$", " ");
+		String className = clazz.getSimpleName().toLowerCase().replace("$", " ");
 
-    // TODO: Delurk this, with invoiceitem being a valid url, we can't get too
-    // fancy yet.
-    if (className.equals("applicationfee")) {
-      return "application_fee";
-    } else {
-      return className;
-    }
+		// TODO: Delurk this, with invoiceitem being a valid url, we can't get too
+		// fancy yet.
+		if (className.equals("applicationfee")) {
+			return "application_fee";
+		} else {
+			return className;
+		}
 	}
 
 	protected static String singleClassURL(Class<?> clazz) {
@@ -276,9 +279,9 @@ public abstract class APIResource extends StripeObject {
 		Map<String, String> flatParams = flattenParams(params);
 		StringBuilder queryStringBuffer = new StringBuilder();
 		for (Map.Entry<String, String> entry : flatParams.entrySet()) {
-                        if (queryStringBuffer.length() > 0) {
-                            queryStringBuffer.append("&");
-                        }
+			if (queryStringBuffer.length() > 0) {
+				queryStringBuffer.append("&");
+			}
 			queryStringBuffer.append(urlEncodePair(entry.getKey(),
 					entry.getValue()));
 		}
