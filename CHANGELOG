@@ -1,3 +1,9 @@
+=== 1.15.0 2014-06-17
+
+* Added metadata to Refund
+* Added metadata to Dispute
+* Fixed incorrect return types for certain collection resources
+
 === 1.14.1 2014-06-04
 
 * Added metadata to Subscription
