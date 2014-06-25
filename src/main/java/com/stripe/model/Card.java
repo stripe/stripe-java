@@ -29,6 +29,8 @@ public class Card extends APIResource {
 	String addressLine1Check;
 	String cvcCheck;
 	String fingerprint;
+	String brand;
+	String funding;
 
 	public Card update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
@@ -185,5 +187,17 @@ public class Card extends APIResource {
 	}
 	public void setFingerprint(String fingerprint) {
 		this.fingerprint = fingerprint;
+	}
+	public String getBrand() {
+		return brand;
+	}
+	public void setBrand(String brand) {
+		this.brand = brand;
+	}
+	public String getFunding() {
+		return funding;
+	}
+	public void setFunding(String funding) {
+		this.funding = funding;
 	}
 }
