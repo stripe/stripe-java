@@ -17,7 +17,7 @@ public class Coupon extends APIResource {
 	String id;
 	Boolean livemode;
 	Integer durationInMonths;
-	Integer maxRedemptions;
+	Long maxRedemptions;
 	Long redeemBy;
 	Integer timesRedeemed;
 	Boolean valid;
@@ -131,11 +131,11 @@ public class Coupon extends APIResource {
 		this.durationInMonths = durationInMonths;
 	}
 
-	public Integer getMaxRedemptions() {
+	public Long getMaxRedemptions() {
 		return maxRedemptions;
 	}
 
-	public void setMaxRedemptions(Integer maxRedemptions) {
+	public void setMaxRedemptions(Long maxRedemptions) {
 		this.maxRedemptions = maxRedemptions;
 	}
 
