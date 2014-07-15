@@ -19,6 +19,12 @@ Add this dependency to your project's POM:
       <artifactId>stripe-java</artifactId>
       <version>1.15.1</version>
     </dependency>
+    
+### Gradle users
+
+Add this dependency to your project's build file:
+
+    compile "com.stripe:stripe-java:1.15.1"
 
 ### Others
 
