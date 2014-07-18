@@ -97,10 +97,20 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 		this.captured = captured;
 	}
 
+	/**
+	 * @deprecated
+	 * Use `dispute` field (https://stripe.com/docs/upgrades#2012-11-07)
+	 */
+	@Deprecated
 	public Boolean getDisputed() {
 		return disputed;
 	}
 
+	/**
+	 * @deprecated
+	 * Use `dispute` field (https://stripe.com/docs/upgrades#2012-11-07)
+	 */
+	@Deprecated
 	public void setDisputed(Boolean disputed) {
 		this.disputed = disputed;
 	}
