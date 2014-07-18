@@ -34,6 +34,7 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>{
 	String subscription;
 	Long applicationFee;
 	Map<String, String> metadata;
+	Boolean forgiven;
 
 	public Integer getSubtotal() {
 		return subtotal;
@@ -145,6 +146,14 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>{
 
 	public void setPaid(Boolean paid) {
 		this.paid = paid;
+	}
+
+	public Boolean getForgiven() {
+		return forgiven;
+	}
+
+	public void setForgiven(Boolean forgiven) {
+		this.forgiven = forgiven;
 	}
 
 	public Long getPeriodStart() {
