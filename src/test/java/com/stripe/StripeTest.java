@@ -18,7 +18,9 @@ import org.junit.Test;
 import com.stripe.exception.CardException;
 import com.stripe.exception.StripeException;
 import com.stripe.exception.InvalidRequestException;
+
 import com.stripe.model.Account;
+import com.stripe.model.ApplicationFee;
 import com.stripe.model.Balance;
 import com.stripe.model.BalanceTransaction;
 import com.stripe.model.BalanceTransactionCollection;
@@ -34,20 +36,20 @@ import com.stripe.model.DeletedCard;
 import com.stripe.model.DeletedCoupon;
 import com.stripe.model.DeletedCustomer;
 import com.stripe.model.DeletedInvoiceItem;
+import com.stripe.model.DeletedRecipient;
 import com.stripe.model.DeletedPlan;
 import com.stripe.model.Event;
+import com.stripe.model.FeeRefundCollection;
 import com.stripe.model.Invoice;
 import com.stripe.model.InvoiceItem;
 import com.stripe.model.InvoiceLineItemCollection;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.Plan;
+import com.stripe.model.Recipient;
+import com.stripe.model.Refund;
 import com.stripe.model.Subscription;
 import com.stripe.model.Token;
 import com.stripe.model.Transfer;
-import com.stripe.model.Recipient;
-import com.stripe.model.DeletedRecipient;
-import com.stripe.model.Refund;
-import com.stripe.model.ApplicationFee;
 
 public class StripeTest {
 	static Map<String, Object> defaultCardParams = new HashMap<String, Object>();
@@ -127,15 +129,15 @@ public class StripeTest {
 		Recipient recipient = Recipient.create(recipientParams);
 		return recipient;
 	}
-	
+
 	static Map<String, Object> getSubscriptionParams() throws StripeException {
 		Plan plan = Plan.create(getUniquePlanParams());
 		Map<String, Object> subscriptionParams = new HashMap<String, Object>();
 		subscriptionParams.put("plan", plan.getId());
 		return subscriptionParams;
-	}	
-	
-	
+	}
+
+
 	@BeforeClass
 	public static void setUp() {
 		Stripe.apiKey = "tGN0bIwXnHdwOa85VABjPdSn8nWY7G7I"; // stripe public
@@ -553,7 +555,7 @@ public class StripeTest {
 		assertTrue(deletedCard.getDeleted());
 		assertEquals(deletedCard.getId(), card.getId());
 		for(Card retrievedCard : retrievedCustomer.getCards().getData()) {
-		    assertFalse("Card was not actually deleted: " + card.getId(), card.getId().equals(retrievedCard.getId()));
+				assertFalse("Card was not actually deleted: " + card.getId(), card.getId().equals(retrievedCard.getId()));
 		}
 	}
 
@@ -990,7 +992,7 @@ public class StripeTest {
 		assertTrue(deletedCard.getDeleted());
 		assertEquals(deletedCard.getId(), card.getId());
 		for(Card retrievedCard : retrievedRecipient.getCards().getData()) {
-		    assertFalse("Card was not actually deleted: " + card.getId(), card.getId().equals(retrievedCard.getId()));
+				assertFalse("Card was not actually deleted: " + card.getId(), card.getId().equals(retrievedCard.getId()));
 		}
 	}
 
@@ -1489,7 +1491,7 @@ public class StripeTest {
 	public void testInvoiceItemMetadata() throws StripeException {
 		testMetadata(InvoiceItem.create(getInvoiceItemParams()));
 	}
-	
+
 	@Test
 	public void testInvoiceMetadata() throws StripeException {
 		InvoiceItem invItem = InvoiceItem.create(getInvoiceItemParams());
