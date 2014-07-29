@@ -15,7 +15,7 @@ import static org.junit.Assert.assertThat;
 
 public class DeserializerTest {
 
-	private static Gson gson  = com.stripe.net.APIResource.GSON;
+	private static Gson gson = com.stripe.net.APIResource.GSON;
 
 	@Test
 	public void deserializeEventDataPreviousAttributes() throws IOException {
@@ -56,6 +56,31 @@ public class DeserializerTest {
 		assertEquals(false, ch.refunds.getHasMore());
 		assertEquals((Integer) 2, ch.refunds.getTotalCount());
 		assertEquals("re_104Buu4hAU1NpT8JMBAc564Q", refunds.get(0).getId());
+	}
+
+	@Test
+	public void deserializeAppFeeRefundList() throws IOException {
+		String json = resource("appfee_refund_list.json");
+		ApplicationFee fee = gson.fromJson(json, ApplicationFee.class);
+
+		List<FeeRefund> refunds = fee.refunds.getData();
+		assertEquals(2, refunds.size());
+		assertEquals(false, fee.refunds.getHasMore());
+		assertEquals((Integer) 2, fee.refunds.getTotalCount());
+		assertEquals("fr_104Buu4hAU1NpT8JMBAc564Q", refunds.get(0).getId());
+	}
+
+	@Test
+	public void deserializeAppFeeRefundSublist() throws IOException {
+		String json = resource("appfee_refund_sublist.json");
+		ApplicationFee fee = gson.fromJson(json, ApplicationFee.class);
+
+		List<FeeRefund> refunds = fee.refunds.getData();
+		assertEquals(2, refunds.size());
+		assertEquals(false, fee.refunds.getHasMore());
+		assertEquals((Integer) 2, fee.refunds.getTotalCount());
+		assertEquals("fr_104Buu4hAU1NpT8JMBAc564Q", refunds.get(0).getId());
+		assertEquals("fee_4UNP26L2Vuc42P", refunds.get(0).getFee());
 	}
 
 	private String resource(String path) throws IOException {

@@ -37,6 +37,8 @@ import com.stripe.model.ChargeRefundCollectionDeserializer;
 import com.stripe.model.StripeObject;
 import com.stripe.model.StripeRawJsonObject;
 import com.stripe.model.StripeRawJsonObjectDeserializer;
+import com.stripe.model.FeeRefundCollection;
+import com.stripe.model.FeeRefundCollectionDeserializer;
 
 public abstract class APIResource extends StripeObject {
 
@@ -44,6 +46,7 @@ public abstract class APIResource extends StripeObject {
 			.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
 			.registerTypeAdapter(EventData.class, new EventDataDeserializer())
 			.registerTypeAdapter(ChargeRefundCollection.class, new ChargeRefundCollectionDeserializer())
+			.registerTypeAdapter(FeeRefundCollection.class, new FeeRefundCollectionDeserializer())
 			.registerTypeAdapter(StripeRawJsonObject.class, new StripeRawJsonObjectDeserializer())
 			.create();
 
@@ -275,7 +278,7 @@ public abstract class APIResource extends StripeObject {
 	}
 
 	private static String createQuery(Map<String, Object> params)
-	    throws UnsupportedEncodingException, InvalidRequestException {
+			throws UnsupportedEncodingException, InvalidRequestException {
 		Map<String, String> flatParams = flattenParams(params);
 		StringBuilder queryStringBuffer = new StringBuilder();
 		for (Map.Entry<String, String> entry : flatParams.entrySet()) {
@@ -307,10 +310,10 @@ public abstract class APIResource extends StripeObject {
 				}
 				flatParams.putAll(flattenParams(flatNestedMap));
 			} else if ("".equals(value)) {
-			    throw new InvalidRequestException("You cannot set '"+key+"' to an empty string. "+
-							      "We interpret empty strings as null in requests. "+
-							      "You may set '"+key+"' to null to delete the property.",
-							      key, null);
+					throw new InvalidRequestException("You cannot set '"+key+"' to an empty string. "+
+										"We interpret empty strings as null in requests. "+
+										"You may set '"+key+"' to null to delete the property.",
+										key, null);
 			} else if (value == null) {
 				flatParams.put(key, "");
 			} else if (value != null) {
@@ -338,11 +341,11 @@ public abstract class APIResource extends StripeObject {
 
 	private static String getResponseBody(InputStream responseStream)
 			throws IOException {
-                //\A is the beginning of
-                // the stream boundary
+		//\A is the beginning of
+		// the stream boundary
 		String rBody = new Scanner(responseStream, CHARSET)
-                        .useDelimiter("\\A")
-			.next(); //
+												.useDelimiter("\\A")
+												.next(); //
 
 		responseStream.close();
 		return rBody;
@@ -371,7 +374,7 @@ public abstract class APIResource extends StripeObject {
 										+ "support@stripe.com for assistance.",
 								method));
 			}
-                        // trigger the request
+			// trigger the request
 			int rCode = conn.getResponseCode();
 			String rBody = null;
 			Map<String, List<String>> headers;
@@ -422,9 +425,8 @@ public abstract class APIResource extends StripeObject {
 			if (allowedToSetTTL) {
 				if (originalDNSCacheTTL == null) {
 					// value unspecified by implementation
-                                        // DNS_CACHE_TTL_PROPERTY_NAME of -1 = cache forever
-					java.security.Security.setProperty(
-							DNS_CACHE_TTL_PROPERTY_NAME, "-1");
+					// DNS_CACHE_TTL_PROPERTY_NAME of -1 = cache forever
+					java.security.Security.setProperty(DNS_CACHE_TTL_PROPERTY_NAME, "-1");
 				} else {
 					java.security.Security.setProperty(
 							DNS_CACHE_TTL_PROPERTY_NAME, originalDNSCacheTTL);
@@ -497,8 +499,7 @@ public abstract class APIResource extends StripeObject {
 		case 401:
 			throw new AuthenticationException(error.message);
 		case 402:
-			throw new CardException(error.message, error.code, error.param,
-					null);
+			throw new CardException(error.message, error.code, error.param, null);
 		default:
 			throw new APIException(error.message, null);
 		}

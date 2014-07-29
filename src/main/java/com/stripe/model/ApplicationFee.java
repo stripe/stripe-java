@@ -1,7 +1,6 @@
 package com.stripe.model;
 
 import java.util.Map;
-import java.util.List;
 
 import com.stripe.exception.APIConnectionException;
 import com.stripe.exception.APIException;
@@ -21,7 +20,7 @@ public class ApplicationFee extends APIResource {
 	String user;
 	String application;
 	String charge;
-	List<FeeRefund> refunds;
+	FeeRefundCollection refunds;
 	String balanceTransaction;
 
 	public String getId() {
@@ -104,12 +103,14 @@ public class ApplicationFee extends APIResource {
 		this.charge = charge;
 	}
 
-	public List<FeeRefund> getRefunds() {
-		return refunds;
-	}
+	public FeeRefundCollection getRefunds() {
+		// API versions 2014-07-26 and earlier render charge refunds as an array
+		// instead of an object, meaning there is no sublist URL.
+		if (refunds.getURL() == null) {
+			refunds.setURL(String.format("/v1/application_fees/%s/refunds", getId()));
+		}
 
-	public void setRefunds(List<FeeRefund> refunds) {
-		this.refunds = refunds;
+		return refunds;
 	}
 
 	public String getBalanceTransaction() {
@@ -170,7 +171,7 @@ public class ApplicationFee extends APIResource {
 		return request(
 				RequestMethod.POST,
 				String.format("%s/refund",
-						instanceURL(ApplicationFee.class, this.getId())), params,
-				ApplicationFee.class, apiKey);
+						instanceURL(ApplicationFee.class, this.getId())),
+							params, ApplicationFee.class, apiKey);
 	}
 }
