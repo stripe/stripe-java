@@ -1,9 +1,16 @@
 package com.stripe.model;
 
+import java.util.Map;
+
+import com.stripe.exception.APIConnectionException;
+import com.stripe.exception.APIException;
+import com.stripe.exception.AuthenticationException;
+import com.stripe.exception.CardException;
+import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 
 
-public class Subscription extends APIResource {
+public class Subscription extends APIResource implements MetadataStore<Subscription>{
 	String id;
 	Long currentPeriodEnd;
 	Long currentPeriodStart;
@@ -17,6 +24,53 @@ public class Subscription extends APIResource {
 	Long canceledAt;
 	Long endedAt;
 	Integer quantity;
+	Discount discount;
+	Double applicationFeePercent;
+	Map<String, String> metadata;
+
+	public Subscription update(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params, null);
+	}
+
+	public Subscription update(Map<String, Object> params, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.POST, this.getInstanceURL(), params, Subscription.class, apiKey);
+	}
+
+	public Subscription cancel(Map<String, Object> params) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return cancel(params, null);
+	}
+
+	public Subscription cancel(Map<String, Object> params, String apiKey) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return request(RequestMethod.DELETE,
+				this.getInstanceURL(), params, Subscription.class,
+				apiKey);
+	}
+
+	public void deleteDiscount() throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		deleteDiscount(null);
+	}
+
+	public void deleteDiscount(String apiKey) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		request(RequestMethod.DELETE,
+				String.format("%s/discount", this.getInstanceURL()), null,
+				Discount.class, apiKey);
+	}
+
+	public String getInstanceURL() {
+		return String.format("%s/%s/subscriptions/%s", classURL(Customer.class), this.getCustomer(), this.getId());
+	}
 
 	public String getId() {
 		return id;
@@ -97,5 +151,26 @@ public class Subscription extends APIResource {
 	}
 	public void setQuantity(Integer quantity) {
 		this.quantity = quantity;
+	}
+	public Discount getDiscount() {
+		return discount;
+	}
+	public void setDiscount(Discount discount) {
+		this.discount = discount;
+	}
+	public Double getApplicationFeePercent() {
+		return applicationFeePercent;
+	}
+	public void setApplicationFeePercent(Double applicationFeePercent) {
+		this.applicationFeePercent = applicationFeePercent;
+	}
+
+	public Map<String, String> getMetadata() {
+		return metadata;
+	}
+
+	public void setMetadata(Map<String, String> metadata) {
+		this.metadata = metadata;
+		
 	}
 }

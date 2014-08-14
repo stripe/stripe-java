@@ -17,6 +17,7 @@ public class Event extends APIResource {
 	Long created;
 	EventData data;
 	Integer pendingWebhooks;
+	String request;
 
 	public static Event retrieve(String id) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
@@ -75,11 +76,11 @@ public class Event extends APIResource {
 	public void setType(String name) {
 		this.type = name;
 	}
-	
+
 	public String getUserId() {
 	    return userId;
 	}
-	
+
 	public void setUserId(String userId) {
 	    this.userId = userId;
 	}
@@ -98,5 +99,13 @@ public class Event extends APIResource {
 
 	public void setPendingWebhooks(Integer pendingWebhooks) {
 		this.pendingWebhooks = pendingWebhooks;
+	}
+
+	public String getRequest() {
+		return request;
+	}
+
+	public void setRequest(String request) {
+		this.request = request;
 	}
 }

@@ -1,9 +1,7 @@
 package com.stripe.model;
 
 import java.util.Map;
-import java.util.List;
 
-import com.stripe.Stripe;
 import com.stripe.exception.APIConnectionException;
 import com.stripe.exception.APIException;
 import com.stripe.exception.AuthenticationException;
@@ -22,7 +20,7 @@ public class ApplicationFee extends APIResource {
 	String user;
 	String application;
 	String charge;
-	List<FeeRefund> refunds;
+	FeeRefundCollection refunds;
 	String balanceTransaction;
 
 	public String getId() {
@@ -105,12 +103,14 @@ public class ApplicationFee extends APIResource {
 		this.charge = charge;
 	}
 
-	public List<FeeRefund> getRefunds() {
-		return refunds;
-	}
+	public FeeRefundCollection getRefunds() {
+		// API versions 2014-07-26 and earlier render charge refunds as an array
+		// instead of an object, meaning there is no sublist URL.
+		if (refunds.getURL() == null) {
+			refunds.setURL(String.format("/v1/application_fees/%s/refunds", getId()));
+		}
 
-	public void setRefunds(List<FeeRefund> refunds) {
-		this.refunds = refunds;
+		return refunds;
 	}
 
 	public String getBalanceTransaction() {
@@ -148,16 +148,14 @@ public class ApplicationFee extends APIResource {
 	public static ApplicationFee retrieve(String id, String apiKey)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		String url = String.format("%s/%s/%s", Stripe.API_BASE, "v1/application_fees", id);
-		return request(RequestMethod.GET, url, null,
+		return request(RequestMethod.GET, instanceURL(ApplicationFee.class, id), null,
 				ApplicationFee.class, apiKey);
 	}
 
 	public static ApplicationFeeCollection all(Map<String, Object> params, String apiKey)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		String url = String.format("%s/%s", Stripe.API_BASE, "v1/application_fees");
-		return request(RequestMethod.GET, url, params,
+		return request(RequestMethod.GET, classURL(ApplicationFee.class), params,
 				ApplicationFeeCollection.class, apiKey);
 	}
 
@@ -170,8 +168,10 @@ public class ApplicationFee extends APIResource {
 	public ApplicationFee refund(Map<String, Object> params, String apiKey)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		String url = String.format("%s/%s/%s", Stripe.API_BASE, "v1/application_fees", id);
-		return request(RequestMethod.POST, url, params,
-				ApplicationFee.class, apiKey);
+		return request(
+				RequestMethod.POST,
+				String.format("%s/refund",
+						instanceURL(ApplicationFee.class, this.getId())),
+							params, ApplicationFee.class, apiKey);
 	}
 }

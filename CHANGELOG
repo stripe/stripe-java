@@ -1,3 +1,94 @@
+=== 1.16.0 2014-07-26
+
+* Application Fee refunds now a list instead of array
+
+=== 1.15.1 2014-06-25
+
+* Added brand and funding to Card
+
+=== 1.15.0 2014-06-17
+
+* Added metadata to Refund
+* Added metadata to Dispute
+* Fixed incorrect return types for certain collection resources
+
+=== 1.14.1 2014-06-04
+
+* Added metadata to Subscription
+
+=== 1.14.0 2014-05-28
+
+* Add support for canceling transfers
+
+=== 1.13.1 2014-05-23
+
+* Fix bug with retrieving lines of upcoming invoice.
+
+=== 1.13.0 2014-05-21
+
+* Support cards for recipients.
+
+=== 1.12.0 2014-04-09
+
+* Test SSL certificate against blacklist
+
+=== 1.11.0 2014-04-07
+
+* upgrade customer, charge, and coupon collections to new pagination style
+* Add missing fields to Account object
+
+=== 1.10.0 2014-03-28
+
+* Support for newstyle pagination API
+  (https://groups.google.com/a/lists.stripe.com/forum/#!topic/api-announce/29sLxmICA9E)
+
+=== 1.9.0 2014-03-17
+
+* Support for dynamic statement descriptions
+* Preserve original 'threaqd null ids through to requests' behavior
+
+=== 1.8.0 2014-03-12
+
+* Upgrade Google GSON to 2.2.4
+* URL-encode object ids (fixes #62)
+
+=== 1.7.2 2014-02-27
+
+* Add 'valid' field to coupon
+
+=== 1.7.1 2014-01-31
+
+* Fix Subscription cancel method call
+* Miscellaneous field fixups
+  - discount on Subscription is an expanded Discount, not string
+  - add missing application_fee_percent field on Subscription
+  - add missing application_fee field on Invoice
+
+=== 1.7.0 2014-01-29
+
+* Add support for multiple subscriptions per customer
+
+=== 1.6.5 2014-01-22
+
+* Fixed url to refund application fees (fixes #60)
+* DRY'd some of the application fee urls
+
+=== 1.6.4 2014-01-16
+
+* Added metadata to InvoiceItem and InvoiceLineItem (fixes #59)
+
+=== 1.6.3 2014-01-13
+
+* Support overriding base url (for testing) (user request)
+* Add default currency to Account object (fixes #46)
+* Add metadata to plan object (thanks, desirable-objects)
+* Remove plan from Customer (fixes #42)
+* Style improvements (see #30) (thanks, steve-nester-uk)
+
+=== 1.6.2 2014-01-08
+
+* Fix return type of Coupon.getRedeemBy
+
 === 1.6.1 2013-12-02
 
 * Add ApplicationFee API resource

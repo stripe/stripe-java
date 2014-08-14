@@ -17,10 +17,11 @@ public class Coupon extends APIResource implements MetadataStore<Coupon> {
 	String id;
 	Boolean livemode;
 	Integer durationInMonths;
-	Integer maxRedemptions;
-	Integer redeemBy;
+	Long maxRedemptions;
+	Long redeemBy;
 	Integer timesRedeemed;
     Map<String, String> metadata;
+	Boolean valid;
 
     public Map<String, String> getMetadata() {
         return metadata;
@@ -148,19 +149,19 @@ public class Coupon extends APIResource implements MetadataStore<Coupon> {
 		this.durationInMonths = durationInMonths;
 	}
 
-	public Integer getMaxRedemptions() {
+	public Long getMaxRedemptions() {
 		return maxRedemptions;
 	}
 
-	public void setMaxRedemptions(Integer maxRedemptions) {
+	public void setMaxRedemptions(Long maxRedemptions) {
 		this.maxRedemptions = maxRedemptions;
 	}
 
-	public Integer getRedeemBy() {
+	public Long getRedeemBy() {
 		return redeemBy;
 	}
 
-	public void setRedeemBy(Integer redeemBy) {
+	public void setRedeemBy(Long redeemBy) {
 		this.redeemBy = redeemBy;
 	}
 
@@ -170,5 +171,13 @@ public class Coupon extends APIResource implements MetadataStore<Coupon> {
 
 	public void setTimesRedeemed(Integer timesRedeemed) {
 		this.timesRedeemed = timesRedeemed;
+	}
+
+	public Boolean getValid() {
+		return valid;
+	}
+
+	public void setValid(Boolean valid) {
+		this.valid = valid;
 	}
 }

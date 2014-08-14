@@ -9,7 +9,7 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 
-public class Invoice extends APIResource {
+public class Invoice extends APIResource implements MetadataStore<Invoice>{
 	Integer subtotal;
 	Integer total;
 	Integer amountDue;
@@ -31,6 +31,10 @@ public class Invoice extends APIResource {
 	Boolean livemode;
 	Integer attemptCount;
 	String currency;
+	String subscription;
+	Long applicationFee;
+	Map<String, String> metadata;
+	Boolean forgiven;
 
 	public Integer getSubtotal() {
 		return subtotal;
@@ -144,6 +148,14 @@ public class Invoice extends APIResource {
 		this.paid = paid;
 	}
 
+	public Boolean getForgiven() {
+		return forgiven;
+	}
+
+	public void setForgiven(Boolean forgiven) {
+		this.forgiven = forgiven;
+	}
+
 	public Long getPeriodStart() {
 		return periodStart;
 	}
@@ -194,6 +206,22 @@ public class Invoice extends APIResource {
 
 	public void setCurrency(String currency) {
 		this.currency = currency;
+	}
+
+	public String getSubscription() {
+		return subscription;
+	}
+
+	public void setSubscription(String subscription) {
+		this.subscription = subscription;
+	}
+
+	public Long getApplicationFee() {
+		return applicationFee;
+	}
+
+	public void setApplicationFee(Long applicationFee) {
+		this.applicationFee = applicationFee;
 	}
 
 	public static Invoice retrieve(String id) throws AuthenticationException,
@@ -275,5 +303,13 @@ public class Invoice extends APIResource {
 		return request(RequestMethod.POST, String.format("%s/pay",
 				instanceURL(Invoice.class, this.getId())), null, Invoice.class,
 				apiKey);
+	}
+
+	public Map<String, String> getMetadata() {
+		return metadata;
+	}
+
+	public void setMetadata(Map<String, String> metadata) {
+		this.metadata = metadata;
 	}
 }

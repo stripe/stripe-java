@@ -1,7 +1,6 @@
 package com.stripe.model;
 
 import java.util.Map;
-import java.util.List;
 
 import com.stripe.exception.APIConnectionException;
 import com.stripe.exception.APIException;
@@ -18,15 +17,17 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 	Boolean livemode;
 	Boolean paid;
 	Boolean refunded;
+	/** Legacy; use `dispute` field (https://stripe.com/docs/upgrades#2012-11-07) */
 	Boolean disputed;
 	Boolean captured;
 	String description;
+	String statementDescription;
 	String failureMessage;
 	String failureCode;
 	Integer amountRefunded;
 	String customer;
 	String invoice;
-	List<Refund> refunds;
+	ChargeRefundCollection refunds;
 	Card card;
 	Dispute dispute;
 	String balanceTransaction;
@@ -96,10 +97,20 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 		this.captured = captured;
 	}
 
+	/**
+	 * @deprecated
+	 * Use `dispute` field (https://stripe.com/docs/upgrades#2012-11-07)
+	 */
+	@Deprecated
 	public Boolean getDisputed() {
 		return disputed;
 	}
 
+	/**
+	 * @deprecated
+	 * Use `dispute` field (https://stripe.com/docs/upgrades#2012-11-07)
+	 */
+	@Deprecated
 	public void setDisputed(Boolean disputed) {
 		this.disputed = disputed;
 	}
@@ -110,6 +121,14 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public String getStatementDescription() {
+		return statementDescription;
+	}
+
+	public void setStatementDescription(String statementDescription) {
+		this.statementDescription = statementDescription;
 	}
 
 	public String getFailureMessage() {
@@ -152,6 +171,15 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 		this.invoice = invoice;
 	}
 
+	public ChargeRefundCollection getRefunds() {
+		// API versions 2014-05-19 and earlier render charge refunds as an array 
+		// instead of an object, meaning there is no sublist URL.
+		if (refunds.getURL() == null) {
+			refunds.setURL(String.format("/v1/charges/%s/refunds", getId()));
+		}
+		return refunds;
+	}
+
 	public Card getCard() {
 		return card;
 	}
@@ -166,14 +194,6 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 
 	public void setDispute(Dispute dispute) {
 		this.dispute = dispute;
-	}
-
-	public List<Refund> getRefunds() {
-		return refunds;
-	}
-
-	public void setRefunds(List<Refund> refunds) {
-		this.refunds = refunds;
 	}
 
 	public String getBalanceTransaction() {

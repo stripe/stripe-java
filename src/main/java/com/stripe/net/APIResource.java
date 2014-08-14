@@ -11,9 +11,15 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.net.URLStreamHandler;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
+import java.security.cert.Certificate;
+import java.security.cert.CertificateEncodingException;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.List;
 
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
@@ -26,32 +32,53 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.model.EventData;
 import com.stripe.model.EventDataDeserializer;
+import com.stripe.model.ChargeRefundCollection;
+import com.stripe.model.ChargeRefundCollectionDeserializer;
 import com.stripe.model.StripeObject;
 import com.stripe.model.StripeRawJsonObject;
 import com.stripe.model.StripeRawJsonObjectDeserializer;
+import com.stripe.model.FeeRefundCollection;
+import com.stripe.model.FeeRefundCollectionDeserializer;
 
 public abstract class APIResource extends StripeObject {
 
-	public static final Gson gson = new GsonBuilder()
+	public static final Gson GSON = new GsonBuilder()
 			.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
 			.registerTypeAdapter(EventData.class, new EventDataDeserializer())
+			.registerTypeAdapter(ChargeRefundCollection.class, new ChargeRefundCollectionDeserializer())
+			.registerTypeAdapter(FeeRefundCollection.class, new FeeRefundCollectionDeserializer())
 			.registerTypeAdapter(StripeRawJsonObject.class, new StripeRawJsonObjectDeserializer())
 			.create();
 
 	private static String className(Class<?> clazz) {
-		return clazz.getSimpleName().toLowerCase().replace("$", "");
+		String className = clazz.getSimpleName().toLowerCase().replace("$", " ");
+
+		// TODO: Delurk this, with invoiceitem being a valid url, we can't get too
+		// fancy yet.
+		if (className.equals("applicationfee")) {
+			return "application_fee";
+		} else {
+			return className;
+		}
 	}
 
 	protected static String singleClassURL(Class<?> clazz) {
-		return String.format("%s/v1/%s", Stripe.API_BASE, className(clazz));
+		return String.format("%s/v1/%s", Stripe.getApiBase(), className(clazz));
 	}
 
 	protected static String classURL(Class<?> clazz) {
 		return String.format("%ss", singleClassURL(clazz));
 	}
 
-	protected static String instanceURL(Class<?> clazz, String id) {
-		return String.format("%s/%s", classURL(clazz), id);
+	protected static String instanceURL(Class<?> clazz, String id) throws InvalidRequestException {
+		try {
+			return String.format("%s/%s", classURL(clazz), urlEncode(id));
+		} catch (UnsupportedEncodingException e) {
+			throw new InvalidRequestException("Unable to encode parameters to "
+					+ CHARSET
+					+ ". Please contact support@stripe.com for assistance.",
+					null, e);
+		}
 	}
 
 	public static final String CHARSET = "UTF-8";
@@ -69,10 +96,20 @@ public abstract class APIResource extends StripeObject {
 		GET, POST, DELETE
 	}
 
+	private static String urlEncode(String str) throws UnsupportedEncodingException {
+		// Preserve original behavior that passing null for an object id will lead
+		// to us actually making a request to /v1/foo/null
+		if (str == null) {
+			return null;
+		}
+		else {
+			return URLEncoder.encode(str, CHARSET);
+		}
+	}
+
 	private static String urlEncodePair(String k, String v)
 			throws UnsupportedEncodingException {
-		return String.format("%s=%s", URLEncoder.encode(k, CHARSET),
-				URLEncoder.encode(v, CHARSET));
+		return String.format("%s=%s", urlEncode(k), urlEncode(v));
 	}
 
 	static Map<String, String> getHeaders(String apiKey) {
@@ -98,14 +135,14 @@ public abstract class APIResource extends StripeObject {
 		propertyMap.put("bindings.version", Stripe.VERSION);
 		propertyMap.put("lang", "Java");
 		propertyMap.put("publisher", "Stripe");
-		headers.put("X-Stripe-Client-User-Agent", gson.toJson(propertyMap));
+		headers.put("X-Stripe-Client-User-Agent", GSON.toJson(propertyMap));
 		if (Stripe.apiVersion != null) {
 			headers.put("Stripe-Version", Stripe.apiVersion);
 		}
 		return headers;
 	}
 
-	private static javax.net.ssl.HttpsURLConnection createStripeConnection(
+	private static java.net.HttpURLConnection createStripeConnection(
 			String url, String apiKey) throws IOException {
 		URL stripeURL = null;
 		String customURLStreamHandlerClassName = System.getProperty(
@@ -137,12 +174,9 @@ public abstract class APIResource extends StripeObject {
 		} else {
 			stripeURL = new URL(url);
 		}
-		javax.net.ssl.HttpsURLConnection conn = (javax.net.ssl.HttpsURLConnection) stripeURL
-				.openConnection(); // enforce
-									// SSL
-									// URLs
-		conn.setConnectTimeout(30000); // 30 seconds
-		conn.setReadTimeout(80000); // 80 seconds
+		java.net.HttpURLConnection conn = (java.net.HttpURLConnection) stripeURL.openConnection();
+		conn.setConnectTimeout(30 * 1000);
+		conn.setReadTimeout(80 * 1000);
 		conn.setUseCaches(false);
 		for (Map.Entry<String, String> header : getHeaders(apiKey).entrySet()) {
 			conn.setRequestProperty(header.getKey(), header.getValue());
@@ -151,23 +185,74 @@ public abstract class APIResource extends StripeObject {
 		return conn;
 	}
 
-	private static javax.net.ssl.HttpsURLConnection createGetConnection(
-			String url, String query, String apiKey) throws IOException {
-		String getURL = String.format("%s?%s", url, query);
-		javax.net.ssl.HttpsURLConnection conn = createStripeConnection(getURL,
+	private static void throwInvalidCertificateException() throws APIConnectionException {
+		throw new APIConnectionException("Invalid server certificate. You tried to connect to a server that has a revoked SSL certificate, which means we cannot securely send data to that server. Please email support@stripe.com if you need help connecting to the correct API server.");
+	}
+
+	private static void checkSSLCert(java.net.HttpURLConnection hconn) throws IOException, APIConnectionException {
+		if (!Stripe.getVerifySSL() && !hconn.getURL().getHost().equals("api.stripe.com")) {
+			return;
+		}
+
+		javax.net.ssl.HttpsURLConnection conn = (javax.net.ssl.HttpsURLConnection) hconn;
+		conn.connect();
+
+		Certificate[] certs = conn.getServerCertificates();
+
+		try {
+			MessageDigest md = MessageDigest.getInstance("SHA-1");
+
+			byte[] der = certs[0].getEncoded();
+			md.update(der);
+			byte[] digest = md.digest();
+
+			byte[] revokedCertDigest = {(byte) 0x05, (byte) 0xc0, (byte) 0xb3, (byte) 0x64, (byte) 0x36, (byte) 0x94, (byte) 0x47, (byte) 0x0a, (byte) 0x88, (byte) 0x8c, (byte) 0x6e, (byte) 0x7f, (byte) 0xeb, (byte) 0x5c, (byte) 0x9e, (byte) 0x24, (byte) 0xe8, (byte) 0x23, (byte) 0xdc, (byte) 0x53};
+
+			if (Arrays.equals(digest, revokedCertDigest)) {
+				throwInvalidCertificateException();
+			}
+
+		} catch (NoSuchAlgorithmException e) {
+			throw new RuntimeException(e);
+		} catch (CertificateEncodingException e) {
+			throwInvalidCertificateException();
+		}
+	}
+
+	private static String formatURL(String url, String query) {
+		if (query == null || query.isEmpty()) {
+			return url;
+		} else {
+			// In some cases, URL can already contain a question mark (eg, upcoming invoice lines)
+			String separator = url.contains("?") ? "&" : "?";
+			return String.format("%s%s%s", url, separator, query);
+		}
+	}
+
+	private static java.net.HttpURLConnection createGetConnection(
+			String url, String query, String apiKey) throws IOException, APIConnectionException {
+		String getURL = formatURL(url, query);
+		java.net.HttpURLConnection conn = createStripeConnection(getURL,
 				apiKey);
 		conn.setRequestMethod("GET");
+
+		checkSSLCert(conn);
+
 		return conn;
 	}
 
-	private static javax.net.ssl.HttpsURLConnection createPostConnection(
-			String url, String query, String apiKey) throws IOException {
-		javax.net.ssl.HttpsURLConnection conn = createStripeConnection(url,
+	private static java.net.HttpURLConnection createPostConnection(
+			String url, String query, String apiKey) throws IOException, APIConnectionException {
+		java.net.HttpURLConnection conn = createStripeConnection(url,
 				apiKey);
+
 		conn.setDoOutput(true);
 		conn.setRequestMethod("POST");
 		conn.setRequestProperty("Content-Type", String.format(
 				"application/x-www-form-urlencoded;charset=%s", CHARSET));
+
+		checkSSLCert(conn);
+
 		OutputStream output = null;
 		try {
 			output = conn.getOutputStream();
@@ -180,26 +265,28 @@ public abstract class APIResource extends StripeObject {
 		return conn;
 	}
 
-	private static javax.net.ssl.HttpsURLConnection createDeleteConnection(
-			String url, String query, String apiKey) throws IOException {
-		String deleteUrl = String.format("%s?%s", url, query);
-		javax.net.ssl.HttpsURLConnection conn = createStripeConnection(
+	private static java.net.HttpURLConnection createDeleteConnection(
+			String url, String query, String apiKey) throws IOException, APIConnectionException {
+		String deleteUrl = formatURL(url, query);
+		java.net.HttpURLConnection conn = createStripeConnection(
 				deleteUrl, apiKey);
 		conn.setRequestMethod("DELETE");
+
+		checkSSLCert(conn);
+
 		return conn;
 	}
 
 	private static String createQuery(Map<String, Object> params)
-	    throws UnsupportedEncodingException, InvalidRequestException {
+			throws UnsupportedEncodingException, InvalidRequestException {
 		Map<String, String> flatParams = flattenParams(params);
-		StringBuffer queryStringBuffer = new StringBuffer();
+		StringBuilder queryStringBuffer = new StringBuilder();
 		for (Map.Entry<String, String> entry : flatParams.entrySet()) {
-			queryStringBuffer.append("&");
+			if (queryStringBuffer.length() > 0) {
+				queryStringBuffer.append("&");
+			}
 			queryStringBuffer.append(urlEncodePair(entry.getKey(),
 					entry.getValue()));
-		}
-		if (queryStringBuffer.length() > 0) {
-			queryStringBuffer.deleteCharAt(0);
 		}
 		return queryStringBuffer.toString();
 	}
@@ -223,10 +310,10 @@ public abstract class APIResource extends StripeObject {
 				}
 				flatParams.putAll(flattenParams(flatNestedMap));
 			} else if ("".equals(value)) {
-			    throw new InvalidRequestException("You cannot set '"+key+"' to an empty string. "+
-							      "We interpret empty strings as null in requests. "+
-							      "You may set '"+key+"' to null to delete the property.",
-							      key, null);
+					throw new InvalidRequestException("You cannot set '"+key+"' to an empty string. "+
+										"We interpret empty strings as null in requests. "+
+										"You may set '"+key+"' to null to delete the property.",
+										key, null);
 			} else if (value == null) {
 				flatParams.put(key, "");
 			} else if (value != null) {
@@ -254,9 +341,12 @@ public abstract class APIResource extends StripeObject {
 
 	private static String getResponseBody(InputStream responseStream)
 			throws IOException {
-		String rBody = new Scanner(responseStream, CHARSET).useDelimiter("\\A")
-				.next(); // \A is the beginning of
-							// the stream boundary
+		//\A is the beginning of
+		// the stream boundary
+		String rBody = new Scanner(responseStream, CHARSET)
+												.useDelimiter("\\A")
+												.next(); //
+
 		responseStream.close();
 		return rBody;
 	}
@@ -264,7 +354,7 @@ public abstract class APIResource extends StripeObject {
 	private static StripeResponse makeURLConnectionRequest(
 			APIResource.RequestMethod method, String url, String query,
 			String apiKey) throws APIConnectionException {
-		javax.net.ssl.HttpsURLConnection conn = null;
+		java.net.HttpURLConnection conn = null;
 		try {
 			switch (method) {
 			case GET:
@@ -284,14 +374,19 @@ public abstract class APIResource extends StripeObject {
 										+ "support@stripe.com for assistance.",
 								method));
 			}
-			int rCode = conn.getResponseCode(); // triggers the request
+			// trigger the request
+			int rCode = conn.getResponseCode();
 			String rBody = null;
+			Map<String, List<String>> headers;
+
 			if (rCode >= 200 && rCode < 300) {
 				rBody = getResponseBody(conn.getInputStream());
 			} else {
 				rBody = getResponseBody(conn.getErrorStream());
 			}
-			return new StripeResponse(rCode, rBody);
+			headers = conn.getHeaderFields();
+			return new StripeResponse(rCode, rBody, headers);
+
 		} catch (IOException e) {
 			throw new APIConnectionException(
 					String.format(
@@ -299,7 +394,7 @@ public abstract class APIResource extends StripeObject {
 									+ "Please check your internet connection and try again. If this problem persists,"
 									+ "you should check Stripe's service status at https://twitter.com/stripestatus,"
 									+ " or let us know at support@stripe.com.",
-							Stripe.API_BASE), e);
+							Stripe.getApiBase()), e);
 		} finally {
 			if (conn != null) {
 				conn.disconnect();
@@ -330,8 +425,8 @@ public abstract class APIResource extends StripeObject {
 			if (allowedToSetTTL) {
 				if (originalDNSCacheTTL == null) {
 					// value unspecified by implementation
-					java.security.Security.setProperty(
-							DNS_CACHE_TTL_PROPERTY_NAME, "-1"); // cache forever
+					// DNS_CACHE_TTL_PROPERTY_NAME of -1 = cache forever
+					java.security.Security.setProperty(DNS_CACHE_TTL_PROPERTY_NAME, "-1");
 				} else {
 					java.security.Security.setProperty(
 							DNS_CACHE_TTL_PROPERTY_NAME, originalDNSCacheTTL);
@@ -388,13 +483,13 @@ public abstract class APIResource extends StripeObject {
 		if (rCode < 200 || rCode >= 300) {
 			handleAPIError(rBody, rCode);
 		}
-		return gson.fromJson(rBody, clazz);
+		return GSON.fromJson(rBody, clazz);
 	}
 
 	private static void handleAPIError(String rBody, int rCode)
 			throws InvalidRequestException, AuthenticationException,
 			CardException, APIException {
-		APIResource.Error error = gson.fromJson(rBody,
+		APIResource.Error error = GSON.fromJson(rBody,
 				APIResource.ErrorContainer.class).error;
 		switch (rCode) {
 		case 400:
@@ -404,8 +499,7 @@ public abstract class APIResource extends StripeObject {
 		case 401:
 			throw new AuthenticationException(error.message);
 		case 402:
-			throw new CardException(error.message, error.code, error.param,
-					null);
+			throw new CardException(error.message, error.code, error.param, null);
 		default:
 			throw new APIException(error.message, null);
 		}

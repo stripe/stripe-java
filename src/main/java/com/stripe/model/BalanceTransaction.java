@@ -21,7 +21,7 @@ public class BalanceTransaction extends APIResource {
 	Long created;
 	Long availableOn;
 	String status;
-	Long fee;
+	Integer fee;
 	List<Fee> feeDetails;
 	String description;
 
@@ -97,11 +97,11 @@ public class BalanceTransaction extends APIResource {
 		this.status = status;
 	}
 
-	public Long getFee() {
+	public Integer getFee() {
 		return fee;
 	}
 
-	public void setFee(Long fee) {
+	public void setFee(Integer fee) {
 		this.fee = fee;
 	}
 
@@ -136,7 +136,7 @@ public class BalanceTransaction extends APIResource {
 	public static BalanceTransaction retrieve(String id, String apiKey)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		String url = String.format("%s/%s/%s", Stripe.API_BASE, "v1/balance/history", id);
+		String url = String.format("%s/%s/%s", Stripe.getApiBase(), "v1/balance/history", id);
 		return request(RequestMethod.GET, url, null,
 				BalanceTransaction.class, apiKey);
 	}
@@ -144,7 +144,7 @@ public class BalanceTransaction extends APIResource {
 	public static BalanceTransactionCollection all(Map<String, Object> params, String apiKey)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		String url = String.format("%s/%s", Stripe.API_BASE, "v1/balance/history");
+		String url = String.format("%s/%s", Stripe.getApiBase(), "v1/balance/history");
 		return request(RequestMethod.GET, url, params,
 				BalanceTransactionCollection.class, apiKey);
 	}

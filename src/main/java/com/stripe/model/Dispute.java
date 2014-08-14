@@ -1,5 +1,7 @@
 package com.stripe.model;
 
+import java.util.Map;
+
 public class Dispute extends StripeObject {
 	String charge;
 	Integer amount;
@@ -11,6 +13,7 @@ public class Dispute extends StripeObject {
 	Long evidenceDueBy;
 	String reason;
 	String balanceTransaction;
+	Map<String, String> metadata;
 
 	public Integer getAmount() {
 		return amount;
@@ -71,5 +74,11 @@ public class Dispute extends StripeObject {
 	}
 	public void setBalanceTransaction(String balanceTransaction) {
 		this.balanceTransaction = balanceTransaction;
+	}
+	public Map<String, String> getMetadata() {
+		return metadata;
+	}
+	public void setMetadata(Map<String, String> metadata) {
+		this.metadata = metadata;
 	}
 }

@@ -1,0 +1,43 @@
+{
+  "id": "fee_4UNP26L2Vuc42P",
+  "object": "application_fee",
+  "created": 1406594363,
+  "livemode": false,
+  "amount": 100,
+  "currency": "usd",
+  "refunded": false,
+  "amount_refunded": 0,
+  "refunds": {
+    "object": "list",
+    "total_count": 2,
+    "has_more": false,
+    "url": "/v1/application_fees/fee_4UNP26L2Vuc42P/refunds",
+    "data": [
+      {
+        "id": "fr_104Buu4hAU1NpT8JMBAc564Q",
+        "amount": 100,
+        "currency": "usd",
+        "created": 1402336848,
+        "fee": "fee_4UNP26L2Vuc42P",
+        "object": "fee_refund",
+        "balance_transaction": "txn_104Buu4hAU1NpT8JMWc89QlB"
+      },
+      {
+        "id": "fr_104Buu4hAU1NpT8JXuwJMRek",
+        "amount": 100,
+        "currency": "usd",
+        "created": 1402336856,
+        "fee": "fee_4UNP26L2Vuc42P",
+        "object": "fee_refund",
+        "balance_transaction": "txn_104Buu4hAU1NpT8Jj0rAGDv6",
+        "metadata": {
+          "key": "value"
+        }
+      }
+    ]
+  },
+  "balance_transaction": "txn_14LOeD4C6rHkrXHk8IWWJr67",
+  "account": "acct_14E5SV4C6rHkrXHk",
+  "application": "ca_4UNPE77EXi66vAmM6bSiMIHbw6JIyC7t",
+  "charge": "ch_14LOeD4C6rHkrXHkEGEn99sW"
+}

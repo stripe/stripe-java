@@ -1,4 +1,4 @@
-# Stripe Java Bindings
+# Stripe Java Bindings [![Build Status](https://travis-ci.org/stripe/stripe-java.svg?branch=master)](https://travis-ci.org/stripe/stripe-java)
 
 You can sign up for a Stripe account at https://stripe.com.
 
@@ -17,15 +17,21 @@ Add this dependency to your project's POM:
     <dependency>
       <groupId>com.stripe</groupId>
       <artifactId>stripe-java</artifactId>
-      <version>1.6.1</version>
+      <version>1.15.1</version>
     </dependency>
+    
+### Gradle users
+
+Add this dependency to your project's build file:
+
+    compile "com.stripe:stripe-java:1.15.1"
 
 ### Others
 
 You'll need to manually install the following JARs:
 
 * The Stripe JAR from https://code.stripe.com/stripe-java-latest.jar
-* [Google Gson](http://code.google.com/p/google-gson/) from <http://google-gson.googlecode.com/files/google-gson-2.2.2-release.zip>.
+* [Google Gson](http://code.google.com/p/google-gson/) from <http://google-gson.googlecode.com/files/google-gson-2.2.4-release.zip>.
 
 Usage
 =====
