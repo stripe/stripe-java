@@ -842,6 +842,15 @@ public class StripeTest {
 		assertEquals(coupon.getDuration(), "once");
 	}
 
+    @Test
+    public void testCouponUpdate() throws StripeException {
+        Coupon createdCoupon = Coupon.create(defaultCouponParams);
+        Map<String, Object> updateParams = new HashMap<String, Object>();
+        updateParams.put("metadata[message]", "This month is on us!");
+        Coupon updatedCoupon = createdCoupon.update(updateParams);
+        assertEquals(updatedCoupon.getMetadata().get("message"), "This month is on us!");
+    }
+
 	@Test
 	public void testCouponRetrieve() throws StripeException {
 		Coupon createdCoupon = Coupon.create(getUniqueCouponParams());
