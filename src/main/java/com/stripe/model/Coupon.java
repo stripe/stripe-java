@@ -9,7 +9,7 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 
-public class Coupon extends APIResource {
+public class Coupon extends APIResource implements MetadataStore<Coupon> {
 	Integer percentOff;
 	Integer amountOff;
 	String currency;
@@ -21,6 +21,15 @@ public class Coupon extends APIResource {
 	Long redeemBy;
 	Integer timesRedeemed;
 	Boolean valid;
+	Map<String, String> metadata;
+
+	public Map<String, String> getMetadata() {
+		return metadata;
+	}
+
+	public void setMetadata(Map<String, String> metadata) {
+		this.metadata = metadata;
+	}
 
 	public static Coupon create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
@@ -32,6 +41,15 @@ public class Coupon extends APIResource {
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return retrieve(id, null);
+	}
+
+	public Coupon update(Map<String, Object> params) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
+		return update(params, null);
+	}
+
+	public Coupon update(Map<String, Object> params, String apiKey) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
+		return request(RequestMethod.POST, instanceURL(Coupon.class, this.id),
+				params, Coupon.class, apiKey);
 	}
 
 	public static CouponCollection all(Map<String, Object> params)
