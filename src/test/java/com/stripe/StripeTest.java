@@ -844,7 +844,7 @@ public class StripeTest {
 
     @Test
     public void testCouponUpdate() throws StripeException {
-        Coupon createdCoupon = Coupon.create(defaultCouponParams);
+        Coupon createdCoupon = Coupon.create(getUniqueCouponParams());
         Map<String, Object> updateParams = new HashMap<String, Object>();
         updateParams.put("metadata[message]", "This month is on us!");
         Coupon updatedCoupon = createdCoupon.update(updateParams);
@@ -1522,4 +1522,8 @@ public class StripeTest {
 		testMetadata(refundedCharge.getRefunds().getData().get(0));
 	}
 
+	@Test
+	public void testCouponMetadata() throws StripeException {
+		testMetadata(Coupon.create(getUniqueCouponParams()));
+	}
 }
