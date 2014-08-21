@@ -390,11 +390,11 @@ public abstract class APIResource extends StripeObject {
 		} catch (IOException e) {
 			throw new APIConnectionException(
 					String.format(
-							"Could not connect to Stripe (%s). "
+							"IOException during API request to Stripe (%s): %s "
 									+ "Please check your internet connection and try again. If this problem persists,"
 									+ "you should check Stripe's service status at https://twitter.com/stripestatus,"
 									+ " or let us know at support@stripe.com.",
-							Stripe.getApiBase()), e);
+							Stripe.getApiBase(), e.getMessage()), e);
 		} finally {
 			if (conn != null) {
 				conn.disconnect();
