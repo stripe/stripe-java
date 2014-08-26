@@ -18,7 +18,6 @@ import org.junit.Test;
 import com.stripe.exception.CardException;
 import com.stripe.exception.StripeException;
 import com.stripe.exception.InvalidRequestException;
-
 import com.stripe.model.Account;
 import com.stripe.model.ApplicationFee;
 import com.stripe.model.Balance;
@@ -38,6 +37,7 @@ import com.stripe.model.DeletedCustomer;
 import com.stripe.model.DeletedInvoiceItem;
 import com.stripe.model.DeletedRecipient;
 import com.stripe.model.DeletedPlan;
+import com.stripe.model.Dispute;
 import com.stripe.model.Event;
 import com.stripe.model.FeeRefundCollection;
 import com.stripe.model.Invoice;
@@ -436,6 +436,28 @@ public class StripeTest {
 		assertEquals(charge.getPaid(), true);
 		assertEquals(charge.getCard().getAddressZipCheck(), "pass");
 		assertEquals(charge.getCard().getAddressLine1Check(), "fail");
+	}
+
+	@Test
+	public void testDisputedCharge() throws StripeException, InterruptedException {
+		Map<String, Object> chargeParams = new HashMap<String, Object>();
+		chargeParams.putAll(defaultChargeParams);
+		Map<String, Object> testmodeDipsuteCardParams = new HashMap<String, Object>();
+		testmodeDipsuteCardParams.put("number", "4000000000000259");
+		testmodeDipsuteCardParams.put("exp_month", 12);
+		testmodeDipsuteCardParams.put("exp_year", 2015);
+		chargeParams.put("card", testmodeDipsuteCardParams);
+		Charge charge = Charge.create(chargeParams);
+
+		// Wait for the dispute to be created asynchronously on the server.
+		// If this flaps or otherwise bothers us, we can revisit the plot.
+		Thread.sleep(5000);
+		Charge reloadedCharge = Charge.retrieve(charge.getId());
+		Dispute dispute = reloadedCharge.getDispute();
+		assertEquals(false, dispute == null);
+		assertEquals(false, dispute.getIsChargeRefundable());
+		assertEquals(1, dispute.getBalanceTransactions().size());
+		assertEquals(Integer.valueOf((-1) * charge.getAmount()), dispute.getBalanceTransactions().get(0).getAmount());
 	}
 
 	@Test
