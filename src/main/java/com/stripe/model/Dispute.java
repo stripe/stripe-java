@@ -1,5 +1,6 @@
 package com.stripe.model;
 
+import java.util.List;
 import java.util.Map;
 
 public class Dispute extends StripeObject {
@@ -12,7 +13,10 @@ public class Dispute extends StripeObject {
 	String evidence;
 	Long evidenceDueBy;
 	String reason;
+	/** 1/2014: Legacy (now use balanceTransactions) -- https://stripe.com/docs/upgrades#2014-08-20 */
 	String balanceTransaction;
+	List<BalanceTransaction> balanceTransactions;
+	Boolean isChargeRefundable;
 	Map<String, String> metadata;
 
 	public Integer getAmount() {
@@ -74,6 +78,18 @@ public class Dispute extends StripeObject {
 	}
 	public void setBalanceTransaction(String balanceTransaction) {
 		this.balanceTransaction = balanceTransaction;
+	}
+	public List<BalanceTransaction> getBalanceTransactions() {
+		return balanceTransactions;
+	}
+	public void setBalanceTransactions(List<BalanceTransaction> balanceTransactions) {
+		this.balanceTransactions = balanceTransactions;
+	}
+	public boolean getIsChargeRefundable() {
+		return isChargeRefundable;
+	}
+	public void setIsChargeRefundable(Boolean isChargeRefundable) {
+		this.isChargeRefundable = isChargeRefundable;
 	}
 	public Map<String, String> getMetadata() {
 		return metadata;
