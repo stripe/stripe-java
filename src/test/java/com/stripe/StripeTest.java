@@ -438,6 +438,8 @@ public class StripeTest {
 		assertEquals(charge.getCard().getAddressLine1Check(), "fail");
 	}
 
+	// This test relies on an asynchronous server interaction, so don't run it in general.
+/*
 	@Test
 	public void testDisputedCharge() throws StripeException, InterruptedException {
 		Map<String, Object> chargeParams = new HashMap<String, Object>();
@@ -449,8 +451,6 @@ public class StripeTest {
 		chargeParams.put("card", testmodeDipsuteCardParams);
 		Charge charge = Charge.create(chargeParams);
 
-		// Wait for the dispute to be created asynchronously on the server.
-		// If this flaps or otherwise bothers us, we can revisit the plot.
 		Thread.sleep(5000);
 		Charge reloadedCharge = Charge.retrieve(charge.getId());
 		Dispute dispute = reloadedCharge.getDispute();
@@ -459,6 +459,7 @@ public class StripeTest {
 		assertEquals(1, dispute.getBalanceTransactions().size());
 		assertEquals(Integer.valueOf((-1) * charge.getAmount()), dispute.getBalanceTransactions().get(0).getAmount());
 	}
+*/
 
 	@Test
 	public void testCustomerCreate() throws StripeException {
