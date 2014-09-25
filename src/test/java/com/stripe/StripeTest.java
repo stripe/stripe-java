@@ -949,8 +949,7 @@ public class StripeTest {
 		Recipient retrievedRecipient = Recipient.retrieve(createdRecipient.getId());
 		assertEquals(createdRecipient.getCreated(), retrievedRecipient.getCreated());
 		assertEquals(createdRecipient.getId(), retrievedRecipient.getId());
-		assertEquals(true, retrievedRecipient.getActiveAccount() instanceof BankAccount);
-		assertEquals(false, retrievedRecipient.getActiveAccount().getValidated());
+		assertEquals(createdRecipient.getActiveAccount().getValidated(), retrievedRecipient.getActiveAccount().getValidated());
 	}
 
 	@Test
