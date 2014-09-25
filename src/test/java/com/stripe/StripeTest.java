@@ -1,29 +1,13 @@
 package com.stripe;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
-
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-import org.junit.BeforeClass;
-import org.junit.Test;
-
 import com.stripe.exception.CardException;
-import com.stripe.exception.StripeException;
 import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.model.Account;
 import com.stripe.model.ApplicationFee;
 import com.stripe.model.Balance;
 import com.stripe.model.BalanceTransaction;
 import com.stripe.model.BalanceTransactionCollection;
-import com.stripe.model.BankAccount;
 import com.stripe.model.Card;
 import com.stripe.model.Charge;
 import com.stripe.model.ChargeCollection;
@@ -35,11 +19,9 @@ import com.stripe.model.DeletedCard;
 import com.stripe.model.DeletedCoupon;
 import com.stripe.model.DeletedCustomer;
 import com.stripe.model.DeletedInvoiceItem;
-import com.stripe.model.DeletedRecipient;
 import com.stripe.model.DeletedPlan;
-import com.stripe.model.Dispute;
+import com.stripe.model.DeletedRecipient;
 import com.stripe.model.Event;
-import com.stripe.model.FeeRefundCollection;
 import com.stripe.model.Invoice;
 import com.stripe.model.InvoiceItem;
 import com.stripe.model.InvoiceLineItemCollection;
@@ -50,6 +32,20 @@ import com.stripe.model.Refund;
 import com.stripe.model.Subscription;
 import com.stripe.model.Token;
 import com.stripe.model.Transfer;
+import org.junit.BeforeClass;
+import org.junit.Test;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+import java.util.UUID;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 public class StripeTest {
 	static Map<String, Object> defaultCardParams = new HashMap<String, Object>();

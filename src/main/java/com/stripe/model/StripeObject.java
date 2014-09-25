@@ -1,10 +1,10 @@
 package com.stripe.model;
 
-import java.lang.reflect.Field;
-
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
+import java.lang.reflect.Field;
 
 public abstract class StripeObject {
 	

@@ -1,5 +1,24 @@
 package com.stripe.net;
 
+import com.google.gson.FieldNamingPolicy;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.stripe.Stripe;
+import com.stripe.exception.APIConnectionException;
+import com.stripe.exception.APIException;
+import com.stripe.exception.AuthenticationException;
+import com.stripe.exception.CardException;
+import com.stripe.exception.InvalidRequestException;
+import com.stripe.model.ChargeRefundCollection;
+import com.stripe.model.ChargeRefundCollectionDeserializer;
+import com.stripe.model.EventData;
+import com.stripe.model.EventDataDeserializer;
+import com.stripe.model.FeeRefundCollection;
+import com.stripe.model.FeeRefundCollectionDeserializer;
+import com.stripe.model.StripeObject;
+import com.stripe.model.StripeRawJsonObject;
+import com.stripe.model.StripeRawJsonObjectDeserializer;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -17,28 +36,9 @@ import java.security.cert.Certificate;
 import java.security.cert.CertificateEncodingException;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.List;
-
-import com.google.gson.FieldNamingPolicy;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.stripe.Stripe;
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
-import com.stripe.model.EventData;
-import com.stripe.model.EventDataDeserializer;
-import com.stripe.model.ChargeRefundCollection;
-import com.stripe.model.ChargeRefundCollectionDeserializer;
-import com.stripe.model.StripeObject;
-import com.stripe.model.StripeRawJsonObject;
-import com.stripe.model.StripeRawJsonObjectDeserializer;
-import com.stripe.model.FeeRefundCollection;
-import com.stripe.model.FeeRefundCollectionDeserializer;
 
 public abstract class APIResource extends StripeObject {
 
@@ -144,7 +144,7 @@ public abstract class APIResource extends StripeObject {
 
 	private static java.net.HttpURLConnection createStripeConnection(
 			String url, String apiKey) throws IOException {
-		URL stripeURL = null;
+		URL stripeURL;
 		String customURLStreamHandlerClassName = System.getProperty(
 				CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME, null);
 		if (customURLStreamHandlerClassName != null) {
@@ -316,7 +316,7 @@ public abstract class APIResource extends StripeObject {
 										key, null);
 			} else if (value == null) {
 				flatParams.put(key, "");
-			} else if (value != null) {
+			} else {
 				flatParams.put(key, value.toString());
 			}
 		}
@@ -376,7 +376,7 @@ public abstract class APIResource extends StripeObject {
 			}
 			// trigger the request
 			int rCode = conn.getResponseCode();
-			String rBody = null;
+			String rBody;
 			Map<String, List<String>> headers;
 
 			if (rCode >= 200 && rCode < 300) {
@@ -526,7 +526,7 @@ public abstract class APIResource extends StripeObject {
 
 			Class<?> fetchOptionsBuilderClass = Class
 					.forName("com.google.appengine.api.urlfetch.FetchOptions$Builder");
-			Object fetchOptions = null;
+			Object fetchOptions;
 			try {
 				fetchOptions = fetchOptionsBuilderClass.getDeclaredMethod(
 						"validateCertificate").invoke(null);
@@ -546,7 +546,7 @@ public abstract class APIResource extends StripeObject {
 			// some time for the application to handle a slow Stripe
 			fetchOptionsClass.getDeclaredMethod("setDeadline",
 					java.lang.Double.class)
-					.invoke(fetchOptions, new Double(55));
+					.invoke(fetchOptions, 55);
 
 			Class<?> requestClass = Class
 					.forName("com.google.appengine.api.urlfetch.HTTPRequest");

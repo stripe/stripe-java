@@ -1,13 +1,13 @@
 package com.stripe.model;
 
-import java.util.Map;
-
 import com.stripe.exception.APIConnectionException;
 import com.stripe.exception.APIException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
+
+import java.util.Map;
 
 public class ApplicationFee extends APIResource {
 	Integer amount;
@@ -162,7 +162,7 @@ public class ApplicationFee extends APIResource {
 	public ApplicationFee refund(String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return this.refund((Map<String, Object>) null, apiKey); // full refund
+		return this.refund(null, apiKey); // full refund
 	}
 
 	public ApplicationFee refund(Map<String, Object> params, String apiKey)

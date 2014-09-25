@@ -1,13 +1,13 @@
 package com.stripe.model;
 
-import java.util.Map;
-
 import com.stripe.Stripe;
 import com.stripe.exception.APIConnectionException;
 import com.stripe.exception.APIException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
+
+import java.util.Map;
 
 public class CustomerCardCollection extends StripeColllectionAPIResource<Card> {
   public CustomerCardCollection all(Map<String, Object> params)
