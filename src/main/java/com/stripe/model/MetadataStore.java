@@ -1,12 +1,12 @@
 package com.stripe.model;
 
-import java.util.Map;
-
 import com.stripe.exception.APIConnectionException;
 import com.stripe.exception.APIException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
+
+import java.util.Map;
 
 /**
  * Common interface for Stripe objects that can store metadata.

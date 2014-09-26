@@ -1,8 +1,8 @@
 package com.stripe.model;
 
-import java.util.List;
-
 import com.stripe.net.APIResource;
+
+import java.util.List;
 
 public abstract class StripeColllectionAPIResource<T> extends APIResource {
 	List<T> data;

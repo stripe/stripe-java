@@ -1,10 +1,5 @@
 package com.stripe.model;
 
-import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.Map;
-
 import com.google.gson.JsonArray;
 import com.google.gson.JsonDeserializationContext;
 import com.google.gson.JsonDeserializer;
@@ -14,10 +9,15 @@ import com.google.gson.JsonParseException;
 import com.google.gson.JsonPrimitive;
 import com.stripe.net.APIResource;
 
+import java.lang.reflect.Type;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
 public class EventDataDeserializer implements JsonDeserializer<EventData> {
 
 	@SuppressWarnings("rawtypes")
-	static Map<String, Class> objectMap = new HashMap<String, Class>();
+	static final Map<String, Class> objectMap = new HashMap<String, Class>();
     static {
         objectMap.put("account", Account.class);
         objectMap.put("charge", Charge.class);

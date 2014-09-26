@@ -3,11 +3,10 @@ package com.stripe.model;
 import com.google.gson.Gson;
 import org.junit.Test;
 
-import java.util.List;
-
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.List;
 
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertEquals;

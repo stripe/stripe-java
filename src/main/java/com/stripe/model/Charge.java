@@ -1,13 +1,13 @@
 package com.stripe.model;
 
-import java.util.Map;
-
 import com.stripe.exception.APIConnectionException;
 import com.stripe.exception.APIException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
+
+import java.util.Map;
 
 public class Charge extends APIResource implements MetadataStore<Charge> {
 	Integer amount;
@@ -303,13 +303,13 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 	public Charge refund(String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return this.refund((Map<String, Object>) null, apiKey); // full refund
+		return this.refund(null, apiKey); // full refund
 	}
 
 	public Charge capture(String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return this.capture((Map<String, Object>) null, apiKey);
+		return this.capture(null, apiKey);
 	}
 
 	public Charge refund(Map<String, Object> params, String apiKey)
