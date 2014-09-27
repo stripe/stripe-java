@@ -17,7 +17,9 @@ public class Transfer extends APIResource implements MetadataStore<Transfer> {
 	Boolean livemode;
 	Summary summary;
 	String description;
+	/** Legacy (replaced with statementDescription in https://stripe.com/docs/upgrades#2014-03-13) */
 	String statementDescriptor;
+	String statementDescription;
 	Integer amount;
 	String currency;
 	List<String> otherTransfers;
@@ -74,12 +76,22 @@ public class Transfer extends APIResource implements MetadataStore<Transfer> {
 		this.description = description;
 	}
 
+	/** Legacy (replaced with statementDescription in https://stripe.com/docs/upgrades#2014-03-13) */
 	public String getStatementDescriptor() {
 		return statementDescriptor;
 	}
 
+	/** Legacy (replaced with statementDescription in https://stripe.com/docs/upgrades#2014-03-13) */
 	public void setStatementDescriptor(String statementDescriptor) {
 		this.statementDescriptor = statementDescriptor;
+	}
+
+	public String getStatementDescription() {
+		return statementDescription;
+	}
+
+	public void setStatementDescription(String statementDescription) {
+		this.statementDescription = statementDescription;
 	}
 
 	public Integer getAmount() {
