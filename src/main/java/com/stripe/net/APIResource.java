@@ -546,7 +546,7 @@ public abstract class APIResource extends StripeObject {
 			// some time for the application to handle a slow Stripe
 			fetchOptionsClass.getDeclaredMethod("setDeadline",
 					java.lang.Double.class)
-					.invoke(fetchOptions, 55);
+					.invoke(fetchOptions, new Double(55));
 
 			Class<?> requestClass = Class
 					.forName("com.google.appengine.api.urlfetch.HTTPRequest");
