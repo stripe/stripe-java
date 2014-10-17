@@ -33,6 +33,12 @@ You'll need to manually install the following JARs:
 * The Stripe JAR from https://code.stripe.com/stripe-java-latest.jar
 * [Google Gson](http://code.google.com/p/google-gson/) from <http://google-gson.googlecode.com/files/google-gson-2.2.4-release.zip>.
 
+### [ProGuard](http://proguard.sourceforge.net/)
+
+If you're planning on using ProGuard, make sure that you exclude the Stripe bindings. You can do this by adding the following to your `proguard.cfg` file:
+
+    -keep class com.stripe.** { *; }
+
 Usage
 =====
 
