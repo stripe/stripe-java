@@ -203,10 +203,10 @@ public class StripeTest {
 	public void testAccountRetrieve() throws StripeException {
 		Account retrievedAccount = Account.retrieve();
 		assertEquals("test+bindings@stripe.com", retrievedAccount.getEmail());
-		assertEquals(false, retrievedAccount.getChargeEnabled());
+		assertEquals(false, retrievedAccount.getChargesEnabled());
 		assertEquals(false, retrievedAccount.getDetailsSubmitted());
 		assertEquals(null, retrievedAccount.getStatementDescriptor());
-		assertEquals(false, retrievedAccount.getTransferEnabled());
+		assertEquals(false, retrievedAccount.getTransfersEnabled());
 		assertEquals("usd", retrievedAccount.getDefaultCurrency());
 	}
 

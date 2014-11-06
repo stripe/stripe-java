@@ -11,9 +11,9 @@ import java.util.List;
 
 public class Account extends APIResource {
 	String id;
-	Boolean chargeEnabled;
+	Boolean chargesEnabled;
 	Boolean detailsSubmitted;
-	Boolean transferEnabled;
+	Boolean transfersEnabled;
 	List<String> currenciesSupported;
 	String email;
 	String statementDescriptor;
@@ -26,16 +26,16 @@ public class Account extends APIResource {
 		return id;
 	}
 
-	public Boolean getChargeEnabled() {
-		return chargeEnabled;
+	public Boolean getChargesEnabled() {
+		return chargesEnabled;
 	}
 
 	public Boolean getDetailsSubmitted() {
 		return detailsSubmitted;
 	}
 
-	public Boolean getTransferEnabled() {
-		return transferEnabled;
+	public Boolean getTransfersEnabled() {
+		return transfersEnabled;
 	}
 
 	public List<String> getCurrenciesSupported() {
