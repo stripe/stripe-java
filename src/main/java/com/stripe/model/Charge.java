@@ -31,6 +31,8 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 	Dispute dispute;
 	String balanceTransaction;
 	Map<String, String> metadata;
+	String receiptEmail;
+	String receiptNumber;
 	String statementDescription;
 
 	public String getId() {
@@ -210,6 +212,22 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 
 	public void setMetadata(Map<String, String> metadata) {
 		this.metadata = metadata;
+	}
+
+	public String getReceiptNumber() {
+		return receiptNumber;
+	}
+
+	public void setReceiptNumber(String receiptNumber) {
+		this.receiptNumber = receiptNumber;
+	}
+
+	public String getReceiptEmail() {
+		return receiptEmail;
+	}
+
+	public void setReceiptEmail(String receiptEmail) {
+		this.receiptEmail = receiptEmail;
 	}
 
 	public static Charge create(Map<String, Object> params)
