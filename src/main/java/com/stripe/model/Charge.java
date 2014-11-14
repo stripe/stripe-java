@@ -21,7 +21,6 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 	Boolean disputed;
 	Boolean captured;
 	String description;
-	String statementDescription;
 	String failureMessage;
 	String failureCode;
 	Integer amountRefunded;
@@ -32,6 +31,9 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 	Dispute dispute;
 	String balanceTransaction;
 	Map<String, String> metadata;
+	String receiptEmail;
+	String receiptNumber;
+	String statementDescription;
 
 	public String getId() {
 		return id;
@@ -172,7 +174,7 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 	}
 
 	public ChargeRefundCollection getRefunds() {
-		// API versions 2014-05-19 and earlier render charge refunds as an array 
+		// API versions 2014-05-19 and earlier render charge refunds as an array
 		// instead of an object, meaning there is no sublist URL.
 		if (refunds.getURL() == null) {
 			refunds.setURL(String.format("/v1/charges/%s/refunds", getId()));
@@ -210,6 +212,22 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 
 	public void setMetadata(Map<String, String> metadata) {
 		this.metadata = metadata;
+	}
+
+	public String getReceiptNumber() {
+		return receiptNumber;
+	}
+
+	public void setReceiptNumber(String receiptNumber) {
+		this.receiptNumber = receiptNumber;
+	}
+
+	public String getReceiptEmail() {
+		return receiptEmail;
+	}
+
+	public void setReceiptEmail(String receiptEmail) {
+		this.receiptEmail = receiptEmail;
 	}
 
 	public static Charge create(Map<String, Object> params)
