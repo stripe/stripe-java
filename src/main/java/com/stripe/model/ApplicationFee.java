@@ -6,6 +6,7 @@ import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
+import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
@@ -124,54 +125,69 @@ public class ApplicationFee extends APIResource {
 	public static ApplicationFee retrieve(String id) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return retrieve(id, null);
+		return retrieve(id, RequestOptions.getDefault());
+	}
+	@Deprecated
+	public static ApplicationFee retrieve(String id, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
+	}
+	public static ApplicationFee retrieve(String id, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, instanceURL(ApplicationFee.class, id), null, ApplicationFee.class, options);
 	}
 
 	public static ApplicationFeeCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return all(params, null);
+		return all(params, RequestOptions.getDefault());
 	}
+	@Deprecated
+	public static ApplicationFeeCollection all(Map<String, Object> params, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return all(params, RequestOptions.builder().setApiKey(apiKey).build());
+	}
+	public static ApplicationFeeCollection all(Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, classURL(ApplicationFee.class), params, ApplicationFeeCollection.class, options);
+	}
+
 
 	public ApplicationFee refund() throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return this.refund(null, null);
+		return this.refund(null, RequestOptions.getDefault());
 	}
-
 	public ApplicationFee refund(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return this.refund(params, null);
+		return this.refund(params, RequestOptions.getDefault());
 	}
-
-	public static ApplicationFee retrieve(String id, String apiKey)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.GET, instanceURL(ApplicationFee.class, id), null,
-				ApplicationFee.class, apiKey);
-	}
-
-	public static ApplicationFeeCollection all(Map<String, Object> params, String apiKey)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.GET, classURL(ApplicationFee.class), params,
-				ApplicationFeeCollection.class, apiKey);
-	}
-
+	@Deprecated
 	public ApplicationFee refund(String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return this.refund(null, apiKey); // full refund
+		return this.refund(RequestOptions.builder().setApiKey(apiKey).build());
 	}
-
+	public ApplicationFee refund(RequestOptions options) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return refund(null, options);
+	}
+	@Deprecated
 	public ApplicationFee refund(Map<String, Object> params, String apiKey)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return request(
-				RequestMethod.POST,
-				String.format("%s/refund",
-						instanceURL(ApplicationFee.class, this.getId())),
-							params, ApplicationFee.class, apiKey);
+		return refund(params, RequestOptions.builder().setApiKey(apiKey).build());
+	}
+	public ApplicationFee refund(Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.POST, String.format("%s/refund",
+						instanceURL(ApplicationFee.class, this.getId())), params, ApplicationFee.class, options);
 	}
 }

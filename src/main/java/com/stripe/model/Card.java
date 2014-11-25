@@ -6,6 +6,7 @@ import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
+import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
@@ -35,27 +36,37 @@ public class Card extends APIResource {
 	public Card update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return update(params, null);
+		return update(params, RequestOptions.getDefault());
 	}
 
+	@Deprecated
 	public Card update(Map<String, Object> params, String apiKey)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.POST, this.getInstanceURL(), params, Card.class, apiKey);
+		return update(params, RequestOptions.builder().setApiKey(apiKey).build());
+	}
+	public Card update(Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.POST, this.getInstanceURL(), params, Card.class, options);
 	}
 
 	public DeletedCard delete() throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return delete(null);
+		return delete(RequestOptions.getDefault());
 	}
 
+	@Deprecated
 	public DeletedCard delete(String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return request(RequestMethod.DELETE,
-				this.getInstanceURL(), null, DeletedCard.class,
-				apiKey);
+		return delete(RequestOptions.builder().setApiKey(apiKey).build());
+	}
+	public DeletedCard delete(RequestOptions options) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedCard.class, options);
 	}
 
 	public String getInstanceURL() {

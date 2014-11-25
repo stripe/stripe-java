@@ -6,6 +6,7 @@ import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
+import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
@@ -34,63 +35,85 @@ public class Coupon extends APIResource implements MetadataStore<Coupon> {
 	public static Coupon create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return create(params, null);
+		return create(params, RequestOptions.getDefault());
 	}
 
 	public static Coupon retrieve(String id) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return retrieve(id, null);
+		return retrieve(id, RequestOptions.getDefault());
 	}
 
 	public Coupon update(Map<String, Object> params) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
-		return update(params, null);
+		return update(params, RequestOptions.getDefault());
 	}
 
+	@Deprecated
 	public Coupon update(Map<String, Object> params, String apiKey) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
-		return request(RequestMethod.POST, instanceURL(Coupon.class, this.id),
-				params, Coupon.class, apiKey);
+		return update(params, RequestOptions.builder().setApiKey(apiKey).build());
+	}
+	public Coupon update(Map<String, Object> params, RequestOptions options) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
+		return request(RequestMethod.POST, instanceURL(Coupon.class, this.id), params, Coupon.class, options);
+	}
+
+	@Deprecated
+	public static Coupon create(Map<String, Object> params, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return create(params, RequestOptions.builder().setApiKey(apiKey).build());
+	}
+	public static Coupon create(Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.POST, classURL(Coupon.class), params, Coupon.class, options);
+	}
+
+	@Deprecated
+	public static Coupon retrieve(String id, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
+	}
+	public static Coupon retrieve(String id, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, instanceURL(Coupon.class, id), null, Coupon.class, options);
 	}
 
 	public static CouponCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return all(params, null);
+		return all(params, RequestOptions.getDefault());
+	}
+
+	@Deprecated
+	public static CouponCollection all(Map<String, Object> params, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return all(params, RequestOptions.builder().setApiKey(apiKey).build());
+	}
+	public static CouponCollection all(Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, classURL(Coupon.class), params, CouponCollection.class, options);
 	}
 
 	public DeletedCoupon delete() throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return delete(null);
+		return delete(RequestOptions.getDefault());
 	}
 
-	public static Coupon create(Map<String, Object> params, String apiKey)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.POST, classURL(Coupon.class), params,
-				Coupon.class, apiKey);
-	}
-
-	public static Coupon retrieve(String id, String apiKey)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.GET, instanceURL(Coupon.class, id), null,
-				Coupon.class, apiKey);
-	}
-
-	public static CouponCollection all(Map<String, Object> params, String apiKey)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.GET, classURL(Coupon.class), params,
-				CouponCollection.class, apiKey);
-	}
-
+	@Deprecated
 	public DeletedCoupon delete(String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return request(RequestMethod.DELETE,
-				instanceURL(Coupon.class, this.id), null, DeletedCoupon.class,
-				apiKey);
+		return delete(RequestOptions.builder().setApiKey(apiKey).build());
+	}
+	public DeletedCoupon delete(RequestOptions options) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return request(RequestMethod.DELETE, instanceURL(Coupon.class, this.id), null, DeletedCoupon.class, options);
 	}
 
 	public Integer getPercentOff() {

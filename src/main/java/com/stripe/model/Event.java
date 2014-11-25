@@ -6,6 +6,7 @@ import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
+import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
@@ -22,27 +23,37 @@ public class Event extends APIResource {
 	public static Event retrieve(String id) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return retrieve(id, null);
+		return retrieve(id, RequestOptions.getDefault());
 	}
 
 	public static EventCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return all(params, null);
+		return all(params, RequestOptions.getDefault());
 	}
 
+	@Deprecated
 	public static Event retrieve(String id, String apiKey)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.GET, instanceURL(Event.class, id), null,
-				Event.class, apiKey);
+		return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
+	}
+	public static Event retrieve(String id, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, instanceURL(Event.class, id), null, Event.class, options);
 	}
 
+	@Deprecated
 	public static EventCollection all(Map<String, Object> params, String apiKey)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.GET, classURL(Event.class), params,
-				EventCollection.class, apiKey);
+		return all(params, RequestOptions.builder().setApiKey(apiKey).build());
+	}
+	public static EventCollection all(Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, classURL(Event.class), params, EventCollection.class, options);
 	}
 
 	public EventData getData() {

@@ -6,6 +6,7 @@ import com.stripe.exception.APIException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
+import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
@@ -13,15 +14,21 @@ public class InvoiceLineItemCollection extends StripeColllectionAPIResource<Invo
 	public InvoiceLineItemCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return all(params, null);
+		return all(params, RequestOptions.getDefault());
 	}
 
+	@Deprecated
 	public InvoiceLineItemCollection all(Map<String, Object> params,
 			String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
+		return all(params, RequestOptions.builder().setApiKey(apiKey).build());
+	}
+	public InvoiceLineItemCollection all(Map<String, Object> params,
+			RequestOptions options) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
 		String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
-		return request(RequestMethod.GET, url, params,
-				InvoiceLineItemCollection.class, apiKey);
+		return request(RequestMethod.GET, url, params, InvoiceLineItemCollection.class, options);
 	}
 }

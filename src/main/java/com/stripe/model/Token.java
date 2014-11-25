@@ -6,6 +6,7 @@ import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
+import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
@@ -77,26 +78,36 @@ public class Token extends APIResource {
 	public static Token create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return create(params, null);
+		return create(params, RequestOptions.getDefault());
 	}
 
 	public static Token retrieve(String id) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return retrieve(id, null);
+		return retrieve(id, RequestOptions.getDefault());
 	}
 
+	@Deprecated
 	public static Token create(Map<String, Object> params, String apiKey)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.POST, classURL(Token.class), params,
-				Token.class, apiKey);
+		return create(params, RequestOptions.builder().setApiKey(apiKey).build());
+	}
+	public static Token create(Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.POST, classURL(Token.class), params, Token.class, options);
 	}
 
+	@Deprecated
 	public static Token retrieve(String id, String apiKey)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.GET, instanceURL(Token.class, id), null,
-				Token.class, apiKey);
+		return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
+	}
+	public static Token retrieve(String id, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, instanceURL(Token.class, id), null, Token.class, options);
 	}
 }
