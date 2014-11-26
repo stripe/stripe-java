@@ -35,17 +35,17 @@ public class Coupon extends APIResource implements MetadataStore<Coupon> {
 	public static Coupon create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return create(params, RequestOptions.getDefault());
+		return create(params, (RequestOptions) null);
 	}
 
 	public static Coupon retrieve(String id) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return retrieve(id, RequestOptions.getDefault());
+		return retrieve(id, (RequestOptions) null);
 	}
 
 	public Coupon update(Map<String, Object> params) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
-		return update(params, RequestOptions.getDefault());
+		return update(params, (RequestOptions) null);
 	}
 
 	@Deprecated
@@ -83,7 +83,7 @@ public class Coupon extends APIResource implements MetadataStore<Coupon> {
 	public static CouponCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return all(params, RequestOptions.getDefault());
+		return all(params, (RequestOptions) null);
 	}
 
 	@Deprecated
@@ -101,7 +101,7 @@ public class Coupon extends APIResource implements MetadataStore<Coupon> {
 	public DeletedCoupon delete() throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return delete(RequestOptions.getDefault());
+		return delete((RequestOptions) null);
 	}
 
 	@Deprecated

@@ -14,7 +14,7 @@ public class CustomerCardCollection extends StripeColllectionAPIResource<Card> {
   public CustomerCardCollection all(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return all(params, RequestOptions.getDefault());
+    return all(params, (RequestOptions) null);
   }
 
   @Deprecated
@@ -35,7 +35,7 @@ public class CustomerCardCollection extends StripeColllectionAPIResource<Card> {
   public Card retrieve(String id)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return retrieve(id, RequestOptions.getDefault());
+    return retrieve(id, (RequestOptions) null);
   }
 
   @Deprecated
@@ -54,7 +54,7 @@ public class CustomerCardCollection extends StripeColllectionAPIResource<Card> {
   public Card create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return create(params, RequestOptions.getDefault());
+    return create(params, (RequestOptions) null);
   }
 
   @Deprecated

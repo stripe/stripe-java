@@ -78,13 +78,13 @@ public class Token extends APIResource {
 	public static Token create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return create(params, RequestOptions.getDefault());
+		return create(params, (RequestOptions) null);
 	}
 
 	public static Token retrieve(String id) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return retrieve(id, RequestOptions.getDefault());
+		return retrieve(id, (RequestOptions) null);
 	}
 
 	@Deprecated

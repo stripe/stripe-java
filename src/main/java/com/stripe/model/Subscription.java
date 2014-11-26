@@ -32,7 +32,7 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 	public Subscription update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return update(params, RequestOptions.getDefault());
+		return update(params, (RequestOptions) null);
 	}
 
 	@Deprecated
@@ -50,7 +50,7 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 	public Subscription cancel(Map<String, Object> params) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return cancel(params, RequestOptions.getDefault());
+		return cancel(params, (RequestOptions) null);
 	}
 
 	@Deprecated
@@ -68,7 +68,7 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 	public void deleteDiscount() throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		deleteDiscount(RequestOptions.getDefault());
+		deleteDiscount((RequestOptions) null);
 	}
 
 	@Deprecated

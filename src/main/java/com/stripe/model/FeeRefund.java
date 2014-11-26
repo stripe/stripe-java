@@ -22,7 +22,7 @@ public class FeeRefund extends APIResource implements MetadataStore<ApplicationF
 	public FeeRefund update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return update(params, RequestOptions.getDefault());
+		return update(params, (RequestOptions) null);
 	}
 
 	@Deprecated

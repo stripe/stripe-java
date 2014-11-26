@@ -105,31 +105,31 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
 	public static InvoiceItem create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return create(params, RequestOptions.getDefault());
+		return create(params, (RequestOptions) null);
 	}
 
 	public static InvoiceItem retrieve(String id)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return retrieve(id, RequestOptions.getDefault());
+		return retrieve(id, (RequestOptions) null);
 	}
 
 	public static InvoiceItemCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return all(params, RequestOptions.getDefault());
+		return all(params, (RequestOptions) null);
 	}
 
 	public InvoiceItem update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return update(params, RequestOptions.getDefault());
+		return update(params, (RequestOptions) null);
 	}
 
 	public DeletedInvoiceItem delete() throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return delete(RequestOptions.getDefault());
+		return delete((RequestOptions) null);
 	}
 
 	@Deprecated

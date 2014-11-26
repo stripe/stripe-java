@@ -228,37 +228,37 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>{
 	public static Invoice retrieve(String id) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return retrieve(id, RequestOptions.getDefault());
+		return retrieve(id, (RequestOptions) null);
 	}
 
 	public static Invoice create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return create(params, RequestOptions.getDefault());
+		return create(params, (RequestOptions) null);
 	}
 
 	public static InvoiceCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return all(params, RequestOptions.getDefault());
+		return all(params, (RequestOptions) null);
 	}
 
 	public static Invoice upcoming(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return upcoming(params, RequestOptions.getDefault());
+		return upcoming(params, (RequestOptions) null);
 	}
 
 	public Invoice pay() throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return this.pay(RequestOptions.getDefault());
+		return this.pay((RequestOptions) null);
 	}
 
 	public Invoice update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return update(params, RequestOptions.getDefault());
+		return update(params, (RequestOptions) null);
 	}
 
 	@Deprecated

@@ -151,76 +151,76 @@ public class Customer extends APIResource implements MetadataStore<Customer> {
 	public static Customer create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return create(params, RequestOptions.getDefault());
+		return create(params, (RequestOptions) null);
 	}
 
 	public static Customer retrieve(String id) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return retrieve(id, RequestOptions.getDefault());
+		return retrieve(id, (RequestOptions) null);
 	}
 
 	public static CustomerCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return all(params, RequestOptions.getDefault());
+		return all(params, (RequestOptions) null);
 	}
 
 	public Customer update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return update(params, RequestOptions.getDefault());
+		return update(params, (RequestOptions) null);
 	}
 
 	public DeletedCustomer delete() throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return delete(RequestOptions.getDefault());
+		return delete((RequestOptions) null);
 	}
 
 	public Card createCard(String token) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return createCard(token, RequestOptions.getDefault());
+		return createCard(token, (RequestOptions) null);
 	}
 
 	public Card createCard(Map<String, Object> params) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return createCard(params, RequestOptions.getDefault());
+		return createCard(params, (RequestOptions) null);
 	}
 
 	public Subscription createSubscription(Map<String, Object> params) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-	return createSubscription(params, RequestOptions.getDefault());
+	return createSubscription(params, (RequestOptions) null);
 	}
 
 	/** 1/2014: Legacy (from before multiple subscriptions per customer) */
 	public Subscription updateSubscription(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return updateSubscription(params, RequestOptions.getDefault());
+		return updateSubscription(params, (RequestOptions) null);
 	}
 
 	/** 1/2014: Legacy (from before multiple subscriptions per customer) */
 	public Subscription cancelSubscription() throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return cancelSubscription(null, RequestOptions.getDefault());
+		return cancelSubscription(null, (RequestOptions) null);
 	}
 
 	/** 1/2014: Legacy (from before multiple subscriptions per customer) */
 	public Subscription cancelSubscription(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return cancelSubscription(params, RequestOptions.getDefault());
+		return cancelSubscription(params, (RequestOptions) null);
 	}
 
 	public void deleteDiscount() throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		deleteDiscount(RequestOptions.getDefault());
+		deleteDiscount((RequestOptions) null);
 	}
 
 	@Deprecated

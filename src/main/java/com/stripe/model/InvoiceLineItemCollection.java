@@ -14,7 +14,7 @@ public class InvoiceLineItemCollection extends StripeColllectionAPIResource<Invo
 	public InvoiceLineItemCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return all(params, RequestOptions.getDefault());
+		return all(params, (RequestOptions) null);
 	}
 
 	@Deprecated

@@ -22,7 +22,7 @@ public class Refund extends APIResource implements MetadataStore<Charge> {
 	public Refund update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return update(params, RequestOptions.getDefault());
+		return update(params, (RequestOptions) null);
 	}
 
 	@Deprecated

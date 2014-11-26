@@ -30,7 +30,7 @@ public class Balance extends APIResource {
 	public static Balance retrieve() throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return retrieve(RequestOptions.getDefault());
+		return retrieve((RequestOptions) null);
 	}
 
 	@Deprecated

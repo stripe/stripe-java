@@ -70,7 +70,7 @@ public class Account extends APIResource {
 	public static Account retrieve()
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return retrieve(RequestOptions.getDefault());
+		return retrieve((RequestOptions) null);
 	}
 
 	@Deprecated

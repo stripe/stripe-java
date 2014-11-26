@@ -36,7 +36,7 @@ public class Card extends APIResource {
 	public Card update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return update(params, RequestOptions.getDefault());
+		return update(params, (RequestOptions) null);
 	}
 
 	@Deprecated
@@ -54,7 +54,7 @@ public class Card extends APIResource {
 	public DeletedCard delete() throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return delete(RequestOptions.getDefault());
+		return delete((RequestOptions) null);
 	}
 
 	@Deprecated

@@ -125,7 +125,7 @@ public class ApplicationFee extends APIResource {
 	public static ApplicationFee retrieve(String id) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return retrieve(id, RequestOptions.getDefault());
+		return retrieve(id, (RequestOptions) null);
 	}
 	@Deprecated
 	public static ApplicationFee retrieve(String id, String apiKey)
@@ -142,7 +142,7 @@ public class ApplicationFee extends APIResource {
 	public static ApplicationFeeCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return all(params, RequestOptions.getDefault());
+		return all(params, (RequestOptions) null);
 	}
 	@Deprecated
 	public static ApplicationFeeCollection all(Map<String, Object> params, String apiKey)
@@ -160,12 +160,12 @@ public class ApplicationFee extends APIResource {
 	public ApplicationFee refund() throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return this.refund(null, RequestOptions.getDefault());
+		return this.refund(null, (RequestOptions) null);
 	}
 	public ApplicationFee refund(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return this.refund(params, RequestOptions.getDefault());
+		return this.refund(params, (RequestOptions) null);
 	}
 	@Deprecated
 	public ApplicationFee refund(String apiKey) throws AuthenticationException,

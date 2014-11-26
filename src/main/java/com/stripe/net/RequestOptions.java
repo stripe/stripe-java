@@ -49,14 +49,16 @@ public class RequestOptions {
 	}
 
 	public static final class RequestOptionsBuilder {
-		private String apiKey = Stripe.apiKey;
-		private String stripeVersion = Stripe.apiVersion;
+		private String apiKey;
+		private String stripeVersion;
+
+		public RequestOptionsBuilder() {
+			this.apiKey = Stripe.apiKey;
+			this.stripeVersion = Stripe.apiVersion;
+		}
 
 		public String getApiKey() {
 			return apiKey;
-		}
-
-		public RequestOptionsBuilder() {
 		}
 
 		public RequestOptionsBuilder setApiKey(String apiKey) {
