@@ -6,6 +6,7 @@ import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
+import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
@@ -31,41 +32,59 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 	public Subscription update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return update(params, null);
+		return update(params, (RequestOptions) null);
 	}
 
+	@Deprecated
 	public Subscription update(Map<String, Object> params, String apiKey)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.POST, this.getInstanceURL(), params, Subscription.class, apiKey);
+		return update(params, RequestOptions.builder().setApiKey(apiKey).build());
+	}
+	public Subscription update(Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.POST, this.getInstanceURL(), params, Subscription.class, options);
 	}
 
 	public Subscription cancel(Map<String, Object> params) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return cancel(params, null);
+		return cancel(params, (RequestOptions) null);
 	}
 
+	@Deprecated
 	public Subscription cancel(Map<String, Object> params, String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return request(RequestMethod.DELETE,
-				this.getInstanceURL(), params, Subscription.class,
-				apiKey);
+		return cancel(params, RequestOptions.builder().setApiKey(apiKey).build());
+	}
+	public Subscription cancel(Map<String, Object> params, RequestOptions options) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return request(RequestMethod.DELETE, this.getInstanceURL(), params, Subscription.class, options);
 	}
 
 	public void deleteDiscount() throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		deleteDiscount(null);
+		deleteDiscount((RequestOptions) null);
 	}
 
+	@Deprecated
 	public void deleteDiscount(String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		request(RequestMethod.DELETE,
-				String.format("%s/discount", this.getInstanceURL()), null,
-				Discount.class, apiKey);
+		RequestOptions result = null;
+		if (apiKey != null) {
+			result = RequestOptions.builder().setApiKey(apiKey).build();
+		}
+		deleteDiscount(result);
+	}
+	public void deleteDiscount(RequestOptions options) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		request(RequestMethod.DELETE, String.format("%s/discount", this.getInstanceURL()), null, Discount.class, options);
 	}
 
 	public String getInstanceURL() {
@@ -171,6 +190,6 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 
 	public void setMetadata(Map<String, String> metadata) {
 		this.metadata = metadata;
-		
+
 	}
 }

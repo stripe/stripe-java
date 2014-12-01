@@ -5,6 +5,7 @@ import com.stripe.exception.APIException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
+import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
@@ -17,6 +18,10 @@ public interface MetadataStore<T> {
 
 	MetadataStore<T> update(Map<String, Object> params) throws AuthenticationException, InvalidRequestException,
 		APIConnectionException, CardException, APIException;
+
+	@Deprecated
 	MetadataStore<T> update(Map<String, Object> params, String apiKey) throws AuthenticationException, InvalidRequestException,
+		APIConnectionException, CardException, APIException;
+	MetadataStore<T> update(Map<String, Object> params, RequestOptions options) throws AuthenticationException, InvalidRequestException,
 		APIConnectionException, CardException, APIException;
 }

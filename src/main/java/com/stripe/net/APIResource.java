@@ -112,17 +112,14 @@ public abstract class APIResource extends StripeObject {
 		return String.format("%s=%s", urlEncode(k), urlEncode(v));
 	}
 
-	static Map<String, String> getHeaders(String apiKey) {
+	static Map<String, String> getHeaders(RequestOptions options) {
 		Map<String, String> headers = new HashMap<String, String>();
+		String apiVersion = options.getStripeVersion();
 		headers.put("Accept-Charset", CHARSET);
 		headers.put("User-Agent",
 				String.format("Stripe/v1 JavaBindings/%s", Stripe.VERSION));
 
-		if (apiKey == null) {
-			apiKey = Stripe.apiKey;
-		}
-
-		headers.put("Authorization", String.format("Bearer %s", apiKey));
+		headers.put("Authorization", String.format("Bearer %s", options.getApiKey()));
 
 		// debug headers
 		String[] propertyNames = { "os.name", "os.version", "os.arch",
@@ -136,14 +133,14 @@ public abstract class APIResource extends StripeObject {
 		propertyMap.put("lang", "Java");
 		propertyMap.put("publisher", "Stripe");
 		headers.put("X-Stripe-Client-User-Agent", GSON.toJson(propertyMap));
-		if (Stripe.apiVersion != null) {
-			headers.put("Stripe-Version", Stripe.apiVersion);
+		if (apiVersion != null) {
+			headers.put("Stripe-Version", apiVersion);
 		}
 		return headers;
 	}
 
 	private static java.net.HttpURLConnection createStripeConnection(
-			String url, String apiKey) throws IOException {
+			String url, RequestOptions options) throws IOException {
 		URL stripeURL;
 		String customURLStreamHandlerClassName = System.getProperty(
 				CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME, null);
@@ -178,7 +175,7 @@ public abstract class APIResource extends StripeObject {
 		conn.setConnectTimeout(30 * 1000);
 		conn.setReadTimeout(80 * 1000);
 		conn.setUseCaches(false);
-		for (Map.Entry<String, String> header : getHeaders(apiKey).entrySet()) {
+		for (Map.Entry<String, String> header : getHeaders(options).entrySet()) {
 			conn.setRequestProperty(header.getKey(), header.getValue());
 		}
 
@@ -230,10 +227,9 @@ public abstract class APIResource extends StripeObject {
 	}
 
 	private static java.net.HttpURLConnection createGetConnection(
-			String url, String query, String apiKey) throws IOException, APIConnectionException {
+			String url, String query, RequestOptions options) throws IOException, APIConnectionException {
 		String getURL = formatURL(url, query);
-		java.net.HttpURLConnection conn = createStripeConnection(getURL,
-				apiKey);
+		java.net.HttpURLConnection conn = createStripeConnection(getURL, options);
 		conn.setRequestMethod("GET");
 
 		checkSSLCert(conn);
@@ -242,9 +238,8 @@ public abstract class APIResource extends StripeObject {
 	}
 
 	private static java.net.HttpURLConnection createPostConnection(
-			String url, String query, String apiKey) throws IOException, APIConnectionException {
-		java.net.HttpURLConnection conn = createStripeConnection(url,
-				apiKey);
+			String url, String query, RequestOptions options) throws IOException, APIConnectionException {
+		java.net.HttpURLConnection conn = createStripeConnection(url, options);
 
 		conn.setDoOutput(true);
 		conn.setRequestMethod("POST");
@@ -266,10 +261,10 @@ public abstract class APIResource extends StripeObject {
 	}
 
 	private static java.net.HttpURLConnection createDeleteConnection(
-			String url, String query, String apiKey) throws IOException, APIConnectionException {
+			String url, String query, RequestOptions options) throws IOException, APIConnectionException {
 		String deleteUrl = formatURL(url, query);
 		java.net.HttpURLConnection conn = createStripeConnection(
-				deleteUrl, apiKey);
+				deleteUrl, options);
 		conn.setRequestMethod("DELETE");
 
 		checkSSLCert(conn);
@@ -353,18 +348,18 @@ public abstract class APIResource extends StripeObject {
 
 	private static StripeResponse makeURLConnectionRequest(
 			APIResource.RequestMethod method, String url, String query,
-			String apiKey) throws APIConnectionException {
+			RequestOptions options) throws APIConnectionException {
 		java.net.HttpURLConnection conn = null;
 		try {
 			switch (method) {
 			case GET:
-				conn = createGetConnection(url, query, apiKey);
+				conn = createGetConnection(url, query, options);
 				break;
 			case POST:
-				conn = createPostConnection(url, query, apiKey);
+				conn = createPostConnection(url, query, options);
 				break;
 			case DELETE:
-				conn = createDeleteConnection(url, query, apiKey);
+				conn = createDeleteConnection(url, query, options);
 				break;
 			default:
 				throw new APIConnectionException(
@@ -404,11 +399,15 @@ public abstract class APIResource extends StripeObject {
 
 	protected static <T> T request(APIResource.RequestMethod method,
 			String url, Map<String, Object> params, Class<T> clazz,
-			String apiKey) throws AuthenticationException,
+			RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
+		if (options == null) {
+			options = RequestOptions.getDefault();
+		}
 		String originalDNSCacheTTL = null;
 		Boolean allowedToSetTTL = true;
+
 		try {
 			originalDNSCacheTTL = java.security.Security
 					.getProperty(DNS_CACHE_TTL_PROPERTY_NAME);
@@ -420,7 +419,7 @@ public abstract class APIResource extends StripeObject {
 		}
 
 		try {
-			return _request(method, url, params, clazz, apiKey);
+			return _request(method, url, params, clazz, options);
 		} finally {
 			if (allowedToSetTTL) {
 				if (originalDNSCacheTTL == null) {
@@ -437,19 +436,15 @@ public abstract class APIResource extends StripeObject {
 
 	protected static <T> T _request(APIResource.RequestMethod method,
 			String url, Map<String, Object> params, Class<T> clazz,
-			String apiKey) throws AuthenticationException,
+			RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		if ((Stripe.apiKey == null || Stripe.apiKey.length() == 0)
-				&& (apiKey == null || apiKey.length() == 0)) {
+		String apiKey = options.getApiKey();
+		if (apiKey == null || apiKey.trim().isEmpty()) {
 			throw new AuthenticationException(
 					"No API key provided. (HINT: set your API key using 'Stripe.apiKey = <API-KEY>'. "
 							+ "You can generate API keys from the Stripe web interface. "
 							+ "See https://stripe.com/api for details or email support@stripe.com if you have questions.");
-		}
-
-		if (apiKey == null) {
-			apiKey = Stripe.apiKey;
 		}
 
 		String query;
@@ -466,13 +461,13 @@ public abstract class APIResource extends StripeObject {
 		StripeResponse response;
 		try {
 			// HTTPSURLConnection verifies SSL cert by default
-			response = makeURLConnectionRequest(method, url, query, apiKey);
+			response = makeURLConnectionRequest(method, url, query, options);
 		} catch (ClassCastException ce) {
 			// appengine doesn't have HTTPSConnection, use URLFetch API
 			String appEngineEnv = System.getProperty(
 					"com.google.appengine.runtime.environment", null);
 			if (appEngineEnv != null) {
-				response = makeAppEngineRequest(method, url, query, apiKey);
+				response = makeAppEngineRequest(method, url, query, options);
 			} else {
 				// non-appengine ClassCastException
 				throw ce;
@@ -510,7 +505,7 @@ public abstract class APIResource extends StripeObject {
 	 * maintain AppEngine-specific JAR
 	 */
 	private static StripeResponse makeAppEngineRequest(RequestMethod method,
-			String url, String query, String apiKey) throws APIException {
+			String url, String query, RequestOptions options) throws APIException {
 		String unknownErrorMessage = "Sorry, an unknown error occurred while trying to use the "
 				+ "Google App Engine runtime. Please contact support@stripe.com for assistance.";
 		try {
@@ -560,7 +555,7 @@ public abstract class APIResource extends StripeObject {
 						.invoke(request, query.getBytes());
 			}
 
-			for (Map.Entry<String, String> header : getHeaders(apiKey)
+			for (Map.Entry<String, String> header : getHeaders(options)
 					.entrySet()) {
 				Class<?> httpHeaderClass = Class
 						.forName("com.google.appengine.api.urlfetch.HTTPHeader");

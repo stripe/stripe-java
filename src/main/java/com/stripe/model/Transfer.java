@@ -6,6 +6,7 @@ import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
+import com.stripe.net.RequestOptions;
 
 import java.util.List;
 import java.util.Map;
@@ -153,86 +154,113 @@ public class Transfer extends APIResource implements MetadataStore<Transfer> {
 	public static Transfer create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return create(params, null);
+		return create(params, (RequestOptions) null);
 	}
 
 	public static Transfer retrieve(String id) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return retrieve(id, null);
+		return retrieve(id, (RequestOptions) null);
 	}
 
 	public Transfer cancel()
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return cancel(null);
+		return cancel((RequestOptions) null);
 	}
 
 	public Transfer update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return update(params, null);
+		return update(params, (RequestOptions) null);
 	}
 
 	public static TransferCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return all(params, null);
+		return all(params, (RequestOptions) null);
 	}
 
 	public TransferTransactionCollection transactions(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return transactions(params, null);
+		return transactions(params, (RequestOptions) null);
 	}
 
+	@Deprecated
 	public static Transfer create(Map<String, Object> params, String apiKey)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.POST, classURL(Transfer.class), params,
-				Transfer.class, apiKey);
+		return create(params, RequestOptions.builder().setApiKey(apiKey).build());
+	}
+	public static Transfer create(Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.POST, classURL(Transfer.class), params, Transfer.class, options);
 	}
 
+	@Deprecated
 	public Transfer update(Map<String, Object> params, String apiKey)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.POST,
-				instanceURL(Transfer.class, this.id), params, Transfer.class,
-				apiKey);
+		return update(params, RequestOptions.builder().setApiKey(apiKey).build());
+	}
+	public Transfer update(Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.POST, instanceURL(Transfer.class, this.id), params, Transfer.class, options);
 	}
 
+	@Deprecated
 	public Transfer cancel(String apiKey)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.POST,
-				instanceURL(Transfer.class, this.id) + "/cancel", null, Transfer.class,
-				apiKey);
+		return cancel(RequestOptions.builder().setApiKey(apiKey).build());
+	}
+	public Transfer cancel(RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.POST, instanceURL(Transfer.class, this.id) + "/cancel", null, Transfer.class, options);
 	}
 
+	@Deprecated
 	public static Transfer retrieve(String id, String apiKey)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.GET, instanceURL(Transfer.class, id),
-				null, Transfer.class, apiKey);
+		return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
+	}
+	public static Transfer retrieve(String id, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, instanceURL(Transfer.class, id), null, Transfer.class, options);
 	}
 
+	@Deprecated
 	public static TransferCollection all(Map<String, Object> params,
 			String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return request(RequestMethod.GET, classURL(Transfer.class), params,
-				TransferCollection.class, apiKey);
+		return all(params, RequestOptions.builder().setApiKey(apiKey).build());
+	}
+	public static TransferCollection all(Map<String, Object> params,
+			RequestOptions options) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return request(RequestMethod.GET, classURL(Transfer.class), params, TransferCollection.class, options);
 	}
 
+	@Deprecated
 	public TransferTransactionCollection transactions(
 			Map<String, Object> params, String apiKey)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return request(
-				RequestMethod.GET,
-				String.format("%s/transactions",
-						instanceURL(Transfer.class, this.getId())), params,
-				TransferTransactionCollection.class, apiKey);
+		return transactions(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
-
+	public TransferTransactionCollection transactions(
+			Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, String.format("%s/transactions",
+						instanceURL(Transfer.class, this.getId())), params, TransferTransactionCollection.class, options);
+	}
 }
