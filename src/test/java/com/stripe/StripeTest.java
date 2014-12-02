@@ -1,9 +1,11 @@
 package com.stripe;
 
+import com.google.common.collect.ImmutableMap;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Account;
+import com.stripe.model.Address;
 import com.stripe.model.ApplicationFee;
 import com.stripe.model.Balance;
 import com.stripe.model.BalanceTransaction;
@@ -29,6 +31,7 @@ import com.stripe.model.MetadataStore;
 import com.stripe.model.Plan;
 import com.stripe.model.Recipient;
 import com.stripe.model.Refund;
+import com.stripe.model.ShippingDetails;
 import com.stripe.model.Subscription;
 import com.stripe.model.Token;
 import com.stripe.model.Transfer;
@@ -233,6 +236,28 @@ public class StripeTest {
 
 		Charge createdCharge = Charge.create(chargeWithStatementDescriptionParams);
 		assertEquals("Stripe", createdCharge.getStatementDescription());
+	}
+
+	@Test
+	public void testChargeCreateWithShippingDetails() throws StripeException {
+		ShippingDetails shippingDetails = new ShippingDetails();
+		shippingDetails.setName("name");
+		shippingDetails.setPhone("123-456-7890");
+		Address address = new Address()
+				.setCity("Washington")
+				.setCountry("USA")
+				.setLine1("1600 Pennsylvania Ave.")
+				.setLine2("line 2 address")
+				.setPostalCode("20500")
+				.setState("D.C.");
+		shippingDetails.setAddress(address);
+
+		Map<String, Object> params = ImmutableMap.<String, Object>builder()
+				.putAll(defaultChargeParams)
+				.put("shipping", ImmutableMap.builder().put("address", ImmutableMap.builder().put("line1", address.getLine1()).put("line2", address.getLine2()).put("city", address.getCity()).put("country", address.getCountry()).put("postal_code", address.getPostalCode()).put("state", address.getState()).build()).put("name", shippingDetails.getName()).put("phone", shippingDetails.getPhone()).build())
+				.build();
+		Charge createdCharge = Charge.create(params);
+		assertEquals(createdCharge.getShipping(), shippingDetails);
 	}
 
 	@Test

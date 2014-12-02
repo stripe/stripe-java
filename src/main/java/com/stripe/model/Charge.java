@@ -35,6 +35,7 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 	String receiptEmail;
 	String receiptNumber;
 	String statementDescription;
+	ShippingDetails shipping;
 
 	public String getId() {
 		return id;
@@ -98,6 +99,14 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 
 	public void setCaptured(Boolean captured) {
 		this.captured = captured;
+	}
+
+	public ShippingDetails getShipping() {
+		return shipping;
+	}
+
+	public void setShipping(ShippingDetails shipping) {
+		this.shipping = shipping;
 	}
 
 	/**
