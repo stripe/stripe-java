@@ -23,6 +23,7 @@ import com.stripe.model.DeletedCustomer;
 import com.stripe.model.DeletedInvoiceItem;
 import com.stripe.model.DeletedPlan;
 import com.stripe.model.DeletedRecipient;
+import com.stripe.model.Dispute;
 import com.stripe.model.Event;
 import com.stripe.model.Invoice;
 import com.stripe.model.InvoiceItem;
@@ -407,7 +408,7 @@ public class StripeTest {
 		Map<String, Object> listParams = new HashMap<String, Object>();
 		listParams.put("include[]", "total_count");
 		ChargeCollection chargeCollection = Charge.all(listParams);
-		assertFalse(chargeCollection.getTotalCount() == null);
+		assertNotNull(chargeCollection.getTotalCount());
 		assertTrue(chargeCollection.getTotalCount() > 0);
 	}
 
@@ -459,28 +460,29 @@ public class StripeTest {
 		assertEquals(charge.getCard().getAddressLine1Check(), "fail");
 	}
 
-	// This test relies on an asynchronous server interaction, so don't run it in general.
-/*
 	@Test
 	public void testDisputedCharge() throws StripeException, InterruptedException {
+		int chargeValueCents = 100;
 		Map<String, Object> chargeParams = new HashMap<String, Object>();
 		chargeParams.putAll(defaultChargeParams);
-		Map<String, Object> testmodeDipsuteCardParams = new HashMap<String, Object>();
-		testmodeDipsuteCardParams.put("number", "4000000000000259");
-		testmodeDipsuteCardParams.put("exp_month", 12);
-		testmodeDipsuteCardParams.put("exp_year", 2015);
-		chargeParams.put("card", testmodeDipsuteCardParams);
+		chargeParams.put("amount", chargeValueCents);
+		Map<String, Object> testModeDisputeCardParams = new HashMap<String, Object>();
+		testModeDisputeCardParams.put("number", "4000000000000259");
+		testModeDisputeCardParams.put("exp_month", 12);
+		testModeDisputeCardParams.put("exp_year", 2020);
+		chargeParams.put("card", testModeDisputeCardParams);
 		Charge charge = Charge.create(chargeParams);
 
-		Thread.sleep(5000);
+		// This test relies on the server asynchronously marking the charge as disputed.
+		// TODO: find a more reliable way to do this instead of sleeping
+		Thread.sleep(10000);
 		Charge reloadedCharge = Charge.retrieve(charge.getId());
 		Dispute dispute = reloadedCharge.getDispute();
-		assertEquals(false, dispute == null);
-		assertEquals(false, dispute.getIsChargeRefundable());
+		assertNotNull(dispute);
+		assertFalse(dispute.getIsChargeRefundable());
 		assertEquals(1, dispute.getBalanceTransactions().size());
-		assertEquals(Integer.valueOf((-1) * charge.getAmount()), dispute.getBalanceTransactions().get(0).getAmount());
+		assertEquals(-chargeValueCents, dispute.getBalanceTransactions().get(0).getAmount().intValue());
 	}
-*/
 
 	@Test
 	public void testCustomerCreate() throws StripeException {
@@ -812,7 +814,7 @@ public class StripeTest {
 
 		InvoiceLineItemCollection lines = retrievedInvoice.getLines().all(
 				listParams);
-		assertFalse(lines == null);
+		assertNotNull(lines);
 	}
 
 	@Test
