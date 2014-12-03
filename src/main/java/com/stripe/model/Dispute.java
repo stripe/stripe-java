@@ -4,18 +4,21 @@ import java.util.List;
 import java.util.Map;
 
 public class Dispute extends StripeObject {
-	String charge;
-	Integer amount;
-	String status;
-	String currency;
-	Long created;
 	Boolean livemode;
-	String evidence;
-	Long evidenceDueBy;
+	Integer amount;
+	String charge;
+	Long created;
+	String currency;
+
 	String reason;
+	String status;
+
 	/** 1/2014: Legacy (now use balanceTransactions) -- https://stripe.com/docs/upgrades#2014-08-20 */
 	String balanceTransaction;
 	List<BalanceTransaction> balanceTransactions;
+
+	String evidence;
+	Long evidenceDueBy;
 	Boolean isChargeRefundable;
 	Map<String, String> metadata;
 
