@@ -18,6 +18,9 @@ public class Dispute extends StripeObject {
 	List<BalanceTransaction> balanceTransactions;
 
 	String evidence;
+
+    EvidenceDetails evidenceDetails;
+    /** 1/2014: Legacy (now use evidenceDetails.dueBy) -- https://stripe.com/docs/upgrades */
 	Long evidenceDueBy;
 	Boolean isChargeRefundable;
 	Map<String, String> metadata;
@@ -99,5 +102,12 @@ public class Dispute extends StripeObject {
 	}
 	public void setMetadata(Map<String, String> metadata) {
 		this.metadata = metadata;
+	}
+	public EvidenceDetails getEvidenceDetails() {
+		return evidenceDetails;
+	}
+
+	public void setEvidenceDetails(EvidenceDetails evidenceDetails) {
+		this.evidenceDetails = evidenceDetails;
 	}
 }
