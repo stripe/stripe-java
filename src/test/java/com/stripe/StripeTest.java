@@ -51,6 +51,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -472,6 +473,21 @@ public class StripeTest {
 		assertFalse(dispute.getIsChargeRefundable());
 		assertEquals(1, dispute.getBalanceTransactions().size());
 		assertEquals(-chargeValueCents, dispute.getBalanceTransactions().get(0).getAmount().intValue());
+	}
+
+	@Test
+	public void testSubmitEvidence() throws StripeException, InterruptedException {
+		int chargeValueCents = 100;
+		Charge disputedCharge = createDisputedCharge(chargeValueCents);
+
+		String myEvidence = "Here's evidence showing this charge is legitimate.";
+		Dispute initialDispute = disputedCharge.getDispute();
+		assertNull(initialDispute.getEvidence());
+		Map<String, Object> disputeParams = ImmutableMap.<String, Object>of("evidence", myEvidence);
+
+		Dispute updatedDispute = disputedCharge.updateDispute(disputeParams);
+		assertNotNull(updatedDispute);
+		assertEquals(myEvidence, updatedDispute.getEvidence());
 	}
 
 	private Charge createDisputedCharge(int chargeValueCents) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException, InterruptedException {
