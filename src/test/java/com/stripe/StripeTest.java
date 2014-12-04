@@ -1,6 +1,9 @@
 package com.stripe;
 
 import com.google.common.collect.ImmutableMap;
+import com.stripe.exception.APIConnectionException;
+import com.stripe.exception.APIException;
+import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
@@ -463,6 +466,15 @@ public class StripeTest {
 	@Test
 	public void testDisputedCharge() throws StripeException, InterruptedException {
 		int chargeValueCents = 100;
+		Charge disputedCharge = createDisputedCharge(chargeValueCents);
+		Dispute dispute = disputedCharge.getDispute();
+		assertNotNull(dispute);
+		assertFalse(dispute.getIsChargeRefundable());
+		assertEquals(1, dispute.getBalanceTransactions().size());
+		assertEquals(-chargeValueCents, dispute.getBalanceTransactions().get(0).getAmount().intValue());
+	}
+
+	private Charge createDisputedCharge(int chargeValueCents) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException, InterruptedException {
 		Map<String, Object> chargeParams = new HashMap<String, Object>();
 		chargeParams.putAll(defaultChargeParams);
 		chargeParams.put("amount", chargeValueCents);
@@ -476,12 +488,7 @@ public class StripeTest {
 		// This test relies on the server asynchronously marking the charge as disputed.
 		// TODO: find a more reliable way to do this instead of sleeping
 		Thread.sleep(10000);
-		Charge reloadedCharge = Charge.retrieve(charge.getId());
-		Dispute dispute = reloadedCharge.getDispute();
-		assertNotNull(dispute);
-		assertFalse(dispute.getIsChargeRefundable());
-		assertEquals(1, dispute.getBalanceTransactions().size());
-		assertEquals(-chargeValueCents, dispute.getBalanceTransactions().get(0).getAmount().intValue());
+		return Charge.retrieve(charge.getId());
 	}
 
 	@Test
