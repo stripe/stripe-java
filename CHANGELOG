@@ -1,3 +1,16 @@
+=== 1.22.0 2014-12-03
+
+* Convention is to call methods with a RequestOptions object, instead of an API Key directly.
+* Support setting the stripe version on a per-request level, via the RequestOptions object.
+* Add shipping and address to the charge object.
+
+Deprecation:
+
+* All requests that involve passing the apiKey directly to the method are now deprecated in favor of
+  using RequestOptions instead. Use RequestOptions as follows:
+
+    RequestOptions.builder().setApiKey(apiKey).build()
+
 === 1.21.0 2014-11-14
 
 * Created Charge.receiptEmail field
