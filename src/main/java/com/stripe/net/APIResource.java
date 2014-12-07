@@ -11,6 +11,8 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.model.ChargeRefundCollection;
 import com.stripe.model.ChargeRefundCollectionDeserializer;
+import com.stripe.model.Dispute;
+import com.stripe.model.DisputeDataDeserializer;
 import com.stripe.model.EventData;
 import com.stripe.model.EventDataDeserializer;
 import com.stripe.model.FeeRefundCollection;
@@ -34,6 +36,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateEncodingException;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -48,6 +51,7 @@ public abstract class APIResource extends StripeObject {
 			.registerTypeAdapter(ChargeRefundCollection.class, new ChargeRefundCollectionDeserializer())
 			.registerTypeAdapter(FeeRefundCollection.class, new FeeRefundCollectionDeserializer())
 			.registerTypeAdapter(StripeRawJsonObject.class, new StripeRawJsonObjectDeserializer())
+			.registerTypeAdapter(Dispute.class, new DisputeDataDeserializer())
 			.create();
 
 	private static String className(Class<?> clazz) {

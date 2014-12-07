@@ -28,6 +28,7 @@ import com.stripe.model.DeletedPlan;
 import com.stripe.model.DeletedRecipient;
 import com.stripe.model.Dispute;
 import com.stripe.model.Event;
+import com.stripe.model.EvidenceSubObject;
 import com.stripe.model.Invoice;
 import com.stripe.model.InvoiceItem;
 import com.stripe.model.InvoiceLineItemCollection;
@@ -39,6 +40,7 @@ import com.stripe.model.ShippingDetails;
 import com.stripe.model.Subscription;
 import com.stripe.model.Token;
 import com.stripe.model.Transfer;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -51,7 +53,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
-import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
 
@@ -130,8 +131,7 @@ public class StripeTest {
 			throws StripeException {
 		Map<String, Object> recipientParams = new HashMap<String, Object>();
 		recipientParams.putAll(defaultRecipientParams);
-		Recipient recipient = Recipient.create(recipientParams);
-		return recipient;
+		return Recipient.create(recipientParams);
 	}
 
 	static Map<String, Object> getSubscriptionParams() throws StripeException {
@@ -141,6 +141,10 @@ public class StripeTest {
 		return subscriptionParams;
 	}
 
+	@Before
+	public void before() {
+		Stripe.apiVersion = null;
+	}
 
 	@BeforeClass
 	public static void setUp() {
@@ -476,18 +480,21 @@ public class StripeTest {
 	}
 
 	@Test
-	public void testSubmitEvidence() throws StripeException, InterruptedException {
+	public void testSubmitOldStyleEvidence() throws StripeException, InterruptedException {
 		int chargeValueCents = 100;
+		Stripe.apiVersion = "2014-11-20";
 		Charge disputedCharge = createDisputedCharge(chargeValueCents);
 
 		String myEvidence = "Here's evidence showing this charge is legitimate.";
 		Dispute initialDispute = disputedCharge.getDispute();
 		assertNull(initialDispute.getEvidence());
+		assertNull(initialDispute.getEvidenceSubObject());
 		Map<String, Object> disputeParams = ImmutableMap.<String, Object>of("evidence", myEvidence);
 
 		Dispute updatedDispute = disputedCharge.updateDispute(disputeParams);
 		assertNotNull(updatedDispute);
 		assertEquals(myEvidence, updatedDispute.getEvidence());
+		assertNull(initialDispute.getEvidenceSubObject());
 	}
 
 	private Charge createDisputedCharge(int chargeValueCents) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException, InterruptedException {

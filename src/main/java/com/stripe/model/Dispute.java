@@ -17,11 +17,14 @@ public class Dispute extends StripeObject {
 	String balanceTransaction;
 	List<BalanceTransaction> balanceTransactions;
 
+	/** 1/2014: Legacy (now use evidenceSubObject) -- https://stripe.com/docs/upgrades */
 	String evidence;
+	EvidenceSubObject evidenceSubObject;
 
-    EvidenceDetails evidenceDetails;
-    /** 1/2014: Legacy (now use evidenceDetails.dueBy) -- https://stripe.com/docs/upgrades */
+	EvidenceDetails evidenceDetails;
+	/** 1/2014: Legacy (now use evidenceDetails.dueBy) -- https://stripe.com/docs/upgrades */
 	Long evidenceDueBy;
+
 	Boolean isChargeRefundable;
 	Map<String, String> metadata;
 
@@ -61,9 +64,17 @@ public class Dispute extends StripeObject {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	public EvidenceSubObject getEvidenceSubObject() {
+		return evidenceSubObject;
+	}
+	public void setEvidenceSubObject(EvidenceSubObject evidence) {
+		this.evidenceSubObject = evidence;
+	}
+	/** 12/2014 Legacy (now use evidenceSubObject) */
 	public String getEvidence() {
 		return evidence;
 	}
+	/** 12/2014 Legacy (now use evidenceSubObject) */
 	public void setEvidence(String evidence) {
 		this.evidence = evidence;
 	}
