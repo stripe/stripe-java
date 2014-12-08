@@ -5,7 +5,7 @@ You can sign up for a Stripe account at https://stripe.com.
 Requirements
 ============
 
-Java 1.5 and later.
+Java 1.6 and later.
 
 Installation
 ============
