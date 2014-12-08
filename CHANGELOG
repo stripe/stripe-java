@@ -1,3 +1,8 @@
+=== 1.22.0 2014-12--8
+
+* Updated Dispute object to include Dispute.EvidenceSubObject. This enables
+  submitting typed dispute evidence.
+
 === 1.21.0 2014-11-14
 
 * Created Charge.receiptEmail field
