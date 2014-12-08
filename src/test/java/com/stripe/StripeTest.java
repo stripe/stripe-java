@@ -53,6 +53,7 @@ import java.util.UUID;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -498,24 +499,29 @@ public class StripeTest {
 		assertNull(updatedDispute.getEvidenceSubObject());
 	}
 
-  @Test
-  public void testSubmitEvidence() throws StripeException, InterruptedException {
+	@Test
+	public void testSubmitEvidence() throws StripeException, InterruptedException {
 		int chargeValueCents = 100;
 		Charge disputedCharge = createDisputedCharge(chargeValueCents);
 
 		Dispute initialDispute = disputedCharge.getDispute();
 		assertNull(initialDispute.getEvidence());
-		assertNull(initialDispute.getEvidenceSubObject());
+		EvidenceSubObject emptyEvidence = new EvidenceSubObject();
+		assertEquals(emptyEvidence, initialDispute.getEvidenceSubObject());
+		assertEquals(0, initialDispute.getEvidenceDetails().getSubmissionCount().intValue());
+
 		Map<String, Object> evidenceHashParams = new HashMap<String, Object>();
+		// TODO: assert on all param types
 		evidenceHashParams.put("product_description", "my productDescription");
 		evidenceHashParams.put("customer_name", "my customerName");
 		evidenceHashParams.put("uncategorized_text", "my uncategorizedText");
-		Map<String, Object> disputeParams = ImmutableMap.<String, Object>of("evidence", evidenceHashParams);
+		Map<String, Object> providedEvidenceParams = ImmutableMap.<String, Object>of("evidence", evidenceHashParams);
 
-		Dispute updatedDispute = disputedCharge.updateDispute(disputeParams);
+		Dispute updatedDispute = disputedCharge.updateDispute(providedEvidenceParams);
 		assertNotNull(updatedDispute);
 		EvidenceSubObject evidenceSubObject = updatedDispute.getEvidenceSubObject();
-		assertNotNull(evidenceSubObject());
+		assertNotSame(emptyEvidence, evidenceSubObject);
+		assertEquals(1, updatedDispute.getEvidenceDetails().getSubmissionCount().intValue());
 		assertNull(updatedDispute.getEvidence());
 
 		assertEquals("my productDescription", evidenceSubObject.getProductDescription());
@@ -524,7 +530,7 @@ public class StripeTest {
 
 		EvidenceDetails evidenceDetails = updatedDispute.getEvidenceDetails();
 		assertNotNull(evidenceDetails);
-		assertEquals(1, evidenceDetails.getSubmissionCount());
+		assertEquals(1, evidenceDetails.getSubmissionCount().intValue());
 	}
 
 	private Charge createDisputedCharge(int chargeValueCents) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException, InterruptedException {
