@@ -13,16 +13,16 @@ public class Dispute extends StripeObject {
 	String reason;
 	String status;
 
-	/** 1/2014: Legacy (now use balanceTransactions) -- https://stripe.com/docs/upgrades#2014-08-20 */
+	/** 8/2014: Legacy (now use balanceTransactions) -- https://stripe.com/docs/upgrades#2014-08-20 */
 	String balanceTransaction;
 	List<BalanceTransaction> balanceTransactions;
 
-	/** 1/2014: Legacy (now use evidenceSubObject) -- https://stripe.com/docs/upgrades */
+	/** 12/2014: Legacy (now use evidenceSubObject) -- https://stripe.com/docs/upgrades */
 	String evidence;
 	EvidenceSubObject evidenceSubObject;
 
 	EvidenceDetails evidenceDetails;
-	/** 1/2014: Legacy (now use evidenceDetails.dueBy) -- https://stripe.com/docs/upgrades */
+	/** 12/2014: Legacy (now use evidenceDetails.dueBy) -- https://stripe.com/docs/upgrades */
 	Long evidenceDueBy;
 
 	Boolean isChargeRefundable;

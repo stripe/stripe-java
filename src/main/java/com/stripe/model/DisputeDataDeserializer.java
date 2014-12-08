@@ -35,7 +35,7 @@ public class DisputeDataDeserializer implements JsonDeserializer<Dispute> {
         if (rawEvidence.isJsonPrimitive()) {
             JsonPrimitive evidenceJsonPrimitive = rawEvidence.getAsJsonPrimitive();
             if (!evidenceJsonPrimitive.isString()) {
-                throw new JsonParseException("Evidence field on a dispute on a charge was a primitive non-string type.");
+                throw new JsonParseException("Evidence field on a dispute was a primitive non-string type.");
             }
             evidenceString = evidenceJsonPrimitive.getAsString();
         } else if (rawEvidence.isJsonObject()) {
