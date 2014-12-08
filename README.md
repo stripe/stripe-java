@@ -5,7 +5,7 @@ You can sign up for a Stripe account at https://stripe.com.
 Requirements
 ============
 
-Java 1.5 and later.
+Java 1.6 and later.
 
 Installation
 ============
@@ -17,14 +17,14 @@ Add this dependency to your project's POM:
     <dependency>
       <groupId>com.stripe</groupId>
       <artifactId>stripe-java</artifactId>
-      <version>1.22.0</version>
+      <version>1.23.0</version>
     </dependency>
 
 ### Gradle users
 
 Add this dependency to your project's build file:
 
-    compile "com.stripe:stripe-java:1.22.0"
+    compile "com.stripe:stripe-java:1.23.0"
 
 ### Others
 

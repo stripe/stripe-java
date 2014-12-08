@@ -1,0 +1,48 @@
+{
+  "charge": "123444",
+  "amount": 1000,
+  "created": 1417911521,
+  "status": "needs_response",
+  "livemode": false,
+  "currency": "usd",
+  "object": "dispute",
+  "reason": "general",
+  "is_charge_refundable": false,
+  "balance_transactions": [
+
+  ],
+  "evidence_details": {
+    "due_by": 1419638399,
+    "submission_count": 0
+  },
+  "evidence": {
+    "product_description": "my productDescription",
+    "customer_name": "my customerName",
+    "customer_email_address": "my customerEmailAddress",
+    "customer_purchase_ip": "my customerPurchaseIp",
+    "customer_signature": "my customerSignature",
+    "billing_address": "my billingAddress",
+    "receipt": "my receipt",
+    "shipping_address": "my shippingAddress",
+    "shipping_date": "my shippingDate",
+    "shipping_tracking_number": "my shippingTrackingNumber",
+    "shipping_documentation": "my shippingDocumentation",
+    "refund_policy": "my refundPolicy",
+    "refund_policy_disclosure": "my refundPolicyDisclosure",
+    "refund_refusal_explanation": "my refundRefusalExplanation",
+    "cancellation_policy": "my cancellationPolicy",
+    "cancellation_policy_disclosure": "my cancellationPolicyDisclosure",
+    "cancellation_rebuttal": "my cancellationRebuttal",
+    "access_activity_log": "my accessActivityLog",
+    "service_date": "my serviceDate",
+    "service_documentation": "my serviceDocumentation",
+    "duplicate_charge_id": "my duplicateChargeId",
+    "duplicate_charge_explanation": "my duplicateChargeExplanation",
+    "duplicate_charge_documentation": "my duplicateChargeDocumentation",
+    "customer_communication": "my customerCommunication",
+    "uncategorized_text": "my uncategorizedText",
+    "uncategorized_file": "my uncategorizedFile"
+  },
+  "metadata": {
+  }
+}

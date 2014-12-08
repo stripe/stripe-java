@@ -1,6 +1,9 @@
 package com.stripe;
 
 import com.google.common.collect.ImmutableMap;
+import com.stripe.exception.APIConnectionException;
+import com.stripe.exception.APIException;
+import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
@@ -23,7 +26,10 @@ import com.stripe.model.DeletedCustomer;
 import com.stripe.model.DeletedInvoiceItem;
 import com.stripe.model.DeletedPlan;
 import com.stripe.model.DeletedRecipient;
+import com.stripe.model.Dispute;
 import com.stripe.model.Event;
+import com.stripe.model.EvidenceDetails;
+import com.stripe.model.EvidenceSubObject;
 import com.stripe.model.Invoice;
 import com.stripe.model.InvoiceItem;
 import com.stripe.model.InvoiceLineItemCollection;
@@ -35,6 +41,7 @@ import com.stripe.model.ShippingDetails;
 import com.stripe.model.Subscription;
 import com.stripe.model.Token;
 import com.stripe.model.Transfer;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -46,6 +53,7 @@ import java.util.UUID;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 import static org.junit.Assert.fail;
@@ -125,8 +133,7 @@ public class StripeTest {
 			throws StripeException {
 		Map<String, Object> recipientParams = new HashMap<String, Object>();
 		recipientParams.putAll(defaultRecipientParams);
-		Recipient recipient = Recipient.create(recipientParams);
-		return recipient;
+		return Recipient.create(recipientParams);
 	}
 
 	static Map<String, Object> getSubscriptionParams() throws StripeException {
@@ -136,6 +143,10 @@ public class StripeTest {
 		return subscriptionParams;
 	}
 
+	@Before
+	public void before() {
+		Stripe.apiVersion = null;
+	}
 
 	@BeforeClass
 	public static void setUp() {
@@ -407,7 +418,7 @@ public class StripeTest {
 		Map<String, Object> listParams = new HashMap<String, Object>();
 		listParams.put("include[]", "total_count");
 		ChargeCollection chargeCollection = Charge.all(listParams);
-		assertFalse(chargeCollection.getTotalCount() == null);
+		assertNotNull(chargeCollection.getTotalCount());
 		assertTrue(chargeCollection.getTotalCount() > 0);
 	}
 
@@ -459,28 +470,85 @@ public class StripeTest {
 		assertEquals(charge.getCard().getAddressLine1Check(), "fail");
 	}
 
-	// This test relies on an asynchronous server interaction, so don't run it in general.
-/*
 	@Test
 	public void testDisputedCharge() throws StripeException, InterruptedException {
+		int chargeValueCents = 100;
+		Charge disputedCharge = createDisputedCharge(chargeValueCents);
+		Dispute dispute = disputedCharge.getDispute();
+		assertNotNull(dispute);
+		assertFalse(dispute.getIsChargeRefundable());
+		assertEquals(1, dispute.getBalanceTransactions().size());
+		assertEquals(-chargeValueCents, dispute.getBalanceTransactions().get(0).getAmount().intValue());
+	}
+
+	@Test
+	public void testSubmitOldStyleEvidence() throws StripeException, InterruptedException {
+		int chargeValueCents = 100;
+		Stripe.apiVersion = "2014-11-20";
+		Charge disputedCharge = createDisputedCharge(chargeValueCents);
+
+		String myEvidence = "Here's evidence showing this charge is legitimate.";
+		Dispute initialDispute = disputedCharge.getDispute();
+		assertNull(initialDispute.getEvidence());
+		assertNull(initialDispute.getEvidenceSubObject());
+		Map<String, Object> disputeParams = ImmutableMap.<String, Object>of("evidence", myEvidence);
+
+		Dispute updatedDispute = disputedCharge.updateDispute(disputeParams);
+		assertNotNull(updatedDispute);
+		assertEquals(myEvidence, updatedDispute.getEvidence());
+		assertNull(updatedDispute.getEvidenceSubObject());
+	}
+
+	@Test
+	public void testSubmitEvidence() throws StripeException, InterruptedException {
+		int chargeValueCents = 100;
+		Charge disputedCharge = createDisputedCharge(chargeValueCents);
+
+		Dispute initialDispute = disputedCharge.getDispute();
+		assertNull(initialDispute.getEvidence());
+		EvidenceSubObject emptyEvidence = new EvidenceSubObject();
+		assertEquals(emptyEvidence, initialDispute.getEvidenceSubObject());
+		assertEquals(0, initialDispute.getEvidenceDetails().getSubmissionCount().intValue());
+
+		Map<String, Object> evidenceHashParams = new HashMap<String, Object>();
+		// TODO: assert on all param types
+		evidenceHashParams.put("product_description", "my productDescription");
+		evidenceHashParams.put("customer_name", "my customerName");
+		evidenceHashParams.put("uncategorized_text", "my uncategorizedText");
+		Map<String, Object> providedEvidenceParams = ImmutableMap.<String, Object>of("evidence", evidenceHashParams);
+
+		Dispute updatedDispute = disputedCharge.updateDispute(providedEvidenceParams);
+		assertNotNull(updatedDispute);
+		EvidenceSubObject evidenceSubObject = updatedDispute.getEvidenceSubObject();
+		assertNotSame(emptyEvidence, evidenceSubObject);
+		assertEquals(1, updatedDispute.getEvidenceDetails().getSubmissionCount().intValue());
+		assertNull(updatedDispute.getEvidence());
+
+		assertEquals("my productDescription", evidenceSubObject.getProductDescription());
+		assertEquals("my customerName", evidenceSubObject.getCustomerName());
+		assertEquals("my uncategorizedText", evidenceSubObject.getUncategorizedText());
+
+		EvidenceDetails evidenceDetails = updatedDispute.getEvidenceDetails();
+		assertNotNull(evidenceDetails);
+		assertEquals(1, evidenceDetails.getSubmissionCount().intValue());
+	}
+
+	private Charge createDisputedCharge(int chargeValueCents) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException, InterruptedException {
 		Map<String, Object> chargeParams = new HashMap<String, Object>();
 		chargeParams.putAll(defaultChargeParams);
-		Map<String, Object> testmodeDipsuteCardParams = new HashMap<String, Object>();
-		testmodeDipsuteCardParams.put("number", "4000000000000259");
-		testmodeDipsuteCardParams.put("exp_month", 12);
-		testmodeDipsuteCardParams.put("exp_year", 2015);
-		chargeParams.put("card", testmodeDipsuteCardParams);
+		chargeParams.put("amount", chargeValueCents);
+		Map<String, Object> testModeDisputeCardParams = new HashMap<String, Object>();
+		testModeDisputeCardParams.put("number", "4000000000000259");
+		testModeDisputeCardParams.put("exp_month", 12);
+		testModeDisputeCardParams.put("exp_year", 2020);
+		chargeParams.put("card", testModeDisputeCardParams);
 		Charge charge = Charge.create(chargeParams);
 
-		Thread.sleep(5000);
-		Charge reloadedCharge = Charge.retrieve(charge.getId());
-		Dispute dispute = reloadedCharge.getDispute();
-		assertEquals(false, dispute == null);
-		assertEquals(false, dispute.getIsChargeRefundable());
-		assertEquals(1, dispute.getBalanceTransactions().size());
-		assertEquals(Integer.valueOf((-1) * charge.getAmount()), dispute.getBalanceTransactions().get(0).getAmount());
+		// This test relies on the server asynchronously marking the charge as disputed.
+		// TODO: find a more reliable way to do this instead of sleeping
+		Thread.sleep(10000);
+		return Charge.retrieve(charge.getId());
 	}
-*/
 
 	@Test
 	public void testCustomerCreate() throws StripeException {
@@ -812,7 +880,7 @@ public class StripeTest {
 
 		InvoiceLineItemCollection lines = retrievedInvoice.getLines().all(
 				listParams);
-		assertFalse(lines == null);
+		assertNotNull(lines);
 	}
 
 	@Test

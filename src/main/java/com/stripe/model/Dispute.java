@@ -4,18 +4,27 @@ import java.util.List;
 import java.util.Map;
 
 public class Dispute extends StripeObject {
-	String charge;
-	Integer amount;
-	String status;
-	String currency;
-	Long created;
 	Boolean livemode;
-	String evidence;
-	Long evidenceDueBy;
+	Integer amount;
+	String charge;
+	Long created;
+	String currency;
+
 	String reason;
-	/** 1/2014: Legacy (now use balanceTransactions) -- https://stripe.com/docs/upgrades#2014-08-20 */
+	String status;
+
+	/** 8/2014: Legacy (now use balanceTransactions) -- https://stripe.com/docs/upgrades#2014-08-20 */
 	String balanceTransaction;
 	List<BalanceTransaction> balanceTransactions;
+
+	/** 12/2014: Legacy (now use evidenceSubObject) -- https://stripe.com/docs/upgrades */
+	String evidence;
+	EvidenceSubObject evidenceSubObject;
+
+	EvidenceDetails evidenceDetails;
+	/** 12/2014: Legacy (now use evidenceDetails.dueBy) -- https://stripe.com/docs/upgrades */
+	Long evidenceDueBy;
+
 	Boolean isChargeRefundable;
 	Map<String, String> metadata;
 
@@ -55,9 +64,17 @@ public class Dispute extends StripeObject {
 	public void setStatus(String status) {
 		this.status = status;
 	}
+	public EvidenceSubObject getEvidenceSubObject() {
+		return evidenceSubObject;
+	}
+	public void setEvidenceSubObject(EvidenceSubObject evidence) {
+		this.evidenceSubObject = evidence;
+	}
+	/** 12/2014 Legacy (now use evidenceSubObject) */
 	public String getEvidence() {
 		return evidence;
 	}
+	/** 12/2014 Legacy (now use evidenceSubObject) */
 	public void setEvidence(String evidence) {
 		this.evidence = evidence;
 	}
@@ -96,5 +113,12 @@ public class Dispute extends StripeObject {
 	}
 	public void setMetadata(Map<String, String> metadata) {
 		this.metadata = metadata;
+	}
+	public EvidenceDetails getEvidenceDetails() {
+		return evidenceDetails;
+	}
+
+	public void setEvidenceDetails(EvidenceDetails evidenceDetails) {
+		this.evidenceDetails = evidenceDetails;
 	}
 }

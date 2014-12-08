@@ -1,3 +1,11 @@
+=== 1.23.0 2014-12-08
+
+* Java 1.5 support dropped. We strongly suggest using newer versions of Java due
+  to runtime, vm, language, and syntax improvements.
+* Dispute Evidence has been updated to reflect the new version of Dispute
+  evidence format introduced as part of api version 2014-12-08.
+  See https://stripe.com/docs/upgrades#2014-12-08 for details.
+
 === 1.22.0 2014-12-03
 
 * Convention is to call methods with a RequestOptions object, instead of an API Key directly.
