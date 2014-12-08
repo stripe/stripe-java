@@ -28,6 +28,7 @@ import com.stripe.model.DeletedPlan;
 import com.stripe.model.DeletedRecipient;
 import com.stripe.model.Dispute;
 import com.stripe.model.Event;
+import com.stripe.model.EvidenceDetails;
 import com.stripe.model.EvidenceSubObject;
 import com.stripe.model.Invoice;
 import com.stripe.model.InvoiceItem;
@@ -495,6 +496,35 @@ public class StripeTest {
 		assertNotNull(updatedDispute);
 		assertEquals(myEvidence, updatedDispute.getEvidence());
 		assertNull(updatedDispute.getEvidenceSubObject());
+	}
+
+  @Test
+  public void testSubmitEvidence() throws StripeException, InterruptedException {
+		int chargeValueCents = 100;
+		Charge disputedCharge = createDisputedCharge(chargeValueCents);
+
+		Dispute initialDispute = disputedCharge.getDispute();
+		assertNull(initialDispute.getEvidence());
+		assertNull(initialDispute.getEvidenceSubObject());
+		Map<String, Object> evidenceHashParams = new HashMap<String, Object>();
+		evidenceHashParams.put("product_description": "my productDescription")
+		evidenceHashParams.put("customer_name": "my customerName")
+		evidenceHashParams.put("uncategorized_text": "my uncategorizedText",
+		Map<String, Object> disputeParams = ImmutableMap.<String, Object>of("evidence", evidenceHashParams);
+
+		Dispute updatedDispute = disputedCharge.updateDispute(disputeParams);
+		assertNotNull(updatedDispute);
+		EvidenceSubObject evidenceSubObject = updatedDispute.getEvidenceSubObject();
+		assertNotNull(evidenceSubObject());
+		assertNull(updatedDispute.getEvidence());
+
+		assertEquals("my productDescription", evidenceSubObject.getProductDescription());
+		assertEquals("my customerName", evidenceSubObject.getCustomerName());
+		assertEquals("my uncategorizedText", evidenceSubObject.getUncategorizedText());
+
+		EvidenceDetails evidenceDetails = updatedDispute.getEvidenceDetails();
+		assertNotNull(evidenceDetails)
+		assertEquals(1, evidenceDetails.getSubmissionCount())
 	}
 
 	private Charge createDisputedCharge(int chargeValueCents) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException, InterruptedException {
