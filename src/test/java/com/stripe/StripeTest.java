@@ -507,9 +507,9 @@ public class StripeTest {
 		assertNull(initialDispute.getEvidence());
 		assertNull(initialDispute.getEvidenceSubObject());
 		Map<String, Object> evidenceHashParams = new HashMap<String, Object>();
-		evidenceHashParams.put("product_description": "my productDescription")
-		evidenceHashParams.put("customer_name": "my customerName")
-		evidenceHashParams.put("uncategorized_text": "my uncategorizedText",
+		evidenceHashParams.put("product_description", "my productDescription");
+		evidenceHashParams.put("customer_name", "my customerName");
+		evidenceHashParams.put("uncategorized_text", "my uncategorizedText");
 		Map<String, Object> disputeParams = ImmutableMap.<String, Object>of("evidence", evidenceHashParams);
 
 		Dispute updatedDispute = disputedCharge.updateDispute(disputeParams);
@@ -523,8 +523,8 @@ public class StripeTest {
 		assertEquals("my uncategorizedText", evidenceSubObject.getUncategorizedText());
 
 		EvidenceDetails evidenceDetails = updatedDispute.getEvidenceDetails();
-		assertNotNull(evidenceDetails)
-		assertEquals(1, evidenceDetails.getSubmissionCount())
+		assertNotNull(evidenceDetails);
+		assertEquals(1, evidenceDetails.getSubmissionCount());
 	}
 
 	private Charge createDisputedCharge(int chargeValueCents) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException, InterruptedException {
