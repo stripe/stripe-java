@@ -4,15 +4,17 @@ import com.stripe.Stripe;
 
 public class RequestOptions {
 	public static RequestOptions getDefault() {
-		return new RequestOptions(Stripe.apiKey, Stripe.apiVersion);
+		return new RequestOptions(Stripe.apiKey, Stripe.apiVersion, null);
 	}
 
 	private final String apiKey;
 	private final String stripeVersion;
+	private final String idempotencyKey;
 
-	private RequestOptions(String apiKey, String stripeVersion) {
+	private RequestOptions(String apiKey, String stripeVersion, String idempotencyKey) {
 		this.apiKey = apiKey;
 		this.stripeVersion = stripeVersion;
+		this.idempotencyKey = idempotencyKey;
 	}
 
 	public String getApiKey() {
@@ -23,6 +25,10 @@ public class RequestOptions {
 		return stripeVersion;
 	}
 
+	public String getIdempotencyKey() {
+		return idempotencyKey;
+	}
+
 	@Override
 	public boolean equals(Object o) {
 		if (this == o) return true;
@@ -30,13 +36,24 @@ public class RequestOptions {
 
 		RequestOptions that = (RequestOptions) o;
 
-		return apiKey.equals(that.apiKey) && stripeVersion.equals(that.stripeVersion);
+		if (apiKey != null ? !apiKey.equals(that.apiKey) : that.apiKey != null) {
+			return false;
+		}
+		if (idempotencyKey != null ? !idempotencyKey.equals(that.idempotencyKey) : that.idempotencyKey != null) {
+			return false;
+		}
+		if (stripeVersion != null ? !stripeVersion.equals(that.stripeVersion) : that.stripeVersion != null) {
+			return false;
+		}
+
+		return true;
 	}
 
 	@Override
 	public int hashCode() {
-		int result = apiKey.hashCode();
-		result = 31 * result + stripeVersion.hashCode();
+		int result = apiKey != null ? apiKey.hashCode() : 0;
+		result = 31 * result + (stripeVersion != null ? stripeVersion.hashCode() : 0);
+		result = 31 * result + (idempotencyKey != null ? idempotencyKey.hashCode() : 0);
 		return result;
 	}
 
@@ -51,6 +68,7 @@ public class RequestOptions {
 	public static final class RequestOptionsBuilder {
 		private String apiKey;
 		private String stripeVersion;
+		private String idempotencyKey;
 
 		public RequestOptionsBuilder() {
 			this.apiKey = Stripe.apiKey;
@@ -81,8 +99,22 @@ public class RequestOptions {
 			return this;
 		}
 
+		public RequestOptionsBuilder setIdempotencyKey(String idempotencyKey) {
+			this.idempotencyKey = idempotencyKey;
+			return this;
+		}
+
+		public RequestOptionsBuilder clearIdempotencyKey() {
+			this.idempotencyKey = null;
+			return this;
+		}
+
+		public String getIdempotencyKey() {
+			return this.idempotencyKey;
+		}
+
 		public RequestOptions build() {
-			return new RequestOptions(normalizeApiKey(this.apiKey), normalizeStripeVersion(this.stripeVersion));
+			return new RequestOptions(normalizeApiKey(this.apiKey), normalizeStripeVersion(this.stripeVersion), normalizeIdempotencyKey(this.idempotencyKey));
 		}
 	}
 
@@ -106,6 +138,20 @@ public class RequestOptions {
 		String normalized = stripeVersion.trim();
 		if (normalized.isEmpty()) {
 			throw new InvalidRequestOptionsException("Empty Stripe version specified!");
+		}
+		return normalized;
+	}
+
+	private static String normalizeIdempotencyKey(String idempotencyKey) {
+		if (idempotencyKey == null) {
+			return null;
+		}
+		String normalized = idempotencyKey.trim();
+		if (normalized.isEmpty()) {
+			throw new InvalidRequestOptionsException("Empty Idempotency Key Specified!");
+		}
+		if (normalized.length() > 255) {
+			throw new InvalidRequestOptionsException(String.format("Idempotency Key length was %d, which is larger than the 255 character maximum!", normalized.length()));
 		}
 		return normalized;
 	}
