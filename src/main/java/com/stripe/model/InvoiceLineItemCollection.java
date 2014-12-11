@@ -10,7 +10,7 @@ import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
-public class InvoiceLineItemCollection extends StripeColllectionAPIResource<InvoiceLineItem> {
+public class InvoiceLineItemCollection extends StripeCollectionAPIResource<InvoiceLineItem> {
 	public InvoiceLineItemCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
