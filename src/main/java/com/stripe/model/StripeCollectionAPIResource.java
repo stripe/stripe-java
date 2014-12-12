@@ -4,7 +4,7 @@ import com.stripe.net.APIResource;
 
 import java.util.List;
 
-public abstract class StripeColllectionAPIResource<T> extends APIResource {
+public abstract class StripeCollectionAPIResource<T> extends APIResource {
 	List<T> data;
 	Integer totalCount;
 	Boolean hasMore;

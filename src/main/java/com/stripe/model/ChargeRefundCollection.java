@@ -10,7 +10,7 @@ import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
-public class ChargeRefundCollection extends StripeColllectionAPIResource<Refund> {
+public class ChargeRefundCollection extends StripeCollectionAPIResource<Refund> {
 	public ChargeRefundCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
