@@ -36,6 +36,15 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 	String receiptNumber;
 	String statementDescription;
 	ShippingDetails shipping;
+	FraudDetails fraudDetails;
+
+	public FraudDetails getFraudDetails() {
+		return fraudDetails;
+	}
+
+	public void setFraudDetails(FraudDetails fraudDetails) {
+		this.fraudDetails = fraudDetails;
+	}
 
 	public String getId() {
 		return id;
