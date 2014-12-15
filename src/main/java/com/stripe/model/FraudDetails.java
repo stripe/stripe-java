@@ -16,6 +16,9 @@ public class FraudDetails extends StripeObject {
         return stripeReport;
     }
 
+    /**
+     * stripeReport is set by Stripe, the field is exposed because it may be useful within unit tests.
+     */
     public void setStripeReport(String stripeReport) {
         this.stripeReport = stripeReport;
     }
