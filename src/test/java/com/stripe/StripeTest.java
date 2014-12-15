@@ -493,6 +493,14 @@ public class StripeTest {
 		FraudDetails expectedReported = new FraudDetails();
 		expectedReported.setUserReport("fraudulent");
 		assertEquals(expectedReported, updatedCharge.getFraudDetails());
+
+		Charge nowSafe = updatedCharge.markSafe(null);
+		expectedReported.setUserReport("safe");
+		assertEquals(expectedReported, nowSafe.getFraudDetails());
+
+		Charge nowFraudulent = nowSafe.markFraudulent(null);
+		expectedReported.setUserReport("fraudulent");
+		assertEquals(expectedReported, nowFraudulent.getFraudDetails());
 	}
 
 	@Test

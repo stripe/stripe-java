@@ -1,7 +1,9 @@
 package com.stripe.model;
 
 public class FraudDetails extends StripeObject {
+    public static final String USER_REPORT = "user_report";
     protected String userReport;
+
     protected String stripeReport;
 
     public String getUserReport() {
