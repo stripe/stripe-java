@@ -8,6 +8,7 @@ import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
 
+import java.util.Collections;
 import java.util.Map;
 
 public class Charge extends APIResource implements MetadataStore<Charge> {
@@ -36,6 +37,17 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 	String receiptNumber;
 	String statementDescription;
 	ShippingDetails shipping;
+
+	public static final String FRAUD_DETAILS = "fraud_details";
+	FraudDetails fraudDetails;
+
+	public FraudDetails getFraudDetails() {
+		return fraudDetails;
+	}
+
+	public void setFraudDetails(FraudDetails fraudDetails) {
+		this.fraudDetails = fraudDetails;
+	}
 
 	public String getId() {
 		return id;
@@ -420,5 +432,25 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.POST, String.format("%s/dispute/close", instanceURL(Charge.class, this.getId())), null, Dispute.class, options);
+	}
+
+	/**
+	 * Convenience method to mark a given charge as fraudulent.
+	 */
+	public Charge markFraudulent(RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		Map<String, Object> params = Collections.<String, Object>singletonMap(FRAUD_DETAILS, Collections.singletonMap(FraudDetails.USER_REPORT, "fraudulent"));
+		return this.update(params, options);
+	}
+
+	/**
+	 * Convenience method to mark a given charge as not fraudulent.
+	 */
+	public Charge markSafe(RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		Map<String, Object> params = Collections.<String, Object>singletonMap(FRAUD_DETAILS, Collections.singletonMap(FraudDetails.USER_REPORT, "safe"));
+		return this.update(params, options);
 	}
 }

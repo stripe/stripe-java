@@ -30,6 +30,7 @@ import com.stripe.model.Dispute;
 import com.stripe.model.Event;
 import com.stripe.model.EvidenceDetails;
 import com.stripe.model.EvidenceSubObject;
+import com.stripe.model.FraudDetails;
 import com.stripe.model.Invoice;
 import com.stripe.model.InvoiceItem;
 import com.stripe.model.InvoiceLineItemCollection;
@@ -479,6 +480,27 @@ public class StripeTest {
 		assertFalse(dispute.getIsChargeRefundable());
 		assertEquals(1, dispute.getBalanceTransactions().size());
 		assertEquals(-chargeValueCents, dispute.getBalanceTransactions().get(0).getAmount().intValue());
+	}
+
+	@Test
+	public void testFraudDetails() throws StripeException, InterruptedException {
+		Charge charge = Charge.create(defaultChargeParams);
+		FraudDetails expected = new FraudDetails();
+		assertEquals(expected, charge.getFraudDetails());
+		Charge refundedCharge = charge.refund();
+		assertEquals(expected, refundedCharge.getFraudDetails());
+		Charge updatedCharge = charge.update(ImmutableMap.<String, Object>of("fraud_details", ImmutableMap.of("user_report", "fraudulent")));
+		FraudDetails expectedReported = new FraudDetails();
+		expectedReported.setUserReport("fraudulent");
+		assertEquals(expectedReported, updatedCharge.getFraudDetails());
+
+		Charge nowSafe = updatedCharge.markSafe(null);
+		expectedReported.setUserReport("safe");
+		assertEquals(expectedReported, nowSafe.getFraudDetails());
+
+		Charge nowFraudulent = nowSafe.markFraudulent(null);
+		expectedReported.setUserReport("fraudulent");
+		assertEquals(expectedReported, nowFraudulent.getFraudDetails());
 	}
 
 	@Test
