@@ -1,3 +1,11 @@
+=== 1.24.0 2014-12-18
+
+* The ability to post multipart/form-data was added
+* Requests can now hit different base endpoints, by passing in `apiBase` when
+  creating URLs.
+* Support for the file upload endpoints was added. Documentation is available
+  at https://stripe.com/docs/api#file_uploads
+
 === 1.23.0 2014-12-08
 
 * Java 1.5 support dropped. We strongly suggest using newer versions of Java due
