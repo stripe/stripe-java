@@ -240,14 +240,14 @@ public class StripeTest {
 	}
 
 	@Test
-	public void testChargeCreateWithStatementDescription() throws StripeException {
-		Map<String, Object> chargeWithStatementDescriptionParams = new HashMap<String, Object>();
-		chargeWithStatementDescriptionParams.putAll(defaultChargeParams);
-		chargeWithStatementDescriptionParams.put("description", "hahaha1234");
-		chargeWithStatementDescriptionParams.put("statement_description", "Stripe");
+	public void testChargeCreateWithStatementDescriptor() throws StripeException {
+		Map<String, Object> chargeWithStatementDescriptorParams = new HashMap<String, Object>();
+		chargeWithStatementDescriptorParams.putAll(defaultChargeParams);
+		chargeWithStatementDescriptorParams.put("description", "hahaha1234");
+		chargeWithStatementDescriptorParams.put("statement_descriptor", "Stripe");
 
-		Charge createdCharge = Charge.create(chargeWithStatementDescriptionParams);
-		assertEquals("Stripe", createdCharge.getStatementDescription());
+		Charge createdCharge = Charge.create(chargeWithStatementDescriptorParams);
+		assertEquals("Stripe", createdCharge.getStatementDescriptor());
 	}
 
 	@Test
@@ -712,11 +712,11 @@ public class StripeTest {
 	}
 
 	@Test
-	public void testPlanCreateWithStatementDescription() throws StripeException {
-		Map<String, Object> planParamsWithStatementDescription = getUniquePlanParams();
-		planParamsWithStatementDescription.put("statement_description", "Stripe");
-		Plan plan = Plan.create(planParamsWithStatementDescription);
-		assertEquals(plan.getStatementDescription(), "Stripe");
+	public void testPlanCreateWithStatementDescriptor() throws StripeException {
+		Map<String, Object> planParamsWithStatementDescriptor = getUniquePlanParams();
+		planParamsWithStatementDescriptor.put("statement_descriptor", "Stripe");
+		Plan plan = Plan.create(planParamsWithStatementDescriptor);
+		assertEquals(plan.getStatementDescriptor(), "Stripe");
 	}
 
 	@Test

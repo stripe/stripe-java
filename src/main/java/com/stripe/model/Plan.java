@@ -21,6 +21,8 @@ public class Plan extends APIResource implements MetadataStore<Plan> {
 	Boolean livemode;
 	Integer trialPeriodDays;
 	Map<String, String> metadata;
+	String statementDescriptor;
+	@Deprecated
 	String statementDescription;
 
 	public static Plan create(Map<String, Object> params)
@@ -185,10 +187,20 @@ public class Plan extends APIResource implements MetadataStore<Plan> {
 		this.metadata = metadata;
 	}
 
+	public String getStatementDescriptor() {
+		return statementDescriptor;
+	}
+
+	public void setStatementDescriptor(String statementDescriptor) {
+		this.statementDescriptor = statementDescriptor;
+	}
+
+	@Deprecated
 	public String getStatementDescription() {
 		return statementDescription;
 	}
 
+	@Deprecated
 	public void setStatementDescription(String statementDescription) {
 		this.statementDescription = statementDescription;
 	}

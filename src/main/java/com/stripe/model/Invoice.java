@@ -36,6 +36,7 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>{
 	Long applicationFee;
 	Map<String, String> metadata;
 	Boolean forgiven;
+	String statementDescriptor;
 
 	public Integer getSubtotal() {
 		return subtotal;
@@ -223,6 +224,14 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>{
 
 	public void setApplicationFee(Long applicationFee) {
 		this.applicationFee = applicationFee;
+	}
+
+	public String getStatementDescriptor() {
+		return statementDescriptor;
+	}
+
+	public void setStatementDescriptor(String statementDescriptor) {
+		this.statementDescriptor = statementDescriptor;
 	}
 
 	public static Invoice retrieve(String id) throws AuthenticationException,
