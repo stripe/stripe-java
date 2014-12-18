@@ -42,6 +42,7 @@ import com.stripe.model.ShippingDetails;
 import com.stripe.model.Subscription;
 import com.stripe.model.Token;
 import com.stripe.model.Transfer;
+import com.stripe.net.RequestOptions;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -1602,6 +1603,51 @@ public class StripeTest {
 		updateParams.put("metadata", null);
 		object = object.update(updateParams);
 		assertTrue(object.getMetadata().isEmpty());
+	}
+
+	@Test
+	public void testIdempotentRequestSent() throws CardException, APIException, AuthenticationException, InvalidRequestException, APIConnectionException {
+		RequestOptions options = RequestOptions.builder()
+				.setIdempotencyKey(UUID.randomUUID().toString())
+				.build();
+
+		Charge firstCharge = Charge.create(defaultChargeParams, options);
+		Charge secondCharge = Charge.create(defaultChargeParams, options);
+
+		assertEquals(firstCharge.getId(), secondCharge.getId());
+	}
+
+	@Test
+	public void testNotIdempotentWhenUnset() throws CardException, APIException, AuthenticationException, InvalidRequestException, APIConnectionException {
+		RequestOptions options = RequestOptions.builder().build();
+
+		Charge firstCharge = Charge.create(defaultChargeParams, options);
+		Charge secondCharge = Charge.create(defaultChargeParams, options);
+
+		assertNotSame(firstCharge.getId(), secondCharge.getId());
+	}
+
+	@Test
+	public void testClearingIdempotentcyActuallyWorks() throws CardException, APIException, AuthenticationException, InvalidRequestException, APIConnectionException {
+		RequestOptions options = RequestOptions.builder()
+				.setIdempotencyKey(UUID.randomUUID().toString())
+				.clearIdempotencyKey()
+				.build();
+
+		Charge firstCharge = Charge.create(defaultChargeParams, options);
+		Charge secondCharge = Charge.create(defaultChargeParams, options);
+
+		assertNotSame(firstCharge.getId(), secondCharge.getId());
+	}
+
+	@Test
+	public void testDefaultOptionsHaveUnsetIdempotentRequest() throws CardException, APIException, AuthenticationException, InvalidRequestException, APIConnectionException {
+		RequestOptions options = RequestOptions.getDefault();
+
+		Charge firstCharge = Charge.create(defaultChargeParams, options);
+		Charge secondCharge = Charge.create(defaultChargeParams, options);
+
+		assertNotSame(firstCharge.getId(), secondCharge.getId());
 	}
 
 	@Test

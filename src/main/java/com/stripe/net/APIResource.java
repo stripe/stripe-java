@@ -36,7 +36,6 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateEncodingException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
@@ -139,6 +138,9 @@ public abstract class APIResource extends StripeObject {
 		headers.put("X-Stripe-Client-User-Agent", GSON.toJson(propertyMap));
 		if (apiVersion != null) {
 			headers.put("Stripe-Version", apiVersion);
+		}
+		if (options.getIdempotencyKey() != null) {
+			headers.put("Idempotency-Key", options.getIdempotencyKey());
 		}
 		return headers;
 	}
