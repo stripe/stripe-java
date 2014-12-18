@@ -35,6 +35,8 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 	Map<String, String> metadata;
 	String receiptEmail;
 	String receiptNumber;
+	String statementDescriptor;
+	@Deprecated
 	String statementDescription;
 	ShippingDetails shipping;
 
@@ -147,10 +149,20 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 		this.description = description;
 	}
 
+	public String getStatementDescriptor() {
+		return statementDescriptor;
+	}
+
+	public void setStatementDescriptor(String statementDescriptor) {
+		this.statementDescriptor = statementDescriptor;
+	}
+
+	@Deprecated
 	public String getStatementDescription() {
 		return statementDescription;
 	}
 
+	@Deprecated
 	public void setStatementDescription(String statementDescription) {
 		this.statementDescription = statementDescription;
 	}
