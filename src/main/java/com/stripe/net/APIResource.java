@@ -21,6 +21,7 @@ import com.stripe.model.StripeObject;
 import com.stripe.model.StripeRawJsonObject;
 import com.stripe.model.StripeRawJsonObjectDeserializer;
 
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -60,22 +61,38 @@ public abstract class APIResource extends StripeObject {
 		// fancy yet.
 		if (className.equals("applicationfee")) {
 			return "application_fee";
+		} else if (className.equals("fileupload")) {
+			return "file";
 		} else {
 			return className;
 		}
 	}
 
 	protected static String singleClassURL(Class<?> clazz) {
-		return String.format("%s/v1/%s", Stripe.getApiBase(), className(clazz));
+		return singleClassURL(clazz, Stripe.getApiBase());
+	}
+	
+	protected static String singleClassURL(Class<?> clazz, String apiBase) {
+		return String.format("%s/v1/%s", apiBase, className(clazz));
 	}
 
 	protected static String classURL(Class<?> clazz) {
-		return String.format("%ss", singleClassURL(clazz));
+		return classURL(clazz, Stripe.getApiBase());
+	}
+	
+	protected static String classURL(Class<?> clazz, String apiBase) {
+		return String.format("%ss", singleClassURL(clazz, apiBase));
+	}
+	
+	protected static String instanceURL(Class<?> clazz, String id)
+			throws InvalidRequestException {
+		return instanceURL(clazz, id, Stripe.getApiBase());
 	}
 
-	protected static String instanceURL(Class<?> clazz, String id) throws InvalidRequestException {
+	protected static String instanceURL(Class<?> clazz, String id, String apiBase)
+			throws InvalidRequestException {
 		try {
-			return String.format("%s/%s", classURL(clazz), urlEncode(id));
+			return String.format("%s/%s", classURL(clazz, apiBase), urlEncode(id));
 		} catch (UnsupportedEncodingException e) {
 			throw new InvalidRequestException("Unable to encode parameters to "
 					+ CHARSET
@@ -99,6 +116,10 @@ public abstract class APIResource extends StripeObject {
 		GET, POST, DELETE
 	}
 
+	protected enum RequestType {
+		NORMAL, MULTIPART
+	}
+
 	private static String urlEncode(String str) throws UnsupportedEncodingException {
 		// Preserve original behavior that passing null for an object id will lead
 		// to us actually making a request to /v1/foo/null
@@ -119,6 +140,7 @@ public abstract class APIResource extends StripeObject {
 		Map<String, String> headers = new HashMap<String, String>();
 		String apiVersion = options.getStripeVersion();
 		headers.put("Accept-Charset", CHARSET);
+		headers.put("Accept", "application/json");
 		headers.put("User-Agent",
 				String.format("Stripe/v1 JavaBindings/%s", Stripe.VERSION));
 
@@ -403,11 +425,29 @@ public abstract class APIResource extends StripeObject {
 		}
 	}
 
+	protected static <T> T multipartRequest(APIResource.RequestMethod method,
+			String url, Map<String, Object> params, Class<T> clazz,
+			RequestOptions options) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return _request(method, url, params, clazz,
+				APIResource.RequestType.MULTIPART, options);
+	}
+
 	protected static <T> T request(APIResource.RequestMethod method,
 			String url, Map<String, Object> params, Class<T> clazz,
 			RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
+		return _request(method, url, params, clazz,
+				APIResource.RequestType.NORMAL, options);
+	}
+
+	private static <T> T _request(APIResource.RequestMethod method,
+			String url, Map<String, Object> params, Class<T> clazz,
+			APIResource.RequestType type, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
 		if (options == null) {
 			options = RequestOptions.getDefault();
 		}
@@ -424,27 +464,6 @@ public abstract class APIResource extends StripeObject {
 			allowedToSetTTL = false;
 		}
 
-		try {
-			return _request(method, url, params, clazz, options);
-		} finally {
-			if (allowedToSetTTL) {
-				if (originalDNSCacheTTL == null) {
-					// value unspecified by implementation
-					// DNS_CACHE_TTL_PROPERTY_NAME of -1 = cache forever
-					java.security.Security.setProperty(DNS_CACHE_TTL_PROPERTY_NAME, "-1");
-				} else {
-					java.security.Security.setProperty(
-							DNS_CACHE_TTL_PROPERTY_NAME, originalDNSCacheTTL);
-				}
-			}
-		}
-	}
-
-	protected static <T> T _request(APIResource.RequestMethod method,
-			String url, Map<String, Object> params, Class<T> clazz,
-			RequestOptions options) throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
 		String apiKey = options.getApiKey();
 		if (apiKey == null || apiKey.trim().isEmpty()) {
 			throw new AuthenticationException(
@@ -453,8 +472,49 @@ public abstract class APIResource extends StripeObject {
 							+ "See https://stripe.com/api for details or email support@stripe.com if you have questions.");
 		}
 
-		String query;
+		try {
+			StripeResponse response;
+			switch (type) {
+			case NORMAL:
+				response = getStripeResponse(method, url, params, options);
+				break;
+			case MULTIPART:
+				response = getMultipartStripeResponse(method, url, params,
+						options);
+				break;
+			default:
+				throw new RuntimeException(
+						"Invalid APIResource request type. "
+								+ "This indicates a bug in the Stripe bindings. Please contact "
+								+ "support@stripe.com for assistance.");
+			}
+			int rCode = response.responseCode;
+			String rBody = response.responseBody;
+			if (rCode < 200 || rCode >= 300) {
+				handleAPIError(rBody, rCode);
+			}
+			return GSON.fromJson(rBody, clazz);
+		} finally {
+			if (allowedToSetTTL) {
+				if (originalDNSCacheTTL == null) {
+					// value unspecified by implementation
+					// DNS_CACHE_TTL_PROPERTY_NAME of -1 = cache forever
+					java.security.Security.setProperty(
+							DNS_CACHE_TTL_PROPERTY_NAME, "-1");
+				} else {
+					java.security.Security.setProperty(
+							DNS_CACHE_TTL_PROPERTY_NAME, originalDNSCacheTTL);
+				}
+			}
+		}
+	}
 
+	private static StripeResponse getStripeResponse(
+			APIResource.RequestMethod method, String url,
+			Map<String, Object> params, RequestOptions options)
+			throws InvalidRequestException, APIConnectionException,
+			APIException {
+		String query;
 		try {
 			query = createQuery(params);
 		} catch (UnsupportedEncodingException e) {
@@ -464,27 +524,110 @@ public abstract class APIResource extends StripeObject {
 					null, e);
 		}
 
-		StripeResponse response;
 		try {
 			// HTTPSURLConnection verifies SSL cert by default
-			response = makeURLConnectionRequest(method, url, query, options);
+			return makeURLConnectionRequest(method, url, query, options);
 		} catch (ClassCastException ce) {
 			// appengine doesn't have HTTPSConnection, use URLFetch API
 			String appEngineEnv = System.getProperty(
 					"com.google.appengine.runtime.environment", null);
 			if (appEngineEnv != null) {
-				response = makeAppEngineRequest(method, url, query, options);
+				return makeAppEngineRequest(method, url, query, options);
 			} else {
 				// non-appengine ClassCastException
 				throw ce;
 			}
 		}
-		int rCode = response.responseCode;
-		String rBody = response.responseBody;
-		if (rCode < 200 || rCode >= 300) {
-			handleAPIError(rBody, rCode);
+	}
+
+	private static StripeResponse getMultipartStripeResponse(
+			APIResource.RequestMethod method, String url,
+			Map<String, Object> params, RequestOptions options)
+			throws InvalidRequestException, APIConnectionException,
+			APIException {
+
+		if (method != APIResource.RequestMethod.POST) {
+			throw new InvalidRequestException(
+					"Multipart requests for HTTP methods other than POST "
+							+ "are currently not supported.", null, null);
 		}
-		return GSON.fromJson(rBody, clazz);
+
+		java.net.HttpURLConnection conn = null;
+		try {
+			conn = createStripeConnection(url, options);
+
+			String boundary = MultipartProcessor.getBoundary();
+			conn.setDoOutput(true);
+			conn.setRequestMethod("POST");
+			conn.setRequestProperty("Content-Type", String.format(
+					"multipart/form-data; boundary=%s", boundary));
+			checkSSLCert(conn);
+
+			MultipartProcessor multipartProcessor = null;
+			try {
+				multipartProcessor = new MultipartProcessor(
+						conn, boundary, CHARSET);
+
+				for (Map.Entry<String, Object> entry : params.entrySet()) {
+					String key = entry.getKey();
+					Object value = entry.getValue();
+					
+					if (value instanceof File) {
+						File currentFile = (File) value;
+						if (!currentFile.exists()) {
+							throw new InvalidRequestException("File for key "
+									+ key + " must exist.", null, null);
+						} else if (!currentFile.isFile()) {
+							throw new InvalidRequestException("File for key "
+									+ key
+									+ " must be a file and not a directory.",
+									null, null);
+						} else if (!currentFile.canRead()) {
+							throw new InvalidRequestException(
+									"Must have read permissions on file for key "
+									+ key + ".", null, null);
+						}
+						multipartProcessor.addFileField(key, currentFile);
+					} else {
+						// We only allow a single level of nesting for params
+						// for multipart
+						multipartProcessor.addFormField(key, (String) value);
+					}
+				}
+
+			} finally {
+				if (multipartProcessor != null) {
+					multipartProcessor.finish();
+				}
+			}
+
+			// trigger the request
+			int rCode = conn.getResponseCode();
+			String rBody;
+			Map<String, List<String>> headers;
+
+			if (rCode >= 200 && rCode < 300) {
+				rBody = getResponseBody(conn.getInputStream());
+			} else {
+				rBody = getResponseBody(conn.getErrorStream());
+			}
+			headers = conn.getHeaderFields();
+			return new StripeResponse(rCode, rBody, headers);
+
+		} catch (IOException e) {
+			throw new APIConnectionException(
+					String.format(
+							"IOException during API request to Stripe (%s): %s "
+									+ "Please check your internet connection and try again. If this problem persists,"
+									+ "you should check Stripe's service status at https://twitter.com/stripestatus,"
+									+ " or let us know at support@stripe.com.",
+							Stripe.getApiBase(), e.getMessage()), e);
+		} finally {
+			if (conn != null) {
+				conn.disconnect();
+			}
+		}
+
 	}
 
 	private static void handleAPIError(String rBody, int rCode)

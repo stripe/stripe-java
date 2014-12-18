@@ -30,6 +30,7 @@ import com.stripe.model.Dispute;
 import com.stripe.model.Event;
 import com.stripe.model.EvidenceDetails;
 import com.stripe.model.EvidenceSubObject;
+import com.stripe.model.FileUpload;
 import com.stripe.model.FraudDetails;
 import com.stripe.model.Invoice;
 import com.stripe.model.InvoiceItem;
@@ -47,6 +48,9 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
+import java.io.File;
+import java.net.URISyntaxException;
+import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -502,6 +506,25 @@ public class StripeTest {
 		Charge nowFraudulent = nowSafe.markFraudulent(null);
 		expectedReported.setUserReport("fraudulent");
 		assertEquals(expectedReported, nowFraudulent.getFraudDetails());
+	}
+
+	@Test
+	public void testCreateFileUpload() throws StripeException,
+			InterruptedException, URISyntaxException {
+		URL url = getClass().getResource("minimal.pdf");
+		File file = new File(url.getPath());
+		Map<String, Object> fileUploadParams = new HashMap<String, Object>();
+		fileUploadParams.put("purpose", "dispute_evidence");
+		fileUploadParams.put("file", file);
+
+		FileUpload fileUpload = FileUpload.create(fileUploadParams);
+		assertEquals(file.length(), fileUpload.getSize().longValue());
+		assertEquals("application/pdf", fileUpload.getMimeType());
+		
+		FileUpload retrievedUpload = FileUpload.retrieve(fileUpload.getId());
+		assertEquals(fileUpload.getId(), retrievedUpload.getId());
+		assertEquals(file.length(), retrievedUpload.getSize().longValue());
+		assertEquals("application/pdf", retrievedUpload.getMimeType());
 	}
 
 	@Test
