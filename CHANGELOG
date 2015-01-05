@@ -5,6 +5,8 @@
   creating URLs.
 * Support for the file upload endpoints was added. Documentation is available
   at https://stripe.com/docs/api#file_uploads
+* Support for fraud reporting (marking charges as safe or fraudulent) was
+  added.
 
 === 1.23.0 2014-12-08
 
