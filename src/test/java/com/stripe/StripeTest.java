@@ -44,6 +44,8 @@ import com.stripe.model.Subscription;
 import com.stripe.model.Token;
 import com.stripe.model.Transfer;
 import com.stripe.net.RequestOptions;
+import com.stripe.model.BitcoinReceiver;
+import com.stripe.model.BitcoinTransaction;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -75,6 +77,7 @@ public class StripeTest {
 	static Map<String, Object> defaultDebitTokenParams = new HashMap<String, Object>();
 	static Map<String, Object> defaultBankAccountParams = new HashMap<String, Object>();
 	static Map<String, Object> defaultRecipientParams = new HashMap<String, Object>();
+	static Map<String, Object> defaultBitcoinReceiverParams = new HashMap<String, Object>();
 
 	static String getUniquePlanId() {
 		return String.format("MY-J-PLAN-%s", UUID.randomUUID().toString().substring(24));
@@ -212,6 +215,10 @@ public class StripeTest {
 		defaultRecipientParams.put("bank_account", defaultBankAccountParams);
 		defaultRecipientParams.put("card", defaultDebitCardParams);
 
+		defaultBitcoinReceiverParams.put("amount", 100);
+		defaultBitcoinReceiverParams.put("currency", "usd");
+		defaultBitcoinReceiverParams.put("description", "some details");
+		defaultBitcoinReceiverParams.put("email", "do+fill_now@stripe.com");
 	}
 
 	@Test
@@ -520,7 +527,7 @@ public class StripeTest {
 		FileUpload fileUpload = FileUpload.create(fileUploadParams);
 		assertEquals(file.length(), fileUpload.getSize().longValue());
 		assertEquals("application/pdf", fileUpload.getMimeType());
-		
+
 		FileUpload retrievedUpload = FileUpload.retrieve(fileUpload.getId());
 		assertEquals(fileUpload.getId(), retrievedUpload.getId());
 		assertEquals(file.length(), retrievedUpload.getSize().longValue());
@@ -1727,5 +1734,45 @@ public class StripeTest {
 	@Test
 	public void testCouponMetadata() throws StripeException {
 		testMetadata(Coupon.create(getUniqueCouponParams()));
+	}
+
+	@Test
+	public void testBitcoinReceiverCreate() throws StripeException {
+		BitcoinReceiver receiver = BitcoinReceiver.create(defaultBitcoinReceiverParams);
+		assertNotNull(receiver.getId());
+	}
+
+	@Test
+	public void testBitcoinReceiverRetrieve() throws StripeException {
+		BitcoinReceiver receiver = BitcoinReceiver.create(defaultBitcoinReceiverParams);
+		BitcoinReceiver retrievedReceiver = BitcoinReceiver.retrieve(receiver.getId());
+		assertEquals(receiver.getId(), retrievedReceiver.getId());
+	}
+
+	@Test
+	public void testBitcoinReceiverList() throws StripeException {
+		Map<String, Object> listParams = new HashMap<String, Object>();
+		listParams.put("count", 1);
+		List<BitcoinReceiver> receivers = BitcoinReceiver.all(listParams).getData();
+		assertEquals(receivers.size(), 1);
+	}
+
+	@Test
+	public void testBitcoinTransactionRetrieve() throws StripeException {
+		Map<String, Object> receiverParams = new HashMap<String, Object>(defaultBitcoinReceiverParams);
+		BitcoinReceiver receiver = BitcoinReceiver.create(receiverParams);
+		BitcoinReceiver retrievedReceiver = BitcoinReceiver.retrieve(receiver.getId());
+		BitcoinTransaction transaction = retrievedReceiver.getTransactions().getData().get(0);
+		assertNotNull(transaction.getId());
+		BitcoinTransaction retrievedTransaction = BitcoinTransaction.retrieve(transaction.getId());
+		assertEquals(transaction.getId(), retrievedTransaction.getId());
+	}
+
+	@Test
+	public void testBitcoinTransactionList() throws StripeException {
+		Map<String, Object> listParams = new HashMap<String, Object>();
+		listParams.put("count", 1);
+		List<BitcoinTransaction> transactions = BitcoinTransaction.all(listParams).getData();
+		assertEquals(transactions.size(), 1);
 	}
 }
