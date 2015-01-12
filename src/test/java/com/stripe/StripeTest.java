@@ -1755,6 +1755,9 @@ public class StripeTest {
 		BitcoinReceiver receiver = BitcoinReceiver.create(defaultBitcoinReceiverParams);
 		BitcoinReceiver retrievedReceiver = BitcoinReceiver.retrieve(receiver.getId());
 		assertEquals(receiver.getId(), retrievedReceiver.getId());
+		List<BitcoinTransaction> transactions = retrievedReceiver.getTransactions().getData();
+		assertNotNull(transactions);
+		assertEquals(1, transactions.size());
 	}
 
 	@Test
@@ -1766,21 +1769,11 @@ public class StripeTest {
 	}
 
 	@Test
-	public void testBitcoinTransactionRetrieve() throws StripeException {
-		Map<String, Object> receiverParams = new HashMap<String, Object>(defaultBitcoinReceiverParams);
-		BitcoinReceiver receiver = BitcoinReceiver.create(receiverParams);
-		BitcoinReceiver retrievedReceiver = BitcoinReceiver.retrieve(receiver.getId());
-		BitcoinTransaction transaction = retrievedReceiver.getTransactions().getData().get(0);
-		assertNotNull(transaction.getId());
-		BitcoinTransaction retrievedTransaction = BitcoinTransaction.retrieve(transaction.getId());
-		assertEquals(transaction.getId(), retrievedTransaction.getId());
-	}
-
-	@Test
 	public void testBitcoinTransactionList() throws StripeException {
+		BitcoinReceiver receiver = BitcoinReceiver.create(defaultBitcoinReceiverParams);
 		Map<String, Object> listParams = new HashMap<String, Object>();
 		listParams.put("count", 1);
-		List<BitcoinTransaction> transactions = BitcoinTransaction.all(listParams).getData();
+		List<BitcoinTransaction> transactions = receiver.getTransactions().all(listParams).getData();
 		assertEquals(transactions.size(), 1);
 	}
 }

@@ -76,28 +76,4 @@ public class BitcoinTransaction extends APIResource {
     public void setReceiver(String receiver) {
         this.receiver = receiver;
     }
-
-    public static BitcoinTransaction retrieve(String id) throws AuthenticationException,
-            InvalidRequestException, APIConnectionException, CardException,
-            APIException {
-        return retrieve(id, (RequestOptions) null);
-    }
-
-    public static BitcoinTransactionCollection all(Map<String, Object> params)
-            throws AuthenticationException, InvalidRequestException,
-            APIConnectionException, CardException, APIException {
-        return all(params, (RequestOptions) null);
-    }
-
-    public static BitcoinTransaction retrieve(String id, RequestOptions options)
-            throws AuthenticationException, InvalidRequestException,
-            APIConnectionException, CardException, APIException {
-        return request(RequestMethod.GET, String.format("%s/%s/%s", Stripe.getApiBase(), "v1/bitcoin/transactions", id), null, BitcoinTransaction.class, options);
-    }
-
-    public static BitcoinTransactionCollection all(Map<String, Object> params, RequestOptions options)
-            throws AuthenticationException, InvalidRequestException,
-            APIConnectionException, CardException, APIException {
-        return request(RequestMethod.GET, String.format("%s/%s", Stripe.getApiBase(), "v1/bitcoin/transactions"), params, BitcoinTransactionCollection.class, options);
-    }
 }
