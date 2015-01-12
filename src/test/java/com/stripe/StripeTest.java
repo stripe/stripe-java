@@ -526,12 +526,20 @@ public class StripeTest {
 
 		FileUpload fileUpload = FileUpload.create(fileUploadParams);
 		assertEquals(file.length(), fileUpload.getSize().longValue());
-		assertEquals("application/pdf", fileUpload.getMimeType());
+		assertEquals("pdf", fileUpload.getType());
 
 		FileUpload retrievedUpload = FileUpload.retrieve(fileUpload.getId());
 		assertEquals(fileUpload.getId(), retrievedUpload.getId());
 		assertEquals(file.length(), retrievedUpload.getSize().longValue());
-		assertEquals("application/pdf", retrievedUpload.getMimeType());
+		assertEquals("pdf", retrievedUpload.getType());
+	}
+	
+	@Test
+	public void testFileUploadList() throws StripeException {
+		Map<String, Object> listParams = new HashMap<String, Object>();
+		listParams.put("limit", 1);
+		List<FileUpload> uploads = FileUpload.all(listParams).getData();
+		assertEquals(uploads.size(), 1);
 	}
 
 	@Test

@@ -18,7 +18,7 @@ public class FileUpload extends APIResource {
 	Long size;
 	String purpose;
 	String url;
-	String mimetype;
+	String type;
 
 	public String getId() {
 		return id;
@@ -60,12 +60,12 @@ public class FileUpload extends APIResource {
 		this.url = url;
 	}
 
-	public String getMimeType() {
-		return mimetype;
+	public String getType() {
+		return type;
 	}
 
-	public void setMimeType(String mimetype) {
-		this.mimetype = mimetype;
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public static FileUpload create(Map<String, Object> params)
@@ -109,6 +109,26 @@ public class FileUpload extends APIResource {
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.GET, instanceURL(FileUpload.class, id, Stripe.UPLOAD_API_BASE),
 				null, FileUpload.class, options);
+	}
+	
+	public static FileUploadCollection all(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return all(params, (RequestOptions) null);
+	}
+	
+	@Deprecated
+	public static FileUploadCollection all(Map<String, Object> params, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return all(params, RequestOptions.builder().setApiKey(apiKey).build());
+	}
+
+	public static FileUploadCollection all(Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, classURL(FileUpload.class, Stripe.UPLOAD_API_BASE),
+				params, FileUploadCollection.class, options);
 	}
 
 }
