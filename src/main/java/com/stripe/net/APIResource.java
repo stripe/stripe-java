@@ -17,6 +17,8 @@ import com.stripe.model.EventData;
 import com.stripe.model.EventDataDeserializer;
 import com.stripe.model.FeeRefundCollection;
 import com.stripe.model.FeeRefundCollectionDeserializer;
+import com.stripe.model.PaymentSource;
+import com.stripe.model.PaymentSourceDeserializer;
 import com.stripe.model.StripeObject;
 import com.stripe.model.StripeRawJsonObject;
 import com.stripe.model.StripeRawJsonObjectDeserializer;
@@ -52,6 +54,7 @@ public abstract class APIResource extends StripeObject {
 			.registerTypeAdapter(FeeRefundCollection.class, new FeeRefundCollectionDeserializer())
 			.registerTypeAdapter(StripeRawJsonObject.class, new StripeRawJsonObjectDeserializer())
 			.registerTypeAdapter(Dispute.class, new DisputeDataDeserializer())
+			.registerTypeAdapter(PaymentSource.class, new PaymentSourceDeserializer())
 			.create();
 
 	private static String className(Class<?> clazz) {

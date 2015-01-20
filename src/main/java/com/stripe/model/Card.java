@@ -5,19 +5,17 @@ import com.stripe.exception.APIException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
-public class Card extends APIResource {
+public class Card extends PaymentSource {
 	Integer expMonth;
 	Integer expYear;
 	String last4;
 	String country;
 	String type;
 	String name;
-	String id;
 	String customer;
 	String recipient;
 	String addressLine1;
@@ -77,14 +75,6 @@ public class Card extends APIResource {
 		} else {
 			return null;
 		}
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
 	}
 
 	public String getCustomer() {

@@ -39,6 +39,7 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 	@Deprecated
 	String statementDescription;
 	ShippingDetails shipping;
+	PaymentSource source;
 
 	public static final String FRAUD_DETAILS = "fraud_details";
 	FraudDetails fraudDetails;
@@ -262,6 +263,14 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 
 	public void setReceiptEmail(String receiptEmail) {
 		this.receiptEmail = receiptEmail;
+	}
+
+	public PaymentSource getSource() {
+		return source;
+	}
+
+	public void setSource(PaymentSource source) {
+		this.source = source;
 	}
 
 	public static Charge create(Map<String, Object> params)

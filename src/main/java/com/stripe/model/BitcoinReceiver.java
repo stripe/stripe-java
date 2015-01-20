@@ -12,8 +12,7 @@ import com.stripe.net.RequestOptions;
 import java.util.Collections;
 import java.util.Map;
 
-public class BitcoinReceiver extends APIResource {
-    String id;
+public class BitcoinReceiver extends PaymentSource {
     Long created;
     String currency;
     Integer amount;
@@ -32,14 +31,6 @@ public class BitcoinReceiver extends APIResource {
     String payment;
     BitcoinTransactionCollection transactions;
     Map<String, String> metadata;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
 
     public Long getCreated() {
         return created;
