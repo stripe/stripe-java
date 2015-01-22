@@ -45,7 +45,7 @@ public class DocumentationTest {
         List<String> closeMatches = new LinkedList<String>();
         while ((line = reader.readLine()) != null) {
             if (line.contains(Stripe.VERSION)) {
-                if (Pattern.matches(String.format("^=== %s 20[12][0-9]-(0[1-9]|1[0-2])-(0[1-9]|1[0-9]|3[0-1])$", Stripe.VERSION), line)) {
+                if (Pattern.matches(String.format("^=== %s 20[12][0-9]-(0[1-9]|1[0-2])-(0[1-9]|1[0-9]|2[0-9]|3[0-1])$", Stripe.VERSION), line)) {
                     return;
                 }
                 closeMatches.add(line);
