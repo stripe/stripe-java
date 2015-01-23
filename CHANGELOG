@@ -1,3 +1,6 @@
+=== 1.25.1 2015-01-23
+* Test of new stripe-java release process.
+
 === 1.25.0 2015-01-21
 * Support making bitcoin charges through BitcoinReceiver source object
 

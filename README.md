@@ -17,14 +17,14 @@ Add this dependency to your project's POM:
     <dependency>
       <groupId>com.stripe</groupId>
       <artifactId>stripe-java</artifactId>
-      <version>1.25.0</version>
+      <version>1.25.1</version>
     </dependency>
 
 ### Gradle users
 
 Add this dependency to your project's build file:
 
-    compile "com.stripe:stripe-java:1.25.0"
+    compile "com.stripe:stripe-java:1.25.1"
 
 ### Others
 
