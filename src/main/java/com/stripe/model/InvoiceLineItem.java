@@ -13,7 +13,8 @@ public class InvoiceLineItem extends StripeObject {
 	Integer quantity;
 	Plan plan;
 	String description;
-  Map<String, String> metadata;
+	Map<String, String> metadata;
+	String subscription;
 
 	public String getId() {
 		return this.id;
@@ -55,7 +56,11 @@ public class InvoiceLineItem extends StripeObject {
 		return this.description;
 	}
 
-  public Map<String, String> getMetadata() {
-    return this.metadata;
-  }
+	public Map<String, String> getMetadata() {
+		return this.metadata;
+	}
+
+	public String getSubscription() {
+		return this.subscription;
+	}
 }
