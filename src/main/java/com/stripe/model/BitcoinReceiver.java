@@ -12,7 +12,10 @@ import com.stripe.net.RequestOptions;
 import java.util.Collections;
 import java.util.Map;
 
-public class BitcoinReceiver extends PaymentSource {
+public class BitcoinReceiver extends APIResource implements PaymentSource {
+    String id;
+    String object;
+    String status;
     Long created;
     String currency;
     Integer amount;
@@ -31,6 +34,30 @@ public class BitcoinReceiver extends PaymentSource {
     String payment;
     BitcoinTransactionCollection transactions;
     Map<String, String> metadata;
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    public String getObject() {
+        return object;
+    }
+
+    public void setObject(String object) {
+        this.object = object;
+    }
+
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
 
     public Long getCreated() {
         return created;
@@ -210,5 +237,36 @@ public class BitcoinReceiver extends PaymentSource {
             throws AuthenticationException, InvalidRequestException,
             APIConnectionException, CardException, APIException {
         return request(RequestMethod.GET, String.format("%s/%s", Stripe.getApiBase(), "v1/bitcoin/receivers"), params, BitcoinReceiverCollection.class, options);
+    }
+
+    public String getInstanceURL() {
+        if (this.customer != null) {
+            return String.format("%s/%s/sources/%s", classURL(Customer.class), this.customer, this.getId());
+        }
+        return null;
+    }
+
+    public BitcoinReceiver update(Map<String, Object> params)
+            throws AuthenticationException, InvalidRequestException,
+            APIConnectionException, CardException, APIException {
+        return update(params, (RequestOptions) null);
+    }
+
+    public BitcoinReceiver update(Map<String, Object> params, RequestOptions options)
+            throws AuthenticationException, InvalidRequestException,
+            APIConnectionException, CardException, APIException {
+        return request(RequestMethod.POST, this.getInstanceURL(), params, BitcoinReceiver.class, options);
+    }
+
+    public DeletedBitcoinReceiver delete() throws AuthenticationException,
+            InvalidRequestException, APIConnectionException, CardException,
+            APIException {
+        return delete((RequestOptions) null);
+    }
+
+    public DeletedBitcoinReceiver delete(RequestOptions options) throws AuthenticationException,
+            InvalidRequestException, APIConnectionException, CardException,
+            APIException {
+        return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedBitcoinReceiver.class, options);
     }
 }

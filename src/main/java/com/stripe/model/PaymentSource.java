@@ -5,37 +5,30 @@ import com.stripe.exception.APIException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
-import com.stripe.net.RequestOptions;
 
 import java.util.Map;
+import com.stripe.net.RequestOptions;
 
-public class PaymentSource extends APIResource {
-	String id;
-	String object;
-	String status;
+public interface PaymentSource {
+	public String getId();
+	public void setId(String id);
+	public String getObject();
+	public void setObject(String object);
+	public String getStatus();
+	public void setStatus(String status);
+	public String getCustomer();
+	public void setCustomer(String customer);
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getObject() {
-		return object;
-	}
-
-	public void setObject(String object) {
-		this.object = object;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
+	public PaymentSource update(Map<String, Object> params) throws
+			AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException;
+	public PaymentSource update(Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException;
+	public DeletedStripeObject delete() throws AuthenticationException,
+			InvalidRequestException, APIConnectionException,
+			CardException, APIException;
+	public DeletedStripeObject delete(RequestOptions options) throws
+			AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException;
 }

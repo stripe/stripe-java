@@ -28,6 +28,7 @@ public class Customer extends APIResource implements MetadataStore<Customer> {
 	Boolean delinquent;
 	Integer accountBalance;
 	CustomerCardCollection cards;
+	PaymentSourceCollection sources;
 	Map<String, String> metadata;
 
 	public Long getCreated() {
@@ -72,6 +73,14 @@ public class Customer extends APIResource implements MetadataStore<Customer> {
 
 	public CustomerCardCollection getCards() {
 		return cards;
+	}
+
+	public PaymentSourceCollection getSources() {
+		return sources;
+	}
+
+	public void setSources(PaymentSourceCollection sources) {
+		this.sources = sources;
 	}
 
 	public String getEmail() {
