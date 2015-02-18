@@ -1,7 +1,7 @@
 package com.stripe.model;
 
 
-public class DeletedCoupon extends StripeObject {
+public class DeletedCoupon extends StripeObject implements DeletedStripeObject {
 	String id;
 	Boolean deleted;
 	

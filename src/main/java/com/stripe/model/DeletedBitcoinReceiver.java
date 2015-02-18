@@ -1,7 +1,7 @@
 package com.stripe.model;
 
 
-public class DeletedCard extends StripeObject implements DeletedStripeObject {
+public class DeletedBitcoinReceiver extends StripeObject implements DeletedStripeObject {
   String id;
   Boolean deleted;
 
