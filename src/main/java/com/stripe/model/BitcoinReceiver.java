@@ -242,8 +242,9 @@ public class BitcoinReceiver extends APIResource implements PaymentSource {
     public String getInstanceURL() {
         if (this.customer != null) {
             return String.format("%s/%s/sources/%s", classURL(Customer.class), this.customer, this.getId());
+        } else {
+            return String.format("%s/%s/%s", Stripe.getApiBase(), "v1/bitcoin/receivers", this.getId());
         }
-        return null;
     }
 
     public BitcoinReceiver update(Map<String, Object> params)
