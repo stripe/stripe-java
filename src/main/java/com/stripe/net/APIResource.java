@@ -66,6 +66,8 @@ public abstract class APIResource extends StripeObject {
 			return "application_fee";
 		} else if (className.equals("fileupload")) {
 			return "file";
+		} else if (className.equals("bitcoinreceiver")) {
+			return "bitcoin_receiver";
 		} else {
 			return className;
 		}

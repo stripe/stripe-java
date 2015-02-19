@@ -45,6 +45,7 @@ import com.stripe.model.Token;
 import com.stripe.model.Transfer;
 import com.stripe.net.RequestOptions;
 import com.stripe.model.BitcoinReceiver;
+import com.stripe.model.DeletedBitcoinReceiver;
 import com.stripe.model.BitcoinTransaction;
 import com.stripe.model.PaymentSource;
 import com.stripe.model.PaymentSourceCollection;
@@ -80,6 +81,7 @@ public class StripeTest {
 	static Map<String, Object> defaultBankAccountParams = new HashMap<String, Object>();
 	static Map<String, Object> defaultRecipientParams = new HashMap<String, Object>();
 	static Map<String, Object> defaultBitcoinReceiverParams = new HashMap<String, Object>();
+	static RequestOptions cardSupportedRequestOptions;
 
 	static String getUniquePlanId() {
 		return String.format("MY-J-PLAN-%s", UUID.randomUUID().toString().substring(24));
@@ -147,6 +149,16 @@ public class StripeTest {
 		return Recipient.create(recipientParams);
 	}
 
+	static Customer createDefaultCustomerWithDefaultBitcoinReceiver()
+			throws StripeException {
+		Customer customer = Customer.create(defaultCustomerParams);
+		BitcoinReceiver receiver = BitcoinReceiver.create(defaultBitcoinReceiverParams);
+		Map<String, Object> createParams = new HashMap<String, Object>();
+		createParams.put("source", receiver.getId());
+		customer.getSources().create(createParams);
+		return customer;
+	}
+
 	static Map<String, Object> getSubscriptionParams() throws StripeException {
 		Plan plan = Plan.create(getUniquePlanParams());
 		Map<String, Object> subscriptionParams = new HashMap<String, Object>();
@@ -163,6 +175,8 @@ public class StripeTest {
 	public static void setUp() {
 		Stripe.apiKey = "tGN0bIwXnHdwOa85VABjPdSn8nWY7G7I"; // stripe public
 															// test key
+
+		cardSupportedRequestOptions = RequestOptions.builder().setStripeVersion("2015-02-16").build();
 
 		defaultCardParams.put("number", "4242424242424242");
 		defaultCardParams.put("exp_month", 12);
@@ -465,7 +479,7 @@ public class StripeTest {
 		invalidCardParams.put("exp_month", 12);
 		invalidCardParams.put("exp_year", 2015);
 		invalidChargeParams.put("card", invalidCardParams);
-		Charge charge = Charge.create(invalidChargeParams);
+		Charge charge = Charge.create(invalidChargeParams, cardSupportedRequestOptions);
 		assertEquals(charge.getPaid(), true);
 		assertEquals(charge.getCard().getAddressZipCheck(), "fail");
 		assertEquals(charge.getCard().getAddressLine1Check(), "pass");
@@ -483,7 +497,7 @@ public class StripeTest {
 		invalidCardParams.put("exp_month", 12);
 		invalidCardParams.put("exp_year", 2015);
 		invalidChargeParams.put("card", invalidCardParams);
-		Charge charge = Charge.create(invalidChargeParams);
+		Charge charge = Charge.create(invalidChargeParams, cardSupportedRequestOptions);
 		assertEquals(charge.getPaid(), true);
 		assertEquals(charge.getCard().getAddressZipCheck(), "pass");
 		assertEquals(charge.getCard().getAddressLine1Check(), "fail");
@@ -539,7 +553,7 @@ public class StripeTest {
 		assertEquals(file.length(), retrievedUpload.getSize().longValue());
 		assertEquals("pdf", retrievedUpload.getType());
 	}
-	
+
 	@Test
 	public void testFileUploadList() throws StripeException {
 		Map<String, Object> listParams = new HashMap<String, Object>();
@@ -619,7 +633,7 @@ public class StripeTest {
 
 	@Test
 	public void testCustomerCreate() throws StripeException {
-		Customer customer = Customer.create(defaultCustomerParams);
+		Customer customer = Customer.create(defaultCustomerParams, cardSupportedRequestOptions);
 		assertEquals(customer.getDescription(), "J Bindings Customer");
 		List<Card> customerCards = customer.getCards().getData();
 		assertEquals(1, customerCards.size());
@@ -671,15 +685,20 @@ public class StripeTest {
 
 	@Test
 	public void testCustomerSourceList() throws StripeException {
-		Customer customer = Customer.create(defaultCustomerParams);
-		List<PaymentSource> customerSources = customer.getSources().getData();
-		assertEquals(1, customerSources.size());
-		assert(customerSources.get(0) instanceof Card);
-		assertEquals("4242", ((Card) customerSources.get(0)).getLast4());
+		Customer customer = createDefaultCustomerWithDefaultBitcoinReceiver();
+
+		HashMap<String, Object> listParams = new HashMap<String, Object>();
+		List<PaymentSource> customerSourceList = customer.getSources().all(listParams).getData();
+
+		assertEquals(2, customerSourceList.size());
+		assert(customerSourceList.get(0) instanceof Card);
+		assertEquals("4242", ((Card) customerSourceList.get(0)).getLast4());
+		assert(customerSourceList.get(1) instanceof BitcoinReceiver);
+		assertEquals(true, ((BitcoinReceiver) customerSourceList.get(1)).getFilled());
 	}
 
 	@Test
-	public void testCustomerSourceRetrieve() throws StripeException {
+	public void testCustomerSourceRetrieveCard() throws StripeException {
 		Customer customer = Customer.create(defaultCustomerParams);
 		PaymentSourceCollection customerSources = customer.getSources();
 		String paymentSourceId = customerSources.getData().get(0).getId();
@@ -689,17 +708,60 @@ public class StripeTest {
 	}
 
 	@Test
-	public void testCustomerSourceCreate() throws StripeException {
-		Customer customer = Customer.create(defaultCustomerParams);
+	public void testCustomerSourceRetrieveBitcoinReceiver() throws StripeException {
+		Customer customer = Customer.create(new HashMap<String, Object>());
+		BitcoinReceiver receiver = BitcoinReceiver.create(defaultBitcoinReceiverParams);
 		PaymentSourceCollection customerSources = customer.getSources();
+		Map<String, Object> createParams = new HashMap<String, Object>();
+		createParams.put("source", receiver.getId());
+		customerSources.create(createParams);
+		customerSources = customerSources.all(new HashMap<String, Object>());
+		String paymentSourceId = customerSources.getData().get(0).getId();
+		PaymentSource paymentSource = customerSources.retrieve(paymentSourceId);
+		assertNotNull(paymentSource);
+		assertEquals(paymentSourceId, paymentSource.getId());
+		assertTrue(paymentSource instanceof BitcoinReceiver);
+		assertTrue(((BitcoinReceiver) paymentSource).getFilled());
+	}
+
+	@Test
+	public void testCustomerCreateWithSource() throws StripeException {
 		HashMap<String, Object> customerCreationParams = new HashMap<String, Object>();
 		HashMap<String, Object> cardParams = new HashMap<String, Object>(defaultCardParams);
 		cardParams.put("object", "card");
 		customerCreationParams.put("source", cardParams);
-		PaymentSource paymentSource = customerSources.create(customerCreationParams);
+		Customer customer = Customer.create(customerCreationParams);
+		assertNotNull(customer);
+		assertNotNull(customer.getId());
+		assertNotNull(customer.getSources());
+		assert(customer.getSources().getData().get(0) instanceof Card);
+	}
+
+	@Test
+	public void testCustomerCreateSourceWithCardHash() throws StripeException {
+		Customer customer = Customer.create(new HashMap<String, Object>());
+		PaymentSourceCollection customerSources = customer.getSources();
+		HashMap<String, Object> cardParams = new HashMap<String, Object>(defaultCardParams);
+		cardParams.put("object", "card");
+		HashMap<String, Object> createParams = new HashMap<String, Object>();
+		createParams.put("source", cardParams);
+		PaymentSource paymentSource = customerSources.create(createParams);
 		assertNotNull(paymentSource);
 		assertNotNull(paymentSource.getId());
 		assert(paymentSource instanceof Card);
+	}
+
+	@Test
+	public void testCustomerCreateSourceWithBitcoinReceiverToken() throws StripeException {
+		Customer customer = Customer.create(new HashMap<String, Object>());
+		PaymentSourceCollection customerSources = customer.getSources();
+		BitcoinReceiver receiver = BitcoinReceiver.create(defaultBitcoinReceiverParams);
+		HashMap<String, Object> createParams = new HashMap<String, Object>();
+		createParams.put("source", receiver.getId());
+		PaymentSource paymentSource = customerSources.create(createParams);
+		assertNotNull(paymentSource);
+		assertNotNull(paymentSource.getId());
+		assert(paymentSource instanceof BitcoinReceiver);
 	}
 
 	@Test
@@ -728,7 +790,7 @@ public class StripeTest {
 
 	@Test
 	public void testCustomerCardAddition() throws StripeException {
-		Customer createdCustomer = Customer.create(defaultCustomerParams);
+		Customer createdCustomer = Customer.create(defaultCustomerParams, cardSupportedRequestOptions);
 		String originalDefaultCard = createdCustomer.getDefaultCard();
 
 		Map<String, Object> creationParams = new HashMap<String, Object>();
@@ -738,13 +800,13 @@ public class StripeTest {
 		Token token = Token.create(defaultTokenParams);
 		createdCustomer.createCard(token.getId());
 
-		Customer updatedCustomer = Customer.retrieve(createdCustomer.getId());
+		Customer updatedCustomer = Customer.retrieve(createdCustomer.getId(), cardSupportedRequestOptions);
 		assertEquals((Integer) updatedCustomer.getCards().getData().size(), (Integer) 3);
 		assertEquals(updatedCustomer.getDefaultCard(), originalDefaultCard);
 
 		Map<String, Object> updateParams = new HashMap<String, Object>();
 		updateParams.put("default_card", addedCard.getId());
-		Customer customerAfterDefaultCardUpdate = updatedCustomer.update(updateParams);
+		Customer customerAfterDefaultCardUpdate = updatedCustomer.update(updateParams, cardSupportedRequestOptions);
 		assertEquals((Integer) customerAfterDefaultCardUpdate.getCards().getData().size(), (Integer) 3);
 		assertEquals(customerAfterDefaultCardUpdate.getDefaultCard(), addedCard.getId());
 
@@ -754,7 +816,7 @@ public class StripeTest {
 
 	@Test
 	public void testCreateCardThroughCollection() throws StripeException {
-		Customer createdCustomer = Customer.create(defaultCustomerParams);
+		Customer createdCustomer = Customer.create(defaultCustomerParams, cardSupportedRequestOptions);
 
 		Map<String, Object> creationParams = new HashMap<String, Object>();
 		creationParams.put("card", defaultCardParams);
@@ -762,14 +824,14 @@ public class StripeTest {
 
 		assertEquals(createdCustomer.getId(), addedCard.getCustomer());
 
-		Customer updatedCustomer = Customer.retrieve(createdCustomer.getId());
+		Customer updatedCustomer = Customer.retrieve(createdCustomer.getId(), cardSupportedRequestOptions);
 		assertEquals((Integer) updatedCustomer.getCards().getData().size(), (Integer) 2);
 	}
 
 
 	@Test
 	public void testCustomerCardUpdate() throws StripeException {
-		Customer customer = Customer.create(defaultCustomerParams);
+		Customer customer = Customer.create(defaultCustomerParams, cardSupportedRequestOptions);
 		Card originalCard = customer.getCards().getData().get(0);
 		Map<String, Object> updateParams = new HashMap<String, Object>();
 		updateParams.put("name", "J Bindings Cardholder, Jr.");
@@ -779,14 +841,14 @@ public class StripeTest {
 
 	@Test
 	public void testCustomerCardDelete() throws StripeException {
-		Customer customer = Customer.create(defaultCustomerParams);
+		Customer customer = Customer.create(defaultCustomerParams, cardSupportedRequestOptions);
 		Map<String, Object> creationParams = new HashMap<String, Object>();
 		creationParams.put("card", defaultCardParams);
 		customer.createCard(creationParams);
 
 		Card card = customer.getCards().getData().get(0);
 		DeletedCard deletedCard = card.delete();
-		Customer retrievedCustomer = Customer.retrieve(customer.getId());
+		Customer retrievedCustomer = Customer.retrieve(customer.getId(), cardSupportedRequestOptions);
 
 		assertTrue(deletedCard.getDeleted());
 		assertEquals(deletedCard.getId(), card.getId());
@@ -1353,7 +1415,7 @@ public class StripeTest {
 	@Test
 	public void testCustomerCreatePerCallAPIKey() throws StripeException {
 		Customer customer = Customer.create(defaultCustomerParams,
-				Stripe.apiKey);
+				cardSupportedRequestOptions);
 		assertEquals(customer.getDescription(), "J Bindings Customer");
 		List<Card> customerCards = customer.getCards().getData();
 		assertEquals(1, customerCards.size());
@@ -1829,6 +1891,47 @@ public class StripeTest {
 		listParams.put("count", 1);
 		List<BitcoinReceiver> receivers = BitcoinReceiver.all(listParams).getData();
 		assertEquals(receivers.size(), 1);
+	}
+
+	@Test
+	public void testBitcoinReceiverUpdate() throws StripeException {
+		BitcoinReceiver receiver = BitcoinReceiver.create(defaultBitcoinReceiverParams);
+		Map<String, Object> updateParams = new HashMap<String, Object>();
+		updateParams.put("description", "some new details");
+		receiver = receiver.update(updateParams);
+		assertEquals("some new details", receiver.getDescription());
+	}
+
+	@Test
+	public void testBitcoinReceiverUpdateWithCustomer() throws StripeException {
+		BitcoinReceiver receiver = BitcoinReceiver.create(defaultBitcoinReceiverParams);
+		Map<String, Object> customerParams = new HashMap<String, Object>();
+		customerParams.put("source", receiver.getId());
+		Customer customer = Customer.create(customerParams);
+		receiver = BitcoinReceiver.retrieve(receiver.getId());
+
+		Map<String, Object> updateParams = new HashMap<String, Object>();
+		updateParams.put("description", "some new details");
+		receiver = receiver.update(updateParams);
+		assertEquals("some new details", receiver.getDescription());
+	}
+
+	@Test
+	public void testBitcoinReceiverDeleteWithCustomer() throws StripeException {
+		BitcoinReceiver receiver = BitcoinReceiver.create(defaultBitcoinReceiverParams);
+		Map<String, Object> customerParams = new HashMap<String, Object>();
+		customerParams.put("source", receiver.getId());
+		Customer customer = Customer.create(customerParams);
+		receiver = BitcoinReceiver.retrieve(receiver.getId());
+
+		Map<String, Object> chargeParams = new HashMap<String, Object>();
+		chargeParams.put("source", receiver.getId());
+		chargeParams.put("currency", receiver.getCurrency());
+		chargeParams.put("amount", receiver.getAmount());
+		Charge charge = Charge.create(chargeParams);
+
+		DeletedBitcoinReceiver deletedReceiver = receiver.delete();
+		assertTrue(deletedReceiver.getDeleted());
 	}
 
 	@Test
