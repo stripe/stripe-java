@@ -30,7 +30,7 @@ Add this dependency to your project's build file:
 
 You'll need to manually install the following JARs:
 
-* The Stripe JAR from https://code.stripe.com/stripe-java-latest.jar
+* The Stripe JAR from https://github.com/stripe/stripe-java/releases/latest
 * [Google Gson](http://code.google.com/p/google-gson/) from <http://google-gson.googlecode.com/files/google-gson-2.2.4-release.zip>.
 
 ### [ProGuard](http://proguard.sourceforge.net/)
