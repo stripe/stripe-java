@@ -18,6 +18,7 @@ public class Customer extends APIResource implements MetadataStore<Customer> {
 	Boolean deleted;
 	String description;
 	String defaultCard;
+	String defaultSource;
 	String email;
 	Long trialEnd;
 	Discount discount;
@@ -69,6 +70,14 @@ public class Customer extends APIResource implements MetadataStore<Customer> {
 
 	public void setDefaultCard(String defaultCard) {
 		this.defaultCard = defaultCard;
+	}
+
+	public String getDefaultSource() {
+		return defaultSource;
+	}
+
+	public void setDefaultSource(String defaultSource) {
+		this.defaultSource = defaultSource;
 	}
 
 	public CustomerCardCollection getCards() {
