@@ -1,3 +1,8 @@
+=== 1.26.0 2015-02-19
+* Added Update and Delete for Bitcoin Receivers
+* Support new API version (2015-02-18) by providing source type properties
+  on Customer and Charge in addition to card type properties
+
 === 1.25.1 2015-01-23
 * Test of new stripe-java release process.
 

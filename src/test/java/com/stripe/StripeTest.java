@@ -735,6 +735,9 @@ public class StripeTest {
 		assertNotNull(customer.getId());
 		assertNotNull(customer.getSources());
 		assert(customer.getSources().getData().get(0) instanceof Card);
+		assertNotNull(customer.getDefaultSource());
+		PaymentSource card = customer.getSources().retrieve(customer.getDefaultSource());
+		assertEquals(card.getId(), customer.getDefaultSource());
 	}
 
 	@Test
@@ -1908,7 +1911,7 @@ public class StripeTest {
 		Map<String, Object> customerParams = new HashMap<String, Object>();
 		customerParams.put("source", receiver.getId());
 		Customer customer = Customer.create(customerParams);
-		receiver = BitcoinReceiver.retrieve(receiver.getId());
+		receiver.setCustomer(customer.getId());
 
 		Map<String, Object> updateParams = new HashMap<String, Object>();
 		updateParams.put("description", "some new details");
@@ -1922,7 +1925,7 @@ public class StripeTest {
 		Map<String, Object> customerParams = new HashMap<String, Object>();
 		customerParams.put("source", receiver.getId());
 		Customer customer = Customer.create(customerParams);
-		receiver = BitcoinReceiver.retrieve(receiver.getId());
+		receiver.setCustomer(customer.getId());
 
 		Map<String, Object> chargeParams = new HashMap<String, Object>();
 		chargeParams.put("source", receiver.getId());
