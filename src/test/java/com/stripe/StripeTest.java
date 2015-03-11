@@ -39,10 +39,12 @@ import com.stripe.model.MetadataStore;
 import com.stripe.model.Plan;
 import com.stripe.model.Recipient;
 import com.stripe.model.Refund;
+import com.stripe.model.Reversal;
 import com.stripe.model.ShippingDetails;
 import com.stripe.model.Subscription;
 import com.stripe.model.Token;
 import com.stripe.model.Transfer;
+import com.stripe.model.TransferReversalCollection;
 import com.stripe.net.RequestOptions;
 import com.stripe.model.BitcoinReceiver;
 import com.stripe.model.DeletedBitcoinReceiver;
@@ -1217,6 +1219,16 @@ public class StripeTest {
 		List<Transfer> transfers = Transfer.all(listParams).getData();
 		assertEquals(transfers.size(), 1);
 	}
+
+	@Test(expected=InvalidRequestException.class)
+  public void testTransferReversalCreate() throws StripeException {
+		Transfer tr = Transfer.create(getTransferParams());
+		Map<String, Object> params = new HashMap<String, Object>();
+		TransferReversalCollection reversals = tr.getReversals();
+		reversals.create(params);
+		// post-condition: we expect an InvalidRequestException here (caught by JUnit),
+		// because in test mode, transfers are automatically sent
+  }
 
 	@Test
 	public void testRecipientCreate() throws StripeException {

@@ -28,6 +28,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer> {
 	BankAccount account;
 	String balanceTransaction;
 	Map<String, String> metadata;
+  TransferReversalCollection reversals;
 
 	public String getId() {
 		return id;
@@ -163,6 +164,11 @@ public class Transfer extends APIResource implements MetadataStore<Transfer> {
 		return retrieve(id, (RequestOptions) null);
 	}
 
+  /**
+   * @deprecated
+   * Use Transfer.getReversals().create() instead of Transfer.cancel().
+   */
+	@Deprecated
 	public Transfer cancel()
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -262,5 +268,12 @@ public class Transfer extends APIResource implements MetadataStore<Transfer> {
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.GET, String.format("%s/transactions",
 						instanceURL(Transfer.class, this.getId())), params, TransferTransactionCollection.class, options);
+	}
+
+	public TransferReversalCollection getReversals() {
+		if (reversals.getURL() == null) {
+			reversals.setURL(String.format("/v1/transfers/%s/reversals", getId()));
+		}
+		return reversals;
 	}
 }
