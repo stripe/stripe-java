@@ -4,17 +4,19 @@ import com.stripe.Stripe;
 
 public class RequestOptions {
 	public static RequestOptions getDefault() {
-		return new RequestOptions(Stripe.apiKey, Stripe.apiVersion, null);
+		return new RequestOptions(Stripe.apiKey, Stripe.apiVersion, null, null);
 	}
 
 	private final String apiKey;
 	private final String stripeVersion;
 	private final String idempotencyKey;
+	private final String stripeAccount;
 
-	private RequestOptions(String apiKey, String stripeVersion, String idempotencyKey) {
+	private RequestOptions(String apiKey, String stripeVersion, String idempotencyKey, String stripeAccount) {
 		this.apiKey = apiKey;
 		this.stripeVersion = stripeVersion;
 		this.idempotencyKey = idempotencyKey;
+		this.stripeAccount = stripeAccount;
 	}
 
 	public String getApiKey() {
@@ -27,6 +29,10 @@ public class RequestOptions {
 
 	public String getIdempotencyKey() {
 		return idempotencyKey;
+	}
+
+	public String getStripeAccount() {
+		return stripeAccount;
 	}
 
 	@Override
@@ -62,13 +68,14 @@ public class RequestOptions {
 	}
 
 	public RequestOptionsBuilder toBuilder() {
-		return new RequestOptionsBuilder().setApiKey(this.apiKey).setStripeVersion(this.stripeVersion);
+		return new RequestOptionsBuilder().setApiKey(this.apiKey).setStripeVersion(this.stripeVersion).setStripeAccount(this.stripeAccount);
 	}
 
 	public static final class RequestOptionsBuilder {
 		private String apiKey;
 		private String stripeVersion;
 		private String idempotencyKey;
+		private String stripeAccount;
 
 		public RequestOptionsBuilder() {
 			this.apiKey = Stripe.apiKey;
@@ -113,8 +120,25 @@ public class RequestOptions {
 			return this.idempotencyKey;
 		}
 
+		public String getStripeAccount() {
+			return this.stripeAccount;
+		}
+
+		public RequestOptionsBuilder setStripeAccount(String stripeAccount) {
+			this.stripeAccount = stripeAccount;
+			return this;
+		}
+
+		public RequestOptionsBuilder clearStripeAccount() {
+			return setStripeAccount(null);
+		}
+
 		public RequestOptions build() {
-			return new RequestOptions(normalizeApiKey(this.apiKey), normalizeStripeVersion(this.stripeVersion), normalizeIdempotencyKey(this.idempotencyKey));
+			return new RequestOptions(
+				normalizeApiKey(this.apiKey),
+				normalizeStripeVersion(this.stripeVersion),
+				normalizeIdempotencyKey(this.idempotencyKey),
+				normalizeStripeAccount(this.stripeAccount));
 		}
 	}
 
@@ -152,6 +176,17 @@ public class RequestOptions {
 		}
 		if (normalized.length() > 255) {
 			throw new InvalidRequestOptionsException(String.format("Idempotency Key length was %d, which is larger than the 255 character maximum!", normalized.length()));
+		}
+		return normalized;
+	}
+
+	private static String normalizeStripeAccount(String stripeAccount) {
+		if (stripeAccount == null) {
+			return null;
+		}
+		String normalized = stripeAccount.trim();
+		if (normalized.isEmpty()) {
+			throw new InvalidRequestOptionsException("Empty stripe account specified!");
 		}
 		return normalized;
 	}

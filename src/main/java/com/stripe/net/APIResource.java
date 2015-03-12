@@ -169,6 +169,9 @@ public abstract class APIResource extends StripeObject {
 		if (options.getIdempotencyKey() != null) {
 			headers.put("Idempotency-Key", options.getIdempotencyKey());
 		}
+		if (options.getStripeAccount() != null) {
+			headers.put("Stripe-Account", options.getStripeAccount());
+		}
 		return headers;
 	}
 
