@@ -12,16 +12,20 @@ public abstract class Stripe {
 
 
 	/**
-	 * (FOR TESTING ONLY) If you'd like your API requests to hit your own
-	 * (mocked) server, you can set this up here by overriding the base api URL.
+	 * FOR TESTING AND NON-SSL INTERNAL NETWORKS:
+	 * If you'd like your API requests to hit your own (mocked) server, you can set this up here by overriding the base api URL.
+	 * Also, if you are on a non-SSL network that needs all outgoing traffic to be HTTP, you can override it here
+	 * but be sure to converted to HTTPS when leaving your network.
 	 */
 	public static void overrideApiBase(final String overriddenApiBase) {
 		apiBase = overriddenApiBase;
 	}
 
 	/**
-	 * (FOR TESTING ONLY) Only disable SSL verification if you're using your own
-	 * (mocked) server. Disabling verification on stripe.com is not supported
+	 * FOR TESTING AND NON-SSL INTERNAL NETWORKS:
+	 * Only disable SSL verification if you're using your own (mocked) server (testing) or
+	 * if you are on a non-SSL network that needs all outgoing traffic to be HTTP
+	 * (assumes the traffic to be converted to HTTPS when leaving your network)
 	 */
 	public static void setVerifySSL(boolean verify) {
 		verifySSL = verify;
