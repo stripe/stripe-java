@@ -28,6 +28,7 @@ public class Customer extends APIResource implements MetadataStore<Customer> {
 	Subscription subscription;
 	Boolean delinquent;
 	Integer accountBalance;
+	String currency;
 	CustomerCardCollection cards;
 	PaymentSourceCollection sources;
 	Map<String, String> metadata;
@@ -156,6 +157,14 @@ public class Customer extends APIResource implements MetadataStore<Customer> {
 
 	public void setAccountBalance(Integer accountBalance) {
 		this.accountBalance = accountBalance;
+	}
+
+	public String getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
 	}
 
 	public Map<String, String> getMetadata() {
