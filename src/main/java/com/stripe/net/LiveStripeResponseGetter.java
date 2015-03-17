@@ -25,6 +25,8 @@ import java.security.cert.Certificate;
 import java.security.cert.CertificateEncodingException;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -221,7 +223,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 		return conn;
 	}
 
-	private static String createQuery(Map<String, Object> params)
+	static String createQuery(Map<String, Object> params)
 			throws UnsupportedEncodingException, InvalidRequestException {
 		Map<String, String> flatParams = flattenParams(params);
 		StringBuilder queryStringBuffer = new StringBuilder();
@@ -235,22 +237,30 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 		return queryStringBuffer.toString();
 	}
 
+
 	private static Map<String, String> flattenParams(Map<String, Object> params)
 			throws InvalidRequestException {
 		if (params == null) {
 			return new HashMap<String, String>();
 		}
-		Map<String, String> flatParams = new HashMap<String, String>();
+		Map<String, String> flatParams = new LinkedHashMap<String, String>();
 		for (Map.Entry<String, Object> entry : params.entrySet()) {
 			String key = entry.getKey();
 			Object value = entry.getValue();
 			if (value instanceof Map<?, ?>) {
-				Map<String, Object> flatNestedMap = new HashMap<String, Object>();
+				Map<String, Object> flatNestedMap = new LinkedHashMap<String, Object>();
 				Map<?, ?> nestedMap = (Map<?, ?>) value;
 				for (Map.Entry<?, ?> nestedEntry : nestedMap.entrySet()) {
 					flatNestedMap.put(
 							String.format("%s[%s]", key, nestedEntry.getKey()),
 							nestedEntry.getValue());
+				}
+				flatParams.putAll(flattenParams(flatNestedMap));
+			} else if (value instanceof List<?>) {
+				Map<String, Object> flatNestedMap = new LinkedHashMap<String, Object>();
+				Iterator<?> it = ((List<?>)value).iterator();
+				for (int index = 0; it.hasNext(); ++index) {
+					flatNestedMap.put(String.format("%s[%s]", key, index), it.next());
 				}
 				flatParams.putAll(flattenParams(flatNestedMap));
 			} else if ("".equals(value)) {

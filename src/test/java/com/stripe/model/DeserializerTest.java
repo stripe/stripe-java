@@ -1,19 +1,18 @@
 package com.stripe.model;
 
 import com.google.gson.Gson;
+import com.stripe.BaseStripeTest;
 import com.stripe.net.APIResource;
 import org.junit.Test;
 
-import java.io.ByteArrayOutputStream;
 import java.io.IOException;
-import java.io.InputStream;
 import java.util.List;
 
 import static org.hamcrest.core.IsNull.notNullValue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
-public class DeserializerTest {
+public class DeserializerTest extends BaseStripeTest {
 
 	private static Gson gson = APIResource.GSON;
 
@@ -116,19 +115,5 @@ public class DeserializerTest {
 		assertEquals((Integer) 2, fee.refunds.getTotalCount());
 		assertEquals("fr_104Buu4hAU1NpT8JMBAc564Q", refunds.get(0).getId());
 		assertEquals("fee_4UNP26L2Vuc42P", refunds.get(0).getFee());
-	}
-
-	private String resource(String path) throws IOException {
-		InputStream resource = getClass().getResourceAsStream(path);
-
-		ByteArrayOutputStream os = new ByteArrayOutputStream(1024);
-		byte[] buf = new byte [1024];
-
-		for( int i = resource.read(buf); i > 0; i = resource.read(buf)) {
-			os.write(buf,0,i);
-		}
-
-		return os.toString("utf8");
-
 	}
 }

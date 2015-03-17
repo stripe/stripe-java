@@ -52,6 +52,10 @@ public class StandardizationTest {
 				if (method.getDeclaringClass() != aClass) {
 					continue;
 				}
+				// Skip equals
+				if (method.getName().equals("equals")) {
+					continue;
+				}
 				// Skip setters
 				if (method.getName().startsWith("set")) {
 					continue;
