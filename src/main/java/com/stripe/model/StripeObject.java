@@ -7,14 +7,14 @@ import com.google.gson.GsonBuilder;
 import java.lang.reflect.Field;
 
 public abstract class StripeObject {
-	
+
 	public static final Gson PRETTY_PRINT_GSON = new GsonBuilder().
 		setPrettyPrinting().
 		serializeNulls().
 		setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).
 		registerTypeAdapter(EventData.class, new EventDataDeserializer()).
 		create();
-	
+
 	@Override public String toString() {
 		return String.format(
 			"<%s@%s id=%s> JSON: %s",
@@ -37,5 +37,9 @@ public abstract class StripeObject {
 		} catch (IllegalAccessException e) {
 			return "";
 		}
+	}
+
+	protected static boolean equals(Object a, Object b) {
+		return a == null ? b == null : a.equals(b);
 	}
 }

@@ -113,11 +113,11 @@ public abstract class APIResource extends StripeObject {
 
 	public static final String CHARSET = "UTF-8";
 
-	protected enum RequestMethod {
+	public enum RequestMethod {
 		GET, POST, DELETE
 	}
 
-	protected enum RequestType {
+	public enum RequestType {
 		NORMAL, MULTIPART
 	}
 

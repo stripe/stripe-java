@@ -1,0 +1,27 @@
+{
+  "id": "acct_1032D82eZvKYlo2C",
+    "email": "site@stripe.com",
+    "statement_descriptor": null,
+    "display_name": "Stripe.com",
+    "timezone": "US/Pacific",
+    "details_submitted": false,
+    "charges_enabled": false,
+    "transfers_enabled": false,
+    "currencies_supported": [
+      "usd",
+    "aud"
+      ],
+    "legal_entity": {
+      "type": "company",
+      "address": {
+        "city": "San Francisco"
+      }
+    },
+    "default_currency": "usd",
+    "country": "US",
+    "object": "account",
+    "business_name": "Stripe.com",
+    "business_url": null,
+    "support_phone": null,
+    "managed": null
+}
