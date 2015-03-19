@@ -21,6 +21,7 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>{
 	Long nextPaymentAttempt;
 	Boolean attempted;
 	String charge;
+	String description;
 	Boolean closed;
 	String customer;
 	Long date;
@@ -116,6 +117,14 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>{
 
 	public void setCharge(String charge) {
 		this.charge = charge;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public Boolean getClosed() {
