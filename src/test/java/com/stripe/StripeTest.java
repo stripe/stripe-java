@@ -140,8 +140,7 @@ public class StripeTest {
 		Map<String, Object> customerWithPlanParams = new HashMap<String, Object>();
 		customerWithPlanParams.putAll(defaultCustomerParams);
 		customerWithPlanParams.put("plan", plan.getId());
-		Customer customer = Customer.create(customerWithPlanParams);
-		return customer;
+		return Customer.create(customerWithPlanParams);
 	}
 
 	static Recipient createDefaultRecipient()
@@ -1083,6 +1082,25 @@ public class StripeTest {
 		listParams.put("count", 1);
 		Invoice invoice = Invoice.all(listParams).getData().get(0);
 		assertEquals(invoice.getCustomer(), customer.getId());
+	}
+
+	@Test
+	public void testInvoiceCreate() throws StripeException {
+		Plan plan = Plan.create(getUniquePlanParams());
+		Customer customer = createDefaultCustomerWithPlan(plan);
+		Map<String, Object> invoiceItem = ImmutableMap.<String, Object>builder()
+				.put("customer", customer.getId())
+				.put("amount", 100)
+				.put("currency", "usd")
+				.put("description", "my item")
+				.build();
+		InvoiceItem createdItem = InvoiceItem.create(invoiceItem);
+		assertEquals("my item", createdItem.getDescription());
+		Invoice invoice = Invoice.create(ImmutableMap.<String, Object>builder()
+				.put("description", "my invoice")
+				.put("customer", customer.getId())
+				.build());
+		assertEquals("my invoice", invoice.getDescription());
 	}
 
 	@Test
