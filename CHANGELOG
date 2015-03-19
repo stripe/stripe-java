@@ -1,3 +1,9 @@
+=== 1.27.0 2015-02-19
+* Added support for transfer reversals
+* Added support for account creation/updating/retrieval by ID
+* Customer objects now support currency
+* Added STRIPE-ACCOUNT header options in RequestOptions
+
 === 1.26.0 2015-02-19
 * Added Update and Delete for Bitcoin Receivers
 * Support new API version (2015-02-18) by providing source type properties
