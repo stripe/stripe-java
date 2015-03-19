@@ -40,6 +40,7 @@ import java.security.NoSuchAlgorithmException;
 import java.security.cert.Certificate;
 import java.security.cert.CertificateEncodingException;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -325,7 +326,7 @@ public abstract class APIResource extends StripeObject {
 	private static Map<String, String> flattenParams(Map<String, Object> params)
 			throws InvalidRequestException {
 		if (params == null) {
-			return new HashMap<String, String>();
+			return Collections.emptyMap();
 		}
 		Map<String, String> flatParams = new HashMap<String, String>();
 		for (Map.Entry<String, Object> entry : params.entrySet()) {
