@@ -14,17 +14,21 @@ Installation
 
 Add this dependency to your project's POM:
 
+```xml
     <dependency>
       <groupId>com.stripe</groupId>
       <artifactId>stripe-java</artifactId>
       <version>1.27.0</version>
     </dependency>
+```
 
 ### Gradle users
 
 Add this dependency to your project's build file:
 
+```groovy
     compile "com.stripe:stripe-java:1.27.0"
+```
 
 ### Others
 
@@ -44,6 +48,7 @@ Usage
 
 StripeExample.java
 
+```java
     import java.util.HashMap;
     import java.util.Map;
 
@@ -71,7 +76,7 @@ StripeExample.java
             }
         }
     }
-
+```
 
 See [StripeTest.java](https://github.com/stripe/stripe-java/blob/master/src/test/java/com/stripe/StripeTest.java) for more examples.
 
