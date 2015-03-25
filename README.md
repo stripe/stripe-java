@@ -55,11 +55,12 @@ StripeExample.java
     import com.stripe.Stripe;
     import com.stripe.exception.StripeException;
     import com.stripe.model.Charge;
+    import com.stripe.net.RequestOptions;
 
     public class StripeExample {
 
         public static void main(String[] args) {
-            Stripe.apiKey = "YOUR-SECRET-KEY";
+            RequestOptions requestOptions = (new RequestOptionsBuilder()).setApiKey("YOUR-SECRET-KEY").build();
             Map<String, Object> chargeMap = new HashMap<String, Object>();
             chargeMap.put("amount", 100);
             chargeMap.put("currency", "usd");
@@ -69,7 +70,7 @@ StripeExample.java
             cardMap.put("exp_year", 2020);
             chargeMap.put("card", cardMap);
             try {
-                Charge charge = Charge.create(chargeMap);
+                Charge charge = Charge.create(chargeMap, requestOptions));
                 System.out.println(charge);
             } catch (StripeException e) {
                 e.printStackTrace();
