@@ -16,6 +16,7 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 	Long created;
 	String currency;
 	String id;
+	String status;
 	Boolean livemode;
 	Boolean paid;
 	Boolean refunded;
@@ -59,7 +60,11 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 	public void setId(String id) {
 		this.id = id;
 	}
-
+	
+	public String getStatus() {
+		return status;
+	}
+	
 	public Integer getAmount() {
 		return amount;
 	}
