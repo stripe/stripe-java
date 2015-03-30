@@ -1,3 +1,6 @@
+=== 1.27.1 2015-03-30
+* Charge objects now support status
+
 === 1.27.0 2015-02-19
 * Added support for transfer reversals
 * Added support for account creation/updating/retrieval by ID
