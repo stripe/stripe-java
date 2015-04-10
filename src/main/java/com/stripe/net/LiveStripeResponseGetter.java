@@ -19,10 +19,6 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLEncoder;
 import java.net.URLStreamHandler;
-import java.security.MessageDigest;
-import java.security.NoSuchAlgorithmException;
-import java.security.cert.Certificate;
-import java.security.cert.CertificateEncodingException;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -133,40 +129,6 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 		return conn;
 	}
 
-	private static void throwInvalidCertificateException() throws APIConnectionException {
-		throw new APIConnectionException("Invalid server certificate. You tried to connect to a server that has a revoked SSL certificate, which means we cannot securely send data to that server. Please email support@stripe.com if you need help connecting to the correct API server.");
-	}
-
-	private static void checkSSLCert(java.net.HttpURLConnection hconn) throws IOException, APIConnectionException {
-		if (!Stripe.getVerifySSL() && !hconn.getURL().getHost().equals("api.stripe.com")) {
-			return;
-		}
-
-		javax.net.ssl.HttpsURLConnection conn = (javax.net.ssl.HttpsURLConnection) hconn;
-		conn.connect();
-
-		Certificate[] certs = conn.getServerCertificates();
-
-		try {
-			MessageDigest md = MessageDigest.getInstance("SHA-1");
-
-			byte[] der = certs[0].getEncoded();
-			md.update(der);
-			byte[] digest = md.digest();
-
-			byte[] revokedCertDigest = {(byte) 0x05, (byte) 0xc0, (byte) 0xb3, (byte) 0x64, (byte) 0x36, (byte) 0x94, (byte) 0x47, (byte) 0x0a, (byte) 0x88, (byte) 0x8c, (byte) 0x6e, (byte) 0x7f, (byte) 0xeb, (byte) 0x5c, (byte) 0x9e, (byte) 0x24, (byte) 0xe8, (byte) 0x23, (byte) 0xdc, (byte) 0x53};
-
-			if (Arrays.equals(digest, revokedCertDigest)) {
-				throwInvalidCertificateException();
-			}
-
-		} catch (NoSuchAlgorithmException e) {
-			throw new RuntimeException(e);
-		} catch (CertificateEncodingException e) {
-			throwInvalidCertificateException();
-		}
-	}
-
 	private static String formatURL(String url, String query) {
 		if (query == null || query.isEmpty()) {
 			return url;
@@ -183,8 +145,6 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 		java.net.HttpURLConnection conn = createStripeConnection(getURL, options);
 		conn.setRequestMethod("GET");
 
-		checkSSLCert(conn);
-
 		return conn;
 	}
 
@@ -196,8 +156,6 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 		conn.setRequestMethod("POST");
 		conn.setRequestProperty("Content-Type", String.format(
 				"application/x-www-form-urlencoded;charset=%s", APIResource.CHARSET));
-
-		checkSSLCert(conn);
 
 		OutputStream output = null;
 		try {
@@ -217,8 +175,6 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 		java.net.HttpURLConnection conn = createStripeConnection(
 				deleteUrl, options);
 		conn.setRequestMethod("DELETE");
-
-		checkSSLCert(conn);
 
 		return conn;
 	}
@@ -474,7 +430,6 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 			conn.setRequestMethod("POST");
 			conn.setRequestProperty("Content-Type", String.format(
 					"multipart/form-data; boundary=%s", boundary));
-			checkSSLCert(conn);
 
 			MultipartProcessor multipartProcessor = null;
 			try {
