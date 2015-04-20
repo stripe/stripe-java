@@ -70,7 +70,7 @@ public class StripeExample {
         cardMap.put("exp_year", 2020);
         chargeMap.put("card", cardMap);
         try {
-            Charge charge = Charge.create(chargeMap, requestOptions));
+            Charge charge = Charge.create(chargeMap, requestOptions);
             System.out.println(charge);
         } catch (StripeException e) {
             e.printStackTrace();
