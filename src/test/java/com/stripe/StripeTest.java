@@ -9,17 +9,22 @@ import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Account;
 import com.stripe.model.Address;
+import com.stripe.model.AlipayAccount;
 import com.stripe.model.ApplicationFee;
 import com.stripe.model.Balance;
 import com.stripe.model.BalanceTransaction;
 import com.stripe.model.BalanceTransactionCollection;
+import com.stripe.model.BitcoinReceiver;
+import com.stripe.model.BitcoinTransaction;
 import com.stripe.model.Card;
 import com.stripe.model.Charge;
 import com.stripe.model.ChargeCollection;
 import com.stripe.model.ChargeRefundCollection;
+import com.stripe.model.ConcretePaymentSource;
 import com.stripe.model.Coupon;
 import com.stripe.model.Customer;
 import com.stripe.model.CustomerSubscriptionCollection;
+import com.stripe.model.DeletedBitcoinReceiver;
 import com.stripe.model.DeletedCard;
 import com.stripe.model.DeletedCoupon;
 import com.stripe.model.DeletedCustomer;
@@ -36,21 +41,18 @@ import com.stripe.model.Invoice;
 import com.stripe.model.InvoiceItem;
 import com.stripe.model.InvoiceLineItemCollection;
 import com.stripe.model.MetadataStore;
+import com.stripe.model.PaymentSource;
+import com.stripe.model.PaymentSourceCollection;
+import com.stripe.model.PaymentSourceDeserializer;
 import com.stripe.model.Plan;
 import com.stripe.model.Recipient;
 import com.stripe.model.Refund;
-import com.stripe.model.Reversal;
 import com.stripe.model.ShippingDetails;
 import com.stripe.model.Subscription;
 import com.stripe.model.Token;
 import com.stripe.model.Transfer;
 import com.stripe.model.TransferReversalCollection;
 import com.stripe.net.RequestOptions;
-import com.stripe.model.BitcoinReceiver;
-import com.stripe.model.DeletedBitcoinReceiver;
-import com.stripe.model.BitcoinTransaction;
-import com.stripe.model.PaymentSource;
-import com.stripe.model.PaymentSourceCollection;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -83,6 +85,7 @@ public class StripeTest {
 	static Map<String, Object> defaultBankAccountParams = new HashMap<String, Object>();
 	static Map<String, Object> defaultRecipientParams = new HashMap<String, Object>();
 	static Map<String, Object> defaultBitcoinReceiverParams = new HashMap<String, Object>();
+	static Map<String, Object> defaultAlipayTokenParams = new HashMap<String, Object>();
 	static RequestOptions cardSupportedRequestOptions;
 
 	static String getUniquePlanId() {
@@ -236,6 +239,12 @@ public class StripeTest {
 		defaultBitcoinReceiverParams.put("currency", "usd");
 		defaultBitcoinReceiverParams.put("description", "some details");
 		defaultBitcoinReceiverParams.put("email", "do+fill_now@stripe.com");
+
+		Map<String, Object> alipayParams = new HashMap<String, Object>();
+		alipayParams.put("reusable", true);
+		alipayParams.put("alipay_username", "stripe+alipay");
+		defaultAlipayTokenParams.put("alipay_account", alipayParams);
+		defaultAlipayTokenParams.put("email", "alipay+account@stripe.com");
 	}
 
 	@Test
@@ -1225,7 +1234,7 @@ public class StripeTest {
 	@Test
 	public void testTransferRetrieve() throws StripeException {
 		Transfer createdTransfer = Transfer.create(getTransferParams());
-		Transfer retrievedTransfer= Transfer.retrieve(createdTransfer.getId());
+		Transfer retrievedTransfer = Transfer.retrieve(createdTransfer.getId());
 		assertEquals(createdTransfer.getDate(), retrievedTransfer.getDate());
 		assertEquals(createdTransfer.getId(), retrievedTransfer.getId());
 	}
@@ -2002,5 +2011,110 @@ public class StripeTest {
 
 		assertTrue(charge.getSource() instanceof Card);
 		assertNotNull(charge.getSource().getId());
+	}
+
+	@Test
+	public void testAlipayAccountCreation() throws StripeException {
+		Token alipayToken = Token.create(defaultAlipayTokenParams);
+		Map<String, Object> customerParams = new HashMap<String, Object>();
+		customerParams.put("source", alipayToken.getId());
+		Customer cus = Customer.create(customerParams);
+
+		PaymentSource alipayAccount = cus.getSources().getData().get(0);
+		assertEquals("alipay_account", alipayAccount.getObject());
+		assertEquals(cus.getId(), alipayAccount.getCustomer());
+		assertTrue(AlipayAccount.class.isInstance(alipayAccount));
+	}
+
+	@Test
+	public void testAlipayAccountUpdating() throws StripeException {
+		Token alipayToken = Token.create(defaultAlipayTokenParams);
+		Map<String, Object> customerParams = new HashMap<String, Object>();
+		customerParams.put("source", alipayToken.getId());
+		Customer cus = Customer.create(customerParams);
+
+		Map<String, Object> updateParams = new HashMap<String, Object>();
+		Map<String, Object> metadata = new HashMap<String, Object>();
+		metadata.put("foo", "bar");
+		updateParams.put("metadata", metadata);
+
+		PaymentSource alipayAccount = cus.getSources().getData().get(0);
+		PaymentSource updatedAccount = alipayAccount.update(updateParams);
+
+		assertEquals("bar", ((AlipayAccount) updatedAccount).getMetadata().get("foo"));
+	}
+
+	@Test
+	public void testAlipayAccountDeleting() throws StripeException {
+		Token alipayToken = Token.create(defaultAlipayTokenParams);
+		Map<String, Object> customerParams = new HashMap<String, Object>();
+		customerParams.put("source", alipayToken.getId());
+		Customer cus = Customer.create(customerParams);
+
+		AlipayAccount alipayAccount = (AlipayAccount) cus.getSources().getData().get(0);
+		alipayAccount.delete();
+
+		PaymentSourceCollection sources = cus.getSources().all(new HashMap<String, Object>());
+		assertEquals(0, sources.getData().size());
+	}
+
+	@Test
+	public void testAlipayAccountAsUnknownSourceCreation() throws StripeException {
+		Map<String, Class<?>> mapping = PaymentSourceDeserializer.getTypeToClazz();
+		mapping.remove("alipay_account");
+
+		Token alipayToken = Token.create(defaultAlipayTokenParams);
+		Map<String, Object> customerParams = new HashMap<String, Object>();
+		customerParams.put("source", alipayToken.getId());
+		Customer cus = Customer.create(customerParams);
+
+		PaymentSource alipayAccount = cus.getSources().getData().get(0);
+		assertEquals("alipay_account", alipayAccount.getObject());
+		assertEquals(cus.getId(), alipayAccount.getCustomer());
+		assertTrue(ConcretePaymentSource.class.isInstance(alipayAccount));
+
+		PaymentSourceDeserializer.setTypeToClazz(null);
+	}
+
+	@Test
+	public void testAlipayAccountAsUnkownPaymentSourceUpdating() throws StripeException {
+		Map<String, Class<?>> mapping = PaymentSourceDeserializer.getTypeToClazz();
+		mapping.remove("alipay_account");
+
+		Token alipayToken = Token.create(defaultAlipayTokenParams);
+		Map<String, Object> customerParams = new HashMap<String, Object>();
+		customerParams.put("source", alipayToken.getId());
+		Customer cus = Customer.create(customerParams);
+
+		Map<String, Object> updateParams = new HashMap<String, Object>();
+		Map<String, Object> metadata = new HashMap<String, Object>();
+		metadata.put("foo", "bar");
+		updateParams.put("metadata", metadata);
+
+		PaymentSource alipayAccount = cus.getSources().getData().get(0);
+		PaymentSource updatedAccount = alipayAccount.update(updateParams);
+
+		assertEquals(alipayAccount.getId(), updatedAccount.getId());
+
+		PaymentSourceDeserializer.setTypeToClazz(null);
+	}
+
+	@Test
+	public void testAlipayAccountAsUnknownPaymentSourceDeleting() throws StripeException {
+		Map<String, Class<?>> mapping = PaymentSourceDeserializer.getTypeToClazz();
+		mapping.remove("alipay_account");
+
+		Token alipayToken = Token.create(defaultAlipayTokenParams);
+		Map<String, Object> customerParams = new HashMap<String, Object>();
+		customerParams.put("source", alipayToken.getId());
+		Customer cus = Customer.create(customerParams);
+
+		PaymentSource alipayAccount = cus.getSources().getData().get(0);
+		alipayAccount.delete();
+
+		PaymentSourceCollection sources = cus.getSources().all(new HashMap<String, Object>());
+		assertEquals(0, sources.getData().size());
+
+		PaymentSourceDeserializer.setTypeToClazz(null);
 	}
 }

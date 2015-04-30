@@ -18,6 +18,7 @@ public interface PaymentSource {
 	public void setStatus(String status);
 	public String getCustomer();
 	public void setCustomer(String customer);
+	public String getInstanceURL();
 
 	public PaymentSource update(Map<String, Object> params) throws
 			AuthenticationException, InvalidRequestException,

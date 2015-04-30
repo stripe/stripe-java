@@ -10,25 +10,42 @@ import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
 
 import java.lang.reflect.Type;
+import java.util.Map;
+import java.util.HashMap;
 import java.util.List;
 
 public class PaymentSourceDeserializer implements JsonDeserializer<PaymentSource> {
-  private static final String SOURCE_OBJECT_PROP = "object";
+    private static final String SOURCE_OBJECT_PROP = "object";
 
-  @Override
-  public PaymentSource deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
-    throws JsonParseException {
+    private static Map<String, Class<?>> typeToClazz;
 
-    String sourceObject = json.getAsJsonObject().getAsJsonPrimitive(SOURCE_OBJECT_PROP).getAsString();
-    Class<?> clazz;
-    if (sourceObject.equals("bitcoin_receiver")) {
-      clazz = BitcoinReceiver.class;
-    } else if (sourceObject.equals("card")) {
-      clazz = Card.class;
-    } else {
-      clazz = PaymentSource.class;
+    public static Map<String, Class<?>> getTypeToClazz() {
+        if (PaymentSourceDeserializer.typeToClazz == null) {
+            HashMap<String, Class<?>> mapping = new HashMap<String, Class<?>>();
+            mapping.put("bitcoin_receiver", BitcoinReceiver.class);
+            mapping.put("card", Card.class);
+            mapping.put("alipay_account", AlipayAccount.class);
+            PaymentSourceDeserializer.setTypeToClazz(mapping);
+        }
+
+        return PaymentSourceDeserializer.typeToClazz;
     }
 
-    return (PaymentSource) context.deserialize(json, clazz);
-  }
+    public static void setTypeToClazz(Map<String, Class<?>> mapping) {
+        PaymentSourceDeserializer.typeToClazz = mapping;
+    }
+
+    @Override
+    public PaymentSource deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+            throws JsonParseException {
+
+        String sourceObject = json.getAsJsonObject().getAsJsonPrimitive(SOURCE_OBJECT_PROP).getAsString();
+        Class<?> clazz = PaymentSourceDeserializer.getTypeToClazz().get(sourceObject);
+
+        if (clazz == null) {
+            clazz = ConcretePaymentSource.class;
+        }
+
+        return (PaymentSource) context.deserialize(json, clazz);
+    }
 }
