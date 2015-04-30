@@ -25,6 +25,15 @@ public class Account extends APIResource {
 	String displayName;
 	Verification verification;
 	LegalEntity legalEntity;
+	Keys keys;
+	Map<String, String> metadata;
+	String businessName;
+	String businessUrl;
+	String businessLogo;
+	String supportPhone;
+	String supportUrl;
+	String supportEmail;
+	Boolean managed;
 
 	public String getId() {
 		return id;
@@ -76,6 +85,51 @@ public class Account extends APIResource {
 
 	public LegalEntity getLegalEntity() {
 		return legalEntity;
+	}
+
+	public Keys getKeys()
+	{
+		return keys;
+	}
+
+	public Map<String, String> getMetadata()
+	{
+		return metadata;
+	}
+
+	public String getBusinessName()
+	{
+		return businessName;
+	}
+
+	public String getBusinessUrl()
+	{
+		return businessUrl;
+	}
+
+	public String getBusinessLogo()
+	{
+		return businessLogo;
+	}
+
+	public String getSupportPhone()
+	{
+		return supportPhone;
+	}
+
+	public String getSupportUrl()
+	{
+		return supportUrl;
+	}
+
+	public String getSupportEmail()
+	{
+		return supportEmail;
+	}
+
+	public Boolean getManaged()
+	{
+		return managed;
 	}
 
 	public static Account create(Map<String, Object> params)
@@ -164,7 +218,16 @@ public class Account extends APIResource {
 			equals(timezone, account.timezone) &&
 			equals(displayName, account.displayName) &&
 			equals(verification, account.verification) &&
-			equals(legalEntity, account.legalEntity);
+			equals(legalEntity, account.legalEntity) &&
+			equals(keys, account.keys) &&
+			equals(metadata, account.metadata) &&
+			equals(businessName, account.businessName) &&
+			equals(businessUrl, account.businessUrl) &&
+			equals(businessLogo, account.businessLogo) &&
+			equals(supportPhone, account.supportPhone) &&
+			equals(supportUrl, account.supportUrl) &&
+			equals(supportEmail, account.supportEmail) &&
+			equals(managed, account.managed);
 	}
 
 	public static class Verification extends StripeObject {
@@ -180,6 +243,21 @@ public class Account extends APIResource {
 		}
 		public Boolean getContacted() {
 			return contacted;
+		}
+	}
+
+	public static class Keys extends StripeObject {
+		String secret;
+		String publishable;
+
+		public String getSecret()
+		{
+			return secret;
+		}
+
+		public String getPublishable()
+		{
+			return publishable;
 		}
 	}
 }

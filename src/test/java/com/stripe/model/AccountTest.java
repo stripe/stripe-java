@@ -55,6 +55,7 @@ public class AccountTest extends BaseStripeTest {
 		expected.country = "US";
 		expected.timezone = "US/Pacific";
 		expected.displayName = "Stripe.com";
+		expected.businessName = "Stripe.com";
 
 		assertEquals(expected, acc);
 	}
