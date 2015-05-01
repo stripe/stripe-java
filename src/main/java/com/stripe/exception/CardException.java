@@ -13,12 +13,6 @@ public class CardException extends StripeException {
 		this.param = param;
 		this.declineCode = declineCode;
 	}
-	
-	public CardException(String message, String code, String param, Throwable e) {
-		super(message, e);
-		this.code = code;
-		this.param = param;
-	}
 
 	public String getCode() {
 		return code;
