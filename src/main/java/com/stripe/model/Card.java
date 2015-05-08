@@ -17,6 +17,7 @@ public class Card extends APIResource implements PaymentSource {
 	Integer expMonth;
 	Integer expYear;
 	String last4;
+	String dynamicLast4;
 	String country;
 	String type;
 	String name;
@@ -138,6 +139,12 @@ public class Card extends APIResource implements PaymentSource {
 	}
 	public void setLast4(String last4) {
 		this.last4 = last4;
+	}
+	public String getDynamicLast4() {
+		return dynamicLast4;
+	}
+	public void setDynamicLast4(String dynamicLast4) {
+		this.dynamicLast4 = dynamicLast4;
 	}
 	public String getCountry() {
 		return country;
