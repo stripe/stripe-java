@@ -27,6 +27,7 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 	Integer quantity;
 	Discount discount;
 	Double applicationFeePercent;
+	Double taxPercent;
 	Map<String, String> metadata;
 
 	public Subscription update(Map<String, Object> params)
@@ -183,13 +184,16 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 	public void setApplicationFeePercent(Double applicationFeePercent) {
 		this.applicationFeePercent = applicationFeePercent;
 	}
-
+	public Double getTaxPercent() {
+		return taxPercent;
+	}
+	public void setTaxPercent(Double taxPercent) {
+		this.taxPercent = taxPercent;
+	}
 	public Map<String, String> getMetadata() {
 		return metadata;
 	}
-
 	public void setMetadata(Map<String, String> metadata) {
 		this.metadata = metadata;
-
 	}
 }
