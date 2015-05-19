@@ -1856,6 +1856,14 @@ public class StripeTest {
 	}
 
 	@Test
+	public void testCardMetadata() throws StripeException {
+		Customer customer = Customer.create(defaultCustomerParams);
+		Map<String, Object> creationParams = new HashMap<String, Object>();
+		creationParams.put("card", defaultCardParams);
+		testMetadata(customer.createCard(creationParams));
+	}
+
+	@Test
 	public void testChargeMetadata() throws StripeException {
 		testMetadata(Charge.create(defaultChargeParams));
 	}

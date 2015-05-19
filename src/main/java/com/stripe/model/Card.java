@@ -10,7 +10,7 @@ import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
-public class Card extends APIResource implements PaymentSource {
+public class Card extends APIResource implements PaymentSource, MetadataStore<Card> {
 	String id;
 	String object;
 	String status;
@@ -35,6 +35,7 @@ public class Card extends APIResource implements PaymentSource {
 	String fingerprint;
 	String brand;
 	String funding;
+	Map<String, String> metadata;
 
 	public Card update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
@@ -235,5 +236,11 @@ public class Card extends APIResource implements PaymentSource {
 	}
 	public void setFunding(String funding) {
 		this.funding = funding;
+	}
+	public Map<String, String> getMetadata() {
+		return metadata;
+	}
+	public void setMetadata(Map<String, String> metadata) {
+		this.metadata = metadata;
 	}
 }
