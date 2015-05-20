@@ -140,7 +140,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 	}
 
 	private static java.net.HttpURLConnection createGetConnection(
-			String url, String query, RequestOptions options) throws IOException, APIConnectionException {
+			String url, String query, RequestOptions options) throws IOException  {
 		String getURL = formatURL(url, query);
 		java.net.HttpURLConnection conn = createStripeConnection(getURL, options);
 		conn.setRequestMethod("GET");
@@ -149,7 +149,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 	}
 
 	private static java.net.HttpURLConnection createPostConnection(
-			String url, String query, RequestOptions options) throws IOException, APIConnectionException {
+			String url, String query, RequestOptions options) throws IOException {
 		java.net.HttpURLConnection conn = createStripeConnection(url, options);
 
 		conn.setDoOutput(true);
@@ -170,7 +170,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 	}
 
 	private static java.net.HttpURLConnection createDeleteConnection(
-			String url, String query, RequestOptions options) throws IOException, APIConnectionException {
+			String url, String query, RequestOptions options) throws IOException {
 		String deleteUrl = formatURL(url, query);
 		java.net.HttpURLConnection conn = createStripeConnection(
 				deleteUrl, options);
