@@ -1,3 +1,8 @@
+=== 1.29.0 2015-05-21
+
+* Added tax percent field to subscriptions
+* Added tax and tax percent fields to invoices
+
 === 1.28.0 2015-05-08
 
 * Added support for Alipay accounts
