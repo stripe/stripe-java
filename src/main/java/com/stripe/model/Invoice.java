@@ -38,6 +38,8 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>{
 	Map<String, String> metadata;
 	Boolean forgiven;
 	String statementDescriptor;
+	Integer tax;
+	Double taxPercent;
 
 	public Integer getSubtotal() {
 		return subtotal;
@@ -241,6 +243,22 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>{
 
 	public void setStatementDescriptor(String statementDescriptor) {
 		this.statementDescriptor = statementDescriptor;
+	}
+
+	public Integer getTax() {
+		return tax;
+	}
+
+	public void setTax(Integer tax) {
+		this.tax = tax;
+	}
+
+	public Double getTaxPercent() {
+		return taxPercent;
+	}
+
+	public void setTaxPercent(Double taxPercent) {
+		this.taxPercent = taxPercent;
 	}
 
 	public static Invoice retrieve(String id) throws AuthenticationException,
