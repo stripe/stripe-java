@@ -456,15 +456,6 @@ public class StripeTest {
 		assertEquals(charges.size(), 1);
 	}
 
-	@Test
-	public void testChargeListWithTotalCount() throws StripeException {
-		Map<String, Object> listParams = new HashMap<String, Object>();
-		listParams.put("include[]", "total_count");
-		ChargeCollection chargeCollection = Charge.all(listParams);
-		assertNotNull(chargeCollection.getTotalCount());
-		assertTrue(chargeCollection.getTotalCount() > 0);
-	}
-
 	@Test(expected = CardException.class)
 	public void testInvalidCard() throws StripeException {
 		Map<String, Object> invalidChargeParams = new HashMap<String, Object>();
