@@ -1,3 +1,7 @@
+=== 1.30.0 2015-05-28
+
+* Add decline_code, charge to CardException
+
 === 1.29.0 2015-05-21
 
 * Added tax percent field to subscriptions
