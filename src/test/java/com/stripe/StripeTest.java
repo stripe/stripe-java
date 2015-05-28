@@ -469,6 +469,25 @@ public class StripeTest {
 	}
 
 	@Test
+	public void testDeclinedCard() throws StripeException {
+		Map<String, Object> declinedChargeParams = new HashMap<String, Object>();
+		declinedChargeParams.putAll(defaultChargeParams);
+		Map<String, Object> declinedCardParams = new HashMap<String, Object>();
+		declinedCardParams.put("number", "4000000000000002");
+		declinedCardParams.put("exp_month", 12);
+		declinedCardParams.put("exp_year", 2015);
+		declinedChargeParams.put("card", declinedCardParams);
+
+		try {
+			Charge.create(declinedChargeParams);
+		}
+		catch (CardException e) {
+			assertEquals("card_declined", e.getCode());
+			assertNotNull(e.getCharge());
+		}
+	}
+
+	@Test
 	public void testInvalidAddressZipTest() throws StripeException {
 		Map<String, Object> invalidChargeParams = new HashMap<String, Object>();
 		invalidChargeParams.putAll(defaultChargeParams);

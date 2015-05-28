@@ -247,8 +247,10 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 		String code;
 
 		String param;
-		
+
 		String decline_code;
+
+		String charge;
 	}
 
 	private static String getResponseBody(InputStream responseStream)
@@ -513,7 +515,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 		case 401:
 			throw new AuthenticationException(error.message);
 		case 402:
-			throw new CardException(error.message, error.code, error.param, error.decline_code, null);
+			throw new CardException(error.message, error.code, error.param, error.decline_code, error.charge, null);
 		default:
 			throw new APIException(error.message, null);
 		}
