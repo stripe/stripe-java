@@ -6,19 +6,15 @@ import com.stripe.exception.APIException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.Map;
 
-public class AlipayAccount extends APIResource implements PaymentSource {
-    String id;
-    String object;
+public class AlipayAccount extends ExternalAccount {
     String status;
     Long created;
-    String customer;
     Map<String, String> metadata;
     String username;
     String fingerprint;
@@ -26,22 +22,6 @@ public class AlipayAccount extends APIResource implements PaymentSource {
     Boolean reusable;
     Integer paymentAmount;
     String paymentCurrency;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getObject() {
-        return object;
-    }
-
-    public void setObject(String object) {
-        this.object = object;
-    }
 
     public String getStatus() {
         return status;
@@ -57,14 +37,6 @@ public class AlipayAccount extends APIResource implements PaymentSource {
 
     public void setCreated(Long created) {
         this.created = created;
-    }
-
-    public String getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(String customer) {
-        this.customer = customer;
     }
 
     public Map<String, String> getMetadata() {
@@ -121,14 +93,6 @@ public class AlipayAccount extends APIResource implements PaymentSource {
 
     public void setPaymentCurrency(String paymentCurrency) {
         this.paymentCurrency = paymentCurrency;
-    }
-
-    public String getInstanceURL() {
-        if (this.getCustomer() != null) {
-            return String.format("%s/%s/sources/%s", classURL(Customer.class), this.getCustomer(), this.getId());
-        } else {
-            return null;
-        }
     }
 
     public AlipayAccount update(Map<String, Object> params)

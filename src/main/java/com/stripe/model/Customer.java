@@ -30,7 +30,7 @@ public class Customer extends APIResource implements MetadataStore<Customer> {
 	Integer accountBalance;
 	String currency;
 	CustomerCardCollection cards;
-	PaymentSourceCollection sources;
+	ExternalAccountCollection sources;
 	Map<String, String> metadata;
 
 	public Long getCreated() {
@@ -85,11 +85,11 @@ public class Customer extends APIResource implements MetadataStore<Customer> {
 		return cards;
 	}
 
-	public PaymentSourceCollection getSources() {
+	public ExternalAccountCollection getSources() {
 		return sources;
 	}
 
-	public void setSources(PaymentSourceCollection sources) {
+	public void setSources(ExternalAccountCollection sources) {
 		this.sources = sources;
 	}
 

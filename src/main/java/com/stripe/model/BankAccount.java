@@ -1,8 +1,7 @@
 package com.stripe.model;
 
 
-public class BankAccount extends StripeObject {
-	String id;
+public class BankAccount extends ExternalAccount {
 	String country;
 	String last4;
 	String bankName;
@@ -11,14 +10,6 @@ public class BankAccount extends StripeObject {
 	String status;
 	String fingerprint;
 	Boolean defaultForCurrency;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 
 	public String getLast4() {
 		return last4;

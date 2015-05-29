@@ -5,14 +5,11 @@ import com.stripe.exception.APIException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
-public class Card extends APIResource implements PaymentSource, MetadataStore<Card> {
-	String id;
-	String object;
+public class Card extends ExternalAccount implements MetadataStore<Card> {
 	String status;
 	Integer expMonth;
 	Integer expYear;
@@ -21,7 +18,6 @@ public class Card extends APIResource implements PaymentSource, MetadataStore<Ca
 	String country;
 	String type;
 	String name;
-	String customer;
 	String recipient;
 	String addressLine1;
 	String addressLine2;
@@ -76,28 +72,14 @@ public class Card extends APIResource implements PaymentSource, MetadataStore<Ca
 	public String getInstanceURL() {
 		if (this.getCustomer() != null) {
 			return String.format("%s/%s/cards/%s", classURL(Customer.class), this.getCustomer(), this.getId());
+		} else if (this.getAccount() != null) {
+			return String.format("%s/%s/external_accounts/%s", classURL(Account.class), this.getAccount(), this.getId());
 		} else if (this.getRecipient() != null) {
 			return String.format("%s/%s/cards/%s", classURL(Recipient.class), this.getRecipient(), this.getId());
 		} else {
 			return null;
 		}
 	}
-
-	public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getObject() {
-        return object;
-    }
-
-    public void setObject(String object) {
-        this.object = object;
-    }
 
     public String getStatus() {
         return status;
@@ -106,14 +88,6 @@ public class Card extends APIResource implements PaymentSource, MetadataStore<Ca
     public void setStatus(String status) {
         this.status = status;
     }
-
-	public String getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(String customer) {
-		this.customer = customer;
-	}
 
 	public String getRecipient() {
 		return recipient;

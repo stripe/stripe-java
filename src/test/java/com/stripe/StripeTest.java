@@ -20,7 +20,6 @@ import com.stripe.model.Card;
 import com.stripe.model.Charge;
 import com.stripe.model.ChargeCollection;
 import com.stripe.model.ChargeRefundCollection;
-import com.stripe.model.ConcretePaymentSource;
 import com.stripe.model.Coupon;
 import com.stripe.model.Customer;
 import com.stripe.model.CustomerSubscriptionCollection;
@@ -35,15 +34,14 @@ import com.stripe.model.Dispute;
 import com.stripe.model.Event;
 import com.stripe.model.EvidenceDetails;
 import com.stripe.model.EvidenceSubObject;
+import com.stripe.model.ExternalAccount;
+import com.stripe.model.ExternalAccountCollection;
 import com.stripe.model.FileUpload;
 import com.stripe.model.FraudDetails;
 import com.stripe.model.Invoice;
 import com.stripe.model.InvoiceItem;
 import com.stripe.model.InvoiceLineItemCollection;
 import com.stripe.model.MetadataStore;
-import com.stripe.model.PaymentSource;
-import com.stripe.model.PaymentSourceCollection;
-import com.stripe.model.PaymentSourceDeserializer;
 import com.stripe.model.Plan;
 import com.stripe.model.Recipient;
 import com.stripe.model.Refund;
@@ -708,7 +706,7 @@ public class StripeTest {
 		Customer customer = createDefaultCustomerWithDefaultBitcoinReceiver();
 
 		HashMap<String, Object> listParams = new HashMap<String, Object>();
-		List<PaymentSource> customerSourceList = customer.getSources().all(listParams).getData();
+		List<ExternalAccount> customerSourceList = customer.getSources().all(listParams).getData();
 
 		assertEquals(2, customerSourceList.size());
 		assert(customerSourceList.get(0) instanceof Card);
@@ -720,9 +718,9 @@ public class StripeTest {
 	@Test
 	public void testCustomerSourceRetrieveCard() throws StripeException {
 		Customer customer = Customer.create(defaultCustomerParams);
-		PaymentSourceCollection customerSources = customer.getSources();
+		ExternalAccountCollection customerSources = customer.getSources();
 		String paymentSourceId = customerSources.getData().get(0).getId();
-		PaymentSource paymentSource = customerSources.retrieve(paymentSourceId);
+		ExternalAccount paymentSource = customerSources.retrieve(paymentSourceId);
 		assertNotNull(paymentSource);
 		assertEquals(paymentSourceId, paymentSource.getId());
 	}
@@ -731,13 +729,13 @@ public class StripeTest {
 	public void testCustomerSourceRetrieveBitcoinReceiver() throws StripeException {
 		Customer customer = Customer.create(new HashMap<String, Object>());
 		BitcoinReceiver receiver = BitcoinReceiver.create(defaultBitcoinReceiverParams);
-		PaymentSourceCollection customerSources = customer.getSources();
+		ExternalAccountCollection customerSources = customer.getSources();
 		Map<String, Object> createParams = new HashMap<String, Object>();
 		createParams.put("source", receiver.getId());
 		customerSources.create(createParams);
 		customerSources = customerSources.all(new HashMap<String, Object>());
 		String paymentSourceId = customerSources.getData().get(0).getId();
-		PaymentSource paymentSource = customerSources.retrieve(paymentSourceId);
+		ExternalAccount paymentSource = customerSources.retrieve(paymentSourceId);
 		assertNotNull(paymentSource);
 		assertEquals(paymentSourceId, paymentSource.getId());
 		assertTrue(paymentSource instanceof BitcoinReceiver);
@@ -756,19 +754,19 @@ public class StripeTest {
 		assertNotNull(customer.getSources());
 		assert(customer.getSources().getData().get(0) instanceof Card);
 		assertNotNull(customer.getDefaultSource());
-		PaymentSource card = customer.getSources().retrieve(customer.getDefaultSource());
+		ExternalAccount card = customer.getSources().retrieve(customer.getDefaultSource());
 		assertEquals(card.getId(), customer.getDefaultSource());
 	}
 
 	@Test
 	public void testCustomerCreateSourceWithCardHash() throws StripeException {
 		Customer customer = Customer.create(new HashMap<String, Object>());
-		PaymentSourceCollection customerSources = customer.getSources();
+		ExternalAccountCollection customerSources = customer.getSources();
 		HashMap<String, Object> cardParams = new HashMap<String, Object>(defaultCardParams);
 		cardParams.put("object", "card");
 		HashMap<String, Object> createParams = new HashMap<String, Object>();
 		createParams.put("source", cardParams);
-		PaymentSource paymentSource = customerSources.create(createParams);
+		ExternalAccount paymentSource = customerSources.create(createParams);
 		assertNotNull(paymentSource);
 		assertNotNull(paymentSource.getId());
 		assert(paymentSource instanceof Card);
@@ -777,11 +775,11 @@ public class StripeTest {
 	@Test
 	public void testCustomerCreateSourceWithBitcoinReceiverToken() throws StripeException {
 		Customer customer = Customer.create(new HashMap<String, Object>());
-		PaymentSourceCollection customerSources = customer.getSources();
+		ExternalAccountCollection customerSources = customer.getSources();
 		BitcoinReceiver receiver = BitcoinReceiver.create(defaultBitcoinReceiverParams);
 		HashMap<String, Object> createParams = new HashMap<String, Object>();
 		createParams.put("source", receiver.getId());
-		PaymentSource paymentSource = customerSources.create(createParams);
+		ExternalAccount paymentSource = customerSources.create(createParams);
 		assertNotNull(paymentSource);
 		assertNotNull(paymentSource.getId());
 		assert(paymentSource instanceof BitcoinReceiver);
@@ -790,8 +788,8 @@ public class StripeTest {
 	@Test
 	public void testCustomerSourceUpdate() throws StripeException {
 		Customer customer = Customer.create(defaultCustomerParams);
-		PaymentSourceCollection customerSources = customer.getSources();
-		PaymentSource paymentSource = customerSources.getData().get(0);
+		ExternalAccountCollection customerSources = customer.getSources();
+		ExternalAccount paymentSource = customerSources.getData().get(0);
 		assert(paymentSource instanceof Card);
 		Card card = (Card) paymentSource;
 
@@ -804,8 +802,8 @@ public class StripeTest {
 	@Test
 	public void testCustomerSourceDelete() throws StripeException {
 		Customer customer = Customer.create(defaultCustomerParams);
-		PaymentSourceCollection customerSources = customer.getSources();
-		PaymentSource paymentSource = customerSources.getData().get(0);
+		ExternalAccountCollection customerSources = customer.getSources();
+		ExternalAccount paymentSource = customerSources.getData().get(0);
 		paymentSource.delete();
 		HashMap<String, Object> listParams = new HashMap<String, Object>();
 		assertEquals(0, customerSources.all(listParams).getData().size());
@@ -2038,7 +2036,7 @@ public class StripeTest {
 		customerParams.put("source", alipayToken.getId());
 		Customer cus = Customer.create(customerParams);
 
-		PaymentSource alipayAccount = cus.getSources().getData().get(0);
+		ExternalAccount alipayAccount = cus.getSources().getData().get(0);
 		assertEquals("alipay_account", alipayAccount.getObject());
 		assertEquals(cus.getId(), alipayAccount.getCustomer());
 		assertTrue(AlipayAccount.class.isInstance(alipayAccount));
@@ -2056,8 +2054,8 @@ public class StripeTest {
 		metadata.put("foo", "bar");
 		updateParams.put("metadata", metadata);
 
-		PaymentSource alipayAccount = cus.getSources().getData().get(0);
-		PaymentSource updatedAccount = alipayAccount.update(updateParams);
+		ExternalAccount alipayAccount = cus.getSources().getData().get(0);
+		ExternalAccount updatedAccount = alipayAccount.update(updateParams);
 
 		assertEquals("bar", ((AlipayAccount) updatedAccount).getMetadata().get("foo"));
 	}
@@ -2072,67 +2070,7 @@ public class StripeTest {
 		AlipayAccount alipayAccount = (AlipayAccount) cus.getSources().getData().get(0);
 		alipayAccount.delete();
 
-		PaymentSourceCollection sources = cus.getSources().all(new HashMap<String, Object>());
+		ExternalAccountCollection sources = cus.getSources().all(new HashMap<String, Object>());
 		assertEquals(0, sources.getData().size());
-	}
-
-	@Test
-	public void testAlipayAccountAsUnknownSourceCreation() throws StripeException {
-		Map<String, Class<?>> mapping = PaymentSourceDeserializer.getTypeToClazz();
-		mapping.remove("alipay_account");
-
-		Token alipayToken = Token.create(defaultAlipayTokenParams);
-		Map<String, Object> customerParams = new HashMap<String, Object>();
-		customerParams.put("source", alipayToken.getId());
-		Customer cus = Customer.create(customerParams);
-
-		PaymentSource alipayAccount = cus.getSources().getData().get(0);
-		assertEquals("alipay_account", alipayAccount.getObject());
-		assertEquals(cus.getId(), alipayAccount.getCustomer());
-		assertTrue(ConcretePaymentSource.class.isInstance(alipayAccount));
-
-		PaymentSourceDeserializer.setTypeToClazz(null);
-	}
-
-	@Test
-	public void testAlipayAccountAsUnkownPaymentSourceUpdating() throws StripeException {
-		Map<String, Class<?>> mapping = PaymentSourceDeserializer.getTypeToClazz();
-		mapping.remove("alipay_account");
-
-		Token alipayToken = Token.create(defaultAlipayTokenParams);
-		Map<String, Object> customerParams = new HashMap<String, Object>();
-		customerParams.put("source", alipayToken.getId());
-		Customer cus = Customer.create(customerParams);
-
-		Map<String, Object> updateParams = new HashMap<String, Object>();
-		Map<String, Object> metadata = new HashMap<String, Object>();
-		metadata.put("foo", "bar");
-		updateParams.put("metadata", metadata);
-
-		PaymentSource alipayAccount = cus.getSources().getData().get(0);
-		PaymentSource updatedAccount = alipayAccount.update(updateParams);
-
-		assertEquals(alipayAccount.getId(), updatedAccount.getId());
-
-		PaymentSourceDeserializer.setTypeToClazz(null);
-	}
-
-	@Test
-	public void testAlipayAccountAsUnknownPaymentSourceDeleting() throws StripeException {
-		Map<String, Class<?>> mapping = PaymentSourceDeserializer.getTypeToClazz();
-		mapping.remove("alipay_account");
-
-		Token alipayToken = Token.create(defaultAlipayTokenParams);
-		Map<String, Object> customerParams = new HashMap<String, Object>();
-		customerParams.put("source", alipayToken.getId());
-		Customer cus = Customer.create(customerParams);
-
-		PaymentSource alipayAccount = cus.getSources().getData().get(0);
-		alipayAccount.delete();
-
-		PaymentSourceCollection sources = cus.getSources().all(new HashMap<String, Object>());
-		assertEquals(0, sources.getData().size());
-
-		PaymentSourceDeserializer.setTypeToClazz(null);
 	}
 }
