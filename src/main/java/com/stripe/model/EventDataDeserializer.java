@@ -102,8 +102,14 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
 				populateMapFromJSONObject(previousAttributes, element.getAsJsonObject());
 				eventData.setPreviousAttributes(previousAttributes);
 			} else if ("object".equals(key)) {
-				String type = element.getAsJsonObject().get("object").getAsString();
-				Class<StripeObject> cl = objectMap.get(type);
+                                String type = "";
+                                try {
+			                type = element.getAsJsonObject().get("object").getAsString();				        
+                                } catch (NullPointerException e) {
+                                        type = element.getAsJsonObject().get("type").getAsString().split("\\.")[0];
+                                }
+
+                                Class<StripeObject> cl = objectMap.get(type);
 				StripeObject object = APIResource.GSON.fromJson(entry.getValue(), cl != null ? cl : StripeRawJsonObject.class);
 				eventData.setObject(object);
 			}
