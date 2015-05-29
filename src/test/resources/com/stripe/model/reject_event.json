@@ -1,0 +1,24 @@
+{
+  "id": "evt_00000000000000",  
+  "created": 1432769421,
+  "livemode": true,
+  "type": "account.reject",
+  "data": {
+    "object": {
+      "id":"vuJEYvcYMexPckSv0bsIJYJBPTK82lWJ_00000000000000",
+      "created": 1432769421,
+      "livemode": true,
+      "body": "Fraudulent account. Please close and refund charges.",
+      "type": "account.reject",
+      "category": "fraud",
+      "author_name": "Stripe Admin",
+      "data": null,
+      "in_reply_to": null
+    }
+  },
+  "object": "event",
+  "pending_webhooks": 1,
+  "request": null,
+  "api_version": null,
+  "user_id": "acct_00000000000000"
+}
