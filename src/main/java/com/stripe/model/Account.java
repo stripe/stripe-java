@@ -202,41 +202,6 @@ public class Account extends APIResource implements MetadataStore<Account> {
 		return request(RequestMethod.POST, instanceURL(Account.class, this.id), params, Account.class, options);
 	}
 
-   @Override
-   public boolean equals(Object o) {
-           if (this == o) {
-                   return true;
-           }
-           if (o == null || getClass() != o.getClass()) {
-                   return false;
-           }
-
-           Account account = (Account) o;
-           return equals(id, account.id) &&
-                   equals(chargesEnabled, account.chargesEnabled) &&
-                   equals(detailsSubmitted, account.detailsSubmitted) &&
-                   equals(transfersEnabled, account.transfersEnabled) &&
-                   equals(currenciesSupported, account.currenciesSupported) &&
-                   equals(email, account.email) &&
-                   equals(statementDescriptor, account.statementDescriptor) &&
-                   equals(defaultCurrency, account.defaultCurrency) &&
-                   equals(country, account.country) &&
-                   equals(timezone, account.timezone) &&
-                   equals(displayName, account.displayName) &&
-                   equals(verification, account.verification) &&
-                   equals(legalEntity, account.legalEntity) &&
-                   equals(keys, account.keys) &&
-                   equals(metadata, account.metadata) &&
-                   equals(businessName, account.businessName) &&
-                   equals(businessUrl, account.businessUrl) &&
-                   equals(businessLogo, account.businessLogo) &&
-                   equals(supportPhone, account.supportPhone) &&
-                   equals(supportUrl, account.supportUrl) &&
-                   equals(supportEmail, account.supportEmail) &&
-                   equals(managed, account.managed) &&
-                   equals(externalAccounts, account.externalAccounts);
-   }
-
 	public static class Verification extends StripeObject {
 		List<String> fieldsNeeded;
 		Long dueBy;
