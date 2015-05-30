@@ -33,53 +33,52 @@ public class Card extends ExternalAccount implements MetadataStore<Card> {
 	String funding;
 	Map<String, String> metadata;
 
-	public Card update(Map<String, Object> params)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return update(params, (RequestOptions) null);
-	}
+    public Card update(Map<String, Object> params)
+            throws AuthenticationException, InvalidRequestException,
+            APIConnectionException, CardException, APIException {
+        return update(params, (RequestOptions) null);
+    }
 
-	@Deprecated
-	public Card update(Map<String, Object> params, String apiKey)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return update(params, RequestOptions.builder().setApiKey(apiKey).build());
-	}
-	public Card update(Map<String, Object> params, RequestOptions options)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.POST, this.getInstanceURL(), params, Card.class, options);
-	}
+    @Deprecated
+    public Card update(Map<String, Object> params, String apiKey)
+            throws AuthenticationException, InvalidRequestException,
+            APIConnectionException, CardException, APIException {
+        return update(params, RequestOptions.builder().setApiKey(apiKey).build());
+    }
 
-	public DeletedCard delete() throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
-		return delete((RequestOptions) null);
-	}
+    public Card update(Map<String, Object> params, RequestOptions options)
+            throws AuthenticationException, InvalidRequestException,
+            APIConnectionException, CardException, APIException {
+        return request(RequestMethod.POST, this.getInstanceURL(), params, Card.class, options);
+    }
 
-	@Deprecated
-	public DeletedCard delete(String apiKey) throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
-		return delete(RequestOptions.builder().setApiKey(apiKey).build());
-	}
-	public DeletedCard delete(RequestOptions options) throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
+    public DeletedCard delete()
+            throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
+        return delete((RequestOptions) null);
+    }
+
+    @Deprecated
+    public DeletedCard delete(String apiKey)
+            throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
+        return delete(RequestOptions.builder().setApiKey(apiKey).build());
+    }
+
+	public DeletedCard delete(RequestOptions options)
+			throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
 		return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedCard.class, options);
 	}
 
-	public String getInstanceURL() {
-		if (this.getCustomer() != null) {
-			return String.format("%s/%s/cards/%s", classURL(Customer.class), this.getCustomer(), this.getId());
-		} else if (this.getAccount() != null) {
-			return String.format("%s/%s/external_accounts/%s", classURL(Account.class), this.getAccount(), this.getId());
-		} else if (this.getRecipient() != null) {
-			return String.format("%s/%s/cards/%s", classURL(Recipient.class), this.getRecipient(), this.getId());
-		} else {
-			return null;
-		}
-	}
+    @Override
+    public String getInstanceURL() {
+        String result = super.getInstanceURL();
+        if (result != null) {
+            return result;
+        } else if (this.getRecipient() != null) {
+            return String.format("%s/%s/cards/%s", classURL(Recipient.class), this.getRecipient(), this.getId());
+        } else {
+            return null;
+        }
+    }
 
     public String getStatus() {
         return status;

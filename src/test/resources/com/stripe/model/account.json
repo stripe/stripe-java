@@ -1,5 +1,5 @@
 {
-  "id": "acct_1032D82eZvKYlo2C",
+    "id": "acct_1032D82eZvKYlo2C",
     "email": "site@stripe.com",
     "statement_descriptor": null,
     "display_name": "Stripe.com",
@@ -8,14 +8,14 @@
     "charges_enabled": false,
     "transfers_enabled": false,
     "currencies_supported": [
-      "usd",
-    "aud"
-      ],
+        "usd",
+        "aud"
+    ],
     "legal_entity": {
-      "type": "company",
-      "address": {
-        "city": "San Francisco"
-      }
+        "type": "company",
+        "address": {
+            "city": "San Francisco"
+        }
     },
     "default_currency": "usd",
     "country": "US",
@@ -23,5 +23,11 @@
     "business_name": "Stripe.com",
     "business_url": null,
     "support_phone": null,
-    "managed": null
+    "managed": null,
+    "external_accounts": {
+        "object": "list",
+        "url": "/v1/accounts/acct_1032D82eZvKYlo2C/external_accounts",
+        "has_more": false,
+        "data": []
+    }
 }
