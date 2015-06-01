@@ -40,7 +40,7 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 	@Deprecated
 	String statementDescription;
 	ShippingDetails shipping;
-	PaymentSource source;
+	ExternalAccount source;
 
 	public static final String FRAUD_DETAILS = "fraud_details";
 	FraudDetails fraudDetails;
@@ -60,11 +60,11 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 	public void setId(String id) {
 		this.id = id;
 	}
-	
+
 	public String getStatus() {
 		return status;
 	}
-	
+
 	public Integer getAmount() {
 		return amount;
 	}
@@ -270,11 +270,11 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 		this.receiptEmail = receiptEmail;
 	}
 
-	public PaymentSource getSource() {
+	public ExternalAccount getSource() {
 		return source;
 	}
 
-	public void setSource(PaymentSource source) {
+	public void setSource(ExternalAccount source) {
 		this.source = source;
 	}
 

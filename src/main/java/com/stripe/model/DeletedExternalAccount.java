@@ -1,6 +1,6 @@
 package com.stripe.model;
 
-public class DeletedConcretePaymentSource extends StripeObject implements DeletedStripeObject {
+public class DeletedExternalAccount extends StripeObject implements DeletedStripeObject {
     String id;
     Boolean deleted;
 

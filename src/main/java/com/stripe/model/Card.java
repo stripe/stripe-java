@@ -5,14 +5,11 @@ import com.stripe.exception.APIException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
-public class Card extends APIResource implements PaymentSource, MetadataStore<Card> {
-	String id;
-	String object;
+public class Card extends ExternalAccount implements MetadataStore<Card> {
 	String status;
 	Integer expMonth;
 	Integer expYear;
@@ -21,7 +18,6 @@ public class Card extends APIResource implements PaymentSource, MetadataStore<Ca
 	String country;
 	String type;
 	String name;
-	String customer;
 	String recipient;
 	String addressLine1;
 	String addressLine2;
@@ -37,66 +33,51 @@ public class Card extends APIResource implements PaymentSource, MetadataStore<Ca
 	String funding;
 	Map<String, String> metadata;
 
-	public Card update(Map<String, Object> params)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return update(params, (RequestOptions) null);
-	}
+    public Card update(Map<String, Object> params)
+            throws AuthenticationException, InvalidRequestException,
+            APIConnectionException, CardException, APIException {
+        return update(params, (RequestOptions) null);
+    }
 
-	@Deprecated
-	public Card update(Map<String, Object> params, String apiKey)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return update(params, RequestOptions.builder().setApiKey(apiKey).build());
-	}
-	public Card update(Map<String, Object> params, RequestOptions options)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.POST, this.getInstanceURL(), params, Card.class, options);
-	}
+    @Deprecated
+    public Card update(Map<String, Object> params, String apiKey)
+            throws AuthenticationException, InvalidRequestException,
+            APIConnectionException, CardException, APIException {
+        return update(params, RequestOptions.builder().setApiKey(apiKey).build());
+    }
 
-	public DeletedCard delete() throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
-		return delete((RequestOptions) null);
-	}
+    public Card update(Map<String, Object> params, RequestOptions options)
+            throws AuthenticationException, InvalidRequestException,
+            APIConnectionException, CardException, APIException {
+        return request(RequestMethod.POST, this.getInstanceURL(), params, Card.class, options);
+    }
 
-	@Deprecated
-	public DeletedCard delete(String apiKey) throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
-		return delete(RequestOptions.builder().setApiKey(apiKey).build());
-	}
-	public DeletedCard delete(RequestOptions options) throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
+    public DeletedCard delete()
+            throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
+        return delete((RequestOptions) null);
+    }
+
+    @Deprecated
+    public DeletedCard delete(String apiKey)
+            throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
+        return delete(RequestOptions.builder().setApiKey(apiKey).build());
+    }
+
+	public DeletedCard delete(RequestOptions options)
+			throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
 		return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedCard.class, options);
 	}
 
-	public String getInstanceURL() {
-		if (this.getCustomer() != null) {
-			return String.format("%s/%s/cards/%s", classURL(Customer.class), this.getCustomer(), this.getId());
-		} else if (this.getRecipient() != null) {
-			return String.format("%s/%s/cards/%s", classURL(Recipient.class), this.getRecipient(), this.getId());
-		} else {
-			return null;
-		}
-	}
-
-	public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getObject() {
-        return object;
-    }
-
-    public void setObject(String object) {
-        this.object = object;
+    @Override
+    public String getInstanceURL() {
+        String result = super.getInstanceURL();
+        if (result != null) {
+            return result;
+        } else if (this.getRecipient() != null) {
+            return String.format("%s/%s/cards/%s", classURL(Recipient.class), this.getRecipient(), this.getId());
+        } else {
+            return null;
+        }
     }
 
     public String getStatus() {
@@ -106,14 +87,6 @@ public class Card extends APIResource implements PaymentSource, MetadataStore<Ca
     public void setStatus(String status) {
         this.status = status;
     }
-
-	public String getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(String customer) {
-		this.customer = customer;
-	}
 
 	public String getRecipient() {
 		return recipient;

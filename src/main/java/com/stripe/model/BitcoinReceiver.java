@@ -12,9 +12,7 @@ import com.stripe.net.RequestOptions;
 import java.util.Collections;
 import java.util.Map;
 
-public class BitcoinReceiver extends APIResource implements PaymentSource {
-    String id;
-    String object;
+public class BitcoinReceiver extends ExternalAccount {
     String status;
     Long created;
     String currency;
@@ -29,27 +27,10 @@ public class BitcoinReceiver extends APIResource implements PaymentSource {
     String inboundAddress;
     String refundAddress;
     String bitcoinUri;
-    String customer;
     String email;
     String payment;
     BitcoinTransactionCollection transactions;
     Map<String, String> metadata;
-
-    public String getId() {
-        return id;
-    }
-
-    public void setId(String id) {
-        this.id = id;
-    }
-
-    public String getObject() {
-        return object;
-    }
-
-    public void setObject(String object) {
-        this.object = object;
-    }
 
     public String getStatus() {
         return status;
@@ -163,14 +144,6 @@ public class BitcoinReceiver extends APIResource implements PaymentSource {
         this.bitcoinUri = bitcoinUri;
     }
 
-    public String getCustomer() {
-        return customer;
-    }
-
-    public void setCustomer(String customer) {
-        this.customer = customer;
-    }
-
     public String getEmail() {
         return email;
     }
@@ -239,32 +212,38 @@ public class BitcoinReceiver extends APIResource implements PaymentSource {
         return request(RequestMethod.GET, String.format("%s/%s", Stripe.getApiBase(), "v1/bitcoin/receivers"), params, BitcoinReceiverCollection.class, options);
     }
 
+    @Override
     public String getInstanceURL() {
-        if (this.customer != null) {
-            return String.format("%s/%s/sources/%s", classURL(Customer.class), this.customer, this.getId());
-        } else {
+        String result = super.getInstanceURL();
+        if (result == null) {
             return String.format("%s/%s/%s", Stripe.getApiBase(), "v1/bitcoin/receivers", this.getId());
+        } else {
+            return result;
         }
     }
 
+    @Override
     public BitcoinReceiver update(Map<String, Object> params)
             throws AuthenticationException, InvalidRequestException,
             APIConnectionException, CardException, APIException {
         return update(params, (RequestOptions) null);
     }
 
+    @Override
     public BitcoinReceiver update(Map<String, Object> params, RequestOptions options)
             throws AuthenticationException, InvalidRequestException,
             APIConnectionException, CardException, APIException {
         return request(RequestMethod.POST, this.getInstanceURL(), params, BitcoinReceiver.class, options);
     }
 
+    @Override
     public DeletedBitcoinReceiver delete() throws AuthenticationException,
             InvalidRequestException, APIConnectionException, CardException,
             APIException {
         return delete((RequestOptions) null);
     }
 
+    @Override
     public DeletedBitcoinReceiver delete(RequestOptions options) throws AuthenticationException,
             InvalidRequestException, APIConnectionException, CardException,
             APIException {

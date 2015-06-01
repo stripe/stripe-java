@@ -14,14 +14,10 @@ import java.util.Map;
  */
 public interface MetadataStore<T> {
 	Map<String, String> getMetadata();
-	void setMetadata(Map<String, String> metadata);
 
 	MetadataStore<T> update(Map<String, Object> params) throws AuthenticationException, InvalidRequestException,
 		APIConnectionException, CardException, APIException;
 
-	@Deprecated
-	MetadataStore<T> update(Map<String, Object> params, String apiKey) throws AuthenticationException, InvalidRequestException,
-		APIConnectionException, CardException, APIException;
 	MetadataStore<T> update(Map<String, Object> params, RequestOptions options) throws AuthenticationException, InvalidRequestException,
 		APIConnectionException, CardException, APIException;
 }

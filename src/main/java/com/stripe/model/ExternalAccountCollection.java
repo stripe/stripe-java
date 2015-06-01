@@ -10,45 +10,45 @@ import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
-public class PaymentSourceCollection extends StripeCollectionAPIResource<PaymentSource> {
-    public PaymentSourceCollection all(Map<String, Object> params)
+public class ExternalAccountCollection extends StripeCollectionAPIResource<ExternalAccount> {
+    public ExternalAccountCollection all(Map<String, Object> params)
             throws AuthenticationException, InvalidRequestException,
             APIConnectionException, CardException, APIException {
         return all(params, (RequestOptions) null);
     }
 
-    public PaymentSourceCollection all(Map<String, Object> params,
+    public ExternalAccountCollection all(Map<String, Object> params,
             RequestOptions options) throws AuthenticationException,
             InvalidRequestException, APIConnectionException, CardException,
             APIException {
         String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
-        return request(RequestMethod.GET, url, params, PaymentSourceCollection.class, options);
+        return request(RequestMethod.GET, url, params, ExternalAccountCollection.class, options);
     }
 
-    public PaymentSource retrieve(String id) throws AuthenticationException,
+    public ExternalAccount retrieve(String id) throws AuthenticationException,
             InvalidRequestException, APIConnectionException, CardException,
             APIException {
         return retrieve(id, (RequestOptions) null);
     }
 
-    public PaymentSource retrieve(String id, RequestOptions options) throws AuthenticationException,
+    public ExternalAccount retrieve(String id, RequestOptions options) throws AuthenticationException,
             InvalidRequestException, APIConnectionException, CardException,
             APIException {
         String url = String.format("%s%s/%s", Stripe.getApiBase(), this.getURL(), id);
-        return request(RequestMethod.GET, url, null, PaymentSource.class, options);
+        return request(RequestMethod.GET, url, null, ExternalAccount.class, options);
     }
 
-    public PaymentSource create(Map<String, Object> params)
+    public ExternalAccount create(Map<String, Object> params)
             throws AuthenticationException, InvalidRequestException,
             APIConnectionException, CardException, APIException {
         return create(params, (RequestOptions) null);
     }
 
-    public PaymentSource create(Map<String, Object> params,
+    public ExternalAccount create(Map<String, Object> params,
             RequestOptions options) throws AuthenticationException,
             InvalidRequestException, APIConnectionException, CardException,
             APIException {
         String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
-        return request(RequestMethod.POST, url, params, PaymentSource.class, options);
+        return request(RequestMethod.POST, url, params, ExternalAccount.class, options);
     }
 }
