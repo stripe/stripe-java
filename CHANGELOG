@@ -1,3 +1,10 @@
+=== 1.31.0 2015-06-01
+
+* `ConcretePaymentSource` and the `PaymentSource` interface have been combined into one `ExternalAccount` class
+* `PaymentSourceCollection` was renamed `ExternalAccountCollection`
+* `Account` now supports `getExternalAccounts`, which allows both `BankAccount` and `Card` attachment.
+* `BankAccount`s can now be deleted from `Customer`s (private beta feature) and `Account`s
+
 === 1.30.0 2015-05-28
 
 * Add decline_code, charge to CardException
