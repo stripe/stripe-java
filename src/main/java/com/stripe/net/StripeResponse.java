@@ -7,17 +7,17 @@ public class StripeResponse {
 	
 	int responseCode;
 	String responseBody;
-        Map<String, List<String>> responseHeaders;
+	Map<String, List<String>> responseHeaders;
 	
 	public StripeResponse(int responseCode, String responseBody) {
 		this.responseCode = responseCode;
 		this.responseBody = responseBody;
-                this.responseHeaders = null;
+		this.responseHeaders = null;
 	}
-        public StripeResponse(int responseCode, String responseBody, Map<String, List<String>> responseHeaders) {
+	public StripeResponse(int responseCode, String responseBody, Map<String, List<String>> responseHeaders) {
 		this.responseCode = responseCode;
 		this.responseBody = responseBody;
-                this.responseHeaders = responseHeaders;
+		this.responseHeaders = responseHeaders;
 	}
 
 	public int getResponseCode() {
@@ -35,7 +35,8 @@ public class StripeResponse {
 	public void setResponseBody(String responseBody) {
 		this.responseBody = responseBody;
 	}
-        public Map<String, List<String>> getResponseHeaders() {
+
+	public Map<String, List<String>> getResponseHeaders() {
 		return responseHeaders;
 	}
 }
