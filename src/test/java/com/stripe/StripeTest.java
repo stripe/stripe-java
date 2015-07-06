@@ -344,7 +344,10 @@ public class StripeTest {
 			assertTrue(false);
 		}
 		catch (InvalidRequestException e) {
-			// Expected
+			String requestId = e.getRequestId();
+			assertFalse(requestId == null);
+			assertFalse(requestId.equals(""));
+			assertTrue(e.toString().contains(requestId));
 		}
 	}
 

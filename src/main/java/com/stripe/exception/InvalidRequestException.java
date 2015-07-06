@@ -6,8 +6,8 @@ public class InvalidRequestException extends StripeException {
 
 	private final String param;
 
-	public InvalidRequestException(String message, String param, Throwable e) {
-		super(message, e);
+	public InvalidRequestException(String message, String param, String requestId, Throwable e) {
+		super(message, requestId, e);
 		this.param = param;
 	}
 
