@@ -1,3 +1,7 @@
+=== 1.32.0 2015-07-06
+
+* Added `getRequestId` method to `StripeException`. 
+
 === 1.31.0 2015-06-01
 
 * `ConcretePaymentSource` and the `PaymentSource` interface have been combined into one `ExternalAccount` class
