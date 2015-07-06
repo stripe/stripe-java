@@ -22,23 +22,9 @@ import com.stripe.model.StripeObject;
 import com.stripe.model.StripeRawJsonObject;
 import com.stripe.model.StripeRawJsonObjectDeserializer;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
-import java.lang.reflect.Constructor;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.net.MalformedURLException;
-import java.net.URL;
 import java.net.URLEncoder;
-import java.net.URLStreamHandler;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 
 public abstract class APIResource extends StripeObject {
 	private static StripeResponseGetter stripeResponseGetter = new LiveStripeResponseGetter();
@@ -102,7 +88,7 @@ public abstract class APIResource extends StripeObject {
 			throw new InvalidRequestException("Unable to encode parameters to "
 					+ CHARSET
 					+ ". Please contact support@stripe.com for assistance.",
-					null, e);
+					null, null, e);
 		}
 	}
 

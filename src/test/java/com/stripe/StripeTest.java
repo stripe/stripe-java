@@ -1150,6 +1150,20 @@ public class StripeTest {
 	}
 
 	@Test
+	public void testUpcomingInvoiceNotFound() throws CardException, APIException, AuthenticationException,
+		InvalidRequestException, APIConnectionException {
+		Customer customer = Customer.create(defaultCustomerParams);
+		Map<String, Object> upcomingParams = new HashMap<String, Object>();
+		upcomingParams.put("customer", customer.getId());
+		try {
+			Invoice.upcoming(upcomingParams);
+			fail();
+		} catch (InvalidRequestException expected) {
+			assertEquals(404, (int)expected.getCode());
+		}
+	}
+
+	@Test
 	public void testTokenCreate() throws StripeException {
 		Token token = Token.create(defaultTokenParams);
 		assertFalse(token.getUsed());
