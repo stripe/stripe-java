@@ -18,7 +18,6 @@ import com.stripe.model.BitcoinReceiver;
 import com.stripe.model.BitcoinTransaction;
 import com.stripe.model.Card;
 import com.stripe.model.Charge;
-import com.stripe.model.ChargeCollection;
 import com.stripe.model.ChargeRefundCollection;
 import com.stripe.model.Coupon;
 import com.stripe.model.Customer;
@@ -533,6 +532,76 @@ public class StripeTest {
 		assertFalse(dispute.getIsChargeRefundable());
 		assertEquals(1, dispute.getBalanceTransactions().size());
 		assertEquals(-chargeValueCents, dispute.getBalanceTransactions().get(0).getAmount().intValue());
+	}
+
+	@Test
+	public void testRetrieveDispute() throws StripeException, InterruptedException {
+		int chargeValueCents = 100;
+		Charge disputedCharge = createDisputedCharge(chargeValueCents);
+		Dispute dispute = disputedCharge.getDispute();
+		Dispute retrievedDispute = Dispute.retrieve(dispute.getId());
+		assertEquals(dispute.getId(), retrievedDispute.getId());
+	}
+
+	@Test
+	public void testDisputeList() throws StripeException, InterruptedException {
+		Map<String, Object> listParams = new HashMap<String, Object>();
+		listParams.put("count", 3);
+		List<Dispute> disputes = Dispute.all(listParams).getData();
+
+		assertEquals(3, disputes.size());
+	}
+
+	@Test
+	public void testUpdateDispute() throws StripeException, InterruptedException {
+		int chargeValueCents = 100;
+		Charge disputedCharge = createDisputedCharge(chargeValueCents);
+
+		Dispute initialDispute = disputedCharge.getDispute();
+		EvidenceSubObject emptyEvidence = new EvidenceSubObject();
+		assertEquals(emptyEvidence, initialDispute.getEvidenceSubObject());
+		assertEquals(new HashMap<String, String>(), initialDispute.getMetadata());
+
+		Map<String, Object> params = new HashMap<String, Object>();
+		Map<String, Object> evidence = new HashMap<String, Object>();
+		Map<String, String> metadata = new HashMap<String, String>();
+
+		evidence.put("product_description", "my productDescription");
+		evidence.put("customer_name", "my customerName");
+		evidence.put("uncategorized_text", "my uncategorizedText");
+
+		metadata.put("some_info", "about the dispute");
+		metadata.put("a_little_more", "12345");
+
+		params.put("evidence", evidence);
+		params.put("metadata", metadata);
+
+		Dispute updatedDispute = initialDispute.update(params);
+		assertNotNull(updatedDispute);
+
+		EvidenceSubObject evidenceSubObject = updatedDispute.getEvidenceSubObject();
+		assertEquals(evidence.get("product_description"), evidenceSubObject.getProductDescription());
+		assertEquals(evidence.get("customer_name"), evidenceSubObject.getCustomerName());
+		assertEquals(evidence.get("uncategorized_text"), evidenceSubObject.getUncategorizedText());
+
+		// Ensure this didn't get stored in the deprecated evidence field.
+		assertNull(updatedDispute.getEvidence());
+
+		Map<String, String> disputeMetadata = updatedDispute.getMetadata();
+		assertNotNull(disputeMetadata);
+		assertEquals(metadata, disputeMetadata);
+	}
+
+	@Test
+	public void testCloseDispute() throws StripeException, InterruptedException {
+		int chargeValueCents = 100;
+		Charge disputedCharge = createDisputedCharge(chargeValueCents);
+		Dispute dispute = disputedCharge.getDispute();
+		assertEquals("needs_response", dispute.getStatus());
+
+		Dispute closedDispute = dispute.close();
+		assertEquals(dispute.getId(), closedDispute.getId());
+		assertEquals("lost", closedDispute.getStatus());
 	}
 
 	@Test
