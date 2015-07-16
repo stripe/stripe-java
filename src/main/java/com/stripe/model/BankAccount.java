@@ -29,6 +29,11 @@ public class BankAccount extends ExternalAccount {
         return request(RequestMethod.POST, this.getInstanceURL(), params, BankAccount.class, options);
     }
 
+    public BankAccount verify(Map<String, Object> params, RequestOptions options)
+            throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
+        return request(RequestMethod.POST, String.format("%s/verify", this.getInstanceURL()), params, BankAccount.class, options);
+    }
+
     public DeletedBankAccount delete()
             throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
         return delete((RequestOptions) null);
