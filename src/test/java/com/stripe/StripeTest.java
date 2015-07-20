@@ -51,6 +51,7 @@ import com.stripe.model.Token;
 import com.stripe.model.Transfer;
 import com.stripe.model.TransferReversalCollection;
 import com.stripe.net.RequestOptions;
+import junit.framework.Assert;
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -86,6 +87,10 @@ public class StripeTest {
 	static Map<String, Object> defaultAlipayTokenParams = new HashMap<String, Object>();
 	static RequestOptions cardSupportedRequestOptions;
 
+	static String getUniqueEmail() {
+		return String.format("test+bindings-%s@stripe.com", UUID.randomUUID().toString().substring(24));
+	}
+
 	static String getUniquePlanId() {
 		return String.format("MY-J-PLAN-%s", UUID.randomUUID().toString().substring(24));
 	}
@@ -119,11 +124,10 @@ public class StripeTest {
 
 	static Map<String, Object> getTransferParams() throws StripeException {
 		Map<String, Object> params = new HashMap<String, Object>();
-			Recipient recipient = Recipient.create(defaultRecipientParams);
-			params.put("amount", 100);
-			params.put("currency", "usd");
-			params.put("recipient", recipient.getId());
-			params.put("card", recipient.getDefaultCard());
+		Account destination = Account.create(getDefaultAccountParams());
+		params.put("amount", 100);
+		params.put("currency", "usd");
+		params.put("destination", destination.getId());
 		return params;
 	}
 
@@ -243,6 +247,18 @@ public class StripeTest {
 		alipayParams.put("alipay_username", "stripe+alipay");
 		defaultAlipayTokenParams.put("alipay_account", alipayParams);
 		defaultAlipayTokenParams.put("email", "alipay+account@stripe.com");
+	}
+
+	static Map<String, Object> getDefaultAccountParams() {
+		Map<String, Object> defaultAccountParams = new HashMap<String, Object>();
+		// TODO: make defaultAccountParams the default for a given currency?
+		HashMap<String, Object> externalAccount = new HashMap<String, Object>();
+		externalAccount.putAll(defaultBankAccountParams);
+		externalAccount.put("object", "bank_account");
+
+		defaultAccountParams.put("external_account", externalAccount);
+		defaultAccountParams.put("email", getUniqueEmail());
+		return defaultAccountParams;
 	}
 
 	@Test
@@ -1233,13 +1249,18 @@ public class StripeTest {
 		assertEquals("pending", createdTransfer.getStatus());
 	}
 
-	@Test(expected=InvalidRequestException.class)
+	@Test
 	public void testTransferCancel() throws StripeException {
-		Transfer createdTransfer = Transfer.create(getTransferParams());
-		createdTransfer.cancel();
+		Transfer created = Transfer.create(getTransferParams());
+		try {
+			// we expect an InvalidRequestException here (caught by JUnit),
+			// because in test mode, transfers are automatically sent.
+			created.cancel(RequestOptions.getDefault());
+			Assert.fail();
+		} catch (InvalidRequestException ire) {
+			// do nothing
+		}
 
-		// post-condition: we expect an InvalidRequestException here (caught by JUnit),
-		// because in test mode, transfers are automatically sent
 	}
 
 	@Test
@@ -1248,6 +1269,13 @@ public class StripeTest {
 		Transfer retrievedTransfer = Transfer.retrieve(createdTransfer.getId());
 		assertEquals(createdTransfer.getDate(), retrievedTransfer.getDate());
 		assertEquals(createdTransfer.getId(), retrievedTransfer.getId());
+	}
+
+	@Test
+	public void testTransferDestinationLoadedCorrectly() throws StripeException {
+		Map<String, Object> transferParams = getTransferParams();
+		Transfer created = Transfer.create(transferParams);
+		assertEquals(transferParams.get("destination"), created.getDestination());
 	}
 
 	@Test
