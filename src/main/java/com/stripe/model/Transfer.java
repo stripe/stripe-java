@@ -24,6 +24,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer> {
 	Integer amount;
 	String currency;
 	List<String> otherTransfers;
+	@Deprecated
 	String recipient;
 	BankAccount account;
 	String balanceTransaction;
@@ -108,10 +109,12 @@ public class Transfer extends APIResource implements MetadataStore<Transfer> {
 		return currency;
 	}
 
+	@Deprecated
 	public String getRecipient() {
 		return recipient;
 	}
 
+	@Deprecated
 	public void setRecipient(String recipient) {
 		this.recipient = recipient;
 	}
