@@ -1286,16 +1286,6 @@ public class StripeTest {
 		assertEquals(transfers.size(), 1);
 	}
 
-	@Test(expected=InvalidRequestException.class)
-  public void testTransferReversalCreate() throws StripeException {
-		Transfer tr = Transfer.create(getTransferParams());
-		Map<String, Object> params = new HashMap<String, Object>();
-		TransferReversalCollection reversals = tr.getReversals();
-		reversals.create(params);
-		// post-condition: we expect an InvalidRequestException here (caught by JUnit),
-		// because in test mode, transfers are automatically sent
-  }
-
 	@Test
 	public void testRecipientCreate() throws StripeException {
 		Recipient recipient = Recipient.create(defaultRecipientParams);
