@@ -1183,14 +1183,14 @@ public class StripeTest {
 		assertEquals(coupon.getDuration(), "once");
 	}
 
-    @Test
-    public void testCouponUpdate() throws StripeException {
-        Coupon createdCoupon = Coupon.create(getUniqueCouponParams());
-        Map<String, Object> updateParams = new HashMap<String, Object>();
-        updateParams.put("metadata[message]", "This month is on us!");
-        Coupon updatedCoupon = createdCoupon.update(updateParams);
-        assertEquals(updatedCoupon.getMetadata().get("message"), "This month is on us!");
-    }
+	@Test
+	public void testCouponUpdate() throws StripeException {
+		Coupon createdCoupon = Coupon.create(getUniqueCouponParams());
+		Map<String, Object> updateParams = new HashMap<String, Object>();
+		updateParams.put("metadata[message]", "This month is on us!");
+		Coupon updatedCoupon = createdCoupon.update(updateParams);
+		assertEquals(updatedCoupon.getMetadata().get("message"), "This month is on us!");
+	}
 
 	@Test
 	public void testCouponRetrieve() throws StripeException {
@@ -2022,10 +2022,10 @@ public class StripeTest {
 		chargeParams.put("amount", 100);
 		chargeParams.put("currency", "usd");
 		Map<String, Object> cardMap = new HashMap<String, Object>();
-        cardMap.put("number", "4242424242424242");
-        cardMap.put("exp_month", 12);
-        cardMap.put("exp_year", 2020);
-        chargeParams.put("card", cardMap);
+		cardMap.put("number", "4242424242424242");
+		cardMap.put("exp_month", 12);
+		cardMap.put("exp_year", 2020);
+		chargeParams.put("card", cardMap);
 		Charge charge = Charge.create(chargeParams);
 
 		assertTrue(charge.getSource() instanceof Card);
