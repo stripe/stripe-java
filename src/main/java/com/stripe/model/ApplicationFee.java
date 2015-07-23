@@ -18,6 +18,7 @@ public class ApplicationFee extends APIResource {
 	Boolean livemode;
 	Boolean refunded;
 	Integer amountRefunded;
+	String account;
 	String user;
 	String application;
 	String charge;
@@ -78,6 +79,14 @@ public class ApplicationFee extends APIResource {
 
 	public void setAmountRefunded(Integer amountRefunded) {
 		this.amountRefunded = amountRefunded;
+	}
+
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
 	}
 
 	public String getUser() {

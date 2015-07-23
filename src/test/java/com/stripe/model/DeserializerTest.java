@@ -116,4 +116,12 @@ public class DeserializerTest extends BaseStripeTest {
 		assertEquals("fr_104Buu4hAU1NpT8JMBAc564Q", refunds.get(0).getId());
 		assertEquals("fee_4UNP26L2Vuc42P", refunds.get(0).getFee());
 	}
+
+	@Test
+	public void deserializeAppFee() throws IOException {
+		String json = resource("appfee_refund_list.json");
+		ApplicationFee fee = gson.fromJson(json, ApplicationFee.class);
+
+		assertEquals("acct_104AVU4zxjIswmc2", fee.getAccount());
+	}
 }
