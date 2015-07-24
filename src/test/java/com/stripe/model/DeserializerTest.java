@@ -70,7 +70,7 @@ public class DeserializerTest extends BaseStripeTest {
 
 	@Test
 	public void deserializeRefundList() throws IOException {
-		String json = resource("charge_refund_list.json");
+		String json = resource("charge_with_refund_array.json");
 		Charge ch = gson.fromJson(json, Charge.class);
 
 		List<Refund> refunds = ch.refunds.getData();
@@ -82,7 +82,7 @@ public class DeserializerTest extends BaseStripeTest {
 
 	@Test
 	public void deserializeRefundSublist() throws IOException {
-		String json = resource("charge_refund_sublist.json");
+		String json = resource("charge_with_refund_sublist.json");
 		Charge ch = gson.fromJson(json, Charge.class);
 
 		List<Refund> refunds = ch.refunds.getData();
@@ -94,7 +94,7 @@ public class DeserializerTest extends BaseStripeTest {
 
 	@Test
 	public void deserializeAppFeeRefundList() throws IOException {
-		String json = resource("appfee_refund_list.json");
+		String json = resource("appfee_with_refund_array.json");
 		ApplicationFee fee = gson.fromJson(json, ApplicationFee.class);
 
 		List<FeeRefund> refunds = fee.refunds.getData();
@@ -106,7 +106,7 @@ public class DeserializerTest extends BaseStripeTest {
 
 	@Test
 	public void deserializeAppFee() throws IOException {
-		String json = resource("appfee_refund_list.json");
+		String json = resource("appfee_with_refund_array.json");
 		ApplicationFee fee = gson.fromJson(json, ApplicationFee.class);
 
 		assertEquals("acct_104AVU4zxjIswmc2", fee.getAccount());
@@ -114,7 +114,7 @@ public class DeserializerTest extends BaseStripeTest {
 
 	@Test
 	public void deserializeAppFeeRefundSublist() throws IOException {
-		String json = resource("appfee_refund_sublist.json");
+		String json = resource("appfee_with_refund_sublist.json");
 		ApplicationFee fee = gson.fromJson(json, ApplicationFee.class);
 
 		List<FeeRefund> refunds = fee.refunds.getData();
