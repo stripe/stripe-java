@@ -105,6 +105,14 @@ public class DeserializerTest extends BaseStripeTest {
 	}
 
 	@Test
+	public void deserializeAppFee() throws IOException {
+		String json = resource("appfee_refund_list.json");
+		ApplicationFee fee = gson.fromJson(json, ApplicationFee.class);
+
+		assertEquals("acct_104AVU4zxjIswmc2", fee.getAccount());
+	}
+
+	@Test
 	public void deserializeAppFeeRefundSublist() throws IOException {
 		String json = resource("appfee_refund_sublist.json");
 		ApplicationFee fee = gson.fromJson(json, ApplicationFee.class);
