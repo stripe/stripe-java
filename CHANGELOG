@@ -1,5 +1,9 @@
 === 1.32.1 2015-07-24
 
+* DESCRIBE CHANGES HERE (try to use the same style, tense, etc. as the other entries)
+
+=== 1.32.1 2015-07-24
+
 * Added `account` to `ApplicationFee`.
 
 === 1.32.0 2015-07-06
