@@ -518,9 +518,9 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 				LiveStripeResponseGetter.ErrorContainer.class).error;
 		switch (rCode) {
 		case 400:
-			throw new InvalidRequestException(error.message, requestId, error.param, null);
+			throw new InvalidRequestException(error.message, error.param, requestId, null);
 		case 404:
-			throw new InvalidRequestException(error.message, requestId, error.param, null);
+			throw new InvalidRequestException(error.message, error.param, requestId, null);
 		case 401:
 			throw new AuthenticationException(error.message, requestId);
 		case 402:
