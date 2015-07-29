@@ -202,6 +202,18 @@ public class Account extends APIResource implements MetadataStore<Account> {
 		return request(RequestMethod.POST, instanceURL(Account.class, this.id), params, Account.class, options);
 	}
 
+	public DeletedAccount delete(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return delete(params, (RequestOptions) null);
+	}
+
+	public DeletedAccount delete(Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.DELETE, instanceURL(Account.class, this.id), params, DeletedAccount.class, options);
+	}
+
 	public static class Verification extends StripeObject {
 		List<String> fieldsNeeded;
 		Long dueBy;
