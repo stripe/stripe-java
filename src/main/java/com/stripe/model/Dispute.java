@@ -1,9 +1,18 @@
 package com.stripe.model;
 
+import com.stripe.exception.APIConnectionException;
+import com.stripe.exception.APIException;
+import com.stripe.exception.AuthenticationException;
+import com.stripe.exception.CardException;
+import com.stripe.exception.InvalidRequestException;
+import com.stripe.net.APIResource;
+import com.stripe.net.RequestOptions;
+
 import java.util.List;
 import java.util.Map;
 
-public class Dispute extends StripeObject {
+public class Dispute extends APIResource {
+	String id;
 	Boolean livemode;
 	Integer amount;
 	String charge;
@@ -27,6 +36,14 @@ public class Dispute extends StripeObject {
 
 	Boolean isChargeRefundable;
 	Map<String, String> metadata;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public Integer getAmount() {
 		return amount;
@@ -120,5 +137,55 @@ public class Dispute extends StripeObject {
 
 	public void setEvidenceDetails(EvidenceDetails evidenceDetails) {
 		this.evidenceDetails = evidenceDetails;
+	}
+
+	public static Dispute retrieve(String id) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return retrieve(id, (RequestOptions) null);
+	}
+
+	public static Dispute retrieve(String id, RequestOptions options) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return request(RequestMethod.GET, instanceURL(Dispute.class, id), null, Dispute.class, options);
+	}
+
+	public static DisputeCollection all(Map<String, Object> params) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return all(params, (RequestOptions) null);
+	}
+
+	public static DisputeCollection all(Map<String, Object> params, RequestOptions options) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return request(RequestMethod.GET, classURL(Dispute.class), params, DisputeCollection.class, options);
+	}
+
+	public Dispute update(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params, (RequestOptions) null);
+	}
+
+	public Dispute update(Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.POST, instanceURL(Dispute.class, this.getId()),
+				params, Dispute.class, options);
+	}
+
+	public Dispute close()
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return close((RequestOptions) null);
+	}
+
+	public Dispute close(RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.POST, String.format("%s/close", instanceURL(Dispute.class, this.getId())),
+				null, Dispute.class, options);
 	}
 }

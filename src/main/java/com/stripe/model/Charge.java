@@ -314,12 +314,14 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 		return this.capture(null, (RequestOptions) null);
 	}
 
+	@Deprecated
 	public Dispute updateDispute(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return this.updateDispute(params, (RequestOptions) null);
 	}
 
+	@Deprecated
 	public Dispute closeDispute() throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
@@ -442,6 +444,8 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 			APIConnectionException, CardException, APIException {
 		return updateDispute(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
+	@Deprecated
 	public Dispute updateDispute(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -454,6 +458,8 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 			APIConnectionException, CardException, APIException {
 		return closeDispute(RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
+	@Deprecated
 	public Dispute closeDispute(RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
