@@ -1,3 +1,8 @@
+=== 1.33.0 2015-08-03
+
+* Added `retrieve`, `all`, `update` and `close` methods to `Dispute`
+* Added `delete` method to managed `Account`s
+
 === 1.32.1 2015-07-24
 
 * Added `account` to `ApplicationFee`.
