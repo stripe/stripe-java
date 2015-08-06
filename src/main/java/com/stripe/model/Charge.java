@@ -65,6 +65,10 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 		return status;
 	}
 
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public Integer getAmount() {
 		return amount;
 	}
