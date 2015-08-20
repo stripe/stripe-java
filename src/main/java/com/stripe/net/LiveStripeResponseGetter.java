@@ -122,14 +122,12 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 		HttpURLConnection conn;
 		if (Stripe.getConnectionProxy() != null) {
 			conn = (HttpURLConnection) stripeURL.openConnection(Stripe.getConnectionProxy());
-			if (Stripe.getProxyCredential() != null) {
-				Authenticator.setDefault(new Authenticator() {
-					@Override
-					protected PasswordAuthentication getPasswordAuthentication() {
-						return Stripe.getProxyCredential();
-					}
-				});
-			}
+			Authenticator.setDefault(new Authenticator() {
+				@Override
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return Stripe.getProxyCredential();
+				}
+			});
 		} else {
 			conn = (HttpURLConnection) stripeURL.openConnection();
 		}
