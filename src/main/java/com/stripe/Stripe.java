@@ -33,9 +33,7 @@ public abstract class Stripe {
 	 * @param proxy proxy host and port setting
 	 */
 	public static void setConnectionProxy(final Proxy proxy) {
-		if (proxy != null) {
-			connectionProxy = new Proxy(proxy.type(), proxy.address());
-		}
+		connectionProxy = proxy == null ? null : new Proxy(proxy.type(), proxy.address());
 	}
 
 	public static Proxy getConnectionProxy() {
@@ -48,9 +46,8 @@ public abstract class Stripe {
 	 * @param auth proxy required userName and password
 	 */
 	public static void setProxyCredential(final PasswordAuthentication auth) {
-		if (auth != null) {
-			proxyCredential = new PasswordAuthentication(auth.getUserName(), auth.getPassword());
-		}
+		proxyCredential = auth == null ? null
+				: new PasswordAuthentication(auth.getUserName(), auth.getPassword());
 	}
 
 	public static PasswordAuthentication getProxyCredential() {
