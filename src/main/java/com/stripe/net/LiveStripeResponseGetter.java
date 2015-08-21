@@ -15,11 +15,12 @@ import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.net.Authenticator;
+import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.PasswordAuthentication;
 import java.net.URL;
-import java.net.URLEncoder;
 import java.net.URLStreamHandler;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.LinkedHashMap;
@@ -118,7 +119,18 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 		} else {
 			stripeURL = new URL(url);
 		}
-		java.net.HttpURLConnection conn = (java.net.HttpURLConnection) stripeURL.openConnection();
+		HttpURLConnection conn;
+		if (Stripe.getConnectionProxy() != null) {
+			conn = (HttpURLConnection) stripeURL.openConnection(Stripe.getConnectionProxy());
+			Authenticator.setDefault(new Authenticator() {
+				@Override
+				protected PasswordAuthentication getPasswordAuthentication() {
+					return Stripe.getProxyCredential();
+				}
+			});
+		} else {
+			conn = (HttpURLConnection) stripeURL.openConnection();
+		}
 		conn.setConnectTimeout(30 * 1000);
 		conn.setReadTimeout(80 * 1000);
 		conn.setUseCaches(false);
@@ -140,7 +152,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 	}
 
 	private static java.net.HttpURLConnection createGetConnection(
-			String url, String query, RequestOptions options) throws IOException  {
+			String url, String query, RequestOptions options) throws IOException {
 		String getURL = formatURL(url, query);
 		java.net.HttpURLConnection conn = createStripeConnection(getURL, options);
 		conn.setRequestMethod("GET");
