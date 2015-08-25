@@ -2,7 +2,7 @@ package com.stripe.model;
 
 import java.util.Map;
 
-public class InvoiceLineItem extends StripeObject {
+public class InvoiceLineItem extends StripeObject implements HasId {
 	String id;
 	String type;
 	Boolean livemode;

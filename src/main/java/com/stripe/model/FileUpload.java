@@ -1,7 +1,6 @@
 package com.stripe.model;
 
 import com.stripe.Stripe;
-
 import com.stripe.exception.APIConnectionException;
 import com.stripe.exception.APIException;
 import com.stripe.exception.AuthenticationException;
@@ -12,7 +11,7 @@ import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
-public class FileUpload extends APIResource {
+public class FileUpload extends APIResource implements HasId {
 	String id;
 	Long created;
 	Long size;
