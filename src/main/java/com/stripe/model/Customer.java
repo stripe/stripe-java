@@ -11,7 +11,7 @@ import com.stripe.net.RequestOptions;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Customer extends APIResource implements MetadataStore<Customer> {
+public class Customer extends APIResource implements MetadataStore<Customer>, HasId {
 	Long created;
 	String id;
 	Boolean livemode;

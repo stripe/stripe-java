@@ -11,7 +11,7 @@ import com.stripe.net.RequestOptions;
 import java.util.Collections;
 import java.util.Map;
 
-public class Charge extends APIResource implements MetadataStore<Charge> {
+public class Charge extends APIResource implements MetadataStore<Charge>, HasId {
 	Integer amount;
 	Long created;
 	String currency;

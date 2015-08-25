@@ -11,7 +11,7 @@ import com.stripe.net.RequestOptions;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Recipient extends APIResource implements MetadataStore<Recipient> {
+public class Recipient extends APIResource implements MetadataStore<Recipient>, HasId {
 	Long created;
 	String id;
 	String type;

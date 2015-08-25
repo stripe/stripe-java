@@ -10,7 +10,7 @@ import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
-public class Coupon extends APIResource implements MetadataStore<Coupon> {
+public class Coupon extends APIResource implements MetadataStore<Coupon>, HasId {
 	Integer percentOff;
 	Integer amountOff;
 	String currency;
