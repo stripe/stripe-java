@@ -45,7 +45,7 @@ public class StripeCollectionIterator<T extends HasId> extends APIResource imple
 			this.lastId = 
 				next.getId();
 			
-			return currentDataIterator.next();
+			return next;
 			
 		} else if (currentCollection.getHasMore()) {
 			try {
