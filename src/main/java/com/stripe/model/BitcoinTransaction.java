@@ -12,7 +12,7 @@ import com.stripe.net.RequestOptions;
 import java.util.Collections;
 import java.util.Map;
 
-public class BitcoinTransaction extends APIResource {
+public class BitcoinTransaction extends APIResource implements HasId {
     String id;
     Long created;
     String currency;

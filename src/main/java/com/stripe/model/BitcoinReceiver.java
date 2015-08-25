@@ -12,7 +12,7 @@ import com.stripe.net.RequestOptions;
 import java.util.Collections;
 import java.util.Map;
 
-public class BitcoinReceiver extends ExternalAccount {
+public class BitcoinReceiver extends ExternalAccount implements HasId {
     String status;
     Long created;
     String currency;
