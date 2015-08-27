@@ -18,6 +18,7 @@ public class Token extends APIResource {
 	Boolean livemode;
 	Boolean used;
 	Card card;
+	BankAccount bankAccount;
 
 	public Integer getAmount() {
 		return amount;
@@ -73,6 +74,14 @@ public class Token extends APIResource {
 
 	public void setCard(Card card) {
 		this.card = card;
+	}
+
+	public BankAccount getBankAccount() {
+	  return bankAccount;
+	}
+
+	public void setBankAccount(BankAccount bankAccount) {
+	  this.bankAccount = bankAccount;
 	}
 
 	public static Token create(Map<String, Object> params)
