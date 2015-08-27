@@ -41,16 +41,21 @@ import com.stripe.model.Invoice;
 import com.stripe.model.InvoiceItem;
 import com.stripe.model.InvoiceLineItemCollection;
 import com.stripe.model.MetadataStore;
+import com.stripe.model.Order;
 import com.stripe.model.Plan;
+import com.stripe.model.Product;
 import com.stripe.model.Recipient;
 import com.stripe.model.Refund;
+import com.stripe.model.SKU;
 import com.stripe.model.ShippingDetails;
 import com.stripe.model.Subscription;
 import com.stripe.model.Token;
 import com.stripe.model.Transfer;
 import com.stripe.model.TransferReversalCollection;
 import com.stripe.net.RequestOptions;
+
 import junit.framework.Assert;
+
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
@@ -73,6 +78,7 @@ import static org.junit.Assert.fail;
 
 public class StripeTest {
 	static Map<String, Object> defaultCardParams = new HashMap<String, Object>();
+	static Map<String, Object> defaultSourceParams = new HashMap<String, Object>();
 	static Map<String, Object> defaultDebitCardParams = new HashMap<String, Object>();
 	static Map<String, Object> defaultChargeParams = new HashMap<String, Object>();
 	static Map<String, Object> defaultCustomerParams = new HashMap<String, Object>();
@@ -194,6 +200,9 @@ public class StripeTest {
 		defaultCardParams.put("address_zip", "94105");
 		defaultCardParams.put("address_state", "CA");
 		defaultCardParams.put("address_country", "USA");
+
+		defaultSourceParams = new HashMap<String, Object>(defaultCardParams);
+		defaultSourceParams.put("object", "card");
 
 		defaultDebitCardParams.put("number", "4000056655665556");
 		defaultDebitCardParams.put("exp_month", 12);
@@ -833,9 +842,7 @@ public class StripeTest {
 	@Test
 	public void testCustomerCreateWithSource() throws StripeException {
 		HashMap<String, Object> customerCreationParams = new HashMap<String, Object>();
-		HashMap<String, Object> cardParams = new HashMap<String, Object>(defaultCardParams);
-		cardParams.put("object", "card");
-		customerCreationParams.put("source", cardParams);
+		customerCreationParams.put("source", defaultSourceParams);
 		Customer customer = Customer.create(customerCreationParams);
 		assertNotNull(customer);
 		assertNotNull(customer.getId());
@@ -850,10 +857,8 @@ public class StripeTest {
 	public void testCustomerCreateSourceWithCardHash() throws StripeException {
 		Customer customer = Customer.create(new HashMap<String, Object>());
 		ExternalAccountCollection customerSources = customer.getSources();
-		HashMap<String, Object> cardParams = new HashMap<String, Object>(defaultCardParams);
-		cardParams.put("object", "card");
 		HashMap<String, Object> createParams = new HashMap<String, Object>();
-		createParams.put("source", cardParams);
+		createParams.put("source", defaultSourceParams);
 		ExternalAccount paymentSource = customerSources.create(createParams);
 		assertNotNull(paymentSource);
 		assertNotNull(paymentSource.getId());
@@ -2162,5 +2167,99 @@ public class StripeTest {
 
 		ExternalAccountCollection sources = cus.getSources().all(new HashMap<String, Object>());
 		assertEquals(0, sources.getData().size());
+	}
+
+	@Test
+	public void testProductCreateReadUpdate() throws StripeException {
+		Stripe.apiKey = "sk_test_JieJALRz7rPz7boV17oMma7a";
+
+		Map<String, Object> createParams = new HashMap<String, Object>();
+		String id = "my_first_product_" + UUID.randomUUID();
+		createParams.put("id", id);
+		createParams.put("name", "Watermelon");
+		Product created = Product.create(createParams);
+		assertEquals(id, created.getId());
+		assertEquals("Watermelon", created.getName());
+
+		Product retrieved = Product.retrieve(id);
+		assertEquals("Watermelon", retrieved.getName());
+
+		Product updated = retrieved.update(ImmutableMap.<String,Object>of("name", "Cantelope"));
+		assertEquals("Cantelope", updated.getName());
+	}
+
+	@Test
+	public void testSKUCreateReadUpdate() throws StripeException {
+		Stripe.apiKey = "sk_test_JieJALRz7rPz7boV17oMma7a";
+
+		Map<String, Object> productCreateParams = new HashMap<String, Object>();
+		String productId = "my_first_product_" + UUID.randomUUID();
+		productCreateParams.put("id", productId);
+		productCreateParams.put("name", "Watermelon");
+		productCreateParams.put("attributes[]", "size");
+		Product.create(productCreateParams);
+
+		Map<String, Object> skuCreateParams = new HashMap<String, Object>();
+		String skuId = "my_first_sku_" + UUID.randomUUID();
+		skuCreateParams.put("id", skuId);
+		skuCreateParams.put("product", productId);
+		skuCreateParams.put("attributes", ImmutableMap.of("size", "large"));
+		skuCreateParams.put("price", 100);
+		skuCreateParams.put("currency", "usd");
+		skuCreateParams.put("inventory", ImmutableMap.of("type", "infinite"));
+		SKU created = SKU.create(skuCreateParams);
+		assertEquals(skuId, created.getId());
+		assertEquals(productId, created.getProduct());
+		assertEquals("large", created.getAttributes().get("size"));
+		assertEquals("infinite", created.getInventory().getType());
+
+		SKU retrieved = SKU.retrieve(skuId);
+		assertEquals("large", retrieved.getAttributes().get("size"));
+
+		SKU updated = retrieved.update(ImmutableMap.<String,Object>of("price", 200));
+		assertEquals((Integer)200, updated.getPrice());
+	}
+
+	@Test
+	public void testOrderCreateReadUpdatePay() throws StripeException {
+		Stripe.apiKey = "sk_test_JieJALRz7rPz7boV17oMma7a";
+
+		Map<String, Object> productCreateParams = new HashMap<String, Object>();
+		String productId = "my_first_product_" + UUID.randomUUID();
+		productCreateParams.put("id", productId);
+		productCreateParams.put("name", "Watermelon");
+		productCreateParams.put("attributes[]", "size");
+		productCreateParams.put("shippable", false);
+		Product.create(productCreateParams);
+
+		Map<String, Object> skuCreateParams = new HashMap<String, Object>();
+		String skuId = "my_first_sku_" + UUID.randomUUID();
+		skuCreateParams.put("id", skuId);
+		skuCreateParams.put("product", productId);
+		skuCreateParams.put("attributes", ImmutableMap.of("size", "large"));
+		skuCreateParams.put("price", 100);
+		skuCreateParams.put("currency", "usd");
+		skuCreateParams.put("inventory", ImmutableMap.of("type", "infinite"));
+		SKU.create(skuCreateParams);
+
+		Map<String, Object> orderCreateParams = new HashMap<String, Object>();
+		orderCreateParams.put("items[]", ImmutableMap.<String, Object>of("type", "sku", "parent", skuId));
+		orderCreateParams.put("currency", "usd");
+		orderCreateParams.put("email", "foo@bar.com");
+		Order created = Order.create(orderCreateParams);
+		String orderId = created.getId();
+		assertEquals("sku", created.getItems().get(0).getType());
+		assertEquals(skuId, created.getItems().get(0).getParent());
+		assertEquals("created", created.getStatus());
+
+		Order retrieved = Order.retrieve(orderId);
+		assertEquals("sku", retrieved.getItems().get(0).getType());
+		assertEquals(skuId, retrieved.getItems().get(0).getParent());
+
+		Order updated = retrieved.update(ImmutableMap.<String,Object>of("metadata", ImmutableMap.of("foo", "bar")));
+		assertEquals("bar", updated.getMetadata().get("foo"));
+
+		Order paid = updated.pay(ImmutableMap.<String,Object>of("source", defaultSourceParams));
+		assertEquals("paid", paid.getStatus());
 	}
 }
