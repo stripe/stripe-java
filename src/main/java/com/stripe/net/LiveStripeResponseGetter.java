@@ -7,6 +7,8 @@ import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 
+import javax.net.ssl.HttpsURLConnection;
+import javax.net.ssl.SSLSocketFactory;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
@@ -37,6 +39,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 	 * environments.
 	 */
 	private static final String CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME = "com.stripe.net.customURLStreamHandler";
+
+	private static final SSLSocketFactory socketFactory = new StripeSSLSocketFactory(HttpsURLConnection.getDefaultSSLSocketFactory());
 
 	public <T> T request(
 			APIResource.RequestMethod method,
@@ -136,6 +140,9 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 		conn.setUseCaches(false);
 		for (Map.Entry<String, String> header : getHeaders(options).entrySet()) {
 			conn.setRequestProperty(header.getKey(), header.getValue());
+		}
+		if (conn instanceof HttpsURLConnection) {
+			((HttpsURLConnection) conn).setSSLSocketFactory(socketFactory);
 		}
 
 		return conn;
