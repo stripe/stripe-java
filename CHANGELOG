@@ -1,3 +1,7 @@
+=== 1.35.0 2015-08-31
+
+* Add `bankAccount` to `Token`
+
 === 1.34.0 2015-08-17
 
 * Added `retrieve`, `all`, `update`, `create` methods to `Refund`
