@@ -40,7 +40,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 	 */
 	private static final String CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME = "com.stripe.net.customURLStreamHandler";
 
-	private static final SSLSocketFactory socketFactory = new StripeSSLSocketFactory(HttpsURLConnection.getDefaultSSLSocketFactory());
+	private static final SSLSocketFactory socketFactory = new StripeSSLSocketFactory();
 
 	public <T> T request(
 			APIResource.RequestMethod method,
