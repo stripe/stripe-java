@@ -41,6 +41,7 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 	String statementDescription;
 	ShippingDetails shipping;
 	ExternalAccount source;
+	String transfer;
 
 	public static final String FRAUD_DETAILS = "fraud_details";
 	FraudDetails fraudDetails;
@@ -280,6 +281,14 @@ public class Charge extends APIResource implements MetadataStore<Charge> {
 
 	public void setSource(ExternalAccount source) {
 		this.source = source;
+	}
+	
+	public String getTransfer() {
+		return transfer;
+	}
+	
+	public void setTransfer(String transfer) {
+		this.transfer = transfer;
 	}
 
 	public static Charge create(Map<String, Object> params)
