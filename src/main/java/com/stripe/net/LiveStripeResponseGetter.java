@@ -4,6 +4,7 @@ import com.stripe.Stripe;
 import com.stripe.exception.APIConnectionException;
 import com.stripe.exception.APIException;
 import com.stripe.exception.AuthenticationException;
+import com.stripe.exception.RateLimitException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 
@@ -537,6 +538,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 			throw new AuthenticationException(error.message, requestId);
 		case 402:
 			throw new CardException(error.message, requestId, error.code, error.param, error.decline_code, error.charge, null);
+		case 429:
+			throw new RateLimitException(error.message, error.param, requestId, null);
 		default:
 			throw new APIException(error.message, requestId, null);
 		}
