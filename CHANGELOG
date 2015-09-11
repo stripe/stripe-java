@@ -1,3 +1,7 @@
+=== 1.36.0 2015-09-11
+
+* Add support for new rate limiting responses.
+
 === 1.35.0 2015-08-31
 
 * Add `bankAccount` to `Token`
