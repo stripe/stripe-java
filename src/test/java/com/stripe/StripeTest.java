@@ -1320,7 +1320,7 @@ public class StripeTest {
 	@Test
 	public void testTransferCreate() throws StripeException {
 		Transfer createdTransfer = Transfer.create(getTransferParams());
-		assertEquals("pending", createdTransfer.getStatus());
+		assertEquals("paid", createdTransfer.getStatus());
 	}
 
 	@Test
