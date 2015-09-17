@@ -27,6 +27,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer> {
 	@Deprecated
 	String recipient;
 	String destination;
+	String destinationPayment;
 	BankAccount account;
 	String balanceTransaction;
 	Map<String, String> metadata;
@@ -126,6 +127,14 @@ public class Transfer extends APIResource implements MetadataStore<Transfer> {
 
 	public void setDestination(String destination) {
 		this.destination = destination;
+	}
+
+	public String getDestinationPayment() {
+		return destinationPayment;
+	}
+
+	public void setDestinationPayment(String destinationPayment) {
+		this.destinationPayment = destinationPayment;
 	}
 
 	public BankAccount getAccount() {
