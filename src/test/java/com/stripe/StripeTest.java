@@ -477,8 +477,14 @@ public class StripeTest {
 	public void testChargeList() throws StripeException {
 		Map<String, Object> listParams = new HashMap<String, Object>();
 		listParams.put("count", 1);
-		List<Charge> charges = Charge.all(listParams).getData();
+		final ChargeCollection all = Charge.all(listParams);
+		List<Charge> charges = all.getData();
 		assertEquals(charges.size(), 1);
+		assertTrue(all.iterator().hasNext());
+		// ensures for-each iteration over StripeCollection is possible
+		for(Object c : all) {
+			assertEquals(c, charges.get(0));
+		}
 	}
 
 	@Test(expected = CardException.class)
