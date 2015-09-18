@@ -31,6 +31,7 @@ public class Card extends ExternalAccount implements MetadataStore<Card> {
 	String fingerprint;
 	String brand;
 	String funding;
+	String currency;
 	Map<String, String> metadata;
 
     public Card update(Map<String, Object> params)
@@ -216,4 +217,6 @@ public class Card extends ExternalAccount implements MetadataStore<Card> {
 	public void setMetadata(Map<String, String> metadata) {
 		this.metadata = metadata;
 	}
+	public String getCurrency() { return currency; }
+	public void setCurrency(String currency) { this.currency = currency; }
 }
