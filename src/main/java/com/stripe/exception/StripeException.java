@@ -3,14 +3,17 @@ package com.stripe.exception;
 public abstract class StripeException extends Exception {
 
 	private String requestId;
+	private Integer statusCode;
 
-	public StripeException(String message, String requestId) {
+	public StripeException(String message, String requestId, Integer statusCode) {
 		super(message, null);
 		this.requestId = requestId;
+		this.statusCode = statusCode;
 	}
 
-	public StripeException(String message, String requestId, Throwable e) {
+	public StripeException(String message, String requestId, Integer statusCode, Throwable e) {
 		super(message, e);
+		this.statusCode = statusCode;
 		this.requestId = requestId;
 	}
 
@@ -18,7 +21,11 @@ public abstract class StripeException extends Exception {
 
 	public String getRequestId() {
 		return requestId;
-    }
+	}
+
+	public Integer getStatusCode() {
+		return statusCode;
+	}
 
 	public String toString() {
 		String reqIdStr = "";

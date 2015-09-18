@@ -372,6 +372,7 @@ public class StripeTest {
 			assertFalse(requestId == null);
 			assertFalse(requestId.equals(""));
 			assertTrue(e.toString().contains(requestId));
+			assertTrue(404 == e.getStatusCode());
 		}
 	}
 
