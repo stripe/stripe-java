@@ -34,69 +34,65 @@ public class Card extends ExternalAccount implements MetadataStore<Card> {
 	String currency;
 	Map<String, String> metadata;
 
-    public Card update(Map<String, Object> params)
-            throws AuthenticationException, InvalidRequestException,
-            APIConnectionException, CardException, APIException {
-        return update(params, (RequestOptions) null);
-    }
+	public Card update(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params, (RequestOptions) null);
+	}
 
-    @Deprecated
-    public Card update(Map<String, Object> params, String apiKey)
-            throws AuthenticationException, InvalidRequestException,
-            APIConnectionException, CardException, APIException {
-        return update(params, RequestOptions.builder().setApiKey(apiKey).build());
-    }
+	@Deprecated
+	public Card update(Map<String, Object> params, String apiKey)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params, RequestOptions.builder().setApiKey(apiKey).build());
+	}
 
-    public Card update(Map<String, Object> params, RequestOptions options)
-            throws AuthenticationException, InvalidRequestException,
-            APIConnectionException, CardException, APIException {
-        return request(RequestMethod.POST, this.getInstanceURL(), params, Card.class, options);
-    }
+	public Card update(Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.POST, this.getInstanceURL(), params, Card.class, options);
+	}
 
-    public DeletedCard delete()
-            throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
-        return delete((RequestOptions) null);
-    }
+	public DeletedCard delete()
+			throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
+		return delete((RequestOptions) null);
+	}
 
-    @Deprecated
-    public DeletedCard delete(String apiKey)
-            throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
-        return delete(RequestOptions.builder().setApiKey(apiKey).build());
-    }
+	@Deprecated
+	public DeletedCard delete(String apiKey)
+			throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
+		return delete(RequestOptions.builder().setApiKey(apiKey).build());
+	}
 
 	public DeletedCard delete(RequestOptions options)
 			throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
 		return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedCard.class, options);
 	}
 
-    @Override
-    public String getInstanceURL() {
-        String result = super.getInstanceURL();
-        if (result != null) {
-            return result;
-        } else if (this.getRecipient() != null) {
-            return String.format("%s/%s/cards/%s", classURL(Recipient.class), this.getRecipient(), this.getId());
-        } else {
-            return null;
-        }
-    }
+	@Override
+	public String getInstanceURL() {
+		String result = super.getInstanceURL();
+		if (result != null) {
+			return result;
+		} else if (this.getRecipient() != null) {
+			return String.format("%s/%s/cards/%s", classURL(Recipient.class), this.getRecipient(), this.getId());
+		} else {
+			return null;
+		}
+	}
 
-    public String getStatus() {
-        return status;
-    }
-
-    public void setStatus(String status) {
-        this.status = status;
-    }
-
+	public String getStatus() {
+		return status;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public String getRecipient() {
 		return recipient;
 	}
-
 	public void setRecipient(String recipient) {
 		this.recipient = recipient;
 	}
-
 	public Integer getExpMonth() {
 		return expMonth;
 	}
@@ -217,6 +213,10 @@ public class Card extends ExternalAccount implements MetadataStore<Card> {
 	public void setMetadata(Map<String, String> metadata) {
 		this.metadata = metadata;
 	}
-	public String getCurrency() { return currency; }
-	public void setCurrency(String currency) { this.currency = currency; }
+	public String getCurrency() {
+		return currency;
+	}
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
 }
