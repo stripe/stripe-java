@@ -27,9 +27,12 @@ public class Transfer extends APIResource implements MetadataStore<Transfer> {
 	@Deprecated
 	String recipient;
 	String destination;
+	String destinationPayment;
 	BankAccount account;
 	String balanceTransaction;
 	Map<String, String> metadata;
+	String failureCode;
+	String failureMessage;
   TransferReversalCollection reversals;
 
 	public String getId() {
@@ -128,6 +131,14 @@ public class Transfer extends APIResource implements MetadataStore<Transfer> {
 		this.destination = destination;
 	}
 
+	public String getDestinationPayment() {
+		return destinationPayment;
+	}
+
+	public void setDestinationPayment(String destinationPayment) {
+		this.destinationPayment = destinationPayment;
+	}
+
 	public BankAccount getAccount() {
 		return account;
 	}
@@ -154,6 +165,22 @@ public class Transfer extends APIResource implements MetadataStore<Transfer> {
 
 	public void setBalanceTransaction(String balanceTransaction) {
 		this.balanceTransaction = balanceTransaction;
+	}
+
+	public String getFailureCode() {
+		return failureCode;
+	}
+
+	public void setFailureCode(String failureCode) {
+		this.failureCode = failureCode;
+	}
+
+	public String getFailureMessage() {
+		return failureMessage;
+	}
+
+	public void setFailureMessage(String failureMessage) {
+		this.failureMessage = failureMessage;
 	}
 
 	public Map<String, String> getMetadata() {
