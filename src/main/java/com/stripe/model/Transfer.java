@@ -33,7 +33,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer> {
 	Map<String, String> metadata;
 	String failureCode;
 	String failureMessage;
-  TransferReversalCollection reversals;
+	TransferReversalCollection reversals;
 
 	public String getId() {
 		return id;

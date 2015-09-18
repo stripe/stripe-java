@@ -18,26 +18,27 @@ public class BankAccount extends ExternalAccount {
 	String status;
 	String fingerprint;
 	Boolean defaultForCurrency;
+	String routingNumber;
 
-    public BankAccount update(Map<String, Object> params)
-            throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
-        return update(params, (RequestOptions) null);
-    }
+	public BankAccount update(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
+		return update(params, (RequestOptions) null);
+	}
 
-    public BankAccount update(Map<String, Object> params, RequestOptions options)
-            throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
-        return request(RequestMethod.POST, this.getInstanceURL(), params, BankAccount.class, options);
-    }
+	public BankAccount update(Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
+		return request(RequestMethod.POST, this.getInstanceURL(), params, BankAccount.class, options);
+	}
 
-    public DeletedBankAccount delete()
-            throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
-        return delete((RequestOptions) null);
-    }
+	public DeletedBankAccount delete()
+			throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
+		return delete((RequestOptions) null);
+	}
 
-    public DeletedBankAccount delete(RequestOptions options)
-            throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
-        return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedBankAccount.class, options);
-    }
+	public DeletedBankAccount delete(RequestOptions options)
+			throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
+		return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedBankAccount.class, options);
+	}
 
 	public String getLast4() {
 		return last4;
@@ -101,5 +102,13 @@ public class BankAccount extends ExternalAccount {
 
 	public void setDefaultForCurrency(Boolean defaultForCurrency) {
 		this.defaultForCurrency = defaultForCurrency;
+	}
+
+	public String getRoutingNumber() {
+		return routingNumber;
+	}
+
+	public void setRoutingNumber(String routingNumber) {
+		this.routingNumber = routingNumber;
 	}
 }
