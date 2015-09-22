@@ -88,7 +88,7 @@ public abstract class APIResource extends StripeObject {
 			throw new InvalidRequestException("Unable to encode parameters to "
 					+ CHARSET
 					+ ". Please contact support@stripe.com for assistance.",
-					null, null, e);
+					null, null, 0, e);
 		}
 	}
 
