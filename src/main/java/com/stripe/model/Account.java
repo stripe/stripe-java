@@ -150,6 +150,18 @@ public class Account extends APIResource implements MetadataStore<Account> {
 		return request(RequestMethod.POST, classURL(Account.class), params, Account.class, options);
 	}
 
+	public static AccountCollection all(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return all(params, (RequestOptions) null);
+	}
+
+	public static AccountCollection all(Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, classURL(Account.class), params, AccountCollection.class, options);
+	}
+
 	public static Account retrieve()
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {

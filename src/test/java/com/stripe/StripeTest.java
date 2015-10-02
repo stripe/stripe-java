@@ -8,6 +8,7 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Account;
+import com.stripe.model.AccountCollection;
 import com.stripe.model.Address;
 import com.stripe.model.AlipayAccount;
 import com.stripe.model.ApplicationFee;
@@ -90,6 +91,7 @@ public class StripeTest {
 	static Map<String, Object> defaultRecipientParams = new HashMap<String, Object>();
 	static Map<String, Object> defaultBitcoinReceiverParams = new HashMap<String, Object>();
 	static Map<String, Object> defaultAlipayTokenParams = new HashMap<String, Object>();
+	static Map<String, Object> defaultManagedAccountParams = new HashMap<String, Object>();
 	static RequestOptions cardSupportedRequestOptions;
 
 	static String getUniqueEmail() {
@@ -255,6 +257,10 @@ public class StripeTest {
 		alipayParams.put("alipay_username", "stripe+alipay");
 		defaultAlipayTokenParams.put("alipay_account", alipayParams);
 		defaultAlipayTokenParams.put("email", "alipay+account@stripe.com");
+
+		defaultManagedAccountParams.put("managed", true);
+		defaultManagedAccountParams.put("country", "US");
+		defaultManagedAccountParams.put("default_currency", "usd");
 	}
 
 	static Map<String, Object> getDefaultAccountParams() {
@@ -2262,5 +2268,19 @@ public class StripeTest {
 
 		Order paid = updated.pay(ImmutableMap.<String,Object>of("source", defaultSourceParams));
 		assertEquals("paid", paid.getStatus());
+	}
+
+	@Test(expected = InvalidRequestException.class)
+	public void getAllExternalAccounts() throws StripeException {
+		Stripe.apiKey = "sk_test_JieJALRz7rPz7boV17oMma7a";
+
+		Account account = Account.create(defaultManagedAccountParams);
+		Assert.assertNotNull(account);
+
+		Map<String, Object> accountParams = new HashMap<String, Object>();
+		accountParams.put("limit", 3);
+		AccountCollection accountCollection = Account.all(accountParams);
+
+		Assert.assertNotNull(accountCollection);
 	}
 }
