@@ -1,10 +1,10 @@
 package com.stripe.model;
 
 public class Money {
-	Integer amount;
+	Long amount;
 	String currency;
 
-	public Integer getAmount() {
+	public Long getAmount() {
 		return amount;
 	}
 
