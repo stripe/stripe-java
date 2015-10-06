@@ -15,6 +15,8 @@ public class Token extends APIResource {
 	Long created;
 	String currency;
 	String id;
+	String email;
+	String clientIp;
 	Boolean livemode;
 	Boolean used;
 	Card card;
@@ -50,6 +52,22 @@ public class Token extends APIResource {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getClientIp() {
+		return clientIp;
+	}
+
+	public void setClientIp(String clientIp) {
+		this.clientIp = clientIp;
 	}
 
 	public Boolean getLivemode() {
