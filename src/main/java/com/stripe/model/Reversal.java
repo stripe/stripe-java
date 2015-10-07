@@ -74,7 +74,7 @@ public class Reversal extends APIResource implements MetadataStore<Transfer> {
 	public String getTransfer() {
 		return transfer;
 	}
-	public void setTransfer(String tarnsfer) {
+	public void setTransfer(String transfer) {
 		this.transfer = transfer;
 	}
 	public Map<String, String> getMetadata() {
