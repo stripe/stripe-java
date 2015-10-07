@@ -1,6 +1,6 @@
 === 1.37.1 2015-10-07
 
-* DESCRIBE CHANGES HERE (try to use the same style, tense, etc. as the other entries) 
+* Bugfix `setTransfer` on `Reversal`
 
 === 1.37.0 2015-09-14
 
