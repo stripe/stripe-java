@@ -90,4 +90,5 @@ You must have Maven installed. To run the tests:
 
 You can run particular tests by passing `-D test=Class#method`. For example:
 
+    mvn test -D test=StripeTest
     mvn test -D test=StripeTest#testPlanCreate
