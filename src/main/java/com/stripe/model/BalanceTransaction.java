@@ -12,7 +12,7 @@ import com.stripe.net.RequestOptions;
 import java.util.List;
 import java.util.Map;
 
-public class BalanceTransaction extends APIResource {
+public class BalanceTransaction extends APIResource implements HasId {
 	String id;
 	String source;
 	Integer amount;

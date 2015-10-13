@@ -10,7 +10,7 @@ import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
-public class Reversal extends APIResource implements MetadataStore<Transfer> {
+public class Reversal extends APIResource implements MetadataStore<Transfer>, HasId {
 	Integer amount;
 	String currency;
 	Long created;

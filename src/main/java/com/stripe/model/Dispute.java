@@ -11,7 +11,7 @@ import com.stripe.net.RequestOptions;
 import java.util.List;
 import java.util.Map;
 
-public class Dispute extends APIResource {
+public class Dispute extends APIResource implements HasId {
 	String id;
 	Boolean livemode;
 	Integer amount;

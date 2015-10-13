@@ -10,7 +10,7 @@ import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
-public class Refund extends APIResource implements MetadataStore<Charge> {
+public class Refund extends APIResource implements MetadataStore<Charge>, HasId {
 	Integer amount;
 	String currency;
 	Long created;

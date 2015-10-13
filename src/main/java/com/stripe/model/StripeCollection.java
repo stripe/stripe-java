@@ -1,8 +1,12 @@
 package com.stripe.model;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
-public abstract class StripeCollection<T> extends StripeObject {
+import com.stripe.net.RequestOptions;
+
+public abstract class StripeCollection<T extends HasId> extends StripeObject implements StripeCollectionInterface<T>, Iterable<T> {
 	List<T> data;
 	Integer totalCount;
 	Boolean hasMore;
@@ -41,5 +45,9 @@ public abstract class StripeCollection<T> extends StripeObject {
 	/** 3/2014: Legacy (from before newstyle pagination API) */
 	public void setCount(Integer count) {
 		this.count = count;
+	}
+	
+	public Iterator<T> iterator() {
+		return new StripeCollectionIterator<T>(this);
 	}
 }

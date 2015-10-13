@@ -10,7 +10,7 @@ import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
-public class Event extends APIResource {
+public class Event extends APIResource implements HasId {
 	String id;
 	String type;
 	String userId;
