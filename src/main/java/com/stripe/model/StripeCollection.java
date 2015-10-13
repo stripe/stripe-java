@@ -4,8 +4,6 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-import com.stripe.net.RequestOptions;
-
 public abstract class StripeCollection<T extends HasId> extends StripeObject implements StripeCollectionInterface<T>, Iterable<T> {
 	List<T> data;
 	Integer totalCount;
