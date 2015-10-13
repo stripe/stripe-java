@@ -84,4 +84,10 @@ See [StripeTest.java](https://github.com/stripe/stripe-java/blob/master/src/test
 Testing
 =======
 
-You must have Maven installed. To run the tests, simply run `mvn test`. You can run particular tests by passing `-D test=Class#method` -- for example, `-D test=StripeTest#testPlanCreate`.
+You must have Maven installed. To run the tests:
+
+    mvn test
+
+You can run particular tests by passing `-D test=Class#method`. For example:
+
+    mvn test -D test=StripeTest#testPlanCreate
