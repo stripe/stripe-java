@@ -10,7 +10,7 @@ import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
-public class Token extends APIResource {
+public class Token extends APIResource implements HasId {
 	Integer amount;
 	Long created;
 	String currency;

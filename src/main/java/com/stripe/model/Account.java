@@ -11,7 +11,7 @@ import com.stripe.net.RequestOptions;
 import java.util.List;
 import java.util.Map;
 
-public class Account extends APIResource implements MetadataStore<Account> {
+public class Account extends APIResource implements HasId, MetadataStore<Account> {
 	String id;
 	Boolean chargesEnabled;
 	Boolean detailsSubmitted;

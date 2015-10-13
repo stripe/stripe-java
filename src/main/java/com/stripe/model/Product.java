@@ -11,7 +11,7 @@ import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
 
-public class Product extends APIResource implements MetadataStore<Product> {
+public class Product extends APIResource implements HasId, MetadataStore<Product> {
 	Long created;
 	Long updated;;
 	String id;

@@ -11,7 +11,7 @@ import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
 
 
-public class SKU extends APIResource implements MetadataStore<SKU> {
+public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
 	Long created;
 	Long updated;
 	String id;
