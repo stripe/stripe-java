@@ -68,25 +68,17 @@ public class LiveStripeResponseGetterTest {
 		assertEquals(encode("nested[]=A&nested[]=B&nested[]=C&a=b&c=d"), srg.createQuery(params));
 	}
 
-	// It's really arrays of hashes where things in
-	// application/x-www-urlencoded-form start to get *really* hairy, so let's
-	// have a special test to cover thsi type of case.
 	@Test
-	public void testCreateQueryWithComplexParams() throws StripeException, UnsupportedEncodingException {
-		List<String> deepNestedList = new LinkedList<String>();
-		deepNestedList.add("A");
-		deepNestedList.add("B");
-
+	public void testCreateQueryWithArrayOfHashes() throws StripeException, UnsupportedEncodingException {
 		Map<String, String> deepNestedMap1 = new LinkedHashMap<String, String>();
-		deepNestedMap1.put("C", "C-1");
-		deepNestedMap1.put("D", "D-1");
+		deepNestedMap1.put("A", "A-1");
+		deepNestedMap1.put("B", "B-1");
 
 		Map<String, String> deepNestedMap2 = new LinkedHashMap<String, String>();
-		deepNestedMap2.put("C", "C-2");
-		deepNestedMap2.put("D", "D-2");
+		deepNestedMap2.put("A", "A-2");
+		deepNestedMap2.put("B", "B-2");
 
 		List<Object> nested = new LinkedList<Object>();
-		nested.add(deepNestedList);
 		nested.add(deepNestedMap1);
 		nested.add(deepNestedMap2);
 
@@ -94,7 +86,7 @@ public class LiveStripeResponseGetterTest {
 		Map<String, Object> params = new LinkedHashMap<String, Object>();
 		params.put("nested", nested);
 
-		assertEquals(encode("nested[][]=A&nested[][]=B&nested[][C]=C-1&nested[][D]=D-1&nested[][C]=C-2&nested[][D]=D-2"), srg.createQuery(params));
+		assertEquals(encode("nested[][A]=A-1&nested[][B]=B-1&nested[][A]=A-2&nested[][B]=B-2"), srg.createQuery(params));
 	}
 
 	@Test
