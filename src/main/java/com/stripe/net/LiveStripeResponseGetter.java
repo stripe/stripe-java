@@ -35,15 +35,15 @@ import java.util.Scanner;
 public class LiveStripeResponseGetter implements StripeResponseGetter {
 	private static final String DNS_CACHE_TTL_PROPERTY_NAME = "networkaddress.cache.ttl";
 
-    private final static class Parameter {
-        public final String key;
-        public final String value;
+	private final static class Parameter {
+		public final String key;
+		public final String value;
 
-        public Parameter(String key, String value) {
-            this.key = key;
-            this.value = value;
-        }
-    }
+		public Parameter(String key, String value) {
+			this.key = key;
+			this.value = value;
+		}
+	}
 
 	/*
 	 * Set this property to override your environment's default
@@ -214,13 +214,13 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 			throws UnsupportedEncodingException, InvalidRequestException {
 		StringBuilder queryStringBuffer = new StringBuilder();
 		List<Parameter> flatParams = flattenParams(params);
-        Iterator<Parameter> it = flatParams.iterator();
+		Iterator<Parameter> it = flatParams.iterator();
 
-        while (it.hasNext()) {
+		while (it.hasNext()) {
 			if (queryStringBuffer.length() > 0) {
 				queryStringBuffer.append("&");
 			}
-            Parameter param = it.next();
+			Parameter param = it.next();
 			queryStringBuffer.append(urlEncodePair(param.key, param.value));
 		}
 
@@ -228,22 +228,22 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 	}
 
 	private static List<Parameter> flattenParams(Map<String, Object> params)
-            throws InvalidRequestException {
-        return flattenParamsMap(params, null);
-    }
+			throws InvalidRequestException {
+		return flattenParamsMap(params, null);
+	}
 
 	private static List<Parameter> flattenParamsList(List<Object> params, String keyPrefix)
 			throws InvalidRequestException {
 		List<Parameter> flatParams = new LinkedList<Parameter>();
-        Iterator<?> it = ((List<?>)params).iterator();
-        String newPrefix = String.format("%s[]", keyPrefix);
+		Iterator<?> it = ((List<?>)params).iterator();
+		String newPrefix = String.format("%s[]", keyPrefix);
 
-        while (it.hasNext()) {
-            flatParams.addAll(flattenParamsValue(it.next(), newPrefix));
-        }
+		while (it.hasNext()) {
+			flatParams.addAll(flattenParamsValue(it.next(), newPrefix));
+		}
 
-        return flatParams;
-    }
+		return flatParams;
+	}
 
 	private static List<Parameter> flattenParamsMap(Map<String, Object> params, String keyPrefix)
 			throws InvalidRequestException {
@@ -256,12 +256,12 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 			String key = entry.getKey();
 			Object value = entry.getValue();
 
-            String newPrefix = key;
-            if (keyPrefix != null) {
-                newPrefix = String.format("%s[%s]", keyPrefix, key);
-            }
+			String newPrefix = key;
+			if (keyPrefix != null) {
+				newPrefix = String.format("%s[%s]", keyPrefix, key);
+			}
 
-            flatParams.addAll(flattenParamsValue(value, newPrefix));
+			flatParams.addAll(flattenParamsValue(value, newPrefix));
 		}
 
 		return flatParams;
@@ -271,25 +271,25 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 			throws InvalidRequestException {
 		List<Parameter> flatParams = new LinkedList<Parameter>();
 
-        if (value instanceof Map<?, ?>) {
-            flatParams = flattenParamsMap((Map<String, Object>)value, keyPrefix);
-        } else if (value instanceof List<?>) {
-            flatParams = flattenParamsList((List<Object>)value, keyPrefix);
-        } else if ("".equals(value)) {
-                throw new InvalidRequestException("You cannot set '"+keyPrefix+"' to an empty string. "+
-                                    "We interpret empty strings as null in requests. "+
-                                    "You may set '"+keyPrefix+"' to null to delete the property.",
-                                    keyPrefix, null, 0, null);
-        } else if (value == null) {
-            flatParams = new LinkedList<Parameter>();
-            flatParams.add(new Parameter(keyPrefix, ""));
-        } else {
-            flatParams = new LinkedList<Parameter>();
-            flatParams.add(new Parameter(keyPrefix, value.toString()));
-        }
+		if (value instanceof Map<?, ?>) {
+			flatParams = flattenParamsMap((Map<String, Object>)value, keyPrefix);
+		} else if (value instanceof List<?>) {
+			flatParams = flattenParamsList((List<Object>)value, keyPrefix);
+		} else if ("".equals(value)) {
+				throw new InvalidRequestException("You cannot set '"+keyPrefix+"' to an empty string. "+
+									"We interpret empty strings as null in requests. "+
+									"You may set '"+keyPrefix+"' to null to delete the property.",
+									keyPrefix, null, 0, null);
+		} else if (value == null) {
+			flatParams = new LinkedList<Parameter>();
+			flatParams.add(new Parameter(keyPrefix, ""));
+		} else {
+			flatParams = new LinkedList<Parameter>();
+			flatParams.add(new Parameter(keyPrefix, value.toString()));
+		}
 
-        return flatParams;
-    }
+		return flatParams;
+	}
 
 	// represents Errors returned as JSON
 	private static class ErrorContainer {
