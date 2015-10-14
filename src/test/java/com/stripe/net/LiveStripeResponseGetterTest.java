@@ -96,5 +96,38 @@ public class LiveStripeResponseGetterTest {
 
 		assertEquals(encode("nested[][]=A&nested[][]=B&nested[][C]=C-1&nested[][D]=D-1&nested[][C]=C-2&nested[][D]=D-2"), srg.createQuery(params));
 	}
-}
 
+	@Test
+	public void testIncorrectAdditionalOwners() throws StripeException, UnsupportedEncodingException {
+		Map<String, String> ownerParams = new HashMap<String, String>();
+		ownerParams.put("first_name", "Stripe");
+
+		List<Object> additionalOwners = new LinkedList<Object>();
+		additionalOwners.add(ownerParams);
+
+		Map<String, Object> legalEntityParams = new HashMap<String, Object>();
+		legalEntityParams.put("additional_owners", additionalOwners);
+
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("legal_entity", legalEntityParams);
+
+		assertEquals(encode("legal_entity[additional_owners][][first_name]=Stripe"), srg.createQuery(params));
+	}
+
+	@Test
+	public void testCorrectAdditionalOwners() throws StripeException, UnsupportedEncodingException {
+		Map<String, String> ownerParams = new HashMap<String, String>();
+		ownerParams.put("first_name", "Stripe");
+
+		Map<String, Object> additionalOwnersMap = new HashMap<String, Object>();
+		additionalOwnersMap.put("0", ownerParams);
+
+		Map<String, Object> legalEntityParams = new HashMap<String, Object>();
+		legalEntityParams.put("additional_owners", additionalOwnersMap);
+
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("legal_entity", legalEntityParams);
+
+		assertEquals(encode("legal_entity[additional_owners][0][first_name]=Stripe"), srg.createQuery(params));
+	}
+}
