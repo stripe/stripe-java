@@ -399,19 +399,6 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
 			T resource = APIResource.GSON.fromJson(rBody, clazz);
 
-            // This ... isn't great.
-            //
-            // The main trouble stems from the fact that every single class
-            // provides its own #all implementation, and this is essentially
-            // the only common method that we have access to. If we didn't put
-            // it here, we'd have to re-implement it in every leaf resource
-            // class.
-            if (resource instanceof StripeCollectionInterface<?>) {
-                StripeCollectionInterface<Object> apiResource = (StripeCollectionInterface<Object>)resource;
-                apiResource.setRequestOptions(options);
-                apiResource.setRequestParams(params);
-            }
-
             return resource;
 		} finally {
 			if (allowedToSetTTL) {
