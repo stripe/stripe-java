@@ -117,12 +117,6 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
 		return retrieve(id, (RequestOptions) null);
 	}
 
-	public static SKUCollection all(Map<String, Object> params)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return all(params, (RequestOptions) null);
-	}
-
 	public SKU update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -141,11 +135,32 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
 		return request(RequestMethod.GET, instanceURL(SKU.class, id), null, SKU.class, options);
 	}
 
+	public static SKUCollection list(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return list(params, (RequestOptions) null);
+	}
+
+	public static SKUCollection list(Map<String, Object> params,
+			RequestOptions options) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return requestCollection(classURL(SKU.class), params, SKUCollection.class, options);
+	}
+
+    @Deprecated
+	public static SKUCollection all(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return list(params, (RequestOptions) null);
+	}
+
+    @Deprecated
 	public static SKUCollection all(Map<String, Object> params,
 			RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return request(RequestMethod.GET, classURL(SKU.class), params, SKUCollection.class, options);
+		return list(params, options);
 	}
 
 	public SKU update(Map<String, Object> params, RequestOptions options)

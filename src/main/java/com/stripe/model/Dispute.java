@@ -151,16 +151,30 @@ public class Dispute extends APIResource implements HasId {
 		return request(RequestMethod.GET, instanceURL(Dispute.class, id), null, Dispute.class, options);
 	}
 
+	public static DisputeCollection list(Map<String, Object> params) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return list(params, (RequestOptions) null);
+	}
+
+	public static DisputeCollection list(Map<String, Object> params, RequestOptions options) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return requestCollection(classURL(Dispute.class), params, DisputeCollection.class, options);
+	}
+
+	@Deprecated
 	public static DisputeCollection all(Map<String, Object> params) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return all(params, (RequestOptions) null);
+		return list(params, (RequestOptions) null);
 	}
 
+	@Deprecated
 	public static DisputeCollection all(Map<String, Object> params, RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return request(RequestMethod.GET, classURL(Dispute.class), params, DisputeCollection.class, options);
+		return list(params, options);
 	}
 
 	public Dispute update(Map<String, Object> params)

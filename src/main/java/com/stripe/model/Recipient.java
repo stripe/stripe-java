@@ -134,12 +134,6 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
 		return retrieve(id, (RequestOptions) null);
 	}
 
-	public static RecipientCollection all(Map<String, Object> params)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return all(params, (RequestOptions) null);
-	}
-
 	public Recipient update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -216,18 +210,40 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
 		return request(RequestMethod.GET, instanceURL(Recipient.class, id), null, Recipient.class, options);
 	}
 
+	public static RecipientCollection list(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return list(params, (RequestOptions) null);
+	}
+
+	public static RecipientCollection list(Map<String, Object> params,
+			RequestOptions options) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return requestCollection(classURL(Recipient.class), params, RecipientCollection.class, options);
+	}
+
+	@Deprecated
+	public static RecipientCollection all(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return list(params, (RequestOptions) null);
+	}
+
 	@Deprecated
 	public static RecipientCollection all(Map<String, Object> params,
 			String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return all(params, RequestOptions.builder().setApiKey(apiKey).build());
+		return list(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
+	@Deprecated
 	public static RecipientCollection all(Map<String, Object> params,
 			RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return request(RequestMethod.GET, classURL(Recipient.class), params, RecipientCollection.class, options);
+		return list(params, options);
 	}
 
 	@Deprecated

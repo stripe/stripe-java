@@ -43,12 +43,6 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
 		return update(params, (RequestOptions) null);
 	}
 
-	public static PlanCollection all(Map<String, Object> params)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return all(params, (RequestOptions) null);
-	}
-
 	public DeletedPlan delete() throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
@@ -91,16 +85,37 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
 		return request(RequestMethod.POST, instanceURL(Plan.class, this.id), params, Plan.class, options);
 	}
 
+	public static PlanCollection list(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return list(params, (RequestOptions) null);
+	}
+
+	public static PlanCollection list(Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return requestCollection(classURL(Plan.class), params, PlanCollection.class, options);
+	}
+
+	@Deprecated
+	public static PlanCollection all(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return list(params, (RequestOptions) null);
+	}
+
 	@Deprecated
 	public static PlanCollection all(Map<String, Object> params, String apiKey)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return all(params, RequestOptions.builder().setApiKey(apiKey).build());
+		return list(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
+	@Deprecated
 	public static PlanCollection all(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.GET, classURL(Plan.class), params, PlanCollection.class, options);
+		return list(params, options);
 	}
 
 	@Deprecated

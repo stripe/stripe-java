@@ -150,16 +150,30 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 		return request(RequestMethod.POST, classURL(Account.class), params, Account.class, options);
 	}
 
+	public static AccountCollection list(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return list(params, (RequestOptions) null);
+	}
+
+	public static AccountCollection list(Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return requestCollection(classURL(Account.class), params, AccountCollection.class, options);
+	}
+
+	@Deprecated
 	public static AccountCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return all(params, (RequestOptions) null);
+		return list(params, (RequestOptions) null);
 	}
 
+	@Deprecated
 	public static AccountCollection all(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.GET, classURL(Account.class), params, AccountCollection.class, options);
+		return list(params, options);
 	}
 
 	public static Account retrieve()

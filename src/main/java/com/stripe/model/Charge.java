@@ -327,12 +327,6 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 		return update(params, (RequestOptions) null);
 	}
 
-	public static ChargeCollection all(Map<String, Object> params)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return all(params, (RequestOptions) null);
-	}
-
 	public Charge refund() throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
@@ -407,16 +401,37 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 		return request(RequestMethod.POST, instanceURL(Charge.class, id), params, Charge.class, options);
 	}
 
+	public static ChargeCollection list(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return list(params, (RequestOptions) null);
+	}
+
+	public static ChargeCollection list(Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return requestCollection(classURL(Charge.class), params, ChargeCollection.class, options);
+	}
+
+	@Deprecated
+	public static ChargeCollection all(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return list(params, (RequestOptions) null);
+	}
+
 	@Deprecated
 	public static ChargeCollection all(Map<String, Object> params, String apiKey)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return all(params, RequestOptions.builder().setApiKey(apiKey).build());
+		return list(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
+	@Deprecated
 	public static ChargeCollection all(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.GET, classURL(Charge.class), params, ChargeCollection.class, options);
+        return list(params, options);
 	}
 
 	@Deprecated

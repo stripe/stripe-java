@@ -188,12 +188,6 @@ public class BitcoinReceiver extends ExternalAccount implements HasId {
         return retrieve(id, (RequestOptions) null);
     }
 
-    public static BitcoinReceiverCollection all(Map<String, Object> params)
-            throws AuthenticationException, InvalidRequestException,
-            APIConnectionException, CardException, APIException {
-        return all(params, (RequestOptions) null);
-    }
-
     public static BitcoinReceiver create(Map<String, Object> params, RequestOptions options)
             throws AuthenticationException, InvalidRequestException,
             APIConnectionException, CardException, APIException {
@@ -206,10 +200,31 @@ public class BitcoinReceiver extends ExternalAccount implements HasId {
         return request(RequestMethod.GET, String.format("%s/%s/%s", Stripe.getApiBase(), "v1/bitcoin/receivers", id), null, BitcoinReceiver.class, options);
     }
 
+    public static BitcoinReceiverCollection list(Map<String, Object> params)
+            throws AuthenticationException, InvalidRequestException,
+            APIConnectionException, CardException, APIException {
+        return list(params, (RequestOptions) null);
+    }
+
+    public static BitcoinReceiverCollection list(Map<String, Object> params, RequestOptions options)
+            throws AuthenticationException, InvalidRequestException,
+            APIConnectionException, CardException, APIException {
+        String url = String.format("%s/%s", Stripe.getApiBase(), "v1/bitcoin/receivers");
+        return requestCollection(url, params, BitcoinReceiverCollection.class, options);
+    }
+
+	@Deprecated
+    public static BitcoinReceiverCollection all(Map<String, Object> params)
+            throws AuthenticationException, InvalidRequestException,
+            APIConnectionException, CardException, APIException {
+        return list(params, (RequestOptions) null);
+    }
+
+	@Deprecated
     public static BitcoinReceiverCollection all(Map<String, Object> params, RequestOptions options)
             throws AuthenticationException, InvalidRequestException,
             APIConnectionException, CardException, APIException {
-        return request(RequestMethod.GET, String.format("%s/%s", Stripe.getApiBase(), "v1/bitcoin/receivers"), params, BitcoinReceiverCollection.class, options);
+        return list(params, options);
     }
 
     @Override

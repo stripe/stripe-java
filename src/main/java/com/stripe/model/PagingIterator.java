@@ -1,6 +1,6 @@
 package com.stripe.model;
 
-import java.util.Collections;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
@@ -9,7 +9,7 @@ import com.stripe.Stripe;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
 
-public class StripeCollectionIterator<T extends HasId> extends APIResource implements Iterator<T> {
+public class PagingIterator<T extends HasId> extends APIResource implements Iterator<T> {
 	private final String url;
 	
 	@SuppressWarnings("rawtypes")
@@ -20,9 +20,9 @@ public class StripeCollectionIterator<T extends HasId> extends APIResource imple
 	
 	private String lastId;
 	
-	StripeCollectionIterator(final StripeCollectionInterface<T> stripeCollection) {
-        this.url = Stripe.getApiBase() + stripeCollection.getUrl();
-        
+	PagingIterator(final StripeCollectionInterface<T> stripeCollection) {
+		this.url = Stripe.getApiBase() + stripeCollection.getUrl();
+
 		this.collectionType = stripeCollection.getClass();
 		
 		this.currentCollection = stripeCollection;
@@ -31,26 +31,30 @@ public class StripeCollectionIterator<T extends HasId> extends APIResource imple
 
 	@Override
 	public boolean hasNext() {
-		return 
-			currentDataIterator.hasNext() ||
+		return currentDataIterator.hasNext() ||
 			currentCollection.getHasMore();
 	}
 
 	@Override
 	public T next() {
 		if (currentDataIterator.hasNext()) {
-			final T next =
-				currentDataIterator.next();
-			
-			this.lastId = 
-				next.getId();
-			
+			final T next = currentDataIterator.next();
+			this.lastId = next.getId();
 			return next;
-			
 		} else if (currentCollection.getHasMore()) {
 			try {
-				this.currentCollection =
-					list(Collections.<String, Object>singletonMap("starting_after", lastId), null);
+                Map<String, Object> params = new HashMap<String, Object>();
+
+                // copy all the parameters from the initial request
+                Map<String, Object> initialParams = currentCollection.getRequestParams();
+                if (initialParams != null) {
+                    params.putAll(initialParams);
+                }
+
+                // then put our new page start in
+                params.put("starting_after", lastId);
+
+				this.currentCollection = list(params, currentCollection.getRequestOptions());
 				
 				this.currentDataIterator =
 					currentCollection.getData().iterator();
@@ -71,7 +75,7 @@ public class StripeCollectionIterator<T extends HasId> extends APIResource imple
 	}
 
 	@SuppressWarnings("unchecked")
-	protected StripeCollectionInterface<T> list(
+	private StripeCollectionInterface<T> list(
 		final Map<String, Object> params, 
 		final RequestOptions options
 	) throws Exception {

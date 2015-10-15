@@ -11,18 +11,33 @@ import com.stripe.net.RequestOptions;
 import java.util.Map;
 
 public class ExternalAccountCollection extends StripeCollectionAPIResource<ExternalAccount> {
-    public ExternalAccountCollection all(Map<String, Object> params)
+    public ExternalAccountCollection list(Map<String, Object> params)
             throws AuthenticationException, InvalidRequestException,
             APIConnectionException, CardException, APIException {
-        return all(params, (RequestOptions) null);
+        return list(params, (RequestOptions) null);
     }
 
-    public ExternalAccountCollection all(Map<String, Object> params,
+    public ExternalAccountCollection list(Map<String, Object> params,
             RequestOptions options) throws AuthenticationException,
             InvalidRequestException, APIConnectionException, CardException,
             APIException {
         String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
-        return request(RequestMethod.GET, url, params, ExternalAccountCollection.class, options);
+        return requestCollection(url, params, ExternalAccountCollection.class, options);
+    }
+
+	@Deprecated
+    public ExternalAccountCollection all(Map<String, Object> params)
+            throws AuthenticationException, InvalidRequestException,
+            APIConnectionException, CardException, APIException {
+        return list(params, (RequestOptions) null);
+    }
+
+	@Deprecated
+    public ExternalAccountCollection all(Map<String, Object> params,
+            RequestOptions options) throws AuthenticationException,
+            InvalidRequestException, APIConnectionException, CardException,
+            APIException {
+        return list(params, options);
     }
 
     public ExternalAccount retrieve(String id) throws AuthenticationException,

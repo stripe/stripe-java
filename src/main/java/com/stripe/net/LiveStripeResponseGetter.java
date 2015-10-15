@@ -7,6 +7,7 @@ import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.RateLimitException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
+import com.stripe.model.StripeCollectionInterface;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSocketFactory;
@@ -395,7 +396,23 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 			if (rCode < 200 || rCode >= 300) {
 				handleAPIError(rBody, rCode, requestId);
 			}
-			return APIResource.GSON.fromJson(rBody, clazz);
+
+			T resource = APIResource.GSON.fromJson(rBody, clazz);
+
+            // This ... isn't great.
+            //
+            // The main trouble stems from the fact that every single class
+            // provides its own #all implementation, and this is essentially
+            // the only common method that we have access to. If we didn't put
+            // it here, we'd have to re-implement it in every leaf resource
+            // class.
+            if (resource instanceof StripeCollectionInterface<?>) {
+                StripeCollectionInterface<Object> apiResource = (StripeCollectionInterface<Object>)resource;
+                apiResource.setRequestOptions(options);
+                apiResource.setRequestParams(params);
+            }
+
+            return resource;
 		} finally {
 			if (allowedToSetTTL) {
 				if (originalDNSCacheTTL == null) {
