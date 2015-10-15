@@ -37,11 +37,9 @@ public class PagingIterator<T extends HasId> extends APIResource implements Iter
 
 	@Override
 	public T next() {
-		if (currentDataIterator.hasNext()) {
-			final T next = currentDataIterator.next();
-			this.lastId = next.getId();
-			return next;
-		} else if (currentCollection.getHasMore()) {
+        // if we've run out of data on the current page, try to fetch another
+        // one
+		if (!currentDataIterator.hasNext() && currentCollection.getHasMore()) {
 			try {
                 Map<String, Object> params = new HashMap<String, Object>();
 
@@ -58,15 +56,18 @@ public class PagingIterator<T extends HasId> extends APIResource implements Iter
 				
 				this.currentDataIterator =
 					currentCollection.getData().iterator();
-				
-				return next();
 			} catch (final Exception e) {
 				throw new RuntimeException("Unable to lazy-load stripe objects", e);
 			}
-			
-		} else {
-			throw new NoSuchElementException();
+        }
+
+		if (currentDataIterator.hasNext()) {
+			final T next = currentDataIterator.next();
+			this.lastId = next.getId();
+			return next;
 		}
+
+        throw new NoSuchElementException();
 	}
 
 	@Override
