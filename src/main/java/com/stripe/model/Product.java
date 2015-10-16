@@ -11,7 +11,7 @@ import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
 
-public class Product extends APIResource implements MetadataStore<Product> {
+public class Product extends APIResource implements HasId, MetadataStore<Product> {
 	Long created;
 	Long updated;;
 	String id;
@@ -161,12 +161,6 @@ public class Product extends APIResource implements MetadataStore<Product> {
 		return retrieve(id, (RequestOptions) null);
 	}
 
-	public static ProductCollection all(Map<String, Object> params)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return all(params, (RequestOptions) null);
-	}
-
 	public Product update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -185,11 +179,32 @@ public class Product extends APIResource implements MetadataStore<Product> {
 		return request(RequestMethod.GET, instanceURL(Product.class, id), null, Product.class, options);
 	}
 
+	public static ProductCollection list(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return list(params, (RequestOptions) null);
+	}
+
+	public static ProductCollection list(Map<String, Object> params,
+			RequestOptions options) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return requestCollection(classURL(Product.class), params, ProductCollection.class, options);
+	}
+
+	@Deprecated
+	public static ProductCollection all(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return list(params, (RequestOptions) null);
+	}
+
+	@Deprecated
 	public static ProductCollection all(Map<String, Object> params,
 			RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return request(RequestMethod.GET, classURL(Product.class), params, ProductCollection.class, options);
+		return list(params, options);
 	}
 
 	public Product update(Map<String, Object> params, RequestOptions options)

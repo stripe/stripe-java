@@ -7,6 +7,7 @@ import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.RateLimitException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
+import com.stripe.model.StripeCollectionInterface;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSocketFactory;
@@ -433,7 +434,10 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 			if (rCode < 200 || rCode >= 300) {
 				handleAPIError(rBody, rCode, requestId);
 			}
-			return APIResource.GSON.fromJson(rBody, clazz);
+
+			T resource = APIResource.GSON.fromJson(rBody, clazz);
+
+            return resource;
 		} finally {
 			if (allowedToSetTTL) {
 				if (originalDNSCacheTTL == null) {

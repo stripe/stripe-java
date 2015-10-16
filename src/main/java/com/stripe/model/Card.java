@@ -9,7 +9,7 @@ import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
-public class Card extends ExternalAccount implements MetadataStore<Card> {
+public class Card extends ExternalAccount implements MetadataStore<Card>, HasId {
 	String status;
 	Integer expMonth;
 	Integer expYear;

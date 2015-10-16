@@ -12,7 +12,7 @@ import com.stripe.net.RequestOptions;
 import java.util.List;
 import java.util.Map;
 
-public class BalanceTransaction extends APIResource {
+public class BalanceTransaction extends APIResource implements HasId {
 	String id;
 	String source;
 	Integer amount;
@@ -128,12 +128,6 @@ public class BalanceTransaction extends APIResource {
 		return retrieve(id, (RequestOptions) null);
 	}
 
-	public static BalanceTransactionCollection all(Map<String, Object> params)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return all(params, (RequestOptions) null);
-	}
-
 	@Deprecated
 	public static BalanceTransaction retrieve(String id, String apiKey)
 			throws AuthenticationException, InvalidRequestException,
@@ -148,16 +142,37 @@ public class BalanceTransaction extends APIResource {
 		return request(RequestMethod.GET, url, null, BalanceTransaction.class, options);
 	}
 
+	public static BalanceTransactionCollection list(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return list(params, (RequestOptions) null);
+	}
+
+	public static BalanceTransactionCollection list(Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		String url = String.format("%s/%s", Stripe.getApiBase(), "v1/balance/history");
+		return requestCollection(url, params, BalanceTransactionCollection.class, options);
+	}
+
+	@Deprecated
+	public static BalanceTransactionCollection all(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return list(params, (RequestOptions) null);
+	}
+
 	@Deprecated
 	public static BalanceTransactionCollection all(Map<String, Object> params, String apiKey)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return all(params, RequestOptions.builder().setApiKey(apiKey).build());
+		return list(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
+	@Deprecated
 	public static BalanceTransactionCollection all(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		String url = String.format("%s/%s", Stripe.getApiBase(), "v1/balance/history");
-		return request(RequestMethod.GET, url, params, BalanceTransactionCollection.class, options);
+        return list(params, options);
 	}
 }

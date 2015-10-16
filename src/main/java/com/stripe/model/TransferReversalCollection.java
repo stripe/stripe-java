@@ -11,18 +11,33 @@ import com.stripe.net.RequestOptions;
 import java.util.Map;
 
 public class TransferReversalCollection extends StripeCollectionAPIResource<Reversal> {
-	public TransferReversalCollection all(Map<String, Object> params)
+	public TransferReversalCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return all(params, null);
+		return list(params, null);
 	}
 
-	public TransferReversalCollection all(Map<String, Object> params,
+	public TransferReversalCollection list(Map<String, Object> params,
 			RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
-		return request(RequestMethod.GET, url, params, TransferReversalCollection.class, options);
+		return requestCollection(url, params, TransferReversalCollection.class, options);
+	}
+
+	@Deprecated
+	public TransferReversalCollection all(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return list(params, null);
+	}
+
+	@Deprecated
+	public TransferReversalCollection all(Map<String, Object> params,
+			RequestOptions options) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return list(params, options);
 	}
 
 	public Reversal retrieve(String id)

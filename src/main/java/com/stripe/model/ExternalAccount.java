@@ -12,7 +12,7 @@ import com.stripe.net.RequestOptions;
 import java.util.Collections;
 import java.util.Map;
 
-public class ExternalAccount extends APIResource {
+public class ExternalAccount extends APIResource implements HasId {
     String id;
     String object;
     String customer;

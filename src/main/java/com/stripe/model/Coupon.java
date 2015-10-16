@@ -10,7 +10,7 @@ import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
-public class Coupon extends APIResource implements MetadataStore<Coupon> {
+public class Coupon extends APIResource implements MetadataStore<Coupon>, HasId {
 	Integer percentOff;
 	Integer amountOff;
 	String currency;
@@ -80,22 +80,37 @@ public class Coupon extends APIResource implements MetadataStore<Coupon> {
 		return request(RequestMethod.GET, instanceURL(Coupon.class, id), null, Coupon.class, options);
 	}
 
+	public static CouponCollection list(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return list(params, (RequestOptions) null);
+	}
+
+	public static CouponCollection list(Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return requestCollection(classURL(Coupon.class), params, CouponCollection.class, options);
+	}
+
+	@Deprecated
 	public static CouponCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return all(params, (RequestOptions) null);
+		return list(params, (RequestOptions) null);
 	}
 
 	@Deprecated
 	public static CouponCollection all(Map<String, Object> params, String apiKey)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return all(params, RequestOptions.builder().setApiKey(apiKey).build());
+		return list(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
+	@Deprecated
 	public static CouponCollection all(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.GET, classURL(Coupon.class), params, CouponCollection.class, options);
+		return list(params, options);
 	}
 
 	public DeletedCoupon delete() throws AuthenticationException,

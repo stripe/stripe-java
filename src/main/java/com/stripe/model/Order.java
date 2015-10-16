@@ -11,7 +11,7 @@ import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
 
-public class Order extends APIResource implements MetadataStore<Order> {
+public class Order extends APIResource implements HasId, MetadataStore<Order> {
 	Long created;
 	Long updated;
 	String id;
@@ -138,12 +138,6 @@ public class Order extends APIResource implements MetadataStore<Order> {
 		return retrieve(id, (RequestOptions) null);
 	}
 
-	public static OrderCollection all(Map<String, Object> params)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return all(params, (RequestOptions) null);
-	}
-
 	public Order update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -162,13 +156,35 @@ public class Order extends APIResource implements MetadataStore<Order> {
 		return request(RequestMethod.GET, instanceURL(Order.class, id), null, Order.class, options);
 	}
 
+	public static OrderCollection list(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return list(params, (RequestOptions) null);
+	}
+
+	public static OrderCollection list(Map<String, Object> params,
+			RequestOptions options) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return requestCollection(classURL(Order.class), params, OrderCollection.class, options);
+	}
+
+    @Deprecated
+	public static OrderCollection all(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return list(params, (RequestOptions) null);
+	}
+
+    @Deprecated
 	public static OrderCollection all(Map<String, Object> params,
 			RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return request(RequestMethod.GET, classURL(Order.class), params, OrderCollection.class, options);
+		return list(params, options);
 	}
 
+    @Deprecated
 	public Order update(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
