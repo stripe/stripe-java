@@ -203,10 +203,10 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 		return retrieve(id, (RequestOptions) null);
 	}
 
-  /**
-   * @deprecated
-   * Use Transfer.getReversals().create() instead of Transfer.cancel().
-   */
+	/**
+	 * @deprecated
+	 * Use Transfer.getReversals().create() instead of Transfer.cancel().
+	 */
 	@Deprecated
 	public Transfer cancel()
 			throws AuthenticationException, InvalidRequestException,

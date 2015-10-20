@@ -148,14 +148,14 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
 		return requestCollection(classURL(SKU.class), params, SKUCollection.class, options);
 	}
 
-    @Deprecated
+	@Deprecated
 	public static SKUCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return list(params, (RequestOptions) null);
 	}
 
-    @Deprecated
+	@Deprecated
 	public static SKUCollection all(Map<String, Object> params,
 			RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,

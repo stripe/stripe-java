@@ -132,26 +132,26 @@ public abstract class APIResource extends StripeObject {
 				APIResource.RequestType.NORMAL, options);
 	}
 
-    /**
-     * Similar to #request, but specific for use with collection types that
-     * come from the API (i.e. lists of resources).
-     *
-     * Collections need a little extra work because we need to plumb request
-     * options and params through so that we can iterate to the next page if
-     * necessary.
-     */
-    protected static <T extends StripeCollectionInterface> T requestCollection(
+	/**
+	 * Similar to #request, but specific for use with collection types that
+	 * come from the API (i.e. lists of resources).
+	 *
+	 * Collections need a little extra work because we need to plumb request
+	 * options and params through so that we can iterate to the next page if
+	 * necessary.
+	 */
+	protected static <T extends StripeCollectionInterface> T requestCollection(
 			String url, Map<String, Object> params, Class<T> clazz,
-            RequestOptions options)
-            throws AuthenticationException, InvalidRequestException,
-            APIConnectionException, CardException, APIException {
-        T collection = request(RequestMethod.GET, url, params, clazz, options);
+			RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		T collection = request(RequestMethod.GET, url, params, clazz, options);
 
-        if (collection != null) {
-            collection.setRequestOptions(options);
-            collection.setRequestParams(params);
-        }
+		if (collection != null) {
+			collection.setRequestOptions(options);
+			collection.setRequestParams(params);
+		}
 
-        return collection;
-    }
+		return collection;
+	}
 }

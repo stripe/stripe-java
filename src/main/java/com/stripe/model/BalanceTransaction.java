@@ -173,6 +173,6 @@ public class BalanceTransaction extends APIResource implements HasId {
 	public static BalanceTransactionCollection all(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-        return list(params, options);
+		return list(params, options);
 	}
 }

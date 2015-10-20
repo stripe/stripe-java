@@ -11,8 +11,8 @@ public abstract class StripeCollectionAPIResource<T extends HasId> extends APIRe
 	List<T> data;
 	Integer totalCount;
 	Boolean hasMore;
-    private RequestOptions requestOptions;
-    private Map<String, Object> requestParams;
+	private RequestOptions requestOptions;
+	private Map<String, Object> requestParams;
 	String url;
 	/** 3/2014: Legacy (from before newstyle pagination API) */
 	Integer count;
@@ -39,7 +39,7 @@ public abstract class StripeCollectionAPIResource<T extends HasId> extends APIRe
 		return url;
 	}
 
-    @Deprecated
+	@Deprecated
 	public String getUrl() {
 		return getURL();
 	}
@@ -56,28 +56,28 @@ public abstract class StripeCollectionAPIResource<T extends HasId> extends APIRe
 		this.count = count;
 	}
 
-    /**
-     * Returns an iterable that can be used to iterate across all objects
-     * across all pages. As page boundaries are encountered, the next page will
-     * be fetch automatically for continued iteration.
-     */
+	/**
+	 * Returns an iterable that can be used to iterate across all objects
+	 * across all pages. As page boundaries are encountered, the next page will
+	 * be fetch automatically for continued iteration.
+	 */
 	public Iterable<T> autoPagingIterable() {
 		return new PagingIterable<T>(this);
 	}
 
-    public RequestOptions getRequestOptions() {
-        return this.requestOptions;
-    }
+	public RequestOptions getRequestOptions() {
+		return this.requestOptions;
+	}
 
-    public Map<String, Object> getRequestParams() {
-        return this.requestParams;
-    }
+	public Map<String, Object> getRequestParams() {
+		return this.requestParams;
+	}
 
-    public void setRequestOptions(RequestOptions requestOptions) {
-        this.requestOptions = requestOptions;
-    }
+	public void setRequestOptions(RequestOptions requestOptions) {
+		this.requestOptions = requestOptions;
+	}
 
-    public void setRequestParams(Map<String, Object> requestParams) {
-        this.requestParams = requestParams;
-    }
+	public void setRequestParams(Map<String, Object> requestParams) {
+		this.requestParams = requestParams;
+	}
 }

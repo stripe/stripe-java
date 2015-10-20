@@ -437,7 +437,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
 			T resource = APIResource.GSON.fromJson(rBody, clazz);
 
-            return resource;
+			return resource;
 		} finally {
 			if (allowedToSetTTL) {
 				if (originalDNSCacheTTL == null) {

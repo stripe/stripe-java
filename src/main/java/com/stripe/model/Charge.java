@@ -431,7 +431,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	public static ChargeCollection all(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-        return list(params, options);
+		return list(params, options);
 	}
 
 	@Deprecated

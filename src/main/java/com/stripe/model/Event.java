@@ -104,11 +104,11 @@ public class Event extends APIResource implements HasId {
 	}
 
 	public String getUserId() {
-	    return userId;
+		return userId;
 	}
 
 	public void setUserId(String userId) {
-	    this.userId = userId;
+		this.userId = userId;
 	}
 
 	public Boolean getLivemode() {

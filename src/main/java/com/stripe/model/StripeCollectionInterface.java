@@ -11,27 +11,27 @@ public interface StripeCollectionInterface<T> {
 	public Boolean getHasMore();
 	public String getUrl();
 
-    /**
-     * Get request options that were used to fetch the collection. This is
-     * useful for purposes of pagination.
-     */
-    public RequestOptions getRequestOptions();
+	/**
+	 * Get request options that were used to fetch the collection. This is
+	 * useful for purposes of pagination.
+	 */
+	public RequestOptions getRequestOptions();
 
-    /**
-     * Get request parameters that were used to fetch the collection. This is
-     * useful for purposes of pagination.
-     */
-    public Map<String, Object> getRequestParams();
+	/**
+	 * Get request parameters that were used to fetch the collection. This is
+	 * useful for purposes of pagination.
+	 */
+	public Map<String, Object> getRequestParams();
 
-    /**
-     * Set request options that were used to fetch the collection. This is
-     * required for purposes of pagination.
-     */
-    public void setRequestOptions(RequestOptions requestOptions);
+	/**
+	 * Set request options that were used to fetch the collection. This is
+	 * required for purposes of pagination.
+	 */
+	public void setRequestOptions(RequestOptions requestOptions);
 
-    /**
-     * Set request parameters that were used to fetch the collection. This is
-     * required for purposes of pagination.
-     */
-    public void setRequestParams(Map<String, Object> requestParams);
+	/**
+	 * Set request parameters that were used to fetch the collection. This is
+	 * required for purposes of pagination.
+	 */
+	public void setRequestParams(Map<String, Object> requestParams);
 }

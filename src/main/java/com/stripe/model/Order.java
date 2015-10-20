@@ -169,14 +169,14 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
 		return requestCollection(classURL(Order.class), params, OrderCollection.class, options);
 	}
 
-    @Deprecated
+	@Deprecated
 	public static OrderCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return list(params, (RequestOptions) null);
 	}
 
-    @Deprecated
+	@Deprecated
 	public static OrderCollection all(Map<String, Object> params,
 			RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
@@ -184,7 +184,7 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
 		return list(params, options);
 	}
 
-    @Deprecated
+	@Deprecated
 	public Order update(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {

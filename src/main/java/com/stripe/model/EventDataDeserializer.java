@@ -18,54 +18,54 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
 
 	@SuppressWarnings("rawtypes")
 	static final Map<String, Class> objectMap = new HashMap<String, Class>();
-    static {
-        objectMap.put("account", Account.class);
-        objectMap.put("charge", Charge.class);
-        objectMap.put("discount", Discount.class);
-        objectMap.put("customer", Customer.class);
-        objectMap.put("invoice", Invoice.class);
-        objectMap.put("invoiceitem", InvoiceItem.class);
-        objectMap.put("plan", Plan.class);
-        objectMap.put("subscription", Subscription.class);
-        objectMap.put("token", Token.class);
-        objectMap.put("coupon", Coupon.class);
-        objectMap.put("transfer", Transfer.class);
-        objectMap.put("dispute", Dispute.class);
-        objectMap.put("refund", Refund.class);
-        objectMap.put("recipient", Recipient.class);
-        objectMap.put("summary", Summary.class);
-        objectMap.put("fee", Fee.class);
-        objectMap.put("bank_account", BankAccount.class);
-        objectMap.put("balance", Balance.class);
-        objectMap.put("card", Card.class);
-        objectMap.put("balance_transaction", BalanceTransaction.class);
-    }
+	static {
+		objectMap.put("account", Account.class);
+		objectMap.put("charge", Charge.class);
+		objectMap.put("discount", Discount.class);
+		objectMap.put("customer", Customer.class);
+		objectMap.put("invoice", Invoice.class);
+		objectMap.put("invoiceitem", InvoiceItem.class);
+		objectMap.put("plan", Plan.class);
+		objectMap.put("subscription", Subscription.class);
+		objectMap.put("token", Token.class);
+		objectMap.put("coupon", Coupon.class);
+		objectMap.put("transfer", Transfer.class);
+		objectMap.put("dispute", Dispute.class);
+		objectMap.put("refund", Refund.class);
+		objectMap.put("recipient", Recipient.class);
+		objectMap.put("summary", Summary.class);
+		objectMap.put("fee", Fee.class);
+		objectMap.put("bank_account", BankAccount.class);
+		objectMap.put("balance", Balance.class);
+		objectMap.put("card", Card.class);
+		objectMap.put("balance_transaction", BalanceTransaction.class);
+	}
 
-    private Object deserializeJsonPrimitive(JsonPrimitive element) {
-    	if (element.isBoolean()) {
-    		return element.getAsBoolean();
-    	} else if (element.isNumber()) {
-    		return element.getAsNumber();
-    	} else {
-    		return element.getAsString();
-    	}
-    }
+	private Object deserializeJsonPrimitive(JsonPrimitive element) {
+		if (element.isBoolean()) {
+			return element.getAsBoolean();
+		} else if (element.isNumber()) {
+			return element.getAsNumber();
+		} else {
+			return element.getAsString();
+		}
+	}
 
-    private Object[] deserializeJsonArray(JsonArray arr) {
-    	Object[] elems = new Object[arr.size()];
-    	Iterator<JsonElement> elemIter = arr.iterator();
-    	int i = 0;
-    	while (elemIter.hasNext()) {
-    		JsonElement elem = elemIter.next();
-    		elems[i++] = deserializeJsonElement(elem);
-    	}
-    	return elems;
-    }
+	private Object[] deserializeJsonArray(JsonArray arr) {
+		Object[] elems = new Object[arr.size()];
+		Iterator<JsonElement> elemIter = arr.iterator();
+		int i = 0;
+		while (elemIter.hasNext()) {
+			JsonElement elem = elemIter.next();
+			elems[i++] = deserializeJsonElement(elem);
+		}
+		return elems;
+	}
 
-    private Object deserializeJsonElement(JsonElement element) {
-    	if (element.isJsonNull()) {
-    		return null;
-    	} else if (element.isJsonObject()) {
+	private Object deserializeJsonElement(JsonElement element) {
+		if (element.isJsonNull()) {
+			return null;
+		} else if (element.isJsonObject()) {
 			Map<String, Object> valueMap = new HashMap<String, Object>();
 			populateMapFromJSONObject(valueMap, element.getAsJsonObject());
 			return valueMap;
@@ -81,13 +81,13 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
 		}
 	}
 
-    private void populateMapFromJSONObject(Map<String, Object> objMap, JsonObject jsonObject) {
+	private void populateMapFromJSONObject(Map<String, Object> objMap, JsonObject jsonObject) {
 		for(Map.Entry<String, JsonElement> entry: jsonObject.entrySet()) {
 			String key = entry.getKey();
 			JsonElement element = entry.getValue();
 			objMap.put(key, deserializeJsonElement(element));
 		}
-    }
+	}
 
 	@SuppressWarnings("unchecked")
 	public EventData deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)

@@ -68,14 +68,14 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
 		return requestCollection(classURL(Refund.class), params, RefundCollection.class, options);
 	}
 
-    @Deprecated
+	@Deprecated
 	public static RefundCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return list(params, (RequestOptions) null);
 	}
 
-    @Deprecated
+	@Deprecated
 	public static RefundCollection all(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {

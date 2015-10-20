@@ -95,11 +95,11 @@ public class Token extends APIResource implements HasId {
 	}
 
 	public BankAccount getBankAccount() {
-	  return bankAccount;
+		return bankAccount;
 	}
 
 	public void setBankAccount(BankAccount bankAccount) {
-	  this.bankAccount = bankAccount;
+		this.bankAccount = bankAccount;
 	}
 
 	public static Token create(Map<String, Object> params)

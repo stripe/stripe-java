@@ -8,11 +8,11 @@ import java.util.Iterator;
  * <code>{@code foreach}</code> loop.
  */
 public class PagingIterable<T extends HasId> implements Iterable<T> {
-    private StripeCollectionInterface<T> page;
+	private StripeCollectionInterface<T> page;
 
 	PagingIterable(final StripeCollectionInterface<T> page) {
-        this.page = page;
-    }
+		this.page = page;
+	}
 
 	public Iterator<T> iterator() {
 		return new PagingIterator<T>(page);
