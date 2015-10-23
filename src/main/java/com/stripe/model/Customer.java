@@ -11,7 +11,7 @@ import com.stripe.net.RequestOptions;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Customer extends APIResource implements MetadataStore<Customer> {
+public class Customer extends APIResource implements MetadataStore<Customer>, HasId {
 	Long created;
 	String id;
 	Boolean livemode;
@@ -187,12 +187,6 @@ public class Customer extends APIResource implements MetadataStore<Customer> {
 		return retrieve(id, (RequestOptions) null);
 	}
 
-	public static CustomerCollection all(Map<String, Object> params)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return all(params, (RequestOptions) null);
-	}
-
 	public Customer update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -274,18 +268,41 @@ public class Customer extends APIResource implements MetadataStore<Customer> {
 		return request(RequestMethod.GET, instanceURL(Customer.class, id), null, Customer.class, options);
 	}
 
+	public static CustomerCollection list(Map<String, Object> params)
+			throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return list(params, (RequestOptions) null);
+	}
+
+	public static CustomerCollection list(Map<String, Object> params,
+			RequestOptions options) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return requestCollection(classURL(Customer.class), params, CustomerCollection.class, options);
+	}
+
+	@Deprecated
+	public static CustomerCollection all(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return list(params, (RequestOptions) null);
+	}
+
 	@Deprecated
 	public static CustomerCollection all(Map<String, Object> params,
 			String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return all(params, RequestOptions.builder().setApiKey(apiKey).build());
+		return list(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
+	@Deprecated
 	public static CustomerCollection all(Map<String, Object> params,
 			RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return request(RequestMethod.GET, classURL(Customer.class), params, CustomerCollection.class, options);
+		return list(params, options);
 	}
 
 	@Deprecated

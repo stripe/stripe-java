@@ -1,6 +1,6 @@
 package com.stripe.model;
 
-public class TransferTransaction extends StripeObject {
+public class TransferTransaction extends StripeObject implements HasId {
 	String id;
 	Long amount;
 	Long net;

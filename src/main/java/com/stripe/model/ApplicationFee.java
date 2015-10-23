@@ -10,7 +10,7 @@ import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
-public class ApplicationFee extends APIResource {
+public class ApplicationFee extends APIResource implements HasId {
 	Integer amount;
 	Long created;
 	String currency;
@@ -148,21 +148,37 @@ public class ApplicationFee extends APIResource {
 		return request(RequestMethod.GET, instanceURL(ApplicationFee.class, id), null, ApplicationFee.class, options);
 	}
 
+	public static ApplicationFeeCollection list(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return list(params, (RequestOptions) null);
+	}
+
+	public static ApplicationFeeCollection list(Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return requestCollection(classURL(ApplicationFee.class), params, ApplicationFeeCollection.class, options);
+	}
+
+	@Deprecated
 	public static ApplicationFeeCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return all(params, (RequestOptions) null);
+		return list(params, (RequestOptions) null);
 	}
+
 	@Deprecated
 	public static ApplicationFeeCollection all(Map<String, Object> params, String apiKey)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return all(params, RequestOptions.builder().setApiKey(apiKey).build());
+		return list(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
+	@Deprecated
 	public static ApplicationFeeCollection all(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.GET, classURL(ApplicationFee.class), params, ApplicationFeeCollection.class, options);
+		return list(params, options);
 	}
 
 

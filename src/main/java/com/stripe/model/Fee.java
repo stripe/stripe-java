@@ -39,7 +39,7 @@ public class Fee extends APIResource {
 
 	public void setDescription(String description) {
 		this.description = description;
-  }
+	}
 
 	public String getCurrency() {
 		return currency;

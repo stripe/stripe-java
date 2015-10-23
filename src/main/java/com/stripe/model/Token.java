@@ -10,11 +10,13 @@ import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
-public class Token extends APIResource {
+public class Token extends APIResource implements HasId {
 	Integer amount;
 	Long created;
 	String currency;
 	String id;
+	String email;
+	String clientIp;
 	Boolean livemode;
 	Boolean used;
 	Card card;
@@ -52,6 +54,22 @@ public class Token extends APIResource {
 		this.id = id;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public String getClientIp() {
+		return clientIp;
+	}
+
+	public void setClientIp(String clientIp) {
+		this.clientIp = clientIp;
+	}
+
 	public Boolean getLivemode() {
 		return livemode;
 	}
@@ -77,11 +95,11 @@ public class Token extends APIResource {
 	}
 
 	public BankAccount getBankAccount() {
-	  return bankAccount;
+		return bankAccount;
 	}
 
 	public void setBankAccount(BankAccount bankAccount) {
-	  this.bankAccount = bankAccount;
+		this.bankAccount = bankAccount;
 	}
 
 	public static Token create(Map<String, Object> params)

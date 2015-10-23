@@ -11,10 +11,25 @@ import com.stripe.net.RequestOptions;
 import java.util.Map;
 
 public class FeeRefundCollection extends StripeCollectionAPIResource<FeeRefund> {
+	public FeeRefundCollection list(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return list(params, (RequestOptions) null);
+	}
+
+	public FeeRefundCollection list(Map<String, Object> params,
+			RequestOptions options) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
+		return requestCollection(url, params, FeeRefundCollection.class, options);
+	}
+
+	@Deprecated
 	public FeeRefundCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return all(params, (RequestOptions) null);
+		return list(params, (RequestOptions) null);
 	}
 
 	@Deprecated
@@ -22,14 +37,15 @@ public class FeeRefundCollection extends StripeCollectionAPIResource<FeeRefund> 
 			String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return all(params, RequestOptions.builder().setApiKey(apiKey).build());
+		return list(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
+	@Deprecated
 	public FeeRefundCollection all(Map<String, Object> params,
 			RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
-		return request(RequestMethod.GET, url, params, FeeRefundCollection.class, options);
+		return list(params, options);
 	}
 
 	public FeeRefund retrieve(String id)

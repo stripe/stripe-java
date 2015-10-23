@@ -24,41 +24,41 @@ public class DeserializerTest extends BaseStripeTest {
 		assertThat(ed.getPreviousAttributes().get("fee"), notNullValue());
 	}
 
-    @Test
-    public void deserializeDisputeObject() throws IOException {
-        String json = resource("dispute.json");
-        Dispute dispute = gson.fromJson(json, Dispute.class);
-        EvidenceSubObject expected = new EvidenceSubObject();
-        expected.setProductDescription("my productDescription");
-        expected.setCustomerName("my customerName");
-        expected.setCustomerEmailAddress("my customerEmailAddress");
-        expected.setCustomerPurchaseIp("my customerPurchaseIp");
-        expected.setCustomerSignature("my customerSignature");
-        expected.setBillingAddress("my billingAddress");
-        expected.setReceipt("my receipt");
-        expected.setShippingAddress("my shippingAddress");
-        expected.setShippingDate("my shippingDate");
-        expected.setShippingTrackingNumber("my shippingTrackingNumber");
-        expected.setShippingDocumentation("my shippingDocumentation");
-        expected.setRefundPolicy("my refundPolicy");
-        expected.setRefundPolicyDisclosure("my refundPolicyDisclosure");
-        expected.setRefundRefusalExplanation("my refundRefusalExplanation");
-        expected.setCancellationPolicy("my cancellationPolicy");
-        expected.setCancellationPolicyDisclosure("my cancellationPolicyDisclosure");
-        expected.setCancellationRebuttal("my cancellationRebuttal");
-        expected.setAccessActivityLog("my accessActivityLog");
-        expected.setServiceDate("my serviceDate");
-        expected.setServiceDocumentation("my serviceDocumentation");
-        expected.setDuplicateChargeId("my duplicateChargeId");
-        expected.setDuplicateChargeExplanation("my duplicateChargeExplanation");
-        expected.setDuplicateChargeDocumentation("my duplicateChargeDocumentation");
-        expected.setCustomerCommunication("my customerCommunication");
-        expected.setUncategorizedText("my uncategorizedText");
-        expected.setUncategorizedFile("my uncategorizedFile");
+	@Test
+	public void deserializeDisputeObject() throws IOException {
+		String json = resource("dispute.json");
+		Dispute dispute = gson.fromJson(json, Dispute.class);
+		EvidenceSubObject expected = new EvidenceSubObject();
+		expected.setProductDescription("my productDescription");
+		expected.setCustomerName("my customerName");
+		expected.setCustomerEmailAddress("my customerEmailAddress");
+		expected.setCustomerPurchaseIp("my customerPurchaseIp");
+		expected.setCustomerSignature("my customerSignature");
+		expected.setBillingAddress("my billingAddress");
+		expected.setReceipt("my receipt");
+		expected.setShippingAddress("my shippingAddress");
+		expected.setShippingDate("my shippingDate");
+		expected.setShippingTrackingNumber("my shippingTrackingNumber");
+		expected.setShippingDocumentation("my shippingDocumentation");
+		expected.setRefundPolicy("my refundPolicy");
+		expected.setRefundPolicyDisclosure("my refundPolicyDisclosure");
+		expected.setRefundRefusalExplanation("my refundRefusalExplanation");
+		expected.setCancellationPolicy("my cancellationPolicy");
+		expected.setCancellationPolicyDisclosure("my cancellationPolicyDisclosure");
+		expected.setCancellationRebuttal("my cancellationRebuttal");
+		expected.setAccessActivityLog("my accessActivityLog");
+		expected.setServiceDate("my serviceDate");
+		expected.setServiceDocumentation("my serviceDocumentation");
+		expected.setDuplicateChargeId("my duplicateChargeId");
+		expected.setDuplicateChargeExplanation("my duplicateChargeExplanation");
+		expected.setDuplicateChargeDocumentation("my duplicateChargeDocumentation");
+		expected.setCustomerCommunication("my customerCommunication");
+		expected.setUncategorizedText("my uncategorizedText");
+		expected.setUncategorizedFile("my uncategorizedFile");
 
-        EvidenceSubObject evidenceSubObject = dispute.getEvidenceSubObject();
-        assertEquals(expected, evidenceSubObject);
-    }
+		EvidenceSubObject evidenceSubObject = dispute.getEvidenceSubObject();
+		assertEquals(expected, evidenceSubObject);
+	}
 
 	@Test
 	public void deserializeEventDataAccountEvent() throws IOException {

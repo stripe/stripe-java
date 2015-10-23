@@ -12,16 +12,30 @@ import java.util.Map;
 
 
 public class BitcoinTransactionCollection extends StripeCollectionAPIResource<BitcoinTransaction> {
-    public BitcoinTransactionCollection all(Map<String, Object> params)
-            throws AuthenticationException, InvalidRequestException,
-            APIConnectionException, CardException, APIException {
-        return all(params, (RequestOptions) null);
-    }
+	public BitcoinTransactionCollection list(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return list(params, (RequestOptions) null);
+	}
 
-    public BitcoinTransactionCollection all(Map<String, Object> params, RequestOptions options)
-            throws AuthenticationException, InvalidRequestException,
-            APIConnectionException, CardException, APIException {
-        String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
-        return request(RequestMethod.GET, url, params, BitcoinTransactionCollection.class, options);
-    }
+	public BitcoinTransactionCollection list(Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
+		return requestCollection(url, params, BitcoinTransactionCollection.class, options);
+	}
+
+	@Deprecated
+	public BitcoinTransactionCollection all(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return list(params, (RequestOptions) null);
+	}
+
+	@Deprecated
+	public BitcoinTransactionCollection all(Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return list(params, options);
+	}
 }

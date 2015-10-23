@@ -11,7 +11,7 @@ import com.stripe.net.RequestOptions;
 import java.util.List;
 import java.util.Map;
 
-public class Transfer extends APIResource implements MetadataStore<Transfer> {
+public class Transfer extends APIResource implements MetadataStore<Transfer>, HasId {
 	String id;
 	String status;
 	Long date;
@@ -203,10 +203,10 @@ public class Transfer extends APIResource implements MetadataStore<Transfer> {
 		return retrieve(id, (RequestOptions) null);
 	}
 
-  /**
-   * @deprecated
-   * Use Transfer.getReversals().create() instead of Transfer.cancel().
-   */
+	/**
+	 * @deprecated
+	 * Use Transfer.getReversals().create() instead of Transfer.cancel().
+	 */
 	@Deprecated
 	public Transfer cancel()
 			throws AuthenticationException, InvalidRequestException,
@@ -218,12 +218,6 @@ public class Transfer extends APIResource implements MetadataStore<Transfer> {
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return update(params, (RequestOptions) null);
-	}
-
-	public static TransferCollection all(Map<String, Object> params)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return all(params, (RequestOptions) null);
 	}
 
 	public TransferTransactionCollection transactions(Map<String, Object> params)
@@ -280,18 +274,40 @@ public class Transfer extends APIResource implements MetadataStore<Transfer> {
 		return request(RequestMethod.GET, instanceURL(Transfer.class, id), null, Transfer.class, options);
 	}
 
+	public static TransferCollection list(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return list(params, (RequestOptions) null);
+	}
+
+	public static TransferCollection list(Map<String, Object> params,
+			RequestOptions options) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return requestCollection(classURL(Transfer.class), params, TransferCollection.class, options);
+	}
+
+	@Deprecated
+	public static TransferCollection all(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return list(params, (RequestOptions) null);
+	}
+
 	@Deprecated
 	public static TransferCollection all(Map<String, Object> params,
 			String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return all(params, RequestOptions.builder().setApiKey(apiKey).build());
+		return list(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
+	@Deprecated
 	public static TransferCollection all(Map<String, Object> params,
 			RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return request(RequestMethod.GET, classURL(Transfer.class), params, TransferCollection.class, options);
+		return list(params, options);
 	}
 
 	@Deprecated
