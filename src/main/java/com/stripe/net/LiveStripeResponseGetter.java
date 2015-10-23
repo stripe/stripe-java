@@ -239,8 +239,12 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 		Iterator<?> it = ((List<?>)params).iterator();
 		String newPrefix = String.format("%s[]", keyPrefix);
 
-		while (it.hasNext()) {
-			flatParams.addAll(flattenParamsValue(it.next(), newPrefix));
+		if (params.isEmpty()) {
+			flatParams.add(new Parameter(keyPrefix, ""));
+		} else {
+			while (it.hasNext()) {
+				flatParams.addAll(flattenParamsValue(it.next(), newPrefix));
+			}
 		}
 
 		return flatParams;
