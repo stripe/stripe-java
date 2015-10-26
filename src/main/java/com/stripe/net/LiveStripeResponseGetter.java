@@ -239,8 +239,16 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 		Iterator<?> it = ((List<?>)params).iterator();
 		String newPrefix = String.format("%s[]", keyPrefix);
 
-		while (it.hasNext()) {
-			flatParams.addAll(flattenParamsValue(it.next(), newPrefix));
+		// Because application/x-www-form-urlencoded cannot represent an empty
+		// list, convention is to take the list parameter and just set it to an
+		// empty string. (e.g. A regular list might look like `a[]=1&b[]=2`.
+		// Emptying it would look like `a=`.)
+		if (params.isEmpty()) {
+			flatParams.add(new Parameter(keyPrefix, ""));
+		} else {
+			while (it.hasNext()) {
+				flatParams.addAll(flattenParamsValue(it.next(), newPrefix));
+			}
 		}
 
 		return flatParams;
