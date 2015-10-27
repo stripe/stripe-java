@@ -1,3 +1,9 @@
+=== 1.38.0 2015-10-27
+
+* Add pagination through the use of calling `AutoPagingIterable()` for a page
+* Fix bug where arrays were not being properly encoded when sent to the API
+* Fix bug where setting a `List` to `null` wasn't encoding to an empty string (which is required to unset an array)
+
 === 1.37.1 2015-10-07
 
 * Bugfix `setTransfer` on `Reversal`
