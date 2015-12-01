@@ -80,6 +80,6 @@ public class PagingIterator<T extends HasId> extends APIResource implements Iter
 		final Map<String, Object> params, 
 		final RequestOptions options
 	) throws Exception {
-		return APIResource.request(RequestMethod.GET, url, params, collectionType, options);
+		return APIResource.requestCollection(url, params, collectionType, options);
 	}
 }
