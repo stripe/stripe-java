@@ -1,3 +1,7 @@
+=== 1.38.1 2015-11-30
+
+* Fix bug when using lazy-paging collection across multiple pages
+
 === 1.38.0 2015-10-27
 
 * Add pagination through the use of calling `AutoPagingIterable()` for a page
