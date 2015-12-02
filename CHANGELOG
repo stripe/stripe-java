@@ -1,3 +1,7 @@
+=== 1.39.0 2015-12-01
+
+* Add a verification routine for external accounts
+
 === 1.38.1 2015-11-30
 
 * Fix bug when using lazy-paging collection across multiple pages
