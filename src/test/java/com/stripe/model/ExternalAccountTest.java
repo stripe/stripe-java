@@ -59,4 +59,26 @@ public class ExternalAccountTest extends BaseStripeTest {
 			null, APIResource.RequestType.NORMAL, RequestOptions.getDefault()
 		);
 	}
+
+	@Test
+	public void testVerify() throws StripeException, IOException {
+		stubNetwork(Customer.class, resource("customer_with_external_account.json"));
+		Customer cus = Customer.retrieve("cus_123");
+		verifyGet(Customer.class, "https://api.stripe.com/v1/customers/cus_123");
+		ExternalAccount bankAccount = cus.getSources().getData().get(0);
+
+		assertEquals(true, bankAccount instanceof ExternalAccount);
+
+		stubNetwork(ExternalAccount.class, "{\"id\": \"extacct_123\", \"object\": \"unknown_external_account\"}");
+
+		Map params = new HashMap<String, Object>();
+		Integer[] amounts = {32, 45};
+		params.put("amounts", amounts);
+		bankAccount.verify(params);
+		verifyPost(
+		    ExternalAccount.class,
+		    "https://api.stripe.com/v1/customers/cus_123/sources/extacct_123/verify",
+		    params
+		);
+	}
 }
