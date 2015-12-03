@@ -764,6 +764,29 @@ public class StripeTest {
 	}
 
 	@Test
+	public void testCustomerCreateWithShippingDetails() throws StripeException {
+		ShippingDetails shippingDetails = new ShippingDetails();
+		shippingDetails.setName("name");
+		shippingDetails.setPhone("123-456-7890");
+		Address address = new Address()
+				.setCity("Washington")
+				.setCountry("USA")
+				.setLine1("1600 Pennsylvania Ave.")
+				.setLine2("line 2 address")
+				.setPostalCode("20500")
+				.setState("D.C.");
+		shippingDetails.setAddress(address);
+
+		Map<String, Object> params = ImmutableMap.<String, Object>builder()
+				.putAll(defaultCustomerParams)
+				.put("shipping", ImmutableMap.builder().put("address", ImmutableMap.builder().put("line1", address.getLine1()).put("line2", address.getLine2()).put("city", address.getCity()).put("country", address.getCountry()).put("postal_code", address.getPostalCode()).put("state", address.getState()).build()).put("name", shippingDetails.getName()).put("phone", shippingDetails.getPhone()).build())
+				.build();
+
+		Customer customer = Customer.create(params);
+		assertEquals(customer.getShipping(), shippingDetails);
+	}
+
+	@Test
 	public void testCustomerRetrieve() throws StripeException {
 		Customer createdCustomer = Customer.create(defaultCustomerParams);
 		Customer retrievedCustomer = Customer.retrieve(createdCustomer.getId());
