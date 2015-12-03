@@ -32,6 +32,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 	CustomerCardCollection cards;
 	ExternalAccountCollection sources;
 	Map<String, String> metadata;
+	ShippingDetails shipping;
 
 	public Long getCreated() {
 		return created;
@@ -173,6 +174,14 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 
 	public void setMetadata(Map<String, String> metadata) {
 		this.metadata = metadata;
+	}
+
+	public ShippingDetails getShipping() {
+		return shipping;
+	}
+
+	public void setShipping(ShippingDetails shipping) {
+		this.shipping = shipping;
 	}
 
 	public static Customer create(Map<String, Object> params)
