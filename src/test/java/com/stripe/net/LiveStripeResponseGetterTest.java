@@ -90,6 +90,13 @@ public class LiveStripeResponseGetterTest {
 	}
 
 	@Test
+	public void testCreateQueryWithEmptyList() throws StripeException, UnsupportedEncodingException {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("a", new LinkedList<String>());
+		assertEquals("a=", srg.createQuery(params));
+	}
+
+	@Test
 	public void testIncorrectAdditionalOwners() throws StripeException, UnsupportedEncodingException {
 		Map<String, String> ownerParams = new HashMap<String, String>();
 		ownerParams.put("first_name", "Stripe");
