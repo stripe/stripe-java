@@ -16,6 +16,7 @@ public class Coupon extends APIResource implements MetadataStore<Coupon>, HasId 
 	String currency;
 	String duration;
 	String id;
+	Long created;
 	Boolean livemode;
 	Integer durationInMonths;
 	Long maxRedemptions;
@@ -169,6 +170,14 @@ public class Coupon extends APIResource implements MetadataStore<Coupon>, HasId 
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public Long getCreated() {
+		return created;
+	}
+
+	public void setCreated(Long created) {
+		this.created = created;
 	}
 
 	public Boolean getLivemode() {

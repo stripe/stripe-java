@@ -15,6 +15,7 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
 	Integer amount;
 	String currency;
 	String id;
+	Long created;
 	String interval;
 	Integer intervalCount;
 	String name;
@@ -152,6 +153,14 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public Long getCreated() {
+		return created;
+	}
+
+	public void setCreated(Long created) {
+		this.created = created;
 	}
 
 	public String getInterval() {
