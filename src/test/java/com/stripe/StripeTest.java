@@ -95,6 +95,11 @@ public class StripeTest {
 	static Map<String, Object> defaultManagedAccountParams = new HashMap<String, Object>();
 	static RequestOptions cardSupportedRequestOptions;
 
+	Date date = new Date(); //Get current date
+  	Calendar calendar = new GregorianCalendar();
+  	calendar.setTime(date); 
+   	int year = calendar.get(Calendar.YEAR) + 1;	
+
 	static String getUniqueEmail() {
 		return String.format("test+bindings-%s@stripe.com", UUID.randomUUID().toString().substring(24));
 	}
@@ -188,13 +193,13 @@ public class StripeTest {
 	@BeforeClass
 	public static void setUp() {
 		Stripe.apiKey = "tGN0bIwXnHdwOa85VABjPdSn8nWY7G7I"; // stripe public
-															// test key
+									// test key
 
 		cardSupportedRequestOptions = RequestOptions.builder().setStripeVersion("2015-02-16").build();
 
 		defaultCardParams.put("number", "4242424242424242");
 		defaultCardParams.put("exp_month", 12);
-		defaultCardParams.put("exp_year", 2015);
+		defaultCardParams.put("exp_year", year);
 		defaultCardParams.put("cvc", "123");
 		defaultCardParams.put("name", "J Bindings Cardholder");
 		defaultCardParams.put("address_line1", "140 2nd Street");
@@ -209,7 +214,7 @@ public class StripeTest {
 
 		defaultDebitCardParams.put("number", "4000056655665556");
 		defaultDebitCardParams.put("exp_month", 12);
-		defaultDebitCardParams.put("exp_year", 2015);
+		defaultDebitCardParams.put("exp_year", year);
 		defaultDebitCardParams.put("cvc", "123");
 		defaultDebitCardParams.put("name", "J Bindings Debitholder");
 		defaultDebitCardParams.put("address_line1", "140 2nd Street");
@@ -496,7 +501,7 @@ public class StripeTest {
 		Map<String, Object> invalidCardParams = new HashMap<String, Object>();
 		invalidCardParams.put("number", "4242424242424241");
 		invalidCardParams.put("exp_month", 12);
-		invalidCardParams.put("exp_year", 2015);
+		invalidCardParams.put("exp_year", year);
 		invalidChargeParams.put("card", invalidCardParams);
 		Charge.create(invalidChargeParams);
 	}
@@ -508,7 +513,7 @@ public class StripeTest {
 		Map<String, Object> declinedCardParams = new HashMap<String, Object>();
 		declinedCardParams.put("number", "4000000000000002");
 		declinedCardParams.put("exp_month", 12);
-		declinedCardParams.put("exp_year", 2015);
+		declinedCardParams.put("exp_year", year);
 		declinedChargeParams.put("card", declinedCardParams);
 
 		try {
@@ -530,7 +535,7 @@ public class StripeTest {
 		invalidCardParams.put("address_zip", "94024");
 		invalidCardParams.put("address_line1", "42 Foo Street");
 		invalidCardParams.put("exp_month", 12);
-		invalidCardParams.put("exp_year", 2015);
+		invalidCardParams.put("exp_year", year);
 		invalidChargeParams.put("card", invalidCardParams);
 		Charge charge = Charge.create(invalidChargeParams, cardSupportedRequestOptions);
 		assertEquals(charge.getPaid(), true);
@@ -548,7 +553,7 @@ public class StripeTest {
 		invalidCardParams.put("address_zip", "94024");
 		invalidCardParams.put("address_line1", "42 Foo Street");
 		invalidCardParams.put("exp_month", 12);
-		invalidCardParams.put("exp_year", 2015);
+		invalidCardParams.put("exp_year", year);
 		invalidChargeParams.put("card", invalidCardParams);
 		Charge charge = Charge.create(invalidChargeParams, cardSupportedRequestOptions);
 		assertEquals(charge.getPaid(), true);
@@ -744,7 +749,7 @@ public class StripeTest {
 		Map<String, Object> testModeDisputeCardParams = new HashMap<String, Object>();
 		testModeDisputeCardParams.put("number", "4000000000000259");
 		testModeDisputeCardParams.put("exp_month", 12);
-		testModeDisputeCardParams.put("exp_year", 2020);
+		testModeDisputeCardParams.put("exp_year", year);
 		chargeParams.put("card", testModeDisputeCardParams);
 		Charge charge = Charge.create(chargeParams);
 
@@ -1583,7 +1588,7 @@ public class StripeTest {
 		Map<String, Object> invalidCardParams = new HashMap<String, Object>();
 		invalidCardParams.put("number", "4242424242424241");
 		invalidCardParams.put("exp_month", 12);
-		invalidCardParams.put("exp_year", 2015);
+		invalidCardParams.put("exp_year", year);
 		invalidChargeParams.put("card", invalidCardParams);
 		Charge.create(invalidChargeParams, Stripe.apiKey);
 	}
@@ -2147,7 +2152,7 @@ public class StripeTest {
 		Map<String, Object> cardMap = new HashMap<String, Object>();
 		cardMap.put("number", "4242424242424242");
 		cardMap.put("exp_month", 12);
-		cardMap.put("exp_year", 2020);
+		cardMap.put("exp_year", year);
 		chargeParams.put("card", cardMap);
 		Charge charge = Charge.create(chargeParams);
 
