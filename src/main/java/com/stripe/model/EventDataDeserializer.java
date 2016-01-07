@@ -19,26 +19,38 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
 	@SuppressWarnings("rawtypes")
 	static final Map<String, Class> objectMap = new HashMap<String, Class>();
 	static {
-		objectMap.put("account", Account.class);
+		objectMap.put("balance", Balance.class);
+		objectMap.put("balance_transaction", BalanceTransaction.class);
 		objectMap.put("charge", Charge.class);
-		objectMap.put("discount", Discount.class);
 		objectMap.put("customer", Customer.class);
+		objectMap.put("dispute", Dispute.class);
+		objectMap.put("event", Event.class);
+		objectMap.put("file_upload", FileUpload.class);
+		objectMap.put("refund", Refund.class);
+		objectMap.put("token", Token.class);
+		objectMap.put("transfer", Transfer.class);
+		objectMap.put("transfer_reversal", Reversal.class);
+		objectMap.put("account", Account.class);
+		objectMap.put("fee_refund", FeeRefund.class);
+		objectMap.put("application_fee", ApplicationFee.class);
+		objectMap.put("recipient", Recipient.class);
+		objectMap.put("alipay_account", AlipayAccount.class);
+		objectMap.put("bank_account", BankAccount.class);
+		objectMap.put("bitcoin_receiver", BitcoinReceiver.class);
+		objectMap.put("card", Card.class);
+		objectMap.put("order", Order.class);
+		objectMap.put("order_item", OrderItem.class);
+		objectMap.put("product", Product.class);
+		objectMap.put("sku", SKU.class);
+		objectMap.put("coupon", Coupon.class);
+		objectMap.put("discount", Discount.class);
 		objectMap.put("invoice", Invoice.class);
+		objectMap.put("invoice_line_item", InvoiceLineItem.class);
 		objectMap.put("invoiceitem", InvoiceItem.class);
 		objectMap.put("plan", Plan.class);
 		objectMap.put("subscription", Subscription.class);
-		objectMap.put("token", Token.class);
-		objectMap.put("coupon", Coupon.class);
-		objectMap.put("transfer", Transfer.class);
-		objectMap.put("dispute", Dispute.class);
-		objectMap.put("refund", Refund.class);
-		objectMap.put("recipient", Recipient.class);
 		objectMap.put("summary", Summary.class);
 		objectMap.put("fee", Fee.class);
-		objectMap.put("bank_account", BankAccount.class);
-		objectMap.put("balance", Balance.class);
-		objectMap.put("card", Card.class);
-		objectMap.put("balance_transaction", BalanceTransaction.class);
 	}
 
 	private Object deserializeJsonPrimitive(JsonPrimitive element) {
