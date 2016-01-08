@@ -19,6 +19,8 @@ public class LegalEntity extends StripeObject {
 	String firstName;
 	String lastName;
 	Address personalAddress;
+	Boolean personalIdNumberProvided;
+	Boolean ssnLast4Provided;
 	Verification verification;
 	List<Owner> additionalOwners;
 
@@ -42,6 +44,12 @@ public class LegalEntity extends StripeObject {
 	}
 	public Address getPersonalAddress() {
 		return personalAddress;
+	}
+	public Boolean getPersonalIdNumberProvided() {
+		return personalIdNumberProvided;
+	}
+	public Boolean getSsnLast4Provided() {
+		return ssnLast4Provided;
 	}
 	public Verification getVerification() {
 		return verification;
@@ -67,6 +75,8 @@ public class LegalEntity extends StripeObject {
 			equals(firstName, le.firstName) &&
 			equals(lastName, le.lastName) &&
 			equals(personalAddress, le.personalAddress) &&
+			equals(personalIdNumberProvided, le.personalIdNumberProvided) &&
+			equals(ssnLast4Provided, le.ssnLast4Provided) &&
 			equals(verification, le.verification) &&
 			equals(additionalOwners, le.additionalOwners);
 	}
