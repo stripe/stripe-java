@@ -4,7 +4,7 @@ public class AccountTransferSchedule extends StripeObject {
 	Integer delayDays;
 	String interval;
 	Integer monthlyAnchor;
-	String weeklyAnchor
+	String weeklyAnchor;
 
 	public Integer getDelayDays() {
 		return this.delayDays;
