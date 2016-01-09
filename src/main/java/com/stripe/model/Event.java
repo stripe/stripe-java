@@ -16,6 +16,7 @@ public class Event extends APIResource implements HasId {
 	String userId;
 	Boolean livemode;
 	Long created;
+	String apiVersion;
 	EventData data;
 	Integer pendingWebhooks;
 	String request;
@@ -85,6 +86,10 @@ public class Event extends APIResource implements HasId {
 
 	public void setCreated(Long created) {
 		this.created = created;
+	}
+
+	public String getApiVersion() {
+		return apiVersion;
 	}
 
 	public String getId() {
