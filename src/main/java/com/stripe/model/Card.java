@@ -32,6 +32,7 @@ public class Card extends ExternalAccount implements MetadataStore<Card>, HasId 
 	String brand;
 	String funding;
 	String currency;
+	String tokenizationMethod;
 	Map<String, String> metadata;
 
 	public Card update(Map<String, Object> params)
@@ -218,5 +219,8 @@ public class Card extends ExternalAccount implements MetadataStore<Card>, HasId 
 	}
 	public void setCurrency(String currency) {
 		this.currency = currency;
+	}
+	public String getTokenizationMethod() {
+		return tokenizationMethod;
 	}
 }
