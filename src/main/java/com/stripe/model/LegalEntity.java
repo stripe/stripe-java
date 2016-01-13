@@ -48,8 +48,14 @@ public class LegalEntity extends StripeObject {
 	public Boolean getPersonalIdNumberProvided() {
 		return personalIdNumberProvided;
 	}
+	public void setPersonalIdNumberProvided(Boolean personalIdNumberProvided) {
+		this.personalIdNumberProvided = personalIdNumberProvided;
+	}
 	public Boolean getSsnLast4Provided() {
 		return ssnLast4Provided;
+	}
+	public void setSsnLast4Provided(Boolean ssnLast4Provided) {
+		this.ssnLast4Provided = ssnLast4Provided;
 	}
 	public Verification getVerification() {
 		return verification;

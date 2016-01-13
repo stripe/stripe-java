@@ -17,6 +17,7 @@ public class Token extends APIResource implements HasId {
 	String id;
 	String email;
 	String clientIp;
+	String type;
 	Boolean livemode;
 	Boolean used;
 	Card card;
@@ -68,6 +69,14 @@ public class Token extends APIResource implements HasId {
 
 	public void setClientIp(String clientIp) {
 		this.clientIp = clientIp;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public Boolean getLivemode() {

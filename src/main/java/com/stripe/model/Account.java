@@ -16,6 +16,7 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 	Boolean chargesEnabled;
 	Boolean detailsSubmitted;
 	Boolean transfersEnabled;
+	Boolean debitNegativeBalances;
 	List<String> currenciesSupported;
 	String email;
 	String statementDescriptor;
@@ -30,10 +31,15 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 	String businessName;
 	String businessUrl;
 	String businessLogo;
+	String businessPrimaryColor;
 	String supportPhone;
 	String supportUrl;
 	String supportEmail;
+	String productDescription;
 	Boolean managed;
+	AccountDeclineChargeOn declineChargeOn;
+	AccountTosAcceptance tosAcceptance;
+	AccountTransferSchedule transferSchedule;
 	ExternalAccountCollection externalAccounts;
 
 	public String getId() {
@@ -50,6 +56,14 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 
 	public Boolean getTransfersEnabled() {
 		return transfersEnabled;
+	}
+
+	public Boolean getDebitNegativeBalances() {
+		return debitNegativeBalances;
+	}
+	
+	public void setDebitNegativeBalances(Boolean debitNegativeBalances) {
+		this.debitNegativeBalances = debitNegativeBalances;
 	}
 
 	public List<String> getCurrenciesSupported() {
@@ -113,6 +127,14 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 		return businessLogo;
 	}
 
+	public String getBusinessPrimaryColor(){
+		return businessPrimaryColor;
+	}
+
+	public void setBusinessPrimaryColor(String businessPrimaryColor){
+		this.businessPrimaryColor = businessPrimaryColor;
+	}
+
 	public String getSupportPhone()
 	{
 		return supportPhone;
@@ -128,9 +150,41 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 		return supportEmail;
 	}
 
+	public String getProductDescription(){
+		return productDescription;
+	}
+
+	public void setProductDescription(String productDescription){
+		this.productDescription = productDescription;
+	}
+
 	public Boolean getManaged()
 	{
 		return managed;
+	}
+
+	public AccountDeclineChargeOn getDeclineChargeOn(){
+		return declineChargeOn;
+	}
+
+	public void setDeclineChargeOn(AccountDeclineChargeOn declineChargeOn){
+		this.declineChargeOn = declineChargeOn;
+	}
+
+	public AccountTosAcceptance getTosAcceptance(){
+		return tosAcceptance;
+	}
+
+	public void setTosAcceptance(AccountTosAcceptance tosAcceptance){
+		this.tosAcceptance = tosAcceptance;
+	}
+
+	public AccountTransferSchedule getTransferSchedule(){
+		return transferSchedule;
+	}
+
+	public void setTransferSchedule(AccountTransferSchedule transferSchedule){
+		this.transferSchedule = transferSchedule;
 	}
 
 	public ExternalAccountCollection getExternalAccounts()

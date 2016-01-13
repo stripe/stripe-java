@@ -18,6 +18,7 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
 	String id;
 	String charge;
 	String reason;
+	String receiptNumber;
 	Map<String, String> metadata;
 
 	public Refund update(Map<String, Object> params)
@@ -137,5 +138,13 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 	public void setReason(String reason) {
 		this.reason = reason;
+	}
+
+	public String getReceiptNumber() {
+		return receiptNumber;
+	}
+	
+	public void setReceiptNumber(String receiptNumber) {
+		this.receiptNumber = receiptNumber;
 	}
 }
