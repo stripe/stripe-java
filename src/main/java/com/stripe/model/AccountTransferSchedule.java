@@ -7,18 +7,34 @@ public class AccountTransferSchedule extends StripeObject {
 	String weeklyAnchor;
 
 	public Integer getDelayDays() {
-		return this.delayDays;
+		return delayDays;
+	}
+
+	public void setDelayDays(Integer delayDays) {
+		this.delayDays = delayDays;
 	}
 
 	public String getInterval() {
-		return this.interval;
+		return interval;
+	}
+
+	public void setInterval(String interval) {
+		this.interval = interval;
 	}
 
 	public Integer getMonthlyAnchor() {
-		return this.monthlyAnchor;
+		return monthlyAnchor;
+	}
+
+	public void setMonthlyAnchor(Integer monthlyAnchor) {
+		this.monthlyAnchor = monthlyAnchor;
 	}
 
 	public String getWeeklyAnchor() {
-		return this.weeklyAnchor;
+		return weeklyAnchor;
+	}
+
+	public void setWeeklyAnchor(String weeklyAnchor) {
+		this.weeklyAnchor = weeklyAnchor;
 	}
 }

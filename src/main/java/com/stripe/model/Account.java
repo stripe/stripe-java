@@ -61,6 +61,10 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 	public Boolean getDebitNegativeBalances() {
 		return debitNegativeBalances;
 	}
+	
+	public void setDebitNegativeBalances(Boolean debitNegativeBalances) {
+		this.debitNegativeBalances = debitNegativeBalances;
+	}
 
 	public List<String> getCurrenciesSupported() {
 		return currenciesSupported;
@@ -123,9 +127,12 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 		return businessLogo;
 	}
 
-	public String getBusinessPrimaryColor()
-	{
+	public String getBusinessPrimaryColor(){
 		return businessPrimaryColor;
+	}
+
+	public void setBusinessPrimaryColor(String businessPrimaryColor){
+		this.businessPrimaryColor = businessPrimaryColor;
 	}
 
 	public String getSupportPhone()
@@ -143,9 +150,12 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 		return supportEmail;
 	}
 
-	public String getProductDescription()
-	{
+	public String getProductDescription(){
 		return productDescription;
+	}
+
+	public void setProductDescription(String productDescription){
+		this.productDescription = productDescription;
 	}
 
 	public Boolean getManaged()
@@ -153,19 +163,28 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 		return managed;
 	}
 
-	public AccountDeclineChargeOn getDeclineChargeOn()
-	{
+	public AccountDeclineChargeOn getDeclineChargeOn(){
 		return declineChargeOn;
 	}
 
-	public AccountTosAcceptance getTosAcceptance()
-	{
+	public void setDeclineChargeOn(AccountDeclineChargeOn declineChargeOn){
+		this.declineChargeOn = declineChargeOn;
+	}
+
+	public AccountTosAcceptance getTosAcceptance(){
 		return tosAcceptance;
 	}
 
-	public AccountTransferSchedule getTransferSchedule()
-	{
+	public void setTosAcceptance(AccountTosAcceptance tosAcceptance){
+		this.tosAcceptance = tosAcceptance;
+	}
+
+	public AccountTransferSchedule getTransferSchedule(){
 		return transferSchedule;
+	}
+
+	public void setTransferSchedule(AccountTransferSchedule transferSchedule){
+		this.transferSchedule = transferSchedule;
 	}
 
 	public ExternalAccountCollection getExternalAccounts()

@@ -223,4 +223,8 @@ public class Card extends ExternalAccount implements MetadataStore<Card>, HasId 
 	public String getTokenizationMethod() {
 		return tokenizationMethod;
 	}
+	
+	public void setTokenizationMethod(String tokenizationMethod) {
+		this.tokenizationMethod = tokenizationMethod;
+	}
 }

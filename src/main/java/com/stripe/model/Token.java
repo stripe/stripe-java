@@ -75,6 +75,10 @@ public class Token extends APIResource implements HasId {
 		return type;
 	}
 
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	public Boolean getLivemode() {
 		return livemode;
 	}

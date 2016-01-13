@@ -143,4 +143,8 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
 	public String getReceiptNumber() {
 		return receiptNumber;
 	}
+	
+	public void setReceiptNumber(String receiptNumber) {
+		this.receiptNumber = receiptNumber;
+	}
 }

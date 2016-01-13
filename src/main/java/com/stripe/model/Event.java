@@ -92,6 +92,10 @@ public class Event extends APIResource implements HasId {
 		return apiVersion;
 	}
 
+	public void setApiVersion(String apiVersion) {
+		this.apiVersion = apiVersion;
+	}
+
 	public String getId() {
 		return id;
 	}
