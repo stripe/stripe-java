@@ -82,7 +82,7 @@ public class LegalEntity extends StripeObject {
 			equals(lastName, le.lastName) &&
 			equals(personalAddress, le.personalAddress) &&
 			equals(personalIdNumberProvided, le.personalIdNumberProvided) &&
-			equals(ssnLast4Provided, le.ssnLast4Provided) &&
+			equals(ssnLast_4Provided, le.ssnLast_4Provided) &&
 			equals(verification, le.verification) &&
 			equals(additionalOwners, le.additionalOwners);
 	}
