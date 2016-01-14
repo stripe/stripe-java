@@ -10,6 +10,7 @@ import com.stripe.net.RequestOptions;
 
 import java.util.List;
 import java.util.Map;
+import com.google.gson.annotations.SerializedName;
 
 public class LegalEntity extends StripeObject {
 	String type;
@@ -20,6 +21,7 @@ public class LegalEntity extends StripeObject {
 	String lastName;
 	Address personalAddress;
 	Boolean personalIdNumberProvided;
+	@SerializedName("ssn_last_4_provided")/*Annotation required for GSON serialization for field with number*/
 	Boolean ssnLast4Provided;
 	Verification verification;
 	List<Owner> additionalOwners;
