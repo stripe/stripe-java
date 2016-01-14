@@ -20,6 +20,7 @@ public class LegalEntity extends StripeObject {
 	String lastName;
 	Address personalAddress;
 	Boolean personalIdNumberProvided;
+	@SerializedName("ssn_last_4_provided")/*Annotation required for GSON serialization for field with number*/
 	Boolean ssnLast4Provided;
 	Verification verification;
 	List<Owner> additionalOwners;
