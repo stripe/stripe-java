@@ -20,7 +20,7 @@ public class LegalEntity extends StripeObject {
 	String lastName;
 	Address personalAddress;
 	Boolean personalIdNumberProvided;
-	Boolean ssnLast4Provided;
+	Boolean ssnLast_4Provided;
 	Verification verification;
 	List<Owner> additionalOwners;
 
@@ -52,10 +52,10 @@ public class LegalEntity extends StripeObject {
 		this.personalIdNumberProvided = personalIdNumberProvided;
 	}
 	public Boolean getSsnLast4Provided() {
-		return ssnLast4Provided;
+		return ssnLast_4Provided;
 	}
-	public void setSsnLast4Provided(Boolean ssnLast4Provided) {
-		this.ssnLast4Provided = ssnLast4Provided;
+	public void setSsnLast4Provided(Boolean ssnLast_4Provided) {
+		this.ssnLast_4Provided = ssnLast_4Provided;
 	}
 	public Verification getVerification() {
 		return verification;
