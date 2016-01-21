@@ -54,6 +54,15 @@ public class AccountTest extends BaseStripeTest {
 		le.address.city = "San Francisco";
 		assertEquals(le, acc.getLegalEntity());
 
+		Account.Verification verif = new Account.Verification();
+		verif.disabledReason = "fields_needed";
+		verif.dueBy = (long) 1457913600;
+		LinkedList<String> fn = new LinkedList<String>();
+		fn.add("legal_entity.first_name");
+		fn.add("legal_entity.last_name");
+		verif.fieldsNeeded = fn;
+		assertEquals(verif, acc.getVerification());
+
 		assertEquals("site@stripe.com", acc.getEmail());
 		assertEquals("usd", acc.getDefaultCurrency());
 		assertEquals("US", acc.getCountry());
