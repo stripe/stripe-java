@@ -15,6 +15,12 @@
         "type": "company",
         "address": {
             "city": "San Francisco"
+        },
+        "verification": {
+            "details": null,
+            "details_code": "failed_other",
+            "document": null,
+            "status": "unverified"
         }
     },
     "default_currency": "usd",
@@ -29,5 +35,13 @@
         "url": "/v1/accounts/acct_1032D82eZvKYlo2C/external_accounts",
         "has_more": false,
         "data": []
+    },
+    "verification": {
+        "disabled_reason": "fields_needed",
+        "due_by": 1457913600,
+        "fields_needed": [
+            "legal_entity.first_name",
+            "legal_entity.last_name"
+        ]
     }
 }

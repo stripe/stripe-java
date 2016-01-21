@@ -61,7 +61,7 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 	public Boolean getDebitNegativeBalances() {
 		return debitNegativeBalances;
 	}
-	
+
 	public void setDebitNegativeBalances(Boolean debitNegativeBalances) {
 		this.debitNegativeBalances = debitNegativeBalances;
 	}
@@ -298,6 +298,7 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 		List<String> fieldsNeeded;
 		Long dueBy;
 		Boolean contacted;
+		String disabledReason;
 
 		public List<String> getFieldsNeeded() {
 			return fieldsNeeded;
@@ -307,6 +308,25 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 		}
 		public Boolean getContacted() {
 			return contacted;
+		}
+		public String getDisabledReason() {
+			return disabledReason;
+		}
+
+		@Override
+		public boolean equals(Object o) {
+			if (this == o) {
+				return true;
+			}
+			if (o == null || getClass() != o.getClass()) {
+				return false;
+			}
+
+			Verification ve = (Verification) o;
+			return equals(dueBy, ve.dueBy) &&
+				equals(disabledReason, ve.disabledReason) &&
+				equals(fieldsNeeded, ve.fieldsNeeded) &&
+				equals(contacted, ve.contacted);
 		}
 	}
 
