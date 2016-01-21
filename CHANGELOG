@@ -1,3 +1,8 @@
+=== 1.42.0 2016-01-21
+
+* Add `details_code` to `LegalEntity`
+* Add `disabled_reason` to `Verification`
+
 === 1.41.1 2016-01-15
 
 * Fix serialization bug in `LegalEntity`'s `ssnLast4Provided`
