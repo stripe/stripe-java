@@ -52,6 +52,10 @@ public class AccountTest extends BaseStripeTest {
 		le.type = "company";
 		le.address = new Address();
 		le.address.city = "San Francisco";
+		LegalEntity.Verification leVerif = new LegalEntity.Verification();
+		leVerif.detailsCode = "failed_other";
+		leVerif.status = "unverified";
+		le.verification = leVerif;
 		assertEquals(le, acc.getLegalEntity());
 
 		Account.Verification verif = new Account.Verification();

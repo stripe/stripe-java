@@ -124,6 +124,7 @@ public class LegalEntity extends StripeObject {
 		String status;
 		String document;
 		String details;
+		String detailsCode;
 
 		public String getStatus() {
 			return status;
@@ -133,6 +134,9 @@ public class LegalEntity extends StripeObject {
 		}
 		public String getDetails() {
 			return details;
+		}
+		public String getDetailsCode() {
+			return detailsCode;
 		}
 
 		@Override
@@ -147,7 +151,8 @@ public class LegalEntity extends StripeObject {
 			Verification verification = (Verification) o;
 			return equals(status, verification.status) &&
 				equals(document, verification.document) &&
-				equals(details, verification.details);
+				equals(details, verification.details) &&
+				equals(detailsCode, verification.detailsCode);
 		}
 	}
 

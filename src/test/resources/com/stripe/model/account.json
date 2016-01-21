@@ -15,6 +15,12 @@
         "type": "company",
         "address": {
             "city": "San Francisco"
+        },
+        "verification": {
+            "details": null,
+            "details_code": "failed_other",
+            "document": null,
+            "status": "unverified"
         }
     },
     "default_currency": "usd",
