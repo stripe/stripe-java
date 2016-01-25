@@ -79,7 +79,7 @@ public abstract class StripeCollection<T extends HasId> extends StripeObject imp
 	/**
 	 * Returns an iterable that can be used to iterate across all objects
 	 * across all pages. As page boundaries are encountered, the next page will
-	 * be fetch automatically for continued iteration.
+	 * be fetched automatically for continued iteration.
 	 */
 	public Iterable<T> autoPagingIterable() {
 		return new PagingIterable<T>(this);
