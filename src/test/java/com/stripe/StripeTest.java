@@ -29,7 +29,9 @@ import com.stripe.model.DeletedCoupon;
 import com.stripe.model.DeletedCustomer;
 import com.stripe.model.DeletedInvoiceItem;
 import com.stripe.model.DeletedPlan;
+import com.stripe.model.DeletedProduct;
 import com.stripe.model.DeletedRecipient;
+import com.stripe.model.DeletedSKU;
 import com.stripe.model.Dispute;
 import com.stripe.model.Event;
 import com.stripe.model.EvidenceDetails;
@@ -2262,6 +2264,35 @@ public class StripeTest {
 
 		SKU updated = retrieved.update(ImmutableMap.<String,Object>of("price", 200));
 		assertEquals((Integer)200, updated.getPrice());
+	}
+
+	@Test
+	public void testSKUProductDeletion() throws StripeException {
+		Stripe.apiKey = "sk_test_JieJALRz7rPz7boV17oMma7a";
+
+		Map<String, Object> productCreateParams = new HashMap<String, Object>();
+		String productId = "my_first_product_" + UUID.randomUUID();
+		productCreateParams.put("id", productId);
+		productCreateParams.put("name", "Watermelon");
+		productCreateParams.put("attributes[]", "size");
+		Product createdProduct = Product.create(productCreateParams);
+
+		Map<String, Object> skuCreateParams = new HashMap<String, Object>();
+		String skuId = "my_first_sku_" + UUID.randomUUID();
+		skuCreateParams.put("id", skuId);
+		skuCreateParams.put("product", productId);
+		skuCreateParams.put("attributes", ImmutableMap.of("size", "large"));
+		skuCreateParams.put("price", 100);
+		skuCreateParams.put("currency", "usd");
+		skuCreateParams.put("inventory", ImmutableMap.of("type", "infinite"));
+
+		SKU created = SKU.create(skuCreateParams);
+
+		DeletedSKU deletedSKU = created.delete();
+		assertTrue(deletedSKU.getDeleted());
+
+		DeletedProduct deletedProduct = createdProduct.delete();
+		assertTrue(deletedProduct.getDeleted());
 	}
 
 	@Test
