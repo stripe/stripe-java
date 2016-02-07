@@ -20,6 +20,8 @@ import com.stripe.model.BitcoinTransaction;
 import com.stripe.model.Card;
 import com.stripe.model.Charge;
 import com.stripe.model.ChargeRefundCollection;
+import com.stripe.model.CountrySpec;
+import com.stripe.model.CountrySpecCollection;
 import com.stripe.model.Coupon;
 import com.stripe.model.Customer;
 import com.stripe.model.CustomerSubscriptionCollection;
@@ -2366,4 +2368,32 @@ public class StripeTest {
 
 		Assert.assertNotNull(accountCollection);
 	}
+
+    @Test
+    public void testCountrySpecRetrieve() throws StripeException {
+		String country = "US";
+		CountrySpec retrievedCountrySpec = CountrySpec.retrieve(country);
+
+		assertEquals(country, retrievedCountrySpec.getId());
+		assertNotSame(retrievedCountrySpec.getSupportedPaymentCurrencies().size(), 0);
+		assertNotSame(retrievedCountrySpec.getSupportedBankAccountCurrencies().size(), 0);
+		assertNotSame(retrievedCountrySpec.getSupportedPaymentMethods().size(), 0);
+
+		List<String> countryForBankAccountInUsd = retrievedCountrySpec.getSupportedBankAccountCurrencies().get("usd");
+		assertNotSame(countryForBankAccountInUsd.size(), 0);
+
+		Map<String, Map<String, List<String>>> verificationFields = retrievedCountrySpec.getVerificationFields();
+		assertNotSame(verificationFields.size(), 0);
+		assertNotSame(verificationFields.get("individual").get("minimum").size(), 0);
+    }
+
+    @Test
+    public void testCountrySpecAll() throws StripeException {
+		Integer limit = 3;
+		Map<String, Object> listParams = new HashMap<String, Object>();
+		listParams.put("count", limit);
+		CountrySpecCollection retrievedCountrySpecCollection = CountrySpec.list(listParams);
+
+		assertEquals((Integer)retrievedCountrySpecCollection.getData().size(), limit);
+    }
 }
