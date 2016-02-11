@@ -22,20 +22,40 @@ public class CountrySpec extends APIResource implements HasId {
 		return id;
 	}
 
+	public void setId(String id) {
+		this.id = id;
+	}
+
 	public Map<String, List<String>> getSupportedBankAccountCurrencies() {
 		return supportedBankAccountCurrencies;
+	}
+
+	public void setSupportedBankAccountCurrencies(Map<String, List<String>> supportedBankAccountCurrencies) {
+		this.supportedBankAccountCurrencies = supportedBankAccountCurrencies;
 	}
 
 	public List<String> getSupportedPaymentCurrencies() {
 		return supportedPaymentCurrencies;
 	}
 
+	public void setSupportedPaymentCurrencies(List<String> supportedPaymentCurrencies) {
+		this.supportedPaymentCurrencies = supportedPaymentCurrencies;
+	}
+
 	public List<String> getSupportedPaymentMethods() {
 		return supportedPaymentMethods;
 	}
 
+	public void setSupportedPaymentMethods(List<String> supportedPaymentMethods) {
+		this.supportedPaymentMethods = supportedPaymentMethods;
+	}
+
 	public VerificationFields getVerificationFields() {
 		return verificationFields;
+	}
+
+	public void setVerificationFields(VerificationFields verificationFields) {
+		this.verificationFields = verificationFields;
 	}
 
 	public static CountrySpec retrieve(String country) throws AuthenticationException,
