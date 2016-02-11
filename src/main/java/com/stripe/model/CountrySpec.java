@@ -16,7 +16,7 @@ public class CountrySpec extends APIResource implements HasId {
 	Map<String, List<String>> supportedBankAccountCurrencies;
 	List<String> supportedPaymentCurrencies;
 	List<String> supportedPaymentMethods;
-	Map<String, Map<String, List<String>>> verificationFields;
+	VerificationFields verificationFields;
 
 	public String getId() {
 		return id;
@@ -34,7 +34,7 @@ public class CountrySpec extends APIResource implements HasId {
 		return supportedPaymentMethods;
 	}
 
-	public Map<String, Map<String, List<String>>> getVerificationFields() {
+	public VerificationFields getVerificationFields() {
 		return verificationFields;
 	}
 

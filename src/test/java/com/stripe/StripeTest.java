@@ -58,6 +58,9 @@ import com.stripe.model.Subscription;
 import com.stripe.model.Token;
 import com.stripe.model.Transfer;
 import com.stripe.model.TransferReversalCollection;
+import com.stripe.model.VerificationFields;
+import com.stripe.model.VerificationFieldsDetails;
+
 import com.stripe.net.RequestOptions;
 
 import junit.framework.Assert;
@@ -2382,9 +2385,8 @@ public class StripeTest {
 		List<String> countryForBankAccountInUsd = retrievedCountrySpec.getSupportedBankAccountCurrencies().get("usd");
 		assertNotSame(countryForBankAccountInUsd.size(), 0);
 
-		Map<String, Map<String, List<String>>> verificationFields = retrievedCountrySpec.getVerificationFields();
-		assertNotSame(verificationFields.size(), 0);
-		assertNotSame(verificationFields.get("individual").get("minimum").size(), 0);
+		VerificationFields verificationFields = retrievedCountrySpec.getVerificationFields();
+		assertNotSame(verificationFields.getIndividual().getMinimum().size(), 0);
     }
 
     @Test
