@@ -16,6 +16,7 @@ public class LegalEntity extends StripeObject {
 	String type;
 	Address address;
 	String businessName;
+	Boolean businessTaxIdProvided;
 	DateOfBirth dob;
 	String firstName;
 	String lastName;
@@ -34,6 +35,12 @@ public class LegalEntity extends StripeObject {
 	}
 	public String getBusinessName() {
 		return businessName;
+	}
+	public Boolean getBusinessTaxIdProvided() {
+		return businessTaxIdProvided;
+	}
+	public void setBusinessTaxIdProvided(Boolean businessTaxIdProvided) {
+		this.businessTaxIdProvided = businessTaxIdProvided;
 	}
 	public DateOfBirth getDob() {
 		return dob;
