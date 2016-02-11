@@ -13,6 +13,9 @@
     ],
     "legal_entity": {
         "type": "company",
+        "business_tax_id_provided": true,
+        "personal_id_number_provided": false,
+        "ssn_last_4_provided": true,
         "address": {
             "city": "San Francisco"
         },
