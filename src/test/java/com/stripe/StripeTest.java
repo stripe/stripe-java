@@ -2387,6 +2387,14 @@ public class StripeTest {
 
 		VerificationFields verificationFields = retrievedCountrySpec.getVerificationFields();
 		assertNotSame(verificationFields.getIndividual().getMinimum().size(), 0);
+
+		CountrySpec retrievedCountrySpec2 = CountrySpec.retrieve(country);
+		VerificationFields verificationFields2 = retrievedCountrySpec2.getVerificationFields();
+		assert(verificationFields2.equals(verificationFields));
+
+		CountrySpec retrievedCountrySpecFR = CountrySpec.retrieve("FR");
+		VerificationFields verificationFieldsFR = retrievedCountrySpecFR.getVerificationFields();
+		assert(!verificationFieldsFR.equals(verificationFields));
     }
 
     @Test
