@@ -1,3 +1,7 @@
+=== 1.45.0 2016-02-18
+
+* Add `CountrySpec` model for looking up country payment information
+
 === 1.44.0 2016-02-11
 
 * Add `businessTaxIdProvided` to `LegalEntity`
