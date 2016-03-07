@@ -1,6 +1,9 @@
 package com.stripe.model;
 
 import java.util.Iterator;
+import java.util.Map;
+
+import com.stripe.net.RequestOptions;
 
 /**
  * Provides an <code>{@code Iterable<T>}</code> target that automatically

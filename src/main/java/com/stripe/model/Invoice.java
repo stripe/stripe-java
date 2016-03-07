@@ -193,8 +193,8 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 		this.discount = discount;
 	}
 
-	public InvoiceLineItemCollection getLines() {
-		return lines;
+	public PagingProxy<InvoiceLineItem> getLines() {
+		return new PagingProxy<InvoiceLineItem>(lines);
 	}
 
 	public Boolean getLivemode() {
