@@ -220,10 +220,38 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 		return createCard(params, (RequestOptions) null);
 	}
 
+	public BankAccount createBankAccount(String token) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return createBankAccount(token, (RequestOptions) null);
+	}
+
+	public BankAccount createBankAccount(String token, RequestOptions options) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		Map<String, Object> postParams = new HashMap<String, Object>();
+		postParams.put("bank_account", token);
+
+		return createBankAccount(postParams, options);
+	}
+
+	public BankAccount createBankAccount(Map<String, Object> params) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return createBankAccount(params, (RequestOptions) null);
+	}
+
+	public BankAccount createBankAccount(Map<String, Object> params, RequestOptions options) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return request(RequestMethod.POST, String.format("%s/bank_accounts",
+				instanceURL(Customer.class, this.id)), params, BankAccount.class, options);
+	}
+
 	public Subscription createSubscription(Map<String, Object> params) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-	return createSubscription(params, (RequestOptions) null);
+		return createSubscription(params, (RequestOptions) null);
 	}
 
 	/** 1/2014: Legacy (from before multiple subscriptions per customer) */

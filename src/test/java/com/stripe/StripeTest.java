@@ -15,6 +15,7 @@ import com.stripe.model.ApplicationFee;
 import com.stripe.model.Balance;
 import com.stripe.model.BalanceTransaction;
 import com.stripe.model.BalanceTransactionCollection;
+import com.stripe.model.BankAccount;
 import com.stripe.model.BitcoinReceiver;
 import com.stripe.model.BitcoinTransaction;
 import com.stripe.model.Card;
@@ -25,6 +26,7 @@ import com.stripe.model.CountrySpecCollection;
 import com.stripe.model.Coupon;
 import com.stripe.model.Customer;
 import com.stripe.model.CustomerSubscriptionCollection;
+import com.stripe.model.DeletedBankAccount;
 import com.stripe.model.DeletedBitcoinReceiver;
 import com.stripe.model.DeletedCard;
 import com.stripe.model.DeletedCoupon;
@@ -57,9 +59,7 @@ import com.stripe.model.ShippingDetails;
 import com.stripe.model.Subscription;
 import com.stripe.model.Token;
 import com.stripe.model.Transfer;
-import com.stripe.model.TransferReversalCollection;
 import com.stripe.model.VerificationFields;
-import com.stripe.model.VerificationFieldsDetails;
 
 import com.stripe.net.RequestOptions;
 
@@ -105,7 +105,7 @@ public class StripeTest {
 	static Map<String, Object> defaultBitcoinReceiverParams = new HashMap<String, Object>();
 	static Map<String, Object> defaultAlipayTokenParams = new HashMap<String, Object>();
 	static Map<String, Object> defaultManagedAccountParams = new HashMap<String, Object>();
-	static RequestOptions cardSupportedRequestOptions;
+	static RequestOptions supportedRequestOptions;
 
 	static String getYear() {
 		Date date = new Date(); //Get current date
@@ -210,7 +210,7 @@ public class StripeTest {
 		Stripe.apiKey = "tGN0bIwXnHdwOa85VABjPdSn8nWY7G7I"; // stripe public
 									// test key
 
-		cardSupportedRequestOptions = RequestOptions.builder().setStripeVersion("2015-02-16").build();
+		supportedRequestOptions = RequestOptions.builder().setStripeVersion("2015-02-16").build();
 
 		defaultCardParams.put("number", "4242424242424242");
 		defaultCardParams.put("exp_month", 12);
@@ -261,6 +261,8 @@ public class StripeTest {
 		defaultBankAccountParams.put("country", "US");
 		defaultBankAccountParams.put("routing_number", "110000000");
 		defaultBankAccountParams.put("account_number", "000123456789");
+		defaultBankAccountParams.put("account_holder_name", "Test Holder");
+		defaultBankAccountParams.put("account_holder_type", "individual");
 
 		defaultRecipientParams.put("name", "J Test");
 		defaultRecipientParams.put("type", "individual");
@@ -552,7 +554,7 @@ public class StripeTest {
 		invalidCardParams.put("exp_month", 12);
 		invalidCardParams.put("exp_year", getYear());
 		invalidChargeParams.put("card", invalidCardParams);
-		Charge charge = Charge.create(invalidChargeParams, cardSupportedRequestOptions);
+		Charge charge = Charge.create(invalidChargeParams, supportedRequestOptions);
 		assertEquals(charge.getPaid(), true);
 		assertEquals(charge.getCard().getAddressZipCheck(), "fail");
 		assertEquals(charge.getCard().getAddressLine1Check(), "pass");
@@ -570,7 +572,7 @@ public class StripeTest {
 		invalidCardParams.put("exp_month", 12);
 		invalidCardParams.put("exp_year", getYear());
 		invalidChargeParams.put("card", invalidCardParams);
-		Charge charge = Charge.create(invalidChargeParams, cardSupportedRequestOptions);
+		Charge charge = Charge.create(invalidChargeParams, supportedRequestOptions);
 		assertEquals(charge.getPaid(), true);
 		assertEquals(charge.getCard().getAddressZipCheck(), "pass");
 		assertEquals(charge.getCard().getAddressLine1Check(), "fail");
@@ -776,7 +778,7 @@ public class StripeTest {
 
 	@Test
 	public void testCustomerCreate() throws StripeException {
-		Customer customer = Customer.create(defaultCustomerParams, cardSupportedRequestOptions);
+		Customer customer = Customer.create(defaultCustomerParams, supportedRequestOptions);
 		assertEquals(customer.getDescription(), "J Bindings Customer");
 		List<Card> customerCards = customer.getCards().getData();
 		assertEquals(1, customerCards.size());
@@ -955,7 +957,7 @@ public class StripeTest {
 
 	@Test
 	public void testCustomerCardAddition() throws StripeException {
-		Customer createdCustomer = Customer.create(defaultCustomerParams, cardSupportedRequestOptions);
+		Customer createdCustomer = Customer.create(defaultCustomerParams, supportedRequestOptions);
 		String originalDefaultCard = createdCustomer.getDefaultCard();
 
 		Map<String, Object> creationParams = new HashMap<String, Object>();
@@ -965,13 +967,13 @@ public class StripeTest {
 		Token token = Token.create(defaultTokenParams);
 		createdCustomer.createCard(token.getId());
 
-		Customer updatedCustomer = Customer.retrieve(createdCustomer.getId(), cardSupportedRequestOptions);
+		Customer updatedCustomer = Customer.retrieve(createdCustomer.getId(), supportedRequestOptions);
 		assertEquals((Integer) updatedCustomer.getCards().getData().size(), (Integer) 3);
 		assertEquals(updatedCustomer.getDefaultCard(), originalDefaultCard);
 
 		Map<String, Object> updateParams = new HashMap<String, Object>();
 		updateParams.put("default_card", addedCard.getId());
-		Customer customerAfterDefaultCardUpdate = updatedCustomer.update(updateParams, cardSupportedRequestOptions);
+		Customer customerAfterDefaultCardUpdate = updatedCustomer.update(updateParams, supportedRequestOptions);
 		assertEquals((Integer) customerAfterDefaultCardUpdate.getCards().getData().size(), (Integer) 3);
 		assertEquals(customerAfterDefaultCardUpdate.getDefaultCard(), addedCard.getId());
 
@@ -981,7 +983,7 @@ public class StripeTest {
 
 	@Test
 	public void testCreateCardThroughCollection() throws StripeException {
-		Customer createdCustomer = Customer.create(defaultCustomerParams, cardSupportedRequestOptions);
+		Customer createdCustomer = Customer.create(defaultCustomerParams, supportedRequestOptions);
 
 		Map<String, Object> creationParams = new HashMap<String, Object>();
 		creationParams.put("card", defaultCardParams);
@@ -989,14 +991,14 @@ public class StripeTest {
 
 		assertEquals(createdCustomer.getId(), addedCard.getCustomer());
 
-		Customer updatedCustomer = Customer.retrieve(createdCustomer.getId(), cardSupportedRequestOptions);
+		Customer updatedCustomer = Customer.retrieve(createdCustomer.getId(), supportedRequestOptions);
 		assertEquals((Integer) updatedCustomer.getCards().getData().size(), (Integer) 2);
 	}
 
 
 	@Test
 	public void testCustomerCardUpdate() throws StripeException {
-		Customer customer = Customer.create(defaultCustomerParams, cardSupportedRequestOptions);
+		Customer customer = Customer.create(defaultCustomerParams, supportedRequestOptions);
 		Card originalCard = customer.getCards().getData().get(0);
 		Map<String, Object> updateParams = new HashMap<String, Object>();
 		updateParams.put("name", "J Bindings Cardholder, Jr.");
@@ -1006,19 +1008,61 @@ public class StripeTest {
 
 	@Test
 	public void testCustomerCardDelete() throws StripeException {
-		Customer customer = Customer.create(defaultCustomerParams, cardSupportedRequestOptions);
+		Customer customer = Customer.create(defaultCustomerParams, supportedRequestOptions);
 		Map<String, Object> creationParams = new HashMap<String, Object>();
 		creationParams.put("card", defaultCardParams);
 		customer.createCard(creationParams);
 
 		Card card = customer.getCards().getData().get(0);
 		DeletedCard deletedCard = card.delete();
-		Customer retrievedCustomer = Customer.retrieve(customer.getId(), cardSupportedRequestOptions);
+		Customer retrievedCustomer = Customer.retrieve(customer.getId(), supportedRequestOptions);
 
 		assertTrue(deletedCard.getDeleted());
 		assertEquals(deletedCard.getId(), card.getId());
 		for(Card retrievedCard : retrievedCustomer.getCards().getData()) {
 				assertFalse("Card was not actually deleted: " + card.getId(), card.getId().equals(retrievedCard.getId()));
+		}
+	}
+
+	@Test
+	public void testCustomerBankAccountAddition() throws StripeException {
+		Customer createdCustomer = Customer.create(defaultCustomerParams, supportedRequestOptions);
+		String originalDefaultCard = createdCustomer.getDefaultCard();
+
+		Map<String, Object> creationParams = new HashMap<String, Object>();
+		creationParams.put("bank_account", defaultBankAccountParams);
+		BankAccount addedBankAccount = createdCustomer.createBankAccount(creationParams);
+
+		Token token = Token.create(defaultTokenParams);
+		createdCustomer.createCard(token.getId());
+
+		Customer updatedCustomer = Customer.retrieve(createdCustomer.getId(), supportedRequestOptions);
+		assertEquals((Integer) updatedCustomer.getSources().getData().size(), (Integer) 3);
+		assertEquals(updatedCustomer.getDefaultCard(), originalDefaultCard);
+
+		Map<String, Object> updateParams = new HashMap<String, Object>();
+		updateParams.put("default_source", addedBankAccount.getId());
+		Customer customerAfterDefaultSourceUpdate = updatedCustomer.update(updateParams, supportedRequestOptions);
+		assertEquals((Integer) customerAfterDefaultSourceUpdate.getSources().getData().size(), (Integer) 3);
+		assertEquals(customerAfterDefaultSourceUpdate.getDefaultSource(), addedBankAccount.getId());
+	}
+
+	@Test
+	public void testCustomerBankAccountDelete() throws StripeException {
+		Customer customer = Customer.create(defaultCustomerParams, supportedRequestOptions);
+
+		Map<String, Object> creationParams = new HashMap<String, Object>();
+		creationParams.put("bank_account", defaultBankAccountParams);
+		BankAccount addedBankAccount = customer.createBankAccount(creationParams);
+
+		DeletedBankAccount deletedBankAccount = addedBankAccount.delete();
+		Customer retrievedCustomer = Customer.retrieve(customer.getId(), supportedRequestOptions);
+
+		assertTrue(deletedBankAccount.getDeleted());
+		assertEquals(deletedBankAccount.getId(), addedBankAccount.getId());
+		for(ExternalAccount retrievedSource : retrievedCustomer.getSources().getData()) {
+			assertFalse("Card was not actually deleted: " + addedBankAccount.getId(),
+					addedBankAccount.getId().equals(retrievedSource.getId()));
 		}
 	}
 
@@ -1611,7 +1655,7 @@ public class StripeTest {
 	@Test
 	public void testCustomerCreatePerCallAPIKey() throws StripeException {
 		Customer customer = Customer.create(defaultCustomerParams,
-				cardSupportedRequestOptions);
+				supportedRequestOptions);
 		assertEquals(customer.getDescription(), "J Bindings Customer");
 		List<Card> customerCards = customer.getCards().getData();
 		assertEquals(1, customerCards.size());
