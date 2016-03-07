@@ -194,7 +194,7 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 	}
 
 	public PagingProxy<InvoiceLineItem> getLines() {
-		return new PagingProxy<InvoiceLineItem>(lines);
+		return new PagingProxy<InvoiceLineItem>(lines, false);
 	}
 
 	public Boolean getLivemode() {
@@ -325,6 +325,13 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.GET, String.format("%s/upcoming", classURL(Invoice.class)), params, Invoice.class, options);
+	}
+
+	public static PagingProxy<Invoice> list() {
+		InvoiceCollection empty = new InvoiceCollection();
+		empty.setHasMore(true);
+		empty.setUrl(classURL(Invoice.class));
+		return new PagingProxy<Invoice>(empty);
 	}
 
 	public static InvoiceCollection list(Map<String, Object> params)

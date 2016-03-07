@@ -19,6 +19,9 @@ public class PagingIterator<T extends HasId> extends APIResource implements Iter
 	private Iterator<T> currentDataIterator;
 	
 	private String lastId;
+
+	private int maxFetches = -1;
+	private int numFetches = 0;
 	
 	PagingIterator(final StripeCollectionInterface<T> stripeCollection) {
 		this.url = Stripe.getApiBase() + stripeCollection.getUrl();
@@ -31,8 +34,9 @@ public class PagingIterator<T extends HasId> extends APIResource implements Iter
 
 	@Override
 	public boolean hasNext() {
-		return currentDataIterator.hasNext() ||
-			currentCollection.getHasMore();
+		return currentCollection.getHasMore() ||
+			(currentDataIterator.hasNext() &&
+				(maxFetches == -1 || numFetches < maxFetches));
 	}
 
 	@Override
@@ -41,6 +45,10 @@ public class PagingIterator<T extends HasId> extends APIResource implements Iter
 		// one
 		if (!currentDataIterator.hasNext() && currentCollection.getHasMore()) {
 			try {
+				if (maxFetches != -1 && numFetches >= maxFetches) {
+					throw new NoSuchElementException();
+				}
+
 				Map<String, Object> params = new HashMap<String, Object>();
 
 				// copy all the parameters from the initial request
@@ -75,9 +83,13 @@ public class PagingIterator<T extends HasId> extends APIResource implements Iter
 		throw new UnsupportedOperationException();
 	}
 
+	public void setMaxFetches(int maxFetches) {
+		this.maxFetches = maxFetches;
+	}
+
 	@SuppressWarnings("unchecked")
 	private StripeCollectionInterface<T> list(
-		final Map<String, Object> params, 
+		final Map<String, Object> params,
 		final RequestOptions options
 	) throws Exception {
 		return APIResource.requestCollection(url, params, collectionType, options);
