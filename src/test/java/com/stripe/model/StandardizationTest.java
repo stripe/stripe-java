@@ -101,7 +101,8 @@ public class StandardizationTest {
 				}
 
 				// Skip the `public static Card createCard(String id) {...` helper method on Customer.
-				if (String.class.equals(finalParamType) && parameters.size() == 1 && "createCard".equals(method.getName())) {
+				if (String.class.equals(finalParamType) && parameters.size() == 1
+						&& ("createCard".equals(method.getName()) || "createBankAccount".equals(method.getName()))) {
 					continue;
 				}
 
