@@ -276,6 +276,12 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 		return update(params, (RequestOptions) null);
 	}
 
+	public Account reject(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.POST, instanceURL(Account.class, this.id) + "/reject", params, Account.class, (RequestOptions) null);
+	}
+
 	public Account update(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {

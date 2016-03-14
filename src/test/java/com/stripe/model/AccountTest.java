@@ -110,6 +110,22 @@ public class AccountTest extends BaseStripeTest {
 	}
 
 	@Test
+	public void testAccountReject() throws StripeException, IOException {
+		String json = resource("account.json");
+		stubNetwork(Account.class, json);
+		Account acc = Account.retrieve("acct_1032D82eZvKYlo2C");
+		verifyGet(Account.class, "https://api.stripe.com/v1/accounts/acct_1032D82eZvKYlo2C");
+
+		Map<String, Object> rejectParams = new HashMap<String, Object>();
+		rejectParams.put("reason", "fraud");
+		acc.reject(rejectParams);
+		verifyPost(Account.class, "https://api.stripe.com/v1/accounts/acct_1032D82eZvKYlo2C/reject", rejectParams);
+
+		verifyNoMoreInteractions(networkMock);
+  }
+
+
+	@Test
 	public void testAccountUpdateById() throws StripeException, IOException {
 		String json = resource("account.json");
 		stubNetwork(Account.class, json);
