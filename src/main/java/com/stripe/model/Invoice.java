@@ -40,6 +40,7 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 	String statementDescriptor;
 	Integer tax;
 	Double taxPercent;
+	String receiptNumber;
 
 	public Integer getSubtotal() {
 		return subtotal;
@@ -259,6 +260,14 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 
 	public void setTaxPercent(Double taxPercent) {
 		this.taxPercent = taxPercent;
+	}
+
+	public String getReceiptNumber() {
+		return receiptNumber;
+	}
+
+	public void setReceiptNumber(String receiptNumber) {
+		this.receiptNumber = receiptNumber;
 	}
 
 	public static Invoice retrieve(String id) throws AuthenticationException,
