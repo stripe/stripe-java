@@ -122,8 +122,7 @@ public class AccountTest extends BaseStripeTest {
 		verifyPost(Account.class, "https://api.stripe.com/v1/accounts/acct_1032D82eZvKYlo2C/reject", rejectParams);
 
 		verifyNoMoreInteractions(networkMock);
-  }
-
+	}
 
 	@Test
 	public void testAccountUpdateById() throws StripeException, IOException {
