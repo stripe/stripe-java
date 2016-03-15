@@ -1,3 +1,8 @@
+=== 1.46.0 2016-03-15
+
+* Expose creating bank accounts on customer
+* Add `reject` action on account
+
 === 1.45.0 2016-02-18
 
 * Add `CountrySpec` model for looking up country payment information
