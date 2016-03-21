@@ -5,9 +5,9 @@ import java.util.Map;
 import com.stripe.net.RequestOptions;
 
 /**
-/* Provides a simple object that allows the contents of a list call to be
-/* iterated lazily so that extra params and options can be applied to future
-/* pagination calls in the case where that's necessary.
+ * Provides a simple object that allows the contents of a list call to be
+ * iterated lazily so that extra params and options can be applied to future
+ * pagination calls in the case where that's necessary.
  */
 public class PagingProxy<T extends HasId> {
 	private StripeCollectionInterface<T> page;
