@@ -92,8 +92,8 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
 		this.shippable = shippable;
 	}
 
-	public SKUCollection getSkus() {
-		return skus;
+	public PagingProxy<SKU> getSkus() {
+		return new PagingProxy<SKU>(skus);
 	}
 
 	public void setSkus(SKUCollection skus) {

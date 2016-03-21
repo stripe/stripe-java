@@ -187,9 +187,9 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 		this.transferSchedule = transferSchedule;
 	}
 
-	public ExternalAccountCollection getExternalAccounts()
+	public PagingProxy<ExternalAccount> getExternalAccounts()
 	{
-		return externalAccounts;
+		return new PagingProxy<ExternalAccount>(externalAccounts);
 	}
 
 	public static Account create(Map<String, Object> params)

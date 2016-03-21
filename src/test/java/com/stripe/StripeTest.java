@@ -46,6 +46,7 @@ import com.stripe.model.FileUpload;
 import com.stripe.model.FraudDetails;
 import com.stripe.model.Invoice;
 import com.stripe.model.InvoiceItem;
+import com.stripe.model.InvoiceLineItem;
 import com.stripe.model.InvoiceLineItemCollection;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.Order;
@@ -77,6 +78,7 @@ import java.net.URL;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -1267,15 +1269,17 @@ public class StripeTest {
 	public void testInvoiceListAndRetrieve() throws StripeException {
 		Plan plan = Plan.create(getUniquePlanParams());
 		createDefaultCustomerWithPlan(plan);
+
 		Map<String, Object> listParams = new HashMap<String, Object>();
 		listParams.put("count", 1);
+
 		Invoice createdInvoice = Invoice.all(listParams).getData().get(0);
 		Invoice retrievedInvoice = Invoice.retrieve(createdInvoice.getId());
 		assertEquals(createdInvoice.getId(), retrievedInvoice.getId());
 
-		InvoiceLineItemCollection lines = retrievedInvoice.getLines().all(
-				listParams);
-		assertNotNull(lines);
+		Iterator<InvoiceLineItem> it =
+			retrievedInvoice.getLines().autoPagingIterable().iterator();
+		assertNotNull(it.next());
 	}
 
 	@Test
@@ -1327,14 +1331,14 @@ public class StripeTest {
 		Invoice upcomingInvoice = Invoice.upcoming(upcomingParams);
 		assertFalse(upcomingInvoice.getAttempted());
 
-		InvoiceLineItemCollection lines = upcomingInvoice.getLines().all(null);
-		assertFalse(lines.getData().isEmpty());
-		assertEquals(item.getId(), lines.getData().get(0).getId());
+		Iterator<InvoiceLineItem> it =
+			upcomingInvoice.getLines().autoPagingIterable().iterator();
+		InvoiceLineItem actual = it.next();
+		assertNotNull(actual);
+		assertEquals(item.getId(), actual.getId());
 
-		Map<String, Object> fetchParams = new HashMap<String, Object>();
-		fetchParams.put("starting_after", item.getId());
-		InvoiceLineItemCollection linesAfterFirst = upcomingInvoice.getLines().all(fetchParams);
-		assertTrue(linesAfterFirst.getData().isEmpty());
+		// Expect no items after the first.
+		assertFalse(it.hasNext());
 	}
 
 	@Test

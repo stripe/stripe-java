@@ -82,8 +82,8 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
 		this.defaultCard = defaultCard;
 	}
 
-	public RecipientCardCollection getCards() {
-		return cards;
+	public PagingProxy<Card> getCards() {
+		return new PagingProxy<Card>(cards);
 	}
 
 	public BankAccount getActiveAccount() {
