@@ -228,13 +228,13 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 		this.invoice = invoice;
 	}
 
-	public ChargeRefundCollection getRefunds() {
+	public PagingProxy<Refund> getRefunds() {
 		// API versions 2014-05-19 and earlier render charge refunds as an array
 		// instead of an object, meaning there is no sublist URL.
 		if (refunds != null && refunds.getURL() == null) {
 			refunds.setURL(String.format("/v1/charges/%s/refunds", getId()));
 		}
-		return refunds;
+		return new PagingProxy<Refund>(refunds);
 	}
 
 	public Card getCard() {

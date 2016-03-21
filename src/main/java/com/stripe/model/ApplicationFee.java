@@ -113,14 +113,14 @@ public class ApplicationFee extends APIResource implements HasId {
 		this.charge = charge;
 	}
 
-	public FeeRefundCollection getRefunds() {
+	public PagingProxy<FeeRefund> getRefunds() {
 		// API versions 2014-07-26 and earlier render charge refunds as an array
 		// instead of an object, meaning there is no sublist URL.
 		if (refunds.getURL() == null) {
 			refunds.setURL(String.format("/v1/application_fees/%s/refunds", getId()));
 		}
 
-		return refunds;
+		return new PagingProxy<FeeRefund>(refunds);
 	}
 
 	public String getBalanceTransaction() {

@@ -325,10 +325,10 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 						instanceURL(Transfer.class, this.getId())), params, TransferTransactionCollection.class, options);
 	}
 
-	public TransferReversalCollection getReversals() {
+	public PagingProxy<Reversal> getReversals() {
 		if (reversals.getURL() == null) {
 			reversals.setURL(String.format("/v1/transfers/%s/reversals", getId()));
 		}
-		return reversals;
+		return new PagingProxy<Reversal>(reversals);
 	}
 }

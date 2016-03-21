@@ -160,8 +160,8 @@ public class BitcoinReceiver extends ExternalAccount implements HasId {
 		this.payment = payment;
 	}
 
-	public BitcoinTransactionCollection getTransactions() {
-		return transactions;
+	public PagingProxy<BitcoinTransaction> getTransactions() {
+		return new PagingProxy<BitcoinTransaction>(transactions);
 	}
 
 	public void setTransactions(BitcoinTransactionCollection transactions) {

@@ -82,12 +82,12 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 		this.defaultSource = defaultSource;
 	}
 
-	public CustomerCardCollection getCards() {
-		return cards;
+	public PagingProxy<Card> getCards() {
+		return new PagingProxy<Card>(cards);
 	}
 
-	public ExternalAccountCollection getSources() {
-		return sources;
+	public PagingProxy<ExternalAccount> getSources() {
+		return new PagingProxy<ExternalAccount>(sources);
 	}
 
 	public void setSources(ExternalAccountCollection sources) {
@@ -136,8 +136,8 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 		this.subscription = subscription;
 	}
 
-	public CustomerSubscriptionCollection getSubscriptions() {
-		return subscriptions;
+	public PagingProxy<Subscription> getSubscriptions() {
+		return new PagingProxy<Subscription>(subscriptions);
 	}
 
 	public Boolean getDeleted() {
