@@ -59,9 +59,24 @@ public abstract class StripeCollectionAPIResource<T extends HasId> extends APIRe
 	/**
 	 * Returns an iterable that can be used to iterate across all objects
 	 * across all pages. As page boundaries are encountered, the next page will
-	 * be fetch automatically for continued iteration.
+	 * be fetched automatically for continued iteration.
 	 */
 	public Iterable<T> autoPagingIterable() {
+		return autoPagingIterable(null, null);
+	}
+
+	public Iterable<T> autoPagingIterable(Map<String, Object> params) {
+		return autoPagingIterable(params, null);
+	}
+
+	public Iterable<T> autoPagingIterable(Map<String, Object> params, RequestOptions options) {
+		// This does have the side effect of manipulating the state of the
+		// given collection, which is an unfortunate side effect, but is quite
+		// likely a good practical trade-off in that these should only be used
+		// for auto pagination with that particular collection instance.
+		this.setRequestOptions(options);
+		this.setRequestParams(params);
+
 		return new PagingIterable<T>(this);
 	}
 
