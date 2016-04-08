@@ -203,9 +203,9 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
 	private static java.net.HttpURLConnection createDeleteConnection(
 			String url, String query, RequestOptions options) throws IOException {
-		String deleteUrl = formatURL(url, query);
+		String deleteURL = formatURL(url, query);
 		java.net.HttpURLConnection conn = createStripeConnection(
-				deleteUrl, options);
+				deleteURL, options);
 		conn.setRequestMethod("DELETE");
 
 		return conn;

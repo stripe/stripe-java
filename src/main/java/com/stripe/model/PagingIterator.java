@@ -21,7 +21,7 @@ public class PagingIterator<T extends HasId> extends APIResource implements Iter
 	private String lastId;
 	
 	PagingIterator(final StripeCollectionInterface<T> stripeCollection) {
-		this.url = Stripe.getApiBase() + stripeCollection.getUrl();
+		this.url = Stripe.getApiBase() + stripeCollection.getURL();
 
 		this.collectionType = stripeCollection.getClass();
 		
