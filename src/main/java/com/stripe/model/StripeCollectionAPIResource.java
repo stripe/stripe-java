@@ -39,11 +39,6 @@ public abstract class StripeCollectionAPIResource<T extends HasId> extends APIRe
 		return url;
 	}
 
-	@Deprecated
-	public String getUrl() {
-		return getURL();
-	}
-
 	public void setURL(String url) {
 		this.url = url;
 	}

@@ -132,14 +132,13 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
 		this.packageDimensions = packageDimensions;
 	}
 
-	public String getUrl() {
+	public String getURL() {
 		return url;
 	}
 
-	public void setUrl(String url) {
+	public void setURL(String url) {
 		this.url = url;
 	}
-
 
 	public Map<String, String> getMetadata() {
 		return metadata;

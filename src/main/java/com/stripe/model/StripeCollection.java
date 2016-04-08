@@ -61,10 +61,10 @@ public abstract class StripeCollection<T extends HasId> extends StripeObject imp
 	public void setHasMore(Boolean hasMore) {
 		this.hasMore = hasMore;
 	}
-	public String getUrl() {
+	public String getURL() {
 		return url;
 	}
-	public void setUrl(String url) {
+	public void setURL(String url) {
 		this.url = url;
 	}
 	/** 3/2014: Legacy (from before newstyle pagination API) */

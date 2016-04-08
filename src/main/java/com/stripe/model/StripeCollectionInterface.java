@@ -9,7 +9,7 @@ public interface StripeCollectionInterface<T> {
 	public List<T> getData();
 	public Integer getTotalCount();
 	public Boolean getHasMore();
-	public String getUrl();
+	public String getURL();
 
 	/**
 	 * Get request options that were used to fetch the collection. This is

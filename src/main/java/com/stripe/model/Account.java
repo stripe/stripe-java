@@ -29,11 +29,11 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 	Keys keys;
 	Map<String, String> metadata;
 	String businessName;
-	String businessUrl;
+	String businessURL;
 	String businessLogo;
 	String businessPrimaryColor;
 	String supportPhone;
-	String supportUrl;
+	String supportURL;
 	String supportEmail;
 	String productDescription;
 	Boolean managed;
@@ -117,9 +117,9 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 		return businessName;
 	}
 
-	public String getBusinessUrl()
+	public String getBusinessURL()
 	{
-		return businessUrl;
+		return businessURL;
 	}
 
 	public String getBusinessLogo()
@@ -140,9 +140,9 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 		return supportPhone;
 	}
 
-	public String getSupportUrl()
+	public String getSupportURL()
 	{
-		return supportUrl;
+		return supportURL;
 	}
 
 	public String getSupportEmail()
