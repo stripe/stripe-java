@@ -1,3 +1,14 @@
+=== 2.0.0 2016-04-08
+
+* Change `getBusinessUrl` to `getBusinessURL` in `Account` model
+* Change `getSupportUrl` to `getSupportURL` in `Account` model
+* Change `getUrl` to `getURL` in `Product` model
+* Change `setUrl` to `setURL` in `Product` model
+* Change `getUrl` to `getURL` in `StripeCollection` model
+* Change `setUrl` to `setURL` in `StripeCollection` model
+* Remove previously-deprecated `getUrl` in `StripeCollectionAPIResource` model
+* Change `getUrl` to `getURL` in `StripeCollectionInterface`
+
 === 1.48.0 2016-03-29
 
 * Add accessors for `default_currency` to `CountrySpec` model
