@@ -32,6 +32,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	String invoice;
 	Boolean livemode;
 	Map<String, String> metadata;
+	ChargeOutcome outcome;
 	String order;
 	Boolean paid;
 	String receiptEmail;
@@ -203,6 +204,14 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 
 	public void setOrder(String order) {
 		this.order = order;
+	}
+
+	public ChargeOutcome getOutcome() {
+		return outcome;
+	}
+
+	public void setOutcome(ChargeOutcome outcome) {
+		this.outcome = outcome;
 	}
 
 	public Boolean getPaid() {
