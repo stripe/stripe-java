@@ -13,27 +13,39 @@ import java.util.Map;
 
 public class Transfer extends APIResource implements MetadataStore<Transfer>, HasId {
 	String id;
-	String status;
-	Long date;
-	Boolean livemode;
-	Summary summary;
-	String description;
-	String statementDescriptor;
-	@Deprecated
-	String statementDescription;
 	Integer amount;
+	Integer amountReversed;
+	String applicationFee;
+	String balanceTransaction;
+	BankAccount bankAccount;
+	Long created;
 	String currency;
+	Long date;
+	String description;
+	String destination;
+	String destinationPayment;
+	String failureCode;
+	String failureMessage;
+	Boolean livemode;
+	Map<String, String> metadata;
+	TransferReversalCollection reversals;
+	Boolean reversed;
+	String sourceTransaction;
+	String sourceType;
+	String statementDescriptor;
+	String status;
+	String type;
+
+	@Deprecated
+	BankAccount account;
+	@Deprecated
 	List<String> otherTransfers;
 	@Deprecated
 	String recipient;
-	String destination;
-	String destinationPayment;
-	BankAccount account;
-	String balanceTransaction;
-	Map<String, String> metadata;
-	String failureCode;
-	String failureMessage;
-	TransferReversalCollection reversals;
+	@Deprecated
+	String statementDescription;
+	@Deprecated
+	Summary summary;
 
 	public String getId() {
 		return id;
@@ -41,64 +53,6 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public Boolean getLivemode() {
-		return livemode;
-	}
-
-	public void setLivemode(Boolean livemode) {
-		this.livemode = livemode;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public Long getDate() {
-		return date;
-	}
-
-	public void setDate(Long date) {
-		this.date = date;
-	}
-
-	public Summary getSummary() {
-		return summary;
-	}
-
-	public void setSummary(Summary summary) {
-		this.summary = summary;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getStatementDescriptor() {
-		return statementDescriptor;
-	}
-
-	public void setStatementDescriptor(String statementDescriptor) {
-		this.statementDescriptor = statementDescriptor;
-	}
-
-	@Deprecated
-	public String getStatementDescription() {
-		return statementDescription;
-	}
-
-	@Deprecated
-	public void setStatementDescription(String statementDescription) {
-		this.statementDescription = statementDescription;
 	}
 
 	public Integer getAmount() {
@@ -109,18 +63,68 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 		this.amount = amount;
 	}
 
+	public Integer getAmountReversed() {
+		return amountReversed;
+	}
+
+	public void setAmountReversed(Integer amountReversed) {
+		this.amountReversed = amountReversed;
+	}
+
+	public String getApplicationFee() {
+		return applicationFee;
+	}
+
+	public void setApplicationFee(String applicationFee) {
+		this.applicationFee = applicationFee;
+	}
+
+	public String getBalanceTransaction() {
+		return balanceTransaction;
+	}
+
+	public void setBalanceTransaction(String balanceTransaction) {
+		this.balanceTransaction = balanceTransaction;
+	}
+
+	public BankAccount getBankAccount() {
+		return bankAccount;
+	}
+
+	public void setBankAccount(BankAccount bankAccount) {
+		this.bankAccount = bankAccount;
+	}
+
+	public Long getCreated() {
+		return created;
+	}
+
+	public void setCreated(Long created) {
+		this.created = created;
+	}
+
 	public String getCurrency() {
 		return currency;
 	}
 
-	@Deprecated
-	public String getRecipient() {
-		return recipient;
+	public void setCurrency(String currency) {
+		this.currency = currency;
 	}
 
-	@Deprecated
-	public void setRecipient(String recipient) {
-		this.recipient = recipient;
+	public Long getDate() {
+		return date;
+	}
+
+	public void setDate(Long date) {
+		this.date = date;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getDestination() {
@@ -139,34 +143,6 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 		this.destinationPayment = destinationPayment;
 	}
 
-	public BankAccount getAccount() {
-		return account;
-	}
-
-	public void setAccount(BankAccount account) {
-		this.account = account;
-	}
-
-	public void setCurrency(String currency) {
-		this.currency = currency;
-	}
-
-	public List<String> getOtherTransfers() {
-		return otherTransfers;
-	}
-
-	public void setOtherTransfers(List<String> otherTransfers) {
-		this.otherTransfers = otherTransfers;
-	}
-
-	public String getBalanceTransaction() {
-		return balanceTransaction;
-	}
-
-	public void setBalanceTransaction(String balanceTransaction) {
-		this.balanceTransaction = balanceTransaction;
-	}
-
 	public String getFailureCode() {
 		return failureCode;
 	}
@@ -183,12 +159,157 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 		this.failureMessage = failureMessage;
 	}
 
+	public Boolean getLivemode() {
+		return livemode;
+	}
+
+	public void setLivemode(Boolean livemode) {
+		this.livemode = livemode;
+	}
+
 	public Map<String, String> getMetadata() {
 		return metadata;
 	}
 
 	public void setMetadata(Map<String, String> metadata) {
 		this.metadata = metadata;
+	}
+
+	public TransferReversalCollection getReversals() {
+		if (reversals.getURL() == null) {
+			reversals.setURL(String.format("/v1/transfers/%s/reversals", getId()));
+		}
+		return reversals;
+	}
+
+	public Boolean getReversed() {
+		return reversed;
+	}
+
+	public void setReversed(Boolean reversed) {
+		this.reversed = reversed;
+	}
+
+	public String getSourceTransaction() {
+		return sourceTransaction;
+	}
+
+	public void setSourceTransaction(String sourceTransaction) {
+		this.sourceTransaction = sourceTransaction;
+	}
+
+	public String getSourceType() {
+		return sourceType;
+	}
+
+	public void setSourceType(String sourceType) {
+		this.sourceType = sourceType;
+	}
+
+	public String getStatementDescriptor() {
+		return statementDescriptor;
+	}
+
+	public void setStatementDescriptor(String statementDescriptor) {
+		this.statementDescriptor = statementDescriptor;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	/**
+	 * @deprecated
+	 * Use `bank_account` field (https://stripe.com/docs/upgrades#2014-05-19)
+	 */
+	@Deprecated
+	public BankAccount getAccount() {
+		return account;
+	}
+
+	/**
+	 * @deprecated
+	 * Use `bank_account` field (https://stripe.com/docs/upgrades#2014-05-19)
+	 */
+	@Deprecated
+	public void setAccount(BankAccount account) {
+		this.account = account;
+	}
+
+	/**
+	 * @deprecated
+	 * Use the balance history endpoint (https://stripe.com/docs/upgrades#2014-08-04)
+	 */
+	@Deprecated
+	public List<String> getOtherTransfers() {
+		return otherTransfers;
+	}
+
+	/**
+	 * @deprecated
+	 * Use the balance history endpoint (https://stripe.com/docs/upgrades#2014-08-04)
+	 */
+	@Deprecated
+	public void setOtherTransfers(List<String> otherTransfers) {
+		this.otherTransfers = otherTransfers;
+	}
+
+	@Deprecated
+	public String getRecipient() {
+		return recipient;
+	}
+
+	@Deprecated
+	public void setRecipient(String recipient) {
+		this.recipient = recipient;
+	}
+
+	/**
+	 * @deprecated
+	 * Use `statement_descriptor` field (https://stripe.com/docs/upgrades#2014-12-17)
+	 */
+	@Deprecated
+	public String getStatementDescription() {
+		return statementDescription;
+	}
+
+	/**
+	 * @deprecated
+	 * Use `statement_descriptor` field (https://stripe.com/docs/upgrades#2014-12-17)
+	 */
+	@Deprecated
+	public void setStatementDescription(String statementDescription) {
+		this.statementDescription = statementDescription;
+	}
+
+	/**
+	 * @deprecated
+	 * Use the balance history endpoint (https://stripe.com/docs/upgrades#2014-08-04)
+	 */
+	@Deprecated
+	public Summary getSummary() {
+		return summary;
+	}
+
+	/**
+	 * @deprecated
+	 * Use the balance history endpoint (https://stripe.com/docs/upgrades#2014-08-04)
+	 */
+	@Deprecated
+	public void setSummary(Summary summary) {
+		this.summary = summary;
 	}
 
 	public static Transfer create(Map<String, Object> params)
@@ -323,12 +444,5 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.GET, String.format("%s/transactions",
 						instanceURL(Transfer.class, this.getId())), params, TransferTransactionCollection.class, options);
-	}
-
-	public TransferReversalCollection getReversals() {
-		if (reversals.getURL() == null) {
-			reversals.setURL(String.format("/v1/transfers/%s/reversals", getId()));
-		}
-		return reversals;
 	}
 }

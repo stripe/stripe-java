@@ -12,37 +12,22 @@ import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
 
 public class Product extends APIResource implements HasId, MetadataStore<Product> {
-	Long created;
-	Long updated;;
 	String id;
-	Boolean livemode;
 	Boolean active;
-	List<String> images;
-	String name;
-	Boolean shippable;
-	SKUCollection skus;
 	List<String> attributes;
 	String caption;
+	Long created;
+	List<String> deactivateOn;
 	String description;
-	PackageDimensions packageDimensions;
-	String url;
+	List<String> images;
+	Boolean livemode;
 	Map<String, String> metadata;
-
-	public Long getCreated() {
-		return created;
-	}
-
-	public void setCreated(Long created) {
-		this.created = created;
-	}
-
-	public Long getUpdated() {
-		return updated;
-	}
-
-	public void setUpdated(Long updated) {
-		this.updated = updated;
-	}
+	String name;
+	PackageDimensions packageDimensions;
+	Boolean shippable;
+	SKUCollection skus;
+	Long updated;
+	String url;
 
 	public String getId() {
 		return id;
@@ -52,52 +37,12 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
 		this.id = id;
 	}
 
-	public Boolean getLivemode() {
-		return livemode;
-	}
-
-	public void setLivemode(Boolean livemode) {
-		this.livemode = livemode;
-	}
-
 	public Boolean getActive() {
 		return active;
 	}
 
 	public void setActive(Boolean active) {
 		this.active = active;
-	}
-
-	public List<String> getImages() {
-		return images;
-	}
-
-	public void setImages(List<String> images) {
-		this.images = images;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Boolean getShippable() {
-		return shippable;
-	}
-
-	public void setShippable(Boolean shippable) {
-		this.shippable = shippable;
-	}
-
-	public SKUCollection getSkus() {
-		return skus;
-	}
-
-	public void setSkus(SKUCollection skus) {
-		this.skus = skus;
 	}
 
 	public List<String> getAttributes() {
@@ -116,12 +61,60 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
 		this.caption = caption;
 	}
 
+	public Long getCreated() {
+		return created;
+	}
+
+	public void setCreated(Long created) {
+		this.created = created;
+	}
+
+	public List<String> getDeactivateOn() {
+		return deactivateOn;
+	}
+
+	public void setDeactivateOn(List<String> deactivateOn) {
+		this.deactivateOn = deactivateOn;
+	}
+
 	public String getDescription() {
 		return description;
 	}
 
 	public void setDescription(String description) {
 		this.description = description;
+	}
+
+	public List<String> getImages() {
+		return images;
+	}
+
+	public void setImages(List<String> images) {
+		this.images = images;
+	}
+
+	public Boolean getLivemode() {
+		return livemode;
+	}
+
+	public void setLivemode(Boolean livemode) {
+		this.livemode = livemode;
+	}
+
+	public Map<String, String> getMetadata() {
+		return metadata;
+	}
+
+	public void setMetadata(Map<String, String> metadata) {
+		this.metadata = metadata;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public PackageDimensions getPackageDimensions() {
@@ -132,20 +125,36 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
 		this.packageDimensions = packageDimensions;
 	}
 
+	public Boolean getShippable() {
+		return shippable;
+	}
+
+	public void setShippable(Boolean shippable) {
+		this.shippable = shippable;
+	}
+
+	public SKUCollection getSkus() {
+		return skus;
+	}
+
+	public void setSkus(SKUCollection skus) {
+		this.skus = skus;
+	}
+
+	public Long getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(Long updated) {
+		this.updated = updated;
+	}
+
 	public String getURL() {
 		return url;
 	}
 
 	public void setURL(String url) {
 		this.url = url;
-	}
-
-	public Map<String, String> getMetadata() {
-		return metadata;
-	}
-
-	public void setMetadata(Map<String, String> metadata) {
-		this.metadata = metadata;
 	}
 
 	public static Product create(Map<String, Object> params)
