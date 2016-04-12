@@ -1,3 +1,11 @@
+=== 2.1.0 2016-04-12
+
+* Deprecate `getUser` and `setUser` on `ApplicationFee`
+* Deprecate `getCard` and `setCard` on `Charge`
+* Deprecate `getAccount` and `setAccount` on `Transfer`
+* Deprecate `getOtherTransfers` and `setOtherTransfers` on `Transfer`
+* Deprecate `getSummary` and `setSummary` on `Transfer`
+
 === 2.0.0 2016-04-08
 
 * Change `getBusinessUrl` to `getBusinessURL` in `Account` model
