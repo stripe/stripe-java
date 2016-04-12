@@ -12,118 +12,176 @@ import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
 
 public class Order extends APIResource implements HasId, MetadataStore<Order> {
-	Long created;
-	Long updated;
 	String id;
-	Boolean livemode;
 	Integer amount;
-	String currency;
-	List<OrderItem> items;
-	Map<String, String> metadata;
-	String status;
+	String application;
+	Long applicationFee;
 	String charge;
+	Long created;
+	String currency;
 	String customer;
 	String email;
+	String externalCouponCode;
+	List<OrderItem> items;
+	Boolean livemode;
+	Map<String, String> metadata;
 	String selectedShippingMethod;
 	ShippingDetails shipping;
 	List<ShippingMethod> shippingMethods;
-	Long applicationFee;
+	String status;
+	StatusTransitions statusTransitions;
+	Long updated;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public Integer getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Integer amount) {
+		this.amount = amount;
+	}
+
+	public String getApplication() {
+		return application;
+	}
+
+	public void setApplication(String application) {
+		this.application = application;
+	}
+
+	public Long getApplicationFee() {
+		return applicationFee;
+	}
+
+	public void setApplicationFee(Long applicationFee) {
+		this.applicationFee = applicationFee;
+	}
+
+	public String getCharge() {
+		return charge;
+	}
+
+	public void setCharge(String charge) {
+		this.charge = charge;
+	}
 
 	public Long getCreated() {
 		return created;
 	}
+
 	public void setCreated(Long created) {
 		this.created = created;
 	}
-	public Long getUpdated() {
-		return updated;
-	}
-	public void setUpdated(Long updated) {
-		this.updated = updated;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public Boolean getLivemode() {
-		return livemode;
-	}
-	public void setLivemode(Boolean livemode) {
-		this.livemode = livemode;
-	}
-	public Integer getAmount() {
-		return amount;
-	}
-	public void setAmount(Integer amount) {
-		this.amount = amount;
-	}
+
 	public String getCurrency() {
 		return currency;
 	}
+
 	public void setCurrency(String currency) {
 		this.currency = currency;
 	}
-	public List<OrderItem> getItems() {
-		return items;
-	}
-	public void setItems(List<OrderItem> items) {
-		this.items = items;
-	}
-	public Map<String, String> getMetadata() {
-		return metadata;
-	}
-	public void setMetadata(Map<String, String> metadata) {
-		this.metadata = metadata;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	public String getCharge() {
-		return charge;
-	}
-	public void setCharge(String charge) {
-		this.charge = charge;
-	}
+
 	public String getCustomer() {
 		return customer;
 	}
+
 	public void setCustomer(String customer) {
 		this.customer = customer;
 	}
+
 	public String getEmail() {
 		return email;
 	}
+
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public String getExternalCouponCode() {
+		return externalCouponCode;
+	}
+
+	public void setExternalCouponCode(String externalCouponCode) {
+		this.externalCouponCode = externalCouponCode;
+	}
+
+	public List<OrderItem> getItems() {
+		return items;
+	}
+
+	public void setItems(List<OrderItem> items) {
+		this.items = items;
+	}
+
+	public Boolean getLivemode() {
+		return livemode;
+	}
+
+	public void setLivemode(Boolean livemode) {
+		this.livemode = livemode;
+	}
+
+	public Map<String, String> getMetadata() {
+		return metadata;
+	}
+
+	public void setMetadata(Map<String, String> metadata) {
+		this.metadata = metadata;
+	}
+
 	public String getSelectedShippingMethod() {
 		return selectedShippingMethod;
 	}
+
 	public void setSelectedShippingMethod(String selectedShippingMethod) {
 		this.selectedShippingMethod = selectedShippingMethod;
 	}
+
 	public ShippingDetails getShipping() {
 		return shipping;
 	}
+
 	public void setShipping(ShippingDetails shipping) {
 		this.shipping = shipping;
 	}
+
 	public List<ShippingMethod> getShippingMethods() {
 		return shippingMethods;
 	}
+
 	public void setShippingMethods(List<ShippingMethod> shippingMethods) {
 		this.shippingMethods = shippingMethods;
 	}
-	public Long getApplicationFee() {
-		return applicationFee;
+
+	public String getStatus() {
+		return status;
 	}
-	public void setApplicationFee(Long applicationFee) {
-		this.applicationFee = applicationFee;
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public StatusTransitions getStatusTransitions() {
+		return statusTransitions;
+	}
+
+	public void setStatusTransitions(StatusTransitions statusTransitions) {
+		this.statusTransitions = statusTransitions;
+	}
+
+	public Long getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(Long updated) {
+		this.updated = updated;
 	}
 
 	public static Order create(Map<String, Object> params)

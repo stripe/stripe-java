@@ -14,17 +14,18 @@ import java.util.Map;
 
 public class BalanceTransaction extends APIResource implements HasId {
 	String id;
-	String source;
 	Integer amount;
-	String currency;
-	Integer net;
-	String type;
-	Long created;
 	Long availableOn;
-	String status;
+	Long created;
+	String currency;
+	String description;
 	Integer fee;
 	List<Fee> feeDetails;
-	String description;
+	Integer net;
+	String source;
+	TransferCollection sourcedTransfers;
+	String status;
+	String type;
 
 	public String getId() {
 		return id;
@@ -32,14 +33,6 @@ public class BalanceTransaction extends APIResource implements HasId {
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public String getSource() {
-		return source;
-	}
-
-	public void setSource(String source) {
-		this.source = source;
 	}
 
 	public Integer getAmount() {
@@ -50,28 +43,12 @@ public class BalanceTransaction extends APIResource implements HasId {
 		this.amount = amount;
 	}
 
-	public String getCurrency() {
-		return currency;
+	public Long getAvailableOn() {
+		return availableOn;
 	}
 
-	public void setCurrency(String currency) {
-		this.currency = currency;
-	}
-
-	public Integer getNet() {
-		return net;
-	}
-
-	public void setNet(Integer net) {
-		this.net = net;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
+	public void setAvailableOn(Long availableOn) {
+		this.availableOn = availableOn;
 	}
 
 	public Long getCreated() {
@@ -82,20 +59,20 @@ public class BalanceTransaction extends APIResource implements HasId {
 		this.created = created;
 	}
 
-	public Long getAvailableOn() {
-		return availableOn;
+	public String getCurrency() {
+		return currency;
 	}
 
-	public void setAvailableOn(Long availableOn) {
-		this.availableOn = availableOn;
+	public void setCurrency(String currency) {
+		this.currency = currency;
 	}
 
-	public String getStatus() {
-		return status;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public Integer getFee() {
@@ -114,12 +91,43 @@ public class BalanceTransaction extends APIResource implements HasId {
 		this.feeDetails = feeDetails;
 	}
 
-	public String getDescription() {
-		return description;
+	public Integer getNet() {
+		return net;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setNet(Integer net) {
+		this.net = net;
+	}
+
+	public String getSource() {
+		return source;
+	}
+
+	public void setSource(String source) {
+		this.source = source;
+	}
+
+	public TransferCollection getSourcedTransfers() {
+		if (sourcedTransfers != null && sourcedTransfers.getURL() == null && getSource() != null) {
+			sourcedTransfers.setURL(String.format("/v1/transfers?source_transaction=%s", getSource()));
+		}
+		return sourcedTransfers;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public static BalanceTransaction retrieve(String id) throws AuthenticationException,
