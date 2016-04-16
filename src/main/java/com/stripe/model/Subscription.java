@@ -36,13 +36,6 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 		return create(params, (RequestOptions) null);
 	}
 
-	@Deprecated
-	public static Subscription create(Map<String, Object> params, String apiKey)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return create(params, RequestOptions.builder().setApiKey(apiKey).build());
-	}
-
 	public static Subscription create(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -61,6 +54,7 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 			APIConnectionException, CardException, APIException {
 		return update(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public Subscription update(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -89,13 +83,6 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return retrieve(id, (RequestOptions) null);
-	}
-
-	@Deprecated
-	public static Subscription retrieve(String id, String apiKey)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
 	}
 
 	public static Subscription retrieve(String id, RequestOptions options)
@@ -127,14 +114,6 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 
 	@Deprecated
 	public static SubscriptionCollection all(Map<String, Object> params,
-			String apiKey) throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
-		return list(params, RequestOptions.builder().setApiKey(apiKey).build());
-	}
-
-	@Deprecated
-	public static SubscriptionCollection all(Map<String, Object> params,
 			RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
@@ -157,6 +136,7 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 		}
 		deleteDiscount(result);
 	}
+
 	public void deleteDiscount(RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {

@@ -1,4 +1,4 @@
 package com.stripe.model;
 
-public class SubscriptionCollection extends StripeCollection<Customer> {
+public class SubscriptionCollection extends StripeCollection<Subscription> {
 }
