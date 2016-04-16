@@ -84,6 +84,13 @@ public class BaseStripeTest {
 				APIResource.RequestType.NORMAL, requestOptions);
 	}
 
+	public static <T> void verifyDelete(
+			Class<T> clazz,
+			String url) throws StripeException {
+		verifyRequest(APIResource.RequestMethod.DELETE, clazz, url, null,
+				APIResource.RequestType.NORMAL, RequestOptions.getDefault());
+	}
+
 	public static <T> void verifyRequest(
 			APIResource.RequestMethod method,
 			Class<T> clazz,

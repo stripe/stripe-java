@@ -30,6 +30,18 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 	Double taxPercent;
 	Map<String, String> metadata;
 
+	public static Subscription create(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return create(params, (RequestOptions) null);
+	}
+
+	public static Subscription create(Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.POST, classURL(Subscription.class), params, Subscription.class, options);
+	}
+
 	public Subscription update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -42,10 +54,11 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 			APIConnectionException, CardException, APIException {
 		return update(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public Subscription update(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.POST, this.getInstanceURL(), params, Subscription.class, options);
+		return request(RequestMethod.POST, instanceURL(Subscription.class, id), params, Subscription.class, options);
 	}
 
 	public Subscription cancel(Map<String, Object> params) throws AuthenticationException,
@@ -63,7 +76,48 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 	public Subscription cancel(Map<String, Object> params, RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return request(RequestMethod.DELETE, this.getInstanceURL(), params, Subscription.class, options);
+		return request(RequestMethod.DELETE, instanceURL(Subscription.class, id), params, Subscription.class, options);
+	}
+
+	public static Subscription retrieve(String id) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return retrieve(id, (RequestOptions) null);
+	}
+
+	public static Subscription retrieve(String id, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, instanceURL(Subscription.class, id), null, Subscription.class, options);
+	}
+
+	public static SubscriptionCollection list(Map<String, Object> params)
+			throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return list(params, (RequestOptions) null);
+	}
+
+	public static SubscriptionCollection list(Map<String, Object> params,
+			RequestOptions options) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return requestCollection(classURL(Subscription.class), params, SubscriptionCollection.class, options);
+	}
+
+	@Deprecated
+	public static SubscriptionCollection all(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return list(params, (RequestOptions) null);
+	}
+
+	@Deprecated
+	public static SubscriptionCollection all(Map<String, Object> params,
+			RequestOptions options) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return list(params, options);
 	}
 
 	public void deleteDiscount() throws AuthenticationException,
@@ -82,14 +136,11 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 		}
 		deleteDiscount(result);
 	}
+
 	public void deleteDiscount(RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		request(RequestMethod.DELETE, String.format("%s/discount", this.getInstanceURL()), null, Discount.class, options);
-	}
-
-	public String getInstanceURL() {
-		return String.format("%s/%s/subscriptions/%s", classURL(Customer.class), this.getCustomer(), this.getId());
+		request(RequestMethod.DELETE, String.format("%s/discount", instanceURL(Subscription.class, id)), null, Discount.class, options);
 	}
 
 	public String getId() {

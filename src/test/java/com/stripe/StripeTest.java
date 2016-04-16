@@ -26,6 +26,7 @@ import com.stripe.model.CountrySpecCollection;
 import com.stripe.model.Coupon;
 import com.stripe.model.Customer;
 import com.stripe.model.CustomerSubscriptionCollection;
+import com.stripe.model.SubscriptionCollection;
 import com.stripe.model.DeletedBankAccount;
 import com.stripe.model.DeletedBitcoinReceiver;
 import com.stripe.model.DeletedCard;
@@ -112,7 +113,7 @@ public class StripeTest {
 		Date date = new Date(); //Get current date
   		Calendar calendar = new GregorianCalendar();
   		calendar.setTime(date);
-   		return calendar.get(Calendar.YEAR) + 1 +"";	
+   		return calendar.get(Calendar.YEAR) + 1 +"";
 	}
 
 
@@ -1194,6 +1195,50 @@ public class StripeTest {
 		sub = sub.cancel(null);
 		assertNotNull(sub.getCanceledAt());
 	}
+
+	@Test
+	public void testTopLevelSubscriptionAPI() throws StripeException {
+		Plan plan = Plan.create(getUniquePlanParams());
+		Plan plan2 = Plan.create(getUniquePlanParams());
+		Customer customer = Customer.create(defaultCustomerParams);
+
+		// Create
+		Map<String, Object> subCreateParams = new HashMap<String, Object>();
+		subCreateParams.put("plan", plan.getId());
+		subCreateParams.put("customer", customer.getId());
+		Subscription sub = Subscription.create(subCreateParams);
+		assertEquals(plan.getId(), sub.getPlan().getId());
+		assertEquals(customer.getId(), sub.getCustomer());
+
+		customer = Customer.retrieve(customer.getId());
+		assertEquals(1, customer.getSubscriptions().getData().size());
+		assertEquals(sub.getId(), customer.getSubscriptions().getData().get(0).getId());
+
+		// Retrieve
+		Subscription retrievedSub = Subscription.retrieve(sub.getId());
+		assertEquals(sub.getId(), retrievedSub.getId());
+
+		// List
+		Map<String, Object> subAllParams = new HashMap<String, Object>();
+		subAllParams.put("plan", plan.getId());
+		subAllParams.put("customer", customer.getId());
+		SubscriptionCollection list = Subscription.all(subAllParams);
+		assertEquals(1, list.getData().size());
+		assertEquals(sub.getId(), list.getData().get(0).getId());
+		assertEquals(customer.getId(), list.getData().get(0).getCustomer());
+		assertEquals(plan.getId(), list.getData().get(0).getPlan().getId());
+
+		// Update
+		Map<String, Object> subUpdateParams = new HashMap<String, Object>();
+		subUpdateParams.put("plan", plan2.getId());
+		sub = sub.update(subUpdateParams);
+		assertEquals(plan2.getId(), sub.getPlan().getId());
+
+		// Cancel
+		sub = sub.cancel(null);
+		assertNotNull(sub.getCanceledAt());
+	}
+
 
 	@Test
 	public void testCreateSubscriptionThroughCollection() throws StripeException {
