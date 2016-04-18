@@ -1,0 +1,40 @@
+{
+    "object": "balance",
+    "available": [
+        {
+            "currency": "usd",
+            "amount": 8045512867,
+            "source_types": {
+                "card": 8035054884,
+                "bank_account": 9008784,
+                "bitcoin_receiver": 1449199
+            }
+        },
+        {
+            "currency": "cad",
+            "amount": 1023450,
+            "source_types": {
+                "card": 1023450
+            }
+        }
+    ],
+    "livemode": false,
+    "pending": [
+        {
+            "currency": "usd",
+            "amount": 1034273583,
+            "source_types": {
+                "card": 1034273583,
+                "bank_account": 0,
+                "bitcoin_receiver": 0
+            }
+        },
+        {
+            "currency": "cad",
+            "amount": 356454,
+            "source_types": {
+                "card": 356454
+            }
+        }
+    ]
+}
