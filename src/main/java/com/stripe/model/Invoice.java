@@ -37,10 +37,12 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 	Integer startingBalance;
 	String statementDescriptor;
 	String subscription;
+	Long subscriptionProrationDate;
 	Integer subtotal;
 	Integer tax;
 	Double taxPercent;
 	Integer total;
+	Long webhooksDeliveredAt;
 
 	public String getId() {
 		return id;
@@ -246,6 +248,14 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 		this.subscription = subscription;
 	}
 
+	public Long getSubscriptionProrationDate() {
+		return subscriptionProrationDate;
+	}
+
+	public void setSubscriptionProrationDate(Long subscriptionProrationDate) {
+		this.subscriptionProrationDate = subscriptionProrationDate;
+	}
+
 	public Integer getSubtotal() {
 		return subtotal;
 	}
@@ -276,6 +286,14 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 
 	public void setTotal(Integer total) {
 		this.total = total;
+	}
+
+	public Long getWebhooksDeliveredAt() {
+		return webhooksDeliveredAt;
+	}
+
+	public void setWebhooksDeliveredAt(Long webhooksDeliveredAt) {
+		this.webhooksDeliveredAt = webhooksDeliveredAt;
 	}
 
 	public static Invoice retrieve(String id) throws AuthenticationException,

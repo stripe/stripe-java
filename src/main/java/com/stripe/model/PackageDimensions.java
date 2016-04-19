@@ -1,6 +1,6 @@
 package com.stripe.model;
 
-public class PackageDimensions {
+public class PackageDimensions extends StripeObject {
 	Double height;
 	Double length;
 	Double weight;

@@ -7,6 +7,7 @@ public class InvoiceLineItem extends StripeObject implements HasId {
 	Integer amount;
 	String currency;
 	String description;
+	Boolean discountable;
 	Boolean livemode;
 	Map<String, String> metadata;
 	InvoiceLineItemPeriod period;
@@ -30,6 +31,10 @@ public class InvoiceLineItem extends StripeObject implements HasId {
 
 	public String getDescription() {
 		return this.description;
+	}
+
+	public Boolean getDiscountable() {
+		return this.discountable;
 	}
 
 	public Boolean getLivemode() {

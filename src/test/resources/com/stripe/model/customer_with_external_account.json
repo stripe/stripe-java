@@ -8,7 +8,10 @@
         "data": [{
             "id": "extacct_123",
             "object": "unknown_external_account",
-            "customer": "cus_123"
+            "customer": "cus_123",
+            "metadata": {
+                "mdkey": "mdvalue"
+            }
         }]
     }
 }

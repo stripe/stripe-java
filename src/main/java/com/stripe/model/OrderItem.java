@@ -1,6 +1,6 @@
 package com.stripe.model;
 
-public class OrderItem {
+public class OrderItem extends StripeObject {
 	Integer amount;
 	String currency;
 	String description;

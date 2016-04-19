@@ -19,7 +19,6 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 	String businessURL;
 	Boolean chargesEnabled;
 	String country;
-	List<String> currenciesSupported;
 	Boolean debitNegativeBalances;
 	AccountDeclineChargeOn declineChargeOn;
 	String defaultCurrency;
@@ -41,6 +40,9 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 	AccountTransferSchedule transferSchedule;
 	Boolean transfersEnabled;
 	Verification verification;
+
+	@Deprecated
+	List<String> currenciesSupported;
 
 	public String getId() {
 		return id;
@@ -75,10 +77,6 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 
 	public String getCountry() {
 		return country;
-	}
-
-	public List<String> getCurrenciesSupported() {
-		return currenciesSupported;
 	}
 
 	public Boolean getDebitNegativeBalances() {
@@ -190,6 +188,15 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 
 	public Verification getVerification() {
 		return verification;
+	}
+
+	/**
+	 * @deprecated
+	 * Use the country_specs endpoint (https://stripe.com/docs/upgrades#2016-03-07)
+	 */
+	@Deprecated
+	public List<String> getCurrenciesSupported() {
+		return currenciesSupported;
 	}
 
 	public static Account create(Map<String, Object> params)

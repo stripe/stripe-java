@@ -10,6 +10,8 @@ import com.stripe.net.RequestOptions;
 import java.util.Map;
 
 public class BankAccount extends ExternalAccount {
+	String accountHolderName;
+	String accountHolderType;
 	String bankName;
 	String country;
 	String currency;
@@ -19,6 +21,22 @@ public class BankAccount extends ExternalAccount {
 	String routingNumber;
 	String status;
 	Boolean validated;
+
+	public String getAccountHolderName() {
+		return accountHolderName;
+	}
+
+	public void setAccountHolderName(String accountHolderName) {
+		this.accountHolderName = accountHolderName;
+	}
+
+	public String getAccountHolderType() {
+		return accountHolderType;
+	}
+
+	public void setAccountHolderType(String accountHolderType) {
+		this.accountHolderType = accountHolderType;
+	}
 
 	public String getBankName() {
 		return bankName;

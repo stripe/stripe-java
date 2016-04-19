@@ -9,7 +9,7 @@ import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
-public class Card extends ExternalAccount implements MetadataStore<Card>, HasId {
+public class Card extends ExternalAccount {
 	String addressCity;
 	String addressCountry;
 	String addressLine1;
@@ -22,17 +22,19 @@ public class Card extends ExternalAccount implements MetadataStore<Card>, HasId 
 	String country;
 	String currency;
 	String cvcCheck;
+	Boolean defaultForCurrency;
 	String dynamicLast4;
 	Integer expMonth;
 	Integer expYear;
 	String fingerprint;
 	String funding;
 	String last4;
-	Map<String, String> metadata;
 	String name;
 	String recipient;
 	String status;
 	String tokenizationMethod;
+
+	@Deprecated
 	String type;
 
 	public String getAddressCity() {
@@ -131,6 +133,14 @@ public class Card extends ExternalAccount implements MetadataStore<Card>, HasId 
 		this.cvcCheck = cvcCheck;
 	}
 
+	public Boolean getDefaultForCurrency() {
+		return defaultForCurrency;
+	}
+
+	public void setDefaultForCurrency(Boolean defaultForCurrency) {
+		this.defaultForCurrency = defaultForCurrency;
+	}
+
 	public String getDynamicLast4() {
 		return dynamicLast4;
 	}
@@ -179,14 +189,6 @@ public class Card extends ExternalAccount implements MetadataStore<Card>, HasId 
 		this.last4 = last4;
 	}
 
-	public Map<String, String> getMetadata() {
-		return metadata;
-	}
-
-	public void setMetadata(Map<String, String> metadata) {
-		this.metadata = metadata;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -219,10 +221,20 @@ public class Card extends ExternalAccount implements MetadataStore<Card>, HasId 
 		this.tokenizationMethod = tokenizationMethod;
 	}
 
+	/**
+	 * @deprecated
+	 * Use `brand` field (https://stripe.com/docs/upgrades#2014-06-13)
+	 */
+	@Deprecated
 	public String getType() {
 		return type;
 	}
 
+	/**
+	 * @deprecated
+	 * Use `brand` field (https://stripe.com/docs/upgrades#2014-06-13)
+	 */
+	@Deprecated
 	public void setType(String type) {
 		this.type = type;
 	}

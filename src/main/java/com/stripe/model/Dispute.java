@@ -14,23 +14,27 @@ import java.util.Map;
 public class Dispute extends APIResource implements HasId {
 	String id;
 	Integer amount;
-	/** 8/2014: Legacy (now use balanceTransactions) -- https://stripe.com/docs/upgrades#2014-08-20 */
-	String balanceTransaction;
 	List<BalanceTransaction> balanceTransactions;
 	String charge;
 	Long created;
 	String currency;
-	/** 12/2014: Legacy (now use evidenceSubObject) -- https://stripe.com/docs/upgrades */
-	String evidence;
+	EvidenceSubObject evidenceSubObject; // `evidence`
 	EvidenceDetails evidenceDetails;
-	/** 12/2014: Legacy (now use evidenceDetails.dueBy) -- https://stripe.com/docs/upgrades */
-	Long evidenceDueBy;
-	EvidenceSubObject evidenceSubObject;
 	Boolean isChargeRefundable;
 	Boolean livemode;
 	Map<String, String> metadata;
 	String reason;
 	String status;
+
+	/** 8/2014: Legacy (now use balanceTransactions) -- https://stripe.com/docs/upgrades#2014-08-20 */
+	@Deprecated
+	String balanceTransaction;
+	/** 12/2014: Legacy (now use evidenceSubObject) -- https://stripe.com/docs/upgrades */
+	@Deprecated
+	String evidence;
+	/** 12/2014: Legacy (now use evidenceDetails.dueBy) -- https://stripe.com/docs/upgrades */
+	@Deprecated
+	Long evidenceDueBy;
 
 	public String getId() {
 		return id;
@@ -46,14 +50,6 @@ public class Dispute extends APIResource implements HasId {
 
 	public void setAmount(Integer amount) {
 		this.amount = amount;
-	}
-
-	public String getBalanceTransaction() {
-		return balanceTransaction;
-	}
-
-	public void setBalanceTransaction(String balanceTransaction) {
-		this.balanceTransaction = balanceTransaction;
 	}
 
 	public List<BalanceTransaction> getBalanceTransactions() {
@@ -88,14 +84,12 @@ public class Dispute extends APIResource implements HasId {
 		this.currency = currency;
 	}
 
-	/** 12/2014 Legacy (now use evidenceSubObject) */
-	public String getEvidence() {
-		return evidence;
+	public EvidenceSubObject getEvidenceSubObject() {
+		return evidenceSubObject;
 	}
 
-	/** 12/2014 Legacy (now use evidenceSubObject) */
-	public void setEvidence(String evidence) {
-		this.evidence = evidence;
+	public void setEvidenceSubObject(EvidenceSubObject evidence) {
+		this.evidenceSubObject = evidence;
 	}
 
 	public EvidenceDetails getEvidenceDetails() {
@@ -104,22 +98,6 @@ public class Dispute extends APIResource implements HasId {
 
 	public void setEvidenceDetails(EvidenceDetails evidenceDetails) {
 		this.evidenceDetails = evidenceDetails;
-	}
-
-	public Long getEvidenceDueBy() {
-		return evidenceDueBy;
-	}
-
-	public void setEvidenceDueBy(Long evidenceDueBy) {
-		this.evidenceDueBy = evidenceDueBy;
-	}
-
-	public EvidenceSubObject getEvidenceSubObject() {
-		return evidenceSubObject;
-	}
-
-	public void setEvidenceSubObject(EvidenceSubObject evidence) {
-		this.evidenceSubObject = evidence;
 	}
 
 	public boolean getIsChargeRefundable() {
@@ -158,6 +136,60 @@ public class Dispute extends APIResource implements HasId {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	/**
+	 * @deprecated
+	 * Use `balance_transactions` field
+	 */
+	@Deprecated
+	public String getBalanceTransaction() {
+		return balanceTransaction;
+	}
+
+	/**
+	 * @deprecated
+	 * Use `balance_transactions` field
+	 */
+	@Deprecated
+	public void setBalanceTransaction(String balanceTransaction) {
+		this.balanceTransaction = balanceTransaction;
+	}
+
+	/**
+	 * @deprecated
+	 * Use evidenceSubObject (https://stripe.com/docs/upgrades#2014-12-08)
+	 */
+	@Deprecated
+	public String getEvidence() {
+		return evidence;
+	}
+
+	/**
+	 * @deprecated
+	 * Use evidenceSubObject (https://stripe.com/docs/upgrades#2014-12-08)
+	 */
+	@Deprecated
+	public void setEvidence(String evidence) {
+		this.evidence = evidence;
+	}
+
+	/**
+	 * @deprecated
+	 * Use evidenceDetails.dueBy (https://stripe.com/docs/upgrades#2014-12-08)
+	 */
+	@Deprecated
+	public Long getEvidenceDueBy() {
+		return evidenceDueBy;
+	}
+
+	/**
+	 * @deprecated
+	 * Use evidenceDetails.dueBy (https://stripe.com/docs/upgrades#2014-12-08)
+	 */
+	@Deprecated
+	public void setEvidenceDueBy(Long evidenceDueBy) {
+		this.evidenceDueBy = evidenceDueBy;
 	}
 
 	public static Dispute retrieve(String id) throws AuthenticationException,

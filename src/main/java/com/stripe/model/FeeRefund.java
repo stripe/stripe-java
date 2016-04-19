@@ -11,13 +11,65 @@ import com.stripe.net.RequestOptions;
 import java.util.Map;
 
 public class FeeRefund extends APIResource implements MetadataStore<ApplicationFee>, HasId {
+	String id;
 	Integer amount;
+	String balanceTransaction;
 	String currency;
 	Long created;
-	String balanceTransaction;
-	String id;
 	String fee;
 	Map<String, String> metadata;
+
+	public String getId() {
+		return id;
+	}
+
+	public Integer getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Integer amount) {
+		this.amount = amount;
+	}
+
+	public String getBalanceTransaction() {
+		return balanceTransaction;
+	}
+
+	public void setBalanceTransaction(String balanceTransaction) {
+		this.balanceTransaction = balanceTransaction;
+	}
+
+	public String getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
+
+	public Long getCreated() {
+		return created;
+	}
+
+	public void setCreated(Long created) {
+		this.created = created;
+	}
+
+	public String getFee() {
+		return fee;
+	}
+
+	public void setFee(String fee) {
+		this.fee = fee;
+	}
+
+	public Map<String, String> getMetadata() {
+		return metadata;
+	}
+
+	public void setMetadata(Map<String, String> metadata) {
+		this.metadata = metadata;
+	}
 
 	public FeeRefund update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
@@ -42,44 +94,5 @@ public class FeeRefund extends APIResource implements MetadataStore<ApplicationF
 			return String.format("%s/%s/refunds/%s", classURL(ApplicationFee.class), this.fee, this.getId());
 		}
 		return null;
-	}
-	public String getId() {
-		return id;
-	}
-	public Integer getAmount() {
-		return amount;
-	}
-	public void setAmount(Integer amount) {
-		this.amount = amount;
-	}
-	public String getCurrency() {
-		return currency;
-	}
-	public void setCurrency(String currency) {
-		this.currency = currency;
-	}
-	public Long getCreated() {
-		return created;
-	}
-	public void setCreated(Long created) {
-		this.created = created;
-	}
-	public String getBalanceTransaction() {
-		return balanceTransaction;
-	}
-	public void setBalanceTransaction(String balanceTransaction) {
-		this.balanceTransaction = balanceTransaction;
-	}
-	public String getFee() {
-		return fee;
-	}
-	public void setFee(String fee) {
-		this.fee = fee;
-	}
-	public Map<String, String> getMetadata() {
-		return metadata;
-	}
-	public void setMetadata(Map<String, String> metadata) {
-		this.metadata = metadata;
 	}
 }
