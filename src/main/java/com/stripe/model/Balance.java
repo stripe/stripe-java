@@ -11,9 +11,13 @@ import com.stripe.net.RequestOptions;
 import java.util.List;
 
 public class Balance extends APIResource {
+	List<Money> available;
 	Boolean livemode;
 	List<Money> pending;
-	List<Money> available;
+
+	public List<Money> getAvailable() {
+		return available;
+	}
 
 	public Boolean getLivemode() {
 		return livemode;
@@ -21,10 +25,6 @@ public class Balance extends APIResource {
 
 	public List<Money> getPending() {
 		return pending;
-	}
-
-	public List<Money> getAvailable() {
-		return available;
 	}
 
 	public static Balance retrieve() throws AuthenticationException,

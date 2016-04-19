@@ -11,19 +11,83 @@ import com.stripe.net.RequestOptions;
 import java.util.Map;
 
 public class Coupon extends APIResource implements MetadataStore<Coupon>, HasId {
-	Integer percentOff;
+	String id;
 	Integer amountOff;
+	Long created;
 	String currency;
 	String duration;
-	String id;
-	Long created;
-	Boolean livemode;
 	Integer durationInMonths;
+	Boolean livemode;
 	Long maxRedemptions;
+	Map<String, String> metadata;
+	Integer percentOff;
 	Long redeemBy;
 	Integer timesRedeemed;
 	Boolean valid;
-	Map<String, String> metadata;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public Integer getAmountOff() {
+		return amountOff;
+	}
+
+	public void setAmountOff(Integer amountOff) {
+		this.amountOff = amountOff;
+	}
+
+	public Long getCreated() {
+		return created;
+	}
+
+	public void setCreated(Long created) {
+		this.created = created;
+	}
+
+	public String getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
+
+	public String getDuration() {
+		return duration;
+	}
+
+	public void setDuration(String duration) {
+		this.duration = duration;
+	}
+
+	public Integer getDurationInMonths() {
+		return durationInMonths;
+	}
+
+	public void setDurationInMonths(Integer durationInMonths) {
+		this.durationInMonths = durationInMonths;
+	}
+
+	public Boolean getLivemode() {
+		return livemode;
+	}
+
+	public void setLivemode(Boolean livemode) {
+		this.livemode = livemode;
+	}
+
+	public Long getMaxRedemptions() {
+		return maxRedemptions;
+	}
+
+	public void setMaxRedemptions(Long maxRedemptions) {
+		this.maxRedemptions = maxRedemptions;
+	}
 
 	public Map<String, String> getMetadata() {
 		return metadata;
@@ -31,6 +95,38 @@ public class Coupon extends APIResource implements MetadataStore<Coupon>, HasId 
 
 	public void setMetadata(Map<String, String> metadata) {
 		this.metadata = metadata;
+	}
+
+	public Integer getPercentOff() {
+		return percentOff;
+	}
+
+	public void setPercentOff(Integer percentOff) {
+		this.percentOff = percentOff;
+	}
+
+	public Long getRedeemBy() {
+		return redeemBy;
+	}
+
+	public void setRedeemBy(Long redeemBy) {
+		this.redeemBy = redeemBy;
+	}
+
+	public Integer getTimesRedeemed() {
+		return timesRedeemed;
+	}
+
+	public void setTimesRedeemed(Integer timesRedeemed) {
+		this.timesRedeemed = timesRedeemed;
+	}
+
+	public Boolean getValid() {
+		return valid;
+	}
+
+	public void setValid(Boolean valid) {
+		this.valid = valid;
 	}
 
 	public static Coupon create(Map<String, Object> params)
@@ -130,101 +226,5 @@ public class Coupon extends APIResource implements MetadataStore<Coupon>, HasId 
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return request(RequestMethod.DELETE, instanceURL(Coupon.class, this.id), null, DeletedCoupon.class, options);
-	}
-
-	public Integer getPercentOff() {
-		return percentOff;
-	}
-
-	public void setPercentOff(Integer percentOff) {
-		this.percentOff = percentOff;
-	}
-
-	public Integer getAmountOff() {
-		return amountOff;
-	}
-
-	public void setAmountOff(Integer amountOff) {
-		this.amountOff = amountOff;
-	}
-
-	public String getCurrency() {
-		return currency;
-	}
-
-	public void setCurrency(String currency) {
-		this.currency = currency;
-	}
-
-	public String getDuration() {
-		return duration;
-	}
-
-	public void setDuration(String duration) {
-		this.duration = duration;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public Long getCreated() {
-		return created;
-	}
-
-	public void setCreated(Long created) {
-		this.created = created;
-	}
-
-	public Boolean getLivemode() {
-		return livemode;
-	}
-
-	public void setLivemode(Boolean livemode) {
-		this.livemode = livemode;
-	}
-
-	public Integer getDurationInMonths() {
-		return durationInMonths;
-	}
-
-	public void setDurationInMonths(Integer durationInMonths) {
-		this.durationInMonths = durationInMonths;
-	}
-
-	public Long getMaxRedemptions() {
-		return maxRedemptions;
-	}
-
-	public void setMaxRedemptions(Long maxRedemptions) {
-		this.maxRedemptions = maxRedemptions;
-	}
-
-	public Long getRedeemBy() {
-		return redeemBy;
-	}
-
-	public void setRedeemBy(Long redeemBy) {
-		this.redeemBy = redeemBy;
-	}
-
-	public Integer getTimesRedeemed() {
-		return timesRedeemed;
-	}
-
-	public void setTimesRedeemed(Integer timesRedeemed) {
-		this.timesRedeemed = timesRedeemed;
-	}
-
-	public Boolean getValid() {
-		return valid;
-	}
-
-	public void setValid(Boolean valid) {
-		this.valid = valid;
 	}
 }

@@ -13,47 +13,31 @@ import java.util.Collections;
 import java.util.Map;
 
 public class BitcoinReceiver extends ExternalAccount implements HasId {
-	String status;
-	Long created;
-	String currency;
+	Boolean active;
 	Integer amount;
 	Integer amountReceived;
 	Integer bitcoinAmount;
 	Integer bitcoinAmountReceived;
-	Boolean filled;
-	Boolean active;
-	Boolean rejectTransactions;
-	String description;
-	String inboundAddress;
-	String refundAddress;
 	String bitcoinUri;
+	Long created;
+	String currency;
+	String description;
 	String email;
-	String payment;
-	BitcoinTransactionCollection transactions;
+	Boolean filled;
+	String inboundAddress;
 	Map<String, String> metadata;
+	String payment;
+	String refundAddress;
+	Boolean rejectTransactions;
+	String status;
+	BitcoinTransactionCollection transactions;
 
-	public String getStatus() {
-		return status;
+	public Boolean getActive() {
+		return active;
 	}
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public Long getCreated() {
-		return created;
-	}
-
-	public void setCreated(Long created) {
-		this.created = created;
-	}
-
-	public String getCurrency() {
-		return currency;
-	}
-
-	public void setCurrency(String currency) {
-		this.currency = currency;
+	public void setActive(Boolean active) {
+		this.active = active;
 	}
 
 	public Integer getAmount() {
@@ -88,28 +72,28 @@ public class BitcoinReceiver extends ExternalAccount implements HasId {
 		this.bitcoinAmountReceived = bitcoinAmountReceived;
 	}
 
-	public Boolean getFilled() {
-		return filled;
+	public String getBitcoinUri() {
+		return bitcoinUri;
 	}
 
-	public void setFilled(Boolean filled) {
-		this.filled = filled;
+	public void setBitcoinUri(String bitcoinUri) {
+		this.bitcoinUri = bitcoinUri;
 	}
 
-	public Boolean getActive() {
-		return active;
+	public Long getCreated() {
+		return created;
 	}
 
-	public void setActive(Boolean active) {
-		this.active = active;
+	public void setCreated(Long created) {
+		this.created = created;
 	}
 
-	public Boolean getRejectTransactions() {
-		return rejectTransactions;
+	public String getCurrency() {
+		return currency;
 	}
 
-	public void setRejectTransactions(Boolean rejectTransactions) {
-		this.rejectTransactions = rejectTransactions;
+	public void setCurrency(String currency) {
+		this.currency = currency;
 	}
 
 	public String getDescription() {
@@ -120,6 +104,22 @@ public class BitcoinReceiver extends ExternalAccount implements HasId {
 		this.description = description;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Boolean getFilled() {
+		return filled;
+	}
+
+	public void setFilled(Boolean filled) {
+		this.filled = filled;
+	}
+
 	public String getInboundAddress() {
 		return inboundAddress;
 	}
@@ -128,28 +128,12 @@ public class BitcoinReceiver extends ExternalAccount implements HasId {
 		this.inboundAddress = inboundAddress;
 	}
 
-	public String getRefundAddress() {
-		return refundAddress;
+	public Map<String, String> getMetadata() {
+		return metadata;
 	}
 
-	public void setRefundAddress(String refundAddress) {
-		this.refundAddress = refundAddress;
-	}
-
-	public String getBitcoinUri() {
-		return bitcoinUri;
-	}
-
-	public void setBitcoinUri(String bitcoinUri) {
-		this.bitcoinUri = bitcoinUri;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
+	public void setMetadata(Map<String, String> metadata) {
+		this.metadata = metadata;
 	}
 
 	public String getPayment() {
@@ -160,20 +144,36 @@ public class BitcoinReceiver extends ExternalAccount implements HasId {
 		this.payment = payment;
 	}
 
+	public String getRefundAddress() {
+		return refundAddress;
+	}
+
+	public void setRefundAddress(String refundAddress) {
+		this.refundAddress = refundAddress;
+	}
+
+	public Boolean getRejectTransactions() {
+		return rejectTransactions;
+	}
+
+	public void setRejectTransactions(Boolean rejectTransactions) {
+		this.rejectTransactions = rejectTransactions;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
 	public BitcoinTransactionCollection getTransactions() {
 		return transactions;
 	}
 
 	public void setTransactions(BitcoinTransactionCollection transactions) {
 		this.transactions = transactions;
-	}
-
-	public Map<String, String> getMetadata() {
-		return metadata;
-	}
-
-	public void setMetadata(Map<String, String> metadata) {
-		this.metadata = metadata;
 	}
 
 	public static BitcoinReceiver create(Map<String, Object> params)

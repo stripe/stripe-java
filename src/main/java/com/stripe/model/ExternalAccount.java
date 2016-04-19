@@ -15,8 +15,8 @@ import java.util.Map;
 public class ExternalAccount extends APIResource implements HasId {
 	String id;
 	String object;
-	String customer;
 	String account;
+	String customer;
 
 	public String getId() {
 		return id;
@@ -26,15 +26,6 @@ public class ExternalAccount extends APIResource implements HasId {
 		return object;
 	}
 
-	public String getCustomer() {
-		return customer;
-	}
-
-	// For testing
-	public void setCustomer(String customer) {
-		this.customer = customer;
-	}
-
 	public String getAccount() {
 		return account;
 	}
@@ -42,6 +33,15 @@ public class ExternalAccount extends APIResource implements HasId {
 	// For testing
 	public void setAccount(String account) {
 		this.account = account;
+	}
+
+	public String getCustomer() {
+		return customer;
+	}
+
+	// For testing
+	public void setCustomer(String customer) {
+		this.customer = customer;
 	}
 
 	public String getInstanceURL() {
@@ -54,7 +54,7 @@ public class ExternalAccount extends APIResource implements HasId {
 		}
 	}
 
-	public ExternalAccount verify(Map<String, Object> params) throws 
+	public ExternalAccount verify(Map<String, Object> params) throws
 			AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return verify(params, (RequestOptions) null);

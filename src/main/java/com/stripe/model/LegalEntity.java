@@ -13,7 +13,7 @@ import java.util.Map;
 import com.google.gson.annotations.SerializedName;
 
 public class LegalEntity extends StripeObject {
-	String type;
+	List<Owner> additionalOwners;
 	Address address;
 	String businessName;
 	Boolean businessTaxIdProvided;
@@ -24,53 +24,67 @@ public class LegalEntity extends StripeObject {
 	Boolean personalIdNumberProvided;
 	@SerializedName("ssn_last_4_provided")/*Annotation required for GSON serialization for field with number*/
 	Boolean ssnLast4Provided;
+	String type;
 	Verification verification;
-	List<Owner> additionalOwners;
+
+	public List<Owner> getAdditionalOwners() {
+		return additionalOwners;
+	}
+
+	public Address getAddress() {
+		return address;
+	}
+
+	public String getBusinessName() {
+		return businessName;
+	}
+
+	public Boolean getBusinessTaxIdProvided() {
+		return businessTaxIdProvided;
+	}
+
+	public void setBusinessTaxIdProvided(Boolean businessTaxIdProvided) {
+		this.businessTaxIdProvided = businessTaxIdProvided;
+	}
+
+	public DateOfBirth getDob() {
+		return dob;
+	}
+
+	public String getFirstName() {
+		return firstName;
+	}
+
+	public String getLastName() {
+		return lastName;
+	}
+
+	public Address getPersonalAddress() {
+		return personalAddress;
+	}
+
+	public Boolean getPersonalIdNumberProvided() {
+		return personalIdNumberProvided;
+	}
+
+	public void setPersonalIdNumberProvided(Boolean personalIdNumberProvided) {
+		this.personalIdNumberProvided = personalIdNumberProvided;
+	}
+
+	public Boolean getSsnLast4Provided() {
+		return ssnLast4Provided;
+	}
+
+	public void setSsnLast4Provided(Boolean ssnLast4Provided) {
+		this.ssnLast4Provided = ssnLast4Provided;
+	}
 
 	public String getType() {
 		return type;
 	}
-	public Address getAddress() {
-		return address;
-	}
-	public String getBusinessName() {
-		return businessName;
-	}
-	public Boolean getBusinessTaxIdProvided() {
-		return businessTaxIdProvided;
-	}
-	public void setBusinessTaxIdProvided(Boolean businessTaxIdProvided) {
-		this.businessTaxIdProvided = businessTaxIdProvided;
-	}
-	public DateOfBirth getDob() {
-		return dob;
-	}
-	public String getFirstName() {
-		return firstName;
-	}
-	public String getLastName() {
-		return lastName;
-	}
-	public Address getPersonalAddress() {
-		return personalAddress;
-	}
-	public Boolean getPersonalIdNumberProvided() {
-		return personalIdNumberProvided;
-	}
-	public void setPersonalIdNumberProvided(Boolean personalIdNumberProvided) {
-		this.personalIdNumberProvided = personalIdNumberProvided;
-	}
-	public Boolean getSsnLast4Provided() {
-		return ssnLast4Provided;
-	}
-	public void setSsnLast4Provided(Boolean ssnLast4Provided) {
-		this.ssnLast4Provided = ssnLast4Provided;
-	}
+
 	public Verification getVerification() {
 		return verification;
-	}
-	public List<Owner> getAdditionalOwners() {
-		return additionalOwners;
 	}
 
 	@Override
@@ -83,7 +97,7 @@ public class LegalEntity extends StripeObject {
 		}
 
 		LegalEntity le = (LegalEntity) o;
-		return equals(type, le.type) &&
+		return equals(additionalOwners, le.additionalOwners) &&
 			equals(address, le.address) &&
 			equals(businessName, le.businessName) &&
 			equals(dob, le.dob) &&
@@ -92,8 +106,8 @@ public class LegalEntity extends StripeObject {
 			equals(personalAddress, le.personalAddress) &&
 			equals(personalIdNumberProvided, le.personalIdNumberProvided) &&
 			equals(ssnLast4Provided, le.ssnLast4Provided) &&
-			equals(verification, le.verification) &&
-			equals(additionalOwners, le.additionalOwners);
+			equals(type, le.type) &&
+			equals(verification, le.verification);
 	}
 
 	public static class DateOfBirth extends StripeObject {
@@ -104,9 +118,11 @@ public class LegalEntity extends StripeObject {
 		public Integer getDay() {
 			return day;
 		}
+
 		public Integer getMonth() {
 			return month;
 		}
+
 		public Integer getYear() {
 			return year;
 		}
@@ -128,22 +144,25 @@ public class LegalEntity extends StripeObject {
 	}
 
 	public static class Verification extends StripeObject {
-		String status;
-		String document;
 		String details;
 		String detailsCode;
+		String document;
+		String status;
 
-		public String getStatus() {
-			return status;
-		}
-		public String getDocument() {
-			return document;
-		}
 		public String getDetails() {
 			return details;
 		}
+
 		public String getDetailsCode() {
 			return detailsCode;
+		}
+
+		public String getDocument() {
+			return document;
+		}
+
+		public String getStatus() {
+			return status;
 		}
 
 		@Override
@@ -156,10 +175,10 @@ public class LegalEntity extends StripeObject {
 			}
 
 			Verification verification = (Verification) o;
-			return equals(status, verification.status) &&
+			return equals(details, verification.details) &&
+				equals(detailsCode, verification.detailsCode) &&
 				equals(document, verification.document) &&
-				equals(details, verification.details) &&
-				equals(detailsCode, verification.detailsCode);
+				equals(status, verification.status);
 		}
 	}
 
@@ -173,15 +192,19 @@ public class LegalEntity extends StripeObject {
 		public Address getAddress() {
 			return address;
 		}
+
 		public DateOfBirth getDob() {
 			return dob;
 		}
+
 		public String getFirstName() {
 			return firstName;
 		}
+
 		public String getLastName() {
 			return lastName;
 		}
+
 		public Verification getVerification() {
 			return verification;
 		}

@@ -12,27 +12,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Recipient extends APIResource implements MetadataStore<Recipient>, HasId {
-	Long created;
 	String id;
-	String type;
-	String name;
-	Boolean livemode;
+	BankAccount activeAccount;
+	RecipientCardCollection cards;
+	Long created;
+	String defaultCard;
 	Boolean deleted;
 	String description;
-	BankAccount activeAccount;
 	String email;
-	Boolean verified;
+	Boolean livemode;
 	Map<String, String> metadata;
-	String defaultCard;
-	RecipientCardCollection cards;
-
-	public Long getCreated() {
-		return created;
-	}
-
-	public void setCreated(Long created) {
-		this.created = created;
-	}
+	String name;
+	String type;
+	Boolean verified;
 
 	public String getId() {
 		return id;
@@ -40,50 +32,6 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
 
 	public void setId(String id) {
 		this.id = id;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Boolean getLivemode() {
-		return livemode;
-	}
-
-	public void setLivemode(Boolean livemode) {
-		this.livemode = livemode;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getDefaultCard() {
-		return defaultCard;
-	}
-
-	public void setDefaultCard(String defaultCard) {
-		this.defaultCard = defaultCard;
-	}
-
-	public RecipientCardCollection getCards() {
-		return cards;
 	}
 
 	public BankAccount getActiveAccount() {
@@ -94,6 +42,38 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
 		this.activeAccount = activeAccount;
 	}
 
+	public RecipientCardCollection getCards() {
+		return cards;
+	}
+
+	public Long getCreated() {
+		return created;
+	}
+
+	public void setCreated(Long created) {
+		this.created = created;
+	}
+
+	public String getDefaultCard() {
+		return defaultCard;
+	}
+
+	public void setDefaultCard(String defaultCard) {
+		this.defaultCard = defaultCard;
+	}
+
+	public Boolean getDeleted() {
+		return deleted;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription(String description) {
+		this.description = description;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -102,16 +82,12 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
 		this.email = email;
 	}
 
-	public Boolean getVerified() {
-		return verified;
+	public Boolean getLivemode() {
+		return livemode;
 	}
 
-	public void setVerified(Boolean verified) {
-		this.verified = verified;
-	}
-
-	public Boolean getDeleted() {
-		return deleted;
+	public void setLivemode(Boolean livemode) {
+		this.livemode = livemode;
 	}
 
 	public Map<String, String> getMetadata() {
@@ -120,6 +96,30 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
 
 	public void setMetadata(Map<String, String> metadata) {
 		this.metadata = metadata;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
+	public Boolean getVerified() {
+		return verified;
+	}
+
+	public void setVerified(Boolean verified) {
+		this.verified = verified;
 	}
 
 	public static Recipient create(Map<String, Object> params)

@@ -11,17 +11,25 @@ import com.stripe.net.RequestOptions;
 import java.util.Map;
 
 public class Token extends APIResource implements HasId {
+	String id;
 	Integer amount;
+	BankAccount bankAccount;
+	Card card;
+	String clientIp;
 	Long created;
 	String currency;
-	String id;
 	String email;
-	String clientIp;
-	String type;
 	Boolean livemode;
+	String type;
 	Boolean used;
-	Card card;
-	BankAccount bankAccount;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
 
 	public Integer getAmount() {
 		return amount;
@@ -29,6 +37,30 @@ public class Token extends APIResource implements HasId {
 
 	public void setAmount(Integer amount) {
 		this.amount = amount;
+	}
+
+	public BankAccount getBankAccount() {
+		return bankAccount;
+	}
+
+	public void setBankAccount(BankAccount bankAccount) {
+		this.bankAccount = bankAccount;
+	}
+
+	public Card getCard() {
+		return card;
+	}
+
+	public void setCard(Card card) {
+		this.card = card;
+	}
+
+	public String getClientIp() {
+		return clientIp;
+	}
+
+	public void setClientIp(String clientIp) {
+		this.clientIp = clientIp;
 	}
 
 	public Long getCreated() {
@@ -47,36 +79,12 @@ public class Token extends APIResource implements HasId {
 		this.currency = currency;
 	}
 
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
 	public String getEmail() {
 		return email;
 	}
 
 	public void setEmail(String email) {
 		this.email = email;
-	}
-
-	public String getClientIp() {
-		return clientIp;
-	}
-
-	public void setClientIp(String clientIp) {
-		this.clientIp = clientIp;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
 	}
 
 	public Boolean getLivemode() {
@@ -87,28 +95,20 @@ public class Token extends APIResource implements HasId {
 		this.livemode = livemode;
 	}
 
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
+	}
+
 	public Boolean getUsed() {
 		return used;
 	}
 
 	public void setUsed(Boolean used) {
 		this.used = used;
-	}
-
-	public Card getCard() {
-		return card;
-	}
-
-	public void setCard(Card card) {
-		this.card = card;
-	}
-
-	public BankAccount getBankAccount() {
-		return bankAccount;
-	}
-
-	public void setBankAccount(BankAccount bankAccount) {
-		this.bankAccount = bankAccount;
 	}
 
 	public static Token create(Map<String, Object> params)

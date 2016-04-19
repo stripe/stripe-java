@@ -13,23 +13,15 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class AlipayAccount extends ExternalAccount {
-	String status;
 	Long created;
-	Map<String, String> metadata;
-	String username;
 	String fingerprint;
-	Boolean used;
-	Boolean reusable;
+	Map<String, String> metadata;
 	Integer paymentAmount;
 	String paymentCurrency;
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
+	Boolean reusable;
+	Boolean used;
+	String username;
+	String status;
 
 	public Long getCreated() {
 		return created;
@@ -37,22 +29,6 @@ public class AlipayAccount extends ExternalAccount {
 
 	public void setCreated(Long created) {
 		this.created = created;
-	}
-
-	public Map<String, String> getMetadata() {
-		return metadata;
-	}
-
-	public void setMetadata(Map<String, String> metadata) {
-		this.metadata = metadata;
-	}
-
-	public String getUsername() {
-		return username;
-	}
-
-	public void setUsername(String username) {
-		this.username = username;
 	}
 
 	public String getFingerprint() {
@@ -63,20 +39,12 @@ public class AlipayAccount extends ExternalAccount {
 		this.fingerprint = fingerprint;
 	}
 
-	public Boolean getUsed() {
-		return used;
+	public Map<String, String> getMetadata() {
+		return metadata;
 	}
 
-	public void setUsed(Boolean used) {
-		this.used = used;
-	}
-
-	public Boolean getReusable() {
-		return reusable;
-	}
-
-	public void setReusable(Boolean reusable) {
-		this.reusable = reusable;
+	public void setMetadata(Map<String, String> metadata) {
+		this.metadata = metadata;
 	}
 
 	public Integer getPaymentAmount() {
@@ -93,6 +61,38 @@ public class AlipayAccount extends ExternalAccount {
 
 	public void setPaymentCurrency(String paymentCurrency) {
 		this.paymentCurrency = paymentCurrency;
+	}
+
+	public Boolean getReusable() {
+		return reusable;
+	}
+
+	public void setReusable(Boolean reusable) {
+		this.reusable = reusable;
+	}
+
+	public Boolean getUsed() {
+		return used;
+	}
+
+	public void setUsed(Boolean used) {
+		this.used = used;
+	}
+
+	public String getUsername() {
+		return username;
+	}
+
+	public void setUsername(String username) {
+		this.username = username;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
 	}
 
 	public AlipayAccount update(Map<String, Object> params)

@@ -11,51 +11,43 @@ import com.stripe.net.RequestOptions;
 import java.util.Map;
 
 public class Invoice extends APIResource implements MetadataStore<Invoice>, HasId {
-	Integer subtotal;
-	Integer total;
-	Integer amountDue;
-	Integer startingBalance;
-	Integer endingBalance;
 	String id;
-	Long created;
-	Long nextPaymentAttempt;
+	Integer amountDue;
+	Long applicationFee;
+	Integer attemptCount;
 	Boolean attempted;
 	String charge;
-	String description;
 	Boolean closed;
+	Long created;
+	String currency;
 	String customer;
 	Long date;
-	Boolean paid;
-	Long periodStart;
-	Long periodEnd;
+	String description;
 	Discount discount;
+	Integer endingBalance;
+	Boolean forgiven;
 	InvoiceLineItemCollection lines;
 	Boolean livemode;
-	Integer attemptCount;
-	String currency;
-	String subscription;
-	Long applicationFee;
 	Map<String, String> metadata;
-	Boolean forgiven;
+	Long nextPaymentAttempt;
+	Boolean paid;
+	Long periodEnd;
+	Long periodStart;
+	String receiptNumber;
+	Integer startingBalance;
 	String statementDescriptor;
+	String subscription;
+	Integer subtotal;
 	Integer tax;
 	Double taxPercent;
-	String receiptNumber;
+	Integer total;
 
-	public Integer getSubtotal() {
-		return subtotal;
+	public String getId() {
+		return id;
 	}
 
-	public void setSubtotal(Integer subtotal) {
-		this.subtotal = subtotal;
-	}
-
-	public Integer getTotal() {
-		return total;
-	}
-
-	public void setTotal(Integer total) {
-		this.total = total;
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public Integer getAmountDue() {
@@ -66,44 +58,20 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 		this.amountDue = amountDue;
 	}
 
-	public Integer getStartingBalance() {
-		return startingBalance;
+	public Long getApplicationFee() {
+		return applicationFee;
 	}
 
-	public void setStartingBalance(Integer startingBalance) {
-		this.startingBalance = startingBalance;
+	public void setApplicationFee(Long applicationFee) {
+		this.applicationFee = applicationFee;
 	}
 
-	public Integer getEndingBalance() {
-		return endingBalance;
+	public Integer getAttemptCount() {
+		return attemptCount;
 	}
 
-	public void setEndingBalance(Integer endingBalance) {
-		this.endingBalance = endingBalance;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public Long getCreated() {
-		return created;
-	}
-
-	public void setCreated(Long created) {
-		this.created = created;
-	}
-
-	public Long getNextPaymentAttempt() {
-		return nextPaymentAttempt;
-	}
-
-	public void setNextPaymentAttempt(Long nextPaymentAttempt) {
-		this.nextPaymentAttempt = nextPaymentAttempt;
+	public void setAttemptCount(Integer attemptCount) {
+		this.attemptCount = attemptCount;
 	}
 
 	public Boolean getAttempted() {
@@ -122,20 +90,28 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 		this.charge = charge;
 	}
 
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
 	public Boolean getClosed() {
 		return closed;
 	}
 
 	public void setClosed(Boolean closed) {
 		this.closed = closed;
+	}
+
+	public Long getCreated() {
+		return created;
+	}
+
+	public void setCreated(Long created) {
+		this.created = created;
+	}
+
+	public String getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
 	}
 
 	public String getCustomer() {
@@ -154,36 +130,12 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 		this.date = date;
 	}
 
-	public Boolean getPaid() {
-		return paid;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setPaid(Boolean paid) {
-		this.paid = paid;
-	}
-
-	public Boolean getForgiven() {
-		return forgiven;
-	}
-
-	public void setForgiven(Boolean forgiven) {
-		this.forgiven = forgiven;
-	}
-
-	public Long getPeriodStart() {
-		return periodStart;
-	}
-
-	public void setPeriodStart(Long periodStart) {
-		this.periodStart = periodStart;
-	}
-
-	public Long getPeriodEnd() {
-		return periodEnd;
-	}
-
-	public void setPeriodEnd(Long periodEnd) {
-		this.periodEnd = periodEnd;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public Discount getDiscount() {
@@ -192,6 +144,22 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 
 	public void setDiscount(Discount discount) {
 		this.discount = discount;
+	}
+
+	public Integer getEndingBalance() {
+		return endingBalance;
+	}
+
+	public void setEndingBalance(Integer endingBalance) {
+		this.endingBalance = endingBalance;
+	}
+
+	public Boolean getForgiven() {
+		return forgiven;
+	}
+
+	public void setForgiven(Boolean forgiven) {
+		this.forgiven = forgiven;
 	}
 
 	public InvoiceLineItemCollection getLines() {
@@ -206,20 +174,68 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 		this.livemode = livemode;
 	}
 
-	public Integer getAttemptCount() {
-		return attemptCount;
+	public Map<String, String> getMetadata() {
+		return metadata;
 	}
 
-	public void setAttemptCount(Integer attemptCount) {
-		this.attemptCount = attemptCount;
+	public void setMetadata(Map<String, String> metadata) {
+		this.metadata = metadata;
 	}
 
-	public String getCurrency() {
-		return currency;
+	public Long getNextPaymentAttempt() {
+		return nextPaymentAttempt;
 	}
 
-	public void setCurrency(String currency) {
-		this.currency = currency;
+	public void setNextPaymentAttempt(Long nextPaymentAttempt) {
+		this.nextPaymentAttempt = nextPaymentAttempt;
+	}
+
+	public Boolean getPaid() {
+		return paid;
+	}
+
+	public void setPaid(Boolean paid) {
+		this.paid = paid;
+	}
+
+	public Long getPeriodEnd() {
+		return periodEnd;
+	}
+
+	public void setPeriodEnd(Long periodEnd) {
+		this.periodEnd = periodEnd;
+	}
+
+	public Long getPeriodStart() {
+		return periodStart;
+	}
+
+	public void setPeriodStart(Long periodStart) {
+		this.periodStart = periodStart;
+	}
+
+	public String getReceiptNumber() {
+		return receiptNumber;
+	}
+
+	public void setReceiptNumber(String receiptNumber) {
+		this.receiptNumber = receiptNumber;
+	}
+
+	public Integer getStartingBalance() {
+		return startingBalance;
+	}
+
+	public void setStartingBalance(Integer startingBalance) {
+		this.startingBalance = startingBalance;
+	}
+
+	public String getStatementDescriptor() {
+		return statementDescriptor;
+	}
+
+	public void setStatementDescriptor(String statementDescriptor) {
+		this.statementDescriptor = statementDescriptor;
 	}
 
 	public String getSubscription() {
@@ -230,20 +246,12 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 		this.subscription = subscription;
 	}
 
-	public Long getApplicationFee() {
-		return applicationFee;
+	public Integer getSubtotal() {
+		return subtotal;
 	}
 
-	public void setApplicationFee(Long applicationFee) {
-		this.applicationFee = applicationFee;
-	}
-
-	public String getStatementDescriptor() {
-		return statementDescriptor;
-	}
-
-	public void setStatementDescriptor(String statementDescriptor) {
-		this.statementDescriptor = statementDescriptor;
+	public void setSubtotal(Integer subtotal) {
+		this.subtotal = subtotal;
 	}
 
 	public Integer getTax() {
@@ -262,12 +270,12 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 		this.taxPercent = taxPercent;
 	}
 
-	public String getReceiptNumber() {
-		return receiptNumber;
+	public Integer getTotal() {
+		return total;
 	}
 
-	public void setReceiptNumber(String receiptNumber) {
-		this.receiptNumber = receiptNumber;
+	public void setTotal(Integer total) {
+		this.total = total;
 	}
 
 	public static Invoice retrieve(String id) throws AuthenticationException,
@@ -395,13 +403,5 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 			APIException {
 		return request(RequestMethod.POST, String.format("%s/pay",
 				instanceURL(Invoice.class, this.getId())), null, Invoice.class, options);
-	}
-
-	public Map<String, String> getMetadata() {
-		return metadata;
-	}
-
-	public void setMetadata(Map<String, String> metadata) {
-		this.metadata = metadata;
 	}
 }

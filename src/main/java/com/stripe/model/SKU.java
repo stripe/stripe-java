@@ -12,97 +12,122 @@ import com.stripe.net.RequestOptions;
 
 
 public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
-	Long created;
-	Long updated;
 	String id;
-	Boolean livemode;
 	Boolean active;
-	String image;
-	Integer price;
-	String currency;
 	Map<String, String> attributes;
+	Long created;
+	String currency;
+	String image;
 	Inventory inventory;
-	String product;
-	PackageDimensions packageDimensions;
+	Boolean livemode;
 	Map<String, String> metadata;
+	PackageDimensions packageDimensions;
+	Integer price;
+	String product;
+	Long updated;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public Boolean getActive() {
+		return active;
+	}
+
+	public void setActive(Boolean active) {
+		this.active = active;
+	}
+
+	public Map<String, String> getAttributes() {
+		return attributes;
+	}
+
+	public void setAttributes(Map<String, String> attributes) {
+		this.attributes = attributes;
+	}
 
 	public Long getCreated() {
 		return created;
 	}
+
 	public void setCreated(Long created) {
 		this.created = created;
 	}
-	public Long getUpdated() {
-		return updated;
-	}
-	public void setUpdated(Long updated) {
-		this.updated = updated;
-	}
-	public String getId() {
-		return id;
-	}
-	public void setId(String id) {
-		this.id = id;
-	}
-	public Boolean getLivemode() {
-		return livemode;
-	}
-	public void setLivemode(Boolean livemode) {
-		this.livemode = livemode;
-	}
-	public Boolean getActive() {
-		return active;
-	}
-	public void setActive(Boolean active) {
-		this.active = active;
-	}
-	public String getImage() {
-		return image;
-	}
-	public void setImage(String image) {
-		this.image = image;
-	}
-	public Integer getPrice() {
-		return price;
-	}
-	public void setPrice(Integer price) {
-		this.price = price;
-	}
+
 	public String getCurrency() {
 		return currency;
 	}
+
 	public void setCurrency(String currency) {
 		this.currency = currency;
 	}
-	public Map<String, String> getAttributes() {
-		return attributes;
+
+	public String getImage() {
+		return image;
 	}
-	public void setAttributes(Map<String, String> attributes) {
-		this.attributes = attributes;
+
+	public void setImage(String image) {
+		this.image = image;
 	}
+
 	public Inventory getInventory() {
 		return inventory;
 	}
+
 	public void setInventory(Inventory inventory) {
 		this.inventory = inventory;
 	}
-	public String getProduct() {
-		return product;
+
+	public Boolean getLivemode() {
+		return livemode;
 	}
-	public void setProduct(String product) {
-		this.product = product;
+
+	public void setLivemode(Boolean livemode) {
+		this.livemode = livemode;
 	}
-	public PackageDimensions getPackageDimensions() {
-		return packageDimensions;
-	}
-	public void setPackageDimensions(PackageDimensions packageDimensions) {
-		this.packageDimensions = packageDimensions;
-	}
+
 	public Map<String, String> getMetadata() {
 		return metadata;
 	}
+
 	public void setMetadata(Map<String, String> metadata) {
 		this.metadata = metadata;
+	}
+
+	public PackageDimensions getPackageDimensions() {
+		return packageDimensions;
+	}
+
+	public void setPackageDimensions(PackageDimensions packageDimensions) {
+		this.packageDimensions = packageDimensions;
+	}
+
+	public Integer getPrice() {
+		return price;
+	}
+
+	public void setPrice(Integer price) {
+		this.price = price;
+	}
+
+	public String getProduct() {
+		return product;
+	}
+
+	public void setProduct(String product) {
+		this.product = product;
+	}
+
+	public Long getUpdated() {
+		return updated;
+	}
+
+	public void setUpdated(Long updated) {
+		this.updated = updated;
 	}
 
 	public static SKU create(Map<String, Object> params)

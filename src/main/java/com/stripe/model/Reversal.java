@@ -11,13 +11,65 @@ import com.stripe.net.RequestOptions;
 import java.util.Map;
 
 public class Reversal extends APIResource implements MetadataStore<Transfer>, HasId {
-	Integer amount;
-	String currency;
-	Long created;
-	String balanceTransaction;
 	String id;
-	String transfer;
+	Integer amount;
+	String balanceTransaction;
+	Long created;
+	String currency;
 	Map<String, String> metadata;
+	String transfer;
+
+	public String getId() {
+		return id;
+	}
+
+	public Integer getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Integer amount) {
+		this.amount = amount;
+	}
+
+	public String getBalanceTransaction() {
+		return balanceTransaction;
+	}
+
+	public void setBalanceTransaction(String balanceTransaction) {
+		this.balanceTransaction = balanceTransaction;
+	}
+
+	public Long getCreated() {
+		return created;
+	}
+
+	public void setCreated(Long created) {
+		this.created = created;
+	}
+
+	public String getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
+
+	public Map<String, String> getMetadata() {
+		return metadata;
+	}
+
+	public void setMetadata(Map<String, String> metadata) {
+		this.metadata = metadata;
+	}
+
+	public String getTransfer() {
+		return transfer;
+	}
+
+	public void setTransfer(String transfer) {
+		this.transfer = transfer;
+	}
 
 	public Reversal update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
@@ -43,45 +95,4 @@ public class Reversal extends APIResource implements MetadataStore<Transfer>, Ha
 		}
 		return null;
 	}
-
-	public String getId() {
-		return id;
-	}
-	public Integer getAmount() {
-		return amount;
-	}
-	public void setAmount(Integer amount) {
-		this.amount = amount;
-	}
-	public String getCurrency() {
-		return currency;
-	}
-	public void setCurrency(String currency) {
-		this.currency = currency;
-	}
-	public Long getCreated() {
-		return created;
-	}
-	public void setCreated(Long created) {
-		this.created = created;
-	}
-	public String getBalanceTransaction() {
-		return balanceTransaction;
-	}
-	public void setBalanceTransaction(String balanceTransaction) {
-		this.balanceTransaction = balanceTransaction;
-	}
-	public String getTransfer() {
-		return transfer;
-	}
-	public void setTransfer(String transfer) {
-		this.transfer = transfer;
-	}
-	public Map<String, String> getMetadata() {
-		return metadata;
-	}
-	public void setMetadata(Map<String, String> metadata) {
-		this.metadata = metadata;
-	}
 }
-

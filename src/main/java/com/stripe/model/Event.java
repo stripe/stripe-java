@@ -12,14 +12,86 @@ import java.util.Map;
 
 public class Event extends APIResource implements HasId {
 	String id;
-	String type;
-	String userId;
-	Boolean livemode;
-	Long created;
 	String apiVersion;
+	Long created;
 	EventData data;
+	Boolean livemode;
 	Integer pendingWebhooks;
 	String request;
+	String type;
+	String userId;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public String getApiVersion() {
+		return apiVersion;
+	}
+
+	public void setApiVersion(String apiVersion) {
+		this.apiVersion = apiVersion;
+	}
+
+	public Long getCreated() {
+		return created;
+	}
+
+	public void setCreated(Long created) {
+		this.created = created;
+	}
+
+	public EventData getData() {
+		return data;
+	}
+
+	public void setData(EventData data) {
+		this.data = data;
+	}
+
+	public Boolean getLivemode() {
+		return livemode;
+	}
+
+	public void setLivemode(Boolean livemode) {
+		this.livemode = livemode;
+	}
+
+	public Integer getPendingWebhooks() {
+		return pendingWebhooks;
+	}
+
+	public void setPendingWebhooks(Integer pendingWebhooks) {
+		this.pendingWebhooks = pendingWebhooks;
+	}
+
+	public String getRequest() {
+		return request;
+	}
+
+	public void setRequest(String request) {
+		this.request = request;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String name) {
+		this.type = name;
+	}
+
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 
 	public static Event retrieve(String id) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
@@ -70,77 +142,5 @@ public class Event extends APIResource implements HasId {
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return list(params, options);
-	}
-
-	public EventData getData() {
-		return data;
-	}
-
-	public void setData(EventData data) {
-		this.data = data;
-	}
-
-	public Long getCreated() {
-		return created;
-	}
-
-	public void setCreated(Long created) {
-		this.created = created;
-	}
-
-	public String getApiVersion() {
-		return apiVersion;
-	}
-
-	public void setApiVersion(String apiVersion) {
-		this.apiVersion = apiVersion;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String name) {
-		this.type = name;
-	}
-
-	public String getUserId() {
-		return userId;
-	}
-
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
-
-	public Boolean getLivemode() {
-		return livemode;
-	}
-
-	public void setLivemode(Boolean livemode) {
-		this.livemode = livemode;
-	}
-
-	public Integer getPendingWebhooks() {
-		return pendingWebhooks;
-	}
-
-	public void setPendingWebhooks(Integer pendingWebhooks) {
-		this.pendingWebhooks = pendingWebhooks;
-	}
-
-	public String getRequest() {
-		return request;
-	}
-
-	public void setRequest(String request) {
-		this.request = request;
 	}
 }
