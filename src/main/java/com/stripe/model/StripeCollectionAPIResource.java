@@ -9,32 +9,40 @@ import java.util.Map;
 
 public abstract class StripeCollectionAPIResource<T extends HasId> extends APIResource implements StripeCollectionInterface<T> {
 	List<T> data;
-	Integer totalCount;
 	Boolean hasMore;
-	private RequestOptions requestOptions;
-	private Map<String, Object> requestParams;
+	Integer totalCount;
 	String url;
+
 	/** 3/2014: Legacy (from before newstyle pagination API) */
 	Integer count;
+
+	private RequestOptions requestOptions;
+	private Map<String, Object> requestParams;
 
 	public List<T> getData() {
 		return data;
 	}
+
 	public void setData(List<T> data) {
 		this.data = data;
 	}
-	public Integer getTotalCount() {
-		return totalCount;
-	}
-	public void setTotalCount(Integer totalCount) {
-		this.totalCount = totalCount;
-	}
+
 	public Boolean getHasMore() {
 		return hasMore;
 	}
+
 	public void setHasMore(Boolean hasMore) {
 		this.hasMore = hasMore;
 	}
+
+	public Integer getTotalCount() {
+		return totalCount;
+	}
+
+	public void setTotalCount(Integer totalCount) {
+		this.totalCount = totalCount;
+	}
+
 	public String getURL() {
 		return url;
 	}
@@ -42,10 +50,12 @@ public abstract class StripeCollectionAPIResource<T extends HasId> extends APIRe
 	public void setURL(String url) {
 		this.url = url;
 	}
+
 	/** 3/2014: Legacy (from before newstyle pagination API) */
 	public Integer getCount() {
 		return count;
 	}
+
 	/** 3/2014: Legacy (from before newstyle pagination API) */
 	public void setCount(Integer count) {
 		this.count = count;

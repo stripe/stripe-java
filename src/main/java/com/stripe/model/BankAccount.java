@@ -10,15 +10,87 @@ import com.stripe.net.RequestOptions;
 import java.util.Map;
 
 public class BankAccount extends ExternalAccount {
-	String country;
-	String last4;
 	String bankName;
-	Boolean validated;
+	String country;
 	String currency;
-	String status;
-	String fingerprint;
 	Boolean defaultForCurrency;
+	String fingerprint;
+	String last4;
 	String routingNumber;
+	String status;
+	Boolean validated;
+
+	public String getBankName() {
+		return bankName;
+	}
+
+	public void setBankName(String bankName) {
+		this.bankName = bankName;
+	}
+
+	public String getCountry() {
+		return country;
+	}
+
+	public void setCountry(String country) {
+		this.country = country;
+	}
+
+	public String getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
+	}
+
+	public Boolean getDefaultForCurrency() {
+		return defaultForCurrency;
+	}
+
+	public void setDefaultForCurrency(Boolean defaultForCurrency) {
+		this.defaultForCurrency = defaultForCurrency;
+	}
+
+	public String getFingerprint() {
+		return fingerprint;
+	}
+
+	public void setFingerprint(String fingerprint) {
+		this.fingerprint = fingerprint;
+	}
+
+	public String getLast4() {
+		return last4;
+	}
+
+	public void setLast4(String last4) {
+		this.last4 = last4;
+	}
+
+	public String getRoutingNumber() {
+		return routingNumber;
+	}
+
+	public void setRoutingNumber(String routingNumber) {
+		this.routingNumber = routingNumber;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Boolean getValidated() {
+		return validated;
+	}
+
+	public void setValidated(Boolean validated) {
+		this.validated = validated;
+	}
 
 	public BankAccount update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
@@ -38,77 +110,5 @@ public class BankAccount extends ExternalAccount {
 	public DeletedBankAccount delete(RequestOptions options)
 			throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
 		return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedBankAccount.class, options);
-	}
-
-	public String getLast4() {
-		return last4;
-	}
-
-	public void setLast4(String last4) {
-		this.last4 = last4;
-	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public void setCountry(String country) {
-		this.country = country;
-	}
-
-	public String getBankName() {
-		return bankName;
-	}
-
-	public void setBankName(String bankName) {
-		this.bankName = bankName;
-	}
-
-	public Boolean getValidated() {
-		return validated;
-	}
-
-	public void setValidated(Boolean validated) {
-		this.validated = validated;
-	}
-
-	public String getCurrency() {
-		return currency;
-	}
-
-	public void setCurrency(String currency) {
-		this.currency = currency;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public String getFingerprint() {
-		return fingerprint;
-	}
-
-	public void setFingerprint(String fingerprint) {
-		this.fingerprint = fingerprint;
-	}
-
-	public Boolean getDefaultForCurrency() {
-		return defaultForCurrency;
-	}
-
-	public void setDefaultForCurrency(Boolean defaultForCurrency) {
-		this.defaultForCurrency = defaultForCurrency;
-	}
-
-	public String getRoutingNumber() {
-		return routingNumber;
-	}
-
-	public void setRoutingNumber(String routingNumber) {
-		this.routingNumber = routingNumber;
 	}
 }

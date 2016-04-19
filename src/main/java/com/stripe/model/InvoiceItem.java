@@ -11,24 +11,16 @@ import com.stripe.net.RequestOptions;
 import java.util.Map;
 
 public class InvoiceItem extends APIResource implements MetadataStore<InvoiceItem>, HasId {
-	Integer amount;
 	String id;
+	Integer amount;
 	String currency;
-	String description;
-	Long date;
-	Boolean livemode;
 	String customer;
+	Long date;
+	String description;
 	String invoice;
+	Boolean livemode;
 	Map<String, String> metadata;
 	String subscription;
-
-	public Integer getAmount() {
-		return amount;
-	}
-
-	public void setAmount(Integer amount) {
-		this.amount = amount;
-	}
 
 	public String getId() {
 		return id;
@@ -36,6 +28,14 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public Integer getAmount() {
+		return amount;
+	}
+
+	public void setAmount(Integer amount) {
+		this.amount = amount;
 	}
 
 	public String getCurrency() {
@@ -46,12 +46,12 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
 		this.currency = currency;
 	}
 
-	public String getDescription() {
-		return description;
+	public String getCustomer() {
+		return customer;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public void setCustomer(String customer) {
+		this.customer = customer;
 	}
 
 	public Long getDate() {
@@ -62,20 +62,12 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
 		this.date = date;
 	}
 
-	public Boolean getLivemode() {
-		return livemode;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setLivemode(Boolean livemode) {
-		this.livemode = livemode;
-	}
-
-	public String getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(String customer) {
-		this.customer = customer;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public String getInvoice() {
@@ -84,6 +76,14 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
 
 	public void setInvoice(String invoice) {
 		this.invoice = invoice;
+	}
+
+	public Boolean getLivemode() {
+		return livemode;
+	}
+
+	public void setLivemode(Boolean livemode) {
+		this.livemode = livemode;
 	}
 
 	public Map<String, String> getMetadata() {

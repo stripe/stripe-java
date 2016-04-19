@@ -13,49 +13,72 @@ import java.util.Map;
 
 public class Account extends APIResource implements HasId, MetadataStore<Account> {
 	String id;
-	Boolean chargesEnabled;
-	Boolean detailsSubmitted;
-	Boolean transfersEnabled;
-	Boolean debitNegativeBalances;
-	List<String> currenciesSupported;
-	String email;
-	String statementDescriptor;
-	String defaultCurrency;
-	String country;
-	String timezone;
-	String displayName;
-	Verification verification;
-	LegalEntity legalEntity;
-	Keys keys;
-	Map<String, String> metadata;
-	String businessName;
-	String businessURL;
 	String businessLogo;
+	String businessName;
 	String businessPrimaryColor;
+	String businessURL;
+	Boolean chargesEnabled;
+	String country;
+	List<String> currenciesSupported;
+	Boolean debitNegativeBalances;
+	AccountDeclineChargeOn declineChargeOn;
+	String defaultCurrency;
+	Boolean detailsSubmitted;
+	String displayName;
+	String email;
+	ExternalAccountCollection externalAccounts;
+	Keys keys;
+	LegalEntity legalEntity;
+	Boolean managed;
+	Map<String, String> metadata;
+	String productDescription;
+	String statementDescriptor;
+	String supportEmail;
 	String supportPhone;
 	String supportURL;
-	String supportEmail;
-	String productDescription;
-	Boolean managed;
-	AccountDeclineChargeOn declineChargeOn;
+	String timezone;
 	AccountTosAcceptance tosAcceptance;
 	AccountTransferSchedule transferSchedule;
-	ExternalAccountCollection externalAccounts;
+	Boolean transfersEnabled;
+	Verification verification;
 
 	public String getId() {
 		return id;
+	}
+
+	public String getBusinessLogo()
+	{
+		return businessLogo;
+	}
+
+	public String getBusinessName()
+	{
+		return businessName;
+	}
+
+	public String getBusinessPrimaryColor(){
+		return businessPrimaryColor;
+	}
+
+	public void setBusinessPrimaryColor(String businessPrimaryColor){
+		this.businessPrimaryColor = businessPrimaryColor;
+	}
+
+	public String getBusinessURL()
+	{
+		return businessURL;
 	}
 
 	public Boolean getChargesEnabled() {
 		return chargesEnabled;
 	}
 
-	public Boolean getDetailsSubmitted() {
-		return detailsSubmitted;
+	public String getCountry() {
+		return country;
 	}
 
-	public Boolean getTransfersEnabled() {
-		return transfersEnabled;
+	public List<String> getCurrenciesSupported() {
+		return currenciesSupported;
 	}
 
 	public Boolean getDebitNegativeBalances() {
@@ -66,40 +89,33 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 		this.debitNegativeBalances = debitNegativeBalances;
 	}
 
-	public List<String> getCurrenciesSupported() {
-		return currenciesSupported;
+	public AccountDeclineChargeOn getDeclineChargeOn(){
+		return declineChargeOn;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public String getStatementDescriptor() {
-		return statementDescriptor;
+	public void setDeclineChargeOn(AccountDeclineChargeOn declineChargeOn){
+		this.declineChargeOn = declineChargeOn;
 	}
 
 	public String getDefaultCurrency() {
 		return defaultCurrency;
 	}
 
-	public String getCountry() {
-		return country;
-	}
-
-	public String getTimezone() {
-		return timezone;
+	public Boolean getDetailsSubmitted() {
+		return detailsSubmitted;
 	}
 
 	public String getDisplayName() {
 		return displayName;
 	}
 
-	public Verification getVerification() {
-		return verification;
+	public String getEmail() {
+		return email;
 	}
 
-	public LegalEntity getLegalEntity() {
-		return legalEntity;
+	public ExternalAccountCollection getExternalAccounts()
+	{
+		return externalAccounts;
 	}
 
 	public Keys getKeys()
@@ -107,32 +123,35 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 		return keys;
 	}
 
+	public LegalEntity getLegalEntity() {
+		return legalEntity;
+	}
+
+	public Boolean getManaged()
+	{
+		return managed;
+	}
+
 	public Map<String, String> getMetadata()
 	{
 		return metadata;
 	}
 
-	public String getBusinessName()
+	public String getProductDescription(){
+		return productDescription;
+	}
+
+	public void setProductDescription(String productDescription){
+		this.productDescription = productDescription;
+	}
+
+	public String getStatementDescriptor() {
+		return statementDescriptor;
+	}
+
+	public String getSupportEmail()
 	{
-		return businessName;
-	}
-
-	public String getBusinessURL()
-	{
-		return businessURL;
-	}
-
-	public String getBusinessLogo()
-	{
-		return businessLogo;
-	}
-
-	public String getBusinessPrimaryColor(){
-		return businessPrimaryColor;
-	}
-
-	public void setBusinessPrimaryColor(String businessPrimaryColor){
-		this.businessPrimaryColor = businessPrimaryColor;
+		return supportEmail;
 	}
 
 	public String getSupportPhone()
@@ -145,30 +164,8 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 		return supportURL;
 	}
 
-	public String getSupportEmail()
-	{
-		return supportEmail;
-	}
-
-	public String getProductDescription(){
-		return productDescription;
-	}
-
-	public void setProductDescription(String productDescription){
-		this.productDescription = productDescription;
-	}
-
-	public Boolean getManaged()
-	{
-		return managed;
-	}
-
-	public AccountDeclineChargeOn getDeclineChargeOn(){
-		return declineChargeOn;
-	}
-
-	public void setDeclineChargeOn(AccountDeclineChargeOn declineChargeOn){
-		this.declineChargeOn = declineChargeOn;
+	public String getTimezone() {
+		return timezone;
 	}
 
 	public AccountTosAcceptance getTosAcceptance(){
@@ -187,9 +184,12 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 		this.transferSchedule = transferSchedule;
 	}
 
-	public ExternalAccountCollection getExternalAccounts()
-	{
-		return externalAccounts;
+	public Boolean getTransfersEnabled() {
+		return transfersEnabled;
+	}
+
+	public Verification getVerification() {
+		return verification;
 	}
 
 	public static Account create(Map<String, Object> params)
@@ -301,22 +301,25 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 	}
 
 	public static class Verification extends StripeObject {
-		List<String> fieldsNeeded;
-		Long dueBy;
 		Boolean contacted;
 		String disabledReason;
+		Long dueBy;
+		List<String> fieldsNeeded;
 
-		public List<String> getFieldsNeeded() {
-			return fieldsNeeded;
-		}
-		public Long getDueBy() {
-			return dueBy;
-		}
 		public Boolean getContacted() {
 			return contacted;
 		}
+
 		public String getDisabledReason() {
 			return disabledReason;
+		}
+
+		public Long getDueBy() {
+			return dueBy;
+		}
+
+		public List<String> getFieldsNeeded() {
+			return fieldsNeeded;
 		}
 
 		@Override
@@ -329,25 +332,25 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 			}
 
 			Verification ve = (Verification) o;
-			return equals(dueBy, ve.dueBy) &&
+			return equals(contacted, ve.contacted) &&
 				equals(disabledReason, ve.disabledReason) &&
-				equals(fieldsNeeded, ve.fieldsNeeded) &&
-				equals(contacted, ve.contacted);
+				equals(dueBy, ve.dueBy) &&
+				equals(fieldsNeeded, ve.fieldsNeeded);
 		}
 	}
 
 	public static class Keys extends StripeObject {
-		String secret;
 		String publishable;
-
-		public String getSecret()
-		{
-			return secret;
-		}
+		String secret;
 
 		public String getPublishable()
 		{
 			return publishable;
+		}
+
+		public String getSecret()
+		{
+			return secret;
 		}
 	}
 }

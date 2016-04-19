@@ -12,35 +12,27 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Customer extends APIResource implements MetadataStore<Customer>, HasId {
-	Long created;
 	String id;
-	Boolean livemode;
-	Boolean deleted;
-	String description;
+	Integer accountBalance;
+	CustomerCardCollection cards;
+	Long created;
+	String currency;
 	String defaultCard;
 	String defaultSource;
-	String email;
-	Long trialEnd;
+	Boolean deleted;
+	Boolean delinquent;
+	String description;
 	Discount discount;
+	String email;
+	Boolean livemode;
+	Map<String, String> metadata;
 	NextRecurringCharge nextRecurringCharge;
-	CustomerSubscriptionCollection subscriptions;
+	ShippingDetails shipping;
+	ExternalAccountCollection sources;
 	/** 1/2014: Legacy (from before multiple subscriptions per customer) */
 	Subscription subscription;
-	Boolean delinquent;
-	Integer accountBalance;
-	String currency;
-	CustomerCardCollection cards;
-	ExternalAccountCollection sources;
-	Map<String, String> metadata;
-	ShippingDetails shipping;
-
-	public Long getCreated() {
-		return created;
-	}
-
-	public void setCreated(Long created) {
-		this.created = created;
-	}
+	CustomerSubscriptionCollection subscriptions;
+	Long trialEnd;
 
 	public String getId() {
 		return id;
@@ -50,20 +42,32 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 		this.id = id;
 	}
 
-	public Boolean getLivemode() {
-		return livemode;
+	public Integer getAccountBalance() {
+		return accountBalance;
 	}
 
-	public void setLivemode(Boolean livemode) {
-		this.livemode = livemode;
+	public void setAccountBalance(Integer accountBalance) {
+		this.accountBalance = accountBalance;
 	}
 
-	public String getDescription() {
-		return description;
+	public CustomerCardCollection getCards() {
+		return cards;
 	}
 
-	public void setDescription(String description) {
-		this.description = description;
+	public Long getCreated() {
+		return created;
+	}
+
+	public void setCreated(Long created) {
+		this.created = created;
+	}
+
+	public String getCurrency() {
+		return currency;
+	}
+
+	public void setCurrency(String currency) {
+		this.currency = currency;
 	}
 
 	public String getDefaultCard() {
@@ -82,32 +86,24 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 		this.defaultSource = defaultSource;
 	}
 
-	public CustomerCardCollection getCards() {
-		return cards;
+	public Boolean getDeleted() {
+		return deleted;
 	}
 
-	public ExternalAccountCollection getSources() {
-		return sources;
+	public Boolean getDelinquent() {
+		return delinquent;
 	}
 
-	public void setSources(ExternalAccountCollection sources) {
-		this.sources = sources;
+	public void setDelinquent(Boolean delinquent) {
+		this.delinquent = delinquent;
 	}
 
-	public String getEmail() {
-		return email;
+	public String getDescription() {
+		return description;
 	}
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Long getTrialEnd() {
-		return trialEnd;
-	}
-
-	public void setTrialEnd(Long trialEnd) {
-		this.trialEnd = trialEnd;
+	public void setDescription(String description) {
+		this.description = description;
 	}
 
 	public Discount getDiscount() {
@@ -118,12 +114,52 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 		this.discount = discount;
 	}
 
+	public String getEmail() {
+		return email;
+	}
+
+	public void setEmail(String email) {
+		this.email = email;
+	}
+
+	public Boolean getLivemode() {
+		return livemode;
+	}
+
+	public void setLivemode(Boolean livemode) {
+		this.livemode = livemode;
+	}
+
+	public Map<String, String> getMetadata() {
+		return metadata;
+	}
+
+	public void setMetadata(Map<String, String> metadata) {
+		this.metadata = metadata;
+	}
+
 	public NextRecurringCharge getNextRecurringCharge() {
 		return nextRecurringCharge;
 	}
 
 	public void setNextRecurringCharge(NextRecurringCharge nextRecurringCharge) {
 		this.nextRecurringCharge = nextRecurringCharge;
+	}
+
+	public ShippingDetails getShipping() {
+		return shipping;
+	}
+
+	public void setShipping(ShippingDetails shipping) {
+		this.shipping = shipping;
+	}
+
+	public ExternalAccountCollection getSources() {
+		return sources;
+	}
+
+	public void setSources(ExternalAccountCollection sources) {
+		this.sources = sources;
 	}
 
 	/** 1/2014: Legacy (from before multiple subscriptions per customer) */
@@ -140,48 +176,12 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 		return subscriptions;
 	}
 
-	public Boolean getDeleted() {
-		return deleted;
+	public Long getTrialEnd() {
+		return trialEnd;
 	}
 
-	public Boolean getDelinquent() {
-		return delinquent;
-	}
-
-	public void setDelinquent(Boolean delinquent) {
-		this.delinquent = delinquent;
-	}
-
-	public Integer getAccountBalance() {
-		return accountBalance;
-	}
-
-	public void setAccountBalance(Integer accountBalance) {
-		this.accountBalance = accountBalance;
-	}
-
-	public String getCurrency() {
-		return currency;
-	}
-
-	public void setCurrency(String currency) {
-		this.currency = currency;
-	}
-
-	public Map<String, String> getMetadata() {
-		return metadata;
-	}
-
-	public void setMetadata(Map<String, String> metadata) {
-		this.metadata = metadata;
-	}
-
-	public ShippingDetails getShipping() {
-		return shipping;
-	}
-
-	public void setShipping(ShippingDetails shipping) {
-		this.shipping = shipping;
+	public void setTrialEnd(Long trialEnd) {
+		this.trialEnd = trialEnd;
 	}
 
 	public static Customer create(Map<String, Object> params)

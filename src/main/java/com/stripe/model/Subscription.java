@@ -13,22 +13,158 @@ import java.util.Map;
 
 public class Subscription extends APIResource implements MetadataStore<Subscription>, HasId {
 	String id;
+	Double applicationFeePercent;
+	Boolean cancelAtPeriodEnd;
+	Long canceledAt;
 	Long currentPeriodEnd;
 	Long currentPeriodStart;
-	Boolean cancelAtPeriodEnd;
 	String customer;
+	Discount discount;
+	Long endedAt;
+	Map<String, String> metadata;
+	Plan plan;
+	Integer quantity;
 	Long start;
 	String status;
-	Long trialStart;
-	Long trialEnd;
-	Plan plan;
-	Long canceledAt;
-	Long endedAt;
-	Integer quantity;
-	Discount discount;
-	Double applicationFeePercent;
 	Double taxPercent;
-	Map<String, String> metadata;
+	Long trialEnd;
+	Long trialStart;
+
+	public String getId() {
+		return id;
+	}
+
+	public void setId(String id) {
+		this.id = id;
+	}
+
+	public Double getApplicationFeePercent() {
+		return applicationFeePercent;
+	}
+
+	public void setApplicationFeePercent(Double applicationFeePercent) {
+		this.applicationFeePercent = applicationFeePercent;
+	}
+
+	public Boolean getCancelAtPeriodEnd() {
+		return cancelAtPeriodEnd;
+	}
+
+	public void setCancelAtPeriodEnd(Boolean cancelAtPeriodEnd) {
+		this.cancelAtPeriodEnd = cancelAtPeriodEnd;
+	}
+
+	public Long getCanceledAt() {
+		return canceledAt;
+	}
+
+	public void setCanceledAt(Long canceledAt) {
+		this.canceledAt = canceledAt;
+	}
+
+	public Long getCurrentPeriodEnd() {
+		return currentPeriodEnd;
+	}
+
+	public void setCurrentPeriodEnd(Long currentPeriodEnd) {
+		this.currentPeriodEnd = currentPeriodEnd;
+	}
+
+	public Long getCurrentPeriodStart() {
+		return currentPeriodStart;
+	}
+
+	public void setCurrentPeriodStart(Long currentPeriodStart) {
+		this.currentPeriodStart = currentPeriodStart;
+	}
+
+	public String getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(String customer) {
+		this.customer = customer;
+	}
+
+	public Discount getDiscount() {
+		return discount;
+	}
+
+	public void setDiscount(Discount discount) {
+		this.discount = discount;
+	}
+
+	public Long getEndedAt() {
+		return endedAt;
+	}
+
+	public void setEndedAt(Long endedAt) {
+		this.endedAt = endedAt;
+	}
+
+	public Map<String, String> getMetadata() {
+		return metadata;
+	}
+
+	public void setMetadata(Map<String, String> metadata) {
+		this.metadata = metadata;
+	}
+
+	public Plan getPlan() {
+		return plan;
+	}
+
+	public void setPlan(Plan plan) {
+		this.plan = plan;
+	}
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
+	}
+
+	public Long getStart() {
+		return start;
+	}
+
+	public void setStart(Long start) {
+		this.start = start;
+	}
+
+	public String getStatus() {
+		return status;
+	}
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+	public Double getTaxPercent() {
+		return taxPercent;
+	}
+
+	public void setTaxPercent(Double taxPercent) {
+		this.taxPercent = taxPercent;
+	}
+
+	public Long getTrialEnd() {
+		return trialEnd;
+	}
+
+	public void setTrialEnd(Long trialEnd) {
+		this.trialEnd = trialEnd;
+	}
+
+	public Long getTrialStart() {
+		return trialStart;
+	}
+
+	public void setTrialStart(Long trialStart) {
+		this.trialStart = trialStart;
+	}
 
 	public Subscription update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
@@ -90,110 +226,5 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 
 	public String getInstanceURL() {
 		return String.format("%s/%s/subscriptions/%s", classURL(Customer.class), this.getCustomer(), this.getId());
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public Long getCurrentPeriodEnd() {
-		return currentPeriodEnd;
-	}
-	public void setCurrentPeriodEnd(Long currentPeriodEnd) {
-		this.currentPeriodEnd = currentPeriodEnd;
-	}
-	public Long getCurrentPeriodStart() {
-		return currentPeriodStart;
-	}
-	public void setCurrentPeriodStart(Long currentPeriodStart) {
-		this.currentPeriodStart = currentPeriodStart;
-	}
-	public Boolean getCancelAtPeriodEnd() {
-		return cancelAtPeriodEnd;
-	}
-	public void setCancelAtPeriodEnd(Boolean cancelAtPeriodEnd) {
-		this.cancelAtPeriodEnd = cancelAtPeriodEnd;
-	}
-	public String getCustomer() {
-		return customer;
-	}
-	public void setCustomer(String customer) {
-		this.customer = customer;
-	}
-	public Long getStart() {
-		return start;
-	}
-	public void setStart(Long start) {
-		this.start = start;
-	}
-	public String getStatus() {
-		return status;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	public Long getTrialStart() {
-		return trialStart;
-	}
-	public void setTrialStart(Long trialStart) {
-		this.trialStart = trialStart;
-	}
-	public Long getTrialEnd() {
-		return trialEnd;
-	}
-	public void setTrialEnd(Long trialEnd) {
-		this.trialEnd = trialEnd;
-	}
-	public Plan getPlan() {
-		return plan;
-	}
-	public void setPlan(Plan plan) {
-		this.plan = plan;
-	}
-	public Long getCanceledAt() {
-		return canceledAt;
-	}
-	public void setCanceledAt(Long canceledAt) {
-		this.canceledAt = canceledAt;
-	}
-	public Long getEndedAt() {
-		return endedAt;
-	}
-	public void setEndedAt(Long endedAt) {
-		this.endedAt = endedAt;
-	}
-	public Integer getQuantity() {
-		return quantity;
-	}
-	public void setQuantity(Integer quantity) {
-		this.quantity = quantity;
-	}
-	public Discount getDiscount() {
-		return discount;
-	}
-	public void setDiscount(Discount discount) {
-		this.discount = discount;
-	}
-	public Double getApplicationFeePercent() {
-		return applicationFeePercent;
-	}
-	public void setApplicationFeePercent(Double applicationFeePercent) {
-		this.applicationFeePercent = applicationFeePercent;
-	}
-	public Double getTaxPercent() {
-		return taxPercent;
-	}
-	public void setTaxPercent(Double taxPercent) {
-		this.taxPercent = taxPercent;
-	}
-	public Map<String, String> getMetadata() {
-		return metadata;
-	}
-	public void setMetadata(Map<String, String> metadata) {
-		this.metadata = metadata;
 	}
 }

@@ -7,8 +7,8 @@ import java.util.Map;
 
 public interface StripeCollectionInterface<T> {
 	public List<T> getData();
-	public Integer getTotalCount();
 	public Boolean getHasMore();
+	public Integer getTotalCount();
 	public String getURL();
 
 	/**
