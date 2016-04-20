@@ -41,6 +41,9 @@ public class ExternalAccountTest extends BaseStripeTest {
 		ExternalAccount ea = cus.getSources().getData().get(0);
 		assertEquals(true, ea instanceof ExternalAccount);
 		assertEquals("unknown_external_account", ea.getObject());
+		Map<String, String> metadata = new HashMap<String, String>();
+		metadata.put("mdkey", "mdvalue");
+		assertEquals(metadata, ea.getMetadata());
 	}
 
 	@Test

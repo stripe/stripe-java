@@ -22,6 +22,7 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
 	String email;
 	Boolean livemode;
 	Map<String, String> metadata;
+	String migratedTo;
 	String name;
 	String type;
 	Boolean verified;
@@ -96,6 +97,14 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
 
 	public void setMetadata(Map<String, String> metadata) {
 		this.metadata = metadata;
+	}
+
+	public String getMigratedTo() {
+		return migratedTo;
+	}
+
+	public void setMigratedTo(String migratedTo) {
+		this.migratedTo = migratedTo;
 	}
 
 	public String getName() {

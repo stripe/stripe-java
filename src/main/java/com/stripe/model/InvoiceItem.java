@@ -17,9 +17,14 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
 	String customer;
 	Long date;
 	String description;
+	Boolean discountable;
 	String invoice;
 	Boolean livemode;
 	Map<String, String> metadata;
+	InvoiceLineItemPeriod period;
+	Plan plan;
+	Boolean proration;
+	Integer quantity;
 	String subscription;
 
 	public String getId() {
@@ -70,6 +75,14 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
 		this.description = description;
 	}
 
+	public Boolean getDiscountable() {
+		return discountable;
+	}
+
+	public void setDiscountable(Boolean discountable) {
+		this.discountable = discountable;
+	}
+
 	public String getInvoice() {
 		return invoice;
 	}
@@ -92,6 +105,38 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
 
 	public void setMetadata(Map<String, String> metadata) {
 		this.metadata = metadata;
+	}
+
+	public InvoiceLineItemPeriod getPeriod() {
+		return period;
+	}
+
+	public void setPeriod(InvoiceLineItemPeriod period) {
+		this.period = period;
+	}
+
+	public Plan getPlan() {
+		return plan;
+	}
+
+	public void setPlan(Plan plan) {
+		this.plan = plan;
+	}
+
+	public Boolean getProration() {
+		return proration;
+	}
+
+	public void setProration(Boolean proration) {
+		this.proration = proration;
+	}
+
+	public Integer getQuantity() {
+		return quantity;
+	}
+
+	public void setQuantity(Integer quantity) {
+		this.quantity = quantity;
 	}
 
 	public String getSubscription() {

@@ -114,11 +114,19 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
 		this.trialPeriodDays = trialPeriodDays;
 	}
 
+	/**
+	 * @deprecated
+	 * Use `statement_descriptor` field (https://stripe.com/docs/upgrades#2014-12-17)
+	 */
 	@Deprecated
 	public String getStatementDescription() {
 		return statementDescription;
 	}
 
+	/**
+	 * @deprecated
+	 * Use `statement_descriptor` field (https://stripe.com/docs/upgrades#2014-12-17)
+	 */
 	@Deprecated
 	public void setStatementDescription(String statementDescription) {
 		this.statementDescription = statementDescription;

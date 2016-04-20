@@ -15,7 +15,7 @@ import java.util.Map;
 public class AlipayAccount extends ExternalAccount {
 	Long created;
 	String fingerprint;
-	Map<String, String> metadata;
+	Boolean livemode;
 	Integer paymentAmount;
 	String paymentCurrency;
 	Boolean reusable;
@@ -39,12 +39,12 @@ public class AlipayAccount extends ExternalAccount {
 		this.fingerprint = fingerprint;
 	}
 
-	public Map<String, String> getMetadata() {
-		return metadata;
+	public Boolean getLivemode() {
+		return livemode;
 	}
 
-	public void setMetadata(Map<String, String> metadata) {
-		this.metadata = metadata;
+	public void setLivemode(Boolean livemode) {
+		this.livemode = livemode;
 	}
 
 	public Integer getPaymentAmount() {

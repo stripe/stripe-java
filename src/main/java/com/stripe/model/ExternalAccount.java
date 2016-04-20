@@ -12,11 +12,12 @@ import com.stripe.net.RequestOptions;
 import java.util.Collections;
 import java.util.Map;
 
-public class ExternalAccount extends APIResource implements HasId {
+public class ExternalAccount extends APIResource implements HasId, MetadataStore<ExternalAccount> {
 	String id;
 	String object;
 	String account;
 	String customer;
+	Map<String, String> metadata;
 
 	public String getId() {
 		return id;
@@ -42,6 +43,14 @@ public class ExternalAccount extends APIResource implements HasId {
 	// For testing
 	public void setCustomer(String customer) {
 		this.customer = customer;
+	}
+
+	public Map<String, String> getMetadata() {
+		return metadata;
+	}
+
+	public void setMetadata(Map<String, String> metadata) {
+		this.metadata = metadata;
 	}
 
 	public String getInstanceURL() {

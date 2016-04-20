@@ -14,10 +14,9 @@ import java.util.Map;
 public class Customer extends APIResource implements MetadataStore<Customer>, HasId {
 	String id;
 	Integer accountBalance;
-	CustomerCardCollection cards;
+	String businessVatId;
 	Long created;
 	String currency;
-	String defaultCard;
 	String defaultSource;
 	Boolean deleted;
 	Boolean delinquent;
@@ -26,12 +25,19 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 	String email;
 	Boolean livemode;
 	Map<String, String> metadata;
-	NextRecurringCharge nextRecurringCharge;
 	ShippingDetails shipping;
 	ExternalAccountCollection sources;
-	/** 1/2014: Legacy (from before multiple subscriptions per customer) */
-	Subscription subscription;
 	CustomerSubscriptionCollection subscriptions;
+
+	@Deprecated
+	CustomerCardCollection cards;
+	@Deprecated
+	String defaultCard;
+	@Deprecated
+	NextRecurringCharge nextRecurringCharge;
+	@Deprecated
+	Subscription subscription;
+	@Deprecated
 	Long trialEnd;
 
 	public String getId() {
@@ -50,8 +56,12 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 		this.accountBalance = accountBalance;
 	}
 
-	public CustomerCardCollection getCards() {
-		return cards;
+	public String getBusinessVatId() {
+		return businessVatId;
+	}
+
+	public void setBusinessVatId(String businessVatId) {
+		this.businessVatId = businessVatId;
 	}
 
 	public Long getCreated() {
@@ -68,14 +78,6 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 
 	public void setCurrency(String currency) {
 		this.currency = currency;
-	}
-
-	public String getDefaultCard() {
-		return defaultCard;
-	}
-
-	public void setDefaultCard(String defaultCard) {
-		this.defaultCard = defaultCard;
 	}
 
 	public String getDefaultSource() {
@@ -138,14 +140,6 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 		this.metadata = metadata;
 	}
 
-	public NextRecurringCharge getNextRecurringCharge() {
-		return nextRecurringCharge;
-	}
-
-	public void setNextRecurringCharge(NextRecurringCharge nextRecurringCharge) {
-		this.nextRecurringCharge = nextRecurringCharge;
-	}
-
 	public ShippingDetails getShipping() {
 		return shipping;
 	}
@@ -162,24 +156,91 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 		this.sources = sources;
 	}
 
-	/** 1/2014: Legacy (from before multiple subscriptions per customer) */
-	public Subscription getSubscription() {
-		return subscription;
-	}
-
-	/** 1/2014: Legacy (from before multiple subscriptions per customer) */
-	public void setSubscription(Subscription subscription) {
-		this.subscription = subscription;
-	}
-
 	public CustomerSubscriptionCollection getSubscriptions() {
 		return subscriptions;
 	}
 
+	public void setSubscriptions(CustomerSubscriptionCollection subscriptions) {
+		this.subscriptions = subscriptions;
+	}
+
+	/**
+	 * @deprecated
+	 * Use `sources` field (https://stripe.com/docs/upgrades#2015-02-18)
+	 */
+	@Deprecated
+	public CustomerCardCollection getCards() {
+		return cards;
+	}
+
+	/**
+	 * @deprecated
+	 * Use `default_source` field (https://stripe.com/docs/upgrades#2015-02-18)
+	 */
+	@Deprecated
+	public String getDefaultCard() {
+		return defaultCard;
+	}
+
+	/**
+	 * @deprecated
+	 * Use `default_source` field (https://stripe.com/docs/upgrades#2015-02-18)
+	 */
+	@Deprecated
+	public void setDefaultCard(String defaultCard) {
+		this.defaultCard = defaultCard;
+	}
+
+	/**
+	 * @deprecated
+	 * Use the upcoming invoice endpoint (https://stripe.com/docs/upgrades#2012-03-25)
+	 */
+	@Deprecated
+	public NextRecurringCharge getNextRecurringCharge() {
+		return nextRecurringCharge;
+	}
+
+	/**
+	 * @deprecated
+	 * Use the upcoming invoice endpoint (https://stripe.com/docs/upgrades#2012-03-25)
+	 */
+	@Deprecated
+	public void setNextRecurringCharge(NextRecurringCharge nextRecurringCharge) {
+		this.nextRecurringCharge = nextRecurringCharge;
+	}
+
+	/**
+	 * @deprecated
+	 * Use `subscriptions` field (https://stripe.com/docs/upgrades#2014-01-31)
+	 */
+	@Deprecated
+	public Subscription getSubscription() {
+		return subscription;
+	}
+
+	/**
+	 * @deprecated
+	 * Use `subscriptions` field (https://stripe.com/docs/upgrades#2014-01-31)
+	 */
+	@Deprecated
+	public void setSubscription(Subscription subscription) {
+		this.subscription = subscription;
+	}
+
+	/**
+	 * @deprecated
+	 * Use `subscriptions` field (https://stripe.com/docs/upgrades#2014-01-31)
+	 */
+	@Deprecated
 	public Long getTrialEnd() {
 		return trialEnd;
 	}
 
+	/**
+	 * @deprecated
+	 * Use `subscriptions` field (https://stripe.com/docs/upgrades#2014-01-31)
+	 */
+	@Deprecated
 	public void setTrialEnd(Long trialEnd) {
 		this.trialEnd = trialEnd;
 	}

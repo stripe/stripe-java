@@ -12,7 +12,7 @@ import com.stripe.net.RequestOptions;
 import java.util.Collections;
 import java.util.Map;
 
-public class BitcoinReceiver extends ExternalAccount implements HasId {
+public class BitcoinReceiver extends ExternalAccount {
 	Boolean active;
 	Integer amount;
 	Integer amountReceived;
@@ -25,12 +25,14 @@ public class BitcoinReceiver extends ExternalAccount implements HasId {
 	String email;
 	Boolean filled;
 	String inboundAddress;
-	Map<String, String> metadata;
+	Boolean livemode;
 	String payment;
 	String refundAddress;
 	Boolean rejectTransactions;
 	String status;
 	BitcoinTransactionCollection transactions;
+	Boolean uncapturedFunds;
+	Boolean usedForPayment;
 
 	public Boolean getActive() {
 		return active;
@@ -128,12 +130,12 @@ public class BitcoinReceiver extends ExternalAccount implements HasId {
 		this.inboundAddress = inboundAddress;
 	}
 
-	public Map<String, String> getMetadata() {
-		return metadata;
+	public Boolean getLivemode() {
+		return livemode;
 	}
 
-	public void setMetadata(Map<String, String> metadata) {
-		this.metadata = metadata;
+	public void setLivemode(Boolean livemode) {
+		this.livemode = livemode;
 	}
 
 	public String getPayment() {
@@ -174,6 +176,22 @@ public class BitcoinReceiver extends ExternalAccount implements HasId {
 
 	public void setTransactions(BitcoinTransactionCollection transactions) {
 		this.transactions = transactions;
+	}
+
+	public Boolean getUncapturedFunds() {
+		return uncapturedFunds;
+	}
+
+	public void setUncapturedFunds(Boolean uncapturedFunds) {
+		this.uncapturedFunds = uncapturedFunds;
+	}
+
+	public Boolean getUsedForPayment() {
+		return usedForPayment;
+	}
+
+	public void setUsedForPayment(Boolean usedForPayment) {
+		this.usedForPayment = usedForPayment;
 	}
 
 	public static BitcoinReceiver create(Map<String, Object> params)
