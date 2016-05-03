@@ -216,7 +216,6 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 		return requestCollection(classURL(Subscription.class), params, SubscriptionCollection.class, options);
 	}
 
-
 	public static Subscription retrieve(String id) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
