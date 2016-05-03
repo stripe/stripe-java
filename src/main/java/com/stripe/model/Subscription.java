@@ -18,6 +18,7 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 	Boolean cancelAtPeriodEnd;
 	String customer;
 	Long start;
+	Long created;
 	String status;
 	Long trialStart;
 	Long trialEnd;
@@ -151,6 +152,12 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 		this.id = id;
 	}
 
+	public Long getCreated() {
+		return created;
+	}
+	public void setCreated(Long created) {
+		this.created = created;
+	}
 	public Long getCurrentPeriodEnd() {
 		return currentPeriodEnd;
 	}
