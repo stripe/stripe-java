@@ -1,3 +1,7 @@
+=== 2.5.0 2016-05-04
+
+* Add `retrieve`, `update`, `create`, `all`, and `delete` methods to the Subscription class
+
 === 2.4.0 2016-04-21
 
 * Add many missing fields to many models (see #285 for details)
