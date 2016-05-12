@@ -9,6 +9,7 @@ import java.io.IOException;
 import java.util.List;
 
 import static org.hamcrest.core.IsNull.notNullValue;
+import static org.hamcrest.core.IsNull.nullValue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
@@ -22,6 +23,14 @@ public class DeserializerTest extends BaseStripeTest {
 		EventData ed = gson.fromJson(json,EventData.class);
 
 		assertThat(ed.getPreviousAttributes().get("fee"), notNullValue());
+	}
+
+	@Test
+	public void deserializeEventPreviousAttributesNull() throws IOException {
+		String json = resource("previous_attributes_null.json");
+		EventData ed = gson.fromJson(json, EventData.class);
+
+		assertThat(ed.getPreviousAttributes(), nullValue());
 	}
 
 	@Test

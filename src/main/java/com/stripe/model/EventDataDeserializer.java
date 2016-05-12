@@ -110,11 +110,13 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
 			String key = entry.getKey();
 			JsonElement element = entry.getValue();
 			if("previous_attributes".equals(key)) {
-				Map<String, Object> previousAttributes = new HashMap<String, Object>();
-				if (element.getAsJsonObject() != null) {
+				if (element.isJsonNull()) {
+					eventData.setPreviousAttributes(null);
+				} else if (element.isJsonObject()) {
+					Map<String, Object> previousAttributes = new HashMap<String, Object>();
 					populateMapFromJSONObject(previousAttributes, element.getAsJsonObject());
+					eventData.setPreviousAttributes(previousAttributes);
 				}
-				eventData.setPreviousAttributes(previousAttributes);
 			} else if ("object".equals(key)) {
 				String type = element.getAsJsonObject().get("object").getAsString();
 				Class<StripeObject> cl = objectMap.get(type);
