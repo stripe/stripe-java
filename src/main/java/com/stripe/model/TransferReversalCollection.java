@@ -6,11 +6,12 @@ import com.stripe.exception.APIException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
+import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
-public class TransferReversalCollection extends StripeCollectionAPIResource<Reversal> {
+public class TransferReversalCollection extends StripeCollection<Reversal> {
 	public TransferReversalCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -22,7 +23,7 @@ public class TransferReversalCollection extends StripeCollectionAPIResource<Reve
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
-		return requestCollection(url, params, TransferReversalCollection.class, options);
+		return APIResource.requestCollection(url, params, TransferReversalCollection.class, options);
 	}
 
 	@Deprecated
@@ -56,7 +57,7 @@ public class TransferReversalCollection extends StripeCollectionAPIResource<Reve
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		String url = String.format("%s%s/%s", Stripe.getApiBase(), this.getURL(), id);
-		return request(RequestMethod.GET, url, null, Reversal.class, options);
+		return APIResource.request(APIResource.RequestMethod.GET, url, null, Reversal.class, options);
 	}
 
 	public Reversal create(Map<String, Object> params)
@@ -70,7 +71,7 @@ public class TransferReversalCollection extends StripeCollectionAPIResource<Reve
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
-		return request(RequestMethod.POST, url, params, Reversal.class, options);
+		return APIResource.request(APIResource.RequestMethod.POST, url, params, Reversal.class, options);
 	}
 }
 

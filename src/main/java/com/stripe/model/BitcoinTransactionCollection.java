@@ -6,12 +6,13 @@ import com.stripe.exception.APIException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
+import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
 
-public class BitcoinTransactionCollection extends StripeCollectionAPIResource<BitcoinTransaction> {
+public class BitcoinTransactionCollection extends StripeCollection<BitcoinTransaction> {
 	public BitcoinTransactionCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -22,7 +23,7 @@ public class BitcoinTransactionCollection extends StripeCollectionAPIResource<Bi
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
-		return requestCollection(url, params, BitcoinTransactionCollection.class, options);
+		return APIResource.requestCollection(url, params, BitcoinTransactionCollection.class, options);
 	}
 
 	@Deprecated
