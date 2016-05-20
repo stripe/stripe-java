@@ -281,12 +281,15 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 		return createCard(params, (RequestOptions) null);
 	}
 
+	// Use `(BankAccount)customer.getSources().create(params)` instead.
+	@Deprecated
 	public BankAccount createBankAccount(String token) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return createBankAccount(token, (RequestOptions) null);
 	}
 
+	@Deprecated
 	public BankAccount createBankAccount(String token, RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
@@ -296,12 +299,14 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 		return createBankAccount(postParams, options);
 	}
 
+	@Deprecated
 	public BankAccount createBankAccount(Map<String, Object> params) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return createBankAccount(params, (RequestOptions) null);
 	}
 
+	@Deprecated
 	public BankAccount createBankAccount(Map<String, Object> params, RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
@@ -428,12 +433,15 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 		return request(RequestMethod.DELETE, instanceURL(Customer.class, this.id), null, DeletedCustomer.class, options);
 	}
 
+	// Use `(Card)customer.getSources().create(params)` instead.
 	@Deprecated
 	public Card createCard(String token, String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return createCard(token, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
+	@Deprecated
 	public Card createCard(String token, RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
@@ -449,6 +457,8 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 			APIException {
 		return createCard(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
+	@Deprecated
 	public Card createCard(Map<String, Object> params, RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
