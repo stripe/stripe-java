@@ -6,11 +6,12 @@ import com.stripe.exception.APIException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
+import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
-public class ChargeRefundCollection extends StripeCollectionAPIResource<Refund> {
+public class ChargeRefundCollection extends StripeCollection<Refund> {
 	public ChargeRefundCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -22,7 +23,7 @@ public class ChargeRefundCollection extends StripeCollectionAPIResource<Refund> 
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
-		return requestCollection(url, params, ChargeRefundCollection.class, options);
+		return APIResource.requestCollection(url, params, ChargeRefundCollection.class, options);
 	}
 
 	@Deprecated
@@ -64,7 +65,7 @@ public class ChargeRefundCollection extends StripeCollectionAPIResource<Refund> 
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		String url = String.format("%s%s/%s", Stripe.getApiBase(), this.getURL(), id);
-		return request(RequestMethod.GET, url, null, Refund.class, options);
+		return APIResource.request(APIResource.RequestMethod.GET, url, null, Refund.class, options);
 	}
 
 	public Refund create(Map<String, Object> params)
@@ -85,6 +86,6 @@ public class ChargeRefundCollection extends StripeCollectionAPIResource<Refund> 
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
-		return request(RequestMethod.POST, url, params, Refund.class, options);
+		return APIResource.request(APIResource.RequestMethod.POST, url, params, Refund.class, options);
 	}
 }

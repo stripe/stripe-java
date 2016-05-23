@@ -6,11 +6,12 @@ import com.stripe.exception.APIException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
+import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
-public class FeeRefundCollection extends StripeCollectionAPIResource<FeeRefund> {
+public class FeeRefundCollection extends StripeCollection<FeeRefund> {
 	public FeeRefundCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -22,7 +23,7 @@ public class FeeRefundCollection extends StripeCollectionAPIResource<FeeRefund> 
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
-		return requestCollection(url, params, FeeRefundCollection.class, options);
+		return APIResource.requestCollection(url, params, FeeRefundCollection.class, options);
 	}
 
 	@Deprecated
@@ -64,7 +65,7 @@ public class FeeRefundCollection extends StripeCollectionAPIResource<FeeRefund> 
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		String url = String.format("%s%s/%s", Stripe.getApiBase(), this.getURL(), id);
-		return request(RequestMethod.GET, url, null, FeeRefund.class, options);
+		return APIResource.request(APIResource.RequestMethod.GET, url, null, FeeRefund.class, options);
 	}
 
 	public FeeRefund create(Map<String, Object> params)
@@ -85,6 +86,6 @@ public class FeeRefundCollection extends StripeCollectionAPIResource<FeeRefund> 
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
-		return request(RequestMethod.POST, url, params, FeeRefund.class, options);
+		return APIResource.request(APIResource.RequestMethod.POST, url, params, FeeRefund.class, options);
 	}
 }

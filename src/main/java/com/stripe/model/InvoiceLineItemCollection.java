@@ -6,11 +6,12 @@ import com.stripe.exception.APIException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
+import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
-public class InvoiceLineItemCollection extends StripeCollectionAPIResource<InvoiceLineItem> {
+public class InvoiceLineItemCollection extends StripeCollection<InvoiceLineItem> {
 	public InvoiceLineItemCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -22,7 +23,7 @@ public class InvoiceLineItemCollection extends StripeCollectionAPIResource<Invoi
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
-		return requestCollection(url, params, InvoiceLineItemCollection.class, options);
+		return APIResource.requestCollection(url, params, InvoiceLineItemCollection.class, options);
 	}
 
 	@Deprecated

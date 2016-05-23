@@ -6,11 +6,12 @@ import com.stripe.exception.APIException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
+import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
-public class RecipientCardCollection extends StripeCollectionAPIResource<Card> {
+public class RecipientCardCollection extends StripeCollection<Card> {
 	public RecipientCardCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -22,7 +23,7 @@ public class RecipientCardCollection extends StripeCollectionAPIResource<Card> {
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
-		return requestCollection(url, params, RecipientCardCollection.class, options);
+		return APIResource.requestCollection(url, params, RecipientCardCollection.class, options);
 	}
 
 	@Deprecated
@@ -65,7 +66,7 @@ public class RecipientCardCollection extends StripeCollectionAPIResource<Card> {
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		String url = String.format("%s%s/%s", Stripe.getApiBase(), this.getURL(), id);
-		return request(RequestMethod.GET, url, null, Card.class, options);
+		return APIResource.request(APIResource.RequestMethod.GET, url, null, Card.class, options);
 	}
 
 	public RecipientCardCollection create(Map<String, Object> params)
@@ -86,6 +87,6 @@ public class RecipientCardCollection extends StripeCollectionAPIResource<Card> {
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
-		return request(RequestMethod.POST, url, params, RecipientCardCollection.class, options);
+		return APIResource.request(APIResource.RequestMethod.POST, url, params, RecipientCardCollection.class, options);
 	}
 }

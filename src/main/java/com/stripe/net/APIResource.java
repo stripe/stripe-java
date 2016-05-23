@@ -116,7 +116,7 @@ public abstract class APIResource extends StripeObject {
 		}
 	}
 
-	protected static <T> T multipartRequest(APIResource.RequestMethod method,
+	public static <T> T multipartRequest(APIResource.RequestMethod method,
 			String url, Map<String, Object> params, Class<T> clazz,
 			RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
@@ -125,7 +125,7 @@ public abstract class APIResource extends StripeObject {
 				APIResource.RequestType.MULTIPART, options);
 	}
 
-	protected static <T> T request(APIResource.RequestMethod method,
+	public static <T> T request(APIResource.RequestMethod method,
 			String url, Map<String, Object> params, Class<T> clazz,
 			RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
@@ -142,7 +142,7 @@ public abstract class APIResource extends StripeObject {
 	 * options and params through so that we can iterate to the next page if
 	 * necessary.
 	 */
-	protected static <T extends StripeCollectionInterface> T requestCollection(
+	public static <T extends StripeCollectionInterface> T requestCollection(
 			String url, Map<String, Object> params, Class<T> clazz,
 			RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,

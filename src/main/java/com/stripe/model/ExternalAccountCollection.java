@@ -6,11 +6,12 @@ import com.stripe.exception.APIException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
+import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
-public class ExternalAccountCollection extends StripeCollectionAPIResource<ExternalAccount> {
+public class ExternalAccountCollection extends StripeCollection<ExternalAccount> {
 	public ExternalAccountCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -22,7 +23,7 @@ public class ExternalAccountCollection extends StripeCollectionAPIResource<Exter
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
-		return requestCollection(url, params, ExternalAccountCollection.class, options);
+		return APIResource.requestCollection(url, params, ExternalAccountCollection.class, options);
 	}
 
 	@Deprecated
@@ -50,7 +51,7 @@ public class ExternalAccountCollection extends StripeCollectionAPIResource<Exter
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		String url = String.format("%s%s/%s", Stripe.getApiBase(), this.getURL(), id);
-		return request(RequestMethod.GET, url, null, ExternalAccount.class, options);
+		return APIResource.request(APIResource.RequestMethod.GET, url, null, ExternalAccount.class, options);
 	}
 
 	public ExternalAccount create(Map<String, Object> params)
@@ -64,6 +65,6 @@ public class ExternalAccountCollection extends StripeCollectionAPIResource<Exter
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
-		return request(RequestMethod.POST, url, params, ExternalAccount.class, options);
+		return APIResource.request(APIResource.RequestMethod.POST, url, params, ExternalAccount.class, options);
 	}
 }
