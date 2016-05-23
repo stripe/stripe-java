@@ -1,3 +1,7 @@
+=== 2.5.1 2016-05-23
+
+* Give all collection classes access to auto-paginating helpers that work beyond first page
+
 === 2.5.0 2016-05-04
 
 * Add `retrieve`, `update`, `create`, `all`, and `delete` methods to the Subscription class
