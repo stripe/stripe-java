@@ -261,4 +261,17 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
 		return request(RequestMethod.POST, String.format("%s/pay",
 				instanceURL(Order.class, this.getId())), params, Order.class, options);
 	}
+
+	public OrderReturn returnOrder(Map<String, Object> params) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return this.returnOrder(params, (RequestOptions) null);
+	}
+
+	public OrderReturn returnOrder(Map<String, Object> params, RequestOptions options) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return request(RequestMethod.POST, String.format("%s/returns",
+					instanceURL(Order.class, this.getId())), params, OrderReturn.class, options);
+	}
 }
