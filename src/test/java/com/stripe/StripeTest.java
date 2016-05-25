@@ -50,6 +50,7 @@ import com.stripe.model.InvoiceItem;
 import com.stripe.model.InvoiceLineItemCollection;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.Order;
+import com.stripe.model.OrderReturn;
 import com.stripe.model.OrderItem;
 import com.stripe.model.Plan;
 import com.stripe.model.Product;
@@ -2386,7 +2387,7 @@ public class StripeTest {
 	}
 
 	@Test
-	public void testOrderCreateReadUpdatePay() throws StripeException {
+	public void testOrderCreateReadUpdatePayReturn() throws StripeException {
 		Stripe.apiKey = "sk_test_JieJALRz7rPz7boV17oMma7a";
 
 		Map<String, Object> productCreateParams = new HashMap<String, Object>();
@@ -2441,6 +2442,9 @@ public class StripeTest {
 
 		Order paid = updated.pay(ImmutableMap.<String,Object>of("source", defaultSourceParams));
 		assertEquals("paid", paid.getStatus());
+
+        OrderReturn returned = paid.returnOrder(null);
+        assertEquals(paid.getId(), returned.getOrder());
 	}
 
 	@Test(expected = InvalidRequestException.class)
