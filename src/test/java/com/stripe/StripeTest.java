@@ -2443,8 +2443,8 @@ public class StripeTest {
 		Order paid = updated.pay(ImmutableMap.<String,Object>of("source", defaultSourceParams));
 		assertEquals("paid", paid.getStatus());
 
-        OrderReturn returned = paid.returnOrder(null);
-        assertEquals(paid.getId(), returned.getOrder());
+		OrderReturn returned = paid.returnOrder(null);
+		assertEquals(paid.getId(), returned.getOrder());
 	}
 
 	@Test(expected = InvalidRequestException.class)
