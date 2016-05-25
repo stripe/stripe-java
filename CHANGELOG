@@ -1,3 +1,7 @@
+=== 2.6.0 2016-05-25
+
+* Add support for returning Relay orders
+
 === 2.5.1 2016-05-23
 
 * Give all collection classes access to auto-paginating helpers that work beyond first page
