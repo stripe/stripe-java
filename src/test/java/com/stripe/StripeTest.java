@@ -2308,33 +2308,37 @@ public class StripeTest {
 
 	@Test
 	public void testProductCreateReadUpdate() throws StripeException {
-		Stripe.apiKey = "sk_test_JieJALRz7rPz7boV17oMma7a";
+		RequestOptions relayRequestOptions = RequestOptions.builder()
+				.setApiKey("sk_test_JieJALRz7rPz7boV17oMma7a")
+				.build();
 
 		Map<String, Object> createParams = new HashMap<String, Object>();
 		String id = "my_first_product_" + UUID.randomUUID();
 		createParams.put("id", id);
 		createParams.put("name", "Watermelon");
-		Product created = Product.create(createParams);
+		Product created = Product.create(createParams, relayRequestOptions);
 		assertEquals(id, created.getId());
 		assertEquals("Watermelon", created.getName());
 
-		Product retrieved = Product.retrieve(id);
+		Product retrieved = Product.retrieve(id, relayRequestOptions);
 		assertEquals("Watermelon", retrieved.getName());
 
-		Product updated = retrieved.update(ImmutableMap.<String,Object>of("name", "Cantelope"));
+		Product updated = retrieved.update(ImmutableMap.<String,Object>of("name", "Cantelope"), relayRequestOptions);
 		assertEquals("Cantelope", updated.getName());
 	}
 
 	@Test
 	public void testSKUCreateReadUpdate() throws StripeException {
-		Stripe.apiKey = "sk_test_JieJALRz7rPz7boV17oMma7a";
+		RequestOptions relayRequestOptions = RequestOptions.builder()
+				.setApiKey("sk_test_JieJALRz7rPz7boV17oMma7a")
+				.build();
 
 		Map<String, Object> productCreateParams = new HashMap<String, Object>();
 		String productId = "my_first_product_" + UUID.randomUUID();
 		productCreateParams.put("id", productId);
 		productCreateParams.put("name", "Watermelon");
 		productCreateParams.put("attributes[]", "size");
-		Product.create(productCreateParams);
+		Product.create(productCreateParams, relayRequestOptions);
 
 		Map<String, Object> skuCreateParams = new HashMap<String, Object>();
 		String skuId = "my_first_sku_" + UUID.randomUUID();
@@ -2344,29 +2348,31 @@ public class StripeTest {
 		skuCreateParams.put("price", 100);
 		skuCreateParams.put("currency", "usd");
 		skuCreateParams.put("inventory", ImmutableMap.of("type", "infinite"));
-		SKU created = SKU.create(skuCreateParams);
+		SKU created = SKU.create(skuCreateParams, relayRequestOptions);
 		assertEquals(skuId, created.getId());
 		assertEquals(productId, created.getProduct());
 		assertEquals("large", created.getAttributes().get("size"));
 		assertEquals("infinite", created.getInventory().getType());
 
-		SKU retrieved = SKU.retrieve(skuId);
+		SKU retrieved = SKU.retrieve(skuId, relayRequestOptions);
 		assertEquals("large", retrieved.getAttributes().get("size"));
 
-		SKU updated = retrieved.update(ImmutableMap.<String,Object>of("price", 200));
+		SKU updated = retrieved.update(ImmutableMap.<String,Object>of("price", 200), relayRequestOptions);
 		assertEquals((Integer)200, updated.getPrice());
 	}
 
 	@Test
 	public void testSKUProductDeletion() throws StripeException {
-		Stripe.apiKey = "sk_test_JieJALRz7rPz7boV17oMma7a";
+		RequestOptions relayRequestOptions = RequestOptions.builder()
+				.setApiKey("sk_test_JieJALRz7rPz7boV17oMma7a")
+				.build();
 
 		Map<String, Object> productCreateParams = new HashMap<String, Object>();
 		String productId = "my_first_product_" + UUID.randomUUID();
 		productCreateParams.put("id", productId);
 		productCreateParams.put("name", "Watermelon");
 		productCreateParams.put("attributes[]", "size");
-		Product createdProduct = Product.create(productCreateParams);
+		Product createdProduct = Product.create(productCreateParams, relayRequestOptions);
 
 		Map<String, Object> skuCreateParams = new HashMap<String, Object>();
 		String skuId = "my_first_sku_" + UUID.randomUUID();
@@ -2377,18 +2383,20 @@ public class StripeTest {
 		skuCreateParams.put("currency", "usd");
 		skuCreateParams.put("inventory", ImmutableMap.of("type", "infinite"));
 
-		SKU created = SKU.create(skuCreateParams);
+		SKU created = SKU.create(skuCreateParams, relayRequestOptions);
 
-		DeletedSKU deletedSKU = created.delete();
+		DeletedSKU deletedSKU = created.delete(relayRequestOptions);
 		assertTrue(deletedSKU.getDeleted());
 
-		DeletedProduct deletedProduct = createdProduct.delete();
+		DeletedProduct deletedProduct = createdProduct.delete(relayRequestOptions);
 		assertTrue(deletedProduct.getDeleted());
 	}
 
 	@Test
 	public void testOrderCreateReadUpdatePayReturn() throws StripeException {
-		Stripe.apiKey = "sk_test_JieJALRz7rPz7boV17oMma7a";
+		RequestOptions relayRequestOptions = RequestOptions.builder()
+				.setApiKey("sk_test_JieJALRz7rPz7boV17oMma7a")
+				.build();
 
 		Map<String, Object> productCreateParams = new HashMap<String, Object>();
 		String productId = "my_first_product_" + UUID.randomUUID();
@@ -2396,7 +2404,7 @@ public class StripeTest {
 		productCreateParams.put("name", "Watermelon");
 		productCreateParams.put("attributes[]", "size");
 		productCreateParams.put("shippable", false);
-		Product.create(productCreateParams);
+		Product.create(productCreateParams, relayRequestOptions);
 
 		Map<String, Object> skuCreateParams = new HashMap<String, Object>();
 		String skuId = "my_first_sku_" + UUID.randomUUID();
@@ -2406,13 +2414,13 @@ public class StripeTest {
 		skuCreateParams.put("price", 100);
 		skuCreateParams.put("currency", "usd");
 		skuCreateParams.put("inventory", ImmutableMap.of("type", "infinite"));
-		SKU.create(skuCreateParams);
+		SKU.create(skuCreateParams, relayRequestOptions);
 
 		Map<String, Object> orderCreateParams = new HashMap<String, Object>();
 		orderCreateParams.put("items[]", ImmutableMap.<String, Object>of("type", "sku", "parent", skuId));
 		orderCreateParams.put("currency", "usd");
 		orderCreateParams.put("email", "foo@bar.com");
-		Order created = Order.create(orderCreateParams);
+		Order created = Order.create(orderCreateParams, relayRequestOptions);
 		assertEquals("created", created.getStatus());
 
 		OrderItem item = null;
@@ -2425,7 +2433,7 @@ public class StripeTest {
 		assertNotNull(item);
 		assertEquals("sku", item.getType());
 
-		Order retrieved = Order.retrieve(created.getId());
+		Order retrieved = Order.retrieve(created.getId(), relayRequestOptions);
 
 		item = null;
 		for (OrderItem i : created.getItems()) {
@@ -2437,20 +2445,18 @@ public class StripeTest {
 		assertNotNull(item);
 		assertEquals("sku", item.getType());
 
-		Order updated = retrieved.update(ImmutableMap.<String,Object>of("metadata", ImmutableMap.of("foo", "bar")));
+		Order updated = retrieved.update(ImmutableMap.<String,Object>of("metadata", ImmutableMap.of("foo", "bar")), relayRequestOptions);
 		assertEquals("bar", updated.getMetadata().get("foo"));
 
-		Order paid = updated.pay(ImmutableMap.<String,Object>of("source", defaultSourceParams));
+		Order paid = updated.pay(ImmutableMap.<String,Object>of("source", defaultSourceParams), relayRequestOptions);
 		assertEquals("paid", paid.getStatus());
 
-		OrderReturn returned = paid.returnOrder(null);
+		OrderReturn returned = paid.returnOrder(null, relayRequestOptions);
 		assertEquals(paid.getId(), returned.getOrder());
 	}
 
-	@Test(expected = InvalidRequestException.class)
-	public void getAllExternalAccounts() throws StripeException {
-		Stripe.apiKey = "sk_test_JieJALRz7rPz7boV17oMma7a";
-
+	@Test
+	public void testGetAllExternalAccounts() throws StripeException {
 		Account account = Account.create(defaultManagedAccountParams);
 		Assert.assertNotNull(account);
 
@@ -2461,8 +2467,8 @@ public class StripeTest {
 		Assert.assertNotNull(accountCollection);
 	}
 
-    @Test
-    public void testCountrySpecRetrieve() throws StripeException {
+	@Test
+	public void testCountrySpecRetrieve() throws StripeException {
 		String country = "US";
 		CountrySpec retrievedCountrySpec = CountrySpec.retrieve(country);
 
@@ -2484,15 +2490,15 @@ public class StripeTest {
 		CountrySpec retrievedCountrySpecFR = CountrySpec.retrieve("FR");
 		VerificationFields verificationFieldsFR = retrievedCountrySpecFR.getVerificationFields();
 		assert(!verificationFieldsFR.equals(verificationFields));
-    }
+	}
 
-    @Test
-    public void testCountrySpecAll() throws StripeException {
+	@Test
+		public void testCountrySpecAll() throws StripeException {
 		Integer limit = 3;
 		Map<String, Object> listParams = new HashMap<String, Object>();
 		listParams.put("count", limit);
 		CountrySpecCollection retrievedCountrySpecCollection = CountrySpec.list(listParams);
 
 		assertEquals((Integer)retrievedCountrySpecCollection.getData().size(), limit);
-    }
+	}
 }
