@@ -2455,10 +2455,8 @@ public class StripeTest {
 		assertEquals(paid.getId(), returned.getOrder());
 	}
 
-	@Test(expected = InvalidRequestException.class)
-	public void getAllExternalAccounts() throws StripeException {
-		Stripe.apiKey = "sk_test_JieJALRz7rPz7boV17oMma7a";
-
+	@Test
+	public void testGetAllExternalAccounts() throws StripeException {
 		Account account = Account.create(defaultManagedAccountParams);
 		Assert.assertNotNull(account);
 
