@@ -2467,8 +2467,8 @@ public class StripeTest {
 		Assert.assertNotNull(accountCollection);
 	}
 
-    @Test
-    public void testCountrySpecRetrieve() throws StripeException {
+	@Test
+	public void testCountrySpecRetrieve() throws StripeException {
 		String country = "US";
 		CountrySpec retrievedCountrySpec = CountrySpec.retrieve(country);
 
@@ -2490,15 +2490,15 @@ public class StripeTest {
 		CountrySpec retrievedCountrySpecFR = CountrySpec.retrieve("FR");
 		VerificationFields verificationFieldsFR = retrievedCountrySpecFR.getVerificationFields();
 		assert(!verificationFieldsFR.equals(verificationFields));
-    }
+	}
 
-    @Test
-    public void testCountrySpecAll() throws StripeException {
+	@Test
+		public void testCountrySpecAll() throws StripeException {
 		Integer limit = 3;
 		Map<String, Object> listParams = new HashMap<String, Object>();
 		listParams.put("count", limit);
 		CountrySpecCollection retrievedCountrySpecCollection = CountrySpec.list(listParams);
 
 		assertEquals((Integer)retrievedCountrySpecCollection.getData().size(), limit);
-    }
+	}
 }
