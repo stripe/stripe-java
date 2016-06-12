@@ -30,8 +30,9 @@
     "country": "US",
     "object": "account",
     "business_name": "Stripe.com",
-    "business_url": null,
+    "business_url": "http://www.business.com",
     "support_phone": null,
+    "support_url": "http://support.business.com",
     "managed": null,
     "external_accounts": {
         "object": "list",
