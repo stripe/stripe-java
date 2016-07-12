@@ -1,3 +1,7 @@
+=== 2.7.0 2016-07-12
+
+* Add `ThreeDSecure` model for 3-D secure payments
+
 === 2.6.1 2016-06-13
 
 * Fix serialization of `businessURL` and `supportURL` in `Account` model
