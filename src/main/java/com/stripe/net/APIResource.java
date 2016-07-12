@@ -59,6 +59,8 @@ public abstract class APIResource extends StripeObject {
 			return "country_spec";
 		} else if (className.equals("orderreturn")) {
 			return "order_return";
+		} else if (className.equals("threedsecure")) {
+			return "three_d_secure";
 		} else {
 			return className;
 		}
