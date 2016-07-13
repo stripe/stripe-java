@@ -2,13 +2,11 @@
 
 You can sign up for a Stripe account at https://stripe.com.
 
-Requirements
-============
+## Requirements
 
 Java 1.6 and later.
 
-Installation
-============
+## Installation
 
 ### Maven users
 
@@ -43,8 +41,11 @@ If you're planning on using ProGuard, make sure that you exclude the Stripe bind
 
     -keep class com.stripe.** { *; }
 
-Usage
-=====
+## Documentation
+
+Please see the [Java API docs](https://stripe.com/docs/api/java) for the most up-to-date documentation.
+
+## Usage
 
 StripeExample.java
 
@@ -81,8 +82,7 @@ public class StripeExample {
 
 See [StripeTest.java](https://github.com/stripe/stripe-java/blob/master/src/test/java/com/stripe/StripeTest.java) for more examples.
 
-Testing
-=======
+## Testing
 
 You must have Maven installed. To run the tests:
 
