@@ -56,6 +56,7 @@ import com.stripe.model.Plan;
 import com.stripe.model.Product;
 import com.stripe.model.Recipient;
 import com.stripe.model.Refund;
+import com.stripe.model.Source;
 import com.stripe.model.SKU;
 import com.stripe.model.ShippingDetails;
 import com.stripe.model.Subscription;
@@ -2500,5 +2501,43 @@ public class StripeTest {
 		CountrySpecCollection retrievedCountrySpecCollection = CountrySpec.list(listParams);
 
 		assertEquals((Integer)retrievedCountrySpecCollection.getData().size(), limit);
+	}
+
+	@Test
+	public void testSourceCreateRead() throws StripeException {
+		RequestOptions sourceRequestOptions = RequestOptions.builder()
+				.setApiKey("sk_test_JieJALRz7rPz7boV17oMma7a")
+				.build();
+
+
+		Map<String, Object> sourceAddressParams = new HashMap<String, Object>();
+		sourceAddressParams.put("line1", "Nollendorfstraße 27");
+		sourceAddressParams.put("city", "Berlin");
+		sourceAddressParams.put("postal_code", "10777");
+		sourceAddressParams.put("country", "DE");
+
+		Map<String, Object> sourceOwnerParams = new HashMap<String, Object>();
+		sourceOwnerParams.put("name", "Jenny Rosen");
+		sourceOwnerParams.put("address", sourceAddressParams);
+
+		Map<String, Object> sepaDebitParams = new HashMap<String, Object>();
+		sepaDebitParams.put("iban", "DE89370400440532013000");
+
+		Map<String, Object> sourceCreateParams = new HashMap<String, Object>();
+		sourceCreateParams.put("type", "sepa_debit");
+		sourceCreateParams.put("currency", "eur");
+		sourceCreateParams.put("sepa_debit", sepaDebitParams);
+		sourceCreateParams.put("owner", sourceOwnerParams);
+
+		Source created = Source.create(sourceCreateParams, sourceRequestOptions);
+		assertEquals("37040044", created.getSEPADebit().get("bank_code"));
+		assertEquals("Nollendorfstraße 27", created.getOwner().getAddress().getLine1());
+		assertEquals("source", created.getObject());
+		assertEquals("Jenny Rosen", created.getOwner().getName());
+		assertEquals("sepa_debit", created.getType());
+		assertEquals("none", created.getFlow());
+
+		Source retrieved = Source.retrieve(created.getId(), sourceRequestOptions);
+		assertEquals(created.getId(), retrieved.getId());
 	}
 }
