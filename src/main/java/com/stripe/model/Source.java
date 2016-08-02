@@ -7,6 +7,7 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.RequestOptions;
 
+import java.io.IOException;
 import java.util.Map;
 
 public class Source extends ExternalAccount {
@@ -33,6 +34,26 @@ public class Source extends ExternalAccount {
 	Map<String, String> bitcoin;
 	Map<String, String> achDebit;
 	Map<String, String> sepaDebit;
+
+	// Helper function to get the data for whatever type the Source is.
+	public Map<String, String> getTypeData() throws IOException {
+		if (getType() == "ideal") {
+			return getIdeal();
+		} else if (getType() == "sofort") {
+			return getSofort();
+		} else if (getType() == "bancontact") {
+			return getBancontact();
+		} else if (getType() == "bitcoin") {
+			return getBitcoin();
+		} else if (getType() == "ach_debit") {
+			return getACHDebit();
+		} else if (getType() == "sepa_debit") {
+			return getSEPADebit();
+		} else {
+			throw new IOException("Unknown type: " + getType());
+		}
+	}
+
 
 	public Integer getAmount() {
 		return amount;
