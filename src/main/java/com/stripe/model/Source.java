@@ -28,32 +28,7 @@ public class Source extends ExternalAccount {
 	SourceVerificationFlow verification;
 
 	// Type-specific properties
-	Map<String, String> ideal;
-	Map<String, String> sofort;
-	Map<String, String> bancontact;
-	Map<String, String> bitcoin;
-	Map<String, String> achDebit;
-	Map<String, String> sepaDebit;
-
-	// Helper function to get the data for whatever type the Source is.
-	public Map<String, String> getTypeData() throws IOException {
-		if (getType() == "ideal") {
-			return getIdeal();
-		} else if (getType() == "sofort") {
-			return getSofort();
-		} else if (getType() == "bancontact") {
-			return getBancontact();
-		} else if (getType() == "bitcoin") {
-			return getBitcoin();
-		} else if (getType() == "ach_debit") {
-			return getACHDebit();
-		} else if (getType() == "sepa_debit") {
-			return getSEPADebit();
-		} else {
-			throw new IOException("Unknown type: " + getType());
-		}
-	}
-
+	Map<String, String> typeData;
 
 	public Integer getAmount() {
 		return amount;
@@ -163,53 +138,15 @@ public class Source extends ExternalAccount {
 
 	// Type-specific getters/setters
 
-	public Map<String, String> getIdeal() {
-		return ideal;
+	public Map<String, String> getTypeData() {
+		return typeData;
 	}
 
-	public void setIdeal(Map<String, String> ideal) {
-		this.ideal = ideal;
+	public void setTypeData(Map<String, String> typeData) {
+		this.typeData = typeData;
 	}
 
-	public Map<String, String> getSofort() {
-		return sofort;
-	}
-
-	public void setSofort(Map<String, String> sofort) {
-		this.sofort = sofort;
-	}
-
-	public Map<String, String> getBancontact() {
-		return bancontact;
-	}
-
-	public void setBancontact(Map<String, String> bancontact) {
-		this.bancontact = bancontact;
-	}
-
-	public Map<String, String> getBitcoin() {
-		return bitcoin;
-	}
-
-	public void setBitcoin(Map<String, String> bitcoin) {
-		this.bitcoin = bitcoin;
-	}
-
-	public Map<String, String> getACHDebit() {
-		return achDebit;
-	}
-
-	public void setACHDebit(Map<String, String> achDebit) {
-		this.achDebit = achDebit;
-	}
-
-	public Map<String, String> getSEPADebit() {
-		return sepaDebit;
-	}
-
-	public void setSEPADebit(Map<String, String> sepaDebit) {
-		this.sepaDebit = sepaDebit;
-	}
+	// APIResource methods
 
 	public String getSourceInstanceURL()
 		throws InvalidRequestException {

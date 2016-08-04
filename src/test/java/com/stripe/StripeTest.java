@@ -2509,33 +2509,24 @@ public class StripeTest {
 				.setApiKey("sk_test_JieJALRz7rPz7boV17oMma7a")
 				.build();
 
-
-		Map<String, Object> sourceAddressParams = new HashMap<String, Object>();
-		sourceAddressParams.put("line1", "Nollendorfstraße 27");
-		sourceAddressParams.put("city", "Berlin");
-		sourceAddressParams.put("postal_code", "10777");
-		sourceAddressParams.put("country", "DE");
-
-		Map<String, Object> sourceOwnerParams = new HashMap<String, Object>();
-		sourceOwnerParams.put("name", "Jenny Rosen");
-		sourceOwnerParams.put("address", sourceAddressParams);
-
-		Map<String, Object> sepaDebitParams = new HashMap<String, Object>();
-		sepaDebitParams.put("iban", "DE89370400440532013000");
+		Map<String, Object> receiverParams = new HashMap<String, Object>();
+		receiverParams.put("refund_attributes_method", "manual");
 
 		Map<String, Object> sourceCreateParams = new HashMap<String, Object>();
-		sourceCreateParams.put("type", "sepa_debit");
-		sourceCreateParams.put("currency", "eur");
-		sourceCreateParams.put("sepa_debit", sepaDebitParams);
-		sourceCreateParams.put("owner", sourceOwnerParams);
+		sourceCreateParams.put("type", "bitcoin");
+		sourceCreateParams.put("currency", "usd");
+		sourceCreateParams.put("amount", 1000);
+		sourceCreateParams.put("receiver", receiverParams);
 
 		Source created = Source.create(sourceCreateParams, sourceRequestOptions);
-		assertEquals("37040044", created.getSEPADebit().get("bank_code"));
-		assertEquals("Nollendorfstraße 27", created.getOwner().getAddress().getLine1());
-		assertEquals("source", created.getObject());
-		assertEquals("Jenny Rosen", created.getOwner().getName());
-		assertEquals("sepa_debit", created.getType());
-		assertEquals("none", created.getFlow());
+		assertEquals("bitcoin", created.getType());
+		assertEquals("receiver", created.getFlow());
+
+		// TODO: It's obviously very unpleasant to have all strings
+		// here. The plan is to type-check these once any method makes
+		// it to public beta. For now, unfortunately, the user will have
+		// to actually cast the data to what they want.
+		assertEquals(0, Integer.parseInt(created.getTypeData().get("amount_charged")));
 
 		Source retrieved = Source.retrieve(created.getId(), sourceRequestOptions);
 		assertEquals(created.getId(), retrieved.getId());
