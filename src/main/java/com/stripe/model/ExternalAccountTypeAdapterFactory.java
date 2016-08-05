@@ -28,6 +28,7 @@ public class ExternalAccountTypeAdapterFactory implements TypeAdapterFactory {
 		final TypeAdapter<BankAccount> bankAccountAdapter = gson.getDelegateAdapter(this, TypeToken.get(BankAccount.class));
 		final TypeAdapter<BitcoinReceiver> bitcoinReceiverAdapter = gson.getDelegateAdapter(this, TypeToken.get(BitcoinReceiver.class));
 		final TypeAdapter<Card> cardAdapter = gson.getDelegateAdapter(this, TypeToken.get(Card.class));
+		final TypeAdapter<Source> sourceAdapter = gson.getDelegateAdapter(this, TypeToken.get(Source.class));
 
 		TypeAdapter<ExternalAccount> result = new TypeAdapter<ExternalAccount>() {
 			public void write(JsonWriter out, ExternalAccount value) throws IOException {
@@ -47,6 +48,8 @@ public class ExternalAccountTypeAdapterFactory implements TypeAdapterFactory {
 					return bitcoinReceiverAdapter.fromJsonTree(object);
 				} else if (sourceObject.equals("card")) {
 					return cardAdapter.fromJsonTree(object);
+				} else if (sourceObject.equals("source")) {
+					return sourceAdapter.fromJsonTree(object);
 				} else {
 					return externalAccountAdapter.fromJsonTree(object);
 				}

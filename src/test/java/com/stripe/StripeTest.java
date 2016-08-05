@@ -56,6 +56,7 @@ import com.stripe.model.Plan;
 import com.stripe.model.Product;
 import com.stripe.model.Recipient;
 import com.stripe.model.Refund;
+import com.stripe.model.Source;
 import com.stripe.model.SKU;
 import com.stripe.model.ShippingDetails;
 import com.stripe.model.Subscription;
@@ -2500,5 +2501,34 @@ public class StripeTest {
 		CountrySpecCollection retrievedCountrySpecCollection = CountrySpec.list(listParams);
 
 		assertEquals((Integer)retrievedCountrySpecCollection.getData().size(), limit);
+	}
+
+	@Test
+	public void testSourceCreateRead() throws StripeException {
+		RequestOptions sourceRequestOptions = RequestOptions.builder()
+				.setApiKey("sk_test_JieJALRz7rPz7boV17oMma7a")
+				.build();
+
+		Map<String, Object> receiverParams = new HashMap<String, Object>();
+		receiverParams.put("refund_attributes_method", "manual");
+
+		Map<String, Object> sourceCreateParams = new HashMap<String, Object>();
+		sourceCreateParams.put("type", "bitcoin");
+		sourceCreateParams.put("currency", "usd");
+		sourceCreateParams.put("amount", 1000);
+		sourceCreateParams.put("receiver", receiverParams);
+
+		Source created = Source.create(sourceCreateParams, sourceRequestOptions);
+		assertEquals("bitcoin", created.getType());
+		assertEquals("receiver", created.getFlow());
+
+		// TODO: It's obviously very unpleasant to have all strings
+		// here. The plan is to type-check these once any method makes
+		// it to public beta. For now, unfortunately, the user will have
+		// to actually cast the data to what they want.
+		assertEquals(0, Integer.parseInt(created.getTypeData().get("amount_charged")));
+
+		Source retrieved = Source.retrieve(created.getId(), sourceRequestOptions);
+		assertEquals(created.getId(), retrieved.getId());
 	}
 }
