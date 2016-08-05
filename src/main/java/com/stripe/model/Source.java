@@ -149,14 +149,13 @@ public class Source extends ExternalAccount {
 	// APIResource methods
 
 	public String getSourceInstanceURL()
-		throws InvalidRequestException {
+			throws InvalidRequestException {
 		if (this.getCustomer() != null) {
 			return String.format("%s/%s/sources/%s", classURL(Customer.class), this.getCustomer(), this.getId());
 		} else {
 			return instanceURL(Source.class, this.getId());
 		}
 	}
-
 
 	public static Source create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
@@ -170,9 +169,9 @@ public class Source extends ExternalAccount {
 		return request(RequestMethod.POST, classURL(Source.class), params, Source.class, options);
 	}
 
-	public static Source retrieve(String id) throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
+	public static Source retrieve(String id)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
 		return retrieve(id, (RequestOptions) null);
 	}
 
@@ -183,15 +182,15 @@ public class Source extends ExternalAccount {
 	}
 
 	@Override
-	public Source verify(Map<String, Object> params) throws
-			AuthenticationException, InvalidRequestException,
+	public Source verify(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return verify(params, (RequestOptions) null);
 	}
 
 	@Override
-	public Source verify(Map<String, Object> params, RequestOptions options) throws
-			AuthenticationException, InvalidRequestException,
+	public Source verify(Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		if (this.getCustomer() != null) {
 			return request(RequestMethod.POST, String.format("%s/verify", this.getSourceInstanceURL()), params, Source.class, options);
@@ -201,8 +200,8 @@ public class Source extends ExternalAccount {
 	}
 
 	@Override
-	public Source update(Map<String, Object> params) throws
-			AuthenticationException, InvalidRequestException,
+	public Source update(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return update(params, null);
 	}
