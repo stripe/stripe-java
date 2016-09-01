@@ -34,6 +34,12 @@ public class Card extends ExternalAccount {
 	String status;
 	String tokenizationMethod;
 
+	// Please note that these field are for internal use only and are not typically returned
+	// as part of standard API requests.
+	String description;
+	String iin;
+	String issuer;
+
 	@Deprecated
 	String type;
 
@@ -220,6 +226,18 @@ public class Card extends ExternalAccount {
 	public void setTokenizationMethod(String tokenizationMethod) {
 		this.tokenizationMethod = tokenizationMethod;
 	}
+
+	public String getDescription() { return description; }
+
+	public void setDescription(String description) { this.description = description; }
+
+	public String getIin() { return iin; }
+
+	public void setIin(String iin) { this.iin = iin; }
+
+	public String getIssuer() { return issuer; }
+
+	public void setIssuer(String issuer) { this.issuer = issuer; }
 
 	/**
 	 * @deprecated
