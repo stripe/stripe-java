@@ -1,3 +1,7 @@
+=== 2.9.0 2016-09-07
+
+* Add `description`, `iin`, and `issuer` attributes to `Card` model
+
 === 2.8.0 2016-08-05
 
 * Add `Source` model (prototype)
