@@ -227,17 +227,29 @@ public class Card extends ExternalAccount {
 		this.tokenizationMethod = tokenizationMethod;
 	}
 
-	public String getDescription() { return description; }
+	public String getDescription() {
+		return description;
+	}
 
-	public void setDescription(String description) { this.description = description; }
+	public void setDescription(String description) {
+		this.description = description;
+	}
 
-	public String getIin() { return iin; }
+	public String getIin() {
+		return iin;
+	}
 
-	public void setIin(String iin) { this.iin = iin; }
+	public void setIin(String iin) {
+		this.iin = iin;
+	}
 
-	public String getIssuer() { return issuer; }
+	public String getIssuer() {
+		return issuer;
+	}
 
-	public void setIssuer(String issuer) { this.issuer = issuer; }
+	public void setIssuer(String issuer) {
+		this.issuer = issuer;
+	}
 
 	/**
 	 * @deprecated
