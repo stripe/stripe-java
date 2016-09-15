@@ -22,6 +22,7 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 	String customer;
 	Discount discount;
 	Long endedAt;
+	SubscriptionItemCollection items;
 	Map<String, String> metadata;
 	Plan plan;
 	Integer quantity;
@@ -173,6 +174,14 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 
 	public void setTrialStart(Long trialStart) {
 		this.trialStart = trialStart;
+	}
+
+	public SubscriptionItemCollection getSubscriptionItems() {
+		return items;
+	}
+
+	public void setSubscriptionItems(SubscriptionItemCollection items) {
+		this.items = items;
 	}
 
 	@Deprecated

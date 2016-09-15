@@ -66,6 +66,8 @@ public abstract class APIResource extends StripeObject {
 			return "three_d_secure";
 		} else if (className.equals("applepaydomain")) {
 			return "apple_pay_domain";
+		} else if (className.equals("subscriptionitem")) {
+			return "subscription_item";
 		} else {
 			return className;
 		}
