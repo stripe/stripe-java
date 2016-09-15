@@ -11,6 +11,8 @@ import com.stripe.model.Account;
 import com.stripe.model.AccountCollection;
 import com.stripe.model.Address;
 import com.stripe.model.AlipayAccount;
+import com.stripe.model.ApplePayDomain;
+import com.stripe.model.ApplePayDomainCollection;
 import com.stripe.model.ApplicationFee;
 import com.stripe.model.Balance;
 import com.stripe.model.BalanceTransaction;
@@ -27,6 +29,7 @@ import com.stripe.model.Coupon;
 import com.stripe.model.Customer;
 import com.stripe.model.CustomerSubscriptionCollection;
 import com.stripe.model.SubscriptionCollection;
+import com.stripe.model.DeletedApplePayDomain;
 import com.stripe.model.DeletedBankAccount;
 import com.stripe.model.DeletedBitcoinReceiver;
 import com.stripe.model.DeletedCard;
@@ -160,6 +163,12 @@ public class StripeTest {
 		params.put("amount", 100);
 		params.put("currency", "usd");
 		params.put("destination", destination.getId());
+		return params;
+	}
+
+	static Map<String, Object> getApplePayDomainParams() throws StripeException {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("domain_name", "jackshack.website");
 		return params;
 	}
 
@@ -2530,5 +2539,34 @@ public class StripeTest {
 
 		Source retrieved = Source.retrieve(created.getId(), sourceRequestOptions);
 		assertEquals(created.getId(), retrieved.getId());
+	}
+
+	@Test
+	public void testApplePayDomainCreate() throws StripeException {
+		ApplePayDomain domain = ApplePayDomain.create(getApplePayDomainParams());
+		assertEquals(domain.getDomainName(), "jackshack.website");
+	}
+
+	@Test
+	public void testApplePayDomainRetrieve() throws StripeException {
+		ApplePayDomain createdDomain = ApplePayDomain.create(getApplePayDomainParams());
+		ApplePayDomain retrievedDomain = ApplePayDomain.retrieve(createdDomain.getId());
+		assertEquals(createdDomain.getId(), retrievedDomain.getId());
+	}
+
+	@Test
+	public void testApplePayDomainList() throws StripeException {
+		Map<String, Object> listParams = new HashMap<String, Object>();
+		listParams.put("count", 1);
+		List<ApplePayDomain> Domains = ApplePayDomain.list(listParams).getData();
+		assertEquals(Domains.size(), 1);
+	}
+
+	@Test
+	public void testApplePayDomainDelete() throws StripeException {
+		ApplePayDomain createdDomain = ApplePayDomain.create(getApplePayDomainParams());
+		DeletedApplePayDomain deletedDomain = createdDomain.delete();
+		assertTrue(deletedDomain.getDeleted());
+		assertEquals(deletedDomain.getId(), createdDomain.getId());
 	}
 }

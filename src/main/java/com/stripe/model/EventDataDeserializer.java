@@ -53,6 +53,7 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
 		objectMap.put("summary", Summary.class);
 		objectMap.put("fee", Fee.class);
 		objectMap.put("three_d_secure", ThreeDSecure.class);
+		objectMap.put("apple_pay_domain", ApplePayDomain.class);
 	}
 
 	private Object deserializeJsonPrimitive(JsonPrimitive element) {
