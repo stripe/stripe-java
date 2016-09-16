@@ -168,7 +168,7 @@ public class StripeTest {
 
 	static Map<String, Object> getApplePayDomainParams() throws StripeException {
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("domain_name", "jackshack.website");
+		params.put("domain_name", "example.com");
 		return params;
 	}
 
@@ -2544,7 +2544,7 @@ public class StripeTest {
 	@Test
 	public void testApplePayDomainCreate() throws StripeException {
 		ApplePayDomain domain = ApplePayDomain.create(getApplePayDomainParams());
-		assertEquals(domain.getDomainName(), "jackshack.website");
+		assertEquals(domain.getDomainName(), "example.com");
 	}
 
 	@Test
