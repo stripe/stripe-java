@@ -55,28 +55,16 @@ public class ApplePayDomain extends APIResource implements HasId {
 		return create(params, (RequestOptions) null);
 	}
 
-	public static ApplePayDomain retrieve(String id) throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
-		return retrieve(id, (RequestOptions) null);
-	}
-
-	public DeletedApplePayDomain delete() throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
-		return delete((RequestOptions) null);
-	}
-
-	public static ApplePayDomainCollection list(Map<String, Object> params)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
-	}
-
 	public static ApplePayDomain create(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.POST, getClassURL(), params, ApplePayDomain.class, options);
+	}
+
+	public static ApplePayDomain retrieve(String id) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return retrieve(id, (RequestOptions) null);
 	}
 
 	public static ApplePayDomain retrieve(String id, RequestOptions options)
@@ -85,10 +73,22 @@ public class ApplePayDomain extends APIResource implements HasId {
 		return request(RequestMethod.GET, getInstanceURL(id), null, ApplePayDomain.class, options);
 	}
 
+	public DeletedApplePayDomain delete() throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return delete((RequestOptions) null);
+	}
+
 	public DeletedApplePayDomain delete(RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return request(RequestMethod.DELETE, getInstanceURL(id), null, DeletedApplePayDomain.class, options);
+	}
+
+	public static ApplePayDomainCollection list(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return list(params, (RequestOptions) null);
 	}
 
 	public static ApplePayDomainCollection list(Map<String, Object> params, RequestOptions options)
@@ -97,11 +97,11 @@ public class ApplePayDomain extends APIResource implements HasId {
 		return requestCollection(getClassURL(), params, ApplePayDomainCollection.class, options);
 	}
 
-	public static String getClassURL() {
+	private static String getClassURL() {
 		return String.format("%s/v1/%s", Stripe.getApiBase(), "apple_pay/domains");
 	}
 
-	public static String getInstanceURL(String id) {
+	private static String getInstanceURL(String id) {
 		if (id != null || id.isEmpty()) {
 			return String.format("%s/%s", getClassURL(), id);
 		}

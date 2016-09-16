@@ -1,6 +1,5 @@
 package com.stripe.model;
 
-
 public class DeletedApplePayDomain extends StripeObject implements DeletedStripeObject {
 	String id;
 	Boolean deleted;
