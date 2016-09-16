@@ -1,3 +1,7 @@
+=== 2.10.0 2016-09-16
+
+* Add support for Apple Pay domains
+
 === 2.9.0 2016-09-07
 
 * Add `description`, `iin`, and `issuer` attributes to `Card` model
