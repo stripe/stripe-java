@@ -87,6 +87,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import java.util.Random;
 import java.util.regex.Pattern;
 
 import static org.junit.Assert.assertEquals;
@@ -168,7 +169,9 @@ public class StripeTest {
 
 	static Map<String, Object> getApplePayDomainParams() throws StripeException {
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("domain_name", "jackshack.website");
+		Random rand = new Random();
+		Integer subdomain = rand.nextInt(Integer.MAX_VALUE);
+		params.put("domain_name", "subdomain" + subdomain.toString() + ".example.com");
 		return params;
 	}
 
@@ -2544,7 +2547,7 @@ public class StripeTest {
 	@Test
 	public void testApplePayDomainCreate() throws StripeException {
 		ApplePayDomain domain = ApplePayDomain.create(getApplePayDomainParams());
-		assertEquals(domain.getDomainName(), "jackshack.website");
+		assertTrue(domain.getDomainName().contains("example.com"));
 	}
 
 	@Test
