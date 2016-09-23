@@ -1338,7 +1338,6 @@ public class StripeTest {
 
 		Map<String, Object> updateParams = new HashMap<String, Object>();
 		updateParams.put("quantity", 4);
-		updateParams.put("subscription", subscription.getId());
 
 		SubscriptionItem updatedSubscriptionItem =
 			subscriptionItem.update(updateParams);
