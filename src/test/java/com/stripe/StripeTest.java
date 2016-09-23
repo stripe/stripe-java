@@ -1297,64 +1297,64 @@ public class StripeTest {
 		assertEquals(sub.getId(), customer.getSubscriptions().getData().get(0).getId());
 	}
 
-  @Test
-  public void testSubscriptionItemCreate() throws StripeException {
-	Customer customer = Customer.create(defaultCustomerParams);
-	Subscription subscription = createDefaultSubscription(customer);
-	SubscriptionItem subscriptionItem = createDefaultSubscriptionItem(subscription);
+	@Test
+	public void testSubscriptionItemCreate() throws StripeException {
+		Customer customer = Customer.create(defaultCustomerParams);
+		Subscription subscription = createDefaultSubscription(customer);
+		SubscriptionItem subscriptionItem = createDefaultSubscriptionItem(subscription);
 
-	assertEquals(subscriptionItem.getPlan().getName(), "J Bindings Plan");
-  }
+		assertEquals(subscriptionItem.getPlan().getName(), "J Bindings Plan");
+	}
 
-  @Test
-  public void testSubscriptionItemRetrieve() throws StripeException {
-	Customer customer = Customer.create(defaultCustomerParams);
-	Subscription subscription = createDefaultSubscription(customer);
-	SubscriptionItem subscriptionItem = createDefaultSubscriptionItem(subscription);
+	@Test
+	public void testSubscriptionItemRetrieve() throws StripeException {
+		Customer customer = Customer.create(defaultCustomerParams);
+		Subscription subscription = createDefaultSubscription(customer);
+		SubscriptionItem subscriptionItem = createDefaultSubscriptionItem(subscription);
 
-	SubscriptionItem retrievedSubscriptionItem = SubscriptionItem
-		.retrieve(subscriptionItem.getId());
-	assertEquals(subscriptionItem.getId(), retrievedSubscriptionItem.getId());
-  }
+		SubscriptionItem retrievedSubscriptionItem = SubscriptionItem
+			.retrieve(subscriptionItem.getId());
+		assertEquals(subscriptionItem.getId(), retrievedSubscriptionItem.getId());
+	}
 
-  @Test
-  public void testSubscriptionItemList() throws StripeException {
-	Customer customer = Customer.create(defaultCustomerParams);
-	Subscription subscription = createDefaultSubscription(customer);
-	SubscriptionItem subscriptionItem = createDefaultSubscriptionItem(subscription);
+	@Test
+	public void testSubscriptionItemList() throws StripeException {
+		Customer customer = Customer.create(defaultCustomerParams);
+		Subscription subscription = createDefaultSubscription(customer);
+		SubscriptionItem subscriptionItem = createDefaultSubscriptionItem(subscription);
 
-	Map<String, Object> listParams = new HashMap<String, Object>();
-	listParams.put("subscription", subscription.getId());
-	SubscriptionItemCollection subscriptionItems = SubscriptionItem.list(listParams);
-	List<SubscriptionItem> subscriptionItemsData = subscriptionItems.getData();
-	assertEquals(subscriptionItemsData.size(), 2);
-  }
+		Map<String, Object> listParams = new HashMap<String, Object>();
+		listParams.put("subscription", subscription.getId());
+		SubscriptionItemCollection subscriptionItems = SubscriptionItem.list(listParams);
+		List<SubscriptionItem> subscriptionItemsData = subscriptionItems.getData();
+		assertEquals(subscriptionItemsData.size(), 2);
+	}
 
-  @Test
-  public void testSubscriptionItemUpdate() throws StripeException {
-	Customer customer = Customer.create(defaultCustomerParams);
-	Subscription subscription = createDefaultSubscription(customer);
-	SubscriptionItem subscriptionItem = createDefaultSubscriptionItem(subscription);
+	@Test
+	public void testSubscriptionItemUpdate() throws StripeException {
+		Customer customer = Customer.create(defaultCustomerParams);
+		Subscription subscription = createDefaultSubscription(customer);
+		SubscriptionItem subscriptionItem = createDefaultSubscriptionItem(subscription);
 
-	Map<String, Object> updateParams = new HashMap<String, Object>();
-	updateParams.put("quantity", 4);
-	updateParams.put("subscription", subscription.getId());
+		Map<String, Object> updateParams = new HashMap<String, Object>();
+		updateParams.put("quantity", 4);
+		updateParams.put("subscription", subscription.getId());
 
-	SubscriptionItem updatedSubscriptionItem =
-		subscriptionItem.update(updateParams);
-	assertTrue(updatedSubscriptionItem.getQuantity() == 4);
-  }
+		SubscriptionItem updatedSubscriptionItem =
+			subscriptionItem.update(updateParams);
+		assertTrue(updatedSubscriptionItem.getQuantity() == 4);
+	}
 
-  @Test
-  public void testSubscriptionItemDelete() throws StripeException {
-	Customer customer = Customer.create(defaultCustomerParams);
-	Subscription subscription = createDefaultSubscription(customer);
-	SubscriptionItem subscriptionItem = createDefaultSubscriptionItem(subscription);
+	@Test
+	public void testSubscriptionItemDelete() throws StripeException {
+		Customer customer = Customer.create(defaultCustomerParams);
+		Subscription subscription = createDefaultSubscription(customer);
+		SubscriptionItem subscriptionItem = createDefaultSubscriptionItem(subscription);
 
-	DeletedSubscriptionItem deletedSubscriptionItem = subscriptionItem.delete();
-	assertTrue(deletedSubscriptionItem.getDeleted());
-	assertEquals(deletedSubscriptionItem.getId(), subscriptionItem.getId());
-  }
+		DeletedSubscriptionItem deletedSubscriptionItem = subscriptionItem.delete();
+		assertTrue(deletedSubscriptionItem.getDeleted());
+		assertEquals(deletedSubscriptionItem.getId(), subscriptionItem.getId());
+	}
 
 	@Test
 	public void testInvoiceItemCreate() throws StripeException {
