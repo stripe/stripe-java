@@ -1,3 +1,7 @@
+=== 2.10.1 2016-10-06
+
+* Fix bug where the Transfer transactions method wasn't using requestCollection
+
 === 2.10.0 2016-09-16
 
 * Add support for Apple Pay domains
