@@ -68,6 +68,7 @@ import com.stripe.model.SubscriptionItem;
 import com.stripe.model.SubscriptionItemCollection;
 import com.stripe.model.Token;
 import com.stripe.model.Transfer;
+import com.stripe.model.TransferTransactionCollection;
 import com.stripe.model.VerificationFields;
 
 import com.stripe.net.RequestOptions;
@@ -1594,6 +1595,17 @@ public class StripeTest {
 		listParams.put("count", 1);
 		List<Transfer> transfers = Transfer.all(listParams).getData();
 		assertEquals(transfers.size(), 1);
+	}
+
+	@Test
+	public void testTransferTransactions() throws StripeException {
+		Map<String, Object> transferParams = getTransferParams();
+		Transfer transfer = Transfer.create(transferParams);
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		TransferTransactionCollection transactions = transfer.transactions(params, supportedRequestOptions);
+		// Test that requestOptions and requestParams are the same in returned transactions:
+		assertEquals(supportedRequestOptions, transactions.getRequestOptions());
+		assertEquals(params, transactions.getRequestParams());
 	}
 
 	@Test
