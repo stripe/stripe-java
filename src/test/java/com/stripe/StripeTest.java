@@ -348,12 +348,15 @@ public class StripeTest {
 		assertEquals("https://api.stripe.com", Stripe.getApiBase());
 	}
 
+	// Account Tests:
 	@Test
 	public void testAccountRetrieve() throws StripeException {
 		Account retrievedAccount = Account.retrieve();
 		assertTrue(Pattern.matches("\\A.*@stripe.com\\z", retrievedAccount.getEmail()));
 	}
 
+
+	// Balance Tests:
 	@Test
 	public void testBalanceRetrieve() throws StripeException {
 		Balance retrievedBalance = Balance.retrieve();
@@ -362,45 +365,7 @@ public class StripeTest {
 		assertEquals(1, retrievedBalance.getAvailable().size());
 	}
 
-	@Test
-	public void testChargeCreate() throws StripeException {
-		Charge createdCharge = Charge.create(defaultChargeParams);
-		assertFalse(createdCharge.getRefunded());
-	}
-
-	@Test
-	public void testChargeCreateWithStatementDescriptor() throws StripeException {
-		Map<String, Object> chargeWithStatementDescriptorParams = new HashMap<String, Object>();
-		chargeWithStatementDescriptorParams.putAll(defaultChargeParams);
-		chargeWithStatementDescriptorParams.put("description", "hahaha1234");
-		chargeWithStatementDescriptorParams.put("statement_descriptor", "Stripe");
-
-		Charge createdCharge = Charge.create(chargeWithStatementDescriptorParams);
-		assertEquals("Stripe", createdCharge.getStatementDescriptor());
-	}
-
-	@Test
-	public void testChargeCreateWithShippingDetails() throws StripeException {
-		ShippingDetails shippingDetails = new ShippingDetails();
-		shippingDetails.setName("name");
-		shippingDetails.setPhone("123-456-7890");
-		Address address = new Address()
-				.setCity("Washington")
-				.setCountry("USA")
-				.setLine1("1600 Pennsylvania Ave.")
-				.setLine2("line 2 address")
-				.setPostalCode("20500")
-				.setState("D.C.");
-		shippingDetails.setAddress(address);
-
-		Map<String, Object> params = ImmutableMap.<String, Object>builder()
-				.putAll(defaultChargeParams)
-				.put("shipping", ImmutableMap.builder().put("address", ImmutableMap.builder().put("line1", address.getLine1()).put("line2", address.getLine2()).put("city", address.getCity()).put("country", address.getCountry()).put("postal_code", address.getPostalCode()).put("state", address.getState()).build()).put("name", shippingDetails.getName()).put("phone", shippingDetails.getPhone()).build())
-				.build();
-		Charge createdCharge = Charge.create(params);
-		assertEquals(createdCharge.getShipping(), shippingDetails);
-	}
-
+	// BalanceTransaction Test:
 	@Test
 	public void testBalanceTransactionRetrieval() throws StripeException {
 		Charge.create(defaultChargeParams);
@@ -418,33 +383,7 @@ public class StripeTest {
 		assertEquals(retrieved.getSource(), first.getSource());
 	}
 
-	@Test
-	public void testChargeRetrieve() throws StripeException {
-		Charge createdCharge = Charge.create(defaultChargeParams);
-		Charge retrievedCharge = Charge.retrieve(createdCharge.getId());
-		assertEquals(createdCharge.getCreated(), retrievedCharge.getCreated());
-		assertEquals(createdCharge.getId(), retrievedCharge.getId());
-		assertNotNull(retrievedCharge.getSource());
-		assertEquals("card", retrievedCharge.getSource().getObject());
-		Card card = (Card) retrievedCharge.getSource();
-		assertEquals(defaultCardParams.get("address_city"), card.getAddressCity());
-	}
-
-	@Test
-	public void testChargeRetrieveNullId() throws StripeException {
-		try {
-			Charge.retrieve(null);
-			assertTrue(false);
-		}
-		catch (InvalidRequestException e) {
-			String requestId = e.getRequestId();
-			assertFalse(requestId == null);
-			assertFalse(requestId.equals(""));
-			assertTrue(e.toString().contains(requestId));
-			assertTrue(404 == e.getStatusCode());
-		}
-	}
-
+	// Refund Tests:
 	@Test
 	public void testChargeRefund() throws StripeException {
 		Charge createdCharge = Charge.create(defaultChargeParams);
@@ -494,6 +433,18 @@ public class StripeTest {
 	}
 
 	@Test
+	public void testChargePartialRefund() throws StripeException {
+		Charge createdCharge = Charge.create(defaultChargeParams);
+		Map<String, Object> refundParams = new HashMap<String, Object>();
+		final Integer REFUND_AMOUNT = 50;
+		refundParams.put("amount", REFUND_AMOUNT);
+		Charge refundedCharge = createdCharge.refund(refundParams);
+		assertFalse(refundedCharge.getRefunded());
+		assertEquals(refundedCharge.getAmountRefunded(), REFUND_AMOUNT);
+	}
+
+	// ChargeRefundCollection Tests:
+	@Test
 	public void testChargeRefundListAndRetrieve()
 			throws StripeException {
 		Charge ch = Charge.create(defaultChargeParams);
@@ -519,30 +470,7 @@ public class StripeTest {
 		assertEquals(created.getId(), retrieved.getId());
 	}
 
-
-	@Test
-	public void testChargeCapture() throws StripeException {
-		Map<String, Object> options = new HashMap<String, Object>(defaultChargeParams);
-		options.put("capture", false);
-
-		Charge created = Charge.create(options);
-		assertFalse(created.getCaptured());
-
-		Charge captured = created.capture();
-		assertTrue(captured.getCaptured());
-	}
-
-	@Test
-	public void testChargePartialRefund() throws StripeException {
-		Charge createdCharge = Charge.create(defaultChargeParams);
-		Map<String, Object> refundParams = new HashMap<String, Object>();
-		final Integer REFUND_AMOUNT = 50;
-		refundParams.put("amount", REFUND_AMOUNT);
-		Charge refundedCharge = createdCharge.refund(refundParams);
-		assertFalse(refundedCharge.getRefunded());
-		assertEquals(refundedCharge.getAmountRefunded(), REFUND_AMOUNT);
-	}
-
+	// ChargeCollection Tests:
 	@Test
 	public void testChargeList() throws StripeException {
 		Map<String, Object> listParams = new HashMap<String, Object>();
@@ -551,73 +479,7 @@ public class StripeTest {
 		assertEquals(charges.size(), 1);
 	}
 
-	@Test(expected = CardException.class)
-	public void testInvalidCard() throws StripeException {
-		Map<String, Object> invalidChargeParams = new HashMap<String, Object>();
-		invalidChargeParams.putAll(defaultChargeParams);
-		Map<String, Object> invalidCardParams = new HashMap<String, Object>();
-		invalidCardParams.put("number", "4242424242424241");
-		invalidCardParams.put("exp_month", 12);
-		invalidCardParams.put("exp_year", getYear());
-		invalidChargeParams.put("card", invalidCardParams);
-		Charge.create(invalidChargeParams);
-	}
-
-	@Test
-	public void testDeclinedCard() throws StripeException {
-		Map<String, Object> declinedChargeParams = new HashMap<String, Object>();
-		declinedChargeParams.putAll(defaultChargeParams);
-		Map<String, Object> declinedCardParams = new HashMap<String, Object>();
-		declinedCardParams.put("number", "4000000000000002");
-		declinedCardParams.put("exp_month", 12);
-		declinedCardParams.put("exp_year", getYear());
-		declinedChargeParams.put("card", declinedCardParams);
-
-		try {
-			Charge.create(declinedChargeParams);
-		}
-		catch (CardException e) {
-			assertEquals("card_declined", e.getCode());
-			assertNotNull(e.getCharge());
-		}
-	}
-
-	@Test
-	public void testInvalidAddressZipTest() throws StripeException {
-		Map<String, Object> invalidChargeParams = new HashMap<String, Object>();
-		invalidChargeParams.putAll(defaultChargeParams);
-		Map<String, Object> invalidCardParams = new HashMap<String, Object>();
-		// See https://stripe.com/docs/testing
-		invalidCardParams.put("number", "4000000000000036");
-		invalidCardParams.put("address_zip", "94024");
-		invalidCardParams.put("address_line1", "42 Foo Street");
-		invalidCardParams.put("exp_month", 12);
-		invalidCardParams.put("exp_year", getYear());
-		invalidChargeParams.put("card", invalidCardParams);
-		Charge charge = Charge.create(invalidChargeParams, supportedRequestOptions);
-		assertEquals(charge.getPaid(), true);
-		assertEquals(charge.getCard().getAddressZipCheck(), "fail");
-		assertEquals(charge.getCard().getAddressLine1Check(), "pass");
-	}
-
-	@Test
-	public void testInvalidAddressLine1Test() throws StripeException {
-		Map<String, Object> invalidChargeParams = new HashMap<String, Object>();
-		invalidChargeParams.putAll(defaultChargeParams);
-		Map<String, Object> invalidCardParams = new HashMap<String, Object>();
-		// See https://stripe.com/docs/testing
-		invalidCardParams.put("number", "4000000000000028");
-		invalidCardParams.put("address_zip", "94024");
-		invalidCardParams.put("address_line1", "42 Foo Street");
-		invalidCardParams.put("exp_month", 12);
-		invalidCardParams.put("exp_year", getYear());
-		invalidChargeParams.put("card", invalidCardParams);
-		Charge charge = Charge.create(invalidChargeParams, supportedRequestOptions);
-		assertEquals(charge.getPaid(), true);
-		assertEquals(charge.getCard().getAddressZipCheck(), "pass");
-		assertEquals(charge.getCard().getAddressLine1Check(), "fail");
-	}
-
+	// Dispute Tests:
 	@Test
 	public void testDisputedCharge() throws StripeException, InterruptedException {
 		int chargeValueCents = 100;
@@ -636,15 +498,6 @@ public class StripeTest {
 		Dispute dispute = disputedCharge.getDispute();
 		Dispute retrievedDispute = Dispute.retrieve(dispute.getId());
 		assertEquals(dispute.getId(), retrievedDispute.getId());
-	}
-
-	@Test
-	public void testDisputeList() throws StripeException, InterruptedException {
-		Map<String, Object> listParams = new HashMap<String, Object>();
-		listParams.put("count", 3);
-		List<Dispute> disputes = Dispute.all(listParams).getData();
-
-		assertEquals(3, disputes.size());
 	}
 
 	@Test
@@ -699,6 +552,17 @@ public class StripeTest {
 		assertEquals("lost", closedDispute.getStatus());
 	}
 
+	// DisputeCollection Tests:
+	@Test
+	public void testDisputeList() throws StripeException, InterruptedException {
+		Map<String, Object> listParams = new HashMap<String, Object>();
+		listParams.put("count", 3);
+		List<Dispute> disputes = Dispute.all(listParams).getData();
+
+		assertEquals(3, disputes.size());
+	}
+
+	// FraudDetails Test:
 	@Test
 	public void testFraudDetails() throws StripeException, InterruptedException {
 		Charge charge = Charge.create(defaultChargeParams);
@@ -720,6 +584,7 @@ public class StripeTest {
 		assertEquals(expectedReported, nowFraudulent.getFraudDetails());
 	}
 
+	// FileUpload Tests:
 	@Test
 	public void testCreateFileUpload() throws StripeException,
 			InterruptedException, URISyntaxException {
@@ -816,6 +681,7 @@ public class StripeTest {
 		return Charge.retrieve(charge.getId());
 	}
 
+	// Customer Tests:
 	@Test
 	public void testCustomerCreate() throws StripeException {
 		Customer customer = Customer.create(defaultCustomerParams, supportedRequestOptions);
@@ -1117,6 +983,7 @@ public class StripeTest {
 		assertTrue(deletedRetrievedCustomer.getDeleted());
 	}
 
+	// Plan Tests:
 	@Test
 	public void testPlanCreate() throws StripeException {
 		Plan plan = Plan.create(getUniquePlanParams());
@@ -1171,6 +1038,7 @@ public class StripeTest {
 		assertEquals(customer.getSubscriptions().getData().get(0).getPlan().getId(), plan.getId());
 	}
 
+	// Subscription Tests:
 	@Test
 	public void testUpdateSubscription() throws StripeException {
 		Plan plan = Plan.create(getUniquePlanParams());
@@ -1359,6 +1227,7 @@ public class StripeTest {
 		assertEquals(deletedSubscriptionItem.getId(), subscriptionItem.getId());
 	}
 
+	// Invoice Tests:
 	@Test
 	public void testInvoiceItemCreate() throws StripeException {
 		Customer customer = Customer.create(defaultCustomerParams);
@@ -1479,6 +1348,7 @@ public class StripeTest {
 		assertTrue(linesAfterFirst.getData().isEmpty());
 	}
 
+	// Token Tests:
 	@Test
 	public void testTokenCreate() throws StripeException {
 		Token token = Token.create(defaultTokenParams);
@@ -1504,6 +1374,7 @@ public class StripeTest {
 		assertTrue(retrievedToken.getUsed());
 	}
 
+	// Coupon Tests:
 	@Test
 	public void testCouponCreate() throws StripeException {
 		Coupon coupon = Coupon.create(getUniqueCouponParams());
@@ -1554,6 +1425,7 @@ public class StripeTest {
 		assertNull(Customer.retrieve(customer.getId()).getDiscount());
 	}
 
+	// Transfer Tests:
 	@Test
 	public void testTransferCreate() throws StripeException {
 		Transfer createdTransfer = Transfer.create(getTransferParams());
@@ -1608,6 +1480,7 @@ public class StripeTest {
 		assertEquals(params, transactions.getRequestParams());
 	}
 
+	// Recipient Tests:
 	@Test
 	public void testRecipientCreate() throws StripeException {
 		Recipient recipient = Recipient.create(defaultRecipientParams);
@@ -1705,6 +1578,7 @@ public class StripeTest {
 		assertTrue(deletedRetrievedRecipient.getDeleted());
 	}
 
+	// ApplicationFee Tests:
 	@Test
 	public void testApplicationFeeList() throws StripeException {
 		Map<String, Object> listParams = new HashMap<String, Object>();
@@ -1713,6 +1587,7 @@ public class StripeTest {
 		assertEquals(fees.size(), 0);
 	}
 
+	// Event Tests:
 	@Test
 	public void testEventRetrieve() throws StripeException {
 		Map<String, Object> listParams = new HashMap<String, Object>();
