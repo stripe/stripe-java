@@ -1,13 +1,9 @@
 package com.stripe.model;
 
-
 import com.google.common.collect.ImmutableMap;
-import com.stripe.Stripe;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
-import com.stripe.net.RequestOptions;
-import org.junit.BeforeClass;
 import org.junit.Test;
 import java.util.*;
 import com.stripe.BaseStripeTest;
@@ -16,40 +12,6 @@ import static org.junit.Assert.*;
 import static org.junit.Assert.assertTrue;
 
 public class ChargeTest extends BaseStripeTest {
-    static Map<String, Object> defaultChargeParams = new HashMap<String, Object>();
-    static Map<String, Object> defaultCardParams = new HashMap<String, Object>();
-    static RequestOptions supportedRequestOptions;
-
-    static String getYear() {
-        Date date = new Date(); //Get current date
-        Calendar calendar = new GregorianCalendar();
-        calendar.setTime(date);
-        return calendar.get(Calendar.YEAR) + 1 +"";
-    }
-
-    @BeforeClass
-    public static void setUp() {
-        Stripe.apiKey = "tGN0bIwXnHdwOa85VABjPdSn8nWY7G7I"; // stripe public
-        // test key
-
-        supportedRequestOptions = RequestOptions.builder().setStripeVersion("2015-02-16").build();
-
-        defaultCardParams.put("number", "4242424242424242");
-        defaultCardParams.put("exp_month", 12);
-        defaultCardParams.put("exp_year", getYear());
-        defaultCardParams.put("cvc", "123");
-        defaultCardParams.put("name", "J Bindings Cardholder");
-        defaultCardParams.put("address_line1", "140 2nd Street");
-        defaultCardParams.put("address_line2", "4th Floor");
-        defaultCardParams.put("address_city", "San Francisco");
-        defaultCardParams.put("address_zip", "94105");
-        defaultCardParams.put("address_state", "CA");
-        defaultCardParams.put("address_country", "USA");
-
-        defaultChargeParams.put("amount", 100);
-        defaultChargeParams.put("currency", "usd");
-        defaultChargeParams.put("card", defaultCardParams);
-    }
 
     @Test
     public void testChargeCreate() throws StripeException {
