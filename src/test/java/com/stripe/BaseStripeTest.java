@@ -1,6 +1,8 @@
 package com.stripe;
 
 import com.stripe.exception.StripeException;
+import com.stripe.model.Customer;
+import com.stripe.model.Plan;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
@@ -40,6 +42,33 @@ public class BaseStripeTest {
 		Calendar calendar = new GregorianCalendar();
 		calendar.setTime(date);
 		return calendar.get(Calendar.YEAR) + 1 +"";
+	}
+
+	public static String getUniqueEmail() {
+		return String.format("test+bindings-%s@stripe.com", UUID.randomUUID().toString().substring(24));
+	}
+
+	public static String getUniquePlanId() {
+		return String.format("MY-J-PLAN-%s", UUID.randomUUID().toString().substring(24));
+	}
+
+	public static String getUniqueCouponId() {
+		return String.format("MY-J-COUPON-%s", UUID.randomUUID().toString().substring(24));
+	}
+
+	public static Map<String, Object> getUniquePlanParams() {
+		Map<String, Object> uniqueParams = new HashMap<String, Object>();
+		uniqueParams.putAll(defaultPlanParams);
+		uniqueParams.put("id", getUniquePlanId());
+		return uniqueParams;
+	}
+
+	public static Customer createDefaultCustomerWithPlan(Plan plan)
+			throws StripeException {
+		Map<String, Object> customerWithPlanParams = new HashMap<String, Object>();
+		customerWithPlanParams.putAll(defaultCustomerParams);
+		customerWithPlanParams.put("plan", plan.getId());
+		return Customer.create(customerWithPlanParams);
 	}
 
 	public static <T> void verifyGet(
