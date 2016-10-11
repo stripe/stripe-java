@@ -1,9 +1,13 @@
-package com.stripe.model;
+package com.stripe.functional;
 
 import com.google.common.collect.ImmutableMap;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
+import com.stripe.model.Address;
+import com.stripe.model.Card;
+import com.stripe.model.Charge;
+import com.stripe.model.ShippingDetails;
 import org.junit.Test;
 import java.util.*;
 import com.stripe.BaseStripeTest;

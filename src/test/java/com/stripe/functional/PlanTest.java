@@ -1,7 +1,10 @@
-package com.stripe.model;
+package com.stripe.functional;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
+import com.stripe.model.Customer;
+import com.stripe.model.DeletedPlan;
+import com.stripe.model.Plan;
 import org.junit.Test;
 
 import java.util.HashMap;

@@ -1,9 +1,10 @@
-package com.stripe.model;
+package com.stripe.functional;
 
 import com.google.common.collect.ImmutableMap;
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
+import com.stripe.model.*;
 import org.junit.Test;
 
 import java.util.*;
