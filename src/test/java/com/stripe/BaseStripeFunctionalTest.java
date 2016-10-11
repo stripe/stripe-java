@@ -2,11 +2,16 @@ package com.stripe;
 
 import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
+import com.stripe.model.MetadataStore;
 import com.stripe.model.Plan;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import org.junit.BeforeClass;
 import java.util.*;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 public class BaseStripeFunctionalTest {
     public static Map<String, Object> defaultCardParams = new HashMap<String, Object>();
@@ -140,5 +145,45 @@ public class BaseStripeFunctionalTest {
         defaultManagedAccountParams.put("managed", true);
         defaultManagedAccountParams.put("country", "US");
         defaultManagedAccountParams.put("default_currency", "usd");
+    }
+
+    public void testMetadata(MetadataStore<?> object) throws StripeException {
+        assertTrue(object.getMetadata().isEmpty());
+
+        Map<String, String> initialMetadata = new HashMap<String, String>();
+        initialMetadata.put("foo", "bar");
+        initialMetadata.put("baz", "qux");
+        Map<String, Object> updateParams = new HashMap<String, Object>();
+        updateParams.put("metadata", initialMetadata);
+        object = object.update(updateParams);
+        assertFalse(object.getMetadata().isEmpty());
+        assertEquals("bar", object.getMetadata().get("foo"));
+        assertEquals("qux", object.getMetadata().get("baz"));
+
+        // Test update single key
+        Map<String, String> metadataUpdate = new HashMap<String, String>();
+        metadataUpdate.put("foo", "new-bar");
+        updateParams = new HashMap<String, Object>();
+        updateParams.put("metadata", metadataUpdate);
+        object = object.update(updateParams);
+        assertFalse(object.getMetadata().isEmpty());
+        assertEquals("new-bar", object.getMetadata().get("foo"));
+        assertEquals("qux", object.getMetadata().get("baz"));
+
+        // Test delete single key
+        metadataUpdate = new HashMap<String, String>();
+        metadataUpdate.put("foo", null);
+        updateParams = new HashMap<String, Object>();
+        updateParams.put("metadata", metadataUpdate);
+        object = object.update(updateParams);
+        assertFalse(object.getMetadata().isEmpty());
+        assertFalse(object.getMetadata().containsKey("foo"));
+        assertEquals("qux", object.getMetadata().get("baz"));
+
+        // Test delete all keys
+        updateParams = new HashMap<String, Object>();
+        updateParams.put("metadata", null);
+        object = object.update(updateParams);
+        assertTrue(object.getMetadata().isEmpty());
     }
 }

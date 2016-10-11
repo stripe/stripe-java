@@ -122,28 +122,12 @@ public class StripeTest {
 		return uniqueParams;
 	}
 
-	static Map<String, Object> getUniqueCouponParams() {
-		Map<String, Object> uniqueParams = new HashMap<String, Object>();
-		uniqueParams.putAll(defaultCouponParams);
-		uniqueParams.put("id", getUniqueCouponId());
-		return uniqueParams;
-	}
-
 	static Map<String, Object> getInvoiceItemParams() throws StripeException {
 		Map<String, Object> params = new HashMap<String, Object>();
 			Customer customer = Customer.create(defaultCustomerParams);
 		params.put("amount", 100);
 		params.put("currency", "usd");
 		params.put("customer", customer.getId());
-		return params;
-	}
-
-	static Map<String, Object> getTransferParams() throws StripeException {
-		Map<String, Object> params = new HashMap<String, Object>();
-		Account destination = Account.create(getDefaultAccountParams());
-		params.put("amount", 100);
-		params.put("currency", "usd");
-		params.put("destination", destination.getId());
 		return params;
 	}
 
@@ -256,18 +240,6 @@ public class StripeTest {
 		defaultManagedAccountParams.put("default_currency", "usd");
 	}
 
-	static Map<String, Object> getDefaultAccountParams() {
-		Map<String, Object> defaultAccountParams = new HashMap<String, Object>();
-		// TODO: make defaultAccountParams the default for a given currency?
-		HashMap<String, Object> externalAccount = new HashMap<String, Object>();
-		externalAccount.putAll(defaultBankAccountParams);
-		externalAccount.put("object", "bank_account");
-
-		defaultAccountParams.put("external_account", externalAccount);
-		defaultAccountParams.put("email", getUniqueEmail());
-		return defaultAccountParams;
-	}
-
 	@Test
 	public void testAPIBase() throws StripeException {
 		assertEquals("https://api.stripe.com", Stripe.getApiBase());
@@ -315,112 +287,6 @@ public class StripeTest {
 		listParams.put("count", 1);
 		List<Charge> charges = Charge.all(listParams).getData();
 		assertEquals(charges.size(), 1);
-	}
-
-	// Coupon Tests:
-	@Test
-	public void testCouponCreate() throws StripeException {
-		Coupon coupon = Coupon.create(getUniqueCouponParams());
-		assertEquals(coupon.getDuration(), "once");
-	}
-
-	@Test
-	public void testCouponUpdate() throws StripeException {
-		Coupon createdCoupon = Coupon.create(getUniqueCouponParams());
-		Map<String, Object> updateParams = new HashMap<String, Object>();
-		updateParams.put("metadata[message]", "This month is on us!");
-		Coupon updatedCoupon = createdCoupon.update(updateParams);
-		assertEquals(updatedCoupon.getMetadata().get("message"), "This month is on us!");
-	}
-
-	@Test
-	public void testCouponRetrieve() throws StripeException {
-		Coupon createdCoupon = Coupon.create(getUniqueCouponParams());
-		Coupon retrievedCoupon = Coupon.retrieve(createdCoupon.getId());
-		assertEquals(createdCoupon.getId(), retrievedCoupon.getId());
-	}
-
-	@Test
-	public void testCouponList() throws StripeException {
-		Map<String, Object> listParams = new HashMap<String, Object>();
-		listParams.put("count", 1);
-		List<Coupon> Coupons = Coupon.all(listParams).getData();
-		assertEquals(Coupons.size(), 1);
-	}
-
-	@Test
-	public void testCouponDelete() throws StripeException {
-		Coupon createdCoupon = Coupon.create(getUniqueCouponParams());
-		DeletedCoupon deletedCoupon = createdCoupon.delete();
-		assertTrue(deletedCoupon.getDeleted());
-		assertEquals(deletedCoupon.getId(), createdCoupon.getId());
-	}
-
-	@Test
-	public void testCustomerCreateWithCoupon() throws StripeException {
-		Coupon coupon = Coupon.create(getUniqueCouponParams());
-		Map<String, Object> customerWithCouponParams = new HashMap<String, Object>();
-		customerWithCouponParams.put("coupon", coupon.getId());
-		Customer customer = Customer.create(customerWithCouponParams);
-		assertEquals(customer.getDiscount().getCoupon().getId(), coupon.getId());
-
-		customer.deleteDiscount();
-		assertNull(Customer.retrieve(customer.getId()).getDiscount());
-	}
-
-	// Transfer Tests:
-	@Test
-	public void testTransferCreate() throws StripeException {
-		Transfer createdTransfer = Transfer.create(getTransferParams());
-		assertEquals("paid", createdTransfer.getStatus());
-	}
-
-	@Test
-	public void testTransferCancel() throws StripeException {
-		Transfer created = Transfer.create(getTransferParams());
-		try {
-			// we expect an InvalidRequestException here (caught by JUnit),
-			// because in test mode, transfers are automatically sent.
-			created.cancel(RequestOptions.getDefault());
-			Assert.fail();
-		} catch (InvalidRequestException ire) {
-			// do nothing
-		}
-
-	}
-
-	@Test
-	public void testTransferRetrieve() throws StripeException {
-		Transfer createdTransfer = Transfer.create(getTransferParams());
-		Transfer retrievedTransfer = Transfer.retrieve(createdTransfer.getId());
-		assertEquals(createdTransfer.getDate(), retrievedTransfer.getDate());
-		assertEquals(createdTransfer.getId(), retrievedTransfer.getId());
-	}
-
-	@Test
-	public void testTransferDestinationLoadedCorrectly() throws StripeException {
-		Map<String, Object> transferParams = getTransferParams();
-		Transfer created = Transfer.create(transferParams);
-		assertEquals(transferParams.get("destination"), created.getDestination());
-	}
-
-	@Test
-	public void testTransferList() throws StripeException {
-		Map<String, Object> listParams = new HashMap<String, Object>();
-		listParams.put("count", 1);
-		List<Transfer> transfers = Transfer.all(listParams).getData();
-		assertEquals(transfers.size(), 1);
-	}
-
-	@Test
-	public void testTransferTransactions() throws StripeException {
-		Map<String, Object> transferParams = getTransferParams();
-		Transfer transfer = Transfer.create(transferParams);
-		HashMap<String, Object> params = new HashMap<String, Object>();
-		TransferTransactionCollection transactions = transfer.transactions(params, supportedRequestOptions);
-		// Test that requestOptions and requestParams are the same in returned transactions:
-		assertEquals(supportedRequestOptions, transactions.getRequestOptions());
-		assertEquals(params, transactions.getRequestParams());
 	}
 
 	// Recipient Tests:
@@ -759,52 +625,6 @@ public class StripeTest {
 	}
 
 	@Test
-	public void testCouponCreatePerCallAPIKey() throws StripeException {
-		Coupon coupon = Coupon.create(getUniqueCouponParams(), Stripe.apiKey);
-		assertEquals(coupon.getDuration(), "once");
-	}
-
-	@Test
-	public void testCouponRetrievePerCallAPIKey() throws StripeException {
-		Coupon createdCoupon = Coupon.create(getUniqueCouponParams(),
-				Stripe.apiKey);
-		Coupon retrievedCoupon = Coupon.retrieve(createdCoupon.getId(),
-				Stripe.apiKey);
-		assertEquals(createdCoupon.getId(), retrievedCoupon.getId());
-	}
-
-	@Test
-	public void testCouponListPerCallAPIKey() throws StripeException {
-		Map<String, Object> listParams = new HashMap<String, Object>();
-		listParams.put("count", 1);
-		List<Coupon> Coupons = Coupon.all(listParams, Stripe.apiKey).getData();
-		assertEquals(Coupons.size(), 1);
-	}
-
-	@Test
-	public void testCouponDeletePerCallAPIKey() throws StripeException {
-		Coupon createdCoupon = Coupon.create(getUniqueCouponParams(),
-				Stripe.apiKey);
-		DeletedCoupon deletedCoupon = createdCoupon.delete(Stripe.apiKey);
-		assertTrue(deletedCoupon.getDeleted());
-		assertEquals(deletedCoupon.getId(), createdCoupon.getId());
-	}
-
-	@Test
-	public void testCustomerCreateWithCouponPerCallAPIKey()
-			throws StripeException {
-		Coupon coupon = Coupon.create(getUniqueCouponParams(), Stripe.apiKey);
-		Map<String, Object> customerWithCouponParams = new HashMap<String, Object>();
-		customerWithCouponParams.put("coupon", coupon.getId());
-		Customer customer = Customer.create(customerWithCouponParams,
-				Stripe.apiKey);
-		assertEquals(customer.getDiscount().getCoupon().getId(), coupon.getId());
-
-		customer.deleteDiscount();
-		assertNull(Customer.retrieve(customer.getId()).getDiscount());
-	}
-
-	@Test
 	public void testEventRetrievePerCallAPIKey() throws StripeException {
 		Map<String, Object> listParams = new HashMap<String, Object>();
 		listParams.put("count", 1);
@@ -925,11 +745,6 @@ public class StripeTest {
 	}
 
 	@Test
-	public void testTransferMetadata() throws StripeException {
-		testMetadata(Transfer.create(getTransferParams()));
-	}
-
-	@Test
 	public void testRecipientMetadata() throws StripeException {
 		testMetadata(Recipient.create(defaultRecipientParams));
 	}
@@ -963,11 +778,6 @@ public class StripeTest {
 		Charge createdCharge = Charge.create(defaultChargeParams);
 		Charge refundedCharge = createdCharge.refund();
 		testMetadata(refundedCharge.getRefunds().getData().get(0));
-	}
-
-	@Test
-	public void testCouponMetadata() throws StripeException {
-		testMetadata(Coupon.create(getUniqueCouponParams()));
 	}
 
 	@Test
