@@ -1,6 +1,6 @@
 package com.stripe.functional;
 
-import com.stripe.BaseStripeTest;
+import com.stripe.BaseStripeFunctionalTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.*;
 import org.junit.Test;
@@ -12,7 +12,7 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class SubscriptionItemTest extends BaseStripeTest {
+public class SubscriptionItemTest extends BaseStripeFunctionalTest {
     static Subscription createDefaultSubscription(Customer customer)
             throws StripeException {
         Plan plan = Plan.create(getUniquePlanParams());

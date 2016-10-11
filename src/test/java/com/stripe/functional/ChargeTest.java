@@ -10,12 +10,12 @@ import com.stripe.model.Charge;
 import com.stripe.model.ShippingDetails;
 import org.junit.Test;
 import java.util.*;
-import com.stripe.BaseStripeTest;
+import com.stripe.BaseStripeFunctionalTest;
 
 import static org.junit.Assert.*;
 import static org.junit.Assert.assertTrue;
 
-public class ChargeTest extends BaseStripeTest {
+public class ChargeTest extends BaseStripeFunctionalTest {
 
     @Test
     public void testChargeCreate() throws StripeException {

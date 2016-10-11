@@ -1,6 +1,6 @@
 package com.stripe.functional;
 
-import com.stripe.BaseStripeTest;
+import com.stripe.BaseStripeFunctionalTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
 import com.stripe.model.DeletedPlan;
@@ -14,7 +14,7 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class PlanTest extends BaseStripeTest {
+public class PlanTest extends BaseStripeFunctionalTest {
     @Test
     public void testPlanCreate() throws StripeException {
         Plan plan = Plan.create(getUniquePlanParams());

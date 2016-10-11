@@ -1,7 +1,7 @@
 package com.stripe.functional;
 
 import com.google.common.collect.ImmutableMap;
-import com.stripe.BaseStripeTest;
+import com.stripe.BaseStripeFunctionalTest;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.*;
@@ -13,7 +13,7 @@ import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
-public class CustomerTest extends BaseStripeTest {
+public class CustomerTest extends BaseStripeFunctionalTest {
 
     static Customer createDefaultCustomerWithDefaultBitcoinReceiver()
             throws StripeException {

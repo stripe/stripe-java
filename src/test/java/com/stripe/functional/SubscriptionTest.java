@@ -1,6 +1,6 @@
 package com.stripe.functional;
 
-import com.stripe.BaseStripeTest;
+import com.stripe.BaseStripeFunctionalTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.*;
 import org.junit.Test;
@@ -11,7 +11,7 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-public class SubscriptionTest extends BaseStripeTest {
+public class SubscriptionTest extends BaseStripeFunctionalTest {
     // Subscription Tests:
     @Test
     public void testUpdateSubscription() throws StripeException {

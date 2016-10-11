@@ -1,7 +1,7 @@
 package com.stripe.functional;
 
 import com.google.common.collect.ImmutableMap;
-import com.stripe.BaseStripeTest;
+import com.stripe.BaseStripeFunctionalTest;
 import com.stripe.Stripe;
 import com.stripe.exception.*;
 import com.stripe.model.*;
@@ -18,7 +18,7 @@ import static org.junit.Assert.*;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
-public class DisputeTest extends BaseStripeTest {
+public class DisputeTest extends BaseStripeFunctionalTest {
 
     private Charge createDisputedCharge(int chargeValueCents) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException, InterruptedException {
         Map<String, Object> chargeParams = new HashMap<String, Object>();
