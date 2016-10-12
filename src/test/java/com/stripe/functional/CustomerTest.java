@@ -2,6 +2,7 @@ package com.stripe.functional;
 
 import com.google.common.collect.ImmutableMap;
 import com.stripe.BaseStripeFunctionalTest;
+import com.stripe.Stripe;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.*;
@@ -326,4 +327,63 @@ public class CustomerTest extends BaseStripeFunctionalTest {
         assertTrue(deletedRetrievedCustomer.getDeleted());
     }
 
+    @Test
+    public void testCustomerCreatePerCallAPIKey() throws StripeException {
+        Customer customer = Customer.create(defaultCustomerParams,
+                supportedRequestOptions);
+        assertEquals(customer.getDescription(), "J Bindings Customer");
+        List<Card> customerCards = customer.getCards().getData();
+        assertEquals(1, customerCards.size());
+        assertEquals("4242", customerCards.get(0).getLast4());
+    }
+
+    @Test
+    public void testCustomerCreateWithPlanPerCallAPIKey()
+            throws StripeException {
+        Plan plan = Plan.create(getUniquePlanParams(), Stripe.apiKey);
+        Customer customer = createDefaultCustomerWithPlan(plan);
+        assertEquals(customer.getSubscriptions().getData().get(0).getPlan().getId(), plan.getId());
+    }
+
+    @Test
+    public void testCustomerRetrievePerCallAPIKey() throws StripeException {
+        Customer createdCustomer = Customer.create(defaultCustomerParams,
+                Stripe.apiKey);
+        Customer retrievedCustomer = Customer.retrieve(createdCustomer.getId());
+        assertEquals(createdCustomer.getCreated(),
+                retrievedCustomer.getCreated());
+        assertEquals(createdCustomer.getId(), retrievedCustomer.getId());
+    }
+
+    @Test
+    public void testCustomerListPerCallAPIKey() throws StripeException {
+        Map<String, Object> listParams = new HashMap<String, Object>();
+        listParams.put("count", 1);
+        List<Customer> Customers = Customer.all(listParams, Stripe.apiKey)
+                .getData();
+        assertEquals(Customers.size(), 1);
+    }
+
+    @Test
+    public void testCustomerUpdatePerCallAPIKey() throws StripeException {
+        Customer createdCustomer = Customer.create(defaultCustomerParams,
+                Stripe.apiKey);
+        Map<String, Object> updateParams = new HashMap<String, Object>();
+        updateParams.put("description", "Updated Description");
+        Customer updatedCustomer = createdCustomer.update(updateParams,
+                Stripe.apiKey);
+        assertEquals(updatedCustomer.getDescription(), "Updated Description");
+    }
+
+    @Test
+    public void testCustomerDeletePerCallAPIKey() throws StripeException {
+        Customer createdCustomer = Customer.create(defaultCustomerParams,
+                Stripe.apiKey);
+        DeletedCustomer deletedCustomer = createdCustomer.delete(Stripe.apiKey);
+        Customer deletedRetrievedCustomer = Customer.retrieve(
+                createdCustomer.getId(), Stripe.apiKey);
+        assertTrue(deletedCustomer.getDeleted());
+        assertEquals(deletedCustomer.getId(), createdCustomer.getId());
+        assertTrue(deletedRetrievedCustomer.getDeleted());
+    }
 }

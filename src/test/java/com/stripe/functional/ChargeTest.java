@@ -1,6 +1,7 @@
 package com.stripe.functional;
 
 import com.google.common.collect.ImmutableMap;
+import com.stripe.Stripe;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
@@ -162,5 +163,74 @@ public class ChargeTest extends BaseStripeFunctionalTest {
         assertEquals(charge.getCard().getAddressLine1Check(), "fail");
     }
 
+    // ChargeCollection Tests:
+    @Test
+    public void testChargeList() throws StripeException {
+        Map<String, Object> listParams = new HashMap<String, Object>();
+        listParams.put("count", 1);
+        List<Charge> charges = Charge.all(listParams).getData();
+        assertEquals(charges.size(), 1);
+    }
 
+    @Test
+    public void testChargeCreatePerCallAPIKey() throws StripeException {
+        Charge createdCharge = Charge
+                .create(defaultChargeParams, Stripe.apiKey);
+        assertFalse(createdCharge.getRefunded());
+    }
+
+    @Test
+    public void testChargeRetrievePerCallAPIKey() throws StripeException {
+        Charge createdCharge = Charge
+                .create(defaultChargeParams, Stripe.apiKey);
+        Charge retrievedCharge = Charge.retrieve(createdCharge.getId(),
+                Stripe.apiKey);
+        assertEquals(createdCharge.getCreated(), retrievedCharge.getCreated());
+        assertEquals(createdCharge.getId(), retrievedCharge.getId());
+    }
+
+    @Test
+    public void testChargeRefundPerCallAPIKey() throws StripeException {
+        Charge createdCharge = Charge
+                .create(defaultChargeParams, Stripe.apiKey);
+        Charge refundedCharge = createdCharge.refund(Stripe.apiKey);
+        assertTrue(refundedCharge.getRefunded());
+    }
+
+    @Test
+    public void testChargePartialRefundPerCallAPIKey() throws StripeException {
+        Charge createdCharge = Charge.create(defaultChargeParams);
+        Map<String, Object> refundParams = new HashMap<String, Object>();
+        final Integer REFUND_AMOUNT = 50;
+        refundParams.put("amount", REFUND_AMOUNT);
+        Charge refundedCharge = createdCharge.refund(refundParams,
+                Stripe.apiKey);
+        assertFalse(refundedCharge.getRefunded());
+        assertEquals(refundedCharge.getAmountRefunded(), REFUND_AMOUNT);
+    }
+
+    @Test
+    public void testChargeListPerCallAPIKey() throws StripeException {
+        Map<String, Object> listParams = new HashMap<String, Object>();
+        listParams.put("count", 1);
+        List<Charge> charges = Charge.all(listParams, Stripe.apiKey).getData();
+        assertEquals(charges.size(), 1);
+    }
+
+    @Test(expected = CardException.class)
+    public void testInvalidCardPerCallAPIKey() throws StripeException {
+        Map<String, Object> invalidChargeParams = new HashMap<String, Object>();
+        invalidChargeParams.putAll(defaultChargeParams);
+        Map<String, Object> invalidCardParams = new HashMap<String, Object>();
+        invalidCardParams.put("number", "4242424242424241");
+        invalidCardParams.put("exp_month", 12);
+        invalidCardParams.put("exp_year", getYear());
+        invalidChargeParams.put("card", invalidCardParams);
+        Charge.create(invalidChargeParams, Stripe.apiKey);
+    }
+
+    @Test
+    public void testChargeMetadata() throws StripeException {
+        testMetadata(Charge.create(defaultChargeParams));
+    }
 }
