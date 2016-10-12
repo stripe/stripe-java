@@ -7,6 +7,8 @@ import com.stripe.model.Plan;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
 import org.junit.BeforeClass;
+import org.junit.Test;
+
 import java.util.*;
 
 import static org.junit.Assert.assertEquals;
@@ -185,5 +187,10 @@ public class BaseStripeFunctionalTest {
         updateParams.put("metadata", null);
         object = object.update(updateParams);
         assertTrue(object.getMetadata().isEmpty());
+    }
+
+    @Test
+    public void testAPIBase() throws StripeException {
+        assertEquals("https://api.stripe.com", Stripe.getApiBase());
     }
 }

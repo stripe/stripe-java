@@ -233,4 +233,16 @@ public class ChargeTest extends BaseStripeFunctionalTest {
     public void testChargeMetadata() throws StripeException {
         testMetadata(Charge.create(defaultChargeParams));
     }
+
+    @Test
+    public void testPerCallAPIUsage() throws StripeException {
+        Charge createdCharge = Charge
+                .create(defaultChargeParams, Stripe.apiKey);
+        assertFalse(createdCharge.getRefunded());
+        try {
+            Charge.create(defaultChargeParams, "INVALID_KEY_HERE");
+            fail();
+        } catch (Exception e) {
+        }
+    }
 }
