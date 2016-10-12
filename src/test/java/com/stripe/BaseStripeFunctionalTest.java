@@ -6,6 +6,7 @@ import com.stripe.model.MetadataStore;
 import com.stripe.model.Plan;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
@@ -72,7 +73,6 @@ public class BaseStripeFunctionalTest {
     public static void setUp() {
         Stripe.apiKey = "tGN0bIwXnHdwOa85VABjPdSn8nWY7G7I"; // stripe public
         // test key
-
         supportedRequestOptions = RequestOptions.builder().setStripeVersion("2015-02-16").build();
 
         defaultCardParams.put("number", "4242424242424242");
@@ -147,6 +147,12 @@ public class BaseStripeFunctionalTest {
         defaultManagedAccountParams.put("managed", true);
         defaultManagedAccountParams.put("country", "US");
         defaultManagedAccountParams.put("default_currency", "usd");
+    }
+
+    @Before
+    public void before()
+    {
+        Stripe.apiVersion = null;
     }
 
     public void testMetadata(MetadataStore<?> object) throws StripeException {
