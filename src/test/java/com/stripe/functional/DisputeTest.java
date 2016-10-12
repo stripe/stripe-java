@@ -145,7 +145,7 @@ public class DisputeTest extends BaseStripeFunctionalTest {
     @Test
     public void testCreateFileUpload() throws StripeException,
             InterruptedException, URISyntaxException {
-        URL url = getClass().getResource("minimal.pdf");
+        URL url = getClass().getSuperclass().getResource("minimal.pdf");
         File file = new File(url.getPath());
         Map<String, Object> fileUploadParams = new HashMap<String, Object>();
         fileUploadParams.put("purpose", "dispute_evidence");
@@ -167,24 +167,6 @@ public class DisputeTest extends BaseStripeFunctionalTest {
         listParams.put("limit", 1);
         List<FileUpload> uploads = FileUpload.all(listParams).getData();
         assertEquals(uploads.size(), 1);
-    }
-
-    @Test
-    public void testSubmitOldStyleEvidence() throws StripeException, InterruptedException {
-        int chargeValueCents = 100;
-        Stripe.apiVersion = "2014-11-20";
-        Charge disputedCharge = createDisputedCharge(chargeValueCents);
-
-        String myEvidence = "Here's evidence showing this charge is legitimate.";
-        Dispute initialDispute = disputedCharge.getDispute();
-        assertNull(initialDispute.getEvidence());
-        assertNull(initialDispute.getEvidenceSubObject());
-        Map<String, Object> disputeParams = ImmutableMap.<String, Object>of("evidence", myEvidence);
-
-        Dispute updatedDispute = disputedCharge.updateDispute(disputeParams);
-        assertNotNull(updatedDispute);
-        assertEquals(myEvidence, updatedDispute.getEvidence());
-        assertNull(updatedDispute.getEvidenceSubObject());
     }
 
     @Test
@@ -221,4 +203,21 @@ public class DisputeTest extends BaseStripeFunctionalTest {
         assertEquals(1, evidenceDetails.getSubmissionCount().intValue());
     }
 
+    @Test
+    public void testSubmitOldStyleEvidence() throws StripeException, InterruptedException {
+        int chargeValueCents = 100;
+        Stripe.apiVersion = "2014-11-20";
+        Charge disputedCharge = createDisputedCharge(chargeValueCents);
+
+        String myEvidence = "Here's evidence showing this charge is legitimate.";
+        Dispute initialDispute = disputedCharge.getDispute();
+        assertNull(initialDispute.getEvidence());
+        assertNull(initialDispute.getEvidenceSubObject());
+        Map<String, Object> disputeParams = ImmutableMap.<String, Object>of("evidence", myEvidence);
+
+        Dispute updatedDispute = disputedCharge.updateDispute(disputeParams);
+        assertNotNull(updatedDispute);
+        assertEquals(myEvidence, updatedDispute.getEvidence());
+        assertNull(updatedDispute.getEvidenceSubObject());
+    }
 }
