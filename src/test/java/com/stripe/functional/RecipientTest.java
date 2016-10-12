@@ -97,7 +97,7 @@ public class RecipientTest extends BaseStripeFunctionalTest {
 
         assertTrue(deletedCard.getDeleted());
         assertEquals(deletedCard.getId(), card.getId());
-        for(Card retrievedCard : retrievedRecipient.getCards().getData()) {
+        for (Card retrievedCard : retrievedRecipient.getCards().getData()) {
             assertFalse("Card was not actually deleted: " + card.getId(), card.getId().equals(retrievedCard.getId()));
         }
     }
@@ -110,5 +110,10 @@ public class RecipientTest extends BaseStripeFunctionalTest {
         assertTrue(deletedRecipient.getDeleted());
         assertEquals(deletedRecipient.getId(), createdRecipient.getId());
         assertTrue(deletedRetrievedRecipient.getDeleted());
+    }
+
+    @Test
+    public void testRecipientMetadata() throws StripeException {
+        testMetadata(Recipient.create(defaultRecipientParams));
     }
 }

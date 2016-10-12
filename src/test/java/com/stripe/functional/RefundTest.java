@@ -17,7 +17,6 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class RefundTest extends BaseStripeFunctionalTest {
-    // Refund Tests:
     @Test
     public void testChargeRefund() throws StripeException {
         Charge createdCharge = Charge.create(defaultChargeParams);
@@ -77,7 +76,6 @@ public class RefundTest extends BaseStripeFunctionalTest {
         assertEquals(refundedCharge.getAmountRefunded(), REFUND_AMOUNT);
     }
 
-    // ChargeRefundCollection Tests:
     @Test
     public void testChargeRefundListAndRetrieve()
             throws StripeException {
@@ -90,7 +88,6 @@ public class RefundTest extends BaseStripeFunctionalTest {
         assertEquals(created.getId(), retrieved.getId());
     }
 
-
     @Test
     public void testChargeRefundListAndRetrievePerCallAPIKey()
             throws StripeException {
@@ -102,5 +99,12 @@ public class RefundTest extends BaseStripeFunctionalTest {
                 Stripe.apiKey).getData().get(0);
         Refund retrieved = ch.getRefunds().retrieve(created.getId(), Stripe.apiKey);
         assertEquals(created.getId(), retrieved.getId());
+    }
+
+    @Test
+    public void testRefundMetadata() throws StripeException {
+        Charge createdCharge = Charge.create(defaultChargeParams);
+        Charge refundedCharge = createdCharge.refund();
+        testMetadata(refundedCharge.getRefunds().getData().get(0));
     }
 }

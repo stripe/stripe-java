@@ -1,6 +1,7 @@
 package com.stripe.functional;
 
 import com.stripe.BaseStripeFunctionalTest;
+import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
 import com.stripe.model.DeletedPlan;
@@ -67,5 +68,48 @@ public class PlanTest extends BaseStripeFunctionalTest {
         Plan plan = Plan.create(getUniquePlanParams());
         Customer customer = createDefaultCustomerWithPlan(plan);
         assertEquals(customer.getSubscriptions().getData().get(0).getPlan().getId(), plan.getId());
+    }
+
+    @Test
+    public void testPlanCreatePerCallAPIKey() throws StripeException {
+        Plan plan = Plan.create(getUniquePlanParams(), Stripe.apiKey);
+        assertEquals(plan.getInterval(), "month");
+    }
+
+    @Test
+    public void testPlanUpdatePerCallAPIKey() throws StripeException {
+        Plan createdPlan = Plan.create(getUniquePlanParams(), Stripe.apiKey);
+        Map<String, Object> updateParams = new HashMap<String, Object>();
+        updateParams.put("name", "Updated Plan Name");
+        Plan updatedplan = createdPlan.update(updateParams, Stripe.apiKey);
+        assertEquals(updatedplan.getName(), "Updated Plan Name");
+    }
+
+    @Test
+    public void testPlanRetrievePerCallAPIKey() throws StripeException {
+        Plan createdPlan = Plan.create(getUniquePlanParams(), Stripe.apiKey);
+        Plan retrievedPlan = Plan.retrieve(createdPlan.getId(), Stripe.apiKey);
+        assertEquals(createdPlan.getId(), retrievedPlan.getId());
+    }
+
+    @Test
+    public void testPlanListPerCallAPIKey() throws StripeException {
+        Map<String, Object> listParams = new HashMap<String, Object>();
+        listParams.put("count", 1);
+        List<Plan> Plans = Plan.all(listParams, Stripe.apiKey).getData();
+        assertEquals(Plans.size(), 1);
+    }
+
+    @Test
+    public void testPlanDeletePerCallAPIKey() throws StripeException {
+        Plan createdPlan = Plan.create(getUniquePlanParams(), Stripe.apiKey);
+        DeletedPlan deletedPlan = createdPlan.delete(Stripe.apiKey);
+        assertTrue(deletedPlan.getDeleted());
+        assertEquals(deletedPlan.getId(), createdPlan.getId());
+    }
+
+    @Test
+    public void testPlanMetadata() throws StripeException {
+        testMetadata(Plan.create(getUniquePlanParams()));
     }
 }

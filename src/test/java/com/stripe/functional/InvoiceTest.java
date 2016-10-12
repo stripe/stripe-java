@@ -23,6 +23,15 @@ public class InvoiceTest extends BaseStripeFunctionalTest {
         return InvoiceItem.create(invoiceItemParams);
     }
 
+    static Map<String, Object> getInvoiceItemParams() throws StripeException {
+        Map<String, Object> params = new HashMap<String, Object>();
+        Customer customer = Customer.create(defaultCustomerParams);
+        params.put("amount", 100);
+        params.put("currency", "usd");
+        params.put("customer", customer.getId());
+        return params;
+    }
+
     // Invoice Tests:
     @Test
     public void testInvoiceItemCreate() throws StripeException {
@@ -233,5 +242,18 @@ public class InvoiceTest extends BaseStripeFunctionalTest {
         Invoice upcomingInvoice = Invoice.upcoming(upcomingParams,
                 Stripe.apiKey);
         assertFalse(upcomingInvoice.getAttempted());
+    }
+
+    @Test
+    public void testInvoiceItemMetadata() throws StripeException {
+        testMetadata(InvoiceItem.create(getInvoiceItemParams()));
+    }
+
+    @Test
+    public void testInvoiceMetadata() throws StripeException {
+        InvoiceItem invItem = InvoiceItem.create(getInvoiceItemParams());
+        Map<String,Object> params = new HashMap<String,Object>();
+        params.put("customer", invItem.getCustomer());
+        testMetadata(Invoice.create(params));
     }
 }

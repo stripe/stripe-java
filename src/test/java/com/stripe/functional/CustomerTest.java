@@ -386,4 +386,9 @@ public class CustomerTest extends BaseStripeFunctionalTest {
         assertEquals(deletedCustomer.getId(), createdCustomer.getId());
         assertTrue(deletedRetrievedCustomer.getDeleted());
     }
+
+    @Test
+    public void testCustomerMetadata() throws StripeException {
+        testMetadata(Customer.create(defaultCustomerParams));
+    }
 }

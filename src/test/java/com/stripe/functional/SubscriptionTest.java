@@ -1,6 +1,7 @@
 package com.stripe.functional;
 
 import com.stripe.BaseStripeFunctionalTest;
+import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.*;
 import org.junit.Test;
@@ -12,7 +13,13 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 public class SubscriptionTest extends BaseStripeFunctionalTest {
-    // Subscription Tests:
+    static Map<String, Object> getSubscriptionParams() throws StripeException {
+        Plan plan = Plan.create(getUniquePlanParams());
+        Map<String, Object> subscriptionParams = new HashMap<String, Object>();
+        subscriptionParams.put("plan", plan.getId());
+        return subscriptionParams;
+    }
+
     @Test
     public void testUpdateSubscription() throws StripeException {
         Plan plan = Plan.create(getUniquePlanParams());
@@ -141,5 +148,48 @@ public class SubscriptionTest extends BaseStripeFunctionalTest {
         customer = Customer.retrieve(customer.getId());
         assertEquals(1, customer.getSubscriptions().getData().size());
         assertEquals(sub.getId(), customer.getSubscriptions().getData().get(0).getId());
+    }
+
+    @Test
+    public void testUpdateSubscriptionPerCallAPIKey() throws StripeException {
+        Plan plan = Plan.create(getUniquePlanParams(), Stripe.apiKey);
+        Customer customer = Customer.create(defaultCustomerParams,
+                Stripe.apiKey);
+        Map<String, Object> subscriptionParams = new HashMap<String, Object>();
+        subscriptionParams.put("plan", plan.getId());
+        Subscription sub = customer.updateSubscription(subscriptionParams,
+                Stripe.apiKey);
+        assertEquals(sub.getPlan().getId(), plan.getId());
+        assertEquals(sub.getCustomer(), customer.getId());
+    }
+
+    @Test
+    public void testCancelSubscriptionPerCallAPIKey() throws StripeException {
+        Plan plan = Plan.create(getUniquePlanParams(), Stripe.apiKey);
+        Customer customer = createDefaultCustomerWithPlan(plan);
+        assertEquals(customer.getSubscriptions().getData().get(0).getStatus(), "active");
+        Subscription canceledSubscription = customer
+                .cancelSubscription(Stripe.apiKey);
+        assertEquals(canceledSubscription.getStatus(), "canceled");
+    }
+
+    @Test
+    public void testCancelSubscriptionAtPeriodEndPerCallAPIKey()
+            throws StripeException {
+        Plan plan = Plan.create(getUniquePlanParams(), Stripe.apiKey);
+        Customer customer = createDefaultCustomerWithPlan(plan);
+        assertEquals(customer.getSubscriptions().getData().get(0).getStatus(), "active");
+        Map<String, Object> cancelParams = new HashMap<String, Object>();
+        cancelParams.put("at_period_end", true);
+        Subscription canceledSubscription = customer.cancelSubscription(
+                cancelParams, Stripe.apiKey);
+        assertEquals(canceledSubscription.getStatus(), "active");
+        assertEquals(canceledSubscription.getCancelAtPeriodEnd(), true);
+    }
+
+    @Test
+    public void testSubscriptionMetadata() throws StripeException {
+        Customer customer = Customer.create(defaultCustomerParams);
+        testMetadata(customer.createSubscription(getSubscriptionParams()));
     }
 }
