@@ -18,16 +18,17 @@ public class SourceTest extends BaseStripeFunctionalTest {
                 .setApiKey("sk_test_JieJALRz7rPz7boV17oMma7a")
                 .build();
 
-        Map<String, Object> receiverParams = new HashMap<String, Object>();
-        receiverParams.put("refund_attributes_method", "manual");
+        Map<String, Object> ownerParams = new HashMap<String, Object>();
+        ownerParams.put("email", "payinguser+fill_now@example.com");
 
         Map<String, Object> sourceCreateParams = new HashMap<String, Object>();
         sourceCreateParams.put("type", "bitcoin");
         sourceCreateParams.put("currency", "usd");
         sourceCreateParams.put("amount", 1000);
-        sourceCreateParams.put("receiver", receiverParams);
+        sourceCreateParams.put("owner", ownerParams);
 
         Source created = Source.create(sourceCreateParams, sourceRequestOptions);
+
         assertEquals("bitcoin", created.getType());
         assertEquals("receiver", created.getFlow());
 
