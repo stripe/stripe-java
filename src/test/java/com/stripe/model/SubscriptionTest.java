@@ -2,8 +2,6 @@ package com.stripe.model;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
-import com.stripe.model.Subscription;
-import com.stripe.model.Discount;
 import com.stripe.net.APIResource;
 import com.stripe.net.LiveStripeResponseGetter;
 import org.junit.After;

@@ -88,7 +88,9 @@ You must have Maven installed. To run the tests:
 
     mvn test
 
-You can run particular tests by passing `-D test=Class#method`. For example:
+You can run particular tests by passing `-D test=Class#method`. Make sure you use the fully qualified class name to differentiate between
+unit and functional tests. For example:
 
-    mvn test -D test=StripeTest
-    mvn test -D test=StripeTest#testPlanCreate
+    mvn test -D test=com.stripe.model.AccountTest
+    mvn test -D test=com.stripe.functional.ChargeTest
+    mvn test -D test=com.stripe.functional.ChargeTest#testChargeCreate
