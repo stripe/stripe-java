@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class Invoice extends APIResource implements MetadataStore<Invoice>, HasId {
 	String id;
-	Integer amountDue;
+	Long amountDue;
 	Long applicationFee;
 	Integer attemptCount;
 	Boolean attempted;
@@ -24,7 +24,7 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 	Long date;
 	String description;
 	Discount discount;
-	Integer endingBalance;
+	Long endingBalance;
 	Boolean forgiven;
 	InvoiceLineItemCollection lines;
 	Boolean livemode;
@@ -34,14 +34,14 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 	Long periodEnd;
 	Long periodStart;
 	String receiptNumber;
-	Integer startingBalance;
+	Long startingBalance;
 	String statementDescriptor;
 	String subscription;
 	Long subscriptionProrationDate;
-	Integer subtotal;
-	Integer tax;
+	Long subtotal;
+	Long tax;
 	Double taxPercent;
-	Integer total;
+	Long total;
 	Long webhooksDeliveredAt;
 
 	public String getId() {
@@ -52,11 +52,11 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 		this.id = id;
 	}
 
-	public Integer getAmountDue() {
+	public Long getAmountDue() {
 		return amountDue;
 	}
 
-	public void setAmountDue(Integer amountDue) {
+	public void setAmountDue(Long amountDue) {
 		this.amountDue = amountDue;
 	}
 
@@ -148,11 +148,11 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 		this.discount = discount;
 	}
 
-	public Integer getEndingBalance() {
+	public Long getEndingBalance() {
 		return endingBalance;
 	}
 
-	public void setEndingBalance(Integer endingBalance) {
+	public void setEndingBalance(Long endingBalance) {
 		this.endingBalance = endingBalance;
 	}
 
@@ -224,11 +224,11 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 		this.receiptNumber = receiptNumber;
 	}
 
-	public Integer getStartingBalance() {
+	public Long getStartingBalance() {
 		return startingBalance;
 	}
 
-	public void setStartingBalance(Integer startingBalance) {
+	public void setStartingBalance(Long startingBalance) {
 		this.startingBalance = startingBalance;
 	}
 
@@ -256,19 +256,19 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 		this.subscriptionProrationDate = subscriptionProrationDate;
 	}
 
-	public Integer getSubtotal() {
+	public Long getSubtotal() {
 		return subtotal;
 	}
 
-	public void setSubtotal(Integer subtotal) {
+	public void setSubtotal(Long subtotal) {
 		this.subtotal = subtotal;
 	}
 
-	public Integer getTax() {
+	public Long getTax() {
 		return tax;
 	}
 
-	public void setTax(Integer tax) {
+	public void setTax(Long tax) {
 		this.tax = tax;
 	}
 
@@ -280,11 +280,11 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 		this.taxPercent = taxPercent;
 	}
 
-	public Integer getTotal() {
+	public Long getTotal() {
 		return total;
 	}
 
-	public void setTotal(Integer total) {
+	public void setTotal(Long total) {
 		this.total = total;
 	}
 

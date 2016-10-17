@@ -201,7 +201,7 @@ public class ChargeTest extends BaseStripeFunctionalTest {
     public void testChargePartialRefundPerCallAPIKey() throws StripeException {
         Charge createdCharge = Charge.create(defaultChargeParams);
         Map<String, Object> refundParams = new HashMap<String, Object>();
-        final Integer REFUND_AMOUNT = 50;
+        final Long REFUND_AMOUNT = 50l;
         refundParams.put("amount", REFUND_AMOUNT);
         Charge refundedCharge = createdCharge.refund(refundParams,
                 Stripe.apiKey);

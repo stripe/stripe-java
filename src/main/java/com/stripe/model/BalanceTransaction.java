@@ -14,12 +14,12 @@ import java.util.Map;
 
 public class BalanceTransaction extends APIResource implements HasId {
 	String id;
-	Integer amount;
+	Long amount;
 	Long availableOn;
 	Long created;
 	String currency;
 	String description;
-	Integer fee;
+	Long fee;
 	List<Fee> feeDetails;
 	Integer net;
 	String source;
@@ -35,11 +35,11 @@ public class BalanceTransaction extends APIResource implements HasId {
 		this.id = id;
 	}
 
-	public Integer getAmount() {
+	public Long getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Integer amount) {
+	public void setAmount(Long amount) {
 		this.amount = amount;
 	}
 
@@ -75,11 +75,11 @@ public class BalanceTransaction extends APIResource implements HasId {
 		this.description = description;
 	}
 
-	public Integer getFee() {
+	public Long getFee() {
 		return fee;
 	}
 
-	public void setFee(Integer fee) {
+	public void setFee(Long fee) {
 		this.fee = fee;
 	}
 

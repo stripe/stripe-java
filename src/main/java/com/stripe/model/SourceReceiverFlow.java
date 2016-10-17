@@ -3,9 +3,9 @@ package com.stripe.model;
 public final class SourceReceiverFlow extends StripeObject {
 	String refundAttributesStatus;
 	String refundAttributesMethod;
-	Integer amountReceived;
-	Integer amountReturned;
-	Integer amountCharged;
+	Long amountReceived;
+	Long amountReturned;
+	Long amountCharged;
 	String address;
 
 	public String getRefundAttributesStatus() {
@@ -24,27 +24,27 @@ public final class SourceReceiverFlow extends StripeObject {
 		this.refundAttributesMethod = refundAttributesMethod;
 	}
 
-	public Integer getAmountReceived() {
+	public Long getAmountReceived() {
 		return amountReceived;
 	}
 
-	public void setAmountReceived(Integer amountReceived){
+	public void setAmountReceived(Long amountReceived){
 		this.amountReceived = amountReceived;
 	}
 
-	public Integer getAmountReturned() {
+	public Long getAmountReturned() {
 		return amountReturned;
 	}
 
-	public void setAmountReturned(Integer amountReturned){
+	public void setAmountReturned(Long amountReturned){
 		this.amountReturned = amountReturned;
 	}
 
-	public Integer getAmountCharged() {
+	public Long getAmountCharged() {
 		return amountCharged;
 	}
 
-	public void setAmountCharged(Integer amountCharged){
+	public void setAmountCharged(Long amountCharged){
 		this.amountCharged = amountCharged;
 	}
 

@@ -16,7 +16,7 @@ public class AlipayAccount extends ExternalAccount {
 	Long created;
 	String fingerprint;
 	Boolean livemode;
-	Integer paymentAmount;
+	Long paymentAmount;
 	String paymentCurrency;
 	Boolean reusable;
 	Boolean used;
@@ -47,11 +47,11 @@ public class AlipayAccount extends ExternalAccount {
 		this.livemode = livemode;
 	}
 
-	public Integer getPaymentAmount() {
+	public Long getPaymentAmount() {
 		return paymentAmount;
 	}
 
-	public void setPaymentAmount(Integer paymentAmount) {
+	public void setPaymentAmount(Long paymentAmount) {
 		this.paymentAmount = paymentAmount;
 	}
 

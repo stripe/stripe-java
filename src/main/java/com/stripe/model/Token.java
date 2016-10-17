@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class Token extends APIResource implements HasId {
 	String id;
-	Integer amount;
+	Long amount;
 	BankAccount bankAccount;
 	Card card;
 	String clientIp;
@@ -31,11 +31,11 @@ public class Token extends APIResource implements HasId {
 		this.id = id;
 	}
 
-	public Integer getAmount() {
+	public Long getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Integer amount) {
+	public void setAmount(Long amount) {
 		this.amount = amount;
 	}
 

@@ -13,8 +13,8 @@ import java.util.Map;
 public class ApplicationFee extends APIResource implements HasId {
 	String id;
 	String account;
-	Integer amount;
-	Integer amountRefunded;
+	Long amount;
+	Long amountRefunded;
 	String application;
 	String balanceTransaction;
 	String charge;
@@ -44,19 +44,19 @@ public class ApplicationFee extends APIResource implements HasId {
 		this.account = account;
 	}
 
-	public Integer getAmount() {
+	public Long getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Integer amount) {
+	public void setAmount(Long amount) {
 		this.amount = amount;
 	}
 
-	public Integer getAmountRefunded() {
+	public Long getAmountRefunded() {
 		return amountRefunded;
 	}
 
-	public void setAmountRefunded(Integer amountRefunded) {
+	public void setAmountRefunded(Long amountRefunded) {
 		this.amountRefunded = amountRefunded;
 	}
 

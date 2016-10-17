@@ -14,10 +14,10 @@ import java.util.Map;
 
 public class BitcoinReceiver extends ExternalAccount {
 	Boolean active;
-	Integer amount;
-	Integer amountReceived;
-	Integer bitcoinAmount;
-	Integer bitcoinAmountReceived;
+	Long amount;
+	Long amountReceived;
+	Long bitcoinAmount;
+	Long bitcoinAmountReceived;
 	String bitcoinUri;
 	Long created;
 	String currency;
@@ -42,35 +42,35 @@ public class BitcoinReceiver extends ExternalAccount {
 		this.active = active;
 	}
 
-	public Integer getAmount() {
+	public Long getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Integer amount) {
+	public void setAmount(Long amount) {
 		this.amount = amount;
 	}
 
-	public Integer getAmountReceived() {
+	public Long getAmountReceived() {
 		return amountReceived;
 	}
 
-	public void setAmountReceived(Integer amountReceived) {
+	public void setAmountReceived(Long amountReceived) {
 		this.amountReceived = amountReceived;
 	}
 
-	public Integer getBitcoinAmount() {
+	public Long getBitcoinAmount() {
 		return bitcoinAmount;
 	}
 
-	public void setBitcoinAmount(Integer bitcoinAmount) {
+	public void setBitcoinAmount(Long bitcoinAmount) {
 		this.bitcoinAmount = bitcoinAmount;
 	}
 
-	public Integer getBitcoinAmountReceived() {
+	public Long getBitcoinAmountReceived() {
 		return bitcoinAmountReceived;
 	}
 
-	public void setBitcoinAmountReceived(Integer bitcoinAmountReceived) {
+	public void setBitcoinAmountReceived(Long bitcoinAmountReceived) {
 		this.bitcoinAmountReceived = bitcoinAmountReceived;
 	}
 

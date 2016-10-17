@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class InvoiceItem extends APIResource implements MetadataStore<InvoiceItem>, HasId {
 	String id;
-	Integer amount;
+	Long amount;
 	String currency;
 	String customer;
 	Long date;
@@ -35,11 +35,11 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
 		this.id = id;
 	}
 
-	public Integer getAmount() {
+	public Long getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Integer amount) {
+	public void setAmount(Long amount) {
 		this.amount = amount;
 	}
 

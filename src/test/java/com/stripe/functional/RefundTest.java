@@ -69,7 +69,7 @@ public class RefundTest extends BaseStripeFunctionalTest {
     public void testChargePartialRefund() throws StripeException {
         Charge createdCharge = Charge.create(defaultChargeParams);
         Map<String, Object> refundParams = new HashMap<String, Object>();
-        final Integer REFUND_AMOUNT = 50;
+        final Long REFUND_AMOUNT = 50l;
         refundParams.put("amount", REFUND_AMOUNT);
         Charge refundedCharge = createdCharge.refund(refundParams);
         assertFalse(refundedCharge.getRefunded());

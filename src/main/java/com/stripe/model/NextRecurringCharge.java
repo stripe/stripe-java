@@ -1,14 +1,14 @@
 package com.stripe.model;
 
 public class NextRecurringCharge extends StripeObject {
-	Integer amount;
+	Long amount;
 	String date;
 	
-	public Integer getAmount() {
+	public Long getAmount() {
 		return amount;
 	}
 	
-	public void setAmount(Integer amount) {
+	public void setAmount(Long amount) {
 		this.amount = amount;
 	}
 	

@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class Reversal extends APIResource implements MetadataStore<Transfer>, HasId {
 	String id;
-	Integer amount;
+	Long amount;
 	String balanceTransaction;
 	Long created;
 	String currency;
@@ -23,11 +23,11 @@ public class Reversal extends APIResource implements MetadataStore<Transfer>, Ha
 		return id;
 	}
 
-	public Integer getAmount() {
+	public Long getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Integer amount) {
+	public void setAmount(Long amount) {
 		this.amount = amount;
 	}
 

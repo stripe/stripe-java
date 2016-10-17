@@ -14,8 +14,8 @@ import java.util.Map;
 
 public class BitcoinTransaction extends APIResource implements HasId {
 	String id;
-	Integer amount;
-	Integer bitcoinAmount;
+	Long amount;
+	Long bitcoinAmount;
 	Long created;
 	String currency;
 	String customer;
@@ -29,19 +29,19 @@ public class BitcoinTransaction extends APIResource implements HasId {
 		this.id = id;
 	}
 
-	public Integer getAmount() {
+	public Long getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Integer amount) {
+	public void setAmount(Long amount) {
 		this.amount = amount;
 	}
 
-	public Integer getBitcoinAmount() {
+	public Long getBitcoinAmount() {
 		return bitcoinAmount;
 	}
 
-	public void setBitcoinAmount(Integer bitcoinAmount) {
+	public void setBitcoinAmount(Long bitcoinAmount) {
 		this.bitcoinAmount = bitcoinAmount;
 	}
 

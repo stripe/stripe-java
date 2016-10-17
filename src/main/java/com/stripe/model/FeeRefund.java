@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class FeeRefund extends APIResource implements MetadataStore<ApplicationFee>, HasId {
 	String id;
-	Integer amount;
+	Long amount;
 	String balanceTransaction;
 	String currency;
 	Long created;
@@ -23,11 +23,11 @@ public class FeeRefund extends APIResource implements MetadataStore<ApplicationF
 		return id;
 	}
 
-	public Integer getAmount() {
+	public Long getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Integer amount) {
+	public void setAmount(Long amount) {
 		this.amount = amount;
 	}
 

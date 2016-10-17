@@ -15,7 +15,7 @@ import java.util.Map;
 
 public class ThreeDSecure extends APIResource implements HasId {
 	String id;
-	Integer amount;
+	Long amount;
 	Boolean authenticated;
 	Card card;
 	Long created;
@@ -33,11 +33,11 @@ public class ThreeDSecure extends APIResource implements HasId {
 		this.id = id;
 	}
 
-	public Integer getAmount() {
+	public Long getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Integer amount) {
+	public void setAmount(Long amount) {
 		this.amount = amount;
 	}
 

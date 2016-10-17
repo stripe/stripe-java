@@ -2,7 +2,7 @@ package com.stripe.model;
 
 public class ShippingMethod extends StripeObject {
 	String id;
-	Integer amount;
+	Long amount;
 	String currency;
 	String description;
 
@@ -14,11 +14,11 @@ public class ShippingMethod extends StripeObject {
 		this.id = id;
 	}
 
-	public Integer getAmount() {
+	public Long getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Integer amount) {
+	public void setAmount(Long amount) {
 		this.amount = amount;
 	}
 

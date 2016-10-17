@@ -13,7 +13,7 @@ import com.stripe.net.RequestOptions;
 
 public class OrderReturn extends APIResource implements HasId {
 	String id;
-	Integer amount;
+	Long amount;
 	Long created;
 	String currency;
 	List<OrderItem> items;
@@ -29,11 +29,11 @@ public class OrderReturn extends APIResource implements HasId {
 		this.id = id;
 	}
 
-	public Integer getAmount() {
+	public Long getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Integer amount) {
+	public void setAmount(Long amount) {
 		this.amount = amount;
 	}
 

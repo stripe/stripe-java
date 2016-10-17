@@ -11,7 +11,7 @@ import java.io.IOException;
 import java.util.Map;
 
 public class Source extends ExternalAccount {
-	Integer amount;
+	Long amount;
 	String clientSecret;
 	Long created;
 	String currency;
@@ -30,11 +30,11 @@ public class Source extends ExternalAccount {
 	// Type-specific properties
 	Map<String, String> typeData;
 
-	public Integer getAmount() {
+	public Long getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Integer amount) {
+	public void setAmount(Long amount) {
 		this.amount = amount;
 	}
 

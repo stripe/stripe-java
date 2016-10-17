@@ -13,7 +13,7 @@ import java.util.Map;
 
 public class Dispute extends APIResource implements HasId {
 	String id;
-	Integer amount;
+	Long amount;
 	List<BalanceTransaction> balanceTransactions;
 	String charge;
 	Long created;
@@ -44,11 +44,11 @@ public class Dispute extends APIResource implements HasId {
 		this.id = id;
 	}
 
-	public Integer getAmount() {
+	public Long getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Integer amount) {
+	public void setAmount(Long amount) {
 		this.amount = amount;
 	}
 

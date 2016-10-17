@@ -3,17 +3,17 @@ package com.stripe.model;
 import com.stripe.net.APIResource;
 
 public class Fee extends APIResource {
-	Integer amount;
+	Long amount;
 	String application;
 	String currency;
 	String description;
 	String type;
 
-	public Integer getAmount() {
+	public Long getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Integer amount) {
+	public void setAmount(Long amount) {
 		this.amount = amount;
 	}
 
