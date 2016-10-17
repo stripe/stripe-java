@@ -4,7 +4,7 @@ import java.util.Map;
 
 public class InvoiceLineItem extends StripeObject implements HasId {
 	String id;
-	Integer amount;
+	Long amount;
 	String currency;
 	String description;
 	Boolean discountable;
@@ -21,7 +21,7 @@ public class InvoiceLineItem extends StripeObject implements HasId {
 		return this.id;
 	}
 
-	public Integer getAmount() {
+	public Long getAmount() {
 		return this.amount;
 	}
 
