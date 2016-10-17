@@ -15,8 +15,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	public static final String FRAUD_DETAILS = "fraud_details";
 
 	String id;
-	Integer amount;
-	Integer amountRefunded;
+	Long amount;
+	Long amountRefunded;
 	String applicationFee;
 	String balanceTransaction;
 	Boolean captured;
@@ -62,19 +62,19 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 		this.id = id;
 	}
 
-	public Integer getAmount() {
+	public Long getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Integer amount) {
+	public void setAmount(Long amount) {
 		this.amount = amount;
 	}
 
-	public Integer getAmountRefunded() {
+	public Long getAmountRefunded() {
 		return amountRefunded;
 	}
 
-	public void setAmountRefunded(Integer amountRefunded) {
+	public void setAmountRefunded(Long amountRefunded) {
 		this.amountRefunded = amountRefunded;
 	}
 

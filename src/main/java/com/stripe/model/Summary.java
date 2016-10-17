@@ -2,16 +2,16 @@ package com.stripe.model;
 
 public class Summary extends StripeObject {
 	Integer adjustmentCount;
-	Integer adjustmentGross;
+	Long adjustmentGross;
 	Integer chargeCount;
-	Integer chargeFees;
-	Integer chargeGross;
-	Integer net;
+	Long chargeFees;
+	Long chargeGross;
+	Long net;
 	Integer refundCount;
-	Integer refundFees;
-	Integer refundGross;
+	Long refundFees;
+	Long refundGross;
 	Integer validationCount;
-	Integer validationFees;
+	Long validationFees;
 
 	public Integer getAdjustmentCount() {
 		return adjustmentCount;
@@ -21,11 +21,11 @@ public class Summary extends StripeObject {
 		this.adjustmentCount = adjustmentCount;
 	}
 
-	public Integer getAdjustmentGross() {
+	public Long getAdjustmentGross() {
 		return adjustmentGross;
 	}
 
-	public void setAdjustmentGross(Integer adjustmentGross) {
+	public void setAdjustmentGross(Long adjustmentGross) {
 		this.adjustmentGross = adjustmentGross;
 	}
 
@@ -37,27 +37,27 @@ public class Summary extends StripeObject {
 		this.chargeCount = chargeCount;
 	}
 
-	public Integer getChargeFees() {
+	public Long getChargeFees() {
 		return chargeFees;
 	}
 
-	public void setChargeFees(Integer chargeFees) {
+	public void setChargeFees(Long chargeFees) {
 		this.chargeFees = chargeFees;
 	}
 
-	public Integer getChargeGross() {
+	public Long getChargeGross() {
 		return chargeGross;
 	}
 
-	public void setChargeGross(Integer chargeGross) {
+	public void setChargeGross(Long chargeGross) {
 		this.chargeGross = chargeGross;
 	}
 
-	public Integer getNet() {
+	public Long getNet() {
 		return net;
 	}
 
-	public void set(Integer net) {
+	public void set(Long net) {
 		this.net = net;
 	}
 
@@ -69,19 +69,19 @@ public class Summary extends StripeObject {
 		this.refundCount = refundCount;
 	}
 
-	public Integer getRefundFees() {
+	public Long getRefundFees() {
 		return refundFees;
 	}
 
-	public void setRefundFees(Integer refundFees) {
+	public void setRefundFees(Long refundFees) {
 		this.refundFees = refundFees;
 	}
 
-	public Integer getRefundGross() {
+	public Long getRefundGross() {
 		return refundGross;
 	}
 
-	public void setRefundGross(Integer refundGross) {
+	public void setRefundGross(Long refundGross) {
 		this.refundGross = refundGross;
 	}
 
@@ -93,11 +93,11 @@ public class Summary extends StripeObject {
 		this.validationCount = validationCount;
 	}
 
-	public Integer getValidationFees() {
+	public Long getValidationFees() {
 		return validationFees;
 	}
 
-	public void setValidationFees(Integer validationFees) {
+	public void setValidationFees(Long validationFees) {
 		this.validationFees = validationFees;
 	}
 }

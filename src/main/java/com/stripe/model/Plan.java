@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
 	String id;
-	Integer amount;
+	Long amount;
 	Long created;
 	String currency;
 	String interval;
@@ -34,11 +34,11 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
 		this.id = id;
 	}
 
-	public Integer getAmount() {
+	public Long getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Integer amount) {
+	public void setAmount(Long amount) {
 		this.amount = amount;
 	}
 

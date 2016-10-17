@@ -1,18 +1,18 @@
 package com.stripe.model;
 
 public class OrderItem extends StripeObject {
-	Integer amount;
+	Long amount;
 	String currency;
 	String description;
 	String parent;
 	Integer quantity;
 	String type;
 
-	public Integer getAmount() {
+	public Long getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Integer amount) {
+	public void setAmount(Long amount) {
 		this.amount = amount;
 	}
 

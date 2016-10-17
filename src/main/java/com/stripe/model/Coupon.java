@@ -12,7 +12,7 @@ import java.util.Map;
 
 public class Coupon extends APIResource implements MetadataStore<Coupon>, HasId {
 	String id;
-	Integer amountOff;
+	Long amountOff;
 	Long created;
 	String currency;
 	String duration;
@@ -33,11 +33,11 @@ public class Coupon extends APIResource implements MetadataStore<Coupon>, HasId 
 		this.id = id;
 	}
 
-	public Integer getAmountOff() {
+	public Long getAmountOff() {
 		return amountOff;
 	}
 
-	public void setAmountOff(Integer amountOff) {
+	public void setAmountOff(Long amountOff) {
 		this.amountOff = amountOff;
 	}
 

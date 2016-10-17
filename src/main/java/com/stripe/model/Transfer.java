@@ -13,8 +13,8 @@ import java.util.Map;
 
 public class Transfer extends APIResource implements MetadataStore<Transfer>, HasId {
 	String id;
-	Integer amount;
-	Integer amountReversed;
+	Long amount;
+	Long amountReversed;
 	String applicationFee;
 	String balanceTransaction;
 	BankAccount bankAccount;
@@ -55,19 +55,19 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 		this.id = id;
 	}
 
-	public Integer getAmount() {
+	public Long getAmount() {
 		return amount;
 	}
 
-	public void setAmount(Integer amount) {
+	public void setAmount(Long amount) {
 		this.amount = amount;
 	}
 
-	public Integer getAmountReversed() {
+	public Long getAmountReversed() {
 		return amountReversed;
 	}
 
-	public void setAmountReversed(Integer amountReversed) {
+	public void setAmountReversed(Long amountReversed) {
 		this.amountReversed = amountReversed;
 	}
 
