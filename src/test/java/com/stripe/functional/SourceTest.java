@@ -36,7 +36,7 @@ public class SourceTest extends BaseStripeFunctionalTest {
         // here. The plan is to type-check these once any method makes
         // it to public beta. For now, unfortunately, the user will have
         // to actually cast the data to what they want.
-        assertEquals(0, Integer.parseInt(created.getTypeData().get("amount_charged")));
+        assertEquals(0, Long.parseLong(created.getTypeData().get("amount_charged")));
 
         Source retrieved = Source.retrieve(created.getId(), sourceRequestOptions);
         assertEquals(created.getId(), retrieved.getId());
