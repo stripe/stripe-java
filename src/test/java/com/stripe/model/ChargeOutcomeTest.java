@@ -17,6 +17,7 @@ public class ChargeOutcomeTest extends BaseStripeTest {
 		ChargeOutcome outcome = APIResource.GSON.fromJson(json, ChargeOutcome.class);
 
 		assertEquals("approved_by_network", outcome.getNetworkStatus());
+		assertEquals("normal", outcome.getRiskLevel());
 		assertEquals(null, outcome.getReason());
 		assertEquals("Payment complete.", outcome.getSellerMessage());
 		assertEquals("authorized", outcome.getType());

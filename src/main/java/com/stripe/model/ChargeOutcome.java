@@ -3,6 +3,7 @@ package com.stripe.model;
 public class ChargeOutcome extends StripeObject {
 	protected String networkStatus;
 	protected String reason;
+	protected String riskLevel;
 	protected String sellerMessage;
 	protected String type;
 
@@ -12,6 +13,10 @@ public class ChargeOutcome extends StripeObject {
 
 	public String getReason() {
 		return reason;
+	}
+
+	public String getRiskLevel() {
+		return riskLevel;
 	}
 
 	public String getSellerMessage() {
@@ -24,6 +29,10 @@ public class ChargeOutcome extends StripeObject {
 
 	public void setNetworkStatus(String networkStatus) {
 		this.networkStatus = networkStatus;
+	}
+
+	public void setRiskLevel(String riskLevel) {
+		this.riskLevel = riskLevel;
 	}
 
 	public void setReason(String reason) {
