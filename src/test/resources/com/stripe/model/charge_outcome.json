@@ -1,6 +1,7 @@
 {
     "network_status": "approved_by_network",
     "reason": null,
+    "risk_level": "normal",
     "seller_message": "Payment complete.",
     "type": "authorized"
 }
