@@ -39,6 +39,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	String receiptNumber;
 	Boolean refunded;
 	ChargeRefundCollection refunds;
+	String review;
 	ShippingDetails shipping;
 	ExternalAccount source;
 	String sourceTransfer;
@@ -244,6 +245,14 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 
 	public void setRefunded(Boolean refunded) {
 		this.refunded = refunded;
+	}
+
+	public String getReview() {
+		return review;
+	}
+
+	public void setReview(String review) {
+		this.review = review;
 	}
 
 	public ChargeRefundCollection getRefunds() {
