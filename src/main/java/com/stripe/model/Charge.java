@@ -39,7 +39,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	String receiptNumber;
 	Boolean refunded;
 	ChargeRefundCollection refunds;
-	String review;
+	ExpandableField<Review> review;
 	ShippingDetails shipping;
 	ExternalAccount source;
 	String sourceTransfer;
@@ -247,11 +247,11 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 		this.refunded = refunded;
 	}
 
-	public String getReview() {
+	public ExpandableField<Review> getReview() {
 		return review;
 	}
 
-	public void setReview(String review) {
+	public void setReview(ExpandableField<Review> review) {
 		this.review = review;
 	}
 
