@@ -1,26 +1,29 @@
 package com.stripe.model;
 
 import com.google.gson.*;
-
+import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 public class ExpandableFieldDeserializer implements JsonDeserializer<ExpandableField> {
-    public ExpandableField<Type> deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+    public ExpandableField deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
         Gson gson = new GsonBuilder()
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                 .create();
+
+        //We need to get the actual parameterized type inside ExpandableField:
+        Type clazz = ((ParameterizedType) typeOfT).getActualTypeArguments()[0];
 
         if (json.isJsonNull()) {
             return null;
         }
 
-        ExpandableField<Type> expandableField;
+        ExpandableField expandableField;
 
         // Check if json is a String ID:
         if (json.isJsonPrimitive()) {
             JsonPrimitive jsonPrimitive = json.getAsJsonPrimitive();
             if (jsonPrimitive.isString()) {
-                expandableField = new ExpandableField<Type>(jsonPrimitive.getAsString(), null);
+                expandableField = new ExpandableField(jsonPrimitive.getAsString(), null);
                 return expandableField;
             }
             else {
@@ -33,8 +36,7 @@ public class ExpandableFieldDeserializer implements JsonDeserializer<ExpandableF
             JsonObject fieldAsJsonObject = json.getAsJsonObject();
             String id = fieldAsJsonObject.getAsJsonPrimitive("id").getAsString();
             // Create the expanded object
-            Type parsedData = gson.fromJson(json, typeOfT);
-            expandableField = new ExpandableField<Type>(id, parsedData);
+            expandableField = new ExpandableField(id, gson.fromJson(json, clazz));
             return expandableField;
         }
 
