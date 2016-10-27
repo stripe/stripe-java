@@ -9,6 +9,7 @@ import com.stripe.model.Address;
 import com.stripe.model.Card;
 import com.stripe.model.Charge;
 import com.stripe.model.ShippingDetails;
+import com.stripe.net.RequestOptions;
 import org.junit.Test;
 import java.util.*;
 import com.stripe.BaseStripeFunctionalTest;
@@ -22,6 +23,19 @@ public class ChargeTest extends BaseStripeFunctionalTest {
     public void testChargeCreate() throws StripeException {
         Charge createdCharge = Charge.create(defaultChargeParams);
         assertFalse(createdCharge.getRefunded());
+    }
+
+    @Test
+    public void testChargeCreateExpandBT() throws StripeException {
+        String[] expand = new String[]{"balance_transaction"};
+        Map<String, Object> params = defaultChargeParams;
+        params.put("expand[]", "balance_transaction");
+        Charge createdCharge = Charge.create(params);
+        assertFalse(createdCharge.getRefunded());
+
+        //Check expanded BT
+        assertTrue(createdCharge.getBalanceTransactionExpandable().isExpanded());
+        assertEquals(createdCharge.getBalanceTransactionExpandable().getID(), createdCharge.getBalanceTransaction());
     }
 
     @Test
@@ -67,6 +81,25 @@ public class ChargeTest extends BaseStripeFunctionalTest {
         assertEquals("card", retrievedCharge.getSource().getObject());
         Card card = (Card) retrievedCharge.getSource();
         assertEquals(defaultCardParams.get("address_city"), card.getAddressCity());
+        //BT Checks:
+        assertEquals(retrievedCharge.getBalanceTransactionExpandable().getID(), retrievedCharge.getBalanceTransaction());
+        assertFalse(retrievedCharge.getBalanceTransactionExpandable().isExpanded());
+    }
+
+    @Test
+    public void testChargeRetrieveWithBalanceTransaction() throws StripeException {
+        Charge createdCharge = Charge.create(defaultChargeParams);
+        Map<String, Object> retrieveParams = new HashMap<String, Object>();
+        retrieveParams.put("expand[]", "balance_transaction");
+        Charge retrievedCharge = Charge.retrieve(createdCharge.getId(), retrieveParams, supportedRequestOptions);
+
+        //Check basics
+        assertEquals(createdCharge.getCreated(), retrievedCharge.getCreated());
+        assertEquals(createdCharge.getId(), retrievedCharge.getId());
+
+        //Check expanded BT
+        assertTrue(createdCharge.getBalanceTransactionExpandable().isExpanded());
+        assertEquals(createdCharge.getBalanceTransactionExpandable().getID(), createdCharge.getBalanceTransaction());
     }
 
     @Test

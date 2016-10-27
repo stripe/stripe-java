@@ -16,8 +16,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	String id;
 	Long amount;
 	Long amountRefunded;
-	String applicationFee;
-	String balanceTransaction;
+	ExpandableField<ApplicationFee> applicationFee;
+	ExpandableField<BalanceTransaction> balanceTransaction;
 	Boolean captured;
 	Long created;
 	String currency;
@@ -78,19 +78,33 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public String getApplicationFee() {
-		return applicationFee;
+		return this.applicationFee.getID();
 	}
 
-	public void setApplicationFee(String applicationFee) {
-		this.applicationFee = applicationFee;
+	public void setApplicationFee(String applicationFeeID) {
+		this.applicationFee.setID(applicationFeeID);
+	}
+
+	public ExpandableField<ApplicationFee> getApplicationFeeExpandable() { return applicationFee; }
+
+	public void setApplicationFeeExpandable(ApplicationFee applicationFee) {
+
+		this.applicationFee = new ExpandableField<ApplicationFee>(applicationFee.getId(), applicationFee);
 	}
 
 	public String getBalanceTransaction() {
-		return balanceTransaction;
+		return this.balanceTransaction.getID();
 	}
 
-	public void setBalanceTransaction(String balanceTransaction) {
-		this.balanceTransaction = balanceTransaction;
+	public void setBalanceTransaction(String balanceTransactionID) {
+		this.balanceTransaction.setID(balanceTransactionID);
+	}
+
+	public ExpandableField<BalanceTransaction> getBalanceTransactionExpandable() { return balanceTransaction; }
+
+	public void setBalanceTransactionExpandable(BalanceTransaction balanceTransaction) {
+
+		this.balanceTransaction = new ExpandableField<BalanceTransaction>(balanceTransaction.getId(), balanceTransaction);
 	}
 
 	public Boolean getCaptured() {
@@ -434,6 +448,12 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.GET, instanceURL(Charge.class, id), null, Charge.class, options);
+	}
+
+	public static Charge retrieve(String id, Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, instanceURL(Charge.class, id), params, Charge.class, options);
 	}
 
 	@Deprecated
