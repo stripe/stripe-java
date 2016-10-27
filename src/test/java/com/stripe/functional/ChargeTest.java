@@ -9,7 +9,6 @@ import com.stripe.model.Address;
 import com.stripe.model.Card;
 import com.stripe.model.Charge;
 import com.stripe.model.ShippingDetails;
-import com.stripe.net.RequestOptions;
 import org.junit.Test;
 import java.util.*;
 import com.stripe.BaseStripeFunctionalTest;
@@ -94,12 +93,12 @@ public class ChargeTest extends BaseStripeFunctionalTest {
         Charge retrievedCharge = Charge.retrieve(createdCharge.getId(), retrieveParams, supportedRequestOptions);
 
         //Check basics
-        assertEquals(createdCharge.getCreated(), retrievedCharge.getCreated());
-        assertEquals(createdCharge.getId(), retrievedCharge.getId());
+        assertEquals(retrievedCharge.getCreated(), retrievedCharge.getCreated());
+        assertEquals(retrievedCharge.getId(), retrievedCharge.getId());
 
         //Check expanded BT
-        assertTrue(createdCharge.getBalanceTransactionExpandable().isExpanded());
-        assertEquals(createdCharge.getBalanceTransactionExpandable().getID(), createdCharge.getBalanceTransaction());
+        assertTrue(retrievedCharge.getBalanceTransactionExpandable().isExpanded());
+        assertEquals(retrievedCharge.getBalanceTransactionExpandable().getID(), createdCharge.getBalanceTransaction());
     }
 
     @Test
@@ -203,6 +202,19 @@ public class ChargeTest extends BaseStripeFunctionalTest {
         listParams.put("count", 1);
         List<Charge> charges = Charge.all(listParams).getData();
         assertEquals(charges.size(), 1);
+    }
+
+    @Test
+    public void testChargeListExpandBT() throws StripeException {
+        Map<String, Object> listParams = new HashMap<String, Object>();
+        listParams.put("count", 1);
+        listParams.put("expand[]", "data.balance_transaction");
+        List<Charge> charges = Charge.list(listParams).getData();
+        assertEquals(charges.size(), 1);
+        //Check expanded BT
+        Charge c = charges.get(0);
+        assertTrue(c.getBalanceTransactionExpandable().isExpanded());
+        assertEquals(c.getBalanceTransactionExpandable().getID(), c.getBalanceTransaction());
     }
 
     @Test
