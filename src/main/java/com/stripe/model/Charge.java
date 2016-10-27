@@ -23,16 +23,16 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	String currency;
 	ExpandableField<Customer> customer;
 	String description;
-	String destination; //exp account
+	ExpandableField<Account> destination;
 	Dispute dispute;
 	String failureCode;
 	String failureMessage;
 	FraudDetails fraudDetails;
-	String invoice; //exp invoice
+	ExpandableField<Invoice> invoice;
 	Boolean livemode;
 	Map<String, String> metadata;
 	ChargeOutcome outcome;
-	String order; //exp Order
+	ExpandableField<Order> order;
 	Boolean paid;
 	String receiptEmail;
 	String receiptNumber;
@@ -40,10 +40,10 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	ChargeRefundCollection refunds;
 	ShippingDetails shipping;
 	ExternalAccount source;
-	String sourceTransfer; //exp Transfer
+	ExpandableField<Transfer> sourceTransfer;
 	String statementDescriptor;
 	String status;
-	String transfer; //exp Transfer
+	ExpandableField<Transfer> transfer;
 
 	@Deprecated
 	Card card;
@@ -185,11 +185,28 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public String getDestination() {
-		return destination;
+		if (this.destination==null) {
+			return null;
+		}
+		return this.destination.getId();
 	}
 
-	public void setDestination(String destination) {
-		this.destination = destination;
+	public void setDestination(String destinationID) {
+		if (this.destination==null || (this.destination.isExpanded() && (this.destination.getExpanded().getId() != destinationID))) {
+			this.destination = new ExpandableField<Account>(destinationID, null);
+		}
+		this.destination.setId(destinationID);
+	}
+
+	public Account getDestinationObject() {
+		if (this.destination==null) {
+			return null;
+		}
+		return this.destination.getExpanded();
+	}
+
+	public void setDestinationObject(Account c) {
+		this.destination = new ExpandableField<Account>(c.getId(), c);
 	}
 
 	public Dispute getDispute() {
@@ -225,11 +242,28 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public String getInvoice() {
-		return invoice;
+		if (this.invoice==null) {
+			return null;
+		}
+		return this.invoice.getId();
 	}
 
-	public void setInvoice(String invoice) {
-		this.invoice = invoice;
+	public void setInvoice(String invoiceID) {
+		if (this.invoice==null || (this.invoice.isExpanded() && (this.invoice.getExpanded().getId() != invoiceID))) {
+			this.invoice = new ExpandableField<Invoice>(invoiceID, null);
+		}
+		this.invoice.setId(invoiceID);
+	}
+
+	public Invoice getInvoiceObject() {
+		if (this.invoice==null) {
+			return null;
+		}
+		return this.invoice.getExpanded();
+	}
+
+	public void setInvoiceObject(Invoice c) {
+		this.invoice = new ExpandableField<Invoice>(c.getId(), c);
 	}
 
 	public Boolean getLivemode() {
@@ -249,11 +283,28 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public String getOrder() {
-		return order;
+		if (this.order==null) {
+			return null;
+		}
+		return this.order.getId();
 	}
 
-	public void setOrder(String order) {
-		this.order = order;
+	public void setOrder(String orderID) {
+		if (this.order==null || (this.order.isExpanded() && (this.order.getExpanded().getId() != orderID))) {
+			this.order = new ExpandableField<Order>(orderID, null);
+		}
+		this.order.setId(orderID);
+	}
+
+	public Order getOrderObject() {
+		if (this.order==null) {
+			return null;
+		}
+		return this.order.getExpanded();
+	}
+
+	public void setOrderObject(Order c) {
+		this.order = new ExpandableField<Order>(c.getId(), c);
 	}
 
 	public ChargeOutcome getOutcome() {
@@ -322,11 +373,28 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public String getSourceTransfer() {
-		return sourceTransfer;
+		if (this.sourceTransfer==null) {
+			return null;
+		}
+		return this.sourceTransfer.getId();
 	}
 
-	public void setSourceTransfer(String sourceTransfer) {
-		this.sourceTransfer = sourceTransfer;
+	public void setSourceTransfer(String sourceTransferID) {
+		if (this.sourceTransfer==null || (this.sourceTransfer.isExpanded() && (this.sourceTransfer.getExpanded().getId() != sourceTransferID))) {
+			this.sourceTransfer = new ExpandableField<Transfer>(sourceTransferID, null);
+		}
+		this.sourceTransfer.setId(sourceTransferID);
+	}
+
+	public Transfer getSourceTransferObject() {
+		if (this.sourceTransfer==null) {
+			return null;
+		}
+		return this.sourceTransfer.getExpanded();
+	}
+
+	public void setSourceTransferObject(Transfer c) {
+		this.sourceTransfer = new ExpandableField<Transfer>(c.getId(), c);
 	}
 
 	public String getStatementDescriptor() {
@@ -346,11 +414,28 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public String getTransfer() {
-		return transfer;
+		if (this.transfer==null) {
+			return null;
+		}
+		return this.transfer.getId();
 	}
 
-	public void setTransfer(String transfer) {
-		this.transfer = transfer;
+	public void setTransfer(String transferID) {
+		if (this.transfer==null || (this.transfer.isExpanded() && (this.transfer.getExpanded().getId() != transferID))) {
+			this.transfer = new ExpandableField<Transfer>(transferID, null);
+		}
+		this.transfer.setId(transferID);
+	}
+
+	public Transfer getTransferObject() {
+		if (this.transfer==null) {
+			return null;
+		}
+		return this.transfer.getExpanded();
+	}
+
+	public void setTransferObject(Transfer c) {
+		this.transfer = new ExpandableField<Transfer>(c.getId(), c);
 	}
 
 	/**
