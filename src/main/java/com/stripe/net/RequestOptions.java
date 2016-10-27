@@ -4,19 +4,21 @@ import com.stripe.Stripe;
 
 public class RequestOptions {
 	public static RequestOptions getDefault() {
-		return new RequestOptions(Stripe.apiKey, Stripe.apiVersion, null, null);
+		return new RequestOptions(Stripe.apiKey, Stripe.apiVersion, null, null, null);
 	}
 
 	private final String apiKey;
 	private final String stripeVersion;
 	private final String idempotencyKey;
 	private final String stripeAccount;
+	private String[] expand;
 
-	private RequestOptions(String apiKey, String stripeVersion, String idempotencyKey, String stripeAccount) {
+	private RequestOptions(String apiKey, String stripeVersion, String idempotencyKey, String stripeAccount, String[] expand) {
 		this.apiKey = apiKey;
 		this.stripeVersion = stripeVersion;
 		this.idempotencyKey = idempotencyKey;
 		this.stripeAccount = stripeAccount;
+		this.expand = expand;
 	}
 
 	public String getApiKey() {
@@ -76,6 +78,7 @@ public class RequestOptions {
 		private String stripeVersion;
 		private String idempotencyKey;
 		private String stripeAccount;
+		private String[] expand;
 
 		public RequestOptionsBuilder() {
 			this.apiKey = Stripe.apiKey;
@@ -116,6 +119,16 @@ public class RequestOptions {
 			return this;
 		}
 
+		public RequestOptionsBuilder setExpand(String[] expand) {
+			this.expand = expand;
+			return this;
+		}
+
+		public RequestOptionsBuilder clearExpand() {
+			this.expand = null;
+			return this;
+		}
+
 		public String getIdempotencyKey() {
 			return this.idempotencyKey;
 		}
@@ -138,7 +151,8 @@ public class RequestOptions {
 				normalizeApiKey(this.apiKey),
 				normalizeStripeVersion(this.stripeVersion),
 				normalizeIdempotencyKey(this.idempotencyKey),
-				normalizeStripeAccount(this.stripeAccount));
+				normalizeStripeAccount(this.stripeAccount),
+				this.expand);
 		}
 	}
 
