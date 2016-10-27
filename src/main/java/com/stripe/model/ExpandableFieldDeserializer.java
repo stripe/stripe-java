@@ -10,9 +10,6 @@ public class ExpandableFieldDeserializer implements JsonDeserializer<ExpandableF
                 .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
                 .create();
 
-        //We need to get the actual parameterized type inside ExpandableField:
-        Type clazz = ((ParameterizedType) typeOfT).getActualTypeArguments()[0];
-
         if (json.isJsonNull()) {
             return null;
         }
@@ -35,7 +32,9 @@ public class ExpandableFieldDeserializer implements JsonDeserializer<ExpandableF
             // Get the `id` out of the response
             JsonObject fieldAsJsonObject = json.getAsJsonObject();
             String id = fieldAsJsonObject.getAsJsonPrimitive("id").getAsString();
-            // Create the expanded object
+            // We need to get the type inside the generic ExpandableField to make sure fromJson correctly serializes
+            // the JsonObject:
+            Type clazz = ((ParameterizedType) typeOfT).getActualTypeArguments()[0];
             expandableField = new ExpandableField(id, gson.fromJson(json, clazz));
             return expandableField;
         }

@@ -1,17 +1,16 @@
 package com.stripe.model;
 
-//TODO: Should this extend StripeObject?
 public class ExpandableField<T> {
     private String id;
-    private T expansion;
+    private T expandedObject;
 
-    public ExpandableField (String idString, T expandedField) {
-        id = idString;
-        expansion = expandedField;
+    public ExpandableField (String id, T expandedObject) {
+        this.id = id;
+        this.expandedObject = expandedObject;
     }
 
     public boolean isExpanded() {
-        if (expansion==null) {
+        if (expandedObject==null) {
             return false;
         }
         return true;
@@ -21,9 +20,16 @@ public class ExpandableField<T> {
         return id;
     }
 
-    public T getExpansion() {
-        return expansion;
+    public void setID(String id) {
+        this.id = id;
     }
 
-    //TODO: Should we have our own equals here?
+
+    public T getExpanded() {
+        return expandedObject;
+    }
+
+    public void setExpanded(T expandedObject) {
+        this.expandedObject = expandedObject;
+    }
 }

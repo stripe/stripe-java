@@ -7,7 +7,6 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
-
 import java.util.Collections;
 import java.util.Map;
 
@@ -247,12 +246,18 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 		this.refunded = refunded;
 	}
 
-	public ExpandableField<Review> getReview() {
-		return review;
+	public String getReview() {
+		return getReviewExpandable().getID();
 	}
 
-	public void setReview(ExpandableField<Review> review) {
-		this.review = review;
+	public void setReview(String review) {
+		getReviewExpandable().setID(review);
+	}
+
+	public ExpandableField<Review> getReviewExpandable() { return review; }
+
+	public void setReviewExpandable(Review review) {
+		this.review = new ExpandableField<Review>(review.getId(), review);
 	}
 
 	public ChargeRefundCollection getRefunds() {
