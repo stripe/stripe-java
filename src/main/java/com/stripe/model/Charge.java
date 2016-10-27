@@ -38,7 +38,6 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	String receiptNumber;
 	Boolean refunded;
 	ChargeRefundCollection refunds;
-	ExpandableField<Review> review;
 	ShippingDetails shipping;
 	ExternalAccount source;
 	String sourceTransfer;
@@ -244,20 +243,6 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 
 	public void setRefunded(Boolean refunded) {
 		this.refunded = refunded;
-	}
-
-	public String getReview() {
-		return getReviewExpandable().getID();
-	}
-
-	public void setReview(String review) {
-		getReviewExpandable().setID(review);
-	}
-
-	public ExpandableField<Review> getReviewExpandable() { return review; }
-
-	public void setReviewExpandable(Review review) {
-		this.review = new ExpandableField<Review>(review.getId(), review);
 	}
 
 	public ChargeRefundCollection getRefunds() {
