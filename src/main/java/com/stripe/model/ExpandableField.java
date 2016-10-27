@@ -16,11 +16,11 @@ public class ExpandableField<T> {
         return true;
     }
 
-    public String getID() {
+    public String getId() {
         return id;
     }
 
-    public void setID(String id) {
+    public void setId(String id) {
         this.id = id;
     }
 

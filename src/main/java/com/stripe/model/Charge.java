@@ -21,18 +21,18 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	Boolean captured;
 	Long created;
 	String currency;
-	String customer;
+	ExpandableField<Customer> customer;
 	String description;
-	String destination;
+	String destination; //exp account
 	Dispute dispute;
 	String failureCode;
 	String failureMessage;
 	FraudDetails fraudDetails;
-	String invoice;
+	String invoice; //exp invoice
 	Boolean livemode;
 	Map<String, String> metadata;
 	ChargeOutcome outcome;
-	String order;
+	String order; //exp Order
 	Boolean paid;
 	String receiptEmail;
 	String receiptNumber;
@@ -40,10 +40,10 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	ChargeRefundCollection refunds;
 	ShippingDetails shipping;
 	ExternalAccount source;
-	String sourceTransfer;
+	String sourceTransfer; //exp Transfer
 	String statementDescriptor;
 	String status;
-	String transfer;
+	String transfer; //exp Transfer
 
 	@Deprecated
 	Card card;
@@ -78,33 +78,53 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public String getApplicationFee() {
-		return this.applicationFee.getID();
+		if (this.applicationFee==null) {
+			return null;
+		}
+		return this.applicationFee.getId();
 	}
 
 	public void setApplicationFee(String applicationFeeID) {
-		this.applicationFee.setID(applicationFeeID);
+		if (this.applicationFee==null || (this.applicationFee.isExpanded() && (this.applicationFee.getExpanded().getId() != applicationFeeID))) {
+			this.applicationFee = new ExpandableField<ApplicationFee>(applicationFeeID, null);
+		}
+		this.applicationFee.setId(applicationFeeID);
 	}
 
-	public ExpandableField<ApplicationFee> getApplicationFeeExpandable() { return applicationFee; }
+	public ApplicationFee getApplicationFeeObject() {
+		if (this.applicationFee==null) {
+			return null;
+		}
+		return this.applicationFee.getExpanded();
+	}
 
-	public void setApplicationFeeExpandable(ApplicationFee applicationFee) {
-
-		this.applicationFee = new ExpandableField<ApplicationFee>(applicationFee.getId(), applicationFee);
+	public void setApplicationFeeObject(ApplicationFee c) {
+		this.applicationFee = new ExpandableField<ApplicationFee>(c.getId(), c);
 	}
 
 	public String getBalanceTransaction() {
-		return this.balanceTransaction.getID();
+		if (this.balanceTransaction==null) {
+			return null;
+		}
+		return this.balanceTransaction.getId();
 	}
 
 	public void setBalanceTransaction(String balanceTransactionID) {
-		this.balanceTransaction.setID(balanceTransactionID);
+		if (this.balanceTransaction==null || (this.balanceTransaction.isExpanded() && (this.balanceTransaction.getExpanded().getId() != balanceTransactionID))) {
+			this.balanceTransaction = new ExpandableField<BalanceTransaction>(balanceTransactionID, null);
+		}
+		this.balanceTransaction.setId(balanceTransactionID);
 	}
 
-	public ExpandableField<BalanceTransaction> getBalanceTransactionExpandable() { return balanceTransaction; }
+	public BalanceTransaction getBalanceTransactionObject() {
+		if (this.balanceTransaction==null) {
+			return null;
+		}
+		return this.balanceTransaction.getExpanded();
+	}
 
-	public void setBalanceTransactionExpandable(BalanceTransaction balanceTransaction) {
-
-		this.balanceTransaction = new ExpandableField<BalanceTransaction>(balanceTransaction.getId(), balanceTransaction);
+	public void setBalanceTransactionObject(BalanceTransaction c) {
+		this.balanceTransaction = new ExpandableField<BalanceTransaction>(c.getId(), c);
 	}
 
 	public Boolean getCaptured() {
@@ -132,11 +152,28 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public String getCustomer() {
-		return customer;
+		if (this.customer==null) {
+			return null;
+		}
+		return this.customer.getId();
 	}
 
-	public void setCustomer(String customer) {
-		this.customer = customer;
+	public void setCustomer(String customerID) {
+		if (this.customer==null || (this.customer.isExpanded() && (this.customer.getExpanded().getId() != customerID))) {
+			this.customer = new ExpandableField<Customer>(customerID, null);
+		}
+		this.customer.setId(customerID);
+	}
+
+	public Customer getCustomerObject() {
+		if (this.customer==null) {
+			return null;
+		}
+		return this.customer.getExpanded();
+	}
+
+	public void setCustomerObject(Customer c) {
+		this.customer = new ExpandableField<Customer>(c.getId(), c);
 	}
 
 	public String getDescription() {

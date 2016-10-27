@@ -31,10 +31,8 @@ public class ChargeTest extends BaseStripeFunctionalTest {
         params.put("expand[]", "balance_transaction");
         Charge createdCharge = Charge.create(params);
         assertFalse(createdCharge.getRefunded());
-
         //Check expanded BT
-        assertTrue(createdCharge.getBalanceTransactionExpandable().isExpanded());
-        assertEquals(createdCharge.getBalanceTransactionExpandable().getID(), createdCharge.getBalanceTransaction());
+        assertEquals(createdCharge.getBalanceTransactionObject().getId(), createdCharge.getBalanceTransaction());
     }
 
     @Test
@@ -81,8 +79,8 @@ public class ChargeTest extends BaseStripeFunctionalTest {
         Card card = (Card) retrievedCharge.getSource();
         assertEquals(defaultCardParams.get("address_city"), card.getAddressCity());
         //BT Checks:
-        assertEquals(retrievedCharge.getBalanceTransactionExpandable().getID(), retrievedCharge.getBalanceTransaction());
-        assertFalse(retrievedCharge.getBalanceTransactionExpandable().isExpanded());
+        assertNotNull(retrievedCharge.getBalanceTransaction());
+        assertNull(retrievedCharge.getBalanceTransactionObject());
     }
 
     @Test
@@ -97,8 +95,7 @@ public class ChargeTest extends BaseStripeFunctionalTest {
         assertEquals(retrievedCharge.getId(), retrievedCharge.getId());
 
         //Check expanded BT
-        assertTrue(retrievedCharge.getBalanceTransactionExpandable().isExpanded());
-        assertEquals(retrievedCharge.getBalanceTransactionExpandable().getID(), createdCharge.getBalanceTransaction());
+        assertEquals(retrievedCharge.getBalanceTransactionObject().getId(), createdCharge.getBalanceTransaction());
     }
 
     @Test
@@ -213,8 +210,7 @@ public class ChargeTest extends BaseStripeFunctionalTest {
         assertEquals(charges.size(), 1);
         //Check expanded BT
         Charge c = charges.get(0);
-        assertTrue(c.getBalanceTransactionExpandable().isExpanded());
-        assertEquals(c.getBalanceTransactionExpandable().getID(), c.getBalanceTransaction());
+        assertEquals(c.getBalanceTransactionObject().getId(), c.getBalanceTransaction());
     }
 
     @Test

@@ -138,8 +138,7 @@ public class RequestOptions {
 				normalizeApiKey(this.apiKey),
 				normalizeStripeVersion(this.stripeVersion),
 				normalizeIdempotencyKey(this.idempotencyKey),
-				normalizeStripeAccount(this.stripeAccount)
-			);
+				normalizeStripeAccount(this.stripeAccount));
 		}
 	}
 
