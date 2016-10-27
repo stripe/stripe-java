@@ -42,6 +42,12 @@ public class ChargeTest extends BaseStripeTest {
         assertEquals(expandedCharge.getApplicationFee(), "fee_9RV1Zcr87rvr68");
         assertEquals(appFee.getId(), "fee_9RV1Zcr87rvr68");
         assertEquals((long) appFee.getAmount(), 111);
+        //Setters:
+        expandedCharge.setApplicationFee("newidhere");
+        assertEquals(expandedCharge.getApplicationFee(), "newidhere");
+        ApplicationFee newAppFee = new ApplicationFee();
+        expandedCharge.setApplicationFeeObject(newAppFee);
+        assertEquals(expandedCharge.getApplicationFeeObject(), newAppFee);
     }
 
     @Test
@@ -50,6 +56,12 @@ public class ChargeTest extends BaseStripeTest {
         assertEquals(expandedCharge.getBalanceTransaction(), "txn_18tjj22eZvKYlo2CeFxM3FxI");
         assertEquals(bt.getId(), "txn_18tjj22eZvKYlo2CeFxM3FxI");
         assertEquals((long) bt.getAmount(), 316);
+        //Setters:
+        expandedCharge.setBalanceTransaction("newidhere");
+        assertEquals(expandedCharge.getBalanceTransaction(), "newidhere");
+        BalanceTransaction newBT = new BalanceTransaction();
+        expandedCharge.setBalanceTransactionObject(newBT);
+        assertEquals(expandedCharge.getBalanceTransactionObject(), newBT);
     }
 
     @Test
@@ -58,6 +70,12 @@ public class ChargeTest extends BaseStripeTest {
         assertEquals(expandedCharge.getCustomer(), "cus_7K0ztY0WclKUdF");
         assertEquals(customer.getId(), "cus_7K0ztY0WclKUdF");
         assertEquals((long) customer.getCreated(), 1447103608);
+        //Setters:
+        expandedCharge.setCustomer("newidhere");
+        assertEquals(expandedCharge.getCustomer(), "newidhere");
+        Customer newCustomer = new Customer();
+        expandedCharge.setCustomerObject(newCustomer);
+        assertEquals(expandedCharge.getCustomerObject(), newCustomer);
     }
 
     @Test
@@ -67,6 +85,12 @@ public class ChargeTest extends BaseStripeTest {
         assertEquals(destination.getId(), "acct_102wRO2iMoKf4jyz");
         assertEquals(destination.getBusinessName(), "RiskyBusiness");
         assertTrue(destination.getManaged());
+        //Setters:
+        expandedCharge.setDestination("newidhere");
+        assertEquals(expandedCharge.getDestination(), "newidhere");
+        Account newDestination = new Account();
+        expandedCharge.setDestinationObject(newDestination);
+        assertEquals(expandedCharge.getDestinationObject(), newDestination);
     }
 
     @Test
@@ -75,14 +99,26 @@ public class ChargeTest extends BaseStripeTest {
         assertEquals(expandedCharge.getInvoice(), "in_199Llh2eZvKYlo2CMA8qc7Ng");
         assertEquals(invoice.getId(), "in_199Llh2eZvKYlo2CMA8qc7Ng");
         assertEquals((long) invoice.getAmountDue(), 999);
+        //Setters:
+        expandedCharge.setInvoice("newidhere");
+        assertEquals(expandedCharge.getInvoice(), "newidhere");
+        Invoice newInvoice = new Invoice();
+        expandedCharge.setInvoiceObject(newInvoice);
+        assertEquals(expandedCharge.getInvoiceObject(), newInvoice);
     }
 
     @Test
-    public void testDeserializeExpandBalanceOrder() throws IOException {
+    public void testDeserializeExpandOrder() throws IOException {
         Order order = expandedCharge.getOrderObject();
         assertEquals(expandedCharge.getOrder(), "or_199IRC2eZvKYlo2CPfFd4CB6");
         assertEquals(order.getId(), "or_199IRC2eZvKYlo2CPfFd4CB6");
         assertEquals((long) order.getAmount(), 1500);
+        //Setters:
+        expandedCharge.setOrder("newidhere");
+        assertEquals(expandedCharge.getOrder(), "newidhere");
+        Order newOrder = new Order();
+        expandedCharge.setOrderObject(newOrder);
+        assertEquals(expandedCharge.getOrderObject(), newOrder);
     }
 
     @Test
@@ -91,6 +127,12 @@ public class ChargeTest extends BaseStripeTest {
         assertEquals(expandedCharge.getSourceTransfer(), "tr_199IPs2eZvKYlo2C9hMneg1R");
         assertEquals(sourceTransfer.getId(), "tr_199IPs2eZvKYlo2C9hMneg1R");
         assertEquals((long) sourceTransfer.getAmount(), 400);
+        //Setters:
+        expandedCharge.setSourceTransfer("newidhere");
+        assertEquals(expandedCharge.getSourceTransfer(), "newidhere");
+        Transfer newST = new Transfer();
+        expandedCharge.setSourceTransferObject(newST);
+        assertEquals(expandedCharge.getSourceTransferObject(), newST);
     }
 
     @Test
@@ -99,5 +141,11 @@ public class ChargeTest extends BaseStripeTest {
         assertEquals(expandedCharge.getTransfer(), "tr_199IPs2eZvKYlo2C9hMneg1R");
         assertEquals(transfer.getId(), "tr_199IPs2eZvKYlo2C9hMneg1R");
         assertEquals((long) transfer.getAmount(), 400);
+        //Setters:
+        expandedCharge.setTransfer("newidhere");
+        assertEquals(expandedCharge.getTransfer(), "newidhere");
+        Transfer newTransfer = new Transfer();
+        expandedCharge.setTransferObject(newTransfer);
+        assertEquals(expandedCharge.getTransferObject(), newTransfer);
     }
 }
