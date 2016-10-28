@@ -28,8 +28,7 @@ public class ChargeTest extends BaseStripeTest {
         assertEquals("ch_198c152iMoKf4jyWWYvyqjTX", basicCharge.getId());
         assertEquals(1477429167, (long) basicCharge.getCreated());
     }
-
-
+    
     @Test
     public void testDeserializeWithExpansions() throws IOException {
         assertEquals("ch_198c152iMoKf4jyWWYvyqjTX", expandedCharge.getId());
