@@ -7,7 +7,6 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
-
 import java.util.Collections;
 import java.util.Map;
 
@@ -17,23 +16,23 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	String id;
 	Long amount;
 	Long amountRefunded;
-	String applicationFee;
-	String balanceTransaction;
+	ExpandableField<ApplicationFee> applicationFee;
+	ExpandableField<BalanceTransaction> balanceTransaction;
 	Boolean captured;
 	Long created;
 	String currency;
-	String customer;
+	ExpandableField<Customer> customer;
 	String description;
-	String destination;
+	ExpandableField<Account> destination;
 	Dispute dispute;
 	String failureCode;
 	String failureMessage;
 	FraudDetails fraudDetails;
-	String invoice;
+	ExpandableField<Invoice> invoice;
 	Boolean livemode;
 	Map<String, String> metadata;
 	ChargeOutcome outcome;
-	String order;
+	ExpandableField<Order> order;
 	Boolean paid;
 	String receiptEmail;
 	String receiptNumber;
@@ -41,10 +40,10 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	ChargeRefundCollection refunds;
 	ShippingDetails shipping;
 	ExternalAccount source;
-	String sourceTransfer;
+	ExpandableField<Transfer> sourceTransfer;
 	String statementDescriptor;
 	String status;
-	String transfer;
+	ExpandableField<Transfer> transfer;
 
 	@Deprecated
 	Card card;
@@ -79,19 +78,47 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public String getApplicationFee() {
-		return applicationFee;
+		if (this.applicationFee == null) {
+			return null;
+		}
+		return this.applicationFee.getId();
 	}
 
-	public void setApplicationFee(String applicationFee) {
-		this.applicationFee = applicationFee;
+	public void setApplicationFee(String applicationFeeID) {
+		this.applicationFee = setExpandableFieldID(applicationFeeID, this.applicationFee);
+	}
+
+	public ApplicationFee getApplicationFeeObject() {
+		if (this.applicationFee == null) {
+			return null;
+		}
+		return this.applicationFee.getExpanded();
+	}
+
+	public void setApplicationFeeObject(ApplicationFee c) {
+		this.applicationFee = new ExpandableField<ApplicationFee>(c.getId(), c);
 	}
 
 	public String getBalanceTransaction() {
-		return balanceTransaction;
+		if (this.balanceTransaction == null) {
+			return null;
+		}
+		return this.balanceTransaction.getId();
 	}
 
-	public void setBalanceTransaction(String balanceTransaction) {
-		this.balanceTransaction = balanceTransaction;
+	public void setBalanceTransaction(String balanceTransactionID) {
+		this.balanceTransaction = setExpandableFieldID(balanceTransactionID, this.balanceTransaction);
+	}
+
+	public BalanceTransaction getBalanceTransactionObject() {
+		if (this.balanceTransaction == null) {
+			return null;
+		}
+		return this.balanceTransaction.getExpanded();
+	}
+
+	public void setBalanceTransactionObject(BalanceTransaction c) {
+		this.balanceTransaction = new ExpandableField<BalanceTransaction>(c.getId(), c);
 	}
 
 	public Boolean getCaptured() {
@@ -119,11 +146,26 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public String getCustomer() {
-		return customer;
+		if (this.customer == null) {
+			return null;
+		}
+		return this.customer.getId();
 	}
 
-	public void setCustomer(String customer) {
-		this.customer = customer;
+	public void setCustomer(String customerID) {
+		this.customer = setExpandableFieldID(customerID, this.customer);
+
+	}
+
+	public Customer getCustomerObject() {
+		if (this.customer == null) {
+			return null;
+		}
+		return this.customer.getExpanded();
+	}
+
+	public void setCustomerObject(Customer c) {
+		this.customer = new ExpandableField<Customer>(c.getId(), c);
 	}
 
 	public String getDescription() {
@@ -135,11 +177,25 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public String getDestination() {
-		return destination;
+		if (this.destination == null) {
+			return null;
+		}
+		return this.destination.getId();
 	}
 
-	public void setDestination(String destination) {
-		this.destination = destination;
+	public void setDestination(String destinationID) {
+		this.destination = APIResource.setExpandableFieldID(destinationID, this.destination);
+	}
+
+	public Account getDestinationObject() {
+		if (this.destination == null) {
+			return null;
+		}
+		return this.destination.getExpanded();
+	}
+
+	public void setDestinationObject(Account c) {
+		this.destination = new ExpandableField<Account>(c.getId(), c);
 	}
 
 	public Dispute getDispute() {
@@ -175,11 +231,25 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public String getInvoice() {
-		return invoice;
+		if (this.invoice == null) {
+			return null;
+		}
+		return this.invoice.getId();
 	}
 
-	public void setInvoice(String invoice) {
-		this.invoice = invoice;
+	public void setInvoice(String invoiceID) {
+		this.invoice = setExpandableFieldID(invoiceID, this.invoice);
+	}
+
+	public Invoice getInvoiceObject() {
+		if (this.invoice == null) {
+			return null;
+		}
+		return this.invoice.getExpanded();
+	}
+
+	public void setInvoiceObject(Invoice c) {
+		this.invoice = new ExpandableField<Invoice>(c.getId(), c);
 	}
 
 	public Boolean getLivemode() {
@@ -199,11 +269,25 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public String getOrder() {
-		return order;
+		if (this.order == null) {
+			return null;
+		}
+		return this.order.getId();
 	}
 
-	public void setOrder(String order) {
-		this.order = order;
+	public void setOrder(String orderID) {
+		this.order = setExpandableFieldID(orderID, this.order);
+	}
+
+	public Order getOrderObject() {
+		if (this.order == null) {
+			return null;
+		}
+		return this.order.getExpanded();
+	}
+
+	public void setOrderObject(Order c) {
+		this.order = new ExpandableField<Order>(c.getId(), c);
 	}
 
 	public ChargeOutcome getOutcome() {
@@ -272,11 +356,25 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public String getSourceTransfer() {
-		return sourceTransfer;
+		if (this.sourceTransfer == null) {
+			return null;
+		}
+		return this.sourceTransfer.getId();
 	}
 
-	public void setSourceTransfer(String sourceTransfer) {
-		this.sourceTransfer = sourceTransfer;
+	public void setSourceTransfer(String sourceTransferID) {
+		this.sourceTransfer = setExpandableFieldID(sourceTransferID, this.sourceTransfer);
+	}
+
+	public Transfer getSourceTransferObject() {
+		if (this.sourceTransfer == null) {
+			return null;
+		}
+		return this.sourceTransfer.getExpanded();
+	}
+
+	public void setSourceTransferObject(Transfer c) {
+		this.sourceTransfer = new ExpandableField<Transfer>(c.getId(), c);
 	}
 
 	public String getStatementDescriptor() {
@@ -296,11 +394,25 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public String getTransfer() {
-		return transfer;
+		if (this.transfer == null) {
+			return null;
+		}
+		return this.transfer.getId();
 	}
 
-	public void setTransfer(String transfer) {
-		this.transfer = transfer;
+	public void setTransfer(String transferID) {
+		this.transfer = setExpandableFieldID(transferID, this.transfer);
+	}
+
+	public Transfer getTransferObject() {
+		if (this.transfer == null) {
+			return null;
+		}
+		return this.transfer.getExpanded();
+	}
+
+	public void setTransferObject(Transfer c) {
+		this.transfer = new ExpandableField<Transfer>(c.getId(), c);
 	}
 
 	/**
@@ -435,6 +547,12 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.GET, instanceURL(Charge.class, id), null, Charge.class, options);
+	}
+
+	public static Charge retrieve(String id, Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, instanceURL(Charge.class, id), params, Charge.class, options);
 	}
 
 	@Deprecated

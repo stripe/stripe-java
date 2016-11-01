@@ -15,9 +15,12 @@ import com.stripe.model.Dispute;
 import com.stripe.model.DisputeDataDeserializer;
 import com.stripe.model.EventData;
 import com.stripe.model.EventDataDeserializer;
+import com.stripe.model.ExpandableField;
+import com.stripe.model.ExpandableFieldDeserializer;
 import com.stripe.model.ExternalAccountTypeAdapterFactory;
 import com.stripe.model.FeeRefundCollection;
 import com.stripe.model.FeeRefundCollectionDeserializer;
+import com.stripe.model.HasId;
 import com.stripe.model.Source;
 import com.stripe.model.SourceDeserializer;
 import com.stripe.model.StripeCollectionInterface;
@@ -44,6 +47,7 @@ public abstract class APIResource extends StripeObject {
 			.registerTypeAdapter(StripeRawJsonObject.class, new StripeRawJsonObjectDeserializer())
 			.registerTypeAdapter(Dispute.class, new DisputeDataDeserializer())
 			.registerTypeAdapter(Source.class, new SourceDeserializer())
+			.registerTypeAdapter(ExpandableField.class, new ExpandableFieldDeserializer())
 			.registerTypeAdapterFactory(new ExternalAccountTypeAdapterFactory())
 			.create();
 
@@ -166,5 +170,18 @@ public abstract class APIResource extends StripeObject {
 		}
 
 		return collection;
+	}
+
+	/**
+	 *  When setting a String ID for an ExpandableField, we need to be careful about keeping the String ID and the
+	 *  expanded object in sync. If they specify a new String ID that is different from the ID within the expanded object,
+	 *  we don't keep the object.
+	 */
+	public static <T extends HasId> ExpandableField<T> setExpandableFieldID(String newId, ExpandableField<T> currentObject) {
+		if (currentObject == null || (currentObject.isExpanded() && (currentObject.getId() != newId))) {
+			return new ExpandableField<T>(newId, null);
+		}
+
+		return new ExpandableField<T>(newId, currentObject.getExpanded());
 	}
 }
