@@ -147,4 +147,18 @@ public class ChargeTest extends BaseStripeTest {
 		expandedCharge.setTransferObject(newTransfer);
 		assertEquals(expandedCharge.getTransferObject(), newTransfer);
 	}
+
+	@Test
+	public void testDeserializeReview() throws IOException {
+		Review review = expandedCharge.getReviewObject();
+		assertEquals(expandedCharge.getReview(), "tr_199IPs2eZvKYlo2C9hMneg1R");
+		assertEquals(review.getId(), "tr_199IPs2eZvKYlo2C9hMneg1R");
+		assertEquals((long) review.getCreated(), 1477087830);
+		//Setters:
+		expandedCharge.setReview("newidhere");
+		assertEquals(expandedCharge.getReview(), "newidhere");
+		Review newReview = new Review();
+		expandedCharge.setReviewObject(newReview);
+		assertEquals(expandedCharge.getReviewObject(), newReview);
+	}
 }
