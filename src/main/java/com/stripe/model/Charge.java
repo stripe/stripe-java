@@ -85,10 +85,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public void setApplicationFee(String applicationFeeID) {
-		if (this.applicationFee==null || (this.applicationFee.isExpanded() && (this.applicationFee.getExpanded().getId() != applicationFeeID))) {
-			this.applicationFee = new ExpandableField<ApplicationFee>(applicationFeeID, null);
-		}
-		this.applicationFee.setId(applicationFeeID);
+		this.applicationFee = setExpandableFieldID(applicationFeeID, this.applicationFee);
 	}
 
 	public ApplicationFee getApplicationFeeObject() {
@@ -110,10 +107,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public void setBalanceTransaction(String balanceTransactionID) {
-		if (this.balanceTransaction==null || (this.balanceTransaction.isExpanded() && (this.balanceTransaction.getExpanded().getId() != balanceTransactionID))) {
-			this.balanceTransaction = new ExpandableField<BalanceTransaction>(balanceTransactionID, null);
-		}
-		this.balanceTransaction.setId(balanceTransactionID);
+		this.balanceTransaction = setExpandableFieldID(balanceTransactionID, this.balanceTransaction);
 	}
 
 	public BalanceTransaction getBalanceTransactionObject() {
@@ -159,10 +153,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public void setCustomer(String customerID) {
-		if (this.customer==null || (this.customer.isExpanded() && (this.customer.getExpanded().getId() != customerID))) {
-			this.customer = new ExpandableField<Customer>(customerID, null);
-		}
-		this.customer.setId(customerID);
+		this.customer = setExpandableFieldID(customerID, this.customer);
+
 	}
 
 	public Customer getCustomerObject() {
@@ -192,10 +184,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public void setDestination(String destinationID) {
-		if (this.destination==null || (this.destination.isExpanded() && (this.destination.getExpanded().getId() != destinationID))) {
-			this.destination = new ExpandableField<Account>(destinationID, null);
-		}
-		this.destination.setId(destinationID);
+		this.destination = APIResource.setExpandableFieldID(destinationID, this.destination);
 	}
 
 	public Account getDestinationObject() {
@@ -249,10 +238,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public void setInvoice(String invoiceID) {
-		if (this.invoice==null || (this.invoice.isExpanded() && (this.invoice.getExpanded().getId() != invoiceID))) {
-			this.invoice = new ExpandableField<Invoice>(invoiceID, null);
-		}
-		this.invoice.setId(invoiceID);
+		this.invoice = setExpandableFieldID(invoiceID, this.invoice);
 	}
 
 	public Invoice getInvoiceObject() {
@@ -290,10 +276,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public void setOrder(String orderID) {
-		if (this.order==null || (this.order.isExpanded() && (this.order.getExpanded().getId() != orderID))) {
-			this.order = new ExpandableField<Order>(orderID, null);
-		}
-		this.order.setId(orderID);
+		this.order = setExpandableFieldID(orderID, this.order);
 	}
 
 	public Order getOrderObject() {
@@ -380,10 +363,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public void setSourceTransfer(String sourceTransferID) {
-		if (this.sourceTransfer==null || (this.sourceTransfer.isExpanded() && (this.sourceTransfer.getExpanded().getId() != sourceTransferID))) {
-			this.sourceTransfer = new ExpandableField<Transfer>(sourceTransferID, null);
-		}
-		this.sourceTransfer.setId(sourceTransferID);
+		this.sourceTransfer = setExpandableFieldID(sourceTransferID, this.sourceTransfer);
 	}
 
 	public Transfer getSourceTransferObject() {
@@ -421,10 +401,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public void setTransfer(String transferID) {
-		if (this.transfer==null || (this.transfer.isExpanded() && (this.transfer.getExpanded().getId() != transferID))) {
-			this.transfer = new ExpandableField<Transfer>(transferID, null);
-		}
-		this.transfer.setId(transferID);
+		this.transfer = setExpandableFieldID(transferID, this.transfer);
 	}
 
 	public Transfer getTransferObject() {

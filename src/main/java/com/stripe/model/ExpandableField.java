@@ -4,7 +4,7 @@ package com.stripe.model;
 //For example, ExpandableField<BalanceTransaction> in Charge.
 //The class should always contain a String id, and may have a null or type T expandedObject.
 //More info here: https://stripe.com/docs/api#expanding_objects
-public class ExpandableField<T> {
+public class ExpandableField<T extends HasId> {
     private String id;
     private T expandedObject;
 

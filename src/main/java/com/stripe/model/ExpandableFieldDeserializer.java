@@ -37,7 +37,7 @@ public class ExpandableFieldDeserializer implements JsonDeserializer<ExpandableF
             // We need to get the type inside the generic ExpandableField to make sure fromJson correctly serializes
             // the JsonObject:
             Type clazz = ((ParameterizedType) typeOfT).getActualTypeArguments()[0];
-            expandableField = new ExpandableField(id, gson.fromJson(json, clazz));
+            expandableField = new ExpandableField(id, (HasId)gson.fromJson(json, clazz));
             return expandableField;
         }
 
