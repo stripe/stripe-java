@@ -78,7 +78,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public String getApplicationFee() {
-		if (this.applicationFee==null) {
+		if (this.applicationFee == null) {
 			return null;
 		}
 		return this.applicationFee.getId();
@@ -89,7 +89,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public ApplicationFee getApplicationFeeObject() {
-		if (this.applicationFee==null) {
+		if (this.applicationFee == null) {
 			return null;
 		}
 		return this.applicationFee.getExpanded();
@@ -100,7 +100,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public String getBalanceTransaction() {
-		if (this.balanceTransaction==null) {
+		if (this.balanceTransaction == null) {
 			return null;
 		}
 		return this.balanceTransaction.getId();
@@ -111,7 +111,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public BalanceTransaction getBalanceTransactionObject() {
-		if (this.balanceTransaction==null) {
+		if (this.balanceTransaction == null) {
 			return null;
 		}
 		return this.balanceTransaction.getExpanded();
@@ -146,7 +146,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public String getCustomer() {
-		if (this.customer==null) {
+		if (this.customer == null) {
 			return null;
 		}
 		return this.customer.getId();
@@ -158,7 +158,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public Customer getCustomerObject() {
-		if (this.customer==null) {
+		if (this.customer == null) {
 			return null;
 		}
 		return this.customer.getExpanded();
@@ -177,7 +177,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public String getDestination() {
-		if (this.destination==null) {
+		if (this.destination == null) {
 			return null;
 		}
 		return this.destination.getId();
@@ -188,7 +188,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public Account getDestinationObject() {
-		if (this.destination==null) {
+		if (this.destination == null) {
 			return null;
 		}
 		return this.destination.getExpanded();
@@ -231,7 +231,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public String getInvoice() {
-		if (this.invoice==null) {
+		if (this.invoice == null) {
 			return null;
 		}
 		return this.invoice.getId();
@@ -242,7 +242,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public Invoice getInvoiceObject() {
-		if (this.invoice==null) {
+		if (this.invoice == null) {
 			return null;
 		}
 		return this.invoice.getExpanded();
@@ -269,7 +269,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public String getOrder() {
-		if (this.order==null) {
+		if (this.order == null) {
 			return null;
 		}
 		return this.order.getId();
@@ -280,7 +280,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public Order getOrderObject() {
-		if (this.order==null) {
+		if (this.order == null) {
 			return null;
 		}
 		return this.order.getExpanded();
@@ -356,7 +356,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public String getSourceTransfer() {
-		if (this.sourceTransfer==null) {
+		if (this.sourceTransfer == null) {
 			return null;
 		}
 		return this.sourceTransfer.getId();
@@ -367,7 +367,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public Transfer getSourceTransferObject() {
-		if (this.sourceTransfer==null) {
+		if (this.sourceTransfer == null) {
 			return null;
 		}
 		return this.sourceTransfer.getExpanded();
@@ -394,7 +394,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public String getTransfer() {
-		if (this.transfer==null) {
+		if (this.transfer == null) {
 			return null;
 		}
 		return this.transfer.getId();
@@ -405,7 +405,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public Transfer getTransferObject() {
-		if (this.transfer==null) {
+		if (this.transfer == null) {
 			return null;
 		}
 		return this.transfer.getExpanded();

@@ -14,7 +14,7 @@ public class ExpandableField<T extends HasId> {
     }
 
     public boolean isExpanded() {
-        if (expandedObject==null) {
+        if (expandedObject == null) {
             return false;
         }
         return true;

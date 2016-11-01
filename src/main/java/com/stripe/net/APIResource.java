@@ -178,7 +178,7 @@ public abstract class APIResource extends StripeObject {
 	 *  we don't keep the object.
 	 */
 	public static <T extends HasId> ExpandableField<T> setExpandableFieldID(String newId, ExpandableField<T> currentObject) {
-		if (currentObject==null || (currentObject.isExpanded() && (currentObject.getId() != newId))) {
+		if (currentObject == null || (currentObject.isExpanded() && (currentObject.getId() != newId))) {
 			return new ExpandableField<T>(newId, null);
 		}
 

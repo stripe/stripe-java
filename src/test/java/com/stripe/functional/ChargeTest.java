@@ -25,7 +25,7 @@ public class ChargeTest extends BaseStripeFunctionalTest {
     }
 
     @Test
-    public void testChargeCreateExpandBT() throws StripeException {
+    public void testChargeCreateExpandBalanceTransaction() throws StripeException {
         String[] expand = new String[]{"balance_transaction"};
         Map<String, Object> params = defaultChargeParams;
         params.put("expand[]", "balance_transaction");
@@ -202,7 +202,7 @@ public class ChargeTest extends BaseStripeFunctionalTest {
     }
 
     @Test
-    public void testChargeListExpandBT() throws StripeException {
+    public void testChargeListExpandBalanceTransaction() throws StripeException {
         Map<String, Object> listParams = new HashMap<String, Object>();
         listParams.put("count", 1);
         listParams.put("expand[]", "data.balance_transaction");
