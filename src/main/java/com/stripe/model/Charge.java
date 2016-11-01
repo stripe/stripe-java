@@ -16,6 +16,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	String id;
 	Long amount;
 	Long amountRefunded;
+	ExpandableField<Application> application;
 	ExpandableField<ApplicationFee> applicationFee;
 	ExpandableField<BalanceTransaction> balanceTransaction;
 	Boolean captured;
@@ -75,6 +76,28 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 
 	public void setAmountRefunded(Long amountRefunded) {
 		this.amountRefunded = amountRefunded;
+	}
+
+	public String getApplication() {
+		if (this.application == null) {
+			return null;
+		}
+		return this.application.getId();
+	}
+
+	public void setApplication(String applicationID) {
+		this.application = setExpandableFieldID(applicationID, this.application);
+	}
+
+	public Application getApplicationObject() {
+		if (this.application == null) {
+			return null;
+		}
+		return this.application.getExpanded();
+	}
+
+	public void setApplicationObject(Application c) {
+		this.application = new ExpandableField<Application>(c.getId(), c);
 	}
 
 	public String getApplicationFee() {
