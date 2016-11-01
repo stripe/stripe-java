@@ -36,6 +36,20 @@ public class ChargeTest extends BaseStripeTest {
 	}
 
 	@Test
+	public void testDeserializeExpandApplication() throws IOException {
+		Application application = expandedCharge.getApplicationObject();
+		assertEquals(expandedCharge.getApplication(), "ca_4UNPzRJlp7joZhEYfqkhc02MYvNFHJEX");
+		assertEquals(application.getId(), "ca_4UNPzRJlp7joZhEYfqkhc02MYvNFHJEX");
+		assertEquals(application.getName(), "My Application");
+		//Setters:
+		expandedCharge.setApplication("newidhere");
+		assertEquals(expandedCharge.getApplication(), "newidhere");
+		Application newApplication = new Application();
+		expandedCharge.setApplicationObject(newApplication);
+		assertEquals(expandedCharge.getApplicationObject(), newApplication);
+	}
+
+	@Test
 	public void testDeserializeExpandApplicationFee() throws IOException {
 		ApplicationFee appFee = expandedCharge.getApplicationFeeObject();
 		assertEquals(expandedCharge.getApplicationFee(), "fee_9RV1Zcr87rvr68");
