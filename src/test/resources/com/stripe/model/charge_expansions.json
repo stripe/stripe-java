@@ -3,6 +3,10 @@
   "object": "charge",
   "amount": 1061,
   "amount_refunded": 0,
+  "application": {
+    "id": "ca_4UNPzRJlp7joZhEYfqkhc02MYvNFHJEX",
+    "name": "My Application"
+  },
   "application_fee": {
     "id": "fee_9RV1Zcr87rvr68",
     "object": "application_fee",
