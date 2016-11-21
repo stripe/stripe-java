@@ -43,4 +43,12 @@ public class ThreeDSecureTest extends BaseStripeTest {
 		verifyPost(ThreeDSecure.class, "https://api.stripe.com/v1/3d_secure", params);
 		verifyNoMoreInteractions(networkMock);
 	}
+
+	@Test
+	public void testRetrieve() throws StripeException {
+		ThreeDSecure tds = ThreeDSecure.retrieve("tdsrc_id");
+
+		verifyGet(ThreeDSecure.class, "https://api.stripe.com/v1/3d_secure/tdsrc_id");
+		verifyNoMoreInteractions(networkMock);
+	}
 }
