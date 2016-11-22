@@ -108,7 +108,29 @@ public class ThreeDSecure extends APIResource implements HasId {
 	public static ThreeDSecure create(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		String url = String.format("%s/%s", Stripe.getApiBase(), "v1/3d_secure");
-		return request(RequestMethod.POST, url, params, ThreeDSecure.class, options);
+		return request(RequestMethod.POST, getClassURL(), params, ThreeDSecure.class, options);
+	}
+
+	public static ThreeDSecure retrieve(String id) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return retrieve(id, (RequestOptions) null);
+	}
+
+	public static ThreeDSecure retrieve(String id, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, getInstanceURL(id), null, ThreeDSecure.class, options);
+	}
+
+	private static String getClassURL() {
+		return String.format("%s/v1/%s", Stripe.getApiBase(), "3d_secure");
+	}
+
+	private static String getInstanceURL(String id) {
+		if (id != null || id.isEmpty()) {
+			return String.format("%s/%s", getClassURL(), id);
+		}
+		return null;
 	}
 }
