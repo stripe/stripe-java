@@ -192,11 +192,7 @@ public class Source extends ExternalAccount {
 	public Source verify(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		if (this.getCustomer() != null) {
-			return request(RequestMethod.POST, String.format("%s/verify", this.getSourceInstanceURL()), params, Source.class, options);
-		} else {
-			throw new InvalidRequestException("Only customer sources can be verified in this manner.", null, null, null, null);
-		}
+		return request(RequestMethod.POST, String.format("%s/verify", this.getSourceInstanceURL()), params, Source.class, options);
 	}
 
 	@Override
