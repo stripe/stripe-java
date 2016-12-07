@@ -1,15 +1,15 @@
 package com.stripe.model;
 
+import static com.stripe.net.APIResource.GSON;
+
 import com.google.gson.*;
+import com.stripe.net.APIResource;
+
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
 public class ExpandableFieldDeserializer implements JsonDeserializer<ExpandableField> {
 	public ExpandableField deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-		Gson gson = new GsonBuilder()
-				.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-				.create();
-
 		if (json.isJsonNull()) {
 			return null;
 		}
@@ -37,7 +37,7 @@ public class ExpandableFieldDeserializer implements JsonDeserializer<ExpandableF
 			// We need to get the type inside the generic ExpandableField to make sure fromJson correctly serializes
 			// the JsonObject:
 			Type clazz = ((ParameterizedType) typeOfT).getActualTypeArguments()[0];
-			expandableField = new ExpandableField(id, (HasId)gson.fromJson(json, clazz));
+			expandableField = new ExpandableField(id, (HasId) GSON.fromJson(json, clazz));
 			return expandableField;
 		}
 
