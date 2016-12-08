@@ -16,7 +16,7 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 	Long applicationFee;
 	Integer attemptCount;
 	Boolean attempted;
-	String charge;
+	ExpandableField<Charge> charge;
 	Boolean closed;
 	Long created;
 	String currency;
@@ -85,11 +85,25 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 	}
 
 	public String getCharge() {
-		return charge;
+		if (charge == null) {
+			return null;
+		}
+		return charge.getId();
 	}
 
 	public void setCharge(String charge) {
-		this.charge = charge;
+		this.charge = setExpandableFieldID(charge, this.charge);
+	}
+
+	public Charge getChargeObject() {
+		if (this.charge == null) {
+			return null;
+		}
+		return this.charge.getExpanded();
+	}
+
+	public void setChargeObject(Charge charge) {
+		this.charge = new ExpandableField<Charge>(charge.getId(), charge);
 	}
 
 	public Boolean getClosed() {

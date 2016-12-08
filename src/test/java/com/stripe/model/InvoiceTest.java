@@ -1,22 +1,28 @@
 package com.stripe.model;
 
-import com.stripe.BaseStripeTest;
-import com.stripe.exception.StripeException;
-import com.stripe.model.Invoice;
-import com.stripe.net.APIResource;
-import com.stripe.net.LiveStripeResponseGetter;
-import org.junit.After;
-import org.junit.Before;
+import static junit.framework.Assert.assertEquals;
+import static junit.framework.Assert.assertNotNull;
+import static junit.framework.Assert.assertNull;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 
-import java.util.Map;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
-import java.util.ArrayList;
+import java.util.Map;
+
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
-import static org.mockito.Mockito.*;
+import com.stripe.BaseStripeTest;
+import com.stripe.exception.StripeException;
+import com.stripe.net.APIResource;
+import com.stripe.net.LiveStripeResponseGetter;
 
 public class InvoiceTest extends BaseStripeTest {
+	Invoice basicInvoice;
+	Invoice expandedInvoice;
 
 	@Before
 	public void mockStripeResponseGetter() {
@@ -27,6 +33,14 @@ public class InvoiceTest extends BaseStripeTest {
 	public void unmockStripeResponseGetter() {
 		/* This needs to be done because tests aren't isolated in Java */
 		APIResource.setStripeResponseGetter(new LiveStripeResponseGetter());
+	}
+
+	@Before
+	public void deserialize() throws IOException {
+		String json = resource("invoice.json");
+		basicInvoice = APIResource.GSON.fromJson(json, Invoice.class);
+		String expandedJson = resource("invoice_expansions.json");
+		expandedInvoice = APIResource.GSON.fromJson(expandedJson, Invoice.class);
 	}
 
 	@Test
@@ -58,4 +72,20 @@ public class InvoiceTest extends BaseStripeTest {
 		verifyGet(Invoice.class, "https://api.stripe.com/v1/invoices/upcoming", params);
 		verifyNoMoreInteractions(networkMock);
 	}
+
+	@Test
+	public void testUnexpandedCharge() {
+		assertEquals("ch_8vzszxcNLVJXqF", basicInvoice.getCharge());
+		assertNull(basicInvoice.getChargeObject());
+	}
+
+	@Test
+	public void testExpandedCharge() {
+		assertEquals("ch_8vzszxcNLVJXqF", expandedInvoice.getCharge());
+		Charge charge = expandedInvoice.getChargeObject();
+		assertNotNull(charge);
+		assertEquals(6000L, (long) charge.getAmount());
+		assertEquals("card_8vzsxmT0Ua0lkd", charge.getSource().getId());
+	}
+
 }
