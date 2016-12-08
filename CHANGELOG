@@ -1,3 +1,7 @@
+=== 3.4.0 2016-12-08
+
+* Add expandable Charge to Invoice
+
 === 3.3.0 2016-11-22
 
 * Add retrieve method for 3-D Secure resources
