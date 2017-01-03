@@ -25,6 +25,7 @@ public class Dispute extends APIResource implements HasId {
 	Map<String, String> metadata;
 	String reason;
 	String status;
+	String networkReasonCode; // Not part of the public API.
 
 	/** 8/2014: Legacy (now use balanceTransactions) -- https://stripe.com/docs/upgrades#2014-08-20 */
 	@Deprecated
@@ -136,6 +137,17 @@ public class Dispute extends APIResource implements HasId {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getNetworkReasonCode() {
+		return networkReasonCode;
+	}
+
+	/**
+	 * This method is not part of the public API and for internal use only.
+	 */
+	public void setNetworkReasonCode(String networkReasonCode) {
+		this.networkReasonCode = networkReasonCode;
 	}
 
 	/**
