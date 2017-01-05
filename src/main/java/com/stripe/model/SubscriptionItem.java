@@ -14,6 +14,7 @@ import java.util.List;
 
 public class SubscriptionItem extends APIResource implements HasId {
 	String id;
+	String object;
 	Long created;
 	Plan plan;
 	Integer quantity;
@@ -24,6 +25,14 @@ public class SubscriptionItem extends APIResource implements HasId {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getObject() {
+		return object;
+	}
+
+	public void setObject(String object) {
+		this.object = object;
 	}
 
 	public Long getCreated() {

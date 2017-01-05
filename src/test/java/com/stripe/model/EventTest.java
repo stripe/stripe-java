@@ -21,4 +21,21 @@ public class EventTest extends BaseStripeTest {
 
 		assertEquals(account.getEmail(), "test@stripe.com");
 	}
+
+	@Test
+	public void serializesToJson() throws IOException {
+		String json = resource("account_event.json");
+		Event event = StripeObject.PRETTY_PRINT_GSON.fromJson(json, Event.class);
+
+		Event reserializedEvent = StripeObject.PRETTY_PRINT_GSON.fromJson(event.toJson(), Event.class);
+
+		assertEquals(reserializedEvent.getId(), event.getId());
+		assertEquals(reserializedEvent.getObject(), event.getObject());
+		assertEquals(reserializedEvent.getApiVersion(), event.getApiVersion());
+		assertEquals(reserializedEvent.getCreated(), event.getCreated());
+		assertEquals(reserializedEvent.getLivemode(), event.getLivemode());
+		assertEquals(reserializedEvent.getRequest(), event.getRequest());
+		assertEquals(reserializedEvent.getType(), event.getType());
+		assertEquals(reserializedEvent.getUserId(), event.getUserId());
+	}
 }

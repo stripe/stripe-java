@@ -13,6 +13,7 @@ import java.util.Map;
 
 public class ApplePayDomain extends APIResource implements HasId {
 	String id;
+	String object;
 	Long created;
 	String domainName;
 	Boolean livemode;
@@ -23,6 +24,14 @@ public class ApplePayDomain extends APIResource implements HasId {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getObject() {
+		return object;
+	}
+
+	public void setObject(String object) {
+		this.object = object;
 	}
 
 	public Long getCreated() {

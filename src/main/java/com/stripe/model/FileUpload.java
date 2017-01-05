@@ -13,6 +13,7 @@ import java.util.Map;
 
 public class FileUpload extends APIResource implements HasId {
 	String id;
+	String object;
 	Long created;
 	String purpose;
 	Long size;
@@ -25,6 +26,14 @@ public class FileUpload extends APIResource implements HasId {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getObject() {
+		return object;
+	}
+
+	public void setObject(String object) {
+		this.object = object;
 	}
 
 	public Long getCreated() {

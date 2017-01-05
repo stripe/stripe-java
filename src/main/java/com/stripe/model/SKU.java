@@ -13,6 +13,7 @@ import com.stripe.net.RequestOptions;
 
 public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
 	String id;
+	String object;
 	Boolean active;
 	Map<String, String> attributes;
 	Long created;
@@ -32,6 +33,14 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getObject() {
+		return object;
+	}
+
+	public void setObject(String object) {
+		this.object = object;
 	}
 
 	public Boolean getActive() {

@@ -12,6 +12,7 @@ import java.util.Map;
 
 public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
 	String id;
+	String object;
 	Long amount;
 	Long created;
 	String currency;
@@ -32,6 +33,14 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getObject() {
+		return object;
+	}
+
+	public void setObject(String object) {
+		this.object = object;
 	}
 
 	public Long getAmount() {

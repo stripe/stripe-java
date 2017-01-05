@@ -12,6 +12,7 @@ import java.util.Map;
 
 public class FeeRefund extends APIResource implements MetadataStore<ApplicationFee>, HasId {
 	String id;
+	String object;
 	Long amount;
 	String balanceTransaction;
 	String currency;
@@ -21,6 +22,14 @@ public class FeeRefund extends APIResource implements MetadataStore<ApplicationF
 
 	public String getId() {
 		return id;
+	}
+
+	public String getObject() {
+		return object;
+	}
+
+	public void setObject(String object) {
+		this.object = object;
 	}
 
 	public Long getAmount() {

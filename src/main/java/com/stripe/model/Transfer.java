@@ -13,6 +13,7 @@ import java.util.Map;
 
 public class Transfer extends APIResource implements MetadataStore<Transfer>, HasId {
 	String id;
+	String object;
 	Long amount;
 	Long amountReversed;
 	String applicationFee;
@@ -53,6 +54,14 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getObject() {
+		return object;
+	}
+
+	public void setObject(String object) {
+		this.object = object;
 	}
 
 	public Long getAmount() {

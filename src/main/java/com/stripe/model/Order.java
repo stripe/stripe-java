@@ -13,6 +13,7 @@ import com.stripe.net.RequestOptions;
 
 public class Order extends APIResource implements HasId, MetadataStore<Order> {
 	String id;
+	String object;
 	Long amount;
 	String application;
 	Long applicationFee;
@@ -38,6 +39,14 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getObject() {
+		return object;
+	}
+
+	public void setObject(String object) {
+		this.object = object;
 	}
 
 	public Long getAmount() {

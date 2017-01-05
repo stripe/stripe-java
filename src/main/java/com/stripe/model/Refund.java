@@ -12,6 +12,7 @@ import java.util.Map;
 
 public class Refund extends APIResource implements MetadataStore<Charge>, HasId {
 	String id;
+	String object;
 	Long amount;
 	String balanceTransaction;
 	String charge;
@@ -29,6 +30,14 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getObject() {
+		return object;
+	}
+
+	public void setObject(String object) {
+		this.object = object;
 	}
 
 	public Long getAmount() {

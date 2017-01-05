@@ -12,6 +12,7 @@ import java.util.Map;
 
 public class Coupon extends APIResource implements MetadataStore<Coupon>, HasId {
 	String id;
+	String object;
 	Long amountOff;
 	Long created;
 	String currency;
@@ -31,6 +32,14 @@ public class Coupon extends APIResource implements MetadataStore<Coupon>, HasId 
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getObject() {
+		return object;
+	}
+
+	public void setObject(String object) {
+		this.object = object;
 	}
 
 	public Long getAmountOff() {

@@ -13,6 +13,7 @@ import java.util.Map;
 
 public class Subscription extends APIResource implements MetadataStore<Subscription>, HasId {
 	String id;
+	String object;
 	Double applicationFeePercent;
 	Boolean cancelAtPeriodEnd;
 	Long canceledAt;
@@ -38,6 +39,14 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getObject() {
+		return object;
+	}
+
+	public void setObject(String object) {
+		this.object = object;
 	}
 
 	public Double getApplicationFeePercent() {

@@ -13,6 +13,7 @@ import java.util.Map;
 
 public class Customer extends APIResource implements MetadataStore<Customer>, HasId {
 	String id;
+	String object;
 	Long accountBalance;
 	String businessVatId;
 	Long created;
@@ -46,6 +47,14 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getObject() {
+		return object;
+	}
+
+	public void setObject(String object) {
+		this.object = object;
 	}
 
 	public Long getAccountBalance() {
