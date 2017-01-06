@@ -14,6 +14,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	public static final String FRAUD_DETAILS = "fraud_details";
 
 	String id;
+	String object;
 	Long amount;
 	Long amountRefunded;
 	ExpandableField<Application> application;
@@ -61,6 +62,14 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getObject() {
+		return object;
+	}
+
+	public void setObject(String object) {
+		this.object = object;
 	}
 
 	public Long getAmount() {

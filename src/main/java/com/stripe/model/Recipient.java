@@ -13,6 +13,7 @@ import java.util.Map;
 
 public class Recipient extends APIResource implements MetadataStore<Recipient>, HasId {
 	String id;
+	String object;
 	BankAccount activeAccount;
 	RecipientCardCollection cards;
 	Long created;
@@ -33,6 +34,14 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getObject() {
+		return object;
+	}
+
+	public void setObject(String object) {
+		this.object = object;
 	}
 
 	public BankAccount getActiveAccount() {

@@ -12,6 +12,7 @@ import java.util.Map;
 
 public class ApplicationFee extends APIResource implements HasId {
 	String id;
+	String object;
 	String account;
 	Long amount;
 	Long amountRefunded;
@@ -34,6 +35,14 @@ public class ApplicationFee extends APIResource implements HasId {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getObject() {
+		return object;
+	}
+
+	public void setObject(String object) {
+		this.object = object;
 	}
 
 	public String getAccount() {

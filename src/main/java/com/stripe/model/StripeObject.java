@@ -24,6 +24,10 @@ public abstract class StripeObject {
 			PRETTY_PRINT_GSON.toJson(this));
 	}
 
+	public String toJson() {
+		return PRETTY_PRINT_GSON.toJson(this);
+	}
+
 	private Object getIdString() {
 		try {
 			Field idField = this.getClass().getDeclaredField("id");

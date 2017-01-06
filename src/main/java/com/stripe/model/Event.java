@@ -12,6 +12,7 @@ import java.util.Map;
 
 public class Event extends APIResource implements HasId {
 	String id;
+	String object;
 	String apiVersion;
 	Long created;
 	EventData data;
@@ -27,6 +28,14 @@ public class Event extends APIResource implements HasId {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getObject() {
+		return object;
+	}
+
+	public void setObject(String object) {
+		this.object = object;
 	}
 
 	public String getApiVersion() {

@@ -12,6 +12,7 @@ import java.util.Map;
 
 public class Token extends APIResource implements HasId {
 	String id;
+	String object;
 	Long amount;
 	BankAccount bankAccount;
 	Card card;
@@ -29,6 +30,14 @@ public class Token extends APIResource implements HasId {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getObject() {
+		return object;
+	}
+
+	public void setObject(String object) {
+		this.object = object;
 	}
 
 	public Long getAmount() {

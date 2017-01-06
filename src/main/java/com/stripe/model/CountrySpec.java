@@ -13,6 +13,7 @@ import java.util.Map;
 
 public class CountrySpec extends APIResource implements HasId {
 	String id;
+	String object;
 	String defaultCurrency;
 	Map<String, List<String>> supportedBankAccountCurrencies;
 	List<String> supportedPaymentCurrencies;
@@ -25,6 +26,14 @@ public class CountrySpec extends APIResource implements HasId {
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getObject() {
+		return object;
+	}
+
+	public void setObject(String object) {
+		this.object = object;
 	}
 
 	public String getDefaultCurrency() {

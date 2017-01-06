@@ -10,6 +10,7 @@ import com.stripe.net.RequestOptions;
 
 public class Account extends APIResource implements HasId, MetadataStore<Account> {
 	String id;
+	String object;
 	String businessLogo;
 	String businessName;
 	String businessPrimaryColor;
@@ -45,6 +46,14 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 
 	public String getId() {
 		return id;
+	}
+
+	public String getObject() {
+		return object;
+	}
+
+	public void setObject(String object) {
+		this.object = object;
 	}
 
 	public String getBusinessLogo()

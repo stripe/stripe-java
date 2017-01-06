@@ -12,6 +12,7 @@ import java.util.Map;
 
 public class Invoice extends APIResource implements MetadataStore<Invoice>, HasId {
 	String id;
+	String object;
 	Long amountDue;
 	Long applicationFee;
 	Integer attemptCount;
@@ -50,6 +51,14 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 
 	public void setId(String id) {
 		this.id = id;
+	}
+
+	public String getObject() {
+		return object;
+	}
+
+	public void setObject(String object) {
+		this.object = object;
 	}
 
 	public Long getAmountDue() {

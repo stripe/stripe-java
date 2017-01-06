@@ -11,9 +11,18 @@ import com.stripe.net.RequestOptions;
 import java.util.List;
 
 public class Balance extends APIResource {
+	String object;
 	List<Money> available;
 	Boolean livemode;
 	List<Money> pending;
+
+	public String getObject() {
+		return object;
+	}
+
+	public void setObject(String object) {
+		this.object = object;
+	}
 
 	public List<Money> getAvailable() {
 		return available;
