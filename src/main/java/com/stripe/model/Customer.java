@@ -165,10 +165,17 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 		this.sources = sources;
 	}
 
+    /**
+     * @deprecated
+     * This will always be null as of API version 2017-01-18. If you wish to retrieve a customer's subscriptions,
+     * call Subscription.list and pass the `customer` option.
+     */
+    @Deprecated
 	public CustomerSubscriptionCollection getSubscriptions() {
 		return subscriptions;
 	}
 
+    @Deprecated
 	public void setSubscriptions(CustomerSubscriptionCollection subscriptions) {
 		this.subscriptions = subscriptions;
 	}
