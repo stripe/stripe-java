@@ -1,0 +1,11 @@
+{
+    "network_status": "approved_by_network",
+    "reason": "elevated_risk_level",
+    "risk_level": "elevated",
+    "rule": {
+        "action": "manual_review",
+        "predicate": ":risk_level: = 'elevated'"
+    },
+    "seller_message": "Stripe evaluated this charge as having elevated risk, and placed it in your manual review queue.",
+    "type": "manual_review"
+}
