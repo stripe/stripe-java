@@ -6,6 +6,7 @@ public class ChargeOutcome extends StripeObject {
 	protected String riskLevel;
 	protected String sellerMessage;
 	protected String type;
+	protected ChargeOutcomeRule rule;
 
 	public String getNetworkStatus() {
 		return networkStatus;
@@ -27,6 +28,10 @@ public class ChargeOutcome extends StripeObject {
 		return type;
 	}
 
+	public ChargeOutcomeRule getRule() {
+		return rule;
+	}
+
 	public void setNetworkStatus(String networkStatus) {
 		this.networkStatus = networkStatus;
 	}
@@ -45,5 +50,9 @@ public class ChargeOutcome extends StripeObject {
 
 	public void setType(String type) {
 		this.type = type;
+	}
+
+	public void setRule(ChargeOutcomeRule rule) {
+		this.rule = rule;
 	}
 }
