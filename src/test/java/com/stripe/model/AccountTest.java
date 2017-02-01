@@ -158,4 +158,18 @@ public class AccountTest extends BaseStripeTest {
 		verifyPost(ExternalAccount.class, "https://api.stripe.com/v1/accounts/acct_1032D82eZvKYlo2C/external_accounts", params);
 		verifyNoMoreInteractions(networkMock);
 	}
+
+	@Test
+	public void testAccountDelete() throws StripeException, IOException {
+		String json = resource("account.json");
+		stubNetwork(Account.class, json);
+		Account acc = Account.retrieve("acct_1032D82eZvKYlo2C");
+		verifyGet(Account.class, "https://api.stripe.com/v1/accounts/acct_1032D82eZvKYlo2C");
+
+		stubNetwork(DeletedAccount.class, "{\"id\": \"acct_1032D82eZvKYlo2C\", \"deleted\": \"true\"}");
+		acc.delete();
+		verifyDelete(DeletedAccount.class, "https://api.stripe.com/v1/accounts/acct_1032D82eZvKYlo2C");
+
+		verifyNoMoreInteractions(networkMock);
+	}
 }

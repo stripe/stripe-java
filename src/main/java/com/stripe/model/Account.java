@@ -303,6 +303,18 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 		return request(RequestMethod.POST, instanceURL(Account.class, this.id), params, Account.class, options);
 	}
 
+	public DeletedAccount delete()
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return delete((RequestOptions) null);
+	}
+
+	public DeletedAccount delete(RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return delete(null, (RequestOptions) null);
+	}
+
 	public DeletedAccount delete(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
