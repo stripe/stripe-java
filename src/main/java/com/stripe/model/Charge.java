@@ -47,6 +47,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	String statementDescriptor;
 	String status;
 	ExpandableField<Transfer> transfer;
+	String transferGroup;
 
 	@Deprecated
 	Card card;
@@ -457,6 +458,14 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 
 	public void setTransfer(String transferID) {
 		this.transfer = setExpandableFieldID(transferID, this.transfer);
+	}
+
+	public String getTransferGroup() {
+		return this.transferGroup;
+	}
+
+	public void setTransferGroup(String transferGroup) {
+		this.transferGroup = transferGroup;
 	}
 
 	public Transfer getTransferObject() {

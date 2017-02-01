@@ -35,6 +35,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 	String sourceType;
 	String statementDescriptor;
 	String status;
+	String transferGroup;
 	String type;
 
 	@Deprecated
@@ -229,6 +230,14 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getTransferGroup() {
+		return this.transferGroup;
+	}
+
+	public void setTransferGroup(String transferGroup) {
+		this.transferGroup = transferGroup;
 	}
 
 	public String getType() {
