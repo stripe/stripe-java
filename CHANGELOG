@@ -1,3 +1,7 @@
+=== 3.9.0 2017-02-02
+
+* Add variant of account `delete` that doesn't require parameters
+
 === 3.8.0 2017-01-23
 
 * Add `ChargeOutcomeRule` to `ChargeOutcome`
