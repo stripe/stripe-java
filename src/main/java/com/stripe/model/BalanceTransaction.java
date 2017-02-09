@@ -24,10 +24,11 @@ public class BalanceTransaction extends APIResource implements HasId {
 	List<Fee> feeDetails;
 	Integer net;
 	String source;
-	@Deprecated
-	TransferCollection sourcedTransfers;
 	String status;
 	String type;
+
+	@Deprecated
+	TransferCollection sourcedTransfers;
 
 	public String getId() {
 		return id;
