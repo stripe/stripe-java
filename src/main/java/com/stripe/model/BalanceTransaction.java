@@ -24,6 +24,7 @@ public class BalanceTransaction extends APIResource implements HasId {
 	List<Fee> feeDetails;
 	Integer net;
 	String source;
+	@Deprecated
 	TransferCollection sourcedTransfers;
 	String status;
 	String type;
@@ -116,6 +117,7 @@ public class BalanceTransaction extends APIResource implements HasId {
 		this.source = source;
 	}
 
+	@Deprecated
 	public TransferCollection getSourcedTransfers() {
 		if (sourcedTransfers != null && sourcedTransfers.getURL() == null && getSource() != null) {
 			sourcedTransfers.setURL(String.format("/v1/transfers?source_transaction=%s", getSource()));
