@@ -118,6 +118,11 @@ public class BalanceTransaction extends APIResource implements HasId {
 		this.source = source;
 	}
 
+	/**
+	 * @deprecated
+	 * Recent API versions no longer return this field (https://stripe.com/docs/upgrades#2017-01-27).
+	 * Prefer listing all transfers with the `transfer_group` parameter: https://stripe.com/docs/api/java#list_transfers-transfer_group.
+	 */
 	@Deprecated
 	public TransferCollection getSourcedTransfers() {
 		if (sourcedTransfers != null && sourcedTransfers.getURL() == null && getSource() != null) {
