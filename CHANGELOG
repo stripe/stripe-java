@@ -1,3 +1,7 @@
+=== 3.10.0 2017-02-13
+
+* Deprecated sourced transfers under balance transactions
+
 === 3.9.0 2017-02-02
 
 * Add variant of account `delete` that doesn't require parameters
