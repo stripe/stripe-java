@@ -80,7 +80,7 @@ public class StripeExample {
 }
 ```
 
-See [StripeTest.java](https://github.com/stripe/stripe-java/blob/master/src/test/java/com/stripe/StripeTest.java) for more examples.
+See files under [Functional Tests](https://github.com/stripe/stripe-java/blob/master/src/test/java/com/stripe/functional/) for more examples.
 
 ## Testing
 
