@@ -17,6 +17,7 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 	Long applicationFee;
 	Integer attemptCount;
 	Boolean attempted;
+	String billing;
 	ExpandableField<Charge> charge;
 	Boolean closed;
 	Long created;
@@ -25,12 +26,14 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 	Long date;
 	String description;
 	Discount discount;
+	Long dueDate;
 	Long endingBalance;
 	Boolean forgiven;
 	InvoiceLineItemCollection lines;
 	Boolean livemode;
 	Map<String, String> metadata;
 	Long nextPaymentAttempt;
+	String number;
 	Boolean paid;
 	Long periodEnd;
 	Long periodStart;
@@ -91,6 +94,14 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 
 	public void setAttempted(Boolean attempted) {
 		this.attempted = attempted;
+	}
+
+	public String getBilling() {
+		return billing;
+	}
+
+	public void setBilling(String billing) {
+		this.billing = billing;
 	}
 
 	public String getCharge() {
@@ -171,6 +182,14 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 		this.discount = discount;
 	}
 
+	public Long getDueDate() {
+		return dueDate;
+	}
+
+	public void setDueDate(Long dueDate) {
+		this.dueDate = dueDate;
+	}
+
 	public Long getEndingBalance() {
 		return endingBalance;
 	}
@@ -213,6 +232,14 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 
 	public void setNextPaymentAttempt(Long nextPaymentAttempt) {
 		this.nextPaymentAttempt = nextPaymentAttempt;
+	}
+
+	public String getNumber() {
+		return number;
+	}
+
+	public void setNumber(String number) {
+		this.number = number;
 	}
 
 	public Boolean getPaid() {

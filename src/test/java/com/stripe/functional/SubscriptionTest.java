@@ -192,4 +192,26 @@ public class SubscriptionTest extends BaseStripeFunctionalTest {
         Customer customer = Customer.create(defaultCustomerParams);
         testMetadata(customer.createSubscription(getSubscriptionParams()));
     }
+
+    @Test
+    public void testInvoicingSubscription() throws StripeException {
+        Plan plan = Plan.create(getUniquePlanParams());
+        defaultCustomerParams.put("email", "test@stripe.com");
+        Customer customer = Customer.create(defaultCustomerParams);
+
+        Map<String, Object> subscriptionParams = new HashMap<String, Object>();
+        subscriptionParams.put("plan", plan.getId());
+        subscriptionParams.put("billing", "send_invoice");
+        subscriptionParams.put("days_until_due", 30);
+        subscriptionParams.put("customer", customer.getId());
+        Subscription sub = Subscription.create(subscriptionParams);
+        assertEquals(plan.getId(), sub.getPlan().getId());
+        assertEquals("send_invoice", sub.getBilling());
+        assertEquals((Integer) 30, sub.getDaysUntilDue());
+
+        Map<String, Object> updateParams = new HashMap<String, Object>();
+        updateParams.put("days_until_due", 10);
+        Subscription subUpdated = sub.update(updateParams);
+        assertEquals((Integer) 10, subUpdated.getDaysUntilDue());
+    }
 }
