@@ -29,6 +29,7 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
 		objectMap.put("bitcoin_receiver", BitcoinReceiver.class);
 		objectMap.put("card", Card.class);
 		objectMap.put("charge", Charge.class);
+		objectMap.put("country_spec", CountrySpec.class);
 		objectMap.put("coupon", Coupon.class);
 		objectMap.put("customer", Customer.class);
 		objectMap.put("discount", Discount.class);
@@ -49,7 +50,9 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
 		objectMap.put("recipient", Recipient.class);
 		objectMap.put("review", Review.class);
 		objectMap.put("sku", SKU.class);
+		objectMap.put("source", Source.class);
 		objectMap.put("subscription", Subscription.class);
+		objectMap.put("subscription_item", SubscriptionItem.class);
 		objectMap.put("summary", Summary.class);
 		objectMap.put("three_d_secure", ThreeDSecure.class);
 		objectMap.put("token", Token.class);
