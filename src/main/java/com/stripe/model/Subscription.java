@@ -20,7 +20,7 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 	Long created;
 	Long currentPeriodEnd;
 	Long currentPeriodStart;
-	String customer;
+	ExpandableField<Customer> customer;;
 	Discount discount;
 	Long endedAt;
 	SubscriptionItemCollection items;
@@ -98,11 +98,25 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 	}
 
 	public String getCustomer() {
-		return customer;
+		if (customer == null) {
+			return null;
+		}
+		return customer.getId();
 	}
 
 	public void setCustomer(String customer) {
-		this.customer = customer;
+		this.customer = setExpandableFieldID(customer, this.customer);
+	}
+
+	public Customer getCustomerObject() {
+		if (this.customer == null) {
+			return null;
+		}
+		return this.customer.getExpanded();
+	}
+
+	public void setCustomerObject(Customer customer) {
+		this.customer = new ExpandableField<Customer>(customer.getId(), customer);
 	}
 
 	public Discount getDiscount() {
