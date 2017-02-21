@@ -1,6 +1,10 @@
-=== 3.10.1 2017-02-21
+=== 3.10.2 2017-02-21
 
 * Add missing API resources to object deserializer
+
+=== 3.10.1 2017-02-21
+
+* This release was inadvertently empty. See 3.10.2 for changes.
 
 === 3.10.0 2017-02-13
 
