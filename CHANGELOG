@@ -1,3 +1,7 @@
+=== 3.10.1 2017-02-21
+
+* Add missing API resources to object deserializer
+
 === 3.10.0 2017-02-13
 
 * Deprecated sourced transfers under balance transactions
