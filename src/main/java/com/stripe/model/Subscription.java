@@ -15,12 +15,14 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 	String id;
 	String object;
 	Double applicationFeePercent;
+	String billing;
 	Boolean cancelAtPeriodEnd;
 	Long canceledAt;
 	Long created;
 	Long currentPeriodEnd;
 	Long currentPeriodStart;
 	String customer;
+	Integer daysUntilDue;
 	Discount discount;
 	Long endedAt;
 	SubscriptionItemCollection items;
@@ -55,6 +57,14 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 
 	public void setApplicationFeePercent(Double applicationFeePercent) {
 		this.applicationFeePercent = applicationFeePercent;
+	}
+
+	public String getBilling() {
+		return billing;
+	}
+
+	public void setBilling(String billing) {
+		this.billing = billing;
 	}
 
 	public Boolean getCancelAtPeriodEnd() {
@@ -103,6 +113,14 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 
 	public void setCustomer(String customer) {
 		this.customer = customer;
+	}
+
+	public Integer getDaysUntilDue() {
+		return daysUntilDue;
+	}
+
+	public void setDaysUntilDue(Integer daysUntilDue) {
+		this.daysUntilDue = daysUntilDue;
 	}
 
 	public Discount getDiscount() {

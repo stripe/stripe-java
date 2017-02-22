@@ -25,6 +25,7 @@ public class InvoiceTest extends BaseStripeFunctionalTest {
 
     static Map<String, Object> getInvoiceItemParams() throws StripeException {
         Map<String, Object> params = new HashMap<String, Object>();
+        defaultCustomerParams.put("email", "test@stripe.com");
         Customer customer = Customer.create(defaultCustomerParams);
         params.put("amount", 100);
         params.put("currency", "usd");
@@ -82,9 +83,10 @@ public class InvoiceTest extends BaseStripeFunctionalTest {
     @Test
     public void testInvoiceListAndRetrieve() throws StripeException {
         Plan plan = Plan.create(getUniquePlanParams());
-        createDefaultCustomerWithPlan(plan);
+        Customer customer = createDefaultCustomerWithPlan(plan);
         Map<String, Object> listParams = new HashMap<String, Object>();
         listParams.put("count", 1);
+        listParams.put("subscription", customer.getSubscriptions().getData().get(0).getId());
         Invoice createdInvoice = Invoice.all(listParams).getData().get(0);
         Invoice retrievedInvoice = Invoice.retrieve(createdInvoice.getId());
         assertEquals(createdInvoice.getId(), retrievedInvoice.getId());
@@ -255,5 +257,23 @@ public class InvoiceTest extends BaseStripeFunctionalTest {
         Map<String,Object> params = new HashMap<String,Object>();
         params.put("customer", invItem.getCustomer());
         testMetadata(Invoice.create(params));
+    }
+
+    @Test
+    public void testSendInvoice() throws StripeException {
+        InvoiceItem invItem = InvoiceItem.create(getInvoiceItemParams());
+        Map<String,Object> params = new HashMap<String,Object>();
+        Long dueDate = (System.currentTimeMillis() / 1000) + 600;
+        params.put("customer", invItem.getCustomer());
+        params.put("billing", "send_invoice");
+        params.put("due_date", dueDate);
+        Invoice invoice = Invoice.create(params);
+        assertEquals("send_invoice", invoice.getBilling());
+        assertEquals(dueDate, invoice.getDueDate());
+
+        Map<String,Object> updateParams = new HashMap<String,Object>();
+        updateParams.put("paid", true);
+        Invoice updatedInvoice = invoice.update(updateParams);
+        assertTrue(updatedInvoice.getPaid());
     }
 }
