@@ -26,7 +26,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	ExpandableField<Customer> customer;
 	String description;
 	ExpandableField<Account> destination;
-	Dispute dispute;
+	ExpandableField<Dispute> dispute;
 	String failureCode;
 	String failureMessage;
 	FraudDetails fraudDetails;
@@ -232,12 +232,26 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 		this.destination = new ExpandableField<Account>(c.getId(), c);
 	}
 
-	public Dispute getDispute() {
-		return dispute;
+	public String getDispute() {
+		if (dispute == null) {
+			return null;
+		}
+		return dispute.getId();
 	}
 
-	public void setDispute(Dispute dispute) {
-		this.dispute = dispute;
+	public void setDispute(String dispute) {
+		this.dispute = setExpandableFieldID(dispute, this.dispute);
+	}
+
+	public Dispute getDisputeObject() {
+		if (dispute == null) {
+			return null;
+		}
+		return this.dispute.getExpanded();
+	}
+
+	public void setDisputeObject(Dispute dispute) {
+		this.dispute = new ExpandableField<Dispute>(dispute.getId(), dispute);
 	}
 
 	public String getFailureCode() {
