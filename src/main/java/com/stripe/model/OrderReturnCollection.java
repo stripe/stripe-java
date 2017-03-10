@@ -1,5 +1,5 @@
 package com.stripe.model;
 
-public class OrderReturnCollection extends StripeCollection<Order> {
+public class OrderReturnCollection extends StripeCollection<OrderReturn> {
 
 }

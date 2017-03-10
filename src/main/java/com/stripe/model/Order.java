@@ -15,23 +15,26 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
 	String id;
 	String object;
 	Long amount;
+	Long amountReturned;
 	String application;
 	Long applicationFee;
-	String charge;
+	ExpandableField<Charge> charge;
 	Long created;
 	String currency;
-	String customer;
+	ExpandableField<Customer> customer;
 	String email;
 	String externalCouponCode;
 	List<OrderItem> items;
 	Boolean livemode;
 	Map<String, String> metadata;
+	OrderReturnCollection returns;
 	String selectedShippingMethod;
 	ShippingDetails shipping;
 	List<ShippingMethod> shippingMethods;
 	String status;
 	StatusTransitions statusTransitions;
 	Long updated;
+	String upstreamId;
 
 	public String getId() {
 		return id;
@@ -57,6 +60,14 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
 		this.amount = amount;
 	}
 
+	public Long getAmountReturned() {
+		return amountReturned;
+	}
+
+	public void setAmountReturned(Long amountReturned) {
+		this.amountReturned = amountReturned;
+	}
+
 	public String getApplication() {
 		return application;
 	}
@@ -74,11 +85,26 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
 	}
 
 	public String getCharge() {
-		return charge;
+		if (this.charge == null) {
+			return null;
+		}
+		return this.charge.getId();
 	}
 
-	public void setCharge(String charge) {
-		this.charge = charge;
+	public void setCharge(String chargeID) {
+		this.charge = setExpandableFieldID(chargeID, this.charge);
+
+	}
+
+	public Charge getChargeObject() {
+		if (this.charge == null) {
+			return null;
+		}
+		return this.charge.getExpanded();
+	}
+
+	public void setChargeObject(Charge charge) {
+		this.charge = new ExpandableField<Charge>(charge.getId(), charge);
 	}
 
 	public Long getCreated() {
@@ -98,11 +124,25 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
 	}
 
 	public String getCustomer() {
-		return customer;
+		if (this.customer == null) {
+			return null;
+		}
+		return this.customer.getId();
 	}
 
-	public void setCustomer(String customer) {
-		this.customer = customer;
+	public void setCustomer(String customerID) {
+		this.customer = setExpandableFieldID(customerID, this.customer);
+	}
+
+	public Customer getCustomerObject() {
+		if (this.customer == null) {
+			return null;
+		}
+		return this.customer.getExpanded();
+	}
+
+	public void setCustomerObject(Customer customer) {
+		this.customer = new ExpandableField<Customer>(customer.getId(), customer);
 	}
 
 	public String getEmail() {
@@ -143,6 +183,14 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
 
 	public void setMetadata(Map<String, String> metadata) {
 		this.metadata = metadata;
+	}
+
+	public OrderReturnCollection getReturns() {
+		return returns;
+	}
+
+	public void setReturns(OrderReturnCollection returns) {
+		this.returns = returns;
 	}
 
 	public String getSelectedShippingMethod() {
@@ -193,6 +241,14 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
 		this.updated = updated;
 	}
 
+	public String getUpstreamId() {
+		return upstreamId;
+	}
+
+	public void setUpstreamId(String upstreamId) {
+		this.upstreamId = upstreamId;
+	}
+
 	public static Order create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -221,6 +277,12 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.GET, instanceURL(Order.class, id), null, Order.class, options);
+	}
+
+	public static Order retrieve(String id, Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, instanceURL(Order.class, id), params, Order.class, options);
 	}
 
 	public static OrderCollection list(Map<String, Object> params)
