@@ -33,7 +33,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	ExpandableField<Invoice> invoice;
 	Boolean livemode;
 	Map<String, String> metadata;
-	ChargeOutcome outcome;
+	ExpandableField<ChargeOutcome> outcome;
 	ExpandableField<Order> order;
 	Boolean paid;
 	String receiptEmail;
@@ -48,6 +48,12 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	String status;
 	ExpandableField<Transfer> transfer;
 	String transferGroup;
+
+	// A pre-expandable version of outcome. Outcome became collapsed by default
+	// in API version 2017-02-14.
+	@Deprecated
+	@SerializedName("outcome")
+	ChargeOutcome outcomeOld;
 
 	@Deprecated
 	Card card;
@@ -338,12 +344,36 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 		this.order = new ExpandableField<Order>(c.getId(), c);
 	}
 
+	@Deprecated
 	public ChargeOutcome getOutcome() {
-		return outcome;
+		return outcomeOld;
 	}
 
+	@Deprecated
 	public void setOutcome(ChargeOutcome outcome) {
-		this.outcome = outcome;
+		this.outcomeOld = outcome;
+	}
+
+	public String getOutcomeID() {
+		if (this.outcome == null) {
+			return null;
+		}
+		return this.outcome.getId();
+	}
+
+	public void setOutcomeID(String outcomeID) {
+		this.outcome = setExpandableFieldID(outcomeID, this.outcome);
+	}
+
+	public ChargeOutcome getOutcomeObject() {
+		if (this.outcome == null) {
+			return null;
+		}
+		return this.outcome.getExpanded();
+	}
+
+	public void setOutcomeObject(ChargeOutcome outcome) {
+		this.outcome = new ExpandableField<ChargeOutcome>(outcome.getId(), outcome);
 	}
 
 	public Boolean getPaid() {
