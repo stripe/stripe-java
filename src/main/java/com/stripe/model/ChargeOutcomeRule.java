@@ -1,11 +1,16 @@
 package com.stripe.model;
 
-public class ChargeOutcomeRule extends StripeObject {
+public class ChargeOutcomeRule extends StripeObject implements HasId {
 	protected String action;
+	protected String id;
 	protected String predicate;
 
 	public String getAction() {
 		return action;
+	}
+
+	public String getId() {
+		return id;
 	}
 
 	public String getPredicate() {
@@ -14,6 +19,10 @@ public class ChargeOutcomeRule extends StripeObject {
 
 	public void setAction(String action) {
 		this.action = action;
+	}
+
+	public void setId(String id) {
+		this.id = id;
 	}
 
 	public void setPredicate(String predicate) {

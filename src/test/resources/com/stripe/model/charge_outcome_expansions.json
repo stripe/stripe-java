@@ -4,6 +4,7 @@
     "risk_level": "elevated",
     "rule": {
         "action": "manual_review",
+        "id": "ssr_199IRC2eZvKYlo2CPfFd4CB6",
         "predicate": ":risk_level: = 'elevated'"
     },
     "seller_message": "Stripe evaluated this charge as having elevated risk, and placed it in your manual review queue.",

@@ -2,6 +2,7 @@
     "network_status": "approved_by_network",
     "reason": null,
     "risk_level": "normal",
+    "rule": "ssr_199IRC2eZvKYlo2CPfFd4CB6",
     "seller_message": "Payment complete.",
     "type": "authorized"
 }
