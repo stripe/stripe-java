@@ -205,22 +205,4 @@ public class DisputeTest extends BaseStripeFunctionalTest {
         assertNotNull(evidenceDetails);
         assertEquals(1, evidenceDetails.getSubmissionCount().intValue());
     }
-
-    @Test
-    public void testSubmitOldStyleEvidence() throws StripeException, InterruptedException {
-        int chargeValueCents = 100;
-        Stripe.apiVersion = "2014-11-20";
-        Charge disputedCharge = createDisputedCharge(chargeValueCents);
-
-        String myEvidence = "Here's evidence showing this charge is legitimate.";
-        Dispute initialDispute = disputedCharge.getDisputeObject();
-        assertNull(initialDispute.getEvidence());
-        assertNull(initialDispute.getEvidenceSubObject());
-        Map<String, Object> disputeParams = ImmutableMap.<String, Object>of("evidence", myEvidence);
-
-        Dispute updatedDispute = disputedCharge.updateDispute(disputeParams);
-        assertNotNull(updatedDispute);
-        assertEquals(myEvidence, updatedDispute.getEvidence());
-        assertNull(updatedDispute.getEvidenceSubObject());
-    }
 }
