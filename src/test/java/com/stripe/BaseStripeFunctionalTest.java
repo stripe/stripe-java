@@ -72,8 +72,13 @@ public class BaseStripeFunctionalTest {
     @BeforeClass
     public static void setUp() {
         Stripe.apiKey = "tGN0bIwXnHdwOa85VABjPdSn8nWY7G7I"; // stripe public
+
+        // Peg the API version so that it can be varied independently of the
+        // one set on the test account.
+        Stripe.apiVersion = "2017-02-14";
+
         // test key
-        supportedRequestOptions = RequestOptions.builder().setStripeVersion("2015-02-16").build();
+        supportedRequestOptions = RequestOptions.builder().setStripeVersion(Stripe.apiVersion).build();
 
         defaultCardParams.put("number", "4242424242424242");
         defaultCardParams.put("exp_month", 12);
