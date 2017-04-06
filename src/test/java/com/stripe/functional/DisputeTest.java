@@ -37,7 +37,7 @@ public class DisputeTest extends BaseStripeFunctionalTest {
         Thread.sleep(10000);
 
         Map<String, Object> retrieveParams = new HashMap<String, Object>();
-		retrieveParams.put("expand[]", "dispute");
+        retrieveParams.put("expand[]", "dispute");
         return Charge.retrieve(charge.getId(), retrieveParams, options);
     }
 
@@ -209,7 +209,7 @@ public class DisputeTest extends BaseStripeFunctionalTest {
 
     @Test
     public void testSubmitOldStyleEvidence() throws StripeException, InterruptedException {
-		RequestOptions options = RequestOptions.builder().setStripeVersion("2014-11-20").build();
+        RequestOptions options = RequestOptions.builder().setStripeVersion("2014-11-20").build();
 
         int chargeValueCents = 100;
         //Stripe.apiVersion = "2014-11-20";
