@@ -5,6 +5,7 @@ import com.stripe.BaseStripeFunctionalTest;
 import com.stripe.Stripe;
 import com.stripe.exception.*;
 import com.stripe.model.*;
+import com.stripe.net.RequestOptions;
 import org.junit.Test;
 
 import java.io.File;
@@ -20,7 +21,7 @@ import static org.junit.Assert.assertNotNull;
 
 public class DisputeTest extends BaseStripeFunctionalTest {
 
-    private Charge createDisputedCharge(int chargeValueCents) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException, InterruptedException {
+    private Charge createDisputedCharge(int chargeValueCents, RequestOptions options) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException, InterruptedException {
         Map<String, Object> chargeParams = new HashMap<String, Object>();
         chargeParams.putAll(defaultChargeParams);
         chargeParams.put("amount", chargeValueCents);
@@ -29,7 +30,7 @@ public class DisputeTest extends BaseStripeFunctionalTest {
         testModeDisputeCardParams.put("exp_month", 12);
         testModeDisputeCardParams.put("exp_year", getYear());
         chargeParams.put("card", testModeDisputeCardParams);
-        Charge charge = Charge.create(chargeParams);
+        Charge charge = Charge.create(chargeParams, options);
 
         // This test relies on the server asynchronously marking the charge as disputed.
         // TODO: find a more reliable way to do this instead of sleeping
@@ -37,13 +38,13 @@ public class DisputeTest extends BaseStripeFunctionalTest {
 
         Map<String, Object> retrieveParams = new HashMap<String, Object>();
 		retrieveParams.put("expand[]", "dispute");
-        return Charge.retrieve(charge.getId(), retrieveParams, null);
+        return Charge.retrieve(charge.getId(), retrieveParams, options);
     }
 
     @Test
     public void testDisputedCharge() throws StripeException, InterruptedException {
         int chargeValueCents = 100;
-        Charge disputedCharge = createDisputedCharge(chargeValueCents);
+        Charge disputedCharge = createDisputedCharge(chargeValueCents, null);
         Dispute dispute = disputedCharge.getDisputeObject();
         assertNotNull(dispute);
         assertFalse(dispute.getIsChargeRefundable());
@@ -54,7 +55,7 @@ public class DisputeTest extends BaseStripeFunctionalTest {
     @Test
     public void testRetrieveDispute() throws StripeException, InterruptedException {
         int chargeValueCents = 100;
-        Charge disputedCharge = createDisputedCharge(chargeValueCents);
+        Charge disputedCharge = createDisputedCharge(chargeValueCents, null);
         Dispute dispute = disputedCharge.getDisputeObject();
         Dispute retrievedDispute = Dispute.retrieve(dispute.getId());
         assertEquals(dispute.getId(), retrievedDispute.getId());
@@ -63,7 +64,7 @@ public class DisputeTest extends BaseStripeFunctionalTest {
     @Test
     public void testUpdateDispute() throws StripeException, InterruptedException {
         int chargeValueCents = 100;
-        Charge disputedCharge = createDisputedCharge(chargeValueCents);
+        Charge disputedCharge = createDisputedCharge(chargeValueCents, null);
 
         Dispute initialDispute = disputedCharge.getDisputeObject();
         EvidenceSubObject emptyEvidence = new EvidenceSubObject();
@@ -103,7 +104,7 @@ public class DisputeTest extends BaseStripeFunctionalTest {
     @Test
     public void testCloseDispute() throws StripeException, InterruptedException {
         int chargeValueCents = 100;
-        Charge disputedCharge = createDisputedCharge(chargeValueCents);
+        Charge disputedCharge = createDisputedCharge(chargeValueCents, null);
         Dispute dispute = disputedCharge.getDisputeObject();
         assertEquals("needs_response", dispute.getStatus());
 
@@ -175,7 +176,7 @@ public class DisputeTest extends BaseStripeFunctionalTest {
     @Test
     public void testSubmitEvidence() throws StripeException, InterruptedException {
         int chargeValueCents = 100;
-        Charge disputedCharge = createDisputedCharge(chargeValueCents);
+        Charge disputedCharge = createDisputedCharge(chargeValueCents, null);
 
         Dispute initialDispute = disputedCharge.getDisputeObject();
         assertNull(initialDispute.getEvidence());
@@ -204,5 +205,25 @@ public class DisputeTest extends BaseStripeFunctionalTest {
         EvidenceDetails evidenceDetails = updatedDispute.getEvidenceDetails();
         assertNotNull(evidenceDetails);
         assertEquals(1, evidenceDetails.getSubmissionCount().intValue());
+    }
+
+    @Test
+    public void testSubmitOldStyleEvidence() throws StripeException, InterruptedException {
+		RequestOptions options = RequestOptions.builder().setStripeVersion("2014-11-20").build();
+
+        int chargeValueCents = 100;
+        //Stripe.apiVersion = "2014-11-20";
+        Charge disputedCharge = createDisputedCharge(chargeValueCents, options);
+
+        String myEvidence = "Here's evidence showing this charge is legitimate.";
+        Dispute initialDispute = disputedCharge.getDisputeObject();
+        assertNull(initialDispute.getEvidence());
+        assertNull(initialDispute.getEvidenceSubObject());
+        Map<String, Object> disputeParams = ImmutableMap.<String, Object>of("evidence", myEvidence);
+
+        Dispute updatedDispute = disputedCharge.updateDispute(disputeParams, options);
+        assertNotNull(updatedDispute);
+        assertEquals(myEvidence, updatedDispute.getEvidence());
+        assertNull(updatedDispute.getEvidenceSubObject());
     }
 }
