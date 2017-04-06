@@ -1,3 +1,7 @@
+=== 4.2.0 2017-04-06
+
+* Add support for payouts; see: https://stripe.com/docs/upgrades#2017-04-06
+
 === 4.1.0 2017-04-04
 
 * Make `rule` under `ChargeOutcome` expandable
