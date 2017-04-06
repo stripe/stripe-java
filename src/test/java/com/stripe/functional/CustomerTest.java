@@ -1,6 +1,7 @@
 package com.stripe.functional;
 
 import com.google.common.collect.ImmutableMap;
+import static org.hamcrest.CoreMatchers.instanceOf;
 import com.stripe.BaseStripeFunctionalTest;
 import com.stripe.Stripe;
 import com.stripe.exception.InvalidRequestException;
@@ -30,9 +31,10 @@ public class CustomerTest extends BaseStripeFunctionalTest {
     public void testCustomerCreate() throws StripeException {
         Customer customer = Customer.create(defaultCustomerParams, supportedRequestOptions);
         assertEquals(customer.getDescription(), "J Bindings Customer");
-        List<Card> customerCards = customer.getCards().getData();
-        assertEquals(1, customerCards.size());
-        assertEquals("4242", customerCards.get(0).getLast4());
+        List<ExternalAccount> customerSources = customer.getSources().getData();
+        assertEquals(1, customerSources.size());
+		assertThat(customerSources.get(0), instanceOf(Card.class));
+        assertEquals("4242", ((Card)customerSources.get(0)).getLast4());
     }
 
     @Test
@@ -208,27 +210,27 @@ public class CustomerTest extends BaseStripeFunctionalTest {
     @Test
     public void testCustomerCardAddition() throws StripeException {
         Customer createdCustomer = Customer.create(defaultCustomerParams, supportedRequestOptions);
-        String originalDefaultCard = createdCustomer.getDefaultCard();
+        String originalDefaultSource = createdCustomer.getDefaultSource();
 
         Map<String, Object> creationParams = new HashMap<String, Object>();
         creationParams.put("card", defaultCardParams);
-        Card addedCard = createdCustomer.createCard(creationParams);
+        ExternalAccount addedCard = createdCustomer.getSources().create(creationParams);
 
         Token token = Token.create(defaultTokenParams);
         createdCustomer.createCard(token.getId());
 
         Customer updatedCustomer = Customer.retrieve(createdCustomer.getId(), supportedRequestOptions);
-        assertEquals((Integer) updatedCustomer.getCards().getData().size(), (Integer) 3);
-        assertEquals(updatedCustomer.getDefaultCard(), originalDefaultCard);
+        assertEquals(3, updatedCustomer.getSources().getData().size());
+        assertEquals(updatedCustomer.getDefaultSource(), originalDefaultSource);
 
         Map<String, Object> updateParams = new HashMap<String, Object>();
         updateParams.put("default_card", addedCard.getId());
         Customer customerAfterDefaultCardUpdate = updatedCustomer.update(updateParams, supportedRequestOptions);
-        assertEquals((Integer) customerAfterDefaultCardUpdate.getCards().getData().size(), (Integer) 3);
-        assertEquals(customerAfterDefaultCardUpdate.getDefaultCard(), addedCard.getId());
+        assertEquals(3, updatedCustomer.getSources().getData().size());
+        assertEquals(customerAfterDefaultCardUpdate.getDefaultSource(), addedCard.getId());
 
-        assertEquals(customerAfterDefaultCardUpdate.getCards().retrieve(originalDefaultCard).getId(), originalDefaultCard);
-        assertEquals(customerAfterDefaultCardUpdate.getCards().retrieve(addedCard.getId()).getId(), addedCard.getId());
+        assertEquals(customerAfterDefaultCardUpdate.getSources().retrieve(originalDefaultSource).getId(), originalDefaultSource);
+        assertEquals(customerAfterDefaultCardUpdate.getSources().retrieve(addedCard.getId()).getId(), addedCard.getId());
     }
 
     @Test
@@ -237,23 +239,24 @@ public class CustomerTest extends BaseStripeFunctionalTest {
 
         Map<String, Object> creationParams = new HashMap<String, Object>();
         creationParams.put("card", defaultCardParams);
-        Card addedCard = createdCustomer.getCards().create(creationParams);
+        ExternalAccount addedCard = createdCustomer.getSources().create(creationParams);
 
         assertEquals(createdCustomer.getId(), addedCard.getCustomer());
 
         Customer updatedCustomer = Customer.retrieve(createdCustomer.getId(), supportedRequestOptions);
-        assertEquals((Integer) updatedCustomer.getCards().getData().size(), (Integer) 2);
+        assertEquals(2, updatedCustomer.getSources().getData().size());
     }
 
 
     @Test
     public void testCustomerCardUpdate() throws StripeException {
         Customer customer = Customer.create(defaultCustomerParams, supportedRequestOptions);
-        Card originalCard = customer.getCards().getData().get(0);
+        ExternalAccount originalCard = customer.getSources().getData().get(0);
         Map<String, Object> updateParams = new HashMap<String, Object>();
         updateParams.put("name", "J Bindings Cardholder, Jr.");
-        Card updatedCard = originalCard.update(updateParams);
-        assertEquals(updatedCard.getName(), "J Bindings Cardholder, Jr.");
+        ExternalAccount updatedCard = originalCard.update(updateParams);
+		assertThat(updatedCard, instanceOf(Card.class));
+        assertEquals(((Card)updatedCard).getName(), "J Bindings Cardholder, Jr.");
     }
 
     @Test
@@ -263,13 +266,13 @@ public class CustomerTest extends BaseStripeFunctionalTest {
         creationParams.put("card", defaultCardParams);
         customer.createCard(creationParams);
 
-        Card card = customer.getCards().getData().get(0);
-        DeletedCard deletedCard = card.delete();
+        ExternalAccount card = customer.getSources().getData().get(0);
+        DeletedExternalAccount deletedCard = card.delete();
         Customer retrievedCustomer = Customer.retrieve(customer.getId(), supportedRequestOptions);
 
         assertTrue(deletedCard.getDeleted());
         assertEquals(deletedCard.getId(), card.getId());
-        for(Card retrievedCard : retrievedCustomer.getCards().getData()) {
+        for(ExternalAccount retrievedCard : retrievedCustomer.getSources().getData()) {
             assertFalse("Card was not actually deleted: " + card.getId(), card.getId().equals(retrievedCard.getId()));
         }
     }
@@ -332,9 +335,10 @@ public class CustomerTest extends BaseStripeFunctionalTest {
         Customer customer = Customer.create(defaultCustomerParams,
                 supportedRequestOptions);
         assertEquals(customer.getDescription(), "J Bindings Customer");
-        List<Card> customerCards = customer.getCards().getData();
-        assertEquals(1, customerCards.size());
-        assertEquals("4242", customerCards.get(0).getLast4());
+        List<ExternalAccount> customerSources = customer.getSources().getData();
+        assertEquals(1, customerSources.size());
+		assertThat(customerSources.get(0), instanceOf(Card.class));
+        assertEquals("4242", ((Card)customerSources.get(0)).getLast4());
     }
 
     @Test

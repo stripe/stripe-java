@@ -1,6 +1,7 @@
 package com.stripe.functional;
 
 import com.google.common.collect.ImmutableMap;
+import static org.hamcrest.CoreMatchers.instanceOf;
 import com.stripe.Stripe;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
@@ -170,8 +171,11 @@ public class ChargeTest extends BaseStripeFunctionalTest {
 		invalidChargeParams.put("card", invalidCardParams);
 		Charge charge = Charge.create(invalidChargeParams, supportedRequestOptions);
 		assertEquals(charge.getPaid(), true);
-		assertEquals(charge.getCard().getAddressZipCheck(), "fail");
-		assertEquals(charge.getCard().getAddressLine1Check(), "pass");
+
+		assertThat(charge.getSource(), instanceOf(Card.class));
+		Card card = (Card)charge.getSource();
+		assertEquals(card.getAddressZipCheck(), "fail");
+		assertEquals(card.getAddressLine1Check(), "pass");
 	}
 
 	@Test
@@ -188,8 +192,11 @@ public class ChargeTest extends BaseStripeFunctionalTest {
 		invalidChargeParams.put("card", invalidCardParams);
 		Charge charge = Charge.create(invalidChargeParams, supportedRequestOptions);
 		assertEquals(charge.getPaid(), true);
-		assertEquals(charge.getCard().getAddressZipCheck(), "pass");
-		assertEquals(charge.getCard().getAddressLine1Check(), "fail");
+
+		assertThat(charge.getSource(), instanceOf(Card.class));
+		Card card = (Card)charge.getSource();
+		assertEquals(card.getAddressZipCheck(), "pass");
+		assertEquals(card.getAddressLine1Check(), "fail");
 	}
 
 	// ChargeCollection Tests:
