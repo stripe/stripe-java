@@ -81,10 +81,12 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 		this.amountReversed = amountReversed;
 	}
 
+	@Deprecated
 	public String getApplicationFee() {
 		return applicationFee;
 	}
 
+	@Deprecated
 	public void setApplicationFee(String applicationFee) {
 		this.applicationFee = applicationFee;
 	}
@@ -97,10 +99,12 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 		this.balanceTransaction = balanceTransaction;
 	}
 
+	@Deprecated
 	public BankAccount getBankAccount() {
 		return bankAccount;
 	}
 
+	@Deprecated
 	public void setBankAccount(BankAccount bankAccount) {
 		this.bankAccount = bankAccount;
 	}
@@ -129,10 +133,12 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 		this.date = date;
 	}
 
+	@Deprecated
 	public String getDescription() {
 		return description;
 	}
 
+	@Deprecated
 	public void setDescription(String description) {
 		this.description = description;
 	}
@@ -153,18 +159,22 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 		this.destinationPayment = destinationPayment;
 	}
 
+	@Deprecated
 	public String getFailureCode() {
 		return failureCode;
 	}
 
+	@Deprecated
 	public void setFailureCode(String failureCode) {
 		this.failureCode = failureCode;
 	}
 
+	@Deprecated
 	public String getFailureMessage() {
 		return failureMessage;
 	}
 
+	@Deprecated
 	public void setFailureMessage(String failureMessage) {
 		this.failureMessage = failureMessage;
 	}
@@ -200,10 +210,12 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 		this.reversed = reversed;
 	}
 
+	@Deprecated
 	public String getSourceTransaction() {
 		return sourceTransaction;
 	}
 
+	@Deprecated
 	public void setSourceTransaction(String sourceTransaction) {
 		this.sourceTransaction = sourceTransaction;
 	}
@@ -224,10 +236,12 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 		this.statementDescriptor = statementDescriptor;
 	}
 
+	@Deprecated
 	public String getStatus() {
 		return status;
 	}
 
+	@Deprecated
 	public void setStatus(String status) {
 		this.status = status;
 	}
@@ -240,10 +254,12 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 		this.transferGroup = transferGroup;
 	}
 
+	@Deprecated
 	public String getType() {
 		return type;
 	}
 
+	@Deprecated
 	public void setType(String type) {
 		this.type = type;
 	}

@@ -26,14 +26,20 @@ public class ChargeTest extends BaseStripeFunctionalTest {
 	}
 
 	@Test
-	public void testChargeCreateExpandBalanceTransaction() throws StripeException {
-		String[] expand = new String[]{"balance_transaction"};
-		Map<String, Object> params = defaultChargeParams;
-		params.put("expand[]", "balance_transaction");
-		Charge createdCharge = Charge.create(params);
-		assertFalse(createdCharge.getRefunded());
-		//Check expanded BT
-		assertEquals(createdCharge.getBalanceTransactionObject().getId(), createdCharge.getBalanceTransaction());
+	public void testChargeExpandBalanceTransaction() throws StripeException {
+		Map<String, Object> createParams = defaultChargeParams;
+		createParams.put("expand[]", "balance_transaction");
+		Charge createdCharge = Charge.create(createParams);
+
+		assertEquals(createdCharge.getBalanceTransactionObject().getId(),
+			createdCharge.getBalanceTransaction());
+
+		Map<String, Object> retrieveParams = new HashMap<String, Object>();
+		retrieveParams.put("expand[]", "balance_transaction");
+		Charge retrievedCharge = Charge.retrieve(createdCharge.getId(), retrieveParams, null);
+
+		assertEquals(retrievedCharge.getBalanceTransactionObject().getId(),
+			retrievedCharge.getBalanceTransaction());
 	}
 
 	@Test
@@ -206,18 +212,6 @@ public class ChargeTest extends BaseStripeFunctionalTest {
 		listParams.put("count", 1);
 		List<Charge> charges = Charge.all(listParams).getData();
 		assertEquals(charges.size(), 1);
-	}
-
-	@Test
-	public void testChargeListExpandBalanceTransaction() throws StripeException {
-		Map<String, Object> listParams = new HashMap<String, Object>();
-		listParams.put("count", 1);
-		listParams.put("expand[]", "data.balance_transaction");
-		List<Charge> charges = Charge.list(listParams).getData();
-		assertEquals(charges.size(), 1);
-		//Check expanded BT
-		Charge c = charges.get(0);
-		assertEquals(c.getBalanceTransactionObject().getId(), c.getBalanceTransaction());
 	}
 
 	@Test

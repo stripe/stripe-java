@@ -44,6 +44,7 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
 		objectMap.put("order", Order.class);
 		objectMap.put("order_item", OrderItem.class);
 		objectMap.put("order_return", OrderReturn.class);
+		objectMap.put("payout", Payout.class);
 		objectMap.put("plan", Plan.class);
 		objectMap.put("product", Product.class);
 		objectMap.put("refund", Refund.class);

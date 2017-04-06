@@ -40,8 +40,9 @@ public class TransferTest extends BaseStripeFunctionalTest {
 
     @Test
     public void testTransferCreate() throws StripeException {
-        Transfer createdTransfer = Transfer.create(getTransferParams());
-        assertEquals("paid", createdTransfer.getStatus());
+        Map<String, Object> transferParams = getTransferParams();
+        Transfer createdTransfer = Transfer.create(transferParams);
+        assertEquals(transferParams.get("destination"), createdTransfer.getDestination());
     }
 
     @Test

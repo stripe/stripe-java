@@ -1,0 +1,20 @@
+{
+  "id": "po_123456789ABCD",
+  "object": "payout",
+  "amount": 10000,
+  "arrival_date": 1487116449,
+  "balance_transaction": "txn_123456789ABCD",
+  "cancellation_balance_transaction": null,
+  "created": 1487116449,
+  "currency": "usd",
+  "destination": "ba_123456789ABCD",
+  "failure_code": null,
+  "failure_message": null,
+  "livemode": false,
+  "metadata": {},
+  "method": "standard",
+  "source_type": "card",
+  "statement_descriptor": null,
+  "status": "paid",
+  "type": "bank_account"
+}
