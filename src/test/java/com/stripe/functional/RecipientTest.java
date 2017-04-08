@@ -54,11 +54,10 @@ public class RecipientTest extends BaseStripeFunctionalTest {
         String originalDefaultCard = createdRecipient.getDefaultCard();
 
         Map<String, Object> creationParams = new HashMap<String, Object>();
-        creationParams.put("card", defaultDebitCardParams);
+        creationParams.put("card", "tok_visa_debit");
         Card addedCard = createdRecipient.createCard(creationParams);
 
-        Token token = Token.create(defaultDebitTokenParams);
-        createdRecipient.createCard(token.getId());
+        createdRecipient.createCard("tok_visa_debit");
 
         Recipient updatedRecipient = Recipient.retrieve(createdRecipient.getId());
         assertEquals((Integer) 3, (Integer) updatedRecipient.getCards().getData().size());
@@ -88,7 +87,7 @@ public class RecipientTest extends BaseStripeFunctionalTest {
     public void testRecipientCardDelete() throws StripeException {
         Recipient recipient = Recipient.create(defaultRecipientParams);
         Map<String, Object> creationParams = new HashMap<String, Object>();
-        creationParams.put("card", defaultDebitCardParams);
+        creationParams.put("card", "tok_visa_debit");
         recipient.createCard(creationParams);
 
         Card card = recipient.getCards().getData().get(0);

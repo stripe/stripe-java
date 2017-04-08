@@ -158,7 +158,7 @@ public class RelayTest extends BaseStripeFunctionalTest {
         Order updated = retrieved.update(ImmutableMap.<String,Object>of("metadata", ImmutableMap.of("foo", "bar")), relayRequestOptions);
         assertEquals("bar", updated.getMetadata().get("foo"));
 
-        Order paid = updated.pay(ImmutableMap.<String,Object>of("source", defaultSourceParams), relayRequestOptions);
+        Order paid = updated.pay(ImmutableMap.<String,Object>of("source", "tok_visa"), relayRequestOptions);
         assertEquals("paid", paid.getStatus());
 
         OrderReturn returned = paid.returnOrder(null, relayRequestOptions);

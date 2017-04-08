@@ -84,7 +84,7 @@ public class ChargeTest extends BaseStripeFunctionalTest {
 		assertNotNull(retrievedCharge.getSource());
 		assertEquals("card", retrievedCharge.getSource().getObject());
 		Card card = (Card) retrievedCharge.getSource();
-		assertEquals(defaultCardParams.get("address_city"), card.getAddressCity());
+		assertEquals("4242", card.getLast4());
 		//BT Checks:
 		assertNotNull(retrievedCharge.getBalanceTransaction());
 		assertNull(retrievedCharge.getBalanceTransactionObject());
@@ -140,7 +140,7 @@ public class ChargeTest extends BaseStripeFunctionalTest {
 		invalidCardParams.put("number", "4242424242424241");
 		invalidCardParams.put("exp_month", 12);
 		invalidCardParams.put("exp_year", getYear());
-		invalidChargeParams.put("card", invalidCardParams);
+		invalidChargeParams.put("source", invalidCardParams);
 		Charge.create(invalidChargeParams);
 	}
 
@@ -149,10 +149,7 @@ public class ChargeTest extends BaseStripeFunctionalTest {
 		Map<String, Object> declinedChargeParams = new HashMap<String, Object>();
 		declinedChargeParams.putAll(defaultChargeParams);
 		Map<String, Object> declinedCardParams = new HashMap<String, Object>();
-		declinedCardParams.put("number", "4000000000000002");
-		declinedCardParams.put("exp_month", 12);
-		declinedCardParams.put("exp_year", getYear());
-		declinedChargeParams.put("card", declinedCardParams);
+		declinedChargeParams.put("source", "tok_chargeDeclined");
 
 		try {
 			Charge.create(declinedChargeParams);
@@ -168,20 +165,13 @@ public class ChargeTest extends BaseStripeFunctionalTest {
 		Map<String, Object> invalidChargeParams = new HashMap<String, Object>();
 		invalidChargeParams.putAll(defaultChargeParams);
 		Map<String, Object> invalidCardParams = new HashMap<String, Object>();
-		// See https://stripe.com/docs/testing
-		invalidCardParams.put("number", "4000000000000036");
-		invalidCardParams.put("address_zip", "94024");
-		invalidCardParams.put("address_line1", "42 Foo Street");
-		invalidCardParams.put("exp_month", 12);
-		invalidCardParams.put("exp_year", getYear());
-		invalidChargeParams.put("card", invalidCardParams);
+		invalidChargeParams.put("source", "tok_avsZipFail");
 		Charge charge = Charge.create(invalidChargeParams, supportedRequestOptions);
 		assertEquals(charge.getPaid(), true);
 
 		assertThat(charge.getSource(), instanceOf(Card.class));
 		Card card = (Card)charge.getSource();
 		assertEquals(card.getAddressZipCheck(), "fail");
-		assertEquals(card.getAddressLine1Check(), "pass");
 	}
 
 	@Test
@@ -189,19 +179,12 @@ public class ChargeTest extends BaseStripeFunctionalTest {
 		Map<String, Object> invalidChargeParams = new HashMap<String, Object>();
 		invalidChargeParams.putAll(defaultChargeParams);
 		Map<String, Object> invalidCardParams = new HashMap<String, Object>();
-		// See https://stripe.com/docs/testing
-		invalidCardParams.put("number", "4000000000000028");
-		invalidCardParams.put("address_zip", "94024");
-		invalidCardParams.put("address_line1", "42 Foo Street");
-		invalidCardParams.put("exp_month", 12);
-		invalidCardParams.put("exp_year", getYear());
-		invalidChargeParams.put("card", invalidCardParams);
+		invalidChargeParams.put("source", "tok_avsLine1Fail");
 		Charge charge = Charge.create(invalidChargeParams, supportedRequestOptions);
 		assertEquals(charge.getPaid(), true);
 
 		assertThat(charge.getSource(), instanceOf(Card.class));
 		Card card = (Card)charge.getSource();
-		assertEquals(card.getAddressZipCheck(), "pass");
 		assertEquals(card.getAddressLine1Check(), "fail");
 	}
 
@@ -267,7 +250,7 @@ public class ChargeTest extends BaseStripeFunctionalTest {
 		invalidCardParams.put("number", "4242424242424241");
 		invalidCardParams.put("exp_month", 12);
 		invalidCardParams.put("exp_year", getYear());
-		invalidChargeParams.put("card", invalidCardParams);
+		invalidChargeParams.put("source", invalidCardParams);
 		Charge.create(invalidChargeParams, Stripe.apiKey);
 	}
 

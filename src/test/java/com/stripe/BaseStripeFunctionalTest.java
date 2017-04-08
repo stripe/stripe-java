@@ -17,15 +17,11 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 public class BaseStripeFunctionalTest {
-    public static Map<String, Object> defaultCardParams = new HashMap<String, Object>();
-    public static Map<String, Object> defaultSourceParams = new HashMap<String, Object>();
-    public static Map<String, Object> defaultDebitCardParams = new HashMap<String, Object>();
     public static Map<String, Object> defaultChargeParams = new HashMap<String, Object>();
     public static Map<String, Object> defaultCustomerParams = new HashMap<String, Object>();
     public static Map<String, Object> defaultPlanParams = new HashMap<String, Object>();
     public static Map<String, Object> defaultCouponParams = new HashMap<String, Object>();
     public static Map<String, Object> defaultTokenParams = new HashMap<String, Object>();
-    public static Map<String, Object> defaultDebitTokenParams = new HashMap<String, Object>();
     public static Map<String, Object> defaultBankAccountParams = new HashMap<String, Object>();
     public static Map<String, Object> defaultRecipientParams = new HashMap<String, Object>();
     public static Map<String, Object> defaultBitcoinReceiverParams = new HashMap<String, Object>();
@@ -80,41 +76,11 @@ public class BaseStripeFunctionalTest {
         // test key
         supportedRequestOptions = RequestOptions.builder().setStripeVersion(Stripe.apiVersion).build();
 
-        defaultCardParams.put("number", "4242424242424242");
-        defaultCardParams.put("exp_month", 12);
-        defaultCardParams.put("exp_year", getYear());
-        defaultCardParams.put("cvc", "123");
-        defaultCardParams.put("name", "J Bindings Cardholder");
-        defaultCardParams.put("address_line1", "140 2nd Street");
-        defaultCardParams.put("address_line2", "4th Floor");
-        defaultCardParams.put("address_city", "San Francisco");
-        defaultCardParams.put("address_zip", "94105");
-        defaultCardParams.put("address_state", "CA");
-        defaultCardParams.put("address_country", "USA");
-
-        defaultSourceParams = new HashMap<String, Object>(defaultCardParams);
-        defaultSourceParams.put("object", "card");
-
-        defaultDebitCardParams.put("number", "4000056655665556");
-        defaultDebitCardParams.put("exp_month", 12);
-        defaultDebitCardParams.put("exp_year", getYear());
-        defaultDebitCardParams.put("cvc", "123");
-        defaultDebitCardParams.put("name", "J Bindings Debitholder");
-        defaultDebitCardParams.put("address_line1", "140 2nd Street");
-        defaultDebitCardParams.put("address_line2", "4th Floor");
-        defaultDebitCardParams.put("address_city", "San Francisco");
-        defaultDebitCardParams.put("address_zip", "94105");
-        defaultDebitCardParams.put("address_state", "CA");
-        defaultDebitCardParams.put("address_country", "USA");
-
         defaultChargeParams.put("amount", 100);
         defaultChargeParams.put("currency", "usd");
-        defaultChargeParams.put("card", defaultCardParams);
+        defaultChargeParams.put("source", "tok_visa");
 
-        defaultTokenParams.put("card", defaultCardParams);
-        defaultDebitTokenParams.put("card", defaultDebitCardParams);
-
-        defaultCustomerParams.put("card", defaultCardParams);
+        defaultCustomerParams.put("source", "tok_visa");
         defaultCustomerParams.put("description", "J Bindings Customer");
 
         defaultPlanParams.put("amount", 100);
@@ -136,7 +102,7 @@ public class BaseStripeFunctionalTest {
         defaultRecipientParams.put("type", "individual");
         defaultRecipientParams.put("tax_id", "000000000");
         defaultRecipientParams.put("bank_account", defaultBankAccountParams);
-        defaultRecipientParams.put("card", defaultDebitCardParams);
+        defaultRecipientParams.put("card", "tok_visa_debit");
 
         defaultBitcoinReceiverParams.put("amount", 100);
         defaultBitcoinReceiverParams.put("currency", "usd");
