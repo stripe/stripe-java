@@ -65,7 +65,7 @@ public class StripeExample {
         Map<String, Object> chargeMap = new HashMap<String, Object>();
         chargeMap.put("amount", 100);
         chargeMap.put("currency", "usd");
-        chargeMap.put("source", "tok_visa"); // obtained via Stripe.js
+        chargeMap.put("source", "tok_1234"); // obtained via Stripe.js
         try {
             Charge charge = Charge.create(chargeMap, requestOptions);
             System.out.println(charge);
