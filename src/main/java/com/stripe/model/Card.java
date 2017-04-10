@@ -7,6 +7,7 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.RequestOptions;
 
+import java.util.List;
 import java.util.Map;
 
 public class Card extends ExternalAccount {
@@ -18,6 +19,7 @@ public class Card extends ExternalAccount {
 	String addressState;
 	String addressZip;
 	String addressZipCheck;
+	List<String> availablePayoutMethods;
 	String brand;
 	String country;
 	String currency;
@@ -105,6 +107,14 @@ public class Card extends ExternalAccount {
 
 	public void setAddressZipCheck(String addressZipCheck) {
 		this.addressZipCheck = addressZipCheck;
+	}
+
+	public List<String> getAvailablePayoutMethods() {
+		return availablePayoutMethods;
+	}
+
+	public void setAvailablePayoutMethods(List<String> availablePayoutMethods) {
+		this.availablePayoutMethods = availablePayoutMethods;
 	}
 
 	public String getBrand() {
