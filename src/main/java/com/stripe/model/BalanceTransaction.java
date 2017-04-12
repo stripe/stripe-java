@@ -1,5 +1,8 @@
 package com.stripe.model;
 
+import java.util.List;
+import java.util.Map;
+
 import com.stripe.Stripe;
 import com.stripe.exception.APIConnectionException;
 import com.stripe.exception.APIException;
@@ -8,9 +11,6 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
-
-import java.util.List;
-import java.util.Map;
 
 public class BalanceTransaction extends APIResource implements HasId {
 	String id;
@@ -26,7 +26,11 @@ public class BalanceTransaction extends APIResource implements HasId {
 	String source;
 	String status;
 	String type;
-
+	
+	transient Charge sourceCharge;
+	transient Transfer sourceTransfer;
+	transient Refund sourceRefund;
+	
 	@Deprecated
 	TransferCollection sourcedTransfers;
 
@@ -146,6 +150,30 @@ public class BalanceTransaction extends APIResource implements HasId {
 	public void setType(String type) {
 		this.type = type;
 	}
+	
+	public Charge getSourceCharge() {
+		return sourceCharge;
+	}
+
+	public void setSourceCharge(Charge sourceCharge) {
+		this.sourceCharge = sourceCharge;
+	}
+
+	public Transfer getSourceTransfer() {
+		return sourceTransfer;
+	}
+
+	public void setSourceTransfer(Transfer sourceTransfer) {
+		this.sourceTransfer = sourceTransfer;
+	}
+
+	public Refund getSourceRefund() {
+		return sourceRefund;
+	}
+
+	public void setSourceRefund(Refund sourceRefund) {
+		this.sourceRefund = sourceRefund;
+	}
 
 	public static BalanceTransaction retrieve(String id) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
@@ -200,4 +228,5 @@ public class BalanceTransaction extends APIResource implements HasId {
 			APIConnectionException, CardException, APIException {
 		return list(params, options);
 	}
+	
 }

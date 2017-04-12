@@ -1,5 +1,9 @@
 package com.stripe.net;
 
+import java.io.UnsupportedEncodingException;
+import java.net.URLEncoder;
+import java.util.Map;
+
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -9,6 +13,8 @@ import com.stripe.exception.APIException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
+import com.stripe.model.BalanceTransaction;
+import com.stripe.model.BalanceTransactionDeserializer;
 import com.stripe.model.ChargeRefundCollection;
 import com.stripe.model.ChargeRefundCollectionDeserializer;
 import com.stripe.model.Dispute;
@@ -28,10 +34,6 @@ import com.stripe.model.StripeObject;
 import com.stripe.model.StripeRawJsonObject;
 import com.stripe.model.StripeRawJsonObjectDeserializer;
 
-import java.io.UnsupportedEncodingException;
-import java.net.URLEncoder;
-import java.util.Map;
-
 public abstract class APIResource extends StripeObject {
 	private static StripeResponseGetter stripeResponseGetter = new LiveStripeResponseGetter();
 
@@ -45,6 +47,7 @@ public abstract class APIResource extends StripeObject {
 			.registerTypeAdapter(ChargeRefundCollection.class, new ChargeRefundCollectionDeserializer())
 			.registerTypeAdapter(FeeRefundCollection.class, new FeeRefundCollectionDeserializer())
 			.registerTypeAdapter(StripeRawJsonObject.class, new StripeRawJsonObjectDeserializer())
+			.registerTypeAdapter(BalanceTransaction.class, new BalanceTransactionDeserializer())
 			.registerTypeAdapter(Dispute.class, new DisputeDataDeserializer())
 			.registerTypeAdapter(Source.class, new SourceDeserializer())
 			.registerTypeAdapter(ExpandableField.class, new ExpandableFieldDeserializer())
