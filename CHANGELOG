@@ -1,3 +1,7 @@
+=== 4.3.0 2017-04-12
+
+* Add support for `available_payout_methods` to `Card` model
+
 === 4.2.0 2017-04-06
 
 * Add support for payouts; see: https://stripe.com/docs/upgrades#2017-04-06
