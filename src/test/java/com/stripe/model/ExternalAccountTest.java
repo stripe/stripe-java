@@ -1,5 +1,6 @@
 package com.stripe.model;
 
+import com.google.common.collect.ImmutableList;
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
@@ -20,6 +21,8 @@ import java.util.Map;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 public class ExternalAccountTest extends BaseStripeTest {
 	@Before
@@ -83,5 +86,26 @@ public class ExternalAccountTest extends BaseStripeTest {
 		    "https://api.stripe.com/v1/customers/cus_123/sources/extacct_123/verify",
 		    params
 		);
+	}
+
+	@Test
+	public void testManagedAccountHasAvailablePayoutMethods() throws StripeException, IOException {
+		stubNetwork(Account.class, resource("managed_account.json"));
+
+		Account account = Account.create(null);
+
+		assertTrue(account.getManaged());
+
+		assertNotNull(account.getExternalAccounts());
+		assertNotNull(account.getExternalAccounts().getData());
+		assertEquals(account.getExternalAccounts().getData().size(), 1);
+		assertEquals(account.getExternalAccounts().getData().get(0).getObject(), "card");
+		assertTrue(account.getExternalAccounts().getData().get(0) instanceof Card);
+
+		Card card = (Card) account.getExternalAccounts().getData().get(0);
+
+		assertNotNull(card.getAvailablePayoutMethods());
+		assertEquals(card.getAvailablePayoutMethods().size(), 2);
+		assertEquals(card.getAvailablePayoutMethods(), ImmutableList.of("standard", "instant"));
 	}
 }
