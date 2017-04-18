@@ -27,9 +27,7 @@ public class BalanceTransaction extends APIResource implements HasId {
 	String status;
 	String type;
 	
-	transient Charge sourceCharge;
-	transient Transfer sourceTransfer;
-	transient Refund sourceRefund;
+	transient HasId sourceObject;
 	
 	@Deprecated
 	TransferCollection sourcedTransfers;
@@ -151,30 +149,15 @@ public class BalanceTransaction extends APIResource implements HasId {
 		this.type = type;
 	}
 	
-	public Charge getSourceCharge() {
-		return sourceCharge;
+	public void setSourceObject(HasId sourceObject) {
+		this.sourceObject = sourceObject;
 	}
 
-	public void setSourceCharge(Charge sourceCharge) {
-		this.sourceCharge = sourceCharge;
+	@SuppressWarnings("unchecked")
+	public <O> O getSourceObject() {
+		return (O) sourceObject;
 	}
-
-	public Transfer getSourceTransfer() {
-		return sourceTransfer;
-	}
-
-	public void setSourceTransfer(Transfer sourceTransfer) {
-		this.sourceTransfer = sourceTransfer;
-	}
-
-	public Refund getSourceRefund() {
-		return sourceRefund;
-	}
-
-	public void setSourceRefund(Refund sourceRefund) {
-		this.sourceRefund = sourceRefund;
-	}
-
+		
 	public static BalanceTransaction retrieve(String id) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {

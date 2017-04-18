@@ -50,17 +50,19 @@ public class BalanceTransactionDeserializer implements JsonDeserializer<BalanceT
 			sourceId = sourceIdEl != null ? sourceIdEl.getAsString() : null;
 			JsonElement val = sourceJsonObject.get("object");
 			if (val != null) {
+				Class<? extends HasId> sourceObjClass = null;
 				if ("charge".equals(val.getAsString())) {
-					Charge charge = context.deserialize(source, Charge.class);
-					balanceTransaction.setSourceCharge(charge);
+					sourceObjClass = Charge.class;
 				} else if ("transfer".equals(val.getAsString())) {
-					Transfer transfer = context.deserialize(source, Transfer.class);
-					balanceTransaction.setSourceTransfer(transfer);
+					sourceObjClass = Transfer.class;
 				} else if ("refund".equals(val.getAsString())) {
-					Refund refund = context.deserialize(source, Refund.class);
-					balanceTransaction.setSourceRefund(refund);
+					sourceObjClass = Refund.class;
 				}
 				// TODO support other source types (?)
+				if (sourceObjClass != null) {
+					HasId sourceObj = context.deserialize(source, sourceObjClass);
+					balanceTransaction.setSourceObject(sourceObj);
+				}
 			}
 		} else if (!source.isJsonNull()) {
 			throw new JsonParseException("Source field on a balance transaction was a non-primitive, non-object type.");
