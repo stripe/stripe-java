@@ -4,19 +4,23 @@ import com.stripe.Stripe;
 
 public class RequestOptions {
 	public static RequestOptions getDefault() {
-		return new RequestOptions(Stripe.apiKey, Stripe.apiVersion, null, null);
+		return new RequestOptions(Stripe.apiKey, Stripe.apiVersion, null, null, 30 * 1000, 80 * 1000);
 	}
 
 	private final String apiKey;
 	private final String stripeVersion;
 	private final String idempotencyKey;
 	private final String stripeAccount;
+	private final int connectionTimeout;
+	private final int readTimeout;
 
-	private RequestOptions(String apiKey, String stripeVersion, String idempotencyKey, String stripeAccount) {
+	private RequestOptions(String apiKey, String stripeVersion, String idempotencyKey, String stripeAccount, int connectionTimeout, int readTimeout) {
 		this.apiKey = apiKey;
 		this.stripeVersion = stripeVersion;
 		this.idempotencyKey = idempotencyKey;
 		this.stripeAccount = stripeAccount;
+		this.connectionTimeout = connectionTimeout;
+		this.readTimeout = readTimeout;
 	}
 
 	public String getApiKey() {
@@ -33,6 +37,14 @@ public class RequestOptions {
 
 	public String getStripeAccount() {
 		return stripeAccount;
+	}
+	
+	public int getReadTimeout() {
+	    return readTimeout;
+	}
+	
+	public int getConnectionTimeout() {
+	    return connectionTimeout;
 	}
 
 	@Override
@@ -51,6 +63,14 @@ public class RequestOptions {
 		if (stripeVersion != null ? !stripeVersion.equals(that.stripeVersion) : that.stripeVersion != null) {
 			return false;
 		}
+		
+		if (connectionTimeout != that.connectionTimeout) {
+			return false;
+		}
+		
+		if (readTimeout != that.readTimeout) {
+			return false;
+		}
 
 		return true;
 	}
@@ -60,6 +80,8 @@ public class RequestOptions {
 		int result = apiKey != null ? apiKey.hashCode() : 0;
 		result = 31 * result + (stripeVersion != null ? stripeVersion.hashCode() : 0);
 		result = 31 * result + (idempotencyKey != null ? idempotencyKey.hashCode() : 0);
+		result = 31 * result + readTimeout;
+		result = 31 * result + connectionTimeout;
 		return result;
 	}
 
@@ -76,6 +98,8 @@ public class RequestOptions {
 		private String stripeVersion;
 		private String idempotencyKey;
 		private String stripeAccount;
+		private int connectionTimeout;
+		private int readTimeout;
 
 		public RequestOptionsBuilder() {
 			this.apiKey = Stripe.apiKey;
@@ -110,6 +134,24 @@ public class RequestOptions {
 			this.idempotencyKey = idempotencyKey;
 			return this;
 		}
+		
+		public RequestOptionsBuilder setConnectionTimeout(int connectionTimeout) {
+		    this.connectionTimeout = connectionTimeout;
+		    return this;
+		}
+		
+		public RequestOptionsBuilder setReadTimeout(int readTimeout) {
+		    this.readTimeout = readTimeout;
+		    return this;
+		}
+		
+		public int getConnectionTimeout() {
+		    return connectionTimeout;
+		}
+		
+		public int getReadTimeout() {
+		    return readTimeout;
+		}
 
 		public RequestOptionsBuilder clearIdempotencyKey() {
 			this.idempotencyKey = null;
@@ -138,7 +180,9 @@ public class RequestOptions {
 				normalizeApiKey(this.apiKey),
 				normalizeStripeVersion(this.stripeVersion),
 				normalizeIdempotencyKey(this.idempotencyKey),
-				normalizeStripeAccount(this.stripeAccount));
+				normalizeStripeAccount(this.stripeAccount),
+				connectionTimeout,
+				readTimeout);
 		}
 	}
 

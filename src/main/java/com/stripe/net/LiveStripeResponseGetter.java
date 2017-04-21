@@ -149,8 +149,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 		} else {
 			conn = (HttpURLConnection) stripeURL.openConnection();
 		}
-		conn.setConnectTimeout(30 * 1000);
-		conn.setReadTimeout(80 * 1000);
+		conn.setConnectTimeout(options.getConnectionTimeout());
+		conn.setReadTimeout(options.getReadTimeout());
 		conn.setUseCaches(false);
 		for (Map.Entry<String, String> header : getHeaders(options).entrySet()) {
 			conn.setRequestProperty(header.getKey(), header.getValue());
