@@ -38,7 +38,7 @@ public class AccountTest extends BaseStripeTest {
 		assertEquals("acct_1032D82eZvKYlo2C", acc.getId());
 		assertEquals(false, acc.getChargesEnabled());
 		assertEquals(false, acc.getDetailsSubmitted());
-		assertEquals(false, acc.getTransfersEnabled());
+		assertEquals(false, acc.getPayoutsEnabled());
 		assertEquals("http://www.business.com", acc.getBusinessURL());
 		assertEquals("http://support.business.com", acc.getSupportURL());
 
@@ -59,6 +59,12 @@ public class AccountTest extends BaseStripeTest {
 		leVerif.status = "unverified";
 		le.verification = leVerif;
 		assertEquals(le, acc.getLegalEntity());
+
+		AccountPayoutSchedule payoutSchedule = new AccountPayoutSchedule();
+		payoutSchedule.delayDays = 10;
+		payoutSchedule.interval = "weekly";
+		payoutSchedule.weeklyAnchor = "wednesday";
+		assertEquals(payoutSchedule, acc.getPayoutSchedule());
 
 		Account.Verification verif = new Account.Verification();
 		verif.disabledReason = "fields_needed";
