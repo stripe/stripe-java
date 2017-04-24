@@ -1,3 +1,7 @@
+=== 4.4.0 2017-04-24
+
+* Add payout properties to `Account` model
+
 === 4.3.0 2017-04-12
 
 * Add support for `available_payout_methods` to `Card` model
