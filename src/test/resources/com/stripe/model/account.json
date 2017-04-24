@@ -6,7 +6,7 @@
     "timezone": "US/Pacific",
     "details_submitted": false,
     "charges_enabled": false,
-    "transfers_enabled": false,
+    "payouts_enabled": false,
     "currencies_supported": [
         "usd",
         "aud"
@@ -39,6 +39,11 @@
         "url": "/v1/accounts/acct_1032D82eZvKYlo2C/external_accounts",
         "has_more": false,
         "data": []
+    },
+    "payout_schedule": {
+        "delay_days": 10,
+        "interval": "weekly",
+        "weekly_anchor": "wednesday"
     },
     "verification": {
         "disabled_reason": "fields_needed",

@@ -29,6 +29,8 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 	LegalEntity legalEntity;
 	Boolean managed;
 	Map<String, String> metadata;
+	Boolean payoutsEnabled;
+	AccountPayoutSchedule payoutSchedule;
 	String productDescription;
 	String statementDescriptor;
 	String supportEmail;
@@ -141,6 +143,22 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 	public Map<String, String> getMetadata()
 	{
 		return metadata;
+	}
+
+	public Boolean getPayoutsEnabled() {
+		return payoutsEnabled;
+	}
+
+	public void setPayoutsEnabled(Boolean payoutsEnabled) {
+		this.payoutsEnabled = payoutsEnabled;
+	}
+
+	public AccountPayoutSchedule getPayoutSchedule(){
+		return payoutSchedule;
+	}
+
+	public void setPayoutSchedule(AccountPayoutSchedule payoutSchedule){
+		this.payoutSchedule = payoutSchedule;
 	}
 
 	public String getProductDescription(){
