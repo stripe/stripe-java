@@ -4,12 +4,12 @@ import com.stripe.Stripe;
 
 public class RequestOptions {
 	
-	private final static int DEFAULT_CONNECTION_TIMEOUT = 30 * 1000;    	
+	private final static int DEFAULT_CONNECT_TIMEOUT = 30 * 1000;    	
 	
 	private final static int DEFAULT_READ_TIMEOUT = 80 * 1000;
     
 	public static RequestOptions getDefault() {
-		return new RequestOptions(Stripe.apiKey, Stripe.apiVersion, null, null, DEFAULT_CONNECTION_TIMEOUT, DEFAULT_READ_TIMEOUT);
+		return new RequestOptions(Stripe.apiKey, Stripe.apiVersion, null, null, DEFAULT_CONNECT_TIMEOUT, DEFAULT_READ_TIMEOUT);
 	}
 
 	private final String apiKey;
