@@ -16,15 +16,15 @@ public class RequestOptions {
 	private final String stripeVersion;
 	private final String idempotencyKey;
 	private final String stripeAccount;
-	private final int connectionTimeout;
+	private final int connectTimeout;
 	private final int readTimeout;
 
-	private RequestOptions(String apiKey, String stripeVersion, String idempotencyKey, String stripeAccount, int connectionTimeout, int readTimeout) {
+	private RequestOptions(String apiKey, String stripeVersion, String idempotencyKey, String stripeAccount, int connectTimeout, int readTimeout) {
 		this.apiKey = apiKey;
 		this.stripeVersion = stripeVersion;
 		this.idempotencyKey = idempotencyKey;
 		this.stripeAccount = stripeAccount;
-		this.connectionTimeout = connectionTimeout;
+		this.connectTimeout = connectTimeout;
 		this.readTimeout = readTimeout;
 	}
 
@@ -48,8 +48,8 @@ public class RequestOptions {
 	    return readTimeout;
 	}
 	
-	public int getConnectionTimeout() {
-	    return connectionTimeout;
+	public int getConnectTimeout() {
+	    return connectTimeout;
 	}
 
 	@Override
@@ -69,7 +69,7 @@ public class RequestOptions {
 			return false;
 		}
 		
-		if (connectionTimeout != that.connectionTimeout) {
+		if (connectTimeout != that.connectTimeout) {
 			return false;
 		}
 		
@@ -86,7 +86,7 @@ public class RequestOptions {
 		result = 31 * result + (stripeVersion != null ? stripeVersion.hashCode() : 0);
 		result = 31 * result + (idempotencyKey != null ? idempotencyKey.hashCode() : 0);
 		result = 31 * result + readTimeout;
-		result = 31 * result + connectionTimeout;
+		result = 31 * result + connectTimeout;
 		return result;
 	}
 
@@ -103,7 +103,7 @@ public class RequestOptions {
 		private String stripeVersion;
 		private String idempotencyKey;
 		private String stripeAccount;
-		private int connectionTimeout;
+		private int connectTimeout;
 		private int readTimeout;
 
 		public RequestOptionsBuilder() {
@@ -140,8 +140,8 @@ public class RequestOptions {
 			return this;
 		}
 		
-		public RequestOptionsBuilder setConnectionTimeout(int connectionTimeout) {
-		    this.connectionTimeout = connectionTimeout;
+		public RequestOptionsBuilder setConnectTimeout(int connectTimeout) {
+		    this.connectTimeout = connectTimeout;
 		    return this;
 		}
 		
@@ -150,8 +150,8 @@ public class RequestOptions {
 		    return this;
 		}
 		
-		public int getConnectionTimeout() {
-		    return connectionTimeout;
+		public int getConnectTimeout() {
+		    return connectTimeout;
 		}
 		
 		public int getReadTimeout() {
@@ -186,7 +186,7 @@ public class RequestOptions {
 				normalizeStripeVersion(this.stripeVersion),
 				normalizeIdempotencyKey(this.idempotencyKey),
 				normalizeStripeAccount(this.stripeAccount),
-				connectionTimeout,
+				connectTimeout,
 				readTimeout);
 		}
 	}
