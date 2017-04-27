@@ -3,13 +3,8 @@ package com.stripe.net;
 import com.stripe.Stripe;
 
 public class RequestOptions {
-	
-	private final static int DEFAULT_CONNECT_TIMEOUT = 30 * 1000;    	
-	
-	private final static int DEFAULT_READ_TIMEOUT = 80 * 1000;
-    
 	public static RequestOptions getDefault() {
-		return new RequestOptions(Stripe.apiKey, Stripe.apiVersion, null, null, DEFAULT_CONNECT_TIMEOUT, DEFAULT_READ_TIMEOUT);
+		return new RequestOptions(Stripe.apiKey, Stripe.apiVersion, null, null, Stripe.getConnectTimeout(), Stripe.getReadTimeout());
 	}
 
 	private final String apiKey;
@@ -140,22 +135,38 @@ public class RequestOptions {
 			return this;
 		}
 		
-		public RequestOptionsBuilder setConnectTimeout(int connectTimeout) {
-		    this.connectTimeout = connectTimeout;
-		    return this;
-		}
-		
-		public RequestOptionsBuilder setReadTimeout(int readTimeout) {
-		    this.readTimeout = readTimeout;
-		    return this;
-		}
-		
 		public int getConnectTimeout() {
 		    return connectTimeout;
 		}
 		
+		/**
+		 * Sets the timeout value that will be used for making new connections to
+		 * the Stripe API (in milliseconds).
+		 *
+		 * @param timeout timeout value in milliseconds
+		 */
+		public RequestOptionsBuilder setConnectTimeout(int timeout) {
+		    this.connectTimeout = timeout;
+		    return this;
+		}
+		
 		public int getReadTimeout() {
 		    return readTimeout;
+		}
+		
+		/**
+		 * Sets the timeout value that will be used when reading data from an
+		 * established connection to the Stripe API (in milliseconds).
+		 *
+		 * Note that this value should be set conservatively because some API
+		 * requests can take time and a short timeout increases the likelihood
+		 * of causing a problem in the backend.
+		 *
+		 * @param timeout timeout value in milliseconds
+		 */
+		public RequestOptionsBuilder setReadTimeout(int timeout) {
+		    this.readTimeout = timeout;
+		    return this;
 		}
 
 		public RequestOptionsBuilder clearIdempotencyKey() {
