@@ -82,6 +82,29 @@ public class StripeExample {
 
 See the project's [functional tests](https://github.com/stripe/stripe-java/blob/master/src/test/java/com/stripe/functional/) for more examples.
 
+### Configuring Timeouts
+
+Connect and read timeouts can be configured globally:
+
+```java
+Stripe.setConnectTimeout(30 * 1000); // in milliseconds
+Stripe.setReadTimeout(80 * 1000);
+```
+
+Or on a finer grain level using `RequestOptions`:
+
+```java
+RequestOptions options = RequestOptions.builder()
+    .setConnectTimeout(30 * 1000) // in milliseconds
+    .setReadTimeout(80 * 1000)
+    .build();
+Charge.create(params, options);
+```
+
+Please take care to set conservative read timeouts. Some API requests can take
+some time, and a short timeout increases the likelihood of a problem within our
+servers.
+
 ## Testing
 
 You must have Maven installed. To run the tests:
@@ -94,3 +117,7 @@ unit and functional tests. For example:
     mvn test -D test=com.stripe.model.AccountTest
     mvn test -D test=com.stripe.functional.ChargeTest
     mvn test -D test=com.stripe.functional.ChargeTest#testChargeCreate
+
+<!--
+# vim: set tw=79:
+-->
