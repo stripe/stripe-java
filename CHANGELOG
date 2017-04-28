@@ -1,3 +1,7 @@
+=== 4.6.0 2017-04-28
+
+* Support for checking webhook signatures
+
 === 4.5.0 2017-04-28
 
 * Make connect and read timeouts configurable (see README for details)
