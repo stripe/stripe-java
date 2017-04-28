@@ -4,19 +4,23 @@ import com.stripe.Stripe;
 
 public class RequestOptions {
 	public static RequestOptions getDefault() {
-		return new RequestOptions(Stripe.apiKey, Stripe.apiVersion, null, null);
+		return new RequestOptions(Stripe.apiKey, Stripe.apiVersion, null, null, Stripe.getConnectTimeout(), Stripe.getReadTimeout());
 	}
 
 	private final String apiKey;
 	private final String stripeVersion;
 	private final String idempotencyKey;
 	private final String stripeAccount;
+	private final int connectTimeout;
+	private final int readTimeout;
 
-	private RequestOptions(String apiKey, String stripeVersion, String idempotencyKey, String stripeAccount) {
+	private RequestOptions(String apiKey, String stripeVersion, String idempotencyKey, String stripeAccount, int connectTimeout, int readTimeout) {
 		this.apiKey = apiKey;
 		this.stripeVersion = stripeVersion;
 		this.idempotencyKey = idempotencyKey;
 		this.stripeAccount = stripeAccount;
+		this.connectTimeout = connectTimeout;
+		this.readTimeout = readTimeout;
 	}
 
 	public String getApiKey() {
@@ -33,6 +37,14 @@ public class RequestOptions {
 
 	public String getStripeAccount() {
 		return stripeAccount;
+	}
+	
+	public int getReadTimeout() {
+	    return readTimeout;
+	}
+	
+	public int getConnectTimeout() {
+	    return connectTimeout;
 	}
 
 	@Override
@@ -51,6 +63,14 @@ public class RequestOptions {
 		if (stripeVersion != null ? !stripeVersion.equals(that.stripeVersion) : that.stripeVersion != null) {
 			return false;
 		}
+		
+		if (connectTimeout != that.connectTimeout) {
+			return false;
+		}
+		
+		if (readTimeout != that.readTimeout) {
+			return false;
+		}
 
 		return true;
 	}
@@ -60,6 +80,8 @@ public class RequestOptions {
 		int result = apiKey != null ? apiKey.hashCode() : 0;
 		result = 31 * result + (stripeVersion != null ? stripeVersion.hashCode() : 0);
 		result = 31 * result + (idempotencyKey != null ? idempotencyKey.hashCode() : 0);
+		result = 31 * result + readTimeout;
+		result = 31 * result + connectTimeout;
 		return result;
 	}
 
@@ -76,6 +98,8 @@ public class RequestOptions {
 		private String stripeVersion;
 		private String idempotencyKey;
 		private String stripeAccount;
+		private int connectTimeout;
+		private int readTimeout;
 
 		public RequestOptionsBuilder() {
 			this.apiKey = Stripe.apiKey;
@@ -110,6 +134,40 @@ public class RequestOptions {
 			this.idempotencyKey = idempotencyKey;
 			return this;
 		}
+		
+		public int getConnectTimeout() {
+		    return connectTimeout;
+		}
+		
+		/**
+		 * Sets the timeout value that will be used for making new connections to
+		 * the Stripe API (in milliseconds).
+		 *
+		 * @param timeout timeout value in milliseconds
+		 */
+		public RequestOptionsBuilder setConnectTimeout(int timeout) {
+		    this.connectTimeout = timeout;
+		    return this;
+		}
+		
+		public int getReadTimeout() {
+		    return readTimeout;
+		}
+		
+		/**
+		 * Sets the timeout value that will be used when reading data from an
+		 * established connection to the Stripe API (in milliseconds).
+		 *
+		 * Note that this value should be set conservatively because some API
+		 * requests can take time and a short timeout increases the likelihood
+		 * of causing a problem in the backend.
+		 *
+		 * @param timeout timeout value in milliseconds
+		 */
+		public RequestOptionsBuilder setReadTimeout(int timeout) {
+		    this.readTimeout = timeout;
+		    return this;
+		}
 
 		public RequestOptionsBuilder clearIdempotencyKey() {
 			this.idempotencyKey = null;
@@ -138,7 +196,9 @@ public class RequestOptions {
 				normalizeApiKey(this.apiKey),
 				normalizeStripeVersion(this.stripeVersion),
 				normalizeIdempotencyKey(this.idempotencyKey),
-				normalizeStripeAccount(this.stripeAccount));
+				normalizeStripeAccount(this.stripeAccount),
+				connectTimeout,
+				readTimeout);
 		}
 	}
 
