@@ -1,3 +1,7 @@
+=== 4.5.0 2017-04-28
+
+* Make connect and read timeouts configurable (see README for details)
+
 === 4.4.0 2017-04-24
 
 * Add payout properties to `Account` model
