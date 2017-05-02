@@ -34,6 +34,7 @@ public class Card extends ExternalAccount {
 	String name;
 	String recipient;
 	String status;
+	ThreeDSecure threeDSecure;
 	String tokenizationMethod;
 
 	// Please note that these field are for internal use only and are not typically returned
@@ -227,6 +228,14 @@ public class Card extends ExternalAccount {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public ThreeDSecure getThreeDSecure() {
+		return threeDSecure;
+	}
+
+	public void setThreeDSecure(ThreeDSecure threeDSecure) {
+		this.threeDSecure = threeDSecure;
 	}
 
 	public String getTokenizationMethod() {
