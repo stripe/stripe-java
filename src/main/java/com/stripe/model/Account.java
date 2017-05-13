@@ -23,6 +23,7 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 	String defaultCurrency;
 	Boolean detailsSubmitted;
 	String displayName;
+	LoginLinkCollection loginLinks;
 	String email;
 	ExternalAccountCollection externalAccounts;
 	Keys keys;
@@ -41,6 +42,7 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 	AccountTosAcceptance tosAcceptance;
 	AccountTransferSchedule transferSchedule;
 	Boolean transfersEnabled;
+	String type;
 	Verification verification;
 
 	@Deprecated
@@ -117,6 +119,10 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 		return displayName;
 	}
 
+	public LoginLinkCollection getLoginLinks() {
+		return loginLinks;
+	}
+
 	public String getEmail() {
 		return email;
 	}
@@ -135,6 +141,11 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 		return legalEntity;
 	}
 
+	/**
+	 * @deprecated
+	 * Use getType() instead.
+	 */
+	@Deprecated
 	public Boolean getManaged()
 	{
 		return managed;
@@ -210,6 +221,14 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 
 	public Boolean getTransfersEnabled() {
 		return transfersEnabled;
+	}
+
+	public String getType() {
+		return type;
+	}
+
+	public void setType(String type) {
+		this.type = type;
 	}
 
 	public Verification getVerification() {

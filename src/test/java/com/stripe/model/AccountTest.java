@@ -178,4 +178,17 @@ public class AccountTest extends BaseStripeTest {
 
 		verifyNoMoreInteractions(networkMock);
 	}
+
+	@Test
+	public void testAccountCreateLoginLink() throws StripeException, IOException {
+		String json = resource("account_express.json");
+		stubNetwork(Account.class, json);
+		Account acc = Account.retrieve("acct_EXPRESS");
+		verifyGet(Account.class, "https://api.stripe.com/v1/accounts/acct_EXPRESS");
+
+		String json_link = resource("login_link.json");
+		stubNetwork(LoginLink.class, json_link);
+		LoginLink link = acc.getLoginLinks().create();
+		verifyPost(LoginLink.class, "https://api.stripe.com/v1/accounts/acct_EXPRESS/login_links", (RequestOptions) null);
+	}
 }
