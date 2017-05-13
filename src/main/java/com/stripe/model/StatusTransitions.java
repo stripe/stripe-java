@@ -4,7 +4,7 @@ import com.stripe.net.APIResource;
 
 public class StatusTransitions extends APIResource {
   Long canceled;
-  Long fulfiled;
+  Long fulfilled;
   Long paid;
   Long returned;
 
@@ -17,11 +17,11 @@ public class StatusTransitions extends APIResource {
   }
 
   public Long getFulfiled() {
-    return fulfiled;
+    return fulfilled;
   }
 
-  public void setFulfiled(Long fulfiled) {
-    this.fulfiled = fulfiled;
+  public void setFulfiled(Long fulfilled) {
+    this.fulfilled = fulfilled;
   }
 
   public Long getPaid() {
