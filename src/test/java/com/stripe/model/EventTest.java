@@ -31,11 +31,11 @@ public class EventTest extends BaseStripeTest {
 
 		assertEquals(reserializedEvent.getId(), event.getId());
 		assertEquals(reserializedEvent.getObject(), event.getObject());
+		assertEquals(reserializedEvent.getAccount(), event.getAccount());
 		assertEquals(reserializedEvent.getApiVersion(), event.getApiVersion());
 		assertEquals(reserializedEvent.getCreated(), event.getCreated());
 		assertEquals(reserializedEvent.getLivemode(), event.getLivemode());
 		assertEquals(reserializedEvent.getRequest(), event.getRequest());
 		assertEquals(reserializedEvent.getType(), event.getType());
-		assertEquals(reserializedEvent.getUserId(), event.getUserId());
 	}
 }

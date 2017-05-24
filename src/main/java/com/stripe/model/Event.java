@@ -13,6 +13,7 @@ import java.util.Map;
 public class Event extends APIResource implements HasId {
 	String id;
 	String object;
+	String account;
 	String apiVersion;
 	Long created;
 	EventData data;
@@ -36,6 +37,14 @@ public class Event extends APIResource implements HasId {
 
 	public void setObject(String object) {
 		this.object = object;
+	}
+
+	public String getAccount() {
+		return account;
+	}
+
+	public void setAccount(String account) {
+		this.account = account;
 	}
 
 	public String getApiVersion() {
@@ -94,10 +103,14 @@ public class Event extends APIResource implements HasId {
 		this.type = name;
 	}
 
+	/** Legacy; use `getAccount` instead (https://stripe.com/docs/upgrades#2017-05-25) */
+	@Deprecated
 	public String getUserId() {
 		return userId;
 	}
 
+	/** Legacy; use `setAccount` instead (https://stripe.com/docs/upgrades#2017-05-25) */
+	@Deprecated
 	public void setUserId(String userId) {
 		this.userId = userId;
 	}
