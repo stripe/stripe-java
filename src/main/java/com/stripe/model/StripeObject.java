@@ -13,6 +13,7 @@ public abstract class StripeObject {
 		serializeNulls().
 		setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).
 		registerTypeAdapter(EventData.class, new EventDataDeserializer()).
+		registerTypeAdapter(EventRequest.class, new EventRequestDeserializer()).
 		create();
 
 	@Override public String toString() {

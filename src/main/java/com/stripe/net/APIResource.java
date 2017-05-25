@@ -15,6 +15,8 @@ import com.stripe.model.Dispute;
 import com.stripe.model.DisputeDataDeserializer;
 import com.stripe.model.EventData;
 import com.stripe.model.EventDataDeserializer;
+import com.stripe.model.EventRequest;
+import com.stripe.model.EventRequestDeserializer;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.ExpandableFieldDeserializer;
 import com.stripe.model.ExternalAccountTypeAdapterFactory;
@@ -42,6 +44,7 @@ public abstract class APIResource extends StripeObject {
 	public static final Gson GSON = new GsonBuilder()
 			.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
 			.registerTypeAdapter(EventData.class, new EventDataDeserializer())
+			.registerTypeAdapter(EventRequest.class, new EventRequestDeserializer())
 			.registerTypeAdapter(ChargeRefundCollection.class, new ChargeRefundCollectionDeserializer())
 			.registerTypeAdapter(FeeRefundCollection.class, new FeeRefundCollectionDeserializer())
 			.registerTypeAdapter(StripeRawJsonObject.class, new StripeRawJsonObjectDeserializer())

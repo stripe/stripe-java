@@ -39,4 +39,11 @@ public class EventTest extends BaseStripeTest {
 		assertEquals(reserializedEvent.getType(), event.getType());
 		assertEquals(reserializedEvent.getUserId(), event.getUserId());
 	}
+
+	@Test
+	public void supportsOldRequest() throws IOException {
+		String json = resource("event_old_request.json");
+		Event event = StripeObject.PRETTY_PRINT_GSON.fromJson(json, Event.class);
+		assertEquals(event.getRequest().getId(), "req_Ait4gLD2CQhStB");
+	}
 }
