@@ -34,8 +34,16 @@ public class EventTest extends BaseStripeTest {
 		assertEquals(reserializedEvent.getApiVersion(), event.getApiVersion());
 		assertEquals(reserializedEvent.getCreated(), event.getCreated());
 		assertEquals(reserializedEvent.getLivemode(), event.getLivemode());
-		assertEquals(reserializedEvent.getRequest(), event.getRequest());
+		assertEquals(reserializedEvent.getRequest().getId(), event.getRequest().getId());
+		assertEquals(reserializedEvent.getRequest().getIdempotencyKey(), event.getRequest().getIdempotencyKey());
 		assertEquals(reserializedEvent.getType(), event.getType());
 		assertEquals(reserializedEvent.getUserId(), event.getUserId());
+	}
+
+	@Test
+	public void supportsOldRequest() throws IOException {
+		String json = resource("event_old_request.json");
+		Event event = StripeObject.PRETTY_PRINT_GSON.fromJson(json, Event.class);
+		assertEquals(event.getRequest().getId(), "req_Ait4gLD2CQhStB");
 	}
 }
