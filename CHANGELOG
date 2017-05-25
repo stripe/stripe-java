@@ -1,3 +1,7 @@
+=== 4.9.0 2017-05-25
+
+* Support expanded request in `Event` model (now with idempotency key)
+
 === 4.8.0 2017-05-25
 
 * Add support for account login links
