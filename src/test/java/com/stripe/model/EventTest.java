@@ -34,7 +34,8 @@ public class EventTest extends BaseStripeTest {
 		assertEquals(reserializedEvent.getApiVersion(), event.getApiVersion());
 		assertEquals(reserializedEvent.getCreated(), event.getCreated());
 		assertEquals(reserializedEvent.getLivemode(), event.getLivemode());
-		assertEquals(reserializedEvent.getRequest(), event.getRequest());
+		assertEquals(reserializedEvent.getRequest().getId(), event.getRequest().getId());
+		assertEquals(reserializedEvent.getRequest().getIdempotencyKey(), event.getRequest().getIdempotencyKey());
 		assertEquals(reserializedEvent.getType(), event.getType());
 		assertEquals(reserializedEvent.getUserId(), event.getUserId());
 	}

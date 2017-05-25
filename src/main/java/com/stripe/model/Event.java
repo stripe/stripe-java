@@ -18,7 +18,7 @@ public class Event extends APIResource implements HasId {
 	EventData data;
 	Boolean livemode;
 	Integer pendingWebhooks;
-	String request;
+	EventRequest request;
 	String type;
 	String userId;
 
@@ -78,11 +78,11 @@ public class Event extends APIResource implements HasId {
 		this.pendingWebhooks = pendingWebhooks;
 	}
 
-	public String getRequest() {
+	public EventRequest getRequest() {
 		return request;
 	}
 
-	public void setRequest(String request) {
+	public void setRequest(EventRequest request) {
 		this.request = request;
 	}
 
