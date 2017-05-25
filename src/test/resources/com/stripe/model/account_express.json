@@ -1,0 +1,12 @@
+{
+    "id": "acct_EXPRESS",
+    "country": "US",
+    "login_links": {
+        "object": "list",
+        "url": "/v1/accounts/acct_EXPRESS/login_links",
+        "has_more": false,
+        "data": []
+    },
+    "object": "account",
+    "type": "custom"
+}
