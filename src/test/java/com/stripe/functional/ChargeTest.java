@@ -137,7 +137,7 @@ public class ChargeTest extends BaseStripeFunctionalTest {
 		Map<String, Object> invalidChargeParams = new HashMap<String, Object>();
 		invalidChargeParams.putAll(defaultChargeParams);
 		Map<String, Object> invalidCardParams = new HashMap<String, Object>();
-		invalidCardParams.put("number", "4242424242424241");
+		invalidCardParams.put("number", "4242424242424241"); // No magic token for invalid card number
 		invalidCardParams.put("exp_month", 12);
 		invalidCardParams.put("exp_year", getYear());
 		invalidChargeParams.put("source", invalidCardParams);
@@ -247,7 +247,7 @@ public class ChargeTest extends BaseStripeFunctionalTest {
 		Map<String, Object> invalidChargeParams = new HashMap<String, Object>();
 		invalidChargeParams.putAll(defaultChargeParams);
 		Map<String, Object> invalidCardParams = new HashMap<String, Object>();
-		invalidCardParams.put("number", "4242424242424241");
+		invalidCardParams.put("number", "4242424242424241"); // No magic token for invalid card number
 		invalidCardParams.put("exp_month", 12);
 		invalidCardParams.put("exp_year", getYear());
 		invalidChargeParams.put("source", invalidCardParams);
