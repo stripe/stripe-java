@@ -147,7 +147,7 @@ public class CustomerTest extends BaseStripeFunctionalTest {
     @Test
     public void testCustomerCreateWithSource() throws StripeException {
         HashMap<String, Object> customerCreationParams = new HashMap<String, Object>();
-        customerCreationParams.put("source", defaultSourceParams);
+        customerCreationParams.put("source", "tok_visa");
         Customer customer = Customer.create(customerCreationParams);
         assertNotNull(customer);
         assertNotNull(customer.getId());
@@ -156,18 +156,6 @@ public class CustomerTest extends BaseStripeFunctionalTest {
         assertNotNull(customer.getDefaultSource());
         ExternalAccount card = customer.getSources().retrieve(customer.getDefaultSource());
         assertEquals(card.getId(), customer.getDefaultSource());
-    }
-
-    @Test
-    public void testCustomerCreateSourceWithCardHash() throws StripeException {
-        Customer customer = Customer.create(new HashMap<String, Object>());
-        ExternalAccountCollection customerSources = customer.getSources();
-        HashMap<String, Object> createParams = new HashMap<String, Object>();
-        createParams.put("source", defaultSourceParams);
-        ExternalAccount paymentSource = customerSources.create(createParams);
-        assertNotNull(paymentSource);
-        assertNotNull(paymentSource.getId());
-        assert(paymentSource instanceof Card);
     }
 
     @Test
@@ -213,11 +201,9 @@ public class CustomerTest extends BaseStripeFunctionalTest {
         String originalDefaultSource = createdCustomer.getDefaultSource();
 
         Map<String, Object> creationParams = new HashMap<String, Object>();
-        creationParams.put("card", defaultCardParams);
+        creationParams.put("source", "tok_visa");
         ExternalAccount addedCard = createdCustomer.getSources().create(creationParams);
-
-        Token token = Token.create(defaultTokenParams);
-        createdCustomer.createCard(token.getId());
+        createdCustomer.createCard("tok_visa");
 
         Customer updatedCustomer = Customer.retrieve(createdCustomer.getId(), supportedRequestOptions);
         assertEquals(3, updatedCustomer.getSources().getData().size());
@@ -238,7 +224,7 @@ public class CustomerTest extends BaseStripeFunctionalTest {
         Customer createdCustomer = Customer.create(defaultCustomerParams, supportedRequestOptions);
 
         Map<String, Object> creationParams = new HashMap<String, Object>();
-        creationParams.put("card", defaultCardParams);
+        creationParams.put("source", "tok_visa");
         ExternalAccount addedCard = createdCustomer.getSources().create(creationParams);
 
         assertEquals(createdCustomer.getId(), addedCard.getCustomer());
@@ -263,7 +249,7 @@ public class CustomerTest extends BaseStripeFunctionalTest {
     public void testCustomerCardDelete() throws StripeException {
         Customer customer = Customer.create(defaultCustomerParams, supportedRequestOptions);
         Map<String, Object> creationParams = new HashMap<String, Object>();
-        creationParams.put("card", defaultCardParams);
+        creationParams.put("source", "tok_visa");
         customer.createCard(creationParams);
 
         ExternalAccount card = customer.getSources().getData().get(0);
@@ -286,8 +272,7 @@ public class CustomerTest extends BaseStripeFunctionalTest {
         creationParams.put("bank_account", defaultBankAccountParams);
         BankAccount addedBankAccount = createdCustomer.createBankAccount(creationParams);
 
-        Token token = Token.create(defaultTokenParams);
-        createdCustomer.createCard(token.getId());
+        createdCustomer.createCard("tok_visa");
 
         Customer updatedCustomer = Customer.retrieve(createdCustomer.getId(), supportedRequestOptions);
         assertEquals((Integer) updatedCustomer.getSources().getData().size(), (Integer) 3);

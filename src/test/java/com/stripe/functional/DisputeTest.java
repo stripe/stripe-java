@@ -25,11 +25,7 @@ public class DisputeTest extends BaseStripeFunctionalTest {
         Map<String, Object> chargeParams = new HashMap<String, Object>();
         chargeParams.putAll(defaultChargeParams);
         chargeParams.put("amount", chargeValueCents);
-        Map<String, Object> testModeDisputeCardParams = new HashMap<String, Object>();
-        testModeDisputeCardParams.put("number", "4000000000000259");
-        testModeDisputeCardParams.put("exp_month", 12);
-        testModeDisputeCardParams.put("exp_year", getYear());
-        chargeParams.put("card", testModeDisputeCardParams);
+        chargeParams.put("source", "tok_createDispute");
         Charge charge = Charge.create(chargeParams, options);
 
         // This test relies on the server asynchronously marking the charge as disputed.
