@@ -40,7 +40,7 @@ public final class Webhook {
 	 * @param payload the payload sent by Stripe.
 	 * @param sigHeader the contents of the signature header sent by Stripe.
 	 * @param secret secret used to generate the signature.
-	 * @param tolerance maximum difference allowed between the header's
+	 * @param tolerance maximum difference in seconds allowed between the header's
 	 *  timestamp and the current time
 	 * @return the Event instance
 	 * @throws SignatureVerificationException if the verification fails.
