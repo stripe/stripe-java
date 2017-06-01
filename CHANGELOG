@@ -1,10 +1,15 @@
-=== 4.9.1 2017-05-30
+=== 5.0.0 2017-05-31
 
 * Clarify tolerance parameter for webhook signatures is in seconds
+* Support expanded request in `Event` model (now with idempotency key)
+
+=== 4.9.1 2017-05-30
+
+* This release should have been 5.0.0, see notes for that
 
 === 4.9.0 2017-05-25
 
-* Support expanded request in `Event` model (now with idempotency key)
+* This release should have been 5.0.0, see notes for that
 
 === 4.8.0 2017-05-25
 
