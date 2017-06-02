@@ -72,7 +72,9 @@ public abstract class APIResource extends StripeObject {
 			return "apple_pay_domain";
 		} else if (className.equals("subscriptionitem")) {
 			return "subscription_item";
-		} else {
+		} else if (className.equals("ephemeralkey")) {
+            return "ephemeral_key";
+        } else {
 			return className;
 		}
 	}
