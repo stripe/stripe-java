@@ -1,3 +1,7 @@
+=== 5.1.0 2017-06-07
+
+* Add `account` field to the event model
+
 === 5.0.0 2017-05-31
 
 * Clarify tolerance parameter for webhook signatures is in seconds
