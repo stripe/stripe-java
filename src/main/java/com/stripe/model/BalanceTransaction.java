@@ -1,5 +1,8 @@
 package com.stripe.model;
 
+import java.util.List;
+import java.util.Map;
+
 import com.stripe.Stripe;
 import com.stripe.exception.APIConnectionException;
 import com.stripe.exception.APIException;
@@ -8,9 +11,6 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
-
-import java.util.List;
-import java.util.Map;
 
 public class BalanceTransaction extends APIResource implements HasId {
 	String id;
@@ -23,10 +23,10 @@ public class BalanceTransaction extends APIResource implements HasId {
 	Long fee;
 	List<Fee> feeDetails;
 	Integer net;
-	String source;
+	ExpandableField<HasId> source;
 	String status;
 	String type;
-
+	
 	@Deprecated
 	TransferCollection sourcedTransfers;
 
@@ -110,14 +110,6 @@ public class BalanceTransaction extends APIResource implements HasId {
 		this.net = net;
 	}
 
-	public String getSource() {
-		return source;
-	}
-
-	public void setSource(String source) {
-		this.source = source;
-	}
-
 	/**
 	 * @deprecated
 	 * Recent API versions no longer return this field (https://stripe.com/docs/upgrades#2017-01-27).
@@ -146,7 +138,36 @@ public class BalanceTransaction extends APIResource implements HasId {
 	public void setType(String type) {
 		this.type = type;
 	}
+	
+	public String getSource() {
+		if (this.source == null) {
+			return null;
+		}
+		return this.source.getId();
+	}
 
+	public void setSource(String sourceID) {
+		this.source = setExpandableFieldID(sourceID, this.source);
+	}
+	
+	public HasId getSourceObject() {
+		if (this.source == null) {
+			return null;
+		}
+		return this.source.getExpanded();
+	}
+
+	public void setSourceObject(HasId o) {
+		this.source = new ExpandableField<HasId>(o.getId(), o);
+	}
+
+	public <O extends HasId> O getSourceObjectAs() {
+		if (this.source == null) {
+			return null;
+		}
+		return (O) this.source.getExpanded();
+ 	}
+	
 	public static BalanceTransaction retrieve(String id) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
@@ -200,4 +221,5 @@ public class BalanceTransaction extends APIResource implements HasId {
 			APIConnectionException, CardException, APIException {
 		return list(params, options);
 	}
+	
 }
