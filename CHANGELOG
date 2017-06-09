@@ -1,3 +1,7 @@
+=== 5.2.0 2017-06-09
+
+* Support for expandable sources in balance transactions
+
 === 5.1.0 2017-06-07
 
 * Add `account` field to the event model
