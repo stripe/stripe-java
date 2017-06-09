@@ -14,11 +14,11 @@ public class Reversal extends APIResource implements MetadataStore<Transfer>, Ha
 	String id;
 	String object;
 	Long amount;
-	String balanceTransaction;
+	ExpandableField<BalanceTransaction> balanceTransaction;
 	Long created;
 	String currency;
 	Map<String, String> metadata;
-	String transfer;
+	ExpandableField<Transfer> transfer;
 
 	public String getId() {
 		return id;
@@ -41,11 +41,25 @@ public class Reversal extends APIResource implements MetadataStore<Transfer>, Ha
 	}
 
 	public String getBalanceTransaction() {
-		return balanceTransaction;
+		if (this.balanceTransaction == null) {
+			return null;
+		}
+		return this.balanceTransaction.getId();
 	}
 
-	public void setBalanceTransaction(String balanceTransaction) {
-		this.balanceTransaction = balanceTransaction;
+	public void setBalanceTransaction(String balanceTransactionID) {
+		this.balanceTransaction = setExpandableFieldID(balanceTransactionID, this.balanceTransaction);
+	}
+
+	public BalanceTransaction getBalanceTransactionObject() {
+		if (this.balanceTransaction == null) {
+			return null;
+		}
+		return this.balanceTransaction.getExpanded();
+	}
+
+	public void setBalanceTransactionObject(BalanceTransaction c) {
+		this.balanceTransaction = new ExpandableField<BalanceTransaction>(c.getId(), c);
 	}
 
 	public Long getCreated() {
@@ -73,11 +87,25 @@ public class Reversal extends APIResource implements MetadataStore<Transfer>, Ha
 	}
 
 	public String getTransfer() {
-		return transfer;
+		if (this.transfer == null) {
+			return null;
+		}
+		return this.transfer.getId();
 	}
 
-	public void setTransfer(String transfer) {
-		this.transfer = transfer;
+	public void setTransfer(String transferID) {
+		this.transfer = setExpandableFieldID(transferID, this.transfer);
+	}
+
+	public Transfer getTransferObject() {
+		if (this.transfer == null) {
+			return null;
+		}
+		return this.transfer.getExpanded();
+	}
+
+	public void setTransferObject(Transfer c) {
+		this.transfer = new ExpandableField<Transfer>(c.getId(), c);
 	}
 
 	public Reversal update(Map<String, Object> params)

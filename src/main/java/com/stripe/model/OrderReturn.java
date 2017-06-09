@@ -19,8 +19,8 @@ public class OrderReturn extends APIResource implements HasId {
 	String currency;
 	List<OrderItem> items;
 	Boolean livemode;
-	String order;
-	String refund;
+	ExpandableField<Order> order;
+	ExpandableField<Refund> refund;
 
 	public String getId() {
 		return id;
@@ -79,19 +79,47 @@ public class OrderReturn extends APIResource implements HasId {
 	}
 
 	public String getOrder() {
-		return order;
+		if (order == null) {
+			return null;
+		}
+		return order.getId();
 	}
 
-	public void setOrder(String order) {
-		this.order = order;
+	public void setOrder(String orderID) {
+		this.order = setExpandableFieldID(orderID, this.order);
+	}
+
+	public Order getOrderObject() {
+		if (this.order == null) {
+			return null;
+		}
+		return this.order.getExpanded();
+	}
+
+	public void setOrderObject(Order order) {
+		this.order = new ExpandableField<Order>(order.getId(), order);
 	}
 
 	public String getRefund() {
-		return refund;
+		if (refund == null) {
+			return null;
+		}
+		return refund.getId();
 	}
 
-	public void setRefund(String refund) {
-		this.refund = refund;
+	public void setRefund(String refundID) {
+		this.refund = setExpandableFieldID(refundID, this.refund);
+	}
+
+	public Refund getRefundObject() {
+		if (this.refund == null) {
+			return null;
+		}
+		return this.refund.getExpanded();
+	}
+
+	public void setRefundObject(Refund refund) {
+		this.refund = new ExpandableField<Refund>(refund.getId(), refund);
 	}
 
 	public static OrderReturn retrieve(String id)

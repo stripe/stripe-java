@@ -15,18 +15,18 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
 	String object;
 	Long amount;
 	String currency;
-	String customer;
+	ExpandableField<Customer> customer;
 	Long date;
 	String description;
 	Boolean discountable;
-	String invoice;
+	ExpandableField<Invoice> invoice;
 	Boolean livemode;
 	Map<String, String> metadata;
 	InvoiceLineItemPeriod period;
 	Plan plan;
 	Boolean proration;
 	Integer quantity;
-	String subscription;
+	ExpandableField<Subscription> subscription;
 
 	public String getId() {
 		return id;
@@ -61,11 +61,26 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
 	}
 
 	public String getCustomer() {
-		return customer;
+		if (this.customer == null) {
+			return null;
+		}
+		return this.customer.getId();
 	}
 
-	public void setCustomer(String customer) {
-		this.customer = customer;
+	public void setCustomer(String customerID) {
+		this.customer = setExpandableFieldID(customerID, this.customer);
+
+	}
+
+	public Customer getCustomerObject() {
+		if (this.customer == null) {
+			return null;
+		}
+		return this.customer.getExpanded();
+	}
+
+	public void setCustomerObject(Customer c) {
+		this.customer = new ExpandableField<Customer>(c.getId(), c);
 	}
 
 	public Long getDate() {
@@ -93,11 +108,26 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
 	}
 
 	public String getInvoice() {
-		return invoice;
+		if (this.invoice == null) {
+			return null;
+		}
+		return this.invoice.getId();
 	}
 
-	public void setInvoice(String invoice) {
-		this.invoice = invoice;
+	public void setInvoice(String invoiceID) {
+		this.invoice = setExpandableFieldID(invoiceID, this.invoice);
+
+	}
+
+	public Invoice getInvoiceObject() {
+		if (this.invoice == null) {
+			return null;
+		}
+		return this.invoice.getExpanded();
+	}
+
+	public void setInvoiceObject(Invoice invoice) {
+		this.invoice = new ExpandableField<Invoice>(invoice.getId(), invoice);
 	}
 
 	public Boolean getLivemode() {
@@ -149,11 +179,25 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
 	}
 
 	public String getSubscription() {
-		return subscription;
+		if (subscription == null) {
+			return null;
+		}
+		return subscription.getId();
 	}
 
-	public void setSubscription(String subscription) {
-		this.subscription = subscription;
+	public void setSubscription(String subscriptionID) {
+		this.subscription = setExpandableFieldID(subscriptionID, this.subscription);
+	}
+
+	public Subscription getSubscriptionObject() {
+		if (this.subscription == null) {
+			return null;
+		}
+		return this.subscription.getExpanded();
+	}
+
+	public void setSubscriptionObject(Subscription subscription) {
+		this.subscription = new ExpandableField<Subscription>(subscription.getId(), subscription);
 	}
 
 	public static InvoiceItem create(Map<String, Object> params)

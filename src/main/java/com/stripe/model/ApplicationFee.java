@@ -13,16 +13,16 @@ import java.util.Map;
 public class ApplicationFee extends APIResource implements HasId {
 	String id;
 	String object;
-	String account;
+	ExpandableField<Account> account;
 	Long amount;
 	Long amountRefunded;
-	String application;
-	String balanceTransaction;
-	String charge;
+	ExpandableField<Application> application;
+	ExpandableField<BalanceTransaction> balanceTransaction;
+	ExpandableField<Charge> charge;
 	Long created;
 	String currency;
 	Boolean livemode;
-	String originatingTransaction;
+	ExpandableField<Charge> originatingTransaction;
 	Boolean refunded;
 	FeeRefundCollection refunds;
 
@@ -46,11 +46,25 @@ public class ApplicationFee extends APIResource implements HasId {
 	}
 
 	public String getAccount() {
-		return account;
+		if (this.account == null) {
+			return null;
+		}
+		return this.account.getId();
 	}
 
-	public void setAccount(String account) {
-		this.account = account;
+	public void setAccount(String accountID) {
+		this.account = setExpandableFieldID(accountID, this.account);
+	}
+
+	public Account getAccountObject() {
+		if (this.account == null) {
+			return null;
+		}
+		return this.account.getExpanded();
+	}
+
+	public void setAccountObject(Account c) {
+		this.account = new ExpandableField<Account>(c.getId(), c);
 	}
 
 	public Long getAmount() {
@@ -70,27 +84,69 @@ public class ApplicationFee extends APIResource implements HasId {
 	}
 
 	public String getApplication() {
-		return application;
+		if (this.application == null) {
+			return null;
+		}
+		return this.application.getId();
 	}
 
-	public void setApplication(String application) {
-		this.application = application;
+	public void setApplication(String applicationID) {
+		this.application = setExpandableFieldID(applicationID, this.application);
+	}
+
+	public Application getApplicationObject() {
+		if (this.application == null) {
+			return null;
+		}
+		return this.application.getExpanded();
+	}
+
+	public void setApplicationObject(Application c) {
+		this.application = new ExpandableField<Application>(c.getId(), c);
 	}
 
 	public String getBalanceTransaction() {
-		return balanceTransaction;
+		if (this.balanceTransaction == null) {
+			return null;
+		}
+		return this.balanceTransaction.getId();
 	}
 
-	public void setBalanceTransaction(String balanceTransaction) {
-		this.balanceTransaction = balanceTransaction;
+	public void setBalanceTransaction(String balanceTransactionID) {
+		this.balanceTransaction = setExpandableFieldID(balanceTransactionID, this.balanceTransaction);
+	}
+
+	public BalanceTransaction getBalanceTransactionObject() {
+		if (this.balanceTransaction == null) {
+			return null;
+		}
+		return this.balanceTransaction.getExpanded();
+	}
+
+	public void setBalanceTransactionObject(BalanceTransaction c) {
+		this.balanceTransaction = new ExpandableField<BalanceTransaction>(c.getId(), c);
 	}
 
 	public String getCharge() {
-		return charge;
+		if (this.charge == null) {
+			return null;
+		}
+		return this.charge.getId();
 	}
 
-	public void setCharge(String charge) {
-		this.charge = charge;
+	public void setCharge(String chargeID) {
+		this.charge = setExpandableFieldID(chargeID, this.charge);
+	}
+
+	public Charge getChargeObject() {
+		if (this.charge == null) {
+			return null;
+		}
+		return this.charge.getExpanded();
+	}
+
+	public void setChargeObject(Charge c) {
+		this.charge = new ExpandableField<Charge>(c.getId(), c);
 	}
 
 	public Long getCreated() {
@@ -118,11 +174,25 @@ public class ApplicationFee extends APIResource implements HasId {
 	}
 
 	public String getOriginatingTransaction() {
-		return originatingTransaction;
+		if (this.originatingTransaction == null) {
+			return null;
+		}
+		return this.originatingTransaction.getId();
 	}
 
-	public void setOriginatingTransaction(String originatingTransaction) {
-		this.originatingTransaction = originatingTransaction;
+	public void setOriginatingTransaction(String originatingTransactionID) {
+		this.originatingTransaction = setExpandableFieldID(originatingTransactionID, this.originatingTransaction);
+	}
+
+	public Charge getOriginatingTransactionObject() {
+		if (this.originatingTransaction == null) {
+			return null;
+		}
+		return this.originatingTransaction.getExpanded();
+	}
+
+	public void setOriginatingTransactionObject(Charge c) {
+		this.originatingTransaction = new ExpandableField<Charge>(c.getId(), c);
 	}
 
 	public Boolean getRefunded() {
