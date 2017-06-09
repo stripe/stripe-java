@@ -322,6 +322,12 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 		return request(RequestMethod.GET, instanceURL(Account.class, id), null, Account.class, options);
 	}
 
+	public static Account retrieve(String id, Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, instanceURL(Account.class, id), params, Account.class, options);
+	}
+
 	public Account update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {

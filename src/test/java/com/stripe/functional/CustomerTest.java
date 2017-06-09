@@ -128,6 +128,19 @@ public class CustomerTest extends BaseStripeFunctionalTest {
     }
 
     @Test
+    public void testCustomerSourceRetrieveWithExpand() throws StripeException {
+        List<String> expandList = new LinkedList<String>();
+        expandList.add("default_source");
+
+        Customer customer = Customer.create(defaultCustomerParams);
+        ExternalAccountCollection customerSources = customer.getSources();
+        String paymentSourceId = customerSources.getData().get(0).getId();
+        ExternalAccount paymentSource = customerSources.retrieve(paymentSourceId);
+        assertNotNull(paymentSource);
+        assertEquals(paymentSourceId, paymentSource.getId());
+    }
+
+    @Test
     public void testCustomerSourceRetrieveBitcoinReceiver() throws StripeException {
         Customer customer = Customer.create(new HashMap<String, Object>());
         BitcoinReceiver receiver = BitcoinReceiver.create(defaultBitcoinReceiverParams);

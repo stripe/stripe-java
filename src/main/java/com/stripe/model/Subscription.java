@@ -278,6 +278,12 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 		return request(RequestMethod.GET, instanceURL(Subscription.class, id), null, Subscription.class, options);
 	}
 
+	public static Subscription retrieve(String id, Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, instanceURL(Subscription.class, id), params, Subscription.class, options);
+	}
+
 	public Subscription update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {

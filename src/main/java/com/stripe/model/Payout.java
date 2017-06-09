@@ -265,6 +265,12 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
 		return request(RequestMethod.GET, instanceURL(Payout.class, id), null, Payout.class, options);
 	}
 
+	public static Payout retrieve(String id, Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, instanceURL(Payout.class, id), params, Payout.class, options);
+	}
+
 	public Payout update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {

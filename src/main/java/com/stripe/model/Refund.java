@@ -184,6 +184,12 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
 		return request(RequestMethod.GET, instanceURL(Refund.class, id), null, Refund.class, options);
 	}
 
+	public static Refund retrieve(String id, Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, instanceURL(Refund.class, id), params, Refund.class, options);
+	}
+
 	public static RefundCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {

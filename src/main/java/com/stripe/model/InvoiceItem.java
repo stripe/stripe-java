@@ -247,6 +247,11 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.GET, instanceURL(InvoiceItem.class, id), null, InvoiceItem.class, options);
 	}
+	public static InvoiceItem retrieve(String id, Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, instanceURL(InvoiceItem.class, id), params, InvoiceItem.class, options);
+	}
 
 	public static InvoiceItemCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,

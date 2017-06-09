@@ -488,6 +488,11 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.GET, instanceURL(Transfer.class, id), null, Transfer.class, options);
 	}
+	public static Transfer retrieve(String id, Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, instanceURL(Transfer.class, id), params, Transfer.class, options);
+	}
 
 	public static TransferCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,

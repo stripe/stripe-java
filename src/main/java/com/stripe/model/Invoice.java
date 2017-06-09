@@ -401,6 +401,11 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.GET, instanceURL(Invoice.class, id), null, Invoice.class, options);
 	}
+	public static Invoice retrieve(String id, Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, instanceURL(Invoice.class, id), params, Invoice.class, options);
+	}
 
 	@Deprecated
 	public static Invoice create(Map<String, Object> params, String apiKey)

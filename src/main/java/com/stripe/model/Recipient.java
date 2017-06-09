@@ -255,6 +255,11 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.GET, instanceURL(Recipient.class, id), null, Recipient.class, options);
 	}
+	public static Recipient retrieve(String id, Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, instanceURL(Recipient.class, id), params, Recipient.class, options);
+	}
 
 	public static RecipientCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,

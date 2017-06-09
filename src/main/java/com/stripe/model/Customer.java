@@ -393,6 +393,11 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.GET, instanceURL(Customer.class, id), null, Customer.class, options);
 	}
+	public static Customer retrieve(String id, Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, instanceURL(Customer.class, id), params, Customer.class, options);
+	}
 
 	public static CustomerCollection list(Map<String, Object> params)
 			throws AuthenticationException,
