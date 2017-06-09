@@ -129,15 +129,17 @@ public class CustomerTest extends BaseStripeFunctionalTest {
 
     @Test
     public void testCustomerSourceRetrieveWithExpand() throws StripeException {
+        Customer customer = Customer.create(defaultCustomerParams);
+
         List<String> expandList = new LinkedList<String>();
         expandList.add("default_source");
+        Map<String, Object> retrieveParams = new HashMap<String, Object>();
+        retrieveParams.put("expand", expandList);
 
-        Customer customer = Customer.create(defaultCustomerParams);
-        ExternalAccountCollection customerSources = customer.getSources();
-        String paymentSourceId = customerSources.getData().get(0).getId();
-        ExternalAccount paymentSource = customerSources.retrieve(paymentSourceId);
-        assertNotNull(paymentSource);
-        assertEquals(paymentSourceId, paymentSource.getId());
+        Customer retrievedCustomer = Customer.retrieve(customer.getId(), retrieveParams, null);
+        ExternalAccount defaultSource = retrievedCustomer.getDefaultSourceObject();
+        assertNotNull(defaultSource);
+        assertEquals("4242", ((Card) defaultSource).getLast4());
     }
 
     @Test
