@@ -23,11 +23,9 @@ public class BalanceTransaction extends APIResource implements HasId {
 	Long fee;
 	List<Fee> feeDetails;
 	Integer net;
-	String source;
+	ExpandableField<HasId> source;
 	String status;
 	String type;
-	
-	transient HasId sourceObject;
 	
 	@Deprecated
 	TransferCollection sourcedTransfers;
@@ -112,14 +110,6 @@ public class BalanceTransaction extends APIResource implements HasId {
 		this.net = net;
 	}
 
-	public String getSource() {
-		return source;
-	}
-
-	public void setSource(String source) {
-		this.source = source;
-	}
-
 	/**
 	 * @deprecated
 	 * Recent API versions no longer return this field (https://stripe.com/docs/upgrades#2017-01-27).
@@ -149,15 +139,35 @@ public class BalanceTransaction extends APIResource implements HasId {
 		this.type = type;
 	}
 	
-	public void setSourceObject(HasId sourceObject) {
-		this.sourceObject = sourceObject;
+	public String getSource() {
+		if (this.source == null) {
+			return null;
+		}
+		return this.source.getId();
 	}
 
-	@SuppressWarnings("unchecked")
-	public <O> O getSourceObject() {
-		return (O) sourceObject;
+	public void setSource(String sourceID) {
+		this.source = setExpandableFieldID(sourceID, this.source);
 	}
-		
+	
+	public HasId getSourceObject() {
+		if (this.source == null) {
+			return null;
+		}
+		return this.source.getExpanded();
+	}
+
+	public void setSourceObject(HasId o) {
+		this.source = new ExpandableField<HasId>(o.getId(), o);
+	}
+
+	public <O extends HasId> O getSourceObjectAs() {
+		if (this.source == null) {
+			return null;
+		}
+		return (O) this.source.getExpanded();
+ 	}
+	
 	public static BalanceTransaction retrieve(String id) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
