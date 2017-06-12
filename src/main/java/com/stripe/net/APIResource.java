@@ -29,6 +29,8 @@ import com.stripe.model.ExternalAccountTypeAdapterFactory;
 import com.stripe.model.FeeRefundCollection;
 import com.stripe.model.FeeRefundCollectionDeserializer;
 import com.stripe.model.HasId;
+import com.stripe.model.OrderItem;
+import com.stripe.model.OrderItemDeserializer;
 import com.stripe.model.Source;
 import com.stripe.model.SourceDeserializer;
 import com.stripe.model.StripeCollectionInterface;
@@ -53,6 +55,7 @@ public abstract class APIResource extends StripeObject {
 			.registerTypeAdapter(BalanceTransaction.class, new BalanceTransactionDeserializer())
 			.registerTypeAdapter(Dispute.class, new DisputeDataDeserializer())
 			.registerTypeAdapter(Source.class, new SourceDeserializer())
+			.registerTypeAdapter(OrderItem.class, new OrderItemDeserializer())
 			.registerTypeAdapter(ExpandableField.class, new ExpandableFieldDeserializer())
 			.registerTypeAdapterFactory(new ExternalAccountTypeAdapterFactory())
 			.create();
