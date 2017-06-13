@@ -56,6 +56,18 @@ public class EphemeralKeyTest extends BaseStripeTest {
 		verifyNoMoreInteractions(networkMock);
 	}
 
+	@Test(expected=IllegalArgumentException.class)
+	public void testVersionlessCreate() throws StripeException {
+		Stripe.apiVersion = null;
+
+		final Map<String, Object> params = new HashMap<String, Object>();
+		params.put("customer", "cus_123");
+
+		final RequestOptions options = RequestOptions.getDefault();
+
+		EphemeralKey.create(params, options);
+	}
+
 	@Test
 	public void testDelete() throws StripeException {
 		EphemeralKey key = new EphemeralKey();

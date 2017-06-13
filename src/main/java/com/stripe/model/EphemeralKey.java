@@ -89,6 +89,10 @@ public class EphemeralKey extends APIResource implements HasId {
 	public static EphemeralKey create(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
+		if (options.getStripeVersion() == null) {
+			throw new IllegalArgumentException("stripeVersion must be specified in RequestOptions");
+		}
+
 		return request(RequestMethod.POST, classURL(EphemeralKey.class), params, EphemeralKey.class, options);
 	}
 
