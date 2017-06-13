@@ -76,8 +76,8 @@ public abstract class APIResource extends StripeObject {
 		} else if (className.equals("subscriptionitem")) {
 			return "subscription_item";
 		} else if (className.equals("ephemeralkey")) {
-            return "ephemeral_key";
-        } else {
+			return "ephemeral_key";
+		} else {
 			return className;
 		}
 	}
@@ -178,9 +178,9 @@ public abstract class APIResource extends StripeObject {
 	}
 
 	/**
-	 *  When setting a String ID for an ExpandableField, we need to be careful about keeping the String ID and the
-	 *  expanded object in sync. If they specify a new String ID that is different from the ID within the expanded object,
-	 *  we don't keep the object.
+	 * When setting a String ID for an ExpandableField, we need to be careful about keeping the String ID and the
+	 * expanded object in sync. If they specify a new String ID that is different from the ID within the expanded object,
+	 * we don't keep the object.
 	 */
 	public static <T extends HasId> ExpandableField<T> setExpandableFieldID(String newId, ExpandableField<T> currentObject) {
 		if (currentObject == null || (currentObject.isExpanded() && (currentObject.getId() != newId))) {

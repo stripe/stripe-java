@@ -17,8 +17,8 @@ public class EphemeralKeyDeserializer implements JsonDeserializer<EphemeralKey> 
 				.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
 				.create();
 
-        EphemeralKey result = gson.fromJson(json, EphemeralKey.class);
-        result.setRawJson(json.getAsJsonObject());
+		EphemeralKey result = gson.fromJson(json, EphemeralKey.class);
+		result.setRawJson(json.getAsJsonObject());
 		return result;
 	}
 }

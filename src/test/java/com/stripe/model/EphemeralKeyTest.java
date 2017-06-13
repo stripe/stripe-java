@@ -18,7 +18,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class EphemeralKeyTest extends BaseStripeTest {
-    private String oldApiVersion;
+	private String oldApiVersion;
 
 	@Before
 	public void mockStripeResponseGetter() {
@@ -33,22 +33,22 @@ public class EphemeralKeyTest extends BaseStripeTest {
 
 	@Before
 	public void saveOldStripeVersion() {
-        oldApiVersion = Stripe.apiVersion;
+		oldApiVersion = Stripe.apiVersion;
 	}
 
 	@After
 	public void restoreOldStripeVersion() {
-        Stripe.apiVersion = oldApiVersion;
+		Stripe.apiVersion = oldApiVersion;
 	}
 
 	@Test
 	public void testCreate() throws StripeException {
-        Stripe.apiVersion = "2016-06-05";
+		Stripe.apiVersion = "2016-06-05";
 
-        final Map<String, Object> params = new HashMap<String, Object>();
-        params.put("customer", "cus_123");
+		final Map<String, Object> params = new HashMap<String, Object>();
+		params.put("customer", "cus_123");
 
-        final RequestOptions options = RequestOptions.builder().setStripeVersion("2017-05-25").build();
+		final RequestOptions options = RequestOptions.builder().setStripeVersion("2017-05-25").build();
 
 		EphemeralKey.create(params, options);
 
@@ -67,10 +67,10 @@ public class EphemeralKeyTest extends BaseStripeTest {
 		verifyNoMoreInteractions(networkMock);
 	}
 
-    @Test
-    public void testJsonReserialization() throws StripeException {
-        final String jsonString = "{\"foo\":5,\"bar\":[\"baz\",null]}";
-        EphemeralKey key = APIResource.GSON.fromJson(jsonString, EphemeralKey.class);
-        assertEquals(key.getRawJson().toString(), jsonString);
-    }
+	@Test
+	public void testJsonReserialization() throws StripeException {
+		final String jsonString = "{\"foo\":5,\"bar\":[\"baz\",null]}";
+		EphemeralKey key = APIResource.GSON.fromJson(jsonString, EphemeralKey.class);
+		assertEquals(key.getRawJson().toString(), jsonString);
+	}
 }
