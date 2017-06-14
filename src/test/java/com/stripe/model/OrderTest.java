@@ -17,6 +17,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
 
 public class OrderTest extends BaseStripeTest {
@@ -127,5 +128,17 @@ public class OrderTest extends BaseStripeTest {
 
 		verifyPost(Order.class, "https://api.stripe.com/v1/orders/or_test_pay/pay", params);
 		verifyNoMoreInteractions(networkMock);
+	}
+
+	@Test
+	public void testDeserializeExpansions() throws StripeException, IOException {
+		String json = resource("order_expansions.json");
+		Order order = APIResource.GSON.fromJson(json, Order.class);
+		assertEquals("or_1ATvaEKCFFPkgtRhFtMgtnLF", order.getId());
+
+		OrderItem item = order.getItems().get(0);
+		SKU parent = item.getParentObjectAs();
+		assertNotNull(parent);
+		assertEquals("silence_mp3", parent.getId());
 	}
 }

@@ -21,7 +21,7 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 	Long created;
 	Long currentPeriodEnd;
 	Long currentPeriodStart;
-	String customer;
+	ExpandableField<Customer> customer;
 	Integer daysUntilDue;
 	Discount discount;
 	Long endedAt;
@@ -108,11 +108,25 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 	}
 
 	public String getCustomer() {
-		return customer;
+		if (this.customer == null) {
+			return null;
+		}
+		return this.customer.getId();
 	}
 
-	public void setCustomer(String customer) {
-		this.customer = customer;
+	public void setCustomer(String customerID) {
+		this.customer = setExpandableFieldID(customerID, this.customer);
+	}
+
+	public Customer getCustomerObject() {
+		if (this.customer == null) {
+			return null;
+		}
+		return this.customer.getExpanded();
+	}
+
+	public void setCustomerObject(Customer c) {
+		this.customer = new ExpandableField<Customer>(c.getId(), c);
 	}
 
 	public Integer getDaysUntilDue() {
@@ -262,6 +276,12 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.GET, instanceURL(Subscription.class, id), null, Subscription.class, options);
+	}
+
+	public static Subscription retrieve(String id, Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, instanceURL(Subscription.class, id), params, Subscription.class, options);
 	}
 
 	public Subscription update(Map<String, Object> params)

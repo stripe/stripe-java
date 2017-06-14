@@ -24,7 +24,7 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
 	Map<String, String> metadata;
 	PackageDimensions packageDimensions;
 	Integer price;
-	String product;
+	ExpandableField<Product> product;
 	Long updated;
 
 	public String getId() {
@@ -124,11 +124,26 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
 	}
 
 	public String getProduct() {
-		return product;
+		if (this.product == null) {
+			return null;
+		}
+		return this.product.getId();
 	}
 
-	public void setProduct(String product) {
-		this.product = product;
+	public void setProduct(String productID) {
+		this.product = setExpandableFieldID(productID, this.product);
+
+	}
+
+	public Product getProductObject() {
+		if (this.product == null) {
+			return null;
+		}
+		return this.product.getExpanded();
+	}
+
+	public void setProductObject(Product product) {
+		this.product = new ExpandableField<Product>(product.getId(), product);
 	}
 
 	public Long getUpdated() {
@@ -167,6 +182,12 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.GET, instanceURL(SKU.class, id), null, SKU.class, options);
+	}
+
+	public static SKU retrieve(String id, Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, instanceURL(SKU.class, id), params, SKU.class, options);
 	}
 
 	public DeletedSKU delete()

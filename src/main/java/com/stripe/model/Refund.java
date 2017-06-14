@@ -14,8 +14,8 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
 	String id;
 	String object;
 	Long amount;
-	String balanceTransaction;
-	String charge;
+	ExpandableField<BalanceTransaction> balanceTransaction;
+	ExpandableField<Charge> charge;
 	Long created;
 	String currency;
 	String description;
@@ -49,19 +49,47 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	public String getBalanceTransaction() {
-		return balanceTransaction;
+		if (this.balanceTransaction == null) {
+			return null;
+		}
+		return this.balanceTransaction.getId();
 	}
 
-	public void setBalanceTransaction(String balanceTransaction) {
-		this.balanceTransaction = balanceTransaction;
+	public void setBalanceTransaction(String balanceTransactionID) {
+		this.balanceTransaction = setExpandableFieldID(balanceTransactionID, this.balanceTransaction);
+	}
+
+	public BalanceTransaction getBalanceTransactionObject() {
+		if (this.balanceTransaction == null) {
+			return null;
+		}
+		return this.balanceTransaction.getExpanded();
+	}
+
+	public void setBalanceTransactionObject(BalanceTransaction c) {
+		this.balanceTransaction = new ExpandableField<BalanceTransaction>(c.getId(), c);
 	}
 
 	public String getCharge() {
-		return charge;
+		if (this.charge == null) {
+			return null;
+		}
+		return this.charge.getId();
 	}
 
-	public void setCharge(String charge) {
-		this.charge = charge;
+	public void setCharge(String chargeID) {
+		this.charge = setExpandableFieldID(chargeID, this.charge);
+	}
+
+	public Charge getChargeObject() {
+		if (this.charge == null) {
+			return null;
+		}
+		return this.charge.getExpanded();
+	}
+
+	public void setChargeObject(Charge c) {
+		this.charge = new ExpandableField<Charge>(c.getId(), c);
 	}
 
 	public Long getCreated() {
@@ -154,6 +182,12 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.GET, instanceURL(Refund.class, id), null, Refund.class, options);
+	}
+
+	public static Refund retrieve(String id, Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, instanceURL(Refund.class, id), params, Refund.class, options);
 	}
 
 	public static RefundCollection list(Map<String, Object> params)

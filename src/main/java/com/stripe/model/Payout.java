@@ -16,11 +16,11 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
 	String object;
 	Long amount;
 	Long arrivalDate;
-	String balanceTransaction;
+	ExpandableField<BalanceTransaction> balanceTransaction;
 	Long created;
 	String currency;
-	String destination;
-	String failureBalanceTransaction;
+	ExpandableField<ExternalAccount> destination;
+	ExpandableField<BalanceTransaction> failureBalanceTransaction;
 	String failureCode;
 	String failureMessage;
 	Boolean livemode;
@@ -64,11 +64,25 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
 	}
 
 	public String getBalanceTransaction() {
-		return balanceTransaction;
+		if (this.balanceTransaction == null) {
+			return null;
+		}
+		return this.balanceTransaction.getId();
 	}
 
-	public void setBalanceTransaction(String balanceTransaction) {
-		this.balanceTransaction = balanceTransaction;
+	public void setBalanceTransaction(String balanceTransactionID) {
+		this.balanceTransaction = setExpandableFieldID(balanceTransactionID, this.balanceTransaction);
+	}
+
+	public BalanceTransaction getBalanceTransactionObject() {
+		if (this.balanceTransaction == null) {
+			return null;
+		}
+		return this.balanceTransaction.getExpanded();
+	}
+
+	public void setBalanceTransactionObject(BalanceTransaction c) {
+		this.balanceTransaction = new ExpandableField<BalanceTransaction>(c.getId(), c);
 	}
 
 	public Long getCreated() {
@@ -88,19 +102,47 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
 	}
 
 	public String getDestination() {
-		return destination;
+		if (this.destination == null) {
+			return null;
+		}
+		return this.destination.getId();
 	}
 
-	public void setDestination(String destination) {
-		this.destination = destination;
+	public void setDestination(String destinationID) {
+		this.destination = APIResource.setExpandableFieldID(destinationID, this.destination);
+	}
+
+	public ExternalAccount getDestinationObject() {
+		if (this.destination == null) {
+			return null;
+		}
+		return this.destination.getExpanded();
+	}
+
+	public void setDestinationObject(ExternalAccount c) {
+		this.destination = new ExpandableField<ExternalAccount>(c.getId(), c);
 	}
 
 	public String getFailureBalanceTransaction() {
-		return failureBalanceTransaction;
+		if (this.failureBalanceTransaction == null) {
+			return null;
+		}
+		return this.failureBalanceTransaction.getId();
 	}
 
-	public void setFailureBalanceTransaction(String failureBalanceTransaction) {
-		this.failureBalanceTransaction = failureBalanceTransaction;
+	public void setFailureBalanceTransaction(String failureBalanceTransactionID) {
+		this.failureBalanceTransaction = setExpandableFieldID(failureBalanceTransactionID, this.failureBalanceTransaction);
+	}
+
+	public BalanceTransaction getFailureBalanceTransactionObject() {
+		if (this.failureBalanceTransaction == null) {
+			return null;
+		}
+		return this.failureBalanceTransaction.getExpanded();
+	}
+
+	public void setFailureBalanceTransactionObject(BalanceTransaction c) {
+		this.failureBalanceTransaction = new ExpandableField<BalanceTransaction>(c.getId(), c);
 	}
 
 	public String getFailureCode() {
@@ -221,6 +263,12 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.GET, instanceURL(Payout.class, id), null, Payout.class, options);
+	}
+
+	public static Payout retrieve(String id, Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, instanceURL(Payout.class, id), params, Payout.class, options);
 	}
 
 	public Payout update(Map<String, Object> params)

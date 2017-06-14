@@ -8,6 +8,8 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
+import com.stripe.model.ExpandableField;
+import com.stripe.model.ExpandableFieldDeserializer;
 
 import java.lang.reflect.Type;
 import java.util.List;
@@ -20,6 +22,7 @@ public class FeeRefundCollectionDeserializer implements JsonDeserializer<FeeRefu
 		throws JsonParseException {
 		Gson gson = new GsonBuilder()
 			.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+			.registerTypeAdapter(ExpandableField.class, new ExpandableFieldDeserializer())
 			.create();
 
 		// API versions 2014-07-26 and earlier render application fee refunds as an array instead of an object

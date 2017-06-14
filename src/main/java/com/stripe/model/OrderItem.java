@@ -1,11 +1,13 @@
 package com.stripe.model;
 
-public class OrderItem extends StripeObject {
+import com.stripe.net.APIResource;
+
+public class OrderItem extends APIResource {
 	String object;
 	Long amount;
 	String currency;
 	String description;
-	String parent;
+	ExpandableField<HasId> parent;
 	Integer quantity;
 	String type;
 
@@ -42,12 +44,33 @@ public class OrderItem extends StripeObject {
 	}
 
 	public String getParent() {
-		return parent;
+		if (this.parent == null) {
+			return null;
+		}
+		return this.parent.getId();
 	}
 
-	public void setParent(String parent) {
-		this.parent = parent;
+	public void setParent(String parentID) {
+		this.parent = setExpandableFieldID(parentID, this.parent);
 	}
+
+	public HasId getParentObject() {
+		if (this.parent == null) {
+			return null;
+		}
+		return this.parent.getExpanded();
+	}
+
+	public void setParentObject(HasId o) {
+		this.parent = new ExpandableField<HasId>(o.getId(), o);
+	}
+
+	public <O extends HasId> O getParentObjectAs() {
+		if (this.parent == null) {
+			return null;
+		}
+		return (O) this.parent.getExpanded();
+ 	}
 
 	public Integer getQuantity() {
 		return quantity;

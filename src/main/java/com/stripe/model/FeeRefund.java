@@ -14,10 +14,10 @@ public class FeeRefund extends APIResource implements MetadataStore<ApplicationF
 	String id;
 	String object;
 	Long amount;
-	String balanceTransaction;
+	ExpandableField<BalanceTransaction> balanceTransaction;
 	String currency;
 	Long created;
-	String fee;
+	ExpandableField<ApplicationFee> fee;
 	Map<String, String> metadata;
 
 	public String getId() {
@@ -41,11 +41,25 @@ public class FeeRefund extends APIResource implements MetadataStore<ApplicationF
 	}
 
 	public String getBalanceTransaction() {
-		return balanceTransaction;
+		if (this.balanceTransaction == null) {
+			return null;
+		}
+		return this.balanceTransaction.getId();
 	}
 
-	public void setBalanceTransaction(String balanceTransaction) {
-		this.balanceTransaction = balanceTransaction;
+	public void setBalanceTransaction(String balanceTransactionID) {
+		this.balanceTransaction = setExpandableFieldID(balanceTransactionID, this.balanceTransaction);
+	}
+
+	public BalanceTransaction getBalanceTransactionObject() {
+		if (this.balanceTransaction == null) {
+			return null;
+		}
+		return this.balanceTransaction.getExpanded();
+	}
+
+	public void setBalanceTransactionObject(BalanceTransaction c) {
+		this.balanceTransaction = new ExpandableField<BalanceTransaction>(c.getId(), c);
 	}
 
 	public String getCurrency() {
@@ -65,11 +79,25 @@ public class FeeRefund extends APIResource implements MetadataStore<ApplicationF
 	}
 
 	public String getFee() {
-		return fee;
+		if (this.fee == null) {
+			return null;
+		}
+		return this.fee.getId();
 	}
 
-	public void setFee(String fee) {
-		this.fee = fee;
+	public void setFee(String feeID) {
+		this.fee = setExpandableFieldID(feeID, this.fee);
+	}
+
+	public ApplicationFee getFeeObject() {
+		if (this.fee == null) {
+			return null;
+		}
+		return this.fee.getExpanded();
+	}
+
+	public void setFeeObject(ApplicationFee c) {
+		this.fee = new ExpandableField<ApplicationFee>(c.getId(), c);
 	}
 
 	public Map<String, String> getMetadata() {

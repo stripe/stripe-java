@@ -3,17 +3,20 @@ package com.stripe.functional;
 import com.stripe.BaseStripeFunctionalTest;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
+import com.stripe.model.BalanceTransaction;
 import com.stripe.model.Charge;
 import com.stripe.model.ChargeRefundCollection;
 import com.stripe.model.Refund;
 import org.junit.Test;
 
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class RefundTest extends BaseStripeFunctionalTest {
@@ -99,6 +102,34 @@ public class RefundTest extends BaseStripeFunctionalTest {
                 Stripe.apiKey).getData().get(0);
         Refund retrieved = ch.getRefunds().retrieve(created.getId(), Stripe.apiKey);
         assertEquals(created.getId(), retrieved.getId());
+    }
+
+    @Test
+    public void testChargeRefundListWithExpand()
+            throws StripeException {
+        Charge ch = Charge.create(defaultChargeParams);
+        ch = ch.refund();
+
+        List<String> expandList = new LinkedList<String>();
+        expandList.add("data.balance_transaction");
+        expandList.add("data.balance_transaction.source");
+        expandList.add("data.charge");
+
+        Map<String, Object> listParams = new HashMap<String, Object>();
+        listParams.put("charge", ch.getId());
+        listParams.put("count", 1);
+        listParams.put("expand", expandList);
+
+        Refund refund = Refund.list(listParams).getData().get(0);
+
+        Charge expCharge = refund.getChargeObject();
+        assertNotNull(expCharge);
+        assertEquals(ch.getId(), expCharge.getId());
+
+        BalanceTransaction expBT = refund.getBalanceTransactionObject();
+        assertNotNull(expBT);
+        Refund expRefundInBT = (Refund) expBT.getSourceObject();
+        assertEquals(refund.getId(), expRefundInBT.getId());
     }
 
     @Test

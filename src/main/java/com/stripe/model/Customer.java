@@ -18,7 +18,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 	String businessVatId;
 	Long created;
 	String currency;
-	String defaultSource;
+	ExpandableField<ExternalAccount> defaultSource;
 	Boolean deleted;
 	Boolean delinquent;
 	String description;
@@ -90,11 +90,25 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 	}
 
 	public String getDefaultSource() {
-		return defaultSource;
+		if (this.defaultSource == null) {
+			return null;
+		}
+		return this.defaultSource.getId();
 	}
 
-	public void setDefaultSource(String defaultSource) {
-		this.defaultSource = defaultSource;
+	public void setDefaultSource(String defaultSourceID) {
+		this.defaultSource = setExpandableFieldID(defaultSourceID, this.defaultSource);
+	}
+
+	public ExternalAccount getDefaultSourceObject() {
+		if (this.defaultSource == null) {
+			return null;
+		}
+		return this.defaultSource.getExpanded();
+	}
+
+	public void setDefaultSourceObject(ExternalAccount c) {
+		this.defaultSource = new ExpandableField<ExternalAccount>(c.getId(), c);
 	}
 
 	public Boolean getDeleted() {
@@ -378,6 +392,11 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.GET, instanceURL(Customer.class, id), null, Customer.class, options);
+	}
+	public static Customer retrieve(String id, Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, instanceURL(Customer.class, id), params, Customer.class, options);
 	}
 
 	public static CustomerCollection list(Map<String, Object> params)

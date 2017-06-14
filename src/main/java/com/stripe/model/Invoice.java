@@ -40,7 +40,7 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 	String receiptNumber;
 	Long startingBalance;
 	String statementDescriptor;
-	String subscription;
+	ExpandableField<Subscription> subscription;
 	Long subscriptionProrationDate;
 	Long subtotal;
 	Long tax;
@@ -111,8 +111,8 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 		return charge.getId();
 	}
 
-	public void setCharge(String charge) {
-		this.charge = setExpandableFieldID(charge, this.charge);
+	public void setCharge(String chargeID) {
+		this.charge = setExpandableFieldID(chargeID, this.charge);
 	}
 
 	public Charge getChargeObject() {
@@ -291,11 +291,25 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 	}
 
 	public String getSubscription() {
-		return subscription;
+		if (subscription == null) {
+			return null;
+		}
+		return subscription.getId();
 	}
 
-	public void setSubscription(String subscription) {
-		this.subscription = subscription;
+	public void setSubscription(String subscriptionID) {
+		this.subscription = setExpandableFieldID(subscriptionID, this.subscription);
+	}
+
+	public Subscription getSubscriptionObject() {
+		if (this.subscription == null) {
+			return null;
+		}
+		return this.subscription.getExpanded();
+	}
+
+	public void setSubscriptionObject(Subscription subscription) {
+		this.subscription = new ExpandableField<Subscription>(subscription.getId(), subscription);
 	}
 
 	public Long getSubscriptionProrationDate() {
@@ -386,6 +400,11 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.GET, instanceURL(Invoice.class, id), null, Invoice.class, options);
+	}
+	public static Invoice retrieve(String id, Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, instanceURL(Invoice.class, id), params, Invoice.class, options);
 	}
 
 	@Deprecated

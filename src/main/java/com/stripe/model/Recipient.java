@@ -17,13 +17,13 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
 	BankAccount activeAccount;
 	RecipientCardCollection cards;
 	Long created;
-	String defaultCard;
+	ExpandableField<Card> defaultCard;
 	Boolean deleted;
 	String description;
 	String email;
 	Boolean livemode;
 	Map<String, String> metadata;
-	String migratedTo;
+	ExpandableField<Account> migratedTo;
 	String name;
 	String type;
 	Boolean verified;
@@ -65,11 +65,25 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
 	}
 
 	public String getDefaultCard() {
-		return defaultCard;
+		if (this.defaultCard == null) {
+			return null;
+		}
+		return this.defaultCard.getId();
 	}
 
-	public void setDefaultCard(String defaultCard) {
-		this.defaultCard = defaultCard;
+	public void setDefaultCard(String defaultCardID) {
+		this.defaultCard = APIResource.setExpandableFieldID(defaultCardID, this.defaultCard);
+	}
+
+	public Card getDefaultCardObject() {
+		if (this.defaultCard == null) {
+			return null;
+		}
+		return this.defaultCard.getExpanded();
+	}
+
+	public void setDefaultCardObject(Card c) {
+		this.defaultCard = new ExpandableField<Card>(c.getId(), c);
 	}
 
 	public Boolean getDeleted() {
@@ -109,11 +123,25 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
 	}
 
 	public String getMigratedTo() {
-		return migratedTo;
+		if (this.migratedTo == null) {
+			return null;
+		}
+		return this.migratedTo.getId();
 	}
 
-	public void setMigratedTo(String migratedTo) {
-		this.migratedTo = migratedTo;
+	public void setMigratedTo(String migratedToID) {
+		this.migratedTo = APIResource.setExpandableFieldID(migratedToID, this.migratedTo);
+	}
+
+	public Account getMigratedToObject() {
+		if (this.migratedTo == null) {
+			return null;
+		}
+		return this.migratedTo.getExpanded();
+	}
+
+	public void setMigratedToObject(Account c) {
+		this.migratedTo = new ExpandableField<Account>(c.getId(), c);
 	}
 
 	public String getName() {
@@ -226,6 +254,11 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.GET, instanceURL(Recipient.class, id), null, Recipient.class, options);
+	}
+	public static Recipient retrieve(String id, Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.GET, instanceURL(Recipient.class, id), params, Recipient.class, options);
 	}
 
 	public static RecipientCollection list(Map<String, Object> params)
