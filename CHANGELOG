@@ -1,3 +1,7 @@
+=== 5.3.0 2017-06-14
+
+* Add missing expandable fields on every model
+
 === 5.2.0 2017-06-09
 
 * Support for expandable sources in balance transactions
