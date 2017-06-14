@@ -1,6 +1,5 @@
 package com.stripe.model;
 
-import com.google.gson.JsonObject;
 import com.stripe.exception.APIConnectionException;
 import com.stripe.exception.APIException;
 import com.stripe.exception.AuthenticationException;
@@ -19,8 +18,8 @@ public class EphemeralKey extends APIResource implements HasId {
 	Long expires;
 	Boolean livemode;
 	String secret;
-	List<AssociatedObject> associatedObjects;
-	transient JsonObject rawJson;
+	List<EphemeralKeyAssociatedObject> associatedObjects;
+	transient String rawJson;
 
 	public String getId() {
 		return id;
@@ -70,19 +69,19 @@ public class EphemeralKey extends APIResource implements HasId {
 		this.secret = secret;
 	}
 
-	public List<AssociatedObject> getAssociatedObjects() {
+	public List<EphemeralKeyAssociatedObject> getAssociatedObjects() {
 		return associatedObjects;
 	}
 
-	public void setAssociatedObjects(List<AssociatedObject> associatedObjects) {
+	public void setAssociatedObjects(List<EphemeralKeyAssociatedObject> associatedObjects) {
 		this.associatedObjects = associatedObjects;
 	}
 
-	public JsonObject getRawJson() {
+	public String getRawJson() {
 		return rawJson;
 	}
 
-	public void setRawJson(JsonObject rawJson) {
+	public void setRawJson(String rawJson) {
 		this.rawJson = rawJson;
 	}
 
@@ -106,26 +105,5 @@ public class EphemeralKey extends APIResource implements HasId {
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.DELETE, instanceURL(EphemeralKey.class, this.id), null, EphemeralKey.class, options);
-	}
-
-	public static class AssociatedObject extends StripeObject {
-		String type;
-		String id;
-
-		public String getType() {
-			return type;
-		}
-
-		public void setType(String type) {
-			this.type = type;
-		}
-
-		public String getId() {
-			return id;
-		}
-
-		public void setId(String id) {
-			this.id = id;
-		}
 	}
 }
