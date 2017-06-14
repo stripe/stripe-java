@@ -10,6 +10,8 @@ import com.stripe.net.RequestOptions;
 import org.junit.After;
 import org.junit.Before;
 
+import java.io.IOException;
+
 import java.util.Map;
 import java.util.HashMap;
 import org.junit.Test;
@@ -79,10 +81,26 @@ public class EphemeralKeyTest extends BaseStripeTest {
 		verifyNoMoreInteractions(networkMock);
 	}
 
+    @Test
+    public void testDeserialize() throws StripeException, IOException {
+		final String json = resource("ephemeral_key.json");
+        EphemeralKey key = APIResource.GSON.fromJson(json, EphemeralKey.class);
+
+        assertEquals(key.getId(), "ephkey_123");
+        assertEquals(key.getObject(), "ephemeral_key");
+        assertEquals(key.getCreated(), Long.valueOf(100));
+        assertEquals(key.getExpires(), Long.valueOf(200));
+        assertEquals(key.getLivemode(), false);
+        assertEquals(key.getSecret(), "ek_test_hunter2");
+        assertEquals(key.getAssociatedObjects().size(), 1);
+        assertEquals(key.getAssociatedObjects().get(0).getType(), "customer");
+        assertEquals(key.getAssociatedObjects().get(0).getId(), "cus_234");
+    }
+
 	@Test
 	public void testJsonReserialization() throws StripeException {
 		final String jsonString = "{\"foo\":5,\"bar\":[\"baz\",null]}";
 		EphemeralKey key = APIResource.GSON.fromJson(jsonString, EphemeralKey.class);
-		assertEquals(key.getRawJson().toString(), jsonString);
+		assertEquals(key.getRawJson(), jsonString);
 	}
 }
