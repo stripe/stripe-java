@@ -1,3 +1,7 @@
+=== 5.4.0 2017-06-19
+
+* Add support for ephemeral keys
+
 === 5.3.0 2017-06-14
 
 * Add missing expandable fields on every model
