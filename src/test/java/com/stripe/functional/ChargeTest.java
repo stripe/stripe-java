@@ -48,9 +48,13 @@ public class ChargeTest extends BaseStripeFunctionalTest {
 		chargeWithStatementDescriptorParams.putAll(defaultChargeParams);
 		chargeWithStatementDescriptorParams.put("description", "hahaha1234");
 		chargeWithStatementDescriptorParams.put("statement_descriptor", "Stripe");
+		chargeWithStatementDescriptorParams.put("alternate_statement_descriptors[kana]", "ストライプ");
+		chargeWithStatementDescriptorParams.put("alternate_statement_descriptors[kanji]", "ストライプジャパン株式会社");
 
 		Charge createdCharge = Charge.create(chargeWithStatementDescriptorParams);
 		assertEquals("Stripe", createdCharge.getStatementDescriptor());
+		assertEquals("ストライプ", createdCharge.getAlternateStatementDescriptors().getKana());
+		assertEquals("ストライプジャパン株式会社", createdCharge.getAlternateStatementDescriptors().getKanji());
 	}
 
 	@Test
