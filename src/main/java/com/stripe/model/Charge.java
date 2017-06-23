@@ -19,6 +19,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	Long amountRefunded;
 	ExpandableField<Application> application;
 	ExpandableField<ApplicationFee> applicationFee;
+	AlternateStatementDescriptors alternateStatementDescriptors;
 	ExpandableField<BalanceTransaction> balanceTransaction;
 	Boolean captured;
 	Long created;
@@ -71,6 +72,14 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 
 	public void setObject(String object) {
 		this.object = object;
+	}
+
+	public AlternateStatementDescriptors getAlternateStatementDescriptors() {
+		return alternateStatementDescriptors;
+	}
+
+	public void setAlternateStatementDescriptors(AlternateStatementDescriptors alternateStatementDescriptors) {
+		this.alternateStatementDescriptors = alternateStatementDescriptors;
 	}
 
 	public Long getAmount() {
