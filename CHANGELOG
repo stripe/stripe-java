@@ -1,3 +1,7 @@
+=== 5.6.0 2017-06-27
+
+* `pay` on invoice can now take parameters
+
 === 5.5.0 2017-06-23
 
 * Add support for alternate statement descriptors on charge
