@@ -491,6 +491,7 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 			APIException {
 		return pay(RequestOptions.builder().setApiKey(apiKey).build());
 	}
+	@Deprecated
 	public Invoice pay(RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
