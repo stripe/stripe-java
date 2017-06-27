@@ -88,4 +88,27 @@ public class InvoiceTest extends BaseStripeTest {
 		assertEquals("card_8vzsxmT0Ua0lkd", charge.getSource().getId());
 	}
 
+	@Test
+	public void testPayNoParams() throws StripeException, IOException {
+		Invoice invoice = new Invoice();
+		invoice.setId("in_test_pay");
+
+		invoice.pay();
+
+		verifyPost(Invoice.class, "https://api.stripe.com/v1/invoices/in_test_pay/pay", (Map)null);
+		verifyNoMoreInteractions(networkMock);
+	}
+
+	@Test
+	public void testPayWithParams() throws StripeException, IOException {
+		Invoice invoice = new Invoice();
+		invoice.setId("in_test_pay");
+
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("source", "src_foo");
+		invoice.pay(params);
+
+		verifyPost(Invoice.class, "https://api.stripe.com/v1/invoices/in_test_pay/pay", params);
+		verifyNoMoreInteractions(networkMock);
+	}
 }

@@ -384,6 +384,12 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 		return this.pay((RequestOptions) null);
 	}
 
+	public Invoice pay(Map<String, Object> params) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return this.pay(params, (RequestOptions) null);
+	}
+
 	public Invoice update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -488,7 +494,12 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 	public Invoice pay(RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
+		return pay(null, options);
+	}
+	public Invoice pay(Map<String, Object> params, RequestOptions options) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
 		return request(RequestMethod.POST, String.format("%s/pay",
-				instanceURL(Invoice.class, this.getId())), null, Invoice.class, options);
+				instanceURL(Invoice.class, this.getId())), params, Invoice.class, options);
 	}
 }
