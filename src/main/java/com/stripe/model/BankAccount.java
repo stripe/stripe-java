@@ -112,7 +112,7 @@ public class BankAccount extends ExternalAccount {
 
 	public BankAccount update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
-		return update(params, (RequestOptions) null);
+		return update(params, null);
 	}
 
 	public BankAccount update(Map<String, Object> params, RequestOptions options)
@@ -122,7 +122,7 @@ public class BankAccount extends ExternalAccount {
 
 	public DeletedBankAccount delete()
 			throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
-		return delete((RequestOptions) null);
+		return delete(null);
 	}
 
 	public DeletedBankAccount delete(RequestOptions options)

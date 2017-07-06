@@ -66,7 +66,7 @@ public class ExternalAccount extends APIResource implements HasId, MetadataStore
 	public ExternalAccount verify(Map<String, Object> params) throws
 			AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return verify(params, (RequestOptions) null);
+		return verify(params, null);
 	}
 
 	public ExternalAccount verify(Map<String, Object> params, RequestOptions options) throws

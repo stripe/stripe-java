@@ -15,7 +15,7 @@ public class ChargeRefundCollection extends StripeCollection<Refund> {
 	public ChargeRefundCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	public ChargeRefundCollection list(Map<String, Object> params,
@@ -30,7 +30,7 @@ public class ChargeRefundCollection extends StripeCollection<Refund> {
 	public ChargeRefundCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	@Deprecated

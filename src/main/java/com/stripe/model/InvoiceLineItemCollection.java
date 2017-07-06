@@ -15,7 +15,7 @@ public class InvoiceLineItemCollection extends StripeCollection<InvoiceLineItem>
 	public InvoiceLineItemCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	public InvoiceLineItemCollection list(Map<String, Object> params,
@@ -30,7 +30,7 @@ public class InvoiceLineItemCollection extends StripeCollection<InvoiceLineItem>
 	public InvoiceLineItemCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	@Deprecated

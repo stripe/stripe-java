@@ -582,12 +582,8 @@ public final class EvidenceSubObject extends StripeObject {
 		if (uncategorizedFile != null ? !uncategorizedFile.equals(that.uncategorizedFile) : that.uncategorizedFile != null) {
 			return false;
 		}
-		if (uncategorizedText != null ? !uncategorizedText.equals(that.uncategorizedText) : that.uncategorizedText != null) {
-			return false;
-		}
-
-		return true;
-	}
+        return uncategorizedText != null ? uncategorizedText.equals(that.uncategorizedText) : that.uncategorizedText == null;
+    }
 
 	@Override
 	public int hashCode() {

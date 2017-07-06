@@ -169,19 +169,19 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
 	public static Product create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return create(params, (RequestOptions) null);
+		return create(params, null);
 	}
 
 	public static Product retrieve(String id)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return retrieve(id, (RequestOptions) null);
+		return retrieve(id, null);
 	}
 
 	public Product update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return update(params, (RequestOptions) null);
+		return update(params, null);
 	}
 
 	public static Product create(Map<String, Object> params, RequestOptions options)
@@ -199,7 +199,7 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
 	public DeletedProduct delete()
 		throws AuthenticationException, InvalidRequestException,
 		APIConnectionException, CardException, APIException {
-		return delete((RequestOptions) null);
+		return delete(null);
 	}
 
 	public DeletedProduct delete(RequestOptions options)
@@ -211,7 +211,7 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
 	public static ProductCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	public static ProductCollection list(Map<String, Object> params,
@@ -225,7 +225,7 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
 	public static ProductCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	@Deprecated

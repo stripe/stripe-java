@@ -111,7 +111,7 @@ public class ThreeDSecure extends APIResource implements HasId {
 	public static ThreeDSecure create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return create(params, (RequestOptions) null);
+		return create(params, null);
 	}
 
 	public static ThreeDSecure create(Map<String, Object> params, RequestOptions options)
@@ -123,7 +123,7 @@ public class ThreeDSecure extends APIResource implements HasId {
 	public static ThreeDSecure retrieve(String id) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return retrieve(id, (RequestOptions) null);
+		return retrieve(id, null);
 	}
 
 	public static ThreeDSecure retrieve(String id, RequestOptions options)

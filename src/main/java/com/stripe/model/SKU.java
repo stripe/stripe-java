@@ -157,19 +157,19 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
 	public static SKU create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return create(params, (RequestOptions) null);
+		return create(params, null);
 	}
 
 	public static SKU retrieve(String id)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return retrieve(id, (RequestOptions) null);
+		return retrieve(id, null);
 	}
 
 	public SKU update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return update(params, (RequestOptions) null);
+		return update(params, null);
 	}
 
 	public static SKU create(Map<String, Object> params, RequestOptions options)
@@ -193,7 +193,7 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
 	public DeletedSKU delete()
 		throws AuthenticationException, InvalidRequestException,
 		APIConnectionException, CardException, APIException {
-		return delete((RequestOptions) null);
+		return delete(null);
 	}
 
 	public DeletedSKU delete(RequestOptions options)
@@ -205,7 +205,7 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
 	public static SKUCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	public static SKUCollection list(Map<String, Object> params,
@@ -219,7 +219,7 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
 	public static SKUCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	@Deprecated

@@ -61,7 +61,7 @@ public class ApplePayDomain extends APIResource implements HasId {
 	public static ApplePayDomain create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return create(params, (RequestOptions) null);
+		return create(params, null);
 	}
 
 	public static ApplePayDomain create(Map<String, Object> params, RequestOptions options)
@@ -73,7 +73,7 @@ public class ApplePayDomain extends APIResource implements HasId {
 	public static ApplePayDomain retrieve(String id) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return retrieve(id, (RequestOptions) null);
+		return retrieve(id, null);
 	}
 
 	public static ApplePayDomain retrieve(String id, RequestOptions options)
@@ -85,7 +85,7 @@ public class ApplePayDomain extends APIResource implements HasId {
 	public DeletedApplePayDomain delete() throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return delete((RequestOptions) null);
+		return delete(null);
 	}
 
 	public DeletedApplePayDomain delete(RequestOptions options) throws AuthenticationException,
@@ -97,7 +97,7 @@ public class ApplePayDomain extends APIResource implements HasId {
 	public static ApplePayDomainCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	public static ApplePayDomainCollection list(Map<String, Object> params, RequestOptions options)

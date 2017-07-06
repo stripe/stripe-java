@@ -63,7 +63,7 @@ public class TransferReversalCollection extends StripeCollection<Reversal> {
 	public Reversal create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return create(params, (RequestOptions) null);
+		return create(params, null);
 	}
 
 	public Reversal create(Map<String, Object> params,

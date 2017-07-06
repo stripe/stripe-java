@@ -657,7 +657,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	public static ChargeCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	public static ChargeCollection list(Map<String, Object> params, RequestOptions options)
@@ -670,7 +670,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	public static ChargeCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	@Deprecated

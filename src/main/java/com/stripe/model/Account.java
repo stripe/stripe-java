@@ -247,7 +247,7 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 	public static Account create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return create(params, (RequestOptions) null);
+		return create(params, null);
 	}
 
 	public static Account create(Map<String, Object> params, RequestOptions options)
@@ -259,7 +259,7 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 	public static AccountCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	public static AccountCollection list(Map<String, Object> params, RequestOptions options)
@@ -272,7 +272,7 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 	public static AccountCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	@Deprecated
@@ -301,7 +301,7 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 		if (null == apiKeyOrAccountId || apiKeyOrAccountId.startsWith("sk_")) {
 			return retrieve(RequestOptions.builder().setApiKey(apiKeyOrAccountId).build());
 		} else {
-			return retrieve(apiKeyOrAccountId, (RequestOptions) null);
+			return retrieve(apiKeyOrAccountId, null);
 		}
 	}
 
@@ -331,13 +331,13 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 	public Account update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return update(params, (RequestOptions) null);
+		return update(params, null);
 	}
 
 	public Account reject(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.POST, instanceURL(Account.class, this.id) + "/reject", params, Account.class, (RequestOptions) null);
+		return request(RequestMethod.POST, instanceURL(Account.class, this.id) + "/reject", params, Account.class, null);
 	}
 
 	public Account update(Map<String, Object> params, RequestOptions options)
@@ -355,13 +355,13 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 	public DeletedAccount delete(RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return delete(null, (RequestOptions) null);
+		return delete(null, null);
 	}
 
 	public DeletedAccount delete(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return delete(params, (RequestOptions) null);
+		return delete(params, null);
 	}
 
 	public DeletedAccount delete(Map<String, Object> params, RequestOptions options)

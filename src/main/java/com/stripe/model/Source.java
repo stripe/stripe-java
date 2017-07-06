@@ -160,7 +160,7 @@ public class Source extends ExternalAccount {
 	public static Source create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return create(params, (RequestOptions) null);
+		return create(params, null);
 	}
 
 	public static Source create(Map<String, Object> params, RequestOptions options)
@@ -172,7 +172,7 @@ public class Source extends ExternalAccount {
 	public static Source retrieve(String id)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return retrieve(id, (RequestOptions) null);
+		return retrieve(id, null);
 	}
 
 	public static Source retrieve(String id, RequestOptions options)
@@ -185,7 +185,7 @@ public class Source extends ExternalAccount {
 	public Source verify(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return verify(params, (RequestOptions) null);
+		return verify(params, null);
 	}
 
 	@Override

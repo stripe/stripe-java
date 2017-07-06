@@ -220,7 +220,7 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
 	public Payout cancel()
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return cancel((RequestOptions) null);
+		return cancel(null);
 	}
 
 	public Payout cancel(RequestOptions options)
@@ -232,7 +232,7 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
 	public static Payout create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return create(params, (RequestOptions) null);
+		return create(params, null);
 	}
 
 	public static Payout create(Map<String, Object> params, RequestOptions options)
@@ -244,7 +244,7 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
 	public static PayoutCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	public static PayoutCollection list(Map<String, Object> params, RequestOptions options)
@@ -256,7 +256,7 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
 	public static Payout retrieve(String id) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return retrieve(id, (RequestOptions) null);
+		return retrieve(id, null);
 	}
 
 	public static Payout retrieve(String id, RequestOptions options)
@@ -274,7 +274,7 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
 	public Payout update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return update(params, (RequestOptions) null);
+		return update(params, null);
 	}
 
 	public Payout update(Map<String, Object> params, RequestOptions options)

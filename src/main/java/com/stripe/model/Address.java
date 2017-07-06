@@ -90,12 +90,8 @@ public final class Address extends StripeObject {
 		if (postalCode != null ? !postalCode.equals(address.postalCode) : address.postalCode != null) {
 			return false;
 		}
-		if (state != null ? !state.equals(address.state) : address.state != null) {
-			return false;
-		}
-
-		return true;
-	}
+        return state != null ? state.equals(address.state) : address.state == null;
+    }
 
 	@Override
 	public int hashCode() {

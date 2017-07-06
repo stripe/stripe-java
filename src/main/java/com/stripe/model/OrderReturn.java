@@ -125,7 +125,7 @@ public class OrderReturn extends APIResource implements HasId {
 	public static OrderReturn retrieve(String id)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return retrieve(id, (RequestOptions) null);
+		return retrieve(id, null);
 	}
 
 	public static OrderReturn retrieve(String id, RequestOptions options)
@@ -137,7 +137,7 @@ public class OrderReturn extends APIResource implements HasId {
 	public static OrderReturnCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	public static OrderReturnCollection list(Map<String, Object> params,

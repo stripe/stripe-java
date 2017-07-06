@@ -8,12 +8,12 @@ import com.stripe.exception.InvalidRequestException;
 import java.util.Map;
 
 public interface StripeResponseGetter {
-	public <T> T request(
-			APIResource.RequestMethod method,
-			String url,
-			Map<String, Object> params,
-			Class<T> clazz,
-			APIResource.RequestType type,
-			RequestOptions options) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException;
+	<T> T request(
+            APIResource.RequestMethod method,
+            String url,
+            Map<String, Object> params,
+            Class<T> clazz,
+            APIResource.RequestType type,
+            RequestOptions options) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException;
 }
 

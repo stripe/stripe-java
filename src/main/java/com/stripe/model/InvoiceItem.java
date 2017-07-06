@@ -256,7 +256,7 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
 	public static InvoiceItemCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	public static InvoiceItemCollection list(Map<String, Object> params,
@@ -270,7 +270,7 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
 	public static InvoiceItemCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	@Deprecated

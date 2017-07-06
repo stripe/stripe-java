@@ -204,7 +204,7 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
 	public static PlanCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	public static PlanCollection list(Map<String, Object> params, RequestOptions options)
@@ -217,7 +217,7 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
 	public static PlanCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	@Deprecated

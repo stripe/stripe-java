@@ -16,7 +16,7 @@ public class BitcoinTransactionCollection extends StripeCollection<BitcoinTransa
 	public BitcoinTransactionCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	public BitcoinTransactionCollection list(Map<String, Object> params, RequestOptions options)
@@ -30,7 +30,7 @@ public class BitcoinTransactionCollection extends StripeCollection<BitcoinTransa
 	public BitcoinTransactionCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	@Deprecated

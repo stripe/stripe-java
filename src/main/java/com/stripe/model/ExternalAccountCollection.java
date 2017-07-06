@@ -15,7 +15,7 @@ public class ExternalAccountCollection extends StripeCollection<ExternalAccount>
 	public ExternalAccountCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	public ExternalAccountCollection list(Map<String, Object> params,
@@ -30,7 +30,7 @@ public class ExternalAccountCollection extends StripeCollection<ExternalAccount>
 	public ExternalAccountCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	@Deprecated
@@ -44,7 +44,7 @@ public class ExternalAccountCollection extends StripeCollection<ExternalAccount>
 	public ExternalAccount retrieve(String id) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return retrieve(id, (RequestOptions) null);
+		return retrieve(id, null);
 	}
 
 	public ExternalAccount retrieve(String id, RequestOptions options) throws AuthenticationException,
@@ -57,7 +57,7 @@ public class ExternalAccountCollection extends StripeCollection<ExternalAccount>
 	public ExternalAccount create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return create(params, (RequestOptions) null);
+		return create(params, null);
 	}
 
 	public ExternalAccount create(Map<String, Object> params,

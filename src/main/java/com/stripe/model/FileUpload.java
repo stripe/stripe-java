@@ -122,7 +122,7 @@ public class FileUpload extends APIResource implements HasId {
 	public static FileUploadCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	public static FileUploadCollection list(Map<String, Object> params, RequestOptions options)
@@ -136,7 +136,7 @@ public class FileUpload extends APIResource implements HasId {
 	public static FileUploadCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	@Deprecated

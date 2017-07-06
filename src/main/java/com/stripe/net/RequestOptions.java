@@ -67,13 +67,9 @@ public class RequestOptions {
 		if (connectTimeout != that.connectTimeout) {
 			return false;
 		}
-		
-		if (readTimeout != that.readTimeout) {
-			return false;
-		}
 
-		return true;
-	}
+        return readTimeout == that.readTimeout;
+    }
 
 	@Override
 	public int hashCode() {

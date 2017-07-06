@@ -197,13 +197,13 @@ public class BitcoinReceiver extends ExternalAccount {
 	public static BitcoinReceiver create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return create(params, (RequestOptions) null);
+		return create(params, null);
 	}
 
 	public static BitcoinReceiver retrieve(String id) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return retrieve(id, (RequestOptions) null);
+		return retrieve(id, null);
 	}
 
 	public static BitcoinReceiver create(Map<String, Object> params, RequestOptions options)
@@ -221,7 +221,7 @@ public class BitcoinReceiver extends ExternalAccount {
 	public static BitcoinReceiverCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	public static BitcoinReceiverCollection list(Map<String, Object> params, RequestOptions options)
@@ -235,7 +235,7 @@ public class BitcoinReceiver extends ExternalAccount {
 	public static BitcoinReceiverCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	@Deprecated
@@ -259,7 +259,7 @@ public class BitcoinReceiver extends ExternalAccount {
 	public BitcoinReceiver update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return update(params, (RequestOptions) null);
+		return update(params, null);
 	}
 
 	@Override
@@ -273,7 +273,7 @@ public class BitcoinReceiver extends ExternalAccount {
 	public DeletedBitcoinReceiver delete() throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return delete((RequestOptions) null);
+		return delete(null);
 	}
 
 	@Override
