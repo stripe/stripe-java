@@ -39,10 +39,6 @@ public final class VerificationFieldsDetails extends StripeObject {
 		if (additional != null ? !additional.equals(verificationFieldsDetails.additional) : verificationFieldsDetails.additional != null) {
 			return false;
 		}
-		if (minimum != null ? !minimum.equals(verificationFieldsDetails.minimum) : verificationFieldsDetails.minimum != null) {
-			return false;
-		}
-
-		return true;
-	}
+        return minimum != null ? minimum.equals(verificationFieldsDetails.minimum) : verificationFieldsDetails.minimum == null;
+    }
 }

@@ -229,7 +229,7 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 	public static SubscriptionCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	@Deprecated
@@ -243,7 +243,7 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 	public static Subscription create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return create(params, (RequestOptions) null);
+		return create(params, null);
 	}
 
 	public static Subscription create(Map<String, Object> params, RequestOptions options)
@@ -256,7 +256,7 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 			throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	public static SubscriptionCollection list(Map<String, Object> params,
@@ -269,7 +269,7 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 	public static Subscription retrieve(String id) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return retrieve(id, (RequestOptions) null);
+		return retrieve(id, null);
 	}
 
 	public static Subscription retrieve(String id, RequestOptions options)

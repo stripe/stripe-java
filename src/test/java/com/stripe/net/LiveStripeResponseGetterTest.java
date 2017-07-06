@@ -35,7 +35,7 @@ public class LiveStripeResponseGetterTest {
 	public void testCreateQuery() throws StripeException, UnsupportedEncodingException {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("a", "b");
-		assertEquals("a=b", srg.createQuery(params));
+		assertEquals("a=b", LiveStripeResponseGetter.createQuery(params));
 	}
 
 	@Test
@@ -48,7 +48,7 @@ public class LiveStripeResponseGetterTest {
 		params.put("nested", nested);
 		params.put("c", "d");
 		params.put("e", "f");
-		assertEquals(encode("nested[A]=B&nested[C]=D&c=d&e=f"), srg.createQuery(params));
+		assertEquals(encode("nested[A]=B&nested[C]=D&c=d&e=f"), LiveStripeResponseGetter.createQuery(params));
 	}
 
 	@Test
@@ -65,7 +65,7 @@ public class LiveStripeResponseGetterTest {
 		params.put("a", "b");
 		params.put("c", "d");
 
-		assertEquals(encode("nested[]=A&nested[]=B&nested[]=C&a=b&c=d"), srg.createQuery(params));
+		assertEquals(encode("nested[]=A&nested[]=B&nested[]=C&a=b&c=d"), LiveStripeResponseGetter.createQuery(params));
 	}
 
 	@Test
@@ -86,14 +86,14 @@ public class LiveStripeResponseGetterTest {
 		Map<String, Object> params = new LinkedHashMap<String, Object>();
 		params.put("nested", nested);
 
-		assertEquals(encode("nested[][A]=A-1&nested[][B]=B-1&nested[][A]=A-2&nested[][B]=B-2"), srg.createQuery(params));
+		assertEquals(encode("nested[][A]=A-1&nested[][B]=B-1&nested[][A]=A-2&nested[][B]=B-2"), LiveStripeResponseGetter.createQuery(params));
 	}
 
 	@Test
 	public void testCreateQueryWithEmptyList() throws StripeException, UnsupportedEncodingException {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("a", new LinkedList<String>());
-		assertEquals("a=", srg.createQuery(params));
+		assertEquals("a=", LiveStripeResponseGetter.createQuery(params));
 	}
 
 	@Test
@@ -110,7 +110,7 @@ public class LiveStripeResponseGetterTest {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("legal_entity", legalEntityParams);
 
-		assertEquals(encode("legal_entity[additional_owners][][first_name]=Stripe"), srg.createQuery(params));
+		assertEquals(encode("legal_entity[additional_owners][][first_name]=Stripe"), LiveStripeResponseGetter.createQuery(params));
 	}
 
 	@Test
@@ -127,6 +127,6 @@ public class LiveStripeResponseGetterTest {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("legal_entity", legalEntityParams);
 
-		assertEquals(encode("legal_entity[additional_owners][0][first_name]=Stripe"), srg.createQuery(params));
+		assertEquals(encode("legal_entity[additional_owners][0][first_name]=Stripe"), LiveStripeResponseGetter.createQuery(params));
 	}
 }

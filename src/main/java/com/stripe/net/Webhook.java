@@ -212,7 +212,7 @@ public final class Webhook {
 		 * @return the timestamp as a long.
 		 */
 		public static long getTimeNow() {
-			long time = (long)(System.currentTimeMillis() / 1000L);
+			long time = System.currentTimeMillis() / 1000L;
 			return time;
 		}
 	}

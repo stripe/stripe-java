@@ -252,19 +252,19 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
 	public static Order create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return create(params, (RequestOptions) null);
+		return create(params, null);
 	}
 
 	public static Order retrieve(String id)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return retrieve(id, (RequestOptions) null);
+		return retrieve(id, null);
 	}
 
 	public Order update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return update(params, (RequestOptions) null);
+		return update(params, null);
 	}
 
 	public static Order create(Map<String, Object> params, RequestOptions options)
@@ -288,7 +288,7 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
 	public static OrderCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	public static OrderCollection list(Map<String, Object> params,
@@ -302,7 +302,7 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
 	public static OrderCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	@Deprecated
@@ -323,7 +323,7 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
 	public Order pay(Map<String, Object> params) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return this.pay(params, (RequestOptions) null);
+		return this.pay(params, null);
 	}
 
 	public Order pay(Map<String, Object> params, RequestOptions options) throws AuthenticationException,
@@ -336,7 +336,7 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
 	public OrderReturn returnOrder(Map<String, Object> params) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return this.returnOrder(params, (RequestOptions) null);
+		return this.returnOrder(params, null);
 	}
 
 	public OrderReturn returnOrder(Map<String, Object> params, RequestOptions options) throws AuthenticationException,

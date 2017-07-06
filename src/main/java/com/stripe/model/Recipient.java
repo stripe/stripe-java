@@ -264,7 +264,7 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
 	public static RecipientCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	public static RecipientCollection list(Map<String, Object> params,
@@ -278,7 +278,7 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
 	public static RecipientCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	@Deprecated

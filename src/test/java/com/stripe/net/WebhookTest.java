@@ -39,8 +39,8 @@ public class WebhookTest extends BaseStripeTest {
 
 	public String generateSigHeader(Map<String, Object> options) throws NoSuchAlgorithmException, InvalidKeyException {
 		long timestamp = (options.get("timestamp") != null) ? ((Long)options.get("timestamp")).longValue() : Webhook.Util.getTimeNow();
-		String payload = (options.get("payload") != null) ? (String)options.get("payload") : this.payload;
-		String secret = (options.get("secret") != null) ? (String)options.get("secret") : this.secret;
+		String payload = (options.get("payload") != null) ? (String)options.get("payload") : WebhookTest.payload;
+		String secret = (options.get("secret") != null) ? (String)options.get("secret") : WebhookTest.secret;
 		String scheme = (options.get("scheme") != null) ? (String)options.get("scheme") : Webhook.Signature.EXPECTED_SCHEME;
 		String signature = (String)options.get("signature");
 

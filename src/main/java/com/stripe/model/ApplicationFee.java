@@ -251,7 +251,7 @@ public class ApplicationFee extends APIResource implements HasId {
 	public static ApplicationFeeCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	public static ApplicationFeeCollection list(Map<String, Object> params, RequestOptions options)
@@ -264,7 +264,7 @@ public class ApplicationFee extends APIResource implements HasId {
 	public static ApplicationFeeCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	@Deprecated

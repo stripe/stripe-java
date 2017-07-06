@@ -15,7 +15,7 @@ public class CustomerCardCollection extends StripeCollection<Card> {
 	public CustomerCardCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	public CustomerCardCollection list(Map<String, Object> params,
@@ -30,7 +30,7 @@ public class CustomerCardCollection extends StripeCollection<Card> {
 	public CustomerCardCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	@Deprecated

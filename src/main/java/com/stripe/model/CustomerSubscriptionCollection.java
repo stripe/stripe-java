@@ -15,7 +15,7 @@ public class CustomerSubscriptionCollection extends StripeCollection<Subscriptio
 	public CustomerSubscriptionCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	public CustomerSubscriptionCollection list(Map<String, Object> params,
@@ -30,7 +30,7 @@ public class CustomerSubscriptionCollection extends StripeCollection<Subscriptio
 	public CustomerSubscriptionCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	@Deprecated

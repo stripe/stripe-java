@@ -48,7 +48,7 @@ public class AccountTest extends BaseStripeFunctionalTest {
         ExternalAccount alipayAccount = cus.getSources().getData().get(0);
         ExternalAccount updatedAccount = alipayAccount.update(updateParams);
 
-        assertEquals("bar", ((AlipayAccount) updatedAccount).getMetadata().get("foo"));
+        assertEquals("bar", updatedAccount.getMetadata().get("foo"));
     }
 
     @Test

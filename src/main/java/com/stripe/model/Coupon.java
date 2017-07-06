@@ -189,7 +189,7 @@ public class Coupon extends APIResource implements MetadataStore<Coupon>, HasId 
 	public static CouponCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	public static CouponCollection list(Map<String, Object> params, RequestOptions options)
@@ -202,7 +202,7 @@ public class Coupon extends APIResource implements MetadataStore<Coupon>, HasId 
 	public static CouponCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	@Deprecated

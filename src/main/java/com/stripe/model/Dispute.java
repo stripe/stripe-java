@@ -216,7 +216,7 @@ public class Dispute extends APIResource implements HasId {
 	public static Dispute retrieve(String id) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return retrieve(id, (RequestOptions) null);
+		return retrieve(id, null);
 	}
 
 	public static Dispute retrieve(String id, RequestOptions options) throws AuthenticationException,
@@ -228,7 +228,7 @@ public class Dispute extends APIResource implements HasId {
 	public static DisputeCollection list(Map<String, Object> params) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	public static DisputeCollection list(Map<String, Object> params, RequestOptions options) throws AuthenticationException,
@@ -241,7 +241,7 @@ public class Dispute extends APIResource implements HasId {
 	public static DisputeCollection all(Map<String, Object> params) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	@Deprecated
@@ -254,7 +254,7 @@ public class Dispute extends APIResource implements HasId {
 	public Dispute update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return update(params, (RequestOptions) null);
+		return update(params, null);
 	}
 
 	public Dispute update(Map<String, Object> params, RequestOptions options)
@@ -267,7 +267,7 @@ public class Dispute extends APIResource implements HasId {
 	public Dispute close()
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return close((RequestOptions) null);
+		return close(null);
 	}
 
 	public Dispute close(RequestOptions options)

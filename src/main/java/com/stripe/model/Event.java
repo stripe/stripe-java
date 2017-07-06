@@ -136,7 +136,7 @@ public class Event extends APIResource implements HasId {
 	public static EventCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	public static EventCollection list(Map<String, Object> params, RequestOptions options)
@@ -149,7 +149,7 @@ public class Event extends APIResource implements HasId {
 	public static EventCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	@Deprecated

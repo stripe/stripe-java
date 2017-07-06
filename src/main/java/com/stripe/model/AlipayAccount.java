@@ -98,7 +98,7 @@ public class AlipayAccount extends ExternalAccount {
 	public AlipayAccount update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return update(params, (RequestOptions) null);
+		return update(params, null);
 	}
 
 	public AlipayAccount update(Map<String, Object> params, RequestOptions options)
@@ -110,7 +110,7 @@ public class AlipayAccount extends ExternalAccount {
 	public DeletedAlipayAccount delete() throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return delete((RequestOptions) null);
+		return delete(null);
 	}
 
 	public DeletedAlipayAccount delete(RequestOptions options) throws AuthenticationException,

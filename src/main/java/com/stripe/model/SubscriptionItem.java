@@ -62,7 +62,7 @@ public class SubscriptionItem extends APIResource implements HasId {
 	public static SubscriptionItem create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return create(params, (RequestOptions) null);
+		return create(params, null);
 	}
 
 	public static SubscriptionItem create(Map<String, Object> params, RequestOptions options)
@@ -75,7 +75,7 @@ public class SubscriptionItem extends APIResource implements HasId {
 			throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	public static SubscriptionItemCollection list(Map<String, Object> params,
@@ -88,7 +88,7 @@ public class SubscriptionItem extends APIResource implements HasId {
 	public static SubscriptionItem retrieve(String id) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return retrieve(id, (RequestOptions) null);
+		return retrieve(id, null);
 	}
 
 	public static SubscriptionItem retrieve(String id, RequestOptions options)
@@ -100,7 +100,7 @@ public class SubscriptionItem extends APIResource implements HasId {
 	public SubscriptionItem update(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return update(params, (RequestOptions) null);
+		return update(params, null);
 	}
 
 	public SubscriptionItem update(Map<String, Object> params, RequestOptions options)
@@ -112,7 +112,7 @@ public class SubscriptionItem extends APIResource implements HasId {
 	public DeletedSubscriptionItem delete() throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return delete((RequestOptions) null);
+		return delete(null);
 	}
 
 	public DeletedSubscriptionItem delete(RequestOptions options) throws AuthenticationException,

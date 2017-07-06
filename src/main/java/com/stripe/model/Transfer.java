@@ -497,7 +497,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 	public static TransferCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	public static TransferCollection list(Map<String, Object> params,
@@ -511,7 +511,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 	public static TransferCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	@Deprecated

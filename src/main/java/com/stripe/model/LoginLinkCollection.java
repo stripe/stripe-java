@@ -15,7 +15,7 @@ public class LoginLinkCollection extends StripeCollection<LoginLink> {
 	public LoginLink create()
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return create((RequestOptions) null);
+		return create(null);
 	}
 
 	public LoginLink create(RequestOptions options) throws AuthenticationException,

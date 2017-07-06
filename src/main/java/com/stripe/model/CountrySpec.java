@@ -79,7 +79,7 @@ public class CountrySpec extends APIResource implements HasId {
 	public static CountrySpec retrieve(String country) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return retrieve(country, (RequestOptions) null);
+		return retrieve(country, null);
 	}
 
 	public static CountrySpec retrieve(String country, RequestOptions options)
@@ -96,7 +96,7 @@ public class CountrySpec extends APIResource implements HasId {
 	public static CountrySpecCollection list(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	public static CountrySpecCollection list(Map<String, Object> params, RequestOptions options)

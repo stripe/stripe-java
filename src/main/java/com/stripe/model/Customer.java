@@ -309,7 +309,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 	public BankAccount createBankAccount(String token) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return createBankAccount(token, (RequestOptions) null);
+		return createBankAccount(token, null);
 	}
 
 	@Deprecated
@@ -326,7 +326,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 	public BankAccount createBankAccount(Map<String, Object> params) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return createBankAccount(params, (RequestOptions) null);
+		return createBankAccount(params, null);
 	}
 
 	@Deprecated
@@ -403,7 +403,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 			throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	public static CustomerCollection list(Map<String, Object> params,
@@ -417,7 +417,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 	public static CustomerCollection all(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return list(params, (RequestOptions) null);
+		return list(params, null);
 	}
 
 	@Deprecated

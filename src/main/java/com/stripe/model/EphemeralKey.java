@@ -98,7 +98,7 @@ public class EphemeralKey extends APIResource implements HasId {
 	public EphemeralKey delete()
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return delete((RequestOptions) null);
+		return delete(null);
 	}
 
 	public EphemeralKey delete(RequestOptions options)
