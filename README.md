@@ -103,16 +103,24 @@ servers.
 
 ## Testing
 
+You'll need to install [stripestub] before being able to run the entire test
+suite. From another terminal run:
+
+    go get -u github.com/brandur/stripestub
+    stripestub -port 6065
+
 You must have Maven installed. To run the tests:
 
-    mvn test
+    STRIPE_STUB_PORT=6065 mvn test
 
 You can run particular tests by passing `-D test=Class#method`. Make sure you use the fully qualified class name to differentiate between
 unit and functional tests. For example:
 
-    mvn test -D test=com.stripe.model.AccountTest
-    mvn test -D test=com.stripe.functional.ChargeTest
-    mvn test -D test=com.stripe.functional.ChargeTest#testChargeCreate
+    STRIPE_STUB_PORT=6065 mvn test -D test=com.stripe.model.AccountTest
+    STRIPE_STUB_PORT=6065 mvn test -D test=com.stripe.functional.ChargeTest
+    STRIPE_STUB_PORT=6065 mvn test -D test=com.stripe.functional.ChargeTest#testChargeCreate
+
+[stripestub]: https://github.com/brandur/stripestub
 
 <!--
 # vim: set tw=79:
