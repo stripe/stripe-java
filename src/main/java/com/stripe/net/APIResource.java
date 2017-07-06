@@ -139,15 +139,14 @@ public abstract class APIResource extends StripeObject {
 		// to us actually making a request to /v1/foo/null
 		if (str == null) {
 			return null;
-		}
-		else {
+		} else {
 			return URLEncoder.encode(str, CHARSET);
 		}
 	}
 
 	public static <T> T multipartRequest(APIResource.RequestMethod method,
-			String url, Map<String, Object> params, Class<T> clazz,
-			RequestOptions options) throws AuthenticationException,
+										 String url, Map<String, Object> params, Class<T> clazz,
+										 RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return APIResource.stripeResponseGetter.request(method, url, params, clazz,
@@ -155,8 +154,8 @@ public abstract class APIResource extends StripeObject {
 	}
 
 	public static <T> T request(APIResource.RequestMethod method,
-			String url, Map<String, Object> params, Class<T> clazz,
-			RequestOptions options) throws AuthenticationException,
+								String url, Map<String, Object> params, Class<T> clazz,
+								RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return APIResource.stripeResponseGetter.request(method, url, params, clazz,
@@ -166,7 +165,7 @@ public abstract class APIResource extends StripeObject {
 	/**
 	 * Similar to #request, but specific for use with collection types that
 	 * come from the API (i.e. lists of resources).
-	 *
+	 * <p>
 	 * Collections need a little extra work because we need to plumb request
 	 * options and params through so that we can iterate to the next page if
 	 * necessary.

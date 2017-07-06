@@ -124,8 +124,7 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
 	}
 
 	/**
-	 * @deprecated
-	 * Use `statement_descriptor` field (https://stripe.com/docs/upgrades#2014-12-17)
+	 * @deprecated Use `statement_descriptor` field (https://stripe.com/docs/upgrades#2014-12-17)
 	 */
 	@Deprecated
 	public String getStatementDescription() {
@@ -133,8 +132,7 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
 	}
 
 	/**
-	 * @deprecated
-	 * Use `statement_descriptor` field (https://stripe.com/docs/upgrades#2014-12-17)
+	 * @deprecated Use `statement_descriptor` field (https://stripe.com/docs/upgrades#2014-12-17)
 	 */
 	@Deprecated
 	public void setStatementDescription(String statementDescription) {
@@ -171,6 +169,7 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
 			APIConnectionException, CardException, APIException {
 		return create(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public static Plan create(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -183,6 +182,7 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
 			APIConnectionException, CardException, APIException {
 		return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public static Plan retrieve(String id, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -195,6 +195,7 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
 			APIConnectionException, CardException, APIException {
 		return update(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public Plan update(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -240,6 +241,7 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
 			APIException {
 		return delete(RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public DeletedPlan delete(RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {

@@ -97,7 +97,7 @@ public class FileUpload extends APIResource implements HasId {
 	}
 
 	public static FileUpload create(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+									RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return multipartRequest(RequestMethod.POST, classURL(FileUpload.class, Stripe.UPLOAD_API_BASE),

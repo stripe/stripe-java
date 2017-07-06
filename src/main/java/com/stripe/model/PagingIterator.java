@@ -11,20 +11,20 @@ import com.stripe.net.RequestOptions;
 
 public class PagingIterator<T extends HasId> extends APIResource implements Iterator<T> {
 	private final String url;
-	
+
 	@SuppressWarnings("rawtypes")
 	private final Class<? extends StripeCollectionInterface> collectionType;
-	
+
 	private StripeCollectionInterface<T> currentCollection;
 	private Iterator<T> currentDataIterator;
-	
+
 	private String lastId;
-	
+
 	PagingIterator(final StripeCollectionInterface<T> stripeCollection) {
 		this.url = Stripe.getApiBase() + stripeCollection.getURL();
 
 		this.collectionType = stripeCollection.getClass();
-		
+
 		this.currentCollection = stripeCollection;
 		this.currentDataIterator = stripeCollection.getData().iterator();
 	}
@@ -32,7 +32,7 @@ public class PagingIterator<T extends HasId> extends APIResource implements Iter
 	@Override
 	public boolean hasNext() {
 		return currentDataIterator.hasNext() ||
-			currentCollection.getHasMore();
+				currentCollection.getHasMore();
 	}
 
 	@Override
@@ -53,9 +53,9 @@ public class PagingIterator<T extends HasId> extends APIResource implements Iter
 				params.put("starting_after", lastId);
 
 				this.currentCollection = list(params, currentCollection.getRequestOptions());
-				
+
 				this.currentDataIterator =
-					currentCollection.getData().iterator();
+						currentCollection.getData().iterator();
 			} catch (final Exception e) {
 				throw new RuntimeException("Unable to lazy-load stripe objects", e);
 			}
@@ -77,8 +77,8 @@ public class PagingIterator<T extends HasId> extends APIResource implements Iter
 
 	@SuppressWarnings("unchecked")
 	private StripeCollectionInterface<T> list(
-		final Map<String, Object> params, 
-		final RequestOptions options
+			final Map<String, Object> params,
+			final RequestOptions options
 	) throws Exception {
 		return APIResource.requestCollection(url, params, collectionType, options);
 	}

@@ -34,8 +34,8 @@ public final class AlternateStatementDescriptors extends StripeObject {
 		if (kana != null ? !kana.equals(that.kana) : that.kana != null) {
 			return false;
 		}
-        return kanji != null ? kanji.equals(that.kanji) : that.kanji == null;
-    }
+		return kanji != null ? kanji.equals(that.kanji) : that.kanji == null;
+	}
 
 	@Override
 	public int hashCode() {

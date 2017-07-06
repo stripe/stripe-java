@@ -60,26 +60,23 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 		this.object = object;
 	}
 
-	public String getBusinessLogo()
-	{
+	public String getBusinessLogo() {
 		return businessLogo;
 	}
 
-	public String getBusinessName()
-	{
+	public String getBusinessName() {
 		return businessName;
 	}
 
-	public String getBusinessPrimaryColor(){
+	public String getBusinessPrimaryColor() {
 		return businessPrimaryColor;
 	}
 
-	public void setBusinessPrimaryColor(String businessPrimaryColor){
+	public void setBusinessPrimaryColor(String businessPrimaryColor) {
 		this.businessPrimaryColor = businessPrimaryColor;
 	}
 
-	public String getBusinessURL()
-	{
+	public String getBusinessURL() {
 		return businessURL;
 	}
 
@@ -99,11 +96,11 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 		this.debitNegativeBalances = debitNegativeBalances;
 	}
 
-	public AccountDeclineChargeOn getDeclineChargeOn(){
+	public AccountDeclineChargeOn getDeclineChargeOn() {
 		return declineChargeOn;
 	}
 
-	public void setDeclineChargeOn(AccountDeclineChargeOn declineChargeOn){
+	public void setDeclineChargeOn(AccountDeclineChargeOn declineChargeOn) {
 		this.declineChargeOn = declineChargeOn;
 	}
 
@@ -127,13 +124,11 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 		return email;
 	}
 
-	public ExternalAccountCollection getExternalAccounts()
-	{
+	public ExternalAccountCollection getExternalAccounts() {
 		return externalAccounts;
 	}
 
-	public Keys getKeys()
-	{
+	public Keys getKeys() {
 		return keys;
 	}
 
@@ -142,17 +137,14 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 	}
 
 	/**
-	 * @deprecated
-	 * Use getType() instead.
+	 * @deprecated Use getType() instead.
 	 */
 	@Deprecated
-	public Boolean getManaged()
-	{
+	public Boolean getManaged() {
 		return managed;
 	}
 
-	public Map<String, String> getMetadata()
-	{
+	public Map<String, String> getMetadata() {
 		return metadata;
 	}
 
@@ -164,19 +156,19 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 		this.payoutsEnabled = payoutsEnabled;
 	}
 
-	public AccountPayoutSchedule getPayoutSchedule(){
+	public AccountPayoutSchedule getPayoutSchedule() {
 		return payoutSchedule;
 	}
 
-	public void setPayoutSchedule(AccountPayoutSchedule payoutSchedule){
+	public void setPayoutSchedule(AccountPayoutSchedule payoutSchedule) {
 		this.payoutSchedule = payoutSchedule;
 	}
 
-	public String getProductDescription(){
+	public String getProductDescription() {
 		return productDescription;
 	}
 
-	public void setProductDescription(String productDescription){
+	public void setProductDescription(String productDescription) {
 		this.productDescription = productDescription;
 	}
 
@@ -184,18 +176,15 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 		return statementDescriptor;
 	}
 
-	public String getSupportEmail()
-	{
+	public String getSupportEmail() {
 		return supportEmail;
 	}
 
-	public String getSupportPhone()
-	{
+	public String getSupportPhone() {
 		return supportPhone;
 	}
 
-	public String getSupportURL()
-	{
+	public String getSupportURL() {
 		return supportURL;
 	}
 
@@ -203,19 +192,19 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 		return timezone;
 	}
 
-	public AccountTosAcceptance getTosAcceptance(){
+	public AccountTosAcceptance getTosAcceptance() {
 		return tosAcceptance;
 	}
 
-	public void setTosAcceptance(AccountTosAcceptance tosAcceptance){
+	public void setTosAcceptance(AccountTosAcceptance tosAcceptance) {
 		this.tosAcceptance = tosAcceptance;
 	}
 
-	public AccountTransferSchedule getTransferSchedule(){
+	public AccountTransferSchedule getTransferSchedule() {
 		return transferSchedule;
 	}
 
-	public void setTransferSchedule(AccountTransferSchedule transferSchedule){
+	public void setTransferSchedule(AccountTransferSchedule transferSchedule) {
 		this.transferSchedule = transferSchedule;
 	}
 
@@ -236,8 +225,7 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 	}
 
 	/**
-	 * @deprecated
-	 * Use the country_specs endpoint (https://stripe.com/docs/upgrades#2016-03-07)
+	 * @deprecated Use the country_specs endpoint (https://stripe.com/docs/upgrades#2016-03-07)
 	 */
 	@Deprecated
 	public List<String> getCurrenciesSupported() {
@@ -309,11 +297,11 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return request(
-			RequestMethod.GET,
-			singleClassURL(Account.class),
-			null,
-			Account.class,
-			options);
+				RequestMethod.GET,
+				singleClassURL(Account.class),
+				null,
+				Account.class,
+				options);
 	}
 
 	public static Account retrieve(String id, RequestOptions options)
@@ -403,9 +391,9 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 
 			Verification ve = (Verification) o;
 			return equals(contacted, ve.contacted) &&
-				equals(disabledReason, ve.disabledReason) &&
-				equals(dueBy, ve.dueBy) &&
-				equals(fieldsNeeded, ve.fieldsNeeded);
+					equals(disabledReason, ve.disabledReason) &&
+					equals(dueBy, ve.dueBy) &&
+					equals(fieldsNeeded, ve.fieldsNeeded);
 		}
 	}
 
@@ -413,13 +401,11 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 		String publishable;
 		String secret;
 
-		public String getPublishable()
-		{
+		public String getPublishable() {
 			return publishable;
 		}
 
-		public String getSecret()
-		{
+		public String getSecret() {
 			return secret;
 		}
 	}

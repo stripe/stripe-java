@@ -197,14 +197,14 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
 	}
 
 	public DeletedProduct delete()
-		throws AuthenticationException, InvalidRequestException,
-		APIConnectionException, CardException, APIException {
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
 		return delete(null);
 	}
 
 	public DeletedProduct delete(RequestOptions options)
-		throws AuthenticationException, InvalidRequestException,
-		APIConnectionException, CardException, APIException {
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.DELETE, instanceURL(Product.class, this.id), null, DeletedProduct.class, options);
 	}
 
@@ -215,7 +215,7 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
 	}
 
 	public static ProductCollection list(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+										 RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return requestCollection(classURL(Product.class), params, ProductCollection.class, options);
@@ -230,7 +230,7 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
 
 	@Deprecated
 	public static ProductCollection all(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+										RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return list(params, options);

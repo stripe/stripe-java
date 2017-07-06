@@ -26,7 +26,7 @@ public class BalanceTransaction extends APIResource implements HasId {
 	ExpandableField<HasId> source;
 	String status;
 	String type;
-	
+
 	@Deprecated
 	TransferCollection sourcedTransfers;
 
@@ -111,8 +111,7 @@ public class BalanceTransaction extends APIResource implements HasId {
 	}
 
 	/**
-	 * @deprecated
-	 * Recent API versions no longer return this field (https://stripe.com/docs/upgrades#2017-01-27).
+	 * @deprecated Recent API versions no longer return this field (https://stripe.com/docs/upgrades#2017-01-27).
 	 * Prefer listing all transfers with the `transfer_group` parameter: https://stripe.com/docs/api/java#list_transfers-transfer_group.
 	 */
 	@Deprecated
@@ -138,7 +137,7 @@ public class BalanceTransaction extends APIResource implements HasId {
 	public void setType(String type) {
 		this.type = type;
 	}
-	
+
 	public String getSource() {
 		if (this.source == null) {
 			return null;
@@ -149,7 +148,7 @@ public class BalanceTransaction extends APIResource implements HasId {
 	public void setSource(String sourceID) {
 		this.source = setExpandableFieldID(sourceID, this.source);
 	}
-	
+
 	public HasId getSourceObject() {
 		if (this.source == null) {
 			return null;
@@ -166,8 +165,8 @@ public class BalanceTransaction extends APIResource implements HasId {
 			return null;
 		}
 		return (O) this.source.getExpanded();
- 	}
-	
+	}
+
 	public static BalanceTransaction retrieve(String id) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
@@ -181,6 +180,7 @@ public class BalanceTransaction extends APIResource implements HasId {
 		String url = String.format("%s/%s/%s", Stripe.getApiBase(), "v1/balance/history", id);
 		return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public static BalanceTransaction retrieve(String id, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -221,5 +221,5 @@ public class BalanceTransaction extends APIResource implements HasId {
 			APIConnectionException, CardException, APIException {
 		return list(params, options);
 	}
-	
+
 }

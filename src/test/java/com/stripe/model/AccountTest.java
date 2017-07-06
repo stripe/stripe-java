@@ -159,7 +159,7 @@ public class AccountTest extends BaseStripeTest {
 		ExternalAccount ea = acc.getExternalAccounts().create(params);
 
 		assertEquals("card", ea.getObject());
-		assertEquals("1234", ((Card)ea).getLast4());
+		assertEquals("1234", ((Card) ea).getLast4());
 
 		verifyPost(ExternalAccount.class, "https://api.stripe.com/v1/accounts/acct_1032D82eZvKYlo2C/external_accounts", params);
 		verifyNoMoreInteractions(networkMock);

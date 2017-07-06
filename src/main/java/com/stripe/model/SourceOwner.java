@@ -10,7 +10,7 @@ public final class SourceOwner extends StripeObject {
 	protected String email;
 	protected String verifiedEmail;
 
-	public Address getAddress(){
+	public Address getAddress() {
 		return address;
 	}
 
@@ -42,7 +42,7 @@ public final class SourceOwner extends StripeObject {
 		this.email = email;
 	}
 
-	public Address getVerifiedAddress(){
+	public Address getVerifiedAddress() {
 		return address;
 	}
 

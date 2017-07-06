@@ -18,6 +18,7 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
 
 	@SuppressWarnings("rawtypes")
 	static final Map<String, Class> objectMap = new HashMap<String, Class>();
+
 	static {
 		objectMap.put("account", Account.class);
 		objectMap.put("alipay_account", AlipayAccount.class);
@@ -102,7 +103,7 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
 	}
 
 	private void populateMapFromJSONObject(Map<String, Object> objMap, JsonObject jsonObject) {
-		for(Map.Entry<String, JsonElement> entry: jsonObject.entrySet()) {
+		for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
 			String key = entry.getKey();
 			JsonElement element = entry.getValue();
 			objMap.put(key, deserializeJsonElement(element));
@@ -114,10 +115,10 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
 			throws JsonParseException {
 		EventData eventData = new EventData();
 		JsonObject jsonObject = json.getAsJsonObject();
-		for(Map.Entry<String, JsonElement> entry: jsonObject.entrySet()) {
+		for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
 			String key = entry.getKey();
 			JsonElement element = entry.getValue();
-			if("previous_attributes".equals(key)) {
+			if ("previous_attributes".equals(key)) {
 				if (element.isJsonNull()) {
 					eventData.setPreviousAttributes(null);
 				} else if (element.isJsonObject()) {

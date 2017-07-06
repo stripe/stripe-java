@@ -39,8 +39,8 @@ public class FraudDetails extends StripeObject {
 		if (stripeReport != null ? !stripeReport.equals(that.stripeReport) : that.stripeReport != null) {
 			return false;
 		}
-        return userReport != null ? userReport.equals(that.userReport) : that.userReport == null;
-    }
+		return userReport != null ? userReport.equals(that.userReport) : that.userReport == null;
+	}
 
 	@Override
 	public int hashCode() {

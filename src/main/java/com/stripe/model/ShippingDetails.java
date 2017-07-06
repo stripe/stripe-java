@@ -46,8 +46,8 @@ public final class ShippingDetails extends StripeObject {
 		if (name != null ? !name.equals(that.name) : that.name != null) {
 			return false;
 		}
-        return phone != null ? phone.equals(that.phone) : that.phone == null;
-    }
+		return phone != null ? phone.equals(that.phone) : that.phone == null;
+	}
 
 	@Override
 	public int hashCode() {

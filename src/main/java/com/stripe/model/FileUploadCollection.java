@@ -1,4 +1,4 @@
 package com.stripe.model;
 
-public class FileUploadCollection extends StripeCollection<FileUpload>{
+public class FileUploadCollection extends StripeCollection<FileUpload> {
 }

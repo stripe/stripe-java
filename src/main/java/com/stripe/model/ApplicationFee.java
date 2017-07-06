@@ -214,8 +214,7 @@ public class ApplicationFee extends APIResource implements HasId {
 	}
 
 	/**
-	 * @deprecated
-	 * Use `account` field (https://stripe.com/docs/upgrades#2013-12-03)
+	 * @deprecated Use `account` field (https://stripe.com/docs/upgrades#2013-12-03)
 	 */
 	@Deprecated
 	public String getUser() {
@@ -223,8 +222,7 @@ public class ApplicationFee extends APIResource implements HasId {
 	}
 
 	/**
-	 * @deprecated
-	 * Use `account` field (https://stripe.com/docs/upgrades#2013-12-03)
+	 * @deprecated Use `account` field (https://stripe.com/docs/upgrades#2013-12-03)
 	 */
 	@Deprecated
 	public void setUser(String user) {
@@ -236,12 +234,14 @@ public class ApplicationFee extends APIResource implements HasId {
 			APIException {
 		return retrieve(id, (RequestOptions) null);
 	}
+
 	@Deprecated
 	public static ApplicationFee retrieve(String id, String apiKey)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public static ApplicationFee retrieve(String id, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -287,32 +287,37 @@ public class ApplicationFee extends APIResource implements HasId {
 			APIException {
 		return this.refund(null, (RequestOptions) null);
 	}
+
 	public ApplicationFee refund(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return this.refund(params, (RequestOptions) null);
 	}
+
 	@Deprecated
 	public ApplicationFee refund(String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return this.refund(RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public ApplicationFee refund(RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return refund(null, options);
 	}
+
 	@Deprecated
 	public ApplicationFee refund(Map<String, Object> params, String apiKey)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return refund(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public ApplicationFee refund(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.POST, String.format("%s/refund",
-						instanceURL(ApplicationFee.class, this.getId())), params, ApplicationFee.class, options);
+				instanceURL(ApplicationFee.class, this.getId())), params, ApplicationFee.class, options);
 	}
 }

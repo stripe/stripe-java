@@ -138,6 +138,7 @@ public class Token extends APIResource implements HasId {
 			APIConnectionException, CardException, APIException {
 		return create(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public static Token create(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -150,6 +151,7 @@ public class Token extends APIResource implements HasId {
 			APIConnectionException, CardException, APIException {
 		return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public static Token retrieve(String id, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {

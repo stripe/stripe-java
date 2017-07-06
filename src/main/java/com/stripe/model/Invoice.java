@@ -402,11 +402,13 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 			APIConnectionException, CardException, APIException {
 		return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public static Invoice retrieve(String id, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.GET, instanceURL(Invoice.class, id), null, Invoice.class, options);
 	}
+
 	public static Invoice retrieve(String id, Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -419,6 +421,7 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 			APIConnectionException, CardException, APIException {
 		return create(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public static Invoice create(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -431,6 +434,7 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 			APIConnectionException, CardException, APIException {
 		return upcoming(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public static Invoice upcoming(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -444,7 +448,7 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 	}
 
 	public static InvoiceCollection list(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+										 RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return requestCollection(classURL(Invoice.class), params, InvoiceCollection.class, options);
@@ -459,7 +463,7 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 
 	@Deprecated
 	public static InvoiceCollection all(Map<String, Object> params,
-			String apiKey) throws AuthenticationException,
+										String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return list(params, RequestOptions.builder().setApiKey(apiKey).build());
@@ -467,7 +471,7 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 
 	@Deprecated
 	public static InvoiceCollection all(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+										RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return list(params, options);
@@ -479,6 +483,7 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 			APIConnectionException, CardException, APIException {
 		return update(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public Invoice update(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -491,12 +496,14 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 			APIException {
 		return pay(RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	@Deprecated
 	public Invoice pay(RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return pay(null, options);
 	}
+
 	public Invoice pay(Map<String, Object> params, RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {

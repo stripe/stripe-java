@@ -20,8 +20,7 @@ public class ExpandableFieldDeserializer implements JsonDeserializer<ExpandableF
 			if (jsonPrimitive.isString()) {
 				expandableField = new ExpandableField(jsonPrimitive.getAsString(), null);
 				return expandableField;
-			}
-			else {
+			} else {
 				throw new JsonParseException("ExpandableField is a non-string primitive type.");
 			}
 		}
@@ -34,7 +33,7 @@ public class ExpandableFieldDeserializer implements JsonDeserializer<ExpandableF
 			// We need to get the type inside the generic ExpandableField to make sure fromJson correctly serializes
 			// the JsonObject:
 			Type clazz = ((ParameterizedType) typeOfT).getActualTypeArguments()[0];
-			expandableField = new ExpandableField(id, (HasId)context.deserialize(json, clazz));
+			expandableField = new ExpandableField(id, (HasId) context.deserialize(json, clazz));
 			return expandableField;
 		}
 

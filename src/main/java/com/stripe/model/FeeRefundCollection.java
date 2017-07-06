@@ -19,7 +19,7 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
 	}
 
 	public FeeRefundCollection list(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+									RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
@@ -35,7 +35,7 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
 
 	@Deprecated
 	public FeeRefundCollection all(Map<String, Object> params,
-			String apiKey) throws AuthenticationException,
+								   String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return list(params, RequestOptions.builder().setApiKey(apiKey).build());
@@ -43,7 +43,7 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
 
 	@Deprecated
 	public FeeRefundCollection all(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+								   RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return list(params, options);
@@ -61,6 +61,7 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
 			APIException {
 		return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public FeeRefund retrieve(String id, RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
@@ -76,13 +77,14 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
 
 	@Deprecated
 	public FeeRefund create(Map<String, Object> params,
-			String apiKey) throws AuthenticationException,
+							String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return create(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public FeeRefund create(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+							RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());

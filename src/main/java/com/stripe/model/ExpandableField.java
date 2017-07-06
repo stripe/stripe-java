@@ -14,8 +14,8 @@ public class ExpandableField<T extends HasId> {
 	}
 
 	public boolean isExpanded() {
-        return expandedObject != null;
-    }
+		return expandedObject != null;
+	}
 
 	public String getId() {
 		return id;

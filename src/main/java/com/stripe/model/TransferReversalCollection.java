@@ -19,7 +19,7 @@ public class TransferReversalCollection extends StripeCollection<Reversal> {
 	}
 
 	public TransferReversalCollection list(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+										   RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
@@ -35,7 +35,7 @@ public class TransferReversalCollection extends StripeCollection<Reversal> {
 
 	@Deprecated
 	public TransferReversalCollection all(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+										  RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return list(params, options);
@@ -53,6 +53,7 @@ public class TransferReversalCollection extends StripeCollection<Reversal> {
 			APIException {
 		return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public Reversal retrieve(String id, RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
@@ -67,7 +68,7 @@ public class TransferReversalCollection extends StripeCollection<Reversal> {
 	}
 
 	public Reversal create(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+						   RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());

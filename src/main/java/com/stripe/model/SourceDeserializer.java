@@ -9,7 +9,7 @@ import java.util.HashMap;
 public class SourceDeserializer implements JsonDeserializer<Source> {
 
 	private void populateMapFromJSONObject(Map<String, String> objMap, JsonObject jsonObject) {
-		for (Map.Entry<String, JsonElement> entry: jsonObject.entrySet()) {
+		for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
 			String key = entry.getKey();
 			JsonElement val = entry.getValue();
 			String value;
@@ -23,8 +23,8 @@ public class SourceDeserializer implements JsonDeserializer<Source> {
 	public Source deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
 			throws JsonParseException {
 		Gson gson = new GsonBuilder()
-			.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-			.create();
+				.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+				.create();
 
 		if (json.isJsonNull()) {
 			return null;

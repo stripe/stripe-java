@@ -12,7 +12,7 @@ public final class SourceReceiverFlow extends StripeObject {
 		return refundAttributesStatus;
 	}
 
-	public void setRefundAttributesStatus(String refundAttributesStatus){
+	public void setRefundAttributesStatus(String refundAttributesStatus) {
 		this.refundAttributesStatus = refundAttributesStatus;
 	}
 
@@ -20,7 +20,7 @@ public final class SourceReceiverFlow extends StripeObject {
 		return refundAttributesMethod;
 	}
 
-	public void setRefundAttributesMethod(String refundAttributesMethod){
+	public void setRefundAttributesMethod(String refundAttributesMethod) {
 		this.refundAttributesMethod = refundAttributesMethod;
 	}
 
@@ -28,7 +28,7 @@ public final class SourceReceiverFlow extends StripeObject {
 		return amountReceived;
 	}
 
-	public void setAmountReceived(Long amountReceived){
+	public void setAmountReceived(Long amountReceived) {
 		this.amountReceived = amountReceived;
 	}
 
@@ -36,7 +36,7 @@ public final class SourceReceiverFlow extends StripeObject {
 		return amountReturned;
 	}
 
-	public void setAmountReturned(Long amountReturned){
+	public void setAmountReturned(Long amountReturned) {
 		this.amountReturned = amountReturned;
 	}
 
@@ -44,7 +44,7 @@ public final class SourceReceiverFlow extends StripeObject {
 		return amountCharged;
 	}
 
-	public void setAmountCharged(Long amountCharged){
+	public void setAmountCharged(Long amountCharged) {
 		this.amountCharged = amountCharged;
 	}
 
@@ -52,7 +52,7 @@ public final class SourceReceiverFlow extends StripeObject {
 		return address;
 	}
 
-	public void setAddress(String address){
+	public void setAddress(String address) {
 		this.address = address;
 	}
 }

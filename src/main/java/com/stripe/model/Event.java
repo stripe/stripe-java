@@ -103,13 +103,17 @@ public class Event extends APIResource implements HasId {
 		this.type = name;
 	}
 
-	/** Legacy; use `getAccount` instead (https://stripe.com/docs/upgrades#2017-05-25) */
+	/**
+	 * Legacy; use `getAccount` instead (https://stripe.com/docs/upgrades#2017-05-25)
+	 */
 	@Deprecated
 	public String getUserId() {
 		return userId;
 	}
 
-	/** Legacy; use `setAccount` instead (https://stripe.com/docs/upgrades#2017-05-25) */
+	/**
+	 * Legacy; use `setAccount` instead (https://stripe.com/docs/upgrades#2017-05-25)
+	 */
 	@Deprecated
 	public void setUserId(String userId) {
 		this.userId = userId;
@@ -127,6 +131,7 @@ public class Event extends APIResource implements HasId {
 			APIConnectionException, CardException, APIException {
 		return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public static Event retrieve(String id, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {

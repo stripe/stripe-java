@@ -24,7 +24,6 @@
     "refunds": {
       "object": "list",
       "data": [
-
       ],
       "has_more": false,
       "total_count": 0,
@@ -54,7 +53,6 @@
     "sourced_transfers": {
       "object": "list",
       "data": [
-
       ],
       "has_more": false,
       "total_count": 0,
@@ -115,7 +113,6 @@
     "subscriptions": {
       "object": "list",
       "data": [
-
       ],
       "has_more": false,
       "total_count": 0,
@@ -167,7 +164,6 @@
     },
     "legal_entity": {
       "additional_owners": [
-
       ],
       "address": {
         "city": "",
@@ -227,7 +223,6 @@
       "disabled_reason": null,
       "due_by": null,
       "fields_needed": [
-
       ]
     }
   },
@@ -387,7 +382,6 @@
   "refunds": {
     "object": "list",
     "data": [
-
     ],
     "has_more": false,
     "total_count": 0,

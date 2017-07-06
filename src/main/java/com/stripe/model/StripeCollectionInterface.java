@@ -7,31 +7,34 @@ import java.util.Map;
 
 public interface StripeCollectionInterface<T> {
 	List<T> getData();
+
 	Boolean getHasMore();
+
 	Integer getTotalCount();
+
 	String getURL();
 
 	/**
 	 * Get request options that were used to fetch the collection. This is
 	 * useful for purposes of pagination.
 	 */
-    RequestOptions getRequestOptions();
+	RequestOptions getRequestOptions();
 
 	/**
 	 * Get request parameters that were used to fetch the collection. This is
 	 * useful for purposes of pagination.
 	 */
-    Map<String, Object> getRequestParams();
+	Map<String, Object> getRequestParams();
 
 	/**
 	 * Set request options that were used to fetch the collection. This is
 	 * required for purposes of pagination.
 	 */
-    void setRequestOptions(RequestOptions requestOptions);
+	void setRequestOptions(RequestOptions requestOptions);
 
 	/**
 	 * Set request parameters that were used to fetch the collection. This is
 	 * required for purposes of pagination.
 	 */
-    void setRequestParams(Map<String, Object> requestParams);
+	void setRequestParams(Map<String, Object> requestParams);
 }

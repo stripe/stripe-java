@@ -19,12 +19,15 @@ public class CardException extends StripeException {
 	public String getCode() {
 		return code;
 	}
+
 	public String getParam() {
 		return param;
 	}
+
 	public String getDeclineCode() {
 		return declineCode;
 	}
+
 	public String getCharge() {
 		return charge;
 	}

@@ -19,7 +19,7 @@ public class RecipientCardCollection extends StripeCollection<Card> {
 	}
 
 	public RecipientCardCollection list(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+										RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
@@ -35,7 +35,7 @@ public class RecipientCardCollection extends StripeCollection<Card> {
 
 	@Deprecated
 	public RecipientCardCollection all(Map<String, Object> params,
-			String apiKey) throws AuthenticationException,
+									   String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return list(params, RequestOptions.builder().setApiKey(apiKey).build());
@@ -43,7 +43,7 @@ public class RecipientCardCollection extends StripeCollection<Card> {
 
 	@Deprecated
 	public RecipientCardCollection all(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+									   RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return list(params, options);
@@ -77,13 +77,14 @@ public class RecipientCardCollection extends StripeCollection<Card> {
 
 	@Deprecated
 	public RecipientCardCollection create(Map<String, Object> params,
-			String apiKey) throws AuthenticationException,
+										  String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return create(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public RecipientCardCollection create(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+										  RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());

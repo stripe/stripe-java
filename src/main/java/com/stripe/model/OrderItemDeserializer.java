@@ -18,6 +18,7 @@ public class OrderItemDeserializer implements JsonDeserializer<OrderItem> {
 
 	@SuppressWarnings("rawtypes")
 	static final Map<String, Class> parentObjMap = new HashMap<String, Class>();
+
 	static {
 		parentObjMap.put("discount", Discount.class);
 		parentObjMap.put("sku", SKU.class);

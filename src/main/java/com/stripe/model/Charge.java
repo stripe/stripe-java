@@ -7,6 +7,7 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
+
 import java.util.Collections;
 import java.util.Map;
 
@@ -52,7 +53,9 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 
 	@Deprecated
 	Card card;
-	/** Legacy; use `dispute` field (https://stripe.com/docs/upgrades#2012-11-07) */
+	/**
+	 * Legacy; use `dispute` field (https://stripe.com/docs/upgrades#2012-11-07)
+	 */
 	@Deprecated
 	Boolean disputed;
 	@Deprecated
@@ -503,8 +506,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	/**
-	 * @deprecated
-	 * Use `source` field (https://stripe.com/docs/upgrades#2015-02-18)
+	 * @deprecated Use `source` field (https://stripe.com/docs/upgrades#2015-02-18)
 	 */
 	@Deprecated
 	public Card getCard() {
@@ -512,8 +514,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	/**
-	 * @deprecated
-	 * Use `source` field (https://stripe.com/docs/upgrades#2015-02-18)
+	 * @deprecated Use `source` field (https://stripe.com/docs/upgrades#2015-02-18)
 	 */
 	@Deprecated
 	public void setCard(Card card) {
@@ -521,8 +522,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	/**
-	 * @deprecated
-	 * Use `dispute` field (https://stripe.com/docs/upgrades#2012-11-07)
+	 * @deprecated Use `dispute` field (https://stripe.com/docs/upgrades#2012-11-07)
 	 */
 	@Deprecated
 	public Boolean getDisputed() {
@@ -530,8 +530,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	/**
-	 * @deprecated
-	 * Use `dispute` field (https://stripe.com/docs/upgrades#2012-11-07)
+	 * @deprecated Use `dispute` field (https://stripe.com/docs/upgrades#2012-11-07)
 	 */
 	@Deprecated
 	public void setDisputed(Boolean disputed) {
@@ -539,8 +538,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	/**
-	 * @deprecated
-	 * Use `statement_descriptor` field (https://stripe.com/docs/upgrades#2014-12-17)
+	 * @deprecated Use `statement_descriptor` field (https://stripe.com/docs/upgrades#2014-12-17)
 	 */
 	@Deprecated
 	public String getStatementDescription() {
@@ -548,8 +546,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	}
 
 	/**
-	 * @deprecated
-	 * Use `statement_descriptor` field (https://stripe.com/docs/upgrades#2014-12-17)
+	 * @deprecated Use `statement_descriptor` field (https://stripe.com/docs/upgrades#2014-12-17)
 	 */
 	@Deprecated
 	public void setStatementDescription(String statementDescription) {
@@ -618,6 +615,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 			APIConnectionException, CardException, APIException {
 		return create(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public static Charge create(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -630,6 +628,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 			APIConnectionException, CardException, APIException {
 		return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public static Charge retrieve(String id, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -648,6 +647,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 			APIConnectionException, CardException, APIException {
 		return update(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public Charge update(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -693,6 +693,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 			APIException {
 		return this.refund(RequestOptions.builder().setApiKey(apiKey).build()); // full refund
 	}
+
 	public Charge refund(RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
@@ -705,6 +706,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 			APIConnectionException, CardException, APIException {
 		return refund(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public Charge refund(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -718,6 +720,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 			APIException {
 		return capture(RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public Charge capture(RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
@@ -730,11 +733,12 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 			APIConnectionException, CardException, APIException {
 		return capture(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public Charge capture(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.POST, String.format("%s/capture",
-						instanceURL(Charge.class, this.getId())), params, Charge.class, options);
+				instanceURL(Charge.class, this.getId())), params, Charge.class, options);
 	}
 
 	@Deprecated

@@ -86,11 +86,11 @@ public class CountrySpec extends APIResource implements HasId {
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return request(
-			RequestMethod.GET,
-			instanceURL(CountrySpec.class, country),
-			null,
-			CountrySpec.class,
-			options);
+				RequestMethod.GET,
+				instanceURL(CountrySpec.class, country),
+				null,
+				CountrySpec.class,
+				options);
 	}
 
 	public static CountrySpecCollection list(Map<String, Object> params)

@@ -188,8 +188,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 	}
 
 	/**
-	 * @deprecated
-	 * Use `sources` field (https://stripe.com/docs/upgrades#2015-02-18)
+	 * @deprecated Use `sources` field (https://stripe.com/docs/upgrades#2015-02-18)
 	 */
 	@Deprecated
 	public CustomerCardCollection getCards() {
@@ -197,8 +196,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 	}
 
 	/**
-	 * @deprecated
-	 * Use `default_source` field (https://stripe.com/docs/upgrades#2015-02-18)
+	 * @deprecated Use `default_source` field (https://stripe.com/docs/upgrades#2015-02-18)
 	 */
 	@Deprecated
 	public String getDefaultCard() {
@@ -206,8 +204,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 	}
 
 	/**
-	 * @deprecated
-	 * Use `default_source` field (https://stripe.com/docs/upgrades#2015-02-18)
+	 * @deprecated Use `default_source` field (https://stripe.com/docs/upgrades#2015-02-18)
 	 */
 	@Deprecated
 	public void setDefaultCard(String defaultCard) {
@@ -215,8 +212,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 	}
 
 	/**
-	 * @deprecated
-	 * Use the upcoming invoice endpoint (https://stripe.com/docs/upgrades#2012-03-25)
+	 * @deprecated Use the upcoming invoice endpoint (https://stripe.com/docs/upgrades#2012-03-25)
 	 */
 	@Deprecated
 	public NextRecurringCharge getNextRecurringCharge() {
@@ -224,8 +220,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 	}
 
 	/**
-	 * @deprecated
-	 * Use the upcoming invoice endpoint (https://stripe.com/docs/upgrades#2012-03-25)
+	 * @deprecated Use the upcoming invoice endpoint (https://stripe.com/docs/upgrades#2012-03-25)
 	 */
 	@Deprecated
 	public void setNextRecurringCharge(NextRecurringCharge nextRecurringCharge) {
@@ -233,8 +228,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 	}
 
 	/**
-	 * @deprecated
-	 * Use `subscriptions` field (https://stripe.com/docs/upgrades#2014-01-31)
+	 * @deprecated Use `subscriptions` field (https://stripe.com/docs/upgrades#2014-01-31)
 	 */
 	@Deprecated
 	public Subscription getSubscription() {
@@ -242,8 +236,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 	}
 
 	/**
-	 * @deprecated
-	 * Use `subscriptions` field (https://stripe.com/docs/upgrades#2014-01-31)
+	 * @deprecated Use `subscriptions` field (https://stripe.com/docs/upgrades#2014-01-31)
 	 */
 	@Deprecated
 	public void setSubscription(Subscription subscription) {
@@ -251,8 +244,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 	}
 
 	/**
-	 * @deprecated
-	 * Use `subscriptions` field (https://stripe.com/docs/upgrades#2014-01-31)
+	 * @deprecated Use `subscriptions` field (https://stripe.com/docs/upgrades#2014-01-31)
 	 */
 	@Deprecated
 	public Long getTrialEnd() {
@@ -260,8 +252,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 	}
 
 	/**
-	 * @deprecated
-	 * Use `subscriptions` field (https://stripe.com/docs/upgrades#2014-01-31)
+	 * @deprecated Use `subscriptions` field (https://stripe.com/docs/upgrades#2014-01-31)
 	 */
 	@Deprecated
 	public void setTrialEnd(Long trialEnd) {
@@ -343,21 +334,27 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 		return createSubscription(params, (RequestOptions) null);
 	}
 
-	/** 1/2014: Legacy (from before multiple subscriptions per customer) */
+	/**
+	 * 1/2014: Legacy (from before multiple subscriptions per customer)
+	 */
 	public Subscription updateSubscription(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return updateSubscription(params, (RequestOptions) null);
 	}
 
-	/** 1/2014: Legacy (from before multiple subscriptions per customer) */
+	/**
+	 * 1/2014: Legacy (from before multiple subscriptions per customer)
+	 */
 	public Subscription cancelSubscription() throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return cancelSubscription(null, (RequestOptions) null);
 	}
 
-	/** 1/2014: Legacy (from before multiple subscriptions per customer) */
+	/**
+	 * 1/2014: Legacy (from before multiple subscriptions per customer)
+	 */
 	public Subscription cancelSubscription(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -376,6 +373,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 			APIConnectionException, CardException, APIException {
 		return create(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public static Customer create(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -388,11 +386,13 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 			APIConnectionException, CardException, APIException {
 		return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public static Customer retrieve(String id, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.GET, instanceURL(Customer.class, id), null, Customer.class, options);
 	}
+
 	public static Customer retrieve(String id, Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -407,7 +407,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 	}
 
 	public static CustomerCollection list(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+										  RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return requestCollection(classURL(Customer.class), params, CustomerCollection.class, options);
@@ -422,7 +422,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 
 	@Deprecated
 	public static CustomerCollection all(Map<String, Object> params,
-			String apiKey) throws AuthenticationException,
+										 String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return list(params, RequestOptions.builder().setApiKey(apiKey).build());
@@ -430,7 +430,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 
 	@Deprecated
 	public static CustomerCollection all(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+										 RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return list(params, options);
@@ -442,6 +442,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 			APIConnectionException, CardException, APIException {
 		return update(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public Customer update(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -455,6 +456,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 		RequestOptions result = null;
 		return delete(RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public DeletedCustomer delete(RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -491,66 +493,78 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return request(RequestMethod.POST, String.format("%s/cards",
-						instanceURL(Customer.class, this.id)), params, Card.class, options);
+				instanceURL(Customer.class, this.id)), params, Card.class, options);
 	}
 
 	@Deprecated
 	public Subscription createSubscription(Map<String, Object> params, String apiKey) throws AuthenticationException,
-		InvalidRequestException, APIConnectionException, CardException,
-		APIException {
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
 		return createSubscription(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public Subscription createSubscription(Map<String, Object> params, RequestOptions options) throws AuthenticationException,
-		InvalidRequestException, APIConnectionException, CardException,
-		APIException {
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
 		return request(RequestMethod.POST, String.format("%s/subscriptions",
-						instanceURL(Customer.class, this.id)), params, Subscription.class, options);
+				instanceURL(Customer.class, this.id)), params, Subscription.class, options);
 	}
 
-	/** 1/2014: Legacy (from before multiple subscriptions per customer) */
+	/**
+	 * 1/2014: Legacy (from before multiple subscriptions per customer)
+	 */
 	@Deprecated
 	public Subscription updateSubscription(Map<String, Object> params,
-			String apiKey) throws AuthenticationException,
+										   String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return updateSubscription(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
-	/** 1/2014: Legacy (from before multiple subscriptions per customer) */
+
+	/**
+	 * 1/2014: Legacy (from before multiple subscriptions per customer)
+	 */
 	public Subscription updateSubscription(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+										   RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return request(RequestMethod.POST, String.format("%s/subscription",
-						instanceURL(Customer.class, this.id)), params, Subscription.class, options);
+				instanceURL(Customer.class, this.id)), params, Subscription.class, options);
 	}
 
-	/** 1/2014: Legacy (from before multiple subscriptions per customer) */
+	/**
+	 * 1/2014: Legacy (from before multiple subscriptions per customer)
+	 */
 	@Deprecated
 	public Subscription cancelSubscription(String apiKey)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return cancelSubscription(RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public Subscription cancelSubscription(RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return cancelSubscription(null, options);
 	}
 
-	/** 1/2014: Legacy (from before multiple subscriptions per customer) */
+	/**
+	 * 1/2014: Legacy (from before multiple subscriptions per customer)
+	 */
 	@Deprecated
 	public Subscription cancelSubscription(Map<String, Object> params,
-			String apiKey) throws AuthenticationException,
+										   String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return cancelSubscription(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public Subscription cancelSubscription(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+										   RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return request(RequestMethod.DELETE, String.format("%s/subscription",
-						instanceURL(Customer.class, this.id)), params, Subscription.class, options);
+				instanceURL(Customer.class, this.id)), params, Subscription.class, options);
 	}
 
 	@Deprecated
@@ -559,11 +573,12 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 			APIException {
 		deleteDiscount(RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public void deleteDiscount(RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		request(RequestMethod.DELETE, String.format("%s/discount",
-						instanceURL(Customer.class, this.id)), null, Discount.class, options);
+				instanceURL(Customer.class, this.id)), null, Discount.class, options);
 	}
 
 }

@@ -19,7 +19,7 @@ public class CustomerCardCollection extends StripeCollection<Card> {
 	}
 
 	public CustomerCardCollection list(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+									   RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
@@ -35,7 +35,7 @@ public class CustomerCardCollection extends StripeCollection<Card> {
 
 	@Deprecated
 	public CustomerCardCollection all(Map<String, Object> params,
-			String apiKey) throws AuthenticationException,
+									  String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return list(params, RequestOptions.builder().setApiKey(apiKey).build());
@@ -43,24 +43,25 @@ public class CustomerCardCollection extends StripeCollection<Card> {
 
 	@Deprecated
 	public CustomerCardCollection all(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+									  RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return list(params, options);
 	}
 
 	public Card retrieve(String id)
-		throws AuthenticationException, InvalidRequestException,
-		APIConnectionException, CardException, APIException {
-	return retrieve(id, (RequestOptions) null);
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return retrieve(id, (RequestOptions) null);
 	}
 
 	@Deprecated
 	public Card retrieve(String id, String apiKey) throws AuthenticationException,
-		InvalidRequestException, APIConnectionException, CardException,
-		APIException {
-	return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public Card retrieve(String id, RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
@@ -69,20 +70,21 @@ public class CustomerCardCollection extends StripeCollection<Card> {
 	}
 
 	public Card create(Map<String, Object> params)
-		throws AuthenticationException, InvalidRequestException,
-		APIConnectionException, CardException, APIException {
-	return create(params, (RequestOptions) null);
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return create(params, (RequestOptions) null);
 	}
 
 	@Deprecated
 	public Card create(Map<String, Object> params,
-		String apiKey) throws AuthenticationException,
-		InvalidRequestException, APIConnectionException, CardException,
-		APIException {
+					   String apiKey) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
 		return create(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public Card create(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+					   RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());

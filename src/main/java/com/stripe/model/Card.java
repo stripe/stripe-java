@@ -271,8 +271,7 @@ public class Card extends ExternalAccount {
 	}
 
 	/**
-	 * @deprecated
-	 * Use `brand` field (https://stripe.com/docs/upgrades#2014-06-13)
+	 * @deprecated Use `brand` field (https://stripe.com/docs/upgrades#2014-06-13)
 	 */
 	@Deprecated
 	public String getType() {
@@ -280,8 +279,7 @@ public class Card extends ExternalAccount {
 	}
 
 	/**
-	 * @deprecated
-	 * Use `brand` field (https://stripe.com/docs/upgrades#2014-06-13)
+	 * @deprecated Use `brand` field (https://stripe.com/docs/upgrades#2014-06-13)
 	 */
 	@Deprecated
 	public void setType(String type) {

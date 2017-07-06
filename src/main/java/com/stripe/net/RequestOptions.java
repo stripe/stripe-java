@@ -38,13 +38,13 @@ public class RequestOptions {
 	public String getStripeAccount() {
 		return stripeAccount;
 	}
-	
+
 	public int getReadTimeout() {
-	    return readTimeout;
+		return readTimeout;
 	}
-	
+
 	public int getConnectTimeout() {
-	    return connectTimeout;
+		return connectTimeout;
 	}
 
 	@Override
@@ -63,13 +63,13 @@ public class RequestOptions {
 		if (stripeVersion != null ? !stripeVersion.equals(that.stripeVersion) : that.stripeVersion != null) {
 			return false;
 		}
-		
+
 		if (connectTimeout != that.connectTimeout) {
 			return false;
 		}
 
-        return readTimeout == that.readTimeout;
-    }
+		return readTimeout == that.readTimeout;
+	}
 
 	@Override
 	public int hashCode() {
@@ -130,11 +130,11 @@ public class RequestOptions {
 			this.idempotencyKey = idempotencyKey;
 			return this;
 		}
-		
+
 		public int getConnectTimeout() {
-		    return connectTimeout;
+			return connectTimeout;
 		}
-		
+
 		/**
 		 * Sets the timeout value that will be used for making new connections to
 		 * the Stripe API (in milliseconds).
@@ -142,18 +142,18 @@ public class RequestOptions {
 		 * @param timeout timeout value in milliseconds
 		 */
 		public RequestOptionsBuilder setConnectTimeout(int timeout) {
-		    this.connectTimeout = timeout;
-		    return this;
+			this.connectTimeout = timeout;
+			return this;
 		}
-		
+
 		public int getReadTimeout() {
-		    return readTimeout;
+			return readTimeout;
 		}
-		
+
 		/**
 		 * Sets the timeout value that will be used when reading data from an
 		 * established connection to the Stripe API (in milliseconds).
-		 *
+		 * <p>
 		 * Note that this value should be set conservatively because some API
 		 * requests can take time and a short timeout increases the likelihood
 		 * of causing a problem in the backend.
@@ -161,8 +161,8 @@ public class RequestOptions {
 		 * @param timeout timeout value in milliseconds
 		 */
 		public RequestOptionsBuilder setReadTimeout(int timeout) {
-		    this.readTimeout = timeout;
-		    return this;
+			this.readTimeout = timeout;
+			return this;
 		}
 
 		public RequestOptionsBuilder clearIdempotencyKey() {
@@ -189,12 +189,12 @@ public class RequestOptions {
 
 		public RequestOptions build() {
 			return new RequestOptions(
-				normalizeApiKey(this.apiKey),
-				normalizeStripeVersion(this.stripeVersion),
-				normalizeIdempotencyKey(this.idempotencyKey),
-				normalizeStripeAccount(this.stripeAccount),
-				connectTimeout,
-				readTimeout);
+					normalizeApiKey(this.apiKey),
+					normalizeStripeVersion(this.stripeVersion),
+					normalizeIdempotencyKey(this.idempotencyKey),
+					normalizeStripeAccount(this.stripeAccount),
+					connectTimeout,
+					readTimeout);
 		}
 	}
 

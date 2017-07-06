@@ -20,7 +20,7 @@ public class DeserializerTest extends BaseStripeTest {
 	@Test
 	public void deserializeEventDataPreviousAttributes() throws IOException {
 		String json = resource("previous_attributes.json");
-		EventData ed = gson.fromJson(json,EventData.class);
+		EventData ed = gson.fromJson(json, EventData.class);
 
 		assertThat(ed.getPreviousAttributes().get("fee"), notNullValue());
 	}

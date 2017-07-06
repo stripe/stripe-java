@@ -234,11 +234,11 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 
 	@Deprecated
 	public static SubscriptionCollection all(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+											 RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return list(params, options);
- 	}
+	}
 
 	public static Subscription create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
@@ -260,7 +260,7 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 	}
 
 	public static SubscriptionCollection list(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+											  RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return requestCollection(classURL(Subscription.class), params, SubscriptionCollection.class, options);
@@ -296,6 +296,7 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 			APIConnectionException, CardException, APIException {
 		return update(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public Subscription update(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -314,6 +315,7 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 			APIException {
 		return cancel(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public Subscription cancel(Map<String, Object> params, RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
@@ -336,6 +338,7 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 		}
 		deleteDiscount(result);
 	}
+
 	public void deleteDiscount(RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {

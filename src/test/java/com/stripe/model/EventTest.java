@@ -17,7 +17,7 @@ public class EventTest extends BaseStripeTest {
 
 		// Thanks to some GSON magic, the object nested within the event can be
 		// typecast to its expected type.
-		Account account = (com.stripe.model.Account)event.getData().getObject();
+		Account account = (com.stripe.model.Account) event.getData().getObject();
 
 		assertEquals(account.getEmail(), "test@stripe.com");
 	}

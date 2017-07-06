@@ -292,7 +292,7 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
 	}
 
 	public static OrderCollection list(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+									   RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return requestCollection(classURL(Order.class), params, OrderCollection.class, options);
@@ -307,7 +307,7 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
 
 	@Deprecated
 	public static OrderCollection all(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+									  RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return list(params, options);
@@ -343,6 +343,6 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return request(RequestMethod.POST, String.format("%s/returns",
-					instanceURL(Order.class, this.getId())), params, OrderReturn.class, options);
+				instanceURL(Order.class, this.getId())), params, OrderReturn.class, options);
 	}
 }

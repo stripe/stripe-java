@@ -17,6 +17,7 @@ import java.util.HashMap;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -47,12 +48,12 @@ public class PagingIteratorTest extends BaseStripeTest {
 		pages.add(resource("pageable_model_page_2.json"));
 
 		when(networkMock.request(
-			Mockito.any(APIResource.RequestMethod.class),
-			Mockito.anyString(),
-			Mockito.<Map<String, Object>>any(),
-			Mockito.<Class<PageableModelCollection>>any(),
-			Mockito.any(APIResource.RequestType.class),
-			Mockito.any(RequestOptions.class))
+				Mockito.any(APIResource.RequestMethod.class),
+				Mockito.anyString(),
+				Mockito.<Map<String, Object>>any(),
+				Mockito.<Class<PageableModelCollection>>any(),
+				Mockito.any(APIResource.RequestType.class),
+				Mockito.any(RequestOptions.class))
 		).thenAnswer(new Answer() {
 			private int count = 0;
 
@@ -97,11 +98,11 @@ public class PagingIteratorTest extends BaseStripeTest {
 		assertEquals("pm_127", models.get(4).getId());
 
 		verifyGet(PageableModelCollection.class, "https://api.stripe.com/v1/pageablemodels",
-			page0Params, options);
+				page0Params, options);
 		verifyGet(PageableModelCollection.class, "https://api.stripe.com/v1/pageablemodels",
-			page1Params, options);
+				page1Params, options);
 		verifyGet(PageableModelCollection.class, "https://api.stripe.com/v1/pageablemodels",
-			page2Params, options);
+				page2Params, options);
 		verifyNoMoreInteractions(networkMock);
 	}
 }
@@ -114,11 +115,11 @@ class PageableModel extends APIResource implements HasId {
 	String id;
 
 	public static PageableModelCollection list(Map<String, Object> params,
-			RequestOptions options)
+											   RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return requestCollection(classURL(PageableModel.class), params,
-			PageableModelCollection.class, options);
+				PageableModelCollection.class, options);
 	}
 
 	public String getId() {

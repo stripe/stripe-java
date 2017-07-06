@@ -141,7 +141,7 @@ public class OrderReturn extends APIResource implements HasId {
 	}
 
 	public static OrderReturnCollection list(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+											 RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return requestCollection(classURL(OrderReturn.class), params, OrderReturnCollection.class, options);

@@ -230,6 +230,7 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
 			APIConnectionException, CardException, APIException {
 		return create(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public static InvoiceItem create(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -242,11 +243,13 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
 			APIConnectionException, CardException, APIException {
 		return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public static InvoiceItem retrieve(String id, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.GET, instanceURL(InvoiceItem.class, id), null, InvoiceItem.class, options);
 	}
+
 	public static InvoiceItem retrieve(String id, Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -260,7 +263,7 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
 	}
 
 	public static InvoiceItemCollection list(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+											 RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return requestCollection(classURL(InvoiceItem.class), params, InvoiceItemCollection.class, options);
@@ -275,7 +278,7 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
 
 	@Deprecated
 	public static InvoiceItemCollection all(Map<String, Object> params,
-			String apiKey) throws AuthenticationException,
+											String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return list(params, RequestOptions.builder().setApiKey(apiKey).build());
@@ -283,7 +286,7 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
 
 	@Deprecated
 	public static InvoiceItemCollection all(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+											RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return list(params, options);
@@ -295,6 +298,7 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
 			APIConnectionException, CardException, APIException {
 		return update(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public InvoiceItem update(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -307,6 +311,7 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
 			APIConnectionException, CardException, APIException {
 		return delete(RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public DeletedInvoiceItem delete(RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {

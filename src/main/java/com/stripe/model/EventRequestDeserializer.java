@@ -15,10 +15,10 @@ import java.util.List;
 public class EventRequestDeserializer implements JsonDeserializer<EventRequest> {
 
 	public EventRequest deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
-		throws JsonParseException {
+			throws JsonParseException {
 		Gson gson = new GsonBuilder()
-			.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-			.create();
+				.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+				.create();
 
 		// API versions 2017-05-25 and earlier render `request` as a string
 		// instead of a JSON object
@@ -26,8 +26,7 @@ public class EventRequestDeserializer implements JsonDeserializer<EventRequest> 
 			EventRequest request = new EventRequest();
 			request.setId(json.getAsString());
 			return request;
-		}
-		else {
+		} else {
 			return gson.fromJson(json, typeOfT);
 		}
 	}
