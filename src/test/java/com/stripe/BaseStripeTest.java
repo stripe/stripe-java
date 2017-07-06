@@ -108,12 +108,12 @@ public class BaseStripeTest {
 
 	public static <T> void stubNetwork(Class<T> clazz, String response) throws StripeException {
 		when(networkMock.request(
-					Mockito.any(APIResource.RequestMethod.class),
-					Mockito.anyString(),
-					Mockito.<Map<String, Object>>any(),
-					Mockito.<Class<T>>any(),
-					Mockito.any(APIResource.RequestType.class),
-					Mockito.any(RequestOptions.class))).thenReturn(APIResource.GSON.fromJson(response, clazz));
+				Mockito.any(APIResource.RequestMethod.class),
+				Mockito.anyString(),
+				Mockito.<Map<String, Object>>any(),
+				Mockito.<Class<T>>any(),
+				Mockito.any(APIResource.RequestType.class),
+				Mockito.any(RequestOptions.class))).thenReturn(APIResource.GSON.fromJson(response, clazz));
 	}
 
 	public static class ParamMapMatcher extends ArgumentMatcher<Map<String, Object>> {
@@ -179,10 +179,10 @@ public class BaseStripeTest {
 		InputStream resource = getClass().getResourceAsStream(path);
 
 		ByteArrayOutputStream os = new ByteArrayOutputStream(1024);
-		byte[] buf = new byte [1024];
+		byte[] buf = new byte[1024];
 
-		for( int i = resource.read(buf); i > 0; i = resource.read(buf)) {
-			os.write(buf,0,i);
+		for (int i = resource.read(buf); i > 0; i = resource.read(buf)) {
+			os.write(buf, 0, i);
 		}
 
 		return os.toString("utf8");

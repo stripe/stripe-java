@@ -38,11 +38,11 @@ public class WebhookTest extends BaseStripeTest {
 	}
 
 	public String generateSigHeader(Map<String, Object> options) throws NoSuchAlgorithmException, InvalidKeyException {
-		long timestamp = (options.get("timestamp") != null) ? ((Long)options.get("timestamp")).longValue() : Webhook.Util.getTimeNow();
-		String payload = (options.get("payload") != null) ? (String)options.get("payload") : WebhookTest.payload;
-		String secret = (options.get("secret") != null) ? (String)options.get("secret") : WebhookTest.secret;
-		String scheme = (options.get("scheme") != null) ? (String)options.get("scheme") : Webhook.Signature.EXPECTED_SCHEME;
-		String signature = (String)options.get("signature");
+		long timestamp = (options.get("timestamp") != null) ? ((Long) options.get("timestamp")).longValue() : Webhook.Util.getTimeNow();
+		String payload = (options.get("payload") != null) ? (String) options.get("payload") : WebhookTest.payload;
+		String secret = (options.get("secret") != null) ? (String) options.get("secret") : WebhookTest.secret;
+		String scheme = (options.get("scheme") != null) ? (String) options.get("scheme") : Webhook.Signature.EXPECTED_SCHEME;
+		String signature = (String) options.get("signature");
 
 		if (signature == null) {
 			String payloadToSign = String.format("%d.%s", timestamp, payload);
@@ -65,7 +65,7 @@ public class WebhookTest extends BaseStripeTest {
 		assertEquals("evt_test_webhook", event.getId());
 	}
 
-	@Test(expected=JsonSyntaxException.class)
+	@Test(expected = JsonSyntaxException.class)
 	public void testInvalidJson() throws SignatureVerificationException, NoSuchAlgorithmException, InvalidKeyException {
 		String payload = "this is not valid JSON";
 		Map<String, Object> options = new HashMap<String, Object>();
@@ -75,7 +75,7 @@ public class WebhookTest extends BaseStripeTest {
 		Webhook.constructEvent(payload, sigHeader, secret);
 	}
 
-	@Test(expected=SignatureVerificationException.class)
+	@Test(expected = SignatureVerificationException.class)
 	public void testValidJsonAndInvalidHeader() throws SignatureVerificationException {
 		String sigHeader = "bad_header";
 

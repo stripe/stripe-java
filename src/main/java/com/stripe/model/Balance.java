@@ -48,6 +48,7 @@ public class Balance extends APIResource {
 			APIConnectionException, CardException, APIException {
 		return retrieve(RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public static Balance retrieve(RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {

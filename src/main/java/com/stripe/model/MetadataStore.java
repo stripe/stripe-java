@@ -16,8 +16,8 @@ public interface MetadataStore<T> {
 	Map<String, String> getMetadata();
 
 	MetadataStore<T> update(Map<String, Object> params) throws AuthenticationException, InvalidRequestException,
-		APIConnectionException, CardException, APIException;
+			APIConnectionException, CardException, APIException;
 
 	MetadataStore<T> update(Map<String, Object> params, RequestOptions options) throws AuthenticationException, InvalidRequestException,
-		APIConnectionException, CardException, APIException;
+			APIConnectionException, CardException, APIException;
 }

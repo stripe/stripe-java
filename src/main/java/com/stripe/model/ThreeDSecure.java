@@ -90,13 +90,11 @@ public class ThreeDSecure extends APIResource implements HasId {
 		this.livemode = livemode;
 	}
 
-	public String getRedirectURL()
-	{
+	public String getRedirectURL() {
 		return redirectURL;
 	}
 
-	public void setRedirectURL(String redirectURL)
-	{
+	public void setRedirectURL(String redirectURL) {
 		this.redirectURL = redirectURL;
 	}
 

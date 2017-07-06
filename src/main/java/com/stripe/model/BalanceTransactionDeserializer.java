@@ -18,6 +18,7 @@ public class BalanceTransactionDeserializer implements JsonDeserializer<BalanceT
 
 	@SuppressWarnings("rawtypes")
 	static final Map<String, Class> sourceObjMap = new HashMap<String, Class>();
+
 	static {
 		sourceObjMap.put("application_fee", ApplicationFee.class);
 		sourceObjMap.put("charge", Charge.class);

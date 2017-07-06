@@ -79,7 +79,7 @@ public class SubscriptionItem extends APIResource implements HasId {
 	}
 
 	public static SubscriptionItemCollection list(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+												  RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return requestCollection(classURL(SubscriptionItem.class), params, SubscriptionItemCollection.class, options);

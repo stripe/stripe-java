@@ -95,7 +95,7 @@ public class InvoiceTest extends BaseStripeTest {
 
 		invoice.pay();
 
-		verifyPost(Invoice.class, "https://api.stripe.com/v1/invoices/in_test_pay/pay", (Map)null);
+		verifyPost(Invoice.class, "https://api.stripe.com/v1/invoices/in_test_pay/pay", (Map) null);
 		verifyNoMoreInteractions(networkMock);
 	}
 

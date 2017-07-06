@@ -9,25 +9,25 @@ import java.util.Map;
 /**
  * Provides a representation of a single page worth of data from the Stripe
  * API.
- *
+ * <p>
  * The following code will have the effect of iterating through a single page
  * worth of invoice data retrieve from the API:
- *
+ * <p>
  * <pre>
  * {@code
  * foreach (Invoice invoice : Invoice.list(...).getData()) {
- *	 System.out.println("Current invoice = " + invoice.toString());
+ * 	 System.out.println("Current invoice = " + invoice.toString());
  * }
  * }
  * </pre>
- *
+ * <p>
  * The class also provides a helper for iterating over collections that may be
  * longer than a single page:
- *
+ * <p>
  * <pre>
  * {@code
  * foreach (Invoice invoice : Invoice.list(...).autoPagingIterable()) {
- *	 System.out.println("Current invoice = " + invoice.toString());
+ * 	 System.out.println("Current invoice = " + invoice.toString());
  * }
  * }
  * </pre>
@@ -40,38 +40,53 @@ public abstract class StripeCollection<T extends HasId> extends StripeObject imp
 	private Map<String, Object> requestParams;
 	String url;
 
-	/** 3/2014: Legacy (from before newstyle pagination API) */
+	/**
+	 * 3/2014: Legacy (from before newstyle pagination API)
+	 */
 	Integer count;
 
 	public List<T> getData() {
 		return data;
 	}
+
 	public void setData(List<T> data) {
 		this.data = data;
 	}
+
 	public Integer getTotalCount() {
 		return totalCount;
 	}
+
 	public void setTotalCount(Integer totalCount) {
 		this.totalCount = totalCount;
 	}
+
 	public Boolean getHasMore() {
 		return hasMore;
 	}
+
 	public void setHasMore(Boolean hasMore) {
 		this.hasMore = hasMore;
 	}
+
 	public String getURL() {
 		return url;
 	}
+
 	public void setURL(String url) {
 		this.url = url;
 	}
-	/** 3/2014: Legacy (from before newstyle pagination API) */
+
+	/**
+	 * 3/2014: Legacy (from before newstyle pagination API)
+	 */
 	public Integer getCount() {
 		return count;
 	}
-	/** 3/2014: Legacy (from before newstyle pagination API) */
+
+	/**
+	 * 3/2014: Legacy (from before newstyle pagination API)
+	 */
 	public void setCount(Integer count) {
 		this.count = count;
 	}

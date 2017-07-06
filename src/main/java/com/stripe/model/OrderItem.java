@@ -70,7 +70,7 @@ public class OrderItem extends APIResource {
 			return null;
 		}
 		return (O) this.parent.getExpanded();
- 	}
+	}
 
 	public Integer getQuantity() {
 		return quantity;

@@ -1,7 +1,9 @@
 package com.stripe.functional;
 
 import com.google.common.collect.ImmutableMap;
+
 import static org.hamcrest.CoreMatchers.instanceOf;
+
 import com.stripe.Stripe;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
@@ -11,7 +13,9 @@ import com.stripe.model.Card;
 import com.stripe.model.Charge;
 import com.stripe.model.ShippingDetails;
 import org.junit.Test;
+
 import java.util.*;
+
 import com.stripe.BaseStripeFunctionalTest;
 
 import static org.junit.Assert.*;
@@ -32,14 +36,14 @@ public class ChargeTest extends BaseStripeFunctionalTest {
 		Charge createdCharge = Charge.create(createParams);
 
 		assertEquals(createdCharge.getBalanceTransactionObject().getId(),
-			createdCharge.getBalanceTransaction());
+				createdCharge.getBalanceTransaction());
 
 		Map<String, Object> retrieveParams = new HashMap<String, Object>();
 		retrieveParams.put("expand[]", "balance_transaction");
 		Charge retrievedCharge = Charge.retrieve(createdCharge.getId(), retrieveParams, null);
 
 		assertEquals(retrievedCharge.getBalanceTransactionObject().getId(),
-			retrievedCharge.getBalanceTransaction());
+				retrievedCharge.getBalanceTransaction());
 	}
 
 	@Test
@@ -114,8 +118,7 @@ public class ChargeTest extends BaseStripeFunctionalTest {
 		try {
 			Charge.retrieve(null);
 			assertTrue(false);
-		}
-		catch (InvalidRequestException e) {
+		} catch (InvalidRequestException e) {
 			String requestId = e.getRequestId();
 			assertFalse(requestId == null);
 			assertFalse(requestId.equals(""));
@@ -157,8 +160,7 @@ public class ChargeTest extends BaseStripeFunctionalTest {
 
 		try {
 			Charge.create(declinedChargeParams);
-		}
-		catch (CardException e) {
+		} catch (CardException e) {
 			assertEquals("card_declined", e.getCode());
 			assertNotNull(e.getCharge());
 		}
@@ -174,7 +176,7 @@ public class ChargeTest extends BaseStripeFunctionalTest {
 		assertEquals(charge.getPaid(), true);
 
 		assertThat(charge.getSource(), instanceOf(Card.class));
-		Card card = (Card)charge.getSource();
+		Card card = (Card) charge.getSource();
 		assertEquals(card.getAddressZipCheck(), "fail");
 	}
 
@@ -188,7 +190,7 @@ public class ChargeTest extends BaseStripeFunctionalTest {
 		assertEquals(charge.getPaid(), true);
 
 		assertThat(charge.getSource(), instanceOf(Card.class));
-		Card card = (Card)charge.getSource();
+		Card card = (Card) charge.getSource();
 		assertEquals(card.getAddressLine1Check(), "fail");
 	}
 

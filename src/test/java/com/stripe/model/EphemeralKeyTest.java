@@ -14,6 +14,7 @@ import java.io.IOException;
 
 import java.util.Map;
 import java.util.HashMap;
+
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
@@ -58,7 +59,7 @@ public class EphemeralKeyTest extends BaseStripeTest {
 		verifyNoMoreInteractions(networkMock);
 	}
 
-	@Test(expected=IllegalArgumentException.class)
+	@Test(expected = IllegalArgumentException.class)
 	public void testVersionlessCreate() throws StripeException {
 		Stripe.apiVersion = null;
 
@@ -81,21 +82,21 @@ public class EphemeralKeyTest extends BaseStripeTest {
 		verifyNoMoreInteractions(networkMock);
 	}
 
-    @Test
-    public void testDeserialize() throws StripeException, IOException {
+	@Test
+	public void testDeserialize() throws StripeException, IOException {
 		final String json = resource("ephemeral_key.json");
-        EphemeralKey key = APIResource.GSON.fromJson(json, EphemeralKey.class);
+		EphemeralKey key = APIResource.GSON.fromJson(json, EphemeralKey.class);
 
-        assertEquals(key.getId(), "ephkey_123");
-        assertEquals(key.getObject(), "ephemeral_key");
-        assertEquals(key.getCreated(), Long.valueOf(100));
-        assertEquals(key.getExpires(), Long.valueOf(200));
-        assertEquals(key.getLivemode(), false);
-        assertEquals(key.getSecret(), "ek_test_hunter2");
-        assertEquals(key.getAssociatedObjects().size(), 1);
-        assertEquals(key.getAssociatedObjects().get(0).getType(), "customer");
-        assertEquals(key.getAssociatedObjects().get(0).getId(), "cus_234");
-    }
+		assertEquals(key.getId(), "ephkey_123");
+		assertEquals(key.getObject(), "ephemeral_key");
+		assertEquals(key.getCreated(), Long.valueOf(100));
+		assertEquals(key.getExpires(), Long.valueOf(200));
+		assertEquals(key.getLivemode(), false);
+		assertEquals(key.getSecret(), "ek_test_hunter2");
+		assertEquals(key.getAssociatedObjects().size(), 1);
+		assertEquals(key.getAssociatedObjects().get(0).getType(), "customer");
+		assertEquals(key.getAssociatedObjects().get(0).getId(), "cus_234");
+	}
 
 	@Test
 	public void testJsonReserialization() throws StripeException {

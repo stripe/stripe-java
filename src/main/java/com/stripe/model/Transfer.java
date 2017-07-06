@@ -325,8 +325,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 	}
 
 	/**
-	 * @deprecated
-	 * Use `bank_account` field (https://stripe.com/docs/upgrades#2014-05-19)
+	 * @deprecated Use `bank_account` field (https://stripe.com/docs/upgrades#2014-05-19)
 	 */
 	@Deprecated
 	public BankAccount getAccount() {
@@ -334,8 +333,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 	}
 
 	/**
-	 * @deprecated
-	 * Use `bank_account` field (https://stripe.com/docs/upgrades#2014-05-19)
+	 * @deprecated Use `bank_account` field (https://stripe.com/docs/upgrades#2014-05-19)
 	 */
 	@Deprecated
 	public void setAccount(BankAccount account) {
@@ -343,8 +341,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 	}
 
 	/**
-	 * @deprecated
-	 * Use the balance history endpoint (https://stripe.com/docs/upgrades#2014-08-04)
+	 * @deprecated Use the balance history endpoint (https://stripe.com/docs/upgrades#2014-08-04)
 	 */
 	@Deprecated
 	public List<String> getOtherTransfers() {
@@ -352,8 +349,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 	}
 
 	/**
-	 * @deprecated
-	 * Use the balance history endpoint (https://stripe.com/docs/upgrades#2014-08-04)
+	 * @deprecated Use the balance history endpoint (https://stripe.com/docs/upgrades#2014-08-04)
 	 */
 	@Deprecated
 	public void setOtherTransfers(List<String> otherTransfers) {
@@ -371,8 +367,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 	}
 
 	/**
-	 * @deprecated
-	 * Use `statement_descriptor` field (https://stripe.com/docs/upgrades#2014-12-17)
+	 * @deprecated Use `statement_descriptor` field (https://stripe.com/docs/upgrades#2014-12-17)
 	 */
 	@Deprecated
 	public String getStatementDescription() {
@@ -380,8 +375,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 	}
 
 	/**
-	 * @deprecated
-	 * Use `statement_descriptor` field (https://stripe.com/docs/upgrades#2014-12-17)
+	 * @deprecated Use `statement_descriptor` field (https://stripe.com/docs/upgrades#2014-12-17)
 	 */
 	@Deprecated
 	public void setStatementDescription(String statementDescription) {
@@ -389,8 +383,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 	}
 
 	/**
-	 * @deprecated
-	 * Use the balance history endpoint (https://stripe.com/docs/upgrades#2014-08-04)
+	 * @deprecated Use the balance history endpoint (https://stripe.com/docs/upgrades#2014-08-04)
 	 */
 	@Deprecated
 	public Summary getSummary() {
@@ -398,8 +391,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 	}
 
 	/**
-	 * @deprecated
-	 * Use the balance history endpoint (https://stripe.com/docs/upgrades#2014-08-04)
+	 * @deprecated Use the balance history endpoint (https://stripe.com/docs/upgrades#2014-08-04)
 	 */
 	@Deprecated
 	public void setSummary(Summary summary) {
@@ -419,8 +411,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 	}
 
 	/**
-	 * @deprecated
-	 * Use Transfer.getReversals().create() instead of Transfer.cancel().
+	 * @deprecated Use Transfer.getReversals().create() instead of Transfer.cancel().
 	 */
 	@Deprecated
 	public Transfer cancel()
@@ -447,6 +438,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 			APIConnectionException, CardException, APIException {
 		return create(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public static Transfer create(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -459,6 +451,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 			APIConnectionException, CardException, APIException {
 		return update(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public Transfer update(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -471,6 +464,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 			APIConnectionException, CardException, APIException {
 		return cancel(RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public Transfer cancel(RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -483,11 +477,13 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 			APIConnectionException, CardException, APIException {
 		return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public static Transfer retrieve(String id, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.GET, instanceURL(Transfer.class, id), null, Transfer.class, options);
 	}
+
 	public static Transfer retrieve(String id, Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -501,7 +497,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 	}
 
 	public static TransferCollection list(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+										  RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return requestCollection(classURL(Transfer.class), params, TransferCollection.class, options);
@@ -516,7 +512,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 
 	@Deprecated
 	public static TransferCollection all(Map<String, Object> params,
-			String apiKey) throws AuthenticationException,
+										 String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return list(params, RequestOptions.builder().setApiKey(apiKey).build());
@@ -524,7 +520,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 
 	@Deprecated
 	public static TransferCollection all(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+										 RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return list(params, options);
@@ -537,6 +533,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 			APIConnectionException, CardException, APIException {
 		return transactions(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public TransferTransactionCollection transactions(
 			Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,

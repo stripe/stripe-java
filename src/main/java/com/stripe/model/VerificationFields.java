@@ -1,6 +1,7 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public final class VerificationFields extends StripeObject {
@@ -39,6 +40,6 @@ public final class VerificationFields extends StripeObject {
 		if (individual != null ? !individual.equals(verificationFields.individual) : verificationFields.individual != null) {
 			return false;
 		}
-        return company != null ? company.equals(verificationFields.company) : verificationFields.company == null;
-    }
+		return company != null ? company.equals(verificationFields.company) : verificationFields.company == null;
+	}
 }

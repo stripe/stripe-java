@@ -22,6 +22,7 @@ public class ExpandableFieldDeserializerTest extends BaseStripeTest {
 	private class TestObject implements HasId {
 		String id;
 		int bar;
+
 		public String getId() {
 			return id;
 		}
@@ -31,7 +32,8 @@ public class ExpandableFieldDeserializerTest extends BaseStripeTest {
 	public void deserializeNull() throws IOException {
 		String json = gson.toJson(null);
 		//Gson also uses TypeTokens internally to get around Type Erasure for generic types, simulate that here:
-		ExpandableField out = gson.fromJson(json, new TypeToken<ExpandableField<TestObject>>() {}.getType());
+		ExpandableField out = gson.fromJson(json, new TypeToken<ExpandableField<TestObject>>() {
+		}.getType());
 		assertNull(out);
 	}
 
@@ -39,7 +41,8 @@ public class ExpandableFieldDeserializerTest extends BaseStripeTest {
 	public void deserializeString() throws IOException {
 		String json = gson.toJson("just_an_id");
 		//Gson also uses TypeTokens internally to get around Type Erasure for generic types, simulate that here:
-		ExpandableField out = gson.fromJson(json, new TypeToken<ExpandableField<TestObject>>() {}.getType());
+		ExpandableField out = gson.fromJson(json, new TypeToken<ExpandableField<TestObject>>() {
+		}.getType());
 		assertEquals(out.getId(), "just_an_id");
 		assertFalse(out.isExpanded());
 	}
@@ -52,7 +55,8 @@ public class ExpandableFieldDeserializerTest extends BaseStripeTest {
 		String json = gson.toJson(anObject);
 
 		//Gson also uses TypeTokens internally to get around Type Erasure for generic types, simulate that here:
-		ExpandableField<TestObject> out = gson.fromJson(json, new TypeToken<ExpandableField<TestObject>>() {}.getType());
+		ExpandableField<TestObject> out = gson.fromJson(json, new TypeToken<ExpandableField<TestObject>>() {
+		}.getType());
 		assertEquals(out.getId(), "an_id_here");
 		assertEquals(out.getExpanded().id, "an_id_here");
 		assertEquals(out.getExpanded().bar, 12);

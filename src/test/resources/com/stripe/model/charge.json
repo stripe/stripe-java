@@ -34,7 +34,6 @@
   "refunds": {
     "object": "list",
     "data": [
-
     ],
     "has_more": false,
     "total_count": 0,

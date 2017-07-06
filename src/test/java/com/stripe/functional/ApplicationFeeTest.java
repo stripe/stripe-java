@@ -12,11 +12,11 @@ import java.util.Map;
 import static org.junit.Assert.assertEquals;
 
 public class ApplicationFeeTest extends BaseStripeFunctionalTest {
-    @Test
-    public void testApplicationFeeList() throws StripeException {
-        Map<String, Object> listParams = new HashMap<String, Object>();
-        listParams.put("count", 0);
-        List<ApplicationFee> fees = ApplicationFee.all(listParams).getData();
-        assertEquals(fees.size(), 0);
-    }
+	@Test
+	public void testApplicationFeeList() throws StripeException {
+		Map<String, Object> listParams = new HashMap<String, Object>();
+		listParams.put("count", 0);
+		List<ApplicationFee> fees = ApplicationFee.all(listParams).getData();
+		assertEquals(fees.size(), 0);
+	}
 }

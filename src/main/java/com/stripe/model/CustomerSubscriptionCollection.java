@@ -19,7 +19,7 @@ public class CustomerSubscriptionCollection extends StripeCollection<Subscriptio
 	}
 
 	public CustomerSubscriptionCollection list(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+											   RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
@@ -35,7 +35,7 @@ public class CustomerSubscriptionCollection extends StripeCollection<Subscriptio
 
 	@Deprecated
 	public CustomerSubscriptionCollection all(Map<String, Object> params,
-			String apiKey) throws AuthenticationException,
+											  String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return list(params, RequestOptions.builder().setApiKey(apiKey).build());
@@ -43,7 +43,7 @@ public class CustomerSubscriptionCollection extends StripeCollection<Subscriptio
 
 	@Deprecated
 	public CustomerSubscriptionCollection all(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+											  RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return list(params, options);
@@ -57,10 +57,11 @@ public class CustomerSubscriptionCollection extends StripeCollection<Subscriptio
 
 	@Deprecated
 	public Subscription retrieve(String id, String apiKey) throws AuthenticationException,
-		InvalidRequestException, APIConnectionException, CardException,
-		APIException {
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
 		return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public Subscription retrieve(String id, RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
@@ -76,13 +77,14 @@ public class CustomerSubscriptionCollection extends StripeCollection<Subscriptio
 
 	@Deprecated
 	public Subscription create(Map<String, Object> params,
-			String apiKey) throws AuthenticationException,
+							   String apiKey) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return create(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public Subscription create(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+							   RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());

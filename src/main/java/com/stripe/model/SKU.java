@@ -191,14 +191,14 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
 	}
 
 	public DeletedSKU delete()
-		throws AuthenticationException, InvalidRequestException,
-		APIConnectionException, CardException, APIException {
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
 		return delete(null);
 	}
 
 	public DeletedSKU delete(RequestOptions options)
-		throws AuthenticationException, InvalidRequestException,
-		APIConnectionException, CardException, APIException {
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.DELETE, instanceURL(SKU.class, this.id), null, DeletedSKU.class, options);
 	}
 
@@ -209,7 +209,7 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
 	}
 
 	public static SKUCollection list(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+									 RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return requestCollection(classURL(SKU.class), params, SKUCollection.class, options);
@@ -224,7 +224,7 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
 
 	@Deprecated
 	public static SKUCollection all(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+									RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return list(params, options);

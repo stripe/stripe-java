@@ -82,9 +82,9 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 		headers.put("Authorization", String.format("Bearer %s", options.getApiKey()));
 
 		// debug headers
-		String[] propertyNames = { "os.name", "os.version", "os.arch",
+		String[] propertyNames = {"os.name", "os.version", "os.arch",
 				"java.version", "java.vendor", "java.vm.version",
-				"java.vm.vendor" };
+				"java.vm.vendor"};
 		Map<String, String> propertyMap = new HashMap<String, String>();
 		for (String propertyName : propertyNames) {
 			propertyMap.put(propertyName, System.getProperty(propertyName));
@@ -237,7 +237,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 	private static List<Parameter> flattenParamsList(List<Object> params, String keyPrefix)
 			throws InvalidRequestException {
 		List<Parameter> flatParams = new LinkedList<Parameter>();
-		Iterator<?> it = ((List<?>)params).iterator();
+		Iterator<?> it = ((List<?>) params).iterator();
 		String newPrefix = String.format("%s[]", keyPrefix);
 
 		// Because application/x-www-form-urlencoded cannot represent an empty
@@ -282,14 +282,14 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 		List<Parameter> flatParams = new LinkedList<Parameter>();
 
 		if (value instanceof Map<?, ?>) {
-			flatParams = flattenParamsMap((Map<String, Object>)value, keyPrefix);
+			flatParams = flattenParamsMap((Map<String, Object>) value, keyPrefix);
 		} else if (value instanceof List<?>) {
-			flatParams = flattenParamsList((List<Object>)value, keyPrefix);
+			flatParams = flattenParamsList((List<Object>) value, keyPrefix);
 		} else if ("".equals(value)) {
-				throw new InvalidRequestException("You cannot set '"+keyPrefix+"' to an empty string. "+
-									"We interpret empty strings as null in requests. "+
-									"You may set '"+keyPrefix+"' to null to delete the property.",
-									keyPrefix, null, 0, null);
+			throw new InvalidRequestException("You cannot set '" + keyPrefix + "' to an empty string. " +
+					"We interpret empty strings as null in requests. " +
+					"You may set '" + keyPrefix + "' to null to delete the property.",
+					keyPrefix, null, 0, null);
 		} else if (value == null) {
 			flatParams = new LinkedList<Parameter>();
 			flatParams.add(new Parameter(keyPrefix, ""));
@@ -326,8 +326,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 		//\A is the beginning of
 		// the stream boundary
 		String rBody = new Scanner(responseStream, APIResource.CHARSET)
-												.useDelimiter("\\A")
-												.next(); //
+				.useDelimiter("\\A")
+				.next(); //
 
 		responseStream.close();
 		return rBody;
@@ -339,22 +339,22 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 		java.net.HttpURLConnection conn = null;
 		try {
 			switch (method) {
-			case GET:
-				conn = createGetConnection(url, query, options);
-				break;
-			case POST:
-				conn = createPostConnection(url, query, options);
-				break;
-			case DELETE:
-				conn = createDeleteConnection(url, query, options);
-				break;
-			default:
-				throw new APIConnectionException(
-						String.format(
-								"Unrecognized HTTP method %s. "
-										+ "This indicates a bug in the Stripe bindings. Please contact "
-										+ "support@stripe.com for assistance.",
-								method));
+				case GET:
+					conn = createGetConnection(url, query, options);
+					break;
+				case POST:
+					conn = createPostConnection(url, query, options);
+					break;
+				case DELETE:
+					conn = createDeleteConnection(url, query, options);
+					break;
+				default:
+					throw new APIConnectionException(
+							String.format(
+									"Unrecognized HTTP method %s. "
+											+ "This indicates a bug in the Stripe bindings. Please contact "
+											+ "support@stripe.com for assistance.",
+									method));
 			}
 			// trigger the request
 			int rCode = conn.getResponseCode();
@@ -385,8 +385,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 	}
 
 	private static <T> T _request(APIResource.RequestMethod method,
-			String url, Map<String, Object> params, Class<T> clazz,
-			APIResource.RequestType type, RequestOptions options)
+								  String url, Map<String, Object> params, Class<T> clazz,
+								  APIResource.RequestType type, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		if (options == null) {
@@ -417,18 +417,18 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 		try {
 			StripeResponse response;
 			switch (type) {
-			case NORMAL:
-				response = getStripeResponse(method, url, params, options);
-				break;
-			case MULTIPART:
-				response = getMultipartStripeResponse(method, url, params,
-						options);
-				break;
-			default:
-				throw new RuntimeException(
-						"Invalid APIResource request type. "
-								+ "This indicates a bug in the Stripe bindings. Please contact "
-								+ "support@stripe.com for assistance.");
+				case NORMAL:
+					response = getStripeResponse(method, url, params, options);
+					break;
+				case MULTIPART:
+					response = getMultipartStripeResponse(method, url, params,
+							options);
+					break;
+				default:
+					throw new RuntimeException(
+							"Invalid APIResource request type. "
+									+ "This indicates a bug in the Stripe bindings. Please contact "
+									+ "support@stripe.com for assistance.");
 			}
 			int rCode = response.responseCode;
 			String rBody = response.responseBody;
@@ -537,7 +537,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 						} else if (!currentFile.canRead()) {
 							throw new InvalidRequestException(
 									"Must have read permissions on file for key "
-									+ key + ".", null, null, 0, null);
+											+ key + ".", null, null, 0, null);
 						}
 						multipartProcessor.addFileField(key, currentFile);
 					} else {
@@ -588,20 +588,20 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 		LiveStripeResponseGetter.Error error = APIResource.GSON.fromJson(rBody,
 				LiveStripeResponseGetter.ErrorContainer.class).error;
 		switch (rCode) {
-		case 400:
-			throw new InvalidRequestException(error.message, error.param, requestId, rCode, null);
-		case 404:
-			throw new InvalidRequestException(error.message, error.param, requestId, rCode, null);
-		case 401:
-			throw new AuthenticationException(error.message, requestId, rCode);
-		case 402:
-			throw new CardException(error.message, requestId, error.code, error.param, error.decline_code, error.charge, rCode, null);
-		case 403:
-			throw new PermissionException(error.message, requestId, rCode);
-		case 429:
-			throw new RateLimitException(error.message, error.param, requestId, rCode, null);
-		default:
-			throw new APIException(error.message, requestId, rCode, null);
+			case 400:
+				throw new InvalidRequestException(error.message, error.param, requestId, rCode, null);
+			case 404:
+				throw new InvalidRequestException(error.message, error.param, requestId, rCode, null);
+			case 401:
+				throw new AuthenticationException(error.message, requestId, rCode);
+			case 402:
+				throw new CardException(error.message, requestId, error.code, error.param, error.decline_code, error.charge, rCode, null);
+			case 403:
+				throw new PermissionException(error.message, requestId, rCode);
+			case 429:
+				throw new RateLimitException(error.message, error.param, requestId, rCode, null);
+			default:
+				throw new APIException(error.message, requestId, rCode, null);
 		}
 	}
 
@@ -610,7 +610,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 	 * maintain AppEngine-specific JAR
 	 */
 	private static StripeResponse makeAppEngineRequest(APIResource.RequestMethod method,
-			String url, String query, RequestOptions options) throws APIException {
+													   String url, String query, RequestOptions options) throws APIException {
 		String unknownErrorMessage = "Sorry, an unknown error occurred while trying to use the "
 				+ "Google App Engine runtime. Please contact support@stripe.com for assistance.";
 		try {

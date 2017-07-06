@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
     <modelVersion>4.0.0</modelVersion>
     <groupId>com.stripe</groupId>
     <artifactId>stripe-java</artifactId>
@@ -7,10 +8,10 @@
     <name>stripe-java</name>
     <url>https://github.com/stripe/stripe-java</url>
     <licenses>
-      <license>
-        <name>MIT</name>
-        <url>http://choosealicense.com/licenses/mit/</url>
-      </license>
+        <license>
+            <name>MIT</name>
+            <url>http://choosealicense.com/licenses/mit/</url>
+        </license>
     </licenses>
     <dependencies>
         <dependency>
@@ -112,22 +113,22 @@
                 </executions>
             </plugin>
             <plugin>
-              <groupId>org.sonatype.plugins</groupId>
-              <version>1.6.4</version>
-              <artifactId>nexus-staging-maven-plugin</artifactId>
-              <executions>
-                <execution>
-                  <id>default-deploy</id>
-                  <phase>deploy</phase>
-                  <goals>
-                    <goal>deploy</goal>
-                  </goals>
-                </execution>
-              </executions>
-              <configuration>
-                <serverId>sonatype-nexus-staging</serverId>
-                <nexusUrl>https://oss.sonatype.org/</nexusUrl>
-              </configuration>
+                <groupId>org.sonatype.plugins</groupId>
+                <version>1.6.4</version>
+                <artifactId>nexus-staging-maven-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>default-deploy</id>
+                        <phase>deploy</phase>
+                        <goals>
+                            <goal>deploy</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <serverId>sonatype-nexus-staging</serverId>
+                    <nexusUrl>https://oss.sonatype.org/</nexusUrl>
+                </configuration>
             </plugin>
         </plugins>
     </build>

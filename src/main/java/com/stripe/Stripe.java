@@ -49,12 +49,12 @@ public abstract class Stripe {
 	public static Proxy getConnectionProxy() {
 		return connectionProxy;
 	}
-	
+
 	public static int getConnectTimeout() {
 		if (connectTimeout == -1) {
 			return DEFAULT_CONNECT_TIMEOUT;
 		}
-	    return connectTimeout;
+		return connectTimeout;
 	}
 
 	/**
@@ -66,18 +66,18 @@ public abstract class Stripe {
 	public static void setConnectTimeout(final int timeout) {
 		connectTimeout = timeout;
 	}
-	
+
 	public static int getReadTimeout() {
 		if (readTimeout == -1) {
 			return DEFAULT_READ_TIMEOUT;
 		}
-	    return readTimeout;
+		return readTimeout;
 	}
 
 	/**
 	 * Sets the timeout value that will be used when reading data from an
 	 * established connection to the Stripe API (in milliseconds).
-	 *
+	 * <p>
 	 * Note that this value should be set conservatively because some API
 	 * requests can take time and a short timeout increases the likelihood of
 	 * causing a problem in the backend.

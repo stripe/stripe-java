@@ -19,7 +19,7 @@ public class ExternalAccountCollection extends StripeCollection<ExternalAccount>
 	}
 
 	public ExternalAccountCollection list(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+										  RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
@@ -35,7 +35,7 @@ public class ExternalAccountCollection extends StripeCollection<ExternalAccount>
 
 	@Deprecated
 	public ExternalAccountCollection all(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+										 RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return list(params, options);
@@ -61,7 +61,7 @@ public class ExternalAccountCollection extends StripeCollection<ExternalAccount>
 	}
 
 	public ExternalAccount create(Map<String, Object> params,
-			RequestOptions options) throws AuthenticationException,
+								  RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());

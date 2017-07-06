@@ -21,9 +21,9 @@ public final class Webhook {
 	 * SignatureVerificationException if the signature verification fails for
 	 * any reason.
 	 *
-	 * @param payload the payload sent by Stripe.
+	 * @param payload   the payload sent by Stripe.
 	 * @param sigHeader the contents of the signature header sent by Stripe.
-	 * @param secret secret used to generate the signature.
+	 * @param secret    secret used to generate the signature.
 	 * @return the Event instance
 	 * @throws SignatureVerificationException if the verification fails.
 	 */
@@ -37,11 +37,11 @@ public final class Webhook {
 	 * SignatureVerificationException if the signature verification fails for
 	 * any reason.
 	 *
-	 * @param payload the payload sent by Stripe.
+	 * @param payload   the payload sent by Stripe.
 	 * @param sigHeader the contents of the signature header sent by Stripe.
-	 * @param secret secret used to generate the signature.
+	 * @param secret    secret used to generate the signature.
 	 * @param tolerance maximum difference in seconds allowed between the header's
-	 *  timestamp and the current time
+	 *                  timestamp and the current time
 	 * @return the Event instance
 	 * @throws SignatureVerificationException if the verification fails.
 	 */
@@ -58,11 +58,11 @@ public final class Webhook {
 		 * Verifies the signature header sent by Stripe. Throws a
 		 * SignatureVerificationException if the verification fails for any reason.
 		 *
-		 * @param payload the payload sent by Stripe.
+		 * @param payload   the payload sent by Stripe.
 		 * @param sigHeader the contents of the signature header sent by Stripe.
-		 * @param secret secret used to generate the signature.
+		 * @param secret    secret used to generate the signature.
 		 * @param tolerance maximum difference allowed between the header's
-		 *  timestamp and the current time
+		 *                  timestamp and the current time
 		 * @throws SignatureVerificationException if the verification fails.
 		 */
 		public static boolean verifyHeader(String payload, String sigHeader, String secret, long tolerance) throws SignatureVerificationException {
@@ -128,7 +128,7 @@ public final class Webhook {
 		 * Extracts the signatures matching a given scheme in a signature header.
 		 *
 		 * @param sigHeader the signature header
-		 * @param scheme the signature scheme to look for.
+		 * @param scheme    the signature scheme to look for.
 		 * @return the list of signatures matching the provided scheme.
 		 */
 		private static List<String> getSignatures(String sigHeader, String scheme) {
@@ -147,11 +147,11 @@ public final class Webhook {
 
 		/**
 		 * Computes the signature for a given payload and secret.
-		 *
+		 * <p>
 		 * The current scheme used by Stripe ("v1") is HMAC/SHA-256.
 		 *
 		 * @param payload the payload to sign.
-		 * @param secret the secret used to generate the signature.
+		 * @param secret  the secret used to generate the signature.
 		 * @return the signature as a string.
 		 */
 		private static String computeSignature(String payload, String secret) throws NoSuchAlgorithmException, InvalidKeyException {
@@ -163,7 +163,7 @@ public final class Webhook {
 		/**
 		 * Computes the HMAC/SHA-256 code for a given key and message.
 		 *
-		 * @param key the key used to generate the code.
+		 * @param key     the key used to generate the code.
 		 * @param message the message.
 		 * @return the code as a string.
 		 */
@@ -181,7 +181,7 @@ public final class Webhook {
 		/**
 		 * Compares two strings for equality. The time taken is independent of the
 		 * number of characters that match.
-		 *
+		 * <p>
 		 * Java actually has MessageDigest.isEqual() for this, but the
 		 * implementation in very old Java 6 versions does not protect against
 		 * timing attacks. Once we drop support for Java 6, we'll be able to just

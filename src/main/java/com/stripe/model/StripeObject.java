@@ -9,20 +9,21 @@ import java.lang.reflect.Field;
 public abstract class StripeObject {
 
 	public static final Gson PRETTY_PRINT_GSON = new GsonBuilder().
-		setPrettyPrinting().
-		serializeNulls().
-		setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).
-		registerTypeAdapter(EventData.class, new EventDataDeserializer()).
-		registerTypeAdapter(EventRequest.class, new EventRequestDeserializer()).
-		create();
+			setPrettyPrinting().
+			serializeNulls().
+			setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).
+			registerTypeAdapter(EventData.class, new EventDataDeserializer()).
+			registerTypeAdapter(EventRequest.class, new EventRequestDeserializer()).
+			create();
 
-	@Override public String toString() {
+	@Override
+	public String toString() {
 		return String.format(
-			"<%s@%s id=%s> JSON: %s",
-			this.getClass().getName(),
-			System.identityHashCode(this),
-			this.getIdString(),
-			PRETTY_PRINT_GSON.toJson(this));
+				"<%s@%s id=%s> JSON: %s",
+				this.getClass().getName(),
+				System.identityHashCode(this),
+				this.getIdString(),
+				PRETTY_PRINT_GSON.toJson(this));
 	}
 
 	public String toJson() {

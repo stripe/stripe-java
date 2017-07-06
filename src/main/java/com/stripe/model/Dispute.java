@@ -28,13 +28,19 @@ public class Dispute extends APIResource implements HasId {
 	String status;
 	String networkReasonCode; // Not part of the public API.
 
-	/** 8/2014: Legacy (now use balanceTransactions) -- https://stripe.com/docs/upgrades#2014-08-20 */
+	/**
+	 * 8/2014: Legacy (now use balanceTransactions) -- https://stripe.com/docs/upgrades#2014-08-20
+	 */
 	@Deprecated
 	String balanceTransaction;
-	/** 12/2014: Legacy (now use evidenceSubObject) -- https://stripe.com/docs/upgrades */
+	/**
+	 * 12/2014: Legacy (now use evidenceSubObject) -- https://stripe.com/docs/upgrades
+	 */
 	@Deprecated
 	String evidence;
-	/** 12/2014: Legacy (now use evidenceDetails.dueBy) -- https://stripe.com/docs/upgrades */
+	/**
+	 * 12/2014: Legacy (now use evidenceDetails.dueBy) -- https://stripe.com/docs/upgrades
+	 */
 	@Deprecated
 	Long evidenceDueBy;
 
@@ -129,6 +135,7 @@ public class Dispute extends APIResource implements HasId {
 	public Map<String, String> getMetadata() {
 		return metadata;
 	}
+
 	public void setMetadata(Map<String, String> metadata) {
 		this.metadata = metadata;
 	}
@@ -136,6 +143,7 @@ public class Dispute extends APIResource implements HasId {
 	public String getReason() {
 		return reason;
 	}
+
 	public void setReason(String reason) {
 		this.reason = reason;
 	}
@@ -160,8 +168,7 @@ public class Dispute extends APIResource implements HasId {
 	}
 
 	/**
-	 * @deprecated
-	 * Use `balance_transactions` field
+	 * @deprecated Use `balance_transactions` field
 	 */
 	@Deprecated
 	public String getBalanceTransaction() {
@@ -169,8 +176,7 @@ public class Dispute extends APIResource implements HasId {
 	}
 
 	/**
-	 * @deprecated
-	 * Use `balance_transactions` field
+	 * @deprecated Use `balance_transactions` field
 	 */
 	@Deprecated
 	public void setBalanceTransaction(String balanceTransaction) {
@@ -178,8 +184,7 @@ public class Dispute extends APIResource implements HasId {
 	}
 
 	/**
-	 * @deprecated
-	 * Use evidenceSubObject (https://stripe.com/docs/upgrades#2014-12-08)
+	 * @deprecated Use evidenceSubObject (https://stripe.com/docs/upgrades#2014-12-08)
 	 */
 	@Deprecated
 	public String getEvidence() {
@@ -187,8 +192,7 @@ public class Dispute extends APIResource implements HasId {
 	}
 
 	/**
-	 * @deprecated
-	 * Use evidenceSubObject (https://stripe.com/docs/upgrades#2014-12-08)
+	 * @deprecated Use evidenceSubObject (https://stripe.com/docs/upgrades#2014-12-08)
 	 */
 	@Deprecated
 	public void setEvidence(String evidence) {
@@ -196,8 +200,7 @@ public class Dispute extends APIResource implements HasId {
 	}
 
 	/**
-	 * @deprecated
-	 * Use evidenceDetails.dueBy (https://stripe.com/docs/upgrades#2014-12-08)
+	 * @deprecated Use evidenceDetails.dueBy (https://stripe.com/docs/upgrades#2014-12-08)
 	 */
 	@Deprecated
 	public Long getEvidenceDueBy() {
@@ -205,8 +208,7 @@ public class Dispute extends APIResource implements HasId {
 	}
 
 	/**
-	 * @deprecated
-	 * Use evidenceDetails.dueBy (https://stripe.com/docs/upgrades#2014-12-08)
+	 * @deprecated Use evidenceDetails.dueBy (https://stripe.com/docs/upgrades#2014-12-08)
 	 */
 	@Deprecated
 	public void setEvidenceDueBy(Long evidenceDueBy) {

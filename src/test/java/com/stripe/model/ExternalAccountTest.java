@@ -59,10 +59,10 @@ public class ExternalAccountTest extends BaseStripeTest {
 		stubNetwork(DeletedExternalAccount.class, "{\"id\": \"extacct_123\", \"object\": \"unknown_external_account\"}");
 		ea.delete();
 		verifyRequest(
-			APIResource.RequestMethod.DELETE,
-			DeletedExternalAccount.class,
-			"https://api.stripe.com/v1/customers/cus_123/sources/extacct_123",
-			null, APIResource.RequestType.NORMAL, RequestOptions.getDefault()
+				APIResource.RequestMethod.DELETE,
+				DeletedExternalAccount.class,
+				"https://api.stripe.com/v1/customers/cus_123/sources/extacct_123",
+				null, APIResource.RequestType.NORMAL, RequestOptions.getDefault()
 		);
 	}
 
@@ -82,9 +82,9 @@ public class ExternalAccountTest extends BaseStripeTest {
 		params.put("amounts", amounts);
 		bankAccount.verify(params);
 		verifyPost(
-		    ExternalAccount.class,
-		    "https://api.stripe.com/v1/customers/cus_123/sources/extacct_123/verify",
-		    params
+				ExternalAccount.class,
+				"https://api.stripe.com/v1/customers/cus_123/sources/extacct_123/verify",
+				params
 		);
 	}
 

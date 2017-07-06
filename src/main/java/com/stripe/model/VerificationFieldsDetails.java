@@ -1,6 +1,7 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
+
 import java.util.List;
 
 public final class VerificationFieldsDetails extends StripeObject {
@@ -39,6 +40,6 @@ public final class VerificationFieldsDetails extends StripeObject {
 		if (additional != null ? !additional.equals(verificationFieldsDetails.additional) : verificationFieldsDetails.additional != null) {
 			return false;
 		}
-        return minimum != null ? minimum.equals(verificationFieldsDetails.minimum) : verificationFieldsDetails.minimum == null;
-    }
+		return minimum != null ? minimum.equals(verificationFieldsDetails.minimum) : verificationFieldsDetails.minimum == null;
+	}
 }

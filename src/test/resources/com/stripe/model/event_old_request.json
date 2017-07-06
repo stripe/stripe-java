@@ -1,10 +1,10 @@
 {
-  "created":1326853478,
-  "livemode":false,
-  "id":"evt_00000000000000",
-  "type":"account.updated",
-  "object":"event",
-  "data":{
+  "created": 1326853478,
+  "livemode": false,
+  "id": "evt_00000000000000",
+  "type": "account.updated",
+  "object": "event",
+  "data": {
   },
-  "request":"req_Ait4gLD2CQhStB"
+  "request": "req_Ait4gLD2CQhStB"
 }

@@ -158,6 +158,7 @@ public class Coupon extends APIResource implements MetadataStore<Coupon>, HasId 
 	public Coupon update(Map<String, Object> params, String apiKey) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
 		return update(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public Coupon update(Map<String, Object> params, RequestOptions options) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
 		return request(RequestMethod.POST, instanceURL(Coupon.class, this.id), params, Coupon.class, options);
 	}
@@ -168,6 +169,7 @@ public class Coupon extends APIResource implements MetadataStore<Coupon>, HasId 
 			APIConnectionException, CardException, APIException {
 		return create(params, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public static Coupon create(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -180,6 +182,7 @@ public class Coupon extends APIResource implements MetadataStore<Coupon>, HasId 
 			APIConnectionException, CardException, APIException {
 		return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public static Coupon retrieve(String id, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -231,6 +234,7 @@ public class Coupon extends APIResource implements MetadataStore<Coupon>, HasId 
 			APIException {
 		return delete(RequestOptions.builder().setApiKey(apiKey).build());
 	}
+
 	public DeletedCoupon delete(RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
