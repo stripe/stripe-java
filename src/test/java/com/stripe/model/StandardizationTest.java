@@ -87,24 +87,14 @@ public class StandardizationTest {
 				if (parameters.isEmpty()) {
 					continue;
 				}
-				Parameter lastParam = parameters.get(parameters.size() - 1);
-				Class<?> finalParamType = lastParam.getType().getRawType();
 
 				// Skip methods that have exactly one param which is a map.
-				if (Map.class.equals(finalParamType) && parameters.size() == 1) {
+				if (parameters.size() == 1) {
 					continue;
 				}
 
-				// Skip `public static Foo retrieve(String id) {...` helper methods
-				if (String.class.equals(finalParamType) && parameters.size() == 1 && "retrieve".equals(method.getName())) {
-					continue;
-				}
-
-				// Skip the `public static Card createCard(String id) {...` helper method on Customer.
-				if (String.class.equals(finalParamType) && parameters.size() == 1
-						&& ("createCard".equals(method.getName()) || "createBankAccount".equals(method.getName()))) {
-					continue;
-				}
+				Parameter lastParam = parameters.get(parameters.size() - 1);
+				Class<?> finalParamType = lastParam.getType().getRawType();
 
 				if (RequestOptions.class.isAssignableFrom(finalParamType)) {
 					continue;
