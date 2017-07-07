@@ -7,6 +7,8 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.params.CreateTransfer;
+import com.stripe.params.UpdateTransfer;
 
 import java.util.List;
 import java.util.Map;
@@ -540,5 +542,29 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 			APIConnectionException, CardException, APIException {
 		String url = String.format("%s%s", instanceURL(Transfer.class, this.getId()), "/transactions");
 		return requestCollection(url, params, TransferTransactionCollection.class, options);
+	}
+
+	public static Transfer create(CreateTransfer params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return create(params, (RequestOptions) null);
+	}
+
+	public static Transfer create(CreateTransfer params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return create(params.toMap(), options);
+	}
+
+	public Transfer update(UpdateTransfer params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params, (RequestOptions) null);
+	}
+
+	public Transfer update(UpdateTransfer params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params.toMap(), options);
 	}
 }
