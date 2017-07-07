@@ -6,6 +6,9 @@ import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.RequestOptions;
+import com.stripe.params.CreateSource;
+import com.stripe.params.UpdateSource;
+import com.stripe.params.VerifySource;
 
 import java.io.IOException;
 import java.util.Map;
@@ -207,5 +210,41 @@ public class Source extends ExternalAccount {
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.POST, this.getSourceInstanceURL(), params, Source.class, options);
+	}
+
+	public static Source create(CreateSource params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return create(params, (RequestOptions) null);
+	}
+
+	public static Source create(CreateSource params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return create(params.toMap(), options);
+	}
+
+	public Source verify(VerifySource params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return verify(params, (RequestOptions) null);
+	}
+
+	public Source verify(VerifySource params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return verify(params.toMap(), options);
+	}
+
+	public Source update(UpdateSource params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params, (RequestOptions) null);
+	}
+
+	public Source update(UpdateSource params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params.toMap(), options);
 	}
 }
