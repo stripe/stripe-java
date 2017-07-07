@@ -10,6 +10,7 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.params.CreateThreeDSecure;
 
 import java.util.Map;
 
@@ -139,5 +140,17 @@ public class ThreeDSecure extends APIResource implements HasId {
 			return String.format("%s/%s", getClassURL(), id);
 		}
 		return null;
+	}
+
+	public static ThreeDSecure create(CreateThreeDSecure params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return create(params, (RequestOptions) null);
+	}
+
+	public static ThreeDSecure create(CreateThreeDSecure params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return create(params.toMap(), options);
 	}
 }
