@@ -7,6 +7,8 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.params.CreateCustomer;
+import com.stripe.params.UpdateCustomer;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -581,4 +583,28 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 				instanceURL(Customer.class, this.id)), null, Discount.class, options);
 	}
 
+
+	public static Customer create(CreateCustomer params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return create(params, (RequestOptions) null);
+	}
+
+	public static Customer create(CreateCustomer params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return create(params.toMap(), options);
+	}
+
+	public Customer update(UpdateCustomer params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params, (RequestOptions) null);
+	}
+
+	public Customer update(UpdateCustomer params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params.toMap(), options);
+	}
 }
