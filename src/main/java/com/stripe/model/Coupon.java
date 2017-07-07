@@ -7,6 +7,8 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.params.CreateCoupon;
+import com.stripe.params.UpdateCoupon;
 
 import java.util.Map;
 
@@ -239,5 +241,29 @@ public class Coupon extends APIResource implements MetadataStore<Coupon>, HasId 
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return request(RequestMethod.DELETE, instanceURL(Coupon.class, this.id), null, DeletedCoupon.class, options);
+	}
+
+	public static Coupon create(CreateCoupon params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return create(params, (RequestOptions) null);
+	}
+
+	public static Coupon create(CreateCoupon params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return create(params.toMap(), options);
+	}
+
+	public Coupon update(UpdateCoupon params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params, (RequestOptions) null);
+	}
+
+	public Coupon update(UpdateCoupon params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params.toMap(), options);
 	}
 }
