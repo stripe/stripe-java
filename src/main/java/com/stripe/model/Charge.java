@@ -583,7 +583,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	public Charge capture() throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return this.capture(null, (RequestOptions) null);
+		return this.capture((Map<String, Object>) null, (RequestOptions) null);
 	}
 
 	@Deprecated
@@ -727,7 +727,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	public Charge capture(RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return this.capture(null, options);
+		return this.capture((Map<String, Object>) null, options);
 	}
 
 	@Deprecated

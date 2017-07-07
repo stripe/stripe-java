@@ -92,7 +92,7 @@ public class ExternalAccountTest extends BaseStripeTest {
 	public void testManagedAccountHasAvailablePayoutMethods() throws StripeException, IOException {
 		stubNetwork(Account.class, resource("managed_account.json"));
 
-		Account account = Account.create(null);
+		Account account = Account.create(new HashMap<String, Object>());
 
 		assertTrue(account.getManaged());
 

@@ -504,7 +504,7 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 	public Invoice pay(RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return pay(null, options);
+		return pay((Map<String, Object>) null, options);
 	}
 
 	public Invoice pay(Map<String, Object> params, RequestOptions options) throws AuthenticationException,
