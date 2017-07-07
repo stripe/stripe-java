@@ -7,6 +7,8 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.params.CreateSubscription;
+import com.stripe.params.UpdateSubscription;
 
 import java.util.Map;
 
@@ -343,5 +345,29 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		request(RequestMethod.DELETE, String.format("%s/discount", instanceURL(Subscription.class, id)), null, Discount.class, options);
+	}
+
+	public static Subscription create(CreateSubscription params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return create(params, (RequestOptions) null);
+	}
+
+	public static Subscription create(CreateSubscription params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return create(params.toMap(), options);
+	}
+
+	public Subscription update(UpdateSubscription params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params, (RequestOptions) null);
+	}
+
+	public Subscription update(UpdateSubscription params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params.toMap(), options);
 	}
 }
