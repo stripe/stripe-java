@@ -7,6 +7,9 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.*;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.params.CreateAccount;
+import com.stripe.params.RejectAccount;
+import com.stripe.params.UpdateAccount;
 
 public class Account extends APIResource implements HasId, MetadataStore<Account> {
 	String id;
@@ -408,5 +411,41 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 		public String getSecret() {
 			return secret;
 		}
+	}
+
+	public Account reject(RejectAccount params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return reject(params, (RequestOptions) null);
+	}
+
+	public Account reject(RejectAccount params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return reject(params.toMap(), options);
+	}
+
+	public static Account create(CreateAccount params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return create(params, (RequestOptions) null);
+	}
+
+	public static Account create(CreateAccount params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return create(params.toMap(), options);
+	}
+
+	public Account update(UpdateAccount params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params, (RequestOptions) null);
+	}
+
+	public Account update(UpdateAccount params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params.toMap(), options);
 	}
 }
