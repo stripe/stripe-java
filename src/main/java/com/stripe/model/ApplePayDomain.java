@@ -8,6 +8,7 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.params.CreateApplePayDomain;
 
 import java.util.Map;
 
@@ -115,5 +116,17 @@ public class ApplePayDomain extends APIResource implements HasId {
 			return String.format("%s/%s", getClassURL(), id);
 		}
 		return null;
+	}
+
+	public static ApplePayDomain create(CreateApplePayDomain params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return create(params, (RequestOptions) null);
+	}
+
+	public static ApplePayDomain create(CreateApplePayDomain params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return create(params.toMap(), options);
 	}
 }
