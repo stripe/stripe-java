@@ -9,6 +9,8 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.params.CreateSKU;
+import com.stripe.params.UpdateSKU;
 
 
 public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
@@ -234,5 +236,29 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.POST, instanceURL(SKU.class, this.id), params, SKU.class, options);
+	}
+
+	public static SKU create(CreateSKU params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return create(params, (RequestOptions) null);
+	}
+
+	public static SKU create(CreateSKU params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return create(params.toMap(), options);
+	}
+
+	public SKU update(UpdateSKU params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params, (RequestOptions) null);
+	}
+
+	public SKU update(UpdateSKU params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params.toMap(), options);
 	}
 }
