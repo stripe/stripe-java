@@ -4,18 +4,20 @@ import com.stripe.Stripe;
 
 public class RequestOptions {
 	public static RequestOptions getDefault() {
-		return new RequestOptions(Stripe.apiKey, Stripe.apiVersion, null, null, Stripe.getConnectTimeout(), Stripe.getReadTimeout());
+		return new RequestOptions(Stripe.apiKey, Stripe.clientId, Stripe.apiVersion, null, null, Stripe.getConnectTimeout(), Stripe.getReadTimeout());
 	}
 
 	private final String apiKey;
+	private final String clientId;
 	private final String stripeVersion;
 	private final String idempotencyKey;
 	private final String stripeAccount;
 	private final int connectTimeout;
 	private final int readTimeout;
 
-	private RequestOptions(String apiKey, String stripeVersion, String idempotencyKey, String stripeAccount, int connectTimeout, int readTimeout) {
+	private RequestOptions(String apiKey, String clientId, String stripeVersion, String idempotencyKey, String stripeAccount, int connectTimeout, int readTimeout) {
 		this.apiKey = apiKey;
+		this.clientId = clientId;
 		this.stripeVersion = stripeVersion;
 		this.idempotencyKey = idempotencyKey;
 		this.stripeAccount = stripeAccount;
@@ -25,6 +27,10 @@ public class RequestOptions {
 
 	public String getApiKey() {
 		return apiKey;
+	}
+
+	public String getClientId() {
+		return clientId;
 	}
 
 	public String getStripeVersion() {
@@ -57,6 +63,9 @@ public class RequestOptions {
 		if (apiKey != null ? !apiKey.equals(that.apiKey) : that.apiKey != null) {
 			return false;
 		}
+		if (clientId != null ? !clientId.equals(that.clientId) : that.clientId != null) {
+			return false;
+		}
 		if (idempotencyKey != null ? !idempotencyKey.equals(that.idempotencyKey) : that.idempotencyKey != null) {
 			return false;
 		}
@@ -74,6 +83,7 @@ public class RequestOptions {
 	@Override
 	public int hashCode() {
 		int result = apiKey != null ? apiKey.hashCode() : 0;
+		result = 31 * result + (clientId != null ? clientId.hashCode() : 0);
 		result = 31 * result + (stripeVersion != null ? stripeVersion.hashCode() : 0);
 		result = 31 * result + (idempotencyKey != null ? idempotencyKey.hashCode() : 0);
 		result = 31 * result + readTimeout;
@@ -91,6 +101,7 @@ public class RequestOptions {
 
 	public static final class RequestOptionsBuilder {
 		private String apiKey;
+		private String clientId;
 		private String stripeVersion;
 		private String idempotencyKey;
 		private String stripeAccount;
@@ -99,11 +110,16 @@ public class RequestOptions {
 
 		public RequestOptionsBuilder() {
 			this.apiKey = Stripe.apiKey;
+			this.clientId = Stripe.clientId;
 			this.stripeVersion = Stripe.apiVersion;
 		}
 
 		public String getApiKey() {
 			return apiKey;
+		}
+
+		public String getClientId() {
+			return clientId;
 		}
 
 		public RequestOptionsBuilder setApiKey(String apiKey) {
@@ -190,6 +206,7 @@ public class RequestOptions {
 		public RequestOptions build() {
 			return new RequestOptions(
 					normalizeApiKey(this.apiKey),
+					normalizeClientId(this.clientId),
 					normalizeStripeVersion(this.stripeVersion),
 					normalizeIdempotencyKey(this.idempotencyKey),
 					normalizeStripeAccount(this.stripeAccount),
@@ -206,6 +223,18 @@ public class RequestOptions {
 		String normalized = apiKey.trim();
 		if (normalized.isEmpty()) {
 			throw new InvalidRequestOptionsException("Empty API key specified!");
+		}
+		return normalized;
+	}
+
+	private static String normalizeClientId(String clientId) {
+		// null client_ids are considered "valid"
+		if (clientId == null) {
+			return null;
+		}
+		String normalized = clientId.trim();
+		if (normalized.isEmpty()) {
+			throw new InvalidRequestOptionsException("Empty client_id specified!");
 		}
 		return normalized;
 	}

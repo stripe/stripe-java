@@ -116,6 +116,16 @@ public class BaseStripeTest {
 				Mockito.any(RequestOptions.class))).thenReturn(APIResource.GSON.fromJson(response, clazz));
 	}
 
+	public static <T> void stubOAuth(Class<T> clazz, String response) throws StripeException {
+		when(networkMock.oAuthRequest(
+				Mockito.any(APIResource.RequestMethod.class),
+				Mockito.anyString(),
+				Mockito.<Map<String, Object>>any(),
+				Mockito.<Class<T>>any(),
+				Mockito.any(APIResource.RequestType.class),
+				Mockito.any(RequestOptions.class))).thenReturn(APIResource.GSON.fromJson(response, clazz));
+	}
+
 	public static class ParamMapMatcher extends ArgumentMatcher<Map<String, Object>> {
 		private Map<String, Object> other;
 

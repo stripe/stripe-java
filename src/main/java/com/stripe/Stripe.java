@@ -9,10 +9,12 @@ public abstract class Stripe {
 
 	public static final String UPLOAD_API_BASE = "https://uploads.stripe.com";
 	public static final String LIVE_API_BASE = "https://api.stripe.com";
+	public static final String CONNECT_API_BASE = "https://connect.stripe.com";
 	public static final String VERSION = "5.7.1";
 
 	public static volatile String apiKey;
 	public static volatile String apiVersion;
+	public static volatile String clientId;
 
 	// Note that URLConnection reserves the value of 0 to mean "infinite
 	// timeout", so we use -1 here to represent an unset value which should
@@ -21,6 +23,7 @@ public abstract class Stripe {
 	private static volatile int readTimeout = -1;
 
 	private static volatile String apiBase = LIVE_API_BASE;
+	private static volatile String connectBase = CONNECT_API_BASE;
 	private static volatile Proxy connectionProxy = null;
 	private static volatile PasswordAuthentication proxyCredential = null;
 
@@ -35,6 +38,19 @@ public abstract class Stripe {
 
 	public static String getApiBase() {
 		return apiBase;
+	}
+
+	/**
+	 * (FOR TESTING ONLY) If you'd like your OAuth requests to hit your own
+	 * (mocked) server, you can set this up here by overriding the base Connect
+	 * URL.
+	 */
+	public static void overrideConnectBase(final String overriddenConnectBase) {
+		connectBase = overriddenConnectBase;
+	}
+
+	public static String getConnectBase() {
+		return connectBase;
 	}
 
 	/**
