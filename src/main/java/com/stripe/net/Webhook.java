@@ -4,6 +4,7 @@ import com.stripe.exception.SignatureVerificationException;
 import com.stripe.model.Event;
 import com.stripe.model.StripeObject;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 import java.util.List;
 import java.security.InvalidKeyException;
@@ -154,7 +155,7 @@ public final class Webhook {
 		 * @param secret  the secret used to generate the signature.
 		 * @return the signature as a string.
 		 */
-		private static String computeSignature(String payload, String secret) throws NoSuchAlgorithmException, InvalidKeyException {
+		private static String computeSignature(String payload, String secret) throws UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException {
 			return Util.computeHmacSHA256(secret, payload);
 		}
 	}
@@ -167,10 +168,10 @@ public final class Webhook {
 		 * @param message the message.
 		 * @return the code as a string.
 		 */
-		public static String computeHmacSHA256(String key, String message) throws NoSuchAlgorithmException, InvalidKeyException {
+		public static String computeHmacSHA256(String key, String message) throws UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException {
 			Mac hasher = Mac.getInstance("HmacSHA256");
-			hasher.init(new SecretKeySpec(key.getBytes(), "HmacSHA256"));
-			byte[] hash = hasher.doFinal(message.getBytes());
+			hasher.init(new SecretKeySpec(key.getBytes("UTF8"), "HmacSHA256"));
+			byte[] hash = hasher.doFinal(message.getBytes("UTF8"));
 			String result = "";
 			for (byte b : hash) {
 				result += Integer.toString((b & 0xff) + 0x100, 16).substring(1);
