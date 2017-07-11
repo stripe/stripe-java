@@ -7,6 +7,7 @@ import com.stripe.model.StripeObject;
 import java.util.ArrayList;
 import java.util.List;
 import java.security.InvalidKeyException;
+import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 
 import javax.crypto.Mac;
@@ -181,11 +182,6 @@ public final class Webhook {
 		/**
 		 * Compares two strings for equality. The time taken is independent of the
 		 * number of characters that match.
-		 * <p>
-		 * Java actually has MessageDigest.isEqual() for this, but the
-		 * implementation in very old Java 6 versions does not protect against
-		 * timing attacks. Once we drop support for Java 6, we'll be able to just
-		 * use MessageDigest.isEqual().
 		 *
 		 * @param a one of the strings to compare.
 		 * @param b the other string to compare.
@@ -195,15 +191,7 @@ public final class Webhook {
 			byte[] digesta = a.getBytes();
 			byte[] digestb = b.getBytes();
 
-			if (digesta.length != digestb.length) {
-				return false;
-			}
-
-			int result = 0;
-			for (int i = 0; i < digesta.length; i++) {
-				result |= digesta[i] ^ digestb[i];
-			}
-			return result == 0;
+			return MessageDigest.isEqual(digesta, digestb);
 		}
 
 		/**
