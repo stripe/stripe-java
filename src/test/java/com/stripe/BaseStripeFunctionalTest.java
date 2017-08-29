@@ -25,7 +25,6 @@ public class BaseStripeFunctionalTest {
 	public static Map<String, Object> defaultBankAccountParams = new HashMap<String, Object>();
 	public static Map<String, Object> defaultRecipientParams = new HashMap<String, Object>();
 	public static Map<String, Object> defaultBitcoinReceiverParams = new HashMap<String, Object>();
-	public static Map<String, Object> defaultAlipayTokenParams = new HashMap<String, Object>();
 	public static Map<String, Object> defaultManagedAccountParams = new HashMap<String, Object>();
 	public static RequestOptions supportedRequestOptions;
 	public static StripeResponseGetter networkMock;
@@ -108,12 +107,6 @@ public class BaseStripeFunctionalTest {
 		defaultBitcoinReceiverParams.put("currency", "usd");
 		defaultBitcoinReceiverParams.put("description", "some details");
 		defaultBitcoinReceiverParams.put("email", "do+fill_now@stripe.com");
-
-		Map<String, Object> alipayParams = new HashMap<String, Object>();
-		alipayParams.put("reusable", true);
-		alipayParams.put("alipay_username", "stripe+alipay");
-		defaultAlipayTokenParams.put("alipay_account", alipayParams);
-		defaultAlipayTokenParams.put("email", "alipay+account@stripe.com");
 
 		defaultManagedAccountParams.put("managed", true);
 		defaultManagedAccountParams.put("country", "US");
