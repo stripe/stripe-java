@@ -1,3 +1,7 @@
+=== 5.8.0 2017-08-31
+
+* Add support for all OAuth actions
+
 === 5.7.1 2017-07-11
 
 * Force UTF-8 encoding for webhook signature verification
