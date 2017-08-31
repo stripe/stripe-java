@@ -40,4 +40,14 @@ public class StripeResponse {
 	public Map<String, List<String>> getResponseHeaders() {
 		return responseHeaders;
 	}
+
+	public String getRequestId() {
+		String requestId = null;
+		Map<String, List<String>> headers = getResponseHeaders();
+		List<String> requestIdList = headers == null ? null : headers.get("Request-Id");
+		if (requestIdList != null && requestIdList.size() > 0) {
+			requestId = requestIdList.get(0);
+		}
+		return requestId;
+	}
 }

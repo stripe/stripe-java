@@ -8,6 +8,13 @@ import com.stripe.exception.PermissionException;
 import com.stripe.exception.RateLimitException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.oauth.InvalidClientException;
+import com.stripe.exception.oauth.InvalidGrantException;
+//import com.stripe.exception.oauth.InvalidRequestException;
+import com.stripe.exception.oauth.InvalidScopeException;
+import com.stripe.exception.oauth.OAuthException;
+import com.stripe.exception.oauth.UnsupportedGrantTypeException;
+import com.stripe.exception.oauth.UnsupportedResponseTypeException;
 import com.stripe.model.StripeCollectionInterface;
 
 import javax.net.ssl.HttpsURLConnection;
@@ -64,6 +71,18 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 			APIResource.RequestType type,
 			RequestOptions options) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
 		return _request(method, url, params, clazz, type, options);
+	}
+
+	public <T> T oAuthRequest(
+			APIResource.RequestMethod method,
+			String url,
+			Map<String, Object> params,
+			Class<T> clazz,
+			APIResource.RequestType type,
+			RequestOptions options) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, APIException,
+			OAuthException {
+		return _oAuthRequest(method, url, params, clazz, type, options);
 	}
 
 	private static String urlEncodePair(String k, String v)
@@ -301,7 +320,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 		return flatParams;
 	}
 
-	// represents Errors returned as JSON
+	// represents regular API errors returned as JSON
+	// handleAPIError uses this class to raise the appropriate StripeException
 	private static class ErrorContainer {
 		private LiveStripeResponseGetter.Error error;
 	}
@@ -319,6 +339,14 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 		String decline_code;
 
 		String charge;
+	}
+
+	// represents OAuth API errors returned as JSON
+	// handleOAuthError uses this class to raise the appropriate OAuthException
+	private static class OAuthError {
+		String error;
+
+		String error_description;
 	}
 
 	private static String getResponseBody(InputStream responseStream)
@@ -384,11 +412,10 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 		}
 	}
 
-	private static <T> T _request(APIResource.RequestMethod method,
-								  String url, Map<String, Object> params, Class<T> clazz,
-								  APIResource.RequestType type, RequestOptions options)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
+	private static StripeResponse _rawRequest(
+			APIResource.RequestMethod method, String url, Map<String, Object> params,
+			APIResource.RequestType type, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException, APIConnectionException, APIException {
 		if (options == null) {
 			options = RequestOptions.getDefault();
 		}
@@ -430,23 +457,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 									+ "This indicates a bug in the Stripe bindings. Please contact "
 									+ "support@stripe.com for assistance.");
 			}
-			int rCode = response.responseCode;
-			String rBody = response.responseBody;
-
-			String requestId = null;
-			Map<String, List<String>> headers = response.getResponseHeaders();
-			List<String> requestIdList = headers == null ? null : headers.get("Request-Id");
-			if (requestIdList != null && requestIdList.size() > 0) {
-				requestId = requestIdList.get(0);
-			}
-
-			if (rCode < 200 || rCode >= 300) {
-				handleAPIError(rBody, rCode, requestId);
-			}
-
-			T resource = APIResource.GSON.fromJson(rBody, clazz);
-
-			return resource;
+			return response;
 		} finally {
 			if (allowedToSetTTL) {
 				if (originalDNSCacheTTL == null) {
@@ -460,6 +471,46 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 				}
 			}
 		}
+	}
+
+	private static <T> T _request(
+			APIResource.RequestMethod method, String url, Map<String, Object> params,
+			Class<T> clazz, APIResource.RequestType type, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		StripeResponse response = _rawRequest(method, url, params, type, options);
+
+		int rCode = response.getResponseCode();
+		String rBody = response.getResponseBody();
+		String requestId = response.getRequestId();
+
+		if (rCode < 200 || rCode >= 300) {
+			handleAPIError(rBody, rCode, requestId);
+		}
+
+		T resource = APIResource.GSON.fromJson(rBody, clazz);
+
+		return resource;
+	}
+
+	private static <T> T _oAuthRequest(
+			APIResource.RequestMethod method, String url, Map<String, Object> params,
+			Class<T> clazz, APIResource.RequestType type, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, APIException, OAuthException {
+		StripeResponse response = _rawRequest(method, url, params, type, options);
+
+		int rCode = response.getResponseCode();
+		String rBody = response.getResponseBody();
+		String requestId = response.getRequestId();
+
+		if (rCode < 200 || rCode >= 300) {
+			handleOAuthError(rBody, rCode, requestId);
+		}
+
+		T resource = APIResource.GSON.fromJson(rBody, clazz);
+
+		return resource;
 	}
 
 	private static StripeResponse getStripeResponse(
@@ -602,6 +653,33 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 				throw new RateLimitException(error.message, error.param, requestId, rCode, null);
 			default:
 				throw new APIException(error.message, requestId, rCode, null);
+		}
+	}
+
+	private static void handleOAuthError(String rBody, int rCode, String requestId)
+			throws InvalidClientException, InvalidGrantException,
+			com.stripe.exception.oauth.InvalidRequestException, InvalidScopeException,
+			UnsupportedGrantTypeException, UnsupportedResponseTypeException, APIException {
+		LiveStripeResponseGetter.OAuthError error = APIResource.GSON.fromJson(rBody,
+				LiveStripeResponseGetter.OAuthError.class);
+		String code = error.error;
+		String description = (error.error_description != null) ? error.error_description : code;
+
+		switch (code) {
+			case "invalid_client":
+				throw new InvalidClientException(code, description, requestId, rCode, null);
+			case "invalid_grant":
+				throw new InvalidGrantException(code, description, requestId, rCode, null);
+			case "invalid_request":
+				throw new com.stripe.exception.oauth.InvalidRequestException(code, description, requestId, rCode, null);
+			case "invalid_scope":
+				throw new InvalidScopeException(code, description, requestId, rCode, null);
+			case "unsupported_grant_type":
+				throw new UnsupportedGrantTypeException(code, description, requestId, rCode, null);
+			case "unsupported_response_type":
+				throw new UnsupportedResponseTypeException(code, description, requestId, rCode, null);
+			default:
+				throw new APIException(code, requestId, rCode, null);
 		}
 	}
 
