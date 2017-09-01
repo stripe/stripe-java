@@ -150,11 +150,7 @@ public class Source extends ExternalAccount {
 
 	public String getSourceInstanceURL()
 			throws InvalidRequestException {
-		if (this.getCustomer() != null) {
-			return String.format("%s/%s/sources/%s", classURL(Customer.class), this.getCustomer(), this.getId());
-		} else {
-			return instanceURL(Source.class, this.getId());
-		}
+		return instanceURL(Source.class, this.getId());
 	}
 
 	public static Source create(Map<String, Object> params)
@@ -207,5 +203,34 @@ public class Source extends ExternalAccount {
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.POST, this.getSourceInstanceURL(), params, Source.class, options);
+	}
+
+	public DeletedExternalAccount delete(RequestOptions options) throws
+			AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+			throw new InvalidRequestException("Source objects cannot be deleted. If you want to detach the source from a customer object, use detach().", null, null, null, null);
+	}
+
+	public Source detach()
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return detach(null, null);
+	}
+
+	public Source detach(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return detach(params, null);
+	}
+
+	public Source detach(Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		if (this.getCustomer() != null) {
+			String url = String.format("%s/%s/sources/%s", classURL(Customer.class), this.getCustomer(), this.getId());
+			return request(RequestMethod.DELETE, url, params, Source.class, options);
+		} else {
+			throw new InvalidRequestException("This source object does not appear to be currently attached to a customer object.", null, null, null, null);
+		}
 	}
 }

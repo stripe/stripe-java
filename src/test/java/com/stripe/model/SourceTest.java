@@ -7,10 +7,12 @@ import java.util.Map;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
+import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.LiveStripeResponseGetter;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.RequestOptions.RequestOptionsBuilder;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -44,6 +46,7 @@ public class SourceTest extends BaseStripeTest {
 		Source src = Source.create(params);
 
 		verifyPost(Source.class, "https://api.stripe.com/v1/sources", params);
+		verifyNoMoreInteractions(networkMock);
 	}
 
 	@Test
@@ -54,11 +57,18 @@ public class SourceTest extends BaseStripeTest {
 		verifyNoMoreInteractions(networkMock);
 	}
 
+	@Test(expected = InvalidRequestException.class)
+	public void testDelete() throws StripeException {
+		Source src = new Source();
+		src.setId("src_test_delete");
+
+		src.delete();
+	}
+
 	@Test
 	public void testVerify() throws StripeException, IOException {
-		stubNetwork(Source.class, resource("source_ach_debit.json"));
-		Source src = Source.retrieve("src_19LGIDKCFFPkgtRhhqvVrz6T");
-		verifyGet(Source.class, "https://api.stripe.com/v1/sources/src_19LGIDKCFFPkgtRhhqvVrz6T");
+		String json = resource("source_ach_debit.json");
+		Source src = APIResource.GSON.fromJson(json, Source.class);
 
 		Map params = new HashMap<String, Object>();
 		Integer[] values = {32, 45};
@@ -69,5 +79,43 @@ public class SourceTest extends BaseStripeTest {
 				"https://api.stripe.com/v1/sources/src_19LGIDKCFFPkgtRhhqvVrz6T/verify",
 				params
 		);
+		verifyNoMoreInteractions(networkMock);
+	}
+
+	@Test
+	public void testUpdate() throws StripeException {
+		Source src = new Source();
+		src.setId("src_test_update");
+
+		Map<String, String> metadata = new HashMap<String, String>();
+		metadata.put("order_id", "6735");
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("metadata", metadata);
+		src.update(params);
+
+		verifyPost(Source.class, "https://api.stripe.com/v1/sources/src_test_update", params);
+		verifyNoMoreInteractions(networkMock);
+	}
+
+	@Test
+	public void testDetachAttachedSource() throws StripeException {
+		Source src = new Source();
+		src.setId("src_test_detach");
+		src.setCustomer("cus_test");
+
+		src.detach();
+		verifyDelete(
+				Source.class,
+				"https://api.stripe.com/v1/customers/cus_test/sources/src_test_detach"
+		);
+		verifyNoMoreInteractions(networkMock);
+	}
+
+	@Test(expected = InvalidRequestException.class)
+	public void testDetachUnattachedSource() throws StripeException {
+		Source src = new Source();
+		src.setId("src_test_detach");
+
+		src.detach();
 	}
 }
