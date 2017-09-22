@@ -24,7 +24,6 @@ public class BaseStripeFunctionalTest {
 	public static Map<String, Object> defaultTokenParams = new HashMap<String, Object>();
 	public static Map<String, Object> defaultBankAccountParams = new HashMap<String, Object>();
 	public static Map<String, Object> defaultRecipientParams = new HashMap<String, Object>();
-	public static Map<String, Object> defaultBitcoinReceiverParams = new HashMap<String, Object>();
 	public static Map<String, Object> defaultManagedAccountParams = new HashMap<String, Object>();
 	public static RequestOptions supportedRequestOptions;
 	public static StripeResponseGetter networkMock;
@@ -102,11 +101,6 @@ public class BaseStripeFunctionalTest {
 		defaultRecipientParams.put("tax_id", "000000000");
 		defaultRecipientParams.put("bank_account", defaultBankAccountParams);
 		defaultRecipientParams.put("card", "tok_visa_debit");
-
-		defaultBitcoinReceiverParams.put("amount", 100);
-		defaultBitcoinReceiverParams.put("currency", "usd");
-		defaultBitcoinReceiverParams.put("description", "some details");
-		defaultBitcoinReceiverParams.put("email", "do+fill_now@stripe.com");
 
 		defaultManagedAccountParams.put("managed", true);
 		defaultManagedAccountParams.put("country", "US");

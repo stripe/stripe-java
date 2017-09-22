@@ -19,16 +19,6 @@ import static org.junit.Assert.assertTrue;
 
 public class CustomerTest extends BaseStripeFunctionalTest {
 
-	static Customer createDefaultCustomerWithDefaultBitcoinReceiver()
-			throws StripeException {
-		Customer customer = Customer.create(defaultCustomerParams);
-		BitcoinReceiver receiver = BitcoinReceiver.create(defaultBitcoinReceiverParams);
-		Map<String, Object> createParams = new HashMap<String, Object>();
-		createParams.put("source", receiver.getId());
-		customer.getSources().create(createParams);
-		return customer;
-	}
-
 	@Test
 	public void testCustomerCreate() throws StripeException {
 		Customer customer = Customer.create(defaultCustomerParams, supportedRequestOptions);
@@ -107,7 +97,11 @@ public class CustomerTest extends BaseStripeFunctionalTest {
 
 	@Test
 	public void testCustomerSourceList() throws StripeException {
-		Customer customer = createDefaultCustomerWithDefaultBitcoinReceiver();
+		Customer customer = Customer.create(defaultCustomerParams);
+
+		Map<String, Object> creationParams = new HashMap<String, Object>();
+		creationParams.put("bank_account", defaultBankAccountParams);
+		customer.createBankAccount(creationParams);
 
 		HashMap<String, Object> listParams = new HashMap<String, Object>();
 		List<ExternalAccount> customerSourceList = customer.getSources().all(listParams).getData();
@@ -115,8 +109,8 @@ public class CustomerTest extends BaseStripeFunctionalTest {
 		assertEquals(2, customerSourceList.size());
 		assert (customerSourceList.get(0) instanceof Card);
 		assertEquals("4242", ((Card) customerSourceList.get(0)).getLast4());
-		assert (customerSourceList.get(1) instanceof BitcoinReceiver);
-		assertEquals(true, ((BitcoinReceiver) customerSourceList.get(1)).getFilled());
+		assert (customerSourceList.get(1) instanceof BankAccount);
+		assertEquals("6789", ((BankAccount) customerSourceList.get(1)).getLast4());
 	}
 
 	@Test
@@ -145,23 +139,6 @@ public class CustomerTest extends BaseStripeFunctionalTest {
 	}
 
 	@Test
-	public void testCustomerSourceRetrieveBitcoinReceiver() throws StripeException {
-		Customer customer = Customer.create(new HashMap<String, Object>());
-		BitcoinReceiver receiver = BitcoinReceiver.create(defaultBitcoinReceiverParams);
-		ExternalAccountCollection customerSources = customer.getSources();
-		Map<String, Object> createParams = new HashMap<String, Object>();
-		createParams.put("source", receiver.getId());
-		customerSources.create(createParams);
-		customerSources = customerSources.all(new HashMap<String, Object>());
-		String paymentSourceId = customerSources.getData().get(0).getId();
-		ExternalAccount paymentSource = customerSources.retrieve(paymentSourceId);
-		assertNotNull(paymentSource);
-		assertEquals(paymentSourceId, paymentSource.getId());
-		assertTrue(paymentSource instanceof BitcoinReceiver);
-		assertTrue(((BitcoinReceiver) paymentSource).getFilled());
-	}
-
-	@Test
 	public void testCustomerCreateWithSource() throws StripeException {
 		HashMap<String, Object> customerCreationParams = new HashMap<String, Object>();
 		customerCreationParams.put("source", "tok_visa");
@@ -173,19 +150,6 @@ public class CustomerTest extends BaseStripeFunctionalTest {
 		assertNotNull(customer.getDefaultSource());
 		ExternalAccount card = customer.getSources().retrieve(customer.getDefaultSource());
 		assertEquals(card.getId(), customer.getDefaultSource());
-	}
-
-	@Test
-	public void testCustomerCreateSourceWithBitcoinReceiverToken() throws StripeException {
-		Customer customer = Customer.create(new HashMap<String, Object>());
-		ExternalAccountCollection customerSources = customer.getSources();
-		BitcoinReceiver receiver = BitcoinReceiver.create(defaultBitcoinReceiverParams);
-		HashMap<String, Object> createParams = new HashMap<String, Object>();
-		createParams.put("source", receiver.getId());
-		ExternalAccount paymentSource = customerSources.create(createParams);
-		assertNotNull(paymentSource);
-		assertNotNull(paymentSource.getId());
-		assert (paymentSource instanceof BitcoinReceiver);
 	}
 
 	@Test
