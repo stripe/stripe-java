@@ -1,9 +1,11 @@
 language: java
 
-jdk:
-  - openjdk7
-  - oraclejdk7
-  - oraclejdk8
+matrix:
+  include:
+    - jdk: openjdk7
+    - jdk: oraclejdk7
+      dist: precise
+    - jdk: oraclejdk8
 
 install: mvn install -Dgpg.skip=true -DskipTests
 
