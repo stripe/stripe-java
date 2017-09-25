@@ -6,6 +6,7 @@ matrix:
     - jdk: oraclejdk7
       dist: precise
     - jdk: oraclejdk8
+    - jdk: oraclejdk9
 
 install: mvn install -Dgpg.skip=true -DskipTests
 
