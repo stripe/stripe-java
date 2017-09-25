@@ -1,3 +1,7 @@
+=== 5.9.0 2017-09-25
+
+* Support Java 9 (just involves upgrading a few Maven plugins)
+
 === 5.8.0 2017-08-31
 
 * Add support for all OAuth actions
