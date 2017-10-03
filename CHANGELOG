@@ -1,3 +1,7 @@
+=== 5.9.1 2017-10-03
+
+* No longer clobber global value of DNS cache TTL if it has not been set
+
 === 5.9.0 2017-09-25
 
 * Support Java 9 (just involves upgrading a few Maven plugins)
