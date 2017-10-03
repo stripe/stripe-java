@@ -425,9 +425,18 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 		try {
 			originalDNSCacheTTL = java.security.Security
 					.getProperty(DNS_CACHE_TTL_PROPERTY_NAME);
-			// disable DNS cache
-			java.security.Security
-					.setProperty(DNS_CACHE_TTL_PROPERTY_NAME, "0");
+			// Disable the DNS cache.
+			//
+			// Unfortunately the original author of this change didn't leave a
+			// comment explaining why it was required, but presumably the worry
+			// was that cache times were being expanded to a point that was
+			// problematic for proper resolution. Various JVM's have pretty
+			// good defaults though, so if the user hasn't touched this value,
+			// don't touch it either.
+			if (originalDNSCacheTTL != null) {
+				java.security.Security
+						.setProperty(DNS_CACHE_TTL_PROPERTY_NAME, "0");
+			}
 		} catch (SecurityException se) {
 			allowedToSetTTL = false;
 		}
@@ -459,16 +468,9 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 			}
 			return response;
 		} finally {
-			if (allowedToSetTTL) {
-				if (originalDNSCacheTTL == null) {
-					// value unspecified by implementation
-					// DNS_CACHE_TTL_PROPERTY_NAME of -1 = cache forever
-					java.security.Security.setProperty(
-							DNS_CACHE_TTL_PROPERTY_NAME, "-1");
-				} else {
-					java.security.Security.setProperty(
-							DNS_CACHE_TTL_PROPERTY_NAME, originalDNSCacheTTL);
-				}
+			if (allowedToSetTTL && originalDNSCacheTTL != null) {
+				java.security.Security.setProperty(
+						DNS_CACHE_TTL_PROPERTY_NAME, originalDNSCacheTTL);
 			}
 		}
 	}
