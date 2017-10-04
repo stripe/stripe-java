@@ -10,6 +10,9 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.params.CreateOrder;
+import com.stripe.params.PayOrder;
+import com.stripe.params.UpdateOrder;
 
 public class Order extends APIResource implements HasId, MetadataStore<Order> {
 	String id;
@@ -344,5 +347,41 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
 			APIException {
 		return request(RequestMethod.POST, String.format("%s/returns",
 				instanceURL(Order.class, this.getId())), params, OrderReturn.class, options);
+	}
+
+	public Order pay(PayOrder params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return pay(params, (RequestOptions) null);
+	}
+
+	public Order pay(PayOrder params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return pay(params.toMap(), options);
+	}
+
+	public static Order create(CreateOrder params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return create(params, (RequestOptions) null);
+	}
+
+	public static Order create(CreateOrder params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return create(params.toMap(), options);
+	}
+
+	public Order update(UpdateOrder params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params, (RequestOptions) null);
+	}
+
+	public Order update(UpdateOrder params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params.toMap(), options);
 	}
 }

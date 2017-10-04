@@ -7,6 +7,7 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.params.UpdateRefund;
 
 import java.util.Map;
 
@@ -221,5 +222,17 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.POST, classURL(Refund.class), params, Refund.class, options);
+	}
+
+	public Refund update(UpdateRefund params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params, (RequestOptions) null);
+	}
+
+	public Refund update(UpdateRefund params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params.toMap(), options);
 	}
 }

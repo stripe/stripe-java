@@ -7,6 +7,9 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.params.CreateInvoice;
+import com.stripe.params.PayInvoice;
+import com.stripe.params.UpdateInvoice;
 
 import java.util.Map;
 
@@ -501,7 +504,7 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 	public Invoice pay(RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return pay(null, options);
+		return pay((Map<String, Object>) null, options);
 	}
 
 	public Invoice pay(Map<String, Object> params, RequestOptions options) throws AuthenticationException,
@@ -509,5 +512,41 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 			APIException {
 		return request(RequestMethod.POST, String.format("%s/pay",
 				instanceURL(Invoice.class, this.getId())), params, Invoice.class, options);
+	}
+
+	public Invoice pay(PayInvoice params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return pay(params, (RequestOptions) null);
+	}
+
+	public Invoice pay(PayInvoice params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return pay(params.toMap(), options);
+	}
+
+	public static Invoice create(CreateInvoice params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return create(params, (RequestOptions) null);
+	}
+
+	public static Invoice create(CreateInvoice params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return create(params.toMap(), options);
+	}
+
+	public Invoice update(UpdateInvoice params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params, (RequestOptions) null);
+	}
+
+	public Invoice update(UpdateInvoice params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params.toMap(), options);
 	}
 }

@@ -7,6 +7,8 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.params.CreateInvoiceItem;
+import com.stripe.params.UpdateInvoiceItem;
 
 import java.util.Map;
 
@@ -318,4 +320,28 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
 		return request(RequestMethod.DELETE, instanceURL(InvoiceItem.class, this.id), null, DeletedInvoiceItem.class, options);
 	}
 
+
+	public static InvoiceItem create(CreateInvoiceItem params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return create(params, (RequestOptions) null);
+	}
+
+	public static InvoiceItem create(CreateInvoiceItem params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return create(params.toMap(), options);
+	}
+
+	public InvoiceItem update(UpdateInvoiceItem params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params, (RequestOptions) null);
+	}
+
+	public InvoiceItem update(UpdateInvoiceItem params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params.toMap(), options);
+	}
 }

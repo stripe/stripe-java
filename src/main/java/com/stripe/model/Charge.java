@@ -7,6 +7,9 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.params.CaptureCharge;
+import com.stripe.params.CreateCharge;
+import com.stripe.params.UpdateCharge;
 
 import java.util.Collections;
 import java.util.Map;
@@ -580,7 +583,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	public Charge capture() throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return this.capture(null, (RequestOptions) null);
+		return this.capture((Map<String, Object>) null, (RequestOptions) null);
 	}
 
 	@Deprecated
@@ -724,7 +727,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 	public Charge capture(RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return this.capture(null, options);
+		return this.capture((Map<String, Object>) null, options);
 	}
 
 	@Deprecated
@@ -787,5 +790,41 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 			APIConnectionException, CardException, APIException {
 		Map<String, Object> params = Collections.<String, Object>singletonMap(FRAUD_DETAILS, Collections.singletonMap(FraudDetails.USER_REPORT, "safe"));
 		return this.update(params, options);
+	}
+
+	public static Charge create(CreateCharge params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return create(params, (RequestOptions) null);
+	}
+
+	public static Charge create(CreateCharge params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return create(params.toMap(), options);
+	}
+
+	public Charge update(UpdateCharge params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params, (RequestOptions) null);
+	}
+
+	public Charge update(UpdateCharge params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params.toMap(), options);
+	}
+
+	public Charge capture(CaptureCharge params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return capture(params, (RequestOptions) null);
+	}
+
+	public Charge capture(CaptureCharge params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return capture(params.toMap(), options);
 	}
 }

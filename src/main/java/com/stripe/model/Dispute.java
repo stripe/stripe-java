@@ -7,6 +7,7 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.params.UpdateDispute;
 
 import java.util.List;
 import java.util.Map;
@@ -277,5 +278,17 @@ public class Dispute extends APIResource implements HasId {
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.POST, String.format("%s/close", instanceURL(Dispute.class, this.getId())),
 				null, Dispute.class, options);
+	}
+
+	public Dispute update(UpdateDispute params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params, (RequestOptions) null);
+	}
+
+	public Dispute update(UpdateDispute params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params.toMap(), options);
 	}
 }

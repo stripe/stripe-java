@@ -7,6 +7,8 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.params.CreateSubscriptionItem;
+import com.stripe.params.UpdateSubscriptionItem;
 
 import java.util.Map;
 import java.util.List;
@@ -119,5 +121,29 @@ public class SubscriptionItem extends APIResource implements HasId {
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
 		return request(RequestMethod.DELETE, instanceURL(SubscriptionItem.class, id), null, DeletedSubscriptionItem.class, options);
+	}
+
+	public static SubscriptionItem create(CreateSubscriptionItem params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return create(params, (RequestOptions) null);
+	}
+
+	public static SubscriptionItem create(CreateSubscriptionItem params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return create(params.toMap(), options);
+	}
+
+	public SubscriptionItem update(UpdateSubscriptionItem params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params, (RequestOptions) null);
+	}
+
+	public SubscriptionItem update(UpdateSubscriptionItem params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params.toMap(), options);
 	}
 }

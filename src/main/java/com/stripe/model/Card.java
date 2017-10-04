@@ -6,6 +6,7 @@ import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.RequestOptions;
+import com.stripe.params.UpdateCard;
 
 import java.util.List;
 import java.util.Map;
@@ -331,5 +332,17 @@ public class Card extends ExternalAccount {
 		} else {
 			return null;
 		}
+	}
+
+	public Card update(UpdateCard params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params, (RequestOptions) null);
+	}
+
+	public Card update(UpdateCard params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return update(params.toMap(), options);
 	}
 }
