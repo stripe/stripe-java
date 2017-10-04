@@ -1,16 +1,17 @@
 package com.stripe.model;
 
 public final class SourceRedirectFlow extends StripeObject {
-	String url;
+	String failureReason;
 	String returnUrl;
 	String status;
+	String url;
 
-	public String getURL() {
-		return url;
+	public String getFailureReason() {
+		return failureReason;
 	}
 
-	public void setURL(String url) {
-		this.url = url;
+	public void setFailureReason(String failureReason) {
+		this.failureReason = failureReason;
 	}
 
 	public String getReturnURL() {
@@ -27,5 +28,13 @@ public final class SourceRedirectFlow extends StripeObject {
 
 	public void setStatus(String status) {
 		this.status = status;
+	}
+
+	public String getURL() {
+		return url;
+	}
+
+	public void setURL(String url) {
+		this.url = url;
 	}
 }
