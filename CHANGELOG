@@ -1,3 +1,7 @@
+=== 5.10.0 2017-10-04
+
+* Add `failure_reason` field to the source redirect flow model
+
 === 5.9.1 2017-10-03
 
 * No longer clobber global value of DNS cache TTL if it has not been set
