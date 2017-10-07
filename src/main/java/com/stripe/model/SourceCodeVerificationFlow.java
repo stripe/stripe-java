@@ -1,6 +1,6 @@
 package com.stripe.model;
 
-public final class SourceVerificationFlow extends StripeObject {
+public final class SourceCodeVerificationFlow extends StripeObject {
 	Integer attemptsRemaining;
 	String status;
 
