@@ -17,6 +17,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 public class PayoutTest extends BaseStripeTest {
@@ -46,6 +47,16 @@ public class PayoutTest extends BaseStripeTest {
 		assertEquals("card", payout.getSourceType());
 		assertEquals("paid", payout.getStatus());
 		assertEquals("bank_account", payout.getType());
+	}
+
+	@Test
+	public void testDeserializeWithExpandedDeletedBankAccount() throws StripeException, IOException {
+		String json = resource("payout_expand_deleted_bank_account.json");
+		Payout payout = APIResource.GSON.fromJson(json, Payout.class);
+
+		assertEquals("po_1BAPKEDtHb1AhhMraoSwrT29", payout.getId());
+		assertEquals("ba_18cB2uDtHb1AhhMrd08CoS4U", payout.getDestination());
+		assertTrue(payout.isDestinationDeleted());
 	}
 
 	@Test

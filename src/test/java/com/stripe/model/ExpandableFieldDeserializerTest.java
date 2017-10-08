@@ -14,6 +14,7 @@ import com.google.gson.reflect.TypeToken;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 public class ExpandableFieldDeserializerTest extends BaseStripeTest {
 
@@ -60,5 +61,19 @@ public class ExpandableFieldDeserializerTest extends BaseStripeTest {
 		assertEquals(out.getId(), "an_id_here");
 		assertEquals(out.getExpanded().id, "an_id_here");
 		assertEquals(out.getExpanded().bar, 12);
+	}
+
+	@Test
+	public void deserializeDeletedObject() throws IOException {
+		Map<String, Object> anObject = new HashMap<String, Object>();
+		anObject.put("id", "id_deleted");
+		anObject.put("deleted", true);
+		String json = gson.toJson(anObject);
+
+		//Gson also uses TypeTokens internally to get around Type Erasure for generic types, simulate that here:
+		ExpandableField<TestObject> out = gson.fromJson(json, new TypeToken<ExpandableField<TestObject>>() {
+		}.getType());
+		assertEquals(out.getId(), "id_deleted");
+		assertTrue(out.isDeleted());
 	}
 }
