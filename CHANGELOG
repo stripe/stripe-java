@@ -3,6 +3,9 @@
 * [#410] Rename "verification" to "code verification" for sources (should have
   been unused up to this point)
 * [#412] Add support for detaching sources from customers
+* Note that some minor versions (5.11 through 5.20) were accidentally skipped
+  for this release. I'm leaving as is to minimize churn, but please don't be
+  alarmed!
 
 === 5.10.0 2017-10-04
 
