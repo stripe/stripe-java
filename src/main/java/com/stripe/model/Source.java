@@ -13,19 +13,18 @@ import java.util.Map;
 public class Source extends ExternalAccount {
 	Long amount;
 	String clientSecret;
+	SourceCodeVerificationFlow codeVerification;
 	Long created;
 	String currency;
 	String flow;
 	Boolean livemode;
 	SourceOwner owner;
-	String status;
-	String usage;
-	String type;
-
-	// Flow-specific properties
 	SourceReceiverFlow receiver;
 	SourceRedirectFlow redirect;
-	SourceVerificationFlow verification;
+	String statementDescriptor;
+	String status;
+	String type;
+	String usage;
 
 	// Type-specific properties
 	Map<String, String> typeData;
@@ -44,6 +43,14 @@ public class Source extends ExternalAccount {
 
 	public void setClientSecret(String clientSecret) {
 		this.clientSecret = clientSecret;
+	}
+
+	public SourceCodeVerificationFlow getCodeVerification() {
+		return codeVerification;
+	}
+
+	public void setCodeVerification(SourceCodeVerificationFlow codeVerification) {
+		this.codeVerification = codeVerification;
 	}
 
 	public Long getCreated() {
@@ -86,6 +93,30 @@ public class Source extends ExternalAccount {
 		this.owner = owner;
 	}
 
+	public SourceReceiverFlow getReceiver() {
+		return receiver;
+	}
+
+	public void setReceiver(SourceReceiverFlow receiver) {
+		this.receiver = receiver;
+	}
+
+	public SourceRedirectFlow getRedirect() {
+		return redirect;
+	}
+
+	public void setRedirect(SourceRedirectFlow redirect) {
+		this.redirect = redirect;
+	}
+
+	public String getStatementDescriptor() {
+		return statementDescriptor;
+	}
+
+	public void setStatementDescriptor(String statementDescriptor) {
+		this.statementDescriptor = statementDescriptor;
+	}
+
 	public String getStatus() {
 		return status;
 	}
@@ -108,32 +139,6 @@ public class Source extends ExternalAccount {
 
 	public void setType(String type) {
 		this.type = type;
-	}
-
-	// Flow-specific getters/setters
-
-	public SourceReceiverFlow getReceiver() {
-		return receiver;
-	}
-
-	public void setReceiver(SourceReceiverFlow receiver) {
-		this.receiver = receiver;
-	}
-
-	public SourceRedirectFlow getRedirect() {
-		return redirect;
-	}
-
-	public void setRedirect(SourceRedirectFlow redirect) {
-		this.redirect = redirect;
-	}
-
-	public SourceVerificationFlow getVerification() {
-		return verification;
-	}
-
-	public void setVerification(SourceVerificationFlow verification) {
-		this.verification = verification;
 	}
 
 	// Type-specific getters/setters
