@@ -1,0 +1,122 @@
+{
+  "id": "acct_1032D82eZvKYlo2C",
+  "object": "account",
+  "business_logo": null,
+  "business_name": "Stripe Test Managed Account",
+  "business_url": null,
+  "charges_enabled": true,
+  "country": "US",
+  "debit_negative_balances": false,
+  "decline_charge_on": {
+    "avs_failure": false,
+    "cvc_failure": false
+  },
+  "default_currency": "usd",
+  "details_submitted": true,
+  "display_name": null,
+  "email": null,
+  "external_accounts": {
+    "object": "list",
+    "data": [
+      {
+        "id": "card_175MxA2iMoKf4jyWCUGYPWfx",
+        "object": "card",
+        "account": "acct_1032D82eZvKYlo2C",
+        "address_city": null,
+        "address_country": null,
+        "address_line1": null,
+        "address_line1_check": null,
+        "address_line2": null,
+        "address_state": null,
+        "address_zip": null,
+        "address_zip_check": null,
+        "available_payout_methods": [
+          "standard",
+          "instant"
+        ],
+        "brand": "Visa",
+        "country": "US",
+        "currency": "usd",
+        "cvc_check": "pass",
+        "default_for_currency": true,
+        "dynamic_last4": null,
+        "exp_month": 1,
+        "exp_year": 2018,
+        "fingerprint": "mmN9BeTLCWlGtlYM",
+        "funding": "debit",
+        "last4": "5556",
+        "metadata": {},
+        "name": null,
+        "tokenization_method": null
+      }
+    ],
+    "has_more": false,
+    "total_count": 1,
+    "url": "/v1/accounts/acct_1032D82eZvKYlo2C/external_accounts"
+  },
+  "keys": {
+    "secret": "sk_test_SECRET",
+    "publishable": "pk_test_PUBLISHABLE"
+  },
+  "legal_entity": {
+    "address": {
+      "city": "San Francisco",
+      "country": "US",
+      "line1": "185 Berry Street",
+      "line2": "Suite 550",
+      "postal_code": "94107",
+      "state": "CA"
+    },
+    "business_name": "Stripe Test Managed Account",
+    "business_tax_id_provided": true,
+    "dob": {
+      "day": 1,
+      "month": 1,
+      "year": 1901
+    },
+    "first_name": "John",
+    "last_name": "Doe",
+    "personal_address": {
+      "city": null,
+      "country": "US",
+      "line1": null,
+      "line2": null,
+      "postal_code": null,
+      "state": null
+    },
+    "personal_id_number_provided": false,
+    "ssn_last_4_provided": true,
+    "type": "company",
+    "verification": {
+      "details": null,
+      "details_code": null,
+      "document": null,
+      "status": "unverified"
+    }
+  },
+  "managed": true,
+  "metadata": {},
+  "product_description": null,
+  "statement_descriptor": null,
+  "support_email": null,
+  "support_phone": null,
+  "timezone": "Etc/UTC",
+  "tos_acceptance": {
+    "date": 1491846910,
+    "ip": "1.2.3.4",
+    "user_agent": null
+  },
+  "verification": {
+    "disabled_reason": null,
+    "due_by": null,
+    "fields_needed": [
+      "legal_entity.personal_id_number"
+    ]
+  },
+  "transfers_enabled": true,
+  "transfer_schedule": {
+    "delay_days": 2,
+    "interval": "daily"
+  },
+  "transfer_statement_descriptor": null
+}

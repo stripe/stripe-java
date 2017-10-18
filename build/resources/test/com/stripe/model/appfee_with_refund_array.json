@@ -1,0 +1,32 @@
+{
+  "id": "fee_4UNPiq6HoYlPuI",
+  "object": "application_fee",
+  "created": 1406594401,
+  "livemode": false,
+  "amount": 100,
+  "currency": "usd",
+  "refunded": false,
+  "amount_refunded": 0,
+  "refunds": [
+    {
+      "id": "fr_104Buu4hAU1NpT8JMBAc564Q",
+      "amount": 100,
+      "currency": "usd",
+      "created": 1402336848,
+      "object": "fee_refund",
+      "balance_transaction": "txn_104Buu4hAU1NpT8JMWc89QlB"
+    },
+    {
+      "id": "fr_104Buu4hAU1NpT8JXuwJMRek",
+      "amount": 100,
+      "currency": "usd",
+      "created": 1402336856,
+      "object": "fee_refund",
+      "balance_transaction": "txn_104Buu4hAU1NpT8Jj0rAGDv6"
+    }
+  ],
+  "balance_transaction": "txn_104AbT4zxjIswmc21KLRdopf",
+  "account": "acct_104AVU4zxjIswmc2",
+  "application": "ca_4UNPzRJlp7joZhEYfqkhc02MYvNFHJEX",
+  "charge": "ch_14FyW04zxjIswmc2xXkpKViy"
+}

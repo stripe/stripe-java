@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.stripe.functional.ApplePayDomainTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2017-10-18T17:31:39" hostname="st-mrmcduff1.local" time="1.854">
+  <properties/>
+  <testcase name="testApplePayDomainCreate" classname="com.stripe.functional.ApplePayDomainTest" time="0.446"/>
+  <testcase name="testApplePayDomainRetrieve" classname="com.stripe.functional.ApplePayDomainTest" time="0.722"/>
+  <testcase name="testApplePayDomainList" classname="com.stripe.functional.ApplePayDomainTest" time="0.093"/>
+  <testcase name="testApplePayDomainDelete" classname="com.stripe.functional.ApplePayDomainTest" time="0.592"/>
+  <testcase name="testAPIBase" classname="com.stripe.functional.ApplePayDomainTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

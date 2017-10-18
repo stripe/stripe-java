@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.stripe.model.OrderTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2017-10-18T17:35:39" hostname="st-mrmcduff1.local" time="0.007">
+  <properties/>
+  <testcase name="testRetrieve" classname="com.stripe.model.OrderTest" time="0.001"/>
+  <testcase name="testCreate" classname="com.stripe.model.OrderTest" time="0.0"/>
+  <testcase name="testDeserializeExpansions" classname="com.stripe.model.OrderTest" time="0.002"/>
+  <testcase name="testList" classname="com.stripe.model.OrderTest" time="0.002"/>
+  <testcase name="testPay" classname="com.stripe.model.OrderTest" time="0.0"/>
+  <testcase name="testRetrieveWithExpand" classname="com.stripe.model.OrderTest" time="0.0"/>
+  <testcase name="testUpdate" classname="com.stripe.model.OrderTest" time="0.001"/>
+  <testcase name="testDeserializeWithExpansions" classname="com.stripe.model.OrderTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

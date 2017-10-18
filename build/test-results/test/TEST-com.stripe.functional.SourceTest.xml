@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.stripe.functional.SourceTest" tests="2" skipped="0" failures="0" errors="0" timestamp="2017-10-18T17:34:42" hostname="st-mrmcduff1.local" time="0.28">
+  <properties/>
+  <testcase name="testSourceCreateRead" classname="com.stripe.functional.SourceTest" time="0.279"/>
+  <testcase name="testAPIBase" classname="com.stripe.functional.SourceTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

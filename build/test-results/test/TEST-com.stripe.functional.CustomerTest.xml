@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.stripe.functional.CustomerTest" tests="28" skipped="0" failures="0" errors="0" timestamp="2017-10-18T17:32:05" hostname="st-mrmcduff1.local" time="22.889">
+  <properties/>
+  <testcase name="testCustomerCreate" classname="com.stripe.functional.CustomerTest" time="0.506"/>
+  <testcase name="testCustomerCreateWithShippingDetails" classname="com.stripe.functional.CustomerTest" time="0.615"/>
+  <testcase name="testCustomerRetrieve" classname="com.stripe.functional.CustomerTest" time="0.511"/>
+  <testcase name="testCustomerList" classname="com.stripe.functional.CustomerTest" time="0.124"/>
+  <testcase name="testCustomerUpdate" classname="com.stripe.functional.CustomerTest" time="0.81"/>
+  <testcase name="testCustomerUpdateToBlank" classname="com.stripe.functional.CustomerTest" time="0.398"/>
+  <testcase name="testCustomerUpdateToNull" classname="com.stripe.functional.CustomerTest" time="1.123"/>
+  <testcase name="testCustomerSourceList" classname="com.stripe.functional.CustomerTest" time="0.741"/>
+  <testcase name="testCustomerSourceRetrieveCard" classname="com.stripe.functional.CustomerTest" time="0.704"/>
+  <testcase name="testCustomerSourceRetrieveWithExpand" classname="com.stripe.functional.CustomerTest" time="0.635"/>
+  <testcase name="testCustomerCreateWithSource" classname="com.stripe.functional.CustomerTest" time="0.5"/>
+  <testcase name="testCustomerSourceUpdate" classname="com.stripe.functional.CustomerTest" time="0.903"/>
+  <testcase name="testCustomerSourceDelete" classname="com.stripe.functional.CustomerTest" time="0.943"/>
+  <testcase name="testCustomerCardAddition" classname="com.stripe.functional.CustomerTest" time="2.377"/>
+  <testcase name="testCreateCardThroughCollection" classname="com.stripe.functional.CustomerTest" time="1.116"/>
+  <testcase name="testCustomerCardUpdate" classname="com.stripe.functional.CustomerTest" time="0.778"/>
+  <testcase name="testCustomerCardDelete" classname="com.stripe.functional.CustomerTest" time="1.29"/>
+  <testcase name="testCustomerBankAccountAddition" classname="com.stripe.functional.CustomerTest" time="1.496"/>
+  <testcase name="testCustomerBankAccountDelete" classname="com.stripe.functional.CustomerTest" time="1.261"/>
+  <testcase name="testCustomerDelete" classname="com.stripe.functional.CustomerTest" time="0.893"/>
+  <testcase name="testCustomerCreatePerCallAPIKey" classname="com.stripe.functional.CustomerTest" time="0.378"/>
+  <testcase name="testCustomerCreateWithPlanPerCallAPIKey" classname="com.stripe.functional.CustomerTest" time="1.134"/>
+  <testcase name="testCustomerRetrievePerCallAPIKey" classname="com.stripe.functional.CustomerTest" time="0.742"/>
+  <testcase name="testCustomerListPerCallAPIKey" classname="com.stripe.functional.CustomerTest" time="0.129"/>
+  <testcase name="testCustomerUpdatePerCallAPIKey" classname="com.stripe.functional.CustomerTest" time="0.553"/>
+  <testcase name="testCustomerDeletePerCallAPIKey" classname="com.stripe.functional.CustomerTest" time="0.686"/>
+  <testcase name="testCustomerMetadata" classname="com.stripe.functional.CustomerTest" time="1.535"/>
+  <testcase name="testAPIBase" classname="com.stripe.functional.CustomerTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

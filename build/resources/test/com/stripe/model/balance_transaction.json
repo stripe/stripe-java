@@ -1,0 +1,23 @@
+{
+  "id": "txn_1AF5AmKac2qaDcCZm8tBQt6I",
+  "object": "balance_transaction",
+  "amount": -5000,
+  "available_on": 1494288000,
+  "created": 1493747548,
+  "currency": "usd",
+  "description": "Chargeback withdrawal for ch_1AF5AlKac2qaDcCZ4Iu07uIA",
+  "fee": 1500,
+  "fee_details": [
+    {
+      "amount": 1500,
+      "application": null,
+      "currency": "usd",
+      "description": "Dispute fee",
+      "type": "stripe_fee"
+    }
+  ],
+  "net": -6500,
+  "source": "dp_1AF5AmKac2qaDcCZHvOjyrDo",
+  "status": "pending",
+  "type": "adjustment"
+}

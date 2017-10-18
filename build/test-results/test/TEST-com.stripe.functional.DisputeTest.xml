@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.stripe.functional.DisputeTest" tests="11" skipped="0" failures="0" errors="0" timestamp="2017-10-18T17:32:28" hostname="st-mrmcduff1.local" time="74.021">
+  <properties/>
+  <testcase name="testDisputedCharge" classname="com.stripe.functional.DisputeTest" time="11.56"/>
+  <testcase name="testRetrieveDispute" classname="com.stripe.functional.DisputeTest" time="11.506"/>
+  <testcase name="testUpdateDispute" classname="com.stripe.functional.DisputeTest" time="11.691"/>
+  <testcase name="testCloseDispute" classname="com.stripe.functional.DisputeTest" time="11.315"/>
+  <testcase name="testDisputeList" classname="com.stripe.functional.DisputeTest" time="0.533"/>
+  <testcase name="testFraudDetails" classname="com.stripe.functional.DisputeTest" time="2.034"/>
+  <testcase name="testCreateFileUpload" classname="com.stripe.functional.DisputeTest" time="1.499"/>
+  <testcase name="testFileUploadList" classname="com.stripe.functional.DisputeTest" time="0.49"/>
+  <testcase name="testSubmitEvidence" classname="com.stripe.functional.DisputeTest" time="11.768"/>
+  <testcase name="testSubmitOldStyleEvidence" classname="com.stripe.functional.DisputeTest" time="11.624"/>
+  <testcase name="testAPIBase" classname="com.stripe.functional.DisputeTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

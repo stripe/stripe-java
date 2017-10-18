@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.stripe.functional.TokenTest" tests="7" skipped="0" failures="0" errors="0" timestamp="2017-10-18T17:35:20" hostname="st-mrmcduff1.local" time="3.741">
+  <properties/>
+  <testcase name="testTokenCreate" classname="com.stripe.functional.TokenTest" time="0.375"/>
+  <testcase name="testTokenRetrieve" classname="com.stripe.functional.TokenTest" time="0.393"/>
+  <testcase name="testTokenUse" classname="com.stripe.functional.TokenTest" time="1.23"/>
+  <testcase name="testTokenCreatePerCallAPIKey" classname="com.stripe.functional.TokenTest" time="0.219"/>
+  <testcase name="testTokenRetrievePerCallAPIKey" classname="com.stripe.functional.TokenTest" time="0.342"/>
+  <testcase name="testTokenUsePerCallAPIKey" classname="com.stripe.functional.TokenTest" time="1.182"/>
+  <testcase name="testAPIBase" classname="com.stripe.functional.TokenTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

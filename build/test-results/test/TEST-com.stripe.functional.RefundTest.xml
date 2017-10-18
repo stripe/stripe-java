@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.stripe.functional.RefundTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2017-10-18T17:34:25" hostname="st-mrmcduff1.local" time="13.101">
+  <properties/>
+  <testcase name="testChargeRefund" classname="com.stripe.functional.RefundTest" time="0.943"/>
+  <testcase name="testChargeRefundUpdateApiKey" classname="com.stripe.functional.RefundTest" time="1.699"/>
+  <testcase name="testChargeRefundCreate" classname="com.stripe.functional.RefundTest" time="1.547"/>
+  <testcase name="testChargeRefundCreateApiKey" classname="com.stripe.functional.RefundTest" time="1.119"/>
+  <testcase name="testChargePartialRefund" classname="com.stripe.functional.RefundTest" time="1.125"/>
+  <testcase name="testChargeRefundListAndRetrieve" classname="com.stripe.functional.RefundTest" time="1.513"/>
+  <testcase name="testChargeRefundListAndRetrievePerCallAPIKey" classname="com.stripe.functional.RefundTest" time="1.655"/>
+  <testcase name="testChargeRefundListWithExpand" classname="com.stripe.functional.RefundTest" time="1.625"/>
+  <testcase name="testRefundMetadata" classname="com.stripe.functional.RefundTest" time="1.874"/>
+  <testcase name="testAPIBase" classname="com.stripe.functional.RefundTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

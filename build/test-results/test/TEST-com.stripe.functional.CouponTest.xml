@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.stripe.functional.CouponTest" tests="13" skipped="0" failures="0" errors="0" timestamp="2017-10-18T17:32:00" hostname="st-mrmcduff1.local" time="4.931">
+  <properties/>
+  <testcase name="testCouponCreate" classname="com.stripe.functional.CouponTest" time="0.146"/>
+  <testcase name="testCouponUpdate" classname="com.stripe.functional.CouponTest" time="0.374"/>
+  <testcase name="testCouponRetrieve" classname="com.stripe.functional.CouponTest" time="0.262"/>
+  <testcase name="testCouponList" classname="com.stripe.functional.CouponTest" time="0.122"/>
+  <testcase name="testCouponDelete" classname="com.stripe.functional.CouponTest" time="0.314"/>
+  <testcase name="testCustomerCreateWithCoupon" classname="com.stripe.functional.CouponTest" time="0.871"/>
+  <testcase name="testCouponCreatePerCallAPIKey" classname="com.stripe.functional.CouponTest" time="0.155"/>
+  <testcase name="testCouponRetrievePerCallAPIKey" classname="com.stripe.functional.CouponTest" time="0.252"/>
+  <testcase name="testCouponListPerCallAPIKey" classname="com.stripe.functional.CouponTest" time="0.13"/>
+  <testcase name="testCouponDeletePerCallAPIKey" classname="com.stripe.functional.CouponTest" time="0.292"/>
+  <testcase name="testCustomerCreateWithCouponPerCallAPIKey" classname="com.stripe.functional.CouponTest" time="0.696"/>
+  <testcase name="testCouponMetadata" classname="com.stripe.functional.CouponTest" time="1.315"/>
+  <testcase name="testAPIBase" classname="com.stripe.functional.CouponTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

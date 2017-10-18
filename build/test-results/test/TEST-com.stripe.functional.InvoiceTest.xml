@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.stripe.functional.InvoiceTest" tests="22" skipped="0" failures="0" errors="0" timestamp="2017-10-18T17:33:47" hostname="st-mrmcduff1.local" time="22.967">
+  <properties/>
+  <testcase name="testInvoiceItemCreate" classname="com.stripe.functional.InvoiceTest" time="0.688"/>
+  <testcase name="testInvoiceItemRetrieve" classname="com.stripe.functional.InvoiceTest" time="0.939"/>
+  <testcase name="testInvoiceItemList" classname="com.stripe.functional.InvoiceTest" time="0.135"/>
+  <testcase name="testInvoiceItemUpdate" classname="com.stripe.functional.InvoiceTest" time="0.95"/>
+  <testcase name="testInvoiceItemDelete" classname="com.stripe.functional.InvoiceTest" time="0.737"/>
+  <testcase name="testInvoiceListAndRetrieve" classname="com.stripe.functional.InvoiceTest" time="2.148"/>
+  <testcase name="testInvoiceRetrieveForCustomer" classname="com.stripe.functional.InvoiceTest" time="1.366"/>
+  <testcase name="testInvoiceCreate" classname="com.stripe.functional.InvoiceTest" time="1.555"/>
+  <testcase name="testUpcomingInvoice" classname="com.stripe.functional.InvoiceTest" time="0.806"/>
+  <testcase name="testUpcomingInvoiceLines" classname="com.stripe.functional.InvoiceTest" time="1.299"/>
+  <testcase name="testInvoiceItemCreatePerCallAPIKey" classname="com.stripe.functional.InvoiceTest" time="1.008"/>
+  <testcase name="testInvoiceItemRetrievePerCallAPIKey" classname="com.stripe.functional.InvoiceTest" time="1.078"/>
+  <testcase name="testInvoiceItemListPerCallAPIKey" classname="com.stripe.functional.InvoiceTest" time="0.113"/>
+  <testcase name="testInvoiceItemUpdatePerCallAPIKey" classname="com.stripe.functional.InvoiceTest" time="0.758"/>
+  <testcase name="testInvoiceItemDeletePerCallAPIKey" classname="com.stripe.functional.InvoiceTest" time="0.765"/>
+  <testcase name="testInvoiceListAndRetrievePerCallAPIKey" classname="com.stripe.functional.InvoiceTest" time="1.592"/>
+  <testcase name="testInvoiceRetrieveForCustomerPerCallAPIKey" classname="com.stripe.functional.InvoiceTest" time="1.396"/>
+  <testcase name="testUpcomingInvoicePerCallAPIKey" classname="com.stripe.functional.InvoiceTest" time="0.933"/>
+  <testcase name="testInvoiceItemMetadata" classname="com.stripe.functional.InvoiceTest" time="1.506"/>
+  <testcase name="testInvoiceMetadata" classname="com.stripe.functional.InvoiceTest" time="1.987"/>
+  <testcase name="testSendInvoice" classname="com.stripe.functional.InvoiceTest" time="1.202"/>
+  <testcase name="testAPIBase" classname="com.stripe.functional.InvoiceTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

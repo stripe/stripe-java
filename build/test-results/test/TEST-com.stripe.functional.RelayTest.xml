@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.stripe.functional.RelayTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2017-10-18T17:34:38" hostname="st-mrmcduff1.local" time="4.493">
+  <properties/>
+  <testcase name="testSKUProductDeletion" classname="com.stripe.functional.RelayTest" time="0.731"/>
+  <testcase name="testOrderCreateReadUpdatePayReturn" classname="com.stripe.functional.RelayTest" time="2.487"/>
+  <testcase name="testProductCreateReadUpdate" classname="com.stripe.functional.RelayTest" time="0.612"/>
+  <testcase name="testSKUCreateReadUpdate" classname="com.stripe.functional.RelayTest" time="0.661"/>
+  <testcase name="testAPIBase" classname="com.stripe.functional.RelayTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

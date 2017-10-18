@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.stripe.model.StandardizationTest" tests="1" skipped="0" failures="0" errors="0" timestamp="2017-10-18T17:35:39" hostname="st-mrmcduff1.local" time="0.114">
+  <properties/>
+  <testcase name="allNonDeprecatedMethodsTakeOptions" classname="com.stripe.model.StandardizationTest" time="0.114"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

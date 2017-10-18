@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.stripe.functional.RecipientTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2017-10-18T17:34:17" hostname="st-mrmcduff1.local" time="7.952">
+  <properties/>
+  <testcase name="testRecipientList" classname="com.stripe.functional.RecipientTest" time="0.106"/>
+  <testcase name="testRecipientUpdate" classname="com.stripe.functional.RecipientTest" time="0.644"/>
+  <testcase name="testRecipientCardAddition" classname="com.stripe.functional.RecipientTest" time="2.032"/>
+  <testcase name="testRecipientCardUpdate" classname="com.stripe.functional.RecipientTest" time="0.755"/>
+  <testcase name="testRecipientCardDelete" classname="com.stripe.functional.RecipientTest" time="1.065"/>
+  <testcase name="testRecipientCreate" classname="com.stripe.functional.RecipientTest" time="0.423"/>
+  <testcase name="testRecipientRetrieve" classname="com.stripe.functional.RecipientTest" time="0.492"/>
+  <testcase name="testRecipientDelete" classname="com.stripe.functional.RecipientTest" time="0.991"/>
+  <testcase name="testRecipientMetadata" classname="com.stripe.functional.RecipientTest" time="1.443"/>
+  <testcase name="testAPIBase" classname="com.stripe.functional.RecipientTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>
