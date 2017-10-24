@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.stripe.model.InvoiceTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2017-10-18T17:35:39" hostname="st-mrmcduff1.local" time="0.006">
+  <properties/>
+  <testcase name="testUpcoming" classname="com.stripe.model.InvoiceTest" time="0.002"/>
+  <testcase name="testUnexpandedCharge" classname="com.stripe.model.InvoiceTest" time="0.001"/>
+  <testcase name="testExpandedCharge" classname="com.stripe.model.InvoiceTest" time="0.001"/>
+  <testcase name="testPayNoParams" classname="com.stripe.model.InvoiceTest" time="0.001"/>
+  <testcase name="testPayWithParams" classname="com.stripe.model.InvoiceTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

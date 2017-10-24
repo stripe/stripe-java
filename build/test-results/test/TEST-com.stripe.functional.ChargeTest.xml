@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.stripe.functional.ChargeTest" tests="22" skipped="0" failures="0" errors="0" timestamp="2017-10-18T17:31:44" hostname="st-mrmcduff1.local" time="14.553">
+  <properties/>
+  <testcase name="testChargeCreate" classname="com.stripe.functional.ChargeTest" time="0.552"/>
+  <testcase name="testChargeExpandBalanceTransaction" classname="com.stripe.functional.ChargeTest" time="0.965"/>
+  <testcase name="testChargeCreateWithStatementDescriptor" classname="com.stripe.functional.ChargeTest" time="0.714"/>
+  <testcase name="testChargeCreateWithShippingDetails" classname="com.stripe.functional.ChargeTest" time="0.949"/>
+  <testcase name="testChargeRetrieve" classname="com.stripe.functional.ChargeTest" time="0.792"/>
+  <testcase name="testChargeRetrieveWithBalanceTransaction" classname="com.stripe.functional.ChargeTest" time="0.871"/>
+  <testcase name="testChargeRetrieveNullId" classname="com.stripe.functional.ChargeTest" time="0.103"/>
+  <testcase name="testChargeCapture" classname="com.stripe.functional.ChargeTest" time="0.917"/>
+  <testcase name="testInvalidCard" classname="com.stripe.functional.ChargeTest" time="0.111"/>
+  <testcase name="testDeclinedCard" classname="com.stripe.functional.ChargeTest" time="0.576"/>
+  <testcase name="testInvalidAddressZipTest" classname="com.stripe.functional.ChargeTest" time="0.629"/>
+  <testcase name="testInvalidAddressLine1Test" classname="com.stripe.functional.ChargeTest" time="0.573"/>
+  <testcase name="testChargeList" classname="com.stripe.functional.ChargeTest" time="0.167"/>
+  <testcase name="testChargeCreatePerCallAPIKey" classname="com.stripe.functional.ChargeTest" time="0.582"/>
+  <testcase name="testChargeRetrievePerCallAPIKey" classname="com.stripe.functional.ChargeTest" time="0.847"/>
+  <testcase name="testChargeRefundPerCallAPIKey" classname="com.stripe.functional.ChargeTest" time="1.195"/>
+  <testcase name="testChargePartialRefundPerCallAPIKey" classname="com.stripe.functional.ChargeTest" time="1.062"/>
+  <testcase name="testChargeListPerCallAPIKey" classname="com.stripe.functional.ChargeTest" time="0.172"/>
+  <testcase name="testInvalidCardPerCallAPIKey" classname="com.stripe.functional.ChargeTest" time="0.113"/>
+  <testcase name="testChargeMetadata" classname="com.stripe.functional.ChargeTest" time="1.906"/>
+  <testcase name="testPerCallAPIUsage" classname="com.stripe.functional.ChargeTest" time="0.75"/>
+  <testcase name="testAPIBase" classname="com.stripe.functional.ChargeTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.stripe.model.ChargeTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2017-10-18T17:35:39" hostname="st-mrmcduff1.local" time="0.063">
+  <properties/>
+  <testcase name="testDeserialize" classname="com.stripe.model.ChargeTest" time="0.007"/>
+  <testcase name="testDeserializeWithExpansions" classname="com.stripe.model.ChargeTest" time="0.004"/>
+  <testcase name="testDeserializeExpandApplication" classname="com.stripe.model.ChargeTest" time="0.003"/>
+  <testcase name="testDeserializeExpandApplicationFee" classname="com.stripe.model.ChargeTest" time="0.003"/>
+  <testcase name="testDeserializeExpandBalanceTransaction" classname="com.stripe.model.ChargeTest" time="0.004"/>
+  <testcase name="testDeserializeExpandCustomer" classname="com.stripe.model.ChargeTest" time="0.003"/>
+  <testcase name="testDeserializeExpandDestination" classname="com.stripe.model.ChargeTest" time="0.004"/>
+  <testcase name="testDeserializeExpandInvoice" classname="com.stripe.model.ChargeTest" time="0.003"/>
+  <testcase name="testDeserializeExpandOrder" classname="com.stripe.model.ChargeTest" time="0.004"/>
+  <testcase name="testDeserializeExpandSourceTransfer" classname="com.stripe.model.ChargeTest" time="0.017"/>
+  <testcase name="testDeserializeExpandTransfer" classname="com.stripe.model.ChargeTest" time="0.005"/>
+  <testcase name="testDeserializeReview" classname="com.stripe.model.ChargeTest" time="0.006"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

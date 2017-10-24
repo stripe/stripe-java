@@ -1,0 +1,73 @@
+{
+  "id": "ch_104But4hAU1NpT8JeeCuY1oU",
+  "object": "charge",
+  "created": 1402336807,
+  "livemode": false,
+  "paid": true,
+  "amount": 100000,
+  "currency": "usd",
+  "refunded": false,
+  "card": {
+    "id": "card_1042IJ4hAU1NpT8JXnbdht98",
+    "object": "card",
+    "last4": "4242",
+    "type": "Visa",
+    "exp_month": 1,
+    "exp_year": 2016,
+    "fingerprint": "Uf9GNAoNcSIFsOB5",
+    "country": "US",
+    "name": null,
+    "address_line1": null,
+    "address_line2": null,
+    "address_city": null,
+    "address_state": null,
+    "address_zip": null,
+    "address_country": null,
+    "cvc_check": null,
+    "address_line1_check": null,
+    "address_zip_check": null,
+    "customer": "cus_42IJFn5NbzaKDs"
+  },
+  "captured": true,
+  "refunds": {
+    "object": "list",
+    "total_count": 2,
+    "has_more": false,
+    "url": "/v1/charges/ch_104But4hAU1NpT8JeeCuY1oU/refunds",
+    "data": [
+      {
+        "id": "re_104Buu4hAU1NpT8JMBAc564Q",
+        "amount": 100,
+        "currency": "usd",
+        "created": 1402336848,
+        "object": "refund",
+        "charge": "ch_104But4hAU1NpT8JeeCuY1oU",
+        "balance_transaction": "txn_104Buu4hAU1NpT8JMWc89QlB",
+        "metadata": {}
+      },
+      {
+        "id": "re_104Buu4hAU1NpT8JXuwJMRek",
+        "amount": 100,
+        "currency": "usd",
+        "created": 1402336856,
+        "object": "refund",
+        "charge": "ch_104But4hAU1NpT8JeeCuY1oU",
+        "balance_transaction": "txn_104Buu4hAU1NpT8Jj0rAGDv6",
+        "metadata": {
+          "key": "value"
+        }
+      }
+    ]
+  },
+  "balance_transaction": "txn_104But4hAU1NpT8JTgukDNZ6",
+  "failure_message": null,
+  "failure_code": null,
+  "amount_refunded": 200,
+  "customer": "cus_42IJFn5NbzaKDs",
+  "invoice": null,
+  "description": "",
+  "dispute": null,
+  "metadata": {},
+  "statement_descriptor": null
+}
+

@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.stripe.functional.PlanTest" tests="14" skipped="0" failures="0" errors="0" timestamp="2017-10-18T17:34:10" hostname="st-mrmcduff1.local" time="6.13">
+  <properties/>
+  <testcase name="testPlanCreate" classname="com.stripe.functional.PlanTest" time="0.186"/>
+  <testcase name="testPlanCreateWithStatementDescriptor" classname="com.stripe.functional.PlanTest" time="0.215"/>
+  <testcase name="testPlanUpdate" classname="com.stripe.functional.PlanTest" time="0.499"/>
+  <testcase name="testPlanRetrieve" classname="com.stripe.functional.PlanTest" time="0.274"/>
+  <testcase name="testPlanList" classname="com.stripe.functional.PlanTest" time="0.102"/>
+  <testcase name="testPlanDelete" classname="com.stripe.functional.PlanTest" time="0.554"/>
+  <testcase name="testCustomerCreateWithPlan" classname="com.stripe.functional.PlanTest" time="1.162"/>
+  <testcase name="testPlanCreatePerCallAPIKey" classname="com.stripe.functional.PlanTest" time="0.201"/>
+  <testcase name="testPlanUpdatePerCallAPIKey" classname="com.stripe.functional.PlanTest" time="0.607"/>
+  <testcase name="testPlanRetrievePerCallAPIKey" classname="com.stripe.functional.PlanTest" time="0.37"/>
+  <testcase name="testPlanListPerCallAPIKey" classname="com.stripe.functional.PlanTest" time="0.1"/>
+  <testcase name="testPlanDeletePerCallAPIKey" classname="com.stripe.functional.PlanTest" time="0.437"/>
+  <testcase name="testPlanMetadata" classname="com.stripe.functional.PlanTest" time="1.418"/>
+  <testcase name="testAPIBase" classname="com.stripe.functional.PlanTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

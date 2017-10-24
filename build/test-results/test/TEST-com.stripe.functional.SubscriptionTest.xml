@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.stripe.functional.SubscriptionTest" tests="12" skipped="0" failures="0" errors="0" timestamp="2017-10-18T17:34:55" hostname="st-mrmcduff1.local" time="24.527">
+  <properties/>
+  <testcase name="testCancelSubscriptionAtPeriodEnd" classname="com.stripe.functional.SubscriptionTest" time="1.36"/>
+  <testcase name="testNewStyleSubscriptionAPI" classname="com.stripe.functional.SubscriptionTest" time="3.088"/>
+  <testcase name="testTopLevelSubscriptionAPI" classname="com.stripe.functional.SubscriptionTest" time="4.521"/>
+  <testcase name="testCreateSubscriptionThroughCollection" classname="com.stripe.functional.SubscriptionTest" time="1.917"/>
+  <testcase name="testSubscriptionMetadata" classname="com.stripe.functional.SubscriptionTest" time="3.589"/>
+  <testcase name="testUpdateSubscriptionPerCallAPIKey" classname="com.stripe.functional.SubscriptionTest" time="1.635"/>
+  <testcase name="testCancelSubscriptionPerCallAPIKey" classname="com.stripe.functional.SubscriptionTest" time="1.466"/>
+  <testcase name="testCancelSubscriptionAtPeriodEndPerCallAPIKey" classname="com.stripe.functional.SubscriptionTest" time="1.843"/>
+  <testcase name="testInvoicingSubscription" classname="com.stripe.functional.SubscriptionTest" time="2.008"/>
+  <testcase name="testUpdateSubscription" classname="com.stripe.functional.SubscriptionTest" time="1.414"/>
+  <testcase name="testCancelSubscription" classname="com.stripe.functional.SubscriptionTest" time="1.684"/>
+  <testcase name="testAPIBase" classname="com.stripe.functional.SubscriptionTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

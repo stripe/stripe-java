@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.stripe.functional.CountrySpecTest" tests="4" skipped="0" failures="0" errors="0" timestamp="2017-10-18T17:31:59" hostname="st-mrmcduff1.local" time="1.305">
+  <properties/>
+  <testcase name="testChargeCreationSourceAsCard" classname="com.stripe.functional.CountrySpecTest" time="0.553"/>
+  <testcase name="testCountrySpecRetrieve" classname="com.stripe.functional.CountrySpecTest" time="0.479"/>
+  <testcase name="testCountrySpecAll" classname="com.stripe.functional.CountrySpecTest" time="0.272"/>
+  <testcase name="testAPIBase" classname="com.stripe.functional.CountrySpecTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

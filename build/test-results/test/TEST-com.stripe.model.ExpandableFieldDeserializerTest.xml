@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.stripe.model.ExpandableFieldDeserializerTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2017-10-18T17:35:39" hostname="st-mrmcduff1.local" time="0.003">
+  <properties/>
+  <testcase name="deserializeString" classname="com.stripe.model.ExpandableFieldDeserializerTest" time="0.001"/>
+  <testcase name="deserializeObject" classname="com.stripe.model.ExpandableFieldDeserializerTest" time="0.001"/>
+  <testcase name="deserializeNull" classname="com.stripe.model.ExpandableFieldDeserializerTest" time="0.001"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

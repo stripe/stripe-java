@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.stripe.functional.EventTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2017-10-18T17:33:42" hostname="st-mrmcduff1.local" time="0.61">
+  <properties/>
+  <testcase name="testEventRetrieve" classname="com.stripe.functional.EventTest" time="0.209"/>
+  <testcase name="testEventList" classname="com.stripe.functional.EventTest" time="0.101"/>
+  <testcase name="testEventRetrievePerCallAPIKey" classname="com.stripe.functional.EventTest" time="0.198"/>
+  <testcase name="testEventListPerCallAPIKey" classname="com.stripe.functional.EventTest" time="0.1"/>
+  <testcase name="testAPIBase" classname="com.stripe.functional.EventTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

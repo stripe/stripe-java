@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.stripe.net.WebhookTest" tests="10" skipped="0" failures="0" errors="0" timestamp="2017-10-18T17:35:39" hostname="st-mrmcduff1.local" time="0.007">
+  <properties/>
+  <testcase name="testValidJsonAndHeader" classname="com.stripe.net.WebhookTest" time="0.003"/>
+  <testcase name="testInvalidJson" classname="com.stripe.net.WebhookTest" time="0.0"/>
+  <testcase name="testValidJsonAndInvalidHeader" classname="com.stripe.net.WebhookTest" time="0.0"/>
+  <testcase name="testMalformedHeader" classname="com.stripe.net.WebhookTest" time="0.001"/>
+  <testcase name="testNoSignaturesWithExpectedScheme" classname="com.stripe.net.WebhookTest" time="0.0"/>
+  <testcase name="testNoValidSignatureForPayload" classname="com.stripe.net.WebhookTest" time="0.0"/>
+  <testcase name="testTimestampOutsideTolerance" classname="com.stripe.net.WebhookTest" time="0.0"/>
+  <testcase name="testValidHeaderAndSignature" classname="com.stripe.net.WebhookTest" time="0.001"/>
+  <testcase name="testHeaderContainsValidSignature" classname="com.stripe.net.WebhookTest" time="0.0"/>
+  <testcase name="testTimestampOffButNoTolerance" classname="com.stripe.net.WebhookTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

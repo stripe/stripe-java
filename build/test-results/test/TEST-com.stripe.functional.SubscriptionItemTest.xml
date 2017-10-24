@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.stripe.functional.SubscriptionItemTest" tests="6" skipped="0" failures="0" errors="0" timestamp="2017-10-18T17:34:42" hostname="st-mrmcduff1.local" time="13.054">
+  <properties/>
+  <testcase name="testSubscriptionItemCreate" classname="com.stripe.functional.SubscriptionItemTest" time="2.204"/>
+  <testcase name="testSubscriptionItemRetrieve" classname="com.stripe.functional.SubscriptionItemTest" time="2.558"/>
+  <testcase name="testSubscriptionItemList" classname="com.stripe.functional.SubscriptionItemTest" time="2.72"/>
+  <testcase name="testSubscriptionItemUpdate" classname="com.stripe.functional.SubscriptionItemTest" time="2.918"/>
+  <testcase name="testSubscriptionItemDelete" classname="com.stripe.functional.SubscriptionItemTest" time="2.652"/>
+  <testcase name="testAPIBase" classname="com.stripe.functional.SubscriptionItemTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

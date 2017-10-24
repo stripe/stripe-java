@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.stripe.functional.TransferTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2017-10-18T17:35:24" hostname="st-mrmcduff1.local" time="14.871">
+  <properties/>
+  <testcase name="testTransferCreate" classname="com.stripe.functional.TransferTest" time="2.337"/>
+  <testcase name="testTransferCancel" classname="com.stripe.functional.TransferTest" time="2.345"/>
+  <testcase name="testTransferRetrieve" classname="com.stripe.functional.TransferTest" time="2.281"/>
+  <testcase name="testTransferDestinationLoadedCorrectly" classname="com.stripe.functional.TransferTest" time="2.443"/>
+  <testcase name="testTransferList" classname="com.stripe.functional.TransferTest" time="0.113"/>
+  <testcase name="testTransferTransactions" classname="com.stripe.functional.TransferTest" time="2.154"/>
+  <testcase name="testTransferMetadata" classname="com.stripe.functional.TransferTest" time="3.196"/>
+  <testcase name="testAPIBase" classname="com.stripe.functional.TransferTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

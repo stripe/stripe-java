@@ -1,0 +1,27 @@
+{
+  "type": "sole_prop",
+  "business_name": "business name",
+  "address": {
+    "line1": "12 Grove Street",
+    "line2": null,
+    "city": "New York",
+    "state": "NY",
+    "postal_code": "10014",
+    "country": "US"
+  },
+  "personal_id_number_provided": false,
+  "ssn_last_4_provided": false,
+  "first_name": "Monica",
+  "last_name": "Geller",
+  "dob": {
+    "day": 4,
+    "month": 4,
+    "year": 1969
+  },
+  "additional_owners": [],
+  "verification": {
+    "status": "verified",
+    "document": null,
+    "details": null
+  }
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.stripe.model.SubscriptionTest" tests="8" skipped="0" failures="0" errors="0" timestamp="2017-10-18T17:35:39" hostname="st-mrmcduff1.local" time="0.002">
+  <properties/>
+  <testcase name="testRetrieve" classname="com.stripe.model.SubscriptionTest" time="0.0"/>
+  <testcase name="testUpdateWithItems" classname="com.stripe.model.SubscriptionTest" time="0.0"/>
+  <testcase name="testCreateWithItems" classname="com.stripe.model.SubscriptionTest" time="0.001"/>
+  <testcase name="testSetDeleteDiscount" classname="com.stripe.model.SubscriptionTest" time="0.0"/>
+  <testcase name="testCreate" classname="com.stripe.model.SubscriptionTest" time="0.0"/>
+  <testcase name="testUpdate" classname="com.stripe.model.SubscriptionTest" time="0.001"/>
+  <testcase name="testAll" classname="com.stripe.model.SubscriptionTest" time="0.0"/>
+  <testcase name="testCancel" classname="com.stripe.model.SubscriptionTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

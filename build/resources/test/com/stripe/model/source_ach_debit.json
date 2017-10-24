@@ -1,0 +1,35 @@
+{
+  "id": "src_19LGIDKCFFPkgtRhhqvVrz6T",
+  "object": "source",
+  "ach_debit": {
+    "country": "US",
+    "fingerprint": "yY5BWKwnW98uydOa",
+    "last4": 6789,
+    "routing_number": 110000000,
+    "type": "individual"
+  },
+  "amount": null,
+  "client_secret": "src_client_secret_mtpQ6fRQdFszxs9ZNfjq2ecA",
+  "created": 1480443925,
+  "currency": "usd",
+  "flow": "verification",
+  "livemode": false,
+  "metadata": {},
+  "owner": {
+    "address": null,
+    "email": null,
+    "name": "Stripey McStripe",
+    "phone": null,
+    "verified_address": null,
+    "verified_email": null,
+    "verified_name": null,
+    "verified_phone": null
+  },
+  "status": "pending",
+  "type": "ach_debit",
+  "usage": "reusable",
+  "verification": {
+    "attempts_remaining": 10,
+    "status": "pending"
+  }
+}

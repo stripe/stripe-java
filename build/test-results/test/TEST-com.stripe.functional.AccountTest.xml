@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.stripe.functional.AccountTest" tests="3" skipped="0" failures="0" errors="0" timestamp="2017-10-18T17:31:36" hostname="st-mrmcduff1.local" time="2.498">
+  <properties/>
+  <testcase name="testAccountRetrieve" classname="com.stripe.functional.AccountTest" time="0.655"/>
+  <testcase name="testGetAllExternalAccounts" classname="com.stripe.functional.AccountTest" time="1.843"/>
+  <testcase name="testAPIBase" classname="com.stripe.functional.AccountTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

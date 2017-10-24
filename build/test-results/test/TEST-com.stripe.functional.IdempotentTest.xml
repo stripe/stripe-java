@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<testsuite name="com.stripe.functional.IdempotentTest" tests="5" skipped="0" failures="0" errors="0" timestamp="2017-10-18T17:33:43" hostname="st-mrmcduff1.local" time="4.67">
+  <properties/>
+  <testcase name="testIdempotentRequestSent" classname="com.stripe.functional.IdempotentTest" time="0.956"/>
+  <testcase name="testNotIdempotentWhenUnset" classname="com.stripe.functional.IdempotentTest" time="1.239"/>
+  <testcase name="testClearingIdempotentcyActuallyWorks" classname="com.stripe.functional.IdempotentTest" time="1.101"/>
+  <testcase name="testDefaultOptionsHaveUnsetIdempotentRequest" classname="com.stripe.functional.IdempotentTest" time="1.373"/>
+  <testcase name="testAPIBase" classname="com.stripe.functional.IdempotentTest" time="0.0"/>
+  <system-out><![CDATA[]]></system-out>
+  <system-err><![CDATA[]]></system-err>
+</testsuite>

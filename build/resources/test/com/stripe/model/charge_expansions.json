@@ -1,0 +1,480 @@
+{
+  "id": "ch_198c152iMoKf4jyWWYvyqjTX",
+  "object": "charge",
+  "amount": 1061,
+  "amount_refunded": 0,
+  "application": {
+    "id": "ca_4UNPzRJlp7joZhEYfqkhc02MYvNFHJEX",
+    "name": "My Application"
+  },
+  "application_fee": {
+    "id": "fee_9RV1Zcr87rvr68",
+    "object": "application_fee",
+    "account": "acct_102wRO2iMoKf4jyz",
+    "amount": 111,
+    "amount_refunded": 0,
+    "application": "ca_33Dfv5ue7ok45gUcpIvP4hhoFmWYxuyL",
+    "balance_transaction": "txn_198LO02iMoKf4jyW0Mr72NYD",
+    "charge": "py_198c16Fg5bGGPxFC9mb6CYe0",
+    "created": 1477429168,
+    "currency": "usd",
+    "livemode": false,
+    "originating_transaction": "ch_198c152iMoKf4jyWWYvyqjTX",
+    "refunded": false,
+    "refunds": {
+      "object": "list",
+      "data": [
+      ],
+      "has_more": false,
+      "total_count": 0,
+      "url": "/v1/application_fees/fee_9RV1Zcr87rvr68/refunds"
+    }
+  },
+  "balance_transaction": {
+    "id": "txn_18tjj22eZvKYlo2CeFxM3FxI",
+    "object": "balance_transaction",
+    "amount": 316,
+    "available_on": 1474416000,
+    "created": 1473883880,
+    "currency": "usd",
+    "description": "User: 832. Events: 1283. Total Tickets: 1",
+    "fee": 39,
+    "fee_details": [
+      {
+        "amount": 39,
+        "application": null,
+        "currency": "usd",
+        "description": "Stripe processing fees",
+        "type": "stripe_fee"
+      }
+    ],
+    "net": 277,
+    "source": "ch_18tjj22eZvKYlo2CBMsf6JfQ",
+    "sourced_transfers": {
+      "object": "list",
+      "data": [
+      ],
+      "has_more": false,
+      "total_count": 0,
+      "url": "/v1/transfers?source_transaction=ch_18tjj22eZvKYlo2CBMsf6JfQ"
+    },
+    "status": "pending",
+    "type": "charge"
+  },
+  "captured": true,
+  "created": 1477429167,
+  "currency": "usd",
+  "customer": {
+    "id": "cus_7K0ztY0WclKUdF",
+    "object": "customer",
+    "account_balance": 0,
+    "created": 1447103608,
+    "currency": "usd",
+    "default_source": "card_175MxA2iMoKf4jyWCUGYPWfx",
+    "delinquent": false,
+    "description": "",
+    "discount": null,
+    "email": "example@gmail.com",
+    "livemode": false,
+    "metadata": {},
+    "shipping": null,
+    "sources": {
+      "object": "list",
+      "data": [
+        {
+          "id": "card_175MxA2iMoKf4jyWCUGYPWfx",
+          "object": "card",
+          "address_city": null,
+          "address_country": null,
+          "address_line1": null,
+          "address_line1_check": null,
+          "address_line2": null,
+          "address_state": null,
+          "address_zip": null,
+          "address_zip_check": null,
+          "brand": "Visa",
+          "country": "US",
+          "customer": "cus_7K0ztY0WclKUdF",
+          "cvc_check": "pass",
+          "dynamic_last4": null,
+          "exp_month": 1,
+          "exp_year": 2025,
+          "funding": "credit",
+          "last4": "4242",
+          "metadata": {},
+          "name": "My Name",
+          "tokenization_method": null
+        }
+      ],
+      "has_more": false,
+      "total_count": 1,
+      "url": "/v1/customers/cus_7K0ztY0WclKUdF/sources"
+    },
+    "subscriptions": {
+      "object": "list",
+      "data": [
+      ],
+      "has_more": false,
+      "total_count": 0,
+      "url": "/v1/customers/cus_7K0ztY0WclKUdF/subscriptions"
+    }
+  },
+  "description": "My Description.",
+  "destination": {
+    "id": "acct_102wRO2iMoKf4jyz",
+    "object": "account",
+    "business_logo": "",
+    "business_name": "RiskyBusiness",
+    "business_url": "",
+    "charges_enabled": true,
+    "country": "US",
+    "debit_negative_balances": true,
+    "decline_charge_on": {
+      "avs_failure": false,
+      "cvc_failure": false
+    },
+    "default_currency": "usd",
+    "details_submitted": true,
+    "display_name": "",
+    "email": "",
+    "external_accounts": {
+      "object": "list",
+      "data": [
+        {
+          "id": "ba_1044ty2iMoKf4jyWxR3H3P7b",
+          "object": "bank_account",
+          "account": "acct_102wRO2iMoKf4jyz",
+          "account_holder_name": null,
+          "account_holder_type": null,
+          "bank_name": "WELLS FARGO BANK",
+          "country": "US",
+          "currency": "usd",
+          "default_for_currency": true,
+          "fingerprint": null,
+          "last4": "1234",
+          "metadata": {
+          },
+          "routing_number": "12345667",
+          "status": "new"
+        }
+      ],
+      "has_more": false,
+      "total_count": 1,
+      "url": "/v1/accounts/acct_102wRO2iMoKf4jyz/external_accounts"
+    },
+    "legal_entity": {
+      "additional_owners": [
+      ],
+      "address": {
+        "city": "",
+        "country": "",
+        "line1": "",
+        "line2": null,
+        "postal_code": "",
+        "state": ""
+      },
+      "business_name": "",
+      "business_tax_id_provided": true,
+      "dob": {
+        "day": 28,
+        "month": 8,
+        "year": 1987
+      },
+      "first_name": "",
+      "last_name": "",
+      "personal_address": {
+        "city": null,
+        "country": "US",
+        "line1": null,
+        "line2": null,
+        "postal_code": null,
+        "state": ""
+      },
+      "personal_id_number_provided": true,
+      "ssn_last_4_provided": true,
+      "type": "llc",
+      "verification": {
+        "details": null,
+        "details_code": null,
+        "document": null,
+        "status": "verified"
+      }
+    },
+    "managed": true,
+    "product_description": "",
+    "statement_descriptor": "MyCompany",
+    "support_email": "s@example.com",
+    "support_phone": "1234567890",
+    "support_url": "",
+    "timezone": "US/Pacific",
+    "tos_acceptance": {
+      "date": null,
+      "iovation_blackbox": null,
+      "ip": null,
+      "user_agent": null
+    },
+    "transfer_schedule": {
+      "delay_days": 2,
+      "interval": "manual"
+    },
+    "transfer_statement_descriptor": null,
+    "transfers_enabled": true,
+    "verification": {
+      "disabled_reason": null,
+      "due_by": null,
+      "fields_needed": [
+      ]
+    }
+  },
+  "dispute": null,
+  "failure_code": null,
+  "failure_message": null,
+  "fraud_details": {
+  },
+  "invoice": {
+    "id": "in_199Llh2eZvKYlo2CMA8qc7Ng",
+    "object": "invoice",
+    "amount_due": 999,
+    "application_fee": null,
+    "attempt_count": 0,
+    "attempted": false,
+    "charge": null,
+    "closed": false,
+    "currency": "usd",
+    "customer": "cus_9SGLlObemZpEzM",
+    "date": 1477605037,
+    "description": null,
+    "discount": null,
+    "ending_balance": null,
+    "forgiven": false,
+    "lines": {
+      "data": [
+        {
+          "id": "sub_9SEB12cTUJ2UNc",
+          "object": "line_item",
+          "amount": 999,
+          "currency": "usd",
+          "description": null,
+          "discountable": true,
+          "livemode": true,
+          "metadata": {
+          },
+          "period": {
+            "start": 1480275575,
+            "end": 1482867575
+          },
+          "plan": {
+            "id": "silver-business-753",
+            "object": "plan",
+            "amount": 999,
+            "created": 1477597080,
+            "currency": "usd",
+            "interval": "month",
+            "interval_count": 1,
+            "livemode": false,
+            "metadata": {
+            },
+            "name": "Silver Business",
+            "statement_descriptor": null,
+            "trial_period_days": null
+          },
+          "proration": false,
+          "quantity": 1,
+          "subscription": null,
+          "type": "subscription"
+        }
+      ],
+      "total_count": 1,
+      "object": "list",
+      "url": "/v1/invoices/in_199Llh2eZvKYlo2CMA8qc7Ng/lines"
+    },
+    "livemode": false,
+    "metadata": {
+    },
+    "next_payment_attempt": 1477608637,
+    "paid": false,
+    "period_end": 1477605016,
+    "period_start": 1475013016,
+    "receipt_number": null,
+    "starting_balance": 0,
+    "statement_descriptor": null,
+    "subscription": "sub_8LhxBBF8jRliLd",
+    "subtotal": 999,
+    "tax": null,
+    "tax_percent": null,
+    "total": 999,
+    "webhooks_delivered_at": 1477605045
+  },
+  "livemode": false,
+  "metadata": {},
+  "order": {
+    "id": "or_199IRC2eZvKYlo2CPfFd4CB6",
+    "object": "order",
+    "amount": 1500,
+    "amount_returned": 1500,
+    "application": null,
+    "application_fee": null,
+    "charge": "ch_199IRP2eZvKYlo2CICMsVcrU",
+    "created": 1477592234,
+    "currency": "usd",
+    "customer": null,
+    "email": "anthony.anderson@example.com",
+    "items": [
+      {
+        "object": "order_item",
+        "amount": 1500,
+        "currency": "usd",
+        "description": "T-shirt",
+        "parent": "sku_9SCqPCCE9fkp4H",
+        "quantity": 1,
+        "type": "sku"
+      }
+    ],
+    "livemode": false,
+    "metadata": {
+    },
+    "returns": {
+      "object": "list",
+      "data": [],
+      "has_more": false,
+      "total_count": 0,
+      "url": "/v1/order_returns?order=or_199IRC2eZvKYlo2CPfFd4CB6"
+    },
+    "selected_shipping_method": "ship_free-shipping",
+    "shipping": {
+      "address": {
+        "city": "San Francisco",
+        "country": "US",
+        "line1": "1234 Main Street",
+        "line2": null,
+        "postal_code": "94111",
+        "state": null
+      },
+      "carrier": null,
+      "name": "Jacob Taylor",
+      "phone": null,
+      "tracking_number": null
+    },
+    "shipping_methods": [
+      {
+        "id": "ship_free-shipping",
+        "amount": 0,
+        "currency": "usd",
+        "delivery_estimate": null,
+        "description": "Free shipping"
+      }
+    ],
+    "status": "created",
+    "status_transitions": null,
+    "updated": 1477592252
+  },
+  "outcome": {
+    "network_status": "approved_by_network",
+    "reason": null,
+    "risk_level": "normal",
+    "seller_message": "Payment complete.",
+    "type": "authorized"
+  },
+  "paid": true,
+  "receipt_email": null,
+  "receipt_number": null,
+  "refunded": false,
+  "refunds": {
+    "object": "list",
+    "data": [
+    ],
+    "has_more": false,
+    "total_count": 0,
+    "url": "/v1/charges/ch_198c152iMoKf4jyWWYvyqjTX/refunds"
+  },
+  "review": {
+    "id": "prv_197BDeCKM4Inl33zU8jDaYKE",
+    "object": "review",
+    "charge": "ch_197BDeCKM4Inl33zIrGBGdR2",
+    "created": 1477087830,
+    "livemode": false,
+    "open": true,
+    "reason": "rule"
+  },
+  "shipping": null,
+  "source": {
+    "id": "card_198c102iMoKf4jyWkVgJ7l6S",
+    "object": "card",
+    "address_city": null,
+    "address_country": null,
+    "address_line1": null,
+    "address_line1_check": null,
+    "address_line2": null,
+    "address_state": null,
+    "address_zip": null,
+    "address_zip_check": null,
+    "brand": "Visa",
+    "country": "US",
+    "customer": null,
+    "cvc_check": null,
+    "dynamic_last4": null,
+    "exp_month": 2,
+    "exp_year": 2017,
+    "funding": "credit",
+    "last4": "4242",
+    "metadata": {}
+  },
+  "source_transfer": {
+    "id": "tr_199IPs2eZvKYlo2C9hMneg1R",
+    "object": "transfer",
+    "amount": 400,
+    "amount_reversed": 400,
+    "application_fee": null,
+    "balance_transaction": "txn_18tjj22eZvKYlo2CeFxM3FxI",
+    "created": 1477592152,
+    "currency": "usd",
+    "date": 1477592152,
+    "description": "Test",
+    "destination": "acct_199IPoK9SjcOovlh",
+    "destination_payment": "py_199IPsK9SjcOovlhLCF0dHTZ",
+    "failure_code": null,
+    "failure_message": null,
+    "livemode": false,
+    "metadata": {
+    },
+    "method": "standard",
+    "recipient": null,
+    "reversals": null,
+    "reversed": true,
+    "source_transaction": null,
+    "source_type": "card",
+    "statement_descriptor": null,
+    "status": "paid",
+    "type": "stripe_account"
+  },
+  "statement_descriptor": null,
+  "status": "succeeded",
+  "transfer": {
+    "id": "tr_199IPs2eZvKYlo2C9hMneg1R",
+    "object": "transfer",
+    "amount": 400,
+    "amount_reversed": 400,
+    "application_fee": null,
+    "balance_transaction": "txn_18tjj22eZvKYlo2CeFxM3FxI",
+    "created": 1477592152,
+    "currency": "usd",
+    "date": 1477592152,
+    "description": "Test",
+    "destination": "acct_199IPoK9SjcOovlh",
+    "destination_payment": "py_199IPsK9SjcOovlhLCF0dHTZ",
+    "failure_code": null,
+    "failure_message": null,
+    "livemode": false,
+    "metadata": {
+    },
+    "method": "standard",
+    "recipient": null,
+    "reversals": null,
+    "reversed": true,
+    "source_transaction": null,
+    "source_type": "card",
+    "statement_descriptor": null,
+    "status": "paid",
+    "type": "stripe_account"
+  }
+}
