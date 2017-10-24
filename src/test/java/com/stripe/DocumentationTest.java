@@ -30,13 +30,13 @@ public class DocumentationTest {
 		Calendar instance = Calendar.getInstance();
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 		String formattedDate = format.format(instance.getTime());
-		String result = "=== " + Stripe.VERSION + " " + formattedDate;
+		String result = "## " + Stripe.VERSION + " - " + formattedDate;
 		return result;
 	}
 
 	@Test
 	public void testChangeLogContainsStaticVersion() throws IOException {
-		File changelogFile = new File("CHANGELOG").getAbsoluteFile();
+		File changelogFile = new File("CHANGELOG.md").getAbsoluteFile();
 		Assert.assertTrue(String.format("Expected CHANGELOG file to exist, but it doesn't. (path is %s).", changelogFile.getAbsolutePath()), changelogFile.exists());
 		Assert.assertTrue(String.format("Expected CHANGELOG to be a file, but it doesn't. (path is %s).", changelogFile.getAbsolutePath()), changelogFile.isFile());
 		BufferedReader reader = new BufferedReader(new FileReader(changelogFile));
@@ -45,7 +45,7 @@ public class DocumentationTest {
 		List<String> closeMatches = new LinkedList<String>();
 		while ((line = reader.readLine()) != null) {
 			if (line.contains(Stripe.VERSION)) {
-				if (Pattern.matches(String.format("^=== %s 20[12][0-9]-(0[1-9]|1[0-2])-(0[1-9]|1[0-9]|2[0-9]|3[0-1])$", Stripe.VERSION), line)) {
+				if (Pattern.matches(String.format("^## %s - 20[12][0-9]-(0[1-9]|1[0-2])-(0[1-9]|1[0-9]|2[0-9]|3[0-1])$", Stripe.VERSION), line)) {
 					return;
 				}
 				closeMatches.add(line);
