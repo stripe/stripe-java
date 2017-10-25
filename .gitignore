@@ -8,5 +8,5 @@ target
 *.iml
 
 # Gradle files
-.gradle/
-build/
+.gradle/*
+build/*
