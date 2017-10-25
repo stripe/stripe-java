@@ -6,4 +6,7 @@ tags
 target
 .idea
 *.iml
-build/*
+
+# Gradle files
+.gradle/
+build/
