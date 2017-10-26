@@ -1,5 +1,5 @@
 # Changelog
-## 5.21.1-beta - 2017-10-26
+## 5.21.1-beta-3 - 2017-10-26
 * Upgrading build system to Gradle
 
 ## 5.21.0 - 2017-10-09

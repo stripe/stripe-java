@@ -6,8 +6,13 @@
  * https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle
  */
 
-apply plugin: 'maven-publish'
+apply plugin: 'maven'
 apply plugin: 'signing'
+apply plugin: 'io.codearte.nexus-staging'
+
+nexusStaging {
+    packageGroup = GROUP
+}
 
 def isReleaseBuild() {
     return VERSION_NAME.contains("SNAPSHOT") == false
@@ -32,7 +37,6 @@ def getRepositoryPassword() {
 }
 
 afterEvaluate { project ->
-
     uploadArchives {
         repositories {
             mavenDeployer {
@@ -41,7 +45,6 @@ afterEvaluate { project ->
                 pom.groupId = GROUP
                 pom.artifactId = POM_ARTIFACT_ID
                 pom.version = VERSION_NAME
-                pom.packaging = POM_PACKAGING
 
                 repository(url: getReleaseRepositoryUrl()) {
                     authentication(userName: getRepositoryUsername(), password: getRepositoryPassword())
@@ -55,6 +58,7 @@ afterEvaluate { project ->
                     name POM_NAME
                     description POM_DESCRIPTION
                     url POM_URL
+                    packaging POM_PACKAGING
 
                     scm {
                         url POM_SCM_URL
