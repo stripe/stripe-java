@@ -1,17 +1,24 @@
 language: java
 
+addons:
+  hosts:
+    - short-hostname
+  hostname: short-hostname
+
 matrix:
   include:
     - jdk: openjdk7
+      dist: precise
     - jdk: oraclejdk7
       dist: precise
     - jdk: oraclejdk8
     - jdk: oraclejdk9
-
-install: mvn install -Dgpg.skip=true -DskipTests
 
 notifications:
   email:
     on_success: never
 
 sudo: false
+
+script:
+  - ./gradlew clean test
