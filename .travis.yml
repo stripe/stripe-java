@@ -8,7 +8,8 @@ matrix:
     - jdk: oraclejdk8
     - jdk: oraclejdk9
 
-install: mvn install -Dgpg.skip=true -DskipTests
+script:
+  - ./gradlew clean test
 
 notifications:
   email:

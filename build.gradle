@@ -1,11 +1,6 @@
 apply plugin: 'java'
 apply plugin: 'maven'
 
-group = 'com.stripe'
-version = '5.21.0'
-
-description = """stripe-java"""
-
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
 tasks.withType(JavaCompile) {
@@ -16,7 +11,6 @@ configurations.all {
 }
 
 repositories {
-        
      maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
      maven { url "http://repo.maven.apache.org/maven2" }
 }
@@ -26,3 +20,5 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version:'4.10'
     testCompile group: 'org.mockito', name: 'mockito-all', version:'1.10.19'
 }
+
+apply from: 'deploy.gradle'
