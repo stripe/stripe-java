@@ -75,11 +75,11 @@ public class DocumentationTest {
 	}
 
 	@Test
-	public void testPomContainsVersionThatMatches() throws IOException {
+	public void testGradlePropertiesContainsVersionThatMatches() throws IOException {
 		// we want to ensure that the pom's version matches the static version.
-		File readmeFile = new File("pom.xml").getAbsoluteFile();
-		Assert.assertTrue(String.format("Expected pom.xml file to exist, but it doesn't. (path is %s).", readmeFile.getAbsolutePath()), readmeFile.exists());
-		Assert.assertTrue(String.format("Expected pom.xml to be a file, but it doesn't. (path is %s).", readmeFile.getAbsolutePath()), readmeFile.isFile());
+		File readmeFile = new File("gradle.properties").getAbsoluteFile();
+		Assert.assertTrue(String.format("Expected gradle.properties file to exist, but it doesn't. (path is %s).", readmeFile.getAbsolutePath()), readmeFile.exists());
+		Assert.assertTrue(String.format("Expected gradle.properties to be a file, but it doesn't. (path is %s).", readmeFile.getAbsolutePath()), readmeFile.isFile());
 		BufferedReader reader = new BufferedReader(new FileReader(readmeFile));
 		String line;
 		while ((line = reader.readLine()) != null) {
