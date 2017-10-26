@@ -1,4 +1,6 @@
 # Changelog
+## 5.21.1-beta - 2017-10-26
+* Upgrading build system to Gradle
 
 ## 5.21.0 - 2017-10-09
 * [#410](https://github.com/stripe/stripe-java/pull/410) Rename "verification" to "code verification" for sources (should have been unused up to this point)

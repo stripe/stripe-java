@@ -55,7 +55,7 @@ public class DocumentationTest {
 	}
 
 	@Test
-	public void testReadMeContainsMavenPomThatMatches() throws IOException {
+	public void testReadMeContainsStripeVersionThatMatches() throws IOException {
 		// this will be very flaky, but we want to ensure that the readme is correct.
 		File readmeFile = new File("README.md").getAbsoluteFile();
 		Assert.assertTrue(String.format("Expected README.md file to exist, but it doesn't. (path is %s).", readmeFile.getAbsolutePath()), readmeFile.exists());
@@ -87,6 +87,6 @@ public class DocumentationTest {
 				return;
 			}
 		}
-		Assert.fail(String.format("Expected the Stripe.VERSION (%s) to match up with the one listed in the pom.xml file. It wasn't found.", Stripe.VERSION));
+		Assert.fail(String.format("Expected the Stripe.VERSION (%s) to match up with the one listed in the gradle.properties file. It wasn't found.", Stripe.VERSION));
 	}
 }
