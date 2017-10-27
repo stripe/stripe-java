@@ -10,7 +10,7 @@ import com.stripe.net.RequestOptions;
 import java.io.IOException;
 import java.util.Map;
 
-public class Source extends ExternalAccount {
+public class Source extends ExternalAccount implements HasSourceTypeData {
 	Long amount;
 	String clientSecret;
 	SourceCodeVerificationFlow codeVerification;
@@ -237,5 +237,18 @@ public class Source extends ExternalAccount {
 		} else {
 			throw new InvalidRequestException("This source object does not appear to be currently attached to a customer object.", null, null, null, null);
 		}
+	}
+
+	public SourceTransactionCollection sourceTransactions(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return sourceTransactions(params, null);
+	}
+
+	public SourceTransactionCollection sourceTransactions(Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		String url = instanceURL(Source.class, this.getId()) + "/source_transactions";
+		return requestCollection(url, params, SourceTransactionCollection.class, options);
 	}
 }
