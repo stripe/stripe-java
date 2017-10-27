@@ -16,16 +16,6 @@ import java.util.regex.Pattern;
 
 public class DocumentationTest {
 
-	@Test
-	public void testVersionAgreesWithVERSIONFile() throws IOException {
-		File versionFile = new File("VERSION").getAbsoluteFile();
-		Assert.assertTrue(String.format("Expected VERSION file to exist, but it doesn't. (path is %s).", versionFile.getAbsolutePath()), versionFile.exists());
-		Assert.assertTrue(String.format("Expected VERSION to be a file, but it doesn't. (path is %s).", versionFile.getAbsolutePath()), versionFile.isFile());
-		BufferedReader reader = new BufferedReader(new FileReader(versionFile));
-		String firstLine = reader.readLine();
-		Assert.assertEquals(firstLine, Stripe.VERSION);
-	}
-
 	private static String formatDateTime() {
 		Calendar instance = Calendar.getInstance();
 		SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
@@ -55,7 +45,7 @@ public class DocumentationTest {
 	}
 
 	@Test
-	public void testReadMeContainsMavenPomThatMatches() throws IOException {
+	public void testReadMeContainsStripeVersionThatMatches() throws IOException {
 		// this will be very flaky, but we want to ensure that the readme is correct.
 		File readmeFile = new File("README.md").getAbsoluteFile();
 		Assert.assertTrue(String.format("Expected README.md file to exist, but it doesn't. (path is %s).", readmeFile.getAbsolutePath()), readmeFile.exists());
@@ -75,11 +65,11 @@ public class DocumentationTest {
 	}
 
 	@Test
-	public void testPomContainsVersionThatMatches() throws IOException {
+	public void testGradlePropertiesContainsVersionThatMatches() throws IOException {
 		// we want to ensure that the pom's version matches the static version.
-		File readmeFile = new File("pom.xml").getAbsoluteFile();
-		Assert.assertTrue(String.format("Expected pom.xml file to exist, but it doesn't. (path is %s).", readmeFile.getAbsolutePath()), readmeFile.exists());
-		Assert.assertTrue(String.format("Expected pom.xml to be a file, but it doesn't. (path is %s).", readmeFile.getAbsolutePath()), readmeFile.isFile());
+		File readmeFile = new File("gradle.properties").getAbsoluteFile();
+		Assert.assertTrue(String.format("Expected gradle.properties file to exist, but it doesn't. (path is %s).", readmeFile.getAbsolutePath()), readmeFile.exists());
+		Assert.assertTrue(String.format("Expected gradle.properties to be a file, but it doesn't. (path is %s).", readmeFile.getAbsolutePath()), readmeFile.isFile());
 		BufferedReader reader = new BufferedReader(new FileReader(readmeFile));
 		String line;
 		while ((line = reader.readLine()) != null) {
@@ -87,6 +77,6 @@ public class DocumentationTest {
 				return;
 			}
 		}
-		Assert.fail(String.format("Expected the Stripe.VERSION (%s) to match up with the one listed in the pom.xml file. It wasn't found.", Stripe.VERSION));
+		Assert.fail(String.format("Expected the Stripe.VERSION (%s) to match up with the one listed in the gradle.properties file. It wasn't found.", Stripe.VERSION));
 	}
 }
