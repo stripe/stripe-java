@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.22.1 - 2017-10-27
+* [#418](https://github.com/stripe/stripe-java/pull/418) Move build and release system from Maven to Gradle
+
 ## 5.22.0 - 2017-10-27
 * [#417](https://github.com/stripe/stripe-java/pull/417) Support for listing source transactions
 
