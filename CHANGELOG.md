@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.22.0 - 2017-10-27
+* [#417](https://github.com/stripe/stripe-java/pull/417) Support for listing source transactions
+
 ## 5.21.0 - 2017-10-09
 * [#410](https://github.com/stripe/stripe-java/pull/410) Rename "verification" to "code verification" for sources (should have been unused up to this point)
 * [#412](https://github.com/stripe/stripe-java/pull/412) Add support for detaching sources from customers
