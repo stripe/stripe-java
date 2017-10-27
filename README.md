@@ -103,16 +103,15 @@ servers.
 
 ## Testing
 
-You must have Maven installed. To run the tests:
+You must have Gradle installed. To run the tests:
 
-    mvn test
+    ./gradlew test
 
-You can run particular tests by passing `-D test=Class#method`. Make sure you use the fully qualified class name to differentiate between
-unit and functional tests. For example:
+You can run particular tests by passing `--tests Class#method`. Make sure you use the fully qualified class name. For example:
 
-    mvn test -D test=com.stripe.model.AccountTest
-    mvn test -D test=com.stripe.functional.ChargeTest
-    mvn test -D test=com.stripe.functional.ChargeTest#testChargeCreate
+    ./gradlew test --tests com.stripe.model.AccountTest
+    ./gradlew test --tests com.stripe.functional.ChargeTest
+    ./gradlew test --tests com.stripe.functional.ChargeTest.testChargeCreate
 
 <!--
 # vim: set tw=79:
