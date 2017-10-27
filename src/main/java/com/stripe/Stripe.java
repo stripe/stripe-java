@@ -10,7 +10,7 @@ public abstract class Stripe {
 	public static final String UPLOAD_API_BASE = "https://uploads.stripe.com";
 	public static final String LIVE_API_BASE = "https://api.stripe.com";
 	public static final String CONNECT_API_BASE = "https://connect.stripe.com";
-	public static final String VERSION = "5.21.0";
+	public static final String VERSION = "5.22.0";
 
 	public static volatile String apiKey;
 	public static volatile String apiVersion;
