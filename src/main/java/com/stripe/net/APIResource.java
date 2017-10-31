@@ -70,26 +70,28 @@ public abstract class APIResource extends StripeObject {
 
 		// TODO: Delurk this, with invoiceitem being a valid url, we can't get too
 		// fancy yet.
-		if (className.equals("applicationfee")) {
+		if (className.equals("applepaydomain")) {
+			return "apple_pay_domain";
+		} else if (className.equals("applicationfee")) {
 			return "application_fee";
-		} else if (className.equals("fileupload")) {
-			return "file";
 		} else if (className.equals("bitcoinreceiver")) {
 			return "bitcoin_receiver";
 		} else if (className.equals("countryspec")) {
 			return "country_spec";
-		} else if (className.equals("orderreturn")) {
-			return "order_return";
-		} else if (className.equals("threedsecure")) {
-			return "three_d_secure";
-		} else if (className.equals("applepaydomain")) {
-			return "apple_pay_domain";
-		} else if (className.equals("subscriptionitem")) {
-			return "subscription_item";
 		} else if (className.equals("ephemeralkey")) {
 			return "ephemeral_key";
+		} else if (className.equals("exchangerate")) {
+			return "exchange_rate";
+		} else if (className.equals("fileupload")) {
+			return "file";
+		} else if (className.equals("orderreturn")) {
+			return "order_return";
 		} else if (className.equals("sourcetransaction")) {
 			return "source_transaction";
+		} else if (className.equals("subscriptionitem")) {
+			return "subscription_item";
+		} else if (className.equals("threedsecure")) {
+			return "three_d_secure";
 		} else {
 			return className;
 		}

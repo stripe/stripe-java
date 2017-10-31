@@ -36,6 +36,7 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
 		objectMap.put("discount", Discount.class);
 		objectMap.put("dispute", Dispute.class);
 		objectMap.put("event", Event.class);
+		objectMap.put("exchange_rate", ExchangeRate.class);
 		objectMap.put("fee", Fee.class);
 		objectMap.put("fee_refund", FeeRefund.class);
 		objectMap.put("file_upload", FileUpload.class);
