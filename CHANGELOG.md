@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.23.0 - 2017-10-31
+* [#419](https://github.com/stripe/stripe-java/pull/419) Support for exchange rate APIs
+
 ## 5.22.1 - 2017-10-27
 * [#418](https://github.com/stripe/stripe-java/pull/418) Move build and release system from Maven to Gradle
 
