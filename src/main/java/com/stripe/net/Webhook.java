@@ -48,7 +48,7 @@ public final class Webhook {
 	 * @throws SignatureVerificationException if the verification fails.
 	 */
 	public static Event constructEvent(String payload, String sigHeader, String secret, long tolerance) throws SignatureVerificationException {
-		Event event = StripeObject.PRETTY_PRINT_GSON.fromJson(payload, Event.class);
+		Event event = APIResource.GSON.fromJson(payload, Event.class);
 		Signature.verifyHeader(payload, sigHeader, secret, tolerance);
 		return event;
 	}

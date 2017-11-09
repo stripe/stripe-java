@@ -12,6 +12,8 @@ public abstract class StripeObject {
 			setPrettyPrinting().
 			serializeNulls().
 			setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).
+			registerTypeAdapter(ExpandableField.class, new ExpandableFieldSerializer()).
+			// TODO: remove the deserializers in the next major release
 			registerTypeAdapter(EventData.class, new EventDataDeserializer()).
 			registerTypeAdapter(EventRequest.class, new EventRequestDeserializer()).
 			create();
