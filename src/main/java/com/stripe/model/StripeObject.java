@@ -1,5 +1,7 @@
 package com.stripe.model;
 
+import com.stripe.net.StripeResponse;
+
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -15,6 +17,8 @@ public abstract class StripeObject {
 			registerTypeAdapter(EventData.class, new EventDataDeserializer()).
 			registerTypeAdapter(EventRequest.class, new EventRequestDeserializer()).
 			create();
+	
+	public StripeResponse response;
 
 	@Override
 	public String toString() {
@@ -24,6 +28,13 @@ public abstract class StripeObject {
 				System.identityHashCode(this),
 				this.getIdString(),
 				PRETTY_PRINT_GSON.toJson(this));
+	}
+
+	public StripeResponse getResponse() {
+		return response;
+	}
+	public void SetResponse(StripeResponse response) {
+		this.response = response; 
 	}
 
 	public String toJson() {
