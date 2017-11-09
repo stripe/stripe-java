@@ -72,7 +72,7 @@ public class DeserializerTest extends BaseStripeTest {
 	@Test
 	public void deserializeEventDataAccountEvent() throws IOException {
 		String json = resource("account_event.json");
-		Event e = StripeObject.PRETTY_PRINT_GSON.fromJson(json, Event.class);
+		Event e = gson.fromJson(json, Event.class);
 
 		assertEquals(e.getType(), "account.updated");
 	}
