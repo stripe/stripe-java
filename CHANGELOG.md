@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.23.1 - 2017-11-09
+* [#423](https://github.com/stripe/stripe-java/pull/423) Fix JSON encoding for expandable fields by adding customer encoder
+
 ## 5.23.0 - 2017-10-31
 * [#419](https://github.com/stripe/stripe-java/pull/419) Support for exchange rate APIs
 
