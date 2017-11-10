@@ -113,7 +113,7 @@ public class BaseStripeTest {
 				Mockito.<Map<String, Object>>any(),
 				Mockito.<Class<T>>any(),
 				Mockito.any(APIResource.RequestType.class),
-				Mockito.any(RequestOptions.class))).thenReturn(APIResource.GSON.fromJson(response, clazz));
+				Mockito.<RequestOptions>any())).thenReturn(APIResource.GSON.fromJson(response, clazz));
 	}
 
 	public static <T> void stubOAuth(Class<T> clazz, String response) throws StripeException {
@@ -123,10 +123,10 @@ public class BaseStripeTest {
 				Mockito.<Map<String, Object>>any(),
 				Mockito.<Class<T>>any(),
 				Mockito.any(APIResource.RequestType.class),
-				Mockito.any(RequestOptions.class))).thenReturn(APIResource.GSON.fromJson(response, clazz));
+				Mockito.<RequestOptions>any())).thenReturn(APIResource.GSON.fromJson(response, clazz));
 	}
 
-	public static class ParamMapMatcher extends ArgumentMatcher<Map<String, Object>> {
+	public static class ParamMapMatcher implements ArgumentMatcher<Map<String, Object>> {
 		private Map<String, Object> other;
 
 		public ParamMapMatcher(Map<String, Object> other) {
@@ -134,23 +134,20 @@ public class BaseStripeTest {
 		}
 
 		/* Treat null references as equal to empty maps */
-		public boolean matches(Object obj) {
-			if (obj == null) {
+		public boolean matches(Map<String,Object> paramMap) {
+			if (paramMap == null) {
 				return this.other == null || this.other.isEmpty();
-			} else if (obj instanceof Map) {
-				Map<String, Object> paramMap = (Map<String, Object>) obj;
+			} else {
 				if (this.other == null) {
 					return paramMap.isEmpty();
 				} else {
 					return this.other.equals(paramMap);
 				}
-			} else {
-				return false;
 			}
 		}
 	}
 
-	public static class RequestOptionsMatcher extends ArgumentMatcher<RequestOptions> {
+	public static class RequestOptionsMatcher implements ArgumentMatcher<RequestOptions> {
 		private RequestOptions other;
 
 		public RequestOptionsMatcher(RequestOptions other) {
@@ -158,19 +155,16 @@ public class BaseStripeTest {
 		}
 
 		/* Treat null reference as RequestOptions.getDefault() */
-		public boolean matches(Object obj) {
+		public boolean matches(RequestOptions requestOptions) {
 			RequestOptions defaultOptions = RequestOptions.getDefault();
-			if (obj == null) {
+			if (requestOptions == null) {
 				return this.other == null || this.other.equals(defaultOptions);
-			} else if (obj instanceof RequestOptions) {
-				RequestOptions requestOptions = (RequestOptions) obj;
+			} else {
 				if (this.other == null) {
 					return requestOptions.equals(defaultOptions);
 				} else {
 					return this.other.equals(requestOptions);
 				}
-			} else {
-				return false;
 			}
 		}
 	}
