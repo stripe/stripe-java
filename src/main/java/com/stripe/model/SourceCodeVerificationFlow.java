@@ -1,22 +1,11 @@
 package com.stripe.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public final class SourceCodeVerificationFlow extends StripeObject {
 	Integer attemptsRemaining;
 	String status;
-
-	public Integer getAttemptsRemaining() {
-		return attemptsRemaining;
-	}
-
-	public void setAttemptsRemaining(Integer attemptsRemaining) {
-		this.attemptsRemaining = attemptsRemaining;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
 }

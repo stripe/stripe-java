@@ -8,191 +8,53 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Collections;
 import java.util.Map;
 
 public class BitcoinReceiver extends ExternalAccount {
+	@Getter @Setter
 	Boolean active;
+	@Getter @Setter
 	Long amount;
+	@Getter @Setter
 	Long amountReceived;
+	@Getter @Setter
 	Long bitcoinAmount;
+	@Getter @Setter
 	Long bitcoinAmountReceived;
+	@Getter @Setter
 	String bitcoinUri;
+	@Getter @Setter
 	Long created;
+	@Getter @Setter
 	String currency;
+	@Getter @Setter
 	String description;
+	@Getter @Setter
 	String email;
+	@Getter @Setter
 	Boolean filled;
+	@Getter @Setter
 	String inboundAddress;
+	@Getter @Setter
 	Boolean livemode;
+	@Getter @Setter
 	String payment;
+	@Getter @Setter
 	String refundAddress;
+	@Getter @Setter
 	Boolean rejectTransactions;
+	@Getter @Setter
 	String status;
+	@Getter @Setter
 	BitcoinTransactionCollection transactions;
+	@Getter @Setter
 	Boolean uncapturedFunds;
+	@Getter @Setter
 	Boolean usedForPayment;
-
-	public Boolean getActive() {
-		return active;
-	}
-
-	public void setActive(Boolean active) {
-		this.active = active;
-	}
-
-	public Long getAmount() {
-		return amount;
-	}
-
-	public void setAmount(Long amount) {
-		this.amount = amount;
-	}
-
-	public Long getAmountReceived() {
-		return amountReceived;
-	}
-
-	public void setAmountReceived(Long amountReceived) {
-		this.amountReceived = amountReceived;
-	}
-
-	public Long getBitcoinAmount() {
-		return bitcoinAmount;
-	}
-
-	public void setBitcoinAmount(Long bitcoinAmount) {
-		this.bitcoinAmount = bitcoinAmount;
-	}
-
-	public Long getBitcoinAmountReceived() {
-		return bitcoinAmountReceived;
-	}
-
-	public void setBitcoinAmountReceived(Long bitcoinAmountReceived) {
-		this.bitcoinAmountReceived = bitcoinAmountReceived;
-	}
-
-	public String getBitcoinUri() {
-		return bitcoinUri;
-	}
-
-	public void setBitcoinUri(String bitcoinUri) {
-		this.bitcoinUri = bitcoinUri;
-	}
-
-	public Long getCreated() {
-		return created;
-	}
-
-	public void setCreated(Long created) {
-		this.created = created;
-	}
-
-	public String getCurrency() {
-		return currency;
-	}
-
-	public void setCurrency(String currency) {
-		this.currency = currency;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Boolean getFilled() {
-		return filled;
-	}
-
-	public void setFilled(Boolean filled) {
-		this.filled = filled;
-	}
-
-	public String getInboundAddress() {
-		return inboundAddress;
-	}
-
-	public void setInboundAddress(String inboundAddress) {
-		this.inboundAddress = inboundAddress;
-	}
-
-	public Boolean getLivemode() {
-		return livemode;
-	}
-
-	public void setLivemode(Boolean livemode) {
-		this.livemode = livemode;
-	}
-
-	public String getPayment() {
-		return payment;
-	}
-
-	public void setPayment(String payment) {
-		this.payment = payment;
-	}
-
-	public String getRefundAddress() {
-		return refundAddress;
-	}
-
-	public void setRefundAddress(String refundAddress) {
-		this.refundAddress = refundAddress;
-	}
-
-	public Boolean getRejectTransactions() {
-		return rejectTransactions;
-	}
-
-	public void setRejectTransactions(Boolean rejectTransactions) {
-		this.rejectTransactions = rejectTransactions;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public BitcoinTransactionCollection getTransactions() {
-		return transactions;
-	}
-
-	public void setTransactions(BitcoinTransactionCollection transactions) {
-		this.transactions = transactions;
-	}
-
-	public Boolean getUncapturedFunds() {
-		return uncapturedFunds;
-	}
-
-	public void setUncapturedFunds(Boolean uncapturedFunds) {
-		this.uncapturedFunds = uncapturedFunds;
-	}
-
-	public Boolean getUsedForPayment() {
-		return usedForPayment;
-	}
-
-	public void setUsedForPayment(Boolean usedForPayment) {
-		this.usedForPayment = usedForPayment;
-	}
 
 	public static BitcoinReceiver create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,

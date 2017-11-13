@@ -10,79 +10,54 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
+import lombok.Getter;
+import lombok.Setter;
 
 public class Order extends APIResource implements HasId, MetadataStore<Order> {
+	@Getter @Setter
 	String id;
+	@Getter @Setter
 	String object;
+	@Getter @Setter
 	Long amount;
+	@Getter @Setter
 	Long amountReturned;
+	@Getter @Setter
 	String application;
+	@Getter @Setter
 	Long applicationFee;
 	ExpandableField<Charge> charge;
+	@Getter @Setter
 	Long created;
+	@Getter @Setter
 	String currency;
 	ExpandableField<Customer> customer;
+	@Getter @Setter
 	String email;
+	@Getter @Setter
 	String externalCouponCode;
+	@Getter @Setter
 	List<OrderItem> items;
+	@Getter @Setter
 	Boolean livemode;
+	@Getter @Setter
 	Map<String, String> metadata;
+	@Getter @Setter
 	OrderReturnCollection returns;
+	@Getter @Setter
 	String selectedShippingMethod;
+	@Getter @Setter
 	ShippingDetails shipping;
+	@Getter @Setter
 	List<ShippingMethod> shippingMethods;
+	@Getter @Setter
 	String status;
+	@Getter @Setter
 	StatusTransitions statusTransitions;
+	@Getter @Setter
 	Long updated;
+	@Getter @Setter
 	String upstreamId;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getObject() {
-		return object;
-	}
-
-	public void setObject(String object) {
-		this.object = object;
-	}
-
-	public Long getAmount() {
-		return amount;
-	}
-
-	public void setAmount(Long amount) {
-		this.amount = amount;
-	}
-
-	public Long getAmountReturned() {
-		return amountReturned;
-	}
-
-	public void setAmountReturned(Long amountReturned) {
-		this.amountReturned = amountReturned;
-	}
-
-	public String getApplication() {
-		return application;
-	}
-
-	public void setApplication(String application) {
-		this.application = application;
-	}
-
-	public Long getApplicationFee() {
-		return applicationFee;
-	}
-
-	public void setApplicationFee(Long applicationFee) {
-		this.applicationFee = applicationFee;
-	}
 
 	public String getCharge() {
 		if (this.charge == null) {
@@ -107,22 +82,6 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
 		this.charge = new ExpandableField<Charge>(charge.getId(), charge);
 	}
 
-	public Long getCreated() {
-		return created;
-	}
-
-	public void setCreated(Long created) {
-		this.created = created;
-	}
-
-	public String getCurrency() {
-		return currency;
-	}
-
-	public void setCurrency(String currency) {
-		this.currency = currency;
-	}
-
 	public String getCustomer() {
 		if (this.customer == null) {
 			return null;
@@ -143,110 +102,6 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
 
 	public void setCustomerObject(Customer customer) {
 		this.customer = new ExpandableField<Customer>(customer.getId(), customer);
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getExternalCouponCode() {
-		return externalCouponCode;
-	}
-
-	public void setExternalCouponCode(String externalCouponCode) {
-		this.externalCouponCode = externalCouponCode;
-	}
-
-	public List<OrderItem> getItems() {
-		return items;
-	}
-
-	public void setItems(List<OrderItem> items) {
-		this.items = items;
-	}
-
-	public Boolean getLivemode() {
-		return livemode;
-	}
-
-	public void setLivemode(Boolean livemode) {
-		this.livemode = livemode;
-	}
-
-	public Map<String, String> getMetadata() {
-		return metadata;
-	}
-
-	public void setMetadata(Map<String, String> metadata) {
-		this.metadata = metadata;
-	}
-
-	public OrderReturnCollection getReturns() {
-		return returns;
-	}
-
-	public void setReturns(OrderReturnCollection returns) {
-		this.returns = returns;
-	}
-
-	public String getSelectedShippingMethod() {
-		return selectedShippingMethod;
-	}
-
-	public void setSelectedShippingMethod(String selectedShippingMethod) {
-		this.selectedShippingMethod = selectedShippingMethod;
-	}
-
-	public ShippingDetails getShipping() {
-		return shipping;
-	}
-
-	public void setShipping(ShippingDetails shipping) {
-		this.shipping = shipping;
-	}
-
-	public List<ShippingMethod> getShippingMethods() {
-		return shippingMethods;
-	}
-
-	public void setShippingMethods(List<ShippingMethod> shippingMethods) {
-		this.shippingMethods = shippingMethods;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public StatusTransitions getStatusTransitions() {
-		return statusTransitions;
-	}
-
-	public void setStatusTransitions(StatusTransitions statusTransitions) {
-		this.statusTransitions = statusTransitions;
-	}
-
-	public Long getUpdated() {
-		return updated;
-	}
-
-	public void setUpdated(Long updated) {
-		this.updated = updated;
-	}
-
-	public String getUpstreamId() {
-		return upstreamId;
-	}
-
-	public void setUpstreamId(String upstreamId) {
-		this.upstreamId = upstreamId;
 	}
 
 	public static Order create(Map<String, Object> params)

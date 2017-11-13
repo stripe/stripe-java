@@ -7,102 +7,82 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Map;
 
 public class Invoice extends APIResource implements MetadataStore<Invoice>, HasId {
+	@Getter @Setter
 	String id;
+	@Getter @Setter
 	String object;
+	@Getter @Setter
 	Long amountDue;
+	@Getter @Setter
 	Long applicationFee;
+	@Getter @Setter
 	Integer attemptCount;
+	@Getter @Setter
 	Boolean attempted;
+	@Getter @Setter
 	String billing;
 	ExpandableField<Charge> charge;
+	@Getter @Setter
 	Boolean closed;
+	@Getter @Setter
 	Long created;
+	@Getter @Setter
 	String currency;
+	@Getter @Setter
 	String customer;
+	@Getter @Setter
 	Long date;
+	@Getter @Setter
 	String description;
+	@Getter @Setter
 	Discount discount;
+	@Getter @Setter
 	Long dueDate;
+	@Getter @Setter
 	Long endingBalance;
+	@Getter @Setter
 	Boolean forgiven;
+	@Getter @Setter
 	InvoiceLineItemCollection lines;
+	@Getter @Setter
 	Boolean livemode;
+	@Getter @Setter
 	Map<String, String> metadata;
+	@Getter @Setter
 	Long nextPaymentAttempt;
+	@Getter @Setter
 	String number;
+	@Getter @Setter
 	Boolean paid;
+	@Getter @Setter
 	Long periodEnd;
+	@Getter @Setter
 	Long periodStart;
+	@Getter @Setter
 	String receiptNumber;
+	@Getter @Setter
 	Long startingBalance;
+	@Getter @Setter
 	String statementDescriptor;
 	ExpandableField<Subscription> subscription;
+	@Getter @Setter
 	Long subscriptionProrationDate;
+	@Getter @Setter
 	Long subtotal;
+	@Getter @Setter
 	Long tax;
+	@Getter @Setter
 	Double taxPercent;
+	@Getter @Setter
 	Long total;
+	@Getter @Setter
 	Long webhooksDeliveredAt;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getObject() {
-		return object;
-	}
-
-	public void setObject(String object) {
-		this.object = object;
-	}
-
-	public Long getAmountDue() {
-		return amountDue;
-	}
-
-	public void setAmountDue(Long amountDue) {
-		this.amountDue = amountDue;
-	}
-
-	public Long getApplicationFee() {
-		return applicationFee;
-	}
-
-	public void setApplicationFee(Long applicationFee) {
-		this.applicationFee = applicationFee;
-	}
-
-	public Integer getAttemptCount() {
-		return attemptCount;
-	}
-
-	public void setAttemptCount(Integer attemptCount) {
-		this.attemptCount = attemptCount;
-	}
-
-	public Boolean getAttempted() {
-		return attempted;
-	}
-
-	public void setAttempted(Boolean attempted) {
-		this.attempted = attempted;
-	}
-
-	public String getBilling() {
-		return billing;
-	}
-
-	public void setBilling(String billing) {
-		this.billing = billing;
-	}
 
 	public String getCharge() {
 		if (charge == null) {
@@ -126,170 +106,6 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 		this.charge = new ExpandableField<Charge>(charge.getId(), charge);
 	}
 
-	public Boolean getClosed() {
-		return closed;
-	}
-
-	public void setClosed(Boolean closed) {
-		this.closed = closed;
-	}
-
-	public Long getCreated() {
-		return created;
-	}
-
-	public void setCreated(Long created) {
-		this.created = created;
-	}
-
-	public String getCurrency() {
-		return currency;
-	}
-
-	public void setCurrency(String currency) {
-		this.currency = currency;
-	}
-
-	public String getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(String customer) {
-		this.customer = customer;
-	}
-
-	public Long getDate() {
-		return date;
-	}
-
-	public void setDate(Long date) {
-		this.date = date;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Discount getDiscount() {
-		return discount;
-	}
-
-	public void setDiscount(Discount discount) {
-		this.discount = discount;
-	}
-
-	public Long getDueDate() {
-		return dueDate;
-	}
-
-	public void setDueDate(Long dueDate) {
-		this.dueDate = dueDate;
-	}
-
-	public Long getEndingBalance() {
-		return endingBalance;
-	}
-
-	public void setEndingBalance(Long endingBalance) {
-		this.endingBalance = endingBalance;
-	}
-
-	public Boolean getForgiven() {
-		return forgiven;
-	}
-
-	public void setForgiven(Boolean forgiven) {
-		this.forgiven = forgiven;
-	}
-
-	public InvoiceLineItemCollection getLines() {
-		return lines;
-	}
-
-	public Boolean getLivemode() {
-		return livemode;
-	}
-
-	public void setLivemode(Boolean livemode) {
-		this.livemode = livemode;
-	}
-
-	public Map<String, String> getMetadata() {
-		return metadata;
-	}
-
-	public void setMetadata(Map<String, String> metadata) {
-		this.metadata = metadata;
-	}
-
-	public Long getNextPaymentAttempt() {
-		return nextPaymentAttempt;
-	}
-
-	public void setNextPaymentAttempt(Long nextPaymentAttempt) {
-		this.nextPaymentAttempt = nextPaymentAttempt;
-	}
-
-	public String getNumber() {
-		return number;
-	}
-
-	public void setNumber(String number) {
-		this.number = number;
-	}
-
-	public Boolean getPaid() {
-		return paid;
-	}
-
-	public void setPaid(Boolean paid) {
-		this.paid = paid;
-	}
-
-	public Long getPeriodEnd() {
-		return periodEnd;
-	}
-
-	public void setPeriodEnd(Long periodEnd) {
-		this.periodEnd = periodEnd;
-	}
-
-	public Long getPeriodStart() {
-		return periodStart;
-	}
-
-	public void setPeriodStart(Long periodStart) {
-		this.periodStart = periodStart;
-	}
-
-	public String getReceiptNumber() {
-		return receiptNumber;
-	}
-
-	public void setReceiptNumber(String receiptNumber) {
-		this.receiptNumber = receiptNumber;
-	}
-
-	public Long getStartingBalance() {
-		return startingBalance;
-	}
-
-	public void setStartingBalance(Long startingBalance) {
-		this.startingBalance = startingBalance;
-	}
-
-	public String getStatementDescriptor() {
-		return statementDescriptor;
-	}
-
-	public void setStatementDescriptor(String statementDescriptor) {
-		this.statementDescriptor = statementDescriptor;
-	}
-
 	public String getSubscription() {
 		if (subscription == null) {
 			return null;
@@ -310,54 +126,6 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 
 	public void setSubscriptionObject(Subscription subscription) {
 		this.subscription = new ExpandableField<Subscription>(subscription.getId(), subscription);
-	}
-
-	public Long getSubscriptionProrationDate() {
-		return subscriptionProrationDate;
-	}
-
-	public void setSubscriptionProrationDate(Long subscriptionProrationDate) {
-		this.subscriptionProrationDate = subscriptionProrationDate;
-	}
-
-	public Long getSubtotal() {
-		return subtotal;
-	}
-
-	public void setSubtotal(Long subtotal) {
-		this.subtotal = subtotal;
-	}
-
-	public Long getTax() {
-		return tax;
-	}
-
-	public void setTax(Long tax) {
-		this.tax = tax;
-	}
-
-	public Double getTaxPercent() {
-		return taxPercent;
-	}
-
-	public void setTaxPercent(Double taxPercent) {
-		this.taxPercent = taxPercent;
-	}
-
-	public Long getTotal() {
-		return total;
-	}
-
-	public void setTotal(Long total) {
-		this.total = total;
-	}
-
-	public Long getWebhooksDeliveredAt() {
-		return webhooksDeliveredAt;
-	}
-
-	public void setWebhooksDeliveredAt(Long webhooksDeliveredAt) {
-		this.webhooksDeliveredAt = webhooksDeliveredAt;
 	}
 
 	public static Invoice retrieve(String id) throws AuthenticationException,

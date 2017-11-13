@@ -7,58 +7,41 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Map;
 
 public class InvoiceItem extends APIResource implements MetadataStore<InvoiceItem>, HasId {
+	@Getter @Setter
 	String id;
+	@Getter @Setter
 	String object;
+	@Getter @Setter
 	Long amount;
+	@Getter @Setter
 	String currency;
 	ExpandableField<Customer> customer;
+	@Getter @Setter
 	Long date;
+	@Getter @Setter
 	String description;
+	@Getter @Setter
 	Boolean discountable;
 	ExpandableField<Invoice> invoice;
+	@Getter @Setter
 	Boolean livemode;
+	@Getter @Setter
 	Map<String, String> metadata;
+	@Getter @Setter
 	InvoiceLineItemPeriod period;
+	@Getter @Setter
 	Plan plan;
+	@Getter @Setter
 	Boolean proration;
+	@Getter @Setter
 	Integer quantity;
 	ExpandableField<Subscription> subscription;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getObject() {
-		return object;
-	}
-
-	public void setObject(String object) {
-		this.object = object;
-	}
-
-	public Long getAmount() {
-		return amount;
-	}
-
-	public void setAmount(Long amount) {
-		this.amount = amount;
-	}
-
-	public String getCurrency() {
-		return currency;
-	}
-
-	public void setCurrency(String currency) {
-		this.currency = currency;
-	}
 
 	public String getCustomer() {
 		if (this.customer == null) {
@@ -83,30 +66,6 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
 		this.customer = new ExpandableField<Customer>(c.getId(), c);
 	}
 
-	public Long getDate() {
-		return date;
-	}
-
-	public void setDate(Long date) {
-		this.date = date;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Boolean getDiscountable() {
-		return discountable;
-	}
-
-	public void setDiscountable(Boolean discountable) {
-		this.discountable = discountable;
-	}
-
 	public String getInvoice() {
 		if (this.invoice == null) {
 			return null;
@@ -128,54 +87,6 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
 
 	public void setInvoiceObject(Invoice invoice) {
 		this.invoice = new ExpandableField<Invoice>(invoice.getId(), invoice);
-	}
-
-	public Boolean getLivemode() {
-		return livemode;
-	}
-
-	public void setLivemode(Boolean livemode) {
-		this.livemode = livemode;
-	}
-
-	public Map<String, String> getMetadata() {
-		return metadata;
-	}
-
-	public void setMetadata(Map<String, String> metadata) {
-		this.metadata = metadata;
-	}
-
-	public InvoiceLineItemPeriod getPeriod() {
-		return period;
-	}
-
-	public void setPeriod(InvoiceLineItemPeriod period) {
-		this.period = period;
-	}
-
-	public Plan getPlan() {
-		return plan;
-	}
-
-	public void setPlan(Plan plan) {
-		this.plan = plan;
-	}
-
-	public Boolean getProration() {
-		return proration;
-	}
-
-	public void setProration(Boolean proration) {
-		this.proration = proration;
-	}
-
-	public Integer getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(Integer quantity) {
-		this.quantity = quantity;
 	}
 
 	public String getSubscription() {

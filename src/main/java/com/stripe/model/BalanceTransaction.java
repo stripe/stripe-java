@@ -11,104 +11,38 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
+import lombok.Getter;
+import lombok.Setter;
 
 public class BalanceTransaction extends APIResource implements HasId {
+	@Getter @Setter
 	String id;
+	@Getter @Setter
 	String object;
+	@Getter @Setter
 	Long amount;
+	@Getter @Setter
 	Long availableOn;
+	@Getter @Setter
 	Long created;
+	@Getter @Setter
 	String currency;
+	@Getter @Setter
 	String description;
+	@Getter @Setter
 	Long fee;
+	@Getter @Setter
 	List<Fee> feeDetails;
+	@Getter @Setter
 	Integer net;
 	ExpandableField<HasId> source;
+	@Getter @Setter
 	String status;
+	@Getter @Setter
 	String type;
 
 	@Deprecated
 	TransferCollection sourcedTransfers;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getObject() {
-		return object;
-	}
-
-	public void setObject(String object) {
-		this.object = object;
-	}
-
-	public Long getAmount() {
-		return amount;
-	}
-
-	public void setAmount(Long amount) {
-		this.amount = amount;
-	}
-
-	public Long getAvailableOn() {
-		return availableOn;
-	}
-
-	public void setAvailableOn(Long availableOn) {
-		this.availableOn = availableOn;
-	}
-
-	public Long getCreated() {
-		return created;
-	}
-
-	public void setCreated(Long created) {
-		this.created = created;
-	}
-
-	public String getCurrency() {
-		return currency;
-	}
-
-	public void setCurrency(String currency) {
-		this.currency = currency;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Long getFee() {
-		return fee;
-	}
-
-	public void setFee(Long fee) {
-		this.fee = fee;
-	}
-
-	public List<Fee> getFeeDetails() {
-		return feeDetails;
-	}
-
-	public void setFeeDetails(List<Fee> feeDetails) {
-		this.feeDetails = feeDetails;
-	}
-
-	public Integer getNet() {
-		return net;
-	}
-
-	public void setNet(Integer net) {
-		this.net = net;
-	}
 
 	/**
 	 * @deprecated Recent API versions no longer return this field (https://stripe.com/docs/upgrades#2017-01-27).
@@ -120,22 +54,6 @@ public class BalanceTransaction extends APIResource implements HasId {
 			sourcedTransfers.setURL(String.format("/v1/transfers?source_transaction=%s", getSource()));
 		}
 		return sourcedTransfers;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
 	}
 
 	public String getSource() {

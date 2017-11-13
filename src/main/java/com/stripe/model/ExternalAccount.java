@@ -8,58 +8,20 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Collections;
 import java.util.Map;
 
+@Getter
+@Setter
 public class ExternalAccount extends APIResource implements HasId, MetadataStore<ExternalAccount> {
 	String id;
 	String object;
 	String account;
 	String customer;
 	Map<String, String> metadata;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getObject() {
-		return object;
-	}
-
-	public void setObject(String object) {
-		this.object = object;
-	}
-
-	public String getAccount() {
-		return account;
-	}
-
-	// For testing
-	public void setAccount(String account) {
-		this.account = account;
-	}
-
-	public String getCustomer() {
-		return customer;
-	}
-
-	// For testing
-	public void setCustomer(String customer) {
-		this.customer = customer;
-	}
-
-	public Map<String, String> getMetadata() {
-		return metadata;
-	}
-
-	public void setMetadata(Map<String, String> metadata) {
-		this.metadata = metadata;
-	}
 
 	public String getInstanceURL() {
 		if (this.getCustomer() != null) {

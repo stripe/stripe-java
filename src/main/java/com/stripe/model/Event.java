@@ -10,6 +10,11 @@ import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class Event extends APIResource implements HasId {
 	String id;
 	String object;
@@ -21,103 +26,12 @@ public class Event extends APIResource implements HasId {
 	Integer pendingWebhooks;
 	EventRequest request;
 	String type;
-	String userId;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getObject() {
-		return object;
-	}
-
-	public void setObject(String object) {
-		this.object = object;
-	}
-
-	public String getAccount() {
-		return account;
-	}
-
-	public void setAccount(String account) {
-		this.account = account;
-	}
-
-	public String getApiVersion() {
-		return apiVersion;
-	}
-
-	public void setApiVersion(String apiVersion) {
-		this.apiVersion = apiVersion;
-	}
-
-	public Long getCreated() {
-		return created;
-	}
-
-	public void setCreated(Long created) {
-		this.created = created;
-	}
-
-	public EventData getData() {
-		return data;
-	}
-
-	public void setData(EventData data) {
-		this.data = data;
-	}
-
-	public Boolean getLivemode() {
-		return livemode;
-	}
-
-	public void setLivemode(Boolean livemode) {
-		this.livemode = livemode;
-	}
-
-	public Integer getPendingWebhooks() {
-		return pendingWebhooks;
-	}
-
-	public void setPendingWebhooks(Integer pendingWebhooks) {
-		this.pendingWebhooks = pendingWebhooks;
-	}
-
-	public EventRequest getRequest() {
-		return request;
-	}
-
-	public void setRequest(EventRequest request) {
-		this.request = request;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String name) {
-		this.type = name;
-	}
 
 	/**
 	 * Legacy; use `getAccount` instead (https://stripe.com/docs/upgrades#2017-05-25)
 	 */
 	@Deprecated
-	public String getUserId() {
-		return userId;
-	}
-
-	/**
-	 * Legacy; use `setAccount` instead (https://stripe.com/docs/upgrades#2017-05-25)
-	 */
-	@Deprecated
-	public void setUserId(String userId) {
-		this.userId = userId;
-	}
+	String userId;
 
 	public static Event retrieve(String id) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,

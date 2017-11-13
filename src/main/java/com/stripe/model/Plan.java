@@ -7,9 +7,13 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Map;
 
+@Getter
+@Setter
 public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
 	String id;
 	String object;
@@ -24,120 +28,11 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
 	String statementDescriptor;
 	Integer trialPeriodDays;
 
+	/**
+	 * @deprecated Use `statementDescriptor` field (https://stripe.com/docs/upgrades#2014-12-17)
+	 */
 	@Deprecated
 	String statementDescription;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getObject() {
-		return object;
-	}
-
-	public void setObject(String object) {
-		this.object = object;
-	}
-
-	public Long getAmount() {
-		return amount;
-	}
-
-	public void setAmount(Long amount) {
-		this.amount = amount;
-	}
-
-	public Long getCreated() {
-		return created;
-	}
-
-	public void setCreated(Long created) {
-		this.created = created;
-	}
-
-	public String getCurrency() {
-		return currency;
-	}
-
-	public void setCurrency(String currency) {
-		this.currency = currency;
-	}
-
-	public String getInterval() {
-		return interval;
-	}
-
-	public void setInterval(String interval) {
-		this.interval = interval;
-	}
-
-	public Integer getIntervalCount() {
-		return intervalCount;
-	}
-
-	public void setIntervalCount(Integer intervalCount) {
-		this.intervalCount = intervalCount;
-	}
-
-	public Boolean getLivemode() {
-		return livemode;
-	}
-
-	public void setLivemode(Boolean livemode) {
-		this.livemode = livemode;
-	}
-
-	public Map<String, String> getMetadata() {
-		return metadata;
-	}
-
-	public void setMetadata(Map<String, String> metadata) {
-		this.metadata = metadata;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getStatementDescriptor() {
-		return statementDescriptor;
-	}
-
-	public void setStatementDescriptor(String statementDescriptor) {
-		this.statementDescriptor = statementDescriptor;
-	}
-
-	public Integer getTrialPeriodDays() {
-		return trialPeriodDays;
-	}
-
-	public void setTrialPeriodDays(Integer trialPeriodDays) {
-		this.trialPeriodDays = trialPeriodDays;
-	}
-
-	/**
-	 * @deprecated Use `statement_descriptor` field (https://stripe.com/docs/upgrades#2014-12-17)
-	 */
-	@Deprecated
-	public String getStatementDescription() {
-		return statementDescription;
-	}
-
-	/**
-	 * @deprecated Use `statement_descriptor` field (https://stripe.com/docs/upgrades#2014-12-17)
-	 */
-	@Deprecated
-	public void setStatementDescription(String statementDescription) {
-		this.statementDescription = statementDescription;
-	}
 
 	public static Plan create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,

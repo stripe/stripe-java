@@ -8,37 +8,17 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Map;
 
+@Getter
+@Setter
 public class ExchangeRate extends APIResource implements HasId {
 	String id;
 	String object;
 	Map<String, Float> rates;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getObject() {
-		return object;
-	}
-
-	public void setObject(String object) {
-		this.object = object;
-	}
-
-	public Map<String, Float> getRates() {
-		return rates;
-	}
-
-	public void setRates(Map<String, Float> rates) {
-		this.rates = rates;
-	}
 
 	public static ExchangeRate retrieve(String currency) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,

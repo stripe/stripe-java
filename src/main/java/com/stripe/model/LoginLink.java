@@ -7,9 +7,13 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Map;
 
+@Getter
+@Setter
 public class LoginLink extends APIResource implements HasId {
 	String object;
 	Long created;
@@ -17,29 +21,5 @@ public class LoginLink extends APIResource implements HasId {
 
 	public String getId() {
 		throw new UnsupportedOperationException("Login links are ephemeral and do not have an identifier");
-	}
-
-	public String getObject() {
-		return object;
-	}
-
-	public void setObject(String object) {
-		this.object = object;
-	}
-
-	public Long getCreated() {
-		return created;
-	}
-
-	public void setCreated(Long created) {
-		this.created = created;
-	}
-
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
 	}
 }

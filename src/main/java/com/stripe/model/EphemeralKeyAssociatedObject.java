@@ -1,22 +1,11 @@
 package com.stripe.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class EphemeralKeyAssociatedObject extends StripeObject implements HasId {
 	String type;
 	String id;
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
 }

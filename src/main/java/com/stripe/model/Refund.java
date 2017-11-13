@@ -7,46 +7,34 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Map;
 
 public class Refund extends APIResource implements MetadataStore<Charge>, HasId {
+	@Getter @Setter
 	String id;
+	@Getter @Setter
 	String object;
+	@Getter @Setter
 	Long amount;
 	ExpandableField<BalanceTransaction> balanceTransaction;
 	ExpandableField<Charge> charge;
+	@Getter @Setter
 	Long created;
+	@Getter @Setter
 	String currency;
+	@Getter @Setter
 	String description;
+	@Getter @Setter
 	Map<String, String> metadata;
+	@Getter @Setter
 	String reason;
+	@Getter @Setter
 	String receiptNumber;
+	@Getter @Setter
 	String status;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getObject() {
-		return object;
-	}
-
-	public void setObject(String object) {
-		this.object = object;
-	}
-
-	public Long getAmount() {
-		return amount;
-	}
-
-	public void setAmount(Long amount) {
-		this.amount = amount;
-	}
 
 	public String getBalanceTransaction() {
 		if (this.balanceTransaction == null) {
@@ -90,62 +78,6 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
 
 	public void setChargeObject(Charge c) {
 		this.charge = new ExpandableField<Charge>(c.getId(), c);
-	}
-
-	public Long getCreated() {
-		return created;
-	}
-
-	public void setCreated(Long created) {
-		this.created = created;
-	}
-
-	public String getCurrency() {
-		return currency;
-	}
-
-	public void setCurrency(String currency) {
-		this.currency = currency;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public Map<String, String> getMetadata() {
-		return metadata;
-	}
-
-	public void setMetadata(Map<String, String> metadata) {
-		this.metadata = metadata;
-	}
-
-	public String getReason() {
-		return reason;
-	}
-
-	public void setReason(String reason) {
-		this.reason = reason;
-	}
-
-	public String getReceiptNumber() {
-		return receiptNumber;
-	}
-
-	public void setReceiptNumber(String receiptNumber) {
-		this.receiptNumber = receiptNumber;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
 	}
 
 	public Refund update(Map<String, Object> params)
