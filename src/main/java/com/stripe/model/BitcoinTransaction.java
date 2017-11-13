@@ -8,72 +8,25 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Collections;
 import java.util.Map;
 
 public class BitcoinTransaction extends APIResource implements HasId {
+	@Getter @Setter
 	String id;
+	@Getter @Setter
 	Long amount;
+	@Getter @Setter
 	Long bitcoinAmount;
+	@Getter @Setter
 	Long created;
+	@Getter @Setter
 	String currency;
+	@Getter @Setter
 	String customer;
+	@Getter @Setter
 	String receiver;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public Long getAmount() {
-		return amount;
-	}
-
-	public void setAmount(Long amount) {
-		this.amount = amount;
-	}
-
-	public Long getBitcoinAmount() {
-		return bitcoinAmount;
-	}
-
-	public void setBitcoinAmount(Long bitcoinAmount) {
-		this.bitcoinAmount = bitcoinAmount;
-	}
-
-	public Long getCreated() {
-		return created;
-	}
-
-	public void setCreated(Long created) {
-		this.created = created;
-	}
-
-	public String getCurrency() {
-		return currency;
-	}
-
-	public void setCurrency(String currency) {
-		this.currency = currency;
-	}
-
-	public String getCustomer() {
-		return customer;
-	}
-
-	public void setCustomer(String customer) {
-		this.customer = customer;
-	}
-
-	public String getReceiver() {
-		return receiver;
-	}
-
-	public void setReceiver(String receiver) {
-		this.receiver = receiver;
-	}
 }

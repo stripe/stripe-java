@@ -1,34 +1,21 @@
 package com.stripe.model;
 
 import com.stripe.net.APIResource;
+import lombok.Getter;
+import lombok.Setter;
 
 public class ChargeOutcome extends APIResource {
+	@Getter @Setter
 	protected String networkStatus;
+	@Getter @Setter
 	protected String reason;
+	@Getter @Setter
 	protected String riskLevel;
 	protected ExpandableField<ChargeOutcomeRule> rule;
+	@Getter @Setter
 	protected String sellerMessage;
+	@Getter @Setter
 	protected String type;
-
-	public String getNetworkStatus() {
-		return networkStatus;
-	}
-
-	public String getReason() {
-		return reason;
-	}
-
-	public String getRiskLevel() {
-		return riskLevel;
-	}
-
-	public String getSellerMessage() {
-		return sellerMessage;
-	}
-
-	public String getType() {
-		return type;
-	}
 
 	@Deprecated
 	public ChargeOutcomeRule getRule() {
@@ -50,26 +37,6 @@ public class ChargeOutcome extends APIResource {
 			return null;
 		}
 		return this.rule.getExpanded();
-	}
-
-	public void setNetworkStatus(String networkStatus) {
-		this.networkStatus = networkStatus;
-	}
-
-	public void setRiskLevel(String riskLevel) {
-		this.riskLevel = riskLevel;
-	}
-
-	public void setReason(String reason) {
-		this.reason = reason;
-	}
-
-	public void setSellerMessage(String sellerMessage) {
-		this.sellerMessage = sellerMessage;
-	}
-
-	public void setType(String type) {
-		this.type = type;
 	}
 
 	@Deprecated

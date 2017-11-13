@@ -1,47 +1,23 @@
 package com.stripe.model;
 
 import com.stripe.net.APIResource;
+import lombok.Getter;
+import lombok.Setter;
 
 public class OrderItem extends APIResource {
+	@Getter @Setter
 	String object;
+	@Getter @Setter
 	Long amount;
+	@Getter @Setter
 	String currency;
+	@Getter @Setter
 	String description;
 	ExpandableField<HasId> parent;
+	@Getter @Setter
 	Integer quantity;
+	@Getter @Setter
 	String type;
-
-	public String getObject() {
-		return object;
-	}
-
-	public void setObject(String object) {
-		this.object = object;
-	}
-
-	public Long getAmount() {
-		return amount;
-	}
-
-	public void setAmount(Long amount) {
-		this.amount = amount;
-	}
-
-	public String getCurrency() {
-		return currency;
-	}
-
-	public void setCurrency(String currency) {
-		this.currency = currency;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
 
 	public String getParent() {
 		if (this.parent == null) {
@@ -70,21 +46,5 @@ public class OrderItem extends APIResource {
 			return null;
 		}
 		return (O) this.parent.getExpanded();
-	}
-
-	public Integer getQuantity() {
-		return quantity;
-	}
-
-	public void setQuantity(Integer quantity) {
-		this.quantity = quantity;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
 	}
 }

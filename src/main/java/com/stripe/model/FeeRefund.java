@@ -7,38 +7,26 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Map;
 
 public class FeeRefund extends APIResource implements MetadataStore<ApplicationFee>, HasId {
+	@Getter
 	String id;
+	@Getter @Setter
 	String object;
+	@Getter @Setter
 	Long amount;
 	ExpandableField<BalanceTransaction> balanceTransaction;
+	@Getter @Setter
 	String currency;
+	@Getter @Setter
 	Long created;
 	ExpandableField<ApplicationFee> fee;
+	@Getter @Setter
 	Map<String, String> metadata;
-
-	public String getId() {
-		return id;
-	}
-
-	public String getObject() {
-		return object;
-	}
-
-	public void setObject(String object) {
-		this.object = object;
-	}
-
-	public Long getAmount() {
-		return amount;
-	}
-
-	public void setAmount(Long amount) {
-		this.amount = amount;
-	}
 
 	public String getBalanceTransaction() {
 		if (this.balanceTransaction == null) {
@@ -62,22 +50,6 @@ public class FeeRefund extends APIResource implements MetadataStore<ApplicationF
 		this.balanceTransaction = new ExpandableField<BalanceTransaction>(c.getId(), c);
 	}
 
-	public String getCurrency() {
-		return currency;
-	}
-
-	public void setCurrency(String currency) {
-		this.currency = currency;
-	}
-
-	public Long getCreated() {
-		return created;
-	}
-
-	public void setCreated(Long created) {
-		this.created = created;
-	}
-
 	public String getFee() {
 		if (this.fee == null) {
 			return null;
@@ -98,14 +70,6 @@ public class FeeRefund extends APIResource implements MetadataStore<ApplicationF
 
 	public void setFeeObject(ApplicationFee c) {
 		this.fee = new ExpandableField<ApplicationFee>(c.getId(), c);
-	}
-
-	public Map<String, String> getMetadata() {
-		return metadata;
-	}
-
-	public void setMetadata(Map<String, String> metadata) {
-		this.metadata = metadata;
 	}
 
 	public FeeRefund update(Map<String, Object> params)

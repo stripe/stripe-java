@@ -7,62 +7,42 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.HashMap;
 import java.util.Map;
 
+
 public class Recipient extends APIResource implements MetadataStore<Recipient>, HasId {
+	@Getter @Setter
 	String id;
+	@Getter @Setter
 	String object;
+	@Getter @Setter
 	BankAccount activeAccount;
+	@Getter
 	RecipientCardCollection cards;
+	@Getter @Setter
 	Long created;
 	ExpandableField<Card> defaultCard;
+	@Getter
 	Boolean deleted;
+	@Getter @Setter
 	String description;
+	@Getter @Setter
 	String email;
+	@Getter @Setter
 	Boolean livemode;
+	@Getter @Setter
 	Map<String, String> metadata;
 	ExpandableField<Account> migratedTo;
+	@Getter @Setter
 	String name;
+	@Getter @Setter
 	String type;
+	@Getter @Setter
 	Boolean verified;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getObject() {
-		return object;
-	}
-
-	public void setObject(String object) {
-		this.object = object;
-	}
-
-	public BankAccount getActiveAccount() {
-		return activeAccount;
-	}
-
-	public void setActiveAccount(BankAccount activeAccount) {
-		this.activeAccount = activeAccount;
-	}
-
-	public RecipientCardCollection getCards() {
-		return cards;
-	}
-
-	public Long getCreated() {
-		return created;
-	}
-
-	public void setCreated(Long created) {
-		this.created = created;
-	}
 
 	public String getDefaultCard() {
 		if (this.defaultCard == null) {
@@ -86,42 +66,6 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
 		this.defaultCard = new ExpandableField<Card>(c.getId(), c);
 	}
 
-	public Boolean getDeleted() {
-		return deleted;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public Boolean getLivemode() {
-		return livemode;
-	}
-
-	public void setLivemode(Boolean livemode) {
-		this.livemode = livemode;
-	}
-
-	public Map<String, String> getMetadata() {
-		return metadata;
-	}
-
-	public void setMetadata(Map<String, String> metadata) {
-		this.metadata = metadata;
-	}
-
 	public String getMigratedTo() {
 		if (this.migratedTo == null) {
 			return null;
@@ -142,30 +86,6 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
 
 	public void setMigratedToObject(Account c) {
 		this.migratedTo = new ExpandableField<Account>(c.getId(), c);
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public Boolean getVerified() {
-		return verified;
-	}
-
-	public void setVerified(Boolean verified) {
-		this.verified = verified;
 	}
 
 	public static Recipient create(Map<String, Object> params)

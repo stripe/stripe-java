@@ -7,230 +7,92 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.*;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
 public class Account extends APIResource implements HasId, MetadataStore<Account> {
+
+	@Getter
 	String id;
+	@Getter @Setter
 	String object;
+	@Getter
 	String businessLogo;
+	@Getter
 	String businessName;
+	@Getter
 	String businessPrimaryColor;
+	@Getter
 	@SerializedName("business_url")
 	String businessURL;
+	@Getter
 	Boolean chargesEnabled;
+	@Getter
 	String country;
+	@Getter @Setter
 	Boolean debitNegativeBalances;
+	@Getter @Setter
 	AccountDeclineChargeOn declineChargeOn;
+	@Getter
 	String defaultCurrency;
+	@Getter
 	Boolean detailsSubmitted;
+	@Getter
 	String displayName;
+	@Getter
 	LoginLinkCollection loginLinks;
+	@Getter
 	String email;
+	@Getter
 	ExternalAccountCollection externalAccounts;
+	@Getter
 	Keys keys;
+	@Getter
 	LegalEntity legalEntity;
-	Boolean managed;
-	Map<String, String> metadata;
-	Boolean payoutsEnabled;
-	AccountPayoutSchedule payoutSchedule;
-	String productDescription;
-	String statementDescriptor;
-	String supportEmail;
-	String supportPhone;
-	@SerializedName("support_url")
-	String supportURL;
-	String timezone;
-	AccountTosAcceptance tosAcceptance;
-	AccountTransferSchedule transferSchedule;
-	Boolean transfersEnabled;
-	String type;
-	Verification verification;
-
-	@Deprecated
-	List<String> currenciesSupported;
-
-	public String getId() {
-		return id;
-	}
-
-	public String getObject() {
-		return object;
-	}
-
-	public void setObject(String object) {
-		this.object = object;
-	}
-
-	public String getBusinessLogo() {
-		return businessLogo;
-	}
-
-	public String getBusinessName() {
-		return businessName;
-	}
-
-	public String getBusinessPrimaryColor() {
-		return businessPrimaryColor;
-	}
-
-	public void setBusinessPrimaryColor(String businessPrimaryColor) {
-		this.businessPrimaryColor = businessPrimaryColor;
-	}
-
-	public String getBusinessURL() {
-		return businessURL;
-	}
-
-	public Boolean getChargesEnabled() {
-		return chargesEnabled;
-	}
-
-	public String getCountry() {
-		return country;
-	}
-
-	public Boolean getDebitNegativeBalances() {
-		return debitNegativeBalances;
-	}
-
-	public void setDebitNegativeBalances(Boolean debitNegativeBalances) {
-		this.debitNegativeBalances = debitNegativeBalances;
-	}
-
-	public AccountDeclineChargeOn getDeclineChargeOn() {
-		return declineChargeOn;
-	}
-
-	public void setDeclineChargeOn(AccountDeclineChargeOn declineChargeOn) {
-		this.declineChargeOn = declineChargeOn;
-	}
-
-	public String getDefaultCurrency() {
-		return defaultCurrency;
-	}
-
-	public Boolean getDetailsSubmitted() {
-		return detailsSubmitted;
-	}
-
-	public String getDisplayName() {
-		return displayName;
-	}
-
-	public LoginLinkCollection getLoginLinks() {
-		return loginLinks;
-	}
-
-	public String getEmail() {
-		return email;
-	}
-
-	public ExternalAccountCollection getExternalAccounts() {
-		return externalAccounts;
-	}
-
-	public Keys getKeys() {
-		return keys;
-	}
-
-	public LegalEntity getLegalEntity() {
-		return legalEntity;
-	}
 
 	/**
 	 * @deprecated Use getType() instead.
 	 */
-	@Deprecated
-	public Boolean getManaged() {
-		return managed;
-	}
-
-	public Map<String, String> getMetadata() {
-		return metadata;
-	}
-
-	public Boolean getPayoutsEnabled() {
-		return payoutsEnabled;
-	}
-
-	public void setPayoutsEnabled(Boolean payoutsEnabled) {
-		this.payoutsEnabled = payoutsEnabled;
-	}
-
-	public AccountPayoutSchedule getPayoutSchedule() {
-		return payoutSchedule;
-	}
-
-	public void setPayoutSchedule(AccountPayoutSchedule payoutSchedule) {
-		this.payoutSchedule = payoutSchedule;
-	}
-
-	public String getProductDescription() {
-		return productDescription;
-	}
-
-	public void setProductDescription(String productDescription) {
-		this.productDescription = productDescription;
-	}
-
-	public String getStatementDescriptor() {
-		return statementDescriptor;
-	}
-
-	public String getSupportEmail() {
-		return supportEmail;
-	}
-
-	public String getSupportPhone() {
-		return supportPhone;
-	}
-
-	public String getSupportURL() {
-		return supportURL;
-	}
-
-	public String getTimezone() {
-		return timezone;
-	}
-
-	public AccountTosAcceptance getTosAcceptance() {
-		return tosAcceptance;
-	}
-
-	public void setTosAcceptance(AccountTosAcceptance tosAcceptance) {
-		this.tosAcceptance = tosAcceptance;
-	}
-
-	public AccountTransferSchedule getTransferSchedule() {
-		return transferSchedule;
-	}
-
-	public void setTransferSchedule(AccountTransferSchedule transferSchedule) {
-		this.transferSchedule = transferSchedule;
-	}
-
-	public Boolean getTransfersEnabled() {
-		return transfersEnabled;
-	}
-
-	public String getType() {
-		return type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
-	}
-
-	public Verification getVerification() {
-		return verification;
-	}
+	@Deprecated @Getter
+	Boolean managed;
+	@Getter
+	Map<String, String> metadata;
+	@Getter @Setter
+	Boolean payoutsEnabled;
+	@Getter @Setter
+	AccountPayoutSchedule payoutSchedule;
+	@Getter @Setter
+	String productDescription;
+	@Getter
+	String statementDescriptor;
+	@Getter
+	String supportEmail;
+	@Getter
+	String supportPhone;
+	@Getter
+	@SerializedName("support_url")
+	String supportURL;
+	@Getter
+	String timezone;
+	@Getter @Setter
+	AccountTosAcceptance tosAcceptance;
+	@Setter
+	AccountTransferSchedule transferSchedule;
+	@Getter
+	Boolean transfersEnabled;
+	@Getter @Setter
+	String type;
+	@Getter
+	Verification verification;
 
 	/**
 	 * @deprecated Use the country_specs endpoint (https://stripe.com/docs/upgrades#2016-03-07)
 	 */
+	@Getter
 	@Deprecated
-	public List<String> getCurrenciesSupported() {
-		return currenciesSupported;
-	}
+	List<String> currenciesSupported;
 
 	public static Account create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,
@@ -358,55 +220,19 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 		return request(RequestMethod.DELETE, instanceURL(Account.class, this.id), params, DeletedAccount.class, options);
 	}
 
+	@Getter
+	@EqualsAndHashCode(callSuper = false)
 	public static class Verification extends StripeObject {
 		Boolean contacted;
 		String disabledReason;
 		Long dueBy;
 		List<String> fieldsNeeded;
 
-		public Boolean getContacted() {
-			return contacted;
-		}
-
-		public String getDisabledReason() {
-			return disabledReason;
-		}
-
-		public Long getDueBy() {
-			return dueBy;
-		}
-
-		public List<String> getFieldsNeeded() {
-			return fieldsNeeded;
-		}
-
-		@Override
-		public boolean equals(Object o) {
-			if (this == o) {
-				return true;
-			}
-			if (o == null || getClass() != o.getClass()) {
-				return false;
-			}
-
-			Verification ve = (Verification) o;
-			return equals(contacted, ve.contacted) &&
-					equals(disabledReason, ve.disabledReason) &&
-					equals(dueBy, ve.dueBy) &&
-					equals(fieldsNeeded, ve.fieldsNeeded);
-		}
 	}
 
+	@Getter
 	public static class Keys extends StripeObject {
 		String publishable;
 		String secret;
-
-		public String getPublishable() {
-			return publishable;
-		}
-
-		public String getSecret() {
-			return secret;
-		}
 	}
 }

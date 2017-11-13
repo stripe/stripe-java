@@ -1,5 +1,10 @@
 package com.stripe.model;
 
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
 public class TransferTransaction extends StripeObject implements HasId {
 	String id;
 	String object;

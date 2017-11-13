@@ -4,6 +4,7 @@
 .settings
 tags
 target
+out
 .idea
 *.iml
 

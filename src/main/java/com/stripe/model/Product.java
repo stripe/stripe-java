@@ -10,7 +10,11 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
 public class Product extends APIResource implements HasId, MetadataStore<Product> {
 	String id;
 	String object;
@@ -29,142 +33,6 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
 	SKUCollection skus;
 	Long updated;
 	String url;
-
-	public String getId() {
-		return id;
-	}
-
-	public void setId(String id) {
-		this.id = id;
-	}
-
-	public String getObject() {
-		return object;
-	}
-
-	public void setObject(String object) {
-		this.object = object;
-	}
-
-	public Boolean getActive() {
-		return active;
-	}
-
-	public void setActive(Boolean active) {
-		this.active = active;
-	}
-
-	public List<String> getAttributes() {
-		return attributes;
-	}
-
-	public void setAttributes(List<String> attributes) {
-		this.attributes = attributes;
-	}
-
-	public String getCaption() {
-		return caption;
-	}
-
-	public void setCaption(String caption) {
-		this.caption = caption;
-	}
-
-	public Long getCreated() {
-		return created;
-	}
-
-	public void setCreated(Long created) {
-		this.created = created;
-	}
-
-	public List<String> getDeactivateOn() {
-		return deactivateOn;
-	}
-
-	public void setDeactivateOn(List<String> deactivateOn) {
-		this.deactivateOn = deactivateOn;
-	}
-
-	public String getDescription() {
-		return description;
-	}
-
-	public void setDescription(String description) {
-		this.description = description;
-	}
-
-	public List<String> getImages() {
-		return images;
-	}
-
-	public void setImages(List<String> images) {
-		this.images = images;
-	}
-
-	public Boolean getLivemode() {
-		return livemode;
-	}
-
-	public void setLivemode(Boolean livemode) {
-		this.livemode = livemode;
-	}
-
-	public Map<String, String> getMetadata() {
-		return metadata;
-	}
-
-	public void setMetadata(Map<String, String> metadata) {
-		this.metadata = metadata;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public PackageDimensions getPackageDimensions() {
-		return packageDimensions;
-	}
-
-	public void setPackageDimensions(PackageDimensions packageDimensions) {
-		this.packageDimensions = packageDimensions;
-	}
-
-	public Boolean getShippable() {
-		return shippable;
-	}
-
-	public void setShippable(Boolean shippable) {
-		this.shippable = shippable;
-	}
-
-	public SKUCollection getSkus() {
-		return skus;
-	}
-
-	public void setSkus(SKUCollection skus) {
-		this.skus = skus;
-	}
-
-	public Long getUpdated() {
-		return updated;
-	}
-
-	public void setUpdated(Long updated) {
-		this.updated = updated;
-	}
-
-	public String getURL() {
-		return url;
-	}
-
-	public void setURL(String url) {
-		this.url = url;
-	}
 
 	public static Product create(Map<String, Object> params)
 			throws AuthenticationException, InvalidRequestException,

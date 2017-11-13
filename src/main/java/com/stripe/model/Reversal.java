@@ -7,38 +7,26 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
+import lombok.Getter;
+import lombok.Setter;
 
 import java.util.Map;
 
 public class Reversal extends APIResource implements MetadataStore<Transfer>, HasId {
+	@Getter
 	String id;
+	@Getter @Setter
 	String object;
+	@Getter @Setter
 	Long amount;
 	ExpandableField<BalanceTransaction> balanceTransaction;
+	@Getter @Setter
 	Long created;
+	@Getter @Setter
 	String currency;
+	@Getter @Setter
 	Map<String, String> metadata;
 	ExpandableField<Transfer> transfer;
-
-	public String getId() {
-		return id;
-	}
-
-	public String getObject() {
-		return object;
-	}
-
-	public void setObject(String object) {
-		this.object = object;
-	}
-
-	public Long getAmount() {
-		return amount;
-	}
-
-	public void setAmount(Long amount) {
-		this.amount = amount;
-	}
 
 	public String getBalanceTransaction() {
 		if (this.balanceTransaction == null) {
@@ -60,30 +48,6 @@ public class Reversal extends APIResource implements MetadataStore<Transfer>, Ha
 
 	public void setBalanceTransactionObject(BalanceTransaction c) {
 		this.balanceTransaction = new ExpandableField<BalanceTransaction>(c.getId(), c);
-	}
-
-	public Long getCreated() {
-		return created;
-	}
-
-	public void setCreated(Long created) {
-		this.created = created;
-	}
-
-	public String getCurrency() {
-		return currency;
-	}
-
-	public void setCurrency(String currency) {
-		this.currency = currency;
-	}
-
-	public Map<String, String> getMetadata() {
-		return metadata;
-	}
-
-	public void setMetadata(Map<String, String> metadata) {
-		this.metadata = metadata;
 	}
 
 	public String getTransfer() {
