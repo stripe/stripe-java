@@ -33,3 +33,10 @@ dependencies {
 }
 
 apply from: 'deploy.gradle'
+
+test {
+    testLogging {
+        events "passed", "skipped", "failed"
+        exceptionFormat "full"
+    }
+}
