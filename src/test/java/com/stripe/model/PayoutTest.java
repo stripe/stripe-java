@@ -39,6 +39,7 @@ public class PayoutTest extends BaseStripeTest {
 		assertEquals("po_123456789ABCD", payout.getId());
 		assertEquals(10000L, (long) payout.getAmount());
 		assertEquals(1487116449L, (long) payout.getArrivalDate());
+		assertEquals(false, payout.getAutomatic());
 		assertEquals("txn_123456789ABCD", payout.getBalanceTransaction());
 		assertEquals("usd", payout.getCurrency());
 		assertEquals("ba_123456789ABCD", payout.getDestination());

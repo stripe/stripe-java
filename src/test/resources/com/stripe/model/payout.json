@@ -3,6 +3,7 @@
   "object": "payout",
   "amount": 10000,
   "arrival_date": 1487116449,
+  "automatic": false,
   "balance_transaction": "txn_123456789ABCD",
   "cancellation_balance_transaction": null,
   "created": 1487116449,
