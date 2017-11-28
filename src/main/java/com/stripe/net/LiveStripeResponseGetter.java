@@ -1,6 +1,7 @@
 package com.stripe.net;
 
 import com.stripe.Stripe;
+import com.stripe.model.StripeObject;
 import com.stripe.exception.APIConnectionException;
 import com.stripe.exception.APIException;
 import com.stripe.exception.AuthenticationException;
@@ -15,7 +16,6 @@ import com.stripe.exception.oauth.InvalidScopeException;
 import com.stripe.exception.oauth.OAuthException;
 import com.stripe.exception.oauth.UnsupportedGrantTypeException;
 import com.stripe.exception.oauth.UnsupportedResponseTypeException;
-import com.stripe.model.StripeCollectionInterface;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSocketFactory;
@@ -35,7 +35,6 @@ import java.net.URL;
 import java.net.URLStreamHandler;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
@@ -482,9 +481,9 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 			APIConnectionException, CardException, APIException {
 		StripeResponse response = _rawRequest(method, url, params, type, options);
 
-		int rCode = response.getResponseCode();
-		String rBody = response.getResponseBody();
-		String requestId = response.getRequestId();
+		int rCode = response.code();
+		String rBody = response.body();
+		String requestId = response.requestId();
 
 		if (rCode < 200 || rCode >= 300) {
 			handleAPIError(rBody, rCode, requestId);
@@ -492,6 +491,10 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
 		T resource = APIResource.GSON.fromJson(rBody, clazz);
 
+		if (resource instanceof StripeObject) {
+			StripeObject obj = (StripeObject)resource;
+			obj.setLastResponse(response);
+		}
 		return resource;
 	}
 
@@ -502,9 +505,9 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 			APIConnectionException, APIException, OAuthException {
 		StripeResponse response = _rawRequest(method, url, params, type, options);
 
-		int rCode = response.getResponseCode();
-		String rBody = response.getResponseBody();
-		String requestId = response.getRequestId();
+		int rCode = response.code();
+		String rBody = response.body();
+		String requestId = response.requestId();
 
 		if (rCode < 200 || rCode >= 300) {
 			handleOAuthError(rBody, rCode, requestId);

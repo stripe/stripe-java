@@ -1,5 +1,7 @@
 package com.stripe.model;
 
+import com.stripe.net.StripeResponse;
+
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -28,9 +30,18 @@ public abstract class StripeObject {
 				PRETTY_PRINT_GSON.toJson(this));
 	}
 
+	public StripeResponse getLastResponse() {
+		return lastResponse;
+	}
+	public void setLastResponse(StripeResponse response) {
+		this.lastResponse = response; 
+	}
+
 	public String toJson() {
 		return PRETTY_PRINT_GSON.toJson(this);
 	}
+
+	private transient StripeResponse lastResponse;
 
 	private Object getIdString() {
 		try {

@@ -5,49 +5,45 @@ import java.util.Map;
 
 public class StripeResponse {
 
-	int responseCode;
-	String responseBody;
-	Map<String, List<String>> responseHeaders;
+	int code;
+	String body;
+	StripeHeaders headers;
 
-	public StripeResponse(int responseCode, String responseBody) {
-		this.responseCode = responseCode;
-		this.responseBody = responseBody;
-		this.responseHeaders = null;
+	public StripeResponse(int code, String body) {
+		this.code = code;
+		this.body = body;
+		this.headers = null;
 	}
 
-	public StripeResponse(int responseCode, String responseBody, Map<String, List<String>> responseHeaders) {
-		this.responseCode = responseCode;
-		this.responseBody = responseBody;
-		this.responseHeaders = responseHeaders;
+	public StripeResponse(int code, String body, Map<String, List<String>> headers) {
+		this.code = code;
+		this.body = body;
+		this.headers = new StripeHeaders(headers);
 	}
 
-	public int getResponseCode() {
-		return responseCode;
+	public int code() {
+		return this.code;
 	}
 
-	public void setResponseCode(int responseCode) {
-		this.responseCode = responseCode;
+	public String body() {
+		return this.body;
 	}
 
-	public String getResponseBody() {
-		return responseBody;
+	public StripeHeaders headers() {
+		return headers;
 	}
 
-	public void setResponseBody(String responseBody) {
-		this.responseBody = responseBody;
-	}
-
-	public Map<String, List<String>> getResponseHeaders() {
-		return responseHeaders;
-	}
-
-	public String getRequestId() {
-		String requestId = null;
-		Map<String, List<String>> headers = getResponseHeaders();
-		List<String> requestIdList = headers == null ? null : headers.get("Request-Id");
-		if (requestIdList != null && requestIdList.size() > 0) {
-			requestId = requestIdList.get(0);
+	public String idempotencyKey() {
+		if (headers == null) {
+			return null;
 		}
-		return requestId;
+		return headers.get("Idempotency-Key");
+	}
+
+	public String requestId() {
+		if (headers == null) {
+			return null;
+		}
+		return headers.get("Request-Id");
 	}
 }
