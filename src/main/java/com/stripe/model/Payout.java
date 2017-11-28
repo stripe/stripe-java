@@ -16,6 +16,7 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
 	String object;
 	Long amount;
 	Long arrivalDate;
+	Boolean automatic;
 	ExpandableField<BalanceTransaction> balanceTransaction;
 	Long created;
 	String currency;
@@ -61,6 +62,14 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
 
 	public void setArrivalDate(Long arrivalDate) {
 		this.arrivalDate = arrivalDate;
+	}
+
+	public Boolean getAutomatic() {
+		return automatic;
+	}
+
+	public void setAutomatic(Boolean automatic) {
+		this.automatic = automatic;
 	}
 
 	public String getBalanceTransaction() {
