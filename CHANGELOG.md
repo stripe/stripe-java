@@ -1,7 +1,8 @@
 # Changelog
 
 ## 5.24.0 - 2017-11-28
-* [#999](https://github.com/stripe/stripe-java/pull/999) DESCRIBE CHANGES HERE (try to use the same style, tense, etc. as the other entries)
+* [#421](https://github.com/stripe/stripe-java/pull/421) Expose response objects 
+* [#427](https://github.com/stripe/stripe-java/pull/427) Add `automatic` property on `Payout` model
 
 ## 5.23.1 - 2017-11-09
 * [#423](https://github.com/stripe/stripe-java/pull/423) Fix JSON encoding for expandable fields by adding customer encoder
