@@ -12,6 +12,7 @@ import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
 import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -55,6 +56,29 @@ public class DisputeTest extends BaseStripeFunctionalTest {
 		Dispute dispute = disputedCharge.getDisputeObject();
 		Dispute retrievedDispute = Dispute.retrieve(dispute.getId());
 		assertEquals(dispute.getId(), retrievedDispute.getId());
+	}
+
+	@Test
+	public void testRetrieveDisputeWithExpand() throws StripeException, InterruptedException {
+		int chargeValueCents = 100;
+		Charge disputedCharge = createDisputedCharge(chargeValueCents, null);
+		Dispute dispute = disputedCharge.getDisputeObject();
+
+		List<String> expandList = new LinkedList<String>();
+		expandList.add("charge");
+
+		Map<String, Object> retrieveParams = new HashMap<String, Object>();
+		retrieveParams.put("expand", expandList);
+
+		Dispute retrievedDispute = Dispute.retrieve(dispute.getId(), retrieveParams, null);
+		assertEquals(dispute.getId(), retrievedDispute.getId());
+
+		Charge expandedCharge = retrievedDispute.getChargeObject();
+		assertNotNull(expandedCharge);
+		assertEquals(disputedCharge.getId(), expandedCharge.getId());
+
+		Card card = (Card) expandedCharge.getSource();
+		assertEquals("0259", card.getLast4());
 	}
 
 	@Test
