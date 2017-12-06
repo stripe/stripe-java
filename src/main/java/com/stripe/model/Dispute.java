@@ -16,7 +16,7 @@ public class Dispute extends APIResource implements HasId {
 	String object;
 	Long amount;
 	List<BalanceTransaction> balanceTransactions;
-	String charge;
+	ExpandableField<Charge> charge;
 	Long created;
 	String currency;
 	EvidenceSubObject evidenceSubObject; // `evidence`
@@ -77,11 +77,25 @@ public class Dispute extends APIResource implements HasId {
 	}
 
 	public String getCharge() {
-		return charge;
+		if (charge == null) {
+			return null;
+		}
+		return charge.getId();
 	}
 
-	public void setCharge(String charge) {
-		this.charge = charge;
+	public void setCharge(String chargeID) {
+		this.charge = setExpandableFieldID(chargeID, this.charge);
+	}
+
+	public Charge getChargeObject() {
+		if (this.charge == null) {
+			return null;
+		}
+		return this.charge.getExpanded();
+	}
+
+	public void setChargeObject(Charge charge) {
+		this.charge = new ExpandableField<Charge>(charge.getId(), charge);
 	}
 
 	public Long getCreated() {
@@ -218,13 +232,19 @@ public class Dispute extends APIResource implements HasId {
 	public static Dispute retrieve(String id) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return retrieve(id, null);
+		return retrieve(id, null, null);
 	}
 
 	public static Dispute retrieve(String id, RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return request(RequestMethod.GET, instanceURL(Dispute.class, id), null, Dispute.class, options);
+		return retrieve(id, null, options);
+	}
+
+	public static Dispute retrieve(String id, Map<String, Object> params, RequestOptions options) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return request(RequestMethod.GET, instanceURL(Dispute.class, id), params, Dispute.class, options);
 	}
 
 	public static DisputeCollection list(Map<String, Object> params) throws AuthenticationException,

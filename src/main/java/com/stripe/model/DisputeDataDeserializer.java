@@ -17,6 +17,8 @@ public class DisputeDataDeserializer implements JsonDeserializer<Dispute> {
 		Gson gson = new GsonBuilder()
 				.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
 				.registerTypeAdapter(ExpandableField.class, new ExpandableFieldDeserializer())
+				.registerTypeAdapter(Source.class, new SourceTypeDataDeserializer<Source>())
+				.registerTypeAdapterFactory(new ExternalAccountTypeAdapterFactory())
 				.create();
 		if (json.isJsonNull()) {
 			return null;
