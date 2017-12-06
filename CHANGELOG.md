@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.25.0 - 2017-12-06
+* [#432](https://github.com/stripe/stripe-java/pull/432) Make charge on `Dispute` expandable
+
 ## 5.24.0 - 2017-11-28
 * [#421](https://github.com/stripe/stripe-java/pull/421) Expose response objects 
 * [#427](https://github.com/stripe/stripe-java/pull/427) Add `automatic` property on `Payout` model
