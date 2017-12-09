@@ -9,6 +9,7 @@ addons:
 
 jdk:
   - openjdk7
+  - openjdk8
   - oraclejdk8
   - oraclejdk9
 
@@ -25,10 +26,8 @@ notifications:
   email:
     on_success: never
 
-sudo: false
-
 script:
-  - ./gradlew clean test
+  - ./gradlew clean cobertura coveralls
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
