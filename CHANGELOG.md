@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.26.0 - 2017-12-18
+* [#436](https://github.com/stripe/stripe-java/pull/436) Fix bug where `options` were not being plumbed through in an account delete method
+* [#436](https://github.com/stripe/stripe-java/pull/436) Add the proper set of overloads for account reject method
+
 ## 5.25.0 - 2017-12-06
 * [#432](https://github.com/stripe/stripe-java/pull/432) Make charge on `Dispute` expandable
 
