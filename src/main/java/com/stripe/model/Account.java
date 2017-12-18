@@ -322,12 +322,6 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 		return update(params, null);
 	}
 
-	public Account reject(Map<String, Object> params)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.POST, instanceURL(Account.class, this.id) + "/reject", params, Account.class, null);
-	}
-
 	public Account update(Map<String, Object> params, RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
@@ -337,13 +331,13 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 	public DeletedAccount delete()
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return delete((RequestOptions) null);
+		return delete(null, (RequestOptions) null);
 	}
 
 	public DeletedAccount delete(RequestOptions options)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		return delete(null, null);
+		return delete(null, options);
 	}
 
 	public DeletedAccount delete(Map<String, Object> params)
@@ -356,6 +350,19 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
 		return request(RequestMethod.DELETE, instanceURL(Account.class, this.id), params, DeletedAccount.class, options);
+	}
+
+	public Account reject(Map<String, Object> params)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return reject(params, null);
+	}
+
+	public Account reject(Map<String, Object> params, RequestOptions options)
+			throws AuthenticationException, InvalidRequestException,
+			APIConnectionException, CardException, APIException {
+		return request(RequestMethod.POST, String.format("%s/reject",
+				instanceURL(Account.class, this.getId())), params, Account.class, options);
 	}
 
 	public static class Verification extends StripeObject {
