@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.27.0 - 2017-12-22
+* [#438](https://github.com/stripe/stripe-java/pull/438) Add support for passing parameters to `SubscriptionItem.delete()`
+
 ## 5.26.0 - 2017-12-18
 * [#436](https://github.com/stripe/stripe-java/pull/436) Fix bug where `options` were not being plumbed through in an account delete method
 * [#436](https://github.com/stripe/stripe-java/pull/436) Add the proper set of overloads for account reject method
