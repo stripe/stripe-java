@@ -112,12 +112,24 @@ public class SubscriptionItem extends APIResource implements HasId {
 	public DeletedSubscriptionItem delete() throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return delete(null);
+		return delete(null, null);
+	}
+
+	public DeletedSubscriptionItem delete(Map<String, Object> params) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return delete(params, null);
 	}
 
 	public DeletedSubscriptionItem delete(RequestOptions options) throws AuthenticationException,
 			InvalidRequestException, APIConnectionException, CardException,
 			APIException {
-		return request(RequestMethod.DELETE, instanceURL(SubscriptionItem.class, id), null, DeletedSubscriptionItem.class, options);
+		return delete(null, options);
+	}
+
+	public DeletedSubscriptionItem delete(Map<String, Object> params, RequestOptions options) throws AuthenticationException,
+			InvalidRequestException, APIConnectionException, CardException,
+			APIException {
+		return request(RequestMethod.DELETE, instanceURL(SubscriptionItem.class, id), params, DeletedSubscriptionItem.class, options);
 	}
 }

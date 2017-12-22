@@ -84,9 +84,12 @@ public class SubscriptionItemTest extends BaseStripeTest {
 		SubscriptionItem item = new SubscriptionItem();
 		item.setId("test_item");
 
-		item.delete();
+		HashMap<String, Object> params = new HashMap<String, Object>();
+		params.put("prorate", false);
 
-		verifyDelete(DeletedSubscriptionItem.class, "https://api.stripe.com/v1/subscription_items/test_item");
+		item.delete(params);
+
+		verifyDelete(DeletedSubscriptionItem.class, "https://api.stripe.com/v1/subscription_items/test_item", params);
 		verifyNoMoreInteractions(networkMock);
 	}
 }
