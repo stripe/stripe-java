@@ -12,6 +12,7 @@ buildscript {
 plugins {
     id 'java'
     id 'maven'
+    id 'jacoco'
 }
 
 sourceCompatibility = 1.7
@@ -41,5 +42,11 @@ test {
     testLogging {
         events "passed", "skipped", "failed"
         exceptionFormat "full"
+    }
+}
+
+jacocoTestReport {
+    reports {
+        xml.enabled true
     }
 }
