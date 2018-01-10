@@ -13,6 +13,9 @@ jdk:
   - oraclejdk9
 
 before_install:
+  - mkdir -p $HOME/bin
+  - curl -fsSL https://testspace-client.s3.amazonaws.com/testspace-linux.tgz | tar -zxvf- -C $HOME/bin
+  - testspace config url $TS_ORG.testspace.com
   # Work around missing crypto in openjdk7
   - |
     if [ "$TRAVIS_JDK_VERSION" == "openjdk7" ]; then
@@ -30,6 +33,13 @@ sudo: false
 script:
   - ./gradlew clean test
 
+after_script:
+  - testspace [${TRAVIS_JDK_VERSION}]./build/test-results/test/TEST-*.xml{src/test/java/com/stripe}
+  - if [[ ${TRAVIS_JDK_VERSION} = "oraclejdk8" ]]; then
+      ./gradlew jacocoTestReport;
+      testspace **/test/jacocoTestReport.xml;
+    fi
+ 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
   - rm -fr $HOME/.gradle/caches/*/plugin-resolution/
