@@ -64,6 +64,10 @@ public class StandardizationTest {
 				if (method.getName().startsWith("get")) {
 					continue;
 				}
+				// Skip internal methods
+				if (method.getName().startsWith("_")) {
+					continue;
+				}
 
 				// If more than one method with the same parameter types is declared in a class, and one of these
 				// methods has a return type that is more specific than any of the others, that method is returned;
