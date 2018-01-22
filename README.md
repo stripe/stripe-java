@@ -33,7 +33,7 @@ compile "com.stripe:stripe-java:5.28.0"
 You'll need to manually install the following JARs:
 
 * The Stripe JAR from https://github.com/stripe/stripe-java/releases/latest
-* [Google Gson](https://github.com/google/gson) from <https://repo1.maven.org/maven2/com/google/code/gson/gson/2.2.4/gson-2.2.4.jar>.
+* [Google Gson](https://github.com/google/gson) from <https://repo1.maven.org/maven2/com/google/code/gson/gson/2.8.2/gson-2.8.2.jar>.
 
 ### [ProGuard](http://proguard.sourceforge.net/)
 
