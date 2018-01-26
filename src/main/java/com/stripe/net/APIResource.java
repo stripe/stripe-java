@@ -34,6 +34,7 @@ import com.stripe.model.HasId;
 import com.stripe.model.OrderItem;
 import com.stripe.model.OrderItemDeserializer;
 import com.stripe.model.Source;
+import com.stripe.model.SourceMandateNotification;
 import com.stripe.model.SourceTransaction;
 import com.stripe.model.SourceTypeDataDeserializer;
 import com.stripe.model.StripeCollectionInterface;
@@ -61,6 +62,7 @@ public abstract class APIResource extends StripeObject {
 			.registerTypeAdapter(OrderItem.class, new OrderItemDeserializer())
 			.registerTypeAdapter(Source.class, new SourceTypeDataDeserializer<Source>())
 			.registerTypeAdapter(SourceTransaction.class, new SourceTypeDataDeserializer<SourceTransaction>())
+			.registerTypeAdapter(SourceMandateNotification.class, new SourceTypeDataDeserializer<SourceTransaction>())
 			.registerTypeAdapter(StripeRawJsonObject.class, new StripeRawJsonObjectDeserializer())
 			.registerTypeAdapterFactory(new ExternalAccountTypeAdapterFactory())
 			.create();
