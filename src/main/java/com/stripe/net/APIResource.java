@@ -61,8 +61,8 @@ public abstract class APIResource extends StripeObject {
 			.registerTypeAdapter(FeeRefundCollection.class, new FeeRefundCollectionDeserializer())
 			.registerTypeAdapter(OrderItem.class, new OrderItemDeserializer())
 			.registerTypeAdapter(Source.class, new SourceTypeDataDeserializer<Source>())
+			.registerTypeAdapter(SourceMandateNotification.class, new SourceTypeDataDeserializer<SourceMandateNotification>())
 			.registerTypeAdapter(SourceTransaction.class, new SourceTypeDataDeserializer<SourceTransaction>())
-			.registerTypeAdapter(SourceMandateNotification.class, new SourceTypeDataDeserializer<SourceTransaction>())
 			.registerTypeAdapter(StripeRawJsonObject.class, new StripeRawJsonObjectDeserializer())
 			.registerTypeAdapterFactory(new ExternalAccountTypeAdapterFactory())
 			.create();
