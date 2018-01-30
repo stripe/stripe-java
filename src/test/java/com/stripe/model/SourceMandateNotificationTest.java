@@ -19,10 +19,7 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class SourceMandateNotificationTest extends BaseStripeTest {
-	@Test
-	public void testDeserialize() throws StripeException, IOException {
-		String json = resource("source_mandate_notification.json");
-		SourceMandateNotification mandateNotification = APIResource.GSON.fromJson(json, SourceMandateNotification.class);
+	private void verifyResource(SourceMandateNotification mandateNotification) {
 		Map<String, String> typeData = mandateNotification.getTypeData();
 
 		assertEquals("srcmn_1234", mandateNotification.getId());
@@ -39,5 +36,23 @@ public class SourceMandateNotificationTest extends BaseStripeTest {
 		assertEquals("TEST111111111111111", typeData.get("creditor_identifier"));
 		assertEquals("OAAAAAAAAAAAAAAO", typeData.get("mandate_reference"));
 		assertEquals("3000", typeData.get("last4"));
+	}
+
+	@Test
+	public void testDeserializeResource() throws StripeException, IOException {
+		String json = resource("source_mandate_notification.json");
+		SourceMandateNotification mandateNotification = APIResource.GSON.fromJson(json, SourceMandateNotification.class);
+
+		verifyResource(mandateNotification);
+	}
+
+	@Test
+	public void testDeserializeEvent() throws StripeException, IOException {
+		String json = resource("source_mandate_notification_event.json");
+		Event event = APIResource.GSON.fromJson(json, Event.class);
+
+		SourceMandateNotification mandateNotification = (com.stripe.model.SourceMandateNotification) event.getData().getObject();
+
+		verifyResource(mandateNotification);
 	}
 }
