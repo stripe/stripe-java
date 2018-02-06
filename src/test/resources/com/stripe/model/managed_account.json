@@ -90,7 +90,12 @@
     "verification": {
       "details": null,
       "details_code": null,
-      "document": null,
+      "document": {
+        "front": null,
+        "back": null,
+        "details": null,
+        "details_code": null,
+      },
       "status": "unverified"
     }
   },

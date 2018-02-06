@@ -22,7 +22,12 @@
     "verification": {
       "details": null,
       "details_code": "failed_other",
-      "document": null,
+      "document": {
+        "front": null,
+        "back": null,
+        "details": null,
+        "details_code": null,
+      },
       "status": "unverified"
     }
   },

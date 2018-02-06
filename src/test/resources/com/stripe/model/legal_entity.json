@@ -21,7 +21,12 @@
   "additional_owners": [],
   "verification": {
     "status": "verified",
-    "document": null,
+    "document": {
+      "front": null,
+      "back": null,
+      "details": null,
+      "details_code": null,
+    },
     "details": null
   }
 }
