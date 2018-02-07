@@ -88,13 +88,7 @@
     "ssn_last_4_provided": true,
     "type": "company",
     "verification": {
-      "details": null,
-      "details_code": null,
       "document": {
-        "front": null,
-        "back": null,
-        "details": null,
-        "details_code": null,
       },
       "status": "unverified"
     }
