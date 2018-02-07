@@ -25,6 +25,7 @@ public class RelayTest extends BaseStripeFunctionalTest {
 		Map<String, Object> createParams = new HashMap<String, Object>();
 		String id = "my_first_product_" + UUID.randomUUID();
 		createParams.put("id", id);
+		createParams.put("type", "good");
 		createParams.put("name", "Watermelon");
 		Product created = Product.create(createParams, relayRequestOptions);
 		assertEquals(id, created.getId());
@@ -46,6 +47,7 @@ public class RelayTest extends BaseStripeFunctionalTest {
 		Map<String, Object> productCreateParams = new HashMap<String, Object>();
 		String productId = "my_first_product_" + UUID.randomUUID();
 		productCreateParams.put("id", productId);
+		productCreateParams.put("type", "good");
 		productCreateParams.put("name", "Watermelon");
 		productCreateParams.put("attributes[]", "size");
 		Product.create(productCreateParams, relayRequestOptions);
@@ -80,6 +82,7 @@ public class RelayTest extends BaseStripeFunctionalTest {
 		Map<String, Object> productCreateParams = new HashMap<String, Object>();
 		String productId = "my_first_product_" + UUID.randomUUID();
 		productCreateParams.put("id", productId);
+		productCreateParams.put("type", "good");
 		productCreateParams.put("name", "Watermelon");
 		productCreateParams.put("attributes[]", "size");
 		Product createdProduct = Product.create(productCreateParams, relayRequestOptions);
@@ -111,6 +114,7 @@ public class RelayTest extends BaseStripeFunctionalTest {
 		Map<String, Object> productCreateParams = new HashMap<String, Object>();
 		String productId = "my_first_product_" + UUID.randomUUID();
 		productCreateParams.put("id", productId);
+		productCreateParams.put("type", "good");
 		productCreateParams.put("name", "Watermelon");
 		productCreateParams.put("attributes[]", "size");
 		productCreateParams.put("shippable", false);

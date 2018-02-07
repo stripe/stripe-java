@@ -21,8 +21,10 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
 	Boolean livemode;
 	Map<String, String> metadata;
 	String name;
+	String nickname;
 	String statementDescriptor;
 	Integer trialPeriodDays;
+	String product;
 
 	@Deprecated
 	String statementDescription;
@@ -107,6 +109,14 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
 		this.name = name;
 	}
 
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
 	public String getStatementDescriptor() {
 		return statementDescriptor;
 	}
@@ -121,6 +131,14 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
 
 	public void setTrialPeriodDays(Integer trialPeriodDays) {
 		this.trialPeriodDays = trialPeriodDays;
+	}
+
+	public String getProduct() {
+		return product;
+	}
+
+	public void setProduct(String product) {
+		this.product = product;
 	}
 
 	/**

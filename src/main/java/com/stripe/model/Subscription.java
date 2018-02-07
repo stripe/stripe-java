@@ -34,6 +34,7 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 	Double taxPercent;
 	Long trialEnd;
 	Long trialStart;
+	Long billingCycleAnchor;
 
 	public String getId() {
 		return id;
@@ -223,6 +224,14 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 
 	public void setSubscriptionItems(SubscriptionItemCollection items) {
 		this.items = items;
+	}
+
+	public Long getBillingCycleAnchor() {
+		return billingCycleAnchor;
+	}
+
+	public void setBillingCycleAnchor(Long billingCycleAnchor) {
+		this.billingCycleAnchor = billingCycleAnchor;
 	}
 
 	@Deprecated

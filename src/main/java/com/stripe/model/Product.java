@@ -29,6 +29,8 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
 	SKUCollection skus;
 	Long updated;
 	String url;
+	String statementDescriptor;
+	String type;
 
 	public String getId() {
 		return id;
@@ -164,6 +166,18 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
 
 	public void setURL(String url) {
 		this.url = url;
+	}
+
+	public String getStatementDescriptor() {
+		return statementDescriptor;
+	}
+
+	public void setStatementDescriptor(String statementDescriptor) {
+		this.statementDescriptor = statementDescriptor;
+	}
+
+	public String getType() {
+		return type;
 	}
 
 	public static Product create(Map<String, Object> params)

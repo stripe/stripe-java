@@ -20,6 +20,8 @@ public class BaseStripeFunctionalTest {
 	public static Map<String, Object> defaultChargeParams = new HashMap<String, Object>();
 	public static Map<String, Object> defaultCustomerParams = new HashMap<String, Object>();
 	public static Map<String, Object> defaultPlanParams = new HashMap<String, Object>();
+	public static Map<String, Object> defaultPlanWithProductParams = new HashMap<String, Object>();
+	public static Map<String, Object> defaultServiceProductParams = new HashMap<String, Object>();
 	public static Map<String, Object> defaultCouponParams = new HashMap<String, Object>();
 	public static Map<String, Object> defaultTokenParams = new HashMap<String, Object>();
 	public static Map<String, Object> defaultBankAccountParams = new HashMap<String, Object>();
@@ -86,6 +88,19 @@ public class BaseStripeFunctionalTest {
 		defaultPlanParams.put("interval", "month");
 		defaultPlanParams.put("interval_count", 2);
 		defaultPlanParams.put("name", "J Bindings Plan");
+
+		Map<String, Object> productParams = new HashMap<String, Object>();
+		productParams.put("name", "Kittens on Demand");
+		defaultPlanWithProductParams.put("product", productParams);
+		defaultPlanWithProductParams.put("amount", 200);
+		defaultPlanWithProductParams.put("currency", "usd");
+		defaultPlanWithProductParams.put("interval", "month");
+		defaultPlanWithProductParams.put("interval_count", 2);
+		defaultPlanWithProductParams.put("nickname", "Two Month Kitten Plan");
+
+		defaultServiceProductParams.put("type", "service");
+		defaultServiceProductParams.put("name", "Run of the Mill Product");
+		defaultServiceProductParams.put("statement_descriptor", "Run of the Mill");
 
 		defaultCouponParams.put("duration", "once");
 		defaultCouponParams.put("percent_off", 10);
