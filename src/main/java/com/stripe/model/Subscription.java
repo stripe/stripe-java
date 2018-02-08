@@ -16,6 +16,7 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 	String object;
 	Double applicationFeePercent;
 	String billing;
+	Long billingCycleAnchor;
 	Boolean cancelAtPeriodEnd;
 	Long canceledAt;
 	Long created;
@@ -34,7 +35,6 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 	Double taxPercent;
 	Long trialEnd;
 	Long trialStart;
-	Long billingCycleAnchor;
 
 	public String getId() {
 		return id;
@@ -66,6 +66,14 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 
 	public void setBilling(String billing) {
 		this.billing = billing;
+	}
+
+	public Long getBillingCycleAnchor() {
+		return billingCycleAnchor;
+	}
+
+	public void setBillingCycleAnchor(Long billingCycleAnchor) {
+		this.billingCycleAnchor = billingCycleAnchor;
 	}
 
 	public Boolean getCancelAtPeriodEnd() {
@@ -224,14 +232,6 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
 
 	public void setSubscriptionItems(SubscriptionItemCollection items) {
 		this.items = items;
-	}
-
-	public Long getBillingCycleAnchor() {
-		return billingCycleAnchor;
-	}
-
-	public void setBillingCycleAnchor(Long billingCycleAnchor) {
-		this.billingCycleAnchor = billingCycleAnchor;
 	}
 
 	@Deprecated

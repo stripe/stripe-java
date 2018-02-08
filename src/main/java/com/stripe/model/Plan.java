@@ -20,14 +20,17 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
 	Integer intervalCount;
 	Boolean livemode;
 	Map<String, String> metadata;
-	String name;
 	String nickname;
-	String statementDescriptor;
-	Integer trialPeriodDays;
 	String product;
 
 	@Deprecated
 	String statementDescription;
+	@Deprecated
+	String name;
+	@Deprecated
+	Integer trialPeriodDays;
+	@Deprecated
+	String statementDescriptor;
 
 	public String getId() {
 		return id;
@@ -101,14 +104,6 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
 		this.metadata = metadata;
 	}
 
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
 	public String getNickname() {
 		return nickname;
 	}
@@ -117,6 +112,28 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
 		this.nickname = nickname;
 	}
 
+	public String getProduct() {
+		return product;
+	}
+
+	public void setProduct(String product) {
+		this.product = product;
+	}
+
+	/**
+	 *  @deprecated Prefer using the product field (https://stripe.com/docs/upgrades#2018-02-05)
+	 */
+	public String getName() {
+		return name;
+	}
+
+	public void setName(String name) {
+		this.name = name;
+	}
+
+	/**
+	 *  @deprecated Prefer using the product field (https://stripe.com/docs/upgrades#2018-02-05)
+	 */
 	public String getStatementDescriptor() {
 		return statementDescriptor;
 	}
@@ -125,20 +142,15 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
 		this.statementDescriptor = statementDescriptor;
 	}
 
+	/**
+	 *  @deprecated Prefer using the product field (https://stripe.com/docs/upgrades#2018-02-05)
+	 */
 	public Integer getTrialPeriodDays() {
 		return trialPeriodDays;
 	}
 
 	public void setTrialPeriodDays(Integer trialPeriodDays) {
 		this.trialPeriodDays = trialPeriodDays;
-	}
-
-	public String getProduct() {
-		return product;
-	}
-
-	public void setProduct(String product) {
-		this.product = product;
 	}
 
 	/**

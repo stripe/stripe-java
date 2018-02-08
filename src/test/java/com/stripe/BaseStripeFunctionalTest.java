@@ -71,7 +71,7 @@ public class BaseStripeFunctionalTest {
 
 		// Peg the API version so that it can be varied independently of the
 		// one set on the test account.
-		Stripe.apiVersion = "2017-04-06";
+		Stripe.apiVersion = "2018-02-06";
 
 		// test key
 		supportedRequestOptions = RequestOptions.builder().setStripeVersion(Stripe.apiVersion).build();
