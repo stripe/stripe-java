@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.29.0 - 2018-02-08
+* [#447](https://github.com/stripe/stripe-java/pull/447) Update `Plan`, `Product` and `Subscription` models for latest API version
+
 ## 5.28.0 - 2018-01-02
 * [#439](https://github.com/stripe/stripe-java/pull/439) Upgrade GSON dependency to 2.8.2
 
