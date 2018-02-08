@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 public class PlanTest extends BaseStripeFunctionalTest {
@@ -21,6 +22,15 @@ public class PlanTest extends BaseStripeFunctionalTest {
 		Plan plan = Plan.create(getUniquePlanParams());
 		assertEquals(plan.getInterval(), "month");
 		assertEquals(plan.getIntervalCount(), (Integer) 2);
+	}
+
+	@Test
+	public void testPlanCreateWithProduct() throws StripeException {
+		Plan plan = Plan.create(defaultPlanWithProductParams);
+		assertEquals(plan.getInterval(), "month");
+		assertEquals(plan.getIntervalCount(), (Integer) 2);
+		assertEquals(plan.getNickname(), defaultPlanWithProductParams.get("nickname"));
+		assertNotNull(plan.getProduct());
 	}
 
 	@Test
