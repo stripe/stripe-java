@@ -40,7 +40,7 @@ public class LegalEntityTest extends BaseStripeTest {
 		assertEquals(new LinkedList<Object>(), le.getAdditionalOwners());
 		assertEquals("verified", le.getVerification().getStatus());
 		assertEquals(null, le.getVerification().getDocument().getFront());
-                assertEquals(null, le.getVerification().getDocument().getBack());
+		assertEquals(null, le.getVerification().getDocument().getBack());
 		assertEquals(null, le.getVerification().getDetails());
 	}
 }

@@ -147,7 +147,7 @@ public class LegalEntity extends StripeObject {
 	public static class Verification extends StripeObject {
 		String details;
 		String detailsCode;
-                Document document;
+		Document document;
 		String status;
 
 		public String getDetails() {
@@ -183,46 +183,46 @@ public class LegalEntity extends StripeObject {
 		}
 	}
 
-        public static class Document extends StripeObject {
-                String front;
-                String back;
-                String details;
-                String detailsCode;
+	public static class Document extends StripeObject {
+		String front;
+		String back;
+		String details;
+		String detailsCode;
 
-                public String getDetails() {
-                        return details;
+		public String getDetails() {
+			return details;
 		}
 
 		public String getDetailsCode() {
 			return detailsCode;
 		}
 
-                public String getFront() {
+		public String getFront() {
 			return front;
 		}
 
-                public String getBack() {
+		public String getBack() {
 			return back;
 		}
 
-                @Override
-                public boolean equals(Object o) {
-                        if (this == o) {
-                                return true;
-                        }
-                        if (o == null || getClass() != o.getClass()) {
-                                return false;
-                        }
-                        
-                        Document document = (Document) o;
-                        return equals(details, document.details) &&
-                                        equals(detailsCode, document.detailsCode) &&
-                                        equals(front, document.front) &&
-                                        equals(back, document.back);
-                }
-        }
+		@Override
+		public boolean equals(Object o) {
+			if (this == o) {
+				return true;
+			}
+			if (o == null || getClass() != o.getClass()) {
+				return false;
+			}
+			
+			Document document = (Document) o;
+			return equals(details, document.details) &&
+					equals(detailsCode, document.detailsCode) &&
+					equals(front, document.front) &&
+					equals(back, document.back);
+		}
+	}
 
-        public static class Owner extends StripeObject {
+	public static class Owner extends StripeObject {
 		Address address;
 		DateOfBirth dob;
 		String firstName;

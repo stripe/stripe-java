@@ -27,7 +27,7 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
 	PackageDimensions packageDimensions;
 	Boolean shippable;
 	SKUCollection skus;
-        String type;
+	String type;
 	Long updated;
 	String url;
 
@@ -151,12 +151,12 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
 		this.skus = skus;
 	}
 
-        public String getType() {
+	public String getType() {
 		return type;
 	}
 
 	public void setType(String type) {
-                this.type = type;
+		this.type = type;
 	}
 
 	public Long getUpdated() {

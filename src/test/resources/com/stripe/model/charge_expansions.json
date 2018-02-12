@@ -41,11 +41,11 @@
     "fee": 39,
     "fee_details": [
       {
-        "amount": 39,
-        "application": null,
-        "currency": "usd",
-        "description": "Stripe processing fees",
-        "type": "stripe_fee"
+	"amount": 39,
+	"application": null,
+	"currency": "usd",
+	"description": "Stripe processing fees",
+	"type": "stripe_fee"
       }
     ],
     "net": 277,
@@ -81,30 +81,30 @@
     "sources": {
       "object": "list",
       "data": [
-        {
-          "id": "card_175MxA2iMoKf4jyWCUGYPWfx",
-          "object": "card",
-          "address_city": null,
-          "address_country": null,
-          "address_line1": null,
-          "address_line1_check": null,
-          "address_line2": null,
-          "address_state": null,
-          "address_zip": null,
-          "address_zip_check": null,
-          "brand": "Visa",
-          "country": "US",
-          "customer": "cus_7K0ztY0WclKUdF",
-          "cvc_check": "pass",
-          "dynamic_last4": null,
-          "exp_month": 1,
-          "exp_year": 2025,
-          "funding": "credit",
-          "last4": "4242",
-          "metadata": {},
-          "name": "My Name",
-          "tokenization_method": null
-        }
+	{
+	  "id": "card_175MxA2iMoKf4jyWCUGYPWfx",
+	  "object": "card",
+	  "address_city": null,
+	  "address_country": null,
+	  "address_line1": null,
+	  "address_line1_check": null,
+	  "address_line2": null,
+	  "address_state": null,
+	  "address_zip": null,
+	  "address_zip_check": null,
+	  "brand": "Visa",
+	  "country": "US",
+	  "customer": "cus_7K0ztY0WclKUdF",
+	  "cvc_check": "pass",
+	  "dynamic_last4": null,
+	  "exp_month": 1,
+	  "exp_year": 2025,
+	  "funding": "credit",
+	  "last4": "4242",
+	  "metadata": {},
+	  "name": "My Name",
+	  "tokenization_method": null
+	}
       ],
       "has_more": false,
       "total_count": 1,
@@ -140,23 +140,23 @@
     "external_accounts": {
       "object": "list",
       "data": [
-        {
-          "id": "ba_1044ty2iMoKf4jyWxR3H3P7b",
-          "object": "bank_account",
-          "account": "acct_102wRO2iMoKf4jyz",
-          "account_holder_name": null,
-          "account_holder_type": null,
-          "bank_name": "WELLS FARGO BANK",
-          "country": "US",
-          "currency": "usd",
-          "default_for_currency": true,
-          "fingerprint": null,
-          "last4": "1234",
-          "metadata": {
-          },
-          "routing_number": "12345667",
-          "status": "new"
-        }
+	{
+	  "id": "ba_1044ty2iMoKf4jyWxR3H3P7b",
+	  "object": "bank_account",
+	  "account": "acct_102wRO2iMoKf4jyz",
+	  "account_holder_name": null,
+	  "account_holder_type": null,
+	  "bank_name": "WELLS FARGO BANK",
+	  "country": "US",
+	  "currency": "usd",
+	  "default_for_currency": true,
+	  "fingerprint": null,
+	  "last4": "1234",
+	  "metadata": {
+	  },
+	  "routing_number": "12345667",
+	  "status": "new"
+	}
       ],
       "has_more": false,
       "total_count": 1,
@@ -166,39 +166,39 @@
       "additional_owners": [
       ],
       "address": {
-        "city": "",
-        "country": "",
-        "line1": "",
-        "line2": null,
-        "postal_code": "",
-        "state": ""
+	"city": "",
+	"country": "",
+	"line1": "",
+	"line2": null,
+	"postal_code": "",
+	"state": ""
       },
       "business_name": "",
       "business_tax_id_provided": true,
       "dob": {
-        "day": 28,
-        "month": 8,
-        "year": 1987
+	"day": 28,
+	"month": 8,
+	"year": 1987
       },
       "first_name": "",
       "last_name": "",
       "personal_address": {
-        "city": null,
-        "country": "US",
-        "line1": null,
-        "line2": null,
-        "postal_code": null,
-        "state": ""
+	"city": null,
+	"country": "US",
+	"line1": null,
+	"line2": null,
+	"postal_code": null,
+	"state": ""
       },
       "personal_id_number_provided": true,
       "ssn_last_4_provided": true,
       "type": "llc",
       "verification": {
-        "details": null,
-        "details_code": null,
-        "document": {
-        },
-        "status": "verified"
+	"details": null,
+	"details_code": null,
+	"document": {
+	},
+	"status": "verified"
       }
     },
     "managed": true,
@@ -250,40 +250,40 @@
     "forgiven": false,
     "lines": {
       "data": [
-        {
-          "id": "sub_9SEB12cTUJ2UNc",
-          "object": "line_item",
-          "amount": 999,
-          "currency": "usd",
-          "description": null,
-          "discountable": true,
-          "livemode": true,
-          "metadata": {
-          },
-          "period": {
-            "start": 1480275575,
-            "end": 1482867575
-          },
-          "plan": {
-            "id": "silver-business-753",
-            "object": "plan",
-            "amount": 999,
-            "created": 1477597080,
-            "currency": "usd",
-            "interval": "month",
-            "interval_count": 1,
-            "livemode": false,
-            "metadata": {
-            },
-            "name": "Silver Business",
-            "statement_descriptor": null,
-            "trial_period_days": null
-          },
-          "proration": false,
-          "quantity": 1,
-          "subscription": null,
-          "type": "subscription"
-        }
+	{
+	  "id": "sub_9SEB12cTUJ2UNc",
+	  "object": "line_item",
+	  "amount": 999,
+	  "currency": "usd",
+	  "description": null,
+	  "discountable": true,
+	  "livemode": true,
+	  "metadata": {
+	  },
+	  "period": {
+	    "start": 1480275575,
+	    "end": 1482867575
+	  },
+	  "plan": {
+	    "id": "silver-business-753",
+	    "object": "plan",
+	    "amount": 999,
+	    "created": 1477597080,
+	    "currency": "usd",
+	    "interval": "month",
+	    "interval_count": 1,
+	    "livemode": false,
+	    "metadata": {
+	    },
+	    "name": "Silver Business",
+	    "statement_descriptor": null,
+	    "trial_period_days": null
+	  },
+	  "proration": false,
+	  "quantity": 1,
+	  "subscription": null,
+	  "type": "subscription"
+	}
       ],
       "total_count": 1,
       "object": "list",
@@ -322,13 +322,13 @@
     "email": "anthony.anderson@example.com",
     "items": [
       {
-        "object": "order_item",
-        "amount": 1500,
-        "currency": "usd",
-        "description": "T-shirt",
-        "parent": "sku_9SCqPCCE9fkp4H",
-        "quantity": 1,
-        "type": "sku"
+	"object": "order_item",
+	"amount": 1500,
+	"currency": "usd",
+	"description": "T-shirt",
+	"parent": "sku_9SCqPCCE9fkp4H",
+	"quantity": 1,
+	"type": "sku"
       }
     ],
     "livemode": false,
@@ -344,12 +344,12 @@
     "selected_shipping_method": "ship_free-shipping",
     "shipping": {
       "address": {
-        "city": "San Francisco",
-        "country": "US",
-        "line1": "1234 Main Street",
-        "line2": null,
-        "postal_code": "94111",
-        "state": null
+	"city": "San Francisco",
+	"country": "US",
+	"line1": "1234 Main Street",
+	"line2": null,
+	"postal_code": "94111",
+	"state": null
       },
       "carrier": null,
       "name": "Jacob Taylor",
@@ -358,11 +358,11 @@
     },
     "shipping_methods": [
       {
-        "id": "ship_free-shipping",
-        "amount": 0,
-        "currency": "usd",
-        "delivery_estimate": null,
-        "description": "Free shipping"
+	"id": "ship_free-shipping",
+	"amount": 0,
+	"currency": "usd",
+	"delivery_estimate": null,
+	"description": "Free shipping"
       }
     ],
     "status": "created",
