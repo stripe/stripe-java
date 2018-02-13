@@ -3,6 +3,9 @@ package com.stripe;
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public abstract class Stripe {
 	private final static int DEFAULT_CONNECT_TIMEOUT = 30 * 1000;
 	private final static int DEFAULT_READ_TIMEOUT = 80 * 1000;
@@ -26,6 +29,8 @@ public abstract class Stripe {
 	private static volatile String connectBase = CONNECT_API_BASE;
 	private static volatile Proxy connectionProxy = null;
 	private static volatile PasswordAuthentication proxyCredential = null;
+
+	private static volatile Map<String, String> appInfo = null;
 
 
 	/**
@@ -115,5 +120,27 @@ public abstract class Stripe {
 
 	public static PasswordAuthentication getProxyCredential() {
 		return proxyCredential;
+	}
+
+	public static void setAppInfo(String name) {
+		setAppInfo(name, null, null);
+	}
+
+	public static void setAppInfo(String name, String version) {
+		setAppInfo(name, version, null);
+	}
+
+	public static void setAppInfo(String name, String version, String url) {
+		if (appInfo == null) {
+			appInfo = new HashMap<String, String>();
+		}
+
+		appInfo.put("name", name);
+		appInfo.put("version", version);
+		appInfo.put("url", url);
+	}
+
+	public static Map<String, String> getAppInfo() {
+		return appInfo;
 	}
 }

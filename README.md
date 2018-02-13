@@ -101,6 +101,16 @@ Please take care to set conservative read timeouts. Some API requests can take
 some time, and a short timeout increases the likelihood of a problem within our
 servers.
 
+### Writing a plugin
+
+If you're writing a plugin that uses the library, we'd appreciate it if you
+identified using `Stripe.setAppInfo()`:
+
+    Stripe.setAppInfo("MyAwesomePlugin", "1.2.34", "https://myawesomeplugin.info");
+
+This information is passed along when the library makes calls to the Stripe
+API.
+
 ## Testing
 
 You must have Gradle installed. To run the tests:
