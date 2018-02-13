@@ -1,7 +1,12 @@
 package com.stripe.net;
 
+import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.LiveStripeResponseGetter;
+import com.stripe.net.RequestOptions;
+import com.stripe.net.RequestOptions.RequestOptionsBuilder;
+
+import com.google.gson.Gson;
 
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
@@ -14,6 +19,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 public class LiveStripeResponseGetterTest {
 	LiveStripeResponseGetter srg;
@@ -125,5 +131,29 @@ public class LiveStripeResponseGetterTest {
 		params.put("legal_entity", legalEntityParams);
 
 		assertEquals(encode("legal_entity[additional_owners][0][first_name]=Stripe"), LiveStripeResponseGetter.createQuery(params));
+	}
+
+	@Test
+	public void testAppInfo() {
+		RequestOptions options = (new RequestOptionsBuilder()).setApiKey("sk_foobar").build();
+
+		Stripe.setAppInfo("MyAwesomePlugin", "1.2.34", "https://myawesomeplugin.info");
+
+		Map<String, String> headers = srg.getHeaders(options);
+
+		String expectedUserAgent = String.format(
+			"Stripe/v1 JavaBindings/%s MyAwesomePlugin/1.2.34 (https://myawesomeplugin.info)",
+			Stripe.VERSION);
+		assertEquals(expectedUserAgent, headers.get("User-Agent"));
+
+		Gson gson = new Gson();
+
+		Map<String, String> uaMap = gson.fromJson(headers.get("X-Stripe-Client-User-Agent"), Map.class);
+		assertNotNull(uaMap.get("application"));
+
+		Map<String, String> appMap = gson.fromJson(uaMap.get("application"), Map.class);
+		assertEquals("MyAwesomePlugin", appMap.get("name"));
+		assertEquals("1.2.34", appMap.get("version"));
+		assertEquals("https://myawesomeplugin.info", appMap.get("url"));
 	}
 }

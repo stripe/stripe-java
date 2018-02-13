@@ -89,13 +89,29 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 		return String.format("%s=%s", APIResource.urlEncode(k), APIResource.urlEncode(v));
 	}
 
+	static String formatAppInfo(Map<String, String> info) {
+		String str = info.get("name");
+		if (info.get("version") != null) {
+			str += String.format("/%s", info.get("version"));
+		}
+		if (info.get("url") != null) {
+			str += String.format(" (%s)", info.get("url"));
+		}
+		return str;
+	}
+
 	static Map<String, String> getHeaders(RequestOptions options) {
 		Map<String, String> headers = new HashMap<String, String>();
+
+		String userAgent = String.format("Stripe/v1 JavaBindings/%s", Stripe.VERSION);
+		if (Stripe.getAppInfo() != null) {
+			userAgent += " " + formatAppInfo(Stripe.getAppInfo());
+		}
+		headers.put("User-Agent", userAgent);
+
 		String apiVersion = options.getStripeVersion();
 		headers.put("Accept-Charset", APIResource.CHARSET);
 		headers.put("Accept", "application/json");
-		headers.put("User-Agent",
-				String.format("Stripe/v1 JavaBindings/%s", Stripe.VERSION));
 
 		headers.put("Authorization", String.format("Bearer %s", options.getApiKey()));
 
@@ -110,6 +126,9 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 		propertyMap.put("bindings.version", Stripe.VERSION);
 		propertyMap.put("lang", "Java");
 		propertyMap.put("publisher", "Stripe");
+		if (Stripe.getAppInfo() != null) {
+			propertyMap.put("application", APIResource.GSON.toJson(Stripe.getAppInfo()));
+		}
 		headers.put("X-Stripe-Client-User-Agent", APIResource.GSON.toJson(propertyMap));
 		if (apiVersion != null) {
 			headers.put("Stripe-Version", apiVersion);
