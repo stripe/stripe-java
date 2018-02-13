@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.31.0 - 2018-02-13
+* [#446](https://github.com/stripe/stripe-java/pull/446) Add support for deserializing `source_mandate_notification` objects
+
 ## 5.30.0 - 2018-02-13
 * [#449](https://github.com/stripe/stripe-java/pull/449) Add `Stripe.setAppInfo()` for passing custom application information in headers
 
