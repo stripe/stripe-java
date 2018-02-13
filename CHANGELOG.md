@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.30.0 - 2018-02-13
+* [#449](https://github.com/stripe/stripe-java/pull/449) Add `Stripe.setAppInfo()` for passing custom application information in headers
+
 ## 5.29.0 - 2018-02-08
 * [#447](https://github.com/stripe/stripe-java/pull/447) Update `Plan`, `Product` and `Subscription` models for latest API version
 
