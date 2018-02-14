@@ -54,11 +54,11 @@ public class AccountTest extends BaseStripeTest {
 		le.businessTaxIdProvided = true;
 		le.personalIdNumberProvided = false;
 		le.ssnLast4Provided = true;
-		LegalEntity.Document leDocument = new LegalEntity.Document();
+		LegalEntity.DocumentSubObject leDocument = new LegalEntity.DocumentSubObject();
 		LegalEntity.Verification leVerif = new LegalEntity.Verification();
 		leVerif.detailsCode = "failed_other";
 		leVerif.status = "unverified";
-		leVerif.document = leDocument;
+		leVerif.documentSubObject = leDocument;
 		le.verification = leVerif;
 		assertEquals(le, acc.getLegalEntity());
 

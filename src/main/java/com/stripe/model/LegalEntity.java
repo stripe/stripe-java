@@ -147,10 +147,13 @@ public class LegalEntity extends StripeObject {
 	public static class Verification extends StripeObject {
 		String details;
 		String detailsCode;
-		Document document;
+		DocumentSubObject documentSubObject;
 		String status;
 
-		public String getDetails() {
+                @Deprecated String document;
+                @Deprecated String documentBack;
+
+                public String getDetails() {
 			return details;
 		}
 
@@ -158,9 +161,36 @@ public class LegalEntity extends StripeObject {
 			return detailsCode;
 		}
 
-		public Document getDocument() {
-			return document;
+		public DocumentSubObject getDocumentSubObject() {
+			return documentSubObject;
 		}
+                public void setDocumentSubObject(DocumentSubObject documentSubObject) {
+			this.documentSubObject = documentSubObject;
+		}
+
+               /**
+                * @deprecated Use getDocumentSubObject
+                */
+                @Deprecated
+                public String getDocument() {
+                    return this.documentSubObject.getFront();
+                }
+                @Deprecated
+                public String getDocumentBack() {
+                    return this.documentSubObject.getBack();
+                }
+
+                /**
+                * @deprecated Use setDocumentSubObject
+                */
+                @Deprecated
+                public void setDocument(String id) {
+                    this.document = id;
+                }
+                @Deprecated
+                public void setDocumentBack(String id) {
+                    this.documentBack = id;
+                }
 
 		public String getStatus() {
 			return status;
@@ -183,7 +213,7 @@ public class LegalEntity extends StripeObject {
 		}
 	}
 
-	public static class Document extends StripeObject {
+	public static class DocumentSubObject extends StripeObject {
 		String front;
 		String back;
 		String details;
@@ -205,6 +235,14 @@ public class LegalEntity extends StripeObject {
 			return back;
 		}
 
+                public void setFront(String id) {
+			this.front = id;
+		}
+
+		public void setBack(String id) {
+			this.back = id;
+		}
+
 		@Override
 		public boolean equals(Object o) {
 			if (this == o) {
@@ -214,7 +252,7 @@ public class LegalEntity extends StripeObject {
 				return false;
 			}
 			
-			Document document = (Document) o;
+			DocumentSubObject document = (DocumentSubObject) o;
 			return equals(details, document.details) &&
 					equals(detailsCode, document.detailsCode) &&
 					equals(front, document.front) &&
