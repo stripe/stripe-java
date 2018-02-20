@@ -1,0 +1,91 @@
+{
+  "id": "tu_123",
+  "object": "topup",
+  "amount": 1000,
+  "balance_transaction": {
+    "id": "txn_18tjj22eZvKYlo2CeFxM3FxI",
+    "object": "balance_transaction",
+    "amount": 316,
+    "available_on": 1474416000,
+    "created": 1473883880,
+    "currency": "usd",
+    "description": "User: 832. Events: 1283. Total Tickets: 1",
+    "fee": 39,
+    "fee_details": [
+      {
+        "amount": 39,
+        "application": null,
+        "currency": "usd",
+        "description": "Stripe processing fees",
+        "type": "stripe_fee"
+      }
+    ],
+    "net": 277,
+    "source": "ch_18tjj22eZvKYlo2CBMsf6JfQ",
+    "sourced_transfers": {
+      "object": "list",
+      "data": [
+      ],
+      "has_more": false,
+      "total_count": 0,
+      "url": "/v1/transfers?source_transaction=ch_18tjj22eZvKYlo2CBMsf6JfQ"
+    },
+    "status": "pending",
+    "type": "charge"
+  },
+  "created": 1517619386,
+  "currency": "usd",
+  "description": "Testing",
+  "expected_availability_date": 1518134400,
+  "failure_code": null,
+  "failure_message": null,
+  "livemode": false,
+  "metadata": {
+    "email": "test@test.com"
+  },
+  "source": {
+    "id": "src_123",
+    "object": "source",
+    "amount": null,
+    "client_secret": "src_client_secret_123",
+    "code_verification": {
+      "attempts_remaining": 10,
+      "status": "pending"
+    },
+    "created": 1517423043,
+    "currency": "usd",
+    "flow": "code_verification",
+    "livemode": true,
+    "metadata": {},
+    "owner": {
+      "address": {
+        "city": null,
+        "country": "US",
+        "line1": null,
+        "line2": null,
+        "postal_code": null,
+        "state": null
+      },
+      "email": null,
+      "name": null,
+      "phone": null,
+      "verified_address": null,
+      "verified_email": null,
+      "verified_name": null,
+      "verified_phone": null
+    },
+    "statement_descriptor": null,
+    "status": "chargeable",
+    "type": "ach_debit",
+    "usage": "reusable",
+    "ach_debit": {
+      "country": "US",
+      "type": "individual",
+      "routing_number": "011111110",
+      "fingerprint": "test_fingerprint",
+      "last4": "1111"
+    }
+  },
+  "statement_descriptor": "statement_descriptor",
+  "status": "pending"
+}
