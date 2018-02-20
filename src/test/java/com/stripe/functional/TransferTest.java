@@ -1,103 +1,86 @@
 package com.stripe.functional;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
-import com.stripe.BaseStripeFunctionalTest;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
-import com.stripe.model.Account;
 import com.stripe.model.Transfer;
-import com.stripe.model.TransferTransactionCollection;
-import com.stripe.net.RequestOptions;
+import com.stripe.model.TransferCollection;
+import com.stripe.net.APIResource;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import junit.framework.Assert;
 
 import org.junit.Test;
 
-public class TransferTest extends BaseStripeFunctionalTest {
-  static Map<String, Object> getDefaultAccountParams() {
-    Map<String, Object> defaultAccountParams = new HashMap<String, Object>();
-    // TODO: make defaultAccountParams the default for a given currency?
-    HashMap<String, Object> externalAccount = new HashMap<String, Object>();
-    externalAccount.putAll(defaultBankAccountParams);
-    externalAccount.put("object", "bank_account");
+public class TransferTest extends BaseStripeTest {
+  public static final String TRANSFER_ID = "tr_123";
 
-    defaultAccountParams.put("external_account", externalAccount);
-    defaultAccountParams.put("email", getUniqueEmail());
-    return defaultAccountParams;
+  private Transfer getTransferFixture() throws StripeException {
+    final Transfer transfer = Transfer.retrieve(TRANSFER_ID);
+    resetNetworkSpy();
+    return transfer;
   }
 
-  static Map<String, Object> getTransferParams() throws StripeException {
-    Map<String, Object> params = new HashMap<String, Object>();
-    Account destination = Account.create(getDefaultAccountParams());
+  @Test
+  public void testCreate() throws StripeException {
+    final Map<String, Object> params = new HashMap<String, Object>();
     params.put("amount", 100);
     params.put("currency", "usd");
-    params.put("destination", destination.getId());
-    return params;
+    params.put("destination", "acct_123");
+
+    final Transfer transfer = Transfer.create(params);
+
+    assertNotNull(transfer);
+    verifyRequest(
+        APIResource.RequestMethod.POST,
+        "/v1/transfers",
+        params
+    );
   }
 
   @Test
-  public void testTransferCreate() throws StripeException {
-    Map<String, Object> transferParams = getTransferParams();
-    Transfer createdTransfer = Transfer.create(transferParams);
-    assertEquals(transferParams.get("destination"), createdTransfer.getDestination());
+  public void testRetrieve() throws StripeException {
+    final Transfer transfer = Transfer.retrieve(TRANSFER_ID);
+
+    assertNotNull(transfer);
+    verifyRequest(
+        APIResource.RequestMethod.GET,
+        String.format("/v1/transfers/%s", TRANSFER_ID)
+    );
   }
 
   @Test
-  public void testTransferCancel() throws StripeException {
-    Transfer created = Transfer.create(getTransferParams());
-    try {
-      // we expect an InvalidRequestException here (caught by JUnit),
-      // because in test mode, transfers are automatically sent.
-      created.cancel(RequestOptions.getDefault());
-      Assert.fail();
-    } catch (InvalidRequestException ire) {
-      // do nothing
-    }
+  public void testUpdate() throws StripeException {
+    Transfer transfer = getTransferFixture();
 
+    final Map<String, Object> metadata = new HashMap<String, Object>();
+    metadata.put("key", "value");
+    final Map<String, Object> params = new HashMap<String, Object>();
+    params.put("metadata", metadata);
+
+    final Transfer updatedTransfer = transfer.update(params);
+
+    assertNotNull(updatedTransfer);
+    verifyRequest(
+        APIResource.RequestMethod.POST,
+        String.format("/v1/transfers/%s", transfer.getId()),
+        params
+    );
   }
 
   @Test
-  public void testTransferRetrieve() throws StripeException {
-    Transfer createdTransfer = Transfer.create(getTransferParams());
-    Transfer retrievedTransfer = Transfer.retrieve(createdTransfer.getId());
-    assertEquals(createdTransfer.getDate(), retrievedTransfer.getDate());
-    assertEquals(createdTransfer.getId(), retrievedTransfer.getId());
-  }
+  public void testList() throws StripeException {
+    final Map<String, Object> params = new HashMap<String, Object>();
+    params.put("limit", 1);
 
-  @Test
-  public void testTransferDestinationLoadedCorrectly() throws StripeException {
-    Map<String, Object> transferParams = getTransferParams();
-    Transfer created = Transfer.create(transferParams);
-    assertEquals(transferParams.get("destination"), created.getDestination());
-  }
+    final TransferCollection transfers = Transfer.list(params);
 
-  @Test
-  public void testTransferList() throws StripeException {
-    Map<String, Object> listParams = new HashMap<String, Object>();
-    listParams.put("count", 1);
-    List<Transfer> transfers = Transfer.all(listParams).getData();
-    assertEquals(transfers.size(), 1);
-  }
-
-  @Test
-  public void testTransferTransactions() throws StripeException {
-    Map<String, Object> transferParams = getTransferParams();
-    Transfer transfer = Transfer.create(transferParams);
-    HashMap<String, Object> params = new HashMap<String, Object>();
-    TransferTransactionCollection transactions = transfer.transactions(params,
-        supportedRequestOptions);
-    // Test that requestOptions and requestParams are the same in returned transactions:
-    assertEquals(supportedRequestOptions, transactions.getRequestOptions());
-    assertEquals(params, transactions.getRequestParams());
-  }
-
-  @Test
-  public void testTransferMetadata() throws StripeException {
-    testMetadata(Transfer.create(getTransferParams()));
+    assertNotNull(transfers);
+    verifyRequest(
+        APIResource.RequestMethod.GET,
+        "/v1/transfers",
+        params
+    );
   }
 }

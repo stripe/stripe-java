@@ -41,8 +41,8 @@ public class LiveStripeResponseGetterTest {
   public void testCreateQueryWithNestedParams() throws StripeException,
       UnsupportedEncodingException {
     /* Use LinkedHashMap because it preserves iteration order */
-    Map<String, Object> params = new LinkedHashMap<String, Object>();
-    Map<String, Object> nested = new LinkedHashMap<String, Object>();
+    final Map<String, Object> params = new LinkedHashMap<String, Object>();
+    final Map<String, Object> nested = new LinkedHashMap<String, Object>();
     nested.put("A", "B");
     nested.put("C", "D");
     params.put("nested", nested);
@@ -53,14 +53,13 @@ public class LiveStripeResponseGetterTest {
 
   @Test
   public void testCreateQueryWithListParams() throws StripeException, UnsupportedEncodingException {
-
-    List<String> nested = new LinkedList<String>();
+    final List<String> nested = new LinkedList<String>();
     nested.add("A");
     nested.add("B");
     nested.add("C");
 
     /* Use LinkedHashMap because it preserves iteration order */
-    Map<String, Object> params = new LinkedHashMap<String, Object>();
+    final Map<String, Object> params = new LinkedHashMap<String, Object>();
     params.put("nested", nested);
     params.put("a", "b");
     params.put("c", "d");
@@ -73,10 +72,10 @@ public class LiveStripeResponseGetterTest {
   public void testCreateQueryWithArrayParams() throws StripeException,
       UnsupportedEncodingException {
 
-    String[] nested = {"A", "B", "C"};
+    final String[] nested = {"A", "B", "C"};
 
     /* Use LinkedHashMap because it preserves iteration order */
-    Map<String, Object> params = new LinkedHashMap<String, Object>();
+    final Map<String, Object> params = new LinkedHashMap<String, Object>();
     params.put("nested", nested);
     params.put("a", "b");
     params.put("c", "d");
@@ -88,20 +87,20 @@ public class LiveStripeResponseGetterTest {
   @Test
   public void testCreateQueryWithListOfHashes() throws StripeException,
       UnsupportedEncodingException {
-    Map<String, String> deepNestedMap1 = new LinkedHashMap<String, String>();
+    final Map<String, String> deepNestedMap1 = new LinkedHashMap<String, String>();
     deepNestedMap1.put("A", "A-1");
     deepNestedMap1.put("B", "B-1");
 
-    Map<String, String> deepNestedMap2 = new LinkedHashMap<String, String>();
+    final Map<String, String> deepNestedMap2 = new LinkedHashMap<String, String>();
     deepNestedMap2.put("A", "A-2");
     deepNestedMap2.put("B", "B-2");
 
-    List<Object> nested = new LinkedList<Object>();
+    final List<Object> nested = new LinkedList<Object>();
     nested.add(deepNestedMap1);
     nested.add(deepNestedMap2);
 
     /* Use LinkedHashMap because it preserves iteration order */
-    Map<String, Object> params = new LinkedHashMap<String, Object>();
+    final Map<String, Object> params = new LinkedHashMap<String, Object>();
     params.put("nested", nested);
 
     assertEquals("nested[][A]=A-1&nested[][B]=B-1&nested[][A]=A-2&nested[][B]=B-2",
@@ -110,15 +109,15 @@ public class LiveStripeResponseGetterTest {
 
   @Test
   public void testCreateQueryWithEmptyList() throws StripeException, UnsupportedEncodingException {
-    Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<String, Object>();
     params.put("a", new LinkedList<String>());
     assertEquals("a=", LiveStripeResponseGetter.createQuery(params));
   }
 
   @Test
   public void testCreateQueryWithEmptyArray() throws StripeException, UnsupportedEncodingException {
-    String[] array = {};
-    Map<String, Object> params = new HashMap<String, Object>();
+    final String[] array = {};
+    final Map<String, Object> params = new HashMap<String, Object>();
     params.put("a", array);
     assertEquals("a=", LiveStripeResponseGetter.createQuery(params));
   }
@@ -126,23 +125,23 @@ public class LiveStripeResponseGetterTest {
   @Test
   public void testCreateQueryUrlEncodeSpecialCharacters() throws StripeException,
       UnsupportedEncodingException {
-    Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<String, Object>();
     params.put("a", "+foo?");
     assertEquals("a=%2Bfoo%3F", LiveStripeResponseGetter.createQuery(params));
   }
 
   @Test
   public void testIncorrectAdditionalOwners() throws StripeException, UnsupportedEncodingException {
-    Map<String, String> ownerParams = new HashMap<String, String>();
+    final Map<String, String> ownerParams = new HashMap<String, String>();
     ownerParams.put("first_name", "Stripe");
 
-    List<Object> additionalOwners = new LinkedList<Object>();
+    final List<Object> additionalOwners = new LinkedList<Object>();
     additionalOwners.add(ownerParams);
 
-    Map<String, Object> legalEntityParams = new HashMap<String, Object>();
+    final Map<String, Object> legalEntityParams = new HashMap<String, Object>();
     legalEntityParams.put("additional_owners", additionalOwners);
 
-    Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<String, Object>();
     params.put("legal_entity", legalEntityParams);
 
     assertEquals("legal_entity[additional_owners][][first_name]=Stripe",
@@ -151,16 +150,16 @@ public class LiveStripeResponseGetterTest {
 
   @Test
   public void testCorrectAdditionalOwners() throws StripeException, UnsupportedEncodingException {
-    Map<String, String> ownerParams = new HashMap<String, String>();
+    final Map<String, String> ownerParams = new HashMap<String, String>();
     ownerParams.put("first_name", "Stripe");
 
-    Map<String, Object> additionalOwnersMap = new HashMap<String, Object>();
+    final Map<String, Object> additionalOwnersMap = new HashMap<String, Object>();
     additionalOwnersMap.put("0", ownerParams);
 
-    Map<String, Object> legalEntityParams = new HashMap<String, Object>();
+    final Map<String, Object> legalEntityParams = new HashMap<String, Object>();
     legalEntityParams.put("additional_owners", additionalOwnersMap);
 
-    Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<String, Object>();
     params.put("legal_entity", legalEntityParams);
 
     assertEquals("legal_entity[additional_owners][0][first_name]=Stripe",
@@ -169,24 +168,24 @@ public class LiveStripeResponseGetterTest {
 
   @Test
   public void testAppInfo() {
-    RequestOptions options = (new RequestOptionsBuilder()).setApiKey("sk_foobar").build();
+    final RequestOptions options = (new RequestOptionsBuilder()).setApiKey("sk_foobar").build();
 
     Stripe.setAppInfo("MyAwesomePlugin", "1.2.34", "https://myawesomeplugin.info");
 
-    Map<String, String> headers = LiveStripeResponseGetter.getHeaders(options);
+    final Map<String, String> headers = LiveStripeResponseGetter.getHeaders(options);
 
-    String expectedUserAgent = String.format(
+    final String expectedUserAgent = String.format(
         "Stripe/v1 JavaBindings/%s MyAwesomePlugin/1.2.34 (https://myawesomeplugin.info)",
         Stripe.VERSION);
     assertEquals(expectedUserAgent, headers.get("User-Agent"));
 
-    Gson gson = new Gson();
+    final Gson gson = new Gson();
 
-    Map<String, String> uaMap = gson.fromJson(headers.get("X-Stripe-Client-User-Agent"),
+    final Map<String, String> uaMap = gson.fromJson(headers.get("X-Stripe-Client-User-Agent"),
         new TypeToken<Map<String, String>>() {}.getType());
     assertNotNull(uaMap.get("application"));
 
-    Map<String, String> appMap = gson.fromJson(uaMap.get("application"),
+    final Map<String, String> appMap = gson.fromJson(uaMap.get("application"),
         new TypeToken<Map<String, String>>() {}.getType());
     assertEquals("MyAwesomePlugin", appMap.get("name"));
     assertEquals("1.2.34", appMap.get("version"));

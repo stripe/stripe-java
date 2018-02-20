@@ -10,9 +10,9 @@ public abstract class Stripe {
   private static final int DEFAULT_CONNECT_TIMEOUT = 30 * 1000;
   private static final int DEFAULT_READ_TIMEOUT = 80 * 1000;
 
-  public static final String UPLOAD_API_BASE = "https://uploads.stripe.com";
   public static final String LIVE_API_BASE = "https://api.stripe.com";
   public static final String CONNECT_API_BASE = "https://connect.stripe.com";
+  public static final String UPLOAD_API_BASE = "https://files.stripe.com";
   public static final String VERSION = "5.39.0";
 
   public static volatile String apiKey;
@@ -27,6 +27,7 @@ public abstract class Stripe {
 
   private static volatile String apiBase = LIVE_API_BASE;
   private static volatile String connectBase = CONNECT_API_BASE;
+  private static volatile String uploadBase = UPLOAD_API_BASE;
   private static volatile Proxy connectionProxy = null;
   private static volatile PasswordAuthentication proxyCredential = null;
 
@@ -56,6 +57,18 @@ public abstract class Stripe {
 
   public static String getConnectBase() {
     return connectBase;
+  }
+
+  /**
+   * (FOR TESTING ONLY) If you'd like your upload requests to hit your own
+   * (mocked) server, you can set this up here by overriding the base api URL.
+   */
+  public static void overrideUploadBase(final String overriddenUploadBase) {
+    uploadBase = overriddenUploadBase;
+  }
+
+  public static String getUploadBase() {
+    return uploadBase;
   }
 
   /**

@@ -1,34 +1,44 @@
 package com.stripe.functional;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 
-import com.stripe.BaseStripeFunctionalTest;
+import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.BalanceTransaction;
 import com.stripe.model.BalanceTransactionCollection;
-import com.stripe.model.Charge;
+import com.stripe.net.APIResource;
 
 import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.Test;
 
-public class BalanceTransactionTest extends BaseStripeFunctionalTest {
+public class BalanceTransactionTest extends BaseStripeTest {
+  public static final String RESOURCE_ID = "bt_123";
+
   @Test
-  public void testBalanceTransactionRetrieval() throws StripeException {
-    Charge.create(defaultChargeParams);
-    BalanceTransactionCollection balanceTransactions = BalanceTransaction.all(null);
-    assertFalse(balanceTransactions.getData().isEmpty());
-    BalanceTransaction first = balanceTransactions.getData().get(0);
-    assertNotNull(first.getStatus());
+  public void testRetrieve() throws StripeException {
+    final BalanceTransaction balanceTransaction = BalanceTransaction.retrieve(RESOURCE_ID);
 
-    HashMap<String, Object> fetchParams = new HashMap<String, Object>();
-    fetchParams.put("count", 2);
-    assertEquals(BalanceTransaction.all(fetchParams).getData().size(), 2);
+    assertNotNull(balanceTransaction);
+    verifyRequest(
+        APIResource.RequestMethod.GET,
+        String.format("/v1/balance/history/%s", RESOURCE_ID)
+    );
+  }
 
-    BalanceTransaction retrieved = BalanceTransaction.retrieve(first.getId());
-    assertEquals(retrieved.getId(), first.getId());
-    assertEquals(retrieved.getSource(), first.getSource());
+  @Test
+  public void testList() throws StripeException {
+    final Map<String, Object> params = new HashMap<String, Object>();
+    params.put("limit", 1);
+
+    final BalanceTransactionCollection balanceTransactions = BalanceTransaction.list(params);
+
+    assertNotNull(balanceTransactions);
+    verifyRequest(
+        APIResource.RequestMethod.GET,
+        String.format("/v1/balance/history"),
+        params
+    );
   }
 }

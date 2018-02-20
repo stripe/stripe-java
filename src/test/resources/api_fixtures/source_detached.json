@@ -1,0 +1,37 @@
+{
+  "id": "src_123",
+  "object": "source",
+  "ach_credit_transfer": {
+      "account_number": "test_52796e3294dc",
+      "bank_name": "TEST BANK",
+      "fingerprint": null,
+      "routing_number": "110000000",
+      "swift_code": "TSTEZ122"
+  },
+  "client_secret": "src_client_secret_123",
+  "created": 1234567890,
+  "currency": "usd",
+  "customer": null,
+  "flow": "receiver",
+  "livemode": false,
+  "metadata": {},
+  "owner": {
+      "address": null,
+      "email": "jenny.rosen@example.com",
+      "name": null,
+      "phone": null,
+      "verified_address": null,
+      "verified_email": null,
+      "verified_name": null,
+      "verified_phone": null
+  },
+  "receiver": {
+      "address": "121042882-38381234567890123",
+      "amount_charged": 0,
+      "amount_received": 0,
+      "amount_returned": 0
+  },
+  "status": "pending",
+  "type": "ach_credit_transfer",
+  "usage": "consumed"
+}

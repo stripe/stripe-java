@@ -1,38 +1,33 @@
 package com.stripe.model;
 
 import static org.junit.Assert.assertEquals;
-
-import com.google.gson.Gson;
+import static org.junit.Assert.assertNotNull;
 
 import com.stripe.BaseStripeTest;
-import com.stripe.model.Event;
 import com.stripe.net.APIResource;
-
-import java.io.IOException;
 
 import org.junit.Test;
 
 public class EventTest extends BaseStripeTest {
-  private static Gson gson = APIResource.GSON;
-
   @Test
-  public void nestedObjectDeserializesToModel() throws IOException {
-    String json = resource("account_event.json");
-    Event event = gson.fromJson(json, Event.class);
+  public void testDeserialize() throws Exception {
+    final String data = getFixture("/v1/events/evt_123");
+    final Event event = APIResource.GSON.fromJson(data, Event.class);
+    assertNotNull(event);
+    assertNotNull(event.getId());
+    assertEquals("event", event.getObject());
 
-    // Thanks to some GSON magic, the object nested within the event can be
-    // typecast to its expected type.
-    Account account = (com.stripe.model.Account) event.getData().getObject();
-
-    assertEquals(account.getEmail(), "test@stripe.com");
+    final Customer customer = (Customer) event.getData().getObject();
+    assertNotNull(customer);
+    assertNotNull(customer.getId());
   }
 
   @Test
-  public void serializesToJson() throws IOException {
-    String json = resource("account_event.json");
-    Event event = gson.fromJson(json, Event.class);
+  public void testReserialize() throws Exception {
+    final String data = getFixture("/v1/events/evt_123");
+    final Event event = APIResource.GSON.fromJson(data, Event.class);
 
-    Event reserializedEvent = gson.fromJson(event.toJson(), Event.class);
+    final Event reserializedEvent = APIResource.GSON.fromJson(event.toJson(), Event.class);
 
     assertEquals(reserializedEvent.getId(), event.getId());
     assertEquals(reserializedEvent.getObject(), event.getObject());
@@ -44,12 +39,5 @@ public class EventTest extends BaseStripeTest {
     assertEquals(reserializedEvent.getRequest().getIdempotencyKey(),
         event.getRequest().getIdempotencyKey());
     assertEquals(reserializedEvent.getType(), event.getType());
-  }
-
-  @Test
-  public void supportsOldRequest() throws IOException {
-    String json = resource("event_old_request.json");
-    Event event = StripeObject.PRETTY_PRINT_GSON.fromJson(json, Event.class);
-    assertEquals(event.getRequest().getId(), "req_Ait4gLD2CQhStB");
   }
 }

@@ -1,0 +1,72 @@
+{
+  "id": "txn_123",
+  "object": "balance_transaction",
+  "amount": -5000,
+  "available_on": 1494288000,
+  "created": 1493747548,
+  "currency": "usd",
+  "description": "Chargeback withdrawal for ch_123",
+  "fee": 1500,
+  "fee_details": [
+    {
+      "amount": 1500,
+      "application": null,
+      "currency": "usd",
+      "description": "Dispute fee",
+      "type": "stripe_fee"
+    }
+  ],
+  "net": -6500,
+  "source": {
+    "id": "dp_123",
+    "object": "dispute",
+    "amount": 5000,
+    "balance_transaction": "txn_123",
+    "balance_transactions": [],
+    "charge": "ch_123",
+    "created": 1497287247,
+    "currency": "usd",
+    "evidence": {
+      "access_activity_log": null,
+      "billing_address": null,
+      "cancellation_policy": null,
+      "cancellation_policy_disclosure": null,
+      "cancellation_rebuttal": null,
+      "customer_communication": null,
+      "customer_email_address": null,
+      "customer_name": null,
+      "customer_purchase_ip": null,
+      "customer_signature": null,
+      "duplicate_charge_documentation": null,
+      "duplicate_charge_explanation": null,
+      "duplicate_charge_id": null,
+      "product_description": null,
+      "receipt": null,
+      "refund_policy": null,
+      "refund_policy_disclosure": null,
+      "refund_refusal_explanation": null,
+      "service_date": null,
+      "service_documentation": null,
+      "shipping_address": null,
+      "shipping_carrier": null,
+      "shipping_date": null,
+      "shipping_documentation": null,
+      "shipping_tracking_number": null,
+      "uncategorized_file": null,
+      "uncategorized_text": null
+    },
+    "evidence_details": {
+      "due_by": 1498694399,
+      "has_evidence": false,
+      "past_due": false,
+      "submission_count": 0
+    },
+    "is_charge_refundable": false,
+    "livemode": false,
+    "metadata": {},
+    "reason": "fraudulent",
+    "status": "needs_response"
+  },
+  "status": "pending",
+  "type": "adjustment"
+}
