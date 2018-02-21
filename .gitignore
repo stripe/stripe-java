@@ -10,6 +10,7 @@ target
 # Gradle files
 .gradle/*
 build/*
+out/*
 
 # compiler output
 bin/
