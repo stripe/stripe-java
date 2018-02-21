@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.32.0 - 2018-02-21
+* [#453](https://github.com/stripe/stripe-java/pull/453) Add support for topups
+
 ## 5.31.0 - 2018-02-13
 * [#446](https://github.com/stripe/stripe-java/pull/446) Add support for deserializing `source_mandate_notification` objects
 
