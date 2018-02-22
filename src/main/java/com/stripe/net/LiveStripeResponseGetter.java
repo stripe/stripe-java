@@ -326,7 +326,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 			throw new InvalidRequestException("You cannot set '" + keyPrefix + "' to an empty string. " +
 					"We interpret empty strings as null in requests. " +
 					"You may set '" + keyPrefix + "' to null to delete the property.",
-					keyPrefix, null, 0, null);
+					keyPrefix, null, null, 0, null);
 		} else if (value == null) {
 			flatParams = new LinkedList<Parameter>();
 			flatParams.add(new Parameter(keyPrefix, ""));
@@ -465,7 +465,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 					"No API key provided. (HINT: set your API key using 'Stripe.apiKey = <API-KEY>'. "
 							+ "You can generate API keys from the Stripe web interface. "
 							+ "See https://stripe.com/api for details or email support@stripe.com if you have questions.",
-					null, 0);
+					null, null, 0);
 		}
 
 		try {
@@ -549,7 +549,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 			throw new InvalidRequestException("Unable to encode parameters to "
 					+ APIResource.CHARSET
 					+ ". Please contact support@stripe.com for assistance.",
-					null, null, 0, e);
+					null, null, null, 0, e);
 		}
 
 		try {
@@ -577,7 +577,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 		if (method != APIResource.RequestMethod.POST) {
 			throw new InvalidRequestException(
 					"Multipart requests for HTTP methods other than POST "
-							+ "are currently not supported.", null, null, 0, null);
+							+ "are currently not supported.", null, null, null, 0, null);
 		}
 
 		java.net.HttpURLConnection conn = null;
@@ -603,16 +603,16 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 						File currentFile = (File) value;
 						if (!currentFile.exists()) {
 							throw new InvalidRequestException("File for key "
-									+ key + " must exist.", null, null, 0, null);
+									+ key + " must exist.", null, null, null, 0, null);
 						} else if (!currentFile.isFile()) {
 							throw new InvalidRequestException("File for key "
 									+ key
 									+ " must be a file and not a directory.",
-									null, null, 0, null);
+									null, null, null, 0, null);
 						} else if (!currentFile.canRead()) {
 							throw new InvalidRequestException(
 									"Must have read permissions on file for key "
-											+ key + ".", null, null, 0, null);
+											+ key + ".", null, null, null, 0, null);
 						}
 						multipartProcessor.addFileField(key, currentFile);
 					} else {
@@ -664,19 +664,19 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 				LiveStripeResponseGetter.ErrorContainer.class).error;
 		switch (rCode) {
 			case 400:
-				throw new InvalidRequestException(error.message, error.param, requestId, rCode, null);
+				throw new InvalidRequestException(error.message, error.param, requestId, error.code, rCode, null);
 			case 404:
-				throw new InvalidRequestException(error.message, error.param, requestId, rCode, null);
+				throw new InvalidRequestException(error.message, error.param, requestId, error.code, rCode, null);
 			case 401:
-				throw new AuthenticationException(error.message, requestId, rCode);
+				throw new AuthenticationException(error.message, requestId, error.code, rCode);
 			case 402:
 				throw new CardException(error.message, requestId, error.code, error.param, error.decline_code, error.charge, rCode, null);
 			case 403:
-				throw new PermissionException(error.message, requestId, rCode);
+				throw new PermissionException(error.message, requestId, error.code, rCode);
 			case 429:
-				throw new RateLimitException(error.message, error.param, requestId, rCode, null);
+				throw new RateLimitException(error.message, error.param, requestId, error.code, rCode, null);
 			default:
-				throw new APIException(error.message, requestId, rCode, null);
+				throw new APIException(error.message, requestId, error.code, rCode, null);
 		}
 	}
 
@@ -789,25 +789,25 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 					.getDeclaredMethod("getContent").invoke(response), APIResource.CHARSET);
 			return new StripeResponse(responseCode, body);
 		} catch (InvocationTargetException e) {
-			throw new APIException(unknownErrorMessage, null, 0, e);
+			throw new APIException(unknownErrorMessage, null, null, 0, e);
 		} catch (MalformedURLException e) {
-			throw new APIException(unknownErrorMessage, null, 0, e);
+			throw new APIException(unknownErrorMessage, null, null, 0, e);
 		} catch (NoSuchFieldException e) {
-			throw new APIException(unknownErrorMessage, null, 0, e);
+			throw new APIException(unknownErrorMessage, null, null, 0, e);
 		} catch (SecurityException e) {
-			throw new APIException(unknownErrorMessage, null, 0, e);
+			throw new APIException(unknownErrorMessage, null, null, 0, e);
 		} catch (NoSuchMethodException e) {
-			throw new APIException(unknownErrorMessage, null, 0, e);
+			throw new APIException(unknownErrorMessage, null, null, 0, e);
 		} catch (ClassNotFoundException e) {
-			throw new APIException(unknownErrorMessage, null, 0, e);
+			throw new APIException(unknownErrorMessage, null, null, 0, e);
 		} catch (IllegalArgumentException e) {
-			throw new APIException(unknownErrorMessage, null, 0, e);
+			throw new APIException(unknownErrorMessage, null, null, 0, e);
 		} catch (IllegalAccessException e) {
-			throw new APIException(unknownErrorMessage, null, 0, e);
+			throw new APIException(unknownErrorMessage, null, null, 0, e);
 		} catch (InstantiationException e) {
-			throw new APIException(unknownErrorMessage, null, 0, e);
+			throw new APIException(unknownErrorMessage, null, null, 0, e);
 		} catch (UnsupportedEncodingException e) {
-			throw new APIException(unknownErrorMessage, null, 0, e);
+			throw new APIException(unknownErrorMessage, null, null, 0, e);
 		}
 	}
 }

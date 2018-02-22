@@ -83,7 +83,8 @@ public class ExternalAccount extends APIResource implements HasId, MetadataStore
 		if (this.getCustomer() != null) {
 			return request(RequestMethod.POST, String.format("%s/verify", this.getInstanceURL()), params, ExternalAccount.class, options);
 		} else {
-			throw new InvalidRequestException("Only customer bank accounts can be verified in this manner.", null, null, null, null);
+			throw new InvalidRequestException("Only customer bank accounts can be verified in this manner.",
+				null, null, null, 0, null);
 		}
 	}
 
