@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.33.0 - 2018-02-23
+* [#455](https://github.com/stripe/stripe-java/pull/455) Add support for `code` attribute on all Stripe exceptions
+
 ## 5.32.0 - 2018-02-21
 * [#453](https://github.com/stripe/stripe-java/pull/453) Add support for topups
 
