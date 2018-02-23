@@ -7,11 +7,9 @@ package com.stripe.exception.oauth;
  * doesn't match the mode of a code or refresh token.
  */
 public class InvalidGrantException extends OAuthException {
-
-	private static final long serialVersionUID = 1L;
+	private static final long serialVersionUID = 2L;
 
 	public InvalidGrantException(String code, String description, String requestId, Integer statusCode, Throwable e) {
 		super(code, description, requestId, statusCode, e);
 	}
-
 }

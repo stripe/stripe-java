@@ -44,7 +44,7 @@ public final class OAuth {
 			throw new InvalidRequestException("Unable to encode parameters to "
 					+ APIResource.CHARSET
 					+ ". Please contact support@stripe.com for assistance.",
-					null, null, 0, e);
+					null, null, null, 0, e);
 		}
 
 		String url = base + "/oauth/authorize?" + query;
@@ -107,7 +107,7 @@ public final class OAuth {
 							+ "after registering your account as a platform. See "
 							+ "https://stripe.com/docs/connect/standard-accounts for details, "
 							+ "or email support@stripe.com if you have any questions.",
-					null, 0);
+					null, null, 0);
 		}
 
 		return clientId;
