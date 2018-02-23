@@ -61,13 +61,15 @@ import com.stripe.net.RequestOptions;
 public class StripeExample {
 
     public static void main(String[] args) {
-        RequestOptions requestOptions = (new RequestOptionsBuilder()).setApiKey("YOUR-SECRET-KEY").build();
+        Stripe.apiKey = "sk_test_...";
+
         Map<String, Object> chargeMap = new HashMap<String, Object>();
         chargeMap.put("amount", 100);
         chargeMap.put("currency", "usd");
         chargeMap.put("source", "tok_1234"); // obtained via Stripe.js
+
         try {
-            Charge charge = Charge.create(chargeMap, requestOptions);
+            Charge charge = Charge.create(chargeMap);
             System.out.println(charge);
         } catch (StripeException e) {
             e.printStackTrace();
@@ -77,6 +79,23 @@ public class StripeExample {
 ```
 
 See the project's [functional tests](https://github.com/stripe/stripe-java/blob/master/src/test/java/com/stripe/functional/) for more examples.
+
+### Per-request Configuration
+
+For apps that need to use multiple keys during the lifetime of a process, like
+one that uses [Stripe Connect][connect], it's also possible to set a
+per-request key and/or account:
+
+``` java
+RequestOptions requestOptions = new RequestOptionsBuilder()
+    .setApiKey("sk_test_...")
+    .setStripeAccount("acct_...")
+    .build();
+
+Charge.list(null, requestOptions);
+
+Charge.retrieve("ch_18atAXCdGbJFKhCuBAa4532Z", requestOptions);
+```
 
 ### Configuring Timeouts
 
@@ -122,6 +141,8 @@ You can run particular tests by passing `--tests Class#method`. Make sure you us
     ./gradlew test --tests com.stripe.model.AccountTest
     ./gradlew test --tests com.stripe.functional.ChargeTest
     ./gradlew test --tests com.stripe.functional.ChargeTest.testChargeCreate
+
+[connect]: https://stripe.com/connect
 
 <!--
 # vim: set tw=79:
