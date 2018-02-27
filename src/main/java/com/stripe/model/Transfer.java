@@ -253,7 +253,6 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 		this.reversed = reversed;
 	}
 
-	@Deprecated
 	public String getSourceTransaction() {
 		if (this.sourceTransaction == null) {
 			return null;
@@ -261,13 +260,11 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 		return this.sourceTransaction.getId();
 	}
 
-	@Deprecated
 	public void setSourceTransaction(String sourceTransactionID) {
 		this.sourceTransaction = setExpandableFieldID(sourceTransactionID, this.sourceTransaction);
 
 	}
 
-	@Deprecated
 	public Charge getSourceTransactionObject() {
 		if (this.sourceTransaction == null) {
 			return null;
@@ -275,7 +272,6 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
 		return this.sourceTransaction.getExpanded();
 	}
 
-	@Deprecated
 	public void setSourceTransactionObject(Charge sourceTransaction) {
 		this.sourceTransaction = new ExpandableField<Charge>(sourceTransaction.getId(), sourceTransaction);
 	}
