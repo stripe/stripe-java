@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.33.1 - 2018-02-27
+* [#457](https://github.com/stripe/stripe-java/pull/457) Add title, version and vendor in JAR manifest file
+
 ## 5.33.0 - 2018-02-23
 * [#455](https://github.com/stripe/stripe-java/pull/455) Add support for `code` attribute on all Stripe exceptions
 
