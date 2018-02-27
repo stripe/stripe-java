@@ -38,6 +38,14 @@ dependencies {
     testRuntime group: 'org.slf4j', name: 'slf4j-api', version: '1.7.10'
 }
 
+jar {
+    manifest {
+        attributes("Implementation-Title": POM_NAME,
+                   "Implementation-Version": VERSION_NAME,
+                   "Implementation-Vendor": VENDOR_NAME)
+    }
+}
+
 apply from: 'deploy.gradle'
 
 test {
