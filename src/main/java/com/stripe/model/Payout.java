@@ -132,6 +132,13 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
 		this.destination = new ExpandableField<ExternalAccount>(c.getId(), c);
 	}
 
+	public Boolean isDestinationDeleted() {
+		if (this.destination == null) {
+			return false;
+		}
+		return this.destination.isDeleted();
+	}
+
 	public String getFailureBalanceTransaction() {
 		if (this.failureBalanceTransaction == null) {
 			return null;

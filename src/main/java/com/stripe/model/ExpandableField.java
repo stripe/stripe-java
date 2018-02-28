@@ -7,14 +7,24 @@ package com.stripe.model;
 public class ExpandableField<T extends HasId> {
 	private String id;
 	private T expandedObject;
+	Boolean deleted;
 
 	public ExpandableField(String id, T expandedObject) {
+		this(id, expandedObject, false);
+	}
+
+	public ExpandableField(String id, T expandedObject, Boolean deleted) {
 		this.id = id;
 		this.expandedObject = expandedObject;
+		this.deleted = deleted;
 	}
 
 	public boolean isExpanded() {
 		return expandedObject != null;
+	}
+
+	public boolean isDeleted() {
+		return deleted;
 	}
 
 	public String getId() {
