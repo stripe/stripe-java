@@ -40,8 +40,8 @@ public class PagingIteratorTest extends BaseStripeTest {
 		APIResource.setStripeResponseGetter(new LiveStripeResponseGetter());
 	}
 
-	@Test
-	public void testAutoPagination() throws IOException, StripeException {
+	@Before
+	public void setUpMockPages() throws IOException, StripeException {
 		final List<String> pages = new ArrayList<String>();
 		pages.add(resource("pageable_model_page_0.json"));
 		pages.add(resource("pageable_model_page_1.json"));
@@ -68,9 +68,12 @@ public class PagingIteratorTest extends BaseStripeTest {
 				return APIResource.GSON.fromJson(pages.get(count++), PageableModelCollection.class);
 			}
 		});
+	}
 
+	@Test
+	public void testAutoPagination() throws IOException, StripeException {
 		// set some arbitrary parameters so that we can verify that they're
-		// used for requests on BOTH pages
+		// used for requests on ALL pages
 		Map<String, Object> page0Params = new HashMap<String, Object>();
 		page0Params.put("foo", "bar");
 
@@ -87,6 +90,49 @@ public class PagingIteratorTest extends BaseStripeTest {
 
 		List<PageableModel> models = new ArrayList<PageableModel>();
 		for (PageableModel model : collection.autoPagingIterable()) {
+			models.add(model);
+		}
+
+		assertEquals(5, models.size());
+		assertEquals("pm_123", models.get(0).getId());
+		assertEquals("pm_124", models.get(1).getId());
+		assertEquals("pm_125", models.get(2).getId());
+		assertEquals("pm_126", models.get(3).getId());
+		assertEquals("pm_127", models.get(4).getId());
+
+		verifyGet(PageableModelCollection.class, "https://api.stripe.com/v1/pageablemodels",
+				page0Params, options);
+		verifyGet(PageableModelCollection.class, "https://api.stripe.com/v1/pageablemodels",
+				page1Params, options);
+		verifyGet(PageableModelCollection.class, "https://api.stripe.com/v1/pageablemodels",
+				page2Params, options);
+		verifyNoMoreInteractions(networkMock);
+	}
+
+	@Test
+	public void testAutoPaginationWithParams() throws IOException, StripeException {
+		// set some arbitrary parameters so that we can verify that the
+		// parameters passed to autoPagingIterable() override the initial
+		// collection parameters
+		Map<String, Object> page0Params = new HashMap<String, Object>();
+		page0Params.put("foo", "bar");
+
+		Map<String, Object> autoPagingParams = new HashMap<String, Object>();
+		autoPagingParams.put("foo", "baz");
+
+		Map<String, Object> page1Params = new HashMap<String, Object>();
+		page1Params.put("foo", "baz");
+		page1Params.put("starting_after", "pm_124");
+
+		Map<String, Object> page2Params = new HashMap<String, Object>();
+		page2Params.put("foo", "baz");
+		page2Params.put("starting_after", "pm_126");
+
+		RequestOptions options = (new RequestOptionsBuilder()).setApiKey("sk_paging_key").build();
+		PageableModelCollection collection = PageableModel.list(page0Params, options);
+
+		List<PageableModel> models = new ArrayList<PageableModel>();
+		for (PageableModel model : collection.autoPagingIterable(autoPagingParams)) {
 			models.add(model);
 		}
 
