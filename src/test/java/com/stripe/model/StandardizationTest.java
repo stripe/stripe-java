@@ -99,9 +99,10 @@ public class StandardizationTest {
         }
         Assert.assertTrue(
             String.format(
-                "Methods on %ss like %s.%s should take a final parameter as a %s parameter.%n",
+                "Methods on %ss like %s.%s should take a final "
+                  + "parameter as a %s parameter, but got %s.%n",
                 APIResource.class.getSimpleName(), model.getSimpleName(), method.getName(),
-                RequestOptions.class.getSimpleName()),
+                RequestOptions.class.getSimpleName(), finalParamType.getCanonicalName()),
             RequestOptions.class.isAssignableFrom(finalParamType));
       }
     }

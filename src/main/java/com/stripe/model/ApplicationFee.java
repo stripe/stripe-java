@@ -183,6 +183,7 @@ public class ApplicationFee extends APIResource implements HasId {
     // API versions 2014-07-26 and earlier render charge refunds as an array
     // instead of an object, meaning there is no sublist URL.
     if (refunds.getURL() == null) {
+      // TODO replace with subresourceURL
       refunds.setURL(String.format("/v1/application_fees/%s/refunds", getId()));
     }
 
