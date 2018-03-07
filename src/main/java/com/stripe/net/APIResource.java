@@ -94,6 +94,8 @@ public abstract class APIResource extends StripeObject {
 			return "subscription_item";
 		} else if (className.equals("threedsecure")) {
 			return "three_d_secure";
+		} else if (className.equals("usagerecord")) {
+			return "usage_record";
 		} else {
 			return className;
 		}
@@ -105,6 +107,10 @@ public abstract class APIResource extends StripeObject {
 
 	protected static String singleClassURL(Class<?> clazz, String apiBase) {
 		return String.format("%s/v1/%s", apiBase, className(clazz));
+	}
+
+	protected static String subclassInstanceURL(Class<?> parentClass, String parentId, Class<?> subclass) throws InvalidRequestException {
+		return String.format("%s/%ss", instanceURL(parentClass, parentId), className(subclass));
 	}
 
 	protected static String classURL(Class<?> clazz) {
