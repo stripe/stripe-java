@@ -14,10 +14,14 @@ plugins {
     id 'maven'
     id 'net.saliman.cobertura' version '2.5.2'
     id 'com.github.kt3k.coveralls' version '2.8.2'
+    id 'osgi'
 }
 
 sourceCompatibility = 1.7
 targetCompatibility = 1.7
+
+group = GROUP
+version = VERSION_NAME
 
 tasks.withType(JavaCompile) {
 	options.encoding = 'UTF-8'
@@ -43,6 +47,14 @@ jar {
         attributes("Implementation-Title": POM_NAME,
                    "Implementation-Version": VERSION_NAME,
                    "Implementation-Vendor": VENDOR_NAME)
+
+        version = VERSION_NAME
+        symbolicName = POM_ARTIFACT_ID
+
+        instruction 'Export-Package',
+            '*'
+
+        
     }
 }
 
