@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.33.3 - 2018-03-21
+* [#464](https://github.com/stripe/stripe-java/pull/464) Add OSGi headers to manifest file
+
 ## 5.33.2 - 2018-02-28
 * [#458](https://github.com/stripe/stripe-java/pull/458) Remove deprecation markers from `sourceTransaction` accessors on `Transfer` model
 
