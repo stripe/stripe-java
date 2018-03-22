@@ -43,4 +43,13 @@ public class ExpandableFieldSerializerTest extends BaseStripeTest {
         String expected = "{\n  \"nested\": {\n    \"id\": \"id_expanded\",\n    \"bar\": 42\n  }\n}";
         assertEquals(expected, object.toJson());
     }
+
+    @Test
+    public void serializeNull() throws IOException {
+        TestTopLevelObject object = new TestTopLevelObject();
+        object.nested = new ExpandableField<TestNestedObject>(null, null);
+
+        String expected = "{\n  \"nested\": null\n}";
+        assertEquals(expected, object.toJson());
+    }
 }
