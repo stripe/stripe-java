@@ -10,8 +10,6 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.net.APIResource;
 import com.stripe.net.LiveStripeResponseGetter;
-import com.stripe.net.RequestOptions;
-import com.stripe.net.RequestOptions.RequestOptionsBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;

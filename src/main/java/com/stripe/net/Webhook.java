@@ -2,7 +2,6 @@ package com.stripe.net;
 
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.model.Event;
-import com.stripe.model.StripeObject;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;

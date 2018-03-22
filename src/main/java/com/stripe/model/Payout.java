@@ -8,7 +8,6 @@ import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
 
-import java.util.List;
 import java.util.Map;
 
 public class Payout extends APIResource implements MetadataStore<Payout>, HasId {

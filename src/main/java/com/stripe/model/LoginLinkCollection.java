@@ -9,8 +9,6 @@ import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
 
-import java.util.Map;
-
 public class LoginLinkCollection extends StripeCollection<LoginLink> {
 	public LoginLink create()
 			throws AuthenticationException, InvalidRequestException,

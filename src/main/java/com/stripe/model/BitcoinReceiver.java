@@ -6,10 +6,8 @@ import com.stripe.exception.APIException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
 
-import java.util.Collections;
 import java.util.Map;
 
 public class BitcoinReceiver extends ExternalAccount {
