@@ -39,7 +39,7 @@ public class SourceTest extends BaseStripeTest {
 		params.put("currency", "usd");
 		params.put("owner", ownerParams);
 
-		Source src = Source.create(params);
+		Source.create(params);
 
 		verifyPost(Source.class, "https://api.stripe.com/v1/sources", params);
 		verifyNoMoreInteractions(networkMock);
@@ -47,7 +47,7 @@ public class SourceTest extends BaseStripeTest {
 
 	@Test
 	public void testRetrieve() throws StripeException {
-		Source src = Source.retrieve("src_foo");
+		Source.retrieve("src_foo");
 
 		verifyGet(Source.class, "https://api.stripe.com/v1/sources/src_foo");
 		verifyNoMoreInteractions(networkMock);

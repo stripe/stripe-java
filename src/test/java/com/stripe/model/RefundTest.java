@@ -65,7 +65,7 @@ public class RefundTest extends BaseStripeTest {
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		params.put("charge", "ch_foo");
 
-		Refund refund = Refund.create(params);
+		Refund.create(params);
 
 		verifyPost(Refund.class, "https://api.stripe.com/v1/refunds", params);
 		verifyNoMoreInteractions(networkMock);

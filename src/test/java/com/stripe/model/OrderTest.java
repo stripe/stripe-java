@@ -60,7 +60,7 @@ public class OrderTest extends BaseStripeTest {
 		params.put("shipping", shippingParams);
 		params.put("email", "natalie.martin@example.com");
 
-		Order order = Order.create(params);
+		Order.create(params);
 
 		verifyPost(Order.class, "https://api.stripe.com/v1/orders", params);
 		verifyNoMoreInteractions(networkMock);
@@ -68,7 +68,7 @@ public class OrderTest extends BaseStripeTest {
 
 	@Test
 	public void testRetrieve() throws StripeException {
-		Order order = Order.retrieve("or_test_retrieve");
+		Order.retrieve("or_test_retrieve");
 
 		verifyGet(Order.class, "https://api.stripe.com/v1/orders/or_test_retrieve");
 		verifyNoMoreInteractions(networkMock);
@@ -83,7 +83,7 @@ public class OrderTest extends BaseStripeTest {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("expand", expandList);
 
-		Order order = Order.retrieve("or_test_retrieve", params, null);
+		Order.retrieve("or_test_retrieve", params, null);
 
 		verifyGet(Order.class, "https://api.stripe.com/v1/orders/or_test_retrieve", params);
 		verifyNoMoreInteractions(networkMock);

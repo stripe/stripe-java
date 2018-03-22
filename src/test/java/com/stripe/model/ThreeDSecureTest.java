@@ -32,7 +32,7 @@ public class ThreeDSecureTest extends BaseStripeTest {
 		params.put("currency", "usd");
 		params.put("return_url", "https://example.org/3d-secure-result");
 
-		ThreeDSecure tds = ThreeDSecure.create(params);
+		ThreeDSecure.create(params);
 
 		verifyPost(ThreeDSecure.class, "https://api.stripe.com/v1/3d_secure", params);
 		verifyNoMoreInteractions(networkMock);
@@ -40,7 +40,7 @@ public class ThreeDSecureTest extends BaseStripeTest {
 
 	@Test
 	public void testRetrieve() throws StripeException {
-		ThreeDSecure tds = ThreeDSecure.retrieve("tdsrc_id");
+		ThreeDSecure.retrieve("tdsrc_id");
 
 		verifyGet(ThreeDSecure.class, "https://api.stripe.com/v1/3d_secure/tdsrc_id");
 		verifyNoMoreInteractions(networkMock);

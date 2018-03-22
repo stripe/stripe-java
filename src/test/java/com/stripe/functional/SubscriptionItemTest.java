@@ -62,7 +62,7 @@ public class SubscriptionItemTest extends BaseStripeFunctionalTest {
 	public void testSubscriptionItemList() throws StripeException {
 		Customer customer = Customer.create(defaultCustomerParams);
 		Subscription subscription = createDefaultSubscription(customer);
-		SubscriptionItem subscriptionItem = createDefaultSubscriptionItem(subscription);
+		createDefaultSubscriptionItem(subscription);
 
 		Map<String, Object> listParams = new HashMap<String, Object>();
 		listParams.put("subscription", subscription.getId());

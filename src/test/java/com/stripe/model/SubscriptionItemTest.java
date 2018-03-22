@@ -68,7 +68,7 @@ public class SubscriptionItemTest extends BaseStripeTest {
 		params.put("plan", "gold");
 		params.put("quantity", 2);
 
-		SubscriptionItem item = SubscriptionItem.create(params);
+		SubscriptionItem.create(params);
 
 		verifyPost(SubscriptionItem.class, "https://api.stripe.com/v1/subscription_items", params);
 		verifyNoMoreInteractions(networkMock);

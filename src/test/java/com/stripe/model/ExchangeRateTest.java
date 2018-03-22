@@ -27,7 +27,7 @@ public class ExchangeRateTest extends BaseStripeTest {
 
 	@Test
 	public void testRetrieve() throws StripeException {
-		ExchangeRate rates = ExchangeRate.retrieve("usd");
+		ExchangeRate.retrieve("usd");
 
 		verifyGet(ExchangeRate.class, "https://api.stripe.com/v1/exchange_rates/usd");
 		verifyNoMoreInteractions(networkMock);
@@ -38,7 +38,7 @@ public class ExchangeRateTest extends BaseStripeTest {
 		HashMap<String, Object> params = new HashMap<String, Object>();
 		params.put("limit", 3);
 
-		ExchangeRateCollection listRates = ExchangeRate.list(params);
+		ExchangeRate.list(params);
 
 		verifyGet(ExchangeRateCollection.class, "https://api.stripe.com/v1/exchange_rates", params);
 		verifyNoMoreInteractions(networkMock);

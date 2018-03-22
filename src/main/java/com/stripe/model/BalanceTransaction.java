@@ -177,7 +177,6 @@ public class BalanceTransaction extends APIResource implements HasId {
 	public static BalanceTransaction retrieve(String id, String apiKey)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		String url = String.format("%s/%s/%s", Stripe.getApiBase(), "v1/balance/history", id);
 		return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
 	}
 
