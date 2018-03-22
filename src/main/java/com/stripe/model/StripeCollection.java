@@ -100,6 +100,19 @@ public abstract class StripeCollection<T extends HasId> extends StripeObject imp
 		return new PagingIterable<T>(this);
 	}
 
+	public Iterable<T> autoPagingIterable(Map<String, Object> params) {
+		this.setRequestParams(params);
+
+		return new PagingIterable<T>(this);
+	}
+
+	public Iterable<T> autoPagingIterable(Map<String, Object> params, RequestOptions options) {
+		this.setRequestOptions(options);
+		this.setRequestParams(params);
+
+		return new PagingIterable<T>(this);
+	}
+
 	public RequestOptions getRequestOptions() {
 		return this.requestOptions;
 	}
