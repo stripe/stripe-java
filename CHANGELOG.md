@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.34.0 - 2018-03-22
+* [#459](https://github.com/stripe/stripe-java/pull/459) Add support for passing parameters to `autoPagingIterable()`
+* [#466](https://github.com/stripe/stripe-java/pull/466) Fix serialization of null expandable attributes
+
 ## 5.33.3 - 2018-03-21
 * [#464](https://github.com/stripe/stripe-java/pull/464) Add OSGi headers to manifest file
 
