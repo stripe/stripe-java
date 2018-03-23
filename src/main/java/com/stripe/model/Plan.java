@@ -21,7 +21,7 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
 	Boolean livemode;
 	Map<String, String> metadata;
 	String nickname;
-	String product;
+	ExpandableField<Product> product;
 
 	@Deprecated
 	String statementDescription;
@@ -113,11 +113,25 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
 	}
 
 	public String getProduct() {
-		return product;
+		if (this.product == null) {
+			return null;
+		}
+		return this.product.getId();
 	}
 
-	public void setProduct(String product) {
-		this.product = product;
+	public void setProduct(String productID) {
+		this.product = setExpandableFieldID(productID, this.product);
+	}
+
+	public Product getProductObject() {
+		if (this.product == null) {
+			return null;
+		}
+		return this.product.getExpanded();
+	}
+
+	public void setProductObject(Product product) {
+		this.product = new ExpandableField<Product>(product.getId(), product);
 	}
 
 	/**
