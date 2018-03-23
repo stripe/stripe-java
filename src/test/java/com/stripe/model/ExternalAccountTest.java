@@ -7,15 +7,12 @@ import com.stripe.model.Customer;
 import com.stripe.model.ExternalAccount;
 import com.stripe.net.APIResource;
 import com.stripe.net.LiveStripeResponseGetter;
-import com.stripe.net.RequestOptions.RequestOptionsBuilder;
 import com.stripe.net.RequestOptions;
 import org.junit.After;
 import org.junit.Before;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;

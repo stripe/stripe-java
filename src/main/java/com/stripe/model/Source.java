@@ -7,7 +7,6 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.RequestOptions;
 
-import java.io.IOException;
 import java.util.Map;
 
 public class Source extends ExternalAccount implements HasSourceTypeData {

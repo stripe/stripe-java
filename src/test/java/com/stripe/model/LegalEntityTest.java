@@ -2,21 +2,15 @@ package com.stripe.model;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
-import com.stripe.model.Account;
 import com.stripe.model.LegalEntity;
 import com.stripe.net.APIResource;
-import com.stripe.net.RequestOptions;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
 
 import org.junit.Test;
 
 import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
 
 public class LegalEntityTest extends BaseStripeTest {
 	@Test

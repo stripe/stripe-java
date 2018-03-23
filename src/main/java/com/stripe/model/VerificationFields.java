@@ -1,9 +1,5 @@
 package com.stripe.model;
 
-import com.google.gson.annotations.SerializedName;
-
-import java.util.List;
-
 public final class VerificationFields extends StripeObject {
 	protected VerificationFieldsDetails individual;
 	protected VerificationFieldsDetails company;

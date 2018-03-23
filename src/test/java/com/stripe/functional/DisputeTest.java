@@ -2,7 +2,6 @@ package com.stripe.functional;
 
 import com.google.common.collect.ImmutableMap;
 import com.stripe.BaseStripeFunctionalTest;
-import com.stripe.Stripe;
 import com.stripe.exception.*;
 import com.stripe.model.*;
 import com.stripe.net.RequestOptions;

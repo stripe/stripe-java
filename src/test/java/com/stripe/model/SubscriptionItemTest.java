@@ -7,16 +7,11 @@ import com.stripe.net.APIResource;
 import com.stripe.net.LiveStripeResponseGetter;
 import org.junit.After;
 import org.junit.Before;
-import junit.framework.Assert;
 
 import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
 
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.*;
 
 public class SubscriptionItemTest extends BaseStripeTest {
@@ -73,7 +68,7 @@ public class SubscriptionItemTest extends BaseStripeTest {
 		params.put("plan", "gold");
 		params.put("quantity", 2);
 
-		SubscriptionItem item = SubscriptionItem.create(params);
+		SubscriptionItem.create(params);
 
 		verifyPost(SubscriptionItem.class, "https://api.stripe.com/v1/subscription_items", params);
 		verifyNoMoreInteractions(networkMock);

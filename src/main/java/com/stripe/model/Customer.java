@@ -453,7 +453,6 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
 	public DeletedCustomer delete(String apiKey)
 			throws AuthenticationException, InvalidRequestException,
 			APIConnectionException, CardException, APIException {
-		RequestOptions result = null;
 		return delete(RequestOptions.builder().setApiKey(apiKey).build());
 	}
 

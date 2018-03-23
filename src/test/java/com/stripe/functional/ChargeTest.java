@@ -155,7 +155,6 @@ public class ChargeTest extends BaseStripeFunctionalTest {
 	public void testDeclinedCard() throws StripeException {
 		Map<String, Object> declinedChargeParams = new HashMap<String, Object>();
 		declinedChargeParams.putAll(defaultChargeParams);
-		Map<String, Object> declinedCardParams = new HashMap<String, Object>();
 		declinedChargeParams.put("source", "tok_chargeDeclined");
 
 		try {
@@ -170,7 +169,6 @@ public class ChargeTest extends BaseStripeFunctionalTest {
 	public void testInvalidAddressZipTest() throws StripeException {
 		Map<String, Object> invalidChargeParams = new HashMap<String, Object>();
 		invalidChargeParams.putAll(defaultChargeParams);
-		Map<String, Object> invalidCardParams = new HashMap<String, Object>();
 		invalidChargeParams.put("source", "tok_avsZipFail");
 		Charge charge = Charge.create(invalidChargeParams, supportedRequestOptions);
 		assertEquals(charge.getPaid(), true);
@@ -184,7 +182,6 @@ public class ChargeTest extends BaseStripeFunctionalTest {
 	public void testInvalidAddressLine1Test() throws StripeException {
 		Map<String, Object> invalidChargeParams = new HashMap<String, Object>();
 		invalidChargeParams.putAll(defaultChargeParams);
-		Map<String, Object> invalidCardParams = new HashMap<String, Object>();
 		invalidChargeParams.put("source", "tok_avsLine1Fail");
 		Charge charge = Charge.create(invalidChargeParams, supportedRequestOptions);
 		assertEquals(charge.getPaid(), true);

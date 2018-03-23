@@ -2,7 +2,6 @@ package com.stripe.model;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.Map;
 
 import com.stripe.BaseStripeTest;
@@ -10,14 +9,11 @@ import com.stripe.exception.StripeException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.LiveStripeResponseGetter;
-import com.stripe.net.RequestOptions;
-import com.stripe.net.RequestOptions.RequestOptionsBuilder;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class SourceTest extends BaseStripeTest {
@@ -43,7 +39,7 @@ public class SourceTest extends BaseStripeTest {
 		params.put("currency", "usd");
 		params.put("owner", ownerParams);
 
-		Source src = Source.create(params);
+		Source.create(params);
 
 		verifyPost(Source.class, "https://api.stripe.com/v1/sources", params);
 		verifyNoMoreInteractions(networkMock);
@@ -51,7 +47,7 @@ public class SourceTest extends BaseStripeTest {
 
 	@Test
 	public void testRetrieve() throws StripeException {
-		Source src = Source.retrieve("src_foo");
+		Source.retrieve("src_foo");
 
 		verifyGet(Source.class, "https://api.stripe.com/v1/sources/src_foo");
 		verifyNoMoreInteractions(networkMock);

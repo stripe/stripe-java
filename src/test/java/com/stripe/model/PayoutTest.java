@@ -2,16 +2,12 @@ package com.stripe.model;
 
 import java.io.IOException;
 import java.util.HashMap;
-import java.util.LinkedList;
-import java.util.List;
 import java.util.Map;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.net.APIResource;
 import com.stripe.net.LiveStripeResponseGetter;
-import com.stripe.net.RequestOptions;
-import com.stripe.net.RequestOptions.RequestOptionsBuilder;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -65,7 +61,7 @@ public class PayoutTest extends BaseStripeTest {
 		params.put("amount", "10000");
 		params.put("currency", "usd");
 
-		Payout payout = Payout.create(params);
+		Payout.create(params);
 
 		verifyPost(Payout.class, "https://api.stripe.com/v1/payouts", params);
 		verifyNoMoreInteractions(networkMock);
@@ -73,7 +69,7 @@ public class PayoutTest extends BaseStripeTest {
 
 	@Test
 	public void testRetrieve() throws StripeException {
-		Payout payout = Payout.retrieve("po_test_retrieve");
+		Payout.retrieve("po_test_retrieve");
 
 		verifyGet(Payout.class, "https://api.stripe.com/v1/payouts/po_test_retrieve");
 		verifyNoMoreInteractions(networkMock);

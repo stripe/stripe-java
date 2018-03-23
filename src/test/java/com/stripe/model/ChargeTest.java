@@ -1,7 +1,6 @@
 package com.stripe.model;
 
 import com.stripe.BaseStripeTest;
-import com.stripe.exception.StripeException;
 import com.stripe.net.APIResource;
 import org.junit.Before;
 import org.junit.Test;

@@ -188,7 +188,7 @@ public class AccountTest extends BaseStripeTest {
 
 		String json_link = resource("login_link.json");
 		stubNetwork(LoginLink.class, json_link);
-		LoginLink link = acc.getLoginLinks().create();
+		acc.getLoginLinks().create();
 		verifyPost(LoginLink.class, "https://api.stripe.com/v1/accounts/acct_EXPRESS/login_links", (RequestOptions) null);
 	}
 }

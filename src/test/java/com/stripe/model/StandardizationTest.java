@@ -46,7 +46,6 @@ public class StandardizationTest {
 	@Test
 	public void allNonDeprecatedMethodsTakeOptions() throws IOException, NoSuchMethodException {
 		for (Class aClass : getAllModels()) {
-			HashSet<Class<?>> interfaces = new HashSet<Class<?>>(Arrays.<Class<?>>asList(aClass.getInterfaces()));
 			for (Method method : aClass.getMethods()) {
 				// Skip methods not declared on the base class.
 				if (method.getDeclaringClass() != aClass) {

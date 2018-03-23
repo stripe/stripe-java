@@ -98,7 +98,7 @@ public class SubscriptionTest extends BaseStripeTest {
 		params.put("customer", "test_cus");
 		params.put("plan", "gold");
 
-		Subscription subscription = Subscription.create(params);
+		Subscription.create(params);
 
 		verifyPost(Subscription.class, "https://api.stripe.com/v1/subscriptions", params);
 		verifyNoMoreInteractions(networkMock);
@@ -123,7 +123,7 @@ public class SubscriptionTest extends BaseStripeTest {
 		params.put("customer", "test_cus");
 		params.put("items", items);
 
-		Subscription subscription = Subscription.create(params);
+		Subscription.create(params);
 
 		verifyPost(Subscription.class, "https://api.stripe.com/v1/subscriptions", params);
 		verifyNoMoreInteractions(networkMock);

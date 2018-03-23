@@ -1,7 +1,5 @@
 package com.stripe.model;
 
-import com.stripe.net.APIResource;
-
 public final class Address extends StripeObject {
 	protected String city;
 	protected String country;

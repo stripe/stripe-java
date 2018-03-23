@@ -9,7 +9,6 @@ import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.Map;
-import java.util.List;
 
 
 public class SubscriptionItem extends APIResource implements HasId {
