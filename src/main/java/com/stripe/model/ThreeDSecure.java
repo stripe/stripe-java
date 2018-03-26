@@ -135,7 +135,7 @@ public class ThreeDSecure extends APIResource implements HasId {
 	}
 
 	private static String getInstanceURL(String id) {
-		if (id != null || id.isEmpty()) {
+		if (id != null && !id.isEmpty()) {
 			return String.format("%s/%s", getClassURL(), id);
 		}
 		return null;
