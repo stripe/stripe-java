@@ -7,6 +7,7 @@ import java.util.Map;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+
 import com.stripe.Stripe;
 import com.stripe.exception.APIConnectionException;
 import com.stripe.exception.APIException;
@@ -148,7 +149,12 @@ public abstract class APIResource extends StripeObject {
 		if (str == null) {
 			return null;
 		} else {
-			return URLEncoder.encode(str, CHARSET);
+			// Don't use strict form encoding by changing the square bracket control
+			// characters back to their literals. This is fine by the server, and
+			// makes these parameter strings easier to read.
+			return URLEncoder.encode(str, CHARSET)
+				.replaceAll("%5B", "[")
+				.replaceAll("%5D", "]");
 		}
 	}
 

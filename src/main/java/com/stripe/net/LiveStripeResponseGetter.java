@@ -292,6 +292,26 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 		return flatParams;
 	}
 
+	private static List<Parameter> flattenParamsArray(Object[] params, String keyPrefix)
+			throws InvalidRequestException {
+		List<Parameter> flatParams = new LinkedList<Parameter>();
+		String newPrefix = String.format("%s[]", keyPrefix);
+
+		// Because application/x-www-form-urlencoded cannot represent an empty
+		// list, convention is to take the list parameter and just set it to an
+		// empty string. (e.g. A regular list might look like `a[]=1&b[]=2`.
+		// Emptying it would look like `a=`.)
+		if (params.length == 0) {
+			flatParams.add(new Parameter(keyPrefix, ""));
+		} else {
+			for (Object item : params) {
+				flatParams.addAll(flattenParamsValue(item, newPrefix));
+			}
+		}
+
+		return flatParams;
+	}
+
 	private static List<Parameter> flattenParamsMap(Map<String, Object> params, String keyPrefix)
 			throws InvalidRequestException {
 		List<Parameter> flatParams = new LinkedList<Parameter>();
@@ -322,6 +342,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 			flatParams = flattenParamsMap((Map<String, Object>) value, keyPrefix);
 		} else if (value instanceof List<?>) {
 			flatParams = flattenParamsList((List<Object>) value, keyPrefix);
+		} else if (value instanceof Object[]) {
+			flatParams = flattenParamsArray((Object[]) value, keyPrefix);
 		} else if ("".equals(value)) {
 			throw new InvalidRequestException("You cannot set '" + keyPrefix + "' to an empty string. " +
 					"We interpret empty strings as null in requests. " +
