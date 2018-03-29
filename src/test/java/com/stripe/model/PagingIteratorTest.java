@@ -31,6 +31,29 @@ import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
 
 public class PagingIteratorTest extends BaseStripeTest {
+  /**
+   * The most simple possible model. Handy for eliminating other variables while
+   * we test some of the nitty gritty of pagination.
+   */
+  private static class PageableModel extends APIResource implements HasId {
+    String id;
+
+    public static PageableModelCollection list(Map<String, Object> params,
+        RequestOptions options)
+        throws AuthenticationException, InvalidRequestException,
+        APIConnectionException, CardException, APIException {
+      return requestCollection(classURL(PageableModel.class), params,
+          PageableModelCollection.class, options);
+    }
+
+    public String getId() {
+      return id;
+    }
+  }
+
+  private static class PageableModelCollection extends StripeCollection<PageableModel> {
+  }
+
   @Before
   public void mockStripeResponseGetter() {
     APIResource.setStripeResponseGetter(networkMock);
@@ -153,27 +176,4 @@ public class PagingIteratorTest extends BaseStripeTest {
         page2Params, options);
     verifyNoMoreInteractions(networkMock);
   }
-}
-
-/**
- * The most simple possible model. Handy for eliminating other variables while
- * we test some of the nitty gritty of pagination.
- */
-class PageableModel extends APIResource implements HasId {
-  String id;
-
-  public static PageableModelCollection list(Map<String, Object> params,
-                         RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return requestCollection(classURL(PageableModel.class), params,
-        PageableModelCollection.class, options);
-  }
-
-  public String getId() {
-    return id;
-  }
-}
-
-class PageableModelCollection extends StripeCollection<PageableModel> {
 }
