@@ -291,6 +291,8 @@ public class ChargeTest extends BaseStripeFunctionalTest {
       Charge.create(defaultChargeParams, "INVALID_KEY_HERE");
       fail();
     } catch (Exception e) {
+      // An exception is expected, so do nothing.
+      // (This test is pretty bad, but it's going away Soon™.)
     }
   }
 }

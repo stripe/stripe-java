@@ -90,8 +90,8 @@ public class CustomerTest extends BaseStripeFunctionalTest {
   public void testCustomerList() throws StripeException {
     Map<String, Object> listParams = new HashMap<String, Object>();
     listParams.put("count", 1);
-    List<Customer> Customers = Customer.all(listParams).getData();
-    assertEquals(Customers.size(), 1);
+    List<Customer> customers = Customer.all(listParams).getData();
+    assertEquals(customers.size(), 1);
   }
 
   @Test
@@ -204,11 +204,11 @@ public class CustomerTest extends BaseStripeFunctionalTest {
   @Test
   public void testCustomerCardAddition() throws StripeException {
     Customer createdCustomer = Customer.create(defaultCustomerParams, supportedRequestOptions);
-    String originalDefaultSource = createdCustomer.getDefaultSource();
+    final String originalDefaultSource = createdCustomer.getDefaultSource();
 
     Map<String, Object> creationParams = new HashMap<String, Object>();
     creationParams.put("source", "tok_visa");
-    ExternalAccount addedCard = createdCustomer.getSources().create(creationParams);
+    final ExternalAccount addedCard = createdCustomer.getSources().create(creationParams);
     createdCustomer.createCard("tok_visa");
 
     Customer updatedCustomer = Customer.retrieve(createdCustomer.getId(), supportedRequestOptions);
@@ -278,11 +278,11 @@ public class CustomerTest extends BaseStripeFunctionalTest {
   @Test
   public void testCustomerBankAccountAddition() throws StripeException {
     Customer createdCustomer = Customer.create(defaultCustomerParams, supportedRequestOptions);
-    String originalDefaultCard = createdCustomer.getDefaultCard();
+    final String originalDefaultCard = createdCustomer.getDefaultCard();
 
     Map<String, Object> creationParams = new HashMap<String, Object>();
     creationParams.put("bank_account", defaultBankAccountParams);
-    BankAccount addedBankAccount = createdCustomer.createBankAccount(creationParams);
+    final BankAccount addedBankAccount = createdCustomer.createBankAccount(creationParams);
 
     createdCustomer.createCard("tok_visa");
 
@@ -362,9 +362,9 @@ public class CustomerTest extends BaseStripeFunctionalTest {
   public void testCustomerListPerCallAPIKey() throws StripeException {
     Map<String, Object> listParams = new HashMap<String, Object>();
     listParams.put("count", 1);
-    List<Customer> Customers = Customer.all(listParams, Stripe.apiKey)
+    List<Customer> customers = Customer.all(listParams, Stripe.apiKey)
         .getData();
-    assertEquals(Customers.size(), 1);
+    assertEquals(customers.size(), 1);
   }
 
   @Test

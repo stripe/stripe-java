@@ -51,8 +51,8 @@ public class CouponTest extends BaseStripeFunctionalTest {
   public void testCouponList() throws StripeException {
     Map<String, Object> listParams = new HashMap<String, Object>();
     listParams.put("count", 1);
-    List<Coupon> Coupons = Coupon.all(listParams).getData();
-    assertEquals(Coupons.size(), 1);
+    List<Coupon> coupons = Coupon.all(listParams).getData();
+    assertEquals(coupons.size(), 1);
   }
 
   @Test
@@ -94,8 +94,8 @@ public class CouponTest extends BaseStripeFunctionalTest {
   public void testCouponListPerCallAPIKey() throws StripeException {
     Map<String, Object> listParams = new HashMap<String, Object>();
     listParams.put("count", 1);
-    List<Coupon> Coupons = Coupon.all(listParams, Stripe.apiKey).getData();
-    assertEquals(Coupons.size(), 1);
+    List<Coupon> coupons = Coupon.all(listParams, Stripe.apiKey).getData();
+    assertEquals(coupons.size(), 1);
   }
 
   @Test

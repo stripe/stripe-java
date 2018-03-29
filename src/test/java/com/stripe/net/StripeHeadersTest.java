@@ -15,15 +15,18 @@ import org.junit.Test;
 public class StripeHeadersTest extends BaseStripeTest {
 
   private Map<String, List<String>> generateHeaderMap() {
-    Map<String, List<String>> headerMap = new HashMap<String, List<String>>();
     List<String> multiValueHeader = new ArrayList<String>();
     multiValueHeader.add("FirstValue");
     multiValueHeader.add("SecondValue");
+ 
     List<String> requestIdHeader = new ArrayList<String>();
     requestIdHeader.add("req_12345");
+ 
+    Map<String, List<String>> headerMap = new HashMap<String, List<String>>();
     headerMap.put("Request-Id", requestIdHeader);
     headerMap.put("Multi-Val", multiValueHeader);
     headerMap.put("Empty-Header", new ArrayList<String>());
+ 
     return headerMap;
   }
 

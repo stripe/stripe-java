@@ -22,16 +22,18 @@ public class SubscriptionItemTest extends BaseStripeFunctionalTest {
   static Subscription createDefaultSubscription(Customer customer)
       throws StripeException {
     Plan plan = Plan.create(getUniquePlanParams());
-    Map<String, Object> subCreateParams = new HashMap<String, Object>();
-    HashMap<String, Object> items = new HashMap<String, Object>();
-    HashMap<String, Object> item = new HashMap<String, Object>();
 
+    HashMap<String, Object> item = new HashMap<String, Object>();
     item.put("plan", plan.getId());
     item.put("quantity", 1);
+
+    HashMap<String, Object> items = new HashMap<String, Object>();
     items.put("0", item);
 
+    Map<String, Object> subCreateParams = new HashMap<String, Object>();
     subCreateParams.put("items", items);
     subCreateParams.put("customer", customer.getId());
+
     return Subscription.create(subCreateParams);
   }
 

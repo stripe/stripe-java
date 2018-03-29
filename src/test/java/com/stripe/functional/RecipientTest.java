@@ -56,11 +56,11 @@ public class RecipientTest extends BaseStripeFunctionalTest {
   @Test
   public void testRecipientCardAddition() throws StripeException {
     Recipient createdRecipient = Recipient.create(defaultRecipientParams);
-    String originalDefaultCard = createdRecipient.getDefaultCard();
+    final String originalDefaultCard = createdRecipient.getDefaultCard();
 
     Map<String, Object> creationParams = new HashMap<String, Object>();
     creationParams.put("card", "tok_visa_debit");
-    Card addedCard = createdRecipient.createCard(creationParams);
+    final Card addedCard = createdRecipient.createCard(creationParams);
 
     createdRecipient.createCard("tok_visa_debit");
 

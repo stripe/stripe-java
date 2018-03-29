@@ -39,7 +39,7 @@ public class SourceTransactionTest extends BaseStripeTest {
     assertEquals(1, transactions.getData().size());
 
     SourceTransaction transaction = transactions.getData().get(0);
-    Map<String, String> typeData = transaction.getTypeData();
+    final Map<String, String> typeData = transaction.getTypeData();
 
     assertEquals("srctxn_1B4r6QKCFFPkgtRhbyo8EK7U", transaction.getId());
     assertEquals("source_transaction", transaction.getObject());

@@ -35,10 +35,6 @@ public class SourceTypeDataDeserializer<T extends HasSourceTypeData>
 
   public T deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
           throws JsonParseException {
-    Gson gson = new GsonBuilder()
-            .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-            .create();
-
     if (json.isJsonNull()) {
       return null;
     }
@@ -58,7 +54,13 @@ public class SourceTypeDataDeserializer<T extends HasSourceTypeData>
 
     // Remove the `type` property.
     jsonObject.remove(type);
+
+    Gson gson = new GsonBuilder()
+            .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+            .create();
+
     T parsedData = gson.fromJson(json, typeOfT);
+
     parsedData.setTypeData(typeData);
 
     return parsedData;

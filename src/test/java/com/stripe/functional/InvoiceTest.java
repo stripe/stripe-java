@@ -64,8 +64,8 @@ public class InvoiceTest extends BaseStripeFunctionalTest {
   public void testInvoiceItemList() throws StripeException {
     Map<String, Object> listParams = new HashMap<String, Object>();
     listParams.put("count", 1);
-    List<InvoiceItem> InvoiceItems = InvoiceItem.all(listParams).getData();
-    assertEquals(InvoiceItems.size(), 1);
+    List<InvoiceItem> invoiceItems = InvoiceItem.all(listParams).getData();
+    assertEquals(invoiceItems.size(), 1);
   }
 
   @Test
@@ -149,7 +149,7 @@ public class InvoiceTest extends BaseStripeFunctionalTest {
   @Test
   public void testUpcomingInvoiceLines() throws Exception {
     Customer customer = Customer.create(defaultCustomerParams);
-    InvoiceItem item = createDefaultInvoiceItem(customer);
+    final InvoiceItem item = createDefaultInvoiceItem(customer);
     Map<String, Object> upcomingParams = new HashMap<String, Object>();
     upcomingParams.put("customer", customer.getId());
     Invoice upcomingInvoice = Invoice.upcoming(upcomingParams);
@@ -187,9 +187,9 @@ public class InvoiceTest extends BaseStripeFunctionalTest {
   public void testInvoiceItemListPerCallAPIKey() throws StripeException {
     Map<String, Object> listParams = new HashMap<String, Object>();
     listParams.put("count", 1);
-    List<InvoiceItem> InvoiceItems = InvoiceItem.all(listParams,
+    List<InvoiceItem> invoiceItems = InvoiceItem.all(listParams,
         Stripe.apiKey).getData();
-    assertEquals(InvoiceItems.size(), 1);
+    assertEquals(invoiceItems.size(), 1);
   }
 
   @Test

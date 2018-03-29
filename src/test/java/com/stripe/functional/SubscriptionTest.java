@@ -60,8 +60,8 @@ public class SubscriptionTest extends BaseStripeFunctionalTest {
 
   @Test
   public void testNewStyleSubscriptionAPI() throws StripeException {
-    Plan plan = Plan.create(getUniquePlanParams());
-    Plan plan2 = Plan.create(getUniquePlanParams());
+    final Plan plan = Plan.create(getUniquePlanParams());
+    final Plan plan2 = Plan.create(getUniquePlanParams());
     Customer customer = Customer.create(defaultCustomerParams);
 
     // Create
@@ -95,8 +95,8 @@ public class SubscriptionTest extends BaseStripeFunctionalTest {
 
   @Test
   public void testTopLevelSubscriptionAPI() throws StripeException {
-    Plan plan = Plan.create(getUniquePlanParams());
-    Plan plan2 = Plan.create(getUniquePlanParams());
+    final Plan plan = Plan.create(getUniquePlanParams());
+    final Plan plan2 = Plan.create(getUniquePlanParams());
     Customer customer = Customer.create(defaultCustomerParams);
 
     // Create

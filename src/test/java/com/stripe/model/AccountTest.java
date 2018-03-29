@@ -34,7 +34,7 @@ public class AccountTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws StripeException, IOException {
     String json = resource("account.json");
-    Account acc = APIResource.GSON.fromJson(json, Account.class);
+    final Account acc = APIResource.GSON.fromJson(json, Account.class);
 
     assertEquals("acct_1032D82eZvKYlo2C", acc.getId());
     assertEquals(false, acc.getChargesEnabled());
@@ -134,7 +134,7 @@ public class AccountTest extends BaseStripeTest {
   public void testAccountUpdateById() throws StripeException, IOException {
     String json = resource("account.json");
     stubNetwork(Account.class, json);
-    Account acc = Account.retrieve("acct_1032D82eZvKYlo2C");
+    final Account acc = Account.retrieve("acct_1032D82eZvKYlo2C");
     verifyGet(Account.class, "https://api.stripe.com/v1/accounts/acct_1032D82eZvKYlo2C");
 
     Map<String, Object> params = new HashMap<String, Object>();
@@ -151,7 +151,7 @@ public class AccountTest extends BaseStripeTest {
   public void testAccountCreateExternalAccount() throws StripeException, IOException {
     String json = resource("account.json");
     stubNetwork(Account.class, json);
-    Account acc = Account.retrieve("acct_1032D82eZvKYlo2C");
+    final Account acc = Account.retrieve("acct_1032D82eZvKYlo2C");
     verifyGet(Account.class, "https://api.stripe.com/v1/accounts/acct_1032D82eZvKYlo2C");
 
     Map<String, Object> params = new HashMap<String, Object>();
@@ -187,8 +187,8 @@ public class AccountTest extends BaseStripeTest {
     Account acc = Account.retrieve("acct_EXPRESS");
     verifyGet(Account.class, "https://api.stripe.com/v1/accounts/acct_EXPRESS");
 
-    String json_link = resource("login_link.json");
-    stubNetwork(LoginLink.class, json_link);
+    String jsonLink = resource("login_link.json");
+    stubNetwork(LoginLink.class, jsonLink);
     acc.getLoginLinks().create();
     verifyPost(LoginLink.class, "https://api.stripe.com/v1/accounts/acct_EXPRESS/login_links", (RequestOptions) null);
   }

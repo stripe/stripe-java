@@ -17,12 +17,12 @@ import org.junit.Test;
 
 public class TokenTest extends BaseStripeFunctionalTest {
   private Map<String, Object> getTokenParams() {
-    Map<String, Object> tokenParams = new HashMap<String, Object>();
     Map<String, Object> cardParams = new HashMap<String, Object>();
     cardParams.put("number", "4242424242424242"); // Test token creation so needs PAN.
     cardParams.put("exp_month", 12);
     cardParams.put("exp_year", getYear());
     cardParams.put("cvc", "123");
+    Map<String, Object> tokenParams = new HashMap<String, Object>();
     tokenParams.put("card", cardParams);
 
     return tokenParams;

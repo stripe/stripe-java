@@ -32,7 +32,7 @@ public final class OAuth {
    */
   public static String authorizeURL(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException {
-    String base = Stripe.getConnectBase();
+    final String base = Stripe.getConnectBase();
 
     params.put("client_id", getClientId(params, options));
     if (params.get("response_type") == null) {

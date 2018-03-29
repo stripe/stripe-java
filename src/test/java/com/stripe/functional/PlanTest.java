@@ -62,8 +62,8 @@ public class PlanTest extends BaseStripeFunctionalTest {
   public void testPlanList() throws StripeException {
     Map<String, Object> listParams = new HashMap<String, Object>();
     listParams.put("count", 1);
-    List<Plan> Plans = Plan.all(listParams).getData();
-    assertEquals(Plans.size(), 1);
+    List<Plan> plans = Plan.all(listParams).getData();
+    assertEquals(plans.size(), 1);
   }
 
   @Test
@@ -107,8 +107,8 @@ public class PlanTest extends BaseStripeFunctionalTest {
   public void testPlanListPerCallAPIKey() throws StripeException {
     Map<String, Object> listParams = new HashMap<String, Object>();
     listParams.put("count", 1);
-    List<Plan> Plans = Plan.all(listParams, Stripe.apiKey).getData();
-    assertEquals(Plans.size(), 1);
+    List<Plan> plans = Plan.all(listParams, Stripe.apiKey).getData();
+    assertEquals(plans.size(), 1);
   }
 
   @Test
