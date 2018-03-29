@@ -1,9 +1,8 @@
 package com.stripe.model;
 
-import java.util.Map;
-
 import com.stripe.net.APIResource;
 
+import java.util.Map;
 
 public class SourceMandateNotification extends APIResource implements HasId, HasSourceTypeData {
   String id;

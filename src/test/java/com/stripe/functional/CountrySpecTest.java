@@ -1,17 +1,23 @@
 package com.stripe.functional;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertTrue;
+
 import com.stripe.BaseStripeFunctionalTest;
 import com.stripe.exception.StripeException;
-import com.stripe.model.*;
-import org.junit.Test;
+import com.stripe.model.Card;
+import com.stripe.model.Charge;
+import com.stripe.model.CountrySpec;
+import com.stripe.model.CountrySpecCollection;
+import com.stripe.model.VerificationFields;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotSame;
+import org.junit.Test;
 
 public class CountrySpecTest extends BaseStripeFunctionalTest {
   @Test

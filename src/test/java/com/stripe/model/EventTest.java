@@ -1,16 +1,16 @@
 package com.stripe.model;
 
+import static org.junit.Assert.assertEquals;
+
+import com.google.gson.Gson;
+
 import com.stripe.BaseStripeTest;
 import com.stripe.model.Event;
 import com.stripe.net.APIResource;
 
-import com.google.gson.Gson;
-
 import java.io.IOException;
 
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class EventTest extends BaseStripeTest {
   private static Gson gson = APIResource.GSON;

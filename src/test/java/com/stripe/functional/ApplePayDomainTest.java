@@ -1,18 +1,19 @@
 package com.stripe.functional;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
+
 import com.stripe.BaseStripeFunctionalTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.ApplePayDomain;
 import com.stripe.model.DeletedApplePayDomain;
-import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Random;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import org.junit.Test;
 
 public class ApplePayDomainTest extends BaseStripeFunctionalTest {
   static Map<String, Object> getApplePayDomainParams() throws StripeException {

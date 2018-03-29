@@ -2,21 +2,21 @@ package com.stripe.net;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 
-import com.stripe.BaseStripeTest;
-import com.stripe.net.StripeResponse;
-import com.stripe.net.StripeHeaders;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
 
-import java.util.List;
-import java.util.ArrayList;
+import com.stripe.BaseStripeTest;
+import com.stripe.net.StripeHeaders;
+import com.stripe.net.StripeResponse;
+
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
 
 public class StripeResponseTest extends BaseStripeTest {
   String chargeBody;

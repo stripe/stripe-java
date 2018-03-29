@@ -1,19 +1,20 @@
 package com.stripe.model;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Balance;
 import com.stripe.model.Money;
 import com.stripe.net.APIResource;
 import com.stripe.net.LiveStripeResponseGetter;
-import org.junit.After;
-import org.junit.Before;
-import org.junit.Test;
 
 import java.io.IOException;
 
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
+import org.junit.After;
+import org.junit.Before;
+import org.junit.Test;
 
 public class BalanceTest extends BaseStripeTest {
   @Before

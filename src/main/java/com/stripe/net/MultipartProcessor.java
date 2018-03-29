@@ -2,11 +2,11 @@ package com.stripe.net;
 
 import java.io.File;
 import java.io.FileInputStream;
-import java.net.URLConnection;
 import java.io.IOException;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
+import java.net.URLConnection;
 import java.util.Random;
 
 public class MultipartProcessor {

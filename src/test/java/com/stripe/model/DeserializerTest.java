@@ -1,17 +1,20 @@
 package com.stripe.model;
 
+import static org.hamcrest.core.IsNull.notNullValue;
+import static org.hamcrest.core.IsNull.nullValue;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+
 import com.google.gson.Gson;
+
 import com.stripe.BaseStripeTest;
 import com.stripe.net.APIResource;
-import org.junit.Test;
 
 import java.io.IOException;
 import java.util.List;
 
-import static org.hamcrest.core.IsNull.notNullValue;
-import static org.hamcrest.core.IsNull.nullValue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+import org.junit.Test;
 
 public class DeserializerTest extends BaseStripeTest {
 

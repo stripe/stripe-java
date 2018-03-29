@@ -5,6 +5,11 @@ import static junit.framework.Assert.assertNotNull;
 import static junit.framework.Assert.assertNull;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
+import com.stripe.BaseStripeTest;
+import com.stripe.exception.StripeException;
+import com.stripe.net.APIResource;
+import com.stripe.net.LiveStripeResponseGetter;
+
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -14,11 +19,6 @@ import java.util.Map;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import com.stripe.BaseStripeTest;
-import com.stripe.exception.StripeException;
-import com.stripe.net.APIResource;
-import com.stripe.net.LiveStripeResponseGetter;
 
 public class InvoiceTest extends BaseStripeTest {
   Invoice basicInvoice;

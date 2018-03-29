@@ -2,26 +2,25 @@ package com.stripe.functional;
 
 import static org.hamcrest.CoreMatchers.instanceOf;
 
-import com.stripe.Stripe;
-import com.stripe.model.Customer;
-import com.stripe.model.CustomerCollection;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
 
 import com.stripe.BaseStripeFunctionalTest;
+import com.stripe.Stripe;
 import com.stripe.exception.APIConnectionException;
 import com.stripe.exception.APIException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.StripeResponse;
+import com.stripe.model.Customer;
+import com.stripe.model.CustomerCollection;
 import com.stripe.net.RequestOptions;
-
-import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.assertThat;
+import com.stripe.net.StripeResponse;
 
 import java.util.HashMap;
+
+import org.junit.Test;
 
 public class StripeResponseTest extends BaseStripeFunctionalTest {
   @Test

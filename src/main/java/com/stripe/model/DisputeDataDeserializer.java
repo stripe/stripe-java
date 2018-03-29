@@ -1,7 +1,5 @@
 package com.stripe.model;
 
-import java.lang.reflect.Type;
-
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
@@ -11,6 +9,8 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonPrimitive;
+
+import java.lang.reflect.Type;
 
 public class DisputeDataDeserializer implements JsonDeserializer<Dispute> {
   public Dispute deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {

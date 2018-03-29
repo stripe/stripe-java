@@ -1,7 +1,5 @@
 package com.stripe.model;
 
-import java.util.Map;
-
 import com.stripe.exception.APIConnectionException;
 import com.stripe.exception.APIException;
 import com.stripe.exception.AuthenticationException;
@@ -10,6 +8,7 @@ import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
 
+import java.util.Map;
 
 public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
   String id;

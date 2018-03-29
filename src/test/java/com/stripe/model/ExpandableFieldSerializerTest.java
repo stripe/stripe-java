@@ -1,12 +1,13 @@
 package com.stripe.model;
 
+import static org.junit.Assert.assertEquals;
+
 import com.stripe.BaseStripeTest;
 import com.stripe.model.StripeObject;
 
 import java.io.IOException;
 
 import org.junit.Test;
-import static org.junit.Assert.assertEquals;
 
 public class ExpandableFieldSerializerTest extends BaseStripeTest {
 

@@ -1,5 +1,7 @@
 package com.stripe.model;
 
+import static org.junit.Assert.assertEquals;
+
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.net.APIResource;
@@ -7,8 +9,6 @@ import com.stripe.net.APIResource;
 import java.io.IOException;
 
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class ChargeOutcomeTest extends BaseStripeTest {
   @Test

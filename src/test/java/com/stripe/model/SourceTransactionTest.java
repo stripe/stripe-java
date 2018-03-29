@@ -1,19 +1,20 @@
 package com.stripe.model;
 
-import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.net.APIResource;
 import com.stripe.net.LiveStripeResponseGetter;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
 
 public class SourceTransactionTest extends BaseStripeTest {
   @Before

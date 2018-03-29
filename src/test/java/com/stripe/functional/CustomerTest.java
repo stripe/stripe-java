@@ -1,21 +1,37 @@
 package com.stripe.functional;
 
-import com.google.common.collect.ImmutableMap;
-
 import static org.hamcrest.CoreMatchers.instanceOf;
+
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+
+import com.google.common.collect.ImmutableMap;
 
 import com.stripe.BaseStripeFunctionalTest;
 import com.stripe.Stripe;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
-import com.stripe.model.*;
+import com.stripe.model.Address;
+import com.stripe.model.BankAccount;
+import com.stripe.model.Card;
+import com.stripe.model.Customer;
+import com.stripe.model.DeletedBankAccount;
+import com.stripe.model.DeletedCustomer;
+import com.stripe.model.DeletedExternalAccount;
+import com.stripe.model.ExternalAccount;
+import com.stripe.model.ExternalAccountCollection;
+import com.stripe.model.Plan;
+import com.stripe.model.ShippingDetails;
+
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+
 import org.junit.Test;
-
-import java.util.*;
-
-import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class CustomerTest extends BaseStripeFunctionalTest {
 

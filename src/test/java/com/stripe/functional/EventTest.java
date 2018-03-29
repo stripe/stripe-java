@@ -1,16 +1,17 @@
 package com.stripe.functional;
 
+import static org.junit.Assert.assertEquals;
+
 import com.stripe.BaseStripeFunctionalTest;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Event;
-import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 public class EventTest extends BaseStripeFunctionalTest {
   @Test

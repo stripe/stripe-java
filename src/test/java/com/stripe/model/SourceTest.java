@@ -1,20 +1,20 @@
 package com.stripe.model;
 
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+
+import com.stripe.BaseStripeTest;
+import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
+import com.stripe.net.APIResource;
+import com.stripe.net.LiveStripeResponseGetter;
+
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.stripe.BaseStripeTest;
-import com.stripe.exception.StripeException;
-import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
-import com.stripe.net.LiveStripeResponseGetter;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.mockito.Mockito.*;
 
 public class SourceTest extends BaseStripeTest {
   @Before

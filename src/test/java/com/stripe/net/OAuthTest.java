@@ -1,5 +1,7 @@
 package com.stripe.net;
 
+import static org.junit.Assert.assertEquals;
+
 import com.stripe.BaseStripeTest;
 import com.stripe.Stripe;
 import com.stripe.exception.AuthenticationException;
@@ -11,17 +13,15 @@ import com.stripe.net.OAuth;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
-import java.util.HashMap;
-import java.util.Map;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLDecoder;
-import java.net.MalformedURLException;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class OAuthTest extends BaseStripeTest {
   @Before
