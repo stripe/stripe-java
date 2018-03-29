@@ -10,16 +10,16 @@ import java.io.IOException;
 import static org.junit.Assert.assertEquals;
 
 public class CardTest extends BaseStripeTest {
-	Card card;
+  Card card;
 
-	@Before
-	public void deserialize() throws IOException {
-		String json = resource("card.json");
-		card = APIResource.GSON.fromJson(json, Card.class);
-	}
+  @Before
+  public void deserialize() throws IOException {
+    String json = resource("card.json");
+    card = APIResource.GSON.fromJson(json, Card.class);
+  }
 
-	@Test
-	public void testDeserialize() throws IOException {
-		assertEquals("bypassed", card.getThreeDSecure().getStatus());
-	}
+  @Test
+  public void testDeserialize() throws IOException {
+    assertEquals("bypassed", card.getThreeDSecure().getStatus());
+  }
 }

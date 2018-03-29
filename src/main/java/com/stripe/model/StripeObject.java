@@ -10,55 +10,55 @@ import java.lang.reflect.Field;
 
 public abstract class StripeObject {
 
-	public static final Gson PRETTY_PRINT_GSON = new GsonBuilder().
-			setPrettyPrinting().
-			serializeNulls().
-			setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).
-			registerTypeAdapter(ExpandableField.class, new ExpandableFieldSerializer()).
-			// TODO: remove the deserializers in the next major release
-			registerTypeAdapter(EventData.class, new EventDataDeserializer()).
-			registerTypeAdapter(EventRequest.class, new EventRequestDeserializer()).
-			create();
+  public static final Gson PRETTY_PRINT_GSON = new GsonBuilder().
+      setPrettyPrinting().
+      serializeNulls().
+      setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).
+      registerTypeAdapter(ExpandableField.class, new ExpandableFieldSerializer()).
+      // TODO: remove the deserializers in the next major release
+      registerTypeAdapter(EventData.class, new EventDataDeserializer()).
+      registerTypeAdapter(EventRequest.class, new EventRequestDeserializer()).
+      create();
 
-	@Override
-	public String toString() {
-		return String.format(
-				"<%s@%s id=%s> JSON: %s",
-				this.getClass().getName(),
-				System.identityHashCode(this),
-				this.getIdString(),
-				PRETTY_PRINT_GSON.toJson(this));
-	}
+  @Override
+  public String toString() {
+    return String.format(
+        "<%s@%s id=%s> JSON: %s",
+        this.getClass().getName(),
+        System.identityHashCode(this),
+        this.getIdString(),
+        PRETTY_PRINT_GSON.toJson(this));
+  }
 
-	public StripeResponse getLastResponse() {
-		return lastResponse;
-	}
-	public void setLastResponse(StripeResponse response) {
-		this.lastResponse = response; 
-	}
+  public StripeResponse getLastResponse() {
+    return lastResponse;
+  }
+  public void setLastResponse(StripeResponse response) {
+    this.lastResponse = response; 
+  }
 
-	public String toJson() {
-		return PRETTY_PRINT_GSON.toJson(this);
-	}
+  public String toJson() {
+    return PRETTY_PRINT_GSON.toJson(this);
+  }
 
-	private transient StripeResponse lastResponse;
+  private transient StripeResponse lastResponse;
 
-	private Object getIdString() {
-		try {
-			Field idField = this.getClass().getDeclaredField("id");
-			return idField.get(this);
-		} catch (SecurityException e) {
-			return "";
-		} catch (NoSuchFieldException e) {
-			return "";
-		} catch (IllegalArgumentException e) {
-			return "";
-		} catch (IllegalAccessException e) {
-			return "";
-		}
-	}
+  private Object getIdString() {
+    try {
+      Field idField = this.getClass().getDeclaredField("id");
+      return idField.get(this);
+    } catch (SecurityException e) {
+      return "";
+    } catch (NoSuchFieldException e) {
+      return "";
+    } catch (IllegalArgumentException e) {
+      return "";
+    } catch (IllegalAccessException e) {
+      return "";
+    }
+  }
 
-	protected static boolean equals(Object a, Object b) {
-		return a == null ? b == null : a.equals(b);
-	}
+  protected static boolean equals(Object a, Object b) {
+    return a == null ? b == null : a.equals(b);
+  }
 }

@@ -12,59 +12,59 @@ import com.stripe.net.RequestOptions;
 import java.util.Map;
 
 public class ExternalAccountCollection extends StripeCollection<ExternalAccount> {
-	public ExternalAccountCollection list(Map<String, Object> params)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return list(params, null);
-	}
+  public ExternalAccountCollection list(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return list(params, null);
+  }
 
-	public ExternalAccountCollection list(Map<String, Object> params,
-										  RequestOptions options) throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
-		String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
-		return APIResource.requestCollection(url, params, ExternalAccountCollection.class, options);
-	}
+  public ExternalAccountCollection list(Map<String, Object> params,
+                      RequestOptions options) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
+    return APIResource.requestCollection(url, params, ExternalAccountCollection.class, options);
+  }
 
-	@Deprecated
-	public ExternalAccountCollection all(Map<String, Object> params)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return list(params, null);
-	}
+  @Deprecated
+  public ExternalAccountCollection all(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return list(params, null);
+  }
 
-	@Deprecated
-	public ExternalAccountCollection all(Map<String, Object> params,
-										 RequestOptions options) throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
-		return list(params, options);
-	}
+  @Deprecated
+  public ExternalAccountCollection all(Map<String, Object> params,
+                     RequestOptions options) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return list(params, options);
+  }
 
-	public ExternalAccount retrieve(String id) throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
-		return retrieve(id, null);
-	}
+  public ExternalAccount retrieve(String id) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return retrieve(id, null);
+  }
 
-	public ExternalAccount retrieve(String id, RequestOptions options) throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
-		String url = String.format("%s%s/%s", Stripe.getApiBase(), this.getURL(), id);
-		return APIResource.request(APIResource.RequestMethod.GET, url, null, ExternalAccount.class, options);
-	}
+  public ExternalAccount retrieve(String id, RequestOptions options) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    String url = String.format("%s%s/%s", Stripe.getApiBase(), this.getURL(), id);
+    return APIResource.request(APIResource.RequestMethod.GET, url, null, ExternalAccount.class, options);
+  }
 
-	public ExternalAccount create(Map<String, Object> params)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return create(params, null);
-	}
+  public ExternalAccount create(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return create(params, null);
+  }
 
-	public ExternalAccount create(Map<String, Object> params,
-								  RequestOptions options) throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
-		String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
-		return APIResource.request(APIResource.RequestMethod.POST, url, params, ExternalAccount.class, options);
-	}
+  public ExternalAccount create(Map<String, Object> params,
+                  RequestOptions options) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
+    return APIResource.request(APIResource.RequestMethod.POST, url, params, ExternalAccount.class, options);
+  }
 }

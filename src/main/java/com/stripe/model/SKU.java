@@ -12,227 +12,227 @@ import com.stripe.net.RequestOptions;
 
 
 public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
-	String id;
-	String object;
-	Boolean active;
-	Map<String, String> attributes;
-	Long created;
-	String currency;
-	String image;
-	Inventory inventory;
-	Boolean livemode;
-	Map<String, String> metadata;
-	PackageDimensions packageDimensions;
-	Integer price;
-	ExpandableField<Product> product;
-	Long updated;
+  String id;
+  String object;
+  Boolean active;
+  Map<String, String> attributes;
+  Long created;
+  String currency;
+  String image;
+  Inventory inventory;
+  Boolean livemode;
+  Map<String, String> metadata;
+  PackageDimensions packageDimensions;
+  Integer price;
+  ExpandableField<Product> product;
+  Long updated;
 
-	public String getId() {
-		return id;
-	}
+  public String getId() {
+    return id;
+  }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+  public void setId(String id) {
+    this.id = id;
+  }
 
-	public String getObject() {
-		return object;
-	}
+  public String getObject() {
+    return object;
+  }
 
-	public void setObject(String object) {
-		this.object = object;
-	}
+  public void setObject(String object) {
+    this.object = object;
+  }
 
-	public Boolean getActive() {
-		return active;
-	}
+  public Boolean getActive() {
+    return active;
+  }
 
-	public void setActive(Boolean active) {
-		this.active = active;
-	}
+  public void setActive(Boolean active) {
+    this.active = active;
+  }
 
-	public Map<String, String> getAttributes() {
-		return attributes;
-	}
+  public Map<String, String> getAttributes() {
+    return attributes;
+  }
 
-	public void setAttributes(Map<String, String> attributes) {
-		this.attributes = attributes;
-	}
+  public void setAttributes(Map<String, String> attributes) {
+    this.attributes = attributes;
+  }
 
-	public Long getCreated() {
-		return created;
-	}
+  public Long getCreated() {
+    return created;
+  }
 
-	public void setCreated(Long created) {
-		this.created = created;
-	}
+  public void setCreated(Long created) {
+    this.created = created;
+  }
 
-	public String getCurrency() {
-		return currency;
-	}
+  public String getCurrency() {
+    return currency;
+  }
 
-	public void setCurrency(String currency) {
-		this.currency = currency;
-	}
+  public void setCurrency(String currency) {
+    this.currency = currency;
+  }
 
-	public String getImage() {
-		return image;
-	}
+  public String getImage() {
+    return image;
+  }
 
-	public void setImage(String image) {
-		this.image = image;
-	}
+  public void setImage(String image) {
+    this.image = image;
+  }
 
-	public Inventory getInventory() {
-		return inventory;
-	}
+  public Inventory getInventory() {
+    return inventory;
+  }
 
-	public void setInventory(Inventory inventory) {
-		this.inventory = inventory;
-	}
+  public void setInventory(Inventory inventory) {
+    this.inventory = inventory;
+  }
 
-	public Boolean getLivemode() {
-		return livemode;
-	}
+  public Boolean getLivemode() {
+    return livemode;
+  }
 
-	public void setLivemode(Boolean livemode) {
-		this.livemode = livemode;
-	}
+  public void setLivemode(Boolean livemode) {
+    this.livemode = livemode;
+  }
 
-	public Map<String, String> getMetadata() {
-		return metadata;
-	}
+  public Map<String, String> getMetadata() {
+    return metadata;
+  }
 
-	public void setMetadata(Map<String, String> metadata) {
-		this.metadata = metadata;
-	}
+  public void setMetadata(Map<String, String> metadata) {
+    this.metadata = metadata;
+  }
 
-	public PackageDimensions getPackageDimensions() {
-		return packageDimensions;
-	}
+  public PackageDimensions getPackageDimensions() {
+    return packageDimensions;
+  }
 
-	public void setPackageDimensions(PackageDimensions packageDimensions) {
-		this.packageDimensions = packageDimensions;
-	}
+  public void setPackageDimensions(PackageDimensions packageDimensions) {
+    this.packageDimensions = packageDimensions;
+  }
 
-	public Integer getPrice() {
-		return price;
-	}
+  public Integer getPrice() {
+    return price;
+  }
 
-	public void setPrice(Integer price) {
-		this.price = price;
-	}
+  public void setPrice(Integer price) {
+    this.price = price;
+  }
 
-	public String getProduct() {
-		if (this.product == null) {
-			return null;
-		}
-		return this.product.getId();
-	}
+  public String getProduct() {
+    if (this.product == null) {
+      return null;
+    }
+    return this.product.getId();
+  }
 
-	public void setProduct(String productID) {
-		this.product = setExpandableFieldID(productID, this.product);
+  public void setProduct(String productID) {
+    this.product = setExpandableFieldID(productID, this.product);
 
-	}
+  }
 
-	public Product getProductObject() {
-		if (this.product == null) {
-			return null;
-		}
-		return this.product.getExpanded();
-	}
+  public Product getProductObject() {
+    if (this.product == null) {
+      return null;
+    }
+    return this.product.getExpanded();
+  }
 
-	public void setProductObject(Product product) {
-		this.product = new ExpandableField<Product>(product.getId(), product);
-	}
+  public void setProductObject(Product product) {
+    this.product = new ExpandableField<Product>(product.getId(), product);
+  }
 
-	public Long getUpdated() {
-		return updated;
-	}
+  public Long getUpdated() {
+    return updated;
+  }
 
-	public void setUpdated(Long updated) {
-		this.updated = updated;
-	}
+  public void setUpdated(Long updated) {
+    this.updated = updated;
+  }
 
-	public static SKU create(Map<String, Object> params)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return create(params, null);
-	}
+  public static SKU create(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return create(params, null);
+  }
 
-	public static SKU retrieve(String id)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return retrieve(id, null);
-	}
+  public static SKU retrieve(String id)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return retrieve(id, null);
+  }
 
-	public SKU update(Map<String, Object> params)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return update(params, null);
-	}
+  public SKU update(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return update(params, null);
+  }
 
-	public static SKU create(Map<String, Object> params, RequestOptions options)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.POST, classURL(SKU.class), params, SKU.class, options);
-	}
+  public static SKU create(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.POST, classURL(SKU.class), params, SKU.class, options);
+  }
 
-	public static SKU retrieve(String id, RequestOptions options)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.GET, instanceURL(SKU.class, id), null, SKU.class, options);
-	}
+  public static SKU retrieve(String id, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.GET, instanceURL(SKU.class, id), null, SKU.class, options);
+  }
 
-	public static SKU retrieve(String id, Map<String, Object> params, RequestOptions options)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.GET, instanceURL(SKU.class, id), params, SKU.class, options);
-	}
+  public static SKU retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.GET, instanceURL(SKU.class, id), params, SKU.class, options);
+  }
 
-	public DeletedSKU delete()
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return delete(null);
-	}
+  public DeletedSKU delete()
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return delete(null);
+  }
 
-	public DeletedSKU delete(RequestOptions options)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.DELETE, instanceURL(SKU.class, this.id), null, DeletedSKU.class, options);
-	}
+  public DeletedSKU delete(RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.DELETE, instanceURL(SKU.class, this.id), null, DeletedSKU.class, options);
+  }
 
-	public static SKUCollection list(Map<String, Object> params)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return list(params, null);
-	}
+  public static SKUCollection list(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return list(params, null);
+  }
 
-	public static SKUCollection list(Map<String, Object> params,
-									 RequestOptions options) throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
-		return requestCollection(classURL(SKU.class), params, SKUCollection.class, options);
-	}
+  public static SKUCollection list(Map<String, Object> params,
+                   RequestOptions options) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return requestCollection(classURL(SKU.class), params, SKUCollection.class, options);
+  }
 
-	@Deprecated
-	public static SKUCollection all(Map<String, Object> params)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return list(params, null);
-	}
+  @Deprecated
+  public static SKUCollection all(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return list(params, null);
+  }
 
-	@Deprecated
-	public static SKUCollection all(Map<String, Object> params,
-									RequestOptions options) throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
-		return list(params, options);
-	}
+  @Deprecated
+  public static SKUCollection all(Map<String, Object> params,
+                  RequestOptions options) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return list(params, options);
+  }
 
-	public SKU update(Map<String, Object> params, RequestOptions options)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.POST, instanceURL(SKU.class, this.id), params, SKU.class, options);
-	}
+  public SKU update(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.POST, instanceURL(SKU.class, this.id), params, SKU.class, options);
+  }
 }

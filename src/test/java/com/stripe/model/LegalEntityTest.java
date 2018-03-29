@@ -13,27 +13,27 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class LegalEntityTest extends BaseStripeTest {
-	@Test
-	public void testDeserialize() throws StripeException, IOException {
-		String json = resource("legal_entity.json");
-		LegalEntity le = APIResource.GSON.fromJson(json, LegalEntity.class);
+  @Test
+  public void testDeserialize() throws StripeException, IOException {
+    String json = resource("legal_entity.json");
+    LegalEntity le = APIResource.GSON.fromJson(json, LegalEntity.class);
 
-		assertEquals("sole_prop", le.getType());
-		assertEquals("business name", le.getBusinessName());
-		assertEquals("12 Grove Street", le.getAddress().getLine1());
-		assertEquals(null, le.getAddress().getLine2());
-		assertEquals("New York", le.getAddress().getCity());
-		assertEquals("NY", le.getAddress().getState());
-		assertEquals("10014", le.getAddress().getPostalCode());
-		assertEquals("US", le.getAddress().getCountry());
-		assertEquals("Monica", le.getFirstName());
-		assertEquals("Geller", le.getLastName());
-		assertEquals(new Integer(4), le.getDob().getDay());
-		assertEquals(new Integer(4), le.getDob().getMonth());
-		assertEquals(new Integer(1969), le.getDob().getYear());
-		assertEquals(new LinkedList<Object>(), le.getAdditionalOwners());
-		assertEquals("verified", le.getVerification().getStatus());
-		assertEquals(null, le.getVerification().getDocument());
-		assertEquals(null, le.getVerification().getDetails());
-	}
+    assertEquals("sole_prop", le.getType());
+    assertEquals("business name", le.getBusinessName());
+    assertEquals("12 Grove Street", le.getAddress().getLine1());
+    assertEquals(null, le.getAddress().getLine2());
+    assertEquals("New York", le.getAddress().getCity());
+    assertEquals("NY", le.getAddress().getState());
+    assertEquals("10014", le.getAddress().getPostalCode());
+    assertEquals("US", le.getAddress().getCountry());
+    assertEquals("Monica", le.getFirstName());
+    assertEquals("Geller", le.getLastName());
+    assertEquals(new Integer(4), le.getDob().getDay());
+    assertEquals(new Integer(4), le.getDob().getMonth());
+    assertEquals(new Integer(1969), le.getDob().getYear());
+    assertEquals(new LinkedList<Object>(), le.getAdditionalOwners());
+    assertEquals("verified", le.getVerification().getStatus());
+    assertEquals(null, le.getVerification().getDocument());
+    assertEquals(null, le.getVerification().getDetails());
+  }
 }

@@ -24,81 +24,81 @@ import org.junit.Test;
 import static org.junit.Assert.assertEquals;
 
 public class OAuthTest extends BaseStripeTest {
-	@Before
-	public void setUpMockAndClientId() {
-		OAuth.setStripeResponseGetter(networkMock);
-		Stripe.clientId = "ca_test";
-	}
+  @Before
+  public void setUpMockAndClientId() {
+    OAuth.setStripeResponseGetter(networkMock);
+    Stripe.clientId = "ca_test";
+  }
 
-	@After
-	public void tearDownMockAndClientId() {
-		Stripe.clientId = null;
-		OAuth.setStripeResponseGetter(new LiveStripeResponseGetter());
-	}
+  @After
+  public void tearDownMockAndClientId() {
+    Stripe.clientId = null;
+    OAuth.setStripeResponseGetter(new LiveStripeResponseGetter());
+  }
 
-	private static Map<String, String> splitQuery(String query) throws UnsupportedEncodingException {
-		Map<String, String> queryPairs = new HashMap<String, String>();
-		String[] pairs = query.split("&");
-		for (String pair : pairs) {
-			int idx = pair.indexOf("=");
-			queryPairs.put(URLDecoder.decode(pair.substring(0, idx), "UTF8"), URLDecoder.decode(pair.substring(idx + 1), "UTF8"));
-		}
-		return queryPairs;
-	}
+  private static Map<String, String> splitQuery(String query) throws UnsupportedEncodingException {
+    Map<String, String> queryPairs = new HashMap<String, String>();
+    String[] pairs = query.split("&");
+    for (String pair : pairs) {
+      int idx = pair.indexOf("=");
+      queryPairs.put(URLDecoder.decode(pair.substring(0, idx), "UTF8"), URLDecoder.decode(pair.substring(idx + 1), "UTF8"));
+    }
+    return queryPairs;
+  }
 
-	@Test
-	public void testAuthorizeURL() throws AuthenticationException, InvalidRequestException, MalformedURLException, UnsupportedEncodingException {
-		Map<String, Object> urlParams = new HashMap<String, Object>();
-		urlParams.put("scope", "read_write");
-		urlParams.put("state", "csrf_token");
-		Map<String, Object> stripeUserParams = new HashMap<String, Object>();
-		stripeUserParams.put("email", "test@example.com");
-		stripeUserParams.put("url", "https://example.com/profile/test");
-		stripeUserParams.put("country", "US");
-		urlParams.put("stripe_user", stripeUserParams);
+  @Test
+  public void testAuthorizeURL() throws AuthenticationException, InvalidRequestException, MalformedURLException, UnsupportedEncodingException {
+    Map<String, Object> urlParams = new HashMap<String, Object>();
+    urlParams.put("scope", "read_write");
+    urlParams.put("state", "csrf_token");
+    Map<String, Object> stripeUserParams = new HashMap<String, Object>();
+    stripeUserParams.put("email", "test@example.com");
+    stripeUserParams.put("url", "https://example.com/profile/test");
+    stripeUserParams.put("country", "US");
+    urlParams.put("stripe_user", stripeUserParams);
 
-		String urlStr = OAuth.authorizeURL(urlParams, null);
+    String urlStr = OAuth.authorizeURL(urlParams, null);
 
-		URL url = new URL(urlStr);
-		Map<String, String> queryPairs = splitQuery(url.getQuery());
+    URL url = new URL(urlStr);
+    Map<String, String> queryPairs = splitQuery(url.getQuery());
 
-		assertEquals("https", url.getProtocol());
-		assertEquals("connect.stripe.com", url.getHost());
-		assertEquals("/oauth/authorize", url.getPath());
+    assertEquals("https", url.getProtocol());
+    assertEquals("connect.stripe.com", url.getHost());
+    assertEquals("/oauth/authorize", url.getPath());
 
-		assertEquals("ca_test", queryPairs.get("client_id"));
-		assertEquals("read_write", queryPairs.get("scope"));
-		assertEquals("test@example.com", queryPairs.get("stripe_user[email]"));
-		assertEquals("https://example.com/profile/test", queryPairs.get("stripe_user[url]"));
-		assertEquals("US", queryPairs.get("stripe_user[country]"));
-	}
+    assertEquals("ca_test", queryPairs.get("client_id"));
+    assertEquals("read_write", queryPairs.get("scope"));
+    assertEquals("test@example.com", queryPairs.get("stripe_user[email]"));
+    assertEquals("https://example.com/profile/test", queryPairs.get("stripe_user[url]"));
+    assertEquals("US", queryPairs.get("stripe_user[country]"));
+  }
 
-	@Test
-	public void testToken() throws StripeException, IOException {
-		String json = resource("../model/oauth_token_response.json");
-		stubOAuth(TokenResponse.class, json);
+  @Test
+  public void testToken() throws StripeException, IOException {
+    String json = resource("../model/oauth_token_response.json");
+    stubOAuth(TokenResponse.class, json);
 
-		Map<String, Object> tokenParams = new HashMap<String, Object>();
-		tokenParams.put("grant_type", "authorization_code");
-		tokenParams.put("code", "this_is_an_authorization_code");
+    Map<String, Object> tokenParams = new HashMap<String, Object>();
+    tokenParams.put("grant_type", "authorization_code");
+    tokenParams.put("code", "this_is_an_authorization_code");
 
-		TokenResponse resp = OAuth.token(tokenParams, null);
+    TokenResponse resp = OAuth.token(tokenParams, null);
 
-		assertEquals(false, resp.getLivemode());
-		assertEquals("acct_test_token", resp.getStripeUserId());
-		assertEquals("read_only", resp.getScope());
-	}
+    assertEquals(false, resp.getLivemode());
+    assertEquals("acct_test_token", resp.getStripeUserId());
+    assertEquals("read_only", resp.getScope());
+  }
 
-	@Test
-	public void testDeauthorize() throws StripeException {
-		String json = "{stripe_user_id: \"acct_test_deauth\"}";
-		stubOAuth(DeauthorizedAccount.class, json);
+  @Test
+  public void testDeauthorize() throws StripeException {
+    String json = "{stripe_user_id: \"acct_test_deauth\"}";
+    stubOAuth(DeauthorizedAccount.class, json);
 
-		Map<String, Object> deauthParams = new HashMap<String, Object>();
-		deauthParams.put("stripe_user_id", "acct_test_deauth");
+    Map<String, Object> deauthParams = new HashMap<String, Object>();
+    deauthParams.put("stripe_user_id", "acct_test_deauth");
 
-		DeauthorizedAccount account = OAuth.deauthorize(deauthParams, null);
+    DeauthorizedAccount account = OAuth.deauthorize(deauthParams, null);
 
-		assertEquals("acct_test_deauth", account.getStripeUserId());
-	}
+    assertEquals("acct_test_deauth", account.getStripeUserId());
+  }
 }

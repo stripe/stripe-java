@@ -12,123 +12,123 @@ import java.util.Map;
 
 
 public class SubscriptionItem extends APIResource implements HasId {
-	String id;
-	String object;
-	Long created;
-	Plan plan;
-	Integer quantity;
+  String id;
+  String object;
+  Long created;
+  Plan plan;
+  Integer quantity;
 
-	public String getId() {
-		return id;
-	}
+  public String getId() {
+    return id;
+  }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+  public void setId(String id) {
+    this.id = id;
+  }
 
-	public String getObject() {
-		return object;
-	}
+  public String getObject() {
+    return object;
+  }
 
-	public void setObject(String object) {
-		this.object = object;
-	}
+  public void setObject(String object) {
+    this.object = object;
+  }
 
-	public Long getCreated() {
-		return created;
-	}
+  public Long getCreated() {
+    return created;
+  }
 
-	public void setCreated(Long created) {
-		this.created = created;
-	}
+  public void setCreated(Long created) {
+    this.created = created;
+  }
 
-	public Plan getPlan() {
-		return plan;
-	}
+  public Plan getPlan() {
+    return plan;
+  }
 
-	public void setPlan(Plan plan) {
-		this.plan = plan;
-	}
+  public void setPlan(Plan plan) {
+    this.plan = plan;
+  }
 
-	public Integer getQuantity() {
-		return quantity;
-	}
+  public Integer getQuantity() {
+    return quantity;
+  }
 
-	public void setQuantity(Integer quantity) {
-		this.quantity = quantity;
-	}
+  public void setQuantity(Integer quantity) {
+    this.quantity = quantity;
+  }
 
-	public static SubscriptionItem create(Map<String, Object> params)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return create(params, null);
-	}
+  public static SubscriptionItem create(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return create(params, null);
+  }
 
-	public static SubscriptionItem create(Map<String, Object> params, RequestOptions options)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.POST, classURL(SubscriptionItem.class), params, SubscriptionItem.class, options);
-	}
+  public static SubscriptionItem create(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.POST, classURL(SubscriptionItem.class), params, SubscriptionItem.class, options);
+  }
 
-	public static SubscriptionItemCollection list(Map<String, Object> params)
-			throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
-		return list(params, null);
-	}
+  public static SubscriptionItemCollection list(Map<String, Object> params)
+      throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return list(params, null);
+  }
 
-	public static SubscriptionItemCollection list(Map<String, Object> params,
-												  RequestOptions options) throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
-		return requestCollection(classURL(SubscriptionItem.class), params, SubscriptionItemCollection.class, options);
-	}
+  public static SubscriptionItemCollection list(Map<String, Object> params,
+                          RequestOptions options) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return requestCollection(classURL(SubscriptionItem.class), params, SubscriptionItemCollection.class, options);
+  }
 
-	public static SubscriptionItem retrieve(String id) throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
-		return retrieve(id, null);
-	}
+  public static SubscriptionItem retrieve(String id) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return retrieve(id, null);
+  }
 
-	public static SubscriptionItem retrieve(String id, RequestOptions options)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.GET, instanceURL(SubscriptionItem.class, id), null, SubscriptionItem.class, options);
-	}
+  public static SubscriptionItem retrieve(String id, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.GET, instanceURL(SubscriptionItem.class, id), null, SubscriptionItem.class, options);
+  }
 
-	public SubscriptionItem update(Map<String, Object> params)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return update(params, null);
-	}
+  public SubscriptionItem update(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return update(params, null);
+  }
 
-	public SubscriptionItem update(Map<String, Object> params, RequestOptions options)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.POST, instanceURL(SubscriptionItem.class, id), params, SubscriptionItem.class, options);
-	}
+  public SubscriptionItem update(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.POST, instanceURL(SubscriptionItem.class, id), params, SubscriptionItem.class, options);
+  }
 
-	public DeletedSubscriptionItem delete() throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
-		return delete(null, null);
-	}
+  public DeletedSubscriptionItem delete() throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return delete(null, null);
+  }
 
-	public DeletedSubscriptionItem delete(Map<String, Object> params) throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
-		return delete(params, null);
-	}
+  public DeletedSubscriptionItem delete(Map<String, Object> params) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return delete(params, null);
+  }
 
-	public DeletedSubscriptionItem delete(RequestOptions options) throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
-		return delete(null, options);
-	}
+  public DeletedSubscriptionItem delete(RequestOptions options) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return delete(null, options);
+  }
 
-	public DeletedSubscriptionItem delete(Map<String, Object> params, RequestOptions options) throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
-		return request(RequestMethod.DELETE, instanceURL(SubscriptionItem.class, id), params, DeletedSubscriptionItem.class, options);
-	}
+  public DeletedSubscriptionItem delete(Map<String, Object> params, RequestOptions options) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return request(RequestMethod.DELETE, instanceURL(SubscriptionItem.class, id), params, DeletedSubscriptionItem.class, options);
+  }
 }

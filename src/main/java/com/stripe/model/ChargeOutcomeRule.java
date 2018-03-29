@@ -1,31 +1,31 @@
 package com.stripe.model;
 
 public class ChargeOutcomeRule extends StripeObject implements HasId {
-	protected String action;
-	protected String id;
-	protected String predicate;
+  protected String action;
+  protected String id;
+  protected String predicate;
 
-	public String getAction() {
-		return action;
-	}
+  public String getAction() {
+    return action;
+  }
 
-	public String getId() {
-		return id;
-	}
+  public String getId() {
+    return id;
+  }
 
-	public String getPredicate() {
-		return predicate;
-	}
+  public String getPredicate() {
+    return predicate;
+  }
 
-	public void setAction(String action) {
-		this.action = action;
-	}
+  public void setAction(String action) {
+    this.action = action;
+  }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+  public void setId(String id) {
+    this.id = id;
+  }
 
-	public void setPredicate(String predicate) {
-		this.predicate = predicate;
-	}
+  public void setPredicate(String predicate) {
+    this.predicate = predicate;
+  }
 }

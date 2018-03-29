@@ -16,63 +16,63 @@ import java.util.Map;
 
 public class OrderItemDeserializer implements JsonDeserializer<OrderItem> {
 
-	@SuppressWarnings("rawtypes")
-	static final Map<String, Class> parentObjMap = new HashMap<String, Class>();
+  @SuppressWarnings("rawtypes")
+  static final Map<String, Class> parentObjMap = new HashMap<String, Class>();
 
-	static {
-		parentObjMap.put("discount", Discount.class);
-		parentObjMap.put("sku", SKU.class);
-	}
+  static {
+    parentObjMap.put("discount", Discount.class);
+    parentObjMap.put("sku", SKU.class);
+  }
 
-	@Override
-	public OrderItem deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
-		Gson gson = new GsonBuilder()
-				.setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-				.create();
+  @Override
+  public OrderItem deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+    Gson gson = new GsonBuilder()
+        .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+        .create();
 
-		if (json.isJsonNull()) {
-			return null;
-		}
+    if (json.isJsonNull()) {
+      return null;
+    }
 
-		if (!json.isJsonObject()) {
-			throw new JsonParseException("OrderItem type was not an object, which is problematic.");
-		}
+    if (!json.isJsonObject()) {
+      throw new JsonParseException("OrderItem type was not an object, which is problematic.");
+    }
 
-		JsonObject oiAsJsonObject = json.getAsJsonObject();
+    JsonObject oiAsJsonObject = json.getAsJsonObject();
 
-		JsonElement parent = oiAsJsonObject.get("parent");
+    JsonElement parent = oiAsJsonObject.get("parent");
 
-		oiAsJsonObject.remove("parent");
+    oiAsJsonObject.remove("parent");
 
-		OrderItem orderItem = gson.fromJson(json, typeOfT);
+    OrderItem orderItem = gson.fromJson(json, typeOfT);
 
-		String parentId = null;
+    String parentId = null;
 
-		if (parent.isJsonPrimitive()) {
-			JsonPrimitive parentJsonPrimitive = parent.getAsJsonPrimitive();
-			if (!parentJsonPrimitive.isString()) {
-				throw new JsonParseException("parent field on an order item was a primitive non-string type.");
-			}
-			parentId = parentJsonPrimitive.getAsString();
-		} else if (parent.isJsonObject()) {
-			JsonObject parentJsonObject = parent.getAsJsonObject();
-			JsonElement parentIdEl = parentJsonObject.get("id");
-			parentId = parentIdEl != null ? parentIdEl.getAsString() : null;
-			JsonElement val = parentJsonObject.get("object");
-			if (val != null) {
-				String type = val.getAsString();
-				Class<? extends HasId> parentObjClass = parentObjMap.get(type);
-				if (parentObjClass != null) {
-					HasId parentObj = context.deserialize(parent, parentObjClass);
-					orderItem.setParentObject(parentObj);
-				}
-			}
-		} else if (!parent.isJsonNull()) {
-			throw new JsonParseException("parent field on an order item was a non-primitive, non-object type.");
-		}
+    if (parent.isJsonPrimitive()) {
+      JsonPrimitive parentJsonPrimitive = parent.getAsJsonPrimitive();
+      if (!parentJsonPrimitive.isString()) {
+        throw new JsonParseException("parent field on an order item was a primitive non-string type.");
+      }
+      parentId = parentJsonPrimitive.getAsString();
+    } else if (parent.isJsonObject()) {
+      JsonObject parentJsonObject = parent.getAsJsonObject();
+      JsonElement parentIdEl = parentJsonObject.get("id");
+      parentId = parentIdEl != null ? parentIdEl.getAsString() : null;
+      JsonElement val = parentJsonObject.get("object");
+      if (val != null) {
+        String type = val.getAsString();
+        Class<? extends HasId> parentObjClass = parentObjMap.get(type);
+        if (parentObjClass != null) {
+          HasId parentObj = context.deserialize(parent, parentObjClass);
+          orderItem.setParentObject(parentObj);
+        }
+      }
+    } else if (!parent.isJsonNull()) {
+      throw new JsonParseException("parent field on an order item was a non-primitive, non-object type.");
+    }
 
-		orderItem.setParent(parentId);
+    orderItem.setParent(parentId);
 
-		return orderItem;
-	}
+    return orderItem;
+  }
 }

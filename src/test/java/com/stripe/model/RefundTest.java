@@ -16,58 +16,58 @@ import static org.mockito.Mockito.*;
 
 public class RefundTest extends BaseStripeTest {
 
-	@Before
-	public void mockStripeResponseGetter() {
-		APIResource.setStripeResponseGetter(networkMock);
-	}
+  @Before
+  public void mockStripeResponseGetter() {
+    APIResource.setStripeResponseGetter(networkMock);
+  }
 
-	@After
-	public void unmockStripeResponseGetter() {
-		/* This needs to be done because tests aren't isolated in Java */
-		APIResource.setStripeResponseGetter(new LiveStripeResponseGetter());
-	}
+  @After
+  public void unmockStripeResponseGetter() {
+    /* This needs to be done because tests aren't isolated in Java */
+    APIResource.setStripeResponseGetter(new LiveStripeResponseGetter());
+  }
 
-	@Test
-	public void testRetrieve() throws StripeException {
-		Refund.retrieve("re_foo");
+  @Test
+  public void testRetrieve() throws StripeException {
+    Refund.retrieve("re_foo");
 
-		verifyGet(Refund.class, "https://api.stripe.com/v1/refunds/re_foo");
-		verifyNoMoreInteractions(networkMock);
-	}
+    verifyGet(Refund.class, "https://api.stripe.com/v1/refunds/re_foo");
+    verifyNoMoreInteractions(networkMock);
+  }
 
-	@Test
-	public void testAll() throws StripeException {
-		HashMap<String, Object> params = new HashMap<String, Object>();
-		params.put("limit", 3);
+  @Test
+  public void testAll() throws StripeException {
+    HashMap<String, Object> params = new HashMap<String, Object>();
+    params.put("limit", 3);
 
-		Refund.all(params);
+    Refund.all(params);
 
-		verifyGet(RefundCollection.class, "https://api.stripe.com/v1/refunds", params);
-		verifyNoMoreInteractions(networkMock);
-	}
+    verifyGet(RefundCollection.class, "https://api.stripe.com/v1/refunds", params);
+    verifyNoMoreInteractions(networkMock);
+  }
 
-	@Test
-	public void testUpdate() throws StripeException {
-		Refund refund = new Refund();
-		refund.setId("re_foo");
+  @Test
+  public void testUpdate() throws StripeException {
+    Refund refund = new Refund();
+    refund.setId("re_foo");
 
-		HashMap<String, Object> params = new HashMap<String, Object>();
-		params.put("reason", "fraudulent");
+    HashMap<String, Object> params = new HashMap<String, Object>();
+    params.put("reason", "fraudulent");
 
-		refund.update(params);
+    refund.update(params);
 
-		verifyPost(Refund.class, "https://api.stripe.com/v1/refunds/re_foo", params);
-		verifyNoMoreInteractions(networkMock);
-	}
+    verifyPost(Refund.class, "https://api.stripe.com/v1/refunds/re_foo", params);
+    verifyNoMoreInteractions(networkMock);
+  }
 
-	@Test
-	public void testCreate() throws StripeException {
-		HashMap<String, Object> params = new HashMap<String, Object>();
-		params.put("charge", "ch_foo");
+  @Test
+  public void testCreate() throws StripeException {
+    HashMap<String, Object> params = new HashMap<String, Object>();
+    params.put("charge", "ch_foo");
 
-		Refund.create(params);
+    Refund.create(params);
 
-		verifyPost(Refund.class, "https://api.stripe.com/v1/refunds", params);
-		verifyNoMoreInteractions(networkMock);
-	}
+    verifyPost(Refund.class, "https://api.stripe.com/v1/refunds", params);
+    verifyNoMoreInteractions(networkMock);
+  }
 }

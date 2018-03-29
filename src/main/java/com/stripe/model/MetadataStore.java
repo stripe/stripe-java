@@ -13,11 +13,11 @@ import java.util.Map;
  * Common interface for Stripe objects that can store metadata.
  */
 public interface MetadataStore<T> {
-	Map<String, String> getMetadata();
+  Map<String, String> getMetadata();
 
-	MetadataStore<T> update(Map<String, Object> params) throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException;
+  MetadataStore<T> update(Map<String, Object> params) throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException;
 
-	MetadataStore<T> update(Map<String, Object> params, RequestOptions options) throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException;
+  MetadataStore<T> update(Map<String, Object> params, RequestOptions options) throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException;
 }

@@ -5,7 +5,7 @@
   "editor.renderWhitespace": "all",
   "[java]": {
     "editor.detectIndentation": false,
-    "editor.insertSpaces": false,
+    "editor.insertSpaces": true,
     "editor.rulers": [
       100
     ],
