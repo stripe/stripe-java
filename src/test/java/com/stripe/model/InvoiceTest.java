@@ -21,94 +21,94 @@ import com.stripe.net.APIResource;
 import com.stripe.net.LiveStripeResponseGetter;
 
 public class InvoiceTest extends BaseStripeTest {
-	Invoice basicInvoice;
-	Invoice expandedInvoice;
+  Invoice basicInvoice;
+  Invoice expandedInvoice;
 
-	@Before
-	public void mockStripeResponseGetter() {
-		APIResource.setStripeResponseGetter(networkMock);
-	}
+  @Before
+  public void mockStripeResponseGetter() {
+    APIResource.setStripeResponseGetter(networkMock);
+  }
 
-	@After
-	public void unmockStripeResponseGetter() {
-		/* This needs to be done because tests aren't isolated in Java */
-		APIResource.setStripeResponseGetter(new LiveStripeResponseGetter());
-	}
+  @After
+  public void unmockStripeResponseGetter() {
+    /* This needs to be done because tests aren't isolated in Java */
+    APIResource.setStripeResponseGetter(new LiveStripeResponseGetter());
+  }
 
-	@Before
-	public void deserialize() throws IOException {
-		String json = resource("invoice.json");
-		basicInvoice = APIResource.GSON.fromJson(json, Invoice.class);
-		String expandedJson = resource("invoice_expansions.json");
-		expandedInvoice = APIResource.GSON.fromJson(expandedJson, Invoice.class);
-	}
+  @Before
+  public void deserialize() throws IOException {
+    String json = resource("invoice.json");
+    basicInvoice = APIResource.GSON.fromJson(json, Invoice.class);
+    String expandedJson = resource("invoice_expansions.json");
+    expandedInvoice = APIResource.GSON.fromJson(expandedJson, Invoice.class);
+  }
 
-	@Test
-	public void testUpcoming() throws StripeException {
-		Map<String, Object> params = new HashMap<String, Object>();
-		List<HashMap<String, Object>> items = new ArrayList<HashMap<String, Object>>();
+  @Test
+  public void testUpcoming() throws StripeException {
+    Map<String, Object> params = new HashMap<String, Object>();
+    List<HashMap<String, Object>> items = new ArrayList<HashMap<String, Object>>();
 
-		HashMap<String, Object> itemA = new HashMap<String, Object>();
-		itemA.put("id", "si_kjnkk893jslo");
-		itemA.put("quantity", 3);
+    HashMap<String, Object> itemA = new HashMap<String, Object>();
+    itemA.put("id", "si_kjnkk893jslo");
+    itemA.put("quantity", 3);
 
-		HashMap<String, Object> itemB = new HashMap<String, Object>();
-		itemB.put("id", "si_kmmkjkjl123x8");
-		itemB.put("deleted", true);
+    HashMap<String, Object> itemB = new HashMap<String, Object>();
+    itemB.put("id", "si_kmmkjkjl123x8");
+    itemB.put("deleted", true);
 
-		HashMap<String, Object> itemC = new HashMap<String, Object>();
-		itemC.put("plan", "silver");
-		itemC.put("quantity", 1);
+    HashMap<String, Object> itemC = new HashMap<String, Object>();
+    itemC.put("plan", "silver");
+    itemC.put("quantity", 1);
 
-		items.add(itemA);
-		items.add(itemB);
-		items.add(itemC);
+    items.add(itemA);
+    items.add(itemB);
+    items.add(itemC);
 
-		params.put("subscription_items", items);
-		params.put("subscription", "sub_8OgUootyH2faMz");
-		params.put("customer", "cus_8OgDDsZEwoTscq");
-		Invoice.upcoming(params);
+    params.put("subscription_items", items);
+    params.put("subscription", "sub_8OgUootyH2faMz");
+    params.put("customer", "cus_8OgDDsZEwoTscq");
+    Invoice.upcoming(params);
 
-		verifyGet(Invoice.class, "https://api.stripe.com/v1/invoices/upcoming", params);
-		verifyNoMoreInteractions(networkMock);
-	}
+    verifyGet(Invoice.class, "https://api.stripe.com/v1/invoices/upcoming", params);
+    verifyNoMoreInteractions(networkMock);
+  }
 
-	@Test
-	public void testUnexpandedCharge() {
-		assertEquals("ch_8vzszxcNLVJXqF", basicInvoice.getCharge());
-		assertNull(basicInvoice.getChargeObject());
-	}
+  @Test
+  public void testUnexpandedCharge() {
+    assertEquals("ch_8vzszxcNLVJXqF", basicInvoice.getCharge());
+    assertNull(basicInvoice.getChargeObject());
+  }
 
-	@Test
-	public void testExpandedCharge() {
-		assertEquals("ch_8vzszxcNLVJXqF", expandedInvoice.getCharge());
-		Charge charge = expandedInvoice.getChargeObject();
-		assertNotNull(charge);
-		assertEquals(6000L, (long) charge.getAmount());
-		assertEquals("card_8vzsxmT0Ua0lkd", charge.getSource().getId());
-	}
+  @Test
+  public void testExpandedCharge() {
+    assertEquals("ch_8vzszxcNLVJXqF", expandedInvoice.getCharge());
+    Charge charge = expandedInvoice.getChargeObject();
+    assertNotNull(charge);
+    assertEquals(6000L, (long) charge.getAmount());
+    assertEquals("card_8vzsxmT0Ua0lkd", charge.getSource().getId());
+  }
 
-	@Test
-	public void testPayNoParams() throws StripeException, IOException {
-		Invoice invoice = new Invoice();
-		invoice.setId("in_test_pay");
+  @Test
+  public void testPayNoParams() throws StripeException, IOException {
+    Invoice invoice = new Invoice();
+    invoice.setId("in_test_pay");
 
-		invoice.pay();
+    invoice.pay();
 
-		verifyPost(Invoice.class, "https://api.stripe.com/v1/invoices/in_test_pay/pay", (Map) null);
-		verifyNoMoreInteractions(networkMock);
-	}
+    verifyPost(Invoice.class, "https://api.stripe.com/v1/invoices/in_test_pay/pay", (Map) null);
+    verifyNoMoreInteractions(networkMock);
+  }
 
-	@Test
-	public void testPayWithParams() throws StripeException, IOException {
-		Invoice invoice = new Invoice();
-		invoice.setId("in_test_pay");
+  @Test
+  public void testPayWithParams() throws StripeException, IOException {
+    Invoice invoice = new Invoice();
+    invoice.setId("in_test_pay");
 
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("source", "src_foo");
-		invoice.pay(params);
+    Map<String, Object> params = new HashMap<String, Object>();
+    params.put("source", "src_foo");
+    invoice.pay(params);
 
-		verifyPost(Invoice.class, "https://api.stripe.com/v1/invoices/in_test_pay/pay", params);
-		verifyNoMoreInteractions(networkMock);
-	}
+    verifyPost(Invoice.class, "https://api.stripe.com/v1/invoices/in_test_pay/pay", params);
+    verifyNoMoreInteractions(networkMock);
+  }
 }

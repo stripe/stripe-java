@@ -1,11 +1,11 @@
 package com.stripe.model;
 
 public interface DeletedStripeObject {
-	String getId();
+  String getId();
 
-	void setId(String id);
+  void setId(String id);
 
-	Boolean getDeleted();
+  Boolean getDeleted();
 
-	void setDeleted(Boolean deleted);
+  void setDeleted(Boolean deleted);
 }

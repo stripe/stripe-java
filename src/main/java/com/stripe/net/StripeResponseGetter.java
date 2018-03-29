@@ -10,22 +10,22 @@ import com.stripe.exception.oauth.OAuthException;
 import java.util.Map;
 
 public interface StripeResponseGetter {
-	<T> T request(
-			APIResource.RequestMethod method,
-			String url,
-			Map<String, Object> params,
-			Class<T> clazz,
-			APIResource.RequestType type,
-			RequestOptions options) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException;
+  <T> T request(
+      APIResource.RequestMethod method,
+      String url,
+      Map<String, Object> params,
+      Class<T> clazz,
+      APIResource.RequestType type,
+      RequestOptions options) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException;
 
-	<T> T oAuthRequest(
-			APIResource.RequestMethod method,
-			String url,
-			Map<String, Object> params,
-			Class<T> clazz,
-			APIResource.RequestType type,
-			RequestOptions options)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, APIException, OAuthException;
+  <T> T oAuthRequest(
+      APIResource.RequestMethod method,
+      String url,
+      Map<String, Object> params,
+      Class<T> clazz,
+      APIResource.RequestType type,
+      RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, APIException, OAuthException;
 }
 

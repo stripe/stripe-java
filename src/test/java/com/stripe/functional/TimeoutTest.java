@@ -10,14 +10,14 @@ import com.stripe.net.RequestOptions;
 
 public class TimeoutTest extends BaseStripeFunctionalTest {
 
-	@Test(expected = APIConnectionException.class)
-	public void testReadTimeoutIsConsidered() throws StripeException {
+  @Test(expected = APIConnectionException.class)
+  public void testReadTimeoutIsConsidered() throws StripeException {
 
-		int tooShortTimeoutInMillis = 1;
-		RequestOptions options = RequestOptions.builder()
-				.setReadTimeout(tooShortTimeoutInMillis)
-				.build();
-		Token.create(defaultTokenParams, options);
-	}
+    int tooShortTimeoutInMillis = 1;
+    RequestOptions options = RequestOptions.builder()
+        .setReadTimeout(tooShortTimeoutInMillis)
+        .build();
+    Token.create(defaultTokenParams, options);
+  }
 
 }

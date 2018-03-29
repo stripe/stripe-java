@@ -6,98 +6,98 @@ import com.stripe.net.APIResource;
 
 
 public class SourceMandateNotification extends APIResource implements HasId, HasSourceTypeData {
-	String id;
-	String object;
-	Long amount;
-	Long created;
-	Boolean livemode;
-	String reason;
-	Source source;
-	String status;
-	String type;
+  String id;
+  String object;
+  Long amount;
+  Long created;
+  Boolean livemode;
+  String reason;
+  Source source;
+  String status;
+  String type;
 
-	// Type-specific properties
-	Map<String, String> typeData;
+  // Type-specific properties
+  Map<String, String> typeData;
 
-	public String getId() {
-		return id;
-	}
+  public String getId() {
+    return id;
+  }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+  public void setId(String id) {
+    this.id = id;
+  }
 
-	public String getObject() {
-		return object;
-	}
+  public String getObject() {
+    return object;
+  }
 
-	public void setObject(String object) {
-		this.object = object;
-	}
+  public void setObject(String object) {
+    this.object = object;
+  }
 
-	public Long getAmount() {
-		return amount;
-	}
+  public Long getAmount() {
+    return amount;
+  }
 
-	public void setAmount(Long amount) {
-		this.amount = amount;
-	}
+  public void setAmount(Long amount) {
+    this.amount = amount;
+  }
 
-	public Long getCreated() {
-		return created;
-	}
+  public Long getCreated() {
+    return created;
+  }
 
-	public void setCreated(Long created) {
-		this.created = created;
-	}
+  public void setCreated(Long created) {
+    this.created = created;
+  }
 
-	public Boolean getLivemode() {
-		return livemode;
-	}
+  public Boolean getLivemode() {
+    return livemode;
+  }
 
-	public void setLivemode(Boolean livemode) {
-		this.livemode = livemode;
-	}
+  public void setLivemode(Boolean livemode) {
+    this.livemode = livemode;
+  }
 
-	public String getReason() {
-		return reason;
-	}
+  public String getReason() {
+    return reason;
+  }
 
-	public void setReason(String reason) {
-		this.reason = reason;
-	}
+  public void setReason(String reason) {
+    this.reason = reason;
+  }
 
-	public Source getSource() {
-		return source;
-	}
+  public Source getSource() {
+    return source;
+  }
 
-	public void setSource(Source source) {
-		this.source = source;
-	}
+  public void setSource(Source source) {
+    this.source = source;
+  }
 
-	public String getStatus() {
-		return status;
-	}
+  public String getStatus() {
+    return status;
+  }
 
-	public void setStatus(String status) {
-		this.status = status;
-	}
+  public void setStatus(String status) {
+    this.status = status;
+  }
 
-	public String getType() {
-		return type;
-	}
+  public String getType() {
+    return type;
+  }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+  public void setType(String type) {
+    this.type = type;
+  }
 
-	// Type-specific getters/setters
+  // Type-specific getters/setters
 
-	public Map<String, String> getTypeData() {
-		return typeData;
-	}
+  public Map<String, String> getTypeData() {
+    return typeData;
+  }
 
-	public void setTypeData(Map<String, String> typeData) {
-		this.typeData = typeData;
-	}
+  public void setTypeData(Map<String, String> typeData) {
+    this.typeData = typeData;
+  }
 }

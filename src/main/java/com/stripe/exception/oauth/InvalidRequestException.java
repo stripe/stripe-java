@@ -5,9 +5,9 @@ package com.stripe.exception.oauth;
  * parameter is not provided, but was required.
  */
 public class InvalidRequestException extends OAuthException {
-	private static final long serialVersionUID = 2L;
+  private static final long serialVersionUID = 2L;
 
-	public InvalidRequestException(String code, String description, String requestId, Integer statusCode, Throwable e) {
-		super(code, description, requestId, statusCode, e);
-	}
+  public InvalidRequestException(String code, String description, String requestId, Integer statusCode, Throwable e) {
+    super(code, description, requestId, statusCode, e);
+  }
 }

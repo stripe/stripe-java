@@ -11,102 +11,102 @@ import com.stripe.net.RequestOptions;
 import java.util.Map;
 
 public class ExternalAccount extends APIResource implements HasId, MetadataStore<ExternalAccount> {
-	String id;
-	String object;
-	String account;
-	String customer;
-	Map<String, String> metadata;
+  String id;
+  String object;
+  String account;
+  String customer;
+  Map<String, String> metadata;
 
-	public String getId() {
-		return id;
-	}
+  public String getId() {
+    return id;
+  }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+  public void setId(String id) {
+    this.id = id;
+  }
 
-	public String getObject() {
-		return object;
-	}
+  public String getObject() {
+    return object;
+  }
 
-	public void setObject(String object) {
-		this.object = object;
-	}
+  public void setObject(String object) {
+    this.object = object;
+  }
 
-	public String getAccount() {
-		return account;
-	}
+  public String getAccount() {
+    return account;
+  }
 
-	// For testing
-	public void setAccount(String account) {
-		this.account = account;
-	}
+  // For testing
+  public void setAccount(String account) {
+    this.account = account;
+  }
 
-	public String getCustomer() {
-		return customer;
-	}
+  public String getCustomer() {
+    return customer;
+  }
 
-	// For testing
-	public void setCustomer(String customer) {
-		this.customer = customer;
-	}
+  // For testing
+  public void setCustomer(String customer) {
+    this.customer = customer;
+  }
 
-	public Map<String, String> getMetadata() {
-		return metadata;
-	}
+  public Map<String, String> getMetadata() {
+    return metadata;
+  }
 
-	public void setMetadata(Map<String, String> metadata) {
-		this.metadata = metadata;
-	}
+  public void setMetadata(Map<String, String> metadata) {
+    this.metadata = metadata;
+  }
 
-	public String getInstanceURL() {
-		if (this.getCustomer() != null) {
-			return String.format("%s/%s/sources/%s", classURL(Customer.class), this.getCustomer(), this.getId());
-		} else if (this.getAccount() != null) {
-			return String.format("%s/%s/external_accounts/%s", classURL(Account.class), this.getAccount(), this.getId());
-		} else {
-			return null;
-		}
-	}
+  public String getInstanceURL() {
+    if (this.getCustomer() != null) {
+      return String.format("%s/%s/sources/%s", classURL(Customer.class), this.getCustomer(), this.getId());
+    } else if (this.getAccount() != null) {
+      return String.format("%s/%s/external_accounts/%s", classURL(Account.class), this.getAccount(), this.getId());
+    } else {
+      return null;
+    }
+  }
 
-	public ExternalAccount verify(Map<String, Object> params) throws
-			AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return verify(params, null);
-	}
+  public ExternalAccount verify(Map<String, Object> params) throws
+      AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return verify(params, null);
+  }
 
-	public ExternalAccount verify(Map<String, Object> params, RequestOptions options) throws
-			AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		if (this.getCustomer() != null) {
-			return request(RequestMethod.POST, String.format("%s/verify", this.getInstanceURL()), params, ExternalAccount.class, options);
-		} else {
-			throw new InvalidRequestException("Only customer bank accounts can be verified in this manner.",
-				null, null, null, 0, null);
-		}
-	}
+  public ExternalAccount verify(Map<String, Object> params, RequestOptions options) throws
+      AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    if (this.getCustomer() != null) {
+      return request(RequestMethod.POST, String.format("%s/verify", this.getInstanceURL()), params, ExternalAccount.class, options);
+    } else {
+      throw new InvalidRequestException("Only customer bank accounts can be verified in this manner.",
+        null, null, null, 0, null);
+    }
+  }
 
-	public ExternalAccount update(Map<String, Object> params) throws
-			AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return update(params, null);
-	}
+  public ExternalAccount update(Map<String, Object> params) throws
+      AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return update(params, null);
+  }
 
-	public ExternalAccount update(Map<String, Object> params, RequestOptions options)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.POST, this.getInstanceURL(), params, ExternalAccount.class, options);
-	}
+  public ExternalAccount update(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.POST, this.getInstanceURL(), params, ExternalAccount.class, options);
+  }
 
-	public DeletedExternalAccount delete() throws AuthenticationException,
-			InvalidRequestException, APIConnectionException,
-			CardException, APIException {
-		return delete(null);
-	}
+  public DeletedExternalAccount delete() throws AuthenticationException,
+      InvalidRequestException, APIConnectionException,
+      CardException, APIException {
+    return delete(null);
+  }
 
-	public DeletedExternalAccount delete(RequestOptions options) throws
-			AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedExternalAccount.class, options);
-	}
+  public DeletedExternalAccount delete(RequestOptions options) throws
+      AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedExternalAccount.class, options);
+  }
 }

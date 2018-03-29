@@ -7,5 +7,5 @@ import com.google.gson.JsonObject;
  * that we have received.
  */
 public class StripeRawJsonObject extends StripeObject {
-	JsonObject json;
+  JsonObject json;
 }

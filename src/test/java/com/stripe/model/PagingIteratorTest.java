@@ -29,128 +29,128 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.*;
 
 public class PagingIteratorTest extends BaseStripeTest {
-	@Before
-	public void mockStripeResponseGetter() {
-		APIResource.setStripeResponseGetter(networkMock);
-	}
+  @Before
+  public void mockStripeResponseGetter() {
+    APIResource.setStripeResponseGetter(networkMock);
+  }
 
-	@After
-	public void unmockStripeResponseGetter() {
-		/* This needs to be done because tests aren't isolated in Java */
-		APIResource.setStripeResponseGetter(new LiveStripeResponseGetter());
-	}
+  @After
+  public void unmockStripeResponseGetter() {
+    /* This needs to be done because tests aren't isolated in Java */
+    APIResource.setStripeResponseGetter(new LiveStripeResponseGetter());
+  }
 
-	@Before
-	public void setUpMockPages() throws IOException, StripeException {
-		final List<String> pages = new ArrayList<String>();
-		pages.add(resource("pageable_model_page_0.json"));
-		pages.add(resource("pageable_model_page_1.json"));
-		pages.add(resource("pageable_model_page_2.json"));
+  @Before
+  public void setUpMockPages() throws IOException, StripeException {
+    final List<String> pages = new ArrayList<String>();
+    pages.add(resource("pageable_model_page_0.json"));
+    pages.add(resource("pageable_model_page_1.json"));
+    pages.add(resource("pageable_model_page_2.json"));
 
-		when(networkMock.request(
-				Mockito.any(APIResource.RequestMethod.class),
-				Mockito.anyString(),
-				Mockito.<Map<String, Object>>any(),
-				Mockito.<Class<PageableModelCollection>>any(),
-				Mockito.any(APIResource.RequestType.class),
-				Mockito.any(RequestOptions.class))
-		).thenAnswer(new Answer() {
-			private int count = 0;
+    when(networkMock.request(
+        Mockito.any(APIResource.RequestMethod.class),
+        Mockito.anyString(),
+        Mockito.<Map<String, Object>>any(),
+        Mockito.<Class<PageableModelCollection>>any(),
+        Mockito.any(APIResource.RequestType.class),
+        Mockito.any(RequestOptions.class))
+    ).thenAnswer(new Answer() {
+      private int count = 0;
 
-			// essentially all we're doing here is returning the first page of
-			// results on the first request and the second page of results on
-			// the second
-			public Object answer(InvocationOnMock invocation) {
-				if (count >= pages.size()) {
-					throw new RuntimeException("Page out of bounds");
-				}
+      // essentially all we're doing here is returning the first page of
+      // results on the first request and the second page of results on
+      // the second
+      public Object answer(InvocationOnMock invocation) {
+        if (count >= pages.size()) {
+          throw new RuntimeException("Page out of bounds");
+        }
 
-				return APIResource.GSON.fromJson(pages.get(count++), PageableModelCollection.class);
-			}
-		});
-	}
+        return APIResource.GSON.fromJson(pages.get(count++), PageableModelCollection.class);
+      }
+    });
+  }
 
-	@Test
-	public void testAutoPagination() throws IOException, StripeException {
-		// set some arbitrary parameters so that we can verify that they're
-		// used for requests on ALL pages
-		Map<String, Object> page0Params = new HashMap<String, Object>();
-		page0Params.put("foo", "bar");
+  @Test
+  public void testAutoPagination() throws IOException, StripeException {
+    // set some arbitrary parameters so that we can verify that they're
+    // used for requests on ALL pages
+    Map<String, Object> page0Params = new HashMap<String, Object>();
+    page0Params.put("foo", "bar");
 
-		Map<String, Object> page1Params = new HashMap<String, Object>();
-		page1Params.put("foo", "bar");
-		page1Params.put("starting_after", "pm_124");
+    Map<String, Object> page1Params = new HashMap<String, Object>();
+    page1Params.put("foo", "bar");
+    page1Params.put("starting_after", "pm_124");
 
-		Map<String, Object> page2Params = new HashMap<String, Object>();
-		page2Params.put("foo", "bar");
-		page2Params.put("starting_after", "pm_126");
+    Map<String, Object> page2Params = new HashMap<String, Object>();
+    page2Params.put("foo", "bar");
+    page2Params.put("starting_after", "pm_126");
 
-		RequestOptions options = (new RequestOptionsBuilder()).setApiKey("sk_paging_key").build();
-		PageableModelCollection collection = PageableModel.list(page0Params, options);
+    RequestOptions options = (new RequestOptionsBuilder()).setApiKey("sk_paging_key").build();
+    PageableModelCollection collection = PageableModel.list(page0Params, options);
 
-		List<PageableModel> models = new ArrayList<PageableModel>();
-		for (PageableModel model : collection.autoPagingIterable()) {
-			models.add(model);
-		}
+    List<PageableModel> models = new ArrayList<PageableModel>();
+    for (PageableModel model : collection.autoPagingIterable()) {
+      models.add(model);
+    }
 
-		assertEquals(5, models.size());
-		assertEquals("pm_123", models.get(0).getId());
-		assertEquals("pm_124", models.get(1).getId());
-		assertEquals("pm_125", models.get(2).getId());
-		assertEquals("pm_126", models.get(3).getId());
-		assertEquals("pm_127", models.get(4).getId());
+    assertEquals(5, models.size());
+    assertEquals("pm_123", models.get(0).getId());
+    assertEquals("pm_124", models.get(1).getId());
+    assertEquals("pm_125", models.get(2).getId());
+    assertEquals("pm_126", models.get(3).getId());
+    assertEquals("pm_127", models.get(4).getId());
 
-		verifyGet(PageableModelCollection.class, "https://api.stripe.com/v1/pageablemodels",
-				page0Params, options);
-		verifyGet(PageableModelCollection.class, "https://api.stripe.com/v1/pageablemodels",
-				page1Params, options);
-		verifyGet(PageableModelCollection.class, "https://api.stripe.com/v1/pageablemodels",
-				page2Params, options);
-		verifyNoMoreInteractions(networkMock);
-	}
+    verifyGet(PageableModelCollection.class, "https://api.stripe.com/v1/pageablemodels",
+        page0Params, options);
+    verifyGet(PageableModelCollection.class, "https://api.stripe.com/v1/pageablemodels",
+        page1Params, options);
+    verifyGet(PageableModelCollection.class, "https://api.stripe.com/v1/pageablemodels",
+        page2Params, options);
+    verifyNoMoreInteractions(networkMock);
+  }
 
-	@Test
-	public void testAutoPaginationWithParams() throws IOException, StripeException {
-		// set some arbitrary parameters so that we can verify that the
-		// parameters passed to autoPagingIterable() override the initial
-		// collection parameters
-		Map<String, Object> page0Params = new HashMap<String, Object>();
-		page0Params.put("foo", "bar");
+  @Test
+  public void testAutoPaginationWithParams() throws IOException, StripeException {
+    // set some arbitrary parameters so that we can verify that the
+    // parameters passed to autoPagingIterable() override the initial
+    // collection parameters
+    Map<String, Object> page0Params = new HashMap<String, Object>();
+    page0Params.put("foo", "bar");
 
-		Map<String, Object> autoPagingParams = new HashMap<String, Object>();
-		autoPagingParams.put("foo", "baz");
+    Map<String, Object> autoPagingParams = new HashMap<String, Object>();
+    autoPagingParams.put("foo", "baz");
 
-		Map<String, Object> page1Params = new HashMap<String, Object>();
-		page1Params.put("foo", "baz");
-		page1Params.put("starting_after", "pm_124");
+    Map<String, Object> page1Params = new HashMap<String, Object>();
+    page1Params.put("foo", "baz");
+    page1Params.put("starting_after", "pm_124");
 
-		Map<String, Object> page2Params = new HashMap<String, Object>();
-		page2Params.put("foo", "baz");
-		page2Params.put("starting_after", "pm_126");
+    Map<String, Object> page2Params = new HashMap<String, Object>();
+    page2Params.put("foo", "baz");
+    page2Params.put("starting_after", "pm_126");
 
-		RequestOptions options = (new RequestOptionsBuilder()).setApiKey("sk_paging_key").build();
-		PageableModelCollection collection = PageableModel.list(page0Params, options);
+    RequestOptions options = (new RequestOptionsBuilder()).setApiKey("sk_paging_key").build();
+    PageableModelCollection collection = PageableModel.list(page0Params, options);
 
-		List<PageableModel> models = new ArrayList<PageableModel>();
-		for (PageableModel model : collection.autoPagingIterable(autoPagingParams)) {
-			models.add(model);
-		}
+    List<PageableModel> models = new ArrayList<PageableModel>();
+    for (PageableModel model : collection.autoPagingIterable(autoPagingParams)) {
+      models.add(model);
+    }
 
-		assertEquals(5, models.size());
-		assertEquals("pm_123", models.get(0).getId());
-		assertEquals("pm_124", models.get(1).getId());
-		assertEquals("pm_125", models.get(2).getId());
-		assertEquals("pm_126", models.get(3).getId());
-		assertEquals("pm_127", models.get(4).getId());
+    assertEquals(5, models.size());
+    assertEquals("pm_123", models.get(0).getId());
+    assertEquals("pm_124", models.get(1).getId());
+    assertEquals("pm_125", models.get(2).getId());
+    assertEquals("pm_126", models.get(3).getId());
+    assertEquals("pm_127", models.get(4).getId());
 
-		verifyGet(PageableModelCollection.class, "https://api.stripe.com/v1/pageablemodels",
-				page0Params, options);
-		verifyGet(PageableModelCollection.class, "https://api.stripe.com/v1/pageablemodels",
-				page1Params, options);
-		verifyGet(PageableModelCollection.class, "https://api.stripe.com/v1/pageablemodels",
-				page2Params, options);
-		verifyNoMoreInteractions(networkMock);
-	}
+    verifyGet(PageableModelCollection.class, "https://api.stripe.com/v1/pageablemodels",
+        page0Params, options);
+    verifyGet(PageableModelCollection.class, "https://api.stripe.com/v1/pageablemodels",
+        page1Params, options);
+    verifyGet(PageableModelCollection.class, "https://api.stripe.com/v1/pageablemodels",
+        page2Params, options);
+    verifyNoMoreInteractions(networkMock);
+  }
 }
 
 /**
@@ -158,19 +158,19 @@ public class PagingIteratorTest extends BaseStripeTest {
  * we test some of the nitty gritty of pagination.
  */
 class PageableModel extends APIResource implements HasId {
-	String id;
+  String id;
 
-	public static PageableModelCollection list(Map<String, Object> params,
-											   RequestOptions options)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return requestCollection(classURL(PageableModel.class), params,
-				PageableModelCollection.class, options);
-	}
+  public static PageableModelCollection list(Map<String, Object> params,
+                         RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return requestCollection(classURL(PageableModel.class), params,
+        PageableModelCollection.class, options);
+  }
 
-	public String getId() {
-		return id;
-	}
+  public String getId() {
+    return id;
+  }
 }
 
 class PageableModelCollection extends StripeCollection<PageableModel> {

@@ -15,7 +15,7 @@ import java.util.Map;
  * <pre>
  * {@code
  * foreach (Invoice invoice : Invoice.list(...).getData()) {
- * 	 System.out.println("Current invoice = " + invoice.toString());
+ *   System.out.println("Current invoice = " + invoice.toString());
  * }
  * }
  * </pre>
@@ -26,105 +26,105 @@ import java.util.Map;
  * <pre>
  * {@code
  * foreach (Invoice invoice : Invoice.list(...).autoPagingIterable()) {
- * 	 System.out.println("Current invoice = " + invoice.toString());
+ *   System.out.println("Current invoice = " + invoice.toString());
  * }
  * }
  * </pre>
  */
 public abstract class StripeCollection<T extends HasId> extends StripeObject implements StripeCollectionInterface<T> {
-	List<T> data;
-	Integer totalCount;
-	Boolean hasMore;
-	private RequestOptions requestOptions;
-	private Map<String, Object> requestParams;
-	String url;
+  List<T> data;
+  Integer totalCount;
+  Boolean hasMore;
+  private RequestOptions requestOptions;
+  private Map<String, Object> requestParams;
+  String url;
 
-	/**
-	 * 3/2014: Legacy (from before newstyle pagination API)
-	 */
-	Integer count;
+  /**
+   * 3/2014: Legacy (from before newstyle pagination API)
+   */
+  Integer count;
 
-	public List<T> getData() {
-		return data;
-	}
+  public List<T> getData() {
+    return data;
+  }
 
-	public void setData(List<T> data) {
-		this.data = data;
-	}
+  public void setData(List<T> data) {
+    this.data = data;
+  }
 
-	public Integer getTotalCount() {
-		return totalCount;
-	}
+  public Integer getTotalCount() {
+    return totalCount;
+  }
 
-	public void setTotalCount(Integer totalCount) {
-		this.totalCount = totalCount;
-	}
+  public void setTotalCount(Integer totalCount) {
+    this.totalCount = totalCount;
+  }
 
-	public Boolean getHasMore() {
-		return hasMore;
-	}
+  public Boolean getHasMore() {
+    return hasMore;
+  }
 
-	public void setHasMore(Boolean hasMore) {
-		this.hasMore = hasMore;
-	}
+  public void setHasMore(Boolean hasMore) {
+    this.hasMore = hasMore;
+  }
 
-	public String getURL() {
-		return url;
-	}
+  public String getURL() {
+    return url;
+  }
 
-	public void setURL(String url) {
-		this.url = url;
-	}
+  public void setURL(String url) {
+    this.url = url;
+  }
 
-	/**
-	 * 3/2014: Legacy (from before newstyle pagination API)
-	 */
-	public Integer getCount() {
-		return count;
-	}
+  /**
+   * 3/2014: Legacy (from before newstyle pagination API)
+   */
+  public Integer getCount() {
+    return count;
+  }
 
-	/**
-	 * 3/2014: Legacy (from before newstyle pagination API)
-	 */
-	public void setCount(Integer count) {
-		this.count = count;
-	}
+  /**
+   * 3/2014: Legacy (from before newstyle pagination API)
+   */
+  public void setCount(Integer count) {
+    this.count = count;
+  }
 
-	/**
-	 * Returns an iterable that can be used to iterate across all objects
-	 * across all pages. As page boundaries are encountered, the next page will
-	 * be fetched automatically for continued iteration.
-	 */
-	public Iterable<T> autoPagingIterable() {
-		return new PagingIterable<T>(this);
-	}
+  /**
+   * Returns an iterable that can be used to iterate across all objects
+   * across all pages. As page boundaries are encountered, the next page will
+   * be fetched automatically for continued iteration.
+   */
+  public Iterable<T> autoPagingIterable() {
+    return new PagingIterable<T>(this);
+  }
 
-	public Iterable<T> autoPagingIterable(Map<String, Object> params) {
-		this.setRequestParams(params);
+  public Iterable<T> autoPagingIterable(Map<String, Object> params) {
+    this.setRequestParams(params);
 
-		return new PagingIterable<T>(this);
-	}
+    return new PagingIterable<T>(this);
+  }
 
-	public Iterable<T> autoPagingIterable(Map<String, Object> params, RequestOptions options) {
-		this.setRequestOptions(options);
-		this.setRequestParams(params);
+  public Iterable<T> autoPagingIterable(Map<String, Object> params, RequestOptions options) {
+    this.setRequestOptions(options);
+    this.setRequestParams(params);
 
-		return new PagingIterable<T>(this);
-	}
+    return new PagingIterable<T>(this);
+  }
 
-	public RequestOptions getRequestOptions() {
-		return this.requestOptions;
-	}
+  public RequestOptions getRequestOptions() {
+    return this.requestOptions;
+  }
 
-	public Map<String, Object> getRequestParams() {
-		return this.requestParams;
-	}
+  public Map<String, Object> getRequestParams() {
+    return this.requestParams;
+  }
 
-	public void setRequestOptions(RequestOptions requestOptions) {
-		this.requestOptions = requestOptions;
-	}
+  public void setRequestOptions(RequestOptions requestOptions) {
+    this.requestOptions = requestOptions;
+  }
 
-	public void setRequestParams(Map<String, Object> requestParams) {
-		this.requestParams = requestParams;
-	}
+  public void setRequestParams(Map<String, Object> requestParams) {
+    this.requestParams = requestParams;
+  }
 }

@@ -10,16 +10,16 @@ import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
 
 public class LoginLinkCollection extends StripeCollection<LoginLink> {
-	public LoginLink create()
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return create(null);
-	}
+  public LoginLink create()
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return create(null);
+  }
 
-	public LoginLink create(RequestOptions options) throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
-		String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
-		return APIResource.request(APIResource.RequestMethod.POST, url, null, LoginLink.class, options);
-	}
+  public LoginLink create(RequestOptions options) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
+    return APIResource.request(APIResource.RequestMethod.POST, url, null, LoginLink.class, options);
+  }
 }

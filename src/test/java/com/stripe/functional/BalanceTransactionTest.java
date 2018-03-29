@@ -14,20 +14,20 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNotNull;
 
 public class BalanceTransactionTest extends BaseStripeFunctionalTest {
-	@Test
-	public void testBalanceTransactionRetrieval() throws StripeException {
-		Charge.create(defaultChargeParams);
-		BalanceTransactionCollection balanceTransactions = BalanceTransaction.all(null);
-		assertFalse(balanceTransactions.getData().isEmpty());
-		BalanceTransaction first = balanceTransactions.getData().get(0);
-		assertNotNull(first.getStatus());
+  @Test
+  public void testBalanceTransactionRetrieval() throws StripeException {
+    Charge.create(defaultChargeParams);
+    BalanceTransactionCollection balanceTransactions = BalanceTransaction.all(null);
+    assertFalse(balanceTransactions.getData().isEmpty());
+    BalanceTransaction first = balanceTransactions.getData().get(0);
+    assertNotNull(first.getStatus());
 
-		HashMap<String, Object> fetchParams = new HashMap<String, Object>();
-		fetchParams.put("count", 2);
-		assertEquals(BalanceTransaction.all(fetchParams).getData().size(), 2);
+    HashMap<String, Object> fetchParams = new HashMap<String, Object>();
+    fetchParams.put("count", 2);
+    assertEquals(BalanceTransaction.all(fetchParams).getData().size(), 2);
 
-		BalanceTransaction retrieved = BalanceTransaction.retrieve(first.getId());
-		assertEquals(retrieved.getId(), first.getId());
-		assertEquals(retrieved.getSource(), first.getSource());
-	}
+    BalanceTransaction retrieved = BalanceTransaction.retrieve(first.getId());
+    assertEquals(retrieved.getId(), first.getId());
+    assertEquals(retrieved.getSource(), first.getSource());
+  }
 }

@@ -2,22 +2,22 @@ package com.stripe.model;
 
 
 public class DeletedSKU extends StripeObject implements DeletedStripeObject {
-	String id;
-	Boolean deleted;
+  String id;
+  Boolean deleted;
 
-	public String getId() {
-		return id;
-	}
+  public String getId() {
+    return id;
+  }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+  public void setId(String id) {
+    this.id = id;
+  }
 
-	public Boolean getDeleted() {
-		return deleted;
-	}
+  public Boolean getDeleted() {
+    return deleted;
+  }
 
-	public void setDeleted(Boolean deleted) {
-		this.deleted = deleted;
-	}
+  public void setDeleted(Boolean deleted) {
+    this.deleted = deleted;
+  }
 }

@@ -6,35 +6,35 @@ import java.util.List;
 import java.util.Map;
 
 public interface StripeCollectionInterface<T> {
-	List<T> getData();
+  List<T> getData();
 
-	Boolean getHasMore();
+  Boolean getHasMore();
 
-	Integer getTotalCount();
+  Integer getTotalCount();
 
-	String getURL();
+  String getURL();
 
-	/**
-	 * Get request options that were used to fetch the collection. This is
-	 * useful for purposes of pagination.
-	 */
-	RequestOptions getRequestOptions();
+  /**
+   * Get request options that were used to fetch the collection. This is
+   * useful for purposes of pagination.
+   */
+  RequestOptions getRequestOptions();
 
-	/**
-	 * Get request parameters that were used to fetch the collection. This is
-	 * useful for purposes of pagination.
-	 */
-	Map<String, Object> getRequestParams();
+  /**
+   * Get request parameters that were used to fetch the collection. This is
+   * useful for purposes of pagination.
+   */
+  Map<String, Object> getRequestParams();
 
-	/**
-	 * Set request options that were used to fetch the collection. This is
-	 * required for purposes of pagination.
-	 */
-	void setRequestOptions(RequestOptions requestOptions);
+  /**
+   * Set request options that were used to fetch the collection. This is
+   * required for purposes of pagination.
+   */
+  void setRequestOptions(RequestOptions requestOptions);
 
-	/**
-	 * Set request parameters that were used to fetch the collection. This is
-	 * required for purposes of pagination.
-	 */
-	void setRequestParams(Map<String, Object> requestParams);
+  /**
+   * Set request parameters that were used to fetch the collection. This is
+   * required for purposes of pagination.
+   */
+  void setRequestParams(Map<String, Object> requestParams);
 }

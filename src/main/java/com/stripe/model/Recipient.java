@@ -12,319 +12,319 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Recipient extends APIResource implements MetadataStore<Recipient>, HasId {
-	String id;
-	String object;
-	BankAccount activeAccount;
-	RecipientCardCollection cards;
-	Long created;
-	ExpandableField<Card> defaultCard;
-	Boolean deleted;
-	String description;
-	String email;
-	Boolean livemode;
-	Map<String, String> metadata;
-	ExpandableField<Account> migratedTo;
-	String name;
-	String type;
-	Boolean verified;
+  String id;
+  String object;
+  BankAccount activeAccount;
+  RecipientCardCollection cards;
+  Long created;
+  ExpandableField<Card> defaultCard;
+  Boolean deleted;
+  String description;
+  String email;
+  Boolean livemode;
+  Map<String, String> metadata;
+  ExpandableField<Account> migratedTo;
+  String name;
+  String type;
+  Boolean verified;
 
-	public String getId() {
-		return id;
-	}
+  public String getId() {
+    return id;
+  }
 
-	public void setId(String id) {
-		this.id = id;
-	}
+  public void setId(String id) {
+    this.id = id;
+  }
 
-	public String getObject() {
-		return object;
-	}
+  public String getObject() {
+    return object;
+  }
 
-	public void setObject(String object) {
-		this.object = object;
-	}
+  public void setObject(String object) {
+    this.object = object;
+  }
 
-	public BankAccount getActiveAccount() {
-		return activeAccount;
-	}
+  public BankAccount getActiveAccount() {
+    return activeAccount;
+  }
 
-	public void setActiveAccount(BankAccount activeAccount) {
-		this.activeAccount = activeAccount;
-	}
+  public void setActiveAccount(BankAccount activeAccount) {
+    this.activeAccount = activeAccount;
+  }
 
-	public RecipientCardCollection getCards() {
-		return cards;
-	}
+  public RecipientCardCollection getCards() {
+    return cards;
+  }
 
-	public Long getCreated() {
-		return created;
-	}
+  public Long getCreated() {
+    return created;
+  }
 
-	public void setCreated(Long created) {
-		this.created = created;
-	}
+  public void setCreated(Long created) {
+    this.created = created;
+  }
 
-	public String getDefaultCard() {
-		if (this.defaultCard == null) {
-			return null;
-		}
-		return this.defaultCard.getId();
-	}
+  public String getDefaultCard() {
+    if (this.defaultCard == null) {
+      return null;
+    }
+    return this.defaultCard.getId();
+  }
 
-	public void setDefaultCard(String defaultCardID) {
-		this.defaultCard = APIResource.setExpandableFieldID(defaultCardID, this.defaultCard);
-	}
+  public void setDefaultCard(String defaultCardID) {
+    this.defaultCard = APIResource.setExpandableFieldID(defaultCardID, this.defaultCard);
+  }
 
-	public Card getDefaultCardObject() {
-		if (this.defaultCard == null) {
-			return null;
-		}
-		return this.defaultCard.getExpanded();
-	}
+  public Card getDefaultCardObject() {
+    if (this.defaultCard == null) {
+      return null;
+    }
+    return this.defaultCard.getExpanded();
+  }
 
-	public void setDefaultCardObject(Card c) {
-		this.defaultCard = new ExpandableField<Card>(c.getId(), c);
-	}
+  public void setDefaultCardObject(Card c) {
+    this.defaultCard = new ExpandableField<Card>(c.getId(), c);
+  }
 
-	public Boolean getDeleted() {
-		return deleted;
-	}
+  public Boolean getDeleted() {
+    return deleted;
+  }
 
-	public String getDescription() {
-		return description;
-	}
+  public String getDescription() {
+    return description;
+  }
 
-	public void setDescription(String description) {
-		this.description = description;
-	}
+  public void setDescription(String description) {
+    this.description = description;
+  }
 
-	public String getEmail() {
-		return email;
-	}
+  public String getEmail() {
+    return email;
+  }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+  public void setEmail(String email) {
+    this.email = email;
+  }
 
-	public Boolean getLivemode() {
-		return livemode;
-	}
+  public Boolean getLivemode() {
+    return livemode;
+  }
 
-	public void setLivemode(Boolean livemode) {
-		this.livemode = livemode;
-	}
+  public void setLivemode(Boolean livemode) {
+    this.livemode = livemode;
+  }
 
-	public Map<String, String> getMetadata() {
-		return metadata;
-	}
+  public Map<String, String> getMetadata() {
+    return metadata;
+  }
 
-	public void setMetadata(Map<String, String> metadata) {
-		this.metadata = metadata;
-	}
+  public void setMetadata(Map<String, String> metadata) {
+    this.metadata = metadata;
+  }
 
-	public String getMigratedTo() {
-		if (this.migratedTo == null) {
-			return null;
-		}
-		return this.migratedTo.getId();
-	}
+  public String getMigratedTo() {
+    if (this.migratedTo == null) {
+      return null;
+    }
+    return this.migratedTo.getId();
+  }
 
-	public void setMigratedTo(String migratedToID) {
-		this.migratedTo = APIResource.setExpandableFieldID(migratedToID, this.migratedTo);
-	}
+  public void setMigratedTo(String migratedToID) {
+    this.migratedTo = APIResource.setExpandableFieldID(migratedToID, this.migratedTo);
+  }
 
-	public Account getMigratedToObject() {
-		if (this.migratedTo == null) {
-			return null;
-		}
-		return this.migratedTo.getExpanded();
-	}
+  public Account getMigratedToObject() {
+    if (this.migratedTo == null) {
+      return null;
+    }
+    return this.migratedTo.getExpanded();
+  }
 
-	public void setMigratedToObject(Account c) {
-		this.migratedTo = new ExpandableField<Account>(c.getId(), c);
-	}
+  public void setMigratedToObject(Account c) {
+    this.migratedTo = new ExpandableField<Account>(c.getId(), c);
+  }
 
-	public String getName() {
-		return name;
-	}
+  public String getName() {
+    return name;
+  }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+  public void setName(String name) {
+    this.name = name;
+  }
 
-	public String getType() {
-		return type;
-	}
+  public String getType() {
+    return type;
+  }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+  public void setType(String type) {
+    this.type = type;
+  }
 
-	public Boolean getVerified() {
-		return verified;
-	}
+  public Boolean getVerified() {
+    return verified;
+  }
 
-	public void setVerified(Boolean verified) {
-		this.verified = verified;
-	}
+  public void setVerified(Boolean verified) {
+    this.verified = verified;
+  }
 
-	public static Recipient create(Map<String, Object> params)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return create(params, (RequestOptions) null);
-	}
+  public static Recipient create(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return create(params, (RequestOptions) null);
+  }
 
-	public static Recipient retrieve(String id) throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
-		return retrieve(id, (RequestOptions) null);
-	}
+  public static Recipient retrieve(String id) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return retrieve(id, (RequestOptions) null);
+  }
 
-	public Recipient update(Map<String, Object> params)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return update(params, (RequestOptions) null);
-	}
+  public Recipient update(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return update(params, (RequestOptions) null);
+  }
 
-	public DeletedRecipient delete() throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
-		return delete((RequestOptions) null);
-	}
+  public DeletedRecipient delete() throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return delete((RequestOptions) null);
+  }
 
-	public Card createCard(String token) throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
-		return createCard(token, (RequestOptions) null);
-	}
+  public Card createCard(String token) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return createCard(token, (RequestOptions) null);
+  }
 
-	public Card createCard(Map<String, Object> params) throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
-		return createCard(params, (RequestOptions) null);
-	}
+  public Card createCard(Map<String, Object> params) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return createCard(params, (RequestOptions) null);
+  }
 
-	@Deprecated
-	public Card createCard(String token, String apiKey) throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
-		return createCard(token, RequestOptions.builder().setApiKey(apiKey).build());
-	}
+  @Deprecated
+  public Card createCard(String token, String apiKey) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return createCard(token, RequestOptions.builder().setApiKey(apiKey).build());
+  }
 
-	public Card createCard(String token, RequestOptions options) throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
-		Map<String, Object> postParams = new HashMap<String, Object>();
-		postParams.put("card", token);
+  public Card createCard(String token, RequestOptions options) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    Map<String, Object> postParams = new HashMap<String, Object>();
+    postParams.put("card", token);
 
-		return createCard(postParams, options);
-	}
+    return createCard(postParams, options);
+  }
 
-	@Deprecated
-	public Card createCard(Map<String, Object> params, String apiKey) throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
-		return createCard(params, RequestOptions.builder().setApiKey(apiKey).build());
-	}
+  @Deprecated
+  public Card createCard(Map<String, Object> params, String apiKey) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return createCard(params, RequestOptions.builder().setApiKey(apiKey).build());
+  }
 
-	public Card createCard(Map<String, Object> params, RequestOptions options) throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
-		return request(RequestMethod.POST, String.format("%s/cards",
-				instanceURL(Recipient.class, this.id)), params, Card.class, options);
-	}
+  public Card createCard(Map<String, Object> params, RequestOptions options) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return request(RequestMethod.POST, String.format("%s/cards",
+        instanceURL(Recipient.class, this.id)), params, Card.class, options);
+  }
 
-	@Deprecated
-	public static Recipient create(Map<String, Object> params, String apiKey)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return create(params, RequestOptions.builder().setApiKey(apiKey).build());
-	}
+  @Deprecated
+  public static Recipient create(Map<String, Object> params, String apiKey)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return create(params, RequestOptions.builder().setApiKey(apiKey).build());
+  }
 
-	public static Recipient create(Map<String, Object> params, RequestOptions options)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.POST, classURL(Recipient.class), params, Recipient.class, options);
-	}
+  public static Recipient create(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.POST, classURL(Recipient.class), params, Recipient.class, options);
+  }
 
-	@Deprecated
-	public static Recipient retrieve(String id, String apiKey)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
-	}
+  @Deprecated
+  public static Recipient retrieve(String id, String apiKey)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
+  }
 
-	public static Recipient retrieve(String id, RequestOptions options)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.GET, instanceURL(Recipient.class, id), null, Recipient.class, options);
-	}
+  public static Recipient retrieve(String id, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.GET, instanceURL(Recipient.class, id), null, Recipient.class, options);
+  }
 
-	public static Recipient retrieve(String id, Map<String, Object> params, RequestOptions options)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.GET, instanceURL(Recipient.class, id), params, Recipient.class, options);
-	}
+  public static Recipient retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.GET, instanceURL(Recipient.class, id), params, Recipient.class, options);
+  }
 
-	public static RecipientCollection list(Map<String, Object> params)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return list(params, null);
-	}
+  public static RecipientCollection list(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return list(params, null);
+  }
 
-	public static RecipientCollection list(Map<String, Object> params,
-										   RequestOptions options) throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
-		return requestCollection(classURL(Recipient.class), params, RecipientCollection.class, options);
-	}
+  public static RecipientCollection list(Map<String, Object> params,
+                       RequestOptions options) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return requestCollection(classURL(Recipient.class), params, RecipientCollection.class, options);
+  }
 
-	@Deprecated
-	public static RecipientCollection all(Map<String, Object> params)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return list(params, null);
-	}
+  @Deprecated
+  public static RecipientCollection all(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return list(params, null);
+  }
 
-	@Deprecated
-	public static RecipientCollection all(Map<String, Object> params,
-										  String apiKey) throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
-		return list(params, RequestOptions.builder().setApiKey(apiKey).build());
-	}
+  @Deprecated
+  public static RecipientCollection all(Map<String, Object> params,
+                      String apiKey) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return list(params, RequestOptions.builder().setApiKey(apiKey).build());
+  }
 
-	@Deprecated
-	public static RecipientCollection all(Map<String, Object> params,
-										  RequestOptions options) throws AuthenticationException,
-			InvalidRequestException, APIConnectionException, CardException,
-			APIException {
-		return list(params, options);
-	}
+  @Deprecated
+  public static RecipientCollection all(Map<String, Object> params,
+                      RequestOptions options) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return list(params, options);
+  }
 
-	@Deprecated
-	public Recipient update(Map<String, Object> params, String apiKey)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return update(params, RequestOptions.builder().setApiKey(apiKey).build());
-	}
+  @Deprecated
+  public Recipient update(Map<String, Object> params, String apiKey)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return update(params, RequestOptions.builder().setApiKey(apiKey).build());
+  }
 
-	public Recipient update(Map<String, Object> params, RequestOptions options)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.POST, instanceURL(Recipient.class, this.id), params, Recipient.class, options);
-	}
+  public Recipient update(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.POST, instanceURL(Recipient.class, this.id), params, Recipient.class, options);
+  }
 
-	@Deprecated
-	public DeletedRecipient delete(String apiKey)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return delete(RequestOptions.builder().setApiKey(apiKey).build());
-	}
+  @Deprecated
+  public DeletedRecipient delete(String apiKey)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return delete(RequestOptions.builder().setApiKey(apiKey).build());
+  }
 
-	public DeletedRecipient delete(RequestOptions options)
-			throws AuthenticationException, InvalidRequestException,
-			APIConnectionException, CardException, APIException {
-		return request(RequestMethod.DELETE, instanceURL(Recipient.class, this.id), null, DeletedRecipient.class, options);
-	}
+  public DeletedRecipient delete(RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.DELETE, instanceURL(Recipient.class, this.id), null, DeletedRecipient.class, options);
+  }
 }
