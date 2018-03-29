@@ -38,7 +38,8 @@ public class LiveStripeResponseGetterTest {
   }
 
   @Test
-  public void testCreateQueryWithNestedParams() throws StripeException, UnsupportedEncodingException {
+  public void testCreateQueryWithNestedParams() throws StripeException,
+      UnsupportedEncodingException {
     /* Use LinkedHashMap because it preserves iteration order */
     Map<String, Object> params = new LinkedHashMap<String, Object>();
     Map<String, Object> nested = new LinkedHashMap<String, Object>();
@@ -69,7 +70,8 @@ public class LiveStripeResponseGetterTest {
   }
 
   @Test
-  public void testCreateQueryWithArrayParams() throws StripeException, UnsupportedEncodingException {
+  public void testCreateQueryWithArrayParams() throws StripeException,
+      UnsupportedEncodingException {
 
     String[] nested = {"A", "B", "C"};
 
@@ -84,7 +86,8 @@ public class LiveStripeResponseGetterTest {
   }
 
   @Test
-  public void testCreateQueryWithListOfHashes() throws StripeException, UnsupportedEncodingException {
+  public void testCreateQueryWithListOfHashes() throws StripeException,
+      UnsupportedEncodingException {
     Map<String, String> deepNestedMap1 = new LinkedHashMap<String, String>();
     deepNestedMap1.put("A", "A-1");
     deepNestedMap1.put("B", "B-1");
@@ -121,7 +124,8 @@ public class LiveStripeResponseGetterTest {
   }
 
   @Test
-  public void testCreateQueryUrlEncodeSpecialCharacters() throws StripeException, UnsupportedEncodingException {
+  public void testCreateQueryUrlEncodeSpecialCharacters() throws StripeException,
+      UnsupportedEncodingException {
     Map<String, Object> params = new HashMap<String, Object>();
     params.put("a", "+foo?");
     assertEquals("a=%2Bfoo%3F", LiveStripeResponseGetter.createQuery(params));

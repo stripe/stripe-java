@@ -12,7 +12,8 @@ public class AuthenticationException extends StripeException {
     this(message, requestId, null, statusCode);
   }
 
-  public AuthenticationException(String message, String requestId, String code, Integer statusCode) {
+  public AuthenticationException(String message, String requestId, String code,
+      Integer statusCode) {
     super(message, requestId, code, statusCode);
   }
 }

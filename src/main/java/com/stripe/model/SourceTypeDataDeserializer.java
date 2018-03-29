@@ -18,7 +18,8 @@ import java.util.Map;
  * is a Map<String, String>, that we call `typeData` in the Java library.
  * This custom deserializer is used to properly deserialize this attribute.
  */
-public class SourceTypeDataDeserializer<T extends HasSourceTypeData> implements JsonDeserializer<T> {
+public class SourceTypeDataDeserializer<T extends HasSourceTypeData>
+    implements JsonDeserializer<T> {
 
   private void populateMapFromJSONObject(Map<String, String> objMap, JsonObject jsonObject) {
     for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {

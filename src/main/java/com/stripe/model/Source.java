@@ -192,7 +192,8 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
   public Source verify(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, String.format("%s/verify", this.getSourceInstanceURL()), params, Source.class, options);
+    return request(RequestMethod.POST, String.format("%s/verify", this.getSourceInstanceURL()),
+        params, Source.class, options);
   }
 
   @Override
@@ -212,8 +213,10 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
   public DeletedExternalAccount delete(RequestOptions options) throws
       AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    throw new InvalidRequestException("Source objects cannot be deleted. If you want to detach the source from a customer object, use detach().",
-        null, null, null, 0, null);
+    throw new InvalidRequestException(
+        "Source objects cannot be deleted. If you want to detach the source from a customer "
+        + "object, use detach().",
+         null, null, null, 0, null);
   }
 
   public Source detach()
@@ -232,11 +235,13 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     if (this.getCustomer() != null) {
-      String url = String.format("%s/%s/sources/%s", classURL(Customer.class), this.getCustomer(), this.getId());
+      String url = String.format("%s/%s/sources/%s", classURL(Customer.class), this.getCustomer(),
+          this.getId());
       return request(RequestMethod.DELETE, url, params, Source.class, options);
     } else {
-      throw new InvalidRequestException("This source object does not appear to be currently attached to a customer object.",
-        null, null, null, 0, null);
+      throw new InvalidRequestException(
+          "This source object does not appear to be currently attached to a customer object.",
+          null, null, null, 0, null);
     }
   }
 
@@ -246,7 +251,8 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
     return sourceTransactions(params, null);
   }
 
-  public SourceTransactionCollection sourceTransactions(Map<String, Object> params, RequestOptions options)
+  public SourceTransactionCollection sourceTransactions(Map<String, Object> params,
+      RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     String url = instanceURL(Source.class, this.getId()) + "/source_transactions";

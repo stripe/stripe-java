@@ -318,7 +318,8 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
   public static Account retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Account.class, id), params, Account.class, options);
+    return request(RequestMethod.GET, instanceURL(Account.class, id), params, Account.class,
+        options);
   }
 
   public Account update(Map<String, Object> params)
@@ -330,7 +331,8 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
   public Account update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Account.class, this.id), params, Account.class, options);
+    return request(RequestMethod.POST, instanceURL(Account.class, this.id), params, Account.class,
+        options);
   }
 
   public DeletedAccount delete()
@@ -354,7 +356,8 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
   public DeletedAccount delete(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.DELETE, instanceURL(Account.class, this.id), params, DeletedAccount.class, options);
+    return request(RequestMethod.DELETE, instanceURL(Account.class, this.id), params,
+        DeletedAccount.class, options);
   }
 
   public Account reject(Map<String, Object> params)

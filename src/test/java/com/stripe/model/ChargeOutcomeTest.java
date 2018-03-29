@@ -33,7 +33,8 @@ public class ChargeOutcomeTest extends BaseStripeTest {
     assertEquals("elevated", outcome.getRiskLevel());
     assertEquals("elevated_risk_level", outcome.getReason());
     assertEquals("ssr_199IRC2eZvKYlo2CPfFd4CB6", outcome.getRuleId());
-    assertEquals("Stripe evaluated this charge as having elevated risk, and placed it in your manual review queue.", outcome.getSellerMessage());
+    assertEquals("Stripe evaluated this charge as having elevated risk, and placed it in your "
+        + "manual review queue.", outcome.getSellerMessage());
     assertEquals("manual_review", outcome.getType());
 
     ChargeOutcomeRule rule = outcome.getRuleObject();

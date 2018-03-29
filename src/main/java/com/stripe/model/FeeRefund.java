@@ -129,7 +129,8 @@ public class FeeRefund extends APIResource implements MetadataStore<ApplicationF
 
   public String getInstanceURL() {
     if (this.fee != null) {
-      return String.format("%s/%s/refunds/%s", classURL(ApplicationFee.class), this.fee, this.getId());
+      return String.format("%s/%s/refunds/%s", classURL(ApplicationFee.class), this.fee,
+          this.getId());
     }
     return null;
   }

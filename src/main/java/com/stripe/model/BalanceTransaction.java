@@ -111,8 +111,10 @@ public class BalanceTransaction extends APIResource implements HasId {
   }
 
   /**
-   * @deprecated Recent API versions no longer return this field (https://stripe.com/docs/upgrades#2017-01-27).
-   *     Prefer listing all transfers with the `transfer_group` parameter: https://stripe.com/docs/api/java#list_transfers-transfer_group.
+   * @deprecated Recent API versions no longer return this field
+   *     (https://stripe.com/docs/upgrades#2017-01-27).
+   *     Prefer listing all transfers with the `transfer_group` parameter:
+   *     https://stripe.com/docs/api/java#list_transfers-transfer_group.
    */
   @Deprecated
   public TransferCollection getSourcedTransfers() {
@@ -193,7 +195,8 @@ public class BalanceTransaction extends APIResource implements HasId {
     return list(params, null);
   }
 
-  public static BalanceTransactionCollection list(Map<String, Object> params, RequestOptions options)
+  public static BalanceTransactionCollection list(Map<String, Object> params,
+      RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     String url = String.format("%s/%s", Stripe.getApiBase(), "v1/balance/history");

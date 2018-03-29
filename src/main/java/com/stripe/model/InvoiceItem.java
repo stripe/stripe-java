@@ -234,7 +234,8 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
   public static InvoiceItem create(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, classURL(InvoiceItem.class), params, InvoiceItem.class, options);
+    return request(RequestMethod.POST, classURL(InvoiceItem.class), params, InvoiceItem.class,
+        options);
   }
 
   @Deprecated
@@ -247,13 +248,15 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
   public static InvoiceItem retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(InvoiceItem.class, id), null, InvoiceItem.class, options);
+    return request(RequestMethod.GET, instanceURL(InvoiceItem.class, id), null, InvoiceItem.class,
+        options);
   }
 
   public static InvoiceItem retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(InvoiceItem.class, id), params, InvoiceItem.class, options);
+    return request(RequestMethod.GET, instanceURL(InvoiceItem.class, id), params, InvoiceItem.class,
+        options);
   }
 
   public static InvoiceItemCollection list(Map<String, Object> params)
@@ -266,7 +269,8 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
                        RequestOptions options) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
-    return requestCollection(classURL(InvoiceItem.class), params, InvoiceItemCollection.class, options);
+    return requestCollection(classURL(InvoiceItem.class), params, InvoiceItemCollection.class,
+        options);
   }
 
   @Deprecated
@@ -302,7 +306,8 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
   public InvoiceItem update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(InvoiceItem.class, this.id), params, InvoiceItem.class, options);
+    return request(RequestMethod.POST, instanceURL(InvoiceItem.class, this.id), params, 
+        InvoiceItem.class, options);
   }
 
   @Deprecated
@@ -315,7 +320,8 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
   public DeletedInvoiceItem delete(RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.DELETE, instanceURL(InvoiceItem.class, this.id), null, DeletedInvoiceItem.class, options);
+    return request(RequestMethod.DELETE, instanceURL(InvoiceItem.class, this.id), null,
+        DeletedInvoiceItem.class, options);
   }
 
 }

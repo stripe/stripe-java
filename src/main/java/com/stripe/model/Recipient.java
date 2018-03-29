@@ -227,9 +227,9 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
     return createCard(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
-  public Card createCard(Map<String, Object> params, RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+  public Card createCard(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
     return request(RequestMethod.POST, String.format("%s/cards",
         instanceURL(Recipient.class, this.id)), params, Card.class, options);
   }
@@ -257,13 +257,15 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
   public static Recipient retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Recipient.class, id), null, Recipient.class, options);
+    return request(RequestMethod.GET, instanceURL(Recipient.class, id), null, Recipient.class,
+        options);
   }
 
   public static Recipient retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Recipient.class, id), params, Recipient.class, options);
+    return request(RequestMethod.GET, instanceURL(Recipient.class, id), params, Recipient.class,
+        options);
   }
 
   public static RecipientCollection list(Map<String, Object> params)
@@ -312,7 +314,8 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
   public Recipient update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Recipient.class, this.id), params, Recipient.class, options);
+    return request(RequestMethod.POST, instanceURL(Recipient.class, this.id), params,
+        Recipient.class, options);
   }
 
   @Deprecated
@@ -325,6 +328,7 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
   public DeletedRecipient delete(RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.DELETE, instanceURL(Recipient.class, this.id), null, DeletedRecipient.class, options);
+    return request(RequestMethod.DELETE, instanceURL(Recipient.class, this.id), null,
+        DeletedRecipient.class, options);
   }
 }

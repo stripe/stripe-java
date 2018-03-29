@@ -32,7 +32,8 @@ public class RecipientTest extends BaseStripeFunctionalTest {
     Recipient retrievedRecipient = Recipient.retrieve(createdRecipient.getId());
     assertEquals(createdRecipient.getCreated(), retrievedRecipient.getCreated());
     assertEquals(createdRecipient.getId(), retrievedRecipient.getId());
-    assertEquals(createdRecipient.getActiveAccount().getValidated(), retrievedRecipient.getActiveAccount().getValidated());
+    assertEquals(createdRecipient.getActiveAccount().getValidated(),
+        retrievedRecipient.getActiveAccount().getValidated());
   }
 
   @Test
@@ -70,11 +71,14 @@ public class RecipientTest extends BaseStripeFunctionalTest {
     Map<String, Object> updateParams = new HashMap<String, Object>();
     updateParams.put("default_card", addedCard.getId());
     Recipient recipientAfterDefaultCardUpdate = updatedRecipient.update(updateParams);
-    assertEquals((Integer) recipientAfterDefaultCardUpdate.getCards().getData().size(), (Integer) 3);
+    assertEquals((Integer) recipientAfterDefaultCardUpdate.getCards().getData().size(),
+        (Integer) 3);
     assertEquals(recipientAfterDefaultCardUpdate.getDefaultCard(), addedCard.getId());
 
-    assertEquals(recipientAfterDefaultCardUpdate.getCards().retrieve(originalDefaultCard).getId(), originalDefaultCard);
-    assertEquals(recipientAfterDefaultCardUpdate.getCards().retrieve(addedCard.getId()).getId(), addedCard.getId());
+    assertEquals(recipientAfterDefaultCardUpdate.getCards().retrieve(originalDefaultCard).getId(),
+        originalDefaultCard);
+    assertEquals(recipientAfterDefaultCardUpdate.getCards().retrieve(addedCard.getId()).getId(),
+        addedCard.getId());
   }
 
   @Test
@@ -101,7 +105,8 @@ public class RecipientTest extends BaseStripeFunctionalTest {
     assertTrue(deletedCard.getDeleted());
     assertEquals(deletedCard.getId(), card.getId());
     for (Card retrievedCard : retrievedRecipient.getCards().getData()) {
-      assertFalse("Card was not actually deleted: " + card.getId(), card.getId().equals(retrievedCard.getId()));
+      assertFalse("Card was not actually deleted: " + card.getId(),
+          card.getId().equals(retrievedCard.getId()));
     }
   }
 

@@ -241,10 +241,11 @@ public class Dispute extends APIResource implements HasId {
     return retrieve(id, null, options);
   }
 
-  public static Dispute retrieve(String id, Map<String, Object> params, RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return request(RequestMethod.GET, instanceURL(Dispute.class, id), params, Dispute.class, options);
+  public static Dispute retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
+    return request(RequestMethod.GET, instanceURL(Dispute.class, id), params, Dispute.class,
+        options);
   }
 
   public static DisputeCollection list(Map<String, Object> params) throws AuthenticationException,
@@ -253,9 +254,9 @@ public class Dispute extends APIResource implements HasId {
     return list(params, null);
   }
 
-  public static DisputeCollection list(Map<String, Object> params, RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+  public static DisputeCollection list(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
     return requestCollection(classURL(Dispute.class), params, DisputeCollection.class, options);
   }
 
@@ -267,9 +268,9 @@ public class Dispute extends APIResource implements HasId {
   }
 
   @Deprecated
-  public static DisputeCollection all(Map<String, Object> params, RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+  public static DisputeCollection all(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
     return list(params, options);
   }
 
@@ -295,7 +296,8 @@ public class Dispute extends APIResource implements HasId {
   public Dispute close(RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, String.format("%s/close", instanceURL(Dispute.class, this.getId())),
+    return request(RequestMethod.POST,
+        String.format("%s/close", instanceURL(Dispute.class, this.getId())),
         null, Dispute.class, options);
   }
 }

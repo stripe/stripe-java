@@ -111,22 +111,27 @@ public class BankAccount extends ExternalAccount {
   }
 
   public BankAccount update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
     return update(params, null);
   }
 
   public BankAccount update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
     return request(RequestMethod.POST, this.getInstanceURL(), params, BankAccount.class, options);
   }
 
   public DeletedBankAccount delete()
-      throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
     return delete(null);
   }
 
   public DeletedBankAccount delete(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
-    return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedBankAccount.class, options);
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
+    return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedBankAccount.class,
+        options);
   }
 }

@@ -139,7 +139,8 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
   }
 
   public void setFailureBalanceTransaction(String failureBalanceTransactionID) {
-    this.failureBalanceTransaction = setExpandableFieldID(failureBalanceTransactionID, this.failureBalanceTransaction);
+    this.failureBalanceTransaction
+        = setExpandableFieldID(failureBalanceTransactionID, this.failureBalanceTransaction);
   }
 
   public BalanceTransaction getFailureBalanceTransactionObject() {
@@ -234,7 +235,8 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
   public Payout cancel(RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Payout.class, this.id) + "/cancel", null, Payout.class, options);
+    return request(RequestMethod.POST, instanceURL(Payout.class, this.id) + "/cancel", null,
+        Payout.class, options);
   }
 
   public static Payout create(Map<String, Object> params)
@@ -288,6 +290,7 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
   public Payout update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Payout.class, this.id), params, Payout.class, options);
+    return request(RequestMethod.POST, instanceURL(Payout.class, this.id), params, Payout.class,
+        options);
   }
 }

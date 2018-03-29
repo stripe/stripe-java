@@ -48,7 +48,8 @@ public class CountrySpec extends APIResource implements HasId {
     return supportedBankAccountCurrencies;
   }
 
-  public void setSupportedBankAccountCurrencies(Map<String, List<String>> supportedBankAccountCurrencies) {
+  public void setSupportedBankAccountCurrencies(
+      Map<String, List<String>> supportedBankAccountCurrencies) {
     this.supportedBankAccountCurrencies = supportedBankAccountCurrencies;
   }
 
@@ -102,6 +103,7 @@ public class CountrySpec extends APIResource implements HasId {
   public static CountrySpecCollection list(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return requestCollection(classURL(CountrySpec.class), params, CountrySpecCollection.class, options);
+    return requestCollection(classURL(CountrySpec.class), params, CountrySpecCollection.class,
+        options);
   }
 }

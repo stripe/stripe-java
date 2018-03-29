@@ -57,7 +57,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
    * URLStreamHandler; Settings the property should not be needed in most
    * environments.
    */
-  private static final String CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME = "com.stripe.net.customURLStreamHandler";
+  private static final String CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME
+      = "com.stripe.net.customURLStreamHandler";
 
   private static final SSLSocketFactory socketFactory = new StripeSSLSocketFactory();
 
@@ -67,7 +68,9 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       Map<String, Object> params,
       Class<T> clazz,
       APIResource.RequestType type,
-      RequestOptions options) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
+      RequestOptions options)
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
     return _request(method, url, params, clazz, type, options);
   }
 
@@ -454,7 +457,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   private static StripeResponse _rawRequest(
       APIResource.RequestMethod method, String url, Map<String, Object> params,
       APIResource.RequestType type, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException, APIException {
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      APIException {
     if (options == null) {
       options = RequestOptions.getDefault();
     }
@@ -485,7 +489,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       throw new AuthenticationException(
           "No API key provided. (HINT: set your API key using 'Stripe.apiKey = <API-KEY>'. "
               + "You can generate API keys from the Stripe web interface. "
-              + "See https://stripe.com/api for details or email support@stripe.com if you have questions.",
+              + "See https://stripe.com/api for details or email support@stripe.com if you have "
+              + "questions.",
           null, null, 0);
     }
 
@@ -685,17 +690,21 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
         LiveStripeResponseGetter.ErrorContainer.class).error;
     switch (rCode) {
       case 400:
-        throw new InvalidRequestException(error.message, error.param, requestId, error.code, rCode, null);
+        throw new InvalidRequestException(error.message, error.param, requestId, error.code, rCode,
+            null);
       case 404:
-        throw new InvalidRequestException(error.message, error.param, requestId, error.code, rCode, null);
+        throw new InvalidRequestException(error.message, error.param, requestId, error.code, rCode,
+            null);
       case 401:
         throw new AuthenticationException(error.message, requestId, error.code, rCode);
       case 402:
-        throw new CardException(error.message, requestId, error.code, error.param, error.decline_code, error.charge, rCode, null);
+        throw new CardException(error.message, requestId, error.code, error.param,
+            error.decline_code, error.charge, rCode, null);
       case 403:
         throw new PermissionException(error.message, requestId, error.code, rCode);
       case 429:
-        throw new RateLimitException(error.message, error.param, requestId, error.code, rCode, null);
+        throw new RateLimitException(error.message, error.param, requestId, error.code, rCode,
+            null);
       default:
         throw new APIException(error.message, requestId, error.code, rCode, null);
     }
@@ -716,7 +725,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       case "invalid_grant":
         throw new InvalidGrantException(code, description, requestId, rCode, null);
       case "invalid_request":
-        throw new com.stripe.exception.oauth.InvalidRequestException(code, description, requestId, rCode, null);
+        throw new com.stripe.exception.oauth.InvalidRequestException(code, description, requestId,
+            rCode, null);
       case "invalid_scope":
         throw new InvalidScopeException(code, description, requestId, rCode, null);
       case "unsupported_grant_type":
@@ -755,9 +765,9 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
             "validateCertificate").invoke(null);
       } catch (NoSuchMethodException e) {
         System.err
-            .println("Warning: this App Engine SDK version does not allow verification of SSL certificates;"
-                + "this exposes you to a MITM attack. Please upgrade your App Engine SDK to >=1.5.0. "
-                + "If you have questions, contact support@stripe.com.");
+            .println("Warning: this App Engine SDK version does not allow verification of SSL "
+                + "certificates; this exposes you to a MITM attack. Please upgrade your App Engine "
+                + "SDK to >=1.5.0. If you have questions, contact support@stripe.com.");
         fetchOptions = fetchOptionsBuilderClass.getDeclaredMethod(
             "withDefaults").invoke(null);
       }

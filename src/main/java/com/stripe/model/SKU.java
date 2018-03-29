@@ -198,7 +198,8 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
   public DeletedSKU delete(RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.DELETE, instanceURL(SKU.class, this.id), null, DeletedSKU.class, options);
+    return request(RequestMethod.DELETE, instanceURL(SKU.class, this.id), null, DeletedSKU.class,
+        options);
   }
 
   public static SKUCollection list(Map<String, Object> params)

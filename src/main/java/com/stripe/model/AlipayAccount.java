@@ -113,7 +113,8 @@ public class AlipayAccount extends ExternalAccount {
   public DeletedAlipayAccount delete(RequestOptions options) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
-    return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedAlipayAccount.class, options);
+    return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedAlipayAccount.class,
+        options);
   }
 }
 

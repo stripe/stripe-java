@@ -92,7 +92,8 @@ public class EphemeralKey extends APIResource implements HasId {
       throw new IllegalArgumentException("stripeVersion must be specified in RequestOptions");
     }
 
-    return request(RequestMethod.POST, classURL(EphemeralKey.class), params, EphemeralKey.class, options);
+    return request(RequestMethod.POST, classURL(EphemeralKey.class), params, EphemeralKey.class,
+        options);
   }
 
   public EphemeralKey delete()
@@ -104,6 +105,7 @@ public class EphemeralKey extends APIResource implements HasId {
   public EphemeralKey delete(RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.DELETE, instanceURL(EphemeralKey.class, this.id), null, EphemeralKey.class, options);
+    return request(RequestMethod.DELETE, instanceURL(EphemeralKey.class, this.id), null,
+        EphemeralKey.class, options);
   }
 }

@@ -12,7 +12,8 @@ import java.lang.reflect.Type;
 
 public class EventRequestDeserializer implements JsonDeserializer<EventRequest> {
 
-  public EventRequest deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+  public EventRequest deserialize(JsonElement json, Type typeOfT,
+      JsonDeserializationContext context)
       throws JsonParseException {
     Gson gson = new GsonBuilder()
         .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)

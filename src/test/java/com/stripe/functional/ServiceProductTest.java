@@ -19,7 +19,8 @@ public class ServiceProductTest extends BaseStripeFunctionalTest {
     assertNotNull(product.getId());
     assertEquals("service", product.getType());
     assertEquals(defaultServiceProductParams.get("name"), product.getName());
-    assertEquals(defaultServiceProductParams.get("statement_descriptor"), product.getStatementDescriptor());
+    assertEquals(defaultServiceProductParams.get("statement_descriptor"),
+        product.getStatementDescriptor());
   }
 
   @Test

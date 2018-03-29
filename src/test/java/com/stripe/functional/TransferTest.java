@@ -89,7 +89,8 @@ public class TransferTest extends BaseStripeFunctionalTest {
     Map<String, Object> transferParams = getTransferParams();
     Transfer transfer = Transfer.create(transferParams);
     HashMap<String, Object> params = new HashMap<String, Object>();
-    TransferTransactionCollection transactions = transfer.transactions(params, supportedRequestOptions);
+    TransferTransactionCollection transactions = transfer.transactions(params,
+        supportedRequestOptions);
     // Test that requestOptions and requestParams are the same in returned transactions:
     assertEquals(supportedRequestOptions, transactions.getRequestOptions());
     assertEquals(params, transactions.getRequestParams());

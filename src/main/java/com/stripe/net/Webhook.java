@@ -27,7 +27,8 @@ public final class Webhook {
    * @return the Event instance
    * @throws SignatureVerificationException if the verification fails.
    */
-  public static Event constructEvent(String payload, String sigHeader, String secret) throws SignatureVerificationException {
+  public static Event constructEvent(String payload, String sigHeader, String secret)
+      throws SignatureVerificationException {
     return constructEvent(payload, sigHeader, secret, DEFAULT_TOLERANCE);
   }
 
@@ -45,7 +46,8 @@ public final class Webhook {
    * @return the Event instance
    * @throws SignatureVerificationException if the verification fails.
    */
-  public static Event constructEvent(String payload, String sigHeader, String secret, long tolerance) throws SignatureVerificationException {
+  public static Event constructEvent(String payload, String sigHeader, String secret,
+      long tolerance) throws SignatureVerificationException {
     Event event = APIResource.GSON.fromJson(payload, Event.class);
     Signature.verifyHeader(payload, sigHeader, secret, tolerance);
     return event;
@@ -65,15 +67,18 @@ public final class Webhook {
      *                  timestamp and the current time
      * @throws SignatureVerificationException if the verification fails.
      */
-    public static boolean verifyHeader(String payload, String sigHeader, String secret, long tolerance) throws SignatureVerificationException {
+    public static boolean verifyHeader(String payload, String sigHeader, String secret,
+        long tolerance) throws SignatureVerificationException {
       // Get timestamp and signatures from header
       long timestamp = getTimestamp(sigHeader);
       List<String> signatures = getSignatures(sigHeader, EXPECTED_SCHEME);
       if (timestamp <= 0) {
-        throw new SignatureVerificationException("Unable to extract timestamp and signatures from header", sigHeader);
+        throw new SignatureVerificationException(
+            "Unable to extract timestamp and signatures from header", sigHeader);
       }
       if (signatures.size() == 0) {
-        throw new SignatureVerificationException("No signatures found with expected scheme", sigHeader);
+        throw new SignatureVerificationException("No signatures found with expected scheme",
+            sigHeader);
       }
 
       // Compute expected signature
@@ -82,7 +87,8 @@ public final class Webhook {
       try {
         expectedSignature = computeSignature(signedPayload, secret);
       } catch (Exception e) {
-        throw new SignatureVerificationException("Unable to compute signature for payload", sigHeader);
+        throw new SignatureVerificationException("Unable to compute signature for payload",
+            sigHeader);
       }
 
       // Check if expected signature is found in list of header's signatures
@@ -94,7 +100,8 @@ public final class Webhook {
         }
       }
       if (!signatureFound) {
-        throw new SignatureVerificationException("No signatures found matching the expected signature for payload", sigHeader);
+        throw new SignatureVerificationException(
+            "No signatures found matching the expected signature for payload", sigHeader);
       }
 
       // Check tolerance
@@ -154,7 +161,8 @@ public final class Webhook {
      * @param secret  the secret used to generate the signature.
      * @return the signature as a string.
      */
-    private static String computeSignature(String payload, String secret) throws UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException {
+    private static String computeSignature(String payload, String secret)
+        throws UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException {
       return Util.computeHmacSHA256(secret, payload);
     }
   }
@@ -167,7 +175,8 @@ public final class Webhook {
      * @param message the message.
      * @return the code as a string.
      */
-    public static String computeHmacSHA256(String key, String message) throws UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException {
+    public static String computeHmacSHA256(String key, String message)
+        throws UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException {
       Mac hasher = Mac.getInstance("HmacSHA256");
       hasher.init(new SecretKeySpec(key.getBytes("UTF8"), "HmacSHA256"));
       byte[] hash = hasher.doFinal(message.getBytes("UTF8"));

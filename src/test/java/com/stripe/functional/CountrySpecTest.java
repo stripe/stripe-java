@@ -38,7 +38,8 @@ public class CountrySpecTest extends BaseStripeFunctionalTest {
     assertNotSame(retrievedCountrySpec.getSupportedBankAccountCurrencies().size(), 0);
     assertNotSame(retrievedCountrySpec.getSupportedPaymentMethods().size(), 0);
 
-    List<String> countryForBankAccountInUsd = retrievedCountrySpec.getSupportedBankAccountCurrencies().get("usd");
+    List<String> countryForBankAccountInUsd
+        = retrievedCountrySpec.getSupportedBankAccountCurrencies().get("usd");
     assertNotSame(countryForBankAccountInUsd.size(), 0);
 
     VerificationFields verificationFields = retrievedCountrySpec.getVerificationFields();

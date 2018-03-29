@@ -61,9 +61,11 @@ public class ExternalAccount extends APIResource implements HasId, MetadataStore
 
   public String getInstanceURL() {
     if (this.getCustomer() != null) {
-      return String.format("%s/%s/sources/%s", classURL(Customer.class), this.getCustomer(), this.getId());
+      return String.format("%s/%s/sources/%s", classURL(Customer.class), this.getCustomer(),
+          this.getId());
     } else if (this.getAccount() != null) {
-      return String.format("%s/%s/external_accounts/%s", classURL(Account.class), this.getAccount(), this.getId());
+      return String.format("%s/%s/external_accounts/%s", classURL(Account.class), this.getAccount(),
+          this.getId());
     } else {
       return null;
     }
@@ -79,10 +81,12 @@ public class ExternalAccount extends APIResource implements HasId, MetadataStore
       AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     if (this.getCustomer() != null) {
-      return request(RequestMethod.POST, String.format("%s/verify", this.getInstanceURL()), params, ExternalAccount.class, options);
+      return request(RequestMethod.POST, String.format("%s/verify", this.getInstanceURL()), params,
+          ExternalAccount.class, options);
     } else {
-      throw new InvalidRequestException("Only customer bank accounts can be verified in this manner.",
-        null, null, null, 0, null);
+      throw new InvalidRequestException(
+          "Only customer bank accounts can be verified in this manner.",
+          null, null, null, 0, null);
     }
   }
 
@@ -95,7 +99,8 @@ public class ExternalAccount extends APIResource implements HasId, MetadataStore
   public ExternalAccount update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, this.getInstanceURL(), params, ExternalAccount.class, options);
+    return request(RequestMethod.POST, this.getInstanceURL(), params, ExternalAccount.class,
+        options);
   }
 
   public DeletedExternalAccount delete() throws AuthenticationException,
@@ -107,6 +112,7 @@ public class ExternalAccount extends APIResource implements HasId, MetadataStore
   public DeletedExternalAccount delete(RequestOptions options) throws
       AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedExternalAccount.class, options);
+    return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedExternalAccount.class,
+        options);
   }
 }

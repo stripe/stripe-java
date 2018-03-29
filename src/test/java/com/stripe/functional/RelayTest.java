@@ -42,7 +42,8 @@ public class RelayTest extends BaseStripeFunctionalTest {
     Product retrieved = Product.retrieve(id, relayRequestOptions);
     assertEquals("Watermelon", retrieved.getName());
 
-    Product updated = retrieved.update(ImmutableMap.<String, Object>of("name", "Cantelope"), relayRequestOptions);
+    Product updated = retrieved.update(ImmutableMap.<String, Object>of("name", "Cantelope"),
+        relayRequestOptions);
     assertEquals("Cantelope", updated.getName());
   }
 
@@ -77,7 +78,8 @@ public class RelayTest extends BaseStripeFunctionalTest {
     SKU retrieved = SKU.retrieve(skuId, relayRequestOptions);
     assertEquals("large", retrieved.getAttributes().get("size"));
 
-    SKU updated = retrieved.update(ImmutableMap.<String, Object>of("price", 200), relayRequestOptions);
+    SKU updated = retrieved.update(ImmutableMap.<String, Object>of("price", 200),
+        relayRequestOptions);
     assertEquals((Integer) 200, updated.getPrice());
   }
 
@@ -139,7 +141,8 @@ public class RelayTest extends BaseStripeFunctionalTest {
     SKU.create(skuCreateParams, relayRequestOptions);
 
     Map<String, Object> orderCreateParams = new HashMap<String, Object>();
-    orderCreateParams.put("items[]", ImmutableMap.<String, Object>of("type", "sku", "parent", skuId));
+    orderCreateParams.put("items[]",
+        ImmutableMap.<String, Object>of("type", "sku", "parent", skuId));
     orderCreateParams.put("currency", "usd");
     orderCreateParams.put("email", "foo@bar.com");
     Order created = Order.create(orderCreateParams, relayRequestOptions);
@@ -167,10 +170,12 @@ public class RelayTest extends BaseStripeFunctionalTest {
     assertNotNull(item);
     assertEquals("sku", item.getType());
 
-    Order updated = retrieved.update(ImmutableMap.<String, Object>of("metadata", ImmutableMap.of("foo", "bar")), relayRequestOptions);
+    Order updated = retrieved.update(ImmutableMap.<String, Object>of("metadata",
+        ImmutableMap.of("foo", "bar")), relayRequestOptions);
     assertEquals("bar", updated.getMetadata().get("foo"));
 
-    Order paid = updated.pay(ImmutableMap.<String, Object>of("source", "tok_visa"), relayRequestOptions);
+    Order paid = updated.pay(ImmutableMap.<String, Object>of("source", "tok_visa"),
+        relayRequestOptions);
     assertEquals("paid", paid.getStatus());
 
     OrderReturn returned = paid.returnOrder(null, relayRequestOptions);

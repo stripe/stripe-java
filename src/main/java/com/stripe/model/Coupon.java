@@ -150,17 +150,24 @@ public class Coupon extends APIResource implements MetadataStore<Coupon>, HasId 
     return retrieve(id, (RequestOptions) null);
   }
 
-  public Coupon update(Map<String, Object> params) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
+  public Coupon update(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
     return update(params, (RequestOptions) null);
   }
 
   @Deprecated
-  public Coupon update(Map<String, Object> params, String apiKey) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
+  public Coupon update(Map<String, Object> params, String apiKey)
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
     return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
-  public Coupon update(Map<String, Object> params, RequestOptions options) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Coupon.class, this.id), params, Coupon.class, options);
+  public Coupon update(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
+    return request(RequestMethod.POST, instanceURL(Coupon.class, this.id), params, Coupon.class,
+        options);
   }
 
   @Deprecated
@@ -238,6 +245,7 @@ public class Coupon extends APIResource implements MetadataStore<Coupon>, HasId 
   public DeletedCoupon delete(RequestOptions options) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
-    return request(RequestMethod.DELETE, instanceURL(Coupon.class, this.id), null, DeletedCoupon.class, options);
+    return request(RequestMethod.DELETE, instanceURL(Coupon.class, this.id), null,
+        DeletedCoupon.class, options);
   }
 }

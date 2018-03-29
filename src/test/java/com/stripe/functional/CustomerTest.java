@@ -61,7 +61,16 @@ public class CustomerTest extends BaseStripeFunctionalTest {
 
     Map<String, Object> params = ImmutableMap.<String, Object>builder()
         .putAll(defaultCustomerParams)
-        .put("shipping", ImmutableMap.builder().put("address", ImmutableMap.builder().put("line1", address.getLine1()).put("line2", address.getLine2()).put("city", address.getCity()).put("country", address.getCountry()).put("postal_code", address.getPostalCode()).put("state", address.getState()).build()).put("name", shippingDetails.getName()).put("phone", shippingDetails.getPhone()).build())
+        .put("shipping", ImmutableMap.builder()
+            .put("address", ImmutableMap.builder()
+                .put("line1", address.getLine1())
+                .put("line2", address.getLine2())
+                .put("city", address.getCity())
+                .put("country", address.getCountry())
+                .put("postal_code", address.getPostalCode())
+                .put("state", address.getState()).build())
+            .put("name", shippingDetails.getName())
+            .put("phone", shippingDetails.getPhone()).build())
         .build();
 
     Customer customer = Customer.create(params);
@@ -208,12 +217,17 @@ public class CustomerTest extends BaseStripeFunctionalTest {
 
     Map<String, Object> updateParams = new HashMap<String, Object>();
     updateParams.put("default_card", addedCard.getId());
-    Customer customerAfterDefaultCardUpdate = updatedCustomer.update(updateParams, supportedRequestOptions);
+    Customer customerAfterDefaultCardUpdate = updatedCustomer.update(updateParams,
+        supportedRequestOptions);
     assertEquals(3, updatedCustomer.getSources().getData().size());
     assertEquals(customerAfterDefaultCardUpdate.getDefaultSource(), addedCard.getId());
 
-    assertEquals(customerAfterDefaultCardUpdate.getSources().retrieve(originalDefaultSource).getId(), originalDefaultSource);
-    assertEquals(customerAfterDefaultCardUpdate.getSources().retrieve(addedCard.getId()).getId(), addedCard.getId());
+    assertEquals(
+        customerAfterDefaultCardUpdate.getSources().retrieve(originalDefaultSource).getId(),
+        originalDefaultSource);
+    assertEquals(
+        customerAfterDefaultCardUpdate.getSources().retrieve(addedCard.getId()).getId(),
+        addedCard.getId());
   }
 
   @Test
@@ -256,7 +270,8 @@ public class CustomerTest extends BaseStripeFunctionalTest {
     assertTrue(deletedCard.getDeleted());
     assertEquals(deletedCard.getId(), card.getId());
     for (ExternalAccount retrievedCard : retrievedCustomer.getSources().getData()) {
-      assertFalse("Card was not actually deleted: " + card.getId(), card.getId().equals(retrievedCard.getId()));
+      assertFalse("Card was not actually deleted: " + card.getId(),
+          card.getId().equals(retrievedCard.getId()));
     }
   }
 
@@ -277,8 +292,10 @@ public class CustomerTest extends BaseStripeFunctionalTest {
 
     Map<String, Object> updateParams = new HashMap<String, Object>();
     updateParams.put("default_source", addedBankAccount.getId());
-    Customer customerAfterDefaultSourceUpdate = updatedCustomer.update(updateParams, supportedRequestOptions);
-    assertEquals((Integer) customerAfterDefaultSourceUpdate.getSources().getData().size(), (Integer) 3);
+    Customer customerAfterDefaultSourceUpdate
+        = updatedCustomer.update(updateParams, supportedRequestOptions);
+    assertEquals((Integer) customerAfterDefaultSourceUpdate.getSources().getData().size(),
+        (Integer) 3);
     assertEquals(customerAfterDefaultSourceUpdate.getDefaultSource(), addedBankAccount.getId());
   }
 

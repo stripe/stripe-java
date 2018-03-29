@@ -72,7 +72,8 @@ public class TransferReversalCollection extends StripeCollection<Reversal> {
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
-    return APIResource.request(APIResource.RequestMethod.POST, url, params, Reversal.class, options);
+    return APIResource.request(APIResource.RequestMethod.POST, url, params, Reversal.class,
+        options);
   }
 }
 

@@ -31,7 +31,8 @@ import java.util.Map;
  * }
  * </pre>
  */
-public abstract class StripeCollection<T extends HasId> extends StripeObject implements StripeCollectionInterface<T> {
+public abstract class StripeCollection<T extends HasId> extends StripeObject
+    implements StripeCollectionInterface<T> {
   List<T> data;
   Integer totalCount;
   Boolean hasMore;
