@@ -306,18 +306,21 @@ public class Card extends ExternalAccount {
   }
 
   public DeletedCard delete()
-      throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
     return delete((RequestOptions) null);
   }
 
   @Deprecated
   public DeletedCard delete(String apiKey)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
     return delete(RequestOptions.builder().setApiKey(apiKey).build());
   }
 
   public DeletedCard delete(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
     return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedCard.class, options);
   }
 
@@ -327,7 +330,8 @@ public class Card extends ExternalAccount {
     if (result != null) {
       return result;
     } else if (this.getRecipient() != null) {
-      return String.format("%s/%s/cards/%s", classURL(Recipient.class), this.getRecipient(), this.getId());
+      return String.format("%s/%s/cards/%s", classURL(Recipient.class), this.getRecipient(),
+          this.getId());
     } else {
       return null;
     }

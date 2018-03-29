@@ -35,7 +35,9 @@ import org.junit.Test;
 
 public class DisputeTest extends BaseStripeFunctionalTest {
 
-  private Charge createDisputedCharge(int chargeValueCents, RequestOptions options) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException, InterruptedException {
+  private Charge createDisputedCharge(int chargeValueCents, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException, InterruptedException {
     Map<String, Object> chargeParams = new HashMap<String, Object>();
     chargeParams.putAll(defaultChargeParams);
     chargeParams.put("amount", chargeValueCents);
@@ -164,7 +166,9 @@ public class DisputeTest extends BaseStripeFunctionalTest {
     assertEquals(expected, charge.getFraudDetails());
     Charge refundedCharge = charge.refund();
     assertEquals(expected, refundedCharge.getFraudDetails());
-    Charge updatedCharge = charge.update(ImmutableMap.<String, Object>of("fraud_details", ImmutableMap.of("user_report", "fraudulent")));
+    Charge updatedCharge = charge.update(
+        ImmutableMap.<String, Object>of("fraud_details",
+            ImmutableMap.of("user_report", "fraudulent")));
     FraudDetails expectedReported = new FraudDetails();
     expectedReported.setUserReport("fraudulent");
     assertEquals(expectedReported, updatedCharge.getFraudDetails());
@@ -222,7 +226,8 @@ public class DisputeTest extends BaseStripeFunctionalTest {
     evidenceHashParams.put("product_description", "my productDescription");
     evidenceHashParams.put("customer_name", "my customerName");
     evidenceHashParams.put("uncategorized_text", "my uncategorizedText");
-    Map<String, Object> providedEvidenceParams = ImmutableMap.<String, Object>of("evidence", evidenceHashParams);
+    Map<String, Object> providedEvidenceParams
+        = ImmutableMap.<String, Object>of("evidence", evidenceHashParams);
 
     Dispute updatedDispute = disputedCharge.updateDispute(providedEvidenceParams);
     assertNotNull(updatedDispute);

@@ -25,7 +25,8 @@ public class OrderItemDeserializer implements JsonDeserializer<OrderItem> {
   }
 
   @Override
-  public OrderItem deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+  public OrderItem deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+      throws JsonParseException {
     Gson gson = new GsonBuilder()
         .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
         .create();
@@ -51,7 +52,8 @@ public class OrderItemDeserializer implements JsonDeserializer<OrderItem> {
     if (parent.isJsonPrimitive()) {
       JsonPrimitive parentJsonPrimitive = parent.getAsJsonPrimitive();
       if (!parentJsonPrimitive.isString()) {
-        throw new JsonParseException("parent field on an order item was a primitive non-string type.");
+        throw new JsonParseException(
+            "parent field on an order item was a primitive non-string type.");
       }
       parentId = parentJsonPrimitive.getAsString();
     } else if (parent.isJsonObject()) {
@@ -68,7 +70,8 @@ public class OrderItemDeserializer implements JsonDeserializer<OrderItem> {
         }
       }
     } else if (!parent.isJsonNull()) {
-      throw new JsonParseException("parent field on an order item was a non-primitive, non-object type.");
+      throw new JsonParseException(
+          "parent field on an order item was a non-primitive, non-object type.");
     }
 
     orderItem.setParent(parentId);

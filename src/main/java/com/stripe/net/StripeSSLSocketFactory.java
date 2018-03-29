@@ -75,7 +75,8 @@ public class StripeSSLSocketFactory extends SSLSocketFactory {
   }
 
   @Override
-  public Socket createSocket(Socket s, String host, int port, boolean autoClose) throws IOException {
+  public Socket createSocket(Socket s, String host, int port, boolean autoClose)
+      throws IOException {
     return fixupSocket(this.under.createSocket(s, host, port, autoClose));
   }
 
@@ -85,7 +86,8 @@ public class StripeSSLSocketFactory extends SSLSocketFactory {
   }
 
   @Override
-  public Socket createSocket(String host, int port, InetAddress localHost, int localPort) throws IOException {
+  public Socket createSocket(String host, int port, InetAddress localHost, int localPort)
+      throws IOException {
     return fixupSocket(this.under.createSocket(host, port, localHost, localPort));
   }
 
@@ -95,7 +97,8 @@ public class StripeSSLSocketFactory extends SSLSocketFactory {
   }
 
   @Override
-  public Socket createSocket(InetAddress address, int port, InetAddress localAddress, int localPort) throws IOException {
+  public Socket createSocket(InetAddress address, int port, InetAddress localAddress, int localPort)
+      throws IOException {
     return fixupSocket(this.under.createSocket(address, port, localAddress, localPort));
   }
 }

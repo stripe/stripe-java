@@ -16,7 +16,9 @@ public interface StripeResponseGetter {
       Map<String, Object> params,
       Class<T> clazz,
       APIResource.RequestType type,
-      RequestOptions options) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException;
+      RequestOptions options)
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException;
 
   <T> T oAuthRequest(
       APIResource.RequestMethod method,

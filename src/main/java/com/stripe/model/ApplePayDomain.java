@@ -91,7 +91,8 @@ public class ApplePayDomain extends APIResource implements HasId {
   public DeletedApplePayDomain delete(RequestOptions options) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
-    return request(RequestMethod.DELETE, getInstanceURL(id), null, DeletedApplePayDomain.class, options);
+    return request(RequestMethod.DELETE, getInstanceURL(id), null, DeletedApplePayDomain.class,
+        options);
   }
 
   public static ApplePayDomainCollection list(Map<String, Object> params)

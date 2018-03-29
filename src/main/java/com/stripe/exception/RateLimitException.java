@@ -8,11 +8,13 @@ public class RateLimitException extends InvalidRequestException {
    */
   @Deprecated
   // TODO: remove this constructor in next major version bump
-  public RateLimitException(String message, String param, String requestId, Integer statusCode, Throwable e) {
+  public RateLimitException(String message, String param, String requestId, Integer statusCode,
+      Throwable e) {
     this(message, param, null, requestId, statusCode, e);
   }
 
-  public RateLimitException(String message, String param, String requestId, String code, Integer statusCode, Throwable e) {
+  public RateLimitException(String message, String param, String requestId, String code,
+      Integer statusCode, Throwable e) {
     super(message, param, code, requestId, statusCode, e);
   }
 }

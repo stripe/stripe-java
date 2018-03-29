@@ -206,12 +206,15 @@ public class Topup extends APIResource implements MetadataStore<Topup>, HasId {
   }
 
   @Override
-  public Topup update(Map<String, Object> params) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
+  public Topup update(Map<String, Object> params) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException, APIException {
     return update(params, null);
   }
 
   @Override
-  public Topup update(Map<String, Object> params, RequestOptions options) throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
+  public Topup update(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
     return request(RequestMethod.POST, instanceURL(Topup.class, id), params, Topup.class, options);
   }
 }

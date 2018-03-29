@@ -29,7 +29,8 @@ public abstract class StripeException extends Exception {
     this(message, requestId, code, statusCode, null);
   }
 
-  public StripeException(String message, String requestId, String code, Integer statusCode, Throwable e) {
+  public StripeException(String message, String requestId, String code, Integer statusCode,
+      Throwable e) {
     super(message, e);
     this.code = code;
     this.requestId = requestId;

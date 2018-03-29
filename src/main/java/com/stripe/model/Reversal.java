@@ -129,7 +129,8 @@ public class Reversal extends APIResource implements MetadataStore<Transfer>, Ha
 
   public String getInstanceURL() {
     if (this.transfer != null) {
-      return String.format("%s/%s/reversals/%s", classURL(Transfer.class), this.transfer, this.getId());
+      return String.format("%s/%s/reversals/%s", classURL(Transfer.class), this.transfer,
+          this.getId());
     }
     return null;
   }

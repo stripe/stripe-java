@@ -88,6 +88,7 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
-    return APIResource.request(APIResource.RequestMethod.POST, url, params, FeeRefund.class, options);
+    return APIResource.request(APIResource.RequestMethod.POST, url, params, FeeRefund.class,
+        options);
   }
 }

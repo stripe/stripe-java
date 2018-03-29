@@ -20,13 +20,18 @@ public class ExternalAccountTypeAdapterFactory implements TypeAdapterFactory {
     final String SOURCE_OBJECT_PROP = "object";
 
     final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
-    final TypeAdapter<ExternalAccount> externalAccountAdapter = gson.getDelegateAdapter(this, TypeToken.get(ExternalAccount.class));
+    final TypeAdapter<ExternalAccount> externalAccountAdapter
+        = gson.getDelegateAdapter(this, TypeToken.get(ExternalAccount.class));
 
-    final TypeAdapter<AlipayAccount> alipayAccountAdapter = gson.getDelegateAdapter(this, TypeToken.get(AlipayAccount.class));
-    final TypeAdapter<BankAccount> bankAccountAdapter = gson.getDelegateAdapter(this, TypeToken.get(BankAccount.class));
-    final TypeAdapter<BitcoinReceiver> bitcoinReceiverAdapter = gson.getDelegateAdapter(this, TypeToken.get(BitcoinReceiver.class));
+    final TypeAdapter<AlipayAccount> alipayAccountAdapter
+        = gson.getDelegateAdapter(this, TypeToken.get(AlipayAccount.class));
+    final TypeAdapter<BankAccount> bankAccountAdapter
+        = gson.getDelegateAdapter(this, TypeToken.get(BankAccount.class));
+    final TypeAdapter<BitcoinReceiver> bitcoinReceiverAdapter
+        = gson.getDelegateAdapter(this, TypeToken.get(BitcoinReceiver.class));
     final TypeAdapter<Card> cardAdapter = gson.getDelegateAdapter(this, TypeToken.get(Card.class));
-    final TypeAdapter<Source> sourceAdapter = gson.getDelegateAdapter(this, TypeToken.get(Source.class));
+    final TypeAdapter<Source> sourceAdapter
+        = gson.getDelegateAdapter(this, TypeToken.get(Source.class));
 
     TypeAdapter<ExternalAccount> result = new TypeAdapter<ExternalAccount>() {
       public void write(JsonWriter out, ExternalAccount value) throws IOException {

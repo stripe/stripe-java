@@ -81,7 +81,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     return alternateStatementDescriptors;
   }
 
-  public void setAlternateStatementDescriptors(AlternateStatementDescriptors alternateStatementDescriptors) {
+  public void setAlternateStatementDescriptors(
+      AlternateStatementDescriptors alternateStatementDescriptors) {
     this.alternateStatementDescriptors = alternateStatementDescriptors;
   }
 
@@ -651,7 +652,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   public Charge update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Charge.class, id), params, Charge.class, options);
+    return request(RequestMethod.POST, instanceURL(Charge.class, id), params, Charge.class,
+        options);
   }
 
   public static ChargeCollection list(Map<String, Object> params)
@@ -752,7 +754,9 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   public Dispute updateDispute(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, String.format("%s/dispute", instanceURL(Charge.class, this.id)), params, Dispute.class, options);
+    return request(RequestMethod.POST,
+        String.format("%s/dispute", instanceURL(Charge.class, this.id)), params, Dispute.class,
+        options);
   }
 
   @Deprecated
@@ -766,7 +770,9 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   public Dispute closeDispute(RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, String.format("%s/dispute/close", instanceURL(Charge.class, this.getId())), null, Dispute.class, options);
+    return request(RequestMethod.POST,
+        String.format("%s/dispute/close", instanceURL(Charge.class, this.getId())), null,
+        Dispute.class, options);
   }
 
   /**
@@ -775,7 +781,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   public Charge markFraudulent(RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    Map<String, Object> params = Collections.<String, Object>singletonMap(FRAUD_DETAILS, Collections.singletonMap(FraudDetails.USER_REPORT, "fraudulent"));
+    Map<String, Object> params = Collections.<String, Object>singletonMap(
+        FRAUD_DETAILS, Collections.singletonMap(FraudDetails.USER_REPORT, "fraudulent"));
     return this.update(params, options);
   }
 
@@ -785,7 +792,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   public Charge markSafe(RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    Map<String, Object> params = Collections.<String, Object>singletonMap(FRAUD_DETAILS, Collections.singletonMap(FraudDetails.USER_REPORT, "safe"));
+    Map<String, Object> params = Collections.<String, Object>singletonMap(
+        FRAUD_DETAILS, Collections.singletonMap(FraudDetails.USER_REPORT, "safe"));
     return this.update(params, options);
   }
 }

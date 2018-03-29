@@ -12,7 +12,8 @@ public class APIException extends StripeException {
     this(message, requestId, null, statusCode, e);
   }
 
-  public APIException(String message, String requestId, String code, Integer statusCode, Throwable e) {
+  public APIException(String message, String requestId, String code, Integer statusCode,
+      Throwable e) {
     super(message, requestId, code, statusCode, e);
   }
 }

@@ -4,7 +4,8 @@ import com.stripe.Stripe;
 
 public class RequestOptions {
   public static RequestOptions getDefault() {
-    return new RequestOptions(Stripe.apiKey, Stripe.clientId, Stripe.apiVersion, null, null, Stripe.getConnectTimeout(), Stripe.getReadTimeout());
+    return new RequestOptions(Stripe.apiKey, Stripe.clientId, Stripe.apiVersion, null, null,
+        Stripe.getConnectTimeout(), Stripe.getReadTimeout());
   }
 
   private final String apiKey;
@@ -15,7 +16,8 @@ public class RequestOptions {
   private final int connectTimeout;
   private final int readTimeout;
 
-  private RequestOptions(String apiKey, String clientId, String stripeVersion, String idempotencyKey, String stripeAccount, int connectTimeout, int readTimeout) {
+  private RequestOptions(String apiKey, String clientId, String stripeVersion,
+      String idempotencyKey, String stripeAccount, int connectTimeout, int readTimeout) {
     this.apiKey = apiKey;
     this.clientId = clientId;
     this.stripeVersion = stripeVersion;
@@ -66,10 +68,12 @@ public class RequestOptions {
     if (clientId != null ? !clientId.equals(that.clientId) : that.clientId != null) {
       return false;
     }
-    if (idempotencyKey != null ? !idempotencyKey.equals(that.idempotencyKey) : that.idempotencyKey != null) {
+    if (idempotencyKey != null ? !idempotencyKey.equals(that.idempotencyKey)
+        : that.idempotencyKey != null) {
       return false;
     }
-    if (stripeVersion != null ? !stripeVersion.equals(that.stripeVersion) : that.stripeVersion != null) {
+    if (stripeVersion != null ? !stripeVersion.equals(that.stripeVersion)
+        : that.stripeVersion != null) {
       return false;
     }
 
@@ -96,7 +100,8 @@ public class RequestOptions {
   }
 
   public RequestOptionsBuilder toBuilder() {
-    return new RequestOptionsBuilder().setApiKey(this.apiKey).setStripeVersion(this.stripeVersion).setStripeAccount(this.stripeAccount);
+    return new RequestOptionsBuilder().setApiKey(this.apiKey).setStripeVersion(this.stripeVersion)
+        .setStripeAccount(this.stripeAccount);
   }
 
   public static final class RequestOptionsBuilder {
@@ -260,7 +265,9 @@ public class RequestOptions {
       throw new InvalidRequestOptionsException("Empty Idempotency Key Specified!");
     }
     if (normalized.length() > 255) {
-      throw new InvalidRequestOptionsException(String.format("Idempotency Key length was %d, which is larger than the 255 character maximum!", normalized.length()));
+      throw new InvalidRequestOptionsException(
+          String.format("Idempotency Key length was %d, which is larger than the 255 character "
+              + "maximum!", normalized.length()));
     }
     return normalized;
   }

@@ -207,13 +207,15 @@ public class BitcoinReceiver extends ExternalAccount {
   public static BitcoinReceiver create(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, String.format("%s/%s", Stripe.getApiBase(), "v1/bitcoin/receivers"), params, BitcoinReceiver.class, options);
+    return request(RequestMethod.POST, String.format("%s/%s", Stripe.getApiBase(),
+        "v1/bitcoin/receivers"), params, BitcoinReceiver.class, options);
   }
 
   public static BitcoinReceiver retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, String.format("%s/%s/%s", Stripe.getApiBase(), "v1/bitcoin/receivers", id), null, BitcoinReceiver.class, options);
+    return request(RequestMethod.GET, String.format("%s/%s/%s", Stripe.getApiBase(),
+        "v1/bitcoin/receivers", id), null, BitcoinReceiver.class, options);
   }
 
   public static BitcoinReceiverCollection list(Map<String, Object> params)
@@ -264,7 +266,8 @@ public class BitcoinReceiver extends ExternalAccount {
   public BitcoinReceiver update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, this.getInstanceURL(), params, BitcoinReceiver.class, options);
+    return request(RequestMethod.POST, this.getInstanceURL(), params, BitcoinReceiver.class,
+        options);
   }
 
   @Override
@@ -278,6 +281,7 @@ public class BitcoinReceiver extends ExternalAccount {
   public DeletedBitcoinReceiver delete(RequestOptions options) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
-    return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedBitcoinReceiver.class, options);
+    return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedBitcoinReceiver.class,
+        options);
   }
 }

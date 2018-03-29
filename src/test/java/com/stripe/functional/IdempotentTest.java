@@ -18,7 +18,8 @@ import org.junit.Test;
 
 public class IdempotentTest extends BaseStripeFunctionalTest {
   @Test
-  public void testIdempotentRequestSent() throws CardException, APIException, AuthenticationException, InvalidRequestException, APIConnectionException {
+  public void testIdempotentRequestSent() throws CardException, APIException,
+      AuthenticationException, InvalidRequestException, APIConnectionException {
     RequestOptions options = RequestOptions.builder()
         .setIdempotencyKey(UUID.randomUUID().toString())
         .build();
@@ -30,7 +31,8 @@ public class IdempotentTest extends BaseStripeFunctionalTest {
   }
 
   @Test
-  public void testNotIdempotentWhenUnset() throws CardException, APIException, AuthenticationException, InvalidRequestException, APIConnectionException {
+  public void testNotIdempotentWhenUnset() throws CardException, APIException,
+      AuthenticationException, InvalidRequestException, APIConnectionException {
     RequestOptions options = RequestOptions.builder().build();
 
     Charge firstCharge = Charge.create(defaultChargeParams, options);
@@ -40,7 +42,8 @@ public class IdempotentTest extends BaseStripeFunctionalTest {
   }
 
   @Test
-  public void testClearingIdempotentcyActuallyWorks() throws CardException, APIException, AuthenticationException, InvalidRequestException, APIConnectionException {
+  public void testClearingIdempotentcyActuallyWorks() throws CardException, APIException,
+      AuthenticationException, InvalidRequestException, APIConnectionException {
     RequestOptions options = RequestOptions.builder()
         .setIdempotencyKey(UUID.randomUUID().toString())
         .clearIdempotencyKey()
@@ -53,7 +56,8 @@ public class IdempotentTest extends BaseStripeFunctionalTest {
   }
 
   @Test
-  public void testDefaultOptionsHaveUnsetIdempotentRequest() throws CardException, APIException, AuthenticationException, InvalidRequestException, APIConnectionException {
+  public void testDefaultOptionsHaveUnsetIdempotentRequest() throws CardException, APIException,
+      AuthenticationException, InvalidRequestException, APIConnectionException {
     RequestOptions options = RequestOptions.getDefault();
 
     Charge firstCharge = Charge.create(defaultChargeParams, options);

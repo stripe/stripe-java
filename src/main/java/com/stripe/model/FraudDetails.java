@@ -36,7 +36,8 @@ public class FraudDetails extends StripeObject {
 
     FraudDetails that = (FraudDetails) o;
 
-    if (stripeReport != null ? !stripeReport.equals(that.stripeReport) : that.stripeReport != null) {
+    if (stripeReport != null ? !stripeReport.equals(that.stripeReport)
+        : that.stripeReport != null) {
       return false;
     }
     return userReport != null ? userReport.equals(that.userReport) : that.userReport == null;

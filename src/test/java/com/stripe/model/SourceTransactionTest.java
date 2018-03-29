@@ -31,9 +31,11 @@ public class SourceTransactionTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws StripeException, IOException {
     String json = resource("source_transactions.json");
-    SourceTransactionCollection transactions = APIResource.GSON.fromJson(json, SourceTransactionCollection.class);
+    SourceTransactionCollection transactions = APIResource.GSON.fromJson(json,
+        SourceTransactionCollection.class);
 
-    assertEquals("/v1/sources/src_1B4r6OKCFFPkgtRhm5thdA7S/source_transactions", transactions.getURL());
+    assertEquals("/v1/sources/src_1B4r6OKCFFPkgtRhm5thdA7S/source_transactions",
+        transactions.getURL());
     assertEquals(1, transactions.getData().size());
 
     SourceTransaction transaction = transactions.getData().get(0);
@@ -63,7 +65,8 @@ public class SourceTransactionTest extends BaseStripeTest {
 
     source.sourceTransactions(params);
 
-    verifyGet(SourceTransactionCollection.class, "https://api.stripe.com/v1/sources/src_foo/source_transactions", params);
+    verifyGet(SourceTransactionCollection.class,
+        "https://api.stripe.com/v1/sources/src_foo/source_transactions", params);
     verifyNoMoreInteractions(networkMock);
   }
 }

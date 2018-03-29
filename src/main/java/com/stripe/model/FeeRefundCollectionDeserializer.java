@@ -19,14 +19,16 @@ public class FeeRefundCollectionDeserializer implements JsonDeserializer<FeeRefu
   public static final Type REFUND_LIST_TYPE = new TypeToken<List<FeeRefund>>() {
   }.getType();
 
-  public FeeRefundCollection deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+  public FeeRefundCollection deserialize(JsonElement json, Type typeOfT,
+      JsonDeserializationContext context)
       throws JsonParseException {
     Gson gson = new GsonBuilder()
         .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
         .registerTypeAdapter(ExpandableField.class, new ExpandableFieldDeserializer())
         .create();
 
-    // API versions 2014-07-26 and earlier render application fee refunds as an array instead of an object
+    // API versions 2014-07-26 and earlier render application fee refunds as an array instead of an
+    // object
     if (json.isJsonArray()) {
       List<FeeRefund> refunds = gson.fromJson(json, REFUND_LIST_TYPE);
       FeeRefundCollection collection = new FeeRefundCollection();

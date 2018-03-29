@@ -8,7 +8,8 @@ import com.google.gson.JsonSerializer;
 import java.lang.reflect.Type;
 
 public class ExpandableFieldSerializer implements JsonSerializer<ExpandableField> {
-  public JsonElement serialize(ExpandableField src, Type typeOfSrc, JsonSerializationContext context) {
+  public JsonElement serialize(ExpandableField src, Type typeOfSrc,
+      JsonSerializationContext context) {
     if (src.isExpanded()) {
       return context.serialize(src.getExpanded());
     } else if (src.getId() != null) {

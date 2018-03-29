@@ -41,13 +41,15 @@ public class OAuthTest extends BaseStripeTest {
     String[] pairs = query.split("&");
     for (String pair : pairs) {
       int idx = pair.indexOf("=");
-      queryPairs.put(URLDecoder.decode(pair.substring(0, idx), "UTF8"), URLDecoder.decode(pair.substring(idx + 1), "UTF8"));
+      queryPairs.put(URLDecoder.decode(pair.substring(0, idx), "UTF8"),
+          URLDecoder.decode(pair.substring(idx + 1), "UTF8"));
     }
     return queryPairs;
   }
 
   @Test
-  public void testAuthorizeURL() throws AuthenticationException, InvalidRequestException, MalformedURLException, UnsupportedEncodingException {
+  public void testAuthorizeURL() throws AuthenticationException, InvalidRequestException,
+      MalformedURLException, UnsupportedEncodingException {
     Map<String, Object> urlParams = new HashMap<String, Object>();
     urlParams.put("scope", "read_write");
     urlParams.put("state", "csrf_token");

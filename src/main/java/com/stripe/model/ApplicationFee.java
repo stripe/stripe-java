@@ -181,7 +181,8 @@ public class ApplicationFee extends APIResource implements HasId {
   }
 
   public void setOriginatingTransaction(String originatingTransactionID) {
-    this.originatingTransaction = setExpandableFieldID(originatingTransactionID, this.originatingTransaction);
+    this.originatingTransaction
+        = setExpandableFieldID(originatingTransactionID, this.originatingTransaction);
   }
 
   public Charge getOriginatingTransactionObject() {
@@ -245,7 +246,8 @@ public class ApplicationFee extends APIResource implements HasId {
   public static ApplicationFee retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(ApplicationFee.class, id), null, ApplicationFee.class, options);
+    return request(RequestMethod.GET, instanceURL(ApplicationFee.class, id), null,
+        ApplicationFee.class, options);
   }
 
   public static ApplicationFeeCollection list(Map<String, Object> params)
@@ -257,7 +259,8 @@ public class ApplicationFee extends APIResource implements HasId {
   public static ApplicationFeeCollection list(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return requestCollection(classURL(ApplicationFee.class), params, ApplicationFeeCollection.class, options);
+    return requestCollection(classURL(ApplicationFee.class), params, ApplicationFeeCollection.class,
+        options);
   }
 
   @Deprecated

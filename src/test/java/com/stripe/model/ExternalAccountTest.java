@@ -53,7 +53,8 @@ public class ExternalAccountTest extends BaseStripeTest {
     verifyGet(Customer.class, "https://api.stripe.com/v1/customers/cus_123");
     ExternalAccount ea = cus.getSources().getData().get(0);
 
-    stubNetwork(DeletedExternalAccount.class, "{\"id\": \"extacct_123\", \"object\": \"unknown_external_account\"}");
+    stubNetwork(DeletedExternalAccount.class,
+        "{\"id\": \"extacct_123\", \"object\": \"unknown_external_account\"}");
     ea.delete();
     verifyRequest(
         APIResource.RequestMethod.DELETE,
@@ -72,7 +73,8 @@ public class ExternalAccountTest extends BaseStripeTest {
 
     assertEquals(true, bankAccount instanceof ExternalAccount);
 
-    stubNetwork(ExternalAccount.class, "{\"id\": \"extacct_123\", \"object\": \"unknown_external_account\"}");
+    stubNetwork(ExternalAccount.class,
+        "{\"id\": \"extacct_123\", \"object\": \"unknown_external_account\"}");
 
     Map params = new HashMap<String, Object>();
     Integer[] amounts = {32, 45};

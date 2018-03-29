@@ -243,7 +243,8 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
   public Plan update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Plan.class, this.id), params, Plan.class, options);
+    return request(RequestMethod.POST, instanceURL(Plan.class, this.id), params, Plan.class,
+        options);
   }
 
   public static PlanCollection list(Map<String, Object> params)
@@ -289,6 +290,7 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
   public DeletedPlan delete(RequestOptions options) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
-    return request(RequestMethod.DELETE, instanceURL(Plan.class, this.id), null, DeletedPlan.class, options);
+    return request(RequestMethod.DELETE, instanceURL(Plan.class, this.id), null, DeletedPlan.class,
+        options);
   }
 }

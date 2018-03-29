@@ -23,7 +23,8 @@ public class CustomerSubscriptionCollection extends StripeCollection<Subscriptio
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
-    return APIResource.requestCollection(url, params, CustomerSubscriptionCollection.class, options);
+    return APIResource.requestCollection(url, params, CustomerSubscriptionCollection.class,
+        options);
   }
 
   @Deprecated
@@ -66,7 +67,8 @@ public class CustomerSubscriptionCollection extends StripeCollection<Subscriptio
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
     String url = String.format("%s%s/%s", Stripe.getApiBase(), this.getURL(), id);
-    return APIResource.request(APIResource.RequestMethod.GET, url, null, Subscription.class, options);
+    return APIResource.request(APIResource.RequestMethod.GET, url, null, Subscription.class,
+        options);
   }
 
   public Subscription create(Map<String, Object> params)
@@ -88,6 +90,7 @@ public class CustomerSubscriptionCollection extends StripeCollection<Subscriptio
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
-    return APIResource.request(APIResource.RequestMethod.POST, url, params, Subscription.class, options);
+    return APIResource.request(APIResource.RequestMethod.POST, url, params, Subscription.class,
+        options);
   }
 }

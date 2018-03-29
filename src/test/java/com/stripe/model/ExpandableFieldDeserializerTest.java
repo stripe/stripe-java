@@ -32,18 +32,20 @@ public class ExpandableFieldDeserializerTest extends BaseStripeTest {
   @Test
   public void deserializeNull() throws IOException {
     String json = gson.toJson(null);
-    //Gson also uses TypeTokens internally to get around Type Erasure for generic types, simulate that here:
-    ExpandableField out = gson.fromJson(json, new TypeToken<ExpandableField<TestObject>>() {
-    }.getType());
+    // Gson also uses TypeTokens internally to get around Type Erasure for generic types, simulate
+    // that here:
+    ExpandableField out = gson.fromJson(json,
+        new TypeToken<ExpandableField<TestObject>>() {}.getType());
     assertNull(out);
   }
 
   @Test
   public void deserializeString() throws IOException {
     String json = gson.toJson("just_an_id");
-    //Gson also uses TypeTokens internally to get around Type Erasure for generic types, simulate that here:
-    ExpandableField out = gson.fromJson(json, new TypeToken<ExpandableField<TestObject>>() {
-    }.getType());
+    // Gson also uses TypeTokens internally to get around Type Erasure for generic types, simulate
+    // that here:
+    ExpandableField out = gson.fromJson(json,
+        new TypeToken<ExpandableField<TestObject>>() {}.getType());
     assertEquals(out.getId(), "just_an_id");
     assertFalse(out.isExpanded());
   }
@@ -55,9 +57,10 @@ public class ExpandableFieldDeserializerTest extends BaseStripeTest {
     anObject.put("bar", 12);
     String json = gson.toJson(anObject);
 
-    //Gson also uses TypeTokens internally to get around Type Erasure for generic types, simulate that here:
-    ExpandableField<TestObject> out = gson.fromJson(json, new TypeToken<ExpandableField<TestObject>>() {
-    }.getType());
+    // Gson also uses TypeTokens internally to get around Type Erasure for generic types, simulate
+    // that here:
+    ExpandableField<TestObject> out = gson.fromJson(json,
+        new TypeToken<ExpandableField<TestObject>>() {}.getType());
     assertEquals(out.getId(), "an_id_here");
     assertEquals(out.getExpanded().id, "an_id_here");
     assertEquals(out.getExpanded().bar, 12);

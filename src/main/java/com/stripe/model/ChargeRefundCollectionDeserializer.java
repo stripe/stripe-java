@@ -14,9 +14,11 @@ import com.stripe.model.ExpandableFieldDeserializer;
 import java.lang.reflect.Type;
 import java.util.List;
 
-public class ChargeRefundCollectionDeserializer implements JsonDeserializer<ChargeRefundCollection> {
+public class ChargeRefundCollectionDeserializer
+    implements JsonDeserializer<ChargeRefundCollection> {
 
-  public ChargeRefundCollection deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
+  public ChargeRefundCollection deserialize(JsonElement json, Type typeOfT,
+      JsonDeserializationContext context)
       throws JsonParseException {
     Gson gson = new GsonBuilder()
         .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)

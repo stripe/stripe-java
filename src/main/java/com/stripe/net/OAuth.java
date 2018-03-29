@@ -30,7 +30,8 @@ public final class OAuth {
    * @param options the request options.
    * @return the URL to Stripe's OAuth form.
    */
-  public static String authorizeURL(Map<String, Object> params, RequestOptions options) throws AuthenticationException, InvalidRequestException {
+  public static String authorizeURL(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException {
     String base = Stripe.getConnectBase();
 
     params.put("client_id", getClientId(params, options));
@@ -61,10 +62,12 @@ public final class OAuth {
    * @return the TokenResponse instance containing the response from the OAuth
    *         API.
    */
-  public static TokenResponse token(Map<String, Object> params, RequestOptions options) throws AuthenticationException, InvalidRequestException, APIConnectionException, APIException, OAuthException {
+  public static TokenResponse token(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException, APIConnectionException, APIException,
+      OAuthException {
     String url = Stripe.getConnectBase() + "/oauth/token";
-    return OAuth.stripeResponseGetter.oAuthRequest(APIResource.RequestMethod.POST, url, params, TokenResponse.class,
-        APIResource.RequestType.NORMAL, options);
+    return OAuth.stripeResponseGetter.oAuthRequest(APIResource.RequestMethod.POST, url, params,
+        TokenResponse.class, APIResource.RequestType.NORMAL, options);
   }
 
 
@@ -76,11 +79,13 @@ public final class OAuth {
    * @return the DeauthorizedAccount instance containing the response from the
    *         OAuth API.
    */
-  public static DeauthorizedAccount deauthorize(Map<String, Object> params, RequestOptions options) throws AuthenticationException, InvalidRequestException, APIConnectionException, APIException, OAuthException {
+  public static DeauthorizedAccount deauthorize(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException, APIConnectionException, APIException,
+      OAuthException {
     String url = Stripe.getConnectBase() + "/oauth/deauthorize";
     params.put("client_id", getClientId(params, options));
-    return OAuth.stripeResponseGetter.oAuthRequest(APIResource.RequestMethod.POST, url, params, DeauthorizedAccount.class,
-        APIResource.RequestType.NORMAL, options);
+    return OAuth.stripeResponseGetter.oAuthRequest(APIResource.RequestMethod.POST, url, params,
+        DeauthorizedAccount.class, APIResource.RequestType.NORMAL, options);
   }
 
   /**
@@ -90,7 +95,8 @@ public final class OAuth {
    * @param options the request options.
    * @return the client_id.
    */
-  private static String getClientId(Map<String, Object> params, RequestOptions options) throws AuthenticationException {
+  private static String getClientId(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException {
     String clientId = Stripe.clientId;
     if ((options != null) && (options.getClientId() != null)) {
       clientId = options.getClientId();

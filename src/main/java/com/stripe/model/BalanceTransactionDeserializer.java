@@ -31,7 +31,8 @@ public class BalanceTransactionDeserializer implements JsonDeserializer<BalanceT
   }
 
   @Override
-  public BalanceTransaction deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context) throws JsonParseException {
+  public BalanceTransaction deserialize(JsonElement json, Type typeOfT,
+      JsonDeserializationContext context) throws JsonParseException {
     Gson gson = new GsonBuilder()
         .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
         .create();
@@ -41,7 +42,8 @@ public class BalanceTransactionDeserializer implements JsonDeserializer<BalanceT
     }
 
     if (!json.isJsonObject()) {
-      throw new JsonParseException("BalanceTransaction type was not an object, which is problematic.");
+      throw new JsonParseException(
+          "BalanceTransaction type was not an object, which is problematic.");
     }
 
     JsonObject btAsJsonObject = json.getAsJsonObject();
@@ -57,7 +59,8 @@ public class BalanceTransactionDeserializer implements JsonDeserializer<BalanceT
     if (source.isJsonPrimitive()) {
       JsonPrimitive sourceJsonPrimitive = source.getAsJsonPrimitive();
       if (!sourceJsonPrimitive.isString()) {
-        throw new JsonParseException("Source field on a balance transaction was a primitive non-string type.");
+        throw new JsonParseException(
+            "Source field on a balance transaction was a primitive non-string type.");
       }
       sourceId = sourceJsonPrimitive.getAsString();
     } else if (source.isJsonObject()) {
@@ -74,7 +77,8 @@ public class BalanceTransactionDeserializer implements JsonDeserializer<BalanceT
         }
       }
     } else if (!source.isJsonNull()) {
-      throw new JsonParseException("Source field on a balance transaction was a non-primitive, non-object type.");
+      throw new JsonParseException(
+          "Source field on a balance transaction was a non-primitive, non-object type.");
     }
 
     balanceTransaction.setSource(sourceId);

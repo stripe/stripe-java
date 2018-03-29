@@ -60,12 +60,14 @@ public class ChargeTest extends BaseStripeFunctionalTest {
     chargeWithStatementDescriptorParams.put("description", "hahaha1234");
     chargeWithStatementDescriptorParams.put("statement_descriptor", "Stripe");
     chargeWithStatementDescriptorParams.put("alternate_statement_descriptors[kana]", "ストライプ");
-    chargeWithStatementDescriptorParams.put("alternate_statement_descriptors[kanji]", "ストライプジャパン株式会社");
+    chargeWithStatementDescriptorParams.put("alternate_statement_descriptors[kanji]",
+        "ストライプジャパン株式会社");
 
     Charge createdCharge = Charge.create(chargeWithStatementDescriptorParams);
     assertEquals("Stripe", createdCharge.getStatementDescriptor());
     assertEquals("ストライプ", createdCharge.getAlternateStatementDescriptors().getKana());
-    assertEquals("ストライプジャパン株式会社", createdCharge.getAlternateStatementDescriptors().getKanji());
+    assertEquals("ストライプジャパン株式会社",
+        createdCharge.getAlternateStatementDescriptors().getKanji());
   }
 
   @Test
@@ -84,7 +86,16 @@ public class ChargeTest extends BaseStripeFunctionalTest {
 
     Map<String, Object> params = ImmutableMap.<String, Object>builder()
         .putAll(defaultChargeParams)
-        .put("shipping", ImmutableMap.builder().put("address", ImmutableMap.builder().put("line1", address.getLine1()).put("line2", address.getLine2()).put("city", address.getCity()).put("country", address.getCountry()).put("postal_code", address.getPostalCode()).put("state", address.getState()).build()).put("name", shippingDetails.getName()).put("phone", shippingDetails.getPhone()).build())
+        .put("shipping", ImmutableMap.builder()
+            .put("address", ImmutableMap.builder()
+                .put("line1", address.getLine1())
+                .put("line2", address.getLine2())
+                .put("city", address.getCity())
+                .put("country", address.getCountry())
+                .put("postal_code", address.getPostalCode())
+                .put("state", address.getState()).build())
+            .put("name", shippingDetails.getName())
+            .put("phone", shippingDetails.getPhone()).build())
         .build();
     Charge createdCharge = Charge.create(params);
     assertEquals(createdCharge.getShipping(), shippingDetails);
@@ -110,14 +121,16 @@ public class ChargeTest extends BaseStripeFunctionalTest {
     Charge createdCharge = Charge.create(defaultChargeParams);
     Map<String, Object> retrieveParams = new HashMap<String, Object>();
     retrieveParams.put("expand[]", "balance_transaction");
-    Charge retrievedCharge = Charge.retrieve(createdCharge.getId(), retrieveParams, supportedRequestOptions);
+    Charge retrievedCharge = Charge.retrieve(createdCharge.getId(),
+        retrieveParams, supportedRequestOptions);
 
     //Check basics
     assertEquals(retrievedCharge.getCreated(), retrievedCharge.getCreated());
     assertEquals(retrievedCharge.getId(), retrievedCharge.getId());
 
     //Check expanded BT
-    assertEquals(retrievedCharge.getBalanceTransactionObject().getId(), createdCharge.getBalanceTransaction());
+    assertEquals(retrievedCharge.getBalanceTransactionObject().getId(),
+        createdCharge.getBalanceTransaction());
   }
 
   @Test

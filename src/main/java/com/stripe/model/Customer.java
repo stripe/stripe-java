@@ -304,9 +304,9 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
   }
 
   @Deprecated
-  public BankAccount createBankAccount(String token, RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+  public BankAccount createBankAccount(String token, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
     Map<String, Object> postParams = new HashMap<String, Object>();
     postParams.put("bank_account", token);
 
@@ -321,9 +321,9 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
   }
 
   @Deprecated
-  public BankAccount createBankAccount(Map<String, Object> params, RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+  public BankAccount createBankAccount(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
     return request(RequestMethod.POST, String.format("%s/bank_accounts",
         instanceURL(Customer.class, this.id)), params, BankAccount.class, options);
   }
@@ -390,13 +390,15 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
   public static Customer retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Customer.class, id), null, Customer.class, options);
+    return request(RequestMethod.GET, instanceURL(Customer.class, id), null, Customer.class,
+        options);
   }
 
   public static Customer retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Customer.class, id), params, Customer.class, options);
+    return request(RequestMethod.GET, instanceURL(Customer.class, id), params, Customer.class,
+        options);
   }
 
   public static CustomerCollection list(Map<String, Object> params)
@@ -446,7 +448,8 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
   public Customer update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Customer.class, this.id), params, Customer.class, options);
+    return request(RequestMethod.POST, instanceURL(Customer.class, this.id), params,
+        Customer.class, options);
   }
 
   @Deprecated
@@ -459,7 +462,8 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
   public DeletedCustomer delete(RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.DELETE, instanceURL(Customer.class, this.id), null, DeletedCustomer.class, options);
+    return request(RequestMethod.DELETE, instanceURL(Customer.class, this.id), null,
+        DeletedCustomer.class, options);
   }
 
   // Use `(Card)customer.getSources().create(params)` instead.
@@ -488,22 +492,22 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
   }
 
   @Deprecated
-  public Card createCard(Map<String, Object> params, RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
+  public Card createCard(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException,InvalidRequestException, APIConnectionException, CardException,
       APIException {
     return request(RequestMethod.POST, String.format("%s/cards",
         instanceURL(Customer.class, this.id)), params, Card.class, options);
   }
 
   @Deprecated
-  public Subscription createSubscription(Map<String, Object> params, String apiKey) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
+  public Subscription createSubscription(Map<String, Object> params, String apiKey)
+      throws AuthenticationException,InvalidRequestException, APIConnectionException, CardException,
       APIException {
     return createSubscription(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
-  public Subscription createSubscription(Map<String, Object> params, RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
+  public Subscription createSubscription(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException,InvalidRequestException, APIConnectionException, CardException,
       APIException {
     return request(RequestMethod.POST, String.format("%s/subscriptions",
         instanceURL(Customer.class, this.id)), params, Subscription.class, options);

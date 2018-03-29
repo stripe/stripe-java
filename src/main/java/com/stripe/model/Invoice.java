@@ -412,7 +412,8 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
   public static Invoice retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Invoice.class, id), params, Invoice.class, options);
+    return request(RequestMethod.GET, instanceURL(Invoice.class, id), params, Invoice.class,
+        options);
   }
 
   @Deprecated
@@ -438,7 +439,8 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
   public static Invoice upcoming(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, String.format("%s/upcoming", classURL(Invoice.class)), params, Invoice.class, options);
+    return request(RequestMethod.GET, String.format("%s/upcoming", classURL(Invoice.class)), params,
+        Invoice.class, options);
   }
 
   public static InvoiceCollection list(Map<String, Object> params)
@@ -487,7 +489,8 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
   public Invoice update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Invoice.class, this.id), params, Invoice.class, options);
+    return request(RequestMethod.POST, instanceURL(Invoice.class, this.id), params, Invoice.class,
+        options);
   }
 
   @Deprecated
@@ -504,9 +507,9 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
     return pay(null, options);
   }
 
-  public Invoice pay(Map<String, Object> params, RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+  public Invoice pay(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
     return request(RequestMethod.POST, String.format("%s/pay",
         instanceURL(Invoice.class, this.getId())), params, Invoice.class, options);
   }

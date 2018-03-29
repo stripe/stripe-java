@@ -33,9 +33,11 @@ public final class VerificationFields extends StripeObject {
 
     VerificationFields verificationFields = (VerificationFields) o;
 
-    if (individual != null ? !individual.equals(verificationFields.individual) : verificationFields.individual != null) {
+    if (individual != null ? !individual.equals(verificationFields.individual)
+        : verificationFields.individual != null) {
       return false;
     }
-    return company != null ? company.equals(verificationFields.company) : verificationFields.company == null;
+    return company != null ? company.equals(verificationFields.company)
+        : verificationFields.company == null;
   }
 }

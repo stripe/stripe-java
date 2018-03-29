@@ -34,7 +34,8 @@ public class SourceMandateNotificationTest extends BaseStripeTest {
   @Test
   public void testDeserializeResource() throws StripeException, IOException {
     String json = resource("source_mandate_notification.json");
-    SourceMandateNotification mandateNotification = APIResource.GSON.fromJson(json, SourceMandateNotification.class);
+    SourceMandateNotification mandateNotification
+        = APIResource.GSON.fromJson(json, SourceMandateNotification.class);
 
     verifyResource(mandateNotification);
   }
@@ -44,7 +45,8 @@ public class SourceMandateNotificationTest extends BaseStripeTest {
     String json = resource("source_mandate_notification_event.json");
     Event event = APIResource.GSON.fromJson(json, Event.class);
 
-    SourceMandateNotification mandateNotification = (com.stripe.model.SourceMandateNotification) event.getData().getObject();
+    SourceMandateNotification mandateNotification
+        = (com.stripe.model.SourceMandateNotification) event.getData().getObject();
 
     verifyResource(mandateNotification);
   }
