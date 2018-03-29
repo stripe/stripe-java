@@ -89,17 +89,17 @@ public class LegalEntity extends StripeObject {
     }
 
     LegalEntity le = (LegalEntity) o;
-    return equals(additionalOwners, le.additionalOwners) &&
-        equals(address, le.address) &&
-        equals(businessName, le.businessName) &&
-        equals(dob, le.dob) &&
-        equals(firstName, le.firstName) &&
-        equals(lastName, le.lastName) &&
-        equals(personalAddress, le.personalAddress) &&
-        equals(personalIdNumberProvided, le.personalIdNumberProvided) &&
-        equals(ssnLast4Provided, le.ssnLast4Provided) &&
-        equals(type, le.type) &&
-        equals(verification, le.verification);
+    return equals(additionalOwners, le.additionalOwners)
+        && equals(address, le.address)
+        && equals(businessName, le.businessName)
+        && equals(dob, le.dob)
+        && equals(firstName, le.firstName)
+        && equals(lastName, le.lastName)
+        && equals(personalAddress, le.personalAddress)
+        && equals(personalIdNumberProvided, le.personalIdNumberProvided)
+        && equals(ssnLast4Provided, le.ssnLast4Provided)
+        && equals(type, le.type)
+        && equals(verification, le.verification);
   }
 
   public static class DateOfBirth extends StripeObject {
@@ -129,9 +129,9 @@ public class LegalEntity extends StripeObject {
       }
 
       DateOfBirth dob = (DateOfBirth) o;
-      return equals(day, dob.day) &&
-          equals(month, dob.month) &&
-          equals(year, dob.year);
+      return equals(day, dob.day)
+          && equals(month, dob.month)
+          && equals(year, dob.year);
     }
   }
 
@@ -167,10 +167,10 @@ public class LegalEntity extends StripeObject {
       }
 
       Verification verification = (Verification) o;
-      return equals(details, verification.details) &&
-          equals(detailsCode, verification.detailsCode) &&
-          equals(document, verification.document) &&
-          equals(status, verification.status);
+      return equals(details, verification.details)
+          && equals(detailsCode, verification.detailsCode)
+          && equals(document, verification.document)
+          && equals(status, verification.status);
     }
   }
 
@@ -211,11 +211,11 @@ public class LegalEntity extends StripeObject {
       }
 
       Owner owner = (Owner) o;
-      return equals(address, owner.address) &&
-          equals(dob, owner.dob) &&
-          equals(firstName, owner.firstName) &&
-          equals(lastName, owner.lastName) &&
-          equals(verification, owner.verification);
+      return equals(address, owner.address)
+          && equals(dob, owner.dob)
+          && equals(firstName, owner.firstName)
+          && equals(lastName, owner.lastName)
+          && equals(verification, owner.verification);
     }
   }
 }

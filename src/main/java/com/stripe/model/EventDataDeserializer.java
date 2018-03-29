@@ -98,9 +98,9 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
     } else if (element.isJsonArray()) {
       return deserializeJsonArray(element.getAsJsonArray());
     } else {
-      System.err.println("Unknown JSON element type for element " + element + ". " +
-          "If you're seeing this messaage, it's probably a bug in the Stripe Java " +
-          "library. Please contact us by email at support@stripe.com.");
+      System.err.println("Unknown JSON element type for element " + element + ". "
+          + "If you're seeing this messaage, it's probably a bug in the Stripe Java "
+          + "library. Please contact us by email at support@stripe.com.");
       return null;
     }
   }

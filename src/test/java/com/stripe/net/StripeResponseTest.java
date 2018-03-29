@@ -26,7 +26,7 @@ public class StripeResponseTest extends BaseStripeTest {
     chargeBody = resource("charge.json");
   }
 
-  private Map<String, List<String>> generateHeaderMap () {
+  private Map<String, List<String>> generateHeaderMap() {
     Map<String, List<String>> headerMap = new HashMap<String, List<String>>();
     List<String> idempotencyHeader = new ArrayList<String>();
     idempotencyHeader.add("12345");

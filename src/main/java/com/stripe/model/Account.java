@@ -405,10 +405,10 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
       }
 
       Verification ve = (Verification) o;
-      return equals(contacted, ve.contacted) &&
-          equals(disabledReason, ve.disabledReason) &&
-          equals(dueBy, ve.dueBy) &&
-          equals(fieldsNeeded, ve.fieldsNeeded);
+      return equals(contacted, ve.contacted)
+          && equals(disabledReason, ve.disabledReason)
+          && equals(dueBy, ve.dueBy)
+          && equals(fieldsNeeded, ve.fieldsNeeded);
     }
   }
 

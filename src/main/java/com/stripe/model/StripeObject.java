@@ -10,15 +10,15 @@ import java.lang.reflect.Field;
 
 public abstract class StripeObject {
 
-  public static final Gson PRETTY_PRINT_GSON = new GsonBuilder().
-      setPrettyPrinting().
-      serializeNulls().
-      setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES).
-      registerTypeAdapter(ExpandableField.class, new ExpandableFieldSerializer()).
+  public static final Gson PRETTY_PRINT_GSON = new GsonBuilder()
+      .setPrettyPrinting()
+      .serializeNulls()
+      .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+      .registerTypeAdapter(ExpandableField.class, new ExpandableFieldSerializer())
       // TODO: remove the deserializers in the next major release
-      registerTypeAdapter(EventData.class, new EventDataDeserializer()).
-      registerTypeAdapter(EventRequest.class, new EventRequestDeserializer()).
-      create();
+      .registerTypeAdapter(EventData.class, new EventDataDeserializer())
+      .registerTypeAdapter(EventRequest.class, new EventRequestDeserializer())
+      .create();
 
   @Override
   public String toString() {
@@ -33,6 +33,7 @@ public abstract class StripeObject {
   public StripeResponse getLastResponse() {
     return lastResponse;
   }
+
   public void setLastResponse(StripeResponse response) {
     this.lastResponse = response; 
   }

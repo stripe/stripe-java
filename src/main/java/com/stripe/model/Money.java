@@ -77,10 +77,10 @@ public class Money extends StripeObject {
       }
 
       SourceTypes st = (SourceTypes) o;
-      return equals(alipayAccount, st.alipayAccount) &&
-          equals(bankAccount, st.bankAccount) &&
-          equals(bitcoinReceiver, st.bitcoinReceiver) &&
-          equals(card, st.card);
+      return equals(alipayAccount, st.alipayAccount)
+          && equals(bankAccount, st.bankAccount)
+          && equals(bitcoinReceiver, st.bitcoinReceiver)
+          && equals(card, st.card);
     }
   }
 }

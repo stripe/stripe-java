@@ -44,6 +44,7 @@ public class StripeResponseTest extends BaseStripeFunctionalTest {
     assertTrue(resp.requestId().startsWith("req_"));
     assertTrue(resp.body().length() > 0);
   }
+
   @Test
   public void testResponseIncludedList() throws
       AuthenticationException,

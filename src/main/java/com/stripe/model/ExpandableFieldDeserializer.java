@@ -29,11 +29,10 @@ public class ExpandableFieldDeserializer implements JsonDeserializer<ExpandableF
       } else {
         throw new JsonParseException("ExpandableField is a non-string primitive type.");
       }
-    }
     // Check if json is an expanded Object. If so, the field has been expanded, so we need to
     // serialize it into the proper typeOfT, and create an ExpandableField with both the String id
     // and this serialized object.
-    else if (json.isJsonObject()) {
+    } else if (json.isJsonObject()) {
       // Get the `id` out of the response
       JsonObject fieldAsJsonObject = json.getAsJsonObject();
       String id = fieldAsJsonObject.getAsJsonPrimitive("id").getAsString();
