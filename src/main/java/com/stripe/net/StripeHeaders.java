@@ -12,7 +12,7 @@ public class StripeHeaders {
   }
 
   /**
-   * Returns the first header value for a given key
+   * Returns the first header value for a given key.
    * @param name The name of the header key
    * @return the first value for the given key
    */

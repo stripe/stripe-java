@@ -346,13 +346,13 @@ public final class EvidenceSubObject extends StripeObject {
 
   /**
    * The Stripe ID for the prior charge which appears to be a duplicate of the disputed charge (only
-   * for disputes of reason `duplicate`)
+   * for disputes of reason `duplicate`).
    */
   protected String duplicateChargeId;
 
   /**
    * The Stripe ID for the prior charge which appears to be a duplicate of the disputed charge (only
-   * for disputes of reason `duplicate`)
+   * for disputes of reason `duplicate`).
    */
   public String getDuplicateChargeId() {
     return this.duplicateChargeId;
@@ -360,7 +360,7 @@ public final class EvidenceSubObject extends StripeObject {
 
   /**
    * The Stripe ID for the prior charge which appears to be a duplicate of the disputed charge (only
-   * for disputes of reason `duplicate`)
+   * for disputes of reason `duplicate`).
    */
   public void setDuplicateChargeId(String duplicateChargeId) {
     this.duplicateChargeId = duplicateChargeId;
@@ -368,13 +368,13 @@ public final class EvidenceSubObject extends StripeObject {
 
   /**
    * An explanation of the difference between the disputed charge and the prior charge that appears
-   * to be a duplicate (only for disputes of reason `duplicate`)
+   * to be a duplicate (only for disputes of reason `duplicate`).
    */
   protected String duplicateChargeExplanation;
 
   /**
    * An explanation of the difference between the disputed charge and the prior charge that appears
-   * to be a duplicate (only for disputes of reason `duplicate`)
+   * to be a duplicate (only for disputes of reason `duplicate`).
    */
   public String getDuplicateChargeExplanation() {
     return this.duplicateChargeExplanation;
@@ -382,7 +382,7 @@ public final class EvidenceSubObject extends StripeObject {
 
   /**
    * An explanation of the difference between the disputed charge and the prior charge that appears
-   * to be a duplicate (only for disputes of reason `duplicate`)
+   * to be a duplicate (only for disputes of reason `duplicate`).
    */
   public void setDuplicateChargeExplanation(String duplicateChargeExplanation) {
     this.duplicateChargeExplanation = duplicateChargeExplanation;

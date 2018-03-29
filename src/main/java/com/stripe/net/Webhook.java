@@ -154,8 +154,8 @@ public final class Webhook {
 
     /**
      * Computes the signature for a given payload and secret.
-     * <p>
-     * The current scheme used by Stripe ("v1") is HMAC/SHA-256.
+     * 
+     * <p>The current scheme used by Stripe ("v1") is HMAC/SHA-256.
      *
      * @param payload the payload to sign.
      * @param secret  the secret used to generate the signature.

@@ -13,7 +13,7 @@ import javax.net.ssl.SSLSocket;
 import javax.net.ssl.SSLSocketFactory;
 
 /**
- * Wraps a SSLSocketFactory and enables more TLS versions
+ * Wraps a SSLSocketFactory and enables more TLS versions.
  */
 public class StripeSSLSocketFactory extends SSLSocketFactory {
   private final SSLSocketFactory under;

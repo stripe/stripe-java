@@ -181,8 +181,8 @@ public abstract class APIResource extends StripeObject {
   /**
    * Similar to #request, but specific for use with collection types that
    * come from the API (i.e. lists of resources).
-   * <p>
-   * Collections need a little extra work because we need to plumb request
+   * 
+   * <p>Collections need a little extra work because we need to plumb request
    * options and params through so that we can iterate to the next page if
    * necessary.
    */

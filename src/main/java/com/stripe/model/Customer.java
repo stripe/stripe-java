@@ -444,7 +444,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
   }
 
   /**
-   * 1/2014: Legacy (from before multiple subscriptions per customer)
+   * 1/2014: Legacy (from before multiple subscriptions per customer).
    */
   public Subscription updateSubscription(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
@@ -453,7 +453,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
   }
 
   /**
-   * 1/2014: Legacy (from before multiple subscriptions per customer)
+   * 1/2014: Legacy (from before multiple subscriptions per customer).
    */
   @Deprecated
   public Subscription updateSubscription(Map<String, Object> params,
@@ -464,7 +464,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
   }
 
   /**
-   * 1/2014: Legacy (from before multiple subscriptions per customer)
+   * 1/2014: Legacy (from before multiple subscriptions per customer).
    */
   public Subscription updateSubscription(Map<String, Object> params,
                        RequestOptions options) throws AuthenticationException,
@@ -475,7 +475,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
   }
 
   /**
-   * 1/2014: Legacy (from before multiple subscriptions per customer)
+   * 1/2014: Legacy (from before multiple subscriptions per customer).
    */
   public Subscription cancelSubscription() throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
@@ -484,7 +484,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
   }
 
   /**
-   * 1/2014: Legacy (from before multiple subscriptions per customer)
+   * 1/2014: Legacy (from before multiple subscriptions per customer).
    */
   public Subscription cancelSubscription(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
@@ -493,7 +493,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
   }
 
   /**
-   * 1/2014: Legacy (from before multiple subscriptions per customer)
+   * 1/2014: Legacy (from before multiple subscriptions per customer).
    */
   @Deprecated
   public Subscription cancelSubscription(String apiKey)
@@ -509,7 +509,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
   }
 
   /**
-   * 1/2014: Legacy (from before multiple subscriptions per customer)
+   * 1/2014: Legacy (from before multiple subscriptions per customer).
    */
   @Deprecated
   public Subscription cancelSubscription(Map<String, Object> params,
