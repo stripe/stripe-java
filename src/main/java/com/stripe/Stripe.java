@@ -59,7 +59,7 @@ public abstract class Stripe {
   }
 
   /**
-   * Set proxy to tunnel all Stripe connections
+   * Set proxy to tunnel all Stripe connections.
    *
    * @param proxy proxy host and port setting
    */
@@ -98,8 +98,8 @@ public abstract class Stripe {
   /**
    * Sets the timeout value that will be used when reading data from an
    * established connection to the Stripe API (in milliseconds).
-   * <p>
-   * Note that this value should be set conservatively because some API
+   * 
+   * <p>Note that this value should be set conservatively because some API
    * requests can take time and a short timeout increases the likelihood of
    * causing a problem in the backend.
    *
@@ -110,7 +110,7 @@ public abstract class Stripe {
   }
 
   /**
-   * Provide credential for proxy authorization if required
+   * Provide credential for proxy authorization if required.
    *
    * @param auth proxy required userName and password
    */

@@ -178,8 +178,8 @@ public class RequestOptions {
     /**
      * Sets the timeout value that will be used when reading data from an
      * established connection to the Stripe API (in milliseconds).
-     * <p>
-     * Note that this value should be set conservatively because some API
+     * 
+     * <p>Note that this value should be set conservatively because some API
      * requests can take time and a short timeout increases the likelihood
      * of causing a problem in the backend.
      *
