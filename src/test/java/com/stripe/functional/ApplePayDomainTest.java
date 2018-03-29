@@ -41,8 +41,8 @@ public class ApplePayDomainTest extends BaseStripeFunctionalTest {
   public void testApplePayDomainList() throws StripeException {
     Map<String, Object> listParams = new HashMap<String, Object>();
     listParams.put("count", 1);
-    List<ApplePayDomain> Domains = ApplePayDomain.list(listParams).getData();
-    assertEquals(Domains.size(), 1);
+    List<ApplePayDomain> domains = ApplePayDomain.list(listParams).getData();
+    assertEquals(domains.size(), 1);
   }
 
   @Test

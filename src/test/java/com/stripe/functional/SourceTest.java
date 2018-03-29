@@ -15,7 +15,7 @@ import org.junit.Test;
 public class SourceTest extends BaseStripeFunctionalTest {
   @Test
   public void testSourceCreateRead() throws StripeException {
-    RequestOptions sourceRequestOptions = RequestOptions.builder()
+    final RequestOptions sourceRequestOptions = RequestOptions.builder()
         .setApiKey("sk_test_JieJALRz7rPz7boV17oMma7a")
         .build();
 

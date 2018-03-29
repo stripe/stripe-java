@@ -49,7 +49,7 @@ public class RelayTest extends BaseStripeFunctionalTest {
 
   @Test
   public void testSKUCreateReadUpdate() throws StripeException {
-    RequestOptions relayRequestOptions = RequestOptions.builder()
+    final RequestOptions relayRequestOptions = RequestOptions.builder()
         .setApiKey("sk_test_JieJALRz7rPz7boV17oMma7a")
         .build();
 
@@ -85,7 +85,7 @@ public class RelayTest extends BaseStripeFunctionalTest {
 
   @Test
   public void testSKUProductDeletion() throws StripeException {
-    RequestOptions relayRequestOptions = RequestOptions.builder()
+    final RequestOptions relayRequestOptions = RequestOptions.builder()
         .setApiKey("sk_test_JieJALRz7rPz7boV17oMma7a")
         .build();
 
@@ -95,7 +95,7 @@ public class RelayTest extends BaseStripeFunctionalTest {
     productCreateParams.put("type", "good");
     productCreateParams.put("name", "Watermelon");
     productCreateParams.put("attributes[]", "size");
-    Product createdProduct = Product.create(productCreateParams, relayRequestOptions);
+    final Product createdProduct = Product.create(productCreateParams, relayRequestOptions);
 
     Map<String, Object> skuCreateParams = new HashMap<String, Object>();
     String skuId = "my_first_sku_" + UUID.randomUUID();
@@ -117,7 +117,7 @@ public class RelayTest extends BaseStripeFunctionalTest {
 
   @Test
   public void testOrderCreateReadUpdatePayReturn() throws StripeException {
-    RequestOptions relayRequestOptions = RequestOptions.builder()
+    final RequestOptions relayRequestOptions = RequestOptions.builder()
         .setApiKey("sk_test_JieJALRz7rPz7boV17oMma7a")
         .build();
 
@@ -158,7 +158,7 @@ public class RelayTest extends BaseStripeFunctionalTest {
     assertNotNull(item);
     assertEquals("sku", item.getType());
 
-    Order retrieved = Order.retrieve(created.getId(), relayRequestOptions);
+    final Order retrieved = Order.retrieve(created.getId(), relayRequestOptions);
 
     item = null;
     for (OrderItem i : created.getItems()) {

@@ -13,7 +13,7 @@ import org.junit.Test;
 
 public class SourceMandateNotificationTest extends BaseStripeTest {
   private void verifyResource(SourceMandateNotification mandateNotification) {
-    Map<String, String> typeData = mandateNotification.getTypeData();
+    final Map<String, String> typeData = mandateNotification.getTypeData();
 
     assertEquals("srcmn_1234", mandateNotification.getId());
     assertEquals("source_mandate_notification", mandateNotification.getObject());

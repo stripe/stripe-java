@@ -45,9 +45,6 @@ public class InvoiceTest extends BaseStripeTest {
 
   @Test
   public void testUpcoming() throws StripeException {
-    Map<String, Object> params = new HashMap<String, Object>();
-    List<HashMap<String, Object>> items = new ArrayList<HashMap<String, Object>>();
-
     HashMap<String, Object> itemA = new HashMap<String, Object>();
     itemA.put("id", "si_kjnkk893jslo");
     itemA.put("quantity", 3);
@@ -60,10 +57,12 @@ public class InvoiceTest extends BaseStripeTest {
     itemC.put("plan", "silver");
     itemC.put("quantity", 1);
 
+    List<HashMap<String, Object>> items = new ArrayList<HashMap<String, Object>>();
     items.add(itemA);
     items.add(itemB);
     items.add(itemC);
 
+    Map<String, Object> params = new HashMap<String, Object>();
     params.put("subscription_items", items);
     params.put("subscription", "sub_8OgUootyH2faMz");
     params.put("customer", "cus_8OgDDsZEwoTscq");

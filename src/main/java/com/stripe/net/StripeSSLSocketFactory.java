@@ -34,6 +34,7 @@ public class StripeSSLSocketFactory extends SSLSocketFactory {
     try {
       supportedProtos = SSLContext.getDefault().getSupportedSSLParameters().getProtocols();
     } catch (NoSuchAlgorithmException e) {
+      // Nothing to do.
     }
 
     for (String proto : supportedProtos) {

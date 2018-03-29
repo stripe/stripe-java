@@ -62,7 +62,7 @@ public class OAuthTest extends BaseStripeTest {
     String urlStr = OAuth.authorizeURL(urlParams, null);
 
     URL url = new URL(urlStr);
-    Map<String, String> queryPairs = splitQuery(url.getQuery());
+    final Map<String, String> queryPairs = splitQuery(url.getQuery());
 
     assertEquals("https", url.getProtocol());
     assertEquals("connect.stripe.com", url.getHost());

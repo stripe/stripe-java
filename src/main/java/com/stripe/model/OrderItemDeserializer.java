@@ -27,10 +27,6 @@ public class OrderItemDeserializer implements JsonDeserializer<OrderItem> {
   @Override
   public OrderItem deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
       throws JsonParseException {
-    Gson gson = new GsonBuilder()
-        .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-        .create();
-
     if (json.isJsonNull()) {
       return null;
     }
@@ -44,6 +40,10 @@ public class OrderItemDeserializer implements JsonDeserializer<OrderItem> {
     JsonElement parent = oiAsJsonObject.get("parent");
 
     oiAsJsonObject.remove("parent");
+
+    Gson gson = new GsonBuilder()
+        .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+        .create();
 
     OrderItem orderItem = gson.fromJson(json, typeOfT);
 

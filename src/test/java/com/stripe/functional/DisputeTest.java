@@ -106,17 +106,16 @@ public class DisputeTest extends BaseStripeFunctionalTest {
     assertEquals(emptyEvidence, initialDispute.getEvidenceSubObject());
     assertEquals(new HashMap<String, String>(), initialDispute.getMetadata());
 
-    Map<String, Object> params = new HashMap<String, Object>();
     Map<String, Object> evidence = new HashMap<String, Object>();
-    Map<String, String> metadata = new HashMap<String, String>();
-
     evidence.put("product_description", "my productDescription");
     evidence.put("customer_name", "my customerName");
     evidence.put("uncategorized_text", "my uncategorizedText");
 
+    Map<String, String> metadata = new HashMap<String, String>();
     metadata.put("some_info", "about the dispute");
     metadata.put("a_little_more", "12345");
 
+    Map<String, Object> params = new HashMap<String, Object>();
     params.put("evidence", evidence);
     params.put("metadata", metadata);
 

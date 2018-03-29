@@ -111,7 +111,6 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     }
     headers.put("User-Agent", userAgent);
 
-    String apiVersion = options.getStripeVersion();
     headers.put("Accept-Charset", APIResource.CHARSET);
     headers.put("Accept", "application/json");
 
@@ -132,8 +131,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       propertyMap.put("application", APIResource.GSON.toJson(Stripe.getAppInfo()));
     }
     headers.put("X-Stripe-Client-User-Agent", APIResource.GSON.toJson(propertyMap));
-    if (apiVersion != null) {
-      headers.put("Stripe-Version", apiVersion);
+    if (options.getStripeVersion() != null) {
+      headers.put("Stripe-Version", options.getStripeVersion());
     }
     if (options.getIdempotencyKey() != null) {
       headers.put("Idempotency-Key", options.getIdempotencyKey());

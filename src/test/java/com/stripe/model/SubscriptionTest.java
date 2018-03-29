@@ -71,9 +71,6 @@ public class SubscriptionTest extends BaseStripeTest {
     Subscription subscription = new Subscription();
     subscription.setId("test_sub");
 
-    HashMap<String, Object> params = new HashMap<String, Object>();
-    List<HashMap<String, Object>> items = new ArrayList<HashMap<String, Object>>();
-
     HashMap<String, Object> itemA = new HashMap<String, Object>();
     itemA.put("plan", "gold");
     itemA.put("quantity", 1);
@@ -82,9 +79,11 @@ public class SubscriptionTest extends BaseStripeTest {
     itemB.put("plan", "silver");
     itemB.put("quantity", 2);
 
+    List<HashMap<String, Object>> items = new ArrayList<HashMap<String, Object>>();
     items.add(itemA);
     items.add(itemB);
 
+    HashMap<String, Object> params = new HashMap<String, Object>();
     params.put("items", items);
 
     subscription.update(params);
@@ -107,9 +106,6 @@ public class SubscriptionTest extends BaseStripeTest {
 
   @Test
   public void testCreateWithItems() throws StripeException {
-    Map<String, Object> params = new HashMap<String, Object>();
-    List<HashMap<String, Object>> items = new ArrayList<HashMap<String, Object>>();
-
     HashMap<String, Object> itemA = new HashMap<String, Object>();
     itemA.put("plan", "gold");
     itemA.put("quantity", 1);
@@ -118,9 +114,11 @@ public class SubscriptionTest extends BaseStripeTest {
     itemB.put("plan", "silver");
     itemB.put("quantity", 2);
 
+    List<HashMap<String, Object>> items = new ArrayList<HashMap<String, Object>>();
     items.add(itemA);
     items.add(itemB);
 
+    Map<String, Object> params = new HashMap<String, Object>();
     params.put("customer", "test_cus");
     params.put("items", items);
 

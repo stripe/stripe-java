@@ -27,13 +27,16 @@ public class StripeResponseTest extends BaseStripeTest {
   }
 
   private Map<String, List<String>> generateHeaderMap() {
-    Map<String, List<String>> headerMap = new HashMap<String, List<String>>();
     List<String> idempotencyHeader = new ArrayList<String>();
     idempotencyHeader.add("12345");
+
     List<String> requestIdHeader = new ArrayList<String>();
     requestIdHeader.add("req_12345");
+
+    Map<String, List<String>> headerMap = new HashMap<String, List<String>>();
     headerMap.put("Idempotency-Key", idempotencyHeader);
     headerMap.put("Request-Id", requestIdHeader);
+
     return headerMap;
   }
 

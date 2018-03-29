@@ -33,10 +33,6 @@ public class BalanceTransactionDeserializer implements JsonDeserializer<BalanceT
   @Override
   public BalanceTransaction deserialize(JsonElement json, Type typeOfT,
       JsonDeserializationContext context) throws JsonParseException {
-    Gson gson = new GsonBuilder()
-        .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-        .create();
-
     if (json.isJsonNull()) {
       return null;
     }
@@ -51,6 +47,10 @@ public class BalanceTransactionDeserializer implements JsonDeserializer<BalanceT
     JsonElement source = btAsJsonObject.get("source");
 
     btAsJsonObject.remove("source");
+
+    Gson gson = new GsonBuilder()
+        .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+        .create();
 
     BalanceTransaction balanceTransaction = gson.fromJson(json, typeOfT);
 
