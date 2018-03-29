@@ -17,7 +17,7 @@ public class ExternalAccountTypeAdapterFactory implements TypeAdapterFactory {
       return null; // this class only serializes 'ExternalAccount' and its subtypes
     }
 
-    final String SOURCE_OBJECT_PROP = "object";
+    final String sourceObjectProp = "object";
 
     final TypeAdapter<JsonElement> elementAdapter = gson.getAdapter(JsonElement.class);
     final TypeAdapter<ExternalAccount> externalAccountAdapter
@@ -41,7 +41,7 @@ public class ExternalAccountTypeAdapterFactory implements TypeAdapterFactory {
 
       public ExternalAccount read(JsonReader in) throws IOException {
         JsonObject object = elementAdapter.read(in).getAsJsonObject();
-        String sourceObject = object.getAsJsonPrimitive(SOURCE_OBJECT_PROP).getAsString();
+        String sourceObject = object.getAsJsonPrimitive(sourceObjectProp).getAsString();
 
         if (sourceObject.equals("alipay_account")) {
           return alipayAccountAdapter.fromJsonTree(object);
