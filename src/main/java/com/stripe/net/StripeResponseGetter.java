@@ -20,7 +20,7 @@ public interface StripeResponseGetter {
       throws AuthenticationException, InvalidRequestException, APIConnectionException,
       CardException, APIException;
 
-  <T> T oAuthRequest(
+  <T> T oauthRequest(
       APIResource.RequestMethod method,
       String url,
       Map<String, Object> params,

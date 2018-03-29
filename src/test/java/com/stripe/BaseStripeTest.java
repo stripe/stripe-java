@@ -149,7 +149,7 @@ public class BaseStripeTest {
   }
 
   public static <T> void stubOAuth(Class<T> clazz, String response) throws StripeException {
-    when(networkMock.oAuthRequest(
+    when(networkMock.oauthRequest(
         Mockito.any(APIResource.RequestMethod.class),
         Mockito.anyString(),
         Mockito.<Map<String, Object>>any(),

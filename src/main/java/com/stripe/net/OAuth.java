@@ -66,7 +66,7 @@ public final class OAuth {
       throws AuthenticationException, InvalidRequestException, APIConnectionException, APIException,
       OAuthException {
     String url = Stripe.getConnectBase() + "/oauth/token";
-    return OAuth.stripeResponseGetter.oAuthRequest(APIResource.RequestMethod.POST, url, params,
+    return OAuth.stripeResponseGetter.oauthRequest(APIResource.RequestMethod.POST, url, params,
         TokenResponse.class, APIResource.RequestType.NORMAL, options);
   }
 
@@ -84,7 +84,7 @@ public final class OAuth {
       OAuthException {
     String url = Stripe.getConnectBase() + "/oauth/deauthorize";
     params.put("client_id", getClientId(params, options));
-    return OAuth.stripeResponseGetter.oAuthRequest(APIResource.RequestMethod.POST, url, params,
+    return OAuth.stripeResponseGetter.oauthRequest(APIResource.RequestMethod.POST, url, params,
         DeauthorizedAccount.class, APIResource.RequestType.NORMAL, options);
   }
 

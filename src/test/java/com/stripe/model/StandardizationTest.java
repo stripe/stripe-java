@@ -47,10 +47,10 @@ public class StandardizationTest {
 
   @Test
   public void allNonDeprecatedMethodsTakeOptions() throws IOException, NoSuchMethodException {
-    for (Class aClass : getAllModels()) {
-      for (Method method : aClass.getMethods()) {
+    for (Class model : getAllModels()) {
+      for (Method method : model.getMethods()) {
         // Skip methods not declared on the base class.
-        if (method.getDeclaringClass() != aClass) {
+        if (method.getDeclaringClass() != model) {
           continue;
         }
         // Skip equals
@@ -73,7 +73,7 @@ public class StandardizationTest {
         // If more than one method with the same parameter types is declared in a class, and one of
         // these methods has a return type that is more specific than any of the others, that method
         // is returned; otherwise one of the methods is chosen arbitrarily.
-        Method mostSpecificMethod = aClass.getDeclaredMethod(method.getName(),
+        Method mostSpecificMethod = model.getDeclaredMethod(method.getName(),
             method.getParameterTypes());
         if (!method.equals(mostSpecificMethod)) {
           continue;
@@ -121,7 +121,7 @@ public class StandardizationTest {
         Assert.assertTrue(
             String.format(
                 "Methods on %ss like %s.%s should take a final parameter as a %s parameter.%n",
-                APIResource.class.getSimpleName(), aClass.getSimpleName(), method.getName(),
+                APIResource.class.getSimpleName(), model.getSimpleName(), method.getName(),
                 RequestOptions.class.getSimpleName()),
             RequestOptions.class.isAssignableFrom(finalParamType));
       }
