@@ -1,14 +1,15 @@
 package com.stripe.functional;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import com.stripe.BaseStripeFunctionalTest;
 import com.stripe.exception.StripeException;
-import com.stripe.model.*;
-import org.junit.Test;
+import com.stripe.model.Product;
 
 import java.util.HashMap;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import org.junit.Test;
 
 public class ServiceProductTest extends BaseStripeFunctionalTest {
   @Test

@@ -1,16 +1,19 @@
 package com.stripe.functional;
 
+import static org.junit.Assert.assertTrue;
+
 import com.stripe.BaseStripeFunctionalTest;
 import com.stripe.exception.StripeException;
-import com.stripe.model.*;
-import junit.framework.Assert;
-import org.junit.Test;
+import com.stripe.model.Account;
+import com.stripe.model.AccountCollection;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Pattern;
 
-import static org.junit.Assert.assertTrue;
+import junit.framework.Assert;
+
+import org.junit.Test;
 
 public class AccountTest extends BaseStripeFunctionalTest {
   @Test

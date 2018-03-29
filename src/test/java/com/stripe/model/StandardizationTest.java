@@ -6,18 +6,19 @@ import com.google.common.collect.Lists;
 import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.Invokable;
 import com.google.common.reflect.Parameter;
+
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
-import junit.framework.Assert;
-import org.junit.Test;
 
 import java.io.IOException;
 import java.lang.reflect.Method;
-import java.util.Arrays;
 import java.util.Collection;
-import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
+
+import junit.framework.Assert;
+
+import org.junit.Test;
 
 /**
  * Simple test to make sure stripe-java provides consistent bindings.

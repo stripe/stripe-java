@@ -1,5 +1,9 @@
 package com.stripe.model;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import com.google.common.collect.ImmutableList;
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
@@ -8,18 +12,14 @@ import com.stripe.model.ExternalAccount;
 import com.stripe.net.APIResource;
 import com.stripe.net.LiveStripeResponseGetter;
 import com.stripe.net.RequestOptions;
-import org.junit.After;
-import org.junit.Before;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
 
 public class ExternalAccountTest extends BaseStripeTest {
   @Before

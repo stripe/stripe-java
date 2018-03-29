@@ -1,15 +1,16 @@
 package com.stripe.functional;
 
+import static org.junit.Assert.assertEquals;
+
 import com.stripe.BaseStripeFunctionalTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Source;
 import com.stripe.net.RequestOptions;
-import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 public class SourceTest extends BaseStripeFunctionalTest {
   @Test

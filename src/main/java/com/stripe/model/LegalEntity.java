@@ -1,8 +1,8 @@
 package com.stripe.model;
 
-import java.util.List;
-
 import com.google.gson.annotations.SerializedName;
+
+import java.util.List;
 
 public class LegalEntity extends StripeObject {
   List<Owner> additionalOwners;

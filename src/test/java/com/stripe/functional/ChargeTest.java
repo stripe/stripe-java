@@ -1,9 +1,18 @@
 package com.stripe.functional;
 
-import com.google.common.collect.ImmutableMap;
-
 import static org.hamcrest.CoreMatchers.instanceOf;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
+
+import com.google.common.collect.ImmutableMap;
+
+import com.stripe.BaseStripeFunctionalTest;
 import com.stripe.Stripe;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
@@ -12,14 +21,12 @@ import com.stripe.model.Address;
 import com.stripe.model.Card;
 import com.stripe.model.Charge;
 import com.stripe.model.ShippingDetails;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
+
 import org.junit.Test;
-
-import java.util.*;
-
-import com.stripe.BaseStripeFunctionalTest;
-
-import static org.junit.Assert.*;
-import static org.junit.Assert.assertTrue;
 
 public class ChargeTest extends BaseStripeFunctionalTest {
 

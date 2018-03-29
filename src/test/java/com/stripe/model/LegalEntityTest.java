@@ -1,5 +1,7 @@
 package com.stripe.model;
 
+import static org.junit.Assert.assertEquals;
+
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.LegalEntity;
@@ -9,8 +11,6 @@ import java.io.IOException;
 import java.util.LinkedList;
 
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class LegalEntityTest extends BaseStripeTest {
   @Test

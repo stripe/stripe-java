@@ -1,16 +1,21 @@
 package com.stripe.functional;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+
 import com.stripe.BaseStripeFunctionalTest;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
-import com.stripe.model.*;
-import org.junit.Test;
+import com.stripe.model.Customer;
+import com.stripe.model.CustomerSubscriptionCollection;
+import com.stripe.model.Plan;
+import com.stripe.model.Subscription;
+import com.stripe.model.SubscriptionCollection;
 
 import java.util.HashMap;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import org.junit.Test;
 
 public class SubscriptionTest extends BaseStripeFunctionalTest {
   static Map<String, Object> getSubscriptionParams() throws StripeException {

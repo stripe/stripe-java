@@ -6,6 +6,12 @@ import static org.junit.Assert.assertNotNull;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
+import com.stripe.Stripe;
+import com.stripe.exception.StripeException;
+import com.stripe.net.LiveStripeResponseGetter;
+import com.stripe.net.RequestOptions;
+import com.stripe.net.RequestOptions.RequestOptionsBuilder;
+
 import java.io.UnsupportedEncodingException;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
@@ -15,12 +21,6 @@ import java.util.Map;
 
 import org.junit.Before;
 import org.junit.Test;
-
-import com.stripe.Stripe;
-import com.stripe.exception.StripeException;
-import com.stripe.net.LiveStripeResponseGetter;
-import com.stripe.net.RequestOptions;
-import com.stripe.net.RequestOptions.RequestOptionsBuilder;
 
 public class LiveStripeResponseGetterTest {
   LiveStripeResponseGetter srg;

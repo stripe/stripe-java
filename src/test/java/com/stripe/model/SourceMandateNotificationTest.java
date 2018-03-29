@@ -1,15 +1,15 @@
 package com.stripe.model;
 
-import java.io.IOException;
-import java.util.Map;
+import static org.junit.Assert.assertEquals;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.net.APIResource;
 
-import org.junit.Test;
+import java.io.IOException;
+import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 public class SourceMandateNotificationTest extends BaseStripeTest {
   private void verifyResource(SourceMandateNotification mandateNotification) {

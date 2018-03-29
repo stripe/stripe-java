@@ -1,19 +1,20 @@
 package com.stripe.model;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNull;
+
 import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
+
 import com.stripe.BaseStripeTest;
 import com.stripe.net.APIResource;
-import org.junit.Test;
 
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.google.gson.reflect.TypeToken;
-
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
+import org.junit.Test;
 
 public class ExpandableFieldDeserializerTest extends BaseStripeTest {
 

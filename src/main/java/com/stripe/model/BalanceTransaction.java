@@ -1,8 +1,5 @@
 package com.stripe.model;
 
-import java.util.List;
-import java.util.Map;
-
 import com.stripe.Stripe;
 import com.stripe.exception.APIConnectionException;
 import com.stripe.exception.APIException;
@@ -11,6 +8,9 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
+
+import java.util.List;
+import java.util.Map;
 
 public class BalanceTransaction extends APIResource implements HasId {
   String id;

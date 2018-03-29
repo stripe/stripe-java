@@ -1,5 +1,7 @@
 package com.stripe.functional;
 
+import static org.junit.Assert.assertEquals;
+
 import com.stripe.BaseStripeFunctionalTest;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
@@ -7,14 +9,14 @@ import com.stripe.model.Account;
 import com.stripe.model.Transfer;
 import com.stripe.model.TransferTransactionCollection;
 import com.stripe.net.RequestOptions;
-import junit.framework.Assert;
-import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
+import junit.framework.Assert;
+
+import org.junit.Test;
 
 public class TransferTest extends BaseStripeFunctionalTest {
   static Map<String, Object> getDefaultAccountParams() {

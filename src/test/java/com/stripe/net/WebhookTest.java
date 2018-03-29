@@ -1,12 +1,14 @@
 package com.stripe.net;
 
-import com.stripe.exception.SignatureVerificationException;
-
-import com.stripe.BaseStripeTest;
-import com.stripe.model.Event;
-import com.stripe.net.Webhook;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import com.google.gson.JsonSyntaxException;
+
+import com.stripe.BaseStripeTest;
+import com.stripe.exception.SignatureVerificationException;
+import com.stripe.model.Event;
+import com.stripe.net.Webhook;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -19,9 +21,6 @@ import org.junit.Before;
 import org.junit.Rule;
 import org.junit.Test;
 import org.junit.rules.ExpectedException;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 
 public class WebhookTest extends BaseStripeTest {
   public static String secret = null;

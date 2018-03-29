@@ -1,8 +1,6 @@
 package com.stripe;
 
 import com.google.common.base.Joiner;
-import org.junit.Assert;
-import org.junit.Test;
 
 import java.io.BufferedReader;
 import java.io.File;
@@ -13,6 +11,9 @@ import java.util.Calendar;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
+
+import org.junit.Assert;
+import org.junit.Test;
 
 public class DocumentationTest {
 

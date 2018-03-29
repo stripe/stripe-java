@@ -3,10 +3,11 @@ package com.stripe.functional;
 import com.stripe.BaseStripeFunctionalTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
-import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import org.junit.Test;
 
 public class CardTest extends BaseStripeFunctionalTest {
   @Test

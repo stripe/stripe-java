@@ -1,19 +1,27 @@
 package com.stripe.functional;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import com.google.common.collect.ImmutableMap;
+
 import com.stripe.BaseStripeFunctionalTest;
 import com.stripe.exception.StripeException;
-import com.stripe.model.*;
+import com.stripe.model.DeletedProduct;
+import com.stripe.model.DeletedSKU;
+import com.stripe.model.Order;
+import com.stripe.model.OrderItem;
+import com.stripe.model.OrderReturn;
+import com.stripe.model.Product;
+import com.stripe.model.SKU;
 import com.stripe.net.RequestOptions;
-import org.junit.Test;
 
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import org.junit.Test;
 
 public class RelayTest extends BaseStripeFunctionalTest {
   @Test

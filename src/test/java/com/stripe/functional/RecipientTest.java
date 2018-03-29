@@ -1,17 +1,21 @@
 package com.stripe.functional;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import com.stripe.BaseStripeFunctionalTest;
 import com.stripe.exception.StripeException;
-import com.stripe.model.*;
-import org.junit.Test;
+import com.stripe.model.Card;
+import com.stripe.model.DeletedCard;
+import com.stripe.model.DeletedRecipient;
+import com.stripe.model.Recipient;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
+import org.junit.Test;
 
 public class RecipientTest extends BaseStripeFunctionalTest {
   // Recipient Tests:

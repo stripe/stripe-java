@@ -1,17 +1,27 @@
 package com.stripe.functional;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
+
 import com.google.common.collect.ImmutableMap;
 import com.stripe.BaseStripeFunctionalTest;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
-import com.stripe.model.*;
-import org.junit.Test;
+import com.stripe.model.Customer;
+import com.stripe.model.DeletedInvoiceItem;
+import com.stripe.model.Invoice;
+
+import com.stripe.model.InvoiceItem;
+import com.stripe.model.InvoiceLineItemCollection;
+import com.stripe.model.Plan;
 
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.*;
+import org.junit.Test;
 
 public class InvoiceTest extends BaseStripeFunctionalTest {
   static InvoiceItem createDefaultInvoiceItem(Customer customer)

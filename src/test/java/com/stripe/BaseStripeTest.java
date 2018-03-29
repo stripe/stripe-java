@@ -1,20 +1,27 @@
 package com.stripe;
 
+import static org.mockito.Mockito.argThat;
+import static org.mockito.Mockito.eq;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
+
 import com.stripe.exception.StripeException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
-import org.junit.Before;
-import org.junit.BeforeClass;
-import org.mockito.ArgumentMatcher;
-import org.mockito.Mockito;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
-import static org.mockito.Mockito.*;
+import org.junit.Before;
+import org.junit.BeforeClass;
+
+import org.mockito.ArgumentMatcher;
+import org.mockito.Mockito;
 
 public class BaseStripeTest {
   public static StripeResponseGetter networkMock;

@@ -1,5 +1,9 @@
 package com.stripe.model;
 
+import static org.junit.Assert.assertEquals;
+import static org.mockito.Mockito.verifyNoMoreInteractions;
+import static org.mockito.Mockito.when;
+
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.APIConnectionException;
 import com.stripe.exception.APIException;
@@ -13,20 +17,18 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.RequestOptions.RequestOptionsBuilder;
 
 import java.io.IOException;
-import java.util.HashMap;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
 import org.mockito.stubbing.Answer;
-
-import static org.junit.Assert.assertEquals;
-import static org.mockito.Mockito.*;
 
 public class PagingIteratorTest extends BaseStripeTest {
   @Before

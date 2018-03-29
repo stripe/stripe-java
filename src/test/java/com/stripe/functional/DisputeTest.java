@@ -1,11 +1,27 @@
 package com.stripe.functional;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNotSame;
+import static org.junit.Assert.assertNull;
+
 import com.google.common.collect.ImmutableMap;
 import com.stripe.BaseStripeFunctionalTest;
-import com.stripe.exception.*;
-import com.stripe.model.*;
+import com.stripe.exception.APIConnectionException;
+import com.stripe.exception.APIException;
+import com.stripe.exception.AuthenticationException;
+import com.stripe.exception.CardException;
+import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
+import com.stripe.model.Card;
+import com.stripe.model.Charge;
+import com.stripe.model.Dispute;
+import com.stripe.model.EvidenceDetails;
+import com.stripe.model.EvidenceSubObject;
+import com.stripe.model.FileUpload;
+import com.stripe.model.FraudDetails;
 import com.stripe.net.RequestOptions;
-import org.junit.Test;
 
 import java.io.File;
 import java.net.URISyntaxException;
@@ -15,9 +31,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
-import static org.junit.Assert.*;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import org.junit.Test;
 
 public class DisputeTest extends BaseStripeFunctionalTest {
 

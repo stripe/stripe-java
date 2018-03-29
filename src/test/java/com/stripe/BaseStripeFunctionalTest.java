@@ -1,20 +1,26 @@
 package com.stripe;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
 import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.Plan;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+
+import java.util.Calendar;
+import java.util.Date;
+import java.util.GregorianCalendar;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.UUID;
+
 import org.junit.Before;
 import org.junit.BeforeClass;
 import org.junit.Test;
-
-import java.util.*;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
 
 public class BaseStripeFunctionalTest {
   public static Map<String, Object> defaultChargeParams = new HashMap<String, Object>();

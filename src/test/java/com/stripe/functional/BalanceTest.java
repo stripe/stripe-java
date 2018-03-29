@@ -1,11 +1,12 @@
 package com.stripe.functional;
 
+import static org.junit.Assert.assertEquals;
+
 import com.stripe.BaseStripeFunctionalTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Balance;
-import org.junit.Test;
 
-import static org.junit.Assert.assertEquals;
+import org.junit.Test;
 
 public class BalanceTest extends BaseStripeFunctionalTest {
   @Test

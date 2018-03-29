@@ -1,8 +1,5 @@
 package com.stripe.net;
 
-import java.io.UnsupportedEncodingException;
-import java.util.Map;
-
 import com.stripe.Stripe;
 import com.stripe.exception.APIConnectionException;
 import com.stripe.exception.APIException;
@@ -15,6 +12,9 @@ import com.stripe.net.APIResource;
 import com.stripe.net.LiveStripeResponseGetter;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
+
+import java.io.UnsupportedEncodingException;
+import java.util.Map;
 
 public final class OAuth {
   private static StripeResponseGetter stripeResponseGetter = new LiveStripeResponseGetter();

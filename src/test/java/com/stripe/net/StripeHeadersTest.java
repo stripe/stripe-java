@@ -1,16 +1,16 @@
 package com.stripe.net;
 
+import static org.junit.Assert.assertEquals;
+
 import com.stripe.BaseStripeTest;
 import com.stripe.net.StripeHeaders;
 
-import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
-
-import static org.junit.Assert.assertEquals;
 
 public class StripeHeadersTest extends BaseStripeTest {
 
