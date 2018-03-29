@@ -17,15 +17,18 @@ import javax.net.ssl.SSLSocketFactory;
  */
 public class StripeSSLSocketFactory extends SSLSocketFactory {
   private final SSLSocketFactory under;
-  private final boolean tlsv11Supported, tlsv12Supported;
+  private final boolean tlsv11Supported;
+  private final boolean tlsv12Supported;
 
-  private static final String TLSv11Proto = "TLSv1.1", TLSv12Proto = "TLSv1.2";
+  private static final String TLSv11Proto = "TLSv1.1";
+  private static final String TLSv12Proto = "TLSv1.2";
 
   public StripeSSLSocketFactory() {
     this.under = HttpsURLConnection.getDefaultSSLSocketFactory();
 
     // For sufficiently old Java, TLSv1.1 and TLSv1.2 might not be supported, so do some detection
-    boolean tlsv11Supported = false, tlsv12Supported = false;
+    boolean tlsv11Supported = false;
+    boolean tlsv12Supported = false;
 
     String[] supportedProtos = new String[0];
     try {

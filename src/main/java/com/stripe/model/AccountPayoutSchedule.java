@@ -48,9 +48,9 @@ public class AccountPayoutSchedule extends StripeObject {
     }
 
     AccountPayoutSchedule schedule = (AccountPayoutSchedule) o;
-    return equals(delayDays, schedule.delayDays) &&
-        equals(interval, schedule.interval) &&
-        equals(monthlyAnchor, schedule.monthlyAnchor) &&
-        equals(weeklyAnchor, schedule.weeklyAnchor);
+    return equals(delayDays, schedule.delayDays)
+        && equals(interval, schedule.interval)
+        && equals(monthlyAnchor, schedule.monthlyAnchor)
+        && equals(weeklyAnchor, schedule.weeklyAnchor);
   }
 }

@@ -31,8 +31,7 @@ public class PagingIterator<T extends HasId> extends APIResource implements Iter
 
   @Override
   public boolean hasNext() {
-    return currentDataIterator.hasNext() ||
-        currentCollection.getHasMore();
+    return currentDataIterator.hasNext() || currentCollection.getHasMore();
   }
 
   @Override

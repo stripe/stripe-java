@@ -682,7 +682,7 @@ public final class EvidenceSubObject extends StripeObject {
         : that.shippingDate != null) {
       return false;
     }
-    if (shippingDocumentation != null ?!shippingDocumentation.equals(that.shippingDocumentation)
+    if (shippingDocumentation != null ? !shippingDocumentation.equals(that.shippingDocumentation)
         : that.shippingDocumentation != null) {
       return false;
     }

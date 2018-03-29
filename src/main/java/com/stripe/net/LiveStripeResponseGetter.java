@@ -42,7 +42,7 @@ import javax.net.ssl.SSLSocketFactory;
 public class LiveStripeResponseGetter implements StripeResponseGetter {
   private static final String DNS_CACHE_TTL_PROPERTY_NAME = "networkaddress.cache.ttl";
 
-  private final static class Parameter {
+  private static final class Parameter {
     public final String key;
     public final String value;
 
@@ -347,9 +347,9 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     } else if (value instanceof Object[]) {
       flatParams = flattenParamsArray((Object[]) value, keyPrefix);
     } else if ("".equals(value)) {
-      throw new InvalidRequestException("You cannot set '" + keyPrefix + "' to an empty string. " +
-          "We interpret empty strings as null in requests. " +
-          "You may set '" + keyPrefix + "' to null to delete the property.",
+      throw new InvalidRequestException("You cannot set '" + keyPrefix + "' to an empty string. "
+          + "We interpret empty strings as null in requests. "
+          + "You may set '" + keyPrefix + "' to null to delete the property.",
           keyPrefix, null, null, 0, null);
     } else if (value == null) {
       flatParams = new LinkedList<Parameter>();

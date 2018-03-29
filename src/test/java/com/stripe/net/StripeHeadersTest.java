@@ -14,7 +14,7 @@ import org.junit.Test;
 
 public class StripeHeadersTest extends BaseStripeTest {
 
-  private Map<String, List<String>> generateHeaderMap () {
+  private Map<String, List<String>> generateHeaderMap() {
     Map<String, List<String>> headerMap = new HashMap<String, List<String>>();
     List<String> multiValueHeader = new ArrayList<String>();
     multiValueHeader.add("FirstValue");
