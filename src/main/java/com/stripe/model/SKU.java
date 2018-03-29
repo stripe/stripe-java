@@ -159,22 +159,16 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
     return create(params, null);
   }
 
-  public static SKU retrieve(String id)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return retrieve(id, null);
-  }
-
-  public SKU update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return update(params, null);
-  }
-
   public static SKU create(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, classURL(SKU.class), params, SKU.class, options);
+  }
+
+  public static SKU retrieve(String id)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return retrieve(id, null);
   }
 
   public static SKU retrieve(String id, RequestOptions options)
@@ -187,6 +181,18 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.GET, instanceURL(SKU.class, id), params, SKU.class, options);
+  }
+
+  public SKU update(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return update(params, null);
+  }
+
+  public SKU update(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.POST, instanceURL(SKU.class, this.id), params, SKU.class, options);
   }
 
   public DeletedSKU delete()
@@ -228,11 +234,5 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
     return list(params, options);
-  }
-
-  public SKU update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(SKU.class, this.id), params, SKU.class, options);
   }
 }

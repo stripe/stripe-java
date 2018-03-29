@@ -265,10 +265,44 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
     return create(params, (RequestOptions) null);
   }
 
+  @Deprecated
+  public static Customer create(Map<String, Object> params, String apiKey)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return create(params, RequestOptions.builder().setApiKey(apiKey).build());
+  }
+
+  public static Customer create(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.POST, classURL(Customer.class), params, Customer.class, options);
+  }
+
   public static Customer retrieve(String id) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
     return retrieve(id, (RequestOptions) null);
+  }
+
+  @Deprecated
+  public static Customer retrieve(String id, String apiKey)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
+  }
+
+  public static Customer retrieve(String id, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.GET, instanceURL(Customer.class, id), null, Customer.class,
+        options);
+  }
+
+  public static Customer retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.GET, instanceURL(Customer.class, id), params, Customer.class,
+        options);
   }
 
   public Customer update(Map<String, Object> params)
@@ -277,10 +311,46 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
     return update(params, (RequestOptions) null);
   }
 
+  @Deprecated
+  public Customer update(Map<String, Object> params, String apiKey)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return update(params, RequestOptions.builder().setApiKey(apiKey).build());
+  }
+
+  public Customer update(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.POST, instanceURL(Customer.class, this.id), params,
+        Customer.class, options);
+  }
+
   public DeletedCustomer delete() throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
     return delete((RequestOptions) null);
+  }
+
+  @Deprecated
+  public DeletedCustomer delete(String apiKey)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return delete(RequestOptions.builder().setApiKey(apiKey).build());
+  }
+
+  public DeletedCustomer delete(RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.DELETE, instanceURL(Customer.class, this.id), null,
+        DeletedCustomer.class, options);
+  }
+
+  // Use `(Card)customer.getSources().create(params)` instead.
+  @Deprecated
+  public Card createCard(String token, String apiKey) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return createCard(token, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
   public Card createCard(String token) throws AuthenticationException,
@@ -293,6 +363,31 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
     return createCard(params, (RequestOptions) null);
+  }
+
+  @Deprecated
+  public Card createCard(String token, RequestOptions options) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    Map<String, Object> postParams = new HashMap<String, Object>();
+    postParams.put("card", token);
+
+    return createCard(postParams, options);
+  }
+
+  @Deprecated
+  public Card createCard(Map<String, Object> params, String apiKey) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return createCard(params, RequestOptions.builder().setApiKey(apiKey).build());
+  }
+
+  @Deprecated
+  public Card createCard(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException,InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return request(RequestMethod.POST, String.format("%s/cards",
+        instanceURL(Customer.class, this.id)), params, Card.class, options);
   }
 
   // Use `(BankAccount)customer.getSources().create(params)` instead.
@@ -334,6 +429,20 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
     return createSubscription(params, (RequestOptions) null);
   }
 
+  @Deprecated
+  public Subscription createSubscription(Map<String, Object> params, String apiKey)
+      throws AuthenticationException,InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return createSubscription(params, RequestOptions.builder().setApiKey(apiKey).build());
+  }
+
+  public Subscription createSubscription(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException,InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return request(RequestMethod.POST, String.format("%s/subscriptions",
+        instanceURL(Customer.class, this.id)), params, Subscription.class, options);
+  }
+
   /**
    * 1/2014: Legacy (from before multiple subscriptions per customer)
    */
@@ -341,6 +450,28 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return updateSubscription(params, (RequestOptions) null);
+  }
+
+  /**
+   * 1/2014: Legacy (from before multiple subscriptions per customer)
+   */
+  @Deprecated
+  public Subscription updateSubscription(Map<String, Object> params,
+                       String apiKey) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return updateSubscription(params, RequestOptions.builder().setApiKey(apiKey).build());
+  }
+
+  /**
+   * 1/2014: Legacy (from before multiple subscriptions per customer)
+   */
+  public Subscription updateSubscription(Map<String, Object> params,
+                       RequestOptions options) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return request(RequestMethod.POST, String.format("%s/subscription",
+        instanceURL(Customer.class, this.id)), params, Subscription.class, options);
   }
 
   /**
@@ -361,6 +492,41 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
     return cancelSubscription(params, (RequestOptions) null);
   }
 
+  /**
+   * 1/2014: Legacy (from before multiple subscriptions per customer)
+   */
+  @Deprecated
+  public Subscription cancelSubscription(String apiKey)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return cancelSubscription(RequestOptions.builder().setApiKey(apiKey).build());
+  }
+
+  public Subscription cancelSubscription(RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return cancelSubscription(null, options);
+  }
+
+  /**
+   * 1/2014: Legacy (from before multiple subscriptions per customer)
+   */
+  @Deprecated
+  public Subscription cancelSubscription(Map<String, Object> params,
+                       String apiKey) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return cancelSubscription(params, RequestOptions.builder().setApiKey(apiKey).build());
+  }
+
+  public Subscription cancelSubscription(Map<String, Object> params,
+                       RequestOptions options) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return request(RequestMethod.DELETE, String.format("%s/subscription",
+        instanceURL(Customer.class, this.id)), params, Subscription.class, options);
+  }
+
   public void deleteDiscount() throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
@@ -368,37 +534,17 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
   }
 
   @Deprecated
-  public static Customer create(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return create(params, RequestOptions.builder().setApiKey(apiKey).build());
+  public void deleteDiscount(String apiKey) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    deleteDiscount(RequestOptions.builder().setApiKey(apiKey).build());
   }
 
-  public static Customer create(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, classURL(Customer.class), params, Customer.class, options);
-  }
-
-  @Deprecated
-  public static Customer retrieve(String id, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  public static Customer retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Customer.class, id), null, Customer.class,
-        options);
-  }
-
-  public static Customer retrieve(String id, Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Customer.class, id), params, Customer.class,
-        options);
+  public void deleteDiscount(RequestOptions options) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    request(RequestMethod.DELETE, String.format("%s/discount",
+        instanceURL(Customer.class, this.id)), null, Discount.class, options);
   }
 
   public static CustomerCollection list(Map<String, Object> params)
@@ -437,151 +583,4 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
       APIException {
     return list(params, options);
   }
-
-  @Deprecated
-  public Customer update(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return update(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  public Customer update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Customer.class, this.id), params,
-        Customer.class, options);
-  }
-
-  @Deprecated
-  public DeletedCustomer delete(String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return delete(RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  public DeletedCustomer delete(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.DELETE, instanceURL(Customer.class, this.id), null,
-        DeletedCustomer.class, options);
-  }
-
-  // Use `(Card)customer.getSources().create(params)` instead.
-  @Deprecated
-  public Card createCard(String token, String apiKey) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return createCard(token, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  @Deprecated
-  public Card createCard(String token, RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    Map<String, Object> postParams = new HashMap<String, Object>();
-    postParams.put("card", token);
-
-    return createCard(postParams, options);
-  }
-
-  @Deprecated
-  public Card createCard(Map<String, Object> params, String apiKey) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return createCard(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  @Deprecated
-  public Card createCard(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException,InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return request(RequestMethod.POST, String.format("%s/cards",
-        instanceURL(Customer.class, this.id)), params, Card.class, options);
-  }
-
-  @Deprecated
-  public Subscription createSubscription(Map<String, Object> params, String apiKey)
-      throws AuthenticationException,InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return createSubscription(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  public Subscription createSubscription(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException,InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return request(RequestMethod.POST, String.format("%s/subscriptions",
-        instanceURL(Customer.class, this.id)), params, Subscription.class, options);
-  }
-
-  /**
-   * 1/2014: Legacy (from before multiple subscriptions per customer)
-   */
-  @Deprecated
-  public Subscription updateSubscription(Map<String, Object> params,
-                       String apiKey) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return updateSubscription(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  /**
-   * 1/2014: Legacy (from before multiple subscriptions per customer)
-   */
-  public Subscription updateSubscription(Map<String, Object> params,
-                       RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return request(RequestMethod.POST, String.format("%s/subscription",
-        instanceURL(Customer.class, this.id)), params, Subscription.class, options);
-  }
-
-  /**
-   * 1/2014: Legacy (from before multiple subscriptions per customer)
-   */
-  @Deprecated
-  public Subscription cancelSubscription(String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return cancelSubscription(RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  public Subscription cancelSubscription(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return cancelSubscription(null, options);
-  }
-
-  /**
-   * 1/2014: Legacy (from before multiple subscriptions per customer)
-   */
-  @Deprecated
-  public Subscription cancelSubscription(Map<String, Object> params,
-                       String apiKey) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return cancelSubscription(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  public Subscription cancelSubscription(Map<String, Object> params,
-                       RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return request(RequestMethod.DELETE, String.format("%s/subscription",
-        instanceURL(Customer.class, this.id)), params, Subscription.class, options);
-  }
-
-  @Deprecated
-  public void deleteDiscount(String apiKey) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    deleteDiscount(RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  public void deleteDiscount(RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    request(RequestMethod.DELETE, String.format("%s/discount",
-        instanceURL(Customer.class, this.id)), null, Discount.class, options);
-  }
-
 }

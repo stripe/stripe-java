@@ -198,12 +198,6 @@ public class BitcoinReceiver extends ExternalAccount {
     return create(params, null);
   }
 
-  public static BitcoinReceiver retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return retrieve(id, null);
-  }
-
   public static BitcoinReceiver create(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -211,6 +205,13 @@ public class BitcoinReceiver extends ExternalAccount {
         "v1/bitcoin/receivers"), params, BitcoinReceiver.class, options);
   }
 
+  public static BitcoinReceiver retrieve(String id) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return retrieve(id, null);
+  }
+
+  
   public static BitcoinReceiver retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

@@ -190,10 +190,22 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
     return create(params, null);
   }
 
+  public static Product create(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.POST, classURL(Product.class), params, Product.class, options);
+  }
+
   public static Product retrieve(String id)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return retrieve(id, null);
+  }
+
+  public static Product retrieve(String id, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.GET, instanceURL(Product.class, id), null, Product.class, options);
   }
 
   public Product update(Map<String, Object> params)
@@ -202,16 +214,11 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
     return update(params, null);
   }
 
-  public static Product create(Map<String, Object> params, RequestOptions options)
+  public Product update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, classURL(Product.class), params, Product.class, options);
-  }
-
-  public static Product retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Product.class, id), null, Product.class, options);
+    return request(RequestMethod.POST, instanceURL(Product.class, this.id), params,
+        Product.class, options);
   }
 
   public DeletedProduct delete()
@@ -253,12 +260,5 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
     return list(params, options);
-  }
-
-  public Product update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Product.class, this.id), params,
-        Product.class, options);
   }
 }

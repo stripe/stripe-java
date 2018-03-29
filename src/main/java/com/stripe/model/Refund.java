@@ -154,18 +154,6 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
     return update(params, (RequestOptions) null);
   }
 
-  public static Refund retrieve(String id)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return retrieve(id, null);
-  }
-
-  public static Refund create(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return create(params, null);
-  }
-
   @Deprecated
   public Refund update(Map<String, Object> params, String apiKey)
       throws AuthenticationException, InvalidRequestException,
@@ -180,6 +168,12 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
         options);
   }
 
+  public static Refund retrieve(String id)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return retrieve(id, null);
+  }
+
   public static Refund retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -190,6 +184,18 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.GET, instanceURL(Refund.class, id), params, Refund.class, options);
+  }
+
+  public static Refund create(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return create(params, null);
+  }
+
+  public static Refund create(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.POST, classURL(Refund.class), params, Refund.class, options);
   }
 
   public static RefundCollection list(Map<String, Object> params)
@@ -216,11 +222,5 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return list(params, options);
-  }
-
-  public static Refund create(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, classURL(Refund.class), params, Refund.class, options);
   }
 }
