@@ -206,24 +206,6 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
     return create(params, (RequestOptions) null);
   }
 
-  public static InvoiceItem retrieve(String id)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return retrieve(id, (RequestOptions) null);
-  }
-
-  public InvoiceItem update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return update(params, (RequestOptions) null);
-  }
-
-  public DeletedInvoiceItem delete() throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return delete((RequestOptions) null);
-  }
-
   @Deprecated
   public static InvoiceItem create(Map<String, Object> params, String apiKey)
       throws AuthenticationException, InvalidRequestException,
@@ -236,6 +218,12 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, classURL(InvoiceItem.class), params, InvoiceItem.class,
         options);
+  }
+
+  public static InvoiceItem retrieve(String id)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return retrieve(id, (RequestOptions) null);
   }
 
   @Deprecated
@@ -257,6 +245,46 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.GET, instanceURL(InvoiceItem.class, id), params, InvoiceItem.class,
         options);
+  }
+
+  public InvoiceItem update(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return update(params, (RequestOptions) null);
+  }
+
+  @Deprecated
+  public InvoiceItem update(Map<String, Object> params, String apiKey)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return update(params, RequestOptions.builder().setApiKey(apiKey).build());
+  }
+
+  public InvoiceItem update(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.POST, instanceURL(InvoiceItem.class, this.id), params, 
+        InvoiceItem.class, options);
+  }
+
+  public DeletedInvoiceItem delete() throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return delete((RequestOptions) null);
+  }
+
+  @Deprecated
+  public DeletedInvoiceItem delete(String apiKey)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return delete(RequestOptions.builder().setApiKey(apiKey).build());
+  }
+
+  public DeletedInvoiceItem delete(RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.DELETE, instanceURL(InvoiceItem.class, this.id), null,
+        DeletedInvoiceItem.class, options);
   }
 
   public static InvoiceItemCollection list(Map<String, Object> params)
@@ -295,33 +323,4 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
       APIException {
     return list(params, options);
   }
-
-  @Deprecated
-  public InvoiceItem update(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return update(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  public InvoiceItem update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(InvoiceItem.class, this.id), params, 
-        InvoiceItem.class, options);
-  }
-
-  @Deprecated
-  public DeletedInvoiceItem delete(String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return delete(RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  public DeletedInvoiceItem delete(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.DELETE, instanceURL(InvoiceItem.class, this.id), null,
-        DeletedInvoiceItem.class, options);
-  }
-
 }

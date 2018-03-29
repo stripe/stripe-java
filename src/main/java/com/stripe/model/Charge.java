@@ -560,56 +560,6 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     return create(params, (RequestOptions) null);
   }
 
-  public static Charge retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return retrieve(id, (RequestOptions) null);
-  }
-
-  public Charge update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return update(params, (RequestOptions) null);
-  }
-
-  public Charge refund() throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return this.refund(null, (RequestOptions) null);
-  }
-
-  public Charge capture() throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return this.capture(null, (RequestOptions) null);
-  }
-
-  @Deprecated
-  public Dispute updateDispute(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return this.updateDispute(params, (RequestOptions) null);
-  }
-
-  @Deprecated
-  public Dispute closeDispute() throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return this.closeDispute((RequestOptions) null);
-  }
-
-  public Charge refund(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return this.refund(params, (RequestOptions) null);
-  }
-
-  public Charge capture(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return this.capture(params, (RequestOptions) null);
-  }
-
   @Deprecated
   public static Charge create(Map<String, Object> params, String apiKey)
       throws AuthenticationException, InvalidRequestException,
@@ -621,6 +571,12 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, classURL(Charge.class), params, Charge.class, options);
+  }
+
+  public static Charge retrieve(String id) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return retrieve(id, (RequestOptions) null);
   }
 
   @Deprecated
@@ -642,6 +598,12 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     return request(RequestMethod.GET, instanceURL(Charge.class, id), params, Charge.class, options);
   }
 
+  public Charge update(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return update(params, (RequestOptions) null);
+  }
+
   @Deprecated
   public Charge update(Map<String, Object> params, String apiKey)
       throws AuthenticationException, InvalidRequestException,
@@ -654,6 +616,130 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, instanceURL(Charge.class, id), params, Charge.class,
         options);
+  }
+
+  public Charge refund() throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return this.refund(null, (RequestOptions) null);
+  }
+
+  public Charge refund(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return this.refund(params, (RequestOptions) null);
+  }
+
+  @Deprecated
+  public Charge refund(String apiKey) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return this.refund(RequestOptions.builder().setApiKey(apiKey).build()); // full refund
+  }
+
+  public Charge refund(RequestOptions options) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return this.refund(null, options); // full refund
+  }
+
+  @Deprecated
+  public Charge refund(Map<String, Object> params, String apiKey)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return refund(params, RequestOptions.builder().setApiKey(apiKey).build());
+  }
+
+  public Charge refund(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.POST, String.format("%s/refund",
+        instanceURL(Charge.class, this.getId())), params, Charge.class, options);
+  }
+
+  public Charge capture() throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return this.capture(null, (RequestOptions) null);
+  }
+
+  public Charge capture(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return this.capture(params, (RequestOptions) null);
+  }
+
+  @Deprecated
+  public Charge capture(String apiKey) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return capture(RequestOptions.builder().setApiKey(apiKey).build());
+  }
+
+  public Charge capture(RequestOptions options) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return this.capture(null, options);
+  }
+
+  @Deprecated
+  public Charge capture(Map<String, Object> params, String apiKey)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return capture(params, RequestOptions.builder().setApiKey(apiKey).build());
+  }
+
+  public Charge capture(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.POST, String.format("%s/capture",
+        instanceURL(Charge.class, this.getId())), params, Charge.class, options);
+  }
+
+  @Deprecated
+  public Dispute updateDispute(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return this.updateDispute(params, (RequestOptions) null);
+  }
+
+  @Deprecated
+  public Dispute updateDispute(Map<String, Object> params, String apiKey)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return updateDispute(params, RequestOptions.builder().setApiKey(apiKey).build());
+  }
+
+  @Deprecated
+  public Dispute updateDispute(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.POST,
+        String.format("%s/dispute", instanceURL(Charge.class, this.id)), params, Dispute.class,
+        options);
+  }
+
+  @Deprecated
+  public Dispute closeDispute() throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return this.closeDispute((RequestOptions) null);
+  }
+
+  @Deprecated
+  public Dispute closeDispute(String apiKey)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return closeDispute(RequestOptions.builder().setApiKey(apiKey).build());
+  }
+
+  @Deprecated
+  public Dispute closeDispute(RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.POST,
+        String.format("%s/dispute/close", instanceURL(Charge.class, this.getId())), null,
+        Dispute.class, options);
   }
 
   public static ChargeCollection list(Map<String, Object> params)
@@ -687,92 +773,6 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return list(params, options);
-  }
-
-  @Deprecated
-  public Charge refund(String apiKey) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return this.refund(RequestOptions.builder().setApiKey(apiKey).build()); // full refund
-  }
-
-  public Charge refund(RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return this.refund(null, options); // full refund
-  }
-
-  @Deprecated
-  public Charge refund(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return refund(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  public Charge refund(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, String.format("%s/refund",
-        instanceURL(Charge.class, this.getId())), params, Charge.class, options);
-  }
-
-  @Deprecated
-  public Charge capture(String apiKey) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return capture(RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  public Charge capture(RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return this.capture(null, options);
-  }
-
-  @Deprecated
-  public Charge capture(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return capture(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  public Charge capture(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, String.format("%s/capture",
-        instanceURL(Charge.class, this.getId())), params, Charge.class, options);
-  }
-
-  @Deprecated
-  public Dispute updateDispute(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return updateDispute(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  @Deprecated
-  public Dispute updateDispute(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST,
-        String.format("%s/dispute", instanceURL(Charge.class, this.id)), params, Dispute.class,
-        options);
-  }
-
-  @Deprecated
-  public Dispute closeDispute(String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return closeDispute(RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  @Deprecated
-  public Dispute closeDispute(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST,
-        String.format("%s/dispute/close", instanceURL(Charge.class, this.getId())), null,
-        Dispute.class, options);
   }
 
   /**

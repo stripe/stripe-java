@@ -366,36 +366,6 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
     return retrieve(id, (RequestOptions) null);
   }
 
-  public static Invoice create(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return create(params, (RequestOptions) null);
-  }
-
-  public static Invoice upcoming(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return upcoming(params, (RequestOptions) null);
-  }
-
-  public Invoice pay() throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return this.pay((RequestOptions) null);
-  }
-
-  public Invoice pay(Map<String, Object> params) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return this.pay(params, null);
-  }
-
-  public Invoice update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return update(params, (RequestOptions) null);
-  }
-
   @Deprecated
   public static Invoice retrieve(String id, String apiKey)
       throws AuthenticationException, InvalidRequestException,
@@ -416,6 +386,12 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
         options);
   }
 
+  public static Invoice create(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return create(params, (RequestOptions) null);
+  }
+
   @Deprecated
   public static Invoice create(Map<String, Object> params, String apiKey)
       throws AuthenticationException, InvalidRequestException,
@@ -427,6 +403,12 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, classURL(Invoice.class), params, Invoice.class, options);
+  }
+
+  public static Invoice upcoming(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return upcoming(params, (RequestOptions) null);
   }
 
   @Deprecated
@@ -441,6 +423,59 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.GET, String.format("%s/upcoming", classURL(Invoice.class)), params,
         Invoice.class, options);
+  }
+
+  public Invoice pay() throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return this.pay((RequestOptions) null);
+  }
+
+  public Invoice pay(Map<String, Object> params) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return this.pay(params, null);
+  }
+
+  @Deprecated
+  public Invoice pay(String apiKey) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return pay(RequestOptions.builder().setApiKey(apiKey).build());
+  }
+
+  @Deprecated
+  public Invoice pay(RequestOptions options) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return pay(null, options);
+  }
+
+  public Invoice pay(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
+    return request(RequestMethod.POST, String.format("%s/pay",
+        instanceURL(Invoice.class, this.getId())), params, Invoice.class, options);
+  }
+
+  public Invoice update(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return update(params, (RequestOptions) null);
+  }
+
+  @Deprecated
+  public Invoice update(Map<String, Object> params, String apiKey)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return update(params, RequestOptions.builder().setApiKey(apiKey).build());
+  }
+
+  public Invoice update(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.POST, instanceURL(Invoice.class, this.id), params, Invoice.class,
+        options);
   }
 
   public static InvoiceCollection list(Map<String, Object> params)
@@ -477,40 +512,5 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
     return list(params, options);
-  }
-
-  @Deprecated
-  public Invoice update(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return update(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  public Invoice update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Invoice.class, this.id), params, Invoice.class,
-        options);
-  }
-
-  @Deprecated
-  public Invoice pay(String apiKey) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return pay(RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  @Deprecated
-  public Invoice pay(RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return pay(null, options);
-  }
-
-  public Invoice pay(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
-    return request(RequestMethod.POST, String.format("%s/pay",
-        instanceURL(Invoice.class, this.getId())), params, Invoice.class, options);
   }
 }

@@ -126,12 +126,6 @@ public class Token extends APIResource implements HasId {
     return create(params, (RequestOptions) null);
   }
 
-  public static Token retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return retrieve(id, (RequestOptions) null);
-  }
-
   @Deprecated
   public static Token create(Map<String, Object> params, String apiKey)
       throws AuthenticationException, InvalidRequestException,
@@ -143,6 +137,12 @@ public class Token extends APIResource implements HasId {
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, classURL(Token.class), params, Token.class, options);
+  }
+
+  public static Token retrieve(String id) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return retrieve(id, (RequestOptions) null);
   }
 
   @Deprecated

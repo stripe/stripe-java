@@ -82,12 +82,6 @@ public class FileUpload extends APIResource implements HasId {
     return create(params, (RequestOptions) null);
   }
 
-  public static FileUpload retrieve(String id)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return retrieve(id, (RequestOptions) null);
-  }
-
   @Deprecated
   public static FileUpload create(Map<String, Object> params, String apiKey)
       throws AuthenticationException, InvalidRequestException,
@@ -102,6 +96,12 @@ public class FileUpload extends APIResource implements HasId {
       APIException {
     return multipartRequest(RequestMethod.POST, classURL(FileUpload.class, Stripe.UPLOAD_API_BASE),
         params, FileUpload.class, options);
+  }
+
+  public static FileUpload retrieve(String id)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return retrieve(id, (RequestOptions) null);
   }
 
   @Deprecated

@@ -255,22 +255,16 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
     return create(params, null);
   }
 
-  public static Order retrieve(String id)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return retrieve(id, null);
-  }
-
-  public Order update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return update(params, null);
-  }
-
   public static Order create(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, classURL(Order.class), params, Order.class, options);
+  }
+
+  public static Order retrieve(String id)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return retrieve(id, null);
   }
 
   public static Order retrieve(String id, RequestOptions options)
@@ -283,6 +277,20 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.GET, instanceURL(Order.class, id), params, Order.class, options);
+  }
+
+  public Order update(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return update(params, null);
+  }
+
+  @Deprecated
+  public Order update(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.POST, instanceURL(Order.class, this.id), params, Order.class,
+        options);
   }
 
   public static OrderCollection list(Map<String, Object> params)
@@ -311,14 +319,6 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
     return list(params, options);
-  }
-
-  @Deprecated
-  public Order update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Order.class, this.id), params, Order.class,
-        options);
   }
 
   public Order pay(Map<String, Object> params) throws AuthenticationException,
