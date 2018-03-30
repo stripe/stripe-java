@@ -3,6 +3,9 @@
   "checkstyle.version": "8.8",
   "checkstyle.configurationFile": "./config/checkstyle/checkstyle.xml",
   "editor.renderWhitespace": "all",
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
   "[java]": {
     "editor.detectIndentation": false,
     "editor.insertSpaces": true,
