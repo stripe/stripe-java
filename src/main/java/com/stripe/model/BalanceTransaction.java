@@ -110,20 +110,6 @@ public class BalanceTransaction extends APIResource implements HasId {
     this.net = net;
   }
 
-  /**
-   * @deprecated Recent API versions no longer return this field
-   *     (https://stripe.com/docs/upgrades#2017-01-27).
-   *     Prefer listing all transfers with the `transfer_group` parameter:
-   *     https://stripe.com/docs/api/java#list_transfers-transfer_group.
-   */
-  @Deprecated
-  public TransferCollection getSourcedTransfers() {
-    if (sourcedTransfers != null && sourcedTransfers.getURL() == null && getSource() != null) {
-      sourcedTransfers.setURL(String.format("/v1/transfers?source_transaction=%s", getSource()));
-    }
-    return sourcedTransfers;
-  }
-
   public String getStatus() {
     return status;
   }
@@ -141,10 +127,7 @@ public class BalanceTransaction extends APIResource implements HasId {
   }
 
   public String getSource() {
-    if (this.source == null) {
-      return null;
-    }
-    return this.source.getId();
+    return (this.source != null) ? this.source.getId() : null;
   }
 
   public void setSource(String sourceID) {
@@ -152,10 +135,7 @@ public class BalanceTransaction extends APIResource implements HasId {
   }
 
   public HasId getSourceObject() {
-    if (this.source == null) {
-      return null;
-    }
-    return this.source.getExpanded();
+    return (this.source != null) ? this.source.getExpanded() : null;
   }
 
   public void setSourceObject(HasId o) {
@@ -163,10 +143,23 @@ public class BalanceTransaction extends APIResource implements HasId {
   }
 
   public <O extends HasId> O getSourceObjectAs() {
-    if (this.source == null) {
-      return null;
+    return (this.source != null) ? (O) this.source.getExpanded() : null;
+  }
+
+  /**
+   * Returns the {@code sourced_transfers} attribute.
+   *
+   * @return the {@code sourced_transfers} attribute
+   * @deprecated Prefer using the {@link Transfer#list} method with the {@code transfer_group}
+   *     parameter.
+   * @see <a href="https://stripe.com/docs/upgrades#2017-01-27">API version 2017-01-27</a>
+   */
+  @Deprecated
+  public TransferCollection getSourcedTransfers() {
+    if (sourcedTransfers != null && sourcedTransfers.getURL() == null && getSource() != null) {
+      sourcedTransfers.setURL(String.format("/v1/transfers?source_transaction=%s", getSource()));
     }
-    return (O) this.source.getExpanded();
+    return sourcedTransfers;
   }
 
   public static BalanceTransaction retrieve(String id) throws AuthenticationException,

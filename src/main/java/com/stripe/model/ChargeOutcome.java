@@ -30,26 +30,26 @@ public class ChargeOutcome extends APIResource {
     return type;
   }
 
+  /**
+   * Returns the {@code rule} object, if expanded. If not expanded, use {@link #getRuleId()} to get
+   * the ID.
+   *
+   * @return the {@code rule} ID
+   * @deprecated In recent API versions, this attribute is no longer automatically expanded. Prefer
+   *     using the {@link #getRuleId()} and {@link #getRuleObject()} methods instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2017-02-14">API version 2017-02-14</a>
+   */
   @Deprecated
   public ChargeOutcomeRule getRule() {
-    if (this.rule == null) {
-      return null;
-    }
-    return this.rule.getExpanded();
+    return (this.rule != null) ? this.rule.getExpanded() : null;
   }
 
   public String getRuleId() {
-    if (this.rule == null) {
-      return null;
-    }
-    return this.rule.getId();
+    return (this.rule != null) ? this.rule.getId() : null;
   }
 
   public ChargeOutcomeRule getRuleObject() {
-    if (this.rule == null) {
-      return null;
-    }
-    return this.rule.getExpanded();
+    return (this.rule != null) ? this.rule.getExpanded() : null;
   }
 
   public void setNetworkStatus(String networkStatus) {

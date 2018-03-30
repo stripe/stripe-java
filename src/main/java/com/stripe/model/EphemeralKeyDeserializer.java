@@ -11,6 +11,9 @@ import com.google.gson.JsonParseException;
 import java.lang.reflect.Type;
 
 public class EphemeralKeyDeserializer implements JsonDeserializer<EphemeralKey> {
+  /**
+   * Deserializes an ephemeral_key JSON payload into an {@link EphemeralKey} object.
+   */
   public EphemeralKey deserialize(JsonElement json, Type typeOfT,
       JsonDeserializationContext context)
       throws JsonParseException {

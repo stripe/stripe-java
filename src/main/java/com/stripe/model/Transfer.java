@@ -92,10 +92,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
   }
 
   public String getBalanceTransaction() {
-    if (this.balanceTransaction == null) {
-      return null;
-    }
-    return this.balanceTransaction.getId();
+    return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
   }
 
   public void setBalanceTransaction(String balanceTransactionID) {
@@ -103,10 +100,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
   }
 
   public BalanceTransaction getBalanceTransactionObject() {
-    if (this.balanceTransaction == null) {
-      return null;
-    }
-    return this.balanceTransaction.getExpanded();
+    return (this.balanceTransaction != null) ? this.balanceTransaction.getExpanded() : null;
   }
 
   public void setBalanceTransactionObject(BalanceTransaction c) {
@@ -158,10 +152,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
   }
 
   public String getDestination() {
-    if (this.destination == null) {
-      return null;
-    }
-    return this.destination.getId();
+    return (this.destination != null) ? this.destination.getId() : null;
   }
 
   public void setDestination(String destinationID) {
@@ -169,10 +160,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
   }
 
   public Account getDestinationObject() {
-    if (this.destination == null) {
-      return null;
-    }
-    return this.destination.getExpanded();
+    return (this.destination != null) ? this.destination.getExpanded() : null;
   }
 
   public void setDestinationObject(Account c) {
@@ -180,22 +168,15 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
   }
 
   public String getDestinationPayment() {
-    if (this.destinationPayment == null) {
-      return null;
-    }
-    return this.destinationPayment.getId();
+    return (this.destinationPayment != null) ? this.destinationPayment.getId() : null;
   }
 
   public void setDestinationPayment(String destinationPaymentID) {
     this.destinationPayment = setExpandableFieldID(destinationPaymentID, this.destinationPayment);
-
   }
 
   public Charge getDestinationPaymentObject() {
-    if (this.destinationPayment == null) {
-      return null;
-    }
-    return this.destinationPayment.getExpanded();
+    return (this.destinationPayment != null) ? this.destinationPayment.getExpanded() : null;
   }
 
   public void setDestinationPaymentObject(Charge destinationPayment) {
@@ -239,6 +220,11 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
     this.metadata = metadata;
   }
 
+  /**
+   * Returns the {@code reversals} list.
+   *
+   * @return the {@code reversals} list
+   */
   public TransferReversalCollection getReversals() {
     if (reversals.getURL() == null) {
       reversals.setURL(String.format("/v1/transfers/%s/reversals", getId()));
@@ -255,10 +241,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
   }
 
   public String getSourceTransaction() {
-    if (this.sourceTransaction == null) {
-      return null;
-    }
-    return this.sourceTransaction.getId();
+    return (this.sourceTransaction != null) ? this.sourceTransaction.getId() : null;
   }
 
   public void setSourceTransaction(String sourceTransactionID) {
@@ -267,10 +250,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
   }
 
   public Charge getSourceTransactionObject() {
-    if (this.sourceTransaction == null) {
-      return null;
-    }
-    return this.sourceTransaction.getExpanded();
+    return (this.sourceTransaction != null) ? this.sourceTransaction.getExpanded() : null;
   }
 
   public void setSourceTransactionObject(Charge sourceTransaction) {
@@ -323,32 +303,34 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
   }
 
   /**
-   * @deprecated Use `bank_account` field (https://stripe.com/docs/upgrades#2014-05-19)
+   * Returns the {@code account} attribute.
+   *
+   * @return the {@code account} attribute
+   * @deprecated Prefer using the {@code bank_account} attribute instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2014-05-19">API version 2014-05-19</a>
    */
   @Deprecated
   public BankAccount getAccount() {
     return account;
   }
 
-  /**
-   * @deprecated Use `bank_account` field (https://stripe.com/docs/upgrades#2014-05-19)
-   */
   @Deprecated
   public void setAccount(BankAccount account) {
     this.account = account;
   }
 
   /**
-   * @deprecated Use the balance history endpoint (https://stripe.com/docs/upgrades#2014-08-04)
+   * Returns the {@code other_transfers} attribute.
+   *
+   * @return the {@code other_transfers} attribute
+   * @deprecated Prefer using the {@link BalanceTransaction#list} method instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2014-08-04">API version 2014-08-04</a>
    */
   @Deprecated
   public List<String> getOtherTransfers() {
     return otherTransfers;
   }
 
-  /**
-   * @deprecated Use the balance history endpoint (https://stripe.com/docs/upgrades#2014-08-04)
-   */
   @Deprecated
   public void setOtherTransfers(List<String> otherTransfers) {
     this.otherTransfers = otherTransfers;
@@ -365,32 +347,34 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
   }
 
   /**
-   * @deprecated Use `statement_descriptor` field (https://stripe.com/docs/upgrades#2014-12-17)
+   * Returns the {@code statement_description} attribute.
+   *
+   * @return the {@code statement_description} attribute
+   * @deprecated Prefer using the {@code statement_descriptor} attribute instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2014-12-17">API version 2014-12-17</a>
    */
   @Deprecated
   public String getStatementDescription() {
     return statementDescription;
   }
 
-  /**
-   * @deprecated Use `statement_descriptor` field (https://stripe.com/docs/upgrades#2014-12-17)
-   */
   @Deprecated
   public void setStatementDescription(String statementDescription) {
     this.statementDescription = statementDescription;
   }
 
   /**
-   * @deprecated Use the balance history endpoint (https://stripe.com/docs/upgrades#2014-08-04)
+   * Returns the {@code summary} attribute.
+   *
+   * @return the {@code summary} attribute
+   * @deprecated Prefer using the {@link BalanceTransaction#list} method instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2014-08-04">API version 2014-08-04</a>
    */
   @Deprecated
   public Summary getSummary() {
     return summary;
   }
 
-  /**
-   * @deprecated Use the balance history endpoint (https://stripe.com/docs/upgrades#2014-08-04)
-   */
   @Deprecated
   public void setSummary(Summary summary) {
     this.summary = summary;
@@ -443,7 +427,10 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
   }
 
   /**
-   * @deprecated Use Transfer.getReversals().create() instead of Transfer.cancel().
+   * Returns the {@code summary} attribute.
+   *
+   * @return the {@code summary} attribute
+   * @deprecated Prefer using the {@code transfers.getReversals().create(params)} method instead.
    */
   @Deprecated
   public Transfer cancel()

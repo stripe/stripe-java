@@ -50,9 +50,8 @@ public class ExternalAccountCollection extends StripeCollection<ExternalAccount>
   public ExternalAccount retrieve(String id, RequestOptions options) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
-    String url = String.format("%s%s/%s", Stripe.getApiBase(), this.getURL(), id);
-    return APIResource.request(APIResource.RequestMethod.GET, url, null, ExternalAccount.class,
-        options);
+    return APIResource.request(APIResource.RequestMethod.GET, String.format("%s%s/%s",
+        Stripe.getApiBase(), this.getURL(), id), null, ExternalAccount.class, options);
   }
 
   public ExternalAccount create(Map<String, Object> params)
@@ -65,8 +64,7 @@ public class ExternalAccountCollection extends StripeCollection<ExternalAccount>
                   RequestOptions options) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
-    String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
-    return APIResource.request(APIResource.RequestMethod.POST, url, params, ExternalAccount.class,
-        options);
+    return APIResource.request(APIResource.RequestMethod.POST, String.format("%s%s",
+        Stripe.getApiBase(), this.getURL()), params, ExternalAccount.class, options);
   }
 }

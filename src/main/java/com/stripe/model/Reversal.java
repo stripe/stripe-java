@@ -41,10 +41,7 @@ public class Reversal extends APIResource implements MetadataStore<Transfer>, Ha
   }
 
   public String getBalanceTransaction() {
-    if (this.balanceTransaction == null) {
-      return null;
-    }
-    return this.balanceTransaction.getId();
+    return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
   }
 
   public void setBalanceTransaction(String balanceTransactionID) {
@@ -52,10 +49,7 @@ public class Reversal extends APIResource implements MetadataStore<Transfer>, Ha
   }
 
   public BalanceTransaction getBalanceTransactionObject() {
-    if (this.balanceTransaction == null) {
-      return null;
-    }
-    return this.balanceTransaction.getExpanded();
+    return (this.balanceTransaction != null) ? this.balanceTransaction.getExpanded() : null;
   }
 
   public void setBalanceTransactionObject(BalanceTransaction c) {
@@ -87,10 +81,7 @@ public class Reversal extends APIResource implements MetadataStore<Transfer>, Ha
   }
 
   public String getTransfer() {
-    if (this.transfer == null) {
-      return null;
-    }
-    return this.transfer.getId();
+    return (this.transfer != null) ? this.transfer.getId() : null;
   }
 
   public void setTransfer(String transferID) {
@@ -98,10 +89,7 @@ public class Reversal extends APIResource implements MetadataStore<Transfer>, Ha
   }
 
   public Transfer getTransferObject() {
-    if (this.transfer == null) {
-      return null;
-    }
-    return this.transfer.getExpanded();
+    return (this.transfer != null) ? this.transfer.getExpanded() : null;
   }
 
   public void setTransferObject(Transfer c) {
@@ -127,7 +115,7 @@ public class Reversal extends APIResource implements MetadataStore<Transfer>, Ha
     return request(RequestMethod.POST, this.getInstanceURL(), params, Reversal.class, options);
   }
 
-  public String getInstanceURL() {
+  protected String getInstanceURL() {
     if (this.transfer != null) {
       return String.format("%s/%s/reversals/%s", classURL(Transfer.class), this.transfer,
           this.getId());

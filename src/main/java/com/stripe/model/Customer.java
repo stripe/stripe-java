@@ -90,10 +90,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
   }
 
   public String getDefaultSource() {
-    if (this.defaultSource == null) {
-      return null;
-    }
-    return this.defaultSource.getId();
+    return (this.defaultSource != null) ? this.defaultSource.getId() : null;
   }
 
   public void setDefaultSource(String defaultSourceID) {
@@ -101,10 +98,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
   }
 
   public ExternalAccount getDefaultSourceObject() {
-    if (this.defaultSource == null) {
-      return null;
-    }
-    return this.defaultSource.getExpanded();
+    return (this.defaultSource != null) ? this.defaultSource.getExpanded() : null;
   }
 
   public void setDefaultSourceObject(ExternalAccount c) {
@@ -188,7 +182,11 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
   }
 
   /**
-   * @deprecated Use `sources` field (https://stripe.com/docs/upgrades#2015-02-18)
+   * Returns the {@code cards} attribute.
+   *
+   * @return the {@code cards} attribute
+   * @deprecated Prefer using the {@code sources} attribute instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2015-02-18">API version 2015-02-18</a>
    */
   @Deprecated
   public CustomerCardCollection getCards() {
@@ -196,64 +194,68 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
   }
 
   /**
-   * @deprecated Use `default_source` field (https://stripe.com/docs/upgrades#2015-02-18)
+   * Returns the {@code default_card} attribute.
+   *
+   * @return the {@code default_card} attribute
+   * @deprecated Prefer using the {@code default_source} attribute instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2015-02-18">API version 2015-02-18</a>
    */
   @Deprecated
   public String getDefaultCard() {
     return defaultCard;
   }
 
-  /**
-   * @deprecated Use `default_source` field (https://stripe.com/docs/upgrades#2015-02-18)
-   */
   @Deprecated
   public void setDefaultCard(String defaultCard) {
     this.defaultCard = defaultCard;
   }
 
   /**
-   * @deprecated Use the upcoming invoice endpoint (https://stripe.com/docs/upgrades#2012-03-25)
+   * Returns the {@code next_recurring_charge} attribute.
+   *
+   * @return the {@code next_recurring_charge} attribute
+   * @deprecated Prefer using the {@link Invoice#upcoming} method instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2012-03-25">API version 2012-03-25</a>
    */
   @Deprecated
   public NextRecurringCharge getNextRecurringCharge() {
     return nextRecurringCharge;
   }
 
-  /**
-   * @deprecated Use the upcoming invoice endpoint (https://stripe.com/docs/upgrades#2012-03-25)
-   */
   @Deprecated
   public void setNextRecurringCharge(NextRecurringCharge nextRecurringCharge) {
     this.nextRecurringCharge = nextRecurringCharge;
   }
 
   /**
-   * @deprecated Use `subscriptions` field (https://stripe.com/docs/upgrades#2014-01-31)
+   * Returns the {@code subscription} attribute.
+   *
+   * @return the {@code subscription} attribute
+   * @deprecated Prefer using the {@code subscriptions} attribute instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2014-01-31">API version 2014-01-31</a>
    */
   @Deprecated
   public Subscription getSubscription() {
     return subscription;
   }
 
-  /**
-   * @deprecated Use `subscriptions` field (https://stripe.com/docs/upgrades#2014-01-31)
-   */
   @Deprecated
   public void setSubscription(Subscription subscription) {
     this.subscription = subscription;
   }
 
   /**
-   * @deprecated Use `subscriptions` field (https://stripe.com/docs/upgrades#2014-01-31)
+   * Returns the {@code trial_end} attribute.
+   *
+   * @return the {@code trial_end} attribute
+   * @deprecated Prefer using the {@code subscriptions} attribute instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2014-01-31">API version 2014-01-31</a>
    */
   @Deprecated
   public Long getTrialEnd() {
     return trialEnd;
   }
 
-  /**
-   * @deprecated Use `subscriptions` field (https://stripe.com/docs/upgrades#2014-01-31)
-   */
   @Deprecated
   public void setTrialEnd(Long trialEnd) {
     this.trialEnd = trialEnd;
@@ -345,7 +347,6 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
         DeletedCustomer.class, options);
   }
 
-  // Use `(Card)customer.getSources().create(params)` instead.
   @Deprecated
   public Card createCard(String token, String apiKey) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
@@ -365,6 +366,14 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
     return createCard(params, (RequestOptions) null);
   }
 
+  /**
+   * Adds a card to the customer using a card token.
+   *
+   * @param token card token ({@code "tok_..."})
+   * @param options request options
+   * @return the new card object
+   * @deprecated Prefer using the {@code customer.getSources().create(params)} method instead.
+   */
   @Deprecated
   public Card createCard(String token, RequestOptions options) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
@@ -390,7 +399,6 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
         instanceURL(Customer.class, this.id)), params, Card.class, options);
   }
 
-  // Use `(BankAccount)customer.getSources().create(params)` instead.
   @Deprecated
   public BankAccount createBankAccount(String token) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
@@ -398,13 +406,20 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
     return createBankAccount(token, null);
   }
 
+  /**
+   * Adds a bank account to the customer using a bank account token.
+   *
+   * @param token bank account token ({@code "btok_..."})
+   * @param options request options
+   * @return the new bank account object
+   * @deprecated Prefer using the {@code customer.getSources().create(params)} method instead.
+   */
   @Deprecated
   public BankAccount createBankAccount(String token, RequestOptions options)
       throws AuthenticationException, InvalidRequestException, APIConnectionException,
       CardException, APIException {
     Map<String, Object> postParams = new HashMap<String, Object>();
     postParams.put("bank_account", token);
-
     return createBankAccount(postParams, options);
   }
 

@@ -122,6 +122,9 @@ public class BaseStripeTest {
         APIResource.RequestType.NORMAL, RequestOptions.getDefault());
   }
 
+  /**
+   * Verifies that the specified request occurred.
+   */
   public static <T> void verifyRequest(
       APIResource.RequestMethod method,
       Class<T> clazz,
@@ -138,6 +141,9 @@ public class BaseStripeTest {
         argThat(new RequestOptionsMatcher(options)));
   }
 
+  /**
+   * Stubs the next API request and return the provided response.
+   */
   public static <T> void stubNetwork(Class<T> clazz, String response) throws StripeException {
     when(networkMock.request(
         Mockito.any(APIResource.RequestMethod.class),
@@ -148,6 +154,9 @@ public class BaseStripeTest {
         Mockito.<RequestOptions>any())).thenReturn(APIResource.GSON.fromJson(response, clazz));
   }
 
+  /**
+   * Stubs the next OAuth request and return the provided response.
+   */
   public static <T> void stubOAuth(Class<T> clazz, String response) throws StripeException {
     when(networkMock.oauthRequest(
         Mockito.any(APIResource.RequestMethod.class),
@@ -165,8 +174,11 @@ public class BaseStripeTest {
       this.other = other;
     }
 
-    /* Treat null references as equal to empty maps */
+    /**
+     * Informs if this matcher accepts the given argument.
+     */
     public boolean matches(Map<String,Object> paramMap) {
+      // Treat null references as equal to empty maps
       if (paramMap == null) {
         return this.other == null || this.other.isEmpty();
       } else {
@@ -186,8 +198,11 @@ public class BaseStripeTest {
       this.other = other;
     }
 
-    /* Treat null reference as RequestOptions.getDefault() */
+    /**
+     * Informs if this matcher accepts the given argument.
+     */
     public boolean matches(RequestOptions requestOptions) {
+      // Treat null reference as RequestOptions.getDefault()
       RequestOptions defaultOptions = RequestOptions.getDefault();
       if (requestOptions == null) {
         return this.other == null || this.other.equals(defaultOptions);

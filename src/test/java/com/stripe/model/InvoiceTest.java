@@ -35,6 +35,9 @@ public class InvoiceTest extends BaseStripeTest {
     APIResource.setStripeResponseGetter(new LiveStripeResponseGetter());
   }
 
+  /**
+   * Sets the {@link Invoice} fixtures.
+   */
   @Before
   public void deserialize() throws IOException {
     String json = resource("invoice.json");

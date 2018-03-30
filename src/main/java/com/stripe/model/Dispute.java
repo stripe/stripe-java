@@ -77,10 +77,7 @@ public class Dispute extends APIResource implements HasId {
   }
 
   public String getCharge() {
-    if (charge == null) {
-      return null;
-    }
-    return charge.getId();
+    return (this.charge != null) ? this.charge.getId() : null;
   }
 
   public void setCharge(String chargeID) {
@@ -88,10 +85,7 @@ public class Dispute extends APIResource implements HasId {
   }
 
   public Charge getChargeObject() {
-    if (this.charge == null) {
-      return null;
-    }
-    return this.charge.getExpanded();
+    return (this.charge != null) ? this.charge.getExpanded() : null;
   }
 
   public void setChargeObject(Charge charge) {
@@ -182,48 +176,51 @@ public class Dispute extends APIResource implements HasId {
   }
 
   /**
-   * @deprecated Use `balance_transactions` field
+   * Returns the {@code balance_transaction} attribute.
+   *
+   * @return the {@code balance_transaction} attribute
+   * @deprecated Prefer using the {@code balance_transactions} attribute instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2014-08-20">API version 2014-08-20</a>
    */
   @Deprecated
   public String getBalanceTransaction() {
     return balanceTransaction;
   }
 
-  /**
-   * @deprecated Use `balance_transactions` field
-   */
   @Deprecated
   public void setBalanceTransaction(String balanceTransaction) {
     this.balanceTransaction = balanceTransaction;
   }
 
   /**
-   * @deprecated Use evidenceSubObject (https://stripe.com/docs/upgrades#2014-12-08)
+   * Returns the {@code evidence} String attribute.
+   *
+   * @return the {@code evidence} String attribute
+   * @deprecated Prefer using the {@link #getEvidenceSubObject} method instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2014-12-08">API version 2014-12-08</a>
    */
   @Deprecated
   public String getEvidence() {
     return evidence;
   }
 
-  /**
-   * @deprecated Use evidenceSubObject (https://stripe.com/docs/upgrades#2014-12-08)
-   */
   @Deprecated
   public void setEvidence(String evidence) {
     this.evidence = evidence;
   }
 
   /**
-   * @deprecated Use evidenceDetails.dueBy (https://stripe.com/docs/upgrades#2014-12-08)
+   * Returns the {@code evidence_due_by} attribute.
+   *
+   * @return the {@code evidence_due_by} attribute
+   * @deprecated Prefer using the {@code getEvidenceDetails().getDueBy()} method instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2014-12-08">API version 2014-12-08</a>
    */
   @Deprecated
   public Long getEvidenceDueBy() {
     return evidenceDueBy;
   }
 
-  /**
-   * @deprecated Use evidenceDetails.dueBy (https://stripe.com/docs/upgrades#2014-12-08)
-   */
   @Deprecated
   public void setEvidenceDueBy(Long evidenceDueBy) {
     this.evidenceDueBy = evidenceDueBy;
@@ -296,8 +293,7 @@ public class Dispute extends APIResource implements HasId {
   public Dispute close(RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST,
-        String.format("%s/close", instanceURL(Dispute.class, this.getId())),
-        null, Dispute.class, options);
+    return request(RequestMethod.POST, String.format("%s/close",
+        instanceURL(Dispute.class, this.getId())), null, Dispute.class, options);
   }
 }

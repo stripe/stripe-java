@@ -71,6 +71,11 @@ public abstract class Stripe {
     return connectionProxy;
   }
 
+  /**
+   * Returns the connection timeout.
+   *
+   * @return timeout value in milliseconds
+   */
   public static int getConnectTimeout() {
     if (connectTimeout == -1) {
       return DEFAULT_CONNECT_TIMEOUT;
@@ -88,6 +93,11 @@ public abstract class Stripe {
     connectTimeout = timeout;
   }
 
+  /**
+   * Returns the read timeout.
+   *
+   * @return timeout value in milliseconds
+   */
   public static int getReadTimeout() {
     if (readTimeout == -1) {
       return DEFAULT_READ_TIMEOUT;
@@ -98,7 +108,7 @@ public abstract class Stripe {
   /**
    * Sets the timeout value that will be used when reading data from an
    * established connection to the Stripe API (in milliseconds).
-   * 
+   *
    * <p>Note that this value should be set conservatively because some API
    * requests can take time and a short timeout increases the likelihood of
    * causing a problem in the backend.
@@ -130,6 +140,13 @@ public abstract class Stripe {
     setAppInfo(name, version, null);
   }
 
+  /**
+   * Sets information about your application. The information is passed along to Stripe.
+   *
+   * @param name Name of your application (e.g. "MyAwesomeApp")
+   * @param version Version of your application (e.g. "1.2.34")
+   * @param url Website for your application (e.g. "https://myawesomeapp.info")
+   */
   public static void setAppInfo(String name, String version, String url) {
     if (appInfo == null) {
       appInfo = new HashMap<String, String>();

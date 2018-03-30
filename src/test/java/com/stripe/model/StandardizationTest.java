@@ -24,27 +24,6 @@ import org.junit.Test;
  * Simple test to make sure stripe-java provides consistent bindings.
  */
 public class StandardizationTest {
-  public Collection<Class> getAllModels() throws IOException {
-    Class<Charge> chargeClass = Charge.class;
-    ClassPath classPath = ClassPath.from(chargeClass.getClassLoader());
-    ImmutableSet<ClassPath.ClassInfo> topLevelClasses
-        = classPath.getTopLevelClasses(chargeClass.getPackage().getName());
-    List<Class> classList = Lists.newArrayListWithExpectedSize(topLevelClasses.size());
-    for (ClassPath.ClassInfo classInfo : topLevelClasses) {
-      Class c = classInfo.load();
-      // Skip things that aren't APIResources
-      if (!APIResource.class.isAssignableFrom(c)) {
-        continue;
-      }
-      // Skip the APIResource itself
-      if (APIResource.class == c) {
-        continue;
-      }
-      classList.add(classInfo.load());
-    }
-    return classList;
-  }
-
   @Test
   public void allNonDeprecatedMethodsTakeOptions() throws IOException, NoSuchMethodException {
     for (Class model : getAllModels()) {
@@ -126,5 +105,26 @@ public class StandardizationTest {
             RequestOptions.class.isAssignableFrom(finalParamType));
       }
     }
+  }
+
+  private Collection<Class> getAllModels() throws IOException {
+    Class<Charge> chargeClass = Charge.class;
+    ClassPath classPath = ClassPath.from(chargeClass.getClassLoader());
+    ImmutableSet<ClassPath.ClassInfo> topLevelClasses
+        = classPath.getTopLevelClasses(chargeClass.getPackage().getName());
+    List<Class> classList = Lists.newArrayListWithExpectedSize(topLevelClasses.size());
+    for (ClassPath.ClassInfo classInfo : topLevelClasses) {
+      Class c = classInfo.load();
+      // Skip things that aren't APIResources
+      if (!APIResource.class.isAssignableFrom(c)) {
+        continue;
+      }
+      // Skip the APIResource itself
+      if (APIResource.class == c) {
+        continue;
+      }
+      classList.add(classInfo.load());
+    }
+    return classList;
   }
 }

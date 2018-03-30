@@ -87,8 +87,7 @@ public class RecipientCardCollection extends StripeCollection<Card> {
                       RequestOptions options) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
-    String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
-    return APIResource.request(APIResource.RequestMethod.POST, url, params,
-        RecipientCardCollection.class, options);
+    return APIResource.request(APIResource.RequestMethod.POST, String.format("%s%s",
+        Stripe.getApiBase(), this.getURL()), params, RecipientCardCollection.class, options);
   }
 }

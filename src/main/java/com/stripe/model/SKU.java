@@ -123,10 +123,7 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
   }
 
   public String getProduct() {
-    if (this.product == null) {
-      return null;
-    }
-    return this.product.getId();
+    return (this.product != null) ? this.product.getId() : null;
   }
 
   public void setProduct(String productID) {
@@ -135,10 +132,7 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
   }
 
   public Product getProductObject() {
-    if (this.product == null) {
-      return null;
-    }
-    return this.product.getExpanded();
+    return (this.product != null) ? this.product.getExpanded() : null;
   }
 
   public void setProductObject(Product product) {

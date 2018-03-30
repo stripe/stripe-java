@@ -8,6 +8,8 @@ public abstract class StripeException extends Exception {
   private Integer statusCode;
 
   /**
+   * Constructs a new Stripe exception with the specified details.
+   *
    * @deprecated Use new constructor with `code` argument instead.
    */
   @Deprecated
@@ -17,6 +19,8 @@ public abstract class StripeException extends Exception {
   }
 
   /**
+   * Constructs a new Stripe exception with the specified details.
+   *
    * @deprecated Use new constructor with `code` argument instead.
    */
   @Deprecated
@@ -29,6 +33,9 @@ public abstract class StripeException extends Exception {
     this(message, requestId, code, statusCode, null);
   }
 
+  /**
+   * Constructs a new Stripe exception with the specified details.
+   */
   public StripeException(String message, String requestId, String code, Integer statusCode,
       Throwable e) {
     super(message, e);
@@ -49,6 +56,12 @@ public abstract class StripeException extends Exception {
     return statusCode;
   }
 
+  /**
+   * Returns a description of the exception, including the HTTP status code and request ID (if
+   * applicable).
+   *
+   * @return a string representation of the exception.
+   */
   public String toString() {
     String additionalInfo = "";
     if (code != null) {

@@ -142,7 +142,11 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
   }
 
   /**
-   * @deprecated Use getType() instead.
+   * Returns the {@code managed} attribute.
+   *
+   * @return the {@code managed} attribute
+   * @deprecated Prefer using the {@code type} attribute instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2017-05-25">API version 2017-05-25</a>
    */
   @Deprecated
   public Boolean getManaged() {
@@ -230,7 +234,12 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
   }
 
   /**
-   * @deprecated Use the country_specs endpoint (https://stripe.com/docs/upgrades#2016-03-07)
+   * Returns the {@code currencies_supported} attribute.
+   *
+   * @return the {@code currencies_supported} attribute
+   * @deprecated Prefer using the {@link CountrySpec#getSupportedPaymentCurrencies()} method
+   *     instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2016-03-07">API version 2016-03-07</a>
    */
   @Deprecated
   public List<String> getCurrenciesSupported() {
@@ -301,12 +310,7 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
   public static Account retrieve(RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(
-        RequestMethod.GET,
-        singleClassURL(Account.class),
-        null,
-        Account.class,
-        options);
+    return request(RequestMethod.GET, singleClassURL(Account.class), null, Account.class, options);
   }
 
   public static Account retrieve(String id, RequestOptions options)

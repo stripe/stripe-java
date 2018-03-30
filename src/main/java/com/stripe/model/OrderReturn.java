@@ -79,10 +79,7 @@ public class OrderReturn extends APIResource implements HasId {
   }
 
   public String getOrder() {
-    if (order == null) {
-      return null;
-    }
-    return order.getId();
+    return (this.order != null) ? this.order.getId() : null;
   }
 
   public void setOrder(String orderID) {
@@ -90,10 +87,7 @@ public class OrderReturn extends APIResource implements HasId {
   }
 
   public Order getOrderObject() {
-    if (this.order == null) {
-      return null;
-    }
-    return this.order.getExpanded();
+    return (this.order != null) ? this.order.getExpanded() : null;
   }
 
   public void setOrderObject(Order order) {
@@ -101,10 +95,7 @@ public class OrderReturn extends APIResource implements HasId {
   }
 
   public String getRefund() {
-    if (refund == null) {
-      return null;
-    }
-    return refund.getId();
+    return (this.refund != null) ? this.refund.getId() : null;
   }
 
   public void setRefund(String refundID) {
@@ -112,10 +103,7 @@ public class OrderReturn extends APIResource implements HasId {
   }
 
   public Refund getRefundObject() {
-    if (this.refund == null) {
-      return null;
-    }
-    return this.refund.getExpanded();
+    return (this.refund != null) ? this.refund.getExpanded() : null;
   }
 
   public void setRefundObject(Refund refund) {

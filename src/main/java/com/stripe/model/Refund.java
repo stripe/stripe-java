@@ -49,10 +49,7 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
   }
 
   public String getBalanceTransaction() {
-    if (this.balanceTransaction == null) {
-      return null;
-    }
-    return this.balanceTransaction.getId();
+    return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
   }
 
   public void setBalanceTransaction(String balanceTransactionID) {
@@ -60,10 +57,7 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
   }
 
   public BalanceTransaction getBalanceTransactionObject() {
-    if (this.balanceTransaction == null) {
-      return null;
-    }
-    return this.balanceTransaction.getExpanded();
+    return (this.balanceTransaction != null) ? this.balanceTransaction.getExpanded() : null;
   }
 
   public void setBalanceTransactionObject(BalanceTransaction c) {
@@ -71,10 +65,7 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
   }
 
   public String getCharge() {
-    if (this.charge == null) {
-      return null;
-    }
-    return this.charge.getId();
+    return (this.charge != null) ? this.charge.getId() : null;
   }
 
   public void setCharge(String chargeID) {
@@ -82,10 +73,7 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
   }
 
   public Charge getChargeObject() {
-    if (this.charge == null) {
-      return null;
-    }
-    return this.charge.getExpanded();
+    return (this.charge != null) ? this.charge.getExpanded() : null;
   }
 
   public void setChargeObject(Charge c) {

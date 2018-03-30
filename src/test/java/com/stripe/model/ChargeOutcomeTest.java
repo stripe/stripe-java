@@ -25,6 +25,7 @@ public class ChargeOutcomeTest extends BaseStripeTest {
     assertEquals("authorized", outcome.getType());
   }
 
+  @Test
   public void testDeserializeWithRule() throws StripeException, IOException {
     String json = resource("charge_outcome_expansions.json");
     ChargeOutcome outcome = APIResource.GSON.fromJson(json, ChargeOutcome.class);

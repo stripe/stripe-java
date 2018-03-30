@@ -44,10 +44,7 @@ public class OrderItem extends APIResource {
   }
 
   public String getParent() {
-    if (this.parent == null) {
-      return null;
-    }
-    return this.parent.getId();
+    return (this.parent != null) ? this.parent.getId() : null;
   }
 
   public void setParent(String parentID) {
@@ -55,10 +52,7 @@ public class OrderItem extends APIResource {
   }
 
   public HasId getParentObject() {
-    if (this.parent == null) {
-      return null;
-    }
-    return this.parent.getExpanded();
+    return (this.parent != null) ? this.parent.getExpanded() : null;
   }
 
   public void setParentObject(HasId o) {
@@ -66,10 +60,7 @@ public class OrderItem extends APIResource {
   }
 
   public <O extends HasId> O getParentObjectAs() {
-    if (this.parent == null) {
-      return null;
-    }
-    return (O) this.parent.getExpanded();
+    return (this.parent != null) ? (O) this.parent.getExpanded() : null;
   }
 
   public Integer getQuantity() {

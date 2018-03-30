@@ -12,6 +12,10 @@ import java.lang.reflect.Type;
 
 public class EventRequestDeserializer implements JsonDeserializer<EventRequest> {
 
+  /**
+   * Deserializes the JSON payload contained in an event's {@code request} attribute into an
+   * {@link EventRequest} instance.
+   */
   public EventRequest deserialize(JsonElement json, Type typeOfT,
       JsonDeserializationContext context)
       throws JsonParseException {
