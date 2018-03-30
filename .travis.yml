@@ -27,7 +27,9 @@ notifications:
     on_success: never
 
 script:
-  - ./gradlew clean cobertura coveralls
+  - ./gradlew clean
+  - if [ "$TRAVIS_JDK_VERSION" == "oraclejdk9" ]; then ./gradlew check; fi
+  - ./gradlew cobertura coveralls
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
