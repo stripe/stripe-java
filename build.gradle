@@ -25,7 +25,7 @@ group = GROUP
 version = VERSION_NAME
 
 tasks.withType(JavaCompile) {
-	options.encoding = 'UTF-8'
+    options.encoding = 'UTF-8'
 }
 
 configurations.all {
@@ -52,10 +52,7 @@ jar {
         version = VERSION_NAME
         symbolicName = POM_ARTIFACT_ID
 
-        instruction 'Export-Package',
-            '*'
-
-        
+        instruction 'Export-Package', '*'
     }
 }
 
@@ -69,7 +66,6 @@ test {
 }
 
 checkstyle {
-    sourceSets = [] // for now, only run checkstyle tasks when called explicitly
     toolVersion = '8.8'
 }
 
