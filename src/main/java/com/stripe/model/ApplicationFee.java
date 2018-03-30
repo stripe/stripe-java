@@ -10,41 +10,43 @@ import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
+import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = false)
 public class ApplicationFee extends APIResource implements HasId {
   String id;
   String object;
-  ExpandableField<Account> account;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Account> account;
   Long amount;
   Long amountRefunded;
-  ExpandableField<Application> application;
-  ExpandableField<BalanceTransaction> balanceTransaction;
-  ExpandableField<Charge> charge;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Application> application;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
+      ExpandableField<BalanceTransaction> balanceTransaction;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Charge> charge;
   Long created;
   String currency;
   Boolean livemode;
-  ExpandableField<Charge> originatingTransaction;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
+      ExpandableField<Charge> originatingTransaction;
   Boolean refunded;
-  FeeRefundCollection refunds;
+  @Getter(AccessLevel.NONE) FeeRefundCollection refunds;
 
+  /**
+   * The {@code user} attribute.
+   *
+   * @return the {@code user} attribute
+   * @deprecated Prefer using the {@link #account} attribute instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2013-12-03">API version 2013-12-03</a>
+   */
   @Deprecated
   String user;
 
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public String getObject() {
-    return object;
-  }
-
-  public void setObject(String object) {
-    this.object = object;
-  }
-
+  // <editor-fold desc="account">
   public String getAccount() {
     return (this.account != null) ? this.account.getId() : null;
   }
@@ -60,23 +62,9 @@ public class ApplicationFee extends APIResource implements HasId {
   public void setAccountObject(Account c) {
     this.account = new ExpandableField<Account>(c.getId(), c);
   }
+  // </editor-fold>
 
-  public Long getAmount() {
-    return amount;
-  }
-
-  public void setAmount(Long amount) {
-    this.amount = amount;
-  }
-
-  public Long getAmountRefunded() {
-    return amountRefunded;
-  }
-
-  public void setAmountRefunded(Long amountRefunded) {
-    this.amountRefunded = amountRefunded;
-  }
-
+  // <editor-fold desc="application">
   public String getApplication() {
     return (this.application != null) ? this.application.getId() : null;
   }
@@ -92,7 +80,9 @@ public class ApplicationFee extends APIResource implements HasId {
   public void setApplicationObject(Application c) {
     this.application = new ExpandableField<Application>(c.getId(), c);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="balanceTransaction">
   public String getBalanceTransaction() {
     return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
   }
@@ -108,7 +98,9 @@ public class ApplicationFee extends APIResource implements HasId {
   public void setBalanceTransactionObject(BalanceTransaction c) {
     this.balanceTransaction = new ExpandableField<BalanceTransaction>(c.getId(), c);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="charge">
   public String getCharge() {
     return (this.charge != null) ? this.charge.getId() : null;
   }
@@ -124,31 +116,9 @@ public class ApplicationFee extends APIResource implements HasId {
   public void setChargeObject(Charge c) {
     this.charge = new ExpandableField<Charge>(c.getId(), c);
   }
+  // </editor-fold>
 
-  public Long getCreated() {
-    return created;
-  }
-
-  public void setCreated(Long created) {
-    this.created = created;
-  }
-
-  public String getCurrency() {
-    return currency;
-  }
-
-  public void setCurrency(String currency) {
-    this.currency = currency;
-  }
-
-  public Boolean getLivemode() {
-    return livemode;
-  }
-
-  public void setLivemode(Boolean livemode) {
-    this.livemode = livemode;
-  }
-
+  // <editor-fold desc="originatingTransaction">
   public String getOriginatingTransaction() {
     return (this.originatingTransaction != null) ? this.originatingTransaction.getId() : null;
   }
@@ -165,14 +135,7 @@ public class ApplicationFee extends APIResource implements HasId {
   public void setOriginatingTransactionObject(Charge c) {
     this.originatingTransaction = new ExpandableField<Charge>(c.getId(), c);
   }
-
-  public Boolean getRefunded() {
-    return refunded;
-  }
-
-  public void setRefunded(Boolean refunded) {
-    this.refunded = refunded;
-  }
+  // </editor-fold>
 
   /**
    * Returns the {@code refunds} list.
@@ -188,23 +151,6 @@ public class ApplicationFee extends APIResource implements HasId {
     }
 
     return refunds;
-  }
-
-  /**
-   * Returns the {@code user} attribute.
-   *
-   * @return the {@code user} attribute
-   * @deprecated Prefer using the {@code account} attribute instead.
-   * @see <a href="https://stripe.com/docs/upgrades#2013-12-03">API version 2013-12-03</a>
-   */
-  @Deprecated
-  public String getUser() {
-    return user;
-  }
-
-  @Deprecated
-  public void setUser(String user) {
-    this.user = user;
   }
 
   public static ApplicationFee retrieve(String id) throws AuthenticationException,

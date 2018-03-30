@@ -10,53 +10,20 @@ import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
+import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = false)
 public class SubscriptionItem extends APIResource implements HasId {
   String id;
   String object;
   Long created;
   Plan plan;
   Integer quantity;
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public String getObject() {
-    return object;
-  }
-
-  public void setObject(String object) {
-    this.object = object;
-  }
-
-  public Long getCreated() {
-    return created;
-  }
-
-  public void setCreated(Long created) {
-    this.created = created;
-  }
-
-  public Plan getPlan() {
-    return plan;
-  }
-
-  public void setPlan(Plan plan) {
-    this.plan = plan;
-  }
-
-  public Integer getQuantity() {
-    return quantity;
-  }
-
-  public void setQuantity(Integer quantity) {
-    this.quantity = quantity;
-  }
 
   public static SubscriptionItem create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,

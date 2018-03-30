@@ -10,36 +10,26 @@ import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
+import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = false)
 public class FeeRefund extends APIResource implements MetadataStore<ApplicationFee>, HasId {
   String id;
   String object;
   Long amount;
-  ExpandableField<BalanceTransaction> balanceTransaction;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
+      ExpandableField<BalanceTransaction> balanceTransaction;
   String currency;
   Long created;
-  ExpandableField<ApplicationFee> fee;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<ApplicationFee> fee;
   Map<String, String> metadata;
 
-  public String getId() {
-    return id;
-  }
-
-  public String getObject() {
-    return object;
-  }
-
-  public void setObject(String object) {
-    this.object = object;
-  }
-
-  public Long getAmount() {
-    return amount;
-  }
-
-  public void setAmount(Long amount) {
-    this.amount = amount;
-  }
-
+  // <editor-fold desc="balanceTransaction">
   public String getBalanceTransaction() {
     return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
   }
@@ -55,23 +45,9 @@ public class FeeRefund extends APIResource implements MetadataStore<ApplicationF
   public void setBalanceTransactionObject(BalanceTransaction c) {
     this.balanceTransaction = new ExpandableField<BalanceTransaction>(c.getId(), c);
   }
+  // </editor-fold>
 
-  public String getCurrency() {
-    return currency;
-  }
-
-  public void setCurrency(String currency) {
-    this.currency = currency;
-  }
-
-  public Long getCreated() {
-    return created;
-  }
-
-  public void setCreated(Long created) {
-    this.created = created;
-  }
-
+  // <editor-fold desc="fee">
   public String getFee() {
     return (this.fee != null) ? this.fee.getId() : null;
   }
@@ -87,14 +63,7 @@ public class FeeRefund extends APIResource implements MetadataStore<ApplicationF
   public void setFeeObject(ApplicationFee c) {
     this.fee = new ExpandableField<ApplicationFee>(c.getId(), c);
   }
-
-  public Map<String, String> getMetadata() {
-    return metadata;
-  }
-
-  public void setMetadata(Map<String, String> metadata) {
-    this.metadata = metadata;
-  }
+  // </editor-fold>
 
   public FeeRefund update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,

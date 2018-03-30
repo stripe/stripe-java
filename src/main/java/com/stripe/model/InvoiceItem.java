@@ -10,63 +10,39 @@ import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
+import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = false)
 public class InvoiceItem extends APIResource implements MetadataStore<InvoiceItem>, HasId {
   String id;
   String object;
   Long amount;
   String currency;
-  ExpandableField<Customer> customer;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Customer> customer;
   Long date;
   String description;
   Boolean discountable;
-  ExpandableField<Invoice> invoice;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Invoice> invoice;
   Boolean livemode;
   Map<String, String> metadata;
   InvoiceLineItemPeriod period;
   Plan plan;
   Boolean proration;
   Integer quantity;
-  ExpandableField<Subscription> subscription;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Subscription> subscription;
 
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public String getObject() {
-    return object;
-  }
-
-  public void setObject(String object) {
-    this.object = object;
-  }
-
-  public Long getAmount() {
-    return amount;
-  }
-
-  public void setAmount(Long amount) {
-    this.amount = amount;
-  }
-
-  public String getCurrency() {
-    return currency;
-  }
-
-  public void setCurrency(String currency) {
-    this.currency = currency;
-  }
-
+  // <editor-fold desc="customer">
   public String getCustomer() {
     return (this.customer != null) ? this.customer.getId() : null;
   }
 
   public void setCustomer(String customerID) {
     this.customer = setExpandableFieldID(customerID, this.customer);
-
   }
 
   public Customer getCustomerObject() {
@@ -76,38 +52,15 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
   public void setCustomerObject(Customer c) {
     this.customer = new ExpandableField<Customer>(c.getId(), c);
   }
+  // </editor-fold>
 
-  public Long getDate() {
-    return date;
-  }
-
-  public void setDate(Long date) {
-    this.date = date;
-  }
-
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  public Boolean getDiscountable() {
-    return discountable;
-  }
-
-  public void setDiscountable(Boolean discountable) {
-    this.discountable = discountable;
-  }
-
+  // <editor-fold desc="invoice">
   public String getInvoice() {
     return (this.invoice != null) ? this.invoice.getId() : null;
   }
 
   public void setInvoice(String invoiceID) {
     this.invoice = setExpandableFieldID(invoiceID, this.invoice);
-
   }
 
   public Invoice getInvoiceObject() {
@@ -117,55 +70,9 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
   public void setInvoiceObject(Invoice invoice) {
     this.invoice = new ExpandableField<Invoice>(invoice.getId(), invoice);
   }
+  // </editor-fold>
 
-  public Boolean getLivemode() {
-    return livemode;
-  }
-
-  public void setLivemode(Boolean livemode) {
-    this.livemode = livemode;
-  }
-
-  public Map<String, String> getMetadata() {
-    return metadata;
-  }
-
-  public void setMetadata(Map<String, String> metadata) {
-    this.metadata = metadata;
-  }
-
-  public InvoiceLineItemPeriod getPeriod() {
-    return period;
-  }
-
-  public void setPeriod(InvoiceLineItemPeriod period) {
-    this.period = period;
-  }
-
-  public Plan getPlan() {
-    return plan;
-  }
-
-  public void setPlan(Plan plan) {
-    this.plan = plan;
-  }
-
-  public Boolean getProration() {
-    return proration;
-  }
-
-  public void setProration(Boolean proration) {
-    this.proration = proration;
-  }
-
-  public Integer getQuantity() {
-    return quantity;
-  }
-
-  public void setQuantity(Integer quantity) {
-    this.quantity = quantity;
-  }
-
+  // <editor-fold desc="subscription">
   public String getSubscription() {
     return (this.subscription != null) ? this.subscription.getId() : null;
   }
@@ -181,6 +88,7 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
   public void setSubscriptionObject(Subscription subscription) {
     this.subscription = new ExpandableField<Subscription>(subscription.getId(), subscription);
   }
+  // </editor-fold>
 
   public static InvoiceItem create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,

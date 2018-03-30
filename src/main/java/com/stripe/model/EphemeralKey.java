@@ -11,6 +11,13 @@ import com.stripe.net.RequestOptions;
 import java.util.List;
 import java.util.Map;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = false)
 public class EphemeralKey extends APIResource implements HasId {
   String id;
   String object;
@@ -20,70 +27,6 @@ public class EphemeralKey extends APIResource implements HasId {
   String secret;
   List<EphemeralKeyAssociatedObject> associatedObjects;
   transient String rawJson;
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public String getObject() {
-    return object;
-  }
-
-  public void setObject(String object) {
-    this.object = object;
-  }
-
-  public Long getCreated() {
-    return created;
-  }
-
-  public void setCreated(Long created) {
-    this.created = created;
-  }
-
-  public Long getExpires() {
-    return expires;
-  }
-
-  public void setExpires(Long expires) {
-    this.expires = expires;
-  }
-
-  public Boolean getLivemode() {
-    return livemode;
-  }
-
-  public void setLivemode(Boolean livemode) {
-    this.livemode = livemode;
-  }
-
-  public String getSecret() {
-    return secret;
-  }
-
-  public void setSecret(String secret) {
-    this.secret = secret;
-  }
-
-  public List<EphemeralKeyAssociatedObject> getAssociatedObjects() {
-    return associatedObjects;
-  }
-
-  public void setAssociatedObjects(List<EphemeralKeyAssociatedObject> associatedObjects) {
-    this.associatedObjects = associatedObjects;
-  }
-
-  public String getRawJson() {
-    return rawJson;
-  }
-
-  public void setRawJson(String rawJson) {
-    this.rawJson = rawJson;
-  }
 
   /**
    * Creates an ephemeral key.

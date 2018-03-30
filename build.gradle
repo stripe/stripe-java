@@ -12,6 +12,7 @@ buildscript {
 plugins {
     id 'java'
     id 'maven'
+    id 'io.franzbecker.gradle-lombok' version '1.11'
     id 'checkstyle'
     id 'net.saliman.cobertura' version '2.5.2'
     id 'com.github.kt3k.coveralls' version '2.8.2'
@@ -54,6 +55,11 @@ jar {
 
         instruction 'Export-Package', '*'
     }
+}
+
+lombok {
+    version = "1.16.22"
+    sha256 = ""
 }
 
 apply from: 'deploy.gradle'

@@ -10,6 +10,13 @@ import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = false)
 public class Token extends APIResource implements HasId {
   String id;
   String object;
@@ -23,102 +30,6 @@ public class Token extends APIResource implements HasId {
   Boolean livemode;
   String type;
   Boolean used;
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public String getObject() {
-    return object;
-  }
-
-  public void setObject(String object) {
-    this.object = object;
-  }
-
-  public Long getAmount() {
-    return amount;
-  }
-
-  public void setAmount(Long amount) {
-    this.amount = amount;
-  }
-
-  public BankAccount getBankAccount() {
-    return bankAccount;
-  }
-
-  public void setBankAccount(BankAccount bankAccount) {
-    this.bankAccount = bankAccount;
-  }
-
-  public Card getCard() {
-    return card;
-  }
-
-  public void setCard(Card card) {
-    this.card = card;
-  }
-
-  public String getClientIp() {
-    return clientIp;
-  }
-
-  public void setClientIp(String clientIp) {
-    this.clientIp = clientIp;
-  }
-
-  public Long getCreated() {
-    return created;
-  }
-
-  public void setCreated(Long created) {
-    this.created = created;
-  }
-
-  public String getCurrency() {
-    return currency;
-  }
-
-  public void setCurrency(String currency) {
-    this.currency = currency;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-  public Boolean getLivemode() {
-    return livemode;
-  }
-
-  public void setLivemode(Boolean livemode) {
-    this.livemode = livemode;
-  }
-
-  public String getType() {
-    return type;
-  }
-
-  public void setType(String type) {
-    this.type = type;
-  }
-
-  public Boolean getUsed() {
-    return used;
-  }
-
-  public void setUsed(Boolean used) {
-    this.used = used;
-  }
 
   public static Token create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,

@@ -1,22 +1,13 @@
 package com.stripe.model;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = false)
 public final class EvidenceDetails extends StripeObject {
   protected Long dueBy;
   protected Integer submissionCount;
-
-  public Long getDueBy() {
-    return dueBy;
-  }
-
-  public void setDueBy(Long dueBy) {
-    this.dueBy = dueBy;
-  }
-
-  public Integer getSubmissionCount() {
-    return submissionCount;
-  }
-
-  public void setSubmissionCount(Integer submissionCount) {
-    this.submissionCount = submissionCount;
-  }
 }

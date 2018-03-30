@@ -10,34 +10,17 @@ import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = false)
 public class ExchangeRate extends APIResource implements HasId {
   String id;
   String object;
   Map<String, Float> rates;
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public String getObject() {
-    return object;
-  }
-
-  public void setObject(String object) {
-    this.object = object;
-  }
-
-  public Map<String, Float> getRates() {
-    return rates;
-  }
-
-  public void setRates(Map<String, Float> rates) {
-    this.rates = rates;
-  }
 
   public static ExchangeRate retrieve(String currency) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,

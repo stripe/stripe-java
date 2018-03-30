@@ -11,6 +11,14 @@ import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
+import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = false)
 public class FileUpload extends APIResource implements HasId {
   String id;
   String object;
@@ -18,56 +26,9 @@ public class FileUpload extends APIResource implements HasId {
   String purpose;
   Long size;
   String type;
-  String url;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) String url;
 
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public String getObject() {
-    return object;
-  }
-
-  public void setObject(String object) {
-    this.object = object;
-  }
-
-  public Long getCreated() {
-    return created;
-  }
-
-  public void setCreated(Long created) {
-    this.created = created;
-  }
-
-  public String getPurpose() {
-    return purpose;
-  }
-
-  public void setPurpose(String purpose) {
-    this.purpose = purpose;
-  }
-
-  public Long getSize() {
-    return size;
-  }
-
-  public void setSize(Long size) {
-    this.size = size;
-  }
-
-  public String getType() {
-    return type;
-  }
-
-  public void setType(String type) {
-    this.type = type;
-  }
-
+  // <editor-fold desc="url">
   public String getURL() {
     return url;
   }
@@ -75,6 +36,7 @@ public class FileUpload extends APIResource implements HasId {
   public void setURL(String url) {
     this.url = url;
   }
+  // </editor-fold>
 
   public static FileUpload create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
