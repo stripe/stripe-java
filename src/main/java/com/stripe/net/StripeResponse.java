@@ -9,12 +9,18 @@ public class StripeResponse {
   String body;
   StripeHeaders headers;
 
+  /**
+   * Constructs a Stripe response with the specified status code and body.
+   */
   public StripeResponse(int code, String body) {
     this.code = code;
     this.body = body;
     this.headers = null;
   }
 
+  /**
+   * Constructs a Stripe response with the specified status code, body and headers.
+   */
   public StripeResponse(int code, String body, Map<String, List<String>> headers) {
     this.code = code;
     this.body = body;
@@ -34,16 +40,10 @@ public class StripeResponse {
   }
 
   public String idempotencyKey() {
-    if (headers == null) {
-      return null;
-    }
-    return headers.get("Idempotency-Key");
+    return (headers != null) ? headers.get("Idempotency-Key") : null;
   }
 
   public String requestId() {
-    if (headers == null) {
-      return null;
-    }
-    return headers.get("Request-Id");
+    return (headers != null) ? headers.get("Request-Id") : null;
   }
 }

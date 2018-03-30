@@ -23,6 +23,9 @@ public class StripeSSLSocketFactory extends SSLSocketFactory {
   private static final String TLSv11Proto = "TLSv1.1";
   private static final String TLSv12Proto = "TLSv1.2";
 
+  /**
+   * Constructs a new SSL socket factory.
+   */
   public StripeSSLSocketFactory() {
     this.under = HttpsURLConnection.getDefaultSSLSocketFactory();
 

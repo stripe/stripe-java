@@ -85,6 +85,14 @@ public class EphemeralKey extends APIResource implements HasId {
     this.rawJson = rawJson;
   }
 
+  /**
+   * Creates an ephemeral key.
+   *
+   * @param params request parameters
+   * @param options request options. {@code stripeVersion} is required when creating ephemeral
+   *     keys.
+   * @return the new ephemeral key
+   */
   public static EphemeralKey create(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

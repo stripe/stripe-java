@@ -65,6 +65,9 @@ public class PagingIteratorTest extends BaseStripeTest {
     APIResource.setStripeResponseGetter(new LiveStripeResponseGetter());
   }
 
+  /**
+   * Sets the mock page fixtures.
+   */
   @Before
   public void setUpMockPages() throws IOException, StripeException {
     final List<String> pages = new ArrayList<String>();

@@ -105,10 +105,7 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
   }
 
   public String getCharge() {
-    if (charge == null) {
-      return null;
-    }
-    return charge.getId();
+    return (this.charge != null) ? this.charge.getId() : null;
   }
 
   public void setCharge(String chargeID) {
@@ -116,10 +113,7 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
   }
 
   public Charge getChargeObject() {
-    if (this.charge == null) {
-      return null;
-    }
-    return this.charge.getExpanded();
+    return (this.charge != null) ? this.charge.getExpanded() : null;
   }
 
   public void setChargeObject(Charge charge) {
@@ -291,10 +285,7 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
   }
 
   public String getSubscription() {
-    if (subscription == null) {
-      return null;
-    }
-    return subscription.getId();
+    return (this.subscription != null) ? this.subscription.getId() : null;
   }
 
   public void setSubscription(String subscriptionID) {
@@ -302,10 +293,7 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
   }
 
   public Subscription getSubscriptionObject() {
-    if (this.subscription == null) {
-      return null;
-    }
-    return this.subscription.getExpanded();
+    return (this.subscription != null) ? this.subscription.getExpanded() : null;
   }
 
   public void setSubscriptionObject(Subscription subscription) {

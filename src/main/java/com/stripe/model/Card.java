@@ -271,16 +271,17 @@ public class Card extends ExternalAccount {
   }
 
   /**
-   * @deprecated Use `brand` field (https://stripe.com/docs/upgrades#2014-06-13)
+   * Returns the {@code type} attribute.
+   *
+   * @return the {@code type} attribute
+   * @deprecated Prefer using the {@code brand} attribute instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2014-06-13">API version 2014-06-13</a>
    */
   @Deprecated
   public String getType() {
     return type;
   }
 
-  /**
-   * @deprecated Use `brand` field (https://stripe.com/docs/upgrades#2014-06-13)
-   */
   @Deprecated
   public void setType(String type) {
     this.type = type;
@@ -325,7 +326,7 @@ public class Card extends ExternalAccount {
   }
 
   @Override
-  public String getInstanceURL() {
+  protected String getInstanceURL() {
     String result = super.getInstanceURL();
     if (result != null) {
       return result;

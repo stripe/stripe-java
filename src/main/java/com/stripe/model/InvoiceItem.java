@@ -61,10 +61,7 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
   }
 
   public String getCustomer() {
-    if (this.customer == null) {
-      return null;
-    }
-    return this.customer.getId();
+    return (this.customer != null) ? this.customer.getId() : null;
   }
 
   public void setCustomer(String customerID) {
@@ -73,10 +70,7 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
   }
 
   public Customer getCustomerObject() {
-    if (this.customer == null) {
-      return null;
-    }
-    return this.customer.getExpanded();
+    return (this.customer != null) ? this.customer.getExpanded() : null;
   }
 
   public void setCustomerObject(Customer c) {
@@ -108,10 +102,7 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
   }
 
   public String getInvoice() {
-    if (this.invoice == null) {
-      return null;
-    }
-    return this.invoice.getId();
+    return (this.invoice != null) ? this.invoice.getId() : null;
   }
 
   public void setInvoice(String invoiceID) {
@@ -120,10 +111,7 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
   }
 
   public Invoice getInvoiceObject() {
-    if (this.invoice == null) {
-      return null;
-    }
-    return this.invoice.getExpanded();
+    return (this.invoice != null) ? this.invoice.getExpanded() : null;
   }
 
   public void setInvoiceObject(Invoice invoice) {
@@ -179,10 +167,7 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
   }
 
   public String getSubscription() {
-    if (subscription == null) {
-      return null;
-    }
-    return subscription.getId();
+    return (this.subscription != null) ? this.subscription.getId() : null;
   }
 
   public void setSubscription(String subscriptionID) {
@@ -190,10 +175,7 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
   }
 
   public Subscription getSubscriptionObject() {
-    if (this.subscription == null) {
-      return null;
-    }
-    return this.subscription.getExpanded();
+    return (this.subscription != null) ? this.subscription.getExpanded() : null;
   }
 
   public void setSubscriptionObject(Subscription subscription) {
@@ -263,7 +245,7 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
   public InvoiceItem update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(InvoiceItem.class, this.id), params, 
+    return request(RequestMethod.POST, instanceURL(InvoiceItem.class, this.id), params,
         InvoiceItem.class, options);
   }
 

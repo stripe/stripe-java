@@ -13,6 +13,9 @@ import com.google.gson.JsonPrimitive;
 import java.lang.reflect.Type;
 
 public class DisputeDataDeserializer implements JsonDeserializer<Dispute> {
+  /**
+   * Deserializes a dispute JSON payload into a {@link Dispute} object.
+   */
   public Dispute deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
       throws JsonParseException {
     Gson gson = new GsonBuilder()

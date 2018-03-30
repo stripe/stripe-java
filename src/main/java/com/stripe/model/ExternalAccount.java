@@ -59,24 +59,19 @@ public class ExternalAccount extends APIResource implements HasId, MetadataStore
     this.metadata = metadata;
   }
 
-  public String getInstanceURL() {
-    if (this.getCustomer() != null) {
-      return String.format("%s/%s/sources/%s", classURL(Customer.class), this.getCustomer(),
-          this.getId());
-    } else if (this.getAccount() != null) {
-      return String.format("%s/%s/external_accounts/%s", classURL(Account.class), this.getAccount(),
-          this.getId());
-    } else {
-      return null;
-    }
-  }
-
   public ExternalAccount verify(Map<String, Object> params) throws
       AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return verify(params, null);
   }
 
+  /**
+   * Verifies a bank account.
+   *
+   * @param params request parameters
+   * @param options request options
+   * @return the verified bank account
+   */
   public ExternalAccount verify(Map<String, Object> params, RequestOptions options) throws
       AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -114,5 +109,17 @@ public class ExternalAccount extends APIResource implements HasId, MetadataStore
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedExternalAccount.class,
         options);
+  }
+
+  protected String getInstanceURL() {
+    if (this.getCustomer() != null) {
+      return String.format("%s/%s/sources/%s", classURL(Customer.class), this.getCustomer(),
+          this.getId());
+    } else if (this.getAccount() != null) {
+      return String.format("%s/%s/external_accounts/%s", classURL(Account.class), this.getAccount(),
+          this.getId());
+    } else {
+      return null;
+    }
   }
 }

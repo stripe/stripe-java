@@ -4,6 +4,8 @@ public class APIException extends StripeException {
   private static final long serialVersionUID = 2L;
 
   /**
+   * Constructs a new API exception with the specified details.
+   *
    * @deprecated Use new constructor with `code` argument instead.
    */
   @Deprecated

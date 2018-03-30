@@ -17,6 +17,9 @@ import java.util.List;
 public class ChargeRefundCollectionDeserializer
     implements JsonDeserializer<ChargeRefundCollection> {
 
+  /**
+   * Deserializes a refund list JSON payload into a {@link ChargeRefundCollection} object.
+   */
   public ChargeRefundCollection deserialize(JsonElement json, Type typeOfT,
       JsonDeserializationContext context)
       throws JsonParseException {

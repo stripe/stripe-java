@@ -38,6 +38,12 @@ public class WebhookTest extends BaseStripeTest {
     return generateSigHeader(options);
   }
 
+  /**
+   * Generates a {@code Stripe-Signature} header.
+   *
+   * @param options Options map to override default values
+   * @return The contents of the generated header
+   */
   public String generateSigHeader(Map<String, Object> options) throws UnsupportedEncodingException,
       NoSuchAlgorithmException, InvalidKeyException {
     long timestamp = (options.get("timestamp") != null)

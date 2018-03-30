@@ -8,6 +8,9 @@ import com.google.gson.JsonParseException;
 import java.lang.reflect.Type;
 
 public class StripeRawJsonObjectDeserializer implements JsonDeserializer<StripeRawJsonObject> {
+  /**
+   * Deserializes a JSON payload into a {@link StripeRawJsonObject} object.
+   */
   public StripeRawJsonObject deserialize(JsonElement json, Type typeOfT,
       JsonDeserializationContext context)
       throws JsonParseException {

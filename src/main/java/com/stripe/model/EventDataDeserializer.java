@@ -113,6 +113,10 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
     }
   }
 
+  /**
+   * Deserializes the JSON payload contained in an event's {@code data} attribute into an
+   * {@link EventData} instance.
+   */
   @SuppressWarnings("unchecked")
   public EventData deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
       throws JsonParseException {

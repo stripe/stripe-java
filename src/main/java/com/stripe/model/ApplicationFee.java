@@ -46,10 +46,7 @@ public class ApplicationFee extends APIResource implements HasId {
   }
 
   public String getAccount() {
-    if (this.account == null) {
-      return null;
-    }
-    return this.account.getId();
+    return (this.account != null) ? this.account.getId() : null;
   }
 
   public void setAccount(String accountID) {
@@ -57,10 +54,7 @@ public class ApplicationFee extends APIResource implements HasId {
   }
 
   public Account getAccountObject() {
-    if (this.account == null) {
-      return null;
-    }
-    return this.account.getExpanded();
+    return (this.account != null) ? this.account.getExpanded() : null;
   }
 
   public void setAccountObject(Account c) {
@@ -84,10 +78,7 @@ public class ApplicationFee extends APIResource implements HasId {
   }
 
   public String getApplication() {
-    if (this.application == null) {
-      return null;
-    }
-    return this.application.getId();
+    return (this.application != null) ? this.application.getId() : null;
   }
 
   public void setApplication(String applicationID) {
@@ -95,10 +86,7 @@ public class ApplicationFee extends APIResource implements HasId {
   }
 
   public Application getApplicationObject() {
-    if (this.application == null) {
-      return null;
-    }
-    return this.application.getExpanded();
+    return (this.application != null) ? this.application.getExpanded() : null;
   }
 
   public void setApplicationObject(Application c) {
@@ -106,10 +94,7 @@ public class ApplicationFee extends APIResource implements HasId {
   }
 
   public String getBalanceTransaction() {
-    if (this.balanceTransaction == null) {
-      return null;
-    }
-    return this.balanceTransaction.getId();
+    return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
   }
 
   public void setBalanceTransaction(String balanceTransactionID) {
@@ -117,10 +102,7 @@ public class ApplicationFee extends APIResource implements HasId {
   }
 
   public BalanceTransaction getBalanceTransactionObject() {
-    if (this.balanceTransaction == null) {
-      return null;
-    }
-    return this.balanceTransaction.getExpanded();
+    return (this.balanceTransaction != null) ? this.balanceTransaction.getExpanded() : null;
   }
 
   public void setBalanceTransactionObject(BalanceTransaction c) {
@@ -128,10 +110,7 @@ public class ApplicationFee extends APIResource implements HasId {
   }
 
   public String getCharge() {
-    if (this.charge == null) {
-      return null;
-    }
-    return this.charge.getId();
+    return (this.charge != null) ? this.charge.getId() : null;
   }
 
   public void setCharge(String chargeID) {
@@ -139,10 +118,7 @@ public class ApplicationFee extends APIResource implements HasId {
   }
 
   public Charge getChargeObject() {
-    if (this.charge == null) {
-      return null;
-    }
-    return this.charge.getExpanded();
+    return (this.charge != null) ? this.charge.getExpanded() : null;
   }
 
   public void setChargeObject(Charge c) {
@@ -174,10 +150,7 @@ public class ApplicationFee extends APIResource implements HasId {
   }
 
   public String getOriginatingTransaction() {
-    if (this.originatingTransaction == null) {
-      return null;
-    }
-    return this.originatingTransaction.getId();
+    return (this.originatingTransaction != null) ? this.originatingTransaction.getId() : null;
   }
 
   public void setOriginatingTransaction(String originatingTransactionID) {
@@ -186,10 +159,7 @@ public class ApplicationFee extends APIResource implements HasId {
   }
 
   public Charge getOriginatingTransactionObject() {
-    if (this.originatingTransaction == null) {
-      return null;
-    }
-    return this.originatingTransaction.getExpanded();
+    return (this.originatingTransaction != null) ? this.originatingTransaction.getExpanded() : null;
   }
 
   public void setOriginatingTransactionObject(Charge c) {
@@ -204,6 +174,11 @@ public class ApplicationFee extends APIResource implements HasId {
     this.refunded = refunded;
   }
 
+  /**
+   * Returns the {@code refunds} list.
+   *
+   * @return the {@code refunds} list
+   */
   public FeeRefundCollection getRefunds() {
     // API versions 2014-07-26 and earlier render charge refunds as an array
     // instead of an object, meaning there is no sublist URL.
@@ -215,16 +190,17 @@ public class ApplicationFee extends APIResource implements HasId {
   }
 
   /**
-   * @deprecated Use `account` field (https://stripe.com/docs/upgrades#2013-12-03)
+   * Returns the {@code user} attribute.
+   *
+   * @return the {@code user} attribute
+   * @deprecated Prefer using the {@code account} attribute instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2013-12-03">API version 2013-12-03</a>
    */
   @Deprecated
   public String getUser() {
     return user;
   }
 
-  /**
-   * @deprecated Use `account` field (https://stripe.com/docs/upgrades#2013-12-03)
-   */
   @Deprecated
   public void setUser(String user) {
     this.user = user;

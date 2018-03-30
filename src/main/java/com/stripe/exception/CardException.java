@@ -7,6 +7,9 @@ public class CardException extends StripeException {
   private String declineCode;
   private String charge;
 
+  /**
+   * Constructs a new card exception with the specified details.
+   */
   public CardException(String message, String requestId, String code, String param,
       String declineCode, String charge, Integer statusCode, Throwable e) {
     super(message, requestId, code, statusCode, e);

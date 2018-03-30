@@ -117,6 +117,10 @@ public class RequestOptions {
     private int connectTimeout;
     private int readTimeout;
 
+    /**
+     * Constructs a request options builder with the global parameters (API key, client ID and
+     * API version) as default values.
+     */
     public RequestOptionsBuilder() {
       this.apiKey = Stripe.apiKey;
       this.clientId = Stripe.clientId;
@@ -178,7 +182,7 @@ public class RequestOptions {
     /**
      * Sets the timeout value that will be used when reading data from an
      * established connection to the Stripe API (in milliseconds).
-     * 
+     *
      * <p>Note that this value should be set conservatively because some API
      * requests can take time and a short timeout increases the likelihood
      * of causing a problem in the backend.
@@ -212,6 +216,9 @@ public class RequestOptions {
       return setStripeAccount(null);
     }
 
+    /**
+     * Constructs a {@link RequestOptions} with the specified values.
+     */
     public RequestOptions build() {
       return new RequestOptions(
           normalizeApiKey(this.apiKey),

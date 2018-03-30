@@ -210,6 +210,11 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
     return request(RequestMethod.POST, this.getSourceInstanceURL(), params, Source.class, options);
   }
 
+  /**
+   * Source objects cannot be deleted. Calling this method will raise an
+   * {@link InvalidRequestException}. Call {@link #detach} to detach the source from a
+   * customer object.
+   */
   public DeletedExternalAccount delete(RequestOptions options) throws
       AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -231,6 +236,9 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
     return detach(params, null);
   }
 
+  /**
+   * Detaches the source from its customer objects.
+   */
   public Source detach(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

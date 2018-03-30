@@ -113,10 +113,7 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
   }
 
   public String getProduct() {
-    if (this.product == null) {
-      return null;
-    }
-    return this.product.getId();
+    return (this.product != null) ? this.product.getId() : null;
   }
 
   public void setProduct(String productID) {
@@ -124,10 +121,7 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
   }
 
   public Product getProductObject() {
-    if (this.product == null) {
-      return null;
-    }
-    return this.product.getExpanded();
+    return (this.product != null) ? this.product.getExpanded() : null;
   }
 
   public void setProductObject(Product product) {
@@ -135,7 +129,11 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
   }
 
   /**
-   *  @deprecated Prefer using the product field (https://stripe.com/docs/upgrades#2018-02-05)
+   * Returns the {@code name} attribute.
+   *
+   * @return the {@code name} attribute
+   * @deprecated Prefer using the {@code getProduct().getName()} method instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2018-02-05">API version 2018-02-05</a>
    */
   public String getName() {
     return name;
@@ -146,7 +144,11 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
   }
 
   /**
-   *  @deprecated Prefer using the product field (https://stripe.com/docs/upgrades#2018-02-05)
+   * Returns the {@code statement_descriptor} attribute.
+   *
+   * @return the {@code statement_descriptor} attribute
+   * @deprecated Prefer using the {@code getProduct().getStatementDescriptor()} method instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2018-02-05">API version 2018-02-05</a>
    */
   public String getStatementDescriptor() {
     return statementDescriptor;
@@ -157,7 +159,12 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
   }
 
   /**
-   *  @deprecated Prefer using the product field (https://stripe.com/docs/upgrades#2018-02-05)
+   * Returns the {@code trial_period_days} attribute.
+   *
+   * @return the {@code trial_period_days} attribute
+   * @deprecated Prefer using the {@link Subscription#create} method with the {@code trial_end}
+   *     parameter instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2018-02-05">API version 2018-02-05</a>
    */
   public Integer getTrialPeriodDays() {
     return trialPeriodDays;
@@ -168,16 +175,18 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
   }
 
   /**
-   * @deprecated Use `statement_descriptor` field (https://stripe.com/docs/upgrades#2014-12-17)
+   * Returns the {@code statement_description} attribute.
+   *
+   * @return the {@code statement_description} attribute
+   * @deprecated Prefer using the {@code getProduct().getStatementDescriptor()} method instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2014-12-17">API version 2014-12-17</a>
+   * @see <a href="https://stripe.com/docs/upgrades#2018-02-05">API version 2018-02-05</a>
    */
   @Deprecated
   public String getStatementDescription() {
     return statementDescription;
   }
 
-  /**
-   * @deprecated Use `statement_descriptor` field (https://stripe.com/docs/upgrades#2014-12-17)
-   */
   @Deprecated
   public void setStatementDescription(String statementDescription) {
     this.statementDescription = statementDescription;

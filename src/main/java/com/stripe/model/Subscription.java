@@ -117,10 +117,7 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
   }
 
   public String getCustomer() {
-    if (this.customer == null) {
-      return null;
-    }
-    return this.customer.getId();
+    return (this.customer != null) ? this.customer.getId() : null;
   }
 
   public void setCustomer(String customerID) {
@@ -128,10 +125,7 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
   }
 
   public Customer getCustomerObject() {
-    if (this.customer == null) {
-      return null;
-    }
-    return this.customer.getExpanded();
+    return (this.customer != null) ? this.customer.getExpanded() : null;
   }
 
   public void setCustomerObject(Customer c) {
@@ -343,6 +337,11 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
     deleteDiscount((RequestOptions) null);
   }
 
+  /**
+   * Deletes the subscription's discount.
+   *
+   * @deprecated Use {@link #deleteDiscount(RequestOptions)} instead.
+   */
   @Deprecated
   public void deleteDiscount(String apiKey) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,

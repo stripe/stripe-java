@@ -65,10 +65,7 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
   }
 
   public String getDefaultCard() {
-    if (this.defaultCard == null) {
-      return null;
-    }
-    return this.defaultCard.getId();
+    return (this.defaultCard != null) ? this.defaultCard.getId() : null;
   }
 
   public void setDefaultCard(String defaultCardID) {
@@ -76,10 +73,7 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
   }
 
   public Card getDefaultCardObject() {
-    if (this.defaultCard == null) {
-      return null;
-    }
-    return this.defaultCard.getExpanded();
+    return (this.defaultCard != null) ? this.defaultCard.getExpanded() : null;
   }
 
   public void setDefaultCardObject(Card c) {
@@ -123,10 +117,7 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
   }
 
   public String getMigratedTo() {
-    if (this.migratedTo == null) {
-      return null;
-    }
-    return this.migratedTo.getId();
+    return (this.migratedTo != null) ? this.migratedTo.getId() : null;
   }
 
   public void setMigratedTo(String migratedToID) {
@@ -134,10 +125,7 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
   }
 
   public Account getMigratedToObject() {
-    if (this.migratedTo == null) {
-      return null;
-    }
-    return this.migratedTo.getExpanded();
+    return (this.migratedTo != null) ? this.migratedTo.getExpanded() : null;
   }
 
   public void setMigratedToObject(Account c) {
@@ -273,6 +261,13 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
     return createCard(token, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
+  /**
+   * Adds a card to the recipient using a card token.
+   *
+   * @param token card token ({@code "tok_..."})
+   * @param options request options
+   * @return the new card object
+   */
   public Card createCard(String token, RequestOptions options) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {

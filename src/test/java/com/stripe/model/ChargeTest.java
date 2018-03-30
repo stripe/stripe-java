@@ -15,6 +15,9 @@ public class ChargeTest extends BaseStripeTest {
   Charge basicCharge;
   Charge expandedCharge;
 
+  /**
+   * Sets the {@link Charge} fixtures.
+   */
   @Before
   public void deserializeCharges() throws IOException {
     String json = resource("charge.json");

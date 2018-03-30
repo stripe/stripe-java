@@ -85,10 +85,7 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
   }
 
   public String getCharge() {
-    if (this.charge == null) {
-      return null;
-    }
-    return this.charge.getId();
+    return (this.charge != null) ? this.charge.getId() : null;
   }
 
   public void setCharge(String chargeID) {
@@ -97,10 +94,7 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
   }
 
   public Charge getChargeObject() {
-    if (this.charge == null) {
-      return null;
-    }
-    return this.charge.getExpanded();
+    return (this.charge != null) ? this.charge.getExpanded() : null;
   }
 
   public void setChargeObject(Charge charge) {
@@ -124,10 +118,7 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
   }
 
   public String getCustomer() {
-    if (this.customer == null) {
-      return null;
-    }
-    return this.customer.getId();
+    return (this.customer != null) ? this.customer.getId() : null;
   }
 
   public void setCustomer(String customerID) {
@@ -135,10 +126,7 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
   }
 
   public Customer getCustomerObject() {
-    if (this.customer == null) {
-      return null;
-    }
-    return this.customer.getExpanded();
+    return (this.customer != null) ? this.customer.getExpanded() : null;
   }
 
   public void setCustomerObject(Customer customer) {

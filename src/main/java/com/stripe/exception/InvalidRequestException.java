@@ -6,6 +6,8 @@ public class InvalidRequestException extends StripeException {
   private final String param;
 
   /**
+   * Constructs a new invalid request exception with the specified details.
+   *
    * @deprecated Use new constructor with `code` argument instead.
    */
   @Deprecated

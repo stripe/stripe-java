@@ -4,6 +4,8 @@ public class PermissionException extends AuthenticationException {
   private static final long serialVersionUID = 2L;
 
   /**
+   * Constructs a new permission exception with the specified details.
+   *
    * @deprecated Use new constructor with `code` argument instead.
    */
   @Deprecated

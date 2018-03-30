@@ -36,7 +36,9 @@ public class BaseStripeFunctionalTest {
   public static RequestOptions supportedRequestOptions;
   public static StripeResponseGetter networkMock;
 
-
+  /**
+   * Returns a string containing next year.
+   */
   public static String getYear() {
     Date date = new Date(); //Get current date
     Calendar calendar = new GregorianCalendar();
@@ -56,6 +58,9 @@ public class BaseStripeFunctionalTest {
     return String.format("MY-J-COUPON-%s", UUID.randomUUID().toString().substring(24));
   }
 
+  /**
+   * Returns the parameters to create a new unique plan.
+   */
   public static Map<String, Object> getUniquePlanParams() {
     Map<String, Object> uniqueParams = new HashMap<String, Object>();
     uniqueParams.putAll(defaultPlanParams);
@@ -63,6 +68,9 @@ public class BaseStripeFunctionalTest {
     return uniqueParams;
   }
 
+  /**
+   * Creates a new customer object with a subscription to the given plan.
+   */
   public static Customer createDefaultCustomerWithPlan(Plan plan)
       throws StripeException {
     Map<String, Object> customerWithPlanParams = new HashMap<String, Object>();
@@ -71,6 +79,9 @@ public class BaseStripeFunctionalTest {
     return Customer.create(customerWithPlanParams);
   }
 
+  /**
+   * Prepares a Stripe functional test: sets the API key and version, sets default params fixtures.
+   */
   @BeforeClass
   public static void setUp() {
     Stripe.apiKey = "tGN0bIwXnHdwOa85VABjPdSn8nWY7G7I"; // stripe public
@@ -133,7 +144,7 @@ public class BaseStripeFunctionalTest {
     Stripe.apiVersion = null;
   }
 
-  public void testMetadata(MetadataStore<?> object) throws StripeException {
+  protected void testMetadata(MetadataStore<?> object) throws StripeException {
     assertTrue(object.getMetadata().isEmpty());
 
     Map<String, String> initialMetadata = new HashMap<String, String>();

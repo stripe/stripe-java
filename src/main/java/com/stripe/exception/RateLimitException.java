@@ -4,6 +4,8 @@ public class RateLimitException extends InvalidRequestException {
   private static final long serialVersionUID = 2L;
 
   /**
+   * Constructs a new rate limit exception with the specified details.
+   *
    * @deprecated Use new constructor with `code` argument instead.
    */
   @Deprecated

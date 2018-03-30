@@ -53,9 +53,6 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 
   @Deprecated
   Card card;
-  /**
-   * Legacy; use `dispute` field (https://stripe.com/docs/upgrades#2012-11-07)
-   */
   @Deprecated
   Boolean disputed;
   @Deprecated
@@ -103,10 +100,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   }
 
   public String getApplication() {
-    if (this.application == null) {
-      return null;
-    }
-    return this.application.getId();
+    return (this.application != null) ? this.application.getId() : null;
   }
 
   public void setApplication(String applicationID) {
@@ -114,10 +108,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   }
 
   public Application getApplicationObject() {
-    if (this.application == null) {
-      return null;
-    }
-    return this.application.getExpanded();
+    return (this.application != null) ? this.application.getExpanded() : null;
   }
 
   public void setApplicationObject(Application c) {
@@ -125,10 +116,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   }
 
   public String getApplicationFee() {
-    if (this.applicationFee == null) {
-      return null;
-    }
-    return this.applicationFee.getId();
+    return (this.applicationFee != null) ? this.applicationFee.getId() : null;
   }
 
   public void setApplicationFee(String applicationFeeID) {
@@ -136,10 +124,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   }
 
   public ApplicationFee getApplicationFeeObject() {
-    if (this.applicationFee == null) {
-      return null;
-    }
-    return this.applicationFee.getExpanded();
+    return (this.applicationFee != null) ? this.applicationFee.getExpanded() : null;
   }
 
   public void setApplicationFeeObject(ApplicationFee c) {
@@ -147,10 +132,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   }
 
   public String getBalanceTransaction() {
-    if (this.balanceTransaction == null) {
-      return null;
-    }
-    return this.balanceTransaction.getId();
+    return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
   }
 
   public void setBalanceTransaction(String balanceTransactionID) {
@@ -158,10 +140,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   }
 
   public BalanceTransaction getBalanceTransactionObject() {
-    if (this.balanceTransaction == null) {
-      return null;
-    }
-    return this.balanceTransaction.getExpanded();
+    return (this.balanceTransaction != null) ? this.balanceTransaction.getExpanded() : null;
   }
 
   public void setBalanceTransactionObject(BalanceTransaction c) {
@@ -193,10 +172,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   }
 
   public String getCustomer() {
-    if (this.customer == null) {
-      return null;
-    }
-    return this.customer.getId();
+    return (this.customer != null) ? this.customer.getId() : null;
   }
 
   public void setCustomer(String customerID) {
@@ -205,10 +181,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   }
 
   public Customer getCustomerObject() {
-    if (this.customer == null) {
-      return null;
-    }
-    return this.customer.getExpanded();
+    return (this.customer != null) ? this.customer.getExpanded() : null;
   }
 
   public void setCustomerObject(Customer c) {
@@ -224,10 +197,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   }
 
   public String getDestination() {
-    if (this.destination == null) {
-      return null;
-    }
-    return this.destination.getId();
+    return (this.destination != null) ? this.destination.getId() : null;
   }
 
   public void setDestination(String destinationID) {
@@ -235,10 +205,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   }
 
   public Account getDestinationObject() {
-    if (this.destination == null) {
-      return null;
-    }
-    return this.destination.getExpanded();
+    return (this.destination != null) ? this.destination.getExpanded() : null;
   }
 
   public void setDestinationObject(Account c) {
@@ -246,10 +213,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   }
 
   public String getDispute() {
-    if (dispute == null) {
-      return null;
-    }
-    return dispute.getId();
+    return (this.dispute != null) ? this.dispute.getId() : null;
   }
 
   public void setDispute(String dispute) {
@@ -257,10 +221,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   }
 
   public Dispute getDisputeObject() {
-    if (dispute == null) {
-      return null;
-    }
-    return this.dispute.getExpanded();
+    return (this.dispute != null) ? this.dispute.getExpanded() : null;
   }
 
   public void setDisputeObject(Dispute dispute) {
@@ -292,10 +253,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   }
 
   public String getInvoice() {
-    if (this.invoice == null) {
-      return null;
-    }
-    return this.invoice.getId();
+    return (this.invoice != null) ? this.invoice.getId() : null;
   }
 
   public void setInvoice(String invoiceID) {
@@ -303,10 +261,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   }
 
   public Invoice getInvoiceObject() {
-    if (this.invoice == null) {
-      return null;
-    }
-    return this.invoice.getExpanded();
+    return (this.invoice != null) ? this.invoice.getExpanded() : null;
   }
 
   public void setInvoiceObject(Invoice c) {
@@ -330,10 +285,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   }
 
   public String getOrder() {
-    if (this.order == null) {
-      return null;
-    }
-    return this.order.getId();
+    return (this.order != null) ? this.order.getId() : null;
   }
 
   public void setOrder(String orderID) {
@@ -341,10 +293,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   }
 
   public Order getOrderObject() {
-    if (this.order == null) {
-      return null;
-    }
-    return this.order.getExpanded();
+    return (this.order != null) ? this.order.getExpanded() : null;
   }
 
   public void setOrderObject(Order c) {
@@ -391,6 +340,11 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     this.refunded = refunded;
   }
 
+  /**
+   * Returns the {@code refunds} list.
+   *
+   * @return the {@code refunds} list
+   */
   public ChargeRefundCollection getRefunds() {
     // API versions 2014-05-19 and earlier render charge refunds as an array
     // instead of an object, meaning there is no sublist URL.
@@ -401,10 +355,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   }
 
   public String getReview() {
-    if (this.review == null) {
-      return null;
-    }
-    return this.review.getId();
+    return (this.review != null) ? this.review.getId() : null;
   }
 
   public void setReview(String reviewID) {
@@ -412,10 +363,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   }
 
   public Review getReviewObject() {
-    if (this.review == null) {
-      return null;
-    }
-    return this.review.getExpanded();
+    return (this.review != null) ? this.review.getExpanded() : null;
   }
 
   public void setReviewObject(Review r) {
@@ -439,10 +387,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   }
 
   public String getSourceTransfer() {
-    if (this.sourceTransfer == null) {
-      return null;
-    }
-    return this.sourceTransfer.getId();
+    return (this.sourceTransfer != null) ? this.sourceTransfer.getId() : null;
   }
 
   public void setSourceTransfer(String sourceTransferID) {
@@ -450,10 +395,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   }
 
   public Transfer getSourceTransferObject() {
-    if (this.sourceTransfer == null) {
-      return null;
-    }
-    return this.sourceTransfer.getExpanded();
+    return (this.sourceTransfer != null) ? this.sourceTransfer.getExpanded() : null;
   }
 
   public void setSourceTransferObject(Transfer c) {
@@ -477,10 +419,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   }
 
   public String getTransfer() {
-    if (this.transfer == null) {
-      return null;
-    }
-    return this.transfer.getId();
+    return (this.transfer != null) ? this.transfer.getId() : null;
   }
 
   public void setTransfer(String transferID) {
@@ -496,10 +435,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   }
 
   public Transfer getTransferObject() {
-    if (this.transfer == null) {
-      return null;
-    }
-    return this.transfer.getExpanded();
+    return (this.transfer != null) ? this.transfer.getExpanded() : null;
   }
 
   public void setTransferObject(Transfer c) {
@@ -507,48 +443,51 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   }
 
   /**
-   * @deprecated Use `source` field (https://stripe.com/docs/upgrades#2015-02-18)
+   * Returns the {@code card} attribute.
+   *
+   * @return the {@code card} attribute
+   * @deprecated Prefer using the {@code source} attribute instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2015-02-18">API version 2015-02-18</a>
    */
   @Deprecated
   public Card getCard() {
     return card;
   }
 
-  /**
-   * @deprecated Use `source` field (https://stripe.com/docs/upgrades#2015-02-18)
-   */
   @Deprecated
   public void setCard(Card card) {
     this.card = card;
   }
 
   /**
-   * @deprecated Use `dispute` field (https://stripe.com/docs/upgrades#2012-11-07)
+   * Returns the {@code disputed} attribute.
+   *
+   * @return the {@code disputed} attribute
+   * @deprecated Prefer using the {@code dispute} attribute instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2012-11-07">API version 2012-11-07</a>
    */
   @Deprecated
   public Boolean getDisputed() {
     return disputed;
   }
 
-  /**
-   * @deprecated Use `dispute` field (https://stripe.com/docs/upgrades#2012-11-07)
-   */
   @Deprecated
   public void setDisputed(Boolean disputed) {
     this.disputed = disputed;
   }
 
   /**
-   * @deprecated Use `statement_descriptor` field (https://stripe.com/docs/upgrades#2014-12-17)
+   * Returns the {@code statement_description} attribute.
+   *
+   * @return the {@code statement_description} attribute
+   * @deprecated Prefer using the {@code statement_descriptor} attribute instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2014-12-17">API version 2014-12-17</a>
    */
   @Deprecated
   public String getStatementDescription() {
     return statementDescription;
   }
 
-  /**
-   * @deprecated Use `statement_descriptor` field (https://stripe.com/docs/upgrades#2014-12-17)
-   */
   @Deprecated
   public void setStatementDescription(String statementDescription) {
     this.statementDescription = statementDescription;
@@ -710,6 +649,11 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     return updateDispute(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
+  /**
+   * Updates the charge's dispute.
+   *
+   * @deprecated Prefer using the {@link Dispute#update} method instead.
+   */
   @Deprecated
   public Dispute updateDispute(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
@@ -733,6 +677,11 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     return closeDispute(RequestOptions.builder().setApiKey(apiKey).build());
   }
 
+  /**
+   * Closes the charge's dispute.
+   *
+   * @deprecated Prefer using the {@link Dispute#close} method instead.
+   */
   @Deprecated
   public Dispute closeDispute(RequestOptions options)
       throws AuthenticationException, InvalidRequestException,

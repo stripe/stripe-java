@@ -211,7 +211,7 @@ public class BitcoinReceiver extends ExternalAccount {
     return retrieve(id, null);
   }
 
-  
+
   public static BitcoinReceiver retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -247,16 +247,6 @@ public class BitcoinReceiver extends ExternalAccount {
   }
 
   @Override
-  public String getInstanceURL() {
-    String result = super.getInstanceURL();
-    if (result == null) {
-      return String.format("%s/%s/%s", Stripe.getApiBase(), "v1/bitcoin/receivers", this.getId());
-    } else {
-      return result;
-    }
-  }
-
-  @Override
   public BitcoinReceiver update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -284,5 +274,15 @@ public class BitcoinReceiver extends ExternalAccount {
       APIException {
     return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedBitcoinReceiver.class,
         options);
+  }
+
+  @Override
+  protected String getInstanceURL() {
+    String result = super.getInstanceURL();
+    if (result == null) {
+      return String.format("%s/%s/%s", Stripe.getApiBase(), "v1/bitcoin/receivers", this.getId());
+    } else {
+      return result;
+    }
   }
 }

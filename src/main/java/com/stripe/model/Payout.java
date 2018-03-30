@@ -72,10 +72,7 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
   }
 
   public String getBalanceTransaction() {
-    if (this.balanceTransaction == null) {
-      return null;
-    }
-    return this.balanceTransaction.getId();
+    return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
   }
 
   public void setBalanceTransaction(String balanceTransactionID) {
@@ -83,10 +80,7 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
   }
 
   public BalanceTransaction getBalanceTransactionObject() {
-    if (this.balanceTransaction == null) {
-      return null;
-    }
-    return this.balanceTransaction.getExpanded();
+    return (this.balanceTransaction != null) ? this.balanceTransaction.getExpanded() : null;
   }
 
   public void setBalanceTransactionObject(BalanceTransaction c) {
@@ -110,10 +104,7 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
   }
 
   public String getDestination() {
-    if (this.destination == null) {
-      return null;
-    }
-    return this.destination.getId();
+    return (this.destination != null) ? this.destination.getId() : null;
   }
 
   public void setDestination(String destinationID) {
@@ -121,10 +112,7 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
   }
 
   public ExternalAccount getDestinationObject() {
-    if (this.destination == null) {
-      return null;
-    }
-    return this.destination.getExpanded();
+    return (this.destination != null) ? this.destination.getExpanded() : null;
   }
 
   public void setDestinationObject(ExternalAccount c) {
@@ -132,10 +120,8 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
   }
 
   public String getFailureBalanceTransaction() {
-    if (this.failureBalanceTransaction == null) {
-      return null;
-    }
-    return this.failureBalanceTransaction.getId();
+    return (this.failureBalanceTransaction != null) ? this.failureBalanceTransaction.getId()
+        : null;
   }
 
   public void setFailureBalanceTransaction(String failureBalanceTransactionID) {
@@ -144,10 +130,8 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
   }
 
   public BalanceTransaction getFailureBalanceTransactionObject() {
-    if (this.failureBalanceTransaction == null) {
-      return null;
-    }
-    return this.failureBalanceTransaction.getExpanded();
+    return (this.failureBalanceTransaction != null) ? this.failureBalanceTransaction.getExpanded()
+        : null;
   }
 
   public void setFailureBalanceTransactionObject(BalanceTransaction c) {

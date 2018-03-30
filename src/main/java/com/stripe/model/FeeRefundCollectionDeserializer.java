@@ -19,6 +19,9 @@ public class FeeRefundCollectionDeserializer implements JsonDeserializer<FeeRefu
   public static final Type REFUND_LIST_TYPE = new TypeToken<List<FeeRefund>>() {
   }.getType();
 
+  /**
+   * Deserializes a fee_refund list JSON payload into a {@link FeeRefundCollection} object.
+   */
   public FeeRefundCollection deserialize(JsonElement json, Type typeOfT,
       JsonDeserializationContext context)
       throws JsonParseException {

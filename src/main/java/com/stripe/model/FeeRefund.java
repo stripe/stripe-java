@@ -41,10 +41,7 @@ public class FeeRefund extends APIResource implements MetadataStore<ApplicationF
   }
 
   public String getBalanceTransaction() {
-    if (this.balanceTransaction == null) {
-      return null;
-    }
-    return this.balanceTransaction.getId();
+    return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
   }
 
   public void setBalanceTransaction(String balanceTransactionID) {
@@ -52,10 +49,7 @@ public class FeeRefund extends APIResource implements MetadataStore<ApplicationF
   }
 
   public BalanceTransaction getBalanceTransactionObject() {
-    if (this.balanceTransaction == null) {
-      return null;
-    }
-    return this.balanceTransaction.getExpanded();
+    return (this.balanceTransaction != null) ? this.balanceTransaction.getExpanded() : null;
   }
 
   public void setBalanceTransactionObject(BalanceTransaction c) {
@@ -79,10 +73,7 @@ public class FeeRefund extends APIResource implements MetadataStore<ApplicationF
   }
 
   public String getFee() {
-    if (this.fee == null) {
-      return null;
-    }
-    return this.fee.getId();
+    return (this.fee != null) ? this.fee.getId() : null;
   }
 
   public void setFee(String feeID) {
@@ -90,10 +81,7 @@ public class FeeRefund extends APIResource implements MetadataStore<ApplicationF
   }
 
   public ApplicationFee getFeeObject() {
-    if (this.fee == null) {
-      return null;
-    }
-    return this.fee.getExpanded();
+    return (this.fee != null) ? this.fee.getExpanded() : null;
   }
 
   public void setFeeObject(ApplicationFee c) {
@@ -127,7 +115,7 @@ public class FeeRefund extends APIResource implements MetadataStore<ApplicationF
     return request(RequestMethod.POST, this.getInstanceURL(), params, FeeRefund.class, options);
   }
 
-  public String getInstanceURL() {
+  protected String getInstanceURL() {
     if (this.fee != null) {
       return String.format("%s/%s/refunds/%s", classURL(ApplicationFee.class), this.fee,
           this.getId());

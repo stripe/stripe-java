@@ -48,12 +48,8 @@ public class ExchangeRate extends APIResource implements HasId {
   public static ExchangeRate retrieve(String currency, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(
-        RequestMethod.GET,
-        instanceURL(ExchangeRate.class, currency),
-        null,
-        ExchangeRate.class,
-        options);
+    return request(RequestMethod.GET, instanceURL(ExchangeRate.class, currency), null,
+        ExchangeRate.class, options);
   }
 
   public static ExchangeRateCollection list(Map<String, Object> params)
