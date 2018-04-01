@@ -57,7 +57,7 @@ public class Summary extends StripeObject {
     return net;
   }
 
-  public void set(Long net) {
+  public void setNet(Long net) {
     this.net = net;
   }
 
