@@ -5,6 +5,15 @@ import org.apache.commons.configuration2.SubnodeConfiguration;
 
 import java.io.FileReader;
 
+/**
+ * <h1>SharedCredentialsProvider</h1>
+ *
+ * <p>Implements CredentialsProvider from ~/.strip/credentials file.
+ *
+ * @author  Jasper Culong
+ * @since   2018-04-03
+ *
+ */
 public class SharedCredentialsProvider implements StripeCredentialsProvider {
 
     String configurationFile;
