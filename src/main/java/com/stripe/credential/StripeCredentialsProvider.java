@@ -11,6 +11,6 @@ package com.stripe.credential;
  */
 public interface StripeCredentialsProvider {
 
-    public StripeCredentials getCredentials();
+  public StripeCredentials getCredentials();
 
 }

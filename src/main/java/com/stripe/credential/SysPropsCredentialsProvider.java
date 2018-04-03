@@ -9,17 +9,16 @@ package com.stripe.credential;
  * @since   2018-04-03
  *
  */
+
 public class SysPropsCredentialsProvider implements StripeCredentialsProvider {
+  @Override
+  public StripeCredentials getCredentials() {
 
-    @Override
-    public StripeCredentials getCredentials() {
+    String apiKey = System.getenv("stripe.apiKey");
 
-        String apiKey = System.getenv("stripe.apiKey");
-
-        if (apiKey.isEmpty() || apiKey == null) {
-            throw new IllegalArgumentException("Unable to set apiKey from System Properties!");
-        }
-
-        return new StripeCredentials(apiKey);
+    if (apiKey.isEmpty() || apiKey == null) {
+      throw new IllegalArgumentException("Unable to set apiKey from System Properties!");
     }
+    return new StripeCredentials(apiKey);
+  }
 }
