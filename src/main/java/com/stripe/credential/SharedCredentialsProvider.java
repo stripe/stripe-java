@@ -17,7 +17,7 @@ public class SharedCredentialsProvider implements StripeCredentialsProvider {
 
     }
 
-    public SharedCredentialsProvider(String configurationFile, String section ) {
+    public SharedCredentialsProvider(String configurationFile, String section) {
 
         this.configurationFile = configurationFile;
         this.section = section;
@@ -40,7 +40,7 @@ public class SharedCredentialsProvider implements StripeCredentialsProvider {
             e.printStackTrace();
         }
 
-        if (apiKey.isEmpty() || apiKey.equals("")) {
+        if (apiKey.isEmpty() || apiKey == null) {
             throw new IllegalArgumentException("Unable to set Credentials from " + this.configurationFile);
         }
 
