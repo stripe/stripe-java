@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.35.0 - 2018-04-05
+* [#462](https://github.com/stripe/stripe-java/pull/462) Add support for flexible billing primitives
+
 ## 5.34.1 - 2018-03-23
 * [#469](https://github.com/stripe/stripe-java/pull/469) Add support for expanding `product` attribute on `Plan` model
 
