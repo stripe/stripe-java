@@ -10,7 +10,10 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
 import com.stripe.model.DeletedPlan;
 import com.stripe.model.Plan;
+import com.stripe.model.PlanTier;
+import com.stripe.model.PlanTransformUsage;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -122,5 +125,82 @@ public class PlanTest extends BaseStripeFunctionalTest {
   @Test
   public void testPlanMetadata() throws StripeException {
     testMetadata(Plan.create(getUniquePlanParams()));
+  }
+
+  @Test
+  public void testPlanCreateWithTiers() throws StripeException {
+    Map<String, Object> productParams = new HashMap<String, Object>();
+    productParams.put("name", "Bar");
+
+    Map<String, Object> params = getUniquePlanParams();
+    params.remove("amount");
+    params.remove("name");
+    params.put("nickname", "Foo");
+    params.put("product", productParams);
+
+    Map<String, Object> tier1 = new HashMap<>();
+    tier1.put("up_to", 1000);
+    tier1.put("amount", 1000);
+
+    Map<String, Object> tier2 = new HashMap<>();
+    tier2.put("up_to", "inf");
+    tier2.put("amount", 2000);
+
+    List<Map<String, Object>> tiers = new ArrayList<>();
+    tiers.add(tier1);
+    tiers.add(tier2);
+    params.put("tiers", tiers);
+    params.put("tiers_mode", "volume");
+    params.put("billing_scheme", "tiered");
+
+    Plan plan = Plan.create(params);
+    assertEquals(null, plan.getAmount());
+    assertEquals("volume", plan.getTiersMode());
+    List<PlanTier> tierConfig = plan.getTiers();
+    assertEquals(2, tierConfig.size());
+    assertEquals(new Long(1000), tierConfig.get(0).getAmount());
+    assertEquals(new Long(1000), tierConfig.get(0).getUpTo());
+    assertEquals(null, tierConfig.get(1).getUpTo());
+    assertEquals(new Long(2000), tierConfig.get(1).getAmount());
+  }
+
+  @Test
+  public void testPlanCreateWithTransformUsage() throws StripeException {
+    Map<String, Object> productParams = new HashMap<String, Object>();
+    productParams.put("name", "Bar");
+
+    Map<String, Object> params = getUniquePlanParams();
+    params.remove("name");
+    params.put("nickname", "Foo");
+    params.put("product", productParams);
+
+    Map<String, Object> transformUsage = new HashMap<>();
+    transformUsage.put("divide_by", 1000);
+    transformUsage.put("round", "up");
+
+    params.put("transform_usage", transformUsage);
+
+    Plan plan = Plan.create(params);
+    assertEquals(new Long(100), plan.getAmount());
+
+    PlanTransformUsage planTransformUsage = plan.getTransformUsage();
+    assertEquals(new Long(1000), planTransformUsage.getDivideBy());
+    assertEquals("up", planTransformUsage.getRound());
+  }
+
+  @Test
+  public void testPlanCreateMetered() throws StripeException {
+    Map<String, Object> productParams = new HashMap<String, Object>();
+    productParams.put("name", "Bar");
+
+    Map<String, Object> params = getUniquePlanParams();
+    params.remove("name");
+    params.put("nickname", "Foo");
+    params.put("product", productParams);
+
+    params.put("usage_type", "metered");
+
+    Plan plan = Plan.create(params);
+    assertEquals("metered", plan.getUsageType());
   }
 }

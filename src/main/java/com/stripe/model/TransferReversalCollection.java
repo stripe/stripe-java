@@ -54,9 +54,16 @@ public class TransferReversalCollection extends StripeCollection<Reversal> {
     return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
+  /**
+   * Load a transfer reversal.
+   * @param id Id of the reversal
+   * @param options Further request options
+   * @return The transfer reversal
+   */
   public Reversal retrieve(String id, RequestOptions options) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
+    // TODO replace with subresourceURL
     String url = String.format("%s%s/%s", Stripe.getApiBase(), this.getURL(), id);
     return APIResource.request(APIResource.RequestMethod.GET, url, null, Reversal.class, options);
   }

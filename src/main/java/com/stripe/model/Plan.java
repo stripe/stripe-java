@@ -8,12 +8,14 @@ import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
 
+import java.util.List;
 import java.util.Map;
 
 public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
   String id;
   String object;
   Long amount;
+  String billingScheme;
   Long created;
   String currency;
   String interval;
@@ -22,6 +24,10 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
   Map<String, String> metadata;
   String nickname;
   ExpandableField<Product> product;
+  List<PlanTier> tiers;
+  String tiersMode;
+  PlanTransformUsage transformUsage;
+  String usageType;
 
   @Deprecated
   String statementDescription;
@@ -54,6 +60,14 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
 
   public void setAmount(Long amount) {
     this.amount = amount;
+  }
+
+  public String getBillingScheme() {
+    return billingScheme;
+  }
+
+  public void setBillingScheme(String billingScheme) {
+    this.billingScheme = billingScheme;
   }
 
   public Long getCreated() {
@@ -190,6 +204,38 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
   @Deprecated
   public void setStatementDescription(String statementDescription) {
     this.statementDescription = statementDescription;
+  }
+
+  public List<PlanTier> getTiers() {
+    return tiers;
+  }
+
+  public void setTiers(List<PlanTier> tiers) {
+    this.tiers = tiers;
+  }
+
+  public String getTiersMode() {
+    return tiersMode;
+  }
+
+  public void setTiersMode(String tiersMode) {
+    this.tiersMode = tiersMode;
+  }
+
+  public PlanTransformUsage getTransformUsage() {
+    return transformUsage;
+  }
+
+  public void setTransformUsage(PlanTransformUsage transformUsage) {
+    this.transformUsage = transformUsage;
+  }
+
+  public String getUsageType() {
+    return usageType;
+  }
+
+  public void setUsageType(String usageType) {
+    this.usageType = usageType;
   }
 
   public static Plan create(Map<String, Object> params)
