@@ -1,7 +1,7 @@
 package com.stripe;
 
-import static org.mockito.Mockito.argThat;
-import static org.mockito.Mockito.eq;
+import static org.mockito.ArgumentMatchers.argThat;
+import static org.mockito.ArgumentMatchers.eq;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -14,110 +14,81 @@ import com.stripe.net.StripeResponseGetter;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
-import java.util.HashMap;
 import java.util.Map;
 
 import org.junit.Before;
 import org.junit.BeforeClass;
-
 import org.mockito.ArgumentMatcher;
 import org.mockito.Mockito;
 
 public class BaseStripeTest {
   public static StripeResponseGetter networkMock;
 
-  public static <T> void verifyGet(
-      Class<T> clazz,
-      String url) throws StripeException {
-    verifyRequest(APIResource.RequestMethod.GET, clazz, url, null,
-        APIResource.RequestType.NORMAL, RequestOptions.getDefault());
+  public static <T> void verifyGet(Class<T> clazz, String url) throws StripeException {
+    verifyRequest(APIResource.RequestMethod.GET, clazz, url, null, APIResource.RequestType.NORMAL,
+        RequestOptions.getDefault());
   }
 
-  public static <T> void verifyGet(
-      Class<T> clazz,
-      String url,
-      Map<String, Object> params) throws StripeException {
-    verifyRequest(APIResource.RequestMethod.GET, clazz, url, params,
-        APIResource.RequestType.NORMAL, RequestOptions.getDefault());
+  public static <T> void verifyGet(Class<T> clazz, String url, Map<String, Object> params)
+      throws StripeException {
+    verifyRequest(APIResource.RequestMethod.GET, clazz, url, params, APIResource.RequestType.NORMAL,
+        RequestOptions.getDefault());
   }
 
-  public static <T> void verifyGet(
-      Class<T> clazz,
-      String url,
+  public static <T> void verifyGet(Class<T> clazz, String url, RequestOptions requestOptions)
+      throws StripeException {
+    verifyRequest(APIResource.RequestMethod.GET, clazz, url, null, APIResource.RequestType.NORMAL,
+        requestOptions);
+  }
+
+  public static <T> void verifyGet(Class<T> clazz, String url, Map<String, Object> params,
       RequestOptions requestOptions) throws StripeException {
-    verifyRequest(APIResource.RequestMethod.GET, clazz, url, null,
-        APIResource.RequestType.NORMAL, requestOptions);
+    verifyRequest(APIResource.RequestMethod.GET, clazz, url, params, APIResource.RequestType.NORMAL,
+        requestOptions);
   }
 
-  public static <T> void verifyGet(
-      Class<T> clazz,
-      String url,
-      Map<String, Object> params,
-      RequestOptions requestOptions) throws StripeException {
-    verifyRequest(APIResource.RequestMethod.GET, clazz, url, params,
-        APIResource.RequestType.NORMAL, requestOptions);
+  public static <T> void verifyPost(Class<T> clazz, String url) throws StripeException {
+    verifyRequest(APIResource.RequestMethod.POST, clazz, url, null, APIResource.RequestType.NORMAL,
+        RequestOptions.getDefault());
   }
 
-  public static <T> void verifyPost(
-      Class<T> clazz,
-      String url) throws StripeException {
-    verifyRequest(APIResource.RequestMethod.POST, clazz, url, null,
-        APIResource.RequestType.NORMAL, RequestOptions.getDefault());
-  }
-
-  public static <T> void verifyPost(
-      Class<T> clazz,
-      String url,
-      Map<String, Object> params) throws StripeException {
+  public static <T> void verifyPost(Class<T> clazz, String url, Map<String, Object> params)
+      throws StripeException {
     verifyRequest(APIResource.RequestMethod.POST, clazz, url, params,
         APIResource.RequestType.NORMAL, RequestOptions.getDefault());
   }
 
-  public static <T> void verifyPost(
-      Class<T> clazz,
-      String url,
-      RequestOptions requestOptions) throws StripeException {
-    verifyRequest(APIResource.RequestMethod.POST, clazz, url, null,
-        APIResource.RequestType.NORMAL, requestOptions);
+  public static <T> void verifyPost(Class<T> clazz, String url, RequestOptions requestOptions)
+      throws StripeException {
+    verifyRequest(APIResource.RequestMethod.POST, clazz, url, null, APIResource.RequestType.NORMAL,
+        requestOptions);
   }
 
-  public static <T> void verifyPost(
-      Class<T> clazz,
-      String url,
-      Map<String, Object> params,
+  public static <T> void verifyPost(Class<T> clazz, String url, Map<String, Object> params,
       RequestOptions requestOptions) throws StripeException {
     verifyRequest(APIResource.RequestMethod.POST, clazz, url, params,
         APIResource.RequestType.NORMAL, requestOptions);
   }
 
-  public static <T> void verifyDelete(
-      Class<T> clazz,
-      String url,
-      Map<String, Object> params) throws StripeException {
+  public static <T> void verifyDelete(Class<T> clazz, String url, Map<String, Object> params)
+      throws StripeException {
     verifyRequest(APIResource.RequestMethod.DELETE, clazz, url, params,
         APIResource.RequestType.NORMAL, RequestOptions.getDefault());
   }
 
-  public static <T> void verifyDelete(
-      Class<T> clazz,
-      String url,
-      RequestOptions requestOptions) throws StripeException {
+  public static <T> void verifyDelete(Class<T> clazz, String url, RequestOptions requestOptions)
+      throws StripeException {
     verifyRequest(APIResource.RequestMethod.DELETE, clazz, url, null,
         APIResource.RequestType.NORMAL, requestOptions);
   }
 
-  public static <T> void verifyDelete(
-      Class<T> clazz,
-      String url,
-      Map<String, Object> params,
+  public static <T> void verifyDelete(Class<T> clazz, String url, Map<String, Object> params,
       RequestOptions requestOptions) throws StripeException {
     verifyRequest(APIResource.RequestMethod.DELETE, clazz, url, params,
         APIResource.RequestType.NORMAL, requestOptions);
   }
 
-  public static <T> void verifyDelete(
-      Class<T> clazz,
-      String url) throws StripeException {
+  public static <T> void verifyDelete(Class<T> clazz, String url) throws StripeException {
     verifyRequest(APIResource.RequestMethod.DELETE, clazz, url, null,
         APIResource.RequestType.NORMAL, RequestOptions.getDefault());
   }
@@ -125,46 +96,31 @@ public class BaseStripeTest {
   /**
    * Verifies that the specified request occurred.
    */
-  public static <T> void verifyRequest(
-      APIResource.RequestMethod method,
-      Class<T> clazz,
-      String url,
-      Map<String, Object> params,
-      APIResource.RequestType requestType,
-      RequestOptions options) throws StripeException {
-    verify(networkMock).request(
-        eq(method),
-        eq(url),
-        argThat(new ParamMapMatcher(params)),
-        eq(clazz),
-        eq(requestType),
-        argThat(new RequestOptionsMatcher(options)));
+  public static <T> void verifyRequest(APIResource.RequestMethod method, Class<T> clazz, String url,
+      Map<String, Object> params, APIResource.RequestType requestType, RequestOptions options)
+      throws StripeException {
+    verify(networkMock).request(eq(method), eq(url), argThat(new ParamMapMatcher(params)),
+        eq(clazz), eq(requestType), argThat(new RequestOptionsMatcher(options)));
   }
 
   /**
    * Stubs the next API request and return the provided response.
    */
   public static <T> void stubNetwork(Class<T> clazz, String response) throws StripeException {
-    when(networkMock.request(
-        Mockito.any(APIResource.RequestMethod.class),
-        Mockito.anyString(),
-        Mockito.<Map<String, Object>>any(),
-        Mockito.<Class<T>>any(),
-        Mockito.any(APIResource.RequestType.class),
-        Mockito.<RequestOptions>any())).thenReturn(APIResource.GSON.fromJson(response, clazz));
+    when(networkMock.request(Mockito.any(APIResource.RequestMethod.class), Mockito.anyString(),
+        Mockito.<Map<String, Object>>any(), Mockito.<Class<T>>any(),
+        Mockito.any(APIResource.RequestType.class), Mockito.<RequestOptions>any()))
+            .thenReturn(APIResource.GSON.fromJson(response, clazz));
   }
 
   /**
    * Stubs the next OAuth request and return the provided response.
    */
   public static <T> void stubOAuth(Class<T> clazz, String response) throws StripeException {
-    when(networkMock.oauthRequest(
-        Mockito.any(APIResource.RequestMethod.class),
-        Mockito.anyString(),
-        Mockito.<Map<String, Object>>any(),
-        Mockito.<Class<T>>any(),
-        Mockito.any(APIResource.RequestType.class),
-        Mockito.<RequestOptions>any())).thenReturn(APIResource.GSON.fromJson(response, clazz));
+    when(networkMock.oauthRequest(Mockito.any(APIResource.RequestMethod.class), Mockito.anyString(),
+        Mockito.<Map<String, Object>>any(), Mockito.<Class<T>>any(),
+        Mockito.any(APIResource.RequestType.class), Mockito.<RequestOptions>any()))
+            .thenReturn(APIResource.GSON.fromJson(response, clazz));
   }
 
   public static class ParamMapMatcher implements ArgumentMatcher<Map<String, Object>> {
@@ -177,7 +133,8 @@ public class BaseStripeTest {
     /**
      * Informs if this matcher accepts the given argument.
      */
-    public boolean matches(Map<String,Object> paramMap) {
+    @Override
+    public boolean matches(Map<String, Object> paramMap) {
       // Treat null references as equal to empty maps
       if (paramMap == null) {
         return this.other == null || this.other.isEmpty();
@@ -201,6 +158,7 @@ public class BaseStripeTest {
     /**
      * Informs if this matcher accepts the given argument.
      */
+    @Override
     public boolean matches(RequestOptions requestOptions) {
       // Treat null reference as RequestOptions.getDefault()
       RequestOptions defaultOptions = RequestOptions.getDefault();
@@ -229,14 +187,14 @@ public class BaseStripeTest {
   protected String resource(String path) throws IOException {
     InputStream resource = getClass().getResourceAsStream(path);
 
-    ByteArrayOutputStream os = new ByteArrayOutputStream(1024);
-    byte[] buf = new byte[1024];
+    try (ByteArrayOutputStream os = new ByteArrayOutputStream(1024)) {
+      byte[] buf = new byte[1024];
 
-    for (int i = resource.read(buf); i > 0; i = resource.read(buf)) {
-      os.write(buf, 0, i);
+      for (int i = resource.read(buf); i > 0; i = resource.read(buf)) {
+        os.write(buf, 0, i);
+      }
+
+      return os.toString("utf8");
     }
-
-    return os.toString("utf8");
-
   }
 }

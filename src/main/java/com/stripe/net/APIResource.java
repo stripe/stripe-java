@@ -3,7 +3,6 @@ package com.stripe.net;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 import com.stripe.Stripe;
 import com.stripe.exception.APIConnectionException;
 import com.stripe.exception.APIException;
@@ -38,7 +37,6 @@ import com.stripe.model.StripeCollectionInterface;
 import com.stripe.model.StripeObject;
 import com.stripe.model.StripeRawJsonObject;
 import com.stripe.model.StripeRawJsonObjectDeserializer;
-
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Map;
@@ -67,8 +65,7 @@ public abstract class APIResource extends StripeObject {
       .registerTypeAdapter(SourceTransaction.class,
           new SourceTypeDataDeserializer<SourceTransaction>())
       .registerTypeAdapter(StripeRawJsonObject.class, new StripeRawJsonObjectDeserializer())
-      .registerTypeAdapterFactory(new ExternalAccountTypeAdapterFactory())
-      .create();
+      .registerTypeAdapterFactory(new ExternalAccountTypeAdapterFactory()).create();
 
   private static String className(Class<?> clazz) {
     String className = clazz.getSimpleName().toLowerCase().replace("$", " ");
@@ -120,8 +117,7 @@ public abstract class APIResource extends StripeObject {
     return String.format("%ss", singleClassURL(clazz, apiBase));
   }
 
-  protected static String instanceURL(Class<?> clazz, String id)
-      throws InvalidRequestException {
+  protected static String instanceURL(Class<?> clazz, String id) throws InvalidRequestException {
     return instanceURL(clazz, id, Stripe.getApiBase());
   }
 
@@ -130,10 +126,8 @@ public abstract class APIResource extends StripeObject {
     try {
       return String.format("%s/%s", classURL(clazz, apiBase), urlEncode(id));
     } catch (UnsupportedEncodingException e) {
-      throw new InvalidRequestException("Unable to encode parameters to "
-          + CHARSET
-          + ". Please contact support@stripe.com for assistance.",
-          null, null, null, 0, e);
+      throw new InvalidRequestException("Unable to encode parameters to " + CHARSET
+          + ". Please contact support@stripe.com for assistance.", null, null, null, 0, e);
     }
   }
 
@@ -146,13 +140,11 @@ public abstract class APIResource extends StripeObject {
   private static String subresourceURL(Class<?> clazz, String id, Class<?> subClazz, String apiBase)
       throws InvalidRequestException {
     try {
-      return String.format("%s/%s/%ss", classURL(clazz, apiBase),
-              urlEncode(id), className(subClazz));
+      return String.format("%s/%s/%ss", classURL(clazz, apiBase), urlEncode(id),
+          className(subClazz));
     } catch (UnsupportedEncodingException e) {
-      throw new InvalidRequestException("Unable to encode parameters to "
-              + CHARSET
-              + ". Please contact support@stripe.com for assistance.",
-              null, null, null, 0, e);
+      throw new InvalidRequestException("Unable to encode parameters to " + CHARSET
+          + ". Please contact support@stripe.com for assistance.", null, null, null, 0, e);
     }
   }
 
@@ -178,43 +170,37 @@ public abstract class APIResource extends StripeObject {
       // Don't use strict form encoding by changing the square bracket control
       // characters back to their literals. This is fine by the server, and
       // makes these parameter strings easier to read.
-      return URLEncoder.encode(str, CHARSET)
-        .replaceAll("%5B", "[")
-        .replaceAll("%5D", "]");
+      return URLEncoder.encode(str, CHARSET).replaceAll("%5B", "[").replaceAll("%5D", "]");
     }
   }
 
-  public static <T> T multipartRequest(APIResource.RequestMethod method,
-                     String url, Map<String, Object> params, Class<T> clazz,
-                     RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+  public static <T> T multipartRequest(APIResource.RequestMethod method, String url,
+      Map<String, Object> params, Class<T> clazz, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
     return APIResource.stripeResponseGetter.request(method, url, params, clazz,
         APIResource.RequestType.MULTIPART, options);
   }
 
-  public static <T> T request(APIResource.RequestMethod method,
-                String url, Map<String, Object> params, Class<T> clazz,
-                RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+  public static <T> T request(APIResource.RequestMethod method, String url,
+      Map<String, Object> params, Class<T> clazz, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
     return APIResource.stripeResponseGetter.request(method, url, params, clazz,
         APIResource.RequestType.NORMAL, options);
   }
 
   /**
-   * Similar to #request, but specific for use with collection types that
-   * come from the API (i.e. lists of resources).
-   *
-   * <p>Collections need a little extra work because we need to plumb request
-   * options and params through so that we can iterate to the next page if
-   * necessary.
+   * Similar to #request, but specific for use with collection types that come from the API (i.e.
+   * lists of resources).
+   * 
+   * <p>Collections need a little extra work because we need to plumb request options and params
+   * through so that we can iterate to the next page if necessary.
    */
-  public static <T extends StripeCollectionInterface> T requestCollection(
-      String url, Map<String, Object> params, Class<T> clazz,
-      RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public static <T extends StripeCollectionInterface> T requestCollection(String url,
+      Map<String, Object> params, Class<T> clazz, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
     T collection = request(RequestMethod.GET, url, params, clazz, options);
 
     if (collection != null) {
@@ -232,7 +218,8 @@ public abstract class APIResource extends StripeObject {
    */
   public static <T extends HasId> ExpandableField<T> setExpandableFieldID(String newId,
       ExpandableField<T> currentObject) {
-    if (currentObject == null || (currentObject.isExpanded() && (currentObject.getId() != newId))) {
+    if (currentObject == null
+        || (currentObject.isExpanded() && !currentObject.getId().equals(newId))) {
       return new ExpandableField<T>(newId, null);
     }
 

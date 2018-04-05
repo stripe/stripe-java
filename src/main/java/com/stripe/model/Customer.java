@@ -41,6 +41,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
   @Deprecated
   Long trialEnd;
 
+  @Override
   public String getId() {
     return id;
   }
@@ -149,6 +150,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
     this.livemode = livemode;
   }
 
+  @Override
   public Map<String, String> getMetadata() {
     return metadata;
   }
@@ -307,6 +309,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
         options);
   }
 
+  @Override
   public Customer update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -320,6 +323,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
     return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
+  @Override
   public Customer update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

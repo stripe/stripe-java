@@ -10,8 +10,8 @@ import com.stripe.net.APIResource;
 import com.stripe.net.LiveStripeResponseGetter;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -43,7 +43,7 @@ public class OrderTest extends BaseStripeTest {
   public void testCreate() throws StripeException {
     Map<String, Object> params = new HashMap<String, Object>();
     params.put("currency", "usd");
-    List<Object> itemsList = new LinkedList<Object>();
+    List<Object> itemsList = new ArrayList<Object>();
     Map<String, Object> item1Params = new HashMap<String, Object>();
     item1Params.put("type", "sku");
     item1Params.put("parent", "sku_test");
@@ -77,7 +77,7 @@ public class OrderTest extends BaseStripeTest {
 
   @Test
   public void testRetrieveWithExpand() throws StripeException {
-    List<String> expandList = new LinkedList<String>();
+    List<String> expandList = new ArrayList<String>();
     expandList.add("charge");
     expandList.add("customer");
 
@@ -136,7 +136,7 @@ public class OrderTest extends BaseStripeTest {
     assertEquals("or_1ATvaEKCFFPkgtRhFtMgtnLF", order.getId());
 
     OrderItem item = order.getItems().get(0);
-    SKU parent = item.getParentObjectAs();
+    SKU parent = (SKU) item.getParentObjectAs();
     assertNotNull(parent);
     assertEquals("silence_mp3", parent.getId());
   }

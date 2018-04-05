@@ -28,6 +28,7 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
   String type;
   Boolean verified;
 
+  @Override
   public String getId() {
     return id;
   }
@@ -108,6 +109,7 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
     this.livemode = livemode;
   }
 
+  @Override
   public Map<String, String> getMetadata() {
     return metadata;
   }
@@ -202,6 +204,7 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
         options);
   }
 
+  @Override
   public Recipient update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -215,6 +218,7 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
     return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
+  @Override
   public Recipient update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

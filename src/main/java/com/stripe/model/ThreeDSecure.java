@@ -26,6 +26,7 @@ public class ThreeDSecure extends APIResource implements HasId {
   String redirectURL;
   String status;
 
+  @Override
   public String getId() {
     return id;
   }

@@ -68,6 +68,11 @@ public class Money extends StripeObject {
     }
 
     @Override
+    public int hashCode() {
+      return 42;
+    }
+
+    @Override
     public boolean equals(Object o) {
       if (this == o) {
         return true;
@@ -77,10 +82,8 @@ public class Money extends StripeObject {
       }
 
       SourceTypes st = (SourceTypes) o;
-      return equals(alipayAccount, st.alipayAccount)
-          && equals(bankAccount, st.bankAccount)
-          && equals(bitcoinReceiver, st.bitcoinReceiver)
-          && equals(card, st.card);
+      return equals(alipayAccount, st.alipayAccount) && equals(bankAccount, st.bankAccount)
+          && equals(bitcoinReceiver, st.bitcoinReceiver) && equals(card, st.card);
     }
   }
 }

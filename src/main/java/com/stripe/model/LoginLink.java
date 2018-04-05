@@ -7,6 +7,7 @@ public class LoginLink extends APIResource implements HasId {
   Long created;
   String url;
 
+  @Override
   public String getId() {
     throw new UnsupportedOperationException(
         "Login links are ephemeral and do not have an identifier");

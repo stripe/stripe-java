@@ -48,6 +48,7 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
   Long total;
   Long webhooksDeliveredAt;
 
+  @Override
   public String getId() {
     return id;
   }
@@ -212,6 +213,7 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
     this.livemode = livemode;
   }
 
+  @Override
   public Map<String, String> getMetadata() {
     return metadata;
   }
@@ -446,6 +448,7 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
         instanceURL(Invoice.class, this.getId())), params, Invoice.class, options);
   }
 
+  @Override
   public Invoice update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -459,6 +462,7 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
     return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
+  @Override
   public Invoice update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

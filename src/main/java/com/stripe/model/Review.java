@@ -9,6 +9,7 @@ public class Review extends StripeObject implements HasId {
   Boolean open;
   String reason;
 
+  @Override
   public String getId() {
     return id;
   }

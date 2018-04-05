@@ -36,6 +36,7 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
   Long updated;
   String upstreamId;
 
+  @Override
   public String getId() {
     return id;
   }
@@ -165,6 +166,7 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
     this.livemode = livemode;
   }
 
+  @Override
   public Map<String, String> getMetadata() {
     return metadata;
   }
@@ -267,12 +269,14 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
     return request(RequestMethod.GET, instanceURL(Order.class, id), params, Order.class, options);
   }
 
+  @Override
   public Order update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return update(params, null);
   }
 
+  @Override
   @Deprecated
   public Order update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,

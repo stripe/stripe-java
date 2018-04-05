@@ -2,13 +2,15 @@ package com.stripe;
 
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
-
+import java.nio.charset.Charset;
 import java.util.HashMap;
 import java.util.Map;
 
 public abstract class Stripe {
   private static final int DEFAULT_CONNECT_TIMEOUT = 30 * 1000;
   private static final int DEFAULT_READ_TIMEOUT = 80 * 1000;
+  
+  public static final Charset UTF_8 = Charset.forName("UTF-8");
 
   public static final String UPLOAD_API_BASE = "https://uploads.stripe.com";
   public static final String LIVE_API_BASE = "https://api.stripe.com";

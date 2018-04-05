@@ -18,6 +18,7 @@ public class InvoiceLineItem extends StripeObject implements HasId {
   String subscription;
   String type;
 
+  @Override
   public String getId() {
     return this.id;
   }

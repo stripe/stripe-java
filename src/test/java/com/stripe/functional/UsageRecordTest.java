@@ -1,6 +1,6 @@
 package com.stripe.functional;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import com.stripe.BaseStripeFunctionalTest;
 import com.stripe.exception.StripeException;
@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
+
 import org.junit.Test;
 
 public class UsageRecordTest extends BaseStripeFunctionalTest {
@@ -30,8 +32,8 @@ public class UsageRecordTest extends BaseStripeFunctionalTest {
 
     UsageRecord ur = UsageRecord.create(params, null);
 
-    assertEquals(new Long(1000), ur.getQuantity());
-    assertEquals(new Long(unixTime), ur.getTimestamp());
+    assertTrue(Objects.equals(1000L, ur.getQuantity()));
+    assertTrue(Objects.equals(unixTime, ur.getTimestamp()));
   }
 
   private Plan createMeteredPlan() throws StripeException {

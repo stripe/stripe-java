@@ -28,6 +28,7 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
   Integer quantity;
   ExpandableField<Subscription> subscription;
 
+  @Override
   public String getId() {
     return id;
   }
@@ -126,6 +127,7 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
     this.livemode = livemode;
   }
 
+  @Override
   public Map<String, String> getMetadata() {
     return metadata;
   }
@@ -229,6 +231,7 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
         options);
   }
 
+  @Override
   public InvoiceItem update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -242,6 +245,7 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
     return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
+  @Override
   public InvoiceItem update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

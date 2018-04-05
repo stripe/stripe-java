@@ -18,6 +18,7 @@ public class SourceTransaction extends APIResource implements HasId, HasSourceTy
   // Type-specific properties
   Map<String, String> typeData;
 
+  @Override
   public String getId() {
     return id;
   }
@@ -92,10 +93,12 @@ public class SourceTransaction extends APIResource implements HasId, HasSourceTy
 
   // Type-specific getters/setters
 
+  @Override
   public Map<String, String> getTypeData() {
     return typeData;
   }
 
+  @Override
   public void setTypeData(Map<String, String> typeData) {
     this.typeData = typeData;
   }

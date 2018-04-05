@@ -18,6 +18,7 @@ public class ApplePayDomain extends APIResource implements HasId {
   String domainName;
   Boolean livemode;
 
+  @Override
   public String getId() {
     return id;
   }

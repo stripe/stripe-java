@@ -142,10 +142,12 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
 
   // Type-specific getters/setters
 
+  @Override
   public Map<String, String> getTypeData() {
     return typeData;
   }
 
+  @Override
   public void setTypeData(Map<String, String> typeData) {
     this.typeData = typeData;
   }
@@ -215,6 +217,7 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
    * {@link InvalidRequestException}. Call {@link #detach} to detach the source from a
    * customer object.
    */
+  @Override
   public DeletedExternalAccount delete(RequestOptions options) throws
       AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

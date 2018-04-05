@@ -1,5 +1,6 @@
 package com.stripe.net;
 
+import com.stripe.Stripe;
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.model.Event;
 
@@ -9,6 +10,7 @@ import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
+
 import javax.crypto.Mac;
 import javax.crypto.spec.SecretKeySpec;
 
@@ -119,7 +121,7 @@ public final class Webhook {
      * @return the timestamp contained in the header.
      */
     private static long getTimestamp(String sigHeader) {
-      String[] items = sigHeader.split(",");
+      String[] items = sigHeader.split(",", -1);
 
       for (String item : items) {
         String[] itemParts = item.split("=", 2);
@@ -140,7 +142,7 @@ public final class Webhook {
      */
     private static List<String> getSignatures(String sigHeader, String scheme) {
       List<String> signatures = new ArrayList<String>();
-      String[] items = sigHeader.split(",");
+      String[] items = sigHeader.split(",", -1);
 
       for (String item : items) {
         String[] itemParts = item.split("=", 2);
@@ -196,8 +198,8 @@ public final class Webhook {
      * @return true if the strings are equal, false otherwise.
      */
     public static boolean secureCompare(String a, String b) {
-      byte[] digesta = a.getBytes();
-      byte[] digestb = b.getBytes();
+      byte[] digesta = a.getBytes(Stripe.UTF_8);
+      byte[] digestb = b.getBytes(Stripe.UTF_8);
 
       return MessageDigest.isEqual(digesta, digestb);
     }

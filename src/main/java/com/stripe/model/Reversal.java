@@ -20,6 +20,7 @@ public class Reversal extends APIResource implements MetadataStore<Transfer>, Ha
   Map<String, String> metadata;
   ExpandableField<Transfer> transfer;
 
+  @Override
   public String getId() {
     return id;
   }
@@ -72,6 +73,7 @@ public class Reversal extends APIResource implements MetadataStore<Transfer>, Ha
     this.currency = currency;
   }
 
+  @Override
   public Map<String, String> getMetadata() {
     return metadata;
   }
@@ -96,6 +98,7 @@ public class Reversal extends APIResource implements MetadataStore<Transfer>, Ha
     this.transfer = new ExpandableField<Transfer>(c.getId(), c);
   }
 
+  @Override
   public Reversal update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -109,6 +112,7 @@ public class Reversal extends APIResource implements MetadataStore<Transfer>, Ha
     return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
+  @Override
   public Reversal update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

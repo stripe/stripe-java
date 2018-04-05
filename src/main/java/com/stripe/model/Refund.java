@@ -24,6 +24,7 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
   String receiptNumber;
   String status;
 
+  @Override
   public String getId() {
     return id;
   }
@@ -104,6 +105,7 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
     this.description = description;
   }
 
+  @Override
   public Map<String, String> getMetadata() {
     return metadata;
   }
@@ -136,6 +138,7 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
     this.status = status;
   }
 
+  @Override
   public Refund update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -149,6 +152,7 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
     return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
+  @Override
   public Refund update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

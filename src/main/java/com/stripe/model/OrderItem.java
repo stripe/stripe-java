@@ -59,8 +59,8 @@ public class OrderItem extends APIResource {
     this.parent = new ExpandableField<HasId>(o.getId(), o);
   }
 
-  public <O extends HasId> O getParentObjectAs() {
-    return (this.parent != null) ? (O) this.parent.getExpanded() : null;
+  public HasId getParentObjectAs() {
+    return (this.parent != null) ? this.parent.getExpanded() : null;
   }
 
   public Integer getQuantity() {

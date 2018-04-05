@@ -1,6 +1,7 @@
 package com.stripe.model;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
@@ -8,7 +9,8 @@ import com.stripe.model.LegalEntity;
 import com.stripe.net.APIResource;
 
 import java.io.IOException;
-import java.util.LinkedList;
+import java.util.ArrayList;
+import java.util.Objects;
 
 import org.junit.Test;
 
@@ -28,10 +30,10 @@ public class LegalEntityTest extends BaseStripeTest {
     assertEquals("US", le.getAddress().getCountry());
     assertEquals("Monica", le.getFirstName());
     assertEquals("Geller", le.getLastName());
-    assertEquals(new Integer(4), le.getDob().getDay());
-    assertEquals(new Integer(4), le.getDob().getMonth());
-    assertEquals(new Integer(1969), le.getDob().getYear());
-    assertEquals(new LinkedList<Object>(), le.getAdditionalOwners());
+    assertTrue(Objects.equals(4, le.getDob().getDay()));
+    assertTrue(Objects.equals(4, le.getDob().getMonth()));
+    assertTrue(Objects.equals(1969, le.getDob().getYear()));
+    assertEquals(new ArrayList<Object>(), le.getAdditionalOwners());
     assertEquals("verified", le.getVerification().getStatus());
     assertEquals(null, le.getVerification().getDocument());
     assertEquals(null, le.getVerification().getDetails());

@@ -49,6 +49,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
   @Deprecated
   Summary summary;
 
+  @Override
   public String getId() {
     return id;
   }
@@ -212,6 +213,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
     this.livemode = livemode;
   }
 
+  @Override
   public Map<String, String> getMetadata() {
     return metadata;
   }
@@ -453,6 +455,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
         Transfer.class, options);
   }
 
+  @Override
   public Transfer update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -466,6 +469,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
     return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
+  @Override
   public Transfer update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

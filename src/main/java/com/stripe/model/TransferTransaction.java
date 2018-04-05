@@ -10,6 +10,7 @@ public class TransferTransaction extends StripeObject implements HasId {
   String description;
   Long fee;
 
+  @Override
   public String getId() {
     return id;
   }

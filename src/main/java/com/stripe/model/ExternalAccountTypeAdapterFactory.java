@@ -16,6 +16,7 @@ public class ExternalAccountTypeAdapterFactory implements TypeAdapterFactory {
    * Creates the type adapter used to instantiate {@link ExternalAccount} subclasses from JSON
    * payloads.
    */
+  @Override
   public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
     if (!ExternalAccount.class.isAssignableFrom(type.getRawType())) {
       return null; // this class only serializes 'ExternalAccount' and its subtypes
@@ -38,11 +39,13 @@ public class ExternalAccountTypeAdapterFactory implements TypeAdapterFactory {
         = gson.getDelegateAdapter(this, TypeToken.get(Source.class));
 
     TypeAdapter<ExternalAccount> result = new TypeAdapter<ExternalAccount>() {
+      @Override
       public void write(JsonWriter out, ExternalAccount value) throws IOException {
         // TODO: check instance of for correct writer
         externalAccountAdapter.write(out, value);
       }
 
+      @Override
       public ExternalAccount read(JsonReader in) throws IOException {
         JsonObject object = elementAdapter.read(in).getAsJsonObject();
         String sourceObject = object.getAsJsonPrimitive(sourceObjectProp).getAsString();

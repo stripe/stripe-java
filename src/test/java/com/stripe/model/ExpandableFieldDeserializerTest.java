@@ -20,10 +20,11 @@ public class ExpandableFieldDeserializerTest extends BaseStripeTest {
 
   private static Gson gson = APIResource.GSON;
 
-  private class TestObject implements HasId {
+  private static class TestObject implements HasId {
     String id;
     int bar;
 
+    @Override
     public String getId() {
       return id;
     }
@@ -34,7 +35,7 @@ public class ExpandableFieldDeserializerTest extends BaseStripeTest {
     String json = gson.toJson(null);
     // Gson also uses TypeTokens internally to get around Type Erasure for generic types, simulate
     // that here:
-    ExpandableField out = gson.fromJson(json,
+    ExpandableField<TestObject> out = gson.fromJson(json,
         new TypeToken<ExpandableField<TestObject>>() {}.getType());
     assertNull(out);
   }

@@ -32,6 +32,7 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
   Long updated;
   String url;
 
+  @Override
   public String getId() {
     return id;
   }
@@ -112,6 +113,7 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
     this.livemode = livemode;
   }
 
+  @Override
   public Map<String, String> getMetadata() {
     return metadata;
   }
@@ -208,12 +210,14 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
     return request(RequestMethod.GET, instanceURL(Product.class, id), null, Product.class, options);
   }
 
+  @Override
   public Product update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return update(params, null);
   }
 
+  @Override
   public Product update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

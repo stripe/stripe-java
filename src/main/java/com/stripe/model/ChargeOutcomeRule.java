@@ -9,6 +9,7 @@ public class ChargeOutcomeRule extends StripeObject implements HasId {
     return action;
   }
 
+  @Override
   public String getId() {
     return id;
   }

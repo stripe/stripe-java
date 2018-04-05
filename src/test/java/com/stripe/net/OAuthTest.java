@@ -2,6 +2,7 @@ package com.stripe.net;
 
 import static org.junit.Assert.assertEquals;
 
+import com.google.common.base.Splitter;
 import com.stripe.BaseStripeTest;
 import com.stripe.Stripe;
 import com.stripe.exception.AuthenticationException;
@@ -17,6 +18,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLDecoder;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.After;
@@ -38,7 +40,7 @@ public class OAuthTest extends BaseStripeTest {
 
   private static Map<String, String> splitQuery(String query) throws UnsupportedEncodingException {
     Map<String, String> queryPairs = new HashMap<String, String>();
-    String[] pairs = query.split("&");
+    List<String> pairs = Splitter.on("&").splitToList(query);
     for (String pair : pairs) {
       int idx = pair.indexOf("=");
       queryPairs.put(URLDecoder.decode(pair.substring(0, idx), "UTF8"),

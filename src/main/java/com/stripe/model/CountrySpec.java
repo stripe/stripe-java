@@ -20,6 +20,7 @@ public class CountrySpec extends APIResource implements HasId {
   List<String> supportedPaymentMethods;
   VerificationFields verificationFields;
 
+  @Override
   public String getId() {
     return id;
   }

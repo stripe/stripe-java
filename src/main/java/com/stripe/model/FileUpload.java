@@ -20,6 +20,7 @@ public class FileUpload extends APIResource implements HasId {
   String type;
   String url;
 
+  @Override
   public String getId() {
     return id;
   }

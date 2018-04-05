@@ -47,11 +47,11 @@ public class CountrySpecTest extends BaseStripeFunctionalTest {
 
     CountrySpec retrievedCountrySpec2 = CountrySpec.retrieve(country);
     VerificationFields verificationFields2 = retrievedCountrySpec2.getVerificationFields();
-    assert (verificationFields2.equals(verificationFields));
+    assertTrue(verificationFields2.equals(verificationFields));
 
     CountrySpec retrievedCountrySpecFR = CountrySpec.retrieve("FR");
     VerificationFields verificationFieldsFR = retrievedCountrySpecFR.getVerificationFields();
-    assert (!verificationFieldsFR.equals(verificationFields));
+    assertTrue(!verificationFieldsFR.equals(verificationFields));
   }
 
   @Test

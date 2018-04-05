@@ -4,6 +4,7 @@ public class Application extends StripeObject implements HasId {
   String id;
   String name;
 
+  @Override
   public String getId() {
     return id;
   }

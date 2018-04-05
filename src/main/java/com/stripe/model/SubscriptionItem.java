@@ -18,6 +18,7 @@ public class SubscriptionItem extends APIResource implements HasId {
   Plan plan;
   Integer quantity;
 
+  @Override
   public String getId() {
     return id;
   }

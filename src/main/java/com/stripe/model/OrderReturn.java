@@ -22,6 +22,7 @@ public class OrderReturn extends APIResource implements HasId {
   ExpandableField<Order> order;
   ExpandableField<Refund> refund;
 
+  @Override
   public String getId() {
     return id;
   }

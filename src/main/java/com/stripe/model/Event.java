@@ -23,6 +23,7 @@ public class Event extends APIResource implements HasId {
   String type;
   String userId;
 
+  @Override
   public String getId() {
     return id;
   }

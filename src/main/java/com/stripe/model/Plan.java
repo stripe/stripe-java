@@ -38,6 +38,7 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
   @Deprecated
   String statementDescriptor;
 
+  @Override
   public String getId() {
     return id;
   }
@@ -110,6 +111,7 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
     this.livemode = livemode;
   }
 
+  @Override
   public Map<String, String> getMetadata() {
     return metadata;
   }
@@ -276,6 +278,7 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
     return request(RequestMethod.GET, instanceURL(Plan.class, id), null, Plan.class, options);
   }
 
+  @Override
   public Plan update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -289,6 +292,7 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
     return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
+  @Override
   public Plan update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
