@@ -16,7 +16,7 @@ public class SysPropsCredentialsProvider implements StripeCredentialsProvider {
 
     String apiKey = System.getenv("stripe.apiKey");
 
-    if (apiKey.isEmpty() || apiKey == null) {
+    if (apiKey.isEmpty()) {
       throw new IllegalArgumentException("Unable to set apiKey from System Properties!");
     }
     return new StripeCredentials(apiKey);

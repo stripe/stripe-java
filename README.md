@@ -47,28 +47,13 @@ Please see the [Java API docs](https://stripe.com/docs/api/java) for the most up
 
 ## Alternate API KEY setup
 
-# ~/.stripe/credentials
-
-```bash
-[default]
-apiKey = sk_test_BQokikJOvBiI2HlWgH4olfQ2
-```
-```java
-StripeCredentials credentials = new SharedCredentialsProvider().getCredentials();
-```
 # System Properties
 ```bash
 -Dstrip.apiKey=sk_test_BQokikJOvBiI2HlWgH4olfQ2
 ```
-```java
-StripeCredentials credentials = new SysPropsCredentialsProvider().getCredentials();
-```
 # Environment Variable
 ```bash
 export STRIPE_API_KEY=sk_test_BQokikJOvBiI2HlWgH4olfQ2
-```
-```java
-StripeCredentials credentials = new EnvVarCredentialsProvider().getCredentials();
 ```
 
 # Initialize 
