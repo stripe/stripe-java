@@ -26,8 +26,8 @@ import com.stripe.net.RequestOptions;
 import java.io.File;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -79,7 +79,7 @@ public class DisputeTest extends BaseStripeFunctionalTest {
     Charge disputedCharge = createDisputedCharge(chargeValueCents, null);
     Dispute dispute = disputedCharge.getDisputeObject();
 
-    List<String> expandList = new LinkedList<String>();
+    List<String> expandList = new ArrayList<>();
     expandList.add("charge");
 
     Map<String, Object> retrieveParams = new HashMap<String, Object>();

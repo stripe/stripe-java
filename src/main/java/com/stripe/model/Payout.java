@@ -31,6 +31,7 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
   String status;
   String type;
 
+  @Override
   public String getId() {
     return id;
   }
@@ -162,6 +163,7 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
     this.livemode = livemode;
   }
 
+  @Override
   public Map<String, String> getMetadata() {
     return metadata;
   }
@@ -265,12 +267,14 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
     return request(RequestMethod.GET, instanceURL(Payout.class, id), params, Payout.class, options);
   }
 
+  @Override
   public Payout update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return update(params, null);
   }
 
+  @Override
   public Payout update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

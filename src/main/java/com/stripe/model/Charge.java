@@ -58,6 +58,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   @Deprecated
   String statementDescription;
 
+  @Override
   public String getId() {
     return id;
   }
@@ -276,6 +277,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     this.livemode = livemode;
   }
 
+  @Override
   public Map<String, String> getMetadata() {
     return metadata;
   }
@@ -537,6 +539,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     return request(RequestMethod.GET, instanceURL(Charge.class, id), params, Charge.class, options);
   }
 
+  @Override
   public Charge update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -550,6 +553,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
+  @Override
   public Charge update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

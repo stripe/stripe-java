@@ -17,6 +17,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 
 import org.junit.Test;
 
@@ -158,10 +159,10 @@ public class PlanTest extends BaseStripeFunctionalTest {
     assertEquals("volume", plan.getTiersMode());
     List<PlanTier> tierConfig = plan.getTiers();
     assertEquals(2, tierConfig.size());
-    assertEquals(new Long(1000), tierConfig.get(0).getAmount());
-    assertEquals(new Long(1000), tierConfig.get(0).getUpTo());
+    assertTrue(Objects.equals(1000L, tierConfig.get(0).getAmount()));
+    assertTrue(Objects.equals(1000L, tierConfig.get(0).getUpTo()));
     assertEquals(null, tierConfig.get(1).getUpTo());
-    assertEquals(new Long(2000), tierConfig.get(1).getAmount());
+    assertTrue(Objects.equals(2000L, tierConfig.get(1).getAmount()));
   }
 
   @Test
@@ -181,10 +182,10 @@ public class PlanTest extends BaseStripeFunctionalTest {
     params.put("transform_usage", transformUsage);
 
     Plan plan = Plan.create(params);
-    assertEquals(new Long(100), plan.getAmount());
+    assertTrue(Objects.equals(100L, plan.getAmount()));
 
     PlanTransformUsage planTransformUsage = plan.getTransformUsage();
-    assertEquals(new Long(1000), planTransformUsage.getDivideBy());
+    assertTrue(Objects.equals(1000L, planTransformUsage.getDivideBy()));
     assertEquals("up", planTransformUsage.getRound());
   }
 

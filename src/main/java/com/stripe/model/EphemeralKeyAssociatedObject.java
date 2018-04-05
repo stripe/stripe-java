@@ -12,6 +12,7 @@ public class EphemeralKeyAssociatedObject extends StripeObject implements HasId 
     this.type = type;
   }
 
+  @Override
   public String getId() {
     return id;
   }

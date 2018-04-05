@@ -45,6 +45,7 @@ public abstract class StripeCollection<T extends HasId> extends StripeObject
    */
   Integer count;
 
+  @Override
   public List<T> getData() {
     return data;
   }
@@ -53,6 +54,7 @@ public abstract class StripeCollection<T extends HasId> extends StripeObject
     this.data = data;
   }
 
+  @Override
   public Integer getTotalCount() {
     return totalCount;
   }
@@ -61,6 +63,7 @@ public abstract class StripeCollection<T extends HasId> extends StripeObject
     this.totalCount = totalCount;
   }
 
+  @Override
   public Boolean getHasMore() {
     return hasMore;
   }
@@ -69,6 +72,7 @@ public abstract class StripeCollection<T extends HasId> extends StripeObject
     this.hasMore = hasMore;
   }
 
+  @Override
   public String getURL() {
     return url;
   }
@@ -114,18 +118,22 @@ public abstract class StripeCollection<T extends HasId> extends StripeObject
     return new PagingIterable<T>(this);
   }
 
+  @Override
   public RequestOptions getRequestOptions() {
     return this.requestOptions;
   }
 
+  @Override
   public Map<String, Object> getRequestParams() {
     return this.requestParams;
   }
 
+  @Override
   public void setRequestOptions(RequestOptions requestOptions) {
     this.requestOptions = requestOptions;
   }
 
+  @Override
   public void setRequestParams(Map<String, Object> requestParams) {
     this.requestParams = requestParams;
   }

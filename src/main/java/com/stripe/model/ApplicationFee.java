@@ -29,6 +29,7 @@ public class ApplicationFee extends APIResource implements HasId {
   @Deprecated
   String user;
 
+  @Override
   public String getId() {
     return id;
   }

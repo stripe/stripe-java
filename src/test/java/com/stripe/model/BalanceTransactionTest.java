@@ -25,7 +25,7 @@ public class BalanceTransactionTest extends BaseStripeTest {
     BalanceTransaction transaction = APIResource.GSON.fromJson(json, BalanceTransaction.class);
     assertEquals("txn_1AF5AmKac2qaDcCZm8tBQt6I", transaction.getId());
 
-    Dispute dp = transaction.getSourceObjectAs();
+    Dispute dp = (Dispute) transaction.getSourceObjectAs();
     assertNotNull(dp);
     assertEquals("dp_1AF5AmKac2qaDcCZHvOjyrDo", dp.getId());
   }

@@ -15,3 +15,4 @@ out/*
 # compiler output
 bin/
 
+/.gradle/

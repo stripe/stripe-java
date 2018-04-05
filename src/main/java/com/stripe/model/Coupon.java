@@ -26,6 +26,7 @@ public class Coupon extends APIResource implements MetadataStore<Coupon>, HasId 
   Integer timesRedeemed;
   Boolean valid;
 
+  @Override
   public String getId() {
     return id;
   }
@@ -98,6 +99,7 @@ public class Coupon extends APIResource implements MetadataStore<Coupon>, HasId 
     this.maxRedemptions = maxRedemptions;
   }
 
+  @Override
   public Map<String, String> getMetadata() {
     return metadata;
   }
@@ -176,6 +178,7 @@ public class Coupon extends APIResource implements MetadataStore<Coupon>, HasId 
     return request(RequestMethod.GET, instanceURL(Coupon.class, id), null, Coupon.class, options);
   }
 
+  @Override
   public Coupon update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException, APIConnectionException,
       CardException, APIException {
@@ -189,6 +192,7 @@ public class Coupon extends APIResource implements MetadataStore<Coupon>, HasId 
     return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
+  @Override
   public Coupon update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException, APIConnectionException,
       CardException, APIException {

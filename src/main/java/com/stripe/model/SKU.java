@@ -26,6 +26,7 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
   ExpandableField<Product> product;
   Long updated;
 
+  @Override
   public String getId() {
     return id;
   }
@@ -98,6 +99,7 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
     this.livemode = livemode;
   }
 
+  @Override
   public Map<String, String> getMetadata() {
     return metadata;
   }
@@ -177,12 +179,14 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
     return request(RequestMethod.GET, instanceURL(SKU.class, id), params, SKU.class, options);
   }
 
+  @Override
   public SKU update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return update(params, null);
   }
 
+  @Override
   public SKU update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

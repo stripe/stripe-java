@@ -117,6 +117,7 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
    * Deserializes the JSON payload contained in an event's {@code data} attribute into an
    * {@link EventData} instance.
    */
+  @Override
   @SuppressWarnings("unchecked")
   public EventData deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
       throws JsonParseException {
@@ -136,8 +137,8 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
       } else if ("object".equals(key)) {
         String type = element.getAsJsonObject().get("object").getAsString();
         Class<StripeObject> cl = objectMap.get(type);
-        StripeObject object = APIResource.GSON.fromJson(
-            entry.getValue(), cl != null ? cl : StripeRawJsonObject.class);
+        StripeObject object = APIResource.GSON.fromJson(entry.getValue(),
+            cl != null ? cl : StripeRawJsonObject.class);
         eventData.setObject(object);
       }
     }

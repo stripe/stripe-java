@@ -14,8 +14,6 @@ public class MultipartProcessor {
   private static final String LINE_BREAK = "\r\n";
   private OutputStream outputStream;
   private PrintWriter writer;
-  private String charset;
-  private java.net.HttpURLConnection conn;
 
   /**
    * Generates a random MIME multipart boundary.
@@ -34,9 +32,6 @@ public class MultipartProcessor {
   public MultipartProcessor(java.net.HttpURLConnection conn, String boundary, String charset)
       throws IOException {
     this.boundary = boundary;
-    this.charset = charset;
-    this.conn = conn;
-
     this.outputStream = conn.getOutputStream();
     this.writer = new PrintWriter(new OutputStreamWriter(outputStream, charset), true);
   }
@@ -76,16 +71,13 @@ public class MultipartProcessor {
     writer.append(LINE_BREAK);
     writer.flush();
 
-    FileInputStream inputStream = new FileInputStream(file);
-    try {
+    try (FileInputStream inputStream = new FileInputStream(file)) {
       byte[] buffer = new byte[4096];
       int bytesRead = -1;
       while ((bytesRead = inputStream.read(buffer)) != -1) {
         outputStream.write(buffer, 0, bytesRead);
       }
       outputStream.flush();
-    } finally {
-      inputStream.close();
     }
 
     writer.append(LINE_BREAK);

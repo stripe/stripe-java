@@ -11,8 +11,9 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.RequestOptions.RequestOptionsBuilder;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.After;
@@ -43,7 +44,7 @@ public class AccountTest extends BaseStripeTest {
     assertEquals("http://www.business.com", acc.getBusinessURL());
     assertEquals("http://support.business.com", acc.getSupportURL());
 
-    LinkedList<String> cs = new LinkedList<String>();
+    List<String> cs = new ArrayList<String>();
     cs.add("usd");
     cs.add("aud");
     assertEquals(cs, acc.getCurrenciesSupported());
@@ -70,7 +71,7 @@ public class AccountTest extends BaseStripeTest {
     Account.Verification verif = new Account.Verification();
     verif.disabledReason = "fields_needed";
     verif.dueBy = (long) 1457913600;
-    LinkedList<String> fn = new LinkedList<String>();
+    List<String> fn = new ArrayList<String>();
     fn.add("legal_entity.first_name");
     fn.add("legal_entity.last_name");
     verif.fieldsNeeded = fn;

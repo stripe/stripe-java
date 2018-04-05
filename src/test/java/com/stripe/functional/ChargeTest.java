@@ -171,7 +171,7 @@ public class ChargeTest extends BaseStripeFunctionalTest {
     Charge.create(invalidChargeParams);
   }
 
-  @Test
+  @Test(expected = CardException.class)
   public void testDeclinedCard() throws StripeException {
     Map<String, Object> declinedChargeParams = new HashMap<String, Object>();
     declinedChargeParams.putAll(defaultChargeParams);
@@ -182,6 +182,7 @@ public class ChargeTest extends BaseStripeFunctionalTest {
     } catch (CardException e) {
       assertEquals("card_declined", e.getCode());
       assertNotNull(e.getCharge());
+      throw e;
     }
   }
 

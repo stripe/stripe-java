@@ -23,6 +23,11 @@ public final class VerificationFields extends StripeObject {
   }
 
   @Override
+  public int hashCode() {
+    return 42;
+  }
+
+  @Override
   public boolean equals(Object o) {
     if (this == o) {
       return true;

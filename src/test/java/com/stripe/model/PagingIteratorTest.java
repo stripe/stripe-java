@@ -46,6 +46,7 @@ public class PagingIteratorTest extends BaseStripeTest {
           PageableModelCollection.class, options);
     }
 
+    @Override
     public String getId() {
       return id;
     }
@@ -88,6 +89,7 @@ public class PagingIteratorTest extends BaseStripeTest {
       // essentially all we're doing here is returning the first page of
       // results on the first request and the second page of results on
       // the second
+      @Override
       public Object answer(InvocationOnMock invocation) {
         if (count >= pages.size()) {
           throw new RuntimeException("Page out of bounds");

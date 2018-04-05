@@ -12,11 +12,11 @@ public class RateLimitException extends InvalidRequestException {
   // TODO: remove this constructor in next major version bump
   public RateLimitException(String message, String param, String requestId, Integer statusCode,
       Throwable e) {
-    this(message, param, null, requestId, statusCode, e);
+    this(message, param, requestId, null, statusCode, e);
   }
 
   public RateLimitException(String message, String param, String requestId, String code,
       Integer statusCode, Throwable e) {
-    super(message, param, code, requestId, statusCode, e);
+    super(message, param, requestId, code, statusCode, e);
   }
 }

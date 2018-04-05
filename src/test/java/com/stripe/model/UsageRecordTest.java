@@ -35,7 +35,7 @@ public class UsageRecordTest extends BaseStripeTest {
     params.put("livemode", true);
     params.put("subscription_item", "si_abc");
 
-    UsageRecord ur = UsageRecord.create(params, null);
+    UsageRecord.create(params, null);
 
     Map<String, Object> apiParams = new HashMap<>();
     apiParams.put("quantity", 1000);
@@ -43,8 +43,7 @@ public class UsageRecordTest extends BaseStripeTest {
     apiParams.put("livemode", true);
 
     verifyPost(UsageRecord.class,
-            "https://api.stripe.com/v1/subscription_items/si_abc/usage_records",
-            apiParams);
+        "https://api.stripe.com/v1/subscription_items/si_abc/usage_records", apiParams);
     verifyNoMoreInteractions(networkMock);
   }
 

@@ -20,6 +20,7 @@ public class FeeRefund extends APIResource implements MetadataStore<ApplicationF
   ExpandableField<ApplicationFee> fee;
   Map<String, String> metadata;
 
+  @Override
   public String getId() {
     return id;
   }
@@ -88,6 +89,7 @@ public class FeeRefund extends APIResource implements MetadataStore<ApplicationF
     this.fee = new ExpandableField<ApplicationFee>(c.getId(), c);
   }
 
+  @Override
   public Map<String, String> getMetadata() {
     return metadata;
   }
@@ -96,6 +98,7 @@ public class FeeRefund extends APIResource implements MetadataStore<ApplicationF
     this.metadata = metadata;
   }
 
+  @Override
   public FeeRefund update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -109,6 +112,7 @@ public class FeeRefund extends APIResource implements MetadataStore<ApplicationF
     return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
+  @Override
   public FeeRefund update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

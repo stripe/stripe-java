@@ -39,6 +39,11 @@ public class AccountPayoutSchedule extends StripeObject {
   }
 
   @Override
+  public int hashCode() {
+    return 42;
+  }
+
+  @Override
   public boolean equals(Object o) {
     if (this == o) {
       return true;
@@ -48,8 +53,7 @@ public class AccountPayoutSchedule extends StripeObject {
     }
 
     AccountPayoutSchedule schedule = (AccountPayoutSchedule) o;
-    return equals(delayDays, schedule.delayDays)
-        && equals(interval, schedule.interval)
+    return equals(delayDays, schedule.delayDays) && equals(interval, schedule.interval)
         && equals(monthlyAnchor, schedule.monthlyAnchor)
         && equals(weeklyAnchor, schedule.weeklyAnchor);
   }

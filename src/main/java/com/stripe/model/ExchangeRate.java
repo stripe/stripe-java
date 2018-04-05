@@ -15,6 +15,7 @@ public class ExchangeRate extends APIResource implements HasId {
   String object;
   Map<String, Float> rates;
 
+  @Override
   public String getId() {
     return id;
   }

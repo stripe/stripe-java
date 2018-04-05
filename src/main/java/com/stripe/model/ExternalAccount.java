@@ -17,6 +17,7 @@ public class ExternalAccount extends APIResource implements HasId, MetadataStore
   String customer;
   Map<String, String> metadata;
 
+  @Override
   public String getId() {
     return id;
   }
@@ -51,6 +52,7 @@ public class ExternalAccount extends APIResource implements HasId, MetadataStore
     this.customer = customer;
   }
 
+  @Override
   public Map<String, String> getMetadata() {
     return metadata;
   }
@@ -85,12 +87,14 @@ public class ExternalAccount extends APIResource implements HasId, MetadataStore
     }
   }
 
+  @Override
   public ExternalAccount update(Map<String, Object> params) throws
       AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return update(params, null);
   }
 
+  @Override
   public ExternalAccount update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

@@ -13,8 +13,8 @@ import com.stripe.model.Charge;
 import com.stripe.model.ChargeRefundCollection;
 import com.stripe.model.Refund;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -111,7 +111,7 @@ public class RefundTest extends BaseStripeFunctionalTest {
     Charge ch = Charge.create(defaultChargeParams);
     ch = ch.refund();
 
-    List<String> expandList = new LinkedList<String>();
+    List<String> expandList = new ArrayList<>();
     expandList.add("data.balance_transaction");
     expandList.add("data.balance_transaction.source");
     expandList.add("data.charge");

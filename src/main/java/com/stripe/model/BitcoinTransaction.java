@@ -11,6 +11,7 @@ public class BitcoinTransaction extends APIResource implements HasId {
   String customer;
   String receiver;
 
+  @Override
   public String getId() {
     return id;
   }

@@ -44,6 +44,7 @@ public class Dispute extends APIResource implements HasId {
   @Deprecated
   Long evidenceDueBy;
 
+  @Override
   public String getId() {
     return id;
   }

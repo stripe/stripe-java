@@ -24,6 +24,7 @@ public class Token extends APIResource implements HasId {
   String type;
   Boolean used;
 
+  @Override
   public String getId() {
     return id;
   }

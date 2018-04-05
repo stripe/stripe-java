@@ -26,8 +26,8 @@ import com.stripe.model.ExternalAccountCollection;
 import com.stripe.model.Plan;
 import com.stripe.model.ShippingDetails;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -132,9 +132,9 @@ public class CustomerTest extends BaseStripeFunctionalTest {
     List<ExternalAccount> customerSourceList = customer.getSources().all(listParams).getData();
 
     assertEquals(2, customerSourceList.size());
-    assert (customerSourceList.get(0) instanceof Card);
+    assertTrue(customerSourceList.get(0) instanceof Card);
     assertEquals("4242", ((Card) customerSourceList.get(0)).getLast4());
-    assert (customerSourceList.get(1) instanceof BankAccount);
+    assertTrue(customerSourceList.get(1) instanceof BankAccount);
     assertEquals("6789", ((BankAccount) customerSourceList.get(1)).getLast4());
   }
 
@@ -152,7 +152,7 @@ public class CustomerTest extends BaseStripeFunctionalTest {
   public void testCustomerSourceRetrieveWithExpand() throws StripeException {
     Customer customer = Customer.create(defaultCustomerParams);
 
-    List<String> expandList = new LinkedList<String>();
+    List<String> expandList = new ArrayList<>();
     expandList.add("default_source");
     Map<String, Object> retrieveParams = new HashMap<String, Object>();
     retrieveParams.put("expand", expandList);
@@ -171,7 +171,7 @@ public class CustomerTest extends BaseStripeFunctionalTest {
     assertNotNull(customer);
     assertNotNull(customer.getId());
     assertNotNull(customer.getSources());
-    assert (customer.getSources().getData().get(0) instanceof Card);
+    assertTrue(customer.getSources().getData().get(0) instanceof Card);
     assertNotNull(customer.getDefaultSource());
     ExternalAccount card = customer.getSources().retrieve(customer.getDefaultSource());
     assertEquals(card.getId(), customer.getDefaultSource());
@@ -182,7 +182,7 @@ public class CustomerTest extends BaseStripeFunctionalTest {
     Customer customer = Customer.create(defaultCustomerParams);
     ExternalAccountCollection customerSources = customer.getSources();
     ExternalAccount paymentSource = customerSources.getData().get(0);
-    assert (paymentSource instanceof Card);
+    assertTrue(paymentSource instanceof Card);
     Card card = (Card) paymentSource;
 
     HashMap<String, Object> updateParams = new HashMap<String, Object>();

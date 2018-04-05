@@ -11,16 +11,17 @@ import org.junit.Test;
 
 public class ExpandableFieldSerializerTest extends BaseStripeTest {
 
-  private class TestNestedObject implements HasId {
+  private static class TestNestedObject implements HasId {
     String id;
     int bar;
 
+    @Override
     public String getId() {
       return id;
     }
   }
 
-  private class TestTopLevelObject extends StripeObject {
+  private static class TestTopLevelObject extends StripeObject {
     ExpandableField<TestNestedObject> nested;
   }
 

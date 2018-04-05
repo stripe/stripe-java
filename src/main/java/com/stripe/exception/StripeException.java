@@ -62,6 +62,7 @@ public abstract class StripeException extends Exception {
    *
    * @return a string representation of the exception.
    */
+  @Override
   public String toString() {
     String additionalInfo = "";
     if (code != null) {

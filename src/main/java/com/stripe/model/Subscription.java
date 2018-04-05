@@ -36,6 +36,7 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
   Long trialEnd;
   Long trialStart;
 
+  @Override
   public String getId() {
     return id;
   }
@@ -156,6 +157,7 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
     this.endedAt = endedAt;
   }
 
+  @Override
   public Map<String, String> getMetadata() {
     return metadata;
   }
@@ -291,6 +293,7 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
         Subscription.class, options);
   }
 
+  @Override
   public Subscription update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -304,6 +307,7 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
     return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
+  @Override
   public Subscription update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

@@ -8,7 +8,6 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.net.APIResource;
 import com.stripe.net.RequestOptions;
-
 import java.util.List;
 import java.util.Map;
 
@@ -30,6 +29,7 @@ public class BalanceTransaction extends APIResource implements HasId {
   @Deprecated
   TransferCollection sourcedTransfers;
 
+  @Override
   public String getId() {
     return id;
   }
@@ -142,8 +142,8 @@ public class BalanceTransaction extends APIResource implements HasId {
     this.source = new ExpandableField<HasId>(o.getId(), o);
   }
 
-  public <O extends HasId> O getSourceObjectAs() {
-    return (this.source != null) ? (O) this.source.getExpanded() : null;
+  public HasId getSourceObjectAs() {
+    return (this.source != null) ? this.source.getExpanded() : null;
   }
 
   /**
@@ -163,34 +163,32 @@ public class BalanceTransaction extends APIResource implements HasId {
   }
 
   public static BalanceTransaction retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+      InvalidRequestException, APIConnectionException, CardException, APIException {
     return retrieve(id, (RequestOptions) null);
   }
 
   @Deprecated
   public static BalanceTransaction retrieve(String id, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
     return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
   public static BalanceTransaction retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
     String url = String.format("%s/%s/%s", Stripe.getApiBase(), "v1/balance/history", id);
     return request(RequestMethod.GET, url, null, BalanceTransaction.class, options);
   }
 
   public static BalanceTransactionCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
     return list(params, null);
   }
 
   public static BalanceTransactionCollection list(Map<String, Object> params,
-      RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
+      RequestOptions options) throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     String url = String.format("%s/%s", Stripe.getApiBase(), "v1/balance/history");
     return requestCollection(url, params, BalanceTransactionCollection.class, options);
@@ -198,22 +196,22 @@ public class BalanceTransaction extends APIResource implements HasId {
 
   @Deprecated
   public static BalanceTransactionCollection all(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
     return list(params, null);
   }
 
   @Deprecated
   public static BalanceTransactionCollection all(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
     return list(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
   @Deprecated
   public static BalanceTransactionCollection all(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
     return list(params, options);
   }
 

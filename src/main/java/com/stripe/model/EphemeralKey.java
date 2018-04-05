@@ -21,6 +21,7 @@ public class EphemeralKey extends APIResource implements HasId {
   List<EphemeralKeyAssociatedObject> associatedObjects;
   transient String rawJson;
 
+  @Override
   public String getId() {
     return id;
   }

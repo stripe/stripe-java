@@ -53,6 +53,7 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
   @Deprecated
   List<String> currenciesSupported;
 
+  @Override
   public String getId() {
     return id;
   }
@@ -153,6 +154,7 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
     return managed;
   }
 
+  @Override
   public Map<String, String> getMetadata() {
     return metadata;
   }
@@ -326,12 +328,14 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
         options);
   }
 
+  @Override
   public Account update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return update(params, null);
   }
 
+  @Override
   public Account update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -399,6 +403,11 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
       return fieldsNeeded;
     }
 
+    @Override
+    public int hashCode() {
+      return 42;
+    }
+    
     @Override
     public boolean equals(Object o) {
       if (this == o) {
