@@ -42,6 +42,7 @@ import com.stripe.model.StripeRawJsonObjectDeserializer;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Map;
+import java.util.Objects;
 
 public abstract class APIResource extends StripeObject {
   private static StripeResponseGetter stripeResponseGetter = new LiveStripeResponseGetter();
@@ -232,7 +233,8 @@ public abstract class APIResource extends StripeObject {
    */
   public static <T extends HasId> ExpandableField<T> setExpandableFieldID(String newId,
       ExpandableField<T> currentObject) {
-    if (currentObject == null || (currentObject.isExpanded() && (currentObject.getId() != newId))) {
+    if (currentObject == null
+        || (currentObject.isExpanded() && (!Objects.equals(currentObject.getId(), newId)))) {
       return new ExpandableField<T>(newId, null);
     }
 
