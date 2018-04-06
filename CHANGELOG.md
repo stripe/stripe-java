@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.35.1 - 2018-04-06
+* [#498](https://github.com/stripe/stripe-java/pull/498) Fix two bugs found by Error Prone
+
 ## 5.35.0 - 2018-04-05
 * [#462](https://github.com/stripe/stripe-java/pull/462) Add support for flexible billing primitives
 
