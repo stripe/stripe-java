@@ -23,21 +23,16 @@ public class SourceTest extends BaseStripeFunctionalTest {
     ownerParams.put("email", "payinguser+fill_now@example.com");
 
     Map<String, Object> sourceCreateParams = new HashMap<String, Object>();
-    sourceCreateParams.put("type", "bitcoin");
+    sourceCreateParams.put("type", "ach_credit_transfer");
     sourceCreateParams.put("currency", "usd");
-    sourceCreateParams.put("amount", 1000);
     sourceCreateParams.put("owner", ownerParams);
 
     Source created = Source.create(sourceCreateParams, sourceRequestOptions);
 
-    assertEquals("bitcoin", created.getType());
+    assertEquals("ach_credit_transfer", created.getType());
     assertEquals("receiver", created.getFlow());
 
-    // TODO: It's obviously very unpleasant to have all strings
-    // here. The plan is to type-check these once any method makes
-    // it to public beta. For now, unfortunately, the user will have
-    // to actually cast the data to what they want.
-    assertEquals(0, Long.parseLong(created.getTypeData().get("amount_charged")));
+    assertEquals(false, created.getTypeData().isEmpty());
 
     Source retrieved = Source.retrieve(created.getId(), sourceRequestOptions);
     assertEquals(created.getId(), retrieved.getId());
