@@ -34,8 +34,7 @@ public class SourceTest extends BaseStripeTest {
     ownerParams.put("email", "jenny.rosen@example.com");
 
     HashMap<String, Object> params = new HashMap<String, Object>();
-    params.put("type", "bitcoin");
-    params.put("amount", 1000);
+    params.put("type", "ach_credit_transfer");
     params.put("currency", "usd");
     params.put("owner", ownerParams);
 
