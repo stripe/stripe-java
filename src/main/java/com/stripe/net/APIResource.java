@@ -90,6 +90,8 @@ public abstract class APIResource extends StripeObject {
       return "exchange_rate";
     } else if (className.equals("fileupload")) {
       return "file";
+    } else if (className.equals("issuerfraudrecord")) {
+      return "issuer_fraud_record";
     } else if (className.equals("orderreturn")) {
       return "order_return";
     } else if (className.equals("sourcetransaction")) {
