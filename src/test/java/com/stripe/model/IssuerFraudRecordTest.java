@@ -8,6 +8,7 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.net.APIResource;
 import com.stripe.net.LiveStripeResponseGetter;
+import com.stripe.net.RequestOptions;
 
 import java.io.IOException;
 import java.util.Collections;
@@ -42,8 +43,8 @@ public class IssuerFraudRecordTest extends BaseStripeTest {
   }
 
   @Test
-  public void testDeserializeExpandCharge() throws IOException {
-    String expandedJson = resource("issuer_fraud_record_expansion.json");
+  public void testDeserializeWithExpansions() throws IOException {
+    String expandedJson = resource("issuer_fraud_record_expansions.json");
     Class<IssuerFraudRecord> klass = IssuerFraudRecord.class;
     IssuerFraudRecord expandedIfr = APIResource.GSON.fromJson(expandedJson, klass);
 
@@ -55,7 +56,19 @@ public class IssuerFraudRecordTest extends BaseStripeTest {
 
   @Test
   public void testRetrieve() throws StripeException {
-    IssuerFraudRecord.retrieve("issfr_123");
+    IssuerFraudRecord.retrieve("issfr_123", null);
+    verifyGet(IssuerFraudRecord.class, "https://api.stripe.com/v1/issuer_fraud_records/issfr_123");
+    verifyNoMoreInteractions(networkMock);
+  }
+
+  @Test
+  public void testRetrieveWithOptions() throws StripeException {
+    final RequestOptions requestOptions = RequestOptions
+        .builder()
+        .setApiKey("sk_test_JieJALRz7rPz7boV17oMma7a")
+        .build();
+
+    IssuerFraudRecord.retrieve("issfr_123", requestOptions);
     verifyGet(IssuerFraudRecord.class, "https://api.stripe.com/v1/issuer_fraud_records/issfr_123");
     verifyNoMoreInteractions(networkMock);
   }
