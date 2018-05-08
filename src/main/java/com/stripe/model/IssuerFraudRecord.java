@@ -85,19 +85,32 @@ public class IssuerFraudRecord extends APIResource implements HasId {
   }
 
   public static IssuerFraudRecord retrieve(String id)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
+      throws AuthenticationException, InvalidRequestException,
+                      APIConnectionException, CardException, APIException {
     String url = instanceURL(IssuerFraudRecord.class, id);
     return request(RequestMethod.GET, url, null, IssuerFraudRecord.class, null);
   }
 
   public static IssuerFraudRecordCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
+      throws AuthenticationException, InvalidRequestException,
+                      APIConnectionException, CardException, APIException {
     return list(params, null);
   }
 
+  /**
+   */
+  /**
+   * Returns the IssuerFraudRecordCollection listing.
+   * @param params The standard parameters for the listing.
+   * @param options The standard request options for the listing.
+   * @return the listing of params at /v1/issuer_fraud_records.
+   */
   public static IssuerFraudRecordCollection list(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException, CardException, APIException {
-    return requestCollection(classURL(IssuerFraudRecord.class), params, IssuerFraudRecordCollection.class, options);
+      throws AuthenticationException, InvalidRequestException,
+                      APIConnectionException, CardException, APIException {
+    return requestCollection(
+        classURL(IssuerFraudRecord.class), params, IssuerFraudRecordCollection.class, options
+    );
   }
 
 }
