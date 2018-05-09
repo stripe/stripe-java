@@ -56,7 +56,7 @@ public class IssuerFraudRecordTest extends BaseStripeTest {
 
   @Test
   public void testRetrieve() throws StripeException {
-    IssuerFraudRecord.retrieve("issfr_123", null);
+    IssuerFraudRecord.retrieve("issfr_123");
     verifyGet(IssuerFraudRecord.class, "https://api.stripe.com/v1/issuer_fraud_records/issfr_123");
     verifyNoMoreInteractions(networkMock);
   }

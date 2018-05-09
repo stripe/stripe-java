@@ -84,6 +84,12 @@ public class IssuerFraudRecord extends APIResource implements HasId {
     this.postDate = postDate;
   }
 
+  public static IssuerFraudRecord retrieve(String id)
+      throws AuthenticationException, InvalidRequestException,
+                      APIConnectionException, CardException, APIException {
+    return retrieve(id, null);
+  }
+
   public static IssuerFraudRecord retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
                       APIConnectionException, CardException, APIException {
@@ -99,7 +105,8 @@ public class IssuerFraudRecord extends APIResource implements HasId {
 
   /**
    * Returns the IssuerFraudRecordCollection listing.
-   * @param params The standard parameters for the listing.
+   *
+   * @param params  The standard parameters for the listing.
    * @param options The standard request options for the listing.
    * @return the listing of params at /v1/issuer_fraud_records.
    */
