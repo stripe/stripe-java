@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.36.0 - 2018-05-09
+* [#505](https://github.com/stripe/stripe-java/pull/505) Add support for issuer fraud records
+
 ## 5.35.1 - 2018-04-06
 * [#498](https://github.com/stripe/stripe-java/pull/498) Fix two bugs found by Error Prone
 
