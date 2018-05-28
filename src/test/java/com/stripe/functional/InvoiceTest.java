@@ -101,6 +101,7 @@ public class InvoiceTest extends BaseStripeFunctionalTest {
     Invoice retrievedInvoice = Invoice.retrieve(createdInvoice.getId());
     assertEquals(createdInvoice.getId(), retrievedInvoice.getId());
 
+    listParams.remove("subscription");
     InvoiceLineItemCollection lines = retrievedInvoice.getLines().all(
         listParams);
     assertNotNull(lines);
