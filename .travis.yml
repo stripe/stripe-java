@@ -7,13 +7,9 @@ addons:
     - short-hostname
   hostname: short-hostname
 
-jdk:
-  - openjdk7
-  - openjdk8
-  - oraclejdk8
-  - oraclejdk9
-
 before_install:
+  # Install script for missing JDKs
+  - wget https://github.com/sormuras/bach/raw/master/install-jdk.sh
   # Work around missing crypto in openjdk7
   - |
     if [ "$TRAVIS_JDK_VERSION" == "openjdk7" ]; then
@@ -22,11 +18,33 @@ before_install:
       echo "security.provider.1=org.bouncycastle.jce.provider.BouncyCastleProvider" | sudo tee -a /etc/java-7-openjdk/security/java.security
     fi
 
+matrix:
+  include:
+# 7
+    - env: JDK='OpenJDK 7'
+      jdk: openjdk7
+# 8
+    - env: JDK='Oracle JDK 8'
+      jdk: oraclejdk8
+    - env: JDK='OpenJDK 8'
+      jdk: openjdk8
+# 9
+    - env: JDK='Oracle JDK 9'
+      jdk: oraclejdk9
+    - env: JDK='OpenJDK 9'
+      install: . ./install-jdk.sh -F 9 -L GPL
+# 10
+    - env: JDK='Oracle JDK 10'
+      install: . ./install-jdk.sh -F 10 -L BCL
+    - env: JDK='OpenJDK 10'
+      install: . ./install-jdk.sh -F 10 -L GPL
+
 notifications:
   email:
     on_success: never
 
 script:
+  - ./gradlew --version
   - ./gradlew clean
   - if [ "$TRAVIS_JDK_VERSION" == "oraclejdk9" ]; then ./gradlew check; fi
   - ./gradlew cobertura coveralls
