@@ -11,17 +11,25 @@ import com.stripe.net.RequestOptions;
 import java.util.List;
 import java.util.Map;
 
+import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = false)
 public class Dispute extends APIResource implements HasId {
   String id;
   String object;
   Long amount;
   List<BalanceTransaction> balanceTransactions;
-  ExpandableField<Charge> charge;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Charge> charge;
   Long created;
   String currency;
   EvidenceSubObject evidenceSubObject; // `evidence`
   EvidenceDetails evidenceDetails;
-  Boolean isChargeRefundable;
+  @Getter(AccessLevel.NONE) Boolean isChargeRefundable;
   Boolean livemode;
   Map<String, String> metadata;
   String reason;
@@ -29,53 +37,36 @@ public class Dispute extends APIResource implements HasId {
   String networkReasonCode; // Not part of the public API.
 
   /**
-   * 8/2014: Legacy (now use balanceTransactions) -- https://stripe.com/docs/upgrades#2014-08-20
+   * The {@code balance_transaction} attribute.
+   *
+   * @return the {@code balance_transaction} attribute
+   * @deprecated Prefer using the {@link #balanceTransactions} attribute instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2014-08-20">API version 2014-08-20</a>
    */
   @Deprecated
   String balanceTransaction;
+
   /**
-   * 12/2014: Legacy (now use evidenceSubObject) -- https://stripe.com/docs/upgrades
+   * The {@code evidence} String attribute.
+   *
+   * @return the {@code evidence} String attribute
+   * @deprecated Prefer using the {@link #getEvidenceSubObject} method instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2014-12-08">API version 2014-12-08</a>
    */
   @Deprecated
   String evidence;
+
   /**
-   * 12/2014: Legacy (now use evidenceDetails.dueBy) -- https://stripe.com/docs/upgrades
+   * The {@code evidence_due_by} attribute.
+   *
+   * @return the {@code evidence_due_by} attribute
+   * @deprecated Prefer using the {@code getEvidenceDetails().getDueBy()} method instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2014-12-08">API version 2014-12-08</a>
    */
   @Deprecated
   Long evidenceDueBy;
 
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public String getObject() {
-    return object;
-  }
-
-  public void setObject(String object) {
-    this.object = object;
-  }
-
-  public Long getAmount() {
-    return amount;
-  }
-
-  public void setAmount(Long amount) {
-    this.amount = amount;
-  }
-
-  public List<BalanceTransaction> getBalanceTransactions() {
-    return balanceTransactions;
-  }
-
-  public void setBalanceTransactions(List<BalanceTransaction> balanceTransactions) {
-    this.balanceTransactions = balanceTransactions;
-  }
-
+  // <editor-fold desc="charge">
   public String getCharge() {
     return (this.charge != null) ? this.charge.getId() : null;
   }
@@ -91,139 +82,11 @@ public class Dispute extends APIResource implements HasId {
   public void setChargeObject(Charge charge) {
     this.charge = new ExpandableField<Charge>(charge.getId(), charge);
   }
+  // </editor-fold>
 
-  public Long getCreated() {
-    return created;
-  }
-
-  public void setCreated(Long created) {
-    this.created = created;
-  }
-
-  public String getCurrency() {
-    return currency;
-  }
-
-  public void setCurrency(String currency) {
-    this.currency = currency;
-  }
-
-  public EvidenceSubObject getEvidenceSubObject() {
-    return evidenceSubObject;
-  }
-
-  public void setEvidenceSubObject(EvidenceSubObject evidence) {
-    this.evidenceSubObject = evidence;
-  }
-
-  public EvidenceDetails getEvidenceDetails() {
-    return evidenceDetails;
-  }
-
-  public void setEvidenceDetails(EvidenceDetails evidenceDetails) {
-    this.evidenceDetails = evidenceDetails;
-  }
-
+  // TODO: change return type to Boolean in next major version
   public boolean getIsChargeRefundable() {
     return isChargeRefundable;
-  }
-
-  public void setIsChargeRefundable(Boolean isChargeRefundable) {
-    this.isChargeRefundable = isChargeRefundable;
-  }
-
-  public Boolean getLivemode() {
-    return livemode;
-  }
-
-  public void setLivemode(Boolean livemode) {
-    this.livemode = livemode;
-  }
-
-  public Map<String, String> getMetadata() {
-    return metadata;
-  }
-
-  public void setMetadata(Map<String, String> metadata) {
-    this.metadata = metadata;
-  }
-
-  public String getReason() {
-    return reason;
-  }
-
-  public void setReason(String reason) {
-    this.reason = reason;
-  }
-
-  public String getStatus() {
-    return status;
-  }
-
-  public void setStatus(String status) {
-    this.status = status;
-  }
-
-  public String getNetworkReasonCode() {
-    return networkReasonCode;
-  }
-
-  /**
-   * This method is not part of the public API and for internal use only.
-   */
-  public void setNetworkReasonCode(String networkReasonCode) {
-    this.networkReasonCode = networkReasonCode;
-  }
-
-  /**
-   * Returns the {@code balance_transaction} attribute.
-   *
-   * @return the {@code balance_transaction} attribute
-   * @deprecated Prefer using the {@code balance_transactions} attribute instead.
-   * @see <a href="https://stripe.com/docs/upgrades#2014-08-20">API version 2014-08-20</a>
-   */
-  @Deprecated
-  public String getBalanceTransaction() {
-    return balanceTransaction;
-  }
-
-  @Deprecated
-  public void setBalanceTransaction(String balanceTransaction) {
-    this.balanceTransaction = balanceTransaction;
-  }
-
-  /**
-   * Returns the {@code evidence} String attribute.
-   *
-   * @return the {@code evidence} String attribute
-   * @deprecated Prefer using the {@link #getEvidenceSubObject} method instead.
-   * @see <a href="https://stripe.com/docs/upgrades#2014-12-08">API version 2014-12-08</a>
-   */
-  @Deprecated
-  public String getEvidence() {
-    return evidence;
-  }
-
-  @Deprecated
-  public void setEvidence(String evidence) {
-    this.evidence = evidence;
-  }
-
-  /**
-   * Returns the {@code evidence_due_by} attribute.
-   *
-   * @return the {@code evidence_due_by} attribute
-   * @deprecated Prefer using the {@code getEvidenceDetails().getDueBy()} method instead.
-   * @see <a href="https://stripe.com/docs/upgrades#2014-12-08">API version 2014-12-08</a>
-   */
-  @Deprecated
-  public Long getEvidenceDueBy() {
-    return evidenceDueBy;
-  }
-
-  @Deprecated
-  public void setEvidenceDueBy(Long evidenceDueBy) {
-    this.evidenceDueBy = evidenceDueBy;
   }
 
   public static Dispute retrieve(String id) throws AuthenticationException,

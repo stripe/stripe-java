@@ -2,34 +2,24 @@ package com.stripe.model;
 
 import com.stripe.net.APIResource;
 
+import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = false)
 public class ChargeOutcome extends APIResource {
   protected String networkStatus;
   protected String reason;
   protected String riskLevel;
-  protected ExpandableField<ChargeOutcomeRule> rule;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
+      protected ExpandableField<ChargeOutcomeRule> rule;
   protected String sellerMessage;
   protected String type;
 
-  public String getNetworkStatus() {
-    return networkStatus;
-  }
-
-  public String getReason() {
-    return reason;
-  }
-
-  public String getRiskLevel() {
-    return riskLevel;
-  }
-
-  public String getSellerMessage() {
-    return sellerMessage;
-  }
-
-  public String getType() {
-    return type;
-  }
-
+  // <editor-fold desc="rule">
   /**
    * Returns the {@code rule} object, if expanded. If not expanded, use {@link #getRuleId()} to get
    * the ID.
@@ -44,44 +34,25 @@ public class ChargeOutcome extends APIResource {
     return (this.rule != null) ? this.rule.getExpanded() : null;
   }
 
-  public String getRuleId() {
-    return (this.rule != null) ? this.rule.getId() : null;
-  }
-
-  public ChargeOutcomeRule getRuleObject() {
-    return (this.rule != null) ? this.rule.getExpanded() : null;
-  }
-
-  public void setNetworkStatus(String networkStatus) {
-    this.networkStatus = networkStatus;
-  }
-
-  public void setRiskLevel(String riskLevel) {
-    this.riskLevel = riskLevel;
-  }
-
-  public void setReason(String reason) {
-    this.reason = reason;
-  }
-
-  public void setSellerMessage(String sellerMessage) {
-    this.sellerMessage = sellerMessage;
-  }
-
-  public void setType(String type) {
-    this.type = type;
-  }
-
   @Deprecated
   public void setRule(ChargeOutcomeRule rule) {
     this.rule = new ExpandableField<ChargeOutcomeRule>(rule.getId(), rule);
+  }
+
+  public String getRuleId() {
+    return (this.rule != null) ? this.rule.getId() : null;
   }
 
   public void setRuleId(String ruleId) {
     this.rule = setExpandableFieldID(ruleId, this.rule);
   }
 
+  public ChargeOutcomeRule getRuleObject() {
+    return (this.rule != null) ? this.rule.getExpanded() : null;
+  }
+
   public void setRuleObject(ChargeOutcomeRule rule) {
     this.rule = new ExpandableField<ChargeOutcomeRule>(rule.getId(), rule);
   }
+  // </editor-fold>
 }

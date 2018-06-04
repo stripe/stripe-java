@@ -10,12 +10,21 @@ import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
+import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = false)
 public class Refund extends APIResource implements MetadataStore<Charge>, HasId {
   String id;
   String object;
   Long amount;
-  ExpandableField<BalanceTransaction> balanceTransaction;
-  ExpandableField<Charge> charge;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
+      ExpandableField<BalanceTransaction> balanceTransaction;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Charge> charge;
   Long created;
   String currency;
   String description;
@@ -24,30 +33,7 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
   String receiptNumber;
   String status;
 
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public String getObject() {
-    return object;
-  }
-
-  public void setObject(String object) {
-    this.object = object;
-  }
-
-  public Long getAmount() {
-    return amount;
-  }
-
-  public void setAmount(Long amount) {
-    this.amount = amount;
-  }
-
+  // <editor-fold desc="balanceTransaction">
   public String getBalanceTransaction() {
     return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
   }
@@ -63,7 +49,9 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
   public void setBalanceTransactionObject(BalanceTransaction c) {
     this.balanceTransaction = new ExpandableField<BalanceTransaction>(c.getId(), c);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="charge">
   public String getCharge() {
     return (this.charge != null) ? this.charge.getId() : null;
   }
@@ -79,62 +67,7 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
   public void setChargeObject(Charge c) {
     this.charge = new ExpandableField<Charge>(c.getId(), c);
   }
-
-  public Long getCreated() {
-    return created;
-  }
-
-  public void setCreated(Long created) {
-    this.created = created;
-  }
-
-  public String getCurrency() {
-    return currency;
-  }
-
-  public void setCurrency(String currency) {
-    this.currency = currency;
-  }
-
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  public Map<String, String> getMetadata() {
-    return metadata;
-  }
-
-  public void setMetadata(Map<String, String> metadata) {
-    this.metadata = metadata;
-  }
-
-  public String getReason() {
-    return reason;
-  }
-
-  public void setReason(String reason) {
-    this.reason = reason;
-  }
-
-  public String getReceiptNumber() {
-    return receiptNumber;
-  }
-
-  public void setReceiptNumber(String receiptNumber) {
-    this.receiptNumber = receiptNumber;
-  }
-
-  public String getStatus() {
-    return status;
-  }
-
-  public void setStatus(String status) {
-    this.status = status;
-  }
+  // </editor-fold>
 
   public Refund update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,

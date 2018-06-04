@@ -10,54 +10,19 @@ import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = false)
 public class ExternalAccount extends APIResource implements HasId, MetadataStore<ExternalAccount> {
   String id;
   String object;
   String account;
   String customer;
   Map<String, String> metadata;
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public String getObject() {
-    return object;
-  }
-
-  public void setObject(String object) {
-    this.object = object;
-  }
-
-  public String getAccount() {
-    return account;
-  }
-
-  // For testing
-  public void setAccount(String account) {
-    this.account = account;
-  }
-
-  public String getCustomer() {
-    return customer;
-  }
-
-  // For testing
-  public void setCustomer(String customer) {
-    this.customer = customer;
-  }
-
-  public Map<String, String> getMetadata() {
-    return metadata;
-  }
-
-  public void setMetadata(Map<String, String> metadata) {
-    this.metadata = metadata;
-  }
 
   public ExternalAccount verify(Map<String, Object> params) throws
       AuthenticationException, InvalidRequestException,

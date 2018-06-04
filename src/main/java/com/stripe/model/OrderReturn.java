@@ -11,6 +11,14 @@ import com.stripe.net.RequestOptions;
 import java.util.List;
 import java.util.Map;
 
+import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = false)
 public class OrderReturn extends APIResource implements HasId {
   String id;
   String object;
@@ -19,65 +27,10 @@ public class OrderReturn extends APIResource implements HasId {
   String currency;
   List<OrderItem> items;
   Boolean livemode;
-  ExpandableField<Order> order;
-  ExpandableField<Refund> refund;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Order> order;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Refund> refund;
 
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public String getObject() {
-    return object;
-  }
-
-  public void setObject(String object) {
-    this.object = object;
-  }
-
-  public Long getAmount() {
-    return amount;
-  }
-
-  public void setAmount(Long amount) {
-    this.amount = amount;
-  }
-
-  public Long getCreated() {
-    return created;
-  }
-
-  public void setCreated(Long created) {
-    this.created = created;
-  }
-
-  public String getCurrency() {
-    return currency;
-  }
-
-  public void setCurrency(String currency) {
-    this.currency = currency;
-  }
-
-  public List<OrderItem> getItems() {
-    return items;
-  }
-
-  public void setItems(List<OrderItem> items) {
-    this.items = items;
-  }
-
-  public Boolean getLivemode() {
-    return livemode;
-  }
-
-  public void setLivemode(Boolean livemode) {
-    this.livemode = livemode;
-  }
-
+  // <editor-fold desc="order">
   public String getOrder() {
     return (this.order != null) ? this.order.getId() : null;
   }
@@ -93,7 +46,9 @@ public class OrderReturn extends APIResource implements HasId {
   public void setOrderObject(Order order) {
     this.order = new ExpandableField<Order>(order.getId(), order);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="refund">
   public String getRefund() {
     return (this.refund != null) ? this.refund.getId() : null;
   }
@@ -109,6 +64,7 @@ public class OrderReturn extends APIResource implements HasId {
   public void setRefundObject(Refund refund) {
     this.refund = new ExpandableField<Refund>(refund.getId(), refund);
   }
+  // </editor-fold>
 
   public static OrderReturn retrieve(String id)
       throws AuthenticationException, InvalidRequestException,

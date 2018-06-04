@@ -11,6 +11,14 @@ import com.stripe.net.RequestOptions;
 import java.util.List;
 import java.util.Map;
 
+import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = false)
 public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
   String id;
   String object;
@@ -23,109 +31,55 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
   Boolean livemode;
   Map<String, String> metadata;
   String nickname;
-  ExpandableField<Product> product;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Product> product;
   List<PlanTier> tiers;
   String tiersMode;
   PlanTransformUsage transformUsage;
   String usageType;
 
-  @Deprecated
-  String statementDescription;
+  /**
+   * The {@code name} attribute.
+   *
+   * @return the {@code name} attribute
+   * @deprecated Prefer using the {@code getProduct().getName()} method instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2018-02-05">API version 2018-02-05</a>
+   */
   @Deprecated
   String name;
+
+  /**
+   * The {@code statement_description} attribute.
+   *
+   * @return the {@code statement_description} attribute
+   * @deprecated Prefer using the {@code getProduct().getStatementDescriptor()} method instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2014-12-17">API version 2014-12-17</a>
+   * @see <a href="https://stripe.com/docs/upgrades#2018-02-05">API version 2018-02-05</a>
+   */
   @Deprecated
-  Integer trialPeriodDays;
+  String statementDescription;
+
+  /**
+   * The {@code statement_descriptor} attribute.
+   *
+   * @return the {@code statement_descriptor} attribute
+   * @deprecated Prefer using the {@code getProduct().getStatementDescriptor()} method instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2018-02-05">API version 2018-02-05</a>
+   */
   @Deprecated
   String statementDescriptor;
 
-  public String getId() {
-    return id;
-  }
+  /**
+   * The {@code trial_period_days} attribute.
+   *
+   * @return the {@code trial_period_days} attribute
+   * @deprecated Prefer using the {@link Subscription#create} method with the {@code trial_end}
+   *     parameter instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2018-02-05">API version 2018-02-05</a>
+   */
+  @Deprecated
+  Integer trialPeriodDays;
 
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public String getObject() {
-    return object;
-  }
-
-  public void setObject(String object) {
-    this.object = object;
-  }
-
-  public Long getAmount() {
-    return amount;
-  }
-
-  public void setAmount(Long amount) {
-    this.amount = amount;
-  }
-
-  public String getBillingScheme() {
-    return billingScheme;
-  }
-
-  public void setBillingScheme(String billingScheme) {
-    this.billingScheme = billingScheme;
-  }
-
-  public Long getCreated() {
-    return created;
-  }
-
-  public void setCreated(Long created) {
-    this.created = created;
-  }
-
-  public String getCurrency() {
-    return currency;
-  }
-
-  public void setCurrency(String currency) {
-    this.currency = currency;
-  }
-
-  public String getInterval() {
-    return interval;
-  }
-
-  public void setInterval(String interval) {
-    this.interval = interval;
-  }
-
-  public Integer getIntervalCount() {
-    return intervalCount;
-  }
-
-  public void setIntervalCount(Integer intervalCount) {
-    this.intervalCount = intervalCount;
-  }
-
-  public Boolean getLivemode() {
-    return livemode;
-  }
-
-  public void setLivemode(Boolean livemode) {
-    this.livemode = livemode;
-  }
-
-  public Map<String, String> getMetadata() {
-    return metadata;
-  }
-
-  public void setMetadata(Map<String, String> metadata) {
-    this.metadata = metadata;
-  }
-
-  public String getNickname() {
-    return nickname;
-  }
-
-  public void setNickname(String nickname) {
-    this.nickname = nickname;
-  }
-
+  // <editor-fold desc="product">
   public String getProduct() {
     return (this.product != null) ? this.product.getId() : null;
   }
@@ -141,70 +95,7 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
   public void setProductObject(Product product) {
     this.product = new ExpandableField<Product>(product.getId(), product);
   }
-
-  /**
-   * Returns the {@code name} attribute.
-   *
-   * @return the {@code name} attribute
-   * @deprecated Prefer using the {@code getProduct().getName()} method instead.
-   * @see <a href="https://stripe.com/docs/upgrades#2018-02-05">API version 2018-02-05</a>
-   */
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  /**
-   * Returns the {@code statement_descriptor} attribute.
-   *
-   * @return the {@code statement_descriptor} attribute
-   * @deprecated Prefer using the {@code getProduct().getStatementDescriptor()} method instead.
-   * @see <a href="https://stripe.com/docs/upgrades#2018-02-05">API version 2018-02-05</a>
-   */
-  public String getStatementDescriptor() {
-    return statementDescriptor;
-  }
-
-  public void setStatementDescriptor(String statementDescriptor) {
-    this.statementDescriptor = statementDescriptor;
-  }
-
-  /**
-   * Returns the {@code trial_period_days} attribute.
-   *
-   * @return the {@code trial_period_days} attribute
-   * @deprecated Prefer using the {@link Subscription#create} method with the {@code trial_end}
-   *     parameter instead.
-   * @see <a href="https://stripe.com/docs/upgrades#2018-02-05">API version 2018-02-05</a>
-   */
-  public Integer getTrialPeriodDays() {
-    return trialPeriodDays;
-  }
-
-  public void setTrialPeriodDays(Integer trialPeriodDays) {
-    this.trialPeriodDays = trialPeriodDays;
-  }
-
-  /**
-   * Returns the {@code statement_description} attribute.
-   *
-   * @return the {@code statement_description} attribute
-   * @deprecated Prefer using the {@code getProduct().getStatementDescriptor()} method instead.
-   * @see <a href="https://stripe.com/docs/upgrades#2014-12-17">API version 2014-12-17</a>
-   * @see <a href="https://stripe.com/docs/upgrades#2018-02-05">API version 2018-02-05</a>
-   */
-  @Deprecated
-  public String getStatementDescription() {
-    return statementDescription;
-  }
-
-  @Deprecated
-  public void setStatementDescription(String statementDescription) {
-    this.statementDescription = statementDescription;
-  }
+  // </editor-fold>
 
   public List<PlanTier> getTiers() {
     return tiers;

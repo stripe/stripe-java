@@ -10,7 +10,14 @@ import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
+import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
 
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = false)
 public class Subscription extends APIResource implements MetadataStore<Subscription>, HasId {
   String id;
   String object;
@@ -22,11 +29,11 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
   Long created;
   Long currentPeriodEnd;
   Long currentPeriodStart;
-  ExpandableField<Customer> customer;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Customer> customer;
   Integer daysUntilDue;
   Discount discount;
   Long endedAt;
-  SubscriptionItemCollection items;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) SubscriptionItemCollection items;
   Map<String, String> metadata;
   Plan plan;
   Integer quantity;
@@ -36,86 +43,7 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
   Long trialEnd;
   Long trialStart;
 
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public String getObject() {
-    return object;
-  }
-
-  public void setObject(String object) {
-    this.object = object;
-  }
-
-  public Double getApplicationFeePercent() {
-    return applicationFeePercent;
-  }
-
-  public void setApplicationFeePercent(Double applicationFeePercent) {
-    this.applicationFeePercent = applicationFeePercent;
-  }
-
-  public String getBilling() {
-    return billing;
-  }
-
-  public void setBilling(String billing) {
-    this.billing = billing;
-  }
-
-  public Long getBillingCycleAnchor() {
-    return billingCycleAnchor;
-  }
-
-  public void setBillingCycleAnchor(Long billingCycleAnchor) {
-    this.billingCycleAnchor = billingCycleAnchor;
-  }
-
-  public Boolean getCancelAtPeriodEnd() {
-    return cancelAtPeriodEnd;
-  }
-
-  public void setCancelAtPeriodEnd(Boolean cancelAtPeriodEnd) {
-    this.cancelAtPeriodEnd = cancelAtPeriodEnd;
-  }
-
-  public Long getCanceledAt() {
-    return canceledAt;
-  }
-
-  public void setCanceledAt(Long canceledAt) {
-    this.canceledAt = canceledAt;
-  }
-
-  public Long getCreated() {
-    return created;
-  }
-
-  public void setCreated(Long created) {
-    this.created = created;
-  }
-
-  public Long getCurrentPeriodEnd() {
-    return currentPeriodEnd;
-  }
-
-  public void setCurrentPeriodEnd(Long currentPeriodEnd) {
-    this.currentPeriodEnd = currentPeriodEnd;
-  }
-
-  public Long getCurrentPeriodStart() {
-    return currentPeriodStart;
-  }
-
-  public void setCurrentPeriodStart(Long currentPeriodStart) {
-    this.currentPeriodStart = currentPeriodStart;
-  }
-
+  // <editor-fold desc="customer">
   public String getCustomer() {
     return (this.customer != null) ? this.customer.getId() : null;
   }
@@ -131,95 +59,9 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
   public void setCustomerObject(Customer c) {
     this.customer = new ExpandableField<Customer>(c.getId(), c);
   }
+  // </editor-fold>
 
-  public Integer getDaysUntilDue() {
-    return daysUntilDue;
-  }
-
-  public void setDaysUntilDue(Integer daysUntilDue) {
-    this.daysUntilDue = daysUntilDue;
-  }
-
-  public Discount getDiscount() {
-    return discount;
-  }
-
-  public void setDiscount(Discount discount) {
-    this.discount = discount;
-  }
-
-  public Long getEndedAt() {
-    return endedAt;
-  }
-
-  public void setEndedAt(Long endedAt) {
-    this.endedAt = endedAt;
-  }
-
-  public Map<String, String> getMetadata() {
-    return metadata;
-  }
-
-  public void setMetadata(Map<String, String> metadata) {
-    this.metadata = metadata;
-  }
-
-  public Plan getPlan() {
-    return plan;
-  }
-
-  public void setPlan(Plan plan) {
-    this.plan = plan;
-  }
-
-  public Integer getQuantity() {
-    return quantity;
-  }
-
-  public void setQuantity(Integer quantity) {
-    this.quantity = quantity;
-  }
-
-  public Long getStart() {
-    return start;
-  }
-
-  public void setStart(Long start) {
-    this.start = start;
-  }
-
-  public String getStatus() {
-    return status;
-  }
-
-  public void setStatus(String status) {
-    this.status = status;
-  }
-
-  public Double getTaxPercent() {
-    return taxPercent;
-  }
-
-  public void setTaxPercent(Double taxPercent) {
-    this.taxPercent = taxPercent;
-  }
-
-  public Long getTrialEnd() {
-    return trialEnd;
-  }
-
-  public void setTrialEnd(Long trialEnd) {
-    this.trialEnd = trialEnd;
-  }
-
-  public Long getTrialStart() {
-    return trialStart;
-  }
-
-  public void setTrialStart(Long trialStart) {
-    this.trialStart = trialStart;
-  }
-
+  // <editor-fold desc="items">
   public SubscriptionItemCollection getSubscriptionItems() {
     return items;
   }
@@ -227,6 +69,7 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
   public void setSubscriptionItems(SubscriptionItemCollection items) {
     this.items = items;
   }
+  // </editor-fold>
 
   @Deprecated
   public static SubscriptionCollection all(Map<String, Object> params)

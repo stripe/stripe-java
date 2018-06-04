@@ -11,59 +11,32 @@ import com.stripe.net.RequestOptions;
 import java.util.HashMap;
 import java.util.Map;
 
+import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = false)
 public class Recipient extends APIResource implements MetadataStore<Recipient>, HasId {
   String id;
   String object;
   BankAccount activeAccount;
   RecipientCardCollection cards;
   Long created;
-  ExpandableField<Card> defaultCard;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Card> defaultCard;
   Boolean deleted;
   String description;
   String email;
   Boolean livemode;
   Map<String, String> metadata;
-  ExpandableField<Account> migratedTo;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Account> migratedTo;
   String name;
   String type;
   Boolean verified;
 
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public String getObject() {
-    return object;
-  }
-
-  public void setObject(String object) {
-    this.object = object;
-  }
-
-  public BankAccount getActiveAccount() {
-    return activeAccount;
-  }
-
-  public void setActiveAccount(BankAccount activeAccount) {
-    this.activeAccount = activeAccount;
-  }
-
-  public RecipientCardCollection getCards() {
-    return cards;
-  }
-
-  public Long getCreated() {
-    return created;
-  }
-
-  public void setCreated(Long created) {
-    this.created = created;
-  }
-
+  // <editor-fold desc="defaultCard">
   public String getDefaultCard() {
     return (this.defaultCard != null) ? this.defaultCard.getId() : null;
   }
@@ -79,43 +52,9 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
   public void setDefaultCardObject(Card c) {
     this.defaultCard = new ExpandableField<Card>(c.getId(), c);
   }
+  // </editor-fold>
 
-  public Boolean getDeleted() {
-    return deleted;
-  }
-
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-  public Boolean getLivemode() {
-    return livemode;
-  }
-
-  public void setLivemode(Boolean livemode) {
-    this.livemode = livemode;
-  }
-
-  public Map<String, String> getMetadata() {
-    return metadata;
-  }
-
-  public void setMetadata(Map<String, String> metadata) {
-    this.metadata = metadata;
-  }
-
+  // <editor-fold desc="migratedTo">
   public String getMigratedTo() {
     return (this.migratedTo != null) ? this.migratedTo.getId() : null;
   }
@@ -131,30 +70,7 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
   public void setMigratedToObject(Account c) {
     this.migratedTo = new ExpandableField<Account>(c.getId(), c);
   }
-
-  public String getName() {
-    return name;
-  }
-
-  public void setName(String name) {
-    this.name = name;
-  }
-
-  public String getType() {
-    return type;
-  }
-
-  public void setType(String type) {
-    this.type = type;
-  }
-
-  public Boolean getVerified() {
-    return verified;
-  }
-
-  public void setVerified(Boolean verified) {
-    this.verified = verified;
-  }
+  // </editor-fold>
 
   public static Recipient create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,

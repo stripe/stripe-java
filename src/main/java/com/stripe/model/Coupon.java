@@ -10,6 +10,13 @@ import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = false)
 public class Coupon extends APIResource implements MetadataStore<Coupon>, HasId {
   String id;
   String object;
@@ -25,118 +32,6 @@ public class Coupon extends APIResource implements MetadataStore<Coupon>, HasId 
   Long redeemBy;
   Integer timesRedeemed;
   Boolean valid;
-
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public String getObject() {
-    return object;
-  }
-
-  public void setObject(String object) {
-    this.object = object;
-  }
-
-  public Long getAmountOff() {
-    return amountOff;
-  }
-
-  public void setAmountOff(Long amountOff) {
-    this.amountOff = amountOff;
-  }
-
-  public Long getCreated() {
-    return created;
-  }
-
-  public void setCreated(Long created) {
-    this.created = created;
-  }
-
-  public String getCurrency() {
-    return currency;
-  }
-
-  public void setCurrency(String currency) {
-    this.currency = currency;
-  }
-
-  public String getDuration() {
-    return duration;
-  }
-
-  public void setDuration(String duration) {
-    this.duration = duration;
-  }
-
-  public Integer getDurationInMonths() {
-    return durationInMonths;
-  }
-
-  public void setDurationInMonths(Integer durationInMonths) {
-    this.durationInMonths = durationInMonths;
-  }
-
-  public Boolean getLivemode() {
-    return livemode;
-  }
-
-  public void setLivemode(Boolean livemode) {
-    this.livemode = livemode;
-  }
-
-  public Long getMaxRedemptions() {
-    return maxRedemptions;
-  }
-
-  public void setMaxRedemptions(Long maxRedemptions) {
-    this.maxRedemptions = maxRedemptions;
-  }
-
-  public Map<String, String> getMetadata() {
-    return metadata;
-  }
-
-  public void setMetadata(Map<String, String> metadata) {
-    this.metadata = metadata;
-  }
-
-  public Integer getPercentOff() {
-    return percentOff;
-  }
-
-  public void setPercentOff(Integer percentOff) {
-    this.percentOff = percentOff;
-  }
-
-  public Long getRedeemBy() {
-    return redeemBy;
-  }
-
-  public void setRedeemBy(Long redeemBy) {
-    this.redeemBy = redeemBy;
-  }
-
-  public Integer getTimesRedeemed() {
-    return timesRedeemed;
-  }
-
-  public void setTimesRedeemed(Integer timesRedeemed) {
-    this.timesRedeemed = timesRedeemed;
-  }
-
-  public Boolean getValid() {
-    return valid;
-  }
-
-  public void setValid(Boolean valid) {
-    this.valid = valid;
-  }
 
   public static Coupon create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,

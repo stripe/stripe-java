@@ -11,6 +11,14 @@ import com.stripe.net.RequestOptions;
 import java.util.Collections;
 import java.util.Map;
 
+import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = false)
 public class Charge extends APIResource implements MetadataStore<Charge>, HasId {
   public static final String FRAUD_DETAILS = "fraud_details";
 
@@ -18,21 +26,23 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   String object;
   Long amount;
   Long amountRefunded;
-  ExpandableField<Application> application;
-  ExpandableField<ApplicationFee> applicationFee;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Application> application;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
+      ExpandableField<ApplicationFee> applicationFee;
   AlternateStatementDescriptors alternateStatementDescriptors;
-  ExpandableField<BalanceTransaction> balanceTransaction;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
+      ExpandableField<BalanceTransaction> balanceTransaction;
   Boolean captured;
   Long created;
   String currency;
-  ExpandableField<Customer> customer;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Customer> customer;
   String description;
-  ExpandableField<Account> destination;
-  ExpandableField<Dispute> dispute;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Account> destination;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Dispute> dispute;
   String failureCode;
   String failureMessage;
   FraudDetails fraudDetails;
-  ExpandableField<Invoice> invoice;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Invoice> invoice;
   Boolean livemode;
   Map<String, String> metadata;
   ChargeOutcome outcome;
@@ -41,64 +51,47 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   String receiptEmail;
   String receiptNumber;
   Boolean refunded;
-  ChargeRefundCollection refunds;
-  ExpandableField<Review> review;
+  @Getter(AccessLevel.NONE) ChargeRefundCollection refunds;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Review> review;
   ShippingDetails shipping;
   ExternalAccount source;
-  ExpandableField<Transfer> sourceTransfer;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Transfer> sourceTransfer;
   String statementDescriptor;
   String status;
-  ExpandableField<Transfer> transfer;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Transfer> transfer;
   String transferGroup;
 
+  /**
+   * The {@code card} attribute.
+   *
+   * @return the {@code card} attribute
+   * @deprecated Prefer using the {@link #source} attribute instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2015-02-18">API version 2015-02-18</a>
+   */
   @Deprecated
   Card card;
+
+  /**
+   * The {@code disputed} attribute.
+   *
+   * @return the {@code disputed} attribute
+   * @deprecated Prefer using the {@link #dispute} attribute instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2012-11-07">API version 2012-11-07</a>
+   */
   @Deprecated
   Boolean disputed;
+
+  /**
+   * The {@code statement_description} attribute.
+   *
+   * @return the {@code cards} attribute
+   * @deprecated Prefer using the {@link #statementDescriptor} attribute instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2014-12-17">API version 2014-12-17</a>
+   */
   @Deprecated
   String statementDescription;
 
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public String getObject() {
-    return object;
-  }
-
-  public void setObject(String object) {
-    this.object = object;
-  }
-
-  public AlternateStatementDescriptors getAlternateStatementDescriptors() {
-    return alternateStatementDescriptors;
-  }
-
-  public void setAlternateStatementDescriptors(
-      AlternateStatementDescriptors alternateStatementDescriptors) {
-    this.alternateStatementDescriptors = alternateStatementDescriptors;
-  }
-
-  public Long getAmount() {
-    return amount;
-  }
-
-  public void setAmount(Long amount) {
-    this.amount = amount;
-  }
-
-  public Long getAmountRefunded() {
-    return amountRefunded;
-  }
-
-  public void setAmountRefunded(Long amountRefunded) {
-    this.amountRefunded = amountRefunded;
-  }
-
+  // <editor-fold desc="application">
   public String getApplication() {
     return (this.application != null) ? this.application.getId() : null;
   }
@@ -114,7 +107,9 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   public void setApplicationObject(Application c) {
     this.application = new ExpandableField<Application>(c.getId(), c);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="applicationFee">
   public String getApplicationFee() {
     return (this.applicationFee != null) ? this.applicationFee.getId() : null;
   }
@@ -130,7 +125,9 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   public void setApplicationFeeObject(ApplicationFee c) {
     this.applicationFee = new ExpandableField<ApplicationFee>(c.getId(), c);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="balanceTransaction">
   public String getBalanceTransaction() {
     return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
   }
@@ -146,31 +143,9 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   public void setBalanceTransactionObject(BalanceTransaction c) {
     this.balanceTransaction = new ExpandableField<BalanceTransaction>(c.getId(), c);
   }
+  // </editor-fold>
 
-  public Boolean getCaptured() {
-    return captured;
-  }
-
-  public void setCaptured(Boolean captured) {
-    this.captured = captured;
-  }
-
-  public Long getCreated() {
-    return created;
-  }
-
-  public void setCreated(Long created) {
-    this.created = created;
-  }
-
-  public String getCurrency() {
-    return currency;
-  }
-
-  public void setCurrency(String currency) {
-    this.currency = currency;
-  }
-
+  // <editor-fold desc="customer">
   public String getCustomer() {
     return (this.customer != null) ? this.customer.getId() : null;
   }
@@ -187,15 +162,9 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   public void setCustomerObject(Customer c) {
     this.customer = new ExpandableField<Customer>(c.getId(), c);
   }
+  // </editor-fold>
 
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
+  // <editor-fold desc="destination">
   public String getDestination() {
     return (this.destination != null) ? this.destination.getId() : null;
   }
@@ -211,7 +180,9 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   public void setDestinationObject(Account c) {
     this.destination = new ExpandableField<Account>(c.getId(), c);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="dispute">
   public String getDispute() {
     return (this.dispute != null) ? this.dispute.getId() : null;
   }
@@ -227,31 +198,9 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   public void setDisputeObject(Dispute dispute) {
     this.dispute = new ExpandableField<Dispute>(dispute.getId(), dispute);
   }
+  // </editor-fold>
 
-  public String getFailureCode() {
-    return failureCode;
-  }
-
-  public void setFailureCode(String failureCode) {
-    this.failureCode = failureCode;
-  }
-
-  public String getFailureMessage() {
-    return failureMessage;
-  }
-
-  public void setFailureMessage(String failureMessage) {
-    this.failureMessage = failureMessage;
-  }
-
-  public FraudDetails getFraudDetails() {
-    return fraudDetails;
-  }
-
-  public void setFraudDetails(FraudDetails fraudDetails) {
-    this.fraudDetails = fraudDetails;
-  }
-
+  // <editor-fold desc="invoice">
   public String getInvoice() {
     return (this.invoice != null) ? this.invoice.getId() : null;
   }
@@ -267,23 +216,9 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   public void setInvoiceObject(Invoice c) {
     this.invoice = new ExpandableField<Invoice>(c.getId(), c);
   }
+  // </editor-fold>
 
-  public Boolean getLivemode() {
-    return livemode;
-  }
-
-  public void setLivemode(Boolean livemode) {
-    this.livemode = livemode;
-  }
-
-  public Map<String, String> getMetadata() {
-    return metadata;
-  }
-
-  public void setMetadata(Map<String, String> metadata) {
-    this.metadata = metadata;
-  }
-
+  // <editor-fold desc="order">
   public String getOrder() {
     return (this.order != null) ? this.order.getId() : null;
   }
@@ -299,46 +234,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   public void setOrderObject(Order c) {
     this.order = new ExpandableField<Order>(c.getId(), c);
   }
-
-  public ChargeOutcome getOutcome() {
-    return outcome;
-  }
-
-  public void setOutcome(ChargeOutcome outcome) {
-    this.outcome = outcome;
-  }
-
-  public Boolean getPaid() {
-    return paid;
-  }
-
-  public void setPaid(Boolean paid) {
-    this.paid = paid;
-  }
-
-  public String getReceiptEmail() {
-    return receiptEmail;
-  }
-
-  public void setReceiptEmail(String receiptEmail) {
-    this.receiptEmail = receiptEmail;
-  }
-
-  public String getReceiptNumber() {
-    return receiptNumber;
-  }
-
-  public void setReceiptNumber(String receiptNumber) {
-    this.receiptNumber = receiptNumber;
-  }
-
-  public Boolean getRefunded() {
-    return refunded;
-  }
-
-  public void setRefunded(Boolean refunded) {
-    this.refunded = refunded;
-  }
+  // </editor-fold>
 
   /**
    * Returns the {@code refunds} list.
@@ -354,6 +250,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     return refunds;
   }
 
+  // <editor-fold desc="review">
   public String getReview() {
     return (this.review != null) ? this.review.getId() : null;
   }
@@ -369,23 +266,9 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   public void setReviewObject(Review r) {
     this.review = new ExpandableField<Review>(r.getId(), r);
   }
+  // </editor-fold>
 
-  public ShippingDetails getShipping() {
-    return shipping;
-  }
-
-  public void setShipping(ShippingDetails shipping) {
-    this.shipping = shipping;
-  }
-
-  public ExternalAccount getSource() {
-    return source;
-  }
-
-  public void setSource(ExternalAccount source) {
-    this.source = source;
-  }
-
+  // <editor-fold desc="sourceTransfer">
   public String getSourceTransfer() {
     return (this.sourceTransfer != null) ? this.sourceTransfer.getId() : null;
   }
@@ -401,37 +284,15 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   public void setSourceTransferObject(Transfer c) {
     this.sourceTransfer = new ExpandableField<Transfer>(c.getId(), c);
   }
+  // </editor-fold>
 
-  public String getStatementDescriptor() {
-    return statementDescriptor;
-  }
-
-  public void setStatementDescriptor(String statementDescriptor) {
-    this.statementDescriptor = statementDescriptor;
-  }
-
-  public String getStatus() {
-    return status;
-  }
-
-  public void setStatus(String status) {
-    this.status = status;
-  }
-
+  // <editor-fold desc="transfer">
   public String getTransfer() {
     return (this.transfer != null) ? this.transfer.getId() : null;
   }
 
   public void setTransfer(String transferID) {
     this.transfer = setExpandableFieldID(transferID, this.transfer);
-  }
-
-  public String getTransferGroup() {
-    return this.transferGroup;
-  }
-
-  public void setTransferGroup(String transferGroup) {
-    this.transferGroup = transferGroup;
   }
 
   public Transfer getTransferObject() {
@@ -441,57 +302,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   public void setTransferObject(Transfer c) {
     this.transfer = new ExpandableField<Transfer>(c.getId(), c);
   }
-
-  /**
-   * Returns the {@code card} attribute.
-   *
-   * @return the {@code card} attribute
-   * @deprecated Prefer using the {@code source} attribute instead.
-   * @see <a href="https://stripe.com/docs/upgrades#2015-02-18">API version 2015-02-18</a>
-   */
-  @Deprecated
-  public Card getCard() {
-    return card;
-  }
-
-  @Deprecated
-  public void setCard(Card card) {
-    this.card = card;
-  }
-
-  /**
-   * Returns the {@code disputed} attribute.
-   *
-   * @return the {@code disputed} attribute
-   * @deprecated Prefer using the {@code dispute} attribute instead.
-   * @see <a href="https://stripe.com/docs/upgrades#2012-11-07">API version 2012-11-07</a>
-   */
-  @Deprecated
-  public Boolean getDisputed() {
-    return disputed;
-  }
-
-  @Deprecated
-  public void setDisputed(Boolean disputed) {
-    this.disputed = disputed;
-  }
-
-  /**
-   * Returns the {@code statement_description} attribute.
-   *
-   * @return the {@code statement_description} attribute
-   * @deprecated Prefer using the {@code statement_descriptor} attribute instead.
-   * @see <a href="https://stripe.com/docs/upgrades#2014-12-17">API version 2014-12-17</a>
-   */
-  @Deprecated
-  public String getStatementDescription() {
-    return statementDescription;
-  }
-
-  @Deprecated
-  public void setStatementDescription(String statementDescription) {
-    this.statementDescription = statementDescription;
-  }
+  // </editor-fold>
 
   public static Charge create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,

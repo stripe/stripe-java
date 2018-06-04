@@ -9,6 +9,13 @@ import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = true)
 public class AlipayAccount extends ExternalAccount {
   Long created;
   String fingerprint;
@@ -19,78 +26,6 @@ public class AlipayAccount extends ExternalAccount {
   Boolean used;
   String username;
   String status;
-
-  public Long getCreated() {
-    return created;
-  }
-
-  public void setCreated(Long created) {
-    this.created = created;
-  }
-
-  public String getFingerprint() {
-    return fingerprint;
-  }
-
-  public void setFingerprint(String fingerprint) {
-    this.fingerprint = fingerprint;
-  }
-
-  public Boolean getLivemode() {
-    return livemode;
-  }
-
-  public void setLivemode(Boolean livemode) {
-    this.livemode = livemode;
-  }
-
-  public Long getPaymentAmount() {
-    return paymentAmount;
-  }
-
-  public void setPaymentAmount(Long paymentAmount) {
-    this.paymentAmount = paymentAmount;
-  }
-
-  public String getPaymentCurrency() {
-    return paymentCurrency;
-  }
-
-  public void setPaymentCurrency(String paymentCurrency) {
-    this.paymentCurrency = paymentCurrency;
-  }
-
-  public Boolean getReusable() {
-    return reusable;
-  }
-
-  public void setReusable(Boolean reusable) {
-    this.reusable = reusable;
-  }
-
-  public Boolean getUsed() {
-    return used;
-  }
-
-  public void setUsed(Boolean used) {
-    this.used = used;
-  }
-
-  public String getUsername() {
-    return username;
-  }
-
-  public void setUsername(String username) {
-    this.username = username;
-  }
-
-  public String getStatus() {
-    return status;
-  }
-
-  public void setStatus(String status) {
-    this.status = status;
-  }
 
   public AlipayAccount update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
@@ -117,4 +52,3 @@ public class AlipayAccount extends ExternalAccount {
         options);
   }
 }
-

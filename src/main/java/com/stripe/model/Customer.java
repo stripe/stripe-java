@@ -11,6 +11,14 @@ import com.stripe.net.RequestOptions;
 import java.util.HashMap;
 import java.util.Map;
 
+import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = false)
 public class Customer extends APIResource implements MetadataStore<Customer>, HasId {
   String id;
   String object;
@@ -18,7 +26,8 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
   String businessVatId;
   Long created;
   String currency;
-  ExpandableField<ExternalAccount> defaultSource;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
+      ExpandableField<ExternalAccount> defaultSource;
   Boolean deleted;
   Boolean delinquent;
   String description;
@@ -30,65 +39,57 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
   ExternalAccountCollection sources;
   CustomerSubscriptionCollection subscriptions;
 
+  /**
+   * The {@code cards} attribute.
+   *
+   * @return the {@code cards} attribute
+   * @deprecated Prefer using the {@link #sources} attribute instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2015-02-18">API version 2015-02-18</a>
+   */
   @Deprecated
   CustomerCardCollection cards;
+
+  /**
+   * The {@code default_card} attribute.
+   *
+   * @return the {@code default_card} attribute
+   * @deprecated Prefer using the {@link #defaultSsource} attribute instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2015-02-18">API version 2015-02-18</a>
+   */
   @Deprecated
   String defaultCard;
+
+  /**
+   * The {@code next_recurring_charge} attribute.
+   *
+   * @return the {@code next_recurring_charge} attribute
+   * @deprecated Prefer using the {@link Invoice#upcoming} method instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2012-03-25">API version 2012-03-25</a>
+   */
   @Deprecated
   NextRecurringCharge nextRecurringCharge;
+
+  /**
+   * The {@code subscription} attribute.
+   *
+   * @return the {@code subscription} attribute
+   * @deprecated Prefer using the {@link #subscriptions} attribute instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2014-01-31">API version 2014-01-31</a>
+   */
   @Deprecated
   Subscription subscription;
+
+  /**
+   * The {@code trial_end} attribute.
+   *
+   * @return the {@code trial_end} attribute
+   * @deprecated Prefer using the {@link #subscriptions} attribute instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2014-01-31">API version 2014-01-31</a>
+   */
   @Deprecated
   Long trialEnd;
 
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public String getObject() {
-    return object;
-  }
-
-  public void setObject(String object) {
-    this.object = object;
-  }
-
-  public Long getAccountBalance() {
-    return accountBalance;
-  }
-
-  public void setAccountBalance(Long accountBalance) {
-    this.accountBalance = accountBalance;
-  }
-
-  public String getBusinessVatId() {
-    return businessVatId;
-  }
-
-  public void setBusinessVatId(String businessVatId) {
-    this.businessVatId = businessVatId;
-  }
-
-  public Long getCreated() {
-    return created;
-  }
-
-  public void setCreated(Long created) {
-    this.created = created;
-  }
-
-  public String getCurrency() {
-    return currency;
-  }
-
-  public void setCurrency(String currency) {
-    this.currency = currency;
-  }
-
+  // <editor-fold desc="defaultSource">
   public String getDefaultSource() {
     return (this.defaultSource != null) ? this.defaultSource.getId() : null;
   }
@@ -104,162 +105,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
   public void setDefaultSourceObject(ExternalAccount c) {
     this.defaultSource = new ExpandableField<ExternalAccount>(c.getId(), c);
   }
-
-  public Boolean getDeleted() {
-    return deleted;
-  }
-
-  public Boolean getDelinquent() {
-    return delinquent;
-  }
-
-  public void setDelinquent(Boolean delinquent) {
-    this.delinquent = delinquent;
-  }
-
-  public String getDescription() {
-    return description;
-  }
-
-  public void setDescription(String description) {
-    this.description = description;
-  }
-
-  public Discount getDiscount() {
-    return discount;
-  }
-
-  public void setDiscount(Discount discount) {
-    this.discount = discount;
-  }
-
-  public String getEmail() {
-    return email;
-  }
-
-  public void setEmail(String email) {
-    this.email = email;
-  }
-
-  public Boolean getLivemode() {
-    return livemode;
-  }
-
-  public void setLivemode(Boolean livemode) {
-    this.livemode = livemode;
-  }
-
-  public Map<String, String> getMetadata() {
-    return metadata;
-  }
-
-  public void setMetadata(Map<String, String> metadata) {
-    this.metadata = metadata;
-  }
-
-  public ShippingDetails getShipping() {
-    return shipping;
-  }
-
-  public void setShipping(ShippingDetails shipping) {
-    this.shipping = shipping;
-  }
-
-  public ExternalAccountCollection getSources() {
-    return sources;
-  }
-
-  public void setSources(ExternalAccountCollection sources) {
-    this.sources = sources;
-  }
-
-  public CustomerSubscriptionCollection getSubscriptions() {
-    return subscriptions;
-  }
-
-  public void setSubscriptions(CustomerSubscriptionCollection subscriptions) {
-    this.subscriptions = subscriptions;
-  }
-
-  /**
-   * Returns the {@code cards} attribute.
-   *
-   * @return the {@code cards} attribute
-   * @deprecated Prefer using the {@code sources} attribute instead.
-   * @see <a href="https://stripe.com/docs/upgrades#2015-02-18">API version 2015-02-18</a>
-   */
-  @Deprecated
-  public CustomerCardCollection getCards() {
-    return cards;
-  }
-
-  /**
-   * Returns the {@code default_card} attribute.
-   *
-   * @return the {@code default_card} attribute
-   * @deprecated Prefer using the {@code default_source} attribute instead.
-   * @see <a href="https://stripe.com/docs/upgrades#2015-02-18">API version 2015-02-18</a>
-   */
-  @Deprecated
-  public String getDefaultCard() {
-    return defaultCard;
-  }
-
-  @Deprecated
-  public void setDefaultCard(String defaultCard) {
-    this.defaultCard = defaultCard;
-  }
-
-  /**
-   * Returns the {@code next_recurring_charge} attribute.
-   *
-   * @return the {@code next_recurring_charge} attribute
-   * @deprecated Prefer using the {@link Invoice#upcoming} method instead.
-   * @see <a href="https://stripe.com/docs/upgrades#2012-03-25">API version 2012-03-25</a>
-   */
-  @Deprecated
-  public NextRecurringCharge getNextRecurringCharge() {
-    return nextRecurringCharge;
-  }
-
-  @Deprecated
-  public void setNextRecurringCharge(NextRecurringCharge nextRecurringCharge) {
-    this.nextRecurringCharge = nextRecurringCharge;
-  }
-
-  /**
-   * Returns the {@code subscription} attribute.
-   *
-   * @return the {@code subscription} attribute
-   * @deprecated Prefer using the {@code subscriptions} attribute instead.
-   * @see <a href="https://stripe.com/docs/upgrades#2014-01-31">API version 2014-01-31</a>
-   */
-  @Deprecated
-  public Subscription getSubscription() {
-    return subscription;
-  }
-
-  @Deprecated
-  public void setSubscription(Subscription subscription) {
-    this.subscription = subscription;
-  }
-
-  /**
-   * Returns the {@code trial_end} attribute.
-   *
-   * @return the {@code trial_end} attribute
-   * @deprecated Prefer using the {@code subscriptions} attribute instead.
-   * @see <a href="https://stripe.com/docs/upgrades#2014-01-31">API version 2014-01-31</a>
-   */
-  @Deprecated
-  public Long getTrialEnd() {
-    return trialEnd;
-  }
-
-  @Deprecated
-  public void setTrialEnd(Long trialEnd) {
-    this.trialEnd = trialEnd;
-  }
+  // </editor-fold>
 
   public static Customer create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,

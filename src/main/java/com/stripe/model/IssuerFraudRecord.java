@@ -10,31 +10,22 @@ import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
+import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = false)
 public class IssuerFraudRecord extends APIResource implements HasId {
   String id;
   String object;
-  ExpandableField<Charge> charge;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Charge> charge;
   Long created;
   String fraudType;
   Boolean livemode;
   Long postDate;
-
-  @Override
-  public String getId() {
-    return id;
-  }
-
-  public void setId(String id) {
-    this.id = id;
-  }
-
-  public String getObject() {
-    return object;
-  }
-
-  public void setObject(String object) {
-    this.object = object;
-  }
 
   public String getCharge() {
     return (this.charge != null) ? this.charge.getId() : null;
@@ -50,38 +41,6 @@ public class IssuerFraudRecord extends APIResource implements HasId {
 
   public void setChargeObject(Charge c) {
     this.charge = new ExpandableField<Charge>(c.getId(), c);
-  }
-
-  public Long getCreated() {
-    return created;
-  }
-
-  public void setCreated(Long created) {
-    this.created = created;
-  }
-
-  public String getFraudType() {
-    return fraudType;
-  }
-
-  public void setFraudType(String fraudType) {
-    this.fraudType = fraudType;
-  }
-
-  public Boolean getLivemode() {
-    return livemode;
-  }
-
-  public void setLivemode(Boolean livemode) {
-    this.livemode = livemode;
-  }
-
-  public Long getPostDate() {
-    return postDate;
-  }
-
-  public void setPostDate(Long postDate) {
-    this.postDate = postDate;
   }
 
   public static IssuerFraudRecord retrieve(String id)
@@ -117,5 +76,4 @@ public class IssuerFraudRecord extends APIResource implements HasId {
         classURL(IssuerFraudRecord.class), params, IssuerFraudRecordCollection.class, options
     );
   }
-
 }

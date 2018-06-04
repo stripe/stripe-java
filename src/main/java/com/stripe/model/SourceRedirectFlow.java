@@ -1,19 +1,20 @@
 package com.stripe.model;
 
+import lombok.AccessLevel;
+import lombok.EqualsAndHashCode;
+import lombok.Getter;
+import lombok.Setter;
+
+@Getter
+@Setter
+@EqualsAndHashCode(callSuper = false)
 public final class SourceRedirectFlow extends StripeObject {
   String failureReason;
-  String returnUrl;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) String returnUrl;
   String status;
-  String url;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) String url;
 
-  public String getFailureReason() {
-    return failureReason;
-  }
-
-  public void setFailureReason(String failureReason) {
-    this.failureReason = failureReason;
-  }
-
+  // <editor-fold desc="returnUrl">
   public String getReturnURL() {
     return returnUrl;
   }
@@ -21,15 +22,9 @@ public final class SourceRedirectFlow extends StripeObject {
   public void setReturnURL(String returnUrl) {
     this.returnUrl = returnUrl;
   }
+  // </editor-fold>
 
-  public String getStatus() {
-    return status;
-  }
-
-  public void setStatus(String status) {
-    this.status = status;
-  }
-
+  // <editor-fold desc="url">
   public String getURL() {
     return url;
   }
@@ -37,4 +32,5 @@ public final class SourceRedirectFlow extends StripeObject {
   public void setURL(String url) {
     this.url = url;
   }
+  // </editor-fold>
 }
