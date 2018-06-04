@@ -130,7 +130,7 @@ identified using `Stripe.setAppInfo()`:
 This information is passed along when the library makes calls to the Stripe
 API.
 
-## Testing
+## Development
 
 You must have Gradle installed. To run the tests:
 
@@ -142,7 +142,11 @@ You can run particular tests by passing `--tests Class#method`. Make sure you us
     ./gradlew test --tests com.stripe.functional.ChargeTest
     ./gradlew test --tests com.stripe.functional.ChargeTest.testChargeCreate
 
+The library uses [Project Lombok][lombok]. While it is not a requirement, you might want to install a [plugin][lombok-plugins] for your favorite IDE to facilitate development.
+
 [connect]: https://stripe.com/connect
+[lombok]: https://projectlombok.org
+[lombok-plugins]: https://projectlombok.org/setup/overview
 
 <!--
 # vim: set tw=79:
