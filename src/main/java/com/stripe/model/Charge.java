@@ -45,8 +45,9 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Invoice> invoice;
   Boolean livemode;
   Map<String, String> metadata;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Account> onBehalfOf;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Order> order;
   ChargeOutcome outcome;
-  ExpandableField<Order> order;
   Boolean paid;
   String receiptEmail;
   String receiptNumber;
@@ -215,6 +216,24 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
 
   public void setInvoiceObject(Invoice c) {
     this.invoice = new ExpandableField<Invoice>(c.getId(), c);
+  }
+  // </editor-fold>
+
+  // <editor-fold desc="onBehalfOf">
+  public String getOnBehalfOf() {
+    return (this.onBehalfOf != null) ? this.onBehalfOf.getId() : null;
+  }
+
+  public void setOnBehalfOf(String onBehalfOfID) {
+    this.onBehalfOf = APIResource.setExpandableFieldID(onBehalfOfID, this.onBehalfOf);
+  }
+
+  public Account getOnBehalfOfObject() {
+    return (this.onBehalfOf != null) ? this.onBehalfOf.getExpanded() : null;
+  }
+
+  public void setOnBehalfOfObject(Account c) {
+    this.onBehalfOf = new ExpandableField<Account>(c.getId(), c);
   }
   // </editor-fold>
 
