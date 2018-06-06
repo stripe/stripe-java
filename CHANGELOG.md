@@ -1,5 +1,10 @@
 # Changelog
 
+## 5.37.0 - 2018-06-06
+* [#513](https://github.com/stripe/stripe-java/pull/513) Add `on_behalf_of` property on `Charge` model
+* [#512](https://github.com/stripe/stripe-java/pull/512) Fix `update()` methods for `FeeRefund` and `Reversal`
+* [#302](https://github.com/stripe/stripe-java/pull/302) The library now uses Project Lombok. All API resource classes now have `equals` and `hashCode` methods.
+
 ## 5.36.0 - 2018-05-09
 * [#505](https://github.com/stripe/stripe-java/pull/505) Add support for issuer fraud records
 
