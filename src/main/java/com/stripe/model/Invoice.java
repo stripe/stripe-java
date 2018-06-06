@@ -1,5 +1,7 @@
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import com.stripe.exception.APIConnectionException;
 import com.stripe.exception.APIException;
 import com.stripe.exception.AuthenticationException;
@@ -37,6 +39,8 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
   Long dueDate;
   Long endingBalance;
   Boolean forgiven;
+  @SerializedName("hosted_invoice_url") String hostedInvoiceURL;
+  @SerializedName("invoice_pdf") String invoicePDF;
   InvoiceLineItemCollection lines;
   Boolean livemode;
   Map<String, String> metadata;
