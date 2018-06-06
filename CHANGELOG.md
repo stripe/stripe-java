@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.38.0 - 2018-06-06
+* [#516](https://github.com/stripe/stripe-java/pull/516) Add `active` property to `Plan` model
+
 ## 5.37.0 - 2018-06-06
 * [#513](https://github.com/stripe/stripe-java/pull/513) Add `on_behalf_of` property on `Charge` model
 * [#512](https://github.com/stripe/stripe-java/pull/512) Fix `update()` methods for `FeeRefund` and `Reversal`
