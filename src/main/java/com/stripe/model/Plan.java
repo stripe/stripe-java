@@ -22,6 +22,7 @@ import lombok.Setter;
 public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
   String id;
   String object;
+  Boolean active;
   Long amount;
   String billingScheme;
   Long created;
