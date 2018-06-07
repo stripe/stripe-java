@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.39.0 - 2018-06-07
+* [#515](https://github.com/stripe/stripe-java/pull/515) Add `hosted_invoice_url` and `invoice_pdf` properties to `Invoice` model
+
 ## 5.38.0 - 2018-06-06
 * [#516](https://github.com/stripe/stripe-java/pull/516) Add `active` property to `Plan` model
 
