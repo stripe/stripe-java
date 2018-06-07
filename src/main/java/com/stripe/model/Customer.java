@@ -53,7 +53,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
    * The {@code default_card} attribute.
    *
    * @return the {@code default_card} attribute
-   * @deprecated Prefer using the {@link #defaultSsource} attribute instead.
+   * @deprecated Prefer using the {@link #defaultSource} attribute instead.
    * @see <a href="https://stripe.com/docs/upgrades#2015-02-18">API version 2015-02-18</a>
    */
   @Deprecated
