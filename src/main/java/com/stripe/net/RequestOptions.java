@@ -295,6 +295,8 @@ public class RequestOptions {
   }
 
   public static class InvalidRequestOptionsException extends RuntimeException {
+    private static final long serialVersionUID = 1L;
+
     public InvalidRequestOptionsException(String message) {
       super(message);
     }
