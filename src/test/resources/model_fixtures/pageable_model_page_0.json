@@ -11,5 +11,5 @@
   ],
   "has_more": true,
   "object": "list",
-  "url": "/v1/pageablemodels"
+  "url": "/v1/pageable_models"
 }

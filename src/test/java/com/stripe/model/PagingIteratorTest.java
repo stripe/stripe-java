@@ -117,17 +117,17 @@ public class PagingIteratorTest extends BaseStripeTest {
 
     verifyRequest(
         APIResource.RequestMethod.GET,
-        "/v1/pageablemodels",
+        "/v1/pageable_models",
         page0Params
     );
     verifyRequest(
         APIResource.RequestMethod.GET,
-        "/v1/pageablemodels",
+        "/v1/pageable_models",
         page1Params
     );
     verifyRequest(
         APIResource.RequestMethod.GET,
-        "/v1/pageablemodels",
+        "/v1/pageable_models",
         page2Params
     );
     verifyNoMoreInteractions(networkSpy);
@@ -169,21 +169,21 @@ public class PagingIteratorTest extends BaseStripeTest {
 
     verifyRequest(
         APIResource.RequestMethod.GET,
-        "/v1/pageablemodels",
+        "/v1/pageable_models",
         page0Params,
         null,
         options
     );
     verifyRequest(
         APIResource.RequestMethod.GET,
-        "/v1/pageablemodels",
+        "/v1/pageable_models",
         page1Params,
         null,
         options
     );
     verifyRequest(
         APIResource.RequestMethod.GET,
-        "/v1/pageablemodels",
+        "/v1/pageable_models",
         page2Params,
         null,
         options
