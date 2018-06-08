@@ -26,6 +26,7 @@ group = GROUP
 version = VERSION_NAME
 
 tasks.withType(JavaCompile) {
+    options.compilerArgs << "-Xlint:all" << "-Xlint:-options" << "-Xlint:-processing" << "-Werror"
     options.encoding = 'UTF-8'
 }
 
