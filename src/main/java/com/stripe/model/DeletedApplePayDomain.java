@@ -1,6 +1,5 @@
 package com.stripe.model;
 
-import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
