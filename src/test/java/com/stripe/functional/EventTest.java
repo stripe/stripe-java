@@ -1,50 +1,44 @@
 package com.stripe.functional;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
-import com.stripe.BaseStripeFunctionalTest;
-import com.stripe.Stripe;
+import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Event;
+import com.stripe.model.EventCollection;
+import com.stripe.net.APIResource;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
 
-public class EventTest extends BaseStripeFunctionalTest {
+public class EventTest extends BaseStripeTest {
+  public static final String EVENT_ID = "evt_123";
+
   @Test
-  public void testEventRetrieve() throws StripeException {
-    Map<String, Object> listParams = new HashMap<String, Object>();
-    listParams.put("count", 1);
-    Event event = Event.all(listParams).getData().get(0);
-    Event retrievedEvent = Event.retrieve(event.getId());
-    assertEquals(event.getId(), retrievedEvent.getId());
+  public void testRetrieve() throws StripeException {
+    final Event event = Event.retrieve(EVENT_ID);
+
+    assertNotNull(event);
+    verifyRequest(
+        APIResource.RequestMethod.GET,
+        String.format("/v1/events/%s", EVENT_ID)
+    );
   }
 
   @Test
-  public void testEventList() throws StripeException {
-    Map<String, Object> listParams = new HashMap<String, Object>();
-    listParams.put("count", 1);
-    List<Event> events = Event.all(listParams).getData();
-    assertEquals(events.size(), 1);
-  }
+  public void testList() throws StripeException {
+    final Map<String, Object> params = new HashMap<String, Object>();
+    params.put("limit", 1);
 
-  @Test
-  public void testEventRetrievePerCallAPIKey() throws StripeException {
-    Map<String, Object> listParams = new HashMap<String, Object>();
-    listParams.put("count", 1);
-    Event event = Event.all(listParams, Stripe.apiKey).getData().get(0);
-    Event retrievedEvent = Event.retrieve(event.getId());
-    assertEquals(event.getId(), retrievedEvent.getId());
-  }
+    final EventCollection resources = Event.list(params);
 
-  @Test
-  public void testEventListPerCallAPIKey() throws StripeException {
-    Map<String, Object> listParams = new HashMap<String, Object>();
-    listParams.put("count", 1);
-    List<Event> events = Event.all(listParams, Stripe.apiKey).getData();
-    assertEquals(events.size(), 1);
+    assertNotNull(resources);
+    verifyRequest(
+        APIResource.RequestMethod.GET,
+        String.format("/v1/events"),
+        params
+    );
   }
 }

@@ -56,7 +56,7 @@ public class FileUpload extends APIResource implements HasId {
                   RequestOptions options) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
-    return multipartRequest(RequestMethod.POST, classURL(FileUpload.class, Stripe.UPLOAD_API_BASE),
+    return multipartRequest(RequestMethod.POST, classURL(FileUpload.class, Stripe.getUploadBase()),
         params, FileUpload.class, options);
   }
 
@@ -77,7 +77,7 @@ public class FileUpload extends APIResource implements HasId {
   public static FileUpload retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(FileUpload.class, id, Stripe.UPLOAD_API_BASE),
+    return request(RequestMethod.GET, instanceURL(FileUpload.class, id, Stripe.getUploadBase()),
         null, FileUpload.class, options);
   }
 
@@ -90,7 +90,7 @@ public class FileUpload extends APIResource implements HasId {
   public static FileUploadCollection list(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return requestCollection(classURL(FileUpload.class, Stripe.UPLOAD_API_BASE),
+    return requestCollection(classURL(FileUpload.class, Stripe.getUploadBase()),
         params, FileUploadCollection.class, options);
   }
 

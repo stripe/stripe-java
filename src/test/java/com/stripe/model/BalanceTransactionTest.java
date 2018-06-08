@@ -1,32 +1,30 @@
 package com.stripe.model;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import com.stripe.BaseStripeTest;
-import com.stripe.exception.StripeException;
+import com.stripe.model.BalanceTransaction;
 import com.stripe.net.APIResource;
-
-import java.io.IOException;
 
 import org.junit.Test;
 
 public class BalanceTransactionTest extends BaseStripeTest {
   @Test
-  public void testDeserialize() throws StripeException, IOException {
-    String json = resource("balance_transaction.json");
-    BalanceTransaction transaction = APIResource.GSON.fromJson(json, BalanceTransaction.class);
-    assertEquals("txn_1AF5AmKac2qaDcCZm8tBQt6I", transaction.getId());
+  public void testDeserialize() throws Exception {
+    final String data = getFixture("/v1/balance/history/txn_123");
+    final BalanceTransaction resource = APIResource.GSON.fromJson(data, BalanceTransaction.class);
+    assertNotNull(resource);
+    assertNotNull(resource.getId());
   }
 
   @Test
-  public void testDeserializeExpansions() throws StripeException, IOException {
-    String json = resource("balance_transaction_expansions.json");
-    BalanceTransaction transaction = APIResource.GSON.fromJson(json, BalanceTransaction.class);
-    assertEquals("txn_1AF5AmKac2qaDcCZm8tBQt6I", transaction.getId());
-
-    Dispute dp = transaction.getSourceObjectAs();
-    assertNotNull(dp);
-    assertEquals("dp_1AF5AmKac2qaDcCZHvOjyrDo", dp.getId());
+  public void testDeserializeExpansions() throws Exception {
+    // TODO: Figure out why stripe-mock does not expand source when asked
+    final String data = getResourceAsString("/api_fixtures/balance_transaction_expansion.json");
+    final BalanceTransaction resource = APIResource.GSON.fromJson(data, BalanceTransaction.class);
+    assertNotNull(resource);
+    final HasId source = resource.getSourceObject();
+    assertNotNull(source);
+    assertNotNull(source.getId());
   }
 }

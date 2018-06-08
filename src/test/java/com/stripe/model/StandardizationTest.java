@@ -1,5 +1,7 @@
 package com.stripe.model;
 
+import static org.junit.Assert.assertTrue;
+
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Lists;
@@ -15,8 +17,6 @@ import java.lang.reflect.Method;
 import java.util.Collection;
 import java.util.List;
 import java.util.Map;
-
-import junit.framework.Assert;
 
 import org.junit.Test;
 
@@ -97,10 +97,9 @@ public class StandardizationTest {
         if (RequestOptions.class.isAssignableFrom(finalParamType)) {
           continue;
         }
-        Assert.assertTrue(
-            String.format(
-                "Methods on %ss like %s.%s should take a final "
-                  + "parameter as a %s parameter, but got %s.%n",
+        assertTrue(
+            String.format("Methods on %ss like %s.%s should take a final "
+                  +       "parameter as a %s parameter, but got %s.%n",
                 APIResource.class.getSimpleName(), model.getSimpleName(), method.getName(),
                 RequestOptions.class.getSimpleName(), finalParamType.getCanonicalName()),
             RequestOptions.class.isAssignableFrom(finalParamType));

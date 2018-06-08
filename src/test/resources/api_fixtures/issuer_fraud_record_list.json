@@ -1,0 +1,16 @@
+{
+  "object": "list",
+  "data": [
+    {
+      "id": "issfr_123",
+      "object": "issuer_fraud_record",
+      "charge": "ch_123",
+      "created": 1525167901,
+      "fraud_type": "misc",
+      "livemode": true,
+      "post_date": 1501718400
+    }
+  ],
+  "has_more": true,
+  "url": "/v1/files"
+}

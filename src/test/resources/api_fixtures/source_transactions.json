@@ -1,0 +1,22 @@
+{
+  "object": "list",
+  "data": [
+    {
+      "id": "srctxn_123",
+      "object": "source_transaction",
+      "amount": 1000,
+      "created": 1506086518,
+      "currency": "usd",
+      "livemode": false,
+      "source": "src_123",
+      "type": "ach_credit_transfer",
+      "ach_credit_transfer": {
+        "last4": "db67",
+        "routing_number": "110000000",
+        "fingerprint": "U9AqfhJoSWCOImOv"
+      }
+    }
+  ],
+  "has_more": false,
+  "url": "/v1/sources/src_123/source_transactions"
+}

@@ -9,31 +9,24 @@ import com.stripe.BaseStripeTest;
 import com.stripe.net.StripeHeaders;
 import com.stripe.net.StripeResponse;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Before;
 import org.junit.Test;
 
 public class StripeResponseTest extends BaseStripeTest {
   String chargeBody;
 
-  @Before
-  public void clientId() throws IOException {
-    chargeBody = resource("charge.json");
-  }
-
   private Map<String, List<String>> generateHeaderMap() {
-    List<String> idempotencyHeader = new ArrayList<String>();
+    final List<String> idempotencyHeader = new ArrayList<String>();
     idempotencyHeader.add("12345");
 
-    List<String> requestIdHeader = new ArrayList<String>();
+    final List<String> requestIdHeader = new ArrayList<String>();
     requestIdHeader.add("req_12345");
 
-    Map<String, List<String>> headerMap = new HashMap<String, List<String>>();
+    final Map<String, List<String>> headerMap = new HashMap<String, List<String>>();
     headerMap.put("Idempotency-Key", idempotencyHeader);
     headerMap.put("Request-Id", requestIdHeader);
 
@@ -50,21 +43,21 @@ public class StripeResponseTest extends BaseStripeTest {
 
   @Test
   public void testBody() {
-    StripeResponse stripeResponse = new StripeResponse(200, chargeBody);
+    final StripeResponse stripeResponse = new StripeResponse(200, chargeBody);
     assertEquals(200, stripeResponse.code());
     assertEquals(chargeBody, stripeResponse.body());
   }
 
   @Test
   public void testHeaders() {
-    Map<String, List<String>> headerMap = generateHeaderMap();
-    StripeResponse stripeResponse = new StripeResponse(200, chargeBody, headerMap);
+    final Map<String, List<String>> headerMap = generateHeaderMap();
+    final StripeResponse stripeResponse = new StripeResponse(200, chargeBody, headerMap);
     assertThat(stripeResponse.headers(), instanceOf(StripeHeaders.class));
   }
 
   @Test
   public void testNoHeaders() {
-    StripeResponse stripeResponse = new StripeResponse(200, chargeBody);
+    final StripeResponse stripeResponse = new StripeResponse(200, chargeBody);
     assertEquals(stripeResponse.headers(), null);
     assertEquals(stripeResponse.idempotencyKey(), null);
     assertEquals(stripeResponse.requestId(), null);
@@ -72,15 +65,15 @@ public class StripeResponseTest extends BaseStripeTest {
 
   @Test
   public void testGetIdempotencyKey() {
-    Map<String, List<String>> headerMap = generateHeaderMap();
-    StripeResponse stripeResponse = new StripeResponse(200, chargeBody, headerMap);
+    final Map<String, List<String>> headerMap = generateHeaderMap();
+    final StripeResponse stripeResponse = new StripeResponse(200, chargeBody, headerMap);
     assertEquals("12345", stripeResponse.idempotencyKey());
   }
 
   @Test
   public void testRequestId() {
-    Map<String, List<String>> headerMap = generateHeaderMap();
-    StripeResponse stripeResponse = new StripeResponse(200, chargeBody, headerMap);
+    final Map<String, List<String>> headerMap = generateHeaderMap();
+    final StripeResponse stripeResponse = new StripeResponse(200, chargeBody, headerMap);
     assertEquals(stripeResponse.requestId(), "req_12345");
   }
 }

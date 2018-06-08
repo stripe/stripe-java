@@ -1,12 +1,13 @@
 package com.stripe.model;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import com.stripe.BaseStripeTest;
-import com.stripe.exception.StripeException;
+import com.stripe.model.Event;
+import com.stripe.model.SourceMandateNotification;
 import com.stripe.net.APIResource;
 
-import java.io.IOException;
 import java.util.Map;
 
 import org.junit.Test;
@@ -15,7 +16,8 @@ public class SourceMandateNotificationTest extends BaseStripeTest {
   private void verifyResource(SourceMandateNotification mandateNotification) {
     final Map<String, String> typeData = mandateNotification.getTypeData();
 
-    assertEquals("srcmn_1234", mandateNotification.getId());
+    assertNotNull(mandateNotification);
+    assertEquals("srcmn_123", mandateNotification.getId());
     assertEquals("source_mandate_notification", mandateNotification.getObject());
     assertEquals(1000L, (long) mandateNotification.getAmount());
     assertEquals(1516981090, (long) mandateNotification.getCreated());
@@ -32,20 +34,20 @@ public class SourceMandateNotificationTest extends BaseStripeTest {
   }
 
   @Test
-  public void testDeserializeResource() throws StripeException, IOException {
-    String json = resource("source_mandate_notification.json");
-    SourceMandateNotification mandateNotification
-        = APIResource.GSON.fromJson(json, SourceMandateNotification.class);
+  public void testDeserialize() throws Exception {
+    final String json = getResourceAsString("/api_fixtures/source_mandate_notification.json");
+    final SourceMandateNotification resource = APIResource.GSON.fromJson(json,
+        SourceMandateNotification.class);
 
-    verifyResource(mandateNotification);
+    verifyResource(resource);
   }
 
   @Test
-  public void testDeserializeEvent() throws StripeException, IOException {
-    String json = resource("source_mandate_notification_event.json");
-    Event event = APIResource.GSON.fromJson(json, Event.class);
+  public void testDeserializeEvent() throws Exception {
+    final String json = getResourceAsString("/api_fixtures/source_mandate_notification_event.json");
+    final Event event = APIResource.GSON.fromJson(json, Event.class);
 
-    SourceMandateNotification mandateNotification
+    final SourceMandateNotification mandateNotification
         = (com.stripe.model.SourceMandateNotification) event.getData().getObject();
 
     verifyResource(mandateNotification);

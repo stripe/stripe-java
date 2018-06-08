@@ -132,6 +132,13 @@ API.
 
 ## Development
 
+The test suite depends on [stripe-mock], so make sure to fetch and run it from a
+background terminal ([stripe-mock's README][stripe-mock] also contains
+instructions for installing via Homebrew and other methods):
+
+    go get -u github.com/stripe/stripe-mock
+    stripe-mock
+
 You must have Gradle installed. To run the tests:
 
     ./gradlew test
@@ -147,6 +154,7 @@ The library uses [Project Lombok][lombok]. While it is not a requirement, you mi
 [connect]: https://stripe.com/connect
 [lombok]: https://projectlombok.org
 [lombok-plugins]: https://projectlombok.org/setup/overview
+[stripe-mock]: https://github.com/stripe/stripe-mock
 
 <!--
 # vim: set tw=79:
