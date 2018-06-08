@@ -56,9 +56,14 @@ public class DisputeDataDeserializer implements JsonDeserializer<Dispute> {
     }
     disputeAsJsonObject.remove("evidence");
     Dispute parsedData = gson.fromJson(json, typeOfT);
-    parsedData.setEvidence(evidenceString);
+    setEvidenceString(parsedData, evidenceString);
     parsedData.setEvidenceSubObject(evidenceSubObject);
 
     return parsedData;
+  }
+
+  @SuppressWarnings("deprecation")
+  private static void setEvidenceString(Dispute dispute, String evidenceString) {
+    dispute.setEvidence(evidenceString);
   }
 }

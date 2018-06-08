@@ -143,6 +143,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     return headers;
   }
 
+  @SuppressWarnings("unchecked")
   private static java.net.HttpURLConnection createStripeConnection(
       String url, RequestOptions options) throws IOException {
     URL stripeURL;
@@ -335,6 +336,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     return flatParams;
   }
 
+  @SuppressWarnings("unchecked")
   private static List<Parameter> flattenParamsValue(Object value, String keyPrefix)
       throws InvalidRequestException {
     List<Parameter> flatParams = new LinkedList<Parameter>();
@@ -392,14 +394,12 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
   private static String getResponseBody(InputStream responseStream)
       throws IOException {
-    //\A is the beginning of
-    // the stream boundary
-    String responseBody = new Scanner(responseStream, APIResource.CHARSET)
-        .useDelimiter("\\A")
-        .next(); //
-
-    responseStream.close();
-    return responseBody;
+    try (final Scanner scanner = new Scanner(responseStream, APIResource.CHARSET)) {
+      // \A is the beginning of the stream boundary
+      final String responseBody = scanner.useDelimiter("\\A").next();
+      responseStream.close();
+      return responseBody;
+    }
   }
 
   private static StripeResponse makeURLConnectionRequest(
@@ -734,7 +734,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
         throw new UnsupportedResponseTypeException(code, description, requestId, responseCode,
             null);
       default:
-        throw new APIException(code, requestId, responseCode, null);
+        throw new APIException(code, requestId, null, responseCode, null);
     }
   }
 
@@ -779,7 +779,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       // some time for the application to handle a slow Stripe
       fetchOptionsClass.getDeclaredMethod("setDeadline",
           java.lang.Double.class)
-          .invoke(fetchOptions, new Double(55));
+          .invoke(fetchOptions, Double.valueOf(55));
 
       Class<?> requestClass = Class
           .forName("com.google.appengine.api.urlfetch.HTTPRequest");

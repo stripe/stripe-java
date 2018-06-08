@@ -62,6 +62,7 @@ public class BalanceTransaction extends APIResource implements HasId {
     this.source = new ExpandableField<HasId>(o.getId(), o);
   }
 
+  @SuppressWarnings("unchecked")
   public <O extends HasId> O getSourceObjectAs() {
     return (this.source != null) ? (O) this.source.getExpanded() : null;
   }

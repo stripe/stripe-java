@@ -195,7 +195,7 @@ public abstract class APIResource extends StripeObject {
    * options and params through so that we can iterate to the next page if
    * necessary.
    */
-  public static <T extends StripeCollectionInterface> T requestCollection(
+  public static <T extends StripeCollectionInterface<?>> T requestCollection(
       String url, Map<String, Object> params, Class<T> clazz,
       RequestOptions options)
       throws AuthenticationException, InvalidRequestException,

@@ -16,6 +16,7 @@ public class ExternalAccountTypeAdapterFactory implements TypeAdapterFactory {
    * Creates the type adapter used to instantiate {@link ExternalAccount} subclasses from JSON
    * payloads.
    */
+  @SuppressWarnings("unchecked")
   public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
     if (!ExternalAccount.class.isAssignableFrom(type.getRawType())) {
       return null; // this class only serializes 'ExternalAccount' and its subtypes

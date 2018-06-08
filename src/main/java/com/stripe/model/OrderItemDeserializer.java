@@ -25,6 +25,7 @@ public class OrderItemDeserializer implements JsonDeserializer<OrderItem> {
   }
 
   @Override
+  @SuppressWarnings("unchecked")
   public OrderItem deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
       throws JsonParseException {
     if (json.isJsonNull()) {
