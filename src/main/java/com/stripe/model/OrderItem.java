@@ -36,6 +36,7 @@ public class OrderItem extends APIResource {
     this.parent = new ExpandableField<HasId>(o.getId(), o);
   }
 
+  @SuppressWarnings("unchecked")
   public <O extends HasId> O getParentObjectAs() {
     return (this.parent != null) ? (O) this.parent.getExpanded() : null;
   }

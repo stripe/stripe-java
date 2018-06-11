@@ -7,11 +7,11 @@ import com.google.gson.JsonSerializer;
 
 import java.lang.reflect.Type;
 
-public class ExpandableFieldSerializer implements JsonSerializer<ExpandableField> {
+public class ExpandableFieldSerializer implements JsonSerializer<ExpandableField<?>> {
   /**
    * Serializes an expandable attribute into a JSON string.
    */
-  public JsonElement serialize(ExpandableField src, Type typeOfSrc,
+  public JsonElement serialize(ExpandableField<?> src, Type typeOfSrc,
       JsonSerializationContext context) {
     if (src.isExpanded()) {
       return context.serialize(src.getExpanded());

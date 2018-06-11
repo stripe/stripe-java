@@ -26,7 +26,7 @@ import org.junit.Test;
 public class StandardizationTest {
   @Test
   public void allNonDeprecatedMethodsTakeOptions() throws IOException, NoSuchMethodException {
-    for (Class model : getAllModels()) {
+    for (Class<?> model : getAllModels()) {
       for (Method method : model.getMethods()) {
         // Skip methods not declared on the base class.
         if (method.getDeclaringClass() != model) {
@@ -107,14 +107,14 @@ public class StandardizationTest {
     }
   }
 
-  private Collection<Class> getAllModels() throws IOException {
+  private Collection<Class<?>> getAllModels() throws IOException {
     Class<Charge> chargeClass = Charge.class;
     ClassPath classPath = ClassPath.from(chargeClass.getClassLoader());
     ImmutableSet<ClassPath.ClassInfo> topLevelClasses
         = classPath.getTopLevelClasses(chargeClass.getPackage().getName());
-    List<Class> classList = Lists.newArrayListWithExpectedSize(topLevelClasses.size());
+    List<Class<?>> classList = Lists.newArrayListWithExpectedSize(topLevelClasses.size());
     for (ClassPath.ClassInfo classInfo : topLevelClasses) {
-      Class c = classInfo.load();
+      Class<?> c = classInfo.load();
       // Skip things that aren't APIResources
       if (!APIResource.class.isAssignableFrom(c)) {
         continue;

@@ -31,7 +31,7 @@ public class DisputeDataDeserializer implements JsonDeserializer<Dispute> {
     if (!json.isJsonObject()) {
       throw new JsonParseException("Dispute type was not an object, which is problematic.");
     }
-    // API Versions 2014-12-TODO and earlier use a string for evidence, and we've renamed that to
+    // API Versions 2014-12-08 and earlier use a string for evidence, and we've renamed that to
     // evidenceString.
     JsonObject disputeAsJsonObject = json.getAsJsonObject();
 
@@ -56,9 +56,14 @@ public class DisputeDataDeserializer implements JsonDeserializer<Dispute> {
     }
     disputeAsJsonObject.remove("evidence");
     Dispute parsedData = gson.fromJson(json, typeOfT);
-    parsedData.setEvidence(evidenceString);
+    setEvidenceString(parsedData, evidenceString);
     parsedData.setEvidenceSubObject(evidenceSubObject);
 
     return parsedData;
+  }
+
+  @SuppressWarnings("deprecation")
+  private static void setEvidenceString(Dispute dispute, String evidenceString) {
+    dispute.setEvidence(evidenceString);
   }
 }

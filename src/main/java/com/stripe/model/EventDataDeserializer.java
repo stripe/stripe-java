@@ -16,8 +16,8 @@ import java.util.Map;
 
 public class EventDataDeserializer implements JsonDeserializer<EventData> {
 
-  @SuppressWarnings("rawtypes")
-  static final Map<String, Class> objectMap = new HashMap<String, Class>();
+  static final Map<String, Class<? extends StripeObject>> objectMap =
+      new HashMap<String, Class<? extends StripeObject>>();
 
   static {
     objectMap.put("account", Account.class);
@@ -117,7 +117,6 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
    * Deserializes the JSON payload contained in an event's {@code data} attribute into an
    * {@link EventData} instance.
    */
-  @SuppressWarnings("unchecked")
   public EventData deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
       throws JsonParseException {
     EventData eventData = new EventData();
@@ -135,7 +134,7 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
         }
       } else if ("object".equals(key)) {
         String type = element.getAsJsonObject().get("object").getAsString();
-        Class<StripeObject> cl = objectMap.get(type);
+        Class<? extends StripeObject> cl = objectMap.get(type);
         StripeObject object = APIResource.GSON.fromJson(
             entry.getValue(), cl != null ? cl : StripeRawJsonObject.class);
         eventData.setObject(object);

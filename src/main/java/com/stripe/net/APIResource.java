@@ -72,38 +72,20 @@ public abstract class APIResource extends StripeObject {
       .create();
 
   private static String className(Class<?> clazz) {
-    String className = clazz.getSimpleName().toLowerCase().replace("$", " ");
+    // Convert CamelCase to snake_case
+    final String className = clazz.getSimpleName()
+        .replaceAll("(.)([A-Z][a-z]+)", "$1_$2")
+        .replaceAll("([a-z0-9])([A-Z])", "$1_$2")
+        .toLowerCase();
 
-    // TODO: Delurk this, with invoiceitem being a valid url, we can't get too
-    // fancy yet.
-    if (className.equals("applepaydomain")) {
-      return "apple_pay_domain";
-    } else if (className.equals("applicationfee")) {
-      return "application_fee";
-    } else if (className.equals("bitcoinreceiver")) {
-      return "bitcoin_receiver";
-    } else if (className.equals("countryspec")) {
-      return "country_spec";
-    } else if (className.equals("ephemeralkey")) {
-      return "ephemeral_key";
-    } else if (className.equals("exchangerate")) {
-      return "exchange_rate";
-    } else if (className.equals("fileupload")) {
-      return "file";
-    } else if (className.equals("issuerfraudrecord")) {
-      return "issuer_fraud_record";
-    } else if (className.equals("orderreturn")) {
-      return "order_return";
-    } else if (className.equals("sourcetransaction")) {
-      return "source_transaction";
-    } else if (className.equals("subscriptionitem")) {
-      return "subscription_item";
-    } else if (className.equals("threedsecure")) {
-      return "three_d_secure";
-    } else if (className.equals("usagerecord")) {
-      return "usage_record";
-    } else {
-      return className;
+    // Handle special cases
+    switch (className) {
+      case "invoice_item":
+        return "invoiceitem";
+      case "file_upload":
+        return "file";
+      default:
+        return className;
     }
   }
 
@@ -213,7 +195,7 @@ public abstract class APIResource extends StripeObject {
    * options and params through so that we can iterate to the next page if
    * necessary.
    */
-  public static <T extends StripeCollectionInterface> T requestCollection(
+  public static <T extends StripeCollectionInterface<?>> T requestCollection(
       String url, Map<String, Object> params, Class<T> clazz,
       RequestOptions options)
       throws AuthenticationException, InvalidRequestException,

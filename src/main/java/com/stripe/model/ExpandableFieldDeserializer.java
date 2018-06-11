@@ -10,25 +10,25 @@ import com.google.gson.JsonPrimitive;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
-public class ExpandableFieldDeserializer implements JsonDeserializer<ExpandableField> {
+public class ExpandableFieldDeserializer implements JsonDeserializer<ExpandableField<?>> {
   /**
    * Deserializes an expandable field JSON payload (i.e. either a string with just the ID, or a full
    * JSON object) into an {@link ExpandableField} object.
    */
-  public ExpandableField deserialize(JsonElement json, Type typeOfT,
+  public ExpandableField<?> deserialize(JsonElement json, Type typeOfT,
       JsonDeserializationContext context) throws JsonParseException {
     if (json.isJsonNull()) {
       return null;
     }
 
-    ExpandableField expandableField;
+    ExpandableField<?> expandableField;
 
     // Check if json is a String ID. If so, the field has not been expanded, so we only need to
     // serialize a String and create a new ExpandableField with the String id only.
     if (json.isJsonPrimitive()) {
       JsonPrimitive jsonPrimitive = json.getAsJsonPrimitive();
       if (jsonPrimitive.isString()) {
-        expandableField = new ExpandableField(jsonPrimitive.getAsString(), null);
+        expandableField = new ExpandableField<HasId>(jsonPrimitive.getAsString(), null);
         return expandableField;
       } else {
         throw new JsonParseException("ExpandableField is a non-string primitive type.");
@@ -43,7 +43,7 @@ public class ExpandableFieldDeserializer implements JsonDeserializer<ExpandableF
       // We need to get the type inside the generic ExpandableField to make sure fromJson correctly
       // serializes the JsonObject:
       Type clazz = ((ParameterizedType) typeOfT).getActualTypeArguments()[0];
-      expandableField = new ExpandableField(id, (HasId) context.deserialize(json, clazz));
+      expandableField = new ExpandableField<HasId>(id, (HasId) context.deserialize(json, clazz));
       return expandableField;
     }
 
