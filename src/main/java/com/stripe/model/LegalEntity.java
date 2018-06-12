@@ -41,6 +41,7 @@ public class LegalEntity extends StripeObject {
     String details;
     String detailsCode;
     String document;
+    String documentBack;
     String status;
   }
 
