@@ -18,6 +18,7 @@ public class LegalEntityTest extends BaseStripeTest {
     // TODO: Figure out how to test various versions of legal_entity
     // such as with additional_owners, with expanded verification doc, etc.
   }
+
   @Test
   public void testDeserializeCompany() throws Exception {
     final String json = getResourceAsString("/api_fixtures/legal_entity.json");

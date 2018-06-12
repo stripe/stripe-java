@@ -96,29 +96,6 @@ public class AccountTest extends BaseStripeTest {
   }
 
   @Test
-  public void testUpdateDocument() throws StripeException {
-    final Account account = getAccountFixture();
-
-    final Map<String, Object> legalEntity = new HashMap<String, Object>();
-    legalEntity.put("type", "individual");
-
-    final Map<String, Object> verification = new HashMap<String, Object>();
-    verification.put("document", "file_123");
-    verification.put("document_back", "file_456");
-    legalEntity.put("verification", verification);
-    final Map<String, Object> params = new HashMap<String, Object>();
-    params.put("legal_entity", legalEntity);
-    final Account updatedAccount = account.update(params);
-
-    assertNotNull(updatedAccount);
-    verifyRequest(
-        APIResource.RequestMethod.POST,
-        String.format("/v1/accounts/%s", account.getId()),
-        params
-    );
-  }
-
-  @Test
   public void testDelete() throws StripeException {
     final Account account = getAccountFixture();
 
