@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.40.0 - 2018-06-13
+* [#521](https://github.com/stripe/stripe-java/pull/521) Add `documentBack` property to `LegalEntity` model
+
 ## 5.39.0 - 2018-06-07
 * [#515](https://github.com/stripe/stripe-java/pull/515) Add `hosted_invoice_url` and `invoice_pdf` properties to `Invoice` model
 
