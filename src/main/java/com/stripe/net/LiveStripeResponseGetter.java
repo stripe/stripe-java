@@ -365,11 +365,11 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
   // represents regular API errors returned as JSON
   // handleAPIError uses this class to raise the appropriate StripeException
-  private static class ErrorContainer {
-    private LiveStripeResponseGetter.Error error;
+  private static class StripeErrorContainer {
+    private StripeError error;
   }
 
-  private static class Error {
+  private static class StripeError {
     @SuppressWarnings("unused")
     String type;
 
@@ -386,7 +386,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
   // represents OAuth API errors returned as JSON
   // handleOAuthError uses this class to raise the appropriate OAuthException
-  private static class OAuthError {
+  private static class StripeOAuthError {
     String error;
 
     String errorDescription;
@@ -685,8 +685,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   private static void handleAPIError(String responseBody, int responseCode, String requestId)
       throws InvalidRequestException, AuthenticationException,
       CardException, APIException {
-    LiveStripeResponseGetter.Error error = APIResource.GSON.fromJson(responseBody,
-        LiveStripeResponseGetter.ErrorContainer.class).error;
+    LiveStripeResponseGetter.StripeError error = APIResource.GSON.fromJson(responseBody,
+        LiveStripeResponseGetter.StripeErrorContainer.class).error;
     switch (responseCode) {
       case 400:
         throw new InvalidRequestException(error.message, error.param, requestId, error.code,
@@ -713,8 +713,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       throws InvalidClientException, InvalidGrantException,
       com.stripe.exception.oauth.InvalidRequestException, InvalidScopeException,
       UnsupportedGrantTypeException, UnsupportedResponseTypeException, APIException {
-    LiveStripeResponseGetter.OAuthError error = APIResource.GSON.fromJson(responseBody,
-        LiveStripeResponseGetter.OAuthError.class);
+    LiveStripeResponseGetter.StripeOAuthError error = APIResource.GSON.fromJson(responseBody,
+        LiveStripeResponseGetter.StripeOAuthError.class);
     String code = error.error;
     String description = (error.errorDescription != null) ? error.errorDescription : code;
 
