@@ -8,8 +8,8 @@ import com.stripe.model.Subscription;
 import com.stripe.model.SubscriptionCollection;
 import com.stripe.net.APIResource;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -28,7 +28,7 @@ public class SubscriptionTest extends BaseStripeTest {
   public void testCreate() throws StripeException {
     final Map<String, Object> item = new HashMap<String, Object>();
     item.put("plan", "silver-plan_123-898");
-    final List<Object> items = new LinkedList<Object>();
+    final List<Object> items = new ArrayList<Object>();
     items.add(item);
     final Map<String, Object> params = new HashMap<String, Object>();
     params.put("customer", "cus_123");

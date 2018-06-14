@@ -11,8 +11,8 @@ import com.stripe.model.SourceTransactionCollection;
 import com.stripe.net.APIResource;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -80,7 +80,7 @@ public class SourceTest extends BaseStripeTest {
   public void testVerify() throws StripeException {
     final Source source = getSourceFixture();
 
-    final List<Integer> values = new LinkedList<Integer>();
+    final List<Integer> values = new ArrayList<Integer>();
     values.add(32);
     values.add(45);
     final Map<String, Object> params = new HashMap<String, Object>();

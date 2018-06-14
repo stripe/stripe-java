@@ -9,8 +9,8 @@ import com.stripe.model.Product;
 import com.stripe.model.ProductCollection;
 import com.stripe.net.APIResource;
 
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -27,7 +27,7 @@ public class ProductTest extends BaseStripeTest {
 
   @Test
   public void testCreate() throws StripeException {
-    final List<String> attributes = new LinkedList<String>();
+    final List<String> attributes = new ArrayList<String>();
     attributes.add("attr1");
     attributes.add("attr2");
     final Map<String, Object> packageDimensions = new HashMap<String, Object>();

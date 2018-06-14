@@ -13,8 +13,8 @@ import com.stripe.model.ExternalAccountCollection;
 import com.stripe.net.APIResource;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -106,7 +106,7 @@ public class BankAccountTest extends BaseStripeTest {
     final BankAccount stubbedBankAccount = APIResource.GSON.fromJson(
         getResourceAsString("/api_fixtures/bank_account.json"), BankAccount.class);
     final ExternalAccountCollection stubbedCollection = new ExternalAccountCollection();
-    final List<ExternalAccount> stubbedData = new LinkedList<ExternalAccount>();
+    final List<ExternalAccount> stubbedData = new ArrayList<ExternalAccount>();
     stubbedData.add(stubbedBankAccount);
     stubbedCollection.setData(stubbedData);
     stubRequest(
@@ -149,7 +149,7 @@ public class BankAccountTest extends BaseStripeTest {
     final Customer customer = Customer.retrieve(CUSTOMER_ID);
     final BankAccount bankAccount = getBankAccountFixture(customer);
 
-    final List<Integer> values = new LinkedList<Integer>();
+    final List<Integer> values = new ArrayList<Integer>();
     values.add(32);
     values.add(45);
     final Map<String, Object> params = new HashMap<String, Object>();

@@ -30,9 +30,9 @@ import java.net.MalformedURLException;
 import java.net.PasswordAuthentication;
 import java.net.URL;
 import java.net.URLStreamHandler;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -275,7 +275,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
   private static List<Parameter> flattenParamsList(List<Object> params, String keyPrefix)
       throws InvalidRequestException {
-    List<Parameter> flatParams = new LinkedList<Parameter>();
+    List<Parameter> flatParams = new ArrayList<Parameter>();
     Iterator<?> it = ((List<?>) params).iterator();
     String newPrefix = String.format("%s[]", keyPrefix);
 
@@ -296,7 +296,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
   private static List<Parameter> flattenParamsArray(Object[] params, String keyPrefix)
       throws InvalidRequestException {
-    List<Parameter> flatParams = new LinkedList<Parameter>();
+    List<Parameter> flatParams = new ArrayList<Parameter>();
     String newPrefix = String.format("%s[]", keyPrefix);
 
     // Because application/x-www-form-urlencoded cannot represent an empty
@@ -316,7 +316,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
   private static List<Parameter> flattenParamsMap(Map<String, Object> params, String keyPrefix)
       throws InvalidRequestException {
-    List<Parameter> flatParams = new LinkedList<Parameter>();
+    List<Parameter> flatParams = new ArrayList<Parameter>();
     if (params == null) {
       return flatParams;
     }
@@ -339,7 +339,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   @SuppressWarnings("unchecked")
   private static List<Parameter> flattenParamsValue(Object value, String keyPrefix)
       throws InvalidRequestException {
-    List<Parameter> flatParams = new LinkedList<Parameter>();
+    List<Parameter> flatParams = new ArrayList<Parameter>();
 
     if (value instanceof Map<?, ?>) {
       flatParams = flattenParamsMap((Map<String, Object>) value, keyPrefix);
@@ -353,10 +353,10 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
           + "You may set '" + keyPrefix + "' to null to delete the property.",
           keyPrefix, null, null, 0, null);
     } else if (value == null) {
-      flatParams = new LinkedList<Parameter>();
+      flatParams = new ArrayList<Parameter>();
       flatParams.add(new Parameter(keyPrefix, ""));
     } else {
-      flatParams = new LinkedList<Parameter>();
+      flatParams = new ArrayList<Parameter>();
       flatParams.add(new Parameter(keyPrefix, value.toString()));
     }
 
