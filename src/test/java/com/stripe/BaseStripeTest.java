@@ -444,8 +444,8 @@ public class BaseStripeTest {
   private static int compareVersions(String a, String b) {
     int ret = 0;
 
-    String[] as = a.split("\\.");
-    String[] bs = b.split("\\.");
+    String[] as = a.split("\\.", -1);
+    String[] bs = b.split("\\.", -1);
 
     int loopMax = bs.length;
     if (as.length > bs.length) {

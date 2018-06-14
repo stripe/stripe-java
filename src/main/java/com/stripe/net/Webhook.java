@@ -119,7 +119,7 @@ public final class Webhook {
      * @return the timestamp contained in the header.
      */
     private static long getTimestamp(String sigHeader) {
-      String[] items = sigHeader.split(",");
+      String[] items = sigHeader.split(",", -1);
 
       for (String item : items) {
         String[] itemParts = item.split("=", 2);
@@ -140,7 +140,7 @@ public final class Webhook {
      */
     private static List<String> getSignatures(String sigHeader, String scheme) {
       List<String> signatures = new ArrayList<String>();
-      String[] items = sigHeader.split(",");
+      String[] items = sigHeader.split(",", -1);
 
       for (String item : items) {
         String[] itemParts = item.split("=", 2);
@@ -154,7 +154,7 @@ public final class Webhook {
 
     /**
      * Computes the signature for a given payload and secret.
-     * 
+     *
      * <p>The current scheme used by Stripe ("v1") is HMAC/SHA-256.
      *
      * @param payload the payload to sign.

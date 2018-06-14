@@ -23,7 +23,7 @@ import org.junit.Test;
 public class OAuthTest extends BaseStripeTest {
   private static Map<String, String> splitQuery(String query) throws UnsupportedEncodingException {
     final Map<String, String> queryPairs = new HashMap<String, String>();
-    final String[] pairs = query.split("&");
+    final String[] pairs = query.split("&", -1);
     for (final String pair : pairs) {
       final int idx = pair.indexOf("=");
       queryPairs.put(URLDecoder.decode(pair.substring(0, idx), "UTF8"),
