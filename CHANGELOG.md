@@ -1,7 +1,7 @@
 # Changelog
 
 ## 5.41.0 - 2018-06-14
-* [#999](https://github.com/stripe/stripe-java/pull/999) DESCRIBE CHANGES HERE (try to use the same style, tense, etc. as the other entries)
+* [#522](https://github.com/stripe/stripe-java/pull/522) Add `amountPaid`, `amountRemaining` and `billingReason` to `Invoice` model
 
 ## 5.40.0 - 2018-06-13
 * [#521](https://github.com/stripe/stripe-java/pull/521) Add `documentBack` property to `LegalEntity` model
