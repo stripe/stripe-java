@@ -46,7 +46,7 @@ public class ExpandableFieldDeserializerTest extends BaseStripeTest {
     // that here:
     final ExpandableField<TestObject> out = gson.fromJson(json,
         new TypeToken<ExpandableField<TestObject>>() {}.getType());
-    assertEquals(out.getId(), "just_an_id");
+    assertEquals("just_an_id", out.getId());
     assertFalse(out.isExpanded());
   }
 
@@ -61,8 +61,8 @@ public class ExpandableFieldDeserializerTest extends BaseStripeTest {
     // that here:
     final ExpandableField<TestObject> out = gson.fromJson(json,
         new TypeToken<ExpandableField<TestObject>>() {}.getType());
-    assertEquals(out.getId(), "an_id_here");
-    assertEquals(out.getExpanded().id, "an_id_here");
-    assertEquals(out.getExpanded().bar, 12);
+    assertEquals("an_id_here", out.getId());
+    assertEquals("an_id_here", out.getExpanded().id);
+    assertEquals(12, out.getExpanded().bar);
   }
 }

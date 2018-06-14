@@ -23,6 +23,6 @@ public class EphemeralKeyTest extends BaseStripeTest {
   public void testRawJson() {
     final String jsonString = "{\"foo\":5,\"bar\":[\"baz\",null]}";
     final EphemeralKey key = APIResource.GSON.fromJson(jsonString, EphemeralKey.class);
-    assertEquals(key.getRawJson(), jsonString);
+    assertEquals(jsonString, key.getRawJson());
   }
 }
