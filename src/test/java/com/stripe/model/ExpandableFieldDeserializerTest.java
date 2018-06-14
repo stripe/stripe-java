@@ -20,7 +20,7 @@ public class ExpandableFieldDeserializerTest extends BaseStripeTest {
 
   private static Gson gson = APIResource.GSON;
 
-  private class TestObject implements HasId {
+  private static class TestObject implements HasId {
     String id;
     int bar;
 

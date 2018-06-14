@@ -11,7 +11,7 @@ import org.junit.Test;
 
 public class ExpandableFieldSerializerTest extends BaseStripeTest {
 
-  private class TestNestedObject implements HasId {
+  private static class TestNestedObject implements HasId {
     String id;
     @SuppressWarnings("unused")
     int bar;
@@ -21,7 +21,7 @@ public class ExpandableFieldSerializerTest extends BaseStripeTest {
     }
   }
 
-  private class TestTopLevelObject extends StripeObject {
+  private static class TestTopLevelObject extends StripeObject {
     @SuppressWarnings("unused")
     ExpandableField<TestNestedObject> nested;
   }
