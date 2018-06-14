@@ -362,18 +362,18 @@ public class BaseStripeTest {
       IOException, MalformedURLException, ProtocolException {
     int status;
 
-    StringBuffer urlStringBuffer = new StringBuffer();
-    urlStringBuffer.append("http://localhost:" + port + path);
+    StringBuilder urlStringBuilder = new StringBuilder();
+    urlStringBuilder.append("http://localhost:" + port + path);
 
     if (expansions != null) {
-      urlStringBuffer.append("?");
+      urlStringBuilder.append("?");
       for (String expansion : expansions) {
-        urlStringBuffer.append("expand[]=");
-        urlStringBuffer.append(expansion);
-        urlStringBuffer.append("&");
+        urlStringBuilder.append("expand[]=");
+        urlStringBuilder.append(expansion);
+        urlStringBuilder.append("&");
       }
     }
-    URL url = new URL(urlStringBuffer.toString());
+    URL url = new URL(urlStringBuilder.toString());
 
     HttpURLConnection conn = (HttpURLConnection)url.openConnection();
     conn.setRequestMethod("GET");
@@ -422,13 +422,13 @@ public class BaseStripeTest {
   private static String readUntilEnd(InputStream inputStream) throws IOException {
     BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
     try {
-      StringBuffer buffer = new StringBuffer();
+      StringBuilder builder = new StringBuilder();
       String line;
       while ((line = reader.readLine()) != null) {
-        buffer.append(line);
-        buffer.append("\r");
+        builder.append(line);
+        builder.append("\r");
       }
-      return buffer.toString();
+      return builder.toString();
     } finally {
       reader.close();
     }
