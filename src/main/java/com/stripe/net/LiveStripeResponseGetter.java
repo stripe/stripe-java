@@ -30,6 +30,7 @@ import java.net.MalformedURLException;
 import java.net.PasswordAuthentication;
 import java.net.URL;
 import java.net.URLStreamHandler;
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -790,7 +791,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
       if (method == APIResource.RequestMethod.POST) {
         requestClass.getDeclaredMethod("setPayload", byte[].class)
-            .invoke(request, query.getBytes());
+            .invoke(request, query.getBytes(StandardCharsets.UTF_8));
       }
 
       for (Map.Entry<String, String> header : getHeaders(options)
