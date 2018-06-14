@@ -71,7 +71,7 @@ public class BaseStripeTest {
     }
 
     String version = conn.getHeaderField("Stripe-Mock-Version");
-    if ((version != "master") && (compareVersions(version, MOCK_MINIMUM_VERSION) > 0)) {
+    if (!(version.equals("master")) && (compareVersions(version, MOCK_MINIMUM_VERSION) > 0)) {
       throw new RuntimeException(String.format(
         "Your version of stripe-mock (%s) is too old. The minimum "
         + "version to run this test suite is %s. Please see its "
