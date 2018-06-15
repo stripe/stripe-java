@@ -22,19 +22,6 @@ public class ExchangeRate extends APIResource implements HasId {
   String object;
   Map<String, Float> rates;
 
-  public static ExchangeRate retrieve(String currency) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return retrieve(currency, null);
-  }
-
-  public static ExchangeRate retrieve(String currency, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(ExchangeRate.class, currency), null,
-        ExchangeRate.class, options);
-  }
-
   public static ExchangeRateCollection list(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -46,5 +33,18 @@ public class ExchangeRate extends APIResource implements HasId {
       APIConnectionException, CardException, APIException {
     return requestCollection(classURL(ExchangeRate.class), params, ExchangeRateCollection.class,
         options);
+  }
+
+  public static ExchangeRate retrieve(String currency) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return retrieve(currency, null);
+  }
+
+  public static ExchangeRate retrieve(String currency, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.GET, instanceURL(ExchangeRate.class, currency), null,
+        ExchangeRate.class, options);
   }
 }

@@ -86,6 +86,26 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
     return list(params, options);
   }
 
+  public Subscription cancel(Map<String, Object> params) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return cancel(params, (RequestOptions) null);
+  }
+
+  public Subscription cancel(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
+    return request(RequestMethod.DELETE, instanceURL(Subscription.class, id), params,
+        Subscription.class, options);
+  }
+
+  @Deprecated
+  public Subscription cancel(Map<String, Object> params, String apiKey)
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
+    return cancel(params, RequestOptions.builder().setApiKey(apiKey).build());
+  }
+
   public static Subscription create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -97,6 +117,35 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, classURL(Subscription.class), params, Subscription.class,
         options);
+  }
+
+  public void deleteDiscount() throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    deleteDiscount((RequestOptions) null);
+  }
+
+  public void deleteDiscount(RequestOptions options) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    request(RequestMethod.DELETE, String.format("%s/discount", instanceURL(Subscription.class, id)),
+        null, Discount.class, options);
+  }
+
+  /**
+   * Deletes the subscription's discount.
+   *
+   * @deprecated Use {@link #deleteDiscount(RequestOptions)} instead.
+   */
+  @Deprecated
+  public void deleteDiscount(String apiKey) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    RequestOptions result = null;
+    if (apiKey != null) {
+      result = RequestOptions.builder().setApiKey(apiKey).build();
+    }
+    deleteDiscount(result);
   }
 
   public static SubscriptionCollection list(Map<String, Object> params)
@@ -154,54 +203,5 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, instanceURL(Subscription.class, id), params,
         Subscription.class, options);
-  }
-
-  public Subscription cancel(Map<String, Object> params) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return cancel(params, (RequestOptions) null);
-  }
-
-  @Deprecated
-  public Subscription cancel(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
-    return cancel(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  public Subscription cancel(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
-    return request(RequestMethod.DELETE, instanceURL(Subscription.class, id), params,
-        Subscription.class, options);
-  }
-
-  public void deleteDiscount() throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    deleteDiscount((RequestOptions) null);
-  }
-
-  /**
-   * Deletes the subscription's discount.
-   *
-   * @deprecated Use {@link #deleteDiscount(RequestOptions)} instead.
-   */
-  @Deprecated
-  public void deleteDiscount(String apiKey) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    RequestOptions result = null;
-    if (apiKey != null) {
-      result = RequestOptions.builder().setApiKey(apiKey).build();
-    }
-    deleteDiscount(result);
-  }
-
-  public void deleteDiscount(RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    request(RequestMethod.DELETE, String.format("%s/discount", instanceURL(Subscription.class, id)),
-        null, Discount.class, options);
   }
 }

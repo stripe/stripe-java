@@ -53,6 +53,21 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
   }
   // </editor-fold>
 
+  @Deprecated
+  public static SKUCollection all(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return list(params, null);
+  }
+
+  @Deprecated
+  public static SKUCollection all(Map<String, Object> params,
+                  RequestOptions options) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return list(params, options);
+  }
+
   public static SKU create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -63,6 +78,32 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, classURL(SKU.class), params, SKU.class, options);
+  }
+
+  public DeletedSKU delete()
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return delete(null);
+  }
+
+  public DeletedSKU delete(RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.DELETE, instanceURL(SKU.class, this.id), null, DeletedSKU.class,
+        options);
+  }
+
+  public static SKUCollection list(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return list(params, null);
+  }
+
+  public static SKUCollection list(Map<String, Object> params,
+                   RequestOptions options) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return requestCollection(classURL(SKU.class), params, SKUCollection.class, options);
   }
 
   public static SKU retrieve(String id)
@@ -95,46 +136,5 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, instanceURL(SKU.class, this.id), params, SKU.class, options);
-  }
-
-  public DeletedSKU delete()
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return delete(null);
-  }
-
-  public DeletedSKU delete(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.DELETE, instanceURL(SKU.class, this.id), null, DeletedSKU.class,
-        options);
-  }
-
-  public static SKUCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, null);
-  }
-
-  public static SKUCollection list(Map<String, Object> params,
-                   RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return requestCollection(classURL(SKU.class), params, SKUCollection.class, options);
-  }
-
-  @Deprecated
-  public static SKUCollection all(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, null);
-  }
-
-  @Deprecated
-  public static SKUCollection all(Map<String, Object> params,
-                  RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return list(params, options);
   }
 }

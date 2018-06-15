@@ -98,42 +98,37 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
   }
   // </editor-fold>
 
-  public List<PlanTier> getTiers() {
-    return tiers;
+  @Deprecated
+  public static PlanCollection all(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return list(params, null);
   }
 
-  public void setTiers(List<PlanTier> tiers) {
-    this.tiers = tiers;
+  @Deprecated
+  public static PlanCollection all(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return list(params, options);
   }
 
-  public String getTiersMode() {
-    return tiersMode;
-  }
-
-  public void setTiersMode(String tiersMode) {
-    this.tiersMode = tiersMode;
-  }
-
-  public PlanTransformUsage getTransformUsage() {
-    return transformUsage;
-  }
-
-  public void setTransformUsage(PlanTransformUsage transformUsage) {
-    this.transformUsage = transformUsage;
-  }
-
-  public String getUsageType() {
-    return usageType;
-  }
-
-  public void setUsageType(String usageType) {
-    this.usageType = usageType;
+  @Deprecated
+  public static PlanCollection all(Map<String, Object> params, String apiKey)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return list(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
   public static Plan create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return create(params, (RequestOptions) null);
+  }
+
+  public static Plan create(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.POST, classURL(Plan.class), params, Plan.class, options);
   }
 
   @Deprecated
@@ -143,64 +138,10 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
     return create(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
-  public static Plan create(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, classURL(Plan.class), params, Plan.class, options);
-  }
-
-  public static Plan retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return retrieve(id, (RequestOptions) null);
-  }
-
-  @Deprecated
-  public static Plan retrieve(String id, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  public static Plan retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Plan.class, id), null, Plan.class, options);
-  }
-
-  @Override
-  public Plan update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return update(params, (RequestOptions) null);
-  }
-
-  @Deprecated
-  public Plan update(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return update(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  @Override
-  public Plan update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Plan.class, this.id), params, Plan.class,
-        options);
-  }
-
   public DeletedPlan delete() throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
     return delete((RequestOptions) null);
-  }
-
-  @Deprecated
-  public DeletedPlan delete(String apiKey) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return delete(RequestOptions.builder().setApiKey(apiKey).build());
   }
 
   public DeletedPlan delete(RequestOptions options) throws AuthenticationException,
@@ -208,6 +149,13 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
       APIException {
     return request(RequestMethod.DELETE, instanceURL(Plan.class, this.id), null, DeletedPlan.class,
         options);
+  }
+
+  @Deprecated
+  public DeletedPlan delete(String apiKey) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return delete(RequestOptions.builder().setApiKey(apiKey).build());
   }
 
   public static PlanCollection list(Map<String, Object> params)
@@ -222,24 +170,44 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
     return requestCollection(classURL(Plan.class), params, PlanCollection.class, options);
   }
 
-  @Deprecated
-  public static PlanCollection all(Map<String, Object> params)
+  public static Plan retrieve(String id) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return retrieve(id, (RequestOptions) null);
+  }
+
+  public static Plan retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return list(params, null);
+    return request(RequestMethod.GET, instanceURL(Plan.class, id), null, Plan.class, options);
   }
 
   @Deprecated
-  public static PlanCollection all(Map<String, Object> params, String apiKey)
+  public static Plan retrieve(String id, String apiKey)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return list(params, RequestOptions.builder().setApiKey(apiKey).build());
+    return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
+  }
+
+  @Override
+  public Plan update(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return update(params, (RequestOptions) null);
+  }
+
+  @Override
+  public Plan update(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.POST, instanceURL(Plan.class, this.id), params, Plan.class,
+        options);
   }
 
   @Deprecated
-  public static PlanCollection all(Map<String, Object> params, RequestOptions options)
+  public Plan update(Map<String, Object> params, String apiKey)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return list(params, options);
+    return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 }

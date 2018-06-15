@@ -37,18 +37,6 @@ public class ApplePayDomain extends APIResource implements HasId {
     return request(RequestMethod.POST, getClassURL(), params, ApplePayDomain.class, options);
   }
 
-  public static ApplePayDomain retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return retrieve(id, null);
-  }
-
-  public static ApplePayDomain retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, getInstanceURL(id), null, ApplePayDomain.class, options);
-  }
-
   public DeletedApplePayDomain delete() throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
@@ -72,6 +60,18 @@ public class ApplePayDomain extends APIResource implements HasId {
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return requestCollection(getClassURL(), params, ApplePayDomainCollection.class, options);
+  }
+
+  public static ApplePayDomain retrieve(String id) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return retrieve(id, null);
+  }
+
+  public static ApplePayDomain retrieve(String id, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.GET, getInstanceURL(id), null, ApplePayDomain.class, options);
   }
 
   private static String getClassURL() {

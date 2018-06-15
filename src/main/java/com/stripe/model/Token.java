@@ -37,17 +37,17 @@ public class Token extends APIResource implements HasId {
     return create(params, (RequestOptions) null);
   }
 
+  public static Token create(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.POST, classURL(Token.class), params, Token.class, options);
+  }
+
   @Deprecated
   public static Token create(Map<String, Object> params, String apiKey)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return create(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  public static Token create(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, classURL(Token.class), params, Token.class, options);
   }
 
   public static Token retrieve(String id) throws AuthenticationException,
@@ -56,16 +56,16 @@ public class Token extends APIResource implements HasId {
     return retrieve(id, (RequestOptions) null);
   }
 
+  public static Token retrieve(String id, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.GET, instanceURL(Token.class, id), null, Token.class, options);
+  }
+
   @Deprecated
   public static Token retrieve(String id, String apiKey)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  public static Token retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Token.class, id), null, Token.class, options);
   }
 }
