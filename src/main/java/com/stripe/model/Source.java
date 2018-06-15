@@ -33,7 +33,8 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
   String usage;
 
   // Type-specific properties
-  Map<String, String> typeData;
+  @Getter(onMethod = @__({@Override})) @Setter(onMethod = @__({@Override}))
+      Map<String, String> typeData;
 
   // APIResource methods
 
@@ -100,6 +101,7 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
    * {@link InvalidRequestException}. Call {@link #detach} to detach the source from a
    * customer object.
    */
+  @Override
   public DeletedExternalAccount delete(RequestOptions options) throws
       AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

@@ -19,7 +19,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Topup extends APIResource implements MetadataStore<Topup>, HasId {
-  String id;
+  @Getter(onMethod = @__({@Override})) String id;
   String object;
   Integer amount;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
@@ -31,7 +31,7 @@ public class Topup extends APIResource implements MetadataStore<Topup>, HasId {
   String failureCode;
   String failureMessage;
   Boolean livemode;
-  Map<String, String> metadata;
+  @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   Source source;
   String statementDescriptor;
   String status;

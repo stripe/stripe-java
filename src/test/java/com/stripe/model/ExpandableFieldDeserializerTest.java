@@ -24,6 +24,7 @@ public class ExpandableFieldDeserializerTest extends BaseStripeTest {
     String id;
     int bar;
 
+    @Override
     public String getId() {
       return id;
     }

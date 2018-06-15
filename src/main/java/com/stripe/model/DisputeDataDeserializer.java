@@ -16,6 +16,7 @@ public class DisputeDataDeserializer implements JsonDeserializer<Dispute> {
   /**
    * Deserializes a dispute JSON payload into a {@link Dispute} object.
    */
+  @Override
   public Dispute deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
       throws JsonParseException {
     Gson gson = new GsonBuilder()

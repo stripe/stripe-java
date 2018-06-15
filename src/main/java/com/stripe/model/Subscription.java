@@ -19,7 +19,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Subscription extends APIResource implements MetadataStore<Subscription>, HasId {
-  String id;
+  @Getter(onMethod = @__({@Override})) String id;
   String object;
   Double applicationFeePercent;
   String billing;
@@ -34,7 +34,7 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
   Discount discount;
   Long endedAt;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) SubscriptionItemCollection items;
-  Map<String, String> metadata;
+  @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   Plan plan;
   Integer quantity;
   Long start;
@@ -134,6 +134,7 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
         Subscription.class, options);
   }
 
+  @Override
   public Subscription update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -147,6 +148,7 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
     return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
+  @Override
   public Subscription update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

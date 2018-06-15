@@ -11,6 +11,7 @@ public class ExpandableFieldSerializer implements JsonSerializer<ExpandableField
   /**
    * Serializes an expandable attribute into a JSON string.
    */
+  @Override
   public JsonElement serialize(ExpandableField<?> src, Type typeOfSrc,
       JsonSerializationContext context) {
     if (src.isExpanded()) {

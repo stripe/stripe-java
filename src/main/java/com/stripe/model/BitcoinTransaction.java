@@ -10,7 +10,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class BitcoinTransaction extends APIResource implements HasId {
-  String id;
+  @Getter(onMethod = @__({@Override})) String id;
   Long amount;
   Long bitcoinAmount;
   Long created;

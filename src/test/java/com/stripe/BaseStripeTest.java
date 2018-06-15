@@ -490,6 +490,7 @@ public class BaseStripeTest {
     /**
      * Informs if this matcher accepts the given argument.
      */
+    @Override
     public boolean matches(Map<String,Object> paramMap) {
       if (this.other == null) {
         // If the matcher was constructed with null, accept any params
@@ -514,6 +515,7 @@ public class BaseStripeTest {
     /**
      * Informs if this matcher accepts the given argument.
      */
+    @Override
     public boolean matches(RequestOptions requestOptions) {
       if (this.other == null) {
         // If the matcher was constructed with null, accept any options

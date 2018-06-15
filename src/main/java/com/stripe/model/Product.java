@@ -20,7 +20,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Product extends APIResource implements HasId, MetadataStore<Product> {
-  String id;
+  @Getter(onMethod = @__({@Override})) String id;
   String object;
   Boolean active;
   List<String> attributes;
@@ -30,7 +30,7 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
   String description;
   List<String> images;
   Boolean livemode;
-  Map<String, String> metadata;
+  @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   String name;
   PackageDimensions packageDimensions;
   Boolean shippable;
@@ -74,12 +74,14 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
     return request(RequestMethod.GET, instanceURL(Product.class, id), null, Product.class, options);
   }
 
+  @Override
   public Product update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return update(params, null);
   }
 
+  @Override
   public Product update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

@@ -19,7 +19,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class FeeRefund extends APIResource implements MetadataStore<ApplicationFee>, HasId {
-  String id;
+  @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long amount;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
@@ -27,7 +27,7 @@ public class FeeRefund extends APIResource implements MetadataStore<ApplicationF
   String currency;
   Long created;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<ApplicationFee> fee;
-  Map<String, String> metadata;
+  @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
 
   // <editor-fold desc="balanceTransaction">
   public String getBalanceTransaction() {
@@ -65,6 +65,7 @@ public class FeeRefund extends APIResource implements MetadataStore<ApplicationF
   }
   // </editor-fold>
 
+  @Override
   public FeeRefund update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -78,6 +79,7 @@ public class FeeRefund extends APIResource implements MetadataStore<ApplicationF
     return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
+  @Override
   public FeeRefund update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

@@ -11,6 +11,7 @@ public class StripeRawJsonObjectDeserializer implements JsonDeserializer<StripeR
   /**
    * Deserializes a JSON payload into a {@link StripeRawJsonObject} object.
    */
+  @Override
   public StripeRawJsonObject deserialize(JsonElement json, Type typeOfT,
       JsonDeserializationContext context)
       throws JsonParseException {

@@ -59,6 +59,7 @@ public class Card extends ExternalAccount {
   @Deprecated
   String type;
 
+  @Override
   public Card update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -72,12 +73,14 @@ public class Card extends ExternalAccount {
     return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
+  @Override
   public Card update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, this.getInstanceURL(), params, Card.class, options);
   }
 
+  @Override
   public DeletedCard delete()
       throws AuthenticationException, InvalidRequestException, APIConnectionException,
       CardException, APIException {
@@ -91,6 +94,7 @@ public class Card extends ExternalAccount {
     return delete(RequestOptions.builder().setApiKey(apiKey).build());
   }
 
+  @Override
   public DeletedCard delete(RequestOptions options)
       throws AuthenticationException, InvalidRequestException, APIConnectionException,
       CardException, APIException {

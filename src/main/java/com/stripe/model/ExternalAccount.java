@@ -18,11 +18,11 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class ExternalAccount extends APIResource implements HasId, MetadataStore<ExternalAccount> {
-  String id;
+  @Getter(onMethod = @__({@Override})) String id;
   String object;
   String account;
   String customer;
-  Map<String, String> metadata;
+  @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
 
   public ExternalAccount verify(Map<String, Object> params) throws
       AuthenticationException, InvalidRequestException,
@@ -50,12 +50,14 @@ public class ExternalAccount extends APIResource implements HasId, MetadataStore
     }
   }
 
+  @Override
   public ExternalAccount update(Map<String, Object> params) throws
       AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return update(params, null);
   }
 
+  @Override
   public ExternalAccount update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

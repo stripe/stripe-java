@@ -21,7 +21,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Account extends APIResource implements HasId, MetadataStore<Account> {
-  String id;
+  @Getter(onMethod = @__({@Override})) String id;
   String object;
   String businessLogo;
   String businessName;
@@ -40,7 +40,7 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
   ExternalAccountCollection externalAccounts;
   Keys keys;
   LegalEntity legalEntity;
-  Map<String, String> metadata;
+  @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   Boolean payoutsEnabled;
   AccountPayoutSchedule payoutSchedule;
   String productDescription;
@@ -155,12 +155,14 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
         options);
   }
 
+  @Override
   public Account update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return update(params, null);
   }
 
+  @Override
   public Account update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

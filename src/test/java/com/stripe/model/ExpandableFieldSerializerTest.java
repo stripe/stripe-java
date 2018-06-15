@@ -16,6 +16,7 @@ public class ExpandableFieldSerializerTest extends BaseStripeTest {
     @SuppressWarnings("unused")
     int bar;
 
+    @Override
     public String getId() {
       return id;
     }

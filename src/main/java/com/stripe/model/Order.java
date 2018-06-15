@@ -20,7 +20,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Order extends APIResource implements HasId, MetadataStore<Order> {
-  String id;
+  @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long amount;
   Long amountReturned;
@@ -34,7 +34,7 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
   String externalCouponCode;
   List<OrderItem> items;
   Boolean livemode;
-  Map<String, String> metadata;
+  @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   OrderReturnCollection returns;
   String selectedShippingMethod;
   ShippingDetails shipping;
@@ -110,13 +110,14 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
     return request(RequestMethod.GET, instanceURL(Order.class, id), params, Order.class, options);
   }
 
+  @Override
   public Order update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return update(params, null);
   }
 
-  @Deprecated
+  @Override
   public Order update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

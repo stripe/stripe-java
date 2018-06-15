@@ -19,14 +19,14 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Reversal extends APIResource implements MetadataStore<Transfer>, HasId {
-  String id;
+  @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long amount;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
       ExpandableField<BalanceTransaction> balanceTransaction;
   Long created;
   String currency;
-  Map<String, String> metadata;
+  @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Transfer> transfer;
 
   // <editor-fold desc="balanceTransaction">
@@ -65,6 +65,7 @@ public class Reversal extends APIResource implements MetadataStore<Transfer>, Ha
   }
   // </editor-fold>
 
+  @Override
   public Reversal update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -78,6 +79,7 @@ public class Reversal extends APIResource implements MetadataStore<Transfer>, Ha
     return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
+  @Override
   public Reversal update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

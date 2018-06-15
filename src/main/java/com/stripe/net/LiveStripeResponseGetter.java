@@ -63,6 +63,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
   private static final SSLSocketFactory socketFactory = new StripeSSLSocketFactory();
 
+  @Override
   public <T> T request(
       APIResource.RequestMethod method,
       String url,
@@ -75,6 +76,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     return staticRequest(method, url, params, clazz, type, options);
   }
 
+  @Override
   public <T> T oauthRequest(
       APIResource.RequestMethod method,
       String url,
