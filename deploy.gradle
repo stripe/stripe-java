@@ -97,8 +97,8 @@ afterEvaluate { project ->
         sign configurations.archives
     }
 
-    task makeJavadocs(type: Javadoc) {
-        source = sourceSets.main.allJava
+    task makeJavadocs(type: Javadoc, dependsOn: delombok) {
+        source = delombok.outputDir
         classpath = configurations.compile
         failOnError = true
     }
