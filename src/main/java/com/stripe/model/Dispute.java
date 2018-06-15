@@ -89,6 +89,45 @@ public class Dispute extends APIResource implements HasId {
     return isChargeRefundable;
   }
 
+  @Deprecated
+  public static DisputeCollection all(Map<String, Object> params) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return list(params, null);
+  }
+
+  @Deprecated
+  public static DisputeCollection all(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
+    return list(params, options);
+  }
+
+  public Dispute close()
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return close(null);
+  }
+
+  public Dispute close(RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.POST, String.format("%s/close",
+        instanceURL(Dispute.class, this.getId())), null, Dispute.class, options);
+  }
+
+  public static DisputeCollection list(Map<String, Object> params) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return list(params, null);
+  }
+
+  public static DisputeCollection list(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
+    return requestCollection(classURL(Dispute.class), params, DisputeCollection.class, options);
+  }
+
   public static Dispute retrieve(String id) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
@@ -108,32 +147,6 @@ public class Dispute extends APIResource implements HasId {
         options);
   }
 
-  public static DisputeCollection list(Map<String, Object> params) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return list(params, null);
-  }
-
-  public static DisputeCollection list(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
-    return requestCollection(classURL(Dispute.class), params, DisputeCollection.class, options);
-  }
-
-  @Deprecated
-  public static DisputeCollection all(Map<String, Object> params) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return list(params, null);
-  }
-
-  @Deprecated
-  public static DisputeCollection all(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
-    return list(params, options);
-  }
-
   public Dispute update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -145,18 +158,5 @@ public class Dispute extends APIResource implements HasId {
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, instanceURL(Dispute.class, this.getId()),
         params, Dispute.class, options);
-  }
-
-  public Dispute close()
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return close(null);
-  }
-
-  public Dispute close(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, String.format("%s/close",
-        instanceURL(Dispute.class, this.getId())), null, Dispute.class, options);
   }
 }

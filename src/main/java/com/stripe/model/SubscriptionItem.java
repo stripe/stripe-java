@@ -37,6 +37,31 @@ public class SubscriptionItem extends APIResource implements HasId {
         SubscriptionItem.class, options);
   }
 
+  public DeletedSubscriptionItem delete() throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return delete(null, null);
+  }
+
+  public DeletedSubscriptionItem delete(RequestOptions options) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return delete(null, options);
+  }
+
+  public DeletedSubscriptionItem delete(Map<String, Object> params) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return delete(params, null);
+  }
+
+  public DeletedSubscriptionItem delete(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
+    return request(RequestMethod.DELETE, instanceURL(SubscriptionItem.class, id), params,
+        DeletedSubscriptionItem.class, options);
+  }
+
   public static SubscriptionItemCollection list(Map<String, Object> params)
       throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
@@ -76,30 +101,5 @@ public class SubscriptionItem extends APIResource implements HasId {
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, instanceURL(SubscriptionItem.class, id), params,
         SubscriptionItem.class, options);
-  }
-
-  public DeletedSubscriptionItem delete() throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return delete(null, null);
-  }
-
-  public DeletedSubscriptionItem delete(Map<String, Object> params) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return delete(params, null);
-  }
-
-  public DeletedSubscriptionItem delete(RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return delete(null, options);
-  }
-
-  public DeletedSubscriptionItem delete(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
-    return request(RequestMethod.DELETE, instanceURL(SubscriptionItem.class, id), params,
-        DeletedSubscriptionItem.class, options);
   }
 }

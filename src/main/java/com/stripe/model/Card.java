@@ -60,31 +60,17 @@ public class Card extends ExternalAccount {
   String type;
 
   @Override
-  public Card update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return update(params, (RequestOptions) null);
-  }
-
-  @Deprecated
-  public Card update(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return update(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  @Override
-  public Card update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, this.getInstanceURL(), params, Card.class, options);
-  }
-
-  @Override
   public DeletedCard delete()
       throws AuthenticationException, InvalidRequestException, APIConnectionException,
       CardException, APIException {
     return delete((RequestOptions) null);
+  }
+
+  @Override
+  public DeletedCard delete(RequestOptions options)
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
+    return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedCard.class, options);
   }
 
   @Deprecated
@@ -95,10 +81,24 @@ public class Card extends ExternalAccount {
   }
 
   @Override
-  public DeletedCard delete(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
-    return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedCard.class, options);
+  public Card update(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return update(params, (RequestOptions) null);
+  }
+
+  @Override
+  public Card update(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.POST, this.getInstanceURL(), params, Card.class, options);
+  }
+
+  @Deprecated
+  public Card update(Map<String, Object> params, String apiKey)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
   @Override

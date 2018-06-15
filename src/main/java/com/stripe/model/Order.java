@@ -80,6 +80,21 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
   }
   // </editor-fold>
 
+  @Deprecated
+  public static OrderCollection all(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return list(params, null);
+  }
+
+  @Deprecated
+  public static OrderCollection all(Map<String, Object> params,
+                    RequestOptions options) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return list(params, options);
+  }
+
   public static Order create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -90,6 +105,32 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, classURL(Order.class), params, Order.class, options);
+  }
+
+  public static OrderCollection list(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return list(params, null);
+  }
+
+  public static OrderCollection list(Map<String, Object> params,
+                     RequestOptions options) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return requestCollection(classURL(Order.class), params, OrderCollection.class, options);
+  }
+
+  public Order pay(Map<String, Object> params) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return this.pay(params, null);
+  }
+
+  public Order pay(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
+    return request(RequestMethod.POST, String.format("%s/pay",
+        instanceURL(Order.class, this.getId())), params, Order.class, options);
   }
 
   public static Order retrieve(String id)
@@ -110,6 +151,19 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
     return request(RequestMethod.GET, instanceURL(Order.class, id), params, Order.class, options);
   }
 
+  public OrderReturn returnOrder(Map<String, Object> params) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return this.returnOrder(params, null);
+  }
+
+  public OrderReturn returnOrder(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
+    return request(RequestMethod.POST, String.format("%s/returns",
+        instanceURL(Order.class, this.getId())), params, OrderReturn.class, options);
+  }
+
   @Override
   public Order update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
@@ -123,59 +177,5 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, instanceURL(Order.class, this.id), params, Order.class,
         options);
-  }
-
-  public static OrderCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, null);
-  }
-
-  public static OrderCollection list(Map<String, Object> params,
-                     RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return requestCollection(classURL(Order.class), params, OrderCollection.class, options);
-  }
-
-  @Deprecated
-  public static OrderCollection all(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, null);
-  }
-
-  @Deprecated
-  public static OrderCollection all(Map<String, Object> params,
-                    RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return list(params, options);
-  }
-
-  public Order pay(Map<String, Object> params) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return this.pay(params, null);
-  }
-
-  public Order pay(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
-    return request(RequestMethod.POST, String.format("%s/pay",
-        instanceURL(Order.class, this.getId())), params, Order.class, options);
-  }
-
-  public OrderReturn returnOrder(Map<String, Object> params) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return this.returnOrder(params, null);
-  }
-
-  public OrderReturn returnOrder(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
-    return request(RequestMethod.POST, String.format("%s/returns",
-        instanceURL(Order.class, this.getId())), params, OrderReturn.class, options);
   }
 }

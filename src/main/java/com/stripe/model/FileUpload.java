@@ -38,18 +38,31 @@ public class FileUpload extends APIResource implements HasId {
   }
   // </editor-fold>
 
+  @Deprecated
+  public static FileUploadCollection all(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return list(params, null);
+  }
+
+  @Deprecated
+  public static FileUploadCollection all(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return list(params, options);
+  }
+
+  @Deprecated
+  public static FileUploadCollection all(Map<String, Object> params, String apiKey)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return list(params, RequestOptions.builder().setApiKey(apiKey).build());
+  }
+
   public static FileUpload create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return create(params, (RequestOptions) null);
-  }
-
-  @Deprecated
-  public static FileUpload create(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    RequestOptions options = RequestOptions.builder().setApiKey(apiKey).build();
-    return create(params, options);
   }
 
   public static FileUpload create(Map<String, Object> params,
@@ -60,25 +73,12 @@ public class FileUpload extends APIResource implements HasId {
         params, FileUpload.class, options);
   }
 
-  public static FileUpload retrieve(String id)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return retrieve(id, (RequestOptions) null);
-  }
-
   @Deprecated
-  public static FileUpload retrieve(String id, String apiKey)
+  public static FileUpload create(Map<String, Object> params, String apiKey)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     RequestOptions options = RequestOptions.builder().setApiKey(apiKey).build();
-    return retrieve(id, options);
-  }
-
-  public static FileUpload retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(FileUpload.class, id, Stripe.getUploadBase()),
-        null, FileUpload.class, options);
+    return create(params, options);
   }
 
   public static FileUploadCollection list(Map<String, Object> params)
@@ -94,25 +94,24 @@ public class FileUpload extends APIResource implements HasId {
         params, FileUploadCollection.class, options);
   }
 
-  @Deprecated
-  public static FileUploadCollection all(Map<String, Object> params)
+  public static FileUpload retrieve(String id)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return list(params, null);
+    return retrieve(id, (RequestOptions) null);
+  }
+
+  public static FileUpload retrieve(String id, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.GET, instanceURL(FileUpload.class, id, Stripe.getUploadBase()),
+        null, FileUpload.class, options);
   }
 
   @Deprecated
-  public static FileUploadCollection all(Map<String, Object> params, String apiKey)
+  public static FileUpload retrieve(String id, String apiKey)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return list(params, RequestOptions.builder().setApiKey(apiKey).build());
+    RequestOptions options = RequestOptions.builder().setApiKey(apiKey).build();
+    return retrieve(id, options);
   }
-
-  @Deprecated
-  public static FileUploadCollection all(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, options);
-  }
-
 }

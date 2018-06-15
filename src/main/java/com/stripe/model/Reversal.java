@@ -72,18 +72,18 @@ public class Reversal extends APIResource implements MetadataStore<Transfer>, Ha
     return update(params, (RequestOptions) null);
   }
 
-  @Deprecated
-  public Reversal update(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return update(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
   @Override
   public Reversal update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, this.getInstanceURL(), params, Reversal.class, options);
+  }
+
+  @Deprecated
+  public Reversal update(Map<String, Object> params, String apiKey)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
   protected String getInstanceURL() {

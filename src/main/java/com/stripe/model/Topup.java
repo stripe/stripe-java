@@ -66,6 +66,18 @@ public class Topup extends APIResource implements MetadataStore<Topup>, HasId {
     return request(RequestMethod.POST, classURL(Topup.class), params, Topup.class, options);
   }
 
+  public static TopupCollection list(Map<String, Object> params)
+          throws AuthenticationException, InvalidRequestException,
+          APIConnectionException, CardException, APIException {
+    return list(params, null);
+  }
+
+  public static TopupCollection list(Map<String, Object> params, RequestOptions options)
+          throws AuthenticationException, InvalidRequestException,
+          APIConnectionException, CardException, APIException {
+    return requestCollection(classURL(Topup.class), params, TopupCollection.class, options);
+  }
+
   public static Topup retrieve(String id) throws AuthenticationException,
           InvalidRequestException, APIConnectionException, CardException,
           APIException {
@@ -82,18 +94,6 @@ public class Topup extends APIResource implements MetadataStore<Topup>, HasId {
           throws AuthenticationException, InvalidRequestException,
           APIConnectionException, CardException, APIException {
     return request(RequestMethod.GET, instanceURL(Topup.class, id), params, Topup.class, options);
-  }
-
-  public static TopupCollection list(Map<String, Object> params)
-          throws AuthenticationException, InvalidRequestException,
-          APIConnectionException, CardException, APIException {
-    return list(params, null);
-  }
-
-  public static TopupCollection list(Map<String, Object> params, RequestOptions options)
-          throws AuthenticationException, InvalidRequestException,
-          APIConnectionException, CardException, APIException {
-    return requestCollection(classURL(Topup.class), params, TopupCollection.class, options);
   }
 
   @Override

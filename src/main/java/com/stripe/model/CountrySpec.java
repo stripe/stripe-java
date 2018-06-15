@@ -27,19 +27,6 @@ public class CountrySpec extends APIResource implements HasId {
   List<String> supportedPaymentMethods;
   VerificationFields verificationFields;
 
-  public static CountrySpec retrieve(String country) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return retrieve(country, null);
-  }
-
-  public static CountrySpec retrieve(String country, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(CountrySpec.class, country), null,
-        CountrySpec.class, options);
-  }
-
   public static CountrySpecCollection list(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -51,5 +38,18 @@ public class CountrySpec extends APIResource implements HasId {
       APIConnectionException, CardException, APIException {
     return requestCollection(classURL(CountrySpec.class), params, CountrySpecCollection.class,
         options);
+  }
+
+  public static CountrySpec retrieve(String country) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return retrieve(country, null);
+  }
+
+  public static CountrySpec retrieve(String country, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.GET, instanceURL(CountrySpec.class, country), null,
+        CountrySpec.class, options);
   }
 }

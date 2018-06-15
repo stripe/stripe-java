@@ -50,6 +50,21 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
   }
   // </editor-fold>
 
+  @Deprecated
+  public static ProductCollection all(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return list(params, null);
+  }
+
+  @Deprecated
+  public static ProductCollection all(Map<String, Object> params,
+                    RequestOptions options) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return list(params, options);
+  }
+
   public static Product create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -60,33 +75,6 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, classURL(Product.class), params, Product.class, options);
-  }
-
-  public static Product retrieve(String id)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return retrieve(id, null);
-  }
-
-  public static Product retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Product.class, id), null, Product.class, options);
-  }
-
-  @Override
-  public Product update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return update(params, null);
-  }
-
-  @Override
-  public Product update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Product.class, this.id), params,
-        Product.class, options);
   }
 
   public DeletedProduct delete()
@@ -115,18 +103,30 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
     return requestCollection(classURL(Product.class), params, ProductCollection.class, options);
   }
 
-  @Deprecated
-  public static ProductCollection all(Map<String, Object> params)
+  public static Product retrieve(String id)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return list(params, null);
+    return retrieve(id, null);
   }
 
-  @Deprecated
-  public static ProductCollection all(Map<String, Object> params,
-                    RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return list(params, options);
+  public static Product retrieve(String id, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.GET, instanceURL(Product.class, id), null, Product.class, options);
+  }
+
+  @Override
+  public Product update(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return update(params, null);
+  }
+
+  @Override
+  public Product update(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.POST, instanceURL(Product.class, this.id), params,
+        Product.class, options);
   }
 }

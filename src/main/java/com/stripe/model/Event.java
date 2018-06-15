@@ -35,23 +35,25 @@ public class Event extends APIResource implements HasId {
   @Deprecated
   String userId;
 
-  public static Event retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return retrieve(id, (RequestOptions) null);
+  @Deprecated
+  public static EventCollection all(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return list(params, null);
   }
 
   @Deprecated
-  public static Event retrieve(String id, String apiKey)
+  public static EventCollection all(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
+    return list(params, options);
   }
 
-  public static Event retrieve(String id, RequestOptions options)
+  @Deprecated
+  public static EventCollection all(Map<String, Object> params, String apiKey)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Event.class, id), null, Event.class, options);
+    return list(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
   public static EventCollection list(Map<String, Object> params)
@@ -66,24 +68,22 @@ public class Event extends APIResource implements HasId {
     return requestCollection(classURL(Event.class), params, EventCollection.class, options);
   }
 
-  @Deprecated
-  public static EventCollection all(Map<String, Object> params)
+  public static Event retrieve(String id) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return retrieve(id, (RequestOptions) null);
+  }
+
+  public static Event retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return list(params, null);
+    return request(RequestMethod.GET, instanceURL(Event.class, id), null, Event.class, options);
   }
 
   @Deprecated
-  public static EventCollection all(Map<String, Object> params, String apiKey)
+  public static Event retrieve(String id, String apiKey)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return list(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  @Deprecated
-  public static EventCollection all(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, options);
+    return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
   }
 }

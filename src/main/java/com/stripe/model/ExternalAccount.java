@@ -24,6 +24,34 @@ public class ExternalAccount extends APIResource implements HasId, MetadataStore
   String customer;
   @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
 
+  public DeletedExternalAccount delete() throws AuthenticationException,
+      InvalidRequestException, APIConnectionException,
+      CardException, APIException {
+    return delete(null);
+  }
+
+  public DeletedExternalAccount delete(RequestOptions options) throws
+      AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedExternalAccount.class,
+        options);
+  }
+
+  @Override
+  public ExternalAccount update(Map<String, Object> params) throws
+      AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return update(params, null);
+  }
+
+  @Override
+  public ExternalAccount update(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.POST, this.getInstanceURL(), params, ExternalAccount.class,
+        options);
+  }
+
   public ExternalAccount verify(Map<String, Object> params) throws
       AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -48,34 +76,6 @@ public class ExternalAccount extends APIResource implements HasId, MetadataStore
           "Only customer bank accounts can be verified in this manner.",
           null, null, null, 0, null);
     }
-  }
-
-  @Override
-  public ExternalAccount update(Map<String, Object> params) throws
-      AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return update(params, null);
-  }
-
-  @Override
-  public ExternalAccount update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, this.getInstanceURL(), params, ExternalAccount.class,
-        options);
-  }
-
-  public DeletedExternalAccount delete() throws AuthenticationException,
-      InvalidRequestException, APIConnectionException,
-      CardException, APIException {
-    return delete(null);
-  }
-
-  public DeletedExternalAccount delete(RequestOptions options) throws
-      AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedExternalAccount.class,
-        options);
   }
 
   protected String getInstanceURL() {

@@ -69,44 +69,18 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
   }
   // </editor-fold>
 
-  @Override
-  public Refund update(Map<String, Object> params)
+  @Deprecated
+  public static RefundCollection all(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return update(params, (RequestOptions) null);
+    return list(params, null);
   }
 
   @Deprecated
-  public Refund update(Map<String, Object> params, String apiKey)
+  public static RefundCollection all(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return update(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  @Override
-  public Refund update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Refund.class, id), params, Refund.class,
-        options);
-  }
-
-  public static Refund retrieve(String id)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return retrieve(id, null);
-  }
-
-  public static Refund retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Refund.class, id), null, Refund.class, options);
-  }
-
-  public static Refund retrieve(String id, Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Refund.class, id), params, Refund.class, options);
+    return list(params, options);
   }
 
   public static Refund create(Map<String, Object> params)
@@ -133,17 +107,43 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
     return requestCollection(classURL(Refund.class), params, RefundCollection.class, options);
   }
 
-  @Deprecated
-  public static RefundCollection all(Map<String, Object> params)
+  public static Refund retrieve(String id)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return list(params, null);
+    return retrieve(id, null);
+  }
+
+  public static Refund retrieve(String id, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.GET, instanceURL(Refund.class, id), null, Refund.class, options);
+  }
+
+  public static Refund retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.GET, instanceURL(Refund.class, id), params, Refund.class, options);
+  }
+
+  @Override
+  public Refund update(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return update(params, (RequestOptions) null);
   }
 
   @Deprecated
-  public static RefundCollection all(Map<String, Object> params, RequestOptions options)
+  public Refund update(Map<String, Object> params, String apiKey)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
-    return list(params, options);
+    return update(params, RequestOptions.builder().setApiKey(apiKey).build());
+  }
+
+  @Override
+  public Refund update(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.POST, instanceURL(Refund.class, id), params, Refund.class,
+        options);
   }
 }

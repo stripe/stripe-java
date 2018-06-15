@@ -55,47 +55,6 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
     return request(RequestMethod.POST, classURL(Source.class), params, Source.class, options);
   }
 
-  public static Source retrieve(String id)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return retrieve(id, null);
-  }
-
-  public static Source retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Source.class, id), null, Source.class, options);
-  }
-
-  @Override
-  public Source verify(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return verify(params, null);
-  }
-
-  @Override
-  public Source verify(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, String.format("%s/verify", this.getSourceInstanceURL()),
-        params, Source.class, options);
-  }
-
-  @Override
-  public Source update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return update(params, null);
-  }
-
-  @Override
-  public Source update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, this.getSourceInstanceURL(), params, Source.class, options);
-  }
-
   /**
    * Source objects cannot be deleted. Calling this method will raise an
    * {@link InvalidRequestException}. Call {@link #detach} to detach the source from a
@@ -124,7 +83,7 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
   }
 
   /**
-   * Detaches the source from its customer objects.
+   * Detaches the source from its customer object.
    */
   public Source detach(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
@@ -140,6 +99,18 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
     }
   }
 
+  public static Source retrieve(String id)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return retrieve(id, null);
+  }
+
+  public static Source retrieve(String id, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.GET, instanceURL(Source.class, id), null, Source.class, options);
+  }
+
   public SourceTransactionCollection sourceTransactions(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -152,5 +123,34 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
       APIConnectionException, CardException, APIException {
     String url = instanceURL(Source.class, this.getId()) + "/source_transactions";
     return requestCollection(url, params, SourceTransactionCollection.class, options);
+  }
+
+  @Override
+  public Source update(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return update(params, null);
+  }
+
+  @Override
+  public Source update(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.POST, this.getSourceInstanceURL(), params, Source.class, options);
+  }
+
+  @Override
+  public Source verify(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return verify(params, null);
+  }
+
+  @Override
+  public Source verify(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return request(RequestMethod.POST, String.format("%s/verify", this.getSourceInstanceURL()),
+        params, Source.class, options);
   }
 }

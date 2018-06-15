@@ -30,20 +30,6 @@ public class BankAccount extends ExternalAccount {
   Boolean validated;
 
   @Override
-  public BankAccount update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
-    return update(params, null);
-  }
-
-  @Override
-  public BankAccount update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
-    return request(RequestMethod.POST, this.getInstanceURL(), params, BankAccount.class, options);
-  }
-
-  @Override
   public DeletedBankAccount delete()
       throws AuthenticationException, InvalidRequestException, APIConnectionException,
       CardException, APIException {
@@ -56,5 +42,19 @@ public class BankAccount extends ExternalAccount {
       CardException, APIException {
     return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedBankAccount.class,
         options);
+  }
+
+  @Override
+  public BankAccount update(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
+    return update(params, null);
+  }
+
+  @Override
+  public BankAccount update(Map<String, Object> params, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException, APIConnectionException,
+      CardException, APIException {
+    return request(RequestMethod.POST, this.getInstanceURL(), params, BankAccount.class, options);
   }
 }

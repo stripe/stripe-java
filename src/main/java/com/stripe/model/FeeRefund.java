@@ -72,18 +72,18 @@ public class FeeRefund extends APIResource implements MetadataStore<ApplicationF
     return update(params, (RequestOptions) null);
   }
 
-  @Deprecated
-  public FeeRefund update(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return update(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
   @Override
   public FeeRefund update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, this.getInstanceURL(), params, FeeRefund.class, options);
+  }
+
+  @Deprecated
+  public FeeRefund update(Map<String, Object> params, String apiKey)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
   protected String getInstanceURL() {
