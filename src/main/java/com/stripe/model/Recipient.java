@@ -20,7 +20,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Recipient extends APIResource implements MetadataStore<Recipient>, HasId {
-  String id;
+  @Getter(onMethod = @__({@Override})) String id;
   String object;
   BankAccount activeAccount;
   RecipientCardCollection cards;
@@ -30,7 +30,7 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
   String description;
   String email;
   Boolean livemode;
-  Map<String, String> metadata;
+  @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Account> migratedTo;
   String name;
   String type;
@@ -118,6 +118,7 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
         options);
   }
 
+  @Override
   public Recipient update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -131,6 +132,7 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
     return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
+  @Override
   public Recipient update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

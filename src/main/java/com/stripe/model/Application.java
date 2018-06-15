@@ -8,6 +8,6 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Application extends StripeObject implements HasId {
-  String id;
+  @Getter(onMethod = @__({@Override})) String id;
   String name;
 }

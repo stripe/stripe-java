@@ -15,6 +15,7 @@ public class ExpandableFieldDeserializer implements JsonDeserializer<ExpandableF
    * Deserializes an expandable field JSON payload (i.e. either a string with just the ID, or a full
    * JSON object) into an {@link ExpandableField} object.
    */
+  @Override
   public ExpandableField<?> deserialize(JsonElement json, Type typeOfT,
       JsonDeserializationContext context) throws JsonParseException {
     if (json.isJsonNull()) {

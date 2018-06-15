@@ -20,7 +20,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
-  String id;
+  @Getter(onMethod = @__({@Override})) String id;
   String object;
   Boolean active;
   Long amount;
@@ -30,7 +30,7 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
   String interval;
   Integer intervalCount;
   Boolean livemode;
-  Map<String, String> metadata;
+  @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   String nickname;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Product> product;
   List<PlanTier> tiers;
@@ -168,6 +168,7 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
     return request(RequestMethod.GET, instanceURL(Plan.class, id), null, Plan.class, options);
   }
 
+  @Override
   public Plan update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -181,6 +182,7 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
     return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
+  @Override
   public Plan update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

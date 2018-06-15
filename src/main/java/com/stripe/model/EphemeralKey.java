@@ -19,7 +19,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class EphemeralKey extends APIResource implements HasId {
-  String id;
+  @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long created;
   Long expires;

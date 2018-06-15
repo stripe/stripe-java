@@ -12,7 +12,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class SourceMandateNotification extends APIResource implements HasId, HasSourceTypeData {
-  String id;
+  @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long amount;
   Long created;
@@ -23,5 +23,6 @@ public class SourceMandateNotification extends APIResource implements HasId, Has
   String type;
 
   // Type-specific properties
-  Map<String, String> typeData;
+  @Getter(onMethod = @__({@Override})) @Setter(onMethod = @__({@Override}))
+      Map<String, String> typeData;
 }

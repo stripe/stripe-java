@@ -21,7 +21,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Invoice extends APIResource implements MetadataStore<Invoice>, HasId {
-  String id;
+  @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long amountDue;
   Long amountPaid;
@@ -46,7 +46,7 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
   @SerializedName("invoice_pdf") String invoicePDF;
   InvoiceLineItemCollection lines;
   Boolean livemode;
-  Map<String, String> metadata;
+  @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   Long nextPaymentAttempt;
   String number;
   Boolean paid;
@@ -197,6 +197,7 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
         instanceURL(Invoice.class, this.getId())), params, Invoice.class, options);
   }
 
+  @Override
   public Invoice update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -210,6 +211,7 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
     return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
+  @Override
   public Invoice update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

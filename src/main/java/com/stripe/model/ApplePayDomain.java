@@ -19,7 +19,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class ApplePayDomain extends APIResource implements HasId {
-  String id;
+  @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long created;
   String domainName;

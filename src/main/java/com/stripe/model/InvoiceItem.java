@@ -19,7 +19,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class InvoiceItem extends APIResource implements MetadataStore<InvoiceItem>, HasId {
-  String id;
+  @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long amount;
   String currency;
@@ -29,7 +29,7 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
   Boolean discountable;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Invoice> invoice;
   Boolean livemode;
-  Map<String, String> metadata;
+  @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   InvoiceLineItemPeriod period;
   Plan plan;
   Boolean proration;
@@ -137,6 +137,7 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
         options);
   }
 
+  @Override
   public InvoiceItem update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -150,6 +151,7 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
     return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
+  @Override
   public InvoiceItem update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

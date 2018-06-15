@@ -117,6 +117,7 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
    * Deserializes the JSON payload contained in an event's {@code data} attribute into an
    * {@link EventData} instance.
    */
+  @Override
   public EventData deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
       throws JsonParseException {
     EventData eventData = new EventData();

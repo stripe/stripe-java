@@ -18,7 +18,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Event extends APIResource implements HasId {
-  String id;
+  @Getter(onMethod = @__({@Override})) String id;
   String object;
   String account;
   String apiVersion;

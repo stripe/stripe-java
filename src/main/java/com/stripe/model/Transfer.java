@@ -20,7 +20,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Transfer extends APIResource implements MetadataStore<Transfer>, HasId {
-  String id;
+  @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long amount;
   Long amountReversed;
@@ -37,7 +37,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
   String failureCode;
   String failureMessage;
   Boolean livemode;
-  Map<String, String> metadata;
+  @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   @Getter(AccessLevel.NONE) TransferReversalCollection reversals;
   Boolean reversed;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Charge> sourceTransaction;
@@ -244,6 +244,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
         Transfer.class, options);
   }
 
+  @Override
   public Transfer update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -257,6 +258,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
     return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
+  @Override
   public Transfer update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

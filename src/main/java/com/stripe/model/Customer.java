@@ -20,7 +20,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Customer extends APIResource implements MetadataStore<Customer>, HasId {
-  String id;
+  @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long accountBalance;
   String businessVatId;
@@ -34,7 +34,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
   Discount discount;
   String email;
   Boolean livemode;
-  Map<String, String> metadata;
+  @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   ShippingDetails shipping;
   ExternalAccountCollection sources;
   CustomerSubscriptionCollection subscriptions;
@@ -153,6 +153,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
         options);
   }
 
+  @Override
   public Customer update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -166,6 +167,7 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
     return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
+  @Override
   public Customer update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

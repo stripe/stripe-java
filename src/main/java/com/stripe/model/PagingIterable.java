@@ -14,6 +14,7 @@ public class PagingIterable<T extends HasId> implements Iterable<T> {
     this.page = page;
   }
 
+  @Override
   public Iterator<T> iterator() {
     return new PagingIterator<T>(page);
   }

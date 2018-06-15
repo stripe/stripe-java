@@ -36,6 +36,7 @@ public class SourceTypeDataDeserializer<T extends HasSourceTypeData>
   /**
    * Deserializes the type-specific data of a {@link Source} or {@link SourceTransaction} object.
    */
+  @Override
   public T deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
           throws JsonParseException {
     if (json.isJsonNull()) {

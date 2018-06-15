@@ -19,7 +19,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
-  String id;
+  @Getter(onMethod = @__({@Override})) String id;
   String object;
   Boolean active;
   Map<String, String> attributes;
@@ -28,7 +28,7 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
   String image;
   Inventory inventory;
   Boolean livemode;
-  Map<String, String> metadata;
+  @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   PackageDimensions packageDimensions;
   Integer price;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Product> product;
@@ -83,12 +83,14 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
     return request(RequestMethod.GET, instanceURL(SKU.class, id), params, SKU.class, options);
   }
 
+  @Override
   public SKU update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return update(params, null);
   }
 
+  @Override
   public SKU update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

@@ -19,7 +19,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Payout extends APIResource implements MetadataStore<Payout>, HasId {
-  String id;
+  @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long amount;
   Long arrivalDate;
@@ -34,7 +34,7 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
   String failureCode;
   String failureMessage;
   Boolean livemode;
-  Map<String, String> metadata;
+  @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   String method;
   String sourceType;
   String statementDescriptor;
@@ -153,12 +153,14 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
     return request(RequestMethod.GET, instanceURL(Payout.class, id), params, Payout.class, options);
   }
 
+  @Override
   public Payout update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return update(params, null);
   }
 
+  @Override
   public Payout update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

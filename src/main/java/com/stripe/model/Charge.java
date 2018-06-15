@@ -22,6 +22,7 @@ import lombok.Setter;
 public class Charge extends APIResource implements MetadataStore<Charge>, HasId {
   public static final String FRAUD_DETAILS = "fraud_details";
 
+  @Getter(onMethod = @__({@Override}))
   String id;
   String object;
   Long amount;
@@ -44,7 +45,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   FraudDetails fraudDetails;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Invoice> invoice;
   Boolean livemode;
-  Map<String, String> metadata;
+  @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Account> onBehalfOf;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Order> order;
   ChargeOutcome outcome;
@@ -367,6 +368,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     return request(RequestMethod.GET, instanceURL(Charge.class, id), params, Charge.class, options);
   }
 
+  @Override
   public Charge update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -380,6 +382,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
+  @Override
   public Charge update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {

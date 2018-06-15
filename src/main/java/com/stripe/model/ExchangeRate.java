@@ -18,7 +18,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class ExchangeRate extends APIResource implements HasId {
-  String id;
+  @Getter(onMethod = @__({@Override})) String id;
   String object;
   Map<String, Float> rates;
 

@@ -18,7 +18,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Coupon extends APIResource implements MetadataStore<Coupon>, HasId {
-  String id;
+  @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long amountOff;
   Long created;
@@ -27,7 +27,7 @@ public class Coupon extends APIResource implements MetadataStore<Coupon>, HasId 
   Integer durationInMonths;
   Boolean livemode;
   Long maxRedemptions;
-  Map<String, String> metadata;
+  @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   Integer percentOff;
   Long redeemBy;
   Integer timesRedeemed;
@@ -71,6 +71,7 @@ public class Coupon extends APIResource implements MetadataStore<Coupon>, HasId 
     return request(RequestMethod.GET, instanceURL(Coupon.class, id), null, Coupon.class, options);
   }
 
+  @Override
   public Coupon update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException, APIConnectionException,
       CardException, APIException {
@@ -84,6 +85,7 @@ public class Coupon extends APIResource implements MetadataStore<Coupon>, HasId 
     return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
+  @Override
   public Coupon update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException, APIConnectionException,
       CardException, APIException {
