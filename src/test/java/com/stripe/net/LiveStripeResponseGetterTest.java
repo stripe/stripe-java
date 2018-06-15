@@ -13,9 +13,9 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.RequestOptions.RequestOptionsBuilder;
 
 import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -53,7 +53,7 @@ public class LiveStripeResponseGetterTest {
 
   @Test
   public void testCreateQueryWithListParams() throws StripeException, UnsupportedEncodingException {
-    final List<String> nested = new LinkedList<String>();
+    final List<String> nested = new ArrayList<String>();
     nested.add("A");
     nested.add("B");
     nested.add("C");
@@ -95,7 +95,7 @@ public class LiveStripeResponseGetterTest {
     deepNestedMap2.put("A", "A-2");
     deepNestedMap2.put("B", "B-2");
 
-    final List<Object> nested = new LinkedList<Object>();
+    final List<Object> nested = new ArrayList<Object>();
     nested.add(deepNestedMap1);
     nested.add(deepNestedMap2);
 
@@ -110,7 +110,7 @@ public class LiveStripeResponseGetterTest {
   @Test
   public void testCreateQueryWithEmptyList() throws StripeException, UnsupportedEncodingException {
     final Map<String, Object> params = new HashMap<String, Object>();
-    params.put("a", new LinkedList<String>());
+    params.put("a", new ArrayList<String>());
     assertEquals("a=", LiveStripeResponseGetter.createQuery(params));
   }
 
@@ -135,7 +135,7 @@ public class LiveStripeResponseGetterTest {
     final Map<String, String> ownerParams = new HashMap<String, String>();
     ownerParams.put("first_name", "Stripe");
 
-    final List<Object> additionalOwners = new LinkedList<Object>();
+    final List<Object> additionalOwners = new ArrayList<Object>();
     additionalOwners.add(ownerParams);
 
     final Map<String, Object> legalEntityParams = new HashMap<String, Object>();

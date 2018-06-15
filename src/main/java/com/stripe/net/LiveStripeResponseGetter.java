@@ -30,9 +30,10 @@ import java.net.MalformedURLException;
 import java.net.PasswordAuthentication;
 import java.net.URL;
 import java.net.URLStreamHandler;
+import java.nio.charset.StandardCharsets;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -275,7 +276,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
   private static List<Parameter> flattenParamsList(List<Object> params, String keyPrefix)
       throws InvalidRequestException {
-    List<Parameter> flatParams = new LinkedList<Parameter>();
+    List<Parameter> flatParams = new ArrayList<Parameter>();
     Iterator<?> it = ((List<?>) params).iterator();
     String newPrefix = String.format("%s[]", keyPrefix);
 
@@ -296,7 +297,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
   private static List<Parameter> flattenParamsArray(Object[] params, String keyPrefix)
       throws InvalidRequestException {
-    List<Parameter> flatParams = new LinkedList<Parameter>();
+    List<Parameter> flatParams = new ArrayList<Parameter>();
     String newPrefix = String.format("%s[]", keyPrefix);
 
     // Because application/x-www-form-urlencoded cannot represent an empty
@@ -316,7 +317,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
   private static List<Parameter> flattenParamsMap(Map<String, Object> params, String keyPrefix)
       throws InvalidRequestException {
-    List<Parameter> flatParams = new LinkedList<Parameter>();
+    List<Parameter> flatParams = new ArrayList<Parameter>();
     if (params == null) {
       return flatParams;
     }
@@ -339,7 +340,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   @SuppressWarnings("unchecked")
   private static List<Parameter> flattenParamsValue(Object value, String keyPrefix)
       throws InvalidRequestException {
-    List<Parameter> flatParams = new LinkedList<Parameter>();
+    List<Parameter> flatParams = new ArrayList<Parameter>();
 
     if (value instanceof Map<?, ?>) {
       flatParams = flattenParamsMap((Map<String, Object>) value, keyPrefix);
@@ -353,10 +354,10 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
           + "You may set '" + keyPrefix + "' to null to delete the property.",
           keyPrefix, null, null, 0, null);
     } else if (value == null) {
-      flatParams = new LinkedList<Parameter>();
+      flatParams = new ArrayList<Parameter>();
       flatParams.add(new Parameter(keyPrefix, ""));
     } else {
-      flatParams = new LinkedList<Parameter>();
+      flatParams = new ArrayList<Parameter>();
       flatParams.add(new Parameter(keyPrefix, value.toString()));
     }
 
@@ -365,11 +366,11 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
   // represents regular API errors returned as JSON
   // handleAPIError uses this class to raise the appropriate StripeException
-  private static class ErrorContainer {
-    private LiveStripeResponseGetter.Error error;
+  private static class StripeErrorContainer {
+    private StripeError error;
   }
 
-  private static class Error {
+  private static class StripeError {
     @SuppressWarnings("unused")
     String type;
 
@@ -386,7 +387,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
   // represents OAuth API errors returned as JSON
   // handleOAuthError uses this class to raise the appropriate OAuthException
-  private static class OAuthError {
+  private static class StripeOAuthError {
     String error;
 
     String errorDescription;
@@ -685,8 +686,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   private static void handleAPIError(String responseBody, int responseCode, String requestId)
       throws InvalidRequestException, AuthenticationException,
       CardException, APIException {
-    LiveStripeResponseGetter.Error error = APIResource.GSON.fromJson(responseBody,
-        LiveStripeResponseGetter.ErrorContainer.class).error;
+    LiveStripeResponseGetter.StripeError error = APIResource.GSON.fromJson(responseBody,
+        LiveStripeResponseGetter.StripeErrorContainer.class).error;
     switch (responseCode) {
       case 400:
         throw new InvalidRequestException(error.message, error.param, requestId, error.code,
@@ -713,8 +714,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       throws InvalidClientException, InvalidGrantException,
       com.stripe.exception.oauth.InvalidRequestException, InvalidScopeException,
       UnsupportedGrantTypeException, UnsupportedResponseTypeException, APIException {
-    LiveStripeResponseGetter.OAuthError error = APIResource.GSON.fromJson(responseBody,
-        LiveStripeResponseGetter.OAuthError.class);
+    LiveStripeResponseGetter.StripeOAuthError error = APIResource.GSON.fromJson(responseBody,
+        LiveStripeResponseGetter.StripeOAuthError.class);
     String code = error.error;
     String description = (error.errorDescription != null) ? error.errorDescription : code;
 
@@ -790,7 +791,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
       if (method == APIResource.RequestMethod.POST) {
         requestClass.getDeclaredMethod("setPayload", byte[].class)
-            .invoke(request, query.getBytes());
+            .invoke(request, query.getBytes(StandardCharsets.UTF_8));
       }
 
       for (Map.Entry<String, String> header : getHeaders(options)

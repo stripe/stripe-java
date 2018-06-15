@@ -3,7 +3,7 @@ package com.stripe.net;
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.model.Event;
 
-import java.io.UnsupportedEncodingException;
+import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
@@ -119,7 +119,7 @@ public final class Webhook {
      * @return the timestamp contained in the header.
      */
     private static long getTimestamp(String sigHeader) {
-      String[] items = sigHeader.split(",");
+      String[] items = sigHeader.split(",", -1);
 
       for (String item : items) {
         String[] itemParts = item.split("=", 2);
@@ -140,7 +140,7 @@ public final class Webhook {
      */
     private static List<String> getSignatures(String sigHeader, String scheme) {
       List<String> signatures = new ArrayList<String>();
-      String[] items = sigHeader.split(",");
+      String[] items = sigHeader.split(",", -1);
 
       for (String item : items) {
         String[] itemParts = item.split("=", 2);
@@ -154,7 +154,7 @@ public final class Webhook {
 
     /**
      * Computes the signature for a given payload and secret.
-     * 
+     *
      * <p>The current scheme used by Stripe ("v1") is HMAC/SHA-256.
      *
      * @param payload the payload to sign.
@@ -162,7 +162,7 @@ public final class Webhook {
      * @return the signature as a string.
      */
     private static String computeSignature(String payload, String secret)
-        throws UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException {
+        throws NoSuchAlgorithmException, InvalidKeyException {
       return Util.computeHmacSHA256(secret, payload);
     }
   }
@@ -176,10 +176,10 @@ public final class Webhook {
      * @return the code as a string.
      */
     public static String computeHmacSHA256(String key, String message)
-        throws UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException {
+        throws NoSuchAlgorithmException, InvalidKeyException {
       Mac hasher = Mac.getInstance("HmacSHA256");
-      hasher.init(new SecretKeySpec(key.getBytes("UTF8"), "HmacSHA256"));
-      byte[] hash = hasher.doFinal(message.getBytes("UTF8"));
+      hasher.init(new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), "HmacSHA256"));
+      byte[] hash = hasher.doFinal(message.getBytes(StandardCharsets.UTF_8));
       String result = "";
       for (byte b : hash) {
         result += Integer.toString((b & 0xff) + 0x100, 16).substring(1);
@@ -196,8 +196,8 @@ public final class Webhook {
      * @return true if the strings are equal, false otherwise.
      */
     public static boolean secureCompare(String a, String b) {
-      byte[] digesta = a.getBytes();
-      byte[] digestb = b.getBytes();
+      byte[] digesta = a.getBytes(StandardCharsets.UTF_8);
+      byte[] digestb = b.getBytes(StandardCharsets.UTF_8);
 
       return MessageDigest.isEqual(digesta, digestb);
     }

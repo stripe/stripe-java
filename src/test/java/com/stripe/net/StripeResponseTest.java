@@ -74,6 +74,6 @@ public class StripeResponseTest extends BaseStripeTest {
   public void testRequestId() {
     final Map<String, List<String>> headerMap = generateHeaderMap();
     final StripeResponse stripeResponse = new StripeResponse(200, chargeBody, headerMap);
-    assertEquals(stripeResponse.requestId(), "req_12345");
+    assertEquals("req_12345", stripeResponse.requestId());
   }
 }

@@ -13,8 +13,8 @@ import com.stripe.model.ExternalAccountCollection;
 import com.stripe.net.APIResource;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -112,7 +112,7 @@ public class CardTest extends BaseStripeTest {
     // stripe-mock doesn't handle this, so we stub the request
     final Card stubbedCard = getCardFixture(customer);
     final ExternalAccountCollection stubbedCollection = new ExternalAccountCollection();
-    final List<ExternalAccount> stubbedData = new LinkedList<ExternalAccount>();
+    final List<ExternalAccount> stubbedData = new ArrayList<ExternalAccount>();
     stubbedData.add(stubbedCard);
     stubbedCollection.setData(stubbedData);
     stubRequest(

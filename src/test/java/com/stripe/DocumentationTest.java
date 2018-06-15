@@ -8,11 +8,14 @@ import com.google.common.base.Joiner;
 
 import java.io.BufferedReader;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -41,11 +44,12 @@ public class DocumentationTest {
             changelogFile.getAbsolutePath()),
         changelogFile.isFile());
 
-    try (final BufferedReader reader = new BufferedReader(new FileReader(changelogFile))) {
+    try (final BufferedReader reader = new BufferedReader(new InputStreamReader(
+        new FileInputStream(changelogFile), StandardCharsets.UTF_8))) {
       final String expectedLine = formatDateTime();
       final String pattern = String.format(
           "^## %s - 20[12][0-9]-(0[1-9]|1[0-2])-(0[1-9]|1[0-9]|2[0-9]|3[0-1])$", Stripe.VERSION);
-      final List<String> closeMatches = new LinkedList<String>();
+      final List<String> closeMatches = new ArrayList<String>();
       String line;
 
       while ((line = reader.readLine()) != null) {
@@ -78,10 +82,11 @@ public class DocumentationTest {
             readmeFile.getAbsolutePath()),
         readmeFile.isFile());
 
-    try (final BufferedReader reader = new BufferedReader(new FileReader(readmeFile))) {
+    try (final BufferedReader reader = new BufferedReader(new InputStreamReader(
+        new FileInputStream(readmeFile), StandardCharsets.UTF_8))) {
       final int expectedMentionsOfVersion = 2;
       // Currently two places mention the Stripe version: the sample pom and gradle files.
-      final List<String> mentioningLines = new LinkedList<String>();
+      final List<String> mentioningLines = new ArrayList<String>();
       String line;
 
       while ((line = reader.readLine()) != null) {
@@ -111,7 +116,8 @@ public class DocumentationTest {
             gradleFile.getAbsolutePath()),
             gradleFile.isFile());
 
-    try (final BufferedReader reader = new BufferedReader(new FileReader(gradleFile))) {
+    try (final BufferedReader reader = new BufferedReader(new InputStreamReader(
+        new FileInputStream(gradleFile), StandardCharsets.UTF_8))) {
       String line;
       while ((line = reader.readLine()) != null) {
         if (line.contains(Stripe.VERSION)) {

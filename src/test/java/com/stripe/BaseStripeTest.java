@@ -22,6 +22,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.ProtocolException;
 import java.net.URL;
+import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 
@@ -71,7 +72,7 @@ public class BaseStripeTest {
     }
 
     String version = conn.getHeaderField("Stripe-Mock-Version");
-    if ((version != "master") && (compareVersions(version, MOCK_MINIMUM_VERSION) > 0)) {
+    if (!(version.equals("master")) && (compareVersions(version, MOCK_MINIMUM_VERSION) > 0)) {
       throw new RuntimeException(String.format(
         "Your version of stripe-mock (%s) is too old. The minimum "
         + "version to run this test suite is %s. Please see its "
@@ -362,18 +363,18 @@ public class BaseStripeTest {
       IOException, MalformedURLException, ProtocolException {
     int status;
 
-    StringBuffer urlStringBuffer = new StringBuffer();
-    urlStringBuffer.append("http://localhost:" + port + path);
+    StringBuilder urlStringBuilder = new StringBuilder();
+    urlStringBuilder.append("http://localhost:" + port + path);
 
     if (expansions != null) {
-      urlStringBuffer.append("?");
+      urlStringBuilder.append("?");
       for (String expansion : expansions) {
-        urlStringBuffer.append("expand[]=");
-        urlStringBuffer.append(expansion);
-        urlStringBuffer.append("&");
+        urlStringBuilder.append("expand[]=");
+        urlStringBuilder.append(expansion);
+        urlStringBuilder.append("&");
       }
     }
-    URL url = new URL(urlStringBuffer.toString());
+    URL url = new URL(urlStringBuilder.toString());
 
     HttpURLConnection conn = (HttpURLConnection)url.openConnection();
     conn.setRequestMethod("GET");
@@ -420,15 +421,16 @@ public class BaseStripeTest {
   }
 
   private static String readUntilEnd(InputStream inputStream) throws IOException {
-    BufferedReader reader = new BufferedReader(new InputStreamReader(inputStream));
+    BufferedReader reader =
+        new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
     try {
-      StringBuffer buffer = new StringBuffer();
+      StringBuilder builder = new StringBuilder();
       String line;
       while ((line = reader.readLine()) != null) {
-        buffer.append(line);
-        buffer.append("\r");
+        builder.append(line);
+        builder.append("\r");
       }
-      return buffer.toString();
+      return builder.toString();
     } finally {
       reader.close();
     }
@@ -444,8 +446,8 @@ public class BaseStripeTest {
   private static int compareVersions(String a, String b) {
     int ret = 0;
 
-    String[] as = a.split("\\.");
-    String[] bs = b.split("\\.");
+    String[] as = a.split("\\.", -1);
+    String[] bs = b.split("\\.", -1);
 
     int loopMax = bs.length;
     if (as.length > bs.length) {
