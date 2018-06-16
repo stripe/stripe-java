@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.41.1 - 2018-06-17
+* [#528](https://github.com/stripe/stripe-java/pull/528) Add `name` to `Coupon` model
+
 ## 5.41.0 - 2018-06-14
 * [#522](https://github.com/stripe/stripe-java/pull/522) Add `amountPaid`, `amountRemaining` and `billingReason` to `Invoice` model
 
