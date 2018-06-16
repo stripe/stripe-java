@@ -28,6 +28,7 @@ public class Coupon extends APIResource implements MetadataStore<Coupon>, HasId 
   Boolean livemode;
   Long maxRedemptions;
   @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
+  String name;
   Integer percentOff;
   Long redeemBy;
   Integer timesRedeemed;
