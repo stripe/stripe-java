@@ -23,22 +23,36 @@ public class Balance extends APIResource {
   Boolean livemode;
   List<Money> pending;
 
+  // <editor-fold desc="retrieve">
+  /**
+   * Retrieve balance.
+   */
   public static Balance retrieve() throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
     return retrieve((RequestOptions) null);
   }
 
+  /**
+   * Retrieve balance.
+   */
   public static Balance retrieve(RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.GET, singleClassURL(Balance.class), null, Balance.class, options);
   }
 
+  /**
+   * Retrieve balance.
+   *
+   * @deprecated Use {@link #retrieve(RequestOptions)} instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public static Balance retrieve(String apiKey)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return retrieve(RequestOptions.builder().setApiKey(apiKey).build());
   }
+  // </editor-fold>
 }

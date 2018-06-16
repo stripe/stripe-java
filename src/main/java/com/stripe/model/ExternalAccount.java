@@ -24,6 +24,7 @@ public class ExternalAccount extends APIResource implements HasId, MetadataStore
   String customer;
   @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
 
+  // <editor-fold desc="delete">
   public DeletedExternalAccount delete() throws AuthenticationException,
       InvalidRequestException, APIConnectionException,
       CardException, APIException {
@@ -36,7 +37,9 @@ public class ExternalAccount extends APIResource implements HasId, MetadataStore
     return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedExternalAccount.class,
         options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="update">
   @Override
   public ExternalAccount update(Map<String, Object> params) throws
       AuthenticationException, InvalidRequestException,
@@ -51,7 +54,9 @@ public class ExternalAccount extends APIResource implements HasId, MetadataStore
     return request(RequestMethod.POST, this.getInstanceURL(), params, ExternalAccount.class,
         options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="verify">
   public ExternalAccount verify(Map<String, Object> params) throws
       AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -77,6 +82,7 @@ public class ExternalAccount extends APIResource implements HasId, MetadataStore
           null, null, null, 0, null);
     }
   }
+  // </editor-fold>
 
   protected String getInstanceURL() {
     // TODO: Replace with subresourceURL

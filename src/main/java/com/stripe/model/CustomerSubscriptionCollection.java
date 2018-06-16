@@ -12,20 +12,13 @@ import com.stripe.net.RequestOptions;
 import java.util.Map;
 
 public class CustomerSubscriptionCollection extends StripeCollection<Subscription> {
-  public CustomerSubscriptionCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, null);
-  }
-
-  public CustomerSubscriptionCollection list(Map<String, Object> params,
-                         RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return APIResource.requestCollection(String.format("%s%s", Stripe.getApiBase(), this.getURL()),
-        params, CustomerSubscriptionCollection.class, options);
-  }
-
+  // <editor-fold desc="all">
+  /**
+   * List all subscriptions.
+   *
+   * @deprecated Use the {@link #list(Map)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public CustomerSubscriptionCollection all(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
@@ -33,14 +26,12 @@ public class CustomerSubscriptionCollection extends StripeCollection<Subscriptio
     return list(params, null);
   }
 
-  @Deprecated
-  public CustomerSubscriptionCollection all(Map<String, Object> params,
-                        String apiKey) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return list(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
+  /**
+   * List all subscriptions.
+   *
+   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public CustomerSubscriptionCollection all(Map<String, Object> params,
                         RequestOptions options) throws AuthenticationException,
@@ -49,40 +40,40 @@ public class CustomerSubscriptionCollection extends StripeCollection<Subscriptio
     return list(params, options);
   }
 
-  public Subscription retrieve(String id)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return retrieve(id, (RequestOptions) null);
-  }
-
+  /**
+   * List all subscriptions.
+   *
+   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
-  public Subscription retrieve(String id, String apiKey) throws AuthenticationException,
+  public CustomerSubscriptionCollection all(Map<String, Object> params,
+                        String apiKey) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
-    return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
+    return list(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
+  // </editor-fold>
 
-  public Subscription retrieve(String id, RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return APIResource.request(APIResource.RequestMethod.GET, String.format("%s%s/%s",
-        Stripe.getApiBase(), this.getURL(), id), null, Subscription.class, options);
-  }
-
+  // <editor-fold desc="create">
+  /**
+   * Create a subscription.
+   *
+   * @deprecated Prefer using the {@link Subscription#create(Map)} method instead.
+   */
+  @Deprecated
   public Subscription create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return create(params, (RequestOptions) null);
   }
 
+  /**
+   * Create a subscription.
+   *
+   * @deprecated Prefer using the {@link Subscription#create(Map, RequestOptions)} method instead.
+   */
   @Deprecated
-  public Subscription create(Map<String, Object> params,
-                 String apiKey) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return create(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
   public Subscription create(Map<String, Object> params,
                  RequestOptions options) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
@@ -90,4 +81,87 @@ public class CustomerSubscriptionCollection extends StripeCollection<Subscriptio
     return APIResource.request(APIResource.RequestMethod.POST, String.format("%s%s",
         Stripe.getApiBase(), this.getURL()), params, Subscription.class, options);
   }
+
+  /**
+   * Create a subscription.
+   *
+   * @deprecated Use the {@link #create(Map, RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
+   */
+  @Deprecated
+  public Subscription create(Map<String, Object> params,
+                 String apiKey) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return create(params, RequestOptions.builder().setApiKey(apiKey).build());
+  }
+  // </editor-fold>
+
+  // <editor-fold desc="list">
+  /**
+   * List all subscriptions.
+   *
+   * @deprecated Prefer using the {@link Subscription#list(Map)} method instead.
+   */
+  @Deprecated
+  public CustomerSubscriptionCollection list(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return list(params, null);
+  }
+
+  /**
+   * List all subscriptions.
+   *
+   * @deprecated Prefer using the {@link Subscription#list(Map)} method instead.
+   */
+  @Deprecated
+  public CustomerSubscriptionCollection list(Map<String, Object> params,
+                         RequestOptions options) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return APIResource.requestCollection(String.format("%s%s", Stripe.getApiBase(), this.getURL()),
+        params, CustomerSubscriptionCollection.class, options);
+  }
+  // </editor-fold>
+
+  // <editor-fold desc="retrieve">
+  /**
+   * Retrieve a subscription.
+   *
+   * @deprecated Prefer using the {@link Subscription#retrieve(String)} method instead.
+   */
+  @Deprecated
+  public Subscription retrieve(String id)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return retrieve(id, (RequestOptions) null);
+  }
+
+  /**
+   * Retrieve a subscription.
+   *
+   * @deprecated Prefer using the {@link Subscription#retrieve(String)} method instead.
+   */
+  @Deprecated
+  public Subscription retrieve(String id, RequestOptions options) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return APIResource.request(APIResource.RequestMethod.GET, String.format("%s%s/%s",
+        Stripe.getApiBase(), this.getURL(), id), null, Subscription.class, options);
+  }
+
+  /**
+   * Retrieve a subscription.
+   *
+   * @deprecated Use the {@link #retrieve(String, RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
+   */
+  @Deprecated
+  public Subscription retrieve(String id, String apiKey) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
+  }
+  // </editor-fold>
 }

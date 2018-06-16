@@ -75,6 +75,13 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
   @Deprecated
   List<String> currenciesSupported;
 
+  // <editor-fold desc="all">
+  /**
+   * List all connected accounts.
+   *
+   * @deprecated Use the {@link #list(Map)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public static AccountCollection all(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
@@ -82,81 +89,133 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
     return list(params, null);
   }
 
+  /**
+   * List all connected accounts.
+   *
+   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public static AccountCollection all(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return list(params, options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="create">
+  /**
+   * Create an account.
+   */
   public static Account create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return create(params, null);
   }
 
+  /**
+   * Create an account.
+   */
   public static Account create(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, classURL(Account.class), params, Account.class, options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="delete">
+  /**
+   * Delete an account.
+   */
   public DeletedAccount delete()
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return delete(null, (RequestOptions) null);
   }
 
+  /**
+   * Delete an account.
+   */
   public DeletedAccount delete(RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return delete(null, options);
   }
 
+  /**
+   * Delete an account.
+   */
   public DeletedAccount delete(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return delete(params, null);
   }
 
+  /**
+   * Delete an account.
+   */
   public DeletedAccount delete(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.DELETE, instanceURL(Account.class, this.id), params,
         DeletedAccount.class, options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="list">
+  /**
+   * List all connected accounts.
+   */
   public static AccountCollection list(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return list(params, null);
   }
 
+  /**
+   * List all connected accounts.
+   */
   public static AccountCollection list(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return requestCollection(classURL(Account.class), params, AccountCollection.class, options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="reject">
+  /**
+   * Reject an account.
+   */
   public Account reject(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return reject(params, null);
   }
 
+  /**
+   * Reject an account.
+   */
   public Account reject(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, String.format("%s/reject",
         instanceURL(Account.class, this.getId())), params, Account.class, options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="retrieve">
+  /**
+   * Retrieve account details.
+   */
   public static Account retrieve()
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return retrieve((RequestOptions) null);
   }
 
+  /**
+   * Retrieve account details.
+   */
   public static Account retrieve(RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -164,10 +223,13 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
   }
 
   /**
-   * In order to preserve backwards-compatibility, this method does two things.
-   * If the parameter looks like an API key (starts with sk_), retrieve the
-   * account resource with no ID parameter set. Otherwise, use the String
-   * parameter as the account ID.
+   * Retrieve account details.
+   *
+   * @param apiKeyOrAccountId If the parameter looks like an API key (starts with "sk_"), retrieve
+   *     the account resource with no ID parameter set. Otherwise, use the String parameter as the
+   *     account ID.
+   * @deprecated This method will only accept account IDs in the next major version. If you call
+   *     this method with API keys, use the {@link #retrieve(RequestOptions)} method instead.
    */
   @Deprecated
   public static Account retrieve(String apiKeyOrAccountId)
@@ -180,19 +242,30 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
     }
   }
 
+  /**
+   * Retrieve account details.
+   */
   public static Account retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.GET, instanceURL(Account.class, id), null, Account.class, options);
   }
 
+  /**
+   * Retrieve account details.
+   */
   public static Account retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.GET, instanceURL(Account.class, id), params, Account.class,
         options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="update">
+  /**
+   * Update an account.
+   */
   @Override
   public Account update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
@@ -200,6 +273,9 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
     return update(params, null);
   }
 
+  /**
+   * Update an account.
+   */
   @Override
   public Account update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
@@ -207,6 +283,7 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
     return request(RequestMethod.POST, instanceURL(Account.class, this.id), params, Account.class,
         options);
   }
+  // </editor-fold>
 
   @Getter
   @Setter

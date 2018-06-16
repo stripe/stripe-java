@@ -22,29 +22,45 @@ public class ExchangeRate extends APIResource implements HasId {
   String object;
   Map<String, Float> rates;
 
+  // <editor-fold desc="list">
+  /**
+   * List all exchange rates.
+   */
   public static ExchangeRateCollection list(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return list(params, null);
   }
 
+  /**
+   * List all exchange rates.
+   */
   public static ExchangeRateCollection list(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return requestCollection(classURL(ExchangeRate.class), params, ExchangeRateCollection.class,
         options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="retrieve">
+  /**
+   * Retrieve an exchange rate.
+   */
   public static ExchangeRate retrieve(String currency) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
     return retrieve(currency, null);
   }
 
+  /**
+   * Retrieve an exchange rate.
+   */
   public static ExchangeRate retrieve(String currency, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.GET, instanceURL(ExchangeRate.class, currency), null,
         ExchangeRate.class, options);
   }
+  // </editor-fold>
 }

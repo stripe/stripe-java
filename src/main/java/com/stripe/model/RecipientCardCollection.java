@@ -12,20 +12,13 @@ import com.stripe.net.RequestOptions;
 import java.util.Map;
 
 public class RecipientCardCollection extends StripeCollection<Card> {
-  public RecipientCardCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, null);
-  }
-
-  public RecipientCardCollection list(Map<String, Object> params,
-                    RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
-    return APIResource.requestCollection(url, params, RecipientCardCollection.class, options);
-  }
-
+  // <editor-fold desc="all">
+  /**
+   * List all recipient cards.
+   *
+   * @deprecated Use the {@link #list(Map)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public RecipientCardCollection all(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
@@ -33,14 +26,12 @@ public class RecipientCardCollection extends StripeCollection<Card> {
     return list(params, null);
   }
 
-  @Deprecated
-  public RecipientCardCollection all(Map<String, Object> params,
-                     String apiKey) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return list(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
+  /**
+   * List all recipient cards.
+   *
+   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public RecipientCardCollection all(Map<String, Object> params,
                      RequestOptions options) throws AuthenticationException,
@@ -49,32 +40,48 @@ public class RecipientCardCollection extends StripeCollection<Card> {
     return list(params, options);
   }
 
-  public Card retrieve(String id)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return retrieve(id, (RequestOptions) null);
-  }
-
+  /**
+   * List all recipient cards.
+   *
+   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
-  public Card retrieve(String id, String apiKey) throws AuthenticationException,
+  public RecipientCardCollection all(Map<String, Object> params,
+                     String apiKey) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
-    return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
+    return list(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
+  // </editor-fold>
 
-  public Card retrieve(String id, RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    String url = String.format("%s%s/%s", Stripe.getApiBase(), this.getURL(), id);
-    return APIResource.request(APIResource.RequestMethod.GET, url, null, Card.class, options);
-  }
-
+  // <editor-fold desc="create">
+  /**
+   * Create a recipient card.
+   */
   public RecipientCardCollection create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return create(params, (RequestOptions) null);
   }
 
+  /**
+   * Create a recipient card.
+   */
+  public RecipientCardCollection create(Map<String, Object> params,
+                      RequestOptions options) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return APIResource.request(APIResource.RequestMethod.POST, String.format("%s%s",
+        Stripe.getApiBase(), this.getURL()), params, RecipientCardCollection.class, options);
+  }
+
+  /**
+   * Create a recipient card.
+   *
+   * @deprecated Use the {@link #create(Map, RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public RecipientCardCollection create(Map<String, Object> params,
                       String apiKey) throws AuthenticationException,
@@ -83,11 +90,59 @@ public class RecipientCardCollection extends StripeCollection<Card> {
     return create(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
-  public RecipientCardCollection create(Map<String, Object> params,
-                      RequestOptions options) throws AuthenticationException,
+  // <editor-fold desc="list">
+  /**
+   * List all recipient cards.
+   */
+  public RecipientCardCollection list(Map<String, Object> params)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return list(params, null);
+  }
+
+  /**
+   * List all recipient cards.
+   */
+  public RecipientCardCollection list(Map<String, Object> params,
+                    RequestOptions options) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
-    return APIResource.request(APIResource.RequestMethod.POST, String.format("%s%s",
-        Stripe.getApiBase(), this.getURL()), params, RecipientCardCollection.class, options);
+    String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
+    return APIResource.requestCollection(url, params, RecipientCardCollection.class, options);
   }
+  // </editor-fold>
+
+  // <editor-fold desc="retrieve">
+  /**
+   * Retrieve a recipient card.
+   */
+  public Card retrieve(String id)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return retrieve(id, (RequestOptions) null);
+  }
+
+  /**
+   * Retrieve a recipient card.
+   */
+  public Card retrieve(String id, RequestOptions options) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    String url = String.format("%s%s/%s", Stripe.getApiBase(), this.getURL(), id);
+    return APIResource.request(APIResource.RequestMethod.GET, url, null, Card.class, options);
+  }
+
+  /**
+   * Retrieve a recipient card.
+   *
+   * @deprecated Use the {@link #retrieve(String, RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
+   */
+  @Deprecated
+  public Card retrieve(String id, String apiKey) throws AuthenticationException,
+      InvalidRequestException, APIConnectionException, CardException,
+      APIException {
+    return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
+  }
+  // </editor-fold>
 }

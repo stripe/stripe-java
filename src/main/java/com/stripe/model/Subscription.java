@@ -71,6 +71,13 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
   }
   // </editor-fold>
 
+  // <editor-fold desc="all">
+  /**
+   * List subscriptions.
+   *
+   * @deprecated Use the {@link #list(Map)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public static SubscriptionCollection all(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
@@ -78,6 +85,12 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
     return list(params, null);
   }
 
+  /**
+   * List subscriptions.
+   *
+   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public static SubscriptionCollection all(Map<String, Object> params,
                        RequestOptions options) throws AuthenticationException,
@@ -85,13 +98,21 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
       APIException {
     return list(params, options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="cancel">
+  /**
+   * Cancel a subscription.
+   */
   public Subscription cancel(Map<String, Object> params) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
     return cancel(params, (RequestOptions) null);
   }
 
+  /**
+   * Cancel a subscription.
+   */
   public Subscription cancel(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException, APIConnectionException,
       CardException, APIException {
@@ -99,32 +120,54 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
         Subscription.class, options);
   }
 
+  /**
+   * Cancel a subscription.
+   *
+   * @deprecated Use the {@link #cancel(Map, RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public Subscription cancel(Map<String, Object> params, String apiKey)
       throws AuthenticationException, InvalidRequestException, APIConnectionException,
       CardException, APIException {
     return cancel(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
+  // </editor-fold>
 
+  // <editor-fold desc="create">
+  /**
+   * Create a subscription.
+   */
   public static Subscription create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return create(params, null);
   }
 
+  /**
+   * Create a subscription.
+   */
   public static Subscription create(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, classURL(Subscription.class), params, Subscription.class,
         options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="deleteDiscount">
+  /**
+   * Delete a subscription discount.
+   */
   public void deleteDiscount() throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
     deleteDiscount((RequestOptions) null);
   }
 
+  /**
+   * Delete a subscription discount.
+   */
   public void deleteDiscount(RequestOptions options) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
@@ -133,9 +176,10 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
   }
 
   /**
-   * Deletes the subscription's discount.
+   * Delete a subscription discount.
    *
-   * @deprecated Use {@link #deleteDiscount(RequestOptions)} instead.
+   * @deprecated Use the {@link #deleteDiscount(RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
    */
   @Deprecated
   public void deleteDiscount(String apiKey) throws AuthenticationException,
@@ -147,7 +191,12 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
     }
     deleteDiscount(result);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="list">
+  /**
+   * List subscriptions.
+   */
   public static SubscriptionCollection list(Map<String, Object> params)
       throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
@@ -155,6 +204,9 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
     return list(params, null);
   }
 
+  /**
+   * List subscriptions.
+   */
   public static SubscriptionCollection list(Map<String, Object> params,
                         RequestOptions options) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
@@ -162,13 +214,21 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
     return requestCollection(classURL(Subscription.class), params, SubscriptionCollection.class,
         options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="retrieve">
+  /**
+   * Retrieve a subscription.
+   */
   public static Subscription retrieve(String id) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
     return retrieve(id, null);
   }
 
+  /**
+   * Retrieve a subscription.
+   */
   public static Subscription retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -176,13 +236,21 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
         options);
   }
 
+  /**
+   * Retrieve a subscription.
+   */
   public static Subscription retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.GET, instanceURL(Subscription.class, id), params,
         Subscription.class, options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="update">
+  /**
+   * Update a subscription.
+   */
   @Override
   public Subscription update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
@@ -190,13 +258,9 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
     return update(params, (RequestOptions) null);
   }
 
-  @Deprecated
-  public Subscription update(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return update(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
+  /**
+   * Update a subscription.
+   */
   @Override
   public Subscription update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
@@ -204,4 +268,18 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
     return request(RequestMethod.POST, instanceURL(Subscription.class, id), params,
         Subscription.class, options);
   }
+
+  /**
+   * Update a subscription.
+   *
+   * @deprecated Use the {@link #update(Map, RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
+   */
+  @Deprecated
+  public Subscription update(Map<String, Object> params, String apiKey)
+      throws AuthenticationException, InvalidRequestException,
+      APIConnectionException, CardException, APIException {
+    return update(params, RequestOptions.builder().setApiKey(apiKey).build());
+  }
+  // </editor-fold>
 }

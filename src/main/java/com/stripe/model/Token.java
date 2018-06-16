@@ -31,41 +31,69 @@ public class Token extends APIResource implements HasId {
   String type;
   Boolean used;
 
+  // <editor-fold desc="create">
+  /**
+   * Create a token.
+   */
   public static Token create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return create(params, (RequestOptions) null);
   }
 
+  /**
+   * Create a token.
+   */
   public static Token create(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, classURL(Token.class), params, Token.class, options);
   }
 
+  /**
+   * Create a token.
+   *
+   * @deprecated Use the {@link #create(Map, RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public static Token create(Map<String, Object> params, String apiKey)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return create(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
+  // </editor-fold>
 
+  // <editor-fold desc="retrieve">
+  /**
+   * Retrieve a token.
+   */
   public static Token retrieve(String id) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
     return retrieve(id, (RequestOptions) null);
   }
 
+  /**
+   * Retrieve a token.
+   */
   public static Token retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.GET, instanceURL(Token.class, id), null, Token.class, options);
   }
 
+  /**
+   * Retrieve a token.
+   *
+   * @deprecated Use the {@link #retrieve(String, RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public static Token retrieve(String id, String apiKey)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
   }
+  // </editor-fold>
 }

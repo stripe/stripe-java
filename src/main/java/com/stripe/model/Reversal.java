@@ -65,6 +65,10 @@ public class Reversal extends APIResource implements MetadataStore<Transfer>, Ha
   }
   // </editor-fold>
 
+  // <editor-fold desc="update">
+  /**
+   * Update a reversal.
+   */
   @Override
   public Reversal update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
@@ -72,6 +76,9 @@ public class Reversal extends APIResource implements MetadataStore<Transfer>, Ha
     return update(params, (RequestOptions) null);
   }
 
+  /**
+   * Update a reversal.
+   */
   @Override
   public Reversal update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
@@ -79,12 +86,19 @@ public class Reversal extends APIResource implements MetadataStore<Transfer>, Ha
     return request(RequestMethod.POST, this.getInstanceURL(), params, Reversal.class, options);
   }
 
+  /**
+   * Update a reversal.
+   *
+   * @deprecated Use the {@link #update(Map, RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public Reversal update(Map<String, Object> params, String apiKey)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
+  // </editor-fold>
 
   protected String getInstanceURL() {
     if (this.transfer != null) {

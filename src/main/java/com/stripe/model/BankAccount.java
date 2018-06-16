@@ -29,6 +29,10 @@ public class BankAccount extends ExternalAccount {
   String status;
   Boolean validated;
 
+  // <editor-fold desc="delete">
+  /**
+   * Delete a bank account.
+   */
   @Override
   public DeletedBankAccount delete()
       throws AuthenticationException, InvalidRequestException, APIConnectionException,
@@ -36,6 +40,9 @@ public class BankAccount extends ExternalAccount {
     return delete(null);
   }
 
+  /**
+   * Delete a bank account.
+   */
   @Override
   public DeletedBankAccount delete(RequestOptions options)
       throws AuthenticationException, InvalidRequestException, APIConnectionException,
@@ -43,7 +50,12 @@ public class BankAccount extends ExternalAccount {
     return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedBankAccount.class,
         options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="update">
+  /**
+   * Update a bank account.
+   */
   @Override
   public BankAccount update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException, APIConnectionException,
@@ -51,10 +63,14 @@ public class BankAccount extends ExternalAccount {
     return update(params, null);
   }
 
+  /**
+   * Update a bank account.
+   */
   @Override
   public BankAccount update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException, APIConnectionException,
       CardException, APIException {
     return request(RequestMethod.POST, this.getInstanceURL(), params, BankAccount.class, options);
   }
+  // </editor-fold>
 }

@@ -38,6 +38,13 @@ public class FileUpload extends APIResource implements HasId {
   }
   // </editor-fold>
 
+  // <editor-fold desc="all">
+  /**
+   * List all file uploads.
+   *
+   * @deprecated Use the {@link #list(Map)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public static FileUploadCollection all(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
@@ -45,6 +52,12 @@ public class FileUpload extends APIResource implements HasId {
     return list(params, null);
   }
 
+  /**
+   * List all file uploads.
+   *
+   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public static FileUploadCollection all(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
@@ -52,19 +65,33 @@ public class FileUpload extends APIResource implements HasId {
     return list(params, options);
   }
 
+  /**
+   * List all file uploads.
+   *
+   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public static FileUploadCollection all(Map<String, Object> params, String apiKey)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return list(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
+  // </editor-fold>
 
+  // <editor-fold desc="create">
+  /**
+   * Create a file upload.
+   */
   public static FileUpload create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return create(params, (RequestOptions) null);
   }
 
+  /**
+   * Create a file upload.
+   */
   public static FileUpload create(Map<String, Object> params,
                   RequestOptions options) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
@@ -73,6 +100,12 @@ public class FileUpload extends APIResource implements HasId {
         params, FileUpload.class, options);
   }
 
+  /**
+   * Create a file upload.
+   *
+   * @deprecated Use the {@link #create(Map, RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public static FileUpload create(Map<String, Object> params, String apiKey)
       throws AuthenticationException, InvalidRequestException,
@@ -80,26 +113,42 @@ public class FileUpload extends APIResource implements HasId {
     RequestOptions options = RequestOptions.builder().setApiKey(apiKey).build();
     return create(params, options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="list">
+  /**
+   * List all file uploads.
+   */
   public static FileUploadCollection list(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return list(params, null);
   }
 
+  /**
+   * List all file uploads.
+   */
   public static FileUploadCollection list(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return requestCollection(classURL(FileUpload.class, Stripe.getUploadBase()),
         params, FileUploadCollection.class, options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="retrieve">
+  /**
+   * Retrieve a file upload.
+   */
   public static FileUpload retrieve(String id)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return retrieve(id, (RequestOptions) null);
   }
 
+  /**
+   * Retrieve a file upload.
+   */
   public static FileUpload retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -107,6 +156,12 @@ public class FileUpload extends APIResource implements HasId {
         null, FileUpload.class, options);
   }
 
+  /**
+   * Retrieve a file upload.
+   *
+   * @deprecated Use the {@link #retrieve(String, RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public static FileUpload retrieve(String id, String apiKey)
       throws AuthenticationException, InvalidRequestException,
@@ -114,4 +169,5 @@ public class FileUpload extends APIResource implements HasId {
     RequestOptions options = RequestOptions.builder().setApiKey(apiKey).build();
     return retrieve(id, options);
   }
+  // </editor-fold>
 }

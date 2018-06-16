@@ -107,6 +107,13 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
   }
   // </editor-fold>
 
+  // <editor-fold desc="all">
+  /**
+   * List all customers.
+   *
+   * @deprecated Use the {@link #list(Map)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public static CustomerCollection all(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
@@ -114,6 +121,12 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
     return list(params, null);
   }
 
+  /**
+   * List all customers.
+   *
+   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public static CustomerCollection all(Map<String, Object> params,
                      RequestOptions options) throws AuthenticationException,
@@ -122,6 +135,12 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
     return list(params, options);
   }
 
+  /**
+   * List all customers.
+   *
+   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public static CustomerCollection all(Map<String, Object> params,
                      String apiKey) throws AuthenticationException,
@@ -129,16 +148,29 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
       APIException {
     return list(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
+  // </editor-fold>
 
+  // <editor-fold desc="cancelSubscription">
   /**
-   * 1/2014: Legacy (from before multiple subscriptions per customer).
+   * Cancel the customer's subscription.
+   *
+   * @deprecated Use the {@link Subscription#cancel(Map)} method instead.
+   *     This method will be removed in the next major version.
    */
+  @Deprecated
   public Subscription cancelSubscription() throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
     return cancelSubscription(null, (RequestOptions) null);
   }
 
+  /**
+   * Cancel the customer's subscription.
+   *
+   * @deprecated Use the {@link Subscription#cancel(Map, RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
+   */
+  @Deprecated
   public Subscription cancelSubscription(RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -146,7 +178,10 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
   }
 
   /**
-   * 1/2014: Legacy (from before multiple subscriptions per customer).
+   * Cancel the customer's subscription.
+   *
+   * @deprecated Use the {@link Subscription#cancel(Map, RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
    */
   @Deprecated
   public Subscription cancelSubscription(String apiKey)
@@ -156,14 +191,25 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
   }
 
   /**
-   * 1/2014: Legacy (from before multiple subscriptions per customer).
+   * Cancel the customer's subscription.
+   *
+   * @deprecated Use the {@link Subscription#cancel(Map)} method instead.
+   *     This method will be removed in the next major version.
    */
+  @Deprecated
   public Subscription cancelSubscription(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return cancelSubscription(params, (RequestOptions) null);
   }
 
+  /**
+   * Cancel the customer's subscription.
+   *
+   * @deprecated Use the {@link Subscription#cancel(Map, RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
+   */
+  @Deprecated
   public Subscription cancelSubscription(Map<String, Object> params,
                        RequestOptions options) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
@@ -173,7 +219,10 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
   }
 
   /**
-   * 1/2014: Legacy (from before multiple subscriptions per customer).
+   * Cancel the customer's subscription.
+   *
+   * @deprecated Use the {@link Subscription#cancel(Map, RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
    */
   @Deprecated
   public Subscription cancelSubscription(Map<String, Object> params,
@@ -182,26 +231,49 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
       APIException {
     return cancelSubscription(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
+  // </editor-fold>
 
+  // <editor-fold desc="create">
+  /**
+   * Create a customer.
+   */
   public static Customer create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return create(params, (RequestOptions) null);
   }
 
+  /**
+   * Create a customer.
+   */
   public static Customer create(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, classURL(Customer.class), params, Customer.class, options);
   }
 
+  /**
+   * Create a customer.
+   *
+   * @deprecated Use the {@link #create(Map, RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public static Customer create(Map<String, Object> params, String apiKey)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return create(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
+  // </editor-fold>
 
+  // <editor-fold desc="createBankAccount">
+  /**
+   * Create a bank account.
+   *
+   * @deprecated Use {@link #getSources()} and
+   *     {@link ExternalAccountCollection#create(Map)} instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public BankAccount createBankAccount(String token) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
@@ -210,12 +282,11 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
   }
 
   /**
-   * Adds a bank account to the customer using a bank account token.
+   * Create a bank account.
    *
-   * @param token bank account token ({@code "btok_..."})
-   * @param options request options
-   * @return the new bank account object
-   * @deprecated Prefer using the {@code customer.getSources().create(params)} method instead.
+   * @deprecated Use {@link #getSources()} and
+   *     {@link ExternalAccountCollection#create(Map, RequestOptions)} instead.
+   *     This method will be removed in the next major version.
    */
   @Deprecated
   public BankAccount createBankAccount(String token, RequestOptions options)
@@ -226,6 +297,13 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
     return createBankAccount(postParams, options);
   }
 
+  /**
+   * Create a bank account.
+   *
+   * @deprecated Use {@link #getSources()} and
+   *     {@link ExternalAccountCollection#create(Map)} instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public BankAccount createBankAccount(Map<String, Object> params) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
@@ -233,6 +311,13 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
     return createBankAccount(params, null);
   }
 
+  /**
+   * Create a bank account.
+   *
+   * @deprecated Use {@link #getSources()} and
+   *     {@link ExternalAccountCollection#create(Map, RequestOptions)} instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public BankAccount createBankAccount(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException, APIConnectionException,
@@ -240,7 +325,17 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
     return request(RequestMethod.POST, String.format("%s/bank_accounts",
         instanceURL(Customer.class, this.id)), params, BankAccount.class, options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="createCard">
+  /**
+   * Create a card.
+   *
+   * @deprecated Use {@link #getSources()} and
+   *     {@link ExternalAccountCollection#create(Map)} instead.
+   *     This method will be removed in the next major version.
+   */
+  @Deprecated
   public Card createCard(String token) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
@@ -248,12 +343,11 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
   }
 
   /**
-   * Adds a card to the customer using a card token.
+   * Create a card.
    *
-   * @param token card token ({@code "tok_..."})
-   * @param options request options
-   * @return the new card object
-   * @deprecated Prefer using the {@code customer.getSources().create(params)} method instead.
+   * @deprecated Use {@link #getSources()} and
+   *     {@link ExternalAccountCollection#create(Map, RequestOptions)} instead.
+   *     This method will be removed in the next major version.
    */
   @Deprecated
   public Card createCard(String token, RequestOptions options) throws AuthenticationException,
@@ -265,6 +359,13 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
     return createCard(postParams, options);
   }
 
+  /**
+   * Create a card.
+   *
+   * @deprecated Use {@link #getSources()} and
+   *     {@link ExternalAccountCollection#create(Map, RequestOptions)} instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public Card createCard(String token, String apiKey) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
@@ -272,12 +373,27 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
     return createCard(token, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
+  /**
+   * Create a card.
+   *
+   * @deprecated Use {@link #getSources()} and
+   *     {@link ExternalAccountCollection#create(Map)} instead.
+   *     This method will be removed in the next major version.
+   */
+  @Deprecated
   public Card createCard(Map<String, Object> params) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
     return createCard(params, (RequestOptions) null);
   }
 
+  /**
+   * Create a card.
+   *
+   * @deprecated Use {@link #getSources()} and
+   *     {@link ExternalAccountCollection#create(Map, RequestOptions)} instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public Card createCard(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException,InvalidRequestException, APIConnectionException, CardException,
@@ -286,19 +402,42 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
         instanceURL(Customer.class, this.id)), params, Card.class, options);
   }
 
+  /**
+   * Create a card.
+   *
+   * @deprecated Use {@link #getSources()} and
+   *     {@link ExternalAccountCollection#create(Map, RequestOptions)} instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public Card createCard(Map<String, Object> params, String apiKey) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
     return createCard(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
+  // </editor-fold>
 
+  // <editor-fold desc="createSubscription">
+  /**
+   * Create a subscription.
+   *
+   * @deprecated Use the {@link Subscription#create(Map)} method instead.
+   *     This method will be removed in the next major version.
+   */
+  @Deprecated
   public Subscription createSubscription(Map<String, Object> params) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
     return createSubscription(params, (RequestOptions) null);
   }
 
+  /**
+   * Create a subscription.
+   *
+   * @deprecated Use the {@link Subscription#create(Map, RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
+   */
+  @Deprecated
   public Subscription createSubscription(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException,InvalidRequestException, APIConnectionException, CardException,
       APIException {
@@ -306,19 +445,33 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
         instanceURL(Customer.class, this.id)), params, Subscription.class, options);
   }
 
+  /**
+   * Create a subscription.
+   *
+   * @deprecated Use the {@link Subscription#create(Map, RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public Subscription createSubscription(Map<String, Object> params, String apiKey)
       throws AuthenticationException,InvalidRequestException, APIConnectionException, CardException,
       APIException {
     return createSubscription(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
+  // </editor-fold>
 
+  // <editor-fold desc="delete">
+  /**
+   * Delete a customer.
+   */
   public DeletedCustomer delete() throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
     return delete((RequestOptions) null);
   }
 
+  /**
+   * Delete a customer.
+   */
   public DeletedCustomer delete(RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -326,19 +479,33 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
         DeletedCustomer.class, options);
   }
 
+  /**
+   * Delete a customer.
+   *
+   * @deprecated Use the {@link #delete(RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public DeletedCustomer delete(String apiKey)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return delete(RequestOptions.builder().setApiKey(apiKey).build());
   }
+  // </editor-fold>
 
+  // <editor-fold desc="deleteDiscount">
+  /**
+   * Delete a customer discount.
+   */
   public void deleteDiscount() throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
     deleteDiscount((RequestOptions) null);
   }
 
+  /**
+   * Delete a customer discount.
+   */
   public void deleteDiscount(RequestOptions options) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
@@ -346,13 +513,24 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
         instanceURL(Customer.class, this.id)), null, Discount.class, options);
   }
 
+  /**
+   * Delete a customer discount.
+   *
+   * @deprecated Use the {@link #deleteDiscount(RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public void deleteDiscount(String apiKey) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
     deleteDiscount(RequestOptions.builder().setApiKey(apiKey).build());
   }
+  // </editor-fold>
 
+  // <editor-fold desc="list">
+  /**
+   * List all customers.
+   */
   public static CustomerCollection list(Map<String, Object> params)
       throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
@@ -360,19 +538,30 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
     return list(params, null);
   }
 
+  /**
+   * List all customers.
+   */
   public static CustomerCollection list(Map<String, Object> params,
                       RequestOptions options) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
     return requestCollection(classURL(Customer.class), params, CustomerCollection.class, options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="retrieve">
+  /**
+   * Retrieve a customer.
+   */
   public static Customer retrieve(String id) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
     return retrieve(id, (RequestOptions) null);
   }
 
+  /**
+   * Retrieve a customer.
+   */
   public static Customer retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -380,6 +569,12 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
         options);
   }
 
+  /**
+   * Retrieve a customer.
+   *
+   * @deprecated Use the {@link #retrieve(String, RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public static Customer retrieve(String id, String apiKey)
       throws AuthenticationException, InvalidRequestException,
@@ -387,13 +582,21 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
     return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
+  /**
+   * Retrieve a customer.
+   */
   public static Customer retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.GET, instanceURL(Customer.class, id), params, Customer.class,
         options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="update">
+  /**
+   * Update a customer.
+   */
   @Override
   public Customer update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
@@ -401,6 +604,9 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
     return update(params, (RequestOptions) null);
   }
 
+  /**
+   * Update a customer.
+   */
   @Override
   public Customer update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
@@ -409,16 +615,28 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
         Customer.class, options);
   }
 
+  /**
+   * Update a customer.
+   *
+   * @deprecated Use the {@link #update(Map, RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public Customer update(Map<String, Object> params, String apiKey)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
+  // </editor-fold>
 
+  // <editor-fold desc="updateSubscription">
   /**
-   * 1/2014: Legacy (from before multiple subscriptions per customer).
+   * Update a subscription.
+   *
+   * @deprecated Use the {@link Subscription#update(Map)} method instead.
+   *     This method will be removed in the next major version.
    */
+  @Deprecated
   public Subscription updateSubscription(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -426,8 +644,12 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
   }
 
   /**
-   * 1/2014: Legacy (from before multiple subscriptions per customer).
+   * Update a subscription.
+   *
+   * @deprecated Use the {@link Subscription#update(Map, RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
    */
+  @Deprecated
   public Subscription updateSubscription(Map<String, Object> params,
                        RequestOptions options) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
@@ -437,7 +659,10 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
   }
 
   /**
-   * 1/2014: Legacy (from before multiple subscriptions per customer).
+   * Update a subscription.
+   *
+   * @deprecated Use the {@link Subscription#update(Map, RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
    */
   @Deprecated
   public Subscription updateSubscription(Map<String, Object> params,
@@ -446,4 +671,5 @@ public class Customer extends APIResource implements MetadataStore<Customer>, Ha
       APIException {
     return updateSubscription(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
+  // </editor-fold>
 }

@@ -59,6 +59,10 @@ public class Card extends ExternalAccount {
   @Deprecated
   String type;
 
+  // <editor-fold desc="delete">
+  /**
+   * Delete a card.
+   */
   @Override
   public DeletedCard delete()
       throws AuthenticationException, InvalidRequestException, APIConnectionException,
@@ -66,6 +70,9 @@ public class Card extends ExternalAccount {
     return delete((RequestOptions) null);
   }
 
+  /**
+   * Delete a card.
+   */
   @Override
   public DeletedCard delete(RequestOptions options)
       throws AuthenticationException, InvalidRequestException, APIConnectionException,
@@ -73,13 +80,24 @@ public class Card extends ExternalAccount {
     return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedCard.class, options);
   }
 
+  /**
+   * Delete a card.
+   *
+   * @deprecated Use the {@link #delete(RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public DeletedCard delete(String apiKey)
       throws AuthenticationException, InvalidRequestException, APIConnectionException,
       CardException, APIException {
     return delete(RequestOptions.builder().setApiKey(apiKey).build());
   }
+  // </editor-fold>
 
+  // <editor-fold desc="update">
+  /**
+   * Update a card.
+   */
   @Override
   public Card update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
@@ -87,6 +105,9 @@ public class Card extends ExternalAccount {
     return update(params, (RequestOptions) null);
   }
 
+  /**
+   * Update a card.
+   */
   @Override
   public Card update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
@@ -94,12 +115,19 @@ public class Card extends ExternalAccount {
     return request(RequestMethod.POST, this.getInstanceURL(), params, Card.class, options);
   }
 
+  /**
+   * Update a card.
+   *
+   * @deprecated Use the {@link #update(Map, RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public Card update(Map<String, Object> params, String apiKey)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
+  // </editor-fold>
 
   @Override
   protected String getInstanceURL() {

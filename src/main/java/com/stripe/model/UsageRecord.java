@@ -26,6 +26,7 @@ public class UsageRecord extends APIResource implements HasId {
   String subscriptionItem;
   Long timestamp;
 
+  // <editor-fold desc="create">
   /**
    * Create a new usage record associated with a subscription item.
    * @param params The quantity, the timestamp and the conflict behaviour (action)
@@ -53,4 +54,5 @@ public class UsageRecord extends APIResource implements HasId {
             subresourceURL(SubscriptionItem.class, subscriptionItem, UsageRecord.class),
             requestParams, UsageRecord.class, options);
   }
+  // </editor-fold>
 }

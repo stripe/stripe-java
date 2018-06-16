@@ -28,6 +28,7 @@ public class EphemeralKey extends APIResource implements HasId {
   List<EphemeralKeyAssociatedObject> associatedObjects;
   transient String rawJson;
 
+  // <editor-fold desc="create">
   /**
    * Creates an ephemeral key.
    *
@@ -46,17 +47,26 @@ public class EphemeralKey extends APIResource implements HasId {
     return request(RequestMethod.POST, classURL(EphemeralKey.class), params, EphemeralKey.class,
         options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="delete">
+  /**
+   * Delete an ephemeral key.
+   */
   public EphemeralKey delete()
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return delete(null);
   }
 
+  /**
+   * Delete an ephemeral key.
+   */
   public EphemeralKey delete(RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.DELETE, instanceURL(EphemeralKey.class, this.id), null,
         EphemeralKey.class, options);
   }
+  // </editor-fold>
 }
