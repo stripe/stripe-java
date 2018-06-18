@@ -151,6 +151,21 @@ You can run particular tests by passing `--tests Class#method`. Make sure you us
 
 The library uses [Project Lombok][lombok]. While it is not a requirement, you might want to install a [plugin][lombok-plugins] for your favorite IDE to facilitate development.
 
+### Instructions to Install Dependencies
+This section will describe how to setup your IDEA editor to begin working with this codebase.
+
+- Install Project Lombok's JAR:
+    - Go to `File > Project Settings > Libraries`, hit the + at the top, search for lombok, and install `org.projectlombok:lombok:1.16.4`, or the most recent version.
+
+- Install the Project Lombok Plugin:
+    -  Go to `IntelliJ IDEA > Preferences > Plugins` and search for / install the Project Lombok plugin.
+    - Go to `IntelliJ IDEA > Preferences > Build, Execution, Deployment > Compiler > Annotation Processors` and check the `Enable annotation processing` box.
+
+- Install Gson:
+    - Go to `File > Project Settings > Libraries`, hit the + at the top, search for gson, and install `com.google.code.gson:gson:2.8.5`, or the most recent version.
+
+
+
 [connect]: https://stripe.com/connect
 [lombok]: https://projectlombok.org
 [lombok-plugins]: https://projectlombok.org/setup/overview
