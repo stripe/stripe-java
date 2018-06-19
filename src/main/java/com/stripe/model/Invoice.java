@@ -100,49 +100,6 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
   }
   // </editor-fold>
 
-  // <editor-fold desc="all">
-  /**
-   * List all invoices.
-   *
-   * @deprecated Use the {@link #list(Map)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static InvoiceCollection all(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, null);
-  }
-
-  /**
-   * List all invoices.
-   *
-   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static InvoiceCollection all(Map<String, Object> params,
-                    RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return list(params, options);
-  }
-
-  /**
-   * List all invoices.
-   *
-   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static InvoiceCollection all(Map<String, Object> params,
-                    String apiKey) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return list(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-  // </editor-fold>
-
   // <editor-fold desc="create">
   /**
    * Create an invoice.
@@ -160,19 +117,6 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, classURL(Invoice.class), params, Invoice.class, options);
-  }
-
-  /**
-   * Create an invoice.
-   *
-   * @deprecated Use the {@link #create(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static Invoice create(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return create(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
   // </editor-fold>
 
@@ -218,19 +162,6 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 
   /**
    * Pay an invoice.
-   *
-   * @deprecated Use the {@link #pay(RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public Invoice pay(String apiKey) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return pay(RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  /**
-   * Pay an invoice.
    */
   public Invoice pay(Map<String, Object> params) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
@@ -270,19 +201,6 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
 
   /**
    * Retrieve an invoice.
-   *
-   * @deprecated Use the {@link #retrieve(String, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static Invoice retrieve(String id, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  /**
-   * Retrieve an invoice.
    */
   public static Invoice retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
@@ -311,19 +229,6 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
     return request(RequestMethod.GET, String.format("%s/upcoming", classURL(Invoice.class)), params,
         Invoice.class, options);
   }
-
-  /**
-   * Retrieve an upcoming invoice.
-   *
-   * @deprecated Use the {@link #upcoming(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static Invoice upcoming(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return upcoming(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
   // </editor-fold>
 
   // <editor-fold desc="update">
@@ -346,19 +251,6 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, instanceURL(Invoice.class, this.id), params, Invoice.class,
         options);
-  }
-
-  /**
-   * Update an invoice.
-   *
-   * @deprecated Use the {@link #update(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public Invoice update(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
   // </editor-fold>
 }

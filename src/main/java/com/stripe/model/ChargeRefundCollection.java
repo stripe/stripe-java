@@ -12,49 +12,6 @@ import com.stripe.net.RequestOptions;
 import java.util.Map;
 
 public class ChargeRefundCollection extends StripeCollection<Refund> {
-  // <editor-fold desc="all">
-  /**
-   * List all charge refunds.
-   *
-   * @deprecated Use the {@link #list(Map)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public ChargeRefundCollection all(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, null);
-  }
-
-  /**
-   * List all charge refunds.
-   *
-   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public ChargeRefundCollection all(Map<String, Object> params,
-                    RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return list(params, options);
-  }
-
-  /**
-   * List all charge refunds.
-   *
-   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public ChargeRefundCollection all(Map<String, Object> params,
-                    String apiKey) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return list(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-  // </editor-fold>
-
   // <editor-fold desc="create">
   /**
    * Create a charge refund.
@@ -80,20 +37,6 @@ public class ChargeRefundCollection extends StripeCollection<Refund> {
       APIException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
     return APIResource.request(APIResource.RequestMethod.POST, url, params, Refund.class, options);
-  }
-
-  /**
-   * Create a charge refund.
-   *
-   * @deprecated Use the {@link #create(Map, RequestOptions)} instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public Refund create(Map<String, Object> params,
-             String apiKey) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return create(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
   // </editor-fold>
 
@@ -149,19 +92,6 @@ public class ChargeRefundCollection extends StripeCollection<Refund> {
       APIException {
     String url = String.format("%s%s/%s", Stripe.getApiBase(), this.getURL(), id);
     return APIResource.request(APIResource.RequestMethod.GET, url, null, Refund.class, options);
-  }
-
-  /**
-   * Retrieve a charge refund.
-   *
-   * @deprecated Use the {@link #retrieve(String, RequestOptions)} instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public Refund retrieve(String id, String apiKey) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
   }
   // </editor-fold>
 }
