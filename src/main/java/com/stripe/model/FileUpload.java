@@ -38,47 +38,6 @@ public class FileUpload extends APIResource implements HasId {
   }
   // </editor-fold>
 
-  // <editor-fold desc="all">
-  /**
-   * List all file uploads.
-   *
-   * @deprecated Use the {@link #list(Map)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static FileUploadCollection all(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, null);
-  }
-
-  /**
-   * List all file uploads.
-   *
-   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static FileUploadCollection all(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, options);
-  }
-
-  /**
-   * List all file uploads.
-   *
-   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static FileUploadCollection all(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-  // </editor-fold>
-
   // <editor-fold desc="create">
   /**
    * Create a file upload.
@@ -98,20 +57,6 @@ public class FileUpload extends APIResource implements HasId {
       APIException {
     return multipartRequest(RequestMethod.POST, classURL(FileUpload.class, Stripe.getUploadBase()),
         params, FileUpload.class, options);
-  }
-
-  /**
-   * Create a file upload.
-   *
-   * @deprecated Use the {@link #create(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static FileUpload create(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    RequestOptions options = RequestOptions.builder().setApiKey(apiKey).build();
-    return create(params, options);
   }
   // </editor-fold>
 
@@ -154,20 +99,6 @@ public class FileUpload extends APIResource implements HasId {
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.GET, instanceURL(FileUpload.class, id, Stripe.getUploadBase()),
         null, FileUpload.class, options);
-  }
-
-  /**
-   * Retrieve a file upload.
-   *
-   * @deprecated Use the {@link #retrieve(String, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static FileUpload retrieve(String id, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    RequestOptions options = RequestOptions.builder().setApiKey(apiKey).build();
-    return retrieve(id, options);
   }
   // </editor-fold>
 }
