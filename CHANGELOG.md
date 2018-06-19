@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.42.0 - 2018-06-19
+* [#529](https://github.com/stripe/stripe-java/pull/529) Annotate a lot of methods as deprecated and flagged for removal in the next major release
+
 ## 5.41.1 - 2018-06-17
 * [#528](https://github.com/stripe/stripe-java/pull/528) Add `name` to `Coupon` model
 
