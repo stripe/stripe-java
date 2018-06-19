@@ -20,19 +20,6 @@ public class TimeoutTest extends BaseStripeTest {
   public ExpectedException thrown = ExpectedException.none();
 
   @Test
-  public void testConnectTimeout() throws IOException, StripeException {
-    // Kind of a hack, but we use the non-routable address 10.255.255.0 to trigger a connection
-    // timeout
-    Stripe.overrideApiBase(String.format("http://10.255.255.0"));
-
-    thrown.expect(APIConnectionException.class);
-    thrown.expectMessage("connect timed out");
-
-    final RequestOptions options = RequestOptions.builder().setConnectTimeout(1).build();
-    Balance.retrieve(options);
-  }
-
-  @Test
   public void testReadTimeout() throws IOException, StripeException {
     // Create a local server that does nothing to trigger a read timeout
     try (final ServerSocket serverSocket =
