@@ -53,35 +53,6 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
   }
   // </editor-fold>
 
-  // <editor-fold desc="all">
-  /**
-   * List all SKUs.
-   *
-   * @deprecated Use the {@link #list(Map)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static SKUCollection all(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, null);
-  }
-
-  /**
-   * List all SKUs.
-   *
-   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static SKUCollection all(Map<String, Object> params,
-                  RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return list(params, options);
-  }
-  // </editor-fold>
-
   // <editor-fold desc="create">
   /**
    * Create a SKU.

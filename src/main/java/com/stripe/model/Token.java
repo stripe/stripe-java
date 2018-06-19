@@ -49,19 +49,6 @@ public class Token extends APIResource implements HasId {
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, classURL(Token.class), params, Token.class, options);
   }
-
-  /**
-   * Create a token.
-   *
-   * @deprecated Use the {@link #create(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static Token create(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return create(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
   // </editor-fold>
 
   // <editor-fold desc="retrieve">
@@ -81,19 +68,6 @@ public class Token extends APIResource implements HasId {
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.GET, instanceURL(Token.class, id), null, Token.class, options);
-  }
-
-  /**
-   * Retrieve a token.
-   *
-   * @deprecated Use the {@link #retrieve(String, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static Token retrieve(String id, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
   }
   // </editor-fold>
 }
