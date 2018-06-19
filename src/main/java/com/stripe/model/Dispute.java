@@ -89,6 +89,13 @@ public class Dispute extends APIResource implements HasId {
     return isChargeRefundable;
   }
 
+  // <editor-fold desc="all">
+  /**
+   * List all disputes.
+   *
+   * @deprecated Use the {@link #list(Map)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public static DisputeCollection all(Map<String, Object> params) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
@@ -96,67 +103,109 @@ public class Dispute extends APIResource implements HasId {
     return list(params, null);
   }
 
+  /**
+   * List all disputes.
+   *
+   * @deprecated Use the {@link #list(Map)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public static DisputeCollection all(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException, APIConnectionException,
       CardException, APIException {
     return list(params, options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="close">
+  /**
+   * Close a dispute.
+   */
   public Dispute close()
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return close(null);
   }
 
+  /**
+   * Close a dispute.
+   */
   public Dispute close(RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, String.format("%s/close",
         instanceURL(Dispute.class, this.getId())), null, Dispute.class, options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="list">
+  /**
+   * List all disputes.
+   */
   public static DisputeCollection list(Map<String, Object> params) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
     return list(params, null);
   }
 
+  /**
+   * List all disputes.
+   */
   public static DisputeCollection list(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException, APIConnectionException,
       CardException, APIException {
     return requestCollection(classURL(Dispute.class), params, DisputeCollection.class, options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="retrieve">
+  /**
+   * Retrieve a dispute.
+   */
   public static Dispute retrieve(String id) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
     return retrieve(id, null, null);
   }
 
+  /**
+   * Retrieve a dispute.
+   */
   public static Dispute retrieve(String id, RequestOptions options) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
     return retrieve(id, null, options);
   }
 
+  /**
+   * Retrieve a dispute.
+   */
   public static Dispute retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException, APIConnectionException,
       CardException, APIException {
     return request(RequestMethod.GET, instanceURL(Dispute.class, id), params, Dispute.class,
         options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="update">
+  /**
+   * Update a dispute.
+   */
   public Dispute update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return update(params, null);
   }
 
+  /**
+   * Update a dispute.
+   */
   public Dispute update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, instanceURL(Dispute.class, this.getId()),
         params, Dispute.class, options);
   }
+  // </editor-fold>
 }

@@ -54,58 +54,93 @@ public class Topup extends APIResource implements MetadataStore<Topup>, HasId {
   }
   // </editor-fold>
 
+  // <editor-fold desc="create">
+  /**
+   * Create a topup.
+   */
   public static Topup create(Map<String, Object> params)
           throws AuthenticationException, InvalidRequestException,
           APIConnectionException, CardException, APIException {
     return create(params, null);
   }
 
+  /**
+   * Create a topup.
+   */
   public static Topup create(Map<String, Object> params, RequestOptions options)
           throws AuthenticationException, InvalidRequestException,
           APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, classURL(Topup.class), params, Topup.class, options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="list">
+  /**
+   * List all topups.
+   */
   public static TopupCollection list(Map<String, Object> params)
           throws AuthenticationException, InvalidRequestException,
           APIConnectionException, CardException, APIException {
     return list(params, null);
   }
 
+  /**
+   * List all topups.
+   */
   public static TopupCollection list(Map<String, Object> params, RequestOptions options)
           throws AuthenticationException, InvalidRequestException,
           APIConnectionException, CardException, APIException {
     return requestCollection(classURL(Topup.class), params, TopupCollection.class, options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="retrieve">
+  /**
+   * Retrieve a topup.
+   */
   public static Topup retrieve(String id) throws AuthenticationException,
           InvalidRequestException, APIConnectionException, CardException,
           APIException {
     return retrieve(id, null);
   }
 
+  /**
+   * Retrieve a topup.
+   */
   public static Topup retrieve(String id, RequestOptions options)
           throws AuthenticationException, InvalidRequestException,
           APIConnectionException, CardException, APIException {
     return retrieve(id, null, options);
   }
 
+  /**
+   * Retrieve a topup.
+   */
   public static Topup retrieve(String id, Map<String, Object> params, RequestOptions options)
           throws AuthenticationException, InvalidRequestException,
           APIConnectionException, CardException, APIException {
     return request(RequestMethod.GET, instanceURL(Topup.class, id), params, Topup.class, options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="update">
+  /**
+   * Update a topup.
+   */
   @Override
   public Topup update(Map<String, Object> params) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException, APIException {
     return update(params, null);
   }
 
+  /**
+   * Update a topup.
+   */
   @Override
   public Topup update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException, APIConnectionException,
       CardException, APIException {
     return request(RequestMethod.POST, instanceURL(Topup.class, id), params, Topup.class, options);
   }
+  // </editor-fold>
 }

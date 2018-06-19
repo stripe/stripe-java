@@ -65,6 +65,10 @@ public class FeeRefund extends APIResource implements MetadataStore<ApplicationF
   }
   // </editor-fold>
 
+  // <editor-fold desc="update">
+  /**
+   * Update an application fee refund.
+   */
   @Override
   public FeeRefund update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
@@ -72,6 +76,9 @@ public class FeeRefund extends APIResource implements MetadataStore<ApplicationF
     return update(params, (RequestOptions) null);
   }
 
+  /**
+   * Update an application fee refund.
+   */
   @Override
   public FeeRefund update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
@@ -79,12 +86,19 @@ public class FeeRefund extends APIResource implements MetadataStore<ApplicationF
     return request(RequestMethod.POST, this.getInstanceURL(), params, FeeRefund.class, options);
   }
 
+  /**
+   * Update an application fee refund.
+   *
+   * @deprecated Use {@link #update(Map, RequestOptions)} instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public FeeRefund update(Map<String, Object> params, String apiKey)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
+  // </editor-fold>
 
   protected String getInstanceURL() {
     if (this.fee != null) {

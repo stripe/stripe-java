@@ -66,12 +66,19 @@ public class OrderReturn extends APIResource implements HasId {
   }
   // </editor-fold>
 
+  // <editor-fold desc="list">
+  /**
+   * List all order returns.
+   */
   public static OrderReturnCollection list(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return list(params, null);
   }
 
+  /**
+   * List all order returns.
+   */
   public static OrderReturnCollection list(Map<String, Object> params,
                        RequestOptions options) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
@@ -79,17 +86,26 @@ public class OrderReturn extends APIResource implements HasId {
     return requestCollection(classURL(OrderReturn.class), params, OrderReturnCollection.class,
         options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="retrieve">
+  /**
+   * Retrieve an order return.
+   */
   public static OrderReturn retrieve(String id)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return retrieve(id, null);
   }
 
+  /**
+   * Retrieve an order return.
+   */
   public static OrderReturn retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.GET, instanceURL(OrderReturn.class, id), null, OrderReturn.class,
         options);
   }
+  // </editor-fold>
 }

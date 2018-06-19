@@ -27,29 +27,45 @@ public class CountrySpec extends APIResource implements HasId {
   List<String> supportedPaymentMethods;
   VerificationFields verificationFields;
 
+  // <editor-fold desc="list">
+  /**
+   * List country specs.
+   */
   public static CountrySpecCollection list(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return list(params, null);
   }
 
+  /**
+   * List country specs.
+   */
   public static CountrySpecCollection list(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return requestCollection(classURL(CountrySpec.class), params, CountrySpecCollection.class,
         options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="retrieve">
+  /**
+   * Retrieve a country spec.
+   */
   public static CountrySpec retrieve(String country) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
     return retrieve(country, null);
   }
 
+  /**
+   * Retrieve a country spec.
+   */
   public static CountrySpec retrieve(String country, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.GET, instanceURL(CountrySpec.class, country), null,
         CountrySpec.class, options);
   }
+  // </editor-fold>
 }

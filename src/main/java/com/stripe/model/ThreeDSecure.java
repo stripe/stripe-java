@@ -32,6 +32,7 @@ public class ThreeDSecure extends APIResource implements HasId {
   @SerializedName("redirect_url") String redirectURL;
   String status;
 
+  // <editor-fold desc="create">
   public static ThreeDSecure create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -43,7 +44,9 @@ public class ThreeDSecure extends APIResource implements HasId {
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, getClassURL(), params, ThreeDSecure.class, options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="retrieve">
   public static ThreeDSecure retrieve(String id) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
@@ -55,6 +58,7 @@ public class ThreeDSecure extends APIResource implements HasId {
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.GET, getInstanceURL(id), null, ThreeDSecure.class, options);
   }
+  // </editor-fold>
 
   private static String getClassURL() {
     return String.format("%s/v1/%s", Stripe.getApiBase(), "3d_secure");

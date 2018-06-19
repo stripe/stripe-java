@@ -50,6 +50,13 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
   }
   // </editor-fold>
 
+  // <editor-fold desc="all">
+  /**
+   * List all products.
+   *
+   * @deprecated Use the {@link #list(Map)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public static ProductCollection all(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
@@ -57,6 +64,12 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
     return list(params, null);
   }
 
+  /**
+   * List all products.
+   *
+   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
+   *     This method will be removed in the next major version.
+   */
   @Deprecated
   public static ProductCollection all(Map<String, Object> params,
                     RequestOptions options) throws AuthenticationException,
@@ -65,56 +78,92 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
     return list(params, options);
   }
 
+  // <editor-fold desc="create">
+  /**
+   * Create a product.
+   */
   public static Product create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return create(params, null);
   }
 
+  /**
+   * Create a product.
+   */
   public static Product create(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, classURL(Product.class), params, Product.class, options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="delete">
+  /**
+   * Delete a product.
+   */
   public DeletedProduct delete()
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return delete(null);
   }
 
+  /**
+   * Delete a product.
+   */
   public DeletedProduct delete(RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.DELETE, instanceURL(Product.class, this.id), null,
         DeletedProduct.class, options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="list">
+  /**
+   * List all products.
+   */
   public static ProductCollection list(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return list(params, null);
   }
 
+  /**
+   * List all products.
+   */
   public static ProductCollection list(Map<String, Object> params,
                      RequestOptions options) throws AuthenticationException,
       InvalidRequestException, APIConnectionException, CardException,
       APIException {
     return requestCollection(classURL(Product.class), params, ProductCollection.class, options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="retrieve">
+  /**
+   * Retrieve a product.
+   */
   public static Product retrieve(String id)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return retrieve(id, null);
   }
 
+  /**
+   * Retrieve a product.
+   */
   public static Product retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.GET, instanceURL(Product.class, id), null, Product.class, options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="update">
+  /**
+   * Update a product.
+   */
   @Override
   public Product update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
@@ -122,6 +171,9 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
     return update(params, null);
   }
 
+  /**
+   * Update a product.
+   */
   @Override
   public Product update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
@@ -129,4 +181,5 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
     return request(RequestMethod.POST, instanceURL(Product.class, this.id), params,
         Product.class, options);
   }
+  // </editor-fold>
 }

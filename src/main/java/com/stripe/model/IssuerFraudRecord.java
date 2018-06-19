@@ -43,19 +43,7 @@ public class IssuerFraudRecord extends APIResource implements HasId {
     this.charge = new ExpandableField<Charge>(c.getId(), c);
   }
 
-  public static IssuerFraudRecord retrieve(String id)
-      throws AuthenticationException, InvalidRequestException,
-                      APIConnectionException, CardException, APIException {
-    return retrieve(id, null);
-  }
-
-  public static IssuerFraudRecord retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-                      APIConnectionException, CardException, APIException {
-    String url = instanceURL(IssuerFraudRecord.class, id);
-    return request(RequestMethod.GET, url, null, IssuerFraudRecord.class, null);
-  }
-
+  // <editor-fold desc="list">
   public static IssuerFraudRecordCollection list(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
                       APIConnectionException, CardException, APIException {
@@ -76,4 +64,20 @@ public class IssuerFraudRecord extends APIResource implements HasId {
         classURL(IssuerFraudRecord.class), params, IssuerFraudRecordCollection.class, options
     );
   }
+  // </editor-fold>
+
+  // <editor-fold desc="retrieve">
+  public static IssuerFraudRecord retrieve(String id)
+      throws AuthenticationException, InvalidRequestException,
+                      APIConnectionException, CardException, APIException {
+    return retrieve(id, null);
+  }
+
+  public static IssuerFraudRecord retrieve(String id, RequestOptions options)
+      throws AuthenticationException, InvalidRequestException,
+                      APIConnectionException, CardException, APIException {
+    String url = instanceURL(IssuerFraudRecord.class, id);
+    return request(RequestMethod.GET, url, null, IssuerFraudRecord.class, null);
+  }
+  // </editor-fold>
 }

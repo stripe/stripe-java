@@ -43,18 +43,27 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
     return instanceURL(Source.class, this.getId());
   }
 
+  // <editor-fold desc="create">
+  /**
+   * Create a source.
+   */
   public static Source create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return create(params, null);
   }
 
+  /**
+   * Create a source.
+   */
   public static Source create(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, classURL(Source.class), params, Source.class, options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="delete">
   /**
    * Source objects cannot be deleted. Calling this method will raise an
    * {@link InvalidRequestException}. Call {@link #detach} to detach the source from a
@@ -69,13 +78,21 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
         + "object, use detach().",
          null, null, null, 0, null);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="detach">
+  /**
+   * Detach a source.
+   */
   public Source detach()
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return detach(null, null);
   }
 
+  /**
+   * Detach a source.
+   */
   public Source detach(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
@@ -83,7 +100,7 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
   }
 
   /**
-   * Detaches the source from its customer object.
+   * Detach a source.
    */
   public Source detach(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
@@ -98,25 +115,41 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
           null, null, null, 0, null);
     }
   }
+  // </editor-fold>
 
+  // <editor-fold desc="retrieve">
+  /**
+   * Retrieve a source.
+   */
   public static Source retrieve(String id)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return retrieve(id, null);
   }
 
+  /**
+   * Retrieve a source.
+   */
   public static Source retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.GET, instanceURL(Source.class, id), null, Source.class, options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="sourceTransactions">
+  /**
+   * Retrieve a source's transactions.
+   */
   public SourceTransactionCollection sourceTransactions(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return sourceTransactions(params, null);
   }
 
+  /**
+   * Retrieve a source's transactions.
+   */
   public SourceTransactionCollection sourceTransactions(Map<String, Object> params,
       RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
@@ -124,7 +157,12 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
     String url = instanceURL(Source.class, this.getId()) + "/source_transactions";
     return requestCollection(url, params, SourceTransactionCollection.class, options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="update">
+  /**
+   * Update a source.
+   */
   @Override
   public Source update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
@@ -132,13 +170,21 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
     return update(params, null);
   }
 
+  /**
+   * Update a source.
+   */
   @Override
   public Source update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, this.getSourceInstanceURL(), params, Source.class, options);
   }
+  // </editor-fold>
 
+  // <editor-fold desc="verify">
+  /**
+   * Verify a source.
+   */
   @Override
   public Source verify(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
@@ -146,6 +192,9 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
     return verify(params, null);
   }
 
+  /**
+   * Verify a source.
+   */
   @Override
   public Source verify(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
@@ -153,4 +202,5 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
     return request(RequestMethod.POST, String.format("%s/verify", this.getSourceInstanceURL()),
         params, Source.class, options);
   }
+  // </editor-fold>
 }
