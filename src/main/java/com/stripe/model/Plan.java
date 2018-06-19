@@ -98,47 +98,6 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
   }
   // </editor-fold>
 
-  // <editor-fold desc="all">
-  /**
-   * List all plans.
-   *
-   * @deprecated Use the {@link #list(Map)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static PlanCollection all(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, null);
-  }
-
-  /**
-   * List all plans.
-   *
-   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static PlanCollection all(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, options);
-  }
-
-  /**
-   * List all plans.
-   *
-   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static PlanCollection all(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-  // </editor-fold>
-
   // <editor-fold desc="create">
   /**
    * Create a plan.
@@ -156,19 +115,6 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, classURL(Plan.class), params, Plan.class, options);
-  }
-
-  /**
-   * Create a plan.
-   *
-   * @deprecated Use the {@link #create(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static Plan create(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return create(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
   // </editor-fold>
 
@@ -190,19 +136,6 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
       APIException {
     return request(RequestMethod.DELETE, instanceURL(Plan.class, this.id), null, DeletedPlan.class,
         options);
-  }
-
-  /**
-   * Delete a plan.
-   *
-   * @deprecated Use the {@link #delete(RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public DeletedPlan delete(String apiKey) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return delete(RequestOptions.builder().setApiKey(apiKey).build());
   }
   // </editor-fold>
 
@@ -244,19 +177,6 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.GET, instanceURL(Plan.class, id), null, Plan.class, options);
   }
-
-  /**
-   * Retrieve a plan.
-   *
-   * @deprecated Use the {@link #retrieve(String, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static Plan retrieve(String id, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
-  }
   // </editor-fold>
 
   // <editor-fold desc="update">
@@ -279,19 +199,6 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, instanceURL(Plan.class, this.id), params, Plan.class,
         options);
-  }
-
-  /**
-   * Update a plan.
-   *
-   * @deprecated Use the {@link #update(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public Plan update(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
   // </editor-fold>
 }
