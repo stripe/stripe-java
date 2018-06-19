@@ -68,47 +68,6 @@ public class BalanceTransaction extends APIResource implements HasId {
   }
   // </editor-fold>
 
-  // <editor-fold desc="all">
-  /**
-   * List all balance history.
-   *
-   * @deprecated Use {@link #list(Map)} instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static BalanceTransactionCollection all(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, null);
-  }
-
-  /**
-   * List all balance history.
-   *
-   * @deprecated Use {@link #list(Map, RequestOptions)} instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static BalanceTransactionCollection all(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, options);
-  }
-
-  /**
-   * List all balance history.
-   *
-   * @deprecated Use {@link #list(Map, RequestOptions)} instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static BalanceTransactionCollection all(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-  // </editor-fold>
-
   // <editor-fold desc="list">
   /**
    * List all balance history.
@@ -149,19 +108,6 @@ public class BalanceTransaction extends APIResource implements HasId {
       APIConnectionException, CardException, APIException {
     String url = String.format("%s/%s/%s", Stripe.getApiBase(), "v1/balance/history", id);
     return request(RequestMethod.GET, url, null, BalanceTransaction.class, options);
-  }
-
-  /**
-   * Retrieve a balance transaction.
-   *
-   * @deprecated Use the {@link #retrieve(String, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static BalanceTransaction retrieve(String id, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
   }
   // </editor-fold>
 }

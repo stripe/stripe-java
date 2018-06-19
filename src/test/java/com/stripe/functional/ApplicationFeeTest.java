@@ -47,21 +47,4 @@ public class ApplicationFeeTest extends BaseStripeTest {
         params
     );
   }
-
-  @Test
-  public void testRefund() throws StripeException {
-    final ApplicationFee fee = getFeeFixture();
-
-    final Map<String, Object> params = new HashMap<String, Object>();
-    params.put("amount", 100);
-
-    final ApplicationFee refundedFee = fee.refund(params);
-
-    assertNotNull(refundedFee);
-    verifyRequest(
-        APIResource.RequestMethod.POST,
-        String.format("/v1/application_fees/%s/refund", fee.getId()),
-        params
-    );
-  }
 }
