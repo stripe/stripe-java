@@ -153,47 +153,6 @@ public class ApplicationFee extends APIResource implements HasId {
     return refunds;
   }
 
-  // <editor-fold desc="all">
-  /**
-   * List all application fees.
-   *
-   * @deprecated Use the {@link #list(Map)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static ApplicationFeeCollection all(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, null);
-  }
-
-  /**
-   * List all application fees.
-   *
-   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static ApplicationFeeCollection all(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, options);
-  }
-
-  /**
-   * List all application fees.
-   *
-   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static ApplicationFeeCollection all(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-  // </editor-fold>
-
   // <editor-fold desc="list">
   /**
    * List all application fees.
@@ -215,91 +174,6 @@ public class ApplicationFee extends APIResource implements HasId {
   }
   // </editor-fold>
 
-  // <editor-fold desc="refund">
-  /**
-   * Refund an application fee.
-   *
-   * @deprecated Use {@link #getRefunds()} and {@link FeeRefundCollection#create(Map)} instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public ApplicationFee refund() throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return this.refund(null, (RequestOptions) null);
-  }
-
-  /**
-   * Refund an application fee.
-   *
-   * @deprecated Use {@link #getRefunds()} and
-   *     {@link FeeRefundCollection#create(Map, RequestOptions)} instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public ApplicationFee refund(RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return refund(null, options);
-  }
-
-  /**
-   * Refund an application fee.
-   *
-   * @deprecated Use {@link #getRefunds()} and
-   *     {@link FeeRefundCollection#create(Map, RequestOptions)} instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public ApplicationFee refund(String apiKey) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return this.refund(RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  /**
-   * Refund an application fee.
-   *
-   * @deprecated Use {@link #getRefunds()} and {@link FeeRefundCollection#create(Map)} instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public ApplicationFee refund(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return this.refund(params, (RequestOptions) null);
-  }
-
-  /**
-   * Refund an application fee.
-   *
-   * @deprecated Use {@link #getRefunds()} and
-   *     {@link FeeRefundCollection#create(Map, RequestOptions)} instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public ApplicationFee refund(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, String.format("%s/refund",
-        instanceURL(ApplicationFee.class, this.getId())), params, ApplicationFee.class, options);
-  }
-
-  /**
-   * Refund an application fee.
-   *
-   * @deprecated Use {@link #getRefunds()} and
-   *     {@link FeeRefundCollection#create(Map, RequestOptions)} instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public ApplicationFee refund(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return refund(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-  // </editor-fold>
-
   // <editor-fold desc="retrieve">
   /**
    * Retrieve an application fee.
@@ -318,19 +192,6 @@ public class ApplicationFee extends APIResource implements HasId {
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.GET, instanceURL(ApplicationFee.class, id), null,
         ApplicationFee.class, options);
-  }
-
-  /**
-   * Retrieve an application fee.
-   *
-   * @deprecated Use {@link #retrieve(String, RequestOptions)} instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static ApplicationFee retrieve(String id, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
   }
   // </editor-fold>
 }

@@ -89,34 +89,6 @@ public class Dispute extends APIResource implements HasId {
     return isChargeRefundable;
   }
 
-  // <editor-fold desc="all">
-  /**
-   * List all disputes.
-   *
-   * @deprecated Use the {@link #list(Map)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static DisputeCollection all(Map<String, Object> params) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return list(params, null);
-  }
-
-  /**
-   * List all disputes.
-   *
-   * @deprecated Use the {@link #list(Map)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static DisputeCollection all(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
-    return list(params, options);
-  }
-  // </editor-fold>
-
   // <editor-fold desc="close">
   /**
    * Close a dispute.
