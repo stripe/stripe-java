@@ -75,34 +75,6 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
   @Deprecated
   List<String> currenciesSupported;
 
-  // <editor-fold desc="all">
-  /**
-   * List all connected accounts.
-   *
-   * @deprecated Use the {@link #list(Map)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static AccountCollection all(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, null);
-  }
-
-  /**
-   * List all connected accounts.
-   *
-   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static AccountCollection all(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, options);
-  }
-  // </editor-fold>
-
   // <editor-fold desc="create">
   /**
    * Create an account.

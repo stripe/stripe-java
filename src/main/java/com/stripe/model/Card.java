@@ -79,19 +79,6 @@ public class Card extends ExternalAccount {
       CardException, APIException {
     return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedCard.class, options);
   }
-
-  /**
-   * Delete a card.
-   *
-   * @deprecated Use the {@link #delete(RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public DeletedCard delete(String apiKey)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
-    return delete(RequestOptions.builder().setApiKey(apiKey).build());
-  }
   // </editor-fold>
 
   // <editor-fold desc="update">
@@ -113,19 +100,6 @@ public class Card extends ExternalAccount {
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, this.getInstanceURL(), params, Card.class, options);
-  }
-
-  /**
-   * Update a card.
-   *
-   * @deprecated Use the {@link #update(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public Card update(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
   // </editor-fold>
 

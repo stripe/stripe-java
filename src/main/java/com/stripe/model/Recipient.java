@@ -72,49 +72,6 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
   }
   // </editor-fold>
 
-  // <editor-fold desc="all">
-  /**
-   * List all recipients.
-   *
-   * @deprecated Use the {@link #list(Map)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static RecipientCollection all(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, null);
-  }
-
-  /**
-   * List all recipients.
-   *
-   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static RecipientCollection all(Map<String, Object> params,
-                      RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return list(params, options);
-  }
-
-  /**
-   * List all recipients.
-   *
-   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static RecipientCollection all(Map<String, Object> params,
-                      String apiKey) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return list(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-  // </editor-fold>
-
   // <editor-fold desc="create">
   /**
    * Create a recipient.
@@ -132,109 +89,6 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
       throws AuthenticationException, InvalidRequestException,
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, classURL(Recipient.class), params, Recipient.class, options);
-  }
-
-  /**
-   * Create a recipient.
-   *
-   * @deprecated Use the {@link #create(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static Recipient create(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return create(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-  // </editor-fold>
-
-  // <editor-fold desc="createCard">
-  /**
-   * Create a card.
-   *
-   * @deprecated Use {@link #getCards()} and
-   *     {@link RecipientCardCollection#create(Map)} instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public Card createCard(String token) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return createCard(token, (RequestOptions) null);
-  }
-
-  /**
-   * Create a card.
-   *
-   * @deprecated Use {@link #getCards()} and
-   *     {@link RecipientCardCollection#create(Map, RequestOptions)} instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public Card createCard(String token, RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    Map<String, Object> postParams = new HashMap<String, Object>();
-    postParams.put("card", token);
-
-    return createCard(postParams, options);
-  }
-
-  /**
-   * Create a card.
-   *
-   * @deprecated Use {@link #getCards()} and
-   *     {@link RecipientCardCollection#create(Map, RequestOptions)} instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public Card createCard(String token, String apiKey) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return createCard(token, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  /**
-   * Create a card.
-   *
-   * @deprecated Use {@link #getCards()} and
-   *     {@link RecipientCardCollection#create(Map)} instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public Card createCard(Map<String, Object> params) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return createCard(params, (RequestOptions) null);
-  }
-
-  /**
-   * Create a card.
-   *
-   * @deprecated Use {@link #getCards()} and
-   *     {@link RecipientCardCollection#create(Map, RequestOptions)} instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public Card createCard(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
-    return request(RequestMethod.POST, String.format("%s/cards",
-        instanceURL(Recipient.class, this.id)), params, Card.class, options);
-  }
-
-  /**
-   * Create a card.
-   *
-   * @deprecated Use {@link #getCards()} and
-   *     {@link RecipientCardCollection#create(Map, RequestOptions)} instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public Card createCard(Map<String, Object> params, String apiKey) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return createCard(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
   // </editor-fold>
 
@@ -256,19 +110,6 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.DELETE, instanceURL(Recipient.class, this.id), null,
         DeletedRecipient.class, options);
-  }
-
-  /**
-   * Delete a recipient.
-   *
-   * @deprecated Use the {@link #delete(RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public DeletedRecipient delete(String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return delete(RequestOptions.builder().setApiKey(apiKey).build());
   }
   // </editor-fold>
 
@@ -315,19 +156,6 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
 
   /**
    * Retrieve a recipient.
-   *
-   * @deprecated Use the {@link #retrieve(String, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static Recipient retrieve(String id, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  /**
-   * Retrieve a recipient.
    */
   public static Recipient retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
@@ -357,19 +185,6 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
       APIConnectionException, CardException, APIException {
     return request(RequestMethod.POST, instanceURL(Recipient.class, this.id), params,
         Recipient.class, options);
-  }
-
-  /**
-   * Update a recipient.
-   *
-   * @deprecated Use the {@link #update(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public Recipient update(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
   // </editor-fold>
 }
