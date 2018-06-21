@@ -1,13 +1,11 @@
 package com.stripe.model;
 
-import com.google.gson.annotations.SerializedName;
-
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
+import com.stripe.exception.ApiConnectionException;
+import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.List;
@@ -20,14 +18,13 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Account extends APIResource implements HasId, MetadataStore<Account> {
+public class Account extends ApiResource implements HasId, MetadataStore<Account> {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   String businessLogo;
   String businessName;
   String businessPrimaryColor;
-  @SerializedName("business_url")
-  String businessURL;
+  String businessUrl;
   Boolean chargesEnabled;
   String country;
   Boolean debitNegativeBalances;
@@ -47,8 +44,7 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
   String statementDescriptor;
   String supportEmail;
   String supportPhone;
-  @SerializedName("support_url")
-  String supportURL;
+  String supportUrl;
   String timezone;
   AccountTosAcceptance tosAcceptance;
   AccountTransferSchedule transferSchedule;
@@ -81,7 +77,7 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
    */
   public static Account create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return create(params, null);
   }
 
@@ -90,8 +86,8 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
    */
   public static Account create(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, classURL(Account.class), params, Account.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, classUrl(Account.class), params, Account.class, options);
   }
   // </editor-fold>
 
@@ -101,7 +97,7 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
    */
   public DeletedAccount delete()
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return delete(null, (RequestOptions) null);
   }
 
@@ -110,7 +106,7 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
    */
   public DeletedAccount delete(RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return delete(null, options);
   }
 
@@ -119,7 +115,7 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
    */
   public DeletedAccount delete(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return delete(params, null);
   }
 
@@ -128,8 +124,8 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
    */
   public DeletedAccount delete(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.DELETE, instanceURL(Account.class, this.id), params,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.DELETE, instanceUrl(Account.class, this.id), params,
         DeletedAccount.class, options);
   }
   // </editor-fold>
@@ -140,7 +136,7 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
    */
   public static AccountCollection list(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return list(params, null);
   }
 
@@ -149,8 +145,8 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
    */
   public static AccountCollection list(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return requestCollection(classURL(Account.class), params, AccountCollection.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return requestCollection(classUrl(Account.class), params, AccountCollection.class, options);
   }
   // </editor-fold>
 
@@ -160,7 +156,7 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
    */
   public Account reject(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return reject(params, null);
   }
 
@@ -169,9 +165,9 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
    */
   public Account reject(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return request(RequestMethod.POST, String.format("%s/reject",
-        instanceURL(Account.class, this.getId())), params, Account.class, options);
+        instanceUrl(Account.class, this.getId())), params, Account.class, options);
   }
   // </editor-fold>
 
@@ -181,7 +177,7 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
    */
   public static Account retrieve()
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return retrieve((RequestOptions) null);
   }
 
@@ -190,8 +186,8 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
    */
   public static Account retrieve(RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, singleClassURL(Account.class), null, Account.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, singleClassUrl(Account.class), null, Account.class, options);
   }
 
   /**
@@ -206,7 +202,7 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
   @Deprecated
   public static Account retrieve(String apiKeyOrAccountId)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     if (null == apiKeyOrAccountId || apiKeyOrAccountId.startsWith("sk_")) {
       return retrieve(RequestOptions.builder().setApiKey(apiKeyOrAccountId).build());
     } else {
@@ -219,8 +215,8 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
    */
   public static Account retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Account.class, id), null, Account.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(Account.class, id), null, Account.class, options);
   }
 
   /**
@@ -228,8 +224,8 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
    */
   public static Account retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Account.class, id), params, Account.class,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(Account.class, id), params, Account.class,
         options);
   }
   // </editor-fold>
@@ -241,7 +237,7 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
   @Override
   public Account update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return update(params, null);
   }
 
@@ -251,8 +247,8 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
   @Override
   public Account update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Account.class, this.id), params, Account.class,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, instanceUrl(Account.class, this.id), params, Account.class,
         options);
   }
   // </editor-fold>

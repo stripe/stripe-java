@@ -48,7 +48,7 @@ public final class Webhook {
    */
   public static Event constructEvent(String payload, String sigHeader, String secret,
       long tolerance) throws SignatureVerificationException {
-    Event event = APIResource.GSON.fromJson(payload, Event.class);
+    Event event = ApiResource.GSON.fromJson(payload, Event.class);
     Signature.verifyHeader(payload, sigHeader, secret, tolerance);
     return event;
   }
@@ -163,7 +163,7 @@ public final class Webhook {
      */
     private static String computeSignature(String payload, String secret)
         throws NoSuchAlgorithmException, InvalidKeyException {
-      return Util.computeHmacSHA256(secret, payload);
+      return Util.computeHmacSha256(secret, payload);
     }
   }
 
@@ -175,7 +175,7 @@ public final class Webhook {
      * @param message the message.
      * @return the code as a string.
      */
-    public static String computeHmacSHA256(String key, String message)
+    public static String computeHmacSha256(String key, String message)
         throws NoSuchAlgorithmException, InvalidKeyException {
       Mac hasher = Mac.getInstance("HmacSHA256");
       hasher.init(new SecretKeySpec(key.getBytes(StandardCharsets.UTF_8), "HmacSHA256"));

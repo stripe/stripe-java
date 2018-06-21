@@ -1,11 +1,11 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
+import com.stripe.exception.ApiConnectionException;
+import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.List;
@@ -19,7 +19,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Order extends APIResource implements HasId, MetadataStore<Order> {
+public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long amount;
@@ -49,8 +49,8 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
     return (this.charge != null) ? this.charge.getId() : null;
   }
 
-  public void setCharge(String chargeID) {
-    this.charge = setExpandableFieldID(chargeID, this.charge);
+  public void setCharge(String chargeId) {
+    this.charge = setExpandableFieldId(chargeId, this.charge);
   }
 
   public Charge getChargeObject() {
@@ -67,8 +67,8 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
     return (this.customer != null) ? this.customer.getId() : null;
   }
 
-  public void setCustomer(String customerID) {
-    this.customer = setExpandableFieldID(customerID, this.customer);
+  public void setCustomer(String customerId) {
+    this.customer = setExpandableFieldId(customerId, this.customer);
   }
 
   public Customer getCustomerObject() {
@@ -86,7 +86,7 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
    */
   public static Order create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return create(params, null);
   }
 
@@ -95,8 +95,8 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
    */
   public static Order create(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, classURL(Order.class), params, Order.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, classUrl(Order.class), params, Order.class, options);
   }
   // </editor-fold>
 
@@ -106,7 +106,7 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
    */
   public static OrderCollection list(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return list(params, null);
   }
 
@@ -115,9 +115,9 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
    */
   public static OrderCollection list(Map<String, Object> params,
                      RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return requestCollection(classURL(Order.class), params, OrderCollection.class, options);
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
+    return requestCollection(classUrl(Order.class), params, OrderCollection.class, options);
   }
   // </editor-fold>
 
@@ -126,8 +126,8 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
    * Pay an order.
    */
   public Order pay(Map<String, Object> params) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
     return this.pay(params, null);
   }
 
@@ -135,10 +135,10 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
    * Pay an order.
    */
   public Order pay(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
+      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
+      CardException, ApiException {
     return request(RequestMethod.POST, String.format("%s/pay",
-        instanceURL(Order.class, this.getId())), params, Order.class, options);
+        instanceUrl(Order.class, this.getId())), params, Order.class, options);
   }
   // </editor-fold>
 
@@ -148,7 +148,7 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
    */
   public static Order retrieve(String id)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return retrieve(id, null);
   }
 
@@ -157,8 +157,8 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
    */
   public static Order retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Order.class, id), null, Order.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(Order.class, id), null, Order.class, options);
   }
 
   /**
@@ -166,8 +166,8 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
    */
   public static Order retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Order.class, id), params, Order.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(Order.class, id), params, Order.class, options);
   }
   // </editor-fold>
 
@@ -176,8 +176,8 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
    * Return an order.
    */
   public OrderReturn returnOrder(Map<String, Object> params) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
     return this.returnOrder(params, null);
   }
 
@@ -185,10 +185,10 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
    * Return an order.
    */
   public OrderReturn returnOrder(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
+      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
+      CardException, ApiException {
     return request(RequestMethod.POST, String.format("%s/returns",
-        instanceURL(Order.class, this.getId())), params, OrderReturn.class, options);
+        instanceUrl(Order.class, this.getId())), params, OrderReturn.class, options);
   }
   // </editor-fold>
 
@@ -199,7 +199,7 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
   @Override
   public Order update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return update(params, null);
   }
 
@@ -209,8 +209,8 @@ public class Order extends APIResource implements HasId, MetadataStore<Order> {
   @Override
   public Order update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Order.class, this.id), params, Order.class,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, instanceUrl(Order.class, this.id), params, Order.class,
         options);
   }
   // </editor-fold>

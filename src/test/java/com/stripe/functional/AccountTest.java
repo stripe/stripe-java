@@ -8,7 +8,7 @@ import com.stripe.model.Account;
 import com.stripe.model.AccountCollection;
 import com.stripe.model.DeletedAccount;
 import com.stripe.model.ExternalAccount;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +33,7 @@ public class AccountTest extends BaseStripeTest {
 
     assertNotNull(account);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/accounts"),
         params
     );
@@ -48,7 +48,7 @@ public class AccountTest extends BaseStripeTest {
 
     assertNotNull(accounts);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/accounts"),
         params
     );
@@ -60,7 +60,7 @@ public class AccountTest extends BaseStripeTest {
 
     assertNotNull(account);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/account")
     );
   }
@@ -71,7 +71,7 @@ public class AccountTest extends BaseStripeTest {
 
     assertNotNull(account);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/accounts/%s", ACCOUNT_ID)
     );
   }
@@ -89,7 +89,7 @@ public class AccountTest extends BaseStripeTest {
 
     assertNotNull(updatedAccount);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/accounts/%s", account.getId()),
         params
     );
@@ -103,7 +103,7 @@ public class AccountTest extends BaseStripeTest {
 
     assertNotNull(deletedAccount);
     verifyRequest(
-        APIResource.RequestMethod.DELETE,
+        ApiResource.RequestMethod.DELETE,
         String.format("/v1/accounts/%s", account.getId())
     );
   }
@@ -119,7 +119,7 @@ public class AccountTest extends BaseStripeTest {
 
     assertNotNull(rejectedAccount);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/accounts/%s/reject", account.getId()),
         params
     );
@@ -136,7 +136,7 @@ public class AccountTest extends BaseStripeTest {
 
     assertNotNull(ea);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/accounts/%s/external_accounts", resource.getId()),
         params
     );

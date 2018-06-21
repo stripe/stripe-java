@@ -7,7 +7,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
 import com.stripe.model.CustomerCollection;
 import com.stripe.model.DeletedCustomer;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -33,7 +33,7 @@ public class CustomerTest extends BaseStripeTest {
 
     assertNotNull(customer);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/customers"),
         params
     );
@@ -45,7 +45,7 @@ public class CustomerTest extends BaseStripeTest {
 
     assertNotNull(customer);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/customers/%s", CUSTOMER_ID)
     );
   }
@@ -63,7 +63,7 @@ public class CustomerTest extends BaseStripeTest {
 
     assertNotNull(updatedCustomer);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/customers/%s", customer.getId()),
         params
     );
@@ -78,7 +78,7 @@ public class CustomerTest extends BaseStripeTest {
 
     assertNotNull(customers);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/customers"),
         params
     );
@@ -92,7 +92,7 @@ public class CustomerTest extends BaseStripeTest {
 
     assertNotNull(deletedCustomer);
     verifyRequest(
-        APIResource.RequestMethod.DELETE,
+        ApiResource.RequestMethod.DELETE,
         String.format("/v1/customers/%s", customer.getId())
     );
   }
@@ -103,7 +103,7 @@ public class CustomerTest extends BaseStripeTest {
 
     // stripe-mock does not support /v1/customers/%s/discount endpoint, so we stub the request
     stubRequest(
-        APIResource.RequestMethod.DELETE,
+        ApiResource.RequestMethod.DELETE,
         String.format("/v1/customers/%s/discount", customer.getId()),
         null,
         void.class,
@@ -113,7 +113,7 @@ public class CustomerTest extends BaseStripeTest {
     customer.deleteDiscount();
 
     verifyRequest(
-        APIResource.RequestMethod.DELETE,
+        ApiResource.RequestMethod.DELETE,
         String.format("/v1/customers/%s/discount", customer.getId())
     );
   }

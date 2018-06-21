@@ -1,8 +1,8 @@
 package com.stripe.model;
 
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
-public class PlanTier extends APIResource {
+public class PlanTier extends ApiResource {
   Long amount;
   Long upTo;
 

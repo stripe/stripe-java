@@ -6,7 +6,7 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.InvoiceItem;
 import com.stripe.model.InvoiceItemCollection;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,7 +34,7 @@ public class InvoiceItemTest extends BaseStripeTest {
 
     assertNotNull(item);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/invoiceitems"),
         params
     );
@@ -46,7 +46,7 @@ public class InvoiceItemTest extends BaseStripeTest {
 
     assertNotNull(item);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/invoiceitems/%s", INVOICE_ITEM_ID)
     );
   }
@@ -64,7 +64,7 @@ public class InvoiceItemTest extends BaseStripeTest {
 
     assertNotNull(updatedItem);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/invoiceitems/%s", resource.getId()),
         params
     );
@@ -79,7 +79,7 @@ public class InvoiceItemTest extends BaseStripeTest {
 
     assertNotNull(items);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/invoiceitems"),
         params
     );
