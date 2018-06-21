@@ -6,7 +6,7 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Subscription;
 import com.stripe.model.SubscriptionCollection;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -38,7 +38,7 @@ public class SubscriptionTest extends BaseStripeTest {
 
     assertNotNull(subscription);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         "/v1/subscriptions",
         params
     );
@@ -50,7 +50,7 @@ public class SubscriptionTest extends BaseStripeTest {
 
     assertNotNull(subscription);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/subscriptions/%s", SUBSCRIPTION_ID)
     );
   }
@@ -68,7 +68,7 @@ public class SubscriptionTest extends BaseStripeTest {
 
     assertNotNull(updatedSubscription);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/subscriptions/%s", subscription.getId()),
         params
     );
@@ -83,7 +83,7 @@ public class SubscriptionTest extends BaseStripeTest {
 
     assertNotNull(subscriptions);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         "/v1/subscriptions",
         params
     );
@@ -97,7 +97,7 @@ public class SubscriptionTest extends BaseStripeTest {
 
     assertNotNull(canceledSubscription);
     verifyRequest(
-        APIResource.RequestMethod.DELETE,
+        ApiResource.RequestMethod.DELETE,
         String.format("/v1/subscriptions/%s", subscription.getId())
     );
   }
@@ -109,7 +109,7 @@ public class SubscriptionTest extends BaseStripeTest {
     subscription.deleteDiscount();
 
     verifyRequest(
-        APIResource.RequestMethod.DELETE,
+        ApiResource.RequestMethod.DELETE,
         String.format("/v1/subscriptions/%s/discount", subscription.getId())
     );
   }

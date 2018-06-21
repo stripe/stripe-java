@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import com.stripe.BaseStripeTest;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ public class SubscriptionItemTest extends BaseStripeTest {
   public void testDeserialize() throws Exception {
     final String data = getFixture("/v1/subscription_items/si_123");
     final SubscriptionItem subscriptionItem =
-        APIResource.GSON.fromJson(data, SubscriptionItem.class);
+        ApiResource.GSON.fromJson(data, SubscriptionItem.class);
     assertNotNull(subscriptionItem);
     assertNotNull(subscriptionItem.getId());
     assertEquals("subscription_item", subscriptionItem.getObject());

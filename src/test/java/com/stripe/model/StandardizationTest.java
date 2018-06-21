@@ -9,7 +9,7 @@ import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.Invokable;
 import com.google.common.reflect.Parameter;
 
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.io.IOException;
@@ -100,7 +100,7 @@ public class StandardizationTest {
         assertTrue(
             String.format("Methods on %ss like %s.%s should take a final "
                   +       "parameter as a %s parameter, but got %s.%n",
-                APIResource.class.getSimpleName(), model.getSimpleName(), method.getName(),
+                ApiResource.class.getSimpleName(), model.getSimpleName(), method.getName(),
                 RequestOptions.class.getSimpleName(), finalParamType.getCanonicalName()),
             RequestOptions.class.isAssignableFrom(finalParamType));
       }
@@ -116,11 +116,11 @@ public class StandardizationTest {
     for (ClassPath.ClassInfo classInfo : topLevelClasses) {
       Class<?> c = classInfo.load();
       // Skip things that aren't APIResources
-      if (!APIResource.class.isAssignableFrom(c)) {
+      if (!ApiResource.class.isAssignableFrom(c)) {
         continue;
       }
       // Skip the APIResource itself
-      if (APIResource.class == c) {
+      if (ApiResource.class == c) {
         continue;
       }
       classList.add(classInfo.load());

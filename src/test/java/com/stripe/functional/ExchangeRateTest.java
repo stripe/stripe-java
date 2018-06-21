@@ -6,7 +6,7 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.ExchangeRate;
 import com.stripe.model.ExchangeRateCollection;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +22,7 @@ public class ExchangeRateTest extends BaseStripeTest {
 
     assertNotNull(rate);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/exchange_rates/usd")
     );
   }
@@ -36,7 +36,7 @@ public class ExchangeRateTest extends BaseStripeTest {
 
     assertNotNull(rates);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/exchange_rates")
     );
   }

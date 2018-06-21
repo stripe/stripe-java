@@ -1,11 +1,11 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
+import com.stripe.exception.ApiConnectionException;
+import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.Map;
@@ -18,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Refund extends APIResource implements MetadataStore<Charge>, HasId {
+public class Refund extends ApiResource implements MetadataStore<Charge>, HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long amount;
@@ -38,8 +38,8 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
     return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
   }
 
-  public void setBalanceTransaction(String balanceTransactionID) {
-    this.balanceTransaction = setExpandableFieldID(balanceTransactionID, this.balanceTransaction);
+  public void setBalanceTransaction(String balanceTransactionId) {
+    this.balanceTransaction = setExpandableFieldId(balanceTransactionId, this.balanceTransaction);
   }
 
   public BalanceTransaction getBalanceTransactionObject() {
@@ -56,8 +56,8 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
     return (this.charge != null) ? this.charge.getId() : null;
   }
 
-  public void setCharge(String chargeID) {
-    this.charge = setExpandableFieldID(chargeID, this.charge);
+  public void setCharge(String chargeId) {
+    this.charge = setExpandableFieldId(chargeId, this.charge);
   }
 
   public Charge getChargeObject() {
@@ -75,7 +75,7 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
    */
   public static Refund create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return create(params, null);
   }
 
@@ -84,8 +84,8 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
    */
   public static Refund create(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, classURL(Refund.class), params, Refund.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, classUrl(Refund.class), params, Refund.class, options);
   }
   // </editor-fold>
 
@@ -95,7 +95,7 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
    */
   public static RefundCollection list(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return list(params, null);
   }
 
@@ -104,8 +104,8 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
    */
   public static RefundCollection list(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return requestCollection(classURL(Refund.class), params, RefundCollection.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return requestCollection(classUrl(Refund.class), params, RefundCollection.class, options);
   }
   // </editor-fold>
 
@@ -115,7 +115,7 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
    */
   public static Refund retrieve(String id)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return retrieve(id, null);
   }
 
@@ -124,8 +124,8 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
    */
   public static Refund retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Refund.class, id), null, Refund.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(Refund.class, id), null, Refund.class, options);
   }
 
   /**
@@ -133,8 +133,8 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
    */
   public static Refund retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Refund.class, id), params, Refund.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(Refund.class, id), params, Refund.class, options);
   }
   // </editor-fold>
 
@@ -145,7 +145,7 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
   @Override
   public Refund update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return update(params, (RequestOptions) null);
   }
 
@@ -155,8 +155,8 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
   @Override
   public Refund update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Refund.class, id), params, Refund.class,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, instanceUrl(Refund.class, id), params, Refund.class,
         options);
   }
   // </editor-fold>

@@ -1,6 +1,6 @@
 package com.stripe.model;
 
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.util.Map;
 
@@ -11,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class SourceMandateNotification extends APIResource implements HasId, HasSourceTypeData {
+public class SourceMandateNotification extends ApiResource implements HasId, HasSourceTypeData {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long amount;

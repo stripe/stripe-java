@@ -1,14 +1,14 @@
 package com.stripe.net;
 
 import com.stripe.Stripe;
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
+import com.stripe.exception.ApiConnectionException;
+import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.oauth.OAuthException;
 import com.stripe.model.oauth.DeauthorizedAccount;
 import com.stripe.model.oauth.TokenResponse;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 import com.stripe.net.LiveStripeResponseGetter;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
@@ -30,7 +30,7 @@ public final class OAuth {
    * @param options the request options.
    * @return the URL to Stripe's OAuth form.
    */
-  public static String authorizeURL(Map<String, Object> params, RequestOptions options)
+  public static String authorizeUrl(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException {
     final String base = Stripe.getConnectBase();
 
@@ -43,7 +43,7 @@ public final class OAuth {
       query = LiveStripeResponseGetter.createQuery(params);
     } catch (UnsupportedEncodingException e) {
       throw new InvalidRequestException("Unable to encode parameters to "
-          + APIResource.CHARSET
+          + ApiResource.CHARSET
           + ". Please contact support@stripe.com for assistance.",
           null, null, null, 0, e);
     }
@@ -63,11 +63,11 @@ public final class OAuth {
    *         API.
    */
   public static TokenResponse token(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException, APIException,
+      throws AuthenticationException, InvalidRequestException, ApiConnectionException, ApiException,
       OAuthException {
     String url = Stripe.getConnectBase() + "/oauth/token";
-    return OAuth.stripeResponseGetter.oauthRequest(APIResource.RequestMethod.POST, url, params,
-        TokenResponse.class, APIResource.RequestType.NORMAL, options);
+    return OAuth.stripeResponseGetter.oauthRequest(ApiResource.RequestMethod.POST, url, params,
+        TokenResponse.class, ApiResource.RequestType.NORMAL, options);
   }
 
 
@@ -80,12 +80,12 @@ public final class OAuth {
    *         OAuth API.
    */
   public static DeauthorizedAccount deauthorize(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException, APIException,
+      throws AuthenticationException, InvalidRequestException, ApiConnectionException, ApiException,
       OAuthException {
     String url = Stripe.getConnectBase() + "/oauth/deauthorize";
     params.put("client_id", getClientId(params, options));
-    return OAuth.stripeResponseGetter.oauthRequest(APIResource.RequestMethod.POST, url, params,
-        DeauthorizedAccount.class, APIResource.RequestType.NORMAL, options);
+    return OAuth.stripeResponseGetter.oauthRequest(ApiResource.RequestMethod.POST, url, params,
+        DeauthorizedAccount.class, ApiResource.RequestType.NORMAL, options);
   }
 
   /**

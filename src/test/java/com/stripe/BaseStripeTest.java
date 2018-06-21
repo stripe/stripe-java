@@ -6,7 +6,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import com.stripe.exception.StripeException;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 import com.stripe.net.LiveStripeResponseGetter;
 import com.stripe.net.OAuth;
 import com.stripe.net.RequestOptions;
@@ -99,7 +99,7 @@ public class BaseStripeTest {
     Stripe.clientId = "ca_123";
 
     networkSpy = Mockito.spy(new LiveStripeResponseGetter());
-    APIResource.setStripeResponseGetter(networkSpy);
+    ApiResource.setStripeResponseGetter(networkSpy);
     OAuth.setStripeResponseGetter(networkSpy);
   }
 
@@ -109,7 +109,7 @@ public class BaseStripeTest {
    */
   @After
   public void tearDownStripeMock() {
-    APIResource.setStripeResponseGetter(new LiveStripeResponseGetter());
+    ApiResource.setStripeResponseGetter(new LiveStripeResponseGetter());
 
     Stripe.overrideApiBase(this.origApiBase);
     Stripe.overrideUploadBase(this.origUploadBase);
@@ -120,11 +120,11 @@ public class BaseStripeTest {
   /**
    * {@code params}, {@code requestType} and {@code options} defaults to {@code null}.
    *
-   * @see BaseStripeTest#verifyRequest(APIResource.RequestMethod, String, Map,
-   *     APIResource.RequestType, RequestOptions)
+   * @see BaseStripeTest#verifyRequest(ApiResource.RequestMethod, String, Map,
+   *     ApiResource.RequestType, RequestOptions)
    */
   public static <T> void verifyRequest(
-      APIResource.RequestMethod method,
+      ApiResource.RequestMethod method,
       String path) throws StripeException {
     verifyRequest(method, path, null, null, null);
   }
@@ -132,11 +132,11 @@ public class BaseStripeTest {
   /**
    * {@code requestType} and {@code options} defaults to {@code null}.
    *
-   * @see BaseStripeTest#verifyRequest(APIResource.RequestMethod, String, Map,
-   *     APIResource.RequestType, RequestOptions)
+   * @see BaseStripeTest#verifyRequest(ApiResource.RequestMethod, String, Map,
+   *     ApiResource.RequestType, RequestOptions)
    */
   public static <T> void verifyRequest(
-      APIResource.RequestMethod method,
+      ApiResource.RequestMethod method,
       String path,
       Map<String, Object> params) throws StripeException {
     verifyRequest(method, path, params, null, null);
@@ -153,10 +153,10 @@ public class BaseStripeTest {
    * @param options request options. If null, the options are not checked.
    */
   public static <T> void verifyRequest(
-      APIResource.RequestMethod method,
+      ApiResource.RequestMethod method,
       String path,
       Map<String, Object> params,
-      APIResource.RequestType requestType,
+      ApiResource.RequestType requestType,
       RequestOptions options) throws StripeException {
     String url;
     if (path.startsWith("/")) {
@@ -172,7 +172,7 @@ public class BaseStripeTest {
           : Mockito.<Map<String, Object>>any(),
         Mockito.<Class<T>>any(),
         (requestType != null) ? Mockito.eq(requestType) :
-          Mockito.any(APIResource.RequestType.class),
+          Mockito.any(ApiResource.RequestType.class),
         (options != null) ? Mockito.argThat(new RequestOptionsMatcher(options))
           : Mockito.<RequestOptions>any()
     );
@@ -195,11 +195,11 @@ public class BaseStripeTest {
   /**
    * {@code params}, {@code requestType} and {@code options} defaults to {@code null}.
    *
-   * @see BaseStripeTest#stubRequest(APIResource.RequestMethod, String, Map,
-   *     APIResource.RequestType, RequestOptions, Class, String)
+   * @see BaseStripeTest#stubRequest(ApiResource.RequestMethod, String, Map,
+   *     ApiResource.RequestType, RequestOptions, Class, String)
    */
   public static <T> void stubRequest(
-      APIResource.RequestMethod method,
+      ApiResource.RequestMethod method,
       String path,
       Class<T> clazz,
       String response) throws StripeException {
@@ -209,11 +209,11 @@ public class BaseStripeTest {
   /**
    * {@code requestType} and {@code options} defaults to {@code null}.
    *
-   * @see BaseStripeTest#stubRequest(APIResource.RequestMethod, String, Map,
-   *     APIResource.RequestType, RequestOptions, Class, String)
+   * @see BaseStripeTest#stubRequest(ApiResource.RequestMethod, String, Map,
+   *     ApiResource.RequestType, RequestOptions, Class, String)
    */
   public static <T> void stubRequest(
-      APIResource.RequestMethod method,
+      ApiResource.RequestMethod method,
       String path,
       Map<String, Object> params,
       Class<T> clazz,
@@ -236,10 +236,10 @@ public class BaseStripeTest {
    *     request.
    */
   public static <T> void stubRequest(
-      APIResource.RequestMethod method,
+      ApiResource.RequestMethod method,
       String path,
       Map<String, Object> params,
-      APIResource.RequestType requestType,
+      ApiResource.RequestType requestType,
       RequestOptions options,
       Class<T> clazz,
       String response) throws StripeException {
@@ -251,7 +251,7 @@ public class BaseStripeTest {
     }
 
     Mockito
-        .doReturn(APIResource.GSON.fromJson(response, clazz))
+        .doReturn(ApiResource.GSON.fromJson(response, clazz))
         .when(networkSpy).request(
           Mockito.eq(method),
           Mockito.eq(url),
@@ -259,7 +259,7 @@ public class BaseStripeTest {
             : Mockito.<Map<String, Object>>any(),
           Mockito.<Class<T>>any(),
           (requestType != null) ? Mockito.eq(requestType)
-            : Mockito.any(APIResource.RequestType.class),
+            : Mockito.any(ApiResource.RequestType.class),
           (options != null) ? Mockito.argThat(new RequestOptionsMatcher(options))
             : Mockito.<RequestOptions>any()
       );
@@ -271,13 +271,13 @@ public class BaseStripeTest {
   public static <T> void stubOAuthRequest(Class<T> clazz, String response)
       throws StripeException {
     Mockito
-        .doReturn(APIResource.GSON.fromJson(response, clazz))
+        .doReturn(ApiResource.GSON.fromJson(response, clazz))
         .when(networkSpy).oauthRequest(
-          Mockito.any(APIResource.RequestMethod.class),
+          Mockito.any(ApiResource.RequestMethod.class),
           Mockito.anyString(),
           Mockito.<Map<String, Object>>any(),
           Mockito.<Class<T>>any(),
-          Mockito.any(APIResource.RequestType.class),
+          Mockito.any(ApiResource.RequestType.class),
           Mockito.<RequestOptions>any()
       );
   }

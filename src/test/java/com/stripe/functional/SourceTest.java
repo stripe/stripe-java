@@ -8,7 +8,7 @@ import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Source;
 import com.stripe.model.SourceTransactionCollection;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -40,7 +40,7 @@ public class SourceTest extends BaseStripeTest {
 
     assertNotNull(source);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         "/v1/sources",
         params
     );
@@ -52,7 +52,7 @@ public class SourceTest extends BaseStripeTest {
 
     assertNotNull(source);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/sources/%s", SOURCE_ID)
     );
   }
@@ -70,7 +70,7 @@ public class SourceTest extends BaseStripeTest {
 
     assertNotNull(updatedSource);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/sources/%s", source.getId()),
         params
     );
@@ -90,7 +90,7 @@ public class SourceTest extends BaseStripeTest {
 
     assertNotNull(verifiedSource);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/sources/%s/verify", source.getId()),
         params
     );
@@ -104,7 +104,7 @@ public class SourceTest extends BaseStripeTest {
     // stripe-mock returns a bank_account instead of a source, which causes a deserialization
     // error. Stub the request for now.
     stubRequest(
-        APIResource.RequestMethod.DELETE,
+        ApiResource.RequestMethod.DELETE,
         String.format("/v1/customers/%s/sources/%s", source.getCustomer(), source.getId()),
         new HashMap<String, Object>(),
         Source.class,
@@ -116,7 +116,7 @@ public class SourceTest extends BaseStripeTest {
     assertNotNull(detachedSource);
     assertNull(detachedSource.getCustomer());
     verifyRequest(
-        APIResource.RequestMethod.DELETE,
+        ApiResource.RequestMethod.DELETE,
         String.format("/v1/customers/%s/sources/%s", source.getCustomer(), source.getId())
     );
   }
@@ -140,7 +140,7 @@ public class SourceTest extends BaseStripeTest {
 
     assertNotNull(transactions);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/sources/%s/source_transactions", SOURCE_ID),
         params
     );

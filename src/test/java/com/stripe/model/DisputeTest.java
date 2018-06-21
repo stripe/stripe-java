@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import com.stripe.BaseStripeTest;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ public class DisputeTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getFixture("/v1/disputes/dp_123");
-    final Dispute dispute = APIResource.GSON.fromJson(data, Dispute.class);
+    final Dispute dispute = ApiResource.GSON.fromJson(data, Dispute.class);
     assertNotNull(dispute);
     assertNotNull(dispute.getId());
     assertEquals("dispute", dispute.getObject());
@@ -26,7 +26,7 @@ public class DisputeTest extends BaseStripeTest {
       "charge",
     };
     final String data = getFixture("/v1/disputes/dp_123", expansions);
-    final Dispute dispute = APIResource.GSON.fromJson(data, Dispute.class);
+    final Dispute dispute = ApiResource.GSON.fromJson(data, Dispute.class);
     assertNotNull(dispute);
     final Charge charge = dispute.getChargeObject();
     assertNotNull(charge);

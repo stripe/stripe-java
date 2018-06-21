@@ -1,11 +1,11 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
+import com.stripe.exception.ApiConnectionException;
+import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.List;
@@ -17,7 +17,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Balance extends APIResource {
+public class Balance extends ApiResource {
   String object;
   List<Money> available;
   Boolean livemode;
@@ -28,8 +28,8 @@ public class Balance extends APIResource {
    * Retrieve balance.
    */
   public static Balance retrieve() throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
     return retrieve((RequestOptions) null);
   }
 
@@ -38,8 +38,8 @@ public class Balance extends APIResource {
    */
   public static Balance retrieve(RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, singleClassURL(Balance.class), null, Balance.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, singleClassUrl(Balance.class), null, Balance.class, options);
   }
   // </editor-fold>
 }
