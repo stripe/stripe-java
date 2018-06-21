@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Token;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -30,7 +30,7 @@ public class TokenTest extends BaseStripeTest {
 
     assertNotNull(token);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         "/v1/tokens",
         params
     );
@@ -42,7 +42,7 @@ public class TokenTest extends BaseStripeTest {
 
     assertNotNull(token);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/tokens/%s", TOKEN_ID)
     );
   }

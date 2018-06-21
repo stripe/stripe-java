@@ -7,7 +7,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Account;
 import com.stripe.model.LoginLink;
 import com.stripe.model.LoginLinkCollection;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.io.IOException;
 
@@ -22,11 +22,11 @@ public class LoginLinkTest extends BaseStripeTest {
 
     // stripe-mock doesn't support this
     final LoginLinkCollection stubbedCollection = new LoginLinkCollection();
-    stubbedCollection.setURL(String.format("/v1/accounts/%s/login_links", account.getId()));
+    stubbedCollection.setUrl(String.format("/v1/accounts/%s/login_links", account.getId()));
     account.setLoginLinks(stubbedCollection);
 
     stubRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/accounts/%s/login_links", account.getId()),
         null,
         LoginLink.class,
@@ -37,7 +37,7 @@ public class LoginLinkTest extends BaseStripeTest {
 
     assertNotNull(link);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/accounts/%s/login_links", account.getId())
     );
   }

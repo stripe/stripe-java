@@ -1,7 +1,7 @@
 package com.stripe.model.issuing;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
+import com.stripe.exception.ApiConnectionException;
+import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
@@ -9,7 +9,7 @@ import com.stripe.model.Address;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.StripeObject;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.List;
@@ -23,7 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Card extends APIResource implements MetadataStore<Card>, HasId {
+public class Card extends ApiResource implements MetadataStore<Card>, HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   AuthorizationControls authorizationControls;
@@ -47,7 +47,7 @@ public class Card extends APIResource implements MetadataStore<Card>, HasId {
    */
   public static Card create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return create(params, null);
   }
 
@@ -56,8 +56,8 @@ public class Card extends APIResource implements MetadataStore<Card>, HasId {
    */
   public static Card create(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, classURL(Card.class), params,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, classUrl(Card.class), params,
       Card.class, options);
   }
   // </editor-fold>
@@ -68,7 +68,7 @@ public class Card extends APIResource implements MetadataStore<Card>, HasId {
    */
   public CardDetails details(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return details(params, null);
   }
 
@@ -77,9 +77,9 @@ public class Card extends APIResource implements MetadataStore<Card>, HasId {
    */
   public CardDetails details(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return request(RequestMethod.GET, String.format("%s/details",
-        instanceURL(Card.class, this.getId())), params, CardDetails.class, options);
+        instanceUrl(Card.class, this.getId())), params, CardDetails.class, options);
   }
   // </editor-fold>
 
@@ -89,7 +89,7 @@ public class Card extends APIResource implements MetadataStore<Card>, HasId {
    */
   public static CardCollection list(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return list(params, null);
   }
 
@@ -97,9 +97,9 @@ public class Card extends APIResource implements MetadataStore<Card>, HasId {
    * List all issuing cards.
    */
   public static CardCollection list(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
-    return requestCollection(classURL(Card.class), params,
+      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
+      CardException, ApiException {
+    return requestCollection(classUrl(Card.class), params,
       CardCollection.class, options);
   }
   // </editor-fold>
@@ -109,8 +109,8 @@ public class Card extends APIResource implements MetadataStore<Card>, HasId {
    * Retrieve an issuing card.
    */
   public static Card retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
     return retrieve(id, null);
   }
 
@@ -119,8 +119,8 @@ public class Card extends APIResource implements MetadataStore<Card>, HasId {
    */
   public static Card retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Card.class, id), null,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(Card.class, id), null,
       Card.class, options);
   }
 
@@ -130,8 +130,8 @@ public class Card extends APIResource implements MetadataStore<Card>, HasId {
   public static Card retrieve(String id, Map<String, Object> params,
       RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Card.class, id), params,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(Card.class, id), params,
       Card.class, options);
   }
   // </editor-fold>
@@ -143,7 +143,7 @@ public class Card extends APIResource implements MetadataStore<Card>, HasId {
   @Override
   public Card update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return update(params, null);
   }
 
@@ -153,12 +153,12 @@ public class Card extends APIResource implements MetadataStore<Card>, HasId {
   @Override
   public Card update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Card.class, this.id), params,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, instanceUrl(Card.class, this.id), params,
       Card.class, options);
   }
   // </editor-fold>
-  
+
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -188,7 +188,7 @@ public class Card extends APIResource implements MetadataStore<Card>, HasId {
     String phone;
     String status;
     String trackingNumber;
-    String trackingURL;
+    String trackingUrl;
     String type;
   }
 }

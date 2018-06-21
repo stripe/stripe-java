@@ -1,11 +1,11 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
+import com.stripe.exception.ApiConnectionException;
+import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.List;
@@ -18,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class EphemeralKey extends APIResource implements HasId {
+public class EphemeralKey extends ApiResource implements HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long created;
@@ -39,12 +39,12 @@ public class EphemeralKey extends APIResource implements HasId {
    */
   public static EphemeralKey create(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     if (options.getStripeVersion() == null) {
       throw new IllegalArgumentException("stripeVersion must be specified in RequestOptions");
     }
 
-    return request(RequestMethod.POST, classURL(EphemeralKey.class), params, EphemeralKey.class,
+    return request(RequestMethod.POST, classUrl(EphemeralKey.class), params, EphemeralKey.class,
         options);
   }
   // </editor-fold>
@@ -55,7 +55,7 @@ public class EphemeralKey extends APIResource implements HasId {
    */
   public EphemeralKey delete()
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return delete(null);
   }
 
@@ -64,8 +64,8 @@ public class EphemeralKey extends APIResource implements HasId {
    */
   public EphemeralKey delete(RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.DELETE, instanceURL(EphemeralKey.class, this.id), null,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.DELETE, instanceUrl(EphemeralKey.class, this.id), null,
         EphemeralKey.class, options);
   }
   // </editor-fold>

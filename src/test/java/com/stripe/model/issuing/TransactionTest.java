@@ -6,7 +6,7 @@ import static org.junit.Assert.assertNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.model.BalanceTransaction;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import org.junit.Test;
 
@@ -14,7 +14,7 @@ public class TransactionTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getFixture("/v1/issuing/transactions/ipi_123");
-    final Transaction transaction = APIResource.GSON.fromJson(data, Transaction.class);
+    final Transaction transaction = ApiResource.GSON.fromJson(data, Transaction.class);
 
     assertNotNull(transaction);
     assertNotNull(transaction.getId());
@@ -30,7 +30,7 @@ public class TransactionTest extends BaseStripeTest {
       "cardholder",
     };
     final String data = getFixture("/v1/issuing/transactions/ipi_123", expansions);
-    final Transaction transaction = APIResource.GSON.fromJson(data, Transaction.class);
+    final Transaction transaction = ApiResource.GSON.fromJson(data, Transaction.class);
 
     assertNotNull(transaction);
     assertNotNull(transaction.getId());

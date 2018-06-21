@@ -8,7 +8,7 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
 import com.stripe.model.ChargeCollection;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,7 +35,7 @@ public class ChargeTest extends BaseStripeTest {
 
     assertNotNull(charge);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         "/v1/charges",
         params
     );
@@ -47,7 +47,7 @@ public class ChargeTest extends BaseStripeTest {
 
     assertNotNull(charge);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/charges/%s", CHARGE_ID)
     );
   }
@@ -65,7 +65,7 @@ public class ChargeTest extends BaseStripeTest {
 
     assertNotNull(updatedCharge);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/charges/%s", charge.getId()),
         params
     );
@@ -80,7 +80,7 @@ public class ChargeTest extends BaseStripeTest {
 
     assertNotNull(charges);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         "/v1/charges",
         params
     );
@@ -94,7 +94,7 @@ public class ChargeTest extends BaseStripeTest {
 
     assertNotNull(fraudulentCharge);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/charges/%s", charge.getId()),
         ImmutableMap.of("fraud_details",
           (Object)ImmutableMap.of("user_report", (Object)"fraudulent"))
@@ -109,7 +109,7 @@ public class ChargeTest extends BaseStripeTest {
 
     assertNotNull(safeCharge);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/charges/%s", charge.getId()),
         ImmutableMap.of("fraud_details",
           (Object)ImmutableMap.of("user_report", (Object)"safe"))

@@ -6,7 +6,7 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.BalanceTransaction;
 import com.stripe.model.BalanceTransactionCollection;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +22,7 @@ public class BalanceTransactionTest extends BaseStripeTest {
 
     assertNotNull(balanceTransaction);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/balance/history/%s", RESOURCE_ID)
     );
   }
@@ -36,7 +36,7 @@ public class BalanceTransactionTest extends BaseStripeTest {
 
     assertNotNull(balanceTransactions);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/balance/history"),
         params
     );

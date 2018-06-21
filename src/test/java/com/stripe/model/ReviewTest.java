@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.model.Review;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ public class ReviewTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String json = getResourceAsString("/api_fixtures/review.json");
-    final Review review = APIResource.GSON.fromJson(json, Review.class);
+    final Review review = ApiResource.GSON.fromJson(json, Review.class);
     assertNotNull(review);
     assertNotNull(review.getId());
     assertEquals("review", review.getObject());

@@ -15,7 +15,7 @@ import javax.net.ssl.SSLSocketFactory;
 /**
  * Wraps a SSLSocketFactory and enables more TLS versions.
  */
-public class StripeSSLSocketFactory extends SSLSocketFactory {
+public class StripeSslSocketFactory extends SSLSocketFactory {
   private final SSLSocketFactory under;
   private final boolean tlsv11Supported;
   private final boolean tlsv12Supported;
@@ -26,7 +26,7 @@ public class StripeSSLSocketFactory extends SSLSocketFactory {
   /**
    * Constructs a new SSL socket factory.
    */
-  public StripeSSLSocketFactory() {
+  public StripeSslSocketFactory() {
     this.under = HttpsURLConnection.getDefaultSSLSocketFactory();
 
     // For sufficiently old Java, TLSv1.1 and TLSv1.2 might not be supported, so do some detection

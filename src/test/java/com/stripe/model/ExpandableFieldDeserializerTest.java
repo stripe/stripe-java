@@ -8,7 +8,7 @@ import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import com.stripe.BaseStripeTest;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -18,7 +18,7 @@ import org.junit.Test;
 
 public class ExpandableFieldDeserializerTest extends BaseStripeTest {
 
-  private static Gson gson = APIResource.GSON;
+  private static Gson gson = ApiResource.GSON;
 
   private static class TestObject implements HasId {
     String id;

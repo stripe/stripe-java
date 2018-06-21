@@ -1,7 +1,7 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
+import com.stripe.exception.ApiConnectionException;
+import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
@@ -35,8 +35,8 @@ public class BankAccount extends ExternalAccount {
    */
   @Override
   public DeletedBankAccount delete()
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
+      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
+      CardException, ApiException {
     return delete(null);
   }
 
@@ -45,9 +45,9 @@ public class BankAccount extends ExternalAccount {
    */
   @Override
   public DeletedBankAccount delete(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
-    return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedBankAccount.class,
+      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
+      CardException, ApiException {
+    return request(RequestMethod.DELETE, this.getInstanceUrl(), null, DeletedBankAccount.class,
         options);
   }
   // </editor-fold>
@@ -58,8 +58,8 @@ public class BankAccount extends ExternalAccount {
    */
   @Override
   public BankAccount update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
+      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
+      CardException, ApiException {
     return update(params, null);
   }
 
@@ -68,9 +68,9 @@ public class BankAccount extends ExternalAccount {
    */
   @Override
   public BankAccount update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
-    return request(RequestMethod.POST, this.getInstanceURL(), params, BankAccount.class, options);
+      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
+      CardException, ApiException {
+    return request(RequestMethod.POST, this.getInstanceUrl(), params, BankAccount.class, options);
   }
   // </editor-fold>
 }

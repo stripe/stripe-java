@@ -7,7 +7,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Order;
 import com.stripe.model.OrderCollection;
 import com.stripe.model.OrderReturn;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,7 +32,7 @@ public class OrderTest extends BaseStripeTest {
 
     assertNotNull(order);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         "/v1/orders",
         params
     );
@@ -44,7 +44,7 @@ public class OrderTest extends BaseStripeTest {
 
     assertNotNull(order);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/orders/%s", ORDER_ID)
     );
   }
@@ -60,7 +60,7 @@ public class OrderTest extends BaseStripeTest {
 
     assertNotNull(updatedOrder);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/orders/%s", order.getId()),
         params
     );
@@ -75,7 +75,7 @@ public class OrderTest extends BaseStripeTest {
 
     assertNotNull(orders);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         "/v1/orders",
         params
     );
@@ -92,7 +92,7 @@ public class OrderTest extends BaseStripeTest {
 
     assertNotNull(paidOrder);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/orders/%s/pay", order.getId()),
         params
     );
@@ -106,7 +106,7 @@ public class OrderTest extends BaseStripeTest {
 
     assertNotNull(orderReturn);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/orders/%s/returns", order.getId()),
         null
     );

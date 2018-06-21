@@ -6,7 +6,7 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.FileUpload;
 import com.stripe.model.FileUploadCollection;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -29,10 +29,10 @@ public class FileUploadTest extends BaseStripeTest {
 
     assertNotNull(fileUpload);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         "/v1/files",
         params,
-        APIResource.RequestType.MULTIPART,
+        ApiResource.RequestType.MULTIPART,
         null
     );
   }
@@ -47,11 +47,11 @@ public class FileUploadTest extends BaseStripeTest {
 
     assertNotNull(fileUpload);
     verifyRequest(
-            APIResource.RequestMethod.POST,
-            "/v1/files",
-            params,
-            APIResource.RequestType.MULTIPART,
-            null
+        ApiResource.RequestMethod.POST,
+        "/v1/files",
+        params,
+        ApiResource.RequestType.MULTIPART,
+        null
     );
   }
 
@@ -61,7 +61,7 @@ public class FileUploadTest extends BaseStripeTest {
 
     assertNotNull(fileUpload);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/files/%s", FILE_UPLOAD_ID)
     );
   }
@@ -75,7 +75,7 @@ public class FileUploadTest extends BaseStripeTest {
 
     assertNotNull(fileUploads);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         "/v1/files",
         params
     );

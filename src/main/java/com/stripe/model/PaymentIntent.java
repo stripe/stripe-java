@@ -1,11 +1,11 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
+import com.stripe.exception.ApiConnectionException;
+import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.List;
@@ -19,7 +19,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class PaymentIntent extends APIResource implements MetadataStore<PaymentIntent>, HasId {
+public class PaymentIntent extends ApiResource implements MetadataStore<PaymentIntent>, HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   List<String> allowedSourceTypes;
@@ -54,7 +54,7 @@ public class PaymentIntent extends APIResource implements MetadataStore<PaymentI
   }
 
   public void setApplication(String applicationId) {
-    this.application = setExpandableFieldID(applicationId, this.application);
+    this.application = setExpandableFieldId(applicationId, this.application);
   }
 
   public Application getApplicationObject() {
@@ -72,7 +72,7 @@ public class PaymentIntent extends APIResource implements MetadataStore<PaymentI
   }
 
   public void setCustomer(String customerId) {
-    this.customer = setExpandableFieldID(customerId, this.customer);
+    this.customer = setExpandableFieldId(customerId, this.customer);
 
   }
 
@@ -91,7 +91,7 @@ public class PaymentIntent extends APIResource implements MetadataStore<PaymentI
   }
 
   public void setOnBehalfOf(String onBehalfOfId) {
-    this.onBehalfOf = APIResource.setExpandableFieldID(onBehalfOfId, this.onBehalfOf);
+    this.onBehalfOf = setExpandableFieldId(onBehalfOfId, this.onBehalfOf);
   }
 
   public Account getOnBehalfOfObject() {
@@ -109,7 +109,7 @@ public class PaymentIntent extends APIResource implements MetadataStore<PaymentI
   }
 
   public void setSource(String sourceId) {
-    this.source = APIResource.setExpandableFieldID(sourceId, this.source);
+    this.source = setExpandableFieldId(sourceId, this.source);
   }
 
   public ExternalAccount getSourceObject() {
@@ -127,7 +127,7 @@ public class PaymentIntent extends APIResource implements MetadataStore<PaymentI
    */
   public PaymentIntent cancel()
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return cancel(null, null);
   }
 
@@ -136,7 +136,7 @@ public class PaymentIntent extends APIResource implements MetadataStore<PaymentI
    */
   public PaymentIntent cancel(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return cancel(params, null);
   }
 
@@ -145,8 +145,8 @@ public class PaymentIntent extends APIResource implements MetadataStore<PaymentI
    */
   public PaymentIntent cancel(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(PaymentIntent.class, this.id) + "/cancel",
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, instanceUrl(PaymentIntent.class, this.id) + "/cancel",
       params, PaymentIntent.class, options);
   }
   // </editor-fold>
@@ -157,7 +157,7 @@ public class PaymentIntent extends APIResource implements MetadataStore<PaymentI
    */
   public PaymentIntent capture()
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return capture(null, null);
   }
 
@@ -166,7 +166,7 @@ public class PaymentIntent extends APIResource implements MetadataStore<PaymentI
    */
   public PaymentIntent capture(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return capture(params, null);
   }
 
@@ -175,8 +175,8 @@ public class PaymentIntent extends APIResource implements MetadataStore<PaymentI
    */
   public PaymentIntent capture(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(PaymentIntent.class, this.id) + "/capture",
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, instanceUrl(PaymentIntent.class, this.id) + "/capture",
       params, PaymentIntent.class, options);
   }
   // </editor-fold>
@@ -187,7 +187,7 @@ public class PaymentIntent extends APIResource implements MetadataStore<PaymentI
    */
   public PaymentIntent confirm()
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return confirm(null, null);
   }
 
@@ -196,7 +196,7 @@ public class PaymentIntent extends APIResource implements MetadataStore<PaymentI
    */
   public PaymentIntent confirm(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return confirm(params, null);
   }
 
@@ -205,8 +205,8 @@ public class PaymentIntent extends APIResource implements MetadataStore<PaymentI
    */
   public PaymentIntent confirm(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(PaymentIntent.class, this.id) + "/confirm",
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, instanceUrl(PaymentIntent.class, this.id) + "/confirm",
       params, PaymentIntent.class, options);
   }
   // </editor-fold>
@@ -217,7 +217,7 @@ public class PaymentIntent extends APIResource implements MetadataStore<PaymentI
    */
   public static PaymentIntent create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return create(params, null);
   }
 
@@ -226,8 +226,8 @@ public class PaymentIntent extends APIResource implements MetadataStore<PaymentI
    */
   public static PaymentIntent create(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, classURL(PaymentIntent.class), params,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, classUrl(PaymentIntent.class), params,
       PaymentIntent.class, options);
   }
   // </editor-fold>
@@ -238,7 +238,7 @@ public class PaymentIntent extends APIResource implements MetadataStore<PaymentI
    */
   public static PaymentIntentCollection list(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return list(params, null);
   }
 
@@ -246,9 +246,9 @@ public class PaymentIntent extends APIResource implements MetadataStore<PaymentI
    * List all payment intents.
    */
   public static PaymentIntentCollection list(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
-    return requestCollection(classURL(PaymentIntent.class), params,
+      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
+      CardException, ApiException {
+    return requestCollection(classUrl(PaymentIntent.class), params,
       PaymentIntentCollection.class, options);
   }
   // </editor-fold>
@@ -258,8 +258,8 @@ public class PaymentIntent extends APIResource implements MetadataStore<PaymentI
    * Retrieve a payment intent.
    */
   public static PaymentIntent retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
     return retrieve(id, null);
   }
 
@@ -268,8 +268,8 @@ public class PaymentIntent extends APIResource implements MetadataStore<PaymentI
    */
   public static PaymentIntent retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(PaymentIntent.class, id), null,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(PaymentIntent.class, id), null,
       PaymentIntent.class, options);
   }
 
@@ -279,8 +279,8 @@ public class PaymentIntent extends APIResource implements MetadataStore<PaymentI
   public static PaymentIntent retrieve(String id, Map<String, Object> params,
       RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(PaymentIntent.class, id), params,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(PaymentIntent.class, id), params,
       PaymentIntent.class, options);
   }
   // </editor-fold>
@@ -292,7 +292,7 @@ public class PaymentIntent extends APIResource implements MetadataStore<PaymentI
   @Override
   public PaymentIntent update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return update(params, null);
   }
 
@@ -302,8 +302,8 @@ public class PaymentIntent extends APIResource implements MetadataStore<PaymentI
   @Override
   public PaymentIntent update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(PaymentIntent.class, this.id), params,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, instanceUrl(PaymentIntent.class, this.id), params,
       PaymentIntent.class,
         options);
   }

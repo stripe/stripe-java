@@ -1,11 +1,11 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
+import com.stripe.exception.ApiConnectionException;
+import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.Collections;
@@ -19,7 +19,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Charge extends APIResource implements MetadataStore<Charge>, HasId {
+public class Charge extends ApiResource implements MetadataStore<Charge>, HasId {
   public static final String FRAUD_DETAILS = "fraud_details";
 
   @Getter(onMethod = @__({@Override}))
@@ -99,8 +99,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     return (this.application != null) ? this.application.getId() : null;
   }
 
-  public void setApplication(String applicationID) {
-    this.application = setExpandableFieldID(applicationID, this.application);
+  public void setApplication(String applicationId) {
+    this.application = setExpandableFieldId(applicationId, this.application);
   }
 
   public Application getApplicationObject() {
@@ -117,8 +117,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     return (this.applicationFee != null) ? this.applicationFee.getId() : null;
   }
 
-  public void setApplicationFee(String applicationFeeID) {
-    this.applicationFee = setExpandableFieldID(applicationFeeID, this.applicationFee);
+  public void setApplicationFee(String applicationFeeId) {
+    this.applicationFee = setExpandableFieldId(applicationFeeId, this.applicationFee);
   }
 
   public ApplicationFee getApplicationFeeObject() {
@@ -135,8 +135,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
   }
 
-  public void setBalanceTransaction(String balanceTransactionID) {
-    this.balanceTransaction = setExpandableFieldID(balanceTransactionID, this.balanceTransaction);
+  public void setBalanceTransaction(String balanceTransactionId) {
+    this.balanceTransaction = setExpandableFieldId(balanceTransactionId, this.balanceTransaction);
   }
 
   public BalanceTransaction getBalanceTransactionObject() {
@@ -153,8 +153,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     return (this.customer != null) ? this.customer.getId() : null;
   }
 
-  public void setCustomer(String customerID) {
-    this.customer = setExpandableFieldID(customerID, this.customer);
+  public void setCustomer(String customerId) {
+    this.customer = setExpandableFieldId(customerId, this.customer);
 
   }
 
@@ -172,8 +172,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     return (this.destination != null) ? this.destination.getId() : null;
   }
 
-  public void setDestination(String destinationID) {
-    this.destination = APIResource.setExpandableFieldID(destinationID, this.destination);
+  public void setDestination(String destinationId) {
+    this.destination = ApiResource.setExpandableFieldId(destinationId, this.destination);
   }
 
   public Account getDestinationObject() {
@@ -190,8 +190,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     return (this.dispute != null) ? this.dispute.getId() : null;
   }
 
-  public void setDispute(String dispute) {
-    this.dispute = setExpandableFieldID(dispute, this.dispute);
+  public void setDispute(String disputeId) {
+    this.dispute = setExpandableFieldId(disputeId, this.dispute);
   }
 
   public Dispute getDisputeObject() {
@@ -208,8 +208,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     return (this.invoice != null) ? this.invoice.getId() : null;
   }
 
-  public void setInvoice(String invoiceID) {
-    this.invoice = setExpandableFieldID(invoiceID, this.invoice);
+  public void setInvoice(String invoiceId) {
+    this.invoice = setExpandableFieldId(invoiceId, this.invoice);
   }
 
   public Invoice getInvoiceObject() {
@@ -226,8 +226,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     return (this.onBehalfOf != null) ? this.onBehalfOf.getId() : null;
   }
 
-  public void setOnBehalfOf(String onBehalfOfID) {
-    this.onBehalfOf = APIResource.setExpandableFieldID(onBehalfOfID, this.onBehalfOf);
+  public void setOnBehalfOf(String onBehalfOfId) {
+    this.onBehalfOf = ApiResource.setExpandableFieldId(onBehalfOfId, this.onBehalfOf);
   }
 
   public Account getOnBehalfOfObject() {
@@ -244,8 +244,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     return (this.order != null) ? this.order.getId() : null;
   }
 
-  public void setOrder(String orderID) {
-    this.order = setExpandableFieldID(orderID, this.order);
+  public void setOrder(String orderId) {
+    this.order = setExpandableFieldId(orderId, this.order);
   }
 
   public Order getOrderObject() {
@@ -265,8 +265,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   public ChargeRefundCollection getRefunds() {
     // API versions 2014-05-19 and earlier render charge refunds as an array
     // instead of an object, meaning there is no sublist URL.
-    if (refunds != null && refunds.getURL() == null) {
-      refunds.setURL(String.format("/v1/charges/%s/refunds", getId()));
+    if (refunds != null && refunds.getUrl() == null) {
+      refunds.setUrl(String.format("/v1/charges/%s/refunds", getId()));
     }
     return refunds;
   }
@@ -276,8 +276,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     return (this.review != null) ? this.review.getId() : null;
   }
 
-  public void setReview(String reviewID) {
-    this.review = setExpandableFieldID(reviewID, this.review);
+  public void setReview(String reviewId) {
+    this.review = setExpandableFieldId(reviewId, this.review);
   }
 
   public Review getReviewObject() {
@@ -294,8 +294,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     return (this.sourceTransfer != null) ? this.sourceTransfer.getId() : null;
   }
 
-  public void setSourceTransfer(String sourceTransferID) {
-    this.sourceTransfer = setExpandableFieldID(sourceTransferID, this.sourceTransfer);
+  public void setSourceTransfer(String sourceTransferId) {
+    this.sourceTransfer = setExpandableFieldId(sourceTransferId, this.sourceTransfer);
   }
 
   public Transfer getSourceTransferObject() {
@@ -312,8 +312,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     return (this.transfer != null) ? this.transfer.getId() : null;
   }
 
-  public void setTransfer(String transferID) {
-    this.transfer = setExpandableFieldID(transferID, this.transfer);
+  public void setTransfer(String transferId) {
+    this.transfer = setExpandableFieldId(transferId, this.transfer);
   }
 
   public Transfer getTransferObject() {
@@ -330,8 +330,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
    * Capture a charge.
    */
   public Charge capture() throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
     return this.capture(null, (RequestOptions) null);
   }
 
@@ -339,8 +339,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
    * Capture a charge.
    */
   public Charge capture(RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
     return this.capture(null, options);
   }
 
@@ -349,7 +349,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
    */
   public Charge capture(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return this.capture(params, (RequestOptions) null);
   }
 
@@ -358,9 +358,9 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
    */
   public Charge capture(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return request(RequestMethod.POST, String.format("%s/capture",
-        instanceURL(Charge.class, this.getId())), params, Charge.class, options);
+        instanceUrl(Charge.class, this.getId())), params, Charge.class, options);
   }
   // </editor-fold>
 
@@ -370,7 +370,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
    */
   public static Charge create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return create(params, (RequestOptions) null);
   }
 
@@ -379,8 +379,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
    */
   public static Charge create(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, classURL(Charge.class), params, Charge.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, classUrl(Charge.class), params, Charge.class, options);
   }
   // </editor-fold>
 
@@ -390,7 +390,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
    */
   public static ChargeCollection list(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return list(params, null);
   }
 
@@ -399,8 +399,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
    */
   public static ChargeCollection list(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return requestCollection(classURL(Charge.class), params, ChargeCollection.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return requestCollection(classUrl(Charge.class), params, ChargeCollection.class, options);
   }
   // </editor-fold>
 
@@ -410,7 +410,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
    */
   public Charge markFraudulent(RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     Map<String, Object> params = Collections.<String, Object>singletonMap(
         FRAUD_DETAILS, Collections.singletonMap(FraudDetails.USER_REPORT, "fraudulent"));
     return this.update(params, options);
@@ -423,7 +423,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
    */
   public Charge markSafe(RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     Map<String, Object> params = Collections.<String, Object>singletonMap(
         FRAUD_DETAILS, Collections.singletonMap(FraudDetails.USER_REPORT, "safe"));
     return this.update(params, options);
@@ -438,8 +438,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
    */
   @Deprecated
   public Charge refund() throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
     return this.refund(null, (RequestOptions) null);
   }
 
@@ -450,8 +450,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
    */
   @Deprecated
   public Charge refund(RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
     return this.refund(null, options);
   }
 
@@ -463,7 +463,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   @Deprecated
   public Charge refund(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return this.refund(params, (RequestOptions) null);
   }
 
@@ -475,9 +475,9 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   @Deprecated
   public Charge refund(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return request(RequestMethod.POST, String.format("%s/refund",
-        instanceURL(Charge.class, this.getId())), params, Charge.class, options);
+        instanceUrl(Charge.class, this.getId())), params, Charge.class, options);
   }
   // </editor-fold>
 
@@ -486,8 +486,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
    * Retrieve a charge.
    */
   public static Charge retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
     return retrieve(id, (RequestOptions) null);
   }
 
@@ -496,8 +496,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
    */
   public static Charge retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Charge.class, id), null, Charge.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(Charge.class, id), null, Charge.class, options);
   }
 
   /**
@@ -505,8 +505,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
    */
   public static Charge retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Charge.class, id), params, Charge.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(Charge.class, id), params, Charge.class, options);
   }
   // </editor-fold>
 
@@ -517,7 +517,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   @Override
   public Charge update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return update(params, (RequestOptions) null);
   }
 
@@ -527,8 +527,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   @Override
   public Charge update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Charge.class, id), params, Charge.class,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, instanceUrl(Charge.class, id), params, Charge.class,
         options);
   }
   // </editor-fold>

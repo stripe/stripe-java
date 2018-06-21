@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.model.PaymentIntent;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ public class PaymentIntentTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     // Keep the fixture to have `action` deserialize properly
-    final PaymentIntent resource = APIResource.GSON.fromJson(
+    final PaymentIntent resource = ApiResource.GSON.fromJson(
         getResourceAsString("/api_fixtures/payment_intent.json"), PaymentIntent.class);
     assertNotNull(resource);
     assertNotNull(resource.getId());
@@ -21,7 +21,7 @@ public class PaymentIntentTest extends BaseStripeTest {
     PaymentIntentSourceAction action =  resource.getNextSourceAction();
     assertNotNull(action);
 
-    PaymentIntentSourceActionValueAuthorizeWithUrl actionValue = 
+    PaymentIntentSourceActionValueAuthorizeWithUrl actionValue =
         (PaymentIntentSourceActionValueAuthorizeWithUrl) action.getValue();
     assertNotNull(actionValue);
     assertEquals("https://stripe.com", actionValue.getUrl());
@@ -36,7 +36,7 @@ public class PaymentIntentTest extends BaseStripeTest {
       "source",
     };
     final String data = getFixture("/v1/payment_intents/pi_123", expansions);
-    final PaymentIntent resource = APIResource.GSON.fromJson(data, PaymentIntent.class);
+    final PaymentIntent resource = ApiResource.GSON.fromJson(data, PaymentIntent.class);
 
     assertNotNull(resource);
     assertNotNull(resource.getId());

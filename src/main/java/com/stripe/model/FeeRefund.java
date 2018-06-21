@@ -1,11 +1,11 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
+import com.stripe.exception.ApiConnectionException;
+import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.Map;
@@ -18,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class FeeRefund extends APIResource implements MetadataStore<ApplicationFee>, HasId {
+public class FeeRefund extends ApiResource implements MetadataStore<ApplicationFee>, HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long amount;
@@ -34,8 +34,8 @@ public class FeeRefund extends APIResource implements MetadataStore<ApplicationF
     return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
   }
 
-  public void setBalanceTransaction(String balanceTransactionID) {
-    this.balanceTransaction = setExpandableFieldID(balanceTransactionID, this.balanceTransaction);
+  public void setBalanceTransaction(String balanceTransactionId) {
+    this.balanceTransaction = setExpandableFieldId(balanceTransactionId, this.balanceTransaction);
   }
 
   public BalanceTransaction getBalanceTransactionObject() {
@@ -52,8 +52,8 @@ public class FeeRefund extends APIResource implements MetadataStore<ApplicationF
     return (this.fee != null) ? this.fee.getId() : null;
   }
 
-  public void setFee(String feeID) {
-    this.fee = setExpandableFieldID(feeID, this.fee);
+  public void setFee(String feeId) {
+    this.fee = setExpandableFieldId(feeId, this.fee);
   }
 
   public ApplicationFee getFeeObject() {
@@ -72,7 +72,7 @@ public class FeeRefund extends APIResource implements MetadataStore<ApplicationF
   @Override
   public FeeRefund update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return update(params, (RequestOptions) null);
   }
 
@@ -82,14 +82,14 @@ public class FeeRefund extends APIResource implements MetadataStore<ApplicationF
   @Override
   public FeeRefund update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, this.getInstanceURL(), params, FeeRefund.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, this.getInstanceUrl(), params, FeeRefund.class, options);
   }
   // </editor-fold>
 
-  protected String getInstanceURL() {
+  protected String getInstanceUrl() {
     if (this.fee != null) {
-      return String.format("%s/%s/refunds/%s", classURL(ApplicationFee.class), this.getFee(),
+      return String.format("%s/%s/refunds/%s", classUrl(ApplicationFee.class), this.getFee(),
           this.getId());
     }
     return null;

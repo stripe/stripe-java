@@ -7,7 +7,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonPrimitive;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -38,7 +38,7 @@ public class PaymentIntentSourceActionDeserializer implements
     sourceAction.setType(type);
     Class<? extends PaymentIntentSourceActionValue> cl = objectMap.get(type);
     if (cl != null) {
-      PaymentIntentSourceActionValue value = APIResource.GSON.fromJson(jsonObject.get("value"), cl);
+      PaymentIntentSourceActionValue value = ApiResource.GSON.fromJson(jsonObject.get("value"), cl);
       sourceAction.setValue(value);
     }
     return sourceAction;
