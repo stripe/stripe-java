@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.ThreeDSecure;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -28,7 +28,7 @@ public class ThreeDSecureTest extends BaseStripeTest {
 
     assertNotNull(threeDSecure);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         "/v1/3d_secure",
         params
     );
@@ -40,7 +40,7 @@ public class ThreeDSecureTest extends BaseStripeTest {
 
     assertNotNull(threeDSecure);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/3d_secure/%s", TDS_ID)
     );
   }

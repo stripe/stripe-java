@@ -1,11 +1,11 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
+import com.stripe.exception.ApiConnectionException;
+import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.List;
@@ -19,7 +19,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Transfer extends APIResource implements MetadataStore<Transfer>, HasId {
+public class Transfer extends ApiResource implements MetadataStore<Transfer>, HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long amount;
@@ -95,8 +95,8 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
     return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
   }
 
-  public void setBalanceTransaction(String balanceTransactionID) {
-    this.balanceTransaction = setExpandableFieldID(balanceTransactionID, this.balanceTransaction);
+  public void setBalanceTransaction(String balanceTransactionId) {
+    this.balanceTransaction = setExpandableFieldId(balanceTransactionId, this.balanceTransaction);
   }
 
   public BalanceTransaction getBalanceTransactionObject() {
@@ -113,8 +113,8 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
     return (this.destination != null) ? this.destination.getId() : null;
   }
 
-  public void setDestination(String destinationID) {
-    this.destination = APIResource.setExpandableFieldID(destinationID, this.destination);
+  public void setDestination(String destinationId) {
+    this.destination = ApiResource.setExpandableFieldId(destinationId, this.destination);
   }
 
   public Account getDestinationObject() {
@@ -131,8 +131,8 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
     return (this.destinationPayment != null) ? this.destinationPayment.getId() : null;
   }
 
-  public void setDestinationPayment(String destinationPaymentID) {
-    this.destinationPayment = setExpandableFieldID(destinationPaymentID, this.destinationPayment);
+  public void setDestinationPayment(String destinationPaymentId) {
+    this.destinationPayment = setExpandableFieldId(destinationPaymentId, this.destinationPayment);
   }
 
   public Charge getDestinationPaymentObject() {
@@ -151,8 +151,8 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
    * @return the {@code reversals} list
    */
   public TransferReversalCollection getReversals() {
-    if (reversals.getURL() == null) {
-      reversals.setURL(String.format("/v1/transfers/%s/reversals", getId()));
+    if (reversals.getUrl() == null) {
+      reversals.setUrl(String.format("/v1/transfers/%s/reversals", getId()));
     }
     return reversals;
   }
@@ -162,8 +162,8 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
     return (this.sourceTransaction != null) ? this.sourceTransaction.getId() : null;
   }
 
-  public void setSourceTransaction(String sourceTransactionID) {
-    this.sourceTransaction = setExpandableFieldID(sourceTransactionID, this.sourceTransaction);
+  public void setSourceTransaction(String sourceTransactionId) {
+    this.sourceTransaction = setExpandableFieldId(sourceTransactionId, this.sourceTransaction);
 
   }
 
@@ -186,7 +186,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
   @Deprecated
   public Transfer cancel()
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return cancel((RequestOptions) null);
   }
 
@@ -198,8 +198,8 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
   @Deprecated
   public Transfer cancel(RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Transfer.class, this.id) + "/cancel", null,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, instanceUrl(Transfer.class, this.id) + "/cancel", null,
         Transfer.class, options);
   }
   // </editor-fold>
@@ -210,7 +210,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
    */
   public static Transfer create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return create(params, (RequestOptions) null);
   }
 
@@ -219,8 +219,8 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
    */
   public static Transfer create(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, classURL(Transfer.class), params, Transfer.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, classUrl(Transfer.class), params, Transfer.class, options);
   }
   // </editor-fold>
 
@@ -230,7 +230,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
    */
   public static TransferCollection list(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return list(params, null);
   }
 
@@ -239,9 +239,9 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
    */
   public static TransferCollection list(Map<String, Object> params,
                       RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return requestCollection(classURL(Transfer.class), params, TransferCollection.class, options);
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
+    return requestCollection(classUrl(Transfer.class), params, TransferCollection.class, options);
   }
   // </editor-fold>
 
@@ -250,8 +250,8 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
    * Retrive a transfer.
    */
   public static Transfer retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
     return retrieve(id, (RequestOptions) null);
   }
 
@@ -260,18 +260,18 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
    */
   public static Transfer retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Transfer.class, id), null, Transfer.class,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(Transfer.class, id), null, Transfer.class,
         options);
   }
 
   /**
-   * Retrive a transfer.
+   * Retrieve a transfer.
    */
   public static Transfer retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Transfer.class, id), params, Transfer.class,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(Transfer.class, id), params, Transfer.class,
         options);
   }
   // </editor-fold>
@@ -286,7 +286,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
   @Deprecated
   public TransferTransactionCollection transactions(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return transactions(params, (RequestOptions) null);
   }
 
@@ -300,8 +300,8 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
   public TransferTransactionCollection transactions(
       Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    String url = String.format("%s%s", instanceURL(Transfer.class, this.getId()), "/transactions");
+      ApiConnectionException, CardException, ApiException {
+    String url = String.format("%s%s", instanceUrl(Transfer.class, this.getId()), "/transactions");
     return requestCollection(url, params, TransferTransactionCollection.class, options);
   }
   // </editor-fold>
@@ -313,7 +313,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
   @Override
   public Transfer update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return update(params, (RequestOptions) null);
   }
 
@@ -323,8 +323,8 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
   @Override
   public Transfer update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Transfer.class, this.id), params,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, instanceUrl(Transfer.class, this.id), params,
         Transfer.class, options);
   }
   // </editor-fold>

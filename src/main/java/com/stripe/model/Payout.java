@@ -1,11 +1,11 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
+import com.stripe.exception.ApiConnectionException;
+import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.Map;
@@ -18,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Payout extends APIResource implements MetadataStore<Payout>, HasId {
+public class Payout extends ApiResource implements MetadataStore<Payout>, HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long amount;
@@ -46,8 +46,8 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
     return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
   }
 
-  public void setBalanceTransaction(String balanceTransactionID) {
-    this.balanceTransaction = setExpandableFieldID(balanceTransactionID, this.balanceTransaction);
+  public void setBalanceTransaction(String balanceTransactionId) {
+    this.balanceTransaction = setExpandableFieldId(balanceTransactionId, this.balanceTransaction);
   }
 
   public BalanceTransaction getBalanceTransactionObject() {
@@ -64,8 +64,8 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
     return (this.destination != null) ? this.destination.getId() : null;
   }
 
-  public void setDestination(String destinationID) {
-    this.destination = APIResource.setExpandableFieldID(destinationID, this.destination);
+  public void setDestination(String destinationId) {
+    this.destination = ApiResource.setExpandableFieldId(destinationId, this.destination);
   }
 
   public ExternalAccount getDestinationObject() {
@@ -83,9 +83,9 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
         : null;
   }
 
-  public void setFailureBalanceTransaction(String failureBalanceTransactionID) {
+  public void setFailureBalanceTransaction(String failureBalanceTransactionId) {
     this.failureBalanceTransaction
-        = setExpandableFieldID(failureBalanceTransactionID, this.failureBalanceTransaction);
+        = setExpandableFieldId(failureBalanceTransactionId, this.failureBalanceTransaction);
   }
 
   public BalanceTransaction getFailureBalanceTransactionObject() {
@@ -104,7 +104,7 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
    */
   public Payout cancel()
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return cancel(null);
   }
 
@@ -113,8 +113,8 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
    */
   public Payout cancel(RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Payout.class, this.id) + "/cancel", null,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, instanceUrl(Payout.class, this.id) + "/cancel", null,
         Payout.class, options);
   }
   // </editor-fold>
@@ -125,7 +125,7 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
    */
   public static Payout create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return create(params, null);
   }
 
@@ -134,8 +134,8 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
    */
   public static Payout create(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, classURL(Payout.class), params, Payout.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, classUrl(Payout.class), params, Payout.class, options);
   }
   // </editor-fold>
 
@@ -145,7 +145,7 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
    */
   public static PayoutCollection list(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return list(params, null);
   }
 
@@ -153,9 +153,9 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
    * List all payouts.
    */
   public static PayoutCollection list(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
-    return requestCollection(classURL(Payout.class), params, PayoutCollection.class, options);
+      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
+      CardException, ApiException {
+    return requestCollection(classUrl(Payout.class), params, PayoutCollection.class, options);
   }
   // </editor-fold>
 
@@ -164,8 +164,8 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
    * Retrieve a payout.
    */
   public static Payout retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
     return retrieve(id, null);
   }
 
@@ -174,8 +174,8 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
    */
   public static Payout retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Payout.class, id), null, Payout.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(Payout.class, id), null, Payout.class, options);
   }
 
   /**
@@ -183,8 +183,8 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
    */
   public static Payout retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Payout.class, id), params, Payout.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(Payout.class, id), params, Payout.class, options);
   }
   // </editor-fold>
 
@@ -195,7 +195,7 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
   @Override
   public Payout update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return update(params, null);
   }
 
@@ -205,8 +205,8 @@ public class Payout extends APIResource implements MetadataStore<Payout>, HasId 
   @Override
   public Payout update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Payout.class, this.id), params, Payout.class,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, instanceUrl(Payout.class, this.id), params, Payout.class,
         options);
   }
   // </editor-fold>

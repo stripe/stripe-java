@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import com.stripe.BaseStripeTest;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ public class OrderReturnTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getFixture("/v1/order_returns/orret_123");
-    final OrderReturn orderReturn = APIResource.GSON.fromJson(data, OrderReturn.class);
+    final OrderReturn orderReturn = ApiResource.GSON.fromJson(data, OrderReturn.class);
     assertNotNull(orderReturn);
     assertNotNull(orderReturn.getId());
     assertEquals("order_return", orderReturn.getObject());
@@ -28,7 +28,7 @@ public class OrderReturnTest extends BaseStripeTest {
       "refund",
     };
     final String data = getFixture("/v1/order_returns/orret_123", expansions);
-    final OrderReturn orderReturn = APIResource.GSON.fromJson(data, OrderReturn.class);
+    final OrderReturn orderReturn = ApiResource.GSON.fromJson(data, OrderReturn.class);
     assertNotNull(orderReturn);
     final Order order = orderReturn.getOrderObject();
     assertNotNull(order);

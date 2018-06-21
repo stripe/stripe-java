@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import com.stripe.BaseStripeTest;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ public class TopupTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getFixture("/v1/topups/tu_123");
-    final Topup topup = APIResource.GSON.fromJson(data, Topup.class);
+    final Topup topup = ApiResource.GSON.fromJson(data, Topup.class);
     assertNotNull(topup);
     assertNotNull(topup.getId());
     assertEquals("topup", topup.getObject());
@@ -26,7 +26,7 @@ public class TopupTest extends BaseStripeTest {
       "balance_transaction",
     };
     final String data = getFixture("/v1/transfers/tr_123", expansions);
-    final Topup topup = APIResource.GSON.fromJson(data, Topup.class);
+    final Topup topup = ApiResource.GSON.fromJson(data, Topup.class);
     assertNotNull(topup);
     final BalanceTransaction balanceTransaction = topup.getBalanceTransactionObject();
     assertNotNull(balanceTransaction);

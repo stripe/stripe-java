@@ -21,7 +21,7 @@ public class OrderItemDeserializer implements JsonDeserializer<OrderItem> {
 
   static {
     parentObjMap.put("discount", Discount.class);
-    parentObjMap.put("sku", SKU.class);
+    parentObjMap.put("sku", Sku.class);
   }
 
   @Override

@@ -1,11 +1,11 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
+import com.stripe.exception.ApiConnectionException;
+import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.Map;
@@ -18,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class InvoiceItem extends APIResource implements MetadataStore<InvoiceItem>, HasId {
+public class InvoiceItem extends ApiResource implements MetadataStore<InvoiceItem>, HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long amount;
@@ -41,8 +41,8 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
     return (this.customer != null) ? this.customer.getId() : null;
   }
 
-  public void setCustomer(String customerID) {
-    this.customer = setExpandableFieldID(customerID, this.customer);
+  public void setCustomer(String customerId) {
+    this.customer = setExpandableFieldId(customerId, this.customer);
   }
 
   public Customer getCustomerObject() {
@@ -59,8 +59,8 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
     return (this.invoice != null) ? this.invoice.getId() : null;
   }
 
-  public void setInvoice(String invoiceID) {
-    this.invoice = setExpandableFieldID(invoiceID, this.invoice);
+  public void setInvoice(String invoiceId) {
+    this.invoice = setExpandableFieldId(invoiceId, this.invoice);
   }
 
   public Invoice getInvoiceObject() {
@@ -77,8 +77,8 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
     return (this.subscription != null) ? this.subscription.getId() : null;
   }
 
-  public void setSubscription(String subscriptionID) {
-    this.subscription = setExpandableFieldID(subscriptionID, this.subscription);
+  public void setSubscription(String subscriptionId) {
+    this.subscription = setExpandableFieldId(subscriptionId, this.subscription);
   }
 
   public Subscription getSubscriptionObject() {
@@ -96,7 +96,7 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
    */
   public static InvoiceItem create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return create(params, (RequestOptions) null);
   }
 
@@ -105,8 +105,8 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
    */
   public static InvoiceItem create(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, classURL(InvoiceItem.class), params, InvoiceItem.class,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, classUrl(InvoiceItem.class), params, InvoiceItem.class,
         options);
   }
   // </editor-fold>
@@ -116,8 +116,8 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
    * Delete an invoice item.
    */
   public DeletedInvoiceItem delete() throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
     return delete((RequestOptions) null);
   }
 
@@ -126,8 +126,8 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
    */
   public DeletedInvoiceItem delete(RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.DELETE, instanceURL(InvoiceItem.class, this.id), null,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.DELETE, instanceUrl(InvoiceItem.class, this.id), null,
         DeletedInvoiceItem.class, options);
   }
   // </editor-fold>
@@ -138,7 +138,7 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
    */
   public static InvoiceItemCollection list(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return list(params, null);
   }
 
@@ -147,9 +147,9 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
    */
   public static InvoiceItemCollection list(Map<String, Object> params,
                        RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return requestCollection(classURL(InvoiceItem.class), params, InvoiceItemCollection.class,
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
+    return requestCollection(classUrl(InvoiceItem.class), params, InvoiceItemCollection.class,
         options);
   }
   // </editor-fold>
@@ -160,7 +160,7 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
    */
   public static InvoiceItem retrieve(String id)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return retrieve(id, (RequestOptions) null);
   }
 
@@ -169,8 +169,8 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
    */
   public static InvoiceItem retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(InvoiceItem.class, id), null, InvoiceItem.class,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(InvoiceItem.class, id), null, InvoiceItem.class,
         options);
   }
 
@@ -179,8 +179,8 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
    */
   public static InvoiceItem retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(InvoiceItem.class, id), params, InvoiceItem.class,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(InvoiceItem.class, id), params, InvoiceItem.class,
         options);
   }
   // </editor-fold>
@@ -192,7 +192,7 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
   @Override
   public InvoiceItem update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return update(params, (RequestOptions) null);
   }
 
@@ -202,8 +202,8 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
   @Override
   public InvoiceItem update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(InvoiceItem.class, this.id), params,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, instanceUrl(InvoiceItem.class, this.id), params,
         InvoiceItem.class, options);
   }
   // </editor-fold>

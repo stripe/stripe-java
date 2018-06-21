@@ -2,7 +2,7 @@ package com.stripe.functional;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.Stripe;
-import com.stripe.exception.APIConnectionException;
+import com.stripe.exception.ApiConnectionException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Balance;
 import com.stripe.net.RequestOptions;
@@ -26,7 +26,7 @@ public class TimeoutTest extends BaseStripeTest {
         new ServerSocket(0, 1, Inet4Address.getByName("localhost"))) {
       Stripe.overrideApiBase(String.format("http://localhost:%d", serverSocket.getLocalPort()));
 
-      thrown.expect(APIConnectionException.class);
+      thrown.expect(ApiConnectionException.class);
       thrown.expectMessage("Read timed out");
 
       final RequestOptions options = RequestOptions.builder().setReadTimeout(1).build();

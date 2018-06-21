@@ -1,11 +1,11 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
+import com.stripe.exception.ApiConnectionException;
+import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.Map;
@@ -18,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class IssuerFraudRecord extends APIResource implements HasId {
+public class IssuerFraudRecord extends ApiResource implements HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Charge> charge;
@@ -31,8 +31,8 @@ public class IssuerFraudRecord extends APIResource implements HasId {
     return (this.charge != null) ? this.charge.getId() : null;
   }
 
-  public void setCharge(String chargeID) {
-    this.charge = setExpandableFieldID(chargeID, this.charge);
+  public void setCharge(String chargeId) {
+    this.charge = setExpandableFieldId(chargeId, this.charge);
   }
 
   public Charge getChargeObject() {
@@ -46,7 +46,7 @@ public class IssuerFraudRecord extends APIResource implements HasId {
   // <editor-fold desc="list">
   public static IssuerFraudRecordCollection list(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-                      APIConnectionException, CardException, APIException {
+                      ApiConnectionException, CardException, ApiException {
     return list(params, null);
   }
 
@@ -59,9 +59,9 @@ public class IssuerFraudRecord extends APIResource implements HasId {
    */
   public static IssuerFraudRecordCollection list(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-                      APIConnectionException, CardException, APIException {
+                      ApiConnectionException, CardException, ApiException {
     return requestCollection(
-        classURL(IssuerFraudRecord.class), params, IssuerFraudRecordCollection.class, options
+        classUrl(IssuerFraudRecord.class), params, IssuerFraudRecordCollection.class, options
     );
   }
   // </editor-fold>
@@ -69,14 +69,14 @@ public class IssuerFraudRecord extends APIResource implements HasId {
   // <editor-fold desc="retrieve">
   public static IssuerFraudRecord retrieve(String id)
       throws AuthenticationException, InvalidRequestException,
-                      APIConnectionException, CardException, APIException {
+                      ApiConnectionException, CardException, ApiException {
     return retrieve(id, null);
   }
 
   public static IssuerFraudRecord retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-                      APIConnectionException, CardException, APIException {
-    String url = instanceURL(IssuerFraudRecord.class, id);
+                      ApiConnectionException, CardException, ApiException {
+    String url = instanceUrl(IssuerFraudRecord.class, id);
     return request(RequestMethod.GET, url, null, IssuerFraudRecord.class, null);
   }
   // </editor-fold>

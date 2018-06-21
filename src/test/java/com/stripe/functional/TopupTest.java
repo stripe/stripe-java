@@ -6,7 +6,7 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Topup;
 import com.stripe.model.TopupCollection;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -35,7 +35,7 @@ public class TopupTest extends BaseStripeTest {
 
     assertNotNull(topup);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         "/v1/topups",
         params
     );
@@ -47,7 +47,7 @@ public class TopupTest extends BaseStripeTest {
 
     assertNotNull(topup);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/topups/%s", TOPUP_ID)
     );
   }
@@ -65,7 +65,7 @@ public class TopupTest extends BaseStripeTest {
 
     assertNotNull(updatedTopup);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/topups/%s", topup.getId()),
         params
     );
@@ -80,7 +80,7 @@ public class TopupTest extends BaseStripeTest {
 
     assertNotNull(topups);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         "/v1/topups",
         params
     );

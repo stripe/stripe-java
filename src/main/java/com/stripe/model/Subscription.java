@@ -1,11 +1,11 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
+import com.stripe.exception.ApiConnectionException;
+import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.Map;
@@ -18,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Subscription extends APIResource implements MetadataStore<Subscription>, HasId {
+public class Subscription extends ApiResource implements MetadataStore<Subscription>, HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   Double applicationFeePercent;
@@ -48,8 +48,8 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
     return (this.customer != null) ? this.customer.getId() : null;
   }
 
-  public void setCustomer(String customerID) {
-    this.customer = setExpandableFieldID(customerID, this.customer);
+  public void setCustomer(String customerId) {
+    this.customer = setExpandableFieldId(customerId, this.customer);
   }
 
   public Customer getCustomerObject() {
@@ -76,8 +76,8 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
    * Cancel a subscription.
    */
   public Subscription cancel(Map<String, Object> params) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
     return cancel(params, (RequestOptions) null);
   }
 
@@ -85,9 +85,9 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
    * Cancel a subscription.
    */
   public Subscription cancel(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
-    return request(RequestMethod.DELETE, instanceURL(Subscription.class, id), params,
+      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
+      CardException, ApiException {
+    return request(RequestMethod.DELETE, instanceUrl(Subscription.class, id), params,
         Subscription.class, options);
   }
   // </editor-fold>
@@ -98,7 +98,7 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
    */
   public static Subscription create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return create(params, null);
   }
 
@@ -107,8 +107,8 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
    */
   public static Subscription create(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, classURL(Subscription.class), params, Subscription.class,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, classUrl(Subscription.class), params, Subscription.class,
         options);
   }
   // </editor-fold>
@@ -118,8 +118,8 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
    * Delete a subscription discount.
    */
   public void deleteDiscount() throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
     deleteDiscount((RequestOptions) null);
   }
 
@@ -127,9 +127,9 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
    * Delete a subscription discount.
    */
   public void deleteDiscount(RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    request(RequestMethod.DELETE, String.format("%s/discount", instanceURL(Subscription.class, id)),
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
+    request(RequestMethod.DELETE, String.format("%s/discount", instanceUrl(Subscription.class, id)),
         null, Discount.class, options);
   }
   // </editor-fold>
@@ -140,8 +140,8 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
    */
   public static SubscriptionCollection list(Map<String, Object> params)
       throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
     return list(params, null);
   }
 
@@ -150,9 +150,9 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
    */
   public static SubscriptionCollection list(Map<String, Object> params,
                         RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return requestCollection(classURL(Subscription.class), params, SubscriptionCollection.class,
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
+    return requestCollection(classUrl(Subscription.class), params, SubscriptionCollection.class,
         options);
   }
   // </editor-fold>
@@ -162,8 +162,8 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
    * Retrieve a subscription.
    */
   public static Subscription retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
     return retrieve(id, null);
   }
 
@@ -172,8 +172,8 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
    */
   public static Subscription retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Subscription.class, id), null, Subscription.class,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(Subscription.class, id), null, Subscription.class,
         options);
   }
 
@@ -182,8 +182,8 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
    */
   public static Subscription retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Subscription.class, id), params,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(Subscription.class, id), params,
         Subscription.class, options);
   }
   // </editor-fold>
@@ -195,7 +195,7 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
   @Override
   public Subscription update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return update(params, (RequestOptions) null);
   }
 
@@ -205,8 +205,8 @@ public class Subscription extends APIResource implements MetadataStore<Subscript
   @Override
   public Subscription update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Subscription.class, id), params,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, instanceUrl(Subscription.class, id), params,
         Subscription.class, options);
   }
   // </editor-fold>

@@ -7,7 +7,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.DeletedProduct;
 import com.stripe.model.Product;
 import com.stripe.model.ProductCollection;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -50,7 +50,7 @@ public class ProductTest extends BaseStripeTest {
 
     assertNotNull(product);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         "/v1/products",
         params
     );
@@ -62,7 +62,7 @@ public class ProductTest extends BaseStripeTest {
 
     assertNotNull(product);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/products/%s", PRODUCT_ID)
     );
   }
@@ -78,7 +78,7 @@ public class ProductTest extends BaseStripeTest {
 
     assertNotNull(updatedProduct);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/products/%s", product.getId()),
         params
     );
@@ -92,7 +92,7 @@ public class ProductTest extends BaseStripeTest {
 
     assertNotNull(deletedProduct);
     verifyRequest(
-        APIResource.RequestMethod.DELETE,
+        ApiResource.RequestMethod.DELETE,
         String.format("/v1/products/%s", product.getId())
     );
   }
@@ -106,7 +106,7 @@ public class ProductTest extends BaseStripeTest {
 
     assertNotNull(products);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         "/v1/products",
         params
     );

@@ -1,17 +1,16 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
+import com.stripe.exception.ApiConnectionException;
+import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.List;
 import java.util.Map;
 
-import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -19,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Product extends APIResource implements HasId, MetadataStore<Product> {
+public class Product extends ApiResource implements HasId, MetadataStore<Product> {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   Boolean active;
@@ -34,21 +33,11 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
   String name;
   PackageDimensions packageDimensions;
   Boolean shippable;
-  SKUCollection skus;
+  SkuCollection skus;
   String statementDescriptor;
   String type;
   Long updated;
-  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) String url;
-
-  // <editor-fold desc="url">
-  public String getURL() {
-    return url;
-  }
-
-  public void setURL(String url) {
-    this.url = url;
-  }
-  // </editor-fold>
+  String url;
 
   // <editor-fold desc="create">
   /**
@@ -56,7 +45,7 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
    */
   public static Product create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return create(params, null);
   }
 
@@ -65,8 +54,8 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
    */
   public static Product create(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, classURL(Product.class), params, Product.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, classUrl(Product.class), params, Product.class, options);
   }
   // </editor-fold>
 
@@ -76,7 +65,7 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
    */
   public DeletedProduct delete()
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return delete(null);
   }
 
@@ -85,8 +74,8 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
    */
   public DeletedProduct delete(RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.DELETE, instanceURL(Product.class, this.id), null,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.DELETE, instanceUrl(Product.class, this.id), null,
         DeletedProduct.class, options);
   }
   // </editor-fold>
@@ -97,7 +86,7 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
    */
   public static ProductCollection list(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return list(params, null);
   }
 
@@ -106,9 +95,9 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
    */
   public static ProductCollection list(Map<String, Object> params,
                      RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return requestCollection(classURL(Product.class), params, ProductCollection.class, options);
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
+    return requestCollection(classUrl(Product.class), params, ProductCollection.class, options);
   }
   // </editor-fold>
 
@@ -118,7 +107,7 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
    */
   public static Product retrieve(String id)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return retrieve(id, null);
   }
 
@@ -127,8 +116,8 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
    */
   public static Product retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Product.class, id), null, Product.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(Product.class, id), null, Product.class, options);
   }
   // </editor-fold>
 
@@ -139,7 +128,7 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
   @Override
   public Product update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return update(params, null);
   }
 
@@ -149,8 +138,8 @@ public class Product extends APIResource implements HasId, MetadataStore<Product
   @Override
   public Product update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Product.class, this.id), params,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, instanceUrl(Product.class, this.id), params,
         Product.class, options);
   }
   // </editor-fold>

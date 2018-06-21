@@ -1,6 +1,6 @@
 package com.stripe.model;
 
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class ChargeOutcome extends APIResource {
+public class ChargeOutcome extends ApiResource {
   protected String networkStatus;
   protected String reason;
   protected String riskLevel;
@@ -44,7 +44,7 @@ public class ChargeOutcome extends APIResource {
   }
 
   public void setRuleId(String ruleId) {
-    this.rule = setExpandableFieldID(ruleId, this.rule);
+    this.rule = setExpandableFieldId(ruleId, this.rule);
   }
 
   public ChargeOutcomeRule getRuleObject() {

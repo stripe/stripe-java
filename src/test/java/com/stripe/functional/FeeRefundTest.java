@@ -7,7 +7,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.ApplicationFee;
 import com.stripe.model.FeeRefund;
 import com.stripe.model.FeeRefundCollection;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,7 +41,7 @@ public class FeeRefundTest extends BaseStripeTest {
 
     assertNotNull(refund);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/application_fees/%s/refunds", fee.getId()),
         params
     );
@@ -55,7 +55,7 @@ public class FeeRefundTest extends BaseStripeTest {
 
     assertNotNull(refund);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/application_fees/%s/refunds/%s", fee.getId(), REFUND_ID)
     );
   }
@@ -74,7 +74,7 @@ public class FeeRefundTest extends BaseStripeTest {
 
     assertNotNull(updatedRefund);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/application_fees/%s/refunds/%s", fee.getId(), refund.getId()),
         params
     );
@@ -91,7 +91,7 @@ public class FeeRefundTest extends BaseStripeTest {
 
     assertNotNull(refunds);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/application_fees/%s/refunds", fee.getId()),
         params
     );

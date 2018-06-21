@@ -6,7 +6,7 @@ import static org.junit.Assert.assertNotNull;
 import com.stripe.BaseStripeTest;
 import com.stripe.model.Event;
 import com.stripe.model.SourceMandateNotification;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.util.Map;
 
@@ -36,7 +36,7 @@ public class SourceMandateNotificationTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String json = getResourceAsString("/api_fixtures/source_mandate_notification.json");
-    final SourceMandateNotification resource = APIResource.GSON.fromJson(json,
+    final SourceMandateNotification resource = ApiResource.GSON.fromJson(json,
         SourceMandateNotification.class);
 
     verifyResource(resource);
@@ -45,7 +45,7 @@ public class SourceMandateNotificationTest extends BaseStripeTest {
   @Test
   public void testDeserializeEvent() throws Exception {
     final String json = getResourceAsString("/api_fixtures/source_mandate_notification_event.json");
-    final Event event = APIResource.GSON.fromJson(json, Event.class);
+    final Event event = ApiResource.GSON.fromJson(json, Event.class);
 
     final SourceMandateNotification mandateNotification
         = (com.stripe.model.SourceMandateNotification) event.getData().getObject();
