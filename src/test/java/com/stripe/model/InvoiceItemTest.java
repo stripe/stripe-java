@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import com.stripe.BaseStripeTest;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ public class InvoiceItemTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getFixture("/v1/invoiceitems/ii_123");
-    final InvoiceItem invoiceItem = APIResource.GSON.fromJson(data, InvoiceItem.class);
+    final InvoiceItem invoiceItem = ApiResource.GSON.fromJson(data, InvoiceItem.class);
     assertNotNull(invoiceItem);
     assertNotNull(invoiceItem.getId());
     assertEquals("invoiceitem", invoiceItem.getObject());
@@ -30,7 +30,7 @@ public class InvoiceItemTest extends BaseStripeTest {
       "subscription",
     };
     final String data = getFixture("/v1/invoiceitems/ii_123", expansions);
-    final InvoiceItem invoiceItem = APIResource.GSON.fromJson(data, InvoiceItem.class);
+    final InvoiceItem invoiceItem = ApiResource.GSON.fromJson(data, InvoiceItem.class);
     assertNotNull(invoiceItem);
     final Customer customer = invoiceItem.getCustomerObject();
     assertNotNull(customer);

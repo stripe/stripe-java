@@ -6,7 +6,7 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Transfer;
 import com.stripe.model.TransferCollection;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +33,7 @@ public class TransferTest extends BaseStripeTest {
 
     assertNotNull(transfer);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         "/v1/transfers",
         params
     );
@@ -45,7 +45,7 @@ public class TransferTest extends BaseStripeTest {
 
     assertNotNull(transfer);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/transfers/%s", TRANSFER_ID)
     );
   }
@@ -63,7 +63,7 @@ public class TransferTest extends BaseStripeTest {
 
     assertNotNull(updatedTransfer);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/transfers/%s", transfer.getId()),
         params
     );
@@ -78,7 +78,7 @@ public class TransferTest extends BaseStripeTest {
 
     assertNotNull(transfers);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         "/v1/transfers",
         params
     );

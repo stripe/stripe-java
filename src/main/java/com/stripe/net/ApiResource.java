@@ -5,8 +5,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import com.stripe.Stripe;
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
+import com.stripe.exception.ApiConnectionException;
+import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
@@ -46,11 +46,11 @@ import java.net.URLEncoder;
 import java.util.Map;
 import java.util.Objects;
 
-public abstract class APIResource extends StripeObject {
+public abstract class ApiResource extends StripeObject {
   private static StripeResponseGetter stripeResponseGetter = new LiveStripeResponseGetter();
 
   public static void setStripeResponseGetter(StripeResponseGetter srg) {
-    APIResource.stripeResponseGetter = srg;
+    ApiResource.stripeResponseGetter = srg;
   }
 
   public static final Gson GSON = new GsonBuilder()
@@ -93,31 +93,31 @@ public abstract class APIResource extends StripeObject {
     }
   }
 
-  protected static String singleClassURL(Class<?> clazz) {
-    return singleClassURL(clazz, Stripe.getApiBase());
+  protected static String singleClassUrl(Class<?> clazz) {
+    return singleClassUrl(clazz, Stripe.getApiBase());
   }
 
-  protected static String singleClassURL(Class<?> clazz, String apiBase) {
+  protected static String singleClassUrl(Class<?> clazz, String apiBase) {
     return String.format("%s/v1/%s", apiBase, className(clazz));
   }
 
-  protected static String classURL(Class<?> clazz) {
-    return classURL(clazz, Stripe.getApiBase());
+  protected static String classUrl(Class<?> clazz) {
+    return classUrl(clazz, Stripe.getApiBase());
   }
 
-  protected static String classURL(Class<?> clazz, String apiBase) {
-    return String.format("%ss", singleClassURL(clazz, apiBase));
+  protected static String classUrl(Class<?> clazz, String apiBase) {
+    return String.format("%ss", singleClassUrl(clazz, apiBase));
   }
 
-  protected static String instanceURL(Class<?> clazz, String id)
+  protected static String instanceUrl(Class<?> clazz, String id)
       throws InvalidRequestException {
-    return instanceURL(clazz, id, Stripe.getApiBase());
+    return instanceUrl(clazz, id, Stripe.getApiBase());
   }
 
-  protected static String instanceURL(Class<?> clazz, String id, String apiBase)
+  protected static String instanceUrl(Class<?> clazz, String id, String apiBase)
       throws InvalidRequestException {
     try {
-      return String.format("%s/%s", classURL(clazz, apiBase), urlEncode(id));
+      return String.format("%s/%s", classUrl(clazz, apiBase), urlEncode(id));
     } catch (UnsupportedEncodingException e) {
       throw new InvalidRequestException("Unable to encode parameters to "
           + CHARSET
@@ -126,16 +126,16 @@ public abstract class APIResource extends StripeObject {
     }
   }
 
-  protected static String subresourceURL(Class<?> clazz, String id, Class<?> subClazz)
+  protected static String subresourceUrl(Class<?> clazz, String id, Class<?> subClazz)
       throws InvalidRequestException {
-    return subresourceURL(clazz, id, subClazz, Stripe.getApiBase());
+    return subresourceUrl(clazz, id, subClazz, Stripe.getApiBase());
   }
 
 
-  private static String subresourceURL(Class<?> clazz, String id, Class<?> subClazz, String apiBase)
+  private static String subresourceUrl(Class<?> clazz, String id, Class<?> subClazz, String apiBase)
       throws InvalidRequestException {
     try {
-      return String.format("%s/%s/%ss", classURL(clazz, apiBase),
+      return String.format("%s/%s/%ss", classUrl(clazz, apiBase),
               urlEncode(id), className(subClazz));
     } catch (UnsupportedEncodingException e) {
       throw new InvalidRequestException("Unable to encode parameters to "
@@ -173,22 +173,22 @@ public abstract class APIResource extends StripeObject {
     }
   }
 
-  public static <T> T multipartRequest(APIResource.RequestMethod method,
+  public static <T> T multipartRequest(ApiResource.RequestMethod method,
                      String url, Map<String, Object> params, Class<T> clazz,
                      RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return APIResource.stripeResponseGetter.request(method, url, params, clazz,
-        APIResource.RequestType.MULTIPART, options);
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
+    return ApiResource.stripeResponseGetter.request(method, url, params, clazz,
+        ApiResource.RequestType.MULTIPART, options);
   }
 
-  public static <T> T request(APIResource.RequestMethod method,
+  public static <T> T request(ApiResource.RequestMethod method,
                 String url, Map<String, Object> params, Class<T> clazz,
                 RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return APIResource.stripeResponseGetter.request(method, url, params, clazz,
-        APIResource.RequestType.NORMAL, options);
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
+    return ApiResource.stripeResponseGetter.request(method, url, params, clazz,
+        ApiResource.RequestType.NORMAL, options);
   }
 
   /**
@@ -203,7 +203,7 @@ public abstract class APIResource extends StripeObject {
       String url, Map<String, Object> params, Class<T> clazz,
       RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     T collection = request(RequestMethod.GET, url, params, clazz, options);
 
     if (collection != null) {
@@ -219,7 +219,7 @@ public abstract class APIResource extends StripeObject {
    * ID and the expanded object in sync. If they specify a new String ID that is different from the
    * ID within the expanded object, we don't keep the object.
    */
-  public static <T extends HasId> ExpandableField<T> setExpandableFieldID(String newId,
+  public static <T extends HasId> ExpandableField<T> setExpandableFieldId(String newId,
       ExpandableField<T> currentObject) {
     if (currentObject == null
         || (currentObject.isExpanded() && (!Objects.equals(currentObject.getId(), newId)))) {

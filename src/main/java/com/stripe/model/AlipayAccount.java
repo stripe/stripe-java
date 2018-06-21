@@ -1,7 +1,7 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
+import com.stripe.exception.ApiConnectionException;
+import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
@@ -29,30 +29,30 @@ public class AlipayAccount extends ExternalAccount {
 
   @Override
   public DeletedAlipayAccount delete() throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
     return delete(null);
   }
 
   @Override
   public DeletedAlipayAccount delete(RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedAlipayAccount.class,
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
+    return request(RequestMethod.DELETE, this.getInstanceUrl(), null, DeletedAlipayAccount.class,
         options);
   }
 
   @Override
   public AlipayAccount update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return update(params, null);
   }
 
   @Override
   public AlipayAccount update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, this.getInstanceURL(), params, AlipayAccount.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, this.getInstanceUrl(), params, AlipayAccount.class, options);
   }
 }

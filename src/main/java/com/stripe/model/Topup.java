@@ -1,11 +1,11 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
+import com.stripe.exception.ApiConnectionException;
+import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.Map;
@@ -18,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Topup extends APIResource implements MetadataStore<Topup>, HasId {
+public class Topup extends ApiResource implements MetadataStore<Topup>, HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   Integer amount;
@@ -41,8 +41,8 @@ public class Topup extends APIResource implements MetadataStore<Topup>, HasId {
     return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
   }
 
-  public void setBalanceTransaction(String balanceTransactionID) {
-    this.balanceTransaction = setExpandableFieldID(balanceTransactionID, this.balanceTransaction);
+  public void setBalanceTransaction(String balanceTransactionId) {
+    this.balanceTransaction = setExpandableFieldId(balanceTransactionId, this.balanceTransaction);
   }
 
   public BalanceTransaction getBalanceTransactionObject() {
@@ -60,7 +60,7 @@ public class Topup extends APIResource implements MetadataStore<Topup>, HasId {
    */
   public static Topup create(Map<String, Object> params)
           throws AuthenticationException, InvalidRequestException,
-          APIConnectionException, CardException, APIException {
+          ApiConnectionException, CardException, ApiException {
     return create(params, null);
   }
 
@@ -69,8 +69,8 @@ public class Topup extends APIResource implements MetadataStore<Topup>, HasId {
    */
   public static Topup create(Map<String, Object> params, RequestOptions options)
           throws AuthenticationException, InvalidRequestException,
-          APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, classURL(Topup.class), params, Topup.class, options);
+          ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, classUrl(Topup.class), params, Topup.class, options);
   }
   // </editor-fold>
 
@@ -80,7 +80,7 @@ public class Topup extends APIResource implements MetadataStore<Topup>, HasId {
    */
   public static TopupCollection list(Map<String, Object> params)
           throws AuthenticationException, InvalidRequestException,
-          APIConnectionException, CardException, APIException {
+          ApiConnectionException, CardException, ApiException {
     return list(params, null);
   }
 
@@ -89,8 +89,8 @@ public class Topup extends APIResource implements MetadataStore<Topup>, HasId {
    */
   public static TopupCollection list(Map<String, Object> params, RequestOptions options)
           throws AuthenticationException, InvalidRequestException,
-          APIConnectionException, CardException, APIException {
-    return requestCollection(classURL(Topup.class), params, TopupCollection.class, options);
+          ApiConnectionException, CardException, ApiException {
+    return requestCollection(classUrl(Topup.class), params, TopupCollection.class, options);
   }
   // </editor-fold>
 
@@ -99,8 +99,8 @@ public class Topup extends APIResource implements MetadataStore<Topup>, HasId {
    * Retrieve a topup.
    */
   public static Topup retrieve(String id) throws AuthenticationException,
-          InvalidRequestException, APIConnectionException, CardException,
-          APIException {
+          InvalidRequestException, ApiConnectionException, CardException,
+          ApiException {
     return retrieve(id, null);
   }
 
@@ -109,7 +109,7 @@ public class Topup extends APIResource implements MetadataStore<Topup>, HasId {
    */
   public static Topup retrieve(String id, RequestOptions options)
           throws AuthenticationException, InvalidRequestException,
-          APIConnectionException, CardException, APIException {
+          ApiConnectionException, CardException, ApiException {
     return retrieve(id, null, options);
   }
 
@@ -118,8 +118,8 @@ public class Topup extends APIResource implements MetadataStore<Topup>, HasId {
    */
   public static Topup retrieve(String id, Map<String, Object> params, RequestOptions options)
           throws AuthenticationException, InvalidRequestException,
-          APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Topup.class, id), params, Topup.class, options);
+          ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(Topup.class, id), params, Topup.class, options);
   }
   // </editor-fold>
 
@@ -129,7 +129,7 @@ public class Topup extends APIResource implements MetadataStore<Topup>, HasId {
    */
   @Override
   public Topup update(Map<String, Object> params) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException, APIException {
+      InvalidRequestException, ApiConnectionException, CardException, ApiException {
     return update(params, null);
   }
 
@@ -138,9 +138,9 @@ public class Topup extends APIResource implements MetadataStore<Topup>, HasId {
    */
   @Override
   public Topup update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Topup.class, id), params, Topup.class, options);
+      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
+      CardException, ApiException {
+    return request(RequestMethod.POST, instanceUrl(Topup.class, id), params, Topup.class, options);
   }
   // </editor-fold>
 }

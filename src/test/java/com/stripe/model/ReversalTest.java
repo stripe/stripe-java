@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import com.stripe.BaseStripeTest;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ public class ReversalTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getFixture("/v1/transfers/tr_123/reversals/trr_123");
-    final Reversal reversal = APIResource.GSON.fromJson(data, Reversal.class);
+    final Reversal reversal = ApiResource.GSON.fromJson(data, Reversal.class);
     assertNotNull(reversal);
     assertNotNull(reversal.getId());
     assertEquals("transfer_reversal", reversal.getObject());
@@ -28,7 +28,7 @@ public class ReversalTest extends BaseStripeTest {
       "transfer",
     };
     final String data = getFixture("/v1/transfers/tr_123/reversals/trr_123", expansions);
-    final Reversal reversal = APIResource.GSON.fromJson(data, Reversal.class);
+    final Reversal reversal = ApiResource.GSON.fromJson(data, Reversal.class);
     assertNotNull(reversal);
     final BalanceTransaction balanceTransaction = reversal.getBalanceTransactionObject();
     assertNotNull(balanceTransaction);

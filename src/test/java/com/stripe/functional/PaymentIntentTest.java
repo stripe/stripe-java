@@ -6,7 +6,7 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentIntent;
 import com.stripe.model.PaymentIntentCollection;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -30,7 +30,7 @@ public class PaymentIntentTest extends BaseStripeTest {
     params.put("currency", "usd");
 
     stubRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/payment_intents"),
         params,
         PaymentIntent.class,
@@ -41,7 +41,7 @@ public class PaymentIntentTest extends BaseStripeTest {
 
     assertNotNull(paymentIntent);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/payment_intents"),
         params
     );
@@ -50,7 +50,7 @@ public class PaymentIntentTest extends BaseStripeTest {
   @Test
   public void testRetrieve() throws  IOException, StripeException {
     stubRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/payment_intents/%s", PAYMENT_INTENT_ID),
         null,
         PaymentIntent.class,
@@ -61,14 +61,14 @@ public class PaymentIntentTest extends BaseStripeTest {
 
     assertNotNull(paymentIntent);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/payment_intents/%s", PAYMENT_INTENT_ID)
     );
   }
 
   @Test
   public void testUpdate() throws  IOException, StripeException {
-    final PaymentIntent paymentIntent = APIResource.GSON.fromJson(
+    final PaymentIntent paymentIntent = ApiResource.GSON.fromJson(
         getResourceAsString("/api_fixtures/payment_intent.json"), PaymentIntent.class);
 
     final Map<String, String> metadata = new HashMap<String, String>();
@@ -77,7 +77,7 @@ public class PaymentIntentTest extends BaseStripeTest {
     params.put("metadata", metadata);
 
     stubRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/payment_intents/%s", paymentIntent.getId()),
         params,
         PaymentIntent.class,
@@ -88,7 +88,7 @@ public class PaymentIntentTest extends BaseStripeTest {
 
     assertNotNull(updatedPaymentIntent);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/payment_intents/%s", paymentIntent.getId()),
         params
     );
@@ -96,7 +96,7 @@ public class PaymentIntentTest extends BaseStripeTest {
 
   @Test
   public void testList() throws  IOException, StripeException {
-    final PaymentIntent stubbedPaymentIntent = APIResource.GSON.fromJson(
+    final PaymentIntent stubbedPaymentIntent = ApiResource.GSON.fromJson(
         getResourceAsString("/api_fixtures/payment_intent.json"), PaymentIntent.class);
     final PaymentIntentCollection stubbedCollection = new PaymentIntentCollection();
     final List<PaymentIntent> stubbedData = new ArrayList<PaymentIntent>();
@@ -107,7 +107,7 @@ public class PaymentIntentTest extends BaseStripeTest {
     params.put("limit", 1);
 
     stubRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/payment_intents"),
         params,
         PaymentIntentCollection.class,
@@ -118,7 +118,7 @@ public class PaymentIntentTest extends BaseStripeTest {
 
     assertNotNull(paymentIntents);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/payment_intents"),
         params
     );
@@ -126,11 +126,11 @@ public class PaymentIntentTest extends BaseStripeTest {
 
   @Test
   public void testCancel() throws  IOException, StripeException {
-    final PaymentIntent paymentIntent = APIResource.GSON.fromJson(
+    final PaymentIntent paymentIntent = ApiResource.GSON.fromJson(
         getResourceAsString("/api_fixtures/payment_intent.json"), PaymentIntent.class);
 
     stubRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/payment_intents/%s/cancel", paymentIntent.getId()),
         null,
         PaymentIntent.class,
@@ -141,18 +141,18 @@ public class PaymentIntentTest extends BaseStripeTest {
 
     assertNotNull(cancelledPaymentIntent);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/payment_intents/%s/cancel", paymentIntent.getId())
     );
   }
 
   @Test
   public void testCapture() throws  IOException, StripeException {
-    final PaymentIntent paymentIntent = APIResource.GSON.fromJson(
+    final PaymentIntent paymentIntent = ApiResource.GSON.fromJson(
         getResourceAsString("/api_fixtures/payment_intent.json"), PaymentIntent.class);
 
     stubRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/payment_intents/%s/capture", paymentIntent.getId()),
         null,
         PaymentIntent.class,
@@ -163,18 +163,18 @@ public class PaymentIntentTest extends BaseStripeTest {
 
     assertNotNull(captureledPaymentIntent);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/payment_intents/%s/capture", paymentIntent.getId())
     );
   }
 
   @Test
   public void testConfirm() throws  IOException, StripeException {
-    final PaymentIntent paymentIntent = APIResource.GSON.fromJson(
+    final PaymentIntent paymentIntent = ApiResource.GSON.fromJson(
         getResourceAsString("/api_fixtures/payment_intent.json"), PaymentIntent.class);
 
     stubRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/payment_intents/%s/confirm", paymentIntent.getId()),
         null,
         PaymentIntent.class,
@@ -185,7 +185,7 @@ public class PaymentIntentTest extends BaseStripeTest {
 
     assertNotNull(confirmledPaymentIntent);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/payment_intents/%s/confirm", paymentIntent.getId())
     );
   }

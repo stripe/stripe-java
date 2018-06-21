@@ -6,7 +6,7 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.OrderReturn;
 import com.stripe.model.OrderReturnCollection;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +22,7 @@ public class OrderReturnTest extends BaseStripeTest {
 
     assertNotNull(orderReturn);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/order_returns/%s", RETURN_ID)
     );
   }
@@ -36,7 +36,7 @@ public class OrderReturnTest extends BaseStripeTest {
 
     assertNotNull(orderReturns);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         "/v1/order_returns",
         params
     );

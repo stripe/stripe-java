@@ -1,11 +1,11 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
+import com.stripe.exception.ApiConnectionException;
+import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.List;
@@ -19,7 +19,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class OrderReturn extends APIResource implements HasId {
+public class OrderReturn extends ApiResource implements HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long amount;
@@ -35,8 +35,8 @@ public class OrderReturn extends APIResource implements HasId {
     return (this.order != null) ? this.order.getId() : null;
   }
 
-  public void setOrder(String orderID) {
-    this.order = setExpandableFieldID(orderID, this.order);
+  public void setOrder(String orderId) {
+    this.order = setExpandableFieldId(orderId, this.order);
   }
 
   public Order getOrderObject() {
@@ -53,8 +53,8 @@ public class OrderReturn extends APIResource implements HasId {
     return (this.refund != null) ? this.refund.getId() : null;
   }
 
-  public void setRefund(String refundID) {
-    this.refund = setExpandableFieldID(refundID, this.refund);
+  public void setRefund(String refundId) {
+    this.refund = setExpandableFieldId(refundId, this.refund);
   }
 
   public Refund getRefundObject() {
@@ -72,7 +72,7 @@ public class OrderReturn extends APIResource implements HasId {
    */
   public static OrderReturnCollection list(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return list(params, null);
   }
 
@@ -81,9 +81,9 @@ public class OrderReturn extends APIResource implements HasId {
    */
   public static OrderReturnCollection list(Map<String, Object> params,
                        RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return requestCollection(classURL(OrderReturn.class), params, OrderReturnCollection.class,
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
+    return requestCollection(classUrl(OrderReturn.class), params, OrderReturnCollection.class,
         options);
   }
   // </editor-fold>
@@ -94,7 +94,7 @@ public class OrderReturn extends APIResource implements HasId {
    */
   public static OrderReturn retrieve(String id)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return retrieve(id, null);
   }
 
@@ -103,8 +103,8 @@ public class OrderReturn extends APIResource implements HasId {
    */
   public static OrderReturn retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(OrderReturn.class, id), null, OrderReturn.class,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(OrderReturn.class, id), null, OrderReturn.class,
         options);
   }
   // </editor-fold>

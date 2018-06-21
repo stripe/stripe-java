@@ -5,14 +5,14 @@ import static org.junit.Assert.assertNotNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.model.PaymentIntent;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import org.junit.Test;
 
 public class PaymentIntentTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
-    final PaymentIntent resource = APIResource.GSON.fromJson(
+    final PaymentIntent resource = ApiResource.GSON.fromJson(
         getResourceAsString("/api_fixtures/payment_intent.json"), PaymentIntent.class);
     assertNotNull(resource);
     assertNotNull(resource.getId());
@@ -20,7 +20,7 @@ public class PaymentIntentTest extends BaseStripeTest {
     PaymentIntentSourceAction action =  resource.getNextSourceAction();
     assertNotNull(action);
 
-    PaymentIntentSourceActionValueAuthorizeWithUrl actionValue = 
+    PaymentIntentSourceActionValueAuthorizeWithUrl actionValue =
         (PaymentIntentSourceActionValueAuthorizeWithUrl) action.getValue();
     assertNotNull(actionValue);
     assertEquals("https://stripe.com", actionValue.getUrl());
@@ -28,7 +28,7 @@ public class PaymentIntentTest extends BaseStripeTest {
 
   @Test
   public void testDeserializeWithExpansions() throws Exception {
-    final PaymentIntent resource = APIResource.GSON.fromJson(
+    final PaymentIntent resource = ApiResource.GSON.fromJson(
         getResourceAsString("/api_fixtures/payment_intent_with_expansions.json"),
         PaymentIntent.class);
 

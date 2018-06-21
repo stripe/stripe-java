@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import com.stripe.BaseStripeTest;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import org.junit.Test;
 
@@ -12,7 +12,7 @@ public class EventTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getFixture("/v1/events/evt_123");
-    final Event event = APIResource.GSON.fromJson(data, Event.class);
+    final Event event = ApiResource.GSON.fromJson(data, Event.class);
     assertNotNull(event);
     assertNotNull(event.getId());
     assertEquals("event", event.getObject());
@@ -25,9 +25,9 @@ public class EventTest extends BaseStripeTest {
   @Test
   public void testReserialize() throws Exception {
     final String data = getFixture("/v1/events/evt_123");
-    final Event event = APIResource.GSON.fromJson(data, Event.class);
+    final Event event = ApiResource.GSON.fromJson(data, Event.class);
 
-    final Event reserializedEvent = APIResource.GSON.fromJson(event.toJson(), Event.class);
+    final Event reserializedEvent = ApiResource.GSON.fromJson(event.toJson(), Event.class);
 
     assertEquals(reserializedEvent.getId(), event.getId());
     assertEquals(reserializedEvent.getObject(), event.getObject());

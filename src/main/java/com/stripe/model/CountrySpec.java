@@ -1,11 +1,11 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
+import com.stripe.exception.ApiConnectionException;
+import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.List;
@@ -18,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class CountrySpec extends APIResource implements HasId {
+public class CountrySpec extends ApiResource implements HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   String defaultCurrency;
@@ -33,7 +33,7 @@ public class CountrySpec extends APIResource implements HasId {
    */
   public static CountrySpecCollection list(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return list(params, null);
   }
 
@@ -42,8 +42,8 @@ public class CountrySpec extends APIResource implements HasId {
    */
   public static CountrySpecCollection list(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return requestCollection(classURL(CountrySpec.class), params, CountrySpecCollection.class,
+      ApiConnectionException, CardException, ApiException {
+    return requestCollection(classUrl(CountrySpec.class), params, CountrySpecCollection.class,
         options);
   }
   // </editor-fold>
@@ -53,8 +53,8 @@ public class CountrySpec extends APIResource implements HasId {
    * Retrieve a country spec.
    */
   public static CountrySpec retrieve(String country) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
     return retrieve(country, null);
   }
 
@@ -63,8 +63,8 @@ public class CountrySpec extends APIResource implements HasId {
    */
   public static CountrySpec retrieve(String country, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(CountrySpec.class, country), null,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(CountrySpec.class, country), null,
         CountrySpec.class, options);
   }
   // </editor-fold>

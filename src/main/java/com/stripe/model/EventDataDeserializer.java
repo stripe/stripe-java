@@ -7,7 +7,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonPrimitive;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.lang.reflect.Type;
 import java.util.HashMap;
@@ -53,7 +53,7 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
     objectMap.put("refund", Refund.class);
     objectMap.put("recipient", Recipient.class);
     objectMap.put("review", Review.class);
-    objectMap.put("sku", SKU.class);
+    objectMap.put("sku", Sku.class);
     objectMap.put("source", Source.class);
     objectMap.put("source_mandate_notification", SourceMandateNotification.class);
     objectMap.put("source_transaction", SourceTransaction.class);
@@ -92,7 +92,7 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
       return null;
     } else if (element.isJsonObject()) {
       Map<String, Object> valueMap = new HashMap<String, Object>();
-      populateMapFromJSONObject(valueMap, element.getAsJsonObject());
+      populateMapFromJsonObject(valueMap, element.getAsJsonObject());
       return valueMap;
     } else if (element.isJsonPrimitive()) {
       return deserializeJsonPrimitive(element.getAsJsonPrimitive());
@@ -106,7 +106,7 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
     }
   }
 
-  private void populateMapFromJSONObject(Map<String, Object> objMap, JsonObject jsonObject) {
+  private void populateMapFromJsonObject(Map<String, Object> objMap, JsonObject jsonObject) {
     for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
       String key = entry.getKey();
       JsonElement element = entry.getValue();
@@ -131,13 +131,13 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
           eventData.setPreviousAttributes(null);
         } else if (element.isJsonObject()) {
           Map<String, Object> previousAttributes = new HashMap<String, Object>();
-          populateMapFromJSONObject(previousAttributes, element.getAsJsonObject());
+          populateMapFromJsonObject(previousAttributes, element.getAsJsonObject());
           eventData.setPreviousAttributes(previousAttributes);
         }
       } else if ("object".equals(key)) {
         String type = element.getAsJsonObject().get("object").getAsString();
         Class<? extends StripeObject> cl = objectMap.get(type);
-        StripeObject object = APIResource.GSON.fromJson(
+        StripeObject object = ApiResource.GSON.fromJson(
             entry.getValue(), cl != null ? cl : StripeRawJsonObject.class);
         eventData.setObject(object);
       }
