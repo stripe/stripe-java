@@ -1,7 +1,7 @@
 package com.stripe.model.issuing;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
+import com.stripe.exception.ApiConnectionException;
+import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
@@ -10,7 +10,7 @@ import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.StripeObject;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.List;
@@ -24,7 +24,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Transaction extends APIResource implements MetadataStore<Transaction>, HasId {
+public class Transaction extends ApiResource implements MetadataStore<Transaction>, HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long amount;
@@ -51,7 +51,7 @@ public class Transaction extends APIResource implements MetadataStore<Transactio
   }
 
   public void setAuthorization(String authorizationId) {
-    this.authorization = setExpandableFieldID(authorizationId, this.authorization);
+    this.authorization = setExpandableFieldId(authorizationId, this.authorization);
   }
 
   public Authorization getAuthorizationObject() {
@@ -69,7 +69,7 @@ public class Transaction extends APIResource implements MetadataStore<Transactio
   }
 
   public void setBalanceTransaction(String balanceTransactionId) {
-    this.balanceTransaction = setExpandableFieldID(balanceTransactionId, this.balanceTransaction);
+    this.balanceTransaction = setExpandableFieldId(balanceTransactionId, this.balanceTransaction);
   }
 
   public BalanceTransaction getBalanceTransactionObject() {
@@ -87,7 +87,7 @@ public class Transaction extends APIResource implements MetadataStore<Transactio
   }
 
   public void setCard(String cardId) {
-    this.card = setExpandableFieldID(cardId, this.card);
+    this.card = setExpandableFieldId(cardId, this.card);
   }
 
   public Card getCardObject() {
@@ -105,7 +105,7 @@ public class Transaction extends APIResource implements MetadataStore<Transactio
   }
 
   public void setCardholder(String cardholderId) {
-    this.cardholder = setExpandableFieldID(cardholderId, this.cardholder);
+    this.cardholder = setExpandableFieldId(cardholderId, this.cardholder);
   }
 
   public Cardholder getCardholderObject() {
@@ -123,7 +123,7 @@ public class Transaction extends APIResource implements MetadataStore<Transactio
   }
 
   public void setDispute(String disputeId) {
-    this.dispute = setExpandableFieldID(disputeId, this.dispute);
+    this.dispute = setExpandableFieldId(disputeId, this.dispute);
   }
 
   public Dispute getDisputeObject() {
@@ -141,7 +141,7 @@ public class Transaction extends APIResource implements MetadataStore<Transactio
    */
   public static TransactionCollection list(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return list(params, null);
   }
 
@@ -149,9 +149,9 @@ public class Transaction extends APIResource implements MetadataStore<Transactio
    * List all issuing transactions.
    */
   public static TransactionCollection list(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
-    return requestCollection(classURL(Transaction.class), params,
+      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
+      CardException, ApiException {
+    return requestCollection(classUrl(Transaction.class), params,
       TransactionCollection.class, options);
   }
   // </editor-fold>
@@ -161,8 +161,8 @@ public class Transaction extends APIResource implements MetadataStore<Transactio
    * Retrieve an issuing transaction.
    */
   public static Transaction retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
     return retrieve(id, null);
   }
 
@@ -171,8 +171,8 @@ public class Transaction extends APIResource implements MetadataStore<Transactio
    */
   public static Transaction retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Transaction.class, id), null,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(Transaction.class, id), null,
       Transaction.class, options);
   }
 
@@ -182,8 +182,8 @@ public class Transaction extends APIResource implements MetadataStore<Transactio
   public static Transaction retrieve(String id, Map<String, Object> params,
       RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Transaction.class, id), params,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(Transaction.class, id), params,
       Transaction.class, options);
   }
   // </editor-fold>
@@ -195,7 +195,7 @@ public class Transaction extends APIResource implements MetadataStore<Transactio
   @Override
   public Transaction update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return update(params, null);
   }
 
@@ -205,8 +205,8 @@ public class Transaction extends APIResource implements MetadataStore<Transactio
   @Override
   public Transaction update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Transaction.class, this.id), params,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, instanceUrl(Transaction.class, this.id), params,
       Transaction.class, options);
   }
   // </editor-fold>

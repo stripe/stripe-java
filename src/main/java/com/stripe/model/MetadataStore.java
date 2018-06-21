@@ -1,7 +1,7 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
+import com.stripe.exception.ApiConnectionException;
+import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
@@ -16,9 +16,9 @@ public interface MetadataStore<T> {
   Map<String, String> getMetadata();
 
   MetadataStore<T> update(Map<String, Object> params) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException, APIException;
+      InvalidRequestException, ApiConnectionException, CardException, ApiException;
 
   MetadataStore<T> update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException;
+      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
+      CardException, ApiException;
 }

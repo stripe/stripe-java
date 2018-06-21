@@ -1,11 +1,11 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
+import com.stripe.exception.ApiConnectionException;
+import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.Map;
@@ -18,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class ApplicationFee extends APIResource implements HasId {
+public class ApplicationFee extends ApiResource implements HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Account> account;
@@ -51,8 +51,8 @@ public class ApplicationFee extends APIResource implements HasId {
     return (this.account != null) ? this.account.getId() : null;
   }
 
-  public void setAccount(String accountID) {
-    this.account = setExpandableFieldID(accountID, this.account);
+  public void setAccount(String accountId) {
+    this.account = setExpandableFieldId(accountId, this.account);
   }
 
   public Account getAccountObject() {
@@ -69,8 +69,8 @@ public class ApplicationFee extends APIResource implements HasId {
     return (this.application != null) ? this.application.getId() : null;
   }
 
-  public void setApplication(String applicationID) {
-    this.application = setExpandableFieldID(applicationID, this.application);
+  public void setApplication(String applicationId) {
+    this.application = setExpandableFieldId(applicationId, this.application);
   }
 
   public Application getApplicationObject() {
@@ -87,8 +87,8 @@ public class ApplicationFee extends APIResource implements HasId {
     return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
   }
 
-  public void setBalanceTransaction(String balanceTransactionID) {
-    this.balanceTransaction = setExpandableFieldID(balanceTransactionID, this.balanceTransaction);
+  public void setBalanceTransaction(String balanceTransactionId) {
+    this.balanceTransaction = setExpandableFieldId(balanceTransactionId, this.balanceTransaction);
   }
 
   public BalanceTransaction getBalanceTransactionObject() {
@@ -105,8 +105,8 @@ public class ApplicationFee extends APIResource implements HasId {
     return (this.charge != null) ? this.charge.getId() : null;
   }
 
-  public void setCharge(String chargeID) {
-    this.charge = setExpandableFieldID(chargeID, this.charge);
+  public void setCharge(String chargeId) {
+    this.charge = setExpandableFieldId(chargeId, this.charge);
   }
 
   public Charge getChargeObject() {
@@ -123,9 +123,9 @@ public class ApplicationFee extends APIResource implements HasId {
     return (this.originatingTransaction != null) ? this.originatingTransaction.getId() : null;
   }
 
-  public void setOriginatingTransaction(String originatingTransactionID) {
+  public void setOriginatingTransaction(String originatingTransactionId) {
     this.originatingTransaction
-        = setExpandableFieldID(originatingTransactionID, this.originatingTransaction);
+        = setExpandableFieldId(originatingTransactionId, this.originatingTransaction);
   }
 
   public Charge getOriginatingTransactionObject() {
@@ -145,9 +145,9 @@ public class ApplicationFee extends APIResource implements HasId {
   public FeeRefundCollection getRefunds() {
     // API versions 2014-07-26 and earlier render charge refunds as an array
     // instead of an object, meaning there is no sublist URL.
-    if (refunds.getURL() == null) {
-      // TODO replace with subresourceURL
-      refunds.setURL(String.format("/v1/application_fees/%s/refunds", getId()));
+    if (refunds.getUrl() == null) {
+      // TODO replace with subresourceUrl
+      refunds.setUrl(String.format("/v1/application_fees/%s/refunds", getId()));
     }
 
     return refunds;
@@ -159,7 +159,7 @@ public class ApplicationFee extends APIResource implements HasId {
    */
   public static ApplicationFeeCollection list(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return list(params, null);
   }
 
@@ -168,8 +168,8 @@ public class ApplicationFee extends APIResource implements HasId {
    */
   public static ApplicationFeeCollection list(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return requestCollection(classURL(ApplicationFee.class), params, ApplicationFeeCollection.class,
+      ApiConnectionException, CardException, ApiException {
+    return requestCollection(classUrl(ApplicationFee.class), params, ApplicationFeeCollection.class,
         options);
   }
   // </editor-fold>
@@ -179,8 +179,8 @@ public class ApplicationFee extends APIResource implements HasId {
    * Retrieve an application fee.
    */
   public static ApplicationFee retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
     return retrieve(id, (RequestOptions) null);
   }
 
@@ -189,8 +189,8 @@ public class ApplicationFee extends APIResource implements HasId {
    */
   public static ApplicationFee retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(ApplicationFee.class, id), null,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(ApplicationFee.class, id), null,
         ApplicationFee.class, options);
   }
   // </editor-fold>

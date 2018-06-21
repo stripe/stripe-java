@@ -1,7 +1,7 @@
 package com.stripe.model.issuing;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
+import com.stripe.exception.ApiConnectionException;
+import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
@@ -9,7 +9,7 @@ import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.StripeObject;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.List;
@@ -23,7 +23,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Dispute extends APIResource implements MetadataStore<Dispute>, HasId {
+public class Dispute extends ApiResource implements MetadataStore<Dispute>, HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long amount;
@@ -42,7 +42,7 @@ public class Dispute extends APIResource implements MetadataStore<Dispute>, HasI
   }
 
   public void setTransaction(String transactionId) {
-    this.transaction = setExpandableFieldID(transactionId, this.transaction);
+    this.transaction = setExpandableFieldId(transactionId, this.transaction);
   }
 
   public Transaction getTransactionObject() {
@@ -60,7 +60,7 @@ public class Dispute extends APIResource implements MetadataStore<Dispute>, HasI
    */
   public static Dispute create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return create(params, null);
   }
 
@@ -69,8 +69,8 @@ public class Dispute extends APIResource implements MetadataStore<Dispute>, HasI
    */
   public static Dispute create(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, classURL(Dispute.class), params,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, classUrl(Dispute.class), params,
       Dispute.class, options);
   }
   // </editor-fold>
@@ -81,7 +81,7 @@ public class Dispute extends APIResource implements MetadataStore<Dispute>, HasI
    */
   public static DisputeCollection list(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return list(params, null);
   }
 
@@ -89,9 +89,9 @@ public class Dispute extends APIResource implements MetadataStore<Dispute>, HasI
    * List all issuing disputes.
    */
   public static DisputeCollection list(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
-    return requestCollection(classURL(Dispute.class), params,
+      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
+      CardException, ApiException {
+    return requestCollection(classUrl(Dispute.class), params,
       DisputeCollection.class, options);
   }
   // </editor-fold>
@@ -101,8 +101,8 @@ public class Dispute extends APIResource implements MetadataStore<Dispute>, HasI
    * Retrieve an issuing dispute.
    */
   public static Dispute retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
     return retrieve(id, null);
   }
 
@@ -111,8 +111,8 @@ public class Dispute extends APIResource implements MetadataStore<Dispute>, HasI
    */
   public static Dispute retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Dispute.class, id), null,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(Dispute.class, id), null,
       Dispute.class, options);
   }
 
@@ -122,8 +122,8 @@ public class Dispute extends APIResource implements MetadataStore<Dispute>, HasI
   public static Dispute retrieve(String id, Map<String, Object> params,
       RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Dispute.class, id), params,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(Dispute.class, id), params,
       Dispute.class, options);
   }
   // </editor-fold>
@@ -135,7 +135,7 @@ public class Dispute extends APIResource implements MetadataStore<Dispute>, HasI
   @Override
   public Dispute update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return update(params, null);
   }
 
@@ -145,8 +145,8 @@ public class Dispute extends APIResource implements MetadataStore<Dispute>, HasI
   @Override
   public Dispute update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Dispute.class, this.id), params,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, instanceUrl(Dispute.class, this.id), params,
       Dispute.class, options);
   }
   // </editor-fold>

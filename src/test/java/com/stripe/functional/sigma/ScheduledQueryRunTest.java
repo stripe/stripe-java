@@ -6,7 +6,7 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.sigma.ScheduledQueryRun;
 import com.stripe.model.sigma.ScheduledQueryRunCollection;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -24,7 +24,7 @@ public class ScheduledQueryRunTest extends BaseStripeTest {
   public void testRetrieve() throws IOException, StripeException {
     // stripe-mock doesn't handle this, so we stub the request
     stubRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/sigma/scheduled_query_runs/%s", RUN_ID),
         null,
         ScheduledQueryRun.class,
@@ -34,7 +34,7 @@ public class ScheduledQueryRunTest extends BaseStripeTest {
 
     assertNotNull(run);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/sigma/scheduled_query_runs/%s", RUN_ID)
     );
   }
@@ -45,7 +45,7 @@ public class ScheduledQueryRunTest extends BaseStripeTest {
     params.put("limit", 1);
 
     // stripe-mock doesn't handle this, so we stub the request
-    final ScheduledQueryRun stubbedRun = APIResource.GSON.fromJson(
+    final ScheduledQueryRun stubbedRun = ApiResource.GSON.fromJson(
         getResourceAsString("/api_fixtures/sigma/scheduled_query_run.json"),
         ScheduledQueryRun.class);
     final ScheduledQueryRunCollection stubbedCollection = new ScheduledQueryRunCollection();
@@ -53,7 +53,7 @@ public class ScheduledQueryRunTest extends BaseStripeTest {
     stubbedData.add(stubbedRun);
     stubbedCollection.setData(stubbedData);
     stubRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/sigma/scheduled_query_runs"),
         params,
         ScheduledQueryRunCollection.class,
@@ -65,7 +65,7 @@ public class ScheduledQueryRunTest extends BaseStripeTest {
 
     assertNotNull(runs);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/sigma/scheduled_query_runs"),
         params
     );

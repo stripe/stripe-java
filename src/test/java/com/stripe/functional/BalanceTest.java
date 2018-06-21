@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Balance;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import org.junit.Test;
 
@@ -16,7 +16,7 @@ public class BalanceTest extends BaseStripeTest {
 
     assertNotNull(balance);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/balance")
     );
   }

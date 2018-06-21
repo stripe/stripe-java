@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import com.stripe.BaseStripeTest;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import org.junit.Test;
 
@@ -13,7 +13,7 @@ public class CardTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getFixture("/v1/issuing/cards/ic_123");
-    final Card card = APIResource.GSON.fromJson(data, Card.class);
+    final Card card = ApiResource.GSON.fromJson(data, Card.class);
 
     assertNotNull(card);
     assertNotNull(card.getId());

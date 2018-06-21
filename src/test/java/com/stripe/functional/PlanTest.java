@@ -7,7 +7,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.DeletedPlan;
 import com.stripe.model.Plan;
 import com.stripe.model.PlanCollection;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -36,7 +36,7 @@ public class PlanTest extends BaseStripeTest {
 
     assertNotNull(plan);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         "/v1/plans",
         params
     );
@@ -48,7 +48,7 @@ public class PlanTest extends BaseStripeTest {
 
     assertNotNull(plan);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/plans/%s", PLAN_ID)
     );
   }
@@ -64,7 +64,7 @@ public class PlanTest extends BaseStripeTest {
 
     assertNotNull(updatedPlan);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/plans/%s", plan.getId()),
         params
     );
@@ -78,7 +78,7 @@ public class PlanTest extends BaseStripeTest {
 
     assertNotNull(deletedPlan);
     verifyRequest(
-        APIResource.RequestMethod.DELETE,
+        ApiResource.RequestMethod.DELETE,
         String.format("/v1/plans/%s", plan.getId())
     );
   }
@@ -92,7 +92,7 @@ public class PlanTest extends BaseStripeTest {
 
     assertNotNull(plans);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         "/v1/plans",
         params
     );

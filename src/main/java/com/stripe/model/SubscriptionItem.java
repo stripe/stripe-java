@@ -1,11 +1,11 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
+import com.stripe.exception.ApiConnectionException;
+import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.Map;
@@ -17,7 +17,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class SubscriptionItem extends APIResource implements HasId {
+public class SubscriptionItem extends ApiResource implements HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long created;
@@ -30,7 +30,7 @@ public class SubscriptionItem extends APIResource implements HasId {
    */
   public static SubscriptionItem create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return create(params, null);
   }
 
@@ -39,8 +39,8 @@ public class SubscriptionItem extends APIResource implements HasId {
    */
   public static SubscriptionItem create(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, classURL(SubscriptionItem.class), params,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, classUrl(SubscriptionItem.class), params,
         SubscriptionItem.class, options);
   }
   // </editor-fold>
@@ -50,8 +50,8 @@ public class SubscriptionItem extends APIResource implements HasId {
    * Delete a subscription item.
    */
   public DeletedSubscriptionItem delete() throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
     return delete(null, null);
   }
 
@@ -59,8 +59,8 @@ public class SubscriptionItem extends APIResource implements HasId {
    * Delete a subscription item.
    */
   public DeletedSubscriptionItem delete(RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
     return delete(null, options);
   }
 
@@ -68,8 +68,8 @@ public class SubscriptionItem extends APIResource implements HasId {
    * Delete a subscription item.
    */
   public DeletedSubscriptionItem delete(Map<String, Object> params) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
     return delete(params, null);
   }
 
@@ -77,9 +77,9 @@ public class SubscriptionItem extends APIResource implements HasId {
    * Delete a subscription item.
    */
   public DeletedSubscriptionItem delete(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
-    return request(RequestMethod.DELETE, instanceURL(SubscriptionItem.class, id), params,
+      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
+      CardException, ApiException {
+    return request(RequestMethod.DELETE, instanceUrl(SubscriptionItem.class, id), params,
         DeletedSubscriptionItem.class, options);
   }
   // </editor-fold>
@@ -90,8 +90,8 @@ public class SubscriptionItem extends APIResource implements HasId {
    */
   public static SubscriptionItemCollection list(Map<String, Object> params)
       throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
     return list(params, null);
   }
 
@@ -100,9 +100,9 @@ public class SubscriptionItem extends APIResource implements HasId {
    */
   public static SubscriptionItemCollection list(Map<String, Object> params,
                           RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return requestCollection(classURL(SubscriptionItem.class), params,
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
+    return requestCollection(classUrl(SubscriptionItem.class), params,
         SubscriptionItemCollection.class, options);
   }
   // </editor-fold>
@@ -112,8 +112,8 @@ public class SubscriptionItem extends APIResource implements HasId {
    * Retrieve a subscription item.
    */
   public static SubscriptionItem retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
     return retrieve(id, null);
   }
 
@@ -122,8 +122,8 @@ public class SubscriptionItem extends APIResource implements HasId {
    */
   public static SubscriptionItem retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(SubscriptionItem.class, id), null,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(SubscriptionItem.class, id), null,
         SubscriptionItem.class, options);
   }
   // </editor-fold>
@@ -134,7 +134,7 @@ public class SubscriptionItem extends APIResource implements HasId {
    */
   public SubscriptionItem update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return update(params, null);
   }
 
@@ -143,8 +143,8 @@ public class SubscriptionItem extends APIResource implements HasId {
    */
   public SubscriptionItem update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(SubscriptionItem.class, id), params,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, instanceUrl(SubscriptionItem.class, id), params,
         SubscriptionItem.class, options);
   }
   // </editor-fold>

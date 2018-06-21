@@ -6,7 +6,7 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.CountrySpec;
 import com.stripe.model.CountrySpecCollection;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +22,7 @@ public class CountrySpecTest extends BaseStripeTest {
 
     assertNotNull(contrySpec);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/country_specs/%s", COUNTRY_SPEC_ID)
     );
   }
@@ -36,7 +36,7 @@ public class CountrySpecTest extends BaseStripeTest {
 
     assertNotNull(countrySpecs);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/country_specs"),
         params
     );

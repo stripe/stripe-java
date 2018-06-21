@@ -6,7 +6,7 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Payout;
 import com.stripe.model.PayoutCollection;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,7 +32,7 @@ public class PayoutTest extends BaseStripeTest {
 
     assertNotNull(payout);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/payouts"),
         params
     );
@@ -44,7 +44,7 @@ public class PayoutTest extends BaseStripeTest {
 
     assertNotNull(payout);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/payouts/%s", PAYOUT_ID)
     );
   }
@@ -62,7 +62,7 @@ public class PayoutTest extends BaseStripeTest {
 
     assertNotNull(updatedPayout);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/payouts/%s", payout.getId()),
         params
     );
@@ -77,7 +77,7 @@ public class PayoutTest extends BaseStripeTest {
 
     assertNotNull(payouts);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/payouts"),
         params
     );
@@ -91,7 +91,7 @@ public class PayoutTest extends BaseStripeTest {
 
     assertNotNull(cancelledPayout);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/payouts/%s/cancel", resource.getId())
     );
   }

@@ -1,11 +1,11 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
+import com.stripe.exception.ApiConnectionException;
+import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.List;
@@ -19,7 +19,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
+public class Plan extends ApiResource implements MetadataStore<Plan>, HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   Boolean active;
@@ -85,8 +85,8 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
     return (this.product != null) ? this.product.getId() : null;
   }
 
-  public void setProduct(String productID) {
-    this.product = setExpandableFieldID(productID, this.product);
+  public void setProduct(String productId) {
+    this.product = setExpandableFieldId(productId, this.product);
   }
 
   public Product getProductObject() {
@@ -104,7 +104,7 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
    */
   public static Plan create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return create(params, (RequestOptions) null);
   }
 
@@ -113,8 +113,8 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
    */
   public static Plan create(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, classURL(Plan.class), params, Plan.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, classUrl(Plan.class), params, Plan.class, options);
   }
   // </editor-fold>
 
@@ -123,8 +123,8 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
    * Delete a plan.
    */
   public DeletedPlan delete() throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
     return delete((RequestOptions) null);
   }
 
@@ -132,9 +132,9 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
    * Delete a plan.
    */
   public DeletedPlan delete(RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return request(RequestMethod.DELETE, instanceURL(Plan.class, this.id), null, DeletedPlan.class,
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
+    return request(RequestMethod.DELETE, instanceUrl(Plan.class, this.id), null, DeletedPlan.class,
         options);
   }
   // </editor-fold>
@@ -145,7 +145,7 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
    */
   public static PlanCollection list(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return list(params, null);
   }
 
@@ -154,8 +154,8 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
    */
   public static PlanCollection list(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return requestCollection(classURL(Plan.class), params, PlanCollection.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return requestCollection(classUrl(Plan.class), params, PlanCollection.class, options);
   }
   // </editor-fold>
 
@@ -164,8 +164,8 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
    * Retrieve a plan.
    */
   public static Plan retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
     return retrieve(id, (RequestOptions) null);
   }
 
@@ -174,8 +174,8 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
    */
   public static Plan retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Plan.class, id), null, Plan.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(Plan.class, id), null, Plan.class, options);
   }
   // </editor-fold>
 
@@ -186,7 +186,7 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
   @Override
   public Plan update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return update(params, (RequestOptions) null);
   }
 
@@ -196,8 +196,8 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
   @Override
   public Plan update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Plan.class, this.id), params, Plan.class,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, instanceUrl(Plan.class, this.id), params, Plan.class,
         options);
   }
   // </editor-fold>

@@ -6,7 +6,7 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentIntent;
 import com.stripe.model.PaymentIntentCollection;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -39,7 +39,7 @@ public class PaymentIntentTest extends BaseStripeTest {
 
     assertNotNull(paymentIntent);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/payment_intents"),
         params
     );
@@ -51,7 +51,7 @@ public class PaymentIntentTest extends BaseStripeTest {
 
     assertNotNull(paymentIntent);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/payment_intents/%s", PAYMENT_INTENT_ID)
     );
   }
@@ -69,7 +69,7 @@ public class PaymentIntentTest extends BaseStripeTest {
 
     assertNotNull(updatedPaymentIntent);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/payment_intents/%s", paymentIntent.getId()),
         params
     );
@@ -84,7 +84,7 @@ public class PaymentIntentTest extends BaseStripeTest {
 
     assertNotNull(paymentIntents);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/payment_intents"),
         params
     );
@@ -97,7 +97,7 @@ public class PaymentIntentTest extends BaseStripeTest {
 
     assertNotNull(cancelledPaymentIntent);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/payment_intents/%s/cancel", paymentIntent.getId())
     );
   }
@@ -109,7 +109,7 @@ public class PaymentIntentTest extends BaseStripeTest {
 
     assertNotNull(captureledPaymentIntent);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/payment_intents/%s/capture", paymentIntent.getId())
     );
   }
@@ -121,7 +121,7 @@ public class PaymentIntentTest extends BaseStripeTest {
 
     assertNotNull(confirmledPaymentIntent);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/payment_intents/%s/confirm", paymentIntent.getId())
     );
   }

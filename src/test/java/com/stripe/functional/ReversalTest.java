@@ -7,7 +7,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Reversal;
 import com.stripe.model.Transfer;
 import com.stripe.model.TransferReversalCollection;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -41,7 +41,7 @@ public class ReversalTest extends BaseStripeTest {
 
     assertNotNull(reversal);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/transfers/%s/reversals", transfer.getId()),
         params
     );
@@ -55,7 +55,7 @@ public class ReversalTest extends BaseStripeTest {
 
     assertNotNull(reversal);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/transfers/%s/reversals/%s", transfer.getId(), REVERSAL_ID)
     );
   }
@@ -74,7 +74,7 @@ public class ReversalTest extends BaseStripeTest {
 
     assertNotNull(updatedReversal);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/transfers/%s/reversals/%s", transfer.getId(), reversal.getId()),
         params
     );
@@ -91,7 +91,7 @@ public class ReversalTest extends BaseStripeTest {
 
     assertNotNull(reversals);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/transfers/%s/reversals", transfer.getId()),
         params
     );

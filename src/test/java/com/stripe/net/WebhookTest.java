@@ -58,7 +58,7 @@ public class WebhookTest extends BaseStripeTest {
 
     if (signature == null) {
       final String payloadToSign = String.format("%d.%s", timestamp, payload);
-      signature = Webhook.Util.computeHmacSHA256(secret, payloadToSign);
+      signature = Webhook.Util.computeHmacSha256(secret, payloadToSign);
     }
 
     final String header = String.format("t=%d,%s=%s", timestamp, scheme, signature);

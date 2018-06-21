@@ -1,7 +1,7 @@
 package com.stripe.model;
 
 import com.stripe.Stripe;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.HashMap;
@@ -9,7 +9,7 @@ import java.util.Iterator;
 import java.util.Map;
 import java.util.NoSuchElementException;
 
-public class PagingIterator<T extends HasId> extends APIResource implements Iterator<T> {
+public class PagingIterator<T extends HasId> extends ApiResource implements Iterator<T> {
   private final String url;
 
   @SuppressWarnings("rawtypes")
@@ -21,7 +21,7 @@ public class PagingIterator<T extends HasId> extends APIResource implements Iter
   private String lastId;
 
   PagingIterator(final StripeCollectionInterface<T> stripeCollection) {
-    this.url = Stripe.getApiBase() + stripeCollection.getURL();
+    this.url = Stripe.getApiBase() + stripeCollection.getUrl();
 
     this.collectionType = stripeCollection.getClass();
 
@@ -79,6 +79,6 @@ public class PagingIterator<T extends HasId> extends APIResource implements Iter
       final Map<String, Object> params,
       final RequestOptions options
   ) throws Exception {
-    return APIResource.requestCollection(url, params, collectionType, options);
+    return ApiResource.requestCollection(url, params, collectionType, options);
   }
 }

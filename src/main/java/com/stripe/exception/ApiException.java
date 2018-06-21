@@ -1,6 +1,6 @@
 package com.stripe.exception;
 
-public class APIException extends StripeException {
+public class ApiException extends StripeException {
   private static final long serialVersionUID = 2L;
 
   /**
@@ -10,11 +10,11 @@ public class APIException extends StripeException {
    */
   @Deprecated
   // TODO: remove this constructor in next major version bump
-  public APIException(String message, String requestId, Integer statusCode, Throwable e) {
+  public ApiException(String message, String requestId, Integer statusCode, Throwable e) {
     this(message, requestId, null, statusCode, e);
   }
 
-  public APIException(String message, String requestId, String code, Integer statusCode,
+  public ApiException(String message, String requestId, String code, Integer statusCode,
       Throwable e) {
     super(message, requestId, code, statusCode, e);
   }

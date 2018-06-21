@@ -7,7 +7,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.issuing.Card;
 import com.stripe.model.issuing.CardCollection;
 import com.stripe.model.issuing.CardDetails;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -31,7 +31,7 @@ public class CardTest extends BaseStripeTest {
 
     assertNotNull(card);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/issuing/cards"),
         params
     );
@@ -45,7 +45,7 @@ public class CardTest extends BaseStripeTest {
 
     assertNotNull(cardDetails);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/issuing/cards/%s/details", card.getId()),
         null
     );
@@ -57,7 +57,7 @@ public class CardTest extends BaseStripeTest {
 
     assertNotNull(card);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/issuing/cards/%s", CARD_ID)
     );
   }
@@ -75,7 +75,7 @@ public class CardTest extends BaseStripeTest {
 
     assertNotNull(updatedCard);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/issuing/cards/%s", card.getId()),
         params
     );
@@ -90,7 +90,7 @@ public class CardTest extends BaseStripeTest {
 
     assertNotNull(resources);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/issuing/cards"),
         params
     );

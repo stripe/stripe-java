@@ -7,7 +7,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.ApplePayDomain;
 import com.stripe.model.ApplePayDomainCollection;
 import com.stripe.model.DeletedApplePayDomain;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -32,7 +32,7 @@ public class ApplePayDomainTest extends BaseStripeTest {
 
     assertNotNull(domain);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/apple_pay/domains"),
         params
     );
@@ -44,7 +44,7 @@ public class ApplePayDomainTest extends BaseStripeTest {
 
     assertNotNull(domain);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/apple_pay/domains/%s", DOMAIN_ID)
     );
   }
@@ -58,7 +58,7 @@ public class ApplePayDomainTest extends BaseStripeTest {
 
     assertNotNull(domains);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/apple_pay/domains"),
         params
     );
@@ -72,7 +72,7 @@ public class ApplePayDomainTest extends BaseStripeTest {
 
     assertNotNull(deletedDomain);
     verifyRequest(
-        APIResource.RequestMethod.DELETE,
+        ApiResource.RequestMethod.DELETE,
         String.format("/v1/apple_pay/domains/%s", domain.getId())
     );
   }

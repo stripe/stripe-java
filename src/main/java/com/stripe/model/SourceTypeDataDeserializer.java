@@ -21,7 +21,7 @@ import java.util.Map;
 public class SourceTypeDataDeserializer<T extends HasSourceTypeData>
     implements JsonDeserializer<T> {
 
-  private void populateMapFromJSONObject(Map<String, String> objMap, JsonObject jsonObject) {
+  private void populateMapFromJsonObject(Map<String, String> objMap, JsonObject jsonObject) {
     for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
       String key = entry.getKey();
       JsonElement val = entry.getValue();
@@ -54,7 +54,7 @@ public class SourceTypeDataDeserializer<T extends HasSourceTypeData>
 
     // Populate the `typeData` from the `type` property.
     Map<String, String> typeData = new HashMap<String, String>();
-    populateMapFromJSONObject(typeData, jsonObject.getAsJsonObject(type));
+    populateMapFromJsonObject(typeData, jsonObject.getAsJsonObject(type));
 
     // Remove the `type` property.
     jsonObject.remove(type);

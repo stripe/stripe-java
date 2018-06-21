@@ -7,7 +7,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Coupon;
 import com.stripe.model.CouponCollection;
 import com.stripe.model.DeletedCoupon;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -33,7 +33,7 @@ public class CouponTest extends BaseStripeTest {
 
     assertNotNull(coupon);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/coupons"),
         params
     );
@@ -45,7 +45,7 @@ public class CouponTest extends BaseStripeTest {
 
     assertNotNull(coupon);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/coupons/%s", COUPON_ID)
     );
   }
@@ -63,7 +63,7 @@ public class CouponTest extends BaseStripeTest {
 
     assertNotNull(updatedCoupon);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/coupons/%s", coupon.getId()),
         params
     );
@@ -78,7 +78,7 @@ public class CouponTest extends BaseStripeTest {
 
     assertNotNull(coupons);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/coupons")
     );
   }
@@ -91,7 +91,7 @@ public class CouponTest extends BaseStripeTest {
 
     assertNotNull(deletedCoupon);
     verifyRequest(
-        APIResource.RequestMethod.DELETE,
+        ApiResource.RequestMethod.DELETE,
         String.format("/v1/coupons/%s", coupon.getId())
     );
   }
