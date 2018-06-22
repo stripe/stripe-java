@@ -1,11 +1,7 @@
 package com.stripe.model;
 
 import com.stripe.Stripe;
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
@@ -14,18 +10,14 @@ public class LoginLinkCollection extends StripeCollection<LoginLink> {
   /**
    * Create a login link.
    */
-  public LoginLink create()
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public LoginLink create() throws StripeException {
     return create(null);
   }
 
   /**
    * Create a login link.
    */
-  public LoginLink create(RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public LoginLink create(RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
     return ApiResource.request(ApiResource.RequestMethod.POST, url, null, LoginLink.class, options);
   }

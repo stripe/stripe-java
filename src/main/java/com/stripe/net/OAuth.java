@@ -1,11 +1,9 @@
 package com.stripe.net;
 
 import com.stripe.Stripe;
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.InvalidRequestException;
-import com.stripe.exception.oauth.OAuthException;
+import com.stripe.exception.StripeException;
 import com.stripe.model.oauth.DeauthorizedAccount;
 import com.stripe.model.oauth.TokenResponse;
 import com.stripe.net.ApiResource;
@@ -63,8 +61,7 @@ public final class OAuth {
    *         API.
    */
   public static TokenResponse token(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, ApiConnectionException, ApiException,
-      OAuthException {
+      throws StripeException {
     String url = Stripe.getConnectBase() + "/oauth/token";
     return OAuth.stripeResponseGetter.oauthRequest(ApiResource.RequestMethod.POST, url, params,
         TokenResponse.class, ApiResource.RequestType.NORMAL, options);
@@ -80,8 +77,7 @@ public final class OAuth {
    *         OAuth API.
    */
   public static DeauthorizedAccount deauthorize(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, ApiConnectionException, ApiException,
-      OAuthException {
+      throws StripeException {
     String url = Stripe.getConnectBase() + "/oauth/deauthorize";
     params.put("client_id", getClientId(params, options));
     return OAuth.stripeResponseGetter.oauthRequest(ApiResource.RequestMethod.POST, url, params,

@@ -5,11 +5,8 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
 import com.stripe.Stripe;
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.model.BalanceTransaction;
 import com.stripe.model.BalanceTransactionDeserializer;
 import com.stripe.model.ChargeRefundCollection;
@@ -175,18 +172,14 @@ public abstract class ApiResource extends StripeObject {
 
   public static <T> T multipartRequest(ApiResource.RequestMethod method,
                      String url, Map<String, Object> params, Class<T> clazz,
-                     RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+                     RequestOptions options) throws StripeException {
     return ApiResource.stripeResponseGetter.request(method, url, params, clazz,
         ApiResource.RequestType.MULTIPART, options);
   }
 
   public static <T> T request(ApiResource.RequestMethod method,
                 String url, Map<String, Object> params, Class<T> clazz,
-                RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+                RequestOptions options) throws StripeException {
     return ApiResource.stripeResponseGetter.request(method, url, params, clazz,
         ApiResource.RequestType.NORMAL, options);
   }
@@ -202,8 +195,7 @@ public abstract class ApiResource extends StripeObject {
   public static <T extends StripeCollectionInterface<?>> T requestCollection(
       String url, Map<String, Object> params, Class<T> clazz,
       RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     T collection = request(RequestMethod.GET, url, params, clazz, options);
 
     if (collection != null) {

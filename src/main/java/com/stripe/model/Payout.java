@@ -1,10 +1,6 @@
 package com.stripe.model;
 
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
@@ -102,18 +98,14 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, HasId 
   /**
    * Cancel a payout.
    */
-  public Payout cancel()
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Payout cancel() throws StripeException {
     return cancel(null);
   }
 
   /**
    * Cancel a payout.
    */
-  public Payout cancel(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Payout cancel(RequestOptions options) throws StripeException {
     return request(RequestMethod.POST, instanceUrl(Payout.class, this.id) + "/cancel", null,
         Payout.class, options);
   }
@@ -123,9 +115,7 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, HasId 
   /**
    * Create a payout.
    */
-  public static Payout create(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Payout create(Map<String, Object> params) throws StripeException {
     return create(params, null);
   }
 
@@ -133,8 +123,7 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, HasId 
    * Create a payout.
    */
   public static Payout create(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.POST, classUrl(Payout.class), params, Payout.class, options);
   }
   // </editor-fold>
@@ -143,9 +132,7 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, HasId 
   /**
    * List all payouts.
    */
-  public static PayoutCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static PayoutCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
@@ -153,8 +140,7 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, HasId 
    * List all payouts.
    */
   public static PayoutCollection list(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
-      CardException, ApiException {
+      throws StripeException {
     return requestCollection(classUrl(Payout.class), params, PayoutCollection.class, options);
   }
   // </editor-fold>
@@ -163,18 +149,14 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, HasId 
   /**
    * Retrieve a payout.
    */
-  public static Payout retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static Payout retrieve(String id) throws StripeException {
     return retrieve(id, null);
   }
 
   /**
    * Retrieve a payout.
    */
-  public static Payout retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Payout retrieve(String id, RequestOptions options) throws StripeException {
     return request(RequestMethod.GET, instanceUrl(Payout.class, id), null, Payout.class, options);
   }
 
@@ -182,8 +164,7 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, HasId 
    * Retrieve a payout.
    */
   public static Payout retrieve(String id, Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.GET, instanceUrl(Payout.class, id), params, Payout.class, options);
   }
   // </editor-fold>
@@ -193,9 +174,7 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, HasId 
    * Update a payout.
    */
   @Override
-  public Payout update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Payout update(Map<String, Object> params) throws StripeException {
     return update(params, null);
   }
 
@@ -203,9 +182,7 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, HasId 
    * Update a payout.
    */
   @Override
-  public Payout update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Payout update(Map<String, Object> params, RequestOptions options) throws StripeException {
     return request(RequestMethod.POST, instanceUrl(Payout.class, this.id), params, Payout.class,
         options);
   }

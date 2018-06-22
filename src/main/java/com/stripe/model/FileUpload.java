@@ -1,11 +1,7 @@
 package com.stripe.model;
 
 import com.stripe.Stripe;
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
@@ -31,19 +27,15 @@ public class FileUpload extends ApiResource implements HasId {
   /**
    * Create a file upload.
    */
-  public static FileUpload create(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static FileUpload create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
    * Create a file upload.
    */
-  public static FileUpload create(Map<String, Object> params,
-                  RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static FileUpload create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     return multipartRequest(RequestMethod.POST, classUrl(FileUpload.class, Stripe.getUploadBase()),
         params, FileUpload.class, options);
   }
@@ -53,9 +45,7 @@ public class FileUpload extends ApiResource implements HasId {
   /**
    * List all file uploads.
    */
-  public static FileUploadCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static FileUploadCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
@@ -63,8 +53,7 @@ public class FileUpload extends ApiResource implements HasId {
    * List all file uploads.
    */
   public static FileUploadCollection list(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return requestCollection(classUrl(FileUpload.class, Stripe.getUploadBase()),
         params, FileUploadCollection.class, options);
   }
@@ -74,18 +63,14 @@ public class FileUpload extends ApiResource implements HasId {
   /**
    * Retrieve a file upload.
    */
-  public static FileUpload retrieve(String id)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static FileUpload retrieve(String id) throws StripeException {
     return retrieve(id, (RequestOptions) null);
   }
 
   /**
    * Retrieve a file upload.
    */
-  public static FileUpload retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static FileUpload retrieve(String id, RequestOptions options) throws StripeException {
     return request(RequestMethod.GET, instanceUrl(FileUpload.class, id, Stripe.getUploadBase()),
         null, FileUpload.class, options);
   }
