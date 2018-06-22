@@ -1,10 +1,6 @@
 package com.stripe.model;
 
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
@@ -328,36 +324,28 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
   /**
    * Capture a charge.
    */
-  public Charge capture() throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public Charge capture() throws StripeException {
     return this.capture(null, (RequestOptions) null);
   }
 
   /**
    * Capture a charge.
    */
-  public Charge capture(RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public Charge capture(RequestOptions options) throws StripeException {
     return this.capture(null, options);
   }
 
   /**
    * Capture a charge.
    */
-  public Charge capture(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Charge capture(Map<String, Object> params) throws StripeException {
     return this.capture(params, (RequestOptions) null);
   }
 
   /**
    * Capture a charge.
    */
-  public Charge capture(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Charge capture(Map<String, Object> params, RequestOptions options) throws StripeException {
     return request(RequestMethod.POST, String.format("%s/capture",
         instanceUrl(Charge.class, this.getId())), params, Charge.class, options);
   }
@@ -367,9 +355,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
   /**
    * Create a charge.
    */
-  public static Charge create(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Charge create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
@@ -377,8 +363,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
    * Create a charge.
    */
   public static Charge create(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.POST, classUrl(Charge.class), params, Charge.class, options);
   }
   // </editor-fold>
@@ -387,9 +372,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
   /**
    * List all charges.
    */
-  public static ChargeCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static ChargeCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
@@ -397,8 +380,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
    * List all charges.
    */
   public static ChargeCollection list(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return requestCollection(classUrl(Charge.class), params, ChargeCollection.class, options);
   }
   // </editor-fold>
@@ -407,9 +389,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
   /**
    * Mark the charge as fraudulent.
    */
-  public Charge markFraudulent(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Charge markFraudulent(RequestOptions options) throws StripeException {
     Map<String, Object> params = Collections.<String, Object>singletonMap(
         FRAUD_DETAILS, Collections.singletonMap(FraudDetails.USER_REPORT, "fraudulent"));
     return this.update(params, options);
@@ -420,9 +400,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
   /**
    * Mark the charge as safe.
    */
-  public Charge markSafe(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Charge markSafe(RequestOptions options) throws StripeException {
     Map<String, Object> params = Collections.<String, Object>singletonMap(
         FRAUD_DETAILS, Collections.singletonMap(FraudDetails.USER_REPORT, "safe"));
     return this.update(params, options);
@@ -436,9 +414,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
    * @deprecated Prefer using the {@link Refund#create(Map)} method instead.
    */
   @Deprecated
-  public Charge refund() throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public Charge refund() throws StripeException {
     return this.refund(null, (RequestOptions) null);
   }
 
@@ -448,9 +424,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
    * @deprecated Prefer using the {@link Refund#create(Map, RequestOptions)} method instead.
    */
   @Deprecated
-  public Charge refund(RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public Charge refund(RequestOptions options) throws StripeException {
     return this.refund(null, options);
   }
 
@@ -460,9 +434,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
    * @deprecated Prefer using the {@link Refund#create(Map)} method instead.
    */
   @Deprecated
-  public Charge refund(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Charge refund(Map<String, Object> params) throws StripeException {
     return this.refund(params, (RequestOptions) null);
   }
 
@@ -472,9 +444,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
    * @deprecated Prefer using the {@link Refund#create(Map, RequestOptions)} method instead.
    */
   @Deprecated
-  public Charge refund(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Charge refund(Map<String, Object> params, RequestOptions options) throws StripeException {
     return request(RequestMethod.POST, String.format("%s/refund",
         instanceUrl(Charge.class, this.getId())), params, Charge.class, options);
   }
@@ -484,18 +454,14 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
   /**
    * Retrieve a charge.
    */
-  public static Charge retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static Charge retrieve(String id) throws StripeException {
     return retrieve(id, (RequestOptions) null);
   }
 
   /**
    * Retrieve a charge.
    */
-  public static Charge retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Charge retrieve(String id, RequestOptions options) throws StripeException {
     return request(RequestMethod.GET, instanceUrl(Charge.class, id), null, Charge.class, options);
   }
 
@@ -503,8 +469,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
    * Retrieve a charge.
    */
   public static Charge retrieve(String id, Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.GET, instanceUrl(Charge.class, id), params, Charge.class, options);
   }
   // </editor-fold>
@@ -514,9 +479,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
    * Update a charge.
    */
   @Override
-  public Charge update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Charge update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
@@ -524,9 +487,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
    * Update a charge.
    */
   @Override
-  public Charge update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Charge update(Map<String, Object> params, RequestOptions options) throws StripeException {
     return request(RequestMethod.POST, instanceUrl(Charge.class, id), params, Charge.class,
         options);
   }

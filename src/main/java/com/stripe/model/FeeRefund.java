@@ -1,10 +1,6 @@
 package com.stripe.model;
 
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
@@ -70,9 +66,7 @@ public class FeeRefund extends ApiResource implements MetadataStore<ApplicationF
    * Update an application fee refund.
    */
   @Override
-  public FeeRefund update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public FeeRefund update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
@@ -81,8 +75,7 @@ public class FeeRefund extends ApiResource implements MetadataStore<ApplicationF
    */
   @Override
   public FeeRefund update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.POST, this.getInstanceUrl(), params, FeeRefund.class, options);
   }
   // </editor-fold>

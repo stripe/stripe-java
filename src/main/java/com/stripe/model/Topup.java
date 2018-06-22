@@ -1,10 +1,6 @@
 package com.stripe.model;
 
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
@@ -58,9 +54,7 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, HasId {
   /**
    * Create a topup.
    */
-  public static Topup create(Map<String, Object> params)
-          throws AuthenticationException, InvalidRequestException,
-          ApiConnectionException, CardException, ApiException {
+  public static Topup create(Map<String, Object> params) throws StripeException {
     return create(params, null);
   }
 
@@ -68,8 +62,7 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, HasId {
    * Create a topup.
    */
   public static Topup create(Map<String, Object> params, RequestOptions options)
-          throws AuthenticationException, InvalidRequestException,
-          ApiConnectionException, CardException, ApiException {
+          throws StripeException {
     return request(RequestMethod.POST, classUrl(Topup.class), params, Topup.class, options);
   }
   // </editor-fold>
@@ -78,9 +71,7 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, HasId {
   /**
    * List all topups.
    */
-  public static TopupCollection list(Map<String, Object> params)
-          throws AuthenticationException, InvalidRequestException,
-          ApiConnectionException, CardException, ApiException {
+  public static TopupCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
@@ -88,8 +79,7 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, HasId {
    * List all topups.
    */
   public static TopupCollection list(Map<String, Object> params, RequestOptions options)
-          throws AuthenticationException, InvalidRequestException,
-          ApiConnectionException, CardException, ApiException {
+          throws StripeException {
     return requestCollection(classUrl(Topup.class), params, TopupCollection.class, options);
   }
   // </editor-fold>
@@ -98,18 +88,14 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, HasId {
   /**
    * Retrieve a topup.
    */
-  public static Topup retrieve(String id) throws AuthenticationException,
-          InvalidRequestException, ApiConnectionException, CardException,
-          ApiException {
+  public static Topup retrieve(String id) throws StripeException {
     return retrieve(id, null);
   }
 
   /**
    * Retrieve a topup.
    */
-  public static Topup retrieve(String id, RequestOptions options)
-          throws AuthenticationException, InvalidRequestException,
-          ApiConnectionException, CardException, ApiException {
+  public static Topup retrieve(String id, RequestOptions options) throws StripeException {
     return retrieve(id, null, options);
   }
 
@@ -117,8 +103,7 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, HasId {
    * Retrieve a topup.
    */
   public static Topup retrieve(String id, Map<String, Object> params, RequestOptions options)
-          throws AuthenticationException, InvalidRequestException,
-          ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.GET, instanceUrl(Topup.class, id), params, Topup.class, options);
   }
   // </editor-fold>
@@ -128,8 +113,7 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, HasId {
    * Update a topup.
    */
   @Override
-  public Topup update(Map<String, Object> params) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException, ApiException {
+  public Topup update(Map<String, Object> params) throws StripeException {
     return update(params, null);
   }
 
@@ -137,9 +121,7 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, HasId {
    * Update a topup.
    */
   @Override
-  public Topup update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
-      CardException, ApiException {
+  public Topup update(Map<String, Object> params, RequestOptions options) throws StripeException {
     return request(RequestMethod.POST, instanceUrl(Topup.class, id), params, Topup.class, options);
   }
   // </editor-fold>

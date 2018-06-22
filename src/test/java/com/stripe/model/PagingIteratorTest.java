@@ -37,8 +37,7 @@ public class PagingIteratorTest extends BaseStripeTest {
 
     public static PageableModelCollection list(Map<String, Object> params,
         RequestOptions options)
-        throws AuthenticationException, InvalidRequestException,
-        ApiConnectionException, CardException, ApiException {
+        throws StripeException {
       return requestCollection(classUrl(PageableModel.class), params,
           PageableModelCollection.class, options);
     }

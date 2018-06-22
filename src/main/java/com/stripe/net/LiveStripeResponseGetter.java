@@ -8,6 +8,7 @@ import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.PermissionException;
 import com.stripe.exception.RateLimitException;
+import com.stripe.exception.StripeException;
 import com.stripe.exception.oauth.InvalidClientException;
 import com.stripe.exception.oauth.InvalidGrantException;
 import com.stripe.exception.oauth.InvalidScopeException;
@@ -71,8 +72,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       Class<T> clazz,
       ApiResource.RequestType type,
       RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
-      CardException, ApiException {
+      throws StripeException {
     return staticRequest(method, url, params, clazz, type, options);
   }
 
@@ -83,9 +83,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       Map<String, Object> params,
       Class<T> clazz,
       ApiResource.RequestType type,
-      RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, ApiException,
-      OAuthException {
+      RequestOptions options)
+      throws StripeException {
     return staticOAuthRequest(method, url, params, clazz, type, options);
   }
 
@@ -524,8 +523,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   private static <T> T staticRequest(
       ApiResource.RequestMethod method, String url, Map<String, Object> params,
       Class<T> clazz, ApiResource.RequestType type, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     StripeResponse response = rawRequest(method, url, params, type, options);
 
     int responseCode = response.code();

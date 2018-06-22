@@ -1,11 +1,7 @@
 package com.stripe.model;
 
 import com.stripe.Stripe;
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
@@ -16,19 +12,15 @@ public class InvoiceLineItemCollection extends StripeCollection<InvoiceLineItem>
   /**
    * Retrieve an invoice's line items.
    */
-  public InvoiceLineItemCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public InvoiceLineItemCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
   /**
    * Retrieve an invoice's line items.
    */
-  public InvoiceLineItemCollection list(Map<String, Object> params,
-                      RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public InvoiceLineItemCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
     return ApiResource.requestCollection(url, params, InvoiceLineItemCollection.class, options);
   }

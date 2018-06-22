@@ -1,10 +1,6 @@
 package com.stripe.model;
 
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
@@ -43,9 +39,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   /**
    * Create a product.
    */
-  public static Product create(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Product create(Map<String, Object> params) throws StripeException {
     return create(params, null);
   }
 
@@ -53,8 +47,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
    * Create a product.
    */
   public static Product create(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.POST, classUrl(Product.class), params, Product.class, options);
   }
   // </editor-fold>
@@ -63,18 +56,14 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   /**
    * Delete a product.
    */
-  public DeletedProduct delete()
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public DeletedProduct delete() throws StripeException {
     return delete(null);
   }
 
   /**
    * Delete a product.
    */
-  public DeletedProduct delete(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public DeletedProduct delete(RequestOptions options) throws StripeException {
     return request(RequestMethod.DELETE, instanceUrl(Product.class, this.id), null,
         DeletedProduct.class, options);
   }
@@ -84,19 +73,15 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   /**
    * List all products.
    */
-  public static ProductCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static ProductCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
   /**
    * List all products.
    */
-  public static ProductCollection list(Map<String, Object> params,
-                     RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static ProductCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     return requestCollection(classUrl(Product.class), params, ProductCollection.class, options);
   }
   // </editor-fold>
@@ -105,18 +90,14 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   /**
    * Retrieve a product.
    */
-  public static Product retrieve(String id)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Product retrieve(String id) throws StripeException {
     return retrieve(id, null);
   }
 
   /**
    * Retrieve a product.
    */
-  public static Product retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Product retrieve(String id, RequestOptions options) throws StripeException {
     return request(RequestMethod.GET, instanceUrl(Product.class, id), null, Product.class, options);
   }
   // </editor-fold>
@@ -126,9 +107,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
    * Update a product.
    */
   @Override
-  public Product update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Product update(Map<String, Object> params) throws StripeException {
     return update(params, null);
   }
 
@@ -136,9 +115,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
    * Update a product.
    */
   @Override
-  public Product update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Product update(Map<String, Object> params, RequestOptions options) throws StripeException {
     return request(RequestMethod.POST, instanceUrl(Product.class, this.id), params,
         Product.class, options);
   }

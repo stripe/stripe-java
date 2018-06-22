@@ -1,10 +1,6 @@
 package com.stripe.model;
 
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
@@ -184,9 +180,7 @@ public class Transfer extends ApiResource implements MetadataStore<Transfer>, Ha
    * @deprecated Use the {#link Payout#cancel()} method instead.
    */
   @Deprecated
-  public Transfer cancel()
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Transfer cancel() throws StripeException {
     return cancel((RequestOptions) null);
   }
 
@@ -196,9 +190,7 @@ public class Transfer extends ApiResource implements MetadataStore<Transfer>, Ha
    * @deprecated Use the {#link Payout#cancel(RequestOptions)} method instead.
    */
   @Deprecated
-  public Transfer cancel(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Transfer cancel(RequestOptions options) throws StripeException {
     return request(RequestMethod.POST, instanceUrl(Transfer.class, this.id) + "/cancel", null,
         Transfer.class, options);
   }
@@ -208,9 +200,7 @@ public class Transfer extends ApiResource implements MetadataStore<Transfer>, Ha
   /**
    * Create a transfer.
    */
-  public static Transfer create(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Transfer create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
@@ -218,8 +208,7 @@ public class Transfer extends ApiResource implements MetadataStore<Transfer>, Ha
    * Create a transfer.
    */
   public static Transfer create(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.POST, classUrl(Transfer.class), params, Transfer.class, options);
   }
   // </editor-fold>
@@ -228,19 +217,15 @@ public class Transfer extends ApiResource implements MetadataStore<Transfer>, Ha
   /**
    * List all transfers.
    */
-  public static TransferCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static TransferCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
   /**
    * List all transfers.
    */
-  public static TransferCollection list(Map<String, Object> params,
-                      RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static TransferCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     return requestCollection(classUrl(Transfer.class), params, TransferCollection.class, options);
   }
   // </editor-fold>
@@ -249,18 +234,14 @@ public class Transfer extends ApiResource implements MetadataStore<Transfer>, Ha
   /**
    * Retrive a transfer.
    */
-  public static Transfer retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static Transfer retrieve(String id) throws StripeException {
     return retrieve(id, (RequestOptions) null);
   }
 
   /**
    * Retrive a transfer.
    */
-  public static Transfer retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Transfer retrieve(String id, RequestOptions options) throws StripeException {
     return request(RequestMethod.GET, instanceUrl(Transfer.class, id), null, Transfer.class,
         options);
   }
@@ -269,8 +250,7 @@ public class Transfer extends ApiResource implements MetadataStore<Transfer>, Ha
    * Retrieve a transfer.
    */
   public static Transfer retrieve(String id, Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.GET, instanceUrl(Transfer.class, id), params, Transfer.class,
         options);
   }
@@ -285,8 +265,7 @@ public class Transfer extends ApiResource implements MetadataStore<Transfer>, Ha
    */
   @Deprecated
   public TransferTransactionCollection transactions(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return transactions(params, (RequestOptions) null);
   }
 
@@ -299,8 +278,7 @@ public class Transfer extends ApiResource implements MetadataStore<Transfer>, Ha
   @Deprecated
   public TransferTransactionCollection transactions(
       Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     String url = String.format("%s%s", instanceUrl(Transfer.class, this.getId()), "/transactions");
     return requestCollection(url, params, TransferTransactionCollection.class, options);
   }
@@ -311,9 +289,7 @@ public class Transfer extends ApiResource implements MetadataStore<Transfer>, Ha
    * Update a transfer.
    */
   @Override
-  public Transfer update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Transfer update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
@@ -322,8 +298,7 @@ public class Transfer extends ApiResource implements MetadataStore<Transfer>, Ha
    */
   @Override
   public Transfer update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.POST, instanceUrl(Transfer.class, this.id), params,
         Transfer.class, options);
   }

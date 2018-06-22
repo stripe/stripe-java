@@ -1,10 +1,6 @@
 package com.stripe.model;
 
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
@@ -26,9 +22,7 @@ public class ExchangeRate extends ApiResource implements HasId {
   /**
    * List all exchange rates.
    */
-  public static ExchangeRateCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static ExchangeRateCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
@@ -36,8 +30,7 @@ public class ExchangeRate extends ApiResource implements HasId {
    * List all exchange rates.
    */
   public static ExchangeRateCollection list(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return requestCollection(classUrl(ExchangeRate.class), params, ExchangeRateCollection.class,
         options);
   }
@@ -47,9 +40,7 @@ public class ExchangeRate extends ApiResource implements HasId {
   /**
    * Retrieve an exchange rate.
    */
-  public static ExchangeRate retrieve(String currency) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static ExchangeRate retrieve(String currency) throws StripeException {
     return retrieve(currency, null);
   }
 
@@ -57,8 +48,7 @@ public class ExchangeRate extends ApiResource implements HasId {
    * Retrieve an exchange rate.
    */
   public static ExchangeRate retrieve(String currency, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.GET, instanceUrl(ExchangeRate.class, currency), null,
         ExchangeRate.class, options);
   }
