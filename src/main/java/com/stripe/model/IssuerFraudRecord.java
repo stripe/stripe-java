@@ -1,10 +1,6 @@
 package com.stripe.model;
 
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
@@ -45,8 +41,7 @@ public class IssuerFraudRecord extends ApiResource implements HasId {
 
   // <editor-fold desc="list">
   public static IssuerFraudRecordCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-                      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return list(params, null);
   }
 
@@ -58,8 +53,7 @@ public class IssuerFraudRecord extends ApiResource implements HasId {
    * @return the listing of params at /v1/issuer_fraud_records.
    */
   public static IssuerFraudRecordCollection list(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-                      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return requestCollection(
         classUrl(IssuerFraudRecord.class), params, IssuerFraudRecordCollection.class, options
     );
@@ -67,15 +61,12 @@ public class IssuerFraudRecord extends ApiResource implements HasId {
   // </editor-fold>
 
   // <editor-fold desc="retrieve">
-  public static IssuerFraudRecord retrieve(String id)
-      throws AuthenticationException, InvalidRequestException,
-                      ApiConnectionException, CardException, ApiException {
+  public static IssuerFraudRecord retrieve(String id) throws StripeException {
     return retrieve(id, null);
   }
 
   public static IssuerFraudRecord retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-                      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     String url = instanceUrl(IssuerFraudRecord.class, id);
     return request(RequestMethod.GET, url, null, IssuerFraudRecord.class, null);
   }

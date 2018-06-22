@@ -1,10 +1,6 @@
 package com.stripe.model;
 
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
@@ -73,9 +69,7 @@ public class Refund extends ApiResource implements MetadataStore<Charge>, HasId 
   /**
    * Create a refund.
    */
-  public static Refund create(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Refund create(Map<String, Object> params) throws StripeException {
     return create(params, null);
   }
 
@@ -83,8 +77,7 @@ public class Refund extends ApiResource implements MetadataStore<Charge>, HasId 
    * Create a refund.
    */
   public static Refund create(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.POST, classUrl(Refund.class), params, Refund.class, options);
   }
   // </editor-fold>
@@ -93,9 +86,7 @@ public class Refund extends ApiResource implements MetadataStore<Charge>, HasId 
   /**
    * List all refunds.
    */
-  public static RefundCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static RefundCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
@@ -103,8 +94,7 @@ public class Refund extends ApiResource implements MetadataStore<Charge>, HasId 
    * List all refunds.
    */
   public static RefundCollection list(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return requestCollection(classUrl(Refund.class), params, RefundCollection.class, options);
   }
   // </editor-fold>
@@ -113,18 +103,14 @@ public class Refund extends ApiResource implements MetadataStore<Charge>, HasId 
   /**
    * Retrieve a refund.
    */
-  public static Refund retrieve(String id)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Refund retrieve(String id) throws StripeException {
     return retrieve(id, null);
   }
 
   /**
    * Retrieve a refund.
    */
-  public static Refund retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Refund retrieve(String id, RequestOptions options) throws StripeException {
     return request(RequestMethod.GET, instanceUrl(Refund.class, id), null, Refund.class, options);
   }
 
@@ -132,8 +118,7 @@ public class Refund extends ApiResource implements MetadataStore<Charge>, HasId 
    * Retrieve a refund.
    */
   public static Refund retrieve(String id, Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.GET, instanceUrl(Refund.class, id), params, Refund.class, options);
   }
   // </editor-fold>
@@ -143,9 +128,7 @@ public class Refund extends ApiResource implements MetadataStore<Charge>, HasId 
    * Update a refund.
    */
   @Override
-  public Refund update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Refund update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
@@ -153,9 +136,7 @@ public class Refund extends ApiResource implements MetadataStore<Charge>, HasId 
    * Update a refund.
    */
   @Override
-  public Refund update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Refund update(Map<String, Object> params, RequestOptions options) throws StripeException {
     return request(RequestMethod.POST, instanceUrl(Refund.class, id), params, Refund.class,
         options);
   }

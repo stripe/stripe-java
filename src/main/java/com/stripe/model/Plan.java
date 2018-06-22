@@ -1,10 +1,6 @@
 package com.stripe.model;
 
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
@@ -102,9 +98,7 @@ public class Plan extends ApiResource implements MetadataStore<Plan>, HasId {
   /**
    * Create a plan.
    */
-  public static Plan create(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Plan create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
@@ -112,8 +106,7 @@ public class Plan extends ApiResource implements MetadataStore<Plan>, HasId {
    * Create a plan.
    */
   public static Plan create(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.POST, classUrl(Plan.class), params, Plan.class, options);
   }
   // </editor-fold>
@@ -122,18 +115,14 @@ public class Plan extends ApiResource implements MetadataStore<Plan>, HasId {
   /**
    * Delete a plan.
    */
-  public DeletedPlan delete() throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public DeletedPlan delete() throws StripeException {
     return delete((RequestOptions) null);
   }
 
   /**
    * Delete a plan.
    */
-  public DeletedPlan delete(RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public DeletedPlan delete(RequestOptions options) throws StripeException {
     return request(RequestMethod.DELETE, instanceUrl(Plan.class, this.id), null, DeletedPlan.class,
         options);
   }
@@ -143,9 +132,7 @@ public class Plan extends ApiResource implements MetadataStore<Plan>, HasId {
   /**
    * List all plans.
    */
-  public static PlanCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static PlanCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
@@ -153,8 +140,7 @@ public class Plan extends ApiResource implements MetadataStore<Plan>, HasId {
    * List all plans.
    */
   public static PlanCollection list(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return requestCollection(classUrl(Plan.class), params, PlanCollection.class, options);
   }
   // </editor-fold>
@@ -163,18 +149,14 @@ public class Plan extends ApiResource implements MetadataStore<Plan>, HasId {
   /**
    * Retrieve a plan.
    */
-  public static Plan retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static Plan retrieve(String id) throws StripeException {
     return retrieve(id, (RequestOptions) null);
   }
 
   /**
    * Retrieve a plan.
    */
-  public static Plan retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Plan retrieve(String id, RequestOptions options) throws StripeException {
     return request(RequestMethod.GET, instanceUrl(Plan.class, id), null, Plan.class, options);
   }
   // </editor-fold>
@@ -184,9 +166,7 @@ public class Plan extends ApiResource implements MetadataStore<Plan>, HasId {
    * Update a plan.
    */
   @Override
-  public Plan update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Plan update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
@@ -194,9 +174,7 @@ public class Plan extends ApiResource implements MetadataStore<Plan>, HasId {
    * Update a plan.
    */
   @Override
-  public Plan update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Plan update(Map<String, Object> params, RequestOptions options) throws StripeException {
     return request(RequestMethod.POST, instanceUrl(Plan.class, this.id), params, Plan.class,
         options);
   }
