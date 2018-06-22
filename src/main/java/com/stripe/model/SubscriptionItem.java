@@ -1,10 +1,6 @@
 package com.stripe.model;
 
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
@@ -28,9 +24,7 @@ public class SubscriptionItem extends ApiResource implements HasId {
   /**
    * Create a subscription item.
    */
-  public static SubscriptionItem create(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static SubscriptionItem create(Map<String, Object> params) throws StripeException {
     return create(params, null);
   }
 
@@ -38,8 +32,7 @@ public class SubscriptionItem extends ApiResource implements HasId {
    * Create a subscription item.
    */
   public static SubscriptionItem create(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.POST, classUrl(SubscriptionItem.class), params,
         SubscriptionItem.class, options);
   }
@@ -49,27 +42,21 @@ public class SubscriptionItem extends ApiResource implements HasId {
   /**
    * Delete a subscription item.
    */
-  public DeletedSubscriptionItem delete() throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public DeletedSubscriptionItem delete() throws StripeException {
     return delete(null, null);
   }
 
   /**
    * Delete a subscription item.
    */
-  public DeletedSubscriptionItem delete(RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public DeletedSubscriptionItem delete(RequestOptions options) throws StripeException {
     return delete(null, options);
   }
 
   /**
    * Delete a subscription item.
    */
-  public DeletedSubscriptionItem delete(Map<String, Object> params) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public DeletedSubscriptionItem delete(Map<String, Object> params) throws StripeException {
     return delete(params, null);
   }
 
@@ -77,8 +64,7 @@ public class SubscriptionItem extends ApiResource implements HasId {
    * Delete a subscription item.
    */
   public DeletedSubscriptionItem delete(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
-      CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.DELETE, instanceUrl(SubscriptionItem.class, id), params,
         DeletedSubscriptionItem.class, options);
   }
@@ -88,20 +74,15 @@ public class SubscriptionItem extends ApiResource implements HasId {
   /**
    * List all subscription items.
    */
-  public static SubscriptionItemCollection list(Map<String, Object> params)
-      throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static SubscriptionItemCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
   /**
    * List all subscription items.
    */
-  public static SubscriptionItemCollection list(Map<String, Object> params,
-                          RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static SubscriptionItemCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     return requestCollection(classUrl(SubscriptionItem.class), params,
         SubscriptionItemCollection.class, options);
   }
@@ -111,9 +92,7 @@ public class SubscriptionItem extends ApiResource implements HasId {
   /**
    * Retrieve a subscription item.
    */
-  public static SubscriptionItem retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static SubscriptionItem retrieve(String id) throws StripeException {
     return retrieve(id, null);
   }
 
@@ -121,8 +100,7 @@ public class SubscriptionItem extends ApiResource implements HasId {
    * Retrieve a subscription item.
    */
   public static SubscriptionItem retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.GET, instanceUrl(SubscriptionItem.class, id), null,
         SubscriptionItem.class, options);
   }
@@ -132,9 +110,7 @@ public class SubscriptionItem extends ApiResource implements HasId {
   /**
    * Update a subscription item.
    */
-  public SubscriptionItem update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public SubscriptionItem update(Map<String, Object> params) throws StripeException {
     return update(params, null);
   }
 
@@ -142,8 +118,7 @@ public class SubscriptionItem extends ApiResource implements HasId {
    * Update a subscription item.
    */
   public SubscriptionItem update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.POST, instanceUrl(SubscriptionItem.class, id), params,
         SubscriptionItem.class, options);
   }

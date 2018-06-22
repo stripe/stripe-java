@@ -1,14 +1,9 @@
 package com.stripe.model;
 
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import lombok.AccessLevel;
@@ -76,9 +71,7 @@ public class Recipient extends ApiResource implements MetadataStore<Recipient>, 
   /**
    * Create a recipient.
    */
-  public static Recipient create(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Recipient create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
@@ -86,8 +79,7 @@ public class Recipient extends ApiResource implements MetadataStore<Recipient>, 
    * Create a recipient.
    */
   public static Recipient create(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.POST, classUrl(Recipient.class), params, Recipient.class, options);
   }
   // </editor-fold>
@@ -96,18 +88,14 @@ public class Recipient extends ApiResource implements MetadataStore<Recipient>, 
   /**
    * Delete a recipient.
    */
-  public DeletedRecipient delete() throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public DeletedRecipient delete() throws StripeException {
     return delete((RequestOptions) null);
   }
 
   /**
    * Delete a recipient.
    */
-  public DeletedRecipient delete(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public DeletedRecipient delete(RequestOptions options) throws StripeException {
     return request(RequestMethod.DELETE, instanceUrl(Recipient.class, this.id), null,
         DeletedRecipient.class, options);
   }
@@ -117,19 +105,15 @@ public class Recipient extends ApiResource implements MetadataStore<Recipient>, 
   /**
    * List all recipients.
    */
-  public static RecipientCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static RecipientCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
   /**
    * List all recipients.
    */
-  public static RecipientCollection list(Map<String, Object> params,
-                       RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static RecipientCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     return requestCollection(classUrl(Recipient.class), params, RecipientCollection.class, options);
   }
   // </editor-fold>
@@ -138,18 +122,14 @@ public class Recipient extends ApiResource implements MetadataStore<Recipient>, 
   /**
    * Retrieve a recipient.
    */
-  public static Recipient retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static Recipient retrieve(String id) throws StripeException {
     return retrieve(id, (RequestOptions) null);
   }
 
   /**
    * Retrieve a recipient.
    */
-  public static Recipient retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Recipient retrieve(String id, RequestOptions options) throws StripeException {
     return request(RequestMethod.GET, instanceUrl(Recipient.class, id), null, Recipient.class,
         options);
   }
@@ -158,8 +138,7 @@ public class Recipient extends ApiResource implements MetadataStore<Recipient>, 
    * Retrieve a recipient.
    */
   public static Recipient retrieve(String id, Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.GET, instanceUrl(Recipient.class, id), params, Recipient.class,
         options);
   }
@@ -170,9 +149,7 @@ public class Recipient extends ApiResource implements MetadataStore<Recipient>, 
    * Update a recipient.
    */
   @Override
-  public Recipient update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Recipient update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
@@ -181,8 +158,7 @@ public class Recipient extends ApiResource implements MetadataStore<Recipient>, 
    */
   @Override
   public Recipient update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.POST, instanceUrl(Recipient.class, this.id), params,
         Recipient.class, options);
   }

@@ -1,12 +1,6 @@
 package com.stripe.model;
 
-import com.google.gson.annotations.SerializedName;
-
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
@@ -103,9 +97,7 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
   /**
    * Create an invoice.
    */
-  public static Invoice create(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Invoice create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
@@ -113,8 +105,7 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
    * Create an invoice.
    */
   public static Invoice create(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.POST, classUrl(Invoice.class), params, Invoice.class, options);
   }
   // </editor-fold>
@@ -123,19 +114,15 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
   /**
    * List all invoices.
    */
-  public static InvoiceCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static InvoiceCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
   /**
    * List all invoices.
    */
-  public static InvoiceCollection list(Map<String, Object> params,
-                     RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static InvoiceCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     return requestCollection(classUrl(Invoice.class), params, InvoiceCollection.class, options);
   }
   // </editor-fold>
@@ -144,36 +131,28 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
   /**
    * Pay an invoice.
    */
-  public Invoice pay() throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public Invoice pay() throws StripeException {
     return this.pay((RequestOptions) null);
   }
 
   /**
    * Pay an invoice.
    */
-  public Invoice pay(RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public Invoice pay(RequestOptions options) throws StripeException {
     return pay(null, options);
   }
 
   /**
    * Pay an invoice.
    */
-  public Invoice pay(Map<String, Object> params) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public Invoice pay(Map<String, Object> params) throws StripeException {
     return this.pay(params, null);
   }
 
   /**
    * Pay an invoice.
    */
-  public Invoice pay(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
-      CardException, ApiException {
+  public Invoice pay(Map<String, Object> params, RequestOptions options) throws StripeException {
     return request(RequestMethod.POST, String.format("%s/pay",
         instanceUrl(Invoice.class, this.getId())), params, Invoice.class, options);
   }
@@ -183,18 +162,14 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
   /**
    * Retrieve an invoice.
    */
-  public static Invoice retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static Invoice retrieve(String id) throws StripeException {
     return retrieve(id, (RequestOptions) null);
   }
 
   /**
    * Retrieve an invoice.
    */
-  public static Invoice retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Invoice retrieve(String id, RequestOptions options) throws StripeException {
     return request(RequestMethod.GET, instanceUrl(Invoice.class, id), null, Invoice.class, options);
   }
 
@@ -202,8 +177,7 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
    * Retrieve an invoice.
    */
   public static Invoice retrieve(String id, Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.GET, instanceUrl(Invoice.class, id), params, Invoice.class,
         options);
   }
@@ -213,9 +187,7 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
   /**
    * Retrieve an upcoming invoice.
    */
-  public static Invoice upcoming(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Invoice upcoming(Map<String, Object> params) throws StripeException {
     return upcoming(params, (RequestOptions) null);
   }
 
@@ -223,8 +195,7 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
    * Retrieve an upcoming invoice.
    */
   public static Invoice upcoming(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.GET, String.format("%s/upcoming", classUrl(Invoice.class)), params,
         Invoice.class, options);
   }
@@ -235,9 +206,7 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
    * Update an invoice.
    */
   @Override
-  public Invoice update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Invoice update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
@@ -245,9 +214,7 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
    * Update an invoice.
    */
   @Override
-  public Invoice update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Invoice update(Map<String, Object> params, RequestOptions options) throws StripeException {
     return request(RequestMethod.POST, instanceUrl(Invoice.class, this.id), params, Invoice.class,
         options);
   }

@@ -1,10 +1,6 @@
 package com.stripe.model;
 
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
@@ -75,9 +71,7 @@ public class Subscription extends ApiResource implements MetadataStore<Subscript
   /**
    * Cancel a subscription.
    */
-  public Subscription cancel(Map<String, Object> params) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public Subscription cancel(Map<String, Object> params) throws StripeException {
     return cancel(params, (RequestOptions) null);
   }
 
@@ -85,8 +79,7 @@ public class Subscription extends ApiResource implements MetadataStore<Subscript
    * Cancel a subscription.
    */
   public Subscription cancel(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
-      CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.DELETE, instanceUrl(Subscription.class, id), params,
         Subscription.class, options);
   }
@@ -96,9 +89,7 @@ public class Subscription extends ApiResource implements MetadataStore<Subscript
   /**
    * Create a subscription.
    */
-  public static Subscription create(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Subscription create(Map<String, Object> params) throws StripeException {
     return create(params, null);
   }
 
@@ -106,8 +97,7 @@ public class Subscription extends ApiResource implements MetadataStore<Subscript
    * Create a subscription.
    */
   public static Subscription create(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.POST, classUrl(Subscription.class), params, Subscription.class,
         options);
   }
@@ -117,18 +107,14 @@ public class Subscription extends ApiResource implements MetadataStore<Subscript
   /**
    * Delete a subscription discount.
    */
-  public void deleteDiscount() throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public void deleteDiscount() throws StripeException {
     deleteDiscount((RequestOptions) null);
   }
 
   /**
    * Delete a subscription discount.
    */
-  public void deleteDiscount(RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public void deleteDiscount(RequestOptions options) throws StripeException {
     request(RequestMethod.DELETE, String.format("%s/discount", instanceUrl(Subscription.class, id)),
         null, Discount.class, options);
   }
@@ -138,20 +124,15 @@ public class Subscription extends ApiResource implements MetadataStore<Subscript
   /**
    * List subscriptions.
    */
-  public static SubscriptionCollection list(Map<String, Object> params)
-      throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static SubscriptionCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
   /**
    * List subscriptions.
    */
-  public static SubscriptionCollection list(Map<String, Object> params,
-                        RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static SubscriptionCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     return requestCollection(classUrl(Subscription.class), params, SubscriptionCollection.class,
         options);
   }
@@ -161,18 +142,14 @@ public class Subscription extends ApiResource implements MetadataStore<Subscript
   /**
    * Retrieve a subscription.
    */
-  public static Subscription retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static Subscription retrieve(String id) throws StripeException {
     return retrieve(id, null);
   }
 
   /**
    * Retrieve a subscription.
    */
-  public static Subscription retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Subscription retrieve(String id, RequestOptions options) throws StripeException {
     return request(RequestMethod.GET, instanceUrl(Subscription.class, id), null, Subscription.class,
         options);
   }
@@ -181,8 +158,7 @@ public class Subscription extends ApiResource implements MetadataStore<Subscript
    * Retrieve a subscription.
    */
   public static Subscription retrieve(String id, Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.GET, instanceUrl(Subscription.class, id), params,
         Subscription.class, options);
   }
@@ -193,9 +169,7 @@ public class Subscription extends ApiResource implements MetadataStore<Subscript
    * Update a subscription.
    */
   @Override
-  public Subscription update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Subscription update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
@@ -204,8 +178,7 @@ public class Subscription extends ApiResource implements MetadataStore<Subscript
    */
   @Override
   public Subscription update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.POST, instanceUrl(Subscription.class, id), params,
         Subscription.class, options);
   }
