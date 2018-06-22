@@ -1,10 +1,7 @@
 package com.stripe.model;
 
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
@@ -25,15 +22,11 @@ public class ExternalAccount extends ApiResource implements HasId, MetadataStore
   @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
 
   // <editor-fold desc="delete">
-  public DeletedExternalAccount delete() throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException,
-      CardException, ApiException {
+  public DeletedExternalAccount delete() throws StripeException {
     return delete(null);
   }
 
-  public DeletedExternalAccount delete(RequestOptions options) throws
-      AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public DeletedExternalAccount delete(RequestOptions options) throws StripeException {
     return request(RequestMethod.DELETE, this.getInstanceUrl(), null, DeletedExternalAccount.class,
         options);
   }
@@ -41,25 +34,20 @@ public class ExternalAccount extends ApiResource implements HasId, MetadataStore
 
   // <editor-fold desc="update">
   @Override
-  public ExternalAccount update(Map<String, Object> params) throws
-      AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public ExternalAccount update(Map<String, Object> params) throws StripeException {
     return update(params, null);
   }
 
   @Override
   public ExternalAccount update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.POST, this.getInstanceUrl(), params, ExternalAccount.class,
         options);
   }
   // </editor-fold>
 
   // <editor-fold desc="verify">
-  public ExternalAccount verify(Map<String, Object> params) throws
-      AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public ExternalAccount verify(Map<String, Object> params) throws StripeException {
     return verify(params, null);
   }
 
@@ -70,9 +58,8 @@ public class ExternalAccount extends ApiResource implements HasId, MetadataStore
    * @param options request options
    * @return the verified bank account
    */
-  public ExternalAccount verify(Map<String, Object> params, RequestOptions options) throws
-      AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public ExternalAccount verify(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     if (this.getCustomer() != null) {
       return request(RequestMethod.POST, String.format("%s/verify", this.getInstanceUrl()), params,
           ExternalAccount.class, options);

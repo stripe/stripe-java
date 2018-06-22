@@ -1,10 +1,6 @@
 package com.stripe.model;
 
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.RequestOptions;
 
 import java.util.Map;
@@ -28,31 +24,24 @@ public class AlipayAccount extends ExternalAccount {
   String status;
 
   @Override
-  public DeletedAlipayAccount delete() throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public DeletedAlipayAccount delete() throws StripeException {
     return delete(null);
   }
 
   @Override
-  public DeletedAlipayAccount delete(RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public DeletedAlipayAccount delete(RequestOptions options) throws StripeException {
     return request(RequestMethod.DELETE, this.getInstanceUrl(), null, DeletedAlipayAccount.class,
         options);
   }
 
   @Override
-  public AlipayAccount update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public AlipayAccount update(Map<String, Object> params) throws StripeException {
     return update(params, null);
   }
 
   @Override
   public AlipayAccount update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.POST, this.getInstanceUrl(), params, AlipayAccount.class, options);
   }
 }

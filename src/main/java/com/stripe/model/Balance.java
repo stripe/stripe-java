@@ -1,10 +1,6 @@
 package com.stripe.model;
 
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
@@ -27,18 +23,14 @@ public class Balance extends ApiResource {
   /**
    * Retrieve balance.
    */
-  public static Balance retrieve() throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static Balance retrieve() throws StripeException {
     return retrieve((RequestOptions) null);
   }
 
   /**
    * Retrieve balance.
    */
-  public static Balance retrieve(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Balance retrieve(RequestOptions options) throws StripeException {
     return request(RequestMethod.GET, singleClassUrl(Balance.class), null, Balance.class, options);
   }
   // </editor-fold>
