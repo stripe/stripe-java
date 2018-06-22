@@ -1,11 +1,11 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
+import com.stripe.exception.ApiConnectionException;
+import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.HashMap;
@@ -19,7 +19,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Recipient extends APIResource implements MetadataStore<Recipient>, HasId {
+public class Recipient extends ApiResource implements MetadataStore<Recipient>, HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   BankAccount activeAccount;
@@ -41,8 +41,8 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
     return (this.defaultCard != null) ? this.defaultCard.getId() : null;
   }
 
-  public void setDefaultCard(String defaultCardID) {
-    this.defaultCard = APIResource.setExpandableFieldID(defaultCardID, this.defaultCard);
+  public void setDefaultCard(String defaultCardId) {
+    this.defaultCard = ApiResource.setExpandableFieldId(defaultCardId, this.defaultCard);
   }
 
   public Card getDefaultCardObject() {
@@ -59,8 +59,8 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
     return (this.migratedTo != null) ? this.migratedTo.getId() : null;
   }
 
-  public void setMigratedTo(String migratedToID) {
-    this.migratedTo = APIResource.setExpandableFieldID(migratedToID, this.migratedTo);
+  public void setMigratedTo(String migratedToId) {
+    this.migratedTo = ApiResource.setExpandableFieldId(migratedToId, this.migratedTo);
   }
 
   public Account getMigratedToObject() {
@@ -78,7 +78,7 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
    */
   public static Recipient create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return create(params, (RequestOptions) null);
   }
 
@@ -87,8 +87,8 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
    */
   public static Recipient create(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, classURL(Recipient.class), params, Recipient.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, classUrl(Recipient.class), params, Recipient.class, options);
   }
   // </editor-fold>
 
@@ -97,8 +97,8 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
    * Delete a recipient.
    */
   public DeletedRecipient delete() throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
     return delete((RequestOptions) null);
   }
 
@@ -107,8 +107,8 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
    */
   public DeletedRecipient delete(RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.DELETE, instanceURL(Recipient.class, this.id), null,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.DELETE, instanceUrl(Recipient.class, this.id), null,
         DeletedRecipient.class, options);
   }
   // </editor-fold>
@@ -119,7 +119,7 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
    */
   public static RecipientCollection list(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return list(params, null);
   }
 
@@ -128,9 +128,9 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
    */
   public static RecipientCollection list(Map<String, Object> params,
                        RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return requestCollection(classURL(Recipient.class), params, RecipientCollection.class, options);
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
+    return requestCollection(classUrl(Recipient.class), params, RecipientCollection.class, options);
   }
   // </editor-fold>
 
@@ -139,8 +139,8 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
    * Retrieve a recipient.
    */
   public static Recipient retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
     return retrieve(id, (RequestOptions) null);
   }
 
@@ -149,8 +149,8 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
    */
   public static Recipient retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Recipient.class, id), null, Recipient.class,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(Recipient.class, id), null, Recipient.class,
         options);
   }
 
@@ -159,8 +159,8 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
    */
   public static Recipient retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Recipient.class, id), params, Recipient.class,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(Recipient.class, id), params, Recipient.class,
         options);
   }
   // </editor-fold>
@@ -172,7 +172,7 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
   @Override
   public Recipient update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return update(params, (RequestOptions) null);
   }
 
@@ -182,8 +182,8 @@ public class Recipient extends APIResource implements MetadataStore<Recipient>, 
   @Override
   public Recipient update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Recipient.class, this.id), params,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, instanceUrl(Recipient.class, this.id), params,
         Recipient.class, options);
   }
   // </editor-fold>

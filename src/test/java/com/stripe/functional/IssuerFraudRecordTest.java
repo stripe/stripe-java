@@ -6,7 +6,7 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.IssuerFraudRecord;
 import com.stripe.model.IssuerFraudRecordCollection;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.io.IOException;
 import java.util.HashMap;
@@ -21,7 +21,7 @@ public class IssuerFraudRecordTest extends BaseStripeTest {
   public void testRetrieve() throws IOException, StripeException {
     // stripe-mock does not support the /v1/issuer_fraud_records endpoint, so we stub the request
     stubRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/issuer_fraud_records/%s", RECORD_ID),
         IssuerFraudRecord.class,
         getResourceAsString("/api_fixtures/issuer_fraud_record.json")
@@ -30,7 +30,7 @@ public class IssuerFraudRecordTest extends BaseStripeTest {
 
     assertNotNull(record);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/issuer_fraud_records/%s", RECORD_ID)
     );
   }
@@ -42,7 +42,7 @@ public class IssuerFraudRecordTest extends BaseStripeTest {
 
     // stripe-mock does not support the /v1/issuer_fraud_records endpoint, so we stub the request
     stubRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         "/v1/issuer_fraud_records",
         params,
         IssuerFraudRecordCollection.class,
@@ -52,7 +52,7 @@ public class IssuerFraudRecordTest extends BaseStripeTest {
 
     assertNotNull(records);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         "/v1/issuer_fraud_records",
         params
     );

@@ -12,7 +12,7 @@ public interface StripeCollectionInterface<T> {
 
   Integer getTotalCount();
 
-  String getURL();
+  String getUrl();
 
   /**
    * Get request options that were used to fetch the collection. This is

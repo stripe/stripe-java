@@ -1,8 +1,8 @@
 package com.stripe.model;
 
 import com.stripe.Stripe;
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
+import com.stripe.exception.ApiConnectionException;
+import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
@@ -42,68 +42,68 @@ public class BitcoinReceiver extends ExternalAccount {
   @Deprecated
   public static BitcoinReceiverCollection all(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return list(params, null);
   }
 
   @Deprecated
   public static BitcoinReceiverCollection all(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return list(params, options);
   }
 
   public static BitcoinReceiver create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return create(params, null);
   }
 
   public static BitcoinReceiver create(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return request(RequestMethod.POST, String.format("%s/%s", Stripe.getApiBase(),
         "v1/bitcoin/receivers"), params, BitcoinReceiver.class, options);
   }
 
   @Override
   public DeletedBitcoinReceiver delete() throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
     return delete(null);
   }
 
   @Override
   public DeletedBitcoinReceiver delete(RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedBitcoinReceiver.class,
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
+    return request(RequestMethod.DELETE, this.getInstanceUrl(), null, DeletedBitcoinReceiver.class,
         options);
   }
 
   public static BitcoinReceiverCollection list(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return list(params, null);
   }
 
   public static BitcoinReceiverCollection list(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     String url = String.format("%s/%s", Stripe.getApiBase(), "v1/bitcoin/receivers");
     return requestCollection(url, params, BitcoinReceiverCollection.class, options);
   }
 
   public static BitcoinReceiver retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
     return retrieve(id, null);
   }
 
 
   public static BitcoinReceiver retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return request(RequestMethod.GET, String.format("%s/%s/%s", Stripe.getApiBase(),
         "v1/bitcoin/receivers", id), null, BitcoinReceiver.class, options);
   }
@@ -111,21 +111,21 @@ public class BitcoinReceiver extends ExternalAccount {
   @Override
   public BitcoinReceiver update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return update(params, null);
   }
 
   @Override
   public BitcoinReceiver update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, this.getInstanceURL(), params, BitcoinReceiver.class,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, this.getInstanceUrl(), params, BitcoinReceiver.class,
         options);
   }
 
   @Override
-  protected String getInstanceURL() {
-    String result = super.getInstanceURL();
+  protected String getInstanceUrl() {
+    String result = super.getInstanceUrl();
     if (result == null) {
       return String.format("%s/%s/%s", Stripe.getApiBase(), "v1/bitcoin/receivers", this.getId());
     } else {

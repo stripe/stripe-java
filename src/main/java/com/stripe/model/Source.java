@@ -1,7 +1,7 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
+import com.stripe.exception.ApiConnectionException;
+import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
@@ -38,9 +38,9 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
 
   // APIResource methods
 
-  public String getSourceInstanceURL()
+  public String getSourceInstanceUrl()
       throws InvalidRequestException {
-    return instanceURL(Source.class, this.getId());
+    return instanceUrl(Source.class, this.getId());
   }
 
   // <editor-fold desc="create">
@@ -49,7 +49,7 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
    */
   public static Source create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return create(params, null);
   }
 
@@ -58,8 +58,8 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
    */
   public static Source create(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, classURL(Source.class), params, Source.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, classUrl(Source.class), params, Source.class, options);
   }
   // </editor-fold>
 
@@ -72,7 +72,7 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
   @Override
   public DeletedExternalAccount delete(RequestOptions options) throws
       AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     throw new InvalidRequestException(
         "Source objects cannot be deleted. If you want to detach the source from a customer "
         + "object, use detach().",
@@ -86,7 +86,7 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
    */
   public Source detach()
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return detach(null, null);
   }
 
@@ -95,7 +95,7 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
    */
   public Source detach(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return detach(params, null);
   }
 
@@ -104,9 +104,9 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
    */
   public Source detach(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     if (this.getCustomer() != null) {
-      String url = String.format("%s/%s/sources/%s", classURL(Customer.class), this.getCustomer(),
+      String url = String.format("%s/%s/sources/%s", classUrl(Customer.class), this.getCustomer(),
           this.getId());
       return request(RequestMethod.DELETE, url, params, Source.class, options);
     } else {
@@ -123,7 +123,7 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
    */
   public static Source retrieve(String id)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return retrieve(id, null);
   }
 
@@ -132,8 +132,8 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
    */
   public static Source retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Source.class, id), null, Source.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(Source.class, id), null, Source.class, options);
   }
   // </editor-fold>
 
@@ -143,7 +143,7 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
    */
   public SourceTransactionCollection sourceTransactions(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return sourceTransactions(params, null);
   }
 
@@ -153,8 +153,8 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
   public SourceTransactionCollection sourceTransactions(Map<String, Object> params,
       RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    String url = instanceURL(Source.class, this.getId()) + "/source_transactions";
+      ApiConnectionException, CardException, ApiException {
+    String url = instanceUrl(Source.class, this.getId()) + "/source_transactions";
     return requestCollection(url, params, SourceTransactionCollection.class, options);
   }
   // </editor-fold>
@@ -166,7 +166,7 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
   @Override
   public Source update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return update(params, null);
   }
 
@@ -176,8 +176,8 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
   @Override
   public Source update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, this.getSourceInstanceURL(), params, Source.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, this.getSourceInstanceUrl(), params, Source.class, options);
   }
   // </editor-fold>
 
@@ -188,7 +188,7 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
   @Override
   public Source verify(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return verify(params, null);
   }
 
@@ -198,8 +198,8 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
   @Override
   public Source verify(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, String.format("%s/verify", this.getSourceInstanceURL()),
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, String.format("%s/verify", this.getSourceInstanceUrl()),
         params, Source.class, options);
   }
   // </editor-fold>

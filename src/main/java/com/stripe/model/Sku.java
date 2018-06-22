@@ -1,11 +1,11 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
+import com.stripe.exception.ApiConnectionException;
+import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.Map;
@@ -18,7 +18,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
+public class Sku extends ApiResource implements HasId, MetadataStore<Sku> {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   Boolean active;
@@ -39,8 +39,8 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
     return (this.product != null) ? this.product.getId() : null;
   }
 
-  public void setProduct(String productID) {
-    this.product = setExpandableFieldID(productID, this.product);
+  public void setProduct(String productId) {
+    this.product = setExpandableFieldId(productId, this.product);
 
   }
 
@@ -57,19 +57,19 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
   /**
    * Create a SKU.
    */
-  public static SKU create(Map<String, Object> params)
+  public static Sku create(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return create(params, null);
   }
 
   /**
    * Create a SKU.
    */
-  public static SKU create(Map<String, Object> params, RequestOptions options)
+  public static Sku create(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, classURL(SKU.class), params, SKU.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, classUrl(Sku.class), params, Sku.class, options);
   }
   // </editor-fold>
 
@@ -77,19 +77,19 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
   /**
    * Delete a SKU.
    */
-  public DeletedSKU delete()
+  public DeletedSku delete()
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return delete(null);
   }
 
   /**
    * Delete a SKU.
    */
-  public DeletedSKU delete(RequestOptions options)
+  public DeletedSku delete(RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.DELETE, instanceURL(SKU.class, this.id), null, DeletedSKU.class,
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.DELETE, instanceUrl(Sku.class, this.id), null, DeletedSku.class,
         options);
   }
   // </editor-fold>
@@ -98,20 +98,20 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
   /**
    * List all SKUs.
    */
-  public static SKUCollection list(Map<String, Object> params)
+  public static SkuCollection list(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return list(params, null);
   }
 
   /**
    * List all SKUs.
    */
-  public static SKUCollection list(Map<String, Object> params,
+  public static SkuCollection list(Map<String, Object> params,
                    RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return requestCollection(classURL(SKU.class), params, SKUCollection.class, options);
+      InvalidRequestException, ApiConnectionException, CardException,
+      ApiException {
+    return requestCollection(classUrl(Sku.class), params, SkuCollection.class, options);
   }
   // </editor-fold>
 
@@ -119,28 +119,28 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
   /**
    * Retrieve a SKU.
    */
-  public static SKU retrieve(String id)
+  public static Sku retrieve(String id)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return retrieve(id, null);
   }
 
   /**
    * Retrieve a SKU.
    */
-  public static SKU retrieve(String id, RequestOptions options)
+  public static Sku retrieve(String id, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(SKU.class, id), null, SKU.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(Sku.class, id), null, Sku.class, options);
   }
 
   /**
    * Retrieve a SKU.
    */
-  public static SKU retrieve(String id, Map<String, Object> params, RequestOptions options)
+  public static Sku retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(SKU.class, id), params, SKU.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.GET, instanceUrl(Sku.class, id), params, Sku.class, options);
   }
   // </editor-fold>
 
@@ -149,9 +149,9 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
    * Update a SKU.
    */
   @Override
-  public SKU update(Map<String, Object> params)
+  public Sku update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return update(params, null);
   }
 
@@ -159,10 +159,10 @@ public class SKU extends APIResource implements HasId, MetadataStore<SKU> {
    * Update a SKU.
    */
   @Override
-  public SKU update(Map<String, Object> params, RequestOptions options)
+  public Sku update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(SKU.class, this.id), params, SKU.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, instanceUrl(Sku.class, this.id), params, Sku.class, options);
   }
   // </editor-fold>
 }

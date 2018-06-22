@@ -1,6 +1,6 @@
 package com.stripe.model;
 
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
@@ -10,7 +10,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class OrderItem extends APIResource {
+public class OrderItem extends ApiResource {
   String object;
   Long amount;
   String currency;
@@ -24,8 +24,8 @@ public class OrderItem extends APIResource {
     return (this.parent != null) ? this.parent.getId() : null;
   }
 
-  public void setParent(String parentID) {
-    this.parent = setExpandableFieldID(parentID, this.parent);
+  public void setParent(String parentId) {
+    this.parent = setExpandableFieldId(parentId, this.parent);
   }
 
   public HasId getParentObject() {

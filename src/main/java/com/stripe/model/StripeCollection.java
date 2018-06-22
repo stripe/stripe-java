@@ -73,11 +73,11 @@ public abstract class StripeCollection<T extends HasId> extends StripeObject
   }
 
   @Override
-  public String getURL() {
+  public String getUrl() {
     return url;
   }
 
-  public void setURL(String url) {
+  public void setUrl(String url) {
     this.url = url;
   }
 

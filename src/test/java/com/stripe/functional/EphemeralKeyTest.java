@@ -6,7 +6,7 @@ import com.stripe.BaseStripeTest;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.EphemeralKey;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.HashMap;
@@ -44,7 +44,7 @@ public class EphemeralKeyTest extends BaseStripeTest {
 
     assertNotNull(key);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         "/v1/ephemeral_keys",
         params,
         null,
@@ -77,7 +77,7 @@ public class EphemeralKeyTest extends BaseStripeTest {
 
     assertNotNull(deletedKey);
     verifyRequest(
-        APIResource.RequestMethod.DELETE,
+        ApiResource.RequestMethod.DELETE,
         String.format("/v1/ephemeral_keys/%s", key.getId())
     );
   }

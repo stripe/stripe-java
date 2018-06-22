@@ -33,7 +33,7 @@ public class OAuthTest extends BaseStripeTest {
   }
 
   @Test
-  public void testAuthorizeURL() throws AuthenticationException, InvalidRequestException,
+  public void testAuthorizeUrl() throws AuthenticationException, InvalidRequestException,
       MalformedURLException, UnsupportedEncodingException {
     final Map<String, Object> urlParams = new HashMap<String, Object>();
     urlParams.put("scope", "read_write");
@@ -44,7 +44,7 @@ public class OAuthTest extends BaseStripeTest {
     stripeUserParams.put("country", "US");
     urlParams.put("stripe_user", stripeUserParams);
 
-    final String urlStr = OAuth.authorizeURL(urlParams, null);
+    final String urlStr = OAuth.authorizeUrl(urlParams, null);
 
     final URL url = new URL(urlStr);
     final Map<String, String> queryPairs = splitQuery(url.getQuery());

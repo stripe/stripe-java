@@ -4,7 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import com.stripe.BaseStripeTest;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import org.junit.Test;
 
@@ -14,7 +14,7 @@ public class OrderItemTest extends BaseStripeTest {
     final String orderData = getFixture("/v1/orders/or_123");
     final String itemsData = getDataAt(orderData, "items");
     final String itemData = getDataAt(itemsData, 0);
-    final OrderItem orderItem = APIResource.GSON.fromJson(itemData, OrderItem.class);
+    final OrderItem orderItem = ApiResource.GSON.fromJson(itemData, OrderItem.class);
     assertNotNull(orderItem);
     assertEquals("order_item", orderItem.getObject());
   }

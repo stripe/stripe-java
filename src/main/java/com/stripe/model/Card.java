@@ -1,7 +1,7 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
+import com.stripe.exception.ApiConnectionException;
+import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
@@ -65,8 +65,8 @@ public class Card extends ExternalAccount {
    */
   @Override
   public DeletedCard delete()
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
+      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
+      CardException, ApiException {
     return delete((RequestOptions) null);
   }
 
@@ -75,9 +75,9 @@ public class Card extends ExternalAccount {
    */
   @Override
   public DeletedCard delete(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
-    return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedCard.class, options);
+      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
+      CardException, ApiException {
+    return request(RequestMethod.DELETE, this.getInstanceUrl(), null, DeletedCard.class, options);
   }
   // </editor-fold>
 
@@ -88,7 +88,7 @@ public class Card extends ExternalAccount {
   @Override
   public Card update(Map<String, Object> params)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      ApiConnectionException, CardException, ApiException {
     return update(params, (RequestOptions) null);
   }
 
@@ -98,18 +98,18 @@ public class Card extends ExternalAccount {
   @Override
   public Card update(Map<String, Object> params, RequestOptions options)
       throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, this.getInstanceURL(), params, Card.class, options);
+      ApiConnectionException, CardException, ApiException {
+    return request(RequestMethod.POST, this.getInstanceUrl(), params, Card.class, options);
   }
   // </editor-fold>
 
   @Override
-  protected String getInstanceURL() {
-    String result = super.getInstanceURL();
+  protected String getInstanceUrl() {
+    String result = super.getInstanceUrl();
     if (result != null) {
       return result;
     } else if (this.getRecipient() != null) {
-      return String.format("%s/%s/cards/%s", classURL(Recipient.class), this.getRecipient(),
+      return String.format("%s/%s/cards/%s", classUrl(Recipient.class), this.getRecipient(),
           this.getId());
     } else {
       return null;
