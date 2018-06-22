@@ -1,10 +1,6 @@
 package com.stripe.model;
 
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
@@ -94,9 +90,7 @@ public class InvoiceItem extends ApiResource implements MetadataStore<InvoiceIte
   /**
    * Create an invoice item.
    */
-  public static InvoiceItem create(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static InvoiceItem create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
@@ -104,8 +98,7 @@ public class InvoiceItem extends ApiResource implements MetadataStore<InvoiceIte
    * Create an invoice item.
    */
   public static InvoiceItem create(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.POST, classUrl(InvoiceItem.class), params, InvoiceItem.class,
         options);
   }
@@ -115,18 +108,14 @@ public class InvoiceItem extends ApiResource implements MetadataStore<InvoiceIte
   /**
    * Delete an invoice item.
    */
-  public DeletedInvoiceItem delete() throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public DeletedInvoiceItem delete() throws StripeException {
     return delete((RequestOptions) null);
   }
 
   /**
    * Delete an invoice item.
    */
-  public DeletedInvoiceItem delete(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public DeletedInvoiceItem delete(RequestOptions options) throws StripeException {
     return request(RequestMethod.DELETE, instanceUrl(InvoiceItem.class, this.id), null,
         DeletedInvoiceItem.class, options);
   }
@@ -136,19 +125,15 @@ public class InvoiceItem extends ApiResource implements MetadataStore<InvoiceIte
   /**
    * List all invoice items.
    */
-  public static InvoiceItemCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static InvoiceItemCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
   /**
    * List all invoice items.
    */
-  public static InvoiceItemCollection list(Map<String, Object> params,
-                       RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static InvoiceItemCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     return requestCollection(classUrl(InvoiceItem.class), params, InvoiceItemCollection.class,
         options);
   }
@@ -158,18 +143,14 @@ public class InvoiceItem extends ApiResource implements MetadataStore<InvoiceIte
   /**
    * Retrieve an invoice item.
    */
-  public static InvoiceItem retrieve(String id)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static InvoiceItem retrieve(String id) throws StripeException {
     return retrieve(id, (RequestOptions) null);
   }
 
   /**
    * Retrieve an invoice item.
    */
-  public static InvoiceItem retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static InvoiceItem retrieve(String id, RequestOptions options) throws StripeException {
     return request(RequestMethod.GET, instanceUrl(InvoiceItem.class, id), null, InvoiceItem.class,
         options);
   }
@@ -178,8 +159,7 @@ public class InvoiceItem extends ApiResource implements MetadataStore<InvoiceIte
    * Retrieve an invoice item.
    */
   public static InvoiceItem retrieve(String id, Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.GET, instanceUrl(InvoiceItem.class, id), params, InvoiceItem.class,
         options);
   }
@@ -190,9 +170,7 @@ public class InvoiceItem extends ApiResource implements MetadataStore<InvoiceIte
    * Update an invoice item.
    */
   @Override
-  public InvoiceItem update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public InvoiceItem update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
@@ -201,8 +179,7 @@ public class InvoiceItem extends ApiResource implements MetadataStore<InvoiceIte
    */
   @Override
   public InvoiceItem update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.POST, instanceUrl(InvoiceItem.class, this.id), params,
         InvoiceItem.class, options);
   }

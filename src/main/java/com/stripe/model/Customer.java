@@ -1,10 +1,6 @@
 package com.stripe.model;
 
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
@@ -111,9 +107,7 @@ public class Customer extends ApiResource implements MetadataStore<Customer>, Ha
   /**
    * Create a customer.
    */
-  public static Customer create(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Customer create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
@@ -121,8 +115,7 @@ public class Customer extends ApiResource implements MetadataStore<Customer>, Ha
    * Create a customer.
    */
   public static Customer create(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.POST, classUrl(Customer.class), params, Customer.class, options);
   }
   // </editor-fold>
@@ -131,18 +124,14 @@ public class Customer extends ApiResource implements MetadataStore<Customer>, Ha
   /**
    * Delete a customer.
    */
-  public DeletedCustomer delete() throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public DeletedCustomer delete() throws StripeException {
     return delete((RequestOptions) null);
   }
 
   /**
    * Delete a customer.
    */
-  public DeletedCustomer delete(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public DeletedCustomer delete(RequestOptions options) throws StripeException {
     return request(RequestMethod.DELETE, instanceUrl(Customer.class, this.id), null,
         DeletedCustomer.class, options);
   }
@@ -152,18 +141,14 @@ public class Customer extends ApiResource implements MetadataStore<Customer>, Ha
   /**
    * Delete a customer discount.
    */
-  public void deleteDiscount() throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public void deleteDiscount() throws StripeException {
     deleteDiscount((RequestOptions) null);
   }
 
   /**
    * Delete a customer discount.
    */
-  public void deleteDiscount(RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public void deleteDiscount(RequestOptions options) throws StripeException {
     request(RequestMethod.DELETE, String.format("%s/discount",
         instanceUrl(Customer.class, this.id)), null, Discount.class, options);
   }
@@ -173,20 +158,15 @@ public class Customer extends ApiResource implements MetadataStore<Customer>, Ha
   /**
    * List all customers.
    */
-  public static CustomerCollection list(Map<String, Object> params)
-      throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static CustomerCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
   /**
    * List all customers.
    */
-  public static CustomerCollection list(Map<String, Object> params,
-                      RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static CustomerCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     return requestCollection(classUrl(Customer.class), params, CustomerCollection.class, options);
   }
   // </editor-fold>
@@ -195,18 +175,14 @@ public class Customer extends ApiResource implements MetadataStore<Customer>, Ha
   /**
    * Retrieve a customer.
    */
-  public static Customer retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static Customer retrieve(String id) throws StripeException {
     return retrieve(id, (RequestOptions) null);
   }
 
   /**
    * Retrieve a customer.
    */
-  public static Customer retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Customer retrieve(String id, RequestOptions options) throws StripeException {
     return request(RequestMethod.GET, instanceUrl(Customer.class, id), null, Customer.class,
         options);
   }
@@ -215,8 +191,7 @@ public class Customer extends ApiResource implements MetadataStore<Customer>, Ha
    * Retrieve a customer.
    */
   public static Customer retrieve(String id, Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.GET, instanceUrl(Customer.class, id), params, Customer.class,
         options);
   }
@@ -227,9 +202,7 @@ public class Customer extends ApiResource implements MetadataStore<Customer>, Ha
    * Update a customer.
    */
   @Override
-  public Customer update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Customer update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
@@ -238,8 +211,7 @@ public class Customer extends ApiResource implements MetadataStore<Customer>, Ha
    */
   @Override
   public Customer update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.POST, instanceUrl(Customer.class, this.id), params,
         Customer.class, options);
   }

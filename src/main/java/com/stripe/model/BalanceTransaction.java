@@ -1,11 +1,7 @@
 package com.stripe.model;
 
 import com.stripe.Stripe;
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
@@ -73,8 +69,7 @@ public class BalanceTransaction extends ApiResource implements HasId {
    * List all balance history.
    */
   public static BalanceTransactionCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return list(params, null);
   }
 
@@ -82,9 +77,7 @@ public class BalanceTransaction extends ApiResource implements HasId {
    * List all balance history.
    */
   public static BalanceTransactionCollection list(Map<String, Object> params,
-      RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      RequestOptions options) throws StripeException {
     String url = String.format("%s/%s", Stripe.getApiBase(), "v1/balance/history");
     return requestCollection(url, params, BalanceTransactionCollection.class, options);
   }
@@ -94,9 +87,7 @@ public class BalanceTransaction extends ApiResource implements HasId {
   /**
    * Retrieve a balance transaction.
    */
-  public static BalanceTransaction retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static BalanceTransaction retrieve(String id) throws StripeException {
     return retrieve(id, (RequestOptions) null);
   }
 
@@ -104,8 +95,7 @@ public class BalanceTransaction extends ApiResource implements HasId {
    * Retrieve a balance transaction.
    */
   public static BalanceTransaction retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     String url = String.format("%s/%s/%s", Stripe.getApiBase(), "v1/balance/history", id);
     return request(RequestMethod.GET, url, null, BalanceTransaction.class, options);
   }

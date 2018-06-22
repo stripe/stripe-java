@@ -1,10 +1,6 @@
 package com.stripe.model;
 
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
@@ -39,9 +35,7 @@ public class Event extends ApiResource implements HasId {
   /**
    * List all events.
    */
-  public static EventCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static EventCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
@@ -49,8 +43,7 @@ public class Event extends ApiResource implements HasId {
    * List all events.
    */
   public static EventCollection list(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return requestCollection(classUrl(Event.class), params, EventCollection.class, options);
   }
   // </editor-fold>
@@ -59,9 +52,7 @@ public class Event extends ApiResource implements HasId {
   /**
    * Retrieve an event.
    */
-  public static Event retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static Event retrieve(String id) throws StripeException {
     return retrieve(id, (RequestOptions) null);
   }
 
@@ -69,8 +60,7 @@ public class Event extends ApiResource implements HasId {
    * Retrieve an event.
    */
   public static Event retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.GET, instanceUrl(Event.class, id), null, Event.class, options);
   }
   // </editor-fold>

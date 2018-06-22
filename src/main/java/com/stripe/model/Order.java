@@ -1,10 +1,6 @@
 package com.stripe.model;
 
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
@@ -84,9 +80,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   /**
    * Create an order.
    */
-  public static Order create(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Order create(Map<String, Object> params) throws StripeException {
     return create(params, null);
   }
 
@@ -94,8 +88,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
    * Create an order.
    */
   public static Order create(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.POST, classUrl(Order.class), params, Order.class, options);
   }
   // </editor-fold>
@@ -104,19 +97,15 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   /**
    * List all orders.
    */
-  public static OrderCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static OrderCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
   /**
    * List all orders.
    */
-  public static OrderCollection list(Map<String, Object> params,
-                     RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static OrderCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     return requestCollection(classUrl(Order.class), params, OrderCollection.class, options);
   }
   // </editor-fold>
@@ -125,18 +114,14 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   /**
    * Pay an order.
    */
-  public Order pay(Map<String, Object> params) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public Order pay(Map<String, Object> params) throws StripeException {
     return this.pay(params, null);
   }
 
   /**
    * Pay an order.
    */
-  public Order pay(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
-      CardException, ApiException {
+  public Order pay(Map<String, Object> params, RequestOptions options) throws StripeException {
     return request(RequestMethod.POST, String.format("%s/pay",
         instanceUrl(Order.class, this.getId())), params, Order.class, options);
   }
@@ -146,18 +131,14 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   /**
    * Retrieve an order.
    */
-  public static Order retrieve(String id)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Order retrieve(String id) throws StripeException {
     return retrieve(id, null);
   }
 
   /**
    * Retrieve an order.
    */
-  public static Order retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Order retrieve(String id, RequestOptions options) throws StripeException {
     return request(RequestMethod.GET, instanceUrl(Order.class, id), null, Order.class, options);
   }
 
@@ -165,8 +146,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
    * Retrieve an order.
    */
   public static Order retrieve(String id, Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.GET, instanceUrl(Order.class, id), params, Order.class, options);
   }
   // </editor-fold>
@@ -175,9 +155,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   /**
    * Return an order.
    */
-  public OrderReturn returnOrder(Map<String, Object> params) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public OrderReturn returnOrder(Map<String, Object> params) throws StripeException {
     return this.returnOrder(params, null);
   }
 
@@ -185,8 +163,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
    * Return an order.
    */
   public OrderReturn returnOrder(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
-      CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.POST, String.format("%s/returns",
         instanceUrl(Order.class, this.getId())), params, OrderReturn.class, options);
   }
@@ -197,9 +174,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
    * Update an order.
    */
   @Override
-  public Order update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Order update(Map<String, Object> params) throws StripeException {
     return update(params, null);
   }
 
@@ -207,9 +182,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
    * Update an order.
    */
   @Override
-  public Order update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Order update(Map<String, Object> params, RequestOptions options) throws StripeException {
     return request(RequestMethod.POST, instanceUrl(Order.class, this.id), params, Order.class,
         options);
   }
