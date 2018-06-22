@@ -1,10 +1,6 @@
 package com.stripe.model;
 
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
@@ -93,18 +89,14 @@ public class Dispute extends ApiResource implements HasId {
   /**
    * Close a dispute.
    */
-  public Dispute close()
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Dispute close() throws StripeException {
     return close(null);
   }
 
   /**
    * Close a dispute.
    */
-  public Dispute close(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Dispute close(RequestOptions options) throws StripeException {
     return request(RequestMethod.POST, String.format("%s/close",
         instanceUrl(Dispute.class, this.getId())), null, Dispute.class, options);
   }
@@ -114,9 +106,7 @@ public class Dispute extends ApiResource implements HasId {
   /**
    * List all disputes.
    */
-  public static DisputeCollection list(Map<String, Object> params) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static DisputeCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
@@ -124,8 +114,7 @@ public class Dispute extends ApiResource implements HasId {
    * List all disputes.
    */
   public static DisputeCollection list(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
-      CardException, ApiException {
+      throws StripeException {
     return requestCollection(classUrl(Dispute.class), params, DisputeCollection.class, options);
   }
   // </editor-fold>
@@ -134,18 +123,14 @@ public class Dispute extends ApiResource implements HasId {
   /**
    * Retrieve a dispute.
    */
-  public static Dispute retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static Dispute retrieve(String id) throws StripeException {
     return retrieve(id, null, null);
   }
 
   /**
    * Retrieve a dispute.
    */
-  public static Dispute retrieve(String id, RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static Dispute retrieve(String id, RequestOptions options) throws StripeException {
     return retrieve(id, null, options);
   }
 
@@ -153,8 +138,7 @@ public class Dispute extends ApiResource implements HasId {
    * Retrieve a dispute.
    */
   public static Dispute retrieve(String id, Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
-      CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.GET, instanceUrl(Dispute.class, id), params, Dispute.class,
         options);
   }
@@ -164,18 +148,14 @@ public class Dispute extends ApiResource implements HasId {
   /**
    * Update a dispute.
    */
-  public Dispute update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Dispute update(Map<String, Object> params) throws StripeException {
     return update(params, null);
   }
 
   /**
    * Update a dispute.
    */
-  public Dispute update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Dispute update(Map<String, Object> params, RequestOptions options) throws StripeException {
     return request(RequestMethod.POST, instanceUrl(Dispute.class, this.getId()),
         params, Dispute.class, options);
   }

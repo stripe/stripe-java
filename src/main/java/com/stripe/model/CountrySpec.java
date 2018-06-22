@@ -1,10 +1,6 @@
 package com.stripe.model;
 
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
@@ -31,9 +27,7 @@ public class CountrySpec extends ApiResource implements HasId {
   /**
    * List country specs.
    */
-  public static CountrySpecCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static CountrySpecCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
@@ -41,8 +35,7 @@ public class CountrySpec extends ApiResource implements HasId {
    * List country specs.
    */
   public static CountrySpecCollection list(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return requestCollection(classUrl(CountrySpec.class), params, CountrySpecCollection.class,
         options);
   }
@@ -52,9 +45,7 @@ public class CountrySpec extends ApiResource implements HasId {
   /**
    * Retrieve a country spec.
    */
-  public static CountrySpec retrieve(String country) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static CountrySpec retrieve(String country) throws StripeException {
     return retrieve(country, null);
   }
 
@@ -62,8 +53,7 @@ public class CountrySpec extends ApiResource implements HasId {
    * Retrieve a country spec.
    */
   public static CountrySpec retrieve(String country, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.GET, instanceUrl(CountrySpec.class, country), null,
         CountrySpec.class, options);
   }

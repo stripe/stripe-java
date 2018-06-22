@@ -1,10 +1,6 @@
 package com.stripe.model.issuing;
 
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
@@ -58,9 +54,7 @@ public class Dispute extends ApiResource implements MetadataStore<Dispute>, HasI
   /**
    * Create an issuing dispute.
    */
-  public static Dispute create(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Dispute create(Map<String, Object> params) throws StripeException {
     return create(params, null);
   }
 
@@ -68,8 +62,7 @@ public class Dispute extends ApiResource implements MetadataStore<Dispute>, HasI
    * Create an issuing dispute.
    */
   public static Dispute create(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.POST, classUrl(Dispute.class), params,
       Dispute.class, options);
   }
@@ -79,9 +72,7 @@ public class Dispute extends ApiResource implements MetadataStore<Dispute>, HasI
   /**
    * List all issuing disputes.
    */
-  public static DisputeCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static DisputeCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
@@ -89,8 +80,7 @@ public class Dispute extends ApiResource implements MetadataStore<Dispute>, HasI
    * List all issuing disputes.
    */
   public static DisputeCollection list(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
-      CardException, ApiException {
+      throws StripeException {
     return requestCollection(classUrl(Dispute.class), params,
       DisputeCollection.class, options);
   }
@@ -100,18 +90,14 @@ public class Dispute extends ApiResource implements MetadataStore<Dispute>, HasI
   /**
    * Retrieve an issuing dispute.
    */
-  public static Dispute retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static Dispute retrieve(String id) throws StripeException {
     return retrieve(id, null);
   }
 
   /**
    * Retrieve an issuing dispute.
    */
-  public static Dispute retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Dispute retrieve(String id, RequestOptions options) throws StripeException {
     return request(RequestMethod.GET, instanceUrl(Dispute.class, id), null,
       Dispute.class, options);
   }
@@ -119,10 +105,8 @@ public class Dispute extends ApiResource implements MetadataStore<Dispute>, HasI
   /**
    * Retrieve an issuing dispute.
    */
-  public static Dispute retrieve(String id, Map<String, Object> params,
-      RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Dispute retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     return request(RequestMethod.GET, instanceUrl(Dispute.class, id), params,
       Dispute.class, options);
   }
@@ -133,9 +117,7 @@ public class Dispute extends ApiResource implements MetadataStore<Dispute>, HasI
    * Update an issuing dispute.
    */
   @Override
-  public Dispute update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Dispute update(Map<String, Object> params) throws StripeException {
     return update(params, null);
   }
 
@@ -143,9 +125,7 @@ public class Dispute extends ApiResource implements MetadataStore<Dispute>, HasI
    * Update an issuing dispute.
    */
   @Override
-  public Dispute update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Dispute update(Map<String, Object> params, RequestOptions options) throws StripeException {
     return request(RequestMethod.POST, instanceUrl(Dispute.class, this.id), params,
       Dispute.class, options);
   }

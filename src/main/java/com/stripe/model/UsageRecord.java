@@ -1,10 +1,7 @@
 package com.stripe.model;
 
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
@@ -34,8 +31,7 @@ public class UsageRecord extends ApiResource implements HasId {
    * @return The created usage record
    */
   public static UsageRecord create(Map<String, Object> params, RequestOptions options)
-          throws AuthenticationException, InvalidRequestException,
-          ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     String subscriptionItem = (String)params.get("subscription_item");
     if (subscriptionItem == null) {
       throw new InvalidRequestException(

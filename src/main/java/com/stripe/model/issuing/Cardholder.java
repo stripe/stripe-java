@@ -1,10 +1,6 @@
 package com.stripe.model.issuing;
 
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.model.Address;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
@@ -39,9 +35,7 @@ public class Cardholder extends ApiResource implements MetadataStore<Cardholder>
   /**
    * Create an issuing cardholder.
    */
-  public static Cardholder create(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Cardholder create(Map<String, Object> params) throws StripeException {
     return create(params, null);
   }
 
@@ -49,8 +43,7 @@ public class Cardholder extends ApiResource implements MetadataStore<Cardholder>
    * Create an issuing cardholder.
    */
   public static Cardholder create(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.POST, classUrl(Cardholder.class), params,
       Cardholder.class, options);
   }
@@ -60,9 +53,7 @@ public class Cardholder extends ApiResource implements MetadataStore<Cardholder>
   /**
    * List all issuing cardholders.
    */
-  public static CardholderCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static CardholderCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
@@ -70,8 +61,7 @@ public class Cardholder extends ApiResource implements MetadataStore<Cardholder>
    * List all issuing cardholders.
    */
   public static CardholderCollection list(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
-      CardException, ApiException {
+      throws StripeException {
     return requestCollection(classUrl(Cardholder.class), params,
       CardholderCollection.class, options);
   }
@@ -81,18 +71,14 @@ public class Cardholder extends ApiResource implements MetadataStore<Cardholder>
   /**
    * Retrieve an issuing cardholder.
    */
-  public static Cardholder retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static Cardholder retrieve(String id) throws StripeException {
     return retrieve(id, null);
   }
 
   /**
    * Retrieve an issuing cardholder.
    */
-  public static Cardholder retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Cardholder retrieve(String id, RequestOptions options) throws StripeException {
     return request(RequestMethod.GET, instanceUrl(Cardholder.class, id), null,
       Cardholder.class, options);
   }
@@ -100,10 +86,8 @@ public class Cardholder extends ApiResource implements MetadataStore<Cardholder>
   /**
    * Retrieve an issuing cardholder.
    */
-  public static Cardholder retrieve(String id, Map<String, Object> params,
-      RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Cardholder retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     return request(RequestMethod.GET, instanceUrl(Cardholder.class, id), params,
       Cardholder.class, options);
   }
@@ -114,9 +98,7 @@ public class Cardholder extends ApiResource implements MetadataStore<Cardholder>
    * Update an issuing cardholder.
    */
   @Override
-  public Cardholder update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Cardholder update(Map<String, Object> params) throws StripeException {
     return update(params, null);
   }
 
@@ -125,8 +107,7 @@ public class Cardholder extends ApiResource implements MetadataStore<Cardholder>
    */
   @Override
   public Cardholder update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.POST, instanceUrl(Cardholder.class, this.id), params,
       Cardholder.class, options);
   }

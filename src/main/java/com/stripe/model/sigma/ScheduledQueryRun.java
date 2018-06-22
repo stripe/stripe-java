@@ -1,10 +1,6 @@
 package com.stripe.model.sigma;
 
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.model.FileUpload;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
@@ -40,8 +36,7 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
    * List all issuing authorizations.
    */
   public static ScheduledQueryRunCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return list(params, null);
   }
 
@@ -49,8 +44,7 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
    * List all issuing authorizations.
    */
   public static ScheduledQueryRunCollection list(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
-      CardException, ApiException {
+      throws StripeException {
     return requestCollection(classUrl(ScheduledQueryRun.class), params,
       ScheduledQueryRunCollection.class, options);
   }
@@ -60,9 +54,7 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
   /**
    * Retrieve an issuing authorization.
    */
-  public static ScheduledQueryRun retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static ScheduledQueryRun retrieve(String id) throws StripeException {
     return retrieve(id, null);
   }
 
@@ -70,8 +62,7 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
    * Retrieve an issuing authorization.
    */
   public static ScheduledQueryRun retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.GET, instanceUrl(ScheduledQueryRun.class, id), null,
       ScheduledQueryRun.class, options);
   }

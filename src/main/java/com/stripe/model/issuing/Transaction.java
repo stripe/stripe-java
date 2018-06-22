@@ -1,10 +1,6 @@
 package com.stripe.model.issuing;
 
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.model.BalanceTransaction;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
@@ -139,9 +135,7 @@ public class Transaction extends ApiResource implements MetadataStore<Transactio
   /**
    * List all issuing transactions.
    */
-  public static TransactionCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static TransactionCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
@@ -149,8 +143,7 @@ public class Transaction extends ApiResource implements MetadataStore<Transactio
    * List all issuing transactions.
    */
   public static TransactionCollection list(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
-      CardException, ApiException {
+      throws StripeException {
     return requestCollection(classUrl(Transaction.class), params,
       TransactionCollection.class, options);
   }
@@ -160,18 +153,14 @@ public class Transaction extends ApiResource implements MetadataStore<Transactio
   /**
    * Retrieve an issuing transaction.
    */
-  public static Transaction retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static Transaction retrieve(String id) throws StripeException {
     return retrieve(id, null);
   }
 
   /**
    * Retrieve an issuing transaction.
    */
-  public static Transaction retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Transaction retrieve(String id, RequestOptions options) throws StripeException {
     return request(RequestMethod.GET, instanceUrl(Transaction.class, id), null,
       Transaction.class, options);
   }
@@ -179,10 +168,8 @@ public class Transaction extends ApiResource implements MetadataStore<Transactio
   /**
    * Retrieve an issuing transaction.
    */
-  public static Transaction retrieve(String id, Map<String, Object> params,
-      RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static Transaction retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     return request(RequestMethod.GET, instanceUrl(Transaction.class, id), params,
       Transaction.class, options);
   }
@@ -193,9 +180,7 @@ public class Transaction extends ApiResource implements MetadataStore<Transactio
    * Update an issuing transaction.
    */
   @Override
-  public Transaction update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Transaction update(Map<String, Object> params) throws StripeException {
     return update(params, null);
   }
 
@@ -204,8 +189,7 @@ public class Transaction extends ApiResource implements MetadataStore<Transactio
    */
   @Override
   public Transaction update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.POST, instanceUrl(Transaction.class, this.id), params,
       Transaction.class, options);
   }

@@ -1,10 +1,6 @@
 package com.stripe.model;
 
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
@@ -125,18 +121,14 @@ public class PaymentIntent extends ApiResource implements MetadataStore<PaymentI
   /**
    * Cancel a payment intent.
    */
-  public PaymentIntent cancel()
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public PaymentIntent cancel() throws StripeException {
     return cancel(null, null);
   }
 
   /**
    * Cancel a payment intent.
    */
-  public PaymentIntent cancel(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public PaymentIntent cancel(Map<String, Object> params) throws StripeException {
     return cancel(params, null);
   }
 
@@ -144,8 +136,7 @@ public class PaymentIntent extends ApiResource implements MetadataStore<PaymentI
    * Cancel a payment intent.
    */
   public PaymentIntent cancel(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.POST, instanceUrl(PaymentIntent.class, this.id) + "/cancel",
       params, PaymentIntent.class, options);
   }
@@ -155,18 +146,14 @@ public class PaymentIntent extends ApiResource implements MetadataStore<PaymentI
   /**
    * Capture a payment intent.
    */
-  public PaymentIntent capture()
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public PaymentIntent capture() throws StripeException {
     return capture(null, null);
   }
 
   /**
    * Capture a payment intent.
    */
-  public PaymentIntent capture(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public PaymentIntent capture(Map<String, Object> params) throws StripeException {
     return capture(params, null);
   }
 
@@ -174,8 +161,7 @@ public class PaymentIntent extends ApiResource implements MetadataStore<PaymentI
    * Capture a payment intent.
    */
   public PaymentIntent capture(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.POST, instanceUrl(PaymentIntent.class, this.id) + "/capture",
       params, PaymentIntent.class, options);
   }
@@ -185,18 +171,14 @@ public class PaymentIntent extends ApiResource implements MetadataStore<PaymentI
   /**
    * Confirm a payment intent.
    */
-  public PaymentIntent confirm()
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public PaymentIntent confirm() throws StripeException {
     return confirm(null, null);
   }
 
   /**
    * Confirm a payment intent.
    */
-  public PaymentIntent confirm(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public PaymentIntent confirm(Map<String, Object> params) throws StripeException {
     return confirm(params, null);
   }
 
@@ -204,8 +186,7 @@ public class PaymentIntent extends ApiResource implements MetadataStore<PaymentI
    * Confirm a payment intent.
    */
   public PaymentIntent confirm(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.POST, instanceUrl(PaymentIntent.class, this.id) + "/confirm",
       params, PaymentIntent.class, options);
   }
@@ -215,9 +196,7 @@ public class PaymentIntent extends ApiResource implements MetadataStore<PaymentI
   /**
    * Create a payment intent.
    */
-  public static PaymentIntent create(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static PaymentIntent create(Map<String, Object> params) throws StripeException {
     return create(params, null);
   }
 
@@ -225,8 +204,7 @@ public class PaymentIntent extends ApiResource implements MetadataStore<PaymentI
    * Create a payment intent.
    */
   public static PaymentIntent create(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.POST, classUrl(PaymentIntent.class), params,
       PaymentIntent.class, options);
   }
@@ -236,9 +214,7 @@ public class PaymentIntent extends ApiResource implements MetadataStore<PaymentI
   /**
    * List all payment intents.
    */
-  public static PaymentIntentCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static PaymentIntentCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
@@ -246,8 +222,7 @@ public class PaymentIntent extends ApiResource implements MetadataStore<PaymentI
    * List all payment intents.
    */
   public static PaymentIntentCollection list(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
-      CardException, ApiException {
+      throws StripeException {
     return requestCollection(classUrl(PaymentIntent.class), params,
       PaymentIntentCollection.class, options);
   }
@@ -257,18 +232,14 @@ public class PaymentIntent extends ApiResource implements MetadataStore<PaymentI
   /**
    * Retrieve a payment intent.
    */
-  public static PaymentIntent retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, ApiConnectionException, CardException,
-      ApiException {
+  public static PaymentIntent retrieve(String id) throws StripeException {
     return retrieve(id, null);
   }
 
   /**
    * Retrieve a payment intent.
    */
-  public static PaymentIntent retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public static PaymentIntent retrieve(String id, RequestOptions options) throws StripeException {
     return request(RequestMethod.GET, instanceUrl(PaymentIntent.class, id), null,
       PaymentIntent.class, options);
   }
@@ -277,9 +248,7 @@ public class PaymentIntent extends ApiResource implements MetadataStore<PaymentI
    * Retrieve a payment intent.
    */
   public static PaymentIntent retrieve(String id, Map<String, Object> params,
-      RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      RequestOptions options) throws StripeException {
     return request(RequestMethod.GET, instanceUrl(PaymentIntent.class, id), params,
       PaymentIntent.class, options);
   }
@@ -290,9 +259,7 @@ public class PaymentIntent extends ApiResource implements MetadataStore<PaymentI
    * Update a payment intent.
    */
   @Override
-  public PaymentIntent update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public PaymentIntent update(Map<String, Object> params) throws StripeException {
     return update(params, null);
   }
 
@@ -301,8 +268,7 @@ public class PaymentIntent extends ApiResource implements MetadataStore<PaymentI
    */
   @Override
   public PaymentIntent update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.POST, instanceUrl(PaymentIntent.class, this.id), params,
       PaymentIntent.class,
         options);

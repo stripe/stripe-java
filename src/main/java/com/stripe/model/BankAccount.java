@@ -1,10 +1,6 @@
 package com.stripe.model;
 
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.RequestOptions;
 
 import java.util.Map;
@@ -34,9 +30,7 @@ public class BankAccount extends ExternalAccount {
    * Delete a bank account.
    */
   @Override
-  public DeletedBankAccount delete()
-      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
-      CardException, ApiException {
+  public DeletedBankAccount delete() throws StripeException {
     return delete(null);
   }
 
@@ -44,9 +38,7 @@ public class BankAccount extends ExternalAccount {
    * Delete a bank account.
    */
   @Override
-  public DeletedBankAccount delete(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
-      CardException, ApiException {
+  public DeletedBankAccount delete(RequestOptions options) throws StripeException {
     return request(RequestMethod.DELETE, this.getInstanceUrl(), null, DeletedBankAccount.class,
         options);
   }
@@ -57,9 +49,7 @@ public class BankAccount extends ExternalAccount {
    * Update a bank account.
    */
   @Override
-  public BankAccount update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
-      CardException, ApiException {
+  public BankAccount update(Map<String, Object> params) throws StripeException {
     return update(params, null);
   }
 
@@ -68,8 +58,7 @@ public class BankAccount extends ExternalAccount {
    */
   @Override
   public BankAccount update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
-      CardException, ApiException {
+      throws StripeException {
     return request(RequestMethod.POST, this.getInstanceUrl(), params, BankAccount.class, options);
   }
   // </editor-fold>

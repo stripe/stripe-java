@@ -1,10 +1,6 @@
 package com.stripe.model;
 
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
@@ -38,8 +34,7 @@ public class EphemeralKey extends ApiResource implements HasId {
    * @return the new ephemeral key
    */
   public static EphemeralKey create(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+      throws StripeException {
     if (options.getStripeVersion() == null) {
       throw new IllegalArgumentException("stripeVersion must be specified in RequestOptions");
     }
@@ -53,18 +48,14 @@ public class EphemeralKey extends ApiResource implements HasId {
   /**
    * Delete an ephemeral key.
    */
-  public EphemeralKey delete()
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public EphemeralKey delete() throws StripeException {
     return delete(null);
   }
 
   /**
    * Delete an ephemeral key.
    */
-  public EphemeralKey delete(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public EphemeralKey delete(RequestOptions options) throws StripeException {
     return request(RequestMethod.DELETE, instanceUrl(EphemeralKey.class, this.id), null,
         EphemeralKey.class, options);
   }

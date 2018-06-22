@@ -1,10 +1,6 @@
 package com.stripe.model;
 
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.RequestOptions;
 
 import java.util.List;
@@ -64,9 +60,7 @@ public class Card extends ExternalAccount {
    * Delete a card.
    */
   @Override
-  public DeletedCard delete()
-      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
-      CardException, ApiException {
+  public DeletedCard delete() throws StripeException {
     return delete((RequestOptions) null);
   }
 
@@ -74,9 +68,7 @@ public class Card extends ExternalAccount {
    * Delete a card.
    */
   @Override
-  public DeletedCard delete(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
-      CardException, ApiException {
+  public DeletedCard delete(RequestOptions options) throws StripeException {
     return request(RequestMethod.DELETE, this.getInstanceUrl(), null, DeletedCard.class, options);
   }
   // </editor-fold>
@@ -86,9 +78,7 @@ public class Card extends ExternalAccount {
    * Update a card.
    */
   @Override
-  public Card update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Card update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
@@ -96,9 +86,7 @@ public class Card extends ExternalAccount {
    * Update a card.
    */
   @Override
-  public Card update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, CardException, ApiException {
+  public Card update(Map<String, Object> params, RequestOptions options) throws StripeException {
     return request(RequestMethod.POST, this.getInstanceUrl(), params, Card.class, options);
   }
   // </editor-fold>

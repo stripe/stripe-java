@@ -1,11 +1,6 @@
 package com.stripe.net;
 
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
-import com.stripe.exception.oauth.OAuthException;
+import com.stripe.exception.StripeException;
 
 import java.util.Map;
 
@@ -17,8 +12,7 @@ public interface StripeResponseGetter {
       Class<T> clazz,
       ApiResource.RequestType type,
       RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, ApiConnectionException,
-      CardException, ApiException;
+      throws StripeException;
 
   <T> T oauthRequest(
       ApiResource.RequestMethod method,
@@ -27,6 +21,5 @@ public interface StripeResponseGetter {
       Class<T> clazz,
       ApiResource.RequestType type,
       RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, ApiException, OAuthException;
+      throws StripeException;
 }
