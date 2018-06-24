@@ -44,6 +44,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   String failureMessage;
   FraudDetails fraudDetails;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Invoice> invoice;
+  ChargeLevel3 level3;
   Boolean livemode;
   @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Account> onBehalfOf;
