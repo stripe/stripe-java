@@ -8,15 +8,15 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Summary extends StripeObject {
-  Integer adjustmentCount;
+  Long adjustmentCount;
   Long adjustmentGross;
-  Integer chargeCount;
+  Long chargeCount;
   Long chargeFees;
   Long chargeGross;
   Long net;
-  Integer refundCount;
+  Long refundCount;
   Long refundFees;
   Long refundGross;
-  Integer validationCount;
+  Long validationCount;
   Long validationFees;
 }

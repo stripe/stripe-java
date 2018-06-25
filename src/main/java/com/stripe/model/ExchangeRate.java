@@ -16,7 +16,7 @@ import lombok.Setter;
 public class ExchangeRate extends ApiResource implements HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
-  Map<String, Float> rates;
+  Map<String, Double> rates;
 
   // <editor-fold desc="list">
   /**

@@ -10,7 +10,7 @@ public interface StripeCollectionInterface<T> {
 
   Boolean getHasMore();
 
-  Integer getTotalCount();
+  Long getTotalCount();
 
   String getUrl();
 

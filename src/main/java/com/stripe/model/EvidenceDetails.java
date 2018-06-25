@@ -9,5 +9,5 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public final class EvidenceDetails extends StripeObject {
   protected Long dueBy;
-  protected Integer submissionCount;
+  protected Long submissionCount;
 }
