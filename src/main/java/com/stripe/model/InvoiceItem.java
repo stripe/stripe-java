@@ -29,7 +29,7 @@ public class InvoiceItem extends ApiResource implements MetadataStore<InvoiceIte
   InvoiceLineItemPeriod period;
   Plan plan;
   Boolean proration;
-  Integer quantity;
+  Long quantity;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Subscription> subscription;
   String subscriptionItem;
   Long unitAmount;

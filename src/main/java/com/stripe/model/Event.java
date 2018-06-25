@@ -21,7 +21,7 @@ public class Event extends ApiResource implements HasId {
   Long created;
   EventData data;
   Boolean livemode;
-  Integer pendingWebhooks;
+  Long pendingWebhooks;
   EventRequest request;
   String type;
 
