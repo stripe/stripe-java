@@ -26,13 +26,13 @@ public class Subscription extends ApiResource implements MetadataStore<Subscript
   Long currentPeriodEnd;
   Long currentPeriodStart;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Customer> customer;
-  Integer daysUntilDue;
+  Long daysUntilDue;
   Discount discount;
   Long endedAt;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) SubscriptionItemCollection items;
   @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   Plan plan;
-  Integer quantity;
+  Long quantity;
   Long start;
   String status;
   Double taxPercent;

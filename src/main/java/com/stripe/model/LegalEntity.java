@@ -29,9 +29,9 @@ public class LegalEntity extends StripeObject {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class DateOfBirth extends StripeObject {
-    Integer day;
-    Integer month;
-    Integer year;
+    Long day;
+    Long month;
+    Long year;
   }
 
   @Getter

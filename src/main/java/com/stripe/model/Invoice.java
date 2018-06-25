@@ -21,7 +21,7 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
   Long amountPaid;
   Long amountRemaining;
   Long applicationFee;
-  Integer attemptCount;
+  Long attemptCount;
   Boolean attempted;
   String billing;
   String billingReason;

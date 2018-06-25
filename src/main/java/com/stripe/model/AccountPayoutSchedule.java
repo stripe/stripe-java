@@ -8,8 +8,8 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class AccountPayoutSchedule extends StripeObject {
-  Integer delayDays;
+  Long delayDays;
   String interval;
-  Integer monthlyAnchor;
+  Long monthlyAnchor;
   String weeklyAnchor;
 }
