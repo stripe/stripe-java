@@ -1,0 +1,23 @@
+{
+  "line_items": [
+    {
+      "discount_amount": 200,
+      "product_code": "1234",
+      "product_description": "description 1",
+      "quantity": 2,
+      "tax_amount": 200,
+      "unit_cost": 1000
+    },
+    {
+      "discount_amount": 300,
+      "product_code": "1235",
+      "product_description": "description 2",
+      "quantity": 3,
+      "tax_amount": 300,
+      "unit_cost": 3000
+    }
+  ],
+  "merchant_reference": "1234",
+  "shipping_address_zip": "94110",
+  "shipping_amount": 700
+}
