@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.43.0 - 2018-06-25
+* [#537](https://github.com/stripe/stripe-java/pull/537) Add `level3` property on `Charge` model
+
 ## 5.42.0 - 2018-06-19
 * [#529](https://github.com/stripe/stripe-java/pull/529) Annotate a lot of methods as deprecated and flagged for removal in the next major release
 
