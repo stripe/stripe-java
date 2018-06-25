@@ -21,7 +21,7 @@ public class InvoiceLineItem extends StripeObject implements HasId {
   InvoiceLineItemPeriod period;
   Plan plan;
   Boolean proration;
-  Integer quantity;
+  Long quantity;
   String subscription;
   String subscriptionItem;
   String type;

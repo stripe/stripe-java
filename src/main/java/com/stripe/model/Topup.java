@@ -17,7 +17,7 @@ import lombok.Setter;
 public class Topup extends ApiResource implements MetadataStore<Topup>, HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
-  Integer amount;
+  Long amount;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
       ExpandableField<BalanceTransaction> balanceTransaction;
   Long created;

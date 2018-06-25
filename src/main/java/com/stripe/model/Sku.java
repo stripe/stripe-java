@@ -26,7 +26,7 @@ public class Sku extends ApiResource implements HasId, MetadataStore<Sku> {
   Boolean livemode;
   @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   PackageDimensions packageDimensions;
-  Integer price;
+  Long price;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Product> product;
   Long updated;
 

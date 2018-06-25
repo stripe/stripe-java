@@ -20,14 +20,14 @@ public class Coupon extends ApiResource implements MetadataStore<Coupon>, HasId 
   Long created;
   String currency;
   String duration;
-  Integer durationInMonths;
+  Long durationInMonths;
   Boolean livemode;
   Long maxRedemptions;
   @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   String name;
-  Integer percentOff;
+  Long percentOff;
   Long redeemBy;
-  Integer timesRedeemed;
+  Long timesRedeemed;
   Boolean valid;
 
   // <editor-fold desc="create">
