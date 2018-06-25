@@ -16,7 +16,7 @@ public class OrderItem extends ApiResource {
   String currency;
   String description;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<HasId> parent;
-  Integer quantity;
+  Long quantity;
   String type;
 
   // <editor-fold desc="parent">

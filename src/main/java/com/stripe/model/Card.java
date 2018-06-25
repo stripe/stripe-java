@@ -29,8 +29,8 @@ public class Card extends ExternalAccount {
   String cvcCheck;
   Boolean defaultForCurrency;
   String dynamicLast4;
-  Integer expMonth;
-  Integer expYear;
+  Long expMonth;
+  Long expYear;
   String fingerprint;
   String funding;
   String last4;

@@ -38,7 +38,7 @@ public class FeeRefundCollectionDeserializer implements JsonDeserializer<FeeRefu
       FeeRefundCollection collection = new FeeRefundCollection();
       collection.setData(refunds);
       collection.setHasMore(false);
-      collection.setTotalCount(refunds.size());
+      collection.setTotalCount(Long.valueOf(refunds.size()));
       return collection;
     } else {
       return gson.fromJson(json, typeOfT);

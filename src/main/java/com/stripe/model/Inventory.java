@@ -9,6 +9,6 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class Inventory {
   String type;
-  Integer quantity;
+  Long quantity;
   String value;
 }
