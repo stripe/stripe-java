@@ -24,7 +24,7 @@ public class Plan extends ApiResource implements MetadataStore<Plan>, HasId {
   Long created;
   String currency;
   String interval;
-  Integer intervalCount;
+  Long intervalCount;
   Boolean livemode;
   @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   String nickname;
@@ -74,7 +74,7 @@ public class Plan extends ApiResource implements MetadataStore<Plan>, HasId {
    * @see <a href="https://stripe.com/docs/upgrades#2018-02-05">API version 2018-02-05</a>
    */
   @Deprecated
-  Integer trialPeriodDays;
+  Long trialPeriodDays;
 
   // <editor-fold desc="product">
   public String getProduct() {

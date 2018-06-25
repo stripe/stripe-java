@@ -34,7 +34,7 @@ import java.util.Map;
 public abstract class StripeCollection<T extends HasId> extends StripeObject
     implements StripeCollectionInterface<T> {
   List<T> data;
-  Integer totalCount;
+  Long totalCount;
   Boolean hasMore;
   private RequestOptions requestOptions;
   private Map<String, Object> requestParams;
@@ -43,7 +43,7 @@ public abstract class StripeCollection<T extends HasId> extends StripeObject
   /**
    * 3/2014: Legacy (from before newstyle pagination API).
    */
-  Integer count;
+  Long count;
 
   @Override
   public List<T> getData() {
@@ -55,11 +55,11 @@ public abstract class StripeCollection<T extends HasId> extends StripeObject
   }
 
   @Override
-  public Integer getTotalCount() {
+  public Long getTotalCount() {
     return totalCount;
   }
 
-  public void setTotalCount(Integer totalCount) {
+  public void setTotalCount(Long totalCount) {
     this.totalCount = totalCount;
   }
 
@@ -84,14 +84,14 @@ public abstract class StripeCollection<T extends HasId> extends StripeObject
   /**
    * 3/2014: Legacy (from before newstyle pagination API).
    */
-  public Integer getCount() {
+  public Long getCount() {
     return count;
   }
 
   /**
    * 3/2014: Legacy (from before newstyle pagination API).
    */
-  public void setCount(Integer count) {
+  public void setCount(Long count) {
     this.count = count;
   }
 

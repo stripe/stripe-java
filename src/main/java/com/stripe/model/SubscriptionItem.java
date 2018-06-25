@@ -18,7 +18,7 @@ public class SubscriptionItem extends ApiResource implements HasId {
   String object;
   Long created;
   Plan plan;
-  Integer quantity;
+  Long quantity;
 
   // <editor-fold desc="create">
   /**

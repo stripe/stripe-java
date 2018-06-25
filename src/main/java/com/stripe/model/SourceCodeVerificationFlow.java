@@ -8,6 +8,6 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public final class SourceCodeVerificationFlow extends StripeObject {
-  Integer attemptsRemaining;
+  Long attemptsRemaining;
   String status;
 }

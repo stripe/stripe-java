@@ -26,7 +26,7 @@ public class BalanceTransaction extends ApiResource implements HasId {
   String description;
   Long fee;
   List<Fee> feeDetails;
-  Integer net;
+  Long net;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<HasId> source;
   String status;
   String type;

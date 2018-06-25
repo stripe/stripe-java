@@ -37,7 +37,7 @@ public class ChargeRefundCollectionDeserializer
       ChargeRefundCollection collection = new ChargeRefundCollection();
       collection.setData(refunds);
       collection.setHasMore(false);
-      collection.setTotalCount(refunds.size());
+      collection.setTotalCount(Long.valueOf(refunds.size()));
       return collection;
     }
 
