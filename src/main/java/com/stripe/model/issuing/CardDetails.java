@@ -2,7 +2,6 @@ package com.stripe.model.issuing;
 
 import com.stripe.model.ExpandableField;
 import com.stripe.net.ApiResource;
-import com.stripe.net.RequestOptions;
 
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
