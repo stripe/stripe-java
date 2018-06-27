@@ -9,6 +9,8 @@ import java.io.PrintWriter;
 import java.net.URLConnection;
 import java.util.Random;
 
+import lombok.Cleanup;
+
 public class MultipartProcessor {
   private final String boundary;
   private static final String LINE_BREAK = "\r\n";
@@ -72,17 +74,13 @@ public class MultipartProcessor {
     writer.append(LINE_BREAK);
     writer.flush();
 
-    FileInputStream inputStream = new FileInputStream(file);
-    try {
-      byte[] buffer = new byte[4096];
-      int bytesRead = -1;
-      while ((bytesRead = inputStream.read(buffer)) != -1) {
-        outputStream.write(buffer, 0, bytesRead);
-      }
-      outputStream.flush();
-    } finally {
-      inputStream.close();
+    @Cleanup FileInputStream inputStream = new FileInputStream(file);
+    byte[] buffer = new byte[4096];
+    int bytesRead = -1;
+    while ((bytesRead = inputStream.read(buffer)) != -1) {
+      outputStream.write(buffer, 0, bytesRead);
     }
+    outputStream.flush();
 
     writer.append(LINE_BREAK);
     writer.flush();
