@@ -25,7 +25,7 @@ public class Dispute extends ApiResource implements HasId {
   String currency;
   EvidenceSubObject evidenceSubObject; // `evidence`
   EvidenceDetails evidenceDetails;
-  @Getter(AccessLevel.NONE) Boolean isChargeRefundable;
+  Boolean isChargeRefundable;
   Boolean livemode;
   Map<String, String> metadata;
   String reason;
@@ -79,11 +79,6 @@ public class Dispute extends ApiResource implements HasId {
     this.charge = new ExpandableField<Charge>(charge.getId(), charge);
   }
   // </editor-fold>
-
-  // TODO: change return type to Boolean in next major version
-  public boolean getIsChargeRefundable() {
-    return isChargeRefundable;
-  }
 
   // <editor-fold desc="close">
   /**
