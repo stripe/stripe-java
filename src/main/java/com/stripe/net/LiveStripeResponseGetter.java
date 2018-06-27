@@ -43,6 +43,8 @@ import java.util.Scanner;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSocketFactory;
 
+import lombok.Cleanup;
+
 public class LiveStripeResponseGetter implements StripeResponseGetter {
   private static final String DNS_CACHE_TTL_PROPERTY_NAME = "networkaddress.cache.ttl";
 
@@ -233,15 +235,9 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     conn.setRequestProperty("Content-Type", String.format(
         "application/x-www-form-urlencoded;charset=%s", ApiResource.CHARSET));
 
-    OutputStream output = null;
-    try {
-      output = conn.getOutputStream();
-      output.write(query.getBytes(ApiResource.CHARSET));
-    } finally {
-      if (output != null) {
-        output.close();
-      }
-    }
+    @Cleanup OutputStream output = conn.getOutputStream();
+    output.write(query.getBytes(ApiResource.CHARSET));
+
     return conn;
   }
 
