@@ -16,12 +16,6 @@ import org.junit.Test;
 public class ApplicationFeeTest extends BaseStripeTest {
   public static final String FEE_ID = "fee_123";
 
-  private ApplicationFee getFeeFixture() throws StripeException {
-    final ApplicationFee fee = ApplicationFee.retrieve(FEE_ID);
-    resetNetworkSpy();
-    return fee;
-  }
-
   @Test
   public void testRetrieve() throws StripeException {
     final ApplicationFee fee = ApplicationFee.retrieve(FEE_ID);
