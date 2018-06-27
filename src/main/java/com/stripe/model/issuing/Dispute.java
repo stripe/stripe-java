@@ -8,7 +8,6 @@ import com.stripe.model.StripeObject;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
-import java.util.List;
 import java.util.Map;
 
 import lombok.AccessLevel;

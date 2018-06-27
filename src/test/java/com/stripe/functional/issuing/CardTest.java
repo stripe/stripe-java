@@ -10,9 +10,7 @@ import com.stripe.model.issuing.CardDetails;
 import com.stripe.net.ApiResource;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;

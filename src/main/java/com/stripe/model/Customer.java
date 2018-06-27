@@ -4,7 +4,6 @@ import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
-import java.util.HashMap;
 import java.util.Map;
 
 import lombok.AccessLevel;

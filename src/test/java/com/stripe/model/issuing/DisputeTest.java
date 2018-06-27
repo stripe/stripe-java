@@ -2,7 +2,6 @@ package com.stripe.model.issuing;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.net.ApiResource;
