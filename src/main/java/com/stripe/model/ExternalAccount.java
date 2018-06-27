@@ -72,7 +72,6 @@ public class ExternalAccount extends ApiResource implements HasId, MetadataStore
   // </editor-fold>
 
   protected String getInstanceUrl() {
-    // TODO: Replace with subresourceURL
     if (this.getCustomer() != null) {
       return String.format("%s/%s/sources/%s", classUrl(Customer.class), this.getCustomer(),
           this.getId());
