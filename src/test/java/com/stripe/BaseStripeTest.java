@@ -26,6 +26,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.List;
 import java.util.Map;
 
+import lombok.Cleanup;
+
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
@@ -421,19 +423,15 @@ public class BaseStripeTest {
   }
 
   private static String readUntilEnd(InputStream inputStream) throws IOException {
-    BufferedReader reader =
+    @Cleanup BufferedReader reader =
         new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
-    try {
-      StringBuilder builder = new StringBuilder();
-      String line;
-      while ((line = reader.readLine()) != null) {
-        builder.append(line);
-        builder.append("\r");
-      }
-      return builder.toString();
-    } finally {
-      reader.close();
+    StringBuilder builder = new StringBuilder();
+    String line;
+    while ((line = reader.readLine()) != null) {
+      builder.append(line);
+      builder.append("\r");
     }
+    return builder.toString();
   }
 
   /**
