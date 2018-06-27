@@ -4,11 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 import com.stripe.BaseStripeTest;
-import com.stripe.exception.ApiConnectionException;
-import com.stripe.exception.ApiException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
