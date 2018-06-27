@@ -7,28 +7,6 @@ public abstract class StripeException extends Exception {
   private String requestId;
   private Integer statusCode;
 
-  /**
-   * Constructs a new Stripe exception with the specified details.
-   *
-   * @deprecated Use new constructor with `code` argument instead.
-   */
-  @Deprecated
-  // TODO: remove this constructor in next major version bump
-  public StripeException(String message, String requestId, Integer statusCode) {
-    this(message, requestId, null, statusCode, null);
-  }
-
-  /**
-   * Constructs a new Stripe exception with the specified details.
-   *
-   * @deprecated Use new constructor with `code` argument instead.
-   */
-  @Deprecated
-  // TODO: remove this constructor in next major version bump
-  public StripeException(String message, String requestId, Integer statusCode, Throwable e) {
-    this(message, requestId, null, statusCode, e);
-  }
-
   public StripeException(String message, String requestId, String code, Integer statusCode) {
     this(message, requestId, code, statusCode, null);
   }
