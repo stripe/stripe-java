@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.44.0 - 2018-06-27
+* [#539](https://github.com/stripe/stripe-java/pull/539) Add `customerReference` and `shippingFromZip` properties on `ChargeLevel3` model
+
 ## 5.43.0 - 2018-06-25
 * [#537](https://github.com/stripe/stripe-java/pull/537) Add `level3` property on `Charge` model
 
