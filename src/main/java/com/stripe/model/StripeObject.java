@@ -15,9 +15,6 @@ public abstract class StripeObject {
       .serializeNulls()
       .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
       .registerTypeAdapter(ExpandableField.class, new ExpandableFieldSerializer())
-      // TODO: remove the deserializers in the next major release
-      .registerTypeAdapter(EventData.class, new EventDataDeserializer())
-      .registerTypeAdapter(EventRequest.class, new EventRequestDeserializer())
       .create();
 
   @Override
@@ -35,7 +32,7 @@ public abstract class StripeObject {
   }
 
   public void setLastResponse(StripeResponse response) {
-    this.lastResponse = response; 
+    this.lastResponse = response;
   }
 
   public String toJson() {
