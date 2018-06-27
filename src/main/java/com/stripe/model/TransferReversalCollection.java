@@ -55,14 +55,6 @@ public class TransferReversalCollection extends StripeCollection<Reversal> {
   /**
    * Retrieve a reversal.
    */
-  @Deprecated
-  public Reversal retrieve(String id, String apiKey) throws StripeException {
-    return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  /**
-   * Retrieve a reversal.
-   */
   public Reversal retrieve(String id, RequestOptions options) throws StripeException {
     String url = String.format("%s%s/%s", Stripe.getApiBase(), this.getUrl(), id);
     return ApiResource.request(ApiResource.RequestMethod.GET, url, null, Reversal.class, options);
