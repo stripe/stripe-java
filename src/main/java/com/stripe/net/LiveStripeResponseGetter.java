@@ -5,6 +5,7 @@ import com.stripe.exception.ApiConnectionException;
 import com.stripe.exception.ApiException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.CardException;
+import com.stripe.exception.IdempotencyException;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.PermissionException;
 import com.stripe.exception.RateLimitException;
@@ -373,7 +374,6 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   }
 
   private static class StripeError {
-    @SuppressWarnings("unused")
     String type;
 
     String message;
@@ -695,17 +695,19 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   }
 
   private static void handleApiError(String responseBody, int responseCode, String requestId)
-      throws InvalidRequestException, AuthenticationException,
-      CardException, ApiException {
+      throws ApiException, AuthenticationException, CardException, IdempotencyException,
+      InvalidRequestException {
     LiveStripeResponseGetter.StripeError error = ApiResource.GSON.fromJson(responseBody,
         LiveStripeResponseGetter.StripeErrorContainer.class).error;
     switch (responseCode) {
       case 400:
-        throw new InvalidRequestException(error.message, error.param, requestId, error.code,
-            responseCode, null);
       case 404:
-        throw new InvalidRequestException(error.message, error.param, requestId, error.code,
-            responseCode, null);
+        if (error.type.equals("idempotency_error")) {
+          throw new IdempotencyException(error.message, requestId, error.code, responseCode);
+        } else {
+          throw new InvalidRequestException(error.message, error.param, requestId, error.code,
+          responseCode, null);
+        }
       case 401:
         throw new AuthenticationException(error.message, requestId, error.code, responseCode);
       case 402:
