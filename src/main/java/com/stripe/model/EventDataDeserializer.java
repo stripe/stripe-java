@@ -23,6 +23,7 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
     objectMap.put("account", Account.class);
     objectMap.put("alipay_account", AlipayAccount.class);
     objectMap.put("apple_pay_domain", ApplePayDomain.class);
+    objectMap.put("application", Application.class);
     objectMap.put("application_fee", ApplicationFee.class);
     objectMap.put("balance", Balance.class);
     objectMap.put("balance_transaction", BalanceTransaction.class);
