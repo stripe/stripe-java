@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.45.0 - 2018-06-28
+* [#542](https://github.com/stripe/stripe-java/pull/542) Fix `account.application.*` event data deserialization issue
+
 ## 5.44.0 - 2018-06-27
 * [#539](https://github.com/stripe/stripe-java/pull/539) Add `customerReference` and `shippingFromZip` properties on `ChargeLevel3` model
 
