@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.46.0 - 2018-06-29
+* [#543](https://github.com/stripe/stripe-java/pull/543) Add support for payment intents
+
 ## 5.45.0 - 2018-06-28
 * [#542](https://github.com/stripe/stripe-java/pull/542) Fix `account.application.*` event data deserialization issue
 
