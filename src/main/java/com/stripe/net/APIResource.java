@@ -30,6 +30,8 @@ import com.stripe.model.FeeRefundCollectionDeserializer;
 import com.stripe.model.HasId;
 import com.stripe.model.OrderItem;
 import com.stripe.model.OrderItemDeserializer;
+import com.stripe.model.PaymentIntentSourceAction;
+import com.stripe.model.PaymentIntentSourceActionDeserializer;
 import com.stripe.model.Source;
 import com.stripe.model.SourceMandateNotification;
 import com.stripe.model.SourceTransaction;
@@ -62,6 +64,8 @@ public abstract class APIResource extends StripeObject {
       .registerTypeAdapter(ExpandableField.class, new ExpandableFieldDeserializer())
       .registerTypeAdapter(FeeRefundCollection.class, new FeeRefundCollectionDeserializer())
       .registerTypeAdapter(OrderItem.class, new OrderItemDeserializer())
+      .registerTypeAdapter(PaymentIntentSourceAction.class,
+          new PaymentIntentSourceActionDeserializer())
       .registerTypeAdapter(Source.class, new SourceTypeDataDeserializer<Source>())
       .registerTypeAdapter(SourceMandateNotification.class,
           new SourceTypeDataDeserializer<SourceMandateNotification>())
