@@ -131,10 +131,6 @@ public class RequestOptions {
       return apiKey;
     }
 
-    public String getClientId() {
-      return clientId;
-    }
-
     public RequestOptionsBuilder setApiKey(String apiKey) {
       this.apiKey = normalizeApiKey(apiKey);
       return this;
@@ -142,6 +138,20 @@ public class RequestOptions {
 
     public RequestOptionsBuilder clearApiKey() {
       this.apiKey = null;
+      return this;
+    }
+
+    public String getClientId() {
+      return clientId;
+    }
+
+    public RequestOptionsBuilder setClientId(String clientId) {
+      this.clientId = normalizeClientId(clientId);
+      return this;
+    }
+
+    public RequestOptionsBuilder clearClientId() {
+      this.clientId = null;
       return this;
     }
 

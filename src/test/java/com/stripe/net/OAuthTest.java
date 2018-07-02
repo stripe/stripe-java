@@ -44,7 +44,9 @@ public class OAuthTest extends BaseStripeTest {
     stripeUserParams.put("country", "US");
     urlParams.put("stripe_user", stripeUserParams);
 
-    final String urlStr = OAuth.authorizeURL(urlParams, null);
+    RequestOptions requestOptions = RequestOptions.builder().setClientId("ca_456").build();
+
+    final String urlStr = OAuth.authorizeURL(urlParams, requestOptions);
 
     final URL url = new URL(urlStr);
     final Map<String, String> queryPairs = splitQuery(url.getQuery());
@@ -53,7 +55,7 @@ public class OAuthTest extends BaseStripeTest {
     assertEquals("connect.stripe.com", url.getHost());
     assertEquals("/oauth/authorize", url.getPath());
 
-    assertEquals("ca_123", queryPairs.get("client_id"));
+    assertEquals("ca_456", queryPairs.get("client_id"));
     assertEquals("read_write", queryPairs.get("scope"));
     assertEquals("test@example.com", queryPairs.get("stripe_user[email]"));
     assertEquals("https://example.com/profile/test", queryPairs.get("stripe_user[url]"));
