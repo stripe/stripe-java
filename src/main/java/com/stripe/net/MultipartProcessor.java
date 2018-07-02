@@ -3,6 +3,7 @@ package com.stripe.net;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
@@ -53,26 +54,38 @@ public class MultipartProcessor {
   }
 
   /**
-   * Adds a file field to the multipart message.
+   * Adds a file field to the multipart message, but takes in an InputStream instead of
+   * just a file to read bytes from.
    *
-   * @param name field name
-   * @param file File instance
+   * @param name          Field name
+   * @param fileName      Name of the "file" being uploaded.
+   * @param inputStream   Stream of bytes to use in place of a file.
+   * @throws IOException  Thrown when writing / reading from streams fails.
    */
-  public void addFileField(String name, File file) throws IOException {
-    String fileName = file.getName();
-    writer.append("--" + boundary).append(LINE_BREAK);
-    writer.append(
-        "Content-Disposition: form-data; name=\"" + name
-            + "\"; filename=\"" + fileName + "\"").append(
-        LINE_BREAK);
+  public void addFileField(String name, String fileName, InputStream inputStream) 
+      throws IOException {
+    writer.append("--").append(boundary).append(LINE_BREAK);
+    writer.append("Content-Disposition: form-data; name=\"").append(name)
+            .append("\"; filename=\"").append(fileName).append("\"").append(LINE_BREAK);
 
     String probableContentType = URLConnection.guessContentTypeFromName(fileName);
-    writer.append("Content-Type: " + probableContentType).append(LINE_BREAK);
+    writer.append("Content-Type: ").append(probableContentType).append(LINE_BREAK);
     writer.append("Content-Transfer-Encoding: binary").append(LINE_BREAK);
     writer.append(LINE_BREAK);
     writer.flush();
 
-    FileInputStream inputStream = new FileInputStream(file);
+    streamToOutput(inputStream);
+
+    writer.append(LINE_BREAK);
+    writer.flush();
+  }
+
+  /**
+   * Utility method to read all the bytes from an InputStream into the outputStream.
+   * @param inputStream   Stream of bytes to read from.
+   * @throws IOException  Thrown on errors reading / writing.
+   */
+  private void streamToOutput(InputStream inputStream) throws IOException {
     try {
       byte[] buffer = new byte[4096];
       int bytesRead = -1;
@@ -83,9 +96,6 @@ public class MultipartProcessor {
     } finally {
       inputStream.close();
     }
-
-    writer.append(LINE_BREAK);
-    writer.flush();
   }
 
   /**
