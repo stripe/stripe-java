@@ -41,7 +41,7 @@ public class PaymentIntent extends ApiResource implements MetadataStore<PaymentI
   ShippingDetails shipping;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<ExternalAccount> source;
   String statementDescriptor;
-  PaymentIntentTransferData transferData;
+  TransferData transferData;
   String status;
 
   // <editor-fold desc="application">
@@ -274,4 +274,11 @@ public class PaymentIntent extends ApiResource implements MetadataStore<PaymentI
         options);
   }
   // </editor-fold>
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TransferData extends StripeObject {
+    Long amount;
+  }
 }

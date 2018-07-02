@@ -8,9 +8,9 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public final class ShippingDetails extends StripeObject {
-  protected Address address;
-  protected String carrier;
-  protected String name;
-  protected String phone;
-  protected String trackingNumber;
+  Address address;
+  String carrier;
+  String name;
+  String phone;
+  String trackingNumber;
 }

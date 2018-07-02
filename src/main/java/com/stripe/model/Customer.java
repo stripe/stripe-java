@@ -215,4 +215,12 @@ public class Customer extends ApiResource implements MetadataStore<Customer>, Ha
         Customer.class, options);
   }
   // </editor-fold>
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class NextRecurringCharge extends StripeObject {
+    Long amount;
+    String date;
+  }
 }

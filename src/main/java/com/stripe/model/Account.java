@@ -24,7 +24,7 @@ public class Account extends ApiResource implements HasId, MetadataStore<Account
   Boolean chargesEnabled;
   String country;
   Boolean debitNegativeBalances;
-  AccountDeclineChargeOn declineChargeOn;
+  DeclineChargeOn declineChargeOn;
   String defaultCurrency;
   Boolean detailsSubmitted;
   String displayName;
@@ -35,15 +35,15 @@ public class Account extends ApiResource implements HasId, MetadataStore<Account
   LegalEntity legalEntity;
   @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   Boolean payoutsEnabled;
-  AccountPayoutSchedule payoutSchedule;
+  PayoutSchedule payoutSchedule;
   String productDescription;
   String statementDescriptor;
   String supportEmail;
   String supportPhone;
   String supportUrl;
   String timezone;
-  AccountTosAcceptance tosAcceptance;
-  AccountTransferSchedule transferSchedule;
+  TosAcceptance tosAcceptance;
+  TransferSchedule transferSchedule;
   Boolean transfersEnabled;
   String type;
   Verification verification;
@@ -222,11 +222,9 @@ public class Account extends ApiResource implements HasId, MetadataStore<Account
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Verification extends StripeObject {
-    Boolean contacted;
-    String disabledReason;
-    Long dueBy;
-    List<String> fieldsNeeded;
+  public static class DeclineChargeOn extends StripeObject {
+    Boolean avsFailure;
+    Boolean cvcFailure;
   }
 
   @Getter
@@ -235,5 +233,44 @@ public class Account extends ApiResource implements HasId, MetadataStore<Account
   public static class Keys extends StripeObject {
     String publishable;
     String secret;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PayoutSchedule extends StripeObject {
+    Long delayDays;
+    String interval;
+    Long monthlyAnchor;
+    String weeklyAnchor;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TosAcceptance extends StripeObject {
+    Long date;
+    String ip;
+    String userAgent;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TransferSchedule extends StripeObject {
+    Long delayDays;
+    String interval;
+    Long monthlyAnchor;
+    String weeklyAnchor;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Verification extends StripeObject {
+    Boolean contacted;
+    String disabledReason;
+    Long dueBy;
+    List<String> fieldsNeeded;
   }
 }

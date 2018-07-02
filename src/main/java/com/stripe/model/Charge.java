@@ -5,6 +5,7 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import lombok.AccessLevel;
@@ -18,8 +19,7 @@ import lombok.Setter;
 public class Charge extends ApiResource implements MetadataStore<Charge>, HasId {
   public static final String FRAUD_DETAILS = "fraud_details";
 
-  @Getter(onMethod = @__({@Override}))
-  String id;
+  @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long amount;
   Long amountRefunded;
@@ -40,12 +40,12 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
   String failureMessage;
   FraudDetails fraudDetails;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Invoice> invoice;
-  ChargeLevel3 level3;
+  Level3 level3;
   Boolean livemode;
   @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Account> onBehalfOf;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Order> order;
-  ChargeOutcome outcome;
+  Outcome outcome;
   Boolean paid;
   String receiptEmail;
   String receiptNumber;
@@ -493,4 +493,104 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
         options);
   }
   // </editor-fold>
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AlternateStatementDescriptors extends StripeObject {
+    String kana;
+    String kanji;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class FraudDetails extends StripeObject {
+    public static final String USER_REPORT = "user_report";
+
+    String userReport;
+    String stripeReport;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Level3 extends StripeObject {
+    String customerReference;
+    List<LineItem> lineItems;
+    String merchantReference;
+    String shippingAddressZip;
+    String shippingFromZip;
+    Long shippingAmount;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class LineItem extends StripeObject {
+      Long discountAmount;
+      String productCode;
+      String productDescription;
+      Long quantity;
+      Long taxAmount;
+      Long unitCost;
+    }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Outcome extends ApiResource {
+    String networkStatus;
+    String reason;
+    String riskLevel;
+    @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Rule> rule;
+    String sellerMessage;
+    String type;
+
+    // <editor-fold desc="rule">
+    /**
+     * Returns the {@code rule} object, if expanded. If not expanded, use {@link #getRuleId()} to
+     * get the ID.
+     *
+     * @return the {@code rule} ID
+     * @deprecated In recent API versions, this attribute is no longer automatically expanded.
+     *     Prefer using the {@link #getRuleId()} and {@link #getRuleObject()} methods instead.
+     * @see <a href="https://stripe.com/docs/upgrades#2017-02-14">API version 2017-02-14</a>
+     */
+    @Deprecated
+    public Rule getRule() {
+      return (this.rule != null) ? this.rule.getExpanded() : null;
+    }
+
+    @Deprecated
+    public void setRule(Rule rule) {
+      this.rule = new ExpandableField<Rule>(rule.getId(), rule);
+    }
+
+    public String getRuleId() {
+      return (this.rule != null) ? this.rule.getId() : null;
+    }
+
+    public void setRuleId(String ruleId) {
+      this.rule = setExpandableFieldId(ruleId, this.rule);
+    }
+
+    public Rule getRuleObject() {
+      return (this.rule != null) ? this.rule.getExpanded() : null;
+    }
+
+    public void setRuleObject(Rule rule) {
+      this.rule = new ExpandableField<Rule>(rule.getId(), rule);
+    }
+    // </editor-fold>
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Rule extends StripeObject implements HasId {
+      @Getter(onMethod = @__({@Override})) String id;
+      String action;
+      String predicate;
+    }
+  }
 }
