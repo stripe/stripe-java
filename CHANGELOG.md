@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.47.0 - 2018-07-02
+* [#546](https://github.com/stripe/stripe-java/pull/546) Add `setClientId()` to `RequestOptionsBuilder`
+
 ## 5.46.0 - 2018-06-29
 * [#543](https://github.com/stripe/stripe-java/pull/543) Add support for payment intents
 
