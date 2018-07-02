@@ -29,9 +29,9 @@ public class Plan extends ApiResource implements MetadataStore<Plan>, HasId {
   @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   String nickname;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Product> product;
-  List<PlanTier> tiers;
+  List<Tier> tiers;
   String tiersMode;
-  PlanTransformUsage transformUsage;
+  TransformUsage transformUsage;
   String usageType;
 
   /**
@@ -179,4 +179,20 @@ public class Plan extends ApiResource implements MetadataStore<Plan>, HasId {
         options);
   }
   // </editor-fold>
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Tier extends StripeObject {
+    Long amount;
+    Long upTo;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TransformUsage extends StripeObject {
+    Long divideBy;
+    String round;
+  }
 }

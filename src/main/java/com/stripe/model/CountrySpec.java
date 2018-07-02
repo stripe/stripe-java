@@ -58,4 +58,20 @@ public class CountrySpec extends ApiResource implements HasId {
         CountrySpec.class, options);
   }
   // </editor-fold>
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class VerificationFields extends StripeObject {
+    Details individual;
+    Details company;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Details extends StripeObject {
+      List<String> additional;
+      List<String> minimum;
+    }
+  }
 }

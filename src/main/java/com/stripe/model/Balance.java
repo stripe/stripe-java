@@ -34,4 +34,23 @@ public class Balance extends ApiResource {
     return request(RequestMethod.GET, singleClassUrl(Balance.class), null, Balance.class, options);
   }
   // </editor-fold>
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Money extends StripeObject {
+    Long amount;
+    String currency;
+    SourceTypes sourceTypes;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SourceTypes extends StripeObject {
+      Long alipayAccount;
+      Long bankAccount;
+      Long bitcoinReceiver;
+      Long card;
+    }
+  }
 }

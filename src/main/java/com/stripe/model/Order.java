@@ -187,4 +187,24 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
         options);
   }
   // </editor-fold>
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ShippingMethod extends StripeObject {
+    String id;
+    Long amount;
+    String currency;
+    String description;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class StatusTransitions extends StripeObject {
+    Long canceled;
+    Long fulfiled;
+    Long paid;
+    Long returned;
+  }
 }

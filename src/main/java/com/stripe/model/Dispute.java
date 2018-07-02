@@ -155,4 +155,12 @@ public class Dispute extends ApiResource implements HasId {
         params, Dispute.class, options);
   }
   // </editor-fold>
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class EvidenceDetails extends StripeObject {
+    Long dueBy;
+    Long submissionCount;
+  }
 }

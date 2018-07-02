@@ -23,6 +23,7 @@ public class IssuerFraudRecord extends ApiResource implements HasId {
   Boolean livemode;
   Long postDate;
 
+  // <editor-fold desc="charge">
   public String getCharge() {
     return (this.charge != null) ? this.charge.getId() : null;
   }
@@ -38,6 +39,7 @@ public class IssuerFraudRecord extends ApiResource implements HasId {
   public void setChargeObject(Charge c) {
     this.charge = new ExpandableField<Charge>(c.getId(), c);
   }
+  // </editor-fold>
 
   // <editor-fold desc="list">
   public static IssuerFraudRecordCollection list(Map<String, Object> params)
