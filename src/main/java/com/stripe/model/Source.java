@@ -16,14 +16,14 @@ import lombok.Setter;
 public class Source extends ExternalAccount implements HasSourceTypeData {
   Long amount;
   String clientSecret;
-  SourceCodeVerificationFlow codeVerification;
+  CodeVerificationFlow codeVerification;
   Long created;
   String currency;
   String flow;
   Boolean livemode;
-  SourceOwner owner;
-  SourceReceiverFlow receiver;
-  SourceRedirectFlow redirect;
+  Owner owner;
+  ReceiverFlow receiver;
+  RedirectFlow redirect;
   String statementDescriptor;
   String status;
   String type;
@@ -173,4 +173,48 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
         params, Source.class, options);
   }
   // </editor-fold>
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CodeVerificationFlow extends StripeObject {
+    Long attemptsRemaining;
+    String status;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Owner extends StripeObject {
+    Address address;
+    Address verifiedAddress;
+    String name;
+    String verifiedName;
+    String phone;
+    String verifiedPhone;
+    String email;
+    String verifiedEmail;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ReceiverFlow extends StripeObject {
+    String refundAttributesStatus;
+    String refundAttributesMethod;
+    Long amountReceived;
+    Long amountReturned;
+    Long amountCharged;
+    String address;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class RedirectFlow extends StripeObject {
+    String failureReason;
+    String returnUrl;
+    String status;
+    String url;
+  }
 }

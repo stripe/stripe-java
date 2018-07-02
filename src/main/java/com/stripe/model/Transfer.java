@@ -303,4 +303,21 @@ public class Transfer extends ApiResource implements MetadataStore<Transfer>, Ha
         Transfer.class, options);
   }
   // </editor-fold>
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Summary extends StripeObject {
+    Long adjustmentCount;
+    Long adjustmentGross;
+    Long chargeCount;
+    Long chargeFees;
+    Long chargeGross;
+    Long net;
+    Long refundCount;
+    Long refundFees;
+    Long refundGross;
+    Long validationCount;
+    Long validationFees;
+  }
 }

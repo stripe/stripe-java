@@ -21,7 +21,7 @@ public class EphemeralKey extends ApiResource implements HasId {
   Long expires;
   Boolean livemode;
   String secret;
-  List<EphemeralKeyAssociatedObject> associatedObjects;
+  List<AssociatedObject> associatedObjects;
   transient String rawJson;
 
   // <editor-fold desc="create">
@@ -60,4 +60,12 @@ public class EphemeralKey extends ApiResource implements HasId {
         EphemeralKey.class, options);
   }
   // </editor-fold>
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AssociatedObject extends StripeObject implements HasId {
+    @Getter(onMethod = @__({@Override})) String id;
+    String type;
+  }
 }

@@ -100,4 +100,15 @@ public class BalanceTransaction extends ApiResource implements HasId {
     return request(RequestMethod.GET, url, null, BalanceTransaction.class, options);
   }
   // </editor-fold>
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Fee extends ApiResource {
+    Long amount;
+    String application;
+    String currency;
+    String description;
+    String type;
+  }
 }

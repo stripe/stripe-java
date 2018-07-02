@@ -141,4 +141,13 @@ public class Sku extends ApiResource implements HasId, MetadataStore<Sku> {
     return request(RequestMethod.POST, instanceUrl(Sku.class, this.id), params, Sku.class, options);
   }
   // </editor-fold>
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Inventory {
+    String type;
+    Long quantity;
+    String value;
+  }
 }
