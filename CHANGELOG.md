@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.48.0 - 2018-07-03
+* [#544](https://github.com/stripe/stripe-java/pull/544) Add support for streams when uploading files
+
 ## 5.47.0 - 2018-07-02
 * [#546](https://github.com/stripe/stripe-java/pull/546) Add `setClientId()` to `RequestOptionsBuilder`
 
