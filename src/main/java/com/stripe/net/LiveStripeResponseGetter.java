@@ -17,6 +17,7 @@ import com.stripe.exception.oauth.UnsupportedResponseTypeException;
 import com.stripe.model.StripeObject;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -642,7 +643,17 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
                   "Must have read permissions on file for key "
                       + key + ".", null, null, null, 0, null);
             }
-            multipartProcessor.addFileField(key, currentFile);
+            multipartProcessor.addFileField(key, currentFile.getName(), 
+                new FileInputStream(currentFile));
+          } else if (value instanceof InputStream) {
+            InputStream inputStream = (InputStream) value;
+            if (inputStream.available() == 0) {
+              throw new InvalidRequestException(
+                "Must have available bytes to read on InputStream for key "
+                  + key + ".", null, null, null, 0, null
+              );
+            }
+            multipartProcessor.addFileField(key, "blob", inputStream);
           } else {
             // We only allow a single level of nesting for params
             // for multipart

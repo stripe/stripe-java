@@ -9,6 +9,7 @@ import com.stripe.model.FileUploadCollection;
 import com.stripe.net.APIResource;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
@@ -33,6 +34,24 @@ public class FileUploadTest extends BaseStripeTest {
         params,
         APIResource.RequestType.MULTIPART,
         null
+    );
+  }
+
+  @Test
+  public void testStreamCreate() throws IOException, StripeException {
+    final Map<String, Object> params = new HashMap<>();
+    params.put("purpose", "dispute_evidence");
+    params.put("file", new FileInputStream(getClass().getResource("/test.png").getFile()));
+
+    final FileUpload fileUpload = FileUpload.create(params);
+
+    assertNotNull(fileUpload);
+    verifyRequest(
+            APIResource.RequestMethod.POST,
+            "/v1/files",
+            params,
+            APIResource.RequestType.MULTIPART,
+            null
     );
   }
 
