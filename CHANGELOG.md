@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.49.0 - 2018-07-06
+* [#548](https://github.com/stripe/stripe-java/pull/548) Add `subscriptionItem` property to `InvoiceItem` and `InvoiceLineItem`
+
 ## 5.48.0 - 2018-07-03
 * [#544](https://github.com/stripe/stripe-java/pull/544) Add support for streams when uploading files
 
