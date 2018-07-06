@@ -35,6 +35,8 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
   Boolean proration;
   Integer quantity;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Subscription> subscription;
+  String subscriptionItem;
+  Long unitAmount;
 
   // <editor-fold desc="customer">
   public String getCustomer() {

@@ -23,5 +23,6 @@ public class InvoiceLineItem extends StripeObject implements HasId {
   Boolean proration;
   Integer quantity;
   String subscription;
+  String subscriptionItem;
   String type;
 }
