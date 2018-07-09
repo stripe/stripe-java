@@ -17,7 +17,13 @@ import java.util.Map;
 import org.junit.Test;
 
 public class PaymentIntentTest extends BaseStripeTest {
-  public static final String PAYMENT_INTENT_ID = "po_123";
+  public static final String PAYMENT_INTENT_ID = "pi_123";
+
+  private PaymentIntent getPaymentIntentFixture() throws StripeException {
+    final PaymentIntent paymentIntent = PaymentIntent.retrieve(PAYMENT_INTENT_ID);
+    resetNetworkSpy();
+    return paymentIntent;
+  }
 
   @Test
   public void testCreate() throws  IOException, StripeException {
@@ -28,14 +34,6 @@ public class PaymentIntentTest extends BaseStripeTest {
     params.put("allowed_source_types", allowedSourcetypes);
     params.put("amount", 1234);
     params.put("currency", "usd");
-
-    stubRequest(
-        APIResource.RequestMethod.POST,
-        String.format("/v1/payment_intents"),
-        params,
-        PaymentIntent.class,
-        getResourceAsString("/api_fixtures/payment_intent.json")
-    );
 
     final PaymentIntent paymentIntent = PaymentIntent.create(params);
 
@@ -49,14 +47,6 @@ public class PaymentIntentTest extends BaseStripeTest {
 
   @Test
   public void testRetrieve() throws  IOException, StripeException {
-    stubRequest(
-        APIResource.RequestMethod.GET,
-        String.format("/v1/payment_intents/%s", PAYMENT_INTENT_ID),
-        null,
-        PaymentIntent.class,
-        getResourceAsString("/api_fixtures/payment_intent.json")
-    );
-
     final PaymentIntent paymentIntent = PaymentIntent.retrieve(PAYMENT_INTENT_ID);
 
     assertNotNull(paymentIntent);
@@ -68,21 +58,12 @@ public class PaymentIntentTest extends BaseStripeTest {
 
   @Test
   public void testUpdate() throws  IOException, StripeException {
-    final PaymentIntent paymentIntent = APIResource.GSON.fromJson(
-        getResourceAsString("/api_fixtures/payment_intent.json"), PaymentIntent.class);
+    final PaymentIntent paymentIntent = getPaymentIntentFixture();
 
     final Map<String, String> metadata = new HashMap<String, String>();
     metadata.put("key", "value");
     final Map<String, Object> params = new HashMap<String, Object>();
     params.put("metadata", metadata);
-
-    stubRequest(
-        APIResource.RequestMethod.POST,
-        String.format("/v1/payment_intents/%s", paymentIntent.getId()),
-        params,
-        PaymentIntent.class,
-        getResourceAsString("/api_fixtures/payment_intent.json")
-    );
 
     final PaymentIntent updatedPaymentIntent = paymentIntent.update(params);
 
@@ -96,23 +77,8 @@ public class PaymentIntentTest extends BaseStripeTest {
 
   @Test
   public void testList() throws  IOException, StripeException {
-    final PaymentIntent stubbedPaymentIntent = APIResource.GSON.fromJson(
-        getResourceAsString("/api_fixtures/payment_intent.json"), PaymentIntent.class);
-    final PaymentIntentCollection stubbedCollection = new PaymentIntentCollection();
-    final List<PaymentIntent> stubbedData = new ArrayList<PaymentIntent>();
-    stubbedData.add(stubbedPaymentIntent);
-    stubbedCollection.setData(stubbedData);
-
     final Map<String, Object> params = new HashMap<String, Object>();
     params.put("limit", 1);
-
-    stubRequest(
-        APIResource.RequestMethod.GET,
-        String.format("/v1/payment_intents"),
-        params,
-        PaymentIntentCollection.class,
-        stubbedCollection.toJson()
-    );
 
     final PaymentIntentCollection paymentIntents = PaymentIntent.list(params);
 
@@ -126,17 +92,7 @@ public class PaymentIntentTest extends BaseStripeTest {
 
   @Test
   public void testCancel() throws  IOException, StripeException {
-    final PaymentIntent paymentIntent = APIResource.GSON.fromJson(
-        getResourceAsString("/api_fixtures/payment_intent.json"), PaymentIntent.class);
-
-    stubRequest(
-        APIResource.RequestMethod.POST,
-        String.format("/v1/payment_intents/%s/cancel", paymentIntent.getId()),
-        null,
-        PaymentIntent.class,
-        getResourceAsString("/api_fixtures/payment_intent.json")
-    );
-
+    final PaymentIntent paymentIntent = getPaymentIntentFixture();
     final PaymentIntent cancelledPaymentIntent = paymentIntent.cancel();
 
     assertNotNull(cancelledPaymentIntent);
@@ -148,17 +104,7 @@ public class PaymentIntentTest extends BaseStripeTest {
 
   @Test
   public void testCapture() throws  IOException, StripeException {
-    final PaymentIntent paymentIntent = APIResource.GSON.fromJson(
-        getResourceAsString("/api_fixtures/payment_intent.json"), PaymentIntent.class);
-
-    stubRequest(
-        APIResource.RequestMethod.POST,
-        String.format("/v1/payment_intents/%s/capture", paymentIntent.getId()),
-        null,
-        PaymentIntent.class,
-        getResourceAsString("/api_fixtures/payment_intent.json")
-    );
-
+    final PaymentIntent paymentIntent = getPaymentIntentFixture();
     final PaymentIntent captureledPaymentIntent = paymentIntent.capture();
 
     assertNotNull(captureledPaymentIntent);
@@ -170,17 +116,7 @@ public class PaymentIntentTest extends BaseStripeTest {
 
   @Test
   public void testConfirm() throws  IOException, StripeException {
-    final PaymentIntent paymentIntent = APIResource.GSON.fromJson(
-        getResourceAsString("/api_fixtures/payment_intent.json"), PaymentIntent.class);
-
-    stubRequest(
-        APIResource.RequestMethod.POST,
-        String.format("/v1/payment_intents/%s/confirm", paymentIntent.getId()),
-        null,
-        PaymentIntent.class,
-        getResourceAsString("/api_fixtures/payment_intent.json")
-    );
-
+    final PaymentIntent paymentIntent = getPaymentIntentFixture();
     final PaymentIntent confirmledPaymentIntent = paymentIntent.confirm();
 
     assertNotNull(confirmledPaymentIntent);

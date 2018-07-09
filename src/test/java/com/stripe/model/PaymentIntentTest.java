@@ -12,6 +12,7 @@ import org.junit.Test;
 public class PaymentIntentTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
+    // Keep the fixture to have `action` deserialize properly
     final PaymentIntent resource = APIResource.GSON.fromJson(
         getResourceAsString("/api_fixtures/payment_intent.json"), PaymentIntent.class);
     assertNotNull(resource);
@@ -28,9 +29,14 @@ public class PaymentIntentTest extends BaseStripeTest {
 
   @Test
   public void testDeserializeWithExpansions() throws Exception {
-    final PaymentIntent resource = APIResource.GSON.fromJson(
-        getResourceAsString("/api_fixtures/payment_intent_with_expansions.json"),
-        PaymentIntent.class);
+    final String[] expansions = {
+      "application",
+      "customer",
+      "on_behalf_of",
+      "source",
+    };
+    final String data = getFixture("/v1/payment_intents/pi_123", expansions);
+    final PaymentIntent resource = APIResource.GSON.fromJson(data, PaymentIntent.class);
 
     assertNotNull(resource);
     assertNotNull(resource.getId());
