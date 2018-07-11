@@ -27,7 +27,7 @@ public class PaymentIntent extends APIResource implements MetadataStore<PaymentI
   Long amountCapturable;
   Long amountReceived;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Application> application;
-  Long applicationFee;
+  Long applicationFeeAmount;
   Long canceledAt;
   String captureMethod;
   ChargeCollection charges;
