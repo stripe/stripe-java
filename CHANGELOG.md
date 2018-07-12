@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.50.0 - 2018-07-11
+* [#552](https://github.com/stripe/stripe-java/pull/552) Rename `ApplicationFee` to `ApplicationFeeAmount` on `PaymentIntent`
+
 ## 5.49.0 - 2018-07-06
 * [#548](https://github.com/stripe/stripe-java/pull/548) Add `subscriptionItem` property to `InvoiceItem` and `InvoiceLineItem`
 
