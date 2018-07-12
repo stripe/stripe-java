@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.51.0 - 2018-07-12
+* [#551](https://github.com/stripe/stripe-java/pull/551) Add `autoAdvance` property to `Invoice`
+
 ## 5.50.0 - 2018-07-11
 * [#552](https://github.com/stripe/stripe-java/pull/552) Rename `ApplicationFee` to `ApplicationFeeAmount` on `PaymentIntent`
 
