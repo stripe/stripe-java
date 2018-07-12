@@ -29,6 +29,7 @@ public class Invoice extends APIResource implements MetadataStore<Invoice>, HasI
   Long applicationFee;
   Integer attemptCount;
   Boolean attempted;
+  Boolean autoAdvance;
   String billing;
   String billingReason;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Charge> charge;
