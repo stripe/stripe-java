@@ -33,6 +33,7 @@ public class Plan extends ApiResource implements MetadataStore<Plan>, HasId {
   String tiersMode;
   TransformUsage transformUsage;
   String usageType;
+  Boolean deleted;
 
   /**
    * The {@code name} attribute.
@@ -115,15 +116,15 @@ public class Plan extends ApiResource implements MetadataStore<Plan>, HasId {
   /**
    * Delete a plan.
    */
-  public DeletedPlan delete() throws StripeException {
+  public Plan delete() throws StripeException {
     return delete((RequestOptions) null);
   }
 
   /**
    * Delete a plan.
    */
-  public DeletedPlan delete(RequestOptions options) throws StripeException {
-    return request(RequestMethod.DELETE, instanceUrl(Plan.class, this.id), null, DeletedPlan.class,
+  public Plan delete(RequestOptions options) throws StripeException {
+    return request(RequestMethod.DELETE, instanceUrl(Plan.class, this.id), null, Plan.class,
         options);
   }
   // </editor-fold>

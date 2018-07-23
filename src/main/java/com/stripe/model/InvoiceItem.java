@@ -33,6 +33,7 @@ public class InvoiceItem extends ApiResource implements MetadataStore<InvoiceIte
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Subscription> subscription;
   String subscriptionItem;
   Long unitAmount;
+  Boolean deleted;
 
   // <editor-fold desc="customer">
   public String getCustomer() {
@@ -110,16 +111,16 @@ public class InvoiceItem extends ApiResource implements MetadataStore<InvoiceIte
   /**
    * Delete an invoice item.
    */
-  public DeletedInvoiceItem delete() throws StripeException {
+  public InvoiceItem delete() throws StripeException {
     return delete((RequestOptions) null);
   }
 
   /**
    * Delete an invoice item.
    */
-  public DeletedInvoiceItem delete(RequestOptions options) throws StripeException {
+  public InvoiceItem delete(RequestOptions options) throws StripeException {
     return request(RequestMethod.DELETE, instanceUrl(InvoiceItem.class, this.id), null,
-        DeletedInvoiceItem.class, options);
+        InvoiceItem.class, options);
   }
   // </editor-fold>
 

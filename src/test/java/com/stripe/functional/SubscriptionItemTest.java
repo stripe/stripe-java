@@ -1,10 +1,10 @@
 package com.stripe.functional;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
-import com.stripe.model.DeletedSubscriptionItem;
 import com.stripe.model.SubscriptionItem;
 import com.stripe.model.SubscriptionItemCollection;
 import com.stripe.net.ApiResource;
@@ -74,9 +74,10 @@ public class SubscriptionItemTest extends BaseStripeTest {
   public void testDelete() throws StripeException {
     final SubscriptionItem subscriptionItem = getItemFixture();
 
-    final DeletedSubscriptionItem deletedSubscriptionItem = subscriptionItem.delete();
+    final SubscriptionItem deletedSubscriptionItem = subscriptionItem.delete();
 
     assertNotNull(deletedSubscriptionItem);
+    assertTrue(deletedSubscriptionItem.getDeleted());
     verifyRequest(
         ApiResource.RequestMethod.DELETE,
         String.format("/v1/subscription_items/%s", subscriptionItem.getId())

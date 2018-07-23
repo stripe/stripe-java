@@ -123,16 +123,16 @@ public class Customer extends ApiResource implements MetadataStore<Customer>, Ha
   /**
    * Delete a customer.
    */
-  public DeletedCustomer delete() throws StripeException {
+  public Customer delete() throws StripeException {
     return delete((RequestOptions) null);
   }
 
   /**
    * Delete a customer.
    */
-  public DeletedCustomer delete(RequestOptions options) throws StripeException {
+  public Customer delete(RequestOptions options) throws StripeException {
     return request(RequestMethod.DELETE, instanceUrl(Customer.class, this.id), null,
-        DeletedCustomer.class, options);
+        Customer.class, options);
   }
   // </editor-fold>
 

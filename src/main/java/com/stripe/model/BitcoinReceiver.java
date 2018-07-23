@@ -34,6 +34,7 @@ public class BitcoinReceiver extends ExternalAccount {
   BitcoinTransactionCollection transactions;
   Boolean uncapturedFunds;
   Boolean usedForPayment;
+  Boolean deleted;
 
   @Deprecated
   public static BitcoinReceiverCollection all(Map<String, Object> params) throws StripeException {
@@ -57,13 +58,13 @@ public class BitcoinReceiver extends ExternalAccount {
   }
 
   @Override
-  public DeletedBitcoinReceiver delete() throws StripeException {
+  public BitcoinReceiver delete() throws StripeException {
     return delete(null);
   }
 
   @Override
-  public DeletedBitcoinReceiver delete(RequestOptions options) throws StripeException {
-    return request(RequestMethod.DELETE, this.getInstanceUrl(), null, DeletedBitcoinReceiver.class,
+  public BitcoinReceiver delete(RequestOptions options) throws StripeException {
+    return request(RequestMethod.DELETE, this.getInstanceUrl(), null, BitcoinReceiver.class,
         options);
   }
 

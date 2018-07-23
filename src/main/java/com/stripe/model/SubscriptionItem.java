@@ -19,6 +19,7 @@ public class SubscriptionItem extends ApiResource implements HasId {
   Long created;
   Plan plan;
   Long quantity;
+  Boolean deleted;
 
   // <editor-fold desc="create">
   /**
@@ -42,31 +43,31 @@ public class SubscriptionItem extends ApiResource implements HasId {
   /**
    * Delete a subscription item.
    */
-  public DeletedSubscriptionItem delete() throws StripeException {
+  public SubscriptionItem delete() throws StripeException {
     return delete(null, null);
   }
 
   /**
    * Delete a subscription item.
    */
-  public DeletedSubscriptionItem delete(RequestOptions options) throws StripeException {
+  public SubscriptionItem delete(RequestOptions options) throws StripeException {
     return delete(null, options);
   }
 
   /**
    * Delete a subscription item.
    */
-  public DeletedSubscriptionItem delete(Map<String, Object> params) throws StripeException {
+  public SubscriptionItem delete(Map<String, Object> params) throws StripeException {
     return delete(params, null);
   }
 
   /**
    * Delete a subscription item.
    */
-  public DeletedSubscriptionItem delete(Map<String, Object> params, RequestOptions options)
+  public SubscriptionItem delete(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     return request(RequestMethod.DELETE, instanceUrl(SubscriptionItem.class, id), params,
-        DeletedSubscriptionItem.class, options);
+        SubscriptionItem.class, options);
   }
   // </editor-fold>
 

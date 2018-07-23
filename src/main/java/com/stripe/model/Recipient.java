@@ -88,16 +88,16 @@ public class Recipient extends ApiResource implements MetadataStore<Recipient>, 
   /**
    * Delete a recipient.
    */
-  public DeletedRecipient delete() throws StripeException {
+  public Recipient delete() throws StripeException {
     return delete((RequestOptions) null);
   }
 
   /**
    * Delete a recipient.
    */
-  public DeletedRecipient delete(RequestOptions options) throws StripeException {
+  public Recipient delete(RequestOptions options) throws StripeException {
     return request(RequestMethod.DELETE, instanceUrl(Recipient.class, this.id), null,
-        DeletedRecipient.class, options);
+        Recipient.class, options);
   }
   // </editor-fold>
 

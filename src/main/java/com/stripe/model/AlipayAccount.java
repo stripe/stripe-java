@@ -22,15 +22,16 @@ public class AlipayAccount extends ExternalAccount {
   Boolean used;
   String username;
   String status;
+  Boolean deleted;
 
   @Override
-  public DeletedAlipayAccount delete() throws StripeException {
+  public AlipayAccount delete() throws StripeException {
     return delete(null);
   }
 
   @Override
-  public DeletedAlipayAccount delete(RequestOptions options) throws StripeException {
-    return request(RequestMethod.DELETE, this.getInstanceUrl(), null, DeletedAlipayAccount.class,
+  public AlipayAccount delete(RequestOptions options) throws StripeException {
+    return request(RequestMethod.DELETE, this.getInstanceUrl(), null, AlipayAccount.class,
         options);
   }
 

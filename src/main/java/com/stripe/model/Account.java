@@ -47,6 +47,7 @@ public class Account extends ApiResource implements HasId, MetadataStore<Account
   Boolean transfersEnabled;
   String type;
   Verification verification;
+  Boolean deleted;
 
   /**
    * The {@code managed} attribute.
@@ -88,31 +89,31 @@ public class Account extends ApiResource implements HasId, MetadataStore<Account
   /**
    * Delete an account.
    */
-  public DeletedAccount delete() throws StripeException {
+  public Account delete() throws StripeException {
     return delete(null, (RequestOptions) null);
   }
 
   /**
    * Delete an account.
    */
-  public DeletedAccount delete(RequestOptions options) throws StripeException {
+  public Account delete(RequestOptions options) throws StripeException {
     return delete(null, options);
   }
 
   /**
    * Delete an account.
    */
-  public DeletedAccount delete(Map<String, Object> params) throws StripeException {
+  public Account delete(Map<String, Object> params) throws StripeException {
     return delete(params, null);
   }
 
   /**
    * Delete an account.
    */
-  public DeletedAccount delete(Map<String, Object> params, RequestOptions options)
+  public Account delete(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     return request(RequestMethod.DELETE, instanceUrl(Account.class, this.id), params,
-        DeletedAccount.class, options);
+        Account.class, options);
   }
   // </editor-fold>
 

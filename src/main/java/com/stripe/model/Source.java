@@ -63,7 +63,7 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
    * customer object.
    */
   @Override
-  public DeletedExternalAccount delete(RequestOptions options) throws StripeException {
+  public Source delete(RequestOptions options) throws StripeException {
     throw new InvalidRequestException(
         "Source objects cannot be deleted. If you want to detach the source from a customer "
         + "object, use detach().",

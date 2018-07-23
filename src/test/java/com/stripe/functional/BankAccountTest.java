@@ -2,12 +2,12 @@ package com.stripe.functional;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.BankAccount;
 import com.stripe.model.Customer;
-import com.stripe.model.DeletedBankAccount;
 import com.stripe.model.ExternalAccount;
 import com.stripe.model.ExternalAccountCollection;
 import com.stripe.net.ApiResource;
@@ -134,10 +134,19 @@ public class BankAccountTest extends BaseStripeTest {
   public void testDelete() throws StripeException {
     final Customer customer = Customer.retrieve(CUSTOMER_ID);
     final BankAccount bankAccount = getBankAccountFixture(customer);
+    final String deleteBankAccountData = String.format(
+        "{\"id\": \"%s\", \"object\": \"bank_account\", \"deleted\": true}", bankAccount.getId()
+    );
 
-    final DeletedBankAccount deletedBankAccount = bankAccount.delete();
+    stubRequest(
+        ApiResource.RequestMethod.DELETE,
+        String.format("/v1/customers/%s/sources/%s", customer.getId(), bankAccount.getId()),
+        null, BankAccount.class, deleteBankAccountData
+    );
+    final BankAccount deletedBankAccount = bankAccount.delete();
 
     assertNotNull(deletedBankAccount);
+    assertTrue(deletedBankAccount.getDeleted());
     verifyRequest(
         ApiResource.RequestMethod.DELETE,
         String.format("/v1/customers/%s/sources/%s", customer.getId(), bankAccount.getId())

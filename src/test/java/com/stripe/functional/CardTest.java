@@ -2,12 +2,12 @@ package com.stripe.functional;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Card;
 import com.stripe.model.Customer;
-import com.stripe.model.DeletedCard;
 import com.stripe.model.ExternalAccount;
 import com.stripe.model.ExternalAccountCollection;
 import com.stripe.net.ApiResource;
@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class CardTest extends BaseStripeTest {
@@ -140,10 +141,19 @@ public class CardTest extends BaseStripeTest {
   public void testDelete() throws IOException, StripeException {
     final Customer customer = Customer.retrieve(CUSTOMER_ID);
     final Card card = getCardFixture(customer);
+    final String deleteCardData = String.format(
+        "{\"id\": \"%s\", \"object\": \"card\", \"deleted\": true}", card.getId()
+    );
 
-    final DeletedCard deletedCard = card.delete();
+    stubRequest(
+        ApiResource.RequestMethod.DELETE,
+        String.format("/v1/customers/%s/sources/%s", customer.getId(), card.getId()),
+        null, Card.class, deleteCardData
+    );
+    final Card deletedCard = card.delete();
 
     assertNotNull(deletedCard);
+    assertTrue(deletedCard.getDeleted());
     verifyRequest(
         ApiResource.RequestMethod.DELETE,
         String.format("/v1/customers/%s/sources/%s", customer.getId(), card.getId())

@@ -39,6 +39,7 @@ public class Card extends ExternalAccount {
   String status;
   ThreeDSecure threeDSecure;
   String tokenizationMethod;
+  Boolean deleted;
 
   // Please note that these field are for internal use only and are not typically returned
   // as part of standard API requests.
@@ -60,7 +61,7 @@ public class Card extends ExternalAccount {
    * Delete a card.
    */
   @Override
-  public DeletedCard delete() throws StripeException {
+  public Card delete() throws StripeException {
     return delete((RequestOptions) null);
   }
 
@@ -68,8 +69,8 @@ public class Card extends ExternalAccount {
    * Delete a card.
    */
   @Override
-  public DeletedCard delete(RequestOptions options) throws StripeException {
-    return request(RequestMethod.DELETE, this.getInstanceUrl(), null, DeletedCard.class, options);
+  public Card delete(RequestOptions options) throws StripeException {
+    return request(RequestMethod.DELETE, this.getInstanceUrl(), null, Card.class, options);
   }
   // </editor-fold>
 

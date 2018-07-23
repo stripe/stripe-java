@@ -1,12 +1,12 @@
 package com.stripe.functional;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.ApplePayDomain;
 import com.stripe.model.ApplePayDomainCollection;
-import com.stripe.model.DeletedApplePayDomain;
 import com.stripe.net.ApiResource;
 
 import java.util.HashMap;
@@ -68,9 +68,10 @@ public class ApplePayDomainTest extends BaseStripeTest {
   public void testDelete() throws StripeException {
     final ApplePayDomain domain = getDomainFixture();
 
-    final DeletedApplePayDomain deletedDomain = domain.delete();
+    final ApplePayDomain deletedDomain = domain.delete();
 
     assertNotNull(deletedDomain);
+    assertTrue(deletedDomain.getDeleted());
     verifyRequest(
         ApiResource.RequestMethod.DELETE,
         String.format("/v1/apple_pay/domains/%s", domain.getId())

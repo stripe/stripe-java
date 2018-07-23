@@ -1,12 +1,12 @@
 package com.stripe.functional;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Coupon;
 import com.stripe.model.CouponCollection;
-import com.stripe.model.DeletedCoupon;
 import com.stripe.net.ApiResource;
 
 import java.util.HashMap;
@@ -87,9 +87,10 @@ public class CouponTest extends BaseStripeTest {
   public void testDelete() throws StripeException {
     final Coupon coupon = getCouponFixture();
 
-    final DeletedCoupon deletedCoupon = coupon.delete();
+    final Coupon deletedCoupon = coupon.delete();
 
     assertNotNull(deletedCoupon);
+    assertTrue(deletedCoupon.getDeleted());
     verifyRequest(
         ApiResource.RequestMethod.DELETE,
         String.format("/v1/coupons/%s", coupon.getId())

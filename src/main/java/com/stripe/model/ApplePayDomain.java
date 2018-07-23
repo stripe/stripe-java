@@ -20,6 +20,7 @@ public class ApplePayDomain extends ApiResource implements HasId {
   Long created;
   String domainName;
   Boolean livemode;
+  Boolean deleted;
 
   // <editor-fold desc="create">
   /**
@@ -42,15 +43,15 @@ public class ApplePayDomain extends ApiResource implements HasId {
   /**
    * Delete an Apple Pay domain.
    */
-  public DeletedApplePayDomain delete() throws StripeException {
+  public ApplePayDomain delete() throws StripeException {
     return delete(null);
   }
 
   /**
    * Delete an Apple Pay domain.
    */
-  public DeletedApplePayDomain delete(RequestOptions options) throws StripeException {
-    return request(RequestMethod.DELETE, getInstanceUrl(id), null, DeletedApplePayDomain.class,
+  public ApplePayDomain delete(RequestOptions options) throws StripeException {
+    return request(RequestMethod.DELETE, getInstanceUrl(id), null, ApplePayDomain.class,
         options);
   }
   // </editor-fold>
