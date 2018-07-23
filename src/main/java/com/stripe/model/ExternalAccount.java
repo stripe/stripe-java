@@ -22,12 +22,12 @@ public class ExternalAccount extends ApiResource implements HasId, MetadataStore
   @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
 
   // <editor-fold desc="delete">
-  public DeletedExternalAccount delete() throws StripeException {
+  public ExternalAccount delete() throws StripeException {
     return delete(null);
   }
 
-  public DeletedExternalAccount delete(RequestOptions options) throws StripeException {
-    return request(RequestMethod.DELETE, this.getInstanceUrl(), null, DeletedExternalAccount.class,
+  public ExternalAccount delete(RequestOptions options) throws StripeException {
+    return request(RequestMethod.DELETE, this.getInstanceUrl(), null, ExternalAccount.class,
         options);
   }
   // </editor-fold>

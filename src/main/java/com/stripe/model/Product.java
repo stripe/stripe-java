@@ -34,6 +34,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   String type;
   Long updated;
   String url;
+  Boolean deleted;
 
   // <editor-fold desc="create">
   /**
@@ -56,16 +57,16 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   /**
    * Delete a product.
    */
-  public DeletedProduct delete() throws StripeException {
+  public Product delete() throws StripeException {
     return delete(null);
   }
 
   /**
    * Delete a product.
    */
-  public DeletedProduct delete(RequestOptions options) throws StripeException {
+  public Product delete(RequestOptions options) throws StripeException {
     return request(RequestMethod.DELETE, instanceUrl(Product.class, this.id), null,
-        DeletedProduct.class, options);
+        Product.class, options);
   }
   // </editor-fold>
 

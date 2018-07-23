@@ -24,13 +24,14 @@ public class BankAccount extends ExternalAccount {
   String routingNumber;
   String status;
   Boolean validated;
+  Boolean deleted;
 
   // <editor-fold desc="delete">
   /**
    * Delete a bank account.
    */
   @Override
-  public DeletedBankAccount delete() throws StripeException {
+  public BankAccount delete() throws StripeException {
     return delete(null);
   }
 
@@ -38,8 +39,8 @@ public class BankAccount extends ExternalAccount {
    * Delete a bank account.
    */
   @Override
-  public DeletedBankAccount delete(RequestOptions options) throws StripeException {
-    return request(RequestMethod.DELETE, this.getInstanceUrl(), null, DeletedBankAccount.class,
+  public BankAccount delete(RequestOptions options) throws StripeException {
+    return request(RequestMethod.DELETE, this.getInstanceUrl(), null, BankAccount.class,
         options);
   }
   // </editor-fold>

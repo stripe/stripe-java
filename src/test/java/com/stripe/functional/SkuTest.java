@@ -2,10 +2,10 @@ package com.stripe.functional;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
-import com.stripe.model.DeletedSku;
 import com.stripe.model.Sku;
 import com.stripe.model.SkuCollection;
 import com.stripe.net.ApiResource;
@@ -86,9 +86,10 @@ public class SkuTest extends BaseStripeTest {
   public void testDelete() throws StripeException {
     final Sku sku = getSkuFixture();
 
-    final DeletedSku deletedSku = sku.delete();
+    final Sku deletedSku = sku.delete();
 
     assertNotNull(deletedSku);
+    assertTrue(deletedSku.getDeleted());
     verifyRequest(
         ApiResource.RequestMethod.DELETE,
         String.format("/v1/skus/%s", sku.getId())

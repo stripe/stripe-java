@@ -1,0 +1,26 @@
+{
+  "amount": 1100,
+  "arrival_date": 1234567890,
+  "automatic": true,
+  "balance_transaction": "txn_123",
+  "created": 1234567890,
+  "currency": "usd",
+  "description": "STRIPE TRANSFER",
+  "destination": {
+    "id": "ba_123",
+    "object": "bank_account",
+    "deleted": true
+  },
+  "failure_balance_transaction": null,
+  "failure_code": null,
+  "failure_message": null,
+  "id": "po_123",
+  "livemode": false,
+  "metadata": {},
+  "method": "standard",
+  "object": "payout",
+  "source_type": "card",
+  "statement_descriptor": null,
+  "status": "paid",
+  "type": "bank_account"
+}

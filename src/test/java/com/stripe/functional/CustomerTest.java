@@ -1,12 +1,12 @@
 package com.stripe.functional;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
 import com.stripe.model.CustomerCollection;
-import com.stripe.model.DeletedCustomer;
 import com.stripe.net.ApiResource;
 
 import java.io.IOException;
@@ -88,9 +88,10 @@ public class CustomerTest extends BaseStripeTest {
   public void testDelete() throws StripeException {
     final Customer customer = getCustomerFixture();
 
-    final DeletedCustomer deletedCustomer = customer.delete();
+    final Customer deletedCustomer = customer.delete();
 
     assertNotNull(deletedCustomer);
+    assertTrue(deletedCustomer.getDeleted());
     verifyRequest(
         ApiResource.RequestMethod.DELETE,
         String.format("/v1/customers/%s", customer.getId())

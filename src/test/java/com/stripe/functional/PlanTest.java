@@ -1,10 +1,10 @@
 package com.stripe.functional;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
-import com.stripe.model.DeletedPlan;
 import com.stripe.model.Plan;
 import com.stripe.model.PlanCollection;
 import com.stripe.net.ApiResource;
@@ -74,9 +74,10 @@ public class PlanTest extends BaseStripeTest {
   public void testDelete() throws StripeException {
     final Plan plan = getPlanFixture();
 
-    final DeletedPlan deletedPlan = plan.delete();
+    final Plan deletedPlan = plan.delete();
 
     assertNotNull(deletedPlan);
+    assertTrue(deletedPlan.getDeleted());
     verifyRequest(
         ApiResource.RequestMethod.DELETE,
         String.format("/v1/plans/%s", plan.getId())

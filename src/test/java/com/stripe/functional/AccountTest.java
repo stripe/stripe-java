@@ -1,12 +1,12 @@
 package com.stripe.functional;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Account;
 import com.stripe.model.AccountCollection;
-import com.stripe.model.DeletedAccount;
 import com.stripe.model.ExternalAccount;
 import com.stripe.net.ApiResource;
 
@@ -99,9 +99,10 @@ public class AccountTest extends BaseStripeTest {
   public void testDelete() throws StripeException {
     final Account account = getAccountFixture();
 
-    final DeletedAccount deletedAccount = account.delete();
+    final Account deletedAccount = account.delete();
 
     assertNotNull(deletedAccount);
+    assertTrue(deletedAccount.getDeleted());
     verifyRequest(
         ApiResource.RequestMethod.DELETE,
         String.format("/v1/accounts/%s", account.getId())

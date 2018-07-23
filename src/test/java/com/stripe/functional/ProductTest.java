@@ -1,10 +1,10 @@
 package com.stripe.functional;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
-import com.stripe.model.DeletedProduct;
 import com.stripe.model.Product;
 import com.stripe.model.ProductCollection;
 import com.stripe.net.ApiResource;
@@ -88,9 +88,10 @@ public class ProductTest extends BaseStripeTest {
   public void testDelete() throws StripeException {
     final Product product = getProductFixture();
 
-    final DeletedProduct deletedProduct = product.delete();
+    final Product deletedProduct = product.delete();
 
     assertNotNull(deletedProduct);
+    assertTrue(deletedProduct.getDeleted());
     verifyRequest(
         ApiResource.RequestMethod.DELETE,
         String.format("/v1/products/%s", product.getId())

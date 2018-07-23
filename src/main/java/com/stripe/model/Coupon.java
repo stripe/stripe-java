@@ -29,6 +29,7 @@ public class Coupon extends ApiResource implements MetadataStore<Coupon>, HasId 
   Long redeemBy;
   Long timesRedeemed;
   Boolean valid;
+  Boolean deleted;
 
   // <editor-fold desc="create">
   /**
@@ -51,16 +52,16 @@ public class Coupon extends ApiResource implements MetadataStore<Coupon>, HasId 
   /**
    * Delete a coupon.
    */
-  public DeletedCoupon delete() throws StripeException {
+  public Coupon delete() throws StripeException {
     return delete((RequestOptions) null);
   }
 
   /**
    * Delete a coupon.
    */
-  public DeletedCoupon delete(RequestOptions options) throws StripeException {
+  public Coupon delete(RequestOptions options) throws StripeException {
     return request(RequestMethod.DELETE, instanceUrl(Coupon.class, this.id), null,
-        DeletedCoupon.class, options);
+        Coupon.class, options);
   }
   // </editor-fold>
 

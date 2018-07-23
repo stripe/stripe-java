@@ -29,6 +29,7 @@ public class Sku extends ApiResource implements HasId, MetadataStore<Sku> {
   Long price;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Product> product;
   Long updated;
+  Boolean deleted;
 
   // <editor-fold desc="product">
   public String getProduct() {
@@ -70,15 +71,15 @@ public class Sku extends ApiResource implements HasId, MetadataStore<Sku> {
   /**
    * Delete a SKU.
    */
-  public DeletedSku delete() throws StripeException {
+  public Sku delete() throws StripeException {
     return delete(null);
   }
 
   /**
    * Delete a SKU.
    */
-  public DeletedSku delete(RequestOptions options) throws StripeException {
-    return request(RequestMethod.DELETE, instanceUrl(Sku.class, this.id), null, DeletedSku.class,
+  public Sku delete(RequestOptions options) throws StripeException {
+    return request(RequestMethod.DELETE, instanceUrl(Sku.class, this.id), null, Sku.class,
         options);
   }
   // </editor-fold>
