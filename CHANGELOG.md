@@ -1,5 +1,9 @@
 # Changelog
 
+## 5.52.0 - 2018-07-26
+* [#556](https://github.com/stripe/stripe-java/pull/556) Add `riskScore` property to `ChargeOutcome`
+* [#557](https://github.com/stripe/stripe-java/pull/557) Add support for StripeIssuing
+
 ## 5.51.0 - 2018-07-12
 * [#551](https://github.com/stripe/stripe-java/pull/551) Add `autoAdvance` property to `Invoice`
 
