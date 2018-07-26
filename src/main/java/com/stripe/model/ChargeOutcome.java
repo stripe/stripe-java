@@ -14,6 +14,7 @@ public class ChargeOutcome extends APIResource {
   protected String networkStatus;
   protected String reason;
   protected String riskLevel;
+  protected Long riskScore;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
       protected ExpandableField<ChargeOutcomeRule> rule;
   protected String sellerMessage;
