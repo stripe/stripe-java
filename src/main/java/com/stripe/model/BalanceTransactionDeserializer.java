@@ -24,8 +24,11 @@ public class BalanceTransactionDeserializer implements JsonDeserializer<BalanceT
     sourceObjMap.put("charge", Charge.class);
     sourceObjMap.put("dispute", Dispute.class);
     sourceObjMap.put("fee_refund", FeeRefund.class);
+    sourceObjMap.put("issuing.authorization", com.stripe.model.issuing.Authorization.class);
+    sourceObjMap.put("issuing.transaction", com.stripe.model.issuing.Transaction.class);
     sourceObjMap.put("payout", Payout.class);
     sourceObjMap.put("refund", Refund.class);
+    sourceObjMap.put("topup", Topup.class);
     sourceObjMap.put("transfer", Transfer.class);
     sourceObjMap.put("transfer_reversal", Reversal.class);
   }

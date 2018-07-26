@@ -77,10 +77,16 @@ public abstract class APIResource extends StripeObject {
 
   private static String className(Class<?> clazz) {
     // Convert CamelCase to snake_case
-    final String className = clazz.getSimpleName()
+    String className = clazz.getSimpleName()
         .replaceAll("(.)([A-Z][a-z]+)", "$1_$2")
         .replaceAll("([a-z0-9])([A-Z])", "$1_$2")
         .toLowerCase();
+
+    // Issuing resources are in their own package. Until we can support adding OBJECT_NAME
+    // to all classes, we use this dirty trick to properly format the API endpoints
+    if (clazz.getName().contains("com.stripe.model.issuing.")) {
+      className = "issuing/" + className;
+    }
 
     // Handle special cases
     switch (className) {

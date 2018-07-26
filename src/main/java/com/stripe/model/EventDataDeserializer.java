@@ -44,9 +44,16 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
     objectMap.put("invoice", Invoice.class);
     objectMap.put("invoice_line_item", InvoiceLineItem.class);
     objectMap.put("invoiceitem", InvoiceItem.class);
+    objectMap.put("issuing.authorization", com.stripe.model.issuing.Authorization.class);
+    objectMap.put("issuing.card", com.stripe.model.issuing.Card.class);
+    objectMap.put("issuing.card_details", com.stripe.model.issuing.CardDetails.class);
+    objectMap.put("issuing.cardholder", com.stripe.model.issuing.Cardholder.class);
+    objectMap.put("issuing.dispute", com.stripe.model.issuing.Dispute.class);
+    objectMap.put("issuing.transaction", com.stripe.model.issuing.Transaction.class);
     objectMap.put("order", Order.class);
     objectMap.put("order_item", OrderItem.class);
     objectMap.put("order_return", OrderReturn.class);
+    objectMap.put("payment_intent", PaymentIntent.class);
     objectMap.put("payout", Payout.class);
     objectMap.put("plan", Plan.class);
     objectMap.put("product", Product.class);
