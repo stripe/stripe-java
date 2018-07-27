@@ -4,6 +4,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 import lombok.AccessLevel;
@@ -54,7 +55,7 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
   Long subscriptionProrationDate;
   Long subtotal;
   Long tax;
-  Double taxPercent;
+  BigDecimal taxPercent;
   Long total;
   Long webhooksDeliveredAt;
 
