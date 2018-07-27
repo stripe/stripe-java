@@ -4,6 +4,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 import lombok.AccessLevel;
@@ -17,7 +18,7 @@ import lombok.Setter;
 public class Subscription extends ApiResource implements MetadataStore<Subscription>, HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
-  Double applicationFeePercent;
+  BigDecimal applicationFeePercent;
   String billing;
   Long billingCycleAnchor;
   Boolean cancelAtPeriodEnd;
@@ -35,7 +36,7 @@ public class Subscription extends ApiResource implements MetadataStore<Subscript
   Long quantity;
   Long start;
   String status;
-  Double taxPercent;
+  BigDecimal taxPercent;
   Long trialEnd;
   Long trialStart;
 

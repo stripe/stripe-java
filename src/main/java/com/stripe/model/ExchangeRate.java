@@ -4,6 +4,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 import lombok.EqualsAndHashCode;
@@ -16,7 +17,7 @@ import lombok.Setter;
 public class ExchangeRate extends ApiResource implements HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
-  Map<String, Double> rates;
+  Map<String, BigDecimal> rates;
 
   // <editor-fold desc="list">
   /**
