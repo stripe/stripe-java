@@ -82,10 +82,12 @@ public abstract class APIResource extends StripeObject {
         .replaceAll("([a-z0-9])([A-Z])", "$1_$2")
         .toLowerCase();
 
-    // Issuing resources are in their own package. Until we can support adding OBJECT_NAME
+    // Issuing or Sigma resources are in their own package. Until we can support adding OBJECT_NAME
     // to all classes, we use this dirty trick to properly format the API endpoints
     if (clazz.getName().contains("com.stripe.model.issuing.")) {
       className = "issuing/" + className;
+    } else if (clazz.getName().contains("com.stripe.model.sigma.")) {
+      className = "sigma/" + className;
     }
 
     // Handle special cases

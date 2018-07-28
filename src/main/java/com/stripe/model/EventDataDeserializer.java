@@ -60,6 +60,7 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
     objectMap.put("refund", Refund.class);
     objectMap.put("recipient", Recipient.class);
     objectMap.put("review", Review.class);
+    objectMap.put("scheduled_query_run", com.stripe.model.sigma.ScheduledQueryRun.class);
     objectMap.put("sku", SKU.class);
     objectMap.put("source", Source.class);
     objectMap.put("source_mandate_notification", SourceMandateNotification.class);
