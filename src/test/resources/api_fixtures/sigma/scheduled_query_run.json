@@ -1,0 +1,23 @@
+{
+  "id": "sqr_123",
+  "object": "scheduled_query_run",
+  "created": 1532728174,
+  "data_load_time": 1532476800,
+  "error": null,
+  "file": {
+    "id": "file_123",
+    "object": "file",
+    "created": 1508284799,
+    "filename": "path",
+    "purpose": "sigma_scheduled_query",
+    "size": 500,
+    "title": null,
+    "type": "csv",
+    "url": "https://files.stripe.com/v1/files/file_123/contents"
+  },
+  "livemode": false,
+  "result_available_until": 1564185600,
+  "sql": "SELECT count(*) from charges",
+  "status": "completed",
+  "title": "Count all charges"
+}
