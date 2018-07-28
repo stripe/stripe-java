@@ -1,5 +1,8 @@
 # Changelog
 
+## 5.53.0 - 2018-07-28
+* [#560](https://github.com/stripe/stripe-java/pull/560) Add support for scheduled query runs (`com.stripe.model.sigma.ScheduledQueryRun`) for Sigma
+
 ## 5.52.0 - 2018-07-26
 * [#556](https://github.com/stripe/stripe-java/pull/556) Add `riskScore` property to `ChargeOutcome`
 * [#557](https://github.com/stripe/stripe-java/pull/557) Add support for StripeIssuing
