@@ -1,5 +1,19 @@
 # Changelog
 
+## 6.0.0 - 2018-07-30
+Major version release. Refer to our [migration guide for v6](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v6) for a list of backwards incompatible changes to watch out for.
+
+Pull requests included in this release:
+* [#532](https://github.com/stripe/stripe-java/pull/532) Remove deprecated methods
+* [#534](https://github.com/stripe/stripe-java/pull/534) Only capitalize the first letter of acronyms per Google's style rules
+* [#535](https://github.com/stripe/stripe-java/pull/535) Change signatures to throw StripeException
+* [#538](https://github.com/stripe/stripe-java/pull/538) Change all integer types to `Long` and all floating point types to `Double`
+* [#540](https://github.com/stripe/stripe-java/pull/540) Add support for idempotency errors
+* [#541](https://github.com/stripe/stripe-java/pull/541) Minor fixes
+* [#547](https://github.com/stripe/stripe-java/pull/547) Move nested objects into inner static classes
+* [#553](https://github.com/stripe/stripe-java/pull/553) Remove `Deleted*` models and add `deleted` attribute instead
+* [#558](https://github.com/stripe/stripe-java/pull/558) Use `BigDecimal` for floating point values
+
 ## 5.53.0 - 2018-07-28
 * [#560](https://github.com/stripe/stripe-java/pull/560) Add support for scheduled query runs (`com.stripe.model.sigma.ScheduledQueryRun`) for Sigma
 
