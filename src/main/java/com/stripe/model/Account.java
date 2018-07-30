@@ -23,6 +23,7 @@ public class Account extends ApiResource implements HasId, MetadataStore<Account
   String businessUrl;
   Boolean chargesEnabled;
   String country;
+  Long created;
   Boolean debitNegativeBalances;
   DeclineChargeOn declineChargeOn;
   String defaultCurrency;
