@@ -1,5 +1,8 @@
 # Changelog
 
+## 6.1.0 - 2018-07-30
+* [#561](https://github.com/stripe/stripe-java/pull/561) Add `created` to `Account`
+
 ## 6.0.0 - 2018-07-30
 Major version release. Refer to our [migration guide for v6](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v6) for a list of backwards incompatible changes to watch out for.
 
