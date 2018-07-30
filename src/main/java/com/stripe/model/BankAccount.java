@@ -1,10 +1,6 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.RequestOptions;
 
 import java.util.Map;
@@ -28,15 +24,14 @@ public class BankAccount extends ExternalAccount {
   String routingNumber;
   String status;
   Boolean validated;
+  Boolean deleted;
 
   // <editor-fold desc="delete">
   /**
    * Delete a bank account.
    */
   @Override
-  public DeletedBankAccount delete()
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
+  public BankAccount delete() throws StripeException {
     return delete(null);
   }
 
@@ -44,10 +39,8 @@ public class BankAccount extends ExternalAccount {
    * Delete a bank account.
    */
   @Override
-  public DeletedBankAccount delete(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
-    return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedBankAccount.class,
+  public BankAccount delete(RequestOptions options) throws StripeException {
+    return request(RequestMethod.DELETE, this.getInstanceUrl(), null, BankAccount.class,
         options);
   }
   // </editor-fold>
@@ -57,9 +50,7 @@ public class BankAccount extends ExternalAccount {
    * Update a bank account.
    */
   @Override
-  public BankAccount update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
+  public BankAccount update(Map<String, Object> params) throws StripeException {
     return update(params, null);
   }
 
@@ -68,9 +59,8 @@ public class BankAccount extends ExternalAccount {
    */
   @Override
   public BankAccount update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
-    return request(RequestMethod.POST, this.getInstanceURL(), params, BankAccount.class, options);
+      throws StripeException {
+    return request(RequestMethod.POST, this.getInstanceUrl(), params, BankAccount.class, options);
   }
   // </editor-fold>
 }

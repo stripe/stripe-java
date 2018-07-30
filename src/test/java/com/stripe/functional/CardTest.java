@@ -2,15 +2,15 @@ package com.stripe.functional;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Card;
 import com.stripe.model.Customer;
-import com.stripe.model.DeletedCard;
 import com.stripe.model.ExternalAccount;
 import com.stripe.model.ExternalAccountCollection;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,6 +18,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class CardTest extends BaseStripeTest {
@@ -26,7 +27,7 @@ public class CardTest extends BaseStripeTest {
 
   private Card getCardFixture(Customer customer) throws IOException, StripeException {
     // stripe-mock doesn't handle cards very well just yet, so use a local fixture
-    final Card card = APIResource.GSON.fromJson(
+    final Card card = ApiResource.GSON.fromJson(
         getResourceAsString("/api_fixtures/card.json"), Card.class);
     card.setCustomer(customer.getId());
 
@@ -42,7 +43,7 @@ public class CardTest extends BaseStripeTest {
 
     // stripe-mock returns a BankAccount instance instead of a Card
     stubRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/customers/%s/sources", customer.getId()),
         params,
         Card.class,
@@ -53,7 +54,7 @@ public class CardTest extends BaseStripeTest {
 
     assertNotNull(card);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/customers/%s/sources", customer.getId()),
         params
     );
@@ -65,7 +66,7 @@ public class CardTest extends BaseStripeTest {
 
     // stripe-mock returns a BankAccount instance instead of a Card
     stubRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/customers/%s/sources/%s", customer.getId(), CARD_ID),
         null,
         Card.class,
@@ -76,7 +77,7 @@ public class CardTest extends BaseStripeTest {
 
     assertNotNull(card);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/customers/%s/sources/%s", customer.getId(), CARD_ID)
     );
   }
@@ -95,7 +96,7 @@ public class CardTest extends BaseStripeTest {
 
     assertNotNull(updatedCard);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/customers/%s/sources/%s", customer.getId(), card.getId()),
         params
     );
@@ -116,7 +117,7 @@ public class CardTest extends BaseStripeTest {
     stubbedData.add(stubbedCard);
     stubbedCollection.setData(stubbedData);
     stubRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/customers/%s/sources", customer.getId()),
         params,
         ExternalAccountCollection.class,
@@ -128,7 +129,7 @@ public class CardTest extends BaseStripeTest {
     assertNotNull(externalAccounts);
     assertEquals(1, externalAccounts.getData().size());
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/customers/%s/sources", customer.getId())
     );
 
@@ -140,12 +141,21 @@ public class CardTest extends BaseStripeTest {
   public void testDelete() throws IOException, StripeException {
     final Customer customer = Customer.retrieve(CUSTOMER_ID);
     final Card card = getCardFixture(customer);
+    final String deleteCardData = String.format(
+        "{\"id\": \"%s\", \"object\": \"card\", \"deleted\": true}", card.getId()
+    );
 
-    final DeletedCard deletedCard = card.delete();
+    stubRequest(
+        ApiResource.RequestMethod.DELETE,
+        String.format("/v1/customers/%s/sources/%s", customer.getId(), card.getId()),
+        null, Card.class, deleteCardData
+    );
+    final Card deletedCard = card.delete();
 
     assertNotNull(deletedCard);
+    assertTrue(deletedCard.getDeleted());
     verifyRequest(
-        APIResource.RequestMethod.DELETE,
+        ApiResource.RequestMethod.DELETE,
         String.format("/v1/customers/%s/sources/%s", customer.getId(), card.getId())
     );
   }

@@ -1,11 +1,7 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.exception.StripeException;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.List;
@@ -17,7 +13,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Balance extends APIResource {
+public class Balance extends ApiResource {
   String object;
   List<Money> available;
   Boolean livemode;
@@ -27,32 +23,34 @@ public class Balance extends APIResource {
   /**
    * Retrieve balance.
    */
-  public static Balance retrieve() throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+  public static Balance retrieve() throws StripeException {
     return retrieve((RequestOptions) null);
   }
 
   /**
    * Retrieve balance.
    */
-  public static Balance retrieve(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, singleClassURL(Balance.class), null, Balance.class, options);
-  }
-
-  /**
-   * Retrieve balance.
-   *
-   * @deprecated Use {@link #retrieve(RequestOptions)} instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static Balance retrieve(String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return retrieve(RequestOptions.builder().setApiKey(apiKey).build());
+  public static Balance retrieve(RequestOptions options) throws StripeException {
+    return request(RequestMethod.GET, singleClassUrl(Balance.class), null, Balance.class, options);
   }
   // </editor-fold>
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Money extends StripeObject {
+    Long amount;
+    String currency;
+    SourceTypes sourceTypes;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SourceTypes extends StripeObject {
+      Long alipayAccount;
+      Long bankAccount;
+      Long bitcoinReceiver;
+      Long card;
+    }
+  }
 }

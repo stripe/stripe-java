@@ -10,9 +10,9 @@ public interface StripeCollectionInterface<T> {
 
   Boolean getHasMore();
 
-  Integer getTotalCount();
+  Long getTotalCount();
 
-  String getURL();
+  String getUrl();
 
   /**
    * Get request options that were used to fetch the collection. This is

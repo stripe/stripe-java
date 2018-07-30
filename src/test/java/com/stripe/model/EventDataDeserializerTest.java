@@ -3,7 +3,7 @@ package com.stripe.model;
 import static org.junit.Assert.assertNotNull;
 
 import com.stripe.BaseStripeTest;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import org.junit.Test;
 
@@ -12,7 +12,7 @@ public class EventDataDeserializerTest extends BaseStripeTest {
   @Test
   public void testEventAccountApplicationDeauthorized() throws Exception {
     final String data = getResourceAsString("/api_fixtures/account_application_deauthorized.json");
-    final Event event = APIResource.GSON.fromJson(data, Event.class);
+    final Event event = ApiResource.GSON.fromJson(data, Event.class);
     assertNotNull(event);
     assertNotNull(event.getId());
     assertNotNull(event.getData());

@@ -8,6 +8,6 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public final class PaymentIntentSourceAction extends StripeObject {
-  protected String type;
-  protected PaymentIntentSourceActionValue value;
+  String type;
+  PaymentIntentSourceActionValue value;
 }

@@ -1,5 +1,7 @@
 package com.stripe.model;
 
+import java.math.BigDecimal;
+
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -8,8 +10,8 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class PackageDimensions extends StripeObject {
-  Double height;
-  Double length;
-  Double weight;
-  Double width;
+  BigDecimal height;
+  BigDecimal length;
+  BigDecimal weight;
+  BigDecimal width;
 }

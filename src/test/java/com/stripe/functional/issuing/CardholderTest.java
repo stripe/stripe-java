@@ -6,12 +6,10 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.issuing.Cardholder;
 import com.stripe.model.issuing.CardholderCollection;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
@@ -40,7 +38,7 @@ public class CardholderTest extends BaseStripeTest {
 
     assertNotNull(cardholder);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/issuing/cardholders"),
         params
     );
@@ -52,7 +50,7 @@ public class CardholderTest extends BaseStripeTest {
 
     assertNotNull(cardholder);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/issuing/cardholders/%s", CARDHOLDER_ID)
     );
   }
@@ -70,7 +68,7 @@ public class CardholderTest extends BaseStripeTest {
 
     assertNotNull(updatedCardholder);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/issuing/cardholders/%s", cardholder.getId()),
         params
     );
@@ -85,7 +83,7 @@ public class CardholderTest extends BaseStripeTest {
 
     assertNotNull(cardholders);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/issuing/cardholders"),
         params
     );

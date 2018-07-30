@@ -1,65 +1,28 @@
 package com.stripe.model;
 
 import com.stripe.Stripe;
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.exception.StripeException;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.Map;
 
 public class TransferReversalCollection extends StripeCollection<Reversal> {
-  // <editor-fold desc="all">
-  /**
-   * List all reversals.
-   *
-   * @deprecated Use the {@link #list(Map)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public TransferReversalCollection all(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, null);
-  }
-
-  /**
-   * List all reversals.
-   *
-   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public TransferReversalCollection all(Map<String, Object> params,
-                      RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return list(params, options);
-  }
-  // </editor-fold>
-
   // <editor-fold desc="create">
   /**
    * Create a reversal.
    */
-  public Reversal create(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public Reversal create(Map<String, Object> params) throws StripeException {
     return create(params, null);
   }
 
   /**
    * Create a reversal.
    */
-  public Reversal create(Map<String, Object> params,
-               RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return APIResource.request(APIResource.RequestMethod.POST, String.format("%s%s",
-        Stripe.getApiBase(), this.getURL()), params, Reversal.class, options);
+  public Reversal create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    return ApiResource.request(ApiResource.RequestMethod.POST, String.format("%s%s",
+        Stripe.getApiBase(), this.getUrl()), params, Reversal.class, options);
   }
   // </editor-fold>
 
@@ -67,21 +30,17 @@ public class TransferReversalCollection extends StripeCollection<Reversal> {
   /**
    * List all reversals.
    */
-  public TransferReversalCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public TransferReversalCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
   /**
    * List all reversals.
    */
-  public TransferReversalCollection list(Map<String, Object> params,
-                       RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    String url = String.format("%s%s", Stripe.getApiBase(), this.getURL());
-    return APIResource.requestCollection(url, params, TransferReversalCollection.class, options);
+  public TransferReversalCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
+    return ApiResource.requestCollection(url, params, TransferReversalCollection.class, options);
   }
   // </editor-fold>
 
@@ -89,30 +48,16 @@ public class TransferReversalCollection extends StripeCollection<Reversal> {
   /**
    * Retrieve a reversal.
    */
-  public Reversal retrieve(String id)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public Reversal retrieve(String id) throws StripeException {
     return retrieve(id, (RequestOptions) null);
   }
 
   /**
    * Retrieve a reversal.
    */
-  @Deprecated
-  public Reversal retrieve(String id, String apiKey) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  /**
-   * Retrieve a reversal.
-   */
-  public Reversal retrieve(String id, RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    String url = String.format("%s%s/%s", Stripe.getApiBase(), this.getURL(), id);
-    return APIResource.request(APIResource.RequestMethod.GET, url, null, Reversal.class, options);
+  public Reversal retrieve(String id, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s/%s", Stripe.getApiBase(), this.getUrl(), id);
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, null, Reversal.class, options);
   }
   // </editor-fold>
 }

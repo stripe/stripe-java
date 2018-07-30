@@ -1,11 +1,7 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.exception.StripeException;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.List;
@@ -19,7 +15,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
+public class Plan extends ApiResource implements MetadataStore<Plan>, HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   Boolean active;
@@ -28,15 +24,16 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
   Long created;
   String currency;
   String interval;
-  Integer intervalCount;
+  Long intervalCount;
   Boolean livemode;
   @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   String nickname;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Product> product;
-  List<PlanTier> tiers;
+  List<Tier> tiers;
   String tiersMode;
-  PlanTransformUsage transformUsage;
+  TransformUsage transformUsage;
   String usageType;
+  Boolean deleted;
 
   /**
    * The {@code name} attribute.
@@ -78,15 +75,15 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
    * @see <a href="https://stripe.com/docs/upgrades#2018-02-05">API version 2018-02-05</a>
    */
   @Deprecated
-  Integer trialPeriodDays;
+  Long trialPeriodDays;
 
   // <editor-fold desc="product">
   public String getProduct() {
     return (this.product != null) ? this.product.getId() : null;
   }
 
-  public void setProduct(String productID) {
-    this.product = setExpandableFieldID(productID, this.product);
+  public void setProduct(String productId) {
+    this.product = setExpandableFieldId(productId, this.product);
   }
 
   public Product getProductObject() {
@@ -98,54 +95,11 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
   }
   // </editor-fold>
 
-  // <editor-fold desc="all">
-  /**
-   * List all plans.
-   *
-   * @deprecated Use the {@link #list(Map)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static PlanCollection all(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, null);
-  }
-
-  /**
-   * List all plans.
-   *
-   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static PlanCollection all(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, options);
-  }
-
-  /**
-   * List all plans.
-   *
-   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static PlanCollection all(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-  // </editor-fold>
-
   // <editor-fold desc="create">
   /**
    * Create a plan.
    */
-  public static Plan create(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public static Plan create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
@@ -153,22 +107,8 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
    * Create a plan.
    */
   public static Plan create(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, classURL(Plan.class), params, Plan.class, options);
-  }
-
-  /**
-   * Create a plan.
-   *
-   * @deprecated Use the {@link #create(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static Plan create(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return create(params, RequestOptions.builder().setApiKey(apiKey).build());
+      throws StripeException {
+    return request(RequestMethod.POST, classUrl(Plan.class), params, Plan.class, options);
   }
   // </editor-fold>
 
@@ -176,33 +116,16 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
   /**
    * Delete a plan.
    */
-  public DeletedPlan delete() throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+  public Plan delete() throws StripeException {
     return delete((RequestOptions) null);
   }
 
   /**
    * Delete a plan.
    */
-  public DeletedPlan delete(RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return request(RequestMethod.DELETE, instanceURL(Plan.class, this.id), null, DeletedPlan.class,
+  public Plan delete(RequestOptions options) throws StripeException {
+    return request(RequestMethod.DELETE, instanceUrl(Plan.class, this.id), null, Plan.class,
         options);
-  }
-
-  /**
-   * Delete a plan.
-   *
-   * @deprecated Use the {@link #delete(RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public DeletedPlan delete(String apiKey) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return delete(RequestOptions.builder().setApiKey(apiKey).build());
   }
   // </editor-fold>
 
@@ -210,9 +133,7 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
   /**
    * List all plans.
    */
-  public static PlanCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public static PlanCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
@@ -220,9 +141,8 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
    * List all plans.
    */
   public static PlanCollection list(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return requestCollection(classURL(Plan.class), params, PlanCollection.class, options);
+      throws StripeException {
+    return requestCollection(classUrl(Plan.class), params, PlanCollection.class, options);
   }
   // </editor-fold>
 
@@ -230,32 +150,15 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
   /**
    * Retrieve a plan.
    */
-  public static Plan retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+  public static Plan retrieve(String id) throws StripeException {
     return retrieve(id, (RequestOptions) null);
   }
 
   /**
    * Retrieve a plan.
    */
-  public static Plan retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Plan.class, id), null, Plan.class, options);
-  }
-
-  /**
-   * Retrieve a plan.
-   *
-   * @deprecated Use the {@link #retrieve(String, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static Plan retrieve(String id, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
+  public static Plan retrieve(String id, RequestOptions options) throws StripeException {
+    return request(RequestMethod.GET, instanceUrl(Plan.class, id), null, Plan.class, options);
   }
   // </editor-fold>
 
@@ -264,9 +167,7 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
    * Update a plan.
    */
   @Override
-  public Plan update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public Plan update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
@@ -274,24 +175,25 @@ public class Plan extends APIResource implements MetadataStore<Plan>, HasId {
    * Update a plan.
    */
   @Override
-  public Plan update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Plan.class, this.id), params, Plan.class,
+  public Plan update(Map<String, Object> params, RequestOptions options) throws StripeException {
+    return request(RequestMethod.POST, instanceUrl(Plan.class, this.id), params, Plan.class,
         options);
   }
-
-  /**
-   * Update a plan.
-   *
-   * @deprecated Use the {@link #update(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public Plan update(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return update(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
   // </editor-fold>
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Tier extends StripeObject {
+    Long amount;
+    Long upTo;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TransformUsage extends StripeObject {
+    Long divideBy;
+    String round;
+  }
 }

@@ -6,12 +6,10 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.issuing.Authorization;
 import com.stripe.model.issuing.AuthorizationCollection;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
@@ -28,7 +26,7 @@ public class AuthorizationTest extends BaseStripeTest {
 
     assertNotNull(approvedAuthorization);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/issuing/authorizations/%s/approve", authorization.getId()),
         null
     );
@@ -42,7 +40,7 @@ public class AuthorizationTest extends BaseStripeTest {
 
     assertNotNull(approvedAuthorization);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/issuing/authorizations/%s/decline", authorization.getId()),
         null
     );
@@ -54,7 +52,7 @@ public class AuthorizationTest extends BaseStripeTest {
 
     assertNotNull(authorization);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/issuing/authorizations/%s", AUTHORIZATION_ID)
     );
   }
@@ -72,7 +70,7 @@ public class AuthorizationTest extends BaseStripeTest {
 
     assertNotNull(updatedAuthorization);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/issuing/authorizations/%s", authorization.getId()),
         params
     );
@@ -87,7 +85,7 @@ public class AuthorizationTest extends BaseStripeTest {
 
     assertNotNull(authorizations);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/issuing/authorizations"),
         params
     );

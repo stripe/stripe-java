@@ -1,10 +1,7 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
 import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.RequestOptions;
 
 import java.util.Map;
@@ -19,14 +16,14 @@ import lombok.Setter;
 public class Source extends ExternalAccount implements HasSourceTypeData {
   Long amount;
   String clientSecret;
-  SourceCodeVerificationFlow codeVerification;
+  CodeVerificationFlow codeVerification;
   Long created;
   String currency;
   String flow;
   Boolean livemode;
-  SourceOwner owner;
-  SourceReceiverFlow receiver;
-  SourceRedirectFlow redirect;
+  Owner owner;
+  ReceiverFlow receiver;
+  RedirectFlow redirect;
   String statementDescriptor;
   String status;
   String type;
@@ -38,18 +35,15 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
 
   // APIResource methods
 
-  public String getSourceInstanceURL()
-      throws InvalidRequestException {
-    return instanceURL(Source.class, this.getId());
+  public String getSourceInstanceUrl() throws InvalidRequestException {
+    return instanceUrl(Source.class, this.getId());
   }
 
   // <editor-fold desc="create">
   /**
    * Create a source.
    */
-  public static Source create(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public static Source create(Map<String, Object> params) throws StripeException {
     return create(params, null);
   }
 
@@ -57,9 +51,8 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
    * Create a source.
    */
   public static Source create(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, classURL(Source.class), params, Source.class, options);
+      throws StripeException {
+    return request(RequestMethod.POST, classUrl(Source.class), params, Source.class, options);
   }
   // </editor-fold>
 
@@ -70,9 +63,7 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
    * customer object.
    */
   @Override
-  public DeletedExternalAccount delete(RequestOptions options) throws
-      AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public Source delete(RequestOptions options) throws StripeException {
     throw new InvalidRequestException(
         "Source objects cannot be deleted. If you want to detach the source from a customer "
         + "object, use detach().",
@@ -84,29 +75,23 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
   /**
    * Detach a source.
    */
-  public Source detach()
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public Source detach() throws StripeException {
     return detach(null, null);
   }
 
   /**
    * Detach a source.
    */
-  public Source detach(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public Source detach(Map<String, Object> params) throws StripeException {
     return detach(params, null);
   }
 
   /**
    * Detach a source.
    */
-  public Source detach(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public Source detach(Map<String, Object> params, RequestOptions options) throws StripeException {
     if (this.getCustomer() != null) {
-      String url = String.format("%s/%s/sources/%s", classURL(Customer.class), this.getCustomer(),
+      String url = String.format("%s/%s/sources/%s", classUrl(Customer.class), this.getCustomer(),
           this.getId());
       return request(RequestMethod.DELETE, url, params, Source.class, options);
     } else {
@@ -121,19 +106,15 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
   /**
    * Retrieve a source.
    */
-  public static Source retrieve(String id)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public static Source retrieve(String id) throws StripeException {
     return retrieve(id, null);
   }
 
   /**
    * Retrieve a source.
    */
-  public static Source retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Source.class, id), null, Source.class, options);
+  public static Source retrieve(String id, RequestOptions options) throws StripeException {
+    return request(RequestMethod.GET, instanceUrl(Source.class, id), null, Source.class, options);
   }
   // </editor-fold>
 
@@ -142,8 +123,7 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
    * Retrieve a source's transactions.
    */
   public SourceTransactionCollection sourceTransactions(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      throws StripeException {
     return sourceTransactions(params, null);
   }
 
@@ -151,10 +131,8 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
    * Retrieve a source's transactions.
    */
   public SourceTransactionCollection sourceTransactions(Map<String, Object> params,
-      RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    String url = instanceURL(Source.class, this.getId()) + "/source_transactions";
+      RequestOptions options) throws StripeException {
+    String url = instanceUrl(Source.class, this.getId()) + "/source_transactions";
     return requestCollection(url, params, SourceTransactionCollection.class, options);
   }
   // </editor-fold>
@@ -164,9 +142,7 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
    * Update a source.
    */
   @Override
-  public Source update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public Source update(Map<String, Object> params) throws StripeException {
     return update(params, null);
   }
 
@@ -174,10 +150,8 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
    * Update a source.
    */
   @Override
-  public Source update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, this.getSourceInstanceURL(), params, Source.class, options);
+  public Source update(Map<String, Object> params, RequestOptions options) throws StripeException {
+    return request(RequestMethod.POST, this.getSourceInstanceUrl(), params, Source.class, options);
   }
   // </editor-fold>
 
@@ -186,9 +160,7 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
    * Verify a source.
    */
   @Override
-  public Source verify(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public Source verify(Map<String, Object> params) throws StripeException {
     return verify(params, null);
   }
 
@@ -196,11 +168,53 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
    * Verify a source.
    */
   @Override
-  public Source verify(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, String.format("%s/verify", this.getSourceInstanceURL()),
+  public Source verify(Map<String, Object> params, RequestOptions options) throws StripeException {
+    return request(RequestMethod.POST, String.format("%s/verify", this.getSourceInstanceUrl()),
         params, Source.class, options);
   }
   // </editor-fold>
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CodeVerificationFlow extends StripeObject {
+    Long attemptsRemaining;
+    String status;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Owner extends StripeObject {
+    Address address;
+    Address verifiedAddress;
+    String name;
+    String verifiedName;
+    String phone;
+    String verifiedPhone;
+    String email;
+    String verifiedEmail;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ReceiverFlow extends StripeObject {
+    String refundAttributesStatus;
+    String refundAttributesMethod;
+    Long amountReceived;
+    Long amountReturned;
+    Long amountCharged;
+    String address;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class RedirectFlow extends StripeObject {
+    String failureReason;
+    String returnUrl;
+    String status;
+    String url;
+  }
 }

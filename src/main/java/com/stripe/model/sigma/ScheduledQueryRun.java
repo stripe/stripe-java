@@ -1,20 +1,13 @@
 package com.stripe.model.sigma;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.model.FileUpload;
 import com.stripe.model.HasId;
-import com.stripe.model.StripeObject;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
-import java.util.List;
 import java.util.Map;
 
-import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -22,7 +15,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class ScheduledQueryRun extends APIResource implements HasId {
+public class ScheduledQueryRun extends ApiResource implements HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long created;
@@ -40,8 +33,7 @@ public class ScheduledQueryRun extends APIResource implements HasId {
    * List all issuing authorizations.
    */
   public static ScheduledQueryRunCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      throws StripeException {
     return list(params, null);
   }
 
@@ -49,9 +41,8 @@ public class ScheduledQueryRun extends APIResource implements HasId {
    * List all issuing authorizations.
    */
   public static ScheduledQueryRunCollection list(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
-    return requestCollection(classURL(ScheduledQueryRun.class), params,
+      throws StripeException {
+    return requestCollection(classUrl(ScheduledQueryRun.class), params,
       ScheduledQueryRunCollection.class, options);
   }
   // </editor-fold>
@@ -60,9 +51,7 @@ public class ScheduledQueryRun extends APIResource implements HasId {
   /**
    * Retrieve an issuing authorization.
    */
-  public static ScheduledQueryRun retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+  public static ScheduledQueryRun retrieve(String id) throws StripeException {
     return retrieve(id, null);
   }
 
@@ -70,9 +59,8 @@ public class ScheduledQueryRun extends APIResource implements HasId {
    * Retrieve an issuing authorization.
    */
   public static ScheduledQueryRun retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(ScheduledQueryRun.class, id), null,
+      throws StripeException {
+    return request(RequestMethod.GET, instanceUrl(ScheduledQueryRun.class, id), null,
       ScheduledQueryRun.class, options);
   }
   // </editor-fold>

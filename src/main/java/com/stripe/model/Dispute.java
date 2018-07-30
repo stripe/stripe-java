@@ -1,11 +1,7 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.exception.StripeException;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.List;
@@ -19,7 +15,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Dispute extends APIResource implements HasId {
+public class Dispute extends ApiResource implements HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long amount;
@@ -29,7 +25,7 @@ public class Dispute extends APIResource implements HasId {
   String currency;
   EvidenceSubObject evidenceSubObject; // `evidence`
   EvidenceDetails evidenceDetails;
-  @Getter(AccessLevel.NONE) Boolean isChargeRefundable;
+  Boolean isChargeRefundable;
   Boolean livemode;
   Map<String, String> metadata;
   String reason;
@@ -71,8 +67,8 @@ public class Dispute extends APIResource implements HasId {
     return (this.charge != null) ? this.charge.getId() : null;
   }
 
-  public void setCharge(String chargeID) {
-    this.charge = setExpandableFieldID(chargeID, this.charge);
+  public void setCharge(String chargeId) {
+    this.charge = setExpandableFieldId(chargeId, this.charge);
   }
 
   public Charge getChargeObject() {
@@ -84,57 +80,20 @@ public class Dispute extends APIResource implements HasId {
   }
   // </editor-fold>
 
-  // TODO: change return type to Boolean in next major version
-  public boolean getIsChargeRefundable() {
-    return isChargeRefundable;
-  }
-
-  // <editor-fold desc="all">
-  /**
-   * List all disputes.
-   *
-   * @deprecated Use the {@link #list(Map)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static DisputeCollection all(Map<String, Object> params) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return list(params, null);
-  }
-
-  /**
-   * List all disputes.
-   *
-   * @deprecated Use the {@link #list(Map)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static DisputeCollection all(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
-    return list(params, options);
-  }
-  // </editor-fold>
-
   // <editor-fold desc="close">
   /**
    * Close a dispute.
    */
-  public Dispute close()
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public Dispute close() throws StripeException {
     return close(null);
   }
 
   /**
    * Close a dispute.
    */
-  public Dispute close(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public Dispute close(RequestOptions options) throws StripeException {
     return request(RequestMethod.POST, String.format("%s/close",
-        instanceURL(Dispute.class, this.getId())), null, Dispute.class, options);
+        instanceUrl(Dispute.class, this.getId())), null, Dispute.class, options);
   }
   // </editor-fold>
 
@@ -142,9 +101,7 @@ public class Dispute extends APIResource implements HasId {
   /**
    * List all disputes.
    */
-  public static DisputeCollection list(Map<String, Object> params) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+  public static DisputeCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
@@ -152,9 +109,8 @@ public class Dispute extends APIResource implements HasId {
    * List all disputes.
    */
   public static DisputeCollection list(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
-    return requestCollection(classURL(Dispute.class), params, DisputeCollection.class, options);
+      throws StripeException {
+    return requestCollection(classUrl(Dispute.class), params, DisputeCollection.class, options);
   }
   // </editor-fold>
 
@@ -162,18 +118,14 @@ public class Dispute extends APIResource implements HasId {
   /**
    * Retrieve a dispute.
    */
-  public static Dispute retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+  public static Dispute retrieve(String id) throws StripeException {
     return retrieve(id, null, null);
   }
 
   /**
    * Retrieve a dispute.
    */
-  public static Dispute retrieve(String id, RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+  public static Dispute retrieve(String id, RequestOptions options) throws StripeException {
     return retrieve(id, null, options);
   }
 
@@ -181,9 +133,8 @@ public class Dispute extends APIResource implements HasId {
    * Retrieve a dispute.
    */
   public static Dispute retrieve(String id, Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Dispute.class, id), params, Dispute.class,
+      throws StripeException {
+    return request(RequestMethod.GET, instanceUrl(Dispute.class, id), params, Dispute.class,
         options);
   }
   // </editor-fold>
@@ -192,20 +143,24 @@ public class Dispute extends APIResource implements HasId {
   /**
    * Update a dispute.
    */
-  public Dispute update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public Dispute update(Map<String, Object> params) throws StripeException {
     return update(params, null);
   }
 
   /**
    * Update a dispute.
    */
-  public Dispute update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Dispute.class, this.getId()),
+  public Dispute update(Map<String, Object> params, RequestOptions options) throws StripeException {
+    return request(RequestMethod.POST, instanceUrl(Dispute.class, this.getId()),
         params, Dispute.class, options);
   }
   // </editor-fold>
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class EvidenceDetails extends StripeObject {
+    Long dueBy;
+    Long submissionCount;
+  }
 }

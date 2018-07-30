@@ -1,11 +1,7 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.exception.StripeException;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.Map;
@@ -18,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Reversal extends APIResource implements MetadataStore<Transfer>, HasId {
+public class Reversal extends ApiResource implements MetadataStore<Transfer>, HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long amount;
@@ -34,8 +30,8 @@ public class Reversal extends APIResource implements MetadataStore<Transfer>, Ha
     return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
   }
 
-  public void setBalanceTransaction(String balanceTransactionID) {
-    this.balanceTransaction = setExpandableFieldID(balanceTransactionID, this.balanceTransaction);
+  public void setBalanceTransaction(String balanceTransactionId) {
+    this.balanceTransaction = setExpandableFieldId(balanceTransactionId, this.balanceTransaction);
   }
 
   public BalanceTransaction getBalanceTransactionObject() {
@@ -52,8 +48,8 @@ public class Reversal extends APIResource implements MetadataStore<Transfer>, Ha
     return (this.transfer != null) ? this.transfer.getId() : null;
   }
 
-  public void setTransfer(String transferID) {
-    this.transfer = setExpandableFieldID(transferID, this.transfer);
+  public void setTransfer(String transferId) {
+    this.transfer = setExpandableFieldId(transferId, this.transfer);
   }
 
   public Transfer getTransferObject() {
@@ -70,9 +66,7 @@ public class Reversal extends APIResource implements MetadataStore<Transfer>, Ha
    * Update a reversal.
    */
   @Override
-  public Reversal update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public Reversal update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
@@ -81,28 +75,14 @@ public class Reversal extends APIResource implements MetadataStore<Transfer>, Ha
    */
   @Override
   public Reversal update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, this.getInstanceURL(), params, Reversal.class, options);
-  }
-
-  /**
-   * Update a reversal.
-   *
-   * @deprecated Use the {@link #update(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public Reversal update(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return update(params, RequestOptions.builder().setApiKey(apiKey).build());
+      throws StripeException {
+    return request(RequestMethod.POST, this.getInstanceUrl(), params, Reversal.class, options);
   }
   // </editor-fold>
 
-  protected String getInstanceURL() {
+  protected String getInstanceUrl() {
     if (this.transfer != null) {
-      return String.format("%s/%s/reversals/%s", classURL(Transfer.class), this.getTransfer(),
+      return String.format("%s/%s/reversals/%s", classUrl(Transfer.class), this.getTransfer(),
           this.getId());
     }
     return null;

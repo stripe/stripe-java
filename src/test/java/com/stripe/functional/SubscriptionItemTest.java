@@ -1,13 +1,13 @@
 package com.stripe.functional;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
-import com.stripe.model.DeletedSubscriptionItem;
 import com.stripe.model.SubscriptionItem;
 import com.stripe.model.SubscriptionItemCollection;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -34,7 +34,7 @@ public class SubscriptionItemTest extends BaseStripeTest {
 
     assertNotNull(subscriptionItem);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         "/v1/subscription_items",
         params
     );
@@ -46,7 +46,7 @@ public class SubscriptionItemTest extends BaseStripeTest {
 
     assertNotNull(subscriptionItem);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/subscription_items/%s", ITEM_ID)
     );
   }
@@ -64,7 +64,7 @@ public class SubscriptionItemTest extends BaseStripeTest {
 
     assertNotNull(updatedSubscriptionItem);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/subscription_items/%s", subscriptionItem.getId()),
         params
     );
@@ -74,11 +74,12 @@ public class SubscriptionItemTest extends BaseStripeTest {
   public void testDelete() throws StripeException {
     final SubscriptionItem subscriptionItem = getItemFixture();
 
-    final DeletedSubscriptionItem deletedSubscriptionItem = subscriptionItem.delete();
+    final SubscriptionItem deletedSubscriptionItem = subscriptionItem.delete();
 
     assertNotNull(deletedSubscriptionItem);
+    assertTrue(deletedSubscriptionItem.getDeleted());
     verifyRequest(
-        APIResource.RequestMethod.DELETE,
+        ApiResource.RequestMethod.DELETE,
         String.format("/v1/subscription_items/%s", subscriptionItem.getId())
     );
   }
@@ -92,7 +93,7 @@ public class SubscriptionItemTest extends BaseStripeTest {
 
     assertNotNull(subscriptionItems);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         "/v1/subscription_items",
         params
     );

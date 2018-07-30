@@ -1,10 +1,6 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.net.RequestOptions;
 
 import java.util.Map;
@@ -26,33 +22,27 @@ public class AlipayAccount extends ExternalAccount {
   Boolean used;
   String username;
   String status;
+  Boolean deleted;
 
   @Override
-  public DeletedAlipayAccount delete() throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+  public AlipayAccount delete() throws StripeException {
     return delete(null);
   }
 
   @Override
-  public DeletedAlipayAccount delete(RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return request(RequestMethod.DELETE, this.getInstanceURL(), null, DeletedAlipayAccount.class,
+  public AlipayAccount delete(RequestOptions options) throws StripeException {
+    return request(RequestMethod.DELETE, this.getInstanceUrl(), null, AlipayAccount.class,
         options);
   }
 
   @Override
-  public AlipayAccount update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public AlipayAccount update(Map<String, Object> params) throws StripeException {
     return update(params, null);
   }
 
   @Override
   public AlipayAccount update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, this.getInstanceURL(), params, AlipayAccount.class, options);
+      throws StripeException {
+    return request(RequestMethod.POST, this.getInstanceUrl(), params, AlipayAccount.class, options);
   }
 }

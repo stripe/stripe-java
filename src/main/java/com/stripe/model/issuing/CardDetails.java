@@ -1,8 +1,7 @@
 package com.stripe.model.issuing;
 
 import com.stripe.model.ExpandableField;
-import com.stripe.net.APIResource;
-import com.stripe.net.RequestOptions;
+import com.stripe.net.ApiResource;
 
 import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
@@ -12,7 +11,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class CardDetails extends APIResource {
+public class CardDetails extends ApiResource {
   String object;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
     ExpandableField<Card> card;
@@ -27,7 +26,7 @@ public class CardDetails extends APIResource {
   }
 
   public void setCard(String cardId) {
-    this.card = setExpandableFieldID(cardId, this.card);
+    this.card = setExpandableFieldId(cardId, this.card);
   }
 
   public Card getCardObject() {

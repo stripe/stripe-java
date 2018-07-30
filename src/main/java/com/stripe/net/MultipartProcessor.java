@@ -1,7 +1,5 @@
 package com.stripe.net;
 
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -9,6 +7,8 @@ import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.URLConnection;
 import java.util.Random;
+
+import lombok.Cleanup;
 
 public class MultipartProcessor {
   private final String boundary;
@@ -62,7 +62,7 @@ public class MultipartProcessor {
    * @param inputStream   Stream of bytes to use in place of a file.
    * @throws IOException  Thrown when writing / reading from streams fails.
    */
-  public void addFileField(String name, String fileName, InputStream inputStream) 
+  public void addFileField(String name, String fileName, InputStream inputStream)
       throws IOException {
     writer.append("--").append(boundary).append(LINE_BREAK);
     writer.append("Content-Disposition: form-data; name=\"").append(name)

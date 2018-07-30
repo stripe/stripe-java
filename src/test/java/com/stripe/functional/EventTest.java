@@ -6,7 +6,7 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Event;
 import com.stripe.model.EventCollection;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,7 +22,7 @@ public class EventTest extends BaseStripeTest {
 
     assertNotNull(event);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/events/%s", EVENT_ID)
     );
   }
@@ -36,7 +36,7 @@ public class EventTest extends BaseStripeTest {
 
     assertNotNull(resources);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/events"),
         params
     );

@@ -1,11 +1,7 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.exception.StripeException;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.Map;
@@ -18,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class ApplicationFee extends APIResource implements HasId {
+public class ApplicationFee extends ApiResource implements HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Account> account;
@@ -51,8 +47,8 @@ public class ApplicationFee extends APIResource implements HasId {
     return (this.account != null) ? this.account.getId() : null;
   }
 
-  public void setAccount(String accountID) {
-    this.account = setExpandableFieldID(accountID, this.account);
+  public void setAccount(String accountId) {
+    this.account = setExpandableFieldId(accountId, this.account);
   }
 
   public Account getAccountObject() {
@@ -69,8 +65,8 @@ public class ApplicationFee extends APIResource implements HasId {
     return (this.application != null) ? this.application.getId() : null;
   }
 
-  public void setApplication(String applicationID) {
-    this.application = setExpandableFieldID(applicationID, this.application);
+  public void setApplication(String applicationId) {
+    this.application = setExpandableFieldId(applicationId, this.application);
   }
 
   public Application getApplicationObject() {
@@ -87,8 +83,8 @@ public class ApplicationFee extends APIResource implements HasId {
     return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
   }
 
-  public void setBalanceTransaction(String balanceTransactionID) {
-    this.balanceTransaction = setExpandableFieldID(balanceTransactionID, this.balanceTransaction);
+  public void setBalanceTransaction(String balanceTransactionId) {
+    this.balanceTransaction = setExpandableFieldId(balanceTransactionId, this.balanceTransaction);
   }
 
   public BalanceTransaction getBalanceTransactionObject() {
@@ -105,8 +101,8 @@ public class ApplicationFee extends APIResource implements HasId {
     return (this.charge != null) ? this.charge.getId() : null;
   }
 
-  public void setCharge(String chargeID) {
-    this.charge = setExpandableFieldID(chargeID, this.charge);
+  public void setCharge(String chargeId) {
+    this.charge = setExpandableFieldId(chargeId, this.charge);
   }
 
   public Charge getChargeObject() {
@@ -123,9 +119,9 @@ public class ApplicationFee extends APIResource implements HasId {
     return (this.originatingTransaction != null) ? this.originatingTransaction.getId() : null;
   }
 
-  public void setOriginatingTransaction(String originatingTransactionID) {
+  public void setOriginatingTransaction(String originatingTransactionId) {
     this.originatingTransaction
-        = setExpandableFieldID(originatingTransactionID, this.originatingTransaction);
+        = setExpandableFieldId(originatingTransactionId, this.originatingTransaction);
   }
 
   public Charge getOriginatingTransactionObject() {
@@ -145,62 +141,18 @@ public class ApplicationFee extends APIResource implements HasId {
   public FeeRefundCollection getRefunds() {
     // API versions 2014-07-26 and earlier render charge refunds as an array
     // instead of an object, meaning there is no sublist URL.
-    if (refunds.getURL() == null) {
-      // TODO replace with subresourceURL
-      refunds.setURL(String.format("/v1/application_fees/%s/refunds", getId()));
+    if (refunds.getUrl() == null) {
+      refunds.setUrl(String.format("/v1/application_fees/%s/refunds", getId()));
     }
 
     return refunds;
   }
 
-  // <editor-fold desc="all">
-  /**
-   * List all application fees.
-   *
-   * @deprecated Use the {@link #list(Map)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static ApplicationFeeCollection all(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, null);
-  }
-
-  /**
-   * List all application fees.
-   *
-   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static ApplicationFeeCollection all(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, options);
-  }
-
-  /**
-   * List all application fees.
-   *
-   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static ApplicationFeeCollection all(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-  // </editor-fold>
-
   // <editor-fold desc="list">
   /**
    * List all application fees.
    */
-  public static ApplicationFeeCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public static ApplicationFeeCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
@@ -208,95 +160,9 @@ public class ApplicationFee extends APIResource implements HasId {
    * List all application fees.
    */
   public static ApplicationFeeCollection list(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return requestCollection(classURL(ApplicationFee.class), params, ApplicationFeeCollection.class,
+      throws StripeException {
+    return requestCollection(classUrl(ApplicationFee.class), params, ApplicationFeeCollection.class,
         options);
-  }
-  // </editor-fold>
-
-  // <editor-fold desc="refund">
-  /**
-   * Refund an application fee.
-   *
-   * @deprecated Use {@link #getRefunds()} and {@link FeeRefundCollection#create(Map)} instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public ApplicationFee refund() throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return this.refund(null, (RequestOptions) null);
-  }
-
-  /**
-   * Refund an application fee.
-   *
-   * @deprecated Use {@link #getRefunds()} and
-   *     {@link FeeRefundCollection#create(Map, RequestOptions)} instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public ApplicationFee refund(RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return refund(null, options);
-  }
-
-  /**
-   * Refund an application fee.
-   *
-   * @deprecated Use {@link #getRefunds()} and
-   *     {@link FeeRefundCollection#create(Map, RequestOptions)} instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public ApplicationFee refund(String apiKey) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return this.refund(RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  /**
-   * Refund an application fee.
-   *
-   * @deprecated Use {@link #getRefunds()} and {@link FeeRefundCollection#create(Map)} instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public ApplicationFee refund(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return this.refund(params, (RequestOptions) null);
-  }
-
-  /**
-   * Refund an application fee.
-   *
-   * @deprecated Use {@link #getRefunds()} and
-   *     {@link FeeRefundCollection#create(Map, RequestOptions)} instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public ApplicationFee refund(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, String.format("%s/refund",
-        instanceURL(ApplicationFee.class, this.getId())), params, ApplicationFee.class, options);
-  }
-
-  /**
-   * Refund an application fee.
-   *
-   * @deprecated Use {@link #getRefunds()} and
-   *     {@link FeeRefundCollection#create(Map, RequestOptions)} instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public ApplicationFee refund(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return refund(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
   // </editor-fold>
 
@@ -304,33 +170,16 @@ public class ApplicationFee extends APIResource implements HasId {
   /**
    * Retrieve an application fee.
    */
-  public static ApplicationFee retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+  public static ApplicationFee retrieve(String id) throws StripeException {
     return retrieve(id, (RequestOptions) null);
   }
 
   /**
    * Retrieve an application fee.
    */
-  public static ApplicationFee retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(ApplicationFee.class, id), null,
+  public static ApplicationFee retrieve(String id, RequestOptions options) throws StripeException {
+    return request(RequestMethod.GET, instanceUrl(ApplicationFee.class, id), null,
         ApplicationFee.class, options);
-  }
-
-  /**
-   * Retrieve an application fee.
-   *
-   * @deprecated Use {@link #retrieve(String, RequestOptions)} instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static ApplicationFee retrieve(String id, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
   }
   // </editor-fold>
 }

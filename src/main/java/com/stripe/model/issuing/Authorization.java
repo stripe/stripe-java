@@ -1,16 +1,12 @@
 package com.stripe.model.issuing;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
+import com.stripe.exception.StripeException;
 import com.stripe.model.BalanceTransaction;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.StripeObject;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.List;
@@ -24,7 +20,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Authorization extends APIResource implements MetadataStore<Authorization>, HasId {
+public class Authorization extends ApiResource implements MetadataStore<Authorization>, HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   Boolean approved;
@@ -56,7 +52,7 @@ public class Authorization extends APIResource implements MetadataStore<Authoriz
   }
 
   public void setCard(String cardId) {
-    this.card = setExpandableFieldID(cardId, this.card);
+    this.card = setExpandableFieldId(cardId, this.card);
   }
 
   public Card getCardObject() {
@@ -74,7 +70,7 @@ public class Authorization extends APIResource implements MetadataStore<Authoriz
   }
 
   public void setCardholder(String cardholderId) {
-    this.cardholder = setExpandableFieldID(cardholderId, this.cardholder);
+    this.cardholder = setExpandableFieldId(cardholderId, this.cardholder);
   }
 
   public Cardholder getCardholderObject() {
@@ -90,9 +86,7 @@ public class Authorization extends APIResource implements MetadataStore<Authoriz
   /**
    * Approve an issuing authorization.
    */
-  public Authorization approve(Map<String, Object> params) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+  public Authorization approve(Map<String, Object> params) throws StripeException {
     return approve(params, null);
   }
 
@@ -100,10 +94,9 @@ public class Authorization extends APIResource implements MetadataStore<Authoriz
    * Approve an issuing authorization.
    */
   public Authorization approve(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      throws StripeException {
     return request(RequestMethod.POST, String.format("%s/approve",
-        instanceURL(Authorization.class, this.getId())), params, Authorization.class, options);
+        instanceUrl(Authorization.class, this.getId())), params, Authorization.class, options);
   }
   // </editor-fold>
 
@@ -111,9 +104,7 @@ public class Authorization extends APIResource implements MetadataStore<Authoriz
   /**
    * Decline an issuing authorization.
    */
-  public Authorization decline(Map<String, Object> params) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+  public Authorization decline(Map<String, Object> params) throws StripeException {
     return decline(params, null);
   }
 
@@ -121,10 +112,9 @@ public class Authorization extends APIResource implements MetadataStore<Authoriz
    * Decline an issuing authorization.
    */
   public Authorization decline(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      throws StripeException {
     return request(RequestMethod.POST, String.format("%s/decline",
-        instanceURL(Authorization.class, this.getId())), params, Authorization.class, options);
+        instanceUrl(Authorization.class, this.getId())), params, Authorization.class, options);
   }
   // </editor-fold>
 
@@ -132,9 +122,7 @@ public class Authorization extends APIResource implements MetadataStore<Authoriz
   /**
    * List all issuing authorizations.
    */
-  public static AuthorizationCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public static AuthorizationCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
@@ -142,9 +130,8 @@ public class Authorization extends APIResource implements MetadataStore<Authoriz
    * List all issuing authorizations.
    */
   public static AuthorizationCollection list(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
-    return requestCollection(classURL(Authorization.class), params,
+      throws StripeException {
+    return requestCollection(classUrl(Authorization.class), params,
       AuthorizationCollection.class, options);
   }
   // </editor-fold>
@@ -153,19 +140,15 @@ public class Authorization extends APIResource implements MetadataStore<Authoriz
   /**
    * Retrieve an issuing authorization.
    */
-  public static Authorization retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+  public static Authorization retrieve(String id) throws StripeException {
     return retrieve(id, null);
   }
 
   /**
    * Retrieve an issuing authorization.
    */
-  public static Authorization retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Authorization.class, id), null,
+  public static Authorization retrieve(String id, RequestOptions options) throws StripeException {
+    return request(RequestMethod.GET, instanceUrl(Authorization.class, id), null,
       Authorization.class, options);
   }
 
@@ -173,10 +156,8 @@ public class Authorization extends APIResource implements MetadataStore<Authoriz
    * Retrieve an issuing authorization.
    */
   public static Authorization retrieve(String id, Map<String, Object> params,
-      RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Authorization.class, id), params,
+      RequestOptions options) throws StripeException {
+    return request(RequestMethod.GET, instanceUrl(Authorization.class, id), params,
       Authorization.class, options);
   }
   // </editor-fold>
@@ -186,9 +167,7 @@ public class Authorization extends APIResource implements MetadataStore<Authoriz
    * Update an issuing authorization.
    */
   @Override
-  public Authorization update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public Authorization update(Map<String, Object> params) throws StripeException {
     return update(params, null);
   }
 
@@ -197,9 +176,8 @@ public class Authorization extends APIResource implements MetadataStore<Authoriz
    */
   @Override
   public Authorization update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Authorization.class, this.id), params,
+      throws StripeException {
+    return request(RequestMethod.POST, instanceUrl(Authorization.class, this.id), params,
       Authorization.class, options);
   }
   // </editor-fold>

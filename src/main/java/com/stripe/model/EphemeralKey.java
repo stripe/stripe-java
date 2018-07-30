@@ -1,11 +1,7 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.exception.StripeException;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.List;
@@ -18,14 +14,14 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class EphemeralKey extends APIResource implements HasId {
+public class EphemeralKey extends ApiResource implements HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long created;
   Long expires;
   Boolean livemode;
   String secret;
-  List<EphemeralKeyAssociatedObject> associatedObjects;
+  List<AssociatedObject> associatedObjects;
   transient String rawJson;
 
   // <editor-fold desc="create">
@@ -38,13 +34,12 @@ public class EphemeralKey extends APIResource implements HasId {
    * @return the new ephemeral key
    */
   public static EphemeralKey create(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      throws StripeException {
     if (options.getStripeVersion() == null) {
       throw new IllegalArgumentException("stripeVersion must be specified in RequestOptions");
     }
 
-    return request(RequestMethod.POST, classURL(EphemeralKey.class), params, EphemeralKey.class,
+    return request(RequestMethod.POST, classUrl(EphemeralKey.class), params, EphemeralKey.class,
         options);
   }
   // </editor-fold>
@@ -53,20 +48,24 @@ public class EphemeralKey extends APIResource implements HasId {
   /**
    * Delete an ephemeral key.
    */
-  public EphemeralKey delete()
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public EphemeralKey delete() throws StripeException {
     return delete(null);
   }
 
   /**
    * Delete an ephemeral key.
    */
-  public EphemeralKey delete(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.DELETE, instanceURL(EphemeralKey.class, this.id), null,
+  public EphemeralKey delete(RequestOptions options) throws StripeException {
+    return request(RequestMethod.DELETE, instanceUrl(EphemeralKey.class, this.id), null,
         EphemeralKey.class, options);
   }
   // </editor-fold>
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AssociatedObject extends StripeObject implements HasId {
+    @Getter(onMethod = @__({@Override})) String id;
+    String type;
+  }
 }

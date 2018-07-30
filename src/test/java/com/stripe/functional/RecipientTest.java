@@ -6,7 +6,7 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Recipient;
 import com.stripe.model.RecipientCollection;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,7 +27,7 @@ public class RecipientTest extends BaseStripeTest {
 
     assertNotNull(recipients);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/recipients")
     );
   }

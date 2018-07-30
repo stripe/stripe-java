@@ -1,12 +1,8 @@
 package com.stripe.model;
 
 import com.stripe.Stripe;
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.exception.StripeException;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.List;
@@ -20,7 +16,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class BalanceTransaction extends APIResource implements HasId {
+public class BalanceTransaction extends ApiResource implements HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long amount;
@@ -30,7 +26,7 @@ public class BalanceTransaction extends APIResource implements HasId {
   String description;
   Long fee;
   List<Fee> feeDetails;
-  Integer net;
+  Long net;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<HasId> source;
   String status;
   String type;
@@ -50,8 +46,8 @@ public class BalanceTransaction extends APIResource implements HasId {
     return (this.source != null) ? this.source.getId() : null;
   }
 
-  public void setSource(String sourceID) {
-    this.source = setExpandableFieldID(sourceID, this.source);
+  public void setSource(String sourceId) {
+    this.source = setExpandableFieldId(sourceId, this.source);
   }
 
   public HasId getSourceObject() {
@@ -68,54 +64,12 @@ public class BalanceTransaction extends APIResource implements HasId {
   }
   // </editor-fold>
 
-  // <editor-fold desc="all">
-  /**
-   * List all balance history.
-   *
-   * @deprecated Use {@link #list(Map)} instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static BalanceTransactionCollection all(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, null);
-  }
-
-  /**
-   * List all balance history.
-   *
-   * @deprecated Use {@link #list(Map, RequestOptions)} instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static BalanceTransactionCollection all(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, options);
-  }
-
-  /**
-   * List all balance history.
-   *
-   * @deprecated Use {@link #list(Map, RequestOptions)} instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static BalanceTransactionCollection all(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-  // </editor-fold>
-
   // <editor-fold desc="list">
   /**
    * List all balance history.
    */
   public static BalanceTransactionCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      throws StripeException {
     return list(params, null);
   }
 
@@ -123,9 +77,7 @@ public class BalanceTransaction extends APIResource implements HasId {
    * List all balance history.
    */
   public static BalanceTransactionCollection list(Map<String, Object> params,
-      RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      RequestOptions options) throws StripeException {
     String url = String.format("%s/%s", Stripe.getApiBase(), "v1/balance/history");
     return requestCollection(url, params, BalanceTransactionCollection.class, options);
   }
@@ -135,9 +87,7 @@ public class BalanceTransaction extends APIResource implements HasId {
   /**
    * Retrieve a balance transaction.
    */
-  public static BalanceTransaction retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+  public static BalanceTransaction retrieve(String id) throws StripeException {
     return retrieve(id, (RequestOptions) null);
   }
 
@@ -145,23 +95,20 @@ public class BalanceTransaction extends APIResource implements HasId {
    * Retrieve a balance transaction.
    */
   public static BalanceTransaction retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      throws StripeException {
     String url = String.format("%s/%s/%s", Stripe.getApiBase(), "v1/balance/history", id);
     return request(RequestMethod.GET, url, null, BalanceTransaction.class, options);
   }
-
-  /**
-   * Retrieve a balance transaction.
-   *
-   * @deprecated Use the {@link #retrieve(String, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static BalanceTransaction retrieve(String id, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
-  }
   // </editor-fold>
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Fee extends ApiResource {
+    Long amount;
+    String application;
+    String currency;
+    String description;
+    String type;
+  }
 }

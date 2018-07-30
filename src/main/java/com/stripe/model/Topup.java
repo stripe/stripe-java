@@ -1,11 +1,7 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.exception.StripeException;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.Map;
@@ -18,10 +14,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Topup extends APIResource implements MetadataStore<Topup>, HasId {
+public class Topup extends ApiResource implements MetadataStore<Topup>, HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
-  Integer amount;
+  Long amount;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
       ExpandableField<BalanceTransaction> balanceTransaction;
   Long created;
@@ -41,8 +37,8 @@ public class Topup extends APIResource implements MetadataStore<Topup>, HasId {
     return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
   }
 
-  public void setBalanceTransaction(String balanceTransactionID) {
-    this.balanceTransaction = setExpandableFieldID(balanceTransactionID, this.balanceTransaction);
+  public void setBalanceTransaction(String balanceTransactionId) {
+    this.balanceTransaction = setExpandableFieldId(balanceTransactionId, this.balanceTransaction);
   }
 
   public BalanceTransaction getBalanceTransactionObject() {
@@ -58,9 +54,7 @@ public class Topup extends APIResource implements MetadataStore<Topup>, HasId {
   /**
    * Create a topup.
    */
-  public static Topup create(Map<String, Object> params)
-          throws AuthenticationException, InvalidRequestException,
-          APIConnectionException, CardException, APIException {
+  public static Topup create(Map<String, Object> params) throws StripeException {
     return create(params, null);
   }
 
@@ -68,9 +62,8 @@ public class Topup extends APIResource implements MetadataStore<Topup>, HasId {
    * Create a topup.
    */
   public static Topup create(Map<String, Object> params, RequestOptions options)
-          throws AuthenticationException, InvalidRequestException,
-          APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, classURL(Topup.class), params, Topup.class, options);
+          throws StripeException {
+    return request(RequestMethod.POST, classUrl(Topup.class), params, Topup.class, options);
   }
   // </editor-fold>
 
@@ -78,9 +71,7 @@ public class Topup extends APIResource implements MetadataStore<Topup>, HasId {
   /**
    * List all topups.
    */
-  public static TopupCollection list(Map<String, Object> params)
-          throws AuthenticationException, InvalidRequestException,
-          APIConnectionException, CardException, APIException {
+  public static TopupCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
@@ -88,9 +79,8 @@ public class Topup extends APIResource implements MetadataStore<Topup>, HasId {
    * List all topups.
    */
   public static TopupCollection list(Map<String, Object> params, RequestOptions options)
-          throws AuthenticationException, InvalidRequestException,
-          APIConnectionException, CardException, APIException {
-    return requestCollection(classURL(Topup.class), params, TopupCollection.class, options);
+          throws StripeException {
+    return requestCollection(classUrl(Topup.class), params, TopupCollection.class, options);
   }
   // </editor-fold>
 
@@ -98,18 +88,14 @@ public class Topup extends APIResource implements MetadataStore<Topup>, HasId {
   /**
    * Retrieve a topup.
    */
-  public static Topup retrieve(String id) throws AuthenticationException,
-          InvalidRequestException, APIConnectionException, CardException,
-          APIException {
+  public static Topup retrieve(String id) throws StripeException {
     return retrieve(id, null);
   }
 
   /**
    * Retrieve a topup.
    */
-  public static Topup retrieve(String id, RequestOptions options)
-          throws AuthenticationException, InvalidRequestException,
-          APIConnectionException, CardException, APIException {
+  public static Topup retrieve(String id, RequestOptions options) throws StripeException {
     return retrieve(id, null, options);
   }
 
@@ -117,9 +103,8 @@ public class Topup extends APIResource implements MetadataStore<Topup>, HasId {
    * Retrieve a topup.
    */
   public static Topup retrieve(String id, Map<String, Object> params, RequestOptions options)
-          throws AuthenticationException, InvalidRequestException,
-          APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Topup.class, id), params, Topup.class, options);
+      throws StripeException {
+    return request(RequestMethod.GET, instanceUrl(Topup.class, id), params, Topup.class, options);
   }
   // </editor-fold>
 
@@ -128,8 +113,7 @@ public class Topup extends APIResource implements MetadataStore<Topup>, HasId {
    * Update a topup.
    */
   @Override
-  public Topup update(Map<String, Object> params) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException, APIException {
+  public Topup update(Map<String, Object> params) throws StripeException {
     return update(params, null);
   }
 
@@ -137,10 +121,8 @@ public class Topup extends APIResource implements MetadataStore<Topup>, HasId {
    * Update a topup.
    */
   @Override
-  public Topup update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException, APIConnectionException,
-      CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Topup.class, id), params, Topup.class, options);
+  public Topup update(Map<String, Object> params, RequestOptions options) throws StripeException {
+    return request(RequestMethod.POST, instanceUrl(Topup.class, id), params, Topup.class, options);
   }
   // </editor-fold>
 }

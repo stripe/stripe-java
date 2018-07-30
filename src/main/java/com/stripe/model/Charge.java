@@ -1,14 +1,11 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.exception.StripeException;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.Collections;
+import java.util.List;
 import java.util.Map;
 
 import lombok.AccessLevel;
@@ -19,11 +16,10 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Charge extends APIResource implements MetadataStore<Charge>, HasId {
+public class Charge extends ApiResource implements MetadataStore<Charge>, HasId {
   public static final String FRAUD_DETAILS = "fraud_details";
 
-  @Getter(onMethod = @__({@Override}))
-  String id;
+  @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long amount;
   Long amountRefunded;
@@ -44,12 +40,12 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   String failureMessage;
   FraudDetails fraudDetails;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Invoice> invoice;
-  ChargeLevel3 level3;
+  Level3 level3;
   Boolean livemode;
   @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Account> onBehalfOf;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Order> order;
-  ChargeOutcome outcome;
+  Outcome outcome;
   Boolean paid;
   String receiptEmail;
   String receiptNumber;
@@ -99,8 +95,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     return (this.application != null) ? this.application.getId() : null;
   }
 
-  public void setApplication(String applicationID) {
-    this.application = setExpandableFieldID(applicationID, this.application);
+  public void setApplication(String applicationId) {
+    this.application = setExpandableFieldId(applicationId, this.application);
   }
 
   public Application getApplicationObject() {
@@ -117,8 +113,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     return (this.applicationFee != null) ? this.applicationFee.getId() : null;
   }
 
-  public void setApplicationFee(String applicationFeeID) {
-    this.applicationFee = setExpandableFieldID(applicationFeeID, this.applicationFee);
+  public void setApplicationFee(String applicationFeeId) {
+    this.applicationFee = setExpandableFieldId(applicationFeeId, this.applicationFee);
   }
 
   public ApplicationFee getApplicationFeeObject() {
@@ -135,8 +131,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
   }
 
-  public void setBalanceTransaction(String balanceTransactionID) {
-    this.balanceTransaction = setExpandableFieldID(balanceTransactionID, this.balanceTransaction);
+  public void setBalanceTransaction(String balanceTransactionId) {
+    this.balanceTransaction = setExpandableFieldId(balanceTransactionId, this.balanceTransaction);
   }
 
   public BalanceTransaction getBalanceTransactionObject() {
@@ -153,8 +149,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     return (this.customer != null) ? this.customer.getId() : null;
   }
 
-  public void setCustomer(String customerID) {
-    this.customer = setExpandableFieldID(customerID, this.customer);
+  public void setCustomer(String customerId) {
+    this.customer = setExpandableFieldId(customerId, this.customer);
 
   }
 
@@ -172,8 +168,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     return (this.destination != null) ? this.destination.getId() : null;
   }
 
-  public void setDestination(String destinationID) {
-    this.destination = APIResource.setExpandableFieldID(destinationID, this.destination);
+  public void setDestination(String destinationId) {
+    this.destination = ApiResource.setExpandableFieldId(destinationId, this.destination);
   }
 
   public Account getDestinationObject() {
@@ -190,8 +186,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     return (this.dispute != null) ? this.dispute.getId() : null;
   }
 
-  public void setDispute(String dispute) {
-    this.dispute = setExpandableFieldID(dispute, this.dispute);
+  public void setDispute(String disputeId) {
+    this.dispute = setExpandableFieldId(disputeId, this.dispute);
   }
 
   public Dispute getDisputeObject() {
@@ -208,8 +204,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     return (this.invoice != null) ? this.invoice.getId() : null;
   }
 
-  public void setInvoice(String invoiceID) {
-    this.invoice = setExpandableFieldID(invoiceID, this.invoice);
+  public void setInvoice(String invoiceId) {
+    this.invoice = setExpandableFieldId(invoiceId, this.invoice);
   }
 
   public Invoice getInvoiceObject() {
@@ -226,8 +222,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     return (this.onBehalfOf != null) ? this.onBehalfOf.getId() : null;
   }
 
-  public void setOnBehalfOf(String onBehalfOfID) {
-    this.onBehalfOf = APIResource.setExpandableFieldID(onBehalfOfID, this.onBehalfOf);
+  public void setOnBehalfOf(String onBehalfOfId) {
+    this.onBehalfOf = ApiResource.setExpandableFieldId(onBehalfOfId, this.onBehalfOf);
   }
 
   public Account getOnBehalfOfObject() {
@@ -244,8 +240,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     return (this.order != null) ? this.order.getId() : null;
   }
 
-  public void setOrder(String orderID) {
-    this.order = setExpandableFieldID(orderID, this.order);
+  public void setOrder(String orderId) {
+    this.order = setExpandableFieldId(orderId, this.order);
   }
 
   public Order getOrderObject() {
@@ -265,8 +261,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   public ChargeRefundCollection getRefunds() {
     // API versions 2014-05-19 and earlier render charge refunds as an array
     // instead of an object, meaning there is no sublist URL.
-    if (refunds != null && refunds.getURL() == null) {
-      refunds.setURL(String.format("/v1/charges/%s/refunds", getId()));
+    if (refunds != null && refunds.getUrl() == null) {
+      refunds.setUrl(String.format("/v1/charges/%s/refunds", getId()));
     }
     return refunds;
   }
@@ -276,8 +272,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     return (this.review != null) ? this.review.getId() : null;
   }
 
-  public void setReview(String reviewID) {
-    this.review = setExpandableFieldID(reviewID, this.review);
+  public void setReview(String reviewId) {
+    this.review = setExpandableFieldId(reviewId, this.review);
   }
 
   public Review getReviewObject() {
@@ -294,8 +290,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     return (this.sourceTransfer != null) ? this.sourceTransfer.getId() : null;
   }
 
-  public void setSourceTransfer(String sourceTransferID) {
-    this.sourceTransfer = setExpandableFieldID(sourceTransferID, this.sourceTransfer);
+  public void setSourceTransfer(String sourceTransferId) {
+    this.sourceTransfer = setExpandableFieldId(sourceTransferId, this.sourceTransfer);
   }
 
   public Transfer getSourceTransferObject() {
@@ -312,8 +308,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
     return (this.transfer != null) ? this.transfer.getId() : null;
   }
 
-  public void setTransfer(String transferID) {
-    this.transfer = setExpandableFieldID(transferID, this.transfer);
+  public void setTransfer(String transferId) {
+    this.transfer = setExpandableFieldId(transferId, this.transfer);
   }
 
   public Transfer getTransferObject() {
@@ -325,152 +321,34 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   }
   // </editor-fold>
 
-  // <editor-fold desc="all">
-  /**
-   * List all charges.
-   *
-   * @deprecated Use the {@link #list(Map)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static ChargeCollection all(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, null);
-  }
-
-  /**
-   * List all charges.
-   *
-   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static ChargeCollection all(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, options);
-  }
-
-  /**
-   * List all charges.
-   *
-   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static ChargeCollection all(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-  // </editor-fold>
-
   // <editor-fold desc="capture">
   /**
    * Capture a charge.
    */
-  public Charge capture() throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+  public Charge capture() throws StripeException {
     return this.capture(null, (RequestOptions) null);
   }
 
   /**
    * Capture a charge.
    */
-  public Charge capture(RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+  public Charge capture(RequestOptions options) throws StripeException {
     return this.capture(null, options);
   }
 
   /**
    * Capture a charge.
-   *
-   * @deprecated Use the {@link #capture(RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
    */
-  @Deprecated
-  public Charge capture(String apiKey) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return capture(RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  /**
-   * Capture a charge.
-   */
-  public Charge capture(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public Charge capture(Map<String, Object> params) throws StripeException {
     return this.capture(params, (RequestOptions) null);
   }
 
   /**
    * Capture a charge.
    */
-  public Charge capture(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public Charge capture(Map<String, Object> params, RequestOptions options) throws StripeException {
     return request(RequestMethod.POST, String.format("%s/capture",
-        instanceURL(Charge.class, this.getId())), params, Charge.class, options);
-  }
-
-  /**
-   * Capture a charge.
-   *
-   * @deprecated Use the {@link #capture(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public Charge capture(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return capture(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-  // </editor-fold>
-
-  // <editor-fold desc="closeDispute">
-  /**
-   * Close the charge's dispute.
-   *
-   * @deprecated Use the {@link Dispute#close()} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public Dispute closeDispute() throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return this.closeDispute((RequestOptions) null);
-  }
-
-  /**
-   * Close the charge's dispute.
-   *
-   * @deprecated Use the {@link Dispute#close(RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public Dispute closeDispute(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST,
-        String.format("%s/dispute/close", instanceURL(Charge.class, this.getId())), null,
-        Dispute.class, options);
-  }
-
-  /**
-   * Close the charge's dispute.
-   *
-   * @deprecated Use the {@link Dispute#close(RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public Dispute closeDispute(String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return closeDispute(RequestOptions.builder().setApiKey(apiKey).build());
+        instanceUrl(Charge.class, this.getId())), params, Charge.class, options);
   }
   // </editor-fold>
 
@@ -478,9 +356,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   /**
    * Create a charge.
    */
-  public static Charge create(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public static Charge create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
@@ -488,22 +364,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
    * Create a charge.
    */
   public static Charge create(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, classURL(Charge.class), params, Charge.class, options);
-  }
-
-  /**
-   * Create a charge.
-   *
-   * @deprecated Use the {@link #create(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static Charge create(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return create(params, RequestOptions.builder().setApiKey(apiKey).build());
+      throws StripeException {
+    return request(RequestMethod.POST, classUrl(Charge.class), params, Charge.class, options);
   }
   // </editor-fold>
 
@@ -511,9 +373,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   /**
    * List all charges.
    */
-  public static ChargeCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public static ChargeCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
@@ -521,9 +381,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
    * List all charges.
    */
   public static ChargeCollection list(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return requestCollection(classURL(Charge.class), params, ChargeCollection.class, options);
+      throws StripeException {
+    return requestCollection(classUrl(Charge.class), params, ChargeCollection.class, options);
   }
   // </editor-fold>
 
@@ -531,9 +390,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   /**
    * Mark the charge as fraudulent.
    */
-  public Charge markFraudulent(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public Charge markFraudulent(RequestOptions options) throws StripeException {
     Map<String, Object> params = Collections.<String, Object>singletonMap(
         FRAUD_DETAILS, Collections.singletonMap(FraudDetails.USER_REPORT, "fraudulent"));
     return this.update(params, options);
@@ -544,9 +401,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   /**
    * Mark the charge as safe.
    */
-  public Charge markSafe(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public Charge markSafe(RequestOptions options) throws StripeException {
     Map<String, Object> params = Collections.<String, Object>singletonMap(
         FRAUD_DETAILS, Collections.singletonMap(FraudDetails.USER_REPORT, "safe"));
     return this.update(params, options);
@@ -560,9 +415,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
    * @deprecated Prefer using the {@link Refund#create(Map)} method instead.
    */
   @Deprecated
-  public Charge refund() throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+  public Charge refund() throws StripeException {
     return this.refund(null, (RequestOptions) null);
   }
 
@@ -572,23 +425,8 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
    * @deprecated Prefer using the {@link Refund#create(Map, RequestOptions)} method instead.
    */
   @Deprecated
-  public Charge refund(RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+  public Charge refund(RequestOptions options) throws StripeException {
     return this.refund(null, options);
-  }
-
-  /**
-   * Refund the charge.
-   *
-   * @deprecated Use the {@link #refund(RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public Charge refund(String apiKey) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return this.refund(RequestOptions.builder().setApiKey(apiKey).build());
   }
 
   /**
@@ -597,9 +435,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
    * @deprecated Prefer using the {@link Refund#create(Map)} method instead.
    */
   @Deprecated
-  public Charge refund(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public Charge refund(Map<String, Object> params) throws StripeException {
     return this.refund(params, (RequestOptions) null);
   }
 
@@ -609,24 +445,9 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
    * @deprecated Prefer using the {@link Refund#create(Map, RequestOptions)} method instead.
    */
   @Deprecated
-  public Charge refund(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public Charge refund(Map<String, Object> params, RequestOptions options) throws StripeException {
     return request(RequestMethod.POST, String.format("%s/refund",
-        instanceURL(Charge.class, this.getId())), params, Charge.class, options);
-  }
-
-  /**
-   * Refund the charge.
-   *
-   * @deprecated Use the {@link #refund(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public Charge refund(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return refund(params, RequestOptions.builder().setApiKey(apiKey).build());
+        instanceUrl(Charge.class, this.getId())), params, Charge.class, options);
   }
   // </editor-fold>
 
@@ -634,41 +455,23 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
   /**
    * Retrieve a charge.
    */
-  public static Charge retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+  public static Charge retrieve(String id) throws StripeException {
     return retrieve(id, (RequestOptions) null);
   }
 
   /**
    * Retrieve a charge.
    */
-  public static Charge retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Charge.class, id), null, Charge.class, options);
-  }
-
-  /**
-   * Retrieve a charge.
-   *
-   * @deprecated Use the {@link #retrieve(String, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static Charge retrieve(String id, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
+  public static Charge retrieve(String id, RequestOptions options) throws StripeException {
+    return request(RequestMethod.GET, instanceUrl(Charge.class, id), null, Charge.class, options);
   }
 
   /**
    * Retrieve a charge.
    */
   public static Charge retrieve(String id, Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Charge.class, id), params, Charge.class, options);
+      throws StripeException {
+    return request(RequestMethod.GET, instanceUrl(Charge.class, id), params, Charge.class, options);
   }
   // </editor-fold>
 
@@ -677,9 +480,7 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
    * Update a charge.
    */
   @Override
-  public Charge update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public Charge update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
@@ -687,67 +488,110 @@ public class Charge extends APIResource implements MetadataStore<Charge>, HasId 
    * Update a charge.
    */
   @Override
-  public Charge update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Charge.class, id), params, Charge.class,
+  public Charge update(Map<String, Object> params, RequestOptions options) throws StripeException {
+    return request(RequestMethod.POST, instanceUrl(Charge.class, id), params, Charge.class,
         options);
-  }
-
-  /**
-   * Update a charge.
-   *
-   * @deprecated Use the {@link #update(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public Charge update(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
   // </editor-fold>
 
-  // <editor-fold desc="updateDispute">
-  /**
-   * Update the charge's dispute.
-   *
-   * @deprecated Use the {@link Dispute#update(Map)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public Dispute updateDispute(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return this.updateDispute(params, (RequestOptions) null);
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AlternateStatementDescriptors extends StripeObject {
+    String kana;
+    String kanji;
   }
 
-  /**
-   * Update the charge's dispute.
-   *
-   * @deprecated Use the {@link Dispute#update(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public Dispute updateDispute(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST,
-        String.format("%s/dispute", instanceURL(Charge.class, this.id)), params, Dispute.class,
-        options);
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class FraudDetails extends StripeObject {
+    public static final String USER_REPORT = "user_report";
+
+    String userReport;
+    String stripeReport;
   }
 
-  /**
-   * Update the charge's dispute.
-   *
-   * @deprecated Use the {@link Dispute#update(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public Dispute updateDispute(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return updateDispute(params, RequestOptions.builder().setApiKey(apiKey).build());
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Level3 extends StripeObject {
+    String customerReference;
+    List<LineItem> lineItems;
+    String merchantReference;
+    String shippingAddressZip;
+    String shippingFromZip;
+    Long shippingAmount;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class LineItem extends StripeObject {
+      Long discountAmount;
+      String productCode;
+      String productDescription;
+      Long quantity;
+      Long taxAmount;
+      Long unitCost;
+    }
   }
-  // </editor-fold>
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Outcome extends ApiResource {
+    String networkStatus;
+    String reason;
+    String riskLevel;
+    Long riskScore;
+    @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Rule> rule;
+    String sellerMessage;
+    String type;
+
+    // <editor-fold desc="rule">
+    /**
+     * Returns the {@code rule} object, if expanded. If not expanded, use {@link #getRuleId()} to
+     * get the ID.
+     *
+     * @return the {@code rule} ID
+     * @deprecated In recent API versions, this attribute is no longer automatically expanded.
+     *     Prefer using the {@link #getRuleId()} and {@link #getRuleObject()} methods instead.
+     * @see <a href="https://stripe.com/docs/upgrades#2017-02-14">API version 2017-02-14</a>
+     */
+    @Deprecated
+    public Rule getRule() {
+      return (this.rule != null) ? this.rule.getExpanded() : null;
+    }
+
+    @Deprecated
+    public void setRule(Rule rule) {
+      this.rule = new ExpandableField<Rule>(rule.getId(), rule);
+    }
+
+    public String getRuleId() {
+      return (this.rule != null) ? this.rule.getId() : null;
+    }
+
+    public void setRuleId(String ruleId) {
+      this.rule = setExpandableFieldId(ruleId, this.rule);
+    }
+
+    public Rule getRuleObject() {
+      return (this.rule != null) ? this.rule.getExpanded() : null;
+    }
+
+    public void setRuleObject(Rule rule) {
+      this.rule = new ExpandableField<Rule>(rule.getId(), rule);
+    }
+    // </editor-fold>
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Rule extends StripeObject implements HasId {
+      @Getter(onMethod = @__({@Override})) String id;
+      String action;
+      String predicate;
+    }
+  }
 }

@@ -2,15 +2,15 @@ package com.stripe.functional;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.BankAccount;
 import com.stripe.model.Customer;
-import com.stripe.model.DeletedBankAccount;
 import com.stripe.model.ExternalAccount;
 import com.stripe.model.ExternalAccountCollection;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -46,7 +46,7 @@ public class BankAccountTest extends BaseStripeTest {
 
     assertNotNull(bankAccount);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/customers/%s/sources", customer.getId()),
         params
     );
@@ -60,7 +60,7 @@ public class BankAccountTest extends BaseStripeTest {
 
     assertNotNull(bankAccount);
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/customers/%s/sources/%s", customer.getId(), BANK_ACCOUNT_ID)
     );
   }
@@ -77,7 +77,7 @@ public class BankAccountTest extends BaseStripeTest {
 
     // stripe-mock returns a Card instance instead of a BankAccount
     stubRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/customers/%s/sources/%s", customer.getId(), bankAccount.getId()),
         params,
         BankAccount.class,
@@ -88,7 +88,7 @@ public class BankAccountTest extends BaseStripeTest {
 
     assertNotNull(updatedBankAccount);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/customers/%s/sources/%s", customer.getId(), bankAccount.getId()),
         params
     );
@@ -103,14 +103,14 @@ public class BankAccountTest extends BaseStripeTest {
     params.put("limit", 1);
 
     // stripe-mock doesn't handle this, so we stub the request
-    final BankAccount stubbedBankAccount = APIResource.GSON.fromJson(
+    final BankAccount stubbedBankAccount = ApiResource.GSON.fromJson(
         getResourceAsString("/api_fixtures/bank_account.json"), BankAccount.class);
     final ExternalAccountCollection stubbedCollection = new ExternalAccountCollection();
     final List<ExternalAccount> stubbedData = new ArrayList<ExternalAccount>();
     stubbedData.add(stubbedBankAccount);
     stubbedCollection.setData(stubbedData);
     stubRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/customers/%s/sources", customer.getId()),
         params,
         ExternalAccountCollection.class,
@@ -122,7 +122,7 @@ public class BankAccountTest extends BaseStripeTest {
     assertNotNull(externalAccounts);
     assertEquals(1, externalAccounts.getData().size());
     verifyRequest(
-        APIResource.RequestMethod.GET,
+        ApiResource.RequestMethod.GET,
         String.format("/v1/customers/%s/sources", customer.getId())
     );
 
@@ -134,12 +134,21 @@ public class BankAccountTest extends BaseStripeTest {
   public void testDelete() throws StripeException {
     final Customer customer = Customer.retrieve(CUSTOMER_ID);
     final BankAccount bankAccount = getBankAccountFixture(customer);
+    final String deleteBankAccountData = String.format(
+        "{\"id\": \"%s\", \"object\": \"bank_account\", \"deleted\": true}", bankAccount.getId()
+    );
 
-    final DeletedBankAccount deletedBankAccount = bankAccount.delete();
+    stubRequest(
+        ApiResource.RequestMethod.DELETE,
+        String.format("/v1/customers/%s/sources/%s", customer.getId(), bankAccount.getId()),
+        null, BankAccount.class, deleteBankAccountData
+    );
+    final BankAccount deletedBankAccount = bankAccount.delete();
 
     assertNotNull(deletedBankAccount);
+    assertTrue(deletedBankAccount.getDeleted());
     verifyRequest(
-        APIResource.RequestMethod.DELETE,
+        ApiResource.RequestMethod.DELETE,
         String.format("/v1/customers/%s/sources/%s", customer.getId(), bankAccount.getId())
     );
   }
@@ -159,7 +168,7 @@ public class BankAccountTest extends BaseStripeTest {
 
     assertNotNull(verifiedBankAccount);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/customers/%s/sources/%s/verify", customer.getId(), bankAccount.getId()),
         params
     );

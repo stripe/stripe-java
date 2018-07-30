@@ -5,7 +5,7 @@ import static org.junit.Assert.assertNotNull;
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.UsageRecord;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -31,7 +31,7 @@ public class UsageRecordTest extends BaseStripeTest {
 
     assertNotNull(resource);
     verifyRequest(
-        APIResource.RequestMethod.POST,
+        ApiResource.RequestMethod.POST,
         String.format("/v1/subscription_items/%s/usage_records", SUBCRIPTION_ITEM_ID),
         params
     );

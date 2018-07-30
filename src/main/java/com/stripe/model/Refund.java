@@ -1,11 +1,7 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.exception.StripeException;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.Map;
@@ -18,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Refund extends APIResource implements MetadataStore<Charge>, HasId {
+public class Refund extends ApiResource implements MetadataStore<Charge>, HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long amount;
@@ -38,8 +34,8 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
     return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
   }
 
-  public void setBalanceTransaction(String balanceTransactionID) {
-    this.balanceTransaction = setExpandableFieldID(balanceTransactionID, this.balanceTransaction);
+  public void setBalanceTransaction(String balanceTransactionId) {
+    this.balanceTransaction = setExpandableFieldId(balanceTransactionId, this.balanceTransaction);
   }
 
   public BalanceTransaction getBalanceTransactionObject() {
@@ -56,8 +52,8 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
     return (this.charge != null) ? this.charge.getId() : null;
   }
 
-  public void setCharge(String chargeID) {
-    this.charge = setExpandableFieldID(chargeID, this.charge);
+  public void setCharge(String chargeId) {
+    this.charge = setExpandableFieldId(chargeId, this.charge);
   }
 
   public Charge getChargeObject() {
@@ -69,40 +65,11 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
   }
   // </editor-fold>
 
-  // <editor-fold desc="all">
-  /**
-   * List all refunds.
-   *
-   * @deprecated Use the {@link #list(Map)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static RefundCollection all(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, null);
-  }
-
-  /**
-   * List all refunds.
-   *
-   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static RefundCollection all(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, options);
-  }
-
   // <editor-fold desc="create">
   /**
    * Create a refund.
    */
-  public static Refund create(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public static Refund create(Map<String, Object> params) throws StripeException {
     return create(params, null);
   }
 
@@ -110,9 +77,8 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
    * Create a refund.
    */
   public static Refund create(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, classURL(Refund.class), params, Refund.class, options);
+      throws StripeException {
+    return request(RequestMethod.POST, classUrl(Refund.class), params, Refund.class, options);
   }
   // </editor-fold>
 
@@ -120,9 +86,7 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
   /**
    * List all refunds.
    */
-  public static RefundCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public static RefundCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
@@ -130,9 +94,8 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
    * List all refunds.
    */
   public static RefundCollection list(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return requestCollection(classURL(Refund.class), params, RefundCollection.class, options);
+      throws StripeException {
+    return requestCollection(classUrl(Refund.class), params, RefundCollection.class, options);
   }
   // </editor-fold>
 
@@ -140,28 +103,23 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
   /**
    * Retrieve a refund.
    */
-  public static Refund retrieve(String id)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public static Refund retrieve(String id) throws StripeException {
     return retrieve(id, null);
   }
 
   /**
    * Retrieve a refund.
    */
-  public static Refund retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Refund.class, id), null, Refund.class, options);
+  public static Refund retrieve(String id, RequestOptions options) throws StripeException {
+    return request(RequestMethod.GET, instanceUrl(Refund.class, id), null, Refund.class, options);
   }
 
   /**
    * Retrieve a refund.
    */
   public static Refund retrieve(String id, Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Refund.class, id), params, Refund.class, options);
+      throws StripeException {
+    return request(RequestMethod.GET, instanceUrl(Refund.class, id), params, Refund.class, options);
   }
   // </editor-fold>
 
@@ -170,9 +128,7 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
    * Update a refund.
    */
   @Override
-  public Refund update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public Refund update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
@@ -180,24 +136,9 @@ public class Refund extends APIResource implements MetadataStore<Charge>, HasId 
    * Update a refund.
    */
   @Override
-  public Refund update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Refund.class, id), params, Refund.class,
+  public Refund update(Map<String, Object> params, RequestOptions options) throws StripeException {
+    return request(RequestMethod.POST, instanceUrl(Refund.class, id), params, Refund.class,
         options);
-  }
-
-  /**
-   * Update a refund.
-   *
-   * @deprecated Use the {@link #update(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public Refund update(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
   // </editor-fold>
 }

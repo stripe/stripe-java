@@ -1,11 +1,7 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.exception.StripeException;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.List;
@@ -19,7 +15,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Transfer extends APIResource implements MetadataStore<Transfer>, HasId {
+public class Transfer extends ApiResource implements MetadataStore<Transfer>, HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long amount;
@@ -95,8 +91,8 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
     return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
   }
 
-  public void setBalanceTransaction(String balanceTransactionID) {
-    this.balanceTransaction = setExpandableFieldID(balanceTransactionID, this.balanceTransaction);
+  public void setBalanceTransaction(String balanceTransactionId) {
+    this.balanceTransaction = setExpandableFieldId(balanceTransactionId, this.balanceTransaction);
   }
 
   public BalanceTransaction getBalanceTransactionObject() {
@@ -113,8 +109,8 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
     return (this.destination != null) ? this.destination.getId() : null;
   }
 
-  public void setDestination(String destinationID) {
-    this.destination = APIResource.setExpandableFieldID(destinationID, this.destination);
+  public void setDestination(String destinationId) {
+    this.destination = ApiResource.setExpandableFieldId(destinationId, this.destination);
   }
 
   public Account getDestinationObject() {
@@ -131,8 +127,8 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
     return (this.destinationPayment != null) ? this.destinationPayment.getId() : null;
   }
 
-  public void setDestinationPayment(String destinationPaymentID) {
-    this.destinationPayment = setExpandableFieldID(destinationPaymentID, this.destinationPayment);
+  public void setDestinationPayment(String destinationPaymentId) {
+    this.destinationPayment = setExpandableFieldId(destinationPaymentId, this.destinationPayment);
   }
 
   public Charge getDestinationPaymentObject() {
@@ -151,8 +147,8 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
    * @return the {@code reversals} list
    */
   public TransferReversalCollection getReversals() {
-    if (reversals.getURL() == null) {
-      reversals.setURL(String.format("/v1/transfers/%s/reversals", getId()));
+    if (reversals.getUrl() == null) {
+      reversals.setUrl(String.format("/v1/transfers/%s/reversals", getId()));
     }
     return reversals;
   }
@@ -162,8 +158,8 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
     return (this.sourceTransaction != null) ? this.sourceTransaction.getId() : null;
   }
 
-  public void setSourceTransaction(String sourceTransactionID) {
-    this.sourceTransaction = setExpandableFieldID(sourceTransactionID, this.sourceTransaction);
+  public void setSourceTransaction(String sourceTransactionId) {
+    this.sourceTransaction = setExpandableFieldId(sourceTransactionId, this.sourceTransaction);
 
   }
 
@@ -177,49 +173,6 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
   }
   // </editor-fold>
 
-  // <editor-fold desc="all">
-  /**
-   * List all transfers.
-   *
-   * @deprecated Use the {@link #list(Map)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static TransferCollection all(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, null);
-  }
-
-  /**
-   * List all transfers.
-   *
-   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static TransferCollection all(Map<String, Object> params,
-                     RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return list(params, options);
-  }
-
-  /**
-   * List all transfers.
-   *
-   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static TransferCollection all(Map<String, Object> params,
-                     String apiKey) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return list(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-  // </editor-fold>
-
   // <editor-fold desc="cancel">
   /**
    * Cancel a transfer.
@@ -227,9 +180,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
    * @deprecated Use the {#link Payout#cancel()} method instead.
    */
   @Deprecated
-  public Transfer cancel()
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public Transfer cancel() throws StripeException {
     return cancel((RequestOptions) null);
   }
 
@@ -239,24 +190,9 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
    * @deprecated Use the {#link Payout#cancel(RequestOptions)} method instead.
    */
   @Deprecated
-  public Transfer cancel(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Transfer.class, this.id) + "/cancel", null,
+  public Transfer cancel(RequestOptions options) throws StripeException {
+    return request(RequestMethod.POST, instanceUrl(Transfer.class, this.id) + "/cancel", null,
         Transfer.class, options);
-  }
-
-  /**
-   * Cancel a transfer.
-   *
-   * @deprecated Use the {@link #cancel(RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public Transfer cancel(String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return cancel(RequestOptions.builder().setApiKey(apiKey).build());
   }
   // </editor-fold>
 
@@ -264,9 +200,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
   /**
    * Create a transfer.
    */
-  public static Transfer create(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public static Transfer create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
@@ -274,22 +208,8 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
    * Create a transfer.
    */
   public static Transfer create(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, classURL(Transfer.class), params, Transfer.class, options);
-  }
-
-  /**
-   * Create a transfer.
-   *
-   * @deprecated Use the {@link #create(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static Transfer create(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return create(params, RequestOptions.builder().setApiKey(apiKey).build());
+      throws StripeException {
+    return request(RequestMethod.POST, classUrl(Transfer.class), params, Transfer.class, options);
   }
   // </editor-fold>
 
@@ -297,20 +217,16 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
   /**
    * List all transfers.
    */
-  public static TransferCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public static TransferCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
   /**
    * List all transfers.
    */
-  public static TransferCollection list(Map<String, Object> params,
-                      RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return requestCollection(classURL(Transfer.class), params, TransferCollection.class, options);
+  public static TransferCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    return requestCollection(classUrl(Transfer.class), params, TransferCollection.class, options);
   }
   // </editor-fold>
 
@@ -318,42 +234,24 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
   /**
    * Retrive a transfer.
    */
-  public static Transfer retrieve(String id) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+  public static Transfer retrieve(String id) throws StripeException {
     return retrieve(id, (RequestOptions) null);
   }
 
   /**
    * Retrive a transfer.
    */
-  public static Transfer retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Transfer.class, id), null, Transfer.class,
+  public static Transfer retrieve(String id, RequestOptions options) throws StripeException {
+    return request(RequestMethod.GET, instanceUrl(Transfer.class, id), null, Transfer.class,
         options);
   }
 
   /**
-   * Retrive a transfer.
-   *
-   * @deprecated Use the {@link #retrieve(String, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static Transfer retrieve(String id, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-
-  /**
-   * Retrive a transfer.
+   * Retrieve a transfer.
    */
   public static Transfer retrieve(String id, Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Transfer.class, id), params, Transfer.class,
+      throws StripeException {
+    return request(RequestMethod.GET, instanceUrl(Transfer.class, id), params, Transfer.class,
         options);
   }
   // </editor-fold>
@@ -367,8 +265,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
    */
   @Deprecated
   public TransferTransactionCollection transactions(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+      throws StripeException {
     return transactions(params, (RequestOptions) null);
   }
 
@@ -381,24 +278,9 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
   @Deprecated
   public TransferTransactionCollection transactions(
       Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    String url = String.format("%s%s", instanceURL(Transfer.class, this.getId()), "/transactions");
+      throws StripeException {
+    String url = String.format("%s%s", instanceUrl(Transfer.class, this.getId()), "/transactions");
     return requestCollection(url, params, TransferTransactionCollection.class, options);
-  }
-
-  /**
-   * Retrieve a transfer's transactions.
-   *
-   * @deprecated Use the {@link #transactions(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public TransferTransactionCollection transactions(
-      Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return transactions(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
   // </editor-fold>
 
@@ -407,9 +289,7 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
    * Update a transfer.
    */
   @Override
-  public Transfer update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public Transfer update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
@@ -418,23 +298,26 @@ public class Transfer extends APIResource implements MetadataStore<Transfer>, Ha
    */
   @Override
   public Transfer update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Transfer.class, this.id), params,
+      throws StripeException {
+    return request(RequestMethod.POST, instanceUrl(Transfer.class, this.id), params,
         Transfer.class, options);
   }
-
-  /**
-   * Update a transfer.
-   *
-   * @deprecated Use the {@link #update(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public Transfer update(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return update(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
   // </editor-fold>
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Summary extends StripeObject {
+    Long adjustmentCount;
+    Long adjustmentGross;
+    Long chargeCount;
+    Long chargeFees;
+    Long chargeGross;
+    Long net;
+    Long refundCount;
+    Long refundFees;
+    Long refundGross;
+    Long validationCount;
+    Long validationFees;
+  }
 }

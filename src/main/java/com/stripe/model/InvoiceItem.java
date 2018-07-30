@@ -1,11 +1,7 @@
 package com.stripe.model;
 
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.exception.StripeException;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.Map;
@@ -18,7 +14,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class InvoiceItem extends APIResource implements MetadataStore<InvoiceItem>, HasId {
+public class InvoiceItem extends ApiResource implements MetadataStore<InvoiceItem>, HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long amount;
@@ -33,18 +29,19 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
   InvoiceLineItemPeriod period;
   Plan plan;
   Boolean proration;
-  Integer quantity;
+  Long quantity;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Subscription> subscription;
   String subscriptionItem;
   Long unitAmount;
+  Boolean deleted;
 
   // <editor-fold desc="customer">
   public String getCustomer() {
     return (this.customer != null) ? this.customer.getId() : null;
   }
 
-  public void setCustomer(String customerID) {
-    this.customer = setExpandableFieldID(customerID, this.customer);
+  public void setCustomer(String customerId) {
+    this.customer = setExpandableFieldId(customerId, this.customer);
   }
 
   public Customer getCustomerObject() {
@@ -61,8 +58,8 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
     return (this.invoice != null) ? this.invoice.getId() : null;
   }
 
-  public void setInvoice(String invoiceID) {
-    this.invoice = setExpandableFieldID(invoiceID, this.invoice);
+  public void setInvoice(String invoiceId) {
+    this.invoice = setExpandableFieldId(invoiceId, this.invoice);
   }
 
   public Invoice getInvoiceObject() {
@@ -79,8 +76,8 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
     return (this.subscription != null) ? this.subscription.getId() : null;
   }
 
-  public void setSubscription(String subscriptionID) {
-    this.subscription = setExpandableFieldID(subscriptionID, this.subscription);
+  public void setSubscription(String subscriptionId) {
+    this.subscription = setExpandableFieldId(subscriptionId, this.subscription);
   }
 
   public Subscription getSubscriptionObject() {
@@ -92,56 +89,11 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
   }
   // </editor-fold>
 
-  // <editor-fold desc="all">
-  /**
-   * List all invoice items.
-   *
-   * @deprecated Use the {@link #list(Map)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static InvoiceItemCollection all(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, null);
-  }
-
-  /**
-   * List all invoice items.
-   *
-   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static InvoiceItemCollection all(Map<String, Object> params,
-                      RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return list(params, options);
-  }
-
-  /**
-   * List all invoice items.
-   *
-   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static InvoiceItemCollection all(Map<String, Object> params,
-                      String apiKey) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return list(params, RequestOptions.builder().setApiKey(apiKey).build());
-  }
-  // </editor-fold>
-
   // <editor-fold desc="create">
   /**
    * Create an invoice item.
    */
-  public static InvoiceItem create(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public static InvoiceItem create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
@@ -149,23 +101,9 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
    * Create an invoice item.
    */
   public static InvoiceItem create(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, classURL(InvoiceItem.class), params, InvoiceItem.class,
+      throws StripeException {
+    return request(RequestMethod.POST, classUrl(InvoiceItem.class), params, InvoiceItem.class,
         options);
-  }
-
-  /**
-   * Create an invoice item.
-   *
-   * @deprecated Use the {@link #create(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static InvoiceItem create(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return create(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
   // </editor-fold>
 
@@ -173,33 +111,16 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
   /**
    * Delete an invoice item.
    */
-  public DeletedInvoiceItem delete() throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
+  public InvoiceItem delete() throws StripeException {
     return delete((RequestOptions) null);
   }
 
   /**
    * Delete an invoice item.
    */
-  public DeletedInvoiceItem delete(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.DELETE, instanceURL(InvoiceItem.class, this.id), null,
-        DeletedInvoiceItem.class, options);
-  }
-
-  /**
-   * Delete an invoice item.
-   *
-   * @deprecated Use the {@link #delete(RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public DeletedInvoiceItem delete(String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return delete(RequestOptions.builder().setApiKey(apiKey).build());
+  public InvoiceItem delete(RequestOptions options) throws StripeException {
+    return request(RequestMethod.DELETE, instanceUrl(InvoiceItem.class, this.id), null,
+        InvoiceItem.class, options);
   }
   // </editor-fold>
 
@@ -207,20 +128,16 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
   /**
    * List all invoice items.
    */
-  public static InvoiceItemCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public static InvoiceItemCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
   /**
    * List all invoice items.
    */
-  public static InvoiceItemCollection list(Map<String, Object> params,
-                       RequestOptions options) throws AuthenticationException,
-      InvalidRequestException, APIConnectionException, CardException,
-      APIException {
-    return requestCollection(classURL(InvoiceItem.class), params, InvoiceItemCollection.class,
+  public static InvoiceItemCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    return requestCollection(classUrl(InvoiceItem.class), params, InvoiceItemCollection.class,
         options);
   }
   // </editor-fold>
@@ -229,42 +146,24 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
   /**
    * Retrieve an invoice item.
    */
-  public static InvoiceItem retrieve(String id)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public static InvoiceItem retrieve(String id) throws StripeException {
     return retrieve(id, (RequestOptions) null);
   }
 
   /**
    * Retrieve an invoice item.
    */
-  public static InvoiceItem retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(InvoiceItem.class, id), null, InvoiceItem.class,
+  public static InvoiceItem retrieve(String id, RequestOptions options) throws StripeException {
+    return request(RequestMethod.GET, instanceUrl(InvoiceItem.class, id), null, InvoiceItem.class,
         options);
-  }
-
-  /**
-   * Retrieve an invoice item.
-   *
-   * @deprecated Use the {@link #retrieve(String, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static InvoiceItem retrieve(String id, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return retrieve(id, RequestOptions.builder().setApiKey(apiKey).build());
   }
 
   /**
    * Retrieve an invoice item.
    */
   public static InvoiceItem retrieve(String id, Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(InvoiceItem.class, id), params, InvoiceItem.class,
+      throws StripeException {
+    return request(RequestMethod.GET, instanceUrl(InvoiceItem.class, id), params, InvoiceItem.class,
         options);
   }
   // </editor-fold>
@@ -274,9 +173,7 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
    * Update an invoice item.
    */
   @Override
-  public InvoiceItem update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public InvoiceItem update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
@@ -285,23 +182,9 @@ public class InvoiceItem extends APIResource implements MetadataStore<InvoiceIte
    */
   @Override
   public InvoiceItem update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(InvoiceItem.class, this.id), params,
+      throws StripeException {
+    return request(RequestMethod.POST, instanceUrl(InvoiceItem.class, this.id), params,
         InvoiceItem.class, options);
-  }
-
-  /**
-   * Update an invoice item.
-   *
-   * @deprecated Use the {@link #update(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public InvoiceItem update(Map<String, Object> params, String apiKey)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return update(params, RequestOptions.builder().setApiKey(apiKey).build());
   }
   // </editor-fold>
 }

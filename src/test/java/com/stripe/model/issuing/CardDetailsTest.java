@@ -2,17 +2,16 @@ package com.stripe.model.issuing;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 
 import com.stripe.BaseStripeTest;
-import com.stripe.net.APIResource;
+import com.stripe.net.ApiResource;
 
 import org.junit.Test;
 
 public class CardDetailsTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
-    final CardDetails cardDetails = APIResource.GSON.fromJson(
+    final CardDetails cardDetails = ApiResource.GSON.fromJson(
         getResourceAsString("/api_fixtures/issuing/card_details.json"), CardDetails.class);
 
     assertNotNull(cardDetails);

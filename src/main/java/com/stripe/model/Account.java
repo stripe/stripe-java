@@ -1,13 +1,7 @@
 package com.stripe.model;
 
-import com.google.gson.annotations.SerializedName;
-
-import com.stripe.exception.APIConnectionException;
-import com.stripe.exception.APIException;
-import com.stripe.exception.AuthenticationException;
-import com.stripe.exception.CardException;
-import com.stripe.exception.InvalidRequestException;
-import com.stripe.net.APIResource;
+import com.stripe.exception.StripeException;
+import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.List;
@@ -20,18 +14,17 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Account extends APIResource implements HasId, MetadataStore<Account> {
+public class Account extends ApiResource implements HasId, MetadataStore<Account> {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   String businessLogo;
   String businessName;
   String businessPrimaryColor;
-  @SerializedName("business_url")
-  String businessURL;
+  String businessUrl;
   Boolean chargesEnabled;
   String country;
   Boolean debitNegativeBalances;
-  AccountDeclineChargeOn declineChargeOn;
+  DeclineChargeOn declineChargeOn;
   String defaultCurrency;
   Boolean detailsSubmitted;
   String displayName;
@@ -42,19 +35,19 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
   LegalEntity legalEntity;
   @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   Boolean payoutsEnabled;
-  AccountPayoutSchedule payoutSchedule;
+  PayoutSchedule payoutSchedule;
   String productDescription;
   String statementDescriptor;
   String supportEmail;
   String supportPhone;
-  @SerializedName("support_url")
-  String supportURL;
+  String supportUrl;
   String timezone;
-  AccountTosAcceptance tosAcceptance;
-  AccountTransferSchedule transferSchedule;
+  TosAcceptance tosAcceptance;
+  TransferSchedule transferSchedule;
   Boolean transfersEnabled;
   String type;
   Verification verification;
+  Boolean deleted;
 
   /**
    * The {@code managed} attribute.
@@ -75,41 +68,11 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
   @Deprecated
   List<String> currenciesSupported;
 
-  // <editor-fold desc="all">
-  /**
-   * List all connected accounts.
-   *
-   * @deprecated Use the {@link #list(Map)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static AccountCollection all(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, null);
-  }
-
-  /**
-   * List all connected accounts.
-   *
-   * @deprecated Use the {@link #list(Map, RequestOptions)} method instead.
-   *     This method will be removed in the next major version.
-   */
-  @Deprecated
-  public static AccountCollection all(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return list(params, options);
-  }
-  // </editor-fold>
-
   // <editor-fold desc="create">
   /**
    * Create an account.
    */
-  public static Account create(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public static Account create(Map<String, Object> params) throws StripeException {
     return create(params, null);
   }
 
@@ -117,9 +80,8 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
    * Create an account.
    */
   public static Account create(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, classURL(Account.class), params, Account.class, options);
+      throws StripeException {
+    return request(RequestMethod.POST, classUrl(Account.class), params, Account.class, options);
   }
   // </editor-fold>
 
@@ -127,38 +89,31 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
   /**
    * Delete an account.
    */
-  public DeletedAccount delete()
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public Account delete() throws StripeException {
     return delete(null, (RequestOptions) null);
   }
 
   /**
    * Delete an account.
    */
-  public DeletedAccount delete(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public Account delete(RequestOptions options) throws StripeException {
     return delete(null, options);
   }
 
   /**
    * Delete an account.
    */
-  public DeletedAccount delete(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public Account delete(Map<String, Object> params) throws StripeException {
     return delete(params, null);
   }
 
   /**
    * Delete an account.
    */
-  public DeletedAccount delete(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.DELETE, instanceURL(Account.class, this.id), params,
-        DeletedAccount.class, options);
+  public Account delete(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    return request(RequestMethod.DELETE, instanceUrl(Account.class, this.id), params,
+        Account.class, options);
   }
   // </editor-fold>
 
@@ -166,9 +121,7 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
   /**
    * List all connected accounts.
    */
-  public static AccountCollection list(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public static AccountCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
 
@@ -176,9 +129,8 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
    * List all connected accounts.
    */
   public static AccountCollection list(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return requestCollection(classURL(Account.class), params, AccountCollection.class, options);
+      throws StripeException {
+    return requestCollection(classUrl(Account.class), params, AccountCollection.class, options);
   }
   // </editor-fold>
 
@@ -186,20 +138,16 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
   /**
    * Reject an account.
    */
-  public Account reject(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public Account reject(Map<String, Object> params) throws StripeException {
     return reject(params, null);
   }
 
   /**
    * Reject an account.
    */
-  public Account reject(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public Account reject(Map<String, Object> params, RequestOptions options) throws StripeException {
     return request(RequestMethod.POST, String.format("%s/reject",
-        instanceURL(Account.class, this.getId())), params, Account.class, options);
+        instanceUrl(Account.class, this.getId())), params, Account.class, options);
   }
   // </editor-fold>
 
@@ -207,19 +155,15 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
   /**
    * Retrieve account details.
    */
-  public static Account retrieve()
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public static Account retrieve() throws StripeException {
     return retrieve((RequestOptions) null);
   }
 
   /**
    * Retrieve account details.
    */
-  public static Account retrieve(RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, singleClassURL(Account.class), null, Account.class, options);
+  public static Account retrieve(RequestOptions options) throws StripeException {
+    return request(RequestMethod.GET, singleClassUrl(Account.class), null, Account.class, options);
   }
 
   /**
@@ -232,9 +176,7 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
    *     this method with API keys, use the {@link #retrieve(RequestOptions)} method instead.
    */
   @Deprecated
-  public static Account retrieve(String apiKeyOrAccountId)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public static Account retrieve(String apiKeyOrAccountId) throws StripeException {
     if (null == apiKeyOrAccountId || apiKeyOrAccountId.startsWith("sk_")) {
       return retrieve(RequestOptions.builder().setApiKey(apiKeyOrAccountId).build());
     } else {
@@ -245,19 +187,16 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
   /**
    * Retrieve account details.
    */
-  public static Account retrieve(String id, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Account.class, id), null, Account.class, options);
+  public static Account retrieve(String id, RequestOptions options) throws StripeException {
+    return request(RequestMethod.GET, instanceUrl(Account.class, id), null, Account.class, options);
   }
 
   /**
    * Retrieve account details.
    */
   public static Account retrieve(String id, Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.GET, instanceURL(Account.class, id), params, Account.class,
+      throws StripeException {
+    return request(RequestMethod.GET, instanceUrl(Account.class, id), params, Account.class,
         options);
   }
   // </editor-fold>
@@ -267,9 +206,7 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
    * Update an account.
    */
   @Override
-  public Account update(Map<String, Object> params)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
+  public Account update(Map<String, Object> params) throws StripeException {
     return update(params, null);
   }
 
@@ -277,13 +214,56 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
    * Update an account.
    */
   @Override
-  public Account update(Map<String, Object> params, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      APIConnectionException, CardException, APIException {
-    return request(RequestMethod.POST, instanceURL(Account.class, this.id), params, Account.class,
+  public Account update(Map<String, Object> params, RequestOptions options) throws StripeException {
+    return request(RequestMethod.POST, instanceUrl(Account.class, this.id), params, Account.class,
         options);
   }
   // </editor-fold>
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class DeclineChargeOn extends StripeObject {
+    Boolean avsFailure;
+    Boolean cvcFailure;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Keys extends StripeObject {
+    String publishable;
+    String secret;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PayoutSchedule extends StripeObject {
+    Long delayDays;
+    String interval;
+    Long monthlyAnchor;
+    String weeklyAnchor;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TosAcceptance extends StripeObject {
+    Long date;
+    String ip;
+    String userAgent;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TransferSchedule extends StripeObject {
+    Long delayDays;
+    String interval;
+    Long monthlyAnchor;
+    String weeklyAnchor;
+  }
 
   @Getter
   @Setter
@@ -293,13 +273,5 @@ public class Account extends APIResource implements HasId, MetadataStore<Account
     String disabledReason;
     Long dueBy;
     List<String> fieldsNeeded;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class Keys extends StripeObject {
-    String publishable;
-    String secret;
   }
 }
