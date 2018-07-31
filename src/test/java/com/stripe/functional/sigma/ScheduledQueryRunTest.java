@@ -22,14 +22,6 @@ public class ScheduledQueryRunTest extends BaseStripeTest {
 
   @Test
   public void testRetrieve() throws IOException, StripeException {
-    // stripe-mock doesn't handle this, so we stub the request
-    stubRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/sigma/scheduled_query_runs/%s", RUN_ID),
-        null,
-        ScheduledQueryRun.class,
-        getResourceAsString("/api_fixtures/sigma/scheduled_query_run.json")
-    );
     final ScheduledQueryRun run = ScheduledQueryRun.retrieve(RUN_ID);
 
     assertNotNull(run);
@@ -43,23 +35,6 @@ public class ScheduledQueryRunTest extends BaseStripeTest {
   public void testList() throws IOException, StripeException {
     final Map<String, Object> params = new HashMap<String, Object>();
     params.put("limit", 1);
-
-    // stripe-mock doesn't handle this, so we stub the request
-    final ScheduledQueryRun stubbedRun = ApiResource.GSON.fromJson(
-        getResourceAsString("/api_fixtures/sigma/scheduled_query_run.json"),
-        ScheduledQueryRun.class);
-    final ScheduledQueryRunCollection stubbedCollection = new ScheduledQueryRunCollection();
-    final List<ScheduledQueryRun> stubbedData = new ArrayList<ScheduledQueryRun>();
-    stubbedData.add(stubbedRun);
-    stubbedCollection.setData(stubbedData);
-    stubRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/sigma/scheduled_query_runs"),
-        params,
-        ScheduledQueryRunCollection.class,
-        stubbedCollection.toJson()
-    );
-
 
     ScheduledQueryRunCollection runs = ScheduledQueryRun.list(params);
 
