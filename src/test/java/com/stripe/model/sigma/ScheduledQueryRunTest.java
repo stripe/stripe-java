@@ -11,7 +11,7 @@ import org.junit.Test;
 public class ScheduledQueryRunTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
-    final String data = getResourceAsString("/api_fixtures/sigma/scheduled_query_run.json");
+    final String data = getFixture("/v1/sigma/scheduled_query_runs/sqr_123");
     final ScheduledQueryRun run = ApiResource.GSON.fromJson(data, ScheduledQueryRun.class);
 
     assertNotNull(run);
