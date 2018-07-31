@@ -33,6 +33,7 @@ import java.util.Map;
  */
 public abstract class StripeCollection<T extends HasId> extends StripeObject
     implements StripeCollectionInterface<T> {
+  String object;
   List<T> data;
   Long totalCount;
   Boolean hasMore;
@@ -70,6 +71,14 @@ public abstract class StripeCollection<T extends HasId> extends StripeObject
 
   public void setHasMore(Boolean hasMore) {
     this.hasMore = hasMore;
+  }
+
+  public String getObject() {
+    return object;
+  }
+
+  public void setObject(String object) {
+    this.object = object;
   }
 
   @Override
