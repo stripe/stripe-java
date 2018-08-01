@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.2.0 - 2018-08-01
+* [#565](https://github.com/stripe/stripe-java/pull/565) Add a `retrieve()` method that accepts parameters (e.g. for expansion) to all resource classes
+* [#566](https://github.com/stripe/stripe-java/pull/566) Add `object` attribute and accessors to `StripeCollection`
+
 ## 6.1.0 - 2018-07-30
 * [#561](https://github.com/stripe/stripe-java/pull/561) Add `created` to `Account`
 
