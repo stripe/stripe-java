@@ -111,7 +111,7 @@ public class Refund extends ApiResource implements MetadataStore<Charge>, HasId 
    * Retrieve a refund.
    */
   public static Refund retrieve(String id, RequestOptions options) throws StripeException {
-    return request(RequestMethod.GET, instanceUrl(Refund.class, id), null, Refund.class, options);
+    return retrieve(id, null, options);
   }
 
   /**

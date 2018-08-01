@@ -5,6 +5,7 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.util.List;
+import java.util.Map;
 
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -31,7 +32,16 @@ public class Balance extends ApiResource {
    * Retrieve balance.
    */
   public static Balance retrieve(RequestOptions options) throws StripeException {
-    return request(RequestMethod.GET, singleClassUrl(Balance.class), null, Balance.class, options);
+    return retrieve(null, options);
+  }
+
+  /**
+   * Retrieve balance.
+   */
+  public static Balance retrieve(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    return request(RequestMethod.GET, singleClassUrl(Balance.class), params, Balance.class,
+        options);
   }
   // </editor-fold>
 

@@ -157,7 +157,7 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, HasId 
    * Retrieve a payout.
    */
   public static Payout retrieve(String id, RequestOptions options) throws StripeException {
-    return request(RequestMethod.GET, instanceUrl(Payout.class, id), null, Payout.class, options);
+    return retrieve(id, null, options);
   }
 
   /**

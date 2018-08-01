@@ -78,8 +78,7 @@ public class Cardholder extends ApiResource implements MetadataStore<Cardholder>
    * Retrieve an issuing cardholder.
    */
   public static Cardholder retrieve(String id, RequestOptions options) throws StripeException {
-    return request(RequestMethod.GET, instanceUrl(Cardholder.class, id), null,
-      Cardholder.class, options);
+    return retrieve(id, null, options);
   }
 
   /**

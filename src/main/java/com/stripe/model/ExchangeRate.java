@@ -50,7 +50,15 @@ public class ExchangeRate extends ApiResource implements HasId {
    */
   public static ExchangeRate retrieve(String currency, RequestOptions options)
       throws StripeException {
-    return request(RequestMethod.GET, instanceUrl(ExchangeRate.class, currency), null,
+    return retrieve(currency, null, options);
+  }
+
+  /**
+   * Retrieve an exchange rate.
+   */
+  public static ExchangeRate retrieve(String currency, Map<String, Object> params,
+      RequestOptions options) throws StripeException {
+    return request(RequestMethod.GET, instanceUrl(ExchangeRate.class, currency), params,
         ExchangeRate.class, options);
   }
   // </editor-fold>

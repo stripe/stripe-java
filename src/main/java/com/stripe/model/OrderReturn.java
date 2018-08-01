@@ -92,7 +92,15 @@ public class OrderReturn extends ApiResource implements HasId {
    * Retrieve an order return.
    */
   public static OrderReturn retrieve(String id, RequestOptions options) throws StripeException {
-    return request(RequestMethod.GET, instanceUrl(OrderReturn.class, id), null, OrderReturn.class,
+    return retrieve(id, null, options);
+  }
+
+  /**
+   * Retrieve an order return.
+   */
+  public static OrderReturn retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    return request(RequestMethod.GET, instanceUrl(OrderReturn.class, id), params, OrderReturn.class,
         options);
   }
   // </editor-fold>

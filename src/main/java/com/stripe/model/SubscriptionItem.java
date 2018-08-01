@@ -102,7 +102,15 @@ public class SubscriptionItem extends ApiResource implements HasId {
    */
   public static SubscriptionItem retrieve(String id, RequestOptions options)
       throws StripeException {
-    return request(RequestMethod.GET, instanceUrl(SubscriptionItem.class, id), null,
+    return retrieve(id, null, options);
+  }
+
+  /**
+   * Retrieve a subscription item.
+   */
+  public static SubscriptionItem retrieve(String id, Map<String, Object> params,
+      RequestOptions options) throws StripeException {
+    return request(RequestMethod.GET, instanceUrl(SubscriptionItem.class, id), params,
         SubscriptionItem.class, options);
   }
   // </editor-fold>

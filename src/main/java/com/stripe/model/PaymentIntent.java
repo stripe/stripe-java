@@ -240,8 +240,7 @@ public class PaymentIntent extends ApiResource implements MetadataStore<PaymentI
    * Retrieve a payment intent.
    */
   public static PaymentIntent retrieve(String id, RequestOptions options) throws StripeException {
-    return request(RequestMethod.GET, instanceUrl(PaymentIntent.class, id), null,
-      PaymentIntent.class, options);
+    return retrieve(id, null, options);
   }
 
   /**

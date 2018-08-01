@@ -43,7 +43,12 @@ public class ThreeDSecure extends ApiResource implements HasId {
   }
 
   public static ThreeDSecure retrieve(String id, RequestOptions options) throws StripeException {
-    return request(RequestMethod.GET, getInstanceUrl(id), null, ThreeDSecure.class, options);
+    return retrieve(id, null, options);
+  }
+
+  public static ThreeDSecure retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    return request(RequestMethod.GET, getInstanceUrl(id), params, ThreeDSecure.class, options);
   }
   // </editor-fold>
 

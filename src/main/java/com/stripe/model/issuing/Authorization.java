@@ -148,8 +148,7 @@ public class Authorization extends ApiResource implements MetadataStore<Authoriz
    * Retrieve an issuing authorization.
    */
   public static Authorization retrieve(String id, RequestOptions options) throws StripeException {
-    return request(RequestMethod.GET, instanceUrl(Authorization.class, id), null,
-      Authorization.class, options);
+    return retrieve(id, null, options);
   }
 
   /**

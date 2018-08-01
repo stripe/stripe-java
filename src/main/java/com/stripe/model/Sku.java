@@ -113,7 +113,7 @@ public class Sku extends ApiResource implements HasId, MetadataStore<Sku> {
    * Retrieve a SKU.
    */
   public static Sku retrieve(String id, RequestOptions options) throws StripeException {
-    return request(RequestMethod.GET, instanceUrl(Sku.class, id), null, Sku.class, options);
+    return retrieve(id, null, options);
   }
 
   /**

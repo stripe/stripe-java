@@ -97,8 +97,7 @@ public class Dispute extends ApiResource implements MetadataStore<Dispute>, HasI
    * Retrieve an issuing dispute.
    */
   public static Dispute retrieve(String id, RequestOptions options) throws StripeException {
-    return request(RequestMethod.GET, instanceUrl(Dispute.class, id), null,
-      Dispute.class, options);
+    return retrieve(id, null, options);
   }
 
   /**

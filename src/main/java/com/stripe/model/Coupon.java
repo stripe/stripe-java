@@ -94,7 +94,15 @@ public class Coupon extends ApiResource implements MetadataStore<Coupon>, HasId 
    * Retrieve a coupon.
    */
   public static Coupon retrieve(String id, RequestOptions options) throws StripeException {
-    return request(RequestMethod.GET, instanceUrl(Coupon.class, id), null, Coupon.class, options);
+    return retrieve(id, null, options);
+  }
+
+  /**
+   * Retrieve a coupon.
+   */
+  public static Coupon retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    return request(RequestMethod.GET, instanceUrl(Coupon.class, id), params, Coupon.class, options);
   }
   // </editor-fold>
 

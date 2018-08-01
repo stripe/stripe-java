@@ -59,9 +59,16 @@ public class Event extends ApiResource implements HasId {
   /**
    * Retrieve an event.
    */
-  public static Event retrieve(String id, RequestOptions options)
+  public static Event retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, null, options);
+  }
+
+  /**
+   * Retrieve an event.
+   */
+  public static Event retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    return request(RequestMethod.GET, instanceUrl(Event.class, id), null, Event.class, options);
+    return request(RequestMethod.GET, instanceUrl(Event.class, id), params, Event.class, options);
   }
   // </editor-fold>
 }

@@ -178,7 +178,15 @@ public class ApplicationFee extends ApiResource implements HasId {
    * Retrieve an application fee.
    */
   public static ApplicationFee retrieve(String id, RequestOptions options) throws StripeException {
-    return request(RequestMethod.GET, instanceUrl(ApplicationFee.class, id), null,
+    return retrieve(id, null, options);
+  }
+
+  /**
+   * Retrieve an application fee.
+   */
+  public static ApplicationFee retrieve(String id, Map<String, Object> params,
+      RequestOptions options) throws StripeException {
+    return request(RequestMethod.GET, instanceUrl(ApplicationFee.class, id), params,
         ApplicationFee.class, options);
   }
   // </editor-fold>

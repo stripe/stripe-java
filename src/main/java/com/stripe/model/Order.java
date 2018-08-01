@@ -139,7 +139,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
    * Retrieve an order.
    */
   public static Order retrieve(String id, RequestOptions options) throws StripeException {
-    return request(RequestMethod.GET, instanceUrl(Order.class, id), null, Order.class, options);
+    return retrieve(id, null, options);
   }
 
   /**

@@ -189,7 +189,7 @@ public class Account extends ApiResource implements HasId, MetadataStore<Account
    * Retrieve account details.
    */
   public static Account retrieve(String id, RequestOptions options) throws StripeException {
-    return request(RequestMethod.GET, instanceUrl(Account.class, id), null, Account.class, options);
+    return retrieve(id, null, options);
   }
 
   /**

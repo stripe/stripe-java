@@ -158,7 +158,15 @@ public class Plan extends ApiResource implements MetadataStore<Plan>, HasId {
    * Retrieve a plan.
    */
   public static Plan retrieve(String id, RequestOptions options) throws StripeException {
-    return request(RequestMethod.GET, instanceUrl(Plan.class, id), null, Plan.class, options);
+    return retrieve(id, null, options);
+  }
+
+  /**
+   * Retrieve a plan.
+   */
+  public static Plan retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    return request(RequestMethod.GET, instanceUrl(Plan.class, id), params, Plan.class, options);
   }
   // </editor-fold>
 

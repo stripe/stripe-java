@@ -103,8 +103,7 @@ public class Card extends ApiResource implements MetadataStore<Card>, HasId {
    * Retrieve an issuing card.
    */
   public static Card retrieve(String id, RequestOptions options) throws StripeException {
-    return request(RequestMethod.GET, instanceUrl(Card.class, id), null,
-      Card.class, options);
+    return retrieve(id, null, options);
   }
 
   /**
