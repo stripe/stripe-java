@@ -99,7 +99,16 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
    * Retrieve a product.
    */
   public static Product retrieve(String id, RequestOptions options) throws StripeException {
-    return request(RequestMethod.GET, instanceUrl(Product.class, id), null, Product.class, options);
+    return retrieve(id, null, options);
+  }
+
+  /**
+   * Retrieve a product.
+   */
+  public static Product retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    return request(RequestMethod.GET, instanceUrl(Product.class, id), params, Product.class,
+        options);
   }
   // </editor-fold>
 

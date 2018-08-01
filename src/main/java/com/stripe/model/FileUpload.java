@@ -71,8 +71,16 @@ public class FileUpload extends ApiResource implements HasId {
    * Retrieve a file upload.
    */
   public static FileUpload retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, null, options);
+  }
+
+  /**
+   * Retrieve a file upload.
+   */
+  public static FileUpload retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     return request(RequestMethod.GET, instanceUrl(FileUpload.class, id, Stripe.getUploadBase()),
-        null, FileUpload.class, options);
+        params, FileUpload.class, options);
   }
   // </editor-fold>
 }

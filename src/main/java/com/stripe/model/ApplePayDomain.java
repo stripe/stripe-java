@@ -85,7 +85,15 @@ public class ApplePayDomain extends ApiResource implements HasId {
    * Retrieve an Apple Pay domain.
    */
   public static ApplePayDomain retrieve(String id, RequestOptions options) throws StripeException {
-    return request(RequestMethod.GET, getInstanceUrl(id), null, ApplePayDomain.class, options);
+    return retrieve(id, null, options);
+  }
+
+  /**
+   * Retrieve an Apple Pay domain.
+   */
+  public static ApplePayDomain retrieve(String id, Map<String, Object> params,
+      RequestOptions options) throws StripeException {
+    return request(RequestMethod.GET, getInstanceUrl(id), params, ApplePayDomain.class, options);
   }
   // </editor-fold>
 

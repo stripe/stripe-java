@@ -159,8 +159,7 @@ public class Transaction extends ApiResource implements MetadataStore<Transactio
    * Retrieve an issuing transaction.
    */
   public static Transaction retrieve(String id, RequestOptions options) throws StripeException {
-    return request(RequestMethod.GET, instanceUrl(Transaction.class, id), null,
-      Transaction.class, options);
+    return retrieve(id, null, options);
   }
 
   /**

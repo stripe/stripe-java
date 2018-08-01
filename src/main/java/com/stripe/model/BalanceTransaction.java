@@ -96,8 +96,16 @@ public class BalanceTransaction extends ApiResource implements HasId {
    */
   public static BalanceTransaction retrieve(String id, RequestOptions options)
       throws StripeException {
+    return retrieve(id, null, options);
+  }
+
+  /**
+   * Retrieve a balance transaction.
+   */
+  public static BalanceTransaction retrieve(String id, Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s/%s/%s", Stripe.getApiBase(), "v1/balance/history", id);
-    return request(RequestMethod.GET, url, null, BalanceTransaction.class, options);
+    return request(RequestMethod.GET, url, params, BalanceTransaction.class, options);
   }
   // </editor-fold>
 

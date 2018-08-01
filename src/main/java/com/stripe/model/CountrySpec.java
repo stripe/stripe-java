@@ -54,7 +54,15 @@ public class CountrySpec extends ApiResource implements HasId {
    */
   public static CountrySpec retrieve(String country, RequestOptions options)
       throws StripeException {
-    return request(RequestMethod.GET, instanceUrl(CountrySpec.class, country), null,
+    return retrieve(country, null, options);
+  }
+
+  /**
+   * Retrieve a country spec.
+   */
+  public static CountrySpec retrieve(String country, Map<String, Object> params,
+      RequestOptions options) throws StripeException {
+    return request(RequestMethod.GET, instanceUrl(CountrySpec.class, country), params,
         CountrySpec.class, options);
   }
   // </editor-fold>

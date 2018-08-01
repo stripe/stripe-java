@@ -56,7 +56,15 @@ public class Token extends ApiResource implements HasId {
    * Retrieve a token.
    */
   public static Token retrieve(String id, RequestOptions options) throws StripeException {
-    return request(RequestMethod.GET, instanceUrl(Token.class, id), null, Token.class, options);
+    return retrieve(id, null, options);
+  }
+
+  /**
+   * Retrieve a token.
+   */
+  public static Token retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    return request(RequestMethod.GET, instanceUrl(Token.class, id), params, Token.class, options);
   }
   // </editor-fold>
 }

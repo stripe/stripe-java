@@ -242,8 +242,7 @@ public class Transfer extends ApiResource implements MetadataStore<Transfer>, Ha
    * Retrive a transfer.
    */
   public static Transfer retrieve(String id, RequestOptions options) throws StripeException {
-    return request(RequestMethod.GET, instanceUrl(Transfer.class, id), null, Transfer.class,
-        options);
+    return retrieve(id, null, options);
   }
 
   /**

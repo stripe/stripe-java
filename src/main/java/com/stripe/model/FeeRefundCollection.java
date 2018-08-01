@@ -56,8 +56,17 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
    * Retrieve an application fee refund.
    */
   public FeeRefund retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, null, options);
+  }
+
+  /**
+   * Retrieve an application fee refund.
+   */
+  public FeeRefund retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String url = String.format("%s%s/%s", Stripe.getApiBase(), this.getUrl(), id);
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, null, FeeRefund.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, FeeRefund.class,
+        options);
   }
   // </editor-fold>
 }

@@ -463,7 +463,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
    * Retrieve a charge.
    */
   public static Charge retrieve(String id, RequestOptions options) throws StripeException {
-    return request(RequestMethod.GET, instanceUrl(Charge.class, id), null, Charge.class, options);
+    return retrieve(id, null, options);
   }
 
   /**

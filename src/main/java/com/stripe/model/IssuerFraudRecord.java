@@ -69,6 +69,11 @@ public class IssuerFraudRecord extends ApiResource implements HasId {
 
   public static IssuerFraudRecord retrieve(String id, RequestOptions options)
       throws StripeException {
+    return retrieve(id, null, options);
+  }
+
+  public static IssuerFraudRecord retrieve(String id, Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url = instanceUrl(IssuerFraudRecord.class, id);
     return request(RequestMethod.GET, url, null, IssuerFraudRecord.class, null);
   }

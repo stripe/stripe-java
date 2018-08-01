@@ -114,7 +114,15 @@ public class Source extends ExternalAccount implements HasSourceTypeData {
    * Retrieve a source.
    */
   public static Source retrieve(String id, RequestOptions options) throws StripeException {
-    return request(RequestMethod.GET, instanceUrl(Source.class, id), null, Source.class, options);
+    return retrieve(id, null, options);
+  }
+
+  /**
+   * Retrieve a source.
+   */
+  public static Source retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    return request(RequestMethod.GET, instanceUrl(Source.class, id), params, Source.class, options);
   }
   // </editor-fold>
 

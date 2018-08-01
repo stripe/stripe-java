@@ -154,8 +154,7 @@ public class InvoiceItem extends ApiResource implements MetadataStore<InvoiceIte
    * Retrieve an invoice item.
    */
   public static InvoiceItem retrieve(String id, RequestOptions options) throws StripeException {
-    return request(RequestMethod.GET, instanceUrl(InvoiceItem.class, id), null, InvoiceItem.class,
-        options);
+    return retrieve(id, null, options);
   }
 
   /**

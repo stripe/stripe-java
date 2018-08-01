@@ -130,8 +130,7 @@ public class Recipient extends ApiResource implements MetadataStore<Recipient>, 
    * Retrieve a recipient.
    */
   public static Recipient retrieve(String id, RequestOptions options) throws StripeException {
-    return request(RequestMethod.GET, instanceUrl(Recipient.class, id), null, Recipient.class,
-        options);
+    return retrieve(id, null, options);
   }
 
   /**

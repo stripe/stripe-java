@@ -30,7 +30,7 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
 
   // <editor-fold desc="list">
   /**
-   * List all issuing authorizations.
+   * List all scheduled query runs.
    */
   public static ScheduledQueryRunCollection list(Map<String, Object> params)
       throws StripeException {
@@ -38,7 +38,7 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
   }
 
   /**
-   * List all issuing authorizations.
+   * List all scheduled query runs.
    */
   public static ScheduledQueryRunCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -49,18 +49,26 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
 
   // <editor-fold desc="retrieve">
   /**
-   * Retrieve an issuing authorization.
+   * Retrieve a scheduled query run.
    */
   public static ScheduledQueryRun retrieve(String id) throws StripeException {
     return retrieve(id, null);
   }
 
   /**
-   * Retrieve an issuing authorization.
+   * Retrieve a scheduled query run.
    */
   public static ScheduledQueryRun retrieve(String id, RequestOptions options)
       throws StripeException {
-    return request(RequestMethod.GET, instanceUrl(ScheduledQueryRun.class, id), null,
+    return retrieve(id, null, options);
+  }
+
+  /**
+   * Retrieve a scheduled query run.
+   */
+  public static ScheduledQueryRun retrieve(String id, Map<String, Object> params,
+      RequestOptions options) throws StripeException {
+    return request(RequestMethod.GET, instanceUrl(ScheduledQueryRun.class, id), params,
       ScheduledQueryRun.class, options);
   }
   // </editor-fold>

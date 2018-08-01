@@ -57,7 +57,16 @@ public class TransferReversalCollection extends StripeCollection<Reversal> {
    */
   public Reversal retrieve(String id, RequestOptions options) throws StripeException {
     String url = String.format("%s%s/%s", Stripe.getApiBase(), this.getUrl(), id);
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, null, Reversal.class, options);
+    return retrieve(id, null, options);
+  }
+
+  /**
+   * Retrieve a reversal.
+   */
+  public Reversal retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s/%s", Stripe.getApiBase(), this.getUrl(), id);
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Reversal.class, options);
   }
   // </editor-fold>
 }

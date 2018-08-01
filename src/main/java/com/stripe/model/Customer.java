@@ -182,8 +182,7 @@ public class Customer extends ApiResource implements MetadataStore<Customer>, Ha
    * Retrieve a customer.
    */
   public static Customer retrieve(String id, RequestOptions options) throws StripeException {
-    return request(RequestMethod.GET, instanceUrl(Customer.class, id), null, Customer.class,
-        options);
+    return retrieve(id, null, options);
   }
 
   /**

@@ -55,8 +55,16 @@ public class CustomerCardCollection extends StripeCollection<Card> {
    * Retrieve a card.
    */
   public Card retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, null, options);
+  }
+
+  /**
+   * Retrieve a card.
+   */
+  public Card retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String url = String.format("%s%s/%s", Stripe.getApiBase(), this.getUrl(), id);
-    return ApiResource.request(ApiResource.RequestMethod.GET, url, null, Card.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Card.class, options);
   }
   // </editor-fold>
 }

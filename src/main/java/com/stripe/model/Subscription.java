@@ -151,8 +151,7 @@ public class Subscription extends ApiResource implements MetadataStore<Subscript
    * Retrieve a subscription.
    */
   public static Subscription retrieve(String id, RequestOptions options) throws StripeException {
-    return request(RequestMethod.GET, instanceUrl(Subscription.class, id), null, Subscription.class,
-        options);
+    return retrieve(id, null, options);
   }
 
   /**
