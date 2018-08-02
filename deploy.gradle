@@ -108,9 +108,9 @@ afterEvaluate { project ->
         from makeJavadocs.destinationDir
     }
 
-    task sourcesJar(type: Jar) {
+    task sourcesJar(type: Jar, dependsOn: delombok) {
         classifier = 'sources'
-        from sourceSets.main.java
+        from delombok.outputDir
     }
 
     artifacts {
