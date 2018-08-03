@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.3.0 - 2018-08-03
+* [#568](https://github.com/stripe/stripe-java/pull/568) Add cancel support for topups
+* [#569](https://github.com/stripe/stripe-java/pull/569) Add support for file links
+
 ## 6.2.1 - 2018-08-02
 * [#567](https://github.com/stripe/stripe-java/pull/567) Use delomboked sources when creating sources JAR
 
