@@ -23,6 +23,22 @@ public class TopupTest extends BaseStripeTest {
   }
 
   @Test
+  public void testCancel() throws StripeException {
+    final Topup topup = getTopupFixture();
+
+    final Map<String, Object> params = new HashMap<String, Object>();
+
+    final Topup canceledTopup = topup.cancel(params);
+
+    assertNotNull(canceledTopup);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        String.format("/v1/topups/%s/cancel", topup.getId()),
+        params
+    );
+  }
+
+  @Test
   public void testCreate() throws StripeException {
     final Map<String, Object> params = new HashMap<String, Object>();
     params.put("amount", 100);
