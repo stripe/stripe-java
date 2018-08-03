@@ -18,6 +18,8 @@ public class FileUpload extends ApiResource implements HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long created;
+  String filename;
+  FileLinkCollection links;
   String purpose;
   Long size;
   String type;
