@@ -38,6 +38,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.ListIterator;
 import java.util.Map;
 import java.util.Scanner;
 import javax.net.ssl.HttpsURLConnection;
@@ -276,9 +277,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   private static List<Parameter> flattenParamsList(List<Object> params, String keyPrefix)
       throws InvalidRequestException {
     List<Parameter> flatParams = new ArrayList<Parameter>();
-    Iterator<?> it = ((List<?>) params).iterator();
-    String newPrefix = String.format("%s[]", keyPrefix);
-
+    ListIterator<?> it = ((List<?>) params).listIterator();
     // Because application/x-www-form-urlencoded cannot represent an empty
     // list, convention is to take the list parameter and just set it to an
     // empty string. (e.g. A regular list might look like `a[]=1&b[]=2`.
@@ -287,6 +286,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       flatParams.add(new Parameter(keyPrefix, ""));
     } else {
       while (it.hasNext()) {
+        String newPrefix = String.format("%s[%d]", keyPrefix, it.nextIndex());
         flatParams.addAll(flattenParamsValue(it.next(), newPrefix));
       }
     }
@@ -297,7 +297,6 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   private static List<Parameter> flattenParamsArray(Object[] params, String keyPrefix)
       throws InvalidRequestException {
     List<Parameter> flatParams = new ArrayList<Parameter>();
-    String newPrefix = String.format("%s[]", keyPrefix);
 
     // Because application/x-www-form-urlencoded cannot represent an empty
     // list, convention is to take the list parameter and just set it to an
@@ -306,8 +305,9 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     if (params.length == 0) {
       flatParams.add(new Parameter(keyPrefix, ""));
     } else {
-      for (Object item : params) {
-        flatParams.addAll(flattenParamsValue(item, newPrefix));
+      for (int i = 0; i < params.length; i++) {
+        String newPrefix = String.format("%s[%d]", keyPrefix, i);
+        flatParams.addAll(flattenParamsValue(params[i], newPrefix));
       }
     }
 
@@ -637,7 +637,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
                   "Must have read permissions on file for key "
                       + key + ".", null, null, null, 0, null);
             }
-            multipartProcessor.addFileField(key, currentFile.getName(), 
+            multipartProcessor.addFileField(key, currentFile.getName(),
                 new FileInputStream(currentFile));
           } else if (value instanceof InputStream) {
             InputStream inputStream = (InputStream) value;
