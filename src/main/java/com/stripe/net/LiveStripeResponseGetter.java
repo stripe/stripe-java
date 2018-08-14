@@ -280,7 +280,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     ListIterator<?> it = ((List<?>) params).listIterator();
     // Because application/x-www-form-urlencoded cannot represent an empty
     // list, convention is to take the list parameter and just set it to an
-    // empty string. (e.g. A regular list might look like `a[]=1&b[]=2`.
+    // empty string. (e.g. A regular list might look like `a[0]=1&b[1]=2`.
     // Emptying it would look like `a=`.)
     if (params.isEmpty()) {
       flatParams.add(new Parameter(keyPrefix, ""));
@@ -300,7 +300,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
     // Because application/x-www-form-urlencoded cannot represent an empty
     // list, convention is to take the list parameter and just set it to an
-    // empty string. (e.g. A regular list might look like `a[]=1&b[]=2`.
+    // empty string. (e.g. A regular list might look like `a[0]=1&b[1]=2`.
     // Emptying it would look like `a=`.)
     if (params.length == 0) {
       flatParams.add(new Parameter(keyPrefix, ""));
