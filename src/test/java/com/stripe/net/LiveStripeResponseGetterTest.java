@@ -64,7 +64,7 @@ public class LiveStripeResponseGetterTest {
     params.put("a", "b");
     params.put("c", "d");
 
-    assertEquals("nested[]=A&nested[]=B&nested[]=C&a=b&c=d",
+    assertEquals("nested[0]=A&nested[1]=B&nested[2]=C&a=b&c=d",
         LiveStripeResponseGetter.createQuery(params));
   }
 
@@ -80,7 +80,7 @@ public class LiveStripeResponseGetterTest {
     params.put("a", "b");
     params.put("c", "d");
 
-    assertEquals("nested[]=A&nested[]=B&nested[]=C&a=b&c=d",
+    assertEquals("nested[0]=A&nested[1]=B&nested[2]=C&a=b&c=d",
         LiveStripeResponseGetter.createQuery(params));
   }
 
@@ -103,7 +103,7 @@ public class LiveStripeResponseGetterTest {
     final Map<String, Object> params = new LinkedHashMap<String, Object>();
     params.put("nested", nested);
 
-    assertEquals("nested[][A]=A-1&nested[][B]=B-1&nested[][A]=A-2&nested[][B]=B-2",
+    assertEquals("nested[0][A]=A-1&nested[0][B]=B-1&nested[1][A]=A-2&nested[1][B]=B-2",
         LiveStripeResponseGetter.createQuery(params));
   }
 
@@ -144,7 +144,7 @@ public class LiveStripeResponseGetterTest {
     final Map<String, Object> params = new HashMap<String, Object>();
     params.put("legal_entity", legalEntityParams);
 
-    assertEquals("legal_entity[additional_owners][][first_name]=Stripe",
+    assertEquals("legal_entity[additional_owners][0][first_name]=Stripe",
         LiveStripeResponseGetter.createQuery(params));
   }
 
