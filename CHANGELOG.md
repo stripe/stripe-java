@@ -1,5 +1,8 @@
 # Changelog
 
+## 6.4.0 - 2018-08-14
+* [#572](https://github.com/stripe/stripe-java/pull/572) Serialize all arrays/lists with integer-indexed encoding
+
 ## 6.3.0 - 2018-08-03
 * [#568](https://github.com/stripe/stripe-java/pull/568) Add cancel support for topups
 * [#569](https://github.com/stripe/stripe-java/pull/569) Add support for file links
