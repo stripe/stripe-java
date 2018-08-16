@@ -1,5 +1,8 @@
 # Changelog
 
+## 6.5.0 - 2018-08-16
+* [#574](https://github.com/stripe/stripe-java/pull/574) Add `unitLabel` to `Product`
+
 ## 6.4.0 - 2018-08-14
 * [#572](https://github.com/stripe/stripe-java/pull/572) Serialize all arrays/lists with integer-indexed encoding
 
