@@ -47,27 +47,6 @@ public class BitcoinReceiver extends ExternalAccount {
     return list(params, options);
   }
 
-  public static BitcoinReceiver create(Map<String, Object> params) throws StripeException {
-    return create(params, null);
-  }
-
-  public static BitcoinReceiver create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    return request(RequestMethod.POST, String.format("%s/%s", Stripe.getApiBase(),
-        "v1/bitcoin/receivers"), params, BitcoinReceiver.class, options);
-  }
-
-  @Override
-  public BitcoinReceiver delete() throws StripeException {
-    return delete(null);
-  }
-
-  @Override
-  public BitcoinReceiver delete(RequestOptions options) throws StripeException {
-    return request(RequestMethod.DELETE, this.getInstanceUrl(), null, BitcoinReceiver.class,
-        options);
-  }
-
   public static BitcoinReceiverCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
   }
@@ -85,18 +64,6 @@ public class BitcoinReceiver extends ExternalAccount {
   public static BitcoinReceiver retrieve(String id, RequestOptions options) throws StripeException {
     return request(RequestMethod.GET, String.format("%s/%s/%s", Stripe.getApiBase(),
         "v1/bitcoin/receivers", id), null, BitcoinReceiver.class, options);
-  }
-
-  @Override
-  public BitcoinReceiver update(Map<String, Object> params) throws StripeException {
-    return update(params, null);
-  }
-
-  @Override
-  public BitcoinReceiver update(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    return request(RequestMethod.POST, this.getInstanceUrl(), params, BitcoinReceiver.class,
-        options);
   }
 
   @Override
