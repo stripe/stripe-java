@@ -33,6 +33,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   String statementDescriptor;
   String type;
   Long updated;
+  String unitLabel;
   String url;
   Boolean deleted;
 
