@@ -1,0 +1,12 @@
+{
+  "id": "sis_123",
+  "object": "usage_record_summary",
+  "invoice": "in_123",
+  "livemode": false,
+  "period": {
+    "end": 1494289000,
+    "start": 1494288000
+  },
+  "subscription_item": "si_123",
+  "total_usage": 1
+}
