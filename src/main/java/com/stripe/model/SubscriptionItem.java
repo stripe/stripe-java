@@ -115,6 +115,25 @@ public class SubscriptionItem extends ApiResource implements HasId {
   }
   // </editor-fold>
 
+  // <editor-fold desc="usageRecordSummaries">
+  /**
+   * Retrieve a subscription item's usage record summaries.
+   */
+  public UsageRecordSummaryCollection usageRecordSummaries(Map<String, Object> params)
+      throws StripeException {
+    return usageRecordSummaries(params, null);
+  }
+
+  /**
+   * Retrieve a subscription item's usage record summaries.
+   */
+  public UsageRecordSummaryCollection usageRecordSummaries(Map<String, Object> params,
+      RequestOptions options) throws StripeException {
+    String url = instanceUrl(SubscriptionItem.class, this.getId()) + "/usage_record_summaries";
+    return requestCollection(url, params, UsageRecordSummaryCollection.class, options);
+  }
+  // </editor-fold>
+
   // <editor-fold desc="update">
   /**
    * Update a subscription item.
