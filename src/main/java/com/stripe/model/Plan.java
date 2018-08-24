@@ -193,8 +193,18 @@ public class Plan extends ApiResource implements MetadataStore<Plan>, HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Tier extends StripeObject {
-    Long amount;
+    Long unitAmount;
     Long upTo;
+
+    /**
+     * The {@code amount} attribute.
+     *
+     * @return the {@code amount} attribute
+     * @deprecated Prefer using the {@code unitAmount} attribute instead.
+     * @see <a href="https://stripe.com/docs/upgrades#2018-08-23">API version 2018-08-23</a>
+     */
+    @Deprecated
+    Long amount;
   }
 
   @Getter
