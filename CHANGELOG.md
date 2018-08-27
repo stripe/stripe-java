@@ -1,5 +1,8 @@
 # Changelog
 
+## 6.7.0 - 2018-08-27
+* [#575](https://github.com/stripe/stripe-java/pull/575) Remove support for `BitcoinReceiver` write-actions
+
 ## 6.6.0 - 2018-08-23
 * [#576](https://github.com/stripe/stripe-java/pull/576) Add support for usage record summaries
 
