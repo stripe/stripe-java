@@ -18,7 +18,6 @@ public class Customer extends ApiResource implements MetadataStore<Customer>, Ha
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long accountBalance;
-  String businessVatId;
   Long created;
   String currency;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
@@ -33,6 +32,18 @@ public class Customer extends ApiResource implements MetadataStore<Customer>, Ha
   ShippingDetails shipping;
   ExternalAccountCollection sources;
   CustomerSubscriptionCollection subscriptions;
+  TaxInfo taxInfo;
+  TaxInfoVerification taxInfoVerification;
+
+  /**
+   * The {@code businessVatId} attribute.
+   *
+   * @return the {@code businessVatId} attribute
+   * @deprecated Prefer using the {@link #taxInfo} attribute instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2018-08-23">API version 2018-08-23</a>
+   */
+  @Deprecated
+  String businessVatId;
 
   /**
    * The {@code cards} attribute.
@@ -221,5 +232,21 @@ public class Customer extends ApiResource implements MetadataStore<Customer>, Ha
   public static class NextRecurringCharge extends StripeObject {
     Long amount;
     String date;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TaxInfo extends StripeObject {
+    String taxId;
+    String type;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TaxInfoVerification extends StripeObject {
+    String status;
+    String verifiedName;
   }
 }
