@@ -60,6 +60,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Transfer> transfer;
   String transferGroup;
 
+  // Please note that these field are for internal use only and are not typically returned
+  // as part of standard API requests.
+  String authorizationCode;
+
   /**
    * The {@code card} attribute.
    *
