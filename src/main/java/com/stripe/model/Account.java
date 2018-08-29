@@ -27,16 +27,18 @@ public class Account extends ApiResource implements HasId, MetadataStore<Account
   Boolean debitNegativeBalances;
   DeclineChargeOn declineChargeOn;
   String defaultCurrency;
+  Boolean deleted;
   Boolean detailsSubmitted;
   String displayName;
-  LoginLinkCollection loginLinks;
   String email;
   ExternalAccountCollection externalAccounts;
   Keys keys;
   LegalEntity legalEntity;
+  LoginLinkCollection loginLinks;
   @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
-  Boolean payoutsEnabled;
   PayoutSchedule payoutSchedule;
+  String payoutStatementDescriptor;
+  Boolean payoutsEnabled;
   String productDescription;
   String statementDescriptor;
   String supportEmail;
@@ -44,11 +46,19 @@ public class Account extends ApiResource implements HasId, MetadataStore<Account
   String supportUrl;
   String timezone;
   TosAcceptance tosAcceptance;
-  TransferSchedule transferSchedule;
   Boolean transfersEnabled;
   String type;
   Verification verification;
-  Boolean deleted;
+
+  /**
+   * The {@code currencies_supported} attribute.
+   *
+   * @deprecated Prefer using the {@link CountrySpec#getSupportedPaymentCurrencies()} method
+   *     instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2016-03-07">API version 2016-03-07</a>
+   */
+  @Deprecated
+  List<String> currenciesSupported;
 
   /**
    * The {@code managed} attribute.
@@ -60,14 +70,13 @@ public class Account extends ApiResource implements HasId, MetadataStore<Account
   Boolean managed;
 
   /**
-   * The {@code currencies_supported} attribute.
+   * The {@code transfer_schedule} attribute.
    *
-   * @deprecated Prefer using the {@link CountrySpec#getSupportedPaymentCurrencies()} method
-   *     instead.
-   * @see <a href="https://stripe.com/docs/upgrades#2016-03-07">API version 2016-03-07</a>
+   * @deprecated Prefer using the {@link #payoutSchedule} attribute instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2017-04-06">API version 2017-04-06</a>
    */
   @Deprecated
-  List<String> currenciesSupported;
+  TransferSchedule transferSchedule;
 
   // <editor-fold desc="create">
   /**
