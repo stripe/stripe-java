@@ -39,6 +39,20 @@ public class TopupTest extends BaseStripeTest {
   }
 
   @Test
+  public void testCancelEmpty() throws StripeException {
+    final Topup topup = getTopupFixture();
+
+    final Topup canceledTopup = topup.cancel();
+
+    assertNotNull(canceledTopup);
+    verifyRequest(
+            ApiResource.RequestMethod.POST,
+            String.format("/v1/topups/%s/cancel", topup.getId()),
+            null
+    );
+  }
+
+  @Test
   public void testCreate() throws StripeException {
     final Map<String, Object> params = new HashMap<String, Object>();
     params.put("amount", 100);

@@ -54,6 +54,13 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, HasId {
   /**
    * Cancel a topup.
    */
+  public Topup cancel() throws StripeException {
+    return cancel(null, null);
+  }
+
+  /**
+   * Cancel a topup.
+   */
   public Topup cancel(Map<String, Object> params) throws StripeException {
     return cancel(params, null);
   }
