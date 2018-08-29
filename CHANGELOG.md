@@ -1,5 +1,9 @@
 # Changelog
 
+## 6.9.0 - 2018-08-29
+* [#580](https://github.com/stripe/stripe-java/pull/580) Add missing attributes to `Account` and `LegalEntity`
+* [#581](https://github.com/stripe/stripe-java/pull/581) Add `Topup.cancel()` overload with no arguments
+
 ## 6.8.0 - 2018-08-28
 * [#577](https://github.com/stripe/stripe-java/pull/577) Update `Customer` and `Plan` models for API version [2018-08-23](https://stripe.com/docs/upgrades#2018-08-23)
 * [#579](https://github.com/stripe/stripe-java/pull/579) Add `authorizationCode` to `Charge`
