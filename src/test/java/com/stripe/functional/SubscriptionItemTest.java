@@ -89,6 +89,7 @@ public class SubscriptionItemTest extends BaseStripeTest {
   public void testList() throws StripeException {
     final Map<String, Object> params = new HashMap<String, Object>();
     params.put("limit", 1);
+    params.put("subscription", "sub_123");
 
     final SubscriptionItemCollection subscriptionItems = SubscriptionItem.list(params);
 
