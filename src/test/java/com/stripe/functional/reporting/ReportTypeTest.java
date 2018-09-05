@@ -1,0 +1,45 @@
+package com.stripe.functional.reporting;
+
+import static org.junit.Assert.assertNotNull;
+
+import com.stripe.BaseStripeTest;
+import com.stripe.exception.StripeException;
+import com.stripe.model.reporting.ReportType;
+import com.stripe.model.reporting.ReportTypeCollection;
+import com.stripe.net.ApiResource;
+
+import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
+
+import org.junit.Test;
+
+
+public class ReportTypeTest extends BaseStripeTest {
+  public static final String REPORT_TYPE_ID = "activity.summary.1";
+
+  @Test
+  public void testRetrieve() throws IOException, StripeException {
+    final ReportType reportType = ReportType.retrieve(REPORT_TYPE_ID);
+
+    assertNotNull(reportType);
+    verifyRequest(
+        ApiResource.RequestMethod.GET,
+        String.format("/v1/reporting/report_types/%s", REPORT_TYPE_ID)
+    );
+  }
+
+  @Test
+  public void testList() throws IOException, StripeException {
+    final Map<String, Object> params = new HashMap<String, Object>();
+
+    ReportTypeCollection reportTypes = ReportType.list(params);
+
+    assertNotNull(reportTypes);
+    verifyRequest(
+        ApiResource.RequestMethod.GET,
+        String.format("/v1/reporting/report_types"),
+        params
+    );
+  }
+}
