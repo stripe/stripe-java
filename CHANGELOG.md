@@ -1,5 +1,8 @@
 # Changelog
 
+## 6.11.0 - 2018-09-05
+* [#584](https://github.com/stripe/stripe-java/pull/584) Add support for reporting resources
+
 ## 6.10.0 - 2018-09-05
 * [#583](https://github.com/stripe/stripe-java/pull/583) Add `exchangeRate` to `BalanceTransaction`
 
