@@ -5,6 +5,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
@@ -24,6 +25,7 @@ public class BalanceTransaction extends ApiResource implements HasId {
   Long created;
   String currency;
   String description;
+  BigDecimal exchangeRate;
   Long fee;
   List<Fee> feeDetails;
   Long net;
