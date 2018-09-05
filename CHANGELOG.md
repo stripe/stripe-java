@@ -1,5 +1,8 @@
 # Changelog
 
+## 6.10.0 - 2018-09-05
+* [#583](https://github.com/stripe/stripe-java/pull/583) Add `exchangeRate` to `BalanceTransaction`
+
 ## 6.9.0 - 2018-08-29
 * [#580](https://github.com/stripe/stripe-java/pull/580) Add missing attributes to `Account` and `LegalEntity`
 * [#581](https://github.com/stripe/stripe-java/pull/581) Add `Topup.cancel()` overload with no arguments
