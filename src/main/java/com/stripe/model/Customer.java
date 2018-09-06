@@ -27,6 +27,7 @@ public class Customer extends ApiResource implements MetadataStore<Customer>, Ha
   String description;
   Discount discount;
   String email;
+  String invoicePrefix;
   Boolean livemode;
   @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   ShippingDetails shipping;
