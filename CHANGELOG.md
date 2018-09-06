@@ -1,5 +1,8 @@
 # Changelog
 
+## 6.12.0 - 2018-09-06
+* [#586](https://github.com/stripe/stripe-java/pull/586) Add `invoicePrefix` to `Customer`
+
 ## 6.11.0 - 2018-09-05
 * [#584](https://github.com/stripe/stripe-java/pull/584) Add support for reporting resources
 
