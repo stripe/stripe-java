@@ -3,17 +3,17 @@ package com.stripe.model;
 import static org.junit.Assert.assertNotNull;
 
 import com.stripe.BaseStripeTest;
-import com.stripe.model.FileUpload;
+import com.stripe.model.File;
 import com.stripe.net.ApiResource;
 
 import org.junit.Test;
 
-public class FileUploadTest extends BaseStripeTest {
+public class FileTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getFixture("/v1/files/file_123");
-    final FileUpload fileUpload = ApiResource.GSON.fromJson(data, FileUpload.class);
-    assertNotNull(fileUpload);
-    assertNotNull(fileUpload.getId());
+    final File file = ApiResource.GSON.fromJson(data, File.class);
+    assertNotNull(file);
+    assertNotNull(file.getId());
   }
 }

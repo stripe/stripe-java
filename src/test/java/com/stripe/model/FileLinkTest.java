@@ -29,7 +29,7 @@ public class FileLinkTest extends BaseStripeTest {
     final String data = getFixture("/v1/file_links/link_123", expansions);
     final FileLink fileLink = ApiResource.GSON.fromJson(data, FileLink.class);
     assertNotNull(fileLink);
-    final FileUpload file = fileLink.getFileObject();
+    final File file = fileLink.getFileObject();
     assertNotNull(file);
     assertNotNull(file.getId());
     assertEquals(fileLink.getFile(), file.getId());
