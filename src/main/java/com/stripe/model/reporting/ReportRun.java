@@ -1,18 +1,14 @@
 package com.stripe.model.reporting;
 
 import com.stripe.exception.StripeException;
-import com.stripe.model.ExpandableField;
 import com.stripe.model.FileUpload;
 import com.stripe.model.HasId;
-import com.stripe.model.MetadataStore;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
-import java.util.List;
 import java.util.Map;
 
-import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;

@@ -56,7 +56,6 @@ public class TransferReversalCollection extends StripeCollection<Reversal> {
    * Retrieve a reversal.
    */
   public Reversal retrieve(String id, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s/%s", Stripe.getApiBase(), this.getUrl(), id);
     return retrieve(id, null, options);
   }
 

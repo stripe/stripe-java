@@ -640,7 +640,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
             multipartProcessor.addFileField(key, currentFile.getName(),
                 new FileInputStream(currentFile));
           } else if (value instanceof InputStream) {
-            InputStream inputStream = (InputStream) value;
+            @Cleanup InputStream inputStream = (InputStream) value;
             if (inputStream.available() == 0) {
               throw new InvalidRequestException(
                 "Must have available bytes to read on InputStream for key "
