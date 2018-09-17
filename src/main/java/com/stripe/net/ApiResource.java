@@ -87,6 +87,8 @@ public abstract class ApiResource extends StripeObject {
       className = "sigma/" + className;
     } else if (clazz.getName().contains("com.stripe.model.reporting.")) {
       className = "reporting/" + className;
+    } else if (clazz.getName().contains("com.stripe.model.terminal.")) {
+      className = "terminal/" + className;
     }
 
     // Handle special cases
