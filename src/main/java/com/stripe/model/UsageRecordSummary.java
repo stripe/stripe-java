@@ -2,8 +2,6 @@ package com.stripe.model;
 
 import com.stripe.net.ApiResource;
 
-import java.util.Map;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;

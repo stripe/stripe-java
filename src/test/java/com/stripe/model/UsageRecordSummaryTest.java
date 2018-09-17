@@ -4,10 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import com.stripe.BaseStripeTest;
-import com.stripe.model.UsageRecordSummaryCollection;
 import com.stripe.net.ApiResource;
-
-import java.util.Map;
 
 import org.junit.Test;
 
