@@ -99,7 +99,7 @@ afterEvaluate { project ->
 
     task makeJavadocs(type: Javadoc, dependsOn: delombok) {
         source = delombok.outputDir
-        classpath = configurations.compile
+        classpath = configurations.compile + configurations.annotationProcessor
         failOnError = true
     }
 
