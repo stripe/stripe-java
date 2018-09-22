@@ -22,7 +22,7 @@ public class DisputeTest extends BaseStripeTest {
   public void testCreate() throws IOException, StripeException {
     final Map<String, Object> params = new HashMap<String, Object>();
     params.put("reason", "fraudulent");
-    params.put("transaction", "ipi_123");
+    params.put("disputed_transaction", "ipi_123");
 
     final Dispute dispute = Dispute.create(params);
 

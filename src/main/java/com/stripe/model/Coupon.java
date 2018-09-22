@@ -4,6 +4,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 import lombok.EqualsAndHashCode;
@@ -19,17 +20,27 @@ public class Coupon extends ApiResource implements MetadataStore<Coupon>, HasId 
   Long amountOff;
   Long created;
   String currency;
+  Boolean deleted;
   String duration;
   Long durationInMonths;
   Boolean livemode;
   Long maxRedemptions;
   @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   String name;
-  Long percentOff;
+  BigDecimal percentOff;
   Long redeemBy;
   Long timesRedeemed;
   Boolean valid;
-  Boolean deleted;
+
+  /**
+   * The {@code percent_off_precise} attribute.
+   *
+   * @return the {@code percent_off_precise} attribute
+   * @deprecated Prefer using the {@link #percentOff} attribute instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2018-07-27">API version 2018-07-27</a>
+   */
+  @Deprecated
+  BigDecimal percentOffPrecise;
 
   // <editor-fold desc="create">
   /**
