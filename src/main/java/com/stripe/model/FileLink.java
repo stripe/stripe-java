@@ -20,7 +20,7 @@ public class FileLink extends ApiResource implements MetadataStore<FileLink>, Ha
   Long created;
   Boolean expired;
   Long expiresAt;
-  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<FileUpload> file;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<File> file;
   Boolean livemode;
   @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   String url;
@@ -34,12 +34,12 @@ public class FileLink extends ApiResource implements MetadataStore<FileLink>, Ha
     this.file = setExpandableFieldId(fileId, this.file);
   }
 
-  public FileUpload getFileObject() {
+  public File getFileObject() {
     return (this.file != null) ? this.file.getExpanded() : null;
   }
 
-  public void setFileObject(FileUpload file) {
-    this.file = new ExpandableField<FileUpload>(file.getId(), file);
+  public void setFileObject(File file) {
+    this.file = new ExpandableField<File>(file.getId(), file);
   }
   // </editor-fold>
 

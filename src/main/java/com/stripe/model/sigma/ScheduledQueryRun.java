@@ -1,7 +1,7 @@
 package com.stripe.model.sigma;
 
 import com.stripe.exception.StripeException;
-import com.stripe.model.FileUpload;
+import com.stripe.model.File;
 import com.stripe.model.HasId;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
@@ -21,7 +21,7 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
   Long created;
   Long dataLoadTime;
   String error;
-  FileUpload file;
+  File file;
   Boolean livemode;
   Long resultAvailableUntil;
   String sql;
