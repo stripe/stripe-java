@@ -23,29 +23,30 @@ public class Dispute extends ApiResource implements MetadataStore<Dispute>, HasI
   String object;
   Long amount;
   Long created;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
+    ExpandableField<Transaction> disputedTransaction;
   Evidence evidence;
   Boolean livemode;
   @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   String reason;
   String status;
-  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
-    ExpandableField<Transaction> transaction;
 
   // <editor-fold desc="transaction">
-  public String getTransaction() {
-    return (this.transaction != null) ? this.transaction.getId() : null;
+  public String getDisputedTransaction() {
+    return (this.disputedTransaction != null) ? this.disputedTransaction.getId() : null;
   }
 
-  public void setTransaction(String transactionId) {
-    this.transaction = setExpandableFieldId(transactionId, this.transaction);
+  public void setDisputedTransaction(String disputedTransactionId) {
+    this.disputedTransaction = setExpandableFieldId(disputedTransactionId,
+        this.disputedTransaction);
   }
 
-  public Transaction getTransactionObject() {
-    return (this.transaction != null) ? this.transaction.getExpanded() : null;
+  public Transaction getDisputedTransactionObject() {
+    return (this.disputedTransaction != null) ? this.disputedTransaction.getExpanded() : null;
   }
 
-  public void setTransactionObject(Transaction c) {
-    this.transaction = new ExpandableField<Transaction>(c.getId(), c);
+  public void setDisputedTransactionObject(Transaction c) {
+    this.disputedTransaction = new ExpandableField<Transaction>(c.getId(), c);
   }
   // </editor-fold>
 

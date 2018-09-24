@@ -1,7 +1,7 @@
 package com.stripe.model.reporting;
 
 import com.stripe.exception.StripeException;
-import com.stripe.model.FileUpload;
+import com.stripe.model.File;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiResource;
@@ -24,7 +24,7 @@ public class ReportRun extends ApiResource implements HasId {
   Boolean livemode;
   Parameters parameters;
   String reportType;
-  FileUpload result;
+  File result;
   String status;
   Long succeededAt;
 
