@@ -1,5 +1,13 @@
 # Changelog
 
+## 7.0.0 - 2018-09-24
+Major version release. Refer to our [migration guide for v7](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v7) for a list of backwards incompatible changes to watch out for.
+
+Pull requests included in this release:
+* [#598](https://github.com/stripe/stripe-java/pull/598) Compatibility with latest API version
+* [#593](https://github.com/stripe/stripe-java/pull/593) Replace `FileUpload` class with `File` class
+* [#592](https://github.com/stripe/stripe-java/pull/592) Support for terminal endpoints
+
 ## 6.12.0 - 2018-09-06
 * [#586](https://github.com/stripe/stripe-java/pull/586) Add `invoicePrefix` to `Customer`
 
