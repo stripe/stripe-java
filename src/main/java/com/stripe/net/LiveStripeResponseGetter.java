@@ -125,29 +125,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
     headers.put("Authorization", String.format("Bearer %s", options.getApiKey()));
 
-    // debug headers
-    String[] propertyNames = {"os.name", "os.version", "os.arch",
-        "java.version", "java.vendor", "java.vm.version",
-        "java.vm.vendor"};
-    Map<String, String> propertyMap = new HashMap<String, String>();
-    for (String propertyName : propertyNames) {
-      propertyMap.put(propertyName, System.getProperty(propertyName));
-    }
-    propertyMap.put("bindings.version", Stripe.VERSION);
-    propertyMap.put("lang", "Java");
-    propertyMap.put("publisher", "Stripe");
-
-    Set<String> propertyKeySet = new HashSet<>(propertyMap.keySet());
-    for (String propertyKey: propertyKeySet) {
-      String property = propertyMap.get(propertyKey);
-      propertyMap.put(propertyKey.replace('.', '_'), property);
-      propertyMap.remove(propertyKey);
-    }
-
-    if (Stripe.getAppInfo() != null) {
-      propertyMap.put("application", ApiResource.GSON.toJson(Stripe.getAppInfo()));
-    }
-    headers.put("X-Stripe-Client-User-Agent", ApiResource.GSON.toJson(propertyMap));
+    headers.put("X-Stripe-Client-User-Agent", ApiResource.GSON.toJson(buildClientUserAgentMap()));
     if (options.getStripeVersion() != null) {
       headers.put("Stripe-Version", options.getStripeVersion());
     }
@@ -158,6 +136,34 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       headers.put("Stripe-Account", options.getStripeAccount());
     }
     return headers;
+  }
+
+  private static Map<String, String> buildClientUserAgentMap() {
+    String[] propertyNames = {"os.name", "os.version", "os.arch",
+            "java.version", "java.vendor", "java.vm.version",
+            "java.vm.vendor"};
+    Map<String, String> clientUserAgentMap = new HashMap<>();
+    for (String propertyName : propertyNames) {
+      clientUserAgentMap.put(propertyName, System.getProperty(propertyName));
+    }
+
+    clientUserAgentMap.put("bindings.version", Stripe.VERSION);
+    clientUserAgentMap.put("lang", "Java");
+    clientUserAgentMap.put("publisher", "Stripe");
+    if (Stripe.getAppInfo() != null) {
+      clientUserAgentMap.put("application", ApiResource.GSON.toJson(Stripe.getAppInfo()));
+    }
+
+    // Format keys to be friendly for log analysis and consistent with other client libraries
+    // key containing '.' is considered nested, but that's not the case here, so we are replacing it with '_'
+    Set<String> keySet = new HashSet<>(clientUserAgentMap.keySet());
+    for (String key: keySet) {
+      String value = clientUserAgentMap.get(key);
+      clientUserAgentMap.remove(key);
+      String formattedKey = key.replace('.', '_');
+      clientUserAgentMap.put(formattedKey, value);
+    }
+    return clientUserAgentMap;
   }
 
   @SuppressWarnings("unchecked")

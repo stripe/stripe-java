@@ -201,6 +201,21 @@ public class LiveStripeResponseGetterTest {
 
     for (Map.Entry<String, String> entry : uaMap.entrySet()) {
       assertTrue("Header key contains unexpected '.'", !entry.getKey().contains("."));
+      assertTrue("Header value should not be empty", entry.getValue() != null);
     }
+
+    // properties common to other stripe client libraries
+    assertTrue(uaMap.containsKey("bindings_version"));
+    assertTrue(uaMap.containsKey("lang"));
+    assertTrue(uaMap.containsKey("publisher"));
+
+    // properties specific to java-client
+    assertTrue(uaMap.containsKey("java_version"));
+    assertTrue(uaMap.containsKey("java_vendor"));
+    assertTrue(uaMap.containsKey("java_vm_version"));
+    assertTrue(uaMap.containsKey("java_vm_vendor"));
+    assertTrue(uaMap.containsKey("os_name"));
+    assertTrue(uaMap.containsKey("os_version"));
+    assertTrue(uaMap.containsKey("os_arch"));
   }
 }
