@@ -159,8 +159,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     Set<String> keySet = new HashSet<>(clientUserAgentMap.keySet());
     for (String key: keySet) {
       String value = clientUserAgentMap.get(key);
-      clientUserAgentMap.remove(key);
       String formattedKey = key.replace('.', '_');
+      clientUserAgentMap.remove(key);
       clientUserAgentMap.put(formattedKey, value);
     }
     return clientUserAgentMap;
