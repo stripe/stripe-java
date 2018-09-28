@@ -155,7 +155,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     }
 
     // Format keys to be friendly for log analysis and consistent with other client libraries
-    // key containing '.' is considered nested, but that's not the case here, so we are replacing it with '_'
+    // Key containing '.' is considered nested in Splunk, but that's not the case here, so we are replacing it with '_'
     Set<String> keySet = new HashSet<>(clientUserAgentMap.keySet());
     for (String key: keySet) {
       String value = clientUserAgentMap.get(key);
