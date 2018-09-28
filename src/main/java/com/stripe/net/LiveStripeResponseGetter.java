@@ -36,11 +36,13 @@ import java.net.URLStreamHandler;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.Set;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSocketFactory;
 
@@ -134,6 +136,14 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     propertyMap.put("bindings.version", Stripe.VERSION);
     propertyMap.put("lang", "Java");
     propertyMap.put("publisher", "Stripe");
+
+    Set<String> propertyKeySet = new HashSet<>(propertyMap.keySet());
+    for (String propertyKey: propertyKeySet) {
+      String property = propertyMap.get(propertyKey);
+      propertyMap.put(propertyKey.replace('.', '_'), property);
+      propertyMap.remove(propertyKey);
+    }
+
     if (Stripe.getAppInfo() != null) {
       propertyMap.put("application", ApiResource.GSON.toJson(Stripe.getAppInfo()));
     }
