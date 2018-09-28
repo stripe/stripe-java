@@ -139,9 +139,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   }
 
   private static Map<String, String> buildClientUserAgentMap() {
-    String[] propertyNames = {"os.name", "os.version", "os.arch",
-            "java.version", "java.vendor", "java.vm.version",
-            "java.vm.vendor"};
+    String[] propertyNames = {"os.name", "os.version", "os.arch", "java.version", "java.vendor",
+      "java.vm.version", "java.vm.vendor"};
     Map<String, String> clientUserAgentMap = new HashMap<>();
     for (String propertyName : propertyNames) {
       clientUserAgentMap.put(propertyName, System.getProperty(propertyName));
@@ -155,7 +154,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     }
 
     // Format keys to be friendly for log analysis and consistent with other client libraries
-    // Key containing '.' is considered nested in Splunk, but that's not the case here, so we are replacing it with '_'
+    // Key containing '.' is considered nested in Splunk, but that's not the case here,
+    // so we are replacing it with '_'
     Set<String> keySet = new HashSet<>(clientUserAgentMap.keySet());
     for (String key: keySet) {
       String value = clientUserAgentMap.get(key);
