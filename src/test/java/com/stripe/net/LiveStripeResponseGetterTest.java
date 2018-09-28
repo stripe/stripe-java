@@ -1,5 +1,6 @@
 package com.stripe.net;
 
+import static junit.framework.TestCase.assertTrue;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
@@ -8,8 +9,6 @@ import com.google.gson.reflect.TypeToken;
 
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
-import com.stripe.net.LiveStripeResponseGetter;
-import com.stripe.net.RequestOptions;
 import com.stripe.net.RequestOptions.RequestOptionsBuilder;
 
 import java.io.UnsupportedEncodingException;
@@ -190,5 +189,33 @@ public class LiveStripeResponseGetterTest {
     assertEquals("MyAwesomePlugin", appMap.get("name"));
     assertEquals("1.2.34", appMap.get("version"));
     assertEquals("https://myawesomeplugin.info", appMap.get("url"));
+  }
+
+  @Test
+  public void testXStripeClientUserAgent() {
+    final RequestOptions options = (new RequestOptionsBuilder()).setApiKey("sk_foobar").build();
+
+    final Map<String, String> headers = LiveStripeResponseGetter.getHeaders(options);
+    final Map<String, String> uaMap = new Gson().fromJson(headers.get("X-Stripe-Client-User-Agent"),
+            new TypeToken<Map<String, String>>() {}.getType());
+
+    for (Map.Entry<String, String> entry : uaMap.entrySet()) {
+      assertTrue("Header key contains unexpected '.'", !entry.getKey().contains("."));
+      assertTrue("Header value should not be empty", entry.getValue() != null);
+    }
+
+    // properties common to other stripe client libraries
+    assertTrue(uaMap.containsKey("bindings_version"));
+    assertTrue(uaMap.containsKey("lang"));
+    assertTrue(uaMap.containsKey("publisher"));
+
+    // properties specific to java-client
+    assertTrue(uaMap.containsKey("java_version"));
+    assertTrue(uaMap.containsKey("java_vendor"));
+    assertTrue(uaMap.containsKey("java_vm_version"));
+    assertTrue(uaMap.containsKey("java_vm_vendor"));
+    assertTrue(uaMap.containsKey("os_name"));
+    assertTrue(uaMap.containsKey("os_version"));
+    assertTrue(uaMap.containsKey("os_arch"));
   }
 }
