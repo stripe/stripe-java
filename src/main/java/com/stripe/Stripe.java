@@ -18,6 +18,7 @@ public abstract class Stripe {
   public static volatile String apiKey;
   public static volatile String apiVersion;
   public static volatile String clientId;
+  public static volatile String partnerId;
 
   // Note that URLConnection reserves the value of 0 to mean "infinite
   // timeout", so we use -1 here to represent an unset value which should
@@ -146,11 +147,15 @@ public abstract class Stripe {
   }
 
   public static void setAppInfo(String name) {
-    setAppInfo(name, null, null);
+    setAppInfo(name, null, null, null);
   }
 
   public static void setAppInfo(String name, String version) {
-    setAppInfo(name, version, null);
+    setAppInfo(name, version, null, null);
+  }
+
+  public static void setAppInfo(String name, String version, String url) {
+    setAppInfo(name, version, url, null);
   }
 
   /**
@@ -159,8 +164,9 @@ public abstract class Stripe {
    * @param name Name of your application (e.g. "MyAwesomeApp")
    * @param version Version of your application (e.g. "1.2.34")
    * @param url Website for your application (e.g. "https://myawesomeapp.info")
+   * @param partnerId Your Stripe Partner ID (e.g. "pp_partner_1234")
    */
-  public static void setAppInfo(String name, String version, String url) {
+  public static void setAppInfo(String name, String version, String url, String partnerId) {
     if (appInfo == null) {
       appInfo = new HashMap<String, String>();
     }
@@ -168,6 +174,7 @@ public abstract class Stripe {
     appInfo.put("name", name);
     appInfo.put("version", version);
     appInfo.put("url", url);
+    appInfo.put("partner_id", partnerId);
   }
 
   public static Map<String, String> getAppInfo() {
