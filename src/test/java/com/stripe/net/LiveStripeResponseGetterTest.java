@@ -170,7 +170,7 @@ public class LiveStripeResponseGetterTest {
   public void testAppInfo() {
     final RequestOptions options = (new RequestOptionsBuilder()).setApiKey("sk_foobar").build();
 
-    Stripe.setAppInfo("MyAwesomePlugin", "1.2.34", "https://myawesomeplugin.info");
+    Stripe.setAppInfo("MyAwesomePlugin", "1.2.34", "https://myawesomeplugin.info", "pp_partner_1234");
 
     final Map<String, String> headers = LiveStripeResponseGetter.getHeaders(options);
 
@@ -190,5 +190,6 @@ public class LiveStripeResponseGetterTest {
     assertEquals("MyAwesomePlugin", appMap.get("name"));
     assertEquals("1.2.34", appMap.get("version"));
     assertEquals("https://myawesomeplugin.info", appMap.get("url"));
+    assertEquals("pp_partner_1234", appMap.get("partner_id"));
   }
 }
