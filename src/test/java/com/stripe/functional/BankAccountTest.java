@@ -24,23 +24,30 @@ public class BankAccountTest extends BaseStripeTest {
   public static final String CUSTOMER_ID = "cus_123";
   public static final String BANK_ACCOUNT_ID = "ba_123";
 
-  private static BankAccount getBankAccountFixture(Customer customer) throws StripeException {
-    final BankAccount bankAccount = (BankAccount) customer.getSources().retrieve(BANK_ACCOUNT_ID);
-    resetNetworkSpy();
-    // stripe-mock returns a bank account that is attached to an account rather than a customer,
-    // so manually fix that. Hopefully this will no longer be necessary in the future.
-    bankAccount.setAccount(null);
+  private BankAccount getBankAccountFixture(Customer customer) throws IOException, StripeException {
+    // stripe-mock doesn't handle bank accounts very well just yet, so use a local fixture
+    final BankAccount bankAccount = ApiResource.GSON.fromJson(
+        getResourceAsString("/api_fixtures/bank_account.json"), BankAccount.class);
     bankAccount.setCustomer(customer.getId());
 
     return bankAccount;
   }
 
   @Test
-  public void testCreate() throws StripeException {
+  public void testCreate() throws IOException, StripeException {
     final Customer customer = Customer.retrieve(CUSTOMER_ID);
 
     final Map<String, Object> params = new HashMap<String, Object>();
     params.put("source", "btok_123");
+
+    // stripe-mock does not always return a Bank Account so we have to mock
+    stubRequest(
+        ApiResource.RequestMethod.POST,
+        String.format("/v1/customers/%s/sources", customer.getId()),
+        params,
+        BankAccount.class,
+        getResourceAsString("/api_fixtures/bank_account.json")
+    );
 
     final BankAccount bankAccount = (BankAccount) customer.getSources().create(params);
 
@@ -53,8 +60,17 @@ public class BankAccountTest extends BaseStripeTest {
   }
 
   @Test
-  public void testRetrieve() throws StripeException {
+  public void testRetrieve() throws IOException, StripeException {
     final Customer customer = Customer.retrieve(CUSTOMER_ID);
+
+    // stripe-mock does not always return a Bank Account so we have to mock
+    stubRequest(
+        ApiResource.RequestMethod.GET,
+        String.format("/v1/customers/%s/sources/%s", customer.getId(), BANK_ACCOUNT_ID),
+        null,
+        BankAccount.class,
+        getResourceAsString("/api_fixtures/bank_account.json")
+    );
 
     final BankAccount bankAccount = (BankAccount) customer.getSources().retrieve(BANK_ACCOUNT_ID);
 
@@ -131,7 +147,7 @@ public class BankAccountTest extends BaseStripeTest {
   }
 
   @Test
-  public void testDelete() throws StripeException {
+  public void testDelete() throws IOException, StripeException {
     final Customer customer = Customer.retrieve(CUSTOMER_ID);
     final BankAccount bankAccount = getBankAccountFixture(customer);
     final String deleteBankAccountData = String.format(
@@ -154,7 +170,7 @@ public class BankAccountTest extends BaseStripeTest {
   }
 
   @Test
-  public void testVerify() throws StripeException {
+  public void testVerify() throws IOException, StripeException {
     final Customer customer = Customer.retrieve(CUSTOMER_ID);
     final BankAccount bankAccount = getBankAccountFixture(customer);
 

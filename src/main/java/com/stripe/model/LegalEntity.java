@@ -40,6 +40,8 @@ public class LegalEntity extends StripeObject {
   String type;
   Verification verification;
 
+  // TODO: Move this to a top level class instead of duplicating
+  // with the Person resource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -49,6 +51,8 @@ public class LegalEntity extends StripeObject {
     Long year;
   }
 
+  // TODO: Move this to a top level class instead of duplicating
+  // with the Person resource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -75,6 +79,9 @@ public class LegalEntity extends StripeObject {
     Verification verification;
   }
 
+
+  // TODO: Move this to a top level class instead of duplicating
+  // with the Person resource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)

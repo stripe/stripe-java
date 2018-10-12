@@ -8,6 +8,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Account;
 import com.stripe.model.AccountCollection;
 import com.stripe.model.ExternalAccount;
+import com.stripe.model.PersonCollection;
 import com.stripe.net.ApiResource;
 
 import java.util.HashMap;
@@ -139,6 +140,23 @@ public class AccountTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/accounts/%s/external_accounts", resource.getId()),
+        params
+    );
+  }
+
+  @Test
+  public void testPersons() throws StripeException {
+    final Account resource = Account.retrieve(ACCOUNT_ID, null);
+
+    final Map<String, Object> params = new HashMap<String, Object>();
+    params.put("limit", 1);
+
+    final PersonCollection persons = resource.persons(params);
+
+    assertNotNull(persons);
+    verifyRequest(
+        ApiResource.RequestMethod.GET,
+        String.format("/v1/accounts/%s/persons", resource.getId()),
         params
     );
   }

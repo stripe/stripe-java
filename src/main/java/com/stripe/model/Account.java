@@ -144,6 +144,33 @@ public class Account extends ApiResource implements HasId, MetadataStore<Account
   }
   // </editor-fold>
 
+  // <editor-fold desc="persons">
+  /**
+   * List an account's persons.
+   */
+  public PersonCollection persons()
+      throws StripeException {
+    return persons(null, null);
+  }
+
+  /**
+   * List an account's persons.
+   */
+  public PersonCollection persons(Map<String, Object> params)
+      throws StripeException {
+    return persons(params, null);
+  }
+
+  /**
+   * List an account's persons.
+   */
+  public PersonCollection persons(Map<String, Object> params,
+      RequestOptions options) throws StripeException {
+    String url = instanceUrl(Account.class, this.getId()) + "/persons";
+    return requestCollection(url, params, PersonCollection.class, options);
+  }
+  // </editor-fold>
+
   // <editor-fold desc="reject">
   /**
    * Reject an account.

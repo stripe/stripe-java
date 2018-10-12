@@ -17,9 +17,9 @@ public class EventTest extends BaseStripeTest {
     assertNotNull(event.getId());
     assertEquals("event", event.getObject());
 
-    final Customer customer = (Customer) event.getData().getObject();
-    assertNotNull(customer);
-    assertNotNull(customer.getId());
+    final Plan plan = (Plan) event.getData().getObject();
+    assertNotNull(plan);
+    assertNotNull(plan.getId());
   }
 
   @Test
