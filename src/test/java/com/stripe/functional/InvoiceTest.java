@@ -1,6 +1,7 @@
 package com.stripe.functional;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
@@ -83,6 +84,72 @@ public class InvoiceTest extends BaseStripeTest {
   }
 
   @Test
+  public void testDelete() throws StripeException {
+    final Invoice invoice = getInvoiceFixture();
+
+    final Invoice deletedInvoice = invoice.delete();
+
+    assertNotNull(deletedInvoice);
+    assertTrue(deletedInvoice.getDeleted());
+    verifyRequest(
+        ApiResource.RequestMethod.DELETE,
+        String.format("/v1/invoices/%s", invoice.getId())
+    );
+  }
+
+  @Test
+  public void testFinalizeInvoice() throws StripeException {
+    final Invoice invoice = getInvoiceFixture();
+
+    final Invoice finalizedInvoice = invoice.finalizeInvoice();
+
+    assertNotNull(finalizedInvoice);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        String.format("/v1/invoices/%s/finalize", invoice.getId())
+    );
+  }
+
+  @Test
+  public void testMarkUncollectible() throws StripeException {
+    final Invoice invoice = getInvoiceFixture();
+
+    final Invoice uncollectibleInvoice = invoice.markUncollectible();
+
+    assertNotNull(uncollectibleInvoice);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        String.format("/v1/invoices/%s/mark_uncollectible", invoice.getId())
+    );
+  }
+
+  @Test
+  public void testPay() throws StripeException {
+    final Invoice invoice = getInvoiceFixture();
+
+    final Invoice paidInvoice = invoice.pay();
+
+    assertNotNull(paidInvoice);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        String.format("/v1/invoices/%s/pay", invoice.getId())
+    );
+  }
+
+  @Test
+  public void testSendInvoice() throws StripeException {
+    final Invoice invoice = getInvoiceFixture();
+
+    final Invoice sentInvoice = invoice.sendInvoice();
+
+    assertNotNull(sentInvoice);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        String.format("/v1/invoices/%s/send", invoice.getId())
+    );
+  }
+
+  @Test
   public void testUpcoming() throws StripeException {
     Map<String, Object> params = new HashMap<String, Object>();
     params.put("customer", "cus_123");
@@ -98,15 +165,15 @@ public class InvoiceTest extends BaseStripeTest {
   }
 
   @Test
-  public void testPay() throws StripeException {
+  public void testVoidInvoice() throws StripeException {
     final Invoice invoice = getInvoiceFixture();
 
-    final Invoice paidInvoice = invoice.pay();
+    final Invoice voidInvoice = invoice.voidInvoice();
 
-    assertNotNull(paidInvoice);
+    assertNotNull(voidInvoice);
     verifyRequest(
         ApiResource.RequestMethod.POST,
-        String.format("/v1/invoices/%s/pay", invoice.getId())
+        String.format("/v1/invoices/%s/void", invoice.getId())
     );
   }
 }
