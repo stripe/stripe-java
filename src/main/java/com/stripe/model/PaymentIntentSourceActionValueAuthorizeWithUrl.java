@@ -9,5 +9,6 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public final class PaymentIntentSourceActionValueAuthorizeWithUrl
     extends PaymentIntentSourceActionValue {
+  String returnUrl;
   String url;
 }

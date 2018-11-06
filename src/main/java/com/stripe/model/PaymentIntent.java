@@ -25,6 +25,7 @@ public class PaymentIntent extends ApiResource implements MetadataStore<PaymentI
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Application> application;
   Long applicationFeeAmount;
   Long canceledAt;
+  String cancellationReason;
   String captureMethod;
   ChargeCollection charges;
   String clientSecret;
@@ -37,12 +38,20 @@ public class PaymentIntent extends ApiResource implements MetadataStore<PaymentI
   PaymentIntentSourceAction nextSourceAction;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Account> onBehalfOf;
   String receiptEmail;
-  String returnUrl;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Review> review;
   ShippingDetails shipping;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<ExternalAccount> source;
   String statementDescriptor;
   TransferData transferData;
   String status;
+
+  /**
+   * The {@code returnUrl} attribute.
+   *
+   * @deprecated This property is not supported anymore and is only present for legacy reasons.
+   */
+  @Deprecated
+  String returnUrl;
 
   // <editor-fold desc="application">
   public String getApplication() {
@@ -96,6 +105,24 @@ public class PaymentIntent extends ApiResource implements MetadataStore<PaymentI
 
   public void setOnBehalfOfObject(Account c) {
     this.onBehalfOf = new ExpandableField<Account>(c.getId(), c);
+  }
+  // </editor-fold>
+
+  // <editor-fold desc="review">
+  public String getReview() {
+    return (this.review != null) ? this.review.getId() : null;
+  }
+
+  public void setReview(String reviewId) {
+    this.review = setExpandableFieldId(reviewId, this.review);
+  }
+
+  public Review getReviewObject() {
+    return (this.review != null) ? this.review.getExpanded() : null;
+  }
+
+  public void setReviewObject(Review c) {
+    this.review = new ExpandableField<Review>(c.getId(), c);
   }
   // </editor-fold>
 
