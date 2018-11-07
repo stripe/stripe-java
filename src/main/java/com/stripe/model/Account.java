@@ -41,6 +41,7 @@ public class Account extends ApiResource implements HasId, MetadataStore<Account
   Boolean payoutsEnabled;
   String productDescription;
   String statementDescriptor;
+  Address supportAddress;
   String supportEmail;
   String supportPhone;
   String supportUrl;

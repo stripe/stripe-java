@@ -21,6 +21,7 @@ public class CountrySpec extends ApiResource implements HasId {
   Map<String, List<String>> supportedBankAccountCurrencies;
   List<String> supportedPaymentCurrencies;
   List<String> supportedPaymentMethods;
+  List<String> supportedTransferCountries;
   VerificationFields verificationFields;
 
   // <editor-fold desc="list">
