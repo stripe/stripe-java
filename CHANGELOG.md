@@ -1,5 +1,10 @@
 # Changelog
 
+## 7.3.0 - 2018-11-07
+* [#610](https://github.com/stripe/stripe-java/pull/610) Add `flatAmount` to `Plan.Tier`
+* [#611](https://github.com/stripe/stripe-java/pull/611) Add `supportedTransferCountries` to `CountrySpec`
+* [#611](https://github.com/stripe/stripe-java/pull/611) Add `supportAddress` to `Account`
+
 ## 7.2.0 - 2018-10-31
 * [#603](https://github.com/stripe/stripe-java/pull/603) Add support for the `Person` resource
 * [#606](https://github.com/stripe/stripe-java/pull/606) Add support for the `WebhookEndpoint` resource
