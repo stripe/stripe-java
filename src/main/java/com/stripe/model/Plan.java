@@ -193,6 +193,7 @@ public class Plan extends ApiResource implements MetadataStore<Plan>, HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Tier extends StripeObject {
+    Long flatAmount;
     Long unitAmount;
     Long upTo;
 
