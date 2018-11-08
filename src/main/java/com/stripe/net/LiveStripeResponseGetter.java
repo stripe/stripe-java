@@ -1,5 +1,7 @@
 package com.stripe.net;
 
+import com.google.gson.JsonSyntaxException;
+
 import com.stripe.Stripe;
 import com.stripe.exception.ApiConnectionException;
 import com.stripe.exception.ApiException;
@@ -531,7 +533,12 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       handleApiError(responseBody, responseCode, requestId);
     }
 
-    T resource = ApiResource.GSON.fromJson(responseBody, clazz);
+    T resource = null;
+    try {
+      resource = ApiResource.GSON.fromJson(responseBody, clazz);
+    } catch (JsonSyntaxException e) {
+      raiseMalformedJsonError(responseBody, responseCode, requestId);
+    }
 
     if (resource instanceof StripeObject) {
       StripeObject obj = (StripeObject)resource;
@@ -555,7 +562,12 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       handleOAuthError(responseBody, responseCode, requestId);
     }
 
-    T resource = ApiResource.GSON.fromJson(responseBody, clazz);
+    T resource = null;
+    try {
+      resource = ApiResource.GSON.fromJson(responseBody, clazz);
+    } catch (JsonSyntaxException e) {
+      raiseMalformedJsonError(responseBody, responseCode, requestId);
+    }
 
     return resource;
   }
@@ -690,11 +702,25 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
   }
 
+  private static void raiseMalformedJsonError(String responseBody, int responseCode,
+      String requestId) throws ApiException {
+    throw new ApiException(
+      String.format(
+          "Invalid response object from API: %s. (HTTP response code was %d)",
+          responseBody, responseCode),
+      requestId, null, responseCode, null);
+  }
+
   private static void handleApiError(String responseBody, int responseCode, String requestId)
       throws ApiException, AuthenticationException, CardException, IdempotencyException,
       InvalidRequestException {
-    LiveStripeResponseGetter.StripeError error = ApiResource.GSON.fromJson(responseBody,
-        LiveStripeResponseGetter.StripeErrorContainer.class).error;
+    LiveStripeResponseGetter.StripeError error = null;
+    try {
+      error = ApiResource.GSON.fromJson(responseBody,
+          LiveStripeResponseGetter.StripeErrorContainer.class).error;
+    } catch (JsonSyntaxException e) {
+      raiseMalformedJsonError(responseBody, responseCode, requestId);
+    }
     switch (responseCode) {
       case 400:
       case 404:
@@ -723,8 +749,13 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       throws InvalidClientException, InvalidGrantException,
       com.stripe.exception.oauth.InvalidRequestException, InvalidScopeException,
       UnsupportedGrantTypeException, UnsupportedResponseTypeException, ApiException {
-    LiveStripeResponseGetter.StripeOAuthError error = ApiResource.GSON.fromJson(responseBody,
-        LiveStripeResponseGetter.StripeOAuthError.class);
+    LiveStripeResponseGetter.StripeOAuthError error = null;
+    try {
+      error = ApiResource.GSON.fromJson(responseBody,
+          LiveStripeResponseGetter.StripeOAuthError.class);
+    } catch (JsonSyntaxException e) {
+      raiseMalformedJsonError(responseBody, responseCode, requestId);
+    }
     String code = error.error;
     String description = (error.errorDescription != null) ? error.errorDescription : code;
 
