@@ -8,7 +8,7 @@
   "amount_capturable": 1000,
   "amount_received": 0,
   "application": null,
-  "application_fee": null,
+  "application_fee_amount": null,
   "canceled_at": null,
   "capture_method": "automatic",
   "charges": {
@@ -34,11 +34,10 @@
     "order_id": "123456789"
   },
   "next_source_action": {
-    "authorize_with_url": {
-      "return_url": "https://stripe.com/return",
+    "type": "authorize_with_url",
+    "value": {
       "url": "https://stripe.com"
-    },
-    "type": "authorize_with_url"
+    }
   },
   "on_behalf_of": null,
   "receipt_email": "test@stripe.com",

@@ -21,6 +21,24 @@ public class PaymentIntentTest extends BaseStripeTest {
     PaymentIntentSourceAction action =  resource.getNextSourceAction();
     assertNotNull(action);
 
+    PaymentIntentSourceActionValueAuthorizeWithUrl actionAuthorize = action.getAuthorizeWithUrl();
+    assertNotNull(actionAuthorize);
+    assertEquals("https://stripe.com", actionAuthorize.getUrl());
+    assertEquals("https://stripe.com/return", actionAuthorize.getReturnUrl());
+  }
+
+  // Ensure legacy version of `next_source_action` with `value` still works
+  @Test
+  public void testDeserializeSourceActionValue() throws Exception {
+    // Keep the fixture to have `action` deserialize properly
+    final PaymentIntent resource = ApiResource.GSON.fromJson(
+        getResourceAsString("/api_fixtures/payment_intent_old_value.json"), PaymentIntent.class);
+    assertNotNull(resource);
+    assertNotNull(resource.getId());
+
+    PaymentIntentSourceAction action =  resource.getNextSourceAction();
+    assertNotNull(action);
+
     PaymentIntentSourceActionValueAuthorizeWithUrl actionValue =
         (PaymentIntentSourceActionValueAuthorizeWithUrl) action.getValue();
     assertNotNull(actionValue);
@@ -33,6 +51,7 @@ public class PaymentIntentTest extends BaseStripeTest {
       "application",
       "customer",
       "on_behalf_of",
+      "review",
       "source",
     };
     final String data = getFixture("/v1/payment_intents/pi_123", expansions);
@@ -49,6 +68,14 @@ public class PaymentIntentTest extends BaseStripeTest {
     assertNotNull(customer);
     assertNotNull(customer.getId());
     assertEquals(resource.getCustomer(), customer.getId());
+    final Account account = resource.getOnBehalfOfObject();
+    assertNotNull(account);
+    assertNotNull(account.getId());
+    assertEquals(resource.getOnBehalfOf(), account.getId());
+    final Review review = resource.getReviewObject();
+    assertNotNull(review);
+    assertNotNull(review.getId());
+    assertEquals(resource.getReview(), review.getId());
     final ExternalAccount source = resource.getSourceObject();
     assertNotNull(source);
     assertNotNull(source.getId());
