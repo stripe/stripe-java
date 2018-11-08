@@ -1,5 +1,8 @@
 # Changelog
 
+## 7.4.0 - 2018-11-08
+* [#609](https://github.com/stripe/stripe-java/pull/609) Support new shape of the `PaymentIntent` resource.
+
 ## 7.3.0 - 2018-11-07
 * [#610](https://github.com/stripe/stripe-java/pull/610) Add `flatAmount` to `Plan.Tier`
 * [#611](https://github.com/stripe/stripe-java/pull/611) Add `supportedTransferCountries` to `CountrySpec`
