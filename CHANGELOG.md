@@ -1,5 +1,8 @@
 # Changelog
 
+## 7.5.0 - 2018-11-08
+* [#604](https://github.com/stripe/stripe-java/pull/604) Add new API endpoints for the `Invoice` resource.
+
 ## 7.4.0 - 2018-11-08
 * [#609](https://github.com/stripe/stripe-java/pull/609) Support new shape of the `PaymentIntent` resource.
 
