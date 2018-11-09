@@ -28,16 +28,16 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
   String billing;
   String billingReason;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Charge> charge;
-  Boolean closed;
   Long created;
   String currency;
   String customer;
   Long date;
+  Boolean deleted;
   String description;
   Discount discount;
   Long dueDate;
   Long endingBalance;
-  Boolean forgiven;
+  Long finalizedAt;
   String hostedInvoiceUrl;
   String invoicePdf;
   InvoiceLineItemCollection lines;
@@ -51,6 +51,7 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
   String receiptNumber;
   Long startingBalance;
   String statementDescriptor;
+  String status;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Subscription> subscription;
   Long subscriptionProrationDate;
   Long subtotal;
@@ -58,6 +59,22 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
   BigDecimal taxPercent;
   Long total;
   Long webhooksDeliveredAt;
+
+  /**
+   * The {@code closed} attribute.
+   *
+   * @deprecated Prefer using the {@code status} attribute instead.
+   */
+  @Deprecated
+  Boolean closed;
+
+  /**
+   * The {@code forgiven} attribute.
+   *
+   * @deprecated Prefer using the {@code status} attribute instead.
+   */
+  @Deprecated
+  Boolean forgiven;
 
   // <editor-fold desc="charge">
   public String getCharge() {
@@ -112,6 +129,23 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
   }
   // </editor-fold>
 
+  // <editor-fold desc="delete">
+  /**
+   * Delete an invoice.
+   */
+  public Invoice delete() throws StripeException {
+    return delete((RequestOptions) null);
+  }
+
+  /**
+   * Delete an invoice.
+   */
+  public Invoice delete(RequestOptions options) throws StripeException {
+    return request(RequestMethod.DELETE, instanceUrl(Invoice.class, this.id), null,
+        Invoice.class, options);
+  }
+  // </editor-fold>
+
   // <editor-fold desc="list">
   /**
    * List all invoices.
@@ -126,6 +160,70 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
   public static InvoiceCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     return requestCollection(classUrl(Invoice.class), params, InvoiceCollection.class, options);
+  }
+  // </editor-fold>
+
+  // <editor-fold desc="finalizeInvoice">
+  /**
+   * Finalize an invoice.
+   */
+  public Invoice finalizeInvoice() throws StripeException {
+    return this.finalizeInvoice((RequestOptions) null);
+  }
+
+  /**
+   * Finalize an invoice.
+   */
+  public Invoice finalizeInvoice(RequestOptions options) throws StripeException {
+    return finalizeInvoice(null, options);
+  }
+
+  /**
+   * Finalize an invoice.
+   */
+  public Invoice finalizeInvoice(Map<String, Object> params) throws StripeException {
+    return this.finalizeInvoice(params, null);
+  }
+
+  /**
+   * Finalize an invoice.
+   */
+  public Invoice finalizeInvoice(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    return request(RequestMethod.POST, String.format("%s/finalize",
+        instanceUrl(Invoice.class, this.getId())), params, Invoice.class, options);
+  }
+  // </editor-fold>
+
+  // <editor-fold desc="markUncollectible">
+  /**
+   * Mark an invoice as uncollectible.
+   */
+  public Invoice markUncollectible() throws StripeException {
+    return this.markUncollectible((RequestOptions) null);
+  }
+
+  /**
+   * Mark an invoice as uncollectible.
+   */
+  public Invoice markUncollectible(RequestOptions options) throws StripeException {
+    return markUncollectible(null, options);
+  }
+
+  /**
+   * Mark an invoice as uncollectible.
+   */
+  public Invoice markUncollectible(Map<String, Object> params) throws StripeException {
+    return this.markUncollectible(params, null);
+  }
+
+  /**
+   * Mark an invoice as uncollectible.
+   */
+  public Invoice markUncollectible(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    return request(RequestMethod.POST, String.format("%s/mark_uncollectible",
+        instanceUrl(Invoice.class, this.getId())), params, Invoice.class, options);
   }
   // </editor-fold>
 
@@ -154,7 +252,8 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
   /**
    * Pay an invoice.
    */
-  public Invoice pay(Map<String, Object> params, RequestOptions options) throws StripeException {
+  public Invoice pay(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     return request(RequestMethod.POST, String.format("%s/pay",
         instanceUrl(Invoice.class, this.getId())), params, Invoice.class, options);
   }
@@ -182,6 +281,38 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
       throws StripeException {
     return request(RequestMethod.GET, instanceUrl(Invoice.class, id), params, Invoice.class,
         options);
+  }
+  // </editor-fold>
+
+  // <editor-fold desc="sendInvoice">
+  /**
+   * send an invoice.
+   */
+  public Invoice sendInvoice() throws StripeException {
+    return this.sendInvoice((RequestOptions) null);
+  }
+
+  /**
+   * send an invoice.
+   */
+  public Invoice sendInvoice(RequestOptions options) throws StripeException {
+    return sendInvoice(null, options);
+  }
+
+  /**
+   * send an invoice.
+   */
+  public Invoice sendInvoice(Map<String, Object> params) throws StripeException {
+    return this.sendInvoice(params, null);
+  }
+
+  /**
+   * send an invoice.
+   */
+  public Invoice sendInvoice(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    return request(RequestMethod.POST, String.format("%s/send",
+        instanceUrl(Invoice.class, this.getId())), params, Invoice.class, options);
   }
   // </editor-fold>
 
@@ -219,6 +350,38 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
   public Invoice update(Map<String, Object> params, RequestOptions options) throws StripeException {
     return request(RequestMethod.POST, instanceUrl(Invoice.class, this.id), params, Invoice.class,
         options);
+  }
+  // </editor-fold>
+
+  // <editor-fold desc="voidInvoice">
+  /**
+   * void an invoice.
+   */
+  public Invoice voidInvoice() throws StripeException {
+    return this.voidInvoice((RequestOptions) null);
+  }
+
+  /**
+   * void an invoice.
+   */
+  public Invoice voidInvoice(RequestOptions options) throws StripeException {
+    return voidInvoice(null, options);
+  }
+
+  /**
+   * void an invoice.
+   */
+  public Invoice voidInvoice(Map<String, Object> params) throws StripeException {
+    return this.voidInvoice(params, null);
+  }
+
+  /**
+   * void an invoice.
+   */
+  public Invoice voidInvoice(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    return request(RequestMethod.POST, String.format("%s/void",
+        instanceUrl(Invoice.class, this.getId())), params, Invoice.class, options);
   }
   // </editor-fold>
 }

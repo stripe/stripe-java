@@ -54,6 +54,7 @@ public class PaymentIntentTest extends BaseStripeTest {
       "review",
       "source",
     };
+
     final String data = getFixture("/v1/payment_intents/pi_123", expansions);
     final PaymentIntent resource = ApiResource.GSON.fromJson(data, PaymentIntent.class);
 
