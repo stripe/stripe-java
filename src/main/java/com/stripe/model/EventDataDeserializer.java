@@ -58,6 +58,10 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
     objectMap.put("payout", Payout.class);
     objectMap.put("plan", Plan.class);
     objectMap.put("product", Product.class);
+    objectMap.put("radar.value_list", com.stripe.model.radar.ValueList.class);
+    objectMap.put("radar.value_list_item", com.stripe.model.radar.ValueListItem.class);
+    objectMap.put("reporting.report_run", com.stripe.model.reporting.ReportRun.class);
+    objectMap.put("reporting.report_type", com.stripe.model.reporting.ReportType.class);
     objectMap.put("refund", Refund.class);
     objectMap.put("recipient", Recipient.class);
     objectMap.put("review", Review.class);
@@ -69,6 +73,9 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
     objectMap.put("subscription", Subscription.class);
     objectMap.put("subscription_item", SubscriptionItem.class);
     objectMap.put("summary", Transfer.Summary.class);
+    objectMap.put("terminal.connection_token", com.stripe.model.terminal.ConnectionToken.class);
+    objectMap.put("terminal.location", com.stripe.model.terminal.Location.class);
+    objectMap.put("terminal.reader", com.stripe.model.terminal.Reader.class);
     objectMap.put("three_d_secure", ThreeDSecure.class);
     objectMap.put("token", Token.class);
     objectMap.put("transfer", Transfer.class);

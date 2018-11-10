@@ -28,7 +28,7 @@ before_install:
 
 env:
   global:
-  - STRIPE_MOCK_VERSION=0.36.1
+  - STRIPE_MOCK_VERSION=0.37.0
 
 matrix:
   include:
