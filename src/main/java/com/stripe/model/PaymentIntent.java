@@ -33,6 +33,7 @@ public class PaymentIntent extends ApiResource implements MetadataStore<PaymentI
   Long created;
   String currency;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Customer> customer;
+  PaymentIntentLastPaymentError lastPaymentError;
   Boolean livemode;
   @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   PaymentIntentSourceAction nextSourceAction;
