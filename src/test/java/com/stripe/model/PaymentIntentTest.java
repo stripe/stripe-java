@@ -27,6 +27,25 @@ public class PaymentIntentTest extends BaseStripeTest {
     assertEquals("https://stripe.com/return", actionAuthorize.getReturnUrl());
   }
 
+  @Test
+  public void testDeserializeLastPaymentError() throws Exception {
+    final PaymentIntent resource = ApiResource.GSON.fromJson(
+        getResourceAsString("/api_fixtures/payment_intent_last_payment_error.json"),
+        PaymentIntent.class);
+    assertNotNull(resource);
+    assertNotNull(resource.getId());
+
+    PaymentIntentLastPaymentError error =  resource.getLastPaymentError();
+    assertNotNull(error);
+
+    assertEquals("ch_123", error.getCharge());
+    assertEquals("generic_decline", error.getDeclineCode());
+
+    final ExternalAccount source = error.getSource();
+    assertNotNull(source);
+    assertNotNull(source.getId());
+  }
+
   // Ensure legacy version of `next_source_action` with `value` still works
   @Test
   public void testDeserializeSourceActionValue() throws Exception {
