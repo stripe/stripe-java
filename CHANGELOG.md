@@ -1,5 +1,11 @@
 # Changelog
 
+## 7.8.0 - 2018-11-19
+* [#616](https://github.com/stripe/stripe-java/pull/616) Add missing properties to a few resources:
+  * Add `default_source` to `Invoice` and `Subscription`
+  * Add `livemode` to Subscription
+  * Add `metadata` and `subscription` to `SubscriptionItem`
+
 ## 7.7.0 - 2018-11-14
 * [#615](https://github.com/stripe/stripe-java/pull/615) Add `last_payment_error` to `PaymentIntent`.
 
