@@ -32,6 +32,8 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
   String currency;
   String customer;
   Long date;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
+      ExpandableField<ExternalAccount> defaultSource;
   Boolean deleted;
   String description;
   Discount discount;
@@ -91,6 +93,24 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
 
   public void setChargeObject(Charge charge) {
     this.charge = new ExpandableField<Charge>(charge.getId(), charge);
+  }
+  // </editor-fold>
+
+  // <editor-fold desc="defaultSource">
+  public String getDefaultSource() {
+    return (this.defaultSource != null) ? this.defaultSource.getId() : null;
+  }
+
+  public void setDefaultSource(String defaultSourceId) {
+    this.defaultSource = setExpandableFieldId(defaultSourceId, this.defaultSource);
+  }
+
+  public ExternalAccount getDefaultSourceObject() {
+    return (this.defaultSource != null) ? this.defaultSource.getExpanded() : null;
+  }
+
+  public void setDefaultSourceObject(ExternalAccount c) {
+    this.defaultSource = new ExpandableField<ExternalAccount>(c.getId(), c);
   }
   // </editor-fold>
 

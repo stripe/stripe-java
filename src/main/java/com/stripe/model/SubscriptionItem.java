@@ -13,13 +13,15 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class SubscriptionItem extends ApiResource implements HasId {
+public class SubscriptionItem extends ApiResource implements MetadataStore<Subscription>, HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   Long created;
+  Boolean deleted;
+  @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   Plan plan;
   Long quantity;
-  Boolean deleted;
+  String subscription;
 
   // <editor-fold desc="create">
   /**
