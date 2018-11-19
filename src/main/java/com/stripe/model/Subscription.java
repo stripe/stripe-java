@@ -28,9 +28,12 @@ public class Subscription extends ApiResource implements MetadataStore<Subscript
   Long currentPeriodStart;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Customer> customer;
   Long daysUntilDue;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
+      ExpandableField<ExternalAccount> defaultSource;
   Discount discount;
   Long endedAt;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) SubscriptionItemCollection items;
+  Boolean livemode;
   @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   Plan plan;
   Long quantity;
@@ -55,6 +58,24 @@ public class Subscription extends ApiResource implements MetadataStore<Subscript
 
   public void setCustomerObject(Customer c) {
     this.customer = new ExpandableField<Customer>(c.getId(), c);
+  }
+  // </editor-fold>
+
+  // <editor-fold desc="defaultSource">
+  public String getDefaultSource() {
+    return (this.defaultSource != null) ? this.defaultSource.getId() : null;
+  }
+
+  public void setDefaultSource(String defaultSourceId) {
+    this.defaultSource = setExpandableFieldId(defaultSourceId, this.defaultSource);
+  }
+
+  public ExternalAccount getDefaultSourceObject() {
+    return (this.defaultSource != null) ? this.defaultSource.getExpanded() : null;
+  }
+
+  public void setDefaultSourceObject(ExternalAccount c) {
+    this.defaultSource = new ExpandableField<ExternalAccount>(c.getId(), c);
   }
   // </editor-fold>
 
