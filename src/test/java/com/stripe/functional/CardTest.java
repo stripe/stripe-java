@@ -8,16 +8,14 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Card;
 import com.stripe.model.Customer;
-import com.stripe.model.ExternalAccount;
-import com.stripe.model.ExternalAccountCollection;
+import com.stripe.model.PaymentSource;
+import com.stripe.model.PaymentSourceCollection;
 import com.stripe.net.ApiResource;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.junit.Test;
 
 public class CardTest extends BaseStripeTest {
@@ -111,28 +109,28 @@ public class CardTest extends BaseStripeTest {
 
     // stripe-mock doesn't handle this, so we stub the request
     final Card stubbedCard = getCardFixture(customer);
-    final ExternalAccountCollection stubbedCollection = new ExternalAccountCollection();
-    final List<ExternalAccount> stubbedData = new ArrayList<>();
+    final PaymentSourceCollection stubbedCollection = new PaymentSourceCollection();
+    final List<PaymentSource> stubbedData = new ArrayList<PaymentSource>();
     stubbedData.add(stubbedCard);
     stubbedCollection.setData(stubbedData);
     stubRequest(
         ApiResource.RequestMethod.GET,
         String.format("/v1/customers/%s/sources", customer.getId()),
         params,
-        ExternalAccountCollection.class,
+        PaymentSourceCollection.class,
         stubbedCollection.toJson()
     );
 
-    final ExternalAccountCollection externalAccounts = customer.getSources().list(params);
+    final PaymentSourceCollection sources = customer.getSources().list(params);
 
-    assertNotNull(externalAccounts);
-    assertEquals(1, externalAccounts.getData().size());
+    assertNotNull(sources);
+    assertEquals(1, sources.getData().size());
     verifyRequest(
         ApiResource.RequestMethod.GET,
         String.format("/v1/customers/%s/sources", customer.getId())
     );
 
-    final Card card = (Card) externalAccounts.getData().get(0);
+    final Card card = (Card) sources.getData().get(0);
     assertNotNull(card);
   }
 
