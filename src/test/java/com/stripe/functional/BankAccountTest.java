@@ -8,8 +8,8 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.BankAccount;
 import com.stripe.model.Customer;
-import com.stripe.model.ExternalAccount;
-import com.stripe.model.ExternalAccountCollection;
+import com.stripe.model.PaymentSource;
+import com.stripe.model.PaymentSourceCollection;
 import com.stripe.net.ApiResource;
 
 import java.io.IOException;
@@ -121,28 +121,28 @@ public class BankAccountTest extends BaseStripeTest {
     // stripe-mock doesn't handle this, so we stub the request
     final BankAccount stubbedBankAccount = ApiResource.GSON.fromJson(
         getResourceAsString("/api_fixtures/bank_account.json"), BankAccount.class);
-    final ExternalAccountCollection stubbedCollection = new ExternalAccountCollection();
-    final List<ExternalAccount> stubbedData = new ArrayList<>();
+    final PaymentSourceCollection stubbedCollection = new PaymentSourceCollection();
+    final List<PaymentSource> stubbedData = new ArrayList<PaymentSource>();
     stubbedData.add(stubbedBankAccount);
     stubbedCollection.setData(stubbedData);
     stubRequest(
         ApiResource.RequestMethod.GET,
         String.format("/v1/customers/%s/sources", customer.getId()),
         params,
-        ExternalAccountCollection.class,
+        PaymentSourceCollection.class,
         stubbedCollection.toJson()
     );
 
-    final ExternalAccountCollection externalAccounts = customer.getSources().list(params);
+    final PaymentSourceCollection sources = customer.getSources().list(params);
 
-    assertNotNull(externalAccounts);
-    assertEquals(1, externalAccounts.getData().size());
+    assertNotNull(sources);
+    assertEquals(1, sources.getData().size());
     verifyRequest(
         ApiResource.RequestMethod.GET,
         String.format("/v1/customers/%s/sources", customer.getId())
     );
 
-    final BankAccount bankAccount = (BankAccount) externalAccounts.getData().get(0);
+    final BankAccount bankAccount = (BankAccount) sources.getData().get(0);
     assertNotNull(bankAccount);
   }
 
