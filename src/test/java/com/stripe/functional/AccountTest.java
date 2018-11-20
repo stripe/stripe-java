@@ -7,7 +7,7 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Account;
 import com.stripe.model.AccountCollection;
-import com.stripe.model.ExternalAccount;
+import com.stripe.model.ExternalAccountSource;
 import com.stripe.model.PersonCollection;
 import com.stripe.net.ApiResource;
 
@@ -134,7 +134,7 @@ public class AccountTest extends BaseStripeTest {
     final Map<String, Object> params = new HashMap<String, Object>();
     params.put("external_account", "tok_123");
 
-    final ExternalAccount ea = resource.getExternalAccounts().create(params);
+    final ExternalAccountSource ea = resource.getExternalAccounts().create(params);
 
     assertNotNull(ea);
     verifyRequest(

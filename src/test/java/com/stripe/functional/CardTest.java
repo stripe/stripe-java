@@ -8,8 +8,10 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Card;
 import com.stripe.model.Customer;
-import com.stripe.model.ExternalAccount;
-import com.stripe.model.ExternalAccountCollection;
+import com.stripe.model.CustomerSource;
+import com.stripe.model.CustomerSourceCollection;
+import com.stripe.model.ExternalAccountSource;
+import com.stripe.model.ExternalAccountSourceCollection;
 import com.stripe.net.ApiResource;
 
 import java.io.IOException;
@@ -111,19 +113,19 @@ public class CardTest extends BaseStripeTest {
 
     // stripe-mock doesn't handle this, so we stub the request
     final Card stubbedCard = getCardFixture(customer);
-    final ExternalAccountCollection stubbedCollection = new ExternalAccountCollection();
-    final List<ExternalAccount> stubbedData = new ArrayList<ExternalAccount>();
+    final CustomerSourceCollection stubbedCollection = new CustomerSourceCollection();
+    final List<CustomerSource> stubbedData = new ArrayList<CustomerSource>();
     stubbedData.add(stubbedCard);
     stubbedCollection.setData(stubbedData);
     stubRequest(
         ApiResource.RequestMethod.GET,
         String.format("/v1/customers/%s/sources", customer.getId()),
         params,
-        ExternalAccountCollection.class,
+        CustomerSourceCollection.class,
         stubbedCollection.toJson()
     );
 
-    final ExternalAccountCollection externalAccounts = customer.getSources().list(params);
+    final CustomerSourceCollection externalAccounts = customer.getSources().list(params);
 
     assertNotNull(externalAccounts);
     assertEquals(1, externalAccounts.getData().size());
