@@ -13,7 +13,7 @@ public class ReversalTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String data = getFixture("/v1/transfers/tr_123/reversals/trr_123");
-    final Reversal reversal = ApiResource.GSON.fromJson(data, Reversal.class);
+    final TransferReversal reversal = ApiResource.GSON.fromJson(data, TransferReversal.class);
     assertNotNull(reversal);
     assertNotNull(reversal.getId());
     assertEquals("transfer_reversal", reversal.getObject());
@@ -28,7 +28,7 @@ public class ReversalTest extends BaseStripeTest {
       "transfer",
     };
     final String data = getFixture("/v1/transfers/tr_123/reversals/trr_123", expansions);
-    final Reversal reversal = ApiResource.GSON.fromJson(data, Reversal.class);
+    final TransferReversal reversal = ApiResource.GSON.fromJson(data, TransferReversal.class);
     assertNotNull(reversal);
     final BalanceTransaction balanceTransaction = reversal.getBalanceTransactionObject();
     assertNotNull(balanceTransaction);

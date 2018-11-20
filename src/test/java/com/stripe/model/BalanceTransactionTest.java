@@ -69,7 +69,7 @@ public class BalanceTransactionTest extends BaseStripeTest {
         assertNotNull(btSource);
         assertEquals("transfer", btSource.getObject());
       } else if (btId.equals("txn_106")) {
-        Reversal btSource = (Reversal) bt.getSourceObject();
+        TransferReversal btSource = (TransferReversal) bt.getSourceObject();
         assertNotNull(btSource);
         assertEquals("transfer_reversal", btSource.getObject());
       } else if (btId.equals("txn_107")) {
