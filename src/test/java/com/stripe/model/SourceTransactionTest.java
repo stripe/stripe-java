@@ -5,9 +5,6 @@ import static org.junit.Assert.assertNotNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.net.ApiResource;
-
-import java.util.Map;
-
 import org.junit.Test;
 
 public class SourceTransactionTest extends BaseStripeTest {
@@ -22,7 +19,6 @@ public class SourceTransactionTest extends BaseStripeTest {
     assertEquals(1, transactions.getData().size());
 
     final SourceTransaction transaction = transactions.getData().get(0);
-    final Map<String, String> typeData = transaction.getTypeData();
 
     assertEquals("srctxn_123", transaction.getId());
     assertEquals("source_transaction", transaction.getObject());
@@ -33,8 +29,8 @@ public class SourceTransactionTest extends BaseStripeTest {
     assertEquals("src_123", transaction.getSource());
     assertEquals("ach_credit_transfer", transaction.getType());
 
-    assertEquals("db67", typeData.get("last4"));
-    assertEquals("110000000", typeData.get("routing_number"));
-    assertEquals("U9AqfhJoSWCOImOv", typeData.get("fingerprint"));
+    final SourceTransaction.AchCreditTransferData typeData = transaction.getAchCreditTransfer();
+    assertEquals("110000000", typeData.getRoutingNumber());
+    assertEquals("U9AqfhJoSWCOImOv", typeData.getFingerprint());
   }
 }
