@@ -7,6 +7,7 @@ import com.stripe.BaseStripeTest;
 import com.stripe.model.PaymentIntent;
 import com.stripe.net.ApiResource;
 
+import org.junit.Ignore;
 import org.junit.Test;
 
 public class PaymentIntentTest extends BaseStripeTest {
@@ -18,10 +19,11 @@ public class PaymentIntentTest extends BaseStripeTest {
     assertNotNull(resource);
     assertNotNull(resource.getId());
 
-    PaymentIntentSourceAction action =  resource.getNextSourceAction();
+    PaymentIntentNextSourceAction action =  resource.getNextSourceAction();
     assertNotNull(action);
 
-    PaymentIntentSourceActionValueAuthorizeWithUrl actionAuthorize = action.getAuthorizeWithUrl();
+    assertEquals("authorize_with_url", action.getType());
+    PaymentIntentNextSourceActionAuthorizeWithUrl actionAuthorize = action.getAuthorizeWithUrl();
     assertNotNull(actionAuthorize);
     assertEquals("https://stripe.com", actionAuthorize.getUrl());
     assertEquals("https://stripe.com/return", actionAuthorize.getReturnUrl());
@@ -35,33 +37,15 @@ public class PaymentIntentTest extends BaseStripeTest {
     assertNotNull(resource);
     assertNotNull(resource.getId());
 
-    PaymentIntentLastPaymentError error =  resource.getLastPaymentError();
+    ApiError error =  resource.getLastPaymentError();
     assertNotNull(error);
 
     assertEquals("ch_123", error.getCharge());
     assertEquals("generic_decline", error.getDeclineCode());
 
-    final ExternalAccount source = error.getSource();
+    final PaymentIntentSource source = error.getSource();
     assertNotNull(source);
     assertNotNull(source.getId());
-  }
-
-  // Ensure legacy version of `next_source_action` with `value` still works
-  @Test
-  public void testDeserializeSourceActionValue() throws Exception {
-    // Keep the fixture to have `action` deserialize properly
-    final PaymentIntent resource = ApiResource.GSON.fromJson(
-        getResourceAsString("/api_fixtures/payment_intent_old_value.json"), PaymentIntent.class);
-    assertNotNull(resource);
-    assertNotNull(resource.getId());
-
-    PaymentIntentSourceAction action =  resource.getNextSourceAction();
-    assertNotNull(action);
-
-    PaymentIntentSourceActionValueAuthorizeWithUrl actionValue =
-        (PaymentIntentSourceActionValueAuthorizeWithUrl) action.getValue();
-    assertNotNull(actionValue);
-    assertEquals("https://stripe.com", actionValue.getUrl());
   }
 
   @Test
@@ -96,7 +80,7 @@ public class PaymentIntentTest extends BaseStripeTest {
     assertNotNull(review);
     assertNotNull(review.getId());
     assertEquals(resource.getReview(), review.getId());
-    final ExternalAccount source = resource.getSourceObject();
+    final PaymentIntentSource source = resource.getSourceObject();
     assertNotNull(source);
     assertNotNull(source.getId());
     assertEquals(resource.getSource(), source.getId());
