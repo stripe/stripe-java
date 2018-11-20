@@ -4,8 +4,8 @@ import static org.junit.Assert.assertNotNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
-import com.stripe.model.Reversal;
 import com.stripe.model.Transfer;
+import com.stripe.model.TransferReversal;
 import com.stripe.model.TransferReversalCollection;
 import com.stripe.net.ApiResource;
 
@@ -24,8 +24,8 @@ public class ReversalTest extends BaseStripeTest {
     return transfer;
   }
 
-  private Reversal getReversalFixture(Transfer transfer) throws StripeException {
-    final Reversal reversal = transfer.getReversals().retrieve(REVERSAL_ID);
+  private TransferReversal getTransferReversalFixture(Transfer transfer) throws StripeException {
+    final TransferReversal reversal = transfer.getReversals().retrieve(REVERSAL_ID);
     resetNetworkSpy();
     return reversal;
   }
@@ -37,7 +37,7 @@ public class ReversalTest extends BaseStripeTest {
     Map<String, Object> params = new HashMap<>();
     params.put("amount", 100);
 
-    final Reversal reversal = transfer.getReversals().create(params);
+    final TransferReversal reversal = transfer.getReversals().create(params);
 
     assertNotNull(reversal);
     verifyRequest(
@@ -51,7 +51,7 @@ public class ReversalTest extends BaseStripeTest {
   public void testRetrieve() throws StripeException {
     final Transfer transfer = getTransferFixture();
 
-    final Reversal reversal = transfer.getReversals().retrieve(REVERSAL_ID);
+    final TransferReversal reversal = transfer.getReversals().retrieve(REVERSAL_ID);
 
     assertNotNull(reversal);
     verifyRequest(
@@ -63,16 +63,16 @@ public class ReversalTest extends BaseStripeTest {
   @Test
   public void testUpdate() throws StripeException {
     final Transfer transfer = getTransferFixture();
-    final Reversal reversal = getReversalFixture(transfer);
+    final TransferReversal reversal = getTransferReversalFixture(transfer);
 
     final Map<String, Object> metadata = new HashMap<>();
     metadata.put("key", "value");
     final Map<String, Object> params = new HashMap<>();
     params.put("metadata", metadata);
 
-    final Reversal updatedReversal = reversal.update(params);
+    final TransferReversal updatedTransferReversal = reversal.update(params);
 
-    assertNotNull(updatedReversal);
+    assertNotNull(updatedTransferReversal);
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/transfers/%s/reversals/%s", transfer.getId(), reversal.getId()),
