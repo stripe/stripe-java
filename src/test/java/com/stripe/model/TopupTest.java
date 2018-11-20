@@ -25,7 +25,7 @@ public class TopupTest extends BaseStripeTest {
     final String[] expansions = {
       "balance_transaction",
     };
-    final String data = getFixture("/v1/transfers/tr_123", expansions);
+    final String data = getFixture("/v1/topups/tu_123", expansions);
     final Topup topup = ApiResource.GSON.fromJson(data, Topup.class);
     assertNotNull(topup);
     final BalanceTransaction balanceTransaction = topup.getBalanceTransactionObject();
