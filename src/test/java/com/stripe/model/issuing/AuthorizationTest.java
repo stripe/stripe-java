@@ -17,8 +17,8 @@ public class AuthorizationTest extends BaseStripeTest {
     assertNotNull(authorization);
     assertNotNull(authorization.getId());
     assertEquals("issuing.authorization", authorization.getObject());
-    assertNotNull(authorization.getCardObject());
-    assertEquals("issuing.card", authorization.getCardObject().getObject());
+    assertNotNull(authorization.getCard());
+    assertEquals("issuing.card", authorization.getCard().getObject());
   }
 
   @Test
@@ -32,7 +32,7 @@ public class AuthorizationTest extends BaseStripeTest {
     assertNotNull(authorization);
     assertNotNull(authorization.getId());
     assertEquals("issuing.authorization", authorization.getObject());
-    assertEquals("issuing.card", authorization.getCardObject().getObject());
+    assertEquals("issuing.card", authorization.getCard().getObject());
 
     final Cardholder cardholder = authorization.getCardholderObject();
     assertNotNull(cardholder);
