@@ -19,16 +19,11 @@ public class UsageRecordTest extends BaseStripeTest {
   public void testCreate() throws StripeException {
     final Map<String, Object> params = new HashMap<>();
     params.put("quantity", 10);
-    params.put("subscription_item", SUBSCRIPTION_ITEM_ID);
     params.put("timestamp", System.currentTimeMillis() / 1000L);
 
-    final UsageRecord resource = UsageRecord.create(params, null);
-
-    // UsageRecord.create() has a non-standard behavior: it uses the `subscription_item` element
-    // in the params map to form the endpoint's URL. We need to remove it from the map because
-    // it won't be sent as a URL-encoded parameter.
-    params.remove("subscription_item");
-
+    final UsageRecord resource = UsageRecord.createOnSubscriptionItem(
+        SUBCRIPTION_ITEM_ID, params, null);
+    
     assertNotNull(resource);
     verifyRequest(
         ApiResource.RequestMethod.POST,
