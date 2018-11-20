@@ -16,7 +16,7 @@ public class CardDetailsTest extends BaseStripeTest {
 
     assertNotNull(cardDetails);
     assertEquals("issuing.card_details", cardDetails.getObject());
-    assertNotNull(cardDetails.getCardObject());
-    assertEquals("issuing.card", cardDetails.getCardObject().getObject());
+    assertNotNull(cardDetails.getCard());
+    assertEquals("issuing.card", cardDetails.getCard().getObject());
   }
 }
