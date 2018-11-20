@@ -89,8 +89,12 @@ public class ChargeTest extends BaseStripeTest {
   @Test
   public void testMarkFaudulent() throws StripeException {
     final Charge charge = getChargeFixture();
+    Map<String, Object> params = new HashMap<>();
+    Map<String, Object> userReport = new HashMap<>();
+    params.put("fraud_details", userReport);
+    userReport.put("user_report", "fraudulent");
 
-    final Charge fraudulentCharge = charge.markFraudulent(null);
+    final Charge fraudulentCharge = charge.update(params);
 
     assertNotNull(fraudulentCharge);
     verifyRequest(
@@ -104,8 +108,12 @@ public class ChargeTest extends BaseStripeTest {
   @Test
   public void testMarkSafe() throws StripeException {
     final Charge charge = getChargeFixture();
+    Map<String, Object> params = new HashMap<>();
+    Map<String, Object> userReport = new HashMap<>();
+    params.put("fraud_details", userReport);
+    userReport.put("user_report", "safe");
 
-    final Charge safeCharge = charge.markSafe(null);
+    final Charge safeCharge = charge.update(params);
 
     assertNotNull(safeCharge);
     verifyRequest(
