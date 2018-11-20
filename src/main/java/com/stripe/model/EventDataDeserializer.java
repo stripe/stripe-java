@@ -16,72 +16,6 @@ import java.util.Map;
 
 public class EventDataDeserializer implements JsonDeserializer<EventData> {
 
-  static final Map<String, Class<? extends StripeObject>> objectMap =
-      new HashMap<String, Class<? extends StripeObject>>();
-
-  static {
-    objectMap.put("account", Account.class);
-    objectMap.put("alipay_account", AlipayAccount.class);
-    objectMap.put("apple_pay_domain", ApplePayDomain.class);
-    objectMap.put("application", Application.class);
-    objectMap.put("application_fee", ApplicationFee.class);
-    objectMap.put("balance", Balance.class);
-    objectMap.put("balance_transaction", BalanceTransaction.class);
-    objectMap.put("bank_account", BankAccount.class);
-    objectMap.put("bitcoin_receiver", BitcoinReceiver.class);
-    objectMap.put("card", Card.class);
-    objectMap.put("charge", Charge.class);
-    objectMap.put("country_spec", CountrySpec.class);
-    objectMap.put("coupon", Coupon.class);
-    objectMap.put("customer", Customer.class);
-    objectMap.put("discount", Discount.class);
-    objectMap.put("dispute", Dispute.class);
-    objectMap.put("event", Event.class);
-    objectMap.put("exchange_rate", ExchangeRate.class);
-    objectMap.put("fee", BalanceTransaction.Fee.class);
-    objectMap.put("fee_refund", FeeRefund.class);
-    objectMap.put("file", File.class);
-    objectMap.put("file_upload", File.class);
-    objectMap.put("invoice", Invoice.class);
-    objectMap.put("invoice_line_item", InvoiceLineItem.class);
-    objectMap.put("invoiceitem", InvoiceItem.class);
-    objectMap.put("issuing.authorization", com.stripe.model.issuing.Authorization.class);
-    objectMap.put("issuing.card", com.stripe.model.issuing.Card.class);
-    objectMap.put("issuing.card_details", com.stripe.model.issuing.CardDetails.class);
-    objectMap.put("issuing.cardholder", com.stripe.model.issuing.Cardholder.class);
-    objectMap.put("issuing.dispute", com.stripe.model.issuing.Dispute.class);
-    objectMap.put("issuing.transaction", com.stripe.model.issuing.Transaction.class);
-    objectMap.put("order", Order.class);
-    objectMap.put("order_item", OrderItem.class);
-    objectMap.put("order_return", OrderReturn.class);
-    objectMap.put("payment_intent", PaymentIntent.class);
-    objectMap.put("payout", Payout.class);
-    objectMap.put("plan", Plan.class);
-    objectMap.put("product", Product.class);
-    objectMap.put("radar.value_list", com.stripe.model.radar.ValueList.class);
-    objectMap.put("radar.value_list_item", com.stripe.model.radar.ValueListItem.class);
-    objectMap.put("reporting.report_run", com.stripe.model.reporting.ReportRun.class);
-    objectMap.put("reporting.report_type", com.stripe.model.reporting.ReportType.class);
-    objectMap.put("refund", Refund.class);
-    objectMap.put("recipient", Recipient.class);
-    objectMap.put("review", Review.class);
-    objectMap.put("scheduled_query_run", com.stripe.model.sigma.ScheduledQueryRun.class);
-    objectMap.put("sku", Sku.class);
-    objectMap.put("source", Source.class);
-    objectMap.put("source_mandate_notification", SourceMandateNotification.class);
-    objectMap.put("source_transaction", SourceTransaction.class);
-    objectMap.put("subscription", Subscription.class);
-    objectMap.put("subscription_item", SubscriptionItem.class);
-    objectMap.put("summary", Transfer.Summary.class);
-    objectMap.put("terminal.connection_token", com.stripe.model.terminal.ConnectionToken.class);
-    objectMap.put("terminal.location", com.stripe.model.terminal.Location.class);
-    objectMap.put("terminal.reader", com.stripe.model.terminal.Reader.class);
-    objectMap.put("three_d_secure", ThreeDSecure.class);
-    objectMap.put("token", Token.class);
-    objectMap.put("transfer", Transfer.class);
-    objectMap.put("transfer_reversal", Reversal.class);
-  }
-
   private Object deserializeJsonPrimitive(JsonPrimitive element) {
     if (element.isBoolean()) {
       return element.getAsBoolean();
@@ -152,7 +86,7 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
         }
       } else if ("object".equals(key)) {
         String type = element.getAsJsonObject().get("object").getAsString();
-        Class<? extends StripeObject> cl = objectMap.get(type);
+        Class<? extends StripeObject> cl = EventDataClassLookup.findClass(type);
         StripeObject object = ApiResource.GSON.fromJson(
             entry.getValue(), cl != null ? cl : StripeRawJsonObject.class);
         eventData.setObject(object);

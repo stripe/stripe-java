@@ -4,15 +4,12 @@ import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 
+import com.google.gson.TypeAdapterFactory;
 import com.stripe.Stripe;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.BalanceTransaction;
-import com.stripe.model.BalanceTransactionDeserializer;
-import com.stripe.model.ChargeRefundCollection;
-import com.stripe.model.ChargeRefundCollectionDeserializer;
 import com.stripe.model.Dispute;
-import com.stripe.model.DisputeDataDeserializer;
 import com.stripe.model.EphemeralKey;
 import com.stripe.model.EphemeralKeyDeserializer;
 import com.stripe.model.EventData;
@@ -21,18 +18,12 @@ import com.stripe.model.EventRequest;
 import com.stripe.model.EventRequestDeserializer;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.ExpandableFieldDeserializer;
-import com.stripe.model.ExternalAccountTypeAdapterFactory;
 import com.stripe.model.FeeRefundCollection;
-import com.stripe.model.FeeRefundCollectionDeserializer;
 import com.stripe.model.HasId;
 import com.stripe.model.OrderItem;
-import com.stripe.model.OrderItemDeserializer;
-import com.stripe.model.PaymentIntentSourceAction;
-import com.stripe.model.PaymentIntentSourceActionDeserializer;
 import com.stripe.model.Source;
 import com.stripe.model.SourceMandateNotification;
 import com.stripe.model.SourceTransaction;
-import com.stripe.model.SourceTypeDataDeserializer;
 import com.stripe.model.StripeCollectionInterface;
 import com.stripe.model.StripeObject;
 import com.stripe.model.StripeRawJsonObject;
@@ -50,27 +41,22 @@ public abstract class ApiResource extends StripeObject {
     ApiResource.stripeResponseGetter = srg;
   }
 
-  public static final Gson GSON = new GsonBuilder()
-      .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-      .registerTypeAdapter(BalanceTransaction.class, new BalanceTransactionDeserializer())
-      .registerTypeAdapter(ChargeRefundCollection.class, new ChargeRefundCollectionDeserializer())
-      .registerTypeAdapter(Dispute.class, new DisputeDataDeserializer())
-      .registerTypeAdapter(EphemeralKey.class, new EphemeralKeyDeserializer())
-      .registerTypeAdapter(EventData.class, new EventDataDeserializer())
-      .registerTypeAdapter(EventRequest.class, new EventRequestDeserializer())
-      .registerTypeAdapter(ExpandableField.class, new ExpandableFieldDeserializer())
-      .registerTypeAdapter(FeeRefundCollection.class, new FeeRefundCollectionDeserializer())
-      .registerTypeAdapter(OrderItem.class, new OrderItemDeserializer())
-      .registerTypeAdapter(PaymentIntentSourceAction.class,
-          new PaymentIntentSourceActionDeserializer())
-      .registerTypeAdapter(Source.class, new SourceTypeDataDeserializer<Source>())
-      .registerTypeAdapter(SourceMandateNotification.class,
-          new SourceTypeDataDeserializer<SourceMandateNotification>())
-      .registerTypeAdapter(SourceTransaction.class,
-          new SourceTypeDataDeserializer<SourceTransaction>())
-      .registerTypeAdapter(StripeRawJsonObject.class, new StripeRawJsonObjectDeserializer())
-      .registerTypeAdapterFactory(new ExternalAccountTypeAdapterFactory())
-      .create();
+  public static final Gson GSON = createGson();
+
+  private static Gson createGson() {
+    GsonBuilder builder = new GsonBuilder()
+        .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+        .registerTypeAdapter(EphemeralKey.class, new EphemeralKeyDeserializer())
+        .registerTypeAdapter(EventData.class, new EventDataDeserializer())
+        .registerTypeAdapter(EventRequest.class, new EventRequestDeserializer())
+        .registerTypeAdapter(ExpandableField.class, new ExpandableFieldDeserializer())
+        .registerTypeAdapter(StripeRawJsonObject.class, new StripeRawJsonObjectDeserializer());
+
+    for (TypeAdapterFactory factory : ApiResourceTypeAdapterFactoryProvider.getAll()) {
+      builder.registerTypeAdapterFactory(factory);
+    }
+    return builder.create();
+  }
 
   private static String className(Class<?> clazz) {
     // Convert CamelCase to snake_case
