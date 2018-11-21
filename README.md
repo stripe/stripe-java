@@ -1,4 +1,6 @@
 # Stripe Java Bindings [![Build Status](https://travis-ci.org/stripe/stripe-java.svg?branch=master)](https://travis-ci.org/stripe/stripe-java)
+[![Code Quality: Java](https://img.shields.io/lgtm/grade/java/g/stripe/stripe-java.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/stripe/stripe-java/context:java)
+[![Total Alerts](https://img.shields.io/lgtm/alerts/g/stripe/stripe-java.svg?logo=lgtm&logoWidth=18)](https://lgtm.com/projects/g/stripe/stripe-java/alerts)
 
 You can sign up for a Stripe account at https://stripe.com.
 
