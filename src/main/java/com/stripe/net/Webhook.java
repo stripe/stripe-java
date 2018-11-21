@@ -92,7 +92,7 @@ public final class Webhook {
       }
 
       // Check if expected signature is found in list of header's signatures
-      Boolean signatureFound = false;
+      boolean signatureFound = false;
       for (String signature : signatures) {
         if (Util.secureCompare(expectedSignature, signature)) {
           signatureFound = true;
