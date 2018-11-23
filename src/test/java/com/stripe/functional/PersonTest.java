@@ -12,9 +12,7 @@ import com.stripe.model.PersonCollection;
 import com.stripe.net.ApiResource;
 
 import java.io.IOException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 import org.junit.Test;
@@ -39,7 +37,7 @@ public class PersonTest extends BaseStripeTest {
     final Map<String, Object> params = new HashMap<String, Object>();
     params.put("first_name", "John");
 
-    final Person person = account.persons().create(params);
+    final Person person = personsTmp.create(params);
 
     assertNotNull(person);
     verifyRequest(
