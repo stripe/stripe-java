@@ -153,7 +153,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   }
 
   @SuppressWarnings("unchecked")
-  private static java.net.HttpURLConnection createStripeConnection(
+  private static HttpURLConnection createStripeConnection(
       String url, RequestOptions options) throws IOException {
     URL stripeUrl;
     String customUrlStreamHandlerClassName = System.getProperty(
@@ -220,18 +220,18 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     }
   }
 
-  private static java.net.HttpURLConnection createGetConnection(
+  private static HttpURLConnection createGetConnection(
       String url, String query, RequestOptions options) throws IOException {
     String getUrl = formatUrl(url, query);
-    java.net.HttpURLConnection conn = createStripeConnection(getUrl, options);
+    HttpURLConnection conn = createStripeConnection(getUrl, options);
     conn.setRequestMethod("GET");
 
     return conn;
   }
 
-  private static java.net.HttpURLConnection createPostConnection(
+  private static HttpURLConnection createPostConnection(
       String url, String query, RequestOptions options) throws IOException {
-    java.net.HttpURLConnection conn = createStripeConnection(url, options);
+    HttpURLConnection conn = createStripeConnection(url, options);
 
     conn.setDoOutput(true);
     conn.setRequestMethod("POST");
@@ -244,10 +244,10 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     return conn;
   }
 
-  private static java.net.HttpURLConnection createDeleteConnection(
+  private static HttpURLConnection createDeleteConnection(
       String url, String query, RequestOptions options) throws IOException {
     String deleteUrl = formatUrl(url, query);
-    java.net.HttpURLConnection conn = createStripeConnection(
+    HttpURLConnection conn = createStripeConnection(
         deleteUrl, options);
     conn.setRequestMethod("DELETE");
 
@@ -406,7 +406,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   private static StripeResponse makeUrlConnectionRequest(
       ApiResource.RequestMethod method, String url, String query,
       RequestOptions options) throws ApiConnectionException {
-    java.net.HttpURLConnection conn = null;
+    HttpURLConnection conn = null;
     try {
       switch (method) {
         case GET:
