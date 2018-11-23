@@ -48,7 +48,7 @@ public class SourceMandateNotificationTest extends BaseStripeTest {
     final Event event = ApiResource.GSON.fromJson(json, Event.class);
 
     final SourceMandateNotification mandateNotification
-        = (com.stripe.model.SourceMandateNotification) event.getData().getObject();
+        = (SourceMandateNotification) event.getData().getObject();
 
     verifyResource(mandateNotification);
   }
