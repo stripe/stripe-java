@@ -1,5 +1,8 @@
 # Changelog
 
+## 7.9.0 - 2018-11-27
+* [#614](https://github.com/stripe/stripe-java/pull/614) Add support for `ValueList` and `ValueListItem` for Radar
+
 ## 7.8.0 - 2018-11-19
 * [#616](https://github.com/stripe/stripe-java/pull/616) Add missing properties to a few resources:
   * Add `default_source` to `Invoice` and `Subscription`
