@@ -12,8 +12,8 @@ import org.junit.Test;
 public class ReviewTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
-    final String json = getResourceAsString("/api_fixtures/review.json");
-    final Review review = ApiResource.GSON.fromJson(json, Review.class);
+    final String data = getFixture("/v1/reviews/prv_123");
+    final Review review = ApiResource.GSON.fromJson(data, Review.class);
     assertNotNull(review);
     assertNotNull(review.getId());
     assertEquals("review", review.getObject());
