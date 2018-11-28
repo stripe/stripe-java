@@ -1,5 +1,9 @@
 # Changelog
 
+## 7.10.0 - 2018-11-28
+* [#621](https://github.com/stripe/stripe-java/pull/621) Add missing properties on the `Refund` resource.
+* [#623](https://github.com/stripe/stripe-java/pull/623) Add support for the `Review` APIs.
+
 ## 7.9.0 - 2018-11-27
 * [#614](https://github.com/stripe/stripe-java/pull/614) Add support for `ValueList` and `ValueListItem` for Radar
 
