@@ -1,21 +1,12 @@
 package com.stripe.model;
 
-import com.stripe.model.issuing.Authorization;
-import com.stripe.model.issuing.CardDetails;
-import com.stripe.model.issuing.Cardholder;
-import com.stripe.model.issuing.Transaction;
-import com.stripe.model.radar.ValueList;
-import com.stripe.model.radar.ValueListItem;
-import com.stripe.model.reporting.ReportRun;
-import com.stripe.model.reporting.ReportType;
-import com.stripe.model.sigma.ScheduledQueryRun;
-import com.stripe.model.terminal.ConnectionToken;
-import com.stripe.model.terminal.Location;
-import com.stripe.model.terminal.Reader;
 import java.util.HashMap;
 import java.util.Map;
 
-public class EventDataClassLookup {
+/**
+ * Event data class look up used in {@link EventDataDeserializer}.
+ */
+final class EventDataClassLookup {
   private static final Map<String, Class<? extends StripeObject>> classLookup = new HashMap<>();
 
   static {

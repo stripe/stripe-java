@@ -22,7 +22,6 @@ import com.stripe.model.EventRequest;
 import com.stripe.model.EventRequestDeserializer;
 import com.stripe.model.ExpandableField;
 import com.stripe.model.ExpandableFieldDeserializer;
-import com.stripe.model.ExternalAccountTypeAdapterFactory;
 import com.stripe.model.FeeRefundCollection;
 import com.stripe.model.FeeRefundCollectionDeserializer;
 import com.stripe.model.HasId;
