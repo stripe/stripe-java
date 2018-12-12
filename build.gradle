@@ -16,7 +16,7 @@ plugins {
     id 'checkstyle'
     id 'net.saliman.cobertura' version '2.5.4'
     id 'com.github.kt3k.coveralls' version '2.8.2'
-    id 'osgi'
+    id 'biz.aQute.bnd.builder' version '4.1.0'
 }
 
 sourceCompatibility = 1.7
@@ -53,12 +53,11 @@ jar {
     manifest {
         attributes("Implementation-Title": POM_NAME,
                    "Implementation-Version": VERSION_NAME,
-                   "Implementation-Vendor": VENDOR_NAME)
+                   "Implementation-Vendor": VENDOR_NAME,
+                   "Bundle-SymbolicName": POM_ARTIFACT_ID,
+                   "Export-Package": 'com.stripe.*')
 
         version = VERSION_NAME
-        symbolicName = POM_ARTIFACT_ID
-
-        instruction 'Export-Package', '*'
     }
 }
 
