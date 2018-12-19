@@ -88,7 +88,9 @@ public abstract class ApiResource extends StripeObject {
 
     // Issuing or Sigma resources are in their own package. Until we can support adding OBJECT_NAME
     // to all classes, we use this dirty trick to properly format the API endpoints
-    if (clazz.getName().contains("com.stripe.model.issuing.")) {
+    if (clazz.getName().contains("com.stripe.model.checkout.")) {
+      className = "checkout/" + className;
+    } else if (clazz.getName().contains("com.stripe.model.issuing.")) {
       className = "issuing/" + className;
     } else if (clazz.getName().contains("com.stripe.model.sigma.")) {
       className = "sigma/" + className;

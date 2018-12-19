@@ -21,6 +21,7 @@ final class EventDataClassLookup {
     classLookup.put("bitcoin_receiver", BitcoinReceiver.class);
     classLookup.put("card", Card.class);
     classLookup.put("charge", Charge.class);
+    classLookup.put("checkout.session", com.stripe.model.checkout.Session.class);
     classLookup.put("country_spec", CountrySpec.class);
     classLookup.put("coupon", Coupon.class);
     classLookup.put("customer", Customer.class);

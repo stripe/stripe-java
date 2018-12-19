@@ -1,0 +1,5 @@
+{
+  "id": "uniqueid",
+  "livemode": false,
+  "object": "checkout.session"
+}
