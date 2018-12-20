@@ -1,7 +1,6 @@
 package com.stripe.net;
 
 import com.google.gson.JsonSyntaxException;
-
 import com.stripe.Stripe;
 import com.stripe.exception.ApiConnectionException;
 import com.stripe.exception.ApiException;
@@ -18,8 +17,9 @@ import com.stripe.exception.oauth.InvalidScopeException;
 import com.stripe.exception.oauth.OAuthException;
 import com.stripe.exception.oauth.UnsupportedGrantTypeException;
 import com.stripe.exception.oauth.UnsupportedResponseTypeException;
+import com.stripe.model.StripeError;
+import com.stripe.model.StripeErrorResponse;
 import com.stripe.model.StripeObject;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -45,7 +45,6 @@ import java.util.Map;
 import java.util.Scanner;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSocketFactory;
-
 import lombok.Cleanup;
 
 public class LiveStripeResponseGetter implements StripeResponseGetter {
@@ -363,26 +362,6 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     }
 
     return flatParams;
-  }
-
-  // represents regular API errors returned as JSON
-  // handleAPIError uses this class to raise the appropriate StripeException
-  private static class StripeErrorContainer {
-    private StripeError error;
-  }
-
-  private static class StripeError {
-    String type;
-
-    String message;
-
-    String code;
-
-    String param;
-
-    String declineCode;
-
-    String charge;
   }
 
   // represents OAuth API errors returned as JSON
@@ -714,34 +693,36 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   private static void handleApiError(String responseBody, int responseCode, String requestId)
       throws ApiException, AuthenticationException, CardException, IdempotencyException,
       InvalidRequestException {
-    LiveStripeResponseGetter.StripeError error = null;
+    StripeError error = null;
     try {
-      error = ApiResource.GSON.fromJson(responseBody,
-          LiveStripeResponseGetter.StripeErrorContainer.class).error;
+      error = ApiResource.GSON.fromJson(responseBody, StripeErrorResponse.class).getError();
     } catch (JsonSyntaxException e) {
       raiseMalformedJsonError(responseBody, responseCode, requestId);
     }
     switch (responseCode) {
       case 400:
       case 404:
-        if (error.type.equals("idempotency_error")) {
-          throw new IdempotencyException(error.message, requestId, error.code, responseCode);
+        if (error.getType().equals("idempotency_error")) {
+          throw new IdempotencyException(error.getMessage(), requestId, error.getCode(),
+              responseCode);
         } else {
-          throw new InvalidRequestException(error.message, error.param, requestId, error.code,
+          throw new InvalidRequestException(error.getMessage(), error.getParam(), requestId,
+              error.getCode(),
           responseCode, null);
         }
       case 401:
-        throw new AuthenticationException(error.message, requestId, error.code, responseCode);
+        throw new AuthenticationException(error.getMessage(), requestId, error.getCode(),
+            responseCode);
       case 402:
-        throw new CardException(error.message, requestId, error.code, error.param,
-            error.declineCode, error.charge, responseCode, null);
+        throw new CardException(error.getMessage(), requestId, error.getCode(), error.getParam(),
+            error.getDeclineCode(), error.getCharge(), responseCode, null);
       case 403:
-        throw new PermissionException(error.message, requestId, error.code, responseCode);
+        throw new PermissionException(error.getMessage(), requestId, error.getCode(), responseCode);
       case 429:
-        throw new RateLimitException(error.message, error.param, requestId, error.code,
-            responseCode, null);
+        throw new RateLimitException(error.getMessage(), error.getParam(), requestId,
+            error.getCode(), responseCode, null);
       default:
-        throw new ApiException(error.message, requestId, error.code, responseCode, null);
+        throw new ApiException(error.getMessage(), requestId, error.getCode(), responseCode, null);
     }
   }
 
