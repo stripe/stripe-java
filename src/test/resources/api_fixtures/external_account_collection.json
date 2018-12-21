@@ -1,0 +1,17 @@
+{
+  "object": "list",
+  "data": [
+    {
+      "id": "card_123",
+      "object": "card"
+    },
+    {
+      "id": "ba_123",
+      "object": "bank_account"
+    },
+    {
+      "id": "bar_123",
+      "object": "unknown_bar"
+    }
+  ]
+}
