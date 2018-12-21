@@ -82,6 +82,14 @@
         "id": "ipi_123",
         "object": "issuing.transaction"
       }
+    },
+    {
+      "id": "txn_110",
+      "object": "balance_transaction",
+      "source": {
+        "id": "foo_123",
+        "object": "foo_unknown_type"
+      }
     }
   ]
 }
