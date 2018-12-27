@@ -17,9 +17,11 @@ import lombok.Setter;
 public class IssuerFraudRecord extends ApiResource implements HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
+  Boolean actionable;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Charge> charge;
   Long created;
   String fraudType;
+  Boolean hasLiabilityShift;
   Boolean livemode;
   Long postDate;
 
