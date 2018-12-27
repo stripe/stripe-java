@@ -1,5 +1,8 @@
 # Changelog
 
+## 7.11.0 - 2018-12-27
+* [#629](https://github.com/stripe/stripe-java/pull/629) Add support for `actionable` and `has_liability_shift` on `IssuerFraudRecord`
+
 ## 7.10.0 - 2018-11-28
 * [#621](https://github.com/stripe/stripe-java/pull/621) Add missing properties on the `Refund` resource.
 * [#623](https://github.com/stripe/stripe-java/pull/623) Add support for the `Review` APIs.
