@@ -54,7 +54,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   }
 
   public void setChargeObject(Charge charge) {
-    this.charge = new ExpandableField<Charge>(charge.getId(), charge);
+    this.charge = new ExpandableField<>(charge.getId(), charge);
   }
   // </editor-fold>
 
@@ -72,7 +72,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   }
 
   public void setCustomerObject(Customer customer) {
-    this.customer = new ExpandableField<Customer>(customer.getId(), customer);
+    this.customer = new ExpandableField<>(customer.getId(), customer);
   }
   // </editor-fold>
 

@@ -43,7 +43,7 @@ public class UsageRecord extends ApiResource implements HasId {
               null
       );
     }
-    Map<String, Object> requestParams = new HashMap<String, Object>(params);
+    Map<String, Object> requestParams = new HashMap<>(params);
     requestParams.remove("subscription_item");
     return request(
             RequestMethod.POST,

@@ -108,7 +108,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
   }
 
   public void setApplicationObject(Application c) {
-    this.application = new ExpandableField<Application>(c.getId(), c);
+    this.application = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 
@@ -126,7 +126,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
   }
 
   public void setApplicationFeeObject(ApplicationFee c) {
-    this.applicationFee = new ExpandableField<ApplicationFee>(c.getId(), c);
+    this.applicationFee = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 
@@ -144,7 +144,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
   }
 
   public void setBalanceTransactionObject(BalanceTransaction c) {
-    this.balanceTransaction = new ExpandableField<BalanceTransaction>(c.getId(), c);
+    this.balanceTransaction = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 
@@ -163,7 +163,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
   }
 
   public void setCustomerObject(Customer c) {
-    this.customer = new ExpandableField<Customer>(c.getId(), c);
+    this.customer = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 
@@ -181,7 +181,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
   }
 
   public void setDestinationObject(Account c) {
-    this.destination = new ExpandableField<Account>(c.getId(), c);
+    this.destination = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 
@@ -199,7 +199,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
   }
 
   public void setDisputeObject(Dispute dispute) {
-    this.dispute = new ExpandableField<Dispute>(dispute.getId(), dispute);
+    this.dispute = new ExpandableField<>(dispute.getId(), dispute);
   }
   // </editor-fold>
 
@@ -217,7 +217,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
   }
 
   public void setInvoiceObject(Invoice c) {
-    this.invoice = new ExpandableField<Invoice>(c.getId(), c);
+    this.invoice = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 
@@ -235,7 +235,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
   }
 
   public void setOnBehalfOfObject(Account c) {
-    this.onBehalfOf = new ExpandableField<Account>(c.getId(), c);
+    this.onBehalfOf = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 
@@ -253,7 +253,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
   }
 
   public void setOrderObject(Order c) {
-    this.order = new ExpandableField<Order>(c.getId(), c);
+    this.order = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 
@@ -285,7 +285,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
   }
 
   public void setReviewObject(Review r) {
-    this.review = new ExpandableField<Review>(r.getId(), r);
+    this.review = new ExpandableField<>(r.getId(), r);
   }
   // </editor-fold>
 
@@ -303,7 +303,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
   }
 
   public void setSourceTransferObject(Transfer c) {
-    this.sourceTransfer = new ExpandableField<Transfer>(c.getId(), c);
+    this.sourceTransfer = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 
@@ -321,7 +321,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
   }
 
   public void setTransferObject(Transfer c) {
-    this.transfer = new ExpandableField<Transfer>(c.getId(), c);
+    this.transfer = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 
@@ -569,7 +569,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
 
     @Deprecated
     public void setRule(Rule rule) {
-      this.rule = new ExpandableField<Rule>(rule.getId(), rule);
+      this.rule = new ExpandableField<>(rule.getId(), rule);
     }
 
     public String getRuleId() {
@@ -585,7 +585,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
     }
 
     public void setRuleObject(Rule rule) {
-      this.rule = new ExpandableField<Rule>(rule.getId(), rule);
+      this.rule = new ExpandableField<>(rule.getId(), rule);
     }
     // </editor-fold>
 

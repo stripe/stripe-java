@@ -51,7 +51,7 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, HasId 
   }
 
   public void setBalanceTransactionObject(BalanceTransaction c) {
-    this.balanceTransaction = new ExpandableField<BalanceTransaction>(c.getId(), c);
+    this.balanceTransaction = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 
@@ -69,7 +69,7 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, HasId 
   }
 
   public void setDestinationObject(ExternalAccount c) {
-    this.destination = new ExpandableField<ExternalAccount>(c.getId(), c);
+    this.destination = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 
@@ -90,7 +90,7 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, HasId 
   }
 
   public void setFailureBalanceTransactionObject(BalanceTransaction c) {
-    this.failureBalanceTransaction = new ExpandableField<BalanceTransaction>(c.getId(), c);
+    this.failureBalanceTransaction = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 

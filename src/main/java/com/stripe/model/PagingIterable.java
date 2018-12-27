@@ -16,6 +16,6 @@ public class PagingIterable<T extends HasId> implements Iterable<T> {
 
   @Override
   public Iterator<T> iterator() {
-    return new PagingIterator<T>(page);
+    return new PagingIterator<>(page);
   }
 }

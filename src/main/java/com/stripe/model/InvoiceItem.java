@@ -49,7 +49,7 @@ public class InvoiceItem extends ApiResource implements MetadataStore<InvoiceIte
   }
 
   public void setCustomerObject(Customer c) {
-    this.customer = new ExpandableField<Customer>(c.getId(), c);
+    this.customer = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 
@@ -85,7 +85,7 @@ public class InvoiceItem extends ApiResource implements MetadataStore<InvoiceIte
   }
 
   public void setSubscriptionObject(Subscription subscription) {
-    this.subscription = new ExpandableField<Subscription>(subscription.getId(), subscription);
+    this.subscription = new ExpandableField<>(subscription.getId(), subscription);
   }
   // </editor-fold>
 

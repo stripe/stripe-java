@@ -92,7 +92,7 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
   }
 
   public void setChargeObject(Charge charge) {
-    this.charge = new ExpandableField<Charge>(charge.getId(), charge);
+    this.charge = new ExpandableField<>(charge.getId(), charge);
   }
   // </editor-fold>
 
@@ -110,7 +110,7 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
   }
 
   public void setDefaultSourceObject(ExternalAccount c) {
-    this.defaultSource = new ExpandableField<ExternalAccount>(c.getId(), c);
+    this.defaultSource = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 
@@ -128,7 +128,7 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
   }
 
   public void setSubscriptionObject(Subscription subscription) {
-    this.subscription = new ExpandableField<Subscription>(subscription.getId(), subscription);
+    this.subscription = new ExpandableField<>(subscription.getId(), subscription);
   }
   // </editor-fold>
 

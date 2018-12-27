@@ -41,7 +41,7 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
     if (element.isJsonNull()) {
       return null;
     } else if (element.isJsonObject()) {
-      Map<String, Object> valueMap = new HashMap<String, Object>();
+      Map<String, Object> valueMap = new HashMap<>();
       populateMapFromJsonObject(valueMap, element.getAsJsonObject());
       return valueMap;
     } else if (element.isJsonPrimitive()) {
@@ -80,7 +80,7 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
         if (element.isJsonNull()) {
           eventData.setPreviousAttributes(null);
         } else if (element.isJsonObject()) {
-          Map<String, Object> previousAttributes = new HashMap<String, Object>();
+          Map<String, Object> previousAttributes = new HashMap<>();
           populateMapFromJsonObject(previousAttributes, element.getAsJsonObject());
           eventData.setPreviousAttributes(previousAttributes);
         }

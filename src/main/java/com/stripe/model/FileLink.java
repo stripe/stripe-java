@@ -39,7 +39,7 @@ public class FileLink extends ApiResource implements MetadataStore<FileLink>, Ha
   }
 
   public void setFileObject(File file) {
-    this.file = new ExpandableField<File>(file.getId(), file);
+    this.file = new ExpandableField<>(file.getId(), file);
   }
   // </editor-fold>
 

@@ -100,7 +100,7 @@ public class Transfer extends ApiResource implements MetadataStore<Transfer>, Ha
   }
 
   public void setBalanceTransactionObject(BalanceTransaction c) {
-    this.balanceTransaction = new ExpandableField<BalanceTransaction>(c.getId(), c);
+    this.balanceTransaction = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 
@@ -118,7 +118,7 @@ public class Transfer extends ApiResource implements MetadataStore<Transfer>, Ha
   }
 
   public void setDestinationObject(Account c) {
-    this.destination = new ExpandableField<Account>(c.getId(), c);
+    this.destination = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 
@@ -137,7 +137,7 @@ public class Transfer extends ApiResource implements MetadataStore<Transfer>, Ha
 
   public void setDestinationPaymentObject(Charge destinationPayment) {
     this.destinationPayment
-        = new ExpandableField<Charge>(destinationPayment.getId(), destinationPayment);
+        = new ExpandableField<>(destinationPayment.getId(), destinationPayment);
   }
   // </editor-fold>
 
@@ -169,7 +169,7 @@ public class Transfer extends ApiResource implements MetadataStore<Transfer>, Ha
 
   public void setSourceTransactionObject(Charge sourceTransaction) {
     this.sourceTransaction
-        = new ExpandableField<Charge>(sourceTransaction.getId(), sourceTransaction);
+        = new ExpandableField<>(sourceTransaction.getId(), sourceTransaction);
   }
   // </editor-fold>
 

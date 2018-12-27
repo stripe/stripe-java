@@ -40,7 +40,7 @@ public class PagingIterator<T extends HasId> extends ApiResource implements Iter
     // one
     if (!currentDataIterator.hasNext() && currentCollection.getHasMore()) {
       try {
-        Map<String, Object> params = new HashMap<String, Object>();
+        Map<String, Object> params = new HashMap<>();
 
         // copy all the parameters from the initial request
         Map<String, Object> initialParams = currentCollection.getRequestParams();
