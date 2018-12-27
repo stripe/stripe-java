@@ -14,9 +14,9 @@ import org.junit.Test;
 
 public class IssuerFraudRecordTest extends BaseStripeTest {
   @Test
-  public void testDeserialize() throws IOException {
-    final String json = getResourceAsString("/api_fixtures/issuer_fraud_record.json");
-    final IssuerFraudRecord record = ApiResource.GSON.fromJson(json, IssuerFraudRecord.class);
+  public void testDeserialize() throws Exception {
+    final String data = getFixture("/v1/issuer_fraud_records/issfr_123");
+    final IssuerFraudRecord record = ApiResource.GSON.fromJson(data, IssuerFraudRecord.class);
     assertNotNull(record);
     assertNotNull(record.getId());
     assertEquals("issuer_fraud_record", record.getObject());
@@ -24,9 +24,12 @@ public class IssuerFraudRecordTest extends BaseStripeTest {
   }
 
   @Test
-  public void testDeserializeWithExpansions() throws IOException {
-    final String json = getResourceAsString("/api_fixtures/issuer_fraud_record_expansions.json");
-    final IssuerFraudRecord record = ApiResource.GSON.fromJson(json, IssuerFraudRecord.class);
+  public void testDeserializeWithExpansions() throws Exception {
+    final String[] expansions = {
+      "charge",
+    };
+    final String data = getFixture("/v1/issuer_fraud_records/issfr_123", expansions);
+    final IssuerFraudRecord record = ApiResource.GSON.fromJson(data, IssuerFraudRecord.class);
     assertNotNull(record);
     assertNotNull(record.getId());
     final Charge charge = record.getChargeObject();
