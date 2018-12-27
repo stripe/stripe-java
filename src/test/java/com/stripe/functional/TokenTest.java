@@ -19,11 +19,11 @@ public class TokenTest extends BaseStripeTest {
   @Test
   public void testCreate() throws StripeException {
     final Calendar now = Calendar.getInstance();
-    final Map<String, Object> card = new HashMap<String, Object>();
+    final Map<String, Object> card = new HashMap<>();
     card.put("number", "4242424242424242");
     card.put("exp_month", now.get(Calendar.MONTH));
     card.put("exp_year", now.get(Calendar.YEAR) + 1);
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("card", card);
 
     final Token token = Token.create(params);

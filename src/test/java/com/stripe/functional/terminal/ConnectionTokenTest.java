@@ -15,7 +15,7 @@ import org.junit.Test;
 public class ConnectionTokenTest extends BaseStripeTest {
   @Test
   public void testCreate() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
 
     final ConnectionToken connectionToken = ConnectionToken.create(params);
 

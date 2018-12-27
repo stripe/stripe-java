@@ -5,7 +5,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import com.stripe.BaseStripeTest;
-import com.stripe.model.IssuerFraudRecord;
 import com.stripe.net.ApiResource;
 
 import java.io.IOException;

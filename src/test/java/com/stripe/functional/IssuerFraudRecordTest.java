@@ -37,7 +37,7 @@ public class IssuerFraudRecordTest extends BaseStripeTest {
 
   @Test
   public void testList() throws IOException, StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     // stripe-mock does not support the /v1/issuer_fraud_records endpoint, so we stub the request

@@ -25,7 +25,7 @@ public class PlanTest extends BaseStripeTest {
 
   @Test
   public void testCreate() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("amount", 1);
     params.put("currency", "usd");
     params.put("id", "sapphire-elite");
@@ -57,7 +57,7 @@ public class PlanTest extends BaseStripeTest {
   public void testUpdate() throws StripeException {
     final Plan plan = getPlanFixture();
 
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("name", "Updated Name");
 
     final Plan updatedPlan = plan.update(params);
@@ -86,7 +86,7 @@ public class PlanTest extends BaseStripeTest {
 
   @Test
   public void testList() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     PlanCollection plans = Plan.list(params);

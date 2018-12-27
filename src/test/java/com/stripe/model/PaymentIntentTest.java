@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import com.stripe.BaseStripeTest;
-import com.stripe.model.PaymentIntent;
 import com.stripe.net.ApiResource;
 
 import org.junit.Test;

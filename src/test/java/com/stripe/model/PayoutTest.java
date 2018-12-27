@@ -4,9 +4,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertTrue;
 
 import com.stripe.BaseStripeTest;
-import com.stripe.exception.StripeException;
-import com.stripe.model.BankAccount;
-import com.stripe.model.Payout;
 import com.stripe.net.ApiResource;
 
 import java.io.IOException;
@@ -22,7 +19,7 @@ public class PayoutTest extends BaseStripeTest {
   }
 
   @Test
-  public void testDeserializeWithExpandedDeletedBankAccount() throws IOException, StripeException {
+  public void testDeserializeWithExpandedDeletedBankAccount() throws IOException {
     final String data = getResourceAsString(
         "/api_fixtures/payout_with_del_ext_bank_acct_expansion.json"
     );

@@ -6,8 +6,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertThat;
 
 import com.stripe.BaseStripeTest;
-import com.stripe.net.StripeHeaders;
-import com.stripe.net.StripeResponse;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -20,13 +18,13 @@ public class StripeResponseTest extends BaseStripeTest {
   String chargeBody;
 
   private Map<String, List<String>> generateHeaderMap() {
-    final List<String> idempotencyHeader = new ArrayList<String>();
+    final List<String> idempotencyHeader = new ArrayList<>();
     idempotencyHeader.add("12345");
 
-    final List<String> requestIdHeader = new ArrayList<String>();
+    final List<String> requestIdHeader = new ArrayList<>();
     requestIdHeader.add("req_12345");
 
-    final Map<String, List<String>> headerMap = new HashMap<String, List<String>>();
+    final Map<String, List<String>> headerMap = new HashMap<>();
     headerMap.put("Idempotency-Key", idempotencyHeader);
     headerMap.put("Request-Id", requestIdHeader);
 

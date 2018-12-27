@@ -8,7 +8,6 @@ import com.stripe.model.issuing.Authorization;
 import com.stripe.model.issuing.AuthorizationCollection;
 import com.stripe.net.ApiResource;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +18,7 @@ public class AuthorizationTest extends BaseStripeTest {
   public static final String AUTHORIZATION_ID = "iauth_123";
 
   @Test
-  public void testApprove() throws IOException, StripeException {
+  public void testApprove() throws StripeException {
     final Authorization authorization = Authorization.retrieve(AUTHORIZATION_ID);
 
     final Authorization approvedAuthorization = authorization.approve(null);
@@ -33,7 +32,7 @@ public class AuthorizationTest extends BaseStripeTest {
   }
 
   @Test
-  public void testDecline() throws IOException, StripeException {
+  public void testDecline() throws StripeException {
     final Authorization authorization = Authorization.retrieve(AUTHORIZATION_ID);
 
     final Authorization approvedAuthorization = authorization.decline(null);
@@ -47,7 +46,7 @@ public class AuthorizationTest extends BaseStripeTest {
   }
 
   @Test
-  public void testRetrieve() throws IOException, StripeException {
+  public void testRetrieve() throws StripeException {
     final Authorization authorization = Authorization.retrieve(AUTHORIZATION_ID);
 
     assertNotNull(authorization);
@@ -58,12 +57,12 @@ public class AuthorizationTest extends BaseStripeTest {
   }
 
   @Test
-  public void testUpdate() throws IOException, StripeException {
+  public void testUpdate() throws StripeException {
     final Authorization authorization = Authorization.retrieve(AUTHORIZATION_ID);
 
-    final Map<String, String> metadata = new HashMap<String, String>();
+    final Map<String, String> metadata = new HashMap<>();
     metadata.put("key", "value");
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("metadata", metadata);
 
     final Authorization updatedAuthorization = authorization.update(params);
@@ -77,8 +76,8 @@ public class AuthorizationTest extends BaseStripeTest {
   }
 
   @Test
-  public void testList() throws IOException, StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+  public void testList() throws StripeException {
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     AuthorizationCollection authorizations = Authorization.list(params);

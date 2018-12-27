@@ -8,7 +8,6 @@ import com.stripe.model.sigma.ScheduledQueryRun;
 import com.stripe.model.sigma.ScheduledQueryRunCollection;
 import com.stripe.net.ApiResource;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +18,7 @@ public class ScheduledQueryRunTest extends BaseStripeTest {
   public static final String RUN_ID = "sqr_123";
 
   @Test
-  public void testRetrieve() throws IOException, StripeException {
+  public void testRetrieve() throws StripeException {
     final ScheduledQueryRun run = ScheduledQueryRun.retrieve(RUN_ID);
 
     assertNotNull(run);
@@ -30,8 +29,8 @@ public class ScheduledQueryRunTest extends BaseStripeTest {
   }
 
   @Test
-  public void testList() throws IOException, StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+  public void testList() throws StripeException {
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     ScheduledQueryRunCollection runs = ScheduledQueryRun.list(params);

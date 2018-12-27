@@ -17,7 +17,7 @@ public class ThreeDSecureTest extends BaseStripeTest {
 
   @Test
   public void testCreate() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("amount", 1000);
     params.put("currency", "usd");
     params.put("customer", "cus_123");

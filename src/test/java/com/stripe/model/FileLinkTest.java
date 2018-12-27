@@ -5,7 +5,6 @@ import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertNull;
 
 import com.stripe.BaseStripeTest;
-import com.stripe.model.FileLink;
 import com.stripe.net.ApiResource;
 
 import org.junit.Test;

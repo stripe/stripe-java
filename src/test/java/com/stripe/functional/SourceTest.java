@@ -29,9 +29,9 @@ public class SourceTest extends BaseStripeTest {
 
   @Test
   public void testCreate() throws StripeException {
-    final Map<String, Object> owner = new HashMap<String, Object>();
+    final Map<String, Object> owner = new HashMap<>();
     owner.put("email", "jenny.rosen@example.com");
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("type", "ach_credit_transfer");
     params.put("currency", "usd");
     params.put("owner", owner);
@@ -61,9 +61,9 @@ public class SourceTest extends BaseStripeTest {
   public void testUpdate() throws StripeException {
     final Source source = getSourceFixture();
 
-    final Map<String, Object> metadata = new HashMap<String, Object>();
+    final Map<String, Object> metadata = new HashMap<>();
     metadata.put("key", "value");
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("metadata", metadata);
 
     final Source updatedSource = source.update(params);
@@ -80,10 +80,10 @@ public class SourceTest extends BaseStripeTest {
   public void testVerify() throws StripeException {
     final Source source = getSourceFixture();
 
-    final List<Integer> values = new ArrayList<Integer>();
+    final List<Integer> values = new ArrayList<>();
     values.add(32);
     values.add(45);
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("values", values);
 
     final Source verifiedSource = source.verify(params);
@@ -133,7 +133,7 @@ public class SourceTest extends BaseStripeTest {
   public void testSourceTransactions() throws StripeException {
     final Source source = getSourceFixture();
 
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     final SourceTransactionCollection transactions = source.sourceTransactions(params);

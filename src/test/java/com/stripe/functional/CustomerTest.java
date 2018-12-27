@@ -9,7 +9,6 @@ import com.stripe.model.Customer;
 import com.stripe.model.CustomerCollection;
 import com.stripe.net.ApiResource;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -27,7 +26,7 @@ public class CustomerTest extends BaseStripeTest {
 
   @Test
   public void testCreate() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
 
     final Customer customer = Customer.create(params);
 
@@ -54,9 +53,9 @@ public class CustomerTest extends BaseStripeTest {
   public void testUpdate() throws StripeException {
     final Customer customer = getCustomerFixture();
 
-    final Map<String, String> metadata = new HashMap<String, String>();
+    final Map<String, String> metadata = new HashMap<>();
     metadata.put("key", "value");
-    Map<String, Object> params = new HashMap<String, Object>();
+    Map<String, Object> params = new HashMap<>();
     params.put("metadata", metadata);
 
     final Customer updatedCustomer = customer.update(params);
@@ -71,7 +70,7 @@ public class CustomerTest extends BaseStripeTest {
 
   @Test
   public void testList() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     final CustomerCollection customers = Customer.list(params);
@@ -99,7 +98,7 @@ public class CustomerTest extends BaseStripeTest {
   }
 
   @Test
-  public void testDeleteDiscount() throws IOException, StripeException {
+  public void testDeleteDiscount() throws StripeException {
     final Customer customer = getCustomerFixture();
 
     // stripe-mock does not support /v1/customers/%s/discount endpoint, so we stub the request

@@ -26,7 +26,7 @@ public class InvoiceTest extends BaseStripeTest {
 
   @Test
   public void testCreate() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("customer", "cus_123");
 
     final Invoice invoice = Invoice.create(params);
@@ -54,9 +54,9 @@ public class InvoiceTest extends BaseStripeTest {
   public void testUpdate() throws StripeException {
     final Invoice invoice = getInvoiceFixture();
 
-    final Map<String, String> metadata = new HashMap<String, String>();
+    final Map<String, String> metadata = new HashMap<>();
     metadata.put("key", "value");
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("metadata", metadata);
 
     final Invoice updatedInvoice = invoice.update(params);
@@ -71,7 +71,7 @@ public class InvoiceTest extends BaseStripeTest {
 
   @Test
   public void testList() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     InvoiceCollection invoices = Invoice.list(params);
@@ -151,7 +151,7 @@ public class InvoiceTest extends BaseStripeTest {
 
   @Test
   public void testUpcoming() throws StripeException {
-    Map<String, Object> params = new HashMap<String, Object>();
+    Map<String, Object> params = new HashMap<>();
     params.put("customer", "cus_123");
 
     final Invoice upcomingInvoice = Invoice.upcoming(params);

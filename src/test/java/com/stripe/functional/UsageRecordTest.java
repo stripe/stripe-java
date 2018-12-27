@@ -13,13 +13,13 @@ import java.util.Map;
 import org.junit.Test;
 
 public class UsageRecordTest extends BaseStripeTest {
-  private static final String SUBCRIPTION_ITEM_ID = "si_123";
+  private static final String SUBSCRIPTION_ITEM_ID = "si_123";
 
   @Test
   public void testCreate() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("quantity", 10);
-    params.put("subscription_item", SUBCRIPTION_ITEM_ID);
+    params.put("subscription_item", SUBSCRIPTION_ITEM_ID);
     params.put("timestamp", System.currentTimeMillis() / 1000L);
 
     final UsageRecord resource = UsageRecord.create(params, null);
@@ -32,7 +32,7 @@ public class UsageRecordTest extends BaseStripeTest {
     assertNotNull(resource);
     verifyRequest(
         ApiResource.RequestMethod.POST,
-        String.format("/v1/subscription_items/%s/usage_records", SUBCRIPTION_ITEM_ID),
+        String.format("/v1/subscription_items/%s/usage_records", SUBSCRIPTION_ITEM_ID),
         params
     );
   }

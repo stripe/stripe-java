@@ -26,7 +26,7 @@ public class SubscriptionItemTest extends BaseStripeTest {
 
   @Test
   public void testCreate() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("plan", "plan_123");
     params.put("subscription", "cus_123");
     params.put("quantity", 99);
@@ -56,9 +56,9 @@ public class SubscriptionItemTest extends BaseStripeTest {
   public void testUpdate() throws StripeException {
     final SubscriptionItem subscriptionItem = getItemFixture();
 
-    final Map<String, Object> metadata = new HashMap<String, Object>();
+    final Map<String, Object> metadata = new HashMap<>();
     metadata.put("key", "value");
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("metadata", metadata);
 
     final SubscriptionItem updatedSubscriptionItem = subscriptionItem.update(params);
@@ -87,7 +87,7 @@ public class SubscriptionItemTest extends BaseStripeTest {
 
   @Test
   public void testList() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
     params.put("subscription", "sub_123");
 
@@ -105,7 +105,7 @@ public class SubscriptionItemTest extends BaseStripeTest {
   public void testUsageRecordSummaries() throws StripeException {
     final SubscriptionItem subscriptionItem = getItemFixture();
 
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     final UsageRecordSummaryCollection summaries = subscriptionItem.usageRecordSummaries(params);

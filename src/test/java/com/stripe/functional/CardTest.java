@@ -24,7 +24,7 @@ public class CardTest extends BaseStripeTest {
   public static final String CUSTOMER_ID = "cus_123";
   public static final String CARD_ID = "card_123";
 
-  private Card getCardFixture(Customer customer) throws IOException, StripeException {
+  private Card getCardFixture(Customer customer) throws IOException {
     // stripe-mock doesn't handle cards very well just yet, so use a local fixture
     final Card card = ApiResource.GSON.fromJson(
         getResourceAsString("/api_fixtures/card.json"), Card.class);
@@ -37,7 +37,7 @@ public class CardTest extends BaseStripeTest {
   public void testCreate() throws IOException, StripeException {
     final Customer customer = Customer.retrieve(CUSTOMER_ID);
 
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("source", "btok_123");
 
     // stripe-mock returns a BankAccount instance instead of a Card
@@ -86,9 +86,9 @@ public class CardTest extends BaseStripeTest {
     final Customer customer = Customer.retrieve(CUSTOMER_ID);
     final Card card = getCardFixture(customer);
 
-    final Map<String, Object> metadata = new HashMap<String, Object>();
+    final Map<String, Object> metadata = new HashMap<>();
     metadata.put("key", "value");
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("metadata", metadata);
 
     final Card updatedCard = card.update(params);
@@ -105,14 +105,14 @@ public class CardTest extends BaseStripeTest {
   public void testList() throws IOException, StripeException {
     final Customer customer = Customer.retrieve(CUSTOMER_ID);
 
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("object", "card");
     params.put("limit", 1);
 
     // stripe-mock doesn't handle this, so we stub the request
     final Card stubbedCard = getCardFixture(customer);
     final ExternalAccountCollection stubbedCollection = new ExternalAccountCollection();
-    final List<ExternalAccount> stubbedData = new ArrayList<ExternalAccount>();
+    final List<ExternalAccount> stubbedData = new ArrayList<>();
     stubbedData.add(stubbedCard);
     stubbedCollection.setData(stubbedData);
     stubRequest(

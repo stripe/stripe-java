@@ -3,7 +3,6 @@ package com.stripe.model;
 import static org.junit.Assert.assertNotNull;
 
 import com.stripe.BaseStripeTest;
-import com.stripe.model.File;
 import com.stripe.net.ApiResource;
 
 import org.junit.Test;

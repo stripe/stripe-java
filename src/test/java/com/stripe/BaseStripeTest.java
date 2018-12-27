@@ -19,8 +19,6 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.ProtocolException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
 import java.util.List;
@@ -346,8 +344,7 @@ public class BaseStripeTest {
    * @param path API path to use to get a fixture for stripe-mock.
    * @return Fixture data encoded as JSON.
    */
-  protected static String getFixture(String path) throws Exception, IOException,
-      MalformedURLException, ProtocolException {
+  protected static String getFixture(String path) throws Exception {
     return getFixture(path, null);
   }
 
@@ -361,8 +358,7 @@ public class BaseStripeTest {
    * @param expansions Set of expansions that should be applied.
    * @return Fixture data encoded as JSON.
    */
-  protected static String getFixture(String path, String[] expansions) throws Exception,
-      IOException, MalformedURLException, ProtocolException {
+  protected static String getFixture(String path, String[] expansions) throws Exception {
     int status;
 
     StringBuilder urlStringBuilder = new StringBuilder();

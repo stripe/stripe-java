@@ -26,13 +26,13 @@ public class SkuTest extends BaseStripeTest {
 
   @Test
   public void testCreate() throws StripeException {
-    final Map<String, Object> attributes = new HashMap<String, Object>();
+    final Map<String, Object> attributes = new HashMap<>();
     attributes.put("attr1", "val1");
     attributes.put("attr2", "val2");
-    final Map<String, Object> inventory = new HashMap<String, Object>();
+    final Map<String, Object> inventory = new HashMap<>();
     inventory.put("type", "bucket");
     inventory.put("value", "limited");
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("active", true);
     params.put("attributes", attributes);
     params.put("price", 499);
@@ -66,10 +66,10 @@ public class SkuTest extends BaseStripeTest {
   public void testUpdate() throws StripeException {
     final Sku sku = getSkuFixture();
 
-    final Map<String, Object> inventory = new HashMap<String, Object>();
+    final Map<String, Object> inventory = new HashMap<>();
     inventory.put("type", "bucket");
     inventory.put("value", "in_stock");
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("inventory", inventory);
 
     final Sku updatedSku = sku.update(params);
@@ -98,7 +98,7 @@ public class SkuTest extends BaseStripeTest {
 
   @Test
   public void testList() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     final SkuCollection skus = Sku.list(params);

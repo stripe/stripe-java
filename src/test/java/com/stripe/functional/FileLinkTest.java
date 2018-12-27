@@ -24,7 +24,7 @@ public class FileLinkTest extends BaseStripeTest {
 
   @Test
   public void testCreate() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("file", "file_123");
 
     final FileLink fileLink = FileLink.create(params);
@@ -52,9 +52,9 @@ public class FileLinkTest extends BaseStripeTest {
   public void testUpdate() throws StripeException {
     final FileLink fileLink = getFileLinkFixture();
 
-    final Map<String, String> metadata = new HashMap<String, String>();
+    final Map<String, String> metadata = new HashMap<>();
     metadata.put("key", "value");
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("metadata", metadata);
 
     final FileLink updatedFileLink = fileLink.update(params);
@@ -69,7 +69,7 @@ public class FileLinkTest extends BaseStripeTest {
 
   @Test
   public void testList() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("file", "file_123");
     params.put("limit", 1);
 

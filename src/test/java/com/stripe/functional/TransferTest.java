@@ -24,7 +24,7 @@ public class TransferTest extends BaseStripeTest {
 
   @Test
   public void testCreate() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("amount", 100);
     params.put("currency", "usd");
     params.put("destination", "acct_123");
@@ -54,9 +54,9 @@ public class TransferTest extends BaseStripeTest {
   public void testUpdate() throws StripeException {
     Transfer transfer = getTransferFixture();
 
-    final Map<String, Object> metadata = new HashMap<String, Object>();
+    final Map<String, Object> metadata = new HashMap<>();
     metadata.put("key", "value");
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("metadata", metadata);
 
     final Transfer updatedTransfer = transfer.update(params);
@@ -71,7 +71,7 @@ public class TransferTest extends BaseStripeTest {
 
   @Test
   public void testList() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     final TransferCollection transfers = Transfer.list(params);

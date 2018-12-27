@@ -26,7 +26,7 @@ public class TopupTest extends BaseStripeTest {
   public void testCancel() throws StripeException {
     final Topup topup = getTopupFixture();
 
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
 
     final Topup canceledTopup = topup.cancel(params);
 
@@ -40,7 +40,7 @@ public class TopupTest extends BaseStripeTest {
 
   @Test
   public void testCreate() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("amount", 100);
     params.put("currency", "usd");
     params.put("source", "src_123");
@@ -72,9 +72,9 @@ public class TopupTest extends BaseStripeTest {
   public void testUpdate() throws StripeException {
     final Topup topup = getTopupFixture();
 
-    final Map<String, Object> metadata = new HashMap<String, Object>();
+    final Map<String, Object> metadata = new HashMap<>();
     metadata.put("key", "value");
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("metadata", metadata);
 
     final Topup updatedTopup = topup.update(params);
@@ -89,7 +89,7 @@ public class TopupTest extends BaseStripeTest {
 
   @Test
   public void testList() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     final TopupCollection topups = Topup.list(params);

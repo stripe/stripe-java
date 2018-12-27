@@ -4,8 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import com.stripe.BaseStripeTest;
-import com.stripe.model.Event;
-import com.stripe.model.SourceMandateNotification;
 import com.stripe.net.ApiResource;
 
 import java.util.Map;

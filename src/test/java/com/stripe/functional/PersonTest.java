@@ -11,7 +11,6 @@ import com.stripe.model.Person;
 import com.stripe.model.PersonCollection;
 import com.stripe.net.ApiResource;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,8 +20,7 @@ public class PersonTest extends BaseStripeTest {
   public static final String ACCOUNT_ID = "cus_123";
   public static final String PERSON_ID = "person_123";
 
-  private PersonCollection getPersonCollectionFixture(Account account)
-      throws IOException, StripeException {
+  private PersonCollection getPersonCollectionFixture(Account account) throws StripeException {
     PersonCollection persons = account.persons();
     resetNetworkSpy();
 
@@ -30,11 +28,11 @@ public class PersonTest extends BaseStripeTest {
   }
 
   @Test
-  public void testCreate() throws IOException, StripeException {
+  public void testCreate() throws StripeException {
     final Account account = Account.retrieve(ACCOUNT_ID, null);
     final PersonCollection personsTmp = getPersonCollectionFixture(account);
 
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("first_name", "John");
 
     final Person person = personsTmp.create(params);
@@ -48,7 +46,7 @@ public class PersonTest extends BaseStripeTest {
   }
 
   @Test
-  public void testRetrieve() throws IOException, StripeException {
+  public void testRetrieve() throws StripeException {
     final Account account = Account.retrieve(ACCOUNT_ID, null);
     final PersonCollection personsTmp = getPersonCollectionFixture(account);
     Person person = personsTmp.retrieve(PERSON_ID);
@@ -61,12 +59,12 @@ public class PersonTest extends BaseStripeTest {
   }
 
   @Test
-  public void testUpdate() throws IOException, StripeException {
+  public void testUpdate() throws StripeException {
     final Account account = Account.retrieve(ACCOUNT_ID, null);
     final PersonCollection personsTmp = getPersonCollectionFixture(account);
     Person person = personsTmp.retrieve(PERSON_ID);
 
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("first_name", "John");
 
     final Person updatedPerson = person.update(params);
@@ -80,11 +78,11 @@ public class PersonTest extends BaseStripeTest {
   }
 
   @Test
-  public void testList() throws IOException, StripeException {
+  public void testList() throws StripeException {
     final Account account = Account.retrieve(ACCOUNT_ID, null);
     final PersonCollection personsTmp = getPersonCollectionFixture(account);
 
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     final PersonCollection persons = personsTmp.list(params);
@@ -101,7 +99,7 @@ public class PersonTest extends BaseStripeTest {
   }
 
   @Test
-  public void testDelete() throws IOException, StripeException {
+  public void testDelete() throws StripeException {
     final Account account = Account.retrieve(ACCOUNT_ID, null);
     final PersonCollection personsTmp = getPersonCollectionFixture(account);
     Person person = personsTmp.retrieve(PERSON_ID);

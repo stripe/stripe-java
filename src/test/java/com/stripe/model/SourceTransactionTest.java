@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import com.stripe.BaseStripeTest;
-import com.stripe.model.SourceTransactionCollection;
 import com.stripe.net.ApiResource;
 
 import java.util.Map;

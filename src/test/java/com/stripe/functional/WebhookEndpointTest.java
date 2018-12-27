@@ -27,10 +27,10 @@ public class WebhookEndpointTest extends BaseStripeTest {
 
   @Test
   public void testCreate() throws StripeException {
-    final List<String> enabledEvents = new ArrayList<String>();
+    final List<String> enabledEvents = new ArrayList<>();
     enabledEvents.add("charge.succeeded");
 
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("enabled_events", enabledEvents);
     params.put("url", "https://stripe.com");
 
@@ -59,10 +59,10 @@ public class WebhookEndpointTest extends BaseStripeTest {
   public void testUpdate() throws StripeException {
     final WebhookEndpoint endpoint = getWebhookEndpointFixture();
 
-    final List<String> enabledEvents = new ArrayList<String>();
+    final List<String> enabledEvents = new ArrayList<>();
     enabledEvents.add("charge.succeeded");
 
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("enabled_events", enabledEvents);
 
     final WebhookEndpoint updatedWebhookEndpoint = endpoint.update(params);
@@ -77,7 +77,7 @@ public class WebhookEndpointTest extends BaseStripeTest {
 
   @Test
   public void testList() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     final WebhookEndpointCollection endpoints = WebhookEndpoint.list(params);
