@@ -102,7 +102,7 @@ public class OrderTest extends BaseStripeTest {
   public void testReturn() throws StripeException {
     final Order order = Order.retrieve(ORDER_ID);
 
-    final OrderReturn orderReturn = order.returnOrder(null);
+    final OrderReturn orderReturn = order.returnOrder((Map<String, Object>) null);
 
     assertNotNull(orderReturn);
     verifyRequest(

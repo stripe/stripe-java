@@ -21,7 +21,7 @@ public class AuthorizationTest extends BaseStripeTest {
   public void testApprove() throws StripeException {
     final Authorization authorization = Authorization.retrieve(AUTHORIZATION_ID);
 
-    final Authorization approvedAuthorization = authorization.approve(null);
+    final Authorization approvedAuthorization = authorization.approve((Map<String, Object>) null);
 
     assertNotNull(approvedAuthorization);
     verifyRequest(
@@ -35,7 +35,7 @@ public class AuthorizationTest extends BaseStripeTest {
   public void testDecline() throws StripeException {
     final Authorization authorization = Authorization.retrieve(AUTHORIZATION_ID);
 
-    final Authorization approvedAuthorization = authorization.decline(null);
+    final Authorization approvedAuthorization = authorization.decline((Map<String, Object>) null);
 
     assertNotNull(approvedAuthorization);
     verifyRequest(
