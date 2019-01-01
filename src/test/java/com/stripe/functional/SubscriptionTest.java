@@ -93,7 +93,7 @@ public class SubscriptionTest extends BaseStripeTest {
   public void testCancel() throws StripeException {
     final Subscription subscription = getSubscriptionFixture();
 
-    final Subscription canceledSubscription = subscription.cancel(null);
+    final Subscription canceledSubscription = subscription.cancel((Map<String, Object>) null);
 
     assertNotNull(canceledSubscription);
     verifyRequest(
