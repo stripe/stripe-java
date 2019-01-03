@@ -7,8 +7,6 @@ import static org.junit.Assert.assertNull;
 import com.stripe.BaseStripeTest;
 import com.stripe.net.ApiResource;
 
-import java.io.IOException;
-
 import org.junit.Test;
 
 public class IssuerFraudRecordTest extends BaseStripeTest {

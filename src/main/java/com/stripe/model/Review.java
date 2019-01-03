@@ -1,8 +1,6 @@
 package com.stripe.model;
 
 import com.stripe.exception.StripeException;
-import com.stripe.model.ExpandableField;
-import com.stripe.model.HasId;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 

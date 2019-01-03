@@ -8,8 +8,6 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonParseException;
 import com.google.gson.reflect.TypeToken;
-import com.stripe.model.ExpandableField;
-import com.stripe.model.ExpandableFieldDeserializer;
 
 import java.lang.reflect.Type;
 import java.util.List;
