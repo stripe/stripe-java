@@ -1,9 +1,7 @@
 package com.stripe.model.radar;
 
 import com.stripe.exception.StripeException;
-import com.stripe.model.File;
 import com.stripe.model.HasId;
-import com.stripe.model.StripeObject;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 

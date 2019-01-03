@@ -4,8 +4,6 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import com.stripe.BaseStripeTest;
-import com.stripe.model.BalanceTransaction;
-import com.stripe.model.BalanceTransactionCollection;
 import com.stripe.net.ApiResource;
 
 import java.util.List;

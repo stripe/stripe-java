@@ -6,10 +6,6 @@ import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.oauth.DeauthorizedAccount;
 import com.stripe.model.oauth.TokenResponse;
-import com.stripe.net.ApiResource;
-import com.stripe.net.LiveStripeResponseGetter;
-import com.stripe.net.RequestOptions;
-import com.stripe.net.StripeResponseGetter;
 
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
