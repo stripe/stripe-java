@@ -22,7 +22,7 @@ public class UsageRecordTest extends BaseStripeTest {
     params.put("timestamp", System.currentTimeMillis() / 1000L);
 
     final UsageRecord resource = UsageRecord.createOnSubscriptionItem(
-        SUBCRIPTION_ITEM_ID, params, null);
+        SUBSCRIPTION_ITEM_ID, params, null);
     
     assertNotNull(resource);
     verifyRequest(
@@ -32,3 +32,5 @@ public class UsageRecordTest extends BaseStripeTest {
     );
   }
 }
+
+
