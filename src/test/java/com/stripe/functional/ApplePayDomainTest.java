@@ -25,7 +25,7 @@ public class ApplePayDomainTest extends BaseStripeTest {
 
   @Test
   public void testCreate() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("domain_name", "stripe.com");
 
     final ApplePayDomain domain = ApplePayDomain.create(params);
@@ -51,7 +51,7 @@ public class ApplePayDomainTest extends BaseStripeTest {
 
   @Test
   public void testList() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     final ApplePayDomainCollection domains = ApplePayDomain.list(params);

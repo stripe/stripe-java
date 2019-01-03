@@ -19,8 +19,8 @@ public class FileTest extends BaseStripeTest {
   public static final String FILE_ID = "file_123";
 
   @Test
-  public void testCreateWithFile() throws IOException, StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+  public void testCreateWithFile() throws StripeException {
+    final Map<String, Object> params = new HashMap<>();
     params.put("purpose", "dispute_evidence");
     params.put("file", new File(getClass().getResource("/test.png").getFile()));
 
@@ -55,7 +55,7 @@ public class FileTest extends BaseStripeTest {
   }
 
   @Test
-  public void testRetrieve() throws IOException, StripeException {
+  public void testRetrieve() throws StripeException {
     final com.stripe.model.File file = com.stripe.model.File.retrieve(FILE_ID);
 
     assertNotNull(file);
@@ -66,8 +66,8 @@ public class FileTest extends BaseStripeTest {
   }
 
   @Test
-  public void testList() throws IOException, StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+  public void testList() throws StripeException {
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     final FileCollection files = com.stripe.model.File.list(params);

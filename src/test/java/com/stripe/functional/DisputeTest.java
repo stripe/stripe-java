@@ -37,9 +37,9 @@ public class DisputeTest extends BaseStripeTest {
   public void testUpdate() throws StripeException {
     final Dispute dispute = getDisputeFixture();
 
-    final Map<String, String> metadata = new HashMap<String, String>();
+    final Map<String, String> metadata = new HashMap<>();
     metadata.put("key", "value");
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("metadata", metadata);
 
     final Dispute updatedDispute = dispute.update(params);
@@ -54,7 +54,7 @@ public class DisputeTest extends BaseStripeTest {
 
   @Test
   public void testList() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     final DisputeCollection disputes = Dispute.list(params);

@@ -3,7 +3,6 @@ package com.stripe.net;
 import static org.junit.Assert.assertEquals;
 
 import com.stripe.BaseStripeTest;
-import com.stripe.net.StripeHeaders;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -15,14 +14,14 @@ import org.junit.Test;
 public class StripeHeadersTest extends BaseStripeTest {
 
   private Map<String, List<String>> generateHeaderMap() {
-    final List<String> multiValueHeader = new ArrayList<String>();
+    final List<String> multiValueHeader = new ArrayList<>();
     multiValueHeader.add("FirstValue");
     multiValueHeader.add("SecondValue");
 
-    final List<String> requestIdHeader = new ArrayList<String>();
+    final List<String> requestIdHeader = new ArrayList<>();
     requestIdHeader.add("req_12345");
 
-    final Map<String, List<String>> headerMap = new HashMap<String, List<String>>();
+    final Map<String, List<String>> headerMap = new HashMap<>();
     headerMap.put("Request-Id", requestIdHeader);
     headerMap.put("Multi-Val", multiValueHeader);
     headerMap.put("Empty-Header", new ArrayList<String>());

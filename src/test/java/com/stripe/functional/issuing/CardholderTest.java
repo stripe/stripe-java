@@ -8,7 +8,6 @@ import com.stripe.model.issuing.Cardholder;
 import com.stripe.model.issuing.CardholderCollection;
 import com.stripe.net.ApiResource;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,17 +18,17 @@ public class CardholderTest extends BaseStripeTest {
   public static final String CARDHOLDER_ID = "ich_123";
 
   @Test
-  public void testCreate() throws IOException, StripeException {
-    final Map<String, Object> address = new HashMap<String, Object>();
+  public void testCreate() throws StripeException {
+    final Map<String, Object> address = new HashMap<>();
     address.put("city", "city");
     address.put("country", "US");
     address.put("line1", "line1");
     address.put("postal_code", "90210");
 
-    final Map<String, Object> billing = new HashMap<String, Object>();
+    final Map<String, Object> billing = new HashMap<>();
     billing.put("address", address);
 
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("billing", billing);
     params.put("name", "Jenny Rosen");
     params.put("type", "individual");
@@ -45,7 +44,7 @@ public class CardholderTest extends BaseStripeTest {
   }
 
   @Test
-  public void testRetrieve() throws IOException, StripeException {
+  public void testRetrieve() throws StripeException {
     final Cardholder cardholder = Cardholder.retrieve(CARDHOLDER_ID);
 
     assertNotNull(cardholder);
@@ -56,12 +55,12 @@ public class CardholderTest extends BaseStripeTest {
   }
 
   @Test
-  public void testUpdate() throws IOException, StripeException {
+  public void testUpdate() throws StripeException {
     final Cardholder cardholder = Cardholder.retrieve(CARDHOLDER_ID);
 
-    final Map<String, String> metadata = new HashMap<String, String>();
+    final Map<String, String> metadata = new HashMap<>();
     metadata.put("key", "value");
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("metadata", metadata);
 
     final Cardholder updatedCardholder = cardholder.update(params);
@@ -75,8 +74,8 @@ public class CardholderTest extends BaseStripeTest {
   }
 
   @Test
-  public void testList() throws IOException, StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+  public void testList() throws StripeException {
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     CardholderCollection cardholders = Cardholder.list(params);

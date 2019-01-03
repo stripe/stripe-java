@@ -26,11 +26,11 @@ public class SubscriptionTest extends BaseStripeTest {
 
   @Test
   public void testCreate() throws StripeException {
-    final Map<String, Object> item = new HashMap<String, Object>();
+    final Map<String, Object> item = new HashMap<>();
     item.put("plan", "silver-plan_123-898");
-    final List<Object> items = new ArrayList<Object>();
+    final List<Object> items = new ArrayList<>();
     items.add(item);
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("customer", "cus_123");
     params.put("items", items);
 
@@ -59,9 +59,9 @@ public class SubscriptionTest extends BaseStripeTest {
   public void testUpdate() throws StripeException {
     final Subscription subscription = getSubscriptionFixture();
 
-    final Map<String, Object> metadata = new HashMap<String, Object>();
+    final Map<String, Object> metadata = new HashMap<>();
     metadata.put("key", "value");
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("metadata", metadata);
 
     final Subscription updatedSubscription = subscription.update(params);
@@ -76,7 +76,7 @@ public class SubscriptionTest extends BaseStripeTest {
 
   @Test
   public void testList() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     final SubscriptionCollection subscriptions = Subscription.list(params);

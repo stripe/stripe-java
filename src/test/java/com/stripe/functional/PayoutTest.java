@@ -24,7 +24,7 @@ public class PayoutTest extends BaseStripeTest {
 
   @Test
   public void testCreate() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("amount", "10000");
     params.put("currency", "usd");
 
@@ -53,9 +53,9 @@ public class PayoutTest extends BaseStripeTest {
   public void testUpdate() throws StripeException {
     final Payout payout = getPayoutFixture();
 
-    final Map<String, String> metadata = new HashMap<String, String>();
+    final Map<String, String> metadata = new HashMap<>();
     metadata.put("key", "value");
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("metadata", metadata);
 
     final Payout updatedPayout = payout.update(params);
@@ -70,7 +70,7 @@ public class PayoutTest extends BaseStripeTest {
 
   @Test
   public void testList() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     final PayoutCollection payouts = Payout.list(params);

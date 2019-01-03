@@ -8,7 +8,6 @@ import com.stripe.model.PaymentIntent;
 import com.stripe.model.PaymentIntentCollection;
 import com.stripe.net.ApiResource;
 
-import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -26,12 +25,12 @@ public class PaymentIntentTest extends BaseStripeTest {
   }
 
   @Test
-  public void testCreate() throws  IOException, StripeException {
-    final List<String> allowedSourcetypes = new ArrayList<String>();
-    allowedSourcetypes.add("card");
+  public void testCreate() throws StripeException {
+    final List<String> allowedSourceTypes = new ArrayList<>();
+    allowedSourceTypes.add("card");
 
-    final Map<String, Object> params = new HashMap<String, Object>();
-    params.put("allowed_source_types", allowedSourcetypes);
+    final Map<String, Object> params = new HashMap<>();
+    params.put("allowed_source_types", allowedSourceTypes);
     params.put("amount", 1234);
     params.put("currency", "usd");
 
@@ -46,7 +45,7 @@ public class PaymentIntentTest extends BaseStripeTest {
   }
 
   @Test
-  public void testRetrieve() throws  IOException, StripeException {
+  public void testRetrieve() throws StripeException {
     final PaymentIntent paymentIntent = PaymentIntent.retrieve(PAYMENT_INTENT_ID);
 
     assertNotNull(paymentIntent);
@@ -57,12 +56,12 @@ public class PaymentIntentTest extends BaseStripeTest {
   }
 
   @Test
-  public void testUpdate() throws  IOException, StripeException {
+  public void testUpdate() throws StripeException {
     final PaymentIntent paymentIntent = getPaymentIntentFixture();
 
-    final Map<String, String> metadata = new HashMap<String, String>();
+    final Map<String, String> metadata = new HashMap<>();
     metadata.put("key", "value");
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("metadata", metadata);
 
     final PaymentIntent updatedPaymentIntent = paymentIntent.update(params);
@@ -76,8 +75,8 @@ public class PaymentIntentTest extends BaseStripeTest {
   }
 
   @Test
-  public void testList() throws  IOException, StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+  public void testList() throws StripeException {
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     final PaymentIntentCollection paymentIntents = PaymentIntent.list(params);
@@ -91,7 +90,7 @@ public class PaymentIntentTest extends BaseStripeTest {
   }
 
   @Test
-  public void testCancel() throws  IOException, StripeException {
+  public void testCancel() throws StripeException {
     final PaymentIntent paymentIntent = getPaymentIntentFixture();
     final PaymentIntent cancelledPaymentIntent = paymentIntent.cancel();
 
@@ -103,11 +102,11 @@ public class PaymentIntentTest extends BaseStripeTest {
   }
 
   @Test
-  public void testCapture() throws  IOException, StripeException {
+  public void testCapture() throws StripeException {
     final PaymentIntent paymentIntent = getPaymentIntentFixture();
-    final PaymentIntent captureledPaymentIntent = paymentIntent.capture();
+    final PaymentIntent capturedPaymentIntent = paymentIntent.capture();
 
-    assertNotNull(captureledPaymentIntent);
+    assertNotNull(capturedPaymentIntent);
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/payment_intents/%s/capture", paymentIntent.getId())
@@ -115,11 +114,11 @@ public class PaymentIntentTest extends BaseStripeTest {
   }
 
   @Test
-  public void testConfirm() throws  IOException, StripeException {
+  public void testConfirm() throws StripeException {
     final PaymentIntent paymentIntent = getPaymentIntentFixture();
-    final PaymentIntent confirmledPaymentIntent = paymentIntent.confirm();
+    final PaymentIntent confirmedPaymentIntent = paymentIntent.confirm();
 
-    assertNotNull(confirmledPaymentIntent);
+    assertNotNull(confirmedPaymentIntent);
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/payment_intents/%s/confirm", paymentIntent.getId())

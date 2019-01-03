@@ -35,7 +35,7 @@ public class EphemeralKeyTest extends BaseStripeTest {
   public void testCreate() throws StripeException {
     Stripe.apiVersion = "2016-06-05";
 
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("customer", "cus_123");
 
     final RequestOptions options = RequestOptions.builder().setStripeVersion("2017-05-25").build();
@@ -56,7 +56,7 @@ public class EphemeralKeyTest extends BaseStripeTest {
   public void testCreateWithoutApiVersion() throws StripeException {
     Stripe.apiVersion = null;
 
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("customer", "cus_123");
 
     final RequestOptions options = RequestOptions.getDefault();
@@ -66,7 +66,7 @@ public class EphemeralKeyTest extends BaseStripeTest {
 
   @Test
   public void testDelete() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("customer", "cus_123");
 
     final RequestOptions options = RequestOptions.builder().setStripeVersion("2017-05-25").build();

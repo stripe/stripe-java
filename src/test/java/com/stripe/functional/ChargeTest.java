@@ -26,7 +26,7 @@ public class ChargeTest extends BaseStripeTest {
 
   @Test
   public void testCreate() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("amount", 100);
     params.put("currency", "usd");
     params.put("source", "src_123");
@@ -56,9 +56,9 @@ public class ChargeTest extends BaseStripeTest {
   public void testUpdate() throws StripeException {
     final Charge charge = getChargeFixture();
 
-    final Map<String, Object> metadata = new HashMap<String, Object>();
+    final Map<String, Object> metadata = new HashMap<>();
     metadata.put("foo", "bar");
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("metadata", metadata);
 
     final Charge updatedCharge = charge.update(params);
@@ -73,7 +73,7 @@ public class ChargeTest extends BaseStripeTest {
 
   @Test
   public void testList() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     final ChargeCollection charges = Charge.list(params);

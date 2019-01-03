@@ -18,8 +18,8 @@ public class LocationTest extends BaseStripeTest {
 
   @Test
   public void testCreate() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
-    final Map<String, String> address = new HashMap<String, String>();
+    final Map<String, Object> params = new HashMap<>();
+    final Map<String, String> address = new HashMap<>();
     address.put("line1", "line1");
     address.put("country", "US");
     address.put("state", "CA");
@@ -53,7 +53,7 @@ public class LocationTest extends BaseStripeTest {
   public void testUpdate() throws StripeException {
     final Location location = Location.retrieve(LOCATION_ID);
 
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("display_name", "new_name");
 
     final Location updatedLocation = location.update(params);
@@ -68,7 +68,7 @@ public class LocationTest extends BaseStripeTest {
 
   @Test
   public void testList() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     LocationCollection resources = Location.list(params);

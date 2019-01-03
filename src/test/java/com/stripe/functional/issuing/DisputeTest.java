@@ -8,7 +8,6 @@ import com.stripe.model.issuing.Dispute;
 import com.stripe.model.issuing.DisputeCollection;
 import com.stripe.net.ApiResource;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,8 +18,8 @@ public class DisputeTest extends BaseStripeTest {
   public static final String DISPUTE_ID = "idp_123";
 
   @Test
-  public void testCreate() throws IOException, StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+  public void testCreate() throws StripeException {
+    final Map<String, Object> params = new HashMap<>();
     params.put("reason", "fraudulent");
     params.put("disputed_transaction", "ipi_123");
 
@@ -35,7 +34,7 @@ public class DisputeTest extends BaseStripeTest {
   }
 
   @Test
-  public void testRetrieve() throws IOException, StripeException {
+  public void testRetrieve() throws StripeException {
     final Dispute dispute = Dispute.retrieve(DISPUTE_ID);
 
     assertNotNull(dispute);
@@ -46,12 +45,12 @@ public class DisputeTest extends BaseStripeTest {
   }
 
   @Test
-  public void testUpdate() throws IOException, StripeException {
+  public void testUpdate() throws StripeException {
     final Dispute dispute = Dispute.retrieve(DISPUTE_ID);
 
-    final Map<String, String> metadata = new HashMap<String, String>();
+    final Map<String, String> metadata = new HashMap<>();
     metadata.put("key", "value");
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("metadata", metadata);
 
     final Dispute updatedDispute = dispute.update(params);
@@ -65,8 +64,8 @@ public class DisputeTest extends BaseStripeTest {
   }
 
   @Test
-  public void testList() throws IOException, StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+  public void testList() throws StripeException {
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     DisputeCollection disputes = Dispute.list(params);

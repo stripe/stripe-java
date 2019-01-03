@@ -8,7 +8,6 @@ import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.oauth.DeauthorizedAccount;
 import com.stripe.model.oauth.TokenResponse;
-import com.stripe.net.OAuth;
 
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
@@ -22,7 +21,7 @@ import org.junit.Test;
 
 public class OAuthTest extends BaseStripeTest {
   private static Map<String, String> splitQuery(String query) throws UnsupportedEncodingException {
-    final Map<String, String> queryPairs = new HashMap<String, String>();
+    final Map<String, String> queryPairs = new HashMap<>();
     final String[] pairs = query.split("&", -1);
     for (final String pair : pairs) {
       final int idx = pair.indexOf("=");
@@ -35,10 +34,10 @@ public class OAuthTest extends BaseStripeTest {
   @Test
   public void testAuthorizeUrl() throws AuthenticationException, InvalidRequestException,
       MalformedURLException, UnsupportedEncodingException {
-    final Map<String, Object> urlParams = new HashMap<String, Object>();
+    final Map<String, Object> urlParams = new HashMap<>();
     urlParams.put("scope", "read_write");
     urlParams.put("state", "csrf_token");
-    final Map<String, Object> stripeUserParams = new HashMap<String, Object>();
+    final Map<String, Object> stripeUserParams = new HashMap<>();
     stripeUserParams.put("email", "test@example.com");
     stripeUserParams.put("url", "https://example.com/profile/test");
     stripeUserParams.put("country", "US");
@@ -69,7 +68,7 @@ public class OAuthTest extends BaseStripeTest {
         getResourceAsString("/oauth_fixtures/token_response.json")
     );
 
-    final Map<String, Object> tokenParams = new HashMap<String, Object>();
+    final Map<String, Object> tokenParams = new HashMap<>();
     tokenParams.put("grant_type", "authorization_code");
     tokenParams.put("code", "this_is_an_authorization_code");
 
@@ -87,7 +86,7 @@ public class OAuthTest extends BaseStripeTest {
         "{stripe_user_id: \"acct_test_deauth\"}"
     );
 
-    final Map<String, Object> deauthParams = new HashMap<String, Object>();
+    final Map<String, Object> deauthParams = new HashMap<>();
     deauthParams.put("stripe_user_id", "acct_test_deauth");
 
     final DeauthorizedAccount account = OAuth.deauthorize(deauthParams, null);

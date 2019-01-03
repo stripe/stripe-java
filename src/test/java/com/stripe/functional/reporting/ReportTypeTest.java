@@ -8,7 +8,6 @@ import com.stripe.model.reporting.ReportType;
 import com.stripe.model.reporting.ReportTypeCollection;
 import com.stripe.net.ApiResource;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +18,7 @@ public class ReportTypeTest extends BaseStripeTest {
   public static final String REPORT_TYPE_ID = "activity.summary.1";
 
   @Test
-  public void testRetrieve() throws IOException, StripeException {
+  public void testRetrieve() throws StripeException {
     final ReportType reportType = ReportType.retrieve(REPORT_TYPE_ID);
 
     assertNotNull(reportType);
@@ -30,8 +29,8 @@ public class ReportTypeTest extends BaseStripeTest {
   }
 
   @Test
-  public void testList() throws IOException, StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+  public void testList() throws StripeException {
+    final Map<String, Object> params = new HashMap<>();
 
     ReportTypeCollection reportTypes = ReportType.list(params);
 

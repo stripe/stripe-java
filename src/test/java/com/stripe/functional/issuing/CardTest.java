@@ -9,7 +9,6 @@ import com.stripe.model.issuing.CardCollection;
 import com.stripe.model.issuing.CardDetails;
 import com.stripe.net.ApiResource;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -20,8 +19,8 @@ public class CardTest extends BaseStripeTest {
   public static final String CARD_ID = "ic_123";
 
   @Test
-  public void testCreate() throws IOException, StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+  public void testCreate() throws StripeException {
+    final Map<String, Object> params = new HashMap<>();
     params.put("currency", "usd");
     params.put("type", "physical");
 
@@ -36,7 +35,7 @@ public class CardTest extends BaseStripeTest {
   }
 
   @Test
-  public void testDetails() throws IOException, StripeException {
+  public void testDetails() throws StripeException {
     final Card card = Card.retrieve(CARD_ID);
 
     final CardDetails cardDetails = card.details(null);
@@ -50,7 +49,7 @@ public class CardTest extends BaseStripeTest {
   }
 
   @Test
-  public void testRetrieve() throws IOException, StripeException {
+  public void testRetrieve() throws StripeException {
     final Card card = Card.retrieve(CARD_ID);
 
     assertNotNull(card);
@@ -61,12 +60,12 @@ public class CardTest extends BaseStripeTest {
   }
 
   @Test
-  public void testUpdate() throws IOException, StripeException {
+  public void testUpdate() throws StripeException {
     final Card card = Card.retrieve(CARD_ID);
 
-    final Map<String, String> metadata = new HashMap<String, String>();
+    final Map<String, String> metadata = new HashMap<>();
     metadata.put("key", "value");
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("metadata", metadata);
 
     final Card updatedCard = card.update(params);
@@ -80,8 +79,8 @@ public class CardTest extends BaseStripeTest {
   }
 
   @Test
-  public void testList() throws IOException, StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+  public void testList() throws StripeException {
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     CardCollection resources = Card.list(params);

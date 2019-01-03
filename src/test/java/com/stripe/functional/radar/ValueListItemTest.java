@@ -25,7 +25,7 @@ public class ValueListItemTest extends BaseStripeTest {
 
   @Test
   public void testCreate() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("value", "value");
     params.put("value_list", "rsl_123");
 
@@ -52,7 +52,7 @@ public class ValueListItemTest extends BaseStripeTest {
 
   @Test
   public void testList() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("value_list", "rsl_123");
     params.put("limit", 1);
 

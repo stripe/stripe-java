@@ -25,7 +25,7 @@ public class OrderTest extends BaseStripeTest {
 
   @Test
   public void testCreate() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("currency", "usd");
 
     final Order order = Order.create(params);
@@ -53,7 +53,7 @@ public class OrderTest extends BaseStripeTest {
   public void testUpdate() throws StripeException {
     final Order order = getOrderFixture();
 
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("status", "fulfilled");
 
     final Order updatedOrder = order.update(params);
@@ -68,7 +68,7 @@ public class OrderTest extends BaseStripeTest {
 
   @Test
   public void testList() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     final OrderCollection orders = Order.list(params);
@@ -85,7 +85,7 @@ public class OrderTest extends BaseStripeTest {
   public void testPay() throws StripeException {
     final Order order = Order.retrieve(ORDER_ID);
 
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("customer", "cus_123");
 
     final Order paidOrder = order.pay(params);

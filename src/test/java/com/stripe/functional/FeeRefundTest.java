@@ -34,7 +34,7 @@ public class FeeRefundTest extends BaseStripeTest {
   public void testCreate() throws StripeException {
     final ApplicationFee fee = getFeeFixture();
 
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("amount", 100);
 
     final FeeRefund refund = fee.getRefunds().create(params);
@@ -65,9 +65,9 @@ public class FeeRefundTest extends BaseStripeTest {
     final ApplicationFee fee = getFeeFixture();
     final FeeRefund refund = getRefundFixture(fee);
 
-    Map<String, Object> metadata = new HashMap<String, Object>();
+    Map<String, Object> metadata = new HashMap<>();
     metadata.put("key", "value");
-    Map<String, Object> params = new HashMap<String, Object>();
+    Map<String, Object> params = new HashMap<>();
     params.put("metadata", metadata);
 
     final FeeRefund updatedRefund = refund.update(params);
@@ -84,7 +84,7 @@ public class FeeRefundTest extends BaseStripeTest {
   public void testList() throws StripeException {
     final ApplicationFee fee = getFeeFixture();
 
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     final FeeRefundCollection refunds = fee.getRefunds().list(params);

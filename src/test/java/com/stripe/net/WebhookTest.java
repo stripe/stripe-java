@@ -8,10 +8,7 @@ import com.google.gson.JsonSyntaxException;
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.model.Event;
-import com.stripe.net.Webhook;
 
-import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
@@ -27,14 +24,13 @@ public class WebhookTest extends BaseStripeTest {
   public static String payload = null;
 
   @Before
-  public void setUpFixtures() throws IOException {
+  public void setUpFixtures() {
     secret = "whsec_test_secret";
     payload = "{\n  \"id\": \"evt_test_webhook\",\n  \"object\": \"event\"\n}";
   }
 
-  public String generateSigHeader() throws UnsupportedEncodingException, NoSuchAlgorithmException,
-      InvalidKeyException {
-    final Map<String, Object> options = new HashMap<String, Object>();
+  public String generateSigHeader() throws NoSuchAlgorithmException, InvalidKeyException {
+    final Map<String, Object> options = new HashMap<>();
     return generateSigHeader(options);
   }
 
@@ -44,8 +40,8 @@ public class WebhookTest extends BaseStripeTest {
    * @param options Options map to override default values
    * @return The contents of the generated header
    */
-  public String generateSigHeader(Map<String, Object> options) throws UnsupportedEncodingException,
-      NoSuchAlgorithmException, InvalidKeyException {
+  public String generateSigHeader(Map<String, Object> options)
+          throws NoSuchAlgorithmException, InvalidKeyException {
     final long timestamp = (options.get("timestamp") != null)
         ? ((Long) options.get("timestamp")).longValue() : Webhook.Util.getTimeNow();
     final String payload = (options.get("payload") != null)
@@ -70,7 +66,7 @@ public class WebhookTest extends BaseStripeTest {
 
   @Test
   public void testValidJsonAndHeader() throws SignatureVerificationException,
-      UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException {
+      NoSuchAlgorithmException, InvalidKeyException {
     final String sigHeader = generateSigHeader();
 
     final Event event = Webhook.constructEvent(payload, sigHeader, secret);
@@ -79,10 +75,10 @@ public class WebhookTest extends BaseStripeTest {
   }
 
   @Test(expected = JsonSyntaxException.class)
-  public void testInvalidJson() throws SignatureVerificationException, UnsupportedEncodingException,
+  public void testInvalidJson() throws SignatureVerificationException,
       NoSuchAlgorithmException, InvalidKeyException {
     final String payload = "this is not valid JSON";
-    final Map<String, Object> options = new HashMap<String, Object>();
+    final Map<String, Object> options = new HashMap<>();
     options.put("payload", payload);
     final String sigHeader = generateSigHeader(options);
 
@@ -108,8 +104,8 @@ public class WebhookTest extends BaseStripeTest {
 
   @Test
   public void testNoSignaturesWithExpectedScheme() throws SignatureVerificationException,
-      UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException {
-    final Map<String, Object> options = new HashMap<String, Object>();
+      NoSuchAlgorithmException, InvalidKeyException {
+    final Map<String, Object> options = new HashMap<>();
     options.put("scheme", "v0");
     final String sigHeader = generateSigHeader(options);
 
@@ -121,8 +117,8 @@ public class WebhookTest extends BaseStripeTest {
 
   @Test
   public void testNoValidSignatureForPayload() throws SignatureVerificationException,
-      UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException {
-    final Map<String, Object> options = new HashMap<String, Object>();
+      NoSuchAlgorithmException, InvalidKeyException {
+    final Map<String, Object> options = new HashMap<>();
     options.put("signature", "bad_signature");
     final String sigHeader = generateSigHeader(options);
 
@@ -134,8 +130,8 @@ public class WebhookTest extends BaseStripeTest {
 
   @Test
   public void testTimestampOutsideTolerance() throws SignatureVerificationException,
-      UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException {
-    final Map<String, Object> options = new HashMap<String, Object>();
+      NoSuchAlgorithmException, InvalidKeyException {
+    final Map<String, Object> options = new HashMap<>();
     options.put("timestamp", Webhook.Util.getTimeNow() - 15);
     final String sigHeader = generateSigHeader(options);
 
@@ -147,7 +143,7 @@ public class WebhookTest extends BaseStripeTest {
 
   @Test
   public void testValidHeaderAndSignature() throws SignatureVerificationException,
-      UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException {
+       NoSuchAlgorithmException, InvalidKeyException {
     final String sigHeader = generateSigHeader();
 
     assertTrue(Webhook.Signature.verifyHeader(payload, sigHeader, secret, 10));
@@ -155,7 +151,7 @@ public class WebhookTest extends BaseStripeTest {
 
   @Test
   public void testHeaderContainsValidSignature() throws SignatureVerificationException,
-      UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException {
+      NoSuchAlgorithmException, InvalidKeyException {
     final String sigHeader = String.format("%s,v1=bad_signature", generateSigHeader());
 
     assertTrue(Webhook.Signature.verifyHeader(payload, sigHeader, secret, 10));
@@ -163,8 +159,8 @@ public class WebhookTest extends BaseStripeTest {
 
   @Test
   public void testTimestampOffButNoTolerance() throws SignatureVerificationException,
-      UnsupportedEncodingException, NoSuchAlgorithmException, InvalidKeyException {
-    final Map<String, Object> options = new HashMap<String, Object>();
+      NoSuchAlgorithmException, InvalidKeyException {
+    final Map<String, Object> options = new HashMap<>();
     options.put("timestamp", Long.valueOf(12345L));
     final String sigHeader = generateSigHeader(options);
 

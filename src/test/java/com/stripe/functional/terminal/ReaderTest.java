@@ -18,7 +18,7 @@ public class ReaderTest extends BaseStripeTest {
 
   @Test
   public void testCreate() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("registration_code", "rabbit-analyzed-pig");
     params.put("label", "device");
 
@@ -47,7 +47,7 @@ public class ReaderTest extends BaseStripeTest {
   public void testUpdate() throws StripeException {
     final Reader reader = Reader.retrieve(READER_ID);
 
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("label", "new_label");
 
     final Reader updatedReader = reader.update(params);
@@ -62,7 +62,7 @@ public class ReaderTest extends BaseStripeTest {
 
   @Test
   public void testList() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     ReaderCollection resources = Reader.list(params);

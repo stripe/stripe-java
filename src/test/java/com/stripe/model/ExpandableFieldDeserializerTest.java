@@ -10,7 +10,6 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.BaseStripeTest;
 import com.stripe.net.ApiResource;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,7 +30,7 @@ public class ExpandableFieldDeserializerTest extends BaseStripeTest {
   }
 
   @Test
-  public void deserializeNull() throws IOException {
+  public void deserializeNull() {
     final String json = gson.toJson(null);
     // Gson also uses TypeTokens internally to get around Type Erasure for generic types, simulate
     // that here:
@@ -41,7 +40,7 @@ public class ExpandableFieldDeserializerTest extends BaseStripeTest {
   }
 
   @Test
-  public void deserializeString() throws IOException {
+  public void deserializeString() {
     final String json = gson.toJson("just_an_id");
     // Gson also uses TypeTokens internally to get around Type Erasure for generic types, simulate
     // that here:
@@ -52,8 +51,8 @@ public class ExpandableFieldDeserializerTest extends BaseStripeTest {
   }
 
   @Test
-  public void deserializeObject() throws IOException {
-    final Map<String, Object> anObject = new HashMap<String, Object>();
+  public void deserializeObject() {
+    final Map<String, Object> anObject = new HashMap<>();
     anObject.put("id", "an_id_here");
     anObject.put("bar", 12);
     final String json = gson.toJson(anObject);

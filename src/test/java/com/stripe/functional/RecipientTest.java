@@ -20,7 +20,7 @@ import org.junit.Test;
 public class RecipientTest extends BaseStripeTest {
   @Test
   public void testList() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     RecipientCollection recipients = Recipient.list(params);

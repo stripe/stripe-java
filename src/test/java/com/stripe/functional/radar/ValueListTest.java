@@ -25,7 +25,7 @@ public class ValueListTest extends BaseStripeTest {
 
   @Test
   public void testCreate() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("alias", "alias");
     params.put("name", "name");
 
@@ -54,9 +54,9 @@ public class ValueListTest extends BaseStripeTest {
   public void testUpdate() throws StripeException {
     final ValueList valueList = getValueListFixture();
 
-    final Map<String, String> metadata = new HashMap<String, String>();
+    final Map<String, String> metadata = new HashMap<>();
     metadata.put("key", "value");
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("metadata", metadata);
 
     final ValueList updatedValueList = valueList.update(params);
@@ -71,7 +71,7 @@ public class ValueListTest extends BaseStripeTest {
 
   @Test
   public void testList() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     final ValueListCollection valueLists = ValueList.list(params);

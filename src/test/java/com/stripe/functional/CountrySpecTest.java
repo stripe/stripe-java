@@ -18,9 +18,9 @@ public class CountrySpecTest extends BaseStripeTest {
 
   @Test
   public void testRetrieve() throws StripeException {
-    final CountrySpec contrySpec = CountrySpec.retrieve(COUNTRY_SPEC_ID);
+    final CountrySpec countrySpec = CountrySpec.retrieve(COUNTRY_SPEC_ID);
 
-    assertNotNull(contrySpec);
+    assertNotNull(countrySpec);
     verifyRequest(
         ApiResource.RequestMethod.GET,
         String.format("/v1/country_specs/%s", COUNTRY_SPEC_ID)
@@ -29,7 +29,7 @@ public class CountrySpecTest extends BaseStripeTest {
 
   @Test
   public void testList() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     CountrySpecCollection countrySpecs = CountrySpec.list(params);

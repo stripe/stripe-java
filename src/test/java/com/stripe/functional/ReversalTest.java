@@ -34,7 +34,7 @@ public class ReversalTest extends BaseStripeTest {
   public void testCreate() throws StripeException {
     final Transfer transfer = getTransferFixture();
 
-    Map<String, Object> params = new HashMap<String, Object>();
+    Map<String, Object> params = new HashMap<>();
     params.put("amount", 100);
 
     final Reversal reversal = transfer.getReversals().create(params);
@@ -65,9 +65,9 @@ public class ReversalTest extends BaseStripeTest {
     final Transfer transfer = getTransferFixture();
     final Reversal reversal = getReversalFixture(transfer);
 
-    final Map<String, Object> metadata = new HashMap<String, Object>();
+    final Map<String, Object> metadata = new HashMap<>();
     metadata.put("key", "value");
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("metadata", metadata);
 
     final Reversal updatedReversal = reversal.update(params);
@@ -84,7 +84,7 @@ public class ReversalTest extends BaseStripeTest {
   public void testList() throws StripeException {
     final Transfer transfer = getTransferFixture();
 
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     final TransferReversalCollection reversals = transfer.getReversals().list(params);

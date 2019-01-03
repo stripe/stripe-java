@@ -27,7 +27,7 @@ public class AccountTest extends BaseStripeTest {
 
   @Test
   public void testCreate() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("type", "custom");
 
     final Account account = Account.create(params);
@@ -42,7 +42,7 @@ public class AccountTest extends BaseStripeTest {
 
   @Test
   public void testList() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     final AccountCollection accounts = Account.list(params);
@@ -81,9 +81,9 @@ public class AccountTest extends BaseStripeTest {
   public void testUpdate() throws StripeException {
     final Account account = getAccountFixture();
 
-    final Map<String, Object> legalEntity = new HashMap<String, Object>();
+    final Map<String, Object> legalEntity = new HashMap<>();
     legalEntity.put("type", "individual");
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("legal_entity", legalEntity);
 
     final Account updatedAccount = account.update(params);
@@ -114,7 +114,7 @@ public class AccountTest extends BaseStripeTest {
   public void testReject() throws StripeException {
     final Account account = getAccountFixture();
 
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("reason", "fraud");
 
     Account rejectedAccount = account.reject(params);
@@ -131,7 +131,7 @@ public class AccountTest extends BaseStripeTest {
   public void testAccountCreateExternalAccount() throws StripeException {
     final Account resource = Account.retrieve(ACCOUNT_ID, null);
 
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("external_account", "tok_123");
 
     final ExternalAccount ea = resource.getExternalAccounts().create(params);
@@ -148,7 +148,7 @@ public class AccountTest extends BaseStripeTest {
   public void testPersons() throws StripeException {
     final Account resource = Account.retrieve(ACCOUNT_ID, null);
 
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     final PersonCollection persons = resource.persons(params);

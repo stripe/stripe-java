@@ -27,15 +27,15 @@ public class ProductTest extends BaseStripeTest {
 
   @Test
   public void testCreate() throws StripeException {
-    final List<String> attributes = new ArrayList<String>();
+    final List<String> attributes = new ArrayList<>();
     attributes.add("attr1");
     attributes.add("attr2");
-    final Map<String, Object> packageDimensions = new HashMap<String, Object>();
+    final Map<String, Object> packageDimensions = new HashMap<>();
     packageDimensions.put("height", 2.234);
     packageDimensions.put("length", 5.10);
     packageDimensions.put("width", 6.50);
     packageDimensions.put("weight", 10);
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("active", true);
     params.put("name", "Test Name");
     params.put("description", "This is a description");
@@ -71,7 +71,7 @@ public class ProductTest extends BaseStripeTest {
   public void testUpdate() throws StripeException {
     final Product product = getProductFixture();
 
-    Map<String, Object> params = new HashMap<String, Object>();
+    Map<String, Object> params = new HashMap<>();
     params.put("name", "Updated Name");
 
     final Product updatedProduct = product.update(params);
@@ -100,7 +100,7 @@ public class ProductTest extends BaseStripeTest {
 
   @Test
   public void testList() throws StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     final ProductCollection products = Product.list(params);

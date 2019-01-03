@@ -8,7 +8,6 @@ import com.stripe.model.issuing.Transaction;
 import com.stripe.model.issuing.TransactionCollection;
 import com.stripe.net.ApiResource;
 
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -19,7 +18,7 @@ public class TransactionTest extends BaseStripeTest {
   public static final String TRANSACTION_ID = "ipi_123";
 
   @Test
-  public void testRetrieve() throws IOException, StripeException {
+  public void testRetrieve() throws StripeException {
     final Transaction transaction = Transaction.retrieve(TRANSACTION_ID);
 
     assertNotNull(transaction);
@@ -30,12 +29,12 @@ public class TransactionTest extends BaseStripeTest {
   }
 
   @Test
-  public void testUpdate() throws IOException, StripeException {
+  public void testUpdate() throws StripeException {
     final Transaction transaction = Transaction.retrieve(TRANSACTION_ID);
 
-    final Map<String, String> metadata = new HashMap<String, String>();
+    final Map<String, String> metadata = new HashMap<>();
     metadata.put("key", "value");
-    final Map<String, Object> params = new HashMap<String, Object>();
+    final Map<String, Object> params = new HashMap<>();
     params.put("metadata", metadata);
 
     final Transaction updatedTransaction = transaction.update(params);
@@ -49,8 +48,8 @@ public class TransactionTest extends BaseStripeTest {
   }
 
   @Test
-  public void testList() throws IOException, StripeException {
-    final Map<String, Object> params = new HashMap<String, Object>();
+  public void testList() throws StripeException {
+    final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
 
     TransactionCollection transactions = Transaction.list(params);
