@@ -91,7 +91,7 @@ public class Plan extends ApiResource implements MetadataStore<Plan>, HasId {
   }
 
   public void setProductObject(Product product) {
-    this.product = new ExpandableField<Product>(product.getId(), product);
+    this.product = new ExpandableField<>(product.getId(), product);
   }
   // </editor-fold>
 

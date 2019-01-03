@@ -49,7 +49,7 @@ public class Refund extends ApiResource implements MetadataStore<Charge>, HasId 
   }
 
   public void setBalanceTransactionObject(BalanceTransaction c) {
-    this.balanceTransaction = new ExpandableField<BalanceTransaction>(c.getId(), c);
+    this.balanceTransaction = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 
@@ -67,7 +67,7 @@ public class Refund extends ApiResource implements MetadataStore<Charge>, HasId 
   }
 
   public void setChargeObject(Charge c) {
-    this.charge = new ExpandableField<Charge>(c.getId(), c);
+    this.charge = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 
@@ -87,7 +87,7 @@ public class Refund extends ApiResource implements MetadataStore<Charge>, HasId 
   }
 
   public void setFailureBalanceTransactionObject(BalanceTransaction c) {
-    this.failureBalanceTransaction = new ExpandableField<BalanceTransaction>(c.getId(), c);
+    this.failureBalanceTransaction = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 
@@ -106,7 +106,7 @@ public class Refund extends ApiResource implements MetadataStore<Charge>, HasId 
   }
 
   public void setSourceTransferReversalObject(Reversal c) {
-    this.sourceTransferReversal = new ExpandableField<Reversal>(c.getId(), c);
+    this.sourceTransferReversal = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 
@@ -124,7 +124,7 @@ public class Refund extends ApiResource implements MetadataStore<Charge>, HasId 
   }
 
   public void setTransferReversalObject(Reversal c) {
-    this.transferReversal = new ExpandableField<Reversal>(c.getId(), c);
+    this.transferReversal = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 

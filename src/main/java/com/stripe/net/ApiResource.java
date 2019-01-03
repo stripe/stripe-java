@@ -236,9 +236,9 @@ public abstract class ApiResource extends StripeObject {
       ExpandableField<T> currentObject) {
     if (currentObject == null
         || (currentObject.isExpanded() && (!Objects.equals(currentObject.getId(), newId)))) {
-      return new ExpandableField<T>(newId, null);
+      return new ExpandableField<>(newId, null);
     }
 
-    return new ExpandableField<T>(newId, currentObject.getExpanded());
+    return new ExpandableField<>(newId, currentObject.getExpanded());
   }
 }

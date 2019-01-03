@@ -39,7 +39,7 @@ public class Reversal extends ApiResource implements MetadataStore<Transfer>, Ha
   }
 
   public void setBalanceTransactionObject(BalanceTransaction c) {
-    this.balanceTransaction = new ExpandableField<BalanceTransaction>(c.getId(), c);
+    this.balanceTransaction = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 
@@ -57,7 +57,7 @@ public class Reversal extends ApiResource implements MetadataStore<Transfer>, Ha
   }
 
   public void setTransferObject(Transfer c) {
-    this.transfer = new ExpandableField<Transfer>(c.getId(), c);
+    this.transfer = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 

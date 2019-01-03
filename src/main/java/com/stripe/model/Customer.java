@@ -110,7 +110,7 @@ public class Customer extends ApiResource implements MetadataStore<Customer>, Ha
   }
 
   public void setDefaultSourceObject(ExternalAccount c) {
-    this.defaultSource = new ExpandableField<ExternalAccount>(c.getId(), c);
+    this.defaultSource = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 

@@ -61,12 +61,12 @@ public abstract class StripeCollection<T extends HasId> extends StripeObject
       private Map<String, Object> requestParams;
 
   public Iterable<T> autoPagingIterable() {
-    return new PagingIterable<T>(this);
+    return new PagingIterable<>(this);
   }
 
   public Iterable<T> autoPagingIterable(Map<String, Object> params) {
     this.setRequestParams(params);
-    return new PagingIterable<T>(this);
+    return new PagingIterable<>(this);
   }
 
   /**
@@ -80,6 +80,6 @@ public abstract class StripeCollection<T extends HasId> extends StripeObject
   public Iterable<T> autoPagingIterable(Map<String, Object> params, RequestOptions options) {
     this.setRequestOptions(options);
     this.setRequestParams(params);
-    return new PagingIterable<T>(this);
+    return new PagingIterable<>(this);
   }
 }

@@ -40,8 +40,7 @@ public class Review extends ApiResource implements HasId {
   }
 
   public void setChargeObject(Charge charge) {
-    this.charge
-        = new ExpandableField<Charge>(charge.getId(), charge);
+    this.charge = new ExpandableField<>(charge.getId(), charge);
   }
   // </editor-fold>
 
@@ -59,8 +58,7 @@ public class Review extends ApiResource implements HasId {
   }
 
   public void setPaymentIntentObject(PaymentIntent paymentIntent) {
-    this.paymentIntent
-        = new ExpandableField<PaymentIntent>(paymentIntent.getId(), paymentIntent);
+    this.paymentIntent = new ExpandableField<>(paymentIntent.getId(), paymentIntent);
   }
   // </editor-fold>
 

@@ -46,7 +46,7 @@ public class Sku extends ApiResource implements HasId, MetadataStore<Sku> {
   }
 
   public void setProductObject(Product product) {
-    this.product = new ExpandableField<Product>(product.getId(), product);
+    this.product = new ExpandableField<>(product.getId(), product);
   }
   // </editor-fold>
 

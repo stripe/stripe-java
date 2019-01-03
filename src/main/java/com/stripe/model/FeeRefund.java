@@ -39,7 +39,7 @@ public class FeeRefund extends ApiResource implements MetadataStore<ApplicationF
   }
 
   public void setBalanceTransactionObject(BalanceTransaction c) {
-    this.balanceTransaction = new ExpandableField<BalanceTransaction>(c.getId(), c);
+    this.balanceTransaction = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 
@@ -57,7 +57,7 @@ public class FeeRefund extends ApiResource implements MetadataStore<ApplicationF
   }
 
   public void setFeeObject(ApplicationFee c) {
-    this.fee = new ExpandableField<ApplicationFee>(c.getId(), c);
+    this.fee = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 

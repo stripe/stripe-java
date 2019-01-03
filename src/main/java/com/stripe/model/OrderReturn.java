@@ -40,7 +40,7 @@ public class OrderReturn extends ApiResource implements HasId {
   }
 
   public void setOrderObject(Order order) {
-    this.order = new ExpandableField<Order>(order.getId(), order);
+    this.order = new ExpandableField<>(order.getId(), order);
   }
   // </editor-fold>
 
@@ -58,7 +58,7 @@ public class OrderReturn extends ApiResource implements HasId {
   }
 
   public void setRefundObject(Refund refund) {
-    this.refund = new ExpandableField<Refund>(refund.getId(), refund);
+    this.refund = new ExpandableField<>(refund.getId(), refund);
   }
   // </editor-fold>
 

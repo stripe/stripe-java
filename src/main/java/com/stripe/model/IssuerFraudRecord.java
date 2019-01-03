@@ -39,7 +39,7 @@ public class IssuerFraudRecord extends ApiResource implements HasId {
   }
 
   public void setChargeObject(Charge c) {
-    this.charge = new ExpandableField<Charge>(c.getId(), c);
+    this.charge = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 

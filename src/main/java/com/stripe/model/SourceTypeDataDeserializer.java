@@ -53,7 +53,7 @@ public class SourceTypeDataDeserializer<T extends HasSourceTypeData>
     String type = jsonObject.getAsJsonPrimitive("type").getAsString();
 
     // Populate the `typeData` from the `type` property.
-    Map<String, String> typeData = new HashMap<String, String>();
+    Map<String, String> typeData = new HashMap<>();
     populateMapFromJsonObject(typeData, jsonObject.getAsJsonObject(type));
 
     // Remove the `type` property.

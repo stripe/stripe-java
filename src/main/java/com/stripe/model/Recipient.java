@@ -45,7 +45,7 @@ public class Recipient extends ApiResource implements MetadataStore<Recipient>, 
   }
 
   public void setDefaultCardObject(Card c) {
-    this.defaultCard = new ExpandableField<Card>(c.getId(), c);
+    this.defaultCard = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 
@@ -63,7 +63,7 @@ public class Recipient extends ApiResource implements MetadataStore<Recipient>, 
   }
 
   public void setMigratedToObject(Account c) {
-    this.migratedTo = new ExpandableField<Account>(c.getId(), c);
+    this.migratedTo = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 

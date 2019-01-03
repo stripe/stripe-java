@@ -68,7 +68,7 @@ public class PaymentIntent extends ApiResource implements MetadataStore<PaymentI
   }
 
   public void setApplicationObject(Application c) {
-    this.application = new ExpandableField<Application>(c.getId(), c);
+    this.application = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 
@@ -87,7 +87,7 @@ public class PaymentIntent extends ApiResource implements MetadataStore<PaymentI
   }
 
   public void setCustomerObject(Customer c) {
-    this.customer = new ExpandableField<Customer>(c.getId(), c);
+    this.customer = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 
@@ -105,7 +105,7 @@ public class PaymentIntent extends ApiResource implements MetadataStore<PaymentI
   }
 
   public void setOnBehalfOfObject(Account c) {
-    this.onBehalfOf = new ExpandableField<Account>(c.getId(), c);
+    this.onBehalfOf = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 
@@ -123,7 +123,7 @@ public class PaymentIntent extends ApiResource implements MetadataStore<PaymentI
   }
 
   public void setReviewObject(Review c) {
-    this.review = new ExpandableField<Review>(c.getId(), c);
+    this.review = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 
@@ -141,7 +141,7 @@ public class PaymentIntent extends ApiResource implements MetadataStore<PaymentI
   }
 
   public void setSourceObject(ExternalAccount c) {
-    this.source = new ExpandableField<ExternalAccount>(c.getId(), c);
+    this.source = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 

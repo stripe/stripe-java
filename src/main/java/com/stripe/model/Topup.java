@@ -46,7 +46,7 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, HasId {
   }
 
   public void setBalanceTransactionObject(BalanceTransaction c) {
-    this.balanceTransaction = new ExpandableField<BalanceTransaction>(c.getId(), c);
+    this.balanceTransaction = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 

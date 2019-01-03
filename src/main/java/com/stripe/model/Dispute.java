@@ -76,7 +76,7 @@ public class Dispute extends ApiResource implements HasId {
   }
 
   public void setChargeObject(Charge charge) {
-    this.charge = new ExpandableField<Charge>(charge.getId(), charge);
+    this.charge = new ExpandableField<>(charge.getId(), charge);
   }
   // </editor-fold>
 

@@ -16,8 +16,7 @@ import java.util.Map;
 
 public class BalanceTransactionDeserializer implements JsonDeserializer<BalanceTransaction> {
 
-  static final Map<String, Class<? extends HasId>> sourceObjMap =
-      new HashMap<String, Class<? extends HasId>>();
+  static final Map<String, Class<? extends HasId>> sourceObjMap = new HashMap<>();
 
   static {
     sourceObjMap.put("application_fee", ApplicationFee.class);

@@ -33,7 +33,7 @@ public class OrderItem extends ApiResource {
   }
 
   public void setParentObject(HasId o) {
-    this.parent = new ExpandableField<HasId>(o.getId(), o);
+    this.parent = new ExpandableField<>(o.getId(), o);
   }
 
   @SuppressWarnings("unchecked")

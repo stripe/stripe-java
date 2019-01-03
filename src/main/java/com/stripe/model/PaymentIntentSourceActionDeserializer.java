@@ -18,7 +18,7 @@ public class PaymentIntentSourceActionDeserializer implements
     JsonDeserializer<PaymentIntentSourceAction> {
 
   static final Map<String, Class<? extends PaymentIntentSourceActionValue>> objectMap =
-      new HashMap<String, Class<? extends PaymentIntentSourceActionValue>>();
+          new HashMap<>();
 
   static {
     objectMap.put("authorize_with_url", PaymentIntentSourceActionValueAuthorizeWithUrl.class);
