@@ -26,6 +26,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Application> application;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
       ExpandableField<ApplicationFee> applicationFee;
+  Long applicationFeeAmount;
   AlternateStatementDescriptors alternateStatementDescriptors;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
       ExpandableField<BalanceTransaction> balanceTransaction;
@@ -58,6 +59,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
   String statementDescriptor;
   String status;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Transfer> transfer;
+  TransferData transferData;
   String transferGroup;
 
   // Please note that these field are for internal use only and are not typically returned
@@ -597,5 +599,12 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
       String action;
       String predicate;
     }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TransferData extends StripeObject {
+    String destination;
   }
 }
