@@ -45,6 +45,7 @@ public class Authorization extends ApiResource implements MetadataStore<Authoriz
   String status;
   List<Transaction> transactions;
   VerificationData verificationData;
+  String walletProvider;
 
   // <editor-fold desc="card">
   public String getCard() {
