@@ -1,5 +1,8 @@
 # Changelog
 
+## 7.12.0 - 2019-01-08
+* [#634](https://github.com/stripe/stripe-java/pull/634) Add support for `wallet_provider` on `Issuing.Authorization`.
+
 ## 7.11.0 - 2018-12-27
 * [#629](https://github.com/stripe/stripe-java/pull/629) Add support for `actionable` and `has_liability_shift` on `IssuerFraudRecord`
 
