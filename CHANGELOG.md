@@ -1,5 +1,8 @@
 # Changelog
 
+## 7.13.0 - 2019-01-09
+* [#626](https://github.com/stripe/stripe-java/pull/626) Add support for the `AccountLink` APIs.  
+
 ## 7.12.0 - 2019-01-08
 * [#634](https://github.com/stripe/stripe-java/pull/634) Add support for `wallet_provider` on `Issuing.Authorization`.
 
