@@ -24,7 +24,6 @@ public class StripeResponseTest extends BaseStripeTest {
   public void testResponseIncluded() throws StripeException {
     final String idempotencyKey = UUID.randomUUID().toString();
     final RequestOptions requestOptions = RequestOptions.builder()
-        .setStripeVersion(Stripe.apiVersion)
         .setIdempotencyKey(idempotencyKey)
         .build();
     final Customer customer = Customer.create(null, requestOptions);

@@ -14,6 +14,7 @@ public abstract class Stripe {
   public static final String CONNECT_API_BASE = "https://connect.stripe.com";
   public static final String UPLOAD_API_BASE = "https://files.stripe.com";
   public static final String VERSION = "7.14.0";
+  public static final String API_VERSION = "2018-11-08";
 
   public static volatile String apiKey;
   public static volatile String apiVersion;

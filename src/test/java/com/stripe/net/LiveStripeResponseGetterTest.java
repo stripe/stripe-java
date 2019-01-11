@@ -190,4 +190,18 @@ public class LiveStripeResponseGetterTest {
     assertEquals("https://myawesomeplugin.info", appMap.get("url"));
     assertEquals("pp_partner_1234", appMap.get("partner_id"));
   }
+
+  @Test
+  public void testStripeVersion() {
+    final RequestOptions optionsOnBehalfOf = new RequestOptionsBuilder()
+        .setStripeVersionOnBehalfOf("2015-05-05").build();
+    assertEquals(
+        "2015-05-05",
+        LiveStripeResponseGetter.getHeaders(optionsOnBehalfOf).get("Stripe-Version"));
+
+    final RequestOptions options = new RequestOptionsBuilder().build();
+    assertEquals(
+        Stripe.API_VERSION,
+        LiveStripeResponseGetter.getHeaders(options).get("Stripe-Version"));
+  }
 }

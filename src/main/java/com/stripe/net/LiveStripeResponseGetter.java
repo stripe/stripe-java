@@ -140,8 +140,16 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       propertyMap.put("application", ApiResource.GSON.toJson(Stripe.getAppInfo()));
     }
     headers.put("X-Stripe-Client-User-Agent", ApiResource.GSON.toJson(propertyMap));
-    if (options.getStripeVersion() != null) {
+
+    // for some API, the client is making request on behalf of other clients
+    // (like mobile for ephemeral key), so we set this value first if present.
+    if (options.getStripeVersionOnBehalfOf() != null) {
+      headers.put("Stripe-Version", options.getStripeVersionOnBehalfOf());
+    } else if (options.getStripeVersion() != null) {
       headers.put("Stripe-Version", options.getStripeVersion());
+    } else {
+      throw new IllegalStateException("Either `stripeVersion`, or `stripeVersionOnBehalfOf` "
+          + "value must be set.");
     }
     if (options.getIdempotencyKey() != null) {
       headers.put("Idempotency-Key", options.getIdempotencyKey());

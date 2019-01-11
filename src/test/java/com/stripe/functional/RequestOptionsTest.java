@@ -2,8 +2,10 @@ package com.stripe.functional;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import com.stripe.BaseStripeTest;
+import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Balance;
 import com.stripe.net.RequestOptions;
@@ -13,18 +15,18 @@ import org.junit.Ignore;
 import org.junit.Test;
 
 public class RequestOptionsTest extends BaseStripeTest {
-  @Ignore // stripe-mock doesn't send a Stripe-Version header
   @Test
   public void testApiVersion() throws StripeException {
-    final String apiVersion = "2017-05-25";
-
-    final RequestOptions options = RequestOptions.builder().setStripeVersion(apiVersion).build();
+    final RequestOptions options = RequestOptions.builder().build();
+    assertEquals(Stripe.API_VERSION, options.getStripeVersion());
+    assertNull(options.getStripeVersionOnBehalfOf());
 
     final Balance balance = Balance.retrieve(options);
     final StripeResponse response = balance.getLastResponse();
 
     assertNotNull(response);
-    assertEquals(apiVersion, response.headers().get("Stripe-Version"));
+    // stripe-mock doesn't send back a Stripe-Version header in the response.
+    // assertEquals(Stripe.API_VERSION, response.headers().get("Stripe-Version"));
   }
 
   @Test

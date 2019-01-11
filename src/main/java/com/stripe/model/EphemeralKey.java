@@ -35,8 +35,9 @@ public class EphemeralKey extends ApiResource implements HasId {
    */
   public static EphemeralKey create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    if (options.getStripeVersion() == null) {
-      throw new IllegalArgumentException("stripeVersion must be specified in RequestOptions");
+    if (options.getStripeVersionOnBehalfOf() == null) {
+      throw new IllegalArgumentException("`stripeVersionOnBehalfOf` must be specified in "
+          + "RequestOptions");
     }
 
     return request(RequestMethod.POST, classUrl(EphemeralKey.class), params, EphemeralKey.class,
