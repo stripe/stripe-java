@@ -22,7 +22,11 @@ public class Reversal extends ApiResource implements MetadataStore<Transfer>, Ha
       ExpandableField<BalanceTransaction> balanceTransaction;
   Long created;
   String currency;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
+      ExpandableField<Refund> destinationPaymentRefund;
   @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
+      ExpandableField<Refund> sourceRefund;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Transfer> transfer;
 
   // <editor-fold desc="balanceTransaction">
@@ -40,6 +44,44 @@ public class Reversal extends ApiResource implements MetadataStore<Transfer>, Ha
 
   public void setBalanceTransactionObject(BalanceTransaction c) {
     this.balanceTransaction = new ExpandableField<>(c.getId(), c);
+  }
+  // </editor-fold>
+
+  // <editor-fold desc="destinationPaymentRefund">
+  public String getDestinationPaymentRefund() {
+    return (this.destinationPaymentRefund != null) ? this.destinationPaymentRefund.getId() : null;
+  }
+
+  public void setDestinationPaymentRefund(String destinationPaymentRefundId) {
+    this.destinationPaymentRefund = setExpandableFieldId(destinationPaymentRefundId,
+        this.destinationPaymentRefund);
+  }
+
+  public Refund getDestinationPaymentRefundObject() {
+    return (this.destinationPaymentRefund != null)
+        ? this.destinationPaymentRefund.getExpanded() : null;
+  }
+
+  public void setDestinationPaymentRefundObject(Refund c) {
+    this.destinationPaymentRefund = new ExpandableField<>(c.getId(), c);
+  }
+  // </editor-fold>
+
+  // <editor-fold desc="sourceRefund">
+  public String getSourceRefund() {
+    return (this.sourceRefund != null) ? this.sourceRefund.getId() : null;
+  }
+
+  public void setSourceRefund(String sourceRefundId) {
+    this.sourceRefund = setExpandableFieldId(sourceRefundId, this.sourceRefund);
+  }
+
+  public Refund getSourceRefundObject() {
+    return (this.sourceRefund != null) ? this.sourceRefund.getExpanded() : null;
+  }
+
+  public void setSourceRefundObject(Refund c) {
+    this.sourceRefund = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 
