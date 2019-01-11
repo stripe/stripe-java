@@ -30,13 +30,14 @@ public class EphemeralKey extends ApiResource implements HasId {
    *
    * @param params request parameters
    * @param options request options. {@code stripeVersion} is required when creating ephemeral
-   *     keys.
+   *     keys. it must have non-null {@link RequestOptions#getStripeVersionOverride()}.
    * @return the new ephemeral key
    */
   public static EphemeralKey create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    if (options.getStripeVersion() == null) {
-      throw new IllegalArgumentException("stripeVersion must be specified in RequestOptions");
+    if (options.getStripeVersionOverride() == null) {
+      throw new IllegalArgumentException("`stripeVersionOverride` must be specified in "
+          + "RequestOptions with stripe version of your mobile client.");
     }
 
     return request(RequestMethod.POST, classUrl(EphemeralKey.class), params, EphemeralKey.class,
