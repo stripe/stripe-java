@@ -1,5 +1,9 @@
 # Changelog
 
+## 7.14.0 - 2019-01-11
+* [#632](https://github.com/stripe/stripe-java/pull/632) Add support for `transfer_data` and `application_fee_amount` on `Charge` and `transfer_data[destination] on `PaymentIntent`.
+* [#647](https://github.com/stripe/stripe-java/pull/647) Add support for deserializing `IssuerFraudRecord` in events.
+
 ## 7.13.0 - 2019-01-09
 * [#626](https://github.com/stripe/stripe-java/pull/626) Add support for the `AccountLink` APIs.  
 
