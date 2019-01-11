@@ -306,6 +306,14 @@ public class PaymentIntent extends ApiResource implements MetadataStore<PaymentI
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class TransferData extends StripeObject {
+    String destination;
+
+    /**
+     * The {@code amount} attribute.
+     *
+     * @deprecated This property is now deprecated and is only present for legacy reasons.
+     */
+    @Deprecated
     Long amount;
   }
 }
