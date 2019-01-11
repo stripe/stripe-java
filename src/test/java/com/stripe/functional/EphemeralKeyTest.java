@@ -1,6 +1,7 @@
 package com.stripe.functional;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.Stripe;
@@ -12,24 +13,9 @@ import com.stripe.net.RequestOptions;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 public class EphemeralKeyTest extends BaseStripeTest {
-  public static final String KEY_ID = "ephkey_123";
-
-  private String oldApiVersion;
-
-  @Before
-  public void saveOldStripeVersion() {
-    oldApiVersion = Stripe.apiVersion;
-  }
-
-  @After
-  public void restoreOldStripeVersion() {
-    Stripe.apiVersion = oldApiVersion;
-  }
 
   @Test
   public void testCreate() throws StripeException {
@@ -38,7 +24,8 @@ public class EphemeralKeyTest extends BaseStripeTest {
     final Map<String, Object> params = new HashMap<>();
     params.put("customer", "cus_123");
 
-    final RequestOptions options = RequestOptions.builder().setStripeVersion("2017-05-25").build();
+    final RequestOptions options = RequestOptions.builder()
+        .setStripeVersionOverride("2017-05-25").build();
 
     final EphemeralKey key = EphemeralKey.create(params, options);
 
@@ -53,13 +40,14 @@ public class EphemeralKeyTest extends BaseStripeTest {
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void testCreateWithoutApiVersion() throws StripeException {
+  public void testCreateWithoutApiVersionOverride() throws StripeException {
     Stripe.apiVersion = null;
 
     final Map<String, Object> params = new HashMap<>();
     params.put("customer", "cus_123");
 
     final RequestOptions options = RequestOptions.getDefault();
+    assertNull(options.getStripeVersionOverride());
 
     EphemeralKey.create(params, options);
   }
@@ -69,7 +57,8 @@ public class EphemeralKeyTest extends BaseStripeTest {
     final Map<String, Object> params = new HashMap<>();
     params.put("customer", "cus_123");
 
-    final RequestOptions options = RequestOptions.builder().setStripeVersion("2017-05-25").build();
+    final RequestOptions options = RequestOptions.builder()
+        .setStripeVersionOverride("2017-05-25").build();
 
     final EphemeralKey key = EphemeralKey.create(params, options);
 
