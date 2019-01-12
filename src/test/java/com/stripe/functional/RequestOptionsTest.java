@@ -11,7 +11,6 @@ import com.stripe.model.Balance;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponse;
 
-import org.junit.Ignore;
 import org.junit.Test;
 
 public class RequestOptionsTest extends BaseStripeTest {
@@ -42,4 +41,5 @@ public class RequestOptionsTest extends BaseStripeTest {
     assertNotNull(response);
     assertEquals(idempotencyKey, response.headers().get("Idempotency-Key"));
   }
+
 }

@@ -13,8 +13,6 @@ import com.stripe.net.RequestOptions;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.After;
-import org.junit.Before;
 import org.junit.Test;
 
 public class EphemeralKeyTest extends BaseStripeTest {
@@ -59,7 +57,8 @@ public class EphemeralKeyTest extends BaseStripeTest {
     final Map<String, Object> params = new HashMap<>();
     params.put("customer", "cus_123");
 
-    final RequestOptions options = RequestOptions.builder().setStripeVersionOnBehalfOf("2017-05-25").build();
+    final RequestOptions options = RequestOptions.builder()
+        .setStripeVersionOnBehalfOf("2017-05-25").build();
 
     final EphemeralKey key = EphemeralKey.create(params, options);
 

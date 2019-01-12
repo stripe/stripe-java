@@ -119,11 +119,13 @@ public class RequestOptions {
     return new RequestOptionsBuilder();
   }
 
+  /**
+   * Convert request options to builder, retaining invariant values for the integration.
+   * @return option builder.
+   */
   public RequestOptionsBuilder toBuilder() {
     return new RequestOptionsBuilder()
-        .setApiKey(this.apiKey)
-        .setStripeVersionOnBehalfOf(this.stripeVersionOnBehalfOf)
-        .setStripeAccount(this.stripeAccount);
+        .setApiKey(this.apiKey).setStripeAccount(this.stripeAccount);
   }
 
   public static final class RequestOptionsBuilder {
@@ -177,7 +179,6 @@ public class RequestOptions {
      * to explicit Stripe resources -- it intends to make request on behalf of others, makes
      * request with their API version, and simply passes the raw values along. Example for this is
      * {@link com.stripe.model.EphemeralKey#create(Map, RequestOptions)}.
-     *
      * Setting this value in typical scenario will result in deserialization error
      * as the model classes has schema according to the pinned {@link Stripe#API_VERSION} and not
      * the {@code stripeVersionOnBehalfOf}
