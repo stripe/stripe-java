@@ -71,6 +71,7 @@ public class PaymentIntentTest extends BaseStripeTest {
       "on_behalf_of",
       "review",
       "source",
+      "transfer_data.destination",
     };
 
     final String data = getFixture("/v1/payment_intents/pi_123", expansions);
@@ -99,5 +100,10 @@ public class PaymentIntentTest extends BaseStripeTest {
     assertNotNull(source);
     assertNotNull(source.getId());
     assertEquals(resource.getSource(), source.getId());
+
+    final Account transferDestination = resource.getTransferData().getDestinationObject();
+    assertNotNull(transferDestination);
+    assertNotNull(transferDestination.getId());
+    assertEquals(resource.getTransferData().getDestination(), transferDestination.getId());
   }
 }
