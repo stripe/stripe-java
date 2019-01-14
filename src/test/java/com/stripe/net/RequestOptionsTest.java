@@ -6,6 +6,7 @@ import static junit.framework.TestCase.assertNull;
 import org.junit.Test;
 
 public class RequestOptionsTest {
+
   @Test
   public void testPersistentValuesInToBuilder() {
     RequestOptions opts = RequestOptions.builder()
@@ -27,5 +28,18 @@ public class RequestOptionsTest {
     assertNull(optsRebuilt.getStripeVersionOnBehalfOf());
     assertEquals(0, optsRebuilt.getReadTimeout());
     assertEquals(0, optsRebuilt.getConnectTimeout());
+  }
+
+  @Test
+  public void testStripeVersionOnBehalfOf() {
+    String stripeVersionOnBehalfOf = "2015-05-05";
+
+    RequestOptions.RequestOptionsBuilder builder = RequestOptions.builder()
+        .setStripeVersionOnBehalfOf(stripeVersionOnBehalfOf);
+
+    assertEquals(stripeVersionOnBehalfOf, builder.getStripeVersionOnBehalfOf());
+
+    builder.clearStripeVersionOnBehalfOf();
+    assertNull(builder.getStripeVersionOnBehalfOf());
   }
 }

@@ -11,6 +11,8 @@ public class RequestOptions {
 
   private final String apiKey;
   private final String clientId;
+  private final String idempotencyKey;
+  private final String stripeAccount;
   /**
    * Stripe version always set at {@link Stripe#API_VERSION}.
    */
@@ -20,18 +22,18 @@ public class RequestOptions {
    * will not be deserialized into the current classes pinned to {@link Stripe#VERSION}.
    */
   private final String stripeVersionOnBehalfOf;
-  private final String idempotencyKey;
-  private final String stripeAccount;
+
   private final int connectTimeout;
   private final int readTimeout;
 
-  private RequestOptions(String apiKey, String clientId, String stripeVersionOnBehalfOf,
-      String idempotencyKey, String stripeAccount, int connectTimeout, int readTimeout) {
+  private RequestOptions(String apiKey, String clientId, String idempotencyKey,
+                         String stripeAccount, String stripeVersionOnBehalfOf,
+                         int connectTimeout, int readTimeout) {
     this.apiKey = apiKey;
     this.clientId = clientId;
-    this.stripeVersionOnBehalfOf = stripeVersionOnBehalfOf;
     this.idempotencyKey = idempotencyKey;
     this.stripeAccount = stripeAccount;
+    this.stripeVersionOnBehalfOf = stripeVersionOnBehalfOf;
     this.connectTimeout = connectTimeout;
     this.readTimeout = readTimeout;
   }
@@ -44,20 +46,20 @@ public class RequestOptions {
     return clientId;
   }
 
-  public String getStripeVersionOnBehalfOf() {
-    return stripeVersionOnBehalfOf;
-  }
-
-  public String getStripeVersion() {
-    return stripeVersion;
-  }
-
   public String getIdempotencyKey() {
     return idempotencyKey;
   }
 
   public String getStripeAccount() {
     return stripeAccount;
+  }
+
+  public String getStripeVersion() {
+    return stripeVersion;
+  }
+
+  public String getStripeVersionOnBehalfOf() {
+    return stripeVersionOnBehalfOf;
   }
 
   public int getReadTimeout() {
@@ -85,12 +87,21 @@ public class RequestOptions {
     if (clientId != null ? !clientId.equals(that.clientId) : that.clientId != null) {
       return false;
     }
-    if (idempotencyKey != null ? !idempotencyKey.equals(that.idempotencyKey)
-        : that.idempotencyKey != null) {
+    if (idempotencyKey != null ? !idempotencyKey.equals(that.idempotencyKey) :
+        that.idempotencyKey != null) {
       return false;
     }
-    if (stripeVersion != null ? !stripeVersion.equals(that.stripeVersion)
-        : that.stripeVersion != null) {
+    if (stripeAccount != null ? !stripeAccount.equals(that.stripeAccount) :
+        that.stripeAccount != null) {
+      return false;
+    }
+    if (stripeVersion != null ? !stripeVersion.equals(that.stripeVersion) :
+        that.stripeVersion != null) {
+      return false;
+    }
+    if (stripeVersionOnBehalfOf != null
+        ? stripeVersionOnBehalfOf.equals(that.stripeVersionOnBehalfOf) :
+        that.stripeVersionOnBehalfOf == null) {
       return false;
     }
 
@@ -98,18 +109,18 @@ public class RequestOptions {
       return false;
     }
 
-    return readTimeout == that.readTimeout;
+    return readTimeout != that.readTimeout;
   }
 
   @Override
   public int hashCode() {
     int result = apiKey != null ? apiKey.hashCode() : 0;
     result = 31 * result + (clientId != null ? clientId.hashCode() : 0);
+    result = 31 * result + (idempotencyKey != null ? idempotencyKey.hashCode() : 0);
+    result = 31 * result + (stripeAccount != null ? stripeAccount.hashCode() : 0);
     result = 31 * result + (stripeVersion != null ? stripeVersion.hashCode() : 0);
     result = 31 * result + (stripeVersionOnBehalfOf != null ? stripeVersionOnBehalfOf.hashCode()
         : 0);
-    result = 31 * result + (idempotencyKey != null ? idempotencyKey.hashCode() : 0);
-    result = 31 * result + (stripeAccount != null ? stripeAccount.hashCode() : 0);
     result = 31 * result + connectTimeout;
     result = 31 * result + readTimeout;
     return result;
@@ -131,9 +142,9 @@ public class RequestOptions {
   public static final class RequestOptionsBuilder {
     private String apiKey;
     private String clientId;
-    private String stripeVersionOnBehalfOf;
     private String idempotencyKey;
     private String stripeAccount;
+    private String stripeVersionOnBehalfOf;
     private int connectTimeout;
     private int readTimeout;
 
@@ -171,22 +182,6 @@ public class RequestOptions {
 
     public RequestOptionsBuilder clearClientId() {
       this.clientId = null;
-      return this;
-    }
-
-    /**
-     * Do not use this except for in API where JSON response is not fully deserialize into
-     * to explicit Stripe resources -- it intends to make request on behalf of others, makes
-     * request with their API version, and simply passes the raw values along. Example for this is
-     * {@link com.stripe.model.EphemeralKey#create(Map, RequestOptions)}.
-     * Setting this value in typical scenario will result in deserialization error
-     * as the model classes has schema according to the pinned {@link Stripe#API_VERSION} and not
-     * the {@code stripeVersionOnBehalfOf}
-     * @param stripeVersionOnBehalfOf stripe version of the client to make request on behalf of
-     * @return option builder
-     */
-    public RequestOptionsBuilder setStripeVersionOnBehalfOf(String stripeVersionOnBehalfOf) {
-      this.stripeVersionOnBehalfOf = normalizeStripeVersion(stripeVersionOnBehalfOf);
       return this;
     }
 
@@ -251,6 +246,30 @@ public class RequestOptions {
       return setStripeAccount(null);
     }
 
+    public String getStripeVersionOnBehalfOf() {
+      return this.stripeVersionOnBehalfOf;
+    }
+
+    /**
+     * Do not use this except for in API where JSON response is not fully deserialize into
+     * to explicit Stripe resources -- it intends to make request on behalf of others, makes
+     * request with their API version, and simply passes the raw values along. Example for this is
+     * {@link com.stripe.model.EphemeralKey#create(Map, RequestOptions)}.
+     * Setting this value in typical scenario will result in deserialization error
+     * as the model classes has schema according to the pinned {@link Stripe#API_VERSION} and not
+     * the {@code stripeVersionOnBehalfOf}
+     * @param stripeVersionOnBehalfOf stripe version of the client to make request on behalf of
+     * @return option builder
+     */
+    public RequestOptionsBuilder setStripeVersionOnBehalfOf(String stripeVersionOnBehalfOf) {
+      this.stripeVersionOnBehalfOf = normalizeStripeVersion(stripeVersionOnBehalfOf);
+      return this;
+    }
+
+    public RequestOptionsBuilder clearStripeVersionOnBehalfOf() {
+      return setStripeVersionOnBehalfOf(null);
+    }
+
     /**
      * Constructs a {@link RequestOptions} with the specified values.
      */
@@ -258,9 +277,9 @@ public class RequestOptions {
       return new RequestOptions(
           normalizeApiKey(this.apiKey),
           normalizeClientId(this.clientId),
-          normalizeStripeVersion(this.stripeVersionOnBehalfOf),
           normalizeIdempotencyKey(this.idempotencyKey),
           normalizeStripeAccount(this.stripeAccount),
+          normalizeStripeVersion(this.stripeVersionOnBehalfOf),
           connectTimeout,
           readTimeout);
     }
