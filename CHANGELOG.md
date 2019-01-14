@@ -1,5 +1,8 @@
 # Changelog
 
+## 7.15.0 - 2019-01-14
+* [#652](https://github.com/stripe/stripe-java/pull/652) Add support for expandable `transfer_data[destination]` on `Charge` and `PaymentIntent`.
+
 ## 7.14.0 - 2019-01-11
 * [#632](https://github.com/stripe/stripe-java/pull/632) Add support for `transfer_data` and `application_fee_amount` on `Charge` and `transfer_data[destination] on `PaymentIntent`.
 * [#647](https://github.com/stripe/stripe-java/pull/647) Add support for deserializing `IssuerFraudRecord` in events.
