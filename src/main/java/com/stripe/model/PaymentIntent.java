@@ -306,7 +306,7 @@ public class PaymentIntent extends ApiResource implements MetadataStore<PaymentI
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class TransferData extends StripeObject {
-    String destination;
+    @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Account> destination;
 
     /**
      * The {@code amount} attribute.
@@ -315,5 +315,24 @@ public class PaymentIntent extends ApiResource implements MetadataStore<PaymentI
      */
     @Deprecated
     Long amount;
+
+    // <editor-fold desc="destination">
+    public String getDestination() {
+      return (this.destination != null) ? this.destination.getId() : null;
+    }
+
+    public void setDestination(String destinationId) {
+      this.destination = setExpandableFieldId(destinationId, this.destination);
+
+    }
+
+    public Account getDestinationObject() {
+      return (this.destination != null) ? this.destination.getExpanded() : null;
+    }
+
+    public void setDestinationObject(Account c) {
+      this.destination = new ExpandableField<>(c.getId(), c);
+    }
+    // </editor-fold>
   }
 }

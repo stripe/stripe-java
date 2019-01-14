@@ -46,6 +46,7 @@ public class ChargeTest extends BaseStripeTest {
       "review",
       "source_transfer",
       "transfer",
+      "transfer_data.destination",
     };
     final String data = getFixture("/v1/charges/ch_123", expansions);
     final Charge charge = ApiResource.GSON.fromJson(data, Charge.class);
@@ -98,5 +99,10 @@ public class ChargeTest extends BaseStripeTest {
     assertNotNull(transfer);
     assertNotNull(transfer.getId());
     assertEquals(charge.getTransfer(), transfer.getId());
+
+    final Account transferDestination = charge.getTransferData().getDestinationObject();
+    assertNotNull(transferDestination);
+    assertNotNull(transferDestination.getId());
+    assertEquals(charge.getTransferData().getDestination(), transferDestination.getId());
   }
 }
