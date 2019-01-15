@@ -25,7 +25,7 @@ public class EphemeralKeyTest extends BaseStripeTest {
     params.put("customer", "cus_123");
 
     final RequestOptions options = RequestOptions.builder()
-        .setStripeVersionOnBehalfOf("2017-05-25").build();
+        .setStripeVersionOverride("2017-05-25").build();
 
     final EphemeralKey key = EphemeralKey.create(params, options);
 
@@ -40,14 +40,14 @@ public class EphemeralKeyTest extends BaseStripeTest {
   }
 
   @Test(expected = IllegalArgumentException.class)
-  public void testCreateWithoutApiVersionOnBehalf() throws StripeException {
+  public void testCreateWithoutApiVersionOverride() throws StripeException {
     Stripe.apiVersion = null;
 
     final Map<String, Object> params = new HashMap<>();
     params.put("customer", "cus_123");
 
     final RequestOptions options = RequestOptions.getDefault();
-    assertNull(options.getStripeVersionOnBehalfOf());
+    assertNull(options.getStripeVersionOverride());
 
     EphemeralKey.create(params, options);
   }
@@ -58,7 +58,7 @@ public class EphemeralKeyTest extends BaseStripeTest {
     params.put("customer", "cus_123");
 
     final RequestOptions options = RequestOptions.builder()
-        .setStripeVersionOnBehalfOf("2017-05-25").build();
+        .setStripeVersionOverride("2017-05-25").build();
 
     final EphemeralKey key = EphemeralKey.create(params, options);
 

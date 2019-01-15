@@ -193,11 +193,11 @@ public class LiveStripeResponseGetterTest {
 
   @Test
   public void testStripeVersion() {
-    final RequestOptions optionsOnBehalfOf = new RequestOptionsBuilder()
-        .setStripeVersionOnBehalfOf("2015-05-05").build();
+    final RequestOptions versionOverrideOpts = new RequestOptionsBuilder()
+        .setStripeVersionOverride("2015-05-05").build();
     assertEquals(
         "2015-05-05",
-        LiveStripeResponseGetter.getHeaders(optionsOnBehalfOf).get("Stripe-Version"));
+        LiveStripeResponseGetter.getHeaders(versionOverrideOpts).get("Stripe-Version"));
 
     final RequestOptions options = new RequestOptionsBuilder().build();
     assertEquals(

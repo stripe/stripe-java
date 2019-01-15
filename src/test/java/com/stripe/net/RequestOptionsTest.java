@@ -11,35 +11,61 @@ public class RequestOptionsTest {
   public void testPersistentValuesInToBuilder() {
     RequestOptions opts = RequestOptions.builder()
         .setApiKey("sk_foo")
-        .setStripeAccount("acct_bar")
         .setClientId("123")
         .setIdempotencyKey("123")
-        .setStripeVersionOnBehalfOf("2015-05-05")
+        .setStripeAccount("acct_bar")
+        .setStripeVersionOverride("2015-05-05")
         .setConnectTimeout(100)
         .setReadTimeout(100).build();
 
     RequestOptions optsRebuilt = opts.toBuilder().build();
 
+    // only api keys and account should persist
+    // assuming these are stable across a given stripe integration
     assertEquals("sk_foo", optsRebuilt.getApiKey());
     assertEquals("acct_bar", optsRebuilt.getStripeAccount());
 
     assertNull(optsRebuilt.getClientId());
     assertNull(optsRebuilt.getIdempotencyKey());
-    assertNull(optsRebuilt.getStripeVersionOnBehalfOf());
+    assertNull(optsRebuilt.getStripeVersionOverride());
     assertEquals(0, optsRebuilt.getReadTimeout());
     assertEquals(0, optsRebuilt.getConnectTimeout());
   }
 
   @Test
-  public void testStripeVersionOnBehalfOf() {
-    String stripeVersionOnBehalfOf = "2015-05-05";
+  public void testStripeVersionOverride() {
+    String stripeVersionOverride = "2015-05-05";
 
     RequestOptions.RequestOptionsBuilder builder = RequestOptions.builder()
-        .setStripeVersionOnBehalfOf(stripeVersionOnBehalfOf);
+        .setStripeVersionOverride(stripeVersionOverride);
 
-    assertEquals(stripeVersionOnBehalfOf, builder.getStripeVersionOnBehalfOf());
+    assertEquals(stripeVersionOverride, builder.getStripeVersionOverride());
 
-    builder.clearStripeVersionOnBehalfOf();
-    assertNull(builder.getStripeVersionOnBehalfOf());
+    builder.clearStripeVersionOverride();
+    assertNull(builder.getStripeVersionOverride());
+  }
+
+  @Test
+  public void testHashCodeEqualOverride() {
+    RequestOptions opts1 = RequestOptions.builder()
+        .setApiKey("sk_foo")
+        .setClientId("123")
+        .setIdempotencyKey("123")
+        .setStripeAccount("acct_bar")
+        .setStripeVersionOverride("2015-05-05")
+        .setConnectTimeout(100)
+        .setReadTimeout(200).build();
+
+    RequestOptions opts2 = RequestOptions.builder()
+        .setApiKey("sk_foo")
+        .setClientId("123")
+        .setIdempotencyKey("123")
+        .setStripeAccount("acct_bar")
+        .setStripeVersionOverride("2015-05-05")
+        .setConnectTimeout(100)
+        .setReadTimeout(200).build();
+
+    assertEquals(opts1, opts2);
+    assertEquals(opts1.hashCode(), opts2.hashCode());
   }
 }
