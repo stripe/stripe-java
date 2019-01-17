@@ -5,6 +5,7 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 
 import lombok.AccessLevel;
@@ -30,6 +31,7 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Charge> charge;
   Long created;
   String currency;
+  List<CustomField> customFields;
   String customer;
   Long date;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
@@ -40,6 +42,7 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
   Long dueDate;
   Long endingBalance;
   Long finalizedAt;
+  String footer;
   String hostedInvoiceUrl;
   String invoicePdf;
   InvoiceLineItemCollection lines;
@@ -404,4 +407,12 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
         instanceUrl(Invoice.class, this.getId())), params, Invoice.class, options);
   }
   // </editor-fold>
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CustomField extends StripeObject {
+    String name;
+    String value;
+  }
 }
