@@ -1,5 +1,9 @@
 # Changelog
 
+## 7.16.0 - 2019-01-17
+* [#653](https://github.com/stripe/stripe-java/pull/653) Add support for `custom_fields` and `footer` on `Invoice`.
+* [#655](https://github.com/stripe/stripe-java/pull/655) Add support for billing thresholds.
+
 ## 7.15.0 - 2019-01-14
 * [#652](https://github.com/stripe/stripe-java/pull/652) Add support for expandable `transfer_data[destination]` on `Charge` and `PaymentIntent`.
 
