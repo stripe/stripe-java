@@ -21,6 +21,7 @@ public class Subscription extends ApiResource implements MetadataStore<Subscript
   BigDecimal applicationFeePercent;
   String billing;
   Long billingCycleAnchor;
+  BillingThresholds billingThresholds;
   Boolean cancelAtPeriodEnd;
   Long canceledAt;
   Long created;
@@ -204,4 +205,12 @@ public class Subscription extends ApiResource implements MetadataStore<Subscript
         Subscription.class, options);
   }
   // </editor-fold>
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class BillingThresholds extends StripeObject {
+    Long amountGte;
+    Boolean resetBillingCycleAnchor;
+  }
 }
