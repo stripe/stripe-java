@@ -16,6 +16,7 @@ import lombok.Setter;
 public class SubscriptionItem extends ApiResource implements MetadataStore<Subscription>, HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
+  BillingThresholds billingThresholds;
   Long created;
   Boolean deleted;
   @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
@@ -153,4 +154,11 @@ public class SubscriptionItem extends ApiResource implements MetadataStore<Subsc
         SubscriptionItem.class, options);
   }
   // </editor-fold>
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class BillingThresholds extends StripeObject {
+    Long usageGte;
+  }
 }

@@ -62,6 +62,7 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
   Long subtotal;
   Long tax;
   BigDecimal taxPercent;
+  ThresholdReason thresholdReason;
   Long total;
   Long webhooksDeliveredAt;
 
@@ -414,5 +415,21 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
   public static class CustomField extends StripeObject {
     String name;
     String value;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ThresholdReason extends StripeObject {
+    Long amountGte;
+    List<ThresholdItemReason> itemReasons;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ThresholdItemReason extends StripeObject {
+    List<String> lineItemIds;
+    Long usageGte;
   }
 }
