@@ -50,6 +50,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
   Boolean paid;
   String receiptEmail;
   String receiptNumber;
+  String receiptUrl;
   Boolean refunded;
   @Getter(AccessLevel.NONE) ChargeRefundCollection refunds;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Review> review;
