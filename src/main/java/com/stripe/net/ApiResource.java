@@ -86,18 +86,13 @@ public abstract class ApiResource extends StripeObject {
         .replaceAll("([a-z0-9])([A-Z])", "$1_$2")
         .toLowerCase();
 
-    // Issuing or Sigma resources are in their own package. Until we can support adding OBJECT_NAME
-    // to all classes, we use this dirty trick to properly format the API endpoints
-    if (clazz.getName().contains("com.stripe.model.issuing.")) {
-      className = "issuing/" + className;
-    } else if (clazz.getName().contains("com.stripe.model.sigma.")) {
-      className = "sigma/" + className;
-    } else if (clazz.getName().contains("com.stripe.model.radar.")) {
-      className = "radar/" + className;
-    } else if (clazz.getName().contains("com.stripe.model.reporting.")) {
-      className = "reporting/" + className;
-    } else if (clazz.getName().contains("com.stripe.model.terminal.")) {
-      className = "terminal/" + className;
+    // Handle namespaced resources by checking if the class is in a sub-package, and if so prepend
+    // it to the class name
+    String[] parts = clazz.getPackage().getName().split("\\.");
+    assert parts.length == 3 || parts.length == 4;
+    if (parts.length == 4) {
+      // The first three parts are always "com.stripe.model", the fourth part is the sub-package
+      className = parts[3] + "/" + className;
     }
 
     // Handle special cases
