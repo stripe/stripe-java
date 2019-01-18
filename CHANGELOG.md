@@ -1,5 +1,8 @@
 # Changelog
 
+## 7.17.0 - 2019-01-17
+* [#656](https://github.com/stripe/stripe-java/pull/656) Added `receipt_url` property to `Charge`.
+
 ## 7.16.0 - 2019-01-17
 * [#653](https://github.com/stripe/stripe-java/pull/653) Add support for `custom_fields` and `footer` on `Invoice`.
 * [#655](https://github.com/stripe/stripe-java/pull/655) Add support for billing thresholds.
