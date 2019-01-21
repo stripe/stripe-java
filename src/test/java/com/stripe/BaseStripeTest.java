@@ -46,11 +46,32 @@ public class BaseStripeTest {
   private String origClientId;
   private String origUploadBase;
 
+  static {
+    // To only stop stripe-mock process after all the test classes.
+    // Alternative solution using @AfterClass will stop the stripe-mock after
+    // every test class.
+    Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
+      @Override
+      public void run() {
+        try {
+          StripeMockProcess.stop();
+        } catch (Exception e) {
+          // ignore any exception from trying to stop embedded stripe-mock
+        }
+      }
+    }));
+  }
+
   /**
    * Checks that stripe-mock is running and up-to-date.
    */
   @BeforeClass
   public static void checkStripeMock() throws Exception {
+    if (StripeMockProcess.start()) {
+      port = String.valueOf(StripeMockProcess.getPort());
+      return;
+    }
+
     port = System.getenv().get("STRIPE_MOCK_PORT");
     if (port == null) {
       port = "12111";
@@ -83,11 +104,11 @@ public class BaseStripeTest {
   }
 
   /**
-   * Activates stripe-mock by overriding the API host and putting a test key
-   * into the environment.
+   * Activates usage of stripe-mock by overriding the API host and putting a test key
+   * into the environment. This is required independent of how strip-mock is started.
    */
   @Before
-  public void setUpStripeMock() {
+  public void setUpStripeMockUsage() {
     this.origApiBase = Stripe.getApiBase();
     this.origUploadBase = Stripe.getUploadBase();
     this.origApiKey = Stripe.apiKey;
@@ -104,11 +125,11 @@ public class BaseStripeTest {
   }
 
   /**
-   * Deactivates stripe-mock by returning the API host to whatever it was
+   * Deactivates usage stripe-mock by returning the API host to whatever it was
    * before stripe-mock was activated.
    */
   @After
-  public void tearDownStripeMock() {
+  public void tearDownStripeMockUsage() {
     ApiResource.setStripeResponseGetter(new LiveStripeResponseGetter());
 
     Stripe.overrideApiBase(this.origApiBase);
