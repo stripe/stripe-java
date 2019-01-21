@@ -68,7 +68,7 @@ public class BaseStripeTest {
   @BeforeClass
   public static void checkStripeMock() throws Exception {
     if (StripeMockProcess.start()) {
-      port = String.valueOf(StripeMockProcess.getPort());
+      port = StripeMockProcess.getPort();
       return;
     }
 
@@ -105,7 +105,7 @@ public class BaseStripeTest {
 
   /**
    * Activates usage of stripe-mock by overriding the API host and putting a test key
-   * into the environment. This is required independent of how strip-mock is started.
+   * into the environment. This is required independent of how stripe-mock is started.
    */
   @Before
   public void setUpStripeMockUsage() {

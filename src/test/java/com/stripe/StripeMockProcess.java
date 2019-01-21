@@ -1,9 +1,12 @@
 package com.stripe;
 
+import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.lang.reflect.Field;
-import java.net.ServerSocket;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 import lombok.Getter;
 
 public class StripeMockProcess {
@@ -14,7 +17,7 @@ public class StripeMockProcess {
 
   private static Process process;
   @Getter
-  private static Integer port;
+  private static String port;
   private static String pid;
 
   /**
@@ -30,7 +33,7 @@ public class StripeMockProcess {
     }
 
     if (process != null && isAlive(process)) {
-      System.out.println(String.format("stripe-mock is already running, port = %d", port));
+      System.out.println(String.format("stripe-mock is already running, port = %s", port));
       return true;
     } else {
       // to reinitialize all properties
@@ -39,22 +42,16 @@ public class StripeMockProcess {
       pid = null;
     }
 
-    port = findAvailablePort();
-
     ProcessBuilder processBuilder = new ProcessBuilder()
         .command(
             "stripe-mock",
             "-http-port",
-            String.valueOf(port),
+            "0", // stripe-mock to choose an available port
             "-spec",
             getPathSpec(),
             "-fixtures",
             getPathFixture()
         );
-
-    // stripe-mock output/error will be the same as this current test parent process
-    processBuilder.redirectOutput(ProcessBuilder.Redirect.INHERIT);
-    processBuilder.redirectError(ProcessBuilder.Redirect.INHERIT);
 
     try {
       process = processBuilder.start();
@@ -69,12 +66,14 @@ public class StripeMockProcess {
 
     pid = getProcessId(process);
 
-    // not returning immediately, otherwise caller to stripe-mock will get connection refused error
-    // sleeping ensures that stripe-mock will already be listening on the port
-    Thread.sleep(1000);
-
     if (isAlive(process)) {
       System.out.println(String.format("Started stripe-mock, PID = %s", pid));
+      System.out.println("Finding port bound to stripe-mock...");
+      port = detectBoundPort(process);
+      if (port == null) {
+        System.out.println(String.format("Unable to find port for stripe-mock, PID = %s", pid));
+        System.exit(1);
+      }
     } else {
       System.out.println(
           String.format("stripe-mock terminated early, exit value = %d", process.exitValue()));
@@ -82,6 +81,26 @@ public class StripeMockProcess {
     }
 
     return true;
+  }
+
+  /**
+   * Find port bound to stripe-mock, relying on process output.
+   */
+  private static String detectBoundPort(Process process) throws IOException, InterruptedException {
+    // output of stripe-mock available as an input stream
+    BufferedReader processOutput = new BufferedReader(
+        new InputStreamReader(process.getInputStream()));
+
+    Pattern pattern = Pattern.compile("Listening for HTTP on port: (\\d+)");
+    String line;
+    while ((line = processOutput.readLine()) != null) {
+      Matcher matcher = pattern.matcher(line);
+      if (matcher.find()) {
+        return matcher.group(1);
+      }
+      Thread.sleep(100);
+    }
+    return null;
   }
 
   /**
@@ -131,18 +150,4 @@ public class StripeMockProcess {
     return new File(ROOT + FIXTURE_PATH).getAbsolutePath();
   }
 
-  private static int findAvailablePort() throws IOException {
-    ServerSocket socket = null;
-    try {
-      // create socket automatically bound to an available port
-      socket = new ServerSocket(0);
-      return socket.getLocalPort();
-    } finally {
-      // always close any created socket
-      // so strip-mock can bind to that available port
-      if (socket != null) {
-        socket.close();
-      }
-    }
-  }
 }
