@@ -85,11 +85,7 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
           eventData.setPreviousAttributes(previousAttributes);
         }
       } else if ("object".equals(key)) {
-        String type = element.getAsJsonObject().get("object").getAsString();
-        Class<? extends StripeObject> cl = EventDataClassLookup.findClass(type);
-        StripeObject object = ApiResource.GSON.fromJson(
-            entry.getValue(), cl != null ? cl : StripeRawJsonObject.class);
-        eventData.setObject(object);
+        eventData.setObject(entry.getValue());
       }
     }
     return eventData;
