@@ -57,9 +57,8 @@ public class StripeMockProcess {
       process = processBuilder.start();
     } catch (IOException e) {
       System.out.println(String.format(
-          "Error while starting stripe-mock, port = %d, fixtures = %s and %s, "
-              + "error message = %s",
-          port, getPathSpec(), getPathFixture(), e.getMessage()
+          "Error while starting stripe-mock, fixtures = %s and %s, error message = %s",
+          getPathSpec(), getPathFixture(), e.getMessage()
       ));
       System.exit(1);
     }
