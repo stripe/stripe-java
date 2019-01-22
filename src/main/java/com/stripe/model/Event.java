@@ -31,6 +31,14 @@ public class Event extends ApiResource implements HasId {
   @Deprecated
   String userId;
 
+  /**
+   * Get event data with explicit deserialization support. This object contains superset
+   * information of {@link EventData}.
+   */
+  public EventVersionedData getVersionedData() {
+    return new EventVersionedData(apiVersion, data.previousAttributes, data.object);
+  }
+
   // <editor-fold desc="list">
   /**
    * List all events.
