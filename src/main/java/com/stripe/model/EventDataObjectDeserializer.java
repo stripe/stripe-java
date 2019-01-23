@@ -4,19 +4,17 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.stripe.Stripe;
 import com.stripe.exception.EventDataDeserializationException;
-import java.util.Map;
 import lombok.EqualsAndHashCode;
-import lombok.Getter;
 
 /**
- * Event data with explicit deserialization support to handle failure due to schema incompatibility
- * between the event data and the model classes. Event data always corresponds to schema at API
- * version of its creation time, while the model classes correspond to schema at a specific API
- * version pinned to this library. Thus, only event data whose API version matches that of
- * the model classes is guaranteed to deserialize safely.
+ * Deserialization helper to get {@code StripeObject} and handle failure due to schema
+ * incompatibility between the data object and the model classes. Event data object always
+ * corresponds to schema at API version of its creation time, while the model classes correspond
+ * to schemas at a specific API version pinned to this library. Thus, only data object whose API
+ * version matches that of the model classes is guaranteed to deserialize safely.
  *
  * <p>In practice, each API version update only affects specific set of classes, so event data
- * for the unaffected classes can be serialized successfully -- even when the API versions do
+ * object for the unaffected classes can be serialized successfully -- even when the API versions do
  * not match. (Although it is considered unsafe by the API version comparison.)
  *
  * <p>Upon seeing deserialization failure from retrieving events or during receiving webhook events,
@@ -24,30 +22,30 @@ import lombok.Getter;
  * schema compatible with the current model classes. (Events in failed webhooks can be retrieved
  * again from the event API.)
  *
- * <p>An example of event data deserialization is:
+ * <p>An example of event data object deserialization is:
  *
  * <pre>
- * Event event =  Event.retrieve("evt_123");
- * EventVersionedData versionedData = event.getVersionedData();
+ * Event event = Event.retrieve("evt_123");
+ * EventDataObjectDeserializer deserializer = event.getDataObjectDeserializer();
  * StripeObject stripeObject;
- * if (versionedData.safeDeserialize()) {
- *   stripeObject = versionedData.getObject();
+ * if (deserializer.deserialize()) {
+ *   stripeObject = deserializer.getObject();
  * } else {
  *   try {
- *     stripeObject = versionedData.forceDeserialize();
+ *     stripeObject = deserializer.deserializeUnsafe();
  *   } catch (EventDataDeserializationException e) {
  *     JsonElement compatibleJson = compatibilityMapper(
- *       e.getRawJsonObject(),
- *       event.getApiVersion());
- *     stripeObject = versionedData.retryDeserialize(compatibleJson);
+ *         e.getRawJsonObject(),
+ *         event.getApiVersion());
+ *     stripeObject = deserializer.deserializeUnsafeWith(compatibleJson);
  *   }
  * }
  * </pre>
  */
 @EqualsAndHashCode(callSuper = false)
-public class EventVersionedData extends StripeObject {
+public class EventDataObjectDeserializer {
   /**
-   * API version of the event data. This value is not made accessible, because
+   * API version of the event data object. This value is not made accessible, because
    * {@link Event#getApiVersion()} should be used instead.
    */
   String apiVersion;
@@ -58,34 +56,55 @@ public class EventVersionedData extends StripeObject {
   StripeObject object;
 
   /**
-   * Original previous attributes, same as {@link EventData#getPreviousAttributes()}.
+   * Raw JSON response to be deserialized into {@code StripeObject}.
    */
-  @Getter
-  Map<String, Object> previousAttributes;
-
-  /**
-   * Raw JSON response to be deserialized into {@code StripeObject}. This is the same
-   * response in {@link EventDataDeserializationException#getRawJsonObject()}.
-   */
-  @Getter
   JsonObject rawJsonObject;
 
-  EventVersionedData(String apiVersion,
-                     Map<String, Object> previousAttributes,
-                     JsonObject rawJsonObject) {
+  EventDataObjectDeserializer(String apiVersion,
+                              JsonObject rawJsonObject) {
     this.apiVersion = apiVersion;
-    this.previousAttributes = previousAttributes;
     this.rawJsonObject = rawJsonObject;
   }
 
   /**
+   * When non-null, the deserialized {@code StripeObject} preserves high data integrity because of
+   * strong correspondence between schema of the API response and the model class (the underlying
+   * concrete class for abstract {@code StripeObject}). It is set in
+   * {@link EventDataObjectDeserializer#deserialize()}
+   * @return stripe object that fully represent its original raw JSON response.
+   */
+  public StripeObject getObject() {
+    if (object != null) {
+      return object;
+    }
+    if (deserialize()) {
+      return object;
+    } else {
+      return null;
+    }
+  }
+
+  /**
+   * Get raw JSON for the data object. This is the same data available in
+   * {@link EventDataDeserializationException#getRawJsonObject()} upon deserialization failure.
+   *
+   * <p>When this data object is known to be incompatible with model classes, consider
+   * transforming the raw JSON to a compatible schema and use
+   * {@link EventDataObjectDeserializer#deserializeUnsafeWith(JsonObject)}
+   * @return a copy of raw JSON object.
+   */
+  public JsonObject getRawJsonObject() {
+    return rawJsonObject.deepCopy();
+  }
+
+  /**
    * Safe deserialize raw JSON into {@code StripeObject}. This operation mutates the state, and the
-   * successful result can be accessed via {@link EventVersionedData#getObject()}. Matching API
-   * version between the current integration and the event is necessary to guarantee safe
-   * deserialization.
+   * successful result can be accessed via {@link EventDataObjectDeserializer#getObject()}.
+   * Matching API version between the current integration and the event is necessary to guarantee
+   * safe deserialization.
    * @return whether deserialization has been successful.
    */
-  public boolean safeDeserialize() {
+  public boolean deserialize() {
     if (!apiVersionMatch()) {
       // when version mismatch, even when deserialization is successful,
       // we cannot guarantee data correctness. Old events containing fields that should be
@@ -106,65 +125,50 @@ public class EventVersionedData extends StripeObject {
   }
 
   /**
-   * When non-null, the deserialized {@code StripeObject} preserves high data integrity because of
-   * strong correspondence between schema of the API response and the model class (the underlying
-   * concrete class for abstract {@code StripeObject}). It is set in
-   * {@link EventVersionedData#safeDeserialize()}
-   * @return stripe object that fully represent its original raw JSON response.
-   */
-  public StripeObject getObject() {
-    if (object != null) {
-      return object;
-    }
-    if (safeDeserialize()) {
-      return object;
-    } else {
-      return null;
-    }
-  }
-
-  /**
    * Force deserialize raw JSON to {@code StripeObject}. The deserialized data is not guaranteed
    * to fully represent the JSON. For example, events of new API version having fields that are not
    * captured by current model class will be lost. Similarly, events of old API version
    * having fields that should be translated into the new fields, like field rename, will be lost.
    *
-   * <p>Upon deserialization failure, {@link EventVersionedData#retryDeserialize(JsonObject)} can
+   * <p>Upon deserialization failure,
+   * {@link EventDataObjectDeserializer#deserializeUnsafeWith(JsonObject)} can
    * be used to recover after making the JSON compatible to the current model classes.
    *
    * @return Object with no guarantee on full representation of its original raw JSON response.
    * @throws EventDataDeserializationException exception that contains the message error and the
    *     raw JSON response of the {@code StripeObject} to be deserialized.
    */
-  public StripeObject forceDeserialize() throws EventDataDeserializationException {
+  public StripeObject deserializeUnsafe() throws EventDataDeserializationException {
     try {
       return EventDataDeserializer.deserializeStripeObject(rawJsonObject);
     } catch (JsonParseException e) {
       String errorMessage;
       if (!apiVersionMatch()) {
         errorMessage = String.format(
-            "Current integration has Stripe API version %s, but the event data has version %s. "
-                + "This schema mismatch can cause the deserialization failure. Please see our API "
-                + "version upgrade guide, and consider evolve the JSON to be compatible with "
-                + "current integration schema. Original error message: ",
+            "Current integration has Stripe API version %s, but the event data object has version "
+                + "%s. This schema mismatch can cause the deserialization failure. Please see "
+                + "our API version upgrade guide, and consider transforming the raw JSON data "
+                + "object to be compatible with current model class schemas and use "
+                + "`deserializeUnsafeWith`. Original error message: %s",
             getIntegrationApiVersion(), this.apiVersion, e.getMessage()
         );
       } else {
-        errorMessage = String.format("Unable to deserialize event data to respective Stripe "
+        errorMessage = String.format("Unable to deserialize event data object to respective Stripe "
             + "object. Please see the raw JSON object, and contact support@stripe.com for "
             + "assistance. Original error message: %s", e.getMessage());
       }
-      throw new EventDataDeserializationException(errorMessage, rawJsonObject);
+      throw new EventDataDeserializationException(errorMessage, rawJsonObject.deepCopy());
     }
   }
 
   /**
-   * Retry deserialization with user-supplied JSON object, whose schema now corresponds to
+   * Deserialize with user-supplied JSON object, whose schema now should correspond to
    * the current model classes. This should be used only when
-   * {@link EventVersionedData#forceDeserialize()} fails.
+   * {@link EventDataObjectDeserializer#deserializeUnsafe()} fails. Throws
+   * {@link JsonParseException} when user-supplied JSON is not compatible with model classes.
    * @return deserialized {@code StripeObject} from user-supplied compatible JSON.
    */
-  public StripeObject retryDeserialize(JsonObject schemaCompatibleJson) {
+  public StripeObject deserializeUnsafeWith(JsonObject schemaCompatibleJson) {
     return EventDataDeserializer.deserializeStripeObject(schemaCompatibleJson);
   }
 

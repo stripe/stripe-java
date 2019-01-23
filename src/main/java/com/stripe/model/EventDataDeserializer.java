@@ -96,13 +96,13 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
    * corresponds to type specified in root-level {@code object} field of the JSON input.
    *
    * <p>Note that the expected JSON input is data at the {@code object} value, as a sibling to
-   * {@code previousAttributes}, and not the discriminator field containing String type.
+   * {@code previousAttributes}, and not the discriminator field containing a string.
    * @return JSON data to be deserialized to super class {@code StripeObject}
    */
-  static StripeObject deserializeStripeObject(JsonObject eventDataJsonObject) {
-    String type = eventDataJsonObject.getAsJsonObject().get("object").getAsString();
+  static StripeObject deserializeStripeObject(JsonObject eventDataObjectJson) {
+    String type = eventDataObjectJson.getAsJsonObject().get("object").getAsString();
     Class<? extends StripeObject> cl = EventDataClassLookup.findClass(type);
     return ApiResource.GSON.fromJson(
-        eventDataJsonObject, cl != null ? cl : StripeRawJsonObject.class);
+        eventDataObjectJson, cl != null ? cl : StripeRawJsonObject.class);
   }
 }

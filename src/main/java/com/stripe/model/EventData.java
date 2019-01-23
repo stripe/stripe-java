@@ -1,6 +1,7 @@
 package com.stripe.model;
 
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParseException;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -18,10 +19,9 @@ public class EventData extends StripeObject {
   Map<String, Object> previousAttributes;
 
   /**
-   * Deprecated in favor of getting {@code StripeObject} from {@link EventVersionedData} with
-   * explicit deserialization support. Throws JsonParseException deserialization failure due to
-   * general invalid JSON, and more specifically when JSON data and model class have incompatible
-   * schemas.
+   * Deprecated in favor of getting {@code StripeObject} from {@link EventDataObjectDeserializer}.
+   * Throws {@link JsonParseException} deserialization failure due to general invalid JSON,
+   * or more specifically when JSON data and model class have incompatible schemas.
    * @return deserialized stripe object for event data.
    */
   @Deprecated
