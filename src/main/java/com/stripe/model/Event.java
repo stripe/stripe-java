@@ -32,11 +32,10 @@ public class Event extends ApiResource implements HasId {
   String userId;
 
   /**
-   * Get event data with explicit deserialization support. This object contains superset
-   * information of {@link EventData}.
+   * Get deserialization helper to handle failure due to schema incompatibility.
    */
-  public EventVersionedData getVersionedData() {
-    return new EventVersionedData(apiVersion, data.previousAttributes, data.object);
+  public EventDataObjectDeserializer getDataObjectDeserializer() {
+    return new EventDataObjectDeserializer(apiVersion, data.object);
   }
 
   // <editor-fold desc="list">
