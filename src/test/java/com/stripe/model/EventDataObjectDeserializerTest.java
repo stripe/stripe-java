@@ -14,7 +14,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
 import com.stripe.BaseStripeTest;
-import com.stripe.exception.EventDataDeserializationException;
+import com.stripe.exception.EventDataObjectDeserializationException;
 import com.stripe.net.ApiResource;
 import java.io.IOException;
 import org.junit.Rule;
@@ -86,7 +86,7 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
 
   @Test
   public void testDeserializeUnsafeDoesNotMutateState() throws IOException,
-      EventDataDeserializationException {
+      EventDataObjectDeserializationException {
 
     final String data = getCurrentEventStringFixture();
     final Event event = ApiResource.GSON.fromJson(data, Event.class);
@@ -118,12 +118,11 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
     try {
       deserializer.deserializeUnsafe();
       fail("Expect event data deserialization failure.");
-    } catch (EventDataDeserializationException e) {
+    } catch (EventDataObjectDeserializationException e) {
       JsonElement originalEventData = new JsonParser().parse(data)
           .getAsJsonObject().get("data")
           .getAsJsonObject().get("object");
-      assertEquals(originalEventData, e.getRawJsonObject());
-      assertEquals(deserializer.getRawJsonObject(), e.getRawJsonObject());
+      assertEquals(originalEventData.toString(), e.getRawJson());
       assertTrue(e.getMessage()
           .contains("Unable to deserialize event data object to respective Stripe object"));
     }
@@ -143,7 +142,7 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
     try {
       deserializer.deserializeUnsafe();
       fail("Expect event data deserialization failure.");
-    } catch (EventDataDeserializationException e) {
+    } catch (EventDataObjectDeserializationException e) {
       assertTrue(e.getMessage().contains(
           "Current integration has Stripe API version "
               + NO_MATCH_VERSION + ", but the event data object has version "
@@ -156,7 +155,7 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
     final String data = getOldEventStringFixture();
     final Event event = ApiResource.GSON.fromJson(data, Event.class);
 
-    EventDataObjectDeserializer deserializer = stubIntegrationApiVersion(
+    final EventDataObjectDeserializer deserializer = stubIntegrationApiVersion(
         event.getDataObjectDeserializer(), NO_MATCH_VERSION);
 
     assertFalse(deserializer.deserialize());
@@ -164,48 +163,33 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
     try {
       deserializer.deserializeUnsafe();
       fail("Expect event data deserialization failure.");
-    } catch (EventDataDeserializationException e) {
-      JsonObject jsonObject = e.getRawJsonObject();
+    } catch (EventDataObjectDeserializationException e) {
+      StripeObject deserialized = deserializer.deserializeUnsafeWith(
+          new EventDataObjectDeserializer.CompatibilityTransformer() {
+            @Override
+            public JsonObject transform(JsonObject rawJsonObject,
+                                        String apiVersion,
+                                        String eventType) {
 
-      // set string value to correspond to the schema
-      jsonObject.add("name", new JsonPrimitive("foo_name"));
-      verifyDeserializedStripeObject(deserializer.deserializeUnsafeWith(jsonObject));
-      // retry deserialize does not mutate the state
-      assertNull(deserializer.getObject());
+              assertNotSame(deserializer.rawJsonObject, rawJsonObject);
+              rawJsonObject.add("name", new JsonPrimitive("foo_name"));
+              return rawJsonObject;
+            }
+          });
+      assertNotNull(deserialized);
     }
   }
 
   @Test
-  public void testGetRawJsonObjectAsDeepCopy() throws Exception {
+  public void testGetRawJson() throws Exception {
     final String data = getCurrentEventStringFixture();
     final Event event = ApiResource.GSON.fromJson(data, Event.class);
 
     EventDataObjectDeserializer deserializer = event.getDataObjectDeserializer();
 
-    JsonObject rawJsonObject = deserializer.getRawJsonObject();
-    assertNotNull(rawJsonObject);
-    assertEquals(event.getData().object, rawJsonObject);
-    assertNotSame(event.getData().object, rawJsonObject);
-
-    rawJsonObject.remove("name");
-    assertNull(rawJsonObject.get("name"));
-    assertNotNull(event.getData().object.get("name"));
-  }
-
-  @Test
-  public void testFailureGetRawJsonObjectAsDeepCopy() throws IOException {
-    final String data = getOldEventStringFixture();
-    final Event event = ApiResource.GSON.fromJson(data, Event.class);
-
-    EventDataObjectDeserializer deserializer = stubIntegrationApiVersion(
-        event.getDataObjectDeserializer(), NO_MATCH_VERSION);
-
-    try {
-      deserializer.deserializeUnsafe();
-      fail("Expect event data deserialization failure.");
-    } catch (EventDataDeserializationException e) {
-      assertNotSame(event.getData().object, e.getRawJsonObject());
-    }
+    String rawJson = deserializer.getRawJson();
+    assertNotNull(rawJson);
+    assertEquals(event.getData().object.toString(), rawJson);
   }
 
   private EventDataObjectDeserializer stubIntegrationApiVersion(EventDataObjectDeserializer data,

@@ -3,7 +3,7 @@ package com.stripe.model;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.stripe.Stripe;
-import com.stripe.exception.EventDataDeserializationException;
+import com.stripe.exception.EventDataObjectDeserializationException;
 import lombok.EqualsAndHashCode;
 
 /**
@@ -18,9 +18,9 @@ import lombok.EqualsAndHashCode;
  * not match. (Although it is considered unsafe by the API version comparison.)
  *
  * <p>Upon seeing deserialization failure from retrieving events or during receiving webhook events,
- * consider defining your own custom mapper that transforms the raw JSON to one with
- * schema compatible with the current model classes. (Events in failed webhooks can be retrieved
- * again from the event API.)
+ * consider defining your own custom {@link CompatibilityTransformer} to transform the raw JSON to
+ * one with schema compatible with the current model classes. (Events in failed webhooks can be
+ * retrieved again from the event API.)
  *
  * <p>An example of event data object deserialization is:
  *
@@ -33,11 +33,9 @@ import lombok.EqualsAndHashCode;
  * } else {
  *   try {
  *     stripeObject = deserializer.deserializeUnsafe();
- *   } catch (EventDataDeserializationException e) {
- *     JsonElement compatibleJson = compatibilityMapper(
- *         e.getRawJsonObject(),
- *         event.getApiVersion());
- *     stripeObject = deserializer.deserializeUnsafeWith(compatibleJson);
+ *   } catch (EventDataObjectDeserializationException e) {
+ *     EventDataObjectDeserializer.CompatibilityTransformer transformer = myCustomerTransformer();
+ *     stripeObject = deserializer.deserializeUnsafeWith(transformer);
  *   }
  * }
  * </pre>
@@ -49,21 +47,25 @@ public class EventDataObjectDeserializer {
    * {@link Event#getApiVersion()} should be used instead.
    */
   String apiVersion;
-
   /**
-   * Deserialized {@code StripeObject} set during successful/safe deserialization.
+   * Event type to which this event data object belongs to.
    */
-  StripeObject object;
-
+  String eventType;
   /**
    * Raw JSON response to be deserialized into {@code StripeObject}.
    */
   JsonObject rawJsonObject;
+  /**
+   * Deserialized {@code StripeObject} set during successful/safe deserialization.
+   */
+  private StripeObject object;
 
   EventDataObjectDeserializer(String apiVersion,
+                              String eventType,
                               JsonObject rawJsonObject) {
     this.apiVersion = apiVersion;
     this.rawJsonObject = rawJsonObject;
+    this.eventType = eventType;
   }
 
   /**
@@ -85,16 +87,13 @@ public class EventDataObjectDeserializer {
   }
 
   /**
-   * Get raw JSON for the data object. This is the same data available in
-   * {@link EventDataDeserializationException#getRawJsonObject()} upon deserialization failure.
-   *
-   * <p>When this data object is known to be incompatible with model classes, consider
-   * transforming the raw JSON to a compatible schema and use
-   * {@link EventDataObjectDeserializer#deserializeUnsafeWith(JsonObject)}
-   * @return a copy of raw JSON object.
+   * Get raw JSON string for the data object. This is the same data available in
+   * {@link EventDataObjectDeserializationException#getRawJson()} ()} upon deserialization
+   * failure.
+   * @return JSON string the event data object.
    */
-  public JsonObject getRawJsonObject() {
-    return rawJsonObject.deepCopy();
+  public String getRawJson() {
+    return rawJsonObject.toString();
   }
 
   /**
@@ -131,14 +130,14 @@ public class EventDataObjectDeserializer {
    * having fields that should be translated into the new fields, like field rename, will be lost.
    *
    * <p>Upon deserialization failure,
-   * {@link EventDataObjectDeserializer#deserializeUnsafeWith(JsonObject)} can
+   * {@link EventDataObjectDeserializer#deserializeUnsafeWith(CompatibilityTransformer)} can
    * be used to recover after making the JSON compatible to the current model classes.
    *
    * @return Object with no guarantee on full representation of its original raw JSON response.
-   * @throws EventDataDeserializationException exception that contains the message error and the
-   *     raw JSON response of the {@code StripeObject} to be deserialized.
+   * @throws EventDataObjectDeserializationException exception that contains the message error
+   *     and the raw JSON response of the {@code StripeObject} to be deserialized.
    */
-  public StripeObject deserializeUnsafe() throws EventDataDeserializationException {
+  public StripeObject deserializeUnsafe() throws EventDataObjectDeserializationException {
     try {
       return EventDataDeserializer.deserializeStripeObject(rawJsonObject);
     } catch (JsonParseException e) {
@@ -154,22 +153,25 @@ public class EventDataObjectDeserializer {
         );
       } else {
         errorMessage = String.format("Unable to deserialize event data object to respective Stripe "
-            + "object. Please see the raw JSON object, and contact support@stripe.com for "
+            + "object. Please see the raw JSON, and contact support@stripe.com for "
             + "assistance. Original error message: %s", e.getMessage());
       }
-      throw new EventDataDeserializationException(errorMessage, rawJsonObject.deepCopy());
+      throw new EventDataObjectDeserializationException(errorMessage, rawJsonObject.toString());
     }
   }
 
   /**
-   * Deserialize with user-supplied JSON object, whose schema now should correspond to
-   * the current model classes. This should be used only when
-   * {@link EventDataObjectDeserializer#deserializeUnsafe()} fails. Throws
-   * {@link JsonParseException} when user-supplied JSON is not compatible with model classes.
+   * Deserialize JSON that has been processed by
+   * {@link CompatibilityTransformer#transform(JsonObject, String, String)} into
+   * {@code StripeObject}. This deserialization method should be used to handle events with schema
+   * incompatible to model class schema of this library. Throws
+   * {@link JsonParseException} when the transformed JSON remains incompatible with the model
+   * classes.
    * @return deserialized {@code StripeObject} from user-supplied compatible JSON.
    */
-  public StripeObject deserializeUnsafeWith(JsonObject schemaCompatibleJson) {
-    return EventDataDeserializer.deserializeStripeObject(schemaCompatibleJson);
+  public StripeObject deserializeUnsafeWith(CompatibilityTransformer transformer) {
+    return EventDataDeserializer.deserializeStripeObject(
+        transformer.transform(rawJsonObject.deepCopy(), apiVersion, eventType));
   }
 
   private boolean apiVersionMatch() {
@@ -182,5 +184,25 @@ public class EventDataObjectDeserializer {
    */
   String getIntegrationApiVersion() {
     return Stripe.apiVersion;
+  }
+
+  /**
+   * Definition of event data object JSON transformation to be compatible to API version of the
+   * library.
+   */
+  public interface CompatibilityTransformer {
+    /**
+     * Transform event data object JSON into a schema compatible with model classes of the library.
+     * When used in
+     * {@link EventDataObjectDeserializer#deserializeUnsafeWith(CompatibilityTransformer)}.
+     * the resulting JSON will be deserialized to {@code StripeObject}.
+     *
+     * @param rawJsonObject event data object JSON to be transformed. Direct mutation is
+     *     allowed.
+     * @param apiVersion API version of the event data object
+     * @param eventType event type to which this event data object belongs to.
+     * @return transformed JSON with schema compatible to the model class in this library.
+     */
+    JsonObject transform(JsonObject rawJsonObject, String apiVersion, String eventType);
   }
 }

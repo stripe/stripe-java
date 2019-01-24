@@ -35,7 +35,7 @@ public class Event extends ApiResource implements HasId {
    * Get deserialization helper to handle failure due to schema incompatibility.
    */
   public EventDataObjectDeserializer getDataObjectDeserializer() {
-    return new EventDataObjectDeserializer(apiVersion, data.object);
+    return new EventDataObjectDeserializer(apiVersion, type, data.object);
   }
 
   // <editor-fold desc="list">
