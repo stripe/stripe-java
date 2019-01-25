@@ -1,5 +1,8 @@
 # Changelog
 
+## 7.18.0 - 2019-01-25
+* [#649](https://github.com/stripe/stripe-java/pull/649) Add support for `destination_payment_refund` and `source_refund` on the `Reversal` resource.
+
 ## 7.17.0 - 2019-01-17
 * [#656](https://github.com/stripe/stripe-java/pull/656) Added `receipt_url` property to `Charge`.
 
