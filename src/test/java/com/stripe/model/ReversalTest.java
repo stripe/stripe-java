@@ -25,15 +25,30 @@ public class ReversalTest extends BaseStripeTest {
   public void testDeserializeWithExpansions() throws Exception {
     final String[] expansions = {
       "balance_transaction",
+      "destination_payment_refund",
+      "source_refund",
       "transfer",
     };
     final String data = getFixture("/v1/transfers/tr_123/reversals/trr_123", expansions);
     final Reversal reversal = ApiResource.GSON.fromJson(data, Reversal.class);
     assertNotNull(reversal);
+
     final BalanceTransaction balanceTransaction = reversal.getBalanceTransactionObject();
     assertNotNull(balanceTransaction);
     assertNotNull(balanceTransaction.getId());
     assertEquals(reversal.getBalanceTransaction(), balanceTransaction.getId());
+
+    final Refund destinationPaymentRefund = reversal.getDestinationPaymentRefundObject();
+    assertNotNull(destinationPaymentRefund);
+    assertNotNull(destinationPaymentRefund.getId());
+    assertEquals(reversal.getDestinationPaymentRefund(), destinationPaymentRefund.getId());
+
+    final Refund sourceRefund = reversal.getSourceRefundObject();
+    assertNotNull(sourceRefund);
+    assertNotNull(sourceRefund.getId());
+    assertEquals(reversal.getSourceRefund(), sourceRefund.getId());
+
+
     final Transfer transfer = reversal.getTransferObject();
     assertNotNull(transfer);
     assertNotNull(transfer.getId());
