@@ -1,0 +1,59 @@
+[
+  {
+    "object": "order_item",
+    "amount": 499,
+    "currency": "usd",
+    "description": "Cookie",
+    "parent": {
+      "id": "sku_DrKhhM22Ukwd29",
+      "object": "sku",
+      "active": true,
+      "attributes": {
+        "type": "Chocolate chip"
+      },
+      "created": 1540586170,
+      "currency": "usd",
+      "image": null,
+      "inventory": {
+        "quantity": 50,
+        "type": "finite",
+        "value": null
+      },
+      "livemode": true,
+      "metadata": {},
+      "package_dimensions": null,
+      "price": 499,
+      "product": "prod_DrKh38cloEgMsB",
+      "updated": 1540586170
+    },
+    "quantity": 1,
+    "type": "sku"
+  },
+  {
+    "object": "order_item",
+    "amount": -300,
+    "currency": "usd",
+    "description": "Custom discount for you",
+    "parent": null,
+    "quantity": null,
+    "type": "discount"
+  },
+  {
+    "object": "order_item",
+    "amount": 0,
+    "currency": "usd",
+    "description": "Taxes (included)",
+    "parent": null,
+    "quantity": null,
+    "type": "tax"
+  },
+  {
+    "object": "order_item",
+    "amount": 0,
+    "currency": "usd",
+    "description": "Free shipping",
+    "parent": "ship_fFr3eSh1pPing",
+    "quantity": null,
+    "type": "shipping"
+  }
+]
