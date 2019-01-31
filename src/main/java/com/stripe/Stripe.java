@@ -19,6 +19,7 @@ public abstract class Stripe {
   public static volatile String apiVersion;
   public static volatile String clientId;
   public static volatile String partnerId;
+  public static volatile boolean enableTelemetry = false;
 
   // Note that URLConnection reserves the value of 0 to mean "infinite
   // timeout", so we use -1 here to represent an unset value which should
