@@ -1,21 +1,22 @@
 package com.stripe.net;
 
-public class RequestMetrics {
-    public String request_id;
-    public long request_duration_ms;
+import com.google.gson.annotations.SerializedName;
 
-    public class Payload {
-        public RequestMetrics last_request_metrics;
-    }
+public class RequestMetrics {
+    @SerializedName("request_id")
+    public String requestId;
+
+    @SerializedName("request_duration_ms")
+    public long requestDurationMs;
 
     public RequestMetrics(String requestId, long requestDurationMS) {
-        this.request_id = requestId;
-        this.request_duration_ms = requestDurationMS;
+        this.requestId = requestId;
+        this.requestDurationMs = requestDurationMS;
     }
 
-    public Payload payload() {
-        Payload p = new Payload();
-        p.last_request_metrics = this;
+    public ClientTelemetryPayload payload() {
+        ClientTelemetryPayload p = new ClientTelemetryPayload();
+        p.lastRequestMetrics = this;
         return p;
     }
 }
