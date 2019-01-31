@@ -154,7 +154,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
     RequestMetrics lastRequestMetrics = prevRequestMetrics.poll();
     if (Stripe.enableTelemetry && lastRequestMetrics != null) {
-      headers.put("X-Stripe-Client-Telemetry", ApiResource.GSON.toJson(lastRequestMetrics.payload()));
+      headers.put("X-Stripe-Client-Telemetry",
+          ApiResource.GSON.toJson(lastRequestMetrics.payload()));
     }
 
     return headers;
@@ -393,7 +394,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     String charge;
   }
 
-  private static ConcurrentLinkedQueue<RequestMetrics> prevRequestMetrics = new ConcurrentLinkedQueue<RequestMetrics>();
+  private static ConcurrentLinkedQueue<RequestMetrics> prevRequestMetrics =
+      new ConcurrentLinkedQueue<RequestMetrics>();
 
   // represents OAuth API errors returned as JSON
   // handleOAuthError uses this class to raise the appropriate OAuthException

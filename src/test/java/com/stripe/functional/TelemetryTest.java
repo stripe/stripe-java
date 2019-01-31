@@ -1,15 +1,15 @@
 package com.stripe.functional;
 
+import static junit.framework.TestCase.assertEquals;
+import static junit.framework.TestCase.assertNull;
+import static junit.framework.TestCase.assertTrue;
+
 import com.stripe.BaseStripeTest;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Balance;
 import com.stripe.net.ApiResource;
 import com.stripe.net.ClientTelemetryPayload;
-import okhttp3.mockwebserver.MockResponse;
-import okhttp3.mockwebserver.MockWebServer;
-import okhttp3.mockwebserver.RecordedRequest;
-import org.junit.Test;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -17,14 +17,20 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
-import static org.junit.Assert.*;
+import okhttp3.mockwebserver.MockResponse;
+import okhttp3.mockwebserver.MockWebServer;
+import okhttp3.mockwebserver.RecordedRequest;
+import org.junit.Test;
+
 
 public class TelemetryTest extends BaseStripeTest {
   @Test
   public void testTelemetryEnabled() throws StripeException, IOException, InterruptedException {
     MockWebServer server = new MockWebServer();
-    server.enqueue(new MockResponse().setBody("{}").addHeader("Request-Id", "req_1").setBodyDelay(30, TimeUnit.MILLISECONDS));
-    server.enqueue(new MockResponse().setBody("{}").addHeader("Request-Id", "req_2").setBodyDelay(70, TimeUnit.MILLISECONDS));
+    server.enqueue(new MockResponse().setBody("{}").addHeader("Request-Id", "req_1")
+        .setBodyDelay(30, TimeUnit.MILLISECONDS));
+    server.enqueue(new MockResponse().setBody("{}").addHeader("Request-Id", "req_2")
+        .setBodyDelay(70, TimeUnit.MILLISECONDS));
     server.enqueue(new MockResponse().setBody("{}").addHeader("Request-Id", "req_3"));
     server.start();
 
@@ -38,7 +44,8 @@ public class TelemetryTest extends BaseStripeTest {
     Balance b2 = Balance.retrieve();
     RecordedRequest request2 = server.takeRequest();
     String telemetry1 = request2.getHeader("X-Stripe-Client-Telemetry");
-    ClientTelemetryPayload payload1 = ApiResource.GSON.fromJson(telemetry1, ClientTelemetryPayload.class);
+    ClientTelemetryPayload payload1 = ApiResource.GSON.fromJson(
+        telemetry1, ClientTelemetryPayload.class);
     assertEquals(payload1.lastRequestMetrics.requestId, "req_1");
     assertTrue(payload1.lastRequestMetrics.requestDurationMs > 30);
     assertTrue(payload1.lastRequestMetrics.requestDurationMs < 60);
@@ -46,7 +53,8 @@ public class TelemetryTest extends BaseStripeTest {
     Balance b3 = Balance.retrieve();
     RecordedRequest request3 = server.takeRequest();
     String telemetry2 = request3.getHeader("X-Stripe-Client-Telemetry");
-    ClientTelemetryPayload payload2 = ApiResource.GSON.fromJson(telemetry2, ClientTelemetryPayload.class);
+    ClientTelemetryPayload payload2 = ApiResource.GSON.fromJson(
+        telemetry2, ClientTelemetryPayload.class);
     assertEquals(payload2.lastRequestMetrics.requestId, "req_2");
     assertTrue(payload2.lastRequestMetrics.requestDurationMs > 70);
     assertTrue(payload2.lastRequestMetrics.requestDurationMs < 100);
@@ -81,7 +89,8 @@ public class TelemetryTest extends BaseStripeTest {
     MockWebServer server = new MockWebServer();
 
     for (int i = 0; i < 20; i++) {
-      server.enqueue(new MockResponse().setBody("{}").addHeader("Request-Id", "req_" + i));
+      server.enqueue(new MockResponse().setBody("{}")
+          .addHeader("Request-Id", "req_" + i));
     }
     server.start();
 
@@ -102,7 +111,7 @@ public class TelemetryTest extends BaseStripeTest {
     // the first 10 requests will not contain telemetry
     ArrayList<Thread> threads = new ArrayList<>();
     for (int i = 0; i < 10; i++) {
-        threads.add(new Thread(work));
+      threads.add(new Thread(work));
     }
     for (int i = 0; i < 10; i++) {
       threads.get(i).start();
@@ -134,7 +143,8 @@ public class TelemetryTest extends BaseStripeTest {
     for (int i = 0; i < 10; i++) {
       RecordedRequest request = server.takeRequest();
       String telemetry2 = request.getHeader("X-Stripe-Client-Telemetry");
-      ClientTelemetryPayload payload = ApiResource.GSON.fromJson(telemetry2, ClientTelemetryPayload.class);
+      ClientTelemetryPayload payload = ApiResource.GSON.fromJson(
+          telemetry2, ClientTelemetryPayload.class);
       seenRequestIds.add(payload.lastRequestMetrics.requestId);
     }
 
