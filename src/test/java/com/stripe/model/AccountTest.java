@@ -1,5 +1,6 @@
 package com.stripe.model;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 
 import com.stripe.BaseStripeTest;
@@ -14,5 +15,28 @@ public class AccountTest extends BaseStripeTest {
     final Account resource = ApiResource.GSON.fromJson(data, Account.class);
     assertNotNull(resource);
     assertNotNull(resource.getId());
+  }
+
+  @Test
+  public void testDeserializeWithExpansions() throws Exception {
+    final String[] expansions = {
+      "settings.branding.icon",
+      "settings.branding.logo",
+    };
+    final String data = getFixture("/v1/accounts/acct_123", expansions);
+
+    final Account resource = ApiResource.GSON.fromJson(data, Account.class);
+    assertNotNull(resource);
+    assertNotNull(resource.getId());
+
+    final File icon = resource.getSettings().getBranding().getIconObject();
+    assertNotNull(icon);
+    assertNotNull(icon.getId());
+    assertEquals(resource.getSettings().getBranding().getIcon(), icon.getId());
+
+    final File logo = resource.getSettings().getBranding().getLogoObject();
+    assertNotNull(logo);
+    assertNotNull(logo.getId());
+    assertEquals(resource.getSettings().getBranding().getLogo(), logo.getId());
   }
 }

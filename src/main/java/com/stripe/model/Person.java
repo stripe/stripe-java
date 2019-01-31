@@ -10,6 +10,7 @@ import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 
+import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -39,6 +40,7 @@ public class Person extends ApiResource implements MetadataStore<Person>, HasId 
   String maidenName;
   @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   String phone;
+  Relationship relationship;
   Requirements requirements;
   @SerializedName("ssn_last_4_provided") Boolean ssnLast4Provided;
   Verification verification;
@@ -84,8 +86,6 @@ public class Person extends ApiResource implements MetadataStore<Person>, HasId 
     return null;
   }
 
-  // TODO: Move this to a top level class instead of duplicating
-  // with the LegalEntity resource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -95,8 +95,6 @@ public class Person extends ApiResource implements MetadataStore<Person>, HasId 
     Long year;
   }
 
-  // TODO: Move this to a top level class instead of duplicating
-  // with the LegalEntity resource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -116,11 +114,25 @@ public class Person extends ApiResource implements MetadataStore<Person>, HasId 
   public static class Relationship extends StripeObject {
     Boolean accountOpener;
     Boolean director;
-    Boolean executive;
     Boolean owner;
     BigDecimal percentOwnership;
-    Boolean representative;
     String title;
+
+    /**
+     * The {@code executive} attribute.
+     * @deprecated This is not required anymore.
+     * @see <a href="https://stripe.com/docs/upgrades#2019-02-19">API version 2019-02-19</a>
+     */
+    @Deprecated
+    Boolean executive;
+
+    /**
+     * The {@code representative} attribute.
+     * @deprecated This is not required anymore.
+     * @see <a href="https://stripe.com/docs/upgrades#2019-02-19">API version 2019-02-19</a>
+     */
+    @Deprecated
+    Boolean representative;
   }
 
   @Getter
@@ -132,16 +144,175 @@ public class Person extends ApiResource implements MetadataStore<Person>, HasId 
     List<String> pastDue;
   }
 
-  // TODO: Move this to a top level class instead of duplicating
-  // with the LegalEntity resource
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Verification extends StripeObject {
     String details;
     String detailsCode;
-    String document;
-    String documentBack;
+    VerificationDocument documentSubObject;
     String status;
+
+    /**
+     * The {@code document} attribute.
+     *
+     * @return the {@code document} attribute
+     * @deprecated Prefer using the {@link #getDocumentSubObject} method instead.
+     * @see <a href="https://stripe.com/docs/upgrades#2019-02-19">API version 2019-02-19</a>
+     */
+    @Deprecated
+    @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<File> document;
+
+    /**
+     * The {@code document_back} attribute.
+     *
+     * @return the {@code document_back} attribute
+     * @deprecated Prefer using the {@link #getDocumentSubObject} method instead.
+     * @see <a href="https://stripe.com/docs/upgrades#2019-02-19">API version 2019-02-19</a>
+     */
+    @Deprecated
+    @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<File> documentBack;
+
+    // <editor-fold desc="document">
+    /**
+     * Gets the {@code document} attribute.
+     *
+     * @return the {@code document} attribute
+     * @deprecated Prefer using the {@link #getDocumentSubObject} method instead.
+     * @see <a href="https://stripe.com/docs/upgrades#2019-02-19">API version 2019-02-19</a>
+     */
+    @Deprecated
+    public String getDocument() {
+      return (this.document != null) ? this.document.getId() : null;
+    }
+
+    /**
+     * Sets the {@code document} attribute.
+     *
+     * @deprecated Prefer using the {@link #setDocumentSubObject} method instead.
+     * @see <a href="https://stripe.com/docs/upgrades#2019-02-19">API version 2019-02-19</a>
+     */
+    @Deprecated
+    public void setDocument(String id) {
+      this.document = ApiResource.setExpandableFieldId(id, this.document);
+    }
+
+    /**
+     * Gets the {@code document} attribute.
+     *
+     * @return the {@code document} attribute
+     * @deprecated Prefer using the {@link #getDocumentSubObject} method instead.
+     * @see <a href="https://stripe.com/docs/upgrades#2019-02-19">API version 2019-02-19</a>
+     */
+    @Deprecated
+    public File getDocumentObject() {
+      return (this.document != null) ? this.document.getExpanded() : null;
+    }
+
+    /**
+     * Sets the {@code document} attribute.
+     *
+     * @deprecated Prefer using the {@link #setDocumentSubObject} method instead.
+     * @see <a href="https://stripe.com/docs/upgrades#2019-02-19">API version 2019-02-19</a>
+     */
+    @Deprecated
+    public void setDocumentObject(File expandableObject) {
+      this.document = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+    }
+    // </editor-fold>
+
+    // <editor-fold desc="documentBack">
+    /**
+     * Gets the {@code document_back} attribute.
+     *
+     * @return the {@code document_back} attribute
+     * @deprecated Prefer using the {@link #getDocumentSubObject} method instead.
+     * @see <a href="https://stripe.com/docs/upgrades#2019-02-19">API version 2019-02-19</a>
+     */
+    @Deprecated
+    public String getDocumentBack() {
+      return (this.documentBack != null) ? this.documentBack.getId() : null;
+    }
+
+    /**
+     * Sets the {@code document_back} attribute.
+     *
+     * @deprecated Prefer using the {@link #setDocumentSubObject} method instead.
+     * @see <a href="https://stripe.com/docs/upgrades#2019-02-19">API version 2019-02-19</a>
+     */
+    @Deprecated
+    public void setDocumentBack(String id) {
+      this.documentBack = ApiResource.setExpandableFieldId(id, this.documentBack);
+    }
+
+    /**
+     * Gets the {@code document_back} attribute.
+     *
+     * @return the {@code document_back} attribute
+     * @deprecated Prefer using the {@link #getDocumentSubObject} method instead.
+     * @see <a href="https://stripe.com/docs/upgrades#2019-02-19">API version 2019-02-19</a>
+     */
+    @Deprecated
+    public File getDocumentBackObject() {
+      return (this.documentBack != null) ? this.documentBack.getExpanded() : null;
+    }
+
+    /**
+     * Sets the {@code document_back} attribute.
+     *
+     * @deprecated Prefer using the {@link #setDocumentSubObject} method instead.
+     * @see <a href="https://stripe.com/docs/upgrades#2019-02-19">API version 2019-02-19</a>
+     */
+    @Deprecated
+    public void setDocumentBackObject(File expandableObject) {
+      this.documentBack = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+    }
+    // </editor-fold>
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class VerificationDocument extends StripeObject {
+    @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<File> back;
+    String details;
+    String detailsCode;
+    @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<File> front;
+
+    // <editor-fold desc="back">
+    public String getBack() {
+      return (this.back != null) ? this.back.getId() : null;
+    }
+
+    public void setBack(String id) {
+      this.back = ApiResource.setExpandableFieldId(id, this.back);
+    }
+
+    public File getBackObject() {
+      return (this.back != null) ? this.back.getExpanded() : null;
+    }
+
+    public void setBackObject(File expandableObject) {
+      this.back = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+    }
+    // </editor-fold>
+
+    // <editor-fold desc="front">
+    public String getFront() {
+      return (this.front != null) ? this.front.getId() : null;
+    }
+
+    public void setFront(String id) {
+      this.front = ApiResource.setExpandableFieldId(id, this.front);
+    }
+
+    public File getFrontObject() {
+      return (this.front != null) ? this.front.getExpanded() : null;
+    }
+
+    public void setFrontObject(File expandableObject) {
+      this.front = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+    }
+    // </editor-fold>
   }
 }
