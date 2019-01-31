@@ -12,6 +12,9 @@ import okhttp3.mockwebserver.RecordedRequest;
 import org.junit.Test;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
 import static org.junit.Assert.*;
@@ -69,6 +72,74 @@ public class TelemetryTest extends BaseStripeTest {
     Balance b2 = Balance.retrieve();
     RecordedRequest request2 = server.takeRequest();
     assertNull(request2.getHeader("X-Stripe-Client-Telemetry"));
+
+    server.shutdown();
+  }
+
+  @Test
+  public void testTelemetryWorksWithConcurrentRequests() throws IOException, InterruptedException {
+    MockWebServer server = new MockWebServer();
+
+    for (int i = 0; i < 20; i++) {
+      server.enqueue(new MockResponse().setBody("{}").addHeader("Request-Id", "req_" + i));
+    }
+    server.start();
+
+    Stripe.overrideApiBase(server.url("").toString());
+    Stripe.enableTelemetry = true;
+
+    Runnable work = new Runnable() {
+      @Override
+      public void run() {
+        try {
+          Balance.retrieve();
+        } catch (StripeException e) {
+          assertNull(e);
+        }
+      }
+    };
+
+    // the first 10 requests will not contain telemetry
+    ArrayList<Thread> threads = new ArrayList<>();
+    for (int i = 0; i < 10; i++) {
+        threads.add(new Thread(work));
+    }
+    for (int i = 0; i < 10; i++) {
+      threads.get(i).start();
+    }
+    for (int i = 0; i < 10; i++) {
+      threads.get(i).join();
+    }
+    threads.clear();
+
+    // the following 10 requests will contain telemetry
+    for (int i = 0; i < 10; i++) {
+      threads.add(new Thread(work));
+    }
+    for (int i = 0; i < 10; i++) {
+      threads.get(i).start();
+    }
+    for (int i = 0; i < 10; i++) {
+      threads.get(i).join();
+    }
+    threads.clear();
+
+    Set<String> seenRequestIds = new HashSet<>();
+
+    for (int i = 0; i < 10; i++) {
+      RecordedRequest request = server.takeRequest();
+      assertNull(request.getHeader("X-Stripe-Client-Telemetry"));
+    }
+
+    for (int i = 0; i < 10; i++) {
+      RecordedRequest request = server.takeRequest();
+      String telemetry2 = request.getHeader("X-Stripe-Client-Telemetry");
+      ClientTelemetryPayload payload = ApiResource.GSON.fromJson(telemetry2, ClientTelemetryPayload.class);
+      seenRequestIds.add(payload.lastRequestMetrics.requestId);
+    }
+
+    // check that each telemetry payload corresponds to a unique request id
+    assertEquals(10, seenRequestIds.size());
 
     server.shutdown();
   }
