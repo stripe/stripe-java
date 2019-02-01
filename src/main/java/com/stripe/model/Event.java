@@ -31,6 +31,13 @@ public class Event extends ApiResource implements HasId {
   @Deprecated
   String userId;
 
+  /**
+   * Get deserialization helper to handle failure due to schema incompatibility.
+   */
+  public EventDataObjectDeserializer getDataObjectDeserializer() {
+    return new EventDataObjectDeserializer(apiVersion, type, data.object);
+  }
+
   // <editor-fold desc="list">
   /**
    * List all events.
