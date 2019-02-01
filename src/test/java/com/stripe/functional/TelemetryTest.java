@@ -110,10 +110,9 @@ public class TelemetryTest extends BaseStripeTest {
     // the first 10 requests will not contain telemetry
     ArrayList<Thread> threads = new ArrayList<>();
     for (int i = 0; i < 10; i++) {
-      threads.add(new Thread(work));
-    }
-    for (int i = 0; i < 10; i++) {
-      threads.get(i).start();
+      Thread t = new Thread(work);
+      threads.add(t);
+      t.start();
     }
     for (int i = 0; i < 10; i++) {
       threads.get(i).join();
@@ -122,15 +121,13 @@ public class TelemetryTest extends BaseStripeTest {
 
     // the following 10 requests will contain telemetry
     for (int i = 0; i < 10; i++) {
-      threads.add(new Thread(work));
-    }
-    for (int i = 0; i < 10; i++) {
-      threads.get(i).start();
+      Thread t = new Thread(work);
+      threads.add(t);
+      t.start();
     }
     for (int i = 0; i < 10; i++) {
       threads.get(i).join();
     }
-    threads.clear();
 
     Set<String> seenRequestIds = new HashSet<>();
 
@@ -141,9 +138,9 @@ public class TelemetryTest extends BaseStripeTest {
 
     for (int i = 0; i < 10; i++) {
       RecordedRequest request = server.takeRequest();
-      String telemetry2 = request.getHeader("X-Stripe-Client-Telemetry");
+      String telemetry = request.getHeader("X-Stripe-Client-Telemetry");
       ClientTelemetryPayload payload = ApiResource.GSON.fromJson(
-          telemetry2, ClientTelemetryPayload.class);
+          telemetry, ClientTelemetryPayload.class);
       seenRequestIds.add(payload.lastRequestMetrics.requestId);
     }
 
