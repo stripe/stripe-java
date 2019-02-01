@@ -30,7 +30,7 @@ public class TelemetryTest extends BaseStripeTest {
     server.enqueue(new MockResponse().setBody("{}").addHeader("Request-Id", "req_1")
         .setBodyDelay(30, TimeUnit.MILLISECONDS));
     server.enqueue(new MockResponse().setBody("{}").addHeader("Request-Id", "req_2")
-        .setBodyDelay(70, TimeUnit.MILLISECONDS));
+        .setBodyDelay(120, TimeUnit.MILLISECONDS));
     server.enqueue(new MockResponse().setBody("{}").addHeader("Request-Id", "req_3"));
     server.start();
 
@@ -48,7 +48,7 @@ public class TelemetryTest extends BaseStripeTest {
         telemetry1, ClientTelemetryPayload.class);
     assertEquals(payload1.lastRequestMetrics.requestId, "req_1");
     assertTrue(payload1.lastRequestMetrics.requestDurationMs > 30);
-    assertTrue(payload1.lastRequestMetrics.requestDurationMs < 60);
+    assertTrue(payload1.lastRequestMetrics.requestDurationMs < 130);
 
     Balance b3 = Balance.retrieve();
     RecordedRequest request3 = server.takeRequest();
@@ -56,8 +56,8 @@ public class TelemetryTest extends BaseStripeTest {
     ClientTelemetryPayload payload2 = ApiResource.GSON.fromJson(
         telemetry2, ClientTelemetryPayload.class);
     assertEquals(payload2.lastRequestMetrics.requestId, "req_2");
-    assertTrue(payload2.lastRequestMetrics.requestDurationMs > 70);
-    assertTrue(payload2.lastRequestMetrics.requestDurationMs < 100);
+    assertTrue(payload2.lastRequestMetrics.requestDurationMs > 120);
+    assertTrue(payload2.lastRequestMetrics.requestDurationMs < 220);
 
     server.shutdown();
   }
