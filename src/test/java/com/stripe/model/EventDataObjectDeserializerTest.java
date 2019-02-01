@@ -143,10 +143,8 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
       deserializer.deserializeUnsafe();
       fail("Expect event data deserialization failure.");
     } catch (EventDataObjectDeserializationException e) {
-      assertTrue(e.getMessage().contains(
-          "Current integration has Stripe API version "
-              + NO_MATCH_VERSION + ", but the event data object has version "
-              + OLD_EVENT_VERSION));
+      assertTrue(e.getMessage().contains("Stripe API version " + NO_MATCH_VERSION));
+      assertTrue(e.getMessage().contains("event data object has " + OLD_EVENT_VERSION));
     }
   }
 

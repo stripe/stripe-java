@@ -9,13 +9,14 @@ import lombok.EqualsAndHashCode;
 /**
  * Deserialization helper to get {@code StripeObject} and handle failure due to schema
  * incompatibility between the data object and the model classes. Event data object always
- * corresponds to schema at API version of its creation time, while the model classes correspond
- * to schemas at a specific API version pinned to this library. Thus, only data object whose API
- * version matches that of the model classes is guaranteed to deserialize safely.
+ * corresponds to the schema at API version of its creation time, available at
+ * {@link Event#getApiVersion()}, while the model classes correspond to schemas at a specific
+ * version pinned to this library {@link Stripe#API_VERSION}. Thus, only data object with same
+ * API versions is guaranteed to deserialize safely.
  *
- * <p>In practice, each API version update only affects specific set of classes, so event data
- * object for the unaffected classes can be serialized successfully -- even when the API versions do
- * not match. (Although it is considered unsafe by the API version comparison.)
+ * <p>In practice, each {@link Stripe#API_VERSION} update only affects specific set of classes,
+ * so event data object for the unaffected classes can still be serialized successfully -- even when
+ * the API versions do not match. (Although it is considered unsafe by the API version comparison.)
  *
  * <p>Upon seeing deserialization failure from retrieving events or during receiving webhook events,
  * consider defining your own custom {@link CompatibilityTransformer} to transform the raw JSON to
@@ -69,10 +70,11 @@ public class EventDataObjectDeserializer {
   }
 
   /**
+   * Gets data event object, in favor of the deprecated {@link EventData#getObject()}.
    * When non-null, the deserialized {@code StripeObject} preserves high data integrity because of
-   * strong correspondence between schema of the API response and the model class (the underlying
-   * concrete class for abstract {@code StripeObject}). It is set in
-   * {@link EventDataObjectDeserializer#deserialize()}
+   * correspondence between schema of the API response and the model class (the underlying
+   * concrete class for abstract {@code StripeObject}) schema. This is when
+   * {@link Event#getApiVersion()} matches {@link Stripe#API_VERSION}.
    * @return stripe object that fully represent its original raw JSON response.
    */
   public StripeObject getObject() {
@@ -99,8 +101,8 @@ public class EventDataObjectDeserializer {
   /**
    * Safe deserialize raw JSON into {@code StripeObject}. This operation mutates the state, and the
    * successful result can be accessed via {@link EventDataObjectDeserializer#getObject()}.
-   * Matching API version between the current integration and the event is necessary to guarantee
-   * safe deserialization.
+   * Matching {@link Event#getApiVersion()} and {@link Stripe#API_VERSION} is necessary condition
+   * to guarantee safe deserialization.
    * @return whether deserialization has been successful.
    */
   public boolean deserialize() {
@@ -129,9 +131,9 @@ public class EventDataObjectDeserializer {
    * captured by current model class will be lost. Similarly, events of old API version
    * having fields that should be translated into the new fields, like field rename, will be lost.
    *
-   * <p>Upon deserialization failure,
-   * {@link EventDataObjectDeserializer#deserializeUnsafeWith(CompatibilityTransformer)} can
-   * be used to recover after making the JSON compatible to the current model classes.
+   * <p>Upon deserialization failure, consider making the JSON compatible to the current model
+   * classes and recover from failure with
+   * {@link EventDataObjectDeserializer#deserializeUnsafeWith(CompatibilityTransformer)}.
    *
    * @return Object with no guarantee on full representation of its original raw JSON response.
    * @throws EventDataObjectDeserializationException exception that contains the message error
@@ -144,11 +146,13 @@ public class EventDataObjectDeserializer {
       String errorMessage;
       if (!apiVersionMatch()) {
         errorMessage = String.format(
-            "Current integration has Stripe API version %s, but the event data object has version "
-                + "%s. This schema mismatch can cause the deserialization failure. Please see "
-                + "our API version upgrade guide, and consider transforming the raw JSON data "
-                + "object to be compatible with current model class schemas and use "
-                + "`deserializeUnsafeWith`. Original error message: %s",
+            "Current `stripe-java` integration has Stripe API version %s, but the event data "
+                + "object has %s. The JSON data might have schema not compatible with the "
+                + "current model classes; such incompatibility can be the cause of "
+                + "deserialization failure. Please see our API version upgrade guide, "
+                + "and consider transforming the raw JSON data object to be compatible with "
+                + "current model class schemas and use `deserializeUnsafeWith`. "
+                + "Original error message: %s",
             getIntegrationApiVersion(), this.apiVersion, e.getMessage()
         );
       } else {
@@ -163,8 +167,8 @@ public class EventDataObjectDeserializer {
   /**
    * Deserialize JSON that has been processed by
    * {@link CompatibilityTransformer#transform(JsonObject, String, String)} into
-   * {@code StripeObject}. This deserialization method should be used to handle events with schema
-   * incompatible to model class schema of this library. Throws
+   * {@code StripeObject}. This deserialization method should only be used to handle events with
+   * schema incompatible to model class schema of this library. Throws
    * {@link JsonParseException} when the transformed JSON remains incompatible with the model
    * classes.
    * @return deserialized {@code StripeObject} from user-supplied compatible JSON.
@@ -175,15 +179,14 @@ public class EventDataObjectDeserializer {
   }
 
   private boolean apiVersionMatch() {
-    return (this.apiVersion != null)
-        && (this.apiVersion.equals(getIntegrationApiVersion()));
+    return getIntegrationApiVersion().equals(this.apiVersion);
   }
 
   /**
    * Internal method to allow for testing with different Stripe version.
    */
   String getIntegrationApiVersion() {
-    return Stripe.apiVersion;
+    return Stripe.API_VERSION;
   }
 
   /**

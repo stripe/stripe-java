@@ -1,12 +1,14 @@
 package com.stripe.exception;
 
+import com.stripe.model.EventDataObjectDeserializer;
 import lombok.Getter;
 
 public class EventDataObjectDeserializationException extends StripeException {
   private static final long serialVersionUID = 2L;
 
   /**
-   * JSON that fails deserialization to {@code StripeObject}.
+   * JSON intended as event data object {@link EventDataObjectDeserializer#getObject()} that
+   * fails deserialization.
    */
   @Getter
   private final String rawJson;
