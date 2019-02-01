@@ -48,7 +48,6 @@ public class TelemetryTest extends BaseStripeTest {
         telemetry1, ClientTelemetryPayload.class);
     assertEquals(payload1.lastRequestMetrics.requestId, "req_1");
     assertTrue(payload1.lastRequestMetrics.requestDurationMs > 30);
-    assertTrue(payload1.lastRequestMetrics.requestDurationMs < 130);
 
     Balance b3 = Balance.retrieve();
     RecordedRequest request3 = server.takeRequest();
@@ -57,7 +56,6 @@ public class TelemetryTest extends BaseStripeTest {
         telemetry2, ClientTelemetryPayload.class);
     assertEquals(payload2.lastRequestMetrics.requestId, "req_2");
     assertTrue(payload2.lastRequestMetrics.requestDurationMs > 120);
-    assertTrue(payload2.lastRequestMetrics.requestDurationMs < 220);
 
     server.shutdown();
   }
