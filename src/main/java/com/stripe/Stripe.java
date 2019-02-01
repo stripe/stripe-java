@@ -17,7 +17,6 @@ public abstract class Stripe {
   public static final String VERSION = "7.29.0";
 
   public static volatile String apiKey;
-  public static volatile String apiVersion;
   public static volatile String clientId;
   public static volatile boolean enableTelemetry = false;
   public static volatile String partnerId;
