@@ -19,8 +19,6 @@ public class EphemeralKeyTest extends BaseStripeTest {
 
   @Test
   public void testCreate() throws StripeException {
-    Stripe.apiVersion = "2016-06-05";
-
     final Map<String, Object> params = new HashMap<>();
     params.put("customer", "cus_123");
 
@@ -41,8 +39,6 @@ public class EphemeralKeyTest extends BaseStripeTest {
 
   @Test(expected = IllegalArgumentException.class)
   public void testCreateWithoutApiVersionOverride() throws StripeException {
-    Stripe.apiVersion = null;
-
     final Map<String, Object> params = new HashMap<>();
     params.put("customer", "cus_123");
 
