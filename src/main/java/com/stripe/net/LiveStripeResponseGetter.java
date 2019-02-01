@@ -474,7 +474,6 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     if (options == null) {
       options = RequestOptions.getDefault();
     }
-
     String originalDnsCacheTtl = null;
     Boolean allowedToSetTtl = true;
 
