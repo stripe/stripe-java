@@ -35,7 +35,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
    */
   String currency;
 
-  /** ID of the default source attached to this customer. */
+  /** ID of the default payment source for the customer. */
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<PaymentSource> defaultSource;
@@ -181,13 +181,12 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
    * Updates the specified customer by setting the values of the parameters passed. Any parameters
    * not provided will be left unchanged. For example, if you pass the <strong>source</strong>
    * parameter, that becomes the customer’s active source (e.g., a card) to be used for all charges
-   * in the future. When you update a customer to a new valid source: for each of the customer’s
-   * current subscriptions, if the subscription bills automatically and is in the <code>past_due
-   * </code> state, then the latest unpaid, unclosed invoice for the subscription will be retried
-   * (note that this retry will not count as an automatic retry, and will not affect the next
-   * regularly scheduled payment for the invoice). (Note also that no invoices pertaining to
-   * subscriptions in the <code>unpaid</code> state, or invoices pertaining to canceled
-   * subscriptions, will be retried as a result of updating the customer’s source.)
+   * in the future. When you update a customer to a new valid card source by passing the
+   * <strong>source</strong> parameter: for each of the customer’s current subscriptions, if the
+   * subscription bills automatically and is in the <code>past_due</code> state, then the latest
+   * unclosed invoice for the subscription will be retried. This retry will not count as an
+   * automatic retry, and will not affect the next regularly scheduled payment for the invoice.
+   * Changing the <strong>default_source</strong> for a customer will not trigger this behavior.
    *
    * <p>This request accepts mostly the same arguments as the customer creation call.
    */
@@ -199,13 +198,12 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
    * Updates the specified customer by setting the values of the parameters passed. Any parameters
    * not provided will be left unchanged. For example, if you pass the <strong>source</strong>
    * parameter, that becomes the customer’s active source (e.g., a card) to be used for all charges
-   * in the future. When you update a customer to a new valid source: for each of the customer’s
-   * current subscriptions, if the subscription bills automatically and is in the <code>past_due
-   * </code> state, then the latest unpaid, unclosed invoice for the subscription will be retried
-   * (note that this retry will not count as an automatic retry, and will not affect the next
-   * regularly scheduled payment for the invoice). (Note also that no invoices pertaining to
-   * subscriptions in the <code>unpaid</code> state, or invoices pertaining to canceled
-   * subscriptions, will be retried as a result of updating the customer’s source.)
+   * in the future. When you update a customer to a new valid card source by passing the
+   * <strong>source</strong> parameter: for each of the customer’s current subscriptions, if the
+   * subscription bills automatically and is in the <code>past_due</code> state, then the latest
+   * unclosed invoice for the subscription will be retried. This retry will not count as an
+   * automatic retry, and will not affect the next regularly scheduled payment for the invoice.
+   * Changing the <strong>default_source</strong> for a customer will not trigger this behavior.
    *
    * <p>This request accepts mostly the same arguments as the customer creation call.
    */
