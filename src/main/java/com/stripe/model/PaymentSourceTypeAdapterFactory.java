@@ -37,8 +37,6 @@ public class PaymentSourceTypeAdapterFactory implements TypeAdapterFactory {
     final TypeAdapter<BitcoinReceiver> bitcoinReceiverAdapter =
         gson.getDelegateAdapter(this, TypeToken.get(BitcoinReceiver.class));
     final TypeAdapter<Card> cardAdapter = gson.getDelegateAdapter(this, TypeToken.get(Card.class));
-    final TypeAdapter<PaymentMethod> paymentMethodAdapter =
-        gson.getDelegateAdapter(this, TypeToken.get(PaymentMethod.class));
     final TypeAdapter<Source> sourceAdapter =
         gson.getDelegateAdapter(this, TypeToken.get(Source.class));
 
@@ -64,8 +62,6 @@ public class PaymentSourceTypeAdapterFactory implements TypeAdapterFactory {
               objectResult = bitcoinReceiverAdapter.fromJsonTree(object);
             } else if (objectType.equals("card")) {
               objectResult = cardAdapter.fromJsonTree(object);
-            } else if (objectType.equals("payment_method")) {
-              objectResult = paymentMethodAdapter.fromJsonTree(object);
             } else if (objectType.equals("source")) {
               objectResult = sourceAdapter.fromJsonTree(object);
             } else {
