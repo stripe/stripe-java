@@ -74,7 +74,6 @@ final class EventDataClassLookup {
     classLookup.put("order_item", OrderItem.class);
     classLookup.put("order_return", OrderReturn.class);
     classLookup.put("payment_intent", PaymentIntent.class);
-    classLookup.put("payment_method", PaymentMethod.class);
     classLookup.put("payout", Payout.class);
     classLookup.put("person", Person.class);
     classLookup.put("plan", Plan.class);
@@ -82,7 +81,6 @@ final class EventDataClassLookup {
     classLookup.put("radar.value_list", ValueList.class);
     classLookup.put("radar.value_list_item", ValueListItem.class);
     classLookup.put("recipient", Recipient.class);
-    classLookup.put("recipient_transfer", RecipientTransfer.class);
     classLookup.put("refund", Refund.class);
     classLookup.put("reporting.report_run", ReportRun.class);
     classLookup.put("reporting.report_type", ReportType.class);
