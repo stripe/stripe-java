@@ -9,7 +9,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class BitcoinTransaction extends StripeObject implements BalanceTransactionSource {
+public class BitcoinTransaction extends StripeObject implements HasId {
   /** The amount of `currency` that the transaction was converted to in real-time. */
   Long amount;
 
