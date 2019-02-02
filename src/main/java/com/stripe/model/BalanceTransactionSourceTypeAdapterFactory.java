@@ -32,8 +32,6 @@ public class BalanceTransactionSourceTypeAdapterFactory implements TypeAdapterFa
         gson.getDelegateAdapter(this, TypeToken.get(BalanceTransactionSource.class));
     final TypeAdapter<ApplicationFee> applicationFeeAdapter =
         gson.getDelegateAdapter(this, TypeToken.get(ApplicationFee.class));
-    final TypeAdapter<BitcoinTransaction> bitcoinTransactionAdapter =
-        gson.getDelegateAdapter(this, TypeToken.get(BitcoinTransaction.class));
     final TypeAdapter<Charge> chargeAdapter =
         gson.getDelegateAdapter(this, TypeToken.get(Charge.class));
     final TypeAdapter<ConnectCollectionTransfer> connectCollectionTransferAdapter =
@@ -48,8 +46,6 @@ public class BalanceTransactionSourceTypeAdapterFactory implements TypeAdapterFa
         gson.getDelegateAdapter(this, TypeToken.get(Transaction.class));
     final TypeAdapter<Payout> payoutAdapter =
         gson.getDelegateAdapter(this, TypeToken.get(Payout.class));
-    final TypeAdapter<RecipientTransfer> recipientTransferAdapter =
-        gson.getDelegateAdapter(this, TypeToken.get(RecipientTransfer.class));
     final TypeAdapter<Refund> refundAdapter =
         gson.getDelegateAdapter(this, TypeToken.get(Refund.class));
     final TypeAdapter<ReserveTransaction> reserveTransactionAdapter =
@@ -75,8 +71,6 @@ public class BalanceTransactionSourceTypeAdapterFactory implements TypeAdapterFa
             String objectType = object.getAsJsonPrimitive(discriminator).getAsString();
             if (objectType.equals("application_fee")) {
               objectResult = applicationFeeAdapter.fromJsonTree(object);
-            } else if (objectType.equals("bitcoin_transaction")) {
-              objectResult = bitcoinTransactionAdapter.fromJsonTree(object);
             } else if (objectType.equals("charge")) {
               objectResult = chargeAdapter.fromJsonTree(object);
             } else if (objectType.equals("connect_collection_transfer")) {
@@ -91,8 +85,6 @@ public class BalanceTransactionSourceTypeAdapterFactory implements TypeAdapterFa
               objectResult = transactionAdapter.fromJsonTree(object);
             } else if (objectType.equals("payout")) {
               objectResult = payoutAdapter.fromJsonTree(object);
-            } else if (objectType.equals("recipient_transfer")) {
-              objectResult = recipientTransferAdapter.fromJsonTree(object);
             } else if (objectType.equals("refund")) {
               objectResult = refundAdapter.fromJsonTree(object);
             } else if (objectType.equals("reserve_transaction")) {
