@@ -25,8 +25,8 @@
  
 ## API version upgrade with `stripe-java`
 
-According to the [recommendations](https://stripe.com/docs/upgrades#how-can-i-upgrade-my-api) for
-Stripe API version upgrade, there are two main impact:
+According to the official [recommendations](https://stripe.com/docs/upgrades#how-can-i-upgrade-my-api)
+ for Stripe API version upgrade, there are two main impact:
  1) Request and response for normal API calls 
  2) Event response structure
 
@@ -95,7 +95,7 @@ Parameter validation is another common change. For example,
   
 Parameter can also take a new default value. Your old code may not explicitly pass the parameter 
 value, but after version upgrade when default value kicks in, your same API call now has a 
-different business implications. For example, in [version change](https://stripe.com/docs/upgrades#2018-05-21), 
+different business implication. For example, in [version change](https://stripe.com/docs/upgrades#2018-05-21), 
 `Subscription#update` will take `trial_from_plan` as true if it is not explicitly specified.
 
 #### API errors
@@ -131,15 +131,16 @@ Please consult the API change log for more details. A complementary recommendati
   
 ### 2. Event response structure
 
-The upgrade guide recommends configuring one test webhook to the latest API version. This 
-allows you to test handling event and its event data object rendered at the upgraded API 
-version. In the latest `stripe-java`, you will find an API version defined at its static value 
+The official upgrade [guide](https://stripe.com/docs/upgrades#how-can-i-upgrade-my-api) 
+recommends  configuring one test webhook to the latest API version. This allows you to test 
+handling event and its event data object rendered at the upgraded API version. In the latest 
+`stripe-java`, you will find an API version defined at its static value 
 `Stripe#API_VERSION` matching the latest API version you can configure your test webhook to.
  
 #### Motivation for handling event compatibility
  
-The guide also recommends the need for compatibility in handling events of both your current and 
-new API versions. This is because for a short period of time after you upgrade, there will be 
+The official guide also recommends the need for compatibility in handling events of both your 
+current and new API versions. This is because for a short period of time after you upgrade, there will be 
 in-flight events of old API version that you should still handle. Additionally, in the case of API 
 version roll-back, you want to smoothly revert by simply reconfigure the dashboard setting 
 without the need to re-deploy your code.
@@ -147,9 +148,9 @@ without the need to re-deploy your code.
 Actually, backward compatibility to read old events is needed in general for 
 API request to read events going back to 30 days in `Event#retrieve`. 
 One approach is having Java model classes that can deserialize events of both versions. 
-This is what `stripe-java` version 7 and below attempts to do. In the event of data type conflict
- (same field name but JSON has unexpected data type), custom deserialization and augmented fields
-  are introduced. 
+This is what `stripe-java` version 7 and below attempts to do. In additiona, when there is data 
+type conflict (same field name but JSON has unexpected data type), custom deserialization and 
+augmented fields are introduced. Version 8, however, will take a different approach. 
 
 #### Illustration of schema incompatibility failure
 
