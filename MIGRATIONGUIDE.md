@@ -57,7 +57,7 @@ implications on using the same enum values. For example, in [version change](htt
 `Account#Verification#getDisabledReason`; if you use `other` to determine if the disabled account is
  under review, you should check for value `under_review` instead.
  
-```
+```java
 Account account = Account.retrieve();
 // need to change "other" to "under_review" instead
 if (account.getVerification().disabledReason.equals("other")) {
@@ -77,7 +77,7 @@ its meaning as the subscription ID.
 #### API requests 
  
 On the API requests, because this client library takes an untyped map as a parameter request to an 
-API method, eg. `Source create(Map<String, Object> params)`, removed parameters due to API 
+API method, eg. `Source#create(Map<String, Object> params)`, removed parameters due to API 
 upgrade will not be caught statically. For example, before [version change](https://stripe.com/docs/upgrades#2018-08-23)
 `Subscription#cancel` allows deferred cancellation with `at_period_end` request parameter, but 
 now removed in favor of `Subscription#update` with `cancel_at_period_end` parameter. Similarly, 
@@ -93,7 +93,7 @@ Parameter validation is another common change. For example,
   the validation is removed and SKUs returned can have duplicate attributes. Your code 
   depending on SKU attribute uniqueness has to be updated. 
   
-Parameter can also take a new default value. Your old code may not explicitly pass the parameter 
+Parameters can also take new default values. Your old code may not explicitly pass the parameter 
 value, but after version upgrade when default value kicks in, your same API call now has a 
 different business implication. For example, in [version change](https://stripe.com/docs/upgrades#2018-05-21), 
 `Subscription#update` will take `trial_from_plan` as true if it is not explicitly specified.
@@ -148,7 +148,7 @@ without the need to re-deploy your code.
 Actually, backward compatibility to read old events is needed in general for 
 API request to read events going back to 30 days in `Event#retrieve`. 
 One approach is having Java model classes that can deserialize events of both versions. 
-This is what `stripe-java` version 7 and below attempts to do. In additiona, when there is data 
+This is what `stripe-java` version 7 and below attempts to do. In addition, when there is data 
 type conflict (same field name but JSON has unexpected data type), custom deserialization and 
 augmented fields are introduced. Version 8, however, will take a different approach. 
 
@@ -163,7 +163,7 @@ where the `lines` has become a common paginated collection structure with fields
 `data`, and `total_count`. Suppose the original `lines` schema is simply an array of invoice items.
  Such data type mismatch cannot be deserialized into recent Java model class, and
  `Event.retrieve("evt_123")` will simply fail.
-```
+```json5
 {
   "id": "evt_123",
   "object": "event",
@@ -207,7 +207,7 @@ lossy results, or failing with a checked exception. In addition, it provides a r
 method to handle incompatible JSON when necessary. This proxy object is introduced in favor of the 
 now deprecated method `EventData#getObject`.
 
-```
+```java
 Event event = Event.retrieve("evt_123");
 // deprecated method
 EventData eventData = event.getData();
@@ -223,11 +223,11 @@ EventDataObjectDeserializer dataObjectDeserializer = event.getDataObjectDeserial
 #### Best-attempt field getter method
 
 In practice, you may only use on a few fields from the event. When those fields are fully 
-compatible with the current schema, you should be able to access thm, not because of a 
+compatible with the current schema, you should be able to access them, not because of a 
 few legacy fields are failing the entire deserialization. The snippet below illustrates the 
 first use case of best-attempt field getter. Suppose you want to get an invoice ID and status 
 values only:
-```
+```java
 String invoiceId = null;
 String status = null;
 if (dataObjectDeserializer.deserialize()) {
@@ -276,7 +276,7 @@ In the example below, we want to handle the same JSON invoice event created when
 API version before `2012-10-26`. We define a `invoiceTransformer` as series of transformation 
 required on invoice object starting from the earliest API version (that the event was created at). 
 
-```
+```java
 EventDataObjectDeserializer dataObjectDeserializer = event.getDataObjectDeserializer();
 EventDataObjectDeserializer.CompatibilityTransformer invoiceTransformer =
     new com.stripe.model.EventDataObjectDeserializer.CompatibilityTransformer() {
@@ -356,7 +356,7 @@ version.
 
 ## Change log for breaking contracts
 
-We enumerate backward-breaking changes, that are not previously marked with @Deprecated according
+We enumerate backward-breaking changes, that are not previously marked with `@Deprecated` according
  to normal conventions, with their motivations/resolutions.
 * [Class changes](https://git.corp.stripe.com/stripe-internal/sdk-autogen-java/blob/master/generated/diff_change_log_class_names.md)
 * [Method changes](https://git.corp.stripe.com/stripe-internal/sdk-autogen-java/blob/master/generated/diff_change_log_methods.md)
