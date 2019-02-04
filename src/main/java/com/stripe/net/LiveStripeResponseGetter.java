@@ -535,11 +535,11 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       ApiResource.RequestMethod method, String url, Map<String, Object> params,
       Class<T> clazz, ApiResource.RequestType type, RequestOptions options)
       throws StripeException {
-    long requestStart = System.currentTimeMillis();
+    long requestStartMs = System.currentTimeMillis();
 
     StripeResponse response = rawRequest(method, url, params, type, options);
 
-    long requestDurationMS = System.currentTimeMillis() - requestStart;
+    long requestDurationMs = System.currentTimeMillis() - requestStartMs;
 
     int responseCode = response.code();
     String responseBody = response.body();
@@ -562,7 +562,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     }
 
     if (Stripe.enableTelemetry && prevRequestMetrics.size() < MAX_REQUEST_METRICS_BUFFER_SIZE) {
-      prevRequestMetrics.add(new RequestMetrics(requestId, requestDurationMS));
+      prevRequestMetrics.add(new RequestMetrics(requestId, requestDurationMs));
     }
 
     return resource;
