@@ -136,7 +136,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    */
   Long quantity;
 
-  /** Date the most recent update to this subscription started. */
+  /**
+   * Date of the last substantial change to this subscription. For example, a change to the items
+   * array, or a change of status, will reset this timestamp.
+   */
   Long start;
 
   /**
