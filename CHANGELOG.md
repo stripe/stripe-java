@@ -1,5 +1,8 @@
 # Changelog
 
+## 7.19.0 - 2019-02-06
+* [#661](https://github.com/stripe/stripe-java/pull/661) Add configurable telemetry to gather information on client-side request latency
+
 ## 7.18.1 - 2019-02-04
 * [#657](https://github.com/stripe/stripe-java/pull/657) Better handling of namespaced resources
 * [#665](https://github.com/stripe/stripe-java/pull/665) Configure Gradle signing plugin to use gpg-agent
