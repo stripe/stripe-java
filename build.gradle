@@ -47,6 +47,7 @@ dependencies {
     testCompile group: 'junit', name: 'junit', version:'4.12'
     testCompile group: 'org.mockito', name: 'mockito-core', version:'2.22.0'
     testRuntime group: 'org.slf4j', name: 'slf4j-api', version: '1.7.25'
+    testImplementation 'com.squareup.okhttp3:mockwebserver:3.12.1'
 }
 
 jar {

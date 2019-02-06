@@ -43,6 +43,7 @@ import java.util.List;
 import java.util.ListIterator;
 import java.util.Map;
 import java.util.Scanner;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLSocketFactory;
 
@@ -50,6 +51,7 @@ import lombok.Cleanup;
 
 public class LiveStripeResponseGetter implements StripeResponseGetter {
   private static final String DNS_CACHE_TTL_PROPERTY_NAME = "networkaddress.cache.ttl";
+  private static final int MAX_REQUEST_METRICS_BUFFER_SIZE = 100;
 
   private static final class Parameter {
     public final String key;
@@ -149,6 +151,13 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     if (options.getStripeAccount() != null) {
       headers.put("Stripe-Account", options.getStripeAccount());
     }
+
+    RequestMetrics lastRequestMetrics = prevRequestMetrics.poll();
+    if (Stripe.enableTelemetry && lastRequestMetrics != null) {
+      headers.put("X-Stripe-Client-Telemetry",
+          ApiResource.GSON.toJson(lastRequestMetrics.payload()));
+    }
+
     return headers;
   }
 
@@ -385,6 +394,9 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     String charge;
   }
 
+  private static ConcurrentLinkedQueue<RequestMetrics> prevRequestMetrics =
+      new ConcurrentLinkedQueue<RequestMetrics>();
+
   // represents OAuth API errors returned as JSON
   // handleOAuthError uses this class to raise the appropriate OAuthException
   private static class StripeOAuthError {
@@ -523,7 +535,11 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       ApiResource.RequestMethod method, String url, Map<String, Object> params,
       Class<T> clazz, ApiResource.RequestType type, RequestOptions options)
       throws StripeException {
+    long requestStartMs = System.currentTimeMillis();
+
     StripeResponse response = rawRequest(method, url, params, type, options);
+
+    long requestDurationMs = System.currentTimeMillis() - requestStartMs;
 
     int responseCode = response.code();
     String responseBody = response.body();
@@ -544,6 +560,11 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       StripeObject obj = (StripeObject)resource;
       obj.setLastResponse(response);
     }
+
+    if (Stripe.enableTelemetry && prevRequestMetrics.size() < MAX_REQUEST_METRICS_BUFFER_SIZE) {
+      prevRequestMetrics.add(new RequestMetrics(requestId, requestDurationMs));
+    }
+
     return resource;
   }
 
