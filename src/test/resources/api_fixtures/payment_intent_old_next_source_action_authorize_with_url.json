@@ -1,6 +1,9 @@
 {
   "id": "pi_123",
   "object": "payment_intent",
+  "allowed_source_types": [
+    "card"
+  ],
   "amount": 1099,
   "amount_capturable": 1000,
   "amount_received": 0,
@@ -30,18 +33,15 @@
   "metadata": {
     "order_id": "123456789"
   },
-  "on_behalf_of": null,
-  "payment_method_types": [
-    "card"
-  ],
-  "receipt_email": "test@stripe.com",
-  "next_action": {
-    "redirect_to_url": {
+  "next_source_action": {
+    "authorize_with_url": {
       "return_url": "https://stripe.com/return",
       "url": "https://stripe.com"
     },
-    "type": "redirect_to_url"
+    "type": "authorize_with_url"
   },
+  "on_behalf_of": null,
+  "receipt_email": "test@stripe.com",
   "return_url": null,
   "shipping": {
     "address": {

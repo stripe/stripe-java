@@ -18,7 +18,6 @@ import lombok.Setter;
 public class PaymentIntent extends ApiResource implements MetadataStore<PaymentIntent>, HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
-  List<String> allowedSourceTypes;
   Long amount;
   Long amountCapturable;
   Long amountReceived;
@@ -36,8 +35,9 @@ public class PaymentIntent extends ApiResource implements MetadataStore<PaymentI
   PaymentIntentLastPaymentError lastPaymentError;
   Boolean livemode;
   @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
-  PaymentIntentSourceAction nextSourceAction;
+  NextAction nextAction;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Account> onBehalfOf;
+  List<String> paymentMethodTypes;
   String receiptEmail;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Review> review;
   ShippingDetails shipping;
@@ -45,6 +45,26 @@ public class PaymentIntent extends ApiResource implements MetadataStore<PaymentI
   String statementDescriptor;
   TransferData transferData;
   String status;
+
+  /**
+   * The {@code allowedSourceTypes} attribute.
+   *
+   * @return the {@code allowedSourceTypes} attribute
+   * @deprecated Prefer using the {@link #paymentMethodTypes} attribute instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2019-02-11">API version 2019-02-11</a>
+   */
+  @Deprecated
+  List<String> allowedSourceTypes;
+
+  /**
+   * The {@code nextSourceAction} attribute.
+   *
+   * @return the {@code nextSourceAction} attribute
+   * @deprecated Prefer using the {@link #nextAction} attribute instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2019-02-11">API version 2019-02-11</a>
+   */
+  @Deprecated
+  PaymentIntentSourceAction nextSourceAction;
 
   /**
    * The {@code returnUrl} attribute.
@@ -334,5 +354,21 @@ public class PaymentIntent extends ApiResource implements MetadataStore<PaymentI
       this.destination = new ExpandableField<>(c.getId(), c);
     }
     // </editor-fold>
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class NextAction extends StripeObject {
+    NextActionRedirectToUrl redirectToUrl;
+    String type;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class NextActionRedirectToUrl extends StripeObject {
+    String returnUrl;
+    String url;
   }
 }
