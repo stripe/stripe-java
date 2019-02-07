@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
@@ -16,6 +17,7 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class Sku extends ApiResource implements HasId, MetadataStore<Sku> {
   /** Whether the SKU is available for purchase. */
+  @SerializedName("active")
   Boolean active;
 
   /**
@@ -23,33 +25,41 @@ public class Sku extends ApiResource implements HasId, MetadataStore<Sku> {
    * example, a product's attributes are `["size", "gender"]`, a valid SKU has the following
    * dictionary of attributes: `{"size": "Medium", "gender": "Unisex"}`.
    */
+  @SerializedName("attributes")
   Map<String, String> attributes;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
 
   /**
    * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
    * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
    */
+  @SerializedName("currency")
   String currency;
 
   /** Always true for a deleted object. */
+  @SerializedName("deleted")
   Boolean deleted;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /** The URL of an image for this SKU, meant to be displayable to the customer. */
+  @SerializedName("image")
   String image;
 
+  @SerializedName("inventory")
   Inventory inventory;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /**
@@ -57,25 +67,31 @@ public class Sku extends ApiResource implements HasId, MetadataStore<Sku> {
    * additional information about the object in a structured format.
    */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("metadata")
   Map<String, String> metadata;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /** The dimensions of this SKU for shipping purposes. */
+  @SerializedName("package_dimensions")
   PackageDimensions packageDimensions;
 
   /**
    * The cost of the item as a positive integer in the smallest currency unit (that is, 100 cents to
    * charge $1.00, or 100 to charge ¥100, Japanese Yen being a zero-decimal currency).
    */
+  @SerializedName("price")
   Long price;
 
   /** The ID of the product this SKU is associated with. The product must be currently active. */
+  @SerializedName("product")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Product> product;
 
+  @SerializedName("updated")
   Long updated;
 
   /** Get id of expandable `product` object. */
@@ -203,15 +219,18 @@ public class Sku extends ApiResource implements HasId, MetadataStore<Sku> {
   @EqualsAndHashCode(callSuper = false)
   public static class Inventory extends StripeObject {
     /** The count of inventory available. Will be present if and only if `type` is `finite`. */
+    @SerializedName("quantity")
     Long quantity;
 
     /** Inventory type. Possible values are `finite`, `bucket` (not quantified), and `infinite`. */
+    @SerializedName("type")
     String type;
 
     /**
      * An indicator of the inventory available. Possible values are `in_stock`, `limited`, and
      * `out_of_stock`. Will be present if and only if `type` is `bucket`.
      */
+    @SerializedName("value")
     String value;
   }
 }

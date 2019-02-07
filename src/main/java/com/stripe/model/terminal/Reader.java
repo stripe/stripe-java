@@ -2,6 +2,7 @@
 
 package com.stripe.model.terminal;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
@@ -17,34 +18,44 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class Reader extends ApiResource implements HasId {
   /** Always true for a deleted object. */
+  @SerializedName("deleted")
   Boolean deleted;
 
   /** The current software version of the reader. */
+  @SerializedName("device_sw_version")
   String deviceSwVersion;
 
   /** Type of reader, e.g., `verifone_P400` or `bbpos_chipper2x`. */
+  @SerializedName("device_type")
   String deviceType;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /** The local IP address of the reader. */
+  @SerializedName("ip_address")
   String ipAddress;
 
   /** Custom label given to the reader for easier identification. */
+  @SerializedName("label")
   String label;
 
   /** The location identifier of the reader. */
+  @SerializedName("location")
   String location;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /** Serial number of the reader. */
+  @SerializedName("serial_number")
   String serialNumber;
 
   /** The networking status of the reader. */
+  @SerializedName("status")
   String status;
 
   /**

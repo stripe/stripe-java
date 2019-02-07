@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,15 +11,21 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class SourceTypeAchDebit extends StripeObject {
+  @SerializedName("bank_name")
   String bankName;
 
+  @SerializedName("country")
   String country;
 
+  @SerializedName("fingerprint")
   String fingerprint;
 
+  @SerializedName("last4")
   String last4;
 
+  @SerializedName("routing_number")
   String routingNumber;
 
+  @SerializedName("type")
   String type;
 }

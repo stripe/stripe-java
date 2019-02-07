@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
@@ -17,32 +18,39 @@ import lombok.Setter;
 public class Transfer extends ApiResource
     implements BalanceTransactionSource, MetadataStore<Transfer> {
   /** Amount in %s to be transferred. */
+  @SerializedName("amount")
   Long amount;
 
   /**
    * Amount in %s reversed (can be less than the amount attribute on the transfer if a partial
    * reversal was issued).
    */
+  @SerializedName("amount_reversed")
   Long amountReversed;
 
   /** Balance transaction that describes the impact of this transfer on your account balance. */
+  @SerializedName("balance_transaction")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<BalanceTransaction> balanceTransaction;
 
   /** Time that this record of the transfer was first created. */
+  @SerializedName("created")
   Long created;
 
   /**
    * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
    * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
    */
+  @SerializedName("currency")
   String currency;
 
   /** An arbitrary string attached to the object. Often useful for displaying to users. */
+  @SerializedName("description")
   String description;
 
   /** ID of the Stripe account the transfer was sent to. */
+  @SerializedName("destination")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Account> destination;
@@ -51,18 +59,21 @@ public class Transfer extends ApiResource
    * If the destination is a Stripe account, this will be the ID of the payment that the destination
    * account received for the transfer.
    */
+  @SerializedName("destination_payment")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Charge> destinationPayment;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /**
@@ -70,24 +81,29 @@ public class Transfer extends ApiResource
    * additional information about the transfer in a structured format.
    */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("metadata")
   Map<String, String> metadata;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /** A list of reversals that have been applied to the transfer. */
+  @SerializedName("reversals")
   TransferReversalCollection reversals;
 
   /**
    * Whether the transfer has been fully reversed. If the transfer is only partially reversed, this
    * attribute will still be false.
    */
+  @SerializedName("reversed")
   Boolean reversed;
 
   /**
    * ID of the charge or payment that was used to fund the transfer. If null, the transfer was
    * funded from the available balance.
    */
+  @SerializedName("source_transaction")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Charge> sourceTransaction;
@@ -96,12 +112,14 @@ public class Transfer extends ApiResource
    * The source balance this transfer came from. One of `card`, `financing`, `bank_account`, or
    * `alipay_account`.
    */
+  @SerializedName("source_type")
   String sourceType;
 
   /**
    * A string that identifies this transaction as part of a group. See the [Connect
    * documentation](/docs/connect/charges-transfers#grouping-transactions) for details.
    */
+  @SerializedName("transfer_group")
   String transferGroup;
 
   /** Get id of expandable `balanceTransaction` object. */

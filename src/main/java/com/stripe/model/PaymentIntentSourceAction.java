@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -11,9 +12,11 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class PaymentIntentSourceAction extends StripeObject {
+  @SerializedName("authorize_with_url")
   PaymentIntentSourceActionValueAuthorizeWithUrl authorizeWithUrl;
 
   /** Type of the next source action to perform, one of `authorize_with_url` or `use_stripe_sdk`. */
+  @SerializedName("type")
   String type;
 
   /**
@@ -21,5 +24,6 @@ public class PaymentIntentSourceAction extends StripeObject {
    * dictionary to invoke authentication flows. The shape of the contents is subject to change and
    * is only intended to be used by Stripe.js.
    */
+  @SerializedName("use_stripe_sdk")
   Map<String, Object> useStripeSdk;
 }

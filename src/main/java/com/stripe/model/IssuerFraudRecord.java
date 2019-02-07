@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
@@ -20,14 +21,17 @@ public class IssuerFraudRecord extends ApiResource implements HasId {
    * wish to proactively refund a charge that receives an IFR, in order to avoid receiving a dispute
    * later.
    */
+  @SerializedName("actionable")
   Boolean actionable;
 
   /** ID of the charge this issuer fraud record is for, optionally expanded. */
+  @SerializedName("charge")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Charge> charge;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
 
   /**
@@ -35,28 +39,34 @@ public class IssuerFraudRecord extends ApiResource implements HasId {
    * `fraudulent_card_application`, `made_with_counterfeit_card`, `made_with_lost_card`,
    * `made_with_stolen_card`, `misc`, `unauthorized_use_of_card`.
    */
+  @SerializedName("fraud_type")
   String fraudType;
 
   /**
    * If true, the associated charge is subject to [liability
    * shift](https://stripe.com/docs/sources/three-d-secure#disputed-payments).
    */
+  @SerializedName("has_liability_shift")
   Boolean hasLiabilityShift;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /** The timestamp at which the card issuer posted the issuer fraud record. */
+  @SerializedName("post_date")
   Long postDate;
 
   /** Get id of expandable `charge` object. */

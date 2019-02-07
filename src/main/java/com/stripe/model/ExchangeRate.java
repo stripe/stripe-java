@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
@@ -21,15 +22,18 @@ public class ExchangeRate extends ApiResource implements HasId {
    * code](https://www.iso.org/iso-4217-currency-codes.html) in lowercase.
    */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /**
    * Hash where the keys are supported currencies and the values are the exchange rate at which the
    * base id currency converts to the key currency.
    */
+  @SerializedName("rates")
   Map<String, BigDecimal> rates;
 
   /**

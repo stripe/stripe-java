@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
@@ -17,18 +18,23 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class PaymentIntent extends ApiResource implements HasId, MetadataStore<PaymentIntent> {
   /** The list of source types (e.g. card) that this PaymentIntent is allowed to use. */
+  @SerializedName("allowed_source_types")
   List<String> allowedSourceTypes;
 
   /** Amount intended to be collected by this PaymentIntent. */
+  @SerializedName("amount")
   Long amount;
 
   /** Amount that can be captured from this PaymentIntent. */
+  @SerializedName("amount_capturable")
   Long amountCapturable;
 
   /** Amount that was collected by this PaymentIntent. */
+  @SerializedName("amount_received")
   Long amountReceived;
 
   /** ID of the Connect application that created the PaymentIntent. */
+  @SerializedName("application")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Application> application;
@@ -37,24 +43,29 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * The amount of the application fee (if any) for the resulting payment. See the PaymentIntent
    * [Connect usage guide](/docs/payments/payment-intents/usage#connect) for details.
    */
+  @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
 
   /**
    * Populated when `status` is `canceled`, this is the time at which the PaymentIntent was
    * canceled. Measured in seconds since the Unix epoch.
    */
+  @SerializedName("canceled_at")
   Long canceledAt;
 
   /**
    * User-given reason for cancellation of this PaymentIntent, one of `duplicate`, `fraudulent`, or
    * `requested_by_customer`.
    */
+  @SerializedName("cancellation_reason")
   String cancellationReason;
 
   /** Capture method of this PaymentIntent, one of `automatic` or `manual`. */
+  @SerializedName("capture_method")
   String captureMethod;
 
   /** Charges that were created by this PaymentIntent, if any. */
+  @SerializedName("charges")
   ChargeCollection charges;
 
   /**
@@ -62,42 +73,52 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * key. Please refer to [dynamic authentication](/docs/payments/dynamic-authentication) guide on
    * how `client_secret` should be handled.
    */
+  @SerializedName("client_secret")
   String clientSecret;
 
   /** Confirmation method of this PaymentIntent, one of `secret` or `publishable`. */
+  @SerializedName("confirmation_method")
   String confirmationMethod;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
 
   /**
    * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
    * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
    */
+  @SerializedName("currency")
   String currency;
 
   /** ID of the Customer this PaymentIntent is for if one exists. */
+  @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
   /** An arbitrary string attached to the object. Often useful for displaying to users. */
+  @SerializedName("description")
   String description;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /** The payment error encountered in the previous PaymentIntent confirmation. */
+  @SerializedName("last_payment_error")
   StripeError lastPaymentError;
 
   /** The [Level III data](/docs/level3) associated with this payment. */
+  @SerializedName("level3")
   Level3 level3;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /**
@@ -105,37 +126,45 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * additional information about the object in a structured format.
    */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("metadata")
   Map<String, String> metadata;
 
   /**
    * If present, this property tells you what actions you need to take in order for your customer to
    * fulfill a payment using the provided source.
    */
+  @SerializedName("next_source_action")
   PaymentIntentSourceAction nextSourceAction;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /**
    * The account (if any) for which the funds of the PaymentIntent are intended. See the
    * PaymentIntent [Connect usage guide](/docs/payments/payment-intents/usage#connect) for details.
    */
+  @SerializedName("on_behalf_of")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Account> onBehalfOf;
 
   /** Email address that the receipt for the resulting payment will be sent to. */
+  @SerializedName("receipt_email")
   String receiptEmail;
 
   /** ID of the review associated with this PaymentIntent, if any. */
+  @SerializedName("review")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Review> review;
 
   /** Shipping information for this PaymentIntent. */
+  @SerializedName("shipping")
   ShippingDetails shipping;
 
   /** ID of the source used in this PaymentIntent. */
+  @SerializedName("source")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<PaymentSource> source;
@@ -144,24 +173,28 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * Extra information about a PaymentIntent. This will appear on your customer's statement when
    * this PaymentIntent succeeds in creating a charge.
    */
+  @SerializedName("statement_descriptor")
   String statementDescriptor;
 
   /**
    * Status of this PaymentIntent, one of `requires_source`, `requires_confirmation`,
    * `requires_source_action`, `processing`, `requires_capture`, `canceled`, or `succeeded`.
    */
+  @SerializedName("status")
   String status;
 
   /**
    * The data with which to automatically create a Transfer when the payment is finalized. See the
    * PaymentIntent [Connect usage guide](/docs/payments/payment-intents/usage#connect) for details.
    */
+  @SerializedName("transfer_data")
   TransferData transferData;
 
   /**
    * A string that identifies the resulting payment as part of a group. See the PaymentIntent
    * [Connect usage guide](/docs/payments/payment-intents/usage#connect) for details.
    */
+  @SerializedName("transfer_group")
   String transferGroup;
 
   /** Get id of expandable `application` object. */
@@ -529,6 +562,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
      * The account (if any) the payment will be attributed to for tax reporting, and where funds
      * from the payment will be transferred to upon payment success.
      */
+    @SerializedName("destination")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<Account> destination;

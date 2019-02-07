@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
@@ -16,37 +17,44 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class Refund extends ApiResource implements BalanceTransactionSource, MetadataStore<Refund> {
   /** Amount, in %s. */
+  @SerializedName("amount")
   Long amount;
 
   /** Balance transaction that describes the impact on your account balance. */
+  @SerializedName("balance_transaction")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<BalanceTransaction> balanceTransaction;
 
   /** ID of the charge that was refunded. */
+  @SerializedName("charge")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Charge> charge;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
 
   /**
    * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
    * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
    */
+  @SerializedName("currency")
   String currency;
 
   /**
    * An arbitrary string attached to the object. Often useful for displaying to users. (Available on
    * non-card refunds only)
    */
+  @SerializedName("description")
   String description;
 
   /**
    * If the refund failed, this balance transaction describes the adjustment made on your account
    * balance that reverses the initial balance transaction.
    */
+  @SerializedName("failure_balance_transaction")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<BalanceTransaction> failureBalanceTransaction;
@@ -55,10 +63,12 @@ public class Refund extends ApiResource implements BalanceTransactionSource, Met
    * If the refund failed, the reason for refund failure if known. Possible values are
    * `lost_or_stolen_card`, `expired_or_canceled_card`, or `unknown`.
    */
+  @SerializedName("failure_reason")
   String failureReason;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /**
@@ -66,24 +76,29 @@ public class Refund extends ApiResource implements BalanceTransactionSource, Met
    * additional information about the object in a structured format.
    */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("metadata")
   Map<String, String> metadata;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /**
    * Reason for the refund. If set, possible values are `duplicate`, `fraudulent`, and
    * `requested_by_customer`.
    */
+  @SerializedName("reason")
   String reason;
 
   /** This is the transaction number that appears on email receipts sent for this refund. */
+  @SerializedName("receipt_number")
   String receiptNumber;
 
   /**
    * The transfer reversal that is associated with the refund. Only present if the charge came from
    * another Stripe account. See the Connect documentation for details.
    */
+  @SerializedName("source_transfer_reversal")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<TransferReversal> sourceTransferReversal;
@@ -93,12 +108,14 @@ public class Refund extends ApiResource implements BalanceTransactionSource, Met
    * types of refunds, it can be `pending`, `succeeded`, `failed`, or `canceled`. Refer to our
    * [refunds](/docs/refunds#failed-refunds) documentation for more details.
    */
+  @SerializedName("status")
   String status;
 
   /**
    * If the accompanying transfer was reversed, the transfer reversal object. Only applicable if the
    * charge was created using the destination parameter.
    */
+  @SerializedName("transfer_reversal")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<TransferReversal> transferReversal;

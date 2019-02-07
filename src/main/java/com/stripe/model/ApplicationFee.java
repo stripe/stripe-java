@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
@@ -16,20 +17,24 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class ApplicationFee extends ApiResource implements BalanceTransactionSource {
   /** ID of the Stripe account this fee was taken from. */
+  @SerializedName("account")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Account> account;
 
   /** Amount earned, in %s. */
+  @SerializedName("amount")
   Long amount;
 
   /**
    * Amount in %s refunded (can be less than the amount attribute on the fee if a partial refund was
    * issued).
    */
+  @SerializedName("amount_refunded")
   Long amountRefunded;
 
   /** ID of the Connect application that earned the fee. */
+  @SerializedName("application")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Application> application;
@@ -38,41 +43,49 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
    * Balance transaction that describes the impact of this collected application fee on your account
    * balance (not including refunds).
    */
+  @SerializedName("balance_transaction")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<BalanceTransaction> balanceTransaction;
 
   /** ID of the charge that the application fee was taken from. */
+  @SerializedName("charge")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Charge> charge;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
 
   /**
    * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
    * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
    */
+  @SerializedName("currency")
   String currency;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /**
    * ID of the corresponding charge on the platform account, if this fee was the result of a charge
    * using the `destination` parameter.
    */
+  @SerializedName("originating_transaction")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Charge> originatingTransaction;
@@ -81,9 +94,11 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
    * Whether the fee has been fully refunded. If the fee is only partially refunded, this attribute
    * will still be false.
    */
+  @SerializedName("refunded")
   Boolean refunded;
 
   /** A list of refunds that have been applied to the fee. */
+  @SerializedName("refunds")
   FeeRefundCollection refunds;
 
   /** Get id of expandable `account` object. */
