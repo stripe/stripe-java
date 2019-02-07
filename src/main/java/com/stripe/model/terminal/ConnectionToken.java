@@ -2,6 +2,7 @@
 
 package com.stripe.model.terminal;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
@@ -16,9 +17,11 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class ConnectionToken extends ApiResource {
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /** Your application should pass this token to the Stripe Terminal SDK. */
+  @SerializedName("secret")
   String secret;
 
   /**

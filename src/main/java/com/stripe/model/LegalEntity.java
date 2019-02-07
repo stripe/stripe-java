@@ -17,86 +17,109 @@ public class LegalEntity extends StripeObject {
    * An array of any owners with at least 25% ownership of the company, excluding the individual
    * responsible for the account.
    */
+  @SerializedName("additional_owners")
   List<Owner> additionalOwners;
 
+  @SerializedName("address")
   Address address;
 
   /** The Kana variation of the primary address of the legal entity (Japan only). */
+  @SerializedName("address_kana")
   JapanAddress addressKana;
 
   /** The Kanji variation of the primary address of the legal entity (Japan only). */
+  @SerializedName("address_kanji")
   JapanAddress addressKanji;
 
   /** The company's legal name. */
+  @SerializedName("business_name")
   String businessName;
 
   /** The Kana variation of the company's legal name (Japan only). */
+  @SerializedName("business_name_kana")
   String businessNameKana;
 
   /** The Kanji variation of the company's legal name (Japan only). */
+  @SerializedName("business_name_kanji")
   String businessNameKanji;
 
   /** Whether the business ID number of the legal entity was provided. */
+  @SerializedName("business_tax_id_provided")
   Boolean businessTaxIdProvided;
 
   /** Whether the business VAT number of the legal entity was provided. */
+  @SerializedName("business_vat_id_provided")
   Boolean businessVatIdProvided;
 
+  @SerializedName("dob")
   DateOfBirth dob;
 
   /** The first name of the individual responsible for the account. */
+  @SerializedName("first_name")
   String firstName;
 
   /**
    * The Kana variation of the first name of the individual responsible for the account (Japan
    * only).
    */
+  @SerializedName("first_name_kana")
   String firstNameKana;
 
   /**
    * The Kanji variation of the first name of the individual responsible for the account (Japan
    * only).
    */
+  @SerializedName("first_name_kanji")
   String firstNameKanji;
 
   /**
    * The gender of the individual responsible for the account (International regulations require
    * either "male" or "female").
    */
+  @SerializedName("gender")
   String gender;
 
   /** The last name of the individual responsible for the account. */
+  @SerializedName("last_name")
   String lastName;
 
   /**
    * The Kana varation of the last name of the individual responsible for the account (Japan only).
    */
+  @SerializedName("last_name_kana")
   String lastNameKana;
 
   /**
    * The Kanji varation of the last name of the individual responsible for the account (Japan only).
    */
+  @SerializedName("last_name_kanji")
   String lastNameKanji;
 
   /** The maiden name of the individual responsible for the account. */
+  @SerializedName("maiden_name")
   String maidenName;
 
+  @SerializedName("personal_address")
   Address personalAddress;
 
   /**
    * The Kana variation of the address of the individual responsible for the account (Japan only).
    */
+  @SerializedName("personal_address_kana")
   JapanAddress personalAddressKana;
 
   /**
    * The Kanji variation of the address of the individual responsible for the account (Japan only).
    */
+  @SerializedName("personal_address_kanji")
   JapanAddress personalAddressKanji;
 
   /** Whether the personal ID number of the individual responsible for the account was provided. */
+  @SerializedName("personal_id_number_provided")
   Boolean personalIdNumberProvided;
 
   /** The company's phone number, used for verification. */
+  @SerializedName("phone_number")
   String phoneNumber;
 
   /**
@@ -108,11 +131,14 @@ public class LegalEntity extends StripeObject {
   /**
    * The jurisdiction in which the `business_tax_id` is registered (Germany-based companies only).
    */
+  @SerializedName("tax_id_registrar")
   String taxIdRegistrar;
 
   /** Either "individual" or "company", for what kind of legal entity the account owner is for. */
+  @SerializedName("type")
   String type;
 
+  @SerializedName("verification")
   Verification verification;
 
   @Getter
@@ -120,12 +146,15 @@ public class LegalEntity extends StripeObject {
   @EqualsAndHashCode(callSuper = false)
   public static class DateOfBirth extends StripeObject {
     /** The day of birth, between 1 and 31. */
+    @SerializedName("day")
     Long day;
 
     /** The month of birth, between 1 and 12. */
+    @SerializedName("month")
     Long month;
 
     /** The four-digit year of birth. */
+    @SerializedName("year")
     Long year;
   }
 
@@ -134,27 +163,34 @@ public class LegalEntity extends StripeObject {
   @EqualsAndHashCode(callSuper = false)
   public static class JapanAddress extends StripeObject {
     /** City/Ward. */
+    @SerializedName("city")
     String city;
 
     /**
      * Two-letter country code ([ISO 3166-1
      * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
      */
+    @SerializedName("country")
     String country;
 
     /** Block/Building number. */
+    @SerializedName("line1")
     String line1;
 
     /** Building details. */
+    @SerializedName("line2")
     String line2;
 
     /** Zip/Postal Code. */
+    @SerializedName("postal_code")
     String postalCode;
 
     /** Prefecture. */
+    @SerializedName("state")
     String state;
 
     /** Town/cho-me. */
+    @SerializedName("town")
     String town;
   }
 
@@ -162,32 +198,41 @@ public class LegalEntity extends StripeObject {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Owner extends StripeObject {
+    @SerializedName("address")
     Address address;
 
+    @SerializedName("dob")
     DateOfBirth dob;
 
     /** The email address of this additional owner. */
+    @SerializedName("email")
     String email;
 
     /** The first name of this additional owner. */
+    @SerializedName("first_name")
     String firstName;
 
     /** The last name of this additional owner. */
+    @SerializedName("last_name")
     String lastName;
 
     /** The maiden name of this additional owner. */
+    @SerializedName("maiden_name")
     String maidenName;
 
     /** Whether the personal ID number of this additional owner was provided. */
+    @SerializedName("personal_id_number_provided")
     Boolean personalIdNumberProvided;
 
     /** The phone number of this additional owner. */
+    @SerializedName("phone")
     String phone;
 
     /** Whether the last 4 digits of this additional owner's SSN have been provided. */
     @SerializedName("ssn_last_4_provided")
     Boolean ssnLast4Provided;
 
+    @SerializedName("verification")
     Verification verification;
   }
 
@@ -200,6 +245,7 @@ public class LegalEntity extends StripeObject {
      * example, if a document is uploaded and the picture is too fuzzy, this may say "Identity
      * document is too unclear to read".
      */
+    @SerializedName("details")
     String details;
 
     /**
@@ -208,12 +254,14 @@ public class LegalEntity extends StripeObject {
      * `scan_id_type_not_supported`, `scan_id_country_not_supported`, `scan_failed_other`, or
      * `scan_failed_test_mode`.
      */
+    @SerializedName("details_code")
     String detailsCode;
 
     /**
      * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A photo (jpg or png) of
      * the front of an identifying document, either a passport or local ID card.
      */
+    @SerializedName("document")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<File> document;
@@ -222,6 +270,7 @@ public class LegalEntity extends StripeObject {
      * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A photo (jpg or png) of
      * the back of an identifying document, either a passport or local ID card.
      */
+    @SerializedName("document_back")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<File> documentBack;
@@ -230,6 +279,7 @@ public class LegalEntity extends StripeObject {
      * The state of verification for this legal entity. Possible values are `unverified`, `pending`,
      * or `verified`.
      */
+    @SerializedName("status")
     String status;
 
     /** Get id of expandable `document` object. */

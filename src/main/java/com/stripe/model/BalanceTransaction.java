@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
@@ -18,42 +19,54 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class BalanceTransaction extends ApiResource implements HasId {
   /** Gross amount of the transaction, in %s. */
+  @SerializedName("amount")
   Long amount;
 
   /** The date the transaction's net funds will become available in the Stripe balance. */
+  @SerializedName("available_on")
   Long availableOn;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
 
   /**
    * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
    * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
    */
+  @SerializedName("currency")
   String currency;
 
   /** An arbitrary string attached to the object. Often useful for displaying to users. */
+  @SerializedName("description")
   String description;
 
+  @SerializedName("exchange_rate")
   BigDecimal exchangeRate;
 
   /** Fees (in %s) paid for this transaction. */
+  @SerializedName("fee")
   Long fee;
 
   /** Detailed breakdown of fees (in %s) paid for this transaction. */
+  @SerializedName("fee_details")
   List<Fee> feeDetails;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /** Net amount of the transaction, in %s. */
+  @SerializedName("net")
   Long net;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /** The Stripe object to which this transaction is related. */
+  @SerializedName("source")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<BalanceTransactionSource> source;
@@ -62,6 +75,7 @@ public class BalanceTransaction extends ApiResource implements HasId {
    * If the transaction's net funds are available in the Stripe balance yet. Either `available` or
    * `pending`.
    */
+  @SerializedName("status")
   String status;
 
   /**
@@ -75,6 +89,7 @@ public class BalanceTransaction extends ApiResource implements HasId {
    * more](https://stripe.com/docs/reporting/balance-transaction-types) about balance transaction
    * types and what they represent.
    */
+  @SerializedName("type")
   String type;
 
   /** Get id of expandable `source` object. */
@@ -141,20 +156,25 @@ public class BalanceTransaction extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class Fee extends StripeObject {
     /** Amount of the fee, in cents. */
+    @SerializedName("amount")
     Long amount;
 
+    @SerializedName("application")
     String application;
 
     /**
      * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
      * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
      */
+    @SerializedName("currency")
     String currency;
 
     /** An arbitrary string attached to the object. Often useful for displaying to users. */
+    @SerializedName("description")
     String description;
 
     /** Type of the fee, one of: `application_fee`, `stripe_fee` or `tax`. */
+    @SerializedName("type")
     String type;
   }
 }

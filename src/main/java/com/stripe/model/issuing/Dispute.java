@@ -2,6 +2,7 @@
 
 package com.stripe.model.issuing;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.ExpandableField;
@@ -24,29 +25,36 @@ public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute
    * Disputed amount. Usually the amount of the `disputed_transaction`, but can differ (usually
    * because of currency fluctuation or because only part of the order is disputed).
    */
+  @SerializedName("amount")
   Long amount;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
 
   /** The currency the `disputed_transaction` was made in. */
+  @SerializedName("currency")
   String currency;
 
   /** The transaction being disputed. */
+  @SerializedName("disputed_transaction")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Transaction> disputedTransaction;
 
+  @SerializedName("evidence")
   Evidence evidence;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /**
@@ -55,15 +63,19 @@ public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute
    * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
    */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("metadata")
   Map<String, String> metadata;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /** Reason for this dispute. One of `other` or `fraudulent`. */
+  @SerializedName("reason")
   String reason;
 
   /** Current status of dispute. One of `unsubmitted`, `under_review`, `won`, or `lost`. */
+  @SerializedName("status")
   String status;
 
   /** Get id of expandable `disputedTransaction` object. */
@@ -161,12 +173,14 @@ public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute
      * Evidence to support a fraudulent dispute. This will only be present if your dispute's
      * `reason` is `fraudulent`.
      */
+    @SerializedName("fraudulent")
     EvidenceFraudulent fraudulent;
 
     /**
      * Evidence to support an uncategorized dispute. This will only be present if your dispute's
      * `reason` is `other`.
      */
+    @SerializedName("other")
     EvidenceOther other;
   }
 
@@ -175,12 +189,14 @@ public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute
   @EqualsAndHashCode(callSuper = false)
   public static class EvidenceFraudulent extends StripeObject {
     /** Brief freeform text explaining why you are disputing this transaction. */
+    @SerializedName("dispute_explanation")
     String disputeExplanation;
 
     /**
      * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional file evidence
      * supporting your dispute.
      */
+    @SerializedName("uncategorized_file")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<File> uncategorizedFile;
@@ -210,12 +226,14 @@ public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute
   @EqualsAndHashCode(callSuper = false)
   public static class EvidenceOther extends StripeObject {
     /** Brief freeform text explaining why you are disputing this transaction. */
+    @SerializedName("dispute_explanation")
     String disputeExplanation;
 
     /**
      * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional file evidence
      * supporting your dispute.
      */
+    @SerializedName("uncategorized_file")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<File> uncategorizedFile;

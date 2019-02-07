@@ -2,6 +2,7 @@
 
 package com.stripe.model.issuing;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.BalanceTransaction;
@@ -20,50 +21,61 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class Transaction extends ApiResource
     implements BalanceTransactionSource, MetadataStore<Transaction> {
+  @SerializedName("amount")
   Long amount;
 
   /** The `Authorization` object that led to this transaction. */
+  @SerializedName("authorization")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Authorization> authorization;
 
+  @SerializedName("balance_transaction")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<BalanceTransaction> balanceTransaction;
 
   /** The card used to make this transaction. */
+  @SerializedName("card")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Card> card;
 
   /** The cardholder to whom this transaction belongs. */
+  @SerializedName("cardholder")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Cardholder> cardholder;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
 
   /**
    * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
    * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
    */
+  @SerializedName("currency")
   String currency;
 
+  @SerializedName("dispute")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Dispute> dispute;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
+  @SerializedName("merchant_data")
   MerchantData merchantData;
 
   /**
@@ -71,14 +83,17 @@ public class Transaction extends ApiResource
    * additional information about the object in a structured format.
    */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("metadata")
   Map<String, String> metadata;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /**
    * One of `capture`, `refund`, `cash_withdrawal`, `refund_reversal`, `dispute`, or `dispute_loss`.
    */
+  @SerializedName("type")
   String type;
 
   /** Get id of expandable `authorization` object. */

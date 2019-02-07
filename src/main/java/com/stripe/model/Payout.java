@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
@@ -16,12 +17,14 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class Payout extends ApiResource implements BalanceTransactionSource, MetadataStore<Payout> {
   /** Amount (in %s) to be transferred to your bank account or debit card. */
+  @SerializedName("amount")
   Long amount;
 
   /**
    * Date the payout is expected to arrive in the bank. This factors in delays like weekends or bank
    * holidays.
    */
+  @SerializedName("arrival_date")
   Long arrivalDate;
 
   /**
@@ -29,28 +32,34 @@ public class Payout extends ApiResource implements BalanceTransactionSource, Met
    * schedule](/docs/payouts#payout-schedule), and `false` if it was [requested
    * manually](https://stripe.com/docs/payouts#manual-payouts).
    */
+  @SerializedName("automatic")
   Boolean automatic;
 
   /**
    * ID of the balance transaction that describes the impact of this payout on your account balance.
    */
+  @SerializedName("balance_transaction")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<BalanceTransaction> balanceTransaction;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
 
   /**
    * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
    * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
    */
+  @SerializedName("currency")
   String currency;
 
   /** An arbitrary string attached to the object. Often useful for displaying to users. */
+  @SerializedName("description")
   String description;
 
   /** ID of the bank account or card the payout was sent to. */
+  @SerializedName("destination")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<ExternalAccount> destination;
@@ -60,6 +69,7 @@ public class Payout extends ApiResource implements BalanceTransactionSource, Met
    * reversed the initial balance transaction, and puts the funds from the failed payout back in
    * your balance.
    */
+  @SerializedName("failure_balance_transaction")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<BalanceTransaction> failureBalanceTransaction;
@@ -68,19 +78,23 @@ public class Payout extends ApiResource implements BalanceTransactionSource, Met
    * Error code explaining reason for payout failure if available. See [Types of payout
    * failures](/docs/api#payout_failures) for a list of failure codes.
    */
+  @SerializedName("failure_code")
   String failureCode;
 
   /** Message to user further explaining reason for payout failure if available. */
+  @SerializedName("failure_message")
   String failureMessage;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /**
@@ -88,6 +102,7 @@ public class Payout extends ApiResource implements BalanceTransactionSource, Met
    * additional information about the object in a structured format.
    */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("metadata")
   Map<String, String> metadata;
 
   /**
@@ -95,18 +110,22 @@ public class Payout extends ApiResource implements BalanceTransactionSource, Met
    * supported for payouts to debit cards. (See [Instant payouts for
    * marketplaces](/blog/instant-payouts-for-marketplaces) for more information.)
    */
+  @SerializedName("method")
   String method;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /**
    * The source balance this payout came from. One of `card`, `financing`, `bank_account`, or
    * `alipay_account`.
    */
+  @SerializedName("source_type")
   String sourceType;
 
   /** Extra information about a payout to be displayed on the user's bank statement. */
+  @SerializedName("statement_descriptor")
   String statementDescriptor;
 
   /**
@@ -115,9 +134,11 @@ public class Payout extends ApiResource implements BalanceTransactionSource, Met
    * `in_transit`. It will then change to `paid` if the transaction goes through. If it does not go
    * through successfully, its status will change to `failed` or `canceled`.
    */
+  @SerializedName("status")
   String status;
 
   /** Can be `bank_account` or `card`. */
+  @SerializedName("type")
   String type;
 
   /** Get id of expandable `balanceTransaction` object. */

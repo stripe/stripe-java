@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
@@ -20,16 +21,20 @@ public class SubscriptionItem extends ApiResource
    * Define thresholds at which an invoice will be sent, and the related subscription advanced to a
    * new billing period.
    */
+  @SerializedName("billing_thresholds")
   BillingThresholds billingThresholds;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
 
   /** Always true for a deleted object. */
+  @SerializedName("deleted")
   Boolean deleted;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /**
@@ -37,20 +42,25 @@ public class SubscriptionItem extends ApiResource
    * additional information about the object in a structured format.
    */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("metadata")
   Map<String, String> metadata;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
+  @SerializedName("plan")
   Plan plan;
 
   /**
    * The [quantity](/docs/subscriptions/quantities) of the plan to which the customer should be
    * subscribed.
    */
+  @SerializedName("quantity")
   Long quantity;
 
   /** The `subscription` this `subscription_item` belongs to. */
+  @SerializedName("subscription")
   String subscription;
 
   /** Returns a list of your subscription items for a given subscription. */
@@ -201,6 +211,7 @@ public class SubscriptionItem extends ApiResource
   @EqualsAndHashCode(callSuper = false)
   public static class BillingThresholds extends StripeObject {
     /** Usage threshold that triggers the subscription to create an invoice. */
+    @SerializedName("usage_gte")
     Long usageGte;
   }
 }
