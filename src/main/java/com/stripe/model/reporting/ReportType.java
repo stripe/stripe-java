@@ -2,6 +2,7 @@
 
 package com.stripe.model.reporting;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
@@ -20,12 +21,14 @@ public class ReportType extends ApiResource implements HasId {
    * Most recent time for which this Report Type is available. Measured in seconds since the Unix
    * epoch.
    */
+  @SerializedName("data_available_end")
   Long dataAvailableEnd;
 
   /**
    * Earliest time for which this Report Type is available. Measured in seconds since the Unix
    * epoch.
    */
+  @SerializedName("data_available_start")
   Long dataAvailableStart;
 
   /**
@@ -34,21 +37,26 @@ public class ReportType extends ApiResource implements HasId {
    * `balance.summary.1`.
    */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /** Human-readable name of the Report Type. */
+  @SerializedName("name")
   String name;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /** When this Report Type was latest updated. Measured in seconds since the Unix epoch. */
+  @SerializedName("updated")
   Long updated;
 
   /**
    * Version of the Report Type. Different versions report with the same ID will have the same
    * purpose, but may take different run parameters or have different result schemas.
    */
+  @SerializedName("version")
   Long version;
 
   /**

@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
@@ -21,39 +22,48 @@ public class OrderReturn extends ApiResource implements HasId {
    * Japanese Yen being a zero-decimal currency) representing the total amount for the returned line
    * item.
    */
+  @SerializedName("amount")
   Long amount;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
 
   /**
    * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
    * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
    */
+  @SerializedName("currency")
   String currency;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /** The items included in this order return. */
+  @SerializedName("items")
   List<OrderItem> items;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /** The order that this return includes items from. */
+  @SerializedName("order")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Order> order;
 
   /** The ID of the refund issued for this return. */
+  @SerializedName("refund")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Refund> refund;

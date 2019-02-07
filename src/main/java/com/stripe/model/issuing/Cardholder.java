@@ -2,6 +2,7 @@
 
 package com.stripe.model.issuing;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Address;
@@ -19,25 +20,31 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Cardholder extends ApiResource implements HasId, MetadataStore<Cardholder> {
+  @SerializedName("billing")
   Billing billing;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
 
   /** The cardholder's email address. */
+  @SerializedName("email")
   String email;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /** Whether or not this cardholder is the default cardholder. */
+  @SerializedName("is_default")
   Boolean isDefault;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /**
@@ -45,21 +52,27 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
    * additional information about the object in a structured format.
    */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("metadata")
   Map<String, String> metadata;
 
   /** The cardholder's name. This will be printed on cards issued to them. */
+  @SerializedName("name")
   String name;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /** The cardholder's phone number. */
+  @SerializedName("phone_number")
   String phoneNumber;
 
   /** One of `active`, `inactive`, `blocked`, or `pending`. */
+  @SerializedName("status")
   String status;
 
   /** One of `individual` or `business_entity`. */
+  @SerializedName("type")
   String type;
 
   /**
@@ -137,8 +150,10 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Billing extends StripeObject {
+    @SerializedName("address")
     Address address;
 
+    @SerializedName("name")
     String name;
   }
 }

@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
@@ -16,10 +17,13 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Source extends ApiResource implements PaymentSource, MetadataStore<Source> {
+  @SerializedName("ach_credit_transfer")
   SourceTypeAchCreditTransfer achCreditTransfer;
 
+  @SerializedName("ach_debit")
   SourceTypeAchDebit achDebit;
 
+  @SerializedName("alipay")
   SourceTypeAlipay alipay;
 
   /**
@@ -28,20 +32,27 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
    * source. This is the amount for which the source will be chargeable once ready. Required for
    * `single_use` sources.
    */
+  @SerializedName("amount")
   Long amount;
 
+  @SerializedName("bancontact")
   SourceTypeBancontact bancontact;
 
+  @SerializedName("card")
   SourceTypeCard card;
 
+  @SerializedName("card_present")
   SourceTypeCardPresent cardPresent;
 
   /** The client secret of the source. Used for client-side retrieval using a publishable key. */
+  @SerializedName("client_secret")
   String clientSecret;
 
+  @SerializedName("code_verification")
   CodeVerificationFlow codeVerification;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
 
   /**
@@ -49,34 +60,42 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
    * the source. This is the currency for which the source will be chargeable once ready. Required
    * for `single_use` sources.
    */
+  @SerializedName("currency")
   String currency;
 
   /**
    * The ID of the customer to which this source is attached. This will not be present when the
    * source has not been attached to a customer.
    */
+  @SerializedName("customer")
   String customer;
 
+  @SerializedName("eps")
   SourceTypeEps eps;
 
   /**
    * The authentication `flow` of the source. `flow` is one of `redirect`, `receiver`,
    * `code_verification`, `none`.
    */
+  @SerializedName("flow")
   String flow;
 
+  @SerializedName("giropay")
   SourceTypeGiropay giropay;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
+  @SerializedName("ideal")
   SourceTypeIdeal ideal;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /**
@@ -84,45 +103,59 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
    * additional information about the object in a structured format.
    */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("metadata")
   Map<String, String> metadata;
 
+  @SerializedName("multibanco")
   SourceTypeMultibanco multibanco;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /**
    * Information about the owner of the payment instrument that may be used or required by
    * particular source types.
    */
+  @SerializedName("owner")
   Owner owner;
 
+  @SerializedName("p24")
   SourceTypeP24 p24;
 
+  @SerializedName("paper_check")
   SourceTypePaperCheck paperCheck;
 
+  @SerializedName("receiver")
   ReceiverFlow receiver;
 
+  @SerializedName("redirect")
   RedirectFlow redirect;
 
+  @SerializedName("sepa_credit_transfer")
   SourceTypeSepaCreditTransfer sepaCreditTransfer;
 
+  @SerializedName("sepa_debit")
   SourceTypeSepaDebit sepaDebit;
 
+  @SerializedName("sofort")
   SourceTypeSofort sofort;
 
   /**
    * Extra information about a source. This will appear on your customer's statement every time you
    * charge the source.
    */
+  @SerializedName("statement_descriptor")
   String statementDescriptor;
 
   /**
    * The status of the source, one of `canceled`, `chargeable`, `consumed`, `failed`, or `pending`.
    * Only `chargeable` sources can be used to create a charge.
    */
+  @SerializedName("status")
   String status;
 
+  @SerializedName("three_d_secure")
   SourceTypeThreeDSecure threeDSecure;
 
   /**
@@ -133,6 +166,7 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
    * matching this value. It contains additional information specific to the [payment
    * method](/docs/sources) used.
    */
+  @SerializedName("type")
   String type;
 
   /**
@@ -140,8 +174,10 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
    * types may or may not be reusable by construction, while others may leave the option at
    * creation. If an incompatible value is passed, an error will be returned.
    */
+  @SerializedName("usage")
   String usage;
 
+  @SerializedName("wechat")
   SourceTypeWechat wechat;
 
   /** Delete a specified source for a given customer. */
@@ -281,6 +317,7 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
     /**
      * The number of attempts remaining to authenticate the source object with a verification code.
      */
+    @SerializedName("attempts_remaining")
     Long attemptsRemaining;
 
     /**
@@ -289,6 +326,7 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
      * `failed` (failed verification, cannot be verified anymore as `attempts_remaining` should be
      * 0).
      */
+    @SerializedName("status")
     String status;
   }
 
@@ -297,15 +335,19 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
   @EqualsAndHashCode(callSuper = false)
   public static class Owner extends StripeObject {
     /** Owner's address. */
+    @SerializedName("address")
     Address address;
 
     /** Owner's email address. */
+    @SerializedName("email")
     String email;
 
     /** Owner's full name. */
+    @SerializedName("name")
     String name;
 
     /** Owner's phone number (including extension). */
+    @SerializedName("phone")
     String phone;
 
     /**
@@ -313,6 +355,7 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
      * directly (and if supported) at the time of authorization or settlement. They cannot be set or
      * mutated.
      */
+    @SerializedName("verified_address")
     Address verifiedAddress;
 
     /**
@@ -320,6 +363,7 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
      * method directly (and if supported) at the time of authorization or settlement. They cannot be
      * set or mutated.
      */
+    @SerializedName("verified_email")
     String verifiedEmail;
 
     /**
@@ -327,6 +371,7 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
      * directly (and if supported) at the time of authorization or settlement. They cannot be set or
      * mutated.
      */
+    @SerializedName("verified_name")
     String verifiedName;
 
     /**
@@ -334,6 +379,7 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
      * by the payment method directly (and if supported) at the time of authorization or settlement.
      * They cannot be set or mutated.
      */
+    @SerializedName("verified_phone")
     String verifiedPhone;
   }
 
@@ -345,12 +391,14 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
      * The address of the receiver source. This is the value that should be communicated to the
      * customer to send their funds to.
      */
+    @SerializedName("address")
     String address;
 
     /**
      * The total amount that was charged by you. The amount charged is expressed in the source's
      * currency.
      */
+    @SerializedName("amount_charged")
     Long amountCharged;
 
     /**
@@ -358,18 +406,22 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
      * amount_charged` is true at all time. The amount received is expressed in the source's
      * currency.
      */
+    @SerializedName("amount_received")
     Long amountReceived;
 
     /**
      * The total amount that was returned to the customer. The amount returned is expressed in the
      * source's currency.
      */
+    @SerializedName("amount_returned")
     Long amountReturned;
 
     /** Type of refund attribute method, one of `email`, `manual`, or `none`. */
+    @SerializedName("refund_attributes_method")
     String refundAttributesMethod;
 
     /** Type of refund attribute status, one of `missing`, `requested`, or `available`. */
+    @SerializedName("refund_attributes_status")
     String refundAttributesStatus;
   }
 
@@ -383,9 +435,11 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
      * declined), or `processing_error` (the redirect failed due to a technical error). Present only
      * if the redirect status is `failed`.
      */
+    @SerializedName("failure_reason")
     String failureReason;
 
     /** The URL you provide to redirect the customer to after they authenticated their payment. */
+    @SerializedName("return_url")
     String returnUrl;
 
     /**
@@ -394,12 +448,14 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
      * `not_required` (redirect should not be used) or `failed` (failed authentication, cannot be
      * reused).
      */
+    @SerializedName("status")
     String status;
 
     /**
      * The URL provided to you to redirect a customer to as part of a `redirect` authentication
      * flow.
      */
+    @SerializedName("url")
     String url;
   }
 }

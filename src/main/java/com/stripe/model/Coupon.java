@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
@@ -20,46 +21,55 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
    * Amount (in the `currency` specified) that will be taken off the subtotal of any invoices for
    * this customer.
    */
+  @SerializedName("amount_off")
   Long amountOff;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
 
   /**
    * If `amount_off` has been set, the three-letter [ISO code for the
    * currency](https://stripe.com/docs/currencies) of the amount to take off.
    */
+  @SerializedName("currency")
   String currency;
 
   /** Always true for a deleted object. */
+  @SerializedName("deleted")
   Boolean deleted;
 
   /**
    * One of `forever`, `once`, and `repeating`. Describes how long a customer who applies this
    * coupon will get the discount.
    */
+  @SerializedName("duration")
   String duration;
 
   /**
    * If `duration` is `repeating`, the number of months the coupon applies. Null if coupon
    * `duration` is `forever` or `once`.
    */
+  @SerializedName("duration_in_months")
   Long durationInMonths;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /**
    * Maximum number of times this coupon can be redeemed, in total, across all customers, before it
    * is no longer valid.
    */
+  @SerializedName("max_redemptions")
   Long maxRedemptions;
 
   /**
@@ -67,12 +77,15 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
    * additional information about the object in a structured format.
    */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("metadata")
   Map<String, String> metadata;
 
   /** Name of the coupon displayed to customers on for instance invoices or receipts. */
+  @SerializedName("name")
   String name;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /**
@@ -80,17 +93,21 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
    * of the coupon. For example, a coupon with percent_off of 50 will make a %s100 invoice %s50
    * instead.
    */
+  @SerializedName("percent_off")
   BigDecimal percentOff;
 
   /** Date after which the coupon can no longer be redeemed. */
+  @SerializedName("redeem_by")
   Long redeemBy;
 
   /** Number of times this coupon has been applied to a customer. */
+  @SerializedName("times_redeemed")
   Long timesRedeemed;
 
   /**
    * Taking account of the above properties, whether this coupon can still be applied to a customer.
    */
+  @SerializedName("valid")
   Boolean valid;
 
   /** Returns a list of your coupons. */

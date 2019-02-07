@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,5 +11,6 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class StripeErrorResponse extends StripeObject {
+  @SerializedName("error")
   StripeError error;
 }

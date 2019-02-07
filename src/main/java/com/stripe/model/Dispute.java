@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
@@ -21,34 +22,42 @@ public class Dispute extends ApiResource
    * Disputed amount. Usually the amount of the charge, but can differ (usually because of currency
    * fluctuation or because only part of the order is disputed).
    */
+  @SerializedName("amount")
   Long amount;
 
   /**
    * List of zero, one, or two balance transactions that show funds withdrawn and reinstated to your
    * Stripe account as a result of this dispute.
    */
+  @SerializedName("balance_transactions")
   List<BalanceTransaction> balanceTransactions;
 
   /** ID of the charge that was disputed. */
+  @SerializedName("charge")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Charge> charge;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
 
   /**
    * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
    * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
    */
+  @SerializedName("currency")
   String currency;
 
+  @SerializedName("evidence")
   Evidence evidence;
 
+  @SerializedName("evidence_details")
   EvidenceDetails evidenceDetails;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /**
@@ -56,12 +65,14 @@ public class Dispute extends ApiResource
    * refunded, no further funds will be withdrawn from your Stripe account as a result of this
    * dispute.
    */
+  @SerializedName("is_charge_refundable")
   Boolean isChargeRefundable;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /**
@@ -69,12 +80,15 @@ public class Dispute extends ApiResource
    * additional information about the object in a structured format.
    */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("metadata")
   Map<String, String> metadata;
 
   /** Network-dependent reason code for the dispute. */
+  @SerializedName("network_reason_code")
   String networkReasonCode;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /**
@@ -84,6 +98,7 @@ public class Dispute extends ApiResource
    * `bank_cannot_process`, `debit_not_authorized`, or `customer_initiated`. Read more about
    * [dispute reasons](/docs/disputes/categories).
    */
+  @SerializedName("reason")
   String reason;
 
   /**
@@ -91,6 +106,7 @@ public class Dispute extends ApiResource
    * `warning_under_review`, `warning_closed`, `needs_response`, `under_review`, `charge_refunded`,
    * `won`, or `lost`.
    */
+  @SerializedName("status")
   String status;
 
   /** Get id of expandable `charge` object. */
@@ -227,15 +243,18 @@ public class Dispute extends ApiResource
      * purchased digital product. This information should include IP addresses, corresponding
      * timestamps, and any detailed recorded activity.
      */
+    @SerializedName("access_activity_log")
     String accessActivityLog;
 
     /** The billing address provided by the customer. */
+    @SerializedName("billing_address")
     String billingAddress;
 
     /**
      * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Your subscription
      * cancellation policy, as shown to the customer.
      */
+    @SerializedName("cancellation_policy")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<File> cancellationPolicy;
@@ -243,9 +262,11 @@ public class Dispute extends ApiResource
     /**
      * An explanation of how and when the customer was shown your refund policy prior to purchase.
      */
+    @SerializedName("cancellation_policy_disclosure")
     String cancellationPolicyDisclosure;
 
     /** A justification for why the customer's subscription was not canceled. */
+    @SerializedName("cancellation_rebuttal")
     String cancellationRebuttal;
 
     /**
@@ -254,23 +275,28 @@ public class Dispute extends ApiResource
      * customer received the product or service, or demonstrating their use of or satisfaction with
      * the product or service.
      */
+    @SerializedName("customer_communication")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<File> customerCommunication;
 
     /** The email address of the customer. */
+    @SerializedName("customer_email_address")
     String customerEmailAddress;
 
     /** The name of the customer. */
+    @SerializedName("customer_name")
     String customerName;
 
     /** The IP address that the customer used when making the purchase. */
+    @SerializedName("customer_purchase_ip")
     String customerPurchaseIp;
 
     /**
      * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A relevant document or
      * contract showing the customer's signature.
      */
+    @SerializedName("customer_signature")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<File> customerSignature;
@@ -281,6 +307,7 @@ public class Dispute extends ApiResource
      * order, etc. This document should be paired with a similar document from the disputed payment
      * that proves the two payments are separate.
      */
+    @SerializedName("duplicate_charge_documentation")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<File> duplicateChargeDocumentation;
@@ -289,20 +316,24 @@ public class Dispute extends ApiResource
      * An explanation of the difference between the disputed charge versus the prior charge that
      * appears to be a duplicate.
      */
+    @SerializedName("duplicate_charge_explanation")
     String duplicateChargeExplanation;
 
     /**
      * The Stripe ID for the prior charge which appears to be a duplicate of the disputed charge.
      */
+    @SerializedName("duplicate_charge_id")
     String duplicateChargeId;
 
     /** A description of the product or service that was sold. */
+    @SerializedName("product_description")
     String productDescription;
 
     /**
      * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any receipt or message
      * sent to the customer notifying them of the charge.
      */
+    @SerializedName("receipt")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<File> receipt;
@@ -311,6 +342,7 @@ public class Dispute extends ApiResource
      * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Your refund policy, as
      * shown to the customer.
      */
+    @SerializedName("refund_policy")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<File> refundPolicy;
@@ -318,15 +350,18 @@ public class Dispute extends ApiResource
     /**
      * Documentation demonstrating that the customer was shown your refund policy prior to purchase.
      */
+    @SerializedName("refund_policy_disclosure")
     String refundPolicyDisclosure;
 
     /** A justification for why the customer is not entitled to a refund. */
+    @SerializedName("refund_refusal_explanation")
     String refundRefusalExplanation;
 
     /**
      * The date on which the customer received or began receiving the purchased service, in a clear
      * human-readable format.
      */
+    @SerializedName("service_date")
     String serviceDate;
 
     /**
@@ -334,6 +369,7 @@ public class Dispute extends ApiResource
      * proof that a service was provided to the customer. This could include a copy of a signed
      * contract, work order, or other form of written agreement.
      */
+    @SerializedName("service_documentation")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<File> serviceDocumentation;
@@ -342,18 +378,21 @@ public class Dispute extends ApiResource
      * The address to which a physical product was shipped. You should try to include as complete
      * address information as possible.
      */
+    @SerializedName("shipping_address")
     String shippingAddress;
 
     /**
      * The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. If
      * multiple carriers were used for this purchase, please separate them with commas.
      */
+    @SerializedName("shipping_carrier")
     String shippingCarrier;
 
     /**
      * The date on which a physical product began its route to the shipping address, in a clear
      * human-readable format.
      */
+    @SerializedName("shipping_date")
     String shippingDate;
 
     /**
@@ -362,6 +401,7 @@ public class Dispute extends ApiResource
      * you. This could include a copy of the shipment receipt, shipping label, etc. It should show
      * the customer's full shipping address, if possible.
      */
+    @SerializedName("shipping_documentation")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<File> shippingDocumentation;
@@ -370,17 +410,20 @@ public class Dispute extends ApiResource
      * The tracking number for a physical product, obtained from the delivery service. If multiple
      * tracking numbers were generated for this purchase, please separate them with commas.
      */
+    @SerializedName("shipping_tracking_number")
     String shippingTrackingNumber;
 
     /**
      * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any additional evidence
      * or statements.
      */
+    @SerializedName("uncategorized_file")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<File> uncategorizedFile;
 
     /** Any additional evidence or statements. */
+    @SerializedName("uncategorized_text")
     String uncategorizedText;
 
     /** Get id of expandable `cancellationPolicy` object. */
@@ -567,9 +610,11 @@ public class Dispute extends ApiResource
      * null if the customer's bank or credit card company doesn't allow a response for this
      * particular dispute.
      */
+    @SerializedName("due_by")
     Long dueBy;
 
     /** Whether evidence has been staged for this dispute. */
+    @SerializedName("has_evidence")
     Boolean hasEvidence;
 
     /**
@@ -577,12 +622,14 @@ public class Dispute extends ApiResource
      * no evidence submissions have occurred. If `true`, then delivery of the latest evidence is
      * *not* guaranteed.
      */
+    @SerializedName("past_due")
     Boolean pastDue;
 
     /**
      * The number of times evidence has been submitted. Typically, you may only submit evidence
      * once.
      */
+    @SerializedName("submission_count")
     Long submissionCount;
   }
 }

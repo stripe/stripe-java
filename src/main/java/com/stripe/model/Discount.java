@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiResource;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -11,30 +12,37 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Discount extends StripeObject {
+  @SerializedName("coupon")
   Coupon coupon;
 
+  @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
   /** Always true for a deleted object. */
+  @SerializedName("deleted")
   Boolean deleted;
 
   /**
    * If the coupon has a duration of `repeating`, the date that this discount will end. If the
    * coupon has a duration of `once` or `forever`, this attribute will be null.
    */
+  @SerializedName("end")
   Long end;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /** Date that the coupon was applied. */
+  @SerializedName("start")
   Long start;
 
   /**
    * The subscription that this coupon is applied to, if it is applied to a particular subscription.
    */
+  @SerializedName("subscription")
   String subscription;
 
   /** Get id of expandable `customer` object. */

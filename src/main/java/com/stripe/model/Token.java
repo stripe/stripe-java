@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
@@ -15,39 +16,49 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Token extends ApiResource implements HasId {
+  @SerializedName("bank_account")
   BankAccount bankAccount;
 
+  @SerializedName("card")
   Card card;
 
   /** IP address of the client that generated the token. */
+  @SerializedName("client_ip")
   String clientIp;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
 
   /**
    * Email of the user, whose token is created during Stripe Checkout. This field is non-standard,
    * and maybe removed in the future.
    */
+  @SerializedName("email")
   String email;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /** Type of the token: `account`, `bank_account`, `card`, or `pii`. */
+  @SerializedName("type")
   String type;
 
   /** Whether this token has already been used (tokens can be used only once). */
+  @SerializedName("used")
   Boolean used;
 
   /** Retrieves the token with the given ID. */

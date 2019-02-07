@@ -2,6 +2,7 @@
 
 package com.stripe.model.issuing;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
@@ -15,12 +16,15 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class CardPin extends ApiResource {
+  @SerializedName("card")
   Card card;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /** The PIN (4 digits number). */
+  @SerializedName("pin")
   String pin;
 
   /**
