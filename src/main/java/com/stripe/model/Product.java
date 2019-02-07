@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
@@ -17,52 +18,62 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class Product extends ApiResource implements HasId, MetadataStore<Product> {
   /** Whether the product is currently available for purchase. */
+  @SerializedName("active")
   Boolean active;
 
   /**
    * A list of up to 5 attributes that each SKU can provide values for (e.g., `["color", "size"]`).
    * Only applicable to products of `type=good`.
    */
+  @SerializedName("attributes")
   List<String> attributes;
 
   /**
    * A short one-line description of the product, meant to be displayable to the customer. Only
    * applicable to products of `type=good`.
    */
+  @SerializedName("caption")
   String caption;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
 
   /**
    * An array of connect application identifiers that cannot purchase this product. Only applicable
    * to products of `type=good`.
    */
+  @SerializedName("deactivate_on")
   List<String> deactivateOn;
 
   /** Always true for a deleted object. */
+  @SerializedName("deleted")
   Boolean deleted;
 
   /**
    * The product's description, meant to be displayable to the customer. Only applicable to products
    * of `type=good`.
    */
+  @SerializedName("description")
   String description;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /**
    * A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
    * Only applicable to products of `type=good`.
    */
+  @SerializedName("images")
   List<String> images;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /**
@@ -70,15 +81,18 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
    * additional information about the object in a structured format.
    */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("metadata")
   Map<String, String> metadata;
 
   /**
    * The product's name, meant to be displayable to the customer. Applicable to both `service` and
    * `good` types.
    */
+  @SerializedName("name")
   String name;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /**
@@ -86,9 +100,11 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
    * override this value by having its own `package_dimensions`. Only applicable to products of
    * `type=good`.
    */
+  @SerializedName("package_dimensions")
   PackageDimensions packageDimensions;
 
   /** Whether this product is a shipped good. Only applicable to products of `type=good`. */
+  @SerializedName("shippable")
   Boolean shippable;
 
   /**
@@ -96,26 +112,31 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
    * In the case that multiple products are billed at once, the first statement descriptor will be
    * used. Only available on products of type=`service`.
    */
+  @SerializedName("statement_descriptor")
   String statementDescriptor;
 
   /**
    * The type of the product. The product is either of type `good`, which is eligible for use with
    * Orders and SKUs, or `service`, which is eligible for use with Subscriptions and Plans.
    */
+  @SerializedName("type")
   String type;
 
   /**
    * A label that represents units of this product, such as seat(s), in Stripe and on customers’
    * receipts and invoices. Only available on products of type=`service`.
    */
+  @SerializedName("unit_label")
   String unitLabel;
 
+  @SerializedName("updated")
   Long updated;
 
   /**
    * A URL of a publicly-accessible webpage for this product. Only applicable to products of
    * `type=good`.
    */
+  @SerializedName("url")
   String url;
 
   /**

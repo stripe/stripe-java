@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
@@ -17,24 +18,30 @@ import lombok.Setter;
 public class UsageRecord extends ApiResource implements HasId {
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /** The usage quantity for the specified date. */
+  @SerializedName("quantity")
   Long quantity;
 
   /** The ID of the subscription item this usage record contains data for. */
+  @SerializedName("subscription_item")
   String subscriptionItem;
 
   /** The timestamp when this usage occurred. */
+  @SerializedName("timestamp")
   Long timestamp;
 
   /**

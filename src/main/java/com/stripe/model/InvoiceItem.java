@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
@@ -19,35 +20,44 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
    * Amount (in the `currency` specified) of the invoice item. This should always be equal to
    * `unit_amount * quantity`.
    */
+  @SerializedName("amount")
   Long amount;
 
   /**
    * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
    * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
    */
+  @SerializedName("currency")
   String currency;
 
   /** The ID of the customer who will be billed when this invoice item is billed. */
+  @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
+  @SerializedName("date")
   Long date;
 
   /** Always true for a deleted object. */
+  @SerializedName("deleted")
   Boolean deleted;
 
   /** An arbitrary string attached to the object. Often useful for displaying to users. */
+  @SerializedName("description")
   String description;
 
   /** If true, discounts will apply to this invoice item. Always false for prorations. */
+  @SerializedName("discountable")
   Boolean discountable;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /** The ID of the invoice this invoice item belongs to. */
+  @SerializedName("invoice")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Invoice> invoice;
@@ -56,6 +66,7 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /**
@@ -63,39 +74,48 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
    * additional information about the object in a structured format.
    */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("metadata")
   Map<String, String> metadata;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
+  @SerializedName("period")
   InvoiceLineItemPeriod period;
 
   /**
    * If the invoice item is a proration, the plan of the subscription that the proration was
    * computed for.
    */
+  @SerializedName("plan")
   Plan plan;
 
   /**
    * Whether the invoice item was created automatically as a proration adjustment when the customer
    * switched plans.
    */
+  @SerializedName("proration")
   Boolean proration;
 
   /**
    * Quantity of units for the invoice item. If the invoice item is a proration, the quantity of the
    * subscription that the proration was computed for.
    */
+  @SerializedName("quantity")
   Long quantity;
 
   /** The subscription that this invoice item has been created for, if any. */
+  @SerializedName("subscription")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Subscription> subscription;
 
+  @SerializedName("subscription_item")
   String subscriptionItem;
 
   /** Unit Amount (in the `currency` specified) of the invoice item. */
+  @SerializedName("unit_amount")
   Long unitAmount;
 
   /** Get id of expandable `customer` object. */

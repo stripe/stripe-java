@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
@@ -17,6 +18,7 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   /** Whether the plan is currently available for new subscriptions. */
+  @SerializedName("active")
   Boolean active;
 
   /**
@@ -26,9 +28,11 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
    * period bounds) or `max` which picks the usage record with the maximum reported usage during a
    * period. Defaults to `sum`.
    */
+  @SerializedName("aggregate_usage")
   String aggregateUsage;
 
   /** The amount in %s to be charged on the interval specified. */
+  @SerializedName("amount")
   Long amount;
 
   /**
@@ -38,40 +42,48 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
    * `usage_type=metered`). `tiered` indicates that the unit pricing will be computed using a
    * tiering strategy as defined using the `tiers` and `tiers_mode` attributes.
    */
+  @SerializedName("billing_scheme")
   String billingScheme;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
 
   /**
    * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
    * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
    */
+  @SerializedName("currency")
   String currency;
 
   /** Always true for a deleted object. */
+  @SerializedName("deleted")
   Boolean deleted;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /**
    * One of `day`, `week`, `month` or `year`. The frequency with which a subscription should be
    * billed.
    */
+  @SerializedName("interval")
   String interval;
 
   /**
    * The number of intervals (specified in the `interval` property) between subscription billings.
    * For example, `interval=month` and `interval_count=3` bills every 3 months.
    */
+  @SerializedName("interval_count")
   Long intervalCount;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /**
@@ -79,15 +91,19 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
    * additional information about the object in a structured format.
    */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("metadata")
   Map<String, String> metadata;
 
   /** A brief description of the plan, hidden from customers. */
+  @SerializedName("nickname")
   String nickname;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /** The product whose pricing this plan determines. */
+  @SerializedName("product")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Product> product;
@@ -96,6 +112,7 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
    * Each element represents a pricing tier. This parameter requires `billing_scheme` to be set to
    * `tiered`. See also the documentation for `billing_scheme`.
    */
+  @SerializedName("tiers")
   List<Tier> tiers;
 
   /**
@@ -103,18 +120,21 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
    * tiering, the maximum quantity within a period determines the per unit price, in `graduated`
    * tiering pricing can successively change as the quantity grows.
    */
+  @SerializedName("tiers_mode")
   String tiersMode;
 
   /**
    * Apply a transformation to the reported usage or set quantity before computing the billed price.
    * Cannot be combined with `tiers`.
    */
+  @SerializedName("transform_usage")
   TransformUsage transformUsage;
 
   /**
    * Default number of trial days when subscribing a customer to this plan using
    * [`trial_from_plan=true`](/docs/api#create_subscription-trial_from_plan).
    */
+  @SerializedName("trial_period_days")
   Long trialPeriodDays;
 
   /**
@@ -123,6 +143,7 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
    * a subscription, `metered` will aggregate the total usage based on usage records. Defaults to
    * `licensed`.
    */
+  @SerializedName("usage_type")
   String usageType;
 
   /** Get id of expandable `product` object. */
@@ -237,12 +258,15 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   @EqualsAndHashCode(callSuper = false)
   public static class Tier extends StripeObject {
     /** Price for the entire tier. */
+    @SerializedName("flat_amount")
     Long flatAmount;
 
     /** Per unit price for units relevant to the tier. */
+    @SerializedName("unit_amount")
     Long unitAmount;
 
     /** Up to and including to this quantity will be contained in the tier. */
+    @SerializedName("up_to")
     Long upTo;
   }
 
@@ -251,9 +275,11 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   @EqualsAndHashCode(callSuper = false)
   public static class TransformUsage extends StripeObject {
     /** Divide usage by this number. */
+    @SerializedName("divide_by")
     Long divideBy;
 
     /** After division, either round the result `up` or `down`. */
+    @SerializedName("round")
     String round;
   }
 }

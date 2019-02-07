@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,7 +11,9 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class SourceTypeEps extends StripeObject {
+  @SerializedName("reference")
   String reference;
 
+  @SerializedName("statement_descriptor")
   String statementDescriptor;
 }

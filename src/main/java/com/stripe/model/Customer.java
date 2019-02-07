@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
@@ -24,23 +25,28 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
    * only taken into account as invoices are finalized. Note that the balance does not include
    * unpaid invoices.
    */
+  @SerializedName("account_balance")
   Long accountBalance;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
 
   /**
    * Three-letter [ISO code for the currency](https://stripe.com/docs/currencies) the customer can
    * be charged in for recurring billing purposes.
    */
+  @SerializedName("currency")
   String currency;
 
   /** ID of the default payment source for the customer. */
+  @SerializedName("default_source")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<PaymentSource> defaultSource;
 
   /** Always true for a deleted object. */
+  @SerializedName("deleted")
   Boolean deleted;
 
   /**
@@ -48,30 +54,38 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
    * the invoice's latest charge is failed. When the customer's latest invoice is billed by sending
    * an invoice, delinquent is true if the invoice is not paid by its due date.
    */
+  @SerializedName("delinquent")
   Boolean delinquent;
 
   /** An arbitrary string attached to the object. Often useful for displaying to users. */
+  @SerializedName("description")
   String description;
 
   /** Describes the current discount active on the customer, if there is one. */
+  @SerializedName("discount")
   Discount discount;
 
   /** The customer's email address. */
+  @SerializedName("email")
   String email;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /** The prefix for the customer used to generate unique invoice numbers. */
+  @SerializedName("invoice_prefix")
   String invoicePrefix;
 
+  @SerializedName("invoice_settings")
   InvoiceSettings invoiceSettings;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /**
@@ -79,26 +93,33 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
    * additional information about the object in a structured format.
    */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("metadata")
   Map<String, String> metadata;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /**
    * Mailing and shipping address for the customer. Appears on invoices emailed to this customer.
    */
+  @SerializedName("shipping")
   ShippingDetails shipping;
 
   /** The customer's payment sources, if any. */
+  @SerializedName("sources")
   PaymentSourceCollection sources;
 
   /** The customer's current subscriptions, if any. */
+  @SerializedName("subscriptions")
   SubscriptionCollection subscriptions;
 
   /** The customer's tax information. Appears on invoices emailed to this customer. */
+  @SerializedName("tax_info")
   TaxInfo taxInfo;
 
   /** Describes the status of looking up the tax ID provided in `tax_info`. */
+  @SerializedName("tax_info_verification")
   TaxInfoVerification taxInfoVerification;
 
   /** Get id of expandable `defaultSource` object. */
@@ -273,9 +294,11 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   @EqualsAndHashCode(callSuper = false)
   public static class InvoiceSettings extends StripeObject {
     /** Default custom fields to be displayed on invoices for this customer. */
+    @SerializedName("custom_fields")
     List<Invoice.CustomField> customFields;
 
     /** Default footer to be displayed on invoices for this customer. */
+    @SerializedName("footer")
     String footer;
   }
 
@@ -284,9 +307,11 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   @EqualsAndHashCode(callSuper = false)
   public static class TaxInfo extends StripeObject {
     /** The customer's tax ID number. */
+    @SerializedName("tax_id")
     String taxId;
 
     /** The type of ID number. */
+    @SerializedName("type")
     String type;
   }
 
@@ -298,9 +323,11 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
      * The state of verification for this customer. Possible values are `unverified`, `pending`, or
      * `verified`.
      */
+    @SerializedName("status")
     String status;
 
     /** The official name associated with the tax ID returned from the external provider. */
+    @SerializedName("verified_name")
     String verifiedName;
   }
 }

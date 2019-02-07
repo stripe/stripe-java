@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
@@ -16,51 +17,61 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class Topup extends ApiResource implements BalanceTransactionSource, MetadataStore<Topup> {
   /** Amount transferred. */
+  @SerializedName("amount")
   Long amount;
 
   /**
    * ID of the balance transaction that describes the impact of this top-up on your account balance.
    * May not be specified depending on status of top-up.
    */
+  @SerializedName("balance_transaction")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<BalanceTransaction> balanceTransaction;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
 
   /**
    * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
    * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
    */
+  @SerializedName("currency")
   String currency;
 
   /** An arbitrary string attached to the object. Often useful for displaying to users. */
+  @SerializedName("description")
   String description;
 
   /**
    * Date the funds are expected to arrive in your Stripe account for payouts. This factors in
    * delays like weekends or bank holidays. May not be specified depending on status of top-up.
    */
+  @SerializedName("expected_availability_date")
   Long expectedAvailabilityDate;
 
   /**
    * Error code explaining reason for top-up failure if available (see [the errors
    * section](/docs/api#errors) for a list of codes).
    */
+  @SerializedName("failure_code")
   String failureCode;
 
   /** Message to user further explaining reason for top-up failure if available. */
+  @SerializedName("failure_message")
   String failureMessage;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /**
@@ -68,25 +79,31 @@ public class Topup extends ApiResource implements BalanceTransactionSource, Meta
    * additional information about the object in a structured format.
    */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("metadata")
   Map<String, String> metadata;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
+  @SerializedName("source")
   Source source;
 
   /**
    * Extra information about a top-up. This will appear on your source's bank statement. It must
    * contain at least one letter.
    */
+  @SerializedName("statement_descriptor")
   String statementDescriptor;
 
   /**
    * The status of the top-up is either `canceled`, `failed`, `pending`, `reversed`, or `succeeded`.
    */
+  @SerializedName("status")
   String status;
 
   /** A string that identifies this top-up as part of a group. */
+  @SerializedName("transfer_group")
   String transferGroup;
 
   /** Get id of expandable `balanceTransaction` object. */
