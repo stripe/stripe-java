@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
@@ -16,12 +17,15 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class LoginLink extends ApiResource {
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /** The URL for the login link. */
+  @SerializedName("url")
   String url;
 
   /**

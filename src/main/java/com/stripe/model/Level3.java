@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import java.util.List;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -11,15 +12,21 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Level3 extends StripeObject {
+  @SerializedName("customer_reference")
   String customerReference;
 
+  @SerializedName("line_items")
   List<Level3LineItem> lineItems;
 
+  @SerializedName("merchant_reference")
   String merchantReference;
 
+  @SerializedName("shipping_address_zip")
   String shippingAddressZip;
 
+  @SerializedName("shipping_amount")
   Long shippingAmount;
 
+  @SerializedName("shipping_from_zip")
   String shippingFromZip;
 }

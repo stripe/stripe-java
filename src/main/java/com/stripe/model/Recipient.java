@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
@@ -16,34 +17,43 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class Recipient extends ApiResource implements HasId, MetadataStore<Recipient> {
   /** Hash describing the current account on the recipient, if there is one. */
+  @SerializedName("active_account")
   BankAccount activeAccount;
 
+  @SerializedName("cards")
   CardCollection cards;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
 
   /** The default card to use for creating transfers to this recipient. */
+  @SerializedName("default_card")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Card> defaultCard;
 
   /** Always true for a deleted object. */
+  @SerializedName("deleted")
   Boolean deleted;
 
   /** An arbitrary string attached to the object. Often useful for displaying to users. */
+  @SerializedName("description")
   String description;
 
+  @SerializedName("email")
   String email;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /**
@@ -51,6 +61,7 @@ public class Recipient extends ApiResource implements HasId, MetadataStore<Recip
    * additional information about the object in a structured format.
    */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("metadata")
   Map<String, String> metadata;
 
   /**
@@ -58,27 +69,33 @@ public class Recipient extends ApiResource implements HasId, MetadataStore<Recip
    * If set, the recipient can no longer be updated, nor can transfers be made to it: use the Custom
    * account instead.
    */
+  @SerializedName("migrated_to")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Account> migratedTo;
 
   /** Full, legal name of the recipient. */
+  @SerializedName("name")
   String name;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
+  @SerializedName("rolled_back_from")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Account> rolledBackFrom;
 
   /** Type of the recipient, one of `individual` or `corporation`. */
+  @SerializedName("type")
   String type;
 
   /**
    * Whether the recipient has been verified. This field is non-standard, and maybe removed in the
    * future
    */
+  @SerializedName("verified")
   Boolean verified;
 
   /** Get id of expandable `defaultCard` object. */

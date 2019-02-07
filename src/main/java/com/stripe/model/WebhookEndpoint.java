@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
@@ -17,42 +18,52 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class WebhookEndpoint extends ApiResource implements HasId {
   /** The ID of the associated Connect application. */
+  @SerializedName("application")
   String application;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
 
   /** Always true for a deleted object. */
+  @SerializedName("deleted")
   Boolean deleted;
 
   /**
    * The list of events to enable for this endpoint. You may specify `['*']` to enable all events.
    */
+  @SerializedName("enabled_events")
   List<String> enabledEvents;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /**
    * The endpoint's secret, used to generate [webhook signatures](/docs/webhooks/signatures). Only
    * returned at creation.
    */
+  @SerializedName("secret")
   String secret;
 
   /** The status of the webhook. It can be `enabled` or `disabled`. */
+  @SerializedName("status")
   String status;
 
   /** The URL of the webhook endpoint. */
+  @SerializedName("url")
   String url;
 
   /** Returns a list of your webhook endpoints. */

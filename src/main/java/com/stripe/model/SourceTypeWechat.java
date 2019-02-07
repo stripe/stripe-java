@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,11 +11,15 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class SourceTypeWechat extends StripeObject {
+  @SerializedName("native_url")
   String nativeUrl;
 
+  @SerializedName("prepay_id")
   String prepayId;
 
+  @SerializedName("qr_code_url")
   String qrCodeUrl;
 
+  @SerializedName("statement_descriptor")
   String statementDescriptor;
 }

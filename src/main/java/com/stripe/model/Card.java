@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
@@ -22,38 +23,47 @@ public class Card extends ApiResource
    * The account this card belongs to. This attribute will not be in the card object if the card
    * belongs to a customer or recipient instead.
    */
+  @SerializedName("account")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Account> account;
 
   /** City/District/Suburb/Town/Village. */
+  @SerializedName("address_city")
   String addressCity;
 
   /** Billing address country, if provided when creating card. */
+  @SerializedName("address_country")
   String addressCountry;
 
   /** Address line 1 (Street address/PO Box/Company name). */
+  @SerializedName("address_line1")
   String addressLine1;
 
   /**
    * If `address_line1` was provided, results of the check: `pass`, `fail`, `unavailable`, or
    * `unchecked`.
    */
+  @SerializedName("address_line1_check")
   String addressLine1Check;
 
   /** Address line 2 (Apartment/Suite/Unit/Building). */
+  @SerializedName("address_line2")
   String addressLine2;
 
   /** State/County/Province/Region. */
+  @SerializedName("address_state")
   String addressState;
 
   /** ZIP or postal code. */
+  @SerializedName("address_zip")
   String addressZip;
 
   /**
    * If `address_zip` was provided, results of the check: `pass`, `fail`, `unavailable`, or
    * `unchecked`.
    */
+  @SerializedName("address_zip_check")
   String addressZipCheck;
 
   /**
@@ -61,84 +71,102 @@ public class Card extends ApiResource
    * "instant"]`. Only values from this set should be passed as the `method` when creating a
    * transfer.
    */
+  @SerializedName("available_payout_methods")
   List<String> availablePayoutMethods;
 
   /**
    * Card brand. Can be `American Express`, `Diners Club`, `Discover`, `JCB`, `MasterCard`,
    * `UnionPay`, `Visa`, or `Unknown`.
    */
+  @SerializedName("brand")
   String brand;
 
   /**
    * Two-letter ISO code representing the country of the card. You could use this attribute to get a
    * sense of the international breakdown of cards you've collected.
    */
+  @SerializedName("country")
   String country;
 
   /**
    * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
    * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
    */
+  @SerializedName("currency")
   String currency;
 
   /**
    * The customer that this card belongs to. This attribute will not be in the card object if the
    * card belongs to an account or recipient instead.
    */
+  @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
   /** If a CVC was provided, results of the check: `pass`, `fail`, `unavailable`, or `unchecked`. */
+  @SerializedName("cvc_check")
   String cvcCheck;
 
   /** Whether this card is the default external account for its currency. */
+  @SerializedName("default_for_currency")
   Boolean defaultForCurrency;
 
   /** Always true for a deleted object. */
+  @SerializedName("deleted")
   Boolean deleted;
 
   /**
    * Card description. (Only for internal use only and not typically available in standard API
    * requests.)
    */
+  @SerializedName("description")
   String description;
 
   /** (For tokenized numbers only.) The last four digits of the device account number. */
+  @SerializedName("dynamic_last4")
   String dynamicLast4;
 
   /** Two-digit number representing the card's expiration month. */
+  @SerializedName("exp_month")
   Long expMonth;
 
   /** Four-digit number representing the card's expiration year. */
+  @SerializedName("exp_year")
   Long expYear;
 
   /**
    * Uniquely identifies this particular card number. You can use this attribute to check whether
    * two customers who've signed up with you are using the same card number, for example.
    */
+  @SerializedName("fingerprint")
   String fingerprint;
 
   /** Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`. */
+  @SerializedName("funding")
   String funding;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /**
    * Issuer identification number of the card. (Only for internal use only and not typically
    * available in standard API requests.)
    */
+  @SerializedName("iin")
   String iin;
 
   /**
    * Issuer bank name of the card. (Only for internal use only and not typically available in
    * standard API requests.)
    */
+  @SerializedName("issuer")
   String issuer;
 
   /** The last four digits of the card. */
+  @SerializedName("last4")
   String last4;
 
   /**
@@ -146,18 +174,22 @@ public class Card extends ApiResource
    * additional information about the object in a structured format.
    */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("metadata")
   Map<String, String> metadata;
 
   /** Cardholder name. */
+  @SerializedName("name")
   String name;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /**
    * The recipient that this card belongs to. This attribute will not be in the card object if the
    * card belongs to a customer or account instead.
    */
+  @SerializedName("recipient")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Recipient> recipient;
@@ -166,6 +198,7 @@ public class Card extends ApiResource
    * If the card number is tokenized, this is the method that was used. Can be `apple_pay` or
    * `google_pay`.
    */
+  @SerializedName("tokenization_method")
   String tokenizationMethod;
 
   /** Get id of expandable `account` object. */

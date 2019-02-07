@@ -2,6 +2,7 @@
 
 package com.stripe.model.issuing;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Address;
@@ -20,40 +21,50 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Card extends ApiResource implements HasId, MetadataStore<Card> {
+  @SerializedName("authorization_controls")
   AuthorizationControls authorizationControls;
 
   /** The brand of the card. */
+  @SerializedName("brand")
   String brand;
 
   /** The [Cardholder](/docs/api#issuing_cardholder_object) object to which the card belongs. */
+  @SerializedName("cardholder")
   Cardholder cardholder;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
 
   /**
    * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
    * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
    */
+  @SerializedName("currency")
   String currency;
 
   /** The expiration month of the card. */
+  @SerializedName("exp_month")
   Long expMonth;
 
   /** The expiration year of the card. */
+  @SerializedName("exp_year")
   Long expYear;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /** The last 4 digits of the card number. */
+  @SerializedName("last4")
   String last4;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /**
@@ -61,21 +72,27 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
    * additional information about the object in a structured format.
    */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("metadata")
   Map<String, String> metadata;
 
   /** The name of the cardholder, printed on the card. */
+  @SerializedName("name")
   String name;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /** Where and how the card will be shipped. */
+  @SerializedName("shipping")
   Shipping shipping;
 
   /** One of `active`, `inactive`, `canceled`, `lost`, `stolen`, or `pending`. */
+  @SerializedName("status")
   String status;
 
   /** One of `virtual` or `physical`. */
+  @SerializedName("type")
   String type;
 
   /**
@@ -186,6 +203,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
      * [categories](/docs/api#issuing_authorization_object-merchant_data-category) of authorizations
      * permitted on this card.
      */
+    @SerializedName("allowed_categories")
     List<String> allowedCategories;
 
     /**
@@ -193,12 +211,14 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
      * [categories](/docs/api#issuing_authorization_object-merchant_data-category) of authorizations
      * to always decline on this card.
      */
+    @SerializedName("blocked_categories")
     List<String> blockedCategories;
 
     /**
      * The currency of the card. See
      * [max_amount](/docs/api#issuing_card_object-authorization_controls-max_amount)
      */
+    @SerializedName("currency")
     String currency;
 
     /**
@@ -206,12 +226,14 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
      * Authorization amounts in a different currency will be converted to the card's currency when
      * evaluating this control.
      */
+    @SerializedName("max_amount")
     Long maxAmount;
 
     /**
      * Maximum count of approved authorizations on this card. Counts all authorizations
      * retroactively.
      */
+    @SerializedName("max_approvals")
     Long maxApprovals;
   }
 
@@ -219,42 +241,51 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Shipping extends StripeObject {
+    @SerializedName("address")
     Address address;
 
     /** The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. */
+    @SerializedName("carrier")
     String carrier;
 
     /** A unix timestamp representing a best estimate of when the card will be delivered. */
+    @SerializedName("eta")
     Long eta;
 
     /** Recipient name. */
+    @SerializedName("name")
     String name;
 
     /** Recipient phone (including extension). */
+    @SerializedName("phone")
     String phone;
 
     /**
      * The delivery status of the card. One of `pending`, `shipped`, `delivered`, `returned`,
      * `failure`, or `canceled`.
      */
+    @SerializedName("status")
     String status;
 
     /**
      * The tracking number for a physical product, obtained from the delivery service. If multiple
      * tracking numbers were generated for this purchase, please separate them with commas.
      */
+    @SerializedName("tracking_number")
     String trackingNumber;
 
     /**
      * A link to the shipping carrier's site where you can view detailed information about a card
      * shipment.
      */
+    @SerializedName("tracking_url")
     String trackingUrl;
 
     /**
      * One of `bulk` or `individual`. Bulk shipments will be grouped and mailed together, while
      * individual ones will not.
      */
+    @SerializedName("type")
     String type;
   }
 }

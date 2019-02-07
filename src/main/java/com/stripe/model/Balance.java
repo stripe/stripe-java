@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
@@ -21,21 +22,25 @@ public class Balance extends ApiResource {
    * explicitly via the [Transfers API](#transfers) or [Payouts API](#payouts). The available
    * balance for each currency and payment type can be found in the `source_types` property.
    */
+  @SerializedName("available")
   List<Money> available;
 
   /**
    * Funds held due to negative balances on connected Custom accounts. The connect reserve balance
    * for each currency and payment type can be found in the `source_types` property.
    */
+  @SerializedName("connect_reserved")
   List<Money> connectReserved;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /**
@@ -43,6 +48,7 @@ public class Balance extends ApiResource {
    * pending balance for each currency, and for each payment type, can be found in the
    * `source_types` property.
    */
+  @SerializedName("pending")
   List<Money> pending;
 
   /**
@@ -82,14 +88,17 @@ public class Balance extends ApiResource {
   @EqualsAndHashCode(callSuper = false)
   public static class Money extends StripeObject {
     /** Balance amount. */
+    @SerializedName("amount")
     Long amount;
 
     /**
      * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
      * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
      */
+    @SerializedName("currency")
     String currency;
 
+    @SerializedName("source_types")
     MoneySourceTypes sourceTypes;
   }
 
@@ -98,9 +107,11 @@ public class Balance extends ApiResource {
   @EqualsAndHashCode(callSuper = false)
   public static class MoneySourceTypes extends StripeObject {
     /** Amount for bank account. */
+    @SerializedName("bank_account")
     Long bankAccount;
 
     /** Amount for card. */
+    @SerializedName("card")
     Long card;
   }
 }

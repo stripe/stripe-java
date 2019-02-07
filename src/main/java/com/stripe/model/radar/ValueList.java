@@ -2,6 +2,7 @@
 
 package com.stripe.model.radar;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
@@ -18,34 +19,42 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class ValueList extends ApiResource implements HasId, MetadataStore<ValueList> {
   /** The name of the value list for use in rules. */
+  @SerializedName("alias")
   String alias;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
 
   /** The name or email address of the user who created this value list. */
+  @SerializedName("created_by")
   String createdBy;
 
   /** Always true for a deleted object. */
+  @SerializedName("deleted")
   Boolean deleted;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /**
    * The type of items in the value list. One of `card_fingerprint`, `card_bin`, `email`,
    * `ip_address`, `country`, `string`, or `case_sensitive_string`.
    */
+  @SerializedName("item_type")
   String itemType;
 
   /** List of items contained within this value list. */
+  @SerializedName("list_items")
   ValueListItemCollection listItems;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /**
@@ -53,12 +62,15 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
    * additional information about the object in a structured format.
    */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("metadata")
   Map<String, String> metadata;
 
   /** The name of the value list. */
+  @SerializedName("name")
   String name;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /**

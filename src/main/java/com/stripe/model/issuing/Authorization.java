@@ -2,6 +2,7 @@
 
 package com.stripe.model.issuing;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.BalanceTransaction;
@@ -23,18 +24,21 @@ import lombok.Setter;
 public class Authorization extends ApiResource
     implements BalanceTransactionSource, MetadataStore<Authorization> {
   /** Whether the authorization has been approved. */
+  @SerializedName("approved")
   Boolean approved;
 
   /**
    * How the card details were provided. One of `keyed_in`, `swipe`, `chip`, `contactless`, or
    * `online`.
    */
+  @SerializedName("authorization_method")
   String authorizationMethod;
 
   /**
    * The amount that has been authorized. This will be `0` when the object is created, and increase
    * after it has been approved.
    */
+  @SerializedName("authorized_amount")
   Long authorizedAmount;
 
   /**
@@ -42,18 +46,23 @@ public class Authorization extends ApiResource
    * currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a
    * [supported currency](https://stripe.com/docs/currencies).
    */
+  @SerializedName("authorized_currency")
   String authorizedCurrency;
 
+  @SerializedName("balance_transactions")
   List<BalanceTransaction> balanceTransactions;
 
+  @SerializedName("card")
   Card card;
 
   /** The cardholder to whom this authorization belongs. */
+  @SerializedName("cardholder")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Cardholder> cardholder;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
 
   /**
@@ -62,26 +71,32 @@ public class Authorization extends ApiResource
    * created, and increase after it has been approved. For multi-currency transactions,
    * `held_amount` can be used to determine the expected exchange rate.
    */
+  @SerializedName("held_amount")
   Long heldAmount;
 
   /**
    * The currency of the [held amount](/docs/api#issuing_authorization_object-held_amount). This
    * will always be the card currency.
    */
+  @SerializedName("held_currency")
   String heldCurrency;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
+  @SerializedName("is_held_amount_controllable")
   Boolean isHeldAmountControllable;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
+  @SerializedName("merchant_data")
   MerchantData merchantData;
 
   /**
@@ -89,36 +104,45 @@ public class Authorization extends ApiResource
    * additional information about the object in a structured format.
    */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("metadata")
   Map<String, String> metadata;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /**
    * The amount the user is requesting to be authorized. This field will only be non-zero during an
    * `issuing.authorization.request` webhook.
    */
+  @SerializedName("pending_authorized_amount")
   Long pendingAuthorizedAmount;
 
   /**
    * The additional amount Stripe will hold if the authorization is approved. This field will only
    * be non-zero during an `issuing.authorization.request` webhook.
    */
+  @SerializedName("pending_held_amount")
   Long pendingHeldAmount;
 
+  @SerializedName("request_history")
   List<RequestHistory> requestHistory;
 
   /** One of `pending`, `reversed`, or `closed`. */
+  @SerializedName("status")
   String status;
 
+  @SerializedName("transactions")
   List<Transaction> transactions;
 
+  @SerializedName("verification_data")
   VerificationData verificationData;
 
   /**
    * What, if any, digital wallet was used for this authorization. One of `apple_pay`, `google_pay`,
    * or `samsung_pay`.
    */
+  @SerializedName("wallet_provider")
   String walletProvider;
 
   /** Get id of expandable `cardholder` object. */
@@ -257,9 +281,11 @@ public class Authorization extends ApiResource
   @EqualsAndHashCode(callSuper = false)
   public static class RequestHistory extends StripeObject {
     /** Whether this request was approved. */
+    @SerializedName("approved")
     Boolean approved;
 
     /** The amount that was authorized at the time of this request. */
+    @SerializedName("authorized_amount")
     Long authorizedAmount;
 
     /**
@@ -267,18 +293,22 @@ public class Authorization extends ApiResource
      * currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a
      * [supported currency](https://stripe.com/docs/currencies).
      */
+    @SerializedName("authorized_currency")
     String authorizedCurrency;
 
     /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+    @SerializedName("created")
     Long created;
 
     /**
      * The amount Stripe held from your account to fund the authorization, if the request was
      * approved.
      */
+    @SerializedName("held_amount")
     Long heldAmount;
 
     /** The currency of the [held amount](/docs/api#issuing_authorization_object-held_amount). */
+    @SerializedName("held_currency")
     String heldCurrency;
 
     /**
@@ -286,6 +316,7 @@ public class Authorization extends ApiResource
      * `account_compliance_disabled`, `account_inactive`, `suspected_fraud`, `webhook_approved`,
      * `webhook_declined`, or `webhook_timeout`.
      */
+    @SerializedName("reason")
     String reason;
   }
 
@@ -294,12 +325,15 @@ public class Authorization extends ApiResource
   @EqualsAndHashCode(callSuper = false)
   public static class VerificationData extends StripeObject {
     /** One of `match`, `mismatch`, or `not_provided`. */
+    @SerializedName("address_line1_check")
     String addressLine1Check;
 
     /** One of `match`, `mismatch`, or `not_provided`. */
+    @SerializedName("address_zip_check")
     String addressZipCheck;
 
     /** One of `match`, `mismatch`, or `not_provided`. */
+    @SerializedName("cvc_check")
     String cvcCheck;
   }
 }
