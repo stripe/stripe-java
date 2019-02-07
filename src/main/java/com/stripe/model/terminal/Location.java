@@ -2,6 +2,7 @@
 
 package com.stripe.model.terminal;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Address;
@@ -17,19 +18,24 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Location extends ApiResource implements HasId {
+  @SerializedName("address")
   Address address;
 
   /** Always true for a deleted object. */
+  @SerializedName("deleted")
   Boolean deleted;
 
   /** The display name of the location. */
+  @SerializedName("display_name")
   String displayName;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /** Retrieves a <code>Location</code> object. */

@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
@@ -15,36 +16,44 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class ThreeDSecure extends ApiResource implements HasId {
+  @SerializedName("amount")
   Long amount;
 
   /**
    * True if the cardholder went through the authentication flow and their bank indicated that
    * authentication succeeded.
    */
+  @SerializedName("authenticated")
   Boolean authenticated;
 
+  @SerializedName("card")
   Card card;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
 
   /**
    * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
    * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
    */
+  @SerializedName("currency")
   String currency;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /**
@@ -52,6 +61,7 @@ public class ThreeDSecure extends ApiResource implements HasId {
    * are going to use Stripe.js to display the authentication page in an iframe, you should use the
    * value "_callback".
    */
+  @SerializedName("redirect_url")
   String redirectUrl;
 
   /**
@@ -61,6 +71,7 @@ public class ThreeDSecure extends ApiResource implements HasId {
    * because the bank has not implemented 3D Secure, the object wlil be in status `succeeded`.
    * `failed` indicates that authentication was attempted unsuccessfully.
    */
+  @SerializedName("status")
   String status;
 
   /** Retrieves a 3D Secure object. */

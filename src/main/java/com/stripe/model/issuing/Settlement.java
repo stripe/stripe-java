@@ -2,6 +2,7 @@
 
 package com.stripe.model.issuing;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
@@ -18,28 +19,34 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class Settlement extends ApiResource implements HasId, MetadataStore<Settlement> {
   /** The Bank Identification Number reflecting this settlement record. */
+  @SerializedName("bin")
   String bin;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
 
   /**
    * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
    * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
    */
+  @SerializedName("currency")
   String currency;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /** The total interchange received as reimbursement for the transactions. */
+  @SerializedName("interchange_fees")
   Long interchangeFees;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /**
@@ -47,33 +54,43 @@ public class Settlement extends ApiResource implements HasId, MetadataStore<Sett
    * additional information about the object in a structured format.
    */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("metadata")
   Map<String, String> metadata;
 
   /** The total net amount required to settle with the network. */
+  @SerializedName("net_total")
   Long netTotal;
 
   /** The total amount of fees owed to the network. */
+  @SerializedName("network_fees")
   Long networkFees;
 
   /** The Settlement Identification Number assigned by the network. */
+  @SerializedName("network_settlement_identifier")
   String networkSettlementIdentifier;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /** The date of the settlement event. */
+  @SerializedName("settlement_date")
   Long settlementDate;
 
   /** One of `international` or `uk_national_net`. */
+  @SerializedName("settlement_service")
   String settlementService;
 
   /** The total number of transactions reflected in this settlement. */
+  @SerializedName("transaction_count")
   Long transactionCount;
 
   /** The total transaction amount reflected in this settlement. */
+  @SerializedName("transaction_volume")
   Long transactionVolume;
 
   /** Whether or not the transactions have been reconciled. */
+  @SerializedName("transactions_reconciled")
   Boolean transactionsReconciled;
 
   /**

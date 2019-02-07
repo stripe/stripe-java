@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
@@ -19,19 +20,24 @@ public class CountrySpec extends ApiResource implements HasId {
   /**
    * The default currency for this country. This applies to both payment methods and bank accounts.
    */
+  @SerializedName("default_currency")
   String defaultCurrency;
 
   /** Unique identifier for the object. Represented as the ISO country code for this country. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /** Currencies that can be accepted in the specific country (for transfers). */
+  @SerializedName("supported_bank_account_currencies")
   Map<String, List<String>> supportedBankAccountCurrencies;
 
   /** Currencies that can be accepted in the specified country (for payments). */
+  @SerializedName("supported_payment_currencies")
   List<String> supportedPaymentCurrencies;
 
   /**
@@ -40,11 +46,14 @@ public class CountrySpec extends ApiResource implements HasId {
    * `stripe` payment method refers to [charging through your
    * platform](https://stripe.com/docs/connect/destination-charges).
    */
+  @SerializedName("supported_payment_methods")
   List<String> supportedPaymentMethods;
 
   /** Countries that can accept transfers from the specified country. */
+  @SerializedName("supported_transfer_countries")
   List<String> supportedTransferCountries;
 
+  @SerializedName("verification_fields")
   VerificationFields verificationFields;
 
   /** Lists all Country Spec objects available in the API. */
@@ -83,9 +92,11 @@ public class CountrySpec extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class VerificationFieldDetails extends StripeObject {
     /** Additional fields which are only required for some users. */
+    @SerializedName("additional")
     List<String> additional;
 
     /** Fields which every account must eventually provide. */
+    @SerializedName("minimum")
     List<String> minimum;
   }
 
@@ -93,8 +104,10 @@ public class CountrySpec extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class VerificationFields extends StripeObject {
+    @SerializedName("company")
     VerificationFieldDetails company;
 
+    @SerializedName("individual")
     VerificationFieldDetails individual;
   }
 }

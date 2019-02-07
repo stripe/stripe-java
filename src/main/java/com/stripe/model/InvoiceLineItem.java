@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -12,27 +13,34 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class InvoiceLineItem extends StripeObject implements HasId {
   /** The amount, in %s. */
+  @SerializedName("amount")
   Long amount;
 
   /**
    * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
    * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
    */
+  @SerializedName("currency")
   String currency;
 
   /** An arbitrary string attached to the object. Often useful for displaying to users. */
+  @SerializedName("description")
   String description;
 
   /** If true, discounts will apply to this line item. Always false for prorations. */
+  @SerializedName("discountable")
   Boolean discountable;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
+  @SerializedName("invoice_item")
   String invoiceItem;
 
   /** Whether this is a test line item. */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /**
@@ -41,34 +49,43 @@ public class InvoiceLineItem extends StripeObject implements HasId {
    * `type=subscription` this will reflect the metadata of the subscription that caused the line
    * item to be created.
    */
+  @SerializedName("metadata")
   Map<String, String> metadata;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
+  @SerializedName("period")
   InvoiceLineItemPeriod period;
 
   /** The plan of the subscription, if the line item is a subscription or a proration. */
+  @SerializedName("plan")
   Plan plan;
 
   /** Whether this is a proration. */
+  @SerializedName("proration")
   Boolean proration;
 
   /** The quantity of the subscription, if the line item is a subscription or a proration. */
+  @SerializedName("quantity")
   Long quantity;
 
   /** The subscription that the invoice item pertains to, if any. */
+  @SerializedName("subscription")
   String subscription;
 
   /**
    * The subscription item that generated this invoice item. Left empty if the line item is not an
    * explicit result of a subscription.
    */
+  @SerializedName("subscription_item")
   String subscriptionItem;
 
   /**
    * A string identifying the type of the source of this line item, either an `invoiceitem` or a
    * `subscription`.
    */
+  @SerializedName("type")
   String type;
 }

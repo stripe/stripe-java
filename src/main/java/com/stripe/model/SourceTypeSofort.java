@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,17 +11,24 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class SourceTypeSofort extends StripeObject {
+  @SerializedName("bank_code")
   String bankCode;
 
+  @SerializedName("bank_name")
   String bankName;
 
+  @SerializedName("bic")
   String bic;
 
+  @SerializedName("country")
   String country;
 
+  @SerializedName("iban_last4")
   String ibanLast4;
 
+  @SerializedName("preferred_language")
   String preferredLanguage;
 
+  @SerializedName("statement_descriptor")
   String statementDescriptor;
 }
