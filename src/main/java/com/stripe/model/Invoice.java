@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
@@ -24,18 +25,22 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * (the customer owes money), the `amount_due` will also take that into account. The charge that
    * gets generated for the invoice will be for the amount specified in `amount_due`.
    */
+  @SerializedName("amount_due")
   Long amountDue;
 
   /** The amount, in %s, that was paid. */
+  @SerializedName("amount_paid")
   Long amountPaid;
 
   /** The amount remaining, in %s, that is due. */
+  @SerializedName("amount_remaining")
   Long amountRemaining;
 
   /**
    * The fee in %s that will be applied to the invoice and transferred to the application owner's
    * Stripe account when the invoice is paid.
    */
+  @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
 
   /**
@@ -44,6 +49,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * retries increment the attempt count. In other words, manual payment attempts after the first
    * attempt do not affect the retry schedule.
    */
+  @SerializedName("attempt_count")
   Long attemptCount;
 
   /**
@@ -51,6 +57,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * after the `invoice.created` webhook, for example, so you might not want to display that invoice
    * as unpaid to your users.
    */
+  @SerializedName("attempted")
   Boolean attempted;
 
   /**
@@ -58,6 +65,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * collection](/docs/billing/invoices/workflow/#auto_advance) of the invoice. When `false`, the
    * invoice's state will not automatically advance without an explicit action.
    */
+  @SerializedName("auto_advance")
   Boolean autoAdvance;
 
   /**
@@ -65,6 +73,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * attempt to pay this invoice using the default source attached to the customer. When sending an
    * invoice, Stripe will email this invoice to the customer with payment instructions.
    */
+  @SerializedName("billing")
   String billing;
 
   /**
@@ -77,9 +86,11 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * is reserved for simulated invoices per the upcoming invoice endpoint. `subscription_threshold`
    * indicates an invoice created due to a billing threshold being reached.
    */
+  @SerializedName("billing_reason")
   String billingReason;
 
   /** ID of the latest charge generated for this invoice, if any. */
+  @SerializedName("charge")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Charge> charge;
@@ -88,16 +99,20 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
    * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
    */
+  @SerializedName("currency")
   String currency;
 
   /** Custom fields displayed on the invoice. */
+  @SerializedName("custom_fields")
   List<CustomField> customFields;
 
+  @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("date")
   Long date;
 
   /**
@@ -105,22 +120,27 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * with the invoice and be in a chargeable state. If not set, defaults to the subscription's
    * default source, if any, or to the customer's default source.
    */
+  @SerializedName("default_source")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<PaymentSource> defaultSource;
 
   /** Always true for a deleted object. */
+  @SerializedName("deleted")
   Boolean deleted;
 
   /** An arbitrary string attached to the object. Often useful for displaying to users. */
+  @SerializedName("description")
   String description;
 
+  @SerializedName("discount")
   Discount discount;
 
   /**
    * The date on which payment for this invoice is due. This value will be `null` for invoices where
    * `billing=charge_automatically`.
    */
+  @SerializedName("due_date")
   Long dueDate;
 
   /**
@@ -128,40 +148,48 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * hour after successful webhook delivery or when payment collection is attempted for the invoice.
    * If the invoice has not been finalized yet, this will be null.
    */
+  @SerializedName("ending_balance")
   Long endingBalance;
 
   /** The time that the invoice draft was finalized. */
+  @SerializedName("finalized_at")
   Long finalizedAt;
 
   /** Footer displayed on the invoice. */
+  @SerializedName("footer")
   String footer;
 
   /**
    * The URL for the hosted invoice page, which allows customers to view and pay an invoice. If the
    * invoice has not been finalized yet, this will be null.
    */
+  @SerializedName("hosted_invoice_url")
   String hostedInvoiceUrl;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /**
    * The link to download the PDF for the invoice. If the invoice has not been finalized yet, this
    * will be null.
    */
+  @SerializedName("invoice_pdf")
   String invoicePdf;
 
   /**
    * The individual line items that make up the invoice. `lines` is sorted as follows: invoice items
    * in reverse chronological order, followed by the subscription, if any.
    */
+  @SerializedName("lines")
   InvoiceLineItemCollection lines;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /**
@@ -169,51 +197,63 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * additional information about the object in a structured format.
    */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("metadata")
   Map<String, String> metadata;
 
   /**
    * The time at which payment will next be attempted. This value will be `null` for invoices where
    * `billing=send_invoice`.
    */
+  @SerializedName("next_payment_attempt")
   Long nextPaymentAttempt;
 
   /**
    * A unique, identifying string that appears on emails sent to the customer for this invoice. This
    * starts with the customer's unique invoice_prefix if it is specified.
    */
+  @SerializedName("number")
   String number;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /**
    * Whether payment was successfully collected for this invoice. An invoice can be paid (most
    * commonly) with a charge or with credit from the customer's account balance.
    */
+  @SerializedName("paid")
   Boolean paid;
 
   /** End of the usage period during which invoice items were added to this invoice. */
+  @SerializedName("period_end")
   Long periodEnd;
 
   /** Start of the usage period during which invoice items were added to this invoice. */
+  @SerializedName("period_start")
   Long periodStart;
 
   /** This is the transaction number that appears on email receipts sent for this invoice. */
+  @SerializedName("receipt_number")
   String receiptNumber;
 
   /**
    * Starting customer balance before the invoice is finalized. If the invoice has not been
    * finalized yet, this will be the current customer balance.
    */
+  @SerializedName("starting_balance")
   Long startingBalance;
 
   /** Extra information about an invoice for the customer's credit card statement. */
+  @SerializedName("statement_descriptor")
   String statementDescriptor;
 
   /** The status of the invoice, one of `draft`, `open`, `paid`, `uncollectible`, or `void`. */
+  @SerializedName("status")
   String status;
 
   /** The subscription that this invoice was prepared for, if any. */
+  @SerializedName("subscription")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Subscription> subscription;
@@ -221,18 +261,21 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   /**
    * Only set for upcoming invoices that preview prorations. The time used to calculate prorations.
    */
+  @SerializedName("subscription_proration_date")
   Long subscriptionProrationDate;
 
   /**
    * Total of all subscriptions, invoice items, and prorations on the invoice before any discount is
    * applied.
    */
+  @SerializedName("subtotal")
   Long subtotal;
 
   /**
    * The amount of tax included in the total, calculated from `tax_percent` and the subtotal. If no
    * `tax_percent` is defined, this value will be null.
    */
+  @SerializedName("tax")
   Long tax;
 
   /**
@@ -240,11 +283,14 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * invoice line items and discounts. This field is inherited from the subscription's `tax_percent`
    * field, but can be changed before the invoice is paid. This field defaults to null.
    */
+  @SerializedName("tax_percent")
   BigDecimal taxPercent;
 
+  @SerializedName("threshold_reason")
   ThresholdReason thresholdReason;
 
   /** Total after discount. */
+  @SerializedName("total")
   Long total;
 
   /**
@@ -252,6 +298,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * webhooks to deliver, this will match `date`). Invoice payment is delayed until webhooks are
    * delivered, or until all webhook delivery attempts have been exhausted.
    */
+  @SerializedName("webhooks_delivered_at")
   Long webhooksDeliveredAt;
 
   /** Get id of expandable `charge` object. */
@@ -749,9 +796,11 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @EqualsAndHashCode(callSuper = false)
   public static class CustomField extends StripeObject {
     /** The name of the custom field. */
+    @SerializedName("name")
     String name;
 
     /** The value of the custom field. */
+    @SerializedName("value")
     String value;
   }
 
@@ -760,9 +809,11 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @EqualsAndHashCode(callSuper = false)
   public static class ThresholdItemReason extends StripeObject {
     /** The IDs of the line items that triggered the threshold invoice. */
+    @SerializedName("line_item_ids")
     List<String> lineItemIds;
 
     /** The quantity threshold boundary that applied to the given line item. */
+    @SerializedName("usage_gte")
     Long usageGte;
   }
 
@@ -771,9 +822,11 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @EqualsAndHashCode(callSuper = false)
   public static class ThresholdReason extends StripeObject {
     /** The total invoice amount threshold boundary if it triggered the threshold invoice. */
+    @SerializedName("amount_gte")
     Long amountGte;
 
     /** Indicates which line items triggered a threshold invoice. */
+    @SerializedName("item_reasons")
     List<ThresholdItemReason> itemReasons;
   }
 }

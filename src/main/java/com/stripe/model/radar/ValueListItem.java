@@ -2,6 +2,7 @@
 
 package com.stripe.model.radar;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
@@ -17,31 +18,39 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class ValueListItem extends ApiResource implements HasId {
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
 
   /** The name or email address of the user who added this item to the value list. */
+  @SerializedName("created_by")
   String createdBy;
 
   /** Always true for a deleted object. */
+  @SerializedName("deleted")
   Boolean deleted;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /** The value of the item. */
+  @SerializedName("value")
   String value;
 
   /** The identifier of the value list this item belongs to. */
+  @SerializedName("value_list")
   String valueList;
 
   /**

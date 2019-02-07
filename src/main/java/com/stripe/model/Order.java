@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
@@ -20,53 +21,66 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
    * A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1,
    * Japanese Yen being a zero-decimal currency) representing the total amount for the order.
    */
+  @SerializedName("amount")
   Long amount;
 
+  @SerializedName("amount_returned")
   Long amountReturned;
 
   /** ID of the Connect Application that created the order. */
+  @SerializedName("application")
   String application;
 
+  @SerializedName("application_fee")
   Long applicationFee;
 
   /**
    * The ID of the payment used to pay for the order. Present if the order status is `paid`,
    * `fulfilled`, or `refunded`.
    */
+  @SerializedName("charge")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Charge> charge;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
 
   /**
    * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
    * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
    */
+  @SerializedName("currency")
   String currency;
 
   /** The customer used for the order. */
+  @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
   /** The email address of the customer placing the order. */
+  @SerializedName("email")
   String email;
 
+  @SerializedName("external_coupon_code")
   String externalCouponCode;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /** List of items constituting the order. An order can have up to 25 items. */
+  @SerializedName("items")
   List<OrderItem> items;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /**
@@ -74,11 +88,14 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
    * additional information about the object in a structured format.
    */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("metadata")
   Map<String, String> metadata;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
+  @SerializedName("returns")
   OrderReturnCollection returns;
 
   /**
@@ -87,29 +104,36 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
    * time, if there are multiple shipping methods, Stripe will automatically selected the first
    * method.
    */
+  @SerializedName("selected_shipping_method")
   String selectedShippingMethod;
 
   /** The shipping address for the order. Present if the order is for goods to be shipped. */
+  @SerializedName("shipping")
   ShippingDetails shipping;
 
   /**
    * A list of supported shipping methods for this order. The desired shipping method can be
    * specified either by updating the order, or when paying it.
    */
+  @SerializedName("shipping_methods")
   List<ShippingMethod> shippingMethods;
 
   /**
    * Current order status. One of `created`, `paid`, `canceled`, `fulfilled`, or `returned`. More
    * details in the [Orders Guide](/docs/orders/guide#understanding-order-statuses).
    */
+  @SerializedName("status")
   String status;
 
   /** The timestamps at which the order status was updated. */
+  @SerializedName("status_transitions")
   StatusTransitions statusTransitions;
 
+  @SerializedName("updated")
   Long updated;
 
   /** The user's order ID if it is different from the Stripe order ID. */
+  @SerializedName("upstream_id")
   String upstreamId;
 
   /** Get id of expandable `charge` object. */
@@ -296,20 +320,24 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
     /**
      * If `type` is `"exact"`, `date` will be the expected delivery date in the format YYYY-MM-DD.
      */
+    @SerializedName("date")
     String date;
 
     /**
      * If `type` is `"range"`, `earliest` will be be the earliest delivery date in the format
      * YYYY-MM-DD.
      */
+    @SerializedName("earliest")
     String earliest;
 
     /**
      * If `type` is `"range"`, `latest` will be the latest delivery date in the format YYYY-MM-DD.
      */
+    @SerializedName("latest")
     String latest;
 
     /** The type of estimate. Must be either `"range"` or `"exact"`. */
+    @SerializedName("type")
     String type;
   }
 
@@ -321,25 +349,30 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
      * A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1,
      * Japanese Yen being a zero-decimal currency) representing the total amount for the line item.
      */
+    @SerializedName("amount")
     Long amount;
 
     /**
      * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
      * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
      */
+    @SerializedName("currency")
     String currency;
 
     /**
      * The estimated delivery date for the given shipping method. Can be either a specific date or a
      * range.
      */
+    @SerializedName("delivery_estimate")
     DeliveryEstimate deliveryEstimate;
 
     /** An arbitrary string attached to the object. Often useful for displaying to users. */
+    @SerializedName("description")
     String description;
 
     /** Unique identifier for the object. */
     @Getter(onMethod = @__({@Override}))
+    @SerializedName("id")
     String id;
   }
 
@@ -347,12 +380,16 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class StatusTransitions extends StripeObject {
+    @SerializedName("canceled")
     Long canceled;
 
+    @SerializedName("fulfiled")
     Long fulfiled;
 
+    @SerializedName("paid")
     Long paid;
 
+    @SerializedName("returned")
     Long returned;
   }
 }

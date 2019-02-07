@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.radar.Rule;
@@ -16,6 +17,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Charge extends ApiResource implements BalanceTransactionSource, MetadataStore<Charge> {
+  @SerializedName("alternate_statement_descriptors")
   AlternateStatementDescriptors alternateStatementDescriptors;
 
   /**
@@ -25,15 +27,18 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
    * $0.50 US or [equivalent in charge
    * currency](https://support.stripe.com/questions/what-is-the-minimum-amount-i-can-charge-with-stripe).
    */
+  @SerializedName("amount")
   Long amount;
 
   /**
    * Amount in %s refunded (can be less than the amount attribute on the charge if a partial refund
    * was issued).
    */
+  @SerializedName("amount_refunded")
   Long amountRefunded;
 
   /** ID of the Connect application that created the charge. */
+  @SerializedName("application")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Application> application;
@@ -42,20 +47,24 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
    * The application fee (if any) for the charge. [See the Connect
    * documentation](/docs/connect/direct-charges#collecting-fees) for details.
    */
+  @SerializedName("application_fee")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<ApplicationFee> applicationFee;
 
   /** The amount of the application fee (if any) for the resulting payment. */
+  @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
 
   /** Authorization code on the charge. */
+  @SerializedName("authorization_code")
   String authorizationCode;
 
   /**
    * ID of the balance transaction that describes the impact of this charge on your account balance
    * (not including refunds or disputes).
    */
+  @SerializedName("balance_transaction")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<BalanceTransaction> balanceTransaction;
@@ -64,34 +73,41 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
    * If the charge was created without capturing, this Boolean represents whether it is still
    * uncaptured or has since been captured.
    */
+  @SerializedName("captured")
   Boolean captured;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
 
   /**
    * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
    * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
    */
+  @SerializedName("currency")
   String currency;
 
   /** ID of the customer this charge is for if one exists. */
+  @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
   /** An arbitrary string attached to the object. Often useful for displaying to users. */
+  @SerializedName("description")
   String description;
 
   /**
    * The account (if any) the charge was made on behalf of, with an automatic transfer. [See the
    * Connect documentation](/docs/connect/destination-charges) for details.
    */
+  @SerializedName("destination")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Account> destination;
 
   /** Details about the dispute if the charge has been disputed. */
+  @SerializedName("dispute")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Dispute> dispute;
@@ -100,29 +116,36 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
    * Error code explaining reason for charge failure if available (see [the errors
    * section](/docs/api#errors) for a list of codes).
    */
+  @SerializedName("failure_code")
   String failureCode;
 
   /** Message to user further explaining reason for charge failure if available. */
+  @SerializedName("failure_message")
   String failureMessage;
 
   /** Information on fraud assessments for the charge. */
+  @SerializedName("fraud_details")
   FraudDetails fraudDetails;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /** ID of the invoice this charge is for if one exists. */
+  @SerializedName("invoice")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Invoice> invoice;
 
+  @SerializedName("level3")
   Level3 level3;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /**
@@ -130,20 +153,24 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
    * additional information about the object in a structured format.
    */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("metadata")
   Map<String, String> metadata;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /**
    * The account (if any) the charge was made on behalf of without triggering an automatic transfer.
    * See the [Connect documentation](/docs/connect/charges-transfers) for details.
    */
+  @SerializedName("on_behalf_of")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Account> onBehalfOf;
 
   /** ID of the order this charge is for if one exists. */
+  @SerializedName("order")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Order> order;
@@ -152,21 +179,26 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
    * Details about whether the payment was accepted, and why. See [understanding
    * declines](/docs/declines) for details.
    */
+  @SerializedName("outcome")
   Outcome outcome;
 
   /** `true` if the charge succeeded, or was successfully authorized for later capture. */
+  @SerializedName("paid")
   Boolean paid;
 
   /** ID of the PaymentIntent associated with this charge, if one exists. */
+  @SerializedName("payment_intent")
   String paymentIntent;
 
   /** This is the email address that the receipt for this charge was sent to. */
+  @SerializedName("receipt_email")
   String receiptEmail;
 
   /**
    * This is the transaction number that appears on email receipts sent for this charge. This
    * attribute will be `null` until a receipt has been sent.
    */
+  @SerializedName("receipt_number")
   String receiptNumber;
 
   /**
@@ -174,31 +206,38 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
    * latest state of the charge, including any refunds. If the charge is for an Invoice, the receipt
    * will be stylized as an Invoice receipt.
    */
+  @SerializedName("receipt_url")
   String receiptUrl;
 
   /**
    * Whether the charge has been fully refunded. If the charge is only partially refunded, this
    * attribute will still be false.
    */
+  @SerializedName("refunded")
   Boolean refunded;
 
   /** A list of refunds that have been applied to the charge. */
+  @SerializedName("refunds")
   RefundCollection refunds;
 
   /** ID of the review associated with this charge if one exists. */
+  @SerializedName("review")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Review> review;
 
   /** Shipping information for the charge. */
+  @SerializedName("shipping")
   ShippingDetails shipping;
 
+  @SerializedName("source")
   PaymentSource source;
 
   /**
    * The transfer ID which created this charge. Only present if the charge came from another Stripe
    * account. [See the Connect documentation](/docs/connect/destination-charges) for details.
    */
+  @SerializedName("source_transfer")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Transfer> sourceTransfer;
@@ -207,25 +246,30 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
    * Extra information about a charge. This will appear on your customer's credit card statement. It
    * must contain at least one letter.
    */
+  @SerializedName("statement_descriptor")
   String statementDescriptor;
 
   /** The status of the payment is either `succeeded`, `pending`, or `failed`. */
+  @SerializedName("status")
   String status;
 
   /**
    * ID of the transfer to the `destination` account (only applicable if the charge was created
    * using the `destination` parameter).
    */
+  @SerializedName("transfer")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Transfer> transfer;
 
+  @SerializedName("transfer_data")
   TransferData transferData;
 
   /**
    * A string that identifies this transaction as part of a group. See the [Connect
    * documentation](/docs/connect/charges-transfers#grouping-transactions) for details.
    */
+  @SerializedName("transfer_group")
   String transferGroup;
 
   /** Get id of expandable `application` object. */
@@ -684,9 +728,11 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
   @EqualsAndHashCode(callSuper = false)
   public static class AlternateStatementDescriptors extends StripeObject {
     /** The Kana variation of the descriptor. */
+    @SerializedName("kana")
     String kana;
 
     /** The Kanji variation of the descriptor. */
+    @SerializedName("kanji")
     String kanji;
   }
 
@@ -695,9 +741,11 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
   @EqualsAndHashCode(callSuper = false)
   public static class FraudDetails extends StripeObject {
     /** Assessments from Stripe. If set, the value is `fraudulent`. */
+    @SerializedName("stripe_report")
     String stripeReport;
 
     /** Assessments reported by you. If set, possible values of are `safe` and `fraudulent`. */
+    @SerializedName("user_report")
     String userReport;
   }
 
@@ -711,6 +759,7 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
      * [blocked by Stripe](/docs/declines#blocked-payments) after bank authorization, and may
      * temporarily appear as "pending" on a cardholder's statement.
      */
+    @SerializedName("network_status")
     String networkStatus;
 
     /**
@@ -720,6 +769,7 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
      * authorized, blocked, or placed in review by custom rules have the value `rule`. See
      * [understanding declines](/docs/declines) for more details.
      */
+    @SerializedName("reason")
     String reason;
 
     /**
@@ -728,6 +778,7 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
      * the public assignment of risk levels, this field will have the value `not_assessed`. In the
      * event of an error in the evaluation, this field will have the value `unknown`.
      */
+    @SerializedName("risk_level")
     String riskLevel;
 
     /**
@@ -736,9 +787,11 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
      * assignment of risk scores, or in the event of an error during evaluation, this field will not
      * be present. This field is only available with Radar for Fraud Teams.
      */
+    @SerializedName("risk_score")
     Long riskScore;
 
     /** The ID of the Radar rule that matched the payment, if applicable. */
+    @SerializedName("rule")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<Rule> rule;
@@ -747,6 +800,7 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
      * A human-readable description of the outcome type and reason, designed for you (the recipient
      * of the payment), not your customer.
      */
+    @SerializedName("seller_message")
     String sellerMessage;
 
     /**
@@ -754,6 +808,7 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
      * `invalid`. See [understanding declines](/docs/declines) and [Radar reviews](radar/review) for
      * details.
      */
+    @SerializedName("type")
     String type;
 
     /** Get id of expandable `rule` object. */
@@ -783,6 +838,7 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
      * The account (if any) the charge was made on behalf of, with an automatic transfer. [See the
      * Connect documentation](/docs/connect/destination-charges) for details.
      */
+    @SerializedName("destination")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<Account> destination;

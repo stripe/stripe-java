@@ -2,6 +2,7 @@
 
 package com.stripe.model.reporting;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.File;
@@ -19,35 +20,43 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class ReportRun extends ApiResource implements HasId {
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
 
   /**
    * If something should go wrong during the run, a message about the failure (populated when
    * `status=failed`).
    */
+  @SerializedName("error")
   String error;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /** Always `true`: reports can only be run on live-mode data. */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
+  @SerializedName("parameters")
   Parameters parameters;
 
   /**
    * The ID of the [report type](/docs/reporting/statements/api#report-types) to run, such as
    * `"balance.summary.1"`.
    */
+  @SerializedName("report_type")
   String reportType;
 
   /**
    * The file object representing the result of the report run (populated when `status=succeeded`).
    */
+  @SerializedName("result")
   File result;
 
   /**
@@ -56,12 +65,14 @@ public class ReportRun extends ApiResource implements HasId {
    * we may encounter an error, at which point this will be set to `failed` and the `error` field
    * will be populated.
    */
+  @SerializedName("status")
   String status;
 
   /**
    * Timestamp at which this run successfully finished (populated when `status=succeeded`). Measured
    * in seconds since the Unix epoch.
    */
+  @SerializedName("succeeded_at")
   Long succeededAt;
 
   /**
@@ -134,21 +145,27 @@ public class ReportRun extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class Parameters extends StripeObject {
     /** Connected account ID by which to filter the report run. */
+    @SerializedName("connected_account")
     String connectedAccount;
 
     /** Currency of objects to be included in the report run. */
+    @SerializedName("currency")
     String currency;
 
     /** Ending timestamp of data to be included in the report run (exclusive). */
+    @SerializedName("interval_end")
     Long intervalEnd;
 
     /** Starting timestamp of data to be included in the report run. */
+    @SerializedName("interval_start")
     Long intervalStart;
 
     /** Payout ID by which to filter the report run. */
+    @SerializedName("payout")
     String payout;
 
     /** Category of balance transactions to be included in the report run. */
+    @SerializedName("reporting_category")
     String reportingCategory;
   }
 }
