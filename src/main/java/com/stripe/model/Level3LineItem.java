@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -10,15 +11,21 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Level3LineItem extends StripeObject {
+  @SerializedName("discount_amount")
   Long discountAmount;
 
+  @SerializedName("product_code")
   String productCode;
 
+  @SerializedName("product_description")
   String productDescription;
 
+  @SerializedName("quantity")
   Long quantity;
 
+  @SerializedName("tax_amount")
   Long taxAmount;
 
+  @SerializedName("unit_cost")
   Long unitCost;
 }

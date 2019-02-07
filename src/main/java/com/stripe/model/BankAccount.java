@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
@@ -17,48 +18,60 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class BankAccount extends ApiResource
     implements ExternalAccount, PaymentSource, MetadataStore<BankAccount> {
+  @SerializedName("account")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Account> account;
 
   /** The name of the person or business that owns the bank account. */
+  @SerializedName("account_holder_name")
   String accountHolderName;
 
   /** The type of entity that holds the account. This can be either `individual` or `company`. */
+  @SerializedName("account_holder_type")
   String accountHolderType;
 
   /** Name of the bank associated with the routing number (e.g., `WELLS FARGO`). */
+  @SerializedName("bank_name")
   String bankName;
 
   /** Two-letter ISO code representing the country the bank account is located in. */
+  @SerializedName("country")
   String country;
 
   /**
    * Three-letter [ISO code for the currency](https://stripe.com/docs/payouts) paid out to the bank
    * account.
    */
+  @SerializedName("currency")
   String currency;
 
+  @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
   /** Whether this bank account is the default external account for its currency. */
+  @SerializedName("default_for_currency")
   Boolean defaultForCurrency;
 
   /** Always true for a deleted object. */
+  @SerializedName("deleted")
   Boolean deleted;
 
   /**
    * Uniquely identifies this particular bank account. You can use this attribute to check whether
    * two bank accounts are the same.
    */
+  @SerializedName("fingerprint")
   String fingerprint;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
+  @SerializedName("last4")
   String last4;
 
   /**
@@ -66,12 +79,15 @@ public class BankAccount extends ApiResource
    * additional information about the object in a structured format.
    */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("metadata")
   Map<String, String> metadata;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /** The routing transit number for the bank account. */
+  @SerializedName("routing_number")
   String routingNumber;
 
   /**
@@ -84,6 +100,7 @@ public class BankAccount extends ApiResource
    * will be `verification_failed`. If a transfer sent to this bank account fails, we'll set the
    * status to `errored` and will not continue to send transfers until the bank details are updated.
    */
+  @SerializedName("status")
   String status;
 
   /** Get id of expandable `account` object. */

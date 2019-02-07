@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
@@ -16,27 +17,33 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class FileLink extends ApiResource implements HasId, MetadataStore<FileLink> {
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
 
   /** Whether this link is already expired. */
+  @SerializedName("expired")
   Boolean expired;
 
   /** Time at which the link expires. */
+  @SerializedName("expires_at")
   Long expiresAt;
 
   /** The file object this link points to. */
+  @SerializedName("file")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<File> file;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /**
@@ -44,12 +51,15 @@ public class FileLink extends ApiResource implements HasId, MetadataStore<FileLi
    * additional information about the object in a structured format.
    */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("metadata")
   Map<String, String> metadata;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /** The publicly accessible URL to download the file. */
+  @SerializedName("url")
   String url;
 
   /** Get id of expandable `file` object. */

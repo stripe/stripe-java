@@ -2,6 +2,7 @@
 
 package com.stripe.model.sigma;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.File;
@@ -19,42 +20,53 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class ScheduledQueryRun extends ApiResource implements HasId {
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
 
   /** When the query was run, Sigma contained a snapshot of your Stripe data at this time. */
+  @SerializedName("data_load_time")
   Long dataLoadTime;
 
+  @SerializedName("error")
   Error error;
 
   /** The file object representing the results of the query. */
+  @SerializedName("file")
   File file;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /** Time at which the result expires and is no longer available for download. */
+  @SerializedName("result_available_until")
   Long resultAvailableUntil;
 
   /** SQL for the query. */
+  @SerializedName("sql")
   String sql;
 
   /**
    * The query's execution status, which will be `completed` for successful runs, and `canceled`,
    * `failed`, or `timed_out` otherwise.
    */
+  @SerializedName("status")
   String status;
 
   /** Title of the query. */
+  @SerializedName("title")
   String title;
 
   /** Returns a list of scheduled query runs. */
@@ -98,6 +110,7 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class Error extends StripeObject {
     /** Information about the run failure. */
+    @SerializedName("message")
     String message;
   }
 }

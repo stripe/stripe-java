@@ -2,6 +2,7 @@
 
 package com.stripe.model.checkout;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
@@ -18,15 +19,18 @@ import lombok.Setter;
 public class Session extends ApiResource implements HasId {
   /** The token used to pass to `redirectToCheckout` in Stripe.js. */
   @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
   String id;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
    */
+  @SerializedName("livemode")
   Boolean livemode;
 
   /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
   String object;
 
   /** Creates a Session object. */
