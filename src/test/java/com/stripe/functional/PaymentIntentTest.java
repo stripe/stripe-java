@@ -26,13 +26,13 @@ public class PaymentIntentTest extends BaseStripeTest {
 
   @Test
   public void testCreate() throws StripeException {
-    final List<String> allowedSourceTypes = new ArrayList<>();
-    allowedSourceTypes.add("card");
+    final List<String> paymentMethodTypes = new ArrayList<>();
+    paymentMethodTypes.add("card");
 
     final Map<String, Object> params = new HashMap<>();
-    params.put("allowed_source_types", allowedSourceTypes);
     params.put("amount", 1234);
     params.put("currency", "usd");
+    params.put("payment_method_types", paymentMethodTypes);
 
     final PaymentIntent paymentIntent = PaymentIntent.create(params);
 

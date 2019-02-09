@@ -4,6 +4,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
+import java.util.List;
 import java.util.Map;
 
 import lombok.AccessLevel;
@@ -28,6 +29,7 @@ public class Customer extends ApiResource implements MetadataStore<Customer>, Ha
   Discount discount;
   String email;
   String invoicePrefix;
+  InvoiceSettings invoiceSettings;
   Boolean livemode;
   @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   ShippingDetails shipping;
@@ -233,6 +235,14 @@ public class Customer extends ApiResource implements MetadataStore<Customer>, Ha
   public static class NextRecurringCharge extends StripeObject {
     Long amount;
     String date;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class InvoiceSettings extends StripeObject {
+    List<Invoice.CustomField> customFields;
+    String footer;
   }
 
   @Getter
