@@ -24,6 +24,7 @@ public class InvoiceTest extends BaseStripeTest {
   public void testDeserializeExpanded() throws Exception {
     final String[] expansions = {
       "charge",
+      "customer",
     };
     final String data = getFixture("/v1/invoices/in_123", expansions);
     final Invoice invoice = ApiResource.GSON.fromJson(data, Invoice.class);
@@ -33,5 +34,9 @@ public class InvoiceTest extends BaseStripeTest {
     assertNotNull(charge);
     assertNotNull(charge.getId());
     assertEquals(invoice.getCharge(), charge.getId());
+    final Customer customer = invoice.getCustomerObject();
+    assertNotNull(customer);
+    assertNotNull(customer.getId());
+    assertEquals(invoice.getCustomer(), customer.getId());
   }
 }

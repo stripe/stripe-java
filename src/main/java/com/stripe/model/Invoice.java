@@ -32,7 +32,7 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
   Long created;
   String currency;
   List<CustomField> customFields;
-  String customer;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Customer> customer;
   Long date;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
       ExpandableField<ExternalAccount> defaultSource;
@@ -97,6 +97,24 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
 
   public void setChargeObject(Charge charge) {
     this.charge = new ExpandableField<>(charge.getId(), charge);
+  }
+  // </editor-fold>
+
+  // <editor-fold desc="customer">
+  public String getCustomer() {
+    return (this.customer != null) ? this.customer.getId() : null;
+  }
+
+  public void setCustomer(String customerId) {
+    this.customer = setExpandableFieldId(customerId, this.customer);
+  }
+
+  public Customer getCustomerObject() {
+    return (this.customer != null) ? this.customer.getExpanded() : null;
+  }
+
+  public void setCustomerObject(Customer customer) {
+    this.customer = new ExpandableField<>(customer.getId(), customer);
   }
   // </editor-fold>
 
