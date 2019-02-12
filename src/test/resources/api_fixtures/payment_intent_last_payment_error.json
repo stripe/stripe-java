@@ -1,9 +1,6 @@
 {
     "id": "pi_123",
     "object": "payment_intent",
-    "allowed_source_types": [
-        "card"
-    ],
     "amount": 100,
     "amount_capturable": 0,
     "amount_received": 0,
@@ -52,6 +49,9 @@
     "livemode": false,
     "next_source_action": null,
     "on_behalf_of": null,
+    "payment_method_types": [
+        "card"
+    ],
     "receipt_email": null,
     "return_url": null,
     "review": null,

@@ -17,13 +17,13 @@ public class PaymentIntentTest extends BaseStripeTest {
     assertNotNull(resource);
     assertNotNull(resource.getId());
 
-    PaymentIntentSourceAction action =  resource.getNextSourceAction();
+    PaymentIntent.NextAction action =  resource.getNextAction();
     assertNotNull(action);
 
-    PaymentIntentSourceActionValueAuthorizeWithUrl actionAuthorize = action.getAuthorizeWithUrl();
-    assertNotNull(actionAuthorize);
-    assertEquals("https://stripe.com", actionAuthorize.getUrl());
-    assertEquals("https://stripe.com/return", actionAuthorize.getReturnUrl());
+    PaymentIntent.NextActionRedirectToUrl actionRedirect = action.getRedirectToUrl();
+    assertNotNull(actionRedirect);
+    assertEquals("https://stripe.com", actionRedirect.getUrl());
+    assertEquals("https://stripe.com/return", actionRedirect.getReturnUrl());
   }
 
   @Test
@@ -45,15 +45,36 @@ public class PaymentIntentTest extends BaseStripeTest {
     assertNotNull(source.getId());
   }
 
+  // Ensure version with `next_source_action` with `authorize_with_url` still works
+  @Test
+  public void testDeserializeNextSourceAction() throws Exception {
+    // Keep the fixture to have `action` deserialize properly
+    final PaymentIntent resource = ApiResource.GSON.fromJson(getResourceAsString(
+            "/api_fixtures/payment_intent_old_next_source_action_authorize_with_url.json"),
+        PaymentIntent.class);
+    assertNotNull(resource);
+    assertNotNull(resource.getId());
+
+    @SuppressWarnings("deprecation")
+    PaymentIntentSourceAction action =  resource.getNextSourceAction();
+    assertNotNull(action);
+
+    PaymentIntentSourceActionValueAuthorizeWithUrl actionAuthorize = action.getAuthorizeWithUrl();
+    assertNotNull(actionAuthorize);
+    assertEquals("https://stripe.com", actionAuthorize.getUrl());
+    assertEquals("https://stripe.com/return", actionAuthorize.getReturnUrl());
+  }
+
   // Ensure legacy version of `next_source_action` with `value` still works
   @Test
   public void testDeserializeSourceActionValue() throws Exception {
     // Keep the fixture to have `action` deserialize properly
-    final PaymentIntent resource = ApiResource.GSON.fromJson(
-        getResourceAsString("/api_fixtures/payment_intent_old_value.json"), PaymentIntent.class);
+    final PaymentIntent resource = ApiResource.GSON.fromJson(getResourceAsString(
+          "/api_fixtures/payment_intent_old_next_source_action_value.json"), PaymentIntent.class);
     assertNotNull(resource);
     assertNotNull(resource.getId());
 
+    @SuppressWarnings("deprecation")
     PaymentIntentSourceAction action =  resource.getNextSourceAction();
     assertNotNull(action);
 

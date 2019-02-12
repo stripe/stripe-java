@@ -1,7 +1,7 @@
 {
   "id": "pi_123",
   "object": "payment_intent",
-  "allowed_source_types": [
+  "payment_method_types": [
     "card"
   ],
   "amount": 1099,
