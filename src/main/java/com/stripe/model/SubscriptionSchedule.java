@@ -334,6 +334,28 @@ public class SubscriptionSchedule extends ApiResource
         ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
   }
 
+  /** Retrieves the list of subscription schedule revisions for a subscription schedule. */
+  public SubscriptionScheduleRevisionCollection revisions() throws StripeException {
+    return revisions((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieves the list of subscription schedule revisions for a subscription schedule. */
+  public SubscriptionScheduleRevisionCollection revisions(Map<String, Object> params)
+      throws StripeException {
+    return revisions(params, (RequestOptions) null);
+  }
+
+  /** Retrieves the list of subscription schedule revisions for a subscription schedule. */
+  public SubscriptionScheduleRevisionCollection revisions(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/subscription_schedules/%s/revisions", this.getId()));
+    return requestCollection(url, params, SubscriptionScheduleRevisionCollection.class, options);
+  }
+
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
