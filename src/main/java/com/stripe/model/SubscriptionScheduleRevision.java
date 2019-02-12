@@ -3,7 +3,6 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-import com.stripe.net.ApiResource;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -24,7 +23,7 @@ public class SubscriptionScheduleRevision extends StripeObject implements HasId 
   String id;
 
   @SerializedName("invoice_settings")
-  SubscriptionScheduleInvoiceSettings invoiceSettings;
+  SubscriptionSchedule.InvoiceSettings invoiceSettings;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
@@ -60,62 +59,9 @@ public class SubscriptionScheduleRevision extends StripeObject implements HasId 
    * `renewal_behavior` is `renew`.
    */
   @SerializedName("renewal_interval")
-  RenewalInterval renewalInterval;
+  SubscriptionSchedule.RenewalInterval renewalInterval;
 
   /** ID of the subscription schedule the revision points to. */
   @SerializedName("schedule")
   String schedule;
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class PhaseItem extends StripeObject {
-    /**
-     * Define thresholds at which an invoice will be sent, and the related subscription advanced to
-     * a new billing period.
-     */
-    @SerializedName("billing_thresholds")
-    SubscriptionItem.BillingThresholds billingThresholds;
-
-    /** ID of the plan to which the customer should be subscribed. */
-    @SerializedName("plan")
-    @Getter(lombok.AccessLevel.NONE)
-    @Setter(lombok.AccessLevel.NONE)
-    ExpandableField<Plan> plan;
-
-    /** Quantity of the plan to which the customer should be subscribed. */
-    @SerializedName("quantity")
-    Long quantity;
-
-    /** Get id of expandable `plan` object. */
-    public String getPlan() {
-      return (this.plan != null) ? this.plan.getId() : null;
-    }
-
-    public void setPlan(String id) {
-      this.plan = ApiResource.setExpandableFieldId(id, this.plan);
-    }
-
-    /** Get expanded `plan`. */
-    public Plan getPlanObject() {
-      return (this.plan != null) ? this.plan.getExpanded() : null;
-    }
-
-    public void setPlanObject(Plan expandableObject) {
-      this.plan = new ExpandableField<Plan>(expandableObject.getId(), expandableObject);
-    }
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class RenewalInterval extends StripeObject {
-    /** Interval at which to renew the subscription schedule for when it ends. */
-    @SerializedName("interval")
-    String interval;
-
-    /** Number of intervals to renew the subscription schedule for when it ends. */
-    @SerializedName("length")
-    Long length;
-  }
 }
