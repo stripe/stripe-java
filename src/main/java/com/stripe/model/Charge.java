@@ -606,6 +606,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class TransferData extends StripeObject {
+    Long amount;
     @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Account> destination;
 
     // <editor-fold desc="destination">
