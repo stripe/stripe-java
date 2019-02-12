@@ -221,34 +221,34 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
     this.businessLogo = new ExpandableField<File>(expandableObject.getId(), expandableObject);
   }
 
-  /** Retrieves the details of the account. */
+  /** Retrieves the details of an account. */
   public static Account retrieve() throws StripeException {
     return retrieve((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves the details of the account. */
+  /** Retrieves the details of an account. */
   public static Account retrieve(RequestOptions options) throws StripeException {
     return retrieve((Map<String, Object>) null, options);
   }
 
-  /** Retrieves the details of the account. */
+  /** Retrieves the details of an account. */
   public static Account retrieve(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/account");
     return request(ApiResource.RequestMethod.GET, url, params, Account.class, options);
   }
 
-  /** Retrieves the details of the account. */
+  /** Retrieves the details of an account. */
   public static Account retrieve(String account) throws StripeException {
     return retrieve(account, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves the details of the account. */
+  /** Retrieves the details of an account. */
   public static Account retrieve(String account, RequestOptions options) throws StripeException {
     return retrieve(account, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves the details of the account. */
+  /** Retrieves the details of an account. */
   public static Account retrieve(String account, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =

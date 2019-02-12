@@ -47,6 +47,9 @@ public class StripeError extends StripeObject {
   @SerializedName("param")
   String param;
 
+  @SerializedName("payment_method")
+  PaymentMethod paymentMethod;
+
   @SerializedName("source")
   PaymentSource source;
 
