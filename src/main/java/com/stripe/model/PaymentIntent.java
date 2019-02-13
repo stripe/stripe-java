@@ -17,10 +17,6 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class PaymentIntent extends ApiResource implements HasId, MetadataStore<PaymentIntent> {
-  /** The list of source types (e.g. card) that this PaymentIntent is allowed to use. */
-  @SerializedName("allowed_source_types")
-  List<String> allowedSourceTypes;
-
   /** Amount intended to be collected by this PaymentIntent. */
   @SerializedName("amount")
   Long amount;
@@ -54,8 +50,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   Long canceledAt;
 
   /**
-   * User-given reason for cancellation of this PaymentIntent, one of `duplicate`, `fraudulent`, or
-   * `requested_by_customer`.
+   * User-given reason for cancellation of this PaymentIntent, one of `duplicate`, `fraudulent`,
+   * `requested_by_customer`, or `failed_invoice`.
    */
   @SerializedName("cancellation_reason")
   String cancellationReason;
@@ -133,8 +129,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * If present, this property tells you what actions you need to take in order for your customer to
    * fulfill a payment using the provided source.
    */
-  @SerializedName("next_source_action")
-  PaymentIntentSourceAction nextSourceAction;
+  @SerializedName("next_action")
+  NextAction nextAction;
 
   /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
@@ -148,6 +144,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Account> onBehalfOf;
+
+  /** The list of payment method types (e.g. card) that this PaymentIntent is allowed to use. */
+  @SerializedName("payment_method_types")
+  List<String> paymentMethodTypes;
 
   /** Email address that the receipt for the resulting payment will be sent to. */
   @SerializedName("receipt_email")
@@ -177,8 +177,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   String statementDescriptor;
 
   /**
-   * Status of this PaymentIntent, one of `requires_source`, `requires_confirmation`,
-   * `requires_source_action`, `processing`, `requires_capture`, `canceled`, or `succeeded`.
+   * Status of this PaymentIntent, one of `requires_payment_method`, `requires_confirmation`,
+   * `requires_action`, `processing`, `requires_capture`, `canceled`, or `succeeded`.
    */
   @SerializedName("status")
   String status;
@@ -376,9 +376,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * confirmation, the PaymentIntent will attempt to initiate a payment.
    *
    * <p>If the selected <code>source</code> requires additional authentication steps, the
-   * PaymentIntent will transition to the <code>requires_source_action</code> status and suggest
-   * additional actions via <code>next_source_action</code>. If payment fails, the PaymentIntent
-   * will transition to the <code>requires_source</code> status. If payment succeeds, the
+   * PaymentIntent will transition to the <code>requires_action</code> status and suggest additional
+   * actions via <code>next_source_action</code>. If payment fails, the PaymentIntent will
+   * transition to the <code>requires_payment_method</code> status. If payment succeeds, the
    * PaymentIntent will transition to the <code>succeeded</code> status (or <code>requires_capture
    * </code>, if <code>capture_method</code> is set to <code>manual</code>).
    *
@@ -395,9 +395,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * confirmation, the PaymentIntent will attempt to initiate a payment.
    *
    * <p>If the selected <code>source</code> requires additional authentication steps, the
-   * PaymentIntent will transition to the <code>requires_source_action</code> status and suggest
-   * additional actions via <code>next_source_action</code>. If payment fails, the PaymentIntent
-   * will transition to the <code>requires_source</code> status. If payment succeeds, the
+   * PaymentIntent will transition to the <code>requires_action</code> status and suggest additional
+   * actions via <code>next_source_action</code>. If payment fails, the PaymentIntent will
+   * transition to the <code>requires_payment_method</code> status. If payment succeeds, the
    * PaymentIntent will transition to the <code>succeeded</code> status (or <code>requires_capture
    * </code>, if <code>capture_method</code> is set to <code>manual</code>).
    *
@@ -414,9 +414,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * confirmation, the PaymentIntent will attempt to initiate a payment.
    *
    * <p>If the selected <code>source</code> requires additional authentication steps, the
-   * PaymentIntent will transition to the <code>requires_source_action</code> status and suggest
-   * additional actions via <code>next_source_action</code>. If payment fails, the PaymentIntent
-   * will transition to the <code>requires_source</code> status. If payment succeeds, the
+   * PaymentIntent will transition to the <code>requires_action</code> status and suggest additional
+   * actions via <code>next_source_action</code>. If payment fails, the PaymentIntent will
+   * transition to the <code>requires_payment_method</code> status. If payment succeeds, the
    * PaymentIntent will transition to the <code>succeeded</code> status (or <code>requires_capture
    * </code>, if <code>capture_method</code> is set to <code>manual</code>).
    *
@@ -433,9 +433,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * confirmation, the PaymentIntent will attempt to initiate a payment.
    *
    * <p>If the selected <code>source</code> requires additional authentication steps, the
-   * PaymentIntent will transition to the <code>requires_source_action</code> status and suggest
-   * additional actions via <code>next_source_action</code>. If payment fails, the PaymentIntent
-   * will transition to the <code>requires_source</code> status. If payment succeeds, the
+   * PaymentIntent will transition to the <code>requires_action</code> status and suggest additional
+   * actions via <code>next_source_action</code>. If payment fails, the PaymentIntent will
+   * transition to the <code>requires_payment_method</code> status. If payment succeeds, the
    * PaymentIntent will transition to the <code>succeeded</code> status (or <code>requires_capture
    * </code>, if <code>capture_method</code> is set to <code>manual</code>).
    *
@@ -453,8 +453,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * A PaymentIntent object can be canceled when it is in one of these statuses: requires_source,
-   * requires_capture, requires_confirmation, requires_source_action.
+   * A PaymentIntent object can be canceled when it is in one of these statuses:
+   * requires_payment_method, requires_capture, requires_confirmation, requires_action.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
@@ -466,8 +466,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * A PaymentIntent object can be canceled when it is in one of these statuses: requires_source,
-   * requires_capture, requires_confirmation, requires_source_action.
+   * A PaymentIntent object can be canceled when it is in one of these statuses:
+   * requires_payment_method, requires_capture, requires_confirmation, requires_action.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
@@ -479,8 +479,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * A PaymentIntent object can be canceled when it is in one of these statuses: requires_source,
-   * requires_capture, requires_confirmation, requires_source_action.
+   * A PaymentIntent object can be canceled when it is in one of these statuses:
+   * requires_payment_method, requires_capture, requires_confirmation, requires_action.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
@@ -492,8 +492,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * A PaymentIntent object can be canceled when it is in one of these statuses: requires_source,
-   * requires_capture, requires_confirmation, requires_source_action.
+   * A PaymentIntent object can be canceled when it is in one of these statuses:
+   * requires_payment_method, requires_capture, requires_confirmation, requires_action.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
@@ -552,6 +552,42 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
             "%s%s",
             Stripe.getApiBase(), String.format("/v1/payment_intents/%s/capture", this.getId()));
     return request(ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class NextAction extends StripeObject {
+    @SerializedName("redirect_to_url")
+    NextActionRedirectToUrl redirectToUrl;
+
+    /** Type of the next action to perform, one of `redirect_to_url` or `use_stripe_sdk`. */
+    @SerializedName("type")
+    String type;
+
+    /**
+     * When confirming a PaymentIntent with Stripe.js, Stripe.js depends on the contents of this
+     * dictionary to invoke authentication flows. The shape of the contents is subject to change and
+     * is only intended to be used by Stripe.js.
+     */
+    @SerializedName("use_stripe_sdk")
+    Map<String, Object> useStripeSdk;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class NextActionRedirectToUrl extends StripeObject {
+    /**
+     * If the customer does not exit their browser while authenticating, they will be redirected to
+     * this specified URL after completion.
+     */
+    @SerializedName("return_url")
+    String returnUrl;
+
+    /** The URL you must redirect your customer to in order to authenticate the payment. */
+    @SerializedName("url")
+    String url;
   }
 
   @Getter

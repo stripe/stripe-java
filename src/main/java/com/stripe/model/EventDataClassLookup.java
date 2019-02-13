@@ -93,6 +93,8 @@ final class EventDataClassLookup {
     classLookup.put("source_transaction", SourceTransaction.class);
     classLookup.put("subscription", Subscription.class);
     classLookup.put("subscription_item", SubscriptionItem.class);
+    classLookup.put("subscription_schedule", SubscriptionSchedule.class);
+    classLookup.put("subscription_schedule_revision", SubscriptionScheduleRevision.class);
     classLookup.put("terminal.connection_token", ConnectionToken.class);
     classLookup.put("terminal.location", Location.class);
     classLookup.put("terminal.reader", Reader.class);
