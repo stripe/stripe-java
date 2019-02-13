@@ -1,5 +1,8 @@
 # Changelog
 
+## 7.21.0 - 2019-02-12
+* [#648](https://github.com/stripe/stripe-java/pull/648) Add support for `transfer_data[destination]` on `Invoice` and `Subscription`.
+
 ## 7.20.0 - 2019-02-12
 * [#670](https://github.com/stripe/stripe-java/pull/670) Add support for API version `2019-02-11` with changes to Payment Intents
   * `PaymentIntentSourceAction`, `PaymentIntentSourceActionValueAuthorizeWithUrl` and `next_source_action` are now depreacated. Use `PaymentIntent.NextAction`, `PaymentIntent.NextActionRedirectToUrl` and `next_action` instead.
