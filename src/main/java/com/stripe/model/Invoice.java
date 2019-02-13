@@ -22,7 +22,7 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
   Long amountDue;
   Long amountPaid;
   Long amountRemaining;
-  Long applicationFee;
+  Long applicationFeeAmount;
   Long attemptCount;
   Boolean attempted;
   Boolean autoAdvance;
@@ -64,7 +64,16 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
   BigDecimal taxPercent;
   ThresholdReason thresholdReason;
   Long total;
+  TransferData transferData;
   Long webhooksDeliveredAt;
+
+  /**
+   * The {@code applicationFee} attribute.
+   *
+   * @deprecated Prefer using the {@code applicationFeeAmount} attribute instead.
+   */
+  @Deprecated
+  Long applicationFee;
 
   /**
    * The {@code closed} attribute.
@@ -449,5 +458,28 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
   public static class ThresholdItemReason extends StripeObject {
     List<String> lineItemIds;
     Long usageGte;
+  }
+
+  public static class TransferData extends StripeObject {
+    @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Account> destination;
+
+    // <editor-fold desc="destination">
+    public String getDestination() {
+      return (this.destination != null) ? this.destination.getId() : null;
+    }
+
+    public void setDestination(String destinationId) {
+      this.destination = setExpandableFieldId(destinationId, this.destination);
+
+    }
+
+    public Account getDestinationObject() {
+      return (this.destination != null) ? this.destination.getExpanded() : null;
+    }
+
+    public void setDestinationObject(Account c) {
+      this.destination = new ExpandableField<>(c.getId(), c);
+    }
+    // </editor-fold>
   }
 }

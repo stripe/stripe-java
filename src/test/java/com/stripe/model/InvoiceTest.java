@@ -21,7 +21,8 @@ public class InvoiceTest extends BaseStripeTest {
   }
 
   @Test
-  public void testDeserializeExpanded() throws Exception {
+  public void testDeserializeWithExpansions() throws Exception {
+    // TODO: Add support for expanding "transfer_data.destination" when stripe-mock supports it.
     final String[] expansions = {
       "charge",
       "customer",
