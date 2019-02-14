@@ -200,10 +200,6 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     @SerializedName("director")
     Boolean director;
 
-    /** Whether the person has a significant control of the account’s legal entity. */
-    @SerializedName("executive")
-    Boolean executive;
-
     /** Whether the person is an owner of the account’s legal entity. */
     @SerializedName("owner")
     Boolean owner;
