@@ -1,5 +1,8 @@
 package com.stripe.exception;
 
+import lombok.Getter;
+
+@Getter
 public class CardException extends StripeException {
   private static final long serialVersionUID = 2L;
 
@@ -16,17 +19,5 @@ public class CardException extends StripeException {
     this.param = param;
     this.declineCode = declineCode;
     this.charge = charge;
-  }
-
-  public String getParam() {
-    return param;
-  }
-
-  public String getDeclineCode() {
-    return declineCode;
-  }
-
-  public String getCharge() {
-    return charge;
   }
 }

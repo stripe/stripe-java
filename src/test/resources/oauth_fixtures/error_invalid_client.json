@@ -1,0 +1,4 @@
+{
+  "error": "invalid_client",
+  "error_description": "No authentication was provided. Send your secret API key using the Authorization header, or as a client_secret POST parameter."
+}
