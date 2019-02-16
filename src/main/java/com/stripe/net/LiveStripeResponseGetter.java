@@ -1,5 +1,6 @@
 package com.stripe.net;
 
+import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
 
 import com.stripe.Stripe;
@@ -18,7 +19,9 @@ import com.stripe.exception.oauth.InvalidScopeException;
 import com.stripe.exception.oauth.OAuthException;
 import com.stripe.exception.oauth.UnsupportedGrantTypeException;
 import com.stripe.exception.oauth.UnsupportedResponseTypeException;
+import com.stripe.model.StripeError;
 import com.stripe.model.StripeObject;
+import com.stripe.model.oauth.OAuthError;
 
 import java.io.File;
 import java.io.FileInputStream;
@@ -374,36 +377,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     return flatParams;
   }
 
-  // represents regular API errors returned as JSON
-  // handleAPIError uses this class to raise the appropriate StripeException
-  private static class StripeErrorContainer {
-    private StripeError error;
-  }
-
-  private static class StripeError {
-    String type;
-
-    String message;
-
-    String code;
-
-    String param;
-
-    String declineCode;
-
-    String charge;
-  }
-
   private static ConcurrentLinkedQueue<RequestMetrics> prevRequestMetrics =
       new ConcurrentLinkedQueue<RequestMetrics>();
-
-  // represents OAuth API errors returned as JSON
-  // handleOAuthError uses this class to raise the appropriate OAuthException
-  private static class StripeOAuthError {
-    String error;
-
-    String errorDescription;
-  }
 
   private static String getResponseBody(InputStream responseStream)
       throws IOException {
@@ -546,7 +521,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     String requestId = response.requestId();
 
     if (responseCode < 200 || responseCode >= 300) {
-      handleApiError(responseBody, responseCode, requestId);
+      handleApiError(response);
     }
 
     T resource = null;
@@ -571,8 +546,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   private static <T> T staticOAuthRequest(
       ApiResource.RequestMethod method, String url, Map<String, Object> params,
       Class<T> clazz, ApiResource.RequestType type, RequestOptions options)
-      throws AuthenticationException, InvalidRequestException,
-      ApiConnectionException, ApiException, OAuthException {
+      throws StripeException {
     StripeResponse response = rawRequest(method, url, params, type, options);
 
     int responseCode = response.code();
@@ -580,7 +554,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     String requestId = response.requestId();
 
     if (responseCode < 200 || responseCode >= 300) {
-      handleOAuthError(responseBody, responseCode, requestId);
+      handleOAuthError(response);
     }
 
     T resource = null;
@@ -732,72 +706,114 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       requestId, null, responseCode, null);
   }
 
-  private static void handleApiError(String responseBody, int responseCode, String requestId)
-      throws ApiException, AuthenticationException, CardException, IdempotencyException,
-      InvalidRequestException {
-    LiveStripeResponseGetter.StripeError error = null;
+  private static void handleApiError(StripeResponse response) throws StripeException {
+    StripeError error = null;
+    StripeException exception = null;
+
     try {
-      error = ApiResource.GSON.fromJson(responseBody,
-          LiveStripeResponseGetter.StripeErrorContainer.class).error;
+      JsonObject jsonObject = ApiResource.GSON.fromJson(response.body(), JsonObject.class)
+          .getAsJsonObject("error");
+      error = ApiResource.GSON.fromJson(jsonObject, StripeError.class);
     } catch (JsonSyntaxException e) {
-      raiseMalformedJsonError(responseBody, responseCode, requestId);
+      raiseMalformedJsonError(response.body(), response.code(), response.requestId());
     }
-    switch (responseCode) {
+    if (error == null) {
+      raiseMalformedJsonError(response.body(), response.code(), response.requestId());
+    }
+
+    error.setLastResponse(response);
+
+    switch (response.code()) {
       case 400:
       case 404:
-        if (error.type.equals("idempotency_error")) {
-          throw new IdempotencyException(error.message, requestId, error.code, responseCode);
+        if ("idempotency_error".equals(error.getType())) {
+          exception =  new IdempotencyException(error.getMessage(), response.requestId(),
+              error.getCode(), response.code());
         } else {
-          throw new InvalidRequestException(error.message, error.param, requestId, error.code,
-          responseCode, null);
+          exception = new InvalidRequestException(error.getMessage(), error.getParam(),
+              response.requestId(), error.getCode(), response.code(), null);
         }
+        break;
       case 401:
-        throw new AuthenticationException(error.message, requestId, error.code, responseCode);
+        exception = new AuthenticationException(error.getMessage(), response.requestId(),
+            error.getCode(), response.code());
+        break;
       case 402:
-        throw new CardException(error.message, requestId, error.code, error.param,
-            error.declineCode, error.charge, responseCode, null);
+        exception = new CardException(error.getMessage(), response.requestId(), error.getCode(),
+            error.getParam(), error.getDeclineCode(), error.getCharge(), response.code(), null);
+        break;
       case 403:
-        throw new PermissionException(error.message, requestId, error.code, responseCode);
+        exception =  new PermissionException(error.getMessage(), response.requestId(),
+            error.getCode(), response.code());
+        break;
       case 429:
-        throw new RateLimitException(error.message, error.param, requestId, error.code,
-            responseCode, null);
+        exception = new RateLimitException(error.getMessage(), error.getParam(),
+            response.requestId(), error.getCode(), response.code(), null);
+        break;
       default:
-        throw new ApiException(error.message, requestId, error.code, responseCode, null);
+        exception = new ApiException(error.getMessage(), response.requestId(), error.getCode(),
+            response.code(), null);
+        break;
     }
+
+    exception.setStripeError(error);
+
+    throw exception;
   }
 
-  private static void handleOAuthError(String responseBody, int responseCode, String requestId)
-      throws InvalidClientException, InvalidGrantException,
-      com.stripe.exception.oauth.InvalidRequestException, InvalidScopeException,
-      UnsupportedGrantTypeException, UnsupportedResponseTypeException, ApiException {
-    LiveStripeResponseGetter.StripeOAuthError error = null;
+  private static void handleOAuthError(StripeResponse response) throws StripeException {
+    OAuthError error = null;
+    StripeException exception = null;
+
     try {
-      error = ApiResource.GSON.fromJson(responseBody,
-          LiveStripeResponseGetter.StripeOAuthError.class);
+      error = ApiResource.GSON.fromJson(response.body(), OAuthError.class);
     } catch (JsonSyntaxException e) {
-      raiseMalformedJsonError(responseBody, responseCode, requestId);
+      raiseMalformedJsonError(response.body(), response.code(), response.requestId());
     }
-    String code = error.error;
-    String description = (error.errorDescription != null) ? error.errorDescription : code;
+    if (error == null) {
+      raiseMalformedJsonError(response.body(), response.code(), response.requestId());
+    }
+
+    error.setLastResponse(response);
+
+    String code = error.getError();
+    String description = (error.getErrorDescription() != null) ? error.getErrorDescription() : code;
 
     switch (code) {
       case "invalid_client":
-        throw new InvalidClientException(code, description, requestId, responseCode, null);
+        exception = new InvalidClientException(code, description, response.requestId(),
+            response.code(), null);
+        break;
       case "invalid_grant":
-        throw new InvalidGrantException(code, description, requestId, responseCode, null);
+        exception = new InvalidGrantException(code, description, response.requestId(),
+            response.code(), null);
+        break;
       case "invalid_request":
-        throw new com.stripe.exception.oauth.InvalidRequestException(code, description, requestId,
-        responseCode, null);
+        exception = new com.stripe.exception.oauth.InvalidRequestException(code, description,
+            response.requestId(), response.code(), null);
+        break;
       case "invalid_scope":
-        throw new InvalidScopeException(code, description, requestId, responseCode, null);
+        exception = new InvalidScopeException(code, description, response.requestId(),
+            response.code(), null);
+        break;
       case "unsupported_grant_type":
-        throw new UnsupportedGrantTypeException(code, description, requestId, responseCode, null);
+        exception = new UnsupportedGrantTypeException(code, description, response.requestId(),
+            response.code(), null);
+        break;
       case "unsupported_response_type":
-        throw new UnsupportedResponseTypeException(code, description, requestId, responseCode,
-            null);
+        exception = new UnsupportedResponseTypeException(code, description, response.requestId(),
+            response.code(), null);
+        break;
       default:
-        throw new ApiException(code, requestId, null, responseCode, null);
+        exception = new ApiException(code, response.requestId(), null, response.code(), null);
+        break;
     }
+
+    if (exception instanceof OAuthException) {
+      ((OAuthException) exception).setOauthError(error);
+    }
+
+    throw exception;
   }
 
   /*
