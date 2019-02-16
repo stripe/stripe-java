@@ -1,5 +1,8 @@
 # Changelog
 
+## 7.22.0 - 2019-02-16
+* [#678](https://github.com/stripe/stripe-java/pull/678) Add `StripeException.getStripeError()` and `OAuthException.getOauthError()` accessors
+
 ## 7.21.0 - 2019-02-12
 * [#648](https://github.com/stripe/stripe-java/pull/648) Add support for `transfer_data[destination]` on `Invoice` and `Subscription`.
 
