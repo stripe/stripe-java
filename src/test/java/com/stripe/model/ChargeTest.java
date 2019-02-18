@@ -18,7 +18,6 @@ public class ChargeTest extends BaseStripeTest {
     assertNotNull(charge.getId());
     assertEquals("charge", charge.getObject());
     assertNull(charge.getApplicationObject());
-    assertNull(charge.getApplicationFeeObject());
     assertNull(charge.getBalanceTransactionObject());
     assertNull(charge.getCustomerObject());
     assertNull(charge.getDestinationObject());
