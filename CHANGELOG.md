@@ -1,5 +1,8 @@
 # Changelog
 
+## 7.23.0 - 2019-02-19
+* [#660](https://github.com/stripe/stripe-java/pull/660) Add support for API version `2019-02-19` and related changes to `Account` and `Person`.
+
 ## 7.22.0 - 2019-02-16
 * [#678](https://github.com/stripe/stripe-java/pull/678) Add `StripeException.getStripeError()` and `OAuthException.getOauthError()` accessors
 
