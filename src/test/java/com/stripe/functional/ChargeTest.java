@@ -10,6 +10,8 @@ import com.stripe.model.Charge;
 import com.stripe.model.ChargeCollection;
 import com.stripe.net.ApiResource;
 
+import com.stripe.net.RequestOptions;
+import com.stripe.param.ChargeUpdateParams;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -89,10 +91,7 @@ public class ChargeTest extends BaseStripeTest {
   @Test
   public void testMarkFaudulent() throws StripeException {
     final Charge charge = getChargeFixture();
-    Map<String, Object> params = new HashMap<>();
-    Map<String, Object> userReport = new HashMap<>();
-    params.put("fraud_details", userReport);
-    userReport.put("user_report", "fraudulent");
+    Map<String, Object> params = fraudDetailsUntypedParam("fraudulent");
 
     final Charge fraudulentCharge = charge.update(params);
 
@@ -106,12 +105,26 @@ public class ChargeTest extends BaseStripeTest {
   }
 
   @Test
+  public void testMarkFraudulentWithTypedParams() throws StripeException {
+    final Charge charge = getChargeFixture();
+
+    ChargeUpdateParams typedParams =
+        fraudDetailsTypedParams(
+            ChargeUpdateParams.FraudDetails.UserReport.FRAUDULENT);
+
+    final Charge fraudulentCharge = charge.update(typedParams, RequestOptions.getDefault());
+
+    assertNotNull(fraudulentCharge);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        String.format("/v1/charges/%s", charge.getId()),
+        fraudDetailsUntypedParam("fraudulent"));
+  }
+
+  @Test
   public void testMarkSafe() throws StripeException {
     final Charge charge = getChargeFixture();
-    Map<String, Object> params = new HashMap<>();
-    Map<String, Object> userReport = new HashMap<>();
-    params.put("fraud_details", userReport);
-    userReport.put("user_report", "safe");
+    Map<String, Object> params = fraudDetailsUntypedParam("safe");
 
     final Charge safeCharge = charge.update(params);
 
@@ -122,5 +135,37 @@ public class ChargeTest extends BaseStripeTest {
         ImmutableMap.of("fraud_details",
           (Object)ImmutableMap.of("user_report", (Object)"safe"))
     );
+  }
+
+  @Test
+  public void testMarkSafeWithTypedParams() throws StripeException {
+    final Charge charge = getChargeFixture();
+
+    ChargeUpdateParams typedParams = fraudDetailsTypedParams(
+        ChargeUpdateParams.FraudDetails.UserReport.SAFE);
+
+    final Charge fraudulentCharge = charge.update(typedParams, RequestOptions.getDefault());
+
+    assertNotNull(fraudulentCharge);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        String.format("/v1/charges/%s", charge.getId()),
+        fraudDetailsUntypedParam("safe"));
+  }
+
+  private ChargeUpdateParams fraudDetailsTypedParams(ChargeUpdateParams.FraudDetails.UserReport
+                                                         safe) {
+    ChargeUpdateParams.FraudDetails fraudDetails = ChargeUpdateParams.FraudDetails.builder()
+        .setUserReport(safe).build();
+    return ChargeUpdateParams.builder()
+        .setFraudDetails(fraudDetails).build();
+  }
+
+  private Map<String, Object> fraudDetailsUntypedParam(String userReport) {
+    Map<String, Object> params = new HashMap<>();
+    Map<String, Object> userReportSubParams = new HashMap<>();
+    userReportSubParams.put("user_report", userReport);
+    params.put("fraud_details", userReportSubParams);
+    return params;
   }
 }
