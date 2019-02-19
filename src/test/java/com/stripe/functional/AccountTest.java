@@ -81,10 +81,8 @@ public class AccountTest extends BaseStripeTest {
   public void testUpdate() throws StripeException {
     final Account account = getAccountFixture();
 
-    final Map<String, Object> legalEntity = new HashMap<>();
-    legalEntity.put("type", "individual");
     final Map<String, Object> params = new HashMap<>();
-    params.put("legal_entity", legalEntity);
+    params.put("business_type", "individual");
 
     final Account updatedAccount = account.update(params);
 

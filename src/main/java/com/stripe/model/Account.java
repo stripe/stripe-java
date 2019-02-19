@@ -7,6 +7,7 @@ import com.stripe.net.RequestOptions;
 import java.util.List;
 import java.util.Map;
 
+import lombok.AccessLevel;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -17,39 +18,66 @@ import lombok.Setter;
 public class Account extends ApiResource implements HasId, MetadataStore<Account> {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
-  String businessLogo;
-  String businessName;
-  String businessPrimaryColor;
-  String businessUrl;
+  BusinessProfile businessProfile;
+  String businessType;
+  Capabilities capabilities;
   Boolean chargesEnabled;
+  Company company;
   String country;
   Long created;
-  Boolean debitNegativeBalances;
-  DeclineChargeOn declineChargeOn;
   String defaultCurrency;
   Boolean deleted;
   Boolean detailsSubmitted;
-  String displayName;
   String email;
   ExternalAccountCollection externalAccounts;
-  Keys keys;
-  LegalEntity legalEntity;
+  Person individual;
   LoginLinkCollection loginLinks;
-  @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
-  PayoutSchedule payoutSchedule;
-  String payoutStatementDescriptor;
+  Map<String, String> metadata;
   Boolean payoutsEnabled;
-  String productDescription;
-  String statementDescriptor;
-  Address supportAddress;
-  String supportEmail;
-  String supportPhone;
-  String supportUrl;
-  String timezone;
+  Requirements requirements;
+  Settings settings;
   TosAcceptance tosAcceptance;
-  Boolean transfersEnabled;
   String type;
-  Verification verification;
+
+  /**
+   * The {@code business_logo_large} attribute.
+   *
+   * @see <a href="https://stripe.com/docs/upgrades#2019-02-19">API version 2019-02-19</a>
+   */
+  @Deprecated
+  String businessLogoLarge;
+
+  /**
+   * The {@code business_logo} attribute.
+   *
+   * @see <a href="https://stripe.com/docs/upgrades#2019-02-19">API version 2019-02-19</a>
+   */
+  @Deprecated
+  String businessLogo;
+
+  /**
+   * The {@code business_name} attribute.
+   *
+   * @see <a href="https://stripe.com/docs/upgrades#2019-02-19">API version 2019-02-19</a>
+   */
+  @Deprecated
+  String businessName;
+
+  /**
+   * The {@code business_primary_color} attribute.
+   *
+   * @see <a href="https://stripe.com/docs/upgrades#2019-02-19">API version 2019-02-19</a>
+   */
+  @Deprecated
+  String businessPrimaryColor;
+
+  /**
+   * The {@code business_url} attribute.
+   *
+   * @see <a href="https://stripe.com/docs/upgrades#2019-02-19">API version 2019-02-19</a>
+   */
+  @Deprecated
+  String businessUrl;
 
   /**
    * The {@code currencies_supported} attribute.
@@ -62,6 +90,38 @@ public class Account extends ApiResource implements HasId, MetadataStore<Account
   List<String> currenciesSupported;
 
   /**
+   * The {@code decline_charge_on} attribute.
+   *
+   * @see <a href="https://stripe.com/docs/upgrades#2019-02-19">API version 2019-02-19</a>
+   */
+  @Deprecated
+  DeclineChargeOn declineChargeOn;
+
+  /**
+   * The {@code debit_negative_balances} attribute.
+   *
+   * @see <a href="https://stripe.com/docs/upgrades#2019-02-19">API version 2019-02-19</a>
+   */
+  @Deprecated
+  Boolean debitNegativeBalances;
+
+  /**
+   * The {@code keys} attribute.
+   *
+   * @see <a href="https://stripe.com/docs/upgrades#2019-02-19">API version 2019-02-19</a>
+   */
+  @Deprecated
+  Keys keys;
+
+  /**
+   * The {@code legal_entity} attribute.
+   *
+   * @see <a href="https://stripe.com/docs/upgrades#2019-02-19">API version 2019-02-19</a>
+   */
+  @Deprecated
+  LegalEntity legalEntity;
+
+  /**
    * The {@code managed} attribute.
    *
    * @deprecated Prefer using the {@link #type} attribute instead.
@@ -71,6 +131,87 @@ public class Account extends ApiResource implements HasId, MetadataStore<Account
   Boolean managed;
 
   /**
+   * The {@code mcc} attribute.
+   *
+   * @see <a href="https://stripe.com/docs/upgrades#2019-02-19">API version 2019-02-19</a>
+   */
+  @Deprecated
+  String mcc;
+
+  /**
+   * The {@code payout_schedule} attribute.
+   *
+   * @see <a href="https://stripe.com/docs/upgrades#2019-02-19">API version 2019-02-19</a>
+   */
+  @Deprecated
+  PayoutSchedule payoutSchedule;
+
+  /**
+   * The {@code payout_statement_descriptor} attribute.
+   *
+   * @see <a href="https://stripe.com/docs/upgrades#2019-02-19">API version 2019-02-19</a>
+   */
+  @Deprecated
+  String payoutStatementDescriptor;
+
+  /**
+   * The {@code product_description} attribute.
+   *
+   * @see <a href="https://stripe.com/docs/upgrades#2019-02-19">API version 2019-02-19</a>
+   */
+  @Deprecated
+  String productDescription;
+
+  /**
+   * The {@code statement_descriptor} attribute.
+   *
+   * @see <a href="https://stripe.com/docs/upgrades#2019-02-19">API version 2019-02-19</a>
+   */
+  @Deprecated
+  String statementDescriptor;
+
+  /**
+   * The {@code support_address} attribute.
+   *
+   * @see <a href="https://stripe.com/docs/upgrades#2019-02-19">API version 2019-02-19</a>
+   */
+  @Deprecated
+  Address supportAddress;
+
+  /**
+   * The {@code support_email} attribute.
+   *
+   * @see <a href="https://stripe.com/docs/upgrades#2019-02-19">API version 2019-02-19</a>
+   */
+  @Deprecated
+  String supportEmail;
+
+  /**
+   * The {@code support_phone} attribute.
+   *
+   * @see <a href="https://stripe.com/docs/upgrades#2019-02-19">API version 2019-02-19</a>
+   */
+  @Deprecated
+  String supportPhone;
+
+  /**
+   * The {@code support_url} attribute.
+   *
+   * @see <a href="https://stripe.com/docs/upgrades#2019-02-19">API version 2019-02-19</a>
+   */
+  @Deprecated
+  String supportUrl;
+
+  /**
+   * The {@code transfers_enabled} attribute.
+   *
+   * @deprecated Prefer using the {@link #payoutsEnabled} attribute instead.
+   * @see <a href="https://stripe.com/docs/upgrades#2017-04-06">API version 2017-04-06</a>
+   */
+  @Deprecated
+  Boolean transfersEnabled;
+
+  /**
    * The {@code transfer_schedule} attribute.
    *
    * @deprecated Prefer using the {@link #payoutSchedule} attribute instead.
@@ -78,6 +219,14 @@ public class Account extends ApiResource implements HasId, MetadataStore<Account
    */
   @Deprecated
   TransferSchedule transferSchedule;
+
+  /**
+   * The {@code verification} attribute.
+   *
+   * @see <a href="https://stripe.com/docs/upgrades#2019-02-19">API version 2019-02-19</a>
+   */
+  @Deprecated
+  Verification verification;
 
   // <editor-fold desc="create">
   /**
@@ -261,17 +410,95 @@ public class Account extends ApiResource implements HasId, MetadataStore<Account
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class DeclineChargeOn extends StripeObject {
-    Boolean avsFailure;
-    Boolean cvcFailure;
+  public static class BusinessProfile extends StripeObject {
+    String mcc;
+    String name;
+    String productDescription;
+    Address supportAddress;
+    String supportEmail;
+    String supportPhone;
+    String supportUrl;
+    String url;
   }
 
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class Keys extends StripeObject {
-    String publishable;
-    String secret;
+  public static class Capabilities extends StripeObject {
+    String cardPayments;
+    String legacyPayments;
+    String platformPayments;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Company extends StripeObject {
+    Address address;
+    Person.JapanAddress addressKana;
+    Person.JapanAddress addressKanji;
+    Boolean directorsProvided;
+    String name;
+    String nameKana;
+    String nameKanji;
+    Boolean ownersProvided;
+    String phone;
+    Boolean taxIdProvided;
+    String taxIdRegistrar;
+    Boolean vatIdProvided;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SettingsBranding extends StripeObject {
+    @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<File> icon;
+    @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<File> logo;
+    String primaryColor;
+
+    // <editor-fold desc="icon">
+    public String getIcon() {
+      return (this.icon != null) ? this.icon.getId() : null;
+    }
+
+    public void setIcon(String iconId) {
+      this.icon = setExpandableFieldId(iconId, this.icon);
+    }
+
+    public File getIconObject() {
+      return (this.icon != null) ? this.icon.getExpanded() : null;
+    }
+
+    public void setIconObject(File c) {
+      this.icon = new ExpandableField<>(c.getId(), c);
+    }
+    // </editor-fold>
+
+    // <editor-fold desc="logo">
+    public String getLogo() {
+      return (this.logo != null) ? this.logo.getId() : null;
+    }
+
+    public void setLogo(String logoId) {
+      this.logo = setExpandableFieldId(logoId, this.logo);
+    }
+
+    public File getLogoObject() {
+      return (this.logo != null) ? this.logo.getExpanded() : null;
+    }
+
+    public void setLogoObject(File c) {
+      this.logo = new ExpandableField<>(c.getId(), c);
+    }
+    // </editor-fold>
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class DeclineChargeOn extends StripeObject {
+    Boolean avsFailure;
+    Boolean cvcFailure;
   }
 
   @Getter
@@ -287,6 +514,60 @@ public class Account extends ApiResource implements HasId, MetadataStore<Account
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class Requirements extends StripeObject {
+    Long currentDeadline;
+    List<String> currentlyDue;
+    String disabledReason;
+    List<String> eventuallyDue;
+    List<String> pastDue;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SettingsCardPayments extends StripeObject {
+    DeclineChargeOn declineOn;
+    String statementDescriptorPrefix;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SettingsDashboard extends StripeObject {
+    String displayName;
+    String timezone;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SettingsPayments extends StripeObject {
+    String statementDescriptor;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SettingsPayouts extends StripeObject {
+    Boolean debitNegativeBalances;
+    PayoutSchedule schedule;
+    String statementDescriptor;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Settings extends StripeObject {
+    SettingsBranding branding;
+    SettingsCardPayments cardPayments;
+    SettingsDashboard dashboard;
+    SettingsPayments payments;
+    SettingsPayouts payouts;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class TosAcceptance extends StripeObject {
     Long date;
     String ip;
@@ -296,6 +577,16 @@ public class Account extends ApiResource implements HasId, MetadataStore<Account
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  @Deprecated
+  public static class Keys extends StripeObject {
+    String publishable;
+    String secret;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  @Deprecated
   public static class TransferSchedule extends StripeObject {
     Long delayDays;
     String interval;
@@ -306,6 +597,7 @@ public class Account extends ApiResource implements HasId, MetadataStore<Account
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  @Deprecated
   public static class Verification extends StripeObject {
     Boolean contacted;
     String disabledReason;

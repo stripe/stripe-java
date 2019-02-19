@@ -1,0 +1,51 @@
+{
+  "account": "acct_123",
+  "created": 1234567890,
+  "dob": {
+    "day": null,
+    "month": null,
+    "year": null
+  },
+  "first_name": null,
+  "id": "person_123",
+  "last_name": null,
+  "metadata": {
+  },
+  "object": "person",
+  "relationship": {
+    "account_opener": false,
+    "director": false,
+    "owner": false,
+    "percent_ownership": null,
+    "title": null
+  },
+  "requirements": {
+    "currently_due": [],
+    "eventually_due": [],
+    "past_due": []
+  },
+  "ssn_last_4_provided": false,
+  "verification": {
+    "details": null,
+    "details_code": null,
+    "document": {
+      "created": 1234567890,
+      "filename": "file_123",
+      "id": "file_123",
+      "links": {
+        "data": [],
+        "has_more": false,
+        "object": "list",
+        "url": "/v1/file_links?file=file_123"
+      },
+      "object": "file",
+      "purpose": "identity_document",
+      "size": 9863,
+      "title": null,
+      "type": "png",
+      "url": null
+    },
+    "document_back": null,
+    "status": "unverified"
+  }
+}

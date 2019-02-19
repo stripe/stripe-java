@@ -33,9 +33,9 @@ public class ChargeTest extends BaseStripeTest {
 
   @Test
   public void testDeserializeWithExpansions() throws Exception {
+    // TODO: add support back for expanding application_fee once stripe-mock supports it.
     final String[] expansions = {
       "application",
-      "application_fee",
       "balance_transaction",
       "customer",
       "destination",
@@ -55,10 +55,6 @@ public class ChargeTest extends BaseStripeTest {
     assertNotNull(application);
     assertNotNull(application.getId());
     assertEquals(charge.getApplication(), application.getId());
-    final ApplicationFee applicationFee = charge.getApplicationFeeObject();
-    assertNotNull(applicationFee);
-    assertNotNull(applicationFee.getId());
-    assertEquals(charge.getApplicationFee(), applicationFee.getId());
     final BalanceTransaction balanceTransaction = charge.getBalanceTransactionObject();
     assertNotNull(balanceTransaction);
     assertNotNull(balanceTransaction.getId());
