@@ -10,6 +10,8 @@ import com.stripe.model.Sku;
 import com.stripe.model.SkuCollection;
 import com.stripe.net.ApiResource;
 
+import com.stripe.net.RequestOptions;
+import com.stripe.param.SkuCreateParams;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -26,6 +28,45 @@ public class SkuTest extends BaseStripeTest {
 
   @Test
   public void testCreate() throws StripeException {
+    final Map<String, Object> params = createUntypedParams();
+
+    final Sku sku = Sku.create(params);
+
+    assertNotNull(sku);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/skus",
+        params
+    );
+  }
+
+  @Test
+  public void testCreateWithParams() throws StripeException {
+    SkuCreateParams.Inventory inventory = SkuCreateParams.Inventory.builder()
+        .setType(SkuCreateParams.Inventory.Type.BUCKET)
+        .setValue(SkuCreateParams.Inventory.Value.LIMITED).build();
+
+    SkuCreateParams typedParams = SkuCreateParams.builder()
+        .setActive(true)
+        .putAttributes("attr1", "val1")
+        .putAttributes("attr2", "val2")
+        .setPrice(499L)
+        .setCurrency("usd")
+        .setInventory(inventory)
+        .setProduct("prod_123")
+        .setImage("http://example.com/foo.png").build();
+
+    final Sku sku = Sku.create(typedParams, RequestOptions.getDefault());
+
+    assertNotNull(sku);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/skus",
+        createUntypedParams()
+    );
+  }
+
+  private Map<String, Object> createUntypedParams() {
     final Map<String, Object> attributes = new HashMap<>();
     attributes.put("attr1", "val1");
     attributes.put("attr2", "val2");
@@ -40,15 +81,7 @@ public class SkuTest extends BaseStripeTest {
     params.put("inventory", inventory);
     params.put("product", "prod_123");
     params.put("image", "http://example.com/foo.png");
-
-    final Sku sku = Sku.create(params);
-
-    assertNotNull(sku);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        "/v1/skus",
-        params
-    );
+    return params;
   }
 
   @Test
