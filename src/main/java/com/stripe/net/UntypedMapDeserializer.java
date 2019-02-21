@@ -4,15 +4,17 @@ import com.google.gson.JsonArray;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Map;
 
 
 public class UntypedMapDeserializer {
   /**
    * Deserialize JSON into untyped map.
-   * {@code JsonArray} is represented as {@code Object[]}.
+   * {@code JsonArray} is represented as {@code List<Object>}.
    * {@code JsonObject} is represented as {@code Map<String, Object>}.
    * {@code JsonPrimitive} is represented as String, Number, or Boolean.
    *
@@ -58,13 +60,12 @@ public class UntypedMapDeserializer {
     }
   }
 
-  private Object[] deserializeJsonArray(JsonArray arr) {
-    Object[] elems = new Object[arr.size()];
+  private List<Object> deserializeJsonArray(JsonArray arr) {
+    List<Object> elems = new ArrayList<>(arr.size());
     Iterator<JsonElement> elemIter = arr.iterator();
-    int i = 0;
     while (elemIter.hasNext()) {
       JsonElement elem = elemIter.next();
-      elems[i++] = deserializeJsonElement(elem);
+      elems.add(deserializeJsonElement(elem));
     }
     return elems;
   }

@@ -9,6 +9,7 @@ import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 import org.junit.Test;
 
@@ -21,9 +22,9 @@ public class UntypedMapDeserializerTest {
     JsonObject jsonObject = jsonObject(
         "foo_array", jsonArray(jsonString("foo1"), jsonString("foo2")));
     Map<String, Object> untyped = untypedMapDeserializer.deserialize(jsonObject);
-    Object[] fooArray = (Object[]) untyped.get("foo_array");
-    assertEquals("foo1", fooArray[0]);
-    assertEquals("foo2", fooArray[1]);
+    List<Object> fooArray = (List<Object>) untyped.get("foo_array");
+    assertEquals("foo1", fooArray.get(0));
+    assertEquals("foo2", fooArray.get(1));
   }
 
   @Test
@@ -78,9 +79,9 @@ public class UntypedMapDeserializerTest {
         jsonObject("bar", jsonNumber(3L)))
     );
     Map<String, Object> untyped = untypedMapDeserializer.deserialize(jsonObject);
-    Object[] objects = (Object[]) untyped.get("foo_array");
-    assertEquals(ImmutableMap.of("foo", 2L), objects[0]);
-    assertEquals(ImmutableMap.of("bar", 3L), objects[1]);
+    List<Object> objects = (List<Object>) untyped.get("foo_array");
+    assertEquals(ImmutableMap.of("foo", 2L), objects.get(0));
+    assertEquals(ImmutableMap.of("bar", 3L), objects.get(1));
   }
 
   private JsonArray jsonArray(JsonElement... elements) {
