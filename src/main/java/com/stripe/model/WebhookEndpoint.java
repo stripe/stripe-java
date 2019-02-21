@@ -7,6 +7,10 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.WebhookEndpointCreateParams;
+import com.stripe.param.WebhookEndpointListParams;
+import com.stripe.param.WebhookEndpointRetrieveParams;
+import com.stripe.param.WebhookEndpointUpdateParams;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -78,6 +82,13 @@ public class WebhookEndpoint extends ApiResource implements HasId {
     return requestCollection(url, params, WebhookEndpointCollection.class, options);
   }
 
+  /** Returns a list of your webhook endpoints. */
+  public static WebhookEndpointCollection list(
+      WebhookEndpointListParams params, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/webhook_endpoints");
+    return requestCollection(url, params, WebhookEndpointCollection.class, options);
+  }
+
   /** Retrieves the webhook endpoint with the given ID. */
   public static WebhookEndpoint retrieve(String webhookEndpoint) throws StripeException {
     return retrieve(webhookEndpoint, (Map<String, Object>) null, (RequestOptions) null);
@@ -92,6 +103,17 @@ public class WebhookEndpoint extends ApiResource implements HasId {
   /** Retrieves the webhook endpoint with the given ID. */
   public static WebhookEndpoint retrieve(
       String webhookEndpoint, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/webhook_endpoints/%s", webhookEndpoint));
+    return request(ApiResource.RequestMethod.GET, url, params, WebhookEndpoint.class, options);
+  }
+
+  /** Retrieves the webhook endpoint with the given ID. */
+  public static WebhookEndpoint retrieve(
+      String webhookEndpoint, WebhookEndpointRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
         String.format(
@@ -129,6 +151,21 @@ public class WebhookEndpoint extends ApiResource implements HasId {
   }
 
   /**
+   * A webhook endpoint must have a <code>url</code> and a list of <code>enabled_events</code>. You
+   * may optionally specify the Boolean <code>connect</code> parameter. If set to true, then a
+   * Connect webhook endpoint that notifies the specified <code>url</code> about events from all
+   * connected accounts is created; otherwise an account webhook endpoint that notifies the
+   * specified <code>url</code> only about events from your account is created. You can also create
+   * webhook endpoints in the <a href="https://dashboard.stripe.com/account/webhooks">webhooks
+   * settings</a> section of the Dashboard.
+   */
+  public static WebhookEndpoint create(WebhookEndpointCreateParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/webhook_endpoints");
+    return request(ApiResource.RequestMethod.POST, url, params, WebhookEndpoint.class, options);
+  }
+
+  /**
    * Updates the webhook endpoint. You may edit the <code>url</code>, the list of <code>
    * enabled_events</code>, and the status of your endpoint.
    */
@@ -141,6 +178,18 @@ public class WebhookEndpoint extends ApiResource implements HasId {
    * enabled_events</code>, and the status of your endpoint.
    */
   public WebhookEndpoint update(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/webhook_endpoints/%s", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, WebhookEndpoint.class, options);
+  }
+
+  /**
+   * Updates the webhook endpoint. You may edit the <code>url</code>, the list of <code>
+   * enabled_events</code>, and the status of your endpoint.
+   */
+  public WebhookEndpoint update(WebhookEndpointUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
         String.format(

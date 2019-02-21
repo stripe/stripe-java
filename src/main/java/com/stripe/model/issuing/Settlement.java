@@ -9,6 +9,9 @@ import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.issuing.SettlementListParams;
+import com.stripe.param.issuing.SettlementRetrieveParams;
+import com.stripe.param.issuing.SettlementUpdateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -111,6 +114,16 @@ public class Settlement extends ApiResource implements HasId, MetadataStore<Sett
     return requestCollection(url, params, SettlementCollection.class, options);
   }
 
+  /**
+   * Returns a list of Issuing <code>Settlement</code> objects. The objects are sorted in descending
+   * order by creation date, with the most recently created object appearing first.
+   */
+  public static SettlementCollection list(SettlementListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/settlements");
+    return requestCollection(url, params, SettlementCollection.class, options);
+  }
+
   /** Retrieves an Issuing <code>Settlement</code> object. */
   public static Settlement retrieve(String settlement) throws StripeException {
     return retrieve(settlement, (Map<String, Object>) null, (RequestOptions) null);
@@ -132,6 +145,16 @@ public class Settlement extends ApiResource implements HasId, MetadataStore<Sett
     return request(ApiResource.RequestMethod.GET, url, params, Settlement.class, options);
   }
 
+  /** Retrieves an Issuing <code>Settlement</code> object. */
+  public static Settlement retrieve(
+      String settlement, SettlementRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/issuing/settlements/%s", settlement));
+    return request(ApiResource.RequestMethod.GET, url, params, Settlement.class, options);
+  }
+
   /**
    * Updates the specified Issuing <code>Settlement</code> object by setting the values of the
    * parameters passed. Any parameters not provided will be left unchanged.
@@ -145,6 +168,18 @@ public class Settlement extends ApiResource implements HasId, MetadataStore<Sett
    * parameters passed. Any parameters not provided will be left unchanged.
    */
   public Settlement update(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/issuing/settlements/%s", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Settlement.class, options);
+  }
+
+  /**
+   * Updates the specified Issuing <code>Settlement</code> object by setting the values of the
+   * parameters passed. Any parameters not provided will be left unchanged.
+   */
+  public Settlement update(SettlementUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
         String.format(

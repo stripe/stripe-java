@@ -7,6 +7,9 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.ReviewApproveParams;
+import com.stripe.param.ReviewListParams;
+import com.stripe.param.ReviewRetrieveParams;
 import java.math.BigDecimal;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -70,7 +73,7 @@ public class Review extends ApiResource implements HasId {
   @SerializedName("open")
   Boolean open;
 
-  /** The reason the review was opened. One of `rule` or `manual`. */
+  /** The reason the review was opened. One of `rule`, `manual`, or `issuer_fraud_record`. */
   @SerializedName("opened_reason")
   String openedReason;
 
@@ -81,8 +84,8 @@ public class Review extends ApiResource implements HasId {
   ExpandableField<PaymentIntent> paymentIntent;
 
   /**
-   * The reason the review is currently open or closed. One of `rule`, `manual`, `approved`,
-   * `refunded`, `refunded_as_fraud`, or `disputed`.
+   * The reason the review is currently open or closed. One of `rule`, `manual`,
+   * `issuer_fraud_record`, `approved`, `refunded`, `refunded_as_fraud`, or `disputed`.
    */
   @SerializedName("reason")
   String reason;
@@ -148,6 +151,17 @@ public class Review extends ApiResource implements HasId {
     return requestCollection(url, params, ReviewCollection.class, options);
   }
 
+  /**
+   * Returns a list of <code>Review</code> objects that have <code>open</code> set to <code>true
+   * </code>. The objects are sorted in descending order by creation date, with the most recently
+   * created object appearing first.
+   */
+  public static ReviewCollection list(ReviewListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/reviews");
+    return requestCollection(url, params, ReviewCollection.class, options);
+  }
+
   /** Retrieves a <code>Review</code> object. */
   public static Review retrieve(String review) throws StripeException {
     return retrieve(review, (Map<String, Object>) null, (RequestOptions) null);
@@ -160,6 +174,14 @@ public class Review extends ApiResource implements HasId {
 
   /** Retrieves a <code>Review</code> object. */
   public static Review retrieve(String review, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/reviews/%s", review));
+    return request(ApiResource.RequestMethod.GET, url, params, Review.class, options);
+  }
+
+  /** Retrieves a <code>Review</code> object. */
+  public static Review retrieve(String review, ReviewRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/reviews/%s", review));
@@ -183,6 +205,14 @@ public class Review extends ApiResource implements HasId {
 
   /** Approves a <code>Review</code> object, closing it and removing it from the list of reviews. */
   public Review approve(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/reviews/%s/approve", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Review.class, options);
+  }
+
+  /** Approves a <code>Review</code> object, closing it and removing it from the list of reviews. */
+  public Review approve(ReviewApproveParams params, RequestOptions options) throws StripeException {
     String url =
         String.format(
             "%s%s", Stripe.getApiBase(), String.format("/v1/reviews/%s/approve", this.getId()));

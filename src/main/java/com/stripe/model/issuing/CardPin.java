@@ -7,6 +7,8 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.issuing.CardPinRetrieveParams;
+import com.stripe.param.issuing.CardPinUpdateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -55,6 +57,17 @@ public class CardPin extends ApiResource {
   }
 
   /**
+   * Retrieves the PIN for a card object, subject to cardholder verification, see <a
+   * href="/docs/issuing/pin_management">Retrieve and update cardholder PIN</a>.
+   */
+  public static CardPin retrieve(String card, CardPinRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/issuing/cards/%s/pin", card));
+    return request(ApiResource.RequestMethod.GET, url, params, CardPin.class, options);
+  }
+
+  /**
    * Updates the PIN for a card, subject to cardholder verification. See <a
    * href="/docs/issuing/pin_management">Retrieve and update cardholder PIN</a>
    */
@@ -67,6 +80,17 @@ public class CardPin extends ApiResource {
    * href="/docs/issuing/pin_management">Retrieve and update cardholder PIN</a>
    */
   public static CardPin update(String card, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/issuing/cards/%s/pin", card));
+    return request(ApiResource.RequestMethod.POST, url, params, CardPin.class, options);
+  }
+
+  /**
+   * Updates the PIN for a card, subject to cardholder verification. See <a
+   * href="/docs/issuing/pin_management">Retrieve and update cardholder PIN</a>
+   */
+  public static CardPin update(String card, CardPinUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/issuing/cards/%s/pin", card));

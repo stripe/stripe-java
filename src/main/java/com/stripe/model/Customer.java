@@ -7,6 +7,10 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.CustomerCreateParams;
+import com.stripe.param.CustomerListParams;
+import com.stripe.param.CustomerRetrieveParams;
+import com.stripe.param.CustomerUpdateParams;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -159,6 +163,16 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
     return requestCollection(url, params, CustomerCollection.class, options);
   }
 
+  /**
+   * Returns a list of your customers. The customers are returned sorted by creation date, with the
+   * most recent customers appearing first.
+   */
+  public static CustomerCollection list(CustomerListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/customers");
+    return requestCollection(url, params, CustomerCollection.class, options);
+  }
+
   /** Creates a new customer object. */
   public static Customer create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -166,6 +180,13 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
 
   /** Creates a new customer object. */
   public static Customer create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/customers");
+    return request(ApiResource.RequestMethod.POST, url, params, Customer.class, options);
+  }
+
+  /** Creates a new customer object. */
+  public static Customer create(CustomerCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/customers");
     return request(ApiResource.RequestMethod.POST, url, params, Customer.class, options);
@@ -193,6 +214,18 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
    */
   public static Customer retrieve(
       String customer, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/customers/%s", customer));
+    return request(ApiResource.RequestMethod.GET, url, params, Customer.class, options);
+  }
+
+  /**
+   * Retrieves the details of an existing customer. You need only supply the unique customer
+   * identifier that was returned upon customer creation.
+   */
+  public static Customer retrieve(
+      String customer, CustomerRetrieveParams params, RequestOptions options)
+      throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/customers/%s", customer));
     return request(ApiResource.RequestMethod.GET, url, params, Customer.class, options);
@@ -229,6 +262,26 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
    * <p>This request accepts mostly the same arguments as the customer creation call.
    */
   public Customer update(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/customers/%s", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Customer.class, options);
+  }
+
+  /**
+   * Updates the specified customer by setting the values of the parameters passed. Any parameters
+   * not provided will be left unchanged. For example, if you pass the <strong>source</strong>
+   * parameter, that becomes the customer’s active source (e.g., a card) to be used for all charges
+   * in the future. When you update a customer to a new valid card source by passing the
+   * <strong>source</strong> parameter: for each of the customer’s current subscriptions, if the
+   * subscription bills automatically and is in the <code>past_due</code> state, then the latest
+   * unclosed invoice for the subscription will be retried. This retry will not count as an
+   * automatic retry, and will not affect the next regularly scheduled payment for the invoice.
+   * Changing the <strong>default_source</strong> for a customer will not trigger this behavior.
+   *
+   * <p>This request accepts mostly the same arguments as the customer creation call.
+   */
+  public Customer update(CustomerUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/customers/%s", this.getId()));

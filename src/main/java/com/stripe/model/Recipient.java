@@ -7,6 +7,10 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.RecipientCreateParams;
+import com.stripe.param.RecipientListParams;
+import com.stripe.param.RecipientRetrieveParams;
+import com.stripe.param.RecipientUpdateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -171,6 +175,16 @@ public class Recipient extends ApiResource implements HasId, MetadataStore<Recip
   }
 
   /**
+   * Returns a list of your recipients. The recipients are returned sorted by creation date, with
+   * the most recently created recipients appearing first.
+   */
+  public static RecipientCollection list(RecipientListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/recipients");
+    return requestCollection(url, params, RecipientCollection.class, options);
+  }
+
+  /**
    * Creates a new <code>Recipient</code> object and verifies the recipient’s identity. Also
    * verifies the recipient’s bank account information or debit card, if either is provided.
    */
@@ -183,6 +197,16 @@ public class Recipient extends ApiResource implements HasId, MetadataStore<Recip
    * verifies the recipient’s bank account information or debit card, if either is provided.
    */
   public static Recipient create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/recipients");
+    return request(ApiResource.RequestMethod.POST, url, params, Recipient.class, options);
+  }
+
+  /**
+   * Creates a new <code>Recipient</code> object and verifies the recipient’s identity. Also
+   * verifies the recipient’s bank account information or debit card, if either is provided.
+   */
+  public static Recipient create(RecipientCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/recipients");
     return request(ApiResource.RequestMethod.POST, url, params, Recipient.class, options);
@@ -215,6 +239,16 @@ public class Recipient extends ApiResource implements HasId, MetadataStore<Recip
   }
 
   /**
+   * Retrieves the details of an existing recipient. You need only supply the unique recipient
+   * identifier that was returned upon recipient creation.
+   */
+  public static Recipient retrieve(
+      String id, RecipientRetrieveParams params, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), String.format("/v1/recipients/%s", id));
+    return request(ApiResource.RequestMethod.GET, url, params, Recipient.class, options);
+  }
+
+  /**
    * Updates the specified recipient by setting the values of the parameters passed. Any parameters
    * not provided will be left unchanged.
    *
@@ -233,6 +267,21 @@ public class Recipient extends ApiResource implements HasId, MetadataStore<Recip
    * you update the bank account, the bank account validation will automatically be rerun.
    */
   public Recipient update(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/recipients/%s", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Recipient.class, options);
+  }
+
+  /**
+   * Updates the specified recipient by setting the values of the parameters passed. Any parameters
+   * not provided will be left unchanged.
+   *
+   * <p>If you update the name or tax ID, the identity verification will automatically be rerun. If
+   * you update the bank account, the bank account validation will automatically be rerun.
+   */
+  public Recipient update(RecipientUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
         String.format(

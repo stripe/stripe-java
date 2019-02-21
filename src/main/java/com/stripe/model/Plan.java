@@ -7,6 +7,10 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.PlanCreateParams;
+import com.stripe.param.PlanListParams;
+import com.stripe.param.PlanRetrieveParams;
+import com.stripe.param.PlanUpdateParams;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -176,6 +180,13 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
     return requestCollection(url, params, PlanCollection.class, options);
   }
 
+  /** Returns a list of your plans. */
+  public static PlanCollection list(PlanListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/plans");
+    return requestCollection(url, params, PlanCollection.class, options);
+  }
+
   /**
    * You can create plans using the API, or in the Stripe <a
    * href="https://dashboard.stripe.com/subscriptions/products">Dashboard</a>.
@@ -189,6 +200,16 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
    * href="https://dashboard.stripe.com/subscriptions/products">Dashboard</a>.
    */
   public static Plan create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/plans");
+    return request(ApiResource.RequestMethod.POST, url, params, Plan.class, options);
+  }
+
+  /**
+   * You can create plans using the API, or in the Stripe <a
+   * href="https://dashboard.stripe.com/subscriptions/products">Dashboard</a>.
+   */
+  public static Plan create(PlanCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/plans");
     return request(ApiResource.RequestMethod.POST, url, params, Plan.class, options);
@@ -211,6 +232,13 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
     return request(ApiResource.RequestMethod.GET, url, params, Plan.class, options);
   }
 
+  /** Retrieves the plan with the given ID. */
+  public static Plan retrieve(String plan, PlanRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), String.format("/v1/plans/%s", plan));
+    return request(ApiResource.RequestMethod.GET, url, params, Plan.class, options);
+  }
+
   /**
    * Updates the specified plan by setting the values of the parameters passed. Any parameters not
    * provided are left unchanged. By design, you cannot change a plan’s ID, amount, currency, or
@@ -226,6 +254,17 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
    * billing cycle.
    */
   public Plan update(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/plans/%s", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Plan.class, options);
+  }
+
+  /**
+   * Updates the specified plan by setting the values of the parameters passed. Any parameters not
+   * provided are left unchanged. By design, you cannot change a plan’s ID, amount, currency, or
+   * billing cycle.
+   */
+  public Plan update(PlanUpdateParams params, RequestOptions options) throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/plans/%s", this.getId()));
     return request(ApiResource.RequestMethod.POST, url, params, Plan.class, options);

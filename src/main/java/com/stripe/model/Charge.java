@@ -8,6 +8,13 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.radar.Rule;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.ChargeCaptureParams;
+import com.stripe.param.ChargeCreateParams;
+import com.stripe.param.ChargeListParams;
+import com.stripe.param.ChargeRefundParams;
+import com.stripe.param.ChargeRetrieveDisputeParams;
+import com.stripe.param.ChargeRetrieveParams;
+import com.stripe.param.ChargeUpdateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -44,15 +51,9 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
   ExpandableField<Application> application;
 
   /**
-   * The application fee (if any) for the charge. [See the Connect
+   * The amount of the application fee (if any) for the charge. [See the Connect
    * documentation](/docs/connect/direct-charges#collecting-fees) for details.
    */
-  @SerializedName("application_fee")
-  @Getter(lombok.AccessLevel.NONE)
-  @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<ApplicationFee> applicationFee;
-
-  /** The amount of the application fee (if any) for the resulting payment. */
   @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
 
@@ -96,15 +97,6 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
   /** An arbitrary string attached to the object. Often useful for displaying to users. */
   @SerializedName("description")
   String description;
-
-  /**
-   * The account (if any) the charge was made on behalf of, with an automatic transfer. [See the
-   * Connect documentation](/docs/connect/destination-charges) for details.
-   */
-  @SerializedName("destination")
-  @Getter(lombok.AccessLevel.NONE)
-  @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<Account> destination;
 
   /** Details about the dispute if the charge has been disputed. */
   @SerializedName("dispute")
@@ -262,6 +254,11 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Transfer> transfer;
 
+  /**
+   * An optional dictionary including the account to automatically transfer to as part of a
+   * destination charge. [See the Connect documentation](/docs/connect/destination-charges) for
+   * details.
+   */
   @SerializedName("transfer_data")
   TransferData transferData;
 
@@ -288,25 +285,6 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
 
   public void setApplicationObject(Application expandableObject) {
     this.application = new ExpandableField<Application>(expandableObject.getId(), expandableObject);
-  }
-
-  /** Get id of expandable `applicationFee` object. */
-  public String getApplicationFee() {
-    return (this.applicationFee != null) ? this.applicationFee.getId() : null;
-  }
-
-  public void setApplicationFee(String id) {
-    this.applicationFee = ApiResource.setExpandableFieldId(id, this.applicationFee);
-  }
-
-  /** Get expanded `applicationFee`. */
-  public ApplicationFee getApplicationFeeObject() {
-    return (this.applicationFee != null) ? this.applicationFee.getExpanded() : null;
-  }
-
-  public void setApplicationFeeObject(ApplicationFee expandableObject) {
-    this.applicationFee =
-        new ExpandableField<ApplicationFee>(expandableObject.getId(), expandableObject);
   }
 
   /** Get id of expandable `balanceTransaction` object. */
@@ -344,24 +322,6 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
 
   public void setCustomerObject(Customer expandableObject) {
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
-  }
-
-  /** Get id of expandable `destination` object. */
-  public String getDestination() {
-    return (this.destination != null) ? this.destination.getId() : null;
-  }
-
-  public void setDestination(String id) {
-    this.destination = ApiResource.setExpandableFieldId(id, this.destination);
-  }
-
-  /** Get expanded `destination`. */
-  public Account getDestinationObject() {
-    return (this.destination != null) ? this.destination.getExpanded() : null;
-  }
-
-  public void setDestinationObject(Account expandableObject) {
-    this.destination = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
   }
 
   /** Get id of expandable `dispute` object. */
@@ -509,6 +469,16 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
   }
 
   /**
+   * Returns a list of charges you’ve previously created. The charges are returned in sorted order,
+   * with the most recent charges appearing first.
+   */
+  public static ChargeCollection list(ChargeListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/charges");
+    return requestCollection(url, params, ChargeCollection.class, options);
+  }
+
+  /**
    * To charge a credit card or other payment source, you create a <code>Charge</code> object. If
    * your API key is in test mode, the supplied payment source (e.g., card) won’t actually be
    * charged, although everything else will occur as if in live mode. (Stripe assumes that the
@@ -525,6 +495,18 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
    * charge would have completed successfully).
    */
   public static Charge create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/charges");
+    return request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
+  }
+
+  /**
+   * To charge a credit card or other payment source, you create a <code>Charge</code> object. If
+   * your API key is in test mode, the supplied payment source (e.g., card) won’t actually be
+   * charged, although everything else will occur as if in live mode. (Stripe assumes that the
+   * charge would have completed successfully).
+   */
+  public static Charge create(ChargeCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/charges");
     return request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
@@ -561,6 +543,18 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
   }
 
   /**
+   * Retrieves the details of a charge that has previously been created. Supply the unique charge ID
+   * that was returned from your previous request, and Stripe will return the corresponding charge
+   * information. The same information is returned when creating or refunding the charge.
+   */
+  public static Charge retrieve(String charge, ChargeRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/charges/%s", charge));
+    return request(ApiResource.RequestMethod.GET, url, params, Charge.class, options);
+  }
+
+  /**
    * Updates the specified charge by setting the values of the parameters passed. Any parameters not
    * provided will be left unchanged.
    */
@@ -573,6 +567,16 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
    * provided will be left unchanged.
    */
   public Charge update(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/charges/%s", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
+  }
+
+  /**
+   * Updates the specified charge by setting the values of the parameters passed. Any parameters not
+   * provided will be left unchanged.
+   */
+  public Charge update(ChargeUpdateParams params, RequestOptions options) throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/charges/%s", this.getId()));
     return request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
@@ -627,6 +631,22 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
    * capturable.
    */
   public Charge capture(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/charges/%s/capture", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
+  }
+
+  /**
+   * Capture the payment of an existing, uncaptured, charge. This is the second half of the two-step
+   * payment flow, where first you <a href="#create_charge">created a charge</a> with the capture
+   * option set to false.
+   *
+   * <p>Uncaptured payments expire exactly seven days after they are created. If they are not
+   * captured by that point in time, they will be marked as refunded and will no longer be
+   * capturable.
+   */
+  public Charge capture(ChargeCaptureParams params, RequestOptions options) throws StripeException {
     String url =
         String.format(
             "%s%s", Stripe.getApiBase(), String.format("/v1/charges/%s/capture", this.getId()));
@@ -704,6 +724,26 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
     return request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
   }
 
+  /**
+   * When you create a new refund, you must specify a charge on which to create it.
+   *
+   * <p>Creating a new refund will refund a charge that has previously been created but not yet
+   * refunded. Funds will be refunded to the credit or debit card that was originally charged.
+   *
+   * <p>You can optionally refund only part of a charge. You can do so multiple times, until the
+   * entire charge has been refunded.
+   *
+   * <p>Once entirely refunded, a charge can’t be refunded again. This method will raise an error
+   * when called on an already-refunded charge, or when trying to refund more money than is left on
+   * a charge.
+   */
+  public Charge refund(ChargeRefundParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/charges/%s/refund", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
+  }
+
   /** Retrieve a dispute for a specified charge. */
   public Dispute retrieveDispute() throws StripeException {
     return retrieveDispute((Map<String, Object>) null, (RequestOptions) null);
@@ -716,6 +756,15 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
 
   /** Retrieve a dispute for a specified charge. */
   public Dispute retrieveDispute(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/charges/%s/dispute", this.getId()));
+    return request(ApiResource.RequestMethod.GET, url, params, Dispute.class, options);
+  }
+
+  /** Retrieve a dispute for a specified charge. */
+  public Dispute retrieveDispute(ChargeRetrieveDisputeParams params, RequestOptions options)
       throws StripeException {
     String url =
         String.format(
@@ -835,8 +884,15 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
   @EqualsAndHashCode(callSuper = false)
   public static class TransferData extends StripeObject {
     /**
-     * The account (if any) the charge was made on behalf of, with an automatic transfer. [See the
-     * Connect documentation](/docs/connect/destination-charges) for details.
+     * The amount transferred to the destination account, if specified. By default, the entire
+     * charge amount is transferred to the destination account.
+     */
+    @SerializedName("amount")
+    Long amount;
+
+    /**
+     * ID of an existing, connected Stripe account to transfer funds to if `transfer_data` was
+     * specified in the charge request.
      */
     @SerializedName("destination")
     @Getter(lombok.AccessLevel.NONE)

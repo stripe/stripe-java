@@ -8,6 +8,8 @@ import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.CardUpdateOnAccountParams;
+import com.stripe.param.CardUpdateOnCustomerParams;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -297,6 +299,69 @@ public class Card extends ApiResource
     } else {
       throw new InvalidRequestException(
           "Unable to construct url because [account, customer] field(s) are all null",
+          null,
+          null,
+          null,
+          0,
+          null);
+    }
+    return request(ApiResource.RequestMethod.POST, url, params, Card.class, options);
+  }
+
+  /**
+   * Updates the metadata, account holder name, and account holder type of a bank account belonging
+   * to a <a href="/docs/connect/custom-accounts">Custom account</a>, and optionally sets it as the
+   * default for its currency. Other bank account details are not editable by design.
+   *
+   * <p>You can re-enable a disabled bank account by performing an update call without providing any
+   * arguments or changes.
+   *
+   * <p>Update a specified source for a given customer.
+   */
+  public Card update(CardUpdateOnAccountParams params, RequestOptions options)
+      throws StripeException {
+    String url;
+    if (this.getAccount() != null) {
+      url =
+          String.format(
+              "%s%s",
+              Stripe.getApiBase(),
+              String.format(
+                  "/v1/accounts/%s/external_accounts/%s", this.getAccount(), this.getId()));
+    } else {
+      throw new InvalidRequestException(
+          "Unable to construct url because [account] field(s) are all null",
+          null,
+          null,
+          null,
+          0,
+          null);
+    }
+    return request(ApiResource.RequestMethod.POST, url, params, Card.class, options);
+  }
+
+  /**
+   * Updates the metadata, account holder name, and account holder type of a bank account belonging
+   * to a <a href="/docs/connect/custom-accounts">Custom account</a>, and optionally sets it as the
+   * default for its currency. Other bank account details are not editable by design.
+   *
+   * <p>You can re-enable a disabled bank account by performing an update call without providing any
+   * arguments or changes.
+   *
+   * <p>Update a specified source for a given customer.
+   */
+  public Card update(CardUpdateOnCustomerParams params, RequestOptions options)
+      throws StripeException {
+    String url;
+    if (this.getCustomer() != null) {
+      url =
+          String.format(
+              "%s%s",
+              Stripe.getApiBase(),
+              String.format("/v1/customers/%s/sources/%s", this.getCustomer(), this.getId()));
+    } else {
+      throw new InvalidRequestException(
+          "Unable to construct url because [customer] field(s) are all null",
           null,
           null,
           null,

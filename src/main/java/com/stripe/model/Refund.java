@@ -7,6 +7,10 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.RefundCreateParams;
+import com.stripe.param.RefundListParams;
+import com.stripe.param.RefundRetrieveParams;
+import com.stripe.param.RefundUpdateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -237,6 +241,17 @@ public class Refund extends ApiResource implements BalanceTransactionSource, Met
     return requestCollection(url, params, RefundCollection.class, options);
   }
 
+  /**
+   * Returns a list of all refunds you’ve previously created. The refunds are returned in sorted
+   * order, with the most recent refunds appearing first. For convenience, the 10 most recent
+   * refunds are always available by default on the charge object.
+   */
+  public static RefundCollection list(RefundListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/refunds");
+    return requestCollection(url, params, RefundCollection.class, options);
+  }
+
   /** Create a refund. */
   public static Refund create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -244,6 +259,13 @@ public class Refund extends ApiResource implements BalanceTransactionSource, Met
 
   /** Create a refund. */
   public static Refund create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/refunds");
+    return request(ApiResource.RequestMethod.POST, url, params, Refund.class, options);
+  }
+
+  /** Create a refund. */
+  public static Refund create(RefundCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/refunds");
     return request(ApiResource.RequestMethod.POST, url, params, Refund.class, options);
@@ -267,6 +289,14 @@ public class Refund extends ApiResource implements BalanceTransactionSource, Met
     return request(ApiResource.RequestMethod.GET, url, params, Refund.class, options);
   }
 
+  /** Retrieves the details of an existing refund. */
+  public static Refund retrieve(String refund, RefundRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/refunds/%s", refund));
+    return request(ApiResource.RequestMethod.GET, url, params, Refund.class, options);
+  }
+
   /**
    * Updates the specified refund by setting the values of the parameters passed. Any parameters not
    * provided will be left unchanged.
@@ -284,6 +314,18 @@ public class Refund extends ApiResource implements BalanceTransactionSource, Met
    * <p>This request only accepts <code>metadata</code> as an argument.
    */
   public Refund update(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/refunds/%s", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Refund.class, options);
+  }
+
+  /**
+   * Updates the specified refund by setting the values of the parameters passed. Any parameters not
+   * provided will be left unchanged.
+   *
+   * <p>This request only accepts <code>metadata</code> as an argument.
+   */
+  public Refund update(RefundUpdateParams params, RequestOptions options) throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/refunds/%s", this.getId()));
     return request(ApiResource.RequestMethod.POST, url, params, Refund.class, options);

@@ -8,6 +8,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.checkout.SessionCreateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -40,6 +41,13 @@ public class Session extends ApiResource implements HasId {
 
   /** Creates a Session object. */
   public static Session create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/checkout/sessions");
+    return request(ApiResource.RequestMethod.POST, url, params, Session.class, options);
+  }
+
+  /** Creates a Session object. */
+  public static Session create(SessionCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/checkout/sessions");
     return request(ApiResource.RequestMethod.POST, url, params, Session.class, options);

@@ -6,6 +6,8 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.SubscriptionScheduleRevisionCollectionListParams;
+import com.stripe.param.SubscriptionScheduleRevisionCollectionRetrieveParams;
 import java.util.Map;
 
 public class SubscriptionScheduleRevisionCollection
@@ -19,6 +21,15 @@ public class SubscriptionScheduleRevisionCollection
   /** Retrieves the list of subscription schedule revisions for a subscription schedule. */
   public SubscriptionScheduleRevisionCollection list(
       Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
+    return ApiResource.requestCollection(
+        url, params, SubscriptionScheduleRevisionCollection.class, options);
+  }
+
+  /** Retrieves the list of subscription schedule revisions for a subscription schedule. */
+  public SubscriptionScheduleRevisionCollection list(
+      SubscriptionScheduleRevisionCollectionListParams params, RequestOptions options)
+      throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
     return ApiResource.requestCollection(
         url, params, SubscriptionScheduleRevisionCollection.class, options);
@@ -50,6 +61,22 @@ public class SubscriptionScheduleRevisionCollection
    */
   public SubscriptionScheduleRevision retrieve(
       String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("%s/%s", this.getUrl(), id));
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, SubscriptionScheduleRevision.class, options);
+  }
+
+  /**
+   * Retrieves the details of an existing subscription schedule revision. You only need to supply
+   * the unique subscription schedule revision identifier that was returned upon subscription
+   * schedule creation or retrieval.
+   */
+  public SubscriptionScheduleRevision retrieve(
+      String id,
+      SubscriptionScheduleRevisionCollectionRetrieveParams params,
+      RequestOptions options)
+      throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("%s/%s", this.getUrl(), id));
     return ApiResource.request(

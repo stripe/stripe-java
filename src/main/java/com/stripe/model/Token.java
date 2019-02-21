@@ -7,6 +7,8 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.TokenCreateParams;
+import com.stripe.param.TokenRetrieveParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -78,6 +80,13 @@ public class Token extends ApiResource implements HasId {
     return request(ApiResource.RequestMethod.GET, url, params, Token.class, options);
   }
 
+  /** Retrieves the token with the given ID. */
+  public static Token retrieve(String token, TokenRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), String.format("/v1/tokens/%s", token));
+    return request(ApiResource.RequestMethod.GET, url, params, Token.class, options);
+  }
+
   /**
    * Creates a single-use token that represents a bank account’s details. This token can be used
    * with any API method in place of a bank account dictionary. This token can be used only once, by
@@ -93,6 +102,17 @@ public class Token extends ApiResource implements HasId {
    * attaching it to a <a href="#accounts">Custom account</a>.
    */
   public static Token create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/tokens");
+    return request(ApiResource.RequestMethod.POST, url, params, Token.class, options);
+  }
+
+  /**
+   * Creates a single-use token that represents a bank account’s details. This token can be used
+   * with any API method in place of a bank account dictionary. This token can be used only once, by
+   * attaching it to a <a href="#accounts">Custom account</a>.
+   */
+  public static Token create(TokenCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/tokens");
     return request(ApiResource.RequestMethod.POST, url, params, Token.class, options);

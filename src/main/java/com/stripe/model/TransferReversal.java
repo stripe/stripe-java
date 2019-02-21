@@ -8,6 +8,7 @@ import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.TransferReversalUpdateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -168,6 +169,33 @@ public class TransferReversal extends ApiResource
    * <p>This request only accepts metadata and description as arguments.
    */
   public TransferReversal update(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url;
+    if (this.getTransfer() != null) {
+      url =
+          String.format(
+              "%s%s",
+              Stripe.getApiBase(),
+              String.format("/v1/transfers/%s/reversals/%s", this.getTransfer(), this.getId()));
+    } else {
+      throw new InvalidRequestException(
+          "Unable to construct url because [transfer] field(s) are all null",
+          null,
+          null,
+          null,
+          0,
+          null);
+    }
+    return request(ApiResource.RequestMethod.POST, url, params, TransferReversal.class, options);
+  }
+
+  /**
+   * Updates the specified reversal by setting the values of the parameters passed. Any parameters
+   * not provided will be left unchanged.
+   *
+   * <p>This request only accepts metadata and description as arguments.
+   */
+  public TransferReversal update(TransferReversalUpdateParams params, RequestOptions options)
       throws StripeException {
     String url;
     if (this.getTransfer() != null) {

@@ -12,6 +12,11 @@ import com.stripe.model.MetadataStore;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.issuing.AuthorizationApproveParams;
+import com.stripe.param.issuing.AuthorizationDeclineParams;
+import com.stripe.param.issuing.AuthorizationListParams;
+import com.stripe.param.issuing.AuthorizationRetrieveParams;
+import com.stripe.param.issuing.AuthorizationUpdateParams;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -181,6 +186,16 @@ public class Authorization extends ApiResource
     return requestCollection(url, params, AuthorizationCollection.class, options);
   }
 
+  /**
+   * Returns a list of Issuing <code>Authorization</code> objects. The objects are sorted in
+   * descending order by creation date, with the most recently created object appearing first.
+   */
+  public static AuthorizationCollection list(AuthorizationListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/authorizations");
+    return requestCollection(url, params, AuthorizationCollection.class, options);
+  }
+
   /** Retrieves an Issuing <code>Authorization</code> object. */
   public static Authorization retrieve(String authorization) throws StripeException {
     return retrieve(authorization, (Map<String, Object>) null, (RequestOptions) null);
@@ -203,6 +218,17 @@ public class Authorization extends ApiResource
     return request(ApiResource.RequestMethod.GET, url, params, Authorization.class, options);
   }
 
+  /** Retrieves an Issuing <code>Authorization</code> object. */
+  public static Authorization retrieve(
+      String authorization, AuthorizationRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/issuing/authorizations/%s", authorization));
+    return request(ApiResource.RequestMethod.GET, url, params, Authorization.class, options);
+  }
+
   /**
    * Updates the specified Issuing <code>Authorization</code> object by setting the values of the
    * parameters passed. Any parameters not provided will be left unchanged.
@@ -216,6 +242,19 @@ public class Authorization extends ApiResource
    * parameters passed. Any parameters not provided will be left unchanged.
    */
   public Authorization update(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/issuing/authorizations/%s", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Authorization.class, options);
+  }
+
+  /**
+   * Updates the specified Issuing <code>Authorization</code> object by setting the values of the
+   * parameters passed. Any parameters not provided will be left unchanged.
+   */
+  public Authorization update(AuthorizationUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
         String.format(
@@ -250,6 +289,17 @@ public class Authorization extends ApiResource
     return request(ApiResource.RequestMethod.POST, url, params, Authorization.class, options);
   }
 
+  /** Approves a pending Issuing <code>Authorization</code> object. */
+  public Authorization approve(AuthorizationApproveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/issuing/authorizations/%s/approve", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Authorization.class, options);
+  }
+
   /** Declines a pending Issuing <code>Authorization</code> object. */
   public Authorization decline() throws StripeException {
     return decline((Map<String, Object>) null, (RequestOptions) null);
@@ -267,6 +317,17 @@ public class Authorization extends ApiResource
 
   /** Declines a pending Issuing <code>Authorization</code> object. */
   public Authorization decline(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/issuing/authorizations/%s/decline", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Authorization.class, options);
+  }
+
+  /** Declines a pending Issuing <code>Authorization</code> object. */
+  public Authorization decline(AuthorizationDeclineParams params, RequestOptions options)
       throws StripeException {
     String url =
         String.format(

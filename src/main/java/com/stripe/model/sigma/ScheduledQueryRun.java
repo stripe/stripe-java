@@ -10,6 +10,8 @@ import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.sigma.ScheduledQueryRunListParams;
+import com.stripe.param.sigma.ScheduledQueryRunRetrieveParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -82,6 +84,13 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
     return requestCollection(url, params, ScheduledQueryRunCollection.class, options);
   }
 
+  /** Returns a list of scheduled query runs. */
+  public static ScheduledQueryRunCollection list(
+      ScheduledQueryRunListParams params, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/sigma/scheduled_query_runs");
+    return requestCollection(url, params, ScheduledQueryRunCollection.class, options);
+  }
+
   /** Retrieves the details of an scheduled query run. */
   public static ScheduledQueryRun retrieve(String scheduledQueryRun) throws StripeException {
     return retrieve(scheduledQueryRun, (Map<String, Object>) null, (RequestOptions) null);
@@ -96,6 +105,18 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
   /** Retrieves the details of an scheduled query run. */
   public static ScheduledQueryRun retrieve(
       String scheduledQueryRun, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/sigma/scheduled_query_runs/%s", scheduledQueryRun));
+    return request(ApiResource.RequestMethod.GET, url, params, ScheduledQueryRun.class, options);
+  }
+
+  /** Retrieves the details of an scheduled query run. */
+  public static ScheduledQueryRun retrieve(
+      String scheduledQueryRun, ScheduledQueryRunRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
         String.format(

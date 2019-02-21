@@ -7,6 +7,16 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.InvoiceCreateParams;
+import com.stripe.param.InvoiceFinalizeInvoiceParams;
+import com.stripe.param.InvoiceListParams;
+import com.stripe.param.InvoiceMarkUncollectibleParams;
+import com.stripe.param.InvoicePayParams;
+import com.stripe.param.InvoiceRetrieveParams;
+import com.stripe.param.InvoiceSendInvoiceParams;
+import com.stripe.param.InvoiceUpcomingParams;
+import com.stripe.param.InvoiceUpdateParams;
+import com.stripe.param.InvoiceVoidInvoiceParams;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
@@ -95,6 +105,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Charge> charge;
 
+  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
+  Long created;
+
   /**
    * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
    * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
@@ -129,7 +143,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("deleted")
   Boolean deleted;
 
-  /** An arbitrary string attached to the object. Often useful for displaying to users. */
+  /**
+   * An arbitrary string attached to the object. Often useful for displaying to users. Referenced as
+   * 'memo' in the Dashboard.
+   */
   @SerializedName("description")
   String description;
 
@@ -252,6 +269,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("status")
   String status;
 
+  @SerializedName("status_transitions")
+  StatusTransitions statusTransitions;
+
   /** The subscription that this invoice was prepared for, if any. */
   @SerializedName("subscription")
   @Getter(lombok.AccessLevel.NONE)
@@ -295,7 +315,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * The time at which webhooks for this invoice were successfully delivered (if the invoice had no
-   * webhooks to deliver, this will match `date`). Invoice payment is delayed until webhooks are
+   * webhooks to deliver, this will match `created`). Invoice payment is delayed until webhooks are
    * delivered, or until all webhook delivery attempts have been exhausted.
    */
   @SerializedName("webhooks_delivered_at")
@@ -394,6 +414,16 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
+   * You can list all invoices, or list the invoices for a specific customer. The invoices are
+   * returned sorted by creation date, with the most recently created invoices appearing first.
+   */
+  public static InvoiceCollection list(InvoiceListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoices");
+    return requestCollection(url, params, InvoiceCollection.class, options);
+  }
+
+  /**
    * At any time, you can preview the upcoming invoice for a customer. This will show you all the
    * charges that are pending, including subscription renewal charges, invoice item charges, etc. It
    * will also show you any discount that is applicable to the customer.
@@ -468,6 +498,32 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
+   * At any time, you can preview the upcoming invoice for a customer. This will show you all the
+   * charges that are pending, including subscription renewal charges, invoice item charges, etc. It
+   * will also show you any discount that is applicable to the customer.
+   *
+   * <p>Note that when you are viewing an upcoming invoice, you are simply viewing a preview – the
+   * invoice has not yet been created. As such, the upcoming invoice will not show up in invoice
+   * listing calls, and you cannot use the API to pay or edit the invoice. If you want to change the
+   * amount that your customer will be billed, you can add, remove, or update pending invoice items,
+   * or update the customer’s discount.
+   *
+   * <p>You can preview the effects of updating a subscription, including a preview of what
+   * proration will take place. To ensure that the actual proration is calculated exactly the same
+   * as the previewed proration, you should pass a <code>proration_date</code> parameter when doing
+   * the actual subscription update. The value passed in should be the same as the <code>
+   * subscription_proration_date</code> returned on the upcoming invoice resource. The recommended
+   * way to get only the prorations being previewed is to consider only proration line items where
+   * <code>period[start]</code> is equal to the <code>subscription_proration_date</code> on the
+   * upcoming invoice resource.
+   */
+  public static Invoice upcoming(InvoiceUpcomingParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoices/upcoming");
+    return request(ApiResource.RequestMethod.GET, url, params, Invoice.class, options);
+  }
+
+  /**
    * This endpoint creates a draft invoice for a given customer. The draft invoice created pulls in
    * all pending invoice items on that customer, including prorations.
    */
@@ -480,6 +536,16 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * all pending invoice items on that customer, including prorations.
    */
   public static Invoice create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoices");
+    return request(ApiResource.RequestMethod.POST, url, params, Invoice.class, options);
+  }
+
+  /**
+   * This endpoint creates a draft invoice for a given customer. The draft invoice created pulls in
+   * all pending invoice items on that customer, including prorations.
+   */
+  public static Invoice create(InvoiceCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoices");
     return request(ApiResource.RequestMethod.POST, url, params, Invoice.class, options);
@@ -498,6 +564,14 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   /** Retrieves the invoice with the given ID. */
   public static Invoice retrieve(String invoice, Map<String, Object> params, RequestOptions options)
       throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/invoices/%s", invoice));
+    return request(ApiResource.RequestMethod.GET, url, params, Invoice.class, options);
+  }
+
+  /** Retrieves the invoice with the given ID. */
+  public static Invoice retrieve(
+      String invoice, InvoiceRetrieveParams params, RequestOptions options) throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/invoices/%s", invoice));
     return request(ApiResource.RequestMethod.GET, url, params, Invoice.class, options);
@@ -528,6 +602,22 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * <code>auto_advance=false</code>.
    */
   public Invoice update(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/invoices/%s", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Invoice.class, options);
+  }
+
+  /**
+   * Draft invoices are fully editable. Once an invoice is <a
+   * href="/docs/billing/invoices/workflow#finalized">finalized</a>, monetary values, as well as
+   * <code>billing</code>, become uneditable.
+   *
+   * <p>If you would like to stop the Stripe Billing engine from automatically finalizing,
+   * reattempting payments on, sending reminders for, or <a
+   * href="/docs/billing/invoices/reconciliation">automatically reconciling</a> invoices, pass
+   * <code>auto_advance=false</code>.
+   */
+  public Invoice update(InvoiceUpdateParams params, RequestOptions options) throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/invoices/%s", this.getId()));
     return request(ApiResource.RequestMethod.POST, url, params, Invoice.class, options);
@@ -619,6 +709,20 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
+   * Stripe automatically creates and then attempts to collect payment on invoices for customers on
+   * subscriptions according to your <a
+   * href="https://dashboard.stripe.com/account/recurring">subscriptions settings</a>. However, if
+   * you’d like to attempt payment on an invoice out of the normal collection schedule or for some
+   * other reason, you can do so.
+   */
+  public Invoice pay(InvoicePayParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/invoices/%s/pay", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Invoice.class, options);
+  }
+
+  /**
    * Stripe automatically finalizes drafts before sending and attempting payment on invoices.
    * However, if you’d like to finalize a draft invoice manually, you can do so using this method.
    */
@@ -647,6 +751,18 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * However, if you’d like to finalize a draft invoice manually, you can do so using this method.
    */
   public Invoice finalizeInvoice(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/invoices/%s/finalize", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Invoice.class, options);
+  }
+
+  /**
+   * Stripe automatically finalizes drafts before sending and attempting payment on invoices.
+   * However, if you’d like to finalize a draft invoice manually, you can do so using this method.
+   */
+  public Invoice finalizeInvoice(InvoiceFinalizeInvoiceParams params, RequestOptions options)
       throws StripeException {
     String url =
         String.format(
@@ -715,6 +831,24 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   }
 
   /**
+   * Stripe will automatically send invoices to customers according to your <a
+   * href="https://dashboard.stripe.com/account/recurring">subscriptions settings</a>. However, if
+   * you’d like to manually send an invoice to your customer out of the normal schedule, you can do
+   * so. When sending invoices that have already been paid, there will be no reference to the
+   * payment in the email.
+   *
+   * <p>Requests made in test-mode result in no emails being sent, despite sending an <code>
+   * invoice.sent</code> event.
+   */
+  public Invoice sendInvoice(InvoiceSendInvoiceParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/invoices/%s/send", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Invoice.class, options);
+  }
+
+  /**
    * Marking an invoice as uncollectible is useful for keeping track of bad debts that can be
    * written off for accounting purposes.
    */
@@ -743,6 +877,19 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * written off for accounting purposes.
    */
   public Invoice markUncollectible(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/invoices/%s/mark_uncollectible", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Invoice.class, options);
+  }
+
+  /**
+   * Marking an invoice as uncollectible is useful for keeping track of bad debts that can be
+   * written off for accounting purposes.
+   */
+  public Invoice markUncollectible(InvoiceMarkUncollectibleParams params, RequestOptions options)
       throws StripeException {
     String url =
         String.format(
@@ -791,6 +938,19 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     return request(ApiResource.RequestMethod.POST, url, params, Invoice.class, options);
   }
 
+  /**
+   * Mark a finalized invoice as void. This cannot be undone. Voiding an invoice is similar to <a
+   * href="#delete_invoice">deletion</a>, however it only applies to finalized invoices and
+   * maintains a papertrail where the invoice can still be found.
+   */
+  public Invoice voidInvoice(InvoiceVoidInvoiceParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/invoices/%s/void", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Invoice.class, options);
+  }
+
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -802,6 +962,27 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     /** The value of the custom field. */
     @SerializedName("value")
     String value;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class StatusTransitions extends StripeObject {
+    /** The time that the invoice draft was finalized. */
+    @SerializedName("finalized_at")
+    Long finalizedAt;
+
+    /** The time that the invoice was marked uncollectible. */
+    @SerializedName("marked_uncollectible_at")
+    Long markedUncollectibleAt;
+
+    /** The time that the invoice was paid. */
+    @SerializedName("paid_at")
+    Long paidAt;
+
+    /** The time that the invoice was voided. */
+    @SerializedName("voided_at")
+    Long voidedAt;
   }
 
   @Getter

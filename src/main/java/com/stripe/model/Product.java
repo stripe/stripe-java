@@ -7,6 +7,10 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.ProductCreateParams;
+import com.stripe.param.ProductListParams;
+import com.stripe.param.ProductRetrieveParams;
+import com.stripe.param.ProductUpdateParams;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -158,6 +162,16 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   }
 
   /**
+   * Creates a new product object. To create a product for use with subscriptions, see <a
+   * href="#create_service_product">Subscriptions Products</a>.
+   */
+  public static Product create(ProductCreateParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/products");
+    return request(ApiResource.RequestMethod.POST, url, params, Product.class, options);
+  }
+
+  /**
    * Retrieves the details of an existing product. Supply the unique product ID from either a
    * product creation request or the product list, and Stripe will return the corresponding product
    * information.
@@ -181,6 +195,17 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
    * information.
    */
   public static Product retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), String.format("/v1/products/%s", id));
+    return request(ApiResource.RequestMethod.GET, url, params, Product.class, options);
+  }
+
+  /**
+   * Retrieves the details of an existing product. Supply the unique product ID from either a
+   * product creation request or the product list, and Stripe will return the corresponding product
+   * information.
+   */
+  public static Product retrieve(String id, ProductRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), String.format("/v1/products/%s", id));
     return request(ApiResource.RequestMethod.GET, url, params, Product.class, options);
@@ -211,6 +236,19 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   }
 
   /**
+   * Updates the specific product by setting the values of the parameters passed. Any parameters not
+   * provided will be left unchanged.
+   *
+   * <p>Note that a product’s <code>attributes</code> are not editable. Instead, you would need to
+   * deactivate the existing product and create a new one with the new attribute values.
+   */
+  public Product update(ProductUpdateParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/products/%s", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Product.class, options);
+  }
+
+  /**
    * Returns a list of your products. The products are returned sorted by creation date, with the
    * most recently created products appearing first.
    */
@@ -223,6 +261,16 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
    * most recently created products appearing first.
    */
   public static ProductCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/products");
+    return requestCollection(url, params, ProductCollection.class, options);
+  }
+
+  /**
+   * Returns a list of your products. The products are returned sorted by creation date, with the
+   * most recently created products appearing first.
+   */
+  public static ProductCollection list(ProductListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/products");
     return requestCollection(url, params, ProductCollection.class, options);

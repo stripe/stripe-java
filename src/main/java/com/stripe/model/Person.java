@@ -8,6 +8,7 @@ import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.PersonUpdateParams;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
@@ -19,20 +20,17 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Person extends ApiResource implements HasId, MetadataStore<Person> {
-  /** The account the person is associated with. */
   @SerializedName("account")
   String account;
 
   @SerializedName("address")
   Address address;
 
-  /** The Kana variation of the person's address (Japan only). */
   @SerializedName("address_kana")
-  LegalEntity.JapanAddress addressKana;
+  JapanAddress addressKana;
 
-  /** The Kanji variation of the person's address (Japan only). */
   @SerializedName("address_kanji")
-  LegalEntity.JapanAddress addressKanji;
+  JapanAddress addressKanji;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
@@ -43,25 +41,20 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   Boolean deleted;
 
   @SerializedName("dob")
-  LegalEntity.DateOfBirth dob;
+  DateOfBirth dob;
 
-  /** The person's email address. */
   @SerializedName("email")
   String email;
 
-  /** The person's first name. */
   @SerializedName("first_name")
   String firstName;
 
-  /** The Kana variation of the person's first name (Japan only). */
   @SerializedName("first_name_kana")
   String firstNameKana;
 
-  /** The Kanji variation of the person's first name (Japan only). */
   @SerializedName("first_name_kanji")
   String firstNameKanji;
 
-  /** The person's gender (International regulations require either "male" or "female"). */
   @SerializedName("gender")
   String gender;
 
@@ -70,23 +63,18 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @SerializedName("id")
   String id;
 
-  /** Whether the person's `id_number` was provided. */
   @SerializedName("id_number_provided")
   Boolean idNumberProvided;
 
-  /** The person's last name. */
   @SerializedName("last_name")
   String lastName;
 
-  /** The Kana variation of the person's last name (Japan only). */
   @SerializedName("last_name_kana")
   String lastNameKana;
 
-  /** The Kanji variation of the person's last name (Japan only). */
   @SerializedName("last_name_kanji")
   String lastNameKanji;
 
-  /** The person's maiden name. */
   @SerializedName("maiden_name")
   String maidenName;
 
@@ -102,26 +90,20 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @SerializedName("object")
   String object;
 
-  /** The person's phone number. */
   @SerializedName("phone")
   String phone;
 
   @SerializedName("relationship")
   Relationship relationship;
 
-  /**
-   * Information about the requirements for this person, including what information needs to be
-   * collected, and by when.
-   */
   @SerializedName("requirements")
   Requirements requirements;
 
-  /** Whether the last 4 digits of this person's SSN have been provided. */
   @SerializedName("ssn_last_4_provided")
   Boolean ssnLast4Provided;
 
   @SerializedName("verification")
-  LegalEntity.Verification verification;
+  Verification verification;
 
   /** Updates an existing person. */
   public Person update(Map<String, Object> params) throws StripeException {
@@ -130,6 +112,27 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
 
   /** Updates an existing person. */
   public Person update(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url;
+    if (this.getAccount() != null) {
+      url =
+          String.format(
+              "%s%s",
+              Stripe.getApiBase(),
+              String.format("/v1/accounts/%s/persons/%s", this.getAccount(), this.getId()));
+    } else {
+      throw new InvalidRequestException(
+          "Unable to construct url because [account] field(s) are all null",
+          null,
+          null,
+          null,
+          0,
+          null);
+    }
+    return request(ApiResource.RequestMethod.POST, url, params, Person.class, options);
+  }
+
+  /** Updates an existing person. */
+  public Person update(PersonUpdateParams params, RequestOptions options) throws StripeException {
     String url;
     if (this.getAccount() != null) {
       url =
@@ -188,6 +191,59 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class DateOfBirth extends StripeObject {
+    /** The day of birth, between 1 and 31. */
+    @SerializedName("day")
+    Long day;
+
+    /** The month of birth, between 1 and 12. */
+    @SerializedName("month")
+    Long month;
+
+    /** The four-digit year of birth. */
+    @SerializedName("year")
+    Long year;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class JapanAddress extends StripeObject {
+    /** City/Ward. */
+    @SerializedName("city")
+    String city;
+
+    /**
+     * Two-letter country code ([ISO 3166-1
+     * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+     */
+    @SerializedName("country")
+    String country;
+
+    /** Block/Building number. */
+    @SerializedName("line1")
+    String line1;
+
+    /** Building details. */
+    @SerializedName("line2")
+    String line2;
+
+    /** Zip/Postal Code. */
+    @SerializedName("postal_code")
+    String postalCode;
+
+    /** Prefecture. */
+    @SerializedName("state")
+    String state;
+
+    /** Town/cho-me. */
+    @SerializedName("town")
+    String town;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class Relationship extends StripeObject {
     /**
      * Whether the person opened the account. This person provides information about themselves, and
@@ -238,5 +294,34 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
      */
     @SerializedName("past_due")
     List<String> pastDue;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Verification extends StripeObject {
+    /**
+     * A user-displayable string describing the verification state for the person. For example, this
+     * may say "Provided identity information could not be verified".
+     */
+    @SerializedName("details")
+    String details;
+
+    /**
+     * One of `scan_name_mismatch`, `failed_keyed_identity`, or `failed_other`. A machine-readable
+     * code specifying the verification state for the person.
+     */
+    @SerializedName("details_code")
+    String detailsCode;
+
+    @SerializedName("document")
+    Account.VerificationDocument document;
+
+    /**
+     * The state of verification for the person. Possible values are `unverified`, `pending`, or
+     * `verified`.
+     */
+    @SerializedName("status")
+    String status;
   }
 }

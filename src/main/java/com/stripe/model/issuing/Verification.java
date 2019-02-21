@@ -8,6 +8,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.issuing.VerificationCreateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -53,6 +54,13 @@ public class Verification extends ApiResource implements HasId {
 
   /** Some actions (eg: updating a PIN) need confirmation from the cardholder. */
   public static Verification create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/verifications");
+    return request(ApiResource.RequestMethod.POST, url, params, Verification.class, options);
+  }
+
+  /** Some actions (eg: updating a PIN) need confirmation from the cardholder. */
+  public static Verification create(VerificationCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/verifications");
     return request(ApiResource.RequestMethod.POST, url, params, Verification.class, options);

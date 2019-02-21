@@ -7,6 +7,8 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.BalanceTransactionListParams;
+import com.stripe.param.BalanceTransactionRetrieveParams;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
@@ -132,6 +134,17 @@ public class BalanceTransaction extends ApiResource implements HasId {
     return requestCollection(url, params, BalanceTransactionCollection.class, options);
   }
 
+  /**
+   * Returns a list of transactions that have contributed to the Stripe account balance (e.g.,
+   * charges, transfers, and so forth). The transactions are returned in sorted order, with the most
+   * recent transactions appearing first.
+   */
+  public static BalanceTransactionCollection list(
+      BalanceTransactionListParams params, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/balance/history");
+    return requestCollection(url, params, BalanceTransactionCollection.class, options);
+  }
+
   /** Retrieves the balance transaction with the given ID. */
   public static BalanceTransaction retrieve(String id) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
@@ -146,6 +159,15 @@ public class BalanceTransaction extends ApiResource implements HasId {
   /** Retrieves the balance transaction with the given ID. */
   public static BalanceTransaction retrieve(
       String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/balance/history/%s", id));
+    return request(ApiResource.RequestMethod.GET, url, params, BalanceTransaction.class, options);
+  }
+
+  /** Retrieves the balance transaction with the given ID. */
+  public static BalanceTransaction retrieve(
+      String id, BalanceTransactionRetrieveParams params, RequestOptions options)
+      throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/balance/history/%s", id));
     return request(ApiResource.RequestMethod.GET, url, params, BalanceTransaction.class, options);

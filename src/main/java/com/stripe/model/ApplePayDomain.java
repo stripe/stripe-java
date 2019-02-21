@@ -7,6 +7,9 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.ApplePayDomainCreateParams;
+import com.stripe.param.ApplePayDomainListParams;
+import com.stripe.param.ApplePayDomainRetrieveParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -55,6 +58,13 @@ public class ApplePayDomain extends ApiResource implements HasId {
     return requestCollection(url, params, ApplePayDomainCollection.class, options);
   }
 
+  /** List apple pay domains. */
+  public static ApplePayDomainCollection list(
+      ApplePayDomainListParams params, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/apple_pay/domains");
+    return requestCollection(url, params, ApplePayDomainCollection.class, options);
+  }
+
   /** Create an apple pay domain. */
   public static ApplePayDomain create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -62,6 +72,13 @@ public class ApplePayDomain extends ApiResource implements HasId {
 
   /** Create an apple pay domain. */
   public static ApplePayDomain create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/apple_pay/domains");
+    return request(ApiResource.RequestMethod.POST, url, params, ApplePayDomain.class, options);
+  }
+
+  /** Create an apple pay domain. */
+  public static ApplePayDomain create(ApplePayDomainCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/apple_pay/domains");
     return request(ApiResource.RequestMethod.POST, url, params, ApplePayDomain.class, options);
@@ -81,6 +98,16 @@ public class ApplePayDomain extends ApiResource implements HasId {
   /** Retrieve an apple pay domain. */
   public static ApplePayDomain retrieve(
       String domain, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/apple_pay/domains/%s", domain));
+    return request(ApiResource.RequestMethod.GET, url, params, ApplePayDomain.class, options);
+  }
+
+  /** Retrieve an apple pay domain. */
+  public static ApplePayDomain retrieve(
+      String domain, ApplePayDomainRetrieveParams params, RequestOptions options)
+      throws StripeException {
     String url =
         String.format(
             "%s%s", Stripe.getApiBase(), String.format("/v1/apple_pay/domains/%s", domain));

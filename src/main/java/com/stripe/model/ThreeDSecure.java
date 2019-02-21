@@ -7,6 +7,8 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.ThreeDSecureCreateParams;
+import com.stripe.param.ThreeDSecureRetrieveParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -94,6 +96,15 @@ public class ThreeDSecure extends ApiResource implements HasId {
     return request(ApiResource.RequestMethod.GET, url, params, ThreeDSecure.class, options);
   }
 
+  /** Retrieves a 3D Secure object. */
+  public static ThreeDSecure retrieve(
+      String threeDSecure, ThreeDSecureRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/3d_secure/%s", threeDSecure));
+    return request(ApiResource.RequestMethod.GET, url, params, ThreeDSecure.class, options);
+  }
+
   /** Initiate 3D Secure authentication. */
   public static ThreeDSecure create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -101,6 +112,13 @@ public class ThreeDSecure extends ApiResource implements HasId {
 
   /** Initiate 3D Secure authentication. */
   public static ThreeDSecure create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/3d_secure");
+    return request(ApiResource.RequestMethod.POST, url, params, ThreeDSecure.class, options);
+  }
+
+  /** Initiate 3D Secure authentication. */
+  public static ThreeDSecure create(ThreeDSecureCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/3d_secure");
     return request(ApiResource.RequestMethod.POST, url, params, ThreeDSecure.class, options);

@@ -8,6 +8,8 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.reporting.ReportTypeListParams;
+import com.stripe.param.reporting.ReportTypeRetrieveParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -91,6 +93,20 @@ public class ReportType extends ApiResource implements HasId {
   }
 
   /**
+   * Retrieves the details of a Report Type. (Requires a <a
+   * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
+   */
+  public static ReportType retrieve(
+      String reportType, ReportTypeRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/reporting/report_types/%s", reportType));
+    return request(ApiResource.RequestMethod.GET, url, params, ReportType.class, options);
+  }
+
+  /**
    * Returns a full list of Report Types. (Requires a <a
    * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
    */
@@ -103,6 +119,16 @@ public class ReportType extends ApiResource implements HasId {
    * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
    */
   public static ReportTypeCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/reporting/report_types");
+    return requestCollection(url, params, ReportTypeCollection.class, options);
+  }
+
+  /**
+   * Returns a full list of Report Types. (Requires a <a
+   * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
+   */
+  public static ReportTypeCollection list(ReportTypeListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/reporting/report_types");
     return requestCollection(url, params, ReportTypeCollection.class, options);

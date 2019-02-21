@@ -12,6 +12,10 @@ import com.stripe.model.MetadataStore;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.issuing.DisputeCreateParams;
+import com.stripe.param.issuing.DisputeListParams;
+import com.stripe.param.issuing.DisputeRetrieveParams;
+import com.stripe.param.issuing.DisputeUpdateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -115,6 +119,16 @@ public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute
     return requestCollection(url, params, DisputeCollection.class, options);
   }
 
+  /**
+   * Returns a list of Issuing <code>Dispute</code> objects. The objects are sorted in descending
+   * order by creation date, with the most recently created object appearing first.
+   */
+  public static DisputeCollection list(DisputeListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/disputes");
+    return requestCollection(url, params, DisputeCollection.class, options);
+  }
+
   /** Creates an Issuing <code>Dispute</code> object. */
   public static Dispute create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -122,6 +136,13 @@ public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute
 
   /** Creates an Issuing <code>Dispute</code> object. */
   public static Dispute create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/disputes");
+    return request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
+  }
+
+  /** Creates an Issuing <code>Dispute</code> object. */
+  public static Dispute create(DisputeCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/disputes");
     return request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
@@ -146,6 +167,17 @@ public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute
     return request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
   }
 
+  /**
+   * Updates the specified Issuing <code>Dispute</code> object by setting the values of the
+   * parameters passed. Any parameters not provided will be left unchanged.
+   */
+  public Dispute update(DisputeUpdateParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/issuing/disputes/%s", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
+  }
+
   /** Retrieves an Issuing <code>Dispute</code> object. */
   public static Dispute retrieve(String dispute) throws StripeException {
     return retrieve(dispute, (Map<String, Object>) null, (RequestOptions) null);
@@ -159,6 +191,15 @@ public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute
   /** Retrieves an Issuing <code>Dispute</code> object. */
   public static Dispute retrieve(String dispute, Map<String, Object> params, RequestOptions options)
       throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/issuing/disputes/%s", dispute));
+    return request(ApiResource.RequestMethod.GET, url, params, Dispute.class, options);
+  }
+
+  /** Retrieves an Issuing <code>Dispute</code> object. */
+  public static Dispute retrieve(
+      String dispute, DisputeRetrieveParams params, RequestOptions options) throws StripeException {
     String url =
         String.format(
             "%s%s", Stripe.getApiBase(), String.format("/v1/issuing/disputes/%s", dispute));

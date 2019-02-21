@@ -7,6 +7,8 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.ApplicationFeeListParams;
+import com.stripe.param.ApplicationFeeRetrieveParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -33,7 +35,6 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
   @SerializedName("amount_refunded")
   Long amountRefunded;
 
-  /** ID of the Connect application that earned the fee. */
   @SerializedName("application")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
@@ -212,6 +213,16 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
   }
 
   /**
+   * Returns a list of application fees you’ve previously collected. The application fees are
+   * returned in sorted order, with the most recent fees appearing first.
+   */
+  public static ApplicationFeeCollection list(
+      ApplicationFeeListParams params, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/application_fees");
+    return requestCollection(url, params, ApplicationFeeCollection.class, options);
+  }
+
+  /**
    * Retrieves the details of an application fee that your account has collected. The same
    * information is returned when refunding the application fee.
    */
@@ -233,6 +244,18 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
    */
   public static ApplicationFee retrieve(
       String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/application_fees/%s", id));
+    return request(ApiResource.RequestMethod.GET, url, params, ApplicationFee.class, options);
+  }
+
+  /**
+   * Retrieves the details of an application fee that your account has collected. The same
+   * information is returned when refunding the application fee.
+   */
+  public static ApplicationFee retrieve(
+      String id, ApplicationFeeRetrieveParams params, RequestOptions options)
+      throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/application_fees/%s", id));
     return request(ApiResource.RequestMethod.GET, url, params, ApplicationFee.class, options);
