@@ -57,8 +57,8 @@ public class EphemeralKey extends ApiResource implements HasId {
    * Delete an ephemeral key.
    */
   public EphemeralKey delete(RequestOptions options) throws StripeException {
-    return request(RequestMethod.DELETE, instanceUrl(EphemeralKey.class, this.id), null,
-        EphemeralKey.class, options);
+    return request(RequestMethod.DELETE, instanceUrl(EphemeralKey.class, this.id),
+        (Map<String,Object>) null, EphemeralKey.class, options);
   }
   // </editor-fold>
 
