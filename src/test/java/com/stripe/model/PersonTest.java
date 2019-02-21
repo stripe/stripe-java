@@ -30,7 +30,7 @@ public class PersonTest extends BaseStripeTest {
     assertNotNull(resource.getId());
     assertNotNull(resource.getVerification());
 
-    final Person.VerificationDocument verifDoc = resource.getVerification().getDocumentSubObject();
+    final Person.VerificationDocument verifDoc = resource.getVerification().getDocument();
     assertNotNull(verifDoc);
 
     final File back = verifDoc.getBackObject();
