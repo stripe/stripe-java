@@ -8,6 +8,7 @@ import com.stripe.model.Account;
 import com.stripe.model.LoginLink;
 import com.stripe.net.ApiResource;
 import java.io.IOException;
+import java.util.Map;
 import org.junit.Test;
 
 public class LoginLinkTest extends BaseStripeTest {
@@ -17,7 +18,8 @@ public class LoginLinkTest extends BaseStripeTest {
   public void testCreate() throws IOException, StripeException {
     final Account account = Account.retrieve(ACCOUNT_ID, null);
 
-    final LoginLink link = LoginLink.createOnAccount(ACCOUNT_ID, null, null);
+    final LoginLink link = LoginLink.createOnAccount(ACCOUNT_ID,
+        (Map<String, Object>) null, null);
 
 
     stubRequest(
