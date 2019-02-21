@@ -2,7 +2,6 @@ package com.stripe.model;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.net.ApiResource;
@@ -42,43 +41,5 @@ public class PersonTest extends BaseStripeTest {
     assertNotNull(front);
     assertNotNull(front.getId());
     assertEquals(verifDoc.getFront(), front.getId());
-
-    // Old document format (pre 2019-02-19)
-    assertNull(resource.getVerification().getDocument());
-    assertNull(resource.getVerification().getDocumentObject());
-  }
-
-  @Test
-  public void testDeserializeOldDocumentUnexpanded() throws Exception {
-    final String data = getResourceAsString("/api_fixtures/person_old_document_unexpanded.json");
-    final Person resource = ApiResource.GSON.fromJson(data, Person.class);
-    assertNotNull(resource);
-    assertNotNull(resource.getId());
-    assertNotNull(resource.getVerification());
-
-    assertNotNull(resource.getVerification().getDocument());
-
-    // Expanded attribute
-    assertNull(resource.getVerification().getDocumentObject());
-
-    // New document format (2019-09-19)
-    assertNull(resource.getVerification().getDocumentSubObject());
-  }
-
-  @Test
-  public void testDeserializeOldDocumentExpanded() throws Exception {
-    final String data = getResourceAsString("/api_fixtures/person_old_document_expanded.json");
-    final Person resource = ApiResource.GSON.fromJson(data, Person.class);
-    assertNotNull(resource);
-    assertNotNull(resource.getId());
-    assertNotNull(resource.getVerification());
-
-    // Expanded attribute
-    assertNotNull(resource.getVerification().getDocumentObject());
-    assertEquals(resource.getVerification().getDocumentObject().getId(),
-        resource.getVerification().getDocument());
-
-    // New document format (2019-09-19)
-    assertNull(resource.getVerification().getDocumentSubObject());
   }
 }
