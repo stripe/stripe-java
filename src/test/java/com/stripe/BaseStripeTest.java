@@ -4,14 +4,12 @@ import static org.mockito.Mockito.reset;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.LiveStripeResponseGetter;
 import com.stripe.net.OAuth;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
-
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -24,14 +22,11 @@ import java.nio.charset.StandardCharsets;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-
 import java.util.Set;
 import lombok.Cleanup;
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.BeforeClass;
-
 import org.mockito.ArgumentMatcher;
 import org.mockito.Mockito;
 

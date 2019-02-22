@@ -12,8 +12,18 @@ import com.google.gson.stream.JsonWriter;
 import java.io.IOException;
 import java.util.Map;
 
+/**
+ * Super class to all api request params objects. This common abstraction is internally used in
+ * {@link ApiResource#request(ApiResource.RequestMethod, String, ApiRequestParams, Class,
+ * RequestOptions)}. It also exposes a convenient method converting the typed parameter into
+ * the legacy support of untyped {@code Map<String, Object>} param.
+ */
 public abstract class ApiRequestParams {
-
+  /**
+   * Interface implemented by all enum parameter to get the actual string value that Stripe API
+   * expects. Internally, it used in custom serialization
+   * {@link ApiRequestParams.HasEmptyEnumTypeAdapterFactory} converting empty string enum to null.
+   */
   public interface Enum {
     String getValue();
   }
@@ -59,6 +69,20 @@ public abstract class ApiRequestParams {
     }
   }
 
+  /**
+   * Convenient method to convert this typed request params into an untyped map. This map is
+   * composed of {@code Map<String, Object>}, {@code List<Object>}, and basic Java data types.
+   * This allows you to test building the request params and verify compatibility with your
+   * prior integrations using the untyped params map
+   * {@link ApiResource#request(ApiResource.RequestMethod, String, Map, Class, RequestOptions)}.
+   *
+   * <p>The peculiarity of this conversion is that `EMPTY` {@link ApiRequestParams.Enum} with raw
+   * value of empty string will be converted to null. This is compatible with the existing
+   * contract enforcing no empty string in the untyped map params.
+   *
+   * <p>Because of the translation from `EMPTY` enum to null, deserializing this map back to a
+   * request instance is lossy. The null value will not be converted back to the `EMPTY` enum.
+   */
   public Map<String, Object> toMap() {
     JsonObject json = GSON.toJsonTree(this).getAsJsonObject();
     return UNTYPED_MAP_DESERIALIZER.deserialize(json);

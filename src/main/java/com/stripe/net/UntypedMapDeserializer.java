@@ -10,7 +10,11 @@ import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 
-
+/**
+ * Deserializer to convert JSON object into an untyped map. While we strive to provide more
+ * typed content in this library, there are instances we need to convert our specific choice of
+ * JSON representation (using GSON) to a generic {@code Map<String, Object>}.
+ */
 public class UntypedMapDeserializer {
   /**
    * Deserialize JSON into untyped map.
