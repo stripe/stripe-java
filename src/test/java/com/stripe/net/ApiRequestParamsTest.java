@@ -6,6 +6,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 
 import java.util.Map;
+
 import org.junit.Test;
 
 public class ApiRequestParamsTest {

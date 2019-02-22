@@ -8,9 +8,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonNull;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
+
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
+
 import org.junit.Test;
 
 public class UntypedMapDeserializerTest {
