@@ -1,5 +1,8 @@
 # Changelog
 
+## 7.24.0 - 2019-02-22
+* [#681](https://github.com/stripe/stripe-java/pull/681) Add support for `status_transitions` and marked `date` as deprecated on `Invoice`.
+
 ## 7.23.0 - 2019-02-19
 * [#660](https://github.com/stripe/stripe-java/pull/660) Add support for API version `2019-02-19` and related changes to `Account` and `Person`.
 
