@@ -164,10 +164,22 @@ public abstract class ApiResource extends StripeObject {
   }
 
   public static <T> T request(ApiResource.RequestMethod method,
+                              String url, ApiRequestParams params, Class<T> clazz,
+                              RequestOptions options) throws StripeException {
+    return request(method, url, params.toMap(), clazz, options);
+  }
+
+  public static <T> T request(ApiResource.RequestMethod method,
                 String url, Map<String, Object> params, Class<T> clazz,
                 RequestOptions options) throws StripeException {
     return ApiResource.stripeResponseGetter.request(method, url, params, clazz,
         ApiResource.RequestType.NORMAL, options);
+  }
+
+  public static <T extends StripeCollectionInterface<?>> T requestCollection(
+      String url, ApiRequestParams params, Class<T> clazz, RequestOptions options)
+      throws StripeException {
+    return requestCollection(url, params.toMap(), clazz, options);
   }
 
   /**
