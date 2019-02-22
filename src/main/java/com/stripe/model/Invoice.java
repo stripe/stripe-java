@@ -33,7 +33,6 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
   String currency;
   List<CustomField> customFields;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Customer> customer;
-  Long date;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
       ExpandableField<ExternalAccount> defaultSource;
   Boolean deleted;
@@ -57,6 +56,7 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
   Long startingBalance;
   String statementDescriptor;
   String status;
+  StatusTransitions statusTransitions;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Subscription> subscription;
   Long subscriptionProrationDate;
   Long subtotal;
@@ -82,6 +82,14 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
    */
   @Deprecated
   Boolean closed;
+
+  /**
+   * The {@code date} attribute.
+   *
+   * @deprecated Prefer using the {@code created} attribute instead.
+   */
+  @Deprecated
+  String date;
 
   /**
    * The {@code forgiven} attribute.
@@ -442,6 +450,16 @@ public class Invoice extends ApiResource implements MetadataStore<Invoice>, HasI
   public static class CustomField extends StripeObject {
     String name;
     String value;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class StatusTransitions extends StripeObject {
+    Long finalizedAt;
+    Long markedUncollectibleAt;
+    Long paidAt;
+    Long voidedAt;
   }
 
   @Getter
