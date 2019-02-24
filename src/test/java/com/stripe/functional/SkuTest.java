@@ -48,8 +48,8 @@ public class SkuTest extends BaseStripeTest {
 
     SkuCreateParams typedParams = SkuCreateParams.builder()
         .setActive(true)
-        .putAttributes("attr1", "val1")
-        .putAttributes("attr2", "val2")
+        .putAttribute("attr1", "val1")
+        .putAttribute("attr2", "val2")
         .setPrice(499L)
         .setCurrency("usd")
         .setInventory(inventory)
