@@ -11,6 +11,7 @@ import com.stripe.model.ChargeCollection;
 import com.stripe.net.ApiResource;
 
 import com.stripe.net.RequestOptions;
+import com.stripe.param.ChargeCreateParams;
 import com.stripe.param.ChargeUpdateParams;
 import java.util.HashMap;
 import java.util.Map;
@@ -40,6 +41,24 @@ public class ChargeTest extends BaseStripeTest {
         ApiResource.RequestMethod.POST,
         "/v1/charges",
         params
+    );
+  }
+
+  @Test
+  public void testCreateWithTypedParams() throws StripeException {
+    ChargeCreateParams params = ChargeCreateParams.builder()
+        .setSource("card_123")
+        .setAmount(100L)
+        .setCurrency("usd")
+        .build();
+
+    final Charge charge = Charge.create(params, RequestOptions.getDefault());
+
+    assertNotNull(charge);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/charges",
+        params.toMap()
     );
   }
 
