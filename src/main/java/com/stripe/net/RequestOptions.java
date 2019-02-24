@@ -3,6 +3,9 @@ package com.stripe.net;
 import com.stripe.Stripe;
 import java.util.Map;
 
+import lombok.EqualsAndHashCode;
+
+@EqualsAndHashCode(callSuper = false)
 public class RequestOptions {
   public static RequestOptions getDefault() {
     return new RequestOptions(Stripe.apiKey, Stripe.clientId, null, null, null,
@@ -68,62 +71,6 @@ public class RequestOptions {
 
   public int getConnectTimeout() {
     return connectTimeout;
-  }
-
-  @Override
-  public boolean equals(Object o) {
-    if (this == o) {
-      return true;
-    }
-    if (o == null || getClass() != o.getClass()) {
-      return false;
-    }
-
-    RequestOptions that = (RequestOptions) o;
-
-    if (apiKey != null ? !apiKey.equals(that.apiKey) : that.apiKey != null) {
-      return false;
-    }
-    if (clientId != null ? !clientId.equals(that.clientId) : that.clientId != null) {
-      return false;
-    }
-    if (idempotencyKey != null ? !idempotencyKey.equals(that.idempotencyKey) :
-        that.idempotencyKey != null) {
-      return false;
-    }
-    if (stripeAccount != null ? !stripeAccount.equals(that.stripeAccount) :
-        that.stripeAccount != null) {
-      return false;
-    }
-    if (stripeVersion != null ? !stripeVersion.equals(that.stripeVersion) :
-        that.stripeVersion != null) {
-      return false;
-    }
-    if (stripeVersionOverride != null
-        ? !stripeVersionOverride.equals(that.stripeVersionOverride) :
-        that.stripeVersionOverride != null) {
-      return false;
-    }
-
-    if (connectTimeout != that.connectTimeout) {
-      return false;
-    }
-
-    return readTimeout == that.readTimeout;
-  }
-
-  @Override
-  public int hashCode() {
-    int result = apiKey != null ? apiKey.hashCode() : 0;
-    result = 31 * result + (clientId != null ? clientId.hashCode() : 0);
-    result = 31 * result + (idempotencyKey != null ? idempotencyKey.hashCode() : 0);
-    result = 31 * result + (stripeAccount != null ? stripeAccount.hashCode() : 0);
-    result = 31 * result + (stripeVersion != null ? stripeVersion.hashCode() : 0);
-    result = 31 * result + (stripeVersionOverride != null ? stripeVersionOverride.hashCode()
-        : 0);
-    result = 31 * result + connectTimeout;
-    result = 31 * result + readTimeout;
-    return result;
   }
 
   public static RequestOptionsBuilder builder() {
@@ -252,7 +199,7 @@ public class RequestOptions {
 
     /**
      * Do not use this except for in API where JSON response is not fully deserialized into
-     * to explicit Stripe classes, but only passed to other clients as raw data -- essentially
+     * explicit Stripe classes, but only passed to other clients as raw data -- essentially
      * making request on behalf of others with their API version. One example is in
      * {@link com.stripe.model.EphemeralKey#create(Map, RequestOptions)}.
      * Setting this value in a typical scenario will result in deserialization error
