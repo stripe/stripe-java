@@ -9,6 +9,7 @@ import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.Invokable;
 import com.google.common.reflect.Parameter;
 
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
@@ -77,7 +78,9 @@ public class StandardizationTest {
         Class<?> finalParamType = lastParam.getType().getRawType();
 
         // Skip methods that have exactly one param which is a map.
-        if (Map.class.equals(finalParamType) && parameters.size() == 1) {
+        boolean isRequestParamType = ApiRequestParams.class.isAssignableFrom(finalParamType)
+            || Map.class.equals(finalParamType);
+        if (isRequestParamType && parameters.size() == 1) {
           continue;
         }
 
