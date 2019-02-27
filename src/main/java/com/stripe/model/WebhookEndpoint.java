@@ -17,6 +17,7 @@ import lombok.Setter;
 public class WebhookEndpoint extends ApiResource implements HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
+  String apiVersion;
   String application;
   Boolean connect;
   Long created;
