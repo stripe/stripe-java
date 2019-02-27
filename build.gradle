@@ -1,6 +1,7 @@
 buildscript {
     repositories {
         jcenter()
+        maven { url 'https://jitpack.io' }
         //Add only for SNAPSHOT versions
         //maven { url "https://oss.sonatype.org/content/repositories/snapshots/" }
     }
