@@ -27,6 +27,7 @@ public class SubscriptionTest extends BaseStripeTest {
     final String[] expansions = {
       "customer",
       "default_source",
+      "latest_invoice",
     };
     final String data = getFixture("/v1/subscriptions/sub_123", expansions);
     final Subscription subscription = ApiResource.GSON.fromJson(data, Subscription.class);
@@ -41,6 +42,11 @@ public class SubscriptionTest extends BaseStripeTest {
     assertNotNull(defaultSource);
     assertNotNull(defaultSource.getId());
     assertEquals(subscription.getDefaultSource(), defaultSource.getId());
+
+    final Invoice invoice = subscription.getLatestInvoiceObject();
+    assertNotNull(invoice);
+    assertNotNull(invoice.getId());
+    assertEquals(subscription.getLatestInvoice(), invoice.getId());
   }
 
   @Test
