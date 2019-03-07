@@ -1,5 +1,8 @@
 # Changelog
 
+## 7.26.0 - 2019-03-06
+* [#686](https://github.com/stripe/stripe-java/pull/686) Add support for `cancel_at` on `Subscription`. 
+
 ## 7.25.0 - 2019-02-28
 * [#684](https://github.com/stripe/stripe-java/pull/684) Add support for `latest_invoice` on `Subscription`.
 * [#685](https://github.com/stripe/stripe-java/pull/685) Add `api_version` to the `WebhookEndpoint` resource.
