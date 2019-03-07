@@ -22,6 +22,7 @@ public class Subscription extends ApiResource implements MetadataStore<Subscript
   String billing;
   Long billingCycleAnchor;
   BillingThresholds billingThresholds;
+  Long cancelAt;
   Boolean cancelAtPeriodEnd;
   Long canceledAt;
   Long created;
