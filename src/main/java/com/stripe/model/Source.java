@@ -18,13 +18,13 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class Source extends ApiResource implements PaymentSource, MetadataStore<Source> {
   @SerializedName("ach_credit_transfer")
-  SourceTypeAchCreditTransfer achCreditTransfer;
+  AchCreditTransfer achCreditTransfer;
 
   @SerializedName("ach_debit")
-  SourceTypeAchDebit achDebit;
+  AchDebit achDebit;
 
   @SerializedName("alipay")
-  SourceTypeAlipay alipay;
+  Alipay alipay;
 
   /**
    * A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1,
@@ -36,13 +36,13 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
   Long amount;
 
   @SerializedName("bancontact")
-  SourceTypeBancontact bancontact;
+  Bancontact bancontact;
 
   @SerializedName("card")
-  SourceTypeCard card;
+  Card card;
 
   @SerializedName("card_present")
-  SourceTypeCardPresent cardPresent;
+  CardPresent cardPresent;
 
   /** The client secret of the source. Used for client-side retrieval using a publishable key. */
   @SerializedName("client_secret")
@@ -71,7 +71,7 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
   String customer;
 
   @SerializedName("eps")
-  SourceTypeEps eps;
+  Eps eps;
 
   /**
    * The authentication `flow` of the source. `flow` is one of `redirect`, `receiver`,
@@ -81,7 +81,7 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
   String flow;
 
   @SerializedName("giropay")
-  SourceTypeGiropay giropay;
+  Giropay giropay;
 
   /** Unique identifier for the object. */
   @Getter(onMethod = @__({@Override}))
@@ -89,7 +89,7 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
   String id;
 
   @SerializedName("ideal")
-  SourceTypeIdeal ideal;
+  Ideal ideal;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
@@ -107,7 +107,7 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
   Map<String, String> metadata;
 
   @SerializedName("multibanco")
-  SourceTypeMultibanco multibanco;
+  Multibanco multibanco;
 
   /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
@@ -121,10 +121,10 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
   Owner owner;
 
   @SerializedName("p24")
-  SourceTypeP24 p24;
+  P24 p24;
 
   @SerializedName("paper_check")
-  SourceTypePaperCheck paperCheck;
+  PaperCheck paperCheck;
 
   @SerializedName("receiver")
   ReceiverFlow receiver;
@@ -133,13 +133,13 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
   RedirectFlow redirect;
 
   @SerializedName("sepa_credit_transfer")
-  SourceTypeSepaCreditTransfer sepaCreditTransfer;
+  SepaCreditTransfer sepaCreditTransfer;
 
   @SerializedName("sepa_debit")
-  SourceTypeSepaDebit sepaDebit;
+  SepaDebit sepaDebit;
 
   @SerializedName("sofort")
-  SourceTypeSofort sofort;
+  Sofort sofort;
 
   /**
    * Extra information about a source. This will appear on your customer's statement every time you
@@ -156,7 +156,7 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
   String status;
 
   @SerializedName("three_d_secure")
-  SourceTypeThreeDSecure threeDSecure;
+  ThreeDSecure threeDSecure;
 
   /**
    * The `type` of the source. The `type` is a payment method, one of `ach_credit_transfer`,
@@ -164,7 +164,7 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
    * `multibanco`, `p24`, `paper_check`, `sepa_credit_transfer`, `sepa_debit`, `sofort`,
    * `three_d_secure`, or `wechat`. An additional hash is included on the source with a name
    * matching this value. It contains additional information specific to the [payment
-   * method](/docs/sources) used.
+   * method](https://stripe.com/docs/sources) used.
    */
   @SerializedName("type")
   String type;
@@ -178,7 +178,7 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
   String usage;
 
   @SerializedName("wechat")
-  SourceTypeWechat wechat;
+  Wechat wechat;
 
   /** Delete a specified source for a given customer. */
   public Source detach() throws StripeException {
@@ -313,6 +313,222 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class AchCreditTransfer extends StripeObject {
+    @SerializedName("account_number")
+    String accountNumber;
+
+    @SerializedName("bank_name")
+    String bankName;
+
+    @SerializedName("fingerprint")
+    String fingerprint;
+
+    @SerializedName("refund_account_holder_name")
+    String refundAccountHolderName;
+
+    @SerializedName("refund_account_holder_type")
+    String refundAccountHolderType;
+
+    @SerializedName("refund_account_number")
+    String refundAccountNumber;
+
+    @SerializedName("refund_routing_number")
+    String refundRoutingNumber;
+
+    @SerializedName("routing_number")
+    String routingNumber;
+
+    @SerializedName("swift_code")
+    String swiftCode;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AchDebit extends StripeObject {
+    @SerializedName("bank_name")
+    String bankName;
+
+    @SerializedName("country")
+    String country;
+
+    @SerializedName("fingerprint")
+    String fingerprint;
+
+    @SerializedName("last4")
+    String last4;
+
+    @SerializedName("routing_number")
+    String routingNumber;
+
+    @SerializedName("type")
+    String type;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Alipay extends StripeObject {
+    @SerializedName("data_string")
+    String dataString;
+
+    @SerializedName("native_url")
+    String nativeUrl;
+
+    @SerializedName("statement_descriptor")
+    String statementDescriptor;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Bancontact extends StripeObject {
+    @SerializedName("bank_code")
+    String bankCode;
+
+    @SerializedName("bank_name")
+    String bankName;
+
+    @SerializedName("bic")
+    String bic;
+
+    @SerializedName("iban_last4")
+    String ibanLast4;
+
+    @SerializedName("preferred_language")
+    String preferredLanguage;
+
+    @SerializedName("statement_descriptor")
+    String statementDescriptor;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Card extends StripeObject {
+    @SerializedName("address_line1_check")
+    String addressLine1Check;
+
+    @SerializedName("address_zip_check")
+    String addressZipCheck;
+
+    @SerializedName("brand")
+    String brand;
+
+    @SerializedName("country")
+    String country;
+
+    @SerializedName("cvc_check")
+    String cvcCheck;
+
+    @SerializedName("dynamic_last4")
+    String dynamicLast4;
+
+    @SerializedName("exp_month")
+    Long expMonth;
+
+    @SerializedName("exp_year")
+    Long expYear;
+
+    @SerializedName("fingerprint")
+    String fingerprint;
+
+    @SerializedName("funding")
+    String funding;
+
+    @SerializedName("last4")
+    String last4;
+
+    @SerializedName("name")
+    String name;
+
+    @SerializedName("skip_validation")
+    Boolean skipValidation;
+
+    @SerializedName("three_d_secure")
+    String threeDSecure;
+
+    @SerializedName("tokenization_method")
+    String tokenizationMethod;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CardPresent extends StripeObject {
+    @SerializedName("application_cryptogram")
+    String applicationCryptogram;
+
+    @SerializedName("application_preferred_name")
+    String applicationPreferredName;
+
+    @SerializedName("authorization_code")
+    String authorizationCode;
+
+    @SerializedName("authorization_response_code")
+    String authorizationResponseCode;
+
+    @SerializedName("brand")
+    String brand;
+
+    @SerializedName("country")
+    String country;
+
+    @SerializedName("cvm_type")
+    String cvmType;
+
+    @SerializedName("data_type")
+    String dataType;
+
+    @SerializedName("dedicated_file_name")
+    String dedicatedFileName;
+
+    @SerializedName("emv_auth_data")
+    String emvAuthData;
+
+    @SerializedName("evidence_customer_signature")
+    String evidenceCustomerSignature;
+
+    @SerializedName("evidence_transaction_certificate")
+    String evidenceTransactionCertificate;
+
+    @SerializedName("exp_month")
+    Long expMonth;
+
+    @SerializedName("exp_year")
+    Long expYear;
+
+    @SerializedName("fingerprint")
+    String fingerprint;
+
+    @SerializedName("funding")
+    String funding;
+
+    @SerializedName("last4")
+    String last4;
+
+    @SerializedName("pos_device_id")
+    String posDeviceId;
+
+    @SerializedName("pos_entry_mode")
+    String posEntryMode;
+
+    @SerializedName("read_method")
+    String readMethod;
+
+    @SerializedName("reader")
+    String reader;
+
+    @SerializedName("terminal_verification_results")
+    String terminalVerificationResults;
+
+    @SerializedName("transaction_status_information")
+    String transactionStatusInformation;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class CodeVerificationFlow extends StripeObject {
     /**
      * The number of attempts remaining to authenticate the source object with a verification code.
@@ -328,6 +544,86 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
      */
     @SerializedName("status")
     String status;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Eps extends StripeObject {
+    @SerializedName("reference")
+    String reference;
+
+    @SerializedName("statement_descriptor")
+    String statementDescriptor;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Giropay extends StripeObject {
+    @SerializedName("bank_code")
+    String bankCode;
+
+    @SerializedName("bank_name")
+    String bankName;
+
+    @SerializedName("bic")
+    String bic;
+
+    @SerializedName("statement_descriptor")
+    String statementDescriptor;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Ideal extends StripeObject {
+    @SerializedName("bank")
+    String bank;
+
+    @SerializedName("bic")
+    String bic;
+
+    @SerializedName("iban_last4")
+    String ibanLast4;
+
+    @SerializedName("statement_descriptor")
+    String statementDescriptor;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Multibanco extends StripeObject {
+    @SerializedName("entity")
+    String entity;
+
+    @SerializedName("reference")
+    String reference;
+
+    @SerializedName("refund_account_holder_address_city")
+    String refundAccountHolderAddressCity;
+
+    @SerializedName("refund_account_holder_address_country")
+    String refundAccountHolderAddressCountry;
+
+    @SerializedName("refund_account_holder_address_line1")
+    String refundAccountHolderAddressLine1;
+
+    @SerializedName("refund_account_holder_address_line2")
+    String refundAccountHolderAddressLine2;
+
+    @SerializedName("refund_account_holder_address_postal_code")
+    String refundAccountHolderAddressPostalCode;
+
+    @SerializedName("refund_account_holder_address_state")
+    String refundAccountHolderAddressState;
+
+    @SerializedName("refund_account_holder_name")
+    String refundAccountHolderName;
+
+    @SerializedName("refund_iban")
+    String refundIban;
   }
 
   @Getter
@@ -381,6 +677,37 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
      */
     @SerializedName("verified_phone")
     String verifiedPhone;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class P24 extends StripeObject {
+    @SerializedName("reference")
+    String reference;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PaperCheck extends StripeObject {
+    @SerializedName("mailing_address_city")
+    String mailingAddressCity;
+
+    @SerializedName("mailing_address_country")
+    String mailingAddressCountry;
+
+    @SerializedName("mailing_address_line1")
+    String mailingAddressLine1;
+
+    @SerializedName("mailing_address_line2")
+    String mailingAddressLine2;
+
+    @SerializedName("mailing_address_postal_code")
+    String mailingAddressPostalCode;
+
+    @SerializedName("mailing_address_state")
+    String mailingAddressState;
   }
 
   @Getter
@@ -457,5 +784,174 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
      */
     @SerializedName("url")
     String url;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SepaCreditTransfer extends StripeObject {
+    @SerializedName("bank_name")
+    String bankName;
+
+    @SerializedName("bic")
+    String bic;
+
+    @SerializedName("iban")
+    String iban;
+
+    @SerializedName("refund_account_holder_address_city")
+    String refundAccountHolderAddressCity;
+
+    @SerializedName("refund_account_holder_address_country")
+    String refundAccountHolderAddressCountry;
+
+    @SerializedName("refund_account_holder_address_line1")
+    String refundAccountHolderAddressLine1;
+
+    @SerializedName("refund_account_holder_address_line2")
+    String refundAccountHolderAddressLine2;
+
+    @SerializedName("refund_account_holder_address_postal_code")
+    String refundAccountHolderAddressPostalCode;
+
+    @SerializedName("refund_account_holder_address_state")
+    String refundAccountHolderAddressState;
+
+    @SerializedName("refund_account_holder_name")
+    String refundAccountHolderName;
+
+    @SerializedName("refund_iban")
+    String refundIban;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SepaDebit extends StripeObject {
+    @SerializedName("bank_code")
+    String bankCode;
+
+    @SerializedName("branch_code")
+    String branchCode;
+
+    @SerializedName("country")
+    String country;
+
+    @SerializedName("fingerprint")
+    String fingerprint;
+
+    @SerializedName("last4")
+    String last4;
+
+    @SerializedName("mandate_reference")
+    String mandateReference;
+
+    @SerializedName("mandate_url")
+    String mandateUrl;
+
+    @SerializedName("skip_validation")
+    Boolean skipValidation;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Sofort extends StripeObject {
+    @SerializedName("bank_code")
+    String bankCode;
+
+    @SerializedName("bank_name")
+    String bankName;
+
+    @SerializedName("bic")
+    String bic;
+
+    @SerializedName("country")
+    String country;
+
+    @SerializedName("iban_last4")
+    String ibanLast4;
+
+    @SerializedName("preferred_language")
+    String preferredLanguage;
+
+    @SerializedName("statement_descriptor")
+    String statementDescriptor;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class ThreeDSecure extends StripeObject {
+    @SerializedName("address_line1_check")
+    String addressLine1Check;
+
+    @SerializedName("address_zip_check")
+    String addressZipCheck;
+
+    @SerializedName("authenticated")
+    Boolean authenticated;
+
+    @SerializedName("brand")
+    String brand;
+
+    @SerializedName("card")
+    String card;
+
+    @SerializedName("country")
+    String country;
+
+    @SerializedName("customer")
+    String customer;
+
+    @SerializedName("cvc_check")
+    String cvcCheck;
+
+    @SerializedName("dynamic_last4")
+    String dynamicLast4;
+
+    @SerializedName("exp_month")
+    Long expMonth;
+
+    @SerializedName("exp_year")
+    Long expYear;
+
+    @SerializedName("fingerprint")
+    String fingerprint;
+
+    @SerializedName("funding")
+    String funding;
+
+    @SerializedName("last4")
+    String last4;
+
+    @SerializedName("name")
+    String name;
+
+    @SerializedName("skip_validation")
+    Boolean skipValidation;
+
+    @SerializedName("three_d_secure")
+    String threeDSecure;
+
+    @SerializedName("tokenization_method")
+    String tokenizationMethod;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Wechat extends StripeObject {
+    @SerializedName("native_url")
+    String nativeUrl;
+
+    @SerializedName("prepay_id")
+    String prepayId;
+
+    @SerializedName("qr_code_url")
+    String qrCodeUrl;
+
+    @SerializedName("statement_descriptor")
+    String statementDescriptor;
   }
 }

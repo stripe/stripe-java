@@ -47,8 +47,8 @@ public class ReportRun extends ApiResource implements HasId {
   Parameters parameters;
 
   /**
-   * The ID of the [report type](/docs/reporting/statements/api#report-types) to run, such as
-   * `"balance.summary.1"`.
+   * The ID of the [report type](https://stripe.com/docs/reporting/statements/api#report-types) to
+   * run, such as `"balance.summary.1"`.
    */
   @SerializedName("report_type")
   String reportType;

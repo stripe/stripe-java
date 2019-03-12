@@ -70,7 +70,7 @@ public class Review extends ApiResource implements HasId {
   @SerializedName("open")
   Boolean open;
 
-  /** The reason the review was opened. One of `rule` or `manual`. */
+  /** The reason the review was opened. One of `rule`, `manual`, or `issuer_fraud_record`. */
   @SerializedName("opened_reason")
   String openedReason;
 
@@ -81,8 +81,8 @@ public class Review extends ApiResource implements HasId {
   ExpandableField<PaymentIntent> paymentIntent;
 
   /**
-   * The reason the review is currently open or closed. One of `rule`, `manual`, `approved`,
-   * `refunded`, `refunded_as_fraud`, or `disputed`.
+   * The reason the review is currently open or closed. One of `rule`, `manual`,
+   * `issuer_fraud_record`, `approved`, `refunded`, `refunded_as_fraud`, or `disputed`.
    */
   @SerializedName("reason")
   String reason;

@@ -5,7 +5,6 @@ package com.stripe.model;
 import com.stripe.model.checkout.Session;
 import com.stripe.model.issuing.Authorization;
 import com.stripe.model.issuing.CardDetails;
-import com.stripe.model.issuing.CardPin;
 import com.stripe.model.issuing.Cardholder;
 import com.stripe.model.issuing.Settlement;
 import com.stripe.model.issuing.Transaction;
@@ -61,7 +60,6 @@ final class EventDataClassLookup {
     classLookup.put("issuing.authorization", Authorization.class);
     classLookup.put("issuing.card", com.stripe.model.issuing.Card.class);
     classLookup.put("issuing.card_details", CardDetails.class);
-    classLookup.put("issuing.card_pin", CardPin.class);
     classLookup.put("issuing.cardholder", Cardholder.class);
     classLookup.put("issuing.dispute", com.stripe.model.issuing.Dispute.class);
     classLookup.put("issuing.settlement", Settlement.class);

@@ -92,11 +92,11 @@ public class Dispute extends ApiResource
   String object;
 
   /**
-   * Reason given by cardholder for dispute. Possible values are `duplicate`, `fraudulent`,
-   * `subscription_canceled`, `product_unacceptable`, `product_not_received`, `unrecognized`,
-   * `credit_not_processed`, `general`, `incorrect_account_details`, `insufficient_funds`,
-   * `bank_cannot_process`, `debit_not_authorized`, or `customer_initiated`. Read more about
-   * [dispute reasons](/docs/disputes/categories).
+   * Reason given by cardholder for dispute. Possible values are `bank_cannot_process`,
+   * `check_returned`, `credit_not_processed`, `customer_initiated`, `debit_not_authorized`,
+   * `duplicate`, `fraudulent`, `general`, `incorrect_account_details`, `insufficient_funds`,
+   * `product_not_received`, `product_unacceptable`, `subscription_canceled`, or `unrecognized`.
+   * Read more about [dispute reasons](https://stripe.com/docs/disputes/categories).
    */
   @SerializedName("reason")
   String reason;

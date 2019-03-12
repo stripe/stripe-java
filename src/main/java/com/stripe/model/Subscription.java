@@ -124,6 +124,12 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @SerializedName("items")
   SubscriptionItemCollection items;
 
+  /** The most recent invoice this subscription has generated. */
+  @SerializedName("latest_invoice")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Invoice> latestInvoice;
+
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
@@ -187,6 +193,13 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @SerializedName("tax_percent")
   BigDecimal taxPercent;
 
+  /**
+   * If specified, the funds from the subscription's invoices will be transferred to the destination
+   * and the ID of the resulting transfers will be found on the resulting charges.
+   */
+  @SerializedName("transfer_data")
+  Invoice.TransferData transferData;
+
   /** If the subscription has a trial, the end of that trial. */
   @SerializedName("trial_end")
   Long trialEnd;
@@ -230,6 +243,24 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   public void setDefaultSourceObject(PaymentSource expandableObject) {
     this.defaultSource =
         new ExpandableField<PaymentSource>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get id of expandable `latestInvoice` object. */
+  public String getLatestInvoice() {
+    return (this.latestInvoice != null) ? this.latestInvoice.getId() : null;
+  }
+
+  public void setLatestInvoice(String id) {
+    this.latestInvoice = ApiResource.setExpandableFieldId(id, this.latestInvoice);
+  }
+
+  /** Get expanded `latestInvoice`. */
+  public Invoice getLatestInvoiceObject() {
+    return (this.latestInvoice != null) ? this.latestInvoice.getExpanded() : null;
+  }
+
+  public void setLatestInvoiceObject(Invoice expandableObject) {
+    this.latestInvoice = new ExpandableField<Invoice>(expandableObject.getId(), expandableObject);
   }
 
   /**
@@ -318,11 +349,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * left in place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations will be removed.
    *
-   * <p>By default, upon subscription cancellation, Stripe will close all unpaid invoices for the
-   * customer. This is designed to prevent unexpected payment attempts after the customer has
-   * canceled a subscription. However, you can reopen the invoices manually after subscription
-   * cancellation to have us proceed with payment collection. Or, you could even re-attempt payment
-   * yourself on all unpaid invoices before allowing the customer to cancel the subscription at all.
+   * <p>By default, upon subscription cancellation, Stripe will stop automatic collection of all
+   * finalized invoices for the customer. This is intended to prevent unexpected payment attempts
+   * after the customer has canceled a subscription. However, you can resume automatic collection of
+   * the invoices manually after subscription cancellation to have us proceed. Or, you could check
+   * for unpaid invoices before allowing the customer to cancel the subscription at all.
    */
   public Subscription cancel() throws StripeException {
     return cancel((Map<String, Object>) null, (RequestOptions) null);
@@ -338,11 +369,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * left in place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations will be removed.
    *
-   * <p>By default, upon subscription cancellation, Stripe will close all unpaid invoices for the
-   * customer. This is designed to prevent unexpected payment attempts after the customer has
-   * canceled a subscription. However, you can reopen the invoices manually after subscription
-   * cancellation to have us proceed with payment collection. Or, you could even re-attempt payment
-   * yourself on all unpaid invoices before allowing the customer to cancel the subscription at all.
+   * <p>By default, upon subscription cancellation, Stripe will stop automatic collection of all
+   * finalized invoices for the customer. This is intended to prevent unexpected payment attempts
+   * after the customer has canceled a subscription. However, you can resume automatic collection of
+   * the invoices manually after subscription cancellation to have us proceed. Or, you could check
+   * for unpaid invoices before allowing the customer to cancel the subscription at all.
    */
   public Subscription cancel(Map<String, Object> params) throws StripeException {
     return cancel(params, (RequestOptions) null);
@@ -358,11 +389,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * left in place and collected at the end of the period. But if the subscription is set to cancel
    * immediately, pending prorations will be removed.
    *
-   * <p>By default, upon subscription cancellation, Stripe will close all unpaid invoices for the
-   * customer. This is designed to prevent unexpected payment attempts after the customer has
-   * canceled a subscription. However, you can reopen the invoices manually after subscription
-   * cancellation to have us proceed with payment collection. Or, you could even re-attempt payment
-   * yourself on all unpaid invoices before allowing the customer to cancel the subscription at all.
+   * <p>By default, upon subscription cancellation, Stripe will stop automatic collection of all
+   * finalized invoices for the customer. This is intended to prevent unexpected payment attempts
+   * after the customer has canceled a subscription. However, you can resume automatic collection of
+   * the invoices manually after subscription cancellation to have us proceed. Or, you could check
+   * for unpaid invoices before allowing the customer to cancel the subscription at all.
    */
   public Subscription cancel(Map<String, Object> params, RequestOptions options)
       throws StripeException {

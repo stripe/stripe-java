@@ -90,24 +90,24 @@ public class CountrySpec extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class VerificationFieldDetails extends StripeObject {
-    /** Additional fields which are only required for some users. */
-    @SerializedName("additional")
-    List<String> additional;
-
-    /** Fields which every account must eventually provide. */
-    @SerializedName("minimum")
-    List<String> minimum;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
   public static class VerificationFields extends StripeObject {
     @SerializedName("company")
-    VerificationFieldDetails company;
+    Details company;
 
     @SerializedName("individual")
-    VerificationFieldDetails individual;
+    Details individual;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Details extends StripeObject {
+      /** Additional fields which are only required for some users. */
+      @SerializedName("additional")
+      List<String> additional;
+
+      /** Fields which every account must eventually provide. */
+      @SerializedName("minimum")
+      List<String> minimum;
+    }
   }
 }
