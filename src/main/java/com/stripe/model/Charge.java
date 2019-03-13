@@ -1,5 +1,7 @@
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
@@ -30,6 +32,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
   AlternateStatementDescriptors alternateStatementDescriptors;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE)
       ExpandableField<BalanceTransaction> balanceTransaction;
+  PaymentMethod.BillingDetails billingDetails;
   Boolean captured;
   Long created;
   String currency;
@@ -48,6 +51,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Order> order;
   Outcome outcome;
   Boolean paid;
+  String paymentMethod;
+  PaymentMethodDetails paymentMethodDetails;
   String receiptEmail;
   String receiptNumber;
   String receiptUrl;
@@ -600,6 +605,487 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
       String action;
       String predicate;
     }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PaymentMethodDetails extends StripeObject {
+    @SerializedName("ach_credit_transfer")
+    AchCreditTransfer achCreditTransfer;
+
+    @SerializedName("ach_debit")
+    AchDebit achDebit;
+
+    @SerializedName("alipay")
+    Alipay alipay;
+
+    @SerializedName("bancontact")
+    Bancontact bancontact;
+
+    @SerializedName("bitcoin")
+    Bitcoin bitcoin;
+
+    @SerializedName("card")
+    Card card;
+
+    @SerializedName("card_present")
+    CardPresent cardPresent;
+
+    @SerializedName("eps")
+    Eps eps;
+
+    @SerializedName("giropay")
+    Giropay giropay;
+
+    @SerializedName("ideal")
+    Ideal ideal;
+
+    @SerializedName("multibanco")
+    Multibanco multibanco;
+
+    @SerializedName("p24")
+    P24 p24;
+
+    @SerializedName("sepa_debit")
+    SepaDebit sepaDebit;
+
+    @SerializedName("sofort")
+    Sofort sofort;
+
+    @SerializedName("stripe_account")
+    StripeAccount stripeAccount;
+
+    @SerializedName("type")
+    String type;
+
+    @SerializedName("wechat")
+    Wechat wechat;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AchCreditTransfer extends StripeObject {
+      @SerializedName("account_number")
+      String accountNumber;
+
+      @SerializedName("bank_name")
+      String bankName;
+
+      @SerializedName("routing_number")
+      String routingNumber;
+
+      @SerializedName("swift_code")
+      String swiftCode;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AchDebit extends StripeObject {
+      @SerializedName("account_holder_type")
+      String accountHolderType;
+
+      @SerializedName("bank_name")
+      String bankName;
+
+      @SerializedName("country")
+      String country;
+
+      @SerializedName("fingerprint")
+      String fingerprint;
+
+      @SerializedName("last4")
+      String last4;
+
+      @SerializedName("routing_number")
+      String routingNumber;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Alipay extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Bancontact extends StripeObject {
+      @SerializedName("bank_code")
+      String bankCode;
+
+      @SerializedName("bank_name")
+      String bankName;
+
+      @SerializedName("bic")
+      String bic;
+
+      @SerializedName("iban_last4")
+      String ibanLast4;
+
+      @SerializedName("preferred_language")
+      String preferredLanguage;
+
+      @SerializedName("verified_name")
+      String verifiedName;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Bitcoin extends StripeObject {
+      @SerializedName("address")
+      String address;
+
+      @SerializedName("amount")
+      Long amount;
+
+      @SerializedName("amount_charged")
+      Long amountCharged;
+
+      @SerializedName("amount_received")
+      Long amountReceived;
+
+      @SerializedName("amount_returned")
+      Long amountReturned;
+
+      @SerializedName("refund_address")
+      String refundAddress;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Card extends StripeObject {
+      @SerializedName("brand")
+      String brand;
+
+      @SerializedName("checks")
+      Checks checks;
+
+      @SerializedName("country")
+      String country;
+
+      @SerializedName("exp_month")
+      Long expMonth;
+
+      @SerializedName("exp_year")
+      Long expYear;
+
+      @SerializedName("fingerprint")
+      String fingerprint;
+
+      @SerializedName("funding")
+      String funding;
+
+      @SerializedName("last4")
+      String last4;
+
+      @SerializedName("three_d_secure")
+      ThreeDSecure threeDSecure;
+
+      /** If this Card is part of a Card Wallet, this contains the details of the Card Wallet. */
+      @SerializedName("wallet")
+      Wallet wallet;
+
+      // Please note that these field are for internal use only and are not typically returned
+      // as part of standard API requests.
+      @SerializedName("description")
+      String description;
+
+      @SerializedName("iin")
+      String iin;
+
+      @SerializedName("issuer")
+      String issuer;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Checks extends StripeObject {
+        @SerializedName("address_line1_check")
+        String addressLine1Check;
+
+        @SerializedName("address_postal_code_check")
+        String addressPostalCodeCheck;
+
+        @SerializedName("cvc_check")
+        String cvcCheck;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class ThreeDSecure extends StripeObject {}
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Wallet extends StripeObject {
+        @SerializedName("amex_express_checkout")
+        AmexExpressCheckout amexExpressCheckout;
+
+        @SerializedName("apple_pay")
+        ApplePay applePay;
+
+        /** (For tokenized numbers only.) The last four digits of the device account number. */
+        @SerializedName("dynamic_last4")
+        String dynamicLast4;
+
+        @SerializedName("google_pay")
+        GooglePay googlePay;
+
+        @SerializedName("masterpass")
+        Masterpass masterpass;
+
+        @SerializedName("samsung_pay")
+        SamsungPay samsungPay;
+
+        @SerializedName("type")
+        String type;
+
+        @SerializedName("visa_checkout")
+        VisaCheckout visaCheckout;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class AmexExpressCheckout extends StripeObject {}
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class ApplePay extends StripeObject {}
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class GooglePay extends StripeObject {}
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Masterpass extends StripeObject {
+          @SerializedName("billing_address")
+          Address billingAddress;
+
+          @SerializedName("email")
+          String email;
+
+          @SerializedName("name")
+          String name;
+
+          @SerializedName("shipping_address")
+          Address shippingAddress;
+        }
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class SamsungPay extends StripeObject {}
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class VisaCheckout extends StripeObject {
+          @SerializedName("billing_address")
+          Address billingAddress;
+
+          @SerializedName("email")
+          String email;
+
+          @SerializedName("name")
+          String name;
+
+          @SerializedName("shipping_address")
+          Address shippingAddress;
+        }
+      }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CardPresent extends StripeObject {
+      @SerializedName("brand")
+      String brand;
+
+      @SerializedName("country")
+      String country;
+
+      @SerializedName("emv_auth_data")
+      String emvAuthData;
+
+      @SerializedName("exp_month")
+      Long expMonth;
+
+      @SerializedName("exp_year")
+      Long expYear;
+
+      @SerializedName("fingerprint")
+      String fingerprint;
+
+      @SerializedName("funding")
+      String funding;
+
+      @SerializedName("generated_card")
+      String generatedCard;
+
+      @SerializedName("last4")
+      String last4;
+
+      @SerializedName("read_method")
+      String readMethod;
+
+      @SerializedName("receipt")
+      Receipt receipt;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Receipt extends StripeObject {
+        @SerializedName("application_cryptogram")
+        String applicationCryptogram;
+
+        @SerializedName("application_preferred_name")
+        String applicationPreferredName;
+
+        @SerializedName("authorization_code")
+        String authorizationCode;
+
+        @SerializedName("authorization_response_code")
+        String authorizationResponseCode;
+
+        @SerializedName("cardholder_verification_method")
+        String cardholderVerificationMethod;
+
+        @SerializedName("dedicated_file_name")
+        String dedicatedFileName;
+
+        @SerializedName("terminal_verification_results")
+        String terminalVerificationResults;
+
+        @SerializedName("transaction_status_information")
+        String transactionStatusInformation;
+      }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Eps extends StripeObject {
+      @SerializedName("verified_name")
+      String verifiedName;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Giropay extends StripeObject {
+      @SerializedName("bank_code")
+      String bankCode;
+
+      @SerializedName("bank_name")
+      String bankName;
+
+      @SerializedName("bic")
+      String bic;
+
+      @SerializedName("verified_name")
+      String verifiedName;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Ideal extends StripeObject {
+      @SerializedName("bank")
+      String bank;
+
+      @SerializedName("bic")
+      String bic;
+
+      @SerializedName("iban_last4")
+      String ibanLast4;
+
+      @SerializedName("verified_name")
+      String verifiedName;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Multibanco extends StripeObject {
+      @SerializedName("entity")
+      String entity;
+
+      @SerializedName("reference")
+      String reference;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class P24 extends StripeObject {
+      @SerializedName("reference")
+      String reference;
+
+      @SerializedName("verified_name")
+      String verifiedName;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SepaDebit extends StripeObject {
+      @SerializedName("bank_code")
+      String bankCode;
+
+      @SerializedName("branch_code")
+      String branchCode;
+
+      @SerializedName("country")
+      String country;
+
+      @SerializedName("fingerprint")
+      String fingerprint;
+
+      @SerializedName("last4")
+      String last4;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Sofort extends StripeObject {
+      @SerializedName("bank_code")
+      String bankCode;
+
+      @SerializedName("bank_name")
+      String bankName;
+
+      @SerializedName("bic")
+      String bic;
+
+      @SerializedName("country")
+      String country;
+
+      @SerializedName("iban_last4")
+      String ibanLast4;
+
+      @SerializedName("verified_name")
+      String verifiedName;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class StripeAccount extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Wechat extends StripeObject {}
   }
 
   @Getter

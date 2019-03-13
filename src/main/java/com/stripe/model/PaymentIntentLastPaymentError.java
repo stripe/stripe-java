@@ -14,6 +14,8 @@ public final class PaymentIntentLastPaymentError extends StripeObject {
   String docUrl;
   String message;
   String param;
+  PaymentIntent paymentIntent;
+  PaymentMethod paymentMethod;
   ExternalAccount source;
   String type;
 }

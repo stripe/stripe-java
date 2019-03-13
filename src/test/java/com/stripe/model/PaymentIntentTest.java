@@ -90,6 +90,7 @@ public class PaymentIntentTest extends BaseStripeTest {
       "application",
       "customer",
       "on_behalf_of",
+      "payment_method",
       "review",
       "source",
       "transfer_data.destination",
@@ -113,6 +114,10 @@ public class PaymentIntentTest extends BaseStripeTest {
     assertNotNull(account);
     assertNotNull(account.getId());
     assertEquals(resource.getOnBehalfOf(), account.getId());
+    final PaymentMethod paymentMethod = resource.getPaymentMethodObject();
+    assertNotNull(paymentMethod);
+    assertNotNull(paymentMethod.getId());
+    assertEquals(resource.getPaymentMethod(), paymentMethod.getId());
     final Review review = resource.getReviewObject();
     assertNotNull(review);
     assertNotNull(review.getId());

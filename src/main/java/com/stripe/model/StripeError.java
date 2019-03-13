@@ -45,7 +45,17 @@ public class StripeError extends StripeObject {
   @SerializedName("param")
   String param;
 
-  // TODO: add `payment_method`
+  /**
+   * The PaymentIntent object for errors returned on a request involving a PaymentIntent.
+   */
+  @SerializedName("payment_intent")
+  PaymentIntent paymentIntent;
+
+  /**
+   * The PaymentMethod object for errors returned on a request involving a PaymentMethod.
+   */
+  @SerializedName("payment_method")
+  PaymentMethod paymentMethod;
 
   /**
    * The source object for errors returned on a request involving a source.
