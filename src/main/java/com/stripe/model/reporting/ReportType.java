@@ -5,6 +5,7 @@ import com.stripe.model.HasId;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
+import java.util.List;
 import java.util.Map;
 
 import lombok.EqualsAndHashCode;
@@ -19,6 +20,7 @@ public class ReportType extends ApiResource implements HasId {
   String object;
   Long dataAvailableEnd;
   Long dataAvailableStart;
+  List<String> defaultColumns;
   String name;
   Long updated;
   Long version;

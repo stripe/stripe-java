@@ -7,6 +7,7 @@ import com.stripe.model.StripeObject;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
+import java.util.List;
 import java.util.Map;
 
 import lombok.EqualsAndHashCode;
@@ -93,6 +94,7 @@ public class ReportRun extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public final class Parameters extends StripeObject {
+    List<String> columns;
     String connectedAccount;
     String currency;
     Long intervalEnd;
