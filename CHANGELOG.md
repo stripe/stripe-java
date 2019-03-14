@@ -1,5 +1,8 @@
 # Changelog
 
+## 7.27.0 - 2019-03-13
+* [#689](https://github.com/stripe/stripe-java/pull/689) Add support for `columns` on `ReportRun` and `default_columns` on `ReportType`.
+
 ## 7.26.0 - 2019-03-06
 * [#686](https://github.com/stripe/stripe-java/pull/686) Add support for `cancel_at` on `Subscription`. 
 
