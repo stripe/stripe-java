@@ -108,10 +108,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("last_payment_error")
   StripeError lastPaymentError;
 
-  /** The [Level III data](https://stripe.com/docs/level3) associated with this payment. */
-  @SerializedName("level3")
-  Charge.Level3 level3;
-
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.

@@ -32,7 +32,10 @@ public class ReportType extends ApiResource implements HasId {
   @SerializedName("data_available_start")
   Long dataAvailableStart;
 
-  /** List of column names that are included by default when this Report Type gets run. */
+  /**
+   * List of column names that are included by default when this Report Type gets run. (If the
+   * Report Type doesn't support the `columns` parameter, this will be null.)
+   */
   @SerializedName("default_columns")
   List<String> defaultColumns;
 

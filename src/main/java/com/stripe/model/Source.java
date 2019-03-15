@@ -123,17 +123,11 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
   @SerializedName("p24")
   P24 p24;
 
-  @SerializedName("paper_check")
-  PaperCheck paperCheck;
-
   @SerializedName("receiver")
   ReceiverFlow receiver;
 
   @SerializedName("redirect")
   RedirectFlow redirect;
-
-  @SerializedName("sepa_credit_transfer")
-  SepaCreditTransfer sepaCreditTransfer;
 
   @SerializedName("sepa_debit")
   SepaDebit sepaDebit;
@@ -328,9 +322,6 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
 
     @SerializedName("refund_account_holder_type")
     String refundAccountHolderType;
-
-    @SerializedName("refund_account_number")
-    String refundAccountNumber;
 
     @SerializedName("refund_routing_number")
     String refundRoutingNumber;
@@ -690,29 +681,6 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class PaperCheck extends StripeObject {
-    @SerializedName("mailing_address_city")
-    String mailingAddressCity;
-
-    @SerializedName("mailing_address_country")
-    String mailingAddressCountry;
-
-    @SerializedName("mailing_address_line1")
-    String mailingAddressLine1;
-
-    @SerializedName("mailing_address_line2")
-    String mailingAddressLine2;
-
-    @SerializedName("mailing_address_postal_code")
-    String mailingAddressPostalCode;
-
-    @SerializedName("mailing_address_state")
-    String mailingAddressState;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
   public static class ReceiverFlow extends StripeObject {
     /**
      * The address of the receiver source. This is the value that should be communicated to the
@@ -784,44 +752,6 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
      */
     @SerializedName("url")
     String url;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class SepaCreditTransfer extends StripeObject {
-    @SerializedName("bank_name")
-    String bankName;
-
-    @SerializedName("bic")
-    String bic;
-
-    @SerializedName("iban")
-    String iban;
-
-    @SerializedName("refund_account_holder_address_city")
-    String refundAccountHolderAddressCity;
-
-    @SerializedName("refund_account_holder_address_country")
-    String refundAccountHolderAddressCountry;
-
-    @SerializedName("refund_account_holder_address_line1")
-    String refundAccountHolderAddressLine1;
-
-    @SerializedName("refund_account_holder_address_line2")
-    String refundAccountHolderAddressLine2;
-
-    @SerializedName("refund_account_holder_address_postal_code")
-    String refundAccountHolderAddressPostalCode;
-
-    @SerializedName("refund_account_holder_address_state")
-    String refundAccountHolderAddressState;
-
-    @SerializedName("refund_account_holder_name")
-    String refundAccountHolderName;
-
-    @SerializedName("refund_iban")
-    String refundIban;
   }
 
   @Getter

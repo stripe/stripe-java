@@ -10,6 +10,7 @@ import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -144,6 +145,10 @@ public class ReportRun extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Parameters extends StripeObject {
+    /** The set of output columns requested for inclusion in the report run. */
+    @SerializedName("columns")
+    List<String> columns;
+
     /** Connected account ID by which to filter the report run. */
     @SerializedName("connected_account")
     String connectedAccount;

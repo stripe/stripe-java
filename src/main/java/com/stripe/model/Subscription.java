@@ -172,16 +172,29 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   Long start;
 
   /**
-   * Possible values are `trialing`, `active`, `past_due`, `canceled`, or `unpaid`. A subscription
-   * still in its trial period is `trialing` and moves to `active` when the trial period is over. If
-   * subscription `billing=charge_automatically` it becomes `past_due` when payment to renew it
-   * fails and `canceled` or `unpaid` (depending on your subscriptions settings) when Stripe has
-   * exhausted all payment retry attempts. If subscription `billing=send_invoice` it becomes
-   * `past_due` when its invoice is not paid by the due date, and `canceled` or `unpaid` if it is
-   * still not paid by an additional deadline after that. Note that when a subscription has a status
-   * of `unpaid`, no subsequent invoices will be attempted (invoices will be created, but then
-   * immediately automatically closed.) After receiving updated payment information from a customer,
-   * you may choose to reopen and pay their closed invoices.
+   * Possible values are `incomplete`, `incomplete_expired`, `trialing`, `active`, `past_due`,
+   * `canceled`, or `unpaid`.
+   *
+   * <p>For `billing=charge_automatically` a subscription moves into `incomplete` if the initial
+   * payment attempt fails. A subscription in this state can only have metadata and default_source
+   * updated. Once the first invoice is paid, the subscription moves into an `active` state. If the
+   * first invoice is not paid within 23 hours, the subscription transitions to
+   * `incomplete_expired`. This is a terminal state, the open invoice will be voided and no further
+   * invoices will be generated.
+   *
+   * <p>A subscription that is currently in a trial period is `trialing` and moves to `active` when
+   * the trial period is over.
+   *
+   * <p>If subscription `billing=charge_automatically` it becomes `past_due` when payment to renew
+   * it fails and `canceled` or `unpaid` (depending on your subscriptions settings) when Stripe has
+   * exhausted all payment retry attempts.
+   *
+   * <p>If subscription `billing=send_invoice` it becomes `past_due` when its invoice is not paid by
+   * the due date, and `canceled` or `unpaid` if it is still not paid by an additional deadline
+   * after that. Note that when a subscription has a status of `unpaid`, no subsequent invoices will
+   * be attempted (invoices will be created, but then immediately automatically closed). After
+   * receiving updated payment information from a customer, you may choose to reopen and pay their
+   * closed invoices.
    */
   @SerializedName("status")
   String status;
