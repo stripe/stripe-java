@@ -17,19 +17,22 @@ public class StripeError extends StripeObject {
 
   /**
    * For some errors that could be handled programmatically, a short string indicating the [error
-   * code](/docs/error-codes) reported.
+   * code](https://stripe.com/docs/error-codes) reported.
    */
   @SerializedName("code")
   String code;
 
   /**
    * For card errors resulting from a card issuer decline, a short string indicating the [card
-   * issuer's reason for the decline](/docs/declines#issuer-declines) if they provide one.
+   * issuer's reason for the decline](https://stripe.com/docs/declines#issuer-declines) if they
+   * provide one.
    */
   @SerializedName("decline_code")
   String declineCode;
 
-  /** A URL to more information about the [error code](/docs/error-codes) reported. */
+  /**
+   * A URL to more information about the [error code](https://stripe.com/docs/error-codes) reported.
+   */
   @SerializedName("doc_url")
   String docUrl;
 
@@ -46,6 +49,9 @@ public class StripeError extends StripeObject {
    */
   @SerializedName("param")
   String param;
+
+  @SerializedName("payment_intent")
+  PaymentIntent paymentIntent;
 
   @SerializedName("source")
   PaymentSource source;

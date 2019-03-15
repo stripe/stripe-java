@@ -17,7 +17,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-
 public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice> {
   /**
    * Final amount due at this time for this invoice. If the invoice's total is smaller than the
@@ -63,8 +62,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * Controls whether Stripe will perform [automatic
-   * collection](/docs/billing/invoices/workflow/#auto_advance) of the invoice. When `false`, the
-   * invoice's state will not automatically advance without an explicit action.
+   * collection](https://stripe.com/docs/billing/invoices/workflow/#auto_advance) of the invoice.
+   * When `false`, the invoice's state will not automatically advance without an explicit action.
    */
   @SerializedName("auto_advance")
   Boolean autoAdvance;
@@ -96,6 +95,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Charge> charge;
 
+  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
+  Long created;
+
   /**
    * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
    * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
@@ -112,10 +115,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
-  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
-  @SerializedName("date")
-  Long date;
-
   /**
    * ID of the default payment source for the invoice. It must belong to the customer associated
    * with the invoice and be in a chargeable state. If not set, defaults to the subscription's
@@ -130,7 +129,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("deleted")
   Boolean deleted;
 
-  /** An arbitrary string attached to the object. Often useful for displaying to users. */
+  /**
+   * An arbitrary string attached to the object. Often useful for displaying to users. Referenced as
+   * 'memo' in the Dashboard.
+   */
   @SerializedName("description")
   String description;
 
@@ -151,10 +153,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    */
   @SerializedName("ending_balance")
   Long endingBalance;
-
-  /** The time that the invoice draft was finalized. */
-  @SerializedName("finalized_at")
-  Long finalizedAt;
 
   /** Footer displayed on the invoice. */
   @SerializedName("footer")
@@ -253,6 +251,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("status")
   String status;
 
+  @SerializedName("status_transitions")
+  StatusTransitions statusTransitions;
+
   /** The subscription that this invoice was prepared for, if any. */
   @SerializedName("subscription")
   @Getter(lombok.AccessLevel.NONE)
@@ -295,8 +296,15 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   Long total;
 
   /**
+   * If specified, the funds from the invoice will be transferred to the destination and the ID of
+   * the resulting transfer will be found on the invoice's charge.
+   */
+  @SerializedName("transfer_data")
+  TransferData transferData;
+
+  /**
    * The time at which webhooks for this invoice were successfully delivered (if the invoice had no
-   * webhooks to deliver, this will match `date`). Invoice payment is delayed until webhooks are
+   * webhooks to deliver, this will match `created`). Invoice payment is delayed until webhooks are
    * delivered, or until all webhook delivery attempts have been exhausted.
    */
   @SerializedName("webhooks_delivered_at")
@@ -370,7 +378,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   public Subscription getSubscriptionObject() {
     return (this.subscription != null) ? this.subscription.getExpanded() : null;
   }
-
 
   public void setSubscriptionObject(Subscription expandableObject) {
     this.subscription =
@@ -809,6 +816,27 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class StatusTransitions extends StripeObject {
+    /** The time that the invoice draft was finalized. */
+    @SerializedName("finalized_at")
+    Long finalizedAt;
+
+    /** The time that the invoice was marked uncollectible. */
+    @SerializedName("marked_uncollectible_at")
+    Long markedUncollectibleAt;
+
+    /** The time that the invoice was paid. */
+    @SerializedName("paid_at")
+    Long paidAt;
+
+    /** The time that the invoice was voided. */
+    @SerializedName("voided_at")
+    Long voidedAt;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class ThresholdItemReason extends StripeObject {
     /** The IDs of the line items that triggered the threshold invoice. */
     @SerializedName("line_item_ids")
@@ -830,5 +858,37 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     /** Indicates which line items triggered a threshold invoice. */
     @SerializedName("item_reasons")
     List<ThresholdItemReason> itemReasons;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TransferData extends StripeObject {
+    /**
+     * The account (if any) where funds from the payment will be transferred to upon payment
+     * success.
+     */
+    @SerializedName("destination")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<Account> destination;
+
+    /** Get id of expandable `destination` object. */
+    public String getDestination() {
+      return (this.destination != null) ? this.destination.getId() : null;
+    }
+
+    public void setDestination(String id) {
+      this.destination = ApiResource.setExpandableFieldId(id, this.destination);
+    }
+
+    /** Get expanded `destination`. */
+    public Account getDestinationObject() {
+      return (this.destination != null) ? this.destination.getExpanded() : null;
+    }
+
+    public void setDestinationObject(Account expandableObject) {
+      this.destination = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
+    }
   }
 }

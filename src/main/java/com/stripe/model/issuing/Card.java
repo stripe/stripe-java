@@ -28,7 +28,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @SerializedName("brand")
   String brand;
 
-  /** The [Cardholder](/docs/api#issuing_cardholder_object) object to which the card belongs. */
+  /**
+   * The [Cardholder](https://stripe.com/docs/api#issuing_cardholder_object) object to which the
+   * card belongs.
+   */
   @SerializedName("cardholder")
   Cardholder cardholder;
 
@@ -200,23 +203,23 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   public static class AuthorizationControls extends StripeObject {
     /**
      * Array of strings containing
-     * [categories](/docs/api#issuing_authorization_object-merchant_data-category) of authorizations
-     * permitted on this card.
+     * [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category)
+     * of authorizations permitted on this card.
      */
     @SerializedName("allowed_categories")
     List<String> allowedCategories;
 
     /**
      * Array of strings containing
-     * [categories](/docs/api#issuing_authorization_object-merchant_data-category) of authorizations
-     * to always decline on this card.
+     * [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category)
+     * of authorizations to always decline on this card.
      */
     @SerializedName("blocked_categories")
     List<String> blockedCategories;
 
     /**
      * The currency of the card. See
-     * [max_amount](/docs/api#issuing_card_object-authorization_controls-max_amount)
+     * [max_amount](https://stripe.com/docs/api#issuing_card_object-authorization_controls-max_amount)
      */
     @SerializedName("currency")
     String currency;

@@ -91,14 +91,20 @@ public class BankAccount extends ApiResource
   String routingNumber;
 
   /**
-   * Possible values are `new`, `validated`, `verified`, `verification_failed`, or `errored`. A bank
-   * account that hasn't had any activity or validation performed is `new`. If Stripe can determine
-   * that the bank account exists, its status will be `validated`. Note that there often isn’t
-   * enough information to know (e.g., for smaller credit unions), and the validation is not always
-   * run. If customer bank account verification has succeeded, the bank account status will be
-   * `verified`. If the verification failed for any reason, such as microdeposit failure, the status
-   * will be `verification_failed`. If a transfer sent to this bank account fails, we'll set the
-   * status to `errored` and will not continue to send transfers until the bank details are updated.
+   * For bank accounts, possible values are `new`, `validated`, `verified`, `verification_failed`,
+   * or `errored`. A bank account that hasn't had any activity or validation performed is `new`. If
+   * Stripe can determine that the bank account exists, its status will be `validated`. Note that
+   * there often isn’t enough information to know (e.g., for smaller credit unions), and the
+   * validation is not always run. If customer bank account verification has succeeded, the bank
+   * account status will be `verified`. If the verification failed for any reason, such as
+   * microdeposit failure, the status will be `verification_failed`. If a transfer sent to this bank
+   * account fails, we'll set the status to `errored` and will not continue to send transfers until
+   * the bank details are updated.
+   *
+   * <p>For external accounts, possible values are `new` and `errored`. Validations aren't run
+   * against external accounts because they're only used for payouts. This means the other statuses
+   * don't apply. If a transfer fails, the status is set to `errored` and transfers are stopped
+   * until account details are updated.
    */
   @SerializedName("status")
   String status;
@@ -147,7 +153,9 @@ public class BankAccount extends ApiResource
    * <p>You can re-enable a disabled bank account by performing an update call without providing any
    * arguments or changes.
    *
-   * <p>Update a specified source for a given customer.
+   * <p>Updates the <code>account_holder_name</code>, <code>account_holder_type</code>, and <code>
+   * metadata</code> of a bank account belonging to a customer. Other bank account details are not
+   * editable, by design.
    */
   public BankAccount update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
@@ -161,7 +169,9 @@ public class BankAccount extends ApiResource
    * <p>You can re-enable a disabled bank account by performing an update call without providing any
    * arguments or changes.
    *
-   * <p>Update a specified source for a given customer.
+   * <p>Updates the <code>account_holder_name</code>, <code>account_holder_type</code>, and <code>
+   * metadata</code> of a bank account belonging to a customer. Other bank account details are not
+   * editable, by design.
    */
   public BankAccount update(Map<String, Object> params, RequestOptions options)
       throws StripeException {

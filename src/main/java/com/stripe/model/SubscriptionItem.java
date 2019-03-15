@@ -53,8 +53,8 @@ public class SubscriptionItem extends ApiResource
   Plan plan;
 
   /**
-   * The [quantity](/docs/subscriptions/quantities) of the plan to which the customer should be
-   * subscribed.
+   * The [quantity](https://stripe.com/docs/subscriptions/quantities) of the plan to which the
+   * customer should be subscribed.
    */
   @SerializedName("quantity")
   Long quantity;

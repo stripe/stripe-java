@@ -53,7 +53,7 @@ public class Topup extends ApiResource implements BalanceTransactionSource, Meta
 
   /**
    * Error code explaining reason for top-up failure if available (see [the errors
-   * section](/docs/api#errors) for a list of codes).
+   * section](https://stripe.com/docs/api#errors) for a list of codes).
    */
   @SerializedName("failure_code")
   String failureCode;
