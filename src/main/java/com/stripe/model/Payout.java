@@ -29,7 +29,7 @@ public class Payout extends ApiResource implements BalanceTransactionSource, Met
 
   /**
    * Returns `true` if the payout was created by an [automated payout
-   * schedule](/docs/payouts#payout-schedule), and `false` if it was [requested
+   * schedule](https://stripe.com/docs/payouts#payout-schedule), and `false` if it was [requested
    * manually](https://stripe.com/docs/payouts#manual-payouts).
    */
   @SerializedName("automatic")
@@ -76,7 +76,7 @@ public class Payout extends ApiResource implements BalanceTransactionSource, Met
 
   /**
    * Error code explaining reason for payout failure if available. See [Types of payout
-   * failures](/docs/api#payout_failures) for a list of failure codes.
+   * failures](https://stripe.com/docs/api#payout_failures) for a list of failure codes.
    */
   @SerializedName("failure_code")
   String failureCode;

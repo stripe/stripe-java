@@ -75,8 +75,9 @@ public class Authorization extends ApiResource
   Long heldAmount;
 
   /**
-   * The currency of the [held amount](/docs/api#issuing_authorization_object-held_amount). This
-   * will always be the card currency.
+   * The currency of the [held
+   * amount](https://stripe.com/docs/api#issuing_authorization_object-held_amount). This will always
+   * be the card currency.
    */
   @SerializedName("held_currency")
   String heldCurrency;
@@ -307,7 +308,10 @@ public class Authorization extends ApiResource
     @SerializedName("held_amount")
     Long heldAmount;
 
-    /** The currency of the [held amount](/docs/api#issuing_authorization_object-held_amount). */
+    /**
+     * The currency of the [held
+     * amount](https://stripe.com/docs/api#issuing_authorization_object-held_amount).
+     */
     @SerializedName("held_currency")
     String heldCurrency;
 
