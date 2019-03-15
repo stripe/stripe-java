@@ -38,7 +38,7 @@ public class CardTest extends BaseStripeTest {
   public void testDetails() throws StripeException {
     final Card card = Card.retrieve(CARD_ID);
 
-    final CardDetails cardDetails = card.details((Map<String, Object>) null);
+    final CardDetails cardDetails = card.details(null);
 
     assertNotNull(cardDetails);
     verifyRequest(
