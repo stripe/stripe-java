@@ -433,9 +433,6 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
     @SerializedName("name")
     String name;
 
-    @SerializedName("skip_validation")
-    Boolean skipValidation;
-
     @SerializedName("three_d_secure")
     String threeDSecure;
 
@@ -778,9 +775,6 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
 
     @SerializedName("mandate_url")
     String mandateUrl;
-
-    @SerializedName("skip_validation")
-    Boolean skipValidation;
   }
 
   @Getter
@@ -857,9 +851,6 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
 
     @SerializedName("name")
     String name;
-
-    @SerializedName("skip_validation")
-    Boolean skipValidation;
 
     @SerializedName("three_d_secure")
     String threeDSecure;
