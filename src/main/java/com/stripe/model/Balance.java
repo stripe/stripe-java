@@ -99,19 +99,19 @@ public class Balance extends ApiResource {
     String currency;
 
     @SerializedName("source_types")
-    MoneySourceTypes sourceTypes;
-  }
+    SourceTypes sourceTypes;
 
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class MoneySourceTypes extends StripeObject {
-    /** Amount for bank account. */
-    @SerializedName("bank_account")
-    Long bankAccount;
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SourceTypes extends StripeObject {
+      /** Amount for bank account. */
+      @SerializedName("bank_account")
+      Long bankAccount;
 
-    /** Amount for card. */
-    @SerializedName("card")
-    Long card;
+      /** Amount for card. */
+      @SerializedName("card")
+      Long card;
+    }
   }
 }

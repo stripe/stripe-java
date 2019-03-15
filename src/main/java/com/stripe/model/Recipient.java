@@ -65,9 +65,9 @@ public class Recipient extends ApiResource implements HasId, MetadataStore<Recip
   Map<String, String> metadata;
 
   /**
-   * The ID of the [Custom account](/docs/connect/custom-accounts) this recipient was migrated to.
-   * If set, the recipient can no longer be updated, nor can transfers be made to it: use the Custom
-   * account instead.
+   * The ID of the [Custom account](https://stripe.com/docs/connect/custom-accounts) this recipient
+   * was migrated to. If set, the recipient can no longer be updated, nor can transfers be made to
+   * it: use the Custom account instead.
    */
   @SerializedName("migrated_to")
   @Getter(lombok.AccessLevel.NONE)

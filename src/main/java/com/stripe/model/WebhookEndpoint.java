@@ -17,6 +17,10 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class WebhookEndpoint extends ApiResource implements HasId {
+  /** The API version events are rendered as for this webhook endpoint. */
+  @SerializedName("api_version")
+  String apiVersion;
+
   /** The ID of the associated Connect application. */
   @SerializedName("application")
   String application;
@@ -52,8 +56,8 @@ public class WebhookEndpoint extends ApiResource implements HasId {
   String object;
 
   /**
-   * The endpoint's secret, used to generate [webhook signatures](/docs/webhooks/signatures). Only
-   * returned at creation.
+   * The endpoint's secret, used to generate [webhook
+   * signatures](https://stripe.com/docs/webhooks/signatures). Only returned at creation.
    */
   @SerializedName("secret")
   String secret;

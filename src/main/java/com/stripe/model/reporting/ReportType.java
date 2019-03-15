@@ -8,6 +8,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -30,6 +31,13 @@ public class ReportType extends ApiResource implements HasId {
    */
   @SerializedName("data_available_start")
   Long dataAvailableStart;
+
+  /**
+   * List of column names that are included by default when this Report Type gets run. (If the
+   * Report Type doesn't support the `columns` parameter, this will be null.)
+   */
+  @SerializedName("default_columns")
+  List<String> defaultColumns;
 
   /**
    * The [ID of the Report
