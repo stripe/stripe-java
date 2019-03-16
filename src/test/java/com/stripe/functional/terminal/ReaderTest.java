@@ -1,6 +1,7 @@
 package com.stripe.functional.terminal;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
@@ -72,6 +73,20 @@ public class ReaderTest extends BaseStripeTest {
         ApiResource.RequestMethod.GET,
         String.format("/v1/terminal/readers"),
         params
+    );
+  }
+
+  @Test
+  public void testDelete() throws StripeException {
+    final Reader reader = Reader.retrieve(READER_ID);
+
+    final Reader deletedReader = reader.delete();
+
+    assertNotNull(deletedReader);
+    assertTrue(deletedReader.getDeleted());
+    verifyRequest(
+        ApiResource.RequestMethod.DELETE,
+        String.format("/v1/terminal/readers/%s", reader.getId())
     );
   }
 }
