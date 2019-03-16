@@ -1,30 +1,39 @@
 # Migration guide for version 8
 
-## Required upgrade to latest Stripe API version
- Up until `stripe-java` version 7, model classes had been maintained in a backward-compatible
- way. Regardless of your [Stripe API version](https://dashboard.stripe.com/developers), you could
-  always use the latest version of this client library. Starting with `stripe-java` 8.0.0, the 
-  model classes only work safely with the latest Stripe API version. To use version 8.0.0, 
-  [update to the latest version of the Stripe API](https://stripe.com/docs/upgrades#how-can-i-upgrade-my-api).
-  TODO: Add explicit version name of this first release - most likely after Avedon 2019-02-18.
+### Version 8 now has a pinned API version, and model classes are no longer backward-compatible
+Up until `stripe-java` version 7, model classes had been maintained in a backward-compatible way.
+Regardless of your [Stripe API version](https://dashboard.stripe.com/developers), you could 
+always use the latest version of this client library. Starting with `stripe-java` 8.0.0, model 
+classes strictly describe schema of API responses from a specific API version. Each library 
+release now specifies an API version it supports: API version is pinned in the library. This 
+first version 8.0.0 has the pinned version of [2019-03-14](https://stripe.com/docs/upgrades#2019-03-14). 
 
- Under the hood, new version 8 sets `Stripe-Version` request header to `Stripe#API_VERSION` 
- statically-defined in the library. Making API requests alone is fine; the return JSON response 
- has schema according to the specified version in request header, and it is compatible with Java 
- model classes of the library. However, event integration without upgrading your API version can 
- result in unhandled failures, both for webhooks and `/v1/events/*` via `Event#retrieve`.
- 
- The event data object in `Event#data#object` is rendered according to your Stripe API 
- version at the time of its creation. Without upgrading your API version, using this 
- library pinned at a specific version has no implication on the JSON schema of the data 
- object; setting version in the header to retrieve events will only render the outer wrapper and 
- metadata as the specified version, but not the inner data object. Similarly, the data object in 
- webhook events are also rendered using Stripe API version you're on. Thus, simply deserializing 
- this data object--on old API version--to the model of latest schema in this library can cause 
- incomplete deserialized object or runtime exceptions. It is necessary that you upgrade to the 
- latest API version to ensure events are created with the same API version supported by this library. 
- 
+### Remaining on an old API version can cause deserialization failure on webhook events.
+Under the hood, new version 8 and above sets `Stripe-Version` request header to 
+`Stripe#API_VERSION` statically-defined in the library. As a result, making API request is
+safe, because the return API response has schema of the pinned version and is compatible with the 
+library's Java model classes. However, webhook events are by default rendered at your 
+account API version and maybe incompatible with the library's schema, causing deserialization 
+failures.
+
+However, you can ensure safe serialization of incoming events by [creating live webhook events](https://stripe.com/docs/api/webhook_endpoints/create#create_webhook_endpoint-api_version) 
+to this pinned API version. Though, with such integration ready, you will be effectively prepared 
+to do an API version upgrade. In fact, configuring test/live webhook events to a new API version
+is a recommended path to do a safe version upgrade. 
+
+### Support for reading old events `/v1/events/*` via `Event#retrieve`
+Events can be retrieved via standard API request, but unlike normal API response, the event data 
+is not rendered at the version specified by request header. Specifically, the event data object
+in `Event#data#object` is by default rendered according to your Stripe API version the time of 
+its creation. (The outer event structure describing event's metadata though does follow the 
+request header version.) Version 8 supports a custom-defined compatibility layer that you can 
+patch events or implement a best-attempt getter, instead of failing deserialization upon seeing 
+events with incompatible schema. This will be discussed in detail in the later section.
+
 ## API version upgrade with `stripe-java`
+Using `stripe-java` version 8 and above means that your API requests will behave as if you have 
+upgraded to the pinned API version. To handle this change, the work required is 
+actually the same as when you would do an actual API version upgrade on your account. 
 
 According to the official [recommendations](https://stripe.com/docs/upgrades#how-can-i-upgrade-my-api)
  for Stripe API version upgrade, there are two main impact:
@@ -102,11 +111,10 @@ different business implication. For example, in [2018-05-21 version change](http
 
 #### API errors
 
-Less obvious ones are changes related to JSON error object which is not directly exposed to you. 
-This library converts such failure into `StripeException`, a subclass of Java `Exception`. For 
-example, in [2017-12-14 version change](https://stripe.com/docs/upgrades#2017-12-14) `card_error`
- is introduced, but that will be surfaced to you simply as a different message in `ApiException`. No 
-change on your part is required.
+Less obvious ones are changes related to JSON error object now exposed at `StripeException.getStripeError()`.
+Different error types `StripeError#type` may be returned. If you are integrating to this "eum" type, 
+check for version change like [2017-12-14](https://stripe.com/docs/upgrades#2017-12-14) where 
+new `card_error` is introduced.
 
 Changes in HTTP error codes, however, can affect your integration as a different type of 
 `StripeException` is thrown. For example, in [2016-10-19 version change](https://stripe.com/docs/upgrades#2016-10-19),
@@ -136,18 +144,24 @@ followings:
 ### 2. Event response structure
 
 The official upgrade [guide](https://stripe.com/docs/upgrades#how-can-i-upgrade-my-api) 
-recommends  configuring one test webhook to the latest API version. This allows you to test 
+recommends configuring one test webhook to the latest API version. This allows you to test 
 handling event and its event data object rendered at the upgraded API version. In the latest 
 `stripe-java`, you will find an API version defined at its static value 
-`Stripe#API_VERSION` matching the latest API version you can configure your test webhook to.
- 
+`Stripe#API_VERSION` matching the latest API version you can configure your test webhook to. 
+
+Alternatively, you can [now create webhook endpoints](https://site-admin.stripe.com/docs/api/webhook_endpoints/create#create_webhook_endpoint-api_version)
+ with a specific API version corresponding to the pinned version of `stripe-java`. This 
+ gives you control of safe rollback window beyond just the default 72 hours, where you 
+ have two concurrent webhook endpoints receiving old and new versions of events respectively.
+
 #### Motivation for handling event compatibility
  
 The official guide also recommends the need for compatibility in handling events of both your 
 current and new API versions. This is because for a short period of time after you upgrade, there will be 
 in-flight events on old API version that you should still handle. Additionally, in the case of 
 an API version roll-back, you will want to revert by changing the dashboard setting without the 
-need to re-deploy your code.
+need to re-deploy your code. This is especially true if you have two webhook endpoints that you 
+would like to switch the event read traffic seamlessly.
 
 Actually, backward compatibility to read old events is needed in general for 
 API request to read events going back to 30 days in `Event#retrieve`. 
@@ -159,7 +173,9 @@ augmented fields are introduced. Version 8, however, will take a different appro
 #### Illustration of schema incompatibility failure
 
 Currently, getting an `Event` will fail if the JSON schema for data object at `event.data.object`
- is not compatible with Java model class for its corresponding object type at `event.data.object.object`. 
+ is not compatible with Java model class for its corresponding object type at `event.data.object
+ .object` (the first object refers to the actual content we care about, and the second to type of
+  object to be deserialized). 
 Consider the JSON data below (fields omitted for illustration). It has 
 `event.data.object.object` as `invoice` so `Event#data#object` will be deserialized to 
 `Invoice.java`. Note the `api_version` before [`2012-10-26`](https://stripe.com/docs/upgrades#2012-10-26) 
@@ -201,7 +217,7 @@ where the `lines` has become a common paginated collection structure with fields
 ```
 
 #### Proxy object for deserialization in version 8
-`stripe-java` version 8 now supports model classes from only the latest API version--and is not 
+`stripe-java` version 8 now supporting model classes from only the pinned API version--and is not 
 backward-compatible--provides a new abstraction to resolve the old event data incompatibility 
 problem. A proxy object `EventDataObjectDeserializer` in `Event#data#getDataObjectDeserializer` 
 is added. The general approach is to defer data object deserialization to your use case. This avoids always 
@@ -350,8 +366,8 @@ also allows custom default values for fields that are now non-optional, and does
    
 #### Deprecating event old version handling
 
-After 72 hours when you have successfully upgraded the API version, any pending old webhook 
-events would have been delivered and handled in application code. After 30 days, events 
+After the default 72 hours when you have successfully upgraded the API version, any pending old 
+webhook events would have been delivered and handled in application code. After 30 days, events 
 guaranteed to be available will all have been created with the upgraded API version. At this 
 time, you can safely deprecate the backward compatibility event handling logic; model classes 
 from API calls, and in event data object via webhook or event endpoints will be of the new API 
