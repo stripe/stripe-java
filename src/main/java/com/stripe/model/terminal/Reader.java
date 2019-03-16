@@ -119,4 +119,28 @@ public class Reader extends ApiResource implements HasId {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/readers");
     return requestCollection(url, params, ReaderCollection.class, options);
   }
+
+  /** Deletes a <code>Reader</code> object. */
+  public static Reader delete(String reader) throws StripeException {
+    return delete(reader, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Deletes a <code>Reader</code> object. */
+  public static Reader delete(String reader, RequestOptions options) throws StripeException {
+    return delete(reader, (Map<String, Object>) null, options);
+  }
+
+  /** Deletes a <code>Reader</code> object. */
+  public static Reader delete(String reader, Map<String, Object> params) throws StripeException {
+    return delete(reader, params, (RequestOptions) null);
+  }
+
+  /** Deletes a <code>Reader</code> object. */
+  public static Reader delete(String reader, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/terminal/readers/%s", reader));
+    return request(ApiResource.RequestMethod.DELETE, url, params, Reader.class, options);
+  }
 }
