@@ -102,27 +102,26 @@ public class Location extends ApiResource implements HasId {
   }
 
   /** Deletes a <code>Location</code> object. */
-  public static Location delete(String location) throws StripeException {
-    return delete(location, (Map<String, Object>) null, (RequestOptions) null);
+  public Location delete() throws StripeException {
+    return delete((Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Deletes a <code>Location</code> object. */
-  public static Location delete(String location, RequestOptions options) throws StripeException {
-    return delete(location, (Map<String, Object>) null, options);
+  public Location delete(RequestOptions options) throws StripeException {
+    return delete((Map<String, Object>) null, options);
   }
 
   /** Deletes a <code>Location</code> object. */
-  public static Location delete(String location, Map<String, Object> params)
-      throws StripeException {
-    return delete(location, params, (RequestOptions) null);
+  public Location delete(Map<String, Object> params) throws StripeException {
+    return delete(params, (RequestOptions) null);
   }
 
   /** Deletes a <code>Location</code> object. */
-  public static Location delete(String location, Map<String, Object> params, RequestOptions options)
+  public Location delete(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/terminal/locations/%s", location));
+            "%s%s", Stripe.getApiBase(), String.format("/v1/terminal/locations/%s", this.getId()));
     return request(ApiResource.RequestMethod.DELETE, url, params, Location.class, options);
   }
 }
