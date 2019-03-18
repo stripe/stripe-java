@@ -121,26 +121,25 @@ public class Reader extends ApiResource implements HasId {
   }
 
   /** Deletes a <code>Reader</code> object. */
-  public static Reader delete(String reader) throws StripeException {
-    return delete(reader, (Map<String, Object>) null, (RequestOptions) null);
+  public Reader delete() throws StripeException {
+    return delete((Map<String, Object>) null, (RequestOptions) null);
   }
 
   /** Deletes a <code>Reader</code> object. */
-  public static Reader delete(String reader, RequestOptions options) throws StripeException {
-    return delete(reader, (Map<String, Object>) null, options);
+  public Reader delete(RequestOptions options) throws StripeException {
+    return delete((Map<String, Object>) null, options);
   }
 
   /** Deletes a <code>Reader</code> object. */
-  public static Reader delete(String reader, Map<String, Object> params) throws StripeException {
-    return delete(reader, params, (RequestOptions) null);
+  public Reader delete(Map<String, Object> params) throws StripeException {
+    return delete(params, (RequestOptions) null);
   }
 
   /** Deletes a <code>Reader</code> object. */
-  public static Reader delete(String reader, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  public Reader delete(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/terminal/readers/%s", reader));
+            "%s%s", Stripe.getApiBase(), String.format("/v1/terminal/readers/%s", this.getId()));
     return request(ApiResource.RequestMethod.DELETE, url, params, Reader.class, options);
   }
 }
