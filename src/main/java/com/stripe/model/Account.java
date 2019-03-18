@@ -17,18 +17,6 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Account extends ApiResource implements PaymentSource, MetadataStore<Account> {
-  @SerializedName("application_icon")
-  String applicationIcon;
-
-  @SerializedName("application_logo")
-  String applicationLogo;
-
-  @SerializedName("application_name")
-  String applicationName;
-
-  @SerializedName("application_url")
-  String applicationUrl;
-
   /** Optional information related to the business. */
   @SerializedName("business_profile")
   BusinessProfile businessProfile;
