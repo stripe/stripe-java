@@ -317,34 +317,6 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class DeliveryEstimate extends StripeObject {
-    /**
-     * If `type` is `"exact"`, `date` will be the expected delivery date in the format YYYY-MM-DD.
-     */
-    @SerializedName("date")
-    String date;
-
-    /**
-     * If `type` is `"range"`, `earliest` will be be the earliest delivery date in the format
-     * YYYY-MM-DD.
-     */
-    @SerializedName("earliest")
-    String earliest;
-
-    /**
-     * If `type` is `"range"`, `latest` will be the latest delivery date in the format YYYY-MM-DD.
-     */
-    @SerializedName("latest")
-    String latest;
-
-    /** The type of estimate. Must be either `"range"` or `"exact"`. */
-    @SerializedName("type")
-    String type;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
   public static class ShippingMethod extends StripeObject implements HasId {
     /**
      * A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1,
@@ -375,6 +347,34 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
     @Getter(onMethod = @__({@Override}))
     @SerializedName("id")
     String id;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DeliveryEstimate extends StripeObject {
+      /**
+       * If `type` is `"exact"`, `date` will be the expected delivery date in the format YYYY-MM-DD.
+       */
+      @SerializedName("date")
+      String date;
+
+      /**
+       * If `type` is `"range"`, `earliest` will be be the earliest delivery date in the format
+       * YYYY-MM-DD.
+       */
+      @SerializedName("earliest")
+      String earliest;
+
+      /**
+       * If `type` is `"range"`, `latest` will be the latest delivery date in the format YYYY-MM-DD.
+       */
+      @SerializedName("latest")
+      String latest;
+
+      /** The type of estimate. Must be either `"range"` or `"exact"`. */
+      @SerializedName("type")
+      String type;
+    }
   }
 
   @Getter

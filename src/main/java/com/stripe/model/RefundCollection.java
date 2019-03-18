@@ -9,17 +9,6 @@ import com.stripe.net.RequestOptions;
 import java.util.Map;
 
 public class RefundCollection extends StripeCollection<Refund> {
-  /** Create a refund. */
-  public Refund create(Map<String, Object> params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /** Create a refund. */
-  public Refund create(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Refund.class, options);
-  }
-
   /**
    * You can see a list of the refunds belonging to a specific charge. Note that the 10 most recent
    * refunds are always available by default on the charge object. If you need more than those 10,

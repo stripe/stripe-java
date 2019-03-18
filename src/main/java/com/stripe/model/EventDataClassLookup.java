@@ -2,13 +2,10 @@
 
 package com.stripe.model;
 
-import com.stripe.model.checkout.Session;
 import com.stripe.model.issuing.Authorization;
 import com.stripe.model.issuing.CardDetails;
 import com.stripe.model.issuing.Cardholder;
-import com.stripe.model.issuing.Settlement;
 import com.stripe.model.issuing.Transaction;
-import com.stripe.model.issuing.Verification;
 import com.stripe.model.radar.ValueList;
 import com.stripe.model.radar.ValueListItem;
 import com.stripe.model.reporting.ReportRun;
@@ -41,7 +38,6 @@ final class EventDataClassLookup {
     classLookup.put("bitcoin_transaction", BitcoinTransaction.class);
     classLookup.put("card", Card.class);
     classLookup.put("charge", Charge.class);
-    classLookup.put("checkout.session", Session.class);
     classLookup.put("connect_collection_transfer", ConnectCollectionTransfer.class);
     classLookup.put("country_spec", CountrySpec.class);
     classLookup.put("coupon", Coupon.class);
@@ -62,9 +58,7 @@ final class EventDataClassLookup {
     classLookup.put("issuing.card_details", CardDetails.class);
     classLookup.put("issuing.cardholder", Cardholder.class);
     classLookup.put("issuing.dispute", com.stripe.model.issuing.Dispute.class);
-    classLookup.put("issuing.settlement", Settlement.class);
     classLookup.put("issuing.transaction", Transaction.class);
-    classLookup.put("issuing.verification", Verification.class);
     classLookup.put("line_item", InvoiceLineItem.class);
     classLookup.put("login_link", LoginLink.class);
     classLookup.put("notification_event_data", EventData.class);
