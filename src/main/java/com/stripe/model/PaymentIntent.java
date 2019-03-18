@@ -145,6 +145,12 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Account> onBehalfOf;
 
+  /** ID of the payment method used in this PaymentIntent. */
+  @SerializedName("payment_method")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<PaymentMethod> paymentMethod;
+
   /** The list of payment method types (e.g. card) that this PaymentIntent is allowed to use. */
   @SerializedName("payment_method_types")
   List<String> paymentMethodTypes;
@@ -252,6 +258,25 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
   public void setOnBehalfOfObject(Account expandableObject) {
     this.onBehalfOf = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get id of expandable `paymentMethod` object. */
+  public String getPaymentMethod() {
+    return (this.paymentMethod != null) ? this.paymentMethod.getId() : null;
+  }
+
+  public void setPaymentMethod(String id) {
+    this.paymentMethod = ApiResource.setExpandableFieldId(id, this.paymentMethod);
+  }
+
+  /** Get expanded `paymentMethod`. */
+  public PaymentMethod getPaymentMethodObject() {
+    return (this.paymentMethod != null) ? this.paymentMethod.getExpanded() : null;
+  }
+
+  public void setPaymentMethodObject(PaymentMethod expandableObject) {
+    this.paymentMethod =
+        new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
   }
 
   /** Get id of expandable `review` object. */

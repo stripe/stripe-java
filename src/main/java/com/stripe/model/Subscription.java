@@ -48,6 +48,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @SerializedName("billing_thresholds")
   BillingThresholds billingThresholds;
 
+  /** A date in the future at which the subscription will automatically get canceled. */
+  @SerializedName("cancel_at")
+  Long cancelAt;
+
   /**
    * If the subscription has been canceled with the `at_period_end` flag set to `true`,
    * `cancel_at_period_end` on the subscription will be true. You can use this attribute to

@@ -194,6 +194,14 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
   @SerializedName("payment_intent")
   String paymentIntent;
 
+  /** ID of the payment method used in this charge. */
+  @SerializedName("payment_method")
+  String paymentMethod;
+
+  /** Transaction-specific details of the payment method used in the payment. */
+  @SerializedName("payment_method_details")
+  PaymentMethodDetails paymentMethodDetails;
+
   /** This is the email address that the receipt for this charge was sent to. */
   @SerializedName("receipt_email")
   String receiptEmail;
@@ -885,6 +893,647 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
     public void setRuleObject(Rule expandableObject) {
       this.rule = new ExpandableField<Rule>(expandableObject.getId(), expandableObject);
     }
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PaymentMethodDetails extends StripeObject {
+    @SerializedName("ach_credit_transfer")
+    AchCreditTransfer achCreditTransfer;
+
+    @SerializedName("ach_debit")
+    AchDebit achDebit;
+
+    @SerializedName("alipay")
+    Alipay alipay;
+
+    @SerializedName("bancontact")
+    Bancontact bancontact;
+
+    @SerializedName("bitcoin")
+    Bitcoin bitcoin;
+
+    @SerializedName("card")
+    Card card;
+
+    @SerializedName("card_present")
+    CardPresent cardPresent;
+
+    @SerializedName("eps")
+    Eps eps;
+
+    @SerializedName("giropay")
+    Giropay giropay;
+
+    @SerializedName("ideal")
+    Ideal ideal;
+
+    @SerializedName("multibanco")
+    Multibanco multibanco;
+
+    @SerializedName("p24")
+    P24 p24;
+
+    @SerializedName("sepa_debit")
+    SepaDebit sepaDebit;
+
+    @SerializedName("sofort")
+    Sofort sofort;
+
+    @SerializedName("stripe_account")
+    StripeAccount stripeAccount;
+
+    /**
+     * The type of transaction-specific details of the payment method used in the payment, one of
+     * `ach_credit_transfer`, `alipay`, `bancontact`, `card`, `eps`, `giropay`, `ideal`,
+     * `multibanco`, `p24`, `sepa_debit`, or `sofort`. An additional hash is included on
+     * `payment_method_details` with a name matching this value. It contains information specific to
+     * the payment method.
+     */
+    @SerializedName("type")
+    String type;
+
+    @SerializedName("wechat")
+    Wechat wechat;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AchCreditTransfer extends StripeObject {
+      /** Account number to transfer funds to. */
+      @SerializedName("account_number")
+      String accountNumber;
+
+      /** Name of the bank associated with the routing number. */
+      @SerializedName("bank_name")
+      String bankName;
+
+      /** Routing transit number for the bank account to transfer funds to. */
+      @SerializedName("routing_number")
+      String routingNumber;
+
+      /** SWIFT code of the bank associated with the routing number. */
+      @SerializedName("swift_code")
+      String swiftCode;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AchDebit extends StripeObject {
+      /** Type of entity that holds the account. This can be either `individual` or `company`. */
+      @SerializedName("account_holder_type")
+      String accountHolderType;
+
+      /** Name of the bank associated with the bank account. */
+      @SerializedName("bank_name")
+      String bankName;
+
+      /** Two-letter ISO code representing the country the bank account is located in. */
+      @SerializedName("country")
+      String country;
+
+      /**
+       * Uniquely identifies this particular bank account. You can use this attribute to check
+       * whether two bank accounts are the same.
+       */
+      @SerializedName("fingerprint")
+      String fingerprint;
+
+      /** Last four digits of the bank account number. */
+      @SerializedName("last4")
+      String last4;
+
+      /** Routing transit number of the bank account. */
+      @SerializedName("routing_number")
+      String routingNumber;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Alipay extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Bancontact extends StripeObject {
+      /** Bank code of bank associated with the bank account. */
+      @SerializedName("bank_code")
+      String bankCode;
+
+      /** Name of the bank associated with the bank account. */
+      @SerializedName("bank_name")
+      String bankName;
+
+      /** Bank Identifier Code of the bank associated with the bank account. */
+      @SerializedName("bic")
+      String bic;
+
+      /** Last four characters of the IBAN. */
+      @SerializedName("iban_last4")
+      String ibanLast4;
+
+      /**
+       * Preferred language of the Bancontact authorization page that the customer is redirected to.
+       * Can be one of `en`, `de`, `fr`, or `nl`.
+       */
+      @SerializedName("preferred_language")
+      String preferredLanguage;
+
+      /**
+       * Owner's verified full name. Values are verified or provided by Bancontact directly (if
+       * supported) at the time of authorization or settlement. They cannot be set or mutated.
+       */
+      @SerializedName("verified_name")
+      String verifiedName;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Bitcoin extends StripeObject {
+      @SerializedName("address")
+      String address;
+
+      @SerializedName("amount")
+      Long amount;
+
+      @SerializedName("amount_charged")
+      Long amountCharged;
+
+      @SerializedName("amount_received")
+      Long amountReceived;
+
+      @SerializedName("amount_returned")
+      Long amountReturned;
+
+      @SerializedName("refund_address")
+      String refundAddress;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Card extends StripeObject {
+      /**
+       * Card brand. Can be `amex`, `diners`, `discover`, `jcb`, `mastercard`, `unionpay`, `visa`,
+       * or `unknown`.
+       */
+      @SerializedName("brand")
+      String brand;
+
+      /** Check results by Card networks on Card address and CVC at time of payment. */
+      @SerializedName("checks")
+      Checks checks;
+
+      /**
+       * Two-letter ISO code representing the country of the card. You could use this attribute to
+       * get a sense of the international breakdown of cards you've collected.
+       */
+      @SerializedName("country")
+      String country;
+
+      /**
+       * Card description. (Only for internal use only and not typically available in standard API
+       * requests.)
+       */
+      @SerializedName("description")
+      String description;
+
+      /** Two-digit number representing the card's expiration month. */
+      @SerializedName("exp_month")
+      Long expMonth;
+
+      /** Four-digit number representing the card's expiration year. */
+      @SerializedName("exp_year")
+      Long expYear;
+
+      /**
+       * Uniquely identifies this particular card number. You can use this attribute to check
+       * whether two customers who've signed up with you are using the same card number, for
+       * example.
+       */
+      @SerializedName("fingerprint")
+      String fingerprint;
+
+      /** Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`. */
+      @SerializedName("funding")
+      String funding;
+
+      /**
+       * Issuer identification number of the card. (Only for internal use only and not typically
+       * available in standard API requests.)
+       */
+      @SerializedName("iin")
+      String iin;
+
+      /**
+       * Issuer bank name of the card. (Only for internal use only and not typically available in
+       * standard API requests.)
+       */
+      @SerializedName("issuer")
+      String issuer;
+
+      /** The last four digits of the card. */
+      @SerializedName("last4")
+      String last4;
+
+      /** Populated if this transaction used 3D Secure authentication. */
+      @SerializedName("three_d_secure")
+      ThreeDSecure threeDSecure;
+
+      /** If this Card is part of a card wallet, this contains the details of the card wallet. */
+      @SerializedName("wallet")
+      Wallet wallet;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Checks extends StripeObject {
+        /**
+         * If a address line1 was provided, results of the check, one of 'pass', 'failed',
+         * 'unavailable' or 'unchecked'.
+         */
+        @SerializedName("address_line1_check")
+        String addressLine1Check;
+
+        /**
+         * If a address postal code was provided, results of the check, one of 'pass', 'failed',
+         * 'unavailable' or 'unchecked'.
+         */
+        @SerializedName("address_postal_code_check")
+        String addressPostalCodeCheck;
+
+        /**
+         * If a CVC was provided, results of the check, one of 'pass', 'failed', 'unavailable' or
+         * 'unchecked'.
+         */
+        @SerializedName("cvc_check")
+        String cvcCheck;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class ThreeDSecure extends StripeObject {}
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Wallet extends StripeObject {
+        @SerializedName("amex_express_checkout")
+        AmexExpressCheckout amexExpressCheckout;
+
+        @SerializedName("apple_pay")
+        ApplePay applePay;
+
+        /** (For tokenized numbers only.) The last four digits of the device account number. */
+        @SerializedName("dynamic_last4")
+        String dynamicLast4;
+
+        @SerializedName("google_pay")
+        GooglePay googlePay;
+
+        @SerializedName("masterpass")
+        Masterpass masterpass;
+
+        @SerializedName("samsung_pay")
+        SamsungPay samsungPay;
+
+        /**
+         * The type of the card wallet, one of `amex_express_checkout`, `apple_pay`, `google_pay`,
+         * `masterpass`, `samsung_pay`, or `visa_checkout`. An additional hash is included on the
+         * Wallet subhash with a name matching this value. It contains additional information
+         * specific to the card wallet type.
+         */
+        @SerializedName("type")
+        String type;
+
+        @SerializedName("visa_checkout")
+        VisaCheckout visaCheckout;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class AmexExpressCheckout extends StripeObject {}
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class ApplePay extends StripeObject {}
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class GooglePay extends StripeObject {}
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Masterpass extends StripeObject {
+          /**
+           * Owner's verified billing address. Values are verified or provided by the wallet
+           * directly (if supported) at the time of authorization or settlement. They cannot be set
+           * or mutated.
+           */
+          @SerializedName("billing_address")
+          Address billingAddress;
+
+          /**
+           * Owner's verified email. Values are verified or provided by the wallet directly (if
+           * supported) at the time of authorization or settlement. They cannot be set or mutated.
+           */
+          @SerializedName("email")
+          String email;
+
+          /**
+           * Owner's verified full name. Values are verified or provided by the wallet directly (if
+           * supported) at the time of authorization or settlement. They cannot be set or mutated.
+           */
+          @SerializedName("name")
+          String name;
+
+          /**
+           * Owner's verified shipping address. Values are verified or provided by the wallet
+           * directly (if supported) at the time of authorization or settlement. They cannot be set
+           * or mutated.
+           */
+          @SerializedName("shipping_address")
+          Address shippingAddress;
+        }
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class SamsungPay extends StripeObject {}
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class VisaCheckout extends StripeObject {
+          /**
+           * Owner's verified billing address. Values are verified or provided by the wallet
+           * directly (if supported) at the time of authorization or settlement. They cannot be set
+           * or mutated.
+           */
+          @SerializedName("billing_address")
+          Address billingAddress;
+
+          /**
+           * Owner's verified email. Values are verified or provided by the wallet directly (if
+           * supported) at the time of authorization or settlement. They cannot be set or mutated.
+           */
+          @SerializedName("email")
+          String email;
+
+          /**
+           * Owner's verified full name. Values are verified or provided by the wallet directly (if
+           * supported) at the time of authorization or settlement. They cannot be set or mutated.
+           */
+          @SerializedName("name")
+          String name;
+
+          /**
+           * Owner's verified shipping address. Values are verified or provided by the wallet
+           * directly (if supported) at the time of authorization or settlement. They cannot be set
+           * or mutated.
+           */
+          @SerializedName("shipping_address")
+          Address shippingAddress;
+        }
+      }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class CardPresent extends StripeObject {
+      @SerializedName("brand")
+      String brand;
+
+      @SerializedName("country")
+      String country;
+
+      @SerializedName("emv_auth_data")
+      String emvAuthData;
+
+      @SerializedName("exp_month")
+      Long expMonth;
+
+      @SerializedName("exp_year")
+      Long expYear;
+
+      @SerializedName("fingerprint")
+      String fingerprint;
+
+      @SerializedName("funding")
+      String funding;
+
+      @SerializedName("generated_card")
+      String generatedCard;
+
+      @SerializedName("last4")
+      String last4;
+
+      @SerializedName("read_method")
+      String readMethod;
+
+      @SerializedName("receipt")
+      Receipt receipt;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Receipt extends StripeObject {
+        @SerializedName("application_cryptogram")
+        String applicationCryptogram;
+
+        @SerializedName("application_preferred_name")
+        String applicationPreferredName;
+
+        @SerializedName("authorization_code")
+        String authorizationCode;
+
+        @SerializedName("authorization_response_code")
+        String authorizationResponseCode;
+
+        @SerializedName("cardholder_verification_method")
+        String cardholderVerificationMethod;
+
+        @SerializedName("dedicated_file_name")
+        String dedicatedFileName;
+
+        @SerializedName("terminal_verification_results")
+        String terminalVerificationResults;
+
+        @SerializedName("transaction_status_information")
+        String transactionStatusInformation;
+      }
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Eps extends StripeObject {
+      /**
+       * Owner's verified full name. Values are verified or provided by EPS directly (if supported)
+       * at the time of authorization or settlement. They cannot be set or mutated.
+       */
+      @SerializedName("verified_name")
+      String verifiedName;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Giropay extends StripeObject {
+      /** Bank code of bank associated with the bank account. */
+      @SerializedName("bank_code")
+      String bankCode;
+
+      /** Name of the bank associated with the bank account. */
+      @SerializedName("bank_name")
+      String bankName;
+
+      /** Bank Identifier Code of the bank associated with the bank account. */
+      @SerializedName("bic")
+      String bic;
+
+      /**
+       * Owner's verified full name. Values are verified or provided by Giropay directly (if
+       * supported) at the time of authorization or settlement. They cannot be set or mutated.
+       */
+      @SerializedName("verified_name")
+      String verifiedName;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Ideal extends StripeObject {
+      /**
+       * The customer's bank. Can be one of `abn_amro`, `asn_bank`, `bunq`, `handelsbanken`, `ing`,
+       * `knab`, `moneyou`, `rabobank`, `regiobank`, `sns_bank`, `triodos_bank`, or `van_lanschot`.
+       */
+      @SerializedName("bank")
+      String bank;
+
+      /** The Bank Identifier Code of the customer's bank. */
+      @SerializedName("bic")
+      String bic;
+
+      /** Last four characters of the IBAN. */
+      @SerializedName("iban_last4")
+      String ibanLast4;
+
+      /**
+       * Owner's verified full name. Values are verified or provided by iDEAL directly (if
+       * supported) at the time of authorization or settlement. They cannot be set or mutated.
+       */
+      @SerializedName("verified_name")
+      String verifiedName;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Multibanco extends StripeObject {
+      /** Entity number associated with this Multibanco payment. */
+      @SerializedName("entity")
+      String entity;
+
+      /** Reference number associated with this Multibanco payment. */
+      @SerializedName("reference")
+      String reference;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class P24 extends StripeObject {
+      /** Unique reference for this Przelewy24 payment. */
+      @SerializedName("reference")
+      String reference;
+
+      /**
+       * Owner's verified full name. Values are verified or provided by Przelewy24 directly (if
+       * supported) at the time of authorization or settlement. They cannot be set or mutated.
+       */
+      @SerializedName("verified_name")
+      String verifiedName;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SepaDebit extends StripeObject {
+      /** Bank code of bank associated with the bank account. */
+      @SerializedName("bank_code")
+      String bankCode;
+
+      /** Branch code of bank associated with the bank account. */
+      @SerializedName("branch_code")
+      String branchCode;
+
+      /** Two-letter ISO code representing the country the bank account is located in. */
+      @SerializedName("country")
+      String country;
+
+      /**
+       * Uniquely identifies this particular bank account. You can use this attribute to check
+       * whether two bank accounts are the same.
+       */
+      @SerializedName("fingerprint")
+      String fingerprint;
+
+      /** Last four characters of the IBAN. */
+      @SerializedName("last4")
+      String last4;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Sofort extends StripeObject {
+      /** Bank code of bank associated with the bank account. */
+      @SerializedName("bank_code")
+      String bankCode;
+
+      /** Name of the bank associated with the bank account. */
+      @SerializedName("bank_name")
+      String bankName;
+
+      /** Bank Identifier Code of the bank associated with the bank account. */
+      @SerializedName("bic")
+      String bic;
+
+      /** Two-letter ISO code representing the country the bank account is located in. */
+      @SerializedName("country")
+      String country;
+
+      /** Last four characters of the IBAN. */
+      @SerializedName("iban_last4")
+      String ibanLast4;
+
+      /**
+       * Owner's verified full name. Values are verified or provided by SOFORT directly (if
+       * supported) at the time of authorization or settlement. They cannot be set or mutated.
+       */
+      @SerializedName("verified_name")
+      String verifiedName;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class StripeAccount extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Wechat extends StripeObject {}
   }
 
   @Getter
