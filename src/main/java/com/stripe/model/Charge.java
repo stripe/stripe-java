@@ -51,6 +51,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, HasId 
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Order> order;
   Outcome outcome;
   Boolean paid;
+  String paymentIntent;
   String paymentMethod;
   PaymentMethodDetails paymentMethodDetails;
   String receiptEmail;
