@@ -37,6 +37,7 @@ public class PaymentIntent extends ApiResource implements MetadataStore<PaymentI
   @Getter(onMethod = @__({@Override})) Map<String, String> metadata;
   NextAction nextAction;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Account> onBehalfOf;
+  @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<PaymentMethod> paymentMethod;
   List<String> paymentMethodTypes;
   String receiptEmail;
   @Getter(AccessLevel.NONE) @Setter(AccessLevel.NONE) ExpandableField<Review> review;
@@ -126,6 +127,24 @@ public class PaymentIntent extends ApiResource implements MetadataStore<PaymentI
 
   public void setOnBehalfOfObject(Account c) {
     this.onBehalfOf = new ExpandableField<>(c.getId(), c);
+  }
+  // </editor-fold>
+
+  // <editor-fold desc="payment_method">
+  public String getPaymentMethod() {
+    return (this.paymentMethod != null) ? this.paymentMethod.getId() : null;
+  }
+
+  public void setPaymentMethod(String paymentMethodId) {
+    this.paymentMethod = setExpandableFieldId(paymentMethodId, this.paymentMethod);
+  }
+
+  public PaymentMethod getPaymentMethodObject() {
+    return (this.paymentMethod != null) ? this.paymentMethod.getExpanded() : null;
+  }
+
+  public void setPaymentMethodObject(PaymentMethod c) {
+    this.paymentMethod = new ExpandableField<>(c.getId(), c);
   }
   // </editor-fold>
 

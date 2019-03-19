@@ -46,6 +46,7 @@ final class EventDataClassLookup {
     classLookup.put("order_item", OrderItem.class);
     classLookup.put("order_return", OrderReturn.class);
     classLookup.put("payment_intent", PaymentIntent.class);
+    classLookup.put("payment_method", PaymentMethod.class);
     classLookup.put("payout", Payout.class);
     classLookup.put("plan", Plan.class);
     classLookup.put("product", Product.class);
