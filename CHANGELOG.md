@@ -1,5 +1,8 @@
 # Changelog
 
+## 7.29.0 - 2019-03-18
+* [#695](https://github.com/stripe/stripe-java/pull/695) Add support for `payment_intent` on `Charge`.
+
 ## 7.28.0 - 2019-03-18
 * [#688](https://github.com/stripe/stripe-python/pull/688) Add support for the `PaymentMethod` resource and APIs
 * [#691](https://github.com/stripe/stripe-python/pull/691) Add support for deleting a Terminal `Location` and `Reader`
