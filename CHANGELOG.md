@@ -1,5 +1,9 @@
 # Changelog
 
+## 7.28.0 - 2019-03-18
+* [#688](https://github.com/stripe/stripe-python/pull/688) Add support for the `PaymentMethod` resource and APIs
+* [#691](https://github.com/stripe/stripe-python/pull/691) Add support for deleting a Terminal `Location` and `Reader`
+
 ## 7.27.0 - 2019-03-13
 * [#689](https://github.com/stripe/stripe-java/pull/689) Add support for `columns` on `ReportRun` and `default_columns` on `ReportType`.
 
