@@ -4,13 +4,11 @@
 and fields have been renamed for consistency. Additionally, `stripe-java` version 8 is now
 "pinned" to the latest version of the Stripe API.
 
-## Classes, methods, and fields renamed
+## Classes, methods, and fields renamed and removed
 
-We enumerate backward-breaking changes, that are not previously marked with `@Deprecated` according
- to normal conventions, with their motivations/resolutions.
-* [Class changes](https://git.corp.stripe.com/stripe-internal/sdk-autogen-java/blob/master/generated/diff_change_log_class_names.md)
-* [Method changes](https://git.corp.stripe.com/stripe-internal/sdk-autogen-java/blob/master/generated/diff_change_log_methods.md)
-* [Field changes](https://git.corp.stripe.com/stripe-internal/sdk-autogen-java/blob/master/generated/diff_change_log_fields.md)
+We enumerate backward-breaking changes, that are not previously marked with `@Deprecated` with 
+their motivations and resolutions.
+* [Breaking changes](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v8----breaking-changes)
 
 ## API version pinning
 
@@ -55,4 +53,4 @@ the [webhooks API](https://stripe.com/docs/api/webhook_endpoints/create) to crea
 is tied to API version 2019-03-14.
 
 For more detailed discussion of the upgrade process for `stripe-java` in particular, see
-[v8_migration_pinned_version.md][./v8_migration_pinned_version.md].
+[pinned version upgrade guide](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v8----version-upgrade)
