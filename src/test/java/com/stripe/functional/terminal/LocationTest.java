@@ -1,6 +1,7 @@
 package com.stripe.functional.terminal;
 
 import static org.junit.Assert.assertNotNull;
+import static org.junit.Assert.assertTrue;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
@@ -78,6 +79,20 @@ public class LocationTest extends BaseStripeTest {
         ApiResource.RequestMethod.GET,
         String.format("/v1/terminal/locations"),
         params
+    );
+  }
+
+  @Test
+  public void testDelete() throws StripeException {
+    final Location location = Location.retrieve(LOCATION_ID);
+
+    final Location deletedLocation = location.delete();
+
+    assertNotNull(deletedLocation);
+    assertTrue(deletedLocation.getDeleted());
+    verifyRequest(
+        ApiResource.RequestMethod.DELETE,
+        String.format("/v1/terminal/locations/%s", location.getId())
     );
   }
 }

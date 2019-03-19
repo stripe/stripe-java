@@ -17,6 +17,8 @@ import lombok.Setter;
 public class Reader extends ApiResource implements HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
+  Boolean deleted;
+  String deviceSwVersion;
   String deviceType;
   String ipAddress;
   String label;
@@ -39,6 +41,23 @@ public class Reader extends ApiResource implements HasId {
           throws StripeException {
     return request(RequestMethod.POST, classUrl(Reader.class), params,
             Reader.class, options);
+  }
+  // </editor-fold>
+
+  // <editor-fold desc="delete">
+  /**
+   * Delete a reader.
+   */
+  public Reader delete() throws StripeException {
+    return delete((RequestOptions) null);
+  }
+
+  /**
+   * Delete a reader.
+   */
+  public Reader delete(RequestOptions options) throws StripeException {
+    return request(RequestMethod.DELETE, instanceUrl(Reader.class, this.id), null,
+        Reader.class, options);
   }
   // </editor-fold>
 

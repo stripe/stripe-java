@@ -19,6 +19,7 @@ public class Location extends ApiResource implements HasId {
   @Getter(onMethod = @__({@Override})) String id;
   String object;
   Address address;
+  Boolean deleted;
   String displayName;
 
   // <editor-fold desc="create">
@@ -36,6 +37,23 @@ public class Location extends ApiResource implements HasId {
           throws StripeException {
     return request(RequestMethod.POST, classUrl(Location.class), params,
             Location.class, options);
+  }
+  // </editor-fold>
+
+  // <editor-fold desc="delete">
+  /**
+   * Delete a location.
+   */
+  public Location delete() throws StripeException {
+    return delete((RequestOptions) null);
+  }
+
+  /**
+   * Delete a location.
+   */
+  public Location delete(RequestOptions options) throws StripeException {
+    return request(RequestMethod.DELETE, instanceUrl(Location.class, this.id), null,
+        Location.class, options);
   }
   // </editor-fold>
 
