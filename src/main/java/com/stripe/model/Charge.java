@@ -73,6 +73,9 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<BalanceTransaction> balanceTransaction;
 
+  @SerializedName("billing_details")
+  PaymentMethod.BillingDetails billingDetails;
+
   /**
    * If the charge was created without capturing, this Boolean represents whether it is still
    * uncaptured or has since been captured.
