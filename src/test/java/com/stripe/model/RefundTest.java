@@ -43,11 +43,11 @@ public class RefundTest extends BaseStripeTest {
     assertNotNull(failureBalanceTransaction);
     assertNotNull(failureBalanceTransaction.getId());
     assertEquals(refund.getFailureBalanceTransaction(), failureBalanceTransaction.getId());
-    final Reversal sourceTransferReversal = refund.getSourceTransferReversalObject();
+    final TransferReversal sourceTransferReversal = refund.getSourceTransferReversalObject();
     assertNotNull(sourceTransferReversal);
     assertNotNull(sourceTransferReversal.getId());
     assertEquals(refund.getSourceTransferReversal(), sourceTransferReversal.getId());
-    final Reversal transferReversal = refund.getTransferReversalObject();
+    final TransferReversal transferReversal = refund.getTransferReversalObject();
     assertNotNull(transferReversal);
     assertNotNull(transferReversal.getId());
     assertEquals(refund.getTransferReversal(), transferReversal.getId());

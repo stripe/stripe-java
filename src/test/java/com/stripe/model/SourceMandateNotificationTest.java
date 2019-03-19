@@ -5,14 +5,10 @@ import static org.junit.Assert.assertNotNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.net.ApiResource;
-
-import java.util.Map;
-
 import org.junit.Test;
 
 public class SourceMandateNotificationTest extends BaseStripeTest {
   private void verifyResource(SourceMandateNotification mandateNotification) {
-    final Map<String, String> typeData = mandateNotification.getTypeData();
 
     assertNotNull(mandateNotification);
     assertEquals("srcmn_123", mandateNotification.getId());
@@ -26,9 +22,9 @@ public class SourceMandateNotificationTest extends BaseStripeTest {
     assertEquals("src_123", mandateNotification.getSource().getId());
     assertEquals("sepa_debit", mandateNotification.getSource().getType());
 
-    assertEquals("TEST111111111111111", typeData.get("creditor_identifier"));
-    assertEquals("OAAAAAAAAAAAAAAO", typeData.get("mandate_reference"));
-    assertEquals("3000", typeData.get("last4"));
+    final SourceMandateNotification.SepaDebitData typeData = mandateNotification.getSepaDebit();
+    assertEquals("OAAAAAAAAAAAAAAO", typeData.getMandateReference());
+    assertEquals("3000", typeData.getLast4());
   }
 
   @Test

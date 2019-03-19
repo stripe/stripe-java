@@ -69,7 +69,7 @@ public class BalanceTransactionTest extends BaseStripeTest {
         assertNotNull(btSource);
         assertEquals("transfer", btSource.getObject());
       } else if (btId.equals("txn_106")) {
-        Reversal btSource = (Reversal) bt.getSourceObject();
+        TransferReversal btSource = (TransferReversal) bt.getSourceObject();
         assertNotNull(btSource);
         assertEquals("transfer_reversal", btSource.getObject());
       } else if (btId.equals("txn_107")) {
@@ -87,13 +87,10 @@ public class BalanceTransactionTest extends BaseStripeTest {
         assertNotNull(btSource);
         assertEquals("issuing.transaction", btSource.getObject());
       } else if (btId.equals("txn_110")) {
-        ApplicationFee btSource = (ApplicationFee) bt.getSourceObject();
+        BalanceTransactionSourceTypeAdapterFactory.UnknownSubType btSource =
+            (BalanceTransactionSourceTypeAdapterFactory.UnknownSubType) bt.getSourceObject();
         assertNotNull(btSource);
-        assertEquals("application_fee", btSource.getObject());
-      } else if (btId.equals("txn_110")) {
-        ApplicationFee btSource = (ApplicationFee) bt.getSourceObject();
-        assertNotNull(btSource);
-        assertEquals("application_fee", btSource.getObject());
+        assertEquals("foo_unknown_type", btSource.getObject());
       }
     }
   }

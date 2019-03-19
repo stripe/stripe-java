@@ -38,7 +38,7 @@ public class SubscriptionTest extends BaseStripeTest {
     assertNotNull(customer.getId());
     assertEquals(subscription.getCustomer(), customer.getId());
 
-    final ExternalAccount defaultSource = subscription.getDefaultSourceObject();
+    final PaymentSource defaultSource = subscription.getDefaultSourceObject();
     assertNotNull(defaultSource);
     assertNotNull(defaultSource.getId());
     assertEquals(subscription.getDefaultSource(), defaultSource.getId());
