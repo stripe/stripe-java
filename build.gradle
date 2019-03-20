@@ -29,6 +29,13 @@ version = VERSION_NAME
 tasks.withType(JavaCompile) {
     options.compilerArgs << "-Xlint:all" << "-Xlint:-options" << "-Xlint:-processing"
     options.encoding = 'UTF-8'
+
+    options.errorprone {
+      // This check is broken in Java 12.  See https://github.com/google/error-prone/issues/1257
+      if ((JavaVersion.current().majorVersion as Integer) > 11) {
+        check('Finally', net.ltgt.gradle.errorprone.CheckSeverity.OFF)
+      }
+    }
 }
 
 compileJava {
