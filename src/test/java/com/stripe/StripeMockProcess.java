@@ -50,8 +50,7 @@ public class StripeMockProcess {
             "-spec",
             getPathSpec(),
             "-fixtures",
-            getPathFixture(),
-            "-strict-version-check"
+            getPathFixture()
         );
 
     try {
