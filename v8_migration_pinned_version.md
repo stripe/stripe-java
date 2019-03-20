@@ -122,7 +122,25 @@ Alternatively, you can [now create webhook endpoints](https://site-admin.stripe.
  with a specific API version corresponding to the pinned version of `stripe-java`. This 
  gives you control of safe rollback window beyond just the default 72 hours, where you 
  have two concurrent webhook endpoints receiving old and new versions of events respectively.
+ 
+#### Safe webhook event deserialization when event API version matches the library's pinned API version
+Given that webhook events have API version `Event#apiVersion` matching `Stripe.API_VERSION`, you 
+can now safely use `EventDataObjectDeserializer` to get your data object.
 
+```java
+ Event event = Webhook.constructEvent(payload, signature, secret);
+ if (event.getType().equals("charge.succeeded")) {
+    // Current, now deprecated
+    Charge charge = (Charge) event.getData().getObject();
+    // New returning value only when API versions matche and null otherwise.
+    Charge charge = (Charge) event.getDataObjectDeserializer().getObject();
+ }
+```
+
+However, when API versions do not match because you are getting events from old webhook endpoints,
+ or simply reading old events from `Event#retrieve`, there are compatibility helpers, motivated and 
+ explained in the following sections.
+ 
 #### Motivation for handling event compatibility
  
 The official guide also recommends the need for compatibility in handling events of both your 
