@@ -1,7 +1,7 @@
 package com.stripe.functional;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.Stripe;
@@ -18,7 +18,7 @@ import lombok.Cleanup;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 
 public class ErrorTest extends BaseStripeTest {

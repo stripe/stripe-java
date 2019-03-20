@@ -1,6 +1,6 @@
 package com.stripe.net;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.AuthenticationException;
@@ -17,7 +17,7 @@ import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class OAuthTest extends BaseStripeTest {
   private static Map<String, String> splitQuery(String query) throws UnsupportedEncodingException {

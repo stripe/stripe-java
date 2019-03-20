@@ -1,7 +1,8 @@
 package com.stripe.net;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.google.gson.JsonSyntaxException;
 
@@ -14,16 +15,14 @@ import java.security.NoSuchAlgorithmException;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class WebhookTest extends BaseStripeTest {
   public static String secret = null;
   public static String payload = null;
 
-  @Before
+  @BeforeEach
   public void setUpFixtures() {
     secret = "whsec_test_secret";
     payload = "{\n  \"id\": \"evt_test_webhook\",\n  \"object\": \"event\"\n}";
@@ -61,9 +60,6 @@ public class WebhookTest extends BaseStripeTest {
     return header;
   }
 
-  @Rule
-  public ExpectedException thrown = ExpectedException.none();
-
   @Test
   public void testValidJsonAndHeader() throws SignatureVerificationException,
       NoSuchAlgorithmException, InvalidKeyException {
@@ -74,7 +70,7 @@ public class WebhookTest extends BaseStripeTest {
     assertEquals("evt_test_webhook", event.getId());
   }
 
-  @Test(expected = JsonSyntaxException.class)
+  @Test
   public void testInvalidJson() throws SignatureVerificationException,
       NoSuchAlgorithmException, InvalidKeyException {
     final String payload = "this is not valid JSON";
@@ -82,24 +78,28 @@ public class WebhookTest extends BaseStripeTest {
     options.put("payload", payload);
     final String sigHeader = generateSigHeader(options);
 
-    Webhook.constructEvent(payload, sigHeader, secret);
+    assertThrows(JsonSyntaxException.class, () -> {
+      Webhook.constructEvent(payload, sigHeader, secret);
+    });
   }
 
-  @Test(expected = SignatureVerificationException.class)
+  @Test
   public void testValidJsonAndInvalidHeader() throws SignatureVerificationException {
     final String sigHeader = "bad_header";
 
-    Webhook.constructEvent(payload, sigHeader, secret);
+    assertThrows(SignatureVerificationException.class, () -> {
+      Webhook.constructEvent(payload, sigHeader, secret);
+    });
   }
 
   @Test
   public void testMalformedHeader() throws SignatureVerificationException {
     final String sigHeader = "i'm not even a real signature header";
 
-    thrown.expect(SignatureVerificationException.class);
-    thrown.expectMessage("Unable to extract timestamp and signatures from header");
-
-    Webhook.Signature.verifyHeader(payload, sigHeader, secret, 0);
+    Throwable exception = assertThrows(SignatureVerificationException.class, () -> {
+      Webhook.Signature.verifyHeader(payload, sigHeader, secret, 0);
+    });
+    assertEquals("Unable to extract timestamp and signatures from header", exception.getMessage());
   }
 
   @Test
@@ -109,10 +109,10 @@ public class WebhookTest extends BaseStripeTest {
     options.put("scheme", "v0");
     final String sigHeader = generateSigHeader(options);
 
-    thrown.expect(SignatureVerificationException.class);
-    thrown.expectMessage("No signatures found with expected scheme");
-
-    Webhook.Signature.verifyHeader(payload, sigHeader, secret, 0);
+    Throwable exception = assertThrows(SignatureVerificationException.class, () -> {
+      Webhook.Signature.verifyHeader(payload, sigHeader, secret, 0);
+    });
+    assertEquals("No signatures found with expected scheme", exception.getMessage());
   }
 
   @Test
@@ -122,10 +122,11 @@ public class WebhookTest extends BaseStripeTest {
     options.put("signature", "bad_signature");
     final String sigHeader = generateSigHeader(options);
 
-    thrown.expect(SignatureVerificationException.class);
-    thrown.expectMessage("No signatures found matching the expected signature for payload");
-
-    Webhook.Signature.verifyHeader(payload, sigHeader, secret, 0);
+    Throwable exception = assertThrows(SignatureVerificationException.class, () -> {
+      Webhook.Signature.verifyHeader(payload, sigHeader, secret, 0);
+    });
+    assertEquals("No signatures found matching the expected signature for payload",
+        exception.getMessage());
   }
 
   @Test
@@ -135,10 +136,10 @@ public class WebhookTest extends BaseStripeTest {
     options.put("timestamp", Webhook.Util.getTimeNow() - 15);
     final String sigHeader = generateSigHeader(options);
 
-    thrown.expect(SignatureVerificationException.class);
-    thrown.expectMessage("Timestamp outside the tolerance zone");
-
-    Webhook.Signature.verifyHeader(payload, sigHeader, secret, 10);
+    Throwable exception = assertThrows(SignatureVerificationException.class, () -> {
+      Webhook.Signature.verifyHeader(payload, sigHeader, secret, 10);
+    });
+    assertEquals("Timestamp outside the tolerance zone", exception.getMessage());
   }
 
   @Test

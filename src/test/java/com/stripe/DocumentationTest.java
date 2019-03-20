@@ -1,8 +1,8 @@
 package com.stripe;
 
-import static org.junit.Assert.assertSame;
-import static org.junit.Assert.assertTrue;
-import static org.junit.Assert.fail;
+import static org.junit.jupiter.api.Assertions.assertSame;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import com.google.common.base.Joiner;
 
@@ -18,7 +18,7 @@ import java.util.Calendar;
 import java.util.List;
 import java.util.regex.Pattern;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class DocumentationTest {
 
@@ -35,13 +35,13 @@ public class DocumentationTest {
     final File changelogFile = new File("CHANGELOG.md").getAbsoluteFile();
 
     assertTrue(
+        changelogFile.exists(),
         String.format("Expected CHANGELOG file to exist, but it doesn't. (path is %s).",
-            changelogFile.getAbsolutePath()),
-        changelogFile.exists());
+            changelogFile.getAbsolutePath()));
     assertTrue(
+        changelogFile.isFile(),
         String.format("Expected CHANGELOG to be a file, but it isn't. (path is %s).",
-            changelogFile.getAbsolutePath()),
-        changelogFile.isFile());
+            changelogFile.getAbsolutePath()));
 
     try (final BufferedReader reader = new BufferedReader(new InputStreamReader(
         new FileInputStream(changelogFile), StandardCharsets.UTF_8))) {
@@ -73,13 +73,13 @@ public class DocumentationTest {
     final File readmeFile = new File("README.md").getAbsoluteFile();
 
     assertTrue(
+        readmeFile.exists(),
         String.format("Expected README.md file to exist, but it doesn't. (path is %s).",
-            readmeFile.getAbsolutePath()),
-        readmeFile.exists());
+            readmeFile.getAbsolutePath()));
     assertTrue(
+        readmeFile.isFile(),
         String.format("Expected README.md to be a file, but it doesn't. (path is %s).",
-            readmeFile.getAbsolutePath()),
-        readmeFile.isFile());
+            readmeFile.getAbsolutePath()));
 
     try (final BufferedReader reader = new BufferedReader(new InputStreamReader(
         new FileInputStream(readmeFile), StandardCharsets.UTF_8))) {
@@ -97,7 +97,7 @@ public class DocumentationTest {
       final String message = String.format(
           "Expected %d mentions of the stripe-java version in the Readme, but found %d:%n%s",
           expectedMentionsOfVersion, mentioningLines.size(), Joiner.on(", ").join(mentioningLines));
-      assertSame(message, expectedMentionsOfVersion, mentioningLines.size());
+      assertSame(expectedMentionsOfVersion, mentioningLines.size(), message);
     }
   }
 
@@ -107,13 +107,9 @@ public class DocumentationTest {
     final File gradleFile = new File("gradle.properties").getAbsoluteFile();
 
     assertTrue(
+        gradleFile.exists(),
         String.format("Expected gradle.properties file to exist, but it doesn't. (path is %s).",
-            gradleFile.getAbsolutePath()),
-        gradleFile.exists());
-    assertTrue(
-        String.format("Expected gradle.properties to be a file, but it doesn't. (path is %s).",
-            gradleFile.getAbsolutePath()),
-            gradleFile.isFile());
+            gradleFile.getAbsolutePath()));
 
     try (final BufferedReader reader = new BufferedReader(new InputStreamReader(
         new FileInputStream(gradleFile), StandardCharsets.UTF_8))) {

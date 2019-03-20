@@ -1,32 +1,30 @@
 package com.stripe.model;
 
-import static junit.framework.TestCase.assertTrue;
-import static junit.framework.TestCase.fail;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNotEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNotSame;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotSame;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.fail;
 
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
+
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.EventDataObjectDeserializationException;
 import com.stripe.net.ApiResource;
+
 import java.io.IOException;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+
+import org.junit.jupiter.api.Test;
+
 import org.mockito.Mockito;
 
 public class EventDataObjectDeserializerTest extends BaseStripeTest {
-
-  @Rule
-  public ExpectedException thrown = ExpectedException.none();
-
   private static final String OLD_EVENT_VERSION = "2013-08-15";
   private static final String CURRENT_EVENT_VERSION = "2017-08-15";
   private static final String NO_MATCH_VERSION = "2000-08-15";
@@ -108,7 +106,7 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
   public void testFailureOnApiVersionMatch() throws Exception {
     final String data = getOldEventStringFixture();
     final Event event = ApiResource.GSON.fromJson(data, Event.class);
-    
+
     assertEquals(OLD_EVENT_VERSION, event.getApiVersion());
     EventDataObjectDeserializer deserializer = stubIntegrationApiVersion(
         event.getDataObjectDeserializer(), OLD_EVENT_VERSION);
