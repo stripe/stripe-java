@@ -31,14 +31,11 @@ import java.io.OutputStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
 import java.net.Authenticator;
 import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
 import java.net.PasswordAuthentication;
 import java.net.URL;
 import java.net.URLStreamHandler;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -47,8 +44,6 @@ import java.util.ListIterator;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentLinkedQueue;
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLSocketFactory;
 
 import lombok.Cleanup;
 
@@ -73,8 +68,6 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
    */
   private static final String CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME
       = "com.stripe.net.customURLStreamHandler";
-
-  private static final SSLSocketFactory socketFactory = new StripeSslSocketFactory();
 
   @Override
   public <T> T request(
@@ -222,9 +215,6 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     conn.setUseCaches(false);
     for (Map.Entry<String, String> header : getHeaders(options).entrySet()) {
       conn.setRequestProperty(header.getKey(), header.getValue());
-    }
-    if (conn instanceof HttpsURLConnection) {
-      ((HttpsURLConnection) conn).setSSLSocketFactory(socketFactory);
     }
 
     return conn;
@@ -590,20 +580,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
           null, null, null, 0, e);
     }
 
-    try {
-      // HTTPSURLConnection verifies SSL cert by default
-      return makeUrlConnectionRequest(method, url, query, options);
-    } catch (ClassCastException ce) {
-      // appengine doesn't have HTTPSConnection, use URLFetch API
-      String appEngineEnv = System.getProperty(
-          "com.google.appengine.runtime.environment", null);
-      if (appEngineEnv != null) {
-        return makeAppEngineRequest(method, url, query, options);
-      } else {
-        // non-appengine ClassCastException
-        throw ce;
-      }
-    }
+    return makeUrlConnectionRequest(method, url, query, options);
   }
 
   private static StripeResponse getMultipartStripeResponse(
@@ -822,109 +799,5 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     }
 
     throw exception;
-  }
-
-  /*
-   * This is slower than usual because of reflection but avoids having to
-   * maintain AppEngine-specific JAR
-   */
-  private static StripeResponse makeAppEngineRequest(ApiResource.RequestMethod method,
-                             String url, String query, RequestOptions options) throws ApiException {
-    String unknownErrorMessage = "Sorry, an unknown error occurred while trying to use the "
-        + "Google App Engine runtime. Please contact support@stripe.com for assistance.";
-    try {
-      if (method == ApiResource.RequestMethod.GET || method == ApiResource.RequestMethod.DELETE) {
-        url = String.format("%s?%s", url, query);
-      }
-      URL fetchUrl = new URL(url);
-
-      Class<?> requestMethodClass = Class
-          .forName("com.google.appengine.api.urlfetch.HTTPMethod");
-      Object httpMethod = requestMethodClass.getDeclaredField(
-          method.name()).get(null);
-
-      Class<?> fetchOptionsBuilderClass = Class
-          .forName("com.google.appengine.api.urlfetch.FetchOptions$Builder");
-      Object fetchOptions;
-      try {
-        fetchOptions = fetchOptionsBuilderClass.getDeclaredMethod(
-            "validateCertificate").invoke(null);
-      } catch (NoSuchMethodException e) {
-        System.err
-            .println("Warning: this App Engine SDK version does not allow verification of SSL "
-                + "certificates; this exposes you to a MITM attack. Please upgrade your App Engine "
-                + "SDK to >=1.5.0. If you have questions, contact support@stripe.com.");
-        fetchOptions = fetchOptionsBuilderClass.getDeclaredMethod(
-            "withDefaults").invoke(null);
-      }
-
-      Class<?> fetchOptionsClass = Class
-          .forName("com.google.appengine.api.urlfetch.FetchOptions");
-
-      // GAE requests can time out after 60 seconds, so make sure we leave
-      // some time for the application to handle a slow Stripe
-      fetchOptionsClass.getDeclaredMethod("setDeadline",
-          java.lang.Double.class)
-          .invoke(fetchOptions, Double.valueOf(55));
-
-      Class<?> requestClass = Class
-          .forName("com.google.appengine.api.urlfetch.HTTPRequest");
-
-      Object request = requestClass.getDeclaredConstructor(URL.class,
-          requestMethodClass, fetchOptionsClass).newInstance(
-          fetchUrl, httpMethod, fetchOptions);
-
-      if (method == ApiResource.RequestMethod.POST) {
-        requestClass.getDeclaredMethod("setPayload", byte[].class)
-            .invoke(request, query.getBytes(StandardCharsets.UTF_8));
-      }
-
-      for (Map.Entry<String, String> header : getHeaders(options)
-          .entrySet()) {
-        Class<?> httpHeaderClass = Class
-            .forName("com.google.appengine.api.urlfetch.HTTPHeader");
-        Object reqHeader = httpHeaderClass.getDeclaredConstructor(
-            String.class, String.class).newInstance(
-            header.getKey(), header.getValue());
-        requestClass.getDeclaredMethod("setHeader", httpHeaderClass)
-            .invoke(request, reqHeader);
-      }
-
-      Class<?> urlFetchFactoryClass = Class
-          .forName("com.google.appengine.api.urlfetch.URLFetchServiceFactory");
-      Object urlFetchService = urlFetchFactoryClass.getDeclaredMethod(
-          "getURLFetchService").invoke(null);
-
-      Method fetchMethod = urlFetchService.getClass().getDeclaredMethod(
-          "fetch", requestClass);
-      fetchMethod.setAccessible(true);
-      Object response = fetchMethod.invoke(urlFetchService, request);
-
-      int responseCode = (Integer) response.getClass()
-          .getDeclaredMethod("getResponseCode").invoke(response);
-      String body = new String((byte[]) response.getClass()
-          .getDeclaredMethod("getContent").invoke(response), ApiResource.CHARSET);
-      return new StripeResponse(responseCode, body);
-    } catch (InvocationTargetException e) {
-      throw new ApiException(unknownErrorMessage, null, null, 0, e);
-    } catch (MalformedURLException e) {
-      throw new ApiException(unknownErrorMessage, null, null, 0, e);
-    } catch (NoSuchFieldException e) {
-      throw new ApiException(unknownErrorMessage, null, null, 0, e);
-    } catch (SecurityException e) {
-      throw new ApiException(unknownErrorMessage, null, null, 0, e);
-    } catch (NoSuchMethodException e) {
-      throw new ApiException(unknownErrorMessage, null, null, 0, e);
-    } catch (ClassNotFoundException e) {
-      throw new ApiException(unknownErrorMessage, null, null, 0, e);
-    } catch (IllegalArgumentException e) {
-      throw new ApiException(unknownErrorMessage, null, null, 0, e);
-    } catch (IllegalAccessException e) {
-      throw new ApiException(unknownErrorMessage, null, null, 0, e);
-    } catch (InstantiationException e) {
-      throw new ApiException(unknownErrorMessage, null, null, 0, e);
-    } catch (UnsupportedEncodingException e) {
-      throw new ApiException(unknownErrorMessage, null, null, 0, e);
-    }
   }
 }
