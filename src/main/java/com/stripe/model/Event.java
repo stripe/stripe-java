@@ -33,6 +33,19 @@ public class Event extends ApiResource implements HasId {
 
   /**
    * Get deserialization helper to handle failure due to schema incompatibility.
+   * When event API version matches that of the library's pinned version,
+   * the following integration pattern is safe.
+   * <pre>
+   *   Event event = getEvent(); // either from webhook or event endpoint
+   *   EventDataObjectDeserializer deserializer = event.getDataObjectDeserializer();
+   *   StripeObject stripeObject = deserializer.getObject();
+   * </pre>
+   * You can ensure that webhook events has the same API version by creating
+   * webhook endpoint specifying api version](https://stripe.com/docs/api/webhook_endpoints/create)
+   * as {@link com.stripe.Stripe#API_VERSION}.
+   * For reading from old webhook endpoints or old events with potential schema
+   * incompatibility, see {@link EventDataObjectDeserializer#deserialize()} and
+   * {@link EventDataObjectDeserializer#deserializeUnsafe()}.
    */
   public EventDataObjectDeserializer getDataObjectDeserializer() {
     return new EventDataObjectDeserializer(apiVersion, type, data.object);
