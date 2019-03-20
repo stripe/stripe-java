@@ -19,7 +19,8 @@ public class EventData extends StripeObject {
   Map<String, Object> previousAttributes;
 
   /**
-   * Deprecated in favor of getting {@code StripeObject} from {@link EventDataObjectDeserializer}.
+   * Deprecated in favor of getting {@code StripeObject} from
+   * {@link Event#getDataObjectDeserializer()} and {@link EventDataObjectDeserializer#getObject()}.
    * Throws {@link JsonParseException} deserialization failure due to general invalid JSON,
    * or more specifically when JSON data and model class have incompatible schemas.
    * @return deserialized stripe object for event data.
