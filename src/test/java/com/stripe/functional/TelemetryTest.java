@@ -1,8 +1,8 @@
 package com.stripe.functional;
 
-import static junit.framework.TestCase.assertEquals;
-import static junit.framework.TestCase.assertNull;
-import static junit.framework.TestCase.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.Stripe;
@@ -20,7 +20,8 @@ import java.util.concurrent.TimeUnit;
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
-import org.junit.Test;
+
+import org.junit.jupiter.api.Test;
 
 
 public class TelemetryTest extends BaseStripeTest {

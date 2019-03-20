@@ -1,6 +1,6 @@
 package com.stripe.model;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.verifyNoMoreInteractions;
 
 import com.stripe.BaseStripeTest;
@@ -15,8 +15,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 import org.mockito.Mockito;
 import org.mockito.invocation.InvocationOnMock;
@@ -49,7 +49,7 @@ public class PagingIteratorTest extends BaseStripeTest {
   /**
    * Sets the mock page fixtures.
    */
-  @Before
+  @BeforeEach
   public void setUpMockPages() throws IOException, StripeException {
     final List<String> pages = new ArrayList<>();
     pages.add(getResourceAsString("/model_fixtures/pageable_model_page_0.json"));

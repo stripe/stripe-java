@@ -1,8 +1,8 @@
 package com.stripe.functional;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.Stripe;
@@ -11,7 +11,7 @@ import com.stripe.model.Balance;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponse;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class RequestOptionsTest extends BaseStripeTest {
   @Test

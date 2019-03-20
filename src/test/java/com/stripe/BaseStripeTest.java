@@ -26,9 +26,9 @@ import java.util.Map;
 
 import lombok.Cleanup;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 
 import org.mockito.ArgumentMatcher;
 import org.mockito.Mockito;
@@ -65,7 +65,7 @@ public class BaseStripeTest {
   /**
    * Checks that stripe-mock is running and up-to-date.
    */
-  @BeforeClass
+  @BeforeAll
   public static void checkStripeMock() throws Exception {
     if (StripeMockProcess.start()) {
       port = StripeMockProcess.getPort();
@@ -107,7 +107,7 @@ public class BaseStripeTest {
    * Activates usage of stripe-mock by overriding the API host and putting a test key
    * into the environment. This is required independent of how stripe-mock is started.
    */
-  @Before
+  @BeforeEach
   public void setUpStripeMockUsage() {
     this.origApiBase = Stripe.getApiBase();
     this.origUploadBase = Stripe.getUploadBase();
@@ -128,7 +128,7 @@ public class BaseStripeTest {
    * Deactivates usage stripe-mock by returning the API host to whatever it was
    * before stripe-mock was activated.
    */
-  @After
+  @AfterEach
   public void tearDownStripeMockUsage() {
     ApiResource.setStripeResponseGetter(new LiveStripeResponseGetter());
 

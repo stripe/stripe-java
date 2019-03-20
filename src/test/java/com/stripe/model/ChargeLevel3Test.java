@@ -1,11 +1,11 @@
 package com.stripe.model;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.net.ApiResource;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class ChargeLevel3Test extends BaseStripeTest {
   @Test

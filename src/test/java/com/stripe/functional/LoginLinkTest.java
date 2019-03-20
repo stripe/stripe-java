@@ -1,6 +1,6 @@
 package com.stripe.functional;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
@@ -8,7 +8,7 @@ import com.stripe.model.Account;
 import com.stripe.model.LoginLink;
 import com.stripe.net.ApiResource;
 import java.io.IOException;
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class LoginLinkTest extends BaseStripeTest {
   public static final String ACCOUNT_ID = "acct_123";

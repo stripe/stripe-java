@@ -1,7 +1,7 @@
 package com.stripe.net;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
@@ -17,13 +17,13 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Before;
-import org.junit.Test;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 public class LiveStripeResponseGetterTest {
   LiveStripeResponseGetter srg;
 
-  @Before
+  @BeforeEach
   public void before() {
     srg = new LiveStripeResponseGetter();
   }

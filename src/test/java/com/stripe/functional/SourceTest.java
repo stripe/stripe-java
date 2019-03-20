@@ -1,7 +1,8 @@
 package com.stripe.functional;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.InvalidRequestException;
@@ -16,7 +17,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class SourceTest extends BaseStripeTest {
   public static final String SOURCE_ID = "src_123";
@@ -121,12 +122,14 @@ public class SourceTest extends BaseStripeTest {
     );
   }
 
-  @Test(expected = InvalidRequestException.class)
+  @Test
   public void testDetachUnattachedSource() throws StripeException {
     final Source source = getSourceFixture();
     source.setCustomer(null);
 
-    source.detach();
+    assertThrows(InvalidRequestException.class, () -> {
+      source.detach();
+    });
   }
 
   @Test

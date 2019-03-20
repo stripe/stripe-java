@@ -1,29 +1,24 @@
 package com.stripe.model;
 
-import static junit.framework.TestCase.assertTrue;
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import java.util.List;
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+
+import org.junit.jupiter.api.Test;
 
 public class ExternalAccountDeserializationTest extends BaseStripeTest {
-
-  @Rule
-  public ExpectedException thrown = ExpectedException.none();
-
   @Test
   public void testDeserializeBankAccount() throws Exception {
     final String data = getResourceAsString("/api_fixtures/bank_account.json");
     final ExternalAccount externalAccount = ApiResource.GSON.fromJson(data, ExternalAccount.class);
     assertNotNull(externalAccount);
-    assertTrue("External account should be a bank account",
-        externalAccount instanceof BankAccount);
+    assertTrue(externalAccount instanceof BankAccount, "External account should be a bank account");
     BankAccount bankAccount = (BankAccount) externalAccount;
     assertEquals(bankAccount.getObject(), "bank_account");
   }
@@ -33,7 +28,7 @@ public class ExternalAccountDeserializationTest extends BaseStripeTest {
     final String data = getResourceAsString("/api_fixtures/card.json");
     final ExternalAccount externalAccount = ApiResource.GSON.fromJson(data, ExternalAccount.class);
     assertNotNull(externalAccount);
-    assertTrue("External account should be a card", externalAccount instanceof Card);
+    assertTrue(externalAccount instanceof Card, "External account should be a card");
     Card card = (Card) externalAccount;
     assertEquals(card.getObject(), "card");
   }
@@ -48,13 +43,17 @@ public class ExternalAccountDeserializationTest extends BaseStripeTest {
         ExternalAccount.class
     );
     assertNotNull(externalAccount);
-    assertTrue("External account should be an unknown subtype",
-        externalAccount instanceof ExternalAccountTypeAdapterFactory.UnknownSubType);
-    thrown.expectMessage(
+    assertTrue(
+        externalAccount instanceof ExternalAccountTypeAdapterFactory.UnknownSubType,
+        "External account should be an unknown subtype");
+
+    Throwable exception = assertThrows(UnsupportedOperationException.class, () -> {
+      externalAccount.delete();
+    });
+    assertEquals(
         "Unknown subtype of ExternalAccount with id: bar_123, object: unknown_bar, does not "
-            + "implement method: delete. Please contact support@stripe.com for assistance.");
-    thrown.expect(UnsupportedOperationException.class);
-    externalAccount.delete();
+        + "implement method: delete. Please contact support@stripe.com for assistance.",
+        exception.getMessage());
   }
 
   @Test
@@ -86,4 +85,3 @@ public class ExternalAccountDeserializationTest extends BaseStripeTest {
     }
   }
 }
-

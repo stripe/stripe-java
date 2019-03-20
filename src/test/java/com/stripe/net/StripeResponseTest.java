@@ -1,9 +1,7 @@
 package com.stripe.net;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.stripe.BaseStripeTest;
 
@@ -12,7 +10,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class StripeResponseTest extends BaseStripeTest {
   String chargeBody;
@@ -50,7 +48,7 @@ public class StripeResponseTest extends BaseStripeTest {
   public void testHeaders() {
     final Map<String, List<String>> headerMap = generateHeaderMap();
     final StripeResponse stripeResponse = new StripeResponse(200, chargeBody, headerMap);
-    assertThat(stripeResponse.headers(), instanceOf(StripeHeaders.class));
+    assertTrue(stripeResponse.headers() instanceof StripeHeaders);
   }
 
   @Test
