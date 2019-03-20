@@ -1,5 +1,8 @@
 # Changelog
 
+## 8.0.2 - 2019-03-20
+* [#999](https://github.com/stripe/stripe-java/pull/999) Fix test compiler error by removing an accidental line  
+
 ## 8.0.1 - 2019-03-20
 * [#999](https://github.com/stripe/stripe-java/pull/999) Fix java doc on deprecated `EventData#getObject` and `Event#getDataObjectDeserializer`
 
