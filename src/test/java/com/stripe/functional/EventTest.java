@@ -52,7 +52,6 @@ public class EventTest extends BaseStripeTest {
     event.setApiVersion(Stripe.API_VERSION);
 
     StripeObject stripeObject = event.getDataObjectDeserializer().getObject();
-    event.getData().getObject()
 
     assertNotNull(stripeObject);
   }
