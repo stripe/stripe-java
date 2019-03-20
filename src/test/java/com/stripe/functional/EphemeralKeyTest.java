@@ -1,7 +1,8 @@
 package com.stripe.functional;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.Stripe;
@@ -13,7 +14,7 @@ import com.stripe.net.RequestOptions;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class EphemeralKeyTest extends BaseStripeTest {
 
@@ -40,7 +41,7 @@ public class EphemeralKeyTest extends BaseStripeTest {
     );
   }
 
-  @Test(expected = IllegalArgumentException.class)
+  @Test
   public void testCreateWithoutApiVersionOverride() throws StripeException {
     final Map<String, Object> params = new HashMap<>();
     params.put("customer", "cus_123");
@@ -48,7 +49,9 @@ public class EphemeralKeyTest extends BaseStripeTest {
     final RequestOptions options = RequestOptions.getDefault();
     assertNull(options.getStripeVersionOverride());
 
-    EphemeralKey.create(params, options);
+    assertThrows(IllegalArgumentException.class, () -> {
+      EphemeralKey.create(params, options);
+    });
   }
 
   @Test

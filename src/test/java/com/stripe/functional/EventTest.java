@@ -1,7 +1,7 @@
 package com.stripe.functional;
 
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.Stripe;
@@ -14,7 +14,7 @@ import com.stripe.net.ApiResource;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class EventTest extends BaseStripeTest {
   public static final String EVENT_ID = "evt_123";

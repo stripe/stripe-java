@@ -1,6 +1,6 @@
 package com.stripe.model;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -18,7 +18,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Simple test to make sure stripe-java provides consistent bindings.
@@ -98,11 +98,11 @@ public class StandardizationTest {
           continue;
         }
         assertTrue(
+            RequestOptions.class.isAssignableFrom(finalParamType),
             String.format("Methods on %ss like %s.%s should take a final "
                   +       "parameter as a %s parameter, but got %s.%n",
                 ApiResource.class.getSimpleName(), model.getSimpleName(), method.getName(),
-                RequestOptions.class.getSimpleName(), finalParamType.getCanonicalName()),
-            RequestOptions.class.isAssignableFrom(finalParamType));
+                RequestOptions.class.getSimpleName(), finalParamType.getCanonicalName()));
       }
     }
   }

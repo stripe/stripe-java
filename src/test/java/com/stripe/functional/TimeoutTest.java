@@ -1,5 +1,8 @@
 package com.stripe.functional;
 
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
+
 import com.stripe.BaseStripeTest;
 import com.stripe.Stripe;
 import com.stripe.exception.ApiConnectionException;
@@ -11,14 +14,9 @@ import java.io.IOException;
 import java.net.Inet4Address;
 import java.net.ServerSocket;
 
-import org.junit.Rule;
-import org.junit.Test;
-import org.junit.rules.ExpectedException;
+import org.junit.jupiter.api.Test;
 
 public class TimeoutTest extends BaseStripeTest {
-  @Rule
-  public ExpectedException thrown = ExpectedException.none();
-
   @Test
   public void testReadTimeout() throws IOException, StripeException {
     // Create a local server that does nothing to trigger a read timeout
@@ -26,11 +24,12 @@ public class TimeoutTest extends BaseStripeTest {
         new ServerSocket(0, 1, Inet4Address.getByName("localhost"))) {
       Stripe.overrideApiBase(String.format("http://localhost:%d", serverSocket.getLocalPort()));
 
-      thrown.expect(ApiConnectionException.class);
-      thrown.expectMessage("Read timed out");
-
       final RequestOptions options = RequestOptions.builder().setReadTimeout(1).build();
-      Balance.retrieve(options);
+
+      Throwable exception = assertThrows(ApiConnectionException.class, () -> {
+        Balance.retrieve(options);
+      });
+      assertTrue(exception.getMessage().contains("Read timed out"));
     }
   }
 }
