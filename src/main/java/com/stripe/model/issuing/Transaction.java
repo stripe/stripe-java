@@ -98,6 +98,8 @@ public class Transaction extends ApiResource
   @SerializedName("merchant_data")
   Authorization.MerchantData merchantData;
 
+  String settlement;
+
   /**
    * Set of <a href="https://stripe.com/docs/api/metadata">key-value pairs</a> that you can attach
    * to an object. This can be useful for storing additional information about the object in a
