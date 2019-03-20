@@ -7,6 +7,10 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.InvoiceItemCreateParams;
+import com.stripe.param.InvoiceItemListParams;
+import com.stripe.param.InvoiceItemRetrieveParams;
+import com.stripe.param.InvoiceItemUpdateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -192,6 +196,24 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   }
 
   /**
+   * Returns a list of your invoice items. Invoice items are returned sorted by creation date, with
+   * the most recently created invoice items appearing first.
+   */
+  public static InvoiceItemCollection list(InvoiceItemListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of your invoice items. Invoice items are returned sorted by creation date, with
+   * the most recently created invoice items appearing first.
+   */
+  public static InvoiceItemCollection list(InvoiceItemListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoiceitems");
+    return requestCollection(url, params, InvoiceItemCollection.class, options);
+  }
+
+  /**
    * Creates an item to be added to a draft invoice. If no invoice is specified, the item will be on
    * the next invoice created for the customer specified.
    */
@@ -204,6 +226,24 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
    * the next invoice created for the customer specified.
    */
   public static InvoiceItem create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoiceitems");
+    return request(ApiResource.RequestMethod.POST, url, params, InvoiceItem.class, options);
+  }
+
+  /**
+   * Creates an item to be added to a draft invoice. If no invoice is specified, the item will be on
+   * the next invoice created for the customer specified.
+   */
+  public static InvoiceItem create(InvoiceItemCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * Creates an item to be added to a draft invoice. If no invoice is specified, the item will be on
+   * the next invoice created for the customer specified.
+   */
+  public static InvoiceItem create(InvoiceItemCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoiceitems");
     return request(ApiResource.RequestMethod.POST, url, params, InvoiceItem.class, options);
@@ -230,6 +270,16 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
     return request(ApiResource.RequestMethod.GET, url, params, InvoiceItem.class, options);
   }
 
+  /** Retrieves the invoice item with the given ID. */
+  public static InvoiceItem retrieve(
+      String invoiceitem, InvoiceItemRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/invoiceitems/%s", invoiceitem));
+    return request(ApiResource.RequestMethod.GET, url, params, InvoiceItem.class, options);
+  }
+
   /**
    * Updates the amount or description of an invoice item on an upcoming invoice. Updating an
    * invoice item is only possible before the invoice it’s attached to is closed.
@@ -243,6 +293,26 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
    * invoice item is only possible before the invoice it’s attached to is closed.
    */
   public InvoiceItem update(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/invoiceitems/%s", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, InvoiceItem.class, options);
+  }
+
+  /**
+   * Updates the amount or description of an invoice item on an upcoming invoice. Updating an
+   * invoice item is only possible before the invoice it’s attached to is closed.
+   */
+  public InvoiceItem update(InvoiceItemUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the amount or description of an invoice item on an upcoming invoice. Updating an
+   * invoice item is only possible before the invoice it’s attached to is closed.
+   */
+  public InvoiceItem update(InvoiceItemUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
         String.format(

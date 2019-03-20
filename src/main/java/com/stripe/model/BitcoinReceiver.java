@@ -7,6 +7,8 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.BitcoinReceiverListParams;
+import com.stripe.param.BitcoinReceiverRetrieveParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -151,6 +153,25 @@ public class BitcoinReceiver extends ApiResource implements PaymentSource {
     return requestCollection(url, params, BitcoinReceiverCollection.class, options);
   }
 
+  /**
+   * Returns a list of your receivers. Receivers are returned sorted by creation date, with the most
+   * recently created receivers appearing first.
+   */
+  public static BitcoinReceiverCollection list(BitcoinReceiverListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of your receivers. Receivers are returned sorted by creation date, with the most
+   * recently created receivers appearing first.
+   */
+  public static BitcoinReceiverCollection list(
+      BitcoinReceiverListParams params, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/bitcoin/receivers");
+    return requestCollection(url, params, BitcoinReceiverCollection.class, options);
+  }
+
   /** Retrieves the Bitcoin receiver with the given ID. */
   public static BitcoinReceiver retrieve(String id) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
@@ -164,6 +185,15 @@ public class BitcoinReceiver extends ApiResource implements PaymentSource {
   /** Retrieves the Bitcoin receiver with the given ID. */
   public static BitcoinReceiver retrieve(
       String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/bitcoin/receivers/%s", id));
+    return request(ApiResource.RequestMethod.GET, url, params, BitcoinReceiver.class, options);
+  }
+
+  /** Retrieves the Bitcoin receiver with the given ID. */
+  public static BitcoinReceiver retrieve(
+      String id, BitcoinReceiverRetrieveParams params, RequestOptions options)
+      throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/bitcoin/receivers/%s", id));
     return request(ApiResource.RequestMethod.GET, url, params, BitcoinReceiver.class, options);

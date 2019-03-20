@@ -8,6 +8,8 @@ import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.CardUpdateOnAccountParams;
+import com.stripe.param.CardUpdateOnCustomerParams;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -295,6 +297,93 @@ public class Card extends ApiResource
     } else {
       throw new InvalidRequestException(
           "Unable to construct url because [account, customer] field(s) are all null",
+          null,
+          null,
+          null,
+          0,
+          null);
+    }
+    return request(ApiResource.RequestMethod.POST, url, params, Card.class, options);
+  }
+
+  /**
+   * If you need to update only some card details, like the billing address or expiration date, you
+   * can do so without having to re-enter the full card details. Stripe also works directly with
+   * card networks so that your customers can <a
+   * href="https://stripe.com/docs/saving-cards#automatic-card-updates">continue using your
+   * service</a> without interruption.
+   *
+   * <p>Updates a specified card for a given customer.
+   */
+  public Card update(CardUpdateOnAccountParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * If you need to update only some card details, like the billing address or expiration date, you
+   * can do so without having to re-enter the full card details. Stripe also works directly with
+   * card networks so that your customers can <a
+   * href="https://stripe.com/docs/saving-cards#automatic-card-updates">continue using your
+   * service</a> without interruption.
+   *
+   * <p>Updates a specified card for a given customer.
+   */
+  public Card update(CardUpdateOnAccountParams params, RequestOptions options)
+      throws StripeException {
+    String url;
+    if (this.getAccount() != null) {
+      url =
+          String.format(
+              "%s%s",
+              Stripe.getApiBase(),
+              String.format(
+                  "/v1/accounts/%s/external_accounts/%s", this.getAccount(), this.getId()));
+    } else {
+      throw new InvalidRequestException(
+          "Unable to construct url because [account] field(s) are all null",
+          null,
+          null,
+          null,
+          0,
+          null);
+    }
+    return request(ApiResource.RequestMethod.POST, url, params, Card.class, options);
+  }
+
+  /**
+   * If you need to update only some card details, like the billing address or expiration date, you
+   * can do so without having to re-enter the full card details. Stripe also works directly with
+   * card networks so that your customers can <a
+   * href="https://stripe.com/docs/saving-cards#automatic-card-updates">continue using your
+   * service</a> without interruption.
+   *
+   * <p>Updates a specified card for a given customer.
+   */
+  public Card update(CardUpdateOnCustomerParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * If you need to update only some card details, like the billing address or expiration date, you
+   * can do so without having to re-enter the full card details. Stripe also works directly with
+   * card networks so that your customers can <a
+   * href="https://stripe.com/docs/saving-cards#automatic-card-updates">continue using your
+   * service</a> without interruption.
+   *
+   * <p>Updates a specified card for a given customer.
+   */
+  public Card update(CardUpdateOnCustomerParams params, RequestOptions options)
+      throws StripeException {
+    String url;
+    if (this.getCustomer() != null) {
+      url =
+          String.format(
+              "%s%s",
+              Stripe.getApiBase(),
+              String.format("/v1/customers/%s/sources/%s", this.getCustomer(), this.getId()));
+    } else {
+      throw new InvalidRequestException(
+          "Unable to construct url because [customer] field(s) are all null",
           null,
           null,
           null,

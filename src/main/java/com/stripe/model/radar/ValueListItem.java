@@ -8,6 +8,9 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.radar.ValueListItemCreateParams;
+import com.stripe.param.radar.ValueListItemListParams;
+import com.stripe.param.radar.ValueListItemRetrieveParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -71,6 +74,25 @@ public class ValueListItem extends ApiResource implements HasId {
     return requestCollection(url, params, ValueListItemCollection.class, options);
   }
 
+  /**
+   * Returns a list of <code>ValueListItem</code> objects. The objects are sorted in descending
+   * order by creation date, with the most recently created object appearing first.
+   */
+  public static ValueListItemCollection list(ValueListItemListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of <code>ValueListItem</code> objects. The objects are sorted in descending
+   * order by creation date, with the most recently created object appearing first.
+   */
+  public static ValueListItemCollection list(ValueListItemListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/radar/value_list_items");
+    return requestCollection(url, params, ValueListItemCollection.class, options);
+  }
+
   /** Retrieves a <code>ValueListItem</code> object. */
   public static ValueListItem retrieve(String item) throws StripeException {
     return retrieve(item, (Map<String, Object>) null, (RequestOptions) null);
@@ -90,6 +112,16 @@ public class ValueListItem extends ApiResource implements HasId {
     return request(ApiResource.RequestMethod.GET, url, params, ValueListItem.class, options);
   }
 
+  /** Retrieves a <code>ValueListItem</code> object. */
+  public static ValueListItem retrieve(
+      String item, ValueListItemRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/radar/value_list_items/%s", item));
+    return request(ApiResource.RequestMethod.GET, url, params, ValueListItem.class, options);
+  }
+
   /**
    * Creates a new <code>ValueListItem</code> object, which is added to the specified parent value
    * list.
@@ -103,6 +135,24 @@ public class ValueListItem extends ApiResource implements HasId {
    * list.
    */
   public static ValueListItem create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/radar/value_list_items");
+    return request(ApiResource.RequestMethod.POST, url, params, ValueListItem.class, options);
+  }
+
+  /**
+   * Creates a new <code>ValueListItem</code> object, which is added to the specified parent value
+   * list.
+   */
+  public static ValueListItem create(ValueListItemCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * Creates a new <code>ValueListItem</code> object, which is added to the specified parent value
+   * list.
+   */
+  public static ValueListItem create(ValueListItemCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/radar/value_list_items");
     return request(ApiResource.RequestMethod.POST, url, params, ValueListItem.class, options);

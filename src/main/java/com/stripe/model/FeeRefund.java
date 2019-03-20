@@ -8,6 +8,7 @@ import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.FeeRefundUpdateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -116,6 +117,38 @@ public class FeeRefund extends ApiResource
    * <p>This request only accepts metadata as an argument.
    */
   public FeeRefund update(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url;
+    if (this.getFee() != null) {
+      url =
+          String.format(
+              "%s%s",
+              Stripe.getApiBase(),
+              String.format("/v1/application_fees/%s/refunds/%s", this.getFee(), this.getId()));
+    } else {
+      throw new InvalidRequestException(
+          "Unable to construct url because [fee] field(s) are all null", null, null, null, 0, null);
+    }
+    return request(ApiResource.RequestMethod.POST, url, params, FeeRefund.class, options);
+  }
+
+  /**
+   * Updates the specified application fee refund by setting the values of the parameters passed.
+   * Any parameters not provided will be left unchanged.
+   *
+   * <p>This request only accepts metadata as an argument.
+   */
+  public FeeRefund update(FeeRefundUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the specified application fee refund by setting the values of the parameters passed.
+   * Any parameters not provided will be left unchanged.
+   *
+   * <p>This request only accepts metadata as an argument.
+   */
+  public FeeRefund update(FeeRefundUpdateParams params, RequestOptions options)
       throws StripeException {
     String url;
     if (this.getFee() != null) {

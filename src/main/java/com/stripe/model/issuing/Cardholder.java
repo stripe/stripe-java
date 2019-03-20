@@ -11,6 +11,10 @@ import com.stripe.model.MetadataStore;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.issuing.CardholderCreateParams;
+import com.stripe.param.issuing.CardholderListParams;
+import com.stripe.param.issuing.CardholderRetrieveParams;
+import com.stripe.param.issuing.CardholderUpdateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -93,6 +97,24 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
     return requestCollection(url, params, CardholderCollection.class, options);
   }
 
+  /**
+   * Returns a list of Issuing <code>Cardholder</code> objects. The objects are sorted in descending
+   * order by creation date, with the most recently created object appearing first.
+   */
+  public static CardholderCollection list(CardholderListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of Issuing <code>Cardholder</code> objects. The objects are sorted in descending
+   * order by creation date, with the most recently created object appearing first.
+   */
+  public static CardholderCollection list(CardholderListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/cardholders");
+    return requestCollection(url, params, CardholderCollection.class, options);
+  }
+
   /** Creates a new Issuing <code>Cardholder</code> object that can be issued cards. */
   public static Cardholder create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -100,6 +122,18 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
 
   /** Creates a new Issuing <code>Cardholder</code> object that can be issued cards. */
   public static Cardholder create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/cardholders");
+    return request(ApiResource.RequestMethod.POST, url, params, Cardholder.class, options);
+  }
+
+  /** Creates a new Issuing <code>Cardholder</code> object that can be issued cards. */
+  public static Cardholder create(CardholderCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a new Issuing <code>Cardholder</code> object that can be issued cards. */
+  public static Cardholder create(CardholderCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/cardholders");
     return request(ApiResource.RequestMethod.POST, url, params, Cardholder.class, options);
@@ -126,6 +160,16 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
     return request(ApiResource.RequestMethod.GET, url, params, Cardholder.class, options);
   }
 
+  /** Retrieves an Issuing <code>Cardholder</code> object. */
+  public static Cardholder retrieve(
+      String cardholder, CardholderRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/issuing/cardholders/%s", cardholder));
+    return request(ApiResource.RequestMethod.GET, url, params, Cardholder.class, options);
+  }
+
   /**
    * Updates the specified Issuing <code>Cardholder</code> object by setting the values of the
    * parameters passed. Any parameters not provided will be left unchanged.
@@ -139,6 +183,26 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
    * parameters passed. Any parameters not provided will be left unchanged.
    */
   public Cardholder update(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/issuing/cardholders/%s", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Cardholder.class, options);
+  }
+
+  /**
+   * Updates the specified Issuing <code>Cardholder</code> object by setting the values of the
+   * parameters passed. Any parameters not provided will be left unchanged.
+   */
+  public Cardholder update(CardholderUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the specified Issuing <code>Cardholder</code> object by setting the values of the
+   * parameters passed. Any parameters not provided will be left unchanged.
+   */
+  public Cardholder update(CardholderUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
         String.format(

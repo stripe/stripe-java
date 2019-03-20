@@ -7,6 +7,11 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.TopupCancelParams;
+import com.stripe.param.TopupCreateParams;
+import com.stripe.param.TopupListParams;
+import com.stripe.param.TopupRetrieveParams;
+import com.stripe.param.TopupUpdateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -137,6 +142,18 @@ public class Topup extends ApiResource implements BalanceTransactionSource, Meta
     return request(ApiResource.RequestMethod.POST, url, params, Topup.class, options);
   }
 
+  /** Top up the balance of an account. */
+  public static Topup create(TopupCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Top up the balance of an account. */
+  public static Topup create(TopupCreateParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/topups");
+    return request(ApiResource.RequestMethod.POST, url, params, Topup.class, options);
+  }
+
   /** Returns a list of top-ups. */
   public static TopupCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
@@ -144,6 +161,18 @@ public class Topup extends ApiResource implements BalanceTransactionSource, Meta
 
   /** Returns a list of top-ups. */
   public static TopupCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/topups");
+    return requestCollection(url, params, TopupCollection.class, options);
+  }
+
+  /** Returns a list of top-ups. */
+  public static TopupCollection list(TopupListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of top-ups. */
+  public static TopupCollection list(TopupListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/topups");
     return requestCollection(url, params, TopupCollection.class, options);
@@ -178,6 +207,17 @@ public class Topup extends ApiResource implements BalanceTransactionSource, Meta
     return request(ApiResource.RequestMethod.GET, url, params, Topup.class, options);
   }
 
+  /**
+   * Retrieves the details of a top-up that has previously been created. Supply the unique top-up ID
+   * that was returned from your previous request, and Stripe will return the corresponding top-up
+   * information.
+   */
+  public static Topup retrieve(String topup, TopupRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), String.format("/v1/topups/%s", topup));
+    return request(ApiResource.RequestMethod.GET, url, params, Topup.class, options);
+  }
+
   /** Updates the metadata of a top-up. Other top-up details are not editable by design. */
   public Topup update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
@@ -185,6 +225,18 @@ public class Topup extends ApiResource implements BalanceTransactionSource, Meta
 
   /** Updates the metadata of a top-up. Other top-up details are not editable by design. */
   public Topup update(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/topups/%s", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Topup.class, options);
+  }
+
+  /** Updates the metadata of a top-up. Other top-up details are not editable by design. */
+  public Topup update(TopupUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /** Updates the metadata of a top-up. Other top-up details are not editable by design. */
+  public Topup update(TopupUpdateParams params, RequestOptions options) throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/topups/%s", this.getId()));
     return request(ApiResource.RequestMethod.POST, url, params, Topup.class, options);
@@ -207,6 +259,19 @@ public class Topup extends ApiResource implements BalanceTransactionSource, Meta
 
   /** Cancels a top-up. Only pending top-ups can be canceled. */
   public Topup cancel(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/topups/%s/cancel", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Topup.class, options);
+  }
+
+  /** Cancels a top-up. Only pending top-ups can be canceled. */
+  public Topup cancel(TopupCancelParams params) throws StripeException {
+    return cancel(params, (RequestOptions) null);
+  }
+
+  /** Cancels a top-up. Only pending top-ups can be canceled. */
+  public Topup cancel(TopupCancelParams params, RequestOptions options) throws StripeException {
     String url =
         String.format(
             "%s%s", Stripe.getApiBase(), String.format("/v1/topups/%s/cancel", this.getId()));

@@ -8,6 +8,7 @@ import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.PersonUpdateParams;
 import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
@@ -130,6 +131,32 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
 
   /** Updates an existing person. */
   public Person update(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url;
+    if (this.getAccount() != null) {
+      url =
+          String.format(
+              "%s%s",
+              Stripe.getApiBase(),
+              String.format("/v1/accounts/%s/persons/%s", this.getAccount(), this.getId()));
+    } else {
+      throw new InvalidRequestException(
+          "Unable to construct url because [account] field(s) are all null",
+          null,
+          null,
+          null,
+          0,
+          null);
+    }
+    return request(ApiResource.RequestMethod.POST, url, params, Person.class, options);
+  }
+
+  /** Updates an existing person. */
+  public Person update(PersonUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /** Updates an existing person. */
+  public Person update(PersonUpdateParams params, RequestOptions options) throws StripeException {
     String url;
     if (this.getAccount() != null) {
       url =

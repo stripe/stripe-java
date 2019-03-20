@@ -8,6 +8,11 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.radar.Rule;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.ChargeCaptureParams;
+import com.stripe.param.ChargeCreateParams;
+import com.stripe.param.ChargeListParams;
+import com.stripe.param.ChargeRetrieveParams;
+import com.stripe.param.ChargeUpdateParams;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -72,6 +77,9 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<BalanceTransaction> balanceTransaction;
+
+  @SerializedName("billing_details")
+  PaymentMethod.BillingDetails billingDetails;
 
   /**
    * If the charge was created without capturing, this Boolean represents whether it is still
@@ -528,6 +536,24 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
   }
 
   /**
+   * Returns a list of charges you’ve previously created. The charges are returned in sorted order,
+   * with the most recent charges appearing first.
+   */
+  public static ChargeCollection list(ChargeListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of charges you’ve previously created. The charges are returned in sorted order,
+   * with the most recent charges appearing first.
+   */
+  public static ChargeCollection list(ChargeListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/charges");
+    return requestCollection(url, params, ChargeCollection.class, options);
+  }
+
+  /**
    * To charge a credit card or other payment source, you create a <code>Charge</code> object. If
    * your API key is in test mode, the supplied payment source (e.g., card) won’t actually be
    * charged, although everything else will occur as if in live mode. (Stripe assumes that the
@@ -544,6 +570,28 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
    * charge would have completed successfully).
    */
   public static Charge create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/charges");
+    return request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
+  }
+
+  /**
+   * To charge a credit card or other payment source, you create a <code>Charge</code> object. If
+   * your API key is in test mode, the supplied payment source (e.g., card) won’t actually be
+   * charged, although everything else will occur as if in live mode. (Stripe assumes that the
+   * charge would have completed successfully).
+   */
+  public static Charge create(ChargeCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * To charge a credit card or other payment source, you create a <code>Charge</code> object. If
+   * your API key is in test mode, the supplied payment source (e.g., card) won’t actually be
+   * charged, although everything else will occur as if in live mode. (Stripe assumes that the
+   * charge would have completed successfully).
+   */
+  public static Charge create(ChargeCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/charges");
     return request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
@@ -580,6 +628,18 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
   }
 
   /**
+   * Retrieves the details of a charge that has previously been created. Supply the unique charge ID
+   * that was returned from your previous request, and Stripe will return the corresponding charge
+   * information. The same information is returned when creating or refunding the charge.
+   */
+  public static Charge retrieve(String charge, ChargeRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/charges/%s", charge));
+    return request(ApiResource.RequestMethod.GET, url, params, Charge.class, options);
+  }
+
+  /**
    * Updates the specified charge by setting the values of the parameters passed. Any parameters not
    * provided will be left unchanged.
    */
@@ -592,6 +652,24 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
    * provided will be left unchanged.
    */
   public Charge update(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/charges/%s", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
+  }
+
+  /**
+   * Updates the specified charge by setting the values of the parameters passed. Any parameters not
+   * provided will be left unchanged.
+   */
+  public Charge update(ChargeUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the specified charge by setting the values of the parameters passed. Any parameters not
+   * provided will be left unchanged.
+   */
+  public Charge update(ChargeUpdateParams params, RequestOptions options) throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/charges/%s", this.getId()));
     return request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
@@ -646,6 +724,35 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
    * capturable.
    */
   public Charge capture(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/charges/%s/capture", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
+  }
+
+  /**
+   * Capture the payment of an existing, uncaptured, charge. This is the second half of the two-step
+   * payment flow, where first you <a href="#create_charge">created a charge</a> with the capture
+   * option set to false.
+   *
+   * <p>Uncaptured payments expire exactly seven days after they are created. If they are not
+   * captured by that point in time, they will be marked as refunded and will no longer be
+   * capturable.
+   */
+  public Charge capture(ChargeCaptureParams params) throws StripeException {
+    return capture(params, (RequestOptions) null);
+  }
+
+  /**
+   * Capture the payment of an existing, uncaptured, charge. This is the second half of the two-step
+   * payment flow, where first you <a href="#create_charge">created a charge</a> with the capture
+   * option set to false.
+   *
+   * <p>Uncaptured payments expire exactly seven days after they are created. If they are not
+   * captured by that point in time, they will be marked as refunded and will no longer be
+   * capturable.
+   */
+  public Charge capture(ChargeCaptureParams params, RequestOptions options) throws StripeException {
     String url =
         String.format(
             "%s%s", Stripe.getApiBase(), String.format("/v1/charges/%s/capture", this.getId()));
