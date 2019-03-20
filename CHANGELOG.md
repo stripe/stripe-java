@@ -1,5 +1,8 @@
 # Changelog
 
+## 8.0.1 - 2019-03-20
+* [#999](https://github.com/stripe/stripe-java/pull/999) Fix java doc on deprecated `EventData#getObject` and `Event#getDataObjectDeserializer`
+
 ## 8.0.0 - 2019-03-19
 * [#662](https://github.com/stripe/stripe-java/pull/662) Major version release. Supports a pinned API version [2019-03-14](https://stripe.com/docs/upgrades#2019-03-14). Refer to our [migration guide for v8](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v8) for API upgrade guide and lists of backwards incompatible changes to watch out for.
 
