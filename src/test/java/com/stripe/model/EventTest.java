@@ -17,7 +17,8 @@ public class EventTest extends BaseStripeTest {
     assertNotNull(event.getId());
     assertEquals("event", event.getObject());
 
-    final Plan plan = (Plan) event.getData().getObject();
+    // Using deserializeUnsafe() because the fixture uses an older API version
+    final Plan plan = (Plan) event.getDataObjectDeserializer().deserializeUnsafe();
     assertNotNull(plan);
     assertNotNull(plan.getId());
   }

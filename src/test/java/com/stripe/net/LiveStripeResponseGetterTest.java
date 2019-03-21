@@ -166,7 +166,7 @@ public class LiveStripeResponseGetterTest {
 
   @Test
   public void testAppInfo() {
-    final RequestOptions options = (new RequestOptionsBuilder()).setApiKey("sk_foobar").build();
+    final RequestOptions options = new RequestOptionsBuilder().setApiKey("sk_foobar").build();
 
     Stripe.setAppInfo("MyAwesomePlugin", "1.2.34", "https://myawesomeplugin.info", "pp_partner_1234");
 

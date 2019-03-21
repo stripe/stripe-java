@@ -148,7 +148,7 @@ public class PagingIteratorTest extends BaseStripeTest {
     page2Params.put("foo", "baz");
     page2Params.put("starting_after", "pm_126");
 
-    final RequestOptions options = (new RequestOptionsBuilder()).setApiKey("sk_paging_key").build();
+    final RequestOptions options = new RequestOptionsBuilder().setApiKey("sk_paging_key").build();
     final PageableModelCollection collection = PageableModel.list(page0Params, options);
 
     final List<PageableModel> models = new ArrayList<>();

@@ -41,8 +41,9 @@ public class SourceMandateNotificationTest extends BaseStripeTest {
     final String json = getResourceAsString("/api_fixtures/source_mandate_notification_event.json");
     final Event event = ApiResource.GSON.fromJson(json, Event.class);
 
+    // Using deserializeUnsafe() because the fixture uses an older API version
     final SourceMandateNotification mandateNotification
-        = (SourceMandateNotification) event.getData().getObject();
+        = (SourceMandateNotification) event.getDataObjectDeserializer().deserializeUnsafe();
 
     verifyResource(mandateNotification);
   }

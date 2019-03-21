@@ -17,6 +17,8 @@ import java.util.HashSet;
 import java.util.Set;
 import java.util.concurrent.TimeUnit;
 
+import lombok.Cleanup;
+
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
 import okhttp3.mockwebserver.RecordedRequest;
@@ -26,7 +28,7 @@ import org.junit.Test;
 public class TelemetryTest extends BaseStripeTest {
   @Test
   public void testTelemetryEnabled() throws StripeException, IOException, InterruptedException {
-    MockWebServer server = new MockWebServer();
+    @Cleanup MockWebServer server = new MockWebServer();
     server.enqueue(new MockResponse().setBody("{}").addHeader("Request-Id", "req_1")
         .setBodyDelay(30, TimeUnit.MILLISECONDS));
     server.enqueue(new MockResponse().setBody("{}").addHeader("Request-Id", "req_2")
@@ -37,11 +39,11 @@ public class TelemetryTest extends BaseStripeTest {
     Stripe.overrideApiBase(server.url("").toString());
     Stripe.enableTelemetry = true;
 
-    Balance b1 = Balance.retrieve();
+    Balance.retrieve();
     RecordedRequest request1 = server.takeRequest();
     assertNull(request1.getHeader("X-Stripe-Client-Telemetry"));
 
-    Balance b2 = Balance.retrieve();
+    Balance.retrieve();
     RecordedRequest request2 = server.takeRequest();
     String telemetry1 = request2.getHeader("X-Stripe-Client-Telemetry");
     ClientTelemetryPayload payload1 = ApiResource.GSON.fromJson(
@@ -49,7 +51,7 @@ public class TelemetryTest extends BaseStripeTest {
     assertEquals(payload1.lastRequestMetrics.requestId, "req_1");
     assertTrue(payload1.lastRequestMetrics.requestDurationMs > 30);
 
-    Balance b3 = Balance.retrieve();
+    Balance.retrieve();
     RecordedRequest request3 = server.takeRequest();
     String telemetry2 = request3.getHeader("X-Stripe-Client-Telemetry");
     ClientTelemetryPayload payload2 = ApiResource.GSON.fromJson(
@@ -62,7 +64,7 @@ public class TelemetryTest extends BaseStripeTest {
 
   @Test
   public void testTelemetryDisabled() throws StripeException, IOException, InterruptedException {
-    MockWebServer server = new MockWebServer();
+    @Cleanup MockWebServer server = new MockWebServer();
     server.enqueue(new MockResponse().setBody("{}").addHeader("Request-Id", "req_1"));
     server.enqueue(new MockResponse().setBody("{}").addHeader("Request-Id", "req_2"));
     server.enqueue(new MockResponse().setBody("{}").addHeader("Request-Id", "req_3"));
@@ -71,11 +73,11 @@ public class TelemetryTest extends BaseStripeTest {
     Stripe.overrideApiBase(server.url("").toString());
     Stripe.enableTelemetry = false;
 
-    Balance b1 = Balance.retrieve();
+    Balance.retrieve();
     RecordedRequest request1 = server.takeRequest();
     assertNull(request1.getHeader("X-Stripe-Client-Telemetry"));
 
-    Balance b2 = Balance.retrieve();
+    Balance.retrieve();
     RecordedRequest request2 = server.takeRequest();
     assertNull(request2.getHeader("X-Stripe-Client-Telemetry"));
 
@@ -84,7 +86,7 @@ public class TelemetryTest extends BaseStripeTest {
 
   @Test
   public void testTelemetryWorksWithConcurrentRequests() throws IOException, InterruptedException {
-    MockWebServer server = new MockWebServer();
+    @Cleanup MockWebServer server = new MockWebServer();
 
     for (int i = 0; i < 20; i++) {
       server.enqueue(new MockResponse().setBody("{}")
