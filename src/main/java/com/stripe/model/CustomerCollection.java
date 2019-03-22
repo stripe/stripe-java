@@ -2,4 +2,28 @@
 
 package com.stripe.model;
 
-public class CustomerCollection extends StripeCollection<Customer> {}
+import com.stripe.Stripe;
+import com.stripe.exception.StripeException;
+import com.stripe.net.ApiResource;
+import com.stripe.net.RequestOptions;
+import java.util.Map;
+
+public class CustomerCollection extends StripeCollection<Customer> {
+  /** Retrieves a specific transaction applied to a customer’s balance. */
+  public Customer retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieves a specific transaction applied to a customer’s balance. */
+  public Customer retrieve(String id, RequestOptions options) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
+  }
+
+  /** Retrieves a specific transaction applied to a customer’s balance. */
+  public Customer retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("%s/%s", this.getUrl(), id));
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Customer.class, options);
+  }
+}

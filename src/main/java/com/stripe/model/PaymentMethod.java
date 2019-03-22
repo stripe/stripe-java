@@ -320,7 +320,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class ThreeDSecureUsage extends StripeObject {
-      /** 3D Secure is support on this card. */
+      /** Whether 3D Secure is supported on this card. */
       @SerializedName("supported")
       Boolean supported;
     }
