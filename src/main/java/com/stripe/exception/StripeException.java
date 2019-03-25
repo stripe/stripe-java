@@ -41,7 +41,7 @@ public abstract class StripeException extends Exception {
    * @return a string representation of the exception.
    */
   @Override
-  public String toString() {
+  public String getMessage() {
     String additionalInfo = "";
     if (code != null) {
       additionalInfo += "; code: " + code;
@@ -49,6 +49,6 @@ public abstract class StripeException extends Exception {
     if (requestId != null) {
       additionalInfo += "; request-id: " + requestId;
     }
-    return super.toString() + additionalInfo;
+    return super.getMessage() + additionalInfo;
   }
 }

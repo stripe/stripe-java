@@ -21,7 +21,8 @@ public class MultipartProcessor {
    */
   public static String getBoundary() {
     Random random = new Random();
-    Long positiveRandomLong = Math.abs(random.nextLong());
+    Long positiveRandomLong = random.nextLong();
+    positiveRandomLong = (positiveRandomLong == Long.MIN_VALUE) ? 0 : Math.abs(positiveRandomLong);
     return String.valueOf(positiveRandomLong);
   }
 

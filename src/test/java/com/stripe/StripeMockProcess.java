@@ -5,8 +5,10 @@ import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.lang.reflect.Field;
+import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
+
 import lombok.Getter;
 
 public class StripeMockProcess {
@@ -88,7 +90,7 @@ public class StripeMockProcess {
   private static String detectBoundPort(Process process) throws IOException, InterruptedException {
     // output of stripe-mock available as an input stream
     BufferedReader processOutput = new BufferedReader(
-        new InputStreamReader(process.getInputStream()));
+        new InputStreamReader(process.getInputStream(), StandardCharsets.UTF_8));
 
     Pattern pattern = Pattern.compile("Listening for HTTP on port: (\\d+)");
     String line;

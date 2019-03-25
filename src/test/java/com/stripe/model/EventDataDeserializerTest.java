@@ -16,9 +16,12 @@ public class EventDataDeserializerTest extends BaseStripeTest {
     assertNotNull(event);
     assertNotNull(event.getId());
     assertNotNull(event.getData());
-    assertNotNull(event.getData().getObject());
 
-    final Application application = (Application) event.getData().getObject();
+    // Using deserializeUnsafe() because the fixture uses an older API version
+    assertNotNull(event.getDataObjectDeserializer().deserializeUnsafe());
+
+    final Application application
+        = (Application) event.getDataObjectDeserializer().deserializeUnsafe();
     assertNotNull(application);
     assertNotNull(application.getId());
   }

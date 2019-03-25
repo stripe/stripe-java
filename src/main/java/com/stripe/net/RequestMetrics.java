@@ -9,9 +9,9 @@ public class RequestMetrics {
   @SerializedName("request_duration_ms")
   public long requestDurationMs;
 
-  public RequestMetrics(String requestId, long requestDurationMS) {
+  public RequestMetrics(String requestId, long requestDurationMs) {
     this.requestId = requestId;
-    this.requestDurationMs = requestDurationMS;
+    this.requestDurationMs = requestDurationMs;
   }
 
   /**

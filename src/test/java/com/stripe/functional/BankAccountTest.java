@@ -180,7 +180,7 @@ public class BankAccountTest extends BaseStripeTest {
     final Map<String, Object> params = new HashMap<>();
     params.put("amounts", values);
 
-    final BankAccount verifiedBankAccount = (BankAccount) bankAccount.verify(params);
+    final BankAccount verifiedBankAccount = bankAccount.verify(params);
 
     assertNotNull(verifiedBankAccount);
     verifyRequest(

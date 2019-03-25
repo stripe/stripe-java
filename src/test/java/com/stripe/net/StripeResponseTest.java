@@ -1,9 +1,7 @@
 package com.stripe.net;
 
-import static org.hamcrest.CoreMatchers.instanceOf;
-
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertThat;
+import static org.junit.Assert.assertNotNull;
 
 import com.stripe.BaseStripeTest;
 
@@ -50,7 +48,7 @@ public class StripeResponseTest extends BaseStripeTest {
   public void testHeaders() {
     final Map<String, List<String>> headerMap = generateHeaderMap();
     final StripeResponse stripeResponse = new StripeResponse(200, chargeBody, headerMap);
-    assertThat(stripeResponse.headers(), instanceOf(StripeHeaders.class));
+    assertNotNull(stripeResponse.headers());
   }
 
   @Test

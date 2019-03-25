@@ -58,7 +58,7 @@ public abstract class ApiResource extends StripeObject {
 
     // Handle namespaced resources by checking if the class is in a sub-package, and if so prepend
     // it to the class name
-    String[] parts = clazz.getPackage().getName().split("\\.");
+    String[] parts = clazz.getPackage().getName().split("\\.", -1);
     assert parts.length == 3 || parts.length == 4;
     if (parts.length == 4) {
       // The first three parts are always "com.stripe.model", the fourth part is the sub-package
@@ -200,7 +200,7 @@ public abstract class ApiResource extends StripeObject {
   public static <T extends HasId> ExpandableField<T> setExpandableFieldId(String newId,
       ExpandableField<T> currentObject) {
     if (currentObject == null
-        || (currentObject.isExpanded() && (!Objects.equals(currentObject.getId(), newId)))) {
+        || (currentObject.isExpanded() && !Objects.equals(currentObject.getId(), newId))) {
       return new ExpandableField<>(newId, null);
     }
 
