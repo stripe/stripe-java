@@ -157,6 +157,7 @@ public class TransferReversal extends ApiResource
    *
    * <p>This request only accepts metadata and description as arguments.
    */
+  @Override
   public TransferReversal update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
@@ -167,6 +168,7 @@ public class TransferReversal extends ApiResource
    *
    * <p>This request only accepts metadata and description as arguments.
    */
+  @Override
   public TransferReversal update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url;

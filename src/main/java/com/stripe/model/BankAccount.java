@@ -157,6 +157,7 @@ public class BankAccount extends ApiResource
    * metadata</code> of a bank account belonging to a customer. Other bank account details are not
    * editable, by design.
    */
+  @Override
   public BankAccount update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
@@ -173,6 +174,7 @@ public class BankAccount extends ApiResource
    * metadata</code> of a bank account belonging to a customer. Other bank account details are not
    * editable, by design.
    */
+  @Override
   public BankAccount update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url;
@@ -206,6 +208,7 @@ public class BankAccount extends ApiResource
    *
    * <p>Delete a specified source for a given customer.
    */
+  @Override
   public BankAccount delete() throws StripeException {
     return delete((Map<String, Object>) null, (RequestOptions) null);
   }
@@ -215,6 +218,7 @@ public class BankAccount extends ApiResource
    *
    * <p>Delete a specified source for a given customer.
    */
+  @Override
   public BankAccount delete(RequestOptions options) throws StripeException {
     return delete((Map<String, Object>) null, options);
   }
@@ -224,6 +228,7 @@ public class BankAccount extends ApiResource
    *
    * <p>Delete a specified source for a given customer.
    */
+  @Override
   public BankAccount delete(Map<String, Object> params) throws StripeException {
     return delete(params, (RequestOptions) null);
   }
@@ -233,6 +238,7 @@ public class BankAccount extends ApiResource
    *
    * <p>Delete a specified source for a given customer.
    */
+  @Override
   public BankAccount delete(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url;

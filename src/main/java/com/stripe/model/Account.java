@@ -154,6 +154,7 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
    * href="/docs/connect/updating-accounts">Connect</a> documentation to learn more about updating
    * accounts.
    */
+  @Override
   public Account update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
@@ -170,6 +171,7 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
    * href="/docs/connect/updating-accounts">Connect</a> documentation to learn more about updating
    * accounts.
    */
+  @Override
   public Account update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/accounts/%s", this.getId()));

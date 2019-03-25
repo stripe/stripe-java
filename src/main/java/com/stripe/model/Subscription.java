@@ -316,6 +316,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * any price changes. To preview how the proration will be calculated, use the <a
    * href="#upcoming_invoice">upcoming invoice</a> endpoint.
    */
+  @Override
   public Subscription update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
@@ -326,6 +327,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * any price changes. To preview how the proration will be calculated, use the <a
    * href="#upcoming_invoice">upcoming invoice</a> endpoint.
    */
+  @Override
   public Subscription update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =

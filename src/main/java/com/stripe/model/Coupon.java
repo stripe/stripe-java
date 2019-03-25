@@ -178,6 +178,7 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
    * Updates the metadata of a coupon. Other coupon details (currency, duration, amount_off) are, by
    * design, not editable.
    */
+  @Override
   public Coupon update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
@@ -186,6 +187,7 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
    * Updates the metadata of a coupon. Other coupon details (currency, duration, amount_off) are, by
    * design, not editable.
    */
+  @Override
   public Coupon update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/coupons/%s", this.getId()));

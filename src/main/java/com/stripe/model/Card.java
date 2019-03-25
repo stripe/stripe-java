@@ -264,6 +264,7 @@ public class Card extends ApiResource
    *
    * <p>Updates a specified card for a given customer.
    */
+  @Override
   public Card update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
@@ -277,6 +278,7 @@ public class Card extends ApiResource
    *
    * <p>Updates a specified card for a given customer.
    */
+  @Override
   public Card update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url;
     if (this.getAccount() != null) {
@@ -309,6 +311,7 @@ public class Card extends ApiResource
    *
    * <p>Delete a specified source for a given customer.
    */
+  @Override
   public Card delete() throws StripeException {
     return delete((Map<String, Object>) null, (RequestOptions) null);
   }
@@ -318,6 +321,7 @@ public class Card extends ApiResource
    *
    * <p>Delete a specified source for a given customer.
    */
+  @Override
   public Card delete(RequestOptions options) throws StripeException {
     return delete((Map<String, Object>) null, options);
   }
@@ -327,6 +331,7 @@ public class Card extends ApiResource
    *
    * <p>Delete a specified source for a given customer.
    */
+  @Override
   public Card delete(Map<String, Object> params) throws StripeException {
     return delete(params, (RequestOptions) null);
   }
@@ -336,6 +341,7 @@ public class Card extends ApiResource
    *
    * <p>Delete a specified source for a given customer.
    */
+  @Override
   public Card delete(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url;
     if (this.getAccount() != null) {

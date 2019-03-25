@@ -193,6 +193,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
    * <p>Note that a product’s <code>attributes</code> are not editable. Instead, you would need to
    * deactivate the existing product and create a new one with the new attribute values.
    */
+  @Override
   public Product update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
@@ -204,6 +205,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
    * <p>Note that a product’s <code>attributes</code> are not editable. Instead, you would need to
    * deactivate the existing product and create a new one with the new attribute values.
    */
+  @Override
   public Product update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/products/%s", this.getId()));

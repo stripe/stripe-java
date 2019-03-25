@@ -124,11 +124,13 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   Verification verification;
 
   /** Updates an existing person. */
+  @Override
   public Person update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
   /** Updates an existing person. */
+  @Override
   public Person update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url;
     if (this.getAccount() != null) {

@@ -386,11 +386,13 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /** Updates a PaymentIntent object. */
+  @Override
   public PaymentIntent update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
   /** Updates a PaymentIntent object. */
+  @Override
   public PaymentIntent update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =

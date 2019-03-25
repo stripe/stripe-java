@@ -167,6 +167,7 @@ public class Dispute extends ApiResource
    * winning your dispute. To figure out which evidence fields to provide, see our <a
    * href="/docs/disputes/categories">guide to dispute types</a>.
    */
+  @Override
   public Dispute update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
@@ -181,6 +182,7 @@ public class Dispute extends ApiResource
    * winning your dispute. To figure out which evidence fields to provide, see our <a
    * href="/docs/disputes/categories">guide to dispute types</a>.
    */
+  @Override
   public Dispute update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/disputes/%s", this.getId()));

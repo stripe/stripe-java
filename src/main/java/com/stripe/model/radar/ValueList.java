@@ -127,6 +127,7 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
    * Updates a <code>ValueList</code> object by setting the values of the parameters passed. Any
    * parameters not provided will be left unchanged. Note that <code>item_type</code> is immutable.
    */
+  @Override
   public ValueList update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
@@ -135,6 +136,7 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
    * Updates a <code>ValueList</code> object by setting the values of the parameters passed. Any
    * parameters not provided will be left unchanged. Note that <code>item_type</code> is immutable.
    */
+  @Override
   public ValueList update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =

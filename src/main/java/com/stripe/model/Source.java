@@ -252,6 +252,7 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
    * also possible to update type specific information for selected payment methods. Please refer to
    * our <a href="/docs/sources">payment method guides</a> for more detail.
    */
+  @Override
   public Source update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
@@ -264,6 +265,7 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
    * also possible to update type specific information for selected payment methods. Please refer to
    * our <a href="/docs/sources">payment method guides</a> for more detail.
    */
+  @Override
   public Source update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/sources/%s", this.getId()));

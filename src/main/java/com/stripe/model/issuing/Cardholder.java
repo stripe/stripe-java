@@ -130,6 +130,7 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
    * Updates the specified Issuing <code>Cardholder</code> object by setting the values of the
    * parameters passed. Any parameters not provided will be left unchanged.
    */
+  @Override
   public Cardholder update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
@@ -138,6 +139,7 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
    * Updates the specified Issuing <code>Cardholder</code> object by setting the values of the
    * parameters passed. Any parameters not provided will be left unchanged.
    */
+  @Override
   public Cardholder update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =

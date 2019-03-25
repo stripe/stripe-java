@@ -130,11 +130,13 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   }
 
   /** Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated. */
+  @Override
   public PaymentMethod update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
   /** Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated. */
+  @Override
   public PaymentMethod update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
@@ -320,7 +322,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class ThreeDSecureUsage extends StripeObject {
-      /** 3D Secure is support on this card. */
+      /** Whether 3D Secure is supported on this card. */
       @SerializedName("supported")
       Boolean supported;
     }

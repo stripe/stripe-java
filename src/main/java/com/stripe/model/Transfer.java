@@ -272,6 +272,7 @@ public class Transfer extends ApiResource
    *
    * <p>This request accepts only metadata as an argument.
    */
+  @Override
   public Transfer update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
@@ -282,6 +283,7 @@ public class Transfer extends ApiResource
    *
    * <p>This request accepts only metadata as an argument.
    */
+  @Override
   public Transfer update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
