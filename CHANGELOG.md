@@ -1,10 +1,14 @@
 # Changelog
 
+## 8.1.0 - 2019-03-25
+* [#710](https://github.com/stripe/stripe-java/pull/710) Add support for `PaymentMethod.BillingDetails` on `Charge`.
+* [#708](https://github.com/stripe/stripe-java/pull/708) Fix issues reported by `ErrorProne` Nothing major or user visible.
+
 ## 8.0.2 - 2019-03-20
-* [#999](https://github.com/stripe/stripe-java/pull/999) Fix test compiler error by removing an accidental line  
+* [#704](https://github.com/stripe/stripe-java/pull/704) Fix test compiler error by removing an accidental line  
 
 ## 8.0.1 - 2019-03-20
-* [#999](https://github.com/stripe/stripe-java/pull/999) Fix java doc on deprecated `EventData#getObject` and `Event#getDataObjectDeserializer`
+* [#701](https://github.com/stripe/stripe-java/pull/701) Fix java doc on deprecated `EventData#getObject` and `Event#getDataObjectDeserializer`
 
 ## 8.0.0 - 2019-03-19
 * [#662](https://github.com/stripe/stripe-java/pull/662) Major version release. Supports a pinned API version [2019-03-14](https://stripe.com/docs/upgrades#2019-03-14). Refer to our [migration guide for v8](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v8) for API upgrade guide and lists of backwards incompatible changes to watch out for.
