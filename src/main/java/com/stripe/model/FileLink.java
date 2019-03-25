@@ -111,11 +111,13 @@ public class FileLink extends ApiResource implements HasId, MetadataStore<FileLi
   }
 
   /** Updates an existing file link object. Expired links can no longer be updated. */
+  @Override
   public FileLink update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
   /** Updates an existing file link object. Expired links can no longer be updated. */
+  @Override
   public FileLink update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =

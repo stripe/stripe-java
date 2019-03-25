@@ -216,6 +216,7 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
    * provided are left unchanged. By design, you cannot change a plan’s ID, amount, currency, or
    * billing cycle.
    */
+  @Override
   public Plan update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
@@ -225,6 +226,7 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
    * provided are left unchanged. By design, you cannot change a plan’s ID, amount, currency, or
    * billing cycle.
    */
+  @Override
   public Plan update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/plans/%s", this.getId()));

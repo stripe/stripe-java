@@ -273,6 +273,7 @@ public class Refund extends ApiResource implements BalanceTransactionSource, Met
    *
    * <p>This request only accepts <code>metadata</code> as an argument.
    */
+  @Override
   public Refund update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
@@ -283,6 +284,7 @@ public class Refund extends ApiResource implements BalanceTransactionSource, Met
    *
    * <p>This request only accepts <code>metadata</code> as an argument.
    */
+  @Override
   public Refund update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/refunds/%s", this.getId()));

@@ -234,6 +234,7 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
    * Updates the amount or description of an invoice item on an upcoming invoice. Updating an
    * invoice item is only possible before the invoice it’s attached to is closed.
    */
+  @Override
   public InvoiceItem update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
@@ -242,6 +243,7 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
    * Updates the amount or description of an invoice item on an upcoming invoice. Updating an
    * invoice item is only possible before the invoice it’s attached to is closed.
    */
+  @Override
   public InvoiceItem update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =

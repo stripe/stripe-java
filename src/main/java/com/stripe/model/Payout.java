@@ -289,6 +289,7 @@ public class Payout extends ApiResource implements BalanceTransactionSource, Met
    * Updates the specified payout by setting the values of the parameters passed. Any parameters not
    * provided will be left unchanged. This request accepts only the metadata as arguments.
    */
+  @Override
   public Payout update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
@@ -297,6 +298,7 @@ public class Payout extends ApiResource implements BalanceTransactionSource, Met
    * Updates the specified payout by setting the values of the parameters passed. Any parameters not
    * provided will be left unchanged. This request accepts only the metadata as arguments.
    */
+  @Override
   public Payout update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/payouts/%s", this.getId()));

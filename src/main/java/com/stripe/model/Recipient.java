@@ -221,6 +221,7 @@ public class Recipient extends ApiResource implements HasId, MetadataStore<Recip
    * <p>If you update the name or tax ID, the identity verification will automatically be rerun. If
    * you update the bank account, the bank account validation will automatically be rerun.
    */
+  @Override
   public Recipient update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
@@ -232,6 +233,7 @@ public class Recipient extends ApiResource implements HasId, MetadataStore<Recip
    * <p>If you update the name or tax ID, the identity verification will automatically be rerun. If
    * you update the bank account, the bank account validation will automatically be rerun.
    */
+  @Override
   public Recipient update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =

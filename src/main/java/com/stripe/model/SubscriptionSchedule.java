@@ -225,11 +225,13 @@ public class SubscriptionSchedule extends ApiResource
   }
 
   /** Updates an existing subscription schedule. */
+  @Override
   public SubscriptionSchedule update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
   /** Updates an existing subscription schedule. */
+  @Override
   public SubscriptionSchedule update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =

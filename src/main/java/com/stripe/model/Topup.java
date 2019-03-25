@@ -179,11 +179,13 @@ public class Topup extends ApiResource implements BalanceTransactionSource, Meta
   }
 
   /** Updates the metadata of a top-up. Other top-up details are not editable by design. */
+  @Override
   public Topup update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
   /** Updates the metadata of a top-up. Other top-up details are not editable by design. */
+  @Override
   public Topup update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/topups/%s", this.getId()));

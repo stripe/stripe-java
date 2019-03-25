@@ -105,6 +105,7 @@ public class FeeRefund extends ApiResource
    *
    * <p>This request only accepts metadata as an argument.
    */
+  @Override
   public FeeRefund update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
@@ -115,6 +116,7 @@ public class FeeRefund extends ApiResource
    *
    * <p>This request only accepts metadata as an argument.
    */
+  @Override
   public FeeRefund update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url;

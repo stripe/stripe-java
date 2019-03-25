@@ -522,6 +522,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * href="/docs/billing/invoices/reconciliation">automatically reconciling</a> invoices, pass
    * <code>auto_advance=false</code>.
    */
+  @Override
   public Invoice update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
@@ -536,6 +537,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * href="/docs/billing/invoices/reconciliation">automatically reconciling</a> invoices, pass
    * <code>auto_advance=false</code>.
    */
+  @Override
   public Invoice update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/invoices/%s", this.getId()));

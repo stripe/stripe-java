@@ -108,11 +108,13 @@ public class SubscriptionItem extends ApiResource
   }
 
   /** Updates the plan or quantity of an item on a current subscription. */
+  @Override
   public SubscriptionItem update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
   /** Updates the plan or quantity of an item on a current subscription. */
+  @Override
   public SubscriptionItem update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =

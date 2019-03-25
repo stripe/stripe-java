@@ -212,6 +212,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
    *
    * <p>This request accepts mostly the same arguments as the customer creation call.
    */
+  @Override
   public Customer update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
@@ -230,6 +231,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
    *
    * <p>This request accepts mostly the same arguments as the customer creation call.
    */
+  @Override
   public Customer update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
