@@ -11,6 +11,9 @@ import com.stripe.model.ExpandableField;
 import com.stripe.model.MetadataStore;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.issuing.TransactionListParams;
+import com.stripe.param.issuing.TransactionRetrieveParams;
+import com.stripe.param.issuing.TransactionUpdateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -206,6 +209,24 @@ public class Transaction extends ApiResource
     return requestCollection(url, params, TransactionCollection.class, options);
   }
 
+  /**
+   * Returns a list of Issuing <code>Transaction</code> objects. The objects are sorted in
+   * descending order by creation date, with the most recently created object appearing first.
+   */
+  public static TransactionCollection list(TransactionListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of Issuing <code>Transaction</code> objects. The objects are sorted in
+   * descending order by creation date, with the most recently created object appearing first.
+   */
+  public static TransactionCollection list(TransactionListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/transactions");
+    return requestCollection(url, params, TransactionCollection.class, options);
+  }
+
   /** Retrieves an Issuing <code>Transaction</code> object. */
   public static Transaction retrieve(String transaction) throws StripeException {
     return retrieve(transaction, (Map<String, Object>) null, (RequestOptions) null);
@@ -220,6 +241,16 @@ public class Transaction extends ApiResource
   /** Retrieves an Issuing <code>Transaction</code> object. */
   public static Transaction retrieve(
       String transaction, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/issuing/transactions/%s", transaction));
+    return request(ApiResource.RequestMethod.GET, url, params, Transaction.class, options);
+  }
+
+  /** Retrieves an Issuing <code>Transaction</code> object. */
+  public static Transaction retrieve(
+      String transaction, TransactionRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
         String.format(
@@ -242,6 +273,27 @@ public class Transaction extends ApiResource
    */
   @Override
   public Transaction update(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/issuing/transactions/%s", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
+  }
+
+  /**
+   * Updates the specified Issuing <code>Transaction</code> object by setting the values of the
+   * parameters passed. Any parameters not provided will be left unchanged.
+   */
+  public Transaction update(TransactionUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the specified Issuing <code>Transaction</code> object by setting the values of the
+   * parameters passed. Any parameters not provided will be left unchanged.
+   */
+  public Transaction update(TransactionUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
         String.format(

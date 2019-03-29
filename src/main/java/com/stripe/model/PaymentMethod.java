@@ -7,6 +7,12 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.PaymentMethodAttachParams;
+import com.stripe.param.PaymentMethodCreateParams;
+import com.stripe.param.PaymentMethodDetachParams;
+import com.stripe.param.PaymentMethodListParams;
+import com.stripe.param.PaymentMethodRetrieveParams;
+import com.stripe.param.PaymentMethodUpdateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -108,6 +114,26 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     return request(ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
   }
 
+  /**
+   * Creates a PaymentMethod object. Read the <a
+   * href="/docs/stripe-js/reference#stripe-create-payment-method">Stripe.js reference</a> to learn
+   * how to create PaymentMethods via Stripe.js.
+   */
+  public static PaymentMethod create(PaymentMethodCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * Creates a PaymentMethod object. Read the <a
+   * href="/docs/stripe-js/reference#stripe-create-payment-method">Stripe.js reference</a> to learn
+   * how to create PaymentMethods via Stripe.js.
+   */
+  public static PaymentMethod create(PaymentMethodCreateParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_methods");
+    return request(ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
+  }
+
   /** Retrieves a PaymentMethod object. */
   public static PaymentMethod retrieve(String paymentMethod) throws StripeException {
     return retrieve(paymentMethod, (Map<String, Object>) null, (RequestOptions) null);
@@ -122,6 +148,16 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   /** Retrieves a PaymentMethod object. */
   public static PaymentMethod retrieve(
       String paymentMethod, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/payment_methods/%s", paymentMethod));
+    return request(ApiResource.RequestMethod.GET, url, params, PaymentMethod.class, options);
+  }
+
+  /** Retrieves a PaymentMethod object. */
+  public static PaymentMethod retrieve(
+      String paymentMethod, PaymentMethodRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
         String.format(
@@ -145,6 +181,20 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     return request(ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
   }
 
+  /** Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated. */
+  public PaymentMethod update(PaymentMethodUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /** Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated. */
+  public PaymentMethod update(PaymentMethodUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/payment_methods/%s", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
+  }
+
   /** Returns a list of PaymentMethods for a given Customer. */
   public static PaymentMethodCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
@@ -157,6 +207,19 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     return requestCollection(url, params, PaymentMethodCollection.class, options);
   }
 
+  /** Returns a list of PaymentMethods for a given Customer. */
+  public static PaymentMethodCollection list(PaymentMethodListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of PaymentMethods for a given Customer. */
+  public static PaymentMethodCollection list(PaymentMethodListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_methods");
+    return requestCollection(url, params, PaymentMethodCollection.class, options);
+  }
+
   /** Attaches a PaymentMethod object to a Customer. */
   public PaymentMethod attach(Map<String, Object> params) throws StripeException {
     return attach(params, (RequestOptions) null);
@@ -164,6 +227,21 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
 
   /** Attaches a PaymentMethod object to a Customer. */
   public PaymentMethod attach(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/payment_methods/%s/attach", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
+  }
+
+  /** Attaches a PaymentMethod object to a Customer. */
+  public PaymentMethod attach(PaymentMethodAttachParams params) throws StripeException {
+    return attach(params, (RequestOptions) null);
+  }
+
+  /** Attaches a PaymentMethod object to a Customer. */
+  public PaymentMethod attach(PaymentMethodAttachParams params, RequestOptions options)
       throws StripeException {
     String url =
         String.format(
@@ -189,6 +267,21 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
 
   /** Detaches a PaymentMethod object from a Customer. */
   public PaymentMethod detach(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/payment_methods/%s/detach", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
+  }
+
+  /** Detaches a PaymentMethod object from a Customer. */
+  public PaymentMethod detach(PaymentMethodDetachParams params) throws StripeException {
+    return detach(params, (RequestOptions) null);
+  }
+
+  /** Detaches a PaymentMethod object from a Customer. */
+  public PaymentMethod detach(PaymentMethodDetachParams params, RequestOptions options)
       throws StripeException {
     String url =
         String.format(

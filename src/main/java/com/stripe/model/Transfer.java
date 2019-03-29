@@ -7,6 +7,10 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.TransferCreateParams;
+import com.stripe.param.TransferListParams;
+import com.stripe.param.TransferRetrieveParams;
+import com.stripe.param.TransferUpdateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -108,10 +112,7 @@ public class Transfer extends ApiResource
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Charge> sourceTransaction;
 
-  /**
-   * The source balance this transfer came from. One of `card`, `financing`, `bank_account`, or
-   * `alipay_account`.
-   */
+  /** The source balance this transfer came from. One of `card` or `bank_account`. */
   @SerializedName("source_type")
   String sourceType;
 
@@ -219,6 +220,26 @@ public class Transfer extends ApiResource
   }
 
   /**
+   * To send funds from your Stripe account to a connected account, you create a new transfer
+   * object. Your <a href="#balance">Stripe balance</a> must be able to cover the transfer amount,
+   * or you’ll receive an “Insufficient Funds” error.
+   */
+  public static Transfer create(TransferCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * To send funds from your Stripe account to a connected account, you create a new transfer
+   * object. Your <a href="#balance">Stripe balance</a> must be able to cover the transfer amount,
+   * or you’ll receive an “Insufficient Funds” error.
+   */
+  public static Transfer create(TransferCreateParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/transfers");
+    return request(ApiResource.RequestMethod.POST, url, params, Transfer.class, options);
+  }
+
+  /**
    * Returns a list of existing transfers sent to connected accounts. The transfers are returned in
    * sorted order, with the most recently created transfers appearing first.
    */
@@ -231,6 +252,24 @@ public class Transfer extends ApiResource
    * sorted order, with the most recently created transfers appearing first.
    */
   public static TransferCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/transfers");
+    return requestCollection(url, params, TransferCollection.class, options);
+  }
+
+  /**
+   * Returns a list of existing transfers sent to connected accounts. The transfers are returned in
+   * sorted order, with the most recently created transfers appearing first.
+   */
+  public static TransferCollection list(TransferListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of existing transfers sent to connected accounts. The transfers are returned in
+   * sorted order, with the most recently created transfers appearing first.
+   */
+  public static TransferCollection list(TransferListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/transfers");
     return requestCollection(url, params, TransferCollection.class, options);
@@ -267,6 +306,19 @@ public class Transfer extends ApiResource
   }
 
   /**
+   * Retrieves the details of an existing transfer. Supply the unique transfer ID from either a
+   * transfer creation request or the transfer list, and Stripe will return the corresponding
+   * transfer information.
+   */
+  public static Transfer retrieve(
+      String transfer, TransferRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/transfers/%s", transfer));
+    return request(ApiResource.RequestMethod.GET, url, params, Transfer.class, options);
+  }
+
+  /**
    * Updates the specified transfer by setting the values of the parameters passed. Any parameters
    * not provided will be left unchanged.
    *
@@ -285,6 +337,29 @@ public class Transfer extends ApiResource
    */
   @Override
   public Transfer update(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/transfers/%s", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Transfer.class, options);
+  }
+
+  /**
+   * Updates the specified transfer by setting the values of the parameters passed. Any parameters
+   * not provided will be left unchanged.
+   *
+   * <p>This request accepts only metadata as an argument.
+   */
+  public Transfer update(TransferUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the specified transfer by setting the values of the parameters passed. Any parameters
+   * not provided will be left unchanged.
+   *
+   * <p>This request accepts only metadata as an argument.
+   */
+  public Transfer update(TransferUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/transfers/%s", this.getId()));

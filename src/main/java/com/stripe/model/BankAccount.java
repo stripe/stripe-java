@@ -8,6 +8,9 @@ import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.BankAccountUpdateOnAccountParams;
+import com.stripe.param.BankAccountUpdateOnCustomerParams;
+import com.stripe.param.BankAccountVerifyParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -204,6 +207,105 @@ public class BankAccount extends ApiResource
   }
 
   /**
+   * Updates the metadata, account holder name, and account holder type of a bank account belonging
+   * to a <a href="/docs/connect/custom-accounts">Custom account</a>, and optionally sets it as the
+   * default for its currency. Other bank account details are not editable by design.
+   *
+   * <p>You can re-enable a disabled bank account by performing an update call without providing any
+   * arguments or changes.
+   *
+   * <p>Updates the <code>account_holder_name</code>, <code>account_holder_type</code>, and <code>
+   * metadata</code> of a bank account belonging to a customer. Other bank account details are not
+   * editable, by design.
+   */
+  public BankAccount update(BankAccountUpdateOnAccountParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the metadata, account holder name, and account holder type of a bank account belonging
+   * to a <a href="/docs/connect/custom-accounts">Custom account</a>, and optionally sets it as the
+   * default for its currency. Other bank account details are not editable by design.
+   *
+   * <p>You can re-enable a disabled bank account by performing an update call without providing any
+   * arguments or changes.
+   *
+   * <p>Updates the <code>account_holder_name</code>, <code>account_holder_type</code>, and <code>
+   * metadata</code> of a bank account belonging to a customer. Other bank account details are not
+   * editable, by design.
+   */
+  public BankAccount update(BankAccountUpdateOnAccountParams params, RequestOptions options)
+      throws StripeException {
+    String url;
+    if (this.getAccount() != null) {
+      url =
+          String.format(
+              "%s%s",
+              Stripe.getApiBase(),
+              String.format(
+                  "/v1/accounts/%s/external_accounts/%s", this.getAccount(), this.getId()));
+    } else {
+      throw new InvalidRequestException(
+          "Unable to construct url because [account] field(s) are all null",
+          null,
+          null,
+          null,
+          0,
+          null);
+    }
+    return request(ApiResource.RequestMethod.POST, url, params, BankAccount.class, options);
+  }
+
+  /**
+   * Updates the metadata, account holder name, and account holder type of a bank account belonging
+   * to a <a href="/docs/connect/custom-accounts">Custom account</a>, and optionally sets it as the
+   * default for its currency. Other bank account details are not editable by design.
+   *
+   * <p>You can re-enable a disabled bank account by performing an update call without providing any
+   * arguments or changes.
+   *
+   * <p>Updates the <code>account_holder_name</code>, <code>account_holder_type</code>, and <code>
+   * metadata</code> of a bank account belonging to a customer. Other bank account details are not
+   * editable, by design.
+   */
+  public BankAccount update(BankAccountUpdateOnCustomerParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the metadata, account holder name, and account holder type of a bank account belonging
+   * to a <a href="/docs/connect/custom-accounts">Custom account</a>, and optionally sets it as the
+   * default for its currency. Other bank account details are not editable by design.
+   *
+   * <p>You can re-enable a disabled bank account by performing an update call without providing any
+   * arguments or changes.
+   *
+   * <p>Updates the <code>account_holder_name</code>, <code>account_holder_type</code>, and <code>
+   * metadata</code> of a bank account belonging to a customer. Other bank account details are not
+   * editable, by design.
+   */
+  public BankAccount update(BankAccountUpdateOnCustomerParams params, RequestOptions options)
+      throws StripeException {
+    String url;
+    if (this.getCustomer() != null) {
+      url =
+          String.format(
+              "%s%s",
+              Stripe.getApiBase(),
+              String.format("/v1/customers/%s/sources/%s", this.getCustomer(), this.getId()));
+    } else {
+      throw new InvalidRequestException(
+          "Unable to construct url because [customer] field(s) are all null",
+          null,
+          null,
+          null,
+          0,
+          null);
+    }
+    return request(ApiResource.RequestMethod.POST, url, params, BankAccount.class, options);
+  }
+
+  /**
    * Delete a specified external account for a given account.
    *
    * <p>Delete a specified source for a given customer.
@@ -284,6 +386,34 @@ public class BankAccount extends ApiResource
 
   /** Verify a specified bank account for a given customer. */
   public BankAccount verify(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url;
+    if (this.getCustomer() != null) {
+      url =
+          String.format(
+              "%s%s",
+              Stripe.getApiBase(),
+              String.format(
+                  "/v1/customers/%s/sources/%s/verify", this.getCustomer(), this.getId()));
+    } else {
+      throw new InvalidRequestException(
+          "Unable to construct url because [customer] field(s) are all null",
+          null,
+          null,
+          null,
+          0,
+          null);
+    }
+    return request(ApiResource.RequestMethod.POST, url, params, BankAccount.class, options);
+  }
+
+  /** Verify a specified bank account for a given customer. */
+  public BankAccount verify(BankAccountVerifyParams params) throws StripeException {
+    return verify(params, (RequestOptions) null);
+  }
+
+  /** Verify a specified bank account for a given customer. */
+  public BankAccount verify(BankAccountVerifyParams params, RequestOptions options)
       throws StripeException {
     String url;
     if (this.getCustomer() != null) {
