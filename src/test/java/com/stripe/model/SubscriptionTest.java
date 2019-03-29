@@ -50,6 +50,7 @@ public class SubscriptionTest extends BaseStripeTest {
   }
 
   @Test
+  @SuppressWarnings("BigDecimalEquals")
   public void testDeserializeBigDecimal() {
     final String data = "{\"object\": \"subscription\", \"tax_percent\": 0.3}";
     final Subscription subscription = ApiResource.GSON.fromJson(data, Subscription.class);
