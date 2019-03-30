@@ -274,6 +274,28 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
     return request(ApiResource.RequestMethod.DELETE, url, params, Customer.class, options);
   }
 
+  /** Retrieves the list of transactions applied to a customer’s balance. */
+  public CustomerBalanceTransactionCollection balanceTransactions() throws StripeException {
+    return balanceTransactions((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieves the list of transactions applied to a customer’s balance. */
+  public CustomerBalanceTransactionCollection balanceTransactions(Map<String, Object> params)
+      throws StripeException {
+    return balanceTransactions(params, (RequestOptions) null);
+  }
+
+  /** Retrieves the list of transactions applied to a customer’s balance. */
+  public CustomerBalanceTransactionCollection balanceTransactions(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/customers/%s/customer_balance_transactions", this.getId()));
+    return requestCollection(url, params, CustomerBalanceTransactionCollection.class, options);
+  }
+
   /** Removes the currently applied discount on a customer. */
   public Discount deleteDiscount() throws StripeException {
     return deleteDiscount((Map<String, Object>) null, (RequestOptions) null);

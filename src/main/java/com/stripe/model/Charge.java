@@ -245,6 +245,10 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
   @SerializedName("shipping")
   ShippingDetails shipping;
 
+  /**
+   * For most Stripe users, the source of every charge is a credit or debit card. This hash is then
+   * the [card object](#card_object) describing that card.
+   */
   @SerializedName("source")
   PaymentSource source;
 

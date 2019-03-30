@@ -117,10 +117,7 @@ public class Payout extends ApiResource implements BalanceTransactionSource, Met
   @SerializedName("object")
   String object;
 
-  /**
-   * The source balance this payout came from. One of `card`, `financing`, `bank_account`, or
-   * `alipay_account`.
-   */
+  /** The source balance this payout came from. One of `card` or `bank_account`. */
   @SerializedName("source_type")
   String sourceType;
 
