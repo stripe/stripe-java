@@ -124,6 +124,7 @@ public class BalanceTransactionSourceTypeAdapterFactory implements TypeAdapterFa
       this.rawJson = rawJson;
     }
 
+    @Override
     public String getId() {
       return this.id;
     }

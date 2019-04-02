@@ -80,6 +80,7 @@ public class ExternalAccountTypeAdapterFactory implements TypeAdapterFactory {
       this.rawJson = rawJson;
     }
 
+    @Override
     public String getId() {
       return this.id;
     }
