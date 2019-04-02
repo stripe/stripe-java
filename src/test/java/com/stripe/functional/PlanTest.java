@@ -30,7 +30,7 @@ public class PlanTest extends BaseStripeTest {
     params.put("currency", "usd");
     params.put("id", "sapphire-elite");
     params.put("interval", "month");
-    params.put("name", "Sapphire Elite");
+    params.put("nickname", "Sapphire Elite");
 
     final Plan plan = Plan.create(params);
 
@@ -58,7 +58,7 @@ public class PlanTest extends BaseStripeTest {
     final Plan plan = getPlanFixture();
 
     final Map<String, Object> params = new HashMap<>();
-    params.put("name", "Updated Name");
+    params.put("nickname", "Updated Name");
 
     final Plan updatedPlan = plan.update(params);
 
