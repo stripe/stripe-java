@@ -10,6 +10,26 @@ import java.util.Map;
 
 public class CustomerBalanceTransactionCollection
     extends StripeCollection<CustomerBalanceTransaction> {
+  /** Retrieves a specific transaction applied to a customer’s balance. */
+  public CustomerBalanceTransaction retrieve(String id) throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieves a specific transaction applied to a customer’s balance. */
+  public CustomerBalanceTransaction retrieve(String id, RequestOptions options)
+      throws StripeException {
+    return retrieve(id, (Map<String, Object>) null, options);
+  }
+
+  /** Retrieves a specific transaction applied to a customer’s balance. */
+  public CustomerBalanceTransaction retrieve(
+      String id, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("%s/%s", this.getUrl(), id));
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, CustomerBalanceTransaction.class, options);
+  }
+
   /**
    * Creates an immutable transaction to apply to the customer’s balance. This transaction updates
    * the customer by adding the amount to the customer’s current balance.

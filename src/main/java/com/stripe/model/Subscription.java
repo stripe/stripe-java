@@ -99,6 +99,16 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   Long daysUntilDue;
 
   /**
+   * ID of the default payment method for the subscription. It must belong to the customer
+   * associated with the subscription and be in a chargeable state. If not set, defaults to the
+   * customer's default payment method.
+   */
+  @SerializedName("default_payment_method")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<PaymentMethod> defaultPaymentMethod;
+
+  /**
    * ID of the default payment source for the subscription. It must belong to the customer
    * associated with the subscription and be in a chargeable state. If not set, defaults to the
    * customer's default source.
@@ -241,6 +251,25 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   public void setCustomerObject(Customer expandableObject) {
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get id of expandable `defaultPaymentMethod` object. */
+  public String getDefaultPaymentMethod() {
+    return (this.defaultPaymentMethod != null) ? this.defaultPaymentMethod.getId() : null;
+  }
+
+  public void setDefaultPaymentMethod(String id) {
+    this.defaultPaymentMethod = ApiResource.setExpandableFieldId(id, this.defaultPaymentMethod);
+  }
+
+  /** Get expanded `defaultPaymentMethod`. */
+  public PaymentMethod getDefaultPaymentMethodObject() {
+    return (this.defaultPaymentMethod != null) ? this.defaultPaymentMethod.getExpanded() : null;
+  }
+
+  public void setDefaultPaymentMethodObject(PaymentMethod expandableObject) {
+    this.defaultPaymentMethod =
+        new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
   }
 
   /** Get id of expandable `defaultSource` object. */

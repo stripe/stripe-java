@@ -104,6 +104,12 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("id")
   String id;
 
+  /** ID of the invoice that created this PaymentIntent, if it exists. */
+  @SerializedName("invoice")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Invoice> invoice;
+
   /** The payment error encountered in the previous PaymentIntent confirmation. */
   @SerializedName("last_payment_error")
   StripeError lastPaymentError;
@@ -240,6 +246,24 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
   public void setCustomerObject(Customer expandableObject) {
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get id of expandable `invoice` object. */
+  public String getInvoice() {
+    return (this.invoice != null) ? this.invoice.getId() : null;
+  }
+
+  public void setInvoice(String id) {
+    this.invoice = ApiResource.setExpandableFieldId(id, this.invoice);
+  }
+
+  /** Get expanded `invoice`. */
+  public Invoice getInvoiceObject() {
+    return (this.invoice != null) ? this.invoice.getExpanded() : null;
+  }
+
+  public void setInvoiceObject(Invoice expandableObject) {
+    this.invoice = new ExpandableField<Invoice>(expandableObject.getId(), expandableObject);
   }
 
   /** Get id of expandable `onBehalfOf` object. */
@@ -523,8 +547,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * A PaymentIntent object can be canceled when it is in one of these statuses:
-   * requires_payment_method, requires_capture, requires_confirmation, requires_action.
+   * A PaymentIntent object can be canceled when it is in one of these statuses: <code>
+   * requires_payment_method</code>, <code>requires_capture</code>, <code>requires_confirmation
+   * </code>, <code>requires_action</code>.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
@@ -536,8 +561,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * A PaymentIntent object can be canceled when it is in one of these statuses:
-   * requires_payment_method, requires_capture, requires_confirmation, requires_action.
+   * A PaymentIntent object can be canceled when it is in one of these statuses: <code>
+   * requires_payment_method</code>, <code>requires_capture</code>, <code>requires_confirmation
+   * </code>, <code>requires_action</code>.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
@@ -549,8 +575,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * A PaymentIntent object can be canceled when it is in one of these statuses:
-   * requires_payment_method, requires_capture, requires_confirmation, requires_action.
+   * A PaymentIntent object can be canceled when it is in one of these statuses: <code>
+   * requires_payment_method</code>, <code>requires_capture</code>, <code>requires_confirmation
+   * </code>, <code>requires_action</code>.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
@@ -562,8 +589,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * A PaymentIntent object can be canceled when it is in one of these statuses:
-   * requires_payment_method, requires_capture, requires_confirmation, requires_action.
+   * A PaymentIntent object can be canceled when it is in one of these statuses: <code>
+   * requires_payment_method</code>, <code>requires_capture</code>, <code>requires_confirmation
+   * </code>, <code>requires_action</code>.
    *
    * <p>Once canceled, no additional charges will be made by the PaymentIntent and any operations on
    * the PaymentIntent will fail with an error. For PaymentIntents with <code>
@@ -580,8 +608,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * Capture the funds of an existing uncaptured PaymentIntent where <code>
-   * required_action="requires_capture"</code>.
+   * Capture the funds of an existing uncaptured PaymentIntent when its status is <code>
+   * requires_capture</code>.
    *
    * <p>Uncaptured PaymentIntents will be canceled exactly seven days after they are created.
    *
@@ -594,8 +622,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * Capture the funds of an existing uncaptured PaymentIntent where <code>
-   * required_action="requires_capture"</code>.
+   * Capture the funds of an existing uncaptured PaymentIntent when its status is <code>
+   * requires_capture</code>.
    *
    * <p>Uncaptured PaymentIntents will be canceled exactly seven days after they are created.
    *
@@ -608,8 +636,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * Capture the funds of an existing uncaptured PaymentIntent where <code>
-   * required_action="requires_capture"</code>.
+   * Capture the funds of an existing uncaptured PaymentIntent when its status is <code>
+   * requires_capture</code>.
    *
    * <p>Uncaptured PaymentIntents will be canceled exactly seven days after they are created.
    *
@@ -622,8 +650,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * Capture the funds of an existing uncaptured PaymentIntent where <code>
-   * required_action="requires_capture"</code>.
+   * Capture the funds of an existing uncaptured PaymentIntent when its status is <code>
+   * requires_capture</code>.
    *
    * <p>Uncaptured PaymentIntents will be canceled exactly seven days after they are created.
    *

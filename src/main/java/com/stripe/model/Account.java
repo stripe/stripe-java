@@ -410,7 +410,11 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
     @SerializedName("address_kanji")
     Person.JapanAddress addressKanji;
 
-    /** Whether information was collected from the company's directors. */
+    /**
+     * Whether the company's directors have been provided. This Boolean will be `true` if you've
+     * manually indicated that all directors are provided via [the `directors_provided`
+     * parameter](https://stripe.com/docs/api/accounts/update#update_account-company-directors_provided).
+     */
     @SerializedName("directors_provided")
     Boolean directorsProvided;
 
@@ -426,7 +430,14 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
     @SerializedName("name_kanji")
     String nameKanji;
 
-    /** Whether the company's owners have been provided. */
+    /**
+     * Whether the company's owners have been provided. This Boolean will be `true` if you've
+     * manually indicated that all owners are provided via [the `owners_provided`
+     * parameter](https://stripe.com/docs/api/accounts/update#update_account-company-owners_provided),
+     * or if Stripe determined that all owners were provided. Stripe determines ownership
+     * requirements using both the number of owners provided and their total percent ownership
+     * (calculated by adding the `percent_ownership` of each owner together).
+     */
     @SerializedName("owners_provided")
     Boolean ownersProvided;
 

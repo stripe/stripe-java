@@ -323,9 +323,34 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
     @SerializedName("custom_fields")
     List<Invoice.CustomField> customFields;
 
+    /** ID of the default payment method for the customer. */
+    @SerializedName("default_payment_method")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<PaymentMethod> defaultPaymentMethod;
+
     /** Default footer to be displayed on invoices for this customer. */
     @SerializedName("footer")
     String footer;
+
+    /** Get id of expandable `defaultPaymentMethod` object. */
+    public String getDefaultPaymentMethod() {
+      return (this.defaultPaymentMethod != null) ? this.defaultPaymentMethod.getId() : null;
+    }
+
+    public void setDefaultPaymentMethod(String id) {
+      this.defaultPaymentMethod = ApiResource.setExpandableFieldId(id, this.defaultPaymentMethod);
+    }
+
+    /** Get expanded `defaultPaymentMethod`. */
+    public PaymentMethod getDefaultPaymentMethodObject() {
+      return (this.defaultPaymentMethod != null) ? this.defaultPaymentMethod.getExpanded() : null;
+    }
+
+    public void setDefaultPaymentMethodObject(PaymentMethod expandableObject) {
+      this.defaultPaymentMethod =
+          new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
+    }
   }
 
   @Getter

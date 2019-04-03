@@ -116,6 +116,16 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   ExpandableField<Customer> customer;
 
   /**
+   * ID of the default payment method for the invoice. It must belong to the customer associated
+   * with the invoice and be in a chargeable state. If not set, defaults to the subscription's
+   * default payment method, if any, or to the customer's default payment method.
+   */
+  @SerializedName("default_payment_method")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<PaymentMethod> defaultPaymentMethod;
+
+  /**
    * ID of the default payment source for the invoice. It must belong to the customer associated
    * with the invoice and be in a chargeable state. If not set, defaults to the subscription's
    * default source, if any, or to the customer's default source.
@@ -223,6 +233,14 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    */
   @SerializedName("paid")
   Boolean paid;
+
+  /**
+   * The PaymentIntent associated with this invoice. The PaymentIntent is generated when the invoice
+   * is finalized, and can then be used to pay the invoice. Note that voiding an invoice will cancel
+   * the PaymentIntent.
+   */
+  @SerializedName("payment_intent")
+  PaymentIntent paymentIntent;
 
   /** End of the usage period during which invoice items were added to this invoice. */
   @SerializedName("period_end")
@@ -344,6 +362,25 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   public void setCustomerObject(Customer expandableObject) {
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get id of expandable `defaultPaymentMethod` object. */
+  public String getDefaultPaymentMethod() {
+    return (this.defaultPaymentMethod != null) ? this.defaultPaymentMethod.getId() : null;
+  }
+
+  public void setDefaultPaymentMethod(String id) {
+    this.defaultPaymentMethod = ApiResource.setExpandableFieldId(id, this.defaultPaymentMethod);
+  }
+
+  /** Get expanded `defaultPaymentMethod`. */
+  public PaymentMethod getDefaultPaymentMethodObject() {
+    return (this.defaultPaymentMethod != null) ? this.defaultPaymentMethod.getExpanded() : null;
+  }
+
+  public void setDefaultPaymentMethodObject(PaymentMethod expandableObject) {
+    this.defaultPaymentMethod =
+        new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
   }
 
   /** Get id of expandable `defaultSource` object. */
