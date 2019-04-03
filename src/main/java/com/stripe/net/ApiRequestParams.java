@@ -25,7 +25,7 @@ public abstract class ApiRequestParams {
    * expects. Internally, it used in custom serialization
    * {@link ApiRequestParams.HasEmptyEnumTypeAdapterFactory} converting empty string enum to null.
    */
-  public interface Enum {
+  public interface EnumParam {
     String getValue();
   }
 
@@ -41,13 +41,13 @@ public abstract class ApiRequestParams {
     @SuppressWarnings("unchecked")
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-      if (!Enum.class.isAssignableFrom(type.getRawType())) {
+      if (!EnumParam.class.isAssignableFrom(type.getRawType())) {
         return null;
       }
 
-      TypeAdapter<Enum> paramEnum = new TypeAdapter<Enum>() {
+      TypeAdapter<EnumParam> paramEnum = new TypeAdapter<EnumParam>() {
         @Override
-        public void write(JsonWriter out, Enum value) throws IOException {
+        public void write(JsonWriter out, EnumParam value) throws IOException {
           if (value.getValue().equals("")) {
             // need to restore serialize null setting
             // not to affect other fields
@@ -61,7 +61,7 @@ public abstract class ApiRequestParams {
         }
 
         @Override
-        public Enum read(JsonReader in) {
+        public EnumParam read(JsonReader in) {
           throw new UnsupportedOperationException(
               "No deserialization is expected from this private type adapter for enum param.");
         }
@@ -77,7 +77,7 @@ public abstract class ApiRequestParams {
    * prior integrations using the untyped params map
    * {@link ApiResource#request(ApiResource.RequestMethod, String, Map, Class, RequestOptions)}.
    *
-   * <p>The peculiarity of this conversion is that `EMPTY` {@link ApiRequestParams.Enum} with raw
+   * <p>The peculiarity of this conversion is that `EMPTY` {@link EnumParam} with raw
    * value of empty string will be converted to null. This is compatible with the existing
    * contract enforcing no empty string in the untyped map params.
    *
