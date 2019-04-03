@@ -495,7 +495,13 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("address_kanji")
     AddressKanji addressKanji;
 
-    /** Whether information has been collected from the company's directors. */
+    /**
+     * Whether the company's directors have been provided. Set this Boolean to `true` after creating
+     * all the company's directors with [the Persons API](https://stripe.com/docs/api/persons) for
+     * accounts with a `relationship.director` requirement. This value is not automatically set to
+     * `true` after creating directors, so it needs to be updated to indicate all directors have
+     * been provided.
+     */
     @SerializedName("directors_provided")
     Boolean directorsProvided;
 
@@ -511,7 +517,11 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("name_kanji")
     String nameKanji;
 
-    /** Whether information has been collected from the company's owners. */
+    /**
+     * Whether the company's owners have been provided. Set this Boolean to `true` after creating
+     * all the company's owners with [the Persons API](https://stripe.com/docs/api/persons) for
+     * accounts with a `relationship.owner` requirement.
+     */
     @SerializedName("owners_provided")
     Boolean ownersProvided;
 
@@ -626,7 +636,13 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Whether information has been collected from the company's directors. */
+      /**
+       * Whether the company's directors have been provided. Set this Boolean to `true` after
+       * creating all the company's directors with [the Persons
+       * API](https://stripe.com/docs/api/persons) for accounts with a `relationship.director`
+       * requirement. This value is not automatically set to `true` after creating directors, so it
+       * needs to be updated to indicate all directors have been provided.
+       */
       public Builder setDirectorsProvided(Boolean directorsProvided) {
         this.directorsProvided = directorsProvided;
         return this;
@@ -650,7 +666,11 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Whether information has been collected from the company's owners. */
+      /**
+       * Whether the company's owners have been provided. Set this Boolean to `true` after creating
+       * all the company's owners with [the Persons API](https://stripe.com/docs/api/persons) for
+       * accounts with a `relationship.owner` requirement.
+       */
       public Builder setOwnersProvided(Boolean ownersProvided) {
         this.ownersProvided = ownersProvided;
         return this;

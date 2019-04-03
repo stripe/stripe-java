@@ -29,8 +29,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   CaptureMethod captureMethod;
 
   /**
-   * Attempt to confirm this PaymentIntent immediately. If the payment method attached is a card, a
-   * return_url may be provided in case additional authentication is required. Read the [expanded
+   * Set to `true` to attempt to confirm this PaymentIntent immediately. This parameter defaults to
+   * `false`. If the payment method attached is a card, a return_url may be provided in case
+   * additional authentication is required. Read the [expanded
    * documentation](https://stripe.com/docs/payments/payment-intents/server-confirmation) to learn
    * more about server-side confirmation.
    */
@@ -348,9 +349,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Attempt to confirm this PaymentIntent immediately. If the payment method attached is a card,
-     * a return_url may be provided in case additional authentication is required. Read the
-     * [expanded
+     * Set to `true` to attempt to confirm this PaymentIntent immediately. This parameter defaults
+     * to `false`. If the payment method attached is a card, a return_url may be provided in case
+     * additional authentication is required. Read the [expanded
      * documentation](https://stripe.com/docs/payments/payment-intents/server-confirmation) to learn
      * more about server-side confirmation.
      */

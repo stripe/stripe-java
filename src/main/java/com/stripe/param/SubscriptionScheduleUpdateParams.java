@@ -380,7 +380,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
      * be set.
      */
     @SerializedName("end_date")
-    String endDate;
+    Object endDate;
 
     /**
      * Integer representing the multiplier applied to the plan interval. For example, `iterations=2`
@@ -399,7 +399,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
     /** The date at which this phase of the subscription schedule starts. */
     @SerializedName("start_date")
-    String startDate;
+    Object startDate;
 
     /**
      * A non-negative decimal (with at most four decimal places) between 0 and 100. This represents
@@ -423,18 +423,18 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
      * date, can not be combined with `trial`
      */
     @SerializedName("trial_end")
-    String trialEnd;
+    Object trialEnd;
 
     private Phase(
         BigDecimal applicationFeePercent,
         String coupon,
-        String endDate,
+        Object endDate,
         Long iterations,
         List<Plan> plans,
-        String startDate,
+        Object startDate,
         BigDecimal taxPercent,
         Boolean trial,
-        String trialEnd) {
+        Object trialEnd) {
       this.applicationFeePercent = applicationFeePercent;
       this.coupon = coupon;
       this.endDate = endDate;
@@ -455,19 +455,19 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
       private String coupon;
 
-      private String endDate;
+      private Object endDate;
 
       private Long iterations;
 
       private List<Plan> plans;
 
-      private String startDate;
+      private Object startDate;
 
       private BigDecimal taxPercent;
 
       private Boolean trial;
 
-      private String trialEnd;
+      private Object trialEnd;
 
       /** Finalize and obtain parameter instance from this builder. */
       public Phase build() {
@@ -531,7 +531,16 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
        * The date at which this phase of the subscription schedule ends. If set, `iterations` must
        * not be set.
        */
-      public Builder setEndDate(String endDate) {
+      public Builder setEndDate(EndDate endDate) {
+        this.endDate = endDate;
+        return this;
+      }
+
+      /**
+       * The date at which this phase of the subscription schedule ends. If set, `iterations` must
+       * not be set.
+       */
+      public Builder setEndDate(Long endDate) {
         this.endDate = endDate;
         return this;
       }
@@ -547,7 +556,13 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       }
 
       /** The date at which this phase of the subscription schedule starts. */
-      public Builder setStartDate(String startDate) {
+      public Builder setStartDate(StartDate startDate) {
+        this.startDate = startDate;
+        return this;
+      }
+
+      /** The date at which this phase of the subscription schedule starts. */
+      public Builder setStartDate(Long startDate) {
         this.startDate = startDate;
         return this;
       }
@@ -568,7 +583,16 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
        * Sets the phase to trialing from the start date to this date. Must be before the phase end
        * date, can not be combined with `trial`
        */
-      public Builder setTrialEnd(String trialEnd) {
+      public Builder setTrialEnd(TrialEnd trialEnd) {
+        this.trialEnd = trialEnd;
+        return this;
+      }
+
+      /**
+       * Sets the phase to trialing from the start date to this date. Must be before the phase end
+       * date, can not be combined with `trial`
+       */
+      public Builder setTrialEnd(Long trialEnd) {
         this.trialEnd = trialEnd;
         return this;
       }
@@ -699,6 +723,39 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         Empty(String value) {
           this.value = value;
         }
+      }
+    }
+
+    public enum EndDate implements ApiRequestParams.Enum {
+      @SerializedName("now")
+      NOW("now");
+
+      @Getter private final String value;
+
+      EndDate(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum StartDate implements ApiRequestParams.Enum {
+      @SerializedName("now")
+      NOW("now");
+
+      @Getter private final String value;
+
+      StartDate(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum TrialEnd implements ApiRequestParams.Enum {
+      @SerializedName("now")
+      NOW("now");
+
+      @Getter private final String value;
+
+      TrialEnd(String value) {
+        this.value = value;
       }
     }
   }

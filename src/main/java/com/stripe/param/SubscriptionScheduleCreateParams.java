@@ -84,7 +84,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
   /** The date at which the subscription schedule starts. */
   @SerializedName("start_date")
-  String startDate;
+  Object startDate;
 
   private SubscriptionScheduleCreateParams(
       Billing billing,
@@ -97,7 +97,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       List<Phase> phases,
       RenewalBehavior renewalBehavior,
       RenewalInterval renewalInterval,
-      String startDate) {
+      Object startDate) {
     this.billing = billing;
     this.billingThresholds = billingThresholds;
     this.customer = customer;
@@ -136,7 +136,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
     private RenewalInterval renewalInterval;
 
-    private String startDate;
+    private Object startDate;
 
     /** Finalize and obtain parameter instance from this builder. */
     public SubscriptionScheduleCreateParams build() {
@@ -307,7 +307,13 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     }
 
     /** The date at which the subscription schedule starts. */
-    public Builder setStartDate(String startDate) {
+    public Builder setStartDate(StartDate startDate) {
+      this.startDate = startDate;
+      return this;
+    }
+
+    /** The date at which the subscription schedule starts. */
+    public Builder setStartDate(Long startDate) {
       this.startDate = startDate;
       return this;
     }
@@ -828,6 +834,17 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     @Getter private final String value;
 
     RenewalBehavior(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum StartDate implements ApiRequestParams.Enum {
+    @SerializedName("now")
+    NOW("now");
+
+    @Getter private final String value;
+
+    StartDate(String value) {
       this.value = value;
     }
   }

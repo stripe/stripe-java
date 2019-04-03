@@ -17,9 +17,6 @@ public class TokenCreateParams extends ApiRequestParams {
   @SerializedName("card")
   Object card;
 
-  @SerializedName("currency")
-  String currency;
-
   /**
    * The customer (owned by the application's account) for which to create a token. For use only
    * with [Stripe Connect](https://stripe.com/docs/connect). Also, this can be used only with an
@@ -39,15 +36,9 @@ public class TokenCreateParams extends ApiRequestParams {
   Pii pii;
 
   private TokenCreateParams(
-      BankAccount bankAccount,
-      Object card,
-      String currency,
-      String customer,
-      List<String> expand,
-      Pii pii) {
+      BankAccount bankAccount, Object card, String customer, List<String> expand, Pii pii) {
     this.bankAccount = bankAccount;
     this.card = card;
-    this.currency = currency;
     this.customer = customer;
     this.expand = expand;
     this.pii = pii;
@@ -62,8 +53,6 @@ public class TokenCreateParams extends ApiRequestParams {
 
     private Object card;
 
-    private String currency;
-
     private String customer;
 
     private List<String> expand;
@@ -73,7 +62,7 @@ public class TokenCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public TokenCreateParams build() {
       return new TokenCreateParams(
-          this.bankAccount, this.card, this.currency, this.customer, this.expand, this.pii);
+          this.bankAccount, this.card, this.customer, this.expand, this.pii);
     }
 
     /**
@@ -115,11 +104,6 @@ public class TokenCreateParams extends ApiRequestParams {
 
     public Builder setCard(String card) {
       this.card = card;
-      return this;
-    }
-
-    public Builder setCurrency(String currency) {
-      this.currency = currency;
       return this;
     }
 

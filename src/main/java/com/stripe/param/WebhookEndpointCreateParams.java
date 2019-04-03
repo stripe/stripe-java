@@ -428,12 +428,6 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("account.application.deauthorized")
     ACCOUNT__APPLICATION__DEAUTHORIZED("account.application.deauthorized"),
 
-    @SerializedName("account.approaching_unactivated_threshold")
-    ACCOUNT__APPROACHING_UNACTIVATED_THRESHOLD("account.approaching_unactivated_threshold"),
-
-    @SerializedName("account.exceeded_unactivated_threshold")
-    ACCOUNT__EXCEEDED_UNACTIVATED_THRESHOLD("account.exceeded_unactivated_threshold"),
-
     @SerializedName("account.external_account.created")
     ACCOUNT__EXTERNAL_ACCOUNT__CREATED("account.external_account.created"),
 
@@ -442,27 +436,6 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     @SerializedName("account.external_account.updated")
     ACCOUNT__EXTERNAL_ACCOUNT__UPDATED("account.external_account.updated"),
-
-    @SerializedName("account.need_info")
-    ACCOUNT__NEED_INFO("account.need_info"),
-
-    @SerializedName("account.need_info.resolved")
-    ACCOUNT__NEED_INFO__RESOLVED("account.need_info.resolved"),
-
-    @SerializedName("account.note_for_review")
-    ACCOUNT__NOTE_FOR_REVIEW("account.note_for_review"),
-
-    @SerializedName("account.note_for_review.resolved")
-    ACCOUNT__NOTE_FOR_REVIEW__RESOLVED("account.note_for_review.resolved"),
-
-    @SerializedName("account.reject")
-    ACCOUNT__REJECT("account.reject"),
-
-    @SerializedName("account.reject.resolved")
-    ACCOUNT__REJECT__RESOLVED("account.reject.resolved"),
-
-    @SerializedName("account.risk_transfers_disabled")
-    ACCOUNT__RISK_TRANSFERS_DISABLED("account.risk_transfers_disabled"),
 
     @SerializedName("account.updated")
     ACCOUNT__UPDATED("account.updated"),
@@ -478,27 +451,6 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     @SerializedName("balance.available")
     BALANCE__AVAILABLE("balance.available"),
-
-    @SerializedName("balance.stripe_reserve_canceled")
-    BALANCE__STRIPE_RESERVE_CANCELED("balance.stripe_reserve_canceled"),
-
-    @SerializedName("balance.stripe_reserve_created")
-    BALANCE__STRIPE_RESERVE_CREATED("balance.stripe_reserve_created"),
-
-    @SerializedName("balance.stripe_reserve_expired")
-    BALANCE__STRIPE_RESERVE_EXPIRED("balance.stripe_reserve_expired"),
-
-    @SerializedName("batch.created")
-    BATCH__CREATED("batch.created"),
-
-    @SerializedName("batch.updated")
-    BATCH__UPDATED("batch.updated"),
-
-    @SerializedName("capability.created")
-    CAPABILITY__CREATED("capability.created"),
-
-    @SerializedName("capability.updated")
-    CAPABILITY__UPDATED("capability.updated"),
 
     @SerializedName("charge.captured")
     CHARGE__CAPTURED("charge.captured"),
@@ -542,9 +494,6 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("checkout.session.completed")
     CHECKOUT__SESSION__COMPLETED("checkout.session.completed"),
 
-    @SerializedName("checkout_beta.session_succeeded")
-    CHECKOUT_BETA__SESSION_SUCCEEDED("checkout_beta.session_succeeded"),
-
     @SerializedName("coupon.created")
     COUPON__CREATED("coupon.created"),
 
@@ -553,36 +502,6 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     @SerializedName("coupon.updated")
     COUPON__UPDATED("coupon.updated"),
-
-    @SerializedName("credit_note.created")
-    CREDIT_NOTE__CREATED("credit_note.created"),
-
-    @SerializedName("credit_note.updated")
-    CREDIT_NOTE__UPDATED("credit_note.updated"),
-
-    @SerializedName("credit_note.voided")
-    CREDIT_NOTE__VOIDED("credit_note.voided"),
-
-    @SerializedName("customer.bank_account.created")
-    CUSTOMER__BANK_ACCOUNT__CREATED("customer.bank_account.created"),
-
-    @SerializedName("customer.bank_account.deleted")
-    CUSTOMER__BANK_ACCOUNT__DELETED("customer.bank_account.deleted"),
-
-    @SerializedName("customer.bank_account.updated")
-    CUSTOMER__BANK_ACCOUNT__UPDATED("customer.bank_account.updated"),
-
-    @SerializedName("customer.card.contact_cardholder")
-    CUSTOMER__CARD__CONTACT_CARDHOLDER("customer.card.contact_cardholder"),
-
-    @SerializedName("customer.card.created")
-    CUSTOMER__CARD__CREATED("customer.card.created"),
-
-    @SerializedName("customer.card.deleted")
-    CUSTOMER__CARD__DELETED("customer.card.deleted"),
-
-    @SerializedName("customer.card.updated")
-    CUSTOMER__CARD__UPDATED("customer.card.updated"),
 
     @SerializedName("customer.created")
     CUSTOMER__CREATED("customer.created"),
@@ -598,9 +517,6 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     @SerializedName("customer.discount.updated")
     CUSTOMER__DISCOUNT__UPDATED("customer.discount.updated"),
-
-    @SerializedName("customer.source.contact_cardholder")
-    CUSTOMER__SOURCE__CONTACT_CARDHOLDER("customer.source.contact_cardholder"),
 
     @SerializedName("customer.source.created")
     CUSTOMER__SOURCE__CREATED("customer.source.created"),
@@ -674,9 +590,6 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("invoiceitem.updated")
     INVOICEITEM__UPDATED("invoiceitem.updated"),
 
-    @SerializedName("issuer_fraud_record.created")
-    ISSUER_FRAUD_RECORD__CREATED("issuer_fraud_record.created"),
-
     @SerializedName("issuing_authorization.created")
     ISSUING_AUTHORIZATION__CREATED("issuing_authorization.created"),
 
@@ -731,15 +644,6 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("order_return.created")
     ORDER_RETURN__CREATED("order_return.created"),
 
-    @SerializedName("payment.created")
-    PAYMENT__CREATED("payment.created"),
-
-    @SerializedName("payment.failed")
-    PAYMENT__FAILED("payment.failed"),
-
-    @SerializedName("payment.paid")
-    PAYMENT__PAID("payment.paid"),
-
     @SerializedName("payment_intent.amount_capturable_updated")
     PAYMENT_INTENT__AMOUNT_CAPTURABLE_UPDATED("payment_intent.amount_capturable_updated"),
 
@@ -748,12 +652,6 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     @SerializedName("payment_intent.payment_failed")
     PAYMENT_INTENT__PAYMENT_FAILED("payment_intent.payment_failed"),
-
-    @SerializedName("payment_intent.requires_authorization")
-    PAYMENT_INTENT__REQUIRES_AUTHORIZATION("payment_intent.requires_authorization"),
-
-    @SerializedName("payment_intent.requires_capture")
-    PAYMENT_INTENT__REQUIRES_CAPTURE("payment_intent.requires_capture"),
 
     @SerializedName("payment_intent.succeeded")
     PAYMENT_INTENT__SUCCEEDED("payment_intent.succeeded"),
@@ -766,12 +664,6 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     @SerializedName("payment_method.detached")
     PAYMENT_METHOD__DETACHED("payment_method.detached"),
-
-    @SerializedName("payment_provider_balance_transaction.created")
-    PAYMENT_PROVIDER_BALANCE_TRANSACTION__CREATED("payment_provider_balance_transaction.created"),
-
-    @SerializedName("payment_provider_transfer.updated")
-    PAYMENT_PROVIDER_TRANSFER__UPDATED("payment_provider_transfer.updated"),
 
     @SerializedName("payout.canceled")
     PAYOUT__CANCELED("payout.canceled"),
@@ -797,9 +689,6 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("person.updated")
     PERSON__UPDATED("person.updated"),
 
-    @SerializedName("ping")
-    PING("ping"),
-
     @SerializedName("plan.created")
     PLAN__CREATED("plan.created"),
 
@@ -818,15 +707,6 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("product.updated")
     PRODUCT__UPDATED("product.updated"),
 
-    @SerializedName("recipient.card.created")
-    RECIPIENT__CARD__CREATED("recipient.card.created"),
-
-    @SerializedName("recipient.card.deleted")
-    RECIPIENT__CARD__DELETED("recipient.card.deleted"),
-
-    @SerializedName("recipient.card.updated")
-    RECIPIENT__CARD__UPDATED("recipient.card.updated"),
-
     @SerializedName("recipient.created")
     RECIPIENT__CREATED("recipient.created"),
 
@@ -836,38 +716,11 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("recipient.updated")
     RECIPIENT__UPDATED("recipient.updated"),
 
-    @SerializedName("recipient_transfer.canceled")
-    RECIPIENT_TRANSFER__CANCELED("recipient_transfer.canceled"),
-
-    @SerializedName("recipient_transfer.created")
-    RECIPIENT_TRANSFER__CREATED("recipient_transfer.created"),
-
-    @SerializedName("recipient_transfer.failed")
-    RECIPIENT_TRANSFER__FAILED("recipient_transfer.failed"),
-
-    @SerializedName("recipient_transfer.paid")
-    RECIPIENT_TRANSFER__PAID("recipient_transfer.paid"),
-
-    @SerializedName("recipient_transfer.updated")
-    RECIPIENT_TRANSFER__UPDATED("recipient_transfer.updated"),
-
-    @SerializedName("refund.created")
-    REFUND__CREATED("refund.created"),
-
-    @SerializedName("refund.failed")
-    REFUND__FAILED("refund.failed"),
-
-    @SerializedName("refund.updated")
-    REFUND__UPDATED("refund.updated"),
-
     @SerializedName("reporting.report_run.failed")
     REPORTING__REPORT_RUN__FAILED("reporting.report_run.failed"),
 
     @SerializedName("reporting.report_run.succeeded")
     REPORTING__REPORT_RUN__SUCCEEDED("reporting.report_run.succeeded"),
-
-    @SerializedName("reporting.report_run.updated")
-    REPORTING__REPORT_RUN__UPDATED("reporting.report_run.updated"),
 
     @SerializedName("reporting.report_type.updated")
     REPORTING__REPORT_TYPE__UPDATED("reporting.report_type.updated"),
@@ -911,36 +764,6 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("source.transaction.updated")
     SOURCE__TRANSACTION__UPDATED("source.transaction.updated"),
 
-    @SerializedName("subscription_schedule.aborted")
-    SUBSCRIPTION_SCHEDULE__ABORTED("subscription_schedule.aborted"),
-
-    @SerializedName("subscription_schedule.canceled")
-    SUBSCRIPTION_SCHEDULE__CANCELED("subscription_schedule.canceled"),
-
-    @SerializedName("subscription_schedule.completed")
-    SUBSCRIPTION_SCHEDULE__COMPLETED("subscription_schedule.completed"),
-
-    @SerializedName("subscription_schedule.created")
-    SUBSCRIPTION_SCHEDULE__CREATED("subscription_schedule.created"),
-
-    @SerializedName("subscription_schedule.expiring")
-    SUBSCRIPTION_SCHEDULE__EXPIRING("subscription_schedule.expiring"),
-
-    @SerializedName("subscription_schedule.released")
-    SUBSCRIPTION_SCHEDULE__RELEASED("subscription_schedule.released"),
-
-    @SerializedName("subscription_schedule.updated")
-    SUBSCRIPTION_SCHEDULE__UPDATED("subscription_schedule.updated"),
-
-    @SerializedName("tax_id.created")
-    TAX_ID__CREATED("tax_id.created"),
-
-    @SerializedName("tax_id.deleted")
-    TAX_ID__DELETED("tax_id.deleted"),
-
-    @SerializedName("tax_id.updated")
-    TAX_ID__UPDATED("tax_id.updated"),
-
     @SerializedName("topup.canceled")
     TOPUP__CANCELED("topup.canceled"),
 
@@ -955,9 +778,6 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     @SerializedName("topup.succeeded")
     TOPUP__SUCCEEDED("topup.succeeded"),
-
-    @SerializedName("transfer.canceled")
-    TRANSFER__CANCELED("transfer.canceled"),
 
     @SerializedName("transfer.created")
     TRANSFER__CREATED("transfer.created"),

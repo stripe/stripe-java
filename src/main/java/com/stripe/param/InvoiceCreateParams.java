@@ -54,6 +54,14 @@ public class InvoiceCreateParams extends ApiRequestParams {
   Long daysUntilDue;
 
   /**
+   * ID of the default payment method for the invoice. It must belong to the customer associated
+   * with the invoice and be in a chargeable state. If not set, defaults to the subscription's
+   * default payment method, if any, or to the customer's default payment method.
+   */
+  @SerializedName("default_payment_method")
+  String defaultPaymentMethod;
+
+  /**
    * ID of the default payment source for the invoice. It must belong to the customer associated
    * with the invoice and be in a chargeable state. If not set, defaults to the subscription's
    * default source, if any, or to the customer's default source.
@@ -119,6 +127,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
       Object customFields,
       String customer,
       Long daysUntilDue,
+      String defaultPaymentMethod,
       String defaultSource,
       String description,
       Long dueDate,
@@ -135,6 +144,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
     this.customFields = customFields;
     this.customer = customer;
     this.daysUntilDue = daysUntilDue;
+    this.defaultPaymentMethod = defaultPaymentMethod;
     this.defaultSource = defaultSource;
     this.description = description;
     this.dueDate = dueDate;
@@ -163,6 +173,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
     private String customer;
 
     private Long daysUntilDue;
+
+    private String defaultPaymentMethod;
 
     private String defaultSource;
 
@@ -193,6 +205,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
           this.customFields,
           this.customer,
           this.daysUntilDue,
+          this.defaultPaymentMethod,
           this.defaultSource,
           this.description,
           this.dueDate,
@@ -312,6 +325,16 @@ public class InvoiceCreateParams extends ApiRequestParams {
      */
     public Builder setDaysUntilDue(Long daysUntilDue) {
       this.daysUntilDue = daysUntilDue;
+      return this;
+    }
+
+    /**
+     * ID of the default payment method for the invoice. It must belong to the customer associated
+     * with the invoice and be in a chargeable state. If not set, defaults to the subscription's
+     * default payment method, if any, or to the customer's default payment method.
+     */
+    public Builder setDefaultPaymentMethod(String defaultPaymentMethod) {
+      this.defaultPaymentMethod = defaultPaymentMethod;
       return this;
     }
 

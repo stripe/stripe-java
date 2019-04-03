@@ -82,7 +82,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
    * trial immediately.
    */
   @SerializedName("trial_end")
-  String trialEnd;
+  Object trialEnd;
 
   private CustomerUpdateParams(
       Long accountBalance,
@@ -97,7 +97,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
       Object shipping,
       String source,
       TaxInfo taxInfo,
-      String trialEnd) {
+      Object trialEnd) {
     this.accountBalance = accountBalance;
     this.coupon = coupon;
     this.defaultSource = defaultSource;
@@ -142,7 +142,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
     private TaxInfo taxInfo;
 
-    private String trialEnd;
+    private Object trialEnd;
 
     /** Finalize and obtain parameter instance from this builder. */
     public CustomerUpdateParams build() {
@@ -298,7 +298,19 @@ public class CustomerUpdateParams extends ApiRequestParams {
      * customer is being subscribed to. The special value `now` can be provided to end the
      * customer's trial immediately.
      */
-    public Builder setTrialEnd(String trialEnd) {
+    public Builder setTrialEnd(TrialEnd trialEnd) {
+      this.trialEnd = trialEnd;
+      return this;
+    }
+
+    /**
+     * Unix timestamp representing the end of the trial period the customer will get before being
+     * charged for the first time. This will always overwrite any trials that might apply via a
+     * subscribed plan. If set, trial_end will override the default trial period of the plan the
+     * customer is being subscribed to. The special value `now` can be provided to end the
+     * customer's trial immediately.
+     */
+    public Builder setTrialEnd(Long trialEnd) {
       this.trialEnd = trialEnd;
       return this;
     }
@@ -310,12 +322,17 @@ public class CustomerUpdateParams extends ApiRequestParams {
     @SerializedName("custom_fields")
     Object customFields;
 
+    /** ID of the default payment method for the customer. */
+    @SerializedName("default_payment_method")
+    String defaultPaymentMethod;
+
     /** Default footer to be displayed on invoices for this customer. */
     @SerializedName("footer")
     String footer;
 
-    private InvoiceSettings(Object customFields, String footer) {
+    private InvoiceSettings(Object customFields, String defaultPaymentMethod, String footer) {
       this.customFields = customFields;
+      this.defaultPaymentMethod = defaultPaymentMethod;
       this.footer = footer;
     }
 
@@ -326,11 +343,13 @@ public class CustomerUpdateParams extends ApiRequestParams {
     public static class Builder {
       private Object customFields;
 
+      private String defaultPaymentMethod;
+
       private String footer;
 
       /** Finalize and obtain parameter instance from this builder. */
       public InvoiceSettings build() {
-        return new InvoiceSettings(this.customFields, this.footer);
+        return new InvoiceSettings(this.customFields, this.defaultPaymentMethod, this.footer);
       }
 
       /** Default custom fields to be displayed on invoices for this customer. */
@@ -342,6 +361,12 @@ public class CustomerUpdateParams extends ApiRequestParams {
       /** Default custom fields to be displayed on invoices for this customer. */
       public Builder setCustomFields(List<CustomField> customFields) {
         this.customFields = customFields;
+        return this;
+      }
+
+      /** ID of the default payment method for the customer. */
+      public Builder setDefaultPaymentMethod(String defaultPaymentMethod) {
+        this.defaultPaymentMethod = defaultPaymentMethod;
         return this;
       }
 
@@ -614,6 +639,17 @@ public class CustomerUpdateParams extends ApiRequestParams {
     @Getter private final String value;
 
     Empty(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum TrialEnd implements ApiRequestParams.Enum {
+    @SerializedName("now")
+    NOW("now");
+
+    @Getter private final String value;
+
+    TrialEnd(String value) {
       this.value = value;
     }
   }

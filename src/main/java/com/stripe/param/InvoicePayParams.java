@@ -35,6 +35,13 @@ public class InvoicePayParams extends ApiRequestParams {
   Boolean paidOutOfBand;
 
   /**
+   * A PaymentMethod to be charged. The PaymentMethod must be the ID of a PaymentMethod belonging to
+   * the customer associated with the invoice being paid.
+   */
+  @SerializedName("payment_method")
+  String paymentMethod;
+
+  /**
    * A payment source to be charged. The source must be the ID of a source belonging to the customer
    * associated with the invoice being paid.
    */
@@ -42,10 +49,15 @@ public class InvoicePayParams extends ApiRequestParams {
   String source;
 
   private InvoicePayParams(
-      List<String> expand, Boolean forgive, Boolean paidOutOfBand, String source) {
+      List<String> expand,
+      Boolean forgive,
+      Boolean paidOutOfBand,
+      String paymentMethod,
+      String source) {
     this.expand = expand;
     this.forgive = forgive;
     this.paidOutOfBand = paidOutOfBand;
+    this.paymentMethod = paymentMethod;
     this.source = source;
   }
 
@@ -60,11 +72,14 @@ public class InvoicePayParams extends ApiRequestParams {
 
     private Boolean paidOutOfBand;
 
+    private String paymentMethod;
+
     private String source;
 
     /** Finalize and obtain parameter instance from this builder. */
     public InvoicePayParams build() {
-      return new InvoicePayParams(this.expand, this.forgive, this.paidOutOfBand, this.source);
+      return new InvoicePayParams(
+          this.expand, this.forgive, this.paidOutOfBand, this.paymentMethod, this.source);
     }
 
     /**
@@ -115,6 +130,15 @@ public class InvoicePayParams extends ApiRequestParams {
      */
     public Builder setPaidOutOfBand(Boolean paidOutOfBand) {
       this.paidOutOfBand = paidOutOfBand;
+      return this;
+    }
+
+    /**
+     * A PaymentMethod to be charged. The PaymentMethod must be the ID of a PaymentMethod belonging
+     * to the customer associated with the invoice being paid.
+     */
+    public Builder setPaymentMethod(String paymentMethod) {
+      this.paymentMethod = paymentMethod;
       return this;
     }
 

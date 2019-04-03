@@ -16,7 +16,9 @@ public class AuthorizationApproveParams extends ApiRequestParams {
 
   /**
    * If the authorization's `is_held_amount_controllable` property is `true`, you may provide this
-   * value to control how much to hold for the authorization.
+   * value to control how much to hold for the authorization. Must be positive (use
+   * [`decline`](https://stripe.com/docs/api/issuing/authorizations/decline) to decline an
+   * authorization request).
    */
   @SerializedName("held_amount")
   Long heldAmount;
@@ -68,7 +70,9 @@ public class AuthorizationApproveParams extends ApiRequestParams {
 
     /**
      * If the authorization's `is_held_amount_controllable` property is `true`, you may provide this
-     * value to control how much to hold for the authorization.
+     * value to control how much to hold for the authorization. Must be positive (use
+     * [`decline`](https://stripe.com/docs/api/issuing/authorizations/decline) to decline an
+     * authorization request).
      */
     public Builder setHeldAmount(Long heldAmount) {
       this.heldAmount = heldAmount;

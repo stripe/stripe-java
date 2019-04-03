@@ -38,7 +38,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
    * [documentation](https://stripe.com/docs/billing/subscriptions/billing-cycle).
    */
   @SerializedName("billing_cycle_anchor")
-  String billingCycleAnchor;
+  BillingCycleAnchor billingCycleAnchor;
 
   /**
    * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
@@ -73,6 +73,14 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
    */
   @SerializedName("days_until_due")
   Long daysUntilDue;
+
+  /**
+   * ID of the default payment method for the subscription. It must belong to the customer
+   * associated with the subscription and be in a chargeable state. If not set, defaults to the
+   * customer's default payment method.
+   */
+  @SerializedName("default_payment_method")
+  String defaultPaymentMethod;
 
   /**
    * ID of the default payment source for the subscription. It must belong to the customer
@@ -143,7 +151,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
    * trial immediately.
    */
   @SerializedName("trial_end")
-  String trialEnd;
+  Object trialEnd;
 
   /**
    * Indicates if a plan's `trial_period_days` should be applied to the subscription. Setting
@@ -156,12 +164,13 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   private SubscriptionUpdateParams(
       BigDecimal applicationFeePercent,
       Billing billing,
-      String billingCycleAnchor,
+      BillingCycleAnchor billingCycleAnchor,
       Object billingThresholds,
       Object cancelAt,
       Boolean cancelAtPeriodEnd,
       String coupon,
       Long daysUntilDue,
+      String defaultPaymentMethod,
       String defaultSource,
       List<String> expand,
       List<Item> items,
@@ -170,7 +179,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       Long prorationDate,
       Object taxPercent,
       Object transferData,
-      String trialEnd,
+      Object trialEnd,
       Boolean trialFromPlan) {
     this.applicationFeePercent = applicationFeePercent;
     this.billing = billing;
@@ -180,6 +189,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     this.cancelAtPeriodEnd = cancelAtPeriodEnd;
     this.coupon = coupon;
     this.daysUntilDue = daysUntilDue;
+    this.defaultPaymentMethod = defaultPaymentMethod;
     this.defaultSource = defaultSource;
     this.expand = expand;
     this.items = items;
@@ -201,7 +211,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
     private Billing billing;
 
-    private String billingCycleAnchor;
+    private BillingCycleAnchor billingCycleAnchor;
 
     private Object billingThresholds;
 
@@ -212,6 +222,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     private String coupon;
 
     private Long daysUntilDue;
+
+    private String defaultPaymentMethod;
 
     private String defaultSource;
 
@@ -229,7 +241,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
     private Object transferData;
 
-    private String trialEnd;
+    private Object trialEnd;
 
     private Boolean trialFromPlan;
 
@@ -244,6 +256,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           this.cancelAtPeriodEnd,
           this.coupon,
           this.daysUntilDue,
+          this.defaultPaymentMethod,
           this.defaultSource,
           this.expand,
           this.items,
@@ -351,7 +364,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * cycle anchor to the current time. For more information, see the billing cycle
      * [documentation](https://stripe.com/docs/billing/subscriptions/billing-cycle).
      */
-    public Builder setBillingCycleAnchor(String billingCycleAnchor) {
+    public Builder setBillingCycleAnchor(BillingCycleAnchor billingCycleAnchor) {
       this.billingCycleAnchor = billingCycleAnchor;
       return this;
     }
@@ -426,6 +439,16 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      */
     public Builder setDaysUntilDue(Long daysUntilDue) {
       this.daysUntilDue = daysUntilDue;
+      return this;
+    }
+
+    /**
+     * ID of the default payment method for the subscription. It must belong to the customer
+     * associated with the subscription and be in a chargeable state. If not set, defaults to the
+     * customer's default payment method.
+     */
+    public Builder setDefaultPaymentMethod(String defaultPaymentMethod) {
+      this.defaultPaymentMethod = defaultPaymentMethod;
       return this;
     }
 
@@ -514,7 +537,19 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * customer is being subscribed to. The special value `now` can be provided to end the
      * customer's trial immediately.
      */
-    public Builder setTrialEnd(String trialEnd) {
+    public Builder setTrialEnd(TrialEnd trialEnd) {
+      this.trialEnd = trialEnd;
+      return this;
+    }
+
+    /**
+     * Unix timestamp representing the end of the trial period the customer will get before being
+     * charged for the first time. This will always overwrite any trials that might apply via a
+     * subscribed plan. If set, trial_end will override the default trial period of the plan the
+     * customer is being subscribed to. The special value `now` can be provided to end the
+     * customer's trial immediately.
+     */
+    public Builder setTrialEnd(Long trialEnd) {
       this.trialEnd = trialEnd;
       return this;
     }
@@ -832,6 +867,20 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
   }
 
+  public enum BillingCycleAnchor implements ApiRequestParams.Enum {
+    @SerializedName("now")
+    NOW("now"),
+
+    @SerializedName("unchanged")
+    UNCHANGED("unchanged");
+
+    @Getter private final String value;
+
+    BillingCycleAnchor(String value) {
+      this.value = value;
+    }
+  }
+
   public enum Empty implements ApiRequestParams.Enum {
     @SerializedName("")
     EMPTY("");
@@ -839,6 +888,17 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     @Getter private final String value;
 
     Empty(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum TrialEnd implements ApiRequestParams.Enum {
+    @SerializedName("now")
+    NOW("now");
+
+    @Getter private final String value;
+
+    TrialEnd(String value) {
       this.value = value;
     }
   }

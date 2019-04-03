@@ -9,14 +9,7 @@ import java.util.List;
 import lombok.Getter;
 
 @Getter
-public class ChargeListParams extends ApiRequestParams {
-  @SerializedName("created")
-  Object created;
-
-  /** Only return charges for the customer specified by this customer ID. */
-  @SerializedName("customer")
-  String customer;
-
+public class CustomerBalanceTransactionsParams extends ApiRequestParams {
   /**
    * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the
    * list. For instance, if you make a list request and receive 100 objects, starting with
@@ -46,36 +39,19 @@ public class ChargeListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
-  /** Only return charges for this transfer group. */
-  @SerializedName("transfer_group")
-  String transferGroup;
-
-  private ChargeListParams(
-      Object created,
-      String customer,
-      String endingBefore,
-      List<String> expand,
-      Long limit,
-      String startingAfter,
-      String transferGroup) {
-    this.created = created;
-    this.customer = customer;
+  private CustomerBalanceTransactionsParams(
+      String endingBefore, List<String> expand, Long limit, String startingAfter) {
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.limit = limit;
     this.startingAfter = startingAfter;
-    this.transferGroup = transferGroup;
   }
 
   public static Builder builder() {
-    return new com.stripe.param.ChargeListParams.Builder();
+    return new com.stripe.param.CustomerBalanceTransactionsParams.Builder();
   }
 
   public static class Builder {
-    private Object created;
-
-    private String customer;
-
     private String endingBefore;
 
     private List<String> expand;
@@ -84,24 +60,16 @@ public class ChargeListParams extends ApiRequestParams {
 
     private String startingAfter;
 
-    private String transferGroup;
-
     /** Finalize and obtain parameter instance from this builder. */
-    public ChargeListParams build() {
-      return new ChargeListParams(
-          this.created,
-          this.customer,
-          this.endingBefore,
-          this.expand,
-          this.limit,
-          this.startingAfter,
-          this.transferGroup);
+    public CustomerBalanceTransactionsParams build() {
+      return new CustomerBalanceTransactionsParams(
+          this.endingBefore, this.expand, this.limit, this.startingAfter);
     }
 
     /**
      * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * ChargeListParams#expand} for the field documentation.
+     * CustomerBalanceTransactionsParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -114,29 +82,13 @@ public class ChargeListParams extends ApiRequestParams {
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
-     * ChargeListParams#expand} for the field documentation.
+     * CustomerBalanceTransactionsParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
         this.expand = new ArrayList<>();
       }
       this.expand.add(element);
-      return this;
-    }
-
-    public Builder setCreated(Created created) {
-      this.created = created;
-      return this;
-    }
-
-    public Builder setCreated(Long created) {
-      this.created = created;
-      return this;
-    }
-
-    /** Only return charges for the customer specified by this customer ID. */
-    public Builder setCustomer(String customer) {
-      this.customer = customer;
       return this;
     }
 
@@ -169,81 +121,6 @@ public class ChargeListParams extends ApiRequestParams {
     public Builder setStartingAfter(String startingAfter) {
       this.startingAfter = startingAfter;
       return this;
-    }
-
-    /** Only return charges for this transfer group. */
-    public Builder setTransferGroup(String transferGroup) {
-      this.transferGroup = transferGroup;
-      return this;
-    }
-  }
-
-  @Getter
-  public static class Created {
-    /** Minimum value to filter by (exclusive). */
-    @SerializedName("gt")
-    Long gt;
-
-    /** Minimum value to filter by (inclusive). */
-    @SerializedName("gte")
-    Long gte;
-
-    /** Maximum value to filter by (exclusive). */
-    @SerializedName("lt")
-    Long lt;
-
-    /** Maximum value to filter by (inclusive). */
-    @SerializedName("lte")
-    Long lte;
-
-    private Created(Long gt, Long gte, Long lt, Long lte) {
-      this.gt = gt;
-      this.gte = gte;
-      this.lt = lt;
-      this.lte = lte;
-    }
-
-    public static Builder builder() {
-      return new com.stripe.param.ChargeListParams.Created.Builder();
-    }
-
-    public static class Builder {
-      private Long gt;
-
-      private Long gte;
-
-      private Long lt;
-
-      private Long lte;
-
-      /** Finalize and obtain parameter instance from this builder. */
-      public Created build() {
-        return new Created(this.gt, this.gte, this.lt, this.lte);
-      }
-
-      /** Minimum value to filter by (inclusive). */
-      public Builder setGte(Long gte) {
-        this.gte = gte;
-        return this;
-      }
-
-      /** Minimum value to filter by (exclusive). */
-      public Builder setGt(Long gt) {
-        this.gt = gt;
-        return this;
-      }
-
-      /** Maximum value to filter by (inclusive). */
-      public Builder setLte(Long lte) {
-        this.lte = lte;
-        return this;
-      }
-
-      /** Maximum value to filter by (exclusive). */
-      public Builder setLt(Long lt) {
-        this.lt = lt;
-        return this;
-      }
     }
   }
 }

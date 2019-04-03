@@ -47,7 +47,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
    * month for subsequent invoices.
    */
   @SerializedName("billing_cycle_anchor")
-  String billingCycleAnchor;
+  Long billingCycleAnchor;
 
   /**
    * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
@@ -86,6 +86,14 @@ public class SubscriptionCreateParams extends ApiRequestParams {
    */
   @SerializedName("days_until_due")
   Long daysUntilDue;
+
+  /**
+   * ID of the default payment method for the subscription. It must belong to the customer
+   * associated with the subscription and be in a chargeable state. If not set, defaults to the
+   * customer's default payment method.
+   */
+  @SerializedName("default_payment_method")
+  String defaultPaymentMethod;
 
   /**
    * ID of the default payment source for the subscription. It must belong to the customer
@@ -146,7 +154,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
    * trial immediately.
    */
   @SerializedName("trial_end")
-  String trialEnd;
+  Object trialEnd;
 
   /**
    * Indicates if a plan's `trial_period_days` should be applied to the subscription. Setting
@@ -167,13 +175,14 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       BigDecimal applicationFeePercent,
       Long backdateStartDate,
       Billing billing,
-      String billingCycleAnchor,
+      Long billingCycleAnchor,
       Object billingThresholds,
       Long cancelAt,
       Boolean cancelAtPeriodEnd,
       String coupon,
       String customer,
       Long daysUntilDue,
+      String defaultPaymentMethod,
       String defaultSource,
       List<String> expand,
       List<Item> items,
@@ -181,7 +190,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       Boolean prorate,
       Object taxPercent,
       TransferData transferData,
-      String trialEnd,
+      Object trialEnd,
       Boolean trialFromPlan,
       Long trialPeriodDays) {
     this.applicationFeePercent = applicationFeePercent;
@@ -194,6 +203,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     this.coupon = coupon;
     this.customer = customer;
     this.daysUntilDue = daysUntilDue;
+    this.defaultPaymentMethod = defaultPaymentMethod;
     this.defaultSource = defaultSource;
     this.expand = expand;
     this.items = items;
@@ -217,7 +227,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     private Billing billing;
 
-    private String billingCycleAnchor;
+    private Long billingCycleAnchor;
 
     private Object billingThresholds;
 
@@ -230,6 +240,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     private String customer;
 
     private Long daysUntilDue;
+
+    private String defaultPaymentMethod;
 
     private String defaultSource;
 
@@ -245,7 +257,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     private TransferData transferData;
 
-    private String trialEnd;
+    private Object trialEnd;
 
     private Boolean trialFromPlan;
 
@@ -264,6 +276,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           this.coupon,
           this.customer,
           this.daysUntilDue,
+          this.defaultPaymentMethod,
           this.defaultSource,
           this.expand,
           this.items,
@@ -382,7 +395,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      * date of the first full invoice, and, for plans with `month` or `year` intervals, the day of
      * the month for subsequent invoices.
      */
-    public Builder setBillingCycleAnchor(String billingCycleAnchor) {
+    public Builder setBillingCycleAnchor(Long billingCycleAnchor) {
       this.billingCycleAnchor = billingCycleAnchor;
       return this;
     }
@@ -458,6 +471,16 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     }
 
     /**
+     * ID of the default payment method for the subscription. It must belong to the customer
+     * associated with the subscription and be in a chargeable state. If not set, defaults to the
+     * customer's default payment method.
+     */
+    public Builder setDefaultPaymentMethod(String defaultPaymentMethod) {
+      this.defaultPaymentMethod = defaultPaymentMethod;
+      return this;
+    }
+
+    /**
      * ID of the default payment source for the subscription. It must belong to the customer
      * associated with the subscription and be in a chargeable state. If not set, defaults to the
      * customer's default source.
@@ -520,7 +543,19 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      * customer is being subscribed to. The special value `now` can be provided to end the
      * customer's trial immediately.
      */
-    public Builder setTrialEnd(String trialEnd) {
+    public Builder setTrialEnd(TrialEnd trialEnd) {
+      this.trialEnd = trialEnd;
+      return this;
+    }
+
+    /**
+     * Unix timestamp representing the end of the trial period the customer will get before being
+     * charged for the first time. This will always overwrite any trials that might apply via a
+     * subscribed plan. If set, trial_end will override the default trial period of the plan the
+     * customer is being subscribed to. The special value `now` can be provided to end the
+     * customer's trial immediately.
+     */
+    public Builder setTrialEnd(Long trialEnd) {
       this.trialEnd = trialEnd;
       return this;
     }
@@ -796,6 +831,17 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     @Getter private final String value;
 
     Empty(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum TrialEnd implements ApiRequestParams.Enum {
+    @SerializedName("now")
+    NOW("now");
+
+    @Getter private final String value;
+
+    TrialEnd(String value) {
       this.value = value;
     }
   }
