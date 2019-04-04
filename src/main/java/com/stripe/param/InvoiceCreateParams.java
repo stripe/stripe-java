@@ -4,6 +4,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -303,7 +304,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
     }
 
     /** A list of up to 4 custom fields to be displayed on the invoice. */
-    public Builder setCustomFields(Empty customFields) {
+    public Builder setCustomFields(EmptyParam customFields) {
       this.customFields = customFields;
       return this;
     }
@@ -480,7 +481,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
     }
   }
 
-  public enum Billing implements ApiRequestParams.Enum {
+  public enum Billing implements ApiRequestParams.EnumParam {
     @SerializedName("charge_automatically")
     CHARGE_AUTOMATICALLY("charge_automatically"),
 
@@ -490,17 +491,6 @@ public class InvoiceCreateParams extends ApiRequestParams {
     @Getter private final String value;
 
     Billing(String value) {
-      this.value = value;
-    }
-  }
-
-  public enum Empty implements ApiRequestParams.Enum {
-    @SerializedName("")
-    EMPTY("");
-
-    @Getter private final String value;
-
-    Empty(String value) {
       this.value = value;
     }
   }

@@ -237,7 +237,7 @@ public class TransferCreateParams extends ApiRequestParams {
     }
   }
 
-  public enum SourceType implements ApiRequestParams.Enum {
+  public enum SourceType implements ApiRequestParams.EnumParam {
     @SerializedName("bank_account")
     BANK_ACCOUNT("bank_account"),
 

@@ -346,7 +346,7 @@ public class CardListParams extends ApiRequestParams {
     }
   }
 
-  public enum Status implements ApiRequestParams.Enum {
+  public enum Status implements ApiRequestParams.EnumParam {
     @SerializedName("active")
     ACTIVE("active"),
 
@@ -369,7 +369,7 @@ public class CardListParams extends ApiRequestParams {
     }
   }
 
-  public enum Type implements ApiRequestParams.Enum {
+  public enum Type implements ApiRequestParams.EnumParam {
     @SerializedName("physical")
     PHYSICAL("physical"),
 

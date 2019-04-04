@@ -4,6 +4,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -382,7 +383,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
      * billing period. Pass an empty string to remove previously-defined thresholds.
      */
-    public Builder setBillingThresholds(Empty billingThresholds) {
+    public Builder setBillingThresholds(EmptyParam billingThresholds) {
       this.billingThresholds = billingThresholds;
       return this;
     }
@@ -410,7 +411,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * A timestamp at which the subscription should cancel. If set to a date before the current
      * period ends this will cause a proration if `prorate=true`.
      */
-    public Builder setCancelAt(Empty cancelAt) {
+    public Builder setCancelAt(EmptyParam cancelAt) {
       this.cancelAt = cancelAt;
       return this;
     }
@@ -493,7 +494,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * a `tax_percent` of `20.0` will charge $12 per invoice. To unset a previously-set value, pass
      * an empty string.
      */
-    public Builder setTaxPercent(Empty taxPercent) {
+    public Builder setTaxPercent(EmptyParam taxPercent) {
       this.taxPercent = taxPercent;
       return this;
     }
@@ -515,7 +516,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * destination and the ID of the resulting transfers will be found on the resulting charges.
      * This will be unset if you POST an empty value.
      */
-    public Builder setTransferData(Empty transferData) {
+    public Builder setTransferData(TransferData transferData) {
       this.transferData = transferData;
       return this;
     }
@@ -525,7 +526,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * destination and the ID of the resulting transfers will be found on the resulting charges.
      * This will be unset if you POST an empty value.
      */
-    public Builder setTransferData(TransferData transferData) {
+    public Builder setTransferData(EmptyParam transferData) {
       this.transferData = transferData;
       return this;
     }
@@ -742,7 +743,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
        * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
        * billing period.
        */
-      public Builder setBillingThresholds(Empty billingThresholds) {
+      public Builder setBillingThresholds(EmptyParam billingThresholds) {
         this.billingThresholds = billingThresholds;
         return this;
       }
@@ -810,17 +811,6 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         }
       }
     }
-
-    public enum Empty implements ApiRequestParams.Enum {
-      @SerializedName("")
-      EMPTY("");
-
-      @Getter private final String value;
-
-      Empty(String value) {
-        this.value = value;
-      }
-    }
   }
 
   @Getter
@@ -853,7 +843,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
   }
 
-  public enum Billing implements ApiRequestParams.Enum {
+  public enum Billing implements ApiRequestParams.EnumParam {
     @SerializedName("charge_automatically")
     CHARGE_AUTOMATICALLY("charge_automatically"),
 
@@ -867,7 +857,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
   }
 
-  public enum BillingCycleAnchor implements ApiRequestParams.Enum {
+  public enum BillingCycleAnchor implements ApiRequestParams.EnumParam {
     @SerializedName("now")
     NOW("now"),
 
@@ -881,18 +871,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
   }
 
-  public enum Empty implements ApiRequestParams.Enum {
-    @SerializedName("")
-    EMPTY("");
-
-    @Getter private final String value;
-
-    Empty(String value) {
-      this.value = value;
-    }
-  }
-
-  public enum TrialEnd implements ApiRequestParams.Enum {
+  public enum TrialEnd implements ApiRequestParams.EnumParam {
     @SerializedName("now")
     NOW("now");
 

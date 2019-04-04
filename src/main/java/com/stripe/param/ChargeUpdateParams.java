@@ -261,7 +261,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
       }
     }
 
-    public enum UserReport implements ApiRequestParams.Enum {
+    public enum UserReport implements ApiRequestParams.EnumParam {
       @SerializedName("fraudulent")
       FRAUDULENT("fraudulent"),
 

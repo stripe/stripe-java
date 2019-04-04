@@ -4,6 +4,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -239,13 +240,13 @@ public class SkuUpdateParams extends ApiRequestParams {
     }
 
     /** The dimensions of this SKU for shipping purposes. */
-    public Builder setPackageDimensions(Empty packageDimensions) {
+    public Builder setPackageDimensions(PackageDimensions packageDimensions) {
       this.packageDimensions = packageDimensions;
       return this;
     }
 
     /** The dimensions of this SKU for shipping purposes. */
-    public Builder setPackageDimensions(PackageDimensions packageDimensions) {
+    public Builder setPackageDimensions(EmptyParam packageDimensions) {
       this.packageDimensions = packageDimensions;
       return this;
     }
@@ -284,9 +285,9 @@ public class SkuUpdateParams extends ApiRequestParams {
      * `out_of_stock`. Will be present if and only if `type` is `bucket`.
      */
     @SerializedName("value")
-    Value value;
+    ApiRequestParams.EnumParam value;
 
-    private Inventory(Long quantity, Type type, Value value) {
+    private Inventory(Long quantity, Type type, ApiRequestParams.EnumParam value) {
       this.quantity = quantity;
       this.type = type;
       this.value = value;
@@ -301,7 +302,7 @@ public class SkuUpdateParams extends ApiRequestParams {
 
       private Type type;
 
-      private Value value;
+      private ApiRequestParams.EnumParam value;
 
       /** Finalize and obtain parameter instance from this builder. */
       public Inventory build() {
@@ -330,9 +331,18 @@ public class SkuUpdateParams extends ApiRequestParams {
         this.value = value;
         return this;
       }
+
+      /**
+       * An indicator of the inventory available. Possible values are `in_stock`, `limited`, and
+       * `out_of_stock`. Will be present if and only if `type` is `bucket`.
+       */
+      public Builder setValue(EmptyParam value) {
+        this.value = value;
+        return this;
+      }
     }
 
-    public enum Type implements ApiRequestParams.Enum {
+    public enum Type implements ApiRequestParams.EnumParam {
       @SerializedName("bucket")
       BUCKET("bucket"),
 
@@ -349,10 +359,7 @@ public class SkuUpdateParams extends ApiRequestParams {
       }
     }
 
-    public enum Value implements ApiRequestParams.Enum {
-      @SerializedName("")
-      EMPTY(""),
-
+    public enum Value implements ApiRequestParams.EnumParam {
       @SerializedName("in_stock")
       IN_STOCK("in_stock"),
 
@@ -437,17 +444,6 @@ public class SkuUpdateParams extends ApiRequestParams {
         this.width = width;
         return this;
       }
-    }
-  }
-
-  public enum Empty implements ApiRequestParams.Enum {
-    @SerializedName("")
-    EMPTY("");
-
-    @Getter private final String value;
-
-    Empty(String value) {
-      this.value = value;
     }
   }
 }

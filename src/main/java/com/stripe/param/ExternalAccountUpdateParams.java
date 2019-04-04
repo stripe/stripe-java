@@ -4,6 +4,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +19,7 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
 
   /** The type of entity that holds the account. This can be either `individual` or `company`. */
   @SerializedName("account_holder_type")
-  AccountHolderType accountHolderType;
+  ApiRequestParams.EnumParam accountHolderType;
 
   /** City/District/Suburb/Town/Village. */
   @SerializedName("address_city")
@@ -69,7 +70,7 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
 
   private ExternalAccountUpdateParams(
       String accountHolderName,
-      AccountHolderType accountHolderType,
+      ApiRequestParams.EnumParam accountHolderType,
       String addressCity,
       String addressCountry,
       String addressLine1,
@@ -105,7 +106,7 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
   public static class Builder {
     private String accountHolderName;
 
-    private AccountHolderType accountHolderType;
+    private ApiRequestParams.EnumParam accountHolderType;
 
     private String addressCity;
 
@@ -214,6 +215,12 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /** The type of entity that holds the account. This can be either `individual` or `company`. */
+    public Builder setAccountHolderType(EmptyParam accountHolderType) {
+      this.accountHolderType = accountHolderType;
+      return this;
+    }
+
     /** City/District/Suburb/Town/Village. */
     public Builder setAddressCity(String addressCity) {
       this.addressCity = addressCity;
@@ -275,10 +282,7 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
     }
   }
 
-  public enum AccountHolderType implements ApiRequestParams.Enum {
-    @SerializedName("")
-    EMPTY(""),
-
+  public enum AccountHolderType implements ApiRequestParams.EnumParam {
     @SerializedName("company")
     COMPANY("company"),
 

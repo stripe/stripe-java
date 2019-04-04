@@ -310,7 +310,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
     }
   }
 
-  public enum Status implements ApiRequestParams.Enum {
+  public enum Status implements ApiRequestParams.EnumParam {
     @SerializedName("active")
     ACTIVE("active"),
 

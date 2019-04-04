@@ -4,6 +4,7 @@ package com.stripe.param.issuing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -346,7 +347,7 @@ public class CardCreateParams extends ApiRequestParams {
       }
     }
 
-    public enum AllowedCategory implements ApiRequestParams.Enum {
+    public enum AllowedCategory implements ApiRequestParams.EnumParam {
       @SerializedName("ac_refrigeration_repair")
       AC_REFRIGERATION_REPAIR("ac_refrigeration_repair"),
 
@@ -1226,7 +1227,7 @@ public class CardCreateParams extends ApiRequestParams {
       }
     }
 
-    public enum BlockedCategory implements ApiRequestParams.Enum {
+    public enum BlockedCategory implements ApiRequestParams.EnumParam {
       @SerializedName("ac_refrigeration_repair")
       AC_REFRIGERATION_REPAIR("ac_refrigeration_repair"),
 
@@ -2120,9 +2121,9 @@ public class CardCreateParams extends ApiRequestParams {
      * individual ones will not.
      */
     @SerializedName("type")
-    Type type;
+    ApiRequestParams.EnumParam type;
 
-    private Shipping(Address address, String name, Type type) {
+    private Shipping(Address address, String name, ApiRequestParams.EnumParam type) {
       this.address = address;
       this.name = name;
       this.type = type;
@@ -2137,7 +2138,7 @@ public class CardCreateParams extends ApiRequestParams {
 
       private String name;
 
-      private Type type;
+      private ApiRequestParams.EnumParam type;
 
       /** Finalize and obtain parameter instance from this builder. */
       public Shipping build() {
@@ -2151,6 +2152,15 @@ public class CardCreateParams extends ApiRequestParams {
 
       public Builder setName(String name) {
         this.name = name;
+        return this;
+      }
+
+      /**
+       * One of `bulk` or `individual`. Bulk shipments will be grouped and mailed together, while
+       * individual ones will not.
+       */
+      public Builder setType(EmptyParam type) {
+        this.type = type;
         return this;
       }
 
@@ -2254,10 +2264,7 @@ public class CardCreateParams extends ApiRequestParams {
       }
     }
 
-    public enum Type implements ApiRequestParams.Enum {
-      @SerializedName("")
-      EMPTY(""),
-
+    public enum Type implements ApiRequestParams.EnumParam {
       @SerializedName("bulk")
       BULK("bulk"),
 
@@ -2272,7 +2279,7 @@ public class CardCreateParams extends ApiRequestParams {
     }
   }
 
-  public enum Status implements ApiRequestParams.Enum {
+  public enum Status implements ApiRequestParams.EnumParam {
     @SerializedName("active")
     ACTIVE("active"),
 
@@ -2286,7 +2293,7 @@ public class CardCreateParams extends ApiRequestParams {
     }
   }
 
-  public enum Type implements ApiRequestParams.Enum {
+  public enum Type implements ApiRequestParams.EnumParam {
     @SerializedName("physical")
     PHYSICAL("physical"),
 

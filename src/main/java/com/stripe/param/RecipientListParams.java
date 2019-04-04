@@ -245,7 +245,7 @@ public class RecipientListParams extends ApiRequestParams {
     }
   }
 
-  public enum Type implements ApiRequestParams.Enum {
+  public enum Type implements ApiRequestParams.EnumParam {
     @SerializedName("corporation")
     CORPORATION("corporation"),
 

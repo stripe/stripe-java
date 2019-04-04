@@ -2378,7 +2378,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
         }
 
-        public enum DelayDays implements ApiRequestParams.Enum {
+        public enum DelayDays implements ApiRequestParams.EnumParam {
           @SerializedName("minimum")
           MINIMUM("minimum");
 
@@ -2389,7 +2389,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
         }
 
-        public enum Interval implements ApiRequestParams.Enum {
+        public enum Interval implements ApiRequestParams.EnumParam {
           @SerializedName("daily")
           DAILY("daily"),
 
@@ -2409,7 +2409,7 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
         }
 
-        public enum WeeklyAnchor implements ApiRequestParams.Enum {
+        public enum WeeklyAnchor implements ApiRequestParams.EnumParam {
           @SerializedName("friday")
           FRIDAY("friday"),
 
@@ -2514,7 +2514,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
   }
 
-  public enum RequestedCapability implements ApiRequestParams.Enum {
+  public enum RequestedCapability implements ApiRequestParams.EnumParam {
     @SerializedName("card_payments")
     CARD_PAYMENTS("card_payments"),
 

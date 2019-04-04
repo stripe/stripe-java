@@ -353,7 +353,7 @@ public class InvoiceListParams extends ApiRequestParams {
     }
   }
 
-  public enum Billing implements ApiRequestParams.Enum {
+  public enum Billing implements ApiRequestParams.EnumParam {
     @SerializedName("charge_automatically")
     CHARGE_AUTOMATICALLY("charge_automatically"),
 

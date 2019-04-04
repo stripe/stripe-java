@@ -4,6 +4,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -776,7 +777,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
        * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
        * billing period.
        */
-      public Builder setBillingThresholds(Empty billingThresholds) {
+      public Builder setBillingThresholds(EmptyParam billingThresholds) {
         this.billingThresholds = billingThresholds;
         return this;
       }
@@ -845,20 +846,9 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         }
       }
     }
-
-    public enum Empty implements ApiRequestParams.Enum {
-      @SerializedName("")
-      EMPTY("");
-
-      @Getter private final String value;
-
-      Empty(String value) {
-        this.value = value;
-      }
-    }
   }
 
-  public enum SubscriptionBillingCycleAnchor implements ApiRequestParams.Enum {
+  public enum SubscriptionBillingCycleAnchor implements ApiRequestParams.EnumParam {
     @SerializedName("now")
     NOW("now"),
 
@@ -872,7 +862,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
   }
 
-  public enum SubscriptionTrialEnd implements ApiRequestParams.Enum {
+  public enum SubscriptionTrialEnd implements ApiRequestParams.EnumParam {
     @SerializedName("now")
     NOW("now");
 

@@ -4,6 +4,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -245,7 +246,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
      * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
      * billing period. Pass an empty string to remove previously-defined thresholds.
      */
-    public Builder setBillingThresholds(Empty billingThresholds) {
+    public Builder setBillingThresholds(EmptyParam billingThresholds) {
       this.billingThresholds = billingThresholds;
       return this;
     }
@@ -662,7 +663,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
          * Define thresholds at which an invoice will be sent, and the subscription advanced to a
          * new billing period.
          */
-        public Builder setBillingThresholds(Empty billingThresholds) {
+        public Builder setBillingThresholds(EmptyParam billingThresholds) {
           this.billingThresholds = billingThresholds;
           return this;
         }
@@ -711,17 +712,6 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
             this.usageGte = usageGte;
             return this;
           }
-        }
-      }
-
-      public enum Empty implements ApiRequestParams.Enum {
-        @SerializedName("")
-        EMPTY("");
-
-        @Getter private final String value;
-
-        Empty(String value) {
-          this.value = value;
         }
       }
     }
@@ -775,7 +765,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       }
     }
 
-    public enum Interval implements ApiRequestParams.Enum {
+    public enum Interval implements ApiRequestParams.EnumParam {
       @SerializedName("day")
       DAY("day"),
 
@@ -796,7 +786,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     }
   }
 
-  public enum Billing implements ApiRequestParams.Enum {
+  public enum Billing implements ApiRequestParams.EnumParam {
     @SerializedName("charge_automatically")
     CHARGE_AUTOMATICALLY("charge_automatically"),
 
@@ -810,18 +800,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     }
   }
 
-  public enum Empty implements ApiRequestParams.Enum {
-    @SerializedName("")
-    EMPTY("");
-
-    @Getter private final String value;
-
-    Empty(String value) {
-      this.value = value;
-    }
-  }
-
-  public enum RenewalBehavior implements ApiRequestParams.Enum {
+  public enum RenewalBehavior implements ApiRequestParams.EnumParam {
     @SerializedName("none")
     NONE("none"),
 
@@ -838,7 +817,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     }
   }
 
-  public enum StartDate implements ApiRequestParams.Enum {
+  public enum StartDate implements ApiRequestParams.EnumParam {
     @SerializedName("now")
     NOW("now");
 

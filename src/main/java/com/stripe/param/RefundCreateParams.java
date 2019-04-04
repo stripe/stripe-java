@@ -160,7 +160,7 @@ public class RefundCreateParams extends ApiRequestParams {
     }
   }
 
-  public enum Reason implements ApiRequestParams.Enum {
+  public enum Reason implements ApiRequestParams.EnumParam {
     @SerializedName("duplicate")
     DUPLICATE("duplicate"),
 

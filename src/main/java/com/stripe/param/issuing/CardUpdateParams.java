@@ -291,7 +291,7 @@ public class CardUpdateParams extends ApiRequestParams {
       }
     }
 
-    public enum AllowedCategory implements ApiRequestParams.Enum {
+    public enum AllowedCategory implements ApiRequestParams.EnumParam {
       @SerializedName("ac_refrigeration_repair")
       AC_REFRIGERATION_REPAIR("ac_refrigeration_repair"),
 
@@ -1171,7 +1171,7 @@ public class CardUpdateParams extends ApiRequestParams {
       }
     }
 
-    public enum BlockedCategory implements ApiRequestParams.Enum {
+    public enum BlockedCategory implements ApiRequestParams.EnumParam {
       @SerializedName("ac_refrigeration_repair")
       AC_REFRIGERATION_REPAIR("ac_refrigeration_repair"),
 
@@ -2052,7 +2052,7 @@ public class CardUpdateParams extends ApiRequestParams {
     }
   }
 
-  public enum Status implements ApiRequestParams.Enum {
+  public enum Status implements ApiRequestParams.EnumParam {
     @SerializedName("active")
     ACTIVE("active"),
 

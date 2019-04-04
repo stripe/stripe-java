@@ -541,7 +541,7 @@ public class SourceCreateParams extends ApiRequestParams {
       }
     }
 
-    public enum RefundAttributesMethod implements ApiRequestParams.Enum {
+    public enum RefundAttributesMethod implements ApiRequestParams.EnumParam {
       @SerializedName("email")
       EMAIL("email"),
 
@@ -595,7 +595,7 @@ public class SourceCreateParams extends ApiRequestParams {
     }
   }
 
-  public enum Flow implements ApiRequestParams.Enum {
+  public enum Flow implements ApiRequestParams.EnumParam {
     @SerializedName("code_verification")
     CODE_VERIFICATION("code_verification"),
 
@@ -615,7 +615,7 @@ public class SourceCreateParams extends ApiRequestParams {
     }
   }
 
-  public enum Usage implements ApiRequestParams.Enum {
+  public enum Usage implements ApiRequestParams.EnumParam {
     @SerializedName("reusable")
     REUSABLE("reusable"),
 

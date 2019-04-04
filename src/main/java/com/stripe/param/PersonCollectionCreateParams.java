@@ -4,6 +4,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -826,7 +827,11 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
     @SerializedName("account_opener")
     Boolean accountOpener;
 
-    /** Whether the person is a director of the account's legal entity. */
+    /**
+     * Whether the person is a director of the account's legal entity. Currently only required for
+     * accounts in the EU. Directors are typically members of the governing board of the company, or
+     * responsible for ensuring the company meets its regulatory obligations.
+     */
     @SerializedName("director")
     Boolean director;
 
@@ -885,7 +890,11 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Whether the person is a director of the account's legal entity. */
+      /**
+       * Whether the person is a director of the account's legal entity. Currently only required for
+       * accounts in the EU. Directors are typically members of the governing board of the company,
+       * or responsible for ensuring the company meets its regulatory obligations.
+       */
       public Builder setDirector(Boolean director) {
         this.director = director;
         return this;
@@ -898,7 +907,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
       }
 
       /** The percent owned by the person of the account's legal entity. */
-      public Builder setPercentOwnership(Empty percentOwnership) {
+      public Builder setPercentOwnership(EmptyParam percentOwnership) {
         this.percentOwnership = percentOwnership;
         return this;
       }
@@ -913,17 +922,6 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
       public Builder setTitle(String title) {
         this.title = title;
         return this;
-      }
-    }
-
-    public enum Empty implements ApiRequestParams.Enum {
-      @SerializedName("")
-      EMPTY("");
-
-      @Getter private final String value;
-
-      Empty(String value) {
-        this.value = value;
       }
     }
   }

@@ -206,7 +206,7 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
   @SerializedName("payment_method")
   String paymentMethod;
 
-  /** Transaction-specific details of the payment method used in the payment. */
+  /** Details about the payment method at the time of the transaction. */
   @SerializedName("payment_method_details")
   PaymentMethodDetails paymentMethodDetails;
 

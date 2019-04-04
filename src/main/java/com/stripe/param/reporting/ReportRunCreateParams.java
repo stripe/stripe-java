@@ -241,7 +241,7 @@ public class ReportRunCreateParams extends ApiRequestParams {
       }
     }
 
-    public enum ReportingCategory implements ApiRequestParams.Enum {
+    public enum ReportingCategory implements ApiRequestParams.EnumParam {
       @SerializedName("advance")
       ADVANCE("advance"),
 

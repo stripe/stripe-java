@@ -467,7 +467,7 @@ public class SubscriptionListParams extends ApiRequestParams {
     }
   }
 
-  public enum Billing implements ApiRequestParams.Enum {
+  public enum Billing implements ApiRequestParams.EnumParam {
     @SerializedName("charge_automatically")
     CHARGE_AUTOMATICALLY("charge_automatically"),
 
@@ -481,7 +481,7 @@ public class SubscriptionListParams extends ApiRequestParams {
     }
   }
 
-  public enum Status implements ApiRequestParams.Enum {
+  public enum Status implements ApiRequestParams.EnumParam {
     @SerializedName("active")
     ACTIVE("active"),
 

@@ -4,6 +4,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -252,13 +253,13 @@ public class CustomerCreateParams extends ApiRequestParams {
     }
 
     /** The customer's shipping information. Appears on invoices emailed to this customer. */
-    public Builder setShipping(Empty shipping) {
+    public Builder setShipping(Shipping shipping) {
       this.shipping = shipping;
       return this;
     }
 
     /** The customer's shipping information. Appears on invoices emailed to this customer. */
-    public Builder setShipping(Shipping shipping) {
+    public Builder setShipping(EmptyParam shipping) {
       this.shipping = shipping;
       return this;
     }
@@ -305,7 +306,7 @@ public class CustomerCreateParams extends ApiRequestParams {
       }
 
       /** Default custom fields to be displayed on invoices for this customer. */
-      public Builder setCustomFields(Empty customFields) {
+      public Builder setCustomFields(EmptyParam customFields) {
         this.customFields = customFields;
         return this;
       }
@@ -363,17 +364,6 @@ public class CustomerCreateParams extends ApiRequestParams {
           this.value = value;
           return this;
         }
-      }
-    }
-
-    public enum Empty implements ApiRequestParams.Enum {
-      @SerializedName("")
-      EMPTY("");
-
-      @Getter private final String value;
-
-      Empty(String value) {
-        this.value = value;
       }
     }
   }
@@ -566,7 +556,7 @@ public class CustomerCreateParams extends ApiRequestParams {
       }
     }
 
-    public enum Type implements ApiRequestParams.Enum {
+    public enum Type implements ApiRequestParams.EnumParam {
       @SerializedName("vat")
       VAT("vat");
 
@@ -575,17 +565,6 @@ public class CustomerCreateParams extends ApiRequestParams {
       Type(String value) {
         this.value = value;
       }
-    }
-  }
-
-  public enum Empty implements ApiRequestParams.Enum {
-    @SerializedName("")
-    EMPTY("");
-
-    @Getter private final String value;
-
-    Empty(String value) {
-      this.value = value;
     }
   }
 }

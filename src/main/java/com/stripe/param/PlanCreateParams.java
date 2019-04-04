@@ -612,7 +612,7 @@ public class PlanCreateParams extends ApiRequestParams {
       }
     }
 
-    public enum UpTo implements ApiRequestParams.Enum {
+    public enum UpTo implements ApiRequestParams.EnumParam {
       @SerializedName("inf")
       INF("inf");
 
@@ -666,7 +666,7 @@ public class PlanCreateParams extends ApiRequestParams {
       }
     }
 
-    public enum Round implements ApiRequestParams.Enum {
+    public enum Round implements ApiRequestParams.EnumParam {
       @SerializedName("down")
       DOWN("down"),
 
@@ -681,7 +681,7 @@ public class PlanCreateParams extends ApiRequestParams {
     }
   }
 
-  public enum AggregateUsage implements ApiRequestParams.Enum {
+  public enum AggregateUsage implements ApiRequestParams.EnumParam {
     @SerializedName("last_during_period")
     LAST_DURING_PERIOD("last_during_period"),
 
@@ -701,7 +701,7 @@ public class PlanCreateParams extends ApiRequestParams {
     }
   }
 
-  public enum BillingScheme implements ApiRequestParams.Enum {
+  public enum BillingScheme implements ApiRequestParams.EnumParam {
     @SerializedName("per_unit")
     PER_UNIT("per_unit"),
 
@@ -715,7 +715,7 @@ public class PlanCreateParams extends ApiRequestParams {
     }
   }
 
-  public enum Interval implements ApiRequestParams.Enum {
+  public enum Interval implements ApiRequestParams.EnumParam {
     @SerializedName("day")
     DAY("day"),
 
@@ -735,7 +735,7 @@ public class PlanCreateParams extends ApiRequestParams {
     }
   }
 
-  public enum TiersMode implements ApiRequestParams.Enum {
+  public enum TiersMode implements ApiRequestParams.EnumParam {
     @SerializedName("graduated")
     GRADUATED("graduated"),
 
@@ -749,7 +749,7 @@ public class PlanCreateParams extends ApiRequestParams {
     }
   }
 
-  public enum UsageType implements ApiRequestParams.Enum {
+  public enum UsageType implements ApiRequestParams.EnumParam {
     @SerializedName("licensed")
     LICENSED("licensed"),
 

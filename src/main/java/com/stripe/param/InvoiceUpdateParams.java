@@ -4,6 +4,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -265,7 +266,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
      * `custom_fields` is specified, the list specified will replace the existing custom field list
      * on this invoice.
      */
-    public Builder setCustomFields(Empty customFields) {
+    public Builder setCustomFields(EmptyParam customFields) {
       this.customFields = customFields;
       return this;
     }
@@ -345,7 +346,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
      * (with at most four decimal places) between 0 and 100. To unset a previously-set value, pass
      * an empty string. This field can be updated only on `draft` invoices.
      */
-    public Builder setTaxPercent(Empty taxPercent) {
+    public Builder setTaxPercent(EmptyParam taxPercent) {
       this.taxPercent = taxPercent;
       return this;
     }
@@ -365,7 +366,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
      * the resulting transfer will be found on the invoice's charge. This will be unset if you POST
      * an empty value.
      */
-    public Builder setTransferData(Empty transferData) {
+    public Builder setTransferData(TransferData transferData) {
       this.transferData = transferData;
       return this;
     }
@@ -375,7 +376,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
      * the resulting transfer will be found on the invoice's charge. This will be unset if you POST
      * an empty value.
      */
-    public Builder setTransferData(TransferData transferData) {
+    public Builder setTransferData(EmptyParam transferData) {
       this.transferData = transferData;
       return this;
     }
@@ -451,17 +452,6 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         this.destination = destination;
         return this;
       }
-    }
-  }
-
-  public enum Empty implements ApiRequestParams.Enum {
-    @SerializedName("")
-    EMPTY("");
-
-    @Getter private final String value;
-
-    Empty(String value) {
-      this.value = value;
     }
   }
 }

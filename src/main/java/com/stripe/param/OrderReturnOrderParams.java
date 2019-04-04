@@ -4,6 +4,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
@@ -64,7 +65,7 @@ public class OrderReturnOrderParams extends ApiRequestParams {
     }
 
     /** List of items to return. */
-    public Builder setItems(Empty items) {
+    public Builder setItems(EmptyParam items) {
       this.items = items;
       return this;
     }
@@ -157,7 +158,7 @@ public class OrderReturnOrderParams extends ApiRequestParams {
       }
     }
 
-    public enum Type implements ApiRequestParams.Enum {
+    public enum Type implements ApiRequestParams.EnumParam {
       @SerializedName("discount")
       DISCOUNT("discount"),
 
@@ -175,17 +176,6 @@ public class OrderReturnOrderParams extends ApiRequestParams {
       Type(String value) {
         this.value = value;
       }
-    }
-  }
-
-  public enum Empty implements ApiRequestParams.Enum {
-    @SerializedName("")
-    EMPTY("");
-
-    @Getter private final String value;
-
-    Empty(String value) {
-      this.value = value;
     }
   }
 }

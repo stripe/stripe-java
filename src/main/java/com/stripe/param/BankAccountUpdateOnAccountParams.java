@@ -4,6 +4,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -18,7 +19,7 @@ public class BankAccountUpdateOnAccountParams extends ApiRequestParams {
 
   /** The type of entity that holds the account. This can be either `individual` or `company`. */
   @SerializedName("account_holder_type")
-  AccountHolderType accountHolderType;
+  ApiRequestParams.EnumParam accountHolderType;
 
   /** When set to true, this becomes the default external account for its currency. */
   @SerializedName("default_for_currency")
@@ -33,7 +34,7 @@ public class BankAccountUpdateOnAccountParams extends ApiRequestParams {
 
   private BankAccountUpdateOnAccountParams(
       String accountHolderName,
-      AccountHolderType accountHolderType,
+      ApiRequestParams.EnumParam accountHolderType,
       Boolean defaultForCurrency,
       List<String> expand,
       Map<String, String> metadata) {
@@ -51,7 +52,7 @@ public class BankAccountUpdateOnAccountParams extends ApiRequestParams {
   public static class Builder {
     private String accountHolderName;
 
-    private AccountHolderType accountHolderType;
+    private ApiRequestParams.EnumParam accountHolderType;
 
     private Boolean defaultForCurrency;
 
@@ -133,6 +134,12 @@ public class BankAccountUpdateOnAccountParams extends ApiRequestParams {
       return this;
     }
 
+    /** The type of entity that holds the account. This can be either `individual` or `company`. */
+    public Builder setAccountHolderType(EmptyParam accountHolderType) {
+      this.accountHolderType = accountHolderType;
+      return this;
+    }
+
     /** When set to true, this becomes the default external account for its currency. */
     public Builder setDefaultForCurrency(Boolean defaultForCurrency) {
       this.defaultForCurrency = defaultForCurrency;
@@ -140,10 +147,7 @@ public class BankAccountUpdateOnAccountParams extends ApiRequestParams {
     }
   }
 
-  public enum AccountHolderType implements ApiRequestParams.Enum {
-    @SerializedName("")
-    EMPTY(""),
-
+  public enum AccountHolderType implements ApiRequestParams.EnumParam {
     @SerializedName("company")
     COMPANY("company"),
 

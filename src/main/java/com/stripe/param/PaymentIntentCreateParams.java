@@ -684,7 +684,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
   }
 
-  public enum CaptureMethod implements ApiRequestParams.Enum {
+  public enum CaptureMethod implements ApiRequestParams.EnumParam {
     @SerializedName("automatic")
     AUTOMATIC("automatic"),
 

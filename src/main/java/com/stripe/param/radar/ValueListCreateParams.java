@@ -149,7 +149,7 @@ public class ValueListCreateParams extends ApiRequestParams {
     }
   }
 
-  public enum ItemType implements ApiRequestParams.Enum {
+  public enum ItemType implements ApiRequestParams.EnumParam {
     @SerializedName("card_bin")
     CARD_BIN("card_bin"),
 

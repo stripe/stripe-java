@@ -141,7 +141,7 @@ public class AccountLinkCreateParams extends ApiRequestParams {
     }
   }
 
-  public enum Collect implements ApiRequestParams.Enum {
+  public enum Collect implements ApiRequestParams.EnumParam {
     @SerializedName("currently_due")
     CURRENTLY_DUE("currently_due"),
 

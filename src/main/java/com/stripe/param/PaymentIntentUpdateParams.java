@@ -4,6 +4,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -260,7 +261,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
      * [Connect usage guide](https://stripe.com/docs/payments/payment-intents/usage#connect) for
      * details.
      */
-    public Builder setApplicationFeeAmount(Empty applicationFeeAmount) {
+    public Builder setApplicationFeeAmount(EmptyParam applicationFeeAmount) {
       this.applicationFeeAmount = applicationFeeAmount;
       return this;
     }
@@ -321,13 +322,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     }
 
     /** Shipping information for this PaymentIntent. */
-    public Builder setShipping(Empty shipping) {
+    public Builder setShipping(Shipping shipping) {
       this.shipping = shipping;
       return this;
     }
 
     /** Shipping information for this PaymentIntent. */
-    public Builder setShipping(Shipping shipping) {
+    public Builder setShipping(EmptyParam shipping) {
       this.shipping = shipping;
       return this;
     }
@@ -525,17 +526,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           return this;
         }
       }
-    }
-  }
-
-  public enum Empty implements ApiRequestParams.Enum {
-    @SerializedName("")
-    EMPTY("");
-
-    @Getter private final String value;
-
-    Empty(String value) {
-      this.value = value;
     }
   }
 }

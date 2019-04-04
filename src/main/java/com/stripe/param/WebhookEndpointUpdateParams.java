@@ -120,7 +120,7 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     }
   }
 
-  public enum EnabledEvent implements ApiRequestParams.Enum {
+  public enum EnabledEvent implements ApiRequestParams.EnumParam {
     @SerializedName("*")
     ALL("*"),
 

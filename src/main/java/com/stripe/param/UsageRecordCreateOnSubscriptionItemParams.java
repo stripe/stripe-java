@@ -116,7 +116,7 @@ public class UsageRecordCreateOnSubscriptionItemParams extends ApiRequestParams 
     }
   }
 
-  public enum Action implements ApiRequestParams.Enum {
+  public enum Action implements ApiRequestParams.EnumParam {
     @SerializedName("increment")
     INCREMENT("increment"),
 

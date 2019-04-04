@@ -224,7 +224,7 @@ public class OrderUpdateParams extends ApiRequestParams {
     }
   }
 
-  public enum Status implements ApiRequestParams.Enum {
+  public enum Status implements ApiRequestParams.EnumParam {
     @SerializedName("canceled")
     CANCELED("canceled"),
 

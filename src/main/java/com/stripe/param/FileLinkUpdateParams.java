@@ -4,6 +4,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -109,7 +110,7 @@ public class FileLinkUpdateParams extends ApiRequestParams {
      * A future timestamp after which the link will no longer be usable, or `now` to expire the link
      * immediately.
      */
-    public Builder setExpiresAt(Empty expiresAt) {
+    public Builder setExpiresAt(ExpiresAt expiresAt) {
       this.expiresAt = expiresAt;
       return this;
     }
@@ -118,7 +119,7 @@ public class FileLinkUpdateParams extends ApiRequestParams {
      * A future timestamp after which the link will no longer be usable, or `now` to expire the link
      * immediately.
      */
-    public Builder setExpiresAt(ExpiresAt expiresAt) {
+    public Builder setExpiresAt(EmptyParam expiresAt) {
       this.expiresAt = expiresAt;
       return this;
     }
@@ -133,18 +134,7 @@ public class FileLinkUpdateParams extends ApiRequestParams {
     }
   }
 
-  public enum Empty implements ApiRequestParams.Enum {
-    @SerializedName("")
-    EMPTY("");
-
-    @Getter private final String value;
-
-    Empty(String value) {
-      this.value = value;
-    }
-  }
-
-  public enum ExpiresAt implements ApiRequestParams.Enum {
+  public enum ExpiresAt implements ApiRequestParams.EnumParam {
     @SerializedName("now")
     NOW("now");
 

@@ -240,7 +240,7 @@ public class PayoutCreateParams extends ApiRequestParams {
     }
   }
 
-  public enum Method implements ApiRequestParams.Enum {
+  public enum Method implements ApiRequestParams.EnumParam {
     @SerializedName("instant")
     INSTANT("instant"),
 
@@ -254,7 +254,7 @@ public class PayoutCreateParams extends ApiRequestParams {
     }
   }
 
-  public enum SourceType implements ApiRequestParams.Enum {
+  public enum SourceType implements ApiRequestParams.EnumParam {
     @SerializedName("bank_account")
     BANK_ACCOUNT("bank_account"),
 

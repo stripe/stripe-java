@@ -323,7 +323,7 @@ public class DisputeCreateParams extends ApiRequestParams {
     }
   }
 
-  public enum Reason implements ApiRequestParams.Enum {
+  public enum Reason implements ApiRequestParams.EnumParam {
     @SerializedName("fraudulent")
     FRAUDULENT("fraudulent"),
 

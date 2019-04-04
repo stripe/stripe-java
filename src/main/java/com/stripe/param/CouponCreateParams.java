@@ -293,7 +293,7 @@ public class CouponCreateParams extends ApiRequestParams {
     }
   }
 
-  public enum Duration implements ApiRequestParams.Enum {
+  public enum Duration implements ApiRequestParams.EnumParam {
     @SerializedName("forever")
     FOREVER("forever"),
 

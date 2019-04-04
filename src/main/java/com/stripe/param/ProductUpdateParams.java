@@ -4,6 +4,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -268,7 +269,7 @@ public class ProductUpdateParams extends ApiRequestParams {
      * replace the existing attributes list on this product. Any attributes not present after the
      * update will be deleted from the SKUs for this product.
      */
-    public Builder setAttributes(Empty attributes) {
+    public Builder setAttributes(EmptyParam attributes) {
       this.attributes = attributes;
       return this;
     }
@@ -299,7 +300,7 @@ public class ProductUpdateParams extends ApiRequestParams {
     /**
      * A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
      */
-    public Builder setImages(Empty images) {
+    public Builder setImages(EmptyParam images) {
       this.images = images;
       return this;
     }
@@ -325,7 +326,7 @@ public class ProductUpdateParams extends ApiRequestParams {
      * The dimensions of this product for shipping purposes. A SKU associated with this product can
      * override this value by having its own `package_dimensions`.
      */
-    public Builder setPackageDimensions(Empty packageDimensions) {
+    public Builder setPackageDimensions(PackageDimensions packageDimensions) {
       this.packageDimensions = packageDimensions;
       return this;
     }
@@ -334,7 +335,7 @@ public class ProductUpdateParams extends ApiRequestParams {
      * The dimensions of this product for shipping purposes. A SKU associated with this product can
      * override this value by having its own `package_dimensions`.
      */
-    public Builder setPackageDimensions(PackageDimensions packageDimensions) {
+    public Builder setPackageDimensions(EmptyParam packageDimensions) {
       this.packageDimensions = packageDimensions;
       return this;
     }
@@ -441,17 +442,6 @@ public class ProductUpdateParams extends ApiRequestParams {
         this.width = width;
         return this;
       }
-    }
-  }
-
-  public enum Empty implements ApiRequestParams.Enum {
-    @SerializedName("")
-    EMPTY("");
-
-    @Getter private final String value;
-
-    Empty(String value) {
-      this.value = value;
     }
   }
 }

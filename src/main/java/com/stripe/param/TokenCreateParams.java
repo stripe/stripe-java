@@ -260,7 +260,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
     }
 
-    public enum AccountHolderType implements ApiRequestParams.Enum {
+    public enum AccountHolderType implements ApiRequestParams.EnumParam {
       @SerializedName("company")
       COMPANY("company"),
 

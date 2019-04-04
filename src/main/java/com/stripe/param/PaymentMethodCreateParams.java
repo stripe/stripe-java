@@ -22,9 +22,10 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   /**
    * If this is a `card` PaymentMethod, this hash contains the user's card details. For backwards
    * compatibility, you can alternatively provide a Stripe token (e.g., for Apple Pay, Amex Express
-   * Checkout, or legacy Checkout). When creating with a card number, you must meet the requirements
-   * for [PCI compliance](https://stripe.com/docs/security#validating-pci-compliance). We strongly
-   * recommend using Stripe.js instead of interacting with this API directly.
+   * Checkout, or legacy Checkout) into the card hash with format `card: {token: "tok_visa"}`. When
+   * creating with a card number, you must meet the requirements for [PCI
+   * compliance](https://stripe.com/docs/security#validating-pci-compliance). We strongly recommend
+   * using Stripe.js instead of interacting with this API directly.
    */
   @SerializedName("card")
   Object card;
@@ -170,8 +171,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     /**
      * If this is a `card` PaymentMethod, this hash contains the user's card details. For backwards
      * compatibility, you can alternatively provide a Stripe token (e.g., for Apple Pay, Amex
-     * Express Checkout, or legacy Checkout). When creating with a card number, you must meet the
-     * requirements for [PCI
+     * Express Checkout, or legacy Checkout) into the card hash with format `card: {token:
+     * "tok_visa"}`. When creating with a card number, you must meet the requirements for [PCI
      * compliance](https://stripe.com/docs/security#validating-pci-compliance). We strongly
      * recommend using Stripe.js instead of interacting with this API directly.
      */
@@ -183,8 +184,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     /**
      * If this is a `card` PaymentMethod, this hash contains the user's card details. For backwards
      * compatibility, you can alternatively provide a Stripe token (e.g., for Apple Pay, Amex
-     * Express Checkout, or legacy Checkout). When creating with a card number, you must meet the
-     * requirements for [PCI
+     * Express Checkout, or legacy Checkout) into the card hash with format `card: {token:
+     * "tok_visa"}`. When creating with a card number, you must meet the requirements for [PCI
      * compliance](https://stripe.com/docs/security#validating-pci-compliance). We strongly
      * recommend using Stripe.js instead of interacting with this API directly.
      */
@@ -474,7 +475,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     }
   }
 
-  public enum Type implements ApiRequestParams.Enum {
+  public enum Type implements ApiRequestParams.EnumParam {
     @SerializedName("card")
     CARD("card"),
 

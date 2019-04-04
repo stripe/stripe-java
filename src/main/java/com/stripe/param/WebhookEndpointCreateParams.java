@@ -149,7 +149,7 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     }
   }
 
-  public enum ApiVersion implements ApiRequestParams.Enum {
+  public enum ApiVersion implements ApiRequestParams.EnumParam {
     @SerializedName("2011-01-01")
     VERSION_2011_01_01("2011-01-01"),
 
@@ -418,7 +418,7 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     }
   }
 
-  public enum EnabledEvent implements ApiRequestParams.Enum {
+  public enum EnabledEvent implements ApiRequestParams.EnumParam {
     @SerializedName("*")
     ALL("*"),
 

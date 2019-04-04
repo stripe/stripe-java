@@ -76,7 +76,7 @@ public class PaymentIntentCancelParams extends ApiRequestParams {
     }
   }
 
-  public enum CancellationReason implements ApiRequestParams.Enum {
+  public enum CancellationReason implements ApiRequestParams.EnumParam {
     @SerializedName("duplicate")
     DUPLICATE("duplicate"),
 
