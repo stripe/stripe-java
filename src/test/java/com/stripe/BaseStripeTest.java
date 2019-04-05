@@ -527,6 +527,7 @@ public class BaseStripeTest {
     }
   }
 
+  @SuppressWarnings("unchecked")
   private static Boolean compareParamObjects(Object thisValue, Object otherValue) {
     if (thisValue == null) {
       return otherValue == null;
