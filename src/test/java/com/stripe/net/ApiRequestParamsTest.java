@@ -60,6 +60,13 @@ public class ApiRequestParamsTest {
     }
   }
 
+  private static class WithBooleanApiRequestParams extends ApiRequestParams {
+    @SerializedName("boolean_param")
+    Boolean booleanParam;
+    @SerializedName("primitive_boolean_param")
+    boolean primitiveBooleanParam;
+  }
+
   @Test
   public void testToMapWithEmptyEnumToNull() {
     ConcreteApiRequestParams paramRequest = new ConcreteApiRequestParams();
@@ -134,5 +141,17 @@ public class ApiRequestParamsTest {
 
     assertTrue(paramMap.containsKey("boo_code"));
     assertEquals(ParamCode.OTHER.getValue(), paramMap.get("boo_code"));
+  }
+
+  @Test
+  public void testToMapWithBooleanParams() {
+    ApiRequestParams params = new WithBooleanApiRequestParams();
+    Map<String, Object> paramMap = params.toMap();
+    assertEquals(1, paramMap.size());
+    assertFalse("Found uninitialized param in param map", paramMap.containsKey("boolean_param"));
+
+    // primitive boolean is default false and is converted into map param accordingly
+    assertTrue(paramMap.containsKey("primitive_boolean_param"));
+    assertEquals(false, paramMap.get("primitive_boolean_param"));
   }
 }
