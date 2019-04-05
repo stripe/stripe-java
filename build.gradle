@@ -71,9 +71,21 @@ lombok {
 import io.franzbecker.gradle.lombok.task.DelombokTask
 
 task delombok(type: DelombokTask, dependsOn: compileJava) {
-    ext.outputDir = file("$buildDir/delombok")
+    ext.outputDir = file("$buildDir/delombok/main")
     outputs.dir(outputDir)
     sourceSets.main.java.srcDirs.each {
+        inputs.dir(it)
+        args(it, "-d", outputDir)
+    }
+    doFirst {
+        outputDir.deleteDir()
+    }
+}
+
+task delombokTest(type: DelombokTask, dependsOn: compileJava) {
+    ext.outputDir = file("$buildDir/delombok/test")
+    outputs.dir(outputDir)
+    sourceSets.test.java.srcDirs.each {
         inputs.dir(it)
         args(it, "-d", outputDir)
     }
