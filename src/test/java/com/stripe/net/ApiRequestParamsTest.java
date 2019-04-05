@@ -60,6 +60,7 @@ public class ApiRequestParamsTest {
     }
   }
 
+  @SuppressWarnings("unused")
   private static class WithBooleanApiRequestParams extends ApiRequestParams {
     @SerializedName("boolean_param")
     Boolean booleanParam;
