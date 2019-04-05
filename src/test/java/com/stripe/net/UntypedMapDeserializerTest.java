@@ -20,6 +20,7 @@ public class UntypedMapDeserializerTest {
   private UntypedMapDeserializer untypedMapDeserializer = new UntypedMapDeserializer();
 
   @Test
+  @SuppressWarnings("unchecked")
   public void testMapOfArray() {
     JsonObject jsonObject = jsonObject(
         "foo_array", jsonArray(jsonString("foo1"), jsonString("foo2")));
@@ -30,6 +31,7 @@ public class UntypedMapDeserializerTest {
   }
 
   @Test
+  @SuppressWarnings("unchecked")
   public void testMapOfMap() {
     JsonObject nestedJsonObject = new JsonObject();
     nestedJsonObject.add("inner_foo1", jsonString("foo1"));
@@ -62,17 +64,19 @@ public class UntypedMapDeserializerTest {
   }
 
   @Test
+  @SuppressWarnings("unchecked")
   public void testMapOfEmptyMap() {
     JsonObject jsonObject = new JsonObject();
     JsonObject nestedJsonObject = new JsonObject();
     jsonObject.add("empty_map", nestedJsonObject);
 
     Map<String, Object> untyped = untypedMapDeserializer.deserialize(jsonObject);
-    Map emptyMap = (Map) untyped.get("empty_map");
+    Map<String, Object> emptyMap = (Map<String, Object>) untyped.get("empty_map");
     assertEquals(0, emptyMap.size());
   }
 
   @Test
+  @SuppressWarnings("unchecked")
   public void testMapOfArrayOfMap() {
     JsonObject jsonObject = new JsonObject();
     // "array": [{"foo": 2}, {"bar": 3}]
