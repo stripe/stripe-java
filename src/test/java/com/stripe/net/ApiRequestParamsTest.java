@@ -28,6 +28,7 @@ public class ApiRequestParamsTest {
     }
   }
 
+  @SuppressWarnings("unused")
   private static class ConcreteApiRequestParams extends ApiRequestParams {
     @SerializedName("foo_enum")
     private ApiRequestParams.EnumParam foo;
