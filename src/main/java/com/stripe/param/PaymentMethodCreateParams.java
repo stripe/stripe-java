@@ -176,7 +176,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
      * compliance](https://stripe.com/docs/security#validating-pci-compliance). We strongly
      * recommend using Stripe.js instead of interacting with this API directly.
      */
-    public Builder setCard(NumberDetails card) {
+    public Builder setCard(CardDetails card) {
       this.card = card;
       return this;
     }
@@ -379,7 +379,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   }
 
   @Getter
-  public static class NumberDetails {
+  public static class CardDetails {
     /** The card's CVC. It is highly recommended to always include this value. */
     @SerializedName("cvc")
     String cvc;
@@ -396,7 +396,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     @SerializedName("number")
     String number;
 
-    private NumberDetails(String cvc, Long expMonth, Long expYear, String number) {
+    private CardDetails(String cvc, Long expMonth, Long expYear, String number) {
       this.cvc = cvc;
       this.expMonth = expMonth;
       this.expYear = expYear;
@@ -404,7 +404,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     }
 
     public static Builder builder() {
-      return new com.stripe.param.PaymentMethodCreateParams.NumberDetails.Builder();
+      return new com.stripe.param.PaymentMethodCreateParams.CardDetails.Builder();
     }
 
     public static class Builder {
@@ -417,8 +417,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       private String number;
 
       /** Finalize and obtain parameter instance from this builder. */
-      public NumberDetails build() {
-        return new NumberDetails(this.cvc, this.expMonth, this.expYear, this.number);
+      public CardDetails build() {
+        return new CardDetails(this.cvc, this.expMonth, this.expYear, this.number);
       }
 
       /** The card's CVC. It is highly recommended to always include this value. */
