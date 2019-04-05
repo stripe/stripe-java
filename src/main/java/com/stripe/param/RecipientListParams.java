@@ -252,7 +252,8 @@ public class RecipientListParams extends ApiRequestParams {
     @SerializedName("individual")
     INDIVIDUAL("individual");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     Type(String value) {
       this.value = value;

@@ -482,7 +482,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     @SerializedName("card_present")
     CARD_PRESENT("card_present");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     Type(String value) {
       this.value = value;

@@ -312,7 +312,8 @@ public class CardholderListParams extends ApiRequestParams {
     @SerializedName("inactive")
     INACTIVE("inactive");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     Status(String value) {
       this.value = value;
@@ -326,7 +327,8 @@ public class CardholderListParams extends ApiRequestParams {
     @SerializedName("individual")
     INDIVIDUAL("individual");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     Type(String value) {
       this.value = value;

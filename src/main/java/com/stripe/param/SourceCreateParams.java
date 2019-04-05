@@ -551,7 +551,8 @@ public class SourceCreateParams extends ApiRequestParams {
       @SerializedName("none")
       NONE("none");
 
-      @Getter private final String value;
+      @Getter(onMethod = @__({@Override}))
+      private final String value;
 
       RefundAttributesMethod(String value) {
         this.value = value;
@@ -608,7 +609,8 @@ public class SourceCreateParams extends ApiRequestParams {
     @SerializedName("redirect")
     REDIRECT("redirect");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     Flow(String value) {
       this.value = value;
@@ -622,7 +624,8 @@ public class SourceCreateParams extends ApiRequestParams {
     @SerializedName("single_use")
     SINGLE_USE("single_use");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     Usage(String value) {
       this.value = value;

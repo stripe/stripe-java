@@ -123,7 +123,8 @@ public class UsageRecordCreateOnSubscriptionItemParams extends ApiRequestParams 
     @SerializedName("set")
     SET("set");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     Action(String value) {
       this.value = value;

@@ -275,7 +275,8 @@ public class AuthorizationListParams extends ApiRequestParams {
     @SerializedName("reversed")
     REVERSED("reversed");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     Status(String value) {
       this.value = value;

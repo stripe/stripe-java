@@ -616,7 +616,8 @@ public class PlanCreateParams extends ApiRequestParams {
       @SerializedName("inf")
       INF("inf");
 
-      @Getter private final String value;
+      @Getter(onMethod = @__({@Override}))
+      private final String value;
 
       UpTo(String value) {
         this.value = value;
@@ -673,7 +674,8 @@ public class PlanCreateParams extends ApiRequestParams {
       @SerializedName("up")
       UP("up");
 
-      @Getter private final String value;
+      @Getter(onMethod = @__({@Override}))
+      private final String value;
 
       Round(String value) {
         this.value = value;
@@ -694,7 +696,8 @@ public class PlanCreateParams extends ApiRequestParams {
     @SerializedName("sum")
     SUM("sum");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     AggregateUsage(String value) {
       this.value = value;
@@ -708,7 +711,8 @@ public class PlanCreateParams extends ApiRequestParams {
     @SerializedName("tiered")
     TIERED("tiered");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     BillingScheme(String value) {
       this.value = value;
@@ -728,7 +732,8 @@ public class PlanCreateParams extends ApiRequestParams {
     @SerializedName("year")
     YEAR("year");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     Interval(String value) {
       this.value = value;
@@ -742,7 +747,8 @@ public class PlanCreateParams extends ApiRequestParams {
     @SerializedName("volume")
     VOLUME("volume");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     TiersMode(String value) {
       this.value = value;
@@ -756,7 +762,8 @@ public class PlanCreateParams extends ApiRequestParams {
     @SerializedName("metered")
     METERED("metered");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     UsageType(String value) {
       this.value = value;

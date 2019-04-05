@@ -268,7 +268,8 @@ public class ChargeUpdateParams extends ApiRequestParams {
       @SerializedName("safe")
       SAFE("safe");
 
-      @Getter private final String value;
+      @Getter(onMethod = @__({@Override}))
+      private final String value;
 
       UserReport(String value) {
         this.value = value;

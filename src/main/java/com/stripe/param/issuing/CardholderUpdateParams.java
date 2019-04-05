@@ -317,7 +317,8 @@ public class CardholderUpdateParams extends ApiRequestParams {
     @SerializedName("inactive")
     INACTIVE("inactive");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     Status(String value) {
       this.value = value;

@@ -247,7 +247,8 @@ public class PayoutCreateParams extends ApiRequestParams {
     @SerializedName("standard")
     STANDARD("standard");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     Method(String value) {
       this.value = value;
@@ -261,7 +262,8 @@ public class PayoutCreateParams extends ApiRequestParams {
     @SerializedName("card")
     CARD("card");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     SourceType(String value) {
       this.value = value;

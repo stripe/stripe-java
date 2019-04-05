@@ -244,7 +244,8 @@ public class TransferCreateParams extends ApiRequestParams {
     @SerializedName("card")
     CARD("card");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     SourceType(String value) {
       this.value = value;

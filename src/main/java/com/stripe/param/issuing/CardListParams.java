@@ -362,7 +362,8 @@ public class CardListParams extends ApiRequestParams {
     @SerializedName("stolen")
     STOLEN("stolen");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     Status(String value) {
       this.value = value;
@@ -376,7 +377,8 @@ public class CardListParams extends ApiRequestParams {
     @SerializedName("virtual")
     VIRTUAL("virtual");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     Type(String value) {
       this.value = value;

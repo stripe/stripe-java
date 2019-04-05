@@ -1164,7 +1164,8 @@ public class CardUpdateParams extends ApiRequestParams {
       @SerializedName("wrecking_and_salvage_yards")
       WRECKING_AND_SALVAGE_YARDS("wrecking_and_salvage_yards");
 
-      @Getter private final String value;
+      @Getter(onMethod = @__({@Override}))
+      private final String value;
 
       AllowedCategory(String value) {
         this.value = value;
@@ -2044,7 +2045,8 @@ public class CardUpdateParams extends ApiRequestParams {
       @SerializedName("wrecking_and_salvage_yards")
       WRECKING_AND_SALVAGE_YARDS("wrecking_and_salvage_yards");
 
-      @Getter private final String value;
+      @Getter(onMethod = @__({@Override}))
+      private final String value;
 
       BlockedCategory(String value) {
         this.value = value;
@@ -2068,7 +2070,8 @@ public class CardUpdateParams extends ApiRequestParams {
     @SerializedName("stolen")
     STOLEN("stolen");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     Status(String value) {
       this.value = value;

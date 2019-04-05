@@ -171,7 +171,8 @@ public class ValueListCreateParams extends ApiRequestParams {
     @SerializedName("string")
     STRING("string");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     ItemType(String value) {
       this.value = value;

@@ -1220,7 +1220,8 @@ public class CardCreateParams extends ApiRequestParams {
       @SerializedName("wrecking_and_salvage_yards")
       WRECKING_AND_SALVAGE_YARDS("wrecking_and_salvage_yards");
 
-      @Getter private final String value;
+      @Getter(onMethod = @__({@Override}))
+      private final String value;
 
       AllowedCategory(String value) {
         this.value = value;
@@ -2100,7 +2101,8 @@ public class CardCreateParams extends ApiRequestParams {
       @SerializedName("wrecking_and_salvage_yards")
       WRECKING_AND_SALVAGE_YARDS("wrecking_and_salvage_yards");
 
-      @Getter private final String value;
+      @Getter(onMethod = @__({@Override}))
+      private final String value;
 
       BlockedCategory(String value) {
         this.value = value;
@@ -2271,7 +2273,8 @@ public class CardCreateParams extends ApiRequestParams {
       @SerializedName("individual")
       INDIVIDUAL("individual");
 
-      @Getter private final String value;
+      @Getter(onMethod = @__({@Override}))
+      private final String value;
 
       Type(String value) {
         this.value = value;
@@ -2286,7 +2289,8 @@ public class CardCreateParams extends ApiRequestParams {
     @SerializedName("inactive")
     INACTIVE("inactive");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     Status(String value) {
       this.value = value;
@@ -2300,7 +2304,8 @@ public class CardCreateParams extends ApiRequestParams {
     @SerializedName("virtual")
     VIRTUAL("virtual");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     Type(String value) {
       this.value = value;

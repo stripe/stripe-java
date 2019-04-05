@@ -289,7 +289,8 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
     @SerializedName("individual")
     INDIVIDUAL("individual");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     AccountHolderType(String value) {
       this.value = value;

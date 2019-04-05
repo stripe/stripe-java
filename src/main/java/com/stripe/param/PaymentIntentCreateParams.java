@@ -691,7 +691,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     @SerializedName("manual")
     MANUAL("manual");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     CaptureMethod(String value) {
       this.value = value;

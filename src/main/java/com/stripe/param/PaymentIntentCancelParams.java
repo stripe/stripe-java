@@ -89,7 +89,8 @@ public class PaymentIntentCancelParams extends ApiRequestParams {
     @SerializedName("requested_by_customer")
     REQUESTED_BY_CUSTOMER("requested_by_customer");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     CancellationReason(String value) {
       this.value = value;

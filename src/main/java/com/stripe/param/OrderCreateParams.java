@@ -345,7 +345,8 @@ public class OrderCreateParams extends ApiRequestParams {
       @SerializedName("tax")
       TAX("tax");
 
-      @Getter private final String value;
+      @Getter(onMethod = @__({@Override}))
+      private final String value;
 
       Type(String value) {
         this.value = value;

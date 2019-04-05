@@ -614,7 +614,8 @@ public class CustomerUpdateParams extends ApiRequestParams {
       @SerializedName("vat")
       VAT("vat");
 
-      @Getter private final String value;
+      @Getter(onMethod = @__({@Override}))
+      private final String value;
 
       Type(String value) {
         this.value = value;
@@ -626,7 +627,8 @@ public class CustomerUpdateParams extends ApiRequestParams {
     @SerializedName("now")
     NOW("now");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     TrialEnd(String value) {
       this.value = value;

@@ -330,7 +330,8 @@ public class DisputeCreateParams extends ApiRequestParams {
     @SerializedName("other")
     OTHER("other");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     Reason(String value) {
       this.value = value;

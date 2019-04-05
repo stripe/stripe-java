@@ -138,7 +138,8 @@ public class FileLinkUpdateParams extends ApiRequestParams {
     @SerializedName("now")
     NOW("now");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     ExpiresAt(String value) {
       this.value = value;

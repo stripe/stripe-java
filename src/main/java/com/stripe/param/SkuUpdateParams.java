@@ -352,7 +352,8 @@ public class SkuUpdateParams extends ApiRequestParams {
       @SerializedName("infinite")
       INFINITE("infinite");
 
-      @Getter private final String value;
+      @Getter(onMethod = @__({@Override}))
+      private final String value;
 
       Type(String value) {
         this.value = value;
@@ -369,7 +370,8 @@ public class SkuUpdateParams extends ApiRequestParams {
       @SerializedName("out_of_stock")
       OUT_OF_STOCK("out_of_stock");
 
-      @Getter private final String value;
+      @Getter(onMethod = @__({@Override}))
+      private final String value;
 
       Value(String value) {
         this.value = value;

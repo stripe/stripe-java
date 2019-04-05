@@ -411,7 +411,8 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("2019-03-14")
     VERSION_2019_03_14("2019-03-14");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     ApiVersion(String value) {
       this.value = value;
@@ -794,7 +795,8 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("transfer.updated")
     TRANSFER__UPDATED("transfer.updated");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     EnabledEvent(String value) {
       this.value = value;

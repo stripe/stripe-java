@@ -2426,7 +2426,8 @@ public class AccountCreateParams extends ApiRequestParams {
           @SerializedName("minimum")
           MINIMUM("minimum");
 
-          @Getter private final String value;
+          @Getter(onMethod = @__({@Override}))
+          private final String value;
 
           DelayDays(String value) {
             this.value = value;
@@ -2446,7 +2447,8 @@ public class AccountCreateParams extends ApiRequestParams {
           @SerializedName("weekly")
           WEEKLY("weekly");
 
-          @Getter private final String value;
+          @Getter(onMethod = @__({@Override}))
+          private final String value;
 
           Interval(String value) {
             this.value = value;
@@ -2475,7 +2477,8 @@ public class AccountCreateParams extends ApiRequestParams {
           @SerializedName("wednesday")
           WEDNESDAY("wednesday");
 
-          @Getter private final String value;
+          @Getter(onMethod = @__({@Override}))
+          private final String value;
 
           WeeklyAnchor(String value) {
             this.value = value;
@@ -2565,7 +2568,8 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("platform_payments")
     PLATFORM_PAYMENTS("platform_payments");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     RequestedCapability(String value) {
       this.value = value;
@@ -2582,7 +2586,8 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("standard")
     STANDARD("standard");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     Type(String value) {
       this.value = value;

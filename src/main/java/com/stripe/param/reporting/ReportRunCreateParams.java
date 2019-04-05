@@ -335,7 +335,8 @@ public class ReportRunCreateParams extends ApiRequestParams {
       @SerializedName("transfer_reversal")
       TRANSFER_REVERSAL("transfer_reversal");
 
-      @Getter private final String value;
+      @Getter(onMethod = @__({@Override}))
+      private final String value;
 
       ReportingCategory(String value) {
         this.value = value;

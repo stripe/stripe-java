@@ -303,7 +303,8 @@ public class CouponCreateParams extends ApiRequestParams {
     @SerializedName("repeating")
     REPEATING("repeating");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     Duration(String value) {
       this.value = value;

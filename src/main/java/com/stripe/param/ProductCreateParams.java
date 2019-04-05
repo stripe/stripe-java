@@ -517,7 +517,8 @@ public class ProductCreateParams extends ApiRequestParams {
     @SerializedName("service")
     SERVICE("service");
 
-    @Getter private final String value;
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
 
     Type(String value) {
       this.value = value;

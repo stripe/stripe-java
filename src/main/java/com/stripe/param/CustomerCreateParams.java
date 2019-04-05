@@ -560,7 +560,8 @@ public class CustomerCreateParams extends ApiRequestParams {
       @SerializedName("vat")
       VAT("vat");
 
-      @Getter private final String value;
+      @Getter(onMethod = @__({@Override}))
+      private final String value;
 
       Type(String value) {
         this.value = value;
