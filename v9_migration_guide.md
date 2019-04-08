@@ -25,16 +25,27 @@ New:
   Charge charge = Charge.create(typedParams);
 ```
 #### Breaking change due to ambiguous `null` parameters
-One breaking change arises from overloading method names. Existing integrations passing `null` to the parameters argument will see complier error due to ambiguous types; the compiler does not know whether `null` is a null untyped map, or null typed parameters. You should create empty parameters with empty map or empty typed parameters instead.
+One breaking change arises from overloading method names. Existing integrations passing `null` to
+ the parameters argument will see complier error due to ambiguous types; the compiler does not 
+ know whether `null` is a null untyped map, or null typed parameters. You should instead create an 
+ empty parameters with either an empty map, or a built typed parameters without any values set.
 
 #### Testing for migration
-To ensure safe migration, consider testing equality between your current untyped `Map<String, Object>` and the new typed parameters method `toMap` to get the same untyped map.
+To ensure safe migration, consider testing equality between your current untyped `Map<String, 
+Object>` parameters and the new typed parameters with `toMap()` to get the untyped representation.
 ```java
-  assertEquals(untypedParams, typedParams.toMap());
+  Map<String, Object> untypedParams = getUntypedParams();
+  ApiRequestParams typedParams = getTypedParams();
+  Map<String, Object> typedParamsAsMap = typedParams.toMap();
+  assertEquals(untypedParams, typedParamsAsMap);
 ```
 
 #### Builder interfaces
-When parameters have nested object, there are corresponding nested builders. 
+* When parameters have nested objects, there are builders for each one via 
+`builder()` method. Here, `SkuCreateParams.Inventory` is separately built, and used in setting 
+`SkuCreateParams` root-level parameters. Note that nested objects are not shared among parameters
+ of different methods. For instance, parameter class to update SKU `SkuUpdateParams` separately has 
+ its nested object of `SkuUpdateParams.Inventory` which can differ from that in parameters to create SKU.
 ```java
   SkuCreateParams.Inventory inventoryParams = SkuCreateParams.Inventory.builder()
       .setQuantity(4L)
@@ -48,7 +59,10 @@ When parameters have nested object, there are corresponding nested builders.
       .build();
   Sku sku = Sku.create(createParams);
 ``` 
-When parameters require a list or a map, there are similar interfaces to `add` and `addAll` in `List<T>`, and `put` and `putAll` in `Map<String, T>`.
+
+
+* When parameters require a list or a map, there are similar interfaces to `add` and `addAll` in 
+`List<T>`, and `put` and `putAll` in `Map<String, T>`.
 ```java
   PaymentIntentRetrieveParams typedParams = PaymentIntentRetrieveParams.builder()
       // support both adding individual element or the whole list
@@ -63,7 +77,9 @@ When parameters require a list or a map, there are similar interfaces to `add` a
        .putAllMetadata(ImmutableMap.of("key2", "value2"))
        .build();
 ```
-When parameters require enums, there are specific enums for each parameter.
+
+
+* When parameters require enums, there are specific enums for each parameter.
 ```java
   WebhookEndpointCreateParams createParams = WebhookEndpointCreateParams
       .builder()
@@ -72,6 +88,7 @@ When parameters require enums, there are specific enums for each parameter.
       .setUrl("https://myEndPoint.com")
       .build();
 ```
+
 
 This has been a long-standing [ask](https://github.com/stripe/stripe-java/issues/211) from the community, so we thank you for your patience!
 
