@@ -7,6 +7,7 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.AccountLinkCreateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -45,6 +46,24 @@ public class AccountLink extends ApiResource {
    * to in order to take them through the Hosted Verification flow.
    */
   public static AccountLink create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/account_links");
+    return request(ApiResource.RequestMethod.POST, url, params, AccountLink.class, options);
+  }
+
+  /**
+   * Creates an AccountLink object that returns a Stripe URL that the user can redirect their user
+   * to in order to take them through the Hosted Verification flow.
+   */
+  public static AccountLink create(AccountLinkCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * Creates an AccountLink object that returns a Stripe URL that the user can redirect their user
+   * to in order to take them through the Hosted Verification flow.
+   */
+  public static AccountLink create(AccountLinkCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/account_links");
     return request(ApiResource.RequestMethod.POST, url, params, AccountLink.class, options);

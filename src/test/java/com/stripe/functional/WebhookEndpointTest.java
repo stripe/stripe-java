@@ -9,6 +9,7 @@ import com.stripe.model.WebhookEndpoint;
 import com.stripe.model.WebhookEndpointCollection;
 import com.stripe.net.ApiResource;
 
+import com.stripe.param.WebhookEndpointCreateParams;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -27,12 +28,7 @@ public class WebhookEndpointTest extends BaseStripeTest {
 
   @Test
   public void testCreate() throws StripeException {
-    final List<String> enabledEvents = new ArrayList<>();
-    enabledEvents.add("charge.succeeded");
-
-    final Map<String, Object> params = new HashMap<>();
-    params.put("enabled_events", enabledEvents);
-    params.put("url", "https://stripe.com");
+    final Map<String, Object> params = createUntypedParams();
 
     final WebhookEndpoint endpoint = WebhookEndpoint.create(params);
 
@@ -41,6 +37,35 @@ public class WebhookEndpointTest extends BaseStripeTest {
         ApiResource.RequestMethod.POST,
         String.format("/v1/webhook_endpoints"),
         params
+    );
+  }
+
+  private Map<String, Object> createUntypedParams() {
+    final List<String> enabledEvents = new ArrayList<>();
+    enabledEvents.add("charge.succeeded");
+
+    final Map<String, Object> params = new HashMap<>();
+    params.put("enabled_events", enabledEvents);
+    params.put("url", "https://stripe.com");
+    return params;
+  }
+
+  @Test
+  public void testCreateWithTypedParams() throws StripeException {
+    final Map<String, Object> untypedParams = createUntypedParams();
+
+    WebhookEndpointCreateParams createParams = WebhookEndpointCreateParams
+        .builder()
+        .addEnabledEvent(WebhookEndpointCreateParams.EnabledEvent.CHARGE__SUCCEEDED)
+        .setUrl("https://stripe.com").build();
+
+    final WebhookEndpoint endpoint = WebhookEndpoint.create(createParams);
+
+    assertNotNull(endpoint);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        String.format("/v1/webhook_endpoints"),
+        untypedParams
     );
   }
 

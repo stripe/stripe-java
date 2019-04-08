@@ -7,6 +7,10 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.CouponCreateParams;
+import com.stripe.param.CouponListParams;
+import com.stripe.param.CouponRetrieveParams;
+import com.stripe.param.CouponUpdateParams;
 import java.math.BigDecimal;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -122,6 +126,18 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
     return requestCollection(url, params, CouponCollection.class, options);
   }
 
+  /** Returns a list of your coupons. */
+  public static CouponCollection list(CouponListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of your coupons. */
+  public static CouponCollection list(CouponListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/coupons");
+    return requestCollection(url, params, CouponCollection.class, options);
+  }
+
   /**
    * You can create coupons easily via the <a href="https://dashboard.stripe.com/coupons">coupon
    * management</a> page of the Stripe dashboard. Coupon creation is also accessible via the API if
@@ -156,6 +172,40 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
     return request(ApiResource.RequestMethod.POST, url, params, Coupon.class, options);
   }
 
+  /**
+   * You can create coupons easily via the <a href="https://dashboard.stripe.com/coupons">coupon
+   * management</a> page of the Stripe dashboard. Coupon creation is also accessible via the API if
+   * you need to create coupons on the fly.
+   *
+   * <p>A coupon has either a <code>percent_off</code> or an <code>amount_off</code> and <code>
+   * currency</code>. If you set an <code>amount_off</code>, that amount will be subtracted from any
+   * invoice’s subtotal. For example, an invoice with a subtotal of 100 will have a final total of 0
+   * if a coupon with an <code>amount_off</code> of 200 is applied to it and an invoice with a
+   * subtotal of 300 will have a final total of 100 if a coupon with an <code>amount_off</code> of
+   * 200 is applied to it.
+   */
+  public static Coupon create(CouponCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * You can create coupons easily via the <a href="https://dashboard.stripe.com/coupons">coupon
+   * management</a> page of the Stripe dashboard. Coupon creation is also accessible via the API if
+   * you need to create coupons on the fly.
+   *
+   * <p>A coupon has either a <code>percent_off</code> or an <code>amount_off</code> and <code>
+   * currency</code>. If you set an <code>amount_off</code>, that amount will be subtracted from any
+   * invoice’s subtotal. For example, an invoice with a subtotal of 100 will have a final total of 0
+   * if a coupon with an <code>amount_off</code> of 200 is applied to it and an invoice with a
+   * subtotal of 300 will have a final total of 100 if a coupon with an <code>amount_off</code> of
+   * 200 is applied to it.
+   */
+  public static Coupon create(CouponCreateParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/coupons");
+    return request(ApiResource.RequestMethod.POST, url, params, Coupon.class, options);
+  }
+
   /** Retrieves the coupon with the given ID. */
   public static Coupon retrieve(String coupon) throws StripeException {
     return retrieve(coupon, (Map<String, Object>) null, (RequestOptions) null);
@@ -168,6 +218,14 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
 
   /** Retrieves the coupon with the given ID. */
   public static Coupon retrieve(String coupon, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/coupons/%s", coupon));
+    return request(ApiResource.RequestMethod.GET, url, params, Coupon.class, options);
+  }
+
+  /** Retrieves the coupon with the given ID. */
+  public static Coupon retrieve(String coupon, CouponRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/coupons/%s", coupon));
@@ -189,6 +247,24 @@ public class Coupon extends ApiResource implements HasId, MetadataStore<Coupon> 
    */
   @Override
   public Coupon update(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/coupons/%s", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Coupon.class, options);
+  }
+
+  /**
+   * Updates the metadata of a coupon. Other coupon details (currency, duration, amount_off) are, by
+   * design, not editable.
+   */
+  public Coupon update(CouponUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the metadata of a coupon. Other coupon details (currency, duration, amount_off) are, by
+   * design, not editable.
+   */
+  public Coupon update(CouponUpdateParams params, RequestOptions options) throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/coupons/%s", this.getId()));
     return request(ApiResource.RequestMethod.POST, url, params, Coupon.class, options);

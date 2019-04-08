@@ -16,6 +16,13 @@ public class EventData extends StripeObject {
    * should be deferred to the user. See the now deprecated method {@link EventData#getObject()}.
    */
   JsonObject object;
+
+  /**
+   * Object containing the names of the attributes that have changed, and their previous values
+   * (sent along only with *.updated events). The untyped object here is composed of
+   * {@code Map<String, Object>}, {@code List<Object>}, and basic Java data types.
+   * The array was represented as {@code Object[]} in `stripe-java` below 8.x.
+   */
   Map<String, Object> previousAttributes;
 
   /**
