@@ -38,7 +38,7 @@ public class Event extends ApiResource implements HasId {
    * <pre>
    *   Event event = getEvent(); // either from webhook or event endpoint
    *   EventDataObjectDeserializer deserializer = event.getDataObjectDeserializer();
-   *   StripeObject stripeObject = deserializer.getObject();
+   *   Optional&lt;StripeObject&gt; stripeObject = deserializer.getObject();
    * </pre>
    * You can ensure that webhook events has the same API version by creating
    * webhook endpoint specifying api version](https://stripe.com/docs/api/webhook_endpoints/create)
