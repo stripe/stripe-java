@@ -4,41 +4,46 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.stripe.Stripe;
 import com.stripe.exception.EventDataObjectDeserializationException;
+import java.util.Map;
+import java.util.Optional;
 import lombok.EqualsAndHashCode;
 
 /**
  * Deserialization helper to get {@code StripeObject} and handle failure due to schema
- * incompatibility between the data object and the model classes. Event data object always
- * corresponds to the schema at API version of its creation time, available at
- * {@link Event#getApiVersion()}, while the model classes correspond to schemas at a specific
- * version pinned to this library {@link Stripe#API_VERSION}. Thus, only data object with same
- * API versions is guaranteed to deserialize safely.
+ * incompatibility between the data object and the model classes. Event data object by default
+ * corresponds to the schema at API version tied to your Stripe account at the event creation time.
+ * That event version is in {@link Event#getApiVersion()}. The model classes for deserialization,
+ * however, corresponds to a specific version pinned to this library {@link Stripe#API_VERSION}.
+ * Thus, only data object with same API versions is guaranteed to deserialize safely.
+ *
+ * <p>To avoid this API version of event webhook mismatch, create a new webhook endpoint with
+ * `api_versions` corresponding to {@link Stripe#API_VERSION}. For more information, see
+ * <a href="https://stripe.com/docs/api/webhook_endpoints/create">API reference</a>
  *
  * <p>In practice, each {@link Stripe#API_VERSION} update only affects specific set of classes,
  * so event data object for the unaffected classes can still be serialized successfully -- even when
  * the API versions do not match. (Although it is considered unsafe by the API version comparison.)
+ * In that case, you can use {@link EventDataObjectDeserializer#deserializeUnsafe()}
  *
- * <p>Upon seeing deserialization failure from retrieving events or during receiving webhook events,
- * consider defining your own custom {@link CompatibilityTransformer} to transform the raw JSON to
- * one with schema compatible with the current model classes. (Events in failed webhooks can be
- * retrieved again from the event API.)
+ * <p>Old events from {@link Event#retrieve(String)} or {@link Event#list(Map)} will have
+ * immutable API versions on them, and there is currently no support for rendering it at
+ * different API versions. If you find failure from reading these events, consider defining your
+ * own custom {@link CompatibilityTransformer} to transform the raw JSON to
+ * one with schema compatible with this current model classes.
  *
- * <p>An example of event data object deserialization is:
- *
+ * <p>En event integration from webhook may look like the example below. Assuming that you have
+ * the event api version matching this library, you should safely find deserialized object from
+ * the deserializer.
  * <pre>
- * Event event = Event.retrieve("evt_123");
- * EventDataObjectDeserializer deserializer = event.getDataObjectDeserializer();
- * StripeObject stripeObject;
- * if (deserializer.deserialize()) {
- *   stripeObject = deserializer.getObject();
- * } else {
- *   try {
- *     stripeObject = deserializer.deserializeUnsafe();
- *   } catch (EventDataObjectDeserializationException e) {
- *     EventDataObjectDeserializer.CompatibilityTransformer transformer = myCustomerTransformer();
- *     stripeObject = deserializer.deserializeUnsafeWith(transformer);
+ *   Event event = Webhook.constructEvent(payload, sigHeader, secret);
+ *   EventDataObjectDeserializer dataObjectDeserializer = event.getDataObjectDeserializer();
+ *   if (dataObjectDeserializer.getObject().isPresent()) {
+ *     StripeObject stripeObject = dataObjectDeserializer.getObject().get();
+ *     doSomething(stripeObject);
+ *   } else {
+ *     throw new IllegalStateException(
+ *       String.format("Unable to deserialize event data object for %s", event));
  *   }
- * }
  * </pre>
  */
 @EqualsAndHashCode(callSuper = false)
@@ -71,20 +76,20 @@ public class EventDataObjectDeserializer {
 
   /**
    * Gets data event object, in favor of the deprecated {@link EventData#getObject()}.
-   * When non-null, the deserialized {@code StripeObject} preserves high data integrity because of
+   * When non-, the deserialized {@code StripeObject} preserves high data integrity because of
    * correspondence between schema of the API response and the model class (the underlying
    * concrete class for abstract {@code StripeObject}) schema. This is when
    * {@link Event#getApiVersion()} matches {@link Stripe#API_VERSION}.
    * @return stripe object that fully represent its original raw JSON response.
    */
-  public StripeObject getObject() {
+  public Optional<StripeObject> getObject() {
     if (object != null) {
-      return object;
+      return Optional.of(object);
     }
     if (deserialize()) {
-      return object;
+      return Optional.of(object);
     } else {
-      return null;
+      return Optional.empty();
     }
   }
 
@@ -105,7 +110,7 @@ public class EventDataObjectDeserializer {
    * to guarantee safe deserialization.
    * @return whether deserialization has been successful.
    */
-  public boolean deserialize() {
+  private boolean deserialize() {
     if (!apiVersionMatch()) {
       // when version mismatch, even when deserialization is successful,
       // we cannot guarantee data correctness. Old events containing fields that should be
@@ -149,11 +154,14 @@ public class EventDataObjectDeserializer {
             "Current `stripe-java` integration has Stripe API version %s, but the event data "
                 + "object has %s. The JSON data might have schema not compatible with the "
                 + "current model classes; such incompatibility can be the cause of "
-                + "deserialization failure. Please see our API version upgrade guide, "
-                + "and consider transforming the raw JSON data object to be compatible with "
-                + "current model class schemas and use `deserializeUnsafeWith`. "
+                + "deserialization failure. "
+                + "If you are deserializing webhoook events, consider creating a different webhook "
+                + "endpoint with `api_version` at %s. See Stripe API reference for more details. "
+                + "If you are deserializing old events from `Event#retrieve`, "
+                + "consider transforming the raw JSON data object to be compatible with this "
+                + "current model class schemas using `deserializeUnsafeWith`. "
                 + "Original error message: %s",
-            getIntegrationApiVersion(), this.apiVersion, e.getMessage()
+            getIntegrationApiVersion(), this.apiVersion, getIntegrationApiVersion(), e.getMessage()
         );
       } else {
         errorMessage = String.format("Unable to deserialize event data object to respective Stripe "

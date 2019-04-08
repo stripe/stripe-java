@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNotSame;
-import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.junit.jupiter.api.Assertions.fail;
 
@@ -57,9 +56,8 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
     EventDataObjectDeserializer deserializer = stubIntegrationApiVersion(
         event.getDataObjectDeserializer(), CURRENT_EVENT_VERSION);
 
-    assertTrue(deserializer.deserialize());
-    assertNotNull(deserializer.getObject());
-    verifyDeserializedStripeObject(deserializer.getObject());
+    assertTrue(deserializer.getObject().isPresent());
+    verifyDeserializedStripeObject(deserializer.getObject().get());
   }
 
   @Test
@@ -74,7 +72,7 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
     EventDataObjectDeserializer deserializer = stubIntegrationApiVersion(
         event.getDataObjectDeserializer(), NO_MATCH_VERSION);
 
-    assertFalse(deserializer.deserialize());
+    assertFalse(deserializer.getObject().isPresent());
 
     // although version mismatch, schema is still compatible
     // so force deserialization is successful
@@ -92,14 +90,12 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
     EventDataObjectDeserializer deserializer = stubIntegrationApiVersion(
         event.getDataObjectDeserializer(), NO_MATCH_VERSION);
 
-    assertFalse(deserializer.deserialize());
-    // when it is unsafe, getting normal object returns nothing.
-    assertNull(deserializer.getObject());
+    assertFalse(deserializer.getObject().isPresent());
 
     StripeObject unsafeDeserialized = deserializer.deserializeUnsafe();
     assertNotNull(unsafeDeserialized);
     // successful forced deserialization, but getting object remains empty
-    assertNull(deserializer.getObject());
+    assertFalse(deserializer.getObject().isPresent());
   }
 
   @Test
@@ -111,7 +107,7 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
     EventDataObjectDeserializer deserializer = stubIntegrationApiVersion(
         event.getDataObjectDeserializer(), OLD_EVENT_VERSION);
 
-    assertFalse(deserializer.deserialize());
+    assertFalse(deserializer.getObject().isPresent());
 
     try {
       deserializer.deserializeUnsafe();
@@ -135,7 +131,7 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
     EventDataObjectDeserializer deserializer = stubIntegrationApiVersion(
         event.getDataObjectDeserializer(), NO_MATCH_VERSION);
 
-    assertFalse(deserializer.deserialize());
+    assertFalse(deserializer.getObject().isPresent());
 
     try {
       deserializer.deserializeUnsafe();
@@ -154,7 +150,7 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
     final EventDataObjectDeserializer deserializer = stubIntegrationApiVersion(
         event.getDataObjectDeserializer(), NO_MATCH_VERSION);
 
-    assertFalse(deserializer.deserialize());
+    assertFalse(deserializer.getObject().isPresent());
 
     try {
       deserializer.deserializeUnsafe();
