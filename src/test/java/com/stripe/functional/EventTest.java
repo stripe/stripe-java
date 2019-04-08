@@ -1,7 +1,8 @@
 package com.stripe.functional;
 
+import static junit.framework.TestCase.assertTrue;
+import static org.junit.Assert.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.Stripe;
@@ -14,6 +15,7 @@ import com.stripe.net.ApiResource;
 import java.util.HashMap;
 import java.util.Map;
 
+import java.util.Optional;
 import org.junit.jupiter.api.Test;
 
 public class EventTest extends BaseStripeTest {
@@ -51,9 +53,9 @@ public class EventTest extends BaseStripeTest {
     // Suppose event has the same API version as the library's pinned version
     event.setApiVersion(Stripe.API_VERSION);
 
-    StripeObject stripeObject = event.getDataObjectDeserializer().getObject();
+    Optional<StripeObject> stripeObject = event.getDataObjectDeserializer().getObject();
 
-    assertNotNull(stripeObject);
+    assertTrue(stripeObject.isPresent());
   }
 
   @Test
@@ -62,10 +64,10 @@ public class EventTest extends BaseStripeTest {
     // Suppose event has different API version from the library's pinned version
     event.setApiVersion("2017-05-25");
 
-    StripeObject stripeObject = event.getDataObjectDeserializer().getObject();
+    Optional<StripeObject> stripeObject = event.getDataObjectDeserializer().getObject();
 
     // See compatibility helper in `EventDataObjectDeserializerTest` for
     // handling schema incompatibility
-    assertNull(stripeObject);
+    assertFalse(stripeObject.isPresent());
   }
 }
