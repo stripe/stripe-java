@@ -8,9 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.Getter;
 
-@Getter
 public class FileLinkCreateParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -58,19 +56,6 @@ public class FileLinkCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * FileLinkCreateParams#expand} for the field documentation.
-     */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
-      return this;
-    }
-
-    /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
      * FileLinkCreateParams#expand} for the field documentation.
@@ -84,15 +69,27 @@ public class FileLinkCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link FileLinkCreateParams#metadata} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * FileLinkCreateParams#expand} for the field documentation.
      */
-    public Builder putAllMetadata(Map<String, String> map) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
       }
-      this.metadata.putAll(map);
+      this.expand.addAll(elements);
+      return this;
+    }
+
+    /** A future timestamp after which the link will no longer be usable. */
+    public Builder setExpiresAt(Long expiresAt) {
+      this.expiresAt = expiresAt;
+      return this;
+    }
+
+    /** The ID of the file. */
+    public Builder setFile(String file) {
+      this.file = file;
       return this;
     }
 
@@ -109,15 +106,16 @@ public class FileLinkCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** A future timestamp after which the link will no longer be usable. */
-    public Builder setExpiresAt(Long expiresAt) {
-      this.expiresAt = expiresAt;
-      return this;
-    }
-
-    /** The ID of the file. */
-    public Builder setFile(String file) {
-      this.file = file;
+    /**
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link FileLinkCreateParams#metadata} for the field documentation.
+     */
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.putAll(map);
       return this;
     }
   }

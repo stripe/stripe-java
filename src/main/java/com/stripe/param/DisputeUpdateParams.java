@@ -8,9 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.Getter;
 
-@Getter
 public class DisputeUpdateParams extends ApiRequestParams {
   /**
    * Evidence to upload, to respond to a dispute. Updating any field in the hash will submit all
@@ -66,15 +64,12 @@ public class DisputeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * DisputeUpdateParams#expand} for the field documentation.
+     * Evidence to upload, to respond to a dispute. Updating any field in the hash will submit all
+     * fields in the hash for review. The combined character count of all fields is limited to
+     * 150,000.
      */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
+    public Builder setEvidence(Evidence evidence) {
+      this.evidence = evidence;
       return this;
     }
 
@@ -92,15 +87,15 @@ public class DisputeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link DisputeUpdateParams#metadata} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * DisputeUpdateParams#expand} for the field documentation.
      */
-    public Builder putAllMetadata(Map<String, String> map) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
       }
-      this.metadata.putAll(map);
+      this.expand.addAll(elements);
       return this;
     }
 
@@ -118,12 +113,15 @@ public class DisputeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Evidence to upload, to respond to a dispute. Updating any field in the hash will submit all
-     * fields in the hash for review. The combined character count of all fields is limited to
-     * 150,000.
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link DisputeUpdateParams#metadata} for the field documentation.
      */
-    public Builder setEvidence(Evidence evidence) {
-      this.evidence = evidence;
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.putAll(map);
       return this;
     }
 
@@ -138,7 +136,6 @@ public class DisputeUpdateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class Evidence {
     /** Has a maximum character count of 20,000. */
     @SerializedName("access_activity_log")
@@ -388,14 +385,14 @@ public class DisputeUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Has a maximum character count of 20,000. */
-      public Builder setCancellationPolicyDisclosure(String cancellationPolicyDisclosure) {
-        this.cancellationPolicyDisclosure = cancellationPolicyDisclosure;
+      public Builder setCancellationPolicy(String cancellationPolicy) {
+        this.cancellationPolicy = cancellationPolicy;
         return this;
       }
 
-      public Builder setCancellationPolicy(String cancellationPolicy) {
-        this.cancellationPolicy = cancellationPolicy;
+      /** Has a maximum character count of 20,000. */
+      public Builder setCancellationPolicyDisclosure(String cancellationPolicyDisclosure) {
+        this.cancellationPolicyDisclosure = cancellationPolicyDisclosure;
         return this;
       }
 
@@ -457,14 +454,14 @@ public class DisputeUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Has a maximum character count of 20,000. */
-      public Builder setRefundPolicyDisclosure(String refundPolicyDisclosure) {
-        this.refundPolicyDisclosure = refundPolicyDisclosure;
+      public Builder setRefundPolicy(String refundPolicy) {
+        this.refundPolicy = refundPolicy;
         return this;
       }
 
-      public Builder setRefundPolicy(String refundPolicy) {
-        this.refundPolicy = refundPolicy;
+      /** Has a maximum character count of 20,000. */
+      public Builder setRefundPolicyDisclosure(String refundPolicyDisclosure) {
+        this.refundPolicyDisclosure = refundPolicyDisclosure;
         return this;
       }
 

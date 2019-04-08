@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
-@Getter
 public class CardCreateParams extends ApiRequestParams {
   /**
    * Spending rules that give you some control over how your cards can be used. Refer to our
@@ -111,58 +110,6 @@ public class CardCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * CardCreateParams#expand} for the field documentation.
-     */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
-      return this;
-    }
-
-    /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * CardCreateParams#expand} for the field documentation.
-     */
-    public Builder addExpand(String element) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.add(element);
-      return this;
-    }
-
-    /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link CardCreateParams#metadata} for the field documentation.
-     */
-    public Builder putAllMetadata(Map<String, String> map) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
-      }
-      this.metadata.putAll(map);
-      return this;
-    }
-
-    /**
-     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
-     * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * CardCreateParams#metadata} for the field documentation.
-     */
-    public Builder putMetadata(String key, String value) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
-      }
-      this.metadata.put(key, value);
-      return this;
-    }
-
-    /**
      * Spending rules that give you some control over how your cards can be used. Refer to our
      * [authorizations](https://stripe.com/docs/issuing/authorizations) documentation for more
      * details.
@@ -184,6 +131,58 @@ public class CardCreateParams extends ApiRequestParams {
     /** The currency for the card. This currently must be `usd`. */
     public Builder setCurrency(String currency) {
       this.currency = currency;
+      return this;
+    }
+
+    /**
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * CardCreateParams#expand} for the field documentation.
+     */
+    public Builder addExpand(String element) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * CardCreateParams#expand} for the field documentation.
+     */
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
+     * CardCreateParams#metadata} for the field documentation.
+     */
+    public Builder putMetadata(String key, String value) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link CardCreateParams#metadata} for the field documentation.
+     */
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.putAll(map);
       return this;
     }
 
@@ -212,7 +211,6 @@ public class CardCreateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class AuthorizationControls {
     /**
      * Array of strings containing
@@ -289,32 +287,6 @@ public class CardCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add all elements to `blockedCategories` list. A list is initialized for the first
-       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-       * {@link AuthorizationControls#blockedCategories} for the field documentation.
-       */
-      public Builder addAllBlockedCategory(List<BlockedCategory> elements) {
-        if (this.blockedCategories == null) {
-          this.blockedCategories = new ArrayList<>();
-        }
-        this.blockedCategories.addAll(elements);
-        return this;
-      }
-
-      /**
-       * Add an element to `allowedCategories` list. A list is initialized for the first
-       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-       * {@link AuthorizationControls#allowedCategories} for the field documentation.
-       */
-      public Builder addAllowedCategory(AllowedCategory element) {
-        if (this.allowedCategories == null) {
-          this.allowedCategories = new ArrayList<>();
-        }
-        this.allowedCategories.add(element);
-        return this;
-      }
-
-      /**
        * Add an element to `blockedCategories` list. A list is initialized for the first
        * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
        * {@link AuthorizationControls#blockedCategories} for the field documentation.
@@ -324,6 +296,19 @@ public class CardCreateParams extends ApiRequestParams {
           this.blockedCategories = new ArrayList<>();
         }
         this.blockedCategories.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `blockedCategories` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link AuthorizationControls#blockedCategories} for the field documentation.
+       */
+      public Builder addAllBlockedCategory(List<BlockedCategory> elements) {
+        if (this.blockedCategories == null) {
+          this.blockedCategories = new ArrayList<>();
+        }
+        this.blockedCategories.addAll(elements);
         return this;
       }
 
@@ -343,6 +328,19 @@ public class CardCreateParams extends ApiRequestParams {
        */
       public Builder setMaxApprovals(Long maxApprovals) {
         this.maxApprovals = maxApprovals;
+        return this;
+      }
+
+      /**
+       * Add an element to `allowedCategories` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link AuthorizationControls#allowedCategories} for the field documentation.
+       */
+      public Builder addAllowedCategory(AllowedCategory element) {
+        if (this.allowedCategories == null) {
+          this.allowedCategories = new ArrayList<>();
+        }
+        this.allowedCategories.add(element);
         return this;
       }
     }
@@ -2110,7 +2108,6 @@ public class CardCreateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class Shipping {
     @SerializedName("address")
     Address address;
@@ -2176,7 +2173,6 @@ public class CardCreateParams extends ApiRequestParams {
       }
     }
 
-    @Getter
     public static class Address {
       @SerializedName("city")
       String city;

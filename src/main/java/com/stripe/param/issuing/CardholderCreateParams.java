@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
-@Getter
 public class CardholderCreateParams extends ApiRequestParams {
   /** The cardholder's billing address. */
   @SerializedName("billing")
@@ -111,16 +110,15 @@ public class CardholderCreateParams extends ApiRequestParams {
           this.type);
     }
 
-    /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * CardholderCreateParams#expand} for the field documentation.
-     */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
+    /** The cardholder's billing address. */
+    public Builder setBilling(Billing billing) {
+      this.billing = billing;
+      return this;
+    }
+
+    /** The cardholder's email address. */
+    public Builder setEmail(String email) {
+      this.email = email;
       return this;
     }
 
@@ -138,15 +136,21 @@ public class CardholderCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link CardholderCreateParams#metadata} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * CardholderCreateParams#expand} for the field documentation.
      */
-    public Builder putAllMetadata(Map<String, String> map) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
       }
-      this.metadata.putAll(map);
+      this.expand.addAll(elements);
+      return this;
+    }
+
+    /** Specifies whether to set this as the default cardholder. */
+    public Builder setIsDefault(Boolean isDefault) {
+      this.isDefault = isDefault;
       return this;
     }
 
@@ -163,21 +167,16 @@ public class CardholderCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The cardholder's billing address. */
-    public Builder setBilling(Billing billing) {
-      this.billing = billing;
-      return this;
-    }
-
-    /** The cardholder's email address. */
-    public Builder setEmail(String email) {
-      this.email = email;
-      return this;
-    }
-
-    /** Specifies whether to set this as the default cardholder. */
-    public Builder setIsDefault(Boolean isDefault) {
-      this.isDefault = isDefault;
+    /**
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link CardholderCreateParams#metadata} for the field documentation.
+     */
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.putAll(map);
       return this;
     }
 
@@ -212,7 +211,6 @@ public class CardholderCreateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class Billing {
     @SerializedName("address")
     Address address;
@@ -250,7 +248,6 @@ public class CardholderCreateParams extends ApiRequestParams {
       }
     }
 
-    @Getter
     public static class Address {
       @SerializedName("city")
       String city;

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
 
-@Getter
 public class PaymentIntentCancelParams extends ApiRequestParams {
   /**
    * Reason for canceling this PaymentIntent. If set, possible values are `duplicate`, `fraudulent`,
@@ -41,15 +40,11 @@ public class PaymentIntentCancelParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentIntentCancelParams#expand} for the field documentation.
+     * Reason for canceling this PaymentIntent. If set, possible values are `duplicate`,
+     * `fraudulent`, `requested_by_customer`, or `failed_invoice`
      */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
+    public Builder setCancellationReason(CancellationReason cancellationReason) {
+      this.cancellationReason = cancellationReason;
       return this;
     }
 
@@ -67,11 +62,15 @@ public class PaymentIntentCancelParams extends ApiRequestParams {
     }
 
     /**
-     * Reason for canceling this PaymentIntent. If set, possible values are `duplicate`,
-     * `fraudulent`, `requested_by_customer`, or `failed_invoice`
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * PaymentIntentCancelParams#expand} for the field documentation.
      */
-    public Builder setCancellationReason(CancellationReason cancellationReason) {
-      this.cancellationReason = cancellationReason;
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
       return this;
     }
   }

@@ -6,9 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.Getter;
 
-@Getter
 public class PaymentIntentCaptureParams extends ApiRequestParams {
   /**
    * The amount to capture from the PaymentIntent, which must be less than or equal to the original
@@ -55,15 +53,22 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentIntentCaptureParams#expand} for the field documentation.
+     * The amount to capture from the PaymentIntent, which must be less than or equal to the
+     * original amount. Any additional amount will be automatically refunded. Defaults to the full
+     * `amount_capturable` if not provided.
      */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
+    public Builder setAmountToCapture(Long amountToCapture) {
+      this.amountToCapture = amountToCapture;
+      return this;
+    }
+
+    /**
+     * The amount of the application fee (if any) that will be applied to the payment and
+     * transferred to the application owner's Stripe account. For more information, see the
+     * PaymentIntents [Connect usage guide](/docs/payments/payment-intents/usage#connect).
+     */
+    public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
+      this.applicationFeeAmount = applicationFeeAmount;
       return this;
     }
 
@@ -81,22 +86,15 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
     }
 
     /**
-     * The amount to capture from the PaymentIntent, which must be less than or equal to the
-     * original amount. Any additional amount will be automatically refunded. Defaults to the full
-     * `amount_capturable` if not provided.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * PaymentIntentCaptureParams#expand} for the field documentation.
      */
-    public Builder setAmountToCapture(Long amountToCapture) {
-      this.amountToCapture = amountToCapture;
-      return this;
-    }
-
-    /**
-     * The amount of the application fee (if any) that will be applied to the payment and
-     * transferred to the application owner's Stripe account. For more information, see the
-     * PaymentIntents [Connect usage guide](/docs/payments/payment-intents/usage#connect).
-     */
-    public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
-      this.applicationFeeAmount = applicationFeeAmount;
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
       return this;
     }
   }

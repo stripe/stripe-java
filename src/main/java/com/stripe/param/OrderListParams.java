@@ -6,9 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.Getter;
 
-@Getter
 public class OrderListParams extends ApiRequestParams {
   /** Date this order was created. */
   @SerializedName("created")
@@ -129,84 +127,6 @@ public class OrderListParams extends ApiRequestParams {
           this.upstreamIds);
     }
 
-    /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * OrderListParams#expand} for the field documentation.
-     */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
-      return this;
-    }
-
-    /**
-     * Add all elements to `ids` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * OrderListParams#ids} for the field documentation.
-     */
-    public Builder addAllId(List<String> elements) {
-      if (this.ids == null) {
-        this.ids = new ArrayList<>();
-      }
-      this.ids.addAll(elements);
-      return this;
-    }
-
-    /**
-     * Add all elements to `upstreamIds` list. A list is initialized for the first `add/addAll`
-     * call, and subsequent calls adds additional elements to the original list. See {@link
-     * OrderListParams#upstreamIds} for the field documentation.
-     */
-    public Builder addAllUpstreamId(List<String> elements) {
-      if (this.upstreamIds == null) {
-        this.upstreamIds = new ArrayList<>();
-      }
-      this.upstreamIds.addAll(elements);
-      return this;
-    }
-
-    /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * OrderListParams#expand} for the field documentation.
-     */
-    public Builder addExpand(String element) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.add(element);
-      return this;
-    }
-
-    /**
-     * Add an element to `ids` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * OrderListParams#ids} for the field documentation.
-     */
-    public Builder addId(String element) {
-      if (this.ids == null) {
-        this.ids = new ArrayList<>();
-      }
-      this.ids.add(element);
-      return this;
-    }
-
-    /**
-     * Add an element to `upstreamIds` list. A list is initialized for the first `add/addAll` call,
-     * and subsequent calls adds additional elements to the original list. See {@link
-     * OrderListParams#upstreamIds} for the field documentation.
-     */
-    public Builder addUpstreamId(String element) {
-      if (this.upstreamIds == null) {
-        this.upstreamIds = new ArrayList<>();
-      }
-      this.upstreamIds.add(element);
-      return this;
-    }
-
     /** Date this order was created. */
     public Builder setCreated(Created created) {
       this.created = created;
@@ -237,6 +157,58 @@ public class OrderListParams extends ApiRequestParams {
     }
 
     /**
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * OrderListParams#expand} for the field documentation.
+     */
+    public Builder addExpand(String element) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * OrderListParams#expand} for the field documentation.
+     */
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add an element to `ids` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * OrderListParams#ids} for the field documentation.
+     */
+    public Builder addId(String element) {
+      if (this.ids == null) {
+        this.ids = new ArrayList<>();
+      }
+      this.ids.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `ids` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * OrderListParams#ids} for the field documentation.
+     */
+    public Builder addAllId(List<String> elements) {
+      if (this.ids == null) {
+        this.ids = new ArrayList<>();
+      }
+      this.ids.addAll(elements);
+      return this;
+    }
+
+    /**
      * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
      * default is 10.
      */
@@ -256,12 +228,6 @@ public class OrderListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Filter orders based on when they were paid, fulfilled, canceled, or returned. */
-    public Builder setStatusTransitions(StatusTransitions statusTransitions) {
-      this.statusTransitions = statusTransitions;
-      return this;
-    }
-
     /**
      * Only return orders that have the given status. One of `created`, `paid`, `fulfilled`, or
      * `refunded`.
@@ -270,9 +236,40 @@ public class OrderListParams extends ApiRequestParams {
       this.status = status;
       return this;
     }
+
+    /** Filter orders based on when they were paid, fulfilled, canceled, or returned. */
+    public Builder setStatusTransitions(StatusTransitions statusTransitions) {
+      this.statusTransitions = statusTransitions;
+      return this;
+    }
+
+    /**
+     * Add an element to `upstreamIds` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * OrderListParams#upstreamIds} for the field documentation.
+     */
+    public Builder addUpstreamId(String element) {
+      if (this.upstreamIds == null) {
+        this.upstreamIds = new ArrayList<>();
+      }
+      this.upstreamIds.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `upstreamIds` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * OrderListParams#upstreamIds} for the field documentation.
+     */
+    public Builder addAllUpstreamId(List<String> elements) {
+      if (this.upstreamIds == null) {
+        this.upstreamIds = new ArrayList<>();
+      }
+      this.upstreamIds.addAll(elements);
+      return this;
+    }
   }
 
-  @Getter
   public static class Created {
     /** Minimum value to filter by (exclusive). */
     @SerializedName("gt")
@@ -315,21 +312,15 @@ public class OrderListParams extends ApiRequestParams {
         return new Created(this.gt, this.gte, this.lt, this.lte);
       }
 
-      /** Minimum value to filter by (inclusive). */
-      public Builder setGte(Long gte) {
-        this.gte = gte;
-        return this;
-      }
-
       /** Minimum value to filter by (exclusive). */
       public Builder setGt(Long gt) {
         this.gt = gt;
         return this;
       }
 
-      /** Maximum value to filter by (inclusive). */
-      public Builder setLte(Long lte) {
-        this.lte = lte;
+      /** Minimum value to filter by (inclusive). */
+      public Builder setGte(Long gte) {
+        this.gte = gte;
         return this;
       }
 
@@ -338,10 +329,15 @@ public class OrderListParams extends ApiRequestParams {
         this.lt = lt;
         return this;
       }
+
+      /** Maximum value to filter by (inclusive). */
+      public Builder setLte(Long lte) {
+        this.lte = lte;
+        return this;
+      }
     }
   }
 
-  @Getter
   public static class StatusTransitions {
     /** Date this order was canceled. */
     @SerializedName("canceled")
@@ -433,7 +429,6 @@ public class OrderListParams extends ApiRequestParams {
       }
     }
 
-    @Getter
     public static class Canceled {
       /** Minimum value to filter by (exclusive). */
       @SerializedName("gt")
@@ -476,21 +471,15 @@ public class OrderListParams extends ApiRequestParams {
           return new Canceled(this.gt, this.gte, this.lt, this.lte);
         }
 
-        /** Minimum value to filter by (inclusive). */
-        public Builder setGte(Long gte) {
-          this.gte = gte;
-          return this;
-        }
-
         /** Minimum value to filter by (exclusive). */
         public Builder setGt(Long gt) {
           this.gt = gt;
           return this;
         }
 
-        /** Maximum value to filter by (inclusive). */
-        public Builder setLte(Long lte) {
-          this.lte = lte;
+        /** Minimum value to filter by (inclusive). */
+        public Builder setGte(Long gte) {
+          this.gte = gte;
           return this;
         }
 
@@ -499,10 +488,15 @@ public class OrderListParams extends ApiRequestParams {
           this.lt = lt;
           return this;
         }
+
+        /** Maximum value to filter by (inclusive). */
+        public Builder setLte(Long lte) {
+          this.lte = lte;
+          return this;
+        }
       }
     }
 
-    @Getter
     public static class Fulfilled {
       /** Minimum value to filter by (exclusive). */
       @SerializedName("gt")
@@ -545,21 +539,15 @@ public class OrderListParams extends ApiRequestParams {
           return new Fulfilled(this.gt, this.gte, this.lt, this.lte);
         }
 
-        /** Minimum value to filter by (inclusive). */
-        public Builder setGte(Long gte) {
-          this.gte = gte;
-          return this;
-        }
-
         /** Minimum value to filter by (exclusive). */
         public Builder setGt(Long gt) {
           this.gt = gt;
           return this;
         }
 
-        /** Maximum value to filter by (inclusive). */
-        public Builder setLte(Long lte) {
-          this.lte = lte;
+        /** Minimum value to filter by (inclusive). */
+        public Builder setGte(Long gte) {
+          this.gte = gte;
           return this;
         }
 
@@ -568,10 +556,15 @@ public class OrderListParams extends ApiRequestParams {
           this.lt = lt;
           return this;
         }
+
+        /** Maximum value to filter by (inclusive). */
+        public Builder setLte(Long lte) {
+          this.lte = lte;
+          return this;
+        }
       }
     }
 
-    @Getter
     public static class Paid {
       /** Minimum value to filter by (exclusive). */
       @SerializedName("gt")
@@ -614,21 +607,15 @@ public class OrderListParams extends ApiRequestParams {
           return new Paid(this.gt, this.gte, this.lt, this.lte);
         }
 
-        /** Minimum value to filter by (inclusive). */
-        public Builder setGte(Long gte) {
-          this.gte = gte;
-          return this;
-        }
-
         /** Minimum value to filter by (exclusive). */
         public Builder setGt(Long gt) {
           this.gt = gt;
           return this;
         }
 
-        /** Maximum value to filter by (inclusive). */
-        public Builder setLte(Long lte) {
-          this.lte = lte;
+        /** Minimum value to filter by (inclusive). */
+        public Builder setGte(Long gte) {
+          this.gte = gte;
           return this;
         }
 
@@ -637,10 +624,15 @@ public class OrderListParams extends ApiRequestParams {
           this.lt = lt;
           return this;
         }
+
+        /** Maximum value to filter by (inclusive). */
+        public Builder setLte(Long lte) {
+          this.lte = lte;
+          return this;
+        }
       }
     }
 
-    @Getter
     public static class Returned {
       /** Minimum value to filter by (exclusive). */
       @SerializedName("gt")
@@ -683,27 +675,27 @@ public class OrderListParams extends ApiRequestParams {
           return new Returned(this.gt, this.gte, this.lt, this.lte);
         }
 
-        /** Minimum value to filter by (inclusive). */
-        public Builder setGte(Long gte) {
-          this.gte = gte;
-          return this;
-        }
-
         /** Minimum value to filter by (exclusive). */
         public Builder setGt(Long gt) {
           this.gt = gt;
           return this;
         }
 
-        /** Maximum value to filter by (inclusive). */
-        public Builder setLte(Long lte) {
-          this.lte = lte;
+        /** Minimum value to filter by (inclusive). */
+        public Builder setGte(Long gte) {
+          this.gte = gte;
           return this;
         }
 
         /** Maximum value to filter by (exclusive). */
         public Builder setLt(Long lt) {
           this.lt = lt;
+          return this;
+        }
+
+        /** Maximum value to filter by (inclusive). */
+        public Builder setLte(Long lte) {
+          this.lte = lte;
           return this;
         }
       }

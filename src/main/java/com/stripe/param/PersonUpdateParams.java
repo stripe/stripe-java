@@ -10,9 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.Getter;
 
-@Getter
 public class PersonUpdateParams extends ApiRequestParams {
   /** The person's address. */
   @SerializedName("address")
@@ -228,16 +226,33 @@ public class PersonUpdateParams extends ApiRequestParams {
           this.verification);
     }
 
-    /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * PersonUpdateParams#expand} for the field documentation.
-     */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
+    /** The person's address. */
+    public Builder setAddress(Address address) {
+      this.address = address;
+      return this;
+    }
+
+    /** The Kana variation of the person's address (Japan only). */
+    public Builder setAddressKana(AddressKana addressKana) {
+      this.addressKana = addressKana;
+      return this;
+    }
+
+    /** The Kanji variation of the person's address (Japan only). */
+    public Builder setAddressKanji(AddressKanji addressKanji) {
+      this.addressKanji = addressKanji;
+      return this;
+    }
+
+    /** The person's date of birth. */
+    public Builder setDob(Dob dob) {
+      this.dob = dob;
+      return this;
+    }
+
+    /** The person's email address. */
+    public Builder setEmail(String email) {
+      this.email = email;
       return this;
     }
 
@@ -255,58 +270,21 @@ public class PersonUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link PersonUpdateParams#metadata} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * PersonUpdateParams#expand} for the field documentation.
      */
-    public Builder putAllMetadata(Map<String, String> map) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
       }
-      this.metadata.putAll(map);
+      this.expand.addAll(elements);
       return this;
     }
 
-    /**
-     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
-     * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * PersonUpdateParams#metadata} for the field documentation.
-     */
-    public Builder putMetadata(String key, String value) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
-      }
-      this.metadata.put(key, value);
-      return this;
-    }
-
-    /** The Kana variation of the person's address (Japan only). */
-    public Builder setAddressKana(AddressKana addressKana) {
-      this.addressKana = addressKana;
-      return this;
-    }
-
-    /** The Kanji variation of the person's address (Japan only). */
-    public Builder setAddressKanji(AddressKanji addressKanji) {
-      this.addressKanji = addressKanji;
-      return this;
-    }
-
-    /** The person's address. */
-    public Builder setAddress(Address address) {
-      this.address = address;
-      return this;
-    }
-
-    /** The person's date of birth. */
-    public Builder setDob(Dob dob) {
-      this.dob = dob;
-      return this;
-    }
-
-    /** The person's email address. */
-    public Builder setEmail(String email) {
-      this.email = email;
+    /** The person's first name. */
+    public Builder setFirstName(String firstName) {
+      this.firstName = firstName;
       return this;
     }
 
@@ -319,12 +297,6 @@ public class PersonUpdateParams extends ApiRequestParams {
     /** The Kanji variation of the person's first name (Japan only). */
     public Builder setFirstNameKanji(String firstNameKanji) {
       this.firstNameKanji = firstNameKanji;
-      return this;
-    }
-
-    /** The person's first name. */
-    public Builder setFirstName(String firstName) {
-      this.firstName = firstName;
       return this;
     }
 
@@ -345,6 +317,12 @@ public class PersonUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /** The person's last name. */
+    public Builder setLastName(String lastName) {
+      this.lastName = lastName;
+      return this;
+    }
+
     /** The Kana variation of the person's last name (Japan only). */
     public Builder setLastNameKana(String lastNameKana) {
       this.lastNameKana = lastNameKana;
@@ -357,15 +335,35 @@ public class PersonUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The person's last name. */
-    public Builder setLastName(String lastName) {
-      this.lastName = lastName;
-      return this;
-    }
-
     /** The person's maiden name. */
     public Builder setMaidenName(String maidenName) {
       this.maidenName = maidenName;
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
+     * PersonUpdateParams#metadata} for the field documentation.
+     */
+    public Builder putMetadata(String key, String value) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link PersonUpdateParams#metadata} for the field documentation.
+     */
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.putAll(map);
       return this;
     }
 
@@ -403,7 +401,6 @@ public class PersonUpdateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class Address {
     /** City, district, suburb, town, or village. */
     @SerializedName("city")
@@ -506,7 +503,6 @@ public class PersonUpdateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class AddressKana {
     /** City or ward. */
     @SerializedName("city")
@@ -634,7 +630,6 @@ public class PersonUpdateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class AddressKanji {
     /** City or ward. */
     @SerializedName("city")
@@ -762,7 +757,6 @@ public class PersonUpdateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class Dob {
     /** The day of birth, between 1 and 31. */
     @SerializedName("day")
@@ -818,7 +812,6 @@ public class PersonUpdateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class Relationship {
     /**
      * Whether the person opened the account. This person provides information about themselves, and
@@ -926,7 +919,6 @@ public class PersonUpdateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class Verification {
     /** An identifying document, either a passport or local ID card. */
     @SerializedName("document")
@@ -955,7 +947,6 @@ public class PersonUpdateParams extends ApiRequestParams {
       }
     }
 
-    @Getter
     public static class Document {
       /**
        * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of

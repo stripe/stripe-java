@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
 
-@Getter
 public class TokenCreateParams extends ApiRequestParams {
   /** The bank account this token will represent. */
   @SerializedName("bank_account")
@@ -65,32 +64,6 @@ public class TokenCreateParams extends ApiRequestParams {
           this.bankAccount, this.card, this.customer, this.expand, this.pii);
     }
 
-    /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * TokenCreateParams#expand} for the field documentation.
-     */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
-      return this;
-    }
-
-    /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * TokenCreateParams#expand} for the field documentation.
-     */
-    public Builder addExpand(String element) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.add(element);
-      return this;
-    }
-
     /** The bank account this token will represent. */
     public Builder setBankAccount(BankAccount bankAccount) {
       this.bankAccount = bankAccount;
@@ -119,6 +92,32 @@ public class TokenCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * TokenCreateParams#expand} for the field documentation.
+     */
+    public Builder addExpand(String element) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * TokenCreateParams#expand} for the field documentation.
+     */
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
+      return this;
+    }
+
     /** The PII this token will represent. */
     public Builder setPii(Pii pii) {
       this.pii = pii;
@@ -126,7 +125,6 @@ public class TokenCreateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class BankAccount {
     /**
      * The name of the person or business that owns the bank account.This field is required when
@@ -276,7 +274,6 @@ public class TokenCreateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class Card {
     @SerializedName("address_city")
     String addressCity;
@@ -449,7 +446,6 @@ public class TokenCreateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class Pii {
     /** The `id_number` for the PII, in string form. */
     @SerializedName("id_number")

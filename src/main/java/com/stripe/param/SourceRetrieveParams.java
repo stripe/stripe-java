@@ -6,9 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.Getter;
 
-@Getter
 public class SourceRetrieveParams extends ApiRequestParams {
   /**
    * The client secret of the source. Required if a publishable key is used to retrieve the source.
@@ -40,15 +38,11 @@ public class SourceRetrieveParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * SourceRetrieveParams#expand} for the field documentation.
+     * The client secret of the source. Required if a publishable key is used to retrieve the
+     * source.
      */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
+    public Builder setClientSecret(String clientSecret) {
+      this.clientSecret = clientSecret;
       return this;
     }
 
@@ -66,11 +60,15 @@ public class SourceRetrieveParams extends ApiRequestParams {
     }
 
     /**
-     * The client secret of the source. Required if a publishable key is used to retrieve the
-     * source.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SourceRetrieveParams#expand} for the field documentation.
      */
-    public Builder setClientSecret(String clientSecret) {
-      this.clientSecret = clientSecret;
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
       return this;
     }
   }

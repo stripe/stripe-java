@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
-@Getter
 public class ChargeUpdateParams extends ApiRequestParams {
   /**
    * The ID of an existing customer that will be associated with this request. This field may only
@@ -124,58 +123,6 @@ public class ChargeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * ChargeUpdateParams#expand} for the field documentation.
-     */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
-      return this;
-    }
-
-    /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * ChargeUpdateParams#expand} for the field documentation.
-     */
-    public Builder addExpand(String element) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.add(element);
-      return this;
-    }
-
-    /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link ChargeUpdateParams#metadata} for the field documentation.
-     */
-    public Builder putAllMetadata(Map<String, String> map) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
-      }
-      this.metadata.putAll(map);
-      return this;
-    }
-
-    /**
-     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
-     * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * ChargeUpdateParams#metadata} for the field documentation.
-     */
-    public Builder putMetadata(String key, String value) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
-      }
-      this.metadata.put(key, value);
-      return this;
-    }
-
-    /**
      * The ID of an existing customer that will be associated with this request. This field may only
      * be updated if there is no existing associated customer with this charge.
      */
@@ -196,6 +143,32 @@ public class ChargeUpdateParams extends ApiRequestParams {
     }
 
     /**
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * ChargeUpdateParams#expand} for the field documentation.
+     */
+    public Builder addExpand(String element) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * ChargeUpdateParams#expand} for the field documentation.
+     */
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
      * A set of key-value pairs you can attach to a charge giving information about its riskiness.
      * If you believe a charge is fraudulent, include a `user_report` key with a value of
      * `fraudulent`. If you believe a charge is safe, include a `user_report` key with a value of
@@ -204,6 +177,32 @@ public class ChargeUpdateParams extends ApiRequestParams {
      */
     public Builder setFraudDetails(FraudDetails fraudDetails) {
       this.fraudDetails = fraudDetails;
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
+     * ChargeUpdateParams#metadata} for the field documentation.
+     */
+    public Builder putMetadata(String key, String value) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link ChargeUpdateParams#metadata} for the field documentation.
+     */
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.putAll(map);
       return this;
     }
 
@@ -234,7 +233,6 @@ public class ChargeUpdateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class FraudDetails {
     @SerializedName("user_report")
     UserReport userReport;
@@ -277,7 +275,6 @@ public class ChargeUpdateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class Shipping {
     /** Shipping address. */
     @SerializedName("address")
@@ -365,7 +362,6 @@ public class ChargeUpdateParams extends ApiRequestParams {
       }
     }
 
-    @Getter
     public static class Address {
       @SerializedName("city")
       String city;

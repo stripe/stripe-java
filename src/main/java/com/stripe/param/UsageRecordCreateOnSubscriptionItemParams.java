@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
 
-@Getter
 public class UsageRecordCreateOnSubscriptionItemParams extends ApiRequestParams {
   /**
    * Valid values are `increment` (default) or `set`. When using `increment` the specified
@@ -63,15 +62,14 @@ public class UsageRecordCreateOnSubscriptionItemParams extends ApiRequestParams 
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * UsageRecordCreateOnSubscriptionItemParams#expand} for the field documentation.
+     * Valid values are `increment` (default) or `set`. When using `increment` the specified
+     * `quantity` will be added to the usage at the specified timestamp. The `set` action will
+     * overwrite the usage quantity at that timestamp. If the subscription has [billing
+     * thresholds](https://stripe.com/docs/api/subscriptions/object#subscription_object-billing_thresholds),
+     * `increment` is the only allowed value.
      */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
+    public Builder setAction(Action action) {
+      this.action = action;
       return this;
     }
 
@@ -89,14 +87,15 @@ public class UsageRecordCreateOnSubscriptionItemParams extends ApiRequestParams 
     }
 
     /**
-     * Valid values are `increment` (default) or `set`. When using `increment` the specified
-     * `quantity` will be added to the usage at the specified timestamp. The `set` action will
-     * overwrite the usage quantity at that timestamp. If the subscription has [billing
-     * thresholds](https://stripe.com/docs/api/subscriptions/object#subscription_object-billing_thresholds),
-     * `increment` is the only allowed value.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * UsageRecordCreateOnSubscriptionItemParams#expand} for the field documentation.
      */
-    public Builder setAction(Action action) {
-      this.action = action;
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
       return this;
     }
 

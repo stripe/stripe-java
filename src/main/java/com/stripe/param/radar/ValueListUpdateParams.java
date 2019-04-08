@@ -8,9 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.Getter;
 
-@Getter
 public class ValueListUpdateParams extends ApiRequestParams {
   /** The name of the value list for use in rules. */
   @SerializedName("alias")
@@ -58,16 +56,9 @@ public class ValueListUpdateParams extends ApiRequestParams {
       return new ValueListUpdateParams(this.alias, this.expand, this.metadata, this.name);
     }
 
-    /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * ValueListUpdateParams#expand} for the field documentation.
-     */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
+    /** The name of the value list for use in rules. */
+    public Builder setAlias(String alias) {
+      this.alias = alias;
       return this;
     }
 
@@ -85,15 +76,15 @@ public class ValueListUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link ValueListUpdateParams#metadata} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * ValueListUpdateParams#expand} for the field documentation.
      */
-    public Builder putAllMetadata(Map<String, String> map) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
       }
-      this.metadata.putAll(map);
+      this.expand.addAll(elements);
       return this;
     }
 
@@ -110,9 +101,16 @@ public class ValueListUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The name of the value list for use in rules. */
-    public Builder setAlias(String alias) {
-      this.alias = alias;
+    /**
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link ValueListUpdateParams#metadata} for the field documentation.
+     */
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.putAll(map);
       return this;
     }
 

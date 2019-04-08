@@ -8,9 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.Getter;
 
-@Getter
 public class ExternalAccountCollectionCreateParams extends ApiRequestParams {
   /**
    * When set to true, or if this is the first external account added in this currency, this account
@@ -65,15 +63,11 @@ public class ExternalAccountCollectionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * ExternalAccountCollectionCreateParams#expand} for the field documentation.
+     * When set to true, or if this is the first external account added in this currency, this
+     * account becomes the default external account for its currency.
      */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
+    public Builder setDefaultForCurrency(Boolean defaultForCurrency) {
+      this.defaultForCurrency = defaultForCurrency;
       return this;
     }
 
@@ -91,15 +85,21 @@ public class ExternalAccountCollectionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link ExternalAccountCollectionCreateParams#metadata} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * ExternalAccountCollectionCreateParams#expand} for the field documentation.
      */
-    public Builder putAllMetadata(Map<String, String> map) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
       }
-      this.metadata.putAll(map);
+      this.expand.addAll(elements);
+      return this;
+    }
+
+    /** Please refer to full [documentation](https://stripe.com/docs/api) instead. */
+    public Builder setExternalAccount(String externalAccount) {
+      this.externalAccount = externalAccount;
       return this;
     }
 
@@ -117,17 +117,15 @@ public class ExternalAccountCollectionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * When set to true, or if this is the first external account added in this currency, this
-     * account becomes the default external account for its currency.
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link ExternalAccountCollectionCreateParams#metadata} for the field documentation.
      */
-    public Builder setDefaultForCurrency(Boolean defaultForCurrency) {
-      this.defaultForCurrency = defaultForCurrency;
-      return this;
-    }
-
-    /** Please refer to full [documentation](https://stripe.com/docs/api) instead. */
-    public Builder setExternalAccount(String externalAccount) {
-      this.externalAccount = externalAccount;
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.putAll(map);
       return this;
     }
   }

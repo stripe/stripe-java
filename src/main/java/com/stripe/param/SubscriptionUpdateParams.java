@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
-@Getter
 public class SubscriptionUpdateParams extends ApiRequestParams {
   /**
    * A non-negative decimal between 0 and 100, with at most two decimal places. This represents the
@@ -271,84 +270,6 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * SubscriptionUpdateParams#expand} for the field documentation.
-     */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
-      return this;
-    }
-
-    /**
-     * Add all elements to `items` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * SubscriptionUpdateParams#items} for the field documentation.
-     */
-    public Builder addAllItem(List<Item> elements) {
-      if (this.items == null) {
-        this.items = new ArrayList<>();
-      }
-      this.items.addAll(elements);
-      return this;
-    }
-
-    /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * SubscriptionUpdateParams#expand} for the field documentation.
-     */
-    public Builder addExpand(String element) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.add(element);
-      return this;
-    }
-
-    /**
-     * Add an element to `items` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * SubscriptionUpdateParams#items} for the field documentation.
-     */
-    public Builder addItem(Item element) {
-      if (this.items == null) {
-        this.items = new ArrayList<>();
-      }
-      this.items.add(element);
-      return this;
-    }
-
-    /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link SubscriptionUpdateParams#metadata} for the field documentation.
-     */
-    public Builder putAllMetadata(Map<String, String> map) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
-      }
-      this.metadata.putAll(map);
-      return this;
-    }
-
-    /**
-     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
-     * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * SubscriptionUpdateParams#metadata} for the field documentation.
-     */
-    public Builder putMetadata(String key, String value) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
-      }
-      this.metadata.put(key, value);
-      return this;
-    }
-
-    /**
      * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
      * the percentage of the subscription invoice subtotal that will be transferred to the
      * application owner's Stripe account. The request must be made with an OAuth key in order to
@@ -357,6 +278,17 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      */
     public Builder setApplicationFeePercent(BigDecimal applicationFeePercent) {
       this.applicationFeePercent = applicationFeePercent;
+      return this;
+    }
+
+    /**
+     * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
+     * attempt to pay this subscription at the end of the cycle using the default source attached to
+     * the customer. When sending an invoice, Stripe will email your customer an invoice with
+     * payment instructions. Defaults to `charge_automatically`.
+     */
+    public Builder setBilling(Billing billing) {
+      this.billing = billing;
       return this;
     }
 
@@ -389,25 +321,6 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
-     * attempt to pay this subscription at the end of the cycle using the default source attached to
-     * the customer. When sending an invoice, Stripe will email your customer an invoice with
-     * payment instructions. Defaults to `charge_automatically`.
-     */
-    public Builder setBilling(Billing billing) {
-      this.billing = billing;
-      return this;
-    }
-
-    /**
-     * Boolean indicating whether this subscription should cancel at the end of the current period.
-     */
-    public Builder setCancelAtPeriodEnd(Boolean cancelAtPeriodEnd) {
-      this.cancelAtPeriodEnd = cancelAtPeriodEnd;
-      return this;
-    }
-
-    /**
      * A timestamp at which the subscription should cancel. If set to a date before the current
      * period ends this will cause a proration if `prorate=true`.
      */
@@ -422,6 +335,14 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      */
     public Builder setCancelAt(Long cancelAt) {
       this.cancelAt = cancelAt;
+      return this;
+    }
+
+    /**
+     * Boolean indicating whether this subscription should cancel at the end of the current period.
+     */
+    public Builder setCancelAtPeriodEnd(Boolean cancelAtPeriodEnd) {
+      this.cancelAtPeriodEnd = cancelAtPeriodEnd;
       return this;
     }
 
@@ -460,6 +381,84 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      */
     public Builder setDefaultSource(String defaultSource) {
       this.defaultSource = defaultSource;
+      return this;
+    }
+
+    /**
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SubscriptionUpdateParams#expand} for the field documentation.
+     */
+    public Builder addExpand(String element) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SubscriptionUpdateParams#expand} for the field documentation.
+     */
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add an element to `items` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SubscriptionUpdateParams#items} for the field documentation.
+     */
+    public Builder addItem(Item element) {
+      if (this.items == null) {
+        this.items = new ArrayList<>();
+      }
+      this.items.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `items` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SubscriptionUpdateParams#items} for the field documentation.
+     */
+    public Builder addAllItem(List<Item> elements) {
+      if (this.items == null) {
+        this.items = new ArrayList<>();
+      }
+      this.items.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
+     * SubscriptionUpdateParams#metadata} for the field documentation.
+     */
+    public Builder putMetadata(String key, String value) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link SubscriptionUpdateParams#metadata} for the field documentation.
+     */
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.putAll(map);
       return this;
     }
 
@@ -566,7 +565,6 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class BillingThresholds {
     /** Monetary threshold that triggers the subscription to advance to a new billing period. */
     @SerializedName("amount_gte")
@@ -617,7 +615,6 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class Item {
     /**
      * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
@@ -705,32 +702,6 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link Item#metadata} for the field documentation.
-       */
-      public Builder putAllMetadata(Map<String, String> map) {
-        if (this.metadata == null) {
-          this.metadata = new HashMap<>();
-        }
-        this.metadata.putAll(map);
-        return this;
-      }
-
-      /**
-       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * Item#metadata} for the field documentation.
-       */
-      public Builder putMetadata(String key, String value) {
-        if (this.metadata == null) {
-          this.metadata = new HashMap<>();
-        }
-        this.metadata.put(key, value);
-        return this;
-      }
-
-      /**
        * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
        * billing period.
        */
@@ -769,6 +740,32 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /**
+       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * Item#metadata} for the field documentation.
+       */
+      public Builder putMetadata(String key, String value) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link Item#metadata} for the field documentation.
+       */
+      public Builder putAllMetadata(Map<String, String> map) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.putAll(map);
+        return this;
+      }
+
       /** Plan ID for this item, as a string. */
       public Builder setPlan(String plan) {
         this.plan = plan;
@@ -782,7 +779,6 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       }
     }
 
-    @Getter
     public static class BillingThresholds {
       /** Usage threshold that triggers the subscription to advance to a new billing period. */
       @SerializedName("usage_gte")
@@ -813,7 +809,6 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class TransferData {
     /** ID of an existing, connected Stripe account. */
     @SerializedName("destination")

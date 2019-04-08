@@ -8,9 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.Getter;
 
-@Getter
 public class TransferReversalCollectionCreateParams extends ApiRequestParams {
   /**
    * A positive integer in %s representing how much of this transfer to reverse. Can only reverse up
@@ -83,15 +81,21 @@ public class TransferReversalCollectionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * TransferReversalCollectionCreateParams#expand} for the field documentation.
+     * A positive integer in %s representing how much of this transfer to reverse. Can only reverse
+     * up to the unreversed amount remaining of the transfer. Partial transfer reversals are only
+     * allowed for transfers to Stripe Accounts. Defaults to the entire transfer amount.
      */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
+    public Builder setAmount(Long amount) {
+      this.amount = amount;
+      return this;
+    }
+
+    /**
+     * An arbitrary string which you can attach to a reversal object. It is displayed alongside the
+     * reversal in the Dashboard. This will be unset if you POST an empty value.
+     */
+    public Builder setDescription(String description) {
+      this.description = description;
       return this;
     }
 
@@ -109,15 +113,15 @@ public class TransferReversalCollectionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link TransferReversalCollectionCreateParams#metadata} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * TransferReversalCollectionCreateParams#expand} for the field documentation.
      */
-    public Builder putAllMetadata(Map<String, String> map) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
       }
-      this.metadata.putAll(map);
+      this.expand.addAll(elements);
       return this;
     }
 
@@ -135,21 +139,15 @@ public class TransferReversalCollectionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * A positive integer in %s representing how much of this transfer to reverse. Can only reverse
-     * up to the unreversed amount remaining of the transfer. Partial transfer reversals are only
-     * allowed for transfers to Stripe Accounts. Defaults to the entire transfer amount.
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link TransferReversalCollectionCreateParams#metadata} for the field documentation.
      */
-    public Builder setAmount(Long amount) {
-      this.amount = amount;
-      return this;
-    }
-
-    /**
-     * An arbitrary string which you can attach to a reversal object. It is displayed alongside the
-     * reversal in the Dashboard. This will be unset if you POST an empty value.
-     */
-    public Builder setDescription(String description) {
-      this.description = description;
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.putAll(map);
       return this;
     }
 

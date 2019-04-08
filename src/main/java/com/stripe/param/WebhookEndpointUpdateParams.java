@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
 
-@Getter
 public class WebhookEndpointUpdateParams extends ApiRequestParams {
   /** Disable the webhook endpoint if set to true. */
   @SerializedName("disabled")
@@ -55,29 +54,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
           this.disabled, this.enabledEvents, this.expand, this.url);
     }
 
-    /**
-     * Add all elements to `enabledEvents` list. A list is initialized for the first `add/addAll`
-     * call, and subsequent calls adds additional elements to the original list. See {@link
-     * WebhookEndpointUpdateParams#enabledEvents} for the field documentation.
-     */
-    public Builder addAllEnabledEvent(List<EnabledEvent> elements) {
-      if (this.enabledEvents == null) {
-        this.enabledEvents = new ArrayList<>();
-      }
-      this.enabledEvents.addAll(elements);
-      return this;
-    }
-
-    /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * WebhookEndpointUpdateParams#expand} for the field documentation.
-     */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
+    /** Disable the webhook endpoint if set to true. */
+    public Builder setDisabled(Boolean disabled) {
+      this.disabled = disabled;
       return this;
     }
 
@@ -95,6 +74,19 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     }
 
     /**
+     * Add all elements to `enabledEvents` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * WebhookEndpointUpdateParams#enabledEvents} for the field documentation.
+     */
+    public Builder addAllEnabledEvent(List<EnabledEvent> elements) {
+      if (this.enabledEvents == null) {
+        this.enabledEvents = new ArrayList<>();
+      }
+      this.enabledEvents.addAll(elements);
+      return this;
+    }
+
+    /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
      * WebhookEndpointUpdateParams#expand} for the field documentation.
@@ -107,9 +99,16 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Disable the webhook endpoint if set to true. */
-    public Builder setDisabled(Boolean disabled) {
-      this.disabled = disabled;
+    /**
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * WebhookEndpointUpdateParams#expand} for the field documentation.
+     */
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
       return this;
     }
 

@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
-@Getter
 public class InvoiceUpcomingParams extends ApiRequestParams {
   /**
    * The code of the coupon to apply. If `subscription` or `subscription_items` is provided, the
@@ -193,41 +192,20 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * InvoiceUpcomingParams#expand} for the field documentation.
+     * The code of the coupon to apply. If `subscription` or `subscription_items` is provided, the
+     * invoice returned will preview updating or creating a subscription with that coupon.
+     * Otherwise, it will preview applying that coupon to the customer for the next upcoming invoice
+     * from among the customer's subscriptions. The invoice can be previewed without a coupon by
+     * passing this value as an empty string.
      */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
+    public Builder setCoupon(String coupon) {
+      this.coupon = coupon;
       return this;
     }
 
-    /**
-     * Add all elements to `invoiceItems` list. A list is initialized for the first `add/addAll`
-     * call, and subsequent calls adds additional elements to the original list. See {@link
-     * InvoiceUpcomingParams#invoiceItems} for the field documentation.
-     */
-    public Builder addAllInvoiceItem(List<InvoiceItem> elements) {
-      if (this.invoiceItems == null) {
-        this.invoiceItems = new ArrayList<>();
-      }
-      this.invoiceItems.addAll(elements);
-      return this;
-    }
-
-    /**
-     * Add all elements to `subscriptionItems` list. A list is initialized for the first
-     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-     * {@link InvoiceUpcomingParams#subscriptionItems} for the field documentation.
-     */
-    public Builder addAllSubscriptionItem(List<SubscriptionItem> elements) {
-      if (this.subscriptionItems == null) {
-        this.subscriptionItems = new ArrayList<>();
-      }
-      this.subscriptionItems.addAll(elements);
+    /** The identifier of the customer whose upcoming invoice you'd like to retrieve. */
+    public Builder setCustomer(String customer) {
+      this.customer = customer;
       return this;
     }
 
@@ -245,6 +223,19 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * InvoiceUpcomingParams#expand} for the field documentation.
+     */
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
      * Add an element to `invoiceItems` list. A list is initialized for the first `add/addAll` call,
      * and subsequent calls adds additional elements to the original list. See {@link
      * InvoiceUpcomingParams#invoiceItems} for the field documentation.
@@ -258,33 +249,27 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `subscriptionItems` list. A list is initialized for the first `add/addAll`
+     * Add all elements to `invoiceItems` list. A list is initialized for the first `add/addAll`
      * call, and subsequent calls adds additional elements to the original list. See {@link
-     * InvoiceUpcomingParams#subscriptionItems} for the field documentation.
+     * InvoiceUpcomingParams#invoiceItems} for the field documentation.
      */
-    public Builder addSubscriptionItem(SubscriptionItem element) {
-      if (this.subscriptionItems == null) {
-        this.subscriptionItems = new ArrayList<>();
+    public Builder addAllInvoiceItem(List<InvoiceItem> elements) {
+      if (this.invoiceItems == null) {
+        this.invoiceItems = new ArrayList<>();
       }
-      this.subscriptionItems.add(element);
+      this.invoiceItems.addAll(elements);
       return this;
     }
 
     /**
-     * The code of the coupon to apply. If `subscription` or `subscription_items` is provided, the
-     * invoice returned will preview updating or creating a subscription with that coupon.
-     * Otherwise, it will preview applying that coupon to the customer for the next upcoming invoice
-     * from among the customer's subscriptions. The invoice can be previewed without a coupon by
-     * passing this value as an empty string.
+     * The identifier of the subscription for which you'd like to retrieve the upcoming invoice. If
+     * not provided, but a `subscription_items` is provided, you will preview creating a
+     * subscription with those items. If neither `subscription` nor `subscription_items` is
+     * provided, you will retrieve the next upcoming invoice from among the customer's
+     * subscriptions.
      */
-    public Builder setCoupon(String coupon) {
-      this.coupon = coupon;
-      return this;
-    }
-
-    /** The identifier of the customer whose upcoming invoice you'd like to retrieve. */
-    public Builder setCustomer(String customer) {
-      this.customer = customer;
+    public Builder setSubscription(String subscription) {
+      this.subscription = subscription;
       return this;
     }
 
@@ -323,6 +308,32 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     public Builder setSubscriptionCancelNow(Boolean subscriptionCancelNow) {
       this.subscriptionCancelNow = subscriptionCancelNow;
+      return this;
+    }
+
+    /**
+     * Add an element to `subscriptionItems` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * InvoiceUpcomingParams#subscriptionItems} for the field documentation.
+     */
+    public Builder addSubscriptionItem(SubscriptionItem element) {
+      if (this.subscriptionItems == null) {
+        this.subscriptionItems = new ArrayList<>();
+      }
+      this.subscriptionItems.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `subscriptionItems` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link InvoiceUpcomingParams#subscriptionItems} for the field documentation.
+     */
+    public Builder addAllSubscriptionItem(List<SubscriptionItem> elements) {
+      if (this.subscriptionItems == null) {
+        this.subscriptionItems = new ArrayList<>();
+      }
+      this.subscriptionItems.addAll(elements);
       return this;
     }
 
@@ -385,21 +396,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       this.subscriptionTrialFromPlan = subscriptionTrialFromPlan;
       return this;
     }
-
-    /**
-     * The identifier of the subscription for which you'd like to retrieve the upcoming invoice. If
-     * not provided, but a `subscription_items` is provided, you will preview creating a
-     * subscription with those items. If neither `subscription` nor `subscription_items` is
-     * provided, you will retrieve the next upcoming invoice from among the customer's
-     * subscriptions.
-     */
-    public Builder setSubscription(String subscription) {
-      this.subscription = subscription;
-      return this;
-    }
   }
 
-  @Getter
   public static class InvoiceItem {
     /** The integer amount in **%s** of previewed invoice item. */
     @SerializedName("amount")
@@ -515,32 +513,6 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
             this.unitAmount);
       }
 
-      /**
-       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link InvoiceItem#metadata} for the field documentation.
-       */
-      public Builder putAllMetadata(Map<String, String> map) {
-        if (this.metadata == null) {
-          this.metadata = new HashMap<>();
-        }
-        this.metadata.putAll(map);
-        return this;
-      }
-
-      /**
-       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * InvoiceItem#metadata} for the field documentation.
-       */
-      public Builder putMetadata(String key, String value) {
-        if (this.metadata == null) {
-          this.metadata = new HashMap<>();
-        }
-        this.metadata.put(key, value);
-        return this;
-      }
-
       /** The integer amount in **%s** of previewed invoice item. */
       public Builder setAmount(Long amount) {
         this.amount = amount;
@@ -584,6 +556,32 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         return this;
       }
 
+      /**
+       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * InvoiceItem#metadata} for the field documentation.
+       */
+      public Builder putMetadata(String key, String value) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link InvoiceItem#metadata} for the field documentation.
+       */
+      public Builder putAllMetadata(Map<String, String> map) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.putAll(map);
+        return this;
+      }
+
       /** The period associated with this invoice item. */
       public Builder setPeriod(Period period) {
         this.period = period;
@@ -607,7 +605,6 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
     }
 
-    @Getter
     public static class Period {
       /** The end of the period, which must be greater than or equal to the start. */
       @SerializedName("end")
@@ -651,7 +648,6 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class SubscriptionItem {
     /**
      * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
@@ -739,32 +735,6 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link SubscriptionItem#metadata} for the field documentation.
-       */
-      public Builder putAllMetadata(Map<String, String> map) {
-        if (this.metadata == null) {
-          this.metadata = new HashMap<>();
-        }
-        this.metadata.putAll(map);
-        return this;
-      }
-
-      /**
-       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * SubscriptionItem#metadata} for the field documentation.
-       */
-      public Builder putMetadata(String key, String value) {
-        if (this.metadata == null) {
-          this.metadata = new HashMap<>();
-        }
-        this.metadata.put(key, value);
-        return this;
-      }
-
-      /**
        * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
        * billing period.
        */
@@ -803,6 +773,32 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         return this;
       }
 
+      /**
+       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SubscriptionItem#metadata} for the field documentation.
+       */
+      public Builder putMetadata(String key, String value) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionItem#metadata} for the field documentation.
+       */
+      public Builder putAllMetadata(Map<String, String> map) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.putAll(map);
+        return this;
+      }
+
       /** Plan ID for this item, as a string. */
       public Builder setPlan(String plan) {
         this.plan = plan;
@@ -816,7 +812,6 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
     }
 
-    @Getter
     public static class BillingThresholds {
       /** Usage threshold that triggers the subscription to advance to a new billing period. */
       @SerializedName("usage_gte")

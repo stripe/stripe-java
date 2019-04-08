@@ -4,9 +4,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
-import lombok.Getter;
 
-@Getter
 public class SubscriptionCancelParams extends ApiRequestParams {
   /**
    * Will generate a final invoice that invoices for any un-invoiced metered usage and new/pending

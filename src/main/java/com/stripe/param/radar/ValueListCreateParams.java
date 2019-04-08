@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
-@Getter
 public class ValueListCreateParams extends ApiRequestParams {
   /** The name of the value list for use in rules. */
   @SerializedName("alias")
@@ -74,16 +73,9 @@ public class ValueListCreateParams extends ApiRequestParams {
           this.alias, this.expand, this.itemType, this.metadata, this.name);
     }
 
-    /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * ValueListCreateParams#expand} for the field documentation.
-     */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
+    /** The name of the value list for use in rules. */
+    public Builder setAlias(String alias) {
+      this.alias = alias;
       return this;
     }
 
@@ -101,15 +93,25 @@ public class ValueListCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link ValueListCreateParams#metadata} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * ValueListCreateParams#expand} for the field documentation.
      */
-    public Builder putAllMetadata(Map<String, String> map) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
       }
-      this.metadata.putAll(map);
+      this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Type of the items in the value list. One of `card_fingerprint`, `card_bin`, `email`,
+     * `ip_address`, `country`, `string`, or `case_sensitive_string`. Use `string` if the item type
+     * is unknown or mixed.
+     */
+    public Builder setItemType(ItemType itemType) {
+      this.itemType = itemType;
       return this;
     }
 
@@ -126,19 +128,16 @@ public class ValueListCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The name of the value list for use in rules. */
-    public Builder setAlias(String alias) {
-      this.alias = alias;
-      return this;
-    }
-
     /**
-     * Type of the items in the value list. One of `card_fingerprint`, `card_bin`, `email`,
-     * `ip_address`, `country`, `string`, or `case_sensitive_string`. Use `string` if the item type
-     * is unknown or mixed.
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link ValueListCreateParams#metadata} for the field documentation.
      */
-    public Builder setItemType(ItemType itemType) {
-      this.itemType = itemType;
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.putAll(map);
       return this;
     }
 

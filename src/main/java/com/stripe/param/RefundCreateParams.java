@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
-@Getter
 public class RefundCreateParams extends ApiRequestParams {
   @SerializedName("amount")
   Long amount;
@@ -82,16 +81,13 @@ public class RefundCreateParams extends ApiRequestParams {
           this.reverseTransfer);
     }
 
-    /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * RefundCreateParams#expand} for the field documentation.
-     */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
+    public Builder setAmount(Long amount) {
+      this.amount = amount;
+      return this;
+    }
+
+    public Builder setCharge(String charge) {
+      this.charge = charge;
       return this;
     }
 
@@ -109,15 +105,15 @@ public class RefundCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link RefundCreateParams#metadata} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * RefundCreateParams#expand} for the field documentation.
      */
-    public Builder putAllMetadata(Map<String, String> map) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
       }
-      this.metadata.putAll(map);
+      this.expand.addAll(elements);
       return this;
     }
 
@@ -134,13 +130,16 @@ public class RefundCreateParams extends ApiRequestParams {
       return this;
     }
 
-    public Builder setAmount(Long amount) {
-      this.amount = amount;
-      return this;
-    }
-
-    public Builder setCharge(String charge) {
-      this.charge = charge;
+    /**
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link RefundCreateParams#metadata} for the field documentation.
+     */
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.putAll(map);
       return this;
     }
 

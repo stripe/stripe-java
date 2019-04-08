@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
-@Getter
 public class OrderCreateParams extends ApiRequestParams {
   /**
    * A coupon code that represents a discount to be applied to this order. Must be one-time duration
@@ -116,84 +115,6 @@ public class OrderCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * OrderCreateParams#expand} for the field documentation.
-     */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
-      return this;
-    }
-
-    /**
-     * Add all elements to `items` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * OrderCreateParams#items} for the field documentation.
-     */
-    public Builder addAllItem(List<Item> elements) {
-      if (this.items == null) {
-        this.items = new ArrayList<>();
-      }
-      this.items.addAll(elements);
-      return this;
-    }
-
-    /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * OrderCreateParams#expand} for the field documentation.
-     */
-    public Builder addExpand(String element) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.add(element);
-      return this;
-    }
-
-    /**
-     * Add an element to `items` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * OrderCreateParams#items} for the field documentation.
-     */
-    public Builder addItem(Item element) {
-      if (this.items == null) {
-        this.items = new ArrayList<>();
-      }
-      this.items.add(element);
-      return this;
-    }
-
-    /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link OrderCreateParams#metadata} for the field documentation.
-     */
-    public Builder putAllMetadata(Map<String, String> map) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
-      }
-      this.metadata.putAll(map);
-      return this;
-    }
-
-    /**
-     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
-     * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * OrderCreateParams#metadata} for the field documentation.
-     */
-    public Builder putMetadata(String key, String value) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
-      }
-      this.metadata.put(key, value);
-      return this;
-    }
-
-    /**
      * A coupon code that represents a discount to be applied to this order. Must be one-time
      * duration and in same currency as the order.
      */
@@ -229,6 +150,84 @@ public class OrderCreateParams extends ApiRequestParams {
     }
 
     /**
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * OrderCreateParams#expand} for the field documentation.
+     */
+    public Builder addExpand(String element) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * OrderCreateParams#expand} for the field documentation.
+     */
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add an element to `items` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * OrderCreateParams#items} for the field documentation.
+     */
+    public Builder addItem(Item element) {
+      if (this.items == null) {
+        this.items = new ArrayList<>();
+      }
+      this.items.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `items` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * OrderCreateParams#items} for the field documentation.
+     */
+    public Builder addAllItem(List<Item> elements) {
+      if (this.items == null) {
+        this.items = new ArrayList<>();
+      }
+      this.items.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
+     * OrderCreateParams#metadata} for the field documentation.
+     */
+    public Builder putMetadata(String key, String value) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link OrderCreateParams#metadata} for the field documentation.
+     */
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.putAll(map);
+      return this;
+    }
+
+    /**
      * Shipping address for the order. Required if any of the SKUs are for products that have
      * `shippable` set to true.
      */
@@ -238,7 +237,6 @@ public class OrderCreateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class Item {
     @SerializedName("amount")
     Long amount;
@@ -354,7 +352,6 @@ public class OrderCreateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class Shipping {
     /** Customer shipping address. */
     @SerializedName("address")
@@ -409,7 +406,6 @@ public class OrderCreateParams extends ApiRequestParams {
       }
     }
 
-    @Getter
     public static class Address {
       @SerializedName("city")
       String city;

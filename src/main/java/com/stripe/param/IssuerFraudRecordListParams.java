@@ -6,9 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.Getter;
 
-@Getter
 public class IssuerFraudRecordListParams extends ApiRequestParams {
   /** Only return issuer fraud records for the charge specified by this charge ID. */
   @SerializedName("charge")
@@ -73,16 +71,20 @@ public class IssuerFraudRecordListParams extends ApiRequestParams {
           this.charge, this.endingBefore, this.expand, this.limit, this.startingAfter);
     }
 
+    /** Only return issuer fraud records for the charge specified by this charge ID. */
+    public Builder setCharge(String charge) {
+      this.charge = charge;
+      return this;
+    }
+
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * IssuerFraudRecordListParams#expand} for the field documentation.
+     * A cursor for use in pagination. `ending_before` is an object ID that defines your place in
+     * the list. For instance, if you make a list request and receive 100 objects, starting with
+     * `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the
+     * previous page of the list.
      */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
+    public Builder setEndingBefore(String endingBefore) {
+      this.endingBefore = endingBefore;
       return this;
     }
 
@@ -99,20 +101,16 @@ public class IssuerFraudRecordListParams extends ApiRequestParams {
       return this;
     }
 
-    /** Only return issuer fraud records for the charge specified by this charge ID. */
-    public Builder setCharge(String charge) {
-      this.charge = charge;
-      return this;
-    }
-
     /**
-     * A cursor for use in pagination. `ending_before` is an object ID that defines your place in
-     * the list. For instance, if you make a list request and receive 100 objects, starting with
-     * `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the
-     * previous page of the list.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * IssuerFraudRecordListParams#expand} for the field documentation.
      */
-    public Builder setEndingBefore(String endingBefore) {
-      this.endingBefore = endingBefore;
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
       return this;
     }
 

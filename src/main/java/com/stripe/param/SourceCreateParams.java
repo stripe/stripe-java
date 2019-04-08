@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
-@Getter
 public class SourceCreateParams extends ApiRequestParams {
   /**
    * Amount associated with the source. This is the amount for which the source will be chargeable
@@ -187,58 +186,6 @@ public class SourceCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * SourceCreateParams#expand} for the field documentation.
-     */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
-      return this;
-    }
-
-    /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * SourceCreateParams#expand} for the field documentation.
-     */
-    public Builder addExpand(String element) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.add(element);
-      return this;
-    }
-
-    /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link SourceCreateParams#metadata} for the field documentation.
-     */
-    public Builder putAllMetadata(Map<String, String> map) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
-      }
-      this.metadata.putAll(map);
-      return this;
-    }
-
-    /**
-     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
-     * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * SourceCreateParams#metadata} for the field documentation.
-     */
-    public Builder putMetadata(String key, String value) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
-      }
-      this.metadata.put(key, value);
-      return this;
-    }
-
-    /**
      * Amount associated with the source. This is the amount for which the source will be chargeable
      * once ready. Required for `single_use` sources.
      */
@@ -266,11 +213,63 @@ public class SourceCreateParams extends ApiRequestParams {
     }
 
     /**
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SourceCreateParams#expand} for the field documentation.
+     */
+    public Builder addExpand(String element) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SourceCreateParams#expand} for the field documentation.
+     */
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
      * The authentication `flow` of the source to create. `flow` is one of `redirect`, `receiver`,
      * `code_verification`, `none`. It is generally inferred unless a type supports multiple flows.
      */
     public Builder setFlow(Flow flow) {
       this.flow = flow;
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
+     * SourceCreateParams#metadata} for the field documentation.
+     */
+    public Builder putMetadata(String key, String value) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link SourceCreateParams#metadata} for the field documentation.
+     */
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.putAll(map);
       return this;
     }
 
@@ -343,7 +342,6 @@ public class SourceCreateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class Owner {
     /** Owner's address. */
     @SerializedName("address")
@@ -411,7 +409,6 @@ public class SourceCreateParams extends ApiRequestParams {
       }
     }
 
-    @Getter
     public static class Address {
       @SerializedName("city")
       String city;
@@ -502,7 +499,6 @@ public class SourceCreateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class Receiver {
     /**
      * The method Stripe should use to request information needed to process a refund or mispayment.
@@ -560,7 +556,6 @@ public class SourceCreateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class Redirect {
     /**
      * The URL you provide to redirect the customer back to you after they authenticated their

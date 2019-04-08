@@ -6,9 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.Getter;
 
-@Getter
 public class ValueListItemCreateParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -45,19 +43,6 @@ public class ValueListItemCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * ValueListItemCreateParams#expand} for the field documentation.
-     */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
-      return this;
-    }
-
-    /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
      * ValueListItemCreateParams#expand} for the field documentation.
@@ -70,15 +55,28 @@ public class ValueListItemCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The identifier of the value list which the created item will be added to. */
-    public Builder setValueList(String valueList) {
-      this.valueList = valueList;
+    /**
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * ValueListItemCreateParams#expand} for the field documentation.
+     */
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
       return this;
     }
 
     /** The value of the item (whose type must match the type of the parent value list). */
     public Builder setValue(String value) {
       this.value = value;
+      return this;
+    }
+
+    /** The identifier of the value list which the created item will be added to. */
+    public Builder setValueList(String valueList) {
+      this.valueList = valueList;
       return this;
     }
   }

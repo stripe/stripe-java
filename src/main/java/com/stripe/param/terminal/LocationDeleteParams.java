@@ -4,9 +4,7 @@ package com.stripe.param.terminal;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
-import lombok.Getter;
 
-@Getter
 public class LocationDeleteParams extends ApiRequestParams {
   /**
    * To group objects on your platform account by connected account, set this parameter to the

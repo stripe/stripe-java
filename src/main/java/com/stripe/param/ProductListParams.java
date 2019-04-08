@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
 
-@Getter
 public class ProductListParams extends ApiRequestParams {
   /**
    * Only return products that are active or inactive (e.g., pass `false` to list all inactive
@@ -130,58 +129,6 @@ public class ProductListParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * ProductListParams#expand} for the field documentation.
-     */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
-      return this;
-    }
-
-    /**
-     * Add all elements to `ids` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * ProductListParams#ids} for the field documentation.
-     */
-    public Builder addAllId(List<String> elements) {
-      if (this.ids == null) {
-        this.ids = new ArrayList<>();
-      }
-      this.ids.addAll(elements);
-      return this;
-    }
-
-    /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * ProductListParams#expand} for the field documentation.
-     */
-    public Builder addExpand(String element) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.add(element);
-      return this;
-    }
-
-    /**
-     * Add an element to `ids` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * ProductListParams#ids} for the field documentation.
-     */
-    public Builder addId(String element) {
-      if (this.ids == null) {
-        this.ids = new ArrayList<>();
-      }
-      this.ids.add(element);
-      return this;
-    }
-
-    /**
      * Only return products that are active or inactive (e.g., pass `false` to list all inactive
      * products).
      */
@@ -210,6 +157,58 @@ public class ProductListParams extends ApiRequestParams {
      */
     public Builder setEndingBefore(String endingBefore) {
       this.endingBefore = endingBefore;
+      return this;
+    }
+
+    /**
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * ProductListParams#expand} for the field documentation.
+     */
+    public Builder addExpand(String element) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * ProductListParams#expand} for the field documentation.
+     */
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add an element to `ids` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * ProductListParams#ids} for the field documentation.
+     */
+    public Builder addId(String element) {
+      if (this.ids == null) {
+        this.ids = new ArrayList<>();
+      }
+      this.ids.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `ids` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * ProductListParams#ids} for the field documentation.
+     */
+    public Builder addAllId(List<String> elements) {
+      if (this.ids == null) {
+        this.ids = new ArrayList<>();
+      }
+      this.ids.addAll(elements);
       return this;
     }
 
@@ -252,7 +251,6 @@ public class ProductListParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class Created {
     /** Minimum value to filter by (exclusive). */
     @SerializedName("gt")
@@ -295,27 +293,27 @@ public class ProductListParams extends ApiRequestParams {
         return new Created(this.gt, this.gte, this.lt, this.lte);
       }
 
-      /** Minimum value to filter by (inclusive). */
-      public Builder setGte(Long gte) {
-        this.gte = gte;
-        return this;
-      }
-
       /** Minimum value to filter by (exclusive). */
       public Builder setGt(Long gt) {
         this.gt = gt;
         return this;
       }
 
-      /** Maximum value to filter by (inclusive). */
-      public Builder setLte(Long lte) {
-        this.lte = lte;
+      /** Minimum value to filter by (inclusive). */
+      public Builder setGte(Long gte) {
+        this.gte = gte;
         return this;
       }
 
       /** Maximum value to filter by (exclusive). */
       public Builder setLt(Long lt) {
         this.lt = lt;
+        return this;
+      }
+
+      /** Maximum value to filter by (inclusive). */
+      public Builder setLte(Long lte) {
+        this.lte = lte;
         return this;
       }
     }

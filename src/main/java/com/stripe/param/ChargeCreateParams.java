@@ -8,9 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.Getter;
 
-@Getter
 public class ChargeCreateParams extends ApiRequestParams {
   /**
    * A positive integer representing how much to charge, in the [smallest currency
@@ -116,13 +114,16 @@ public class ChargeCreateParams extends ApiRequestParams {
   String source;
 
   /**
-   * An arbitrary string to be displayed on your customer's credit card statement. This can be up to
-   * _22 characters_. As an example, if your website is `RunClub` and the item you're charging for
-   * is a race ticket, you might want to specify a `statement_descriptor` of `RunClub 5K race
-   * ticket`. The statement description must contain at least one letter, must not contain `"'`
-   * characters, and will appear on your customer's statement in capital letters. Non-ASCII
-   * characters are automatically stripped. While most banks and card issuers display this
-   * information consistently, some might display it incorrectly or not at all.
+   * An arbitrary string to be used as the dynamic portion of the full descriptor displayed on your
+   * customer's credit card statement. This value will be prefixed by your [account's statement
+   * descriptor](https://stripe.com/docs/charges#dynamic-statement-descriptor). As an example, if
+   * your account's statement descriptor is `RUNCLUB` and the item you're charging for is a race
+   * ticket, you may want to specify a `statement_descriptor` of `5K RACE`, so that the resulting
+   * full descriptor would be `RUNCLUB* 5K RACE`. The full descriptor may be up to *22 characters*.
+   * This value must contain at least one letter, may not include `"'` characters, and will appear
+   * on your customer's statement in capital letters. Non-ASCII characters are automatically
+   * stripped. While most banks display this information consistently, some may display it
+   * incorrectly or not at all.
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
@@ -241,58 +242,6 @@ public class ChargeCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * ChargeCreateParams#expand} for the field documentation.
-     */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
-      return this;
-    }
-
-    /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * ChargeCreateParams#expand} for the field documentation.
-     */
-    public Builder addExpand(String element) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.add(element);
-      return this;
-    }
-
-    /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link ChargeCreateParams#metadata} for the field documentation.
-     */
-    public Builder putAllMetadata(Map<String, String> map) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
-      }
-      this.metadata.putAll(map);
-      return this;
-    }
-
-    /**
-     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
-     * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * ChargeCreateParams#metadata} for the field documentation.
-     */
-    public Builder putMetadata(String key, String value) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
-      }
-      this.metadata.put(key, value);
-      return this;
-    }
-
-    /**
      * A positive integer representing how much to charge, in the [smallest currency
      * unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., `100` cents to charge $1.00, or
      * `100` to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 USD or
@@ -304,6 +253,11 @@ public class ChargeCreateParams extends ApiRequestParams {
       return this;
     }
 
+    public Builder setApplicationFee(Long applicationFee) {
+      this.applicationFee = applicationFee;
+      return this;
+    }
+
     /**
      * A fee in %s that will be applied to the charge and transferred to the application owner's
      * Stripe account. The request must be made with an OAuth key or the `Stripe-Account` header in
@@ -312,11 +266,6 @@ public class ChargeCreateParams extends ApiRequestParams {
      */
     public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
       this.applicationFeeAmount = applicationFeeAmount;
-      return this;
-    }
-
-    public Builder setApplicationFee(Long applicationFee) {
-      this.applicationFee = applicationFee;
       return this;
     }
 
@@ -360,6 +309,58 @@ public class ChargeCreateParams extends ApiRequestParams {
 
     public Builder setDestination(Destination destination) {
       this.destination = destination;
+      return this;
+    }
+
+    /**
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * ChargeCreateParams#expand} for the field documentation.
+     */
+    public Builder addExpand(String element) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * ChargeCreateParams#expand} for the field documentation.
+     */
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
+     * ChargeCreateParams#metadata} for the field documentation.
+     */
+    public Builder putMetadata(String key, String value) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link ChargeCreateParams#metadata} for the field documentation.
+     */
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.putAll(map);
       return this;
     }
 
@@ -411,13 +412,16 @@ public class ChargeCreateParams extends ApiRequestParams {
     }
 
     /**
-     * An arbitrary string to be displayed on your customer's credit card statement. This can be up
-     * to _22 characters_. As an example, if your website is `RunClub` and the item you're charging
-     * for is a race ticket, you might want to specify a `statement_descriptor` of `RunClub 5K race
-     * ticket`. The statement description must contain at least one letter, must not contain `"'`
-     * characters, and will appear on your customer's statement in capital letters. Non-ASCII
-     * characters are automatically stripped. While most banks and card issuers display this
-     * information consistently, some might display it incorrectly or not at all.
+     * An arbitrary string to be used as the dynamic portion of the full descriptor displayed on
+     * your customer's credit card statement. This value will be prefixed by your [account's
+     * statement descriptor](https://stripe.com/docs/charges#dynamic-statement-descriptor). As an
+     * example, if your account's statement descriptor is `RUNCLUB` and the item you're charging for
+     * is a race ticket, you may want to specify a `statement_descriptor` of `5K RACE`, so that the
+     * resulting full descriptor would be `RUNCLUB* 5K RACE`. The full descriptor may be up to *22
+     * characters*. This value must contain at least one letter, may not include `"'` characters,
+     * and will appear on your customer's statement in capital letters. Non-ASCII characters are
+     * automatically stripped. While most banks display this information consistently, some may
+     * display it incorrectly or not at all.
      */
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
@@ -444,7 +448,6 @@ public class ChargeCreateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class Destination {
     /** ID of an existing, connected Stripe account. */
     @SerializedName("account")
@@ -495,7 +498,6 @@ public class ChargeCreateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class Shipping {
     /** Shipping address. */
     @SerializedName("address")
@@ -583,7 +585,6 @@ public class ChargeCreateParams extends ApiRequestParams {
       }
     }
 
-    @Getter
     public static class Address {
       @SerializedName("city")
       String city;
@@ -674,7 +675,6 @@ public class ChargeCreateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class TransferData {
     /**
      * The amount transferred to the destination account, if specified. By default, the entire

@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
-@Getter
 public class CustomerUpdateParams extends ApiRequestParams {
   /**
    * An integer amount in %s that represents the account balance for your customer. Account balances
@@ -164,58 +163,6 @@ public class CustomerUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * CustomerUpdateParams#expand} for the field documentation.
-     */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
-      return this;
-    }
-
-    /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * CustomerUpdateParams#expand} for the field documentation.
-     */
-    public Builder addExpand(String element) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.add(element);
-      return this;
-    }
-
-    /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link CustomerUpdateParams#metadata} for the field documentation.
-     */
-    public Builder putAllMetadata(Map<String, String> map) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
-      }
-      this.metadata.putAll(map);
-      return this;
-    }
-
-    /**
-     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
-     * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * CustomerUpdateParams#metadata} for the field documentation.
-     */
-    public Builder putMetadata(String key, String value) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
-      }
-      this.metadata.put(key, value);
-      return this;
-    }
-
-    /**
      * An integer amount in %s that represents the account balance for your customer. Account
      * balances only affect invoices. A negative amount represents a credit that decreases the
      * amount due on an invoice; a positive amount increases the amount due on an invoice.
@@ -255,6 +202,32 @@ public class CustomerUpdateParams extends ApiRequestParams {
     }
 
     /**
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * CustomerUpdateParams#expand} for the field documentation.
+     */
+    public Builder addExpand(String element) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * CustomerUpdateParams#expand} for the field documentation.
+     */
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
      * The prefix for the customer used to generate unique invoice numbers. Must be 3–12 uppercase
      * letters or numbers.
      */
@@ -266,6 +239,32 @@ public class CustomerUpdateParams extends ApiRequestParams {
     /** Default invoice settings for this customer. */
     public Builder setInvoiceSettings(InvoiceSettings invoiceSettings) {
       this.invoiceSettings = invoiceSettings;
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
+     * CustomerUpdateParams#metadata} for the field documentation.
+     */
+    public Builder putMetadata(String key, String value) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link CustomerUpdateParams#metadata} for the field documentation.
+     */
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.putAll(map);
       return this;
     }
 
@@ -317,7 +316,6 @@ public class CustomerUpdateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class InvoiceSettings {
     /** Default custom fields to be displayed on invoices for this customer. */
     @SerializedName("custom_fields")
@@ -378,7 +376,6 @@ public class CustomerUpdateParams extends ApiRequestParams {
       }
     }
 
-    @Getter
     public static class CustomField {
       /** The name of the custom field. This may be up to 30 characters. */
       @SerializedName("name")
@@ -422,7 +419,6 @@ public class CustomerUpdateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class Shipping {
     /** Customer shipping address. */
     @SerializedName("address")
@@ -477,7 +473,6 @@ public class CustomerUpdateParams extends ApiRequestParams {
       }
     }
 
-    @Getter
     public static class Address {
       @SerializedName("city")
       String city;
@@ -568,7 +563,6 @@ public class CustomerUpdateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class TaxInfo {
     /** The customer's tax ID number. */
     @SerializedName("tax_id")

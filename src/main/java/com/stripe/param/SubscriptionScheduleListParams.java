@@ -6,9 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.Getter;
 
-@Getter
 public class SubscriptionScheduleListParams extends ApiRequestParams {
   /** Only return subscription schedules that were created canceled the given date interval. */
   @SerializedName("canceled_at")
@@ -126,32 +124,6 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
           this.startingAfter);
     }
 
-    /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * SubscriptionScheduleListParams#expand} for the field documentation.
-     */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
-      return this;
-    }
-
-    /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * SubscriptionScheduleListParams#expand} for the field documentation.
-     */
-    public Builder addExpand(String element) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.add(element);
-      return this;
-    }
-
     /** Only return subscription schedules that were created canceled the given date interval. */
     public Builder setCanceledAt(CanceledAt canceledAt) {
       this.canceledAt = canceledAt;
@@ -206,6 +178,32 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
     }
 
     /**
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SubscriptionScheduleListParams#expand} for the field documentation.
+     */
+    public Builder addExpand(String element) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SubscriptionScheduleListParams#expand} for the field documentation.
+     */
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
      * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
      * default is 10.
      */
@@ -244,7 +242,6 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class CanceledAt {
     /** Minimum value to filter by (exclusive). */
     @SerializedName("gt")
@@ -287,21 +284,15 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
         return new CanceledAt(this.gt, this.gte, this.lt, this.lte);
       }
 
-      /** Minimum value to filter by (inclusive). */
-      public Builder setGte(Long gte) {
-        this.gte = gte;
-        return this;
-      }
-
       /** Minimum value to filter by (exclusive). */
       public Builder setGt(Long gt) {
         this.gt = gt;
         return this;
       }
 
-      /** Maximum value to filter by (inclusive). */
-      public Builder setLte(Long lte) {
-        this.lte = lte;
+      /** Minimum value to filter by (inclusive). */
+      public Builder setGte(Long gte) {
+        this.gte = gte;
         return this;
       }
 
@@ -310,10 +301,15 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
         this.lt = lt;
         return this;
       }
+
+      /** Maximum value to filter by (inclusive). */
+      public Builder setLte(Long lte) {
+        this.lte = lte;
+        return this;
+      }
     }
   }
 
-  @Getter
   public static class CompletedAt {
     /** Minimum value to filter by (exclusive). */
     @SerializedName("gt")
@@ -356,21 +352,15 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
         return new CompletedAt(this.gt, this.gte, this.lt, this.lte);
       }
 
-      /** Minimum value to filter by (inclusive). */
-      public Builder setGte(Long gte) {
-        this.gte = gte;
-        return this;
-      }
-
       /** Minimum value to filter by (exclusive). */
       public Builder setGt(Long gt) {
         this.gt = gt;
         return this;
       }
 
-      /** Maximum value to filter by (inclusive). */
-      public Builder setLte(Long lte) {
-        this.lte = lte;
+      /** Minimum value to filter by (inclusive). */
+      public Builder setGte(Long gte) {
+        this.gte = gte;
         return this;
       }
 
@@ -379,10 +369,15 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
         this.lt = lt;
         return this;
       }
+
+      /** Maximum value to filter by (inclusive). */
+      public Builder setLte(Long lte) {
+        this.lte = lte;
+        return this;
+      }
     }
   }
 
-  @Getter
   public static class Created {
     /** Minimum value to filter by (exclusive). */
     @SerializedName("gt")
@@ -425,21 +420,15 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
         return new Created(this.gt, this.gte, this.lt, this.lte);
       }
 
-      /** Minimum value to filter by (inclusive). */
-      public Builder setGte(Long gte) {
-        this.gte = gte;
-        return this;
-      }
-
       /** Minimum value to filter by (exclusive). */
       public Builder setGt(Long gt) {
         this.gt = gt;
         return this;
       }
 
-      /** Maximum value to filter by (inclusive). */
-      public Builder setLte(Long lte) {
-        this.lte = lte;
+      /** Minimum value to filter by (inclusive). */
+      public Builder setGte(Long gte) {
+        this.gte = gte;
         return this;
       }
 
@@ -448,10 +437,15 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
         this.lt = lt;
         return this;
       }
+
+      /** Maximum value to filter by (inclusive). */
+      public Builder setLte(Long lte) {
+        this.lte = lte;
+        return this;
+      }
     }
   }
 
-  @Getter
   public static class ReleasedAt {
     /** Minimum value to filter by (exclusive). */
     @SerializedName("gt")
@@ -494,27 +488,27 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
         return new ReleasedAt(this.gt, this.gte, this.lt, this.lte);
       }
 
-      /** Minimum value to filter by (inclusive). */
-      public Builder setGte(Long gte) {
-        this.gte = gte;
-        return this;
-      }
-
       /** Minimum value to filter by (exclusive). */
       public Builder setGt(Long gt) {
         this.gt = gt;
         return this;
       }
 
-      /** Maximum value to filter by (inclusive). */
-      public Builder setLte(Long lte) {
-        this.lte = lte;
+      /** Minimum value to filter by (inclusive). */
+      public Builder setGte(Long gte) {
+        this.gte = gte;
         return this;
       }
 
       /** Maximum value to filter by (exclusive). */
       public Builder setLt(Long lt) {
         this.lt = lt;
+        return this;
+      }
+
+      /** Maximum value to filter by (inclusive). */
+      public Builder setLte(Long lte) {
+        this.lte = lte;
         return this;
       }
     }

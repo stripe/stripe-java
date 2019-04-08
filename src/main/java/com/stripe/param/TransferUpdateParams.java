@@ -8,9 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.Getter;
 
-@Getter
 public class TransferUpdateParams extends ApiRequestParams {
   /** An arbitrary string attached to the object. Often useful for displaying to users. */
   @SerializedName("description")
@@ -51,16 +49,9 @@ public class TransferUpdateParams extends ApiRequestParams {
       return new TransferUpdateParams(this.description, this.expand, this.metadata);
     }
 
-    /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * TransferUpdateParams#expand} for the field documentation.
-     */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
+    /** An arbitrary string attached to the object. Often useful for displaying to users. */
+    public Builder setDescription(String description) {
+      this.description = description;
       return this;
     }
 
@@ -78,15 +69,15 @@ public class TransferUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link TransferUpdateParams#metadata} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * TransferUpdateParams#expand} for the field documentation.
      */
-    public Builder putAllMetadata(Map<String, String> map) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
       }
-      this.metadata.putAll(map);
+      this.expand.addAll(elements);
       return this;
     }
 
@@ -103,9 +94,16 @@ public class TransferUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** An arbitrary string attached to the object. Often useful for displaying to users. */
-    public Builder setDescription(String description) {
-      this.description = description;
+    /**
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link TransferUpdateParams#metadata} for the field documentation.
+     */
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.putAll(map);
       return this;
     }
   }

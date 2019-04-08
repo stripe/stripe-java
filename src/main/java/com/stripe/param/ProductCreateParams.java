@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
-@Getter
 public class ProductCreateParams extends ApiRequestParams {
   /** Whether the product is currently available for purchase. Defaults to `true`. */
   @SerializedName("active")
@@ -211,55 +210,9 @@ public class ProductCreateParams extends ApiRequestParams {
           this.url);
     }
 
-    /**
-     * Add all elements to `attributes` list. A list is initialized for the first `add/addAll` call,
-     * and subsequent calls adds additional elements to the original list. See {@link
-     * ProductCreateParams#attributes} for the field documentation.
-     */
-    public Builder addAllAttribute(List<String> elements) {
-      if (this.attributes == null) {
-        this.attributes = new ArrayList<>();
-      }
-      this.attributes.addAll(elements);
-      return this;
-    }
-
-    /**
-     * Add all elements to `deactivateOn` list. A list is initialized for the first `add/addAll`
-     * call, and subsequent calls adds additional elements to the original list. See {@link
-     * ProductCreateParams#deactivateOn} for the field documentation.
-     */
-    public Builder addAllDeactivateOn(List<String> elements) {
-      if (this.deactivateOn == null) {
-        this.deactivateOn = new ArrayList<>();
-      }
-      this.deactivateOn.addAll(elements);
-      return this;
-    }
-
-    /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * ProductCreateParams#expand} for the field documentation.
-     */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
-      return this;
-    }
-
-    /**
-     * Add all elements to `images` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * ProductCreateParams#images} for the field documentation.
-     */
-    public Builder addAllImage(List<String> elements) {
-      if (this.images == null) {
-        this.images = new ArrayList<>();
-      }
-      this.images.addAll(elements);
+    /** Whether the product is currently available for purchase. Defaults to `true`. */
+    public Builder setActive(Boolean active) {
+      this.active = active;
       return this;
     }
 
@@ -277,6 +230,28 @@ public class ProductCreateParams extends ApiRequestParams {
     }
 
     /**
+     * Add all elements to `attributes` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * ProductCreateParams#attributes} for the field documentation.
+     */
+    public Builder addAllAttribute(List<String> elements) {
+      if (this.attributes == null) {
+        this.attributes = new ArrayList<>();
+      }
+      this.attributes.addAll(elements);
+      return this;
+    }
+
+    /**
+     * A short one-line description of the product, meant to be displayable to the customer. May
+     * only be set if type=`good`.
+     */
+    public Builder setCaption(String caption) {
+      this.caption = caption;
+      return this;
+    }
+
+    /**
      * Add an element to `deactivateOn` list. A list is initialized for the first `add/addAll` call,
      * and subsequent calls adds additional elements to the original list. See {@link
      * ProductCreateParams#deactivateOn} for the field documentation.
@@ -286,6 +261,28 @@ public class ProductCreateParams extends ApiRequestParams {
         this.deactivateOn = new ArrayList<>();
       }
       this.deactivateOn.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `deactivateOn` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * ProductCreateParams#deactivateOn} for the field documentation.
+     */
+    public Builder addAllDeactivateOn(List<String> elements) {
+      if (this.deactivateOn == null) {
+        this.deactivateOn = new ArrayList<>();
+      }
+      this.deactivateOn.addAll(elements);
+      return this;
+    }
+
+    /**
+     * The product's description, meant to be displayable to the customer. May only be set if
+     * type=`good`.
+     */
+    public Builder setDescription(String description) {
+      this.description = description;
       return this;
     }
 
@@ -303,6 +300,29 @@ public class ProductCreateParams extends ApiRequestParams {
     }
 
     /**
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * ProductCreateParams#expand} for the field documentation.
+     */
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * An identifier will be randomly generated by Stripe. You can optionally override this ID, but
+     * the ID must be unique across all products in your Stripe account. Applicable to both
+     * `service` and `good` types.
+     */
+    public Builder setId(String id) {
+      this.id = id;
+      return this;
+    }
+
+    /**
      * Add an element to `images` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
      * ProductCreateParams#images} for the field documentation.
@@ -316,15 +336,15 @@ public class ProductCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link ProductCreateParams#metadata} for the field documentation.
+     * Add all elements to `images` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * ProductCreateParams#images} for the field documentation.
      */
-    public Builder putAllMetadata(Map<String, String> map) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
+    public Builder addAllImage(List<String> elements) {
+      if (this.images == null) {
+        this.images = new ArrayList<>();
       }
-      this.metadata.putAll(map);
+      this.images.addAll(elements);
       return this;
     }
 
@@ -341,37 +361,16 @@ public class ProductCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Whether the product is currently available for purchase. Defaults to `true`. */
-    public Builder setActive(Boolean active) {
-      this.active = active;
-      return this;
-    }
-
     /**
-     * A short one-line description of the product, meant to be displayable to the customer. May
-     * only be set if type=`good`.
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link ProductCreateParams#metadata} for the field documentation.
      */
-    public Builder setCaption(String caption) {
-      this.caption = caption;
-      return this;
-    }
-
-    /**
-     * The product's description, meant to be displayable to the customer. May only be set if
-     * type=`good`.
-     */
-    public Builder setDescription(String description) {
-      this.description = description;
-      return this;
-    }
-
-    /**
-     * An identifier will be randomly generated by Stripe. You can optionally override this ID, but
-     * the ID must be unique across all products in your Stripe account. Applicable to both
-     * `service` and `good` types.
-     */
-    public Builder setId(String id) {
-      this.id = id;
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.putAll(map);
       return this;
     }
 
@@ -440,7 +439,6 @@ public class ProductCreateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class PackageDimensions {
     /** Height, in inches. Maximum precision is 2 decimal places. */
     @SerializedName("height")

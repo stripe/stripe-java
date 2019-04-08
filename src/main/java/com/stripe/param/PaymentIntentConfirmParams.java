@@ -7,9 +7,7 @@ import com.stripe.net.ApiRequestParams;
 import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.Getter;
 
-@Getter
 public class PaymentIntentConfirmParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -99,19 +97,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentIntentConfirmParams#expand} for the field documentation.
-     */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
-      return this;
-    }
-
-    /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
      * PaymentIntentConfirmParams#expand} for the field documentation.
@@ -121,6 +106,19 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         this.expand = new ArrayList<>();
       }
       this.expand.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * PaymentIntentConfirmParams#expand} for the field documentation.
+     */
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
       return this;
     }
 
@@ -178,7 +176,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class Shipping {
     /** Shipping address. */
     @SerializedName("address")
@@ -266,7 +263,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
     }
 
-    @Getter
     public static class Address {
       @SerializedName("city")
       String city;

@@ -12,7 +12,6 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
-@Getter
 public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
   /**
    * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
@@ -137,80 +136,13 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * SubscriptionScheduleUpdateParams#expand} for the field documentation.
+     * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
+     * attempt to pay the underlying subscription at the end of each billing cycle using the default
+     * source attached to the customer. When sending an invoice, Stripe will email your customer an
+     * invoice with payment instructions. Defaults to `charge_automatically` on creation.
      */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
-      return this;
-    }
-
-    /**
-     * Add all elements to `phases` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * SubscriptionScheduleUpdateParams#phases} for the field documentation.
-     */
-    public Builder addAllPhase(List<Phase> elements) {
-      if (this.phases == null) {
-        this.phases = new ArrayList<>();
-      }
-      this.phases.addAll(elements);
-      return this;
-    }
-
-    /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * SubscriptionScheduleUpdateParams#expand} for the field documentation.
-     */
-    public Builder addExpand(String element) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.add(element);
-      return this;
-    }
-
-    /**
-     * Add an element to `phases` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * SubscriptionScheduleUpdateParams#phases} for the field documentation.
-     */
-    public Builder addPhase(Phase element) {
-      if (this.phases == null) {
-        this.phases = new ArrayList<>();
-      }
-      this.phases.add(element);
-      return this;
-    }
-
-    /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link SubscriptionScheduleUpdateParams#metadata} for the field documentation.
-     */
-    public Builder putAllMetadata(Map<String, String> map) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
-      }
-      this.metadata.putAll(map);
-      return this;
-    }
-
-    /**
-     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
-     * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * SubscriptionScheduleUpdateParams#metadata} for the field documentation.
-     */
-    public Builder putMetadata(String key, String value) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
-      }
-      this.metadata.put(key, value);
+    public Builder setBilling(Billing billing) {
+      this.billing = billing;
       return this;
     }
 
@@ -233,19 +165,86 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
-     * attempt to pay the underlying subscription at the end of each billing cycle using the default
-     * source attached to the customer. When sending an invoice, Stripe will email your customer an
-     * invoice with payment instructions. Defaults to `charge_automatically` on creation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SubscriptionScheduleUpdateParams#expand} for the field documentation.
      */
-    public Builder setBilling(Billing billing) {
-      this.billing = billing;
+    public Builder addExpand(String element) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SubscriptionScheduleUpdateParams#expand} for the field documentation.
+     */
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
       return this;
     }
 
     /** All invoices will be billed using the specified settings. */
     public Builder setInvoiceSettings(InvoiceSettings invoiceSettings) {
       this.invoiceSettings = invoiceSettings;
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
+     * SubscriptionScheduleUpdateParams#metadata} for the field documentation.
+     */
+    public Builder putMetadata(String key, String value) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link SubscriptionScheduleUpdateParams#metadata} for the field documentation.
+     */
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.putAll(map);
+      return this;
+    }
+
+    /**
+     * Add an element to `phases` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SubscriptionScheduleUpdateParams#phases} for the field documentation.
+     */
+    public Builder addPhase(Phase element) {
+      if (this.phases == null) {
+        this.phases = new ArrayList<>();
+      }
+      this.phases.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `phases` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SubscriptionScheduleUpdateParams#phases} for the field documentation.
+     */
+    public Builder addAllPhase(List<Phase> elements) {
+      if (this.phases == null) {
+        this.phases = new ArrayList<>();
+      }
+      this.phases.addAll(elements);
       return this;
     }
 
@@ -281,7 +280,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class BillingThresholds {
     /** Monetary threshold that triggers the subscription to advance to a new billing period. */
     @SerializedName("amount_gte")
@@ -332,7 +330,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class InvoiceSettings {
     @SerializedName("days_until_due")
     Long daysUntilDue;
@@ -360,7 +357,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class Phase {
     /**
      * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
@@ -485,32 +481,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Add all elements to `plans` list. A list is initialized for the first `add/addAll` call,
-       * and subsequent calls adds additional elements to the original list. See {@link Phase#plans}
-       * for the field documentation.
-       */
-      public Builder addAllPlan(List<Plan> elements) {
-        if (this.plans == null) {
-          this.plans = new ArrayList<>();
-        }
-        this.plans.addAll(elements);
-        return this;
-      }
-
-      /**
-       * Add an element to `plans` list. A list is initialized for the first `add/addAll` call, and
-       * subsequent calls adds additional elements to the original list. See {@link Phase#plans} for
-       * the field documentation.
-       */
-      public Builder addPlan(Plan element) {
-        if (this.plans == null) {
-          this.plans = new ArrayList<>();
-        }
-        this.plans.add(element);
-        return this;
-      }
-
-      /**
        * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
        * the percentage of the subscription invoice subtotal that will be transferred to the
        * application owner's Stripe account. The request must be made with an OAuth key in order to
@@ -556,6 +526,32 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /**
+       * Add an element to `plans` list. A list is initialized for the first `add/addAll` call, and
+       * subsequent calls adds additional elements to the original list. See {@link Phase#plans} for
+       * the field documentation.
+       */
+      public Builder addPlan(Plan element) {
+        if (this.plans == null) {
+          this.plans = new ArrayList<>();
+        }
+        this.plans.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `plans` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link Phase#plans}
+       * for the field documentation.
+       */
+      public Builder addAllPlan(List<Plan> elements) {
+        if (this.plans == null) {
+          this.plans = new ArrayList<>();
+        }
+        this.plans.addAll(elements);
+        return this;
+      }
+
       /** The date at which this phase of the subscription schedule starts. */
       public Builder setStartDate(StartDate startDate) {
         this.startDate = startDate;
@@ -581,6 +577,15 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       }
 
       /**
+       * If set to true the entire phase is counted as a trial and the customer will not be charged
+       * for any fees.
+       */
+      public Builder setTrial(Boolean trial) {
+        this.trial = trial;
+        return this;
+      }
+
+      /**
        * Sets the phase to trialing from the start date to this date. Must be before the phase end
        * date, can not be combined with `trial`
        */
@@ -597,18 +602,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         this.trialEnd = trialEnd;
         return this;
       }
-
-      /**
-       * If set to true the entire phase is counted as a trial and the customer will not be charged
-       * for any fees.
-       */
-      public Builder setTrial(Boolean trial) {
-        this.trial = trial;
-        return this;
-      }
     }
 
-    @Getter
     public static class Plan {
       /**
        * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
@@ -684,7 +679,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         }
       }
 
-      @Getter
       public static class BillingThresholds {
         /** Usage threshold that triggers the subscription to advance to a new billing period. */
         @SerializedName("usage_gte")
@@ -753,7 +747,6 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class RenewalInterval {
     /**
      * Interval at which to renew the subscription schedule for when it ends. Possible values are

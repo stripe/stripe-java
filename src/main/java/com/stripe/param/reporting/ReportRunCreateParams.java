@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
 
-@Getter
 public class ReportRunCreateParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -52,19 +51,6 @@ public class ReportRunCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * ReportRunCreateParams#expand} for the field documentation.
-     */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
-      return this;
-    }
-
-    /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
      * ReportRunCreateParams#expand} for the field documentation.
@@ -74,6 +60,19 @@ public class ReportRunCreateParams extends ApiRequestParams {
         this.expand = new ArrayList<>();
       }
       this.expand.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * ReportRunCreateParams#expand} for the field documentation.
+     */
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
       return this;
     }
 
@@ -97,7 +96,6 @@ public class ReportRunCreateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class Parameters {
     /**
      * The set of report columns to include in the report output. If omitted, the Report Type is run
@@ -179,19 +177,6 @@ public class ReportRunCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add all elements to `columns` list. A list is initialized for the first `add/addAll` call,
-       * and subsequent calls adds additional elements to the original list. See {@link
-       * Parameters#columns} for the field documentation.
-       */
-      public Builder addAllColumn(List<String> elements) {
-        if (this.columns == null) {
-          this.columns = new ArrayList<>();
-        }
-        this.columns.addAll(elements);
-        return this;
-      }
-
-      /**
        * Add an element to `columns` list. A list is initialized for the first `add/addAll` call,
        * and subsequent calls adds additional elements to the original list. See {@link
        * Parameters#columns} for the field documentation.
@@ -201,6 +186,19 @@ public class ReportRunCreateParams extends ApiRequestParams {
           this.columns = new ArrayList<>();
         }
         this.columns.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `columns` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * Parameters#columns} for the field documentation.
+       */
+      public Builder addAllColumn(List<String> elements) {
+        if (this.columns == null) {
+          this.columns = new ArrayList<>();
+        }
+        this.columns.addAll(elements);
         return this;
       }
 

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
 
-@Getter
 public class WebhookEndpointCreateParams extends ApiRequestParams {
   /**
    * Events sent to this endpoint will be generated with this Stripe Version instead of your
@@ -73,28 +72,20 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `enabledEvents` list. A list is initialized for the first `add/addAll`
-     * call, and subsequent calls adds additional elements to the original list. See {@link
-     * WebhookEndpointCreateParams#enabledEvents} for the field documentation.
+     * Events sent to this endpoint will be generated with this Stripe Version instead of your
+     * account's default Stripe Version.
      */
-    public Builder addAllEnabledEvent(List<EnabledEvent> elements) {
-      if (this.enabledEvents == null) {
-        this.enabledEvents = new ArrayList<>();
-      }
-      this.enabledEvents.addAll(elements);
+    public Builder setApiVersion(ApiVersion apiVersion) {
+      this.apiVersion = apiVersion;
       return this;
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * WebhookEndpointCreateParams#expand} for the field documentation.
+     * Whether this endpoint should receive events from connected accounts (`true`), or your account
+     * (`false`).
      */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
+    public Builder setConnect(Boolean connect) {
+      this.connect = connect;
       return this;
     }
 
@@ -112,6 +103,19 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     }
 
     /**
+     * Add all elements to `enabledEvents` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * WebhookEndpointCreateParams#enabledEvents} for the field documentation.
+     */
+    public Builder addAllEnabledEvent(List<EnabledEvent> elements) {
+      if (this.enabledEvents == null) {
+        this.enabledEvents = new ArrayList<>();
+      }
+      this.enabledEvents.addAll(elements);
+      return this;
+    }
+
+    /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
      * WebhookEndpointCreateParams#expand} for the field documentation.
@@ -125,20 +129,15 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Events sent to this endpoint will be generated with this Stripe Version instead of your
-     * account's default Stripe Version.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * WebhookEndpointCreateParams#expand} for the field documentation.
      */
-    public Builder setApiVersion(ApiVersion apiVersion) {
-      this.apiVersion = apiVersion;
-      return this;
-    }
-
-    /**
-     * Whether this endpoint should receive events from connected accounts (`true`), or your account
-     * (`false`).
-     */
-    public Builder setConnect(Boolean connect) {
-      this.connect = connect;
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
       return this;
     }
 

@@ -6,9 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.Getter;
 
-@Getter
 public class PaymentMethodAttachParams extends ApiRequestParams {
   /** The ID of the customer to which to attach the PaymentMethod. */
   @SerializedName("customer")
@@ -37,16 +35,9 @@ public class PaymentMethodAttachParams extends ApiRequestParams {
       return new PaymentMethodAttachParams(this.customer, this.expand);
     }
 
-    /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentMethodAttachParams#expand} for the field documentation.
-     */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
+    /** The ID of the customer to which to attach the PaymentMethod. */
+    public Builder setCustomer(String customer) {
+      this.customer = customer;
       return this;
     }
 
@@ -63,9 +54,16 @@ public class PaymentMethodAttachParams extends ApiRequestParams {
       return this;
     }
 
-    /** The ID of the customer to which to attach the PaymentMethod. */
-    public Builder setCustomer(String customer) {
-      this.customer = customer;
+    /**
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * PaymentMethodAttachParams#expand} for the field documentation.
+     */
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
       return this;
     }
   }

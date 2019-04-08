@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
-@Getter
 public class PaymentIntentCreateParams extends ApiRequestParams {
   /** Amount intended to be collected by this PaymentIntent. */
   @SerializedName("amount")
@@ -248,84 +247,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           this.transferGroup);
     }
 
-    /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentIntentCreateParams#expand} for the field documentation.
-     */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
-      return this;
-    }
-
-    /**
-     * Add all elements to `paymentMethodTypes` list. A list is initialized for the first
-     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-     * {@link PaymentIntentCreateParams#paymentMethodTypes} for the field documentation.
-     */
-    public Builder addAllPaymentMethodType(List<String> elements) {
-      if (this.paymentMethodTypes == null) {
-        this.paymentMethodTypes = new ArrayList<>();
-      }
-      this.paymentMethodTypes.addAll(elements);
-      return this;
-    }
-
-    /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentIntentCreateParams#expand} for the field documentation.
-     */
-    public Builder addExpand(String element) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.add(element);
-      return this;
-    }
-
-    /**
-     * Add an element to `paymentMethodTypes` list. A list is initialized for the first `add/addAll`
-     * call, and subsequent calls adds additional elements to the original list. See {@link
-     * PaymentIntentCreateParams#paymentMethodTypes} for the field documentation.
-     */
-    public Builder addPaymentMethodType(String element) {
-      if (this.paymentMethodTypes == null) {
-        this.paymentMethodTypes = new ArrayList<>();
-      }
-      this.paymentMethodTypes.add(element);
-      return this;
-    }
-
-    /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link PaymentIntentCreateParams#metadata} for the field documentation.
-     */
-    public Builder putAllMetadata(Map<String, String> map) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
-      }
-      this.metadata.putAll(map);
-      return this;
-    }
-
-    /**
-     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
-     * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * PaymentIntentCreateParams#metadata} for the field documentation.
-     */
-    public Builder putMetadata(String key, String value) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
-      }
-      this.metadata.put(key, value);
-      return this;
-    }
-
     /** Amount intended to be collected by this PaymentIntent. */
     public Builder setAmount(Long amount) {
       this.amount = amount;
@@ -382,6 +303,58 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
 
     /**
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * PaymentIntentCreateParams#expand} for the field documentation.
+     */
+    public Builder addExpand(String element) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * PaymentIntentCreateParams#expand} for the field documentation.
+     */
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
+     * PaymentIntentCreateParams#metadata} for the field documentation.
+     */
+    public Builder putMetadata(String key, String value) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link PaymentIntentCreateParams#metadata} for the field documentation.
+     */
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.putAll(map);
+      return this;
+    }
+
+    /**
      * The Stripe account ID for which these funds are intended. For details, see the PaymentIntents
      * [Connect usage guide](https://stripe.com/docs/payments/payment-intents/usage#connect).
      */
@@ -393,6 +366,32 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     /** ID of the payment method to attach to this PaymentIntent. */
     public Builder setPaymentMethod(String paymentMethod) {
       this.paymentMethod = paymentMethod;
+      return this;
+    }
+
+    /**
+     * Add an element to `paymentMethodTypes` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * PaymentIntentCreateParams#paymentMethodTypes} for the field documentation.
+     */
+    public Builder addPaymentMethodType(String element) {
+      if (this.paymentMethodTypes == null) {
+        this.paymentMethodTypes = new ArrayList<>();
+      }
+      this.paymentMethodTypes.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `paymentMethodTypes` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link PaymentIntentCreateParams#paymentMethodTypes} for the field documentation.
+     */
+    public Builder addAllPaymentMethodType(List<String> elements) {
+      if (this.paymentMethodTypes == null) {
+        this.paymentMethodTypes = new ArrayList<>();
+      }
+      this.paymentMethodTypes.addAll(elements);
       return this;
     }
 
@@ -467,7 +466,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class Shipping {
     /** Shipping address. */
     @SerializedName("address")
@@ -555,7 +553,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       }
     }
 
-    @Getter
     public static class Address {
       @SerializedName("city")
       String city;
@@ -646,7 +643,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class TransferData {
     /**
      * If specified, successful charges will be attributed to the destination account for tax

@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
 
-@Getter
 public class SubscriptionListParams extends ApiRequestParams {
   /**
    * The billing mode of the subscriptions to retrieve. Either `charge_automatically` or
@@ -141,32 +140,6 @@ public class SubscriptionListParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * SubscriptionListParams#expand} for the field documentation.
-     */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
-      return this;
-    }
-
-    /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * SubscriptionListParams#expand} for the field documentation.
-     */
-    public Builder addExpand(String element) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.add(element);
-      return this;
-    }
-
-    /**
      * The billing mode of the subscriptions to retrieve. Either `charge_automatically` or
      * `send_invoice`.
      */
@@ -223,6 +196,32 @@ public class SubscriptionListParams extends ApiRequestParams {
     }
 
     /**
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SubscriptionListParams#expand} for the field documentation.
+     */
+    public Builder addExpand(String element) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SubscriptionListParams#expand} for the field documentation.
+     */
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
      * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
      * default is 10.
      */
@@ -260,7 +259,6 @@ public class SubscriptionListParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class Created {
     /** Minimum value to filter by (exclusive). */
     @SerializedName("gt")
@@ -303,21 +301,15 @@ public class SubscriptionListParams extends ApiRequestParams {
         return new Created(this.gt, this.gte, this.lt, this.lte);
       }
 
-      /** Minimum value to filter by (inclusive). */
-      public Builder setGte(Long gte) {
-        this.gte = gte;
-        return this;
-      }
-
       /** Minimum value to filter by (exclusive). */
       public Builder setGt(Long gt) {
         this.gt = gt;
         return this;
       }
 
-      /** Maximum value to filter by (inclusive). */
-      public Builder setLte(Long lte) {
-        this.lte = lte;
+      /** Minimum value to filter by (inclusive). */
+      public Builder setGte(Long gte) {
+        this.gte = gte;
         return this;
       }
 
@@ -326,10 +318,15 @@ public class SubscriptionListParams extends ApiRequestParams {
         this.lt = lt;
         return this;
       }
+
+      /** Maximum value to filter by (inclusive). */
+      public Builder setLte(Long lte) {
+        this.lte = lte;
+        return this;
+      }
     }
   }
 
-  @Getter
   public static class CurrentPeriodEnd {
     /** Minimum value to filter by (exclusive). */
     @SerializedName("gt")
@@ -372,21 +369,15 @@ public class SubscriptionListParams extends ApiRequestParams {
         return new CurrentPeriodEnd(this.gt, this.gte, this.lt, this.lte);
       }
 
-      /** Minimum value to filter by (inclusive). */
-      public Builder setGte(Long gte) {
-        this.gte = gte;
-        return this;
-      }
-
       /** Minimum value to filter by (exclusive). */
       public Builder setGt(Long gt) {
         this.gt = gt;
         return this;
       }
 
-      /** Maximum value to filter by (inclusive). */
-      public Builder setLte(Long lte) {
-        this.lte = lte;
+      /** Minimum value to filter by (inclusive). */
+      public Builder setGte(Long gte) {
+        this.gte = gte;
         return this;
       }
 
@@ -395,10 +386,15 @@ public class SubscriptionListParams extends ApiRequestParams {
         this.lt = lt;
         return this;
       }
+
+      /** Maximum value to filter by (inclusive). */
+      public Builder setLte(Long lte) {
+        this.lte = lte;
+        return this;
+      }
     }
   }
 
-  @Getter
   public static class CurrentPeriodStart {
     /** Minimum value to filter by (exclusive). */
     @SerializedName("gt")
@@ -441,27 +437,27 @@ public class SubscriptionListParams extends ApiRequestParams {
         return new CurrentPeriodStart(this.gt, this.gte, this.lt, this.lte);
       }
 
-      /** Minimum value to filter by (inclusive). */
-      public Builder setGte(Long gte) {
-        this.gte = gte;
-        return this;
-      }
-
       /** Minimum value to filter by (exclusive). */
       public Builder setGt(Long gt) {
         this.gt = gt;
         return this;
       }
 
-      /** Maximum value to filter by (inclusive). */
-      public Builder setLte(Long lte) {
-        this.lte = lte;
+      /** Minimum value to filter by (inclusive). */
+      public Builder setGte(Long gte) {
+        this.gte = gte;
         return this;
       }
 
       /** Maximum value to filter by (exclusive). */
       public Builder setLt(Long lt) {
         this.lt = lt;
+        return this;
+      }
+
+      /** Maximum value to filter by (inclusive). */
+      public Builder setLte(Long lte) {
+        this.lte = lte;
         return this;
       }
     }

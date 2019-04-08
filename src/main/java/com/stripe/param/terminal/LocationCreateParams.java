@@ -6,9 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.Getter;
 
-@Getter
 public class LocationCreateParams extends ApiRequestParams {
   /** The full address of the location. */
   @SerializedName("address")
@@ -56,16 +54,15 @@ public class LocationCreateParams extends ApiRequestParams {
           this.address, this.displayName, this.expand, this.operatorAccount);
     }
 
-    /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * LocationCreateParams#expand} for the field documentation.
-     */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
+    /** The full address of the location. */
+    public Builder setAddress(Address address) {
+      this.address = address;
+      return this;
+    }
+
+    /** A name for the location. */
+    public Builder setDisplayName(String displayName) {
+      this.displayName = displayName;
       return this;
     }
 
@@ -82,15 +79,16 @@ public class LocationCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The full address of the location. */
-    public Builder setAddress(Address address) {
-      this.address = address;
-      return this;
-    }
-
-    /** A name for the location. */
-    public Builder setDisplayName(String displayName) {
-      this.displayName = displayName;
+    /**
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * LocationCreateParams#expand} for the field documentation.
+     */
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
       return this;
     }
 
@@ -104,7 +102,6 @@ public class LocationCreateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class Address {
     @SerializedName("city")
     String city;

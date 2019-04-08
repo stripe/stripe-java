@@ -8,9 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.Getter;
 
-@Getter
 public class PaymentMethodUpdateParams extends ApiRequestParams {
   /**
    * Billing information associated with the PaymentMethod that may be used or required by
@@ -61,15 +59,16 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentMethodUpdateParams#expand} for the field documentation.
+     * Billing information associated with the PaymentMethod that may be used or required by
+     * particular types of payment methods.
      */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
+    public Builder setBillingDetails(BillingDetails billingDetails) {
+      this.billingDetails = billingDetails;
+      return this;
+    }
+
+    public Builder setCard(Card card) {
+      this.card = card;
       return this;
     }
 
@@ -87,15 +86,15 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link PaymentMethodUpdateParams#metadata} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * PaymentMethodUpdateParams#expand} for the field documentation.
      */
-    public Builder putAllMetadata(Map<String, String> map) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
       }
-      this.metadata.putAll(map);
+      this.expand.addAll(elements);
       return this;
     }
 
@@ -113,21 +112,19 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Billing information associated with the PaymentMethod that may be used or required by
-     * particular types of payment methods.
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link PaymentMethodUpdateParams#metadata} for the field documentation.
      */
-    public Builder setBillingDetails(BillingDetails billingDetails) {
-      this.billingDetails = billingDetails;
-      return this;
-    }
-
-    public Builder setCard(Card card) {
-      this.card = card;
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.putAll(map);
       return this;
     }
   }
 
-  @Getter
   public static class BillingDetails {
     /** Billing address. */
     @SerializedName("address")
@@ -195,7 +192,6 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
       }
     }
 
-    @Getter
     public static class Address {
       @SerializedName("city")
       String city;
@@ -286,7 +282,6 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class Card {
     /** Two-digit number representing the card's expiration month. */
     @SerializedName("exp_month")

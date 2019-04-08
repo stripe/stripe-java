@@ -6,9 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.Getter;
 
-@Getter
 public class BalanceTransactionListParams extends ApiRequestParams {
   @SerializedName("available_on")
   Object availableOn;
@@ -130,32 +128,6 @@ public class BalanceTransactionListParams extends ApiRequestParams {
           this.type);
     }
 
-    /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * BalanceTransactionListParams#expand} for the field documentation.
-     */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
-      return this;
-    }
-
-    /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * BalanceTransactionListParams#expand} for the field documentation.
-     */
-    public Builder addExpand(String element) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.add(element);
-      return this;
-    }
-
     public Builder setAvailableOn(AvailableOn availableOn) {
       this.availableOn = availableOn;
       return this;
@@ -189,6 +161,32 @@ public class BalanceTransactionListParams extends ApiRequestParams {
      */
     public Builder setEndingBefore(String endingBefore) {
       this.endingBefore = endingBefore;
+      return this;
+    }
+
+    /**
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * BalanceTransactionListParams#expand} for the field documentation.
+     */
+    public Builder addExpand(String element) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * BalanceTransactionListParams#expand} for the field documentation.
+     */
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
       return this;
     }
 
@@ -238,7 +236,6 @@ public class BalanceTransactionListParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class AvailableOn {
     /** Minimum value to filter by (exclusive). */
     @SerializedName("gt")
@@ -281,21 +278,15 @@ public class BalanceTransactionListParams extends ApiRequestParams {
         return new AvailableOn(this.gt, this.gte, this.lt, this.lte);
       }
 
-      /** Minimum value to filter by (inclusive). */
-      public Builder setGte(Long gte) {
-        this.gte = gte;
-        return this;
-      }
-
       /** Minimum value to filter by (exclusive). */
       public Builder setGt(Long gt) {
         this.gt = gt;
         return this;
       }
 
-      /** Maximum value to filter by (inclusive). */
-      public Builder setLte(Long lte) {
-        this.lte = lte;
+      /** Minimum value to filter by (inclusive). */
+      public Builder setGte(Long gte) {
+        this.gte = gte;
         return this;
       }
 
@@ -304,10 +295,15 @@ public class BalanceTransactionListParams extends ApiRequestParams {
         this.lt = lt;
         return this;
       }
+
+      /** Maximum value to filter by (inclusive). */
+      public Builder setLte(Long lte) {
+        this.lte = lte;
+        return this;
+      }
     }
   }
 
-  @Getter
   public static class Created {
     /** Minimum value to filter by (exclusive). */
     @SerializedName("gt")
@@ -350,27 +346,27 @@ public class BalanceTransactionListParams extends ApiRequestParams {
         return new Created(this.gt, this.gte, this.lt, this.lte);
       }
 
-      /** Minimum value to filter by (inclusive). */
-      public Builder setGte(Long gte) {
-        this.gte = gte;
-        return this;
-      }
-
       /** Minimum value to filter by (exclusive). */
       public Builder setGt(Long gt) {
         this.gt = gt;
         return this;
       }
 
-      /** Maximum value to filter by (inclusive). */
-      public Builder setLte(Long lte) {
-        this.lte = lte;
+      /** Minimum value to filter by (inclusive). */
+      public Builder setGte(Long gte) {
+        this.gte = gte;
         return this;
       }
 
       /** Maximum value to filter by (exclusive). */
       public Builder setLt(Long lt) {
         this.lt = lt;
+        return this;
+      }
+
+      /** Maximum value to filter by (inclusive). */
+      public Builder setLte(Long lte) {
+        this.lte = lte;
         return this;
       }
     }

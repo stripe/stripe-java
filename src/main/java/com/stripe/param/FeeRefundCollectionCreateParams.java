@@ -8,9 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.Getter;
 
-@Getter
 public class FeeRefundCollectionCreateParams extends ApiRequestParams {
   /**
    * A positive integer, in _%s_, representing how much of this fee to refund. Can refund only up to
@@ -55,15 +53,11 @@ public class FeeRefundCollectionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * FeeRefundCollectionCreateParams#expand} for the field documentation.
+     * A positive integer, in _%s_, representing how much of this fee to refund. Can refund only up
+     * to the remaining unrefunded amount of the fee.
      */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
+    public Builder setAmount(Long amount) {
+      this.amount = amount;
       return this;
     }
 
@@ -81,15 +75,15 @@ public class FeeRefundCollectionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link FeeRefundCollectionCreateParams#metadata} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * FeeRefundCollectionCreateParams#expand} for the field documentation.
      */
-    public Builder putAllMetadata(Map<String, String> map) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
       }
-      this.metadata.putAll(map);
+      this.expand.addAll(elements);
       return this;
     }
 
@@ -107,11 +101,15 @@ public class FeeRefundCollectionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * A positive integer, in _%s_, representing how much of this fee to refund. Can refund only up
-     * to the remaining unrefunded amount of the fee.
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link FeeRefundCollectionCreateParams#metadata} for the field documentation.
      */
-    public Builder setAmount(Long amount) {
-      this.amount = amount;
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.putAll(map);
       return this;
     }
   }

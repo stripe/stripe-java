@@ -6,9 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.Getter;
 
-@Getter
 public class ChargeCaptureParams extends ApiRequestParams {
   /**
    * The amount to capture, which must be less than or equal to the original amount. Any additional
@@ -40,14 +38,17 @@ public class ChargeCaptureParams extends ApiRequestParams {
   String receiptEmail;
 
   /**
-   * An arbitrary string to be displayed on your customer's credit card statement. This may be up to
-   * *22 characters*. As an example, if your website is `RunClub` and the item you're charging for
-   * is a race ticket, you may want to specify a `statement_descriptor` of `RunClub 5K race ticket`.
-   * The statement description must contain at least one letter, may not include `"'` characters,
-   * and will appear on your customer's statement in capital letters. Non-ASCII characters are
-   * automatically stripped. Updating this value will overwrite the previous statement descriptor of
-   * this charge. While most banks display this information consistently, some may display it
-   * incorrectly or not at all.
+   * An arbitrary string to be used as the dynamic portion of the full descriptor displayed on your
+   * customer's credit card statement. This value will be prefixed by your [account's statement
+   * descriptor](https://stripe.com/docs/charges#dynamic-statement-descriptor). As an example, if
+   * your account's statement descriptor is `RUNCLUB` and the item you're charging for is a race
+   * ticket, you may want to specify a `statement_descriptor` of `5K RACE`, so that the resulting
+   * full descriptor would be `RUNCLUB* 5K RACE`. The full descriptor may be up to *22 characters*.
+   * This value must contain at least one letter, may not include `"'` characters, and will appear
+   * on your customer's statement in capital letters. Non-ASCII characters are automatically
+   * stripped. Updating this value will overwrite the previous `statement_descriptor` of this
+   * charge. While most banks display this information consistently, some may display it incorrectly
+   * or not at all.
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
@@ -123,15 +124,26 @@ public class ChargeCaptureParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * ChargeCaptureParams#expand} for the field documentation.
+     * The amount to capture, which must be less than or equal to the original amount. Any
+     * additional amount will be automatically refunded.
      */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
+    public Builder setAmount(Long amount) {
+      this.amount = amount;
+      return this;
+    }
+
+    /** An application fee to add on to this charge. Can only be used with Stripe Connect. */
+    public Builder setApplicationFee(Long applicationFee) {
+      this.applicationFee = applicationFee;
+      return this;
+    }
+
+    /**
+     * An application fee amount to add on to this charge, which must be less than or equal to the
+     * original amount. Can only be used with Stripe Connect.
+     */
+    public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
+      this.applicationFeeAmount = applicationFeeAmount;
       return this;
     }
 
@@ -149,26 +161,15 @@ public class ChargeCaptureParams extends ApiRequestParams {
     }
 
     /**
-     * The amount to capture, which must be less than or equal to the original amount. Any
-     * additional amount will be automatically refunded.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * ChargeCaptureParams#expand} for the field documentation.
      */
-    public Builder setAmount(Long amount) {
-      this.amount = amount;
-      return this;
-    }
-
-    /**
-     * An application fee amount to add on to this charge, which must be less than or equal to the
-     * original amount. Can only be used with Stripe Connect.
-     */
-    public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
-      this.applicationFeeAmount = applicationFeeAmount;
-      return this;
-    }
-
-    /** An application fee to add on to this charge. Can only be used with Stripe Connect. */
-    public Builder setApplicationFee(Long applicationFee) {
-      this.applicationFee = applicationFee;
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
       return this;
     }
 
@@ -183,14 +184,17 @@ public class ChargeCaptureParams extends ApiRequestParams {
     }
 
     /**
-     * An arbitrary string to be displayed on your customer's credit card statement. This may be up
-     * to *22 characters*. As an example, if your website is `RunClub` and the item you're charging
-     * for is a race ticket, you may want to specify a `statement_descriptor` of `RunClub 5K race
-     * ticket`. The statement description must contain at least one letter, may not include `"'`
-     * characters, and will appear on your customer's statement in capital letters. Non-ASCII
-     * characters are automatically stripped. Updating this value will overwrite the previous
-     * statement descriptor of this charge. While most banks display this information consistently,
-     * some may display it incorrectly or not at all.
+     * An arbitrary string to be used as the dynamic portion of the full descriptor displayed on
+     * your customer's credit card statement. This value will be prefixed by your [account's
+     * statement descriptor](https://stripe.com/docs/charges#dynamic-statement-descriptor). As an
+     * example, if your account's statement descriptor is `RUNCLUB` and the item you're charging for
+     * is a race ticket, you may want to specify a `statement_descriptor` of `5K RACE`, so that the
+     * resulting full descriptor would be `RUNCLUB* 5K RACE`. The full descriptor may be up to *22
+     * characters*. This value must contain at least one letter, may not include `"'` characters,
+     * and will appear on your customer's statement in capital letters. Non-ASCII characters are
+     * automatically stripped. Updating this value will overwrite the previous
+     * `statement_descriptor` of this charge. While most banks display this information
+     * consistently, some may display it incorrectly or not at all.
      */
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
@@ -219,7 +223,6 @@ public class ChargeCaptureParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class TransferData {
     /**
      * The amount transferred to the destination account, if specified. By default, the entire

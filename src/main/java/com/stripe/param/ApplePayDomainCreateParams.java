@@ -6,9 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.Getter;
 
-@Getter
 public class ApplePayDomainCreateParams extends ApiRequestParams {
   @SerializedName("domain_name")
   String domainName;
@@ -36,16 +34,8 @@ public class ApplePayDomainCreateParams extends ApiRequestParams {
       return new ApplePayDomainCreateParams(this.domainName, this.expand);
     }
 
-    /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * ApplePayDomainCreateParams#expand} for the field documentation.
-     */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
+    public Builder setDomainName(String domainName) {
+      this.domainName = domainName;
       return this;
     }
 
@@ -62,8 +52,16 @@ public class ApplePayDomainCreateParams extends ApiRequestParams {
       return this;
     }
 
-    public Builder setDomainName(String domainName) {
-      this.domainName = domainName;
+    /**
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * ApplePayDomainCreateParams#expand} for the field documentation.
+     */
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
       return this;
     }
   }

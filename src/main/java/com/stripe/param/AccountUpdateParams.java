@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
-@Getter
 public class AccountUpdateParams extends ApiRequestParams {
   /**
    * An [account token](https://stripe.com/docs/api#create_account_token), used to securely provide
@@ -179,84 +178,6 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * AccountUpdateParams#expand} for the field documentation.
-     */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
-      return this;
-    }
-
-    /**
-     * Add all elements to `requestedCapabilities` list. A list is initialized for the first
-     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-     * {@link AccountUpdateParams#requestedCapabilities} for the field documentation.
-     */
-    public Builder addAllRequestedCapability(List<RequestedCapability> elements) {
-      if (this.requestedCapabilities == null) {
-        this.requestedCapabilities = new ArrayList<>();
-      }
-      this.requestedCapabilities.addAll(elements);
-      return this;
-    }
-
-    /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * AccountUpdateParams#expand} for the field documentation.
-     */
-    public Builder addExpand(String element) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.add(element);
-      return this;
-    }
-
-    /**
-     * Add an element to `requestedCapabilities` list. A list is initialized for the first
-     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-     * {@link AccountUpdateParams#requestedCapabilities} for the field documentation.
-     */
-    public Builder addRequestedCapability(RequestedCapability element) {
-      if (this.requestedCapabilities == null) {
-        this.requestedCapabilities = new ArrayList<>();
-      }
-      this.requestedCapabilities.add(element);
-      return this;
-    }
-
-    /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link AccountUpdateParams#metadata} for the field documentation.
-     */
-    public Builder putAllMetadata(Map<String, String> map) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
-      }
-      this.metadata.putAll(map);
-      return this;
-    }
-
-    /**
-     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
-     * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * AccountUpdateParams#metadata} for the field documentation.
-     */
-    public Builder putMetadata(String key, String value) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
-      }
-      this.metadata.put(key, value);
-      return this;
-    }
-
-    /**
      * An [account token](https://stripe.com/docs/api#create_account_token), used to securely
      * provide details to the account.
      */
@@ -307,6 +228,32 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     /**
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * AccountUpdateParams#expand} for the field documentation.
+     */
+    public Builder addExpand(String element) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * AccountUpdateParams#expand} for the field documentation.
+     */
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
      * A card or bank account to attach to the account. You can provide either a token, like the
      * ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary, as
      * documented in the `external_account` parameter for [bank
@@ -331,6 +278,58 @@ public class AccountUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
+     * AccountUpdateParams#metadata} for the field documentation.
+     */
+    public Builder putMetadata(String key, String value) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link AccountUpdateParams#metadata} for the field documentation.
+     */
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.putAll(map);
+      return this;
+    }
+
+    /**
+     * Add an element to `requestedCapabilities` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link AccountUpdateParams#requestedCapabilities} for the field documentation.
+     */
+    public Builder addRequestedCapability(RequestedCapability element) {
+      if (this.requestedCapabilities == null) {
+        this.requestedCapabilities = new ArrayList<>();
+      }
+      this.requestedCapabilities.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `requestedCapabilities` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link AccountUpdateParams#requestedCapabilities} for the field documentation.
+     */
+    public Builder addAllRequestedCapability(List<RequestedCapability> elements) {
+      if (this.requestedCapabilities == null) {
+        this.requestedCapabilities = new ArrayList<>();
+      }
+      this.requestedCapabilities.addAll(elements);
+      return this;
+    }
+
     /** Options for customizing how the account functions within Stripe. */
     public Builder setSettings(Settings settings) {
       this.settings = settings;
@@ -347,7 +346,6 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class BusinessProfile {
     /**
      * The merchant category code for the account. MCCs are used to classify businesses based on the
@@ -481,7 +479,6 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class Company {
     /** The company's primary address. */
     @SerializedName("address")
@@ -618,6 +615,12 @@ public class AccountUpdateParams extends ApiRequestParams {
             this.vatId);
       }
 
+      /** The company's primary address. */
+      public Builder setAddress(Address address) {
+        this.address = address;
+        return this;
+      }
+
       /** The Kana variation of the company's primary address (Japan only). */
       public Builder setAddressKana(AddressKana addressKana) {
         this.addressKana = addressKana;
@@ -627,12 +630,6 @@ public class AccountUpdateParams extends ApiRequestParams {
       /** The Kanji variation of the company's primary address (Japan only). */
       public Builder setAddressKanji(AddressKanji addressKanji) {
         this.addressKanji = addressKanji;
-        return this;
-      }
-
-      /** The company's primary address. */
-      public Builder setAddress(Address address) {
-        this.address = address;
         return this;
       }
 
@@ -648,6 +645,12 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** The company's legal name. */
+      public Builder setName(String name) {
+        this.name = name;
+        return this;
+      }
+
       /** The Kana variation of the company's legal name (Japan only). */
       public Builder setNameKana(String nameKana) {
         this.nameKana = nameKana;
@@ -657,12 +660,6 @@ public class AccountUpdateParams extends ApiRequestParams {
       /** The Kanji variation of the company's legal name (Japan only). */
       public Builder setNameKanji(String nameKanji) {
         this.nameKanji = nameKanji;
-        return this;
-      }
-
-      /** The company's legal name. */
-      public Builder setName(String name) {
-        this.name = name;
         return this;
       }
 
@@ -682,12 +679,6 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The jurisdiction in which the `tax_id` is registered (Germany-based companies only). */
-      public Builder setTaxIdRegistrar(String taxIdRegistrar) {
-        this.taxIdRegistrar = taxIdRegistrar;
-        return this;
-      }
-
       /**
        * The business ID number of the company, as appropriate for the company’s country. (Examples
        * are an Employer ID Number in the U.S., a Business Number in Canada, or a Company Number in
@@ -698,6 +689,12 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** The jurisdiction in which the `tax_id` is registered (Germany-based companies only). */
+      public Builder setTaxIdRegistrar(String taxIdRegistrar) {
+        this.taxIdRegistrar = taxIdRegistrar;
+        return this;
+      }
+
       /** The VAT number of the company. */
       public Builder setVatId(String vatId) {
         this.vatId = vatId;
@@ -705,7 +702,6 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
     }
 
-    @Getter
     public static class Address {
       /** City, district, suburb, town, or village. */
       @SerializedName("city")
@@ -813,7 +809,6 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
     }
 
-    @Getter
     public static class AddressKana {
       /** City or ward. */
       @SerializedName("city")
@@ -941,7 +936,6 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
     }
 
-    @Getter
     public static class AddressKanji {
       /** City or ward. */
       @SerializedName("city")
@@ -1070,7 +1064,6 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class Individual {
     /** The individual's primary address. */
     @SerializedName("address")
@@ -1256,29 +1249,9 @@ public class AccountUpdateParams extends ApiRequestParams {
             this.verification);
       }
 
-      /**
-       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link Individual#metadata} for the field documentation.
-       */
-      public Builder putAllMetadata(Map<String, String> map) {
-        if (this.metadata == null) {
-          this.metadata = new HashMap<>();
-        }
-        this.metadata.putAll(map);
-        return this;
-      }
-
-      /**
-       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * Individual#metadata} for the field documentation.
-       */
-      public Builder putMetadata(String key, String value) {
-        if (this.metadata == null) {
-          this.metadata = new HashMap<>();
-        }
-        this.metadata.put(key, value);
+      /** The individual's primary address. */
+      public Builder setAddress(Address address) {
+        this.address = address;
         return this;
       }
 
@@ -1294,12 +1267,6 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The individual's primary address. */
-      public Builder setAddress(Address address) {
-        this.address = address;
-        return this;
-      }
-
       /** The individual's date of birth. */
       public Builder setDob(Dob dob) {
         this.dob = dob;
@@ -1308,6 +1275,12 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       public Builder setEmail(String email) {
         this.email = email;
+        return this;
+      }
+
+      /** The individual's first name. */
+      public Builder setFirstName(String firstName) {
+        this.firstName = firstName;
         return this;
       }
 
@@ -1320,12 +1293,6 @@ public class AccountUpdateParams extends ApiRequestParams {
       /** The Kanji variation of the individual's first name (Japan only). */
       public Builder setFirstNameKanji(String firstNameKanji) {
         this.firstNameKanji = firstNameKanji;
-        return this;
-      }
-
-      /** The individual's first name. */
-      public Builder setFirstName(String firstName) {
-        this.firstName = firstName;
         return this;
       }
 
@@ -1346,6 +1313,12 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** The individual's last name. */
+      public Builder setLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+      }
+
       /** The Kana varation of the individual's last name (Japan only). */
       public Builder setLastNameKana(String lastNameKana) {
         this.lastNameKana = lastNameKana;
@@ -1358,15 +1331,35 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The individual's last name. */
-      public Builder setLastName(String lastName) {
-        this.lastName = lastName;
-        return this;
-      }
-
       /** The individual's maiden name. */
       public Builder setMaidenName(String maidenName) {
         this.maidenName = maidenName;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * Individual#metadata} for the field documentation.
+       */
+      public Builder putMetadata(String key, String value) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link Individual#metadata} for the field documentation.
+       */
+      public Builder putAllMetadata(Map<String, String> map) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.putAll(map);
         return this;
       }
 
@@ -1389,7 +1382,6 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
     }
 
-    @Getter
     public static class Address {
       /** City, district, suburb, town, or village. */
       @SerializedName("city")
@@ -1497,7 +1489,6 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
     }
 
-    @Getter
     public static class AddressKana {
       /** City or ward. */
       @SerializedName("city")
@@ -1625,7 +1616,6 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
     }
 
-    @Getter
     public static class AddressKanji {
       /** City or ward. */
       @SerializedName("city")
@@ -1753,7 +1743,6 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
     }
 
-    @Getter
     public static class Dob {
       /** The day of birth, between 1 and 31. */
       @SerializedName("day")
@@ -1809,7 +1798,6 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
     }
 
-    @Getter
     public static class Verification {
       /** An identifying document, either a passport or local ID card. */
       @SerializedName("document")
@@ -1838,7 +1826,6 @@ public class AccountUpdateParams extends ApiRequestParams {
         }
       }
 
-      @Getter
       public static class Document {
         /**
          * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
@@ -1896,7 +1883,6 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class Settings {
     /**
      * Settings used to apply the account's branding to email receipts, invoices, Checkout, and
@@ -1971,7 +1957,6 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
     }
 
-    @Getter
     public static class Branding {
       /**
        * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) An icon for the
@@ -2041,7 +2026,6 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
     }
 
-    @Getter
     public static class CardPayments {
       /**
        * Automatically declines certain charge types regardless of whether the card issuer accepted
@@ -2099,7 +2083,6 @@ public class AccountUpdateParams extends ApiRequestParams {
         }
       }
 
-      @Getter
       public static class DeclineOn {
         /**
          * Whether Stripe automatically declines charges with an incorrect ZIP or postal code. This
@@ -2157,7 +2140,6 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
     }
 
-    @Getter
     public static class Payments {
       /**
        * The default text that appears on credit card statements when a charge is made. This field
@@ -2193,7 +2175,6 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
     }
 
-    @Getter
     public static class Payouts {
       /**
        * A Boolean indicating whether Stripe should try to reclaim negative balances from an
@@ -2272,7 +2253,6 @@ public class AccountUpdateParams extends ApiRequestParams {
         }
       }
 
-      @Getter
       public static class Schedule {
         /**
          * The number of days charge funds are held before being paid out. May also be set to
@@ -2444,7 +2424,6 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
   }
 
-  @Getter
   public static class TosAcceptance {
     /**
      * The Unix timestamp marking when the account representative accepted the Stripe Services

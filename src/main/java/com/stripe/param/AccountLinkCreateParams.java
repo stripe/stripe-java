@@ -8,7 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 import lombok.Getter;
 
-@Getter
 public class AccountLinkCreateParams extends ApiRequestParams {
   /** The identifier of the account to create an account link for. */
   @SerializedName("account")
@@ -78,16 +77,18 @@ public class AccountLinkCreateParams extends ApiRequestParams {
           this.account, this.collect, this.expand, this.failureUrl, this.successUrl, this.type);
     }
 
+    /** The identifier of the account to create an account link for. */
+    public Builder setAccount(String account) {
+      this.account = account;
+      return this;
+    }
+
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * AccountLinkCreateParams#expand} for the field documentation.
+     * The information the platform wants to collect from users up-front. Possible values are
+     * `currently_due` and `eventually_due`.
      */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
+    public Builder setCollect(Collect collect) {
+      this.collect = collect;
       return this;
     }
 
@@ -104,18 +105,16 @@ public class AccountLinkCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The identifier of the account to create an account link for. */
-    public Builder setAccount(String account) {
-      this.account = account;
-      return this;
-    }
-
     /**
-     * The information the platform wants to collect from users up-front. Possible values are
-     * `currently_due` and `eventually_due`.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * AccountLinkCreateParams#expand} for the field documentation.
      */
-    public Builder setCollect(Collect collect) {
-      this.collect = collect;
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
       return this;
     }
 

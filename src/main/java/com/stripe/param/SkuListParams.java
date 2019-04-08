@@ -8,9 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import lombok.Getter;
 
-@Getter
 public class SkuListParams extends ApiRequestParams {
   /**
    * Only return SKUs that are active or inactive (e.g., pass `false` to list all inactive
@@ -131,67 +129,11 @@ public class SkuListParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * SkuListParams#expand} for the field documentation.
+     * Only return SKUs that are active or inactive (e.g., pass `false` to list all inactive
+     * products).
      */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
-      return this;
-    }
-
-    /**
-     * Add all elements to `ids` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link SkuListParams#ids}
-     * for the field documentation.
-     */
-    public Builder addAllId(List<String> elements) {
-      if (this.ids == null) {
-        this.ids = new ArrayList<>();
-      }
-      this.ids.addAll(elements);
-      return this;
-    }
-
-    /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * SkuListParams#expand} for the field documentation.
-     */
-    public Builder addExpand(String element) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.add(element);
-      return this;
-    }
-
-    /**
-     * Add an element to `ids` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link SkuListParams#ids}
-     * for the field documentation.
-     */
-    public Builder addId(String element) {
-      if (this.ids == null) {
-        this.ids = new ArrayList<>();
-      }
-      this.ids.add(element);
-      return this;
-    }
-
-    /**
-     * Add all map key/value pairs to `attributes` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link SkuListParams#attributes} for the field documentation.
-     */
-    public Builder putAllAttribute(Map<String, String> map) {
-      if (this.attributes == null) {
-        this.attributes = new HashMap<>();
-      }
-      this.attributes.putAll(map);
+    public Builder setActive(Boolean active) {
+      this.active = active;
       return this;
     }
 
@@ -209,11 +151,15 @@ public class SkuListParams extends ApiRequestParams {
     }
 
     /**
-     * Only return SKUs that are active or inactive (e.g., pass `false` to list all inactive
-     * products).
+     * Add all map key/value pairs to `attributes` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link SkuListParams#attributes} for the field documentation.
      */
-    public Builder setActive(Boolean active) {
-      this.active = active;
+    public Builder putAllAttribute(Map<String, String> map) {
+      if (this.attributes == null) {
+        this.attributes = new HashMap<>();
+      }
+      this.attributes.putAll(map);
       return this;
     }
 
@@ -225,6 +171,58 @@ public class SkuListParams extends ApiRequestParams {
      */
     public Builder setEndingBefore(String endingBefore) {
       this.endingBefore = endingBefore;
+      return this;
+    }
+
+    /**
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SkuListParams#expand} for the field documentation.
+     */
+    public Builder addExpand(String element) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SkuListParams#expand} for the field documentation.
+     */
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add an element to `ids` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link SkuListParams#ids}
+     * for the field documentation.
+     */
+    public Builder addId(String element) {
+      if (this.ids == null) {
+        this.ids = new ArrayList<>();
+      }
+      this.ids.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `ids` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link SkuListParams#ids}
+     * for the field documentation.
+     */
+    public Builder addAllId(List<String> elements) {
+      if (this.ids == null) {
+        this.ids = new ArrayList<>();
+      }
+      this.ids.addAll(elements);
       return this;
     }
 

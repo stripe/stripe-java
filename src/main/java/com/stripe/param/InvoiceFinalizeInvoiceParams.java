@@ -6,9 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import java.util.ArrayList;
 import java.util.List;
-import lombok.Getter;
 
-@Getter
 public class InvoiceFinalizeInvoiceParams extends ApiRequestParams {
   /**
    * Controls whether Stripe will perform [automatic
@@ -42,15 +40,12 @@ public class InvoiceFinalizeInvoiceParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * InvoiceFinalizeInvoiceParams#expand} for the field documentation.
+     * Controls whether Stripe will perform [automatic
+     * collection](https://stripe.com/docs/billing/invoices/workflow/#auto_advance) of the invoice.
+     * When `false`, the invoice's state will not automatically advance without an explicit action.
      */
-    public Builder addAllExpand(List<String> elements) {
-      if (this.expand == null) {
-        this.expand = new ArrayList<>();
-      }
-      this.expand.addAll(elements);
+    public Builder setAutoAdvance(Boolean autoAdvance) {
+      this.autoAdvance = autoAdvance;
       return this;
     }
 
@@ -68,12 +63,15 @@ public class InvoiceFinalizeInvoiceParams extends ApiRequestParams {
     }
 
     /**
-     * Controls whether Stripe will perform [automatic
-     * collection](https://stripe.com/docs/billing/invoices/workflow/#auto_advance) of the invoice.
-     * When `false`, the invoice's state will not automatically advance without an explicit action.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * InvoiceFinalizeInvoiceParams#expand} for the field documentation.
      */
-    public Builder setAutoAdvance(Boolean autoAdvance) {
-      this.autoAdvance = autoAdvance;
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
       return this;
     }
   }
