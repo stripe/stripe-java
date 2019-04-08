@@ -1,7 +1,6 @@
 package com.stripe.functional;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
@@ -55,8 +54,6 @@ public class TokenTest extends BaseStripeTest {
     TokenCreateParams createParams = TokenCreateParams.builder()
         .setCard(card)
         .build();
-
-    assertTrue(createParams.getCard() instanceof TokenCreateParams.Card);
 
     final Token token = Token.create(createParams, RequestOptions.getDefault());
 

@@ -158,8 +158,6 @@ public class PaymentIntentTest extends BaseStripeTest {
     PaymentIntentListParams listParams = PaymentIntentListParams.builder()
         .setLimit(1L).build();
 
-    assertEquals(Long.valueOf(1L), listParams.getLimit());
-
     final PaymentIntentCollection paymentIntents = PaymentIntent.list(listParams,
         RequestOptions.getDefault());
 
