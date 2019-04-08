@@ -80,6 +80,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
   String source;
 
   /**
+   * Extra information about a PaymentIntent. This will appear on your customer's statement when
+   * this PaymentIntent succeeds in creating a charge.
+   */
+  @SerializedName("statement_descriptor")
+  String statementDescriptor;
+
+  /**
    * A string that identifies the resulting payment as part of a group. `transfer_group` may only be
    * provided if it has not been set. See the PaymentIntents [Connect usage
    * guide](https://stripe.com/docs/payments/payment-intents/usage#connect) for details.
@@ -101,6 +108,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       Boolean savePaymentMethod,
       Object shipping,
       String source,
+      String statementDescriptor,
       String transferGroup) {
     this.amount = amount;
     this.applicationFeeAmount = applicationFeeAmount;
@@ -115,6 +123,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     this.savePaymentMethod = savePaymentMethod;
     this.shipping = shipping;
     this.source = source;
+    this.statementDescriptor = statementDescriptor;
     this.transferGroup = transferGroup;
   }
 
@@ -149,6 +158,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     private String source;
 
+    private String statementDescriptor;
+
     private String transferGroup;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -167,6 +178,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           this.savePaymentMethod,
           this.shipping,
           this.source,
+          this.statementDescriptor,
           this.transferGroup);
     }
 
@@ -334,6 +346,15 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     /** ID of the Source object to attach to this PaymentIntent. */
     public Builder setSource(String source) {
       this.source = source;
+      return this;
+    }
+
+    /**
+     * Extra information about a PaymentIntent. This will appear on your customer's statement when
+     * this PaymentIntent succeeds in creating a charge.
+     */
+    public Builder setStatementDescriptor(String statementDescriptor) {
+      this.statementDescriptor = statementDescriptor;
       return this;
     }
 
