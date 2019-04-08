@@ -7,6 +7,7 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.BalanceRetrieveParams;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -78,6 +79,18 @@ public class Balance extends ApiResource {
    * balances</a>.
    */
   public static Balance retrieve(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/balance");
+    return request(ApiResource.RequestMethod.GET, url, params, Balance.class, options);
+  }
+
+  /**
+   * Retrieves the current account balance, based on the authentication that was used to make the
+   * request. For a sample request, see <a
+   * href="/docs/connect/account-balances#accounting-for-negative-balances">Accounting for negative
+   * balances</a>.
+   */
+  public static Balance retrieve(BalanceRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/balance");
     return request(ApiResource.RequestMethod.GET, url, params, Balance.class, options);

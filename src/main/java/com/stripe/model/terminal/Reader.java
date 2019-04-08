@@ -8,6 +8,11 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.terminal.ReaderCreateParams;
+import com.stripe.param.terminal.ReaderDeleteParams;
+import com.stripe.param.terminal.ReaderListParams;
+import com.stripe.param.terminal.ReaderRetrieveParams;
+import com.stripe.param.terminal.ReaderUpdateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -77,6 +82,25 @@ public class Reader extends ApiResource implements HasId {
     return request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
   }
 
+  /**
+   * Updates a <code>Reader</code> object by setting the values of the parameters passed. Any
+   * parameters not provided will be left unchanged.
+   */
+  public Reader update(ReaderUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates a <code>Reader</code> object by setting the values of the parameters passed. Any
+   * parameters not provided will be left unchanged.
+   */
+  public Reader update(ReaderUpdateParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/terminal/readers/%s", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
+  }
+
   /** Retrieves a <code>Reader</code> object. */
   public static Reader retrieve(String reader) throws StripeException {
     return retrieve(reader, (Map<String, Object>) null, (RequestOptions) null);
@@ -96,6 +120,15 @@ public class Reader extends ApiResource implements HasId {
     return request(ApiResource.RequestMethod.GET, url, params, Reader.class, options);
   }
 
+  /** Retrieves a <code>Reader</code> object. */
+  public static Reader retrieve(String reader, ReaderRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/terminal/readers/%s", reader));
+    return request(ApiResource.RequestMethod.GET, url, params, Reader.class, options);
+  }
+
   /** Creates a new <code>Reader</code> object. */
   public static Reader create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -108,6 +141,18 @@ public class Reader extends ApiResource implements HasId {
     return request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
   }
 
+  /** Creates a new <code>Reader</code> object. */
+  public static Reader create(ReaderCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a new <code>Reader</code> object. */
+  public static Reader create(ReaderCreateParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/readers");
+    return request(ApiResource.RequestMethod.POST, url, params, Reader.class, options);
+  }
+
   /** Returns a list of <code>Reader</code> objects. */
   public static ReaderCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
@@ -115,6 +160,18 @@ public class Reader extends ApiResource implements HasId {
 
   /** Returns a list of <code>Reader</code> objects. */
   public static ReaderCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/readers");
+    return requestCollection(url, params, ReaderCollection.class, options);
+  }
+
+  /** Returns a list of <code>Reader</code> objects. */
+  public static ReaderCollection list(ReaderListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of <code>Reader</code> objects. */
+  public static ReaderCollection list(ReaderListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/readers");
     return requestCollection(url, params, ReaderCollection.class, options);
@@ -137,6 +194,19 @@ public class Reader extends ApiResource implements HasId {
 
   /** Deletes a <code>Reader</code> object. */
   public Reader delete(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/terminal/readers/%s", this.getId()));
+    return request(ApiResource.RequestMethod.DELETE, url, params, Reader.class, options);
+  }
+
+  /** Deletes a <code>Reader</code> object. */
+  public Reader delete(ReaderDeleteParams params) throws StripeException {
+    return delete(params, (RequestOptions) null);
+  }
+
+  /** Deletes a <code>Reader</code> object. */
+  public Reader delete(ReaderDeleteParams params, RequestOptions options) throws StripeException {
     String url =
         String.format(
             "%s%s", Stripe.getApiBase(), String.format("/v1/terminal/readers/%s", this.getId()));

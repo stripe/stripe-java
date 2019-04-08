@@ -7,6 +7,8 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.OrderReturnListParams;
+import com.stripe.param.OrderReturnRetrieveParams;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -123,6 +125,24 @@ public class OrderReturn extends ApiResource implements HasId {
   }
 
   /**
+   * Returns a list of your order returns. The returns are returned sorted by creation date, with
+   * the most recently created return appearing first.
+   */
+  public static OrderReturnCollection list(OrderReturnListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of your order returns. The returns are returned sorted by creation date, with
+   * the most recently created return appearing first.
+   */
+  public static OrderReturnCollection list(OrderReturnListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/order_returns");
+    return requestCollection(url, params, OrderReturnCollection.class, options);
+  }
+
+  /**
    * Retrieves the details of an existing order return. Supply the unique order ID from either an
    * order return creation request or the order return list, and Stripe will return the
    * corresponding order information.
@@ -147,6 +167,18 @@ public class OrderReturn extends ApiResource implements HasId {
    */
   public static OrderReturn retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/order_returns/%s", id));
+    return request(ApiResource.RequestMethod.GET, url, params, OrderReturn.class, options);
+  }
+
+  /**
+   * Retrieves the details of an existing order return. Supply the unique order ID from either an
+   * order return creation request or the order return list, and Stripe will return the
+   * corresponding order information.
+   */
+  public static OrderReturn retrieve(
+      String id, OrderReturnRetrieveParams params, RequestOptions options) throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/order_returns/%s", id));
     return request(ApiResource.RequestMethod.GET, url, params, OrderReturn.class, options);

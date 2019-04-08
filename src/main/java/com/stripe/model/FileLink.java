@@ -7,6 +7,10 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.FileLinkCreateParams;
+import com.stripe.param.FileLinkListParams;
+import com.stripe.param.FileLinkRetrieveParams;
+import com.stripe.param.FileLinkUpdateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -98,6 +102,14 @@ public class FileLink extends ApiResource implements HasId, MetadataStore<FileLi
     return request(ApiResource.RequestMethod.GET, url, params, FileLink.class, options);
   }
 
+  /** Retrieves the file link with the given ID. */
+  public static FileLink retrieve(
+      String link, FileLinkRetrieveParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/file_links/%s", link));
+    return request(ApiResource.RequestMethod.GET, url, params, FileLink.class, options);
+  }
+
   /** Creates a new file link object. */
   public static FileLink create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -105,6 +117,18 @@ public class FileLink extends ApiResource implements HasId, MetadataStore<FileLi
 
   /** Creates a new file link object. */
   public static FileLink create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/file_links");
+    return request(ApiResource.RequestMethod.POST, url, params, FileLink.class, options);
+  }
+
+  /** Creates a new file link object. */
+  public static FileLink create(FileLinkCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a new file link object. */
+  public static FileLink create(FileLinkCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/file_links");
     return request(ApiResource.RequestMethod.POST, url, params, FileLink.class, options);
@@ -126,6 +150,20 @@ public class FileLink extends ApiResource implements HasId, MetadataStore<FileLi
     return request(ApiResource.RequestMethod.POST, url, params, FileLink.class, options);
   }
 
+  /** Updates an existing file link object. Expired links can no longer be updated. */
+  public FileLink update(FileLinkUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /** Updates an existing file link object. Expired links can no longer be updated. */
+  public FileLink update(FileLinkUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/file_links/%s", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, FileLink.class, options);
+  }
+
   /** Returns a list of file links. */
   public static FileLinkCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
@@ -133,6 +171,18 @@ public class FileLink extends ApiResource implements HasId, MetadataStore<FileLi
 
   /** Returns a list of file links. */
   public static FileLinkCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/file_links");
+    return requestCollection(url, params, FileLinkCollection.class, options);
+  }
+
+  /** Returns a list of file links. */
+  public static FileLinkCollection list(FileLinkListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of file links. */
+  public static FileLinkCollection list(FileLinkListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/file_links");
     return requestCollection(url, params, FileLinkCollection.class, options);
