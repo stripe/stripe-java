@@ -7,6 +7,11 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.PayoutCancelParams;
+import com.stripe.param.PayoutCreateParams;
+import com.stripe.param.PayoutListParams;
+import com.stripe.param.PayoutRetrieveParams;
+import com.stripe.param.PayoutUpdateParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -117,10 +122,7 @@ public class Payout extends ApiResource implements BalanceTransactionSource, Met
   @SerializedName("object")
   String object;
 
-  /**
-   * The source balance this payout came from. One of `card`, `financing`, `bank_account`, or
-   * `alipay_account`.
-   */
+  /** The source balance this payout came from. One of `card` or `bank_account`. */
   @SerializedName("source_type")
   String sourceType;
 
@@ -232,6 +234,18 @@ public class Payout extends ApiResource implements BalanceTransactionSource, Met
   }
 
   /**
+   * Retrieves the details of an existing payout. Supply the unique payout ID from either a payout
+   * creation request or the payout list, and Stripe will return the corresponding payout
+   * information.
+   */
+  public static Payout retrieve(String payout, PayoutRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/payouts/%s", payout));
+    return request(ApiResource.RequestMethod.GET, url, params, Payout.class, options);
+  }
+
+  /**
    * Returns a list of existing payouts sent to third-party bank accounts or that Stripe has sent
    * you. The payouts are returned in sorted order, with the most recently created payouts appearing
    * first.
@@ -246,6 +260,26 @@ public class Payout extends ApiResource implements BalanceTransactionSource, Met
    * first.
    */
   public static PayoutCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payouts");
+    return requestCollection(url, params, PayoutCollection.class, options);
+  }
+
+  /**
+   * Returns a list of existing payouts sent to third-party bank accounts or that Stripe has sent
+   * you. The payouts are returned in sorted order, with the most recently created payouts appearing
+   * first.
+   */
+  public static PayoutCollection list(PayoutListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of existing payouts sent to third-party bank accounts or that Stripe has sent
+   * you. The payouts are returned in sorted order, with the most recently created payouts appearing
+   * first.
+   */
+  public static PayoutCollection list(PayoutListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payouts");
     return requestCollection(url, params, PayoutCollection.class, options);
@@ -286,6 +320,40 @@ public class Payout extends ApiResource implements BalanceTransactionSource, Met
   }
 
   /**
+   * To send funds to your own bank account, you create a new payout object. Your <a
+   * href="#balance">Stripe balance</a> must be able to cover the payout amount, or you’ll receive
+   * an “Insufficient Funds” error.
+   *
+   * <p>If your API key is in test mode, money won’t actually be sent, though everything else will
+   * occur as if in live mode.
+   *
+   * <p>If you are creating a manual payout on a Stripe account that uses multiple payment source
+   * types, you’ll need to specify the source type balance that the payout should draw from. The <a
+   * href="#balance_object">balance object</a> details available and pending amounts by source type.
+   */
+  public static Payout create(PayoutCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * To send funds to your own bank account, you create a new payout object. Your <a
+   * href="#balance">Stripe balance</a> must be able to cover the payout amount, or you’ll receive
+   * an “Insufficient Funds” error.
+   *
+   * <p>If your API key is in test mode, money won’t actually be sent, though everything else will
+   * occur as if in live mode.
+   *
+   * <p>If you are creating a manual payout on a Stripe account that uses multiple payment source
+   * types, you’ll need to specify the source type balance that the payout should draw from. The <a
+   * href="#balance_object">balance object</a> details available and pending amounts by source type.
+   */
+  public static Payout create(PayoutCreateParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payouts");
+    return request(ApiResource.RequestMethod.POST, url, params, Payout.class, options);
+  }
+
+  /**
    * Updates the specified payout by setting the values of the parameters passed. Any parameters not
    * provided will be left unchanged. This request accepts only the metadata as arguments.
    */
@@ -300,6 +368,24 @@ public class Payout extends ApiResource implements BalanceTransactionSource, Met
    */
   @Override
   public Payout update(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/payouts/%s", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Payout.class, options);
+  }
+
+  /**
+   * Updates the specified payout by setting the values of the parameters passed. Any parameters not
+   * provided will be left unchanged. This request accepts only the metadata as arguments.
+   */
+  public Payout update(PayoutUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates the specified payout by setting the values of the parameters passed. Any parameters not
+   * provided will be left unchanged. This request accepts only the metadata as arguments.
+   */
+  public Payout update(PayoutUpdateParams params, RequestOptions options) throws StripeException {
     String url =
         String.format("%s%s", Stripe.getApiBase(), String.format("/v1/payouts/%s", this.getId()));
     return request(ApiResource.RequestMethod.POST, url, params, Payout.class, options);
@@ -334,6 +420,25 @@ public class Payout extends ApiResource implements BalanceTransactionSource, Met
    * refunded to your available balance. You may not cancel automatic Stripe payouts.
    */
   public Payout cancel(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/payouts/%s/cancel", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Payout.class, options);
+  }
+
+  /**
+   * A previously created payout can be canceled if it has not yet been paid out. Funds will be
+   * refunded to your available balance. You may not cancel automatic Stripe payouts.
+   */
+  public Payout cancel(PayoutCancelParams params) throws StripeException {
+    return cancel(params, (RequestOptions) null);
+  }
+
+  /**
+   * A previously created payout can be canceled if it has not yet been paid out. Funds will be
+   * refunded to your available balance. You may not cancel automatic Stripe payouts.
+   */
+  public Payout cancel(PayoutCancelParams params, RequestOptions options) throws StripeException {
     String url =
         String.format(
             "%s%s", Stripe.getApiBase(), String.format("/v1/payouts/%s/cancel", this.getId()));

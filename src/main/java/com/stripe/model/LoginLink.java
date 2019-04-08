@@ -7,6 +7,7 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.LoginLinkCreateOnAccountParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -36,6 +37,21 @@ public class LoginLink extends ApiResource {
    */
   public static LoginLink createOnAccount(
       String account, Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/accounts/%s/login_links", account));
+    return request(ApiResource.RequestMethod.POST, url, params, LoginLink.class, options);
+  }
+
+  /**
+   * Creates a single-use login link for an Express account to access their Stripe dashboard.
+   *
+   * <p><strong>You may only create login links for <a href="/docs/connect/express-accounts">Express
+   * accounts</a> connected to your platform</strong>.
+   */
+  public static LoginLink createOnAccount(
+      String account, LoginLinkCreateOnAccountParams params, RequestOptions options)
+      throws StripeException {
     String url =
         String.format(
             "%s%s", Stripe.getApiBase(), String.format("/v1/accounts/%s/login_links", account));
