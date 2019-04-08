@@ -41,15 +41,19 @@ public class SkuTest extends BaseStripeTest {
   }
 
   @Test
-  public void testCreateWithParams() throws StripeException {
+  public void testCreateWithTypedParams() throws StripeException {
     SkuCreateParams.Inventory inventory = SkuCreateParams.Inventory.builder()
         .setType(SkuCreateParams.Inventory.Type.BUCKET)
         .setValue(SkuCreateParams.Inventory.Value.LIMITED).build();
 
+    Map<String, String> additionalAttributes = new HashMap<>();
+    additionalAttributes.put("attr2", "val2");
+
     SkuCreateParams typedParams = SkuCreateParams.builder()
         .setActive(true)
+        // support both individual key/value entry and the whole map
         .putAttribute("attr1", "val1")
-        .putAttribute("attr2", "val2")
+        .putAllAttribute(additionalAttributes)
         .setPrice(499L)
         .setCurrency("usd")
         .setInventory(inventory)
