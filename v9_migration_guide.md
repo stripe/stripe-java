@@ -76,7 +76,8 @@ When parameters require enums, there are specific enums for each parameter.
 This has been a long-standing [ask](https://github.com/stripe/stripe-java/issues/211) from the community, so we thank you for your patience!
 
 ## Event deserialization
-* Currently, untyped map `Event#previousAttributes` may contain value `Object[]` to represent a list. Now `List<Object>` is the deserialized object for list content.
+* Currently, untyped map `Event#previousAttributes` may contain value `Object[]` to represent a 
+list. Now `List<Object>` is the deserialized object for list content. This addresses the [issue](https://github.com/stripe/stripe-java/issues/605).
 * Currently, `EventDataObjectDeserializer#getObject` returns `StripeObject` which can be `null` 
 when there is API version mismatch between `stripe-java` pinned version `Stripe#API_VERSION` and 
 the event version `Event#apiVersion`. Now, with jdk8 and above, `Optional<StripeObject>` is 
