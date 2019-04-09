@@ -1,7 +1,7 @@
 package com.stripe.param;
 
-import static org.junit.jupiter.api.Assertions.assertSame;
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertSame;
 
 import java.io.File;
 import java.io.FileInputStream;

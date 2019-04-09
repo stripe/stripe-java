@@ -3,6 +3,7 @@ package com.stripe.functional;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.google.common.collect.ImmutableMap;
 import com.stripe.BaseStripeTest;
@@ -41,6 +42,14 @@ public class EphemeralKeyTest extends BaseStripeTest {
         null,
         options
     );
+  }
+
+  @Test
+  public void testThrowExceptionCreateWithNullTypedParams() {
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+      EphemeralKey.create((EphemeralKeyCreateParams) null, RequestOptions.getDefault());
+    });
+    assertTrue(exception.getMessage().contains("Found null params"));
   }
 
   @Test

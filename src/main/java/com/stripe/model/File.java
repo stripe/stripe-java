@@ -92,10 +92,8 @@ public class File extends ApiResource implements HasId {
    */
   public static File create(FileCreateParams params, RequestOptions options)
       throws StripeException {
-    return create(
-        params != null ? params.toMap() : (Map<String, Object>) null,
-        options
-    );
+    checkNullTypedParams(classUrl(File.class, Stripe.getUploadBase()), params);
+    return create(params.toMap(), options);
   }
 
   /**

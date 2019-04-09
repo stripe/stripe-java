@@ -1,12 +1,15 @@
 package com.stripe.functional;
 
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.google.common.collect.ImmutableMap;
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.FileCollection;
 import com.stripe.net.ApiResource;
+import com.stripe.net.RequestOptions;
 import com.stripe.param.FileCreateParams;
 import com.stripe.param.FileListParams;
 
@@ -60,6 +63,14 @@ public class FileTest extends BaseStripeTest {
         ApiResource.RequestType.MULTIPART,
         null
     );
+  }
+
+  @Test
+  public void testThrowExceptionCreateWithNullTypedParams() {
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+      com.stripe.model.File.create((FileCreateParams) null, RequestOptions.getDefault());
+    });
+    assertTrue(exception.getMessage().contains("Found null params"));
   }
 
   @Test

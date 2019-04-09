@@ -60,9 +60,8 @@ public class EphemeralKey extends ApiResource implements HasId {
    */
   public static EphemeralKey create(EphemeralKeyCreateParams params, RequestOptions options)
       throws StripeException {
-    return create(
-        params != null ? params.toMap(): (Map<String, Object>) null,
-        options);
+    checkNullTypedParams(classUrl(EphemeralKey.class), params);
+    return create(params.toMap(), options);
   }
 
   /**
