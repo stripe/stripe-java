@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.EphemeralKeyCreateParams;
 
 import java.util.List;
 import java.util.Map;
@@ -48,6 +49,21 @@ public class EphemeralKey extends ApiResource implements HasId {
   List<AssociatedObject> associatedObjects;
 
   transient String rawJson;
+
+  /**
+   * Creates an ephemeral API key for a given resource.
+   *
+   * @param params request parameters
+   * @param options request options. {@code stripeVersion} is required when creating ephemeral
+   *     keys. it must have non-null {@link RequestOptions#getStripeVersionOverride()}.
+   * @return the new ephemeral key
+   */
+  public static EphemeralKey create(EphemeralKeyCreateParams params, RequestOptions options)
+      throws StripeException {
+    return create(
+        params != null ? params.toMap(): (Map<String, Object>) null,
+        options);
+  }
 
   /**
    * Creates an ephemeral API key for a given resource.
