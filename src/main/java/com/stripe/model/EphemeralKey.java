@@ -1,5 +1,7 @@
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
+
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
@@ -15,18 +17,40 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class EphemeralKey extends ApiResource implements HasId {
-  @Getter(onMethod = @__({@Override})) String id;
-  String object;
+  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  @SerializedName("created")
   Long created;
+
+  /** Time at which the key will expire. Measured in seconds since the Unix epoch. */
+  @SerializedName("expires")
   Long expires;
+
+  /** Unique identifier for the object. */
+  @Getter(onMethod = @__({@Override}))
+  @SerializedName("id")
+  String id;
+
+  /**
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if
+   * the object exists in test mode.
+   */
+  @SerializedName("livemode")
   Boolean livemode;
+
+  /** String representing the object's type. Objects of the same type share the same value. */
+  @SerializedName("object")
+  String object;
+
+  /** The key's secret. You can use this value to make authorized requests to the Stripe API. */
+  @SerializedName("secret")
   String secret;
+
   List<AssociatedObject> associatedObjects;
+
   transient String rawJson;
 
-  // <editor-fold desc="create">
   /**
-   * Creates an ephemeral key.
+   * Creates an ephemeral API key for a given resource.
    *
    * @param params request parameters
    * @param options request options. {@code stripeVersion} is required when creating ephemeral
@@ -43,24 +67,21 @@ public class EphemeralKey extends ApiResource implements HasId {
     return request(RequestMethod.POST, classUrl(EphemeralKey.class), params, EphemeralKey.class,
         options);
   }
-  // </editor-fold>
 
-  // <editor-fold desc="delete">
   /**
-   * Delete an ephemeral key.
+   * Invalidates an ephemeral API key for a given resource.
    */
   public EphemeralKey delete() throws StripeException {
     return delete(null);
   }
 
   /**
-   * Delete an ephemeral key.
+   * Invalidates an ephemeral API key for a given resource.
    */
   public EphemeralKey delete(RequestOptions options) throws StripeException {
     return request(RequestMethod.DELETE, instanceUrl(EphemeralKey.class, this.id),
         (Map<String,Object>) null, EphemeralKey.class, options);
   }
-  // </editor-fold>
 
   @Getter
   @Setter
