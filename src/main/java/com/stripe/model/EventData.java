@@ -2,6 +2,7 @@ package com.stripe.model;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
+import com.google.gson.annotations.SerializedName;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -15,6 +16,7 @@ public class EventData extends StripeObject {
    * Raw JSON object intended to be deserialized as {@code StripeObject}. The deserialization
    * should be deferred to the user. See the now deprecated method {@link EventData#getObject()}.
    */
+  @SerializedName("object")
   JsonObject object;
 
   /**
@@ -23,6 +25,7 @@ public class EventData extends StripeObject {
    * {@code Map<String, Object>}, {@code List<Object>}, and basic Java data types.
    * The array was previously represented as {@code Object[]} in `stripe-java` below v9.x
    */
+  @SerializedName("previous_attributes")
   Map<String, Object> previousAttributes;
 
   /**
