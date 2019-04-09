@@ -80,8 +80,7 @@ public class EventDataObjectDeserializer {
    * (the underlying concrete class for abstract {@code StripeObject}) schema. This is when
    * {@link Event#getApiVersion()} matches {@link Stripe#API_VERSION}. Otherwise, the option is
    * empty.
-   * @return {@code Optional<StripeObject>} that contains stripe object when deserialization is
-   *     safe.
+   * @return {@code Optional} that contains stripe object when deserialization is safe.
    */
   public Optional<StripeObject> getObject() {
     if (object != null) {
