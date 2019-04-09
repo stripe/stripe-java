@@ -7,6 +7,11 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.SubscriptionCancelParams;
+import com.stripe.param.SubscriptionCreateParams;
+import com.stripe.param.SubscriptionListParams;
+import com.stripe.param.SubscriptionRetrieveParams;
+import com.stripe.param.SubscriptionUpdateParams;
 import java.math.BigDecimal;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -97,6 +102,16 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    */
   @SerializedName("days_until_due")
   Long daysUntilDue;
+
+  /**
+   * ID of the default payment method for the subscription. It must belong to the customer
+   * associated with the subscription and be in a chargeable state. If not set, defaults to the
+   * customer's default payment method.
+   */
+  @SerializedName("default_payment_method")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<PaymentMethod> defaultPaymentMethod;
 
   /**
    * ID of the default payment source for the subscription. It must belong to the customer
@@ -243,6 +258,25 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
   }
 
+  /** Get id of expandable `defaultPaymentMethod` object. */
+  public String getDefaultPaymentMethod() {
+    return (this.defaultPaymentMethod != null) ? this.defaultPaymentMethod.getId() : null;
+  }
+
+  public void setDefaultPaymentMethod(String id) {
+    this.defaultPaymentMethod = ApiResource.setExpandableFieldId(id, this.defaultPaymentMethod);
+  }
+
+  /** Get expanded `defaultPaymentMethod`. */
+  public PaymentMethod getDefaultPaymentMethodObject() {
+    return (this.defaultPaymentMethod != null) ? this.defaultPaymentMethod.getExpanded() : null;
+  }
+
+  public void setDefaultPaymentMethodObject(PaymentMethod expandableObject) {
+    this.defaultPaymentMethod =
+        new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
+  }
+
   /** Get id of expandable `defaultSource` object. */
   public String getDefaultSource() {
     return (this.defaultSource != null) ? this.defaultSource.getId() : null;
@@ -298,6 +332,24 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     return requestCollection(url, params, SubscriptionCollection.class, options);
   }
 
+  /**
+   * By default, returns a list of subscriptions that have not been canceled. In order to list
+   * canceled subscriptions, specify <code>status=canceled</code>.
+   */
+  public static SubscriptionCollection list(SubscriptionListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * By default, returns a list of subscriptions that have not been canceled. In order to list
+   * canceled subscriptions, specify <code>status=canceled</code>.
+   */
+  public static SubscriptionCollection list(SubscriptionListParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscriptions");
+    return requestCollection(url, params, SubscriptionCollection.class, options);
+  }
+
   /** Creates a new subscription on an existing customer. */
   public static Subscription create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -305,6 +357,18 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   /** Creates a new subscription on an existing customer. */
   public static Subscription create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscriptions");
+    return request(ApiResource.RequestMethod.POST, url, params, Subscription.class, options);
+  }
+
+  /** Creates a new subscription on an existing customer. */
+  public static Subscription create(SubscriptionCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /** Creates a new subscription on an existing customer. */
+  public static Subscription create(SubscriptionCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscriptions");
     return request(ApiResource.RequestMethod.POST, url, params, Subscription.class, options);
@@ -336,6 +400,30 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     return request(ApiResource.RequestMethod.POST, url, params, Subscription.class, options);
   }
 
+  /**
+   * Updates an existing subscription on a customer to match the specified parameters. When changing
+   * plans or quantities, we will optionally prorate the price we charge next month to make up for
+   * any price changes. To preview how the proration will be calculated, use the <a
+   * href="#upcoming_invoice">upcoming invoice</a> endpoint.
+   */
+  public Subscription update(SubscriptionUpdateParams params) throws StripeException {
+    return update(params, (RequestOptions) null);
+  }
+
+  /**
+   * Updates an existing subscription on a customer to match the specified parameters. When changing
+   * plans or quantities, we will optionally prorate the price we charge next month to make up for
+   * any price changes. To preview how the proration will be calculated, use the <a
+   * href="#upcoming_invoice">upcoming invoice</a> endpoint.
+   */
+  public Subscription update(SubscriptionUpdateParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/subscriptions/%s", this.getId()));
+    return request(ApiResource.RequestMethod.POST, url, params, Subscription.class, options);
+  }
+
   /** Retrieves the subscription with the given ID. */
   public static Subscription retrieve(String subscriptionExposedId) throws StripeException {
     return retrieve(subscriptionExposedId, (Map<String, Object>) null, (RequestOptions) null);
@@ -350,6 +438,17 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   /** Retrieves the subscription with the given ID. */
   public static Subscription retrieve(
       String subscriptionExposedId, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/subscriptions/%s", subscriptionExposedId));
+    return request(ApiResource.RequestMethod.GET, url, params, Subscription.class, options);
+  }
+
+  /** Retrieves the subscription with the given ID. */
+  public static Subscription retrieve(
+      String subscriptionExposedId, SubscriptionRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
         String.format(
@@ -415,6 +514,50 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * for unpaid invoices before allowing the customer to cancel the subscription at all.
    */
   public Subscription cancel(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/subscriptions/%s", this.getId()));
+    return request(ApiResource.RequestMethod.DELETE, url, params, Subscription.class, options);
+  }
+
+  /**
+   * Cancels a customer’s subscription immediately. The customer will not be charged again for the
+   * subscription.
+   *
+   * <p>Note, however, that any pending invoice items that you’ve created will still be charged for
+   * at the end of the period, unless manually <a href="#delete_invoiceitem">deleted</a>. If you’ve
+   * set the subscription to cancel at the end of the period, any pending prorations will also be
+   * left in place and collected at the end of the period. But if the subscription is set to cancel
+   * immediately, pending prorations will be removed.
+   *
+   * <p>By default, upon subscription cancellation, Stripe will stop automatic collection of all
+   * finalized invoices for the customer. This is intended to prevent unexpected payment attempts
+   * after the customer has canceled a subscription. However, you can resume automatic collection of
+   * the invoices manually after subscription cancellation to have us proceed. Or, you could check
+   * for unpaid invoices before allowing the customer to cancel the subscription at all.
+   */
+  public Subscription cancel(SubscriptionCancelParams params) throws StripeException {
+    return cancel(params, (RequestOptions) null);
+  }
+
+  /**
+   * Cancels a customer’s subscription immediately. The customer will not be charged again for the
+   * subscription.
+   *
+   * <p>Note, however, that any pending invoice items that you’ve created will still be charged for
+   * at the end of the period, unless manually <a href="#delete_invoiceitem">deleted</a>. If you’ve
+   * set the subscription to cancel at the end of the period, any pending prorations will also be
+   * left in place and collected at the end of the period. But if the subscription is set to cancel
+   * immediately, pending prorations will be removed.
+   *
+   * <p>By default, upon subscription cancellation, Stripe will stop automatic collection of all
+   * finalized invoices for the customer. This is intended to prevent unexpected payment attempts
+   * after the customer has canceled a subscription. However, you can resume automatic collection of
+   * the invoices manually after subscription cancellation to have us proceed. Or, you could check
+   * for unpaid invoices before allowing the customer to cancel the subscription at all.
+   */
+  public Subscription cancel(SubscriptionCancelParams params, RequestOptions options)
       throws StripeException {
     String url =
         String.format(

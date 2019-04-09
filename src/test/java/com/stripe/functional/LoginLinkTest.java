@@ -1,6 +1,6 @@
 package com.stripe.functional;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
@@ -8,7 +8,8 @@ import com.stripe.model.Account;
 import com.stripe.model.LoginLink;
 import com.stripe.net.ApiResource;
 import java.io.IOException;
-import org.junit.Test;
+import java.util.Map;
+import org.junit.jupiter.api.Test;
 
 public class LoginLinkTest extends BaseStripeTest {
   public static final String ACCOUNT_ID = "acct_123";
@@ -17,7 +18,8 @@ public class LoginLinkTest extends BaseStripeTest {
   public void testCreate() throws IOException, StripeException {
     final Account account = Account.retrieve(ACCOUNT_ID, null);
 
-    final LoginLink link = LoginLink.createOnAccount(ACCOUNT_ID, null, null);
+    final LoginLink link = LoginLink.createOnAccount(ACCOUNT_ID,
+        (Map<String, Object>) null, null);
 
 
     stubRequest(

@@ -164,10 +164,24 @@ public abstract class ApiResource extends StripeObject {
   }
 
   public static <T> T request(ApiResource.RequestMethod method,
+                              String url, ApiRequestParams params, Class<T> clazz,
+                              RequestOptions options) throws StripeException {
+    checkNullTypedParams(url, params);
+    return request(method, url, params.toMap(), clazz, options);
+  }
+
+  public static <T> T request(ApiResource.RequestMethod method,
                 String url, Map<String, Object> params, Class<T> clazz,
                 RequestOptions options) throws StripeException {
     return ApiResource.stripeResponseGetter.request(method, url, params, clazz,
         ApiResource.RequestType.NORMAL, options);
+  }
+
+  public static <T extends StripeCollectionInterface<?>> T requestCollection(
+      String url, ApiRequestParams params, Class<T> clazz, RequestOptions options)
+      throws StripeException {
+    checkNullTypedParams(url, params);
+    return requestCollection(url, params.toMap(), clazz, options);
   }
 
   /**
@@ -190,6 +204,19 @@ public abstract class ApiResource extends StripeObject {
     }
 
     return collection;
+  }
+
+  /**
+   * Invalidate null typed parameters.
+   * @param url     request url associated with the given parameters.
+   * @param params  typed parameters to check for null value.
+   */
+  public static void checkNullTypedParams(String url, ApiRequestParams params) {
+    if (params == null) {
+      throw new IllegalArgumentException(String.format("Found null params for %s. "
+          + "Please pass empty params using param builder via `builder().build()` instead.", url
+      ));
+    }
   }
 
   /**

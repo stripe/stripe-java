@@ -10,6 +10,9 @@ import com.stripe.model.HasId;
 import com.stripe.model.StripeObject;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.reporting.ReportRunCreateParams;
+import com.stripe.param.reporting.ReportRunListParams;
+import com.stripe.param.reporting.ReportRunRetrieveParams;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -106,6 +109,19 @@ public class ReportRun extends ApiResource implements HasId {
   }
 
   /**
+   * Retrieves the details of an existing Report Run. (Requires a <a
+   * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
+   */
+  public static ReportRun retrieve(
+      String reportRun, ReportRunRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/reporting/report_runs/%s", reportRun));
+    return request(ApiResource.RequestMethod.GET, url, params, ReportRun.class, options);
+  }
+
+  /**
    * Creates a new object and begin running the report. (Requires a <a
    * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
    */
@@ -124,6 +140,24 @@ public class ReportRun extends ApiResource implements HasId {
   }
 
   /**
+   * Creates a new object and begin running the report. (Requires a <a
+   * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
+   */
+  public static ReportRun create(ReportRunCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * Creates a new object and begin running the report. (Requires a <a
+   * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
+   */
+  public static ReportRun create(ReportRunCreateParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/reporting/report_runs");
+    return request(ApiResource.RequestMethod.POST, url, params, ReportRun.class, options);
+  }
+
+  /**
    * Returns a list of Report Runs, with the most recent appearing first. (Requires a <a
    * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
    */
@@ -136,6 +170,24 @@ public class ReportRun extends ApiResource implements HasId {
    * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
    */
   public static ReportRunCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/reporting/report_runs");
+    return requestCollection(url, params, ReportRunCollection.class, options);
+  }
+
+  /**
+   * Returns a list of Report Runs, with the most recent appearing first. (Requires a <a
+   * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
+   */
+  public static ReportRunCollection list(ReportRunListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of Report Runs, with the most recent appearing first. (Requires a <a
+   * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
+   */
+  public static ReportRunCollection list(ReportRunListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/reporting/report_runs");
     return requestCollection(url, params, ReportRunCollection.class, options);

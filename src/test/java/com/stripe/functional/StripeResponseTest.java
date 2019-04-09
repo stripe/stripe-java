@@ -1,8 +1,8 @@
 package com.stripe.functional;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
@@ -12,9 +12,10 @@ import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponse;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.UUID;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class StripeResponseTest extends BaseStripeTest {
   @Test
@@ -23,7 +24,7 @@ public class StripeResponseTest extends BaseStripeTest {
     final RequestOptions requestOptions = RequestOptions.builder()
         .setIdempotencyKey(idempotencyKey)
         .build();
-    final Customer customer = Customer.create(null, requestOptions);
+    final Customer customer = Customer.create((Map<String, Object>) null, requestOptions);
     final Customer retrievedCustomer = Customer.retrieve(customer.getId(), requestOptions);
     final StripeResponse response = retrievedCustomer.getLastResponse();
     assertNotNull(response);

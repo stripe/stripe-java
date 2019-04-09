@@ -1,15 +1,15 @@
 package com.stripe.model;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.net.ApiResource;
 
 import java.math.BigDecimal;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class SubscriptionTest extends BaseStripeTest {
   @Test
@@ -50,6 +50,7 @@ public class SubscriptionTest extends BaseStripeTest {
   }
 
   @Test
+  @SuppressWarnings("BigDecimalEquals")
   public void testDeserializeBigDecimal() {
     final String data = "{\"object\": \"subscription\", \"tax_percent\": 0.3}";
     final Subscription subscription = ApiResource.GSON.fromJson(data, Subscription.class);

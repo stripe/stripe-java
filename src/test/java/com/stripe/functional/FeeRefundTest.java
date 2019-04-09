@@ -1,6 +1,6 @@
 package com.stripe.functional;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
@@ -9,10 +9,12 @@ import com.stripe.model.FeeRefund;
 import com.stripe.model.FeeRefundCollection;
 import com.stripe.net.ApiResource;
 
+import com.stripe.net.RequestOptions;
+import com.stripe.param.FeeRefundCollectionCreateParams;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class FeeRefundTest extends BaseStripeTest {
   public static final String FEE_ID = "fee_123";
@@ -44,6 +46,25 @@ public class FeeRefundTest extends BaseStripeTest {
         ApiResource.RequestMethod.POST,
         String.format("/v1/application_fees/%s/refunds", fee.getId()),
         params
+    );
+  }
+
+  @Test
+  public void testCreateWithTypedParams() throws StripeException {
+    final ApplicationFee fee = getFeeFixture();
+
+    FeeRefundCollectionCreateParams typedParams = FeeRefundCollectionCreateParams.builder()
+        .setAmount(100L).build();
+
+    final FeeRefund refund = fee.getRefunds().create(typedParams, RequestOptions.getDefault());
+
+    assertNotNull(refund);
+    Map<String, Object> param = new HashMap<>();
+    param.put("amount", 100);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        String.format("/v1/application_fees/%s/refunds", fee.getId()),
+        param
     );
   }
 

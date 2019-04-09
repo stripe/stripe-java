@@ -1,19 +1,29 @@
 package com.stripe.functional;
 
-import static org.junit.Assert.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
+import com.stripe.model.Account;
+import com.stripe.model.Application;
+import com.stripe.model.Customer;
 import com.stripe.model.PaymentIntent;
 import com.stripe.model.PaymentIntentCollection;
+import com.stripe.model.PaymentSource;
+import com.stripe.model.Review;
 import com.stripe.net.ApiResource;
 
+import com.stripe.net.RequestOptions;
+import com.stripe.param.PaymentIntentListParams;
+import com.stripe.param.PaymentIntentRetrieveParams;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class PaymentIntentTest extends BaseStripeTest {
   public static final String PAYMENT_INTENT_ID = "pi_123";
@@ -56,6 +66,58 @@ public class PaymentIntentTest extends BaseStripeTest {
   }
 
   @Test
+  public void testRetrieveExpandWithTypedParam() throws StripeException {
+    // expansion fields and the resulting verification is copied
+    // from `model/PaymentIntentTest`
+    PaymentIntentRetrieveParams typedParams = PaymentIntentRetrieveParams.builder()
+        // support both adding individual element and the whole list
+        .addExpand("application")
+        .addExpand("customer")
+        .addExpand("on_behalf_of")
+        .addAllExpand(Arrays.asList("review", "source", "transfer_data.destination"))
+        .build();
+
+    final PaymentIntent resource = PaymentIntent.retrieve(PAYMENT_INTENT_ID, typedParams,
+        RequestOptions.getDefault());
+
+    assertNotNull(resource);
+    assertNotNull(resource.getId());
+
+    final Application application = resource.getApplicationObject();
+    assertNotNull(application);
+    assertNotNull(application.getId());
+    assertEquals(resource.getApplication(), application.getId());
+    final Customer customer = resource.getCustomerObject();
+    assertNotNull(customer);
+    assertNotNull(customer.getId());
+    assertEquals(resource.getCustomer(), customer.getId());
+    final Account account = resource.getOnBehalfOfObject();
+    assertNotNull(account);
+    assertNotNull(account.getId());
+    assertEquals(resource.getOnBehalfOf(), account.getId());
+    final Review review = resource.getReviewObject();
+    assertNotNull(review);
+    assertNotNull(review.getId());
+    assertEquals(resource.getReview(), review.getId());
+    final PaymentSource source = resource.getSourceObject();
+    assertNotNull(source);
+    assertNotNull(source.getId());
+    assertEquals(resource.getSource(), source.getId());
+
+    final Account transferDestination = resource.getTransferData().getDestinationObject();
+    assertNotNull(transferDestination);
+    assertNotNull(transferDestination.getId());
+    assertEquals(resource.getTransferData().getDestination(), transferDestination.getId());
+
+    assertNotNull(resource);
+    verifyRequest(
+        ApiResource.RequestMethod.GET,
+        String.format("/v1/payment_intents/%s", PAYMENT_INTENT_ID),
+        typedParams.toMap()
+    );
+  }
+
+  @Test
   public void testUpdate() throws StripeException {
     final PaymentIntent paymentIntent = getPaymentIntentFixture();
 
@@ -80,6 +142,24 @@ public class PaymentIntentTest extends BaseStripeTest {
     params.put("limit", 1);
 
     final PaymentIntentCollection paymentIntents = PaymentIntent.list(params);
+
+    assertNotNull(paymentIntents);
+    verifyRequest(
+        ApiResource.RequestMethod.GET,
+        String.format("/v1/payment_intents"),
+        params
+    );
+  }
+
+  @Test
+  public void testListWithTypedParams() throws StripeException {
+    final Map<String, Object> params = new HashMap<>();
+    params.put("limit", 1);
+    PaymentIntentListParams listParams = PaymentIntentListParams.builder()
+        .setLimit(1L).build();
+
+    final PaymentIntentCollection paymentIntents = PaymentIntent.list(listParams,
+        RequestOptions.getDefault());
 
     assertNotNull(paymentIntents);
     verifyRequest(

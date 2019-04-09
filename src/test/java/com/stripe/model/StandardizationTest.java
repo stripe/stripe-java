@@ -1,6 +1,6 @@
 package com.stripe.model;
 
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableSet;
@@ -9,6 +9,7 @@ import com.google.common.reflect.ClassPath;
 import com.google.common.reflect.Invokable;
 import com.google.common.reflect.Parameter;
 
+import com.stripe.net.ApiRequestParams;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
@@ -18,7 +19,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Simple test to make sure stripe-java provides consistent bindings.
@@ -77,7 +78,9 @@ public class StandardizationTest {
         Class<?> finalParamType = lastParam.getType().getRawType();
 
         // Skip methods that have exactly one param which is a map.
-        if (Map.class.equals(finalParamType) && parameters.size() == 1) {
+        boolean isRequestParamType = ApiRequestParams.class.isAssignableFrom(finalParamType)
+            || Map.class.equals(finalParamType);
+        if (isRequestParamType && parameters.size() == 1) {
           continue;
         }
 
@@ -98,11 +101,11 @@ public class StandardizationTest {
           continue;
         }
         assertTrue(
+            RequestOptions.class.isAssignableFrom(finalParamType),
             String.format("Methods on %ss like %s.%s should take a final "
                   +       "parameter as a %s parameter, but got %s.%n",
                 ApiResource.class.getSimpleName(), model.getSimpleName(), method.getName(),
-                RequestOptions.class.getSimpleName(), finalParamType.getCanonicalName()),
-            RequestOptions.class.isAssignableFrom(finalParamType));
+                RequestOptions.class.getSimpleName(), finalParamType.getCanonicalName()));
       }
     }
   }

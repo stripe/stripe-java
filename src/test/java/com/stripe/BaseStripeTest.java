@@ -21,14 +21,16 @@ import java.lang.reflect.Type;
 import java.net.HttpURLConnection;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import lombok.Cleanup;
 
-import org.junit.After;
-import org.junit.Before;
-import org.junit.BeforeClass;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.BeforeEach;
 
 import org.mockito.ArgumentMatcher;
 import org.mockito.Mockito;
@@ -65,7 +67,7 @@ public class BaseStripeTest {
   /**
    * Checks that stripe-mock is running and up-to-date.
    */
-  @BeforeClass
+  @BeforeAll
   public static void checkStripeMock() throws Exception {
     if (StripeMockProcess.start()) {
       port = StripeMockProcess.getPort();
@@ -107,7 +109,7 @@ public class BaseStripeTest {
    * Activates usage of stripe-mock by overriding the API host and putting a test key
    * into the environment. This is required independent of how stripe-mock is started.
    */
-  @Before
+  @BeforeEach
   public void setUpStripeMockUsage() {
     this.origApiBase = Stripe.getApiBase();
     this.origUploadBase = Stripe.getUploadBase();
@@ -128,7 +130,7 @@ public class BaseStripeTest {
    * Deactivates usage stripe-mock by returning the API host to whatever it was
    * before stripe-mock was activated.
    */
-  @After
+  @AfterEach
   public void tearDownStripeMockUsage() {
     ApiResource.setStripeResponseGetter(new LiveStripeResponseGetter());
 
@@ -506,7 +508,7 @@ public class BaseStripeTest {
      * Informs if this matcher accepts the given argument.
      */
     @Override
-    public boolean matches(Map<String,Object> paramMap) {
+    public boolean matches(Map<String, Object> paramMap) {
       if (this.other == null) {
         // If the matcher was constructed with null, accept any params
         return true;
@@ -514,10 +516,70 @@ public class BaseStripeTest {
         if (paramMap == null) {
           return this.other.isEmpty();
         } else {
-          return this.other.equals(paramMap);
+          return compareParamObjects(this.other, paramMap);
         }
       }
     }
+
+    @Override
+    public String toString() {
+      return other.toString();
+    }
+  }
+
+  @SuppressWarnings("unchecked")
+  private static Boolean compareParamObjects(Object thisValue, Object otherValue) {
+    if (thisValue == null) {
+      return otherValue == null;
+    }
+
+    if (thisValue instanceof Map<?, ?>) {
+      if (!(otherValue instanceof  Map<?, ?>)) {
+        return false;
+      }
+      Map<String, Object> thisMap = (Map<String, Object>) thisValue;
+      Map<String, Object> otherMap = (Map<String, Object>) otherValue;
+      Set<String> thisKeySet = thisMap.keySet();
+      if (!thisKeySet.equals(otherMap.keySet())) {
+        return false;
+      }
+      for (String thisKey : thisKeySet) {
+        if (!compareParamObjects(thisMap.get(thisKey), otherMap.get(thisKey))) {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    if (thisValue instanceof Object[]) {
+      thisValue = Arrays.asList((Object[]) thisValue);
+    }
+    if (otherValue instanceof Object[]) {
+      otherValue = Arrays.asList((Object[]) otherValue);
+    }
+
+    if (thisValue instanceof List<?> && otherValue instanceof List<?>) {
+      List<Object> thisListValue = (List<Object>) thisValue;
+      List<Object> otherListValue = (List<Object>) otherValue;
+      if (thisListValue.size() != otherListValue.size()) {
+        return false;
+      }
+      for (int i = 0; i < thisListValue.size(); i++) {
+        if (!compareParamObjects(thisListValue.get(i), otherListValue.get(i))) {
+          return false;
+        }
+      }
+      return true;
+    }
+
+    if (thisValue instanceof Integer) {
+      thisValue = Long.valueOf((Integer) thisValue);
+    }
+    if (otherValue instanceof Integer) {
+      otherValue = Long.valueOf((Integer) otherValue);
+    }
+
+    return thisValue.equals(otherValue);
   }
 
   public static class RequestOptionsMatcher implements ArgumentMatcher<RequestOptions> {

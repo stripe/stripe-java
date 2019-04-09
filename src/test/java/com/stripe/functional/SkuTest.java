@@ -1,8 +1,8 @@
 package com.stripe.functional;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
-import static org.junit.Assert.assertTrue;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
@@ -10,10 +10,12 @@ import com.stripe.model.Sku;
 import com.stripe.model.SkuCollection;
 import com.stripe.net.ApiResource;
 
+import com.stripe.net.RequestOptions;
+import com.stripe.param.SkuCreateParams;
 import java.util.HashMap;
 import java.util.Map;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class SkuTest extends BaseStripeTest {
   public static final String SKU_ID = "sku_123";
@@ -26,6 +28,49 @@ public class SkuTest extends BaseStripeTest {
 
   @Test
   public void testCreate() throws StripeException {
+    final Map<String, Object> params = createUntypedParams();
+
+    final Sku sku = Sku.create(params);
+
+    assertNotNull(sku);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/skus",
+        params
+    );
+  }
+
+  @Test
+  public void testCreateWithTypedParams() throws StripeException {
+    SkuCreateParams.Inventory inventory = SkuCreateParams.Inventory.builder()
+        .setType(SkuCreateParams.Inventory.Type.BUCKET)
+        .setValue(SkuCreateParams.Inventory.Value.LIMITED).build();
+
+    Map<String, String> additionalAttributes = new HashMap<>();
+    additionalAttributes.put("attr2", "val2");
+
+    SkuCreateParams typedParams = SkuCreateParams.builder()
+        .setActive(true)
+        // support both individual key/value entry and the whole map
+        .putAttribute("attr1", "val1")
+        .putAllAttribute(additionalAttributes)
+        .setPrice(499L)
+        .setCurrency("usd")
+        .setInventory(inventory)
+        .setProduct("prod_123")
+        .setImage("http://example.com/foo.png").build();
+
+    final Sku sku = Sku.create(typedParams, RequestOptions.getDefault());
+
+    assertNotNull(sku);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/skus",
+        createUntypedParams()
+    );
+  }
+
+  private Map<String, Object> createUntypedParams() {
     final Map<String, Object> attributes = new HashMap<>();
     attributes.put("attr1", "val1");
     attributes.put("attr2", "val2");
@@ -40,15 +85,7 @@ public class SkuTest extends BaseStripeTest {
     params.put("inventory", inventory);
     params.put("product", "prod_123");
     params.put("image", "http://example.com/foo.png");
-
-    final Sku sku = Sku.create(params);
-
-    assertNotNull(sku);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        "/v1/skus",
-        params
-    );
+    return params;
   }
 
   @Test

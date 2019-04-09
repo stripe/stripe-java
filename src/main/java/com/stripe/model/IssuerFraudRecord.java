@@ -7,6 +7,8 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.IssuerFraudRecordListParams;
+import com.stripe.param.IssuerFraudRecordRetrieveParams;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -100,6 +102,19 @@ public class IssuerFraudRecord extends ApiResource implements HasId {
     return requestCollection(url, params, IssuerFraudRecordCollection.class, options);
   }
 
+  /** Returns a list of issuer fraud records. */
+  public static IssuerFraudRecordCollection list(IssuerFraudRecordListParams params)
+      throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /** Returns a list of issuer fraud records. */
+  public static IssuerFraudRecordCollection list(
+      IssuerFraudRecordListParams params, RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuer_fraud_records");
+    return requestCollection(url, params, IssuerFraudRecordCollection.class, options);
+  }
+
   /**
    * Retrieves the details of an issuer fraud record that has previously been created.
    *
@@ -129,6 +144,22 @@ public class IssuerFraudRecord extends ApiResource implements HasId {
    */
   public static IssuerFraudRecord retrieve(
       String issuerFraudRecord, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/issuer_fraud_records/%s", issuerFraudRecord));
+    return request(ApiResource.RequestMethod.GET, url, params, IssuerFraudRecord.class, options);
+  }
+
+  /**
+   * Retrieves the details of an issuer fraud record that has previously been created.
+   *
+   * <p>Please refer to the <a href="#issuer_fraud_record_object">issuer fraud record</a> object
+   * reference for more details.
+   */
+  public static IssuerFraudRecord retrieve(
+      String issuerFraudRecord, IssuerFraudRecordRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
         String.format(
