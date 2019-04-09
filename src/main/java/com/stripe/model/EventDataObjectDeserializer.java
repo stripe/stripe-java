@@ -12,7 +12,7 @@ import lombok.EqualsAndHashCode;
  * Deserialization helper to get {@code StripeObject} and handle failure due to schema
  * incompatibility between the data object and the model classes. Event data object by default
  * corresponds to the schema at API version tied to your Stripe account at the event creation time.
- * That event version is in {@link Event#getApiVersion()}. The model classes for deserialization,
+ * This event version is in {@link Event#getApiVersion()}. The model classes for deserialization,
  * however, corresponds to a specific version pinned to this library {@link Stripe#API_VERSION}.
  * Thus, only data object with same API versions is guaranteed to deserialize safely.
  *
@@ -20,7 +20,7 @@ import lombok.EqualsAndHashCode;
  * `api_versions` corresponding to {@link Stripe#API_VERSION}. For more information, see
  * <a href="https://stripe.com/docs/api/webhook_endpoints/create">API reference</a>
  *
- * <p>In practice, each {@link Stripe#API_VERSION} update only affects specific set of classes,
+ * <p>In practice, each API version update only affects specific set of classes,
  * so event data object for the unaffected classes can still be serialized successfully -- even when
  * the API versions do not match. (Although it is considered unsafe by the API version comparison.)
  * In that case, you can use {@link EventDataObjectDeserializer#deserializeUnsafe()}
@@ -49,8 +49,7 @@ import lombok.EqualsAndHashCode;
 @EqualsAndHashCode(callSuper = false)
 public class EventDataObjectDeserializer {
   /**
-   * API version of the event data object. This value is not made accessible, because
-   * {@link Event#getApiVersion()} should be used instead.
+   * API version of the event data object.
    */
   String apiVersion;
   /**
@@ -75,12 +74,13 @@ public class EventDataObjectDeserializer {
   }
 
   /**
-   * Gets data event object, in favor of the deprecated {@link EventData#getObject()}.
-   * When non-, the deserialized {@code StripeObject} preserves high data integrity because of
-   * correspondence between schema of the API response and the model class (the underlying
-   * concrete class for abstract {@code StripeObject}) schema. This is when
-   * {@link Event#getApiVersion()} matches {@link Stripe#API_VERSION}.
-   * @return stripe object that fully represent its original raw JSON response.
+   * Gets optional of data event object, in favor of the deprecated {@link EventData#getObject()}.
+   * When the optional is present, the deserialized {@code StripeObject} preserves high data
+   * integrity because of correspondence between schema of the API response and the model class
+   * (the underlying concrete class for abstract {@code StripeObject}) schema. This is when
+   * {@link Event#getApiVersion()} matches {@link Stripe#API_VERSION}. Otherwise, the optional is
+   * empty.
+   * @return Optional of stripe object that represents its original raw JSON response.
    */
   public Optional<StripeObject> getObject() {
     if (object != null) {
@@ -95,7 +95,7 @@ public class EventDataObjectDeserializer {
 
   /**
    * Get raw JSON string for the data object. This is the same data available in
-   * {@link EventDataObjectDeserializationException#getRawJson()} ()} upon deserialization
+   * {@link EventDataObjectDeserializationException#getRawJson()} upon deserialization
    * failure.
    * @return JSON string the event data object.
    */
