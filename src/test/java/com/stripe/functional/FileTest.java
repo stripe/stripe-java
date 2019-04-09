@@ -7,6 +7,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.FileCollection;
 import com.stripe.net.ApiResource;
 
+import com.stripe.param.FileCreateParams;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -20,9 +21,8 @@ public class FileTest extends BaseStripeTest {
 
   @Test
   public void testCreateWithFile() throws StripeException {
-    final Map<String, Object> params = new HashMap<>();
-    params.put("purpose", "dispute_evidence");
-    params.put("file", new File(getClass().getResource("/test.png").getFile()));
+    File value = new File(getClass().getResource("/test.png").getFile());
+    final Map<String, Object> params = untypedCreateParams(value);
 
     final com.stripe.model.File file = com.stripe.model.File.create(params);
 
@@ -37,10 +37,38 @@ public class FileTest extends BaseStripeTest {
   }
 
   @Test
+  public void testCreateWithFileWithTypedParams() throws StripeException {
+    File fileObject = new File(getClass().getResource("/test.png").getFile());
+    FileCreateParams fileCreateParams = FileCreateParams.builder()
+        .setPurpose(FileCreateParams.Purpose.DISPUTE_EVIDENCE)
+        .setFile(fileObject)
+        .build();
+
+    final com.stripe.model.File file = com.stripe.model.File.create(fileCreateParams);
+
+    assertNotNull(file);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/files",
+        untypedCreateParams(fileObject),
+        ApiResource.RequestType.MULTIPART,
+        null
+    );
+  }
+
+  private Map<String, Object> untypedCreateParams(java.io.File file) {
+    final Map<String, Object> params = new HashMap<>();
+    params.put("purpose", "dispute_evidence");
+    params.put("file", file);
+    return params;
+  }
+
+  @Test
   public void testCreateWithStream() throws IOException, StripeException {
     final Map<String, Object> params = new HashMap<>();
     params.put("purpose", "dispute_evidence");
-    params.put("file", new FileInputStream(getClass().getResource("/test.png").getFile()));
+    FileInputStream value = new FileInputStream(getClass().getResource("/test.png").getFile());
+    params.put("file", value);
 
     final com.stripe.model.File file = com.stripe.model.File.create(params);
 

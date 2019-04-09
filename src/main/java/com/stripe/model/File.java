@@ -7,6 +7,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 
+import com.stripe.param.FileCreateParams;
 import java.util.Map;
 
 import lombok.EqualsAndHashCode;
@@ -72,6 +73,28 @@ public class File extends ApiResource implements HasId {
    */
   public static File create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * To upload a file to Stripe, you’ll need to send a request of type {@code multipart/form-data}.
+   * The request should contain the file you would like to upload, as well as the parameters for
+   * creating a file.
+   */
+  public static File create(FileCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * To upload a file to Stripe, you’ll need to send a request of type {@code multipart/form-data}.
+   * The request should contain the file you would like to upload, as well as the parameters for
+   * creating a file.
+   */
+  public static File create(FileCreateParams params, RequestOptions options)
+      throws StripeException {
+    return create(
+        params != null ? params.toMap() : (Map<String, Object>) null,
+        options
+    );
   }
 
   /**
