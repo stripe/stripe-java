@@ -5,6 +5,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.EventListParams;
 
 import java.util.Map;
 
@@ -110,7 +111,28 @@ public class Event extends ApiResource implements HasId {
    * <a href="https://stripe.com/docs/api/events/object">event object</a> {@code api_version}
    * attribute (not according to your current Stripe API version or {@code Stripe-Version} header).
    */
+  public static EventCollection list(EventListParams params) throws StripeException {
+    return list(params, null);
+  }
+
+  /**
+   * List events, going back up to 30 days. Each event data is rendered according to Stripe API
+   * version at its creation time, specified in
+   * <a href="https://stripe.com/docs/api/events/object">event object</a> {@code api_version}
+   * attribute (not according to your current Stripe API version or {@code Stripe-Version} header).
+   */
   public static EventCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    return requestCollection(classUrl(Event.class), params, EventCollection.class, options);
+  }
+
+  /**
+   * List events, going back up to 30 days. Each event data is rendered according to Stripe API
+   * version at its creation time, specified in
+   * <a href="https://stripe.com/docs/api/events/object">event object</a> {@code api_version}
+   * attribute (not according to your current Stripe API version or {@code Stripe-Version} header).
+   */
+  public static EventCollection list(EventListParams params, RequestOptions options)
       throws StripeException {
     return requestCollection(classUrl(Event.class), params, EventCollection.class, options);
   }
