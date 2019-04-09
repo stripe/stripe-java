@@ -21,7 +21,7 @@ public class EventData extends StripeObject {
    * Object containing the names of the attributes that have changed, and their previous values
    * (sent along only with *.updated events). The untyped object here is composed of
    * {@code Map<String, Object>}, {@code List<Object>}, and basic Java data types.
-   * The array was represented as {@code Object[]} in `stripe-java` below 8.x.
+   * The array was previously represented as {@code Object[]} in `stripe-java` below v9.x
    */
   Map<String, Object> previousAttributes;
 
