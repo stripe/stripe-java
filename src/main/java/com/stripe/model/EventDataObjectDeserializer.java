@@ -16,7 +16,7 @@ import lombok.EqualsAndHashCode;
  * however, corresponds to a specific version pinned to this library {@link Stripe#API_VERSION}.
  * Thus, only data object with same API versions is guaranteed to deserialize safely.
  *
- * <p>To avoid this API version of event webhook mismatch, create a new webhook endpoint with
+ * <p>To avoid this problem of API version mismatch, create a new webhook endpoint
  * `api_versions` corresponding to {@link Stripe#API_VERSION}. For more information, see
  * <a href="https://stripe.com/docs/api/webhook_endpoints/create">API reference</a>
  *
