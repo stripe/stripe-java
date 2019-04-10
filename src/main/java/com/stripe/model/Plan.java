@@ -241,7 +241,8 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   /** Retrieves the plan with the given ID. */
   public static Plan retrieve(String plan, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), String.format("/v1/plans/%s", plan));
+    String url = String.format("%s%s", Stripe.getApiBase(), String.format("/v1/plans/%s",
+        urlEncodeId(plan)));
     return request(ApiResource.RequestMethod.GET, url, params, Plan.class, options);
   }
 

@@ -1,9 +1,12 @@
 package com.stripe.functional;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.stripe.BaseStripeTest;
+import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Plan;
 import com.stripe.model.PlanCollection;
@@ -12,6 +15,7 @@ import com.stripe.net.ApiResource;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.Test;
 
 public class PlanTest extends BaseStripeTest {
@@ -50,6 +54,21 @@ public class PlanTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.GET,
         String.format("/v1/plans/%s", PLAN_ID)
+    );
+  }
+
+  @Test
+  public void testRetrieveIdWithForwardSlash() throws StripeException {
+    InvalidRequestException exception =
+        assertThrows(InvalidRequestException.class, () -> {
+          Plan.retrieve("Pro plan $699/month");
+        });
+    assertThat(exception.getMessage(), CoreMatchers.containsString(
+        "Unrecognized request URL (GET: /v1/plans/Pro+plan+$699/month)"));
+
+    verifyRequest(
+        ApiResource.RequestMethod.GET,
+        String.format("/v1/plans/%s", "Pro+plan+%24699%2Fmonth")
     );
   }
 

@@ -156,6 +156,20 @@ public abstract class ApiResource extends StripeObject {
     }
   }
 
+  /**
+   * URL-encode a string ID in url path formatting.
+   */
+  public static String urlEncodeId(String id) throws InvalidRequestException {
+    try {
+      return urlEncode(id);
+    } catch (UnsupportedEncodingException e) {
+      throw new InvalidRequestException(String.format(
+          "Unable to encode `%s` in the url to %s. "
+          + "Please contact support@stripe.com for assistance.", id, CHARSET),
+          null, null, null, 0, e);
+    }
+  }
+
   public static <T> T multipartRequest(ApiResource.RequestMethod method,
                      String url, Map<String, Object> params, Class<T> clazz,
                      RequestOptions options) throws StripeException {
