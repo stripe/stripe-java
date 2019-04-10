@@ -108,7 +108,9 @@ public class ValueListItem extends ApiResource implements HasId {
       String item, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/radar/value_list_items/%s", item));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/radar/value_list_items/%s", ApiResource.urlEncodeId(item)));
     return request(ApiResource.RequestMethod.GET, url, params, ValueListItem.class, options);
   }
 
@@ -118,7 +120,9 @@ public class ValueListItem extends ApiResource implements HasId {
       throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/radar/value_list_items/%s", item));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/radar/value_list_items/%s", ApiResource.urlEncodeId(item)));
     return request(ApiResource.RequestMethod.GET, url, params, ValueListItem.class, options);
   }
 
@@ -179,7 +183,8 @@ public class ValueListItem extends ApiResource implements HasId {
     String url =
         String.format(
             "%s%s",
-            Stripe.getApiBase(), String.format("/v1/radar/value_list_items/%s", this.getId()));
+            Stripe.getApiBase(),
+            String.format("/v1/radar/value_list_items/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.DELETE, url, params, ValueListItem.class, options);
   }
 }

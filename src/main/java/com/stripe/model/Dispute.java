@@ -169,7 +169,10 @@ public class Dispute extends ApiResource
   public static Dispute retrieve(String dispute, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/disputes/%s", dispute));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/disputes/%s", ApiResource.urlEncodeId(dispute)));
     return request(ApiResource.RequestMethod.GET, url, params, Dispute.class, options);
   }
 
@@ -177,7 +180,10 @@ public class Dispute extends ApiResource
   public static Dispute retrieve(
       String dispute, DisputeRetrieveParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/disputes/%s", dispute));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/disputes/%s", ApiResource.urlEncodeId(dispute)));
     return request(ApiResource.RequestMethod.GET, url, params, Dispute.class, options);
   }
 
@@ -209,7 +215,10 @@ public class Dispute extends ApiResource
   @Override
   public Dispute update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/disputes/%s", this.getId()));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/disputes/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
   }
 
@@ -239,7 +248,10 @@ public class Dispute extends ApiResource
    */
   public Dispute update(DisputeUpdateParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/disputes/%s", this.getId()));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/disputes/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
   }
 
@@ -286,7 +298,9 @@ public class Dispute extends ApiResource
   public Dispute close(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/disputes/%s/close", this.getId()));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/disputes/%s/close", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
   }
 
@@ -311,7 +325,9 @@ public class Dispute extends ApiResource
   public Dispute close(DisputeCloseParams params, RequestOptions options) throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/disputes/%s/close", this.getId()));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/disputes/%s/close", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
   }
 

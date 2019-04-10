@@ -178,7 +178,9 @@ public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute
   public Dispute update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/issuing/disputes/%s", this.getId()));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/issuing/disputes/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
   }
 
@@ -197,7 +199,9 @@ public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute
   public Dispute update(DisputeUpdateParams params, RequestOptions options) throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/issuing/disputes/%s", this.getId()));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/issuing/disputes/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Dispute.class, options);
   }
 
@@ -216,7 +220,9 @@ public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute
       throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/issuing/disputes/%s", dispute));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/issuing/disputes/%s", ApiResource.urlEncodeId(dispute)));
     return request(ApiResource.RequestMethod.GET, url, params, Dispute.class, options);
   }
 
@@ -225,7 +231,9 @@ public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute
       String dispute, DisputeRetrieveParams params, RequestOptions options) throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/issuing/disputes/%s", dispute));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/issuing/disputes/%s", ApiResource.urlEncodeId(dispute)));
     return request(ApiResource.RequestMethod.GET, url, params, Dispute.class, options);
   }
 

@@ -261,7 +261,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
    */
   public static Order retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), String.format("/v1/orders/%s", id));
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/orders/%s", ApiResource.urlEncodeId(id)));
     return request(ApiResource.RequestMethod.GET, url, params, Order.class, options);
   }
 
@@ -271,7 +274,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
    */
   public static Order retrieve(String id, OrderRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), String.format("/v1/orders/%s", id));
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/orders/%s", ApiResource.urlEncodeId(id)));
     return request(ApiResource.RequestMethod.GET, url, params, Order.class, options);
   }
 
@@ -291,7 +297,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   @Override
   public Order update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/orders/%s", this.getId()));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/orders/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
   }
 
@@ -309,7 +318,10 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
    */
   public Order update(OrderUpdateParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/orders/%s", this.getId()));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/orders/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
   }
 
@@ -332,7 +344,9 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   public Order pay(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/orders/%s/pay", this.getId()));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/orders/%s/pay", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
   }
 
@@ -345,7 +359,9 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   public Order pay(OrderPayParams params, RequestOptions options) throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/orders/%s/pay", this.getId()));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/orders/%s/pay", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
   }
 
@@ -389,7 +405,9 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
       throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/orders/%s/returns", this.getId()));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/orders/%s/returns", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, OrderReturn.class, options);
   }
 
@@ -413,7 +431,9 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
       throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/orders/%s/returns", this.getId()));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/orders/%s/returns", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, OrderReturn.class, options);
   }
 

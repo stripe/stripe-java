@@ -289,13 +289,18 @@ public class Card extends ApiResource
               "%s%s",
               Stripe.getApiBase(),
               String.format(
-                  "/v1/accounts/%s/external_accounts/%s", this.getAccount(), this.getId()));
+                  "/v1/accounts/%s/external_accounts/%s",
+                  ApiResource.urlEncodeId(this.getAccount()),
+                  ApiResource.urlEncodeId(this.getId())));
     } else if (this.getCustomer() != null) {
       url =
           String.format(
               "%s%s",
               Stripe.getApiBase(),
-              String.format("/v1/customers/%s/sources/%s", this.getCustomer(), this.getId()));
+              String.format(
+                  "/v1/customers/%s/sources/%s",
+                  ApiResource.urlEncodeId(this.getCustomer()),
+                  ApiResource.urlEncodeId(this.getId())));
     } else {
       throw new InvalidRequestException(
           "Unable to construct url because [account, customer] field(s) are all null",
@@ -339,7 +344,9 @@ public class Card extends ApiResource
               "%s%s",
               Stripe.getApiBase(),
               String.format(
-                  "/v1/accounts/%s/external_accounts/%s", this.getAccount(), this.getId()));
+                  "/v1/accounts/%s/external_accounts/%s",
+                  ApiResource.urlEncodeId(this.getAccount()),
+                  ApiResource.urlEncodeId(this.getId())));
     } else {
       throw new InvalidRequestException(
           "Unable to construct url because [account] field(s) are all null",
@@ -382,7 +389,10 @@ public class Card extends ApiResource
           String.format(
               "%s%s",
               Stripe.getApiBase(),
-              String.format("/v1/customers/%s/sources/%s", this.getCustomer(), this.getId()));
+              String.format(
+                  "/v1/customers/%s/sources/%s",
+                  ApiResource.urlEncodeId(this.getCustomer()),
+                  ApiResource.urlEncodeId(this.getId())));
     } else {
       throw new InvalidRequestException(
           "Unable to construct url because [customer] field(s) are all null",
@@ -439,13 +449,18 @@ public class Card extends ApiResource
               "%s%s",
               Stripe.getApiBase(),
               String.format(
-                  "/v1/accounts/%s/external_accounts/%s", this.getAccount(), this.getId()));
+                  "/v1/accounts/%s/external_accounts/%s",
+                  ApiResource.urlEncodeId(this.getAccount()),
+                  ApiResource.urlEncodeId(this.getId())));
     } else if (this.getCustomer() != null) {
       url =
           String.format(
               "%s%s",
               Stripe.getApiBase(),
-              String.format("/v1/customers/%s/sources/%s", this.getCustomer(), this.getId()));
+              String.format(
+                  "/v1/customers/%s/sources/%s",
+                  ApiResource.urlEncodeId(this.getCustomer()),
+                  ApiResource.urlEncodeId(this.getId())));
     } else {
       throw new InvalidRequestException(
           "Unable to construct url because [account, customer] field(s) are all null",

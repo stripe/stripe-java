@@ -90,7 +90,9 @@ public class ExchangeRate extends ApiResource implements HasId {
       String currency, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/exchange_rates/%s", currency));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/exchange_rates/%s", ApiResource.urlEncodeId(currency)));
     return request(ApiResource.RequestMethod.GET, url, params, ExchangeRate.class, options);
   }
 
@@ -100,7 +102,9 @@ public class ExchangeRate extends ApiResource implements HasId {
       throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/exchange_rates/%s", currency));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/exchange_rates/%s", ApiResource.urlEncodeId(currency)));
     return request(ApiResource.RequestMethod.GET, url, params, ExchangeRate.class, options);
   }
 }

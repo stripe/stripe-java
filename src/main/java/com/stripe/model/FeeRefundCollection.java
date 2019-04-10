@@ -148,7 +148,10 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
   public FeeRefund retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("%s/%s", this.getUrl(), id));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, FeeRefund.class, options);
   }
@@ -162,7 +165,10 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
       String id, FeeRefundCollectionRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("%s/%s", this.getUrl(), id));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
     return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, FeeRefund.class, options);
   }

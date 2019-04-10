@@ -111,7 +111,9 @@ public class ApplePayDomain extends ApiResource implements HasId {
       String domain, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/apple_pay/domains/%s", domain));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/apple_pay/domains/%s", ApiResource.urlEncodeId(domain)));
     return request(ApiResource.RequestMethod.GET, url, params, ApplePayDomain.class, options);
   }
 
@@ -121,7 +123,9 @@ public class ApplePayDomain extends ApiResource implements HasId {
       throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/apple_pay/domains/%s", domain));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/apple_pay/domains/%s", ApiResource.urlEncodeId(domain)));
     return request(ApiResource.RequestMethod.GET, url, params, ApplePayDomain.class, options);
   }
 
@@ -145,7 +149,9 @@ public class ApplePayDomain extends ApiResource implements HasId {
       throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/apple_pay/domains/%s", this.getId()));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/apple_pay/domains/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.DELETE, url, params, ApplePayDomain.class, options);
   }
 }

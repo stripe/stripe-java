@@ -178,7 +178,10 @@ public class TransferReversal extends ApiResource
           String.format(
               "%s%s",
               Stripe.getApiBase(),
-              String.format("/v1/transfers/%s/reversals/%s", this.getTransfer(), this.getId()));
+              String.format(
+                  "/v1/transfers/%s/reversals/%s",
+                  ApiResource.urlEncodeId(this.getTransfer()),
+                  ApiResource.urlEncodeId(this.getId())));
     } else {
       throw new InvalidRequestException(
           "Unable to construct url because [transfer] field(s) are all null",
@@ -215,7 +218,10 @@ public class TransferReversal extends ApiResource
           String.format(
               "%s%s",
               Stripe.getApiBase(),
-              String.format("/v1/transfers/%s/reversals/%s", this.getTransfer(), this.getId()));
+              String.format(
+                  "/v1/transfers/%s/reversals/%s",
+                  ApiResource.urlEncodeId(this.getTransfer()),
+                  ApiResource.urlEncodeId(this.getId())));
     } else {
       throw new InvalidRequestException(
           "Unable to construct url because [transfer] field(s) are all null",

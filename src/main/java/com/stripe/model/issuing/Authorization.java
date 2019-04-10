@@ -224,7 +224,8 @@ public class Authorization extends ApiResource
     String url =
         String.format(
             "%s%s",
-            Stripe.getApiBase(), String.format("/v1/issuing/authorizations/%s", authorization));
+            Stripe.getApiBase(),
+            String.format("/v1/issuing/authorizations/%s", ApiResource.urlEncodeId(authorization)));
     return request(ApiResource.RequestMethod.GET, url, params, Authorization.class, options);
   }
 
@@ -235,7 +236,8 @@ public class Authorization extends ApiResource
     String url =
         String.format(
             "%s%s",
-            Stripe.getApiBase(), String.format("/v1/issuing/authorizations/%s", authorization));
+            Stripe.getApiBase(),
+            String.format("/v1/issuing/authorizations/%s", ApiResource.urlEncodeId(authorization)));
     return request(ApiResource.RequestMethod.GET, url, params, Authorization.class, options);
   }
 
@@ -258,7 +260,8 @@ public class Authorization extends ApiResource
     String url =
         String.format(
             "%s%s",
-            Stripe.getApiBase(), String.format("/v1/issuing/authorizations/%s", this.getId()));
+            Stripe.getApiBase(),
+            String.format("/v1/issuing/authorizations/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Authorization.class, options);
   }
 
@@ -279,7 +282,8 @@ public class Authorization extends ApiResource
     String url =
         String.format(
             "%s%s",
-            Stripe.getApiBase(), String.format("/v1/issuing/authorizations/%s", this.getId()));
+            Stripe.getApiBase(),
+            String.format("/v1/issuing/authorizations/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Authorization.class, options);
   }
 
@@ -305,7 +309,8 @@ public class Authorization extends ApiResource
         String.format(
             "%s%s",
             Stripe.getApiBase(),
-            String.format("/v1/issuing/authorizations/%s/approve", this.getId()));
+            String.format(
+                "/v1/issuing/authorizations/%s/approve", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Authorization.class, options);
   }
 
@@ -321,7 +326,8 @@ public class Authorization extends ApiResource
         String.format(
             "%s%s",
             Stripe.getApiBase(),
-            String.format("/v1/issuing/authorizations/%s/approve", this.getId()));
+            String.format(
+                "/v1/issuing/authorizations/%s/approve", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Authorization.class, options);
   }
 
@@ -347,7 +353,8 @@ public class Authorization extends ApiResource
         String.format(
             "%s%s",
             Stripe.getApiBase(),
-            String.format("/v1/issuing/authorizations/%s/decline", this.getId()));
+            String.format(
+                "/v1/issuing/authorizations/%s/decline", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Authorization.class, options);
   }
 
@@ -363,7 +370,8 @@ public class Authorization extends ApiResource
         String.format(
             "%s%s",
             Stripe.getApiBase(),
-            String.format("/v1/issuing/authorizations/%s/decline", this.getId()));
+            String.format(
+                "/v1/issuing/authorizations/%s/decline", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Authorization.class, options);
   }
 

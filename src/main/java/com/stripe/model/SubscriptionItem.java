@@ -110,7 +110,9 @@ public class SubscriptionItem extends ApiResource
       String item, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/subscription_items/%s", item));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(item)));
     return request(ApiResource.RequestMethod.GET, url, params, SubscriptionItem.class, options);
   }
 
@@ -120,7 +122,9 @@ public class SubscriptionItem extends ApiResource
       throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/subscription_items/%s", item));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(item)));
     return request(ApiResource.RequestMethod.GET, url, params, SubscriptionItem.class, options);
   }
 
@@ -161,7 +165,9 @@ public class SubscriptionItem extends ApiResource
       throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/subscription_items/%s", this.getId()));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, SubscriptionItem.class, options);
   }
 
@@ -175,7 +181,9 @@ public class SubscriptionItem extends ApiResource
       throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/subscription_items/%s", this.getId()));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, SubscriptionItem.class, options);
   }
 
@@ -211,7 +219,9 @@ public class SubscriptionItem extends ApiResource
       throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/subscription_items/%s", this.getId()));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.DELETE, url, params, SubscriptionItem.class, options);
   }
 
@@ -231,7 +241,9 @@ public class SubscriptionItem extends ApiResource
       throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/subscription_items/%s", this.getId()));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/subscription_items/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.DELETE, url, params, SubscriptionItem.class, options);
   }
 
@@ -280,7 +292,9 @@ public class SubscriptionItem extends ApiResource
         String.format(
             "%s%s",
             Stripe.getApiBase(),
-            String.format("/v1/subscription_items/%s/usage_record_summaries", this.getId()));
+            String.format(
+                "/v1/subscription_items/%s/usage_record_summaries",
+                ApiResource.urlEncodeId(this.getId())));
     return requestCollection(url, params, UsageRecordSummaryCollection.class, options);
   }
 
@@ -316,7 +330,9 @@ public class SubscriptionItem extends ApiResource
         String.format(
             "%s%s",
             Stripe.getApiBase(),
-            String.format("/v1/subscription_items/%s/usage_record_summaries", this.getId()));
+            String.format(
+                "/v1/subscription_items/%s/usage_record_summaries",
+                ApiResource.urlEncodeId(this.getId())));
     return requestCollection(url, params, UsageRecordSummaryCollection.class, options);
   }
 

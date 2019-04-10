@@ -185,7 +185,9 @@ public class Review extends ApiResource implements HasId {
   public static Review retrieve(String review, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/reviews/%s", review));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/reviews/%s", ApiResource.urlEncodeId(review)));
     return request(ApiResource.RequestMethod.GET, url, params, Review.class, options);
   }
 
@@ -193,7 +195,9 @@ public class Review extends ApiResource implements HasId {
   public static Review retrieve(String review, ReviewRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/reviews/%s", review));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/reviews/%s", ApiResource.urlEncodeId(review)));
     return request(ApiResource.RequestMethod.GET, url, params, Review.class, options);
   }
 
@@ -216,7 +220,9 @@ public class Review extends ApiResource implements HasId {
   public Review approve(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/reviews/%s/approve", this.getId()));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/reviews/%s/approve", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Review.class, options);
   }
 
@@ -229,7 +235,9 @@ public class Review extends ApiResource implements HasId {
   public Review approve(ReviewApproveParams params, RequestOptions options) throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/reviews/%s/approve", this.getId()));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/reviews/%s/approve", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Review.class, options);
   }
 

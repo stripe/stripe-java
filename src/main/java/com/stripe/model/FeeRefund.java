@@ -126,7 +126,9 @@ public class FeeRefund extends ApiResource
           String.format(
               "%s%s",
               Stripe.getApiBase(),
-              String.format("/v1/application_fees/%s/refunds/%s", this.getFee(), this.getId()));
+              String.format(
+                  "/v1/application_fees/%s/refunds/%s",
+                  ApiResource.urlEncodeId(this.getFee()), ApiResource.urlEncodeId(this.getId())));
     } else {
       throw new InvalidRequestException(
           "Unable to construct url because [fee] field(s) are all null", null, null, null, 0, null);
@@ -158,7 +160,9 @@ public class FeeRefund extends ApiResource
           String.format(
               "%s%s",
               Stripe.getApiBase(),
-              String.format("/v1/application_fees/%s/refunds/%s", this.getFee(), this.getId()));
+              String.format(
+                  "/v1/application_fees/%s/refunds/%s",
+                  ApiResource.urlEncodeId(this.getFee()), ApiResource.urlEncodeId(this.getId())));
     } else {
       throw new InvalidRequestException(
           "Unable to construct url because [fee] field(s) are all null", null, null, null, 0, null);

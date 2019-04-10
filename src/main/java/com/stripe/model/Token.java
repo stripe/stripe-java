@@ -76,14 +76,20 @@ public class Token extends ApiResource implements HasId {
   /** Retrieves the token with the given ID. */
   public static Token retrieve(String token, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), String.format("/v1/tokens/%s", token));
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/tokens/%s", ApiResource.urlEncodeId(token)));
     return request(ApiResource.RequestMethod.GET, url, params, Token.class, options);
   }
 
   /** Retrieves the token with the given ID. */
   public static Token retrieve(String token, TokenRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), String.format("/v1/tokens/%s", token));
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/tokens/%s", ApiResource.urlEncodeId(token)));
     return request(ApiResource.RequestMethod.GET, url, params, Token.class, options);
   }
 

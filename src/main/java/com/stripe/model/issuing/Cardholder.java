@@ -160,7 +160,9 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
       throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/issuing/cardholders/%s", cardholder));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(cardholder)));
     return request(ApiResource.RequestMethod.GET, url, params, Cardholder.class, options);
   }
 
@@ -170,7 +172,9 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
       throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/issuing/cardholders/%s", cardholder));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(cardholder)));
     return request(ApiResource.RequestMethod.GET, url, params, Cardholder.class, options);
   }
 
@@ -192,7 +196,9 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
       throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/issuing/cardholders/%s", this.getId()));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Cardholder.class, options);
   }
 
@@ -212,7 +218,9 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
       throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/issuing/cardholders/%s", this.getId()));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Cardholder.class, options);
   }
 

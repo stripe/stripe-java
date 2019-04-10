@@ -301,7 +301,10 @@ public class Transfer extends ApiResource
   public static Transfer retrieve(
       String transfer, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/transfers/%s", transfer));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/transfers/%s", ApiResource.urlEncodeId(transfer)));
     return request(ApiResource.RequestMethod.GET, url, params, Transfer.class, options);
   }
 
@@ -314,7 +317,10 @@ public class Transfer extends ApiResource
       String transfer, TransferRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/transfers/%s", transfer));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/transfers/%s", ApiResource.urlEncodeId(transfer)));
     return request(ApiResource.RequestMethod.GET, url, params, Transfer.class, options);
   }
 
@@ -339,7 +345,10 @@ public class Transfer extends ApiResource
   public Transfer update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/transfers/%s", this.getId()));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/transfers/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Transfer.class, options);
   }
 
@@ -362,7 +371,10 @@ public class Transfer extends ApiResource
   public Transfer update(TransferUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/transfers/%s", this.getId()));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/transfers/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Transfer.class, options);
   }
 }

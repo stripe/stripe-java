@@ -170,7 +170,10 @@ public class BalanceTransaction extends ApiResource implements HasId {
   public static BalanceTransaction retrieve(
       String id, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/balance/history/%s", id));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/balance/history/%s", ApiResource.urlEncodeId(id)));
     return request(ApiResource.RequestMethod.GET, url, params, BalanceTransaction.class, options);
   }
 
@@ -179,7 +182,10 @@ public class BalanceTransaction extends ApiResource implements HasId {
       String id, BalanceTransactionRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/balance/history/%s", id));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/balance/history/%s", ApiResource.urlEncodeId(id)));
     return request(ApiResource.RequestMethod.GET, url, params, BalanceTransaction.class, options);
   }
 

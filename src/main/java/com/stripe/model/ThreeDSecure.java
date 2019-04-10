@@ -92,7 +92,10 @@ public class ThreeDSecure extends ApiResource implements HasId {
       String threeDSecure, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/3d_secure/%s", threeDSecure));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/3d_secure/%s", ApiResource.urlEncodeId(threeDSecure)));
     return request(ApiResource.RequestMethod.GET, url, params, ThreeDSecure.class, options);
   }
 
@@ -101,7 +104,10 @@ public class ThreeDSecure extends ApiResource implements HasId {
       String threeDSecure, ThreeDSecureRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/3d_secure/%s", threeDSecure));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/3d_secure/%s", ApiResource.urlEncodeId(threeDSecure)));
     return request(ApiResource.RequestMethod.GET, url, params, ThreeDSecure.class, options);
   }
 

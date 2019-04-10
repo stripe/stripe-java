@@ -139,7 +139,10 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
           String.format(
               "%s%s",
               Stripe.getApiBase(),
-              String.format("/v1/accounts/%s/persons/%s", this.getAccount(), this.getId()));
+              String.format(
+                  "/v1/accounts/%s/persons/%s",
+                  ApiResource.urlEncodeId(this.getAccount()),
+                  ApiResource.urlEncodeId(this.getId())));
     } else {
       throw new InvalidRequestException(
           "Unable to construct url because [account] field(s) are all null",
@@ -165,7 +168,10 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
           String.format(
               "%s%s",
               Stripe.getApiBase(),
-              String.format("/v1/accounts/%s/persons/%s", this.getAccount(), this.getId()));
+              String.format(
+                  "/v1/accounts/%s/persons/%s",
+                  ApiResource.urlEncodeId(this.getAccount()),
+                  ApiResource.urlEncodeId(this.getId())));
     } else {
       throw new InvalidRequestException(
           "Unable to construct url because [account] field(s) are all null",
@@ -201,7 +207,10 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
           String.format(
               "%s%s",
               Stripe.getApiBase(),
-              String.format("/v1/accounts/%s/persons/%s", this.getAccount(), this.getId()));
+              String.format(
+                  "/v1/accounts/%s/persons/%s",
+                  ApiResource.urlEncodeId(this.getAccount()),
+                  ApiResource.urlEncodeId(this.getId())));
     } else {
       throw new InvalidRequestException(
           "Unable to construct url because [account] field(s) are all null",

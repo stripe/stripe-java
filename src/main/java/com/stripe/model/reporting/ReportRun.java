@@ -104,7 +104,9 @@ public class ReportRun extends ApiResource implements HasId {
       String reportRun, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/reporting/report_runs/%s", reportRun));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/reporting/report_runs/%s", ApiResource.urlEncodeId(reportRun)));
     return request(ApiResource.RequestMethod.GET, url, params, ReportRun.class, options);
   }
 
@@ -117,7 +119,9 @@ public class ReportRun extends ApiResource implements HasId {
       throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/reporting/report_runs/%s", reportRun));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/reporting/report_runs/%s", ApiResource.urlEncodeId(reportRun)));
     return request(ApiResource.RequestMethod.GET, url, params, ReportRun.class, options);
   }
 

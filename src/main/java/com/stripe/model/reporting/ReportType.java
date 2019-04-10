@@ -96,7 +96,8 @@ public class ReportType extends ApiResource implements HasId {
     String url =
         String.format(
             "%s%s",
-            Stripe.getApiBase(), String.format("/v1/reporting/report_types/%s", reportType));
+            Stripe.getApiBase(),
+            String.format("/v1/reporting/report_types/%s", ApiResource.urlEncodeId(reportType)));
     return request(ApiResource.RequestMethod.GET, url, params, ReportType.class, options);
   }
 
@@ -110,7 +111,8 @@ public class ReportType extends ApiResource implements HasId {
     String url =
         String.format(
             "%s%s",
-            Stripe.getApiBase(), String.format("/v1/reporting/report_types/%s", reportType));
+            Stripe.getApiBase(),
+            String.format("/v1/reporting/report_types/%s", ApiResource.urlEncodeId(reportType)));
     return request(ApiResource.RequestMethod.GET, url, params, ReportType.class, options);
   }
 

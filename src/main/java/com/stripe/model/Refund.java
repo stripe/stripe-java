@@ -299,7 +299,9 @@ public class Refund extends ApiResource implements BalanceTransactionSource, Met
   public static Refund retrieve(String refund, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/refunds/%s", refund));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/refunds/%s", ApiResource.urlEncodeId(refund)));
     return request(ApiResource.RequestMethod.GET, url, params, Refund.class, options);
   }
 
@@ -307,7 +309,9 @@ public class Refund extends ApiResource implements BalanceTransactionSource, Met
   public static Refund retrieve(String refund, RefundRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/refunds/%s", refund));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/refunds/%s", ApiResource.urlEncodeId(refund)));
     return request(ApiResource.RequestMethod.GET, url, params, Refund.class, options);
   }
 
@@ -331,7 +335,10 @@ public class Refund extends ApiResource implements BalanceTransactionSource, Met
   @Override
   public Refund update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/refunds/%s", this.getId()));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/refunds/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Refund.class, options);
   }
 
@@ -353,7 +360,10 @@ public class Refund extends ApiResource implements BalanceTransactionSource, Met
    */
   public Refund update(RefundUpdateParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/refunds/%s", this.getId()));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/refunds/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Refund.class, options);
   }
 }

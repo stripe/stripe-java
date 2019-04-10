@@ -186,7 +186,10 @@ public class BitcoinReceiver extends ApiResource implements PaymentSource {
   public static BitcoinReceiver retrieve(
       String id, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/bitcoin/receivers/%s", id));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/bitcoin/receivers/%s", ApiResource.urlEncodeId(id)));
     return request(ApiResource.RequestMethod.GET, url, params, BitcoinReceiver.class, options);
   }
 
@@ -195,7 +198,10 @@ public class BitcoinReceiver extends ApiResource implements PaymentSource {
       String id, BitcoinReceiverRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/bitcoin/receivers/%s", id));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/bitcoin/receivers/%s", ApiResource.urlEncodeId(id)));
     return request(ApiResource.RequestMethod.GET, url, params, BitcoinReceiver.class, options);
   }
 }
