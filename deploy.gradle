@@ -119,7 +119,6 @@ afterEvaluate { project ->
     }
 
     artifacts {
-        archives jar
         archives sourcesJar
         archives makeJavadocsJar
     }
