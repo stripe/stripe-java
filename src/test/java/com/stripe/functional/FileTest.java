@@ -47,6 +47,10 @@ public class FileTest extends BaseStripeTest {
     File fileObject = new File(getClass().getResource("/test.png").getFile());
     FileCreateParams fileCreateParams = FileCreateParams.builder()
         .setPurpose(FileCreateParams.Purpose.DISPUTE_EVIDENCE)
+        .setFileLinkData(FileCreateParams.FileLinkData.builder()
+            .setCreate(true)
+            .setExpiresAt(123L)
+            .build())
         .setFile(fileObject)
         .build();
 
@@ -58,7 +62,11 @@ public class FileTest extends BaseStripeTest {
         "/v1/files",
         ImmutableMap.of(
             "purpose", "dispute_evidence",
-            "file", fileObject
+            "file", fileObject,
+            "file_link_data", ImmutableMap.of(
+                "create", true,
+                "expires_at", 123
+            )
         ),
         ApiResource.RequestType.MULTIPART,
         null

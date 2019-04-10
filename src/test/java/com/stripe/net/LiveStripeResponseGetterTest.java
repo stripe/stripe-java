@@ -1,22 +1,32 @@
 package com.stripe.net;
 
+import static org.hamcrest.MatcherAssert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 
 import com.stripe.Stripe;
+import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.net.RequestOptions.RequestOptionsBuilder;
 
+import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.IOException;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
@@ -162,6 +172,45 @@ public class LiveStripeResponseGetterTest {
 
     assertEquals("legal_entity[additional_owners][0][first_name]=Stripe",
         LiveStripeResponseGetter.createQuery(params));
+  }
+
+  @Test
+  public void testThrowingOnCreateQueryWithFile() {
+    final Map<String, Object> params = new HashMap<>();
+    params.put("file", new File(getClass().getResource("/test.png").getFile()));
+
+    // file encoding should be handled in multi-part request instead
+    assertThrows(InvalidRequestException.class, () -> {
+      LiveStripeResponseGetter.createQuery(params);
+    });
+  }
+
+  @Test
+  public void testEncodeMultipartParams() throws IOException, InvalidRequestException {
+    final HttpURLConnection mockConn = mock(HttpURLConnection.class);
+    final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
+    when(mockConn.getOutputStream()).thenReturn(outputStream);
+    final MultipartProcessor multipartProcessor = new MultipartProcessor(
+        mockConn, "abc", ApiResource.CHARSET);
+
+    final Map<String, Object> params = new HashMap<>();
+    params.put("file", new File(getClass().getResource("/test.png").getFile()));
+
+    final Map<String, Object> nestedParams = new HashMap<>();
+    nestedParams.put("create", true);
+    nestedParams.put("expires_at", 123L);
+    params.put("file_link_data", nestedParams);
+
+    LiveStripeResponseGetter.encodeMultipartParams(multipartProcessor, params);
+
+    String encoded = outputStream.toString();
+
+    assertThat(encoded, CoreMatchers.containsString(
+        "Content-Disposition: form-data; name=\"file\"; filename=\"test.png\""));
+    assertThat(encoded, CoreMatchers.containsString(
+        "Content-Disposition: form-data; name=\"file_link_data[create]\""));
+    assertThat(encoded, CoreMatchers.containsString(
+        "Content-Disposition: form-data; name=\"file_link_data[expires_at]\""));
   }
 
   @Test
