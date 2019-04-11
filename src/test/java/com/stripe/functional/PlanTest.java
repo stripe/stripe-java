@@ -59,6 +59,8 @@ public class PlanTest extends BaseStripeTest {
 
   @Test
   public void testRetrieveIdWithForwardSlash() throws StripeException {
+    // `stripe-mock` now has a different behavior from the actual APIs.
+    // It currently does not accept url-encoded values.
     InvalidRequestException exception =
         assertThrows(InvalidRequestException.class, () -> {
           Plan.retrieve("Pro plan $699/month");
@@ -66,6 +68,7 @@ public class PlanTest extends BaseStripeTest {
     assertThat(exception.getMessage(), CoreMatchers.containsString(
         "Unrecognized request URL (GET: /v1/plans/Pro+plan+$699/month)"));
 
+    // Still verifying that request is invoked with encoded url.
     verifyRequest(
         ApiResource.RequestMethod.GET,
         String.format("/v1/plans/%s", "Pro+plan+%24699%2Fmonth")
