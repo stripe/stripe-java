@@ -27,10 +27,10 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
   AlternateStatementDescriptors alternateStatementDescriptors;
 
   /**
-   * A positive integer in the [smallest currency
+   * A positive integer representing how much to charge in the [smallest currency
    * unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100
-   * to charge ¥100, a zero-decimal currency) representing how much to charge. The minimum amount is
-   * $0.50 US or [equivalent in charge
+   * to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in
+   * charge
    * currency](https://support.stripe.com/questions/what-is-the-minimum-amount-i-can-charge-with-stripe).
    */
   @SerializedName("amount")

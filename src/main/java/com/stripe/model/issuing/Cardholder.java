@@ -15,6 +15,7 @@ import com.stripe.param.issuing.CardholderCreateParams;
 import com.stripe.param.issuing.CardholderListParams;
 import com.stripe.param.issuing.CardholderRetrieveParams;
 import com.stripe.param.issuing.CardholderUpdateParams;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -24,6 +25,9 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Cardholder extends ApiResource implements HasId, MetadataStore<Cardholder> {
+  @SerializedName("authorization_controls")
+  AuthorizationControls authorizationControls;
+
   @SerializedName("billing")
   Billing billing;
 
@@ -210,6 +214,27 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
         String.format(
             "%s%s", Stripe.getApiBase(), String.format("/v1/issuing/cardholders/%s", this.getId()));
     return request(ApiResource.RequestMethod.POST, url, params, Cardholder.class, options);
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AuthorizationControls extends StripeObject {
+    /**
+     * Array of strings containing
+     * [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category)
+     * of authorizations permitted on this card.
+     */
+    @SerializedName("allowed_categories")
+    List<String> allowedCategories;
+
+    /**
+     * Array of strings containing
+     * [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category)
+     * of authorizations to always decline on this card.
+     */
+    @SerializedName("blocked_categories")
+    List<String> blockedCategories;
   }
 
   @Getter

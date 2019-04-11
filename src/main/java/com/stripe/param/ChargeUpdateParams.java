@@ -34,9 +34,8 @@ public class ChargeUpdateParams extends ApiRequestParams {
   /**
    * A set of key-value pairs you can attach to a charge giving information about its riskiness. If
    * you believe a charge is fraudulent, include a `user_report` key with a value of `fraudulent`.
-   * If you believe a charge is safe, include a `user_report` key with a value of `safe`. Note that
-   * you must refund a charge before setting the `user_report` to `fraudulent`. Stripe will use the
-   * information you send to improve our fraud detection algorithms.
+   * If you believe a charge is safe, include a `user_report` key with a value of `safe`. Stripe
+   * will use the information you send to improve our fraud detection algorithms.
    */
   @SerializedName("fraud_details")
   FraudDetails fraudDetails;
@@ -172,8 +171,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
      * A set of key-value pairs you can attach to a charge giving information about its riskiness.
      * If you believe a charge is fraudulent, include a `user_report` key with a value of
      * `fraudulent`. If you believe a charge is safe, include a `user_report` key with a value of
-     * `safe`. Note that you must refund a charge before setting the `user_report` to `fraudulent`.
-     * Stripe will use the information you send to improve our fraud detection algorithms.
+     * `safe`. Stripe will use the information you send to improve our fraud detection algorithms.
      */
     public Builder setFraudDetails(FraudDetails fraudDetails) {
       this.fraudDetails = fraudDetails;
