@@ -367,6 +367,13 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     } else if (value == null) {
       flatParams = new ArrayList<>();
       flatParams.add(new Parameter(keyPrefix, ""));
+    } else if ((value instanceof File) || (value instanceof InputStream)) {
+      throw new InvalidRequestException(String.format(
+          "java.io.File or java.io.InputStream %s is not supported at '%s' parameter. "
+          + "Please check our API reference for the parameter type, "
+          + "or use the provided parameter class instead.",
+          value, keyPrefix),
+          keyPrefix, null, null, 0, null);
     } else {
       flatParams = new ArrayList<>();
       flatParams.add(new Parameter(keyPrefix, value.toString()));
@@ -607,46 +614,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
       MultipartProcessor multipartProcessor = null;
       try {
-        multipartProcessor = new MultipartProcessor(
-            conn, boundary, ApiResource.CHARSET);
-
-        for (Map.Entry<String, Object> entry : params.entrySet()) {
-          String key = entry.getKey();
-          Object value = entry.getValue();
-
-          if (value instanceof File) {
-            File currentFile = (File) value;
-            if (!currentFile.exists()) {
-              throw new InvalidRequestException("File for key "
-                  + key + " must exist.", null, null, null, 0, null);
-            } else if (!currentFile.isFile()) {
-              throw new InvalidRequestException("File for key "
-                  + key
-                  + " must be a file and not a directory.",
-                  null, null, null, 0, null);
-            } else if (!currentFile.canRead()) {
-              throw new InvalidRequestException(
-                  "Must have read permissions on file for key "
-                      + key + ".", null, null, null, 0, null);
-            }
-            multipartProcessor.addFileField(key, currentFile.getName(),
-                new FileInputStream(currentFile));
-          } else if (value instanceof InputStream) {
-            @Cleanup InputStream inputStream = (InputStream) value;
-            if (inputStream.available() == 0) {
-              throw new InvalidRequestException(
-                "Must have available bytes to read on InputStream for key "
-                  + key + ".", null, null, null, 0, null
-              );
-            }
-            multipartProcessor.addFileField(key, "blob", inputStream);
-          } else {
-            // We only allow a single level of nesting for params
-            // for multipart
-            multipartProcessor.addFormField(key, (String) value);
-          }
-        }
-
+        multipartProcessor = new MultipartProcessor(conn, boundary, ApiResource.CHARSET);
+        encodeMultipartParams(multipartProcessor, params);
       } finally {
         if (multipartProcessor != null) {
           multipartProcessor.finish();
@@ -680,6 +649,56 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       }
     }
 
+  }
+
+  /**
+   * Encode multipart params as a counter-part method to {@link this#createQuery(Map)} for
+   * encoding params for non-multipart request.
+   * @param multipartProcessor        multi-part processor handling encoding of input stream and
+   *                                  basic key-value forms.
+   * @param params                    parameter map that can contain file or input stream.
+   */
+  static void encodeMultipartParams(MultipartProcessor multipartProcessor,
+                                    Map<String, Object> params)
+      throws InvalidRequestException, IOException {
+
+    for (Map.Entry<String, Object> entry : params.entrySet()) {
+      String key = entry.getKey();
+      Object value = entry.getValue();
+
+      if (value instanceof File) {
+        File currentFile = (File) value;
+        if (!currentFile.exists()) {
+          throw new InvalidRequestException("File for key "
+              + key + " must exist.", null, null, null, 0, null);
+        } else if (!currentFile.isFile()) {
+          throw new InvalidRequestException("File for key "
+              + key
+              + " must be a file and not a directory.",
+              null, null, null, 0, null);
+        } else if (!currentFile.canRead()) {
+          throw new InvalidRequestException(
+              "Must have read permissions on file for key "
+                  + key + ".", null, null, null, 0, null);
+        }
+        multipartProcessor.addFileField(key, currentFile.getName(),
+            new FileInputStream(currentFile));
+      } else if (value instanceof InputStream) {
+        @Cleanup InputStream inputStream = (InputStream) value;
+        if (inputStream.available() == 0) {
+          throw new InvalidRequestException(
+            "Must have available bytes to read on InputStream for key "
+              + key + ".", null, null, null, 0, null
+          );
+        }
+        multipartProcessor.addFileField(key, "blob", inputStream);
+      } else {
+        List<Parameter> parameters = flattenParamsValue(value, key);
+        for (Parameter parameter : parameters) {
+          multipartProcessor.addFormField(parameter.key, parameter.value);
+        }
+      }
+    }
   }
 
   private static void raiseMalformedJsonError(String responseBody, int responseCode,
