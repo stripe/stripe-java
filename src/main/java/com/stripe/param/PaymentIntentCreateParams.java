@@ -11,7 +11,13 @@ import java.util.Map;
 import lombok.Getter;
 
 public class PaymentIntentCreateParams extends ApiRequestParams {
-  /** Amount intended to be collected by this PaymentIntent. */
+  /**
+   * A positive integer representing how much to charge in the [smallest currency
+   * unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100
+   * to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in
+   * charge
+   * currency](https://support.stripe.com/questions/what-is-the-minimum-amount-i-can-charge-with-stripe).
+   */
   @SerializedName("amount")
   Long amount;
 
@@ -36,6 +42,21 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
    */
   @SerializedName("confirm")
   Boolean confirm;
+
+  /**
+   * One of `automatic` (default) or `manual`.
+   *
+   * <p>When the confirmation method is `automatic`, a PaymentIntent can be confirmed using a
+   * publishable key. After `next_action`s are handled, no additional confirmation is required to
+   * complete the payment.
+   *
+   * <p>When the confirmation method is `manual`, all payment attempts must be made using a secret
+   * key. The PaymentIntent will return to the `requires_confirmation` state after handling
+   * `next_action`s, and requires your server to initiate each payment attempt with an explicit
+   * confirmation.
+   */
+  @SerializedName("confirmation_method")
+  ConfirmationMethod confirmationMethod;
 
   /**
    * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
@@ -139,6 +160,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       Long applicationFeeAmount,
       CaptureMethod captureMethod,
       Boolean confirm,
+      ConfirmationMethod confirmationMethod,
       String currency,
       String customer,
       String description,
@@ -159,6 +181,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     this.applicationFeeAmount = applicationFeeAmount;
     this.captureMethod = captureMethod;
     this.confirm = confirm;
+    this.confirmationMethod = confirmationMethod;
     this.currency = currency;
     this.customer = customer;
     this.description = description;
@@ -189,6 +212,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     private CaptureMethod captureMethod;
 
     private Boolean confirm;
+
+    private ConfirmationMethod confirmationMethod;
 
     private String currency;
 
@@ -229,6 +254,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           this.applicationFeeAmount,
           this.captureMethod,
           this.confirm,
+          this.confirmationMethod,
           this.currency,
           this.customer,
           this.description,
@@ -247,7 +273,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           this.transferGroup);
     }
 
-    /** Amount intended to be collected by this PaymentIntent. */
+    /**
+     * A positive integer representing how much to charge in the [smallest currency
+     * unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or
+     * 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent
+     * in charge
+     * currency](https://support.stripe.com/questions/what-is-the-minimum-amount-i-can-charge-with-stripe).
+     */
     public Builder setAmount(Long amount) {
       this.amount = amount;
       return this;
@@ -278,6 +310,23 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      */
     public Builder setConfirm(Boolean confirm) {
       this.confirm = confirm;
+      return this;
+    }
+
+    /**
+     * One of `automatic` (default) or `manual`.
+     *
+     * <p>When the confirmation method is `automatic`, a PaymentIntent can be confirmed using a
+     * publishable key. After `next_action`s are handled, no additional confirmation is required to
+     * complete the payment.
+     *
+     * <p>When the confirmation method is `manual`, all payment attempts must be made using a secret
+     * key. The PaymentIntent will return to the `requires_confirmation` state after handling
+     * `next_action`s, and requires your server to initiate each payment attempt with an explicit
+     * confirmation.
+     */
+    public Builder setConfirmationMethod(ConfirmationMethod confirmationMethod) {
+      this.confirmationMethod = confirmationMethod;
       return this;
     }
 
@@ -691,6 +740,21 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     private final String value;
 
     CaptureMethod(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum ConfirmationMethod implements ApiRequestParams.EnumParam {
+    @SerializedName("automatic")
+    AUTOMATIC("automatic"),
+
+    @SerializedName("manual")
+    MANUAL("manual");
+
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
+
+    ConfirmationMethod(String value) {
       this.value = value;
     }
   }

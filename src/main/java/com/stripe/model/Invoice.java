@@ -244,11 +244,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("paid")
   Boolean paid;
 
-  /**
-   * The PaymentIntent associated with this invoice. The PaymentIntent is generated when the invoice
-   * is finalized, and can then be used to pay the invoice. Note that voiding an invoice will cancel
-   * the PaymentIntent.
-   */
   @SerializedName("payment_intent")
   PaymentIntent paymentIntent;
 
@@ -756,9 +751,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   /**
    * Stripe automatically creates and then attempts to collect payment on invoices for customers on
    * subscriptions according to your <a
-   * href="https://dashboard.stripe.com/account/recurring">subscriptions settings</a>. However, if
-   * you’d like to attempt payment on an invoice out of the normal collection schedule or for some
-   * other reason, you can do so.
+   * href="https://dashboard.stripe.com/account/billing/automatic">subscriptions settings</a>.
+   * However, if you’d like to attempt payment on an invoice out of the normal collection schedule
+   * or for some other reason, you can do so.
    */
   public Invoice pay() throws StripeException {
     return pay((Map<String, Object>) null, (RequestOptions) null);
@@ -767,9 +762,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   /**
    * Stripe automatically creates and then attempts to collect payment on invoices for customers on
    * subscriptions according to your <a
-   * href="https://dashboard.stripe.com/account/recurring">subscriptions settings</a>. However, if
-   * you’d like to attempt payment on an invoice out of the normal collection schedule or for some
-   * other reason, you can do so.
+   * href="https://dashboard.stripe.com/account/billing/automatic">subscriptions settings</a>.
+   * However, if you’d like to attempt payment on an invoice out of the normal collection schedule
+   * or for some other reason, you can do so.
    */
   public Invoice pay(RequestOptions options) throws StripeException {
     return pay((Map<String, Object>) null, options);
@@ -778,9 +773,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   /**
    * Stripe automatically creates and then attempts to collect payment on invoices for customers on
    * subscriptions according to your <a
-   * href="https://dashboard.stripe.com/account/recurring">subscriptions settings</a>. However, if
-   * you’d like to attempt payment on an invoice out of the normal collection schedule or for some
-   * other reason, you can do so.
+   * href="https://dashboard.stripe.com/account/billing/automatic">subscriptions settings</a>.
+   * However, if you’d like to attempt payment on an invoice out of the normal collection schedule
+   * or for some other reason, you can do so.
    */
   public Invoice pay(Map<String, Object> params) throws StripeException {
     return pay(params, (RequestOptions) null);
@@ -789,9 +784,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   /**
    * Stripe automatically creates and then attempts to collect payment on invoices for customers on
    * subscriptions according to your <a
-   * href="https://dashboard.stripe.com/account/recurring">subscriptions settings</a>. However, if
-   * you’d like to attempt payment on an invoice out of the normal collection schedule or for some
-   * other reason, you can do so.
+   * href="https://dashboard.stripe.com/account/billing/automatic">subscriptions settings</a>.
+   * However, if you’d like to attempt payment on an invoice out of the normal collection schedule
+   * or for some other reason, you can do so.
    */
   public Invoice pay(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
@@ -803,9 +798,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   /**
    * Stripe automatically creates and then attempts to collect payment on invoices for customers on
    * subscriptions according to your <a
-   * href="https://dashboard.stripe.com/account/recurring">subscriptions settings</a>. However, if
-   * you’d like to attempt payment on an invoice out of the normal collection schedule or for some
-   * other reason, you can do so.
+   * href="https://dashboard.stripe.com/account/billing/automatic">subscriptions settings</a>.
+   * However, if you’d like to attempt payment on an invoice out of the normal collection schedule
+   * or for some other reason, you can do so.
    */
   public Invoice pay(InvoicePayParams params) throws StripeException {
     return pay(params, (RequestOptions) null);
@@ -814,9 +809,9 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   /**
    * Stripe automatically creates and then attempts to collect payment on invoices for customers on
    * subscriptions according to your <a
-   * href="https://dashboard.stripe.com/account/recurring">subscriptions settings</a>. However, if
-   * you’d like to attempt payment on an invoice out of the normal collection schedule or for some
-   * other reason, you can do so.
+   * href="https://dashboard.stripe.com/account/billing/automatic">subscriptions settings</a>.
+   * However, if you’d like to attempt payment on an invoice out of the normal collection schedule
+   * or for some other reason, you can do so.
    */
   public Invoice pay(InvoicePayParams params, RequestOptions options) throws StripeException {
     String url =
@@ -883,10 +878,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * Stripe will automatically send invoices to customers according to your <a
-   * href="https://dashboard.stripe.com/account/recurring">subscriptions settings</a>. However, if
-   * you’d like to manually send an invoice to your customer out of the normal schedule, you can do
-   * so. When sending invoices that have already been paid, there will be no reference to the
-   * payment in the email.
+   * href="https://dashboard.stripe.com/account/billing/automatic">subscriptions settings</a>.
+   * However, if you’d like to manually send an invoice to your customer out of the normal schedule,
+   * you can do so. When sending invoices that have already been paid, there will be no reference to
+   * the payment in the email.
    *
    * <p>Requests made in test-mode result in no emails being sent, despite sending an <code>
    * invoice.sent</code> event.
@@ -897,10 +892,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * Stripe will automatically send invoices to customers according to your <a
-   * href="https://dashboard.stripe.com/account/recurring">subscriptions settings</a>. However, if
-   * you’d like to manually send an invoice to your customer out of the normal schedule, you can do
-   * so. When sending invoices that have already been paid, there will be no reference to the
-   * payment in the email.
+   * href="https://dashboard.stripe.com/account/billing/automatic">subscriptions settings</a>.
+   * However, if you’d like to manually send an invoice to your customer out of the normal schedule,
+   * you can do so. When sending invoices that have already been paid, there will be no reference to
+   * the payment in the email.
    *
    * <p>Requests made in test-mode result in no emails being sent, despite sending an <code>
    * invoice.sent</code> event.
@@ -911,10 +906,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * Stripe will automatically send invoices to customers according to your <a
-   * href="https://dashboard.stripe.com/account/recurring">subscriptions settings</a>. However, if
-   * you’d like to manually send an invoice to your customer out of the normal schedule, you can do
-   * so. When sending invoices that have already been paid, there will be no reference to the
-   * payment in the email.
+   * href="https://dashboard.stripe.com/account/billing/automatic">subscriptions settings</a>.
+   * However, if you’d like to manually send an invoice to your customer out of the normal schedule,
+   * you can do so. When sending invoices that have already been paid, there will be no reference to
+   * the payment in the email.
    *
    * <p>Requests made in test-mode result in no emails being sent, despite sending an <code>
    * invoice.sent</code> event.
@@ -925,10 +920,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * Stripe will automatically send invoices to customers according to your <a
-   * href="https://dashboard.stripe.com/account/recurring">subscriptions settings</a>. However, if
-   * you’d like to manually send an invoice to your customer out of the normal schedule, you can do
-   * so. When sending invoices that have already been paid, there will be no reference to the
-   * payment in the email.
+   * href="https://dashboard.stripe.com/account/billing/automatic">subscriptions settings</a>.
+   * However, if you’d like to manually send an invoice to your customer out of the normal schedule,
+   * you can do so. When sending invoices that have already been paid, there will be no reference to
+   * the payment in the email.
    *
    * <p>Requests made in test-mode result in no emails being sent, despite sending an <code>
    * invoice.sent</code> event.
@@ -943,10 +938,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * Stripe will automatically send invoices to customers according to your <a
-   * href="https://dashboard.stripe.com/account/recurring">subscriptions settings</a>. However, if
-   * you’d like to manually send an invoice to your customer out of the normal schedule, you can do
-   * so. When sending invoices that have already been paid, there will be no reference to the
-   * payment in the email.
+   * href="https://dashboard.stripe.com/account/billing/automatic">subscriptions settings</a>.
+   * However, if you’d like to manually send an invoice to your customer out of the normal schedule,
+   * you can do so. When sending invoices that have already been paid, there will be no reference to
+   * the payment in the email.
    *
    * <p>Requests made in test-mode result in no emails being sent, despite sending an <code>
    * invoice.sent</code> event.
@@ -957,10 +952,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * Stripe will automatically send invoices to customers according to your <a
-   * href="https://dashboard.stripe.com/account/recurring">subscriptions settings</a>. However, if
-   * you’d like to manually send an invoice to your customer out of the normal schedule, you can do
-   * so. When sending invoices that have already been paid, there will be no reference to the
-   * payment in the email.
+   * href="https://dashboard.stripe.com/account/billing/automatic">subscriptions settings</a>.
+   * However, if you’d like to manually send an invoice to your customer out of the normal schedule,
+   * you can do so. When sending invoices that have already been paid, there will be no reference to
+   * the payment in the email.
    *
    * <p>Requests made in test-mode result in no emails being sent, despite sending an <code>
    * invoice.sent</code> event.

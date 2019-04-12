@@ -18,7 +18,11 @@ public class FileLinkCreateParams extends ApiRequestParams {
   @SerializedName("expires_at")
   Long expiresAt;
 
-  /** The ID of the file. */
+  /**
+   * The ID of the file. The file's `purpose` must be one of the following: `business_icon`,
+   * `business_logo`, `customer_signature`, `dispute_evidence`, `finance_report_run`,
+   * `pci_document`, `sigma_scheduled_query`, or `tax_document_user_upload`.
+   */
   @SerializedName("file")
   String file;
 
@@ -87,7 +91,11 @@ public class FileLinkCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The ID of the file. */
+    /**
+     * The ID of the file. The file's `purpose` must be one of the following: `business_icon`,
+     * `business_logo`, `customer_signature`, `dispute_evidence`, `finance_report_run`,
+     * `pci_document`, `sigma_scheduled_query`, or `tax_document_user_upload`.
+     */
     public Builder setFile(String file) {
       this.file = file;
       return this;

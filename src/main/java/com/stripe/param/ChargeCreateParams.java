@@ -11,10 +11,11 @@ import java.util.Map;
 
 public class ChargeCreateParams extends ApiRequestParams {
   /**
-   * A positive integer representing how much to charge, in the [smallest currency
-   * unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., `100` cents to charge $1.00, or
-   * `100` to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 USD or [equivalent
-   * in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts).
+   * A positive integer representing how much to charge in the [smallest currency
+   * unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100
+   * to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in
+   * charge
+   * currency](https://support.stripe.com/questions/what-is-the-minimum-amount-i-can-charge-with-stripe).
    */
   @SerializedName("amount")
   Long amount;
@@ -242,11 +243,11 @@ public class ChargeCreateParams extends ApiRequestParams {
     }
 
     /**
-     * A positive integer representing how much to charge, in the [smallest currency
-     * unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., `100` cents to charge $1.00, or
-     * `100` to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 USD or
-     * [equivalent in charge
-     * currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts).
+     * A positive integer representing how much to charge in the [smallest currency
+     * unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or
+     * 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent
+     * in charge
+     * currency](https://support.stripe.com/questions/what-is-the-minimum-amount-i-can-charge-with-stripe).
      */
     public Builder setAmount(Long amount) {
       this.amount = amount;
