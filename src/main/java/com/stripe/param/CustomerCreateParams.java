@@ -280,12 +280,17 @@ public class CustomerCreateParams extends ApiRequestParams {
     @SerializedName("custom_fields")
     Object customFields;
 
+    /** ID of the default payment method for the customer. */
+    @SerializedName("default_payment_method")
+    String defaultPaymentMethod;
+
     /** Default footer to be displayed on invoices for this customer. */
     @SerializedName("footer")
     String footer;
 
-    private InvoiceSettings(Object customFields, String footer) {
+    private InvoiceSettings(Object customFields, String defaultPaymentMethod, String footer) {
       this.customFields = customFields;
+      this.defaultPaymentMethod = defaultPaymentMethod;
       this.footer = footer;
     }
 
@@ -296,11 +301,13 @@ public class CustomerCreateParams extends ApiRequestParams {
     public static class Builder {
       private Object customFields;
 
+      private String defaultPaymentMethod;
+
       private String footer;
 
       /** Finalize and obtain parameter instance from this builder. */
       public InvoiceSettings build() {
-        return new InvoiceSettings(this.customFields, this.footer);
+        return new InvoiceSettings(this.customFields, this.defaultPaymentMethod, this.footer);
       }
 
       /** Default custom fields to be displayed on invoices for this customer. */
@@ -312,6 +319,12 @@ public class CustomerCreateParams extends ApiRequestParams {
       /** Default custom fields to be displayed on invoices for this customer. */
       public Builder setCustomFields(List<CustomField> customFields) {
         this.customFields = customFields;
+        return this;
+      }
+
+      /** ID of the default payment method for the customer. */
+      public Builder setDefaultPaymentMethod(String defaultPaymentMethod) {
+        this.defaultPaymentMethod = defaultPaymentMethod;
         return this;
       }
 

@@ -4,6 +4,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -233,9 +234,9 @@ public class ChargeUpdateParams extends ApiRequestParams {
 
   public static class FraudDetails {
     @SerializedName("user_report")
-    UserReport userReport;
+    ApiRequestParams.EnumParam userReport;
 
-    private FraudDetails(UserReport userReport) {
+    private FraudDetails(ApiRequestParams.EnumParam userReport) {
       this.userReport = userReport;
     }
 
@@ -244,7 +245,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private UserReport userReport;
+      private ApiRequestParams.EnumParam userReport;
 
       /** Finalize and obtain parameter instance from this builder. */
       public FraudDetails build() {
@@ -252,6 +253,11 @@ public class ChargeUpdateParams extends ApiRequestParams {
       }
 
       public Builder setUserReport(UserReport userReport) {
+        this.userReport = userReport;
+        return this;
+      }
+
+      public Builder setUserReport(EmptyParam userReport) {
         this.userReport = userReport;
         return this;
       }
