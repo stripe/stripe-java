@@ -1,5 +1,11 @@
 # Changelog
 
+## 9.1.0 - 2019-04-11
+* [#737](https://github.com/stripe/stripe-java/pull/737) Fix issue #736 on un-encoded ID in url path
+* [#739](https://github.com/stripe/stripe-java/pull/739) Add support for `ConfirmationMethod` in `PaymentIntentCreateParams`, `AuthorizationControls` in cardholders mode/params, and
+* [#735](https://github.com/stripe/stripe-java/pull/735) Fix encoding of nested parameters in multipart requests
+* [#734](https://github.com/stripe/stripe-java/pull/734) Upgrade Gradle to 5.3.1
+
 ## 9.0.0 - 2019-04-09
 * [#700](https://github.com/stripe/stripe-java/pull/700) Major version release. Refer to our [migration guide for v9](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v9) for a list of backward incompatible changes to watch out for.
 Pull requests included in this release:
