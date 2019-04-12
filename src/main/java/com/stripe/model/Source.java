@@ -197,7 +197,10 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
           String.format(
               "%s%s",
               Stripe.getApiBase(),
-              String.format("/v1/customers/%s/sources/%s", this.getCustomer(), this.getId()));
+              String.format(
+                  "/v1/customers/%s/sources/%s",
+                  ApiResource.urlEncodeId(this.getCustomer()),
+                  ApiResource.urlEncodeId(this.getId())));
     } else {
       throw new InvalidRequestException(
           "Unable to construct url because [customer] field(s) are all null",
@@ -233,7 +236,9 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
   public static Source retrieve(String source, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/sources/%s", source));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/sources/%s", ApiResource.urlEncodeId(source)));
     return request(ApiResource.RequestMethod.GET, url, params, Source.class, options);
   }
 
@@ -244,7 +249,9 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
   public static Source retrieve(String source, SourceRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/sources/%s", source));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/sources/%s", ApiResource.urlEncodeId(source)));
     return request(ApiResource.RequestMethod.GET, url, params, Source.class, options);
   }
 
@@ -296,7 +303,10 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
   @Override
   public Source update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/sources/%s", this.getId()));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/sources/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Source.class, options);
   }
 
@@ -322,7 +332,10 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
    */
   public Source update(SourceUpdateParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/sources/%s", this.getId()));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/sources/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Source.class, options);
   }
 
@@ -335,7 +348,9 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
   public Source verify(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/sources/%s/verify", this.getId()));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/sources/%s/verify", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Source.class, options);
   }
 
@@ -348,7 +363,9 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
   public Source verify(SourceVerifyParams params, RequestOptions options) throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/sources/%s/verify", this.getId()));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/sources/%s/verify", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Source.class, options);
   }
 
@@ -369,7 +386,9 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
     String url =
         String.format(
             "%s%s",
-            Stripe.getApiBase(), String.format("/v1/sources/%s/source_transactions", this.getId()));
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/sources/%s/source_transactions", ApiResource.urlEncodeId(this.getId())));
     return requestCollection(url, params, SourceTransactionCollection.class, options);
   }
 
@@ -385,7 +404,9 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
     String url =
         String.format(
             "%s%s",
-            Stripe.getApiBase(), String.format("/v1/sources/%s/source_transactions", this.getId()));
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/sources/%s/source_transactions", ApiResource.urlEncodeId(this.getId())));
     return requestCollection(url, params, SourceTransactionCollection.class, options);
   }
 

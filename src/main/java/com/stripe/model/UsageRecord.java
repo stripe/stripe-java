@@ -74,7 +74,9 @@ public class UsageRecord extends ApiResource implements HasId {
         String.format(
             "%s%s",
             Stripe.getApiBase(),
-            String.format("/v1/subscription_items/%s/usage_records", subscriptionItem));
+            String.format(
+                "/v1/subscription_items/%s/usage_records",
+                ApiResource.urlEncodeId(subscriptionItem)));
     return request(ApiResource.RequestMethod.POST, url, params, UsageRecord.class, options);
   }
 
@@ -109,7 +111,9 @@ public class UsageRecord extends ApiResource implements HasId {
         String.format(
             "%s%s",
             Stripe.getApiBase(),
-            String.format("/v1/subscription_items/%s/usage_records", subscriptionItem));
+            String.format(
+                "/v1/subscription_items/%s/usage_records",
+                ApiResource.urlEncodeId(subscriptionItem)));
     return request(ApiResource.RequestMethod.POST, url, params, UsageRecord.class, options);
   }
 }

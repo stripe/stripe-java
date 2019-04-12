@@ -39,7 +39,9 @@ public class LoginLink extends ApiResource {
       String account, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/accounts/%s/login_links", account));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/accounts/%s/login_links", ApiResource.urlEncodeId(account)));
     return request(ApiResource.RequestMethod.POST, url, params, LoginLink.class, options);
   }
 
@@ -54,7 +56,9 @@ public class LoginLink extends ApiResource {
       throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/accounts/%s/login_links", account));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/accounts/%s/login_links", ApiResource.urlEncodeId(account)));
     return request(ApiResource.RequestMethod.POST, url, params, LoginLink.class, options);
   }
 }

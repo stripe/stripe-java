@@ -138,7 +138,9 @@ public class Sku extends ApiResource implements HasId, MetadataStore<Sku> {
    */
   public static Sku retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), String.format("/v1/skus/%s", id));
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/skus/%s", ApiResource.urlEncodeId(id)));
     return request(ApiResource.RequestMethod.GET, url, params, Sku.class, options);
   }
 
@@ -148,7 +150,9 @@ public class Sku extends ApiResource implements HasId, MetadataStore<Sku> {
    */
   public static Sku retrieve(String id, SkuRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), String.format("/v1/skus/%s", id));
+    String url =
+        String.format(
+            "%s%s", Stripe.getApiBase(), String.format("/v1/skus/%s", ApiResource.urlEncodeId(id)));
     return request(ApiResource.RequestMethod.GET, url, params, Sku.class, options);
   }
 
@@ -210,7 +214,10 @@ public class Sku extends ApiResource implements HasId, MetadataStore<Sku> {
   @Override
   public Sku update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/skus/%s", this.getId()));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/skus/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Sku.class, options);
   }
 
@@ -234,7 +241,10 @@ public class Sku extends ApiResource implements HasId, MetadataStore<Sku> {
    */
   public Sku update(SkuUpdateParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/skus/%s", this.getId()));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/skus/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Sku.class, options);
   }
 
@@ -279,7 +289,10 @@ public class Sku extends ApiResource implements HasId, MetadataStore<Sku> {
   /** Delete a SKU. Deleting a SKU is only possible until it has been used in an order. */
   public Sku delete(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/skus/%s", this.getId()));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/skus/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.DELETE, url, params, Sku.class, options);
   }
 

@@ -255,7 +255,10 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
   public static ApplicationFee retrieve(
       String id, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/application_fees/%s", id));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/application_fees/%s", ApiResource.urlEncodeId(id)));
     return request(ApiResource.RequestMethod.GET, url, params, ApplicationFee.class, options);
   }
 
@@ -267,7 +270,10 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
       String id, ApplicationFeeRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/application_fees/%s", id));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/application_fees/%s", ApiResource.urlEncodeId(id)));
     return request(ApiResource.RequestMethod.GET, url, params, ApplicationFee.class, options);
   }
 }

@@ -97,7 +97,10 @@ public class CountrySpec extends ApiResource implements HasId {
   public static CountrySpec retrieve(
       String country, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/country_specs/%s", country));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/country_specs/%s", ApiResource.urlEncodeId(country)));
     return request(ApiResource.RequestMethod.GET, url, params, CountrySpec.class, options);
   }
 
@@ -106,7 +109,10 @@ public class CountrySpec extends ApiResource implements HasId {
       String country, CountrySpecRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/country_specs/%s", country));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/country_specs/%s", ApiResource.urlEncodeId(country)));
     return request(ApiResource.RequestMethod.GET, url, params, CountrySpec.class, options);
   }
 

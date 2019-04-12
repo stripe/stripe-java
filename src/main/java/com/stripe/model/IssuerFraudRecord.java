@@ -148,7 +148,9 @@ public class IssuerFraudRecord extends ApiResource implements HasId {
     String url =
         String.format(
             "%s%s",
-            Stripe.getApiBase(), String.format("/v1/issuer_fraud_records/%s", issuerFraudRecord));
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/issuer_fraud_records/%s", ApiResource.urlEncodeId(issuerFraudRecord)));
     return request(ApiResource.RequestMethod.GET, url, params, IssuerFraudRecord.class, options);
   }
 
@@ -164,7 +166,9 @@ public class IssuerFraudRecord extends ApiResource implements HasId {
     String url =
         String.format(
             "%s%s",
-            Stripe.getApiBase(), String.format("/v1/issuer_fraud_records/%s", issuerFraudRecord));
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/issuer_fraud_records/%s", ApiResource.urlEncodeId(issuerFraudRecord)));
     return request(ApiResource.RequestMethod.GET, url, params, IssuerFraudRecord.class, options);
   }
 }

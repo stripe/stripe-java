@@ -229,7 +229,9 @@ public class Payout extends ApiResource implements BalanceTransactionSource, Met
   public static Payout retrieve(String payout, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/payouts/%s", payout));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/payouts/%s", ApiResource.urlEncodeId(payout)));
     return request(ApiResource.RequestMethod.GET, url, params, Payout.class, options);
   }
 
@@ -241,7 +243,9 @@ public class Payout extends ApiResource implements BalanceTransactionSource, Met
   public static Payout retrieve(String payout, PayoutRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/payouts/%s", payout));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/payouts/%s", ApiResource.urlEncodeId(payout)));
     return request(ApiResource.RequestMethod.GET, url, params, Payout.class, options);
   }
 
@@ -369,7 +373,10 @@ public class Payout extends ApiResource implements BalanceTransactionSource, Met
   @Override
   public Payout update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/payouts/%s", this.getId()));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/payouts/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Payout.class, options);
   }
 
@@ -387,7 +394,10 @@ public class Payout extends ApiResource implements BalanceTransactionSource, Met
    */
   public Payout update(PayoutUpdateParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/payouts/%s", this.getId()));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/payouts/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Payout.class, options);
   }
 
@@ -422,7 +432,9 @@ public class Payout extends ApiResource implements BalanceTransactionSource, Met
   public Payout cancel(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/payouts/%s/cancel", this.getId()));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/payouts/%s/cancel", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Payout.class, options);
   }
 
@@ -441,7 +453,9 @@ public class Payout extends ApiResource implements BalanceTransactionSource, Met
   public Payout cancel(PayoutCancelParams params, RequestOptions options) throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/payouts/%s/cancel", this.getId()));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/payouts/%s/cancel", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Payout.class, options);
   }
 }

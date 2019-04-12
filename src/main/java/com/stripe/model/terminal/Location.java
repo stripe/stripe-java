@@ -58,7 +58,9 @@ public class Location extends ApiResource implements HasId {
       String location, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/terminal/locations/%s", location));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location)));
     return request(ApiResource.RequestMethod.GET, url, params, Location.class, options);
   }
 
@@ -68,7 +70,9 @@ public class Location extends ApiResource implements HasId {
       throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/terminal/locations/%s", location));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location)));
     return request(ApiResource.RequestMethod.GET, url, params, Location.class, options);
   }
 
@@ -112,7 +116,9 @@ public class Location extends ApiResource implements HasId {
       throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/terminal/locations/%s", this.getId()));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Location.class, options);
   }
 
@@ -132,7 +138,9 @@ public class Location extends ApiResource implements HasId {
       throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/terminal/locations/%s", this.getId()));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Location.class, options);
   }
 
@@ -180,7 +188,9 @@ public class Location extends ApiResource implements HasId {
       throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/terminal/locations/%s", this.getId()));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.DELETE, url, params, Location.class, options);
   }
 
@@ -194,7 +204,9 @@ public class Location extends ApiResource implements HasId {
       throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/terminal/locations/%s", this.getId()));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.DELETE, url, params, Location.class, options);
   }
 }

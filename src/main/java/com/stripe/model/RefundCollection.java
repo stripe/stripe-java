@@ -69,7 +69,10 @@ public class RefundCollection extends StripeCollection<Refund> {
   public Refund retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("%s/%s", this.getUrl(), id));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Refund.class, options);
   }
 
@@ -77,7 +80,10 @@ public class RefundCollection extends StripeCollection<Refund> {
   public Refund retrieve(String id, RefundCollectionRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("%s/%s", this.getUrl(), id));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Refund.class, options);
   }
 }

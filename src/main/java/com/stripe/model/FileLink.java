@@ -98,7 +98,9 @@ public class FileLink extends ApiResource implements HasId, MetadataStore<FileLi
   public static FileLink retrieve(String link, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/file_links/%s", link));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/file_links/%s", ApiResource.urlEncodeId(link)));
     return request(ApiResource.RequestMethod.GET, url, params, FileLink.class, options);
   }
 
@@ -106,7 +108,9 @@ public class FileLink extends ApiResource implements HasId, MetadataStore<FileLi
   public static FileLink retrieve(
       String link, FileLinkRetrieveParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/file_links/%s", link));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/file_links/%s", ApiResource.urlEncodeId(link)));
     return request(ApiResource.RequestMethod.GET, url, params, FileLink.class, options);
   }
 
@@ -146,7 +150,9 @@ public class FileLink extends ApiResource implements HasId, MetadataStore<FileLi
       throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/file_links/%s", this.getId()));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/file_links/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, FileLink.class, options);
   }
 
@@ -160,7 +166,9 @@ public class FileLink extends ApiResource implements HasId, MetadataStore<FileLi
       throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/file_links/%s", this.getId()));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/file_links/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, FileLink.class, options);
   }
 

@@ -151,7 +151,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/payment_methods/%s", paymentMethod));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(paymentMethod)));
     return request(ApiResource.RequestMethod.GET, url, params, PaymentMethod.class, options);
   }
 
@@ -161,7 +163,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/payment_methods/%s", paymentMethod));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(paymentMethod)));
     return request(ApiResource.RequestMethod.GET, url, params, PaymentMethod.class, options);
   }
 
@@ -177,7 +181,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/payment_methods/%s", this.getId()));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
   }
 
@@ -191,7 +197,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/payment_methods/%s", this.getId()));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
   }
 
@@ -231,7 +239,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     String url =
         String.format(
             "%s%s",
-            Stripe.getApiBase(), String.format("/v1/payment_methods/%s/attach", this.getId()));
+            Stripe.getApiBase(),
+            String.format("/v1/payment_methods/%s/attach", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
   }
 
@@ -246,7 +255,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     String url =
         String.format(
             "%s%s",
-            Stripe.getApiBase(), String.format("/v1/payment_methods/%s/attach", this.getId()));
+            Stripe.getApiBase(),
+            String.format("/v1/payment_methods/%s/attach", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
   }
 
@@ -271,7 +281,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     String url =
         String.format(
             "%s%s",
-            Stripe.getApiBase(), String.format("/v1/payment_methods/%s/detach", this.getId()));
+            Stripe.getApiBase(),
+            String.format("/v1/payment_methods/%s/detach", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
   }
 
@@ -286,7 +297,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     String url =
         String.format(
             "%s%s",
-            Stripe.getApiBase(), String.format("/v1/payment_methods/%s/detach", this.getId()));
+            Stripe.getApiBase(),
+            String.format("/v1/payment_methods/%s/detach", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
   }
 

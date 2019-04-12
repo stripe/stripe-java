@@ -228,7 +228,10 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   public static Customer retrieve(
       String customer, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/customers/%s", customer));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/customers/%s", ApiResource.urlEncodeId(customer)));
     return request(ApiResource.RequestMethod.GET, url, params, Customer.class, options);
   }
 
@@ -240,7 +243,10 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
       String customer, CustomerRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/customers/%s", customer));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/customers/%s", ApiResource.urlEncodeId(customer)));
     return request(ApiResource.RequestMethod.GET, url, params, Customer.class, options);
   }
 
@@ -281,7 +287,10 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   public Customer update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/customers/%s", this.getId()));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/customers/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Customer.class, options);
   }
 
@@ -320,7 +329,10 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   public Customer update(CustomerUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/customers/%s", this.getId()));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/customers/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Customer.class, options);
   }
 
@@ -355,7 +367,10 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   public Customer delete(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/customers/%s", this.getId()));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/customers/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.DELETE, url, params, Customer.class, options);
   }
 
@@ -374,7 +389,9 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
       throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/customers/%s/discount", this.getId()));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/customers/%s/discount", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.DELETE, url, params, Discount.class, options);
   }
 

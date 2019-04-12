@@ -627,7 +627,9 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
   public static Charge retrieve(String charge, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/charges/%s", charge));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/charges/%s", ApiResource.urlEncodeId(charge)));
     return request(ApiResource.RequestMethod.GET, url, params, Charge.class, options);
   }
 
@@ -639,7 +641,9 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
   public static Charge retrieve(String charge, ChargeRetrieveParams params, RequestOptions options)
       throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/charges/%s", charge));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/charges/%s", ApiResource.urlEncodeId(charge)));
     return request(ApiResource.RequestMethod.GET, url, params, Charge.class, options);
   }
 
@@ -659,7 +663,10 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
   @Override
   public Charge update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/charges/%s", this.getId()));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/charges/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
   }
 
@@ -677,7 +684,10 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
    */
   public Charge update(ChargeUpdateParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/charges/%s", this.getId()));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/charges/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
   }
 
@@ -732,7 +742,9 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
   public Charge capture(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/charges/%s/capture", this.getId()));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/charges/%s/capture", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
   }
 
@@ -761,7 +773,9 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
   public Charge capture(ChargeCaptureParams params, RequestOptions options) throws StripeException {
     String url =
         String.format(
-            "%s%s", Stripe.getApiBase(), String.format("/v1/charges/%s/capture", this.getId()));
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/charges/%s/capture", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
   }
 

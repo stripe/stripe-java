@@ -241,14 +241,20 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   /** Retrieves the plan with the given ID. */
   public static Plan retrieve(String plan, Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), String.format("/v1/plans/%s", plan));
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/plans/%s", ApiResource.urlEncodeId(plan)));
     return request(ApiResource.RequestMethod.GET, url, params, Plan.class, options);
   }
 
   /** Retrieves the plan with the given ID. */
   public static Plan retrieve(String plan, PlanRetrieveParams params, RequestOptions options)
       throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), String.format("/v1/plans/%s", plan));
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/plans/%s", ApiResource.urlEncodeId(plan)));
     return request(ApiResource.RequestMethod.GET, url, params, Plan.class, options);
   }
 
@@ -270,7 +276,10 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   @Override
   public Plan update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/plans/%s", this.getId()));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/plans/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Plan.class, options);
   }
 
@@ -290,7 +299,10 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
    */
   public Plan update(PlanUpdateParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/plans/%s", this.getId()));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/plans/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.POST, url, params, Plan.class, options);
   }
 
@@ -312,7 +324,10 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   /** Deleting plans means new subscribers can’t be added. Existing subscribers aren’t affected. */
   public Plan delete(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format("%s%s", Stripe.getApiBase(), String.format("/v1/plans/%s", this.getId()));
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/plans/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.DELETE, url, params, Plan.class, options);
   }
 

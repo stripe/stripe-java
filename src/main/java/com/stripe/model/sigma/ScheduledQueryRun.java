@@ -116,7 +116,8 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
         String.format(
             "%s%s",
             Stripe.getApiBase(),
-            String.format("/v1/sigma/scheduled_query_runs/%s", scheduledQueryRun));
+            String.format(
+                "/v1/sigma/scheduled_query_runs/%s", ApiResource.urlEncodeId(scheduledQueryRun)));
     return request(ApiResource.RequestMethod.GET, url, params, ScheduledQueryRun.class, options);
   }
 
@@ -128,7 +129,8 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
         String.format(
             "%s%s",
             Stripe.getApiBase(),
-            String.format("/v1/sigma/scheduled_query_runs/%s", scheduledQueryRun));
+            String.format(
+                "/v1/sigma/scheduled_query_runs/%s", ApiResource.urlEncodeId(scheduledQueryRun)));
     return request(ApiResource.RequestMethod.GET, url, params, ScheduledQueryRun.class, options);
   }
 
