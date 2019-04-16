@@ -108,9 +108,9 @@ public class Refund extends ApiResource implements BalanceTransactionSource, Met
   ExpandableField<TransferReversal> sourceTransferReversal;
 
   /**
-   * Status of the refund. For credit card refunds, this can be `succeeded` or `failed`. For other
-   * types of refunds, it can be `pending`, `succeeded`, `failed`, or `canceled`. Refer to our
-   * [refunds](https://stripe.com/docs/refunds#failed-refunds) documentation for more details.
+   * Status of the refund. For credit card refunds, this can be `pending`, `succeeded`, or `failed`.
+   * For other types of refunds, it can be `pending`, `succeeded`, `failed`, or `canceled`. Refer to
+   * our [refunds](https://stripe.com/docs/refunds#failed-refunds) documentation for more details.
    */
   @SerializedName("status")
   String status;

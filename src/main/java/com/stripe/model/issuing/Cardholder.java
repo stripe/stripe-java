@@ -243,6 +243,10 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
      */
     @SerializedName("blocked_categories")
     List<String> blockedCategories;
+
+    /** Limit the spending with rules based on time intervals and categories. */
+    @SerializedName("spending_limits")
+    List<SpendingLimit> spendingLimits;
   }
 
   @Getter
@@ -254,5 +258,29 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
 
     @SerializedName("name")
     String name;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SpendingLimit extends StripeObject {
+    /** Maximum amount allowed to spend per time interval. */
+    @SerializedName("amount")
+    Long amount;
+
+    /**
+     * Array of strings containing
+     * [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category)
+     * on which to apply the spending limit. Leave this blank to limit all charges.
+     */
+    @SerializedName("categories")
+    List<String> categories;
+
+    /**
+     * The time interval with which to apply this spending limit towards. Allowed values are
+     * `per_authorization`, `daily`, `weekly`, `monthly`, `yearly`, or `all_time`.
+     */
+    @SerializedName("interval")
+    String interval;
   }
 }
