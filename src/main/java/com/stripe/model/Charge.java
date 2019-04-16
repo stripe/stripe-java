@@ -1214,7 +1214,13 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class ThreeDSecure extends StripeObject {}
+      public static class ThreeDSecure extends StripeObject {
+        @SerializedName("succeeded")
+        Boolean succeeded;
+
+        @SerializedName("version")
+        String version;
+      }
 
       @Getter
       @Setter

@@ -36,9 +36,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   /**
    * Set to `true` to attempt to confirm this PaymentIntent immediately. This parameter defaults to
    * `false`. If the payment method attached is a card, a return_url may be provided in case
-   * additional authentication is required. Read the [expanded
-   * documentation](https://stripe.com/docs/payments/payment-intents/server-confirmation) to learn
-   * more about server-side confirmation.
+   * additional authentication is required.
    */
   @SerializedName("confirm")
   Boolean confirm;
@@ -53,7 +51,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
    * <p>When the confirmation method is `manual`, all payment attempts must be made using a secret
    * key. The PaymentIntent will return to the `requires_confirmation` state after handling
    * `next_action`s, and requires your server to initiate each payment attempt with an explicit
-   * confirmation.
+   * confirmation. Read the [expanded
+   * documentation](https://stripe.com/docs/payments/payment-intents/quickstart#flow-manual-confirmation)
+   * to learn more about manual confirmation.
    */
   @SerializedName("confirmation_method")
   ConfirmationMethod confirmationMethod;
@@ -304,9 +304,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     /**
      * Set to `true` to attempt to confirm this PaymentIntent immediately. This parameter defaults
      * to `false`. If the payment method attached is a card, a return_url may be provided in case
-     * additional authentication is required. Read the [expanded
-     * documentation](https://stripe.com/docs/payments/payment-intents/server-confirmation) to learn
-     * more about server-side confirmation.
+     * additional authentication is required.
      */
     public Builder setConfirm(Boolean confirm) {
       this.confirm = confirm;
@@ -323,7 +321,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      * <p>When the confirmation method is `manual`, all payment attempts must be made using a secret
      * key. The PaymentIntent will return to the `requires_confirmation` state after handling
      * `next_action`s, and requires your server to initiate each payment attempt with an explicit
-     * confirmation.
+     * confirmation. Read the [expanded
+     * documentation](https://stripe.com/docs/payments/payment-intents/quickstart#flow-manual-confirmation)
+     * to learn more about manual confirmation.
      */
     public Builder setConfirmationMethod(ConfirmationMethod confirmationMethod) {
       this.confirmationMethod = confirmationMethod;
