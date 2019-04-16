@@ -403,7 +403,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
     @SerializedName("custom_fields")
     List<Invoice.CustomField> customFields;
 
-    /** ID of the default payment method for the customer. */
+    /** ID of the default payment method used for subscriptions and invoices for the customer. */
     @SerializedName("default_payment_method")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)

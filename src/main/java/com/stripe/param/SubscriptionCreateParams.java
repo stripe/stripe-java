@@ -89,8 +89,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
   /**
    * ID of the default payment method for the subscription. It must belong to the customer
-   * associated with the subscription and be in a chargeable state. If not set, defaults to the
-   * customer's default payment method.
+   * associated with the subscription. If not set, invoices will use the default payment method in
+   * the customer's invoice settings.
    */
   @SerializedName("default_payment_method")
   String defaultPaymentMethod;
@@ -394,8 +394,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     /**
      * ID of the default payment method for the subscription. It must belong to the customer
-     * associated with the subscription and be in a chargeable state. If not set, defaults to the
-     * customer's default payment method.
+     * associated with the subscription. If not set, invoices will use the default payment method in
+     * the customer's invoice settings.
      */
     public Builder setDefaultPaymentMethod(String defaultPaymentMethod) {
       this.defaultPaymentMethod = defaultPaymentMethod;

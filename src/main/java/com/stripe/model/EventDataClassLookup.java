@@ -2,6 +2,7 @@
 
 package com.stripe.model;
 
+import com.stripe.model.checkout.Session;
 import com.stripe.model.issuing.Authorization;
 import com.stripe.model.issuing.CardDetails;
 import com.stripe.model.issuing.Cardholder;
@@ -38,6 +39,7 @@ final class EventDataClassLookup {
     classLookup.put("bitcoin_transaction", BitcoinTransaction.class);
     classLookup.put("card", Card.class);
     classLookup.put("charge", Charge.class);
+    classLookup.put("checkout.session", Session.class);
     classLookup.put("connect_collection_transfer", ConnectCollectionTransfer.class);
     classLookup.put("country_spec", CountrySpec.class);
     classLookup.put("coupon", Coupon.class);

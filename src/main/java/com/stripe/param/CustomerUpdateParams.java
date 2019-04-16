@@ -321,7 +321,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
     @SerializedName("custom_fields")
     Object customFields;
 
-    /** ID of the default payment method for the customer. */
+    /** ID of the default payment method used for subscriptions and invoices for the customer. */
     @SerializedName("default_payment_method")
     String defaultPaymentMethod;
 
@@ -363,7 +363,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** ID of the default payment method for the customer. */
+      /** ID of the default payment method used for subscriptions and invoices for the customer. */
       public Builder setDefaultPaymentMethod(String defaultPaymentMethod) {
         this.defaultPaymentMethod = defaultPaymentMethod;
         return this;
