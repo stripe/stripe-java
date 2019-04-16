@@ -1,8 +1,14 @@
 # Changelog
 
+## 9.2.0 - 2019-04-15
+* [#744](https://github.com/stripe/stripe-java/pull/744)
+  * Make `paymentIntent` on `Invoice` expandable instead of full-model
+  * Add support for issuing `SpendingLimit` in `Card` and `CardHolder`
+  * Add support for fields in `PaymentMethodDetails.Card.ThreeDSecure`
+
 ## 9.1.0 - 2019-04-11
 * [#737](https://github.com/stripe/stripe-java/pull/737) Fix issue #736 on un-encoded ID in url path
-* [#739](https://github.com/stripe/stripe-java/pull/739) Add support for `ConfirmationMethod` in `PaymentIntentCreateParams`, `AuthorizationControls` in cardholders mode/params, and
+* [#739](https://github.com/stripe/stripe-java/pull/739) Add support for `ConfirmationMethod` in `PaymentIntentCreateParams`, `AuthorizationControls` in cardholders mode/params
 * [#735](https://github.com/stripe/stripe-java/pull/735) Fix encoding of nested parameters in multipart requests
 * [#734](https://github.com/stripe/stripe-java/pull/734) Upgrade Gradle to 5.3.1
 
