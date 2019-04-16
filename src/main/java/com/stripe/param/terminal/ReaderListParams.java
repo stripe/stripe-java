@@ -8,10 +8,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ReaderListParams extends ApiRequestParams {
-  /** A device type to filter readers to only those of the specific device type. */
-  @SerializedName("device_type")
-  String deviceType;
-
   /**
    * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the
    * list. For instance, if you make a list request and receive 100 objects, starting with
@@ -57,7 +53,6 @@ public class ReaderListParams extends ApiRequestParams {
   String status;
 
   private ReaderListParams(
-      String deviceType,
       String endingBefore,
       List<String> expand,
       Long limit,
@@ -65,7 +60,6 @@ public class ReaderListParams extends ApiRequestParams {
       String operatorAccount,
       String startingAfter,
       String status) {
-    this.deviceType = deviceType;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.limit = limit;
@@ -80,8 +74,6 @@ public class ReaderListParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String deviceType;
-
     private String endingBefore;
 
     private List<String> expand;
@@ -99,7 +91,6 @@ public class ReaderListParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public ReaderListParams build() {
       return new ReaderListParams(
-          this.deviceType,
           this.endingBefore,
           this.expand,
           this.limit,
@@ -107,12 +98,6 @@ public class ReaderListParams extends ApiRequestParams {
           this.operatorAccount,
           this.startingAfter,
           this.status);
-    }
-
-    /** A device type to filter readers to only those of the specific device type. */
-    public Builder setDeviceType(String deviceType) {
-      this.deviceType = deviceType;
-      return this;
     }
 
     /**

@@ -244,8 +244,15 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("paid")
   Boolean paid;
 
+  /**
+   * The PaymentIntent associated with this invoice. The PaymentIntent is generated when the invoice
+   * is finalized, and can then be used to pay the invoice. Note that voiding an invoice will cancel
+   * the PaymentIntent.
+   */
   @SerializedName("payment_intent")
-  PaymentIntent paymentIntent;
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<PaymentIntent> paymentIntent;
 
   /** End of the usage period during which invoice items were added to this invoice. */
   @SerializedName("period_end")
@@ -405,6 +412,25 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   public void setDefaultSourceObject(PaymentSource expandableObject) {
     this.defaultSource =
         new ExpandableField<PaymentSource>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get id of expandable `paymentIntent` object. */
+  public String getPaymentIntent() {
+    return (this.paymentIntent != null) ? this.paymentIntent.getId() : null;
+  }
+
+  public void setPaymentIntent(String id) {
+    this.paymentIntent = ApiResource.setExpandableFieldId(id, this.paymentIntent);
+  }
+
+  /** Get expanded `paymentIntent`. */
+  public PaymentIntent getPaymentIntentObject() {
+    return (this.paymentIntent != null) ? this.paymentIntent.getExpanded() : null;
+  }
+
+  public void setPaymentIntentObject(PaymentIntent expandableObject) {
+    this.paymentIntent =
+        new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
   }
 
   /** Get id of expandable `subscription` object. */
