@@ -52,7 +52,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
    * key. The PaymentIntent will return to the `requires_confirmation` state after handling
    * `next_action`s, and requires your server to initiate each payment attempt with an explicit
    * confirmation. Read the [expanded
-   * documentation](https://stripe.com/docs/payments/payment-intents/quickstart#flow-manual-confirmation)
+   * documentation](https://stripe.com/docs/payments/payment-intents/quickstart#manual-confirmation-flow)
    * to learn more about manual confirmation.
    */
   @SerializedName("confirmation_method")
@@ -322,7 +322,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      * key. The PaymentIntent will return to the `requires_confirmation` state after handling
      * `next_action`s, and requires your server to initiate each payment attempt with an explicit
      * confirmation. Read the [expanded
-     * documentation](https://stripe.com/docs/payments/payment-intents/quickstart#flow-manual-confirmation)
+     * documentation](https://stripe.com/docs/payments/payment-intents/quickstart#manual-confirmation-flow)
      * to learn more about manual confirmation.
      */
     public Builder setConfirmationMethod(ConfirmationMethod confirmationMethod) {

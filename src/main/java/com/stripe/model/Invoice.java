@@ -262,6 +262,14 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("period_start")
   Long periodStart;
 
+  /** Total amount of all post-payment credit notes issued for this invoice. */
+  @SerializedName("post_payment_credit_notes_amount")
+  Long postPaymentCreditNotesAmount;
+
+  /** Total amount of all pre-payment credit notes issued for this invoice. */
+  @SerializedName("pre_payment_credit_notes_amount")
+  Long prePaymentCreditNotesAmount;
+
   /** This is the transaction number that appears on email receipts sent for this invoice. */
   @SerializedName("receipt_number")
   String receiptNumber;
