@@ -1,5 +1,8 @@
 # Changelog
 
+## 9.3.0 - 2019-04-16
+* [#745](https://github.com/stripe/stripe-java/pull/745) Add support for the Checkout `Session` resource and APIs
+
 ## 9.2.0 - 2019-04-15
 * [#744](https://github.com/stripe/stripe-java/pull/744)
   * Make `paymentIntent` on `Invoice` expandable instead of full-model
