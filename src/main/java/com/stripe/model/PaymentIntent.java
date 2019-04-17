@@ -520,7 +520,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * will return to the <code>requires_confirmation</code> state after those actions are completed.
    * Your server needs to then explicitly re-confirm the PaymentIntent to initiate the next payment
    * attempt. Read the <a
-   * href="/docs/payments/payment-intents/quickstart#flow-manual-confirmation">expanded
+   * href="/docs/payments/payment-intents/quickstart#manual-confirmation-flow">expanded
    * documentation</a> to learn more about manual confirmation.
    */
   public PaymentIntent confirm() throws StripeException {
@@ -549,7 +549,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * will return to the <code>requires_confirmation</code> state after those actions are completed.
    * Your server needs to then explicitly re-confirm the PaymentIntent to initiate the next payment
    * attempt. Read the <a
-   * href="/docs/payments/payment-intents/quickstart#flow-manual-confirmation">expanded
+   * href="/docs/payments/payment-intents/quickstart#manual-confirmation-flow">expanded
    * documentation</a> to learn more about manual confirmation.
    */
   public PaymentIntent confirm(RequestOptions options) throws StripeException {
@@ -578,7 +578,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * will return to the <code>requires_confirmation</code> state after those actions are completed.
    * Your server needs to then explicitly re-confirm the PaymentIntent to initiate the next payment
    * attempt. Read the <a
-   * href="/docs/payments/payment-intents/quickstart#flow-manual-confirmation">expanded
+   * href="/docs/payments/payment-intents/quickstart#manual-confirmation-flow">expanded
    * documentation</a> to learn more about manual confirmation.
    */
   public PaymentIntent confirm(Map<String, Object> params) throws StripeException {
@@ -607,7 +607,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * will return to the <code>requires_confirmation</code> state after those actions are completed.
    * Your server needs to then explicitly re-confirm the PaymentIntent to initiate the next payment
    * attempt. Read the <a
-   * href="/docs/payments/payment-intents/quickstart#flow-manual-confirmation">expanded
+   * href="/docs/payments/payment-intents/quickstart#manual-confirmation-flow">expanded
    * documentation</a> to learn more about manual confirmation.
    */
   public PaymentIntent confirm(Map<String, Object> params, RequestOptions options)
@@ -642,7 +642,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * will return to the <code>requires_confirmation</code> state after those actions are completed.
    * Your server needs to then explicitly re-confirm the PaymentIntent to initiate the next payment
    * attempt. Read the <a
-   * href="/docs/payments/payment-intents/quickstart#flow-manual-confirmation">expanded
+   * href="/docs/payments/payment-intents/quickstart#manual-confirmation-flow">expanded
    * documentation</a> to learn more about manual confirmation.
    */
   public PaymentIntent confirm(PaymentIntentConfirmParams params) throws StripeException {
@@ -671,7 +671,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * will return to the <code>requires_confirmation</code> state after those actions are completed.
    * Your server needs to then explicitly re-confirm the PaymentIntent to initiate the next payment
    * attempt. Read the <a
-   * href="/docs/payments/payment-intents/quickstart#flow-manual-confirmation">expanded
+   * href="/docs/payments/payment-intents/quickstart#manual-confirmation-flow">expanded
    * documentation</a> to learn more about manual confirmation.
    */
   public PaymentIntent confirm(PaymentIntentConfirmParams params, RequestOptions options)
