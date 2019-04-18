@@ -20,10 +20,18 @@ public class CustomerUpdateParams extends ApiRequestParams {
   @SerializedName("account_balance")
   Long accountBalance;
 
+  /** The customer's address. */
+  @SerializedName("address")
+  Object address;
+
   @SerializedName("coupon")
   String coupon;
 
-  /** ID of the default payment source for the customer. */
+  /**
+   * Provide the ID of a payment source already attached to this customer to make it this customer's
+   * default payment source. If you want to add a new payment source and make it the default, see
+   * the [source](https://stripe.com/docs/api/customers/update#update_customer-source) property.
+   */
   @SerializedName("default_source")
   String defaultSource;
 
@@ -63,6 +71,18 @@ public class CustomerUpdateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  /** The customer's full name or business name. */
+  @SerializedName("name")
+  String name;
+
+  /** The customer's phone number. */
+  @SerializedName("phone")
+  String phone;
+
+  /** Customer's preferred languages, ordered by preference. */
+  @SerializedName("preferred_locales")
+  List<String> preferredLocales;
+
   /** The customer's shipping information. Appears on invoices emailed to this customer. */
   @SerializedName("shipping")
   Object shipping;
@@ -86,6 +106,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
   private CustomerUpdateParams(
       Long accountBalance,
+      Object address,
       String coupon,
       String defaultSource,
       String description,
@@ -94,11 +115,15 @@ public class CustomerUpdateParams extends ApiRequestParams {
       String invoicePrefix,
       InvoiceSettings invoiceSettings,
       Map<String, String> metadata,
+      String name,
+      String phone,
+      List<String> preferredLocales,
       Object shipping,
       String source,
       TaxInfo taxInfo,
       Object trialEnd) {
     this.accountBalance = accountBalance;
+    this.address = address;
     this.coupon = coupon;
     this.defaultSource = defaultSource;
     this.description = description;
@@ -107,6 +132,9 @@ public class CustomerUpdateParams extends ApiRequestParams {
     this.invoicePrefix = invoicePrefix;
     this.invoiceSettings = invoiceSettings;
     this.metadata = metadata;
+    this.name = name;
+    this.phone = phone;
+    this.preferredLocales = preferredLocales;
     this.shipping = shipping;
     this.source = source;
     this.taxInfo = taxInfo;
@@ -119,6 +147,8 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
   public static class Builder {
     private Long accountBalance;
+
+    private Object address;
 
     private String coupon;
 
@@ -136,6 +166,12 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
+    private String name;
+
+    private String phone;
+
+    private List<String> preferredLocales;
+
     private Object shipping;
 
     private String source;
@@ -148,6 +184,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
     public CustomerUpdateParams build() {
       return new CustomerUpdateParams(
           this.accountBalance,
+          this.address,
           this.coupon,
           this.defaultSource,
           this.description,
@@ -156,6 +193,9 @@ public class CustomerUpdateParams extends ApiRequestParams {
           this.invoicePrefix,
           this.invoiceSettings,
           this.metadata,
+          this.name,
+          this.phone,
+          this.preferredLocales,
           this.shipping,
           this.source,
           this.taxInfo,
@@ -172,12 +212,29 @@ public class CustomerUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /** The customer's address. */
+    public Builder setAddress(Address address) {
+      this.address = address;
+      return this;
+    }
+
+    /** The customer's address. */
+    public Builder setAddress(EmptyParam address) {
+      this.address = address;
+      return this;
+    }
+
     public Builder setCoupon(String coupon) {
       this.coupon = coupon;
       return this;
     }
 
-    /** ID of the default payment source for the customer. */
+    /**
+     * Provide the ID of a payment source already attached to this customer to make it this
+     * customer's default payment source. If you want to add a new payment source and make it the
+     * default, see the
+     * [source](https://stripe.com/docs/api/customers/update#update_customer-source) property.
+     */
     public Builder setDefaultSource(String defaultSource) {
       this.defaultSource = defaultSource;
       return this;
@@ -268,6 +325,44 @@ public class CustomerUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /** The customer's full name or business name. */
+    public Builder setName(String name) {
+      this.name = name;
+      return this;
+    }
+
+    /** The customer's phone number. */
+    public Builder setPhone(String phone) {
+      this.phone = phone;
+      return this;
+    }
+
+    /**
+     * Add an element to `preferredLocales` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * CustomerUpdateParams#preferredLocales} for the field documentation.
+     */
+    public Builder addPreferredLocale(String element) {
+      if (this.preferredLocales == null) {
+        this.preferredLocales = new ArrayList<>();
+      }
+      this.preferredLocales.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `preferredLocales` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * CustomerUpdateParams#preferredLocales} for the field documentation.
+     */
+    public Builder addAllPreferredLocale(List<String> elements) {
+      if (this.preferredLocales == null) {
+        this.preferredLocales = new ArrayList<>();
+      }
+      this.preferredLocales.addAll(elements);
+      return this;
+    }
+
     /** The customer's shipping information. Appears on invoices emailed to this customer. */
     public Builder setShipping(Shipping shipping) {
       this.shipping = shipping;
@@ -313,6 +408,90 @@ public class CustomerUpdateParams extends ApiRequestParams {
     public Builder setTrialEnd(Long trialEnd) {
       this.trialEnd = trialEnd;
       return this;
+    }
+  }
+
+  public static class Address {
+    @SerializedName("city")
+    String city;
+
+    @SerializedName("country")
+    String country;
+
+    @SerializedName("line1")
+    String line1;
+
+    @SerializedName("line2")
+    String line2;
+
+    @SerializedName("postal_code")
+    String postalCode;
+
+    @SerializedName("state")
+    String state;
+
+    private Address(
+        String city, String country, String line1, String line2, String postalCode, String state) {
+      this.city = city;
+      this.country = country;
+      this.line1 = line1;
+      this.line2 = line2;
+      this.postalCode = postalCode;
+      this.state = state;
+    }
+
+    public static Builder builder() {
+      return new com.stripe.param.CustomerUpdateParams.Address.Builder();
+    }
+
+    public static class Builder {
+      private String city;
+
+      private String country;
+
+      private String line1;
+
+      private String line2;
+
+      private String postalCode;
+
+      private String state;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public Address build() {
+        return new Address(
+            this.city, this.country, this.line1, this.line2, this.postalCode, this.state);
+      }
+
+      public Builder setCity(String city) {
+        this.city = city;
+        return this;
+      }
+
+      public Builder setCountry(String country) {
+        this.country = country;
+        return this;
+      }
+
+      public Builder setLine1(String line1) {
+        this.line1 = line1;
+        return this;
+      }
+
+      public Builder setLine2(String line2) {
+        this.line2 = line2;
+        return this;
+      }
+
+      public Builder setPostalCode(String postalCode) {
+        this.postalCode = postalCode;
+        return this;
+      }
+
+      public Builder setState(String state) {
+        this.state = state;
+        return this;
+      }
     }
   }
 

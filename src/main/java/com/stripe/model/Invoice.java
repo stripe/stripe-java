@@ -29,6 +29,20 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice> {
   /**
+   * The country of the business associated with this invoice, most often the business creating the
+   * invoice.
+   */
+  @SerializedName("account_country")
+  String accountCountry;
+
+  /**
+   * The public name of the business associated with this invoice, most often the business creating
+   * the invoice.
+   */
+  @SerializedName("account_name")
+  String accountName;
+
+  /**
    * Final amount due at this time for this invoice. If the invoice's total is smaller than the
    * minimum charge amount, for example, or if there is account credit that can be applied to the
    * invoice, the `amount_due` may be 0. If there is a positive `starting_balance` for the invoice
@@ -124,6 +138,34 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
+
+  /**
+   * The customer's address. Until the invoice is finalized, this field will equal
+   * `customer.address`. Once the invoice is finalized, this field will no longer be updated.
+   */
+  @SerializedName("customer_address")
+  Address customerAddress;
+
+  /**
+   * The customer's name. Until the invoice is finalized, this field will equal `customer.name`.
+   * Once the invoice is finalized, this field will no longer be updated.
+   */
+  @SerializedName("customer_name")
+  String customerName;
+
+  /**
+   * The customer's phone number. Until the invoice is finalized, this field will equal
+   * `customer.phone`. Once the invoice is finalized, this field will no longer be updated.
+   */
+  @SerializedName("customer_phone")
+  String customerPhone;
+
+  /**
+   * The customer's shipping information. Until the invoice is finalized, this field will equal
+   * `customer.shipping`. Once the invoice is finalized, this field will no longer be updated.
+   */
+  @SerializedName("customer_shipping")
+  ShippingDetails customerShipping;
 
   /**
    * ID of the default payment method for the invoice. It must belong to the customer associated
@@ -262,6 +304,14 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("period_start")
   Long periodStart;
 
+  /** Total amount of all post-payment credit notes issued for this invoice. */
+  @SerializedName("post_payment_credit_notes_amount")
+  Long postPaymentCreditNotesAmount;
+
+  /** Total amount of all pre-payment credit notes issued for this invoice. */
+  @SerializedName("pre_payment_credit_notes_amount")
+  Long prePaymentCreditNotesAmount;
+
   /** This is the transaction number that appears on email receipts sent for this invoice. */
   @SerializedName("receipt_number")
   String receiptNumber;
@@ -277,7 +327,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("statement_descriptor")
   String statementDescriptor;
 
-  /** The status of the invoice, one of `draft`, `open`, `paid`, `uncollectible`, or `void`. */
+  /**
+   * The status of the invoice, one of `draft`, `open`, `paid`, `uncollectible`, or `void`. [Learn
+   * more](https://stripe.com/docs/billing/invoices/workflow#workflow-overview)
+   */
   @SerializedName("status")
   String status;
 

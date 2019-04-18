@@ -32,6 +32,10 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   @SerializedName("account_balance")
   Long accountBalance;
 
+  /** The customer's address. */
+  @SerializedName("address")
+  Address address;
+
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
@@ -100,9 +104,21 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  /** The customer's full name or business name. */
+  @SerializedName("name")
+  String name;
+
   /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
   String object;
+
+  /** The customer's phone number. */
+  @SerializedName("phone")
+  String phone;
+
+  /** The customer's preferred locales (languages), ordered by preference. */
+  @SerializedName("preferred_locales")
+  List<String> preferredLocales;
 
   /**
    * Mailing and shipping address for the customer. Appears on invoices emailed to this customer.

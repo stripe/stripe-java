@@ -503,6 +503,15 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("coupon.updated")
     COUPON__UPDATED("coupon.updated"),
 
+    @SerializedName("credit_note.created")
+    CREDIT_NOTE__CREATED("credit_note.created"),
+
+    @SerializedName("credit_note.updated")
+    CREDIT_NOTE__UPDATED("credit_note.updated"),
+
+    @SerializedName("credit_note.voided")
+    CREDIT_NOTE__VOIDED("credit_note.voided"),
+
     @SerializedName("customer.created")
     CUSTOMER__CREATED("customer.created"),
 
