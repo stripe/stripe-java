@@ -1,5 +1,11 @@
 # Changelog
 
+## 9.4.0 - 2019-04-18
+* [#748](https://github.com/stripe/stripe-java/pull/748)
+  * Add support for `address`, `name`, `phone` and `preferredLocales` on `Customer`
+  * Add support for the `CreditNote` resource and APIs
+  * Add support for account and customer related fields on the `Invoice` resource
+
 ## 9.3.0 - 2019-04-16
 * [#745](https://github.com/stripe/stripe-java/pull/745) Add support for the Checkout `Session` resource and APIs
 
