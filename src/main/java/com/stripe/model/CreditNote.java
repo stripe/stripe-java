@@ -60,7 +60,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   @SerializedName("livemode")
   Boolean livemode;
 
-  /** Credit note memo. */
+  /** Customer-facing text that appears on the credit note PDF. */
   @SerializedName("memo")
   String memo;
 
@@ -72,7 +72,10 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** Credit note number. */
+  /**
+   * A unique number that identifies this particular credit note and appears on the PDF of the
+   * credit note and its associated invoice.
+   */
   @SerializedName("number")
   String number;
 
@@ -97,11 +100,18 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Refund> refund;
 
-  /** Status of this credit note, one of `issued` or `void`. */
+  /**
+   * Status of this credit note, one of `issued` or `void`. Learn more about [voiding credit
+   * notes](https://stripe.com/docs/billing/invoices/credit-notes#voiding).
+   */
   @SerializedName("status")
   String status;
 
-  /** Type of this credit note, one of `post_payment` or `pre_payment`. */
+  /**
+   * Type of this credit note, one of `post_payment` or `pre_payment`. A `pre_payment` credit note
+   * means it was issued when the invoice was open. A `post_payment` credit note means it was issued
+   * when the invoice was paid.
+   */
   @SerializedName("type")
   String type;
 
@@ -351,22 +361,34 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
     return request(ApiResource.RequestMethod.POST, url, params, CreditNote.class, options);
   }
 
-  /** Marks a credit note as void. */
+  /**
+   * Marks a credit note as void. Learn more about <a
+   * href="/docs/billing/invoices/credit-notes#voiding">voiding credit notes</a>.
+   */
   public CreditNote voidCreditNote() throws StripeException {
     return voidCreditNote((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Marks a credit note as void. */
+  /**
+   * Marks a credit note as void. Learn more about <a
+   * href="/docs/billing/invoices/credit-notes#voiding">voiding credit notes</a>.
+   */
   public CreditNote voidCreditNote(RequestOptions options) throws StripeException {
     return voidCreditNote((Map<String, Object>) null, options);
   }
 
-  /** Marks a credit note as void. */
+  /**
+   * Marks a credit note as void. Learn more about <a
+   * href="/docs/billing/invoices/credit-notes#voiding">voiding credit notes</a>.
+   */
   public CreditNote voidCreditNote(Map<String, Object> params) throws StripeException {
     return voidCreditNote(params, (RequestOptions) null);
   }
 
-  /** Marks a credit note as void. */
+  /**
+   * Marks a credit note as void. Learn more about <a
+   * href="/docs/billing/invoices/credit-notes#voiding">voiding credit notes</a>.
+   */
   public CreditNote voidCreditNote(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
@@ -377,12 +399,18 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
     return request(ApiResource.RequestMethod.POST, url, params, CreditNote.class, options);
   }
 
-  /** Marks a credit note as void. */
+  /**
+   * Marks a credit note as void. Learn more about <a
+   * href="/docs/billing/invoices/credit-notes#voiding">voiding credit notes</a>.
+   */
   public CreditNote voidCreditNote(CreditNoteVoidCreditNoteParams params) throws StripeException {
     return voidCreditNote(params, (RequestOptions) null);
   }
 
-  /** Marks a credit note as void. */
+  /**
+   * Marks a credit note as void. Learn more about <a
+   * href="/docs/billing/invoices/credit-notes#voiding">voiding credit notes</a>.
+   */
   public CreditNote voidCreditNote(CreditNoteVoidCreditNoteParams params, RequestOptions options)
       throws StripeException {
     String url =
