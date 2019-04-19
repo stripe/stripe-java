@@ -37,20 +37,23 @@ class ApiServiceTest {
   }
 
   private static class FooService extends ApiService {
-    String updateUrl = "/v1/foos/%s";
-    String updateOnBarUrl = "/v1/bars/%s/foos/%s";
+    String createUrl = "/v1/foos";
+    String customOperationUrl = "/v1/foos/%s/custom_operation";
     String deleteUrl = "/v1/foos/%s";
     String listUrl = "/v1/foos";
+    String retrieveUrl = "/v1/foos/%s";
+    String updateUrl = "/v1/foos/%s";
+    String updateOnBarUrl = "/v1/bars/%s/foos/%s";
 
-    public Foo update(String foo, FooParams params, RequestOptions options)
+    public Foo create(FooParams params, RequestOptions options)
         throws StripeException {
-      String url = resourceUrl(this.updateUrl, foo);
+      String url = resourceUrl(this.createUrl);
       return request(ApiResource.RequestMethod.POST, url, params, Foo.class, options);
     }
 
-    public Foo update(String bar, String foo, FooOnBarParams params, RequestOptions options)
+    public Foo customOperation(String foo, FooParams params, RequestOptions options)
         throws StripeException {
-      String url = resourceUrl(this.updateOnBarUrl, bar, foo);
+      String url = resourceUrl(this.customOperationUrl, foo);
       return request(ApiResource.RequestMethod.POST, url, params, Foo.class, options);
     }
 
@@ -66,6 +69,24 @@ class ApiServiceTest {
       return requestCollection(url, params, FooCollection.class, options);
     }
 
+    public Foo retrieve(String foo, FooParams params, RequestOptions options)
+        throws StripeException {
+      String url = resourceUrl(this.retrieveUrl, foo);
+      return request(ApiResource.RequestMethod.GET, url, params, Foo.class, options);
+    }
+
+    public Foo update(String foo, FooParams params, RequestOptions options)
+        throws StripeException {
+      String url = resourceUrl(this.updateUrl, foo);
+      return request(ApiResource.RequestMethod.POST, url, params, Foo.class, options);
+    }
+
+    public Foo update(String bar, String foo, FooOnBarParams params, RequestOptions options)
+        throws StripeException {
+      String url = resourceUrl(this.updateOnBarUrl, bar, foo);
+      return request(ApiResource.RequestMethod.POST, url, params, Foo.class, options);
+    }
+
     public Foo updateWithInvalidFormatting(String foo, FooParams params, RequestOptions options)
         throws StripeException {
       String url = resourceUrl("/v1/foos/%s/bars/%s", foo);
@@ -74,7 +95,7 @@ class ApiServiceTest {
   }
 
   @AfterAll
-  public static void restoreNetWork() {
+  public static void restoreNetwork() {
     ApiResource.setStripeResponseGetter(new LiveStripeResponseGetter());
   }
 
@@ -95,33 +116,23 @@ class ApiServiceTest {
   }
 
   @Test
-  public void testRequestUpdate() throws StripeException {
-    fooService.update(FOO_ID, new FooParams(), RequestOptions.getDefault());
+  public void testCreate() throws StripeException {
+    fooService.create(new FooParams(), RequestOptions.getDefault());
 
     verifyRequest(ApiResource.RequestMethod.POST,
-        String.format("/v1/foos/%s", FOO_ID), Foo.class);
+        "/v1/foos", Foo.class);
   }
 
   @Test
-  public void testRequestUpdateOnParent() throws StripeException {
-    fooService.update(BAR_ID, FOO_ID, new FooOnBarParams(), RequestOptions.getDefault());
+  public void testCustomOperation() throws StripeException {
+    fooService.customOperation(FOO_ID, new FooParams(), RequestOptions.getDefault());
 
     verifyRequest(ApiResource.RequestMethod.POST,
-        String.format("/v1/bars/%s/foos/%s", BAR_ID, FOO_ID),
-        Foo.class);
+        String.format("/v1/foos/%s/custom_operation", FOO_ID), Foo.class);
   }
 
   @Test
-  public void testRequestCollection() throws StripeException {
-    fooService.list(new FooParams(), RequestOptions.getDefault());
-
-    verifyRequest(ApiResource.RequestMethod.GET,
-        "/v1/foos",
-        FooCollection.class);
-  }
-
-  @Test
-  public void testRequestDelete() throws StripeException {
+  public void testDelete() throws StripeException {
     fooService.delete(FOO_ID, new FooParams(), RequestOptions.getDefault());
 
     verifyRequest(ApiResource.RequestMethod.DELETE,
@@ -131,7 +142,7 @@ class ApiServiceTest {
   }
 
   @Test
-  public void testRequestDeleteWithNullParams() throws StripeException {
+  public void testDeleteWithNullParams() throws StripeException {
     fooService.delete(FOO_ID, null, RequestOptions.getDefault());
 
     verifyRequest(ApiResource.RequestMethod.DELETE,
@@ -141,14 +152,50 @@ class ApiServiceTest {
   }
 
   @Test
-  public void testRequestThrowingUrlFormatting() {
+  public void testList() throws StripeException {
+    fooService.list(new FooParams(), RequestOptions.getDefault());
+
+    verifyRequest(ApiResource.RequestMethod.GET,
+        "/v1/foos",
+        FooCollection.class);
+  }
+
+  @Test
+  public void testRetrieve() throws StripeException {
+    fooService.retrieve(FOO_ID, new FooParams(), RequestOptions.getDefault());
+
+    verifyRequest(ApiResource.RequestMethod.GET,
+        String.format("/v1/foos/%s", FOO_ID),
+        Foo.class
+    );
+  }
+
+  @Test
+  public void testUpdate() throws StripeException {
+    fooService.update(FOO_ID, new FooParams(), RequestOptions.getDefault());
+
+    verifyRequest(ApiResource.RequestMethod.POST,
+        String.format("/v1/foos/%s", FOO_ID), Foo.class);
+  }
+
+  @Test
+  public void testUpdateOnParent() throws StripeException {
+    fooService.update(BAR_ID, FOO_ID, new FooOnBarParams(), RequestOptions.getDefault());
+
+    verifyRequest(ApiResource.RequestMethod.POST,
+        String.format("/v1/bars/%s/foos/%s", BAR_ID, FOO_ID),
+        Foo.class);
+  }
+
+  @Test
+  public void testUpdateThrowingUrlFormatting() {
     assertThrows(InvalidRequestException.class, () -> {
       fooService.updateWithInvalidFormatting(FOO_ID, new FooParams(), RequestOptions.getDefault());
     });
   }
 
   @Test
-  public void testRequestUrlVariableEncoded() throws StripeException {
+  public void testUpdateEnsureEncodedVariable() throws StripeException {
     fooService.update("Plan 100$/month",
         "Plan 200$/month",
         new FooOnBarParams(), RequestOptions.getDefault());
