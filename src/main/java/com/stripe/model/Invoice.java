@@ -147,6 +147,13 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   Address customerAddress;
 
   /**
+   * The customer's email. Until the invoice is finalized, this field will equal `customer.email`.
+   * Once the invoice is finalized, this field will no longer be updated.
+   */
+  @SerializedName("customer_email")
+  String customerEmail;
+
+  /**
    * The customer's name. Until the invoice is finalized, this field will equal `customer.name`.
    * Once the invoice is finalized, this field will no longer be updated.
    */
@@ -166,6 +173,13 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    */
   @SerializedName("customer_shipping")
   ShippingDetails customerShipping;
+
+  /**
+   * The customer's tax ids. Until the invoice is finalized, this field will equal
+   * `customer.tax_ids`. Once the invoice is finalized, this field will no longer be updated.
+   */
+  @SerializedName("customer_tax_ids")
+  List<CustomerTaxId> customerTaxIds;
 
   /**
    * ID of the default payment method for the invoice. It must belong to the customer associated
@@ -1211,6 +1225,19 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     String name;
 
     /** The value of the custom field. */
+    @SerializedName("value")
+    String value;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class CustomerTaxId extends StripeObject {
+    /** The type of the tax ID, one of `eu_vat`, `nz_gst`, `au_abn`, or `unknown`. */
+    @SerializedName("type")
+    String type;
+
+    /** The value of the tax ID. */
     @SerializedName("value")
     String value;
   }
