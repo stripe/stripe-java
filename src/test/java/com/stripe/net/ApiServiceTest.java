@@ -30,7 +30,6 @@ class ApiServiceTest {
   private static class FooCollection extends StripeCollection<Foo> {
   }
 
-
   private static class FooParams extends ApiRequestParams {
   }
 

@@ -54,12 +54,39 @@ public abstract class ApiService {
     return String.format("%s%s", Stripe.getApiBase(), format);
   }
 
+  /**
+   * Make an api request with a valid url like that from {@code resourceUrl}. This method is more
+   * general than its counterpart {@code requestCollection} to list collection classes.
+   * This implementation uses the same underlying method as that in resource class like
+   * {@code Charge.create(params, opts)}.
+   * @param method  http method
+   * @param url     valid url
+   * @param params  nullable request params; null value will be converted to empty params
+   * @param clazz   class to which JSON response is deserialized to
+   * @param options request options
+   * @return object of type clazz
+   * @throws StripeException exceptions containing error code and information helpful for debugging
+   *     and reporting to stripe support.
+   */
   protected static <T> T request(ApiResource.RequestMethod method,
                               String url, ApiRequestParams params, Class<T> clazz,
                               RequestOptions options) throws StripeException {
     return ApiResource.request(method, url, nullSafeParams(params), clazz, options);
   }
 
+  /**
+   * Make an api request for collection classes with a valid url like that from {@code resourceUrl}.
+   * This implementation uses the same underlying method as that in resource class when obtaining
+   * object collection like {@code Charge.list(params)} to get {@code ChargeCollection}. Note
+   * that http method cannot be specified; the underlying implementation defaults to GET.
+   * @param url     a valid url
+   * @param params  nullable request params; null value will be converted to empty params
+   * @param clazz   stripe collection class to which JSON response is deserialized to
+   * @param options request options
+   * @return stripe collection object
+   * @throws StripeException exceptions containing error code and information helpful for debugging
+   *     and reporting to stripe support.
+   */
   protected static <T extends StripeCollectionInterface<?>> T requestCollection(
       String url, ApiRequestParams params, Class<T> clazz, RequestOptions options)
       throws StripeException {
