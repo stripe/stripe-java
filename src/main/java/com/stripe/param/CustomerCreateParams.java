@@ -85,6 +85,10 @@ public class CustomerCreateParams extends ApiRequestParams {
   @SerializedName("source")
   String source;
 
+  /** The customer's tax IDs. */
+  @SerializedName("tax_id_data")
+  List<TaxIdData> taxIdData;
+
   /** The customer's tax information. Appears on invoices emailed to this customer. */
   @SerializedName("tax_info")
   TaxInfo taxInfo;
@@ -105,6 +109,7 @@ public class CustomerCreateParams extends ApiRequestParams {
       List<String> preferredLocales,
       Object shipping,
       String source,
+      List<TaxIdData> taxIdData,
       TaxInfo taxInfo) {
     this.accountBalance = accountBalance;
     this.address = address;
@@ -121,6 +126,7 @@ public class CustomerCreateParams extends ApiRequestParams {
     this.preferredLocales = preferredLocales;
     this.shipping = shipping;
     this.source = source;
+    this.taxIdData = taxIdData;
     this.taxInfo = taxInfo;
   }
 
@@ -159,6 +165,8 @@ public class CustomerCreateParams extends ApiRequestParams {
 
     private String source;
 
+    private List<TaxIdData> taxIdData;
+
     private TaxInfo taxInfo;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -179,6 +187,7 @@ public class CustomerCreateParams extends ApiRequestParams {
           this.preferredLocales,
           this.shipping,
           this.source,
+          this.taxIdData,
           this.taxInfo);
     }
 
@@ -351,6 +360,32 @@ public class CustomerCreateParams extends ApiRequestParams {
 
     public Builder setSource(String source) {
       this.source = source;
+      return this;
+    }
+
+    /**
+     * Add an element to `taxIdData` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * CustomerCreateParams#taxIdData} for the field documentation.
+     */
+    public Builder addTaxIdData(TaxIdData element) {
+      if (this.taxIdData == null) {
+        this.taxIdData = new ArrayList<>();
+      }
+      this.taxIdData.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `taxIdData` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * CustomerCreateParams#taxIdData} for the field documentation.
+     */
+    public Builder addAllTaxIdData(List<TaxIdData> elements) {
+      if (this.taxIdData == null) {
+        this.taxIdData = new ArrayList<>();
+      }
+      this.taxIdData.addAll(elements);
       return this;
     }
 
@@ -688,6 +723,66 @@ public class CustomerCreateParams extends ApiRequestParams {
           this.state = state;
           return this;
         }
+      }
+    }
+  }
+
+  public static class TaxIdData {
+    /** Type of the tax ID, one of `eu_vat`, `nz_gst`, or `au_abn`. */
+    @SerializedName("type")
+    Type type;
+
+    /** Value of the tax ID. */
+    @SerializedName("value")
+    String value;
+
+    private TaxIdData(Type type, String value) {
+      this.type = type;
+      this.value = value;
+    }
+
+    public static Builder builder() {
+      return new com.stripe.param.CustomerCreateParams.TaxIdData.Builder();
+    }
+
+    public static class Builder {
+      private Type type;
+
+      private String value;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public TaxIdData build() {
+        return new TaxIdData(this.type, this.value);
+      }
+
+      /** Type of the tax ID, one of `eu_vat`, `nz_gst`, or `au_abn`. */
+      public Builder setType(Type type) {
+        this.type = type;
+        return this;
+      }
+
+      /** Value of the tax ID. */
+      public Builder setValue(String value) {
+        this.value = value;
+        return this;
+      }
+    }
+
+    public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("au_abn")
+      AU_ABN("au_abn"),
+
+      @SerializedName("eu_vat")
+      EU_VAT("eu_vat"),
+
+      @SerializedName("nz_gst")
+      NZ_GST("nz_gst");
+
+      @Getter(onMethod = @__({@Override}))
+      private final String value;
+
+      Type(String value) {
+        this.value = value;
       }
     }
   }

@@ -134,6 +134,10 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   @SerializedName("subscriptions")
   SubscriptionCollection subscriptions;
 
+  /** The customer's tax IDs. */
+  @SerializedName("tax_ids")
+  TaxIdCollection taxIds;
+
   /** The customer's tax information. Appears on invoices emailed to this customer. */
   @SerializedName("tax_info")
   TaxInfo taxInfo;
