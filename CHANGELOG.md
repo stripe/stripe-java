@@ -1,5 +1,8 @@
 # Changelog
 
+## 9.5.0 - 2019-04-22
+* [#750](https://github.com/stripe/stripe-java/pull/750) Add support for the `TaxId` resource and APIs
+
 ## 9.4.0 - 2019-04-18
 * [#748](https://github.com/stripe/stripe-java/pull/748)
   * Add support for `address`, `name`, `phone` and `preferredLocales` on `Customer`
