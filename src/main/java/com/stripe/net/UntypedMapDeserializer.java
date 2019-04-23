@@ -18,27 +18,94 @@ import java.util.Map;
  */
 public class UntypedMapDeserializer {
   /**
+   * Strategy to deserialize a JSON element, allowing for custom behavior between the deserialized
+   * element and its outer map.
+   * For example, for a full JSON:
+   * {
+   *   "foo": 1,
+   *   "foo_inner": { // outer context map
+   *     "bar": 1,
+   *     "zing": 2,   // given JSON element
+   *   },
+   * }
+   *
+   * <p>Given, a json entry of "zing": 2, the outer map corresponds to value for "foo_inner". A
+   * default strategy is to simply deserialize value and adds to given map at "zing" key.
+   *
+   * <p>Custom strategy allows, for example, renaming the key "zing", wraps the deserialized
+   * value in another map/array, or flatten the value if the deserialized value is a map.
+   */
+  interface Strategy {
+    /**
+     * Define how the given JSON element should be deserialized, and how the deserialized content
+     * should be added to the given outer map.
+     * @param outerMap               the untyped map that the deserialized content can be added to.
+     * @param jsonEntry              original JSON entry with key and json element
+     * @param untypedMapDeserializer deserializer for the untyped map to transform the given json
+     *                               element
+     */
+    void deserializeAndTransform(Map<String, Object> outerMap,
+                                 Map.Entry<String, JsonElement> jsonEntry,
+                                 UntypedMapDeserializer untypedMapDeserializer
+    );
+  }
+
+  /**
+   * Strategy for this deserializer.
+   */
+  private Strategy strategy;
+
+  /**
+   * Default deserializer for the untyped map. The result untyped map has same object graph
+   * structure as that of the given JSON content.
+   */
+  public UntypedMapDeserializer() {
+    /**
+     * Default strategy where each JSON element gets deserialized and added with its original key.
+     */
+    this.strategy = new Strategy() {
+      @Override
+      public void deserializeAndTransform(Map<String, Object> outerMap,
+                                          Map.Entry<String, JsonElement> jsonEntry,
+                                          UntypedMapDeserializer untypedMapDeserializer) {
+        outerMap.put(
+            jsonEntry.getKey(),
+            untypedMapDeserializer.deserializeJsonElement(jsonEntry.getValue()));
+      }
+    };
+  }
+
+  /**
+   * Deserializer with a custom strategy.
+   * @param strategy definition of how JSON element should be deserialized and set in its outer map.
+   */
+  UntypedMapDeserializer(Strategy strategy) {
+    this.strategy = strategy;
+  }
+
+  /**
    * Deserialize JSON into untyped map.
    * {@code JsonArray} is represented as {@code List<Object>}.
    * {@code JsonObject} is represented as {@code Map<String, Object>}.
    * {@code JsonPrimitive} is represented as String, Number, or Boolean.
-   *
    * @param jsonObject  JSON to convert into untyped map
    * @return untyped map without dependency on JSON representation.
    */
   public Map<String, Object> deserialize(JsonObject jsonObject) {
     Map<String, Object> objMap = new HashMap<>();
     for (Map.Entry<String, JsonElement> entry : jsonObject.entrySet()) {
-      String key = entry.getKey();
-      JsonElement element = entry.getValue();
-      // JsonElement is super class of all JSON standard types:
-      // array, null, primitive, and object
-      objMap.put(key, deserializeJsonElement(element));
+      this.strategy.deserializeAndTransform(objMap, entry, this);
     }
     return objMap;
   }
 
-  private Object deserializeJsonElement(JsonElement element) {
+  /**
+   * Normalizes JSON element into an untyped Object as value to the untyped map.
+   * @param element JSON element to convert to java Object
+   * @return untyped object, one of {@code Map<String, Object>}, {@code String}, {@code Number},
+   * {@code Boolean}, or {@code List<Array>}.
+   */
+  Object deserializeJsonElement(JsonElement element) {
     if (element.isJsonNull()) {
       return null;
     } else if (element.isJsonObject()) {
