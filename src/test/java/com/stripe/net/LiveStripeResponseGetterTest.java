@@ -116,6 +116,24 @@ public class LiveStripeResponseGetterTest {
   }
 
   @Test
+  public void testCreateQueryWithFormEncodedKeys() throws StripeException,
+      UnsupportedEncodingException {
+    /* Use LinkedHashMap because it preserves iteration order */
+    final Map<String, Object> params = new LinkedHashMap<>();
+
+    // params with form-encoded keys at creating query can happen through "extraParams"
+    // we now support only map of string key/value, so specifying nested params relies on form
+    // encoding.
+    params.put("nested[0][A]", "A-1");
+    params.put("nested[0][B]", "B-1");
+    params.put("nested[1][A]", "A-2");
+    params.put("nested[1][B]", "B-2");
+
+    assertEquals("nested[0][A]=A-1&nested[0][B]=B-1&nested[1][A]=A-2&nested[1][B]=B-2",
+        LiveStripeResponseGetter.createQuery(params));
+  }
+
+  @Test
   public void testCreateQueryWithEmptyList() throws StripeException, UnsupportedEncodingException {
     final Map<String, Object> params = new HashMap<>();
     params.put("a", new ArrayList<String>());
