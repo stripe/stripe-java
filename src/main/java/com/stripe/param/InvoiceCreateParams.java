@@ -69,6 +69,9 @@ public class InvoiceCreateParams extends ApiRequestParams {
   @SerializedName("default_source")
   String defaultSource;
 
+  @SerializedName("default_tax_rates")
+  List<String> defaultTaxRates;
+
   @SerializedName("description")
   String description;
 
@@ -129,6 +132,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
       Long daysUntilDue,
       String defaultPaymentMethod,
       String defaultSource,
+      List<String> defaultTaxRates,
       String description,
       Long dueDate,
       List<String> expand,
@@ -146,6 +150,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
     this.daysUntilDue = daysUntilDue;
     this.defaultPaymentMethod = defaultPaymentMethod;
     this.defaultSource = defaultSource;
+    this.defaultTaxRates = defaultTaxRates;
     this.description = description;
     this.dueDate = dueDate;
     this.expand = expand;
@@ -178,6 +183,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
     private String defaultSource;
 
+    private List<String> defaultTaxRates;
+
     private String description;
 
     private Long dueDate;
@@ -207,6 +214,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
           this.daysUntilDue,
           this.defaultPaymentMethod,
           this.defaultSource,
+          this.defaultTaxRates,
           this.description,
           this.dueDate,
           this.expand,
@@ -293,6 +301,32 @@ public class InvoiceCreateParams extends ApiRequestParams {
      */
     public Builder setDefaultSource(String defaultSource) {
       this.defaultSource = defaultSource;
+      return this;
+    }
+
+    /**
+     * Add an element to `defaultTaxRates` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * InvoiceCreateParams#defaultTaxRates} for the field documentation.
+     */
+    public Builder addDefaultTaxRate(String element) {
+      if (this.defaultTaxRates == null) {
+        this.defaultTaxRates = new ArrayList<>();
+      }
+      this.defaultTaxRates.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `defaultTaxRates` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * InvoiceCreateParams#defaultTaxRates} for the field documentation.
+     */
+    public Builder addAllDefaultTaxRate(List<String> elements) {
+      if (this.defaultTaxRates == null) {
+        this.defaultTaxRates = new ArrayList<>();
+      }
+      this.defaultTaxRates.addAll(elements);
       return this;
     }
 

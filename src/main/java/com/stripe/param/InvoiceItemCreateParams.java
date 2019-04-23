@@ -78,6 +78,9 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
   @SerializedName("subscription")
   String subscription;
 
+  @SerializedName("tax_rates")
+  List<String> taxRates;
+
   /**
    * The integer unit amount in **%s** of the charge to be applied to the upcoming invoice. This
    * unit_amount will be multiplied by the quantity to get the full amount. If you want to apply a
@@ -98,6 +101,7 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
       Period period,
       Long quantity,
       String subscription,
+      List<String> taxRates,
       Long unitAmount) {
     this.amount = amount;
     this.currency = currency;
@@ -110,6 +114,7 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
     this.period = period;
     this.quantity = quantity;
     this.subscription = subscription;
+    this.taxRates = taxRates;
     this.unitAmount = unitAmount;
   }
 
@@ -140,6 +145,8 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
 
     private String subscription;
 
+    private List<String> taxRates;
+
     private Long unitAmount;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -156,6 +163,7 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
           this.period,
           this.quantity,
           this.subscription,
+          this.taxRates,
           this.unitAmount);
     }
 
@@ -285,6 +293,32 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
      */
     public Builder setSubscription(String subscription) {
       this.subscription = subscription;
+      return this;
+    }
+
+    /**
+     * Add an element to `taxRates` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * InvoiceItemCreateParams#taxRates} for the field documentation.
+     */
+    public Builder addTaxRate(String element) {
+      if (this.taxRates == null) {
+        this.taxRates = new ArrayList<>();
+      }
+      this.taxRates.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `taxRates` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * InvoiceItemCreateParams#taxRates} for the field documentation.
+     */
+    public Builder addAllTaxRate(List<String> elements) {
+      if (this.taxRates == null) {
+        this.taxRates = new ArrayList<>();
+      }
+      this.taxRates.addAll(elements);
       return this;
     }
 

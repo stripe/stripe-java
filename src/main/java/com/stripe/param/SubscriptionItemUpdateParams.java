@@ -52,6 +52,9 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
   @SerializedName("quantity")
   Long quantity;
 
+  @SerializedName("tax_rates")
+  Object taxRates;
+
   private SubscriptionItemUpdateParams(
       Object billingThresholds,
       List<String> expand,
@@ -59,7 +62,8 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
       String plan,
       Boolean prorate,
       Long prorationDate,
-      Long quantity) {
+      Long quantity,
+      Object taxRates) {
     this.billingThresholds = billingThresholds;
     this.expand = expand;
     this.metadata = metadata;
@@ -67,6 +71,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
     this.prorate = prorate;
     this.prorationDate = prorationDate;
     this.quantity = quantity;
+    this.taxRates = taxRates;
   }
 
   public static Builder builder() {
@@ -88,6 +93,8 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
 
     private Long quantity;
 
+    private Object taxRates;
+
     /** Finalize and obtain parameter instance from this builder. */
     public SubscriptionItemUpdateParams build() {
       return new SubscriptionItemUpdateParams(
@@ -97,7 +104,8 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
           this.plan,
           this.prorate,
           this.prorationDate,
-          this.quantity);
+          this.quantity,
+          this.taxRates);
     }
 
     /**
@@ -199,6 +207,16 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
     /** The quantity you'd like to apply to the subscription item you're creating. */
     public Builder setQuantity(Long quantity) {
       this.quantity = quantity;
+      return this;
+    }
+
+    public Builder setTaxRates(EmptyParam taxRates) {
+      this.taxRates = taxRates;
+      return this;
+    }
+
+    public Builder setTaxRates(List<String> taxRates) {
+      this.taxRates = taxRates;
       return this;
     }
   }

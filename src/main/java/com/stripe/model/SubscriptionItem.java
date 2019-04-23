@@ -13,6 +13,7 @@ import com.stripe.param.SubscriptionItemListParams;
 import com.stripe.param.SubscriptionItemRetrieveParams;
 import com.stripe.param.SubscriptionItemUpdateParams;
 import com.stripe.param.SubscriptionItemUsageRecordSummariesParams;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -68,6 +69,10 @@ public class SubscriptionItem extends ApiResource
   /** The `subscription` this `subscription_item` belongs to. */
   @SerializedName("subscription")
   String subscription;
+
+  /** The tax rates which apply to the subscription item. */
+  @SerializedName("tax_rates")
+  List<TaxRate> taxRates;
 
   /** Returns a list of your subscription items for a given subscription. */
   public static SubscriptionItemCollection list(Map<String, Object> params) throws StripeException {

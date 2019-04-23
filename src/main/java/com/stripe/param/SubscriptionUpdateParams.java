@@ -90,6 +90,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   @SerializedName("default_source")
   String defaultSource;
 
+  @SerializedName("default_tax_rates")
+  Object defaultTaxRates;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -172,6 +175,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       Long daysUntilDue,
       String defaultPaymentMethod,
       String defaultSource,
+      Object defaultTaxRates,
       List<String> expand,
       List<Item> items,
       Map<String, String> metadata,
@@ -191,6 +195,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     this.daysUntilDue = daysUntilDue;
     this.defaultPaymentMethod = defaultPaymentMethod;
     this.defaultSource = defaultSource;
+    this.defaultTaxRates = defaultTaxRates;
     this.expand = expand;
     this.items = items;
     this.metadata = metadata;
@@ -227,6 +232,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
     private String defaultSource;
 
+    private Object defaultTaxRates;
+
     private List<String> expand;
 
     private List<Item> items;
@@ -258,6 +265,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           this.daysUntilDue,
           this.defaultPaymentMethod,
           this.defaultSource,
+          this.defaultTaxRates,
           this.expand,
           this.items,
           this.metadata,
@@ -381,6 +389,16 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      */
     public Builder setDefaultSource(String defaultSource) {
       this.defaultSource = defaultSource;
+      return this;
+    }
+
+    public Builder setDefaultTaxRates(EmptyParam defaultTaxRates) {
+      this.defaultTaxRates = defaultTaxRates;
+      return this;
+    }
+
+    public Builder setDefaultTaxRates(List<String> defaultTaxRates) {
+      this.defaultTaxRates = defaultTaxRates;
       return this;
     }
 
@@ -653,6 +671,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     @SerializedName("quantity")
     Long quantity;
 
+    @SerializedName("tax_rates")
+    Object taxRates;
+
     private Item(
         Object billingThresholds,
         Boolean clearUsage,
@@ -660,7 +681,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         String id,
         Map<String, String> metadata,
         String plan,
-        Long quantity) {
+        Long quantity,
+        Object taxRates) {
       this.billingThresholds = billingThresholds;
       this.clearUsage = clearUsage;
       this.deleted = deleted;
@@ -668,6 +690,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       this.metadata = metadata;
       this.plan = plan;
       this.quantity = quantity;
+      this.taxRates = taxRates;
     }
 
     public static Builder builder() {
@@ -689,6 +712,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
       private Long quantity;
 
+      private Object taxRates;
+
       /** Finalize and obtain parameter instance from this builder. */
       public Item build() {
         return new Item(
@@ -698,7 +723,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
             this.id,
             this.metadata,
             this.plan,
-            this.quantity);
+            this.quantity,
+            this.taxRates);
       }
 
       /**
@@ -775,6 +801,16 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       /** Quantity for this item. */
       public Builder setQuantity(Long quantity) {
         this.quantity = quantity;
+        return this;
+      }
+
+      public Builder setTaxRates(EmptyParam taxRates) {
+        this.taxRates = taxRates;
+        return this;
+      }
+
+      public Builder setTaxRates(List<String> taxRates) {
+        this.taxRates = taxRates;
         return this;
       }
     }

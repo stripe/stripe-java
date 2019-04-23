@@ -58,6 +58,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   @SerializedName("default_source")
   String defaultSource;
 
+  @SerializedName("default_tax_rates")
+  Object defaultTaxRates;
+
   @SerializedName("description")
   String description;
 
@@ -111,6 +114,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       Long daysUntilDue,
       String defaultPaymentMethod,
       String defaultSource,
+      Object defaultTaxRates,
       String description,
       Long dueDate,
       List<String> expand,
@@ -125,6 +129,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     this.daysUntilDue = daysUntilDue;
     this.defaultPaymentMethod = defaultPaymentMethod;
     this.defaultSource = defaultSource;
+    this.defaultTaxRates = defaultTaxRates;
     this.description = description;
     this.dueDate = dueDate;
     this.expand = expand;
@@ -152,6 +157,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
     private String defaultSource;
 
+    private Object defaultTaxRates;
+
     private String description;
 
     private Long dueDate;
@@ -177,6 +184,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
           this.daysUntilDue,
           this.defaultPaymentMethod,
           this.defaultSource,
+          this.defaultTaxRates,
           this.description,
           this.dueDate,
           this.expand,
@@ -253,6 +261,16 @@ public class InvoiceUpdateParams extends ApiRequestParams {
      */
     public Builder setDefaultSource(String defaultSource) {
       this.defaultSource = defaultSource;
+      return this;
+    }
+
+    public Builder setDefaultTaxRates(EmptyParam defaultTaxRates) {
+      this.defaultTaxRates = defaultTaxRates;
+      return this;
+    }
+
+    public Builder setDefaultTaxRates(List<String> defaultTaxRates) {
+      this.defaultTaxRates = defaultTaxRates;
       return this;
     }
 

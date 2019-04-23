@@ -11,6 +11,7 @@ import com.stripe.param.InvoiceItemCreateParams;
 import com.stripe.param.InvoiceItemListParams;
 import com.stripe.param.InvoiceItemRetrieveParams;
 import com.stripe.param.InvoiceItemUpdateParams;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -117,6 +118,10 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
 
   @SerializedName("subscription_item")
   String subscriptionItem;
+
+  /** The tax rates which apply to the invoice item. */
+  @SerializedName("tax_rates")
+  List<TaxRate> taxRates;
 
   /** Unit Amount (in the `currency` specified) of the invoice item. */
   @SerializedName("unit_amount")

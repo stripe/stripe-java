@@ -503,15 +503,6 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("coupon.updated")
     COUPON__UPDATED("coupon.updated"),
 
-    @SerializedName("credit_note.created")
-    CREDIT_NOTE__CREATED("credit_note.created"),
-
-    @SerializedName("credit_note.updated")
-    CREDIT_NOTE__UPDATED("credit_note.updated"),
-
-    @SerializedName("credit_note.voided")
-    CREDIT_NOTE__VOIDED("credit_note.voided"),
-
     @SerializedName("customer.created")
     CUSTOMER__CREATED("customer.created"),
 
@@ -577,9 +568,6 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     @SerializedName("invoice.marked_uncollectible")
     INVOICE__MARKED_UNCOLLECTIBLE("invoice.marked_uncollectible"),
-
-    @SerializedName("invoice.payment_action_required")
-    INVOICE__PAYMENT_ACTION_REQUIRED("invoice.payment_action_required"),
 
     @SerializedName("invoice.payment_failed")
     INVOICE__PAYMENT_FAILED("invoice.payment_failed"),

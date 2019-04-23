@@ -411,6 +411,9 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     @SerializedName("coupon")
     String coupon;
 
+    @SerializedName("default_tax_rates")
+    Object defaultTaxRates;
+
     /**
      * The date at which this phase of the subscription schedule ends. If set, `iterations` must not
      * be set.
@@ -460,6 +463,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     private Phase(
         BigDecimal applicationFeePercent,
         String coupon,
+        Object defaultTaxRates,
         Long endDate,
         Long iterations,
         List<Plan> plans,
@@ -468,6 +472,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         Long trialEnd) {
       this.applicationFeePercent = applicationFeePercent;
       this.coupon = coupon;
+      this.defaultTaxRates = defaultTaxRates;
       this.endDate = endDate;
       this.iterations = iterations;
       this.plans = plans;
@@ -484,6 +489,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       private BigDecimal applicationFeePercent;
 
       private String coupon;
+
+      private Object defaultTaxRates;
 
       private Long endDate;
 
@@ -502,6 +509,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         return new Phase(
             this.applicationFeePercent,
             this.coupon,
+            this.defaultTaxRates,
             this.endDate,
             this.iterations,
             this.plans,
@@ -525,6 +533,16 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       /** The identifier of the coupon to apply to this phase of the subscription schedule. */
       public Builder setCoupon(String coupon) {
         this.coupon = coupon;
+        return this;
+      }
+
+      public Builder setDefaultTaxRates(EmptyParam defaultTaxRates) {
+        this.defaultTaxRates = defaultTaxRates;
+        return this;
+      }
+
+      public Builder setDefaultTaxRates(List<String> defaultTaxRates) {
+        this.defaultTaxRates = defaultTaxRates;
         return this;
       }
 
@@ -623,10 +641,14 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       @SerializedName("quantity")
       Long quantity;
 
-      private Plan(Object billingThresholds, String plan, Long quantity) {
+      @SerializedName("tax_rates")
+      Object taxRates;
+
+      private Plan(Object billingThresholds, String plan, Long quantity, Object taxRates) {
         this.billingThresholds = billingThresholds;
         this.plan = plan;
         this.quantity = quantity;
+        this.taxRates = taxRates;
       }
 
       public static Builder builder() {
@@ -640,9 +662,11 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
         private Long quantity;
 
+        private Object taxRates;
+
         /** Finalize and obtain parameter instance from this builder. */
         public Plan build() {
-          return new Plan(this.billingThresholds, this.plan, this.quantity);
+          return new Plan(this.billingThresholds, this.plan, this.quantity, this.taxRates);
         }
 
         /**
@@ -675,6 +699,16 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
          */
         public Builder setQuantity(Long quantity) {
           this.quantity = quantity;
+          return this;
+        }
+
+        public Builder setTaxRates(EmptyParam taxRates) {
+          this.taxRates = taxRates;
+          return this;
+        }
+
+        public Builder setTaxRates(List<String> taxRates) {
+          this.taxRates = taxRates;
           return this;
         }
       }

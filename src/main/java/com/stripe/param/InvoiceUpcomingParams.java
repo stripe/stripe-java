@@ -63,6 +63,9 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   @SerializedName("subscription_cancel_now")
   Boolean subscriptionCancelNow;
 
+  @SerializedName("subscription_default_tax_rates")
+  Object subscriptionDefaultTaxRates;
+
   /** List of subscription items, each with an attached plan. */
   @SerializedName("subscription_items")
   List<SubscriptionItem> subscriptionItems;
@@ -117,6 +120,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       Object subscriptionBillingCycleAnchor,
       Boolean subscriptionCancelAtPeriodEnd,
       Boolean subscriptionCancelNow,
+      Object subscriptionDefaultTaxRates,
       List<SubscriptionItem> subscriptionItems,
       Boolean subscriptionProrate,
       Long subscriptionProrationDate,
@@ -131,6 +135,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     this.subscriptionBillingCycleAnchor = subscriptionBillingCycleAnchor;
     this.subscriptionCancelAtPeriodEnd = subscriptionCancelAtPeriodEnd;
     this.subscriptionCancelNow = subscriptionCancelNow;
+    this.subscriptionDefaultTaxRates = subscriptionDefaultTaxRates;
     this.subscriptionItems = subscriptionItems;
     this.subscriptionProrate = subscriptionProrate;
     this.subscriptionProrationDate = subscriptionProrationDate;
@@ -160,6 +165,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     private Boolean subscriptionCancelNow;
 
+    private Object subscriptionDefaultTaxRates;
+
     private List<SubscriptionItem> subscriptionItems;
 
     private Boolean subscriptionProrate;
@@ -183,6 +190,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
           this.subscriptionBillingCycleAnchor,
           this.subscriptionCancelAtPeriodEnd,
           this.subscriptionCancelNow,
+          this.subscriptionDefaultTaxRates,
           this.subscriptionItems,
           this.subscriptionProrate,
           this.subscriptionProrationDate,
@@ -308,6 +316,16 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     public Builder setSubscriptionCancelNow(Boolean subscriptionCancelNow) {
       this.subscriptionCancelNow = subscriptionCancelNow;
+      return this;
+    }
+
+    public Builder setSubscriptionDefaultTaxRates(EmptyParam subscriptionDefaultTaxRates) {
+      this.subscriptionDefaultTaxRates = subscriptionDefaultTaxRates;
+      return this;
+    }
+
+    public Builder setSubscriptionDefaultTaxRates(List<String> subscriptionDefaultTaxRates) {
+      this.subscriptionDefaultTaxRates = subscriptionDefaultTaxRates;
       return this;
     }
 
@@ -447,6 +465,9 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     @SerializedName("quantity")
     Long quantity;
 
+    @SerializedName("tax_rates")
+    Object taxRates;
+
     /**
      * The integer unit amount in **%s** of the charge to be applied to the upcoming invoice. This
      * unit_amount will be multiplied by the quantity to get the full amount. If you want to apply a
@@ -464,6 +485,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         Map<String, String> metadata,
         Period period,
         Long quantity,
+        Object taxRates,
         Long unitAmount) {
       this.amount = amount;
       this.currency = currency;
@@ -473,6 +495,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       this.metadata = metadata;
       this.period = period;
       this.quantity = quantity;
+      this.taxRates = taxRates;
       this.unitAmount = unitAmount;
     }
 
@@ -497,6 +520,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
       private Long quantity;
 
+      private Object taxRates;
+
       private Long unitAmount;
 
       /** Finalize and obtain parameter instance from this builder. */
@@ -510,6 +535,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
             this.metadata,
             this.period,
             this.quantity,
+            this.taxRates,
             this.unitAmount);
       }
 
@@ -591,6 +617,16 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       /** Non-negative integer. The quantity of units for the invoice item. */
       public Builder setQuantity(Long quantity) {
         this.quantity = quantity;
+        return this;
+      }
+
+      public Builder setTaxRates(EmptyParam taxRates) {
+        this.taxRates = taxRates;
+        return this;
+      }
+
+      public Builder setTaxRates(List<String> taxRates) {
+        this.taxRates = taxRates;
         return this;
       }
 
@@ -686,6 +722,9 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     @SerializedName("quantity")
     Long quantity;
 
+    @SerializedName("tax_rates")
+    Object taxRates;
+
     private SubscriptionItem(
         Object billingThresholds,
         Boolean clearUsage,
@@ -693,7 +732,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         String id,
         Map<String, String> metadata,
         String plan,
-        Long quantity) {
+        Long quantity,
+        Object taxRates) {
       this.billingThresholds = billingThresholds;
       this.clearUsage = clearUsage;
       this.deleted = deleted;
@@ -701,6 +741,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       this.metadata = metadata;
       this.plan = plan;
       this.quantity = quantity;
+      this.taxRates = taxRates;
     }
 
     public static Builder builder() {
@@ -722,6 +763,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
       private Long quantity;
 
+      private Object taxRates;
+
       /** Finalize and obtain parameter instance from this builder. */
       public SubscriptionItem build() {
         return new SubscriptionItem(
@@ -731,7 +774,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
             this.id,
             this.metadata,
             this.plan,
-            this.quantity);
+            this.quantity,
+            this.taxRates);
       }
 
       /**
@@ -808,6 +852,16 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       /** Quantity for this item. */
       public Builder setQuantity(Long quantity) {
         this.quantity = quantity;
+        return this;
+      }
+
+      public Builder setTaxRates(EmptyParam taxRates) {
+        this.taxRates = taxRates;
+        return this;
+      }
+
+      public Builder setTaxRates(List<String> taxRates) {
+        this.taxRates = taxRates;
         return this;
       }
     }

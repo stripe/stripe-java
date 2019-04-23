@@ -13,6 +13,7 @@ import com.stripe.param.SubscriptionListParams;
 import com.stripe.param.SubscriptionRetrieveParams;
 import com.stripe.param.SubscriptionUpdateParams;
 import java.math.BigDecimal;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -122,6 +123,10 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<PaymentSource> defaultSource;
+
+  /** The default tax rates that apply to this subscription. */
+  @SerializedName("default_tax_rates")
+  List<TaxRate> defaultTaxRates;
 
   /**
    * Describes the current discount applied to this subscription, if there is one. When billing, a
