@@ -175,8 +175,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   ShippingDetails customerShipping;
 
   /**
-   * The customer's tax ids. Until the invoice is finalized, this field will equal
-   * `customer.tax_ids`. Once the invoice is finalized, this field will no longer be updated.
+   * The customer's tax ids. Until the invoice is finalized, this field will contain the same tax
+   * IDs as `customer.tax_ids`. Once the invoice is finalized, this field will no longer be updated.
    */
   @SerializedName("customer_tax_ids")
   List<CustomerTaxId> customerTaxIds;

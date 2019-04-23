@@ -5,7 +5,9 @@ package com.stripe.param.terminal;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class LocationUpdateParams extends ApiRequestParams {
   /** The full address of the location. */
@@ -20,6 +22,10 @@ public class LocationUpdateParams extends ApiRequestParams {
   @SerializedName("expand")
   List<String> expand;
 
+  /** Extra parameters for custom features not yet available in the client library. */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
   /**
    * To group objects on your platform account by connected account, set this parameter to the
    * connected account operating your application.
@@ -28,10 +34,15 @@ public class LocationUpdateParams extends ApiRequestParams {
   String operatorAccount;
 
   private LocationUpdateParams(
-      Address address, String displayName, List<String> expand, String operatorAccount) {
+      Address address,
+      String displayName,
+      List<String> expand,
+      Map<String, Object> extraParams,
+      String operatorAccount) {
     this.address = address;
     this.displayName = displayName;
     this.expand = expand;
+    this.extraParams = extraParams;
     this.operatorAccount = operatorAccount;
   }
 
@@ -46,12 +57,14 @@ public class LocationUpdateParams extends ApiRequestParams {
 
     private List<String> expand;
 
+    private Map<String, Object> extraParams;
+
     private String operatorAccount;
 
     /** Finalize and obtain parameter instance from this builder. */
     public LocationUpdateParams build() {
       return new LocationUpdateParams(
-          this.address, this.displayName, this.expand, this.operatorAccount);
+          this.address, this.displayName, this.expand, this.extraParams, this.operatorAccount);
     }
 
     /** The full address of the location. */
@@ -93,6 +106,32 @@ public class LocationUpdateParams extends ApiRequestParams {
     }
 
     /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * LocationUpdateParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link LocationUpdateParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
      * To group objects on your platform account by connected account, set this parameter to the
      * connected account operating your application.
      */
@@ -109,6 +148,10 @@ public class LocationUpdateParams extends ApiRequestParams {
     @SerializedName("country")
     String country;
 
+    /** Extra parameters for custom features not yet available in the client library. */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
     @SerializedName("line1")
     String line1;
 
@@ -122,9 +165,16 @@ public class LocationUpdateParams extends ApiRequestParams {
     String state;
 
     private Address(
-        String city, String country, String line1, String line2, String postalCode, String state) {
+        String city,
+        String country,
+        Map<String, Object> extraParams,
+        String line1,
+        String line2,
+        String postalCode,
+        String state) {
       this.city = city;
       this.country = country;
+      this.extraParams = extraParams;
       this.line1 = line1;
       this.line2 = line2;
       this.postalCode = postalCode;
@@ -140,6 +190,8 @@ public class LocationUpdateParams extends ApiRequestParams {
 
       private String country;
 
+      private Map<String, Object> extraParams;
+
       private String line1;
 
       private String line2;
@@ -151,7 +203,13 @@ public class LocationUpdateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public Address build() {
         return new Address(
-            this.city, this.country, this.line1, this.line2, this.postalCode, this.state);
+            this.city,
+            this.country,
+            this.extraParams,
+            this.line1,
+            this.line2,
+            this.postalCode,
+            this.state);
       }
 
       public Builder setCity(String city) {
@@ -161,6 +219,32 @@ public class LocationUpdateParams extends ApiRequestParams {
 
       public Builder setCountry(String country) {
         this.country = country;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * Address#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link Address#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
 

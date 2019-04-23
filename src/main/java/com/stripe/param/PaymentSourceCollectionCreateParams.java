@@ -14,6 +14,10 @@ public class PaymentSourceCollectionCreateParams extends ApiRequestParams {
   @SerializedName("expand")
   List<String> expand;
 
+  /** Extra parameters for custom features not yet available in the client library. */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
   /**
    * A set of key-value pairs that you can attach to a card object. It can be useful for storing
    * additional information about the card in a structured format.
@@ -26,8 +30,12 @@ public class PaymentSourceCollectionCreateParams extends ApiRequestParams {
   String source;
 
   private PaymentSourceCollectionCreateParams(
-      List<String> expand, Map<String, String> metadata, String source) {
+      List<String> expand,
+      Map<String, Object> extraParams,
+      Map<String, String> metadata,
+      String source) {
     this.expand = expand;
+    this.extraParams = extraParams;
     this.metadata = metadata;
     this.source = source;
   }
@@ -39,13 +47,16 @@ public class PaymentSourceCollectionCreateParams extends ApiRequestParams {
   public static class Builder {
     private List<String> expand;
 
+    private Map<String, Object> extraParams;
+
     private Map<String, String> metadata;
 
     private String source;
 
     /** Finalize and obtain parameter instance from this builder. */
     public PaymentSourceCollectionCreateParams build() {
-      return new PaymentSourceCollectionCreateParams(this.expand, this.metadata, this.source);
+      return new PaymentSourceCollectionCreateParams(
+          this.expand, this.extraParams, this.metadata, this.source);
     }
 
     /**
@@ -71,6 +82,32 @@ public class PaymentSourceCollectionCreateParams extends ApiRequestParams {
         this.expand = new ArrayList<>();
       }
       this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * PaymentSourceCollectionCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link PaymentSourceCollectionCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
       return this;
     }
 

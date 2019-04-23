@@ -25,6 +25,10 @@ public class ExternalAccountCollectionCreateParams extends ApiRequestParams {
   @SerializedName("external_account")
   String externalAccount;
 
+  /** Extra parameters for custom features not yet available in the client library. */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
   /**
    * A set of key-value pairs that you can attach to an external account object. It can be useful
    * for storing additional information about the external account in a structured format.
@@ -36,10 +40,12 @@ public class ExternalAccountCollectionCreateParams extends ApiRequestParams {
       Boolean defaultForCurrency,
       List<String> expand,
       String externalAccount,
+      Map<String, Object> extraParams,
       Map<String, String> metadata) {
     this.defaultForCurrency = defaultForCurrency;
     this.expand = expand;
     this.externalAccount = externalAccount;
+    this.extraParams = extraParams;
     this.metadata = metadata;
   }
 
@@ -54,12 +60,18 @@ public class ExternalAccountCollectionCreateParams extends ApiRequestParams {
 
     private String externalAccount;
 
+    private Map<String, Object> extraParams;
+
     private Map<String, String> metadata;
 
     /** Finalize and obtain parameter instance from this builder. */
     public ExternalAccountCollectionCreateParams build() {
       return new ExternalAccountCollectionCreateParams(
-          this.defaultForCurrency, this.expand, this.externalAccount, this.metadata);
+          this.defaultForCurrency,
+          this.expand,
+          this.externalAccount,
+          this.extraParams,
+          this.metadata);
     }
 
     /**
@@ -100,6 +112,32 @@ public class ExternalAccountCollectionCreateParams extends ApiRequestParams {
     /** Please refer to full [documentation](https://stripe.com/docs/api) instead. */
     public Builder setExternalAccount(String externalAccount) {
       this.externalAccount = externalAccount;
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * ExternalAccountCollectionCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link ExternalAccountCollectionCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
       return this;
     }
 

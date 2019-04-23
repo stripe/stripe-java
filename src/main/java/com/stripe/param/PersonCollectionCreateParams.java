@@ -36,6 +36,10 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
   @SerializedName("expand")
   List<String> expand;
 
+  /** Extra parameters for custom features not yet available in the client library. */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
   /** The person's first name. */
   @SerializedName("first_name")
   String firstName;
@@ -115,6 +119,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
       Dob dob,
       String email,
       List<String> expand,
+      Map<String, Object> extraParams,
       String firstName,
       String firstNameKana,
       String firstNameKanji,
@@ -136,6 +141,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
     this.dob = dob;
     this.email = email;
     this.expand = expand;
+    this.extraParams = extraParams;
     this.firstName = firstName;
     this.firstNameKana = firstNameKana;
     this.firstNameKanji = firstNameKanji;
@@ -169,6 +175,8 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
     private String email;
 
     private List<String> expand;
+
+    private Map<String, Object> extraParams;
 
     private String firstName;
 
@@ -209,6 +217,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
           this.dob,
           this.email,
           this.expand,
+          this.extraParams,
           this.firstName,
           this.firstNameKana,
           this.firstNameKanji,
@@ -279,6 +288,32 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
         this.expand = new ArrayList<>();
       }
       this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * PersonCollectionCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link PersonCollectionCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
       return this;
     }
 
@@ -413,6 +448,10 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
     @SerializedName("country")
     String country;
 
+    /** Extra parameters for custom features not yet available in the client library. */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
     /** Address line 1 (e.g., street, PO Box, or company name). */
     @SerializedName("line1")
     String line1;
@@ -430,9 +469,16 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
     String state;
 
     private Address(
-        String city, String country, String line1, String line2, String postalCode, String state) {
+        String city,
+        String country,
+        Map<String, Object> extraParams,
+        String line1,
+        String line2,
+        String postalCode,
+        String state) {
       this.city = city;
       this.country = country;
+      this.extraParams = extraParams;
       this.line1 = line1;
       this.line2 = line2;
       this.postalCode = postalCode;
@@ -448,6 +494,8 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
 
       private String country;
 
+      private Map<String, Object> extraParams;
+
       private String line1;
 
       private String line2;
@@ -459,7 +507,13 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public Address build() {
         return new Address(
-            this.city, this.country, this.line1, this.line2, this.postalCode, this.state);
+            this.city,
+            this.country,
+            this.extraParams,
+            this.line1,
+            this.line2,
+            this.postalCode,
+            this.state);
       }
 
       /** City, district, suburb, town, or village. */
@@ -474,6 +528,32 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
        */
       public Builder setCountry(String country) {
         this.country = country;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * Address#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link Address#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
 
@@ -515,6 +595,10 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
     @SerializedName("country")
     String country;
 
+    /** Extra parameters for custom features not yet available in the client library. */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
     /** Block or building number. */
     @SerializedName("line1")
     String line1;
@@ -538,6 +622,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
     private AddressKana(
         String city,
         String country,
+        Map<String, Object> extraParams,
         String line1,
         String line2,
         String postalCode,
@@ -545,6 +630,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
         String town) {
       this.city = city;
       this.country = country;
+      this.extraParams = extraParams;
       this.line1 = line1;
       this.line2 = line2;
       this.postalCode = postalCode;
@@ -561,6 +647,8 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
 
       private String country;
 
+      private Map<String, Object> extraParams;
+
       private String line1;
 
       private String line2;
@@ -576,6 +664,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
         return new AddressKana(
             this.city,
             this.country,
+            this.extraParams,
             this.line1,
             this.line2,
             this.postalCode,
@@ -595,6 +684,32 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
        */
       public Builder setCountry(String country) {
         this.country = country;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * AddressKana#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link AddressKana#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
 
@@ -642,6 +757,10 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
     @SerializedName("country")
     String country;
 
+    /** Extra parameters for custom features not yet available in the client library. */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
     /** Block or building number. */
     @SerializedName("line1")
     String line1;
@@ -665,6 +784,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
     private AddressKanji(
         String city,
         String country,
+        Map<String, Object> extraParams,
         String line1,
         String line2,
         String postalCode,
@@ -672,6 +792,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
         String town) {
       this.city = city;
       this.country = country;
+      this.extraParams = extraParams;
       this.line1 = line1;
       this.line2 = line2;
       this.postalCode = postalCode;
@@ -688,6 +809,8 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
 
       private String country;
 
+      private Map<String, Object> extraParams;
+
       private String line1;
 
       private String line2;
@@ -703,6 +826,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
         return new AddressKanji(
             this.city,
             this.country,
+            this.extraParams,
             this.line1,
             this.line2,
             this.postalCode,
@@ -722,6 +846,32 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
        */
       public Builder setCountry(String country) {
         this.country = country;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * AddressKanji#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link AddressKanji#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
 
@@ -762,6 +912,10 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
     @SerializedName("day")
     Long day;
 
+    /** Extra parameters for custom features not yet available in the client library. */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
     /** The month of birth, between 1 and 12. */
     @SerializedName("month")
     Long month;
@@ -770,8 +924,9 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
     @SerializedName("year")
     Long year;
 
-    private Dob(Long day, Long month, Long year) {
+    private Dob(Long day, Map<String, Object> extraParams, Long month, Long year) {
       this.day = day;
+      this.extraParams = extraParams;
       this.month = month;
       this.year = year;
     }
@@ -783,18 +938,46 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
     public static class Builder {
       private Long day;
 
+      private Map<String, Object> extraParams;
+
       private Long month;
 
       private Long year;
 
       /** Finalize and obtain parameter instance from this builder. */
       public Dob build() {
-        return new Dob(this.day, this.month, this.year);
+        return new Dob(this.day, this.extraParams, this.month, this.year);
       }
 
       /** The day of birth, between 1 and 31. */
       public Builder setDay(Long day) {
         this.day = day;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * Dob#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link Dob#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
 
@@ -828,6 +1011,10 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
     @SerializedName("director")
     Boolean director;
 
+    /** Extra parameters for custom features not yet available in the client library. */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
     /** Whether the person is an owner of the account’s legal entity. */
     @SerializedName("owner")
     Boolean owner;
@@ -843,11 +1030,13 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
     private Relationship(
         Boolean accountOpener,
         Boolean director,
+        Map<String, Object> extraParams,
         Boolean owner,
         Object percentOwnership,
         String title) {
       this.accountOpener = accountOpener;
       this.director = director;
+      this.extraParams = extraParams;
       this.owner = owner;
       this.percentOwnership = percentOwnership;
       this.title = title;
@@ -862,6 +1051,8 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
 
       private Boolean director;
 
+      private Map<String, Object> extraParams;
+
       private Boolean owner;
 
       private Object percentOwnership;
@@ -871,7 +1062,12 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public Relationship build() {
         return new Relationship(
-            this.accountOpener, this.director, this.owner, this.percentOwnership, this.title);
+            this.accountOpener,
+            this.director,
+            this.extraParams,
+            this.owner,
+            this.percentOwnership,
+            this.title);
       }
 
       /**
@@ -890,6 +1086,32 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
        */
       public Builder setDirector(Boolean director) {
         this.director = director;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * Relationship#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link Relationship#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
 
@@ -924,8 +1146,13 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
     @SerializedName("document")
     Document document;
 
-    private Verification(Document document) {
+    /** Extra parameters for custom features not yet available in the client library. */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Verification(Document document, Map<String, Object> extraParams) {
       this.document = document;
+      this.extraParams = extraParams;
     }
 
     public static Builder builder() {
@@ -935,14 +1162,42 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
     public static class Builder {
       private Document document;
 
+      private Map<String, Object> extraParams;
+
       /** Finalize and obtain parameter instance from this builder. */
       public Verification build() {
-        return new Verification(this.document);
+        return new Verification(this.document, this.extraParams);
       }
 
       /** An identifying document, either a passport or local ID card. */
       public Builder setDocument(Document document) {
         this.document = document;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * Verification#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link Verification#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
     }
@@ -955,6 +1210,10 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
       @SerializedName("back")
       String back;
 
+      /** Extra parameters for custom features not yet available in the client library. */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
       /**
        * The front of an ID returned by a [file upload](#create_file) with a `purpose` value of
        * `identity_document`.
@@ -962,8 +1221,9 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
       @SerializedName("front")
       String front;
 
-      private Document(String back, String front) {
+      private Document(String back, Map<String, Object> extraParams, String front) {
         this.back = back;
+        this.extraParams = extraParams;
         this.front = front;
       }
 
@@ -974,11 +1234,13 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
       public static class Builder {
         private String back;
 
+        private Map<String, Object> extraParams;
+
         private String front;
 
         /** Finalize and obtain parameter instance from this builder. */
         public Document build() {
-          return new Document(this.back, this.front);
+          return new Document(this.back, this.extraParams, this.front);
         }
 
         /**
@@ -987,6 +1249,32 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
          */
         public Builder setBack(String back) {
           this.back = back;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link Document#extraParams} for the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link Document#extraParams} for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
           return this;
         }
 

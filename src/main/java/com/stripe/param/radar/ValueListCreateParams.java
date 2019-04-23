@@ -19,6 +19,10 @@ public class ValueListCreateParams extends ApiRequestParams {
   @SerializedName("expand")
   List<String> expand;
 
+  /** Extra parameters for custom features not yet available in the client library. */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
   /**
    * Type of the items in the value list. One of `card_fingerprint`, `card_bin`, `email`,
    * `ip_address`, `country`, `string`, or `case_sensitive_string`. Use `string` if the item type is
@@ -42,11 +46,13 @@ public class ValueListCreateParams extends ApiRequestParams {
   private ValueListCreateParams(
       String alias,
       List<String> expand,
+      Map<String, Object> extraParams,
       ItemType itemType,
       Map<String, String> metadata,
       String name) {
     this.alias = alias;
     this.expand = expand;
+    this.extraParams = extraParams;
     this.itemType = itemType;
     this.metadata = metadata;
     this.name = name;
@@ -61,6 +67,8 @@ public class ValueListCreateParams extends ApiRequestParams {
 
     private List<String> expand;
 
+    private Map<String, Object> extraParams;
+
     private ItemType itemType;
 
     private Map<String, String> metadata;
@@ -70,7 +78,7 @@ public class ValueListCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public ValueListCreateParams build() {
       return new ValueListCreateParams(
-          this.alias, this.expand, this.itemType, this.metadata, this.name);
+          this.alias, this.expand, this.extraParams, this.itemType, this.metadata, this.name);
     }
 
     /** The name of the value list for use in rules. */
@@ -102,6 +110,32 @@ public class ValueListCreateParams extends ApiRequestParams {
         this.expand = new ArrayList<>();
       }
       this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * ValueListCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link ValueListCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
       return this;
     }
 

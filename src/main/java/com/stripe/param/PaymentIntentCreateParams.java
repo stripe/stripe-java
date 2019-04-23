@@ -77,6 +77,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   @SerializedName("expand")
   List<String> expand;
 
+  /** Extra parameters for custom features not yet available in the client library. */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format.
@@ -165,6 +169,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       String customer,
       String description,
       List<String> expand,
+      Map<String, Object> extraParams,
       Map<String, String> metadata,
       String onBehalfOf,
       String paymentMethod,
@@ -186,6 +191,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     this.customer = customer;
     this.description = description;
     this.expand = expand;
+    this.extraParams = extraParams;
     this.metadata = metadata;
     this.onBehalfOf = onBehalfOf;
     this.paymentMethod = paymentMethod;
@@ -223,6 +229,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     private List<String> expand;
 
+    private Map<String, Object> extraParams;
+
     private Map<String, String> metadata;
 
     private String onBehalfOf;
@@ -259,6 +267,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           this.customer,
           this.description,
           this.expand,
+          this.extraParams,
           this.metadata,
           this.onBehalfOf,
           this.paymentMethod,
@@ -374,6 +383,32 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         this.expand = new ArrayList<>();
       }
       this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * PaymentIntentCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link PaymentIntentCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
       return this;
     }
 
@@ -524,6 +559,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     @SerializedName("carrier")
     String carrier;
 
+    /** Extra parameters for custom features not yet available in the client library. */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
     /** Recipient name. */
     @SerializedName("name")
     String name;
@@ -540,9 +579,15 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     String trackingNumber;
 
     private Shipping(
-        Address address, String carrier, String name, String phone, String trackingNumber) {
+        Address address,
+        String carrier,
+        Map<String, Object> extraParams,
+        String name,
+        String phone,
+        String trackingNumber) {
       this.address = address;
       this.carrier = carrier;
+      this.extraParams = extraParams;
       this.name = name;
       this.phone = phone;
       this.trackingNumber = trackingNumber;
@@ -557,6 +602,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       private String carrier;
 
+      private Map<String, Object> extraParams;
+
       private String name;
 
       private String phone;
@@ -565,7 +612,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       /** Finalize and obtain parameter instance from this builder. */
       public Shipping build() {
-        return new Shipping(this.address, this.carrier, this.name, this.phone, this.trackingNumber);
+        return new Shipping(
+            this.address,
+            this.carrier,
+            this.extraParams,
+            this.name,
+            this.phone,
+            this.trackingNumber);
       }
 
       /** Shipping address. */
@@ -577,6 +630,32 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       /** The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. */
       public Builder setCarrier(String carrier) {
         this.carrier = carrier;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * Shipping#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link Shipping#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
 
@@ -609,6 +688,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       @SerializedName("country")
       String country;
 
+      /** Extra parameters for custom features not yet available in the client library. */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
       @SerializedName("line1")
       String line1;
 
@@ -624,12 +707,14 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       private Address(
           String city,
           String country,
+          Map<String, Object> extraParams,
           String line1,
           String line2,
           String postalCode,
           String state) {
         this.city = city;
         this.country = country;
+        this.extraParams = extraParams;
         this.line1 = line1;
         this.line2 = line2;
         this.postalCode = postalCode;
@@ -645,6 +730,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         private String country;
 
+        private Map<String, Object> extraParams;
+
         private String line1;
 
         private String line2;
@@ -656,7 +743,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public Address build() {
           return new Address(
-              this.city, this.country, this.line1, this.line2, this.postalCode, this.state);
+              this.city,
+              this.country,
+              this.extraParams,
+              this.line1,
+              this.line2,
+              this.postalCode,
+              this.state);
         }
 
         public Builder setCity(String city) {
@@ -666,6 +759,32 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         public Builder setCountry(String country) {
           this.country = country;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link Address#extraParams} for the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link Address#extraParams} for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
           return this;
         }
 
@@ -701,8 +820,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     @SerializedName("destination")
     String destination;
 
-    private TransferData(String destination) {
+    /** Extra parameters for custom features not yet available in the client library. */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private TransferData(String destination, Map<String, Object> extraParams) {
       this.destination = destination;
+      this.extraParams = extraParams;
     }
 
     public static Builder builder() {
@@ -712,9 +836,11 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     public static class Builder {
       private String destination;
 
+      private Map<String, Object> extraParams;
+
       /** Finalize and obtain parameter instance from this builder. */
       public TransferData build() {
-        return new TransferData(this.destination);
+        return new TransferData(this.destination, this.extraParams);
       }
 
       /**
@@ -724,6 +850,32 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
        */
       public Builder setDestination(String destination) {
         this.destination = destination;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * TransferData#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link TransferData#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
     }

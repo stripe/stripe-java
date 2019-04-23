@@ -5,7 +5,9 @@ package com.stripe.param;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lombok.Getter;
 
 public class WebhookEndpointCreateParams extends ApiRequestParams {
@@ -33,6 +35,10 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
   @SerializedName("expand")
   List<String> expand;
 
+  /** Extra parameters for custom features not yet available in the client library. */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
   /** The URL of the webhook endpoint. */
   @SerializedName("url")
   String url;
@@ -42,11 +48,13 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
       Boolean connect,
       List<EnabledEvent> enabledEvents,
       List<String> expand,
+      Map<String, Object> extraParams,
       String url) {
     this.apiVersion = apiVersion;
     this.connect = connect;
     this.enabledEvents = enabledEvents;
     this.expand = expand;
+    this.extraParams = extraParams;
     this.url = url;
   }
 
@@ -63,12 +71,19 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     private List<String> expand;
 
+    private Map<String, Object> extraParams;
+
     private String url;
 
     /** Finalize and obtain parameter instance from this builder. */
     public WebhookEndpointCreateParams build() {
       return new WebhookEndpointCreateParams(
-          this.apiVersion, this.connect, this.enabledEvents, this.expand, this.url);
+          this.apiVersion,
+          this.connect,
+          this.enabledEvents,
+          this.expand,
+          this.extraParams,
+          this.url);
     }
 
     /**
@@ -138,6 +153,32 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
         this.expand = new ArrayList<>();
       }
       this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * WebhookEndpointCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link WebhookEndpointCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
       return this;
     }
 

@@ -14,6 +14,10 @@ public class TransferReversalUpdateParams extends ApiRequestParams {
   @SerializedName("expand")
   List<String> expand;
 
+  /** Extra parameters for custom features not yet available in the client library. */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
@@ -22,8 +26,10 @@ public class TransferReversalUpdateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  private TransferReversalUpdateParams(List<String> expand, Map<String, String> metadata) {
+  private TransferReversalUpdateParams(
+      List<String> expand, Map<String, Object> extraParams, Map<String, String> metadata) {
     this.expand = expand;
+    this.extraParams = extraParams;
     this.metadata = metadata;
   }
 
@@ -34,11 +40,13 @@ public class TransferReversalUpdateParams extends ApiRequestParams {
   public static class Builder {
     private List<String> expand;
 
+    private Map<String, Object> extraParams;
+
     private Map<String, String> metadata;
 
     /** Finalize and obtain parameter instance from this builder. */
     public TransferReversalUpdateParams build() {
-      return new TransferReversalUpdateParams(this.expand, this.metadata);
+      return new TransferReversalUpdateParams(this.expand, this.extraParams, this.metadata);
     }
 
     /**
@@ -64,6 +72,32 @@ public class TransferReversalUpdateParams extends ApiRequestParams {
         this.expand = new ArrayList<>();
       }
       this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * TransferReversalUpdateParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link TransferReversalUpdateParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
       return this;
     }
 

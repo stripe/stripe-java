@@ -5,12 +5,18 @@ package com.stripe.param.terminal;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ReaderCreateParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
+
+  /** Extra parameters for custom features not yet available in the client library. */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
 
   /**
    * Custom label given to the reader for easier identification. If no label is specified, the
@@ -39,11 +45,13 @@ public class ReaderCreateParams extends ApiRequestParams {
 
   private ReaderCreateParams(
       List<String> expand,
+      Map<String, Object> extraParams,
       String label,
       String location,
       String operatorAccount,
       String registrationCode) {
     this.expand = expand;
+    this.extraParams = extraParams;
     this.label = label;
     this.location = location;
     this.operatorAccount = operatorAccount;
@@ -57,6 +65,8 @@ public class ReaderCreateParams extends ApiRequestParams {
   public static class Builder {
     private List<String> expand;
 
+    private Map<String, Object> extraParams;
+
     private String label;
 
     private String location;
@@ -68,7 +78,12 @@ public class ReaderCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public ReaderCreateParams build() {
       return new ReaderCreateParams(
-          this.expand, this.label, this.location, this.operatorAccount, this.registrationCode);
+          this.expand,
+          this.extraParams,
+          this.label,
+          this.location,
+          this.operatorAccount,
+          this.registrationCode);
     }
 
     /**
@@ -94,6 +109,32 @@ public class ReaderCreateParams extends ApiRequestParams {
         this.expand = new ArrayList<>();
       }
       this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * ReaderCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link ReaderCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
       return this;
     }
 

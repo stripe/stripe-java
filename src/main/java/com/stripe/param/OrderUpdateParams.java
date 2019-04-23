@@ -22,6 +22,10 @@ public class OrderUpdateParams extends ApiRequestParams {
   @SerializedName("expand")
   List<String> expand;
 
+  /** Extra parameters for custom features not yet available in the client library. */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
   /**
    * A set of key-value pairs that you can attach to a product object. It can be useful for storing
    * additional information about the order in a structured format.
@@ -52,12 +56,14 @@ public class OrderUpdateParams extends ApiRequestParams {
   private OrderUpdateParams(
       String coupon,
       List<String> expand,
+      Map<String, Object> extraParams,
       Map<String, String> metadata,
       String selectedShippingMethod,
       Shipping shipping,
       Status status) {
     this.coupon = coupon;
     this.expand = expand;
+    this.extraParams = extraParams;
     this.metadata = metadata;
     this.selectedShippingMethod = selectedShippingMethod;
     this.shipping = shipping;
@@ -73,6 +79,8 @@ public class OrderUpdateParams extends ApiRequestParams {
 
     private List<String> expand;
 
+    private Map<String, Object> extraParams;
+
     private Map<String, String> metadata;
 
     private String selectedShippingMethod;
@@ -86,6 +94,7 @@ public class OrderUpdateParams extends ApiRequestParams {
       return new OrderUpdateParams(
           this.coupon,
           this.expand,
+          this.extraParams,
           this.metadata,
           this.selectedShippingMethod,
           this.shipping,
@@ -124,6 +133,32 @@ public class OrderUpdateParams extends ApiRequestParams {
         this.expand = new ArrayList<>();
       }
       this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * OrderUpdateParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link OrderUpdateParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
       return this;
     }
 
@@ -185,12 +220,17 @@ public class OrderUpdateParams extends ApiRequestParams {
     @SerializedName("carrier")
     String carrier;
 
+    /** Extra parameters for custom features not yet available in the client library. */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
     /** The tracking number provided by the carrier. */
     @SerializedName("tracking_number")
     String trackingNumber;
 
-    private Shipping(String carrier, String trackingNumber) {
+    private Shipping(String carrier, Map<String, Object> extraParams, String trackingNumber) {
       this.carrier = carrier;
+      this.extraParams = extraParams;
       this.trackingNumber = trackingNumber;
     }
 
@@ -201,16 +241,44 @@ public class OrderUpdateParams extends ApiRequestParams {
     public static class Builder {
       private String carrier;
 
+      private Map<String, Object> extraParams;
+
       private String trackingNumber;
 
       /** Finalize and obtain parameter instance from this builder. */
       public Shipping build() {
-        return new Shipping(this.carrier, this.trackingNumber);
+        return new Shipping(this.carrier, this.extraParams, this.trackingNumber);
       }
 
       /** The name of the carrier like `USPS`, `UPS`, or `FedEx`. */
       public Builder setCarrier(String carrier) {
         this.carrier = carrier;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * Shipping#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link Shipping#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
 

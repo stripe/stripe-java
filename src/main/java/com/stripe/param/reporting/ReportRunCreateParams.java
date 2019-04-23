@@ -5,13 +5,19 @@ package com.stripe.param.reporting;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lombok.Getter;
 
 public class ReportRunCreateParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
+
+  /** Extra parameters for custom features not yet available in the client library. */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
 
   /**
    * Parameters specifying how the report should be run. Different Report Types have different
@@ -28,8 +34,13 @@ public class ReportRunCreateParams extends ApiRequestParams {
   @SerializedName("report_type")
   String reportType;
 
-  private ReportRunCreateParams(List<String> expand, Parameters parameters, String reportType) {
+  private ReportRunCreateParams(
+      List<String> expand,
+      Map<String, Object> extraParams,
+      Parameters parameters,
+      String reportType) {
     this.expand = expand;
+    this.extraParams = extraParams;
     this.parameters = parameters;
     this.reportType = reportType;
   }
@@ -41,13 +52,16 @@ public class ReportRunCreateParams extends ApiRequestParams {
   public static class Builder {
     private List<String> expand;
 
+    private Map<String, Object> extraParams;
+
     private Parameters parameters;
 
     private String reportType;
 
     /** Finalize and obtain parameter instance from this builder. */
     public ReportRunCreateParams build() {
-      return new ReportRunCreateParams(this.expand, this.parameters, this.reportType);
+      return new ReportRunCreateParams(
+          this.expand, this.extraParams, this.parameters, this.reportType);
     }
 
     /**
@@ -73,6 +87,32 @@ public class ReportRunCreateParams extends ApiRequestParams {
         this.expand = new ArrayList<>();
       }
       this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * ReportRunCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link ReportRunCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
       return this;
     }
 
@@ -112,6 +152,10 @@ public class ReportRunCreateParams extends ApiRequestParams {
     @SerializedName("currency")
     String currency;
 
+    /** Extra parameters for custom features not yet available in the client library. */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
     /** Ending timestamp of data to be included in the report run (exclusive). */
     @SerializedName("interval_end")
     Long intervalEnd;
@@ -132,6 +176,7 @@ public class ReportRunCreateParams extends ApiRequestParams {
         List<String> columns,
         String connectedAccount,
         String currency,
+        Map<String, Object> extraParams,
         Long intervalEnd,
         Long intervalStart,
         String payout,
@@ -139,6 +184,7 @@ public class ReportRunCreateParams extends ApiRequestParams {
       this.columns = columns;
       this.connectedAccount = connectedAccount;
       this.currency = currency;
+      this.extraParams = extraParams;
       this.intervalEnd = intervalEnd;
       this.intervalStart = intervalStart;
       this.payout = payout;
@@ -156,6 +202,8 @@ public class ReportRunCreateParams extends ApiRequestParams {
 
       private String currency;
 
+      private Map<String, Object> extraParams;
+
       private Long intervalEnd;
 
       private Long intervalStart;
@@ -170,6 +218,7 @@ public class ReportRunCreateParams extends ApiRequestParams {
             this.columns,
             this.connectedAccount,
             this.currency,
+            this.extraParams,
             this.intervalEnd,
             this.intervalStart,
             this.payout,
@@ -211,6 +260,32 @@ public class ReportRunCreateParams extends ApiRequestParams {
       /** Currency of objects to be included in the report run. */
       public Builder setCurrency(String currency) {
         this.currency = currency;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * Parameters#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link Parameters#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
 

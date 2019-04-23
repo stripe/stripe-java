@@ -5,7 +5,9 @@ package com.stripe.param;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lombok.Getter;
 
 public class TokenCreateParams extends ApiRequestParams {
@@ -30,16 +32,26 @@ public class TokenCreateParams extends ApiRequestParams {
   @SerializedName("expand")
   List<String> expand;
 
+  /** Extra parameters for custom features not yet available in the client library. */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
   /** The PII this token will represent. */
   @SerializedName("pii")
   Pii pii;
 
   private TokenCreateParams(
-      BankAccount bankAccount, Object card, String customer, List<String> expand, Pii pii) {
+      BankAccount bankAccount,
+      Object card,
+      String customer,
+      List<String> expand,
+      Map<String, Object> extraParams,
+      Pii pii) {
     this.bankAccount = bankAccount;
     this.card = card;
     this.customer = customer;
     this.expand = expand;
+    this.extraParams = extraParams;
     this.pii = pii;
   }
 
@@ -56,12 +68,14 @@ public class TokenCreateParams extends ApiRequestParams {
 
     private List<String> expand;
 
+    private Map<String, Object> extraParams;
+
     private Pii pii;
 
     /** Finalize and obtain parameter instance from this builder. */
     public TokenCreateParams build() {
       return new TokenCreateParams(
-          this.bankAccount, this.card, this.customer, this.expand, this.pii);
+          this.bankAccount, this.card, this.customer, this.expand, this.extraParams, this.pii);
     }
 
     /** The bank account this token will represent. */
@@ -118,6 +132,32 @@ public class TokenCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * TokenCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link TokenCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
+      return this;
+    }
+
     /** The PII this token will represent. */
     public Builder setPii(Pii pii) {
       this.pii = pii;
@@ -155,6 +195,10 @@ public class TokenCreateParams extends ApiRequestParams {
     @SerializedName("currency")
     String currency;
 
+    /** Extra parameters for custom features not yet available in the client library. */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
     /**
      * The routing number, sort code, or other country-appropriateinstitution number for the bank
      * account. For US bank accounts, this is required and should bethe ACH routing number, not the
@@ -170,12 +214,14 @@ public class TokenCreateParams extends ApiRequestParams {
         String accountNumber,
         String country,
         String currency,
+        Map<String, Object> extraParams,
         String routingNumber) {
       this.accountHolderName = accountHolderName;
       this.accountHolderType = accountHolderType;
       this.accountNumber = accountNumber;
       this.country = country;
       this.currency = currency;
+      this.extraParams = extraParams;
       this.routingNumber = routingNumber;
     }
 
@@ -194,6 +240,8 @@ public class TokenCreateParams extends ApiRequestParams {
 
       private String currency;
 
+      private Map<String, Object> extraParams;
+
       private String routingNumber;
 
       /** Finalize and obtain parameter instance from this builder. */
@@ -204,6 +252,7 @@ public class TokenCreateParams extends ApiRequestParams {
             this.accountNumber,
             this.country,
             this.currency,
+            this.extraParams,
             this.routingNumber);
       }
 
@@ -243,6 +292,32 @@ public class TokenCreateParams extends ApiRequestParams {
        */
       public Builder setCurrency(String currency) {
         this.currency = currency;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * BankAccount#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link BankAccount#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
 
@@ -305,6 +380,10 @@ public class TokenCreateParams extends ApiRequestParams {
     @SerializedName("exp_year")
     String expYear;
 
+    /** Extra parameters for custom features not yet available in the client library. */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
     @SerializedName("name")
     String name;
 
@@ -322,6 +401,7 @@ public class TokenCreateParams extends ApiRequestParams {
         String cvc,
         String expMonth,
         String expYear,
+        Map<String, Object> extraParams,
         String name,
         String number) {
       this.addressCity = addressCity;
@@ -334,6 +414,7 @@ public class TokenCreateParams extends ApiRequestParams {
       this.cvc = cvc;
       this.expMonth = expMonth;
       this.expYear = expYear;
+      this.extraParams = extraParams;
       this.name = name;
       this.number = number;
     }
@@ -363,6 +444,8 @@ public class TokenCreateParams extends ApiRequestParams {
 
       private String expYear;
 
+      private Map<String, Object> extraParams;
+
       private String name;
 
       private String number;
@@ -380,6 +463,7 @@ public class TokenCreateParams extends ApiRequestParams {
             this.cvc,
             this.expMonth,
             this.expYear,
+            this.extraParams,
             this.name,
             this.number);
       }
@@ -434,6 +518,32 @@ public class TokenCreateParams extends ApiRequestParams {
         return this;
       }
 
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * Card#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link Card#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
       public Builder setName(String name) {
         this.name = name;
         return this;
@@ -447,11 +557,16 @@ public class TokenCreateParams extends ApiRequestParams {
   }
 
   public static class Pii {
+    /** Extra parameters for custom features not yet available in the client library. */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
     /** The `id_number` for the PII, in string form. */
     @SerializedName("id_number")
     String idNumber;
 
-    private Pii(String idNumber) {
+    private Pii(Map<String, Object> extraParams, String idNumber) {
+      this.extraParams = extraParams;
       this.idNumber = idNumber;
     }
 
@@ -460,11 +575,39 @@ public class TokenCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private Map<String, Object> extraParams;
+
       private String idNumber;
 
       /** Finalize and obtain parameter instance from this builder. */
       public Pii build() {
-        return new Pii(this.idNumber);
+        return new Pii(this.extraParams, this.idNumber);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * Pii#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link Pii#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
       }
 
       /** The `id_number` for the PII, in string form. */

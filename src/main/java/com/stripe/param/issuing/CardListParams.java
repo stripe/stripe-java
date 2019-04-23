@@ -5,7 +5,9 @@ package com.stripe.param.issuing;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lombok.Getter;
 
 public class CardListParams extends ApiRequestParams {
@@ -37,6 +39,10 @@ public class CardListParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
+
+  /** Extra parameters for custom features not yet available in the client library. */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
 
   /** Only return cards that have the given last four digits. */
   @SerializedName("last4")
@@ -84,6 +90,7 @@ public class CardListParams extends ApiRequestParams {
       Long expMonth,
       Long expYear,
       List<String> expand,
+      Map<String, Object> extraParams,
       String last4,
       Long limit,
       String name,
@@ -97,6 +104,7 @@ public class CardListParams extends ApiRequestParams {
     this.expMonth = expMonth;
     this.expYear = expYear;
     this.expand = expand;
+    this.extraParams = extraParams;
     this.last4 = last4;
     this.limit = limit;
     this.name = name;
@@ -123,6 +131,8 @@ public class CardListParams extends ApiRequestParams {
 
     private List<String> expand;
 
+    private Map<String, Object> extraParams;
+
     private String last4;
 
     private Long limit;
@@ -146,6 +156,7 @@ public class CardListParams extends ApiRequestParams {
           this.expMonth,
           this.expYear,
           this.expand,
+          this.extraParams,
           this.last4,
           this.limit,
           this.name,
@@ -222,6 +233,32 @@ public class CardListParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * CardListParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link CardListParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
+      return this;
+    }
+
     /** Only return cards that have the given last four digits. */
     public Builder setLast4(String last4) {
       this.last4 = last4;
@@ -277,6 +314,10 @@ public class CardListParams extends ApiRequestParams {
   }
 
   public static class Created {
+    /** Extra parameters for custom features not yet available in the client library. */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
     /** Minimum value to filter by (exclusive). */
     @SerializedName("gt")
     Long gt;
@@ -293,7 +334,8 @@ public class CardListParams extends ApiRequestParams {
     @SerializedName("lte")
     Long lte;
 
-    private Created(Long gt, Long gte, Long lt, Long lte) {
+    private Created(Map<String, Object> extraParams, Long gt, Long gte, Long lt, Long lte) {
+      this.extraParams = extraParams;
       this.gt = gt;
       this.gte = gte;
       this.lt = lt;
@@ -305,6 +347,8 @@ public class CardListParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private Map<String, Object> extraParams;
+
       private Long gt;
 
       private Long gte;
@@ -315,7 +359,33 @@ public class CardListParams extends ApiRequestParams {
 
       /** Finalize and obtain parameter instance from this builder. */
       public Created build() {
-        return new Created(this.gt, this.gte, this.lt, this.lte);
+        return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * Created#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link Created#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
       }
 
       /** Minimum value to filter by (exclusive). */

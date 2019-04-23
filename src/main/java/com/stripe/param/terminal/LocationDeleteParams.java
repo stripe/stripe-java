@@ -4,8 +4,14 @@ package com.stripe.param.terminal;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import java.util.HashMap;
+import java.util.Map;
 
 public class LocationDeleteParams extends ApiRequestParams {
+  /** Extra parameters for custom features not yet available in the client library. */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
   /**
    * To group objects on your platform account by connected account, set this parameter to the
    * connected account operating your application.
@@ -13,7 +19,8 @@ public class LocationDeleteParams extends ApiRequestParams {
   @SerializedName("operator_account")
   String operatorAccount;
 
-  private LocationDeleteParams(String operatorAccount) {
+  private LocationDeleteParams(Map<String, Object> extraParams, String operatorAccount) {
+    this.extraParams = extraParams;
     this.operatorAccount = operatorAccount;
   }
 
@@ -22,11 +29,39 @@ public class LocationDeleteParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private Map<String, Object> extraParams;
+
     private String operatorAccount;
 
     /** Finalize and obtain parameter instance from this builder. */
     public LocationDeleteParams build() {
-      return new LocationDeleteParams(this.operatorAccount);
+      return new LocationDeleteParams(this.extraParams, this.operatorAccount);
+    }
+
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * LocationDeleteParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link LocationDeleteParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
+      return this;
     }
 
     /**

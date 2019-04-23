@@ -46,6 +46,10 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
   @SerializedName("expand")
   List<String> expand;
 
+  /** Extra parameters for custom features not yet available in the client library. */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
   /**
    * The ID of an existing invoice to add this invoice item to. When left blank, the invoice item
    * will be added to the next upcoming scheduled invoice. This is useful when adding invoice items
@@ -93,6 +97,7 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
       String description,
       Boolean discountable,
       List<String> expand,
+      Map<String, Object> extraParams,
       String invoice,
       Map<String, String> metadata,
       Period period,
@@ -105,6 +110,7 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
     this.description = description;
     this.discountable = discountable;
     this.expand = expand;
+    this.extraParams = extraParams;
     this.invoice = invoice;
     this.metadata = metadata;
     this.period = period;
@@ -130,6 +136,8 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
 
     private List<String> expand;
 
+    private Map<String, Object> extraParams;
+
     private String invoice;
 
     private Map<String, String> metadata;
@@ -151,6 +159,7 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
           this.description,
           this.discountable,
           this.expand,
+          this.extraParams,
           this.invoice,
           this.metadata,
           this.period,
@@ -224,6 +233,32 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
         this.expand = new ArrayList<>();
       }
       this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * InvoiceItemCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link InvoiceItemCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
       return this;
     }
 
@@ -304,12 +339,17 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
     @SerializedName("end")
     Long end;
 
+    /** Extra parameters for custom features not yet available in the client library. */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
     /** The start of the period. */
     @SerializedName("start")
     Long start;
 
-    private Period(Long end, Long start) {
+    private Period(Long end, Map<String, Object> extraParams, Long start) {
       this.end = end;
+      this.extraParams = extraParams;
       this.start = start;
     }
 
@@ -320,16 +360,44 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
     public static class Builder {
       private Long end;
 
+      private Map<String, Object> extraParams;
+
       private Long start;
 
       /** Finalize and obtain parameter instance from this builder. */
       public Period build() {
-        return new Period(this.end, this.start);
+        return new Period(this.end, this.extraParams, this.start);
       }
 
       /** The end of the period, which must be greater than or equal to the start. */
       public Builder setEnd(Long end) {
         this.end = end;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * Period#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link Period#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
 

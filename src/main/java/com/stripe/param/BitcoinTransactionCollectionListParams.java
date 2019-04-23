@@ -5,7 +5,9 @@ package com.stripe.param;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BitcoinTransactionCollectionListParams extends ApiRequestParams {
   /** Only return transactions for the customer specified by this customer ID. */
@@ -25,6 +27,10 @@ public class BitcoinTransactionCollectionListParams extends ApiRequestParams {
   @SerializedName("expand")
   List<String> expand;
 
+  /** Extra parameters for custom features not yet available in the client library. */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
   /**
    * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
    * default is 10.
@@ -42,10 +48,16 @@ public class BitcoinTransactionCollectionListParams extends ApiRequestParams {
   String startingAfter;
 
   private BitcoinTransactionCollectionListParams(
-      String customer, String endingBefore, List<String> expand, Long limit, String startingAfter) {
+      String customer,
+      String endingBefore,
+      List<String> expand,
+      Map<String, Object> extraParams,
+      Long limit,
+      String startingAfter) {
     this.customer = customer;
     this.endingBefore = endingBefore;
     this.expand = expand;
+    this.extraParams = extraParams;
     this.limit = limit;
     this.startingAfter = startingAfter;
   }
@@ -61,6 +73,8 @@ public class BitcoinTransactionCollectionListParams extends ApiRequestParams {
 
     private List<String> expand;
 
+    private Map<String, Object> extraParams;
+
     private Long limit;
 
     private String startingAfter;
@@ -68,7 +82,12 @@ public class BitcoinTransactionCollectionListParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public BitcoinTransactionCollectionListParams build() {
       return new BitcoinTransactionCollectionListParams(
-          this.customer, this.endingBefore, this.expand, this.limit, this.startingAfter);
+          this.customer,
+          this.endingBefore,
+          this.expand,
+          this.extraParams,
+          this.limit,
+          this.startingAfter);
     }
 
     /** Only return transactions for the customer specified by this customer ID. */
@@ -111,6 +130,32 @@ public class BitcoinTransactionCollectionListParams extends ApiRequestParams {
         this.expand = new ArrayList<>();
       }
       this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * BitcoinTransactionCollectionListParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link BitcoinTransactionCollectionListParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
       return this;
     }
 

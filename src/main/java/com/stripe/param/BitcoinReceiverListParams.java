@@ -5,7 +5,9 @@ package com.stripe.param;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class BitcoinReceiverListParams extends ApiRequestParams {
   /** Filter for active receivers. */
@@ -24,6 +26,10 @@ public class BitcoinReceiverListParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
+
+  /** Extra parameters for custom features not yet available in the client library. */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
 
   /** Filter for filled receivers. */
   @SerializedName("filled")
@@ -53,6 +59,7 @@ public class BitcoinReceiverListParams extends ApiRequestParams {
       Boolean active,
       String endingBefore,
       List<String> expand,
+      Map<String, Object> extraParams,
       Boolean filled,
       Long limit,
       String startingAfter,
@@ -60,6 +67,7 @@ public class BitcoinReceiverListParams extends ApiRequestParams {
     this.active = active;
     this.endingBefore = endingBefore;
     this.expand = expand;
+    this.extraParams = extraParams;
     this.filled = filled;
     this.limit = limit;
     this.startingAfter = startingAfter;
@@ -77,6 +85,8 @@ public class BitcoinReceiverListParams extends ApiRequestParams {
 
     private List<String> expand;
 
+    private Map<String, Object> extraParams;
+
     private Boolean filled;
 
     private Long limit;
@@ -91,6 +101,7 @@ public class BitcoinReceiverListParams extends ApiRequestParams {
           this.active,
           this.endingBefore,
           this.expand,
+          this.extraParams,
           this.filled,
           this.limit,
           this.startingAfter,
@@ -137,6 +148,32 @@ public class BitcoinReceiverListParams extends ApiRequestParams {
         this.expand = new ArrayList<>();
       }
       this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * BitcoinReceiverListParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link BitcoinReceiverListParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
       return this;
     }
 
