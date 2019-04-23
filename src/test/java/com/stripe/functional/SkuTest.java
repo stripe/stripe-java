@@ -2,9 +2,13 @@ package com.stripe.functional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.google.common.collect.ImmutableMap;
+
 import com.stripe.BaseStripeTest;
+import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Sku;
 import com.stripe.model.SkuCollection;
@@ -12,6 +16,7 @@ import com.stripe.net.ApiResource;
 
 import com.stripe.net.RequestOptions;
 import com.stripe.param.SkuCreateParams;
+
 import java.util.HashMap;
 import java.util.Map;
 
@@ -37,6 +42,61 @@ public class SkuTest extends BaseStripeTest {
         ApiResource.RequestMethod.POST,
         "/v1/skus",
         params
+    );
+  }
+
+  @Test
+  public void testThrowingCreateWithExtraParamsEmptyString() {
+    // extra params does not handle converting "empty" string to null like the empty param enum
+    SkuCreateParams.Inventory inventory = SkuCreateParams.Inventory.builder()
+        .putExtraParam("type", "bucket")
+        .putExtraParam("value", "")
+        .build();
+    SkuCreateParams typedParams = SkuCreateParams.builder()
+        .setInventory(inventory).build();
+
+    InvalidRequestException exception = assertThrows(InvalidRequestException.class, () -> {
+      Sku.create(typedParams, RequestOptions.getDefault());
+    });
+
+    assertTrue(exception.getMessage().contains(
+        "You cannot set 'inventory[value]' to an empty string"));
+  }
+
+  @Test
+  public void testCreateWithExtraParams() throws StripeException {
+    // same content as `createUntypedParams` but is set via extra params instead
+    SkuCreateParams.Inventory inventory = SkuCreateParams.Inventory.builder()
+        .putExtraParam("type", "bucket")
+        .putExtraParam("value", "limited")
+        .build();
+
+    Map<String, String> additionalAttributes = new HashMap<>();
+    additionalAttributes.put("attr2", "val2");
+
+    SkuCreateParams typedParams = SkuCreateParams.builder()
+        .putExtraParam("active", true)
+        .putExtraParam("attributes", ImmutableMap.of(
+            "attr1", "val1",
+            "attr2", "val2"
+        ))
+        .putExtraParam("price", 499L)
+        .putExtraParam("currency", "usd")
+        .putExtraParam("inventory", inventory)
+        // allow both put/putAll
+        .putAllExtraParam(ImmutableMap.of(
+            "product", "prod_123",
+            "image", "http://example.com/foo.png"
+        ))
+        .build();
+
+    final Sku sku = Sku.create(typedParams, RequestOptions.getDefault());
+
+    assertNotNull(sku);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        "/v1/skus",
+        createUntypedParams()
     );
   }
 
