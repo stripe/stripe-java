@@ -20,11 +20,20 @@ import java.io.File;
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.Deque;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.LinkedHashMap;
+import java.util.LinkedHashSet;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.TreeSet;
 
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.BeforeEach;
@@ -116,9 +125,53 @@ public class LiveStripeResponseGetterTest {
   }
 
   @Test
-  public void testCreateQueryWithEmptyList() throws StripeException, UnsupportedEncodingException {
+  public void testCreateQueryWithCollection() throws UnsupportedEncodingException,
+      InvalidRequestException {
+    // test collections with its own implementation to return iterator giving "A", "B", "C" in order
+    final Set<String> nestedTreeSet = new TreeSet<>(String::compareTo);
+    nestedTreeSet.add("B");
+    nestedTreeSet.add("C");
+    nestedTreeSet.add("A");
+
+    final Deque<String> nestedDequeue = new ArrayDeque<>();
+    nestedDequeue.addFirst("C");
+    nestedDequeue.addFirst("B");
+    nestedDequeue.addFirst("A");
+
+    final Set<String> nestedLinkedHashSet = new LinkedHashSet<>();
+    nestedLinkedHashSet.add("A");
+    nestedLinkedHashSet.add("B");
+    nestedLinkedHashSet.add("C");
+
+    final List<String> linkedList = new LinkedList<>();
+    linkedList.add("A");
+    linkedList.add("B");
+    linkedList.add("C");
+
+    List<Collection<String>> collections = Arrays.asList(nestedTreeSet, nestedDequeue,
+        nestedLinkedHashSet);
+
+    for (Collection<String> collection : collections) {
+      final Map<String, Object> params = new LinkedHashMap<>();
+      params.put("nested", collection);
+      // collection is treated the same as array encoding
+      assertEquals("nested[0]=A&nested[1]=B&nested[2]=C",
+          LiveStripeResponseGetter.createQuery(params),
+          "Failed encoding for collection " + collection.getClass());
+    }
+  }
+
+  @Test
+  public void testCreateQueryWithEmptyCollection() throws StripeException,
+      UnsupportedEncodingException {
     final Map<String, Object> params = new HashMap<>();
     params.put("a", new ArrayList<String>());
+    assertEquals("a=", LiveStripeResponseGetter.createQuery(params));
+
+    params.put("a", new HashSet<>());
+    assertEquals("a=", LiveStripeResponseGetter.createQuery(params));
+
+    params.put("a", new TreeSet<>());
     assertEquals("a=", LiveStripeResponseGetter.createQuery(params));
   }
 
