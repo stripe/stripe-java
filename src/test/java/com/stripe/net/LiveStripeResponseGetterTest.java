@@ -123,6 +123,27 @@ public class LiveStripeResponseGetterTest {
         LiveStripeResponseGetter.createQuery(params));
   }
 
+  @Test
+  public void testCreateQueryWithFormEncodedKeys() throws StripeException,
+      UnsupportedEncodingException {
+    /* Use LinkedHashMap because it preserves iteration order */
+    final Map<String, Object> params = new LinkedHashMap<>();
+
+    // Params with form-encoded keys can happen through "extraParams". Instead of passing a
+    // string key and `Object` value, users can also specify key as form-encoded path to the
+    // extra param value.
+    // This "extraParams" behavior is supported by other typed libraries, but not
+    // intended in `stripe-java`. However, by the virtue of supporting arbitrary string key in
+    // extra param map, this behavior is implicitly supported.
+    params.put("nested[0][A]", "A-1");
+    params.put("nested[0][B]", "B-1");
+    params.put("nested[1][A]", "A-2");
+    params.put("nested[1][B]", "B-2");
+
+    assertEquals("nested[0][A]=A-1&nested[0][B]=B-1&nested[1][A]=A-2&nested[1][B]=B-2",
+        LiveStripeResponseGetter.createQuery(params));
+  }
+
   @SuppressWarnings("ModifiedButNotUsed")
   @Test
   public void testCreateQueryWithCollection() throws UnsupportedEncodingException,
