@@ -24,7 +24,6 @@ import java.util.ArrayDeque;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.Deque;
 import java.util.HashMap;
 import java.util.HashSet;
@@ -35,7 +34,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-import java.util.function.Function;
 
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.BeforeEach;
@@ -130,7 +128,7 @@ public class LiveStripeResponseGetterTest {
   public void testCreateQueryWithCollection() throws UnsupportedEncodingException,
       InvalidRequestException {
     // test collections with its own implementation to return iterator giving "A", "B", "C" in order
-    final Set<String> nestedTreeSet = new TreeSet<>(Comparator.comparing(Function.identity()));
+    final Set<String> nestedTreeSet = new TreeSet<>(String::compareTo);
     nestedTreeSet.add("B");
     nestedTreeSet.add("C");
     nestedTreeSet.add("A");
