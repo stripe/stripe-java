@@ -3,7 +3,9 @@ package com.stripe.param;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lombok.Getter;
 
 public class FileListParams extends ApiRequestParams {
@@ -22,6 +24,15 @@ public class FileListParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
+
+  /**
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
+   */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
 
   /**
    * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
@@ -50,12 +61,14 @@ public class FileListParams extends ApiRequestParams {
       Object created,
       String endingBefore,
       List<String> expand,
+      Map<String, Object> extraParams,
       Long limit,
       Purpose purpose,
       String startingAfter) {
     this.created = created;
     this.endingBefore = endingBefore;
     this.expand = expand;
+    this.extraParams = extraParams;
     this.limit = limit;
     this.purpose = purpose;
     this.startingAfter = startingAfter;
@@ -72,6 +85,8 @@ public class FileListParams extends ApiRequestParams {
 
     private List<String> expand;
 
+    private Map<String, Object> extraParams;
+
     private Long limit;
 
     private Purpose purpose;
@@ -84,6 +99,7 @@ public class FileListParams extends ApiRequestParams {
           this.created,
           this.endingBefore,
           this.expand,
+          this.extraParams,
           this.limit,
           this.purpose,
           this.startingAfter);
@@ -137,6 +153,32 @@ public class FileListParams extends ApiRequestParams {
     }
 
     /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * FileListParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link FileListParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
      * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
      * default is 10.
      */
@@ -167,6 +209,15 @@ public class FileListParams extends ApiRequestParams {
   }
 
   public static class Created {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
     /** Minimum value to filter by (exclusive). */
     @SerializedName("gt")
     Long gt;
@@ -183,7 +234,8 @@ public class FileListParams extends ApiRequestParams {
     @SerializedName("lte")
     Long lte;
 
-    private Created(Long gt, Long gte, Long lt, Long lte) {
+    private Created(Map<String, Object> extraParams, Long gt, Long gte, Long lt, Long lte) {
+      this.extraParams = extraParams;
       this.gt = gt;
       this.gte = gte;
       this.lt = lt;
@@ -195,6 +247,8 @@ public class FileListParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private Map<String, Object> extraParams;
+
       private Long gt;
 
       private Long gte;
@@ -205,7 +259,33 @@ public class FileListParams extends ApiRequestParams {
 
       /** Finalize and obtain parameter instance from this builder. */
       public Created build() {
-        return new Created(this.gt, this.gte, this.lt, this.lte);
+        return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * FileListParams.Created#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link FileListParams.Created#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
       }
 
       /** Minimum value to filter by (exclusive). */

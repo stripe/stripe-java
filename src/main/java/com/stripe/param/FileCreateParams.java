@@ -15,6 +15,15 @@ public class FileCreateParams extends ApiRequestParams {
   List<String> expand;
 
   /**
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
+   */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
+  /**
    * A file to upload. The file should follow the specifications of RFC 2388 (which defines file
    * transfers for the `multipart/form-data` protocol).
    *
@@ -33,14 +42,19 @@ public class FileCreateParams extends ApiRequestParams {
   /**
    * The purpose of the uploaded file. Possible values are `business_icon`, `business_logo`,
    * `customer_signature`, `dispute_evidence`, `identity_document`, `pci_document`, or
-   * `tax_document_user_upload`
+   * `tax_document_user_upload`.
    */
   @SerializedName("purpose")
   Purpose purpose;
 
   private FileCreateParams(
-      List<String> expand, Object file, FileLinkData fileLinkData, Purpose purpose) {
+      List<String> expand,
+      Map<String, Object> extraParams,
+      Object file,
+      FileLinkData fileLinkData,
+      Purpose purpose) {
     this.expand = expand;
+    this.extraParams = extraParams;
     this.file = file;
     this.fileLinkData = fileLinkData;
     this.purpose = purpose;
@@ -53,6 +67,8 @@ public class FileCreateParams extends ApiRequestParams {
   public static class Builder {
     private List<String> expand;
 
+    private Map<String, Object> extraParams;
+
     private Object file;
 
     private FileLinkData fileLinkData;
@@ -61,7 +77,8 @@ public class FileCreateParams extends ApiRequestParams {
 
     /** Finalize and obtain parameter instance from this builder. */
     public FileCreateParams build() {
-      return new FileCreateParams(this.expand, this.file, this.fileLinkData, this.purpose);
+      return new FileCreateParams(
+          this.expand, this.extraParams, this.file, this.fileLinkData, this.purpose);
     }
 
     /**
@@ -87,6 +104,32 @@ public class FileCreateParams extends ApiRequestParams {
         this.expand = new ArrayList<>();
       }
       this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * FileCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link FileCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
       return this;
     }
 
@@ -120,7 +163,7 @@ public class FileCreateParams extends ApiRequestParams {
     /**
      * The purpose of the uploaded file. Possible values are `business_icon`, `business_logo`,
      * `customer_signature`, `dispute_evidence`, `identity_document`, `pci_document`, or
-     * `tax_document_user_upload`
+     * `tax_document_user_upload`.
      */
     public Builder setPurpose(Purpose purpose) {
       this.purpose = purpose;
@@ -129,7 +172,11 @@ public class FileCreateParams extends ApiRequestParams {
   }
 
   public static class FileLinkData {
-    /** Set this to `true` to create a file link for the newly created file. */
+    /**
+     * Set this to `true` to create a file link for the newly created file. Creating a link is only
+     * possible when the file's `purpose` is one of the following: `business_icon`, `business_logo`,
+     * `customer_signature`, `dispute_evidence`, `pci_document`, or `tax_document_user_upload`.
+     */
     @SerializedName("create")
     Boolean create;
 
@@ -138,15 +185,29 @@ public class FileCreateParams extends ApiRequestParams {
     Long expiresAt;
 
     /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
      * Set of key-value pairs that you can attach to an object. This can be useful for storing
      * additional information about the object in a structured format.
      */
     @SerializedName("metadata")
     Map<String, String> metadata;
 
-    private FileLinkData(Boolean create, Long expiresAt, Map<String, String> metadata) {
+    private FileLinkData(
+        Boolean create,
+        Long expiresAt,
+        Map<String, Object> extraParams,
+        Map<String, String> metadata) {
       this.create = create;
       this.expiresAt = expiresAt;
+      this.extraParams = extraParams;
       this.metadata = metadata;
     }
 
@@ -159,14 +220,21 @@ public class FileCreateParams extends ApiRequestParams {
 
       private Long expiresAt;
 
+      private Map<String, Object> extraParams;
+
       private Map<String, String> metadata;
 
       /** Finalize and obtain parameter instance from this builder. */
       public FileLinkData build() {
-        return new FileLinkData(this.create, this.expiresAt, this.metadata);
+        return new FileLinkData(this.create, this.expiresAt, this.extraParams, this.metadata);
       }
 
-      /** Set this to `true` to create a file link for the newly created file. */
+      /**
+       * Set this to `true` to create a file link for the newly created file. Creating a link is
+       * only possible when the file's `purpose` is one of the following: `business_icon`,
+       * `business_logo`, `customer_signature`, `dispute_evidence`, `pci_document`, or
+       * `tax_document_user_upload`.
+       */
       public Builder setCreate(Boolean create) {
         this.create = create;
         return this;
@@ -179,9 +247,35 @@ public class FileCreateParams extends ApiRequestParams {
       }
 
       /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * FileCreateParams.FileLinkData#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link FileCreateParams.FileLinkData#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
        * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * FileLinkData#metadata} for the field documentation.
+       * FileCreateParams.FileLinkData#metadata} for the field documentation.
        */
       public Builder putMetadata(String key, String value) {
         if (this.metadata == null) {
@@ -194,7 +288,7 @@ public class FileCreateParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `metadata` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link FileLinkData#metadata} for the field documentation.
+       * See {@link FileCreateParams.FileLinkData#metadata} for the field documentation.
        */
       public Builder putAllMetadata(Map<String, String> map) {
         if (this.metadata == null) {
