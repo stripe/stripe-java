@@ -41,13 +41,16 @@ class ApiRequestParamsConverter {
                   + "Please contact support@stripe.com for assistance.",
               ApiRequestParams.EXTRA_PARAMS_KEY, value, Stripe.VERSION));
         }
-        // `key` value indicating extra params is dropped, and instead the extra params are
-        // flattened and set at this outer map instead.
+        // JSON value now corresponds to the extra params map, and is also deserialized as a map.
+        // Instead of putting this result map under the original key, flatten the map
+        // by adding all its key/value pairs to the outer map instead.
         Map<String, Object> extraParamsMap =
             untypedMapDeserializer.deserialize(value.getAsJsonObject());
         outerMap.putAll(extraParamsMap);
       } else {
-        // normal deserialization where output map has the same structure as given JSON content.
+        // Normal deserialization where output map has the same structure as the given JSON content.
+        // The deserialized content is an untyped `Object` and added to the outer map at the
+        // original key.
         outerMap.put(key, untypedMapDeserializer.deserializeJsonElement(value));
       }
     }
@@ -115,7 +118,7 @@ class ApiRequestParamsConverter {
    * request instance is lossy. The null value will not be converted back to the `EMPTY` enum.
    *
    * <p>2) Parameter with serialized name {@link ApiRequestParams#EXTRA_PARAMS_KEY} will be
-   * flattened. This is to support passing beta or new params that the current library has not
+   * flattened. This is to support passing new params that the current library has not
    * yet supported.
    */
   Map<String, Object> convert(ApiRequestParams apiRequestParams) {

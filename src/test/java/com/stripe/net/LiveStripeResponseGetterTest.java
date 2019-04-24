@@ -121,9 +121,12 @@ public class LiveStripeResponseGetterTest {
     /* Use LinkedHashMap because it preserves iteration order */
     final Map<String, Object> params = new LinkedHashMap<>();
 
-    // params with form-encoded keys at creating query can happen through "extraParams"
-    // we now support only map of string key/value, so specifying nested params relies on form
-    // encoding.
+    // Params with form-encoded keys can happen through "extraParams". Instead of passing a
+    // string key and `Object` value, users can also specify key as form-encoded path to the
+    // extra param value.
+    // This "extraParams" behavior is supported by other typed libraries, but not
+    // intended in `stripe-java`. However, by the virtue of supporting arbitrary string key in
+    // extra param map, this behavior is implicitly supported.
     params.put("nested[0][A]", "A-1");
     params.put("nested[0][B]", "B-1");
     params.put("nested[1][A]", "A-2");

@@ -30,10 +30,10 @@ public class UntypedMapDeserializer {
    * }
    *
    * <p>Given, a json entry of "zing": 2, the outer map corresponds to value for "foo_inner". A
-   * default strategy is to simply deserialize value and adds to given map at "zing" key.
+   * default strategy is to simply deserialize value and puts to the outer map at "zing" key.
    *
-   * <p>Custom strategy allows, for example, renaming the key "zing", wraps the deserialized
-   * value in another map/array, or flatten the value if the deserialized value is a map.
+   * <p>Custom strategy allows, for example, renaming the key "zing", wrapping the deserialized
+   * value in another map/array, or flattening the value if the deserialized value is a map.
    */
   interface Strategy {
     /**
