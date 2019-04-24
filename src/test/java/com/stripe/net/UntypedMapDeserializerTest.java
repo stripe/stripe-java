@@ -1,6 +1,6 @@
 package com.stripe.net;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.JsonArray;
@@ -10,14 +10,28 @@ import com.google.gson.JsonObject;
 import com.google.gson.JsonPrimitive;
 
 import java.math.BigDecimal;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 public class UntypedMapDeserializerTest {
 
   private UntypedMapDeserializer untypedMapDeserializer = new UntypedMapDeserializer();
+
+  private UntypedMapDeserializer flatteningDeserializer = new UntypedMapDeserializer(
+      (outerMap, jsonEntry, untypedMapDeserializer) -> {
+        JsonElement value = jsonEntry.getValue();
+        if (value.isJsonObject()) {
+          outerMap.putAll(untypedMapDeserializer.deserialize(value.getAsJsonObject()));
+        } else {
+          outerMap.put(jsonEntry.getKey(),
+              untypedMapDeserializer.deserializeJsonElement(value));
+        }
+        return;
+      }
+  );
 
   @Test
   @SuppressWarnings("unchecked")
@@ -88,6 +102,50 @@ public class UntypedMapDeserializerTest {
     List<Object> objects = (List<Object>) untyped.get("foo_array");
     assertEquals(ImmutableMap.of("foo", 2L), objects.get(0));
     assertEquals(ImmutableMap.of("bar", 3L), objects.get(1));
+  }
+
+  @Test
+  public void tesStrategyFlattenAllSchema() {
+    // {"parent": {"child": {"grand_child": 1}}}
+    JsonObject jsonObject = new JsonObject();
+    jsonObject.add("parent",
+        jsonObject("child", jsonObject("grand_child", jsonNumber(1L))));
+    Map<String, Object> untyped = flatteningDeserializer.deserialize(jsonObject);
+    // innermost remains
+    assertEquals(ImmutableMap.of("grand_child", 1L), untyped);
+  }
+
+  @Test
+  public void tesStrategyFlattenInArraySchema() {
+    JsonArray jsonArray = jsonArray(
+        jsonObject("child", jsonObject("grand_child", jsonNumber(1L))),
+        jsonObject("child", jsonObject("grand_child", jsonNumber(2L))),
+        jsonObject("child", jsonObject("grand_child", jsonNumber(3L)))
+    );
+
+    Object untyped = flatteningDeserializer.deserializeJsonElement(jsonArray);
+    assertEquals(Arrays.asList(
+        ImmutableMap.of("grand_child", 1L),
+        ImmutableMap.of("grand_child", 2L),
+        ImmutableMap.of("grand_child", 3L)), untyped);
+  }
+
+  @Test
+  public void tesStrategyRenameKey() {
+    UntypedMapDeserializer renamer = new UntypedMapDeserializer(
+        (outerMap, jsonEntry, untypedMapDeserializer) -> {
+          JsonElement value = jsonEntry.getValue();
+          outerMap.put(jsonEntry.getKey() + "_foo",
+              untypedMapDeserializer.deserializeJsonElement(value));
+        }
+    );
+
+    JsonObject jsonObject = new JsonObject();
+    jsonObject.add("child", jsonObject("grand_child", jsonNumber(1L)));
+    Map<String, Object> untyped = renamer.deserialize(jsonObject);
+    assertEquals(untyped, ImmutableMap.of(
+        "child_foo", ImmutableMap.of("grand_child_foo", 1L)
+    ));
   }
 
   private JsonArray jsonArray(JsonElement... elements) {
