@@ -2541,6 +2541,9 @@ public class AccountCreateParams extends ApiRequestParams {
   }
 
   public enum RequestedCapability implements ApiRequestParams.EnumParam {
+    @SerializedName("card_issuing")
+    CARD_ISSUING("card_issuing"),
+
     @SerializedName("card_payments")
     CARD_PAYMENTS("card_payments"),
 

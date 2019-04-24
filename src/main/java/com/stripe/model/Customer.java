@@ -138,11 +138,17 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   @SerializedName("tax_ids")
   TaxIdCollection taxIds;
 
-  /** The customer's tax information. Appears on invoices emailed to this customer. */
+  /**
+   * The customer's tax information. Appears on invoices emailed to this customer. This attribute
+   * has been deprecated in favor of [`tax_ids`](#customer_object-tax_ids).
+   */
   @SerializedName("tax_info")
   TaxInfo taxInfo;
 
-  /** Describes the status of looking up the tax ID provided in `tax_info`. */
+  /**
+   * Describes the status of looking up the tax ID provided in `tax_info`. This attribute has been
+   * deprecated in favor of [`tax_ids`](#customer_object-tax_ids).
+   */
   @SerializedName("tax_info_verification")
   TaxInfoVerification taxInfoVerification;
 
