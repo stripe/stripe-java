@@ -37,10 +37,10 @@ import java.net.PasswordAuthentication;
 import java.net.URL;
 import java.net.URLStreamHandler;
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
-import java.util.ListIterator;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentLinkedQueue;
@@ -286,10 +286,13 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     return flattenParamsMap(params, null);
   }
 
-  private static List<Parameter> flattenParamsList(List<Object> params, String keyPrefix)
+  private static List<Parameter> flattenParamsCollection(Collection<Object> params,
+                                                         String keyPrefix)
       throws InvalidRequestException {
     List<Parameter> flatParams = new ArrayList<>();
-    ListIterator<?> it = ((List<?>) params).listIterator();
+    // Rely on the collection specific implementation for iterator to provide the order and the
+    // indices of elements in the array encoding
+    Iterator<?> it = params.iterator();
     // Because application/x-www-form-urlencoded cannot represent an empty
     // list, convention is to take the list parameter and just set it to an
     // empty string. (e.g. A regular list might look like `a[0]=1&b[1]=2`.
@@ -297,8 +300,9 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     if (params.isEmpty()) {
       flatParams.add(new Parameter(keyPrefix, ""));
     } else {
+      int index = 0;
       while (it.hasNext()) {
-        String newPrefix = String.format("%s[%d]", keyPrefix, it.nextIndex());
+        String newPrefix = String.format("%s[%d]", keyPrefix, index++);
         flatParams.addAll(flattenParamsValue(it.next(), newPrefix));
       }
     }
@@ -355,8 +359,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
     if (value instanceof Map<?, ?>) {
       flatParams = flattenParamsMap((Map<String, Object>) value, keyPrefix);
-    } else if (value instanceof List<?>) {
-      flatParams = flattenParamsList((List<Object>) value, keyPrefix);
+    } else if (value instanceof Collection<?>) {
+      flatParams = flattenParamsCollection((Collection<Object>) value, keyPrefix);
     } else if (value instanceof Object[]) {
       flatParams = flattenParamsArray((Object[]) value, keyPrefix);
     } else if ("".equals(value)) {
