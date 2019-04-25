@@ -29,7 +29,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.LinkedHashMap;
 import java.util.LinkedHashSet;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -124,6 +123,7 @@ public class LiveStripeResponseGetterTest {
         LiveStripeResponseGetter.createQuery(params));
   }
 
+  @SuppressWarnings("ModifiedButNotUsed")
   @Test
   public void testCreateQueryWithCollection() throws UnsupportedEncodingException,
       InvalidRequestException {
@@ -143,13 +143,13 @@ public class LiveStripeResponseGetterTest {
     nestedLinkedHashSet.add("B");
     nestedLinkedHashSet.add("C");
 
-    final List<String> linkedList = new LinkedList<>();
-    linkedList.add("A");
-    linkedList.add("B");
-    linkedList.add("C");
+    final List<String> nestedList = new ArrayList<>();
+    nestedList.add("A");
+    nestedList.add("B");
+    nestedList.add("C");
 
     List<Collection<String>> collections = Arrays.asList(nestedTreeSet, nestedDequeue,
-        nestedLinkedHashSet);
+        nestedLinkedHashSet, nestedList);
 
     for (Collection<String> collection : collections) {
       final Map<String, Object> params = new LinkedHashMap<>();
