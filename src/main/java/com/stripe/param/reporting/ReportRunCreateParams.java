@@ -333,7 +333,7 @@ public class ReportRunCreateParams extends ApiRequestParams {
       @SerializedName("transfer_reversal")
       TRANSFER_REVERSAL("transfer_reversal");
 
-      @Getter(onMethod = @__({@Override}))
+      @Getter(onMethod_ = {@Override})
       private final String value;
 
       ReportingCategory(String value) {

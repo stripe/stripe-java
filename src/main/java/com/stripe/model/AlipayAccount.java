@@ -34,7 +34,7 @@ public class AlipayAccount extends StripeObject implements PaymentSource {
   String fingerprint;
 
   /** Unique identifier for the object. */
-  @Getter(onMethod = @__({@Override}))
+  @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 

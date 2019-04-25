@@ -776,7 +776,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       @SerializedName("now")
       NOW("now");
 
-      @Getter(onMethod = @__({@Override}))
+      @Getter(onMethod_ = {@Override})
       private final String value;
 
       EndDate(String value) {
@@ -788,7 +788,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       @SerializedName("now")
       NOW("now");
 
-      @Getter(onMethod = @__({@Override}))
+      @Getter(onMethod_ = {@Override})
       private final String value;
 
       StartDate(String value) {
@@ -800,7 +800,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       @SerializedName("now")
       NOW("now");
 
-      @Getter(onMethod = @__({@Override}))
+      @Getter(onMethod_ = {@Override})
       private final String value;
 
       TrialEnd(String value) {
@@ -869,7 +869,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       @SerializedName("year")
       YEAR("year");
 
-      @Getter(onMethod = @__({@Override}))
+      @Getter(onMethod_ = {@Override})
       private final String value;
 
       Interval(String value) {
@@ -885,7 +885,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     @SerializedName("send_invoice")
     SEND_INVOICE("send_invoice");
 
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     private final String value;
 
     Billing(String value) {
@@ -903,7 +903,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     @SerializedName("renew")
     RENEW("renew");
 
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     private final String value;
 
     RenewalBehavior(String value) {

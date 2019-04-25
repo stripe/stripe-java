@@ -26,7 +26,7 @@ public class ReserveTransaction extends StripeObject implements BalanceTransacti
   String description;
 
   /** Unique identifier for the object. */
-  @Getter(onMethod = @__({@Override}))
+  @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 

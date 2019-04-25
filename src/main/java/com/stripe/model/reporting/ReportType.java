@@ -46,7 +46,7 @@ public class ReportType extends ApiResource implements HasId {
    * Type](https://stripe.com/docs/reporting/statements/api#available-report-types), such as
    * `balance.summary.1`.
    */
-  @Getter(onMethod = @__({@Override}))
+  @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 

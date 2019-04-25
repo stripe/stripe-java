@@ -809,7 +809,7 @@ public class CustomerCreateParams extends ApiRequestParams {
       @SerializedName("nz_gst")
       NZ_GST("nz_gst");
 
-      @Getter(onMethod = @__({@Override}))
+      @Getter(onMethod_ = {@Override})
       private final String value;
 
       Type(String value) {
@@ -863,7 +863,7 @@ public class CustomerCreateParams extends ApiRequestParams {
       @SerializedName("vat")
       VAT("vat");
 
-      @Getter(onMethod = @__({@Override}))
+      @Getter(onMethod_ = {@Override})
       private final String value;
 
       Type(String value) {
@@ -882,7 +882,7 @@ public class CustomerCreateParams extends ApiRequestParams {
     @SerializedName("reverse")
     REVERSE("reverse");
 
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     private final String value;
 
     TaxExempt(String value) {

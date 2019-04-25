@@ -871,7 +871,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     @SerializedName("send_invoice")
     SEND_INVOICE("send_invoice");
 
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     private final String value;
 
     Billing(String value) {
@@ -883,7 +883,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     @SerializedName("now")
     NOW("now");
 
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     private final String value;
 
     TrialEnd(String value) {

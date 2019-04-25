@@ -35,7 +35,7 @@ public class Reader extends ApiResource implements HasId {
   String deviceType;
 
   /** Unique identifier for the object. */
-  @Getter(onMethod = @__({@Override}))
+  @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 

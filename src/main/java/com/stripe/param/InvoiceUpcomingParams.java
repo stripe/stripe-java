@@ -916,7 +916,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     @SerializedName("unchanged")
     UNCHANGED("unchanged");
 
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     private final String value;
 
     SubscriptionBillingCycleAnchor(String value) {
@@ -928,7 +928,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     @SerializedName("now")
     NOW("now");
 
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     private final String value;
 
     SubscriptionTrialEnd(String value) {

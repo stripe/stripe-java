@@ -888,7 +888,7 @@ public class SessionCreateParams extends ApiRequestParams {
       @SerializedName("manual")
       MANUAL("manual");
 
-      @Getter(onMethod = @__({@Override}))
+      @Getter(onMethod_ = {@Override})
       private final String value;
 
       CaptureMethod(String value) {
@@ -1073,7 +1073,7 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("required")
     REQUIRED("required");
 
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     private final String value;
 
     BillingAddressCollection(String value) {
@@ -1127,7 +1127,7 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("zh")
     ZH("zh");
 
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     private final String value;
 
     Locale(String value) {
@@ -1139,7 +1139,7 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("card")
     CARD("card");
 
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     private final String value;
 
     PaymentMethodType(String value) {

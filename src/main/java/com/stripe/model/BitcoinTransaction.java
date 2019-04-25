@@ -31,7 +31,7 @@ public class BitcoinTransaction extends StripeObject implements HasId {
   String currency;
 
   /** Unique identifier for the object. */
-  @Getter(onMethod = @__({@Override}))
+  @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 

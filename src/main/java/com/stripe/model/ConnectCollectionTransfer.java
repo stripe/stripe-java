@@ -30,7 +30,7 @@ public class ConnectCollectionTransfer extends StripeObject implements BalanceTr
   ExpandableField<Account> destination;
 
   /** Unique identifier for the object. */
-  @Getter(onMethod = @__({@Override}))
+  @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 

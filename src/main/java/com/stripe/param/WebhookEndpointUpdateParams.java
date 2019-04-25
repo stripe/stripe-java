@@ -519,7 +519,7 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("transfer.updated")
     TRANSFER__UPDATED("transfer.updated");
 
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     private final String value;
 
     EnabledEvent(String value) {

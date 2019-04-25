@@ -235,7 +235,7 @@ public class CreditNoteCreateParams extends ApiRequestParams {
     @SerializedName("product_unsatisfactory")
     PRODUCT_UNSATISFACTORY("product_unsatisfactory");
 
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     private final String value;
 
     Reason(String value) {

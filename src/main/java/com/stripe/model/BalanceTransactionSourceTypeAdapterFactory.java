@@ -69,31 +69,31 @@ public class BalanceTransactionSourceTypeAdapterFactory implements TypeAdapterFa
             JsonObject object = jsonElementAdapter.read(in).getAsJsonObject();
             BalanceTransactionSource objectResult;
             String objectType = object.getAsJsonPrimitive(discriminator).getAsString();
-            if (objectType.equals("application_fee")) {
+            if ("application_fee".equals(objectType)) {
               objectResult = applicationFeeAdapter.fromJsonTree(object);
-            } else if (objectType.equals("charge")) {
+            } else if ("charge".equals(objectType)) {
               objectResult = chargeAdapter.fromJsonTree(object);
-            } else if (objectType.equals("connect_collection_transfer")) {
+            } else if ("connect_collection_transfer".equals(objectType)) {
               objectResult = connectCollectionTransferAdapter.fromJsonTree(object);
-            } else if (objectType.equals("dispute")) {
+            } else if ("dispute".equals(objectType)) {
               objectResult = disputeAdapter.fromJsonTree(object);
-            } else if (objectType.equals("fee_refund")) {
+            } else if ("fee_refund".equals(objectType)) {
               objectResult = feeRefundAdapter.fromJsonTree(object);
-            } else if (objectType.equals("issuing.authorization")) {
+            } else if ("issuing.authorization".equals(objectType)) {
               objectResult = authorizationAdapter.fromJsonTree(object);
-            } else if (objectType.equals("issuing.transaction")) {
+            } else if ("issuing.transaction".equals(objectType)) {
               objectResult = transactionAdapter.fromJsonTree(object);
-            } else if (objectType.equals("payout")) {
+            } else if ("payout".equals(objectType)) {
               objectResult = payoutAdapter.fromJsonTree(object);
-            } else if (objectType.equals("refund")) {
+            } else if ("refund".equals(objectType)) {
               objectResult = refundAdapter.fromJsonTree(object);
-            } else if (objectType.equals("reserve_transaction")) {
+            } else if ("reserve_transaction".equals(objectType)) {
               objectResult = reserveTransactionAdapter.fromJsonTree(object);
-            } else if (objectType.equals("topup")) {
+            } else if ("topup".equals(objectType)) {
               objectResult = topupAdapter.fromJsonTree(object);
-            } else if (objectType.equals("transfer")) {
+            } else if ("transfer".equals(objectType)) {
               objectResult = transferAdapter.fromJsonTree(object);
-            } else if (objectType.equals("transfer_reversal")) {
+            } else if ("transfer_reversal".equals(objectType)) {
               objectResult = transferReversalAdapter.fromJsonTree(object);
             } else {
               String id = object.getAsJsonPrimitive("id").getAsString();

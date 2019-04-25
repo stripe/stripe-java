@@ -42,7 +42,7 @@ public class Review extends ApiResource implements HasId {
   Long created;
 
   /** Unique identifier for the object. */
-  @Getter(onMethod = @__({@Override}))
+  @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 

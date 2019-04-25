@@ -28,7 +28,7 @@ public class SourceMandateNotification extends StripeObject implements HasId {
   Long created;
 
   /** Unique identifier for the object. */
-  @Getter(onMethod = @__({@Override}))
+  @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 

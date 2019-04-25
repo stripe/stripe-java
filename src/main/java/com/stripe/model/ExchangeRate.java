@@ -23,7 +23,7 @@ public class ExchangeRate extends ApiResource implements HasId {
    * Unique identifier for the object. Represented as the three-letter [ISO currency
    * code](https://www.iso.org/iso-4217-currency-codes.html) in lowercase.
    */
-  @Getter(onMethod = @__({@Override}))
+  @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 

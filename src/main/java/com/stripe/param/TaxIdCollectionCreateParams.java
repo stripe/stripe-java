@@ -92,7 +92,7 @@ public class TaxIdCollectionCreateParams extends ApiRequestParams {
     @SerializedName("nz_gst")
     NZ_GST("nz_gst");
 
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     private final String value;
 
     Type(String value) {

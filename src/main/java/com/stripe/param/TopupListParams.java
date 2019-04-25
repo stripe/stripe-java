@@ -350,7 +350,7 @@ public class TopupListParams extends ApiRequestParams {
     @SerializedName("succeeded")
     SUCCEEDED("succeeded");
 
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     private final String value;
 
     Status(String value) {

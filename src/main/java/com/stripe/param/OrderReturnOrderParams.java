@@ -169,7 +169,7 @@ public class OrderReturnOrderParams extends ApiRequestParams {
       @SerializedName("tax")
       TAX("tax");
 
-      @Getter(onMethod = @__({@Override}))
+      @Getter(onMethod_ = {@Override})
       private final String value;
 
       Type(String value) {

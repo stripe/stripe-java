@@ -169,7 +169,7 @@ public class RefundCreateParams extends ApiRequestParams {
     @SerializedName("requested_by_customer")
     REQUESTED_BY_CUSTOMER("requested_by_customer");
 
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     private final String value;
 
     Reason(String value) {

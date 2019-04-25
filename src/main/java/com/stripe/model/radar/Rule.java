@@ -22,7 +22,7 @@ public class Rule extends StripeObject implements HasId {
   Boolean deleted;
 
   /** Unique identifier for the object. */
-  @Getter(onMethod = @__({@Override}))
+  @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 

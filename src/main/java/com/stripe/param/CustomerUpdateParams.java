@@ -818,7 +818,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
       @SerializedName("vat")
       VAT("vat");
 
-      @Getter(onMethod = @__({@Override}))
+      @Getter(onMethod_ = {@Override})
       private final String value;
 
       Type(String value) {
@@ -837,7 +837,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
     @SerializedName("reverse")
     REVERSE("reverse");
 
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     private final String value;
 
     TaxExempt(String value) {
@@ -849,7 +849,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
     @SerializedName("now")
     NOW("now");
 
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     private final String value;
 
     TrialEnd(String value) {

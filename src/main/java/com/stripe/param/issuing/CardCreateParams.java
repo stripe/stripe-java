@@ -1341,7 +1341,7 @@ public class CardCreateParams extends ApiRequestParams {
         @SerializedName("wrecking_and_salvage_yards")
         WRECKING_AND_SALVAGE_YARDS("wrecking_and_salvage_yards");
 
-        @Getter(onMethod = @__({@Override}))
+        @Getter(onMethod_ = {@Override})
         private final String value;
 
         Category(String value) {
@@ -1368,7 +1368,7 @@ public class CardCreateParams extends ApiRequestParams {
         @SerializedName("yearly")
         YEARLY("yearly");
 
-        @Getter(onMethod = @__({@Override}))
+        @Getter(onMethod_ = {@Override})
         private final String value;
 
         Interval(String value) {
@@ -2250,7 +2250,7 @@ public class CardCreateParams extends ApiRequestParams {
       @SerializedName("wrecking_and_salvage_yards")
       WRECKING_AND_SALVAGE_YARDS("wrecking_and_salvage_yards");
 
-      @Getter(onMethod = @__({@Override}))
+      @Getter(onMethod_ = {@Override})
       private final String value;
 
       AllowedCategory(String value) {
@@ -3131,7 +3131,7 @@ public class CardCreateParams extends ApiRequestParams {
       @SerializedName("wrecking_and_salvage_yards")
       WRECKING_AND_SALVAGE_YARDS("wrecking_and_salvage_yards");
 
-      @Getter(onMethod = @__({@Override}))
+      @Getter(onMethod_ = {@Override})
       private final String value;
 
       BlockedCategory(String value) {
@@ -3301,7 +3301,7 @@ public class CardCreateParams extends ApiRequestParams {
       @SerializedName("individual")
       INDIVIDUAL("individual");
 
-      @Getter(onMethod = @__({@Override}))
+      @Getter(onMethod_ = {@Override})
       private final String value;
 
       Type(String value) {
@@ -3317,7 +3317,7 @@ public class CardCreateParams extends ApiRequestParams {
     @SerializedName("inactive")
     INACTIVE("inactive");
 
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     private final String value;
 
     Status(String value) {
@@ -3332,7 +3332,7 @@ public class CardCreateParams extends ApiRequestParams {
     @SerializedName("virtual")
     VIRTUAL("virtual");
 
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     private final String value;
 
     Type(String value) {

@@ -35,7 +35,7 @@ public class ReportRun extends ApiResource implements HasId {
   String error;
 
   /** Unique identifier for the object. */
-  @Getter(onMethod = @__({@Override}))
+  @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 

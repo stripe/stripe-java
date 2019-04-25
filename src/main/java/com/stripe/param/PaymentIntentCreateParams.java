@@ -736,7 +736,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     @SerializedName("manual")
     MANUAL("manual");
 
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     private final String value;
 
     CaptureMethod(String value) {
@@ -751,7 +751,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     @SerializedName("manual")
     MANUAL("manual");
 
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     private final String value;
 
     ConfirmationMethod(String value) {
