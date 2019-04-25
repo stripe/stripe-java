@@ -4,6 +4,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -52,6 +53,13 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
   Long quantity;
 
   /**
+   * The tax rates which apply to the invoice item. When set, the `default_tax_rates` on the invoice
+   * do not apply to this invoice item.
+   */
+  @SerializedName("tax_rates")
+  Object taxRates;
+
+  /**
    * The integer unit amount in **%s** of the charge to be applied to the upcoming invoice. This
    * unit_amount will be multiplied by the quantity to get the full amount. If you want to apply a
    * credit to the customer's account, pass a negative unit_amount.
@@ -67,6 +75,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
       Map<String, String> metadata,
       Period period,
       Long quantity,
+      Object taxRates,
       Long unitAmount) {
     this.amount = amount;
     this.description = description;
@@ -75,6 +84,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     this.metadata = metadata;
     this.period = period;
     this.quantity = quantity;
+    this.taxRates = taxRates;
     this.unitAmount = unitAmount;
   }
 
@@ -97,6 +107,8 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
 
     private Long quantity;
 
+    private Object taxRates;
+
     private Long unitAmount;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -109,6 +121,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
           this.metadata,
           this.period,
           this.quantity,
+          this.taxRates,
           this.unitAmount);
     }
 
@@ -201,6 +214,24 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     /** Non-negative integer. The quantity of units for the invoice item. */
     public Builder setQuantity(Long quantity) {
       this.quantity = quantity;
+      return this;
+    }
+
+    /**
+     * The tax rates which apply to the invoice item. When set, the `default_tax_rates` on the
+     * invoice do not apply to this invoice item.
+     */
+    public Builder setTaxRates(EmptyParam taxRates) {
+      this.taxRates = taxRates;
+      return this;
+    }
+
+    /**
+     * The tax rates which apply to the invoice item. When set, the `default_tax_rates` on the
+     * invoice do not apply to this invoice item.
+     */
+    public Builder setTaxRates(List<String> taxRates) {
+      this.taxRates = taxRates;
       return this;
     }
 

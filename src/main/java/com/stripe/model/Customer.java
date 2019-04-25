@@ -134,20 +134,28 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   @SerializedName("subscriptions")
   SubscriptionCollection subscriptions;
 
+  /** Describes the customer's tax exemption status. One of `none`, `exempt`, or `reverse`. */
+  @SerializedName("tax_exempt")
+  String taxExempt;
+
   /** The customer's tax IDs. */
   @SerializedName("tax_ids")
   TaxIdCollection taxIds;
 
   /**
-   * The customer's tax information. Appears on invoices emailed to this customer. This attribute
-   * has been deprecated in favor of [`tax_ids`](#customer_object-tax_ids).
+   * The customer's tax information. Appears on invoices emailed to this customer. This field has
+   * been deprecated and will be removed in a future API version, for further information view the
+   * [migration
+   * guide](https://stripe.com/docs/billing/migration/taxes#moving-from-taxinfo-to-customer-tax-ids).
    */
   @SerializedName("tax_info")
   TaxInfo taxInfo;
 
   /**
-   * Describes the status of looking up the tax ID provided in `tax_info`. This attribute has been
-   * deprecated in favor of [`tax_ids`](#customer_object-tax_ids).
+   * Describes the status of looking up the tax ID provided in `tax_info`. This field has been
+   * deprecated and will be removed in a future API version, for further information view the
+   * [migration
+   * guide](https://stripe.com/docs/billing/migration/taxes#moving-from-taxinfo-to-customer-tax-ids).
    */
   @SerializedName("tax_info_verification")
   TaxInfoVerification taxInfoVerification;

@@ -85,11 +85,20 @@ public class CustomerCreateParams extends ApiRequestParams {
   @SerializedName("source")
   String source;
 
+  /** The customer's tax exemption. One of `none`, `exempt`, or `reverse`. */
+  @SerializedName("tax_exempt")
+  ApiRequestParams.EnumParam taxExempt;
+
   /** The customer's tax IDs. */
   @SerializedName("tax_id_data")
   List<TaxIdData> taxIdData;
 
-  /** The customer's tax information. Appears on invoices emailed to this customer. */
+  /**
+   * The customer's tax information. Appears on invoices emailed to this customer. This parameter
+   * has been deprecated and will be removed in a future API version, for further information view
+   * the [migration
+   * guide](https://stripe.com/docs/billing/migration/taxes#moving-from-taxinfo-to-customer-tax-ids).
+   */
   @SerializedName("tax_info")
   TaxInfo taxInfo;
 
@@ -109,6 +118,7 @@ public class CustomerCreateParams extends ApiRequestParams {
       List<String> preferredLocales,
       Object shipping,
       String source,
+      ApiRequestParams.EnumParam taxExempt,
       List<TaxIdData> taxIdData,
       TaxInfo taxInfo) {
     this.accountBalance = accountBalance;
@@ -126,6 +136,7 @@ public class CustomerCreateParams extends ApiRequestParams {
     this.preferredLocales = preferredLocales;
     this.shipping = shipping;
     this.source = source;
+    this.taxExempt = taxExempt;
     this.taxIdData = taxIdData;
     this.taxInfo = taxInfo;
   }
@@ -165,6 +176,8 @@ public class CustomerCreateParams extends ApiRequestParams {
 
     private String source;
 
+    private ApiRequestParams.EnumParam taxExempt;
+
     private List<TaxIdData> taxIdData;
 
     private TaxInfo taxInfo;
@@ -187,6 +200,7 @@ public class CustomerCreateParams extends ApiRequestParams {
           this.preferredLocales,
           this.shipping,
           this.source,
+          this.taxExempt,
           this.taxIdData,
           this.taxInfo);
     }
@@ -363,6 +377,18 @@ public class CustomerCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /** The customer's tax exemption. One of `none`, `exempt`, or `reverse`. */
+    public Builder setTaxExempt(TaxExempt taxExempt) {
+      this.taxExempt = taxExempt;
+      return this;
+    }
+
+    /** The customer's tax exemption. One of `none`, `exempt`, or `reverse`. */
+    public Builder setTaxExempt(EmptyParam taxExempt) {
+      this.taxExempt = taxExempt;
+      return this;
+    }
+
     /**
      * Add an element to `taxIdData` list. A list is initialized for the first `add/addAll` call,
      * and subsequent calls adds additional elements to the original list. See {@link
@@ -389,7 +415,12 @@ public class CustomerCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The customer's tax information. Appears on invoices emailed to this customer. */
+    /**
+     * The customer's tax information. Appears on invoices emailed to this customer. This parameter
+     * has been deprecated and will be removed in a future API version, for further information view
+     * the [migration
+     * guide](https://stripe.com/docs/billing/migration/taxes#moving-from-taxinfo-to-customer-tax-ids).
+     */
     public Builder setTaxInfo(TaxInfo taxInfo) {
       this.taxInfo = taxInfo;
       return this;
@@ -838,6 +869,24 @@ public class CustomerCreateParams extends ApiRequestParams {
       Type(String value) {
         this.value = value;
       }
+    }
+  }
+
+  public enum TaxExempt implements ApiRequestParams.EnumParam {
+    @SerializedName("exempt")
+    EXEMPT("exempt"),
+
+    @SerializedName("none")
+    NONE("none"),
+
+    @SerializedName("reverse")
+    REVERSE("reverse");
+
+    @Getter(onMethod = @__({@Override}))
+    private final String value;
+
+    TaxExempt(String value) {
+      this.value = value;
     }
   }
 }

@@ -175,6 +175,13 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   ShippingDetails customerShipping;
 
   /**
+   * The customer's tax exempt status. Until the invoice is finalized, this field will equal
+   * `customer.tax_exempt`. Once the invoice is finalized, this field will no longer be updated.
+   */
+  @SerializedName("customer_tax_exempt")
+  String customerTaxExempt;
+
+  /**
    * The customer's tax IDs. Until the invoice is finalized, this field will contain the same tax
    * IDs as `customer.tax_ids`. Once the invoice is finalized, this field will no longer be updated.
    */
@@ -200,6 +207,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<PaymentSource> defaultSource;
+
+  /** The tax rates applied to this invoice, if any. */
+  @SerializedName("default_tax_rates")
+  List<TaxRate> defaultTaxRates;
 
   /** Always true for a deleted object. */
   @SerializedName("deleted")
@@ -370,10 +381,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("subtotal")
   Long subtotal;
 
-  /**
-   * The amount of tax included in the total, calculated from `tax_percent` and the subtotal. If no
-   * `tax_percent` is defined, this value will be null.
-   */
+  /** The amount of tax on this invoice. This is the sum of all the tax amounts on this invoice. */
   @SerializedName("tax")
   Long tax;
 
@@ -391,6 +399,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   /** Total after discount. */
   @SerializedName("total")
   Long total;
+
+  /** The aggregate amounts calculated per tax rate for all line items. */
+  @SerializedName("total_tax_amounts")
+  List<TaxAmount> totalTaxAmounts;
 
   /**
    * If specified, the funds from the invoice will be transferred to the destination and the ID of
@@ -1261,6 +1273,43 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
     /** The time that the invoice was voided. */
     @SerializedName("voided_at")
     Long voidedAt;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TaxAmount extends StripeObject {
+    /** The amount, in %s, of the tax. */
+    @SerializedName("amount")
+    Long amount;
+
+    /** Whether this tax amount is inclusive or exclusive. */
+    @SerializedName("inclusive")
+    Boolean inclusive;
+
+    /** The tax rate that was applied to get this tax amount. */
+    @SerializedName("tax_rate")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<TaxRate> taxRate;
+
+    /** Get id of expandable `taxRate` object. */
+    public String getTaxRate() {
+      return (this.taxRate != null) ? this.taxRate.getId() : null;
+    }
+
+    public void setTaxRate(String id) {
+      this.taxRate = ApiResource.setExpandableFieldId(id, this.taxRate);
+    }
+
+    /** Get expanded `taxRate`. */
+    public TaxRate getTaxRateObject() {
+      return (this.taxRate != null) ? this.taxRate.getExpanded() : null;
+    }
+
+    public void setTaxRateObject(TaxRate expandableObject) {
+      this.taxRate = new ExpandableField<TaxRate>(expandableObject.getId(), expandableObject);
+    }
   }
 
   @Getter

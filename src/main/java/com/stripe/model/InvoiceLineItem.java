@@ -3,6 +3,7 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -81,6 +82,14 @@ public class InvoiceLineItem extends StripeObject implements HasId {
    */
   @SerializedName("subscription_item")
   String subscriptionItem;
+
+  /** The amount of tax calculated per tax rate for this line item. */
+  @SerializedName("tax_amounts")
+  List<Invoice.TaxAmount> taxAmounts;
+
+  /** The tax rates which apply to the line item. */
+  @SerializedName("tax_rates")
+  List<TaxRate> taxRates;
 
   /**
    * A string identifying the type of the source of this line item, either an `invoiceitem` or a
