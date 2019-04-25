@@ -33,8 +33,9 @@ public class ReaderListParams extends ApiRequestParams {
   String location;
 
   /**
-   * To group objects on your platform account by connected account, set this parameter to the
-   * connected account operating your application.
+   * To [group
+   * objects](https://stripe.com/docs/terminal/payments/connect#grouping-objects-by-connected-account)
+   * on your platform account by connected account, set this parameter to the connected account ID.
    */
   @SerializedName("operator_account")
   String operatorAccount;
@@ -153,8 +154,10 @@ public class ReaderListParams extends ApiRequestParams {
     }
 
     /**
-     * To group objects on your platform account by connected account, set this parameter to the
-     * connected account operating your application.
+     * To [group
+     * objects](https://stripe.com/docs/terminal/payments/connect#grouping-objects-by-connected-account)
+     * on your platform account by connected account, set this parameter to the connected account
+     * ID.
      */
     public Builder setOperatorAccount(String operatorAccount) {
       this.operatorAccount = operatorAccount;

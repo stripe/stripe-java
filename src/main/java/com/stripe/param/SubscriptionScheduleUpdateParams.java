@@ -373,6 +373,13 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     String coupon;
 
     /**
+     * The tax rates that will apply to any phase that does not have `tax_rates` set. Invoices
+     * created will have their `default_tax_rates` populated from the phase.
+     */
+    @SerializedName("default_tax_rates")
+    Object defaultTaxRates;
+
+    /**
      * The date at which this phase of the subscription schedule ends. If set, `iterations` must not
      * be set.
      */
@@ -403,7 +410,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
      * the percentage of the subscription invoice subtotal that will be calculated and added as tax
      * to the final amount in each billing period during thise phase of the schedule. For example, a
      * plan which charges $10/month with a `tax_percent` of `20.0` will charge $12 per invoice. To
-     * unset a previously-set value, pass an empty string.
+     * unset a previously-set value, pass an empty string. This field has been deprecated and will
+     * be removed in a future API version, for further information view the [migration
+     * docs](https://stripe.com/docs/billing/migration/taxes) to `tax_rates`
      */
     @SerializedName("tax_percent")
     BigDecimal taxPercent;
@@ -425,6 +434,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     private Phase(
         BigDecimal applicationFeePercent,
         String coupon,
+        Object defaultTaxRates,
         Object endDate,
         Long iterations,
         List<Plan> plans,
@@ -434,6 +444,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         Object trialEnd) {
       this.applicationFeePercent = applicationFeePercent;
       this.coupon = coupon;
+      this.defaultTaxRates = defaultTaxRates;
       this.endDate = endDate;
       this.iterations = iterations;
       this.plans = plans;
@@ -451,6 +462,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       private BigDecimal applicationFeePercent;
 
       private String coupon;
+
+      private Object defaultTaxRates;
 
       private Object endDate;
 
@@ -471,6 +484,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         return new Phase(
             this.applicationFeePercent,
             this.coupon,
+            this.defaultTaxRates,
             this.endDate,
             this.iterations,
             this.plans,
@@ -495,6 +509,24 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       /** The identifier of the coupon to apply to this phase of the subscription schedule. */
       public Builder setCoupon(String coupon) {
         this.coupon = coupon;
+        return this;
+      }
+
+      /**
+       * The tax rates that will apply to any phase that does not have `tax_rates` set. Invoices
+       * created will have their `default_tax_rates` populated from the phase.
+       */
+      public Builder setDefaultTaxRates(EmptyParam defaultTaxRates) {
+        this.defaultTaxRates = defaultTaxRates;
+        return this;
+      }
+
+      /**
+       * The tax rates that will apply to any phase that does not have `tax_rates` set. Invoices
+       * created will have their `default_tax_rates` populated from the phase.
+       */
+      public Builder setDefaultTaxRates(List<String> defaultTaxRates) {
+        this.defaultTaxRates = defaultTaxRates;
         return this;
       }
 
@@ -569,7 +601,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
        * represents the percentage of the subscription invoice subtotal that will be calculated and
        * added as tax to the final amount in each billing period during thise phase of the schedule.
        * For example, a plan which charges $10/month with a `tax_percent` of `20.0` will charge $12
-       * per invoice. To unset a previously-set value, pass an empty string.
+       * per invoice. To unset a previously-set value, pass an empty string. This field has been
+       * deprecated and will be removed in a future API version, for further information view the
+       * [migration docs](https://stripe.com/docs/billing/migration/taxes) to `tax_rates`
        */
       public Builder setTaxPercent(BigDecimal taxPercent) {
         this.taxPercent = taxPercent;
@@ -623,10 +657,18 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       @SerializedName("quantity")
       Long quantity;
 
-      private Plan(Object billingThresholds, String plan, Long quantity) {
+      /**
+       * The tax rates which apply to this `subscription_item`. When set, the `default_tax_rates` on
+       * the subscription do not apply to this `subscription_item`.
+       */
+      @SerializedName("tax_rates")
+      Object taxRates;
+
+      private Plan(Object billingThresholds, String plan, Long quantity, Object taxRates) {
         this.billingThresholds = billingThresholds;
         this.plan = plan;
         this.quantity = quantity;
+        this.taxRates = taxRates;
       }
 
       public static Builder builder() {
@@ -640,9 +682,11 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
         private Long quantity;
 
+        private Object taxRates;
+
         /** Finalize and obtain parameter instance from this builder. */
         public Plan build() {
-          return new Plan(this.billingThresholds, this.plan, this.quantity);
+          return new Plan(this.billingThresholds, this.plan, this.quantity, this.taxRates);
         }
 
         /**
@@ -675,6 +719,24 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
          */
         public Builder setQuantity(Long quantity) {
           this.quantity = quantity;
+          return this;
+        }
+
+        /**
+         * The tax rates which apply to this `subscription_item`. When set, the `default_tax_rates`
+         * on the subscription do not apply to this `subscription_item`.
+         */
+        public Builder setTaxRates(EmptyParam taxRates) {
+          this.taxRates = taxRates;
+          return this;
+        }
+
+        /**
+         * The tax rates which apply to this `subscription_item`. When set, the `default_tax_rates`
+         * on the subscription do not apply to this `subscription_item`.
+         */
+        public Builder setTaxRates(List<String> taxRates) {
+          this.taxRates = taxRates;
           return this;
         }
       }

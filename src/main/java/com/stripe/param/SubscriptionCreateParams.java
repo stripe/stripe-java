@@ -103,6 +103,13 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   @SerializedName("default_source")
   String defaultSource;
 
+  /**
+   * The tax rates that will apply to any subscription item that does not have `tax_rates` set.
+   * Invoices created will have their `default_tax_rates` populated from the subscription.
+   */
+  @SerializedName("default_tax_rates")
+  Object defaultTaxRates;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -133,7 +140,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
    * the percentage of the subscription invoice subtotal that will be calculated and added as tax to
    * the final amount in each billing period. For example, a plan which charges $10/month with a
    * `tax_percent` of `20.0` will charge $12 per invoice. To unset a previously-set value, pass an
-   * empty string.
+   * empty string. This field has been deprecated and will be removed in a future API version, for
+   * further information view the [migration docs](https://stripe.com/docs/billing/migration/taxes)
+   * to `tax_rates`
    */
   @SerializedName("tax_percent")
   Object taxPercent;
@@ -184,6 +193,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       Long daysUntilDue,
       String defaultPaymentMethod,
       String defaultSource,
+      Object defaultTaxRates,
       List<String> expand,
       List<Item> items,
       Map<String, String> metadata,
@@ -205,6 +215,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     this.daysUntilDue = daysUntilDue;
     this.defaultPaymentMethod = defaultPaymentMethod;
     this.defaultSource = defaultSource;
+    this.defaultTaxRates = defaultTaxRates;
     this.expand = expand;
     this.items = items;
     this.metadata = metadata;
@@ -245,6 +256,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     private String defaultSource;
 
+    private Object defaultTaxRates;
+
     private List<String> expand;
 
     private List<Item> items;
@@ -278,6 +291,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           this.daysUntilDue,
           this.defaultPaymentMethod,
           this.defaultSource,
+          this.defaultTaxRates,
           this.expand,
           this.items,
           this.metadata,
@@ -413,6 +427,24 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     }
 
     /**
+     * The tax rates that will apply to any subscription item that does not have `tax_rates` set.
+     * Invoices created will have their `default_tax_rates` populated from the subscription.
+     */
+    public Builder setDefaultTaxRates(EmptyParam defaultTaxRates) {
+      this.defaultTaxRates = defaultTaxRates;
+      return this;
+    }
+
+    /**
+     * The tax rates that will apply to any subscription item that does not have `tax_rates` set.
+     * Invoices created will have their `default_tax_rates` populated from the subscription.
+     */
+    public Builder setDefaultTaxRates(List<String> defaultTaxRates) {
+      this.defaultTaxRates = defaultTaxRates;
+      return this;
+    }
+
+    /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
      * SubscriptionCreateParams#expand} for the field documentation.
@@ -507,7 +539,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      * the percentage of the subscription invoice subtotal that will be calculated and added as tax
      * to the final amount in each billing period. For example, a plan which charges $10/month with
      * a `tax_percent` of `20.0` will charge $12 per invoice. To unset a previously-set value, pass
-     * an empty string.
+     * an empty string. This field has been deprecated and will be removed in a future API version,
+     * for further information view the [migration
+     * docs](https://stripe.com/docs/billing/migration/taxes) to `tax_rates`
      */
     public Builder setTaxPercent(EmptyParam taxPercent) {
       this.taxPercent = taxPercent;
@@ -519,7 +553,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      * the percentage of the subscription invoice subtotal that will be calculated and added as tax
      * to the final amount in each billing period. For example, a plan which charges $10/month with
      * a `tax_percent` of `20.0` will charge $12 per invoice. To unset a previously-set value, pass
-     * an empty string.
+     * an empty string. This field has been deprecated and will be removed in a future API version,
+     * for further information view the [migration
+     * docs](https://stripe.com/docs/billing/migration/taxes) to `tax_rates`
      */
     public Builder setTaxPercent(BigDecimal taxPercent) {
       this.taxPercent = taxPercent;
@@ -653,12 +689,24 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     @SerializedName("quantity")
     Long quantity;
 
+    /**
+     * The tax rates which apply to this `subscription_item`. When set, the `default_tax_rates` on
+     * the subscription do not apply to this `subscription_item`.
+     */
+    @SerializedName("tax_rates")
+    Object taxRates;
+
     private Item(
-        Object billingThresholds, Map<String, String> metadata, String plan, Long quantity) {
+        Object billingThresholds,
+        Map<String, String> metadata,
+        String plan,
+        Long quantity,
+        Object taxRates) {
       this.billingThresholds = billingThresholds;
       this.metadata = metadata;
       this.plan = plan;
       this.quantity = quantity;
+      this.taxRates = taxRates;
     }
 
     public static Builder builder() {
@@ -674,9 +722,12 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
       private Long quantity;
 
+      private Object taxRates;
+
       /** Finalize and obtain parameter instance from this builder. */
       public Item build() {
-        return new Item(this.billingThresholds, this.metadata, this.plan, this.quantity);
+        return new Item(
+            this.billingThresholds, this.metadata, this.plan, this.quantity, this.taxRates);
       }
 
       /**
@@ -732,6 +783,24 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       /** Quantity for this item. */
       public Builder setQuantity(Long quantity) {
         this.quantity = quantity;
+        return this;
+      }
+
+      /**
+       * The tax rates which apply to this `subscription_item`. When set, the `default_tax_rates` on
+       * the subscription do not apply to this `subscription_item`.
+       */
+      public Builder setTaxRates(EmptyParam taxRates) {
+        this.taxRates = taxRates;
+        return this;
+      }
+
+      /**
+       * The tax rates which apply to this `subscription_item`. When set, the `default_tax_rates` on
+       * the subscription do not apply to this `subscription_item`.
+       */
+      public Builder setTaxRates(List<String> taxRates) {
+        this.taxRates = taxRates;
         return this;
       }
     }

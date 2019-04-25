@@ -782,6 +782,12 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("source.transaction.updated")
     SOURCE__TRANSACTION__UPDATED("source.transaction.updated"),
 
+    @SerializedName("tax_rate.created")
+    TAX_RATE__CREATED("tax_rate.created"),
+
+    @SerializedName("tax_rate.updated")
+    TAX_RATE__UPDATED("tax_rate.updated"),
+
     @SerializedName("topup.canceled")
     TOPUP__CANCELED("topup.canceled"),
 

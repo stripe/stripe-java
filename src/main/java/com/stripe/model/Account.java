@@ -688,8 +688,7 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
 
     /**
      * The fields that need to be collected to keep the account enabled. If not collected by the
-     * `current_deadline`, these fields will appear in `past_due` as well, and the account will be
-     * disabled.
+     * `current_deadline`, these fields appear in `past_due` as well, and the account is disabled.
      */
     @SerializedName("currently_due")
     List<String> currentlyDue;
@@ -705,8 +704,8 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
 
     /**
      * The fields that need to be collected assuming all volume thresholds are reached. As they
-     * become required, these fields will appear in `currently_due` as well, and the
-     * `current_deadline` will be set.
+     * become required, these fields appear in `currently_due` as well, and the `current_deadline`
+     * is set.
      */
     @SerializedName("eventually_due")
     List<String> eventuallyDue;

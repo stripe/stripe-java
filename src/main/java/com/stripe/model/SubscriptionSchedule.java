@@ -549,6 +549,9 @@ public class SubscriptionSchedule extends ApiResource
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<Coupon> coupon;
 
+    @SerializedName("default_tax_rates")
+    List<TaxRate> defaultTaxRates;
+
     /** The end of this phase of the subscription schedule. */
     @SerializedName("end_date")
     Long endDate;
@@ -611,6 +614,13 @@ public class SubscriptionSchedule extends ApiResource
     /** Quantity of the plan to which the customer should be subscribed. */
     @SerializedName("quantity")
     Long quantity;
+
+    /**
+     * The tax rates which apply to this `phase_item`. When set, the `default_tax_rates` on the
+     * phase do not apply to this `phase_item`.
+     */
+    @SerializedName("tax_rates")
+    List<TaxRate> taxRates;
 
     /** Get id of expandable `plan` object. */
     public String getPlan() {
