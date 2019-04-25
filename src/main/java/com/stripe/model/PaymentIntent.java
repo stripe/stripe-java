@@ -107,7 +107,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   String description;
 
   /** Unique identifier for the object. */
-  @Getter(onMethod = @__({@Override}))
+  @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
@@ -133,7 +133,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * additional information about the object in a structured format. For more information, see the
    * [documentation](https://stripe.com/docs/payments/payment-intents/creating-payment-intents#storing-information-in-metadata).
    */
-  @Getter(onMethod = @__({@Override}))
+  @Getter(onMethod_ = {@Override})
   @SerializedName("metadata")
   Map<String, String> metadata;
 

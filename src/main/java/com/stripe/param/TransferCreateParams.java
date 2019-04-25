@@ -243,7 +243,7 @@ public class TransferCreateParams extends ApiRequestParams {
     @SerializedName("card")
     CARD("card");
 
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     private final String value;
 
     SourceType(String value) {

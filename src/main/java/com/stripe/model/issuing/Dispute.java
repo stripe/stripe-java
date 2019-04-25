@@ -50,7 +50,7 @@ public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute
   Evidence evidence;
 
   /** Unique identifier for the object. */
-  @Getter(onMethod = @__({@Override}))
+  @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
@@ -66,7 +66,7 @@ public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute
    * additional information about the object in a structured format. Individual keys can be unset by
    * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
    */
-  @Getter(onMethod = @__({@Override}))
+  @Getter(onMethod_ = {@Override})
   @SerializedName("metadata")
   Map<String, String> metadata;
 

@@ -12,7 +12,7 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class UsageRecordSummary extends StripeObject implements HasId {
   /** Unique identifier for the object. */
-  @Getter(onMethod = @__({@Override}))
+  @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 

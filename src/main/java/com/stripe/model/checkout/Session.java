@@ -70,7 +70,7 @@ public class Session extends ApiResource implements HasId {
   List<DisplayItem> displayItems;
 
   /** Unique identifier for the object. Used to pass to `redirectToCheckout` in Stripe.js. */
-  @Getter(onMethod = @__({@Override}))
+  @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 

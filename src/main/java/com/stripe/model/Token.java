@@ -40,7 +40,7 @@ public class Token extends ApiResource implements HasId {
   String email;
 
   /** Unique identifier for the object. */
-  @Getter(onMethod = @__({@Override}))
+  @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 

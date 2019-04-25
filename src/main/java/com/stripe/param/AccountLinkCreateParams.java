@@ -147,7 +147,7 @@ public class AccountLinkCreateParams extends ApiRequestParams {
     @SerializedName("eventually_due")
     EVENTUALLY_DUE("eventually_due");
 
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     private final String value;
 
     Collect(String value) {

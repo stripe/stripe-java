@@ -26,7 +26,7 @@ public class CountrySpec extends ApiResource implements HasId {
   String defaultCurrency;
 
   /** Unique identifier for the object. Represented as the ISO country code for this country. */
-  @Getter(onMethod = @__({@Override}))
+  @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 

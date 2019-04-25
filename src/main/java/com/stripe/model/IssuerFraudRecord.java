@@ -52,7 +52,7 @@ public class IssuerFraudRecord extends ApiResource implements HasId {
   Boolean hasLiabilityShift;
 
   /** Unique identifier for the object. */
-  @Getter(onMethod = @__({@Override}))
+  @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 

@@ -35,7 +35,7 @@ public class Location extends ApiResource implements HasId {
   String displayName;
 
   /** Unique identifier for the object. */
-  @Getter(onMethod = @__({@Override}))
+  @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 

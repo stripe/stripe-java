@@ -69,7 +69,7 @@ public class Transfer extends ApiResource
   ExpandableField<Charge> destinationPayment;
 
   /** Unique identifier for the object. */
-  @Getter(onMethod = @__({@Override}))
+  @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
@@ -84,7 +84,7 @@ public class Transfer extends ApiResource
    * A set of key-value pairs that you can attach to a transfer object. It can be useful for storing
    * additional information about the transfer in a structured format.
    */
-  @Getter(onMethod = @__({@Override}))
+  @Getter(onMethod_ = {@Override})
   @SerializedName("metadata")
   Map<String, String> metadata;
 

@@ -326,7 +326,7 @@ public class ProductListParams extends ApiRequestParams {
     @SerializedName("service")
     SERVICE("service");
 
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     private final String value;
 
     Type(String value) {

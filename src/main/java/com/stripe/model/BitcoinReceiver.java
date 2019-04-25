@@ -82,7 +82,7 @@ public class BitcoinReceiver extends ApiResource implements PaymentSource {
   Boolean filled;
 
   /** Unique identifier for the object. */
-  @Getter(onMethod = @__({@Override}))
+  @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 

@@ -52,17 +52,17 @@ public class PaymentSourceTypeAdapterFactory implements TypeAdapterFactory {
             JsonObject object = jsonElementAdapter.read(in).getAsJsonObject();
             PaymentSource objectResult;
             String objectType = object.getAsJsonPrimitive(discriminator).getAsString();
-            if (objectType.equals("account")) {
+            if ("account".equals(objectType)) {
               objectResult = accountAdapter.fromJsonTree(object);
-            } else if (objectType.equals("alipay_account")) {
+            } else if ("alipay_account".equals(objectType)) {
               objectResult = alipayAccountAdapter.fromJsonTree(object);
-            } else if (objectType.equals("bank_account")) {
+            } else if ("bank_account".equals(objectType)) {
               objectResult = bankAccountAdapter.fromJsonTree(object);
-            } else if (objectType.equals("bitcoin_receiver")) {
+            } else if ("bitcoin_receiver".equals(objectType)) {
               objectResult = bitcoinReceiverAdapter.fromJsonTree(object);
-            } else if (objectType.equals("card")) {
+            } else if ("card".equals(objectType)) {
               objectResult = cardAdapter.fromJsonTree(object);
-            } else if (objectType.equals("source")) {
+            } else if ("source".equals(objectType)) {
               objectResult = sourceAdapter.fromJsonTree(object);
             } else {
               String id = object.getAsJsonPrimitive("id").getAsString();

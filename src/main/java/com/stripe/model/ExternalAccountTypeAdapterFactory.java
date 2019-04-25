@@ -47,9 +47,9 @@ public class ExternalAccountTypeAdapterFactory implements TypeAdapterFactory {
             JsonObject object = jsonElementAdapter.read(in).getAsJsonObject();
             ExternalAccount objectResult;
             String objectType = object.getAsJsonPrimitive(discriminator).getAsString();
-            if (objectType.equals("bank_account")) {
+            if ("bank_account".equals(objectType)) {
               objectResult = bankAccountAdapter.fromJsonTree(object);
-            } else if (objectType.equals("card")) {
+            } else if ("card".equals(objectType)) {
               objectResult = cardAdapter.fromJsonTree(object);
             } else {
               String id = object.getAsJsonPrimitive("id").getAsString();

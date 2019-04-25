@@ -357,7 +357,7 @@ public class InvoiceListParams extends ApiRequestParams {
     @SerializedName("send_invoice")
     SEND_INVOICE("send_invoice");
 
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     private final String value;
 
     Billing(String value) {

@@ -128,7 +128,7 @@ public class BankAccountUpdateOnCustomerParams extends ApiRequestParams {
     @SerializedName("individual")
     INDIVIDUAL("individual");
 
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     private final String value;
 
     AccountHolderType(String value) {

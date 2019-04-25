@@ -613,7 +613,7 @@ public class PlanCreateParams extends ApiRequestParams {
       @SerializedName("inf")
       INF("inf");
 
-      @Getter(onMethod = @__({@Override}))
+      @Getter(onMethod_ = {@Override})
       private final String value;
 
       UpTo(String value) {
@@ -670,7 +670,7 @@ public class PlanCreateParams extends ApiRequestParams {
       @SerializedName("up")
       UP("up");
 
-      @Getter(onMethod = @__({@Override}))
+      @Getter(onMethod_ = {@Override})
       private final String value;
 
       Round(String value) {
@@ -692,7 +692,7 @@ public class PlanCreateParams extends ApiRequestParams {
     @SerializedName("sum")
     SUM("sum");
 
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     private final String value;
 
     AggregateUsage(String value) {
@@ -707,7 +707,7 @@ public class PlanCreateParams extends ApiRequestParams {
     @SerializedName("tiered")
     TIERED("tiered");
 
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     private final String value;
 
     BillingScheme(String value) {
@@ -728,7 +728,7 @@ public class PlanCreateParams extends ApiRequestParams {
     @SerializedName("year")
     YEAR("year");
 
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     private final String value;
 
     Interval(String value) {
@@ -743,7 +743,7 @@ public class PlanCreateParams extends ApiRequestParams {
     @SerializedName("volume")
     VOLUME("volume");
 
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     private final String value;
 
     TiersMode(String value) {
@@ -758,7 +758,7 @@ public class PlanCreateParams extends ApiRequestParams {
     @SerializedName("metered")
     METERED("metered");
 
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     private final String value;
 
     UsageType(String value) {

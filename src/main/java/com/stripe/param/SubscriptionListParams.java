@@ -470,7 +470,7 @@ public class SubscriptionListParams extends ApiRequestParams {
     @SerializedName("send_invoice")
     SEND_INVOICE("send_invoice");
 
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     private final String value;
 
     Billing(String value) {
@@ -506,7 +506,7 @@ public class SubscriptionListParams extends ApiRequestParams {
     @SerializedName("unpaid")
     UNPAID("unpaid");
 
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     private final String value;
 
     Status(String value) {

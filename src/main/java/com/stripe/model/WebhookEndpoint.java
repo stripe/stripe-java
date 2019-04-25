@@ -44,7 +44,7 @@ public class WebhookEndpoint extends ApiResource implements HasId {
   List<String> enabledEvents;
 
   /** Unique identifier for the object. */
-  @Getter(onMethod = @__({@Override}))
+  @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
