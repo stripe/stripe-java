@@ -1,5 +1,8 @@
 # Changelog
 
+## 9.7.0 - 2019-04-24
+* [#761](https://github.com/stripe/stripe-java/pull/761) Add support for `TaxRate` resource and APIs
+
 ## 9.6.0 - 2019-04-24
 * [#756](https://github.com/stripe/stripe-java/pull/756) Fix form-encoding to support `Collection` in untyped params as array. Previously only `List` is form-encoded as array.
 * [#755](https://github.com/stripe/stripe-java/pull/755) Add support for `CARD_ISSUING` enum in `RequestedCapability` for Account create/update params.
