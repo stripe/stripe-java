@@ -23,6 +23,15 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
   List<String> expand;
 
   /**
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
+   */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
+  /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format.
    */
@@ -66,6 +75,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
   private SubscriptionItemCreateParams(
       Object billingThresholds,
       List<String> expand,
+      Map<String, Object> extraParams,
       Map<String, String> metadata,
       String plan,
       Boolean prorate,
@@ -75,6 +85,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
       Object taxRates) {
     this.billingThresholds = billingThresholds;
     this.expand = expand;
+    this.extraParams = extraParams;
     this.metadata = metadata;
     this.plan = plan;
     this.prorate = prorate;
@@ -92,6 +103,8 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
     private Object billingThresholds;
 
     private List<String> expand;
+
+    private Map<String, Object> extraParams;
 
     private Map<String, String> metadata;
 
@@ -112,6 +125,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
       return new SubscriptionItemCreateParams(
           this.billingThresholds,
           this.expand,
+          this.extraParams,
           this.metadata,
           this.plan,
           this.prorate,
@@ -162,6 +176,32 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
         this.expand = new ArrayList<>();
       }
       this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * SubscriptionItemCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link SubscriptionItemCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
       return this;
     }
 
@@ -249,11 +289,21 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
   }
 
   public static class BillingThresholds {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
     /** Usage threshold that triggers the subscription to advance to a new billing period. */
     @SerializedName("usage_gte")
     Long usageGte;
 
-    private BillingThresholds(Long usageGte) {
+    private BillingThresholds(Map<String, Object> extraParams, Long usageGte) {
+      this.extraParams = extraParams;
       this.usageGte = usageGte;
     }
 
@@ -262,11 +312,40 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private Map<String, Object> extraParams;
+
       private Long usageGte;
 
       /** Finalize and obtain parameter instance from this builder. */
       public BillingThresholds build() {
-        return new BillingThresholds(this.usageGte);
+        return new BillingThresholds(this.extraParams, this.usageGte);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SubscriptionItemCreateParams.BillingThresholds#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionItemCreateParams.BillingThresholds#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
       }
 
       /** Usage threshold that triggers the subscription to advance to a new billing period. */

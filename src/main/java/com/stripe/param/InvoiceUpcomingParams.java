@@ -31,6 +31,15 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   @SerializedName("expand")
   List<String> expand;
 
+  /**
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
+   */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
   /** List of invoice items to add or update in the upcoming invoice preview. */
   @SerializedName("invoice_items")
   List<InvoiceItem> invoiceItems;
@@ -115,6 +124,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       String coupon,
       String customer,
       List<String> expand,
+      Map<String, Object> extraParams,
       List<InvoiceItem> invoiceItems,
       String subscription,
       Object subscriptionBillingCycleAnchor,
@@ -130,6 +140,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     this.coupon = coupon;
     this.customer = customer;
     this.expand = expand;
+    this.extraParams = extraParams;
     this.invoiceItems = invoiceItems;
     this.subscription = subscription;
     this.subscriptionBillingCycleAnchor = subscriptionBillingCycleAnchor;
@@ -154,6 +165,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     private String customer;
 
     private List<String> expand;
+
+    private Map<String, Object> extraParams;
 
     private List<InvoiceItem> invoiceItems;
 
@@ -185,6 +198,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
           this.coupon,
           this.customer,
           this.expand,
+          this.extraParams,
           this.invoiceItems,
           this.subscription,
           this.subscriptionBillingCycleAnchor,
@@ -240,6 +254,32 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         this.expand = new ArrayList<>();
       }
       this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * InvoiceUpcomingParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link InvoiceUpcomingParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
       return this;
     }
 
@@ -444,6 +484,15 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     Boolean discountable;
 
     /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
      * The ID of the invoice item to update in preview. If not specified, a new invoice item will be
      * added to the preview of the upcoming invoice.
      */
@@ -481,6 +530,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         String currency,
         String description,
         Boolean discountable,
+        Map<String, Object> extraParams,
         String invoiceitem,
         Map<String, String> metadata,
         Period period,
@@ -491,6 +541,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       this.currency = currency;
       this.description = description;
       this.discountable = discountable;
+      this.extraParams = extraParams;
       this.invoiceitem = invoiceitem;
       this.metadata = metadata;
       this.period = period;
@@ -512,6 +563,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
       private Boolean discountable;
 
+      private Map<String, Object> extraParams;
+
       private String invoiceitem;
 
       private Map<String, String> metadata;
@@ -531,6 +584,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
             this.currency,
             this.description,
             this.discountable,
+            this.extraParams,
             this.invoiceitem,
             this.metadata,
             this.period,
@@ -574,6 +628,32 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
 
       /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * InvoiceUpcomingParams.InvoiceItem#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link InvoiceUpcomingParams.InvoiceItem#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
        * The ID of the invoice item to update in preview. If not specified, a new invoice item will
        * be added to the preview of the upcoming invoice.
        */
@@ -585,7 +665,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * InvoiceItem#metadata} for the field documentation.
+       * InvoiceUpcomingParams.InvoiceItem#metadata} for the field documentation.
        */
       public Builder putMetadata(String key, String value) {
         if (this.metadata == null) {
@@ -598,7 +678,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `metadata` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link InvoiceItem#metadata} for the field documentation.
+       * See {@link InvoiceUpcomingParams.InvoiceItem#metadata} for the field documentation.
        */
       public Builder putAllMetadata(Map<String, String> map) {
         if (this.metadata == null) {
@@ -646,12 +726,22 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       @SerializedName("end")
       Long end;
 
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
       /** The start of the period. */
       @SerializedName("start")
       Long start;
 
-      private Period(Long end, Long start) {
+      private Period(Long end, Map<String, Object> extraParams, Long start) {
         this.end = end;
+        this.extraParams = extraParams;
         this.start = start;
       }
 
@@ -662,16 +752,46 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       public static class Builder {
         private Long end;
 
+        private Map<String, Object> extraParams;
+
         private Long start;
 
         /** Finalize and obtain parameter instance from this builder. */
         public Period build() {
-          return new Period(this.end, this.start);
+          return new Period(this.end, this.extraParams, this.start);
         }
 
         /** The end of the period, which must be greater than or equal to the start. */
         public Builder setEnd(Long end) {
           this.end = end;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceUpcomingParams.InvoiceItem.Period#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceUpcomingParams.InvoiceItem.Period#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
           return this;
         }
 
@@ -703,6 +823,15 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     @SerializedName("deleted")
     Boolean deleted;
 
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
     /** Subscription item to update. */
     @SerializedName("id")
     String id;
@@ -733,6 +862,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         Object billingThresholds,
         Boolean clearUsage,
         Boolean deleted,
+        Map<String, Object> extraParams,
         String id,
         Map<String, String> metadata,
         String plan,
@@ -741,6 +871,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       this.billingThresholds = billingThresholds;
       this.clearUsage = clearUsage;
       this.deleted = deleted;
+      this.extraParams = extraParams;
       this.id = id;
       this.metadata = metadata;
       this.plan = plan;
@@ -759,6 +890,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
       private Boolean deleted;
 
+      private Map<String, Object> extraParams;
+
       private String id;
 
       private Map<String, String> metadata;
@@ -775,6 +908,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
             this.billingThresholds,
             this.clearUsage,
             this.deleted,
+            this.extraParams,
             this.id,
             this.metadata,
             this.plan,
@@ -815,6 +949,32 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         return this;
       }
 
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * InvoiceUpcomingParams.SubscriptionItem#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link InvoiceUpcomingParams.SubscriptionItem#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
       /** Subscription item to update. */
       public Builder setId(String id) {
         this.id = id;
@@ -824,7 +984,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * SubscriptionItem#metadata} for the field documentation.
+       * InvoiceUpcomingParams.SubscriptionItem#metadata} for the field documentation.
        */
       public Builder putMetadata(String key, String value) {
         if (this.metadata == null) {
@@ -837,7 +997,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `metadata` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link SubscriptionItem#metadata} for the field documentation.
+       * See {@link InvoiceUpcomingParams.SubscriptionItem#metadata} for the field documentation.
        */
       public Builder putAllMetadata(Map<String, String> map) {
         if (this.metadata == null) {
@@ -879,11 +1039,21 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     public static class BillingThresholds {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
       /** Usage threshold that triggers the subscription to advance to a new billing period. */
       @SerializedName("usage_gte")
       Long usageGte;
 
-      private BillingThresholds(Long usageGte) {
+      private BillingThresholds(Map<String, Object> extraParams, Long usageGte) {
+        this.extraParams = extraParams;
         this.usageGte = usageGte;
       }
 
@@ -893,11 +1063,41 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private Map<String, Object> extraParams;
+
         private Long usageGte;
 
         /** Finalize and obtain parameter instance from this builder. */
         public BillingThresholds build() {
-          return new BillingThresholds(this.usageGte);
+          return new BillingThresholds(this.extraParams, this.usageGte);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceUpcomingParams.SubscriptionItem.BillingThresholds#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link InvoiceUpcomingParams.SubscriptionItem.BillingThresholds#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
         }
 
         /** Usage threshold that triggers the subscription to advance to a new billing period. */

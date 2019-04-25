@@ -21,6 +21,15 @@ public class RefundCreateParams extends ApiRequestParams {
   @SerializedName("expand")
   List<String> expand;
 
+  /**
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
+   */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
   @SerializedName("metadata")
   Map<String, String> metadata;
 
@@ -37,6 +46,7 @@ public class RefundCreateParams extends ApiRequestParams {
       Long amount,
       String charge,
       List<String> expand,
+      Map<String, Object> extraParams,
       Map<String, String> metadata,
       Reason reason,
       Boolean refundApplicationFee,
@@ -44,6 +54,7 @@ public class RefundCreateParams extends ApiRequestParams {
     this.amount = amount;
     this.charge = charge;
     this.expand = expand;
+    this.extraParams = extraParams;
     this.metadata = metadata;
     this.reason = reason;
     this.refundApplicationFee = refundApplicationFee;
@@ -61,6 +72,8 @@ public class RefundCreateParams extends ApiRequestParams {
 
     private List<String> expand;
 
+    private Map<String, Object> extraParams;
+
     private Map<String, String> metadata;
 
     private Reason reason;
@@ -75,6 +88,7 @@ public class RefundCreateParams extends ApiRequestParams {
           this.amount,
           this.charge,
           this.expand,
+          this.extraParams,
           this.metadata,
           this.reason,
           this.refundApplicationFee,
@@ -114,6 +128,32 @@ public class RefundCreateParams extends ApiRequestParams {
         this.expand = new ArrayList<>();
       }
       this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * RefundCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link RefundCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
       return this;
     }
 
