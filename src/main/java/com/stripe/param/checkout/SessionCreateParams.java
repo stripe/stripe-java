@@ -417,8 +417,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
       /**
        * Add an element to `images` list. A list is initialized for the first `add/addAll` call, and
-       * subsequent calls adds additional elements to the original list. See {@link LineItem#images}
-       * for the field documentation.
+       * subsequent calls adds additional elements to the original list. See {@link
+       * SessionCreateParams.LineItem#images} for the field documentation.
        */
       public Builder addImage(String element) {
         if (this.images == null) {
@@ -431,7 +431,7 @@ public class SessionCreateParams extends ApiRequestParams {
       /**
        * Add all elements to `images` list. A list is initialized for the first `add/addAll` call,
        * and subsequent calls adds additional elements to the original list. See {@link
-       * LineItem#images} for the field documentation.
+       * SessionCreateParams.LineItem#images} for the field documentation.
        */
       public Builder addAllImage(List<String> elements) {
         if (this.images == null) {
@@ -596,7 +596,7 @@ public class SessionCreateParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * PaymentIntentData#metadata} for the field documentation.
+       * SessionCreateParams.PaymentIntentData#metadata} for the field documentation.
        */
       public Builder putMetadata(String key, String value) {
         if (this.metadata == null) {
@@ -609,7 +609,7 @@ public class SessionCreateParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `metadata` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link PaymentIntentData#metadata} for the field documentation.
+       * See {@link SessionCreateParams.PaymentIntentData#metadata} for the field documentation.
        */
       public Builder putAllMetadata(Map<String, String> map) {
         if (this.metadata == null) {
@@ -955,7 +955,7 @@ public class SessionCreateParams extends ApiRequestParams {
       /**
        * Add an element to `items` list. A list is initialized for the first `add/addAll` call, and
        * subsequent calls adds additional elements to the original list. See {@link
-       * SubscriptionData#items} for the field documentation.
+       * SessionCreateParams.SubscriptionData#items} for the field documentation.
        */
       public Builder addItem(Item element) {
         if (this.items == null) {
@@ -968,7 +968,7 @@ public class SessionCreateParams extends ApiRequestParams {
       /**
        * Add all elements to `items` list. A list is initialized for the first `add/addAll` call,
        * and subsequent calls adds additional elements to the original list. See {@link
-       * SubscriptionData#items} for the field documentation.
+       * SessionCreateParams.SubscriptionData#items} for the field documentation.
        */
       public Builder addAllItem(List<Item> elements) {
         if (this.items == null) {
@@ -981,7 +981,7 @@ public class SessionCreateParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * SubscriptionData#metadata} for the field documentation.
+       * SessionCreateParams.SubscriptionData#metadata} for the field documentation.
        */
       public Builder putMetadata(String key, String value) {
         if (this.metadata == null) {
@@ -994,7 +994,7 @@ public class SessionCreateParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `metadata` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link SubscriptionData#metadata} for the field documentation.
+       * See {@link SessionCreateParams.SubscriptionData#metadata} for the field documentation.
        */
       public Builder putAllMetadata(Map<String, String> map) {
         if (this.metadata == null) {

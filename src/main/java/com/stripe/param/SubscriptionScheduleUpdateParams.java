@@ -560,8 +560,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
       /**
        * Add an element to `plans` list. A list is initialized for the first `add/addAll` call, and
-       * subsequent calls adds additional elements to the original list. See {@link Phase#plans} for
-       * the field documentation.
+       * subsequent calls adds additional elements to the original list. See {@link
+       * SubscriptionScheduleUpdateParams.Phase#plans} for the field documentation.
        */
       public Builder addPlan(Plan element) {
         if (this.plans == null) {
@@ -573,8 +573,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
       /**
        * Add all elements to `plans` list. A list is initialized for the first `add/addAll` call,
-       * and subsequent calls adds additional elements to the original list. See {@link Phase#plans}
-       * for the field documentation.
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * SubscriptionScheduleUpdateParams.Phase#plans} for the field documentation.
        */
       public Builder addAllPlan(List<Plan> elements) {
         if (this.plans == null) {

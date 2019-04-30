@@ -74,9 +74,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
   /**
    * The client secret of this PaymentIntent. Used for client-side retrieval using a publishable
-   * key. Please refer to [dynamic
-   * authentication](https://stripe.com/docs/payments/dynamic-authentication) guide on how
-   * `client_secret` should be handled.
+   * key. Please refer to our [automatic confirmation quickstart
+   * guide](https://stripe.com/docs/payments/payment-intents/quickstart#automatic-confirmation-flow)
+   * to learn about how `client_secret` should be handled.
    */
   @SerializedName("client_secret")
   String clientSecret;
