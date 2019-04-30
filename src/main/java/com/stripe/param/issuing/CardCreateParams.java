@@ -288,7 +288,8 @@ public class CardCreateParams extends ApiRequestParams {
       /**
        * Add all elements to `allowedCategories` list. A list is initialized for the first
        * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-       * {@link AuthorizationControls#allowedCategories} for the field documentation.
+       * {@link CardCreateParams.AuthorizationControls#allowedCategories} for the field
+       * documentation.
        */
       public Builder addAllAllowedCategory(List<AllowedCategory> elements) {
         if (this.allowedCategories == null) {
@@ -301,7 +302,8 @@ public class CardCreateParams extends ApiRequestParams {
       /**
        * Add an element to `blockedCategories` list. A list is initialized for the first
        * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-       * {@link AuthorizationControls#blockedCategories} for the field documentation.
+       * {@link CardCreateParams.AuthorizationControls#blockedCategories} for the field
+       * documentation.
        */
       public Builder addBlockedCategory(BlockedCategory element) {
         if (this.blockedCategories == null) {
@@ -314,7 +316,8 @@ public class CardCreateParams extends ApiRequestParams {
       /**
        * Add all elements to `blockedCategories` list. A list is initialized for the first
        * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-       * {@link AuthorizationControls#blockedCategories} for the field documentation.
+       * {@link CardCreateParams.AuthorizationControls#blockedCategories} for the field
+       * documentation.
        */
       public Builder addAllBlockedCategory(List<BlockedCategory> elements) {
         if (this.blockedCategories == null) {
@@ -346,7 +349,7 @@ public class CardCreateParams extends ApiRequestParams {
       /**
        * Add an element to `spendingLimits` list. A list is initialized for the first `add/addAll`
        * call, and subsequent calls adds additional elements to the original list. See {@link
-       * AuthorizationControls#spendingLimits} for the field documentation.
+       * CardCreateParams.AuthorizationControls#spendingLimits} for the field documentation.
        */
       public Builder addSpendingLimit(SpendingLimit element) {
         if (this.spendingLimits == null) {
@@ -359,7 +362,7 @@ public class CardCreateParams extends ApiRequestParams {
       /**
        * Add all elements to `spendingLimits` list. A list is initialized for the first `add/addAll`
        * call, and subsequent calls adds additional elements to the original list. See {@link
-       * AuthorizationControls#spendingLimits} for the field documentation.
+       * CardCreateParams.AuthorizationControls#spendingLimits} for the field documentation.
        */
       public Builder addAllSpendingLimit(List<SpendingLimit> elements) {
         if (this.spendingLimits == null) {
@@ -372,7 +375,8 @@ public class CardCreateParams extends ApiRequestParams {
       /**
        * Add an element to `allowedCategories` list. A list is initialized for the first
        * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-       * {@link AuthorizationControls#allowedCategories} for the field documentation.
+       * {@link CardCreateParams.AuthorizationControls#allowedCategories} for the field
+       * documentation.
        */
       public Builder addAllowedCategory(AllowedCategory element) {
         if (this.allowedCategories == null) {
@@ -435,7 +439,8 @@ public class CardCreateParams extends ApiRequestParams {
         /**
          * Add an element to `categories` list. A list is initialized for the first `add/addAll`
          * call, and subsequent calls adds additional elements to the original list. See {@link
-         * SpendingLimit#categories} for the field documentation.
+         * CardCreateParams.AuthorizationControls.SpendingLimit#categories} for the field
+         * documentation.
          */
         public Builder addCategory(Category element) {
           if (this.categories == null) {
@@ -448,7 +453,8 @@ public class CardCreateParams extends ApiRequestParams {
         /**
          * Add all elements to `categories` list. A list is initialized for the first `add/addAll`
          * call, and subsequent calls adds additional elements to the original list. See {@link
-         * SpendingLimit#categories} for the field documentation.
+         * CardCreateParams.AuthorizationControls.SpendingLimit#categories} for the field
+         * documentation.
          */
         public Builder addAllCategory(List<Category> elements) {
           if (this.categories == null) {

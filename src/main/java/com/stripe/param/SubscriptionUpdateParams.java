@@ -791,7 +791,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * Item#metadata} for the field documentation.
+       * SubscriptionUpdateParams.Item#metadata} for the field documentation.
        */
       public Builder putMetadata(String key, String value) {
         if (this.metadata == null) {
@@ -804,7 +804,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `metadata` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link Item#metadata} for the field documentation.
+       * See {@link SubscriptionUpdateParams.Item#metadata} for the field documentation.
        */
       public Builder putAllMetadata(Map<String, String> map) {
         if (this.metadata == null) {

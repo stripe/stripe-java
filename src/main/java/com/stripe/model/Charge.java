@@ -942,6 +942,9 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
     @SerializedName("ach_debit")
     AchDebit achDebit;
 
+    @SerializedName("acss_debit")
+    AcssDebit acssDebit;
+
     @SerializedName("alipay")
     Alipay alipay;
 
@@ -1027,6 +1030,30 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
       @SerializedName("bank_name")
       String bankName;
 
+      /** Two-letter ISO code representing the country the bank account is located in. */
+      @SerializedName("country")
+      String country;
+
+      /**
+       * Uniquely identifies this particular bank account. You can use this attribute to check
+       * whether two bank accounts are the same.
+       */
+      @SerializedName("fingerprint")
+      String fingerprint;
+
+      /** Last four digits of the bank account number. */
+      @SerializedName("last4")
+      String last4;
+
+      /** Routing transit number of the bank account. */
+      @SerializedName("routing_number")
+      String routingNumber;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AcssDebit extends StripeObject {
       /** Two-letter ISO code representing the country the bank account is located in. */
       @SerializedName("country")
       String country;

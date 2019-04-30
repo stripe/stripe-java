@@ -179,7 +179,7 @@ public class ReportRunCreateParams extends ApiRequestParams {
       /**
        * Add an element to `columns` list. A list is initialized for the first `add/addAll` call,
        * and subsequent calls adds additional elements to the original list. See {@link
-       * Parameters#columns} for the field documentation.
+       * ReportRunCreateParams.Parameters#columns} for the field documentation.
        */
       public Builder addColumn(String element) {
         if (this.columns == null) {
@@ -192,7 +192,7 @@ public class ReportRunCreateParams extends ApiRequestParams {
       /**
        * Add all elements to `columns` list. A list is initialized for the first `add/addAll` call,
        * and subsequent calls adds additional elements to the original list. See {@link
-       * Parameters#columns} for the field documentation.
+       * ReportRunCreateParams.Parameters#columns} for the field documentation.
        */
       public Builder addAllColumn(List<String> elements) {
         if (this.columns == null) {

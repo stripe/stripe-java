@@ -585,7 +585,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * InvoiceItem#metadata} for the field documentation.
+       * InvoiceUpcomingParams.InvoiceItem#metadata} for the field documentation.
        */
       public Builder putMetadata(String key, String value) {
         if (this.metadata == null) {
@@ -598,7 +598,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `metadata` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link InvoiceItem#metadata} for the field documentation.
+       * See {@link InvoiceUpcomingParams.InvoiceItem#metadata} for the field documentation.
        */
       public Builder putAllMetadata(Map<String, String> map) {
         if (this.metadata == null) {
@@ -824,7 +824,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       /**
        * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * SubscriptionItem#metadata} for the field documentation.
+       * InvoiceUpcomingParams.SubscriptionItem#metadata} for the field documentation.
        */
       public Builder putMetadata(String key, String value) {
         if (this.metadata == null) {
@@ -837,7 +837,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       /**
        * Add all map key/value pairs to `metadata` map. A map is initialized for the first
        * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link SubscriptionItem#metadata} for the field documentation.
+       * See {@link InvoiceUpcomingParams.SubscriptionItem#metadata} for the field documentation.
        */
       public Builder putAllMetadata(Map<String, String> map) {
         if (this.metadata == null) {

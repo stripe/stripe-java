@@ -134,7 +134,10 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   @SerializedName("subscriptions")
   SubscriptionCollection subscriptions;
 
-  /** Describes the customer's tax exemption status. One of `none`, `exempt`, or `reverse`. */
+  /**
+   * Describes the customer's tax exemption status. One of `none`, `exempt`, or `reverse`. When set
+   * to `reverse`, invoice and receipt PDFs include the text **"Reverse charge"**.
+   */
   @SerializedName("tax_exempt")
   String taxExempt;
 

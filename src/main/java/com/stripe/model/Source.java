@@ -28,6 +28,9 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
   @SerializedName("ach_debit")
   AchDebit achDebit;
 
+  @SerializedName("acss_debit")
+  AcssDebit acssDebit;
+
   @SerializedName("alipay")
   Alipay alipay;
 
@@ -160,10 +163,9 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
   /**
    * The `type` of the source. The `type` is a payment method, one of `ach_credit_transfer`,
    * `ach_debit`, `alipay`, `bancontact`, `card`, `card_present`, `eps`, `giropay`, `ideal`,
-   * `multibanco`, `p24`, `paper_check`, `sepa_credit_transfer`, `sepa_debit`, `sofort`,
-   * `three_d_secure`, or `wechat`. An additional hash is included on the source with a name
-   * matching this value. It contains additional information specific to the [payment
-   * method](https://stripe.com/docs/sources) used.
+   * `multibanco`, `p24`, `sepa_debit`, `sofort`, `three_d_secure`, or `wechat`. An additional hash
+   * is included on the source with a name matching this value. It contains additional information
+   * specific to the [payment method](https://stripe.com/docs/sources) used.
    */
   @SerializedName("type")
   String type;
@@ -460,6 +462,41 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
 
     @SerializedName("type")
     String type;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AcssDebit extends StripeObject {
+    @SerializedName("bank_address_city")
+    String bankAddressCity;
+
+    @SerializedName("bank_address_line_1")
+    String bankAddressLine1;
+
+    @SerializedName("bank_address_line_2")
+    String bankAddressLine2;
+
+    @SerializedName("bank_address_postal_code")
+    String bankAddressPostalCode;
+
+    @SerializedName("bank_name")
+    String bankName;
+
+    @SerializedName("category")
+    String category;
+
+    @SerializedName("country")
+    String country;
+
+    @SerializedName("fingerprint")
+    String fingerprint;
+
+    @SerializedName("last4")
+    String last4;
+
+    @SerializedName("routing_number")
+    String routingNumber;
   }
 
   @Getter
