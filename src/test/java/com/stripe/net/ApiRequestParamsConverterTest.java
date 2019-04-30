@@ -195,6 +195,21 @@ public class ApiRequestParamsConverterTest {
     assertTrue(exception.getMessage().contains("Unexpected schema for extra params"));
   }
 
+  @Test
+  public void testIllegalConflictingExtraParams() {
+    ModelHasExtraParams fooParams = new ModelHasExtraParams(ParamCode.ENUM_FOO);
+    // `string_value` will find two param values: one from the original param, the other from the
+    // flattened extra param map.
+    assertTrue(fooParams.toMap().containsKey("string_value"));
+    fooParams.extraParams.put("string_value", "my conflicting param value");
+
+    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
+      toMap(fooParams);
+    });
+    assertTrue(exception.getMessage().contains(
+        "Found param key `string_value` with values `foo` and `my conflicting param value`."));
+  }
+
   private Map<String, Object> toMap(ApiRequestParams params) {
     return converter.convert(params);
   }

@@ -12,8 +12,8 @@ import com.google.gson.stream.JsonReader;
 import com.google.gson.stream.JsonWriter;
 
 import com.stripe.Stripe;
-
 import com.stripe.param.common.EmptyParam;
+
 import java.io.IOException;
 import java.util.Map;
 
@@ -32,27 +32,47 @@ class ApiRequestParamsConverter {
                                         Map.Entry<String, JsonElement> jsonEntry,
                                         UntypedMapDeserializer untypedMapDeserializer) {
       String key = jsonEntry.getKey();
-      JsonElement value = jsonEntry.getValue();
+      JsonElement jsonValue = jsonEntry.getValue();
       if (ApiRequestParams.EXTRA_PARAMS_KEY.equals(key)) {
-        if (!value.isJsonObject()) {
+        if (!jsonValue.isJsonObject()) {
           throw new IllegalStateException(String.format(
               "Unexpected schema for extra params. JSON object is expected at key `%s`, but found"
                   + " `%s`. This is likely a problem with this current library version `%s`. "
                   + "Please contact support@stripe.com for assistance.",
-              ApiRequestParams.EXTRA_PARAMS_KEY, value, Stripe.VERSION));
+              ApiRequestParams.EXTRA_PARAMS_KEY, jsonValue, Stripe.VERSION));
         }
         // JSON value now corresponds to the extra params map, and is also deserialized as a map.
         // Instead of putting this result map under the original key, flatten the map
         // by adding all its key/value pairs to the outer map instead.
         Map<String, Object> extraParamsMap =
-            untypedMapDeserializer.deserialize(value.getAsJsonObject());
-        outerMap.putAll(extraParamsMap);
+            untypedMapDeserializer.deserialize(jsonValue.getAsJsonObject());
+        for (Map.Entry<String, Object> entry : extraParamsMap.entrySet()) {
+          validateDuplicateKey(outerMap, entry.getKey(), entry.getValue());
+          outerMap.put(entry.getKey(), entry.getValue());
+        }
       } else {
+        Object value = untypedMapDeserializer.deserializeJsonElement(jsonValue);
+        validateDuplicateKey(outerMap, key, value);
+
         // Normal deserialization where output map has the same structure as the given JSON content.
         // The deserialized content is an untyped `Object` and added to the outer map at the
         // original key.
-        outerMap.put(key, untypedMapDeserializer.deserializeJsonElement(value));
+        outerMap.put(key, value);
       }
+    }
+  }
+
+  private static void validateDuplicateKey(Map<String, Object> outerMap,
+                                           String paramKey, Object paramValue) {
+    if (outerMap.containsKey(paramKey)) {
+      throw new IllegalArgumentException(String.format(
+          "Found multiple param values for the same param key. This can happen because you passed "
+              + "additional parameters via `putExtraParam` that conflict with the existing params. "
+              + "Found param key `%s` with values `%s` and `%s`. "
+              + "If you wish to pass additional params for nested parameters, you "
+              + "should add extra params at the nested params themselves, not from the "
+              + "top-level param.",
+          paramKey, outerMap.get(paramKey), paramValue));
     }
   }
 
