@@ -6,6 +6,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Address;
+import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.StripeObject;
@@ -91,6 +92,16 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @SerializedName("object")
   String object;
 
+  /** The card this card replaces, if any. */
+  @SerializedName("replacement_for")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<Card> replacementFor;
+
+  /** Why the card that this card replaces (if any) needed to be replaced. */
+  @SerializedName("replacement_reason")
+  String replacementReason;
+
   /** Where and how the card will be shipped. */
   @SerializedName("shipping")
   Shipping shipping;
@@ -102,6 +113,24 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   /** One of `virtual` or `physical`. */
   @SerializedName("type")
   String type;
+
+  /** Get id of expandable `replacementFor` object. */
+  public String getReplacementFor() {
+    return (this.replacementFor != null) ? this.replacementFor.getId() : null;
+  }
+
+  public void setReplacementFor(String id) {
+    this.replacementFor = ApiResource.setExpandableFieldId(id, this.replacementFor);
+  }
+
+  /** Get expanded `replacementFor`. */
+  public Card getReplacementForObject() {
+    return (this.replacementFor != null) ? this.replacementFor.getExpanded() : null;
+  }
+
+  public void setReplacementForObject(Card expandableObject) {
+    this.replacementFor = new ExpandableField<Card>(expandableObject.getId(), expandableObject);
+  }
 
   /**
    * Returns a list of Issuing <code>Card</code> objects. The objects are sorted in descending order

@@ -15,6 +15,10 @@ public class PaymentIntentListParams extends ApiRequestParams {
   @SerializedName("created")
   Object created;
 
+  /** Only return PaymentIntents for the customer specified by this customer ID. */
+  @SerializedName("customer")
+  String customer;
+
   /**
    * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the
    * list. For instance, if you make a list request and receive 100 objects, starting with
@@ -45,8 +49,14 @@ public class PaymentIntentListParams extends ApiRequestParams {
   String startingAfter;
 
   private PaymentIntentListParams(
-      Object created, String endingBefore, List<String> expand, Long limit, String startingAfter) {
+      Object created,
+      String customer,
+      String endingBefore,
+      List<String> expand,
+      Long limit,
+      String startingAfter) {
     this.created = created;
+    this.customer = customer;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.limit = limit;
@@ -60,6 +70,8 @@ public class PaymentIntentListParams extends ApiRequestParams {
   public static class Builder {
     private Object created;
 
+    private String customer;
+
     private String endingBefore;
 
     private List<String> expand;
@@ -71,7 +83,12 @@ public class PaymentIntentListParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public PaymentIntentListParams build() {
       return new PaymentIntentListParams(
-          this.created, this.endingBefore, this.expand, this.limit, this.startingAfter);
+          this.created,
+          this.customer,
+          this.endingBefore,
+          this.expand,
+          this.limit,
+          this.startingAfter);
     }
 
     /**
@@ -89,6 +106,12 @@ public class PaymentIntentListParams extends ApiRequestParams {
      */
     public Builder setCreated(Long created) {
       this.created = created;
+      return this;
+    }
+
+    /** Only return PaymentIntents for the customer specified by this customer ID. */
+    public Builder setCustomer(String customer) {
+      this.customer = customer;
       return this;
     }
 
