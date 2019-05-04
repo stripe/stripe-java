@@ -197,7 +197,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
   /**
    * Status of this PaymentIntent, one of `requires_payment_method`, `requires_confirmation`,
-   * `requires_action`, `processing`, `requires_capture`, `canceled`, or `succeeded`.
+   * `requires_action`, `processing`, `requires_capture`, `canceled`, or `succeeded`. You can read
+   * more about PaymentIntent statuses
+   * [here](https://stripe.com/docs/payments/payment-intents/usage#paymentintent-status-overview).
    */
   @SerializedName("status")
   String status;
@@ -345,24 +347,72 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     this.source = new ExpandableField<PaymentSource>(expandableObject.getId(), expandableObject);
   }
 
-  /** Creates a PaymentIntent object. */
+  /**
+   * Creates a PaymentIntent object.
+   *
+   * <p>After the PaymentIntent is created, attach a payment method and <a
+   * href="/docs/api/payment_intents/confirm">confirm</a> to continue the payment. You can read more
+   * about the different payment flows available via the Payment Intents API <a
+   * href="/docs/payments/payment-intents">here</a>.
+   *
+   * <p>When <code>confirm=true</code> is used during creation, it is equivalent to creating and
+   * confirming the PaymentIntent in the same call. You may use any parameters available in the <a
+   * href="/docs/api/payment_intents/confirm">confirm API</a> when <code>confirm=true</code> is
+   * supplied.
+   */
   public static PaymentIntent create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a PaymentIntent object. */
+  /**
+   * Creates a PaymentIntent object.
+   *
+   * <p>After the PaymentIntent is created, attach a payment method and <a
+   * href="/docs/api/payment_intents/confirm">confirm</a> to continue the payment. You can read more
+   * about the different payment flows available via the Payment Intents API <a
+   * href="/docs/payments/payment-intents">here</a>.
+   *
+   * <p>When <code>confirm=true</code> is used during creation, it is equivalent to creating and
+   * confirming the PaymentIntent in the same call. You may use any parameters available in the <a
+   * href="/docs/api/payment_intents/confirm">confirm API</a> when <code>confirm=true</code> is
+   * supplied.
+   */
   public static PaymentIntent create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_intents");
     return request(ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
   }
 
-  /** Creates a PaymentIntent object. */
+  /**
+   * Creates a PaymentIntent object.
+   *
+   * <p>After the PaymentIntent is created, attach a payment method and <a
+   * href="/docs/api/payment_intents/confirm">confirm</a> to continue the payment. You can read more
+   * about the different payment flows available via the Payment Intents API <a
+   * href="/docs/payments/payment-intents">here</a>.
+   *
+   * <p>When <code>confirm=true</code> is used during creation, it is equivalent to creating and
+   * confirming the PaymentIntent in the same call. You may use any parameters available in the <a
+   * href="/docs/api/payment_intents/confirm">confirm API</a> when <code>confirm=true</code> is
+   * supplied.
+   */
   public static PaymentIntent create(PaymentIntentCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a PaymentIntent object. */
+  /**
+   * Creates a PaymentIntent object.
+   *
+   * <p>After the PaymentIntent is created, attach a payment method and <a
+   * href="/docs/api/payment_intents/confirm">confirm</a> to continue the payment. You can read more
+   * about the different payment flows available via the Payment Intents API <a
+   * href="/docs/payments/payment-intents">here</a>.
+   *
+   * <p>When <code>confirm=true</code> is used during creation, it is equivalent to creating and
+   * confirming the PaymentIntent in the same call. You may use any parameters available in the <a
+   * href="/docs/api/payment_intents/confirm">confirm API</a> when <code>confirm=true</code> is
+   * supplied.
+   */
   public static PaymentIntent create(PaymentIntentCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_intents");

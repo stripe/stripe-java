@@ -69,9 +69,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   String object;
 
   /**
-   * The type of the PaymentMethod, one of `card` or `card_present`. An additional hash is included
-   * on the PaymentMethod with a name matching this value. It contains additional information
-   * specific to the PaymentMethod type.
+   * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name
+   * matching this value. It contains additional information specific to the PaymentMethod type.
    */
   @SerializedName("type")
   String type;

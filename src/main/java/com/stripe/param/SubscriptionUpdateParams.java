@@ -157,7 +157,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
    * charged for the first time. This will always overwrite any trials that might apply via a
    * subscribed plan. If set, trial_end will override the default trial period of the plan the
    * customer is being subscribed to. The special value `now` can be provided to end the customer's
-   * trial immediately.
+   * trial immediately. Can be at most two years from `billing_cycle_anchor`.
    */
   @SerializedName("trial_end")
   Object trialEnd;
@@ -571,7 +571,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * charged for the first time. This will always overwrite any trials that might apply via a
      * subscribed plan. If set, trial_end will override the default trial period of the plan the
      * customer is being subscribed to. The special value `now` can be provided to end the
-     * customer's trial immediately.
+     * customer's trial immediately. Can be at most two years from `billing_cycle_anchor`.
      */
     public Builder setTrialEnd(TrialEnd trialEnd) {
       this.trialEnd = trialEnd;
@@ -583,7 +583,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * charged for the first time. This will always overwrite any trials that might apply via a
      * subscribed plan. If set, trial_end will override the default trial period of the plan the
      * customer is being subscribed to. The special value `now` can be provided to end the
-     * customer's trial immediately.
+     * customer's trial immediately. Can be at most two years from `billing_cycle_anchor`.
      */
     public Builder setTrialEnd(Long trialEnd) {
       this.trialEnd = trialEnd;

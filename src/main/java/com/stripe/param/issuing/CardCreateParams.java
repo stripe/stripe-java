@@ -38,6 +38,14 @@ public class CardCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  /** The card this is meant to be a replacement for (if any). */
+  @SerializedName("replacement_for")
+  String replacementFor;
+
+  /** If `replacement_for` is specified, this should indicate why that card is being replaced. */
+  @SerializedName("replacement_reason")
+  ReplacementReason replacementReason;
+
   /**
    * The address where the card will be shipped. This will default to the cardholder's billing
    * address for physical cards.
@@ -62,6 +70,8 @@ public class CardCreateParams extends ApiRequestParams {
       String currency,
       List<String> expand,
       Map<String, String> metadata,
+      String replacementFor,
+      ReplacementReason replacementReason,
       Shipping shipping,
       Status status,
       Type type) {
@@ -70,6 +80,8 @@ public class CardCreateParams extends ApiRequestParams {
     this.currency = currency;
     this.expand = expand;
     this.metadata = metadata;
+    this.replacementFor = replacementFor;
+    this.replacementReason = replacementReason;
     this.shipping = shipping;
     this.status = status;
     this.type = type;
@@ -90,6 +102,10 @@ public class CardCreateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
+    private String replacementFor;
+
+    private ReplacementReason replacementReason;
+
     private Shipping shipping;
 
     private Status status;
@@ -104,6 +120,8 @@ public class CardCreateParams extends ApiRequestParams {
           this.currency,
           this.expand,
           this.metadata,
+          this.replacementFor,
+          this.replacementReason,
           this.shipping,
           this.status,
           this.type);
@@ -183,6 +201,18 @@ public class CardCreateParams extends ApiRequestParams {
         this.metadata = new HashMap<>();
       }
       this.metadata.putAll(map);
+      return this;
+    }
+
+    /** The card this is meant to be a replacement for (if any). */
+    public Builder setReplacementFor(String replacementFor) {
+      this.replacementFor = replacementFor;
+      return this;
+    }
+
+    /** If `replacement_for` is specified, this should indicate why that card is being replaced. */
+    public Builder setReplacementReason(ReplacementReason replacementReason) {
+      this.replacementReason = replacementReason;
       return this;
     }
 
@@ -3313,6 +3343,27 @@ public class CardCreateParams extends ApiRequestParams {
       Type(String value) {
         this.value = value;
       }
+    }
+  }
+
+  public enum ReplacementReason implements ApiRequestParams.EnumParam {
+    @SerializedName("damage")
+    DAMAGE("damage"),
+
+    @SerializedName("expiration")
+    EXPIRATION("expiration"),
+
+    @SerializedName("loss")
+    LOSS("loss"),
+
+    @SerializedName("theft")
+    THEFT("theft");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    ReplacementReason(String value) {
+      this.value = value;
     }
   }
 
