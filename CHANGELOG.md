@@ -1,5 +1,10 @@
 # Changelog
 
+## 9.9.0 - 2019-05-03
+* [#768](https://github.com/stripe/stripe-java/pull/768)
+  * Add support for `customer` filter when listing `PaymentIntent`
+  * Add support for `replacement_for` and `replacement_reason` on Issuing `card` creation
+
 ## 9.8.0 - 2019-04-29
 * [#766](https://github.com/stripe/stripe-java/pull/766) Add support for ACSS debit Sources
 
