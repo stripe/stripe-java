@@ -39,6 +39,15 @@ public class SkuListParams extends ApiRequestParams {
   @SerializedName("expand")
   List<String> expand;
 
+  /**
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
+   */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
   /** Only return SKUs with the given IDs. */
   @SerializedName("ids")
   List<String> ids;
@@ -75,6 +84,7 @@ public class SkuListParams extends ApiRequestParams {
       Map<String, String> attributes,
       String endingBefore,
       List<String> expand,
+      Map<String, Object> extraParams,
       List<String> ids,
       Boolean inStock,
       Long limit,
@@ -84,6 +94,7 @@ public class SkuListParams extends ApiRequestParams {
     this.attributes = attributes;
     this.endingBefore = endingBefore;
     this.expand = expand;
+    this.extraParams = extraParams;
     this.ids = ids;
     this.inStock = inStock;
     this.limit = limit;
@@ -104,6 +115,8 @@ public class SkuListParams extends ApiRequestParams {
 
     private List<String> expand;
 
+    private Map<String, Object> extraParams;
+
     private List<String> ids;
 
     private Boolean inStock;
@@ -121,6 +134,7 @@ public class SkuListParams extends ApiRequestParams {
           this.attributes,
           this.endingBefore,
           this.expand,
+          this.extraParams,
           this.ids,
           this.inStock,
           this.limit,
@@ -197,6 +211,32 @@ public class SkuListParams extends ApiRequestParams {
         this.expand = new ArrayList<>();
       }
       this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * SkuListParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link SkuListParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
       return this;
     }
 

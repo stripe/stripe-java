@@ -30,6 +30,15 @@ public class CardUpdateParams extends ApiRequestParams {
   @SerializedName("expand")
   List<String> expand;
 
+  /**
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
+   */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
   @SerializedName("metadata")
   Map<String, String> metadata;
 
@@ -44,11 +53,13 @@ public class CardUpdateParams extends ApiRequestParams {
       AuthorizationControls authorizationControls,
       String cardholder,
       List<String> expand,
+      Map<String, Object> extraParams,
       Map<String, String> metadata,
       Status status) {
     this.authorizationControls = authorizationControls;
     this.cardholder = cardholder;
     this.expand = expand;
+    this.extraParams = extraParams;
     this.metadata = metadata;
     this.status = status;
   }
@@ -64,6 +75,8 @@ public class CardUpdateParams extends ApiRequestParams {
 
     private List<String> expand;
 
+    private Map<String, Object> extraParams;
+
     private Map<String, String> metadata;
 
     private Status status;
@@ -71,7 +84,12 @@ public class CardUpdateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public CardUpdateParams build() {
       return new CardUpdateParams(
-          this.authorizationControls, this.cardholder, this.expand, this.metadata, this.status);
+          this.authorizationControls,
+          this.cardholder,
+          this.expand,
+          this.extraParams,
+          this.metadata,
+          this.status);
     }
 
     /**
@@ -116,6 +134,32 @@ public class CardUpdateParams extends ApiRequestParams {
         this.expand = new ArrayList<>();
       }
       this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * CardUpdateParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link CardUpdateParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
       return this;
     }
 
@@ -173,6 +217,15 @@ public class CardUpdateParams extends ApiRequestParams {
     List<BlockedCategory> blockedCategories;
 
     /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
      * Maximum amount allowed per authorization on this card, in the currency of the card.
      * Authorization amounts in a different currency will be converted to the card's currency when
      * evaluating this control.
@@ -194,11 +247,13 @@ public class CardUpdateParams extends ApiRequestParams {
     private AuthorizationControls(
         List<AllowedCategory> allowedCategories,
         List<BlockedCategory> blockedCategories,
+        Map<String, Object> extraParams,
         Long maxAmount,
         Long maxApprovals,
         List<SpendingLimit> spendingLimits) {
       this.allowedCategories = allowedCategories;
       this.blockedCategories = blockedCategories;
+      this.extraParams = extraParams;
       this.maxAmount = maxAmount;
       this.maxApprovals = maxApprovals;
       this.spendingLimits = spendingLimits;
@@ -213,6 +268,8 @@ public class CardUpdateParams extends ApiRequestParams {
 
       private List<BlockedCategory> blockedCategories;
 
+      private Map<String, Object> extraParams;
+
       private Long maxAmount;
 
       private Long maxApprovals;
@@ -224,6 +281,7 @@ public class CardUpdateParams extends ApiRequestParams {
         return new AuthorizationControls(
             this.allowedCategories,
             this.blockedCategories,
+            this.extraParams,
             this.maxAmount,
             this.maxApprovals,
             this.spendingLimits);
@@ -268,6 +326,32 @@ public class CardUpdateParams extends ApiRequestParams {
           this.blockedCategories = new ArrayList<>();
         }
         this.blockedCategories.addAll(elements);
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * CardUpdateParams.AuthorizationControls#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CardUpdateParams.AuthorizationControls#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
 
@@ -345,15 +429,29 @@ public class CardUpdateParams extends ApiRequestParams {
       List<Category> categories;
 
       /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
        * The time interval with which to apply this spending limit towards. Allowed values are
        * 'per_authorization', 'daily', 'weekly', 'monthly', 'yearly', and 'all_time'.
        */
       @SerializedName("interval")
       Interval interval;
 
-      private SpendingLimit(Long amount, List<Category> categories, Interval interval) {
+      private SpendingLimit(
+          Long amount,
+          List<Category> categories,
+          Map<String, Object> extraParams,
+          Interval interval) {
         this.amount = amount;
         this.categories = categories;
+        this.extraParams = extraParams;
         this.interval = interval;
       }
 
@@ -367,11 +465,13 @@ public class CardUpdateParams extends ApiRequestParams {
 
         private List<Category> categories;
 
+        private Map<String, Object> extraParams;
+
         private Interval interval;
 
         /** Finalize and obtain parameter instance from this builder. */
         public SpendingLimit build() {
-          return new SpendingLimit(this.amount, this.categories, this.interval);
+          return new SpendingLimit(this.amount, this.categories, this.extraParams, this.interval);
         }
 
         /** Maximum amount allowed to spend per time interval. */
@@ -405,6 +505,34 @@ public class CardUpdateParams extends ApiRequestParams {
             this.categories = new ArrayList<>();
           }
           this.categories.addAll(elements);
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CardUpdateParams.AuthorizationControls.SpendingLimit#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CardUpdateParams.AuthorizationControls.SpendingLimit#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
           return this;
         }
 

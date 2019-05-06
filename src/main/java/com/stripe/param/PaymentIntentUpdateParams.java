@@ -43,6 +43,15 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
   List<String> expand;
 
   /**
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
+   */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
+  /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format.
    */
@@ -62,11 +71,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
   String receiptEmail;
 
   /**
-   * Set to `true` to save the PaymentIntent's payment method (either `source` or `payment_method`)
-   * to the associated customer. If the payment method is already attached, this parameter does
-   * nothing. This parameter defaults to `false` and applies to the payment method passed in the
-   * same request or the current payment method attached to the PaymentIntent and must be specified
-   * again if a new payment method is added.
+   * Set to `true` to [save the PaymentIntent's payment
+   * method](https://stripe.com/docs/payments/payment-methods/saving) (either `source` or
+   * `payment_method`) to the associated customer. Defaults to `false`. If the payment method is
+   * already attached, this parameter does nothing. This parameter errors for payment methods that
+   * are not permitted to be attached to customers. The parameter applies to the payment method
+   * passed in the same request or the current payment method attached to the PaymentIntent and must
+   * be specified again if a new payment method is added.
    */
   @SerializedName("save_payment_method")
   Boolean savePaymentMethod;
@@ -101,6 +112,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       String customer,
       String description,
       List<String> expand,
+      Map<String, Object> extraParams,
       Map<String, String> metadata,
       String paymentMethod,
       List<String> paymentMethodTypes,
@@ -116,6 +128,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     this.customer = customer;
     this.description = description;
     this.expand = expand;
+    this.extraParams = extraParams;
     this.metadata = metadata;
     this.paymentMethod = paymentMethod;
     this.paymentMethodTypes = paymentMethodTypes;
@@ -144,6 +157,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     private List<String> expand;
 
+    private Map<String, Object> extraParams;
+
     private Map<String, String> metadata;
 
     private String paymentMethod;
@@ -171,6 +186,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           this.customer,
           this.description,
           this.expand,
+          this.extraParams,
           this.metadata,
           this.paymentMethod,
           this.paymentMethodTypes,
@@ -256,6 +272,32 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     }
 
     /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * PaymentIntentUpdateParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link PaymentIntentUpdateParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
      * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
      * and subsequent calls add additional key/value pairs to the original map. See {@link
      * PaymentIntentUpdateParams#metadata} for the field documentation.
@@ -320,9 +362,11 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Set to `true` to save the PaymentIntent's payment method (either `source` or
-     * `payment_method`) to the associated customer. If the payment method is already attached, this
-     * parameter does nothing. This parameter defaults to `false` and applies to the payment method
+     * Set to `true` to [save the PaymentIntent's payment
+     * method](https://stripe.com/docs/payments/payment-methods/saving) (either `source` or
+     * `payment_method`) to the associated customer. Defaults to `false`. If the payment method is
+     * already attached, this parameter does nothing. This parameter errors for payment methods that
+     * are not permitted to be attached to customers. The parameter applies to the payment method
      * passed in the same request or the current payment method attached to the PaymentIntent and
      * must be specified again if a new payment method is added.
      */
@@ -378,6 +422,15 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     @SerializedName("carrier")
     String carrier;
 
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
     /** Recipient name. */
     @SerializedName("name")
     String name;
@@ -394,9 +447,15 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     String trackingNumber;
 
     private Shipping(
-        Address address, String carrier, String name, String phone, String trackingNumber) {
+        Address address,
+        String carrier,
+        Map<String, Object> extraParams,
+        String name,
+        String phone,
+        String trackingNumber) {
       this.address = address;
       this.carrier = carrier;
+      this.extraParams = extraParams;
       this.name = name;
       this.phone = phone;
       this.trackingNumber = trackingNumber;
@@ -411,6 +470,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       private String carrier;
 
+      private Map<String, Object> extraParams;
+
       private String name;
 
       private String phone;
@@ -419,7 +480,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       /** Finalize and obtain parameter instance from this builder. */
       public Shipping build() {
-        return new Shipping(this.address, this.carrier, this.name, this.phone, this.trackingNumber);
+        return new Shipping(
+            this.address,
+            this.carrier,
+            this.extraParams,
+            this.name,
+            this.phone,
+            this.trackingNumber);
       }
 
       /** Shipping address. */
@@ -431,6 +498,32 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       /** The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. */
       public Builder setCarrier(String carrier) {
         this.carrier = carrier;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentIntentUpdateParams.Shipping#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentIntentUpdateParams.Shipping#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
 
@@ -463,6 +556,15 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       @SerializedName("country")
       String country;
 
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
       @SerializedName("line1")
       String line1;
 
@@ -478,12 +580,14 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       private Address(
           String city,
           String country,
+          Map<String, Object> extraParams,
           String line1,
           String line2,
           String postalCode,
           String state) {
         this.city = city;
         this.country = country;
+        this.extraParams = extraParams;
         this.line1 = line1;
         this.line2 = line2;
         this.postalCode = postalCode;
@@ -499,6 +603,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
         private String country;
 
+        private Map<String, Object> extraParams;
+
         private String line1;
 
         private String line2;
@@ -510,7 +616,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         /** Finalize and obtain parameter instance from this builder. */
         public Address build() {
           return new Address(
-              this.city, this.country, this.line1, this.line2, this.postalCode, this.state);
+              this.city,
+              this.country,
+              this.extraParams,
+              this.line1,
+              this.line2,
+              this.postalCode,
+              this.state);
         }
 
         public Builder setCity(String city) {
@@ -520,6 +632,34 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
         public Builder setCountry(String country) {
           this.country = country;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.Shipping.Address#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentUpdateParams.Shipping.Address#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
           return this;
         }
 

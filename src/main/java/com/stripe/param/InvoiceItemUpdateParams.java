@@ -38,6 +38,15 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
   List<String> expand;
 
   /**
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
+   */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
+  /**
    * A set of key-value pairs that you can attach to an invoice item object. It can be useful for
    * storing additional information about the invoice item in a structured format.
    */
@@ -72,6 +81,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
       String description,
       Boolean discountable,
       List<String> expand,
+      Map<String, Object> extraParams,
       Map<String, String> metadata,
       Period period,
       Long quantity,
@@ -81,6 +91,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     this.description = description;
     this.discountable = discountable;
     this.expand = expand;
+    this.extraParams = extraParams;
     this.metadata = metadata;
     this.period = period;
     this.quantity = quantity;
@@ -101,6 +112,8 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
 
     private List<String> expand;
 
+    private Map<String, Object> extraParams;
+
     private Map<String, String> metadata;
 
     private Period period;
@@ -118,6 +131,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
           this.description,
           this.discountable,
           this.expand,
+          this.extraParams,
           this.metadata,
           this.period,
           this.quantity,
@@ -176,6 +190,32 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
         this.expand = new ArrayList<>();
       }
       this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * InvoiceItemUpdateParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link InvoiceItemUpdateParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
       return this;
     }
 
@@ -251,12 +291,22 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     @SerializedName("end")
     Long end;
 
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
     /** The start of the period. */
     @SerializedName("start")
     Long start;
 
-    private Period(Long end, Long start) {
+    private Period(Long end, Map<String, Object> extraParams, Long start) {
       this.end = end;
+      this.extraParams = extraParams;
       this.start = start;
     }
 
@@ -267,16 +317,44 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     public static class Builder {
       private Long end;
 
+      private Map<String, Object> extraParams;
+
       private Long start;
 
       /** Finalize and obtain parameter instance from this builder. */
       public Period build() {
-        return new Period(this.end, this.start);
+        return new Period(this.end, this.extraParams, this.start);
       }
 
       /** The end of the period, which must be greater than or equal to the start. */
       public Builder setEnd(Long end) {
         this.end = end;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * InvoiceItemUpdateParams.Period#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link InvoiceItemUpdateParams.Period#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
 
