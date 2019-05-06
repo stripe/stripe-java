@@ -37,6 +37,15 @@ public class SkuCreateParams extends ApiRequestParams {
   List<String> expand;
 
   /**
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
+   */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
+  /**
    * The identifier for the SKU. Must be unique. If not provided, an identifier will be randomly
    * generated.
    */
@@ -78,6 +87,7 @@ public class SkuCreateParams extends ApiRequestParams {
       Map<String, String> attributes,
       String currency,
       List<String> expand,
+      Map<String, Object> extraParams,
       String id,
       String image,
       Inventory inventory,
@@ -89,6 +99,7 @@ public class SkuCreateParams extends ApiRequestParams {
     this.attributes = attributes;
     this.currency = currency;
     this.expand = expand;
+    this.extraParams = extraParams;
     this.id = id;
     this.image = image;
     this.inventory = inventory;
@@ -111,6 +122,8 @@ public class SkuCreateParams extends ApiRequestParams {
 
     private List<String> expand;
 
+    private Map<String, Object> extraParams;
+
     private String id;
 
     private String image;
@@ -132,6 +145,7 @@ public class SkuCreateParams extends ApiRequestParams {
           this.attributes,
           this.currency,
           this.expand,
+          this.extraParams,
           this.id,
           this.image,
           this.inventory,
@@ -209,6 +223,32 @@ public class SkuCreateParams extends ApiRequestParams {
     }
 
     /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * SkuCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link SkuCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
      * The identifier for the SKU. Must be unique. If not provided, an identifier will be randomly
      * generated.
      */
@@ -278,6 +318,15 @@ public class SkuCreateParams extends ApiRequestParams {
   }
 
   public static class Inventory {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
     /** The count of inventory available. Required if `type` is `finite`. */
     @SerializedName("quantity")
     Long quantity;
@@ -293,7 +342,12 @@ public class SkuCreateParams extends ApiRequestParams {
     @SerializedName("value")
     ApiRequestParams.EnumParam value;
 
-    private Inventory(Long quantity, Type type, ApiRequestParams.EnumParam value) {
+    private Inventory(
+        Map<String, Object> extraParams,
+        Long quantity,
+        Type type,
+        ApiRequestParams.EnumParam value) {
+      this.extraParams = extraParams;
       this.quantity = quantity;
       this.type = type;
       this.value = value;
@@ -304,6 +358,8 @@ public class SkuCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private Map<String, Object> extraParams;
+
       private Long quantity;
 
       private Type type;
@@ -312,7 +368,33 @@ public class SkuCreateParams extends ApiRequestParams {
 
       /** Finalize and obtain parameter instance from this builder. */
       public Inventory build() {
-        return new Inventory(this.quantity, this.type, this.value);
+        return new Inventory(this.extraParams, this.quantity, this.type, this.value);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SkuCreateParams.Inventory#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SkuCreateParams.Inventory#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
       }
 
       /** The count of inventory available. Required if `type` is `finite`. */
@@ -386,6 +468,15 @@ public class SkuCreateParams extends ApiRequestParams {
   }
 
   public static class PackageDimensions {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
     /** Height, in inches. Maximum precision is 2 decimal places. */
     @SerializedName("height")
     BigDecimal height;
@@ -403,7 +494,12 @@ public class SkuCreateParams extends ApiRequestParams {
     BigDecimal width;
 
     private PackageDimensions(
-        BigDecimal height, BigDecimal length, BigDecimal weight, BigDecimal width) {
+        Map<String, Object> extraParams,
+        BigDecimal height,
+        BigDecimal length,
+        BigDecimal weight,
+        BigDecimal width) {
+      this.extraParams = extraParams;
       this.height = height;
       this.length = length;
       this.weight = weight;
@@ -415,6 +511,8 @@ public class SkuCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private Map<String, Object> extraParams;
+
       private BigDecimal height;
 
       private BigDecimal length;
@@ -425,7 +523,34 @@ public class SkuCreateParams extends ApiRequestParams {
 
       /** Finalize and obtain parameter instance from this builder. */
       public PackageDimensions build() {
-        return new PackageDimensions(this.height, this.length, this.weight, this.width);
+        return new PackageDimensions(
+            this.extraParams, this.height, this.length, this.weight, this.width);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SkuCreateParams.PackageDimensions#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SkuCreateParams.PackageDimensions#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
       }
 
       /** Height, in inches. Maximum precision is 2 decimal places. */
