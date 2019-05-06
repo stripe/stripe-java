@@ -4,19 +4,23 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.google.common.collect.ImmutableMap;
+
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Invoice;
 import com.stripe.model.InvoiceCollection;
 import com.stripe.net.ApiResource;
-
 import com.stripe.net.RequestOptions;
+import com.stripe.param.InvoiceCreateParams;
 import com.stripe.param.InvoiceUpcomingParams;
 import com.stripe.param.InvoiceUpdateParams;
 import com.stripe.param.common.EmptyParam;
+
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import org.junit.jupiter.api.Test;
@@ -77,7 +81,7 @@ public class InvoiceTest extends BaseStripeTest {
   }
 
   @Test
-  public void testUpdateWithTypeParams() throws StripeException {
+  public void testUpdateWithTypedParams() throws StripeException {
     final Invoice invoice = getInvoiceFixture();
 
     final Map<String, String> metadata = new HashMap<>();
@@ -114,13 +118,17 @@ public class InvoiceTest extends BaseStripeTest {
         String.format("/v1/invoices/%s", invoice.getId()),
         params
     );
+  }
 
+  @Test
+  public void testUpdateWithTypedParamsContainingEmptyParamEnum() throws StripeException {
+    final Invoice invoice = getInvoiceFixture();
     InvoiceUpdateParams typedParamsWithEmpty = InvoiceUpdateParams.builder()
         .setCustomFields(EmptyParam.EMPTY)
         .setTaxPercent(EmptyParam.EMPTY)
         .build();
 
-    updatedInvoice = invoice.update(typedParamsWithEmpty, RequestOptions.getDefault());
+    Invoice updatedInvoice = invoice.update(typedParamsWithEmpty, RequestOptions.getDefault());
 
     Map<String, Object> paramsWithEmpty = new HashMap<>();
     paramsWithEmpty.put("custom_fields", null);
@@ -131,6 +139,49 @@ public class InvoiceTest extends BaseStripeTest {
         ApiResource.RequestMethod.POST,
         String.format("/v1/invoices/%s", invoice.getId()),
         paramsWithEmpty
+    );
+  }
+
+  @Test
+  public void testUpdateWithExtraParams() throws StripeException {
+    final Invoice invoice = getInvoiceFixture();
+    // suppose that `custom_fields` isn't available yet, pretend
+    // that users want this beta feature and use untyped map in our
+    // main typed param via `putExtraParam`
+    List<Map<String, Object>> customFields = new ArrayList<>();
+    customFields.add(
+        ImmutableMap.of(
+            "name", "A",
+            "value", "1"
+        ));
+    customFields.add(
+        ImmutableMap.of(
+            "name", "B",
+            "value", "2"
+        )
+    );
+
+    InvoiceUpdateParams paramsWithExtraParam = InvoiceUpdateParams.builder()
+        .putExtraParam("custom_fields", customFields)
+        .build();
+
+    Invoice updatedInvoice = invoice.update(paramsWithExtraParam, RequestOptions.getDefault());
+
+    assertNotNull(updatedInvoice);
+
+    assertNotNull(invoice);
+    verifyRequest(
+        ApiResource.RequestMethod.POST,
+        String.format("/v1/invoices/%s", invoice.getId()),
+        // param with extra param has the same map as that using standard builder
+        InvoiceCreateParams.builder()
+            .setCustomFields(Arrays.asList(
+                InvoiceCreateParams.CustomField.builder()
+                    .setName("A").setValue("1").build(),
+                InvoiceCreateParams.CustomField.builder()
+                    .setName("B").setValue("2").build()
+            ))
+            .build().toMap()
     );
   }
 
