@@ -2503,6 +2503,9 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("card_payments")
     CARD_PAYMENTS("card_payments"),
 
+    @SerializedName("legacy_payments")
+    LEGACY_PAYMENTS("legacy_payments"),
+
     @SerializedName("platform_payments")
     PLATFORM_PAYMENTS("platform_payments");
 

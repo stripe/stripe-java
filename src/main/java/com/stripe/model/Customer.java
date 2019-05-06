@@ -8,6 +8,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.CustomerCreateParams;
+import com.stripe.param.CustomerCustomerBalanceTransactionsParams;
 import com.stripe.param.CustomerListParams;
 import com.stripe.param.CustomerRetrieveParams;
 import com.stripe.param.CustomerUpdateParams;
@@ -409,6 +410,50 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
             Stripe.getApiBase(),
             String.format("/v1/customers/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.DELETE, url, params, Customer.class, options);
+  }
+
+  /** Retrieves the list of transactions applied to a customer’s balance. */
+  public CustomerBalanceTransactionCollection customerBalanceTransactions() throws StripeException {
+    return customerBalanceTransactions((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /** Retrieves the list of transactions applied to a customer’s balance. */
+  public CustomerBalanceTransactionCollection customerBalanceTransactions(
+      Map<String, Object> params) throws StripeException {
+    return customerBalanceTransactions(params, (RequestOptions) null);
+  }
+
+  /** Retrieves the list of transactions applied to a customer’s balance. */
+  public CustomerBalanceTransactionCollection customerBalanceTransactions(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/customers/%s/customer_balance_transactions",
+                ApiResource.urlEncodeId(this.getId())));
+    return requestCollection(url, params, CustomerBalanceTransactionCollection.class, options);
+  }
+
+  /** Retrieves the list of transactions applied to a customer’s balance. */
+  public CustomerBalanceTransactionCollection customerBalanceTransactions(
+      CustomerCustomerBalanceTransactionsParams params) throws StripeException {
+    return customerBalanceTransactions(params, (RequestOptions) null);
+  }
+
+  /** Retrieves the list of transactions applied to a customer’s balance. */
+  public CustomerBalanceTransactionCollection customerBalanceTransactions(
+      CustomerCustomerBalanceTransactionsParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/customers/%s/customer_balance_transactions",
+                ApiResource.urlEncodeId(this.getId())));
+    return requestCollection(url, params, CustomerBalanceTransactionCollection.class, options);
   }
 
   /** Removes the currently applied discount on a customer. */

@@ -31,11 +31,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   String returnUrl;
 
   /**
-   * Set to `true` to save the PaymentIntent's payment method (either `source` or `payment_method`)
-   * to the associated customer. If the payment method is already attached, this parameter does
-   * nothing. This parameter defaults to `false` and applies to the payment method passed in the
-   * same request or the current payment method attached to the PaymentIntent and must be specified
-   * again if a new payment method is added.
+   * Set to `true` to [save the PaymentIntent's payment
+   * method](https://stripe.com/docs/payments/payment-methods/saving) (either `source` or
+   * `payment_method`) to the associated customer. Defaults to `false`. If the payment method is
+   * already attached, this parameter does nothing. This parameter errors for payment methods that
+   * are not permitted to be attached to customers. The parameter applies to the payment method
+   * passed in the same request or the current payment method attached to the PaymentIntent and must
+   * be specified again if a new payment method is added.
    */
   @SerializedName("save_payment_method")
   Boolean savePaymentMethod;
@@ -146,9 +148,11 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     /**
-     * Set to `true` to save the PaymentIntent's payment method (either `source` or
-     * `payment_method`) to the associated customer. If the payment method is already attached, this
-     * parameter does nothing. This parameter defaults to `false` and applies to the payment method
+     * Set to `true` to [save the PaymentIntent's payment
+     * method](https://stripe.com/docs/payments/payment-methods/saving) (either `source` or
+     * `payment_method`) to the associated customer. Defaults to `false`. If the payment method is
+     * already attached, this parameter does nothing. This parameter errors for payment methods that
+     * are not permitted to be attached to customers. The parameter applies to the payment method
      * passed in the same request or the current payment method attached to the PaymentIntent and
      * must be specified again if a new payment method is added.
      */

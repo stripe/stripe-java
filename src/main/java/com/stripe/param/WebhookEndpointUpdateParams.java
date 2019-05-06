@@ -384,6 +384,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("payment_method.detached")
     PAYMENT_METHOD__DETACHED("payment_method.detached"),
 
+    @SerializedName("payment_method.updated")
+    PAYMENT_METHOD__UPDATED("payment_method.updated"),
+
     @SerializedName("payout.canceled")
     PAYOUT__CANCELED("payout.canceled"),
 

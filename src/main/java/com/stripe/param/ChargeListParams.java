@@ -36,6 +36,12 @@ public class ChargeListParams extends ApiRequestParams {
   Long limit;
 
   /**
+   * Only return charges that were created by the PaymentIntent specified by this PaymentIntent ID.
+   */
+  @SerializedName("payment_intent")
+  String paymentIntent;
+
+  /**
    * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the
    * list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`,
    * your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of
@@ -54,6 +60,7 @@ public class ChargeListParams extends ApiRequestParams {
       String endingBefore,
       List<String> expand,
       Long limit,
+      String paymentIntent,
       String startingAfter,
       String transferGroup) {
     this.created = created;
@@ -61,6 +68,7 @@ public class ChargeListParams extends ApiRequestParams {
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.limit = limit;
+    this.paymentIntent = paymentIntent;
     this.startingAfter = startingAfter;
     this.transferGroup = transferGroup;
   }
@@ -80,6 +88,8 @@ public class ChargeListParams extends ApiRequestParams {
 
     private Long limit;
 
+    private String paymentIntent;
+
     private String startingAfter;
 
     private String transferGroup;
@@ -92,6 +102,7 @@ public class ChargeListParams extends ApiRequestParams {
           this.endingBefore,
           this.expand,
           this.limit,
+          this.paymentIntent,
           this.startingAfter,
           this.transferGroup);
     }
@@ -155,6 +166,15 @@ public class ChargeListParams extends ApiRequestParams {
      */
     public Builder setLimit(Long limit) {
       this.limit = limit;
+      return this;
+    }
+
+    /**
+     * Only return charges that were created by the PaymentIntent specified by this PaymentIntent
+     * ID.
+     */
+    public Builder setPaymentIntent(String paymentIntent) {
+      this.paymentIntent = paymentIntent;
       return this;
     }
 
