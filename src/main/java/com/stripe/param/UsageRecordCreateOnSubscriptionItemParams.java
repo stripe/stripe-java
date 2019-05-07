@@ -5,7 +5,9 @@ package com.stripe.param;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lombok.Getter;
 
 public class UsageRecordCreateOnSubscriptionItemParams extends ApiRequestParams {
@@ -23,6 +25,15 @@ public class UsageRecordCreateOnSubscriptionItemParams extends ApiRequestParams 
   @SerializedName("expand")
   List<String> expand;
 
+  /**
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
+   */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
   /** The usage quantity for the specified timestamp. */
   @SerializedName("quantity")
   Long quantity;
@@ -35,9 +46,14 @@ public class UsageRecordCreateOnSubscriptionItemParams extends ApiRequestParams 
   Long timestamp;
 
   private UsageRecordCreateOnSubscriptionItemParams(
-      Action action, List<String> expand, Long quantity, Long timestamp) {
+      Action action,
+      List<String> expand,
+      Map<String, Object> extraParams,
+      Long quantity,
+      Long timestamp) {
     this.action = action;
     this.expand = expand;
+    this.extraParams = extraParams;
     this.quantity = quantity;
     this.timestamp = timestamp;
   }
@@ -51,6 +67,8 @@ public class UsageRecordCreateOnSubscriptionItemParams extends ApiRequestParams 
 
     private List<String> expand;
 
+    private Map<String, Object> extraParams;
+
     private Long quantity;
 
     private Long timestamp;
@@ -58,7 +76,7 @@ public class UsageRecordCreateOnSubscriptionItemParams extends ApiRequestParams 
     /** Finalize and obtain parameter instance from this builder. */
     public UsageRecordCreateOnSubscriptionItemParams build() {
       return new UsageRecordCreateOnSubscriptionItemParams(
-          this.action, this.expand, this.quantity, this.timestamp);
+          this.action, this.expand, this.extraParams, this.quantity, this.timestamp);
     }
 
     /**
@@ -96,6 +114,33 @@ public class UsageRecordCreateOnSubscriptionItemParams extends ApiRequestParams 
         this.expand = new ArrayList<>();
       }
       this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * UsageRecordCreateOnSubscriptionItemParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link UsageRecordCreateOnSubscriptionItemParams#extraParams} for the field
+     * documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
       return this;
     }
 

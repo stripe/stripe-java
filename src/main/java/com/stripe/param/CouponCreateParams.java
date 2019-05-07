@@ -44,6 +44,15 @@ public class CouponCreateParams extends ApiRequestParams {
   List<String> expand;
 
   /**
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
+   */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
+  /**
    * Unique string of your choice that will be used to identify this coupon when applying it to a
    * customer. This is often a specific code you'll give to your customer to use when signing up
    * (e.g., `FALL25OFF`). If you don't want to specify a particular code, you can leave the ID blank
@@ -94,6 +103,7 @@ public class CouponCreateParams extends ApiRequestParams {
       Duration duration,
       Long durationInMonths,
       List<String> expand,
+      Map<String, Object> extraParams,
       String id,
       Long maxRedemptions,
       Map<String, String> metadata,
@@ -105,6 +115,7 @@ public class CouponCreateParams extends ApiRequestParams {
     this.duration = duration;
     this.durationInMonths = durationInMonths;
     this.expand = expand;
+    this.extraParams = extraParams;
     this.id = id;
     this.maxRedemptions = maxRedemptions;
     this.metadata = metadata;
@@ -128,6 +139,8 @@ public class CouponCreateParams extends ApiRequestParams {
 
     private List<String> expand;
 
+    private Map<String, Object> extraParams;
+
     private String id;
 
     private Long maxRedemptions;
@@ -148,6 +161,7 @@ public class CouponCreateParams extends ApiRequestParams {
           this.duration,
           this.durationInMonths,
           this.expand,
+          this.extraParams,
           this.id,
           this.maxRedemptions,
           this.metadata,
@@ -214,6 +228,32 @@ public class CouponCreateParams extends ApiRequestParams {
         this.expand = new ArrayList<>();
       }
       this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * CouponCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link CouponCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
       return this;
     }
 
