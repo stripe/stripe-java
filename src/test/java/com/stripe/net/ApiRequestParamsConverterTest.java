@@ -36,6 +36,7 @@ public class ApiRequestParamsConverterTest {
     }
   }
 
+  // The fields are implicitly used in testing serialization
   @SuppressWarnings("UnusedVariable")
   private static class ModelHasExtraParams extends ApiRequestParams {
     private String stringValue;
@@ -62,6 +63,7 @@ public class ApiRequestParamsConverterTest {
     }
   }
 
+  // The fields are implicitly used in testing serialization
   @SuppressWarnings("UnusedVariable")
   private static class RootModelHasNestedExtraParams extends ApiRequestParams {
     private String rootStringValue;
