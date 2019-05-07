@@ -1,5 +1,12 @@
 # Changelog
 
+## 9.10.0 - 2019-05-06
+* [#773](https://github.com/stripe/stripe-java/pull/773)
+  * Add support for `extraParams` in all sub-classes of ApiRequestParams their nested classes
+  * Add support for webhook event `payment_method.updated`
+  * Add support for `payment_intent` filter when listing `Charge`
+  * Add support for `legacy_payments` enum `RequestedCapability` in `AccountCreateParams` and `AccountUpdateParams` 
+
 ## 9.9.0 - 2019-05-03
 * [#768](https://github.com/stripe/stripe-java/pull/768)
   * Add support for `customer` filter when listing `PaymentIntent`
