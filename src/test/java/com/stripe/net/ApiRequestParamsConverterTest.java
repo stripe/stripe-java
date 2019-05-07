@@ -36,6 +36,7 @@ public class ApiRequestParamsConverterTest {
     }
   }
 
+  @SuppressWarnings("UnusedVariable")
   private static class ModelHasExtraParams extends ApiRequestParams {
     private String stringValue;
     private EnumParam enumValue;
@@ -61,6 +62,7 @@ public class ApiRequestParamsConverterTest {
     }
   }
 
+  @SuppressWarnings("UnusedVariable")
   private static class RootModelHasNestedExtraParams extends ApiRequestParams {
     private String rootStringValue;
     private EnumParam rootEnumValue;
@@ -169,6 +171,7 @@ public class ApiRequestParamsConverterTest {
     assertEquals(expected, toMap(params));
   }
 
+  @SuppressWarnings("unchecked")
   @Test
   public void testHasExtraParamsWithWrongSerializedName() {
     ModelHasExtraParamsWithWrongSerializedName params =
