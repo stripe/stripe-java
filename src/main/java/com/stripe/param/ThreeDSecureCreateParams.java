@@ -5,7 +5,9 @@ package com.stripe.param;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class ThreeDSecureCreateParams extends ApiRequestParams {
   /** Amount of the charge that you will create when authentication completes. */
@@ -30,6 +32,15 @@ public class ThreeDSecureCreateParams extends ApiRequestParams {
   @SerializedName("expand")
   List<String> expand;
 
+  /**
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
+   */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
   /** The URL that the cardholder's browser will be returned to when authentication completes. */
   @SerializedName("return_url")
   String returnUrl;
@@ -40,12 +51,14 @@ public class ThreeDSecureCreateParams extends ApiRequestParams {
       String currency,
       String customer,
       List<String> expand,
+      Map<String, Object> extraParams,
       String returnUrl) {
     this.amount = amount;
     this.card = card;
     this.currency = currency;
     this.customer = customer;
     this.expand = expand;
+    this.extraParams = extraParams;
     this.returnUrl = returnUrl;
   }
 
@@ -64,12 +77,20 @@ public class ThreeDSecureCreateParams extends ApiRequestParams {
 
     private List<String> expand;
 
+    private Map<String, Object> extraParams;
+
     private String returnUrl;
 
     /** Finalize and obtain parameter instance from this builder. */
     public ThreeDSecureCreateParams build() {
       return new ThreeDSecureCreateParams(
-          this.amount, this.card, this.currency, this.customer, this.expand, this.returnUrl);
+          this.amount,
+          this.card,
+          this.currency,
+          this.customer,
+          this.expand,
+          this.extraParams,
+          this.returnUrl);
     }
 
     /** Amount of the charge that you will create when authentication completes. */
@@ -121,6 +142,32 @@ public class ThreeDSecureCreateParams extends ApiRequestParams {
         this.expand = new ArrayList<>();
       }
       this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * ThreeDSecureCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link ThreeDSecureCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
       return this;
     }
 

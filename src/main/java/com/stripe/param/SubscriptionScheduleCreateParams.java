@@ -38,6 +38,15 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
   List<String> expand;
 
   /**
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
+   */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
+  /**
    * Migrate an existing subscription to be managed by a subscription schedule. If this parameter is
    * set, a subscription schedule will be created using the subscription's plan(s), set to
    * auto-renew using the subscription's interval. Other parameters cannot be set since their values
@@ -91,6 +100,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       Object billingThresholds,
       String customer,
       List<String> expand,
+      Map<String, Object> extraParams,
       String fromSubscription,
       InvoiceSettings invoiceSettings,
       Map<String, String> metadata,
@@ -102,6 +112,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     this.billingThresholds = billingThresholds;
     this.customer = customer;
     this.expand = expand;
+    this.extraParams = extraParams;
     this.fromSubscription = fromSubscription;
     this.invoiceSettings = invoiceSettings;
     this.metadata = metadata;
@@ -124,6 +135,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
     private List<String> expand;
 
+    private Map<String, Object> extraParams;
+
     private String fromSubscription;
 
     private InvoiceSettings invoiceSettings;
@@ -145,6 +158,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
           this.billingThresholds,
           this.customer,
           this.expand,
+          this.extraParams,
           this.fromSubscription,
           this.invoiceSettings,
           this.metadata,
@@ -212,6 +226,32 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         this.expand = new ArrayList<>();
       }
       this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * SubscriptionScheduleCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link SubscriptionScheduleCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
       return this;
     }
 
@@ -325,6 +365,15 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     Long amountGte;
 
     /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
      * Indicates if the `billing_cycle_anchor` should be reset when a threshold is reached. If true,
      * `billing_cycle_anchor` will be updated to the date/time the threshold was last reached;
      * otherwise, the value will remain unchanged.
@@ -332,8 +381,10 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     @SerializedName("reset_billing_cycle_anchor")
     Boolean resetBillingCycleAnchor;
 
-    private BillingThresholds(Long amountGte, Boolean resetBillingCycleAnchor) {
+    private BillingThresholds(
+        Long amountGte, Map<String, Object> extraParams, Boolean resetBillingCycleAnchor) {
       this.amountGte = amountGte;
+      this.extraParams = extraParams;
       this.resetBillingCycleAnchor = resetBillingCycleAnchor;
     }
 
@@ -344,16 +395,47 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     public static class Builder {
       private Long amountGte;
 
+      private Map<String, Object> extraParams;
+
       private Boolean resetBillingCycleAnchor;
 
       /** Finalize and obtain parameter instance from this builder. */
       public BillingThresholds build() {
-        return new BillingThresholds(this.amountGte, this.resetBillingCycleAnchor);
+        return new BillingThresholds(
+            this.amountGte, this.extraParams, this.resetBillingCycleAnchor);
       }
 
       /** Monetary threshold that triggers the subscription to advance to a new billing period. */
       public Builder setAmountGte(Long amountGte) {
         this.amountGte = amountGte;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SubscriptionScheduleCreateParams.BillingThresholds#extraParams} for the field
+       * documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionScheduleCreateParams.BillingThresholds#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
 
@@ -373,8 +455,18 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     @SerializedName("days_until_due")
     Long daysUntilDue;
 
-    private InvoiceSettings(Long daysUntilDue) {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private InvoiceSettings(Long daysUntilDue, Map<String, Object> extraParams) {
       this.daysUntilDue = daysUntilDue;
+      this.extraParams = extraParams;
     }
 
     public static Builder builder() {
@@ -384,13 +476,42 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     public static class Builder {
       private Long daysUntilDue;
 
+      private Map<String, Object> extraParams;
+
       /** Finalize and obtain parameter instance from this builder. */
       public InvoiceSettings build() {
-        return new InvoiceSettings(this.daysUntilDue);
+        return new InvoiceSettings(this.daysUntilDue, this.extraParams);
       }
 
       public Builder setDaysUntilDue(Long daysUntilDue) {
         this.daysUntilDue = daysUntilDue;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SubscriptionScheduleCreateParams.InvoiceSettings#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionScheduleCreateParams.InvoiceSettings#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
     }
@@ -424,6 +545,15 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
      */
     @SerializedName("end_date")
     Long endDate;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
 
     /**
      * Integer representing the multiplier applied to the plan interval. For example, `iterations=2`
@@ -471,6 +601,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         String coupon,
         Object defaultTaxRates,
         Long endDate,
+        Map<String, Object> extraParams,
         Long iterations,
         List<Plan> plans,
         BigDecimal taxPercent,
@@ -480,6 +611,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       this.coupon = coupon;
       this.defaultTaxRates = defaultTaxRates;
       this.endDate = endDate;
+      this.extraParams = extraParams;
       this.iterations = iterations;
       this.plans = plans;
       this.taxPercent = taxPercent;
@@ -500,6 +632,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
       private Long endDate;
 
+      private Map<String, Object> extraParams;
+
       private Long iterations;
 
       private List<Plan> plans;
@@ -517,6 +651,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
             this.coupon,
             this.defaultTaxRates,
             this.endDate,
+            this.extraParams,
             this.iterations,
             this.plans,
             this.taxPercent,
@@ -566,6 +701,32 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
        */
       public Builder setEndDate(Long endDate) {
         this.endDate = endDate;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SubscriptionScheduleCreateParams.Phase#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionScheduleCreateParams.Phase#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
 
@@ -646,6 +807,15 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       @SerializedName("billing_thresholds")
       Object billingThresholds;
 
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
       /** The plan ID to subscribe to. */
       @SerializedName("plan")
       String plan;
@@ -664,8 +834,14 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       @SerializedName("tax_rates")
       Object taxRates;
 
-      private Plan(Object billingThresholds, String plan, Long quantity, Object taxRates) {
+      private Plan(
+          Object billingThresholds,
+          Map<String, Object> extraParams,
+          String plan,
+          Long quantity,
+          Object taxRates) {
         this.billingThresholds = billingThresholds;
+        this.extraParams = extraParams;
         this.plan = plan;
         this.quantity = quantity;
         this.taxRates = taxRates;
@@ -678,6 +854,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       public static class Builder {
         private Object billingThresholds;
 
+        private Map<String, Object> extraParams;
+
         private String plan;
 
         private Long quantity;
@@ -686,7 +864,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
         /** Finalize and obtain parameter instance from this builder. */
         public Plan build() {
-          return new Plan(this.billingThresholds, this.plan, this.quantity, this.taxRates);
+          return new Plan(
+              this.billingThresholds, this.extraParams, this.plan, this.quantity, this.taxRates);
         }
 
         /**
@@ -704,6 +883,34 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
          */
         public Builder setBillingThresholds(EmptyParam billingThresholds) {
           this.billingThresholds = billingThresholds;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionScheduleCreateParams.Phase.Plan#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionScheduleCreateParams.Phase.Plan#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
           return this;
         }
 
@@ -742,11 +949,22 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       }
 
       public static class BillingThresholds {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
         /** Usage threshold that triggers the subscription to advance to a new billing period. */
         @SerializedName("usage_gte")
         Long usageGte;
 
-        private BillingThresholds(Long usageGte) {
+        private BillingThresholds(Map<String, Object> extraParams, Long usageGte) {
+          this.extraParams = extraParams;
           this.usageGte = usageGte;
         }
 
@@ -756,11 +974,43 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         }
 
         public static class Builder {
+          private Map<String, Object> extraParams;
+
           private Long usageGte;
 
           /** Finalize and obtain parameter instance from this builder. */
           public BillingThresholds build() {
-            return new BillingThresholds(this.usageGte);
+            return new BillingThresholds(this.extraParams, this.usageGte);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionScheduleCreateParams.Phase.Plan.BillingThresholds#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * SubscriptionScheduleCreateParams.Phase.Plan.BillingThresholds#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
           }
 
           /** Usage threshold that triggers the subscription to advance to a new billing period. */
@@ -775,6 +1025,15 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
   public static class RenewalInterval {
     /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
      * Interval at which to renew the subscription schedule for when it ends. Possible values are
      * `day`, `week`, `month`, or `year`.
      */
@@ -785,7 +1044,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     @SerializedName("length")
     Long length;
 
-    private RenewalInterval(Interval interval, Long length) {
+    private RenewalInterval(Map<String, Object> extraParams, Interval interval, Long length) {
+      this.extraParams = extraParams;
       this.interval = interval;
       this.length = length;
     }
@@ -795,13 +1055,42 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private Map<String, Object> extraParams;
+
       private Interval interval;
 
       private Long length;
 
       /** Finalize and obtain parameter instance from this builder. */
       public RenewalInterval build() {
-        return new RenewalInterval(this.interval, this.length);
+        return new RenewalInterval(this.extraParams, this.interval, this.length);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SubscriptionScheduleCreateParams.RenewalInterval#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionScheduleCreateParams.RenewalInterval#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
       }
 
       /**

@@ -44,6 +44,15 @@ public class ProductUpdateParams extends ApiRequestParams {
   @SerializedName("expand")
   List<String> expand;
 
+  /**
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
+   */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
   /** A list of up to 8 URLs of images for this product, meant to be displayable to the customer. */
   @SerializedName("images")
   Object images;
@@ -101,6 +110,7 @@ public class ProductUpdateParams extends ApiRequestParams {
       List<String> deactivateOn,
       String description,
       List<String> expand,
+      Map<String, Object> extraParams,
       Object images,
       Map<String, String> metadata,
       String name,
@@ -115,6 +125,7 @@ public class ProductUpdateParams extends ApiRequestParams {
     this.deactivateOn = deactivateOn;
     this.description = description;
     this.expand = expand;
+    this.extraParams = extraParams;
     this.images = images;
     this.metadata = metadata;
     this.name = name;
@@ -142,6 +153,8 @@ public class ProductUpdateParams extends ApiRequestParams {
 
     private List<String> expand;
 
+    private Map<String, Object> extraParams;
+
     private Object images;
 
     private Map<String, String> metadata;
@@ -167,6 +180,7 @@ public class ProductUpdateParams extends ApiRequestParams {
           this.deactivateOn,
           this.description,
           this.expand,
+          this.extraParams,
           this.images,
           this.metadata,
           this.name,
@@ -266,6 +280,32 @@ public class ProductUpdateParams extends ApiRequestParams {
         this.expand = new ArrayList<>();
       }
       this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * ProductUpdateParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link ProductUpdateParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
       return this;
     }
 
@@ -374,6 +414,15 @@ public class ProductUpdateParams extends ApiRequestParams {
   }
 
   public static class PackageDimensions {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
     /** Height, in inches. Maximum precision is 2 decimal places. */
     @SerializedName("height")
     BigDecimal height;
@@ -391,7 +440,12 @@ public class ProductUpdateParams extends ApiRequestParams {
     BigDecimal width;
 
     private PackageDimensions(
-        BigDecimal height, BigDecimal length, BigDecimal weight, BigDecimal width) {
+        Map<String, Object> extraParams,
+        BigDecimal height,
+        BigDecimal length,
+        BigDecimal weight,
+        BigDecimal width) {
+      this.extraParams = extraParams;
       this.height = height;
       this.length = length;
       this.weight = weight;
@@ -403,6 +457,8 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private Map<String, Object> extraParams;
+
       private BigDecimal height;
 
       private BigDecimal length;
@@ -413,7 +469,34 @@ public class ProductUpdateParams extends ApiRequestParams {
 
       /** Finalize and obtain parameter instance from this builder. */
       public PackageDimensions build() {
-        return new PackageDimensions(this.height, this.length, this.weight, this.width);
+        return new PackageDimensions(
+            this.extraParams, this.height, this.length, this.weight, this.width);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ProductUpdateParams.PackageDimensions#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ProductUpdateParams.PackageDimensions#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
       }
 
       /** Height, in inches. Maximum precision is 2 decimal places. */

@@ -6,7 +6,9 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import lombok.Getter;
 
 public class OrderReturnOrderParams extends ApiRequestParams {
@@ -14,12 +16,23 @@ public class OrderReturnOrderParams extends ApiRequestParams {
   @SerializedName("expand")
   List<String> expand;
 
+  /**
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
+   */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
   /** List of items to return. */
   @SerializedName("items")
   Object items;
 
-  private OrderReturnOrderParams(List<String> expand, Object items) {
+  private OrderReturnOrderParams(
+      List<String> expand, Map<String, Object> extraParams, Object items) {
     this.expand = expand;
+    this.extraParams = extraParams;
     this.items = items;
   }
 
@@ -30,11 +43,13 @@ public class OrderReturnOrderParams extends ApiRequestParams {
   public static class Builder {
     private List<String> expand;
 
+    private Map<String, Object> extraParams;
+
     private Object items;
 
     /** Finalize and obtain parameter instance from this builder. */
     public OrderReturnOrderParams build() {
-      return new OrderReturnOrderParams(this.expand, this.items);
+      return new OrderReturnOrderParams(this.expand, this.extraParams, this.items);
     }
 
     /**
@@ -63,6 +78,32 @@ public class OrderReturnOrderParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * OrderReturnOrderParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link OrderReturnOrderParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
+      return this;
+    }
+
     /** List of items to return. */
     public Builder setItems(EmptyParam items) {
       this.items = items;
@@ -85,6 +126,15 @@ public class OrderReturnOrderParams extends ApiRequestParams {
     @SerializedName("description")
     String description;
 
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
     /** The ID of the SKU, tax, or shipping item being returned. */
     @SerializedName("parent")
     String parent;
@@ -97,9 +147,16 @@ public class OrderReturnOrderParams extends ApiRequestParams {
     @SerializedName("type")
     Type type;
 
-    private Item(Long amount, String description, String parent, Long quantity, Type type) {
+    private Item(
+        Long amount,
+        String description,
+        Map<String, Object> extraParams,
+        String parent,
+        Long quantity,
+        Type type) {
       this.amount = amount;
       this.description = description;
+      this.extraParams = extraParams;
       this.parent = parent;
       this.quantity = quantity;
       this.type = type;
@@ -114,6 +171,8 @@ public class OrderReturnOrderParams extends ApiRequestParams {
 
       private String description;
 
+      private Map<String, Object> extraParams;
+
       private String parent;
 
       private Long quantity;
@@ -122,7 +181,8 @@ public class OrderReturnOrderParams extends ApiRequestParams {
 
       /** Finalize and obtain parameter instance from this builder. */
       public Item build() {
-        return new Item(this.amount, this.description, this.parent, this.quantity, this.type);
+        return new Item(
+            this.amount, this.description, this.extraParams, this.parent, this.quantity, this.type);
       }
 
       /** The amount (price) for this order item to return. */
@@ -134,6 +194,32 @@ public class OrderReturnOrderParams extends ApiRequestParams {
       /** If returning a `tax` item, use description to disambiguate which one to return. */
       public Builder setDescription(String description) {
         this.description = description;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * OrderReturnOrderParams.Item#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link OrderReturnOrderParams.Item#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
 

@@ -5,7 +5,9 @@ package com.stripe.param;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class AccountPersonsParams extends ApiRequestParams {
   /**
@@ -20,6 +22,15 @@ public class AccountPersonsParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
+
+  /**
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
+   */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
 
   /**
    * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
@@ -47,11 +58,13 @@ public class AccountPersonsParams extends ApiRequestParams {
   private AccountPersonsParams(
       String endingBefore,
       List<String> expand,
+      Map<String, Object> extraParams,
       Long limit,
       Relationship relationship,
       String startingAfter) {
     this.endingBefore = endingBefore;
     this.expand = expand;
+    this.extraParams = extraParams;
     this.limit = limit;
     this.relationship = relationship;
     this.startingAfter = startingAfter;
@@ -66,6 +79,8 @@ public class AccountPersonsParams extends ApiRequestParams {
 
     private List<String> expand;
 
+    private Map<String, Object> extraParams;
+
     private Long limit;
 
     private Relationship relationship;
@@ -75,7 +90,12 @@ public class AccountPersonsParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public AccountPersonsParams build() {
       return new AccountPersonsParams(
-          this.endingBefore, this.expand, this.limit, this.relationship, this.startingAfter);
+          this.endingBefore,
+          this.expand,
+          this.extraParams,
+          this.limit,
+          this.relationship,
+          this.startingAfter);
     }
 
     /**
@@ -112,6 +132,32 @@ public class AccountPersonsParams extends ApiRequestParams {
         this.expand = new ArrayList<>();
       }
       this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * AccountPersonsParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link AccountPersonsParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
       return this;
     }
 
@@ -161,15 +207,26 @@ public class AccountPersonsParams extends ApiRequestParams {
     Boolean director;
 
     /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
      * A filter on the list of people returned based on whether these people are owners of the
      * account's company.
      */
     @SerializedName("owner")
     Boolean owner;
 
-    private Relationship(Boolean accountOpener, Boolean director, Boolean owner) {
+    private Relationship(
+        Boolean accountOpener, Boolean director, Map<String, Object> extraParams, Boolean owner) {
       this.accountOpener = accountOpener;
       this.director = director;
+      this.extraParams = extraParams;
       this.owner = owner;
     }
 
@@ -182,11 +239,13 @@ public class AccountPersonsParams extends ApiRequestParams {
 
       private Boolean director;
 
+      private Map<String, Object> extraParams;
+
       private Boolean owner;
 
       /** Finalize and obtain parameter instance from this builder. */
       public Relationship build() {
-        return new Relationship(this.accountOpener, this.director, this.owner);
+        return new Relationship(this.accountOpener, this.director, this.extraParams, this.owner);
       }
 
       /**
@@ -204,6 +263,32 @@ public class AccountPersonsParams extends ApiRequestParams {
        */
       public Builder setDirector(Boolean director) {
         this.director = director;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * AccountPersonsParams.Relationship#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link AccountPersonsParams.Relationship#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
 

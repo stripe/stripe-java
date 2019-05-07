@@ -19,6 +19,15 @@ public class FileLinkCreateParams extends ApiRequestParams {
   Long expiresAt;
 
   /**
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
+   */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
+  /**
    * The ID of the file. The file's `purpose` must be one of the following: `business_icon`,
    * `business_logo`, `customer_signature`, `dispute_evidence`, `finance_report_run`,
    * `pci_document`, `sigma_scheduled_query`, or `tax_document_user_upload`.
@@ -34,9 +43,14 @@ public class FileLinkCreateParams extends ApiRequestParams {
   Map<String, String> metadata;
 
   private FileLinkCreateParams(
-      List<String> expand, Long expiresAt, String file, Map<String, String> metadata) {
+      List<String> expand,
+      Long expiresAt,
+      Map<String, Object> extraParams,
+      String file,
+      Map<String, String> metadata) {
     this.expand = expand;
     this.expiresAt = expiresAt;
+    this.extraParams = extraParams;
     this.file = file;
     this.metadata = metadata;
   }
@@ -50,13 +64,16 @@ public class FileLinkCreateParams extends ApiRequestParams {
 
     private Long expiresAt;
 
+    private Map<String, Object> extraParams;
+
     private String file;
 
     private Map<String, String> metadata;
 
     /** Finalize and obtain parameter instance from this builder. */
     public FileLinkCreateParams build() {
-      return new FileLinkCreateParams(this.expand, this.expiresAt, this.file, this.metadata);
+      return new FileLinkCreateParams(
+          this.expand, this.expiresAt, this.extraParams, this.file, this.metadata);
     }
 
     /**
@@ -88,6 +105,32 @@ public class FileLinkCreateParams extends ApiRequestParams {
     /** A future timestamp after which the link will no longer be usable. */
     public Builder setExpiresAt(Long expiresAt) {
       this.expiresAt = expiresAt;
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * FileLinkCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link FileLinkCreateParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
       return this;
     }
 

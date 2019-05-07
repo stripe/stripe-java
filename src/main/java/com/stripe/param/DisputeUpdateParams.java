@@ -23,6 +23,15 @@ public class DisputeUpdateParams extends ApiRequestParams {
   List<String> expand;
 
   /**
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
+   */
+  @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+  Map<String, Object> extraParams;
+
+  /**
    * A set of key-value pairs that you can attach to a dispute object. This can be useful for
    * storing additional information about the dispute in a structured format.
    */
@@ -38,9 +47,14 @@ public class DisputeUpdateParams extends ApiRequestParams {
   Boolean submit;
 
   private DisputeUpdateParams(
-      Evidence evidence, List<String> expand, Map<String, String> metadata, Boolean submit) {
+      Evidence evidence,
+      List<String> expand,
+      Map<String, Object> extraParams,
+      Map<String, String> metadata,
+      Boolean submit) {
     this.evidence = evidence;
     this.expand = expand;
+    this.extraParams = extraParams;
     this.metadata = metadata;
     this.submit = submit;
   }
@@ -54,13 +68,16 @@ public class DisputeUpdateParams extends ApiRequestParams {
 
     private List<String> expand;
 
+    private Map<String, Object> extraParams;
+
     private Map<String, String> metadata;
 
     private Boolean submit;
 
     /** Finalize and obtain parameter instance from this builder. */
     public DisputeUpdateParams build() {
-      return new DisputeUpdateParams(this.evidence, this.expand, this.metadata, this.submit);
+      return new DisputeUpdateParams(
+          this.evidence, this.expand, this.extraParams, this.metadata, this.submit);
     }
 
     /**
@@ -96,6 +113,32 @@ public class DisputeUpdateParams extends ApiRequestParams {
         this.expand = new ArrayList<>();
       }
       this.expand.addAll(elements);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * DisputeUpdateParams#extraParams} for the field documentation.
+     */
+    public Builder putExtraParam(String key, Object value) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link DisputeUpdateParams#extraParams} for the field documentation.
+     */
+    public Builder putAllExtraParam(Map<String, Object> map) {
+      if (this.extraParams == null) {
+        this.extraParams = new HashMap<>();
+      }
+      this.extraParams.putAll(map);
       return this;
     }
 
@@ -180,6 +223,15 @@ public class DisputeUpdateParams extends ApiRequestParams {
     @SerializedName("duplicate_charge_id")
     String duplicateChargeId;
 
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
     /** Has a maximum character count of 20,000. */
     @SerializedName("product_description")
     String productDescription;
@@ -240,6 +292,7 @@ public class DisputeUpdateParams extends ApiRequestParams {
         String duplicateChargeDocumentation,
         String duplicateChargeExplanation,
         String duplicateChargeId,
+        Map<String, Object> extraParams,
         String productDescription,
         String receipt,
         String refundPolicy,
@@ -267,6 +320,7 @@ public class DisputeUpdateParams extends ApiRequestParams {
       this.duplicateChargeDocumentation = duplicateChargeDocumentation;
       this.duplicateChargeExplanation = duplicateChargeExplanation;
       this.duplicateChargeId = duplicateChargeId;
+      this.extraParams = extraParams;
       this.productDescription = productDescription;
       this.receipt = receipt;
       this.refundPolicy = refundPolicy;
@@ -314,6 +368,8 @@ public class DisputeUpdateParams extends ApiRequestParams {
 
       private String duplicateChargeId;
 
+      private Map<String, Object> extraParams;
+
       private String productDescription;
 
       private String receipt;
@@ -358,6 +414,7 @@ public class DisputeUpdateParams extends ApiRequestParams {
             this.duplicateChargeDocumentation,
             this.duplicateChargeExplanation,
             this.duplicateChargeId,
+            this.extraParams,
             this.productDescription,
             this.receipt,
             this.refundPolicy,
@@ -440,6 +497,32 @@ public class DisputeUpdateParams extends ApiRequestParams {
 
       public Builder setDuplicateChargeId(String duplicateChargeId) {
         this.duplicateChargeId = duplicateChargeId;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * DisputeUpdateParams.Evidence#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link DisputeUpdateParams.Evidence#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
 
