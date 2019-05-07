@@ -18,8 +18,8 @@ import java.util.Map;
  */
 public class UntypedMapDeserializer {
   /**
-   * Strategy to deserialize a JSON element, allowing for custom behavior between the deserialized
-   * element and its outer map.
+   * Strategy to deserialize a JSON element, allowing for custom interactions between the
+   * deserialized element and its outer map.
    * For example, for a full JSON:
    * {
    *   "foo": 1,
@@ -30,7 +30,7 @@ public class UntypedMapDeserializer {
    * }
    *
    * <p>Given, a json entry of "zing": 2, the outer map corresponds to value for "foo_inner". A
-   * default strategy is to simply deserialize value and puts to the outer map at "zing" key.
+   * default strategy is to simply deserialize value and puts it at "zing" key in the outer map.
    *
    * <p>Custom strategy allows, for example, renaming the key "zing", wrapping the deserialized
    * value in another map/array, or flattening the value if the deserialized value is a map.
