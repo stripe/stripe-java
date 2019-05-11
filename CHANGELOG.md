@@ -1,5 +1,11 @@
 # Changelog
 
+## 9.11.0 - 2019-05-10
+* [#776](https://github.com/stripe/stripe-java/pull/776)
+  * Add support for `startDate` in `Subscription`
+  * Removed one unsupported enum on `PaymentIntentCancelParams`
+
+
 ## 9.10.0 - 2019-05-06
 * [#773](https://github.com/stripe/stripe-java/pull/773)
   * Add support for `extraParams` in all sub-classes of ApiRequestParams their nested classes
