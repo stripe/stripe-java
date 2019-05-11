@@ -44,7 +44,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
   /**
    * The amount of the application fee (if any) for the resulting payment. See the PaymentIntents
-   * [Connect usage guide](https://stripe.com/docs/payments/payment-intents/usage#connect) for
+   * [use case for connected
+   * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts) for
    * details.
    */
   @SerializedName("application_fee_amount")
@@ -59,7 +60,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
   /**
    * User-given reason for cancellation of this PaymentIntent, one of `duplicate`, `fraudulent`,
-   * `requested_by_customer`, or `failed_invoice`.
+   * `requested_by_customer`, `failed_invoice`, or `void_invoice`.
    */
   @SerializedName("cancellation_reason")
   String cancellationReason;
@@ -150,8 +151,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
   /**
    * The account (if any) for which the funds of the PaymentIntent are intended. See the
-   * PaymentIntents [Connect usage
-   * guide](https://stripe.com/docs/payments/payment-intents/usage#connect) for details.
+   * PaymentIntents [use case for connected
+   * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts) for
+   * details.
    */
   @SerializedName("on_behalf_of")
   @Getter(lombok.AccessLevel.NONE)
@@ -197,24 +199,25 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
   /**
    * Status of this PaymentIntent, one of `requires_payment_method`, `requires_confirmation`,
-   * `requires_action`, `processing`, `requires_capture`, `canceled`, or `succeeded`. You can read
-   * more about PaymentIntent statuses
-   * [here](https://stripe.com/docs/payments/payment-intents/usage#paymentintent-status-overview).
+   * `requires_action`, `processing`, `requires_capture`, `canceled`, or `succeeded`. Read more
+   * about each PaymentIntent [status](https://stripe.com/docs/payments/payment-intents/status).
    */
   @SerializedName("status")
   String status;
 
   /**
    * The data with which to automatically create a Transfer when the payment is finalized. See the
-   * PaymentIntents [Connect usage
-   * guide](https://stripe.com/docs/payments/payment-intents/usage#connect) for details.
+   * PaymentIntents [use case for connected
+   * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts) for
+   * details.
    */
   @SerializedName("transfer_data")
   TransferData transferData;
 
   /**
-   * A string that identifies the resulting payment as part of a group. See the PaymentIntents
-   * [Connect usage guide](https://stripe.com/docs/payments/payment-intents/usage#connect) for
+   * A string that identifies the resulting payment as part of a group. See the PaymentIntents [use
+   * case for connected
+   * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts) for
    * details.
    */
   @SerializedName("transfer_group")

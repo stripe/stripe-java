@@ -17,7 +17,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
   /**
    * The amount of the application fee (if any) for the resulting payment. See the PaymentIntents
-   * [Connect usage guide](https://stripe.com/docs/payments/payment-intents/usage#connect) for
+   * [use case for connected
+   * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts) for
    * details.
    */
   @SerializedName("application_fee_amount")
@@ -99,8 +100,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
   /**
    * A string that identifies the resulting payment as part of a group. `transfer_group` may only be
-   * provided if it has not been set. See the PaymentIntents [Connect usage
-   * guide](https://stripe.com/docs/payments/payment-intents/usage#connect) for details.
+   * provided if it has not been set. See the PaymentIntents [use case for connected
+   * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts) for
+   * details.
    */
   @SerializedName("transfer_group")
   String transferGroup;
@@ -206,7 +208,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     /**
      * The amount of the application fee (if any) for the resulting payment. See the PaymentIntents
-     * [Connect usage guide](https://stripe.com/docs/payments/payment-intents/usage#connect) for
+     * [use case for connected
+     * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts) for
      * details.
      */
     public Builder setApplicationFeeAmount(EmptyParam applicationFeeAmount) {
@@ -216,7 +219,8 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     /**
      * The amount of the application fee (if any) for the resulting payment. See the PaymentIntents
-     * [Connect usage guide](https://stripe.com/docs/payments/payment-intents/usage#connect) for
+     * [use case for connected
+     * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts) for
      * details.
      */
     public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
@@ -404,8 +408,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     /**
      * A string that identifies the resulting payment as part of a group. `transfer_group` may only
-     * be provided if it has not been set. See the PaymentIntents [Connect usage
-     * guide](https://stripe.com/docs/payments/payment-intents/usage#connect) for details.
+     * be provided if it has not been set. See the PaymentIntents [use case for connected
+     * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts) for
+     * details.
      */
     public Builder setTransferGroup(String transferGroup) {
       this.transferGroup = transferGroup;

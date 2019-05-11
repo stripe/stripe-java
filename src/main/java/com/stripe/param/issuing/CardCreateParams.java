@@ -55,10 +55,7 @@ public class CardCreateParams extends ApiRequestParams {
   @SerializedName("replacement_reason")
   ReplacementReason replacementReason;
 
-  /**
-   * The address where the card will be shipped. This will default to the cardholder's billing
-   * address for physical cards.
-   */
+  /** The address where the card will be shipped. */
   @SerializedName("shipping")
   Shipping shipping;
 
@@ -256,10 +253,7 @@ public class CardCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * The address where the card will be shipped. This will default to the cardholder's billing
-     * address for physical cards.
-     */
+    /** The address where the card will be shipped. */
     public Builder setShipping(Shipping shipping) {
       this.shipping = shipping;
       return this;

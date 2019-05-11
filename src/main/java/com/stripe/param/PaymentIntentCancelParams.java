@@ -120,9 +120,6 @@ public class PaymentIntentCancelParams extends ApiRequestParams {
     @SerializedName("duplicate")
     DUPLICATE("duplicate"),
 
-    @SerializedName("failed_invoice")
-    FAILED_INVOICE("failed_invoice"),
-
     @SerializedName("fraudulent")
     FRAUDULENT("fraudulent"),
 
