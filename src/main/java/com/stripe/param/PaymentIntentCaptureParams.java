@@ -20,8 +20,9 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
 
   /**
    * The amount of the application fee (if any) that will be applied to the payment and transferred
-   * to the application owner's Stripe account. For more information, see the PaymentIntents
-   * [Connect usage guide](/docs/payments/payment-intents/usage#connect).
+   * to the application owner's Stripe account. For more information, see the PaymentIntents [use
+   * case for connected
+   * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
    */
   @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
@@ -82,7 +83,8 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
     /**
      * The amount of the application fee (if any) that will be applied to the payment and
      * transferred to the application owner's Stripe account. For more information, see the
-     * PaymentIntents [Connect usage guide](/docs/payments/payment-intents/usage#connect).
+     * PaymentIntents [use case for connected
+     * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
      */
     public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
       this.applicationFeeAmount = applicationFeeAmount;

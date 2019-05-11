@@ -23,8 +23,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
   /**
    * The amount of the application fee (if any) that will be applied to the payment and transferred
-   * to the application owner's Stripe account. For more information, see the PaymentIntents
-   * [Connect usage guide](/docs/payments/payment-intents/usage#connect).
+   * to the application owner's Stripe account. For more information, see the PaymentIntents [use
+   * case for connected
+   * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
    */
   @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
@@ -95,7 +96,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
   /**
    * The Stripe account ID for which these funds are intended. For details, see the PaymentIntents
-   * [Connect usage guide](https://stripe.com/docs/payments/payment-intents/usage#connect).
+   * [use case for connected
+   * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
    */
   @SerializedName("on_behalf_of")
   String onBehalfOf;
@@ -152,15 +154,16 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
   /**
    * The parameters used to automatically create a Transfer when the payment succeeds. For more
-   * information, see the PaymentIntents [Connect usage
-   * guide](https://stripe.com/docs/payments/payment-intents/usage#connect).
+   * information, see the PaymentIntents [use case for connected
+   * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
    */
   @SerializedName("transfer_data")
   TransferData transferData;
 
   /**
-   * A string that identifies the resulting payment as part of a group. See the PaymentIntents
-   * [Connect usage guide](https://stripe.com/docs/payments/payment-intents/usage#connect) for
+   * A string that identifies the resulting payment as part of a group. See the PaymentIntents [use
+   * case for connected
+   * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts) for
    * details.
    */
   @SerializedName("transfer_group")
@@ -304,7 +307,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     /**
      * The amount of the application fee (if any) that will be applied to the payment and
      * transferred to the application owner's Stripe account. For more information, see the
-     * PaymentIntents [Connect usage guide](/docs/payments/payment-intents/usage#connect).
+     * PaymentIntents [use case for connected
+     * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
      */
     public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
       this.applicationFeeAmount = applicationFeeAmount;
@@ -447,7 +451,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     /**
      * The Stripe account ID for which these funds are intended. For details, see the PaymentIntents
-     * [Connect usage guide](https://stripe.com/docs/payments/payment-intents/usage#connect).
+     * [use case for connected
+     * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
      */
     public Builder setOnBehalfOf(String onBehalfOf) {
       this.onBehalfOf = onBehalfOf;
@@ -540,8 +545,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     /**
      * The parameters used to automatically create a Transfer when the payment succeeds. For more
-     * information, see the PaymentIntents [Connect usage
-     * guide](https://stripe.com/docs/payments/payment-intents/usage#connect).
+     * information, see the PaymentIntents [use case for connected
+     * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
      */
     public Builder setTransferData(TransferData transferData) {
       this.transferData = transferData;
@@ -550,7 +555,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     /**
      * A string that identifies the resulting payment as part of a group. See the PaymentIntents
-     * [Connect usage guide](https://stripe.com/docs/payments/payment-intents/usage#connect) for
+     * [use case for connected
+     * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts) for
      * details.
      */
     public Builder setTransferGroup(String transferGroup) {

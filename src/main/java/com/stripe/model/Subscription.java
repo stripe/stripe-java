@@ -199,6 +199,13 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   Long start;
 
   /**
+   * Date when the subscription was first created. The date might differ from the `created` date due
+   * to backdating.
+   */
+  @SerializedName("start_date")
+  Long startDate;
+
+  /**
    * Possible values are `incomplete`, `incomplete_expired`, `trialing`, `active`, `past_due`,
    * `canceled`, or `unpaid`.
    *
