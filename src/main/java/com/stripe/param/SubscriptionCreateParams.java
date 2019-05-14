@@ -151,7 +151,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
    * `tax_percent` of `20.0` will charge $12 per invoice. To unset a previously-set value, pass an
    * empty string. This field has been deprecated and will be removed in a future API version, for
    * further information view the [migration docs](https://stripe.com/docs/billing/migration/taxes)
-   * to `tax_rates`
+   * for `tax_rates`.
    */
   @SerializedName("tax_percent")
   Object taxPercent;
@@ -581,7 +581,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      * a `tax_percent` of `20.0` will charge $12 per invoice. To unset a previously-set value, pass
      * an empty string. This field has been deprecated and will be removed in a future API version,
      * for further information view the [migration
-     * docs](https://stripe.com/docs/billing/migration/taxes) to `tax_rates`
+     * docs](https://stripe.com/docs/billing/migration/taxes) for `tax_rates`.
      */
     public Builder setTaxPercent(EmptyParam taxPercent) {
       this.taxPercent = taxPercent;
@@ -595,7 +595,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      * a `tax_percent` of `20.0` will charge $12 per invoice. To unset a previously-set value, pass
      * an empty string. This field has been deprecated and will be removed in a future API version,
      * for further information view the [migration
-     * docs](https://stripe.com/docs/billing/migration/taxes) to `tax_rates`
+     * docs](https://stripe.com/docs/billing/migration/taxes) for `tax_rates`.
      */
     public Builder setTaxPercent(BigDecimal taxPercent) {
       this.taxPercent = taxPercent;

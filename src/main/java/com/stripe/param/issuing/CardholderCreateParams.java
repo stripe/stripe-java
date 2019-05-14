@@ -3260,6 +3260,10 @@ public class CardholderCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
+    /**
+     * Deprecated param. Passing value for this param is simply discarded. It will be removed in the
+     * next client library major version
+     */
     @SerializedName("name")
     String name;
 
@@ -3316,6 +3320,10 @@ public class CardholderCreateParams extends ApiRequestParams {
         return this;
       }
 
+      /**
+       * Deprecated param. Passing value for this param is simply discarded. It will be removed in
+       * the next client library major version
+       */
       public Builder setName(String name) {
         this.name = name;
         return this;

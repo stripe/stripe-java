@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
 public class PaymentIntentConfirmParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
@@ -23,6 +24,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
+
+  /**
+   * Used in payment flows that collect payment details and charge later, when the customer is not
+   * available to complete additional required steps for the payment. Setting this parameter
+   * indicates that this payment attempt is happening while the customer is not in your checkout
+   * flow. Use `recurring` for payments made on a recurring basis (for example, subscriptions) and
+   * `one_off` for all other off-session payments.
+   */
+  @SerializedName("off_session")
+  OffSession offSession;
 
   /** ID of the payment method to attach to this PaymentIntent. */
   @SerializedName("payment_method")
@@ -64,6 +75,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   private PaymentIntentConfirmParams(
       List<String> expand,
       Map<String, Object> extraParams,
+      OffSession offSession,
       String paymentMethod,
       String receiptEmail,
       String returnUrl,
@@ -72,6 +84,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       String source) {
     this.expand = expand;
     this.extraParams = extraParams;
+    this.offSession = offSession;
     this.paymentMethod = paymentMethod;
     this.receiptEmail = receiptEmail;
     this.returnUrl = returnUrl;
@@ -88,6 +101,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     private List<String> expand;
 
     private Map<String, Object> extraParams;
+
+    private OffSession offSession;
 
     private String paymentMethod;
 
@@ -106,6 +121,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       return new PaymentIntentConfirmParams(
           this.expand,
           this.extraParams,
+          this.offSession,
           this.paymentMethod,
           this.receiptEmail,
           this.returnUrl,
@@ -163,6 +179,18 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * Used in payment flows that collect payment details and charge later, when the customer is not
+     * available to complete additional required steps for the payment. Setting this parameter
+     * indicates that this payment attempt is happening while the customer is not in your checkout
+     * flow. Use `recurring` for payments made on a recurring basis (for example, subscriptions) and
+     * `one_off` for all other off-session payments.
+     */
+    public Builder setOffSession(OffSession offSession) {
+      this.offSession = offSession;
       return this;
     }
 
@@ -492,6 +520,21 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           return this;
         }
       }
+    }
+  }
+
+  public enum OffSession implements ApiRequestParams.EnumParam {
+    @SerializedName("one_off")
+    ONE_OFF("one_off"),
+
+    @SerializedName("recurring")
+    RECURRING("recurring");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    OffSession(String value) {
+      this.value = value;
     }
   }
 }

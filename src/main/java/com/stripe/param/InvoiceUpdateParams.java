@@ -58,6 +58,10 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   @SerializedName("default_source")
   String defaultSource;
 
+  /**
+   * The tax rates that will apply to any line item that does not have `tax_rates` set. Pass an
+   * empty string to remove previously-set default tax rates.
+   */
   @SerializedName("default_tax_rates")
   Object defaultTaxRates;
 
@@ -105,7 +109,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
    * at most four decimal places) between 0 and 100. To unset a previously-set value, pass an empty
    * string. This field can be updated only on `draft` invoices. This field has been deprecated and
    * will be removed in a future API version, for further information view the [migration
-   * docs](https://stripe.com/docs/billing/migration/taxes) to `tax_rates`
+   * docs](https://stripe.com/docs/billing/migration/taxes) for `tax_rates`.
    */
   @SerializedName("tax_percent")
   Object taxPercent;
@@ -280,11 +284,19 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * The tax rates that will apply to any line item that does not have `tax_rates` set. Pass an
+     * empty string to remove previously-set default tax rates.
+     */
     public Builder setDefaultTaxRates(EmptyParam defaultTaxRates) {
       this.defaultTaxRates = defaultTaxRates;
       return this;
     }
 
+    /**
+     * The tax rates that will apply to any line item that does not have `tax_rates` set. Pass an
+     * empty string to remove previously-set default tax rates.
+     */
     public Builder setDefaultTaxRates(List<String> defaultTaxRates) {
       this.defaultTaxRates = defaultTaxRates;
       return this;
@@ -404,7 +416,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
      * (with at most four decimal places) between 0 and 100. To unset a previously-set value, pass
      * an empty string. This field can be updated only on `draft` invoices. This field has been
      * deprecated and will be removed in a future API version, for further information view the
-     * [migration docs](https://stripe.com/docs/billing/migration/taxes) to `tax_rates`
+     * [migration docs](https://stripe.com/docs/billing/migration/taxes) for `tax_rates`.
      */
     public Builder setTaxPercent(EmptyParam taxPercent) {
       this.taxPercent = taxPercent;
@@ -416,7 +428,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
      * (with at most four decimal places) between 0 and 100. To unset a previously-set value, pass
      * an empty string. This field can be updated only on `draft` invoices. This field has been
      * deprecated and will be removed in a future API version, for further information view the
-     * [migration docs](https://stripe.com/docs/billing/migration/taxes) to `tax_rates`
+     * [migration docs](https://stripe.com/docs/billing/migration/taxes) for `tax_rates`.
      */
     public Builder setTaxPercent(BigDecimal taxPercent) {
       this.taxPercent = taxPercent;

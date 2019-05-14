@@ -69,6 +69,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
   @SerializedName("default_source")
   String defaultSource;
 
+  /** The tax rates that will apply to any line item that does not have `tax_rates` set. */
   @SerializedName("default_tax_rates")
   List<String> defaultTaxRates;
 
@@ -124,7 +125,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
   /**
    * The percent tax rate applied to the invoice, represented as a decimal number. This field has
    * been deprecated and will be removed in a future API version, for further information view the
-   * [migration docs](https://stripe.com/docs/billing/migration/taxes) to `tax_rates`
+   * [migration docs](https://stripe.com/docs/billing/migration/taxes) for `tax_rates`.
    */
   @SerializedName("tax_percent")
   BigDecimal taxPercent;
@@ -473,7 +474,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
     /**
      * The percent tax rate applied to the invoice, represented as a decimal number. This field has
      * been deprecated and will be removed in a future API version, for further information view the
-     * [migration docs](https://stripe.com/docs/billing/migration/taxes) to `tax_rates`
+     * [migration docs](https://stripe.com/docs/billing/migration/taxes) for `tax_rates`.
      */
     public Builder setTaxPercent(BigDecimal taxPercent) {
       this.taxPercent = taxPercent;

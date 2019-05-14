@@ -72,6 +72,11 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   @SerializedName("subscription_cancel_now")
   Boolean subscriptionCancelNow;
 
+  /**
+   * If provided, the invoice returned will preview updating or creating a subscription with these
+   * default tax rates. The default tax rates will apply to any line item that does not have
+   * `tax_rates` set.
+   */
   @SerializedName("subscription_default_tax_rates")
   Object subscriptionDefaultTaxRates;
 
@@ -100,7 +105,9 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
   /**
    * If provided, the invoice returned will preview updating or creating a subscription with that
-   * tax percent. If set, one of `subscription_items` or `subscription` is required.
+   * tax percent. If set, one of `subscription_items` or `subscription` is required. This field has
+   * been deprecated and will be removed in a future API version, for further information view the
+   * [migration docs](https://stripe.com/docs/billing/migration/taxes) for `tax_rates`.
    */
   @SerializedName("subscription_tax_percent")
   BigDecimal subscriptionTaxPercent;
@@ -359,11 +366,21 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * If provided, the invoice returned will preview updating or creating a subscription with these
+     * default tax rates. The default tax rates will apply to any line item that does not have
+     * `tax_rates` set.
+     */
     public Builder setSubscriptionDefaultTaxRates(EmptyParam subscriptionDefaultTaxRates) {
       this.subscriptionDefaultTaxRates = subscriptionDefaultTaxRates;
       return this;
     }
 
+    /**
+     * If provided, the invoice returned will preview updating or creating a subscription with these
+     * default tax rates. The default tax rates will apply to any line item that does not have
+     * `tax_rates` set.
+     */
     public Builder setSubscriptionDefaultTaxRates(List<String> subscriptionDefaultTaxRates) {
       this.subscriptionDefaultTaxRates = subscriptionDefaultTaxRates;
       return this;
@@ -420,7 +437,9 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     /**
      * If provided, the invoice returned will preview updating or creating a subscription with that
-     * tax percent. If set, one of `subscription_items` or `subscription` is required.
+     * tax percent. If set, one of `subscription_items` or `subscription` is required. This field
+     * has been deprecated and will be removed in a future API version, for further information view
+     * the [migration docs](https://stripe.com/docs/billing/migration/taxes) for `tax_rates`.
      */
     public Builder setSubscriptionTaxPercent(BigDecimal subscriptionTaxPercent) {
       this.subscriptionTaxPercent = subscriptionTaxPercent;

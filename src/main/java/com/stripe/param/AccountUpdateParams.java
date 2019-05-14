@@ -2866,9 +2866,29 @@ public class AccountUpdateParams extends ApiRequestParams {
       @SerializedName("statement_descriptor")
       String statementDescriptor;
 
-      private Payments(Map<String, Object> extraParams, String statementDescriptor) {
+      /**
+       * The Kana variation of the default text that appears on credit card statements when a charge
+       * is made (Japan only).
+       */
+      @SerializedName("statement_descriptor_kana")
+      String statementDescriptorKana;
+
+      /**
+       * The Kanji variation of the default text that appears on credit card statements when a
+       * charge is made (Japan only).
+       */
+      @SerializedName("statement_descriptor_kanji")
+      String statementDescriptorKanji;
+
+      private Payments(
+          Map<String, Object> extraParams,
+          String statementDescriptor,
+          String statementDescriptorKana,
+          String statementDescriptorKanji) {
         this.extraParams = extraParams;
         this.statementDescriptor = statementDescriptor;
+        this.statementDescriptorKana = statementDescriptorKana;
+        this.statementDescriptorKanji = statementDescriptorKanji;
       }
 
       public static Builder builder() {
@@ -2880,9 +2900,17 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         private String statementDescriptor;
 
+        private String statementDescriptorKana;
+
+        private String statementDescriptorKanji;
+
         /** Finalize and obtain parameter instance from this builder. */
         public Payments build() {
-          return new Payments(this.extraParams, this.statementDescriptor);
+          return new Payments(
+              this.extraParams,
+              this.statementDescriptor,
+              this.statementDescriptorKana,
+              this.statementDescriptorKanji);
         }
 
         /**
@@ -2919,6 +2947,24 @@ public class AccountUpdateParams extends ApiRequestParams {
          */
         public Builder setStatementDescriptor(String statementDescriptor) {
           this.statementDescriptor = statementDescriptor;
+          return this;
+        }
+
+        /**
+         * The Kana variation of the default text that appears on credit card statements when a
+         * charge is made (Japan only).
+         */
+        public Builder setStatementDescriptorKana(String statementDescriptorKana) {
+          this.statementDescriptorKana = statementDescriptorKana;
+          return this;
+        }
+
+        /**
+         * The Kanji variation of the default text that appears on credit card statements when a
+         * charge is made (Japan only).
+         */
+        public Builder setStatementDescriptorKanji(String statementDescriptorKanji) {
+          this.statementDescriptorKanji = statementDescriptorKanji;
           return this;
         }
       }

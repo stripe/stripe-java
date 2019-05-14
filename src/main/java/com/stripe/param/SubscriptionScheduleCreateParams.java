@@ -577,7 +577,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
      * plan which charges $10/month with a `tax_percent` of `20.0` will charge $12 per invoice. To
      * unset a previously-set value, pass an empty string. This field has been deprecated and will
      * be removed in a future API version, for further information view the [migration
-     * docs](https://stripe.com/docs/billing/migration/taxes) to `tax_rates`
+     * docs](https://stripe.com/docs/billing/migration/taxes) for `tax_rates`.
      */
     @SerializedName("tax_percent")
     BigDecimal taxPercent;
@@ -773,7 +773,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
        * For example, a plan which charges $10/month with a `tax_percent` of `20.0` will charge $12
        * per invoice. To unset a previously-set value, pass an empty string. This field has been
        * deprecated and will be removed in a future API version, for further information view the
-       * [migration docs](https://stripe.com/docs/billing/migration/taxes) to `tax_rates`
+       * [migration docs](https://stripe.com/docs/billing/migration/taxes) for `tax_rates`.
        */
       public Builder setTaxPercent(BigDecimal taxPercent) {
         this.taxPercent = taxPercent;
