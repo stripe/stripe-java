@@ -1,5 +1,12 @@
 # Changelog
 
+## 9.12.0 - 2019-05-14
+* [#777](https://github.com/stripe/stripe-java/pull/777) 
+  * Add support for `Capability`
+  * Add enum `off_session` for `PaymentIntentConfirmParams` and `PaymentIntentCreateParams`
+  * Add enum `abandoned` for `PaymentIntentCancellationParams`.
+  * Add support for `statementDescriptorKana` and `statementDescriptorKanji` in `Account.SettingsPayments`
+
 ## 9.11.0 - 2019-05-10
 * [#776](https://github.com/stripe/stripe-java/pull/776)
   * Add support for `startDate` in `Subscription`
