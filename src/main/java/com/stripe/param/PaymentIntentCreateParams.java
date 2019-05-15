@@ -95,6 +95,16 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   Map<String, String> metadata;
 
   /**
+   * Used in payment flows that collect payment details and charge later, when the customer is not
+   * available to complete additional required steps for the payment. Setting this parameter
+   * indicates that this payment attempt is happening while the customer is not in your checkout
+   * flow. Use `recurring` for payments made on a recurring basis (for example, subscriptions) and
+   * `one_off` for all other off-session payments.
+   */
+  @SerializedName("off_session")
+  OffSession offSession;
+
+  /**
    * The Stripe account ID for which these funds are intended. For details, see the PaymentIntents
    * [use case for connected
    * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
@@ -181,6 +191,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Map<String, String> metadata,
+      OffSession offSession,
       String onBehalfOf,
       String paymentMethod,
       List<String> paymentMethodTypes,
@@ -203,6 +214,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
+    this.offSession = offSession;
     this.onBehalfOf = onBehalfOf;
     this.paymentMethod = paymentMethod;
     this.paymentMethodTypes = paymentMethodTypes;
@@ -243,6 +255,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
+    private OffSession offSession;
+
     private String onBehalfOf;
 
     private String paymentMethod;
@@ -279,6 +293,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.metadata,
+          this.offSession,
           this.onBehalfOf,
           this.paymentMethod,
           this.paymentMethodTypes,
@@ -446,6 +461,18 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
         this.metadata = new HashMap<>();
       }
       this.metadata.putAll(map);
+      return this;
+    }
+
+    /**
+     * Used in payment flows that collect payment details and charge later, when the customer is not
+     * available to complete additional required steps for the payment. Setting this parameter
+     * indicates that this payment attempt is happening while the customer is not in your checkout
+     * flow. Use `recurring` for payments made on a recurring basis (for example, subscriptions) and
+     * `one_off` for all other off-session payments.
+     */
+    public Builder setOffSession(OffSession offSession) {
+      this.offSession = offSession;
       return this;
     }
 
@@ -939,6 +966,21 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     private final String value;
 
     ConfirmationMethod(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum OffSession implements ApiRequestParams.EnumParam {
+    @SerializedName("one_off")
+    ONE_OFF("one_off"),
+
+    @SerializedName("recurring")
+    RECURRING("recurring");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    OffSession(String value) {
       this.value = value;
     }
   }

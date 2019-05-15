@@ -7,6 +7,7 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.AccountCapabilitiesParams;
 import com.stripe.param.AccountCreateParams;
 import com.stripe.param.AccountListParams;
 import com.stripe.param.AccountPersonsParams;
@@ -496,6 +497,59 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
     return requestCollection(url, params, PersonCollection.class, options);
   }
 
+  /**
+   * Returns a list of capabilities associated with the account. The capabilities are returned
+   * sorted by creation date, with the most recent capability appearing first.
+   */
+  public CapabilityCollection capabilities() throws StripeException {
+    return capabilities((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of capabilities associated with the account. The capabilities are returned
+   * sorted by creation date, with the most recent capability appearing first.
+   */
+  public CapabilityCollection capabilities(Map<String, Object> params) throws StripeException {
+    return capabilities(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of capabilities associated with the account. The capabilities are returned
+   * sorted by creation date, with the most recent capability appearing first.
+   */
+  public CapabilityCollection capabilities(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/accounts/%s/capabilities", ApiResource.urlEncodeId(this.getId())));
+    return requestCollection(url, params, CapabilityCollection.class, options);
+  }
+
+  /**
+   * Returns a list of capabilities associated with the account. The capabilities are returned
+   * sorted by creation date, with the most recent capability appearing first.
+   */
+  public CapabilityCollection capabilities(AccountCapabilitiesParams params)
+      throws StripeException {
+    return capabilities(params, (RequestOptions) null);
+  }
+
+  /**
+   * Returns a list of capabilities associated with the account. The capabilities are returned
+   * sorted by creation date, with the most recent capability appearing first.
+   */
+  public CapabilityCollection capabilities(AccountCapabilitiesParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/accounts/%s/capabilities", ApiResource.urlEncodeId(this.getId())));
+    return requestCollection(url, params, CapabilityCollection.class, options);
+  }
+
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -848,6 +902,20 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
      */
     @SerializedName("statement_descriptor")
     String statementDescriptor;
+
+    /**
+     * The Kana variation of the default text that appears on credit card statements when a charge
+     * is made (Japan only).
+     */
+    @SerializedName("statement_descriptor_kana")
+    String statementDescriptorKana;
+
+    /**
+     * The Kanji variation of the default text that appears on credit card statements when a charge
+     * is made (Japan only).
+     */
+    @SerializedName("statement_descriptor_kanji")
+    String statementDescriptorKanji;
   }
 
   @Getter
