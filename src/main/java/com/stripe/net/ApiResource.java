@@ -24,6 +24,7 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.util.Map;
 import java.util.Objects;
+import javafx.util.Pair;
 
 public abstract class ApiResource extends StripeObject {
   private static StripeResponseGetter stripeResponseGetter = new LiveStripeResponseGetter();
@@ -94,7 +95,8 @@ public abstract class ApiResource extends StripeObject {
 
   protected static String instanceUrl(Class<?> clazz, String id)
       throws InvalidRequestException {
-    return instanceUrl(clazz, id, Stripe.getApiBase());
+    Pair<String, String> pair = new Pair<>(id, "");
+    return instanceUrl(clazz, pair.toString(), Stripe.getApiBase());
   }
 
   protected static String instanceUrl(Class<?> clazz, String id, String apiBase)
