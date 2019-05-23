@@ -51,7 +51,7 @@ public class TaxId extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
-  /** Type of the tax ID, one of `eu_vat`, `nz_gst`, `au_abn`, or `unknown`. */
+  /** Type of the tax ID, one of `au_abn`, `eu_vat`, `in_gst`, `no_vat`, `nz_gst`, or `unknown`. */
   @SerializedName("type")
   String type;
 

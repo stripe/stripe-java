@@ -13,7 +13,7 @@ import lombok.Getter;
 public class OrderUpdateParams extends ApiRequestParams {
   /**
    * A coupon code that represents a discount to be applied to this order. Must be one-time duration
-   * and in same currency as the order.
+   * and in same currency as the order. An order can have multiple coupons.
    */
   @SerializedName("coupon")
   String coupon;
@@ -108,7 +108,7 @@ public class OrderUpdateParams extends ApiRequestParams {
 
     /**
      * A coupon code that represents a discount to be applied to this order. Must be one-time
-     * duration and in same currency as the order.
+     * duration and in same currency as the order. An order can have multiple coupons.
      */
     public Builder setCoupon(String coupon) {
       this.coupon = coupon;

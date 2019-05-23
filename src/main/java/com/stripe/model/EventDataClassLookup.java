@@ -7,6 +7,7 @@ import com.stripe.model.issuing.Authorization;
 import com.stripe.model.issuing.CardDetails;
 import com.stripe.model.issuing.Cardholder;
 import com.stripe.model.issuing.Transaction;
+import com.stripe.model.radar.EarlyFraudWarning;
 import com.stripe.model.radar.ValueList;
 import com.stripe.model.radar.ValueListItem;
 import com.stripe.model.reporting.ReportRun;
@@ -75,6 +76,7 @@ final class EventDataClassLookup {
     classLookup.put("person", Person.class);
     classLookup.put("plan", Plan.class);
     classLookup.put("product", Product.class);
+    classLookup.put("radar.early_fraud_warning", EarlyFraudWarning.class);
     classLookup.put("radar.value_list", ValueList.class);
     classLookup.put("radar.value_list_item", ValueListItem.class);
     classLookup.put("recipient", Recipient.class);

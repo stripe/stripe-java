@@ -66,7 +66,16 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("cancellation_reason")
   String cancellationReason;
 
-  /** Capture method of this PaymentIntent, one of `automatic` or `manual`. */
+  /**
+   * One of `automatic` (default) or `manual`.
+   *
+   * <p>When the capture method is `automatic`, Stripe automatically captures funds when the
+   * customer authorizes the payment.
+   *
+   * <p>Change `capture_method` to manual if you wish to [separate authorization and
+   * capture](https://stripe.com/docs/payments/payment-intents/creating-payment-intents#separate-authorization-and-capture)
+   * for payment methods that support this.
+   */
   @SerializedName("capture_method")
   String captureMethod;
 
@@ -83,7 +92,21 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("client_secret")
   String clientSecret;
 
-  /** Confirmation method of this PaymentIntent, one of `manual` or `automatic`. */
+  /**
+   * One of `automatic` (default) or `manual`.
+   *
+   * <p>When the confirmation method is `automatic`, a PaymentIntent can be confirmed using a
+   * publishable key. After `next_action`s are handled, no additional confirmation is required to
+   * complete the payment.
+   *
+   * <p>When the confirmation method is `manual`, all payment attempts must be made using a secret
+   * key. The PaymentIntent returns to the `requires_confirmation` state after handling
+   * `next_action`s, and requires your server to initiate each payment attempt with an explicit
+   * confirmation.
+   *
+   * <p>Learn more about the different [confirmation
+   * flows](https://stripe.com/docs/payments/payment-intents#one-time-payments).
+   */
   @SerializedName("confirmation_method")
   String confirmationMethod;
 
@@ -185,7 +208,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("shipping")
   ShippingDetails shipping;
 
-  /** ID of the source used in this PaymentIntent. */
+  /**
+   * This is a legacy field that will be removed in the future. It is the ID of the Source object
+   * that is associated with this PaymentIntent, if one was supplied.
+   */
   @SerializedName("source")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
