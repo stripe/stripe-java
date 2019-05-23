@@ -1,5 +1,11 @@
 # Changelog
 
+## 9.13.0 - 2019-05-23
+* [#780](https://github.com/stripe/stripe-java/pull/780)
+  * Add support for new `radar.early_fraud_warning` resource and methods
+  * Add new in_gst and no_vat tax ID types
+  * Add `spending_limits_currency` attribute and parameter in Issuing resources
+
 ## 9.12.0 - 2019-05-14
 * [#777](https://github.com/stripe/stripe-java/pull/777) 
   * Add support for `Capability`
