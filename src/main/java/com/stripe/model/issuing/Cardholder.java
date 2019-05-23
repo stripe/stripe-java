@@ -247,6 +247,10 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
     /** Limit the spending with rules based on time intervals and categories. */
     @SerializedName("spending_limits")
     List<SpendingLimit> spendingLimits;
+
+    /** Currency for the amounts within spending_limits. */
+    @SerializedName("spending_limits_currency")
+    String spendingLimitsCurrency;
   }
 
   @Getter

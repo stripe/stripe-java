@@ -197,6 +197,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("balance.available")
     BALANCE__AVAILABLE("balance.available"),
 
+    @SerializedName("capability.updated")
+    CAPABILITY__UPDATED("capability.updated"),
+
     @SerializedName("charge.captured")
     CHARGE__CAPTURED("charge.captured"),
 
@@ -472,6 +475,12 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
 
     @SerializedName("product.updated")
     PRODUCT__UPDATED("product.updated"),
+
+    @SerializedName("radar.early_fraud_warning.created")
+    RADAR__EARLY_FRAUD_WARNING__CREATED("radar.early_fraud_warning.created"),
+
+    @SerializedName("radar.early_fraud_warning.updated")
+    RADAR__EARLY_FRAUD_WARNING__UPDATED("radar.early_fraud_warning.updated"),
 
     @SerializedName("recipient.created")
     RECIPIENT__CREATED("recipient.created"),

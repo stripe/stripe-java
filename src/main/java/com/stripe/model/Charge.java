@@ -251,8 +251,9 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
   ShippingDetails shipping;
 
   /**
-   * For most Stripe users, the source of every charge is a credit or debit card. This hash is then
-   * the [card object](#card_object) describing that card.
+   * This is a legacy field that will be removed in the future. It contains the Source, Card, or
+   * BankAccount object used for the charge. For details about the payment method used for this
+   * charge, refer to `payment_method` or `payment_method_details` instead.
    */
   @SerializedName("source")
   PaymentSource source;
@@ -1242,9 +1243,18 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class ThreeDSecure extends StripeObject {
+        /**
+         * Whether or not authentication was performed. 3D Secure will succeed without
+         * authentication when the card is not enrolled.
+         */
+        @SerializedName("authenticated")
+        Boolean authenticated;
+
+        /** Whether or not 3D Secure succeeded. */
         @SerializedName("succeeded")
         Boolean succeeded;
 
+        /** The version of 3D Secure that was used for this payment. */
         @SerializedName("version")
         String version;
       }

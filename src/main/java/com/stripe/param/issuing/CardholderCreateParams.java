@@ -304,15 +304,21 @@ public class CardholderCreateParams extends ApiRequestParams {
     @SerializedName("spending_limits")
     List<SpendingLimit> spendingLimits;
 
+    /** Currency for your spending limits. Defaults to your merchant country's currency. */
+    @SerializedName("spending_limits_currency")
+    String spendingLimitsCurrency;
+
     private AuthorizationControls(
         List<AllowedCategory> allowedCategories,
         List<BlockedCategory> blockedCategories,
         Map<String, Object> extraParams,
-        List<SpendingLimit> spendingLimits) {
+        List<SpendingLimit> spendingLimits,
+        String spendingLimitsCurrency) {
       this.allowedCategories = allowedCategories;
       this.blockedCategories = blockedCategories;
       this.extraParams = extraParams;
       this.spendingLimits = spendingLimits;
+      this.spendingLimitsCurrency = spendingLimitsCurrency;
     }
 
     public static Builder builder() {
@@ -328,10 +334,16 @@ public class CardholderCreateParams extends ApiRequestParams {
 
       private List<SpendingLimit> spendingLimits;
 
+      private String spendingLimitsCurrency;
+
       /** Finalize and obtain parameter instance from this builder. */
       public AuthorizationControls build() {
         return new AuthorizationControls(
-            this.allowedCategories, this.blockedCategories, this.extraParams, this.spendingLimits);
+            this.allowedCategories,
+            this.blockedCategories,
+            this.extraParams,
+            this.spendingLimits,
+            this.spendingLimitsCurrency);
       }
 
       /**
@@ -426,6 +438,12 @@ public class CardholderCreateParams extends ApiRequestParams {
           this.spendingLimits = new ArrayList<>();
         }
         this.spendingLimits.addAll(elements);
+        return this;
+      }
+
+      /** Currency for your spending limits. Defaults to your merchant country's currency. */
+      public Builder setSpendingLimitsCurrency(String spendingLimitsCurrency) {
+        this.spendingLimitsCurrency = spendingLimitsCurrency;
         return this;
       }
 

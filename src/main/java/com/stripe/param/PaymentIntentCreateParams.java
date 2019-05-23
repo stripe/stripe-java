@@ -30,7 +30,16 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
 
-  /** Capture method of this PaymentIntent, one of `automatic` or `manual`. */
+  /**
+   * One of `automatic` (default) or `manual`.
+   *
+   * <p>When the capture method is `automatic`, Stripe automatically captures funds when the
+   * customer authorizes the payment.
+   *
+   * <p>Change `capture_method` to manual if you wish to [separate authorization and
+   * capture](https://stripe.com/docs/payments/payment-intents/creating-payment-intents#separate-authorization-and-capture)
+   * for payment methods that support this.
+   */
   @SerializedName("capture_method")
   CaptureMethod captureMethod;
 
@@ -50,11 +59,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
    * complete the payment.
    *
    * <p>When the confirmation method is `manual`, all payment attempts must be made using a secret
-   * key. The PaymentIntent will return to the `requires_confirmation` state after handling
+   * key. The PaymentIntent returns to the `requires_confirmation` state after handling
    * `next_action`s, and requires your server to initiate each payment attempt with an explicit
-   * confirmation. Read the [expanded
-   * documentation](https://stripe.com/docs/payments/payment-intents/quickstart#manual-confirmation-flow)
-   * to learn more about manual confirmation.
+   * confirmation.
+   *
+   * <p>Learn more about the different [confirmation
+   * flows](https://stripe.com/docs/payments/payment-intents#one-time-payments).
    */
   @SerializedName("confirmation_method")
   ConfirmationMethod confirmationMethod;
@@ -112,7 +122,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   @SerializedName("on_behalf_of")
   String onBehalfOf;
 
-  /** ID of the payment method to attach to this PaymentIntent. */
+  /**
+   * ID of the payment method (a PaymentMethod, Card, BankAccount, or saved Source object) to attach
+   * to this PaymentIntent.
+   */
   @SerializedName("payment_method")
   String paymentMethod;
 
@@ -136,13 +149,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   String returnUrl;
 
   /**
-   * Set to `true` to [save the PaymentIntent's payment
-   * method](https://stripe.com/docs/payments/payment-methods/saving) (either `source` or
-   * `payment_method`) to the associated customer. Defaults to `false`. If the payment method is
-   * already attached, this parameter does nothing. This parameter errors for payment methods that
-   * are not permitted to be attached to customers. The parameter applies to the payment method
-   * passed in the same request or the current payment method attached to the PaymentIntent and must
-   * be specified again if a new payment method is added.
+   * If the PaymentIntent has a `payment_method` and a `customer` or if you're attaching a payment
+   * method to the PaymentIntent in this request, you can pass `save_payment_method=true` to save
+   * the payment method to the customer. Defaults to `false`.
+   *
+   * <p>If the payment method is already saved to a customer, this does nothing. If this type of
+   * payment method cannot be saved to a customer, the request will error.
    */
   @SerializedName("save_payment_method")
   Boolean savePaymentMethod;
@@ -151,7 +163,11 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   @SerializedName("shipping")
   Shipping shipping;
 
-  /** ID of the Source object to attach to this PaymentIntent. */
+  /**
+   * This is a legacy field that will be removed in the future. It is the ID of the Source object to
+   * attach to this PaymentIntent. Please use the `payment_method` field instead, which also
+   * supports Source, Card, and BankAccount objects.
+   */
   @SerializedName("source")
   String source;
 
@@ -330,7 +346,16 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Capture method of this PaymentIntent, one of `automatic` or `manual`. */
+    /**
+     * One of `automatic` (default) or `manual`.
+     *
+     * <p>When the capture method is `automatic`, Stripe automatically captures funds when the
+     * customer authorizes the payment.
+     *
+     * <p>Change `capture_method` to manual if you wish to [separate authorization and
+     * capture](https://stripe.com/docs/payments/payment-intents/creating-payment-intents#separate-authorization-and-capture)
+     * for payment methods that support this.
+     */
     public Builder setCaptureMethod(CaptureMethod captureMethod) {
       this.captureMethod = captureMethod;
       return this;
@@ -354,11 +379,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      * complete the payment.
      *
      * <p>When the confirmation method is `manual`, all payment attempts must be made using a secret
-     * key. The PaymentIntent will return to the `requires_confirmation` state after handling
+     * key. The PaymentIntent returns to the `requires_confirmation` state after handling
      * `next_action`s, and requires your server to initiate each payment attempt with an explicit
-     * confirmation. Read the [expanded
-     * documentation](https://stripe.com/docs/payments/payment-intents/quickstart#manual-confirmation-flow)
-     * to learn more about manual confirmation.
+     * confirmation.
+     *
+     * <p>Learn more about the different [confirmation
+     * flows](https://stripe.com/docs/payments/payment-intents#one-time-payments).
      */
     public Builder setConfirmationMethod(ConfirmationMethod confirmationMethod) {
       this.confirmationMethod = confirmationMethod;
@@ -486,7 +512,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** ID of the payment method to attach to this PaymentIntent. */
+    /**
+     * ID of the payment method (a PaymentMethod, Card, BankAccount, or saved Source object) to
+     * attach to this PaymentIntent.
+     */
     public Builder setPaymentMethod(String paymentMethod) {
       this.paymentMethod = paymentMethod;
       return this;
@@ -536,13 +565,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Set to `true` to [save the PaymentIntent's payment
-     * method](https://stripe.com/docs/payments/payment-methods/saving) (either `source` or
-     * `payment_method`) to the associated customer. Defaults to `false`. If the payment method is
-     * already attached, this parameter does nothing. This parameter errors for payment methods that
-     * are not permitted to be attached to customers. The parameter applies to the payment method
-     * passed in the same request or the current payment method attached to the PaymentIntent and
-     * must be specified again if a new payment method is added.
+     * If the PaymentIntent has a `payment_method` and a `customer` or if you're attaching a payment
+     * method to the PaymentIntent in this request, you can pass `save_payment_method=true` to save
+     * the payment method to the customer. Defaults to `false`.
+     *
+     * <p>If the payment method is already saved to a customer, this does nothing. If this type of
+     * payment method cannot be saved to a customer, the request will error.
      */
     public Builder setSavePaymentMethod(Boolean savePaymentMethod) {
       this.savePaymentMethod = savePaymentMethod;
@@ -555,7 +583,11 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** ID of the Source object to attach to this PaymentIntent. */
+    /**
+     * This is a legacy field that will be removed in the future. It is the ID of the Source object
+     * to attach to this PaymentIntent. Please use the `payment_method` field instead, which also
+     * supports Source, Card, and BankAccount objects.
+     */
     public Builder setSource(String source) {
       this.source = source;
       return this;

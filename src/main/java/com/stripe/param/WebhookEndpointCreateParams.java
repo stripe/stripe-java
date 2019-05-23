@@ -454,7 +454,10 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     VERSION_2019_02_19("2019-02-19"),
 
     @SerializedName("2019-03-14")
-    VERSION_2019_03_14("2019-03-14");
+    VERSION_2019_03_14("2019-03-14"),
+
+    @SerializedName("2019-05-16")
+    VERSION_2019_05_16("2019-05-16");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
@@ -497,6 +500,9 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     @SerializedName("balance.available")
     BALANCE__AVAILABLE("balance.available"),
+
+    @SerializedName("capability.updated")
+    CAPABILITY__UPDATED("capability.updated"),
 
     @SerializedName("charge.captured")
     CHARGE__CAPTURED("charge.captured"),
@@ -773,6 +779,12 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     @SerializedName("product.updated")
     PRODUCT__UPDATED("product.updated"),
+
+    @SerializedName("radar.early_fraud_warning.created")
+    RADAR__EARLY_FRAUD_WARNING__CREATED("radar.early_fraud_warning.created"),
+
+    @SerializedName("radar.early_fraud_warning.updated")
+    RADAR__EARLY_FRAUD_WARNING__UPDATED("radar.early_fraud_warning.updated"),
 
     @SerializedName("recipient.created")
     RECIPIENT__CREATED("recipient.created"),

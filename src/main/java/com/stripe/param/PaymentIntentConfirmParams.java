@@ -35,7 +35,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   @SerializedName("off_session")
   OffSession offSession;
 
-  /** ID of the payment method to attach to this PaymentIntent. */
+  /**
+   * ID of the payment method (a PaymentMethod, Card, BankAccount, or saved Source object) to attach
+   * to this PaymentIntent.
+   */
   @SerializedName("payment_method")
   String paymentMethod;
 
@@ -53,13 +56,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   String returnUrl;
 
   /**
-   * Set to `true` to [save the PaymentIntent's payment
-   * method](https://stripe.com/docs/payments/payment-methods/saving) (either `source` or
-   * `payment_method`) to the associated customer. Defaults to `false`. If the payment method is
-   * already attached, this parameter does nothing. This parameter errors for payment methods that
-   * are not permitted to be attached to customers. The parameter applies to the payment method
-   * passed in the same request or the current payment method attached to the PaymentIntent and must
-   * be specified again if a new payment method is added.
+   * If the PaymentIntent has a `payment_method` and a `customer` or if you're attaching a payment
+   * method to the PaymentIntent in this request, you can pass `save_payment_method=true` to save
+   * the payment method to the customer. Defaults to `false`.
+   *
+   * <p>If the payment method is already saved to a customer, this does nothing. If this type of
+   * payment method cannot be saved to a customer, the request will error.
    */
   @SerializedName("save_payment_method")
   Boolean savePaymentMethod;
@@ -68,7 +70,11 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   @SerializedName("shipping")
   Object shipping;
 
-  /** ID of the Source object to attach to this PaymentIntent. */
+  /**
+   * This is a legacy field that will be removed in the future. It is the ID of the Source object to
+   * attach to this PaymentIntent. Please use the `payment_method` field instead, which also
+   * supports Source, Card, and BankAccount objects.
+   */
   @SerializedName("source")
   String source;
 
@@ -194,7 +200,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       return this;
     }
 
-    /** ID of the payment method to attach to this PaymentIntent. */
+    /**
+     * ID of the payment method (a PaymentMethod, Card, BankAccount, or saved Source object) to
+     * attach to this PaymentIntent.
+     */
     public Builder setPaymentMethod(String paymentMethod) {
       this.paymentMethod = paymentMethod;
       return this;
@@ -218,13 +227,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     /**
-     * Set to `true` to [save the PaymentIntent's payment
-     * method](https://stripe.com/docs/payments/payment-methods/saving) (either `source` or
-     * `payment_method`) to the associated customer. Defaults to `false`. If the payment method is
-     * already attached, this parameter does nothing. This parameter errors for payment methods that
-     * are not permitted to be attached to customers. The parameter applies to the payment method
-     * passed in the same request or the current payment method attached to the PaymentIntent and
-     * must be specified again if a new payment method is added.
+     * If the PaymentIntent has a `payment_method` and a `customer` or if you're attaching a payment
+     * method to the PaymentIntent in this request, you can pass `save_payment_method=true` to save
+     * the payment method to the customer. Defaults to `false`.
+     *
+     * <p>If the payment method is already saved to a customer, this does nothing. If this type of
+     * payment method cannot be saved to a customer, the request will error.
      */
     public Builder setSavePaymentMethod(Boolean savePaymentMethod) {
       this.savePaymentMethod = savePaymentMethod;
@@ -243,7 +251,11 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       return this;
     }
 
-    /** ID of the Source object to attach to this PaymentIntent. */
+    /**
+     * This is a legacy field that will be removed in the future. It is the ID of the Source object
+     * to attach to this PaymentIntent. Please use the `payment_method` field instead, which also
+     * supports Source, Card, and BankAccount objects.
+     */
     public Builder setSource(String source) {
       this.source = source;
       return this;

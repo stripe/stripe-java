@@ -1245,7 +1245,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class CustomerTaxId extends StripeObject {
-    /** The type of the tax ID, one of `eu_vat`, `nz_gst`, `au_abn`, or `unknown`. */
+    /**
+     * The type of the tax ID, one of `au_abn`, `eu_vat`, `in_gst`, `no_vat`, `nz_gst`, or
+     * `unknown`.
+     */
     @SerializedName("type")
     String type;
 
