@@ -10,7 +10,6 @@ import com.stripe.model.Application;
 import com.stripe.model.Customer;
 import com.stripe.model.PaymentIntent;
 import com.stripe.model.PaymentIntentCollection;
-import com.stripe.model.PaymentSource;
 import com.stripe.model.Review;
 import com.stripe.net.ApiResource;
 
@@ -74,7 +73,7 @@ public class PaymentIntentTest extends BaseStripeTest {
         .addExpand("application")
         .addExpand("customer")
         .addExpand("on_behalf_of")
-        .addAllExpand(Arrays.asList("review", "source", "transfer_data.destination"))
+        .addAllExpand(Arrays.asList("review", "transfer_data.destination"))
         .build();
 
     final PaymentIntent resource = PaymentIntent.retrieve(PAYMENT_INTENT_ID, typedParams,
@@ -99,10 +98,6 @@ public class PaymentIntentTest extends BaseStripeTest {
     assertNotNull(review);
     assertNotNull(review.getId());
     assertEquals(resource.getReview(), review.getId());
-    final PaymentSource source = resource.getSourceObject();
-    assertNotNull(source);
-    assertNotNull(source.getId());
-    assertEquals(resource.getSource(), source.getId());
 
     final Account transferDestination = resource.getTransferData().getDestinationObject();
     assertNotNull(transferDestination);
