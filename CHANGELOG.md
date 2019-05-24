@@ -1,5 +1,8 @@
 # Changelog
 
+## 10.0.0 - 2019-05-24
+* [#781](https://github.com/stripe/stripe-java/pull/781) Pin library to API version `2019-05-16`
+
 ## 9.13.0 - 2019-05-23
 * [#780](https://github.com/stripe/stripe-java/pull/780)
   * Add support for new `radar.early_fraud_warning` resource and methods
