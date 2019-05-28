@@ -160,6 +160,14 @@ public abstract class ApiResource extends StripeObject {
    * URL-encode a string ID in url path formatting.
    */
   public static String urlEncodeId(String id) throws InvalidRequestException {
+    if (id == null) {
+      throw new InvalidRequestException(
+          "Invalid null ID found for url path formatting. This can be because your string ID "
+              + "argument to the API method is null, or the ID field in your stripe object "
+              + "instance is null. Please contact support@stripe.com on the latter case. ",
+          null, null, null, 0, null);
+    }
+
     try {
       return urlEncode(id);
     } catch (UnsupportedEncodingException e) {
