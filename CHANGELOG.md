@@ -1,5 +1,8 @@
 # Changelog
 
+## 10.0.1 - 2019-05-28
+* [#783](https://github.com/stripe/stripe-java/pull/783) Fix url-encoding for string id to throw exception on passing null
+
 ## 10.0.0 - 2019-05-24
 * [#781](https://github.com/stripe/stripe-java/pull/781) Pin library to API version `2019-05-16`
 
