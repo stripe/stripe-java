@@ -1,10 +1,12 @@
 package com.stripe.net;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.stripe.BaseStripeTest;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -30,10 +32,28 @@ public class StripeHeadersTest extends BaseStripeTest {
   }
 
   @Test
+  public void testDuplicatedKeyError() {
+    assertThrows(IllegalArgumentException.class, () -> {
+      final Map<String, List<String>> headerMap = new HashMap<>();
+      headerMap.put("Request-Id", Arrays.asList("req_123"));
+      headerMap.put("request-id", Arrays.asList("req_123"));
+
+      new StripeHeaders(headerMap);
+    });
+  }
+
+  @Test
   public void testGet() {
     final StripeHeaders headers = new StripeHeaders(generateHeaderMap());
     assertEquals("req_12345", headers.get("Request-Id"));
     assertEquals("FirstValue", headers.get("Multi-Val"));
+  }
+
+  @Test
+  public void testGetCaseInsensitive() {
+    final StripeHeaders headers = new StripeHeaders(generateHeaderMap());
+    assertEquals("req_12345", headers.get("request-id"));
+    assertEquals("FirstValue", headers.get("multi-val"));
   }
 
   @Test
