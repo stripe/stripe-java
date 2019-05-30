@@ -13,8 +13,8 @@ plugins {
     id 'java'
     id 'maven'
     id 'io.franzbecker.gradle-lombok' version '2.1'
+    id "com.diffplug.gradle.spotless" version "3.23.0"
     id "net.ltgt.errorprone" version "0.7.1"
-    id 'checkstyle'
     id 'net.saliman.cobertura' version '2.6.1'
     id 'com.github.kt3k.coveralls' version '2.8.2'
     id 'biz.aQute.bnd.builder' version '4.2.0'
@@ -118,8 +118,11 @@ test {
     }
 }
 
-checkstyle {
-    toolVersion = '8.19'
+spotless {
+  java {
+    googleJavaFormat('1.7')
+    removeUnusedImports()
+  }
 }
 
 cobertura {
