@@ -1,7 +1,4 @@
 {
-  "checkstyle.autocheck": true,
-  "checkstyle.version": "8.8",
-  "checkstyle.configurationFile": "./config/checkstyle/checkstyle.xml",
   "editor.renderWhitespace": "all",
   "[java]": {
     "editor.rulers": [
