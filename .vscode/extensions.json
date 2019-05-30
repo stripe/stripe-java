@@ -3,6 +3,7 @@
         "vscjava.vscode-java-pack",
         "shengchen.vscode-checkstyle",
         "GabrielBB.vscode-lombok",
-        "naco-siren.gradle-language"
+        "naco-siren.gradle-language",
+        "EditorConfig.editorconfig"
     ]
 }
