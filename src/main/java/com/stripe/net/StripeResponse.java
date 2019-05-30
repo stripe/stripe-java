@@ -9,18 +9,14 @@ public class StripeResponse {
   String body;
   StripeHeaders headers;
 
-  /**
-   * Constructs a Stripe response with the specified status code and body.
-   */
+  /** Constructs a Stripe response with the specified status code and body. */
   public StripeResponse(int code, String body) {
     this.code = code;
     this.body = body;
     this.headers = null;
   }
 
-  /**
-   * Constructs a Stripe response with the specified status code, body and headers.
-   */
+  /** Constructs a Stripe response with the specified status code, body and headers. */
   public StripeResponse(int code, String body, Map<String, List<String>> headers) {
     this.code = code;
     this.body = body;

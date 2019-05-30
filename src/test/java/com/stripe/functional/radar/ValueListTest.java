@@ -8,10 +8,8 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.radar.ValueList;
 import com.stripe.model.radar.ValueListCollection;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class ValueListTest extends BaseStripeTest {
@@ -32,11 +30,7 @@ public class ValueListTest extends BaseStripeTest {
     final ValueList valueList = ValueList.create(params);
 
     assertNotNull(valueList);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/radar/value_lists"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.POST, String.format("/v1/radar/value_lists"), params);
   }
 
   @Test
@@ -45,9 +39,7 @@ public class ValueListTest extends BaseStripeTest {
 
     assertNotNull(valueList);
     verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/radar/value_lists/%s", VALUE_LIST_ID)
-    );
+        ApiResource.RequestMethod.GET, String.format("/v1/radar/value_lists/%s", VALUE_LIST_ID));
   }
 
   @Test
@@ -65,8 +57,7 @@ public class ValueListTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/radar/value_lists/%s", valueList.getId()),
-        params
-    );
+        params);
   }
 
   @Test
@@ -77,10 +68,7 @@ public class ValueListTest extends BaseStripeTest {
     final ValueListCollection valueLists = ValueList.list(params);
 
     assertNotNull(valueLists);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/radar/value_lists")
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/radar/value_lists"));
   }
 
   @Test
@@ -93,7 +81,6 @@ public class ValueListTest extends BaseStripeTest {
     assertTrue(deletedValueList.getDeleted());
     verifyRequest(
         ApiResource.RequestMethod.DELETE,
-        String.format("/v1/radar/value_lists/%s", valueList.getId())
-    );
+        String.format("/v1/radar/value_lists/%s", valueList.getId()));
   }
 }

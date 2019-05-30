@@ -3,13 +3,13 @@ package com.stripe.model;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.stripe.BaseStripeTest;
-
 import org.junit.jupiter.api.Test;
 
 public class ExpandableFieldSerializerTest extends BaseStripeTest {
 
   private static class TestNestedObject implements HasId {
     String id;
+
     @SuppressWarnings("unused")
     int bar;
 

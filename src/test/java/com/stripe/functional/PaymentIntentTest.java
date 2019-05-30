@@ -12,7 +12,6 @@ import com.stripe.model.PaymentIntent;
 import com.stripe.model.PaymentIntentCollection;
 import com.stripe.model.Review;
 import com.stripe.net.ApiResource;
-
 import com.stripe.net.RequestOptions;
 import com.stripe.param.PaymentIntentListParams;
 import com.stripe.param.PaymentIntentRetrieveParams;
@@ -21,7 +20,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class PaymentIntentTest extends BaseStripeTest {
@@ -46,11 +44,7 @@ public class PaymentIntentTest extends BaseStripeTest {
     final PaymentIntent paymentIntent = PaymentIntent.create(params);
 
     assertNotNull(paymentIntent);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/payment_intents"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.POST, String.format("/v1/payment_intents"), params);
   }
 
   @Test
@@ -59,25 +53,24 @@ public class PaymentIntentTest extends BaseStripeTest {
 
     assertNotNull(paymentIntent);
     verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/payment_intents/%s", PAYMENT_INTENT_ID)
-    );
+        ApiResource.RequestMethod.GET, String.format("/v1/payment_intents/%s", PAYMENT_INTENT_ID));
   }
 
   @Test
   public void testRetrieveExpandWithTypedParam() throws StripeException {
     // expansion fields and the resulting verification is copied
     // from `model/PaymentIntentTest`
-    PaymentIntentRetrieveParams typedParams = PaymentIntentRetrieveParams.builder()
-        // support both adding individual element and the whole list
-        .addExpand("application")
-        .addExpand("customer")
-        .addExpand("on_behalf_of")
-        .addAllExpand(Arrays.asList("review", "transfer_data.destination"))
-        .build();
+    PaymentIntentRetrieveParams typedParams =
+        PaymentIntentRetrieveParams.builder()
+            // support both adding individual element and the whole list
+            .addExpand("application")
+            .addExpand("customer")
+            .addExpand("on_behalf_of")
+            .addAllExpand(Arrays.asList("review", "transfer_data.destination"))
+            .build();
 
-    final PaymentIntent resource = PaymentIntent.retrieve(PAYMENT_INTENT_ID, typedParams,
-        RequestOptions.getDefault());
+    final PaymentIntent resource =
+        PaymentIntent.retrieve(PAYMENT_INTENT_ID, typedParams, RequestOptions.getDefault());
 
     assertNotNull(resource);
     assertNotNull(resource.getId());
@@ -108,8 +101,7 @@ public class PaymentIntentTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.GET,
         String.format("/v1/payment_intents/%s", PAYMENT_INTENT_ID),
-        typedParams.toMap()
-    );
+        typedParams.toMap());
   }
 
   @Test
@@ -127,8 +119,7 @@ public class PaymentIntentTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/payment_intents/%s", paymentIntent.getId()),
-        params
-    );
+        params);
   }
 
   @Test
@@ -139,29 +130,20 @@ public class PaymentIntentTest extends BaseStripeTest {
     final PaymentIntentCollection paymentIntents = PaymentIntent.list(params);
 
     assertNotNull(paymentIntents);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/payment_intents"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/payment_intents"), params);
   }
 
   @Test
   public void testListWithTypedParams() throws StripeException {
     final Map<String, Object> params = new HashMap<>();
     params.put("limit", 1);
-    PaymentIntentListParams listParams = PaymentIntentListParams.builder()
-        .setLimit(1L).build();
+    PaymentIntentListParams listParams = PaymentIntentListParams.builder().setLimit(1L).build();
 
-    final PaymentIntentCollection paymentIntents = PaymentIntent.list(listParams,
-        RequestOptions.getDefault());
+    final PaymentIntentCollection paymentIntents =
+        PaymentIntent.list(listParams, RequestOptions.getDefault());
 
     assertNotNull(paymentIntents);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/payment_intents"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/payment_intents"), params);
   }
 
   @Test
@@ -172,8 +154,7 @@ public class PaymentIntentTest extends BaseStripeTest {
     assertNotNull(cancelledPaymentIntent);
     verifyRequest(
         ApiResource.RequestMethod.POST,
-        String.format("/v1/payment_intents/%s/cancel", paymentIntent.getId())
-    );
+        String.format("/v1/payment_intents/%s/cancel", paymentIntent.getId()));
   }
 
   @Test
@@ -184,8 +165,7 @@ public class PaymentIntentTest extends BaseStripeTest {
     assertNotNull(capturedPaymentIntent);
     verifyRequest(
         ApiResource.RequestMethod.POST,
-        String.format("/v1/payment_intents/%s/capture", paymentIntent.getId())
-    );
+        String.format("/v1/payment_intents/%s/capture", paymentIntent.getId()));
   }
 
   @Test
@@ -196,7 +176,6 @@ public class PaymentIntentTest extends BaseStripeTest {
     assertNotNull(confirmedPaymentIntent);
     verifyRequest(
         ApiResource.RequestMethod.POST,
-        String.format("/v1/payment_intents/%s/confirm", paymentIntent.getId())
-    );
+        String.format("/v1/payment_intents/%s/confirm", paymentIntent.getId()));
   }
 }

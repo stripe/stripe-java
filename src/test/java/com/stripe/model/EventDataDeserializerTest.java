@@ -4,7 +4,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.net.ApiResource;
-
 import org.junit.jupiter.api.Test;
 
 public class EventDataDeserializerTest extends BaseStripeTest {
@@ -20,10 +19,9 @@ public class EventDataDeserializerTest extends BaseStripeTest {
     // Using deserializeUnsafe() because the fixture uses an older API version
     assertNotNull(event.getDataObjectDeserializer().deserializeUnsafe());
 
-    final Application application
-        = (Application) event.getDataObjectDeserializer().deserializeUnsafe();
+    final Application application =
+        (Application) event.getDataObjectDeserializer().deserializeUnsafe();
     assertNotNull(application);
     assertNotNull(application.getId());
   }
-
 }

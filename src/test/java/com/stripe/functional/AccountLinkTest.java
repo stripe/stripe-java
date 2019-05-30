@@ -6,10 +6,8 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.AccountLink;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class AccountLinkTest extends BaseStripeTest {
@@ -24,10 +22,6 @@ public class AccountLinkTest extends BaseStripeTest {
     final AccountLink accountLink = AccountLink.create(params);
 
     assertNotNull(accountLink);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/account_links"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.POST, String.format("/v1/account_links"), params);
   }
 }

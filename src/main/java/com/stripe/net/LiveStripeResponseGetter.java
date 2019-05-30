@@ -2,7 +2,6 @@ package com.stripe.net;
 
 import com.google.gson.JsonObject;
 import com.google.gson.JsonSyntaxException;
-
 import com.stripe.Stripe;
 import com.stripe.exception.ApiConnectionException;
 import com.stripe.exception.ApiException;
@@ -22,7 +21,6 @@ import com.stripe.exception.oauth.UnsupportedResponseTypeException;
 import com.stripe.model.StripeError;
 import com.stripe.model.StripeObject;
 import com.stripe.model.oauth.OAuthError;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -44,7 +42,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 import java.util.concurrent.ConcurrentLinkedQueue;
-
 import lombok.Cleanup;
 
 public class LiveStripeResponseGetter implements StripeResponseGetter {
@@ -66,8 +63,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
    * URLStreamHandler; Settings the property should not be needed in most
    * environments.
    */
-  private static final String CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME
-      = "com.stripe.net.customURLStreamHandler";
+  private static final String CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME =
+      "com.stripe.net.customURLStreamHandler";
 
   @Override
   public <T> T request(
@@ -93,8 +90,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     return staticOAuthRequest(method, url, params, clazz, type, options);
   }
 
-  private static String urlEncodePair(String k, String v)
-      throws UnsupportedEncodingException {
+  private static String urlEncodePair(String k, String v) throws UnsupportedEncodingException {
     return String.format("%s=%s", ApiResource.urlEncode(k), ApiResource.urlEncode(v));
   }
 
@@ -124,9 +120,15 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     headers.put("Authorization", String.format("Bearer %s", options.getApiKey()));
 
     // debug headers
-    String[] propertyNames = {"os.name", "os.version", "os.arch",
-        "java.version", "java.vendor", "java.vm.version",
-        "java.vm.vendor"};
+    String[] propertyNames = {
+      "os.name",
+      "os.version",
+      "os.arch",
+      "java.version",
+      "java.vendor",
+      "java.vm.version",
+      "java.vm.vendor"
+    };
     Map<String, String> propertyMap = new HashMap<>();
     for (String propertyName : propertyNames) {
       propertyMap.put(propertyName, System.getProperty(propertyName));
@@ -146,8 +148,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     } else if (options.getStripeVersion() != null) {
       headers.put("Stripe-Version", options.getStripeVersion());
     } else {
-      throw new IllegalStateException("Either `stripeVersion`, or `stripeVersionOverride` "
-          + "value must be set.");
+      throw new IllegalStateException(
+          "Either `stripeVersion`, or `stripeVersionOverride` " + "value must be set.");
     }
     if (options.getIdempotencyKey() != null) {
       headers.put("Idempotency-Key", options.getIdempotencyKey());
@@ -158,26 +160,25 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
     RequestMetrics lastRequestMetrics = prevRequestMetrics.poll();
     if (Stripe.enableTelemetry && lastRequestMetrics != null) {
-      headers.put("X-Stripe-Client-Telemetry",
-          ApiResource.GSON.toJson(lastRequestMetrics.payload()));
+      headers.put(
+          "X-Stripe-Client-Telemetry", ApiResource.GSON.toJson(lastRequestMetrics.payload()));
     }
 
     return headers;
   }
 
   @SuppressWarnings("unchecked")
-  private static HttpURLConnection createStripeConnection(
-      String url, RequestOptions options) throws IOException {
+  private static HttpURLConnection createStripeConnection(String url, RequestOptions options)
+      throws IOException {
     URL stripeUrl;
-    String customUrlStreamHandlerClassName = System.getProperty(
-        CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME, null);
+    String customUrlStreamHandlerClassName =
+        System.getProperty(CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME, null);
     if (customUrlStreamHandlerClassName != null) {
       // instantiate the custom handler provided
       try {
-        Class<URLStreamHandler> clazz = (Class<URLStreamHandler>) Class
-            .forName(customUrlStreamHandlerClassName);
-        Constructor<URLStreamHandler> constructor = clazz
-            .getConstructor();
+        Class<URLStreamHandler> clazz =
+            (Class<URLStreamHandler>) Class.forName(customUrlStreamHandlerClassName);
+        Constructor<URLStreamHandler> constructor = clazz.getConstructor();
         URLStreamHandler customHandler = constructor.newInstance();
         stripeUrl = new URL(null, url, customHandler);
       } catch (ClassNotFoundException e) {
@@ -201,12 +202,13 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     HttpURLConnection conn;
     if (Stripe.getConnectionProxy() != null) {
       conn = (HttpURLConnection) stripeUrl.openConnection(Stripe.getConnectionProxy());
-      Authenticator.setDefault(new Authenticator() {
-        @Override
-        protected PasswordAuthentication getPasswordAuthentication() {
-          return Stripe.getProxyCredential();
-        }
-      });
+      Authenticator.setDefault(
+          new Authenticator() {
+            @Override
+            protected PasswordAuthentication getPasswordAuthentication() {
+              return Stripe.getProxyCredential();
+            }
+          });
     } else {
       conn = (HttpURLConnection) stripeUrl.openConnection();
     }
@@ -245,8 +247,9 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
     conn.setDoOutput(true);
     conn.setRequestMethod("POST");
-    conn.setRequestProperty("Content-Type", String.format(
-        "application/x-www-form-urlencoded;charset=%s", ApiResource.CHARSET));
+    conn.setRequestProperty(
+        "Content-Type",
+        String.format("application/x-www-form-urlencoded;charset=%s", ApiResource.CHARSET));
 
     @Cleanup OutputStream output = conn.getOutputStream();
     output.write(query.getBytes(ApiResource.CHARSET));
@@ -257,8 +260,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   private static HttpURLConnection createDeleteConnection(
       String url, String query, RequestOptions options) throws IOException {
     String deleteUrl = formatUrl(url, query);
-    HttpURLConnection conn = createStripeConnection(
-        deleteUrl, options);
+    HttpURLConnection conn = createStripeConnection(deleteUrl, options);
     conn.setRequestMethod("DELETE");
 
     return conn;
@@ -286,9 +288,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     return flattenParamsMap(params, null);
   }
 
-  private static List<Parameter> flattenParamsCollection(Collection<Object> params,
-                                                         String keyPrefix)
-      throws InvalidRequestException {
+  private static List<Parameter> flattenParamsCollection(
+      Collection<Object> params, String keyPrefix) throws InvalidRequestException {
     List<Parameter> flatParams = new ArrayList<>();
     // Rely on the collection specific implementation for iterator to provide the order and the
     // indices of elements in the array encoding
@@ -364,20 +365,34 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     } else if (value instanceof Object[]) {
       flatParams = flattenParamsArray((Object[]) value, keyPrefix);
     } else if ("".equals(value)) {
-      throw new InvalidRequestException("You cannot set '" + keyPrefix + "' to an empty string. "
-          + "We interpret empty strings as null in requests. "
-          + "You may set '" + keyPrefix + "' to null to delete the property.",
-          keyPrefix, null, null, 0, null);
+      throw new InvalidRequestException(
+          "You cannot set '"
+              + keyPrefix
+              + "' to an empty string. "
+              + "We interpret empty strings as null in requests. "
+              + "You may set '"
+              + keyPrefix
+              + "' to null to delete the property.",
+          keyPrefix,
+          null,
+          null,
+          0,
+          null);
     } else if (value == null) {
       flatParams = new ArrayList<>();
       flatParams.add(new Parameter(keyPrefix, ""));
     } else if ((value instanceof File) || (value instanceof InputStream)) {
-      throw new InvalidRequestException(String.format(
-          "java.io.File or java.io.InputStream %s is not supported at '%s' parameter. "
-          + "Please check our API reference for the parameter type, "
-          + "or use the provided parameter class instead.",
-          value, keyPrefix),
-          keyPrefix, null, null, 0, null);
+      throw new InvalidRequestException(
+          String.format(
+              "java.io.File or java.io.InputStream %s is not supported at '%s' parameter. "
+                  + "Please check our API reference for the parameter type, "
+                  + "or use the provided parameter class instead.",
+              value, keyPrefix),
+          keyPrefix,
+          null,
+          null,
+          0,
+          null);
     } else {
       flatParams = new ArrayList<>();
       flatParams.add(new Parameter(keyPrefix, value.toString()));
@@ -389,8 +404,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   private static ConcurrentLinkedQueue<RequestMetrics> prevRequestMetrics =
       new ConcurrentLinkedQueue<RequestMetrics>();
 
-  private static String getResponseBody(InputStream responseStream)
-      throws IOException {
+  private static String getResponseBody(InputStream responseStream) throws IOException {
     try (final Scanner scanner = new Scanner(responseStream, ApiResource.CHARSET)) {
       // \A is the beginning of the stream boundary
       final String responseBody = scanner.useDelimiter("\\A").next();
@@ -400,8 +414,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   }
 
   private static StripeResponse makeUrlConnectionRequest(
-      ApiResource.RequestMethod method, String url, String query,
-      RequestOptions options) throws ApiConnectionException {
+      ApiResource.RequestMethod method, String url, String query, RequestOptions options)
+      throws ApiConnectionException {
     HttpURLConnection conn = null;
     try {
       switch (method) {
@@ -442,7 +456,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
                   + "Please check your internet connection and try again. If this problem persists,"
                   + "you should check Stripe's service status at https://twitter.com/stripestatus,"
                   + " or let us know at support@stripe.com.",
-              Stripe.getApiBase(), e.getMessage()), e);
+              Stripe.getApiBase(), e.getMessage()),
+          e);
     } finally {
       if (conn != null) {
         conn.disconnect();
@@ -451,10 +466,13 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   }
 
   private static StripeResponse rawRequest(
-      ApiResource.RequestMethod method, String url, Map<String, Object> params,
-      ApiResource.RequestType type, RequestOptions options)
+      ApiResource.RequestMethod method,
+      String url,
+      Map<String, Object> params,
+      ApiResource.RequestType type,
+      RequestOptions options)
       throws AuthenticationException, InvalidRequestException, ApiConnectionException,
-      ApiException {
+          ApiException {
     if (options == null) {
       options = RequestOptions.getDefault();
     }
@@ -462,8 +480,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     Boolean allowedToSetTtl = true;
 
     try {
-      originalDnsCacheTtl = java.security.Security
-          .getProperty(DNS_CACHE_TTL_PROPERTY_NAME);
+      originalDnsCacheTtl = java.security.Security.getProperty(DNS_CACHE_TTL_PROPERTY_NAME);
       // Disable the DNS cache.
       //
       // Unfortunately the original author of this change didn't leave a
@@ -473,8 +490,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       // good defaults though, so if the user hasn't touched this value,
       // don't touch it either.
       if (originalDnsCacheTtl != null) {
-        java.security.Security
-            .setProperty(DNS_CACHE_TTL_PROPERTY_NAME, "0");
+        java.security.Security.setProperty(DNS_CACHE_TTL_PROPERTY_NAME, "0");
       }
     } catch (SecurityException se) {
       allowedToSetTtl = false;
@@ -487,7 +503,9 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
               + "You can generate API keys from the Stripe web interface. "
               + "See https://stripe.com/api for details or email support@stripe.com if you have "
               + "questions.",
-          null, null, 0);
+          null,
+          null,
+          0);
     }
 
     try {
@@ -497,8 +515,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
           response = getStripeResponse(method, url, params, options);
           break;
         case MULTIPART:
-          response = getMultipartStripeResponse(method, url, params,
-              options);
+          response = getMultipartStripeResponse(method, url, params, options);
           break;
         default:
           throw new RuntimeException(
@@ -509,15 +526,18 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       return response;
     } finally {
       if (allowedToSetTtl && originalDnsCacheTtl != null) {
-        java.security.Security.setProperty(
-            DNS_CACHE_TTL_PROPERTY_NAME, originalDnsCacheTtl);
+        java.security.Security.setProperty(DNS_CACHE_TTL_PROPERTY_NAME, originalDnsCacheTtl);
       }
     }
   }
 
   private static <T> T staticRequest(
-      ApiResource.RequestMethod method, String url, Map<String, Object> params,
-      Class<T> clazz, ApiResource.RequestType type, RequestOptions options)
+      ApiResource.RequestMethod method,
+      String url,
+      Map<String, Object> params,
+      Class<T> clazz,
+      ApiResource.RequestType type,
+      RequestOptions options)
       throws StripeException {
     long requestStartMs = System.currentTimeMillis();
 
@@ -541,7 +561,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     }
 
     if (resource instanceof StripeObject) {
-      StripeObject obj = (StripeObject)resource;
+      StripeObject obj = (StripeObject) resource;
       obj.setLastResponse(response);
     }
 
@@ -553,8 +573,12 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   }
 
   private static <T> T staticOAuthRequest(
-      ApiResource.RequestMethod method, String url, Map<String, Object> params,
-      Class<T> clazz, ApiResource.RequestType type, RequestOptions options)
+      ApiResource.RequestMethod method,
+      String url,
+      Map<String, Object> params,
+      Class<T> clazz,
+      ApiResource.RequestType type,
+      RequestOptions options)
       throws StripeException {
     StripeResponse response = rawRequest(method, url, params, type, options);
 
@@ -577,33 +601,44 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   }
 
   private static StripeResponse getStripeResponse(
-      ApiResource.RequestMethod method, String url,
-      Map<String, Object> params, RequestOptions options)
-      throws InvalidRequestException, ApiConnectionException,
-      ApiException {
+      ApiResource.RequestMethod method,
+      String url,
+      Map<String, Object> params,
+      RequestOptions options)
+      throws InvalidRequestException, ApiConnectionException, ApiException {
     String query;
     try {
       query = createQuery(params);
     } catch (UnsupportedEncodingException e) {
-      throw new InvalidRequestException("Unable to encode parameters to "
-          + ApiResource.CHARSET
-          + ". Please contact support@stripe.com for assistance.",
-          null, null, null, 0, e);
+      throw new InvalidRequestException(
+          "Unable to encode parameters to "
+              + ApiResource.CHARSET
+              + ". Please contact support@stripe.com for assistance.",
+          null,
+          null,
+          null,
+          0,
+          e);
     }
 
     return makeUrlConnectionRequest(method, url, query, options);
   }
 
   private static StripeResponse getMultipartStripeResponse(
-      ApiResource.RequestMethod method, String url,
-      Map<String, Object> params, RequestOptions options)
-      throws InvalidRequestException, ApiConnectionException,
-      ApiException {
+      ApiResource.RequestMethod method,
+      String url,
+      Map<String, Object> params,
+      RequestOptions options)
+      throws InvalidRequestException, ApiConnectionException, ApiException {
 
     if (method != ApiResource.RequestMethod.POST) {
       throw new InvalidRequestException(
-          "Multipart requests for HTTP methods other than POST "
-              + "are currently not supported.", null, null, null, 0, null);
+          "Multipart requests for HTTP methods other than POST " + "are currently not supported.",
+          null,
+          null,
+          null,
+          0,
+          null);
     }
 
     java.net.HttpURLConnection conn = null;
@@ -613,8 +648,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       String boundary = MultipartProcessor.getBoundary();
       conn.setDoOutput(true);
       conn.setRequestMethod("POST");
-      conn.setRequestProperty("Content-Type", String.format(
-          "multipart/form-data; boundary=%s", boundary));
+      conn.setRequestProperty(
+          "Content-Type", String.format("multipart/form-data; boundary=%s", boundary));
 
       MultipartProcessor multipartProcessor = null;
       try {
@@ -646,24 +681,25 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
                   + "Please check your internet connection and try again. If this problem persists,"
                   + "you should check Stripe's service status at https://twitter.com/stripestatus,"
                   + " or let us know at support@stripe.com.",
-              Stripe.getApiBase(), e.getMessage()), e);
+              Stripe.getApiBase(), e.getMessage()),
+          e);
     } finally {
       if (conn != null) {
         conn.disconnect();
       }
     }
-
   }
 
   /**
-   * Encode multipart params as a counter-part method to {@link this#createQuery(Map)} for
-   * encoding params for non-multipart request.
-   * @param multipartProcessor        multi-part processor handling encoding of input stream and
-   *                                  basic key-value forms.
-   * @param params                    parameter map that can contain file or input stream.
+   * Encode multipart params as a counter-part method to {@link this#createQuery(Map)} for encoding
+   * params for non-multipart request.
+   *
+   * @param multipartProcessor multi-part processor handling encoding of input stream and basic
+   *     key-value forms.
+   * @param params parameter map that can contain file or input stream.
    */
-  static void encodeMultipartParams(MultipartProcessor multipartProcessor,
-                                    Map<String, Object> params)
+  static void encodeMultipartParams(
+      MultipartProcessor multipartProcessor, Map<String, Object> params)
       throws InvalidRequestException, IOException {
 
     for (Map.Entry<String, Object> entry : params.entrySet()) {
@@ -673,27 +709,32 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       if (value instanceof File) {
         File currentFile = (File) value;
         if (!currentFile.exists()) {
-          throw new InvalidRequestException("File for key "
-              + key + " must exist.", null, null, null, 0, null);
+          throw new InvalidRequestException(
+              "File for key " + key + " must exist.", null, null, null, 0, null);
         } else if (!currentFile.isFile()) {
-          throw new InvalidRequestException("File for key "
-              + key
-              + " must be a file and not a directory.",
-              null, null, null, 0, null);
+          throw new InvalidRequestException(
+              "File for key " + key + " must be a file and not a directory.",
+              null,
+              null,
+              null,
+              0,
+              null);
         } else if (!currentFile.canRead()) {
           throw new InvalidRequestException(
-              "Must have read permissions on file for key "
-                  + key + ".", null, null, null, 0, null);
+              "Must have read permissions on file for key " + key + ".", null, null, null, 0, null);
         }
-        multipartProcessor.addFileField(key, currentFile.getName(),
-            new FileInputStream(currentFile));
+        multipartProcessor.addFileField(
+            key, currentFile.getName(), new FileInputStream(currentFile));
       } else if (value instanceof InputStream) {
         @Cleanup InputStream inputStream = (InputStream) value;
         if (inputStream.available() == 0) {
           throw new InvalidRequestException(
-            "Must have available bytes to read on InputStream for key "
-              + key + ".", null, null, null, 0, null
-          );
+              "Must have available bytes to read on InputStream for key " + key + ".",
+              null,
+              null,
+              null,
+              0,
+              null);
         }
         multipartProcessor.addFileField(key, "blob", inputStream);
       } else {
@@ -705,13 +746,16 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     }
   }
 
-  private static void raiseMalformedJsonError(String responseBody, int responseCode,
-      String requestId) throws ApiException {
+  private static void raiseMalformedJsonError(
+      String responseBody, int responseCode, String requestId) throws ApiException {
     throw new ApiException(
-      String.format(
-          "Invalid response object from API: %s. (HTTP response code was %d)",
-          responseBody, responseCode),
-      requestId, null, responseCode, null);
+        String.format(
+            "Invalid response object from API: %s. (HTTP response code was %d)",
+            responseBody, responseCode),
+        requestId,
+        null,
+        responseCode,
+        null);
   }
 
   private static void handleApiError(StripeResponse response) throws StripeException {
@@ -719,8 +763,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     StripeException exception = null;
 
     try {
-      JsonObject jsonObject = ApiResource.GSON.fromJson(response.body(), JsonObject.class)
-          .getAsJsonObject("error");
+      JsonObject jsonObject =
+          ApiResource.GSON.fromJson(response.body(), JsonObject.class).getAsJsonObject("error");
       error = ApiResource.GSON.fromJson(jsonObject, StripeError.class);
     } catch (JsonSyntaxException e) {
       raiseMalformedJsonError(response.body(), response.code(), response.requestId());
@@ -735,32 +779,56 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       case 400:
       case 404:
         if ("idempotency_error".equals(error.getType())) {
-          exception =  new IdempotencyException(error.getMessage(), response.requestId(),
-              error.getCode(), response.code());
+          exception =
+              new IdempotencyException(
+                  error.getMessage(), response.requestId(), error.getCode(), response.code());
         } else {
-          exception = new InvalidRequestException(error.getMessage(), error.getParam(),
-              response.requestId(), error.getCode(), response.code(), null);
+          exception =
+              new InvalidRequestException(
+                  error.getMessage(),
+                  error.getParam(),
+                  response.requestId(),
+                  error.getCode(),
+                  response.code(),
+                  null);
         }
         break;
       case 401:
-        exception = new AuthenticationException(error.getMessage(), response.requestId(),
-            error.getCode(), response.code());
+        exception =
+            new AuthenticationException(
+                error.getMessage(), response.requestId(), error.getCode(), response.code());
         break;
       case 402:
-        exception = new CardException(error.getMessage(), response.requestId(), error.getCode(),
-            error.getParam(), error.getDeclineCode(), error.getCharge(), response.code(), null);
+        exception =
+            new CardException(
+                error.getMessage(),
+                response.requestId(),
+                error.getCode(),
+                error.getParam(),
+                error.getDeclineCode(),
+                error.getCharge(),
+                response.code(),
+                null);
         break;
       case 403:
-        exception =  new PermissionException(error.getMessage(), response.requestId(),
-            error.getCode(), response.code());
+        exception =
+            new PermissionException(
+                error.getMessage(), response.requestId(), error.getCode(), response.code());
         break;
       case 429:
-        exception = new RateLimitException(error.getMessage(), error.getParam(),
-            response.requestId(), error.getCode(), response.code(), null);
+        exception =
+            new RateLimitException(
+                error.getMessage(),
+                error.getParam(),
+                response.requestId(),
+                error.getCode(),
+                response.code(),
+                null);
         break;
       default:
-        exception = new ApiException(error.getMessage(), response.requestId(), error.getCode(),
-            response.code(), null);
+        exception =
+            new ApiException(
+                error.getMessage(), response.requestId(), error.getCode(), response.code(), null);
         break;
     }
 
@@ -789,28 +857,34 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
     switch (code) {
       case "invalid_client":
-        exception = new InvalidClientException(code, description, response.requestId(),
-            response.code(), null);
+        exception =
+            new InvalidClientException(
+                code, description, response.requestId(), response.code(), null);
         break;
       case "invalid_grant":
-        exception = new InvalidGrantException(code, description, response.requestId(),
-            response.code(), null);
+        exception =
+            new InvalidGrantException(
+                code, description, response.requestId(), response.code(), null);
         break;
       case "invalid_request":
-        exception = new com.stripe.exception.oauth.InvalidRequestException(code, description,
-            response.requestId(), response.code(), null);
+        exception =
+            new com.stripe.exception.oauth.InvalidRequestException(
+                code, description, response.requestId(), response.code(), null);
         break;
       case "invalid_scope":
-        exception = new InvalidScopeException(code, description, response.requestId(),
-            response.code(), null);
+        exception =
+            new InvalidScopeException(
+                code, description, response.requestId(), response.code(), null);
         break;
       case "unsupported_grant_type":
-        exception = new UnsupportedGrantTypeException(code, description, response.requestId(),
-            response.code(), null);
+        exception =
+            new UnsupportedGrantTypeException(
+                code, description, response.requestId(), response.code(), null);
         break;
       case "unsupported_response_type":
-        exception = new UnsupportedResponseTypeException(code, description, response.requestId(),
-            response.code(), null);
+        exception =
+            new UnsupportedResponseTypeException(
+                code, description, response.requestId(), response.code(), null);
         break;
       default:
         exception = new ApiException(code, response.requestId(), null, response.code(), null);

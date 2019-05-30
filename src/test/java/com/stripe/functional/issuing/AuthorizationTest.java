@@ -7,12 +7,9 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.issuing.Authorization;
 import com.stripe.model.issuing.AuthorizationCollection;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
-
 
 public class AuthorizationTest extends BaseStripeTest {
   public static final String AUTHORIZATION_ID = "iauth_123";
@@ -27,8 +24,7 @@ public class AuthorizationTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/issuing/authorizations/%s/approve", authorization.getId()),
-        null
-    );
+        null);
   }
 
   @Test
@@ -41,8 +37,7 @@ public class AuthorizationTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/issuing/authorizations/%s/decline", authorization.getId()),
-        null
-    );
+        null);
   }
 
   @Test
@@ -52,8 +47,7 @@ public class AuthorizationTest extends BaseStripeTest {
     assertNotNull(authorization);
     verifyRequest(
         ApiResource.RequestMethod.GET,
-        String.format("/v1/issuing/authorizations/%s", AUTHORIZATION_ID)
-    );
+        String.format("/v1/issuing/authorizations/%s", AUTHORIZATION_ID));
   }
 
   @Test
@@ -71,8 +65,7 @@ public class AuthorizationTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/issuing/authorizations/%s", authorization.getId()),
-        params
-    );
+        params);
   }
 
   @Test
@@ -84,9 +77,6 @@ public class AuthorizationTest extends BaseStripeTest {
 
     assertNotNull(authorizations);
     verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/issuing/authorizations"),
-        params
-    );
+        ApiResource.RequestMethod.GET, String.format("/v1/issuing/authorizations"), params);
   }
 }

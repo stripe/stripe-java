@@ -7,10 +7,8 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.OrderReturn;
 import com.stripe.model.OrderReturnCollection;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class OrderReturnTest extends BaseStripeTest {
@@ -21,10 +19,7 @@ public class OrderReturnTest extends BaseStripeTest {
     final OrderReturn orderReturn = OrderReturn.retrieve(RETURN_ID);
 
     assertNotNull(orderReturn);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/order_returns/%s", RETURN_ID)
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/order_returns/%s", RETURN_ID));
   }
 
   @Test
@@ -35,10 +30,6 @@ public class OrderReturnTest extends BaseStripeTest {
     final OrderReturnCollection orderReturns = OrderReturn.list(params);
 
     assertNotNull(orderReturns);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        "/v1/order_returns",
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, "/v1/order_returns", params);
   }
 }

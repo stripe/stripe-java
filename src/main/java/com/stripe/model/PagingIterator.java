@@ -3,7 +3,6 @@ package com.stripe.model;
 import com.stripe.Stripe;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
-
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
@@ -53,8 +52,7 @@ public class PagingIterator<T extends HasId> extends ApiResource implements Iter
 
         this.currentCollection = list(params, currentCollection.getRequestOptions());
 
-        this.currentDataIterator =
-            currentCollection.getData().iterator();
+        this.currentDataIterator = currentCollection.getData().iterator();
       } catch (final Exception e) {
         throw new RuntimeException("Unable to lazy-load stripe objects", e);
       }
@@ -76,9 +74,7 @@ public class PagingIterator<T extends HasId> extends ApiResource implements Iter
 
   @SuppressWarnings("unchecked")
   private StripeCollectionInterface<T> list(
-      final Map<String, Object> params,
-      final RequestOptions options
-  ) throws Exception {
+      final Map<String, Object> params, final RequestOptions options) throws Exception {
     return ApiResource.requestCollection(url, params, collectionType, options);
   }
 }

@@ -8,10 +8,8 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.terminal.Reader;
 import com.stripe.model.terminal.ReaderCollection;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class ReaderTest extends BaseStripeTest {
@@ -26,11 +24,7 @@ public class ReaderTest extends BaseStripeTest {
     final Reader reader = Reader.create(params);
 
     assertNotNull(reader);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/terminal/readers"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.POST, String.format("/v1/terminal/readers"), params);
   }
 
   @Test
@@ -39,9 +33,7 @@ public class ReaderTest extends BaseStripeTest {
 
     assertNotNull(reader);
     verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/terminal/readers/%s", READER_ID)
-    );
+        ApiResource.RequestMethod.GET, String.format("/v1/terminal/readers/%s", READER_ID));
   }
 
   @Test
@@ -57,8 +49,7 @@ public class ReaderTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/terminal/readers/%s", reader.getId()),
-        params
-    );
+        params);
   }
 
   @Test
@@ -69,11 +60,7 @@ public class ReaderTest extends BaseStripeTest {
     ReaderCollection resources = Reader.list(params);
 
     assertNotNull(resources);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/terminal/readers"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/terminal/readers"), params);
   }
 
   @Test
@@ -85,8 +72,6 @@ public class ReaderTest extends BaseStripeTest {
     assertNotNull(deletedReader);
     assertTrue(deletedReader.getDeleted());
     verifyRequest(
-        ApiResource.RequestMethod.DELETE,
-        String.format("/v1/terminal/readers/%s", reader.getId())
-    );
+        ApiResource.RequestMethod.DELETE, String.format("/v1/terminal/readers/%s", reader.getId()));
   }
 }

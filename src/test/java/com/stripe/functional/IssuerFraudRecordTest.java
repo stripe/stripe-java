@@ -7,11 +7,9 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.IssuerFraudRecord;
 import com.stripe.model.IssuerFraudRecordCollection;
 import com.stripe.net.ApiResource;
-
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class IssuerFraudRecordTest extends BaseStripeTest {
@@ -23,9 +21,7 @@ public class IssuerFraudRecordTest extends BaseStripeTest {
 
     assertNotNull(record);
     verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/issuer_fraud_records/%s", RECORD_ID)
-    );
+        ApiResource.RequestMethod.GET, String.format("/v1/issuer_fraud_records/%s", RECORD_ID));
   }
 
   @Test
@@ -36,10 +32,6 @@ public class IssuerFraudRecordTest extends BaseStripeTest {
     final IssuerFraudRecordCollection records = IssuerFraudRecord.list(params);
 
     assertNotNull(records);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        "/v1/issuer_fraud_records",
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, "/v1/issuer_fraud_records", params);
   }
 }

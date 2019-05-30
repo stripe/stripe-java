@@ -4,13 +4,11 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.stripe.BaseStripeTest;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class StripeHeadersTest extends BaseStripeTest {
@@ -33,13 +31,15 @@ public class StripeHeadersTest extends BaseStripeTest {
 
   @Test
   public void testDuplicatedKeyError() {
-    assertThrows(IllegalArgumentException.class, () -> {
-      final Map<String, List<String>> headerMap = new HashMap<>();
-      headerMap.put("Request-Id", Arrays.asList("req_123"));
-      headerMap.put("request-id", Arrays.asList("req_123"));
+    assertThrows(
+        IllegalArgumentException.class,
+        () -> {
+          final Map<String, List<String>> headerMap = new HashMap<>();
+          headerMap.put("Request-Id", Arrays.asList("req_123"));
+          headerMap.put("request-id", Arrays.asList("req_123"));
 
-      new StripeHeaders(headerMap);
-    });
+          new StripeHeaders(headerMap);
+        });
   }
 
   @Test

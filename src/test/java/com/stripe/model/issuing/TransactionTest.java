@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import com.stripe.BaseStripeTest;
 import com.stripe.model.BalanceTransaction;
 import com.stripe.net.ApiResource;
-
 import org.junit.jupiter.api.Test;
 
 public class TransactionTest extends BaseStripeTest {
@@ -23,10 +22,7 @@ public class TransactionTest extends BaseStripeTest {
   @Test
   public void testDeserializeWithExpansions() throws Exception {
     final String[] expansions = {
-      "authorization",
-      "balance_transaction",
-      "card",
-      "cardholder",
+      "authorization", "balance_transaction", "card", "cardholder",
     };
     final String data = getFixture("/v1/issuing/transactions/ipi_123", expansions);
     final Transaction transaction = ApiResource.GSON.fromJson(data, Transaction.class);

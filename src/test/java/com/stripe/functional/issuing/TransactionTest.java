@@ -7,12 +7,9 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.issuing.Transaction;
 import com.stripe.model.issuing.TransactionCollection;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
-
 
 public class TransactionTest extends BaseStripeTest {
   public static final String TRANSACTION_ID = "ipi_123";
@@ -24,8 +21,7 @@ public class TransactionTest extends BaseStripeTest {
     assertNotNull(transaction);
     verifyRequest(
         ApiResource.RequestMethod.GET,
-        String.format("/v1/issuing/transactions/%s", TRANSACTION_ID)
-    );
+        String.format("/v1/issuing/transactions/%s", TRANSACTION_ID));
   }
 
   @Test
@@ -43,8 +39,7 @@ public class TransactionTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/issuing/transactions/%s", transaction.getId()),
-        params
-    );
+        params);
   }
 
   @Test
@@ -55,10 +50,6 @@ public class TransactionTest extends BaseStripeTest {
     TransactionCollection transactions = Transaction.list(params);
 
     assertNotNull(transactions);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/issuing/transactions"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/issuing/transactions"), params);
   }
 }

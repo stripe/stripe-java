@@ -7,12 +7,9 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.reporting.ReportRun;
 import com.stripe.model.reporting.ReportRunCollection;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
-
 
 public class ReportRunTest extends BaseStripeTest {
   public static final String REPORT_RUN_ID = "frr_123";
@@ -26,10 +23,7 @@ public class ReportRunTest extends BaseStripeTest {
 
     assertNotNull(reportRun);
     verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/reporting/report_runs"),
-        params
-    );
+        ApiResource.RequestMethod.POST, String.format("/v1/reporting/report_runs"), params);
   }
 
   @Test
@@ -39,8 +33,7 @@ public class ReportRunTest extends BaseStripeTest {
     assertNotNull(reportRun);
     verifyRequest(
         ApiResource.RequestMethod.GET,
-        String.format("/v1/reporting/report_runs/%s", REPORT_RUN_ID)
-    );
+        String.format("/v1/reporting/report_runs/%s", REPORT_RUN_ID));
   }
 
   @Test
@@ -52,9 +45,6 @@ public class ReportRunTest extends BaseStripeTest {
 
     assertNotNull(reportRuns);
     verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/reporting/report_runs"),
-        params
-    );
+        ApiResource.RequestMethod.GET, String.format("/v1/reporting/report_runs"), params);
   }
 }

@@ -8,9 +8,7 @@ public class StripeHeaders {
 
   Map<String, List<String>> headers = new HashMap<String, List<String>>();
 
-  /**
-   * Constructs a collection of headers from the given map.
-   */
+  /** Constructs a collection of headers from the given map. */
   public StripeHeaders(Map<String, List<String>> headers) {
     // Downcase all header names so that we can easily and efficiently perform
     // case-insensitive lookups.
@@ -21,10 +19,10 @@ public class StripeHeaders {
     for (Map.Entry<String, List<String>> entry : headers.entrySet()) {
       String key = entry.getKey() != null ? entry.getKey().toLowerCase() : null;
       if (this.headers.containsKey(key)) {
-        throw new IllegalArgumentException(String.format(
-        "Header map contained key `%s` multiple times with varying casing",
-        entry.getKey()
-      ));
+        throw new IllegalArgumentException(
+            String.format(
+                "Header map contained key `%s` multiple times with varying casing",
+                entry.getKey()));
       }
 
       this.headers.put(key, entry.getValue());
@@ -33,6 +31,7 @@ public class StripeHeaders {
 
   /**
    * Returns the first header value for a given key.
+   *
    * @param name The name of the header key
    * @return the first value for the given key
    */
@@ -48,5 +47,4 @@ public class StripeHeaders {
   public List<String> values(String name) {
     return headers == null ? null : headers.get(name.toLowerCase());
   }
-
 }

@@ -7,7 +7,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 import com.google.gson.reflect.TypeToken;
 import com.stripe.BaseStripeTest;
 import com.stripe.net.ApiResource;
-
 import java.lang.reflect.Type;
 import java.util.List;
 import org.junit.jupiter.api.Test;
@@ -25,9 +24,9 @@ public class OrderItemTest extends BaseStripeTest {
 
   @Test
   public void testDeserializeWithExpansions() throws Exception {
-    final String orderItemsData = getResourceAsString(
-        "/api_fixtures/order_item_parent_expansions.json");
-    Type type = new TypeToken<List<OrderItem>>(){}.getType();
+    final String orderItemsData =
+        getResourceAsString("/api_fixtures/order_item_parent_expansions.json");
+    Type type = new TypeToken<List<OrderItem>>() {}.getType();
     final List<OrderItem> orderItemList = ApiResource.GSON.fromJson(orderItemsData, type);
     for (int i = 0; i < orderItemList.size(); i++) {
       final OrderItem orderItem = orderItemList.get(i);

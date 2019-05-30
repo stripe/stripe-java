@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.net.ApiResource;
-
 import org.junit.jupiter.api.Test;
 
 public class InvoiceTest extends BaseStripeTest {
@@ -24,8 +23,7 @@ public class InvoiceTest extends BaseStripeTest {
   public void testDeserializeWithExpansions() throws Exception {
     // TODO: Add support for expanding "transfer_data.destination" when stripe-mock supports it.
     final String[] expansions = {
-      "charge",
-      "customer",
+      "charge", "customer",
     };
     final String data = getFixture("/v1/invoices/in_123", expansions);
     final Invoice invoice = ApiResource.GSON.fromJson(data, Invoice.class);

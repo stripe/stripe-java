@@ -4,9 +4,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 
 import com.stripe.exception.InvalidRequestException;
-
 import java.io.UnsupportedEncodingException;
-
 import org.junit.jupiter.api.Test;
 
 class ApiResourceTest {
@@ -20,8 +18,10 @@ class ApiResourceTest {
 
   @Test
   public void testUrlEncodeIdThrowingOnNull() {
-    assertThrows(InvalidRequestException.class, () -> {
-      ApiResource.urlEncodeId(null);
-    });
+    assertThrows(
+        InvalidRequestException.class,
+        () -> {
+          ApiResource.urlEncodeId(null);
+        });
   }
 }

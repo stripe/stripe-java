@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.net.ApiResource;
-
 import org.junit.jupiter.api.Test;
 
 public class OrderReturnTest extends BaseStripeTest {
@@ -24,8 +23,7 @@ public class OrderReturnTest extends BaseStripeTest {
   @Test
   public void testDeserializeWithExpansions() throws Exception {
     final String[] expansions = {
-      "order",
-      "refund",
+      "order", "refund",
     };
     final String data = getFixture("/v1/order_returns/orret_123", expansions);
     final OrderReturn orderReturn = ApiResource.GSON.fromJson(data, OrderReturn.class);

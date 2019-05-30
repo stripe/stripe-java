@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.net.ApiResource;
-
 import org.junit.jupiter.api.Test;
 
 public class ApplicationFeeTest extends BaseStripeTest {
@@ -27,11 +26,7 @@ public class ApplicationFeeTest extends BaseStripeTest {
   @Test
   public void testDeserializeWithExpansions() throws Exception {
     final String[] expansions = {
-      "account",
-      "application",
-      "balance_transaction",
-      "charge",
-      "originating_transaction",
+      "account", "application", "balance_transaction", "charge", "originating_transaction",
     };
     final String data = getFixture("/v1/application_fees/fee_123", expansions);
     final ApplicationFee fee = ApiResource.GSON.fromJson(data, ApplicationFee.class);

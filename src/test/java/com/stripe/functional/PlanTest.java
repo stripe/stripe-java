@@ -11,10 +11,8 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Plan;
 import com.stripe.model.PlanCollection;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.Test;
 
@@ -39,11 +37,7 @@ public class PlanTest extends BaseStripeTest {
     final Plan plan = Plan.create(params);
 
     assertNotNull(plan);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        "/v1/plans",
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.POST, "/v1/plans", params);
   }
 
   @Test
@@ -51,10 +45,7 @@ public class PlanTest extends BaseStripeTest {
     final Plan plan = Plan.retrieve(PLAN_ID);
 
     assertNotNull(plan);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/plans/%s", PLAN_ID)
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/plans/%s", PLAN_ID));
   }
 
   @Test
@@ -62,17 +53,19 @@ public class PlanTest extends BaseStripeTest {
     // `stripe-mock` now has a different behavior from the actual APIs.
     // It currently does not accept url-encoded values.
     InvalidRequestException exception =
-        assertThrows(InvalidRequestException.class, () -> {
-          Plan.retrieve("Pro plan $699/month");
-        });
-    assertThat(exception.getMessage(), CoreMatchers.containsString(
-        "Unrecognized request URL (GET: /v1/plans/Pro+plan+$699/month)"));
+        assertThrows(
+            InvalidRequestException.class,
+            () -> {
+              Plan.retrieve("Pro plan $699/month");
+            });
+    assertThat(
+        exception.getMessage(),
+        CoreMatchers.containsString(
+            "Unrecognized request URL (GET: /v1/plans/Pro+plan+$699/month)"));
 
     // Still verifying that request is invoked with encoded url.
     verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/plans/%s", "Pro+plan+%24699%2Fmonth")
-    );
+        ApiResource.RequestMethod.GET, String.format("/v1/plans/%s", "Pro+plan+%24699%2Fmonth"));
   }
 
   @Test
@@ -86,10 +79,7 @@ public class PlanTest extends BaseStripeTest {
 
     assertNotNull(updatedPlan);
     verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/plans/%s", plan.getId()),
-        params
-    );
+        ApiResource.RequestMethod.POST, String.format("/v1/plans/%s", plan.getId()), params);
   }
 
   @Test
@@ -100,10 +90,7 @@ public class PlanTest extends BaseStripeTest {
 
     assertNotNull(deletedPlan);
     assertTrue(deletedPlan.getDeleted());
-    verifyRequest(
-        ApiResource.RequestMethod.DELETE,
-        String.format("/v1/plans/%s", plan.getId())
-    );
+    verifyRequest(ApiResource.RequestMethod.DELETE, String.format("/v1/plans/%s", plan.getId()));
   }
 
   @Test
@@ -114,10 +101,6 @@ public class PlanTest extends BaseStripeTest {
     PlanCollection plans = Plan.list(params);
 
     assertNotNull(plans);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        "/v1/plans",
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, "/v1/plans", params);
   }
 }

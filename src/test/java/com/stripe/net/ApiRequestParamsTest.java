@@ -8,7 +8,6 @@ import static org.junit.Assert.assertNull;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.param.common.EmptyParam;
 import java.util.Map;
-
 import lombok.Setter;
 import org.junit.Test;
 
@@ -32,12 +31,14 @@ public class ApiRequestParamsTest {
   private static class ConcreteApiRequestParams extends ApiRequestParams {
     @SerializedName("foo_enum")
     private ApiRequestParams.EnumParam foo;
+
     @SerializedName("bar_enum")
     private ApiRequestParams.EnumParam bar;
 
     @Setter
     @SerializedName("baz_string")
     private String bazString;
+
     @Setter
     @SerializedName("boo_code")
     private ParamCode booCode;
@@ -64,6 +65,7 @@ public class ApiRequestParamsTest {
   private static class WithBooleanApiRequestParams extends ApiRequestParams {
     @SerializedName("boolean_param")
     Boolean booleanParam;
+
     @SerializedName("primitive_boolean_param")
     boolean primitiveBooleanParam;
   }

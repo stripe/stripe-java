@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.net.ApiResource;
-
 import org.junit.jupiter.api.Test;
 
 public class EventTest extends BaseStripeTest {
@@ -37,8 +36,8 @@ public class EventTest extends BaseStripeTest {
     assertEquals(reserializedEvent.getCreated(), event.getCreated());
     assertEquals(reserializedEvent.getLivemode(), event.getLivemode());
     assertEquals(reserializedEvent.getRequest().getId(), event.getRequest().getId());
-    assertEquals(reserializedEvent.getRequest().getIdempotencyKey(),
-        event.getRequest().getIdempotencyKey());
+    assertEquals(
+        reserializedEvent.getRequest().getIdempotencyKey(), event.getRequest().getIdempotencyKey());
     assertEquals(reserializedEvent.getType(), event.getType());
   }
 }

@@ -1,15 +1,12 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.EphemeralKeyCreateParams;
-
 import java.util.List;
 import java.util.Map;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -32,8 +29,8 @@ public class EphemeralKey extends ApiResource implements HasId {
   String id;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if
-   * the object exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -54,8 +51,8 @@ public class EphemeralKey extends ApiResource implements HasId {
    * Creates an ephemeral API key for a given resource.
    *
    * @param params request parameters
-   * @param options request options. {@code stripeVersion} is required when creating ephemeral
-   *     keys. it must have non-null {@link RequestOptions#getStripeVersionOverride()}.
+   * @param options request options. {@code stripeVersion} is required when creating ephemeral keys.
+   *     it must have non-null {@link RequestOptions#getStripeVersionOverride()}.
    * @return the new ephemeral key
    */
   public static EphemeralKey create(EphemeralKeyCreateParams params, RequestOptions options)
@@ -68,41 +65,44 @@ public class EphemeralKey extends ApiResource implements HasId {
    * Creates an ephemeral API key for a given resource.
    *
    * @param params request parameters
-   * @param options request options. {@code stripeVersion} is required when creating ephemeral
-   *     keys. it must have non-null {@link RequestOptions#getStripeVersionOverride()}.
+   * @param options request options. {@code stripeVersion} is required when creating ephemeral keys.
+   *     it must have non-null {@link RequestOptions#getStripeVersionOverride()}.
    * @return the new ephemeral key
    */
   public static EphemeralKey create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     if (options.getStripeVersionOverride() == null) {
-      throw new IllegalArgumentException("`stripeVersionOverride` must be specified in "
-          + "RequestOptions with stripe version of your mobile client.");
+      throw new IllegalArgumentException(
+          "`stripeVersionOverride` must be specified in "
+              + "RequestOptions with stripe version of your mobile client.");
     }
 
-    return request(RequestMethod.POST, classUrl(EphemeralKey.class), params, EphemeralKey.class,
-        options);
+    return request(
+        RequestMethod.POST, classUrl(EphemeralKey.class), params, EphemeralKey.class, options);
   }
 
-  /**
-   * Invalidates an ephemeral API key for a given resource.
-   */
+  /** Invalidates an ephemeral API key for a given resource. */
   public EphemeralKey delete() throws StripeException {
     return delete(null);
   }
 
-  /**
-   * Invalidates an ephemeral API key for a given resource.
-   */
+  /** Invalidates an ephemeral API key for a given resource. */
   public EphemeralKey delete(RequestOptions options) throws StripeException {
-    return request(RequestMethod.DELETE, instanceUrl(EphemeralKey.class, this.id),
-        (Map<String,Object>) null, EphemeralKey.class, options);
+    return request(
+        RequestMethod.DELETE,
+        instanceUrl(EphemeralKey.class, this.id),
+        (Map<String, Object>) null,
+        EphemeralKey.class,
+        options);
   }
 
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class AssociatedObject extends StripeObject implements HasId {
-    @Getter(onMethod = @__({@Override})) String id;
+    @Getter(onMethod = @__({@Override}))
+    String id;
+
     String type;
   }
 }

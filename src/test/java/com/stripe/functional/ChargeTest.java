@@ -3,19 +3,16 @@ package com.stripe.functional;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.google.common.collect.ImmutableMap;
-
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Charge;
 import com.stripe.model.ChargeCollection;
 import com.stripe.net.ApiResource;
-
 import com.stripe.net.RequestOptions;
 import com.stripe.param.ChargeCreateParams;
 import com.stripe.param.ChargeUpdateParams;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class ChargeTest extends BaseStripeTest {
@@ -37,29 +34,22 @@ public class ChargeTest extends BaseStripeTest {
     final Charge charge = Charge.create(params);
 
     assertNotNull(charge);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        "/v1/charges",
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.POST, "/v1/charges", params);
   }
 
   @Test
   public void testCreateWithTypedParams() throws StripeException {
-    ChargeCreateParams params = ChargeCreateParams.builder()
-        .setSource("card_123")
-        .setAmount(100L)
-        .setCurrency("usd")
-        .build();
+    ChargeCreateParams params =
+        ChargeCreateParams.builder()
+            .setSource("card_123")
+            .setAmount(100L)
+            .setCurrency("usd")
+            .build();
 
     final Charge charge = Charge.create(params, RequestOptions.getDefault());
 
     assertNotNull(charge);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        "/v1/charges",
-        params.toMap()
-    );
+    verifyRequest(ApiResource.RequestMethod.POST, "/v1/charges", params.toMap());
   }
 
   @Test
@@ -67,10 +57,7 @@ public class ChargeTest extends BaseStripeTest {
     final Charge charge = Charge.retrieve(CHARGE_ID);
 
     assertNotNull(charge);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/charges/%s", CHARGE_ID)
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/charges/%s", CHARGE_ID));
   }
 
   @Test
@@ -86,10 +73,7 @@ public class ChargeTest extends BaseStripeTest {
 
     assertNotNull(updatedCharge);
     verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/charges/%s", charge.getId()),
-        params
-    );
+        ApiResource.RequestMethod.POST, String.format("/v1/charges/%s", charge.getId()), params);
   }
 
   @Test
@@ -100,11 +84,7 @@ public class ChargeTest extends BaseStripeTest {
     final ChargeCollection charges = Charge.list(params);
 
     assertNotNull(charges);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        "/v1/charges",
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, "/v1/charges", params);
   }
 
   @Test
@@ -118,9 +98,8 @@ public class ChargeTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/charges/%s", charge.getId()),
-        ImmutableMap.of("fraud_details",
-          (Object)ImmutableMap.of("user_report", (Object)"fraudulent"))
-    );
+        ImmutableMap.of(
+            "fraud_details", (Object) ImmutableMap.of("user_report", (Object) "fraudulent")));
   }
 
   @Test
@@ -128,8 +107,7 @@ public class ChargeTest extends BaseStripeTest {
     final Charge charge = getChargeFixture();
 
     ChargeUpdateParams typedParams =
-        fraudDetailsTypedParams(
-            ChargeUpdateParams.FraudDetails.UserReport.FRAUDULENT);
+        fraudDetailsTypedParams(ChargeUpdateParams.FraudDetails.UserReport.FRAUDULENT);
 
     final Charge fraudulentCharge = charge.update(typedParams, RequestOptions.getDefault());
 
@@ -151,17 +129,15 @@ public class ChargeTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/charges/%s", charge.getId()),
-        ImmutableMap.of("fraud_details",
-          (Object)ImmutableMap.of("user_report", (Object)"safe"))
-    );
+        ImmutableMap.of("fraud_details", (Object) ImmutableMap.of("user_report", (Object) "safe")));
   }
 
   @Test
   public void testMarkSafeWithTypedParams() throws StripeException {
     final Charge charge = getChargeFixture();
 
-    ChargeUpdateParams typedParams = fraudDetailsTypedParams(
-        ChargeUpdateParams.FraudDetails.UserReport.SAFE);
+    ChargeUpdateParams typedParams =
+        fraudDetailsTypedParams(ChargeUpdateParams.FraudDetails.UserReport.SAFE);
 
     final Charge fraudulentCharge = charge.update(typedParams, RequestOptions.getDefault());
 
@@ -172,12 +148,11 @@ public class ChargeTest extends BaseStripeTest {
         fraudDetailsUntypedParam("safe"));
   }
 
-  private ChargeUpdateParams fraudDetailsTypedParams(ChargeUpdateParams.FraudDetails.UserReport
-                                                         safe) {
-    ChargeUpdateParams.FraudDetails fraudDetails = ChargeUpdateParams.FraudDetails.builder()
-        .setUserReport(safe).build();
-    return ChargeUpdateParams.builder()
-        .setFraudDetails(fraudDetails).build();
+  private ChargeUpdateParams fraudDetailsTypedParams(
+      ChargeUpdateParams.FraudDetails.UserReport safe) {
+    ChargeUpdateParams.FraudDetails fraudDetails =
+        ChargeUpdateParams.FraudDetails.builder().setUserReport(safe).build();
+    return ChargeUpdateParams.builder().setFraudDetails(fraudDetails).build();
   }
 
   private Map<String, Object> fraudDetailsUntypedParam(String userReport) {

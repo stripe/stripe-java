@@ -7,12 +7,9 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.InvoiceItem;
 import com.stripe.model.InvoiceItemCollection;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
-
 
 public class InvoiceItemTest extends BaseStripeTest {
   public static final String INVOICE_ITEM_ID = "ii_123";
@@ -33,11 +30,7 @@ public class InvoiceItemTest extends BaseStripeTest {
     final InvoiceItem item = InvoiceItem.create(params);
 
     assertNotNull(item);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/invoiceitems"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.POST, String.format("/v1/invoiceitems"), params);
   }
 
   @Test
@@ -46,9 +39,7 @@ public class InvoiceItemTest extends BaseStripeTest {
 
     assertNotNull(item);
     verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/invoiceitems/%s", INVOICE_ITEM_ID)
-    );
+        ApiResource.RequestMethod.GET, String.format("/v1/invoiceitems/%s", INVOICE_ITEM_ID));
   }
 
   @Test
@@ -66,8 +57,7 @@ public class InvoiceItemTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/invoiceitems/%s", resource.getId()),
-        params
-    );
+        params);
   }
 
   @Test
@@ -78,10 +68,6 @@ public class InvoiceItemTest extends BaseStripeTest {
     InvoiceItemCollection items = InvoiceItem.list(params);
 
     assertNotNull(items);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/invoiceitems"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/invoiceitems"), params);
   }
 }

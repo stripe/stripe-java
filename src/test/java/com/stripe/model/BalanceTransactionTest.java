@@ -5,9 +5,7 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.net.ApiResource;
-
 import java.util.List;
-
 import org.junit.jupiter.api.Test;
 
 public class BalanceTransactionTest extends BaseStripeTest {
@@ -32,8 +30,9 @@ public class BalanceTransactionTest extends BaseStripeTest {
 
   @Test
   public void testDeserializeCollectionWithSourceExpansions() throws Exception {
-    final String data = getResourceAsString(
-        "/api_fixtures/balance_transaction_collection_with_source_expansion.json");
+    final String data =
+        getResourceAsString(
+            "/api_fixtures/balance_transaction_collection_with_source_expansion.json");
     final BalanceTransactionCollection btCollection =
         ApiResource.GSON.fromJson(data, BalanceTransactionCollection.class);
 
@@ -83,7 +82,7 @@ public class BalanceTransactionTest extends BaseStripeTest {
         assertEquals("issuing.authorization", btSource.getObject());
       } else if (btId.equals("txn_109")) {
         com.stripe.model.issuing.Transaction btSource =
-            (com.stripe.model.issuing.Transaction ) bt.getSourceObject();
+            (com.stripe.model.issuing.Transaction) bt.getSourceObject();
         assertNotNull(btSource);
         assertEquals("issuing.transaction", btSource.getObject());
       } else if (btId.equals("txn_110")) {

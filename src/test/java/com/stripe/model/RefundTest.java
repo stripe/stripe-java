@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.net.ApiResource;
-
 import org.junit.jupiter.api.Test;
 
 public class RefundTest extends BaseStripeTest {
@@ -38,8 +37,8 @@ public class RefundTest extends BaseStripeTest {
     assertNotNull(charge);
     assertNotNull(charge.getId());
     assertEquals(refund.getCharge(), charge.getId());
-    final BalanceTransaction failureBalanceTransaction
-        = refund.getFailureBalanceTransactionObject();
+    final BalanceTransaction failureBalanceTransaction =
+        refund.getFailureBalanceTransactionObject();
     assertNotNull(failureBalanceTransaction);
     assertNotNull(failureBalanceTransaction.getId());
     assertEquals(refund.getFailureBalanceTransaction(), failureBalanceTransaction.getId());

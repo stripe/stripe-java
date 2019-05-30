@@ -6,10 +6,8 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.ThreeDSecure;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class ThreeDSecureTest extends BaseStripeTest {
@@ -27,11 +25,7 @@ public class ThreeDSecureTest extends BaseStripeTest {
     final ThreeDSecure threeDSecure = ThreeDSecure.create(params);
 
     assertNotNull(threeDSecure);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        "/v1/3d_secure",
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.POST, "/v1/3d_secure", params);
   }
 
   @Test
@@ -39,9 +33,6 @@ public class ThreeDSecureTest extends BaseStripeTest {
     final ThreeDSecure threeDSecure = ThreeDSecure.retrieve(TDS_ID);
 
     assertNotNull(threeDSecure);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/3d_secure/%s", TDS_ID)
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/3d_secure/%s", TDS_ID));
   }
 }

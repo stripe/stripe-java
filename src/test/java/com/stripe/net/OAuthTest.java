@@ -8,7 +8,6 @@ import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.oauth.DeauthorizedAccount;
 import com.stripe.model.oauth.TokenResponse;
-
 import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
@@ -16,7 +15,6 @@ import java.net.URL;
 import java.net.URLDecoder;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class OAuthTest extends BaseStripeTest {
@@ -25,15 +23,17 @@ public class OAuthTest extends BaseStripeTest {
     final String[] pairs = query.split("&", -1);
     for (final String pair : pairs) {
       final int idx = pair.indexOf("=");
-      queryPairs.put(URLDecoder.decode(pair.substring(0, idx), "UTF8"),
+      queryPairs.put(
+          URLDecoder.decode(pair.substring(0, idx), "UTF8"),
           URLDecoder.decode(pair.substring(idx + 1), "UTF8"));
     }
     return queryPairs;
   }
 
   @Test
-  public void testAuthorizeUrl() throws AuthenticationException, InvalidRequestException,
-      MalformedURLException, UnsupportedEncodingException {
+  public void testAuthorizeUrl()
+      throws AuthenticationException, InvalidRequestException, MalformedURLException,
+          UnsupportedEncodingException {
     final Map<String, Object> urlParams = new HashMap<>();
     urlParams.put("scope", "read_write");
     urlParams.put("state", "csrf_token");
@@ -64,9 +64,7 @@ public class OAuthTest extends BaseStripeTest {
   @Test
   public void testToken() throws StripeException, IOException {
     stubOAuthRequest(
-        TokenResponse.class,
-        getResourceAsString("/oauth_fixtures/token_response.json")
-    );
+        TokenResponse.class, getResourceAsString("/oauth_fixtures/token_response.json"));
 
     final Map<String, Object> tokenParams = new HashMap<>();
     tokenParams.put("grant_type", "authorization_code");
@@ -81,10 +79,7 @@ public class OAuthTest extends BaseStripeTest {
 
   @Test
   public void testDeauthorize() throws StripeException {
-    stubOAuthRequest(
-        DeauthorizedAccount.class,
-        "{stripe_user_id: \"acct_test_deauth\"}"
-    );
+    stubOAuthRequest(DeauthorizedAccount.class, "{stripe_user_id: \"acct_test_deauth\"}");
 
     final Map<String, Object> deauthParams = new HashMap<>();
     deauthParams.put("stripe_user_id", "acct_test_deauth");

@@ -6,7 +6,6 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Balance;
 import com.stripe.net.ApiResource;
-
 import org.junit.jupiter.api.Test;
 
 public class BalanceTest extends BaseStripeTest {
@@ -15,9 +14,6 @@ public class BalanceTest extends BaseStripeTest {
     final Balance balance = Balance.retrieve();
 
     assertNotNull(balance);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/balance")
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/balance"));
   }
 }

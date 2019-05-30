@@ -3,19 +3,18 @@ package com.stripe.model;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
-
 import com.stripe.net.StripeResponse;
-
 import java.lang.reflect.Field;
 
 public abstract class StripeObject {
 
-  public static final Gson PRETTY_PRINT_GSON = new GsonBuilder()
-      .setPrettyPrinting()
-      .serializeNulls()
-      .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-      .registerTypeAdapter(ExpandableField.class, new ExpandableFieldSerializer())
-      .create();
+  public static final Gson PRETTY_PRINT_GSON =
+      new GsonBuilder()
+          .setPrettyPrinting()
+          .serializeNulls()
+          .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+          .registerTypeAdapter(ExpandableField.class, new ExpandableFieldSerializer())
+          .create();
 
   @Override
   public String toString() {

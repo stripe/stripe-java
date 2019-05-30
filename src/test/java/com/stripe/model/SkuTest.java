@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.net.ApiResource;
-
 import org.junit.jupiter.api.Test;
 
 public class SkuTest extends BaseStripeTest {
@@ -22,7 +21,7 @@ public class SkuTest extends BaseStripeTest {
 
   @Test
   public void testDeserializeWithExpansions() throws Exception {
-    final String[] expansions = { "product" };
+    final String[] expansions = {"product"};
     final String data = getFixture("/v1/skus/sku_123", expansions);
     final Sku sku = ApiResource.GSON.fromJson(data, Sku.class);
     assertNotNull(sku);

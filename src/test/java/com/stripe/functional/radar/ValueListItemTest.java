@@ -8,10 +8,8 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.radar.ValueListItem;
 import com.stripe.model.radar.ValueListItemCollection;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class ValueListItemTest extends BaseStripeTest {
@@ -33,10 +31,7 @@ public class ValueListItemTest extends BaseStripeTest {
 
     assertNotNull(valueListItem);
     verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/radar/value_list_items"),
-        params
-    );
+        ApiResource.RequestMethod.POST, String.format("/v1/radar/value_list_items"), params);
   }
 
   @Test
@@ -46,8 +41,7 @@ public class ValueListItemTest extends BaseStripeTest {
     assertNotNull(valueListItem);
     verifyRequest(
         ApiResource.RequestMethod.GET,
-        String.format("/v1/radar/value_list_items/%s", VALUE_LIST_ID)
-    );
+        String.format("/v1/radar/value_list_items/%s", VALUE_LIST_ID));
   }
 
   @Test
@@ -59,10 +53,7 @@ public class ValueListItemTest extends BaseStripeTest {
     final ValueListItemCollection valueListItems = ValueListItem.list(params);
 
     assertNotNull(valueListItems);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/radar/value_list_items")
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/radar/value_list_items"));
   }
 
   @Test
@@ -75,7 +66,6 @@ public class ValueListItemTest extends BaseStripeTest {
     assertTrue(deletedValueListItem.getDeleted());
     verifyRequest(
         ApiResource.RequestMethod.DELETE,
-        String.format("/v1/radar/value_list_items/%s", valueListItem.getId())
-    );
+        String.format("/v1/radar/value_list_items/%s", valueListItem.getId()));
   }
 }

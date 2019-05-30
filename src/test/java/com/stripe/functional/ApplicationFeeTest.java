@@ -7,10 +7,8 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.ApplicationFee;
 import com.stripe.model.ApplicationFeeCollection;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class ApplicationFeeTest extends BaseStripeTest {
@@ -21,10 +19,7 @@ public class ApplicationFeeTest extends BaseStripeTest {
     final ApplicationFee fee = ApplicationFee.retrieve(FEE_ID);
 
     assertNotNull(fee);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/application_fees/%s", FEE_ID)
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/application_fees/%s", FEE_ID));
   }
 
   @Test
@@ -35,10 +30,6 @@ public class ApplicationFeeTest extends BaseStripeTest {
     final ApplicationFeeCollection fees = ApplicationFee.list(params);
 
     assertNotNull(fees);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/application_fees"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/application_fees"), params);
   }
 }
