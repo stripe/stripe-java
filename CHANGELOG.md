@@ -1,5 +1,8 @@
 # Changelog
 
+## 10.0.2 - 2019-05-29
+* [#784](https://github.com/stripe/stripe-java/pull/784) Make headers access case insensitive
+
 ## 10.0.1 - 2019-05-28
 * [#783](https://github.com/stripe/stripe-java/pull/783) Fix url-encoding for string id to throw exception on passing null
 
