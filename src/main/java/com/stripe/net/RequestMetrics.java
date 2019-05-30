@@ -14,9 +14,7 @@ public class RequestMetrics {
     this.requestDurationMs = requestDurationMs;
   }
 
-  /**
-   * Constructs the JSON payload to be sent in the X-Stripe-Client-Telemetry header.
-   */
+  /** Constructs the JSON payload to be sent in the X-Stripe-Client-Telemetry header. */
   public ClientTelemetryPayload payload() {
     ClientTelemetryPayload p = new ClientTelemetryPayload();
     p.lastRequestMetrics = this;

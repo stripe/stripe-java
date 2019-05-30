@@ -14,10 +14,11 @@ class FileCreateParamsTest {
   @Test
   public void testToMapWithFileObject() {
     java.io.File file = new File(getClass().getResource("/test.png").getFile());
-    FileCreateParams fileCreateParams = FileCreateParams.builder()
-        .setFile(file)
-        .setPurpose(FileCreateParams.Purpose.BUSINESS_ICON)
-        .build();
+    FileCreateParams fileCreateParams =
+        FileCreateParams.builder()
+            .setFile(file)
+            .setPurpose(FileCreateParams.Purpose.BUSINESS_ICON)
+            .build();
 
     Map<String, Object> untypedParams = fileCreateParams.toMap();
     // file object is not deserialized/transformed into something other than
@@ -28,12 +29,13 @@ class FileCreateParamsTest {
 
   @Test
   public void testToMapWithFileInputStream() throws FileNotFoundException {
-    java.io.FileInputStream fileInputStream = new FileInputStream(getClass()
-        .getResource("/test.png").getFile());
-    FileCreateParams fileCreateParams = FileCreateParams.builder()
-        .setFile(fileInputStream)
-        .setPurpose(FileCreateParams.Purpose.BUSINESS_ICON)
-        .build();
+    java.io.FileInputStream fileInputStream =
+        new FileInputStream(getClass().getResource("/test.png").getFile());
+    FileCreateParams fileCreateParams =
+        FileCreateParams.builder()
+            .setFile(fileInputStream)
+            .setPurpose(FileCreateParams.Purpose.BUSINESS_ICON)
+            .build();
 
     Map<String, Object> untypedParams = fileCreateParams.toMap();
     // file object is not deserialized/transformed into something other than

@@ -1,16 +1,13 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.FileCreateParams;
 import com.stripe.param.FileListParams;
-
 import java.util.Map;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -41,9 +38,9 @@ public class File extends ApiResource implements HasId {
 
   /**
    * The purpose of the file. Possible values are {@code business_icon}, {@code business_logo},
-   * {@code customer_signature}, {@code dispute_evidence}, {@code finance_report_run},
-   * {@code identity_document}, {@code pci_document}, {@code sigma_scheduled_query}, or
-   * {@code tax_document_user_upload}.
+   * {@code customer_signature}, {@code dispute_evidence}, {@code finance_report_run}, {@code
+   * identity_document}, {@code pci_document}, {@code sigma_scheduled_query}, or {@code
+   * tax_document_user_upload}.
    */
   @SerializedName("purpose")
   String purpose;
@@ -57,8 +54,7 @@ public class File extends ApiResource implements HasId {
   String title;
 
   /**
-   * The type of the file returned (e.g., {@code csv}, {@code pdf}, {@code jpg}, or
-   * {@code png}).
+   * The type of the file returned (e.g., {@code csv}, {@code pdf}, {@code jpg}, or {@code png}).
    */
   @SerializedName("type")
   String type;
@@ -103,8 +99,12 @@ public class File extends ApiResource implements HasId {
    */
   public static File create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    return multipartRequest(RequestMethod.POST, classUrl(File.class, Stripe.getUploadBase()),
-        params, File.class, options);
+    return multipartRequest(
+        RequestMethod.POST,
+        classUrl(File.class, Stripe.getUploadBase()),
+        params,
+        File.class,
+        options);
   }
 
   /**

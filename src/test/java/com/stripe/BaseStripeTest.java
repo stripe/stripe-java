@@ -4,14 +4,12 @@ import static org.mockito.Mockito.reset;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.LiveStripeResponseGetter;
 import com.stripe.net.OAuth;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponseGetter;
-
 import java.io.BufferedReader;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
@@ -25,13 +23,10 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
-
 import lombok.Cleanup;
-
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
-
 import org.mockito.ArgumentMatcher;
 import org.mockito.Mockito;
 
@@ -52,21 +47,22 @@ public class BaseStripeTest {
     // To only stop stripe-mock process after all the test classes.
     // Alternative solution using @AfterClass will stop the stripe-mock after
     // every test class.
-    Runtime.getRuntime().addShutdownHook(new Thread(new Runnable() {
-      @Override
-      public void run() {
-        try {
-          StripeMockProcess.stop();
-        } catch (Exception e) {
-          // ignore any exception from trying to stop embedded stripe-mock
-        }
-      }
-    }));
+    Runtime.getRuntime()
+        .addShutdownHook(
+            new Thread(
+                new Runnable() {
+                  @Override
+                  public void run() {
+                    try {
+                      StripeMockProcess.stop();
+                    } catch (Exception e) {
+                      // ignore any exception from trying to stop embedded stripe-mock
+                    }
+                  }
+                }));
   }
 
-  /**
-   * Checks that stripe-mock is running and up-to-date.
-   */
+  /** Checks that stripe-mock is running and up-to-date. */
   @BeforeAll
   public static void checkStripeMock() throws Exception {
     if (StripeMockProcess.start()) {
@@ -87,27 +83,27 @@ public class BaseStripeTest {
     try {
       conn.getResponseCode();
     } catch (IOException e) {
-      throw new RuntimeException(String.format(
-        "Couldn't reach stripe-mock at `localhost:%s`. Is it "
-        + "running? Please see README for setup instructions.",
-        port
-      ));
+      throw new RuntimeException(
+          String.format(
+              "Couldn't reach stripe-mock at `localhost:%s`. Is it "
+                  + "running? Please see README for setup instructions.",
+              port));
     }
 
     String version = conn.getHeaderField("Stripe-Mock-Version");
     if (!version.equals("master") && (compareVersions(version, MOCK_MINIMUM_VERSION) > 0)) {
-      throw new RuntimeException(String.format(
-        "Your version of stripe-mock (%s) is too old. The minimum "
-        + "version to run this test suite is %s. Please see its "
-        + "repository for upgrade instructions.",
-        version, MOCK_MINIMUM_VERSION
-      ));
+      throw new RuntimeException(
+          String.format(
+              "Your version of stripe-mock (%s) is too old. The minimum "
+                  + "version to run this test suite is %s. Please see its "
+                  + "repository for upgrade instructions.",
+              version, MOCK_MINIMUM_VERSION));
     }
   }
 
   /**
-   * Activates usage of stripe-mock by overriding the API host and putting a test key
-   * into the environment. This is required independent of how stripe-mock is started.
+   * Activates usage of stripe-mock by overriding the API host and putting a test key into the
+   * environment. This is required independent of how stripe-mock is started.
    */
   @BeforeEach
   public void setUpStripeMockUsage() {
@@ -127,8 +123,8 @@ public class BaseStripeTest {
   }
 
   /**
-   * Deactivates usage stripe-mock by returning the API host to whatever it was
-   * before stripe-mock was activated.
+   * Deactivates usage stripe-mock by returning the API host to whatever it was before stripe-mock
+   * was activated.
    */
   @AfterEach
   public void tearDownStripeMockUsage() {
@@ -146,9 +142,8 @@ public class BaseStripeTest {
    * @see BaseStripeTest#verifyRequest(ApiResource.RequestMethod, String, Map,
    *     ApiResource.RequestType, RequestOptions)
    */
-  public static <T> void verifyRequest(
-      ApiResource.RequestMethod method,
-      String path) throws StripeException {
+  public static <T> void verifyRequest(ApiResource.RequestMethod method, String path)
+      throws StripeException {
     verifyRequest(method, path, null, null, null);
   }
 
@@ -159,9 +154,8 @@ public class BaseStripeTest {
    *     ApiResource.RequestType, RequestOptions)
    */
   public static <T> void verifyRequest(
-      ApiResource.RequestMethod method,
-      String path,
-      Map<String, Object> params) throws StripeException {
+      ApiResource.RequestMethod method, String path, Map<String, Object> params)
+      throws StripeException {
     verifyRequest(method, path, params, null, null);
   }
 
@@ -180,7 +174,8 @@ public class BaseStripeTest {
       String path,
       Map<String, Object> params,
       ApiResource.RequestType requestType,
-      RequestOptions options) throws StripeException {
+      RequestOptions options)
+      throws StripeException {
     String url;
     if (path.startsWith("/")) {
       url = String.format("%s%s", Stripe.getApiBase(), path);
@@ -188,29 +183,28 @@ public class BaseStripeTest {
       url = path;
     }
 
-    Mockito.verify(networkSpy).request(
-        Mockito.eq(method),
-        Mockito.eq(url),
-        (params != null) ? Mockito.argThat(new ParamMapMatcher(params))
-          : Mockito.<Map<String, Object>>any(),
-        Mockito.<Class<T>>any(),
-        (requestType != null) ? Mockito.eq(requestType) :
-          Mockito.any(ApiResource.RequestType.class),
-        (options != null) ? Mockito.argThat(new RequestOptionsMatcher(options))
-          : Mockito.<RequestOptions>any()
-    );
+    Mockito.verify(networkSpy)
+        .request(
+            Mockito.eq(method),
+            Mockito.eq(url),
+            (params != null)
+                ? Mockito.argThat(new ParamMapMatcher(params))
+                : Mockito.<Map<String, Object>>any(),
+            Mockito.<Class<T>>any(),
+            (requestType != null)
+                ? Mockito.eq(requestType)
+                : Mockito.any(ApiResource.RequestType.class),
+            (options != null)
+                ? Mockito.argThat(new RequestOptionsMatcher(options))
+                : Mockito.<RequestOptions>any());
   }
 
-  /**
-   * Verifies that no request was made.
-   */
+  /** Verifies that no request was made. */
   public static <T> void verifyNoRequest() {
     Mockito.verifyZeroInteractions(networkSpy);
   }
 
-  /**
-   * Verifies that no additionalrequests were made since the last verification.
-   */
+  /** Verifies that no additionalrequests were made since the last verification. */
   public static <T> void verifyNoMoreRequests() {
     Mockito.verifyNoMoreInteractions(networkSpy);
   }
@@ -222,10 +216,8 @@ public class BaseStripeTest {
    *     ApiResource.RequestType, RequestOptions, Class, String)
    */
   public static <T> void stubRequest(
-      ApiResource.RequestMethod method,
-      String path,
-      Class<T> clazz,
-      String response) throws StripeException {
+      ApiResource.RequestMethod method, String path, Class<T> clazz, String response)
+      throws StripeException {
     stubRequest(method, path, null, null, null, clazz, response);
   }
 
@@ -240,13 +232,14 @@ public class BaseStripeTest {
       String path,
       Map<String, Object> params,
       Class<T> clazz,
-      String response) throws StripeException {
+      String response)
+      throws StripeException {
     stubRequest(method, path, params, null, null, clazz, response);
   }
 
   /**
-   * Stubs an API request. This should rarely be necessary, but some endpoints are not
-   * supported by stripe-mock yet.
+   * Stubs an API request. This should rarely be necessary, but some endpoints are not supported by
+   * stripe-mock yet.
    *
    * @param method HTTP method (GET, POST or DELETE)
    * @param path request path (e.g. "/v1/charges"). Can also be an abolute URL.
@@ -255,8 +248,7 @@ public class BaseStripeTest {
    *     checked.
    * @param options request options. If null, the options are not checked.
    * @param clazz Class of the API resource that will be returned for the stubbed request.
-   * @param response JSON payload of the API resource that will be returned for the stubbed
-   *     request.
+   * @param response JSON payload of the API resource that will be returned for the stubbed request.
    */
   public static <T> void stubRequest(
       ApiResource.RequestMethod method,
@@ -265,7 +257,8 @@ public class BaseStripeTest {
       ApiResource.RequestType requestType,
       RequestOptions options,
       Class<T> clazz,
-      String response) throws StripeException {
+      String response)
+      throws StripeException {
     String url;
     if (path.startsWith("/")) {
       url = String.format("%s%s", Stripe.getApiBase(), path);
@@ -273,41 +266,39 @@ public class BaseStripeTest {
       url = path;
     }
 
-    Mockito
-        .doReturn(ApiResource.GSON.fromJson(response, clazz))
-        .when(networkSpy).request(
-          Mockito.eq(method),
-          Mockito.eq(url),
-          (params != null) ? Mockito.argThat(new ParamMapMatcher(params))
-            : Mockito.<Map<String, Object>>any(),
-          Mockito.<Class<T>>any(),
-          (requestType != null) ? Mockito.eq(requestType)
-            : Mockito.any(ApiResource.RequestType.class),
-          (options != null) ? Mockito.argThat(new RequestOptionsMatcher(options))
-            : Mockito.<RequestOptions>any()
-      );
+    Mockito.doReturn(ApiResource.GSON.fromJson(response, clazz))
+        .when(networkSpy)
+        .request(
+            Mockito.eq(method),
+            Mockito.eq(url),
+            (params != null)
+                ? Mockito.argThat(new ParamMapMatcher(params))
+                : Mockito.<Map<String, Object>>any(),
+            Mockito.<Class<T>>any(),
+            (requestType != null)
+                ? Mockito.eq(requestType)
+                : Mockito.any(ApiResource.RequestType.class),
+            (options != null)
+                ? Mockito.argThat(new RequestOptionsMatcher(options))
+                : Mockito.<RequestOptions>any());
+  }
+
+  /** Stubs an OAuth API request. stripe-mock does not supported OAuth endpoints at this time. */
+  public static <T> void stubOAuthRequest(Class<T> clazz, String response) throws StripeException {
+    Mockito.doReturn(ApiResource.GSON.fromJson(response, clazz))
+        .when(networkSpy)
+        .oauthRequest(
+            Mockito.any(ApiResource.RequestMethod.class),
+            Mockito.anyString(),
+            Mockito.<Map<String, Object>>any(),
+            Mockito.<Class<T>>any(),
+            Mockito.any(ApiResource.RequestType.class),
+            Mockito.<RequestOptions>any());
   }
 
   /**
-   * Stubs an OAuth API request. stripe-mock does not supported OAuth endpoints at this time.
-   */
-  public static <T> void stubOAuthRequest(Class<T> clazz, String response)
-      throws StripeException {
-    Mockito
-        .doReturn(ApiResource.GSON.fromJson(response, clazz))
-        .when(networkSpy).oauthRequest(
-          Mockito.any(ApiResource.RequestMethod.class),
-          Mockito.anyString(),
-          Mockito.<Map<String, Object>>any(),
-          Mockito.<Class<T>>any(),
-          Mockito.any(ApiResource.RequestType.class),
-          Mockito.<RequestOptions>any()
-      );
-  }
-
-  /**
-   * Resets the network spy. This is useful when you need to retrieve a resource from stripe-mock
-   * to use as a fixture, but the retrieval request is not part of the test.
+   * Resets the network spy. This is useful when you need to retrieve a resource from stripe-mock to
+   * use as a fixture, but the retrieval request is not part of the test.
    */
   public static void resetNetworkSpy() {
     reset(networkSpy);
@@ -316,10 +307,9 @@ public class BaseStripeTest {
   /**
    * Convenience method that extracts a subset of JSON data and returns it.
    *
-   * <p>For example, if I know that my charge object has a customer under it,
-   * I can pass my charge JSON data and specify {@code field} as {@code
-   * customer}. This returns everything that had been under the {@code
-   * customer} key (encoded as JSON).
+   * <p>For example, if I know that my charge object has a customer under it, I can pass my charge
+   * JSON data and specify {@code field} as {@code customer}. This returns everything that had been
+   * under the {@code customer} key (encoded as JSON).
    *
    * @param data JSON encoded data.
    * @param field Field under data which to extract.
@@ -327,7 +317,7 @@ public class BaseStripeTest {
    */
   protected static String getDataAt(String data, String field) {
     Gson gson = new Gson();
-    Type type = new TypeToken<Map<String, Object>>(){}.getType();
+    Type type = new TypeToken<Map<String, Object>>() {}.getType();
     Map<String, Object> map = gson.fromJson(data, type);
     Object value = map.get(field);
     return gson.toJson(value);
@@ -336,10 +326,9 @@ public class BaseStripeTest {
   /**
    * Convenience method that extracts a subset of JSON data and returns it.
    *
-   * <p>For example, if I know that my charge object has a customer under it,
-   * I can pass my charge JSON data and specify {@code field} as {@code
-   * customer}. This returns everything that had been under the {@code
-   * customer} key (encoded as JSON).
+   * <p>For example, if I know that my charge object has a customer under it, I can pass my charge
+   * JSON data and specify {@code field} as {@code customer}. This returns everything that had been
+   * under the {@code customer} key (encoded as JSON).
    *
    * @param data JSON encoded data.
    * @param index Index of the data to extract.
@@ -347,18 +336,17 @@ public class BaseStripeTest {
    */
   protected static String getDataAt(String data, Integer index) {
     Gson gson = new Gson();
-    Type type = new TypeToken<List<Object>>(){}.getType();
+    Type type = new TypeToken<List<Object>>() {}.getType();
     List<Object> list = gson.fromJson(data, type);
     Object value = list.get(index);
     return gson.toJson(value);
   }
 
   /**
-   * Gets fixture data from stripe-mock for a resource expected to be at the
-   * given API path. stripe-mock ignores whether IDs are actually valid, so
-   * it's only important to make sure that the route exists, rather than the
-   * actual resource. It's common to use a symbolic ID stand-in like {@code
-   * ch_123}.
+   * Gets fixture data from stripe-mock for a resource expected to be at the given API path.
+   * stripe-mock ignores whether IDs are actually valid, so it's only important to make sure that
+   * the route exists, rather than the actual resource. It's common to use a symbolic ID stand-in
+   * like {@code ch_123}.
    *
    * <pre>
    * getFixture("/v1/charges/ch_123")
@@ -372,10 +360,9 @@ public class BaseStripeTest {
   }
 
   /**
-   * Gets fixture data with expansions specified. Expansions are specified
-   * the same way as they are in the normal API like {@code customer} or
-   * {@code data.customer}. Use the special {@code *} character to specify
-   * that all fields should be expanded.
+   * Gets fixture data with expansions specified. Expansions are specified the same way as they are
+   * in the normal API like {@code customer} or {@code data.customer}. Use the special {@code *}
+   * character to specify that all fields should be expanded.
    *
    * @param path API path to use to get a fixture for stripe-mock.
    * @param expansions Set of expansions that should be applied.
@@ -397,7 +384,7 @@ public class BaseStripeTest {
     }
     URL url = new URL(urlStringBuilder.toString());
 
-    HttpURLConnection conn = (HttpURLConnection)url.openConnection();
+    HttpURLConnection conn = (HttpURLConnection) url.openConnection();
     conn.setRequestMethod("GET");
     conn.setRequestProperty("Authorization", "Bearer sk_test_123");
 
@@ -405,18 +392,15 @@ public class BaseStripeTest {
     try {
       status = conn.getResponseCode();
     } catch (IOException e) {
-      throw new RuntimeException(String.format(
-        "Couldn't reach stripe-mock at `localhost:%s`. Is it "
-        + "running? Please see README for setup instructions.",
-        port
-      ));
+      throw new RuntimeException(
+          String.format(
+              "Couldn't reach stripe-mock at `localhost:%s`. Is it "
+                  + "running? Please see README for setup instructions.",
+              port));
     }
 
     if (status != 200) {
-      throw new RuntimeException(String.format(
-        "Connection to stripe-mock at : %d.",
-        status
-      ));
+      throw new RuntimeException(String.format("Connection to stripe-mock at : %d.", status));
     }
 
     return readUntilEnd(conn.getInputStream());
@@ -442,7 +426,8 @@ public class BaseStripeTest {
   }
 
   private static String readUntilEnd(InputStream inputStream) throws IOException {
-    @Cleanup BufferedReader reader =
+    @Cleanup
+    BufferedReader reader =
         new BufferedReader(new InputStreamReader(inputStream, StandardCharsets.UTF_8));
     StringBuilder builder = new StringBuilder();
     String line;
@@ -504,9 +489,7 @@ public class BaseStripeTest {
       this.other = other;
     }
 
-    /**
-     * Informs if this matcher accepts the given argument.
-     */
+    /** Informs if this matcher accepts the given argument. */
     @Override
     public boolean matches(Map<String, Object> paramMap) {
       if (this.other == null) {
@@ -534,7 +517,7 @@ public class BaseStripeTest {
     }
 
     if (thisValue instanceof Map<?, ?>) {
-      if (!(otherValue instanceof  Map<?, ?>)) {
+      if (!(otherValue instanceof Map<?, ?>)) {
         return false;
       }
       Map<String, Object> thisMap = (Map<String, Object>) thisValue;
@@ -589,9 +572,7 @@ public class BaseStripeTest {
       this.other = other;
     }
 
-    /**
-     * Informs if this matcher accepts the given argument.
-     */
+    /** Informs if this matcher accepts the given argument. */
     @Override
     public boolean matches(RequestOptions requestOptions) {
       if (this.other == null) {

@@ -9,11 +9,9 @@ import com.stripe.exception.ApiConnectionException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Balance;
 import com.stripe.net.RequestOptions;
-
 import java.io.IOException;
 import java.net.Inet4Address;
 import java.net.ServerSocket;
-
 import org.junit.jupiter.api.Test;
 
 public class TimeoutTest extends BaseStripeTest {
@@ -26,9 +24,12 @@ public class TimeoutTest extends BaseStripeTest {
 
       final RequestOptions options = RequestOptions.builder().setReadTimeout(1).build();
 
-      Throwable exception = assertThrows(ApiConnectionException.class, () -> {
-        Balance.retrieve(options);
-      });
+      Throwable exception =
+          assertThrows(
+              ApiConnectionException.class,
+              () -> {
+                Balance.retrieve(options);
+              });
       assertTrue(exception.getMessage().contains("Read timed out"));
     }
   }

@@ -1,7 +1,6 @@
 package com.stripe.model.oauth;
 
 import com.stripe.model.StripeObject;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;

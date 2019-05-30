@@ -2,7 +2,6 @@ package com.stripe.net;
 
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.model.Event;
-
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
 import java.security.MessageDigest;
@@ -16,14 +15,13 @@ public final class Webhook {
   private static final long DEFAULT_TOLERANCE = 300;
 
   /**
-   * Returns an Event instance using the provided JSON payload. Throws a
-   * JsonSyntaxException if the payload is not valid JSON, and a
-   * SignatureVerificationException if the signature verification fails for
-   * any reason.
+   * Returns an Event instance using the provided JSON payload. Throws a JsonSyntaxException if the
+   * payload is not valid JSON, and a SignatureVerificationException if the signature verification
+   * fails for any reason.
    *
-   * @param payload   the payload sent by Stripe.
+   * @param payload the payload sent by Stripe.
    * @param sigHeader the contents of the signature header sent by Stripe.
-   * @param secret    secret used to generate the signature.
+   * @param secret secret used to generate the signature.
    * @return the Event instance
    * @throws SignatureVerificationException if the verification fails.
    */
@@ -33,21 +31,21 @@ public final class Webhook {
   }
 
   /**
-   * Returns an Event instance using the provided JSON payload. Throws a
-   * JsonSyntaxException if the payload is not valid JSON, and a
-   * SignatureVerificationException if the signature verification fails for
-   * any reason.
+   * Returns an Event instance using the provided JSON payload. Throws a JsonSyntaxException if the
+   * payload is not valid JSON, and a SignatureVerificationException if the signature verification
+   * fails for any reason.
    *
-   * @param payload   the payload sent by Stripe.
+   * @param payload the payload sent by Stripe.
    * @param sigHeader the contents of the signature header sent by Stripe.
-   * @param secret    secret used to generate the signature.
-   * @param tolerance maximum difference in seconds allowed between the header's
-   *                  timestamp and the current time
+   * @param secret secret used to generate the signature.
+   * @param tolerance maximum difference in seconds allowed between the header's timestamp and the
+   *     current time
    * @return the Event instance
    * @throws SignatureVerificationException if the verification fails.
    */
-  public static Event constructEvent(String payload, String sigHeader, String secret,
-      long tolerance) throws SignatureVerificationException {
+  public static Event constructEvent(
+      String payload, String sigHeader, String secret, long tolerance)
+      throws SignatureVerificationException {
     Event event = ApiResource.GSON.fromJson(payload, Event.class);
     Signature.verifyHeader(payload, sigHeader, secret, tolerance);
     return event;
@@ -57,18 +55,19 @@ public final class Webhook {
     public static final String EXPECTED_SCHEME = "v1";
 
     /**
-     * Verifies the signature header sent by Stripe. Throws a
-     * SignatureVerificationException if the verification fails for any reason.
+     * Verifies the signature header sent by Stripe. Throws a SignatureVerificationException if the
+     * verification fails for any reason.
      *
-     * @param payload   the payload sent by Stripe.
+     * @param payload the payload sent by Stripe.
      * @param sigHeader the contents of the signature header sent by Stripe.
-     * @param secret    secret used to generate the signature.
-     * @param tolerance maximum difference allowed between the header's
-     *                  timestamp and the current time
+     * @param secret secret used to generate the signature.
+     * @param tolerance maximum difference allowed between the header's timestamp and the current
+     *     time
      * @throws SignatureVerificationException if the verification fails.
      */
-    public static boolean verifyHeader(String payload, String sigHeader, String secret,
-        long tolerance) throws SignatureVerificationException {
+    public static boolean verifyHeader(
+        String payload, String sigHeader, String secret, long tolerance)
+        throws SignatureVerificationException {
       // Get timestamp and signatures from header
       long timestamp = getTimestamp(sigHeader);
       List<String> signatures = getSignatures(sigHeader, EXPECTED_SCHEME);
@@ -77,8 +76,8 @@ public final class Webhook {
             "Unable to extract timestamp and signatures from header", sigHeader);
       }
       if (signatures.size() == 0) {
-        throw new SignatureVerificationException("No signatures found with expected scheme",
-            sigHeader);
+        throw new SignatureVerificationException(
+            "No signatures found with expected scheme", sigHeader);
       }
 
       // Compute expected signature
@@ -87,8 +86,8 @@ public final class Webhook {
       try {
         expectedSignature = computeSignature(signedPayload, secret);
       } catch (Exception e) {
-        throw new SignatureVerificationException("Unable to compute signature for payload",
-            sigHeader);
+        throw new SignatureVerificationException(
+            "Unable to compute signature for payload", sigHeader);
       }
 
       // Check if expected signature is found in list of header's signatures
@@ -135,7 +134,7 @@ public final class Webhook {
      * Extracts the signatures matching a given scheme in a signature header.
      *
      * @param sigHeader the signature header
-     * @param scheme    the signature scheme to look for.
+     * @param scheme the signature scheme to look for.
      * @return the list of signatures matching the provided scheme.
      */
     private static List<String> getSignatures(String sigHeader, String scheme) {
@@ -158,7 +157,7 @@ public final class Webhook {
      * <p>The current scheme used by Stripe ("v1") is HMAC/SHA-256.
      *
      * @param payload the payload to sign.
-     * @param secret  the secret used to generate the signature.
+     * @param secret the secret used to generate the signature.
      * @return the signature as a string.
      */
     private static String computeSignature(String payload, String secret)
@@ -171,7 +170,7 @@ public final class Webhook {
     /**
      * Computes the HMAC/SHA-256 code for a given key and message.
      *
-     * @param key     the key used to generate the code.
+     * @param key the key used to generate the code.
      * @param message the message.
      * @return the code as a string.
      */
@@ -188,8 +187,8 @@ public final class Webhook {
     }
 
     /**
-     * Compares two strings for equality. The time taken is independent of the
-     * number of characters that match.
+     * Compares two strings for equality. The time taken is independent of the number of characters
+     * that match.
      *
      * @param a one of the strings to compare.
      * @param b the other string to compare.

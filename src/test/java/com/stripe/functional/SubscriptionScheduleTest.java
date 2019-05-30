@@ -8,10 +8,8 @@ import com.stripe.model.SubscriptionSchedule;
 import com.stripe.model.SubscriptionScheduleCollection;
 import com.stripe.model.SubscriptionScheduleRevisionCollection;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class SubscriptionScheduleTest extends BaseStripeTest {
@@ -36,8 +34,7 @@ public class SubscriptionScheduleTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/subscription_schedules/%s/cancel", schedule.getId()),
-        params
-    );
+        params);
   }
 
   @Test
@@ -48,11 +45,7 @@ public class SubscriptionScheduleTest extends BaseStripeTest {
     final SubscriptionSchedule schedule = SubscriptionSchedule.create(params);
 
     assertNotNull(schedule);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        "/v1/subscription_schedules",
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.POST, "/v1/subscription_schedules", params);
   }
 
   @Test
@@ -63,11 +56,7 @@ public class SubscriptionScheduleTest extends BaseStripeTest {
     final SubscriptionScheduleCollection schedules = SubscriptionSchedule.list(params);
 
     assertNotNull(schedules);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        "/v1/subscription_schedules",
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, "/v1/subscription_schedules", params);
   }
 
   @Test
@@ -83,8 +72,7 @@ public class SubscriptionScheduleTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/subscription_schedules/%s/release", schedule.getId()),
-        params
-    );
+        params);
   }
 
   @Test
@@ -93,9 +81,7 @@ public class SubscriptionScheduleTest extends BaseStripeTest {
 
     assertNotNull(schedule);
     verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/subscription_schedules/%s", SCHEDULE_ID)
-    );
+        ApiResource.RequestMethod.GET, String.format("/v1/subscription_schedules/%s", SCHEDULE_ID));
   }
 
   @Test
@@ -113,8 +99,7 @@ public class SubscriptionScheduleTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/subscription_schedules/%s", schedule.getId()),
-        params
-    );
+        params);
   }
 
   @Test
@@ -130,7 +115,6 @@ public class SubscriptionScheduleTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.GET,
         String.format("/v1/subscription_schedules/%s/revisions", schedule.getId()),
-        params
-    );
+        params);
   }
 }

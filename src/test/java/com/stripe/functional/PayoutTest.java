@@ -7,10 +7,8 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Payout;
 import com.stripe.model.PayoutCollection;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class PayoutTest extends BaseStripeTest {
@@ -31,11 +29,7 @@ public class PayoutTest extends BaseStripeTest {
     final Payout payout = Payout.create(params);
 
     assertNotNull(payout);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/payouts"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.POST, String.format("/v1/payouts"), params);
   }
 
   @Test
@@ -43,10 +37,7 @@ public class PayoutTest extends BaseStripeTest {
     final Payout payout = Payout.retrieve(PAYOUT_ID);
 
     assertNotNull(payout);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/payouts/%s", PAYOUT_ID)
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/payouts/%s", PAYOUT_ID));
   }
 
   @Test
@@ -62,10 +53,7 @@ public class PayoutTest extends BaseStripeTest {
 
     assertNotNull(updatedPayout);
     verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/payouts/%s", payout.getId()),
-        params
-    );
+        ApiResource.RequestMethod.POST, String.format("/v1/payouts/%s", payout.getId()), params);
   }
 
   @Test
@@ -76,11 +64,7 @@ public class PayoutTest extends BaseStripeTest {
     final PayoutCollection payouts = Payout.list(params);
 
     assertNotNull(payouts);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/payouts"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/payouts"), params);
   }
 
   @Test
@@ -91,8 +75,6 @@ public class PayoutTest extends BaseStripeTest {
 
     assertNotNull(cancelledPayout);
     verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/payouts/%s/cancel", resource.getId())
-    );
+        ApiResource.RequestMethod.POST, String.format("/v1/payouts/%s/cancel", resource.getId()));
   }
 }

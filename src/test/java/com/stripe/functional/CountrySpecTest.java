@@ -7,10 +7,8 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.CountrySpec;
 import com.stripe.model.CountrySpecCollection;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class CountrySpecTest extends BaseStripeTest {
@@ -22,9 +20,7 @@ public class CountrySpecTest extends BaseStripeTest {
 
     assertNotNull(countrySpec);
     verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/country_specs/%s", COUNTRY_SPEC_ID)
-    );
+        ApiResource.RequestMethod.GET, String.format("/v1/country_specs/%s", COUNTRY_SPEC_ID));
   }
 
   @Test
@@ -35,10 +31,6 @@ public class CountrySpecTest extends BaseStripeTest {
     CountrySpecCollection countrySpecs = CountrySpec.list(params);
 
     assertNotNull(countrySpecs);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/country_specs"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/country_specs"), params);
   }
 }

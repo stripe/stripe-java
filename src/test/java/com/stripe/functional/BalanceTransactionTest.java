@@ -7,10 +7,8 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.BalanceTransaction;
 import com.stripe.model.BalanceTransactionCollection;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class BalanceTransactionTest extends BaseStripeTest {
@@ -22,9 +20,7 @@ public class BalanceTransactionTest extends BaseStripeTest {
 
     assertNotNull(balanceTransaction);
     verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/balance/history/%s", RESOURCE_ID)
-    );
+        ApiResource.RequestMethod.GET, String.format("/v1/balance/history/%s", RESOURCE_ID));
   }
 
   @Test
@@ -35,10 +31,6 @@ public class BalanceTransactionTest extends BaseStripeTest {
     final BalanceTransactionCollection balanceTransactions = BalanceTransaction.list(params);
 
     assertNotNull(balanceTransactions);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/balance/history"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/balance/history"), params);
   }
 }

@@ -9,10 +9,8 @@ import com.stripe.model.SubscriptionItem;
 import com.stripe.model.SubscriptionItemCollection;
 import com.stripe.model.UsageRecordSummaryCollection;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class SubscriptionItemTest extends BaseStripeTest {
@@ -34,11 +32,7 @@ public class SubscriptionItemTest extends BaseStripeTest {
     final SubscriptionItem subscriptionItem = SubscriptionItem.create(params);
 
     assertNotNull(subscriptionItem);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        "/v1/subscription_items",
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.POST, "/v1/subscription_items", params);
   }
 
   @Test
@@ -47,9 +41,7 @@ public class SubscriptionItemTest extends BaseStripeTest {
 
     assertNotNull(subscriptionItem);
     verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/subscription_items/%s", ITEM_ID)
-    );
+        ApiResource.RequestMethod.GET, String.format("/v1/subscription_items/%s", ITEM_ID));
   }
 
   @Test
@@ -67,8 +59,7 @@ public class SubscriptionItemTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/subscription_items/%s", subscriptionItem.getId()),
-        params
-    );
+        params);
   }
 
   @Test
@@ -81,8 +72,7 @@ public class SubscriptionItemTest extends BaseStripeTest {
     assertTrue(deletedSubscriptionItem.getDeleted());
     verifyRequest(
         ApiResource.RequestMethod.DELETE,
-        String.format("/v1/subscription_items/%s", subscriptionItem.getId())
-    );
+        String.format("/v1/subscription_items/%s", subscriptionItem.getId()));
   }
 
   @Test
@@ -94,11 +84,7 @@ public class SubscriptionItemTest extends BaseStripeTest {
     final SubscriptionItemCollection subscriptionItems = SubscriptionItem.list(params);
 
     assertNotNull(subscriptionItems);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        "/v1/subscription_items",
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, "/v1/subscription_items", params);
   }
 
   @Test
@@ -114,7 +100,6 @@ public class SubscriptionItemTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.GET,
         String.format("/v1/subscription_items/%s/usage_record_summaries", subscriptionItem.getId()),
-        params
-    );
+        params);
   }
 }

@@ -5,10 +5,8 @@ import com.google.gson.JsonDeserializer;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
-
 import com.stripe.net.ApiResource;
 import com.stripe.net.UntypedMapDeserializer;
-
 import java.lang.reflect.Type;
 import java.util.Map;
 
@@ -18,8 +16,8 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
       new UntypedMapDeserializer();
 
   /**
-   * Deserializes the JSON payload contained in an event's {@code data} attribute into an
-   * {@link EventData} instance.
+   * Deserializes the JSON payload contained in an event's {@code data} attribute into an {@link
+   * EventData} instance.
    */
   @Override
   public EventData deserialize(JsonElement json, Type typeOfT, JsonDeserializationContext context)
@@ -50,6 +48,7 @@ public class EventDataDeserializer implements JsonDeserializer<EventData> {
    *
    * <p>Note that the expected JSON input is data at the {@code object} value, as a sibling to
    * {@code previousAttributes}, and not the discriminator field containing a string.
+   *
    * @return JSON data to be deserialized to super class {@code StripeObject}
    */
   static StripeObject deserializeStripeObject(JsonObject eventDataObjectJson) {

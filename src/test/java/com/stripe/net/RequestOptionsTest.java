@@ -9,14 +9,16 @@ public class RequestOptionsTest {
 
   @Test
   public void testPersistentValuesInToBuilder() {
-    RequestOptions opts = RequestOptions.builder()
-        .setApiKey("sk_foo")
-        .setClientId("123")
-        .setIdempotencyKey("123")
-        .setStripeAccount("acct_bar")
-        .setStripeVersionOverride("2015-05-05")
-        .setConnectTimeout(100)
-        .setReadTimeout(100).build();
+    RequestOptions opts =
+        RequestOptions.builder()
+            .setApiKey("sk_foo")
+            .setClientId("123")
+            .setIdempotencyKey("123")
+            .setStripeAccount("acct_bar")
+            .setStripeVersionOverride("2015-05-05")
+            .setConnectTimeout(100)
+            .setReadTimeout(100)
+            .build();
 
     RequestOptions optsRebuilt = opts.toBuilder().build();
 
@@ -36,8 +38,8 @@ public class RequestOptionsTest {
   public void testStripeVersionOverride() {
     String stripeVersionOverride = "2015-05-05";
 
-    RequestOptions.RequestOptionsBuilder builder = RequestOptions.builder()
-        .setStripeVersionOverride(stripeVersionOverride);
+    RequestOptions.RequestOptionsBuilder builder =
+        RequestOptions.builder().setStripeVersionOverride(stripeVersionOverride);
 
     assertEquals(stripeVersionOverride, builder.getStripeVersionOverride());
 
@@ -47,23 +49,27 @@ public class RequestOptionsTest {
 
   @Test
   public void testHashCodeEqualOverride() {
-    RequestOptions opts1 = RequestOptions.builder()
-        .setApiKey("sk_foo")
-        .setClientId("123")
-        .setIdempotencyKey("123")
-        .setStripeAccount("acct_bar")
-        .setStripeVersionOverride("2015-05-05")
-        .setConnectTimeout(100)
-        .setReadTimeout(200).build();
+    RequestOptions opts1 =
+        RequestOptions.builder()
+            .setApiKey("sk_foo")
+            .setClientId("123")
+            .setIdempotencyKey("123")
+            .setStripeAccount("acct_bar")
+            .setStripeVersionOverride("2015-05-05")
+            .setConnectTimeout(100)
+            .setReadTimeout(200)
+            .build();
 
-    RequestOptions opts2 = RequestOptions.builder()
-        .setApiKey("sk_foo")
-        .setClientId("123")
-        .setIdempotencyKey("123")
-        .setStripeAccount("acct_bar")
-        .setStripeVersionOverride("2015-05-05")
-        .setConnectTimeout(100)
-        .setReadTimeout(200).build();
+    RequestOptions opts2 =
+        RequestOptions.builder()
+            .setApiKey("sk_foo")
+            .setClientId("123")
+            .setIdempotencyKey("123")
+            .setStripeAccount("acct_bar")
+            .setStripeVersionOverride("2015-05-05")
+            .setConnectTimeout(100)
+            .setReadTimeout(200)
+            .build();
 
     assertEquals(opts1, opts2);
     assertEquals(opts1.hashCode(), opts2.hashCode());

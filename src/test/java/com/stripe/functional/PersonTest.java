@@ -10,10 +10,8 @@ import com.stripe.model.Account;
 import com.stripe.model.Person;
 import com.stripe.model.PersonCollection;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class PersonTest extends BaseStripeTest {
@@ -41,8 +39,7 @@ public class PersonTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/accounts/%s/persons", account.getId()),
-        params
-    );
+        params);
   }
 
   @Test
@@ -54,8 +51,7 @@ public class PersonTest extends BaseStripeTest {
     assertNotNull(person);
     verifyRequest(
         ApiResource.RequestMethod.GET,
-        String.format("/v1/accounts/%s/persons/%s", account.getId(), PERSON_ID)
-    );
+        String.format("/v1/accounts/%s/persons/%s", account.getId(), PERSON_ID));
   }
 
   @Test
@@ -73,8 +69,7 @@ public class PersonTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/accounts/%s/persons/%s", account.getId(), person.getId()),
-        params
-    );
+        params);
   }
 
   @Test
@@ -90,9 +85,7 @@ public class PersonTest extends BaseStripeTest {
     assertNotNull(persons);
     assertEquals(1, persons.getData().size());
     verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/accounts/%s/persons", account.getId())
-    );
+        ApiResource.RequestMethod.GET, String.format("/v1/accounts/%s/persons", account.getId()));
 
     final Person person = persons.getData().get(0);
     assertNotNull(person);
@@ -110,7 +103,6 @@ public class PersonTest extends BaseStripeTest {
     assertTrue(deletedPerson.getDeleted());
     verifyRequest(
         ApiResource.RequestMethod.DELETE,
-        String.format("/v1/accounts/%s/persons/%s", account.getId(), person.getId())
-    );
+        String.format("/v1/accounts/%s/persons/%s", account.getId(), person.getId()));
   }
 }

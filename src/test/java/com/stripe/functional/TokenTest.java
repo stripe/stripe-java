@@ -8,10 +8,8 @@ import com.stripe.model.Token;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.TokenCreateParams;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class TokenTest extends BaseStripeTest {
@@ -24,11 +22,7 @@ public class TokenTest extends BaseStripeTest {
     final Token token = Token.create(params);
 
     assertNotNull(token);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        "/v1/tokens",
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.POST, "/v1/tokens", params);
   }
 
   private Map<String, Object> untypedCreateParams() {
@@ -45,67 +39,50 @@ public class TokenTest extends BaseStripeTest {
   public void testCreateWithCardTypedParams() throws StripeException {
     final Map<String, Object> params = untypedCreateParams();
 
-    TokenCreateParams.Card card = TokenCreateParams.Card.builder()
-        .setNumber("4242424242424242")
-        .setExpMonth("11")
-        .setExpYear("2022")
-        .build();
+    TokenCreateParams.Card card =
+        TokenCreateParams.Card.builder()
+            .setNumber("4242424242424242")
+            .setExpMonth("11")
+            .setExpYear("2022")
+            .build();
 
-    TokenCreateParams createParams = TokenCreateParams.builder()
-        .setCard(card)
-        .build();
+    TokenCreateParams createParams = TokenCreateParams.builder().setCard(card).build();
 
     final Token token = Token.create(createParams, RequestOptions.getDefault());
 
     assertNotNull(token);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        "/v1/tokens",
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.POST, "/v1/tokens", params);
   }
 
   @Test
   public void testCreateWithBankAccountTypedParams() throws StripeException {
-    TokenCreateParams.BankAccount bankAccount = TokenCreateParams.BankAccount.builder()
-        .setAccountHolderName("John")
-        .setAccountNumber("8888888")
-        .setCurrency("usd")
-        .setCountry("USA")
-        .build();
+    TokenCreateParams.BankAccount bankAccount =
+        TokenCreateParams.BankAccount.builder()
+            .setAccountHolderName("John")
+            .setAccountNumber("8888888")
+            .setCurrency("usd")
+            .setCountry("USA")
+            .build();
 
-    TokenCreateParams createParams = TokenCreateParams.builder()
-        .setBankAccount(bankAccount)
-        .build();
+    TokenCreateParams createParams =
+        TokenCreateParams.builder().setBankAccount(bankAccount).build();
 
     final Token token = Token.create(createParams, RequestOptions.getDefault());
 
     assertNotNull(token);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        "/v1/tokens",
-        createParams.toMap()
-    );
+    verifyRequest(ApiResource.RequestMethod.POST, "/v1/tokens", createParams.toMap());
   }
 
   @Test
   public void testCreateWithPiiTypedParams() throws StripeException {
-    TokenCreateParams.Pii pii = TokenCreateParams.Pii.builder()
-        .setIdNumber("123")
-        .build();
+    TokenCreateParams.Pii pii = TokenCreateParams.Pii.builder().setIdNumber("123").build();
 
-    TokenCreateParams createParams = TokenCreateParams.builder()
-        .setPii(pii)
-        .build();
+    TokenCreateParams createParams = TokenCreateParams.builder().setPii(pii).build();
 
     final Token token = Token.create(createParams, RequestOptions.getDefault());
 
     assertNotNull(token);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        "/v1/tokens",
-        createParams.toMap()
-    );
+    verifyRequest(ApiResource.RequestMethod.POST, "/v1/tokens", createParams.toMap());
   }
 
   @Test
@@ -113,9 +90,6 @@ public class TokenTest extends BaseStripeTest {
     final Token token = Token.retrieve(TOKEN_ID);
 
     assertNotNull(token);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/tokens/%s", TOKEN_ID)
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/tokens/%s", TOKEN_ID));
   }
 }

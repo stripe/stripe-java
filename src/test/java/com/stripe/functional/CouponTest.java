@@ -8,10 +8,8 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Coupon;
 import com.stripe.model.CouponCollection;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class CouponTest extends BaseStripeTest {
@@ -32,11 +30,7 @@ public class CouponTest extends BaseStripeTest {
     final Coupon coupon = Coupon.create(params);
 
     assertNotNull(coupon);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/coupons"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.POST, String.format("/v1/coupons"), params);
   }
 
   @Test
@@ -44,10 +38,7 @@ public class CouponTest extends BaseStripeTest {
     final Coupon coupon = Coupon.retrieve(COUPON_ID);
 
     assertNotNull(coupon);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/coupons/%s", COUPON_ID)
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/coupons/%s", COUPON_ID));
   }
 
   @Test
@@ -63,10 +54,7 @@ public class CouponTest extends BaseStripeTest {
 
     assertNotNull(updatedCoupon);
     verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/coupons/%s", coupon.getId()),
-        params
-    );
+        ApiResource.RequestMethod.POST, String.format("/v1/coupons/%s", coupon.getId()), params);
   }
 
   @Test
@@ -77,10 +65,7 @@ public class CouponTest extends BaseStripeTest {
     final CouponCollection coupons = Coupon.list(params);
 
     assertNotNull(coupons);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/coupons")
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/coupons"));
   }
 
   @Test
@@ -92,8 +77,6 @@ public class CouponTest extends BaseStripeTest {
     assertNotNull(deletedCoupon);
     assertTrue(deletedCoupon.getDeleted());
     verifyRequest(
-        ApiResource.RequestMethod.DELETE,
-        String.format("/v1/coupons/%s", coupon.getId())
-    );
+        ApiResource.RequestMethod.DELETE, String.format("/v1/coupons/%s", coupon.getId()));
   }
 }

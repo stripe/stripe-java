@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.net.ApiResource;
-
 import org.junit.jupiter.api.Test;
 
 public class PersonTest extends BaseStripeTest {
@@ -20,8 +19,7 @@ public class PersonTest extends BaseStripeTest {
   @Test
   public void testDeserializeWithExpansions() throws Exception {
     final String[] expansions = {
-      "verification.document.back",
-      "verification.document.front",
+      "verification.document.back", "verification.document.front",
     };
     final String data = getFixture("/v1/accounts/acct_123/persons/person_123", expansions);
     final Person resource = ApiResource.GSON.fromJson(data, Person.class);

@@ -12,13 +12,11 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.FileCreateParams;
 import com.stripe.param.FileListParams;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class FileTest extends BaseStripeTest {
@@ -38,21 +36,19 @@ public class FileTest extends BaseStripeTest {
         "/v1/files",
         params,
         ApiResource.RequestType.MULTIPART,
-        null
-    );
+        null);
   }
 
   @Test
   public void testCreateWithFileWithTypedParams() throws StripeException {
     File fileObject = new File(getClass().getResource("/test.png").getFile());
-    FileCreateParams fileCreateParams = FileCreateParams.builder()
-        .setPurpose(FileCreateParams.Purpose.DISPUTE_EVIDENCE)
-        .setFileLinkData(FileCreateParams.FileLinkData.builder()
-            .setCreate(true)
-            .setExpiresAt(123L)
-            .build())
-        .setFile(fileObject)
-        .build();
+    FileCreateParams fileCreateParams =
+        FileCreateParams.builder()
+            .setPurpose(FileCreateParams.Purpose.DISPUTE_EVIDENCE)
+            .setFileLinkData(
+                FileCreateParams.FileLinkData.builder().setCreate(true).setExpiresAt(123L).build())
+            .setFile(fileObject)
+            .build();
 
     final com.stripe.model.File file = com.stripe.model.File.create(fileCreateParams);
 
@@ -61,23 +57,24 @@ public class FileTest extends BaseStripeTest {
         ApiResource.RequestMethod.POST,
         "/v1/files",
         ImmutableMap.of(
-            "purpose", "dispute_evidence",
-            "file", fileObject,
-            "file_link_data", ImmutableMap.of(
-                "create", true,
-                "expires_at", 123
-            )
-        ),
+            "purpose",
+            "dispute_evidence",
+            "file",
+            fileObject,
+            "file_link_data",
+            ImmutableMap.of("create", true, "expires_at", 123)),
         ApiResource.RequestType.MULTIPART,
-        null
-    );
+        null);
   }
 
   @Test
   public void testThrowExceptionCreateWithNullTypedParams() {
-    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-      com.stripe.model.File.create((FileCreateParams) null, RequestOptions.getDefault());
-    });
+    IllegalArgumentException exception =
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> {
+              com.stripe.model.File.create((FileCreateParams) null, RequestOptions.getDefault());
+            });
     assertTrue(exception.getMessage().contains("Found null params"));
   }
 
@@ -96,8 +93,7 @@ public class FileTest extends BaseStripeTest {
         "/v1/files",
         params,
         ApiResource.RequestType.MULTIPART,
-        null
-    );
+        null);
   }
 
   @Test
@@ -105,10 +101,7 @@ public class FileTest extends BaseStripeTest {
     final com.stripe.model.File file = com.stripe.model.File.retrieve(FILE_ID);
 
     assertNotNull(file);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/files/%s", FILE_ID)
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/files/%s", FILE_ID));
   }
 
   @Test
@@ -119,28 +112,16 @@ public class FileTest extends BaseStripeTest {
     final FileCollection files = com.stripe.model.File.list(params);
 
     assertNotNull(files);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        "/v1/files",
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, "/v1/files", params);
   }
 
   @Test
   public void testListWithTypedParams() throws StripeException {
-    FileListParams params = FileListParams.builder()
-        .setLimit(1L)
-        .build();
+    FileListParams params = FileListParams.builder().setLimit(1L).build();
 
     final FileCollection files = com.stripe.model.File.list(params);
 
     assertNotNull(files);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        "/v1/files",
-        ImmutableMap.of(
-            "limit", 1
-        )
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, "/v1/files", ImmutableMap.of("limit", 1));
   }
 }

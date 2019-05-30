@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.net.ApiResource;
-
 import org.junit.jupiter.api.Test;
 
 public class OAuthErrorTest extends BaseStripeTest {
@@ -17,6 +16,7 @@ public class OAuthErrorTest extends BaseStripeTest {
     assertEquals("invalid_client", error.getError());
     assertEquals(
         "No authentication was provided. Send your secret API key using the Authorization "
-        + "header, or as a client_secret POST parameter.", error.getErrorDescription());
+            + "header, or as a client_secret POST parameter.",
+        error.getErrorDescription());
   }
 }

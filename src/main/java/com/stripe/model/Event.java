@@ -1,14 +1,11 @@
 package com.stripe.model;
 
 import com.google.gson.annotations.SerializedName;
-
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.EventListParams;
-
 import java.util.Map;
-
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
@@ -42,8 +39,8 @@ public class Event extends ApiResource implements HasId {
   String id;
 
   /**
-   * Has the value {@code true} if the object exists in live mode or the value {@code false} if
-   * the object exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -53,8 +50,8 @@ public class Event extends ApiResource implements HasId {
   String object;
 
   /**
-   * Number of webhooks that have yet to be successfully delivered (i.e., to return a 20x
-   * response) to the URLs you’ve specified.
+   * Number of webhooks that have yet to be successfully delivered (i.e., to return a 20x response)
+   * to the URLs you’ve specified.
    */
   @SerializedName("pending_webhooks")
   Long pendingWebhooks;
@@ -63,32 +60,28 @@ public class Event extends ApiResource implements HasId {
   @SerializedName("request")
   EventRequest request;
 
-  /**
-   * Description of the event (e.g., {@code invoice.created} or {@code charge.refunded}).
-   */
+  /** Description of the event (e.g., {@code invoice.created} or {@code charge.refunded}). */
   @SerializedName("type")
   String type;
 
-  /**
-   * Legacy; use `account` instead (https://stripe.com/docs/upgrades#2017-05-25)
-   */
-  @Deprecated
-  String userId;
+  /** Legacy; use `account` instead (https://stripe.com/docs/upgrades#2017-05-25) */
+  @Deprecated String userId;
 
   /**
-   * Get deserialization helper to handle failure due to schema incompatibility.
-   * When event API version matches that of the library's pinned version,
-   * the following integration pattern is safe.
+   * Get deserialization helper to handle failure due to schema incompatibility. When event API
+   * version matches that of the library's pinned version, the following integration pattern is
+   * safe.
+   *
    * <pre>
    *   Event event = getEvent(); // either from webhook or event endpoint
    *   EventDataObjectDeserializer deserializer = event.getDataObjectDeserializer();
    *   Optional&lt;StripeObject&gt; stripeObject = deserializer.getObject();
    * </pre>
-   * You can ensure that webhook events has the same API version by creating
-   * webhook endpoint specifying api version](https://stripe.com/docs/api/webhook_endpoints/create)
-   * as {@link com.stripe.Stripe#API_VERSION}.
-   * For reading from old webhook endpoints or old events with potential schema
-   * incompatibility, see {@link EventDataObjectDeserializer#deserialize()} and
+   *
+   * You can ensure that webhook events has the same API version by creating webhook endpoint
+   * specifying api version](https://stripe.com/docs/api/webhook_endpoints/create) as {@link
+   * com.stripe.Stripe#API_VERSION}. For reading from old webhook endpoints or old events with
+   * potential schema incompatibility, see {@link EventDataObjectDeserializer#deserialize()} and
    * {@link EventDataObjectDeserializer#deserializeUnsafe()}.
    */
   public EventDataObjectDeserializer getDataObjectDeserializer() {
@@ -97,9 +90,9 @@ public class Event extends ApiResource implements HasId {
 
   /**
    * List events, going back up to 30 days. Each event data is rendered according to Stripe API
-   * version at its creation time, specified in
-   * <a href="https://stripe.com/docs/api/events/object">event object</a> {@code api_version}
-   * attribute (not according to your current Stripe API version or {@code Stripe-Version} header).
+   * version at its creation time, specified in <a
+   * href="https://stripe.com/docs/api/events/object">event object</a> {@code api_version} attribute
+   * (not according to your current Stripe API version or {@code Stripe-Version} header).
    */
   public static EventCollection list(Map<String, Object> params) throws StripeException {
     return list(params, null);
@@ -107,9 +100,9 @@ public class Event extends ApiResource implements HasId {
 
   /**
    * List events, going back up to 30 days. Each event data is rendered according to Stripe API
-   * version at its creation time, specified in
-   * <a href="https://stripe.com/docs/api/events/object">event object</a> {@code api_version}
-   * attribute (not according to your current Stripe API version or {@code Stripe-Version} header).
+   * version at its creation time, specified in <a
+   * href="https://stripe.com/docs/api/events/object">event object</a> {@code api_version} attribute
+   * (not according to your current Stripe API version or {@code Stripe-Version} header).
    */
   public static EventCollection list(EventListParams params) throws StripeException {
     return list(params, null);
@@ -117,9 +110,9 @@ public class Event extends ApiResource implements HasId {
 
   /**
    * List events, going back up to 30 days. Each event data is rendered according to Stripe API
-   * version at its creation time, specified in
-   * <a href="https://stripe.com/docs/api/events/object">event object</a> {@code api_version}
-   * attribute (not according to your current Stripe API version or {@code Stripe-Version} header).
+   * version at its creation time, specified in <a
+   * href="https://stripe.com/docs/api/events/object">event object</a> {@code api_version} attribute
+   * (not according to your current Stripe API version or {@code Stripe-Version} header).
    */
   public static EventCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -128,9 +121,9 @@ public class Event extends ApiResource implements HasId {
 
   /**
    * List events, going back up to 30 days. Each event data is rendered according to Stripe API
-   * version at its creation time, specified in
-   * <a href="https://stripe.com/docs/api/events/object">event object</a> {@code api_version}
-   * attribute (not according to your current Stripe API version or {@code Stripe-Version} header).
+   * version at its creation time, specified in <a
+   * href="https://stripe.com/docs/api/events/object">event object</a> {@code api_version} attribute
+   * (not according to your current Stripe API version or {@code Stripe-Version} header).
    */
   public static EventCollection list(EventListParams params, RequestOptions options)
       throws StripeException {

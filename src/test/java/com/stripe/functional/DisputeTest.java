@@ -7,10 +7,8 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Dispute;
 import com.stripe.model.DisputeCollection;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class DisputeTest extends BaseStripeTest {
@@ -27,10 +25,7 @@ public class DisputeTest extends BaseStripeTest {
     final Dispute dispute = Dispute.retrieve(DISPUTE_ID);
 
     assertNotNull(dispute);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/disputes/%s", DISPUTE_ID)
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/disputes/%s", DISPUTE_ID));
   }
 
   @Test
@@ -46,10 +41,7 @@ public class DisputeTest extends BaseStripeTest {
 
     assertNotNull(updatedDispute);
     verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/disputes/%s", dispute.getId()),
-        params
-    );
+        ApiResource.RequestMethod.POST, String.format("/v1/disputes/%s", dispute.getId()), params);
   }
 
   @Test
@@ -60,11 +52,7 @@ public class DisputeTest extends BaseStripeTest {
     final DisputeCollection disputes = Dispute.list(params);
 
     assertNotNull(disputes);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/disputes"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/disputes"), params);
   }
 
   @Test
@@ -75,8 +63,6 @@ public class DisputeTest extends BaseStripeTest {
 
     assertNotNull(closedDispute);
     verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/disputes/%s/close", dispute.getId())
-    );
+        ApiResource.RequestMethod.POST, String.format("/v1/disputes/%s/close", dispute.getId()));
   }
 }

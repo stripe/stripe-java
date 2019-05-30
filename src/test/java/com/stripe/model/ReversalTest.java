@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.net.ApiResource;
-
 import org.junit.jupiter.api.Test;
 
 public class ReversalTest extends BaseStripeTest {
@@ -24,10 +23,7 @@ public class ReversalTest extends BaseStripeTest {
   @Test
   public void testDeserializeWithExpansions() throws Exception {
     final String[] expansions = {
-      "balance_transaction",
-      "destination_payment_refund",
-      "source_refund",
-      "transfer",
+      "balance_transaction", "destination_payment_refund", "source_refund", "transfer",
     };
     final String data = getFixture("/v1/transfers/tr_123/reversals/trr_123", expansions);
     final TransferReversal reversal = ApiResource.GSON.fromJson(data, TransferReversal.class);
@@ -47,7 +43,6 @@ public class ReversalTest extends BaseStripeTest {
     assertNotNull(sourceRefund);
     assertNotNull(sourceRefund.getId());
     assertEquals(reversal.getSourceRefund(), sourceRefund.getId());
-
 
     final Transfer transfer = reversal.getTransferObject();
     assertNotNull(transfer);

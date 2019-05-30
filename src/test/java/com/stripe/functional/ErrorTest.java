@@ -10,24 +10,21 @@ import com.stripe.exception.StripeException;
 import com.stripe.exception.oauth.InvalidClientException;
 import com.stripe.model.Balance;
 import com.stripe.net.OAuth;
-
 import java.io.IOException;
-
 import lombok.Cleanup;
-
 import okhttp3.mockwebserver.MockResponse;
 import okhttp3.mockwebserver.MockWebServer;
-
 import org.junit.jupiter.api.Test;
-
 
 public class ErrorTest extends BaseStripeTest {
   @Test
   public void testStripeError() throws StripeException, IOException, InterruptedException {
     InvalidRequestException exception = null;
     @Cleanup MockWebServer server = new MockWebServer();
-    server.enqueue(new MockResponse().setResponseCode(400)
-        .setBody(getResourceAsString("/api_fixtures/error_invalid_request.json")));
+    server.enqueue(
+        new MockResponse()
+            .setResponseCode(400)
+            .setBody(getResourceAsString("/api_fixtures/error_invalid_request.json")));
 
     Stripe.overrideApiBase(server.url("").toString());
 
@@ -48,8 +45,10 @@ public class ErrorTest extends BaseStripeTest {
   public void testOAuthError() throws StripeException, IOException, InterruptedException {
     InvalidClientException exception = null;
     @Cleanup MockWebServer server = new MockWebServer();
-    server.enqueue(new MockResponse().setResponseCode(401)
-        .setBody(getResourceAsString("/oauth_fixtures/error_invalid_client.json")));
+    server.enqueue(
+        new MockResponse()
+            .setResponseCode(401)
+            .setBody(getResourceAsString("/oauth_fixtures/error_invalid_client.json")));
 
     Stripe.overrideApiBase(server.url("").toString());
 

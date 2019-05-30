@@ -8,12 +8,9 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Customer;
 import com.stripe.model.CustomerCollection;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
-
 
 public class CustomerTest extends BaseStripeTest {
   public static final String CUSTOMER_ID = "cus_123";
@@ -31,11 +28,7 @@ public class CustomerTest extends BaseStripeTest {
     final Customer customer = Customer.create(params);
 
     assertNotNull(customer);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/customers"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.POST, String.format("/v1/customers"), params);
   }
 
   @Test
@@ -43,10 +36,7 @@ public class CustomerTest extends BaseStripeTest {
     final Customer customer = Customer.retrieve(CUSTOMER_ID);
 
     assertNotNull(customer);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/customers/%s", CUSTOMER_ID)
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/customers/%s", CUSTOMER_ID));
   }
 
   @Test
@@ -64,8 +54,7 @@ public class CustomerTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/customers/%s", customer.getId()),
-        params
-    );
+        params);
   }
 
   @Test
@@ -76,11 +65,7 @@ public class CustomerTest extends BaseStripeTest {
     final CustomerCollection customers = Customer.list(params);
 
     assertNotNull(customers);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/customers"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/customers"), params);
   }
 
   @Test
@@ -92,9 +77,7 @@ public class CustomerTest extends BaseStripeTest {
     assertNotNull(deletedCustomer);
     assertTrue(deletedCustomer.getDeleted());
     verifyRequest(
-        ApiResource.RequestMethod.DELETE,
-        String.format("/v1/customers/%s", customer.getId())
-    );
+        ApiResource.RequestMethod.DELETE, String.format("/v1/customers/%s", customer.getId()));
   }
 
   @Test
@@ -107,14 +90,12 @@ public class CustomerTest extends BaseStripeTest {
         String.format("/v1/customers/%s/discount", customer.getId()),
         null,
         void.class,
-        null
-    );
+        null);
 
     customer.deleteDiscount();
 
     verifyRequest(
         ApiResource.RequestMethod.DELETE,
-        String.format("/v1/customers/%s/discount", customer.getId())
-    );
+        String.format("/v1/customers/%s/discount", customer.getId()));
   }
 }

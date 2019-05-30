@@ -6,7 +6,6 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParseException;
 import com.google.gson.JsonPrimitive;
-
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 
@@ -16,8 +15,9 @@ public class ExpandableFieldDeserializer implements JsonDeserializer<ExpandableF
    * JSON object) into an {@link ExpandableField} object.
    */
   @Override
-  public ExpandableField<?> deserialize(JsonElement json, Type typeOfT,
-      JsonDeserializationContext context) throws JsonParseException {
+  public ExpandableField<?> deserialize(
+      JsonElement json, Type typeOfT, JsonDeserializationContext context)
+      throws JsonParseException {
     if (json.isJsonNull()) {
       return null;
     }
@@ -34,9 +34,9 @@ public class ExpandableFieldDeserializer implements JsonDeserializer<ExpandableF
       } else {
         throw new JsonParseException("ExpandableField is a non-string primitive type.");
       }
-    // Check if json is an expanded Object. If so, the field has been expanded, so we need to
-    // serialize it into the proper typeOfT, and create an ExpandableField with both the String id
-    // and this serialized object.
+      // Check if json is an expanded Object. If so, the field has been expanded, so we need to
+      // serialize it into the proper typeOfT, and create an ExpandableField with both the String id
+      // and this serialized object.
     } else if (json.isJsonObject()) {
       // Get the `id` out of the response
       JsonObject fieldAsJsonObject = json.getAsJsonObject();

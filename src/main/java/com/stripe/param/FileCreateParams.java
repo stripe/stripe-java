@@ -18,8 +18,8 @@ public class FileCreateParams extends ApiRequestParams {
    * A file to upload. The file should follow the specifications of RFC 2388 (which defines file
    * transfers for the `multipart/form-data` protocol).
    *
-   * <p>Note this field is marked as transient to avoid JSON deserializer. Override
-   * {@link FileCreateParams#toMap()} makes sure that the returned map has this same file instance.
+   * <p>Note this field is marked as transient to avoid JSON deserializer. Override {@link
+   * FileCreateParams#toMap()} makes sure that the returned map has this same file instance.
    */
   transient Object file;
 
@@ -237,10 +237,11 @@ public class FileCreateParams extends ApiRequestParams {
   }
 
   /**
-   * Returns untyped parameters for file creation. Map value for {@code "file"} is the same
-   * instance of value set in {@link Builder#setFile(File)} or
-   * {@link Builder#setFile(java.io.FileInputStream)}; the file is not transformed or serialized
-   * at this level.
+   * Returns untyped parameters for file creation. Map value for {@code "file"} is the same instance
+   * of value set in {@link Builder#setFile(File)} or {@link
+   * Builder#setFile(java.io.FileInputStream)}; the file is not transformed or serialized at this
+   * level.
+   *
    * @return Untyped parameters containing file object set in the builder.
    */
   @Override

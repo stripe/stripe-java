@@ -7,10 +7,8 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.FileLink;
 import com.stripe.model.FileLinkCollection;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class FileLinkTest extends BaseStripeTest {
@@ -30,11 +28,7 @@ public class FileLinkTest extends BaseStripeTest {
     final FileLink fileLink = FileLink.create(params);
 
     assertNotNull(fileLink);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/file_links"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.POST, String.format("/v1/file_links"), params);
   }
 
   @Test
@@ -42,10 +36,7 @@ public class FileLinkTest extends BaseStripeTest {
     final FileLink fileLink = FileLink.retrieve(FILE_LINK_ID);
 
     assertNotNull(fileLink);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/file_links/%s", FILE_LINK_ID)
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/file_links/%s", FILE_LINK_ID));
   }
 
   @Test
@@ -63,8 +54,7 @@ public class FileLinkTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/file_links/%s", fileLink.getId()),
-        params
-    );
+        params);
   }
 
   @Test
@@ -76,9 +66,6 @@ public class FileLinkTest extends BaseStripeTest {
     final FileLinkCollection fileLinks = FileLink.list(params);
 
     assertNotNull(fileLinks);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/file_links")
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/file_links"));
   }
 }

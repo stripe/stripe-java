@@ -8,12 +8,10 @@ import com.stripe.model.ApplicationFee;
 import com.stripe.model.FeeRefund;
 import com.stripe.model.FeeRefundCollection;
 import com.stripe.net.ApiResource;
-
 import com.stripe.net.RequestOptions;
 import com.stripe.param.FeeRefundCollectionCreateParams;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class FeeRefundTest extends BaseStripeTest {
@@ -45,16 +43,15 @@ public class FeeRefundTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/application_fees/%s/refunds", fee.getId()),
-        params
-    );
+        params);
   }
 
   @Test
   public void testCreateWithTypedParams() throws StripeException {
     final ApplicationFee fee = getFeeFixture();
 
-    FeeRefundCollectionCreateParams typedParams = FeeRefundCollectionCreateParams.builder()
-        .setAmount(100L).build();
+    FeeRefundCollectionCreateParams typedParams =
+        FeeRefundCollectionCreateParams.builder().setAmount(100L).build();
 
     final FeeRefund refund = fee.getRefunds().create(typedParams, RequestOptions.getDefault());
 
@@ -64,8 +61,7 @@ public class FeeRefundTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/application_fees/%s/refunds", fee.getId()),
-        param
-    );
+        param);
   }
 
   @Test
@@ -77,8 +73,7 @@ public class FeeRefundTest extends BaseStripeTest {
     assertNotNull(refund);
     verifyRequest(
         ApiResource.RequestMethod.GET,
-        String.format("/v1/application_fees/%s/refunds/%s", fee.getId(), REFUND_ID)
-    );
+        String.format("/v1/application_fees/%s/refunds/%s", fee.getId(), REFUND_ID));
   }
 
   @Test
@@ -97,8 +92,7 @@ public class FeeRefundTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/application_fees/%s/refunds/%s", fee.getId(), refund.getId()),
-        params
-    );
+        params);
   }
 
   @Test
@@ -114,7 +108,6 @@ public class FeeRefundTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.GET,
         String.format("/v1/application_fees/%s/refunds", fee.getId()),
-        params
-    );
+        params);
   }
 }

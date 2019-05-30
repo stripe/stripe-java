@@ -8,12 +8,10 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Product;
 import com.stripe.model.ProductCollection;
 import com.stripe.net.ApiResource;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class ProductTest extends BaseStripeTest {
@@ -49,11 +47,7 @@ public class ProductTest extends BaseStripeTest {
     final Product product = Product.create(params);
 
     assertNotNull(product);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        "/v1/products",
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.POST, "/v1/products", params);
   }
 
   @Test
@@ -61,10 +55,7 @@ public class ProductTest extends BaseStripeTest {
     final Product product = Product.retrieve(PRODUCT_ID);
 
     assertNotNull(product);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/products/%s", PRODUCT_ID)
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/products/%s", PRODUCT_ID));
   }
 
   @Test
@@ -78,10 +69,7 @@ public class ProductTest extends BaseStripeTest {
 
     assertNotNull(updatedProduct);
     verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/products/%s", product.getId()),
-        params
-    );
+        ApiResource.RequestMethod.POST, String.format("/v1/products/%s", product.getId()), params);
   }
 
   @Test
@@ -93,9 +81,7 @@ public class ProductTest extends BaseStripeTest {
     assertNotNull(deletedProduct);
     assertTrue(deletedProduct.getDeleted());
     verifyRequest(
-        ApiResource.RequestMethod.DELETE,
-        String.format("/v1/products/%s", product.getId())
-    );
+        ApiResource.RequestMethod.DELETE, String.format("/v1/products/%s", product.getId()));
   }
 
   @Test
@@ -106,10 +92,6 @@ public class ProductTest extends BaseStripeTest {
     final ProductCollection products = Product.list(params);
 
     assertNotNull(products);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        "/v1/products",
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, "/v1/products", params);
   }
 }
