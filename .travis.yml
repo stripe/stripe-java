@@ -38,7 +38,7 @@ notifications:
 script:
   - ./gradlew --version
   - ./gradlew clean
-  - if [ "$TRAVIS_JDK_VERSION" == "oraclejdk9" ]; then ./gradlew check; fi
+  - if [ "$TRAVIS_JDK_VERSION" == "oraclejdk8" ]; then ./gradlew check verGJF; fi
   - ./gradlew -Djdk.tls.client.protocols="TLSv1.2" cobertura coveralls
 
 before_cache:
