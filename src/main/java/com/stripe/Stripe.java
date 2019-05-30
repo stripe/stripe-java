@@ -2,7 +2,6 @@ package com.stripe;
 
 import java.net.PasswordAuthentication;
 import java.net.Proxy;
-
 import java.util.HashMap;
 import java.util.Map;
 
@@ -35,10 +34,9 @@ public abstract class Stripe {
 
   private static volatile Map<String, String> appInfo = null;
 
-
   /**
-   * (FOR TESTING ONLY) If you'd like your API requests to hit your own
-   * (mocked) server, you can set this up here by overriding the base api URL.
+   * (FOR TESTING ONLY) If you'd like your API requests to hit your own (mocked) server, you can set
+   * this up here by overriding the base api URL.
    */
   public static void overrideApiBase(final String overriddenApiBase) {
     apiBase = overriddenApiBase;
@@ -49,9 +47,8 @@ public abstract class Stripe {
   }
 
   /**
-   * (FOR TESTING ONLY) If you'd like your OAuth requests to hit your own
-   * (mocked) server, you can set this up here by overriding the base Connect
-   * URL.
+   * (FOR TESTING ONLY) If you'd like your OAuth requests to hit your own (mocked) server, you can
+   * set this up here by overriding the base Connect URL.
    */
   public static void overrideConnectBase(final String overriddenConnectBase) {
     connectBase = overriddenConnectBase;
@@ -62,8 +59,8 @@ public abstract class Stripe {
   }
 
   /**
-   * (FOR TESTING ONLY) If you'd like your upload requests to hit your own
-   * (mocked) server, you can set this up here by overriding the base api URL.
+   * (FOR TESTING ONLY) If you'd like your upload requests to hit your own (mocked) server, you can
+   * set this up here by overriding the base api URL.
    */
   public static void overrideUploadBase(final String overriddenUploadBase) {
     uploadBase = overriddenUploadBase;
@@ -99,8 +96,8 @@ public abstract class Stripe {
   }
 
   /**
-   * Sets the timeout value that will be used for making new connections to
-   * the Stripe API (in milliseconds).
+   * Sets the timeout value that will be used for making new connections to the Stripe API (in
+   * milliseconds).
    *
    * @param timeout timeout value in milliseconds
    */
@@ -121,12 +118,11 @@ public abstract class Stripe {
   }
 
   /**
-   * Sets the timeout value that will be used when reading data from an
-   * established connection to the Stripe API (in milliseconds).
+   * Sets the timeout value that will be used when reading data from an established connection to
+   * the Stripe API (in milliseconds).
    *
-   * <p>Note that this value should be set conservatively because some API
-   * requests can take time and a short timeout increases the likelihood of
-   * causing a problem in the backend.
+   * <p>Note that this value should be set conservatively because some API requests can take time
+   * and a short timeout increases the likelihood of causing a problem in the backend.
    *
    * @param timeout timeout value in milliseconds
    */

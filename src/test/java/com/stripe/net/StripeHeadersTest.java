@@ -3,12 +3,10 @@ package com.stripe.net;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import com.stripe.BaseStripeTest;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class StripeHeadersTest extends BaseStripeTest {

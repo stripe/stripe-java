@@ -11,8 +11,8 @@ public class SourceTransactionTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     final String json = getResourceAsString("/api_fixtures/source_transactions.json");
-    final SourceTransactionCollection transactions = ApiResource.GSON.fromJson(json,
-        SourceTransactionCollection.class);
+    final SourceTransactionCollection transactions =
+        ApiResource.GSON.fromJson(json, SourceTransactionCollection.class);
 
     assertNotNull(transactions);
     assertEquals("/v1/sources/src_123/source_transactions", transactions.getUrl());

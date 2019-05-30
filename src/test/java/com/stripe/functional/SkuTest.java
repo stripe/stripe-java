@@ -9,12 +9,10 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Sku;
 import com.stripe.model.SkuCollection;
 import com.stripe.net.ApiResource;
-
 import com.stripe.net.RequestOptions;
 import com.stripe.param.SkuCreateParams;
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class SkuTest extends BaseStripeTest {
@@ -33,41 +31,37 @@ public class SkuTest extends BaseStripeTest {
     final Sku sku = Sku.create(params);
 
     assertNotNull(sku);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        "/v1/skus",
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.POST, "/v1/skus", params);
   }
 
   @Test
   public void testCreateWithTypedParams() throws StripeException {
-    SkuCreateParams.Inventory inventory = SkuCreateParams.Inventory.builder()
-        .setType(SkuCreateParams.Inventory.Type.BUCKET)
-        .setValue(SkuCreateParams.Inventory.Value.LIMITED).build();
+    SkuCreateParams.Inventory inventory =
+        SkuCreateParams.Inventory.builder()
+            .setType(SkuCreateParams.Inventory.Type.BUCKET)
+            .setValue(SkuCreateParams.Inventory.Value.LIMITED)
+            .build();
 
     Map<String, String> additionalAttributes = new HashMap<>();
     additionalAttributes.put("attr2", "val2");
 
-    SkuCreateParams typedParams = SkuCreateParams.builder()
-        .setActive(true)
-        // support both individual key/value entry and the whole map
-        .putAttribute("attr1", "val1")
-        .putAllAttribute(additionalAttributes)
-        .setPrice(499L)
-        .setCurrency("usd")
-        .setInventory(inventory)
-        .setProduct("prod_123")
-        .setImage("http://example.com/foo.png").build();
+    SkuCreateParams typedParams =
+        SkuCreateParams.builder()
+            .setActive(true)
+            // support both individual key/value entry and the whole map
+            .putAttribute("attr1", "val1")
+            .putAllAttribute(additionalAttributes)
+            .setPrice(499L)
+            .setCurrency("usd")
+            .setInventory(inventory)
+            .setProduct("prod_123")
+            .setImage("http://example.com/foo.png")
+            .build();
 
     final Sku sku = Sku.create(typedParams, RequestOptions.getDefault());
 
     assertNotNull(sku);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        "/v1/skus",
-        createUntypedParams()
-    );
+    verifyRequest(ApiResource.RequestMethod.POST, "/v1/skus", createUntypedParams());
   }
 
   private Map<String, Object> createUntypedParams() {
@@ -93,10 +87,7 @@ public class SkuTest extends BaseStripeTest {
     final Sku sku = Sku.retrieve(SKU_ID);
 
     assertNotNull(sku);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/skus/%s", SKU_ID)
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/skus/%s", SKU_ID));
   }
 
   @Test
@@ -113,10 +104,7 @@ public class SkuTest extends BaseStripeTest {
 
     assertNotNull(updatedSku);
     verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/skus/%s", sku.getId()),
-        params
-    );
+        ApiResource.RequestMethod.POST, String.format("/v1/skus/%s", sku.getId()), params);
   }
 
   @Test
@@ -127,10 +115,7 @@ public class SkuTest extends BaseStripeTest {
 
     assertNotNull(deletedSku);
     assertTrue(deletedSku.getDeleted());
-    verifyRequest(
-        ApiResource.RequestMethod.DELETE,
-        String.format("/v1/skus/%s", sku.getId())
-    );
+    verifyRequest(ApiResource.RequestMethod.DELETE, String.format("/v1/skus/%s", sku.getId()));
   }
 
   @Test
@@ -142,10 +127,6 @@ public class SkuTest extends BaseStripeTest {
 
     assertNotNull(skus);
     assertEquals(1, skus.getData().size());
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        "/v1/skus",
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, "/v1/skus", params);
   }
 }

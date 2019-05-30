@@ -6,9 +6,7 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.net.ApiResource;
-
 import java.math.BigDecimal;
-
 import org.junit.jupiter.api.Test;
 
 public class SubscriptionTest extends BaseStripeTest {
@@ -25,9 +23,7 @@ public class SubscriptionTest extends BaseStripeTest {
   public void testDeserializeWithExpansions() throws Exception {
     // TODO: Add support for expanding "transfer_data.destination" when stripe-mock supports it.
     final String[] expansions = {
-      "customer",
-      "default_source",
-      "latest_invoice",
+      "customer", "default_source", "latest_invoice",
     };
     final String data = getFixture("/v1/subscriptions/sub_123", expansions);
     final Subscription subscription = ApiResource.GSON.fromJson(data, Subscription.class);

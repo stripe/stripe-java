@@ -6,14 +6,11 @@ import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.google.gson.annotations.SerializedName;
-
 import com.stripe.param.common.EmptyParam;
-
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class ApiRequestParamsConverterTest {
@@ -22,7 +19,8 @@ public class ApiRequestParamsConverterTest {
   // To test interactions between the flattening and empty enums
   enum ParamCode implements ApiRequestParams.EnumParam {
     ENUM_FOO("enum_foo"),
-    ENUM_BAR("enum_bar"),;
+    ENUM_BAR("enum_bar"),
+    ;
 
     private final String value;
 
@@ -73,8 +71,7 @@ public class ApiRequestParamsConverterTest {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     private Map<String, String> extraParams;
 
-    public RootModelHasNestedExtraParams(EnumParam rootEnumValue,
-                                         ModelHasExtraParams subParamFoo) {
+    public RootModelHasNestedExtraParams(EnumParam rootEnumValue, ModelHasExtraParams subParamFoo) {
       this.rootStringValue = "bar";
       this.rootEnumValue = rootEnumValue;
       this.subParamFoo = subParamFoo;
@@ -111,9 +108,7 @@ public class ApiRequestParamsConverterTest {
   public void testHasExtraParams() {
     ModelHasExtraParams params = new ModelHasExtraParams(ParamCode.ENUM_FOO);
 
-    assertEquals(
-        ModelHasExtraParams.expectedParams("enum_foo"),
-        toMap(params));
+    assertEquals(ModelHasExtraParams.expectedParams("enum_foo"), toMap(params));
   }
 
   @Test
@@ -133,11 +128,10 @@ public class ApiRequestParamsConverterTest {
   @Test
   public void testHasNestedExtraParams() {
     ModelHasExtraParams fooParams = new ModelHasExtraParams(ParamCode.ENUM_FOO);
-    RootModelHasNestedExtraParams barParams = new RootModelHasNestedExtraParams(
-        ParamCode.ENUM_BAR, fooParams);
+    RootModelHasNestedExtraParams barParams =
+        new RootModelHasNestedExtraParams(ParamCode.ENUM_BAR, fooParams);
 
-    Map<String, Object> expected = RootModelHasNestedExtraParams
-        .expectedParams("enum_bar");
+    Map<String, Object> expected = RootModelHasNestedExtraParams.expectedParams("enum_bar");
     expected.put("sub_param_foo", ModelHasExtraParams.expectedParams("enum_foo"));
 
     assertEquals(expected, toMap(barParams));
@@ -147,8 +141,8 @@ public class ApiRequestParamsConverterTest {
   public void testHasNestedExtraParamsWithEmpty() {
     ModelHasExtraParams fooParams = new ModelHasExtraParams(EmptyParam.EMPTY);
 
-    RootModelHasNestedExtraParams barParams = new RootModelHasNestedExtraParams(
-        EmptyParam.EMPTY, fooParams);
+    RootModelHasNestedExtraParams barParams =
+        new RootModelHasNestedExtraParams(EmptyParam.EMPTY, fooParams);
 
     Map<String, Object> expected = RootModelHasNestedExtraParams.expectedParams(null);
     expected.put("sub_param_foo", ModelHasExtraParams.expectedParams(null));
@@ -159,17 +153,17 @@ public class ApiRequestParamsConverterTest {
   @Test
   public void testHasListExtraParams() {
     ModelHasListExtraParams params = new ModelHasListExtraParams();
-    params.paramFooList = Arrays.asList(
-        new ModelHasExtraParams(ParamCode.ENUM_FOO),
-        new ModelHasExtraParams(ParamCode.ENUM_BAR)
-    );
+    params.paramFooList =
+        Arrays.asList(
+            new ModelHasExtraParams(ParamCode.ENUM_FOO),
+            new ModelHasExtraParams(ParamCode.ENUM_BAR));
 
     Map<String, Object> expected = new HashMap<>();
-    expected.put("param_foo_list",
+    expected.put(
+        "param_foo_list",
         Arrays.asList(
             ModelHasExtraParams.expectedParams("enum_foo"),
-            ModelHasExtraParams.expectedParams("enum_bar")
-        ));
+            ModelHasExtraParams.expectedParams("enum_bar")));
     assertEquals(expected, toMap(params));
   }
 
@@ -184,7 +178,7 @@ public class ApiRequestParamsConverterTest {
     Map<String, Object> untypedParams = toMap(params);
     assertEquals(1, untypedParams.size());
     assertTrue(untypedParams.containsKey("extra_params"));
-    Map<String, Object> subParams = (Map<String, Object>)untypedParams.get("extra_params");
+    Map<String, Object> subParams = (Map<String, Object>) untypedParams.get("extra_params");
     assertEquals(1, subParams.size());
     assertEquals("bar", subParams.get("foo"));
   }
@@ -194,9 +188,12 @@ public class ApiRequestParamsConverterTest {
     IllegalModelHasWrongExtraParamsType params = new IllegalModelHasWrongExtraParamsType();
     params.extraParams = "should have been a map";
 
-    IllegalStateException exception = assertThrows(IllegalStateException.class, () -> {
-      toMap(params);
-    });
+    IllegalStateException exception =
+        assertThrows(
+            IllegalStateException.class,
+            () -> {
+              toMap(params);
+            });
     assertTrue(exception.getMessage().contains("Unexpected schema for extra params"));
   }
 
@@ -208,11 +205,17 @@ public class ApiRequestParamsConverterTest {
     assertTrue(fooParams.toMap().containsKey("string_value"));
     fooParams.extraParams.put("string_value", "my conflicting param value");
 
-    IllegalArgumentException exception = assertThrows(IllegalArgumentException.class, () -> {
-      toMap(fooParams);
-    });
-    assertTrue(exception.getMessage().contains(
-        "Found param key `string_value` with values `foo` and `my conflicting param value`."));
+    IllegalArgumentException exception =
+        assertThrows(
+            IllegalArgumentException.class,
+            () -> {
+              toMap(fooParams);
+            });
+    assertTrue(
+        exception
+            .getMessage()
+            .contains(
+                "Found param key `string_value` with values `foo` and `my conflicting param value`."));
   }
 
   private Map<String, Object> toMap(ApiRequestParams params) {

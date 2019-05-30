@@ -8,10 +8,8 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.ApplePayDomain;
 import com.stripe.model.ApplePayDomainCollection;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class ApplePayDomainTest extends BaseStripeTest {
@@ -31,11 +29,7 @@ public class ApplePayDomainTest extends BaseStripeTest {
     final ApplePayDomain domain = ApplePayDomain.create(params);
 
     assertNotNull(domain);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/apple_pay/domains"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.POST, String.format("/v1/apple_pay/domains"), params);
   }
 
   @Test
@@ -44,9 +38,7 @@ public class ApplePayDomainTest extends BaseStripeTest {
 
     assertNotNull(domain);
     verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/apple_pay/domains/%s", DOMAIN_ID)
-    );
+        ApiResource.RequestMethod.GET, String.format("/v1/apple_pay/domains/%s", DOMAIN_ID));
   }
 
   @Test
@@ -57,11 +49,7 @@ public class ApplePayDomainTest extends BaseStripeTest {
     final ApplePayDomainCollection domains = ApplePayDomain.list(params);
 
     assertNotNull(domains);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/apple_pay/domains"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/apple_pay/domains"), params);
   }
 
   @Test
@@ -74,7 +62,6 @@ public class ApplePayDomainTest extends BaseStripeTest {
     assertTrue(deletedDomain.getDeleted());
     verifyRequest(
         ApiResource.RequestMethod.DELETE,
-        String.format("/v1/apple_pay/domains/%s", domain.getId())
-    );
+        String.format("/v1/apple_pay/domains/%s", domain.getId()));
   }
 }

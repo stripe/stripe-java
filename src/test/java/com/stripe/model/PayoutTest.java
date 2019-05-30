@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.net.ApiResource;
-
 import java.io.IOException;
 import org.junit.jupiter.api.Test;
 
@@ -20,9 +19,8 @@ public class PayoutTest extends BaseStripeTest {
 
   @Test
   public void testDeserializeWithExpandedDeletedBankAccount() throws IOException {
-    final String data = getResourceAsString(
-        "/api_fixtures/payout_with_del_ext_bank_acct_expansion.json"
-    );
+    final String data =
+        getResourceAsString("/api_fixtures/payout_with_del_ext_bank_acct_expansion.json");
     final Payout resource = ApiResource.GSON.fromJson(data, Payout.class);
     final BankAccount bankAccount = (BankAccount) resource.getDestinationObject();
 

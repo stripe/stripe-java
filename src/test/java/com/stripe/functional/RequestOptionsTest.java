@@ -10,7 +10,6 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Balance;
 import com.stripe.net.RequestOptions;
 import com.stripe.net.StripeResponse;
-
 import org.junit.jupiter.api.Test;
 
 public class RequestOptionsTest extends BaseStripeTest {

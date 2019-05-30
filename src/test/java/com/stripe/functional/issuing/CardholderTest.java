@@ -7,12 +7,9 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.issuing.Cardholder;
 import com.stripe.model.issuing.CardholderCollection;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
-
 
 public class CardholderTest extends BaseStripeTest {
   public static final String CARDHOLDER_ID = "ich_123";
@@ -36,11 +33,7 @@ public class CardholderTest extends BaseStripeTest {
     final Cardholder cardholder = Cardholder.create(params);
 
     assertNotNull(cardholder);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/issuing/cardholders"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.POST, String.format("/v1/issuing/cardholders"), params);
   }
 
   @Test
@@ -49,9 +42,7 @@ public class CardholderTest extends BaseStripeTest {
 
     assertNotNull(cardholder);
     verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/issuing/cardholders/%s", CARDHOLDER_ID)
-    );
+        ApiResource.RequestMethod.GET, String.format("/v1/issuing/cardholders/%s", CARDHOLDER_ID));
   }
 
   @Test
@@ -69,8 +60,7 @@ public class CardholderTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/issuing/cardholders/%s", cardholder.getId()),
-        params
-    );
+        params);
   }
 
   @Test
@@ -81,10 +71,6 @@ public class CardholderTest extends BaseStripeTest {
     CardholderCollection cardholders = Cardholder.list(params);
 
     assertNotNull(cardholders);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/issuing/cardholders"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/issuing/cardholders"), params);
   }
 }

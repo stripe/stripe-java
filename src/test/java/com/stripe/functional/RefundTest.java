@@ -7,12 +7,9 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Refund;
 import com.stripe.model.RefundCollection;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
-
 
 public class RefundTest extends BaseStripeTest {
   public static final String REFUND_ID = "re_123";
@@ -31,11 +28,7 @@ public class RefundTest extends BaseStripeTest {
     final Refund refund = Refund.create(params);
 
     assertNotNull(refund);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/refunds"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.POST, String.format("/v1/refunds"), params);
   }
 
   @Test
@@ -43,10 +36,7 @@ public class RefundTest extends BaseStripeTest {
     final Refund refund = Refund.retrieve(REFUND_ID);
 
     assertNotNull(refund);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/refunds/%s", REFUND_ID)
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/refunds/%s", REFUND_ID));
   }
 
   @Test
@@ -62,10 +52,7 @@ public class RefundTest extends BaseStripeTest {
 
     assertNotNull(updatedRefund);
     verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/refunds/%s", refund.getId()),
-        params
-    );
+        ApiResource.RequestMethod.POST, String.format("/v1/refunds/%s", refund.getId()), params);
   }
 
   @Test
@@ -76,10 +63,6 @@ public class RefundTest extends BaseStripeTest {
     final RefundCollection refunds = Refund.list(params);
 
     assertNotNull(refunds);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/refunds"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/refunds"), params);
   }
 }

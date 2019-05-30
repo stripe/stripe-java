@@ -2,23 +2,26 @@ package com.stripe.net;
 
 import com.stripe.Stripe;
 import java.util.Map;
-
 import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = false)
 public class RequestOptions {
   public static RequestOptions getDefault() {
-    return new RequestOptions(Stripe.apiKey, Stripe.clientId, null, null, null,
-        Stripe.getConnectTimeout(), Stripe.getReadTimeout());
+    return new RequestOptions(
+        Stripe.apiKey,
+        Stripe.clientId,
+        null,
+        null,
+        null,
+        Stripe.getConnectTimeout(),
+        Stripe.getReadTimeout());
   }
 
   private final String apiKey;
   private final String clientId;
   private final String idempotencyKey;
   private final String stripeAccount;
-  /**
-   * Stripe version always set at {@link Stripe#API_VERSION}.
-   */
+  /** Stripe version always set at {@link Stripe#API_VERSION}. */
   private final String stripeVersion = Stripe.API_VERSION;
   /**
    * Stripe version override when made on behalf of others. This can be used when the returned
@@ -29,9 +32,14 @@ public class RequestOptions {
   private final int connectTimeout;
   private final int readTimeout;
 
-  private RequestOptions(String apiKey, String clientId, String idempotencyKey,
-                         String stripeAccount, String stripeVersionOverride,
-                         int connectTimeout, int readTimeout) {
+  private RequestOptions(
+      String apiKey,
+      String clientId,
+      String idempotencyKey,
+      String stripeAccount,
+      String stripeVersionOverride,
+      int connectTimeout,
+      int readTimeout) {
     this.apiKey = apiKey;
     this.clientId = clientId;
     this.idempotencyKey = idempotencyKey;
@@ -79,11 +87,11 @@ public class RequestOptions {
 
   /**
    * Convert request options to builder, retaining invariant values for the integration.
+   *
    * @return option builder.
    */
   public RequestOptionsBuilder toBuilder() {
-    return new RequestOptionsBuilder()
-        .setApiKey(this.apiKey).setStripeAccount(this.stripeAccount);
+    return new RequestOptionsBuilder().setApiKey(this.apiKey).setStripeAccount(this.stripeAccount);
   }
 
   public static final class RequestOptionsBuilder {
@@ -96,8 +104,8 @@ public class RequestOptions {
     private int readTimeout;
 
     /**
-     * Constructs a request options builder with the global parameters (API key, client ID and
-     * API version) as default values.
+     * Constructs a request options builder with the global parameters (API key, client ID and API
+     * version) as default values.
      */
     public RequestOptionsBuilder() {
       this.apiKey = Stripe.apiKey;
@@ -142,8 +150,8 @@ public class RequestOptions {
     }
 
     /**
-     * Sets the timeout value that will be used for making new connections to
-     * the Stripe API (in milliseconds).
+     * Sets the timeout value that will be used for making new connections to the Stripe API (in
+     * milliseconds).
      *
      * @param timeout timeout value in milliseconds
      */
@@ -157,12 +165,11 @@ public class RequestOptions {
     }
 
     /**
-     * Sets the timeout value that will be used when reading data from an
-     * established connection to the Stripe API (in milliseconds).
+     * Sets the timeout value that will be used when reading data from an established connection to
+     * the Stripe API (in milliseconds).
      *
-     * <p>Note that this value should be set conservatively because some API
-     * requests can take time and a short timeout increases the likelihood
-     * of causing a problem in the backend.
+     * <p>Note that this value should be set conservatively because some API requests can take time
+     * and a short timeout increases the likelihood of causing a problem in the backend.
      *
      * @param timeout timeout value in milliseconds
      */
@@ -198,15 +205,15 @@ public class RequestOptions {
     }
 
     /**
-     * Do not use this except for in API where JSON response is not fully deserialized into
-     * explicit Stripe classes, but only passed to other clients as raw data -- essentially
-     * making request on behalf of others with their API version. One example is in
-     * {@link com.stripe.model.EphemeralKey#create(Map, RequestOptions)}.
-     * Setting this value in a typical scenario will result in deserialization error
-     * as the model classes have schema according to the pinned {@link Stripe#API_VERSION} and not
-     * the {@code stripeVersionOverride}
+     * Do not use this except for in API where JSON response is not fully deserialized into explicit
+     * Stripe classes, but only passed to other clients as raw data -- essentially making request on
+     * behalf of others with their API version. One example is in {@link
+     * com.stripe.model.EphemeralKey#create(Map, RequestOptions)}. Setting this value in a typical
+     * scenario will result in deserialization error as the model classes have schema according to
+     * the pinned {@link Stripe#API_VERSION} and not the {@code stripeVersionOverride}
+     *
      * @param stripeVersionOverride stripe version override which belongs to the client to make
-     *                              request on behalf of.
+     *     request on behalf of.
      * @return option builder
      */
     public RequestOptionsBuilder setStripeVersionOverride(String stripeVersionOverride) {
@@ -218,9 +225,7 @@ public class RequestOptions {
       return setStripeVersionOverride(null);
     }
 
-    /**
-     * Constructs a {@link RequestOptions} with the specified values.
-     */
+    /** Constructs a {@link RequestOptions} with the specified values. */
     public RequestOptions build() {
       return new RequestOptions(
           normalizeApiKey(this.apiKey),
@@ -279,8 +284,9 @@ public class RequestOptions {
     }
     if (normalized.length() > 255) {
       throw new InvalidRequestOptionsException(
-          String.format("Idempotency Key length was %d, which is larger than the 255 character "
-              + "maximum!", normalized.length()));
+          String.format(
+              "Idempotency Key length was %d, which is larger than the 255 character " + "maximum!",
+              normalized.length()));
     }
     return normalized;
   }

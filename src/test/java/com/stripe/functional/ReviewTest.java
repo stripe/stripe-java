@@ -7,10 +7,8 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Review;
 import com.stripe.model.ReviewCollection;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class ReviewTest extends BaseStripeTest {
@@ -29,9 +27,7 @@ public class ReviewTest extends BaseStripeTest {
     review.approve();
     assertNotNull(review);
     verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/reviews/%s/approve", review.getId())
-    );
+        ApiResource.RequestMethod.POST, String.format("/v1/reviews/%s/approve", review.getId()));
   }
 
   @Test
@@ -42,10 +38,7 @@ public class ReviewTest extends BaseStripeTest {
     final ReviewCollection reviews = Review.list(params);
 
     assertNotNull(reviews);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/reviews")
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/reviews"));
   }
 
   @Test
@@ -53,9 +46,6 @@ public class ReviewTest extends BaseStripeTest {
     final Review review = Review.retrieve(REVIEW_ID);
 
     assertNotNull(review);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/reviews/%s", review.getId())
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/reviews/%s", review.getId()));
   }
 }

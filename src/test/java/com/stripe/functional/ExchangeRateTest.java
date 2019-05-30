@@ -7,10 +7,8 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.ExchangeRate;
 import com.stripe.model.ExchangeRateCollection;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class ExchangeRateTest extends BaseStripeTest {
@@ -21,10 +19,7 @@ public class ExchangeRateTest extends BaseStripeTest {
     final ExchangeRate rate = ExchangeRate.retrieve(CURRENCY);
 
     assertNotNull(rate);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/exchange_rates/usd")
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/exchange_rates/usd"));
   }
 
   @Test
@@ -35,9 +30,6 @@ public class ExchangeRateTest extends BaseStripeTest {
     final ExchangeRateCollection rates = ExchangeRate.list(params);
 
     assertNotNull(rates);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/exchange_rates")
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/exchange_rates"));
   }
 }

@@ -8,13 +8,11 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.WebhookEndpoint;
 import com.stripe.model.WebhookEndpointCollection;
 import com.stripe.net.ApiResource;
-
 import com.stripe.param.WebhookEndpointCreateParams;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class WebhookEndpointTest extends BaseStripeTest {
@@ -33,11 +31,7 @@ public class WebhookEndpointTest extends BaseStripeTest {
     final WebhookEndpoint endpoint = WebhookEndpoint.create(params);
 
     assertNotNull(endpoint);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/webhook_endpoints"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.POST, String.format("/v1/webhook_endpoints"), params);
   }
 
   private Map<String, Object> createUntypedParams() {
@@ -54,19 +48,17 @@ public class WebhookEndpointTest extends BaseStripeTest {
   public void testCreateWithTypedParams() throws StripeException {
     final Map<String, Object> untypedParams = createUntypedParams();
 
-    WebhookEndpointCreateParams createParams = WebhookEndpointCreateParams
-        .builder()
-        .addEnabledEvent(WebhookEndpointCreateParams.EnabledEvent.CHARGE__SUCCEEDED)
-        .setUrl("https://stripe.com").build();
+    WebhookEndpointCreateParams createParams =
+        WebhookEndpointCreateParams.builder()
+            .addEnabledEvent(WebhookEndpointCreateParams.EnabledEvent.CHARGE__SUCCEEDED)
+            .setUrl("https://stripe.com")
+            .build();
 
     final WebhookEndpoint endpoint = WebhookEndpoint.create(createParams);
 
     assertNotNull(endpoint);
     verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/webhook_endpoints"),
-        untypedParams
-    );
+        ApiResource.RequestMethod.POST, String.format("/v1/webhook_endpoints"), untypedParams);
   }
 
   @Test
@@ -76,8 +68,7 @@ public class WebhookEndpointTest extends BaseStripeTest {
     assertNotNull(endpoint);
     verifyRequest(
         ApiResource.RequestMethod.GET,
-        String.format("/v1/webhook_endpoints/%s", WEBHOOK_ENDPOINT_ID)
-    );
+        String.format("/v1/webhook_endpoints/%s", WEBHOOK_ENDPOINT_ID));
   }
 
   @Test
@@ -96,8 +87,7 @@ public class WebhookEndpointTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/webhook_endpoints/%s", endpoint.getId()),
-        params
-    );
+        params);
   }
 
   @Test
@@ -108,10 +98,7 @@ public class WebhookEndpointTest extends BaseStripeTest {
     final WebhookEndpointCollection endpoints = WebhookEndpoint.list(params);
 
     assertNotNull(endpoints);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/webhook_endpoints")
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/webhook_endpoints"));
   }
 
   @Test
@@ -124,7 +111,6 @@ public class WebhookEndpointTest extends BaseStripeTest {
     assertTrue(deletedWebhookEndpoint.getDeleted());
     verifyRequest(
         ApiResource.RequestMethod.DELETE,
-        String.format("/v1/webhook_endpoints/%s", endpoint.getId())
-    );
+        String.format("/v1/webhook_endpoints/%s", endpoint.getId()));
   }
 }

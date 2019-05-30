@@ -18,23 +18,18 @@ public class LoginLinkTest extends BaseStripeTest {
   public void testCreate() throws IOException, StripeException {
     final Account account = Account.retrieve(ACCOUNT_ID, null);
 
-    final LoginLink link = LoginLink.createOnAccount(ACCOUNT_ID,
-        (Map<String, Object>) null, null);
-
+    final LoginLink link = LoginLink.createOnAccount(ACCOUNT_ID, (Map<String, Object>) null, null);
 
     stubRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/accounts/%s/login_links", account.getId()),
         null,
         LoginLink.class,
-        getResourceAsString("/api_fixtures/login_link.json")
-    );
-
+        getResourceAsString("/api_fixtures/login_link.json"));
 
     assertNotNull(link);
     verifyRequest(
         ApiResource.RequestMethod.POST,
-        String.format("/v1/accounts/%s/login_links", account.getId())
-    );
+        String.format("/v1/accounts/%s/login_links", account.getId()));
   }
 }

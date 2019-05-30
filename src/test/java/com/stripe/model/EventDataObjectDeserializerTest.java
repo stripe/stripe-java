@@ -12,15 +12,11 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
-
 import com.stripe.BaseStripeTest;
 import com.stripe.exception.EventDataObjectDeserializationException;
 import com.stripe.net.ApiResource;
-
 import java.io.IOException;
-
 import org.junit.jupiter.api.Test;
-
 import org.mockito.Mockito;
 
 public class EventDataObjectDeserializerTest extends BaseStripeTest {
@@ -40,8 +36,7 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
   }
 
   private String getOldEventStringFixture() throws IOException {
-    return getResourceAsString(
-        "/api_fixtures/account_application_deauthorized_old_version.json");
+    return getResourceAsString("/api_fixtures/account_application_deauthorized_old_version.json");
   }
 
   @Test
@@ -53,8 +48,8 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
     assertNotNull(event.getId());
 
     assertEquals(CURRENT_EVENT_VERSION, event.getApiVersion());
-    EventDataObjectDeserializer deserializer = stubIntegrationApiVersion(
-        event.getDataObjectDeserializer(), CURRENT_EVENT_VERSION);
+    EventDataObjectDeserializer deserializer =
+        stubIntegrationApiVersion(event.getDataObjectDeserializer(), CURRENT_EVENT_VERSION);
 
     assertTrue(deserializer.getObject().isPresent());
     verifyDeserializedStripeObject(deserializer.getObject().get());
@@ -69,8 +64,8 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
     assertNotNull(event.getId());
 
     assertNotEquals(NO_MATCH_VERSION, event.getApiVersion());
-    EventDataObjectDeserializer deserializer = stubIntegrationApiVersion(
-        event.getDataObjectDeserializer(), NO_MATCH_VERSION);
+    EventDataObjectDeserializer deserializer =
+        stubIntegrationApiVersion(event.getDataObjectDeserializer(), NO_MATCH_VERSION);
 
     assertFalse(deserializer.getObject().isPresent());
 
@@ -81,14 +76,14 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
   }
 
   @Test
-  public void testDeserializeUnsafeDoesNotMutateState() throws IOException,
-      EventDataObjectDeserializationException {
+  public void testDeserializeUnsafeDoesNotMutateState()
+      throws IOException, EventDataObjectDeserializationException {
 
     final String data = getCurrentEventStringFixture();
     final Event event = ApiResource.GSON.fromJson(data, Event.class);
 
-    EventDataObjectDeserializer deserializer = stubIntegrationApiVersion(
-        event.getDataObjectDeserializer(), NO_MATCH_VERSION);
+    EventDataObjectDeserializer deserializer =
+        stubIntegrationApiVersion(event.getDataObjectDeserializer(), NO_MATCH_VERSION);
 
     assertFalse(deserializer.getObject().isPresent());
 
@@ -104,8 +99,8 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
     final Event event = ApiResource.GSON.fromJson(data, Event.class);
 
     assertEquals(OLD_EVENT_VERSION, event.getApiVersion());
-    EventDataObjectDeserializer deserializer = stubIntegrationApiVersion(
-        event.getDataObjectDeserializer(), OLD_EVENT_VERSION);
+    EventDataObjectDeserializer deserializer =
+        stubIntegrationApiVersion(event.getDataObjectDeserializer(), OLD_EVENT_VERSION);
 
     assertFalse(deserializer.getObject().isPresent());
 
@@ -113,12 +108,17 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
       deserializer.deserializeUnsafe();
       fail("Expect event data deserialization failure.");
     } catch (EventDataObjectDeserializationException e) {
-      JsonElement originalEventData = new JsonParser().parse(data)
-          .getAsJsonObject().get("data")
-          .getAsJsonObject().get("object");
+      JsonElement originalEventData =
+          new JsonParser()
+              .parse(data)
+              .getAsJsonObject()
+              .get("data")
+              .getAsJsonObject()
+              .get("object");
       assertEquals(originalEventData.toString(), e.getRawJson());
-      assertTrue(e.getMessage()
-          .contains("Unable to deserialize event data object to respective Stripe object"));
+      assertTrue(
+          e.getMessage()
+              .contains("Unable to deserialize event data object to respective Stripe object"));
     }
   }
 
@@ -128,8 +128,8 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
     final Event event = ApiResource.GSON.fromJson(data, Event.class);
 
     assertEquals(OLD_EVENT_VERSION, event.getApiVersion());
-    EventDataObjectDeserializer deserializer = stubIntegrationApiVersion(
-        event.getDataObjectDeserializer(), NO_MATCH_VERSION);
+    EventDataObjectDeserializer deserializer =
+        stubIntegrationApiVersion(event.getDataObjectDeserializer(), NO_MATCH_VERSION);
 
     assertFalse(deserializer.getObject().isPresent());
 
@@ -147,8 +147,8 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
     final String data = getOldEventStringFixture();
     final Event event = ApiResource.GSON.fromJson(data, Event.class);
 
-    final EventDataObjectDeserializer deserializer = stubIntegrationApiVersion(
-        event.getDataObjectDeserializer(), NO_MATCH_VERSION);
+    final EventDataObjectDeserializer deserializer =
+        stubIntegrationApiVersion(event.getDataObjectDeserializer(), NO_MATCH_VERSION);
 
     assertFalse(deserializer.getObject().isPresent());
 
@@ -156,18 +156,18 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
       deserializer.deserializeUnsafe();
       fail("Expect event data deserialization failure.");
     } catch (EventDataObjectDeserializationException e) {
-      StripeObject deserialized = deserializer.deserializeUnsafeWith(
-          new EventDataObjectDeserializer.CompatibilityTransformer() {
-            @Override
-            public JsonObject transform(JsonObject rawJsonObject,
-                                        String apiVersion,
-                                        String eventType) {
+      StripeObject deserialized =
+          deserializer.deserializeUnsafeWith(
+              new EventDataObjectDeserializer.CompatibilityTransformer() {
+                @Override
+                public JsonObject transform(
+                    JsonObject rawJsonObject, String apiVersion, String eventType) {
 
-              assertNotSame(deserializer.rawJsonObject, rawJsonObject);
-              rawJsonObject.add("name", new JsonPrimitive("foo_name"));
-              return rawJsonObject;
-            }
-          });
+                  assertNotSame(deserializer.rawJsonObject, rawJsonObject);
+                  rawJsonObject.add("name", new JsonPrimitive("foo_name"));
+                  return rawJsonObject;
+                }
+              });
       assertNotNull(deserialized);
     }
   }
@@ -184,8 +184,8 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
     assertEquals(event.getData().object.toString(), rawJson);
   }
 
-  private EventDataObjectDeserializer stubIntegrationApiVersion(EventDataObjectDeserializer data,
-                                                                String stripeVersion) {
+  private EventDataObjectDeserializer stubIntegrationApiVersion(
+      EventDataObjectDeserializer data, String stripeVersion) {
     EventDataObjectDeserializer dataSpy = Mockito.spy(data);
     Mockito.doReturn(stripeVersion).when(dataSpy).getIntegrationApiVersion();
     return dataSpy;

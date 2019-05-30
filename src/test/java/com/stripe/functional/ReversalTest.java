@@ -8,10 +8,8 @@ import com.stripe.model.Transfer;
 import com.stripe.model.TransferReversal;
 import com.stripe.model.TransferReversalCollection;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class ReversalTest extends BaseStripeTest {
@@ -43,8 +41,7 @@ public class ReversalTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/transfers/%s/reversals", transfer.getId()),
-        params
-    );
+        params);
   }
 
   @Test
@@ -56,8 +53,7 @@ public class ReversalTest extends BaseStripeTest {
     assertNotNull(reversal);
     verifyRequest(
         ApiResource.RequestMethod.GET,
-        String.format("/v1/transfers/%s/reversals/%s", transfer.getId(), REVERSAL_ID)
-    );
+        String.format("/v1/transfers/%s/reversals/%s", transfer.getId(), REVERSAL_ID));
   }
 
   @Test
@@ -76,8 +72,7 @@ public class ReversalTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/transfers/%s/reversals/%s", transfer.getId(), reversal.getId()),
-        params
-    );
+        params);
   }
 
   @Test
@@ -93,7 +88,6 @@ public class ReversalTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.GET,
         String.format("/v1/transfers/%s/reversals", transfer.getId()),
-        params
-    );
+        params);
   }
 }

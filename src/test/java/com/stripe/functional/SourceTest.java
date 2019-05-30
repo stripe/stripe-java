@@ -10,13 +10,11 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Source;
 import com.stripe.model.SourceTransactionCollection;
 import com.stripe.net.ApiResource;
-
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class SourceTest extends BaseStripeTest {
@@ -40,11 +38,7 @@ public class SourceTest extends BaseStripeTest {
     final Source source = Source.create(params);
 
     assertNotNull(source);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        "/v1/sources",
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.POST, "/v1/sources", params);
   }
 
   @Test
@@ -52,10 +46,7 @@ public class SourceTest extends BaseStripeTest {
     final Source source = Source.retrieve(SOURCE_ID);
 
     assertNotNull(source);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/sources/%s", SOURCE_ID)
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/sources/%s", SOURCE_ID));
   }
 
   @Test
@@ -71,10 +62,7 @@ public class SourceTest extends BaseStripeTest {
 
     assertNotNull(updatedSource);
     verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/sources/%s", source.getId()),
-        params
-    );
+        ApiResource.RequestMethod.POST, String.format("/v1/sources/%s", source.getId()), params);
   }
 
   @Test
@@ -93,8 +81,7 @@ public class SourceTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/sources/%s/verify", source.getId()),
-        params
-    );
+        params);
   }
 
   @Test
@@ -109,8 +96,7 @@ public class SourceTest extends BaseStripeTest {
         String.format("/v1/customers/%s/sources/%s", source.getCustomer(), source.getId()),
         new HashMap<String, Object>(),
         Source.class,
-        getResourceAsString("/api_fixtures/source_detached.json")
-    );
+        getResourceAsString("/api_fixtures/source_detached.json"));
 
     final Source detachedSource = source.detach();
 
@@ -118,8 +104,7 @@ public class SourceTest extends BaseStripeTest {
     assertNull(detachedSource.getCustomer());
     verifyRequest(
         ApiResource.RequestMethod.DELETE,
-        String.format("/v1/customers/%s/sources/%s", source.getCustomer(), source.getId())
-    );
+        String.format("/v1/customers/%s/sources/%s", source.getCustomer(), source.getId()));
   }
 
   @Test
@@ -127,9 +112,11 @@ public class SourceTest extends BaseStripeTest {
     final Source source = getSourceFixture();
     source.setCustomer(null);
 
-    assertThrows(InvalidRequestException.class, () -> {
-      source.detach();
-    });
+    assertThrows(
+        InvalidRequestException.class,
+        () -> {
+          source.detach();
+        });
   }
 
   @Test
@@ -145,7 +132,6 @@ public class SourceTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.GET,
         String.format("/v1/sources/%s/source_transactions", SOURCE_ID),
-        params
-    );
+        params);
   }
 }

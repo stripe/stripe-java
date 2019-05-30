@@ -1,7 +1,6 @@
 package com.stripe.exception;
 
 import com.stripe.model.StripeError;
-
 import lombok.Getter;
 import lombok.Setter;
 
@@ -9,11 +8,8 @@ import lombok.Setter;
 public abstract class StripeException extends Exception {
   private static final long serialVersionUID = 2L;
 
-  /**
-   * The error resource returned by Stripe's API that caused the exception.
-   */
-  @Setter
-  StripeError stripeError;
+  /** The error resource returned by Stripe's API that caused the exception. */
+  @Setter StripeError stripeError;
 
   private String code;
   private String requestId;
@@ -23,11 +19,9 @@ public abstract class StripeException extends Exception {
     this(message, requestId, code, statusCode, null);
   }
 
-  /**
-   * Constructs a new Stripe exception with the specified details.
-   */
-  public StripeException(String message, String requestId, String code, Integer statusCode,
-      Throwable e) {
+  /** Constructs a new Stripe exception with the specified details. */
+  public StripeException(
+      String message, String requestId, String code, Integer statusCode, Throwable e) {
     super(message, e);
     this.code = code;
     this.requestId = requestId;

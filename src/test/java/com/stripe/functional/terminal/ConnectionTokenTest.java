@@ -6,10 +6,8 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.terminal.ConnectionToken;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class ConnectionTokenTest extends BaseStripeTest {
@@ -21,9 +19,6 @@ public class ConnectionTokenTest extends BaseStripeTest {
 
     assertNotNull(connectionToken);
     verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/terminal/connection_tokens"),
-        params
-    );
+        ApiResource.RequestMethod.POST, String.format("/v1/terminal/connection_tokens"), params);
   }
 }

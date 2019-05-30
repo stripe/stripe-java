@@ -7,10 +7,8 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.PaymentMethod;
 import com.stripe.model.PaymentMethodCollection;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class PaymentMethodTest extends BaseStripeTest {
@@ -30,11 +28,7 @@ public class PaymentMethodTest extends BaseStripeTest {
     final PaymentMethod payment_method = PaymentMethod.create(params);
 
     assertNotNull(payment_method);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/payment_methods"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.POST, String.format("/v1/payment_methods"), params);
   }
 
   @Test
@@ -43,9 +37,7 @@ public class PaymentMethodTest extends BaseStripeTest {
 
     assertNotNull(payment_method);
     verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/payment_methods/%s", PAYMENT_METHOD_ID)
-    );
+        ApiResource.RequestMethod.GET, String.format("/v1/payment_methods/%s", PAYMENT_METHOD_ID));
   }
 
   @Test
@@ -63,8 +55,7 @@ public class PaymentMethodTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/payment_methods/%s", payment_method.getId()),
-        params
-    );
+        params);
   }
 
   @Test
@@ -77,10 +68,7 @@ public class PaymentMethodTest extends BaseStripeTest {
     final PaymentMethodCollection payment_methods = PaymentMethod.list(params);
 
     assertNotNull(payment_methods);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/payment_methods")
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/payment_methods"));
   }
 
   @Test
@@ -95,8 +83,7 @@ public class PaymentMethodTest extends BaseStripeTest {
     assertNotNull(attachedPaymentMethod);
     verifyRequest(
         ApiResource.RequestMethod.POST,
-        String.format("/v1/payment_methods/%s/attach", payment_method.getId())
-    );
+        String.format("/v1/payment_methods/%s/attach", payment_method.getId()));
   }
 
   @Test
@@ -108,7 +95,6 @@ public class PaymentMethodTest extends BaseStripeTest {
     assertNotNull(detachedPaymentMethod);
     verifyRequest(
         ApiResource.RequestMethod.POST,
-        String.format("/v1/payment_methods/%s/detach", payment_method.getId())
-    );
+        String.format("/v1/payment_methods/%s/detach", payment_method.getId()));
   }
 }

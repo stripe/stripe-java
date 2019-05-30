@@ -8,10 +8,8 @@ import com.stripe.model.Order;
 import com.stripe.model.OrderCollection;
 import com.stripe.model.OrderReturn;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class OrderTest extends BaseStripeTest {
@@ -31,11 +29,7 @@ public class OrderTest extends BaseStripeTest {
     final Order order = Order.create(params);
 
     assertNotNull(order);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        "/v1/orders",
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.POST, "/v1/orders", params);
   }
 
   @Test
@@ -43,10 +37,7 @@ public class OrderTest extends BaseStripeTest {
     final Order order = Order.retrieve(ORDER_ID);
 
     assertNotNull(order);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/orders/%s", ORDER_ID)
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/orders/%s", ORDER_ID));
   }
 
   @Test
@@ -60,10 +51,7 @@ public class OrderTest extends BaseStripeTest {
 
     assertNotNull(updatedOrder);
     verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/orders/%s", order.getId()),
-        params
-    );
+        ApiResource.RequestMethod.POST, String.format("/v1/orders/%s", order.getId()), params);
   }
 
   @Test
@@ -74,11 +62,7 @@ public class OrderTest extends BaseStripeTest {
     final OrderCollection orders = Order.list(params);
 
     assertNotNull(orders);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        "/v1/orders",
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, "/v1/orders", params);
   }
 
   @Test
@@ -92,10 +76,7 @@ public class OrderTest extends BaseStripeTest {
 
     assertNotNull(paidOrder);
     verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/orders/%s/pay", order.getId()),
-        params
-    );
+        ApiResource.RequestMethod.POST, String.format("/v1/orders/%s/pay", order.getId()), params);
   }
 
   @Test
@@ -108,7 +89,6 @@ public class OrderTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/orders/%s/returns", order.getId()),
-        null
-    );
+        null);
   }
 }

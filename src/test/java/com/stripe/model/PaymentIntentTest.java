@@ -5,19 +5,19 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.net.ApiResource;
-
 import org.junit.jupiter.api.Test;
 
 public class PaymentIntentTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
     // Keep the fixture to have `action` deserialize properly
-    final PaymentIntent resource = ApiResource.GSON.fromJson(
-        getResourceAsString("/api_fixtures/payment_intent.json"), PaymentIntent.class);
+    final PaymentIntent resource =
+        ApiResource.GSON.fromJson(
+            getResourceAsString("/api_fixtures/payment_intent.json"), PaymentIntent.class);
     assertNotNull(resource);
     assertNotNull(resource.getId());
 
-    PaymentIntent.NextAction action =  resource.getNextAction();
+    PaymentIntent.NextAction action = resource.getNextAction();
     assertNotNull(action);
 
     PaymentIntent.NextActionRedirectToUrl actionRedirect = action.getRedirectToUrl();
@@ -28,13 +28,14 @@ public class PaymentIntentTest extends BaseStripeTest {
 
   @Test
   public void testDeserializeLastPaymentError() throws Exception {
-    final PaymentIntent resource = ApiResource.GSON.fromJson(
-        getResourceAsString("/api_fixtures/payment_intent_last_payment_error.json"),
-        PaymentIntent.class);
+    final PaymentIntent resource =
+        ApiResource.GSON.fromJson(
+            getResourceAsString("/api_fixtures/payment_intent_last_payment_error.json"),
+            PaymentIntent.class);
     assertNotNull(resource);
     assertNotNull(resource.getId());
 
-    StripeError error =  resource.getLastPaymentError();
+    StripeError error = resource.getLastPaymentError();
     assertNotNull(error);
 
     assertEquals("ch_123", error.getCharge());
@@ -44,7 +45,6 @@ public class PaymentIntentTest extends BaseStripeTest {
     assertNotNull(source);
     assertNotNull(source.getId());
   }
-
 
   @Test
   public void testDeserializeWithExpansions() throws Exception {

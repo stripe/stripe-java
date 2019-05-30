@@ -26,9 +26,7 @@ public class MultipartProcessor {
     return String.valueOf(positiveRandomLong);
   }
 
-  /**
-   * Constructs a new multipart body builder.
-   */
+  /** Constructs a new multipart body builder. */
   public MultipartProcessor(java.net.HttpURLConnection conn, String boundary, String charset)
       throws IOException {
     this.boundary = boundary;
@@ -45,27 +43,31 @@ public class MultipartProcessor {
    */
   public void addFormField(String name, String value) {
     writer.append("--" + boundary).append(LINE_BREAK);
-    writer.append("Content-Disposition: form-data; name=\"" + name + "\"")
-        .append(LINE_BREAK);
+    writer.append("Content-Disposition: form-data; name=\"" + name + "\"").append(LINE_BREAK);
     writer.append(LINE_BREAK);
     writer.append(value).append(LINE_BREAK);
     writer.flush();
   }
 
   /**
-   * Adds a file field to the multipart message, but takes in an InputStream instead of
-   * just a file to read bytes from.
+   * Adds a file field to the multipart message, but takes in an InputStream instead of just a file
+   * to read bytes from.
    *
-   * @param name          Field name
-   * @param fileName      Name of the "file" being uploaded.
-   * @param inputStream   Stream of bytes to use in place of a file.
-   * @throws IOException  Thrown when writing / reading from streams fails.
+   * @param name Field name
+   * @param fileName Name of the "file" being uploaded.
+   * @param inputStream Stream of bytes to use in place of a file.
+   * @throws IOException Thrown when writing / reading from streams fails.
    */
   public void addFileField(String name, String fileName, InputStream inputStream)
       throws IOException {
     writer.append("--").append(boundary).append(LINE_BREAK);
-    writer.append("Content-Disposition: form-data; name=\"").append(name)
-            .append("\"; filename=\"").append(fileName).append("\"").append(LINE_BREAK);
+    writer
+        .append("Content-Disposition: form-data; name=\"")
+        .append(name)
+        .append("\"; filename=\"")
+        .append(fileName)
+        .append("\"")
+        .append(LINE_BREAK);
 
     String probableContentType = URLConnection.guessContentTypeFromName(fileName);
     writer.append("Content-Type: ").append(probableContentType).append(LINE_BREAK);
@@ -81,8 +83,9 @@ public class MultipartProcessor {
 
   /**
    * Utility method to read all the bytes from an InputStream into the outputStream.
-   * @param inputStream   Stream of bytes to read from.
-   * @throws IOException  Thrown on errors reading / writing.
+   *
+   * @param inputStream Stream of bytes to read from.
+   * @throws IOException Thrown on errors reading / writing.
    */
   private void streamToOutput(InputStream inputStream) throws IOException {
     try {
@@ -97,9 +100,7 @@ public class MultipartProcessor {
     }
   }
 
-  /**
-   * Adds the final boundary to the multipart message and closes streams.
-   */
+  /** Adds the final boundary to the multipart message and closes streams. */
   public void finish() throws IOException {
     writer.append("--" + boundary + "--").append(LINE_BREAK);
     writer.flush();

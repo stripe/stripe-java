@@ -8,10 +8,8 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.terminal.Location;
 import com.stripe.model.terminal.LocationCollection;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class LocationTest extends BaseStripeTest {
@@ -32,11 +30,7 @@ public class LocationTest extends BaseStripeTest {
     final Location location = Location.create(params);
 
     assertNotNull(location);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/terminal/locations"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.POST, String.format("/v1/terminal/locations"), params);
   }
 
   @Test
@@ -45,9 +39,7 @@ public class LocationTest extends BaseStripeTest {
 
     assertNotNull(location);
     verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/terminal/locations/%s", LOCATION_ID)
-    );
+        ApiResource.RequestMethod.GET, String.format("/v1/terminal/locations/%s", LOCATION_ID));
   }
 
   @Test
@@ -63,8 +55,7 @@ public class LocationTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/terminal/locations/%s", location.getId()),
-        params
-    );
+        params);
   }
 
   @Test
@@ -75,11 +66,7 @@ public class LocationTest extends BaseStripeTest {
     LocationCollection resources = Location.list(params);
 
     assertNotNull(resources);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/terminal/locations"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/terminal/locations"), params);
   }
 
   @Test
@@ -92,7 +79,6 @@ public class LocationTest extends BaseStripeTest {
     assertTrue(deletedLocation.getDeleted());
     verifyRequest(
         ApiResource.RequestMethod.DELETE,
-        String.format("/v1/terminal/locations/%s", location.getId())
-    );
+        String.format("/v1/terminal/locations/%s", location.getId()));
   }
 }

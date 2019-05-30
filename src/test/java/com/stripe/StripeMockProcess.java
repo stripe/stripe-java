@@ -8,7 +8,6 @@ import java.lang.reflect.Field;
 import java.nio.charset.StandardCharsets;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
-
 import lombok.Getter;
 
 public class StripeMockProcess {
@@ -18,8 +17,7 @@ public class StripeMockProcess {
   private static final String SPEC_PATH = "/openapi/spec3.json";
 
   private static Process process;
-  @Getter
-  private static String port;
+  @Getter private static String port;
   private static String pid;
 
   /**
@@ -27,8 +25,8 @@ public class StripeMockProcess {
    *
    * @return whether the stripe-mock can be started and is now running.
    */
-  public static boolean start() throws IOException, InterruptedException, NoSuchFieldException,
-      IllegalAccessException {
+  public static boolean start()
+      throws IOException, InterruptedException, NoSuchFieldException, IllegalAccessException {
 
     if (!new File(getPathSpec()).exists() || !new File(getPathFixture()).exists()) {
       return false;
@@ -44,24 +42,24 @@ public class StripeMockProcess {
       pid = null;
     }
 
-    ProcessBuilder processBuilder = new ProcessBuilder()
-        .command(
-            "stripe-mock",
-            "-http-port",
-            "0", // stripe-mock to choose an available port
-            "-spec",
-            getPathSpec(),
-            "-fixtures",
-            getPathFixture()
-        );
+    ProcessBuilder processBuilder =
+        new ProcessBuilder()
+            .command(
+                "stripe-mock",
+                "-http-port",
+                "0", // stripe-mock to choose an available port
+                "-spec",
+                getPathSpec(),
+                "-fixtures",
+                getPathFixture());
 
     try {
       process = processBuilder.start();
     } catch (IOException e) {
-      System.out.println(String.format(
-          "Error while starting stripe-mock, fixtures = %s and %s, error message = %s",
-          getPathSpec(), getPathFixture(), e.getMessage()
-      ));
+      System.out.println(
+          String.format(
+              "Error while starting stripe-mock, fixtures = %s and %s, error message = %s",
+              getPathSpec(), getPathFixture(), e.getMessage()));
       System.exit(1);
     }
 
@@ -84,13 +82,11 @@ public class StripeMockProcess {
     return true;
   }
 
-  /**
-   * Find port bound to stripe-mock, relying on process output.
-   */
+  /** Find port bound to stripe-mock, relying on process output. */
   private static String detectBoundPort(Process process) throws IOException, InterruptedException {
     // output of stripe-mock available as an input stream
-    BufferedReader processOutput = new BufferedReader(
-        new InputStreamReader(process.getInputStream(), StandardCharsets.UTF_8));
+    BufferedReader processOutput =
+        new BufferedReader(new InputStreamReader(process.getInputStream(), StandardCharsets.UTF_8));
 
     Pattern pattern = Pattern.compile("Listening for HTTP on port: (\\d+)");
     String line;
@@ -123,8 +119,8 @@ public class StripeMockProcess {
     }
   }
 
-  private static String getProcessId(Process process) throws NoSuchFieldException,
-      IllegalAccessException {
+  private static String getProcessId(Process process)
+      throws NoSuchFieldException, IllegalAccessException {
     // abstract class `Process` does not have PID interface
     // reflection is workaround in getting process ID, only available in the concrete UNIXProcess
     // (casting not possible due to the class default access)
@@ -150,5 +146,4 @@ public class StripeMockProcess {
   private static String getPathFixture() {
     return new File(ROOT + FIXTURE_PATH).getAbsolutePath();
   }
-
 }

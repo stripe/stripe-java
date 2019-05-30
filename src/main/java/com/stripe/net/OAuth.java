@@ -6,7 +6,6 @@ import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.oauth.DeauthorizedAccount;
 import com.stripe.model.oauth.TokenResponse;
-
 import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
@@ -20,7 +19,7 @@ public final class OAuth {
   /**
    * Generates a URL to Stripe's OAuth form.
    *
-   * @param params  the parameters to include in the URL.
+   * @param params the parameters to include in the URL.
    * @param options the request options.
    * @return the URL to Stripe's OAuth form.
    */
@@ -36,54 +35,65 @@ public final class OAuth {
     try {
       query = LiveStripeResponseGetter.createQuery(params);
     } catch (UnsupportedEncodingException e) {
-      throw new InvalidRequestException("Unable to encode parameters to "
-          + ApiResource.CHARSET
-          + ". Please contact support@stripe.com for assistance.",
-          null, null, null, 0, e);
+      throw new InvalidRequestException(
+          "Unable to encode parameters to "
+              + ApiResource.CHARSET
+              + ". Please contact support@stripe.com for assistance.",
+          null,
+          null,
+          null,
+          0,
+          e);
     }
 
     String url = base + "/oauth/authorize?" + query;
     return url;
   }
 
-
   /**
-   * Uses an authorization code to connect an account to your platform and
-   * fetch the user's credentials.
+   * Uses an authorization code to connect an account to your platform and fetch the user's
+   * credentials.
    *
-   * @param params  the request parameters.
+   * @param params the request parameters.
    * @param options the request options.
-   * @return the TokenResponse instance containing the response from the OAuth
-   *         API.
+   * @return the TokenResponse instance containing the response from the OAuth API.
    */
   public static TokenResponse token(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = Stripe.getConnectBase() + "/oauth/token";
-    return OAuth.stripeResponseGetter.oauthRequest(ApiResource.RequestMethod.POST, url, params,
-        TokenResponse.class, ApiResource.RequestType.NORMAL, options);
+    return OAuth.stripeResponseGetter.oauthRequest(
+        ApiResource.RequestMethod.POST,
+        url,
+        params,
+        TokenResponse.class,
+        ApiResource.RequestType.NORMAL,
+        options);
   }
-
 
   /**
    * Disconnects an account from your platform.
    *
-   * @param params  the request parameters.
+   * @param params the request parameters.
    * @param options the request options.
-   * @return the DeauthorizedAccount instance containing the response from the
-   *         OAuth API.
+   * @return the DeauthorizedAccount instance containing the response from the OAuth API.
    */
   public static DeauthorizedAccount deauthorize(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = Stripe.getConnectBase() + "/oauth/deauthorize";
     params.put("client_id", getClientId(params, options));
-    return OAuth.stripeResponseGetter.oauthRequest(ApiResource.RequestMethod.POST, url, params,
-        DeauthorizedAccount.class, ApiResource.RequestType.NORMAL, options);
+    return OAuth.stripeResponseGetter.oauthRequest(
+        ApiResource.RequestMethod.POST,
+        url,
+        params,
+        DeauthorizedAccount.class,
+        ApiResource.RequestType.NORMAL,
+        options);
   }
 
   /**
    * Returns the client_id to use in OAuth requests.
    *
-   * @param params  the request parameters.
+   * @param params the request parameters.
    * @param options the request options.
    * @return the client_id.
    */
@@ -105,7 +115,9 @@ public final class OAuth {
               + "after registering your account as a platform. See "
               + "https://stripe.com/docs/connect/standard-accounts for details, "
               + "or email support@stripe.com if you have any questions.",
-          null, null, 0);
+          null,
+          null,
+          0);
     }
 
     return clientId;

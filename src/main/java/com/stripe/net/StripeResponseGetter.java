@@ -1,7 +1,6 @@
 package com.stripe.net;
 
 import com.stripe.exception.StripeException;
-
 import java.util.Map;
 
 public interface StripeResponseGetter {

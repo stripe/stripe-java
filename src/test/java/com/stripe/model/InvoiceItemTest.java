@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.net.ApiResource;
-
 import org.junit.jupiter.api.Test;
 
 public class InvoiceItemTest extends BaseStripeTest {
@@ -25,9 +24,7 @@ public class InvoiceItemTest extends BaseStripeTest {
   @Test
   public void testDeserializeExpanded() throws Exception {
     final String[] expansions = {
-      "customer",
-      "invoice",
-      "subscription",
+      "customer", "invoice", "subscription",
     };
     final String data = getFixture("/v1/invoiceitems/ii_123", expansions);
     final InvoiceItem invoiceItem = ApiResource.GSON.fromJson(data, InvoiceItem.class);

@@ -10,10 +10,8 @@ import com.stripe.model.AccountCollection;
 import com.stripe.model.ExternalAccount;
 import com.stripe.model.PersonCollection;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 public class AccountTest extends BaseStripeTest {
@@ -33,11 +31,7 @@ public class AccountTest extends BaseStripeTest {
     final Account account = Account.create(params);
 
     assertNotNull(account);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/accounts"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.POST, String.format("/v1/accounts"), params);
   }
 
   @Test
@@ -48,11 +42,7 @@ public class AccountTest extends BaseStripeTest {
     final AccountCollection accounts = Account.list(params);
 
     assertNotNull(accounts);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/accounts"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/accounts"), params);
   }
 
   @Test
@@ -60,10 +50,7 @@ public class AccountTest extends BaseStripeTest {
     final Account account = Account.retrieve();
 
     assertNotNull(account);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/account")
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/account"));
   }
 
   @Test
@@ -71,10 +58,7 @@ public class AccountTest extends BaseStripeTest {
     final Account account = Account.retrieve(ACCOUNT_ID, null);
 
     assertNotNull(account);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/accounts/%s", ACCOUNT_ID)
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/accounts/%s", ACCOUNT_ID));
   }
 
   @Test
@@ -88,10 +72,7 @@ public class AccountTest extends BaseStripeTest {
 
     assertNotNull(updatedAccount);
     verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/accounts/%s", account.getId()),
-        params
-    );
+        ApiResource.RequestMethod.POST, String.format("/v1/accounts/%s", account.getId()), params);
   }
 
   @Test
@@ -103,9 +84,7 @@ public class AccountTest extends BaseStripeTest {
     assertNotNull(deletedAccount);
     assertTrue(deletedAccount.getDeleted());
     verifyRequest(
-        ApiResource.RequestMethod.DELETE,
-        String.format("/v1/accounts/%s", account.getId())
-    );
+        ApiResource.RequestMethod.DELETE, String.format("/v1/accounts/%s", account.getId()));
   }
 
   @Test
@@ -121,8 +100,7 @@ public class AccountTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/accounts/%s/reject", account.getId()),
-        params
-    );
+        params);
   }
 
   @Test
@@ -138,8 +116,7 @@ public class AccountTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/accounts/%s/external_accounts", resource.getId()),
-        params
-    );
+        params);
   }
 
   @Test
@@ -155,7 +132,6 @@ public class AccountTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.GET,
         String.format("/v1/accounts/%s/persons", resource.getId()),
-        params
-    );
+        params);
   }
 }

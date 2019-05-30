@@ -9,12 +9,10 @@ import static org.mockito.Mockito.when;
 
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
-
 import com.stripe.Stripe;
 import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.net.RequestOptions.RequestOptionsBuilder;
-
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
@@ -33,7 +31,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 import java.util.TreeSet;
-
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -54,8 +51,8 @@ public class LiveStripeResponseGetterTest {
   }
 
   @Test
-  public void testCreateQueryWithNestedParams() throws StripeException,
-      UnsupportedEncodingException {
+  public void testCreateQueryWithNestedParams()
+      throws StripeException, UnsupportedEncodingException {
     /* Use LinkedHashMap because it preserves iteration order */
     final Map<String, Object> params = new LinkedHashMap<>();
     final Map<String, Object> nested = new LinkedHashMap<>();
@@ -80,13 +77,14 @@ public class LiveStripeResponseGetterTest {
     params.put("a", "b");
     params.put("c", "d");
 
-    assertEquals("nested[0]=A&nested[1]=B&nested[2]=C&a=b&c=d",
+    assertEquals(
+        "nested[0]=A&nested[1]=B&nested[2]=C&a=b&c=d",
         LiveStripeResponseGetter.createQuery(params));
   }
 
   @Test
-  public void testCreateQueryWithArrayParams() throws StripeException,
-      UnsupportedEncodingException {
+  public void testCreateQueryWithArrayParams()
+      throws StripeException, UnsupportedEncodingException {
 
     final String[] nested = {"A", "B", "C"};
 
@@ -96,13 +94,14 @@ public class LiveStripeResponseGetterTest {
     params.put("a", "b");
     params.put("c", "d");
 
-    assertEquals("nested[0]=A&nested[1]=B&nested[2]=C&a=b&c=d",
+    assertEquals(
+        "nested[0]=A&nested[1]=B&nested[2]=C&a=b&c=d",
         LiveStripeResponseGetter.createQuery(params));
   }
 
   @Test
-  public void testCreateQueryWithListOfHashes() throws StripeException,
-      UnsupportedEncodingException {
+  public void testCreateQueryWithListOfHashes()
+      throws StripeException, UnsupportedEncodingException {
     final Map<String, String> deepNestedMap1 = new LinkedHashMap<>();
     deepNestedMap1.put("A", "A-1");
     deepNestedMap1.put("B", "B-1");
@@ -119,13 +118,14 @@ public class LiveStripeResponseGetterTest {
     final Map<String, Object> params = new LinkedHashMap<>();
     params.put("nested", nested);
 
-    assertEquals("nested[0][A]=A-1&nested[0][B]=B-1&nested[1][A]=A-2&nested[1][B]=B-2",
+    assertEquals(
+        "nested[0][A]=A-1&nested[0][B]=B-1&nested[1][A]=A-2&nested[1][B]=B-2",
         LiveStripeResponseGetter.createQuery(params));
   }
 
   @Test
-  public void testCreateQueryWithFormEncodedKeys() throws StripeException,
-      UnsupportedEncodingException {
+  public void testCreateQueryWithFormEncodedKeys()
+      throws StripeException, UnsupportedEncodingException {
     /* Use LinkedHashMap because it preserves iteration order */
     final Map<String, Object> params = new LinkedHashMap<>();
 
@@ -140,14 +140,15 @@ public class LiveStripeResponseGetterTest {
     params.put("nested[1][A]", "A-2");
     params.put("nested[1][B]", "B-2");
 
-    assertEquals("nested[0][A]=A-1&nested[0][B]=B-1&nested[1][A]=A-2&nested[1][B]=B-2",
+    assertEquals(
+        "nested[0][A]=A-1&nested[0][B]=B-1&nested[1][A]=A-2&nested[1][B]=B-2",
         LiveStripeResponseGetter.createQuery(params));
   }
 
   @SuppressWarnings("ModifiedButNotUsed")
   @Test
-  public void testCreateQueryWithCollection() throws UnsupportedEncodingException,
-      InvalidRequestException {
+  public void testCreateQueryWithCollection()
+      throws UnsupportedEncodingException, InvalidRequestException {
     // test collections with its own implementation to return iterator giving "A", "B", "C" in order
     final Set<String> nestedTreeSet = new TreeSet<>(String::compareTo);
     nestedTreeSet.add("B");
@@ -169,22 +170,23 @@ public class LiveStripeResponseGetterTest {
     nestedList.add("B");
     nestedList.add("C");
 
-    List<Collection<String>> collections = Arrays.asList(nestedTreeSet, nestedDequeue,
-        nestedLinkedHashSet, nestedList);
+    List<Collection<String>> collections =
+        Arrays.asList(nestedTreeSet, nestedDequeue, nestedLinkedHashSet, nestedList);
 
     for (Collection<String> collection : collections) {
       final Map<String, Object> params = new LinkedHashMap<>();
       params.put("nested", collection);
       // collection is treated the same as array encoding
-      assertEquals("nested[0]=A&nested[1]=B&nested[2]=C",
+      assertEquals(
+          "nested[0]=A&nested[1]=B&nested[2]=C",
           LiveStripeResponseGetter.createQuery(params),
           "Failed encoding for collection " + collection.getClass());
     }
   }
 
   @Test
-  public void testCreateQueryWithEmptyCollection() throws StripeException,
-      UnsupportedEncodingException {
+  public void testCreateQueryWithEmptyCollection()
+      throws StripeException, UnsupportedEncodingException {
     final Map<String, Object> params = new HashMap<>();
     params.put("a", new ArrayList<String>());
     assertEquals("a=", LiveStripeResponseGetter.createQuery(params));
@@ -205,8 +207,8 @@ public class LiveStripeResponseGetterTest {
   }
 
   @Test
-  public void testCreateQueryUrlEncodeSpecialCharacters() throws StripeException,
-      UnsupportedEncodingException {
+  public void testCreateQueryUrlEncodeSpecialCharacters()
+      throws StripeException, UnsupportedEncodingException {
     final Map<String, Object> params = new HashMap<>();
     params.put("a", "+foo?");
     assertEquals("a=%2Bfoo%3F", LiveStripeResponseGetter.createQuery(params));
@@ -226,7 +228,8 @@ public class LiveStripeResponseGetterTest {
     final Map<String, Object> params = new HashMap<>();
     params.put("legal_entity", legalEntityParams);
 
-    assertEquals("legal_entity[additional_owners][0][first_name]=Stripe",
+    assertEquals(
+        "legal_entity[additional_owners][0][first_name]=Stripe",
         LiveStripeResponseGetter.createQuery(params));
   }
 
@@ -244,7 +247,8 @@ public class LiveStripeResponseGetterTest {
     final Map<String, Object> params = new HashMap<>();
     params.put("legal_entity", legalEntityParams);
 
-    assertEquals("legal_entity[additional_owners][0][first_name]=Stripe",
+    assertEquals(
+        "legal_entity[additional_owners][0][first_name]=Stripe",
         LiveStripeResponseGetter.createQuery(params));
   }
 
@@ -254,9 +258,11 @@ public class LiveStripeResponseGetterTest {
     params.put("file", new File(getClass().getResource("/test.png").getFile()));
 
     // file encoding should be handled in multi-part request instead
-    assertThrows(InvalidRequestException.class, () -> {
-      LiveStripeResponseGetter.createQuery(params);
-    });
+    assertThrows(
+        InvalidRequestException.class,
+        () -> {
+          LiveStripeResponseGetter.createQuery(params);
+        });
   }
 
   @Test
@@ -264,8 +270,8 @@ public class LiveStripeResponseGetterTest {
     final HttpURLConnection mockConn = mock(HttpURLConnection.class);
     final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
     when(mockConn.getOutputStream()).thenReturn(outputStream);
-    final MultipartProcessor multipartProcessor = new MultipartProcessor(
-        mockConn, "abc", ApiResource.CHARSET);
+    final MultipartProcessor multipartProcessor =
+        new MultipartProcessor(mockConn, "abc", ApiResource.CHARSET);
 
     final Map<String, Object> params = new HashMap<>();
     params.put("file", new File(getClass().getResource("/test.png").getFile()));
@@ -279,35 +285,45 @@ public class LiveStripeResponseGetterTest {
 
     String encoded = outputStream.toString();
 
-    assertThat(encoded, CoreMatchers.containsString(
-        "Content-Disposition: form-data; name=\"file\"; filename=\"test.png\""));
-    assertThat(encoded, CoreMatchers.containsString(
-        "Content-Disposition: form-data; name=\"file_link_data[create]\""));
-    assertThat(encoded, CoreMatchers.containsString(
-        "Content-Disposition: form-data; name=\"file_link_data[expires_at]\""));
+    assertThat(
+        encoded,
+        CoreMatchers.containsString(
+            "Content-Disposition: form-data; name=\"file\"; filename=\"test.png\""));
+    assertThat(
+        encoded,
+        CoreMatchers.containsString(
+            "Content-Disposition: form-data; name=\"file_link_data[create]\""));
+    assertThat(
+        encoded,
+        CoreMatchers.containsString(
+            "Content-Disposition: form-data; name=\"file_link_data[expires_at]\""));
   }
 
   @Test
   public void testAppInfo() {
     final RequestOptions options = new RequestOptionsBuilder().setApiKey("sk_foobar").build();
 
-    Stripe.setAppInfo("MyAwesomePlugin", "1.2.34", "https://myawesomeplugin.info", "pp_partner_1234");
+    Stripe.setAppInfo(
+        "MyAwesomePlugin", "1.2.34", "https://myawesomeplugin.info", "pp_partner_1234");
 
     final Map<String, String> headers = LiveStripeResponseGetter.getHeaders(options);
 
-    final String expectedUserAgent = String.format(
-        "Stripe/v1 JavaBindings/%s MyAwesomePlugin/1.2.34 (https://myawesomeplugin.info)",
-        Stripe.VERSION);
+    final String expectedUserAgent =
+        String.format(
+            "Stripe/v1 JavaBindings/%s MyAwesomePlugin/1.2.34 (https://myawesomeplugin.info)",
+            Stripe.VERSION);
     assertEquals(expectedUserAgent, headers.get("User-Agent"));
 
     final Gson gson = new Gson();
 
-    final Map<String, String> uaMap = gson.fromJson(headers.get("X-Stripe-Client-User-Agent"),
-        new TypeToken<Map<String, String>>() {}.getType());
+    final Map<String, String> uaMap =
+        gson.fromJson(
+            headers.get("X-Stripe-Client-User-Agent"),
+            new TypeToken<Map<String, String>>() {}.getType());
     assertNotNull(uaMap.get("application"));
 
-    final Map<String, String> appMap = gson.fromJson(uaMap.get("application"),
-        new TypeToken<Map<String, String>>() {}.getType());
+    final Map<String, String> appMap =
+        gson.fromJson(uaMap.get("application"), new TypeToken<Map<String, String>>() {}.getType());
     assertEquals("MyAwesomePlugin", appMap.get("name"));
     assertEquals("1.2.34", appMap.get("version"));
     assertEquals("https://myawesomeplugin.info", appMap.get("url"));
@@ -316,15 +332,14 @@ public class LiveStripeResponseGetterTest {
 
   @Test
   public void testStripeVersion() {
-    final RequestOptions versionOverrideOpts = new RequestOptionsBuilder()
-        .setStripeVersionOverride("2015-05-05").build();
+    final RequestOptions versionOverrideOpts =
+        new RequestOptionsBuilder().setStripeVersionOverride("2015-05-05").build();
     assertEquals(
         "2015-05-05",
         LiveStripeResponseGetter.getHeaders(versionOverrideOpts).get("Stripe-Version"));
 
     final RequestOptions options = new RequestOptionsBuilder().build();
     assertEquals(
-        Stripe.API_VERSION,
-        LiveStripeResponseGetter.getHeaders(options).get("Stripe-Version"));
+        Stripe.API_VERSION, LiveStripeResponseGetter.getHeaders(options).get("Stripe-Version"));
   }
 }

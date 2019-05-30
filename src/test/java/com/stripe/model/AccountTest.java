@@ -5,7 +5,6 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.net.ApiResource;
-
 import org.junit.jupiter.api.Test;
 
 public class AccountTest extends BaseStripeTest {
@@ -20,8 +19,7 @@ public class AccountTest extends BaseStripeTest {
   @Test
   public void testDeserializeWithExpansions() throws Exception {
     final String[] expansions = {
-      "settings.branding.icon",
-      "settings.branding.logo",
+      "settings.branding.icon", "settings.branding.logo",
     };
     final String data = getFixture("/v1/accounts/acct_123", expansions);
 

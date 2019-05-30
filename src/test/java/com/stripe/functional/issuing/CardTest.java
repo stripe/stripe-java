@@ -8,12 +8,9 @@ import com.stripe.model.issuing.Card;
 import com.stripe.model.issuing.CardCollection;
 import com.stripe.model.issuing.CardDetails;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
-
 
 public class CardTest extends BaseStripeTest {
   public static final String CARD_ID = "ic_123";
@@ -27,11 +24,7 @@ public class CardTest extends BaseStripeTest {
     final Card card = Card.create(params);
 
     assertNotNull(card);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/issuing/cards"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.POST, String.format("/v1/issuing/cards"), params);
   }
 
   @Test
@@ -44,8 +37,7 @@ public class CardTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.GET,
         String.format("/v1/issuing/cards/%s/details", card.getId()),
-        null
-    );
+        null);
   }
 
   @Test
@@ -53,10 +45,7 @@ public class CardTest extends BaseStripeTest {
     final Card card = Card.retrieve(CARD_ID);
 
     assertNotNull(card);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/issuing/cards/%s", CARD_ID)
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/issuing/cards/%s", CARD_ID));
   }
 
   @Test
@@ -74,8 +63,7 @@ public class CardTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/issuing/cards/%s", card.getId()),
-        params
-    );
+        params);
   }
 
   @Test
@@ -86,10 +74,6 @@ public class CardTest extends BaseStripeTest {
     CardCollection resources = Card.list(params);
 
     assertNotNull(resources);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/issuing/cards"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/issuing/cards"), params);
   }
 }

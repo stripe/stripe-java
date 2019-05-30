@@ -7,12 +7,9 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.issuing.Dispute;
 import com.stripe.model.issuing.DisputeCollection;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
-
 
 public class DisputeTest extends BaseStripeTest {
   public static final String DISPUTE_ID = "idp_123";
@@ -26,11 +23,7 @@ public class DisputeTest extends BaseStripeTest {
     final Dispute dispute = Dispute.create(params);
 
     assertNotNull(dispute);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        String.format("/v1/issuing/disputes"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.POST, String.format("/v1/issuing/disputes"), params);
   }
 
   @Test
@@ -39,9 +32,7 @@ public class DisputeTest extends BaseStripeTest {
 
     assertNotNull(dispute);
     verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/issuing/disputes/%s", DISPUTE_ID)
-    );
+        ApiResource.RequestMethod.GET, String.format("/v1/issuing/disputes/%s", DISPUTE_ID));
   }
 
   @Test
@@ -59,8 +50,7 @@ public class DisputeTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/issuing/disputes/%s", dispute.getId()),
-        params
-    );
+        params);
   }
 
   @Test
@@ -71,10 +61,6 @@ public class DisputeTest extends BaseStripeTest {
     DisputeCollection disputes = Dispute.list(params);
 
     assertNotNull(disputes);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/issuing/disputes"),
-        params
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/issuing/disputes"), params);
   }
 }

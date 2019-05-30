@@ -7,15 +7,13 @@ import com.stripe.exception.StripeException;
 import com.stripe.model.Recipient;
 import com.stripe.model.RecipientCollection;
 import com.stripe.net.ApiResource;
-
 import java.util.HashMap;
 import java.util.Map;
-
 import org.junit.jupiter.api.Test;
 
 /**
- * Recipients are deprecated. All tests have been removed; the Java APIs will
- * eventually be removed as well.
+ * Recipients are deprecated. All tests have been removed; the Java APIs will eventually be removed
+ * as well.
  */
 public class RecipientTest extends BaseStripeTest {
   @Test
@@ -26,9 +24,6 @@ public class RecipientTest extends BaseStripeTest {
     RecipientCollection recipients = Recipient.list(params);
 
     assertNotNull(recipients);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/recipients")
-    );
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/recipients"));
   }
 }

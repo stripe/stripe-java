@@ -35,13 +35,14 @@ public abstract class ApiResource extends StripeObject {
   public static final Gson GSON = createGson();
 
   private static Gson createGson() {
-    GsonBuilder builder = new GsonBuilder()
-        .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-        .registerTypeAdapter(EphemeralKey.class, new EphemeralKeyDeserializer())
-        .registerTypeAdapter(EventData.class, new EventDataDeserializer())
-        .registerTypeAdapter(EventRequest.class, new EventRequestDeserializer())
-        .registerTypeAdapter(ExpandableField.class, new ExpandableFieldDeserializer())
-        .registerTypeAdapter(StripeRawJsonObject.class, new StripeRawJsonObjectDeserializer());
+    GsonBuilder builder =
+        new GsonBuilder()
+            .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+            .registerTypeAdapter(EphemeralKey.class, new EphemeralKeyDeserializer())
+            .registerTypeAdapter(EventData.class, new EventDataDeserializer())
+            .registerTypeAdapter(EventRequest.class, new EventRequestDeserializer())
+            .registerTypeAdapter(ExpandableField.class, new ExpandableFieldDeserializer())
+            .registerTypeAdapter(StripeRawJsonObject.class, new StripeRawJsonObjectDeserializer());
 
     for (TypeAdapterFactory factory : ApiResourceTypeAdapterFactoryProvider.getAll()) {
       builder.registerTypeAdapterFactory(factory);
@@ -51,10 +52,12 @@ public abstract class ApiResource extends StripeObject {
 
   private static String className(Class<?> clazz) {
     // Convert CamelCase to snake_case
-    String className = clazz.getSimpleName()
-        .replaceAll("(.)([A-Z][a-z]+)", "$1_$2")
-        .replaceAll("([a-z0-9])([A-Z])", "$1_$2")
-        .toLowerCase();
+    String className =
+        clazz
+            .getSimpleName()
+            .replaceAll("(.)([A-Z][a-z]+)", "$1_$2")
+            .replaceAll("([a-z0-9])([A-Z])", "$1_$2")
+            .toLowerCase();
 
     // Handle namespaced resources by checking if the class is in a sub-package, and if so prepend
     // it to the class name
@@ -92,8 +95,7 @@ public abstract class ApiResource extends StripeObject {
     return String.format("%ss", singleClassUrl(clazz, apiBase));
   }
 
-  protected static String instanceUrl(Class<?> clazz, String id)
-      throws InvalidRequestException {
+  protected static String instanceUrl(Class<?> clazz, String id) throws InvalidRequestException {
     return instanceUrl(clazz, id, Stripe.getApiBase());
   }
 
@@ -102,10 +104,15 @@ public abstract class ApiResource extends StripeObject {
     try {
       return String.format("%s/%s", classUrl(clazz, apiBase), urlEncode(id));
     } catch (UnsupportedEncodingException e) {
-      throw new InvalidRequestException("Unable to encode parameters to "
-          + CHARSET
-          + ". Please contact support@stripe.com for assistance.",
-          null, null, null, 0, e);
+      throw new InvalidRequestException(
+          "Unable to encode parameters to "
+              + CHARSET
+              + ". Please contact support@stripe.com for assistance.",
+          null,
+          null,
+          null,
+          0,
+          e);
     }
   }
 
@@ -114,33 +121,38 @@ public abstract class ApiResource extends StripeObject {
     return subresourceUrl(clazz, id, subClazz, Stripe.getApiBase());
   }
 
-
   private static String subresourceUrl(Class<?> clazz, String id, Class<?> subClazz, String apiBase)
       throws InvalidRequestException {
     try {
-      return String.format("%s/%s/%ss", classUrl(clazz, apiBase),
-              urlEncode(id), className(subClazz));
+      return String.format(
+          "%s/%s/%ss", classUrl(clazz, apiBase), urlEncode(id), className(subClazz));
     } catch (UnsupportedEncodingException e) {
-      throw new InvalidRequestException("Unable to encode parameters to "
+      throw new InvalidRequestException(
+          "Unable to encode parameters to "
               + CHARSET
               + ". Please contact support@stripe.com for assistance.",
-              null, null, null, 0, e);
+          null,
+          null,
+          null,
+          0,
+          e);
     }
   }
 
   public static final String CHARSET = "UTF-8";
 
   public enum RequestMethod {
-    GET, POST, DELETE
+    GET,
+    POST,
+    DELETE
   }
 
   public enum RequestType {
-    NORMAL, MULTIPART
+    NORMAL,
+    MULTIPART
   }
 
-  /**
-   * URL-encodes a string.
-   */
+  /** URL-encodes a string. */
   public static String urlEncode(String str) throws UnsupportedEncodingException {
     // Preserve original behavior that passing null for an object id will lead
     // to us actually making a request to /v1/foo/null
@@ -150,53 +162,71 @@ public abstract class ApiResource extends StripeObject {
       // Don't use strict form encoding by changing the square bracket control
       // characters back to their literals. This is fine by the server, and
       // makes these parameter strings easier to read.
-      return URLEncoder.encode(str, CHARSET)
-        .replaceAll("%5B", "[")
-        .replaceAll("%5D", "]");
+      return URLEncoder.encode(str, CHARSET).replaceAll("%5B", "[").replaceAll("%5D", "]");
     }
   }
 
-  /**
-   * URL-encode a string ID in url path formatting.
-   */
+  /** URL-encode a string ID in url path formatting. */
   public static String urlEncodeId(String id) throws InvalidRequestException {
     if (id == null) {
       throw new InvalidRequestException(
           "Invalid null ID found for url path formatting. This can be because your string ID "
               + "argument to the API method is null, or the ID field in your stripe object "
               + "instance is null. Please contact support@stripe.com on the latter case. ",
-          null, null, null, 0, null);
+          null,
+          null,
+          null,
+          0,
+          null);
     }
 
     try {
       return urlEncode(id);
     } catch (UnsupportedEncodingException e) {
-      throw new InvalidRequestException(String.format(
-          "Unable to encode `%s` in the url to %s. "
-          + "Please contact support@stripe.com for assistance.", id, CHARSET),
-          null, null, null, 0, e);
+      throw new InvalidRequestException(
+          String.format(
+              "Unable to encode `%s` in the url to %s. "
+                  + "Please contact support@stripe.com for assistance.",
+              id, CHARSET),
+          null,
+          null,
+          null,
+          0,
+          e);
     }
   }
 
-  public static <T> T multipartRequest(ApiResource.RequestMethod method,
-                     String url, Map<String, Object> params, Class<T> clazz,
-                     RequestOptions options) throws StripeException {
-    return ApiResource.stripeResponseGetter.request(method, url, params, clazz,
-        ApiResource.RequestType.MULTIPART, options);
+  public static <T> T multipartRequest(
+      ApiResource.RequestMethod method,
+      String url,
+      Map<String, Object> params,
+      Class<T> clazz,
+      RequestOptions options)
+      throws StripeException {
+    return ApiResource.stripeResponseGetter.request(
+        method, url, params, clazz, ApiResource.RequestType.MULTIPART, options);
   }
 
-  public static <T> T request(ApiResource.RequestMethod method,
-                              String url, ApiRequestParams params, Class<T> clazz,
-                              RequestOptions options) throws StripeException {
+  public static <T> T request(
+      ApiResource.RequestMethod method,
+      String url,
+      ApiRequestParams params,
+      Class<T> clazz,
+      RequestOptions options)
+      throws StripeException {
     checkNullTypedParams(url, params);
     return request(method, url, params.toMap(), clazz, options);
   }
 
-  public static <T> T request(ApiResource.RequestMethod method,
-                String url, Map<String, Object> params, Class<T> clazz,
-                RequestOptions options) throws StripeException {
-    return ApiResource.stripeResponseGetter.request(method, url, params, clazz,
-        ApiResource.RequestType.NORMAL, options);
+  public static <T> T request(
+      ApiResource.RequestMethod method,
+      String url,
+      Map<String, Object> params,
+      Class<T> clazz,
+      RequestOptions options)
+      throws StripeException {
+    return ApiResource.stripeResponseGetter.request(
+        method, url, params, clazz, ApiResource.RequestType.NORMAL, options);
   }
 
   public static <T extends StripeCollectionInterface<?>> T requestCollection(
@@ -207,16 +237,14 @@ public abstract class ApiResource extends StripeObject {
   }
 
   /**
-   * Similar to #request, but specific for use with collection types that
-   * come from the API (i.e. lists of resources).
+   * Similar to #request, but specific for use with collection types that come from the API (i.e.
+   * lists of resources).
    *
-   * <p>Collections need a little extra work because we need to plumb request
-   * options and params through so that we can iterate to the next page if
-   * necessary.
+   * <p>Collections need a little extra work because we need to plumb request options and params
+   * through so that we can iterate to the next page if necessary.
    */
   public static <T extends StripeCollectionInterface<?>> T requestCollection(
-      String url, Map<String, Object> params, Class<T> clazz,
-      RequestOptions options)
+      String url, Map<String, Object> params, Class<T> clazz, RequestOptions options)
       throws StripeException {
     T collection = request(RequestMethod.GET, url, params, clazz, options);
 
@@ -230,14 +258,17 @@ public abstract class ApiResource extends StripeObject {
 
   /**
    * Invalidate null typed parameters.
-   * @param url     request url associated with the given parameters.
-   * @param params  typed parameters to check for null value.
+   *
+   * @param url request url associated with the given parameters.
+   * @param params typed parameters to check for null value.
    */
   public static void checkNullTypedParams(String url, ApiRequestParams params) {
     if (params == null) {
-      throw new IllegalArgumentException(String.format("Found null params for %s. "
-          + "Please pass empty params using param builder via `builder().build()` instead.", url
-      ));
+      throw new IllegalArgumentException(
+          String.format(
+              "Found null params for %s. "
+                  + "Please pass empty params using param builder via `builder().build()` instead.",
+              url));
     }
   }
 
@@ -246,8 +277,8 @@ public abstract class ApiResource extends StripeObject {
    * ID and the expanded object in sync. If they specify a new String ID that is different from the
    * ID within the expanded object, we don't keep the object.
    */
-  public static <T extends HasId> ExpandableField<T> setExpandableFieldId(String newId,
-      ExpandableField<T> currentObject) {
+  public static <T extends HasId> ExpandableField<T> setExpandableFieldId(
+      String newId, ExpandableField<T> currentObject) {
     if (currentObject == null
         || (currentObject.isExpanded() && !Objects.equals(currentObject.getId(), newId))) {
       return new ExpandableField<>(newId, null);

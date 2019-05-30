@@ -9,7 +9,6 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import java.util.List;
-
 import org.junit.jupiter.api.Test;
 
 public class ExternalAccountDeserializationTest extends BaseStripeTest {
@@ -35,31 +34,33 @@ public class ExternalAccountDeserializationTest extends BaseStripeTest {
 
   @Test
   public void testUnknownSubTypeThrowingUnsupportedOperation() throws StripeException {
-    final ExternalAccount externalAccount = ApiResource.GSON.fromJson(
-        "    {\n"
-            + "      \"id\": \"bar_123\",\n"
-            + "      \"object\": \"unknown_bar\"\n"
-            + "    }",
-        ExternalAccount.class
-    );
+    final ExternalAccount externalAccount =
+        ApiResource.GSON.fromJson(
+            "    {\n"
+                + "      \"id\": \"bar_123\",\n"
+                + "      \"object\": \"unknown_bar\"\n"
+                + "    }",
+            ExternalAccount.class);
     assertNotNull(externalAccount);
     assertTrue(
         externalAccount instanceof ExternalAccountTypeAdapterFactory.UnknownSubType,
         "External account should be an unknown subtype");
 
-    Throwable exception = assertThrows(UnsupportedOperationException.class, () -> {
-      externalAccount.delete();
-    });
+    Throwable exception =
+        assertThrows(
+            UnsupportedOperationException.class,
+            () -> {
+              externalAccount.delete();
+            });
     assertEquals(
         "Unknown subtype of ExternalAccount with id: bar_123, object: unknown_bar, does not "
-        + "implement method: delete. Please contact support@stripe.com for assistance.",
+            + "implement method: delete. Please contact support@stripe.com for assistance.",
         exception.getMessage());
   }
 
   @Test
   public void testDeserializeCollection() throws Exception {
-    final String data = getResourceAsString(
-        "/api_fixtures/external_account_collection.json");
+    final String data = getResourceAsString("/api_fixtures/external_account_collection.json");
     final ExternalAccountCollection externalAccountCollection =
         ApiResource.GSON.fromJson(data, ExternalAccountCollection.class);
 

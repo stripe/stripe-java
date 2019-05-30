@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertNull;
 
 import com.stripe.BaseStripeTest;
 import com.stripe.net.ApiResource;
-
 import org.junit.jupiter.api.Test;
 
 public class TransferTest extends BaseStripeTest {
@@ -26,10 +25,7 @@ public class TransferTest extends BaseStripeTest {
   @Test
   public void testDeserializeWithExpansions() throws Exception {
     final String[] expansions = {
-      "balance_transaction",
-      "destination",
-      "destination_payment",
-      "source_transaction",
+      "balance_transaction", "destination", "destination_payment", "source_transaction",
     };
     final String data = getFixture("/v1/transfers/tr_123", expansions);
     final Transfer transfer = ApiResource.GSON.fromJson(data, Transfer.class);
