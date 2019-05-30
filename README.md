@@ -143,15 +143,27 @@ You must have Gradle installed. To run the tests:
 
     ./gradlew test
 
-You can run particular tests by passing `--tests Class#method`. Make sure you use the fully qualified class name. For example:
+You can run particular tests by passing `--tests Class#method`. Make sure you
+use the fully qualified class name. For example:
 
     ./gradlew test --tests com.stripe.model.AccountTest
     ./gradlew test --tests com.stripe.functional.ChargeTest
     ./gradlew test --tests com.stripe.functional.ChargeTest.testChargeCreate
 
+Run the linter (Checkstyle) with:
+
+    ./gradlew check
+
+The library uses [google-java-format][google-java-format] for code formatting.
+Code must be formatted before PRs are submitted, otherwise CI will fail. Run
+the formatter with:
+
+    ./gradlew goJF
+
 The library uses [Project Lombok][lombok]. While it is not a requirement, you might want to install a [plugin][lombok-plugins] for your favorite IDE to facilitate development.
 
 [connect]: https://stripe.com/connect
+[google-java-format]: https://github.com/google/google-java-format
 [lombok]: https://projectlombok.org
 [lombok-plugins]: https://projectlombok.org/setup/overview
 [stripe-mock]: https://github.com/stripe/stripe-mock
