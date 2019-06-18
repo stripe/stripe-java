@@ -17,13 +17,12 @@ before_install:
 
 env:
   global:
-  - STRIPE_MOCK_VERSION=0.57.0
+    # If changing this number, please also change it in `BaseStripeTest.java`.
+  - STRIPE_MOCK_VERSION=0.58.0
 
 matrix:
   include:
-    - jdk: oraclejdk8
     - jdk: openjdk8
-    - jdk: oraclejdk9
     - jdk: openjdk9
     - jdk: openjdk10
     - jdk: openjdk11
@@ -38,7 +37,7 @@ notifications:
 script:
   - ./gradlew --version
   - ./gradlew clean
-  - if [ "$TRAVIS_JDK_VERSION" == "oraclejdk9" ]; then ./gradlew check; fi
+  - if [ "$TRAVIS_JDK_VERSION" == "openjdk8" ]; then ./gradlew check; fi
   - ./gradlew -Djdk.tls.client.protocols="TLSv1.2" cobertura coveralls
 
 before_cache:
