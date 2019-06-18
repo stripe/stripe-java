@@ -12,11 +12,11 @@ buildscript {
 plugins {
     id 'java'
     id 'maven'
-    id 'io.franzbecker.gradle-lombok' version '2.1'
-    id "com.diffplug.gradle.spotless" version "3.23.0"
-    id "net.ltgt.errorprone" version "0.7.1"
+    id 'io.franzbecker.gradle-lombok' version '3.1.0'
+    id "com.diffplug.gradle.spotless" version "3.23.1"
+    id "net.ltgt.errorprone" version "0.8.1"
     id 'net.saliman.cobertura' version '2.6.1'
-    id 'com.github.kt3k.coveralls' version '2.8.2'
+    id 'com.github.kt3k.coveralls' version '2.8.4'
     id 'biz.aQute.bnd.builder' version '4.2.0'
 }
 
@@ -46,12 +46,12 @@ dependencies {
     compile group: 'com.google.code.gson', name: 'gson', version:'2.8.5'
     errorprone group: 'com.google.errorprone', name: 'error_prone_core', version: '2.3.3'
     errorproneJavac group: 'com.google.errorprone', name: 'javac', version:'9+181-r4173-1'
-    testCompile group: 'com.google.guava', name: 'guava', version:'27.1-jre'
-    testCompile group: 'org.mockito', name: 'mockito-core', version:'2.26.0'
+    testCompile group: 'com.google.guava', name: 'guava', version:'28.0-jre'
+    testCompile group: 'org.mockito', name: 'mockito-core', version:'2.28.2'
     testRuntime group: 'org.slf4j', name: 'slf4j-api', version: '1.7.26'
-    testImplementation group: 'com.squareup.okhttp3', name: 'mockwebserver', version: '3.14.0'
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.4.1'
-    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.4.1'
+    testImplementation group: 'com.squareup.okhttp3', name: 'mockwebserver', version: '3.14.2'
+    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.4.2'
+    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.4.2'
 }
 
 jar {
@@ -67,7 +67,7 @@ jar {
 }
 
 lombok {
-    version = "1.18.6"
+    version = "1.18.8"
     sha256 = ""
 }
 
