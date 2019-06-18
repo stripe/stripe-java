@@ -42,6 +42,12 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
+  /** Customer balance transaction related to this credit note. */
+  @SerializedName("customer_balance_transaction")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<CustomerBalanceTransaction> customerBalanceTransaction;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -131,6 +137,30 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
 
   public void setCustomerObject(Customer expandableObject) {
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get id of expandable `customerBalanceTransaction` object. */
+  public String getCustomerBalanceTransaction() {
+    return (this.customerBalanceTransaction != null)
+        ? this.customerBalanceTransaction.getId()
+        : null;
+  }
+
+  public void setCustomerBalanceTransaction(String id) {
+    this.customerBalanceTransaction =
+        ApiResource.setExpandableFieldId(id, this.customerBalanceTransaction);
+  }
+
+  /** Get expanded `customerBalanceTransaction`. */
+  public CustomerBalanceTransaction getCustomerBalanceTransactionObject() {
+    return (this.customerBalanceTransaction != null)
+        ? this.customerBalanceTransaction.getExpanded()
+        : null;
+  }
+
+  public void setCustomerBalanceTransactionObject(CustomerBalanceTransaction expandableObject) {
+    this.customerBalanceTransaction =
+        new ExpandableField<CustomerBalanceTransaction>(expandableObject.getId(), expandableObject);
   }
 
   /** Get id of expandable `invoice` object. */

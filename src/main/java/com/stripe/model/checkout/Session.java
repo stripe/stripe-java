@@ -104,6 +104,15 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("payment_method_types")
   List<String> paymentMethodTypes;
 
+  /**
+   * Describes the type of transaction being performed by Checkout in order to customize relevant
+   * text on the page, such as the submit button. `submit_type` can only be specified on Checkout
+   * Sessions using line items or a SKU, but not Checkout Sessions for subscriptions. Supported
+   * values are `auto`, `book`, `donate`, or `pay`.
+   */
+  @SerializedName("submit_type")
+  String submitType;
+
   /** The ID of the subscription created if one or more plans were provided. */
   @SerializedName("subscription")
   @Getter(lombok.AccessLevel.NONE)

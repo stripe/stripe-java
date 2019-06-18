@@ -33,8 +33,8 @@ public class Authorization extends ApiResource
   Boolean approved;
 
   /**
-   * How the card details were provided. One of `keyed_in`, `swipe`, `chip`, `contactless`, or
-   * `online`.
+   * How the card details were provided. One of `chip`, `contactless`, `keyed_in`, `online`, or
+   * `swipe`.
    */
   @SerializedName("authorization_method")
   String authorizationMethod;

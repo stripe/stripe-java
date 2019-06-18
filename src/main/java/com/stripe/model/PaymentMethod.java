@@ -227,12 +227,26 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     return requestCollection(url, params, PaymentMethodCollection.class, options);
   }
 
-  /** Attaches a PaymentMethod object to a Customer. */
+  /**
+   * Attaches a PaymentMethod object to a Customer.
+   *
+   * <p>To use this PaymentMethod as the default for invoice or subscription payments, set <a
+   * href="/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">
+   * <code>invoice_settings.default_payment_method</code></a>, on the Customer to the
+   * PaymentMethod’s ID.
+   */
   public PaymentMethod attach(Map<String, Object> params) throws StripeException {
     return attach(params, (RequestOptions) null);
   }
 
-  /** Attaches a PaymentMethod object to a Customer. */
+  /**
+   * Attaches a PaymentMethod object to a Customer.
+   *
+   * <p>To use this PaymentMethod as the default for invoice or subscription payments, set <a
+   * href="/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">
+   * <code>invoice_settings.default_payment_method</code></a>, on the Customer to the
+   * PaymentMethod’s ID.
+   */
   public PaymentMethod attach(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
@@ -243,12 +257,26 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     return request(ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
   }
 
-  /** Attaches a PaymentMethod object to a Customer. */
+  /**
+   * Attaches a PaymentMethod object to a Customer.
+   *
+   * <p>To use this PaymentMethod as the default for invoice or subscription payments, set <a
+   * href="/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">
+   * <code>invoice_settings.default_payment_method</code></a>, on the Customer to the
+   * PaymentMethod’s ID.
+   */
   public PaymentMethod attach(PaymentMethodAttachParams params) throws StripeException {
     return attach(params, (RequestOptions) null);
   }
 
-  /** Attaches a PaymentMethod object to a Customer. */
+  /**
+   * Attaches a PaymentMethod object to a Customer.
+   *
+   * <p>To use this PaymentMethod as the default for invoice or subscription payments, set <a
+   * href="/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">
+   * <code>invoice_settings.default_payment_method</code></a>, on the Customer to the
+   * PaymentMethod’s ID.
+   */
   public PaymentMethod attach(PaymentMethodAttachParams params, RequestOptions options)
       throws StripeException {
     String url =

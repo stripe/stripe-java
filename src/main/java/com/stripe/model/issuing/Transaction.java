@@ -78,6 +78,12 @@ public class Transaction extends ApiResource
   @SerializedName("livemode")
   Boolean livemode;
 
+  @SerializedName("merchant_amount")
+  Long merchantAmount;
+
+  @SerializedName("merchant_currency")
+  String merchantCurrency;
+
   @SerializedName("merchant_data")
   MerchantData merchantData;
 
