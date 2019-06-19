@@ -1,5 +1,14 @@
 # Changelog
 
+## 10.1.0 - 2019-06-18
+* [#789](https://github.com/stripe/stripe-java/pull/789)
+  * Add support for SEPA Credit Transfer sources
+  * Add support for `CustomerBalanceTransaction` resource and APIs
+  * Add `balance` property on `Customer`
+  * Add `submitType` property on `checkout.Session`
+  * Add `merchantAmount` and `merchantCurrency` properties on `issuing.Transaction`
+  * Add `location` property on `terminal.ConnectionToken`
+
 ## 10.0.2 - 2019-05-29
 * [#784](https://github.com/stripe/stripe-java/pull/784) Make headers access case insensitive
 
@@ -16,7 +25,7 @@
   * Add `spending_limits_currency` attribute and parameter in Issuing resources
 
 ## 9.12.0 - 2019-05-14
-* [#777](https://github.com/stripe/stripe-java/pull/777) 
+* [#777](https://github.com/stripe/stripe-java/pull/777)
   * Add support for `Capability`
   * Add enum `off_session` for `PaymentIntentConfirmParams` and `PaymentIntentCreateParams`
   * Add enum `abandoned` for `PaymentIntentCancellationParams`.
@@ -33,7 +42,7 @@
   * Add support for `extraParams` in all sub-classes of ApiRequestParams their nested classes
   * Add support for webhook event `payment_method.updated`
   * Add support for `payment_intent` filter when listing `Charge`
-  * Add support for `legacy_payments` enum `RequestedCapability` in `AccountCreateParams` and `AccountUpdateParams` 
+  * Add support for `legacy_payments` enum `RequestedCapability` in `AccountCreateParams` and `AccountUpdateParams`
 
 ## 9.9.0 - 2019-05-03
 * [#768](https://github.com/stripe/stripe-java/pull/768)
@@ -92,7 +101,7 @@ Pull requests included in this release:
 * [#708](https://github.com/stripe/stripe-java/pull/708) Fix issues reported by `ErrorProne` Nothing major or user visible.
 
 ## 8.0.2 - 2019-03-20
-* [#704](https://github.com/stripe/stripe-java/pull/704) Fix test compiler error by removing an accidental line  
+* [#704](https://github.com/stripe/stripe-java/pull/704) Fix test compiler error by removing an accidental line
 
 ## 8.0.1 - 2019-03-20
 * [#701](https://github.com/stripe/stripe-java/pull/701) Fix java doc on deprecated `EventData#getObject` and `Event#getDataObjectDeserializer`
@@ -111,7 +120,7 @@ Pull requests included in this release:
 * [#689](https://github.com/stripe/stripe-java/pull/689) Add support for `columns` on `ReportRun` and `default_columns` on `ReportType`.
 
 ## 7.26.0 - 2019-03-06
-* [#686](https://github.com/stripe/stripe-java/pull/686) Add support for `cancel_at` on `Subscription`. 
+* [#686](https://github.com/stripe/stripe-java/pull/686) Add support for `cancel_at` on `Subscription`.
 
 ## 7.25.0 - 2019-02-28
 * [#684](https://github.com/stripe/stripe-java/pull/684) Add support for `latest_invoice` on `Subscription`.
@@ -162,7 +171,7 @@ Pull requests included in this release:
 * [#647](https://github.com/stripe/stripe-java/pull/647) Add support for deserializing `IssuerFraudRecord` in events.
 
 ## 7.13.0 - 2019-01-09
-* [#626](https://github.com/stripe/stripe-java/pull/626) Add support for the `AccountLink` APIs.  
+* [#626](https://github.com/stripe/stripe-java/pull/626) Add support for the `AccountLink` APIs.
 
 ## 7.12.0 - 2019-01-08
 * [#634](https://github.com/stripe/stripe-java/pull/634) Add support for `wallet_provider` on `Issuing.Authorization`.
@@ -384,7 +393,7 @@ Pull requests included in this release:
 * [#432](https://github.com/stripe/stripe-java/pull/432) Make charge on `Dispute` expandable
 
 ## 5.24.0 - 2017-11-28
-* [#421](https://github.com/stripe/stripe-java/pull/421) Expose response objects 
+* [#421](https://github.com/stripe/stripe-java/pull/421) Expose response objects
 * [#427](https://github.com/stripe/stripe-java/pull/427) Add `automatic` property on `Payout` model
 
 ## 5.23.1 - 2017-11-09
