@@ -17,6 +17,10 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class ConnectionToken extends ApiResource {
+  /** The id of the location that this connection token is scoped to. */
+  @SerializedName("location")
+  String location;
+
   /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
   String object;

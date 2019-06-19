@@ -137,6 +137,9 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
   @SerializedName("redirect")
   RedirectFlow redirect;
 
+  @SerializedName("sepa_credit_transfer")
+  SepaCreditTransfer sepaCreditTransfer;
+
   @SerializedName("sepa_debit")
   SepaDebit sepaDebit;
 
@@ -892,6 +895,44 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
      */
     @SerializedName("url")
     String url;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SepaCreditTransfer extends StripeObject {
+    @SerializedName("bank_name")
+    String bankName;
+
+    @SerializedName("bic")
+    String bic;
+
+    @SerializedName("iban")
+    String iban;
+
+    @SerializedName("refund_account_holder_address_city")
+    String refundAccountHolderAddressCity;
+
+    @SerializedName("refund_account_holder_address_country")
+    String refundAccountHolderAddressCountry;
+
+    @SerializedName("refund_account_holder_address_line1")
+    String refundAccountHolderAddressLine1;
+
+    @SerializedName("refund_account_holder_address_line2")
+    String refundAccountHolderAddressLine2;
+
+    @SerializedName("refund_account_holder_address_postal_code")
+    String refundAccountHolderAddressPostalCode;
+
+    @SerializedName("refund_account_holder_address_state")
+    String refundAccountHolderAddressState;
+
+    @SerializedName("refund_account_holder_name")
+    String refundAccountHolderName;
+
+    @SerializedName("refund_iban")
+    String refundIban;
   }
 
   @Getter

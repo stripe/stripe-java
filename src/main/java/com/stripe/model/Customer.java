@@ -7,6 +7,7 @@ import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
+import com.stripe.param.CustomerBalanceTransactionsParams;
 import com.stripe.param.CustomerCreateParams;
 import com.stripe.param.CustomerListParams;
 import com.stripe.param.CustomerRetrieveParams;
@@ -21,20 +22,23 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Customer extends ApiResource implements HasId, MetadataStore<Customer> {
-  /**
-   * Current balance, if any, being stored on the customer's account. If negative, the customer has
-   * credit to apply to the next invoice. If positive, the customer has an amount owed that will be
-   * added to the next invoice. The balance does not refer to any unpaid invoices; it solely takes
-   * into account amounts that have yet to be successfully applied to any invoice. This balance is
-   * only taken into account as invoices are finalized. Note that the balance does not include
-   * unpaid invoices.
-   */
+  /** This field has been renamed to `balance` and will be removed in a future API version. */
   @SerializedName("account_balance")
   Long accountBalance;
 
   /** The customer's address. */
   @SerializedName("address")
   Address address;
+
+  /**
+   * Current balance, if any, being stored on the customer. If negative, the customer has credit to
+   * apply to their next invoice. If positive, the customer has an amount owed that will be added to
+   * their next invoice. The balance does not refer to any unpaid invoices; it solely takes into
+   * account amounts that have yet to be successfully applied to any invoice. This balance is only
+   * taken into account as invoices are finalized.
+   */
+  @SerializedName("balance")
+  Long balance;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
@@ -409,6 +413,62 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
             Stripe.getApiBase(),
             String.format("/v1/customers/%s", ApiResource.urlEncodeId(this.getId())));
     return request(ApiResource.RequestMethod.DELETE, url, params, Customer.class, options);
+  }
+
+  /**
+   * Retrieves the list of transactions that updated the customer’s <a
+   * href="/docs/api/customers/object#customer_object-balance"><code>balance</code></a>.
+   */
+  public CustomerBalanceTransactionCollection balanceTransactions() throws StripeException {
+    return balanceTransactions((Map<String, Object>) null, (RequestOptions) null);
+  }
+
+  /**
+   * Retrieves the list of transactions that updated the customer’s <a
+   * href="/docs/api/customers/object#customer_object-balance"><code>balance</code></a>.
+   */
+  public CustomerBalanceTransactionCollection balanceTransactions(Map<String, Object> params)
+      throws StripeException {
+    return balanceTransactions(params, (RequestOptions) null);
+  }
+
+  /**
+   * Retrieves the list of transactions that updated the customer’s <a
+   * href="/docs/api/customers/object#customer_object-balance"><code>balance</code></a>.
+   */
+  public CustomerBalanceTransactionCollection balanceTransactions(
+      Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/customers/%s/balance_transactions", ApiResource.urlEncodeId(this.getId())));
+    return requestCollection(url, params, CustomerBalanceTransactionCollection.class, options);
+  }
+
+  /**
+   * Retrieves the list of transactions that updated the customer’s <a
+   * href="/docs/api/customers/object#customer_object-balance"><code>balance</code></a>.
+   */
+  public CustomerBalanceTransactionCollection balanceTransactions(
+      CustomerBalanceTransactionsParams params) throws StripeException {
+    return balanceTransactions(params, (RequestOptions) null);
+  }
+
+  /**
+   * Retrieves the list of transactions that updated the customer’s <a
+   * href="/docs/api/customers/object#customer_object-balance"><code>balance</code></a>.
+   */
+  public CustomerBalanceTransactionCollection balanceTransactions(
+      CustomerBalanceTransactionsParams params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/customers/%s/balance_transactions", ApiResource.urlEncodeId(this.getId())));
+    return requestCollection(url, params, CustomerBalanceTransactionCollection.class, options);
   }
 
   /** Removes the currently applied discount on a customer. */

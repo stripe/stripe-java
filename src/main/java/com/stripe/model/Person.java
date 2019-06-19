@@ -184,22 +184,50 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     return request(ApiResource.RequestMethod.POST, url, params, Person.class, options);
   }
 
-  /** Deletes an existing person’s relationship to the account’s legal entity. */
+  /**
+   * Deletes an existing person’s relationship to the account’s legal entity. Any person with a
+   * relationship for an account can be deleted through the API, except if the person is the <code>
+   * account_opener</code>. If your integration is using the deprecated <code>controller</code> or
+   * <code>executive</code> parameter, you cannot delete the only verified <code>controller</code>
+   * (or <code>executive</code>), or the only <code>controller</code> (or <code>executive</code>) on
+   * file.
+   */
   public Person delete() throws StripeException {
     return delete((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Deletes an existing person’s relationship to the account’s legal entity. */
+  /**
+   * Deletes an existing person’s relationship to the account’s legal entity. Any person with a
+   * relationship for an account can be deleted through the API, except if the person is the <code>
+   * account_opener</code>. If your integration is using the deprecated <code>controller</code> or
+   * <code>executive</code> parameter, you cannot delete the only verified <code>controller</code>
+   * (or <code>executive</code>), or the only <code>controller</code> (or <code>executive</code>) on
+   * file.
+   */
   public Person delete(RequestOptions options) throws StripeException {
     return delete((Map<String, Object>) null, options);
   }
 
-  /** Deletes an existing person’s relationship to the account’s legal entity. */
+  /**
+   * Deletes an existing person’s relationship to the account’s legal entity. Any person with a
+   * relationship for an account can be deleted through the API, except if the person is the <code>
+   * account_opener</code>. If your integration is using the deprecated <code>controller</code> or
+   * <code>executive</code> parameter, you cannot delete the only verified <code>controller</code>
+   * (or <code>executive</code>), or the only <code>controller</code> (or <code>executive</code>) on
+   * file.
+   */
   public Person delete(Map<String, Object> params) throws StripeException {
     return delete(params, (RequestOptions) null);
   }
 
-  /** Deletes an existing person’s relationship to the account’s legal entity. */
+  /**
+   * Deletes an existing person’s relationship to the account’s legal entity. Any person with a
+   * relationship for an account can be deleted through the API, except if the person is the <code>
+   * account_opener</code>. If your integration is using the deprecated <code>controller</code> or
+   * <code>executive</code> parameter, you cannot delete the only verified <code>controller</code>
+   * (or <code>executive</code>), or the only <code>controller</code> (or <code>executive</code>) on
+   * file.
+   */
   public Person delete(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url;
     if (this.getAccount() != null) {

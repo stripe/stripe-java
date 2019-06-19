@@ -91,13 +91,23 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("payment_method_types")
   List<PaymentMethodType> paymentMethodTypes;
 
+  /**
+   * Describes the type of transaction being performed by Checkout in order to customize relevant
+   * text on the page, such as the submit button. `submit_type` can only be specified on Checkout
+   * Sessions using line items or a SKU, but not Checkout Sessions for subscriptions. Supported
+   * values are `auto`, `book`, `donate`, or `pay`.
+   */
+  @SerializedName("submit_type")
+  SubmitType submitType;
+
   /** A subset of parameters to be passed to subscription creation. */
   @SerializedName("subscription_data")
   SubscriptionData subscriptionData;
 
   /**
-   * The URL the customer will be directed to after the payment or subscription creation is
-   * successful.
+   * The URL to which Stripe should send customers when payment is complete. If you’d like access to
+   * the Checkout Session for the successful payment, read more about it in our guide on [fulfilling
+   * your payments with webhooks](/docs/payments/checkout/fulfillment#webhooks).
    */
   @SerializedName("success_url")
   String successUrl;
@@ -114,6 +124,7 @@ public class SessionCreateParams extends ApiRequestParams {
       Locale locale,
       PaymentIntentData paymentIntentData,
       List<PaymentMethodType> paymentMethodTypes,
+      SubmitType submitType,
       SubscriptionData subscriptionData,
       String successUrl) {
     this.billingAddressCollection = billingAddressCollection;
@@ -127,6 +138,7 @@ public class SessionCreateParams extends ApiRequestParams {
     this.locale = locale;
     this.paymentIntentData = paymentIntentData;
     this.paymentMethodTypes = paymentMethodTypes;
+    this.submitType = submitType;
     this.subscriptionData = subscriptionData;
     this.successUrl = successUrl;
   }
@@ -158,6 +170,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private List<PaymentMethodType> paymentMethodTypes;
 
+    private SubmitType submitType;
+
     private SubscriptionData subscriptionData;
 
     private String successUrl;
@@ -176,6 +190,7 @@ public class SessionCreateParams extends ApiRequestParams {
           this.locale,
           this.paymentIntentData,
           this.paymentMethodTypes,
+          this.submitType,
           this.subscriptionData,
           this.successUrl);
     }
@@ -352,6 +367,17 @@ public class SessionCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * Describes the type of transaction being performed by Checkout in order to customize relevant
+     * text on the page, such as the submit button. `submit_type` can only be specified on Checkout
+     * Sessions using line items or a SKU, but not Checkout Sessions for subscriptions. Supported
+     * values are `auto`, `book`, `donate`, or `pay`.
+     */
+    public Builder setSubmitType(SubmitType submitType) {
+      this.submitType = submitType;
+      return this;
+    }
+
     /** A subset of parameters to be passed to subscription creation. */
     public Builder setSubscriptionData(SubscriptionData subscriptionData) {
       this.subscriptionData = subscriptionData;
@@ -359,8 +385,9 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The URL the customer will be directed to after the payment or subscription creation is
-     * successful.
+     * The URL to which Stripe should send customers when payment is complete. If you’d like access
+     * to the Checkout Session for the successful payment, read more about it in our guide on
+     * [fulfilling your payments with webhooks](/docs/payments/checkout/fulfillment#webhooks).
      */
     public Builder setSuccessUrl(String successUrl) {
       this.successUrl = successUrl;
@@ -1490,6 +1517,27 @@ public class SessionCreateParams extends ApiRequestParams {
     private final String value;
 
     PaymentMethodType(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum SubmitType implements ApiRequestParams.EnumParam {
+    @SerializedName("auto")
+    AUTO("auto"),
+
+    @SerializedName("book")
+    BOOK("book"),
+
+    @SerializedName("donate")
+    DONATE("donate"),
+
+    @SerializedName("pay")
+    PAY("pay");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    SubmitType(String value) {
       this.value = value;
     }
   }

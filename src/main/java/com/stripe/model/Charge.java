@@ -30,8 +30,9 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
    * A positive integer representing how much to charge in the [smallest currency
    * unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100
    * to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent in
-   * charge
-   * currency](https://support.stripe.com/questions/what-is-the-minimum-amount-i-can-charge-with-stripe).
+   * charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The
+   * amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of
+   * $999,999.99).
    */
   @SerializedName("amount")
   Long amount;
@@ -976,6 +977,9 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
     @SerializedName("p24")
     P24 p24;
 
+    @SerializedName("sepa_credit_transfer")
+    SepaCreditTransfer sepaCreditTransfer;
+
     @SerializedName("sepa_debit")
     SepaDebit sepaDebit;
 
@@ -1584,6 +1588,23 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
        */
       @SerializedName("verified_name")
       String verifiedName;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class SepaCreditTransfer extends StripeObject {
+      /** Name of the bank associated with the bank account. */
+      @SerializedName("bank_name")
+      String bankName;
+
+      /** Bank Identifier Code of the bank associated with the bank account. */
+      @SerializedName("bic")
+      String bic;
+
+      /** IBAN of the bank account to transfer funds to. */
+      @SerializedName("iban")
+      String iban;
     }
 
     @Getter

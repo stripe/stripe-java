@@ -12,17 +12,21 @@ import java.util.Map;
 import lombok.Getter;
 
 public class CustomerUpdateParams extends ApiRequestParams {
-  /**
-   * An integer amount in %s that represents the account balance for your customer. Account balances
-   * only affect invoices. A negative amount represents a credit that decreases the amount due on an
-   * invoice; a positive amount increases the amount due on an invoice.
-   */
+  /** This field has been renamed to `balance` and will be removed in a future API version. */
   @SerializedName("account_balance")
   Long accountBalance;
 
   /** The customer's address. */
   @SerializedName("address")
   Object address;
+
+  /**
+   * An integer amount in %s that represents the customer's current balance, which affect the
+   * customer's future invoices. A negative amount represents a credit that decreases the amount due
+   * on an invoice; a positive amount increases the amount due on an invoice.
+   */
+  @SerializedName("balance")
+  Long balance;
 
   @SerializedName("coupon")
   String coupon;
@@ -125,6 +129,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
   private CustomerUpdateParams(
       Long accountBalance,
       Object address,
+      Long balance,
       String coupon,
       String defaultSource,
       String description,
@@ -144,6 +149,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
       Object trialEnd) {
     this.accountBalance = accountBalance;
     this.address = address;
+    this.balance = balance;
     this.coupon = coupon;
     this.defaultSource = defaultSource;
     this.description = description;
@@ -171,6 +177,8 @@ public class CustomerUpdateParams extends ApiRequestParams {
     private Long accountBalance;
 
     private Object address;
+
+    private Long balance;
 
     private String coupon;
 
@@ -211,6 +219,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
       return new CustomerUpdateParams(
           this.accountBalance,
           this.address,
+          this.balance,
           this.coupon,
           this.defaultSource,
           this.description,
@@ -230,11 +239,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
           this.trialEnd);
     }
 
-    /**
-     * An integer amount in %s that represents the account balance for your customer. Account
-     * balances only affect invoices. A negative amount represents a credit that decreases the
-     * amount due on an invoice; a positive amount increases the amount due on an invoice.
-     */
+    /** This field has been renamed to `balance` and will be removed in a future API version. */
     public Builder setAccountBalance(Long accountBalance) {
       this.accountBalance = accountBalance;
       return this;
@@ -249,6 +254,16 @@ public class CustomerUpdateParams extends ApiRequestParams {
     /** The customer's address. */
     public Builder setAddress(EmptyParam address) {
       this.address = address;
+      return this;
+    }
+
+    /**
+     * An integer amount in %s that represents the customer's current balance, which affect the
+     * customer's future invoices. A negative amount represents a credit that decreases the amount
+     * due on an invoice; a positive amount increases the amount due on an invoice.
+     */
+    public Builder setBalance(Long balance) {
+      this.balance = balance;
       return this;
     }
 

@@ -544,13 +544,29 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     return request(ApiResource.RequestMethod.GET, url, params, PaymentIntent.class, options);
   }
 
-  /** Updates a PaymentIntent object. */
+  /**
+   * Updates properties on a PaymentIntent object without confirming.
+   *
+   * <p>Depending on which properties you update, you may need to confirm the PaymentIntent again.
+   * For example, updating the <code>payment_method</code> will always require you to confirm the
+   * PaymentIntent again. If you prefer to update and confirm at the same time, we recommend
+   * updating properties via the <a href="/docs/api/payment_intents/confirm">confirm API</a>
+   * instead.
+   */
   @Override
   public PaymentIntent update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
-  /** Updates a PaymentIntent object. */
+  /**
+   * Updates properties on a PaymentIntent object without confirming.
+   *
+   * <p>Depending on which properties you update, you may need to confirm the PaymentIntent again.
+   * For example, updating the <code>payment_method</code> will always require you to confirm the
+   * PaymentIntent again. If you prefer to update and confirm at the same time, we recommend
+   * updating properties via the <a href="/docs/api/payment_intents/confirm">confirm API</a>
+   * instead.
+   */
   @Override
   public PaymentIntent update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -562,12 +578,28 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     return request(ApiResource.RequestMethod.POST, url, params, PaymentIntent.class, options);
   }
 
-  /** Updates a PaymentIntent object. */
+  /**
+   * Updates properties on a PaymentIntent object without confirming.
+   *
+   * <p>Depending on which properties you update, you may need to confirm the PaymentIntent again.
+   * For example, updating the <code>payment_method</code> will always require you to confirm the
+   * PaymentIntent again. If you prefer to update and confirm at the same time, we recommend
+   * updating properties via the <a href="/docs/api/payment_intents/confirm">confirm API</a>
+   * instead.
+   */
   public PaymentIntent update(PaymentIntentUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
-  /** Updates a PaymentIntent object. */
+  /**
+   * Updates properties on a PaymentIntent object without confirming.
+   *
+   * <p>Depending on which properties you update, you may need to confirm the PaymentIntent again.
+   * For example, updating the <code>payment_method</code> will always require you to confirm the
+   * PaymentIntent again. If you prefer to update and confirm at the same time, we recommend
+   * updating properties via the <a href="/docs/api/payment_intents/confirm">confirm API</a>
+   * instead.
+   */
   public PaymentIntent update(PaymentIntentUpdateParams params, RequestOptions options)
       throws StripeException {
     String url =
