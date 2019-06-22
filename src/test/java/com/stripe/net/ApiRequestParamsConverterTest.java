@@ -94,6 +94,14 @@ public class ApiRequestParamsConverterTest {
     List<ModelHasExtraParams> paramFooList;
   }
 
+  private static class HasMetadataParams extends ApiRequestParams {
+    @SerializedName("metadata")
+    Map<String, String> metadata;
+
+    @SerializedName("feature_map")
+    Map<String, Long> featureMap;
+  }
+
   private static class ModelHasExtraParamsWithWrongSerializedName extends ApiRequestParams {
     @SerializedName("extra_params")
     private Map<String, String> extraParams;
@@ -216,6 +224,32 @@ public class ApiRequestParamsConverterTest {
             .getMessage()
             .contains(
                 "Found param key `string_value` with values `foo` and `my conflicting param value`."));
+  }
+
+  @Test
+  public void testMetadataWithNullValue() {
+    HasMetadataParams params = new HasMetadataParams();
+    params.metadata = new HashMap<>();
+    params.metadata.put("foo", "123");
+    params.metadata.put("bar", null);
+
+    params.featureMap = new HashMap<>();
+    params.featureMap.put("fooLong", 123L);
+    // should disappear
+    params.featureMap.put("barLong", null);
+
+    Map<String, Object> untypedParams = toMap(params);
+    Map<String, String> metadata = (Map<String, String>) untypedParams.get("metadata");
+    assertEquals(metadata.size(), 2);
+    assertEquals(metadata.get("foo"), "123");
+    assertEquals(metadata.get("bar"), null);
+
+    assertEquals(metadata.size(), 2);
+
+    Map<String, String> featureMap = (Map<String, String>) untypedParams.get("feature_map");
+
+    assertEquals(featureMap.size(), 1);
+    assertEquals(featureMap.get("fooLong"), 123L);
   }
 
   private Map<String, Object> toMap(ApiRequestParams params) {
