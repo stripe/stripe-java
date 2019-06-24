@@ -97,4 +97,7 @@ public class InvoiceLineItem extends StripeObject implements HasId {
    */
   @SerializedName("type")
   String type;
+
+  @SerializedName("unified_proration")
+  Boolean unifiedProration;
 }

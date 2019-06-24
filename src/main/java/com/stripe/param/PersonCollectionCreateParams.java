@@ -26,7 +26,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
 
   /** The person's date of birth. */
   @SerializedName("dob")
-  Dob dob;
+  Object dob;
 
   /** The person's email address. */
   @SerializedName("email")
@@ -121,7 +121,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
       Address address,
       AddressKana addressKana,
       AddressKanji addressKanji,
-      Dob dob,
+      Object dob,
       String email,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -175,7 +175,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
 
     private AddressKanji addressKanji;
 
-    private Dob dob;
+    private Object dob;
 
     private String email;
 
@@ -260,6 +260,12 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
 
     /** The person's date of birth. */
     public Builder setDob(Dob dob) {
+      this.dob = dob;
+      return this;
+    }
+
+    /** The person's date of birth. */
+    public Builder setDob(EmptyParam dob) {
       this.dob = dob;
       return this;
     }

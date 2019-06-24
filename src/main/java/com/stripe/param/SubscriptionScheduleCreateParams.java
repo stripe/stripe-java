@@ -14,10 +14,7 @@ import lombok.Getter;
 
 public class SubscriptionScheduleCreateParams extends ApiRequestParams {
   /**
-   * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
-   * attempt to pay the underlying subscription at the end of each billing cycle using the default
-   * source attached to the customer. When sending an invoice, Stripe will email your customer an
-   * invoice with payment instructions. Defaults to `charge_automatically` on creation.
+   * This field has been renamed to `collection_method` and will be removed in a future API version.
    */
   @SerializedName("billing")
   Billing billing;
@@ -28,6 +25,15 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
    */
   @SerializedName("billing_thresholds")
   Object billingThresholds;
+
+  /**
+   * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
+   * attempt to pay the underlying subscription at the end of each billing cycle using the default
+   * source attached to the customer. When sending an invoice, Stripe will email your customer an
+   * invoice with payment instructions. Defaults to `charge_automatically` on creation.
+   */
+  @SerializedName("collection_method")
+  CollectionMethod collectionMethod;
 
   /** The identifier of the customer to create the subscription schedule for. */
   @SerializedName("customer")
@@ -98,6 +104,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
   private SubscriptionScheduleCreateParams(
       Billing billing,
       Object billingThresholds,
+      CollectionMethod collectionMethod,
       String customer,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -110,6 +117,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       Object startDate) {
     this.billing = billing;
     this.billingThresholds = billingThresholds;
+    this.collectionMethod = collectionMethod;
     this.customer = customer;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -130,6 +138,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     private Billing billing;
 
     private Object billingThresholds;
+
+    private CollectionMethod collectionMethod;
 
     private String customer;
 
@@ -156,6 +166,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       return new SubscriptionScheduleCreateParams(
           this.billing,
           this.billingThresholds,
+          this.collectionMethod,
           this.customer,
           this.expand,
           this.extraParams,
@@ -169,10 +180,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
-     * attempt to pay the underlying subscription at the end of each billing cycle using the default
-     * source attached to the customer. When sending an invoice, Stripe will email your customer an
-     * invoice with payment instructions. Defaults to `charge_automatically` on creation.
+     * This field has been renamed to `collection_method` and will be removed in a future API
+     * version.
      */
     public Builder setBilling(Billing billing) {
       this.billing = billing;
@@ -194,6 +203,17 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
      */
     public Builder setBillingThresholds(EmptyParam billingThresholds) {
       this.billingThresholds = billingThresholds;
+      return this;
+    }
+
+    /**
+     * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
+     * attempt to pay the underlying subscription at the end of each billing cycle using the default
+     * source attached to the customer. When sending an invoice, Stripe will email your customer an
+     * invoice with payment instructions. Defaults to `charge_automatically` on creation.
+     */
+    public Builder setCollectionMethod(CollectionMethod collectionMethod) {
+      this.collectionMethod = collectionMethod;
       return this;
     }
 
@@ -1142,6 +1162,21 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     private final String value;
 
     Billing(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum CollectionMethod implements ApiRequestParams.EnumParam {
+    @SerializedName("charge_automatically")
+    CHARGE_AUTOMATICALLY("charge_automatically"),
+
+    @SerializedName("send_invoice")
+    SEND_INVOICE("send_invoice");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    CollectionMethod(String value) {
       this.value = value;
     }
   }

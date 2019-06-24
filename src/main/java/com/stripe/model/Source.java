@@ -1047,9 +1047,6 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Wechat extends StripeObject {
-    @SerializedName("native_url")
-    String nativeUrl;
-
     @SerializedName("prepay_id")
     String prepayId;
 

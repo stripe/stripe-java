@@ -31,13 +31,19 @@ public class InvoiceCreateParams extends ApiRequestParams {
   Boolean autoAdvance;
 
   /**
+   * This field has been renamed to `collection_method` and will be removed in a future API version.
+   */
+  @SerializedName("billing")
+  Billing billing;
+
+  /**
    * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
    * attempt to pay this invoice using the default source attached to the customer. When sending an
    * invoice, Stripe will email this invoice to the customer with payment instructions. Defaults to
    * `charge_automatically`.
    */
-  @SerializedName("billing")
-  Billing billing;
+  @SerializedName("collection_method")
+  CollectionMethod collectionMethod;
 
   /** A list of up to 4 custom fields to be displayed on the invoice. */
   @SerializedName("custom_fields")
@@ -48,7 +54,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
   /**
    * The number of days from when the invoice is created until it is due. Valid only for invoices
-   * where `billing=send_invoice`.
+   * where `collection_method=send_invoice`.
    */
   @SerializedName("days_until_due")
   Long daysUntilDue;
@@ -78,7 +84,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
   /**
    * The date on which payment for this invoice is due. Valid only for invoices where
-   * `billing=send_invoice`.
+   * `collection_method=send_invoice`.
    */
   @SerializedName("due_date")
   Long dueDate;
@@ -142,6 +148,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
       Long applicationFeeAmount,
       Boolean autoAdvance,
       Billing billing,
+      CollectionMethod collectionMethod,
       Object customFields,
       String customer,
       Long daysUntilDue,
@@ -161,6 +168,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
     this.applicationFeeAmount = applicationFeeAmount;
     this.autoAdvance = autoAdvance;
     this.billing = billing;
+    this.collectionMethod = collectionMethod;
     this.customFields = customFields;
     this.customer = customer;
     this.daysUntilDue = daysUntilDue;
@@ -189,6 +197,8 @@ public class InvoiceCreateParams extends ApiRequestParams {
     private Boolean autoAdvance;
 
     private Billing billing;
+
+    private CollectionMethod collectionMethod;
 
     private Object customFields;
 
@@ -228,6 +238,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
           this.applicationFeeAmount,
           this.autoAdvance,
           this.billing,
+          this.collectionMethod,
           this.customFields,
           this.customer,
           this.daysUntilDue,
@@ -268,13 +279,22 @@ public class InvoiceCreateParams extends ApiRequestParams {
     }
 
     /**
+     * This field has been renamed to `collection_method` and will be removed in a future API
+     * version.
+     */
+    public Builder setBilling(Billing billing) {
+      this.billing = billing;
+      return this;
+    }
+
+    /**
      * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
      * attempt to pay this invoice using the default source attached to the customer. When sending
      * an invoice, Stripe will email this invoice to the customer with payment instructions.
      * Defaults to `charge_automatically`.
      */
-    public Builder setBilling(Billing billing) {
-      this.billing = billing;
+    public Builder setCollectionMethod(CollectionMethod collectionMethod) {
+      this.collectionMethod = collectionMethod;
       return this;
     }
 
@@ -297,7 +317,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
     /**
      * The number of days from when the invoice is created until it is due. Valid only for invoices
-     * where `billing=send_invoice`.
+     * where `collection_method=send_invoice`.
      */
     public Builder setDaysUntilDue(Long daysUntilDue) {
       this.daysUntilDue = daysUntilDue;
@@ -357,7 +377,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
 
     /**
      * The date on which payment for this invoice is due. Valid only for invoices where
-     * `billing=send_invoice`.
+     * `collection_method=send_invoice`.
      */
     public Builder setDueDate(Long dueDate) {
       this.dueDate = dueDate;
@@ -650,6 +670,21 @@ public class InvoiceCreateParams extends ApiRequestParams {
     private final String value;
 
     Billing(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum CollectionMethod implements ApiRequestParams.EnumParam {
+    @SerializedName("charge_automatically")
+    CHARGE_AUTOMATICALLY("charge_automatically"),
+
+    @SerializedName("send_invoice")
+    SEND_INVOICE("send_invoice");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    CollectionMethod(String value) {
       this.value = value;
     }
   }

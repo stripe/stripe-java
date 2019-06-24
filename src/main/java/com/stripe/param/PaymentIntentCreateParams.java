@@ -113,7 +113,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
    * `one_off` for all other off-session payments.
    */
   @SerializedName("off_session")
-  OffSession offSession;
+  Object offSession;
 
   /**
    * The Stripe account ID for which these funds are intended. For details, see the PaymentIntents
@@ -208,7 +208,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Map<String, String> metadata,
-      OffSession offSession,
+      Object offSession,
       String onBehalfOf,
       String paymentMethod,
       List<String> paymentMethodTypes,
@@ -272,7 +272,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
-    private OffSession offSession;
+    private Object offSession;
 
     private String onBehalfOf;
 
@@ -500,6 +500,18 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      * `one_off` for all other off-session payments.
      */
     public Builder setOffSession(OffSession offSession) {
+      this.offSession = offSession;
+      return this;
+    }
+
+    /**
+     * Used in payment flows that collect payment details and charge later, when the customer is not
+     * available to complete additional required steps for the payment. Setting this parameter
+     * indicates that this payment attempt is happening while the customer is not in your checkout
+     * flow. Use `recurring` for payments made on a recurring basis (for example, subscriptions) and
+     * `one_off` for all other off-session payments.
+     */
+    public Builder setOffSession(Boolean offSession) {
       this.offSession = offSession;
       return this;
     }

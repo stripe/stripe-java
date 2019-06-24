@@ -33,7 +33,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
    * `one_off` for all other off-session payments.
    */
   @SerializedName("off_session")
-  OffSession offSession;
+  Object offSession;
 
   /**
    * ID of the payment method (a PaymentMethod, Card, BankAccount, or saved Source object) to attach
@@ -81,7 +81,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   private PaymentIntentConfirmParams(
       List<String> expand,
       Map<String, Object> extraParams,
-      OffSession offSession,
+      Object offSession,
       String paymentMethod,
       String receiptEmail,
       String returnUrl,
@@ -108,7 +108,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private OffSession offSession;
+    private Object offSession;
 
     private String paymentMethod;
 
@@ -196,6 +196,18 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
      * `one_off` for all other off-session payments.
      */
     public Builder setOffSession(OffSession offSession) {
+      this.offSession = offSession;
+      return this;
+    }
+
+    /**
+     * Used in payment flows that collect payment details and charge later, when the customer is not
+     * available to complete additional required steps for the payment. Setting this parameter
+     * indicates that this payment attempt is happening while the customer is not in your checkout
+     * flow. Use `recurring` for payments made on a recurring basis (for example, subscriptions) and
+     * `one_off` for all other off-session payments.
+     */
+    public Builder setOffSession(Boolean offSession) {
       this.offSession = offSession;
       return this;
     }

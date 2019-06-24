@@ -88,7 +88,7 @@ public class BalanceTransaction extends ApiResource implements HasId {
    * `payout_failure`, `refund`, `refund_failure`, `reserve_transaction`, `reserved_funds`,
    * `stripe_fee`, `stripe_fx_fee`, `tax_fee`, `topup`, `topup_reversal`, `transfer`,
    * `transfer_cancel`, `transfer_failure`, or `transfer_refund`. [Learn
-   * more](https://stripe.com/docs/reporting/balance-transaction-types) about balance transaction
+   * more](https://stripe.com/docs/reports/balance-transaction-types) about balance transaction
    * types and what they represent.
    */
   @SerializedName("type")
