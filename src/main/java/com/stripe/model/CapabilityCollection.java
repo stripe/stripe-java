@@ -47,17 +47,17 @@ public class CapabilityCollection extends StripeCollection<Capability> {
     return ApiResource.requestCollection(url, params, CapabilityCollection.class, options);
   }
 
-  /** Retrieves an existing Account Capability. */
+  /** Retrieves information about the specified Account Capability. */
   public Capability retrieve(String id) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves an existing Account Capability. */
+  /** Retrieves information about the specified Account Capability. */
   public Capability retrieve(String id, RequestOptions options) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves an existing Account Capability. */
+  /** Retrieves information about the specified Account Capability. */
   public Capability retrieve(String id, Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
@@ -69,7 +69,7 @@ public class CapabilityCollection extends StripeCollection<Capability> {
         ApiResource.RequestMethod.GET, url, params, Capability.class, options);
   }
 
-  /** Retrieves an existing Account Capability. */
+  /** Retrieves information about the specified Account Capability. */
   public Capability retrieve(
       String id, CapabilityCollectionRetrieveParams params, RequestOptions options)
       throws StripeException {

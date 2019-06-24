@@ -12,10 +12,16 @@ import lombok.Getter;
 
 public class InvoiceListParams extends ApiRequestParams {
   /**
-   * The billing mode of the invoice to retrieve. Either `charge_automatically` or `send_invoice`.
+   * This field has been renamed to `collection_method` and will be removed in a future API version.
    */
   @SerializedName("billing")
   Billing billing;
+
+  /**
+   * The billing mode of the invoice to retrieve. Either `charge_automatically` or `send_invoice`.
+   */
+  @SerializedName("collection_method")
+  CollectionMethod collectionMethod;
 
   @SerializedName("created")
   Object created;
@@ -65,12 +71,20 @@ public class InvoiceListParams extends ApiRequestParams {
   @SerializedName("starting_after")
   String startingAfter;
 
+  /**
+   * The status of the invoice, one of `draft`, `open`, `paid`, `uncollectible`, or `void`. [Learn
+   * more](https://stripe.com/docs/billing/invoices/workflow#workflow-overview)
+   */
+  @SerializedName("status")
+  Status status;
+
   /** Only return invoices for the subscription specified by this subscription ID. */
   @SerializedName("subscription")
   String subscription;
 
   private InvoiceListParams(
       Billing billing,
+      CollectionMethod collectionMethod,
       Object created,
       String customer,
       Object dueDate,
@@ -79,8 +93,10 @@ public class InvoiceListParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       Long limit,
       String startingAfter,
+      Status status,
       String subscription) {
     this.billing = billing;
+    this.collectionMethod = collectionMethod;
     this.created = created;
     this.customer = customer;
     this.dueDate = dueDate;
@@ -89,6 +105,7 @@ public class InvoiceListParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.limit = limit;
     this.startingAfter = startingAfter;
+    this.status = status;
     this.subscription = subscription;
   }
 
@@ -98,6 +115,8 @@ public class InvoiceListParams extends ApiRequestParams {
 
   public static class Builder {
     private Billing billing;
+
+    private CollectionMethod collectionMethod;
 
     private Object created;
 
@@ -115,12 +134,15 @@ public class InvoiceListParams extends ApiRequestParams {
 
     private String startingAfter;
 
+    private Status status;
+
     private String subscription;
 
     /** Finalize and obtain parameter instance from this builder. */
     public InvoiceListParams build() {
       return new InvoiceListParams(
           this.billing,
+          this.collectionMethod,
           this.created,
           this.customer,
           this.dueDate,
@@ -129,14 +151,24 @@ public class InvoiceListParams extends ApiRequestParams {
           this.extraParams,
           this.limit,
           this.startingAfter,
+          this.status,
           this.subscription);
+    }
+
+    /**
+     * This field has been renamed to `collection_method` and will be removed in a future API
+     * version.
+     */
+    public Builder setBilling(Billing billing) {
+      this.billing = billing;
+      return this;
     }
 
     /**
      * The billing mode of the invoice to retrieve. Either `charge_automatically` or `send_invoice`.
      */
-    public Builder setBilling(Billing billing) {
-      this.billing = billing;
+    public Builder setCollectionMethod(CollectionMethod collectionMethod) {
+      this.collectionMethod = collectionMethod;
       return this;
     }
 
@@ -246,6 +278,15 @@ public class InvoiceListParams extends ApiRequestParams {
      */
     public Builder setStartingAfter(String startingAfter) {
       this.startingAfter = startingAfter;
+      return this;
+    }
+
+    /**
+     * The status of the invoice, one of `draft`, `open`, `paid`, `uncollectible`, or `void`. [Learn
+     * more](https://stripe.com/docs/billing/invoices/workflow#workflow-overview)
+     */
+    public Builder setStatus(Status status) {
+      this.status = status;
       return this;
     }
 
@@ -479,6 +520,45 @@ public class InvoiceListParams extends ApiRequestParams {
     private final String value;
 
     Billing(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum CollectionMethod implements ApiRequestParams.EnumParam {
+    @SerializedName("charge_automatically")
+    CHARGE_AUTOMATICALLY("charge_automatically"),
+
+    @SerializedName("send_invoice")
+    SEND_INVOICE("send_invoice");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    CollectionMethod(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum Status implements ApiRequestParams.EnumParam {
+    @SerializedName("draft")
+    DRAFT("draft"),
+
+    @SerializedName("open")
+    OPEN("open"),
+
+    @SerializedName("paid")
+    PAID("paid"),
+
+    @SerializedName("uncollectible")
+    UNCOLLECTIBLE("uncollectible"),
+
+    @SerializedName("void")
+    VOID("void");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Status(String value) {
       this.value = value;
     }
   }

@@ -4,6 +4,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -1374,7 +1375,7 @@ public class AccountCreateParams extends ApiRequestParams {
 
     /** The individual's date of birth. */
     @SerializedName("dob")
-    Dob dob;
+    Object dob;
 
     @SerializedName("email")
     String email;
@@ -1454,7 +1455,7 @@ public class AccountCreateParams extends ApiRequestParams {
         Address address,
         AddressKana addressKana,
         AddressKanji addressKanji,
-        Dob dob,
+        Object dob,
         String email,
         Map<String, Object> extraParams,
         String firstName,
@@ -1502,7 +1503,7 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private AddressKanji addressKanji;
 
-      private Dob dob;
+      private Object dob;
 
       private String email;
 
@@ -1578,6 +1579,12 @@ public class AccountCreateParams extends ApiRequestParams {
 
       /** The individual's date of birth. */
       public Builder setDob(Dob dob) {
+        this.dob = dob;
+        return this;
+      }
+
+      /** The individual's date of birth. */
+      public Builder setDob(EmptyParam dob) {
         this.dob = dob;
         return this;
       }

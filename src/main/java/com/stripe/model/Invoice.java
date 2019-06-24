@@ -93,9 +93,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   Boolean autoAdvance;
 
   /**
-   * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
-   * attempt to pay this invoice using the default source attached to the customer. When sending an
-   * invoice, Stripe will email this invoice to the customer with payment instructions.
+   * This field has been renamed to `collection_method` and will be removed in a future API version.
    */
   @SerializedName("billing")
   String billing;
@@ -118,6 +116,14 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Charge> charge;
+
+  /**
+   * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
+   * attempt to pay this invoice using the default source attached to the customer. When sending an
+   * invoice, Stripe will email this invoice to the customer with payment instructions.
+   */
+  @SerializedName("collection_method")
+  String collectionMethod;
 
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
@@ -228,7 +234,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * The date on which payment for this invoice is due. This value will be `null` for invoices where
-   * `billing=charge_automatically`.
+   * `collection_method=charge_automatically`.
    */
   @SerializedName("due_date")
   Long dueDate;
@@ -288,7 +294,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
 
   /**
    * The time at which payment will next be attempted. This value will be `null` for invoices where
-   * `billing=send_invoice`.
+   * `collection_method=send_invoice`.
    */
   @SerializedName("next_payment_attempt")
   Long nextPaymentAttempt;

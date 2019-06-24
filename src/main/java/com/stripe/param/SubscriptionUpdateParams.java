@@ -24,10 +24,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   BigDecimal applicationFeePercent;
 
   /**
-   * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
-   * attempt to pay this subscription at the end of the cycle using the default source attached to
-   * the customer. When sending an invoice, Stripe will email your customer an invoice with payment
-   * instructions. Defaults to `charge_automatically`.
+   * This field has been renamed to `collection_method` and will be removed in a future API version.
    */
   @SerializedName("billing")
   Billing billing;
@@ -59,6 +56,15 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
    */
   @SerializedName("cancel_at_period_end")
   Boolean cancelAtPeriodEnd;
+
+  /**
+   * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
+   * attempt to pay this subscription at the end of the cycle using the default source attached to
+   * the customer. When sending an invoice, Stripe will email your customer an invoice with payment
+   * instructions. Defaults to `charge_automatically`.
+   */
+  @SerializedName("collection_method")
+  CollectionMethod collectionMethod;
 
   /**
    * The code of the coupon to apply to this subscription. A coupon applied to a subscription will
@@ -186,6 +192,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       Object billingThresholds,
       Object cancelAt,
       Boolean cancelAtPeriodEnd,
+      CollectionMethod collectionMethod,
       String coupon,
       Long daysUntilDue,
       String defaultPaymentMethod,
@@ -207,6 +214,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     this.billingThresholds = billingThresholds;
     this.cancelAt = cancelAt;
     this.cancelAtPeriodEnd = cancelAtPeriodEnd;
+    this.collectionMethod = collectionMethod;
     this.coupon = coupon;
     this.daysUntilDue = daysUntilDue;
     this.defaultPaymentMethod = defaultPaymentMethod;
@@ -240,6 +248,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     private Object cancelAt;
 
     private Boolean cancelAtPeriodEnd;
+
+    private CollectionMethod collectionMethod;
 
     private String coupon;
 
@@ -280,6 +290,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           this.billingThresholds,
           this.cancelAt,
           this.cancelAtPeriodEnd,
+          this.collectionMethod,
           this.coupon,
           this.daysUntilDue,
           this.defaultPaymentMethod,
@@ -310,10 +321,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
-     * attempt to pay this subscription at the end of the cycle using the default source attached to
-     * the customer. When sending an invoice, Stripe will email your customer an invoice with
-     * payment instructions. Defaults to `charge_automatically`.
+     * This field has been renamed to `collection_method` and will be removed in a future API
+     * version.
      */
     public Builder setBilling(Billing billing) {
       this.billing = billing;
@@ -371,6 +380,17 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      */
     public Builder setCancelAtPeriodEnd(Boolean cancelAtPeriodEnd) {
       this.cancelAtPeriodEnd = cancelAtPeriodEnd;
+      return this;
+    }
+
+    /**
+     * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
+     * attempt to pay this subscription at the end of the cycle using the default source attached to
+     * the customer. When sending an invoice, Stripe will email your customer an invoice with
+     * payment instructions. Defaults to `charge_automatically`.
+     */
+    public Builder setCollectionMethod(CollectionMethod collectionMethod) {
+      this.collectionMethod = collectionMethod;
       return this;
     }
 
@@ -1129,6 +1149,21 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     private final String value;
 
     BillingCycleAnchor(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum CollectionMethod implements ApiRequestParams.EnumParam {
+    @SerializedName("charge_automatically")
+    CHARGE_AUTOMATICALLY("charge_automatically"),
+
+    @SerializedName("send_invoice")
+    SEND_INVOICE("send_invoice");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    CollectionMethod(String value) {
       this.value = value;
     }
   }

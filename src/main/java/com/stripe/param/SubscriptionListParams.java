@@ -12,11 +12,17 @@ import lombok.Getter;
 
 public class SubscriptionListParams extends ApiRequestParams {
   /**
-   * The billing mode of the subscriptions to retrieve. Either `charge_automatically` or
-   * `send_invoice`.
+   * This field has been renamed to `collection_method` and will be removed in a future API version.
    */
   @SerializedName("billing")
   Billing billing;
+
+  /**
+   * The collection method of the subscriptions to retrieve. Either `charge_automatically` or
+   * `send_invoice`.
+   */
+  @SerializedName("collection_method")
+  CollectionMethod collectionMethod;
 
   @SerializedName("created")
   Object created;
@@ -84,6 +90,7 @@ public class SubscriptionListParams extends ApiRequestParams {
 
   private SubscriptionListParams(
       Billing billing,
+      CollectionMethod collectionMethod,
       Object created,
       Object currentPeriodEnd,
       Object currentPeriodStart,
@@ -96,6 +103,7 @@ public class SubscriptionListParams extends ApiRequestParams {
       String startingAfter,
       Status status) {
     this.billing = billing;
+    this.collectionMethod = collectionMethod;
     this.created = created;
     this.currentPeriodEnd = currentPeriodEnd;
     this.currentPeriodStart = currentPeriodStart;
@@ -115,6 +123,8 @@ public class SubscriptionListParams extends ApiRequestParams {
 
   public static class Builder {
     private Billing billing;
+
+    private CollectionMethod collectionMethod;
 
     private Object created;
 
@@ -142,6 +152,7 @@ public class SubscriptionListParams extends ApiRequestParams {
     public SubscriptionListParams build() {
       return new SubscriptionListParams(
           this.billing,
+          this.collectionMethod,
           this.created,
           this.currentPeriodEnd,
           this.currentPeriodStart,
@@ -156,11 +167,20 @@ public class SubscriptionListParams extends ApiRequestParams {
     }
 
     /**
-     * The billing mode of the subscriptions to retrieve. Either `charge_automatically` or
-     * `send_invoice`.
+     * This field has been renamed to `collection_method` and will be removed in a future API
+     * version.
      */
     public Builder setBilling(Billing billing) {
       this.billing = billing;
+      return this;
+    }
+
+    /**
+     * The collection method of the subscriptions to retrieve. Either `charge_automatically` or
+     * `send_invoice`.
+     */
+    public Builder setCollectionMethod(CollectionMethod collectionMethod) {
+      this.collectionMethod = collectionMethod;
       return this;
     }
 
@@ -634,6 +654,21 @@ public class SubscriptionListParams extends ApiRequestParams {
     private final String value;
 
     Billing(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum CollectionMethod implements ApiRequestParams.EnumParam {
+    @SerializedName("charge_automatically")
+    CHARGE_AUTOMATICALLY("charge_automatically"),
+
+    @SerializedName("send_invoice")
+    SEND_INVOICE("send_invoice");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    CollectionMethod(String value) {
       this.value = value;
     }
   }
