@@ -1,5 +1,8 @@
 # Changelog
 
+## 10.3.0 - 2019-06-24
+* [#792](https://github.com/stripe/stripe-java/pull/792) Enable request latency telemetry by default
+
 ## 10.2.0 - 2019-06-24
 * [#794](https://github.com/stripe/stripe-java/pull/794)
   * Add `collection_method` to `Invoice`, `Subscription` and `SubscriptionSchedule`
