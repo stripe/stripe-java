@@ -42,8 +42,12 @@ public class TelemetryTest extends BaseStripeTest {
     Stripe.enableTelemetry = true;
 
     Balance.retrieve();
-    RecordedRequest request1 = server.takeRequest();
-    assertNull(request1.getHeader("X-Stripe-Client-Telemetry"));
+    server.takeRequest();
+    // The first request may or may not include a `X-Stripe-Client-Telemetry` header depending on
+    // whether this test is the first to run or not. So we don't test the presence or absence of
+    // the header for the first request.
+    // Ideally we'd have a way of emptying the request metrics queue, but it's private and I don't
+    // want to make it public just for tests.
 
     Balance.retrieve();
     RecordedRequest request2 = server.takeRequest();

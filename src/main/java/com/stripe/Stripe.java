@@ -17,7 +17,7 @@ public abstract class Stripe {
 
   public static volatile String apiKey;
   public static volatile String clientId;
-  public static volatile boolean enableTelemetry = false;
+  public static volatile boolean enableTelemetry = true;
   public static volatile String partnerId;
 
   // Note that URLConnection reserves the value of 0 to mean "infinite
