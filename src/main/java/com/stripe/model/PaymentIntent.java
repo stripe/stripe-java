@@ -204,6 +204,18 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Review> review;
 
+  /**
+   * When provided, this property indicates how you intend to use the payment method that your
+   * customer provides after the current payment completes. If applicable, additional authentication
+   * may be performed to comply with regional legislation or network rules required to enable the
+   * usage of the same payment method for additional payments.
+   *
+   * <p>Use `on_session` if you intend to only reuse the payment method when the customer is in your
+   * checkout flow. Use `off_session` if your customer may or may not be in your checkout flow.
+   */
+  @SerializedName("setup_future_usage")
+  String setupFutureUsage;
+
   /** Shipping information for this PaymentIntent. */
   @SerializedName("shipping")
   ShippingDetails shipping;

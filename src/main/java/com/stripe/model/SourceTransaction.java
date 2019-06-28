@@ -70,6 +70,9 @@ public class SourceTransaction extends StripeObject implements HasId {
   @SerializedName("type")
   String type;
 
+  @SerializedName("uk_credit_transfer")
+  UKCreditTransferData ukCreditTransfer;
+
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
@@ -144,5 +147,26 @@ public class SourceTransaction extends StripeObject implements HasId {
     /** Sender's name. */
     @SerializedName("sender_name")
     String senderName;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class UKCreditTransferData extends StripeObject {
+    /** Bank account fingerprint associated with the transfer. */
+    @SerializedName("fingerprint")
+    String fingerprint;
+
+    /** Last 4 digits of account number associated with the transfer. */
+    @SerializedName("last4")
+    String last4;
+
+    /** Sender name associated with the transfer. */
+    @SerializedName("sender_name")
+    String senderName;
+
+    /** Sort code associated with the transfer. */
+    @SerializedName("sort_code")
+    String sortCode;
   }
 }

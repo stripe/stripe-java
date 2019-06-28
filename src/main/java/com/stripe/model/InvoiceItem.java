@@ -126,6 +126,13 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   @SerializedName("tax_rates")
   List<TaxRate> taxRates;
 
+  /**
+   * For prorations this indicates whether Stripe automatically grouped multiple related debit and
+   * credit line items into a single combined line item.
+   */
+  @SerializedName("unified_proration")
+  Boolean unifiedProration;
+
   /** Unit Amount (in the `currency` specified) of the invoice item. */
   @SerializedName("unit_amount")
   Long unitAmount;

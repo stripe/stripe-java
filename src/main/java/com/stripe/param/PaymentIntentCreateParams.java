@@ -160,6 +160,18 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   @SerializedName("save_payment_method")
   Boolean savePaymentMethod;
 
+  /**
+   * When provided, this property indicates how you intend to use the payment method that your
+   * customer provides after the current payment completes. If applicable, additional authentication
+   * may be performed to comply with regional legislation or network rules required to enable the
+   * usage of the same payment method for additional payments.
+   *
+   * <p>Use `on_session` if you intend to only reuse the payment method when the customer is in your
+   * checkout flow. Use `off_session` if your customer may or may not be in your checkout flow.
+   */
+  @SerializedName("setup_future_usage")
+  SetupFutureUsage setupFutureUsage;
+
   /** Shipping information for this PaymentIntent. */
   @SerializedName("shipping")
   Shipping shipping;
@@ -215,6 +227,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       String receiptEmail,
       String returnUrl,
       Boolean savePaymentMethod,
+      SetupFutureUsage setupFutureUsage,
       Shipping shipping,
       String source,
       String statementDescriptor,
@@ -238,6 +251,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     this.receiptEmail = receiptEmail;
     this.returnUrl = returnUrl;
     this.savePaymentMethod = savePaymentMethod;
+    this.setupFutureUsage = setupFutureUsage;
     this.shipping = shipping;
     this.source = source;
     this.statementDescriptor = statementDescriptor;
@@ -286,6 +300,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     private Boolean savePaymentMethod;
 
+    private SetupFutureUsage setupFutureUsage;
+
     private Shipping shipping;
 
     private String source;
@@ -317,6 +333,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           this.receiptEmail,
           this.returnUrl,
           this.savePaymentMethod,
+          this.setupFutureUsage,
           this.shipping,
           this.source,
           this.statementDescriptor,
@@ -588,6 +605,21 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      */
     public Builder setSavePaymentMethod(Boolean savePaymentMethod) {
       this.savePaymentMethod = savePaymentMethod;
+      return this;
+    }
+
+    /**
+     * When provided, this property indicates how you intend to use the payment method that your
+     * customer provides after the current payment completes. If applicable, additional
+     * authentication may be performed to comply with regional legislation or network rules required
+     * to enable the usage of the same payment method for additional payments.
+     *
+     * <p>Use `on_session` if you intend to only reuse the payment method when the customer is in
+     * your checkout flow. Use `off_session` if your customer may or may not be in your checkout
+     * flow.
+     */
+    public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+      this.setupFutureUsage = setupFutureUsage;
       return this;
     }
 
@@ -1027,6 +1059,21 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     private final String value;
 
     OffSession(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+    @SerializedName("off_session")
+    OFF_SESSION("off_session"),
+
+    @SerializedName("on_session")
+    ON_SESSION("on_session");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    SetupFutureUsage(String value) {
       this.value = value;
     }
   }

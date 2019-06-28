@@ -18,7 +18,8 @@ public class InvoiceListParams extends ApiRequestParams {
   Billing billing;
 
   /**
-   * The billing mode of the invoice to retrieve. Either `charge_automatically` or `send_invoice`.
+   * The collection method of the invoice to retrieve. Either `charge_automatically` or
+   * `send_invoice`.
    */
   @SerializedName("collection_method")
   CollectionMethod collectionMethod;
@@ -165,7 +166,8 @@ public class InvoiceListParams extends ApiRequestParams {
     }
 
     /**
-     * The billing mode of the invoice to retrieve. Either `charge_automatically` or `send_invoice`.
+     * The collection method of the invoice to retrieve. Either `charge_automatically` or
+     * `send_invoice`.
      */
     public Builder setCollectionMethod(CollectionMethod collectionMethod) {
       this.collectionMethod = collectionMethod;

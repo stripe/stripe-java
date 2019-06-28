@@ -10,6 +10,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
 public class InvoiceUpdateParams extends ApiRequestParams {
   /**
@@ -29,6 +30,13 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   Boolean autoAdvance;
 
   /**
+   * Either `charge_automatically` or `send_invoice`. This field can be updated only on `draft`
+   * invoices.
+   */
+  @SerializedName("collection_method")
+  CollectionMethod collectionMethod;
+
+  /**
    * A list of up to 4 custom fields to be displayed on the invoice. If a value for `custom_fields`
    * is specified, the list specified will replace the existing custom field list on this invoice.
    */
@@ -37,7 +45,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
   /**
    * The number of days from which the invoice is created until it is due. Only valid for invoices
-   * where `billing=send_invoice`. This field can only be updated on `draft` invoices.
+   * where `collection_method=send_invoice`. This field can only be updated on `draft` invoices.
    */
   @SerializedName("days_until_due")
   Long daysUntilDue;
@@ -70,7 +78,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
   /**
    * The date on which payment for this invoice is due. Only valid for invoices where
-   * `billing=send_invoice`. This field can only be updated on `draft` invoices.
+   * `collection_method=send_invoice`. This field can only be updated on `draft` invoices.
    */
   @SerializedName("due_date")
   Long dueDate;
@@ -125,6 +133,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   private InvoiceUpdateParams(
       Long applicationFeeAmount,
       Boolean autoAdvance,
+      CollectionMethod collectionMethod,
       Object customFields,
       Long daysUntilDue,
       String defaultPaymentMethod,
@@ -141,6 +150,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       Object transferData) {
     this.applicationFeeAmount = applicationFeeAmount;
     this.autoAdvance = autoAdvance;
+    this.collectionMethod = collectionMethod;
     this.customFields = customFields;
     this.daysUntilDue = daysUntilDue;
     this.defaultPaymentMethod = defaultPaymentMethod;
@@ -165,6 +175,8 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     private Long applicationFeeAmount;
 
     private Boolean autoAdvance;
+
+    private CollectionMethod collectionMethod;
 
     private Object customFields;
 
@@ -199,6 +211,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       return new InvoiceUpdateParams(
           this.applicationFeeAmount,
           this.autoAdvance,
+          this.collectionMethod,
           this.customFields,
           this.daysUntilDue,
           this.defaultPaymentMethod,
@@ -236,6 +249,15 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     }
 
     /**
+     * Either `charge_automatically` or `send_invoice`. This field can be updated only on `draft`
+     * invoices.
+     */
+    public Builder setCollectionMethod(CollectionMethod collectionMethod) {
+      this.collectionMethod = collectionMethod;
+      return this;
+    }
+
+    /**
      * A list of up to 4 custom fields to be displayed on the invoice. If a value for
      * `custom_fields` is specified, the list specified will replace the existing custom field list
      * on this invoice.
@@ -257,7 +279,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
     /**
      * The number of days from which the invoice is created until it is due. Only valid for invoices
-     * where `billing=send_invoice`. This field can only be updated on `draft` invoices.
+     * where `collection_method=send_invoice`. This field can only be updated on `draft` invoices.
      */
     public Builder setDaysUntilDue(Long daysUntilDue) {
       this.daysUntilDue = daysUntilDue;
@@ -309,7 +331,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
     /**
      * The date on which payment for this invoice is due. Only valid for invoices where
-     * `billing=send_invoice`. This field can only be updated on `draft` invoices.
+     * `collection_method=send_invoice`. This field can only be updated on `draft` invoices.
      */
     public Builder setDueDate(Long dueDate) {
       this.dueDate = dueDate;
@@ -600,6 +622,21 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         this.extraParams.putAll(map);
         return this;
       }
+    }
+  }
+
+  public enum CollectionMethod implements ApiRequestParams.EnumParam {
+    @SerializedName("charge_automatically")
+    CHARGE_AUTOMATICALLY("charge_automatically"),
+
+    @SerializedName("send_invoice")
+    SEND_INVOICE("send_invoice");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    CollectionMethod(String value) {
+      this.value = value;
     }
   }
 }

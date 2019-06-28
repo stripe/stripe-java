@@ -506,6 +506,15 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("review.opened")
     REVIEW__OPENED("review.opened"),
 
+    @SerializedName("setup_intent.created")
+    SETUP_INTENT__CREATED("setup_intent.created"),
+
+    @SerializedName("setup_intent.setup_failed")
+    SETUP_INTENT__SETUP_FAILED("setup_intent.setup_failed"),
+
+    @SerializedName("setup_intent.succeeded")
+    SETUP_INTENT__SUCCEEDED("setup_intent.succeeded"),
+
     @SerializedName("sigma.scheduled_query_run.created")
     SIGMA__SCHEDULED_QUERY_RUN__CREATED("sigma.scheduled_query_run.created"),
 

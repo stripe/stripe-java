@@ -56,6 +56,9 @@ public class StripeError extends StripeObject {
   @SerializedName("payment_method")
   PaymentMethod paymentMethod;
 
+  @SerializedName("setup_intent")
+  SetupIntent setupIntent;
+
   @SerializedName("source")
   PaymentSource source;
 
