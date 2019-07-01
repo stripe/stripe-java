@@ -35,6 +35,22 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
   @SerializedName("collection_method")
   CollectionMethod collectionMethod;
 
+  /**
+   * ID of the default payment method for the subscription schedule. It must belong to the customer
+   * associated with the subscription schedule. If not set, invoices will use the default payment
+   * method in the customer's invoice settings.
+   */
+  @SerializedName("default_payment_method")
+  String defaultPaymentMethod;
+
+  /**
+   * ID of the default payment source for the subscription schedule. It must belong to the customer
+   * associated with the subscription schedule and be in a chargeable state. If not set, defaults to
+   * the customer's default source.
+   */
+  @SerializedName("default_source")
+  String defaultSource;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -96,6 +112,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       Billing billing,
       Object billingThresholds,
       CollectionMethod collectionMethod,
+      String defaultPaymentMethod,
+      String defaultSource,
       List<String> expand,
       Map<String, Object> extraParams,
       InvoiceSettings invoiceSettings,
@@ -107,6 +125,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     this.billing = billing;
     this.billingThresholds = billingThresholds;
     this.collectionMethod = collectionMethod;
+    this.defaultPaymentMethod = defaultPaymentMethod;
+    this.defaultSource = defaultSource;
     this.expand = expand;
     this.extraParams = extraParams;
     this.invoiceSettings = invoiceSettings;
@@ -127,6 +147,10 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     private Object billingThresholds;
 
     private CollectionMethod collectionMethod;
+
+    private String defaultPaymentMethod;
+
+    private String defaultSource;
 
     private List<String> expand;
 
@@ -150,6 +174,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
           this.billing,
           this.billingThresholds,
           this.collectionMethod,
+          this.defaultPaymentMethod,
+          this.defaultSource,
           this.expand,
           this.extraParams,
           this.invoiceSettings,
@@ -195,6 +221,26 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
      */
     public Builder setCollectionMethod(CollectionMethod collectionMethod) {
       this.collectionMethod = collectionMethod;
+      return this;
+    }
+
+    /**
+     * ID of the default payment method for the subscription schedule. It must belong to the
+     * customer associated with the subscription schedule. If not set, invoices will use the default
+     * payment method in the customer's invoice settings.
+     */
+    public Builder setDefaultPaymentMethod(String defaultPaymentMethod) {
+      this.defaultPaymentMethod = defaultPaymentMethod;
+      return this;
+    }
+
+    /**
+     * ID of the default payment source for the subscription schedule. It must belong to the
+     * customer associated with the subscription schedule and be in a chargeable state. If not set,
+     * defaults to the customer's default source.
+     */
+    public Builder setDefaultSource(String defaultSource) {
+      this.defaultSource = defaultSource;
       return this;
     }
 

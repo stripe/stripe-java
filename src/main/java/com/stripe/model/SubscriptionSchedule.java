@@ -78,6 +78,26 @@ public class SubscriptionSchedule extends ApiResource
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
+  /**
+   * ID of the default payment method for the subscription schedule. It must belong to the customer
+   * associated with the subscription schedule. If not set, invoices will use the default payment
+   * method in the customer's invoice settings.
+   */
+  @SerializedName("default_payment_method")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<PaymentMethod> defaultPaymentMethod;
+
+  /**
+   * ID of the default payment source for the subscription schedule. It must belong to the customer
+   * associated with the subscription schedule and be in a chargeable state. If not set, defaults to
+   * the customer's default source.
+   */
+  @SerializedName("default_source")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<PaymentSource> defaultSource;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -161,6 +181,44 @@ public class SubscriptionSchedule extends ApiResource
 
   public void setCustomerObject(Customer expandableObject) {
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get id of expandable `defaultPaymentMethod` object. */
+  public String getDefaultPaymentMethod() {
+    return (this.defaultPaymentMethod != null) ? this.defaultPaymentMethod.getId() : null;
+  }
+
+  public void setDefaultPaymentMethod(String id) {
+    this.defaultPaymentMethod = ApiResource.setExpandableFieldId(id, this.defaultPaymentMethod);
+  }
+
+  /** Get expanded `defaultPaymentMethod`. */
+  public PaymentMethod getDefaultPaymentMethodObject() {
+    return (this.defaultPaymentMethod != null) ? this.defaultPaymentMethod.getExpanded() : null;
+  }
+
+  public void setDefaultPaymentMethodObject(PaymentMethod expandableObject) {
+    this.defaultPaymentMethod =
+        new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get id of expandable `defaultSource` object. */
+  public String getDefaultSource() {
+    return (this.defaultSource != null) ? this.defaultSource.getId() : null;
+  }
+
+  public void setDefaultSource(String id) {
+    this.defaultSource = ApiResource.setExpandableFieldId(id, this.defaultSource);
+  }
+
+  /** Get expanded `defaultSource`. */
+  public PaymentSource getDefaultSourceObject() {
+    return (this.defaultSource != null) ? this.defaultSource.getExpanded() : null;
+  }
+
+  public void setDefaultSourceObject(PaymentSource expandableObject) {
+    this.defaultSource =
+        new ExpandableField<PaymentSource>(expandableObject.getId(), expandableObject);
   }
 
   /** Get id of expandable `subscription` object. */

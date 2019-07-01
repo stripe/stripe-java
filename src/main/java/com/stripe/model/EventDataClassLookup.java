@@ -76,6 +76,7 @@ final class EventDataClassLookup {
     classLookup.put("payout", Payout.class);
     classLookup.put("person", Person.class);
     classLookup.put("plan", Plan.class);
+    classLookup.put("platform_tax_fee", PlatformTaxFee.class);
     classLookup.put("product", Product.class);
     classLookup.put("radar.early_fraud_warning", EarlyFraudWarning.class);
     classLookup.put("radar.value_list", ValueList.class);
@@ -87,6 +88,7 @@ final class EventDataClassLookup {
     classLookup.put("reserve_transaction", ReserveTransaction.class);
     classLookup.put("review", Review.class);
     classLookup.put("scheduled_query_run", ScheduledQueryRun.class);
+    classLookup.put("setup_intent", SetupIntent.class);
     classLookup.put("sku", Sku.class);
     classLookup.put("source", Source.class);
     classLookup.put("source_mandate_notification", SourceMandateNotification.class);

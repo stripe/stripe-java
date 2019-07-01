@@ -39,6 +39,22 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
   @SerializedName("customer")
   String customer;
 
+  /**
+   * ID of the default payment method for the subscription schedule. It must belong to the customer
+   * associated with the subscription schedule. If not set, invoices will use the default payment
+   * method in the customer's invoice settings.
+   */
+  @SerializedName("default_payment_method")
+  String defaultPaymentMethod;
+
+  /**
+   * ID of the default payment source for the subscription schedule. It must belong to the customer
+   * associated with the subscription schedule and be in a chargeable state. If not set, defaults to
+   * the customer's default source.
+   */
+  @SerializedName("default_source")
+  String defaultSource;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -106,6 +122,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       Object billingThresholds,
       CollectionMethod collectionMethod,
       String customer,
+      String defaultPaymentMethod,
+      String defaultSource,
       List<String> expand,
       Map<String, Object> extraParams,
       String fromSubscription,
@@ -119,6 +137,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     this.billingThresholds = billingThresholds;
     this.collectionMethod = collectionMethod;
     this.customer = customer;
+    this.defaultPaymentMethod = defaultPaymentMethod;
+    this.defaultSource = defaultSource;
     this.expand = expand;
     this.extraParams = extraParams;
     this.fromSubscription = fromSubscription;
@@ -142,6 +162,10 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     private CollectionMethod collectionMethod;
 
     private String customer;
+
+    private String defaultPaymentMethod;
+
+    private String defaultSource;
 
     private List<String> expand;
 
@@ -168,6 +192,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
           this.billingThresholds,
           this.collectionMethod,
           this.customer,
+          this.defaultPaymentMethod,
+          this.defaultSource,
           this.expand,
           this.extraParams,
           this.fromSubscription,
@@ -220,6 +246,26 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     /** The identifier of the customer to create the subscription schedule for. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
+      return this;
+    }
+
+    /**
+     * ID of the default payment method for the subscription schedule. It must belong to the
+     * customer associated with the subscription schedule. If not set, invoices will use the default
+     * payment method in the customer's invoice settings.
+     */
+    public Builder setDefaultPaymentMethod(String defaultPaymentMethod) {
+      this.defaultPaymentMethod = defaultPaymentMethod;
+      return this;
+    }
+
+    /**
+     * ID of the default payment source for the subscription schedule. It must belong to the
+     * customer associated with the subscription schedule and be in a chargeable state. If not set,
+     * defaults to the customer's default source.
+     */
+    public Builder setDefaultSource(String defaultSource) {
+      this.defaultSource = defaultSource;
       return this;
     }
 

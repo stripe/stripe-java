@@ -46,6 +46,8 @@ public class BalanceTransactionSourceTypeAdapterFactory implements TypeAdapterFa
         gson.getDelegateAdapter(this, TypeToken.get(Transaction.class));
     final TypeAdapter<Payout> payoutAdapter =
         gson.getDelegateAdapter(this, TypeToken.get(Payout.class));
+    final TypeAdapter<PlatformTaxFee> platformTaxFeeAdapter =
+        gson.getDelegateAdapter(this, TypeToken.get(PlatformTaxFee.class));
     final TypeAdapter<Refund> refundAdapter =
         gson.getDelegateAdapter(this, TypeToken.get(Refund.class));
     final TypeAdapter<ReserveTransaction> reserveTransactionAdapter =
@@ -85,6 +87,8 @@ public class BalanceTransactionSourceTypeAdapterFactory implements TypeAdapterFa
               objectResult = transactionAdapter.fromJsonTree(object);
             } else if ("payout".equals(objectType)) {
               objectResult = payoutAdapter.fromJsonTree(object);
+            } else if ("platform_tax_fee".equals(objectType)) {
+              objectResult = platformTaxFeeAdapter.fromJsonTree(object);
             } else if ("refund".equals(objectType)) {
               objectResult = refundAdapter.fromJsonTree(object);
             } else if ("reserve_transaction".equals(objectType)) {
