@@ -1,5 +1,12 @@
 # Changelog
 
+## 10.4.0 - 2019-07-01
+* [#796](https://github.com/stripe/stripe-java/pull/796)
+  * Add support for the `SetupIntent` resource and APIs
+  * Add support for `PlatformTaxFee` resource
+  * Add `unified_proration` on `InvoiceItem` and `InvoiceLineItem`
+  * Add `default_payment_method` and `default_source` to `SubscriptionSchedule`
+
 ## 10.3.0 - 2019-06-24
 * [#792](https://github.com/stripe/stripe-java/pull/792) Enable request latency telemetry by default
 
