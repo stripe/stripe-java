@@ -34,7 +34,7 @@ public class Settlement extends ApiResource implements HasId, MetadataStore<Sett
   String currency;
 
   /** Unique identifier for the object. */
-  @Getter(onMethod = @__({@Override}))
+  @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
@@ -53,7 +53,7 @@ public class Settlement extends ApiResource implements HasId, MetadataStore<Sett
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format.
    */
-  @Getter(onMethod = @__({@Override}))
+  @Getter(onMethod_ = {@Override})
   @SerializedName("metadata")
   Map<String, String> metadata;
 
@@ -136,6 +136,7 @@ public class Settlement extends ApiResource implements HasId, MetadataStore<Sett
    * Updates the specified Issuing <code>Settlement</code> object by setting the values of the
    * parameters passed. Any parameters not provided will be left unchanged.
    */
+  @Override
   public Settlement update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
@@ -144,6 +145,7 @@ public class Settlement extends ApiResource implements HasId, MetadataStore<Sett
    * Updates the specified Issuing <code>Settlement</code> object by setting the values of the
    * parameters passed. Any parameters not provided will be left unchanged.
    */
+  @Override
   public Settlement update(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url =
