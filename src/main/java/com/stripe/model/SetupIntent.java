@@ -38,6 +38,10 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
 
   /**
    * The client secret of this SetupIntent. Used for client-side retrieval using a publishable key.
+   *
+   * <p>The client secret can be used to complete payment setup from your frontend. It should not be
+   * stored, logged, embedded in URLs, or exposed to anyone other than the customer. Make sure that
+   * you have TLS enabled on any page that includes the client secret.
    */
   @SerializedName("client_secret")
   String clientSecret;
@@ -46,7 +50,12 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   @SerializedName("created")
   Long created;
 
-  /** ID of the Customer this SetupIntent belongs to, if one exists. */
+  /**
+   * ID of the Customer this SetupIntent belongs to, if one exists.
+   *
+   * <p>If present, payment methods used with this SetupIntent can only be attached to this
+   * Customer, and payment methods attached to other Customers cannot be used with this SetupIntent.
+   */
   @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
@@ -82,7 +91,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
 
   /**
    * If present, this property tells you what actions you need to take in order for your customer to
-   * set up this payment method.
+   * continue payment setup.
    */
   @SerializedName("next_action")
   NextAction nextAction;
@@ -108,8 +117,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   List<String> paymentMethodTypes;
 
   /**
-   * Status of this SetupIntent, one of `requires_payment_method`, `requires_confirmation`,
-   * `requires_action`, `processing`, `canceled`, or `succeeded`.
+   * [Status](https://stripe.com/docs/payments/intents#intent-statuses) of this SetupIntent, one of
+   * `requires_payment_method`, `requires_confirmation`, `requires_action`, `processing`,
+   * `canceled`, or `succeeded`.
    */
   @SerializedName("status")
   String status;
@@ -118,7 +128,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    * Indicates how the payment method is intended to be used in the future.
    *
    * <p>Use `on_session` if you intend to only reuse the payment method when the customer is in your
-   * checkout flow. Use `off_session` if your customer may or may not be in your checkout flow.
+   * checkout flow. Use `off_session` if your customer may or may not be in your checkout flow. If
+   * not provided, this value defaults to `off_session`.
    */
   @SerializedName("usage")
   String usage;

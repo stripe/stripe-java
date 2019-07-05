@@ -414,9 +414,9 @@ public class Authorization extends ApiResource
     String heldCurrency;
 
     /**
-     * One of `authorization_controls`, `card_active`, `card_inactive`, `insufficient_funds`,
-     * `account_compliance_disabled`, `account_inactive`, `suspected_fraud`, `webhook_approved`,
-     * `webhook_declined`, or `webhook_timeout`.
+     * One of `authentication_failed`, `authorization_controls`, `card_active`, `card_inactive`,
+     * `insufficient_funds`, `account_compliance_disabled`, `account_inactive`, `suspected_fraud`,
+     * `webhook_approved`, `webhook_declined`, or `webhook_timeout`.
      */
     @SerializedName("reason")
     String reason;

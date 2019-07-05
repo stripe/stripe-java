@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
 public class PaymentIntentUpdateParams extends ApiRequestParams {
   /** Amount intended to be collected by this PaymentIntent. */
@@ -31,7 +32,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
   @SerializedName("currency")
   String currency;
 
-  /** ID of the customer this PaymentIntent is for if one exists. */
+  /**
+   * ID of the Customer this PaymentIntent belongs to, if one exists.
+   *
+   * <p>If present, payment methods used with this PaymentIntent can only be attached to this
+   * Customer, and payment methods attached to other Customers cannot be used with this
+   * PaymentIntent.
+   */
   @SerializedName("customer")
   String customer;
 
@@ -85,6 +92,30 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
   @SerializedName("save_payment_method")
   Boolean savePaymentMethod;
 
+  /**
+   * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+   *
+   * <p>If present, the payment method used with this PaymentIntent can be
+   * [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer, even after the
+   * transaction completes.
+   *
+   * <p>Use `on_session` if you intend to only reuse the payment method when your customer is
+   * present in your checkout flow. Use `off_session` if your customer may or may not be in your
+   * checkout flow.
+   *
+   * <p>Stripe uses `setup_future_usage` to dynamically optimize your payment flow and comply with
+   * regional legislation and network rules. For example, if your customer is impacted by
+   * [SCA](https://stripe.com/docs/strong-customer-authentication), using `off_session` will ensure
+   * that they are authenticated while processing this PaymentIntent. You will then be able to make
+   * later [off-session](https://stripe.com/docs/payments/payment-intents/off-session) payments for
+   * this customer.
+   *
+   * <p>If `setup_future_usage` is already set and you are performing a request using a publishable
+   * key, you may only update the value from `on_session` to `off_session`.
+   */
+  @SerializedName("setup_future_usage")
+  SetupFutureUsage setupFutureUsage;
+
   /** Shipping information for this PaymentIntent. */
   @SerializedName("shipping")
   Object shipping;
@@ -103,6 +134,14 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
+
+  /**
+   * The parameters used to automatically create a Transfer when the payment succeeds. For more
+   * information, see the PaymentIntents [use case for connected
+   * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
+   */
+  @SerializedName("transfer_data")
+  TransferData transferData;
 
   /**
    * A string that identifies the resulting payment as part of a group. `transfer_group` may only be
@@ -126,9 +165,11 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       List<String> paymentMethodTypes,
       String receiptEmail,
       Boolean savePaymentMethod,
+      SetupFutureUsage setupFutureUsage,
       Object shipping,
       String source,
       String statementDescriptor,
+      TransferData transferData,
       String transferGroup) {
     this.amount = amount;
     this.applicationFeeAmount = applicationFeeAmount;
@@ -142,9 +183,11 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     this.paymentMethodTypes = paymentMethodTypes;
     this.receiptEmail = receiptEmail;
     this.savePaymentMethod = savePaymentMethod;
+    this.setupFutureUsage = setupFutureUsage;
     this.shipping = shipping;
     this.source = source;
     this.statementDescriptor = statementDescriptor;
+    this.transferData = transferData;
     this.transferGroup = transferGroup;
   }
 
@@ -177,11 +220,15 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     private Boolean savePaymentMethod;
 
+    private SetupFutureUsage setupFutureUsage;
+
     private Object shipping;
 
     private String source;
 
     private String statementDescriptor;
+
+    private TransferData transferData;
 
     private String transferGroup;
 
@@ -200,9 +247,11 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           this.paymentMethodTypes,
           this.receiptEmail,
           this.savePaymentMethod,
+          this.setupFutureUsage,
           this.shipping,
           this.source,
           this.statementDescriptor,
+          this.transferData,
           this.transferGroup);
     }
 
@@ -243,7 +292,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** ID of the customer this PaymentIntent is for if one exists. */
+    /**
+     * ID of the Customer this PaymentIntent belongs to, if one exists.
+     *
+     * <p>If present, payment methods used with this PaymentIntent can only be attached to this
+     * Customer, and payment methods attached to other Customers cannot be used with this
+     * PaymentIntent.
+     */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;
@@ -387,6 +442,32 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+     *
+     * <p>If present, the payment method used with this PaymentIntent can be
+     * [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer, even after the
+     * transaction completes.
+     *
+     * <p>Use `on_session` if you intend to only reuse the payment method when your customer is
+     * present in your checkout flow. Use `off_session` if your customer may or may not be in your
+     * checkout flow.
+     *
+     * <p>Stripe uses `setup_future_usage` to dynamically optimize your payment flow and comply with
+     * regional legislation and network rules. For example, if your customer is impacted by
+     * [SCA](https://stripe.com/docs/strong-customer-authentication), using `off_session` will
+     * ensure that they are authenticated while processing this PaymentIntent. You will then be able
+     * to make later [off-session](https://stripe.com/docs/payments/payment-intents/off-session)
+     * payments for this customer.
+     *
+     * <p>If `setup_future_usage` is already set and you are performing a request using a
+     * publishable key, you may only update the value from `on_session` to `off_session`.
+     */
+    public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+      this.setupFutureUsage = setupFutureUsage;
+      return this;
+    }
+
     /** Shipping information for this PaymentIntent. */
     public Builder setShipping(Shipping shipping) {
       this.shipping = shipping;
@@ -415,6 +496,16 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
      */
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
+      return this;
+    }
+
+    /**
+     * The parameters used to automatically create a Transfer when the payment succeeds. For more
+     * information, see the PaymentIntents [use case for connected
+     * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
+     */
+    public Builder setTransferData(TransferData transferData) {
+      this.transferData = transferData;
       return this;
     }
 
@@ -700,6 +791,88 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           return this;
         }
       }
+    }
+  }
+
+  public static class TransferData {
+    /** The amount that will be transferred automatically when a charge succeeds. */
+    @SerializedName("amount")
+    Long amount;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private TransferData(Long amount, Map<String, Object> extraParams) {
+      this.amount = amount;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new com.stripe.param.PaymentIntentUpdateParams.TransferData.Builder();
+    }
+
+    public static class Builder {
+      private Long amount;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public TransferData build() {
+        return new TransferData(this.amount, this.extraParams);
+      }
+
+      /** The amount that will be transferred automatically when a charge succeeds. */
+      public Builder setAmount(Long amount) {
+        this.amount = amount;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentIntentUpdateParams.TransferData#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentIntentUpdateParams.TransferData#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+  }
+
+  public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+    @SerializedName("off_session")
+    OFF_SESSION("off_session"),
+
+    @SerializedName("on_session")
+    ON_SESSION("on_session");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    SetupFutureUsage(String value) {
+      this.value = value;
     }
   }
 }

@@ -11,7 +11,20 @@ import java.util.Map;
 import lombok.Getter;
 
 public class SetupIntentCreateParams extends ApiRequestParams {
-  /** ID of the customer this SetupIntent is for if one exists. */
+  /**
+   * Set to `true` to attempt to confirm this SetupIntent immediately. This parameter defaults to
+   * `false`. If the payment method attached is a card, a return_url may be provided in case
+   * additional authentication is required.
+   */
+  @SerializedName("confirm")
+  Boolean confirm;
+
+  /**
+   * ID of the Customer this SetupIntent belongs to, if one exists.
+   *
+   * <p>If present, payment methods used with this SetupIntent can only be attached to this
+   * Customer, and payment methods attached to other Customers cannot be used with this SetupIntent.
+   */
   @SerializedName("customer")
   String customer;
 
@@ -58,15 +71,26 @@ public class SetupIntentCreateParams extends ApiRequestParams {
   List<String> paymentMethodTypes;
 
   /**
+   * The URL to redirect your customer back to after they authenticate on the payment method's app
+   * or site. If you'd prefer to redirect to a mobile application, you can alternatively supply an
+   * application URI scheme. This parameter is only used for cards and other redirect-based payment
+   * methods.
+   */
+  @SerializedName("return_url")
+  String returnUrl;
+
+  /**
    * Indicates how the payment method is intended to be used in the future.
    *
    * <p>Use `on_session` if you intend to only reuse the payment method when the customer is in your
-   * checkout flow. Use `off_session` if your customer may or may not be in your checkout flow.
+   * checkout flow. Use `off_session` if your customer may or may not be in your checkout flow. If
+   * not provided, this value defaults to `off_session`.
    */
   @SerializedName("usage")
   Object usage;
 
   private SetupIntentCreateParams(
+      Boolean confirm,
       String customer,
       String description,
       List<String> expand,
@@ -75,7 +99,9 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       String onBehalfOf,
       String paymentMethod,
       List<String> paymentMethodTypes,
+      String returnUrl,
       Object usage) {
+    this.confirm = confirm;
     this.customer = customer;
     this.description = description;
     this.expand = expand;
@@ -84,6 +110,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     this.onBehalfOf = onBehalfOf;
     this.paymentMethod = paymentMethod;
     this.paymentMethodTypes = paymentMethodTypes;
+    this.returnUrl = returnUrl;
     this.usage = usage;
   }
 
@@ -92,6 +119,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private Boolean confirm;
+
     private String customer;
 
     private String description;
@@ -108,11 +137,14 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
     private List<String> paymentMethodTypes;
 
+    private String returnUrl;
+
     private Object usage;
 
     /** Finalize and obtain parameter instance from this builder. */
     public SetupIntentCreateParams build() {
       return new SetupIntentCreateParams(
+          this.confirm,
           this.customer,
           this.description,
           this.expand,
@@ -121,10 +153,27 @@ public class SetupIntentCreateParams extends ApiRequestParams {
           this.onBehalfOf,
           this.paymentMethod,
           this.paymentMethodTypes,
+          this.returnUrl,
           this.usage);
     }
 
-    /** ID of the customer this SetupIntent is for if one exists. */
+    /**
+     * Set to `true` to attempt to confirm this SetupIntent immediately. This parameter defaults to
+     * `false`. If the payment method attached is a card, a return_url may be provided in case
+     * additional authentication is required.
+     */
+    public Builder setConfirm(Boolean confirm) {
+      this.confirm = confirm;
+      return this;
+    }
+
+    /**
+     * ID of the Customer this SetupIntent belongs to, if one exists.
+     *
+     * <p>If present, payment methods used with this SetupIntent can only be attached to this
+     * Customer, and payment methods attached to other Customers cannot be used with this
+     * SetupIntent.
+     */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;
@@ -256,11 +305,22 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     }
 
     /**
+     * The URL to redirect your customer back to after they authenticate on the payment method's app
+     * or site. If you'd prefer to redirect to a mobile application, you can alternatively supply an
+     * application URI scheme. This parameter is only used for cards and other redirect-based
+     * payment methods.
+     */
+    public Builder setReturnUrl(String returnUrl) {
+      this.returnUrl = returnUrl;
+      return this;
+    }
+
+    /**
      * Indicates how the payment method is intended to be used in the future.
      *
      * <p>Use `on_session` if you intend to only reuse the payment method when the customer is in
      * your checkout flow. Use `off_session` if your customer may or may not be in your checkout
-     * flow.
+     * flow. If not provided, this value defaults to `off_session`.
      */
     public Builder setUsage(Usage usage) {
       this.usage = usage;
@@ -272,7 +332,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
      *
      * <p>Use `on_session` if you intend to only reuse the payment method when the customer is in
      * your checkout flow. Use `off_session` if your customer may or may not be in your checkout
-     * flow.
+     * flow. If not provided, this value defaults to `off_session`.
      */
     public Builder setUsage(String usage) {
       this.usage = usage;

@@ -85,7 +85,13 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
   /**
    * The client secret of this PaymentIntent. Used for client-side retrieval using a publishable
-   * key. Please refer to our [automatic confirmation quickstart
+   * key.
+   *
+   * <p>The client secret can be used to complete a payment from your frontend. It should not be
+   * stored, logged, embedded in URLs, or exposed to anyone other than the customer. Make sure that
+   * you have TLS enabled on any page that includes the client secret.
+   *
+   * <p>Please refer to our [automatic confirmation quickstart
    * guide](https://stripe.com/docs/payments/payment-intents/quickstart#automatic-confirmation-flow)
    * to learn about how `client_secret` should be handled.
    */
@@ -121,7 +127,13 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("currency")
   String currency;
 
-  /** ID of the Customer this PaymentIntent is for if one exists. */
+  /**
+   * ID of the Customer this PaymentIntent belongs to, if one exists.
+   *
+   * <p>If present, payment methods used with this PaymentIntent can only be attached to this
+   * Customer, and payment methods attached to other Customers cannot be used with this
+   * PaymentIntent.
+   */
   @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
@@ -205,13 +217,22 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   ExpandableField<Review> review;
 
   /**
-   * When provided, this property indicates how you intend to use the payment method that your
-   * customer provides after the current payment completes. If applicable, additional authentication
-   * may be performed to comply with regional legislation or network rules required to enable the
-   * usage of the same payment method for additional payments.
+   * Indicates that you intend to make future payments with this PaymentIntent's payment method.
    *
-   * <p>Use `on_session` if you intend to only reuse the payment method when the customer is in your
-   * checkout flow. Use `off_session` if your customer may or may not be in your checkout flow.
+   * <p>If present, the payment method used with this PaymentIntent can be
+   * [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer, even after the
+   * transaction completes.
+   *
+   * <p>Use `on_session` if you intend to only reuse the payment method when your customer is
+   * present in your checkout flow. Use `off_session` if your customer may or may not be in your
+   * checkout flow.
+   *
+   * <p>Stripe uses `setup_future_usage` to dynamically optimize your payment flow and comply with
+   * regional legislation and network rules. For example, if your customer is impacted by
+   * [SCA](https://stripe.com/docs/strong-customer-authentication), using `off_session` will ensure
+   * that they are authenticated while processing this PaymentIntent. You will then be able to make
+   * later [off-session](https://stripe.com/docs/payments/payment-intents/off-session) payments for
+   * this customer.
    */
   @SerializedName("setup_future_usage")
   String setupFutureUsage;
@@ -239,7 +260,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   /**
    * Status of this PaymentIntent, one of `requires_payment_method`, `requires_confirmation`,
    * `requires_action`, `processing`, `requires_capture`, `canceled`, or `succeeded`. Read more
-   * about each PaymentIntent [status](https://stripe.com/docs/payments/payment-intents/status).
+   * about each PaymentIntent [status](https://stripe.com/docs/payments/intents#intent-statuses).
    */
   @SerializedName("status")
   String status;
@@ -1040,6 +1061,17 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class TransferData extends StripeObject {
+    /**
+     * A positive integer representing how much to charge in the [smallest currency
+     * unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or
+     * 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent
+     * in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts).
+     * The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of
+     * $999,999.99).
+     */
+    @SerializedName("amount")
+    Long amount;
+
     /**
      * The account (if any) the payment will be attributed to for tax reporting, and where funds
      * from the payment will be transferred to upon payment success.

@@ -103,6 +103,10 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   @SerializedName("subscription_proration_date")
   Long subscriptionProrationDate;
 
+  /** Date a subscription is intended to start (can be future or past). */
+  @SerializedName("subscription_start_date")
+  Long subscriptionStartDate;
+
   /**
    * If provided, the invoice returned will preview updating or creating a subscription with that
    * tax percent. If set, one of `subscription_items` or `subscription` is required. This field has
@@ -141,6 +145,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       List<SubscriptionItem> subscriptionItems,
       Boolean subscriptionProrate,
       Long subscriptionProrationDate,
+      Long subscriptionStartDate,
       BigDecimal subscriptionTaxPercent,
       Object subscriptionTrialEnd,
       Boolean subscriptionTrialFromPlan) {
@@ -157,6 +162,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     this.subscriptionItems = subscriptionItems;
     this.subscriptionProrate = subscriptionProrate;
     this.subscriptionProrationDate = subscriptionProrationDate;
+    this.subscriptionStartDate = subscriptionStartDate;
     this.subscriptionTaxPercent = subscriptionTaxPercent;
     this.subscriptionTrialEnd = subscriptionTrialEnd;
     this.subscriptionTrialFromPlan = subscriptionTrialFromPlan;
@@ -193,6 +199,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     private Long subscriptionProrationDate;
 
+    private Long subscriptionStartDate;
+
     private BigDecimal subscriptionTaxPercent;
 
     private Object subscriptionTrialEnd;
@@ -215,6 +223,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
           this.subscriptionItems,
           this.subscriptionProrate,
           this.subscriptionProrationDate,
+          this.subscriptionStartDate,
           this.subscriptionTaxPercent,
           this.subscriptionTrialEnd,
           this.subscriptionTrialFromPlan);
@@ -432,6 +441,12 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
      */
     public Builder setSubscriptionProrationDate(Long subscriptionProrationDate) {
       this.subscriptionProrationDate = subscriptionProrationDate;
+      return this;
+    }
+
+    /** Date a subscription is intended to start (can be future or past). */
+    public Builder setSubscriptionStartDate(Long subscriptionStartDate) {
+      this.subscriptionStartDate = subscriptionStartDate;
       return this;
     }
 
