@@ -77,7 +77,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   @SerializedName("currency")
   String currency;
 
-  /** ID of the customer this PaymentIntent is for if one exists. */
+  /**
+   * ID of the Customer this PaymentIntent belongs to, if one exists.
+   *
+   * <p>If present, payment methods used with this PaymentIntent can only be attached to this
+   * Customer, and payment methods attached to other Customers cannot be used with this
+   * PaymentIntent.
+   */
   @SerializedName("customer")
   String customer;
 
@@ -161,13 +167,22 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   Boolean savePaymentMethod;
 
   /**
-   * When provided, this property indicates how you intend to use the payment method that your
-   * customer provides after the current payment completes. If applicable, additional authentication
-   * may be performed to comply with regional legislation or network rules required to enable the
-   * usage of the same payment method for additional payments.
+   * Indicates that you intend to make future payments with this PaymentIntent's payment method.
    *
-   * <p>Use `on_session` if you intend to only reuse the payment method when the customer is in your
-   * checkout flow. Use `off_session` if your customer may or may not be in your checkout flow.
+   * <p>If present, the payment method used with this PaymentIntent can be
+   * [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer, even after the
+   * transaction completes.
+   *
+   * <p>Use `on_session` if you intend to only reuse the payment method when your customer is
+   * present in your checkout flow. Use `off_session` if your customer may or may not be in your
+   * checkout flow.
+   *
+   * <p>Stripe uses `setup_future_usage` to dynamically optimize your payment flow and comply with
+   * regional legislation and network rules. For example, if your customer is impacted by
+   * [SCA](https://stripe.com/docs/strong-customer-authentication), using `off_session` will ensure
+   * that they are authenticated while processing this PaymentIntent. You will then be able to make
+   * later [off-session](https://stripe.com/docs/payments/payment-intents/off-session) payments for
+   * this customer.
    */
   @SerializedName("setup_future_usage")
   SetupFutureUsage setupFutureUsage;
@@ -419,7 +434,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** ID of the customer this PaymentIntent is for if one exists. */
+    /**
+     * ID of the Customer this PaymentIntent belongs to, if one exists.
+     *
+     * <p>If present, payment methods used with this PaymentIntent can only be attached to this
+     * Customer, and payment methods attached to other Customers cannot be used with this
+     * PaymentIntent.
+     */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;
@@ -609,14 +630,22 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * When provided, this property indicates how you intend to use the payment method that your
-     * customer provides after the current payment completes. If applicable, additional
-     * authentication may be performed to comply with regional legislation or network rules required
-     * to enable the usage of the same payment method for additional payments.
+     * Indicates that you intend to make future payments with this PaymentIntent's payment method.
      *
-     * <p>Use `on_session` if you intend to only reuse the payment method when the customer is in
-     * your checkout flow. Use `off_session` if your customer may or may not be in your checkout
-     * flow.
+     * <p>If present, the payment method used with this PaymentIntent can be
+     * [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer, even after the
+     * transaction completes.
+     *
+     * <p>Use `on_session` if you intend to only reuse the payment method when your customer is
+     * present in your checkout flow. Use `off_session` if your customer may or may not be in your
+     * checkout flow.
+     *
+     * <p>Stripe uses `setup_future_usage` to dynamically optimize your payment flow and comply with
+     * regional legislation and network rules. For example, if your customer is impacted by
+     * [SCA](https://stripe.com/docs/strong-customer-authentication), using `off_session` will
+     * ensure that they are authenticated while processing this PaymentIntent. You will then be able
+     * to make later [off-session](https://stripe.com/docs/payments/payment-intents/off-session)
+     * payments for this customer.
      */
     public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
       this.setupFutureUsage = setupFutureUsage;
@@ -945,6 +974,18 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
   public static class TransferData {
     /**
+     * The amount that will be transferred automatically when a charge succeeds. The amount is
+     * capped at the total transaction amount and if no amount is set, the full amount is
+     * transferred.
+     *
+     * <p>If you intend to collect a fee and you need a more robust reporting experience, using
+     * [application_fee_amount](https://stripe.com/docs/api/payment_intents/create#create_payment_intent-application_fee_amount)
+     * might be a better fit for your integration.
+     */
+    @SerializedName("amount")
+    Long amount;
+
+    /**
      * If specified, successful charges will be attributed to the destination account for tax
      * reporting, and the funds from charges will be transferred to the destination account. The ID
      * of the resulting transfer will be returned on the successful charge's `transfer` field.
@@ -961,7 +1002,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private TransferData(String destination, Map<String, Object> extraParams) {
+    private TransferData(Long amount, String destination, Map<String, Object> extraParams) {
+      this.amount = amount;
       this.destination = destination;
       this.extraParams = extraParams;
     }
@@ -971,13 +1013,29 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private Long amount;
+
       private String destination;
 
       private Map<String, Object> extraParams;
 
       /** Finalize and obtain parameter instance from this builder. */
       public TransferData build() {
-        return new TransferData(this.destination, this.extraParams);
+        return new TransferData(this.amount, this.destination, this.extraParams);
+      }
+
+      /**
+       * The amount that will be transferred automatically when a charge succeeds. The amount is
+       * capped at the total transaction amount and if no amount is set, the full amount is
+       * transferred.
+       *
+       * <p>If you intend to collect a fee and you need a more robust reporting experience, using
+       * [application_fee_amount](https://stripe.com/docs/api/payment_intents/create#create_payment_intent-application_fee_amount)
+       * might be a better fit for your integration.
+       */
+      public Builder setAmount(Long amount) {
+        this.amount = amount;
+        return this;
       }
 
       /**

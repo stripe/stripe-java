@@ -614,6 +614,27 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("receipt_email")
     String receiptEmail;
 
+    /**
+     * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+     *
+     * <p>If present, the payment method used with this PaymentIntent can be
+     * [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer, even after the
+     * transaction completes.
+     *
+     * <p>Use `on_session` if you intend to only reuse the payment method when your customer is
+     * present in your checkout flow. Use `off_session` if your customer may or may not be in your
+     * checkout flow.
+     *
+     * <p>Stripe uses `setup_future_usage` to dynamically optimize your payment flow and comply with
+     * regional legislation and network rules. For example, if your customer is impacted by
+     * [SCA](https://stripe.com/docs/strong-customer-authentication), using `off_session` will
+     * ensure that they are authenticated while processing this PaymentIntent. You will then be able
+     * to make later [off-session](https://stripe.com/docs/payments/payment-intents/off-session)
+     * payments for this customer.
+     */
+    @SerializedName("setup_future_usage")
+    SetupFutureUsage setupFutureUsage;
+
     /** Shipping information for this payment. */
     @SerializedName("shipping")
     Shipping shipping;
@@ -641,6 +662,7 @@ public class SessionCreateParams extends ApiRequestParams {
         Map<String, String> metadata,
         String onBehalfOf,
         String receiptEmail,
+        SetupFutureUsage setupFutureUsage,
         Shipping shipping,
         String statementDescriptor,
         TransferData transferData) {
@@ -651,6 +673,7 @@ public class SessionCreateParams extends ApiRequestParams {
       this.metadata = metadata;
       this.onBehalfOf = onBehalfOf;
       this.receiptEmail = receiptEmail;
+      this.setupFutureUsage = setupFutureUsage;
       this.shipping = shipping;
       this.statementDescriptor = statementDescriptor;
       this.transferData = transferData;
@@ -675,6 +698,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private String receiptEmail;
 
+      private SetupFutureUsage setupFutureUsage;
+
       private Shipping shipping;
 
       private String statementDescriptor;
@@ -691,6 +716,7 @@ public class SessionCreateParams extends ApiRequestParams {
             this.metadata,
             this.onBehalfOf,
             this.receiptEmail,
+            this.setupFutureUsage,
             this.shipping,
             this.statementDescriptor,
             this.transferData);
@@ -785,6 +811,30 @@ public class SessionCreateParams extends ApiRequestParams {
       /** Email address that the receipt for the resulting payment will be sent to. */
       public Builder setReceiptEmail(String receiptEmail) {
         this.receiptEmail = receiptEmail;
+        return this;
+      }
+
+      /**
+       * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+       *
+       * <p>If present, the payment method used with this PaymentIntent can be
+       * [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer, even after
+       * the transaction completes.
+       *
+       * <p>Use `on_session` if you intend to only reuse the payment method when your customer is
+       * present in your checkout flow. Use `off_session` if your customer may or may not be in your
+       * checkout flow.
+       *
+       * <p>Stripe uses `setup_future_usage` to dynamically optimize your payment flow and comply
+       * with regional legislation and network rules. For example, if your customer is impacted by
+       * [SCA](https://stripe.com/docs/strong-customer-authentication), using `off_session` will
+       * ensure that they are authenticated while processing this PaymentIntent. You will then be
+       * able to make later
+       * [off-session](https://stripe.com/docs/payments/payment-intents/off-session) payments for
+       * this customer.
+       */
+      public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+        this.setupFutureUsage = setupFutureUsage;
         return this;
       }
 
@@ -1183,6 +1233,21 @@ public class SessionCreateParams extends ApiRequestParams {
       private final String value;
 
       CaptureMethod(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+      @SerializedName("off_session")
+      OFF_SESSION("off_session"),
+
+      @SerializedName("on_session")
+      ON_SESSION("on_session");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      SetupFutureUsage(String value) {
         this.value = value;
       }
     }

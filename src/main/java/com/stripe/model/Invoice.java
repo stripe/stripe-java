@@ -768,7 +768,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   /**
    * Draft invoices are fully editable. Once an invoice is <a
    * href="/docs/billing/invoices/workflow#finalized">finalized</a>, monetary values, as well as
-   * <code>billing</code>, become uneditable.
+   * <code>collection_method</code>, become uneditable.
    *
    * <p>If you would like to stop the Stripe Billing engine from automatically finalizing,
    * reattempting payments on, sending reminders for, or <a
@@ -783,7 +783,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   /**
    * Draft invoices are fully editable. Once an invoice is <a
    * href="/docs/billing/invoices/workflow#finalized">finalized</a>, monetary values, as well as
-   * <code>billing</code>, become uneditable.
+   * <code>collection_method</code>, become uneditable.
    *
    * <p>If you would like to stop the Stripe Billing engine from automatically finalizing,
    * reattempting payments on, sending reminders for, or <a
@@ -803,7 +803,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   /**
    * Draft invoices are fully editable. Once an invoice is <a
    * href="/docs/billing/invoices/workflow#finalized">finalized</a>, monetary values, as well as
-   * <code>billing</code>, become uneditable.
+   * <code>collection_method</code>, become uneditable.
    *
    * <p>If you would like to stop the Stripe Billing engine from automatically finalizing,
    * reattempting payments on, sending reminders for, or <a
@@ -817,7 +817,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   /**
    * Draft invoices are fully editable. Once an invoice is <a
    * href="/docs/billing/invoices/workflow#finalized">finalized</a>, monetary values, as well as
-   * <code>billing</code>, become uneditable.
+   * <code>collection_method</code>, become uneditable.
    *
    * <p>If you would like to stop the Stripe Billing engine from automatically finalizing,
    * reattempting payments on, sending reminders for, or <a

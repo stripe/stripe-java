@@ -65,6 +65,30 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   @SerializedName("save_payment_method")
   Boolean savePaymentMethod;
 
+  /**
+   * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+   *
+   * <p>If present, the payment method used with this PaymentIntent can be
+   * [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer, even after the
+   * transaction completes.
+   *
+   * <p>Use `on_session` if you intend to only reuse the payment method when your customer is
+   * present in your checkout flow. Use `off_session` if your customer may or may not be in your
+   * checkout flow.
+   *
+   * <p>Stripe uses `setup_future_usage` to dynamically optimize your payment flow and comply with
+   * regional legislation and network rules. For example, if your customer is impacted by
+   * [SCA](https://stripe.com/docs/strong-customer-authentication), using `off_session` will ensure
+   * that they are authenticated while processing this PaymentIntent. You will then be able to make
+   * later [off-session](https://stripe.com/docs/payments/payment-intents/off-session) payments for
+   * this customer.
+   *
+   * <p>If `setup_future_usage` is already set and you are performing a request using a publishable
+   * key, you may only update the value from `on_session` to `off_session`.
+   */
+  @SerializedName("setup_future_usage")
+  SetupFutureUsage setupFutureUsage;
+
   /** Shipping information for this PaymentIntent. */
   @SerializedName("shipping")
   Object shipping;
@@ -85,6 +109,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       String receiptEmail,
       String returnUrl,
       Boolean savePaymentMethod,
+      SetupFutureUsage setupFutureUsage,
       Object shipping,
       String source) {
     this.expand = expand;
@@ -94,6 +119,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     this.receiptEmail = receiptEmail;
     this.returnUrl = returnUrl;
     this.savePaymentMethod = savePaymentMethod;
+    this.setupFutureUsage = setupFutureUsage;
     this.shipping = shipping;
     this.source = source;
   }
@@ -117,6 +143,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
     private Boolean savePaymentMethod;
 
+    private SetupFutureUsage setupFutureUsage;
+
     private Object shipping;
 
     private String source;
@@ -131,6 +159,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           this.receiptEmail,
           this.returnUrl,
           this.savePaymentMethod,
+          this.setupFutureUsage,
           this.shipping,
           this.source);
     }
@@ -245,6 +274,32 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
      */
     public Builder setSavePaymentMethod(Boolean savePaymentMethod) {
       this.savePaymentMethod = savePaymentMethod;
+      return this;
+    }
+
+    /**
+     * Indicates that you intend to make future payments with this PaymentIntent's payment method.
+     *
+     * <p>If present, the payment method used with this PaymentIntent can be
+     * [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer, even after the
+     * transaction completes.
+     *
+     * <p>Use `on_session` if you intend to only reuse the payment method when your customer is
+     * present in your checkout flow. Use `off_session` if your customer may or may not be in your
+     * checkout flow.
+     *
+     * <p>Stripe uses `setup_future_usage` to dynamically optimize your payment flow and comply with
+     * regional legislation and network rules. For example, if your customer is impacted by
+     * [SCA](https://stripe.com/docs/strong-customer-authentication), using `off_session` will
+     * ensure that they are authenticated while processing this PaymentIntent. You will then be able
+     * to make later [off-session](https://stripe.com/docs/payments/payment-intents/off-session)
+     * payments for this customer.
+     *
+     * <p>If `setup_future_usage` is already set and you are performing a request using a
+     * publishable key, you may only update the value from `on_session` to `off_session`.
+     */
+    public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+      this.setupFutureUsage = setupFutureUsage;
       return this;
     }
 
@@ -555,6 +610,21 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     private final String value;
 
     OffSession(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
+    @SerializedName("off_session")
+    OFF_SESSION("off_session"),
+
+    @SerializedName("on_session")
+    ON_SESSION("on_session");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    SetupFutureUsage(String value) {
       this.value = value;
     }
   }

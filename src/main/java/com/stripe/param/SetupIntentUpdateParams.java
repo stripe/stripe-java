@@ -10,7 +10,12 @@ import java.util.List;
 import java.util.Map;
 
 public class SetupIntentUpdateParams extends ApiRequestParams {
-  /** ID of the customer this SetupIntent is for if one exists. */
+  /**
+   * ID of the Customer this SetupIntent belongs to, if one exists.
+   *
+   * <p>If present, payment methods used with this SetupIntent can only be attached to this
+   * Customer, and payment methods attached to other Customers cannot be used with this SetupIntent.
+   */
   @SerializedName("customer")
   String customer;
 
@@ -100,7 +105,13 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
           this.paymentMethodTypes);
     }
 
-    /** ID of the customer this SetupIntent is for if one exists. */
+    /**
+     * ID of the Customer this SetupIntent belongs to, if one exists.
+     *
+     * <p>If present, payment methods used with this SetupIntent can only be attached to this
+     * Customer, and payment methods attached to other Customers cannot be used with this
+     * SetupIntent.
+     */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;
