@@ -3,6 +3,8 @@ package com.stripe.model;
 import com.google.gson.FieldNamingPolicy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
+import com.google.gson.JsonObject;
+import com.stripe.net.ApiResource;
 import com.stripe.net.StripeResponse;
 import java.lang.reflect.Field;
 
@@ -34,11 +36,34 @@ public abstract class StripeObject {
     this.lastResponse = response;
   }
 
+  /**
+   * Returns the raw JsonObject exposed by the Gson library. This can be used to access properties
+   * that are not directly exposed by Stripe's Java library.
+   *
+   * <p>Note: You should always prefer using the standard property accessors whenever possible.
+   * Because this method exposes Gson's underlying API, it is not considered fully stable. Stripe's
+   * Java library might move off Gson in the future and this method would be removed or change
+   * significantly.
+   *
+   * @return The raw JsonObject.
+   */
+  public JsonObject getRawJsonObject() {
+    // Lazily initialize this the first time the getter is called.
+    if (this.rawJsonObject == null) {
+      this.rawJsonObject =
+          ApiResource.GSON.fromJson(this.getLastResponse().body(), JsonObject.class);
+    }
+
+    return this.rawJsonObject;
+  }
+
   public String toJson() {
     return PRETTY_PRINT_GSON.toJson(this);
   }
 
   private transient StripeResponse lastResponse;
+
+  private transient JsonObject rawJsonObject;
 
   private Object getIdString() {
     try {
