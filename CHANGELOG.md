@@ -1,5 +1,8 @@
 # Changelog
 
+## 10.6.0 - 2019-07-12
+* [#799](https://github.com/stripe/stripe-java/pull/799) Add `getRawJsonObject()` accessor
+
 ## 10.5.0 - 2019-07-09
 * [#798](https://github.com/stripe/stripe-java/pull/798)
   * Add support for `transfer_data[amount]` on PaymentIntent
