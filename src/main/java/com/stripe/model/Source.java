@@ -13,6 +13,7 @@ import com.stripe.param.SourceRetrieveParams;
 import com.stripe.param.SourceSourceTransactionsParams;
 import com.stripe.param.SourceUpdateParams;
 import com.stripe.param.SourceVerifyParams;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -99,6 +100,9 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
   @SerializedName("ideal")
   Ideal ideal;
 
+  @SerializedName("klarna")
+  Klarna klarna;
+
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
@@ -146,6 +150,9 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
   @SerializedName("sofort")
   Sofort sofort;
 
+  @SerializedName("source_order")
+  Order sourceOrder;
+
   /**
    * Extra information about a source. This will appear on your customer's statement every time you
    * charge the source.
@@ -166,9 +173,9 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
   /**
    * The `type` of the source. The `type` is a payment method, one of `ach_credit_transfer`,
    * `ach_debit`, `alipay`, `bancontact`, `card`, `card_present`, `eps`, `giropay`, `ideal`,
-   * `multibanco`, `p24`, `sepa_debit`, `sofort`, `three_d_secure`, or `wechat`. An additional hash
-   * is included on the source with a name matching this value. It contains additional information
-   * specific to the [payment method](https://stripe.com/docs/sources) used.
+   * `multibanco`, `klarna`, `p24`, `sepa_debit`, `sofort`, `three_d_secure`, or `wechat`. An
+   * additional hash is included on the source with a name matching this value. It contains
+   * additional information specific to the [payment method](https://stripe.com/docs/sources) used.
    */
   @SerializedName("type")
   String type;
@@ -728,6 +735,86 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class Klarna extends StripeObject {
+    @SerializedName("background_image_url")
+    String backgroundImageUrl;
+
+    @SerializedName("client_token")
+    String clientToken;
+
+    @SerializedName("first_name")
+    String firstName;
+
+    @SerializedName("last_name")
+    String lastName;
+
+    @SerializedName("locale")
+    String locale;
+
+    @SerializedName("logo_url")
+    String logoUrl;
+
+    @SerializedName("page_title")
+    String pageTitle;
+
+    @SerializedName("pay_later_asset_urls_descriptive")
+    String payLaterAssetUrlsDescriptive;
+
+    @SerializedName("pay_later_asset_urls_standard")
+    String payLaterAssetUrlsStandard;
+
+    @SerializedName("pay_later_name")
+    String payLaterName;
+
+    @SerializedName("pay_later_redirect_url")
+    String payLaterRedirectUrl;
+
+    @SerializedName("pay_now_asset_urls_descriptive")
+    String payNowAssetUrlsDescriptive;
+
+    @SerializedName("pay_now_asset_urls_standard")
+    String payNowAssetUrlsStandard;
+
+    @SerializedName("pay_now_name")
+    String payNowName;
+
+    @SerializedName("pay_now_redirect_url")
+    String payNowRedirectUrl;
+
+    @SerializedName("pay_over_time_asset_urls_descriptive")
+    String payOverTimeAssetUrlsDescriptive;
+
+    @SerializedName("pay_over_time_asset_urls_standard")
+    String payOverTimeAssetUrlsStandard;
+
+    @SerializedName("pay_over_time_name")
+    String payOverTimeName;
+
+    @SerializedName("pay_over_time_redirect_url")
+    String payOverTimeRedirectUrl;
+
+    @SerializedName("payment_method_categories")
+    String paymentMethodCategories;
+
+    @SerializedName("purchase_country")
+    String purchaseCountry;
+
+    @SerializedName("purchase_type")
+    String purchaseType;
+
+    @SerializedName("redirect_url")
+    String redirectUrl;
+
+    @SerializedName("shipping_first_name")
+    String shippingFirstName;
+
+    @SerializedName("shipping_last_name")
+    String shippingLastName;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class Multibanco extends StripeObject {
     @SerializedName("entity")
     String entity;
@@ -758,6 +845,64 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
 
     @SerializedName("refund_iban")
     String refundIban;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Order extends StripeObject {
+    /**
+     * A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1,
+     * Japanese Yen being a zero-decimal currency) representing the total amount for the order.
+     */
+    @SerializedName("amount")
+    Long amount;
+
+    /**
+     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
+     * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+     */
+    @SerializedName("currency")
+    String currency;
+
+    /** The email address of the customer placing the order. */
+    @SerializedName("email")
+    String email;
+
+    /** List of items constituting the order. */
+    @SerializedName("items")
+    List<OrderItem> items;
+
+    @SerializedName("shipping")
+    ShippingDetails shipping;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class OrderItem extends StripeObject {
+    /** The amount (price) for this order item. */
+    @SerializedName("amount")
+    Long amount;
+
+    /** This currency of this order item. Required when `amount` is present. */
+    @SerializedName("currency")
+    String currency;
+
+    /** Human-readable description for this order item. */
+    @SerializedName("description")
+    String description;
+
+    /**
+     * The quantity of this order item. When type is `sku`, this is the number of instances of the
+     * SKU to be ordered.
+     */
+    @SerializedName("quantity")
+    Long quantity;
+
+    /** The type of this order item. Must be `sku`, `tax`, or `shipping`. */
+    @SerializedName("type")
+    String type;
   }
 
   @Getter

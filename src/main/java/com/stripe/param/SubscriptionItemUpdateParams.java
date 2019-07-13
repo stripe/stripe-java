@@ -9,6 +9,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
 public class SubscriptionItemUpdateParams extends ApiRequestParams {
   /**
@@ -37,6 +38,9 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
+
+  @SerializedName("payment_behavior")
+  PaymentBehavior paymentBehavior;
 
   /** The identifier of the new plan for this subscription item. */
   @SerializedName("plan")
@@ -73,6 +77,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Map<String, String> metadata,
+      PaymentBehavior paymentBehavior,
       String plan,
       Boolean prorate,
       Long prorationDate,
@@ -82,6 +87,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
+    this.paymentBehavior = paymentBehavior;
     this.plan = plan;
     this.prorate = prorate;
     this.prorationDate = prorationDate;
@@ -102,6 +108,8 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
+    private PaymentBehavior paymentBehavior;
+
     private String plan;
 
     private Boolean prorate;
@@ -119,6 +127,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.metadata,
+          this.paymentBehavior,
           this.plan,
           this.prorate,
           this.prorationDate,
@@ -219,6 +228,11 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
         this.metadata = new HashMap<>();
       }
       this.metadata.putAll(map);
+      return this;
+    }
+
+    public Builder setPaymentBehavior(PaymentBehavior paymentBehavior) {
+      this.paymentBehavior = paymentBehavior;
       return this;
     }
 
@@ -338,6 +352,21 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
         this.usageGte = usageGte;
         return this;
       }
+    }
+  }
+
+  public enum PaymentBehavior implements ApiRequestParams.EnumParam {
+    @SerializedName("allow_incomplete")
+    ALLOW_INCOMPLETE("allow_incomplete"),
+
+    @SerializedName("error_if_incomplete")
+    ERROR_IF_INCOMPLETE("error_if_incomplete");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    PaymentBehavior(String value) {
+      this.value = value;
     }
   }
 }

@@ -29,7 +29,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
    * Set to `true` to indicate that the customer is not in your checkout flow during this payment
    * attempt, and therefore is unable to authenticate. This parameter is intended for scenarios
    * where you collect card details and [charge them
-   * later](https://stripe.com/docs/payments/payment-intents/off-session).
+   * later](https://stripe.com/docs/payments/cards/charging-saved-cards).
    */
   @SerializedName("off_session")
   Object offSession;
@@ -220,7 +220,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
      * Set to `true` to indicate that the customer is not in your checkout flow during this payment
      * attempt, and therefore is unable to authenticate. This parameter is intended for scenarios
      * where you collect card details and [charge them
-     * later](https://stripe.com/docs/payments/payment-intents/off-session).
+     * later](https://stripe.com/docs/payments/cards/charging-saved-cards).
      */
     public Builder setOffSession(OffSession offSession) {
       this.offSession = offSession;
@@ -231,7 +231,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
      * Set to `true` to indicate that the customer is not in your checkout flow during this payment
      * attempt, and therefore is unable to authenticate. This parameter is intended for scenarios
      * where you collect card details and [charge them
-     * later](https://stripe.com/docs/payments/payment-intents/off-session).
+     * later](https://stripe.com/docs/payments/cards/charging-saved-cards).
      */
     public Builder setOffSession(Boolean offSession) {
       this.offSession = offSession;

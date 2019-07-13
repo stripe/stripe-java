@@ -623,14 +623,17 @@ public class SessionCreateParams extends ApiRequestParams {
      *
      * <p>Use `on_session` if you intend to only reuse the payment method when your customer is
      * present in your checkout flow. Use `off_session` if your customer may or may not be in your
-     * checkout flow.
+     * checkout flow. See [Saving card details after a
+     * payment](https://stripe.com/docs/payments/cards/saving-cards#saving-card-after-payment) to
+     * learn more.
      *
      * <p>Stripe uses `setup_future_usage` to dynamically optimize your payment flow and comply with
      * regional legislation and network rules. For example, if your customer is impacted by
      * [SCA](https://stripe.com/docs/strong-customer-authentication), using `off_session` will
      * ensure that they are authenticated while processing this PaymentIntent. You will then be able
-     * to make later [off-session](https://stripe.com/docs/payments/payment-intents/off-session)
-     * payments for this customer.
+     * to collect [off-session
+     * payments](https://stripe.com/docs/payments/cards/charging-saved-cards#off-session-payments-with-saved-cards)
+     * for this customer.
      */
     @SerializedName("setup_future_usage")
     SetupFutureUsage setupFutureUsage;
@@ -823,15 +826,17 @@ public class SessionCreateParams extends ApiRequestParams {
        *
        * <p>Use `on_session` if you intend to only reuse the payment method when your customer is
        * present in your checkout flow. Use `off_session` if your customer may or may not be in your
-       * checkout flow.
+       * checkout flow. See [Saving card details after a
+       * payment](https://stripe.com/docs/payments/cards/saving-cards#saving-card-after-payment) to
+       * learn more.
        *
        * <p>Stripe uses `setup_future_usage` to dynamically optimize your payment flow and comply
        * with regional legislation and network rules. For example, if your customer is impacted by
        * [SCA](https://stripe.com/docs/strong-customer-authentication), using `off_session` will
        * ensure that they are authenticated while processing this PaymentIntent. You will then be
-       * able to make later
-       * [off-session](https://stripe.com/docs/payments/payment-intents/off-session) payments for
-       * this customer.
+       * able to collect [off-session
+       * payments](https://stripe.com/docs/payments/cards/charging-saved-cards#off-session-payments-with-saved-cards)
+       * for this customer.
        */
       public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
         this.setupFutureUsage = setupFutureUsage;
