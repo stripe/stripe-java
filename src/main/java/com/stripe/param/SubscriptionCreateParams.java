@@ -141,6 +141,24 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   Map<String, String> metadata;
 
   /**
+   * Use `allow_incomplete` to create subscriptions with `status=incomplete` if its first invoice
+   * cannot be paid. Creating subscriptions with this status allows you to manage scenarios where
+   * additional user actions are needed to pay a subscription's invoice. For example, SCA regulation
+   * may require 3DS authentication to complete payment. See the [SCA Migration
+   * Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication) for Billing to
+   * learn more. This is the default behavior.
+   *
+   * <p>Use `error_if_incomplete` if you want Stripe to return an HTTP 402 status code if a
+   * subscription's first invoice cannot be paid. For example, if a payment method requires 3DS
+   * authentication due to SCA regulation and further user action is needed, this parameter does not
+   * create a subscription and returns an error instead. This was the default behavior for API
+   * versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14)
+   * to learn more.
+   */
+  @SerializedName("payment_behavior")
+  PaymentBehavior paymentBehavior;
+
+  /**
    * Boolean (defaults to `true`) telling us whether to [credit for unused
    * time](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle
    * changes (e.g. when switching plans, resetting `billing_cycle_anchor=now`, or starting a trial),
@@ -214,6 +232,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       List<Item> items,
       Map<String, String> metadata,
+      PaymentBehavior paymentBehavior,
       Boolean prorate,
       Object taxPercent,
       TransferData transferData,
@@ -238,6 +257,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.items = items;
     this.metadata = metadata;
+    this.paymentBehavior = paymentBehavior;
     this.prorate = prorate;
     this.taxPercent = taxPercent;
     this.transferData = transferData;
@@ -287,6 +307,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
+    private PaymentBehavior paymentBehavior;
+
     private Boolean prorate;
 
     private Object taxPercent;
@@ -320,6 +342,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           this.extraParams,
           this.items,
           this.metadata,
+          this.paymentBehavior,
           this.prorate,
           this.taxPercent,
           this.transferData,
@@ -579,6 +602,26 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         this.metadata = new HashMap<>();
       }
       this.metadata.putAll(map);
+      return this;
+    }
+
+    /**
+     * Use `allow_incomplete` to create subscriptions with `status=incomplete` if its first invoice
+     * cannot be paid. Creating subscriptions with this status allows you to manage scenarios where
+     * additional user actions are needed to pay a subscription's invoice. For example, SCA
+     * regulation may require 3DS authentication to complete payment. See the [SCA Migration
+     * Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication) for Billing
+     * to learn more. This is the default behavior.
+     *
+     * <p>Use `error_if_incomplete` if you want Stripe to return an HTTP 402 status code if a
+     * subscription's first invoice cannot be paid. For example, if a payment method requires 3DS
+     * authentication due to SCA regulation and further user action is needed, this parameter does
+     * not create a subscription and returns an error instead. This was the default behavior for API
+     * versions prior to 2019-03-14. See the
+     * [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.
+     */
+    public Builder setPaymentBehavior(PaymentBehavior paymentBehavior) {
+      this.paymentBehavior = paymentBehavior;
       return this;
     }
 
@@ -1113,6 +1156,21 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     private final String value;
 
     CollectionMethod(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum PaymentBehavior implements ApiRequestParams.EnumParam {
+    @SerializedName("allow_incomplete")
+    ALLOW_INCOMPLETE("allow_incomplete"),
+
+    @SerializedName("error_if_incomplete")
+    ERROR_IF_INCOMPLETE("error_if_incomplete");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    PaymentBehavior(String value) {
       this.value = value;
     }
   }

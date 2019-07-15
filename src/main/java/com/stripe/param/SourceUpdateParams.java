@@ -8,6 +8,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
 public class SourceUpdateParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
@@ -37,15 +38,24 @@ public class SourceUpdateParams extends ApiRequestParams {
   @SerializedName("owner")
   Owner owner;
 
+  /**
+   * Information about the items and shipping associated with the source. Required for transactional
+   * credit (for example Klarna) sources before you can charge it.
+   */
+  @SerializedName("source_order")
+  SourceOrder sourceOrder;
+
   private SourceUpdateParams(
       List<String> expand,
       Map<String, Object> extraParams,
       Map<String, String> metadata,
-      Owner owner) {
+      Owner owner,
+      SourceOrder sourceOrder) {
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
     this.owner = owner;
+    this.sourceOrder = sourceOrder;
   }
 
   public static Builder builder() {
@@ -61,9 +71,12 @@ public class SourceUpdateParams extends ApiRequestParams {
 
     private Owner owner;
 
+    private SourceOrder sourceOrder;
+
     /** Finalize and obtain parameter instance from this builder. */
     public SourceUpdateParams build() {
-      return new SourceUpdateParams(this.expand, this.extraParams, this.metadata, this.owner);
+      return new SourceUpdateParams(
+          this.expand, this.extraParams, this.metadata, this.owner, this.sourceOrder);
     }
 
     /**
@@ -150,6 +163,15 @@ public class SourceUpdateParams extends ApiRequestParams {
      */
     public Builder setOwner(Owner owner) {
       this.owner = owner;
+      return this;
+    }
+
+    /**
+     * Information about the items and shipping associated with the source. Required for
+     * transactional credit (for example Klarna) sources before you can charge it.
+     */
+    public Builder setSourceOrder(SourceOrder sourceOrder) {
+      this.sourceOrder = sourceOrder;
       return this;
     }
   }
@@ -392,6 +414,556 @@ public class SourceUpdateParams extends ApiRequestParams {
         public Builder setState(String state) {
           this.state = state;
           return this;
+        }
+      }
+    }
+  }
+
+  public static class SourceOrder {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** List of items constituting the order. */
+    @SerializedName("items")
+    List<Item> items;
+
+    /**
+     * Shipping address for the order. Required if any of the SKUs are for products that have
+     * `shippable` set to true.
+     */
+    @SerializedName("shipping")
+    Shipping shipping;
+
+    private SourceOrder(Map<String, Object> extraParams, List<Item> items, Shipping shipping) {
+      this.extraParams = extraParams;
+      this.items = items;
+      this.shipping = shipping;
+    }
+
+    public static Builder builder() {
+      return new com.stripe.param.SourceUpdateParams.SourceOrder.Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private List<Item> items;
+
+      private Shipping shipping;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SourceOrder build() {
+        return new SourceOrder(this.extraParams, this.items, this.shipping);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SourceUpdateParams.SourceOrder#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SourceUpdateParams.SourceOrder#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * Add an element to `items` list. A list is initialized for the first `add/addAll` call, and
+       * subsequent calls adds additional elements to the original list. See {@link
+       * SourceUpdateParams.SourceOrder#items} for the field documentation.
+       */
+      public Builder addItem(Item element) {
+        if (this.items == null) {
+          this.items = new ArrayList<>();
+        }
+        this.items.add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `items` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * SourceUpdateParams.SourceOrder#items} for the field documentation.
+       */
+      public Builder addAllItem(List<Item> elements) {
+        if (this.items == null) {
+          this.items = new ArrayList<>();
+        }
+        this.items.addAll(elements);
+        return this;
+      }
+
+      /**
+       * Shipping address for the order. Required if any of the SKUs are for products that have
+       * `shippable` set to true.
+       */
+      public Builder setShipping(Shipping shipping) {
+        this.shipping = shipping;
+        return this;
+      }
+    }
+
+    public static class Item {
+      @SerializedName("amount")
+      Long amount;
+
+      @SerializedName("currency")
+      String currency;
+
+      @SerializedName("description")
+      String description;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The ID of the SKU being ordered. */
+      @SerializedName("parent")
+      String parent;
+
+      /**
+       * The quantity of this order item. When type is `sku`, this is the number of instances of the
+       * SKU to be ordered.
+       */
+      @SerializedName("quantity")
+      Long quantity;
+
+      @SerializedName("type")
+      Type type;
+
+      private Item(
+          Long amount,
+          String currency,
+          String description,
+          Map<String, Object> extraParams,
+          String parent,
+          Long quantity,
+          Type type) {
+        this.amount = amount;
+        this.currency = currency;
+        this.description = description;
+        this.extraParams = extraParams;
+        this.parent = parent;
+        this.quantity = quantity;
+        this.type = type;
+      }
+
+      public static Builder builder() {
+        return new com.stripe.param.SourceUpdateParams.SourceOrder.Item.Builder();
+      }
+
+      public static class Builder {
+        private Long amount;
+
+        private String currency;
+
+        private String description;
+
+        private Map<String, Object> extraParams;
+
+        private String parent;
+
+        private Long quantity;
+
+        private Type type;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Item build() {
+          return new Item(
+              this.amount,
+              this.currency,
+              this.description,
+              this.extraParams,
+              this.parent,
+              this.quantity,
+              this.type);
+        }
+
+        public Builder setAmount(Long amount) {
+          this.amount = amount;
+          return this;
+        }
+
+        public Builder setCurrency(String currency) {
+          this.currency = currency;
+          return this;
+        }
+
+        public Builder setDescription(String description) {
+          this.description = description;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SourceUpdateParams.SourceOrder.Item#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SourceUpdateParams.SourceOrder.Item#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The ID of the SKU being ordered. */
+        public Builder setParent(String parent) {
+          this.parent = parent;
+          return this;
+        }
+
+        /**
+         * The quantity of this order item. When type is `sku`, this is the number of instances of
+         * the SKU to be ordered.
+         */
+        public Builder setQuantity(Long quantity) {
+          this.quantity = quantity;
+          return this;
+        }
+
+        public Builder setType(Type type) {
+          this.type = type;
+          return this;
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("discount")
+        DISCOUNT("discount"),
+
+        @SerializedName("shipping")
+        SHIPPING("shipping"),
+
+        @SerializedName("sku")
+        SKU("sku"),
+
+        @SerializedName("tax")
+        TAX("tax");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    public static class Shipping {
+      /** Shipping address. */
+      @SerializedName("address")
+      Address address;
+
+      /** The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. */
+      @SerializedName("carrier")
+      String carrier;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** Recipient name. */
+      @SerializedName("name")
+      String name;
+
+      /** Recipient phone (including extension). */
+      @SerializedName("phone")
+      String phone;
+
+      /**
+       * The tracking number for a physical product, obtained from the delivery service. If multiple
+       * tracking numbers were generated for this purchase, please separate them with commas.
+       */
+      @SerializedName("tracking_number")
+      String trackingNumber;
+
+      private Shipping(
+          Address address,
+          String carrier,
+          Map<String, Object> extraParams,
+          String name,
+          String phone,
+          String trackingNumber) {
+        this.address = address;
+        this.carrier = carrier;
+        this.extraParams = extraParams;
+        this.name = name;
+        this.phone = phone;
+        this.trackingNumber = trackingNumber;
+      }
+
+      public static Builder builder() {
+        return new com.stripe.param.SourceUpdateParams.SourceOrder.Shipping.Builder();
+      }
+
+      public static class Builder {
+        private Address address;
+
+        private String carrier;
+
+        private Map<String, Object> extraParams;
+
+        private String name;
+
+        private String phone;
+
+        private String trackingNumber;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Shipping build() {
+          return new Shipping(
+              this.address,
+              this.carrier,
+              this.extraParams,
+              this.name,
+              this.phone,
+              this.trackingNumber);
+        }
+
+        /** Shipping address. */
+        public Builder setAddress(Address address) {
+          this.address = address;
+          return this;
+        }
+
+        /** The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. */
+        public Builder setCarrier(String carrier) {
+          this.carrier = carrier;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SourceUpdateParams.SourceOrder.Shipping#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SourceUpdateParams.SourceOrder.Shipping#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** Recipient name. */
+        public Builder setName(String name) {
+          this.name = name;
+          return this;
+        }
+
+        /** Recipient phone (including extension). */
+        public Builder setPhone(String phone) {
+          this.phone = phone;
+          return this;
+        }
+
+        /**
+         * The tracking number for a physical product, obtained from the delivery service. If
+         * multiple tracking numbers were generated for this purchase, please separate them with
+         * commas.
+         */
+        public Builder setTrackingNumber(String trackingNumber) {
+          this.trackingNumber = trackingNumber;
+          return this;
+        }
+      }
+
+      public static class Address {
+        @SerializedName("city")
+        String city;
+
+        @SerializedName("country")
+        String country;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        @SerializedName("line1")
+        String line1;
+
+        @SerializedName("line2")
+        String line2;
+
+        @SerializedName("postal_code")
+        String postalCode;
+
+        @SerializedName("state")
+        String state;
+
+        private Address(
+            String city,
+            String country,
+            Map<String, Object> extraParams,
+            String line1,
+            String line2,
+            String postalCode,
+            String state) {
+          this.city = city;
+          this.country = country;
+          this.extraParams = extraParams;
+          this.line1 = line1;
+          this.line2 = line2;
+          this.postalCode = postalCode;
+          this.state = state;
+        }
+
+        public static Builder builder() {
+          return new com.stripe.param.SourceUpdateParams.SourceOrder.Shipping.Address.Builder();
+        }
+
+        public static class Builder {
+          private String city;
+
+          private String country;
+
+          private Map<String, Object> extraParams;
+
+          private String line1;
+
+          private String line2;
+
+          private String postalCode;
+
+          private String state;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public Address build() {
+            return new Address(
+                this.city,
+                this.country,
+                this.extraParams,
+                this.line1,
+                this.line2,
+                this.postalCode,
+                this.state);
+          }
+
+          public Builder setCity(String city) {
+            this.city = city;
+            return this;
+          }
+
+          public Builder setCountry(String country) {
+            this.country = country;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SourceUpdateParams.SourceOrder.Shipping.Address#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SourceUpdateParams.SourceOrder.Shipping.Address#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          public Builder setLine1(String line1) {
+            this.line1 = line1;
+            return this;
+          }
+
+          public Builder setLine2(String line2) {
+            this.line2 = line2;
+            return this;
+          }
+
+          public Builder setPostalCode(String postalCode) {
+            this.postalCode = postalCode;
+            return this;
+          }
+
+          public Builder setState(String state) {
+            this.state = state;
+            return this;
+          }
         }
       }
     }
