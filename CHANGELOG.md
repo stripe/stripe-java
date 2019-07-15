@@ -1,5 +1,10 @@
 # Changelog
 
+## 10.7.0 - 2019-07-15
+* [#800](https://github.com/stripe/stripe-java/pull/800)
+  * Add support for Sources of type `klarna`
+  * Add support for `payment_behavior` on Subscription and SubscriptionItem to control their behaviour on creation or update.
+
 ## 10.6.0 - 2019-07-12
 * [#799](https://github.com/stripe/stripe-java/pull/799) Add `getRawJsonObject()` accessor
 
