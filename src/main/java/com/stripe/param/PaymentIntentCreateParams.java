@@ -112,11 +112,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   Map<String, String> metadata;
 
   /**
-   * Used in payment flows that collect payment details and charge later, when the customer is not
-   * available to complete additional required steps for the payment. Setting this parameter
-   * indicates that this payment attempt is happening while the customer is not in your checkout
-   * flow. Use `recurring` for payments made on a recurring basis (for example, subscriptions) and
-   * `one_off` for all other off-session payments.
+   * Set to `true` to indicate that the customer is not in your checkout flow during this payment
+   * attempt, and therefore is unable to authenticate. This parameter is intended for scenarios
+   * where you collect card details and [charge them
+   * later](https://stripe.com/docs/payments/cards/charging-saved-cards).
    */
   @SerializedName("off_session")
   Object offSession;
@@ -534,11 +533,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Used in payment flows that collect payment details and charge later, when the customer is not
-     * available to complete additional required steps for the payment. Setting this parameter
-     * indicates that this payment attempt is happening while the customer is not in your checkout
-     * flow. Use `recurring` for payments made on a recurring basis (for example, subscriptions) and
-     * `one_off` for all other off-session payments.
+     * Set to `true` to indicate that the customer is not in your checkout flow during this payment
+     * attempt, and therefore is unable to authenticate. This parameter is intended for scenarios
+     * where you collect card details and [charge them
+     * later](https://stripe.com/docs/payments/cards/charging-saved-cards).
      */
     public Builder setOffSession(OffSession offSession) {
       this.offSession = offSession;
@@ -546,11 +544,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Used in payment flows that collect payment details and charge later, when the customer is not
-     * available to complete additional required steps for the payment. Setting this parameter
-     * indicates that this payment attempt is happening while the customer is not in your checkout
-     * flow. Use `recurring` for payments made on a recurring basis (for example, subscriptions) and
-     * `one_off` for all other off-session payments.
+     * Set to `true` to indicate that the customer is not in your checkout flow during this payment
+     * attempt, and therefore is unable to authenticate. This parameter is intended for scenarios
+     * where you collect card details and [charge them
+     * later](https://stripe.com/docs/payments/cards/charging-saved-cards).
      */
     public Builder setOffSession(Boolean offSession) {
       this.offSession = offSession;

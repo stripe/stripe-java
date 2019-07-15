@@ -36,6 +36,10 @@ public class InvoicePayParams extends ApiRequestParams {
   @SerializedName("forgive")
   Boolean forgive;
 
+  /** Indicates if a customer is on or off-session while an invoice payment is attempted. */
+  @SerializedName("off_session")
+  Boolean offSession;
+
   /**
    * Boolean representing whether an invoice is paid outside of Stripe. This will result in no
    * charge being made.
@@ -61,12 +65,14 @@ public class InvoicePayParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Boolean forgive,
+      Boolean offSession,
       Boolean paidOutOfBand,
       String paymentMethod,
       String source) {
     this.expand = expand;
     this.extraParams = extraParams;
     this.forgive = forgive;
+    this.offSession = offSession;
     this.paidOutOfBand = paidOutOfBand;
     this.paymentMethod = paymentMethod;
     this.source = source;
@@ -83,6 +89,8 @@ public class InvoicePayParams extends ApiRequestParams {
 
     private Boolean forgive;
 
+    private Boolean offSession;
+
     private Boolean paidOutOfBand;
 
     private String paymentMethod;
@@ -95,6 +103,7 @@ public class InvoicePayParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.forgive,
+          this.offSession,
           this.paidOutOfBand,
           this.paymentMethod,
           this.source);
@@ -165,6 +174,12 @@ public class InvoicePayParams extends ApiRequestParams {
      */
     public Builder setForgive(Boolean forgive) {
       this.forgive = forgive;
+      return this;
+    }
+
+    /** Indicates if a customer is on or off-session while an invoice payment is attempted. */
+    public Builder setOffSession(Boolean offSession) {
+      this.offSession = offSession;
       return this;
     }
 
