@@ -183,6 +183,18 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   String object;
 
   /**
+   * You can use this [SetupIntent](https://stripe.com/docs/api/setup_intents) to collect user
+   * authentication when creating a subscription without immediate payment or updating a
+   * subscription's payment method, allowing you to optimize for off-session payments. Learn more in
+   * the [SCA Migration
+   * Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication#scenario-2).
+   */
+  @SerializedName("pending_setup_intent")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<SetupIntent> pendingSetupIntent;
+
+  /**
    * Hash describing the plan the customer is subscribed to. Only set if the subscription contains a
    * single plan.
    */
@@ -333,6 +345,25 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
 
   public void setLatestInvoiceObject(Invoice expandableObject) {
     this.latestInvoice = new ExpandableField<Invoice>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get id of expandable `pendingSetupIntent` object. */
+  public String getPendingSetupIntent() {
+    return (this.pendingSetupIntent != null) ? this.pendingSetupIntent.getId() : null;
+  }
+
+  public void setPendingSetupIntent(String id) {
+    this.pendingSetupIntent = ApiResource.setExpandableFieldId(id, this.pendingSetupIntent);
+  }
+
+  /** Get expanded `pendingSetupIntent`. */
+  public SetupIntent getPendingSetupIntentObject() {
+    return (this.pendingSetupIntent != null) ? this.pendingSetupIntent.getExpanded() : null;
+  }
+
+  public void setPendingSetupIntentObject(SetupIntent expandableObject) {
+    this.pendingSetupIntent =
+        new ExpandableField<SetupIntent>(expandableObject.getId(), expandableObject);
   }
 
   /**

@@ -127,6 +127,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  /** Indicates if a customer is on or off-session while an invoice payment is attempted. */
+  @SerializedName("off_session")
+  Boolean offSession;
+
   /**
    * Use `allow_incomplete` to create subscriptions with `status=incomplete` if its first invoice
    * cannot be paid. Creating subscriptions with this status allows you to manage scenarios where
@@ -220,6 +224,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       List<Item> items,
       Map<String, String> metadata,
+      Boolean offSession,
       PaymentBehavior paymentBehavior,
       Boolean prorate,
       Long prorationDate,
@@ -243,6 +248,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.items = items;
     this.metadata = metadata;
+    this.offSession = offSession;
     this.paymentBehavior = paymentBehavior;
     this.prorate = prorate;
     this.prorationDate = prorationDate;
@@ -289,6 +295,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
+    private Boolean offSession;
+
     private PaymentBehavior paymentBehavior;
 
     private Boolean prorate;
@@ -322,6 +330,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           this.extraParams,
           this.items,
           this.metadata,
+          this.offSession,
           this.paymentBehavior,
           this.prorate,
           this.prorationDate,
@@ -574,6 +583,12 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
         this.metadata = new HashMap<>();
       }
       this.metadata.putAll(map);
+      return this;
+    }
+
+    /** Indicates if a customer is on or off-session while an invoice payment is attempted. */
+    public Builder setOffSession(Boolean offSession) {
+      this.offSession = offSession;
       return this;
     }
 
