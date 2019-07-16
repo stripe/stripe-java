@@ -1,5 +1,9 @@
 # Changelog
 
+## 10.9.1 - 2019-07-16
+* [#804](https://github.com/stripe/stripe-java/pull/804) Add support for unsetting metadata keys
+* [#805](https://github.com/stripe/stripe-java/pull/805) Bump dependencies
+
 ## 10.9.0 - 2019-07-15
 * [#802](https://github.com/stripe/stripe-java/pull/802) Add support for `payment_method_options` on `PaymentIntent` and `SetupIntent`
 
