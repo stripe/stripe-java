@@ -135,6 +135,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   @SerializedName("payment_method")
   String paymentMethod;
 
+  /** Payment-method-specific configuration for this PaymentIntent. */
+  @SerializedName("payment_method_options")
+  PaymentMethodOptions paymentMethodOptions;
+
   /**
    * The list of payment method types (e.g. card) that this PaymentIntent is allowed to use. If this
    * is not provided, defaults to ["card"].
@@ -240,6 +244,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       Object offSession,
       String onBehalfOf,
       String paymentMethod,
+      PaymentMethodOptions paymentMethodOptions,
       List<String> paymentMethodTypes,
       String receiptEmail,
       String returnUrl,
@@ -264,6 +269,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     this.offSession = offSession;
     this.onBehalfOf = onBehalfOf;
     this.paymentMethod = paymentMethod;
+    this.paymentMethodOptions = paymentMethodOptions;
     this.paymentMethodTypes = paymentMethodTypes;
     this.receiptEmail = receiptEmail;
     this.returnUrl = returnUrl;
@@ -309,6 +315,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     private String paymentMethod;
 
+    private PaymentMethodOptions paymentMethodOptions;
+
     private List<String> paymentMethodTypes;
 
     private String receiptEmail;
@@ -346,6 +354,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           this.offSession,
           this.onBehalfOf,
           this.paymentMethod,
+          this.paymentMethodOptions,
           this.paymentMethodTypes,
           this.receiptEmail,
           this.returnUrl,
@@ -573,6 +582,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /** Payment-method-specific configuration for this PaymentIntent. */
+    public Builder setPaymentMethodOptions(PaymentMethodOptions paymentMethodOptions) {
+      this.paymentMethodOptions = paymentMethodOptions;
+      return this;
+    }
+
     /**
      * Add an element to `paymentMethodTypes` list. A list is initialized for the first `add/addAll`
      * call, and subsequent calls adds additional elements to the original list. See {@link
@@ -699,6 +714,191 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     public Builder setTransferGroup(String transferGroup) {
       this.transferGroup = transferGroup;
       return this;
+    }
+  }
+
+  public static class PaymentMethodOptions {
+    /** Configuration for any card payments attempted on this PaymentIntent. */
+    @SerializedName("card")
+    Card card;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private PaymentMethodOptions(Card card, Map<String, Object> extraParams) {
+      this.card = card;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new com.stripe.param.PaymentIntentCreateParams.PaymentMethodOptions.Builder();
+    }
+
+    public static class Builder {
+      private Card card;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PaymentMethodOptions build() {
+        return new PaymentMethodOptions(this.card, this.extraParams);
+      }
+
+      /** Configuration for any card payments attempted on this PaymentIntent. */
+      public Builder setCard(Card card) {
+        this.card = card;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentIntentCreateParams.PaymentMethodOptions#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentIntentCreateParams.PaymentMethodOptions#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    public static class Card {
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * When specified, this parameter indicates that a transaction will be marked as MOTO (Mail
+       * Order Telephone Order) and thus out of scope for SCA.
+       */
+      @SerializedName("moto")
+      Boolean moto;
+
+      /**
+       * We strongly recommend that you rely on our SCA engine to automatically prompt your
+       * customers for authentication based on risk level and other requirements. However, if you
+       * wish to request authentication based on logic from your own fraud engine, provide this
+       * option. Permitted values include: `automatic`, `any`, or `challenge_only`.
+       */
+      @SerializedName("request_three_d_secure")
+      RequestThreeDSecure requestThreeDSecure;
+
+      private Card(
+          Map<String, Object> extraParams, Boolean moto, RequestThreeDSecure requestThreeDSecure) {
+        this.extraParams = extraParams;
+        this.moto = moto;
+        this.requestThreeDSecure = requestThreeDSecure;
+      }
+
+      public static Builder builder() {
+        return new com.stripe.param.PaymentIntentCreateParams.PaymentMethodOptions.Card.Builder();
+      }
+
+      public static class Builder {
+        private Map<String, Object> extraParams;
+
+        private Boolean moto;
+
+        private RequestThreeDSecure requestThreeDSecure;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Card build() {
+          return new Card(this.extraParams, this.moto, this.requestThreeDSecure);
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodOptions.Card#extraParams} for the
+         * field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentCreateParams.PaymentMethodOptions.Card#extraParams} for the
+         * field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * When specified, this parameter indicates that a transaction will be marked as MOTO (Mail
+         * Order Telephone Order) and thus out of scope for SCA.
+         */
+        public Builder setMoto(Boolean moto) {
+          this.moto = moto;
+          return this;
+        }
+
+        /**
+         * We strongly recommend that you rely on our SCA engine to automatically prompt your
+         * customers for authentication based on risk level and other requirements. However, if you
+         * wish to request authentication based on logic from your own fraud engine, provide this
+         * option. Permitted values include: `automatic`, `any`, or `challenge_only`.
+         */
+        public Builder setRequestThreeDSecure(RequestThreeDSecure requestThreeDSecure) {
+          this.requestThreeDSecure = requestThreeDSecure;
+          return this;
+        }
+      }
+
+      public enum RequestThreeDSecure implements ApiRequestParams.EnumParam {
+        @SerializedName("any")
+        ANY("any"),
+
+        @SerializedName("automatic")
+        AUTOMATIC("automatic"),
+
+        @SerializedName("challenge_only")
+        CHALLENGE_ONLY("challenge_only");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        RequestThreeDSecure(String value) {
+          this.value = value;
+        }
+      }
     }
   }
 
