@@ -1,5 +1,8 @@
 # Changelog
 
+## 10.9.0 - 2019-07-15
+* [#802](https://github.com/stripe/stripe-java/pull/802) Add support for `payment_method_options` on `PaymentIntent` and `SetupIntent`
+
 ## 10.8.0 - 2019-07-15
 * [#801](https://github.com/stripe/stripe-java/pull/801)
   * Add support for `pending_setup_intent` on Subscription
