@@ -112,6 +112,10 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<PaymentMethod> paymentMethod;
 
+  /** Payment-method-specific configuration for this SetupIntent. */
+  @SerializedName("payment_method_options")
+  PaymentMethodOptions paymentMethodOptions;
+
   /** The list of payment method types (e.g. card) that this SetupIntent is allowed to set up. */
   @SerializedName("payment_method_types")
   List<String> paymentMethodTypes;
@@ -604,5 +608,27 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     /** The URL you must redirect your customer to in order to authenticate. */
     @SerializedName("url")
     String url;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PaymentMethodOptions extends StripeObject {
+    @SerializedName("card")
+    Card card;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Card extends StripeObject {
+      /**
+       * We strongly recommend that you rely on our SCA engine to automatically prompt your
+       * customers for authentication based on risk level and other requirements. However, if you
+       * wish to request authentication based on logic from your own fraud engine, provide this
+       * option. Permitted values include: `automatic`, `any`, or `challenge_only`.
+       */
+      @SerializedName("request_three_d_secure")
+      String requestThreeDSecure;
+    }
   }
 }
