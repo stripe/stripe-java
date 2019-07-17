@@ -34,11 +34,10 @@ public class SessionCreateParams extends ApiRequestParams {
   String clientReferenceId;
 
   /**
-   * ID of an existing customer paying for this session, if one exists. May only be used with
-   * line_items. Usage with subscription_data is not yet available. If blank, Checkout will create a
-   * new customer object based on information provided during the session. The email stored on the
-   * customer will be used to prefill the email field on the Checkout page. If the customer changes
-   * their email on the Checkout page, the Customer object will be updated with the new email.
+   * ID of an existing customer, if one exists. If blank, Checkout will create a new customer object
+   * based on information provided during the session. The email stored on the customer will be used
+   * to prefill the email field on the Checkout page. If the customer changes their email on the
+   * Checkout page, the Customer object will be updated with the new email.
    */
   @SerializedName("customer")
   String customer;
@@ -66,8 +65,8 @@ public class SessionCreateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * A list of items the customer is purchasing. Use this parameter for one-time payments. To create
-   * subscriptions, use `subscription_data.items`.
+   * A list of items the customer is purchasing. Use this parameter for one-time payments or adding
+   * invoice line items to a subscription (used in conjunction with `subscription_data`.
    */
   @SerializedName("line_items")
   List<LineItem> lineItems;
@@ -224,12 +223,10 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * ID of an existing customer paying for this session, if one exists. May only be used with
-     * line_items. Usage with subscription_data is not yet available. If blank, Checkout will create
-     * a new customer object based on information provided during the session. The email stored on
-     * the customer will be used to prefill the email field on the Checkout page. If the customer
-     * changes their email on the Checkout page, the Customer object will be updated with the new
-     * email.
+     * ID of an existing customer, if one exists. If blank, Checkout will create a new customer
+     * object based on information provided during the session. The email stored on the customer
+     * will be used to prefill the email field on the Checkout page. If the customer changes their
+     * email on the Checkout page, the Customer object will be updated with the new email.
      */
     public Builder setCustomer(String customer) {
       this.customer = customer;
@@ -605,7 +602,7 @@ public class SessionCreateParams extends ApiRequestParams {
     /**
      * The Stripe account ID for which these funds are intended. For details, see the PaymentIntents
      * [use case for connected
-     * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
+     * accounts](/docs/payments/payment-intents/use-cases#connected-accounts).
      */
     @SerializedName("on_behalf_of")
     String onBehalfOf;
@@ -804,7 +801,7 @@ public class SessionCreateParams extends ApiRequestParams {
       /**
        * The Stripe account ID for which these funds are intended. For details, see the
        * PaymentIntents [use case for connected
-       * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
+       * accounts](/docs/payments/payment-intents/use-cases#connected-accounts).
        */
       public Builder setOnBehalfOf(String onBehalfOf) {
         this.onBehalfOf = onBehalfOf;
@@ -1284,14 +1281,14 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * Unix timestamp representing the end of the trial period the customer will get before being
-     * charged for the first time. Has to be at least 48h in the future.
+     * charged for the first time. Has to be at least 48 hours in the future.
      */
     @SerializedName("trial_end")
     Long trialEnd;
 
     /**
      * Integer representing the number of trial period days before the customer is charged for the
-     * first time.Has to be at least 1.
+     * first time. Has to be at least 1.
      */
     @SerializedName("trial_period_days")
     Long trialPeriodDays;
@@ -1410,7 +1407,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
       /**
        * Unix timestamp representing the end of the trial period the customer will get before being
-       * charged for the first time. Has to be at least 48h in the future.
+       * charged for the first time. Has to be at least 48 hours in the future.
        */
       public Builder setTrialEnd(Long trialEnd) {
         this.trialEnd = trialEnd;
@@ -1419,7 +1416,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
       /**
        * Integer representing the number of trial period days before the customer is charged for the
-       * first time.Has to be at least 1.
+       * first time. Has to be at least 1.
        */
       public Builder setTrialPeriodDays(Long trialPeriodDays) {
         this.trialPeriodDays = trialPeriodDays;

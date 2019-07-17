@@ -1076,10 +1076,14 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @EqualsAndHashCode(callSuper = false)
     public static class Card extends StripeObject {
       /**
-       * We strongly recommend that you rely on our SCA engine to automatically prompt your
-       * customers for authentication based on risk level and other requirements. However, if you
-       * wish to request authentication based on logic from your own fraud engine, provide this
-       * option. Permitted values include: `automatic`, `any`, or `challenge_only`.
+       * We strongly recommend that you rely on our SCA Engine to automatically prompt your
+       * customers for authentication based on risk level and [other
+       * requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish
+       * to request 3D Secure based on logic from your own fraud engine, provide this option.
+       * Permitted values include: `automatic`, `any`, or `challenge_only`. If not provided,
+       * defaults to `automatic`. Read our guide on [manually requesting 3D
+       * Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on
+       * how this configuration interacts with Radar and our SCA Engine.
        */
       @SerializedName("request_three_d_secure")
       String requestThreeDSecure;

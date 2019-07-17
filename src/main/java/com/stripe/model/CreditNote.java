@@ -121,6 +121,10 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   @SerializedName("type")
   String type;
 
+  /** The time that the credit note was voided. */
+  @SerializedName("voided_at")
+  Long voidedAt;
+
   /** Get id of expandable `customer` object. */
   public String getCustomer() {
     return (this.customer != null) ? this.customer.getId() : null;

@@ -502,6 +502,23 @@ public class PlanCreateParams extends ApiRequestParams {
     Map<String, String> metadata;
 
     /**
+     * The product's name, meant to be displayable to the customer. Applicable to both `service` and
+     * `good` types.
+     */
+    @SerializedName("name")
+    String name;
+
+    /**
+     * An arbitrary string to be displayed on your customer's credit card statement. This may be up
+     * to 22 characters. The statement description may not include "' characters, and will appear on
+     * your customer's statement in capital letters. Non-ASCII characters are automatically
+     * stripped. While most banks display this information consistently, some may display it
+     * incorrectly or not at all.
+     */
+    @SerializedName("statement_descriptor")
+    String statementDescriptor;
+
+    /**
      * A label that represents units of this product, such as seat(s), in Stripe and on customers’
      * receipts and invoices. Only available on products of type=`service`.
      */
@@ -513,11 +530,15 @@ public class PlanCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams,
         String id,
         Map<String, String> metadata,
+        String name,
+        String statementDescriptor,
         String unitLabel) {
       this.active = active;
       this.extraParams = extraParams;
       this.id = id;
       this.metadata = metadata;
+      this.name = name;
+      this.statementDescriptor = statementDescriptor;
       this.unitLabel = unitLabel;
     }
 
@@ -534,11 +555,22 @@ public class PlanCreateParams extends ApiRequestParams {
 
       private Map<String, String> metadata;
 
+      private String name;
+
+      private String statementDescriptor;
+
       private String unitLabel;
 
       /** Finalize and obtain parameter instance from this builder. */
       public Product build() {
-        return new Product(this.active, this.extraParams, this.id, this.metadata, this.unitLabel);
+        return new Product(
+            this.active,
+            this.extraParams,
+            this.id,
+            this.metadata,
+            this.name,
+            this.statementDescriptor,
+            this.unitLabel);
       }
 
       /** Whether the product is currently available for purchase. Defaults to `true`. */
@@ -605,6 +637,27 @@ public class PlanCreateParams extends ApiRequestParams {
           this.metadata = new HashMap<>();
         }
         this.metadata.putAll(map);
+        return this;
+      }
+
+      /**
+       * The product's name, meant to be displayable to the customer. Applicable to both `service`
+       * and `good` types.
+       */
+      public Builder setName(String name) {
+        this.name = name;
+        return this;
+      }
+
+      /**
+       * An arbitrary string to be displayed on your customer's credit card statement. This may be
+       * up to 22 characters. The statement description may not include "' characters, and will
+       * appear on your customer's statement in capital letters. Non-ASCII characters are
+       * automatically stripped. While most banks display this information consistently, some may
+       * display it incorrectly or not at all.
+       */
+      public Builder setStatementDescriptor(String statementDescriptor) {
+        this.statementDescriptor = statementDescriptor;
         return this;
       }
 
