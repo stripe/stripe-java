@@ -1,5 +1,8 @@
 # Changelog
 
+## 10.10.0 - 2019-07-17
+* [#806](https://github.com/stripe/stripe-java/pull/806) Add support for `voided_at` on `CreditNote`
+
 ## 10.9.1 - 2019-07-16
 * [#804](https://github.com/stripe/stripe-java/pull/804) Add support for unsetting metadata keys
 * [#805](https://github.com/stripe/stripe-java/pull/805) Bump dependencies
