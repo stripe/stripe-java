@@ -1,5 +1,11 @@
 # Changelog
 
+## 10.11.0 - 2019-07-19
+* [#808](https://github.com/stripe/stripe-java/pull/999)
+  * Add `off_session` to `SubscriptionItem` update
+  * Add `customer` when listing `CreditNote`
+  * Remove `challenge_only` enum value. This is technically a breaking change, but we've chosen to release this as a minor version in light of the fact that this value was virtually unused.
+
 ## 10.10.0 - 2019-07-17
 * [#806](https://github.com/stripe/stripe-java/pull/806) Add support for `voided_at` on `CreditNote`
 
