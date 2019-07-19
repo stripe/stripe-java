@@ -39,6 +39,9 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  @SerializedName("off_session")
+  Boolean offSession;
+
   @SerializedName("payment_behavior")
   PaymentBehavior paymentBehavior;
 
@@ -77,6 +80,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Map<String, String> metadata,
+      Boolean offSession,
       PaymentBehavior paymentBehavior,
       String plan,
       Boolean prorate,
@@ -87,6 +91,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
+    this.offSession = offSession;
     this.paymentBehavior = paymentBehavior;
     this.plan = plan;
     this.prorate = prorate;
@@ -108,6 +113,8 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
+    private Boolean offSession;
+
     private PaymentBehavior paymentBehavior;
 
     private String plan;
@@ -127,6 +134,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.metadata,
+          this.offSession,
           this.paymentBehavior,
           this.plan,
           this.prorate,
@@ -228,6 +236,11 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
         this.metadata = new HashMap<>();
       }
       this.metadata.putAll(map);
+      return this;
+    }
+
+    public Builder setOffSession(Boolean offSession) {
+      this.offSession = offSession;
       return this;
     }
 
