@@ -10,6 +10,10 @@ import java.util.List;
 import java.util.Map;
 
 public class CreditNoteListParams extends ApiRequestParams {
+  /** Only return credit notes for the customer specified by this customer ID. */
+  @SerializedName("customer")
+  String customer;
+
   /**
    * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the
    * list. For instance, if you make a list request and receive 100 objects, starting with
@@ -32,7 +36,7 @@ public class CreditNoteListParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** ID of the invoice. */
+  /** Only return credit notes for the invoice specified by this invoice ID. */
   @SerializedName("invoice")
   String invoice;
 
@@ -53,12 +57,14 @@ public class CreditNoteListParams extends ApiRequestParams {
   String startingAfter;
 
   private CreditNoteListParams(
+      String customer,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
       String invoice,
       Long limit,
       String startingAfter) {
+    this.customer = customer;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -72,6 +78,8 @@ public class CreditNoteListParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private String customer;
+
     private String endingBefore;
 
     private List<String> expand;
@@ -87,12 +95,19 @@ public class CreditNoteListParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public CreditNoteListParams build() {
       return new CreditNoteListParams(
+          this.customer,
           this.endingBefore,
           this.expand,
           this.extraParams,
           this.invoice,
           this.limit,
           this.startingAfter);
+    }
+
+    /** Only return credit notes for the customer specified by this customer ID. */
+    public Builder setCustomer(String customer) {
+      this.customer = customer;
+      return this;
     }
 
     /**
@@ -158,7 +173,7 @@ public class CreditNoteListParams extends ApiRequestParams {
       return this;
     }
 
-    /** ID of the invoice. */
+    /** Only return credit notes for the invoice specified by this invoice ID. */
     public Builder setInvoice(String invoice) {
       this.invoice = invoice;
       return this;
