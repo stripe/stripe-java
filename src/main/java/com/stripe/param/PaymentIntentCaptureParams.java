@@ -41,6 +41,13 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
+   * Extra information about a PaymentIntent. This will appear on your customer's statement when
+   * this PaymentIntent succeeds in creating a charge.
+   */
+  @SerializedName("statement_descriptor")
+  String statementDescriptor;
+
+  /**
    * The parameters used to automatically create a Transfer when the payment is captured. For more
    * information, see the PaymentIntents [use case for connected
    * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
@@ -53,11 +60,13 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
       Long applicationFeeAmount,
       List<String> expand,
       Map<String, Object> extraParams,
+      String statementDescriptor,
       TransferData transferData) {
     this.amountToCapture = amountToCapture;
     this.applicationFeeAmount = applicationFeeAmount;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.statementDescriptor = statementDescriptor;
     this.transferData = transferData;
   }
 
@@ -74,6 +83,8 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private String statementDescriptor;
+
     private TransferData transferData;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -83,6 +94,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
           this.applicationFeeAmount,
           this.expand,
           this.extraParams,
+          this.statementDescriptor,
           this.transferData);
     }
 
@@ -156,6 +168,15 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * Extra information about a PaymentIntent. This will appear on your customer's statement when
+     * this PaymentIntent succeeds in creating a charge.
+     */
+    public Builder setStatementDescriptor(String statementDescriptor) {
+      this.statementDescriptor = statementDescriptor;
       return this;
     }
 
