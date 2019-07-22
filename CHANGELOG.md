@@ -1,5 +1,10 @@
 # Changelog
 
+## 10.12.0 - 2019-07-22
+* [#809](https://github.com/stripe/stripe-java/pull/809)
+  * Add support for `statement_descriptor` on `PaymentIntent` capture
+  * Add support for unsetting `setup_future_usage` on `PaymentIntent`
+
 ## 10.11.0 - 2019-07-19
 * [#808](https://github.com/stripe/stripe-java/pull/999)
   * Add `off_session` to `SubscriptionItem` update
