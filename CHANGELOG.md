@@ -1,5 +1,8 @@
 # Changelog
 
+## 10.12.1 - 2019-07-30
+* [#812](https://github.com/stripe/stripe-java/pull/812) Fix potential `NullPointerException` when calling `getRawJsonObject()`
+
 ## 10.12.0 - 2019-07-22
 * [#809](https://github.com/stripe/stripe-java/pull/809)
   * Add support for `statement_descriptor` on `PaymentIntent` capture
