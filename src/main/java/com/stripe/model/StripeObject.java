@@ -49,7 +49,7 @@ public abstract class StripeObject {
    */
   public JsonObject getRawJsonObject() {
     // Lazily initialize this the first time the getter is called.
-    if (this.rawJsonObject == null) {
+    if ((this.rawJsonObject == null) && (this.getLastResponse() != null)) {
       this.rawJsonObject =
           ApiResource.GSON.fromJson(this.getLastResponse().body(), JsonObject.class);
     }
