@@ -1,5 +1,8 @@
 # Changelog
 
+## 10.12.2 - 2019-08-07
+* [#818](https://github.com/stripe/stripe-java/pull/818) Set default timeouts in `RequestOptionsBuilder`
+
 ## 10.12.1 - 2019-07-30
 * [#812](https://github.com/stripe/stripe-java/pull/812) Fix potential `NullPointerException` when calling `getRawJsonObject()`
 
