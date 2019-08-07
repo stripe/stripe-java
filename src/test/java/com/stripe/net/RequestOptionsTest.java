@@ -3,6 +3,7 @@ package com.stripe.net;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNull;
 
+import com.stripe.Stripe;
 import org.junit.jupiter.api.Test;
 
 public class RequestOptionsTest {
@@ -30,8 +31,8 @@ public class RequestOptionsTest {
     assertNull(optsRebuilt.getClientId());
     assertNull(optsRebuilt.getIdempotencyKey());
     assertNull(optsRebuilt.getStripeVersionOverride());
-    assertEquals(0, optsRebuilt.getReadTimeout());
-    assertEquals(0, optsRebuilt.getConnectTimeout());
+    assertEquals(Stripe.DEFAULT_CONNECT_TIMEOUT, optsRebuilt.getConnectTimeout());
+    assertEquals(Stripe.DEFAULT_READ_TIMEOUT, optsRebuilt.getReadTimeout());
   }
 
   @Test
@@ -73,5 +74,13 @@ public class RequestOptionsTest {
 
     assertEquals(opts1, opts2);
     assertEquals(opts1.hashCode(), opts2.hashCode());
+  }
+
+  @Test
+  public void testTimeoutDefaultValues() {
+    RequestOptions opts = RequestOptions.builder().build();
+
+    assertEquals(Stripe.DEFAULT_CONNECT_TIMEOUT, opts.getConnectTimeout());
+    assertEquals(Stripe.DEFAULT_READ_TIMEOUT, opts.getReadTimeout());
   }
 }
