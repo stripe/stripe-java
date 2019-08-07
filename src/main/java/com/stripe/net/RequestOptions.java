@@ -104,12 +104,14 @@ public class RequestOptions {
     private int readTimeout;
 
     /**
-     * Constructs a request options builder with the global parameters (API key, client ID and API
-     * version) as default values.
+     * Constructs a request options builder with the global parameters (API key and client ID) as
+     * default values.
      */
     public RequestOptionsBuilder() {
       this.apiKey = Stripe.apiKey;
       this.clientId = Stripe.clientId;
+      this.connectTimeout = Stripe.DEFAULT_CONNECT_TIMEOUT;
+      this.readTimeout = Stripe.DEFAULT_READ_TIMEOUT;
     }
 
     public String getApiKey() {
