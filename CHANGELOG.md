@@ -1,5 +1,12 @@
 # Changelog
 
+## 10.13.0 - 2019-08-08
+* [#819](https://github.com/stripe/stripe-java/pull/819)
+  * Add support for `payment_method_details[card][moto]` on `Charge`
+  * Add support for `statement_descriptor_suffix` on `Charge` and `PaymentIntent`
+  * Add support `subscription_data[application_fee_percent]` on Checkout `Session`
+  * Rename `uk_credit_transfer` to `gbp_credit_transfer` on Source. This is technically a breaking change, but we've chosen to release this as a minor version as the previous name was virtually unused.
+
 ## 10.12.2 - 2019-08-07
 * [#818](https://github.com/stripe/stripe-java/pull/818) Set default timeouts in `RequestOptionsBuilder`
 
