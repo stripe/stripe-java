@@ -381,8 +381,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   Long subscriptionProrationDate;
 
   /**
-   * Total of all subscriptions, invoice items, and prorations on the invoice before any discount is
-   * applied.
+   * Total of all subscriptions, invoice items, and prorations on the invoice before any discount or
+   * tax is applied.
    */
   @SerializedName("subtotal")
   Long subtotal;
@@ -402,7 +402,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("threshold_reason")
   ThresholdReason thresholdReason;
 
-  /** Total after discount. */
+  /** Total after discounts and taxes. */
   @SerializedName("total")
   Long total;
 

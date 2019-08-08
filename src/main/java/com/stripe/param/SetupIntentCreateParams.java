@@ -74,6 +74,12 @@ public class SetupIntentCreateParams extends ApiRequestParams {
   @SerializedName("payment_method_types")
   List<String> paymentMethodTypes;
 
+  /**
+   * The URL to redirect your customer back to after they authenticate or cancel their payment on
+   * the payment method's app or site. If you'd prefer to redirect to a mobile application, you can
+   * alternatively supply an application URI scheme. This parameter can only be used with
+   * [`confirm=true`](https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm).
+   */
   @SerializedName("return_url")
   String returnUrl;
 
@@ -313,6 +319,12 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * The URL to redirect your customer back to after they authenticate or cancel their payment on
+     * the payment method's app or site. If you'd prefer to redirect to a mobile application, you
+     * can alternatively supply an application URI scheme. This parameter can only be used with
+     * [`confirm=true`](https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm).
+     */
     public Builder setReturnUrl(String returnUrl) {
       this.returnUrl = returnUrl;
       return this;

@@ -20,7 +20,7 @@ public class BalanceTransactionTest extends BaseStripeTest {
 
     assertNotNull(balanceTransaction);
     verifyRequest(
-        ApiResource.RequestMethod.GET, String.format("/v1/balance/history/%s", RESOURCE_ID));
+        ApiResource.RequestMethod.GET, String.format("/v1/balance_transactions/%s", RESOURCE_ID));
   }
 
   @Test
@@ -31,6 +31,6 @@ public class BalanceTransactionTest extends BaseStripeTest {
     final BalanceTransactionCollection balanceTransactions = BalanceTransaction.list(params);
 
     assertNotNull(balanceTransactions);
-    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/balance/history"), params);
+    verifyRequest(ApiResource.RequestMethod.GET, String.format("/v1/balance_transactions"), params);
   }
 }

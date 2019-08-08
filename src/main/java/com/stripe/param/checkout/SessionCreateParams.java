@@ -4,6 +4,7 @@ package com.stripe.param.checkout;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -66,7 +67,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
   /**
    * A list of items the customer is purchasing. Use this parameter for one-time payments or adding
-   * invoice line items to a subscription (used in conjunction with `subscription_data`.
+   * invoice line items to a subscription (used in conjunction with `subscription_data`).
    */
   @SerializedName("line_items")
   List<LineItem> lineItems;
@@ -1257,6 +1258,17 @@ public class SessionCreateParams extends ApiRequestParams {
 
   public static class SubscriptionData {
     /**
+     * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
+     * the percentage of the subscription invoice subtotal that will be transferred to the
+     * application owner's Stripe account. To use an application fee percent, the request must be
+     * made on behalf of another account, using the `Stripe-Account` header or an OAuth key. For
+     * more information, see the application fees
+     * [documentation](https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions).
+     */
+    @SerializedName("application_fee_percent")
+    BigDecimal applicationFeePercent;
+
+    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -1294,11 +1306,13 @@ public class SessionCreateParams extends ApiRequestParams {
     Long trialPeriodDays;
 
     private SubscriptionData(
+        BigDecimal applicationFeePercent,
         Map<String, Object> extraParams,
         List<Item> items,
         Map<String, String> metadata,
         Long trialEnd,
         Long trialPeriodDays) {
+      this.applicationFeePercent = applicationFeePercent;
       this.extraParams = extraParams;
       this.items = items;
       this.metadata = metadata;
@@ -1311,6 +1325,8 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     public static class Builder {
+      private BigDecimal applicationFeePercent;
+
       private Map<String, Object> extraParams;
 
       private List<Item> items;
@@ -1324,7 +1340,25 @@ public class SessionCreateParams extends ApiRequestParams {
       /** Finalize and obtain parameter instance from this builder. */
       public SubscriptionData build() {
         return new SubscriptionData(
-            this.extraParams, this.items, this.metadata, this.trialEnd, this.trialPeriodDays);
+            this.applicationFeePercent,
+            this.extraParams,
+            this.items,
+            this.metadata,
+            this.trialEnd,
+            this.trialPeriodDays);
+      }
+
+      /**
+       * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
+       * the percentage of the subscription invoice subtotal that will be transferred to the
+       * application owner's Stripe account. To use an application fee percent, the request must be
+       * made on behalf of another account, using the `Stripe-Account` header or an OAuth key. For
+       * more information, see the application fees
+       * [documentation](https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions).
+       */
+      public Builder setApplicationFeePercent(BigDecimal applicationFeePercent) {
+        this.applicationFeePercent = applicationFeePercent;
+        return this;
       }
 
       /**

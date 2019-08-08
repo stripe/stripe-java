@@ -258,11 +258,19 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   ExpandableField<PaymentSource> source;
 
   /**
-   * Extra information about a PaymentIntent. This will appear on your customer's statement when
-   * this PaymentIntent succeeds in creating a charge.
+   * For non-card charges, you can use this value as the complete description that appears on your
+   * customers’ statements. Must contain at least one letter, maximum 22 characters.
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
+
+  /**
+   * Provides information about a card payment that customers see on their statements. Concatenated
+   * with the prefix (shortened descriptor) or statement descriptor that’s set on the account to
+   * form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
+   */
+  @SerializedName("statement_descriptor_suffix")
+  String statementDescriptorSuffix;
 
   /**
    * Status of this PaymentIntent, one of `requires_payment_method`, `requires_confirmation`,

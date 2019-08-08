@@ -125,19 +125,20 @@ public class ChargeCreateParams extends ApiRequestParams {
   String source;
 
   /**
-   * An arbitrary string to be used as the dynamic portion of the full descriptor displayed on your
-   * customer's credit card statement. This value will be prefixed by your [account's statement
-   * descriptor](https://stripe.com/docs/charges#dynamic-statement-descriptor). As an example, if
-   * your account's statement descriptor is `RUNCLUB` and the item you're charging for is a race
-   * ticket, you may want to specify a `statement_descriptor` of `5K RACE`, so that the resulting
-   * full descriptor would be `RUNCLUB* 5K RACE`. The full descriptor may be up to *22 characters*.
-   * This value must contain at least one letter, may not include `"'` characters, and will appear
-   * on your customer's statement in capital letters. Non-ASCII characters are automatically
-   * stripped. While most banks display this information consistently, some may display it
-   * incorrectly or not at all.
+   * For card charges, use `statement_descriptor_suffix` instead. Otherwise, you can use this value
+   * as the complete description of a charge on your customers’ statements. Must contain at least
+   * one letter, maximum 22 characters.
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
+
+  /**
+   * Provides information about the charge that customers see on their statements. Concatenated with
+   * the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the
+   * complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
+   */
+  @SerializedName("statement_descriptor_suffix")
+  String statementDescriptorSuffix;
 
   /**
    * An optional dictionary including the account to automatically transfer to as part of a
@@ -171,6 +172,7 @@ public class ChargeCreateParams extends ApiRequestParams {
       Shipping shipping,
       String source,
       String statementDescriptor,
+      String statementDescriptorSuffix,
       TransferData transferData,
       String transferGroup) {
     this.amount = amount;
@@ -189,6 +191,7 @@ public class ChargeCreateParams extends ApiRequestParams {
     this.shipping = shipping;
     this.source = source;
     this.statementDescriptor = statementDescriptor;
+    this.statementDescriptorSuffix = statementDescriptorSuffix;
     this.transferData = transferData;
     this.transferGroup = transferGroup;
   }
@@ -230,6 +233,8 @@ public class ChargeCreateParams extends ApiRequestParams {
 
     private String statementDescriptor;
 
+    private String statementDescriptorSuffix;
+
     private TransferData transferData;
 
     private String transferGroup;
@@ -253,6 +258,7 @@ public class ChargeCreateParams extends ApiRequestParams {
           this.shipping,
           this.source,
           this.statementDescriptor,
+          this.statementDescriptorSuffix,
           this.transferData,
           this.transferGroup);
     }
@@ -455,19 +461,23 @@ public class ChargeCreateParams extends ApiRequestParams {
     }
 
     /**
-     * An arbitrary string to be used as the dynamic portion of the full descriptor displayed on
-     * your customer's credit card statement. This value will be prefixed by your [account's
-     * statement descriptor](https://stripe.com/docs/charges#dynamic-statement-descriptor). As an
-     * example, if your account's statement descriptor is `RUNCLUB` and the item you're charging for
-     * is a race ticket, you may want to specify a `statement_descriptor` of `5K RACE`, so that the
-     * resulting full descriptor would be `RUNCLUB* 5K RACE`. The full descriptor may be up to *22
-     * characters*. This value must contain at least one letter, may not include `"'` characters,
-     * and will appear on your customer's statement in capital letters. Non-ASCII characters are
-     * automatically stripped. While most banks display this information consistently, some may
-     * display it incorrectly or not at all.
+     * For card charges, use `statement_descriptor_suffix` instead. Otherwise, you can use this
+     * value as the complete description of a charge on your customers’ statements. Must contain at
+     * least one letter, maximum 22 characters.
      */
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
+      return this;
+    }
+
+    /**
+     * Provides information about the charge that customers see on their statements. Concatenated
+     * with the prefix (shortened descriptor) or statement descriptor that’s set on the account to
+     * form the complete statement descriptor. Maximum 22 characters for the concatenated
+     * descriptor.
+     */
+    public Builder setStatementDescriptorSuffix(String statementDescriptorSuffix) {
+      this.statementDescriptorSuffix = statementDescriptorSuffix;
       return this;
     }
 
