@@ -21,7 +21,9 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class CreditNote extends ApiResource implements HasId, MetadataStore<CreditNote> {
-  /** The integer amount in **%s** representing the total amount of the credit note. */
+  /**
+   * The integer amount in **%s** representing the total amount of the credit note, including tax.
+   */
   @SerializedName("amount")
   Long amount;
 

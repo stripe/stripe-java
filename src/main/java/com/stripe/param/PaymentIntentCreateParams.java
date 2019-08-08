@@ -45,9 +45,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   CaptureMethod captureMethod;
 
   /**
-   * Set to `true` to attempt to confirm this PaymentIntent immediately. This parameter defaults to
-   * `false`. If the payment method attached is a card, a return_url may be provided in case
-   * additional authentication is required.
+   * Set to `true` to attempt to [confirm](https://stripe.com/docs/api/payment_intents/confirm) this
+   * PaymentIntent immediately. This parameter defaults to `false`. When creating and confirming a
+   * PaymentIntent at the same time, parameters available in the
+   * [confirm](https://stripe.com/docs/api/payment_intents/confirm) API may also be provided.
    */
   @SerializedName("confirm")
   Boolean confirm;
@@ -115,7 +116,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
    * Set to `true` to indicate that the customer is not in your checkout flow during this payment
    * attempt, and therefore is unable to authenticate. This parameter is intended for scenarios
    * where you collect card details and [charge them
-   * later](https://stripe.com/docs/payments/cards/charging-saved-cards).
+   * later](https://stripe.com/docs/payments/cards/charging-saved-cards). This parameter can only be
+   * used with
+   * [`confirm=true`](https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm).
    */
   @SerializedName("off_session")
   Object offSession;
@@ -153,7 +156,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   /**
    * The URL to redirect your customer back to after they authenticate or cancel their payment on
    * the payment method's app or site. If you'd prefer to redirect to a mobile application, you can
-   * alternatively supply an application URI scheme. This param can only be used if `confirm=true`.
+   * alternatively supply an application URI scheme. This parameter can only be used with
+   * [`confirm=true`](https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm).
    */
   @SerializedName("return_url")
   String returnUrl;
@@ -206,11 +210,19 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   String source;
 
   /**
-   * Extra information about a PaymentIntent. This will appear on your customer's statement when
-   * this PaymentIntent succeeds in creating a charge.
+   * For non-card charges, you can use this value as the complete description that appears on your
+   * customers’ statements. Must contain at least one letter, maximum 22 characters.
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
+
+  /**
+   * Provides information about a card payment that customers see on their statements. Concatenated
+   * with the prefix (shortened descriptor) or statement descriptor that’s set on the account to
+   * form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
+   */
+  @SerializedName("statement_descriptor_suffix")
+  String statementDescriptorSuffix;
 
   /**
    * The parameters used to automatically create a Transfer when the payment succeeds. For more
@@ -253,6 +265,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       Shipping shipping,
       String source,
       String statementDescriptor,
+      String statementDescriptorSuffix,
       TransferData transferData,
       String transferGroup) {
     this.amount = amount;
@@ -278,6 +291,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     this.shipping = shipping;
     this.source = source;
     this.statementDescriptor = statementDescriptor;
+    this.statementDescriptorSuffix = statementDescriptorSuffix;
     this.transferData = transferData;
     this.transferGroup = transferGroup;
   }
@@ -333,6 +347,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     private String statementDescriptor;
 
+    private String statementDescriptorSuffix;
+
     private TransferData transferData;
 
     private String transferGroup;
@@ -363,6 +379,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           this.shipping,
           this.source,
           this.statementDescriptor,
+          this.statementDescriptorSuffix,
           this.transferData,
           this.transferGroup);
     }
@@ -407,9 +424,10 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Set to `true` to attempt to confirm this PaymentIntent immediately. This parameter defaults
-     * to `false`. If the payment method attached is a card, a return_url may be provided in case
-     * additional authentication is required.
+     * Set to `true` to attempt to [confirm](https://stripe.com/docs/api/payment_intents/confirm)
+     * this PaymentIntent immediately. This parameter defaults to `false`. When creating and
+     * confirming a PaymentIntent at the same time, parameters available in the
+     * [confirm](https://stripe.com/docs/api/payment_intents/confirm) API may also be provided.
      */
     public Builder setConfirm(Boolean confirm) {
       this.confirm = confirm;
@@ -545,7 +563,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      * Set to `true` to indicate that the customer is not in your checkout flow during this payment
      * attempt, and therefore is unable to authenticate. This parameter is intended for scenarios
      * where you collect card details and [charge them
-     * later](https://stripe.com/docs/payments/cards/charging-saved-cards).
+     * later](https://stripe.com/docs/payments/cards/charging-saved-cards). This parameter can only
+     * be used with
+     * [`confirm=true`](https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm).
      */
     public Builder setOffSession(OffSession offSession) {
       this.offSession = offSession;
@@ -556,7 +576,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      * Set to `true` to indicate that the customer is not in your checkout flow during this payment
      * attempt, and therefore is unable to authenticate. This parameter is intended for scenarios
      * where you collect card details and [charge them
-     * later](https://stripe.com/docs/payments/cards/charging-saved-cards).
+     * later](https://stripe.com/docs/payments/cards/charging-saved-cards). This parameter can only
+     * be used with
+     * [`confirm=true`](https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm).
      */
     public Builder setOffSession(Boolean offSession) {
       this.offSession = offSession;
@@ -623,8 +645,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     /**
      * The URL to redirect your customer back to after they authenticate or cancel their payment on
      * the payment method's app or site. If you'd prefer to redirect to a mobile application, you
-     * can alternatively supply an application URI scheme. This param can only be used if
-     * `confirm=true`.
+     * can alternatively supply an application URI scheme. This parameter can only be used with
+     * [`confirm=true`](https://stripe.com/docs/api/payment_intents/create#create_payment_intent-confirm).
      */
     public Builder setReturnUrl(String returnUrl) {
       this.returnUrl = returnUrl;
@@ -687,11 +709,22 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Extra information about a PaymentIntent. This will appear on your customer's statement when
-     * this PaymentIntent succeeds in creating a charge.
+     * For non-card charges, you can use this value as the complete description that appears on your
+     * customers’ statements. Must contain at least one letter, maximum 22 characters.
      */
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
+      return this;
+    }
+
+    /**
+     * Provides information about a card payment that customers see on their statements.
+     * Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the
+     * account to form the complete statement descriptor. Maximum 22 characters for the concatenated
+     * descriptor.
+     */
+    public Builder setStatementDescriptorSuffix(String statementDescriptorSuffix) {
+      this.statementDescriptorSuffix = statementDescriptorSuffix;
       return this;
     }
 

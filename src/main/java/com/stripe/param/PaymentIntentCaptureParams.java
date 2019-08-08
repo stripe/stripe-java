@@ -41,11 +41,19 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * Extra information about a PaymentIntent. This will appear on your customer's statement when
-   * this PaymentIntent succeeds in creating a charge.
+   * For non-card charges, you can use this value as the complete description that appears on your
+   * customers’ statements. Must contain at least one letter, maximum 22 characters.
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
+
+  /**
+   * Provides information about a card payment that customers see on their statements. Concatenated
+   * with the prefix (shortened descriptor) or statement descriptor that’s set on the account to
+   * form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
+   */
+  @SerializedName("statement_descriptor_suffix")
+  String statementDescriptorSuffix;
 
   /**
    * The parameters used to automatically create a Transfer when the payment is captured. For more
@@ -61,12 +69,14 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       String statementDescriptor,
+      String statementDescriptorSuffix,
       TransferData transferData) {
     this.amountToCapture = amountToCapture;
     this.applicationFeeAmount = applicationFeeAmount;
     this.expand = expand;
     this.extraParams = extraParams;
     this.statementDescriptor = statementDescriptor;
+    this.statementDescriptorSuffix = statementDescriptorSuffix;
     this.transferData = transferData;
   }
 
@@ -85,6 +95,8 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
 
     private String statementDescriptor;
 
+    private String statementDescriptorSuffix;
+
     private TransferData transferData;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -95,6 +107,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.statementDescriptor,
+          this.statementDescriptorSuffix,
           this.transferData);
     }
 
@@ -172,11 +185,22 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
     }
 
     /**
-     * Extra information about a PaymentIntent. This will appear on your customer's statement when
-     * this PaymentIntent succeeds in creating a charge.
+     * For non-card charges, you can use this value as the complete description that appears on your
+     * customers’ statements. Must contain at least one letter, maximum 22 characters.
      */
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
+      return this;
+    }
+
+    /**
+     * Provides information about a card payment that customers see on their statements.
+     * Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the
+     * account to form the complete statement descriptor. Maximum 22 characters for the concatenated
+     * descriptor.
+     */
+    public Builder setStatementDescriptorSuffix(String statementDescriptorSuffix) {
+      this.statementDescriptorSuffix = statementDescriptorSuffix;
       return this;
     }
 

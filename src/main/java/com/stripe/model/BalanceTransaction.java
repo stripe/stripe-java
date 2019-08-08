@@ -117,6 +117,9 @@ public class BalanceTransaction extends ApiResource implements HasId {
    * Returns a list of transactions that have contributed to the Stripe account balance (e.g.,
    * charges, transfers, and so forth). The transactions are returned in sorted order, with the most
    * recent transactions appearing first.
+   *
+   * <p>Note that this endpoint was previously called “Balance history” and used the path <code>
+   * /v1/balance/history</code>.
    */
   public static BalanceTransactionCollection list(Map<String, Object> params)
       throws StripeException {
@@ -127,10 +130,13 @@ public class BalanceTransaction extends ApiResource implements HasId {
    * Returns a list of transactions that have contributed to the Stripe account balance (e.g.,
    * charges, transfers, and so forth). The transactions are returned in sorted order, with the most
    * recent transactions appearing first.
+   *
+   * <p>Note that this endpoint was previously called “Balance history” and used the path <code>
+   * /v1/balance/history</code>.
    */
   public static BalanceTransactionCollection list(
       Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/balance/history");
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/balance_transactions");
     return requestCollection(url, params, BalanceTransactionCollection.class, options);
   }
 
@@ -138,6 +144,9 @@ public class BalanceTransaction extends ApiResource implements HasId {
    * Returns a list of transactions that have contributed to the Stripe account balance (e.g.,
    * charges, transfers, and so forth). The transactions are returned in sorted order, with the most
    * recent transactions appearing first.
+   *
+   * <p>Note that this endpoint was previously called “Balance history” and used the path <code>
+   * /v1/balance/history</code>.
    */
   public static BalanceTransactionCollection list(BalanceTransactionListParams params)
       throws StripeException {
@@ -148,36 +157,55 @@ public class BalanceTransaction extends ApiResource implements HasId {
    * Returns a list of transactions that have contributed to the Stripe account balance (e.g.,
    * charges, transfers, and so forth). The transactions are returned in sorted order, with the most
    * recent transactions appearing first.
+   *
+   * <p>Note that this endpoint was previously called “Balance history” and used the path <code>
+   * /v1/balance/history</code>.
    */
   public static BalanceTransactionCollection list(
       BalanceTransactionListParams params, RequestOptions options) throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/balance/history");
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/balance_transactions");
     return requestCollection(url, params, BalanceTransactionCollection.class, options);
   }
 
-  /** Retrieves the balance transaction with the given ID. */
+  /**
+   * Retrieves the balance transaction with the given ID.
+   *
+   * <p>Note that this endpoint previously used the path <code>/v1/balance/history/:id</code>.
+   */
   public static BalanceTransaction retrieve(String id) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves the balance transaction with the given ID. */
+  /**
+   * Retrieves the balance transaction with the given ID.
+   *
+   * <p>Note that this endpoint previously used the path <code>/v1/balance/history/:id</code>.
+   */
   public static BalanceTransaction retrieve(String id, RequestOptions options)
       throws StripeException {
     return retrieve(id, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves the balance transaction with the given ID. */
+  /**
+   * Retrieves the balance transaction with the given ID.
+   *
+   * <p>Note that this endpoint previously used the path <code>/v1/balance/history/:id</code>.
+   */
   public static BalanceTransaction retrieve(
       String id, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         String.format(
             "%s%s",
             Stripe.getApiBase(),
-            String.format("/v1/balance/history/%s", ApiResource.urlEncodeId(id)));
+            String.format("/v1/balance_transactions/%s", ApiResource.urlEncodeId(id)));
     return request(ApiResource.RequestMethod.GET, url, params, BalanceTransaction.class, options);
   }
 
-  /** Retrieves the balance transaction with the given ID. */
+  /**
+   * Retrieves the balance transaction with the given ID.
+   *
+   * <p>Note that this endpoint previously used the path <code>/v1/balance/history/:id</code>.
+   */
   public static BalanceTransaction retrieve(
       String id, BalanceTransactionRetrieveParams params, RequestOptions options)
       throws StripeException {
@@ -185,7 +213,7 @@ public class BalanceTransaction extends ApiResource implements HasId {
         String.format(
             "%s%s",
             Stripe.getApiBase(),
-            String.format("/v1/balance/history/%s", ApiResource.urlEncodeId(id)));
+            String.format("/v1/balance_transactions/%s", ApiResource.urlEncodeId(id)));
     return request(ApiResource.RequestMethod.GET, url, params, BalanceTransaction.class, options);
   }
 

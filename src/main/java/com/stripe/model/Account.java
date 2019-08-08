@@ -103,7 +103,7 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
   @SerializedName("requirements")
   Requirements requirements;
 
-  /** Account options for customizing how the account functions within Stripe. */
+  /** Options for customizing how the account functions within Stripe. */
   @SerializedName("settings")
   Settings settings;
 

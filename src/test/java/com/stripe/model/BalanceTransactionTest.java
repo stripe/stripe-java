@@ -11,7 +11,7 @@ import org.junit.jupiter.api.Test;
 public class BalanceTransactionTest extends BaseStripeTest {
   @Test
   public void testDeserialize() throws Exception {
-    final String data = getFixture("/v1/balance/history/txn_123");
+    final String data = getFixture("/v1/balance_transactions/txn_123");
     final BalanceTransaction resource = ApiResource.GSON.fromJson(data, BalanceTransaction.class);
     assertNotNull(resource);
     assertNotNull(resource.getId());

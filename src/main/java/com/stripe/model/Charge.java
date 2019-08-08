@@ -270,11 +270,20 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
   ExpandableField<Transfer> sourceTransfer;
 
   /**
-   * Extra information about a charge. This will appear on your customer's credit card statement. It
-   * must contain at least one letter.
+   * For card charges, use `statement_descriptor_suffix` instead. Otherwise, you can use this value
+   * as the complete description of a charge on your customers’ statements. Must contain at least
+   * one letter, maximum 22 characters.
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
+
+  /**
+   * Provides information about the charge that customers see on their statements. Concatenated with
+   * the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the
+   * complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
+   */
+  @SerializedName("statement_descriptor_suffix")
+  String statementDescriptorSuffix;
 
   /** The status of the payment is either `succeeded`, `pending`, or `failed`. */
   @SerializedName("status")
@@ -1211,6 +1220,10 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
       /** The last four digits of the card. */
       @SerializedName("last4")
       String last4;
+
+      /** True if this payment was marked as MOTO and out of scope for SCA. */
+      @SerializedName("moto")
+      Boolean moto;
 
       /** Populated if this transaction used 3D Secure authentication. */
       @SerializedName("three_d_secure")
