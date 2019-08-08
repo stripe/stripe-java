@@ -6,7 +6,6 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.StripeException;
 import com.stripe.model.SubscriptionSchedule;
 import com.stripe.model.SubscriptionScheduleCollection;
-import com.stripe.model.SubscriptionScheduleRevisionCollection;
 import com.stripe.net.ApiResource;
 import java.util.HashMap;
 import java.util.Map;
@@ -99,22 +98,6 @@ public class SubscriptionScheduleTest extends BaseStripeTest {
     verifyRequest(
         ApiResource.RequestMethod.POST,
         String.format("/v1/subscription_schedules/%s", schedule.getId()),
-        params);
-  }
-
-  @Test
-  public void testRevisions() throws StripeException {
-    final SubscriptionSchedule schedule = getSubscriptionScheduleFixture();
-
-    final Map<String, Object> params = new HashMap<>();
-    params.put("limit", 1);
-
-    final SubscriptionScheduleRevisionCollection revisions = schedule.revisions(params);
-
-    assertNotNull(revisions);
-    verifyRequest(
-        ApiResource.RequestMethod.GET,
-        String.format("/v1/subscription_schedules/%s/revisions", schedule.getId()),
         params);
   }
 }
