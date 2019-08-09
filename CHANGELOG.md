@@ -1,5 +1,10 @@
 # Changelog
 
+## 10.14.0 - 2019-08-08
+* [#820](https://github.com/stripe/stripe-java/pull/820)
+  * Add support for unsetting `receipt_email` on `PaymentIntent`
+  * Remove support for `SubscriptionScheduleRevision`. This is technicall a breaking change, but we've chosen to release this as a minor version as this resource and its APIs were virtually unused.
+
 ## 10.13.0 - 2019-08-08
 * [#819](https://github.com/stripe/stripe-java/pull/819)
   * Add support for `payment_method_details[card][moto]` on `Charge`
