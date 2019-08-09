@@ -47,7 +47,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
   /** Email address that the receipt for the resulting payment will be sent to. */
   @SerializedName("receipt_email")
-  String receiptEmail;
+  Object receiptEmail;
 
   /**
    * The URL to redirect your customer back to after they authenticate or cancel their payment on
@@ -112,7 +112,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       Object offSession,
       String paymentMethod,
       PaymentMethodOptions paymentMethodOptions,
-      String receiptEmail,
+      Object receiptEmail,
       String returnUrl,
       Boolean savePaymentMethod,
       ApiRequestParams.EnumParam setupFutureUsage,
@@ -146,7 +146,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
     private PaymentMethodOptions paymentMethodOptions;
 
-    private String receiptEmail;
+    private Object receiptEmail;
 
     private String returnUrl;
 
@@ -260,6 +260,12 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     /** Payment-method-specific configuration for this PaymentIntent. */
     public Builder setPaymentMethodOptions(PaymentMethodOptions paymentMethodOptions) {
       this.paymentMethodOptions = paymentMethodOptions;
+      return this;
+    }
+
+    /** Email address that the receipt for the resulting payment will be sent to. */
+    public Builder setReceiptEmail(EmptyParam receiptEmail) {
+      this.receiptEmail = receiptEmail;
       return this;
     }
 

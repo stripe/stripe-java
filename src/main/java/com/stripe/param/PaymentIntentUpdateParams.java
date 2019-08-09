@@ -79,7 +79,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
   /** Email address that the receipt for the resulting payment will be sent to. */
   @SerializedName("receipt_email")
-  String receiptEmail;
+  Object receiptEmail;
 
   /**
    * If the PaymentIntent has a `payment_method` and a `customer` or if you're attaching a payment
@@ -172,7 +172,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       Map<String, String> metadata,
       String paymentMethod,
       List<String> paymentMethodTypes,
-      String receiptEmail,
+      Object receiptEmail,
       Boolean savePaymentMethod,
       ApiRequestParams.EnumParam setupFutureUsage,
       Object shipping,
@@ -227,7 +227,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     private List<String> paymentMethodTypes;
 
-    private String receiptEmail;
+    private Object receiptEmail;
 
     private Boolean savePaymentMethod;
 
@@ -434,6 +434,12 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         this.paymentMethodTypes = new ArrayList<>();
       }
       this.paymentMethodTypes.addAll(elements);
+      return this;
+    }
+
+    /** Email address that the receipt for the resulting payment will be sent to. */
+    public Builder setReceiptEmail(EmptyParam receiptEmail) {
+      this.receiptEmail = receiptEmail;
       return this;
     }
 

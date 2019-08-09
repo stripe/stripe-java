@@ -12,7 +12,6 @@ import com.stripe.param.SubscriptionScheduleCreateParams;
 import com.stripe.param.SubscriptionScheduleListParams;
 import com.stripe.param.SubscriptionScheduleReleaseParams;
 import com.stripe.param.SubscriptionScheduleRetrieveParams;
-import com.stripe.param.SubscriptionScheduleRevisionsParams;
 import com.stripe.param.SubscriptionScheduleUpdateParams;
 import java.math.BigDecimal;
 import java.util.List;
@@ -150,10 +149,6 @@ public class SubscriptionSchedule extends ApiResource
    */
   @SerializedName("renewal_interval")
   RenewalInterval renewalInterval;
-
-  /** ID of the current revision of the subscription schedule. */
-  @SerializedName("revision")
-  String revision;
 
   /** Possible values are `not_started`, `active`, `completed`, `released`, and `canceled`. */
   @SerializedName("status")
@@ -528,47 +523,6 @@ public class SubscriptionSchedule extends ApiResource
                 "/v1/subscription_schedules/%s/release", ApiResource.urlEncodeId(this.getId())));
     return request(
         ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
-  }
-
-  /** Retrieves the list of subscription schedule revisions for a subscription schedule. */
-  public SubscriptionScheduleRevisionCollection revisions() throws StripeException {
-    return revisions((Map<String, Object>) null, (RequestOptions) null);
-  }
-
-  /** Retrieves the list of subscription schedule revisions for a subscription schedule. */
-  public SubscriptionScheduleRevisionCollection revisions(Map<String, Object> params)
-      throws StripeException {
-    return revisions(params, (RequestOptions) null);
-  }
-
-  /** Retrieves the list of subscription schedule revisions for a subscription schedule. */
-  public SubscriptionScheduleRevisionCollection revisions(
-      Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/subscription_schedules/%s/revisions", ApiResource.urlEncodeId(this.getId())));
-    return requestCollection(url, params, SubscriptionScheduleRevisionCollection.class, options);
-  }
-
-  /** Retrieves the list of subscription schedule revisions for a subscription schedule. */
-  public SubscriptionScheduleRevisionCollection revisions(
-      SubscriptionScheduleRevisionsParams params) throws StripeException {
-    return revisions(params, (RequestOptions) null);
-  }
-
-  /** Retrieves the list of subscription schedule revisions for a subscription schedule. */
-  public SubscriptionScheduleRevisionCollection revisions(
-      SubscriptionScheduleRevisionsParams params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/subscription_schedules/%s/revisions", ApiResource.urlEncodeId(this.getId())));
-    return requestCollection(url, params, SubscriptionScheduleRevisionCollection.class, options);
   }
 
   @Getter
