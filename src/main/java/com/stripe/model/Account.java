@@ -609,11 +609,11 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
     String legacyPayments;
 
     /**
-     * The status of the platform payments capability of the account, or whether your platform can
-     * process charges on behalf of the account.
+     * The status of the transfers capability of the account, or whether your platform can transfer
+     * funds to the account.
      */
-    @SerializedName("platform_payments")
-    String platformPayments;
+    @SerializedName("transfers")
+    String transfers;
   }
 
   @Getter

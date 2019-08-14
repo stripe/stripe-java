@@ -3486,8 +3486,8 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("legacy_payments")
     LEGACY_PAYMENTS("legacy_payments"),
 
-    @SerializedName("platform_payments")
-    PLATFORM_PAYMENTS("platform_payments");
+    @SerializedName("transfers")
+    TRANSFERS("transfers");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
