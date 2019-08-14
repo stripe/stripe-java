@@ -187,10 +187,8 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   /**
    * Deletes an existing person’s relationship to the account’s legal entity. Any person with a
    * relationship for an account can be deleted through the API, except if the person is the <code>
-   * account_opener</code>. If your integration is using the deprecated <code>controller</code> or
-   * <code>executive</code> parameter, you cannot delete the only verified <code>controller</code>
-   * (or <code>executive</code>), or the only <code>controller</code> (or <code>executive</code>) on
-   * file.
+   * account_opener</code>. If your integration is using the <code>executive</code> parameter, you
+   * cannot delete the only verified <code>executive</code> on file.
    */
   public Person delete() throws StripeException {
     return delete((Map<String, Object>) null, (RequestOptions) null);
@@ -199,10 +197,8 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   /**
    * Deletes an existing person’s relationship to the account’s legal entity. Any person with a
    * relationship for an account can be deleted through the API, except if the person is the <code>
-   * account_opener</code>. If your integration is using the deprecated <code>controller</code> or
-   * <code>executive</code> parameter, you cannot delete the only verified <code>controller</code>
-   * (or <code>executive</code>), or the only <code>controller</code> (or <code>executive</code>) on
-   * file.
+   * account_opener</code>. If your integration is using the <code>executive</code> parameter, you
+   * cannot delete the only verified <code>executive</code> on file.
    */
   public Person delete(RequestOptions options) throws StripeException {
     return delete((Map<String, Object>) null, options);
@@ -211,10 +207,8 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   /**
    * Deletes an existing person’s relationship to the account’s legal entity. Any person with a
    * relationship for an account can be deleted through the API, except if the person is the <code>
-   * account_opener</code>. If your integration is using the deprecated <code>controller</code> or
-   * <code>executive</code> parameter, you cannot delete the only verified <code>controller</code>
-   * (or <code>executive</code>), or the only <code>controller</code> (or <code>executive</code>) on
-   * file.
+   * account_opener</code>. If your integration is using the <code>executive</code> parameter, you
+   * cannot delete the only verified <code>executive</code> on file.
    */
   public Person delete(Map<String, Object> params) throws StripeException {
     return delete(params, (RequestOptions) null);
@@ -223,10 +217,8 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   /**
    * Deletes an existing person’s relationship to the account’s legal entity. Any person with a
    * relationship for an account can be deleted through the API, except if the person is the <code>
-   * account_opener</code>. If your integration is using the deprecated <code>controller</code> or
-   * <code>executive</code> parameter, you cannot delete the only verified <code>controller</code>
-   * (or <code>executive</code>), or the only <code>controller</code> (or <code>executive</code>) on
-   * file.
+   * account_opener</code>. If your integration is using the <code>executive</code> parameter, you
+   * cannot delete the only verified <code>executive</code> on file.
    */
   public Person delete(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url;
@@ -322,6 +314,13 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
      */
     @SerializedName("director")
     Boolean director;
+
+    /**
+     * Whether the person has significant responsibility to control, manage, or direct the
+     * organization.
+     */
+    @SerializedName("executive")
+    Boolean executive;
 
     /** Whether the person is an owner of the account’s legal entity. */
     @SerializedName("owner")
