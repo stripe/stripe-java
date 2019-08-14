@@ -44,6 +44,9 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
   @SerializedName("amount")
   Long amount;
 
+  @SerializedName("au_becs_debit")
+  AuBecsDebit auBecsDebit;
+
   @SerializedName("bancontact")
   Bancontact bancontact;
 
@@ -521,6 +524,20 @@ public class Source extends ApiResource implements PaymentSource, MetadataStore<
 
     @SerializedName("statement_descriptor")
     String statementDescriptor;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AuBecsDebit extends StripeObject {
+    @SerializedName("bsb_number")
+    String bsbNumber;
+
+    @SerializedName("fingerprint")
+    String fingerprint;
+
+    @SerializedName("last4")
+    String last4;
   }
 
   @Getter

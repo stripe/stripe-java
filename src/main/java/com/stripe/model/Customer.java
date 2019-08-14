@@ -416,7 +416,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   }
 
   /**
-   * Retrieves the list of transactions that updated the customer’s <a
+   * Returns a list of transactions that updated the customer’s <a
    * href="/docs/api/customers/object#customer_object-balance"><code>balance</code></a>.
    */
   public CustomerBalanceTransactionCollection balanceTransactions() throws StripeException {
@@ -424,7 +424,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   }
 
   /**
-   * Retrieves the list of transactions that updated the customer’s <a
+   * Returns a list of transactions that updated the customer’s <a
    * href="/docs/api/customers/object#customer_object-balance"><code>balance</code></a>.
    */
   public CustomerBalanceTransactionCollection balanceTransactions(Map<String, Object> params)
@@ -433,7 +433,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   }
 
   /**
-   * Retrieves the list of transactions that updated the customer’s <a
+   * Returns a list of transactions that updated the customer’s <a
    * href="/docs/api/customers/object#customer_object-balance"><code>balance</code></a>.
    */
   public CustomerBalanceTransactionCollection balanceTransactions(
@@ -448,7 +448,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   }
 
   /**
-   * Retrieves the list of transactions that updated the customer’s <a
+   * Returns a list of transactions that updated the customer’s <a
    * href="/docs/api/customers/object#customer_object-balance"><code>balance</code></a>.
    */
   public CustomerBalanceTransactionCollection balanceTransactions(
@@ -457,7 +457,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   }
 
   /**
-   * Retrieves the list of transactions that updated the customer’s <a
+   * Returns a list of transactions that updated the customer’s <a
    * href="/docs/api/customers/object#customer_object-balance"><code>balance</code></a>.
    */
   public CustomerBalanceTransactionCollection balanceTransactions(

@@ -92,6 +92,10 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @SerializedName("object")
   String object;
 
+  /** Metadata about the PIN on the card. */
+  @SerializedName("pin")
+  Pin pin;
+
   /** The card this card replaces, if any. */
   @SerializedName("replacement_for")
   @Getter(lombok.AccessLevel.NONE)
@@ -377,6 +381,15 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     /** Currency for the amounts within spending_limits. Locked to the currency of the card. */
     @SerializedName("spending_limits_currency")
     String spendingLimitsCurrency;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Pin extends StripeObject {
+    /** The status of the pin. One of `blocked` or `active`. */
+    @SerializedName("status")
+    String status;
   }
 
   @Getter

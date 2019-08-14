@@ -851,6 +851,9 @@ public class CardholderCreateParams extends ApiRequestParams {
         @SerializedName("detective_agencies")
         DETECTIVE_AGENCIES("detective_agencies"),
 
+        @SerializedName("digital_goods_applications")
+        DIGITAL_GOODS_APPLICATIONS("digital_goods_applications"),
+
         @SerializedName("direct_marketing_catalog_merchant")
         DIRECT_MARKETING_CATALOG_MERCHANT("direct_marketing_catalog_merchant"),
 
@@ -1760,6 +1763,9 @@ public class CardholderCreateParams extends ApiRequestParams {
       @SerializedName("detective_agencies")
       DETECTIVE_AGENCIES("detective_agencies"),
 
+      @SerializedName("digital_goods_applications")
+      DIGITAL_GOODS_APPLICATIONS("digital_goods_applications"),
+
       @SerializedName("direct_marketing_catalog_merchant")
       DIRECT_MARKETING_CATALOG_MERCHANT("direct_marketing_catalog_merchant"),
 
@@ -2640,6 +2646,9 @@ public class CardholderCreateParams extends ApiRequestParams {
 
       @SerializedName("detective_agencies")
       DETECTIVE_AGENCIES("detective_agencies"),
+
+      @SerializedName("digital_goods_applications")
+      DIGITAL_GOODS_APPLICATIONS("digital_goods_applications"),
 
       @SerializedName("direct_marketing_catalog_merchant")
       DIRECT_MARKETING_CATALOG_MERCHANT("direct_marketing_catalog_merchant"),

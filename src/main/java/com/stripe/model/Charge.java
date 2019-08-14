@@ -959,6 +959,9 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
     @SerializedName("alipay")
     Alipay alipay;
 
+    @SerializedName("au_becs_debit")
+    AuBecsDebit auBecsDebit;
+
     @SerializedName("bancontact")
     Bancontact bancontact;
 
@@ -1095,6 +1098,26 @@ public class Charge extends ApiResource implements BalanceTransactionSource, Met
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Alipay extends StripeObject {}
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class AuBecsDebit extends StripeObject {
+      /** Bank-State-Branch number of the bank account. */
+      @SerializedName("bsb_number")
+      String bsbNumber;
+
+      /**
+       * Uniquely identifies this particular bank account. You can use this attribute to check
+       * whether two bank accounts are the same.
+       */
+      @SerializedName("fingerprint")
+      String fingerprint;
+
+      /** Last four digits of the bank account number. */
+      @SerializedName("last4")
+      String last4;
+    }
 
     @Getter
     @Setter
