@@ -4,6 +4,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -51,6 +52,13 @@ public class SourceCreateParams extends ApiRequestParams {
    */
   @SerializedName("flow")
   Flow flow;
+
+  /**
+   * Information about a mandate possibility attached to a source object (generally for bank debits)
+   * as well as its acceptance status.
+   */
+  @SerializedName("mandate")
+  Mandate mandate;
 
   /**
    * A set of key-value pairs that you can attach to a source object. It can be useful for storing
@@ -125,6 +133,7 @@ public class SourceCreateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Flow flow,
+      Mandate mandate,
       Map<String, String> metadata,
       String originalSource,
       Owner owner,
@@ -141,6 +150,7 @@ public class SourceCreateParams extends ApiRequestParams {
     this.expand = expand;
     this.extraParams = extraParams;
     this.flow = flow;
+    this.mandate = mandate;
     this.metadata = metadata;
     this.originalSource = originalSource;
     this.owner = owner;
@@ -169,6 +179,8 @@ public class SourceCreateParams extends ApiRequestParams {
     private Map<String, Object> extraParams;
 
     private Flow flow;
+
+    private Mandate mandate;
 
     private Map<String, String> metadata;
 
@@ -199,6 +211,7 @@ public class SourceCreateParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.flow,
+          this.mandate,
           this.metadata,
           this.originalSource,
           this.owner,
@@ -296,6 +309,15 @@ public class SourceCreateParams extends ApiRequestParams {
      */
     public Builder setFlow(Flow flow) {
       this.flow = flow;
+      return this;
+    }
+
+    /**
+     * Information about a mandate possibility attached to a source object (generally for bank
+     * debits) as well as its acceptance status.
+     */
+    public Builder setMandate(Mandate mandate) {
+      this.mandate = mandate;
       return this;
     }
 
@@ -400,6 +422,616 @@ public class SourceCreateParams extends ApiRequestParams {
     public Builder setUsage(Usage usage) {
       this.usage = usage;
       return this;
+    }
+  }
+
+  public static class Mandate {
+    /**
+     * The parameters required to notify Stripe of a mandate acceptance or refusal by the customer.
+     */
+    @SerializedName("acceptance")
+    Acceptance acceptance;
+
+    /** The amount specified by the mandate. (Leave null for a mandate covering all amounts) */
+    @SerializedName("amount")
+    Object amount;
+
+    /** The currency specified by the mandate. (Must match `currency` of the source) */
+    @SerializedName("currency")
+    String currency;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * The interval of debits permitted by the mandate. Either `one_time` (just permitting a single
+     * debit), `scheduled` (with debits on an agreed schedule or for clearly-defined events), or
+     * `variable`(for debits with any frequency)
+     */
+    @SerializedName("interval")
+    Interval interval;
+
+    /**
+     * The method Stripe should use to notify the customer of upcoming debit instructions and/or
+     * mandate confirmation as required by the underlying debit network. Either `email` (an email is
+     * sent directly to the customer), `manual` (a `source.mandate_notification` event is sent to
+     * your webhooks endpoint and you should handle the notification) or `none` (the underlying
+     * debit network does not require any notification).
+     */
+    @SerializedName("notification_method")
+    NotificationMethod notificationMethod;
+
+    private Mandate(
+        Acceptance acceptance,
+        Object amount,
+        String currency,
+        Map<String, Object> extraParams,
+        Interval interval,
+        NotificationMethod notificationMethod) {
+      this.acceptance = acceptance;
+      this.amount = amount;
+      this.currency = currency;
+      this.extraParams = extraParams;
+      this.interval = interval;
+      this.notificationMethod = notificationMethod;
+    }
+
+    public static Builder builder() {
+      return new com.stripe.param.SourceCreateParams.Mandate.Builder();
+    }
+
+    public static class Builder {
+      private Acceptance acceptance;
+
+      private Object amount;
+
+      private String currency;
+
+      private Map<String, Object> extraParams;
+
+      private Interval interval;
+
+      private NotificationMethod notificationMethod;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public Mandate build() {
+        return new Mandate(
+            this.acceptance,
+            this.amount,
+            this.currency,
+            this.extraParams,
+            this.interval,
+            this.notificationMethod);
+      }
+
+      /**
+       * The parameters required to notify Stripe of a mandate acceptance or refusal by the
+       * customer.
+       */
+      public Builder setAcceptance(Acceptance acceptance) {
+        this.acceptance = acceptance;
+        return this;
+      }
+
+      /** The amount specified by the mandate. (Leave null for a mandate covering all amounts) */
+      public Builder setAmount(EmptyParam amount) {
+        this.amount = amount;
+        return this;
+      }
+
+      /** The amount specified by the mandate. (Leave null for a mandate covering all amounts) */
+      public Builder setAmount(Long amount) {
+        this.amount = amount;
+        return this;
+      }
+
+      /** The currency specified by the mandate. (Must match `currency` of the source) */
+      public Builder setCurrency(String currency) {
+        this.currency = currency;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SourceCreateParams.Mandate#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SourceCreateParams.Mandate#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * The interval of debits permitted by the mandate. Either `one_time` (just permitting a
+       * single debit), `scheduled` (with debits on an agreed schedule or for clearly-defined
+       * events), or `variable`(for debits with any frequency)
+       */
+      public Builder setInterval(Interval interval) {
+        this.interval = interval;
+        return this;
+      }
+
+      /**
+       * The method Stripe should use to notify the customer of upcoming debit instructions and/or
+       * mandate confirmation as required by the underlying debit network. Either `email` (an email
+       * is sent directly to the customer), `manual` (a `source.mandate_notification` event is sent
+       * to your webhooks endpoint and you should handle the notification) or `none` (the underlying
+       * debit network does not require any notification).
+       */
+      public Builder setNotificationMethod(NotificationMethod notificationMethod) {
+        this.notificationMethod = notificationMethod;
+        return this;
+      }
+    }
+
+    public static class Acceptance {
+      /** The unix timestamp the mandate was accepted or refused at by the customer. */
+      @SerializedName("date")
+      Long date;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The IP address from which the mandate was accepted or refused by the customer. */
+      @SerializedName("ip")
+      String ip;
+
+      /**
+       * The parameters required to store a mandate accepted offline. Should only be set if
+       * `mandate[type]` is `offline`
+       */
+      @SerializedName("offline")
+      Offline offline;
+
+      /**
+       * The parameters required to store a mandate accepted online. Should only be set if
+       * `mandate[type]` is `online`
+       */
+      @SerializedName("online")
+      Online online;
+
+      /**
+       * The status of the mandate acceptance. Either `accepted` (the mandate was accepted) or
+       * `refused` (the mandate was refused).
+       */
+      @SerializedName("status")
+      Status status;
+
+      /**
+       * The type of acceptance information included with the mandate. Either `online` or `offline`
+       */
+      @SerializedName("type")
+      Type type;
+
+      /**
+       * The user agent of the browser from which the mandate was accepted or refused by the
+       * customer.
+       */
+      @SerializedName("user_agent")
+      String userAgent;
+
+      private Acceptance(
+          Long date,
+          Map<String, Object> extraParams,
+          String ip,
+          Offline offline,
+          Online online,
+          Status status,
+          Type type,
+          String userAgent) {
+        this.date = date;
+        this.extraParams = extraParams;
+        this.ip = ip;
+        this.offline = offline;
+        this.online = online;
+        this.status = status;
+        this.type = type;
+        this.userAgent = userAgent;
+      }
+
+      public static Builder builder() {
+        return new com.stripe.param.SourceCreateParams.Mandate.Acceptance.Builder();
+      }
+
+      public static class Builder {
+        private Long date;
+
+        private Map<String, Object> extraParams;
+
+        private String ip;
+
+        private Offline offline;
+
+        private Online online;
+
+        private Status status;
+
+        private Type type;
+
+        private String userAgent;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Acceptance build() {
+          return new Acceptance(
+              this.date,
+              this.extraParams,
+              this.ip,
+              this.offline,
+              this.online,
+              this.status,
+              this.type,
+              this.userAgent);
+        }
+
+        /** The unix timestamp the mandate was accepted or refused at by the customer. */
+        public Builder setDate(Long date) {
+          this.date = date;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SourceCreateParams.Mandate.Acceptance#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SourceCreateParams.Mandate.Acceptance#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The IP address from which the mandate was accepted or refused by the customer. */
+        public Builder setIp(String ip) {
+          this.ip = ip;
+          return this;
+        }
+
+        /**
+         * The parameters required to store a mandate accepted offline. Should only be set if
+         * `mandate[type]` is `offline`
+         */
+        public Builder setOffline(Offline offline) {
+          this.offline = offline;
+          return this;
+        }
+
+        /**
+         * The parameters required to store a mandate accepted online. Should only be set if
+         * `mandate[type]` is `online`
+         */
+        public Builder setOnline(Online online) {
+          this.online = online;
+          return this;
+        }
+
+        /**
+         * The status of the mandate acceptance. Either `accepted` (the mandate was accepted) or
+         * `refused` (the mandate was refused).
+         */
+        public Builder setStatus(Status status) {
+          this.status = status;
+          return this;
+        }
+
+        /**
+         * The type of acceptance information included with the mandate. Either `online` or
+         * `offline`
+         */
+        public Builder setType(Type type) {
+          this.type = type;
+          return this;
+        }
+
+        /**
+         * The user agent of the browser from which the mandate was accepted or refused by the
+         * customer.
+         */
+        public Builder setUserAgent(String userAgent) {
+          this.userAgent = userAgent;
+          return this;
+        }
+      }
+
+      public static class Offline {
+        /**
+         * An email to contact you with if a copy of the mandate is requested, required if `type` is
+         * `offline`.
+         */
+        @SerializedName("contact_email")
+        String contactEmail;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private Offline(String contactEmail, Map<String, Object> extraParams) {
+          this.contactEmail = contactEmail;
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new com.stripe.param.SourceCreateParams.Mandate.Acceptance.Offline.Builder();
+        }
+
+        public static class Builder {
+          private String contactEmail;
+
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public Offline build() {
+            return new Offline(this.contactEmail, this.extraParams);
+          }
+
+          /**
+           * An email to contact you with if a copy of the mandate is requested, required if `type`
+           * is `offline`.
+           */
+          public Builder setContactEmail(String contactEmail) {
+            this.contactEmail = contactEmail;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SourceCreateParams.Mandate.Acceptance.Offline#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SourceCreateParams.Mandate.Acceptance.Offline#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+      }
+
+      public static class Online {
+        /** The unix timestamp the mandate was accepted or refused at by the customer. */
+        @SerializedName("date")
+        Long date;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** The IP address from which the mandate was accepted or refused by the customer. */
+        @SerializedName("ip")
+        String ip;
+
+        /**
+         * The user agent of the browser from which the mandate was accepted or refused by the
+         * customer.
+         */
+        @SerializedName("user_agent")
+        String userAgent;
+
+        private Online(Long date, Map<String, Object> extraParams, String ip, String userAgent) {
+          this.date = date;
+          this.extraParams = extraParams;
+          this.ip = ip;
+          this.userAgent = userAgent;
+        }
+
+        public static Builder builder() {
+          return new com.stripe.param.SourceCreateParams.Mandate.Acceptance.Online.Builder();
+        }
+
+        public static class Builder {
+          private Long date;
+
+          private Map<String, Object> extraParams;
+
+          private String ip;
+
+          private String userAgent;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public Online build() {
+            return new Online(this.date, this.extraParams, this.ip, this.userAgent);
+          }
+
+          /** The unix timestamp the mandate was accepted or refused at by the customer. */
+          public Builder setDate(Long date) {
+            this.date = date;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SourceCreateParams.Mandate.Acceptance.Online#extraParams} for the field
+           * documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SourceCreateParams.Mandate.Acceptance.Online#extraParams} for the field
+           * documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** The IP address from which the mandate was accepted or refused by the customer. */
+          public Builder setIp(String ip) {
+            this.ip = ip;
+            return this;
+          }
+
+          /**
+           * The user agent of the browser from which the mandate was accepted or refused by the
+           * customer.
+           */
+          public Builder setUserAgent(String userAgent) {
+            this.userAgent = userAgent;
+            return this;
+          }
+        }
+      }
+
+      public enum Status implements ApiRequestParams.EnumParam {
+        @SerializedName("accepted")
+        ACCEPTED("accepted"),
+
+        @SerializedName("pending")
+        PENDING("pending"),
+
+        @SerializedName("refused")
+        REFUSED("refused"),
+
+        @SerializedName("revoked")
+        REVOKED("revoked");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Status(String value) {
+          this.value = value;
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("offline")
+        OFFLINE("offline"),
+
+        @SerializedName("online")
+        ONLINE("online");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
+      }
+    }
+
+    public enum Interval implements ApiRequestParams.EnumParam {
+      @SerializedName("one_time")
+      ONE_TIME("one_time"),
+
+      @SerializedName("scheduled")
+      SCHEDULED("scheduled"),
+
+      @SerializedName("variable")
+      VARIABLE("variable");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Interval(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum NotificationMethod implements ApiRequestParams.EnumParam {
+      @SerializedName("deprecated_none")
+      DEPRECATED_NONE("deprecated_none"),
+
+      @SerializedName("email")
+      EMAIL("email"),
+
+      @SerializedName("manual")
+      MANUAL("manual"),
+
+      @SerializedName("none")
+      NONE("none"),
+
+      @SerializedName("stripe_email")
+      STRIPE_EMAIL("stripe_email");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      NotificationMethod(String value) {
+        this.value = value;
+      }
     }
   }
 

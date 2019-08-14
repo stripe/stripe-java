@@ -62,7 +62,7 @@ public class CustomerBalanceTransactionCollection
   }
 
   /**
-   * Retrieves the list of transactions that updated the customer’s <a
+   * Returns a list of transactions that updated the customer’s <a
    * href="/docs/api/customers/object#customer_object-balance"><code>balance</code></a>.
    */
   public CustomerBalanceTransactionCollection list(Map<String, Object> params)
@@ -71,7 +71,7 @@ public class CustomerBalanceTransactionCollection
   }
 
   /**
-   * Retrieves the list of transactions that updated the customer’s <a
+   * Returns a list of transactions that updated the customer’s <a
    * href="/docs/api/customers/object#customer_object-balance"><code>balance</code></a>.
    */
   public CustomerBalanceTransactionCollection list(
@@ -82,7 +82,7 @@ public class CustomerBalanceTransactionCollection
   }
 
   /**
-   * Retrieves the list of transactions that updated the customer’s <a
+   * Returns a list of transactions that updated the customer’s <a
    * href="/docs/api/customers/object#customer_object-balance"><code>balance</code></a>.
    */
   public CustomerBalanceTransactionCollection list(
@@ -91,7 +91,7 @@ public class CustomerBalanceTransactionCollection
   }
 
   /**
-   * Retrieves the list of transactions that updated the customer’s <a
+   * Returns a list of transactions that updated the customer’s <a
    * href="/docs/api/customers/object#customer_object-balance"><code>balance</code></a>.
    */
   public CustomerBalanceTransactionCollection list(

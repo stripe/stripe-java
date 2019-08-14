@@ -434,7 +434,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
       /**
        * When specified, this parameter signals that a card has been collected as MOTO (Mail Order
-       * Telephone Order) and is thus out of scope for SCA.
+       * Telephone Order) and thus out of scope for SCA. This parameter can only be provided during
+       * confirmation.
        */
       @SerializedName("moto")
       Boolean moto;
@@ -505,7 +506,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
         /**
          * When specified, this parameter signals that a card has been collected as MOTO (Mail Order
-         * Telephone Order) and is thus out of scope for SCA.
+         * Telephone Order) and thus out of scope for SCA. This parameter can only be provided
+         * during confirmation.
          */
         public Builder setMoto(Boolean moto) {
           this.moto = moto;

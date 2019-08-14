@@ -829,7 +829,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       /**
        * When specified, this parameter indicates that a transaction will be marked as MOTO (Mail
-       * Order Telephone Order) and thus out of scope for SCA.
+       * Order Telephone Order) and thus out of scope for SCA. This parameter can only be provided
+       * during confirmation.
        */
       @SerializedName("moto")
       Boolean moto;
@@ -900,7 +901,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         /**
          * When specified, this parameter indicates that a transaction will be marked as MOTO (Mail
-         * Order Telephone Order) and thus out of scope for SCA.
+         * Order Telephone Order) and thus out of scope for SCA. This parameter can only be provided
+         * during confirmation.
          */
         public Builder setMoto(Boolean moto) {
           this.moto = moto;
