@@ -207,6 +207,13 @@ public class AccountPersonsParams extends ApiRequestParams {
     Boolean director;
 
     /**
+     * A filter on the list of people returned based on whether these people are executives of the
+     * account's company.
+     */
+    @SerializedName("executive")
+    Boolean executive;
+
+    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -223,9 +230,14 @@ public class AccountPersonsParams extends ApiRequestParams {
     Boolean owner;
 
     private Relationship(
-        Boolean accountOpener, Boolean director, Map<String, Object> extraParams, Boolean owner) {
+        Boolean accountOpener,
+        Boolean director,
+        Boolean executive,
+        Map<String, Object> extraParams,
+        Boolean owner) {
       this.accountOpener = accountOpener;
       this.director = director;
+      this.executive = executive;
       this.extraParams = extraParams;
       this.owner = owner;
     }
@@ -239,13 +251,16 @@ public class AccountPersonsParams extends ApiRequestParams {
 
       private Boolean director;
 
+      private Boolean executive;
+
       private Map<String, Object> extraParams;
 
       private Boolean owner;
 
       /** Finalize and obtain parameter instance from this builder. */
       public Relationship build() {
-        return new Relationship(this.accountOpener, this.director, this.extraParams, this.owner);
+        return new Relationship(
+            this.accountOpener, this.director, this.executive, this.extraParams, this.owner);
       }
 
       /**
@@ -263,6 +278,15 @@ public class AccountPersonsParams extends ApiRequestParams {
        */
       public Builder setDirector(Boolean director) {
         this.director = director;
+        return this;
+      }
+
+      /**
+       * A filter on the list of people returned based on whether these people are executives of the
+       * account's company.
+       */
+      public Builder setExecutive(Boolean executive) {
+        this.executive = executive;
         return this;
       }
 
