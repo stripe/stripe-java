@@ -1,5 +1,8 @@
 # Changelog
 
+## 11.1.0 - 2019-08-15
+* [#826](https://github.com/stripe/stripe-java/pull/826) Add support for `executive` on `Person` create, update and list
+
 ## 11.0.0 - 2019-08-14
 * [#825](https://github.com/stripe/stripe-java/pull/825) Move to API version [`2019-08-14`](https://stripe.com/docs/upgrades#2019-08-14)
   * Rename `platform_payments` to `transfers` in `Account`
