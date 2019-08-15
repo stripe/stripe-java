@@ -1043,6 +1043,13 @@ public class PersonUpdateParams extends ApiRequestParams {
     Boolean director;
 
     /**
+     * Whether the person has significant responsibility to control, manage, or direct the
+     * organization.
+     */
+    @SerializedName("executive")
+    Boolean executive;
+
+    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -1066,12 +1073,14 @@ public class PersonUpdateParams extends ApiRequestParams {
     private Relationship(
         Boolean accountOpener,
         Boolean director,
+        Boolean executive,
         Map<String, Object> extraParams,
         Boolean owner,
         Object percentOwnership,
         String title) {
       this.accountOpener = accountOpener;
       this.director = director;
+      this.executive = executive;
       this.extraParams = extraParams;
       this.owner = owner;
       this.percentOwnership = percentOwnership;
@@ -1087,6 +1096,8 @@ public class PersonUpdateParams extends ApiRequestParams {
 
       private Boolean director;
 
+      private Boolean executive;
+
       private Map<String, Object> extraParams;
 
       private Boolean owner;
@@ -1100,6 +1111,7 @@ public class PersonUpdateParams extends ApiRequestParams {
         return new Relationship(
             this.accountOpener,
             this.director,
+            this.executive,
             this.extraParams,
             this.owner,
             this.percentOwnership,
@@ -1122,6 +1134,15 @@ public class PersonUpdateParams extends ApiRequestParams {
        */
       public Builder setDirector(Boolean director) {
         this.director = director;
+        return this;
+      }
+
+      /**
+       * Whether the person has significant responsibility to control, manage, or direct the
+       * organization.
+       */
+      public Builder setExecutive(Boolean executive) {
+        this.executive = executive;
         return this;
       }
 
