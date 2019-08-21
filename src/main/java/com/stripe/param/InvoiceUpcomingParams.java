@@ -45,6 +45,13 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   List<InvoiceItem> invoiceItems;
 
   /**
+   * The identifier of the unstarted schedule whose upcoming invoice you'd like to retrieve. Cannot
+   * be used with subscription or subscription fields.
+   */
+  @SerializedName("schedule")
+  String schedule;
+
+  /**
    * The identifier of the subscription for which you'd like to retrieve the upcoming invoice. If
    * not provided, but a `subscription_items` is provided, you will preview creating a subscription
    * with those items. If neither `subscription` nor `subscription_items` is provided, you will
@@ -62,6 +69,13 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
    */
   @SerializedName("subscription_billing_cycle_anchor")
   Object subscriptionBillingCycleAnchor;
+
+  /**
+   * Boolean indicating when the subscription should be scheduled to cancel. Will prorate if within
+   * the current period if `prorate=true`
+   */
+  @SerializedName("subscription_cancel_at")
+  Object subscriptionCancelAt;
 
   /**
    * Boolean indicating whether this subscription should cancel at the end of the current period.
@@ -137,8 +151,10 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       List<InvoiceItem> invoiceItems,
+      String schedule,
       String subscription,
       Object subscriptionBillingCycleAnchor,
+      Object subscriptionCancelAt,
       Boolean subscriptionCancelAtPeriodEnd,
       Boolean subscriptionCancelNow,
       Object subscriptionDefaultTaxRates,
@@ -154,8 +170,10 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     this.expand = expand;
     this.extraParams = extraParams;
     this.invoiceItems = invoiceItems;
+    this.schedule = schedule;
     this.subscription = subscription;
     this.subscriptionBillingCycleAnchor = subscriptionBillingCycleAnchor;
+    this.subscriptionCancelAt = subscriptionCancelAt;
     this.subscriptionCancelAtPeriodEnd = subscriptionCancelAtPeriodEnd;
     this.subscriptionCancelNow = subscriptionCancelNow;
     this.subscriptionDefaultTaxRates = subscriptionDefaultTaxRates;
@@ -183,9 +201,13 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     private List<InvoiceItem> invoiceItems;
 
+    private String schedule;
+
     private String subscription;
 
     private Object subscriptionBillingCycleAnchor;
+
+    private Object subscriptionCancelAt;
 
     private Boolean subscriptionCancelAtPeriodEnd;
 
@@ -215,8 +237,10 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.invoiceItems,
+          this.schedule,
           this.subscription,
           this.subscriptionBillingCycleAnchor,
+          this.subscriptionCancelAt,
           this.subscriptionCancelAtPeriodEnd,
           this.subscriptionCancelNow,
           this.subscriptionDefaultTaxRates,
@@ -326,6 +350,15 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
+     * The identifier of the unstarted schedule whose upcoming invoice you'd like to retrieve.
+     * Cannot be used with subscription or subscription fields.
+     */
+    public Builder setSchedule(String schedule) {
+      this.schedule = schedule;
+      return this;
+    }
+
+    /**
      * The identifier of the subscription for which you'd like to retrieve the upcoming invoice. If
      * not provided, but a `subscription_items` is provided, you will preview creating a
      * subscription with those items. If neither `subscription` nor `subscription_items` is
@@ -359,6 +392,24 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
      */
     public Builder setSubscriptionBillingCycleAnchor(Long subscriptionBillingCycleAnchor) {
       this.subscriptionBillingCycleAnchor = subscriptionBillingCycleAnchor;
+      return this;
+    }
+
+    /**
+     * Boolean indicating when the subscription should be scheduled to cancel. Will prorate if
+     * within the current period if `prorate=true`
+     */
+    public Builder setSubscriptionCancelAt(EmptyParam subscriptionCancelAt) {
+      this.subscriptionCancelAt = subscriptionCancelAt;
+      return this;
+    }
+
+    /**
+     * Boolean indicating when the subscription should be scheduled to cancel. Will prorate if
+     * within the current period if `prorate=true`
+     */
+    public Builder setSubscriptionCancelAt(Long subscriptionCancelAt) {
+      this.subscriptionCancelAt = subscriptionCancelAt;
       return this;
     }
 

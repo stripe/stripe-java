@@ -561,11 +561,37 @@ public class SubscriptionSchedule extends ApiResource
     @SerializedName("application_fee_percent")
     BigDecimal applicationFeePercent;
 
+    /**
+     * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
+     * billing period.
+     */
+    @SerializedName("billing_thresholds")
+    Subscription.BillingThresholds billingThresholds;
+
+    /**
+     * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
+     * attempt to pay the underlying subscription at the end of each billing cycle using the default
+     * source attached to the customer. When sending an invoice, Stripe will email your customer an
+     * invoice with payment instructions.
+     */
+    @SerializedName("collection_method")
+    String collectionMethod;
+
     /** ID of the coupon to use during this phase of the subscription schedule. */
     @SerializedName("coupon")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<Coupon> coupon;
+
+    /**
+     * ID of the default payment method for the subscription schedule. It must belong to the
+     * customer associated with the subscription schedule. If not set, invoices will use the default
+     * payment method in the customer's invoice settings.
+     */
+    @SerializedName("default_payment_method")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<PaymentMethod> defaultPaymentMethod;
 
     @SerializedName("default_tax_rates")
     List<TaxRate> defaultTaxRates;
@@ -573,6 +599,10 @@ public class SubscriptionSchedule extends ApiResource
     /** The end of this phase of the subscription schedule. */
     @SerializedName("end_date")
     Long endDate;
+
+    /** The subscription schedule's default invoice settings. */
+    @SerializedName("invoice_settings")
+    InvoiceSettings invoiceSettings;
 
     /** Plans to subscribe during this phase of the subscription schedule. */
     @SerializedName("plans")
@@ -609,6 +639,25 @@ public class SubscriptionSchedule extends ApiResource
 
     public void setCouponObject(Coupon expandableObject) {
       this.coupon = new ExpandableField<Coupon>(expandableObject.getId(), expandableObject);
+    }
+
+    /** Get id of expandable `defaultPaymentMethod` object. */
+    public String getDefaultPaymentMethod() {
+      return (this.defaultPaymentMethod != null) ? this.defaultPaymentMethod.getId() : null;
+    }
+
+    public void setDefaultPaymentMethod(String id) {
+      this.defaultPaymentMethod = ApiResource.setExpandableFieldId(id, this.defaultPaymentMethod);
+    }
+
+    /** Get expanded `defaultPaymentMethod`. */
+    public PaymentMethod getDefaultPaymentMethodObject() {
+      return (this.defaultPaymentMethod != null) ? this.defaultPaymentMethod.getExpanded() : null;
+    }
+
+    public void setDefaultPaymentMethodObject(PaymentMethod expandableObject) {
+      this.defaultPaymentMethod =
+          new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
     }
   }
 

@@ -10,6 +10,7 @@ import com.stripe.model.ExpandableField;
 import com.stripe.model.HasId;
 import com.stripe.model.PaymentIntent;
 import com.stripe.model.Plan;
+import com.stripe.model.SetupIntent;
 import com.stripe.model.Sku;
 import com.stripe.model.StripeObject;
 import com.stripe.model.Subscription;
@@ -88,6 +89,10 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("locale")
   String locale;
 
+  /** The mode of the Checkout Session. */
+  @SerializedName("mode")
+  String mode;
+
   /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
   String object;
@@ -103,6 +108,12 @@ public class Session extends ApiResource implements HasId {
    */
   @SerializedName("payment_method_types")
   List<String> paymentMethodTypes;
+
+  /** The ID of the SetupIntent if mode was set to `setup`. */
+  @SerializedName("setup_intent")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<SetupIntent> setupIntent;
 
   /**
    * Describes the type of transaction being performed by Checkout in order to customize relevant
@@ -161,6 +172,24 @@ public class Session extends ApiResource implements HasId {
   public void setPaymentIntentObject(PaymentIntent expandableObject) {
     this.paymentIntent =
         new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get id of expandable `setupIntent` object. */
+  public String getSetupIntent() {
+    return (this.setupIntent != null) ? this.setupIntent.getId() : null;
+  }
+
+  public void setSetupIntent(String id) {
+    this.setupIntent = ApiResource.setExpandableFieldId(id, this.setupIntent);
+  }
+
+  /** Get expanded `setupIntent`. */
+  public SetupIntent getSetupIntentObject() {
+    return (this.setupIntent != null) ? this.setupIntent.getExpanded() : null;
+  }
+
+  public void setSetupIntentObject(SetupIntent expandableObject) {
+    this.setupIntent = new ExpandableField<SetupIntent>(expandableObject.getId(), expandableObject);
   }
 
   /** Get id of expandable `subscription` object. */

@@ -548,6 +548,27 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("source.transaction.updated")
     SOURCE__TRANSACTION__UPDATED("source.transaction.updated"),
 
+    @SerializedName("subscription_schedule.aborted")
+    SUBSCRIPTION_SCHEDULE__ABORTED("subscription_schedule.aborted"),
+
+    @SerializedName("subscription_schedule.canceled")
+    SUBSCRIPTION_SCHEDULE__CANCELED("subscription_schedule.canceled"),
+
+    @SerializedName("subscription_schedule.completed")
+    SUBSCRIPTION_SCHEDULE__COMPLETED("subscription_schedule.completed"),
+
+    @SerializedName("subscription_schedule.created")
+    SUBSCRIPTION_SCHEDULE__CREATED("subscription_schedule.created"),
+
+    @SerializedName("subscription_schedule.expiring")
+    SUBSCRIPTION_SCHEDULE__EXPIRING("subscription_schedule.expiring"),
+
+    @SerializedName("subscription_schedule.released")
+    SUBSCRIPTION_SCHEDULE__RELEASED("subscription_schedule.released"),
+
+    @SerializedName("subscription_schedule.updated")
+    SUBSCRIPTION_SCHEDULE__UPDATED("subscription_schedule.updated"),
+
     @SerializedName("tax_rate.created")
     TAX_RATE__CREATED("tax_rate.created"),
 

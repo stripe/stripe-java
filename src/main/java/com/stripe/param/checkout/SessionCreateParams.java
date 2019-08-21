@@ -80,6 +80,10 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("locale")
   Locale locale;
 
+  /** The mode of the Checkout Session. */
+  @SerializedName("mode")
+  Mode mode;
+
   /** A subset of parameters to be passed to PaymentIntent creation. */
   @SerializedName("payment_intent_data")
   PaymentIntentData paymentIntentData;
@@ -90,6 +94,10 @@ public class SessionCreateParams extends ApiRequestParams {
    */
   @SerializedName("payment_method_types")
   List<PaymentMethodType> paymentMethodTypes;
+
+  /** A subset of parameters to be passed to SetupIntent creation. */
+  @SerializedName("setup_intent_data")
+  SetupIntentData setupIntentData;
 
   /**
    * Describes the type of transaction being performed by Checkout in order to customize relevant
@@ -122,8 +130,10 @@ public class SessionCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams,
       List<LineItem> lineItems,
       Locale locale,
+      Mode mode,
       PaymentIntentData paymentIntentData,
       List<PaymentMethodType> paymentMethodTypes,
+      SetupIntentData setupIntentData,
       SubmitType submitType,
       SubscriptionData subscriptionData,
       String successUrl) {
@@ -136,8 +146,10 @@ public class SessionCreateParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.lineItems = lineItems;
     this.locale = locale;
+    this.mode = mode;
     this.paymentIntentData = paymentIntentData;
     this.paymentMethodTypes = paymentMethodTypes;
+    this.setupIntentData = setupIntentData;
     this.submitType = submitType;
     this.subscriptionData = subscriptionData;
     this.successUrl = successUrl;
@@ -166,9 +178,13 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private Locale locale;
 
+    private Mode mode;
+
     private PaymentIntentData paymentIntentData;
 
     private List<PaymentMethodType> paymentMethodTypes;
+
+    private SetupIntentData setupIntentData;
 
     private SubmitType submitType;
 
@@ -188,8 +204,10 @@ public class SessionCreateParams extends ApiRequestParams {
           this.extraParams,
           this.lineItems,
           this.locale,
+          this.mode,
           this.paymentIntentData,
           this.paymentMethodTypes,
+          this.setupIntentData,
           this.submitType,
           this.subscriptionData,
           this.successUrl);
@@ -333,6 +351,12 @@ public class SessionCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /** The mode of the Checkout Session. */
+    public Builder setMode(Mode mode) {
+      this.mode = mode;
+      return this;
+    }
+
     /** A subset of parameters to be passed to PaymentIntent creation. */
     public Builder setPaymentIntentData(PaymentIntentData paymentIntentData) {
       this.paymentIntentData = paymentIntentData;
@@ -362,6 +386,12 @@ public class SessionCreateParams extends ApiRequestParams {
         this.paymentMethodTypes = new ArrayList<>();
       }
       this.paymentMethodTypes.addAll(elements);
+      return this;
+    }
+
+    /** A subset of parameters to be passed to SetupIntent creation. */
+    public Builder setSetupIntentData(SetupIntentData setupIntentData) {
+      this.setupIntentData = setupIntentData;
       return this;
     }
 
@@ -1256,6 +1286,135 @@ public class SessionCreateParams extends ApiRequestParams {
     }
   }
 
+  public static class SetupIntentData {
+    /** An arbitrary string attached to the object. Often useful for displaying to users. */
+    @SerializedName("description")
+    String description;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /**
+     * Set of key-value pairs that you can attach to an object. This can be useful for storing
+     * additional information about the object in a structured format.
+     */
+    @SerializedName("metadata")
+    Map<String, String> metadata;
+
+    /**
+     * The Stripe account ID for which these funds are intended. For details, see the PaymentIntents
+     * [use case for connected
+     * accounts](/docs/payments/payment-intents/use-cases#connected-accounts).
+     */
+    @SerializedName("on_behalf_of")
+    String onBehalfOf;
+
+    private SetupIntentData(
+        String description,
+        Map<String, Object> extraParams,
+        Map<String, String> metadata,
+        String onBehalfOf) {
+      this.description = description;
+      this.extraParams = extraParams;
+      this.metadata = metadata;
+      this.onBehalfOf = onBehalfOf;
+    }
+
+    public static Builder builder() {
+      return new com.stripe.param.checkout.SessionCreateParams.SetupIntentData.Builder();
+    }
+
+    public static class Builder {
+      private String description;
+
+      private Map<String, Object> extraParams;
+
+      private Map<String, String> metadata;
+
+      private String onBehalfOf;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SetupIntentData build() {
+        return new SetupIntentData(
+            this.description, this.extraParams, this.metadata, this.onBehalfOf);
+      }
+
+      /** An arbitrary string attached to the object. Often useful for displaying to users. */
+      public Builder setDescription(String description) {
+        this.description = description;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.SetupIntentData#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.SetupIntentData#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.SetupIntentData#metadata} for the field documentation.
+       */
+      public Builder putMetadata(String key, String value) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.SetupIntentData#metadata} for the field documentation.
+       */
+      public Builder putAllMetadata(Map<String, String> map) {
+        if (this.metadata == null) {
+          this.metadata = new HashMap<>();
+        }
+        this.metadata.putAll(map);
+        return this;
+      }
+
+      /**
+       * The Stripe account ID for which these funds are intended. For details, see the
+       * PaymentIntents [use case for connected
+       * accounts](/docs/payments/payment-intents/use-cases#connected-accounts).
+       */
+      public Builder setOnBehalfOf(String onBehalfOf) {
+        this.onBehalfOf = onBehalfOf;
+        return this;
+      }
+    }
+  }
+
   public static class SubscriptionData {
     /**
      * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
@@ -1606,6 +1765,24 @@ public class SessionCreateParams extends ApiRequestParams {
     private final String value;
 
     Locale(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum Mode implements ApiRequestParams.EnumParam {
+    @SerializedName("payment")
+    PAYMENT("payment"),
+
+    @SerializedName("setup")
+    SETUP("setup"),
+
+    @SerializedName("subscription")
+    SUBSCRIPTION("subscription");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    Mode(String value) {
       this.value = value;
     }
   }
