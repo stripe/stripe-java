@@ -1,5 +1,12 @@
 # Changelog
 
+## 11.2.0 - 2019-08-21
+* [#828](https://github.com/stripe/stripe-java/pull/828) Add support for `schedule` on `Subscription`
+* Add support for `defaultPaymentMethod`, `invoiceSettings`, `collectionMethod` and `billingThresholds` to `SubscriptionSchedule` and its update and create APIs
+* Add support for `mode` and `setupIntent` on Checkout `Session` and its create API
+* Add support for `schedule` and `subscriptionCancelAt` to the `Invoice` Upcoming API
+* Add support for new event types `subscription_schedule.*`
+
 ## 11.1.0 - 2019-08-15
 * [#826](https://github.com/stripe/stripe-java/pull/826) Add support for `executive` on `Person` create, update and list
 
