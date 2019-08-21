@@ -555,9 +555,33 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     @SerializedName("application_fee_percent")
     BigDecimal applicationFeePercent;
 
+    /**
+     * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
+     * billing period. Pass an empty string to remove previously-defined thresholds.
+     */
+    @SerializedName("billing_thresholds")
+    Object billingThresholds;
+
+    /**
+     * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
+     * attempt to pay the underlying subscription at the end of each billing cycle using the default
+     * source attached to the customer. When sending an invoice, Stripe will email your customer an
+     * invoice with payment instructions. Defaults to `charge_automatically` on creation.
+     */
+    @SerializedName("collection_method")
+    CollectionMethod collectionMethod;
+
     /** The identifier of the coupon to apply to this phase of the subscription schedule. */
     @SerializedName("coupon")
     String coupon;
+
+    /**
+     * ID of the default payment method for the subscription schedule. It must belong to the
+     * customer associated with the subscription schedule. If not set, invoices will use the default
+     * payment method in the customer's invoice settings.
+     */
+    @SerializedName("default_payment_method")
+    String defaultPaymentMethod;
 
     /**
      * The tax rates that will apply to any phase that does not have `tax_rates` set. Invoices
@@ -581,6 +605,10 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
+
+    /** All invoices will be billed using the specified settings. */
+    @SerializedName("invoice_settings")
+    InvoiceSettings invoiceSettings;
 
     /**
      * Integer representing the multiplier applied to the plan interval. For example, `iterations=2`
@@ -629,10 +657,14 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
     private Phase(
         BigDecimal applicationFeePercent,
+        Object billingThresholds,
+        CollectionMethod collectionMethod,
         String coupon,
+        String defaultPaymentMethod,
         Object defaultTaxRates,
         Object endDate,
         Map<String, Object> extraParams,
+        InvoiceSettings invoiceSettings,
         Long iterations,
         List<Plan> plans,
         Object startDate,
@@ -640,10 +672,14 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         Boolean trial,
         Object trialEnd) {
       this.applicationFeePercent = applicationFeePercent;
+      this.billingThresholds = billingThresholds;
+      this.collectionMethod = collectionMethod;
       this.coupon = coupon;
+      this.defaultPaymentMethod = defaultPaymentMethod;
       this.defaultTaxRates = defaultTaxRates;
       this.endDate = endDate;
       this.extraParams = extraParams;
+      this.invoiceSettings = invoiceSettings;
       this.iterations = iterations;
       this.plans = plans;
       this.startDate = startDate;
@@ -659,13 +695,21 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     public static class Builder {
       private BigDecimal applicationFeePercent;
 
+      private Object billingThresholds;
+
+      private CollectionMethod collectionMethod;
+
       private String coupon;
+
+      private String defaultPaymentMethod;
 
       private Object defaultTaxRates;
 
       private Object endDate;
 
       private Map<String, Object> extraParams;
+
+      private InvoiceSettings invoiceSettings;
 
       private Long iterations;
 
@@ -683,10 +727,14 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       public Phase build() {
         return new Phase(
             this.applicationFeePercent,
+            this.billingThresholds,
+            this.collectionMethod,
             this.coupon,
+            this.defaultPaymentMethod,
             this.defaultTaxRates,
             this.endDate,
             this.extraParams,
+            this.invoiceSettings,
             this.iterations,
             this.plans,
             this.startDate,
@@ -707,9 +755,49 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /**
+       * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
+       * billing period. Pass an empty string to remove previously-defined thresholds.
+       */
+      public Builder setBillingThresholds(BillingThresholds billingThresholds) {
+        this.billingThresholds = billingThresholds;
+        return this;
+      }
+
+      /**
+       * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
+       * billing period. Pass an empty string to remove previously-defined thresholds.
+       */
+      public Builder setBillingThresholds(EmptyParam billingThresholds) {
+        this.billingThresholds = billingThresholds;
+        return this;
+      }
+
+      /**
+       * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
+       * attempt to pay the underlying subscription at the end of each billing cycle using the
+       * default source attached to the customer. When sending an invoice, Stripe will email your
+       * customer an invoice with payment instructions. Defaults to `charge_automatically` on
+       * creation.
+       */
+      public Builder setCollectionMethod(CollectionMethod collectionMethod) {
+        this.collectionMethod = collectionMethod;
+        return this;
+      }
+
       /** The identifier of the coupon to apply to this phase of the subscription schedule. */
       public Builder setCoupon(String coupon) {
         this.coupon = coupon;
+        return this;
+      }
+
+      /**
+       * ID of the default payment method for the subscription schedule. It must belong to the
+       * customer associated with the subscription schedule. If not set, invoices will use the
+       * default payment method in the customer's invoice settings.
+       */
+      public Builder setDefaultPaymentMethod(String defaultPaymentMethod) {
+        this.defaultPaymentMethod = defaultPaymentMethod;
         return this;
       }
 
@@ -772,6 +860,12 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** All invoices will be billed using the specified settings. */
+      public Builder setInvoiceSettings(InvoiceSettings invoiceSettings) {
+        this.invoiceSettings = invoiceSettings;
         return this;
       }
 
@@ -862,6 +956,167 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       public Builder setTrialEnd(Long trialEnd) {
         this.trialEnd = trialEnd;
         return this;
+      }
+    }
+
+    public static class BillingThresholds {
+      /** Monetary threshold that triggers the subscription to advance to a new billing period. */
+      @SerializedName("amount_gte")
+      Long amountGte;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * Indicates if the `billing_cycle_anchor` should be reset when a threshold is reached. If
+       * true, `billing_cycle_anchor` will be updated to the date/time the threshold was last
+       * reached; otherwise, the value will remain unchanged.
+       */
+      @SerializedName("reset_billing_cycle_anchor")
+      Boolean resetBillingCycleAnchor;
+
+      private BillingThresholds(
+          Long amountGte, Map<String, Object> extraParams, Boolean resetBillingCycleAnchor) {
+        this.amountGte = amountGte;
+        this.extraParams = extraParams;
+        this.resetBillingCycleAnchor = resetBillingCycleAnchor;
+      }
+
+      public static Builder builder() {
+        return new com.stripe.param.SubscriptionScheduleUpdateParams.Phase.BillingThresholds
+            .Builder();
+      }
+
+      public static class Builder {
+        private Long amountGte;
+
+        private Map<String, Object> extraParams;
+
+        private Boolean resetBillingCycleAnchor;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public BillingThresholds build() {
+          return new BillingThresholds(
+              this.amountGte, this.extraParams, this.resetBillingCycleAnchor);
+        }
+
+        /** Monetary threshold that triggers the subscription to advance to a new billing period. */
+        public Builder setAmountGte(Long amountGte) {
+          this.amountGte = amountGte;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionScheduleUpdateParams.Phase.BillingThresholds#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionScheduleUpdateParams.Phase.BillingThresholds#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * Indicates if the `billing_cycle_anchor` should be reset when a threshold is reached. If
+         * true, `billing_cycle_anchor` will be updated to the date/time the threshold was last
+         * reached; otherwise, the value will remain unchanged.
+         */
+        public Builder setResetBillingCycleAnchor(Boolean resetBillingCycleAnchor) {
+          this.resetBillingCycleAnchor = resetBillingCycleAnchor;
+          return this;
+        }
+      }
+    }
+
+    public static class InvoiceSettings {
+      @SerializedName("days_until_due")
+      Long daysUntilDue;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private InvoiceSettings(Long daysUntilDue, Map<String, Object> extraParams) {
+        this.daysUntilDue = daysUntilDue;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new com.stripe.param.SubscriptionScheduleUpdateParams.Phase.InvoiceSettings
+            .Builder();
+      }
+
+      public static class Builder {
+        private Long daysUntilDue;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public InvoiceSettings build() {
+          return new InvoiceSettings(this.daysUntilDue, this.extraParams);
+        }
+
+        public Builder setDaysUntilDue(Long daysUntilDue) {
+          this.daysUntilDue = daysUntilDue;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionScheduleUpdateParams.Phase.InvoiceSettings#extraParams} for
+         * the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SubscriptionScheduleUpdateParams.Phase.InvoiceSettings#extraParams} for
+         * the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
       }
     }
 
@@ -1085,6 +1340,21 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
             return this;
           }
         }
+      }
+    }
+
+    public enum CollectionMethod implements ApiRequestParams.EnumParam {
+      @SerializedName("charge_automatically")
+      CHARGE_AUTOMATICALLY("charge_automatically"),
+
+      @SerializedName("send_invoice")
+      SEND_INVOICE("send_invoice");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      CollectionMethod(String value) {
+        this.value = value;
       }
     }
 

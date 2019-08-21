@@ -209,6 +209,12 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @SerializedName("quantity")
   Long quantity;
 
+  /** The schedule attached to the subscription. */
+  @SerializedName("schedule")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<SubscriptionSchedule> schedule;
+
   /**
    * Date of the last substantial change to this subscription. For example, a change to the items
    * array, or a change of status, will reset this timestamp.
@@ -364,6 +370,25 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   public void setPendingSetupIntentObject(SetupIntent expandableObject) {
     this.pendingSetupIntent =
         new ExpandableField<SetupIntent>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get id of expandable `schedule` object. */
+  public String getSchedule() {
+    return (this.schedule != null) ? this.schedule.getId() : null;
+  }
+
+  public void setSchedule(String id) {
+    this.schedule = ApiResource.setExpandableFieldId(id, this.schedule);
+  }
+
+  /** Get expanded `schedule`. */
+  public SubscriptionSchedule getScheduleObject() {
+    return (this.schedule != null) ? this.schedule.getExpanded() : null;
+  }
+
+  public void setScheduleObject(SubscriptionSchedule expandableObject) {
+    this.schedule =
+        new ExpandableField<SubscriptionSchedule>(expandableObject.getId(), expandableObject);
   }
 
   /**

@@ -643,7 +643,7 @@ public class Account extends ApiResource implements PaymentSource, MetadataStore
     @SerializedName("name")
     String name;
 
-    /** The Kana variation of the company's legal name Japan only). */
+    /** The Kana variation of the company's legal name (Japan only). */
     @SerializedName("name_kana")
     String nameKana;
 
