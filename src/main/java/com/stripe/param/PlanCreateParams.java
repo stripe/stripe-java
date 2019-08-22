@@ -4,6 +4,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -31,6 +32,13 @@ public class PlanCreateParams extends ApiRequestParams {
    */
   @SerializedName("amount")
   Long amount;
+
+  /**
+   * Same as `amount`, but accepts a decimal value with at most 12 decimal places. Only one of
+   * `amount` and `amount_decimal` can be set.
+   */
+  @SerializedName("amount_decimal")
+  BigDecimal amountDecimal;
 
   /**
    * Describes how to compute the price per period. Either `per_unit` or `tiered`. `per_unit`
@@ -138,6 +146,7 @@ public class PlanCreateParams extends ApiRequestParams {
       Boolean active,
       AggregateUsage aggregateUsage,
       Long amount,
+      BigDecimal amountDecimal,
       BillingScheme billingScheme,
       String currency,
       List<String> expand,
@@ -156,6 +165,7 @@ public class PlanCreateParams extends ApiRequestParams {
     this.active = active;
     this.aggregateUsage = aggregateUsage;
     this.amount = amount;
+    this.amountDecimal = amountDecimal;
     this.billingScheme = billingScheme;
     this.currency = currency;
     this.expand = expand;
@@ -183,6 +193,8 @@ public class PlanCreateParams extends ApiRequestParams {
     private AggregateUsage aggregateUsage;
 
     private Long amount;
+
+    private BigDecimal amountDecimal;
 
     private BillingScheme billingScheme;
 
@@ -220,6 +232,7 @@ public class PlanCreateParams extends ApiRequestParams {
           this.active,
           this.aggregateUsage,
           this.amount,
+          this.amountDecimal,
           this.billingScheme,
           this.currency,
           this.expand,
@@ -261,6 +274,15 @@ public class PlanCreateParams extends ApiRequestParams {
      */
     public Builder setAmount(Long amount) {
       this.amount = amount;
+      return this;
+    }
+
+    /**
+     * Same as `amount`, but accepts a decimal value with at most 12 decimal places. Only one of
+     * `amount` and `amount_decimal` can be set.
+     */
+    public Builder setAmountDecimal(BigDecimal amountDecimal) {
+      this.amountDecimal = amountDecimal;
       return this;
     }
 
@@ -688,9 +710,23 @@ public class PlanCreateParams extends ApiRequestParams {
     @SerializedName("flat_amount")
     Long flatAmount;
 
+    /**
+     * Same as `flat_amount`, but accepts a decimal value representing an integer in the minor units
+     * of the currency. Only one of `flat_amount` and `flat_amount_decimal` can be set.
+     */
+    @SerializedName("flat_amount_decimal")
+    BigDecimal flatAmountDecimal;
+
     /** The per unit billing amount for each individual unit for which this tier applies. */
     @SerializedName("unit_amount")
     Long unitAmount;
+
+    /**
+     * Same as `unit_amount`, but accepts a decimal value with at most 12 decimal places. Only one
+     * of `unit_amount` and `unit_amount_decimal` can be set.
+     */
+    @SerializedName("unit_amount_decimal")
+    BigDecimal unitAmountDecimal;
 
     /**
      * Specifies the upper bound of this tier. The lower bound of a tier is the upper bound of the
@@ -699,10 +735,18 @@ public class PlanCreateParams extends ApiRequestParams {
     @SerializedName("up_to")
     Object upTo;
 
-    private Tier(Map<String, Object> extraParams, Long flatAmount, Long unitAmount, Object upTo) {
+    private Tier(
+        Map<String, Object> extraParams,
+        Long flatAmount,
+        BigDecimal flatAmountDecimal,
+        Long unitAmount,
+        BigDecimal unitAmountDecimal,
+        Object upTo) {
       this.extraParams = extraParams;
       this.flatAmount = flatAmount;
+      this.flatAmountDecimal = flatAmountDecimal;
       this.unitAmount = unitAmount;
+      this.unitAmountDecimal = unitAmountDecimal;
       this.upTo = upTo;
     }
 
@@ -715,13 +759,23 @@ public class PlanCreateParams extends ApiRequestParams {
 
       private Long flatAmount;
 
+      private BigDecimal flatAmountDecimal;
+
       private Long unitAmount;
+
+      private BigDecimal unitAmountDecimal;
 
       private Object upTo;
 
       /** Finalize and obtain parameter instance from this builder. */
       public Tier build() {
-        return new Tier(this.extraParams, this.flatAmount, this.unitAmount, this.upTo);
+        return new Tier(
+            this.extraParams,
+            this.flatAmount,
+            this.flatAmountDecimal,
+            this.unitAmount,
+            this.unitAmountDecimal,
+            this.upTo);
       }
 
       /**
@@ -758,9 +812,27 @@ public class PlanCreateParams extends ApiRequestParams {
         return this;
       }
 
+      /**
+       * Same as `flat_amount`, but accepts a decimal value representing an integer in the minor
+       * units of the currency. Only one of `flat_amount` and `flat_amount_decimal` can be set.
+       */
+      public Builder setFlatAmountDecimal(BigDecimal flatAmountDecimal) {
+        this.flatAmountDecimal = flatAmountDecimal;
+        return this;
+      }
+
       /** The per unit billing amount for each individual unit for which this tier applies. */
       public Builder setUnitAmount(Long unitAmount) {
         this.unitAmount = unitAmount;
+        return this;
+      }
+
+      /**
+       * Same as `unit_amount`, but accepts a decimal value with at most 12 decimal places. Only one
+       * of `unit_amount` and `unit_amount_decimal` can be set.
+       */
+      public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
+        this.unitAmountDecimal = unitAmountDecimal;
         return this;
       }
 
