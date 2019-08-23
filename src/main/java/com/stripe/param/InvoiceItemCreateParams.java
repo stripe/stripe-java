@@ -4,6 +4,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -102,6 +103,13 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
   @SerializedName("unit_amount")
   Long unitAmount;
 
+  /**
+   * Same as `unit_amount`, but accepts a decimal value with at most 12 decimal places. Only one of
+   * `unit_amount` and `unit_amount_decimal` can be set.
+   */
+  @SerializedName("unit_amount_decimal")
+  BigDecimal unitAmountDecimal;
+
   private InvoiceItemCreateParams(
       Long amount,
       String currency,
@@ -116,7 +124,8 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
       Long quantity,
       String subscription,
       List<String> taxRates,
-      Long unitAmount) {
+      Long unitAmount,
+      BigDecimal unitAmountDecimal) {
     this.amount = amount;
     this.currency = currency;
     this.customer = customer;
@@ -131,6 +140,7 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
     this.subscription = subscription;
     this.taxRates = taxRates;
     this.unitAmount = unitAmount;
+    this.unitAmountDecimal = unitAmountDecimal;
   }
 
   public static Builder builder() {
@@ -166,6 +176,8 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
 
     private Long unitAmount;
 
+    private BigDecimal unitAmountDecimal;
+
     /** Finalize and obtain parameter instance from this builder. */
     public InvoiceItemCreateParams build() {
       return new InvoiceItemCreateParams(
@@ -182,7 +194,8 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
           this.quantity,
           this.subscription,
           this.taxRates,
-          this.unitAmount);
+          this.unitAmount,
+          this.unitAmountDecimal);
     }
 
     /**
@@ -373,6 +386,15 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
      */
     public Builder setUnitAmount(Long unitAmount) {
       this.unitAmount = unitAmount;
+      return this;
+    }
+
+    /**
+     * Same as `unit_amount`, but accepts a decimal value with at most 12 decimal places. Only one
+     * of `unit_amount` and `unit_amount_decimal` can be set.
+     */
+    public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
+      this.unitAmountDecimal = unitAmountDecimal;
       return this;
     }
   }

@@ -11,6 +11,7 @@ import com.stripe.param.PlanCreateParams;
 import com.stripe.param.PlanListParams;
 import com.stripe.param.PlanRetrieveParams;
 import com.stripe.param.PlanUpdateParams;
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
@@ -38,6 +39,10 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   /** The amount in %s to be charged on the interval specified. */
   @SerializedName("amount")
   Long amount;
+
+  /** Same as `amount`, but contains a decimal value with at most 12 decimal places. */
+  @SerializedName("amount_decimal")
+  BigDecimal amountDecimal;
 
   /**
    * Describes how to compute the price per period. Either `per_unit` or `tiered`. `per_unit`
@@ -339,9 +344,17 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
     @SerializedName("flat_amount")
     Long flatAmount;
 
+    /** Same as `flat_amount`, but contains a decimal value with at most 12 decimal places. */
+    @SerializedName("flat_amount_decimal")
+    BigDecimal flatAmountDecimal;
+
     /** Per unit price for units relevant to the tier. */
     @SerializedName("unit_amount")
     Long unitAmount;
+
+    /** Same as `unit_amount`, but contains a decimal value with at most 12 decimal places. */
+    @SerializedName("unit_amount_decimal")
+    BigDecimal unitAmountDecimal;
 
     /** Up to and including to this quantity will be contained in the tier. */
     @SerializedName("up_to")
