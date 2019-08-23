@@ -1,5 +1,9 @@
 # Changelog
 
+## 11.3.0 - 2019-08-23
+* [#829](https://github.com/stripe/stripe-java/pull/829)
+  * Release support for decimal values on Billing resources such as `Plan` or `InvoiceItem`
+
 ## 11.2.0 - 2019-08-21
 * [#828](https://github.com/stripe/stripe-java/pull/828)
   * Add support for `schedule` on `Subscription`
