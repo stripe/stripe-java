@@ -168,5 +168,13 @@ public class Capability extends ApiResource implements HasId {
      */
     @SerializedName("past_due")
     List<String> pastDue;
+
+    /**
+     * Additional fields that may be required depending on the results of verification or review for
+     * provided requirements. If any of these fields become required, they appear in `currently_due`
+     * or `past_due`.
+     */
+    @SerializedName("pending_verification")
+    List<String> pendingVerification;
   }
 }

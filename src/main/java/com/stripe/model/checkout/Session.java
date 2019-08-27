@@ -89,7 +89,7 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("locale")
   String locale;
 
-  /** The mode of the Checkout Session. */
+  /** The mode of the Checkout Session, one of `payment`, `setup`, or `subscription`. */
   @SerializedName("mode")
   String mode;
 
