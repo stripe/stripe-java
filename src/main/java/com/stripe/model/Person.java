@@ -341,8 +341,8 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   public static class Requirements extends StripeObject {
     /**
      * Fields that need to be collected to keep the person's account enabled. If not collected by
-     * the account's `current_deadline`, these fields are moved to `past_due` and the account is
-     * disabled.
+     * the account's `current_deadline`, these fields appear in `past_due` as well, and the account
+     * is disabled.
      */
     @SerializedName("currently_due")
     List<String> currentlyDue;
@@ -360,6 +360,14 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
      */
     @SerializedName("past_due")
     List<String> pastDue;
+
+    /**
+     * Additional fields that may be required depending on the results of verification or review for
+     * provided requirements. If any of these fields become required, they appear in `currently_due`
+     * or `past_due`.
+     */
+    @SerializedName("pending_verification")
+    List<String> pendingVerification;
   }
 
   @Getter

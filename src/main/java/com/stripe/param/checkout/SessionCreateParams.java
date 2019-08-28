@@ -80,7 +80,7 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("locale")
   Locale locale;
 
-  /** The mode of the Checkout Session. */
+  /** The mode of the Checkout Session, one of `payment`, `setup`, or `subscription`. */
   @SerializedName("mode")
   Mode mode;
 
@@ -351,7 +351,7 @@ public class SessionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The mode of the Checkout Session. */
+    /** The mode of the Checkout Session, one of `payment`, `setup`, or `subscription`. */
     public Builder setMode(Mode mode) {
       this.mode = mode;
       return this;
@@ -1307,11 +1307,7 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("metadata")
     Map<String, String> metadata;
 
-    /**
-     * The Stripe account ID for which these funds are intended. For details, see the PaymentIntents
-     * [use case for connected
-     * accounts](/docs/payments/payment-intents/use-cases#connected-accounts).
-     */
+    /** The Stripe account for which the setup is intended. */
     @SerializedName("on_behalf_of")
     String onBehalfOf;
 
@@ -1403,11 +1399,7 @@ public class SessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * The Stripe account ID for which these funds are intended. For details, see the
-       * PaymentIntents [use case for connected
-       * accounts](/docs/payments/payment-intents/use-cases#connected-accounts).
-       */
+      /** The Stripe account for which the setup is intended. */
       public Builder setOnBehalfOf(String onBehalfOf) {
         this.onBehalfOf = onBehalfOf;
         return this;

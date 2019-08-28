@@ -71,8 +71,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   Object subscriptionBillingCycleAnchor;
 
   /**
-   * Boolean indicating when the subscription should be scheduled to cancel. Will prorate if within
-   * the current period if `prorate=true`
+   * Timestamp indicating when the subscription should be scheduled to cancel. Will prorate if
+   * within the current period if `prorate=true`
    */
   @SerializedName("subscription_cancel_at")
   Object subscriptionCancelAt;
@@ -396,7 +396,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * Boolean indicating when the subscription should be scheduled to cancel. Will prorate if
+     * Timestamp indicating when the subscription should be scheduled to cancel. Will prorate if
      * within the current period if `prorate=true`
      */
     public Builder setSubscriptionCancelAt(EmptyParam subscriptionCancelAt) {
@@ -405,7 +405,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * Boolean indicating when the subscription should be scheduled to cancel. Will prorate if
+     * Timestamp indicating when the subscription should be scheduled to cancel. Will prorate if
      * within the current period if `prorate=true`
      */
     public Builder setSubscriptionCancelAt(Long subscriptionCancelAt) {
