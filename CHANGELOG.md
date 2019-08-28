@@ -1,5 +1,8 @@
 # Changelog
 
+## 11.4.0 - 2019-08-28
+* [#830](https://github.com/stripe/stripe-java/pull/830) Add support for `pendingVerification` on `Account`, `Person` and `Capability`
+
 ## 11.3.0 - 2019-08-23
 * [#829](https://github.com/stripe/stripe-java/pull/829)
   * Release support for decimal values on Billing resources such as `Plan` or `InvoiceItem`
