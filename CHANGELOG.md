@@ -1,5 +1,8 @@
 # Changelog
 
+## 11.5.0 - 2019-08-28
+* [#833](https://github.com/stripe/stripe-java/pull/833) Add support for `endBehavior` on `SubscriptionSchedule`
+
 ## 11.4.0 - 2019-08-28
 * [#830](https://github.com/stripe/stripe-java/pull/830) Add support for `pendingVerification` on `Account`, `Person` and `Capability`
 
