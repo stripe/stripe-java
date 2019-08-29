@@ -51,6 +51,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
   @SerializedName("default_source")
   String defaultSource;
 
+  @SerializedName("end_behavior")
+  EndBehavior endBehavior;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -114,6 +117,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       CollectionMethod collectionMethod,
       String defaultPaymentMethod,
       String defaultSource,
+      EndBehavior endBehavior,
       List<String> expand,
       Map<String, Object> extraParams,
       InvoiceSettings invoiceSettings,
@@ -127,6 +131,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     this.collectionMethod = collectionMethod;
     this.defaultPaymentMethod = defaultPaymentMethod;
     this.defaultSource = defaultSource;
+    this.endBehavior = endBehavior;
     this.expand = expand;
     this.extraParams = extraParams;
     this.invoiceSettings = invoiceSettings;
@@ -152,6 +157,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
     private String defaultSource;
 
+    private EndBehavior endBehavior;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
@@ -176,6 +183,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
           this.collectionMethod,
           this.defaultPaymentMethod,
           this.defaultSource,
+          this.endBehavior,
           this.expand,
           this.extraParams,
           this.invoiceSettings,
@@ -241,6 +249,11 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
      */
     public Builder setDefaultSource(String defaultSource) {
       this.defaultSource = defaultSource;
+      return this;
+    }
+
+    public Builder setEndBehavior(EndBehavior endBehavior) {
+      this.endBehavior = endBehavior;
       return this;
     }
 
@@ -1533,7 +1546,31 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
   }
 
+  public enum EndBehavior implements ApiRequestParams.EnumParam {
+    @SerializedName("cancel")
+    CANCEL("cancel"),
+
+    @SerializedName("none")
+    NONE("none"),
+
+    @SerializedName("release")
+    RELEASE("release"),
+
+    @SerializedName("renew")
+    RENEW("renew");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    EndBehavior(String value) {
+      this.value = value;
+    }
+  }
+
   public enum RenewalBehavior implements ApiRequestParams.EnumParam {
+    @SerializedName("cancel")
+    CANCEL("cancel"),
+
     @SerializedName("none")
     NONE("none"),
 
