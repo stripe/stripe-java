@@ -97,7 +97,7 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
-  /** The ID of the PaymentIntent created if SKUs or line items were provided. */
+  /** The ID of the PaymentIntent for `payment` mode. */
   @SerializedName("payment_intent")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)

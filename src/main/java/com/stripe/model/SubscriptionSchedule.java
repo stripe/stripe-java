@@ -97,6 +97,10 @@ public class SubscriptionSchedule extends ApiResource
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<PaymentSource> defaultSource;
 
+  /** Behavior of the subscription schedule and underlying subscription when it ends. */
+  @SerializedName("end_behavior")
+  String endBehavior;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
