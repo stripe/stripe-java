@@ -1,5 +1,8 @@
 # Changelog
 
+## 11.5.1 - 2019-08-30
+* [#834](https://github.com/stripe/stripe-java/pull/834) Make `stripeError` transient on `StripeException`
+
 ## 11.5.0 - 2019-08-28
 * [#833](https://github.com/stripe/stripe-java/pull/833) Add support for `endBehavior` on `SubscriptionSchedule`
 
