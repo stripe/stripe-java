@@ -434,6 +434,10 @@ public class Authorization extends ApiResource
     @SerializedName("address_zip_check")
     String addressZipCheck;
 
+    /** One of `success`, `failure`, `exempt`, or `none`. */
+    @SerializedName("authentication")
+    String authentication;
+
     /** One of `match`, `mismatch`, or `not_provided`. */
     @SerializedName("cvc_check")
     String cvcCheck;

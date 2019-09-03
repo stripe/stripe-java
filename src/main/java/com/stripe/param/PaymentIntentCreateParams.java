@@ -183,8 +183,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
    * <p>Use `on_session` if you intend to only reuse the payment method when your customer is
    * present in your checkout flow. Use `off_session` if your customer may or may not be in your
    * checkout flow. See [Saving card details after a
-   * payment](https://stripe.com/docs/payments/cards/saving-cards#saving-card-after-payment) to
-   * learn more.
+   * payment](https://stripe.com/docs/payments/cards/saving-cards-after-payment) to learn more.
    *
    * <p>Stripe uses `setup_future_usage` to dynamically optimize your payment flow and comply with
    * regional legislation and network rules. For example, if your customer is impacted by
@@ -676,8 +675,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      * <p>Use `on_session` if you intend to only reuse the payment method when your customer is
      * present in your checkout flow. Use `off_session` if your customer may or may not be in your
      * checkout flow. See [Saving card details after a
-     * payment](https://stripe.com/docs/payments/cards/saving-cards#saving-card-after-payment) to
-     * learn more.
+     * payment](https://stripe.com/docs/payments/cards/saving-cards-after-payment) to learn more.
      *
      * <p>Stripe uses `setup_future_usage` to dynamically optimize your payment flow and comply with
      * regional legislation and network rules. For example, if your customer is impacted by
