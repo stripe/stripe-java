@@ -1,5 +1,8 @@
 # Changelog
 
+## 11.6.1 - 2019-09-03
+* [#839](https://github.com/stripe/stripe-java/pull/839) Deprecate `total_count`
+
 ## 11.6.0 - 2019-09-03
 * [#838](https://github.com/stripe/stripe-java/pull/838) Support `authentication` on Issuing `Authorization` and `url` on `MerchantData`
 
