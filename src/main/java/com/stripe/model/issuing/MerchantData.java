@@ -42,4 +42,8 @@ public class MerchantData extends StripeObject {
   /** State where the seller is located. */
   @SerializedName("state")
   String state;
+
+  /** The url an online purchase was made from. */
+  @SerializedName("url")
+  String url;
 }

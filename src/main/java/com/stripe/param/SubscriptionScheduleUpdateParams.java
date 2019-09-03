@@ -96,10 +96,11 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
   /**
    * Configures how the subscription schedule behaves when it ends. Possible values are `none`,
-   * `renew`, or `release`. `renew` will create a new subscription schedule revision by adding a new
-   * phase using the most recent phase's `plans` applied to a duration set by `renewal_interval`.
-   * `none` will stop the subscription schedule and cancel the underlying subscription. `release`
-   * will stop the subscription schedule, but keep the underlying subscription running.
+   * `cancel`, `renew`, or `release`. `renew` will create a new subscription schedule revision by
+   * adding a new phase using the most recent phase's `plans` applied to a duration set by
+   * `renewal_interval`. `none` will stop the subscription schedule and cancel the underlying
+   * subscription. `cancel` is semantically the same as `none`. `release` will stop the subscription
+   * schedule, but keep the underlying subscription running.
    */
   @SerializedName("renewal_behavior")
   RenewalBehavior renewalBehavior;
@@ -378,11 +379,11 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
     /**
      * Configures how the subscription schedule behaves when it ends. Possible values are `none`,
-     * `renew`, or `release`. `renew` will create a new subscription schedule revision by adding a
-     * new phase using the most recent phase's `plans` applied to a duration set by
+     * `cancel`, `renew`, or `release`. `renew` will create a new subscription schedule revision by
+     * adding a new phase using the most recent phase's `plans` applied to a duration set by
      * `renewal_interval`. `none` will stop the subscription schedule and cancel the underlying
-     * subscription. `release` will stop the subscription schedule, but keep the underlying
-     * subscription running.
+     * subscription. `cancel` is semantically the same as `none`. `release` will stop the
+     * subscription schedule, but keep the underlying subscription running.
      */
     public Builder setRenewalBehavior(RenewalBehavior renewalBehavior) {
       this.renewalBehavior = renewalBehavior;

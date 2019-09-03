@@ -25,7 +25,7 @@ public class Capability extends ApiResource implements HasId {
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Account> account;
 
-  /** Unique identifier for the object. */
+  /** The identifier for the capability. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;

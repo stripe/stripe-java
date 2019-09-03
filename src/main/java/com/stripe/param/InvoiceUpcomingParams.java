@@ -83,6 +83,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   @SerializedName("subscription_cancel_at_period_end")
   Boolean subscriptionCancelAtPeriodEnd;
 
+  /** This simulates the subscription being canceled or expired immediately. */
   @SerializedName("subscription_cancel_now")
   Boolean subscriptionCancelNow;
 
@@ -421,6 +422,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       return this;
     }
 
+    /** This simulates the subscription being canceled or expired immediately. */
     public Builder setSubscriptionCancelNow(Boolean subscriptionCancelNow) {
       this.subscriptionCancelNow = subscriptionCancelNow;
       return this;
