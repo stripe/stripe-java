@@ -1,5 +1,8 @@
 # Changelog
 
+## 11.6.0 - 2019-09-03
+* [#838](https://github.com/stripe/stripe-java/pull/838) Support `authentication` on Issuing `Authorization` and `url` on `MerchantData`
+
 ## 11.5.1 - 2019-08-30
 * [#834](https://github.com/stripe/stripe-java/pull/834) Make `stripeError` transient on `StripeException`
 
