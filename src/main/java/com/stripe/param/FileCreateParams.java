@@ -228,7 +228,7 @@ public class FileCreateParams extends ApiRequestParams {
     @SerializedName("tax_document_user_upload")
     TAX_DOCUMENT_USER_UPLOAD("tax_document_user_upload");
 
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     private final String value;
 
     Purpose(String value) {

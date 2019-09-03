@@ -24,7 +24,7 @@ public class EphemeralKey extends ApiResource implements HasId {
   Long expires;
 
   /** Unique identifier for the object. */
-  @Getter(onMethod = @__({@Override}))
+  @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
@@ -100,7 +100,7 @@ public class EphemeralKey extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class AssociatedObject extends StripeObject implements HasId {
-    @Getter(onMethod = @__({@Override}))
+    @Getter(onMethod_ = {@Override})
     String id;
 
     String type;

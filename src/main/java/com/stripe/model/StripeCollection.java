@@ -39,13 +39,13 @@ public abstract class StripeCollection<T extends HasId> extends StripeObject
     implements StripeCollectionInterface<T> {
   String object;
 
-  @Getter(onMethod = @__({@Override}))
+  @Getter(onMethod_ = {@Override})
   List<T> data;
 
-  @Getter(onMethod = @__({@Override}))
+  @Getter(onMethod_ = {@Override})
   Boolean hasMore;
 
-  @Getter(onMethod = @__({@Override}))
+  @Getter(onMethod_ = {@Override})
   String url;
 
   /**
@@ -63,14 +63,14 @@ public abstract class StripeCollection<T extends HasId> extends StripeObject
    * @see <a href="https://stripe.com/docs/api/java#pagination">Pagination</a>
    */
   @Deprecated
-  @Getter(onMethod = @__({@Override}))
+  @Getter(onMethod_ = {@Override})
   Long totalCount;
 
-  @Getter(onMethod = @__({@Override}))
+  @Getter(onMethod_ = {@Override})
   @Setter(onMethod = @__({@Override}))
   private RequestOptions requestOptions;
 
-  @Getter(onMethod = @__({@Override}))
+  @Getter(onMethod_ = {@Override})
   @Setter(onMethod = @__({@Override}))
   private Map<String, Object> requestParams;
 
