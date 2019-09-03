@@ -9,9 +9,16 @@ public interface StripeCollectionInterface<T> {
 
   Boolean getHasMore();
 
-  Long getTotalCount();
-
   String getUrl();
+
+  /**
+   * The {@code total_count} attribute.
+   *
+   * @deprecated Use pagination parameters instead.
+   * @see <a href="https://stripe.com/docs/api/java#pagination">Pagination</a>
+   */
+  @Deprecated
+  Long getTotalCount();
 
   /**
    * Get request options that were used to fetch the collection. This is useful for purposes of

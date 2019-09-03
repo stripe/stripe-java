@@ -46,9 +46,6 @@ public abstract class StripeCollection<T extends HasId> extends StripeObject
   Boolean hasMore;
 
   @Getter(onMethod = @__({@Override}))
-  Long totalCount;
-
-  @Getter(onMethod = @__({@Override}))
   String url;
 
   /**
@@ -58,6 +55,16 @@ public abstract class StripeCollection<T extends HasId> extends StripeObject
    * @see <a href="https://stripe.com/docs/api/java#pagination">Pagination</a>
    */
   @Deprecated Long count;
+
+  /**
+   * The {@code total_count} attribute.
+   *
+   * @deprecated Use pagination parameters instead.
+   * @see <a href="https://stripe.com/docs/api/java#pagination">Pagination</a>
+   */
+  @Deprecated
+  @Getter(onMethod = @__({@Override}))
+  Long totalCount;
 
   @Getter(onMethod = @__({@Override}))
   @Setter(onMethod = @__({@Override}))
