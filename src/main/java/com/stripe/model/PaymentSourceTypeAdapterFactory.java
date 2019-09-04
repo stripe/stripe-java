@@ -37,6 +37,7 @@ public class PaymentSourceTypeAdapterFactory implements TypeAdapterFactory {
     final TypeAdapter<Card> cardAdapter = gson.getDelegateAdapter(this, TypeToken.get(Card.class));
     final TypeAdapter<Source> sourceAdapter =
         gson.getDelegateAdapter(this, TypeToken.get(Source.class));
+
     TypeAdapter<PaymentSource> resultCustomTypeAdapter =
         new TypeAdapter<PaymentSource>() {
           @Override
@@ -68,6 +69,7 @@ public class PaymentSourceTypeAdapterFactory implements TypeAdapterFactory {
             return objectResult;
           }
         };
+
     return (TypeAdapter<T>) resultCustomTypeAdapter.nullSafe();
   }
   /**

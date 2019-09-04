@@ -32,6 +32,7 @@ public class ExternalAccountTypeAdapterFactory implements TypeAdapterFactory {
     final TypeAdapter<BankAccount> bankAccountAdapter =
         gson.getDelegateAdapter(this, TypeToken.get(BankAccount.class));
     final TypeAdapter<Card> cardAdapter = gson.getDelegateAdapter(this, TypeToken.get(Card.class));
+
     TypeAdapter<ExternalAccount> resultCustomTypeAdapter =
         new TypeAdapter<ExternalAccount>() {
           @Override
@@ -55,6 +56,7 @@ public class ExternalAccountTypeAdapterFactory implements TypeAdapterFactory {
             return objectResult;
           }
         };
+
     return (TypeAdapter<T>) resultCustomTypeAdapter.nullSafe();
   }
   /**

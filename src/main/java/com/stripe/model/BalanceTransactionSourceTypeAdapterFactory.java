@@ -56,6 +56,7 @@ public class BalanceTransactionSourceTypeAdapterFactory implements TypeAdapterFa
         gson.getDelegateAdapter(this, TypeToken.get(Transfer.class));
     final TypeAdapter<TransferReversal> transferReversalAdapter =
         gson.getDelegateAdapter(this, TypeToken.get(TransferReversal.class));
+
     TypeAdapter<BalanceTransactionSource> resultCustomTypeAdapter =
         new TypeAdapter<BalanceTransactionSource>() {
           @Override
@@ -103,6 +104,7 @@ public class BalanceTransactionSourceTypeAdapterFactory implements TypeAdapterFa
             return objectResult;
           }
         };
+
     return (TypeAdapter<T>) resultCustomTypeAdapter.nullSafe();
   }
   /**
