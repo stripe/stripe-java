@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ExternalAccountCollectionCreateParams extends ApiRequestParams {
-
   /**
    * When set to true, or if this is the first external account added in this currency, this account
    * becomes the default external account for its currency.
@@ -68,6 +67,7 @@ public class ExternalAccountCollectionCreateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public ExternalAccountCollectionCreateParams build() {
       return new ExternalAccountCollectionCreateParams(
           this.defaultForCurrency,

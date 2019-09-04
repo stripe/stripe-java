@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class BitcoinReceiverListParams extends ApiRequestParams {
-
   /** Filter for active receivers. */
   @SerializedName("active")
   Boolean active;
@@ -99,6 +98,7 @@ public class BitcoinReceiverListParams extends ApiRequestParams {
 
     private Boolean uncapturedFunds;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public BitcoinReceiverListParams build() {
       return new BitcoinReceiverListParams(
           this.active,

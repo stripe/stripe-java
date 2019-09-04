@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class PaymentMethodUpdateParams extends ApiRequestParams {
-
   /**
    * Billing information associated with the PaymentMethod that may be used or required by
    * particular types of payment methods.
@@ -67,6 +66,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public PaymentMethodUpdateParams build() {
       return new PaymentMethodUpdateParams(
           this.billingDetails, this.card, this.expand, this.extraParams, this.metadata);
@@ -166,7 +166,6 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
   }
 
   public static class BillingDetails {
-
     /** Billing address. */
     @SerializedName("address")
     Address address;
@@ -216,6 +215,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
 
       private String phone;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public BillingDetails build() {
         return new BillingDetails(
             this.address, this.email, this.extraParams, this.name, this.phone);
@@ -337,6 +337,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
 
         private String state;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Address build() {
           return new Address(
               this.city,
@@ -410,7 +411,6 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
   }
 
   public static class Card {
-
     /** Two-digit number representing the card's expiration month. */
     @SerializedName("exp_month")
     Long expMonth;
@@ -445,6 +445,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Card build() {
         return new Card(this.expMonth, this.expYear, this.extraParams);
       }

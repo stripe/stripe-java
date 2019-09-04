@@ -9,7 +9,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class PayoutCreateParams extends ApiRequestParams {
-
   /** A positive integer in cents representing how much to payout. */
   @SerializedName("amount")
   Long amount;
@@ -124,6 +123,7 @@ public class PayoutCreateParams extends ApiRequestParams {
 
     private String statementDescriptor;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public PayoutCreateParams build() {
       return new PayoutCreateParams(
           this.amount,

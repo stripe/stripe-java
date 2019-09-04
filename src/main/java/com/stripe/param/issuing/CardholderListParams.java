@@ -9,7 +9,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class CardholderListParams extends ApiRequestParams {
-
   /** Only return cardholders that were created during the given date interval. */
   @SerializedName("created")
   Object created;
@@ -126,6 +125,7 @@ public class CardholderListParams extends ApiRequestParams {
 
     private Type type;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public CardholderListParams build() {
       return new CardholderListParams(
           this.created,
@@ -273,7 +273,6 @@ public class CardholderListParams extends ApiRequestParams {
   }
 
   public static class Created {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -322,6 +321,7 @@ public class CardholderListParams extends ApiRequestParams {
 
       private Long lte;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Created build() {
         return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }

@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class SubscriptionScheduleReleaseParams extends ApiRequestParams {
-
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -44,6 +43,7 @@ public class SubscriptionScheduleReleaseParams extends ApiRequestParams {
 
     private Boolean preserveCancelDate;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public SubscriptionScheduleReleaseParams build() {
       return new SubscriptionScheduleReleaseParams(
           this.expand, this.extraParams, this.preserveCancelDate);

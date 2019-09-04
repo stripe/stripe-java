@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class PaymentIntentRetrieveParams extends ApiRequestParams {
-
   /**
    * The client secret of the PaymentIntent. Required if a publishable key is used to retrieve the
    * source.
@@ -47,6 +46,7 @@ public class PaymentIntentRetrieveParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public PaymentIntentRetrieveParams build() {
       return new PaymentIntentRetrieveParams(this.clientSecret, this.expand, this.extraParams);
     }

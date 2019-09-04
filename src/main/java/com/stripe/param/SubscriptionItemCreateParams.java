@@ -9,7 +9,6 @@ import java.util.List;
 import java.util.Map;
 
 public class SubscriptionItemCreateParams extends ApiRequestParams {
-
   /**
    * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
    * billing period.
@@ -119,6 +118,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
 
     private Object taxRates;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public SubscriptionItemCreateParams build() {
       return new SubscriptionItemCreateParams(
           this.billingThresholds,
@@ -287,7 +287,6 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
   }
 
   public static class BillingThresholds {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -315,6 +314,7 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
 
       private Long usageGte;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public BillingThresholds build() {
         return new BillingThresholds(this.extraParams, this.usageGte);
       }

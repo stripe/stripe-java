@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ChargeCaptureParams extends ApiRequestParams {
-
   /**
    * The amount to capture, which must be less than or equal to the original amount. Any additional
    * amount will be automatically refunded.
@@ -128,6 +127,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
 
     private String transferGroup;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public ChargeCaptureParams build() {
       return new ChargeCaptureParams(
           this.amount,
@@ -272,7 +272,6 @@ public class ChargeCaptureParams extends ApiRequestParams {
   }
 
   public static class TransferData {
-
     /**
      * The amount transferred to the destination account, if specified. By default, the entire
      * charge amount is transferred to the destination account.
@@ -303,6 +302,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public TransferData build() {
         return new TransferData(this.amount, this.extraParams);
       }

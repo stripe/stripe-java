@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ChargeCreateParams extends ApiRequestParams {
-
   /**
    * A positive integer representing how much to charge in the [smallest currency
    * unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100
@@ -238,6 +237,7 @@ public class ChargeCreateParams extends ApiRequestParams {
 
     private String transferGroup;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public ChargeCreateParams build() {
       return new ChargeCreateParams(
           this.amount,
@@ -500,7 +500,6 @@ public class ChargeCreateParams extends ApiRequestParams {
   }
 
   public static class Destination {
-
     /** ID of an existing, connected Stripe account. */
     @SerializedName("account")
     String account;
@@ -539,6 +538,7 @@ public class ChargeCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Destination build() {
         return new Destination(this.account, this.amount, this.extraParams);
       }
@@ -588,7 +588,6 @@ public class ChargeCreateParams extends ApiRequestParams {
   }
 
   public static class Shipping {
-
     /** Shipping address. */
     @SerializedName("address")
     Address address;
@@ -653,6 +652,7 @@ public class ChargeCreateParams extends ApiRequestParams {
 
       private String trackingNumber;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Shipping build() {
         return new Shipping(
             this.address,
@@ -787,6 +787,7 @@ public class ChargeCreateParams extends ApiRequestParams {
 
         private String state;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Address build() {
           return new Address(
               this.city,
@@ -860,7 +861,6 @@ public class ChargeCreateParams extends ApiRequestParams {
   }
 
   public static class TransferData {
-
     /**
      * The amount transferred to the destination account, if specified. By default, the entire
      * charge amount is transferred to the destination account.
@@ -898,6 +898,7 @@ public class ChargeCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public TransferData build() {
         return new TransferData(this.amount, this.destination, this.extraParams);
       }

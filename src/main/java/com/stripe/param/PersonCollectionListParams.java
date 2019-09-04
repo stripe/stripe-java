@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class PersonCollectionListParams extends ApiRequestParams {
-
   /**
    * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the
    * list. For instance, if you make a list request and receive 100 objects, starting with
@@ -86,6 +85,7 @@ public class PersonCollectionListParams extends ApiRequestParams {
 
     private String startingAfter;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public PersonCollectionListParams build() {
       return new PersonCollectionListParams(
           this.endingBefore,
@@ -190,7 +190,6 @@ public class PersonCollectionListParams extends ApiRequestParams {
   }
 
   public static class Relationship {
-
     /**
      * A filter on the list of people returned based on whether these people are the account opener
      * of the account's company.
@@ -256,6 +255,7 @@ public class PersonCollectionListParams extends ApiRequestParams {
 
       private Boolean owner;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Relationship build() {
         return new Relationship(
             this.accountOpener, this.director, this.executive, this.extraParams, this.owner);

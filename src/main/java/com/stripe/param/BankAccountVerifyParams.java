@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class BankAccountVerifyParams extends ApiRequestParams {
-
   /**
    * Two positive integers, in *cents*, equal to the values of the microdeposits sent to the bank
    * account.
@@ -47,6 +46,7 @@ public class BankAccountVerifyParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public BankAccountVerifyParams build() {
       return new BankAccountVerifyParams(this.amounts, this.expand, this.extraParams);
     }

@@ -10,7 +10,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class FileLinkUpdateParams extends ApiRequestParams {
-
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -62,6 +61,7 @@ public class FileLinkUpdateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public FileLinkUpdateParams build() {
       return new FileLinkUpdateParams(this.expand, this.expiresAt, this.extraParams, this.metadata);
     }

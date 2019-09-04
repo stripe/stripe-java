@@ -9,7 +9,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class OrderUpdateParams extends ApiRequestParams {
-
   /**
    * A coupon code that represents a discount to be applied to this order. Must be one-time duration
    * and in same currency as the order. An order can have multiple coupons.
@@ -93,6 +92,7 @@ public class OrderUpdateParams extends ApiRequestParams {
 
     private Status status;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public OrderUpdateParams build() {
       return new OrderUpdateParams(
           this.coupon,
@@ -219,7 +219,6 @@ public class OrderUpdateParams extends ApiRequestParams {
   }
 
   public static class Shipping {
-
     /** The name of the carrier like `USPS`, `UPS`, or `FedEx`. */
     @SerializedName("carrier")
     String carrier;
@@ -254,6 +253,7 @@ public class OrderUpdateParams extends ApiRequestParams {
 
       private String trackingNumber;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Shipping build() {
         return new Shipping(this.carrier, this.extraParams, this.trackingNumber);
       }

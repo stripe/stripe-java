@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class CreditNoteListParams extends ApiRequestParams {
-
   /** Only return credit notes for the customer specified by this customer ID. */
   @SerializedName("customer")
   String customer;
@@ -91,6 +90,7 @@ public class CreditNoteListParams extends ApiRequestParams {
 
     private String startingAfter;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public CreditNoteListParams build() {
       return new CreditNoteListParams(
           this.customer,

@@ -9,7 +9,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class SetupIntentCancelParams extends ApiRequestParams {
-
   /**
    * Reason for canceling this SetupIntent. Possible values are `abandoned`,
    * `requested_by_customer`, or `duplicate`
@@ -48,6 +47,7 @@ public class SetupIntentCancelParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public SetupIntentCancelParams build() {
       return new SetupIntentCancelParams(this.cancellationReason, this.expand, this.extraParams);
     }

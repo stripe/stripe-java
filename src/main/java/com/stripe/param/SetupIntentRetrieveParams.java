@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class SetupIntentRetrieveParams extends ApiRequestParams {
-
   /**
    * The client secret of the SetupIntent. Required if a publishable key is used to retrieve the
    * SetupIntent.
@@ -47,6 +46,7 @@ public class SetupIntentRetrieveParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public SetupIntentRetrieveParams build() {
       return new SetupIntentRetrieveParams(this.clientSecret, this.expand, this.extraParams);
     }

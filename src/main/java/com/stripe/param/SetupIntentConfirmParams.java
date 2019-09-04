@@ -9,7 +9,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class SetupIntentConfirmParams extends ApiRequestParams {
-
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -71,6 +70,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
     private String returnUrl;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public SetupIntentConfirmParams build() {
       return new SetupIntentConfirmParams(
           this.expand,
@@ -160,7 +160,6 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
   }
 
   public static class PaymentMethodOptions {
-
     /** Configuration for any card setup attempted on this SetupIntent. */
     @SerializedName("card")
     Card card;
@@ -188,6 +187,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public PaymentMethodOptions build() {
         return new PaymentMethodOptions(this.card, this.extraParams);
       }
@@ -227,7 +227,6 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     }
 
     public static class Card {
-
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -276,6 +275,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
 
         private RequestThreeDSecure requestThreeDSecure;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Card build() {
           return new Card(this.extraParams, this.moto, this.requestThreeDSecure);
         }

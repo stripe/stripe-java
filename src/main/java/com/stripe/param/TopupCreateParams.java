@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class TopupCreateParams extends ApiRequestParams {
-
   /** A positive integer representing how much to transfer. */
   @SerializedName("amount")
   Long amount;
@@ -108,6 +107,7 @@ public class TopupCreateParams extends ApiRequestParams {
 
     private String transferGroup;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public TopupCreateParams build() {
       return new TopupCreateParams(
           this.amount,

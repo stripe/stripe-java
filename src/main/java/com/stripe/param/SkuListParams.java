@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class SkuListParams extends ApiRequestParams {
-
   /**
    * Only return SKUs that are active or inactive (e.g., pass `false` to list all inactive
    * products).
@@ -126,6 +125,7 @@ public class SkuListParams extends ApiRequestParams {
 
     private String startingAfter;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public SkuListParams build() {
       return new SkuListParams(
           this.active,

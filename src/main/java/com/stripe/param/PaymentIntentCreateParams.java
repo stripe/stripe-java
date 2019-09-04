@@ -9,7 +9,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class PaymentIntentCreateParams extends ApiRequestParams {
-
   /**
    * A positive integer representing how much to charge in the [smallest currency
    * unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or 100
@@ -351,6 +350,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     private String transferGroup;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public PaymentIntentCreateParams build() {
       return new PaymentIntentCreateParams(
           this.amount,
@@ -747,7 +747,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   }
 
   public static class PaymentMethodOptions {
-
     /** Configuration for any card payments attempted on this PaymentIntent. */
     @SerializedName("card")
     Card card;
@@ -775,6 +774,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public PaymentMethodOptions build() {
         return new PaymentMethodOptions(this.card, this.extraParams);
       }
@@ -814,7 +814,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
 
     public static class Card {
-
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -863,6 +862,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         private RequestThreeDSecure requestThreeDSecure;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Card build() {
           return new Card(this.extraParams, this.moto, this.requestThreeDSecure);
         }
@@ -939,7 +939,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   }
 
   public static class Shipping {
-
     /** Shipping address. */
     @SerializedName("address")
     Address address;
@@ -1004,6 +1003,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       private String trackingNumber;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Shipping build() {
         return new Shipping(
             this.address,
@@ -1138,6 +1138,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
         private String state;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Address build() {
           return new Address(
               this.city,
@@ -1211,7 +1212,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   }
 
   public static class TransferData {
-
     /**
      * The amount that will be transferred automatically when a charge succeeds. The amount is
      * capped at the total transaction amount and if no amount is set, the full amount is
@@ -1258,6 +1258,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public TransferData build() {
         return new TransferData(this.amount, this.destination, this.extraParams);
       }

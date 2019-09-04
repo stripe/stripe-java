@@ -81,6 +81,7 @@ public class DisputeListParams extends ApiRequestParams {
 
     private String startingAfter;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public DisputeListParams build() {
       return new DisputeListParams(
           this.created,
@@ -186,7 +187,6 @@ public class DisputeListParams extends ApiRequestParams {
   }
 
   public static class Created {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -235,6 +235,7 @@ public class DisputeListParams extends ApiRequestParams {
 
       private Long lte;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Created build() {
         return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }

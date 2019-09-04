@@ -11,7 +11,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class PaymentIntentUpdateParams extends ApiRequestParams {
-
   /** Amount intended to be collected by this PaymentIntent. */
   @SerializedName("amount")
   Long amount;
@@ -245,6 +244,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     private String transferGroup;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public PaymentIntentUpdateParams build() {
       return new PaymentIntentUpdateParams(
           this.amount,
@@ -580,7 +580,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
   }
 
   public static class Shipping {
-
     /** Shipping address. */
     @SerializedName("address")
     Address address;
@@ -645,6 +644,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       private String trackingNumber;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Shipping build() {
         return new Shipping(
             this.address,
@@ -779,6 +779,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
         private String state;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Address build() {
           return new Address(
               this.city,
@@ -852,7 +853,6 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
   }
 
   public static class TransferData {
-
     /** The amount that will be transferred automatically when a charge succeeds. */
     @SerializedName("amount")
     Long amount;
@@ -880,6 +880,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public TransferData build() {
         return new TransferData(this.amount, this.extraParams);
       }

@@ -9,7 +9,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class AccountLinkCreateParams extends ApiRequestParams {
-
   /** The identifier of the account to create an account link for. */
   @SerializedName("account")
   String account;
@@ -85,6 +84,7 @@ public class AccountLinkCreateParams extends ApiRequestParams {
 
     private String type;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public AccountLinkCreateParams build() {
       return new AccountLinkCreateParams(
           this.account,

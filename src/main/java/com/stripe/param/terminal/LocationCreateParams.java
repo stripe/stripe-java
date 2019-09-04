@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class LocationCreateParams extends ApiRequestParams {
-
   /** The full address of the location. */
   @SerializedName("address")
   Address address;
@@ -66,6 +65,7 @@ public class LocationCreateParams extends ApiRequestParams {
 
     private String operatorAccount;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public LocationCreateParams build() {
       return new LocationCreateParams(
           this.address, this.displayName, this.expand, this.extraParams, this.operatorAccount);
@@ -211,6 +211,7 @@ public class LocationCreateParams extends ApiRequestParams {
 
       private String state;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Address build() {
         return new Address(
             this.city,

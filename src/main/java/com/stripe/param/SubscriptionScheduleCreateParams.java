@@ -11,7 +11,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class SubscriptionScheduleCreateParams extends ApiRequestParams {
-
   /**
    * This field has been renamed to `collection_method` and will be removed in a future API version.
    */
@@ -192,6 +191,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
     private Object startDate;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public SubscriptionScheduleCreateParams build() {
       return new SubscriptionScheduleCreateParams(
           this.billing,
@@ -438,7 +438,6 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
   }
 
   public static class BillingThresholds {
-
     /** Monetary threshold that triggers the subscription to advance to a new billing period. */
     @SerializedName("amount_gte")
     Long amountGte;
@@ -478,6 +477,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
       private Boolean resetBillingCycleAnchor;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public BillingThresholds build() {
         return new BillingThresholds(
             this.amountGte, this.extraParams, this.resetBillingCycleAnchor);
@@ -556,6 +556,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public InvoiceSettings build() {
         return new InvoiceSettings(this.daysUntilDue, this.extraParams);
       }
@@ -595,7 +596,6 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
   }
 
   public static class Phase {
-
     /**
      * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
      * the percentage of the subscription invoice subtotal that will be transferred to the
@@ -766,6 +766,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
       private Long trialEnd;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Phase build() {
         return new Phase(
             this.applicationFeePercent,
@@ -971,7 +972,6 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     }
 
     public static class BillingThresholds {
-
       /** Monetary threshold that triggers the subscription to advance to a new billing period. */
       @SerializedName("amount_gte")
       Long amountGte;
@@ -1011,6 +1011,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
         private Boolean resetBillingCycleAnchor;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public BillingThresholds build() {
           return new BillingThresholds(
               this.amountGte, this.extraParams, this.resetBillingCycleAnchor);
@@ -1089,6 +1090,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public InvoiceSettings build() {
           return new InvoiceSettings(this.daysUntilDue, this.extraParams);
         }
@@ -1129,7 +1131,6 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     }
 
     public static class Plan {
-
       /**
        * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
        * billing period.
@@ -1192,6 +1193,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
         private Object taxRates;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Plan build() {
           return new Plan(
               this.billingThresholds, this.extraParams, this.plan, this.quantity, this.taxRates);
@@ -1278,7 +1280,6 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       }
 
       public static class BillingThresholds {
-
         /**
          * Map of extra parameters for custom features not available in this client library. The
          * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -1307,6 +1308,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
           private Long usageGte;
 
+          /** Finalize and obtain parameter instance from this builder. */
           public BillingThresholds build() {
             return new BillingThresholds(this.extraParams, this.usageGte);
           }
@@ -1367,7 +1369,6 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
   }
 
   public static class RenewalInterval {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -1405,6 +1406,7 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
       private Long length;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public RenewalInterval build() {
         return new RenewalInterval(this.extraParams, this.interval, this.length);
       }

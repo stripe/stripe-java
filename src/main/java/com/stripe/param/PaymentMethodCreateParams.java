@@ -9,7 +9,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class PaymentMethodCreateParams extends ApiRequestParams {
-
   /**
    * Billing information associated with the PaymentMethod that may be used or required by
    * particular types of payment methods.
@@ -106,6 +105,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
     private Type type;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public PaymentMethodCreateParams build() {
       return new PaymentMethodCreateParams(
           this.billingDetails,
@@ -257,7 +257,6 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   }
 
   public static class BillingDetails {
-
     /** Billing address. */
     @SerializedName("address")
     Address address;
@@ -307,6 +306,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
       private String phone;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public BillingDetails build() {
         return new BillingDetails(
             this.address, this.email, this.extraParams, this.name, this.phone);
@@ -428,6 +428,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
         private String state;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Address build() {
           return new Address(
               this.city,
@@ -501,7 +502,6 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   }
 
   public static class CardDetails {
-
     /** The card's CVC. It is highly recommended to always include this value. */
     @SerializedName("cvc")
     String cvc;
@@ -551,6 +551,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
       private String number;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public CardDetails build() {
         return new CardDetails(
             this.cvc, this.expMonth, this.expYear, this.extraParams, this.number);
@@ -609,7 +610,6 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   }
 
   public static class Token {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -636,6 +636,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
       private String token;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Token build() {
         return new Token(this.extraParams, this.token);
       }

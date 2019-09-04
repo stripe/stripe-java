@@ -9,7 +9,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class SetupIntentCreateParams extends ApiRequestParams {
-
   /**
    * Set to `true` to attempt to confirm this SetupIntent immediately. This parameter defaults to
    * `false`. If the payment method attached is a card, a return_url may be provided in case
@@ -148,6 +147,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
     private Object usage;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public SetupIntentCreateParams build() {
       return new SetupIntentCreateParams(
           this.confirm,
@@ -354,7 +354,6 @@ public class SetupIntentCreateParams extends ApiRequestParams {
   }
 
   public static class PaymentMethodOptions {
-
     /** Configuration for any card setup attempted on this SetupIntent. */
     @SerializedName("card")
     Card card;
@@ -382,6 +381,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public PaymentMethodOptions build() {
         return new PaymentMethodOptions(this.card, this.extraParams);
       }
@@ -421,7 +421,6 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     }
 
     public static class Card {
-
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -470,6 +469,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
         private RequestThreeDSecure requestThreeDSecure;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Card build() {
           return new Card(this.extraParams, this.moto, this.requestThreeDSecure);
         }

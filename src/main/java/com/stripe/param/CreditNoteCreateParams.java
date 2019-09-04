@@ -9,7 +9,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class CreditNoteCreateParams extends ApiRequestParams {
-
   /** The integer amount in **%s** representing the total amount of the credit note. */
   @SerializedName("amount")
   Long amount;
@@ -116,6 +115,7 @@ public class CreditNoteCreateParams extends ApiRequestParams {
 
     private Long refundAmount;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public CreditNoteCreateParams build() {
       return new CreditNoteCreateParams(
           this.amount,

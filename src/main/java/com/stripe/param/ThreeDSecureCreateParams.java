@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ThreeDSecureCreateParams extends ApiRequestParams {
-
   /** Amount of the charge that you will create when authentication completes. */
   @SerializedName("amount")
   Long amount;
@@ -80,6 +79,7 @@ public class ThreeDSecureCreateParams extends ApiRequestParams {
 
     private String returnUrl;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public ThreeDSecureCreateParams build() {
       return new ThreeDSecureCreateParams(
           this.amount,

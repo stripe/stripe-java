@@ -12,7 +12,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class SkuCreateParams extends ApiRequestParams {
-
   /** Whether the SKU is available for purchase. Default to `true`. */
   @SerializedName("active")
   Boolean active;
@@ -138,6 +137,7 @@ public class SkuCreateParams extends ApiRequestParams {
 
     private String product;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public SkuCreateParams build() {
       return new SkuCreateParams(
           this.active,
@@ -317,7 +317,6 @@ public class SkuCreateParams extends ApiRequestParams {
   }
 
   public static class Inventory {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -362,6 +361,7 @@ public class SkuCreateParams extends ApiRequestParams {
 
       private EnumParam value;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Inventory build() {
         return new Inventory(this.extraParams, this.quantity, this.type, this.value);
       }
@@ -463,7 +463,6 @@ public class SkuCreateParams extends ApiRequestParams {
   }
 
   public static class PackageDimensions {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -517,6 +516,7 @@ public class SkuCreateParams extends ApiRequestParams {
 
       private BigDecimal width;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public PackageDimensions build() {
         return new PackageDimensions(
             this.extraParams, this.height, this.length, this.weight, this.width);

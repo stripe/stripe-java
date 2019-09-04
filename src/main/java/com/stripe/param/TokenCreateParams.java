@@ -9,7 +9,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class TokenCreateParams extends ApiRequestParams {
-
   /** The bank account this token will represent. */
   @SerializedName("bank_account")
   BankAccount bankAccount;
@@ -76,6 +75,7 @@ public class TokenCreateParams extends ApiRequestParams {
 
     private Pii pii;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public TokenCreateParams build() {
       return new TokenCreateParams(
           this.bankAccount, this.card, this.customer, this.expand, this.extraParams, this.pii);
@@ -169,7 +169,6 @@ public class TokenCreateParams extends ApiRequestParams {
   }
 
   public static class BankAccount {
-
     /**
      * The name of the person or business that owns the bank account.This field is required when
      * attaching the bank account to a `Customer` object.
@@ -253,6 +252,7 @@ public class TokenCreateParams extends ApiRequestParams {
 
       private String routingNumber;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public BankAccount build() {
         return new BankAccount(
             this.accountHolderName,
@@ -463,6 +463,7 @@ public class TokenCreateParams extends ApiRequestParams {
 
       private String number;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Card build() {
         return new Card(
             this.addressCity,
@@ -569,7 +570,6 @@ public class TokenCreateParams extends ApiRequestParams {
   }
 
   public static class Pii {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -597,6 +597,7 @@ public class TokenCreateParams extends ApiRequestParams {
 
       private String idNumber;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Pii build() {
         return new Pii(this.extraParams, this.idNumber);
       }

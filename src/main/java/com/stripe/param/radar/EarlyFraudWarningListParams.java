@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class EarlyFraudWarningListParams extends ApiRequestParams {
-
   /** Only return early fraud warnings for the charge specified by this charge ID. */
   @SerializedName("charge")
   String charge;
@@ -83,6 +82,7 @@ public class EarlyFraudWarningListParams extends ApiRequestParams {
 
     private String startingAfter;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public EarlyFraudWarningListParams build() {
       return new EarlyFraudWarningListParams(
           this.charge,

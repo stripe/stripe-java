@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class SubscriptionScheduleListParams extends ApiRequestParams {
-
   /** Only return subscription schedules that were created canceled the given date interval. */
   @SerializedName("canceled_at")
   Object canceledAt;
@@ -123,6 +122,7 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
 
     private String startingAfter;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public SubscriptionScheduleListParams build() {
       return new SubscriptionScheduleListParams(
           this.canceledAt,
@@ -283,7 +283,6 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
   }
 
   public static class CanceledAt {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -332,6 +331,7 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
 
       private Long lte;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public CanceledAt build() {
         return new CanceledAt(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
@@ -390,7 +390,6 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
   }
 
   public static class CompletedAt {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -439,6 +438,7 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
 
       private Long lte;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public CompletedAt build() {
         return new CompletedAt(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
@@ -497,7 +497,6 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
   }
 
   public static class Created {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -546,6 +545,7 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
 
       private Long lte;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Created build() {
         return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
@@ -603,7 +603,6 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
   }
 
   public static class ReleasedAt {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -652,6 +651,7 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
 
       private Long lte;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public ReleasedAt build() {
         return new ReleasedAt(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }

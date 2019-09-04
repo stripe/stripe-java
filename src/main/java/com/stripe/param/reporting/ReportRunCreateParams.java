@@ -9,7 +9,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class ReportRunCreateParams extends ApiRequestParams {
-
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -62,6 +61,7 @@ public class ReportRunCreateParams extends ApiRequestParams {
 
     private String reportType;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public ReportRunCreateParams build() {
       return new ReportRunCreateParams(
           this.expand, this.extraParams, this.parameters, this.reportType);
@@ -140,7 +140,6 @@ public class ReportRunCreateParams extends ApiRequestParams {
   }
 
   public static class Parameters {
-
     /**
      * The set of report columns to include in the report output. If omitted, the Report Type is run
      * with its default column set.
@@ -221,6 +220,7 @@ public class ReportRunCreateParams extends ApiRequestParams {
 
       private ReportingCategory reportingCategory;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Parameters build() {
         return new Parameters(
             this.columns,

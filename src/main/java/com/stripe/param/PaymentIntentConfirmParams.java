@@ -11,7 +11,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class PaymentIntentConfirmParams extends ApiRequestParams {
-
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -158,6 +157,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
     private String source;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public PaymentIntentConfirmParams build() {
       return new PaymentIntentConfirmParams(
           this.expand,
@@ -376,7 +376,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   }
 
   public static class PaymentMethodOptions {
-
     /** Configuration for any card payments attempted on this PaymentIntent. */
     @SerializedName("card")
     Card card;
@@ -404,6 +403,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public PaymentMethodOptions build() {
         return new PaymentMethodOptions(this.card, this.extraParams);
       }
@@ -443,7 +443,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     public static class Card {
-
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -492,6 +491,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         private RequestThreeDSecure requestThreeDSecure;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Card build() {
           return new Card(this.extraParams, this.moto, this.requestThreeDSecure);
         }
@@ -568,7 +568,6 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   }
 
   public static class Shipping {
-
     /** Shipping address. */
     @SerializedName("address")
     Address address;
@@ -633,6 +632,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
       private String trackingNumber;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Shipping build() {
         return new Shipping(
             this.address,
@@ -767,6 +767,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
         private String state;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Address build() {
           return new Address(
               this.city,

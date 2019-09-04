@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class LocationRetrieveParams extends ApiRequestParams {
-
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -48,6 +47,7 @@ public class LocationRetrieveParams extends ApiRequestParams {
 
     private String operatorAccount;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public LocationRetrieveParams build() {
       return new LocationRetrieveParams(this.expand, this.extraParams, this.operatorAccount);
     }

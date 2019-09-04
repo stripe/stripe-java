@@ -9,7 +9,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class WebhookEndpointCreateParams extends ApiRequestParams {
-
   /**
    * Events sent to this endpoint will be generated with this Stripe Version instead of your
    * account's default Stripe Version.
@@ -79,6 +78,7 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
 
     private String url;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public WebhookEndpointCreateParams build() {
       return new WebhookEndpointCreateParams(
           this.apiVersion,

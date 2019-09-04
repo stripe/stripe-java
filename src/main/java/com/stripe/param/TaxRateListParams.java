@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class TaxRateListParams extends ApiRequestParams {
-
   /** Optional flag to filter by tax rates that are either active or not active (archived). */
   @SerializedName("active")
   Boolean active;
@@ -107,6 +106,7 @@ public class TaxRateListParams extends ApiRequestParams {
 
     private String startingAfter;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public TaxRateListParams build() {
       return new TaxRateListParams(
           this.active,
@@ -243,7 +243,6 @@ public class TaxRateListParams extends ApiRequestParams {
   }
 
   public static class Created {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -292,6 +291,7 @@ public class TaxRateListParams extends ApiRequestParams {
 
       private Long lte;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Created build() {
         return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
@@ -349,7 +349,6 @@ public class TaxRateListParams extends ApiRequestParams {
   }
 
   public static class Percentage {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -398,6 +397,7 @@ public class TaxRateListParams extends ApiRequestParams {
 
       private Long lte;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Percentage build() {
         return new Percentage(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }

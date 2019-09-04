@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class SourceRetrieveParams extends ApiRequestParams {
-
   /**
    * The client secret of the source. Required if a publishable key is used to retrieve the source.
    */
@@ -46,6 +45,7 @@ public class SourceRetrieveParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public SourceRetrieveParams build() {
       return new SourceRetrieveParams(this.clientSecret, this.expand, this.extraParams);
     }

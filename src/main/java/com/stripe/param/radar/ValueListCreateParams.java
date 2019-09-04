@@ -9,7 +9,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class ValueListCreateParams extends ApiRequestParams {
-
   /** The name of the value list for use in rules. */
   @SerializedName("alias")
   String alias;
@@ -79,6 +78,7 @@ public class ValueListCreateParams extends ApiRequestParams {
 
     private String name;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public ValueListCreateParams build() {
       return new ValueListCreateParams(
           this.alias, this.expand, this.extraParams, this.itemType, this.metadata, this.name);

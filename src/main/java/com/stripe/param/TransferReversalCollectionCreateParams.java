@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class TransferReversalCollectionCreateParams extends ApiRequestParams {
-
   /**
    * A positive integer in %s representing how much of this transfer to reverse. Can only reverse up
    * to the unreversed amount remaining of the transfer. Partial transfer reversals are only allowed
@@ -86,6 +85,7 @@ public class TransferReversalCollectionCreateParams extends ApiRequestParams {
 
     private Boolean refundApplicationFee;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public TransferReversalCollectionCreateParams build() {
       return new TransferReversalCollectionCreateParams(
           this.amount,

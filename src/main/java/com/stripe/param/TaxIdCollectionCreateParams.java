@@ -9,7 +9,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class TaxIdCollectionCreateParams extends ApiRequestParams {
-
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -52,6 +51,7 @@ public class TaxIdCollectionCreateParams extends ApiRequestParams {
 
     private String value;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public TaxIdCollectionCreateParams build() {
       return new TaxIdCollectionCreateParams(this.expand, this.extraParams, this.type, this.value);
     }

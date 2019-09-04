@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class OrderReturnListParams extends ApiRequestParams {
-
   /** Date this return was created. */
   @SerializedName("created")
   Object created;
@@ -91,6 +90,7 @@ public class OrderReturnListParams extends ApiRequestParams {
 
     private String startingAfter;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public OrderReturnListParams build() {
       return new OrderReturnListParams(
           this.created,
@@ -205,7 +205,6 @@ public class OrderReturnListParams extends ApiRequestParams {
   }
 
   public static class Created {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -254,6 +253,7 @@ public class OrderReturnListParams extends ApiRequestParams {
 
       private Long lte;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Created build() {
         return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }

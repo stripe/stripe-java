@@ -9,7 +9,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class ReaderListParams extends ApiRequestParams {
-
   /**
    * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the
    * list. For instance, if you make a list request and receive 100 objects, starting with
@@ -104,6 +103,7 @@ public class ReaderListParams extends ApiRequestParams {
 
     private Object status;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public ReaderListParams build() {
       return new ReaderListParams(
           this.endingBefore,

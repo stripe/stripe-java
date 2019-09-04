@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class PlanUpdateParams extends ApiRequestParams {
-
   /** Whether the plan is currently available for new subscriptions. */
   @SerializedName("active")
   Boolean active;
@@ -87,6 +86,7 @@ public class PlanUpdateParams extends ApiRequestParams {
 
     private Long trialPeriodDays;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public PlanUpdateParams build() {
       return new PlanUpdateParams(
           this.active,

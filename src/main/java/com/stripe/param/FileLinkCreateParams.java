@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class FileLinkCreateParams extends ApiRequestParams {
-
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -69,6 +68,7 @@ public class FileLinkCreateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public FileLinkCreateParams build() {
       return new FileLinkCreateParams(
           this.expand, this.expiresAt, this.extraParams, this.file, this.metadata);

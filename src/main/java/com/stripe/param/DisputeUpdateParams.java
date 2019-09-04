@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class DisputeUpdateParams extends ApiRequestParams {
-
   /**
    * Evidence to upload, to respond to a dispute. Updating any field in the hash will submit all
    * fields in the hash for review. The combined character count of all fields is limited to
@@ -73,6 +72,7 @@ public class DisputeUpdateParams extends ApiRequestParams {
 
     private Boolean submit;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public DisputeUpdateParams build() {
       return new DisputeUpdateParams(
           this.evidence, this.expand, this.extraParams, this.metadata, this.submit);
@@ -178,7 +178,6 @@ public class DisputeUpdateParams extends ApiRequestParams {
   }
 
   public static class Evidence {
-
     /** Has a maximum character count of 20,000. */
     @SerializedName("access_activity_log")
     String accessActivityLog;
@@ -397,6 +396,7 @@ public class DisputeUpdateParams extends ApiRequestParams {
 
       private String uncategorizedText;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Evidence build() {
         return new Evidence(
             this.accessActivityLog,

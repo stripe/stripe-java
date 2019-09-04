@@ -10,7 +10,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class ProductCreateParams extends ApiRequestParams {
-
   /** Whether the product is currently available for purchase. Defaults to `true`. */
   @SerializedName("active")
   Boolean active;
@@ -201,6 +200,7 @@ public class ProductCreateParams extends ApiRequestParams {
 
     private String url;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public ProductCreateParams build() {
       return new ProductCreateParams(
           this.active,
@@ -478,7 +478,6 @@ public class ProductCreateParams extends ApiRequestParams {
   }
 
   public static class PackageDimensions {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -532,6 +531,7 @@ public class ProductCreateParams extends ApiRequestParams {
 
       private BigDecimal width;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public PackageDimensions build() {
         return new PackageDimensions(
             this.extraParams, this.height, this.length, this.weight, this.width);

@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class LoginLinkCreateOnAccountParams extends ApiRequestParams {
-
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -44,6 +43,7 @@ public class LoginLinkCreateOnAccountParams extends ApiRequestParams {
 
     private String redirectUrl;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public LoginLinkCreateOnAccountParams build() {
       return new LoginLinkCreateOnAccountParams(this.expand, this.extraParams, this.redirectUrl);
     }

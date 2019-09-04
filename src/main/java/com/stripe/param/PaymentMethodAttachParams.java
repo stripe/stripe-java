@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class PaymentMethodAttachParams extends ApiRequestParams {
-
   /** The ID of the customer to which to attach the PaymentMethod. */
   @SerializedName("customer")
   String customer;
@@ -44,6 +43,7 @@ public class PaymentMethodAttachParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public PaymentMethodAttachParams build() {
       return new PaymentMethodAttachParams(this.customer, this.expand, this.extraParams);
     }

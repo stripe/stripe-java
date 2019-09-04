@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class TransferReversalCollectionRetrieveParams extends ApiRequestParams {
-
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -37,6 +36,7 @@ public class TransferReversalCollectionRetrieveParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public TransferReversalCollectionRetrieveParams build() {
       return new TransferReversalCollectionRetrieveParams(this.expand, this.extraParams);
     }

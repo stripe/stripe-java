@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class SetupIntentUpdateParams extends ApiRequestParams {
-
   /**
    * ID of the Customer this SetupIntent belongs to, if one exists.
    *
@@ -92,6 +91,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
     private List<String> paymentMethodTypes;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public SetupIntentUpdateParams build() {
       return new SetupIntentUpdateParams(
           this.customer,

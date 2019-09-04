@@ -42,6 +42,7 @@ public class ApplePayDomainCreateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public ApplePayDomainCreateParams build() {
       return new ApplePayDomainCreateParams(this.domainName, this.expand, this.extraParams);
     }

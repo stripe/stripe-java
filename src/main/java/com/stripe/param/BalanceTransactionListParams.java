@@ -126,6 +126,7 @@ public class BalanceTransactionListParams extends ApiRequestParams {
 
     private String type;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public BalanceTransactionListParams build() {
       return new BalanceTransactionListParams(
           this.availableOn,
@@ -276,7 +277,6 @@ public class BalanceTransactionListParams extends ApiRequestParams {
   }
 
   public static class AvailableOn {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -325,6 +325,7 @@ public class BalanceTransactionListParams extends ApiRequestParams {
 
       private Long lte;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public AvailableOn build() {
         return new AvailableOn(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
@@ -383,7 +384,6 @@ public class BalanceTransactionListParams extends ApiRequestParams {
   }
 
   public static class Created {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -432,6 +432,7 @@ public class BalanceTransactionListParams extends ApiRequestParams {
 
       private Long lte;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Created build() {
         return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }

@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ValueListItemCreateParams extends ApiRequestParams {
-
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -51,6 +50,7 @@ public class ValueListItemCreateParams extends ApiRequestParams {
 
     private String valueList;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public ValueListItemCreateParams build() {
       return new ValueListItemCreateParams(
           this.expand, this.extraParams, this.value, this.valueList);

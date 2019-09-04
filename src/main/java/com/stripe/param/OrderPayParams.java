@@ -93,6 +93,7 @@ public class OrderPayParams extends ApiRequestParams {
 
     private String source;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public OrderPayParams build() {
       return new OrderPayParams(
           this.applicationFee,

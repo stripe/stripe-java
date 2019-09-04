@@ -9,7 +9,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class InvoiceListParams extends ApiRequestParams {
-
   /**
    * This field has been renamed to `collection_method` and will be removed in a future API version.
    */
@@ -138,6 +137,7 @@ public class InvoiceListParams extends ApiRequestParams {
 
     private String subscription;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public InvoiceListParams build() {
       return new InvoiceListParams(
           this.billing,
@@ -298,7 +298,6 @@ public class InvoiceListParams extends ApiRequestParams {
   }
 
   public static class Created {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -347,6 +346,7 @@ public class InvoiceListParams extends ApiRequestParams {
 
       private Long lte;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Created build() {
         return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
@@ -404,7 +404,6 @@ public class InvoiceListParams extends ApiRequestParams {
   }
 
   public static class DueDate {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -453,6 +452,7 @@ public class InvoiceListParams extends ApiRequestParams {
 
       private Long lte;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public DueDate build() {
         return new DueDate(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }

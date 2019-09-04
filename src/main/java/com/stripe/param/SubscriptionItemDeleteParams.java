@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SubscriptionItemDeleteParams extends ApiRequestParams {
-
   /**
    * Delete all usage for the given subscription item. Allowed only when the current plan's
    * `usage_type` is `metered`.
@@ -59,6 +58,7 @@ public class SubscriptionItemDeleteParams extends ApiRequestParams {
 
     private Long prorationDate;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public SubscriptionItemDeleteParams build() {
       return new SubscriptionItemDeleteParams(
           this.clearUsage, this.extraParams, this.prorate, this.prorationDate);

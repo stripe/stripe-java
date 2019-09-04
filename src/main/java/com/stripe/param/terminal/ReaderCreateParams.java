@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ReaderCreateParams extends ApiRequestParams {
-
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -80,6 +79,7 @@ public class ReaderCreateParams extends ApiRequestParams {
 
     private String registrationCode;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public ReaderCreateParams build() {
       return new ReaderCreateParams(
           this.expand,

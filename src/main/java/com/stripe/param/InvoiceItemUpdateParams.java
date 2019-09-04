@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 public class InvoiceItemUpdateParams extends ApiRequestParams {
-
   /**
    * The integer amount in **%s** of the charge to be applied to the upcoming invoice. If you want
    * to apply a credit to the customer's account, pass a negative amount.
@@ -135,6 +134,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
 
     private BigDecimal unitAmountDecimal;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public InvoiceItemUpdateParams build() {
       return new InvoiceItemUpdateParams(
           this.amount,
@@ -307,7 +307,6 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
   }
 
   public static class Period {
-
     /** The end of the period, which must be greater than or equal to the start. */
     @SerializedName("end")
     Long end;
@@ -342,6 +341,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
 
       private Long start;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Period build() {
         return new Period(this.end, this.extraParams, this.start);
       }

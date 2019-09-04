@@ -11,7 +11,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class InvoiceUpcomingParams extends ApiRequestParams {
-
   /**
    * The code of the coupon to apply. If `subscription` or `subscription_items` is provided, the
    * invoice returned will preview updating or creating a subscription with that coupon. Otherwise,
@@ -229,6 +228,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     private Boolean subscriptionTrialFromPlan;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public InvoiceUpcomingParams build() {
       return new InvoiceUpcomingParams(
           this.coupon,
@@ -542,7 +542,6 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   }
 
   public static class InvoiceItem {
-
     /** The integer amount in **%s** of previewed invoice item. */
     @SerializedName("amount")
     Long amount;
@@ -674,6 +673,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
       private BigDecimal unitAmountDecimal;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public InvoiceItem build() {
         return new InvoiceItem(
             this.amount,
@@ -828,7 +828,6 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     public static class Period {
-
       /** The end of the period, which must be greater than or equal to the start. */
       @SerializedName("end")
       Long end;
@@ -863,6 +862,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
         private Long start;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Period build() {
           return new Period(this.end, this.extraParams, this.start);
         }
@@ -911,7 +911,6 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   }
 
   public static class SubscriptionItem {
-
     /**
      * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
      * billing period.
@@ -1009,6 +1008,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
       private Object taxRates;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public SubscriptionItem build() {
         return new SubscriptionItem(
             this.billingThresholds,
@@ -1145,7 +1145,6 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     public static class BillingThresholds {
-
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -1173,6 +1172,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
         private Long usageGte;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public BillingThresholds build() {
           return new BillingThresholds(this.extraParams, this.usageGte);
         }

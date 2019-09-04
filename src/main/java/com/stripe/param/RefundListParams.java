@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class RefundListParams extends ApiRequestParams {
-
   /** Only return refunds for the charge specified by this charge ID. */
   @SerializedName("charge")
   String charge;
@@ -90,6 +89,7 @@ public class RefundListParams extends ApiRequestParams {
 
     private String startingAfter;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public RefundListParams build() {
       return new RefundListParams(
           this.charge,
@@ -202,7 +202,6 @@ public class RefundListParams extends ApiRequestParams {
   }
 
   public static class Created {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -251,6 +250,7 @@ public class RefundListParams extends ApiRequestParams {
 
       private Long lte;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Created build() {
         return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }

@@ -10,7 +10,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class SessionCreateParams extends ApiRequestParams {
-
   /**
    * Specify whether Checkout should collect the customer's billing address. If set to `required`,
    * Checkout will always collect the customer's billing address. If left blank or set to `auto`
@@ -191,6 +190,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
     private String successUrl;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public SessionCreateParams build() {
       return new SessionCreateParams(
           this.billingAddressCollection,
@@ -423,7 +423,6 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   public static class LineItem {
-
     /** The amount to be collected per unit of the line item. */
     @SerializedName("amount")
     Long amount;
@@ -496,6 +495,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private Long quantity;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public LineItem build() {
         return new LineItem(
             this.amount,
@@ -595,7 +595,6 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   public static class PaymentIntentData {
-
     /**
      * The amount of the application fee (if any) that will be applied to the payment and
      * transferred to the application owner's Stripe account. To use an application fee, the request
@@ -736,6 +735,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private TransferData transferData;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public PaymentIntentData build() {
         return new PaymentIntentData(
             this.applicationFeeAmount,
@@ -895,7 +895,6 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     public static class Shipping {
-
       /** Shipping address. */
       @SerializedName("address")
       Address address;
@@ -960,6 +959,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
         private String trackingNumber;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Shipping build() {
           return new Shipping(
               this.address,
@@ -1098,6 +1098,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
           private String state;
 
+          /** Finalize and obtain parameter instance from this builder. */
           public Address build() {
             return new Address(
                 this.city,
@@ -1171,7 +1172,6 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     public static class TransferData {
-
       /**
        * If specified, successful charges will be attributed to the destination account for tax
        * reporting, and the funds from charges will be transferred to the destination account. The
@@ -1203,6 +1203,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public TransferData build() {
           return new TransferData(this.destination, this.extraParams);
         }
@@ -1280,7 +1281,6 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   public static class SetupIntentData {
-
     /** An arbitrary string attached to the object. Often useful for displaying to users. */
     @SerializedName("description")
     String description;
@@ -1329,6 +1329,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private String onBehalfOf;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public SetupIntentData build() {
         return new SetupIntentData(
             this.description, this.extraParams, this.metadata, this.onBehalfOf);
@@ -1401,7 +1402,6 @@ public class SessionCreateParams extends ApiRequestParams {
   }
 
   public static class SubscriptionData {
-
     /**
      * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
      * the percentage of the subscription invoice subtotal that will be transferred to the
@@ -1482,6 +1482,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private Long trialPeriodDays;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public SubscriptionData build() {
         return new SubscriptionData(
             this.applicationFeePercent,
@@ -1603,7 +1604,6 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     public static class Item {
-
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -1638,6 +1638,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
         private Long quantity;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Item build() {
           return new Item(this.extraParams, this.plan, this.quantity);
         }

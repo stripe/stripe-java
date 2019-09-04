@@ -104,6 +104,7 @@ public class PayoutListParams extends ApiRequestParams {
 
     private String status;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public PayoutListParams build() {
       return new PayoutListParams(
           this.arrivalDate,
@@ -236,7 +237,6 @@ public class PayoutListParams extends ApiRequestParams {
   }
 
   public static class ArrivalDate {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -285,6 +285,7 @@ public class PayoutListParams extends ApiRequestParams {
 
       private Long lte;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public ArrivalDate build() {
         return new ArrivalDate(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
@@ -342,7 +343,6 @@ public class PayoutListParams extends ApiRequestParams {
   }
 
   public static class Created {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -391,6 +391,7 @@ public class PayoutListParams extends ApiRequestParams {
 
       private Long lte;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Created build() {
         return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }

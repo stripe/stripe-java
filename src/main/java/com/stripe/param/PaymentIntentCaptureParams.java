@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class PaymentIntentCaptureParams extends ApiRequestParams {
-
   /**
    * The amount to capture from the PaymentIntent, which must be less than or equal to the original
    * amount. Any additional amount will be automatically refunded. Defaults to the full
@@ -98,6 +97,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
 
     private TransferData transferData;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public PaymentIntentCaptureParams build() {
       return new PaymentIntentCaptureParams(
           this.amountToCapture,
@@ -214,7 +214,6 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
   }
 
   public static class TransferData {
-
     /** The amount that will be transferred automatically when a charge succeeds. */
     @SerializedName("amount")
     Long amount;
@@ -242,6 +241,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public TransferData build() {
         return new TransferData(this.amount, this.extraParams);
       }

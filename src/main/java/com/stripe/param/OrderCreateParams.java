@@ -9,7 +9,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class OrderCreateParams extends ApiRequestParams {
-
   /**
    * A coupon code that represents a discount to be applied to this order. Must be one-time duration
    * and in same currency as the order. An order can have multiple coupons.
@@ -113,6 +112,7 @@ public class OrderCreateParams extends ApiRequestParams {
 
     private Shipping shipping;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public OrderCreateParams build() {
       return new OrderCreateParams(
           this.coupon,
@@ -344,6 +344,7 @@ public class OrderCreateParams extends ApiRequestParams {
 
       private Type type;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Item build() {
         return new Item(
             this.amount,
@@ -440,7 +441,6 @@ public class OrderCreateParams extends ApiRequestParams {
   }
 
   public static class Shipping {
-
     /** Customer shipping address. */
     @SerializedName("address")
     Address address;
@@ -482,6 +482,7 @@ public class OrderCreateParams extends ApiRequestParams {
 
       private String phone;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Shipping build() {
         return new Shipping(this.address, this.extraParams, this.name, this.phone);
       }
@@ -595,6 +596,7 @@ public class OrderCreateParams extends ApiRequestParams {
 
         private String state;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Address build() {
           return new Address(
               this.city,

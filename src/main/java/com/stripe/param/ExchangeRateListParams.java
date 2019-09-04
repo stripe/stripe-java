@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ExchangeRateListParams extends ApiRequestParams {
-
   /**
    * A cursor for use in pagination. `ending_before` is the currency that defines your place in the
    * list. For instance, if you make a list request and receive 100 objects, starting with the
@@ -75,6 +74,7 @@ public class ExchangeRateListParams extends ApiRequestParams {
 
     private String startingAfter;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public ExchangeRateListParams build() {
       return new ExchangeRateListParams(
           this.endingBefore, this.expand, this.extraParams, this.limit, this.startingAfter);

@@ -9,7 +9,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class PaymentMethodListParams extends ApiRequestParams {
-
   /** The ID of the customer whose PaymentMethods will be retrieved. */
   @SerializedName("customer")
   String customer;
@@ -92,6 +91,7 @@ public class PaymentMethodListParams extends ApiRequestParams {
 
     private Type type;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public PaymentMethodListParams build() {
       return new PaymentMethodListParams(
           this.customer,

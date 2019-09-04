@@ -80,6 +80,7 @@ public class RefundCreateParams extends ApiRequestParams {
 
     private Boolean reverseTransfer;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public RefundCreateParams build() {
       return new RefundCreateParams(
           this.amount,

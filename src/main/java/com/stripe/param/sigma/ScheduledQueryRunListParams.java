@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ScheduledQueryRunListParams extends ApiRequestParams {
-
   /**
    * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the
    * list. For instance, if you make a list request and receive 100 objects, starting with
@@ -75,6 +74,7 @@ public class ScheduledQueryRunListParams extends ApiRequestParams {
 
     private String startingAfter;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public ScheduledQueryRunListParams build() {
       return new ScheduledQueryRunListParams(
           this.endingBefore, this.expand, this.extraParams, this.limit, this.startingAfter);

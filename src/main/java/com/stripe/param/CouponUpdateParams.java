@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class CouponUpdateParams extends ApiRequestParams {
-
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -60,6 +59,7 @@ public class CouponUpdateParams extends ApiRequestParams {
 
     private String name;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public CouponUpdateParams build() {
       return new CouponUpdateParams(this.expand, this.extraParams, this.metadata, this.name);
     }

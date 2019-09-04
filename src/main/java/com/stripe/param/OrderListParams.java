@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class OrderListParams extends ApiRequestParams {
-
   /** Date this order was created. */
   @SerializedName("created")
   Object created;
@@ -126,6 +125,7 @@ public class OrderListParams extends ApiRequestParams {
 
     private List<String> upstreamIds;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public OrderListParams build() {
       return new OrderListParams(
           this.created,
@@ -311,7 +311,6 @@ public class OrderListParams extends ApiRequestParams {
   }
 
   public static class Created {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -360,6 +359,7 @@ public class OrderListParams extends ApiRequestParams {
 
       private Long lte;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Created build() {
         return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
@@ -417,7 +417,6 @@ public class OrderListParams extends ApiRequestParams {
   }
 
   public static class StatusTransitions {
-
     /** Date this order was canceled. */
     @SerializedName("canceled")
     Object canceled;
@@ -471,6 +470,7 @@ public class OrderListParams extends ApiRequestParams {
 
       private Object returned;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public StatusTransitions build() {
         return new StatusTransitions(
             this.canceled, this.extraParams, this.fulfilled, this.paid, this.returned);
@@ -552,7 +552,6 @@ public class OrderListParams extends ApiRequestParams {
     }
 
     public static class Canceled {
-
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -601,6 +600,7 @@ public class OrderListParams extends ApiRequestParams {
 
         private Long lte;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Canceled build() {
           return new Canceled(this.extraParams, this.gt, this.gte, this.lt, this.lte);
         }
@@ -660,7 +660,6 @@ public class OrderListParams extends ApiRequestParams {
     }
 
     public static class Fulfilled {
-
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -709,6 +708,7 @@ public class OrderListParams extends ApiRequestParams {
 
         private Long lte;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Fulfilled build() {
           return new Fulfilled(this.extraParams, this.gt, this.gte, this.lt, this.lte);
         }
@@ -768,7 +768,6 @@ public class OrderListParams extends ApiRequestParams {
     }
 
     public static class Paid {
-
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -817,6 +816,7 @@ public class OrderListParams extends ApiRequestParams {
 
         private Long lte;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Paid build() {
           return new Paid(this.extraParams, this.gt, this.gte, this.lt, this.lte);
         }
@@ -876,7 +876,6 @@ public class OrderListParams extends ApiRequestParams {
     }
 
     public static class Returned {
-
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -925,6 +924,7 @@ public class OrderListParams extends ApiRequestParams {
 
         private Long lte;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Returned build() {
           return new Returned(this.extraParams, this.gt, this.gte, this.lt, this.lte);
         }

@@ -9,7 +9,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class SubscriptionListParams extends ApiRequestParams {
-
   /**
    * This field has been renamed to `collection_method` and will be removed in a future API version.
    */
@@ -147,6 +146,7 @@ public class SubscriptionListParams extends ApiRequestParams {
 
     private Status status;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public SubscriptionListParams build() {
       return new SubscriptionListParams(
           this.billing,
@@ -320,7 +320,6 @@ public class SubscriptionListParams extends ApiRequestParams {
   }
 
   public static class Created {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -369,6 +368,7 @@ public class SubscriptionListParams extends ApiRequestParams {
 
       private Long lte;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Created build() {
         return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
@@ -426,7 +426,6 @@ public class SubscriptionListParams extends ApiRequestParams {
   }
 
   public static class CurrentPeriodEnd {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -476,6 +475,7 @@ public class SubscriptionListParams extends ApiRequestParams {
 
       private Long lte;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public CurrentPeriodEnd build() {
         return new CurrentPeriodEnd(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
@@ -534,7 +534,6 @@ public class SubscriptionListParams extends ApiRequestParams {
   }
 
   public static class CurrentPeriodStart {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -584,6 +583,7 @@ public class SubscriptionListParams extends ApiRequestParams {
 
       private Long lte;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public CurrentPeriodStart build() {
         return new CurrentPeriodStart(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }

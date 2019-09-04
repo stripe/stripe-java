@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class IssuerFraudRecordListParams extends ApiRequestParams {
-
   /** Only return issuer fraud records for the charge specified by this charge ID. */
   @SerializedName("charge")
   String charge;
@@ -83,6 +82,7 @@ public class IssuerFraudRecordListParams extends ApiRequestParams {
 
     private String startingAfter;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public IssuerFraudRecordListParams build() {
       return new IssuerFraudRecordListParams(
           this.charge,

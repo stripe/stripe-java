@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class TransactionRetrieveParams extends ApiRequestParams {
-
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -36,6 +35,7 @@ public class TransactionRetrieveParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public TransactionRetrieveParams build() {
       return new TransactionRetrieveParams(this.expand, this.extraParams);
     }

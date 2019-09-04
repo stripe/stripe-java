@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class PaymentIntentListParams extends ApiRequestParams {
-
   /**
    * A filter on the list, based on the object `created` field. The value can be a string with an
    * integer Unix timestamp, or it can be a dictionary with a number of different query options.
@@ -94,6 +93,7 @@ public class PaymentIntentListParams extends ApiRequestParams {
 
     private String startingAfter;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public PaymentIntentListParams build() {
       return new PaymentIntentListParams(
           this.created,
@@ -214,7 +214,6 @@ public class PaymentIntentListParams extends ApiRequestParams {
   }
 
   public static class Created {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -263,6 +262,7 @@ public class PaymentIntentListParams extends ApiRequestParams {
 
       private Long lte;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Created build() {
         return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }

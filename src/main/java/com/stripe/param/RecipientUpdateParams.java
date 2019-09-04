@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class RecipientUpdateParams extends ApiRequestParams {
-
   /**
    * A bank account to attach to the recipient. You can provide either a token, like the ones
    * returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a user's
@@ -131,6 +130,7 @@ public class RecipientUpdateParams extends ApiRequestParams {
 
     private String taxId;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public RecipientUpdateParams build() {
       return new RecipientUpdateParams(
           this.bankAccount,

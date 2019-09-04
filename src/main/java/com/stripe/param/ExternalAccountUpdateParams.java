@@ -11,7 +11,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class ExternalAccountUpdateParams extends ApiRequestParams {
-
   /** The name of the person or business that owns the bank account. */
   @SerializedName("account_holder_name")
   String accountHolderName;
@@ -144,6 +143,7 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
 
     private String name;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public ExternalAccountUpdateParams build() {
       return new ExternalAccountUpdateParams(
           this.accountHolderName,

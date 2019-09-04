@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class SubscriptionCancelParams extends ApiRequestParams {
-
   /**
    * Map of extra parameters for custom features not available in this client library. The content
    * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -48,6 +47,7 @@ public class SubscriptionCancelParams extends ApiRequestParams {
 
     private Boolean prorate;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public SubscriptionCancelParams build() {
       return new SubscriptionCancelParams(this.extraParams, this.invoiceNow, this.prorate);
     }

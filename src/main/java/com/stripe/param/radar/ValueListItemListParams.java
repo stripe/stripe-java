@@ -100,6 +100,7 @@ public class ValueListItemListParams extends ApiRequestParams {
 
     private String valueList;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public ValueListItemListParams build() {
       return new ValueListItemListParams(
           this.created,
@@ -222,7 +223,6 @@ public class ValueListItemListParams extends ApiRequestParams {
   }
 
   public static class Created {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -271,6 +271,7 @@ public class ValueListItemListParams extends ApiRequestParams {
 
       private Long lte;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Created build() {
         return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }

@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class InvoiceFinalizeInvoiceParams extends ApiRequestParams {
-
   /**
    * Controls whether Stripe will perform [automatic
    * collection](https://stripe.com/docs/billing/invoices/workflow/#auto_advance) of the invoice.
@@ -48,6 +47,7 @@ public class InvoiceFinalizeInvoiceParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public InvoiceFinalizeInvoiceParams build() {
       return new InvoiceFinalizeInvoiceParams(this.autoAdvance, this.expand, this.extraParams);
     }

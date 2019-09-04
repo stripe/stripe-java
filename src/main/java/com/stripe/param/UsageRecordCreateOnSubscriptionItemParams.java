@@ -9,7 +9,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class UsageRecordCreateOnSubscriptionItemParams extends ApiRequestParams {
-
   /**
    * Valid values are `increment` (default) or `set`. When using `increment` the specified
    * `quantity` will be added to the usage at the specified timestamp. The `set` action will
@@ -72,6 +71,7 @@ public class UsageRecordCreateOnSubscriptionItemParams extends ApiRequestParams 
 
     private Long timestamp;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public UsageRecordCreateOnSubscriptionItemParams build() {
       return new UsageRecordCreateOnSubscriptionItemParams(
           this.action, this.expand, this.extraParams, this.quantity, this.timestamp);

@@ -11,7 +11,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class CustomerUpdateParams extends ApiRequestParams {
-
   /** This field has been renamed to `balance` and will be removed in a future API version. */
   @SerializedName("account_balance")
   Long accountBalance;
@@ -214,6 +213,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
     private Object trialEnd;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public CustomerUpdateParams build() {
       return new CustomerUpdateParams(
           this.accountBalance,
@@ -560,6 +560,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
       private String state;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Address build() {
         return new Address(
             this.city,
@@ -630,7 +631,6 @@ public class CustomerUpdateParams extends ApiRequestParams {
   }
 
   public static class InvoiceSettings {
-
     /** Default custom fields to be displayed on invoices for this customer. */
     @SerializedName("custom_fields")
     Object customFields;
@@ -676,6 +676,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
       private String footer;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public InvoiceSettings build() {
         return new InvoiceSettings(
             this.customFields, this.defaultPaymentMethod, this.extraParams, this.footer);
@@ -733,7 +734,6 @@ public class CustomerUpdateParams extends ApiRequestParams {
     }
 
     public static class CustomField {
-
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -768,6 +768,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
         private String value;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public CustomField build() {
           return new CustomField(this.extraParams, this.name, this.value);
         }
@@ -816,7 +817,6 @@ public class CustomerUpdateParams extends ApiRequestParams {
   }
 
   public static class Shipping {
-
     /** Customer shipping address. */
     @SerializedName("address")
     Address address;
@@ -858,6 +858,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
       private String phone;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Shipping build() {
         return new Shipping(this.address, this.extraParams, this.name, this.phone);
       }
@@ -971,6 +972,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
         private String state;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Address build() {
           return new Address(
               this.city,
@@ -1044,7 +1046,6 @@ public class CustomerUpdateParams extends ApiRequestParams {
   }
 
   public static class TaxInfo {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -1079,6 +1080,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
       private Type type;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public TaxInfo build() {
         return new TaxInfo(this.extraParams, this.taxId, this.type);
       }

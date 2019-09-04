@@ -10,7 +10,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class SourceUpdateParams extends ApiRequestParams {
-
   /** Amount associated with the source. */
   @SerializedName("amount")
   Long amount;
@@ -92,6 +91,7 @@ public class SourceUpdateParams extends ApiRequestParams {
 
     private SourceOrder sourceOrder;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public SourceUpdateParams build() {
       return new SourceUpdateParams(
           this.amount,
@@ -216,7 +216,6 @@ public class SourceUpdateParams extends ApiRequestParams {
   }
 
   public static class Mandate {
-
     /**
      * The parameters required to notify Stripe of a mandate acceptance or refusal by the customer.
      */
@@ -290,6 +289,7 @@ public class SourceUpdateParams extends ApiRequestParams {
 
       private NotificationMethod notificationMethod;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Mandate build() {
         return new Mandate(
             this.acceptance,
@@ -377,7 +377,6 @@ public class SourceUpdateParams extends ApiRequestParams {
     }
 
     public static class Acceptance {
-
       /** The unix timestamp the mandate was accepted or refused at by the customer. */
       @SerializedName("date")
       Long date;
@@ -469,6 +468,7 @@ public class SourceUpdateParams extends ApiRequestParams {
 
         private String userAgent;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Acceptance build() {
           return new Acceptance(
               this.date,
@@ -568,7 +568,6 @@ public class SourceUpdateParams extends ApiRequestParams {
       }
 
       public static class Offline {
-
         /**
          * An email to contact you with if a copy of the mandate is requested, required if `type` is
          * `offline`.
@@ -600,6 +599,7 @@ public class SourceUpdateParams extends ApiRequestParams {
 
           private Map<String, Object> extraParams;
 
+          /** Finalize and obtain parameter instance from this builder. */
           public Offline build() {
             return new Offline(this.contactEmail, this.extraParams);
           }
@@ -644,7 +644,6 @@ public class SourceUpdateParams extends ApiRequestParams {
       }
 
       public static class Online {
-
         /** The unix timestamp the mandate was accepted or refused at by the customer. */
         @SerializedName("date")
         Long date;
@@ -690,6 +689,7 @@ public class SourceUpdateParams extends ApiRequestParams {
 
           private String userAgent;
 
+          /** Finalize and obtain parameter instance from this builder. */
           public Online build() {
             return new Online(this.date, this.extraParams, this.ip, this.userAgent);
           }
@@ -826,7 +826,6 @@ public class SourceUpdateParams extends ApiRequestParams {
   }
 
   public static class Owner {
-
     /** Owner's address. */
     @SerializedName("address")
     Address address;
@@ -876,6 +875,7 @@ public class SourceUpdateParams extends ApiRequestParams {
 
       private String phone;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Owner build() {
         return new Owner(this.address, this.email, this.extraParams, this.name, this.phone);
       }
@@ -995,6 +995,7 @@ public class SourceUpdateParams extends ApiRequestParams {
 
         private String state;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Address build() {
           return new Address(
               this.city,
@@ -1068,7 +1069,6 @@ public class SourceUpdateParams extends ApiRequestParams {
   }
 
   public static class SourceOrder {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -1106,6 +1106,7 @@ public class SourceUpdateParams extends ApiRequestParams {
 
       private Shipping shipping;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public SourceOrder build() {
         return new SourceOrder(this.extraParams, this.items, this.shipping);
       }
@@ -1241,6 +1242,7 @@ public class SourceUpdateParams extends ApiRequestParams {
 
         private Type type;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Item build() {
           return new Item(
               this.amount,
@@ -1339,7 +1341,6 @@ public class SourceUpdateParams extends ApiRequestParams {
     }
 
     public static class Shipping {
-
       /** Shipping address. */
       @SerializedName("address")
       Address address;
@@ -1404,6 +1405,7 @@ public class SourceUpdateParams extends ApiRequestParams {
 
         private String trackingNumber;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Shipping build() {
           return new Shipping(
               this.address,
@@ -1542,6 +1544,7 @@ public class SourceUpdateParams extends ApiRequestParams {
 
           private String state;
 
+          /** Finalize and obtain parameter instance from this builder. */
           public Address build() {
             return new Address(
                 this.city,

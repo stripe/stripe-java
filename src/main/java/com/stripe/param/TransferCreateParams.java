@@ -9,7 +9,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class TransferCreateParams extends ApiRequestParams {
-
   /** A positive integer in %s representing how much to transfer. */
   @SerializedName("amount")
   Long amount;
@@ -123,6 +122,7 @@ public class TransferCreateParams extends ApiRequestParams {
 
     private String transferGroup;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public TransferCreateParams build() {
       return new TransferCreateParams(
           this.amount,

@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class TaxRateUpdateParams extends ApiRequestParams {
-
   /**
    * Flag determining whether the tax rate is active or inactive. Inactive tax rates continue to
    * work where they are currently applied however they cannot be used for new applications.
@@ -88,6 +87,7 @@ public class TaxRateUpdateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public TaxRateUpdateParams build() {
       return new TaxRateUpdateParams(
           this.active,

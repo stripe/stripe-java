@@ -9,7 +9,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class WebhookEndpointUpdateParams extends ApiRequestParams {
-
   /** Disable the webhook endpoint if set to true. */
   @SerializedName("disabled")
   Boolean disabled;
@@ -65,6 +64,7 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
 
     private String url;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public WebhookEndpointUpdateParams build() {
       return new WebhookEndpointUpdateParams(
           this.disabled, this.enabledEvents, this.expand, this.extraParams, this.url);

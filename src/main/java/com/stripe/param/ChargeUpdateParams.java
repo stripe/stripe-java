@@ -11,7 +11,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class ChargeUpdateParams extends ApiRequestParams {
-
   /**
    * The ID of an existing customer that will be associated with this request. This field may only
    * be updated if there is no existing associated customer with this charge.
@@ -122,6 +121,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
 
     private String transferGroup;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public ChargeUpdateParams build() {
       return new ChargeUpdateParams(
           this.customer,
@@ -272,7 +272,6 @@ public class ChargeUpdateParams extends ApiRequestParams {
   }
 
   public static class FraudDetails {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -299,6 +298,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
 
       private EnumParam userReport;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public FraudDetails build() {
         return new FraudDetails(this.extraParams, this.userReport);
       }
@@ -357,7 +357,6 @@ public class ChargeUpdateParams extends ApiRequestParams {
   }
 
   public static class Shipping {
-
     /** Shipping address. */
     @SerializedName("address")
     Address address;
@@ -422,6 +421,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
 
       private String trackingNumber;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Shipping build() {
         return new Shipping(
             this.address,
@@ -556,6 +556,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
 
         private String state;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Address build() {
           return new Address(
               this.city,

@@ -9,7 +9,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class CardholderCreateParams extends ApiRequestParams {
-
   /**
    * Spending rules that give you control over how your cardholders can make charges. Refer to our
    * [authorizations](https://stripe.com/docs/issuing/authorizations) documentation for more
@@ -120,6 +119,7 @@ public class CardholderCreateParams extends ApiRequestParams {
 
     private Type type;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public CardholderCreateParams build() {
       return new CardholderCreateParams(
           this.authorizationControls,
@@ -273,7 +273,6 @@ public class CardholderCreateParams extends ApiRequestParams {
   }
 
   public static class AuthorizationControls {
-
     /**
      * Array of strings containing
      * [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category)
@@ -335,6 +334,7 @@ public class CardholderCreateParams extends ApiRequestParams {
 
       private String spendingLimitsCurrency;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public AuthorizationControls build() {
         return new AuthorizationControls(
             this.allowedCategories,
@@ -461,7 +461,6 @@ public class CardholderCreateParams extends ApiRequestParams {
     }
 
     public static class SpendingLimit {
-
       /** Maximum amount allowed to spend per time interval. */
       @SerializedName("amount")
       Long amount;
@@ -514,6 +513,7 @@ public class CardholderCreateParams extends ApiRequestParams {
 
         private Interval interval;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public SpendingLimit build() {
           return new SpendingLimit(this.amount, this.categories, this.extraParams, this.interval);
         }
@@ -3308,6 +3308,7 @@ public class CardholderCreateParams extends ApiRequestParams {
 
       private String name;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Billing build() {
         return new Billing(this.address, this.extraParams, this.name);
       }
@@ -3417,6 +3418,7 @@ public class CardholderCreateParams extends ApiRequestParams {
 
         private String state;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Address build() {
           return new Address(
               this.city,

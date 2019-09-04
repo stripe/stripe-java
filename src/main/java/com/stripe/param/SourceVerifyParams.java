@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class SourceVerifyParams extends ApiRequestParams {
-
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -44,6 +43,7 @@ public class SourceVerifyParams extends ApiRequestParams {
 
     private List<String> values;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public SourceVerifyParams build() {
       return new SourceVerifyParams(this.expand, this.extraParams, this.values);
     }

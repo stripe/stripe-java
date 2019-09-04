@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 public class PersonCollectionCreateParams extends ApiRequestParams {
-
   /** The person's address. */
   @SerializedName("address")
   Address address;
@@ -212,6 +211,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
 
     private Verification verification;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public PersonCollectionCreateParams build() {
       return new PersonCollectionCreateParams(
           this.address,
@@ -446,7 +446,6 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
   }
 
   public static class Address {
-
     /** City, district, suburb, town, or village. */
     @SerializedName("city")
     String city;
@@ -519,6 +518,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
 
       private String state;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Address build() {
         return new Address(
             this.city,
@@ -598,7 +598,6 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
   }
 
   public static class AddressKana {
-
     /** City or ward. */
     @SerializedName("city")
     String city;
@@ -679,6 +678,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
 
       private String town;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public AddressKana build() {
         return new AddressKana(
             this.city,
@@ -766,7 +766,6 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
   }
 
   public static class AddressKanji {
-
     /** City or ward. */
     @SerializedName("city")
     String city;
@@ -847,6 +846,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
 
       private String town;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public AddressKanji build() {
         return new AddressKanji(
             this.city,
@@ -934,7 +934,6 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
   }
 
   public static class Dob {
-
     /** The day of birth, between 1 and 31. */
     @SerializedName("day")
     Long day;
@@ -976,6 +975,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
 
       private Long year;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Dob build() {
         return new Dob(this.day, this.extraParams, this.month, this.year);
       }
@@ -1027,7 +1027,6 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
   }
 
   public static class Relationship {
-
     /**
      * Whether the person opened the account. This person provides information about themselves, and
      * general information about the account.
@@ -1107,6 +1106,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
 
       private String title;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Relationship build() {
         return new Relationship(
             this.accountOpener,
@@ -1200,7 +1200,6 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
   }
 
   public static class Verification {
-
     /** An identifying document, either a passport or local ID card. */
     @SerializedName("document")
     Document document;
@@ -1228,6 +1227,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Verification build() {
         return new Verification(this.document, this.extraParams);
       }
@@ -1267,7 +1267,6 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
     }
 
     public static class Document {
-
       /**
        * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
        * `identity_document`.
@@ -1308,6 +1307,7 @@ public class PersonCollectionCreateParams extends ApiRequestParams {
 
         private String front;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Document build() {
           return new Document(this.back, this.extraParams, this.front);
         }

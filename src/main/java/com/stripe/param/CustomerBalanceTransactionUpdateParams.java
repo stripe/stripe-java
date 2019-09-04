@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class CustomerBalanceTransactionUpdateParams extends ApiRequestParams {
-
   /** An arbitrary string attached to the object. Often useful for displaying to users. */
   @SerializedName("description")
   String description;
@@ -57,6 +56,7 @@ public class CustomerBalanceTransactionUpdateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public CustomerBalanceTransactionUpdateParams build() {
       return new CustomerBalanceTransactionUpdateParams(
           this.description, this.expand, this.extraParams, this.metadata);

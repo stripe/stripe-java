@@ -6,7 +6,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class LocationDeleteParams extends ApiRequestParams {
-
   /**
    * Map of extra parameters for custom features not available in this client library. The content
    * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -38,6 +37,7 @@ public class LocationDeleteParams extends ApiRequestParams {
 
     private String operatorAccount;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public LocationDeleteParams build() {
       return new LocationDeleteParams(this.extraParams, this.operatorAccount);
     }

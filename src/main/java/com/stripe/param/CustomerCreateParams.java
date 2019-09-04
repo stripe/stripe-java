@@ -11,7 +11,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class CustomerCreateParams extends ApiRequestParams {
-
   /** This field has been renamed to `balance` and will be removed in a future API version. */
   @SerializedName("account_balance")
   Long accountBalance;
@@ -203,6 +202,7 @@ public class CustomerCreateParams extends ApiRequestParams {
 
     private TaxInfo taxInfo;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public CustomerCreateParams build() {
       return new CustomerCreateParams(
           this.accountBalance,
@@ -545,6 +545,7 @@ public class CustomerCreateParams extends ApiRequestParams {
 
       private String state;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Address build() {
         return new Address(
             this.city,
@@ -615,7 +616,6 @@ public class CustomerCreateParams extends ApiRequestParams {
   }
 
   public static class InvoiceSettings {
-
     /** Default custom fields to be displayed on invoices for this customer. */
     @SerializedName("custom_fields")
     Object customFields;
@@ -661,6 +661,7 @@ public class CustomerCreateParams extends ApiRequestParams {
 
       private String footer;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public InvoiceSettings build() {
         return new InvoiceSettings(
             this.customFields, this.defaultPaymentMethod, this.extraParams, this.footer);
@@ -718,7 +719,6 @@ public class CustomerCreateParams extends ApiRequestParams {
     }
 
     public static class CustomField {
-
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -753,6 +753,7 @@ public class CustomerCreateParams extends ApiRequestParams {
 
         private String value;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public CustomField build() {
           return new CustomField(this.extraParams, this.name, this.value);
         }
@@ -801,7 +802,6 @@ public class CustomerCreateParams extends ApiRequestParams {
   }
 
   public static class Shipping {
-
     /** Customer shipping address. */
     @SerializedName("address")
     Address address;
@@ -843,6 +843,7 @@ public class CustomerCreateParams extends ApiRequestParams {
 
       private String phone;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Shipping build() {
         return new Shipping(this.address, this.extraParams, this.name, this.phone);
       }
@@ -956,6 +957,7 @@ public class CustomerCreateParams extends ApiRequestParams {
 
         private String state;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Address build() {
           return new Address(
               this.city,
@@ -1029,7 +1031,6 @@ public class CustomerCreateParams extends ApiRequestParams {
   }
 
   public static class TaxIdData {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -1064,6 +1065,7 @@ public class CustomerCreateParams extends ApiRequestParams {
 
       private String value;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public TaxIdData build() {
         return new TaxIdData(this.extraParams, this.type, this.value);
       }
@@ -1133,7 +1135,6 @@ public class CustomerCreateParams extends ApiRequestParams {
   }
 
   public static class TaxInfo {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -1168,6 +1169,7 @@ public class CustomerCreateParams extends ApiRequestParams {
 
       private Type type;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public TaxInfo build() {
         return new TaxInfo(this.extraParams, this.taxId, this.type);
       }

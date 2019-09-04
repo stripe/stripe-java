@@ -10,7 +10,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class OrderReturnOrderParams extends ApiRequestParams {
-
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -46,6 +45,7 @@ public class OrderReturnOrderParams extends ApiRequestParams {
 
     private Object items;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public OrderReturnOrderParams build() {
       return new OrderReturnOrderParams(this.expand, this.extraParams, this.items);
     }
@@ -116,7 +116,6 @@ public class OrderReturnOrderParams extends ApiRequestParams {
   }
 
   public static class Item {
-
     /** The amount (price) for this order item to return. */
     @SerializedName("amount")
     Long amount;
@@ -178,6 +177,7 @@ public class OrderReturnOrderParams extends ApiRequestParams {
 
       private Type type;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Item build() {
         return new Item(
             this.amount, this.description, this.extraParams, this.parent, this.quantity, this.type);

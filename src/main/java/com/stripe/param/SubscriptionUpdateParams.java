@@ -11,7 +11,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class SubscriptionUpdateParams extends ApiRequestParams {
-
   /**
    * A non-negative decimal between 0 and 100, with at most two decimal places. This represents the
    * percentage of the subscription invoice subtotal that will be transferred to the application
@@ -310,6 +309,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
     private Boolean trialFromPlan;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public SubscriptionUpdateParams build() {
       return new SubscriptionUpdateParams(
           this.applicationFeePercent,
@@ -718,7 +718,6 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   }
 
   public static class BillingThresholds {
-
     /** Monetary threshold that triggers the subscription to advance to a new billing period. */
     @SerializedName("amount_gte")
     Long amountGte;
@@ -758,6 +757,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
       private Boolean resetBillingCycleAnchor;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public BillingThresholds build() {
         return new BillingThresholds(
             this.amountGte, this.extraParams, this.resetBillingCycleAnchor);
@@ -809,7 +809,6 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   }
 
   public static class Item {
-
     /**
      * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
      * billing period.
@@ -907,6 +906,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
       private Object taxRates;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Item build() {
         return new Item(
             this.billingThresholds,
@@ -1043,7 +1043,6 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
 
     public static class BillingThresholds {
-
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -1071,6 +1070,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
         private Long usageGte;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public BillingThresholds build() {
           return new BillingThresholds(this.extraParams, this.usageGte);
         }
@@ -1113,7 +1113,6 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   }
 
   public static class TransferData {
-
     /** ID of an existing, connected Stripe account. */
     @SerializedName("destination")
     String destination;
@@ -1141,6 +1140,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public TransferData build() {
         return new TransferData(this.destination, this.extraParams);
       }

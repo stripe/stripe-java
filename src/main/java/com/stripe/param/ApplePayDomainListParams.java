@@ -81,6 +81,7 @@ public class ApplePayDomainListParams extends ApiRequestParams {
 
     private String startingAfter;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public ApplePayDomainListParams build() {
       return new ApplePayDomainListParams(
           this.domainName,

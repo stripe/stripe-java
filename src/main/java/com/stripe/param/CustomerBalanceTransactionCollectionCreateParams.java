@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class CustomerBalanceTransactionCollectionCreateParams extends ApiRequestParams {
-
   /**
    * The integer amount in **%s** to apply to the customer's balance. Pass a negative amount to
    * credit the customer's balance, and pass in a positive amount to debit the customer's balance.
@@ -82,6 +81,7 @@ public class CustomerBalanceTransactionCollectionCreateParams extends ApiRequest
 
     private Map<String, String> metadata;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public CustomerBalanceTransactionCollectionCreateParams build() {
       return new CustomerBalanceTransactionCollectionCreateParams(
           this.amount,

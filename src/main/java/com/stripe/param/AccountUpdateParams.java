@@ -10,7 +10,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class AccountUpdateParams extends ApiRequestParams {
-
   /**
    * An [account token](https://stripe.com/docs/api#create_account_token), used to securely provide
    * details to the account.
@@ -172,6 +171,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     private TosAcceptance tosAcceptance;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public AccountUpdateParams build() {
       return new AccountUpdateParams(
           this.accountToken,
@@ -386,7 +386,6 @@ public class AccountUpdateParams extends ApiRequestParams {
   }
 
   public static class BusinessProfile {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -470,6 +469,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       private String url;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public BusinessProfile build() {
         return new BusinessProfile(
             this.extraParams,
@@ -559,7 +559,6 @@ public class AccountUpdateParams extends ApiRequestParams {
   }
 
   public static class Company {
-
     /** The company's primary address. */
     @SerializedName("address")
     Address address;
@@ -691,6 +690,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       private String vatId;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Company build() {
         return new Company(
             this.address,
@@ -822,7 +822,6 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     public static class Address {
-
       /** City, district, suburb, town, or village. */
       @SerializedName("city")
       String city;
@@ -895,6 +894,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         private String state;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Address build() {
           return new Address(
               this.city,
@@ -976,7 +976,6 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     public static class AddressKana {
-
       /** City or ward. */
       @SerializedName("city")
       String city;
@@ -1057,6 +1056,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         private String town;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public AddressKana build() {
           return new AddressKana(
               this.city,
@@ -1145,7 +1145,6 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     public static class AddressKanji {
-
       /** City or ward. */
       @SerializedName("city")
       String city;
@@ -1226,6 +1225,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         private String town;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public AddressKanji build() {
           return new AddressKanji(
               this.city,
@@ -1315,7 +1315,6 @@ public class AccountUpdateParams extends ApiRequestParams {
   }
 
   public static class Individual {
-
     /** The individual's primary address. */
     @SerializedName("address")
     Address address;
@@ -1490,6 +1489,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       private Verification verification;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Individual build() {
         return new Individual(
             this.address,
@@ -1679,7 +1679,6 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     public static class Address {
-
       /** City, district, suburb, town, or village. */
       @SerializedName("city")
       String city;
@@ -1752,6 +1751,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         private String state;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Address build() {
           return new Address(
               this.city,
@@ -1833,7 +1833,6 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     public static class AddressKana {
-
       /** City or ward. */
       @SerializedName("city")
       String city;
@@ -1914,6 +1913,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         private String town;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public AddressKana build() {
           return new AddressKana(
               this.city,
@@ -2002,7 +2002,6 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     public static class AddressKanji {
-
       /** City or ward. */
       @SerializedName("city")
       String city;
@@ -2083,6 +2082,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         private String town;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public AddressKanji build() {
           return new AddressKanji(
               this.city,
@@ -2171,7 +2171,6 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     public static class Dob {
-
       /** The day of birth, between 1 and 31. */
       @SerializedName("day")
       Long day;
@@ -2213,6 +2212,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         private Long year;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Dob build() {
           return new Dob(this.day, this.extraParams, this.month, this.year);
         }
@@ -2266,7 +2266,6 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     public static class Verification {
-
       /** An identifying document, either a passport or local ID card. */
       @SerializedName("document")
       Document document;
@@ -2294,6 +2293,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Verification build() {
           return new Verification(this.document, this.extraParams);
         }
@@ -2334,7 +2334,6 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
 
       public static class Document {
-
         /**
          * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
          * `identity_document`.
@@ -2376,6 +2375,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
           private String front;
 
+          /** Finalize and obtain parameter instance from this builder. */
           public Document build() {
             return new Document(this.back, this.extraParams, this.front);
           }
@@ -2431,7 +2431,6 @@ public class AccountUpdateParams extends ApiRequestParams {
   }
 
   public static class Settings {
-
     /**
      * Settings used to apply the account's branding to email receipts, invoices, Checkout, and
      * other products.
@@ -2488,6 +2487,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       private Payouts payouts;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Settings build() {
         return new Settings(
             this.branding, this.cardPayments, this.extraParams, this.payments, this.payouts);
@@ -2548,7 +2548,6 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     public static class Branding {
-
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -2598,6 +2597,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         private String primaryColor;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Branding build() {
           return new Branding(this.extraParams, this.icon, this.logo, this.primaryColor);
         }
@@ -2658,7 +2658,6 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     public static class CardPayments {
-
       /**
        * Automatically declines certain charge types regardless of whether the card issuer accepted
        * or declined the charge.
@@ -2702,6 +2701,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         private String statementDescriptorPrefix;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public CardPayments build() {
           return new CardPayments(this.declineOn, this.extraParams, this.statementDescriptorPrefix);
         }
@@ -2756,7 +2756,6 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
 
       public static class DeclineOn {
-
         /**
          * Whether Stripe automatically declines charges with an incorrect ZIP or postal code. This
          * setting only applies when a ZIP or postal code is provided and they fail bank
@@ -2799,6 +2798,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
           private Map<String, Object> extraParams;
 
+          /** Finalize and obtain parameter instance from this builder. */
           public DeclineOn build() {
             return new DeclineOn(this.avsFailure, this.cvcFailure, this.extraParams);
           }
@@ -2854,7 +2854,6 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     public static class Payments {
-
       /**
        * Map of extra parameters for custom features not available in this client library. The
        * content in this map is not serialized under this field's {@code @SerializedName} value.
@@ -2909,6 +2908,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         private String statementDescriptorKanji;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Payments build() {
           return new Payments(
               this.extraParams,
@@ -2975,7 +2975,6 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     public static class Payouts {
-
       /**
        * A Boolean indicating whether Stripe should try to reclaim negative balances from an
        * attached bank account. For details, see [Understanding Connect Account
@@ -3032,6 +3031,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         private String statementDescriptor;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Payouts build() {
           return new Payouts(
               this.debitNegativeBalances,
@@ -3100,7 +3100,6 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
 
       public static class Schedule {
-
         /**
          * The number of days charge funds are held before being paid out. May also be set to
          * `minimum`, representing the lowest available value for the account country. Default is
@@ -3168,6 +3167,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
           private WeeklyAnchor weeklyAnchor;
 
+          /** Finalize and obtain parameter instance from this builder. */
           public Schedule build() {
             return new Schedule(
                 this.delayDays,
@@ -3320,7 +3320,6 @@ public class AccountUpdateParams extends ApiRequestParams {
   }
 
   public static class TosAcceptance {
-
     /**
      * The Unix timestamp marking when the account representative accepted the Stripe Services
      * Agreement.
@@ -3370,6 +3369,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       private String userAgent;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public TosAcceptance build() {
         return new TosAcceptance(this.date, this.extraParams, this.ip, this.userAgent);
       }

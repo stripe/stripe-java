@@ -10,7 +10,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class PlanCreateParams extends ApiRequestParams {
-
   /** Whether the plan is currently available for new subscriptions. Defaults to `true`. */
   @SerializedName("active")
   Boolean active;
@@ -225,6 +224,7 @@ public class PlanCreateParams extends ApiRequestParams {
 
     private UsageType usageType;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public PlanCreateParams build() {
       return new PlanCreateParams(
           this.active,
@@ -492,7 +492,6 @@ public class PlanCreateParams extends ApiRequestParams {
   }
 
   public static class Product {
-
     /** Whether the product is currently available for purchase. Defaults to `true`. */
     @SerializedName("active")
     Boolean active;
@@ -582,6 +581,7 @@ public class PlanCreateParams extends ApiRequestParams {
 
       private String unitLabel;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Product build() {
         return new Product(
             this.active,
@@ -693,7 +693,6 @@ public class PlanCreateParams extends ApiRequestParams {
   }
 
   public static class Tier {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -766,6 +765,7 @@ public class PlanCreateParams extends ApiRequestParams {
 
       private Object upTo;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Tier build() {
         return new Tier(
             this.extraParams,
@@ -867,7 +867,6 @@ public class PlanCreateParams extends ApiRequestParams {
   }
 
   public static class TransformUsage {
-
     /** Divide usage by this number. */
     @SerializedName("divide_by")
     Long divideBy;
@@ -902,6 +901,7 @@ public class PlanCreateParams extends ApiRequestParams {
 
       private Round round;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public TransformUsage build() {
         return new TransformUsage(this.divideBy, this.extraParams, this.round);
       }

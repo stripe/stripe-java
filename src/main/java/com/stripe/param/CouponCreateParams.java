@@ -10,7 +10,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class CouponCreateParams extends ApiRequestParams {
-
   /**
    * A positive integer representing the amount to subtract from an invoice total (required if
    * `percent_off` is not passed).
@@ -152,6 +151,7 @@ public class CouponCreateParams extends ApiRequestParams {
 
     private Long redeemBy;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public CouponCreateParams build() {
       return new CouponCreateParams(
           this.amountOff,

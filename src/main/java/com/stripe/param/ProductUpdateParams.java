@@ -10,7 +10,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ProductUpdateParams extends ApiRequestParams {
-
   /** Whether the product is available for purchase. */
   @SerializedName("active")
   Boolean active;
@@ -170,6 +169,7 @@ public class ProductUpdateParams extends ApiRequestParams {
 
     private String url;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public ProductUpdateParams build() {
       return new ProductUpdateParams(
           this.active,
@@ -412,7 +412,6 @@ public class ProductUpdateParams extends ApiRequestParams {
   }
 
   public static class PackageDimensions {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -466,6 +465,7 @@ public class ProductUpdateParams extends ApiRequestParams {
 
       private BigDecimal width;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public PackageDimensions build() {
         return new PackageDimensions(
             this.extraParams, this.height, this.length, this.weight, this.width);

@@ -11,7 +11,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class InvoiceUpdateParams extends ApiRequestParams {
-
   /**
    * A fee in %s that will be applied to the invoice and transferred to the application owner's
    * Stripe account. The request must be made with an OAuth key or the Stripe-Account header in
@@ -205,6 +204,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
     private Object transferData;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public InvoiceUpdateParams build() {
       return new InvoiceUpdateParams(
           this.applicationFeeAmount,
@@ -477,7 +477,6 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   }
 
   public static class CustomField {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -512,6 +511,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
       private String value;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public CustomField build() {
         return new CustomField(this.extraParams, this.name, this.value);
       }
@@ -557,7 +557,6 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   }
 
   public static class TransferData {
-
     /** ID of an existing, connected Stripe account. */
     @SerializedName("destination")
     String destination;
@@ -585,6 +584,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public TransferData build() {
         return new TransferData(this.destination, this.extraParams);
       }

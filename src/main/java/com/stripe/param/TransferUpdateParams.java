@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class TransferUpdateParams extends ApiRequestParams {
-
   /** An arbitrary string attached to the object. Often useful for displaying to users. */
   @SerializedName("description")
   String description;
@@ -58,6 +57,7 @@ public class TransferUpdateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public TransferUpdateParams build() {
       return new TransferUpdateParams(
           this.description, this.expand, this.extraParams, this.metadata);

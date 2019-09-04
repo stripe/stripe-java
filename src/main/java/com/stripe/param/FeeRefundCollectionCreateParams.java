@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class FeeRefundCollectionCreateParams extends ApiRequestParams {
-
   /**
    * A positive integer, in _%s_, representing how much of this fee to refund. Can refund only up to
    * the remaining unrefunded amount of the fee.
@@ -61,6 +60,7 @@ public class FeeRefundCollectionCreateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public FeeRefundCollectionCreateParams build() {
       return new FeeRefundCollectionCreateParams(
           this.amount, this.expand, this.extraParams, this.metadata);

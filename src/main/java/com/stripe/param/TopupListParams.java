@@ -9,7 +9,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class TopupListParams extends ApiRequestParams {
-
   /** A positive integer representing how much to transfer. */
   @SerializedName("amount")
   Object amount;
@@ -106,6 +105,7 @@ public class TopupListParams extends ApiRequestParams {
 
     private Status status;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public TopupListParams build() {
       return new TopupListParams(
           this.amount,
@@ -242,7 +242,6 @@ public class TopupListParams extends ApiRequestParams {
   }
 
   public static class Amount {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -291,6 +290,7 @@ public class TopupListParams extends ApiRequestParams {
 
       private Long lte;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Amount build() {
         return new Amount(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
@@ -348,7 +348,6 @@ public class TopupListParams extends ApiRequestParams {
   }
 
   public static class Created {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -397,6 +396,7 @@ public class TopupListParams extends ApiRequestParams {
 
       private Long lte;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Created build() {
         return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }

@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ValueListUpdateParams extends ApiRequestParams {
-
   /** The name of the value list for use in rules. */
   @SerializedName("alias")
   String alias;
@@ -66,6 +65,7 @@ public class ValueListUpdateParams extends ApiRequestParams {
 
     private String name;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public ValueListUpdateParams build() {
       return new ValueListUpdateParams(
           this.alias, this.expand, this.extraParams, this.metadata, this.name);

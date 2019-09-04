@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class ConnectionTokenCreateParams extends ApiRequestParams {
-
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -62,6 +61,7 @@ public class ConnectionTokenCreateParams extends ApiRequestParams {
 
     private String operatorAccount;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public ConnectionTokenCreateParams build() {
       return new ConnectionTokenCreateParams(
           this.expand, this.extraParams, this.location, this.operatorAccount);

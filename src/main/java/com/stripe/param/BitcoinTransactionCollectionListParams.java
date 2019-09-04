@@ -8,7 +8,6 @@ import java.util.List;
 import java.util.Map;
 
 public class BitcoinTransactionCollectionListParams extends ApiRequestParams {
-
   /** Only return transactions for the customer specified by this customer ID. */
   @SerializedName("customer")
   String customer;
@@ -83,6 +82,7 @@ public class BitcoinTransactionCollectionListParams extends ApiRequestParams {
 
     private String startingAfter;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public BitcoinTransactionCollectionListParams build() {
       return new BitcoinTransactionCollectionListParams(
           this.customer,

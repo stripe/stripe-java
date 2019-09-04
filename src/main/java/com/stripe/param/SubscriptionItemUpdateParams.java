@@ -10,7 +10,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class SubscriptionItemUpdateParams extends ApiRequestParams {
-
   /**
    * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
    * billing period.
@@ -126,6 +125,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
 
     private Object taxRates;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public SubscriptionItemUpdateParams build() {
       return new SubscriptionItemUpdateParams(
           this.billingThresholds,
@@ -299,7 +299,6 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
   }
 
   public static class BillingThresholds {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -327,6 +326,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
 
       private Long usageGte;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public BillingThresholds build() {
         return new BillingThresholds(this.extraParams, this.usageGte);
       }

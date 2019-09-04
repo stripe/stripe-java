@@ -9,7 +9,6 @@ import java.util.Map;
 import lombok.Getter;
 
 public class DisputeCreateParams extends ApiRequestParams {
-
   /**
    * Amount to dispute, defaults to full value, given in the currency the transaction was made in.
    */
@@ -88,6 +87,7 @@ public class DisputeCreateParams extends ApiRequestParams {
 
     private Reason reason;
 
+    /** Finalize and obtain parameter instance from this builder. */
     public DisputeCreateParams build() {
       return new DisputeCreateParams(
           this.amount,
@@ -208,7 +208,6 @@ public class DisputeCreateParams extends ApiRequestParams {
   }
 
   public static class Evidence {
-
     /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -249,6 +248,7 @@ public class DisputeCreateParams extends ApiRequestParams {
 
       private Other other;
 
+      /** Finalize and obtain parameter instance from this builder. */
       public Evidence build() {
         return new Evidence(this.extraParams, this.fraudulent, this.other);
       }
@@ -299,7 +299,6 @@ public class DisputeCreateParams extends ApiRequestParams {
     }
 
     public static class Fraudulent {
-
       /** Brief freeform text explaining why you are disputing this transaction. */
       @SerializedName("dispute_explanation")
       String disputeExplanation;
@@ -338,6 +337,7 @@ public class DisputeCreateParams extends ApiRequestParams {
 
         private String uncategorizedFile;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Fraudulent build() {
           return new Fraudulent(this.disputeExplanation, this.extraParams, this.uncategorizedFile);
         }
@@ -388,7 +388,6 @@ public class DisputeCreateParams extends ApiRequestParams {
     }
 
     public static class Other {
-
       /** Brief freeform text explaining why you are disputing this transaction. */
       @SerializedName("dispute_explanation")
       String disputeExplanation;
@@ -427,6 +426,7 @@ public class DisputeCreateParams extends ApiRequestParams {
 
         private String uncategorizedFile;
 
+        /** Finalize and obtain parameter instance from this builder. */
         public Other build() {
           return new Other(this.disputeExplanation, this.extraParams, this.uncategorizedFile);
         }
