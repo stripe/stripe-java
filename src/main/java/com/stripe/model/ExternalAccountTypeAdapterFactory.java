@@ -56,9 +56,9 @@ public class ExternalAccountTypeAdapterFactory implements TypeAdapterFactory {
             return objectResult;
           }
         };
-
     return (TypeAdapter<T>) resultCustomTypeAdapter.nullSafe();
   }
+
   /**
    * Unknown subtype of {@link com.stripe.model.ExternalAccount}. If this class is the outcome of
    * deserialization, please contact support@stripe.com for assistance and provide the id and object

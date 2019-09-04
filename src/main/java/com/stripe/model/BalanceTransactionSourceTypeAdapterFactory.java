@@ -104,9 +104,9 @@ public class BalanceTransactionSourceTypeAdapterFactory implements TypeAdapterFa
             return objectResult;
           }
         };
-
     return (TypeAdapter<T>) resultCustomTypeAdapter.nullSafe();
   }
+
   /**
    * Unknown subtype of {@link com.stripe.model.BalanceTransactionSource}. If this class is the
    * outcome of deserialization, please contact support@stripe.com for assistance and provide the id

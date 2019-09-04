@@ -10,8 +10,8 @@ import java.util.Map;
 
 public class InvoiceItemCreateParams extends ApiRequestParams {
   /**
-   * The integer amount in **%s** of the charge to be applied to the upcoming invoice. If you want
-   * to apply a credit to the customer's account, pass a negative amount.
+   * The integer amount in **%s** of the charge to be applied to the upcoming invoice. Passing in a
+   * negative `amount` will reduce the `amount_due` on the invoice.
    */
   @SerializedName("amount")
   Long amount;
@@ -95,8 +95,8 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
 
   /**
    * The integer unit amount in **%s** of the charge to be applied to the upcoming invoice. This
-   * unit_amount will be multiplied by the quantity to get the full amount. If you want to apply a
-   * credit to the customer's account, pass a negative unit_amount.
+   * `unit_amount` will be multiplied by the quantity to get the full amount. Passing in a negative
+   * `unit_amount` will reduce the `amount_due` on the invoice.
    */
   @SerializedName("unit_amount")
   Long unitAmount;
@@ -197,8 +197,8 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The integer amount in **%s** of the charge to be applied to the upcoming invoice. If you want
-     * to apply a credit to the customer's account, pass a negative amount.
+     * The integer amount in **%s** of the charge to be applied to the upcoming invoice. Passing in
+     * a negative `amount` will reduce the `amount_due` on the invoice.
      */
     public Builder setAmount(Long amount) {
       this.amount = amount;
@@ -379,8 +379,8 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
 
     /**
      * The integer unit amount in **%s** of the charge to be applied to the upcoming invoice. This
-     * unit_amount will be multiplied by the quantity to get the full amount. If you want to apply a
-     * credit to the customer's account, pass a negative unit_amount.
+     * `unit_amount` will be multiplied by the quantity to get the full amount. Passing in a
+     * negative `unit_amount` will reduce the `amount_due` on the invoice.
      */
     public Builder setUnitAmount(Long unitAmount) {
       this.unitAmount = unitAmount;
