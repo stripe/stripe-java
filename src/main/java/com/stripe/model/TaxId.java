@@ -102,7 +102,7 @@ public class TaxId extends ApiResource implements HasId {
                 "/v1/customers/%s/tax_ids/%s",
                 ApiResource.urlEncodeId(this.getCustomer()),
                 ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.DELETE, url, params, TaxId.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.DELETE, url, params, TaxId.class, options);
   }
 
   @Getter

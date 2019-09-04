@@ -169,7 +169,7 @@ public class Recipient extends ApiResource implements HasId, MetadataStore<Recip
   public static RecipientCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/recipients");
-    return requestCollection(url, params, RecipientCollection.class, options);
+    return ApiResource.requestCollection(url, params, RecipientCollection.class, options);
   }
 
   /**
@@ -187,7 +187,7 @@ public class Recipient extends ApiResource implements HasId, MetadataStore<Recip
   public static RecipientCollection list(RecipientListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/recipients");
-    return requestCollection(url, params, RecipientCollection.class, options);
+    return ApiResource.requestCollection(url, params, RecipientCollection.class, options);
   }
 
   /**
@@ -205,7 +205,8 @@ public class Recipient extends ApiResource implements HasId, MetadataStore<Recip
   public static Recipient create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/recipients");
-    return request(ApiResource.RequestMethod.POST, url, params, Recipient.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Recipient.class, options);
   }
 
   /**
@@ -223,7 +224,8 @@ public class Recipient extends ApiResource implements HasId, MetadataStore<Recip
   public static Recipient create(RecipientCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/recipients");
-    return request(ApiResource.RequestMethod.POST, url, params, Recipient.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Recipient.class, options);
   }
 
   /**
@@ -252,7 +254,8 @@ public class Recipient extends ApiResource implements HasId, MetadataStore<Recip
         String.format(
             "%s%s",
             Stripe.getApiBase(), String.format("/v1/recipients/%s", ApiResource.urlEncodeId(id)));
-    return request(ApiResource.RequestMethod.GET, url, params, Recipient.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, Recipient.class, options);
   }
 
   /**
@@ -265,7 +268,8 @@ public class Recipient extends ApiResource implements HasId, MetadataStore<Recip
         String.format(
             "%s%s",
             Stripe.getApiBase(), String.format("/v1/recipients/%s", ApiResource.urlEncodeId(id)));
-    return request(ApiResource.RequestMethod.GET, url, params, Recipient.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, Recipient.class, options);
   }
 
   /**
@@ -295,7 +299,8 @@ public class Recipient extends ApiResource implements HasId, MetadataStore<Recip
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/recipients/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, Recipient.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Recipient.class, options);
   }
 
   /**
@@ -323,7 +328,8 @@ public class Recipient extends ApiResource implements HasId, MetadataStore<Recip
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/recipients/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, Recipient.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Recipient.class, options);
   }
 
   /** Permanently deletes a recipient. It cannot be undone. */
@@ -349,6 +355,7 @@ public class Recipient extends ApiResource implements HasId, MetadataStore<Recip
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/recipients/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.DELETE, url, params, Recipient.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.DELETE, url, params, Recipient.class, options);
   }
 }

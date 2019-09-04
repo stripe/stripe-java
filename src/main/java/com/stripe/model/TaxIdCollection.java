@@ -18,7 +18,7 @@ public class TaxIdCollection extends StripeCollection<TaxId> {
   /** Creates a new <code>TaxID</code> object for a customer. */
   public TaxId create(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
-    return request(ApiResource.RequestMethod.POST, url, params, TaxId.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, TaxId.class, options);
   }
 
   /** Creates a new <code>TaxID</code> object for a customer. */
@@ -30,7 +30,7 @@ public class TaxIdCollection extends StripeCollection<TaxId> {
   public TaxId create(TaxIdCollectionCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
-    return request(ApiResource.RequestMethod.POST, url, params, TaxId.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, TaxId.class, options);
   }
 
   /** Retrieves the <code>TaxID</code> object with the given identifier. */
@@ -51,7 +51,7 @@ public class TaxIdCollection extends StripeCollection<TaxId> {
             "%s%s",
             Stripe.getApiBase(),
             String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
-    return request(ApiResource.RequestMethod.GET, url, params, TaxId.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, TaxId.class, options);
   }
 
   /** Retrieves the <code>TaxID</code> object with the given identifier. */
@@ -62,7 +62,7 @@ public class TaxIdCollection extends StripeCollection<TaxId> {
             "%s%s",
             Stripe.getApiBase(),
             String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
-    return request(ApiResource.RequestMethod.GET, url, params, TaxId.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, TaxId.class, options);
   }
 
   /** Returns a list of tax IDs for a customer. */
@@ -74,7 +74,7 @@ public class TaxIdCollection extends StripeCollection<TaxId> {
   public TaxIdCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
-    return requestCollection(url, params, TaxIdCollection.class, options);
+    return ApiResource.requestCollection(url, params, TaxIdCollection.class, options);
   }
 
   /** Returns a list of tax IDs for a customer. */
@@ -86,6 +86,6 @@ public class TaxIdCollection extends StripeCollection<TaxId> {
   public TaxIdCollection list(TaxIdCollectionListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
-    return requestCollection(url, params, TaxIdCollection.class, options);
+    return ApiResource.requestCollection(url, params, TaxIdCollection.class, options);
   }
 }

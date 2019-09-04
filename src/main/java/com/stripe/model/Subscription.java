@@ -404,7 +404,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   public static SubscriptionCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscriptions");
-    return requestCollection(url, params, SubscriptionCollection.class, options);
+    return ApiResource.requestCollection(url, params, SubscriptionCollection.class, options);
   }
 
   /**
@@ -422,7 +422,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   public static SubscriptionCollection list(SubscriptionListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscriptions");
-    return requestCollection(url, params, SubscriptionCollection.class, options);
+    return ApiResource.requestCollection(url, params, SubscriptionCollection.class, options);
   }
 
   /** Creates a new subscription on an existing customer. */
@@ -434,7 +434,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   public static Subscription create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscriptions");
-    return request(ApiResource.RequestMethod.POST, url, params, Subscription.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Subscription.class, options);
   }
 
   /** Creates a new subscription on an existing customer. */
@@ -446,7 +447,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   public static Subscription create(SubscriptionCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscriptions");
-    return request(ApiResource.RequestMethod.POST, url, params, Subscription.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Subscription.class, options);
   }
 
   /**
@@ -474,7 +476,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, Subscription.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Subscription.class, options);
   }
 
   /**
@@ -500,7 +503,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, Subscription.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Subscription.class, options);
   }
 
   /** Retrieves the subscription with the given ID. */
@@ -523,7 +527,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(subscriptionExposedId)));
-    return request(ApiResource.RequestMethod.GET, url, params, Subscription.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, Subscription.class, options);
   }
 
   /** Retrieves the subscription with the given ID. */
@@ -535,7 +540,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(subscriptionExposedId)));
-    return request(ApiResource.RequestMethod.GET, url, params, Subscription.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, Subscription.class, options);
   }
 
   /**
@@ -601,7 +607,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.DELETE, url, params, Subscription.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.DELETE, url, params, Subscription.class, options);
   }
 
   /**
@@ -647,7 +654,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/subscriptions/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.DELETE, url, params, Subscription.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.DELETE, url, params, Subscription.class, options);
   }
 
   /** Removes the currently applied discount on a subscription. */
@@ -668,7 +676,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/subscriptions/%s/discount", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.DELETE, url, params, Discount.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.DELETE, url, params, Discount.class, options);
   }
 
   @Getter

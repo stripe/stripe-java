@@ -180,7 +180,7 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   public static PlanCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/plans");
-    return requestCollection(url, params, PlanCollection.class, options);
+    return ApiResource.requestCollection(url, params, PlanCollection.class, options);
   }
 
   /** Returns a list of your plans. */
@@ -192,7 +192,7 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   public static PlanCollection list(PlanListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/plans");
-    return requestCollection(url, params, PlanCollection.class, options);
+    return ApiResource.requestCollection(url, params, PlanCollection.class, options);
   }
 
   /**
@@ -210,7 +210,7 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   public static Plan create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/plans");
-    return request(ApiResource.RequestMethod.POST, url, params, Plan.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Plan.class, options);
   }
 
   /**
@@ -228,7 +228,7 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   public static Plan create(PlanCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/plans");
-    return request(ApiResource.RequestMethod.POST, url, params, Plan.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Plan.class, options);
   }
 
   /** Retrieves the plan with the given ID. */
@@ -248,7 +248,7 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
         String.format(
             "%s%s",
             Stripe.getApiBase(), String.format("/v1/plans/%s", ApiResource.urlEncodeId(plan)));
-    return request(ApiResource.RequestMethod.GET, url, params, Plan.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Plan.class, options);
   }
 
   /** Retrieves the plan with the given ID. */
@@ -258,7 +258,7 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
         String.format(
             "%s%s",
             Stripe.getApiBase(), String.format("/v1/plans/%s", ApiResource.urlEncodeId(plan)));
-    return request(ApiResource.RequestMethod.GET, url, params, Plan.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Plan.class, options);
   }
 
   /**
@@ -283,7 +283,7 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/plans/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, Plan.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Plan.class, options);
   }
 
   /**
@@ -306,7 +306,7 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/plans/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, Plan.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Plan.class, options);
   }
 
   /** Deleting plans means new subscribers can’t be added. Existing subscribers aren’t affected. */
@@ -331,7 +331,7 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/plans/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.DELETE, url, params, Plan.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.DELETE, url, params, Plan.class, options);
   }
 
   @Getter

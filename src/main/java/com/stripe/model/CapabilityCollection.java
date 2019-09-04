@@ -24,7 +24,7 @@ public class CapabilityCollection extends StripeCollection<Capability> {
   public CapabilityCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
-    return requestCollection(url, params, CapabilityCollection.class, options);
+    return ApiResource.requestCollection(url, params, CapabilityCollection.class, options);
   }
 
   /**
@@ -42,7 +42,7 @@ public class CapabilityCollection extends StripeCollection<Capability> {
   public CapabilityCollection list(CapabilityCollectionListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
-    return requestCollection(url, params, CapabilityCollection.class, options);
+    return ApiResource.requestCollection(url, params, CapabilityCollection.class, options);
   }
 
   /** Retrieves information about the specified Account Capability. */
@@ -63,7 +63,8 @@ public class CapabilityCollection extends StripeCollection<Capability> {
             "%s%s",
             Stripe.getApiBase(),
             String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
-    return request(ApiResource.RequestMethod.GET, url, params, Capability.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, Capability.class, options);
   }
 
   /** Retrieves information about the specified Account Capability. */
@@ -75,6 +76,7 @@ public class CapabilityCollection extends StripeCollection<Capability> {
             "%s%s",
             Stripe.getApiBase(),
             String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
-    return request(ApiResource.RequestMethod.GET, url, params, Capability.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, Capability.class, options);
   }
 }

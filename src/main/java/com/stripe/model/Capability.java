@@ -79,7 +79,8 @@ public class Capability extends ApiResource implements HasId {
             String.format(
                 "/v1/accounts/%s/capabilities/%s",
                 ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, Capability.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Capability.class, options);
   }
 
   /** Updates an existing Account Capability. */
@@ -97,7 +98,8 @@ public class Capability extends ApiResource implements HasId {
             String.format(
                 "/v1/accounts/%s/capabilities/%s",
                 ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, Capability.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Capability.class, options);
   }
 
   @Getter

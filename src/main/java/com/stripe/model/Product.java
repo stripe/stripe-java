@@ -156,7 +156,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   public static Product create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/products");
-    return request(ApiResource.RequestMethod.POST, url, params, Product.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Product.class, options);
   }
 
   /**
@@ -174,7 +174,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   public static Product create(ProductCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/products");
-    return request(ApiResource.RequestMethod.POST, url, params, Product.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Product.class, options);
   }
 
   /**
@@ -206,7 +206,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
         String.format(
             "%s%s",
             Stripe.getApiBase(), String.format("/v1/products/%s", ApiResource.urlEncodeId(id)));
-    return request(ApiResource.RequestMethod.GET, url, params, Product.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Product.class, options);
   }
 
   /**
@@ -220,7 +220,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
         String.format(
             "%s%s",
             Stripe.getApiBase(), String.format("/v1/products/%s", ApiResource.urlEncodeId(id)));
-    return request(ApiResource.RequestMethod.GET, url, params, Product.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Product.class, options);
   }
 
   /**
@@ -249,7 +249,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/products/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, Product.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Product.class, options);
   }
 
   /**
@@ -276,7 +276,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/products/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, Product.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Product.class, options);
   }
 
   /**
@@ -294,7 +294,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   public static ProductCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/products");
-    return requestCollection(url, params, ProductCollection.class, options);
+    return ApiResource.requestCollection(url, params, ProductCollection.class, options);
   }
 
   /**
@@ -312,7 +312,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   public static ProductCollection list(ProductListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/products");
-    return requestCollection(url, params, ProductCollection.class, options);
+    return ApiResource.requestCollection(url, params, ProductCollection.class, options);
   }
 
   /**
@@ -353,6 +353,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/products/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.DELETE, url, params, Product.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.DELETE, url, params, Product.class, options);
   }
 }

@@ -79,7 +79,7 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
   public static ScheduledQueryRunCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/sigma/scheduled_query_runs");
-    return requestCollection(url, params, ScheduledQueryRunCollection.class, options);
+    return ApiResource.requestCollection(url, params, ScheduledQueryRunCollection.class, options);
   }
 
   /** Returns a list of scheduled query runs. */
@@ -92,7 +92,7 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
   public static ScheduledQueryRunCollection list(
       ScheduledQueryRunListParams params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/sigma/scheduled_query_runs");
-    return requestCollection(url, params, ScheduledQueryRunCollection.class, options);
+    return ApiResource.requestCollection(url, params, ScheduledQueryRunCollection.class, options);
   }
 
   /** Retrieves the details of an scheduled query run. */
@@ -116,7 +116,8 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
             Stripe.getApiBase(),
             String.format(
                 "/v1/sigma/scheduled_query_runs/%s", ApiResource.urlEncodeId(scheduledQueryRun)));
-    return request(ApiResource.RequestMethod.GET, url, params, ScheduledQueryRun.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ScheduledQueryRun.class, options);
   }
 
   /** Retrieves the details of an scheduled query run. */
@@ -129,7 +130,8 @@ public class ScheduledQueryRun extends ApiResource implements HasId {
             Stripe.getApiBase(),
             String.format(
                 "/v1/sigma/scheduled_query_runs/%s", ApiResource.urlEncodeId(scheduledQueryRun)));
-    return request(ApiResource.RequestMethod.GET, url, params, ScheduledQueryRun.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ScheduledQueryRun.class, options);
   }
 
   @Getter

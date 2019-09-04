@@ -212,7 +212,7 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   public static InvoiceItemCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoiceitems");
-    return requestCollection(url, params, InvoiceItemCollection.class, options);
+    return ApiResource.requestCollection(url, params, InvoiceItemCollection.class, options);
   }
 
   /**
@@ -230,7 +230,7 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   public static InvoiceItemCollection list(InvoiceItemListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoiceitems");
-    return requestCollection(url, params, InvoiceItemCollection.class, options);
+    return ApiResource.requestCollection(url, params, InvoiceItemCollection.class, options);
   }
 
   /**
@@ -248,7 +248,8 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   public static InvoiceItem create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoiceitems");
-    return request(ApiResource.RequestMethod.POST, url, params, InvoiceItem.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, InvoiceItem.class, options);
   }
 
   /**
@@ -266,7 +267,8 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   public static InvoiceItem create(InvoiceItemCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/invoiceitems");
-    return request(ApiResource.RequestMethod.POST, url, params, InvoiceItem.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, InvoiceItem.class, options);
   }
 
   /** Retrieves the invoice item with the given ID. */
@@ -289,7 +291,8 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(invoiceitem)));
-    return request(ApiResource.RequestMethod.GET, url, params, InvoiceItem.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, InvoiceItem.class, options);
   }
 
   /** Retrieves the invoice item with the given ID. */
@@ -301,7 +304,8 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(invoiceitem)));
-    return request(ApiResource.RequestMethod.GET, url, params, InvoiceItem.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, InvoiceItem.class, options);
   }
 
   /**
@@ -325,7 +329,8 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, InvoiceItem.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, InvoiceItem.class, options);
   }
 
   /**
@@ -347,7 +352,8 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, InvoiceItem.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, InvoiceItem.class, options);
   }
 
   /**
@@ -385,6 +391,7 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/invoiceitems/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.DELETE, url, params, InvoiceItem.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.DELETE, url, params, InvoiceItem.class, options);
   }
 }

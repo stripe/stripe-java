@@ -214,7 +214,8 @@ public class Transfer extends ApiResource
   public static Transfer create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/transfers");
-    return request(ApiResource.RequestMethod.POST, url, params, Transfer.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Transfer.class, options);
   }
 
   /**
@@ -234,7 +235,8 @@ public class Transfer extends ApiResource
   public static Transfer create(TransferCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/transfers");
-    return request(ApiResource.RequestMethod.POST, url, params, Transfer.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Transfer.class, options);
   }
 
   /**
@@ -252,7 +254,7 @@ public class Transfer extends ApiResource
   public static TransferCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/transfers");
-    return requestCollection(url, params, TransferCollection.class, options);
+    return ApiResource.requestCollection(url, params, TransferCollection.class, options);
   }
 
   /**
@@ -270,7 +272,7 @@ public class Transfer extends ApiResource
   public static TransferCollection list(TransferListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/transfers");
-    return requestCollection(url, params, TransferCollection.class, options);
+    return ApiResource.requestCollection(url, params, TransferCollection.class, options);
   }
 
   /**
@@ -303,7 +305,7 @@ public class Transfer extends ApiResource
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/transfers/%s", ApiResource.urlEncodeId(transfer)));
-    return request(ApiResource.RequestMethod.GET, url, params, Transfer.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Transfer.class, options);
   }
 
   /**
@@ -319,7 +321,7 @@ public class Transfer extends ApiResource
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/transfers/%s", ApiResource.urlEncodeId(transfer)));
-    return request(ApiResource.RequestMethod.GET, url, params, Transfer.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Transfer.class, options);
   }
 
   /**
@@ -347,7 +349,8 @@ public class Transfer extends ApiResource
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/transfers/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, Transfer.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Transfer.class, options);
   }
 
   /**
@@ -373,6 +376,7 @@ public class Transfer extends ApiResource
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/transfers/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, Transfer.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Transfer.class, options);
   }
 }

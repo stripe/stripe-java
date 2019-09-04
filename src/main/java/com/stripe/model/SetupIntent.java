@@ -230,7 +230,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   public static SetupIntent create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/setup_intents");
-    return request(ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
   }
 
   /**
@@ -254,7 +255,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   public static SetupIntent create(SetupIntentCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/setup_intents");
-    return request(ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
   }
 
   /** Returns a list of SetupIntents. */
@@ -266,7 +268,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   public static SetupIntentCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/setup_intents");
-    return requestCollection(url, params, SetupIntentCollection.class, options);
+    return ApiResource.requestCollection(url, params, SetupIntentCollection.class, options);
   }
 
   /** Returns a list of SetupIntents. */
@@ -278,7 +280,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   public static SetupIntentCollection list(SetupIntentListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/setup_intents");
-    return requestCollection(url, params, SetupIntentCollection.class, options);
+    return ApiResource.requestCollection(url, params, SetupIntentCollection.class, options);
   }
 
   /**
@@ -323,7 +325,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/setup_intents/%s", ApiResource.urlEncodeId(intent)));
-    return request(ApiResource.RequestMethod.GET, url, params, SetupIntent.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, SetupIntent.class, options);
   }
 
   /**
@@ -343,7 +346,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/setup_intents/%s", ApiResource.urlEncodeId(intent)));
-    return request(ApiResource.RequestMethod.GET, url, params, SetupIntent.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, SetupIntent.class, options);
   }
 
   /** Updates a SetupIntent object. */
@@ -361,7 +365,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/setup_intents/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
   }
 
   /** Updates a SetupIntent object. */
@@ -377,7 +382,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/setup_intents/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
   }
 
   /**
@@ -447,7 +453,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/setup_intents/%s/confirm", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
   }
 
   /**
@@ -485,7 +492,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/setup_intents/%s/confirm", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
   }
 
   /**
@@ -539,7 +547,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/setup_intents/%s/cancel", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
   }
 
   /**
@@ -569,7 +578,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/setup_intents/%s/cancel", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, SetupIntent.class, options);
   }
 
   @Getter

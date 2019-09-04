@@ -39,7 +39,7 @@ public class CustomerBalanceTransactionCollection
             "%s%s",
             Stripe.getApiBase(),
             String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
-    return request(
+    return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, CustomerBalanceTransaction.class, options);
   }
 
@@ -55,7 +55,7 @@ public class CustomerBalanceTransactionCollection
             "%s%s",
             Stripe.getApiBase(),
             String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
-    return request(
+    return ApiResource.request(
         ApiResource.RequestMethod.GET, url, params, CustomerBalanceTransaction.class, options);
   }
 
@@ -75,7 +75,8 @@ public class CustomerBalanceTransactionCollection
   public CustomerBalanceTransactionCollection list(
       Map<String, Object> params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
-    return requestCollection(url, params, CustomerBalanceTransactionCollection.class, options);
+    return ApiResource.requestCollection(
+        url, params, CustomerBalanceTransactionCollection.class, options);
   }
 
   /**
@@ -95,7 +96,8 @@ public class CustomerBalanceTransactionCollection
       CustomerBalanceTransactionCollectionListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
-    return requestCollection(url, params, CustomerBalanceTransactionCollection.class, options);
+    return ApiResource.requestCollection(
+        url, params, CustomerBalanceTransactionCollection.class, options);
   }
 
   /**
@@ -113,7 +115,7 @@ public class CustomerBalanceTransactionCollection
   public CustomerBalanceTransaction create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
-    return request(
+    return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, CustomerBalanceTransaction.class, options);
   }
 
@@ -134,7 +136,7 @@ public class CustomerBalanceTransactionCollection
       CustomerBalanceTransactionCollectionCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
-    return request(
+    return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, CustomerBalanceTransaction.class, options);
   }
 }

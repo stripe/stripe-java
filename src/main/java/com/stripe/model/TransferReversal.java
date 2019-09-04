@@ -177,7 +177,8 @@ public class TransferReversal extends ApiResource
                 "/v1/transfers/%s/reversals/%s",
                 ApiResource.urlEncodeId(this.getTransfer()),
                 ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, TransferReversal.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, TransferReversal.class, options);
   }
 
   /**
@@ -206,6 +207,7 @@ public class TransferReversal extends ApiResource
                 "/v1/transfers/%s/reversals/%s",
                 ApiResource.urlEncodeId(this.getTransfer()),
                 ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, TransferReversal.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, TransferReversal.class, options);
   }
 }

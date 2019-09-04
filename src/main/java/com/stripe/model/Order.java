@@ -186,7 +186,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   public static Order create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/orders");
-    return request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
   }
 
   /** Creates a new order object. */
@@ -198,7 +198,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   public static Order create(OrderCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/orders");
-    return request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
   }
 
   /**
@@ -216,7 +216,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   public static OrderCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/orders");
-    return requestCollection(url, params, OrderCollection.class, options);
+    return ApiResource.requestCollection(url, params, OrderCollection.class, options);
   }
 
   /**
@@ -234,7 +234,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   public static OrderCollection list(OrderListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/orders");
-    return requestCollection(url, params, OrderCollection.class, options);
+    return ApiResource.requestCollection(url, params, OrderCollection.class, options);
   }
 
   /**
@@ -263,7 +263,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
         String.format(
             "%s%s",
             Stripe.getApiBase(), String.format("/v1/orders/%s", ApiResource.urlEncodeId(id)));
-    return request(ApiResource.RequestMethod.GET, url, params, Order.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Order.class, options);
   }
 
   /**
@@ -276,7 +276,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
         String.format(
             "%s%s",
             Stripe.getApiBase(), String.format("/v1/orders/%s", ApiResource.urlEncodeId(id)));
-    return request(ApiResource.RequestMethod.GET, url, params, Order.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Order.class, options);
   }
 
   /**
@@ -299,7 +299,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/orders/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
   }
 
   /**
@@ -320,7 +320,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/orders/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
   }
 
   /** Pay an order by providing a <code>source</code> to create a payment. */
@@ -345,7 +345,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/orders/%s/pay", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
   }
 
   /** Pay an order by providing a <code>source</code> to create a payment. */
@@ -360,7 +360,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/orders/%s/pay", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
   }
 
   /**
@@ -406,7 +406,8 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/orders/%s/returns", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, OrderReturn.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, OrderReturn.class, options);
   }
 
   /**
@@ -432,7 +433,8 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/orders/%s/returns", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, OrderReturn.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, OrderReturn.class, options);
   }
 
   @Getter

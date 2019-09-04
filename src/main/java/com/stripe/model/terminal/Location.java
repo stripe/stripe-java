@@ -59,7 +59,7 @@ public class Location extends ApiResource implements HasId {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location)));
-    return request(ApiResource.RequestMethod.GET, url, params, Location.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Location.class, options);
   }
 
   /** Retrieves a <code>Location</code> object. */
@@ -71,7 +71,7 @@ public class Location extends ApiResource implements HasId {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(location)));
-    return request(ApiResource.RequestMethod.GET, url, params, Location.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Location.class, options);
   }
 
   /** Creates a new <code>Location</code> object. */
@@ -83,7 +83,8 @@ public class Location extends ApiResource implements HasId {
   public static Location create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/locations");
-    return request(ApiResource.RequestMethod.POST, url, params, Location.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Location.class, options);
   }
 
   /** Creates a new <code>Location</code> object. */
@@ -95,7 +96,8 @@ public class Location extends ApiResource implements HasId {
   public static Location create(LocationCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/locations");
-    return request(ApiResource.RequestMethod.POST, url, params, Location.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Location.class, options);
   }
 
   /**
@@ -117,7 +119,8 @@ public class Location extends ApiResource implements HasId {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, Location.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Location.class, options);
   }
 
   /**
@@ -139,7 +142,8 @@ public class Location extends ApiResource implements HasId {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, Location.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Location.class, options);
   }
 
   /** Returns a list of <code>Location</code> objects. */
@@ -151,7 +155,7 @@ public class Location extends ApiResource implements HasId {
   public static LocationCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/locations");
-    return requestCollection(url, params, LocationCollection.class, options);
+    return ApiResource.requestCollection(url, params, LocationCollection.class, options);
   }
 
   /** Returns a list of <code>Location</code> objects. */
@@ -163,7 +167,7 @@ public class Location extends ApiResource implements HasId {
   public static LocationCollection list(LocationListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/terminal/locations");
-    return requestCollection(url, params, LocationCollection.class, options);
+    return ApiResource.requestCollection(url, params, LocationCollection.class, options);
   }
 
   /** Deletes a <code>Location</code> object. */
@@ -189,7 +193,8 @@ public class Location extends ApiResource implements HasId {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.DELETE, url, params, Location.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.DELETE, url, params, Location.class, options);
   }
 
   /** Deletes a <code>Location</code> object. */
@@ -205,6 +210,7 @@ public class Location extends ApiResource implements HasId {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.DELETE, url, params, Location.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.DELETE, url, params, Location.class, options);
   }
 }

@@ -89,7 +89,7 @@ public class EarlyFraudWarning extends ApiResource implements HasId {
   public static EarlyFraudWarningCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/radar/early_fraud_warnings");
-    return requestCollection(url, params, EarlyFraudWarningCollection.class, options);
+    return ApiResource.requestCollection(url, params, EarlyFraudWarningCollection.class, options);
   }
 
   /** Returns a list of early fraud warnings. */
@@ -102,7 +102,7 @@ public class EarlyFraudWarning extends ApiResource implements HasId {
   public static EarlyFraudWarningCollection list(
       EarlyFraudWarningListParams params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/radar/early_fraud_warnings");
-    return requestCollection(url, params, EarlyFraudWarningCollection.class, options);
+    return ApiResource.requestCollection(url, params, EarlyFraudWarningCollection.class, options);
   }
 
   /**
@@ -141,7 +141,8 @@ public class EarlyFraudWarning extends ApiResource implements HasId {
             Stripe.getApiBase(),
             String.format(
                 "/v1/radar/early_fraud_warnings/%s", ApiResource.urlEncodeId(earlyFraudWarning)));
-    return request(ApiResource.RequestMethod.GET, url, params, EarlyFraudWarning.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, EarlyFraudWarning.class, options);
   }
 
   /**
@@ -159,6 +160,7 @@ public class EarlyFraudWarning extends ApiResource implements HasId {
             Stripe.getApiBase(),
             String.format(
                 "/v1/radar/early_fraud_warnings/%s", ApiResource.urlEncodeId(earlyFraudWarning)));
-    return request(ApiResource.RequestMethod.GET, url, params, EarlyFraudWarning.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, EarlyFraudWarning.class, options);
   }
 }

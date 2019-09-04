@@ -78,7 +78,7 @@ public class Token extends ApiResource implements HasId {
         String.format(
             "%s%s",
             Stripe.getApiBase(), String.format("/v1/tokens/%s", ApiResource.urlEncodeId(token)));
-    return request(ApiResource.RequestMethod.GET, url, params, Token.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Token.class, options);
   }
 
   /** Retrieves the token with the given ID. */
@@ -88,7 +88,7 @@ public class Token extends ApiResource implements HasId {
         String.format(
             "%s%s",
             Stripe.getApiBase(), String.format("/v1/tokens/%s", ApiResource.urlEncodeId(token)));
-    return request(ApiResource.RequestMethod.GET, url, params, Token.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Token.class, options);
   }
 
   /**
@@ -108,7 +108,7 @@ public class Token extends ApiResource implements HasId {
   public static Token create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/tokens");
-    return request(ApiResource.RequestMethod.POST, url, params, Token.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Token.class, options);
   }
 
   /**
@@ -128,6 +128,6 @@ public class Token extends ApiResource implements HasId {
   public static Token create(TokenCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/tokens");
-    return request(ApiResource.RequestMethod.POST, url, params, Token.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Token.class, options);
   }
 }

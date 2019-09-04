@@ -124,7 +124,8 @@ public class FeeRefund extends ApiResource
             String.format(
                 "/v1/application_fees/%s/refunds/%s",
                 ApiResource.urlEncodeId(this.getFee()), ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, FeeRefund.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, FeeRefund.class, options);
   }
 
   /**
@@ -152,6 +153,7 @@ public class FeeRefund extends ApiResource
             String.format(
                 "/v1/application_fees/%s/refunds/%s",
                 ApiResource.urlEncodeId(this.getFee()), ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, FeeRefund.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, FeeRefund.class, options);
   }
 }

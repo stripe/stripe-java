@@ -545,7 +545,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   public static ChargeCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/charges");
-    return requestCollection(url, params, ChargeCollection.class, options);
+    return ApiResource.requestCollection(url, params, ChargeCollection.class, options);
   }
 
   /**
@@ -563,7 +563,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   public static ChargeCollection list(ChargeListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/charges");
-    return requestCollection(url, params, ChargeCollection.class, options);
+    return ApiResource.requestCollection(url, params, ChargeCollection.class, options);
   }
 
   /**
@@ -585,7 +585,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   public static Charge create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/charges");
-    return request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
   }
 
   /**
@@ -607,7 +607,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   public static Charge create(ChargeCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/charges");
-    return request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
   }
 
   /**
@@ -639,7 +639,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         String.format(
             "%s%s",
             Stripe.getApiBase(), String.format("/v1/charges/%s", ApiResource.urlEncodeId(charge)));
-    return request(ApiResource.RequestMethod.GET, url, params, Charge.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Charge.class, options);
   }
 
   /**
@@ -653,7 +653,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         String.format(
             "%s%s",
             Stripe.getApiBase(), String.format("/v1/charges/%s", ApiResource.urlEncodeId(charge)));
-    return request(ApiResource.RequestMethod.GET, url, params, Charge.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Charge.class, options);
   }
 
   /**
@@ -676,7 +676,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/charges/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
   }
 
   /**
@@ -697,7 +697,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/charges/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
   }
 
   /**
@@ -754,7 +754,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/charges/%s/capture", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
   }
 
   /**
@@ -785,7 +785,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/charges/%s/capture", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Charge.class, options);
   }
 
   @Getter

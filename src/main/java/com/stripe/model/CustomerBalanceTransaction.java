@@ -175,7 +175,7 @@ public class CustomerBalanceTransaction extends ApiResource
                 "/v1/customers/%s/balance_transactions/%s",
                 ApiResource.urlEncodeId(this.getCustomer()),
                 ApiResource.urlEncodeId(this.getId())));
-    return request(
+    return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, CustomerBalanceTransaction.class, options);
   }
 
@@ -203,7 +203,7 @@ public class CustomerBalanceTransaction extends ApiResource
                 "/v1/customers/%s/balance_transactions/%s",
                 ApiResource.urlEncodeId(this.getCustomer()),
                 ApiResource.urlEncodeId(this.getId())));
-    return request(
+    return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, CustomerBalanceTransaction.class, options);
   }
 }

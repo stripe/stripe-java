@@ -119,7 +119,7 @@ public class OrderReturn extends ApiResource implements HasId {
   public static OrderReturnCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/order_returns");
-    return requestCollection(url, params, OrderReturnCollection.class, options);
+    return ApiResource.requestCollection(url, params, OrderReturnCollection.class, options);
   }
 
   /**
@@ -137,7 +137,7 @@ public class OrderReturn extends ApiResource implements HasId {
   public static OrderReturnCollection list(OrderReturnListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/order_returns");
-    return requestCollection(url, params, OrderReturnCollection.class, options);
+    return ApiResource.requestCollection(url, params, OrderReturnCollection.class, options);
   }
 
   /**
@@ -170,7 +170,8 @@ public class OrderReturn extends ApiResource implements HasId {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/order_returns/%s", ApiResource.urlEncodeId(id)));
-    return request(ApiResource.RequestMethod.GET, url, params, OrderReturn.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, OrderReturn.class, options);
   }
 
   /**
@@ -185,6 +186,7 @@ public class OrderReturn extends ApiResource implements HasId {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/order_returns/%s", ApiResource.urlEncodeId(id)));
-    return request(ApiResource.RequestMethod.GET, url, params, OrderReturn.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, OrderReturn.class, options);
   }
 }

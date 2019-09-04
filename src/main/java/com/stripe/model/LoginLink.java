@@ -40,7 +40,8 @@ public class LoginLink extends ApiResource {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/accounts/%s/login_links", ApiResource.urlEncodeId(account)));
-    return request(ApiResource.RequestMethod.POST, url, params, LoginLink.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, LoginLink.class, options);
   }
 
   /**
@@ -57,6 +58,7 @@ public class LoginLink extends ApiResource {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/accounts/%s/login_links", ApiResource.urlEncodeId(account)));
-    return request(ApiResource.RequestMethod.POST, url, params, LoginLink.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, LoginLink.class, options);
   }
 }

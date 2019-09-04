@@ -227,7 +227,7 @@ public class Session extends ApiResource implements HasId {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(session)));
-    return request(ApiResource.RequestMethod.GET, url, params, Session.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Session.class, options);
   }
 
   /** Retrieves a Session object. */
@@ -238,7 +238,7 @@ public class Session extends ApiResource implements HasId {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/checkout/sessions/%s", ApiResource.urlEncodeId(session)));
-    return request(ApiResource.RequestMethod.GET, url, params, Session.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Session.class, options);
   }
 
   /** Creates a Session object. */
@@ -250,7 +250,7 @@ public class Session extends ApiResource implements HasId {
   public static Session create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/checkout/sessions");
-    return request(ApiResource.RequestMethod.POST, url, params, Session.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Session.class, options);
   }
 
   /** Creates a Session object. */
@@ -262,7 +262,7 @@ public class Session extends ApiResource implements HasId {
   public static Session create(SessionCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/checkout/sessions");
-    return request(ApiResource.RequestMethod.POST, url, params, Session.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Session.class, options);
   }
 
   @Getter

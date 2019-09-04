@@ -210,7 +210,7 @@ public class Transaction extends ApiResource
   public static TransactionCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/transactions");
-    return requestCollection(url, params, TransactionCollection.class, options);
+    return ApiResource.requestCollection(url, params, TransactionCollection.class, options);
   }
 
   /**
@@ -228,7 +228,7 @@ public class Transaction extends ApiResource
   public static TransactionCollection list(TransactionListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/transactions");
-    return requestCollection(url, params, TransactionCollection.class, options);
+    return ApiResource.requestCollection(url, params, TransactionCollection.class, options);
   }
 
   /** Retrieves an Issuing <code>Transaction</code> object. */
@@ -251,7 +251,8 @@ public class Transaction extends ApiResource
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(transaction)));
-    return request(ApiResource.RequestMethod.GET, url, params, Transaction.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, Transaction.class, options);
   }
 
   /** Retrieves an Issuing <code>Transaction</code> object. */
@@ -263,7 +264,8 @@ public class Transaction extends ApiResource
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(transaction)));
-    return request(ApiResource.RequestMethod.GET, url, params, Transaction.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, Transaction.class, options);
   }
 
   /**
@@ -287,7 +289,8 @@ public class Transaction extends ApiResource
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
   }
 
   /**
@@ -309,6 +312,7 @@ public class Transaction extends ApiResource
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
   }
 }

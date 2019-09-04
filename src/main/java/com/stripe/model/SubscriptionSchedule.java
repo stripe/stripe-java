@@ -247,7 +247,8 @@ public class SubscriptionSchedule extends ApiResource
   public static SubscriptionScheduleCollection list(
       Map<String, Object> params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_schedules");
-    return requestCollection(url, params, SubscriptionScheduleCollection.class, options);
+    return ApiResource.requestCollection(
+        url, params, SubscriptionScheduleCollection.class, options);
   }
 
   /** Retrieves the list of your subscription schedules. */
@@ -260,7 +261,8 @@ public class SubscriptionSchedule extends ApiResource
   public static SubscriptionScheduleCollection list(
       SubscriptionScheduleListParams params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_schedules");
-    return requestCollection(url, params, SubscriptionScheduleCollection.class, options);
+    return ApiResource.requestCollection(
+        url, params, SubscriptionScheduleCollection.class, options);
   }
 
   /** Creates a new subscription schedule object. */
@@ -272,7 +274,7 @@ public class SubscriptionSchedule extends ApiResource
   public static SubscriptionSchedule create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_schedules");
-    return request(
+    return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
   }
 
@@ -286,7 +288,7 @@ public class SubscriptionSchedule extends ApiResource
   public static SubscriptionSchedule create(
       SubscriptionScheduleCreateParams params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_schedules");
-    return request(
+    return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
   }
 
@@ -318,7 +320,8 @@ public class SubscriptionSchedule extends ApiResource
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(schedule)));
-    return request(ApiResource.RequestMethod.GET, url, params, SubscriptionSchedule.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, SubscriptionSchedule.class, options);
   }
 
   /**
@@ -333,7 +336,8 @@ public class SubscriptionSchedule extends ApiResource
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(schedule)));
-    return request(ApiResource.RequestMethod.GET, url, params, SubscriptionSchedule.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, SubscriptionSchedule.class, options);
   }
 
   /** Updates an existing subscription schedule. */
@@ -351,7 +355,7 @@ public class SubscriptionSchedule extends ApiResource
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(
+    return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
   }
 
@@ -369,7 +373,7 @@ public class SubscriptionSchedule extends ApiResource
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(
+    return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
   }
 
@@ -413,7 +417,7 @@ public class SubscriptionSchedule extends ApiResource
             Stripe.getApiBase(),
             String.format(
                 "/v1/subscription_schedules/%s/cancel", ApiResource.urlEncodeId(this.getId())));
-    return request(
+    return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
   }
 
@@ -440,7 +444,7 @@ public class SubscriptionSchedule extends ApiResource
             Stripe.getApiBase(),
             String.format(
                 "/v1/subscription_schedules/%s/cancel", ApiResource.urlEncodeId(this.getId())));
-    return request(
+    return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
   }
 
@@ -492,7 +496,7 @@ public class SubscriptionSchedule extends ApiResource
             Stripe.getApiBase(),
             String.format(
                 "/v1/subscription_schedules/%s/release", ApiResource.urlEncodeId(this.getId())));
-    return request(
+    return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
   }
 
@@ -523,7 +527,7 @@ public class SubscriptionSchedule extends ApiResource
             Stripe.getApiBase(),
             String.format(
                 "/v1/subscription_schedules/%s/release", ApiResource.urlEncodeId(this.getId())));
-    return request(
+    return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
   }
 

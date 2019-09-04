@@ -65,7 +65,7 @@ public class CountrySpec extends ApiResource implements HasId {
   public static CountrySpecCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/country_specs");
-    return requestCollection(url, params, CountrySpecCollection.class, options);
+    return ApiResource.requestCollection(url, params, CountrySpecCollection.class, options);
   }
 
   /** Lists all Country Spec objects available in the API. */
@@ -77,7 +77,7 @@ public class CountrySpec extends ApiResource implements HasId {
   public static CountrySpecCollection list(CountrySpecListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/country_specs");
-    return requestCollection(url, params, CountrySpecCollection.class, options);
+    return ApiResource.requestCollection(url, params, CountrySpecCollection.class, options);
   }
 
   /** Returns a Country Spec for a given Country code. */
@@ -99,7 +99,8 @@ public class CountrySpec extends ApiResource implements HasId {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/country_specs/%s", ApiResource.urlEncodeId(country)));
-    return request(ApiResource.RequestMethod.GET, url, params, CountrySpec.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, CountrySpec.class, options);
   }
 
   /** Returns a Country Spec for a given Country code. */
@@ -111,7 +112,8 @@ public class CountrySpec extends ApiResource implements HasId {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/country_specs/%s", ApiResource.urlEncodeId(country)));
-    return request(ApiResource.RequestMethod.GET, url, params, CountrySpec.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, CountrySpec.class, options);
   }
 
   @Getter

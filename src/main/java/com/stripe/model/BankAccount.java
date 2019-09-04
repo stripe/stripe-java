@@ -172,7 +172,8 @@ public class BankAccount extends ApiResource
                 "/v1/customers/%s/sources/%s/verify",
                 ApiResource.urlEncodeId(this.getCustomer()),
                 ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, BankAccount.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, BankAccount.class, options);
   }
 
   /** Verify a specified bank account for a given customer. */
@@ -191,7 +192,8 @@ public class BankAccount extends ApiResource
                 "/v1/customers/%s/sources/%s/verify",
                 ApiResource.urlEncodeId(this.getCustomer()),
                 ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, BankAccount.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, BankAccount.class, options);
   }
 
   /**

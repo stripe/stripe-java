@@ -148,7 +148,7 @@ public class BitcoinReceiver extends ApiResource implements PaymentSource {
   public static BitcoinReceiverCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/bitcoin/receivers");
-    return requestCollection(url, params, BitcoinReceiverCollection.class, options);
+    return ApiResource.requestCollection(url, params, BitcoinReceiverCollection.class, options);
   }
 
   /**
@@ -167,7 +167,7 @@ public class BitcoinReceiver extends ApiResource implements PaymentSource {
   public static BitcoinReceiverCollection list(
       BitcoinReceiverListParams params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/bitcoin/receivers");
-    return requestCollection(url, params, BitcoinReceiverCollection.class, options);
+    return ApiResource.requestCollection(url, params, BitcoinReceiverCollection.class, options);
   }
 
   /** Retrieves the Bitcoin receiver with the given ID. */
@@ -188,7 +188,8 @@ public class BitcoinReceiver extends ApiResource implements PaymentSource {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/bitcoin/receivers/%s", ApiResource.urlEncodeId(id)));
-    return request(ApiResource.RequestMethod.GET, url, params, BitcoinReceiver.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, BitcoinReceiver.class, options);
   }
 
   /** Retrieves the Bitcoin receiver with the given ID. */
@@ -200,6 +201,7 @@ public class BitcoinReceiver extends ApiResource implements PaymentSource {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/bitcoin/receivers/%s", ApiResource.urlEncodeId(id)));
-    return request(ApiResource.RequestMethod.GET, url, params, BitcoinReceiver.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, BitcoinReceiver.class, options);
   }
 }

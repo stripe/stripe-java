@@ -90,7 +90,7 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
   public static ValueListCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/radar/value_lists");
-    return requestCollection(url, params, ValueListCollection.class, options);
+    return ApiResource.requestCollection(url, params, ValueListCollection.class, options);
   }
 
   /**
@@ -108,7 +108,7 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
   public static ValueListCollection list(ValueListListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/radar/value_lists");
-    return requestCollection(url, params, ValueListCollection.class, options);
+    return ApiResource.requestCollection(url, params, ValueListCollection.class, options);
   }
 
   /** Retrieves a <code>ValueList</code> object. */
@@ -130,7 +130,8 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(valueList)));
-    return request(ApiResource.RequestMethod.GET, url, params, ValueList.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ValueList.class, options);
   }
 
   /** Retrieves a <code>ValueList</code> object. */
@@ -142,7 +143,8 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(valueList)));
-    return request(ApiResource.RequestMethod.GET, url, params, ValueList.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ValueList.class, options);
   }
 
   /** Creates a new <code>ValueList</code> object, which can then be referenced in rules. */
@@ -154,7 +156,8 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
   public static ValueList create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/radar/value_lists");
-    return request(ApiResource.RequestMethod.POST, url, params, ValueList.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, ValueList.class, options);
   }
 
   /** Creates a new <code>ValueList</code> object, which can then be referenced in rules. */
@@ -166,7 +169,8 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
   public static ValueList create(ValueListCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/radar/value_lists");
-    return request(ApiResource.RequestMethod.POST, url, params, ValueList.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, ValueList.class, options);
   }
 
   /**
@@ -190,7 +194,8 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, ValueList.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, ValueList.class, options);
   }
 
   /**
@@ -212,7 +217,8 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, ValueList.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, ValueList.class, options);
   }
 
   /**
@@ -250,6 +256,7 @@ public class ValueList extends ApiResource implements HasId, MetadataStore<Value
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/radar/value_lists/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.DELETE, url, params, ValueList.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.DELETE, url, params, ValueList.class, options);
   }
 }

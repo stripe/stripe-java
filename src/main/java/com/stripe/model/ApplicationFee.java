@@ -208,7 +208,7 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
   public static ApplicationFeeCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/application_fees");
-    return requestCollection(url, params, ApplicationFeeCollection.class, options);
+    return ApiResource.requestCollection(url, params, ApplicationFeeCollection.class, options);
   }
 
   /**
@@ -227,7 +227,7 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
   public static ApplicationFeeCollection list(
       ApplicationFeeListParams params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/application_fees");
-    return requestCollection(url, params, ApplicationFeeCollection.class, options);
+    return ApiResource.requestCollection(url, params, ApplicationFeeCollection.class, options);
   }
 
   /**
@@ -257,7 +257,8 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/application_fees/%s", ApiResource.urlEncodeId(id)));
-    return request(ApiResource.RequestMethod.GET, url, params, ApplicationFee.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ApplicationFee.class, options);
   }
 
   /**
@@ -272,6 +273,7 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/application_fees/%s", ApiResource.urlEncodeId(id)));
-    return request(ApiResource.RequestMethod.GET, url, params, ApplicationFee.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ApplicationFee.class, options);
   }
 }

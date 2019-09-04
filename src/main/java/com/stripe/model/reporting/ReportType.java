@@ -96,7 +96,8 @@ public class ReportType extends ApiResource implements HasId {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/reporting/report_types/%s", ApiResource.urlEncodeId(reportType)));
-    return request(ApiResource.RequestMethod.GET, url, params, ReportType.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ReportType.class, options);
   }
 
   /**
@@ -111,7 +112,8 @@ public class ReportType extends ApiResource implements HasId {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/reporting/report_types/%s", ApiResource.urlEncodeId(reportType)));
-    return request(ApiResource.RequestMethod.GET, url, params, ReportType.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, ReportType.class, options);
   }
 
   /**
@@ -129,7 +131,7 @@ public class ReportType extends ApiResource implements HasId {
   public static ReportTypeCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/reporting/report_types");
-    return requestCollection(url, params, ReportTypeCollection.class, options);
+    return ApiResource.requestCollection(url, params, ReportTypeCollection.class, options);
   }
 
   /**
@@ -147,6 +149,6 @@ public class ReportType extends ApiResource implements HasId {
   public static ReportTypeCollection list(ReportTypeListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/reporting/report_types");
-    return requestCollection(url, params, ReportTypeCollection.class, options);
+    return ApiResource.requestCollection(url, params, ReportTypeCollection.class, options);
   }
 }

@@ -39,7 +39,8 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
   public FeeRefund create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
-    return request(ApiResource.RequestMethod.POST, url, params, FeeRefund.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, FeeRefund.class, options);
   }
 
   /**
@@ -71,7 +72,8 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
   public FeeRefund create(FeeRefundCollectionCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
-    return request(ApiResource.RequestMethod.POST, url, params, FeeRefund.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, FeeRefund.class, options);
   }
 
   /**
@@ -93,7 +95,7 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
   public FeeRefundCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
-    return requestCollection(url, params, FeeRefundCollection.class, options);
+    return ApiResource.requestCollection(url, params, FeeRefundCollection.class, options);
   }
 
   /**
@@ -115,7 +117,7 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
   public FeeRefundCollection list(FeeRefundCollectionListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
-    return requestCollection(url, params, FeeRefundCollection.class, options);
+    return ApiResource.requestCollection(url, params, FeeRefundCollection.class, options);
   }
 
   /**
@@ -148,7 +150,8 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
             "%s%s",
             Stripe.getApiBase(),
             String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
-    return request(ApiResource.RequestMethod.GET, url, params, FeeRefund.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, FeeRefund.class, options);
   }
 
   /**
@@ -164,6 +167,7 @@ public class FeeRefundCollection extends StripeCollection<FeeRefund> {
             "%s%s",
             Stripe.getApiBase(),
             String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
-    return request(ApiResource.RequestMethod.GET, url, params, FeeRefund.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, FeeRefund.class, options);
   }
 }

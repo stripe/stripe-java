@@ -19,7 +19,7 @@ public class PaymentSourceCollection extends StripeCollection<PaymentSource> {
   public PaymentSourceCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
-    return requestCollection(url, params, PaymentSourceCollection.class, options);
+    return ApiResource.requestCollection(url, params, PaymentSourceCollection.class, options);
   }
 
   /** List sources for a specified customer. */
@@ -32,7 +32,7 @@ public class PaymentSourceCollection extends StripeCollection<PaymentSource> {
   public PaymentSourceCollection list(
       PaymentSourceCollectionListParams params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
-    return requestCollection(url, params, PaymentSourceCollection.class, options);
+    return ApiResource.requestCollection(url, params, PaymentSourceCollection.class, options);
   }
 
   /** Retrieve a specified source for a given customer. */
@@ -53,7 +53,8 @@ public class PaymentSourceCollection extends StripeCollection<PaymentSource> {
             "%s%s",
             Stripe.getApiBase(),
             String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
-    return request(ApiResource.RequestMethod.GET, url, params, PaymentSource.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PaymentSource.class, options);
   }
 
   /** Retrieve a specified source for a given customer. */
@@ -65,7 +66,8 @@ public class PaymentSourceCollection extends StripeCollection<PaymentSource> {
             "%s%s",
             Stripe.getApiBase(),
             String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
-    return request(ApiResource.RequestMethod.GET, url, params, PaymentSource.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, PaymentSource.class, options);
   }
 
   /**
@@ -95,7 +97,8 @@ public class PaymentSourceCollection extends StripeCollection<PaymentSource> {
   public PaymentSource create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
-    return request(ApiResource.RequestMethod.POST, url, params, PaymentSource.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, PaymentSource.class, options);
   }
 
   /**
@@ -125,6 +128,7 @@ public class PaymentSourceCollection extends StripeCollection<PaymentSource> {
   public PaymentSource create(PaymentSourceCollectionCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
-    return request(ApiResource.RequestMethod.POST, url, params, PaymentSource.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, PaymentSource.class, options);
   }
 }

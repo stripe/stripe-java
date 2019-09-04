@@ -96,7 +96,7 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   public static CardholderCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/cardholders");
-    return requestCollection(url, params, CardholderCollection.class, options);
+    return ApiResource.requestCollection(url, params, CardholderCollection.class, options);
   }
 
   /**
@@ -114,7 +114,7 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   public static CardholderCollection list(CardholderListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/cardholders");
-    return requestCollection(url, params, CardholderCollection.class, options);
+    return ApiResource.requestCollection(url, params, CardholderCollection.class, options);
   }
 
   /** Creates a new Issuing <code>Cardholder</code> object that can be issued cards. */
@@ -126,7 +126,8 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   public static Cardholder create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/cardholders");
-    return request(ApiResource.RequestMethod.POST, url, params, Cardholder.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Cardholder.class, options);
   }
 
   /** Creates a new Issuing <code>Cardholder</code> object that can be issued cards. */
@@ -138,7 +139,8 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   public static Cardholder create(CardholderCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/cardholders");
-    return request(ApiResource.RequestMethod.POST, url, params, Cardholder.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Cardholder.class, options);
   }
 
   /** Retrieves an Issuing <code>Cardholder</code> object. */
@@ -161,7 +163,8 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(cardholder)));
-    return request(ApiResource.RequestMethod.GET, url, params, Cardholder.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, Cardholder.class, options);
   }
 
   /** Retrieves an Issuing <code>Cardholder</code> object. */
@@ -173,7 +176,8 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(cardholder)));
-    return request(ApiResource.RequestMethod.GET, url, params, Cardholder.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, Cardholder.class, options);
   }
 
   /**
@@ -197,7 +201,8 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, Cardholder.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Cardholder.class, options);
   }
 
   /**
@@ -219,7 +224,8 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/issuing/cardholders/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, Cardholder.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, Cardholder.class, options);
   }
 
   @Getter

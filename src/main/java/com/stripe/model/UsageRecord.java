@@ -75,7 +75,8 @@ public class UsageRecord extends ApiResource implements HasId {
             String.format(
                 "/v1/subscription_items/%s/usage_records",
                 ApiResource.urlEncodeId(subscriptionItem)));
-    return request(ApiResource.RequestMethod.POST, url, params, UsageRecord.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, UsageRecord.class, options);
   }
 
   /**
@@ -112,6 +113,7 @@ public class UsageRecord extends ApiResource implements HasId {
             String.format(
                 "/v1/subscription_items/%s/usage_records",
                 ApiResource.urlEncodeId(subscriptionItem)));
-    return request(ApiResource.RequestMethod.POST, url, params, UsageRecord.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, UsageRecord.class, options);
   }
 }

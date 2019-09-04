@@ -25,7 +25,7 @@ public class PersonCollection extends StripeCollection<Person> {
   public PersonCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
-    return requestCollection(url, params, PersonCollection.class, options);
+    return ApiResource.requestCollection(url, params, PersonCollection.class, options);
   }
 
   /**
@@ -43,7 +43,7 @@ public class PersonCollection extends StripeCollection<Person> {
   public PersonCollection list(PersonCollectionListParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
-    return requestCollection(url, params, PersonCollection.class, options);
+    return ApiResource.requestCollection(url, params, PersonCollection.class, options);
   }
 
   /** Retrieves an existing person. */
@@ -64,7 +64,7 @@ public class PersonCollection extends StripeCollection<Person> {
             "%s%s",
             Stripe.getApiBase(),
             String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
-    return request(ApiResource.RequestMethod.GET, url, params, Person.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Person.class, options);
   }
 
   /** Retrieves an existing person. */
@@ -75,7 +75,7 @@ public class PersonCollection extends StripeCollection<Person> {
             "%s%s",
             Stripe.getApiBase(),
             String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
-    return request(ApiResource.RequestMethod.GET, url, params, Person.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Person.class, options);
   }
 
   /** Creates a new person. */
@@ -86,7 +86,7 @@ public class PersonCollection extends StripeCollection<Person> {
   /** Creates a new person. */
   public Person create(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
-    return request(ApiResource.RequestMethod.POST, url, params, Person.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Person.class, options);
   }
 
   /** Creates a new person. */
@@ -98,6 +98,6 @@ public class PersonCollection extends StripeCollection<Person> {
   public Person create(PersonCollectionCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
-    return request(ApiResource.RequestMethod.POST, url, params, Person.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Person.class, options);
   }
 }

@@ -137,7 +137,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
             String.format(
                 "/v1/accounts/%s/persons/%s",
                 ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, Person.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Person.class, options);
   }
 
   /** Updates an existing person. */
@@ -154,7 +154,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
             String.format(
                 "/v1/accounts/%s/persons/%s",
                 ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, Person.class, options);
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Person.class, options);
   }
 
   /**
@@ -201,7 +201,8 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
             String.format(
                 "/v1/accounts/%s/persons/%s",
                 ApiResource.urlEncodeId(this.getAccount()), ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.DELETE, url, params, Person.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.DELETE, url, params, Person.class, options);
   }
 
   @Getter

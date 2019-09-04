@@ -97,7 +97,7 @@ public class IssuerFraudRecord extends ApiResource implements HasId {
   public static IssuerFraudRecordCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuer_fraud_records");
-    return requestCollection(url, params, IssuerFraudRecordCollection.class, options);
+    return ApiResource.requestCollection(url, params, IssuerFraudRecordCollection.class, options);
   }
 
   /** Returns a list of issuer fraud records. */
@@ -110,7 +110,7 @@ public class IssuerFraudRecord extends ApiResource implements HasId {
   public static IssuerFraudRecordCollection list(
       IssuerFraudRecordListParams params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuer_fraud_records");
-    return requestCollection(url, params, IssuerFraudRecordCollection.class, options);
+    return ApiResource.requestCollection(url, params, IssuerFraudRecordCollection.class, options);
   }
 
   /**
@@ -149,7 +149,8 @@ public class IssuerFraudRecord extends ApiResource implements HasId {
             Stripe.getApiBase(),
             String.format(
                 "/v1/issuer_fraud_records/%s", ApiResource.urlEncodeId(issuerFraudRecord)));
-    return request(ApiResource.RequestMethod.GET, url, params, IssuerFraudRecord.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, IssuerFraudRecord.class, options);
   }
 
   /**
@@ -167,6 +168,7 @@ public class IssuerFraudRecord extends ApiResource implements HasId {
             Stripe.getApiBase(),
             String.format(
                 "/v1/issuer_fraud_records/%s", ApiResource.urlEncodeId(issuerFraudRecord)));
-    return request(ApiResource.RequestMethod.GET, url, params, IssuerFraudRecord.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, IssuerFraudRecord.class, options);
   }
 }

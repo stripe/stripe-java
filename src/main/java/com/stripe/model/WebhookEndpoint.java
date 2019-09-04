@@ -81,7 +81,7 @@ public class WebhookEndpoint extends ApiResource implements HasId {
   public static WebhookEndpointCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/webhook_endpoints");
-    return requestCollection(url, params, WebhookEndpointCollection.class, options);
+    return ApiResource.requestCollection(url, params, WebhookEndpointCollection.class, options);
   }
 
   /** Returns a list of your webhook endpoints. */
@@ -94,7 +94,7 @@ public class WebhookEndpoint extends ApiResource implements HasId {
   public static WebhookEndpointCollection list(
       WebhookEndpointListParams params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/webhook_endpoints");
-    return requestCollection(url, params, WebhookEndpointCollection.class, options);
+    return ApiResource.requestCollection(url, params, WebhookEndpointCollection.class, options);
   }
 
   /** Retrieves the webhook endpoint with the given ID. */
@@ -117,7 +117,8 @@ public class WebhookEndpoint extends ApiResource implements HasId {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/webhook_endpoints/%s", ApiResource.urlEncodeId(webhookEndpoint)));
-    return request(ApiResource.RequestMethod.GET, url, params, WebhookEndpoint.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, WebhookEndpoint.class, options);
   }
 
   /** Retrieves the webhook endpoint with the given ID. */
@@ -129,7 +130,8 @@ public class WebhookEndpoint extends ApiResource implements HasId {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/webhook_endpoints/%s", ApiResource.urlEncodeId(webhookEndpoint)));
-    return request(ApiResource.RequestMethod.GET, url, params, WebhookEndpoint.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, WebhookEndpoint.class, options);
   }
 
   /**
@@ -157,7 +159,8 @@ public class WebhookEndpoint extends ApiResource implements HasId {
   public static WebhookEndpoint create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/webhook_endpoints");
-    return request(ApiResource.RequestMethod.POST, url, params, WebhookEndpoint.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, WebhookEndpoint.class, options);
   }
 
   /**
@@ -185,7 +188,8 @@ public class WebhookEndpoint extends ApiResource implements HasId {
   public static WebhookEndpoint create(WebhookEndpointCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/webhook_endpoints");
-    return request(ApiResource.RequestMethod.POST, url, params, WebhookEndpoint.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, WebhookEndpoint.class, options);
   }
 
   /**
@@ -207,7 +211,8 @@ public class WebhookEndpoint extends ApiResource implements HasId {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/webhook_endpoints/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, WebhookEndpoint.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, WebhookEndpoint.class, options);
   }
 
   /**
@@ -229,7 +234,8 @@ public class WebhookEndpoint extends ApiResource implements HasId {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/webhook_endpoints/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.POST, url, params, WebhookEndpoint.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.POST, url, params, WebhookEndpoint.class, options);
   }
 
   /**
@@ -271,6 +277,7 @@ public class WebhookEndpoint extends ApiResource implements HasId {
             "%s%s",
             Stripe.getApiBase(),
             String.format("/v1/webhook_endpoints/%s", ApiResource.urlEncodeId(this.getId())));
-    return request(ApiResource.RequestMethod.DELETE, url, params, WebhookEndpoint.class, options);
+    return ApiResource.request(
+        ApiResource.RequestMethod.DELETE, url, params, WebhookEndpoint.class, options);
   }
 }
