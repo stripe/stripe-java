@@ -1,5 +1,10 @@
 # Changelog
 
+## 11.7.0 - 2019-09-05
+* [#827](https://github.com/stripe/stripe-java/pull/827) Switch to new "prettier" codegen
+* [#841](https://github.com/stripe/stripe-java/pull/841)
+  * Just a trivial comment update
+
 ## 11.6.1 - 2019-09-03
 * [#839](https://github.com/stripe/stripe-java/pull/839) Deprecate `total_count`
 
