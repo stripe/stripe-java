@@ -40,7 +40,6 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
-  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("date")
   Long date;
 
@@ -116,7 +115,6 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Subscription> subscription;
 
-  /** The subscription item that this invoice item has been created for, if any. */
   @SerializedName("subscription_item")
   String subscriptionItem;
 

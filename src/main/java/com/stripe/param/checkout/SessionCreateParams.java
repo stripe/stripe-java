@@ -78,7 +78,7 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("locale")
   Locale locale;
 
-  /** The mode of the Checkout Session, one of `payment`, `setup`, or `subscription`. */
+  /** The mode of the Checkout Session. */
   @SerializedName("mode")
   Mode mode;
 
@@ -111,9 +111,9 @@ public class SessionCreateParams extends ApiRequestParams {
   SubscriptionData subscriptionData;
 
   /**
-   * The URL to which Stripe should send customers when payment or setup is complete. If you’d like
-   * access to the Checkout Session for the successful payment, read more about it in our guide on
-   * [fulfilling your payments with webhooks](/docs/payments/checkout/fulfillment#webhooks).
+   * The URL to which Stripe should send customers when payment is complete. If you’d like access to
+   * the Checkout Session for the successful payment, read more about it in our guide on [fulfilling
+   * your payments with webhooks](/docs/payments/checkout/fulfillment#webhooks).
    */
   @SerializedName("success_url")
   String successUrl;
@@ -349,7 +349,7 @@ public class SessionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The mode of the Checkout Session, one of `payment`, `setup`, or `subscription`. */
+    /** The mode of the Checkout Session. */
     public Builder setMode(Mode mode) {
       this.mode = mode;
       return this;
@@ -411,10 +411,9 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The URL to which Stripe should send customers when payment or setup is complete. If you’d
-     * like access to the Checkout Session for the successful payment, read more about it in our
-     * guide on [fulfilling your payments with
-     * webhooks](/docs/payments/checkout/fulfillment#webhooks).
+     * The URL to which Stripe should send customers when payment is complete. If you’d like access
+     * to the Checkout Session for the successful payment, read more about it in our guide on
+     * [fulfilling your payments with webhooks](/docs/payments/checkout/fulfillment#webhooks).
      */
     public Builder setSuccessUrl(String successUrl) {
       this.successUrl = successUrl;
@@ -651,7 +650,8 @@ public class SessionCreateParams extends ApiRequestParams {
      * <p>Use `on_session` if you intend to only reuse the payment method when your customer is
      * present in your checkout flow. Use `off_session` if your customer may or may not be in your
      * checkout flow. See [Saving card details after a
-     * payment](https://stripe.com/docs/payments/cards/saving-cards-after-payment) to learn more.
+     * payment](https://stripe.com/docs/payments/cards/saving-cards#saving-card-after-payment) to
+     * learn more.
      *
      * <p>Stripe uses `setup_future_usage` to dynamically optimize your payment flow and comply with
      * regional legislation and network rules. For example, if your customer is impacted by
@@ -853,7 +853,8 @@ public class SessionCreateParams extends ApiRequestParams {
        * <p>Use `on_session` if you intend to only reuse the payment method when your customer is
        * present in your checkout flow. Use `off_session` if your customer may or may not be in your
        * checkout flow. See [Saving card details after a
-       * payment](https://stripe.com/docs/payments/cards/saving-cards-after-payment) to learn more.
+       * payment](https://stripe.com/docs/payments/cards/saving-cards#saving-card-after-payment) to
+       * learn more.
        *
        * <p>Stripe uses `setup_future_usage` to dynamically optimize your payment flow and comply
        * with regional legislation and network rules. For example, if your customer is impacted by
@@ -1301,7 +1302,11 @@ public class SessionCreateParams extends ApiRequestParams {
     @SerializedName("metadata")
     Map<String, String> metadata;
 
-    /** The Stripe account for which the setup is intended. */
+    /**
+     * The Stripe account ID for which these funds are intended. For details, see the PaymentIntents
+     * [use case for connected
+     * accounts](/docs/payments/payment-intents/use-cases#connected-accounts).
+     */
     @SerializedName("on_behalf_of")
     String onBehalfOf;
 
@@ -1393,7 +1398,11 @@ public class SessionCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The Stripe account for which the setup is intended. */
+      /**
+       * The Stripe account ID for which these funds are intended. For details, see the
+       * PaymentIntents [use case for connected
+       * accounts](/docs/payments/payment-intents/use-cases#connected-accounts).
+       */
       public Builder setOnBehalfOf(String onBehalfOf) {
         this.onBehalfOf = onBehalfOf;
         return this;

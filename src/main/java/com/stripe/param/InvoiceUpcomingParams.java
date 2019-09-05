@@ -69,8 +69,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   Object subscriptionBillingCycleAnchor;
 
   /**
-   * Timestamp indicating when the subscription should be scheduled to cancel. Will prorate if
-   * within the current period if `prorate=true`
+   * Boolean indicating when the subscription should be scheduled to cancel. Will prorate if within
+   * the current period if `prorate=true`
    */
   @SerializedName("subscription_cancel_at")
   Object subscriptionCancelAt;
@@ -81,7 +81,6 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   @SerializedName("subscription_cancel_at_period_end")
   Boolean subscriptionCancelAtPeriodEnd;
 
-  /** This simulates the subscription being canceled or expired immediately. */
   @SerializedName("subscription_cancel_now")
   Boolean subscriptionCancelNow;
 
@@ -395,7 +394,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * Timestamp indicating when the subscription should be scheduled to cancel. Will prorate if
+     * Boolean indicating when the subscription should be scheduled to cancel. Will prorate if
      * within the current period if `prorate=true`
      */
     public Builder setSubscriptionCancelAt(Long subscriptionCancelAt) {
@@ -404,7 +403,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * Timestamp indicating when the subscription should be scheduled to cancel. Will prorate if
+     * Boolean indicating when the subscription should be scheduled to cancel. Will prorate if
      * within the current period if `prorate=true`
      */
     public Builder setSubscriptionCancelAt(EmptyParam subscriptionCancelAt) {
@@ -420,7 +419,6 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       return this;
     }
 
-    /** This simulates the subscription being canceled or expired immediately. */
     public Builder setSubscriptionCancelNow(Boolean subscriptionCancelNow) {
       this.subscriptionCancelNow = subscriptionCancelNow;
       return this;

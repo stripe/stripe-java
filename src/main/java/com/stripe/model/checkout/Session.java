@@ -87,7 +87,7 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("locale")
   String locale;
 
-  /** The mode of the Checkout Session, one of `payment`, `setup`, or `subscription`. */
+  /** The mode of the Checkout Session. */
   @SerializedName("mode")
   String mode;
 
@@ -95,7 +95,7 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
-  /** The ID of the PaymentIntent for `payment` mode. */
+  /** The ID of the PaymentIntent created if SKUs or line items were provided. */
   @SerializedName("payment_intent")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
