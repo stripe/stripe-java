@@ -82,11 +82,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
   String returnUrl;
 
   /**
-   * Indicates how the payment method is intended to be used in the future.
-   *
-   * <p>Use `on_session` if you intend to only reuse the payment method when the customer is in your
-   * checkout flow. Use `off_session` if your customer may or may not be in your checkout flow. If
-   * not provided, this value defaults to `off_session`.
+   * Indicates how the payment method is intended to be used in the future. If not provided, this
+   * value defaults to `off_session`.
    */
   @SerializedName("usage")
   Object usage;
@@ -329,11 +326,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Indicates how the payment method is intended to be used in the future.
-     *
-     * <p>Use `on_session` if you intend to only reuse the payment method when the customer is in
-     * your checkout flow. Use `off_session` if your customer may or may not be in your checkout
-     * flow. If not provided, this value defaults to `off_session`.
+     * Indicates how the payment method is intended to be used in the future. If not provided, this
+     * value defaults to `off_session`.
      */
     public Builder setUsage(Usage usage) {
       this.usage = usage;
@@ -341,11 +335,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Indicates how the payment method is intended to be used in the future.
-     *
-     * <p>Use `on_session` if you intend to only reuse the payment method when the customer is in
-     * your checkout flow. Use `off_session` if your customer may or may not be in your checkout
-     * flow. If not provided, this value defaults to `off_session`.
+     * Indicates how the payment method is intended to be used in the future. If not provided, this
+     * value defaults to `off_session`.
      */
     public Builder setUsage(String usage) {
       this.usage = usage;
