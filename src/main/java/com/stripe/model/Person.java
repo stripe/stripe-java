@@ -337,6 +337,13 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @EqualsAndHashCode(callSuper = false)
   public static class Verification extends StripeObject {
     /**
+     * A document showing address, either a passport, local ID card, or utility bill from a
+     * well-known utility company.
+     */
+    @SerializedName("additional_document")
+    VerificationDocument additionalDocument;
+
+    /**
      * A user-displayable string describing the verification state for the person. For example, this
      * may say "Provided identity information could not be verified".
      */
