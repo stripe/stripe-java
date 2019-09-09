@@ -1,5 +1,10 @@
 # Changelog
 
+## 11.8.0 - 2019-09-09
+* [#842](https://github.com/stripe/stripe-java/pull/842)
+  * Add support for `company[verification]` on `Account`
+  * Add support for `verification[additional_document]` on `Person`
+
 ## 11.7.0 - 2019-09-05
 * [#827](https://github.com/stripe/stripe-java/pull/827) Switch to new "prettier" codegen
 * [#841](https://github.com/stripe/stripe-java/pull/841)
