@@ -676,6 +676,91 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     /** Whether the company's business VAT number was provided. */
     @SerializedName("vat_id_provided")
     Boolean vatIdProvided;
+
+    /** Information on the verification state of the company. */
+    @SerializedName("verification")
+    Verification verification;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Verification extends StripeObject {
+      @SerializedName("document")
+      VerificationDocument document;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class VerificationDocument extends StripeObject {
+        /**
+         * The back of a document returned by a [file upload](#create_file) with a `purpose` value
+         * of `additional_verification`.
+         */
+        @SerializedName("back")
+        @Getter(lombok.AccessLevel.NONE)
+        @Setter(lombok.AccessLevel.NONE)
+        ExpandableField<File> back;
+
+        /** A user-displayable string describing the verification state of this document. */
+        @SerializedName("details")
+        String details;
+
+        /**
+         * One of `document_corrupt`, `document_failed_copy`, `document_not_readable`,
+         * `document_not_uploaded`, `document_failed_other`, `document_fraudulent`,
+         * `document_invalid`, `document_manipulated`, `document_too_large`, or
+         * `document_failed_test_mode`. A machine-readable code specifying the verification state
+         * for this document.
+         */
+        @SerializedName("details_code")
+        String detailsCode;
+
+        /**
+         * The front of a document returned by a [file upload](#create_file) with a `purpose` value
+         * of `additional_verification`.
+         */
+        @SerializedName("front")
+        @Getter(lombok.AccessLevel.NONE)
+        @Setter(lombok.AccessLevel.NONE)
+        ExpandableField<File> front;
+
+        /** Get id of expandable `back` object. */
+        public String getBack() {
+          return (this.back != null) ? this.back.getId() : null;
+        }
+
+        public void setBack(String id) {
+          this.back = ApiResource.setExpandableFieldId(id, this.back);
+        }
+
+        /** Get expanded `back`. */
+        public File getBackObject() {
+          return (this.back != null) ? this.back.getExpanded() : null;
+        }
+
+        public void setBackObject(File expandableObject) {
+          this.back = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+        }
+
+        /** Get id of expandable `front` object. */
+        public String getFront() {
+          return (this.front != null) ? this.front.getId() : null;
+        }
+
+        public void setFront(String id) {
+          this.front = ApiResource.setExpandableFieldId(id, this.front);
+        }
+
+        /** Get expanded `front`. */
+        public File getFrontObject() {
+          return (this.front != null) ? this.front.getExpanded() : null;
+        }
+
+        public void setFrontObject(File expandableObject) {
+          this.front = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+        }
+      }
+    }
   }
 
   @Getter

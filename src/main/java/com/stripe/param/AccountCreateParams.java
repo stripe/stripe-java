@@ -674,6 +674,10 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("vat_id")
     String vatId;
 
+    /** Information on the verification state of the company. */
+    @SerializedName("verification")
+    Verification verification;
+
     private Company(
         Address address,
         AddressKana addressKana,
@@ -687,7 +691,8 @@ public class AccountCreateParams extends ApiRequestParams {
         String phone,
         String taxId,
         String taxIdRegistrar,
-        String vatId) {
+        String vatId,
+        Verification verification) {
       this.address = address;
       this.addressKana = addressKana;
       this.addressKanji = addressKanji;
@@ -701,6 +706,7 @@ public class AccountCreateParams extends ApiRequestParams {
       this.taxId = taxId;
       this.taxIdRegistrar = taxIdRegistrar;
       this.vatId = vatId;
+      this.verification = verification;
     }
 
     public static Builder builder() {
@@ -734,6 +740,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
       private String vatId;
 
+      private Verification verification;
+
       /** Finalize and obtain parameter instance from this builder. */
       public Company build() {
         return new Company(
@@ -749,7 +757,8 @@ public class AccountCreateParams extends ApiRequestParams {
             this.phone,
             this.taxId,
             this.taxIdRegistrar,
-            this.vatId);
+            this.vatId,
+            this.verification);
       }
 
       /** The company's primary address. */
@@ -861,6 +870,12 @@ public class AccountCreateParams extends ApiRequestParams {
       /** The VAT number of the company. */
       public Builder setVatId(String vatId) {
         this.vatId = vatId;
+        return this;
+      }
+
+      /** Information on the verification state of the company. */
+      public Builder setVerification(Verification verification) {
+        this.verification = verification;
         return this;
       }
     }
@@ -1353,6 +1368,170 @@ public class AccountCreateParams extends ApiRequestParams {
         public Builder setTown(String town) {
           this.town = town;
           return this;
+        }
+      }
+    }
+
+    public static class Verification {
+      /** A document verifying the business. */
+      @SerializedName("document")
+      Document document;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Verification(Document document, Map<String, Object> extraParams) {
+        this.document = document;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Document document;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Verification build() {
+          return new Verification(this.document, this.extraParams);
+        }
+
+        /** A document verifying the business. */
+        public Builder setDocument(Document document) {
+          this.document = document;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Company.Verification#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link AccountCreateParams.Company.Verification#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+
+      public static class Document {
+        /**
+         * The back of a document returned by a [file upload](#create_file) with a `purpose` value
+         * of `additional_verification`.
+         */
+        @SerializedName("back")
+        String back;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * The front of a document returned by a [file upload](#create_file) with a `purpose` value
+         * of `additional_verification`.
+         */
+        @SerializedName("front")
+        String front;
+
+        private Document(String back, Map<String, Object> extraParams, String front) {
+          this.back = back;
+          this.extraParams = extraParams;
+          this.front = front;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private String back;
+
+          private Map<String, Object> extraParams;
+
+          private String front;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public Document build() {
+            return new Document(this.back, this.extraParams, this.front);
+          }
+
+          /**
+           * The back of a document returned by a [file upload](#create_file) with a `purpose` value
+           * of `additional_verification`.
+           */
+          public Builder setBack(String back) {
+            this.back = back;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link AccountCreateParams.Company.Verification.Document#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link AccountCreateParams.Company.Verification.Document#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * The front of a document returned by a [file upload](#create_file) with a `purpose`
+           * value of `additional_verification`.
+           */
+          public Builder setFront(String front) {
+            this.front = front;
+            return this;
+          }
         }
       }
     }
@@ -2310,6 +2489,13 @@ public class AccountCreateParams extends ApiRequestParams {
     }
 
     public static class Verification {
+      /**
+       * A document showing address, either a passport, local ID card, or utility bill from a
+       * well-known utility company.
+       */
+      @SerializedName("additional_document")
+      AdditionalDocument additionalDocument;
+
       /** An identifying document, either a passport or local ID card. */
       @SerializedName("document")
       Document document;
@@ -2323,7 +2509,11 @@ public class AccountCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      private Verification(Document document, Map<String, Object> extraParams) {
+      private Verification(
+          AdditionalDocument additionalDocument,
+          Document document,
+          Map<String, Object> extraParams) {
+        this.additionalDocument = additionalDocument;
         this.document = document;
         this.extraParams = extraParams;
       }
@@ -2333,13 +2523,24 @@ public class AccountCreateParams extends ApiRequestParams {
       }
 
       public static class Builder {
+        private AdditionalDocument additionalDocument;
+
         private Document document;
 
         private Map<String, Object> extraParams;
 
         /** Finalize and obtain parameter instance from this builder. */
         public Verification build() {
-          return new Verification(this.document, this.extraParams);
+          return new Verification(this.additionalDocument, this.document, this.extraParams);
+        }
+
+        /**
+         * A document showing address, either a passport, local ID card, or utility bill from a
+         * well-known utility company.
+         */
+        public Builder setAdditionalDocument(AdditionalDocument additionalDocument) {
+          this.additionalDocument = additionalDocument;
+          return this;
         }
 
         /** An identifying document, either a passport or local ID card. */
@@ -2374,6 +2575,103 @@ public class AccountCreateParams extends ApiRequestParams {
           }
           this.extraParams.putAll(map);
           return this;
+        }
+      }
+
+      public static class AdditionalDocument {
+        /**
+         * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
+         * `identity_document`.
+         */
+        @SerializedName("back")
+        String back;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * The front of an ID returned by a [file upload](#create_file) with a `purpose` value of
+         * `identity_document`.
+         */
+        @SerializedName("front")
+        String front;
+
+        private AdditionalDocument(String back, Map<String, Object> extraParams, String front) {
+          this.back = back;
+          this.extraParams = extraParams;
+          this.front = front;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private String back;
+
+          private Map<String, Object> extraParams;
+
+          private String front;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public AdditionalDocument build() {
+            return new AdditionalDocument(this.back, this.extraParams, this.front);
+          }
+
+          /**
+           * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
+           * `identity_document`.
+           */
+          public Builder setBack(String back) {
+            this.back = back;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AccountCreateParams.Individual.Verification.AdditionalDocument#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * AccountCreateParams.Individual.Verification.AdditionalDocument#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * The front of an ID returned by a [file upload](#create_file) with a `purpose` value of
+           * `identity_document`.
+           */
+          public Builder setFront(String front) {
+            this.front = front;
+            return this;
+          }
         }
       }
 
