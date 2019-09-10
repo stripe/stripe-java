@@ -2,7 +2,6 @@ package com.stripe.param.checkout;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
-import com.stripe.net.ApiRequestParams.EnumParam;
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -12,115 +11,109 @@ import lombok.Getter;
 
 public class SessionCreateParams extends ApiRequestParams {
   /**
-   * Specify whether Checkout should collect the customer's billing address. If set to `required`, Checkout will always collect the customer's billing address. If left blank or set to `auto` Checkout will only collect the billing address when necessary.
+   * Specify whether Checkout should collect the customer's billing address. If set to `required`,
+   * Checkout will always collect the customer's billing address. If left blank or set to `auto`
+   * Checkout will only collect the billing address when necessary.
    */
   @SerializedName("billing_address_collection")
   BillingAddressCollection billingAddressCollection;
 
   /**
-   * The URL the customer will be directed to if they decide to cancel payment and return to your website.
+   * The URL the customer will be directed to if they decide to cancel payment and return to your
+   * website.
    */
   @SerializedName("cancel_url")
   String cancelUrl;
 
   /**
-   * A unique string to reference the Checkout Session. This can be a
-customer ID, a cart ID, or similar, and can be used to reconcile the
-session with your internal systems.
+   * A unique string to reference the Checkout Session. This can be a customer ID, a cart ID, or
+   * similar, and can be used to reconcile the session with your internal systems.
    */
   @SerializedName("client_reference_id")
   String clientReferenceId;
 
   /**
-   * ID of an existing customer, if one exists. If blank, Checkout will
-create a new customer object based on information provided during the
-session. The email stored on the customer will be used to prefill the
-email field on the Checkout page. If the customer changes their email
-on the Checkout page, the Customer object will be updated with the new
-email.
+   * ID of an existing customer, if one exists. If blank, Checkout will create a new customer object
+   * based on information provided during the session. The email stored on the customer will be used
+   * to prefill the email field on the Checkout page. If the customer changes their email on the
+   * Checkout page, the Customer object will be updated with the new email.
    */
   @SerializedName("customer")
   String customer;
 
   /**
-   * If provided, this value will be used when the Customer object is created.
-If not provided, customers will be asked to enter their email address.
-Use this parameter to prefill customer data if you already have an email
-on file. To access information about the customer once a session is
-complete, use the `customer` field.
+   * If provided, this value will be used when the Customer object is created. If not provided,
+   * customers will be asked to enter their email address. Use this parameter to prefill customer
+   * data if you already have an email on file. To access information about the customer once a
+   * session is complete, use the `customer` field.
    */
   @SerializedName("customer_email")
   String customerEmail;
 
-  /**
-   * Specifies which fields in the response should be expanded.
-   */
+  /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
 
   /**
-   * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
   /**
-   * A list of items the customer is purchasing. Use this parameter for
-one-time payments or adding invoice line items to a subscription (used
-in conjunction with `subscription_data`).
+   * A list of items the customer is purchasing. Use this parameter for one-time payments or adding
+   * invoice line items to a subscription (used in conjunction with `subscription_data`).
    */
   @SerializedName("line_items")
   List<LineItem> lineItems;
 
   /**
-   * The IETF language tag of the locale Checkout is displayed in. If blank or `auto`, the browser's locale is used. Supported values are `auto`, `da`, `de`, `en`, `es`, `fi`, `fr`, `it`, `ja`, `nb`, `nl`, `pl`, `pt`, `sv`, or `zh`.
+   * The IETF language tag of the locale Checkout is displayed in. If blank or `auto`, the browser's
+   * locale is used. Supported values are `auto`, `da`, `de`, `en`, `es`, `fi`, `fr`, `it`, `ja`,
+   * `nb`, `nl`, `pl`, `pt`, `sv`, or `zh`.
    */
   @SerializedName("locale")
   Locale locale;
 
-  /**
-   * The mode of the Checkout Session, one of `payment`, `setup`, or `subscription`.
-   */
+  /** The mode of the Checkout Session, one of `payment`, `setup`, or `subscription`. */
   @SerializedName("mode")
   Mode mode;
 
-  /**
-   * A subset of parameters to be passed to PaymentIntent creation.
-   */
+  /** A subset of parameters to be passed to PaymentIntent creation. */
   @SerializedName("payment_intent_data")
   PaymentIntentData paymentIntentData;
 
   /**
-   * A list of the types of payment methods (e.g. card) this Checkout
-Session is allowed to accept. The only supported value today is `card`.
+   * A list of the types of payment methods (e.g. card) this Checkout Session is allowed to accept.
+   * The only supported value today is `card`.
    */
   @SerializedName("payment_method_types")
   List<PaymentMethodType> paymentMethodTypes;
 
-  /**
-   * A subset of parameters to be passed to SetupIntent creation.
-   */
+  /** A subset of parameters to be passed to SetupIntent creation. */
   @SerializedName("setup_intent_data")
   SetupIntentData setupIntentData;
 
   /**
-   * Describes the type of transaction being performed by Checkout in order to customize relevant text on the page, such as the submit button. `submit_type` can only be specified on Checkout Sessions using line items or a SKU, but not Checkout Sessions for subscriptions. Supported values are `auto`, `book`, `donate`, or `pay`.
+   * Describes the type of transaction being performed by Checkout in order to customize relevant
+   * text on the page, such as the submit button. `submit_type` can only be specified on Checkout
+   * Sessions using line items or a SKU, but not Checkout Sessions for subscriptions. Supported
+   * values are `auto`, `book`, `donate`, or `pay`.
    */
   @SerializedName("submit_type")
   SubmitType submitType;
 
-  /**
-   * A subset of parameters to be passed to subscription creation.
-   */
+  /** A subset of parameters to be passed to subscription creation. */
   @SerializedName("subscription_data")
   SubscriptionData subscriptionData;
 
   /**
-   * The URL to which Stripe should send customers when payment or setup
-is complete.
-If you’d like access to the Checkout Session for the successful
-payment, read more about it in our guide on [fulfilling your payments
-with webhooks](/docs/payments/checkout/fulfillment#webhooks).
+   * The URL to which Stripe should send customers when payment or setup is complete. If you’d like
+   * access to the Checkout Session for the successful payment, read more about it in our guide on
+   * [fulfilling your payments with webhooks](/docs/payments/checkout/fulfillment#webhooks).
    */
   @SerializedName("success_url")
   String successUrl;
@@ -159,9 +152,11 @@ with webhooks](/docs/payments/checkout/fulfillment#webhooks).
     this.subscriptionData = subscriptionData;
     this.successUrl = successUrl;
   }
+
   public static Builder builder() {
     return new Builder();
   }
+
   public static class Builder {
     private BillingAddressCollection billingAddressCollection;
 
@@ -195,32 +190,31 @@ with webhooks](/docs/payments/checkout/fulfillment#webhooks).
 
     private String successUrl;
 
-    /**
-     * Finalize and obtain parameter instance from this builder.
-     */
+    /** Finalize and obtain parameter instance from this builder. */
     public SessionCreateParams build() {
       return new SessionCreateParams(
-        this.billingAddressCollection,
-        this.cancelUrl,
-        this.clientReferenceId,
-        this.customer,
-        this.customerEmail,
-        this.expand,
-        this.extraParams,
-        this.lineItems,
-        this.locale,
-        this.mode,
-        this.paymentIntentData,
-        this.paymentMethodTypes,
-        this.setupIntentData,
-        this.submitType,
-        this.subscriptionData,
-        this.successUrl
-      );
+          this.billingAddressCollection,
+          this.cancelUrl,
+          this.clientReferenceId,
+          this.customer,
+          this.customerEmail,
+          this.expand,
+          this.extraParams,
+          this.lineItems,
+          this.locale,
+          this.mode,
+          this.paymentIntentData,
+          this.paymentMethodTypes,
+          this.setupIntentData,
+          this.submitType,
+          this.subscriptionData,
+          this.successUrl);
     }
 
     /**
-     * Specify whether Checkout should collect the customer's billing address. If set to `required`, Checkout will always collect the customer's billing address. If left blank or set to `auto` Checkout will only collect the billing address when necessary.
+     * Specify whether Checkout should collect the customer's billing address. If set to `required`,
+     * Checkout will always collect the customer's billing address. If left blank or set to `auto`
+     * Checkout will only collect the billing address when necessary.
      */
     public Builder setBillingAddressCollection(BillingAddressCollection billingAddressCollection) {
       this.billingAddressCollection = billingAddressCollection;
@@ -228,7 +222,8 @@ with webhooks](/docs/payments/checkout/fulfillment#webhooks).
     }
 
     /**
-     * The URL the customer will be directed to if they decide to cancel payment and return to your website.
+     * The URL the customer will be directed to if they decide to cancel payment and return to your
+     * website.
      */
     public Builder setCancelUrl(String cancelUrl) {
       this.cancelUrl = cancelUrl;
@@ -236,9 +231,8 @@ with webhooks](/docs/payments/checkout/fulfillment#webhooks).
     }
 
     /**
-     * A unique string to reference the Checkout Session. This can be a
-customer ID, a cart ID, or similar, and can be used to reconcile the
-session with your internal systems.
+     * A unique string to reference the Checkout Session. This can be a customer ID, a cart ID, or
+     * similar, and can be used to reconcile the session with your internal systems.
      */
     public Builder setClientReferenceId(String clientReferenceId) {
       this.clientReferenceId = clientReferenceId;
@@ -246,12 +240,10 @@ session with your internal systems.
     }
 
     /**
-     * ID of an existing customer, if one exists. If blank, Checkout will
-create a new customer object based on information provided during the
-session. The email stored on the customer will be used to prefill the
-email field on the Checkout page. If the customer changes their email
-on the Checkout page, the Customer object will be updated with the new
-email.
+     * ID of an existing customer, if one exists. If blank, Checkout will create a new customer
+     * object based on information provided during the session. The email stored on the customer
+     * will be used to prefill the email field on the Checkout page. If the customer changes their
+     * email on the Checkout page, the Customer object will be updated with the new email.
      */
     public Builder setCustomer(String customer) {
       this.customer = customer;
@@ -259,11 +251,10 @@ email.
     }
 
     /**
-     * If provided, this value will be used when the Customer object is created.
-If not provided, customers will be asked to enter their email address.
-Use this parameter to prefill customer data if you already have an email
-on file. To access information about the customer once a session is
-complete, use the `customer` field.
+     * If provided, this value will be used when the Customer object is created. If not provided,
+     * customers will be asked to enter their email address. Use this parameter to prefill customer
+     * data if you already have an email on file. To access information about the customer once a
+     * session is complete, use the `customer` field.
      */
     public Builder setCustomerEmail(String customerEmail) {
       this.customerEmail = customerEmail;
@@ -271,7 +262,9 @@ complete, use the `customer` field.
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link SessionCreateParams#expand} for the field documentation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SessionCreateParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -282,7 +275,9 @@ complete, use the `customer` field.
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link SessionCreateParams#expand} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SessionCreateParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -293,7 +288,9 @@ complete, use the `customer` field.
     }
 
     /**
-     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SessionCreateParams#extraParams} for the field documentation.
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * SessionCreateParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -304,7 +301,9 @@ complete, use the `customer` field.
     }
 
     /**
-     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SessionCreateParams#extraParams} for the field documentation.
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link SessionCreateParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -315,7 +314,9 @@ complete, use the `customer` field.
     }
 
     /**
-     * Add an element to `lineItems` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link SessionCreateParams#lineItems} for the field documentation.
+     * Add an element to `lineItems` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * SessionCreateParams#lineItems} for the field documentation.
      */
     public Builder addLineItem(LineItem element) {
       if (this.lineItems == null) {
@@ -326,7 +327,9 @@ complete, use the `customer` field.
     }
 
     /**
-     * Add all elements to `lineItems` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link SessionCreateParams#lineItems} for the field documentation.
+     * Add all elements to `lineItems` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * SessionCreateParams#lineItems} for the field documentation.
      */
     public Builder addAllLineItem(List<LineItem> elements) {
       if (this.lineItems == null) {
@@ -337,31 +340,31 @@ complete, use the `customer` field.
     }
 
     /**
-     * The IETF language tag of the locale Checkout is displayed in. If blank or `auto`, the browser's locale is used. Supported values are `auto`, `da`, `de`, `en`, `es`, `fi`, `fr`, `it`, `ja`, `nb`, `nl`, `pl`, `pt`, `sv`, or `zh`.
+     * The IETF language tag of the locale Checkout is displayed in. If blank or `auto`, the
+     * browser's locale is used. Supported values are `auto`, `da`, `de`, `en`, `es`, `fi`, `fr`,
+     * `it`, `ja`, `nb`, `nl`, `pl`, `pt`, `sv`, or `zh`.
      */
     public Builder setLocale(Locale locale) {
       this.locale = locale;
       return this;
     }
 
-    /**
-     * The mode of the Checkout Session, one of `payment`, `setup`, or `subscription`.
-     */
+    /** The mode of the Checkout Session, one of `payment`, `setup`, or `subscription`. */
     public Builder setMode(Mode mode) {
       this.mode = mode;
       return this;
     }
 
-    /**
-     * A subset of parameters to be passed to PaymentIntent creation.
-     */
+    /** A subset of parameters to be passed to PaymentIntent creation. */
     public Builder setPaymentIntentData(PaymentIntentData paymentIntentData) {
       this.paymentIntentData = paymentIntentData;
       return this;
     }
 
     /**
-     * Add an element to `paymentMethodTypes` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link SessionCreateParams#paymentMethodTypes} for the field documentation.
+     * Add an element to `paymentMethodTypes` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * SessionCreateParams#paymentMethodTypes} for the field documentation.
      */
     public Builder addPaymentMethodType(PaymentMethodType element) {
       if (this.paymentMethodTypes == null) {
@@ -372,7 +375,9 @@ complete, use the `customer` field.
     }
 
     /**
-     * Add all elements to `paymentMethodTypes` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link SessionCreateParams#paymentMethodTypes} for the field documentation.
+     * Add all elements to `paymentMethodTypes` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link SessionCreateParams#paymentMethodTypes} for the field documentation.
      */
     public Builder addAllPaymentMethodType(List<PaymentMethodType> elements) {
       if (this.paymentMethodTypes == null) {
@@ -382,82 +387,75 @@ complete, use the `customer` field.
       return this;
     }
 
-    /**
-     * A subset of parameters to be passed to SetupIntent creation.
-     */
+    /** A subset of parameters to be passed to SetupIntent creation. */
     public Builder setSetupIntentData(SetupIntentData setupIntentData) {
       this.setupIntentData = setupIntentData;
       return this;
     }
 
     /**
-     * Describes the type of transaction being performed by Checkout in order to customize relevant text on the page, such as the submit button. `submit_type` can only be specified on Checkout Sessions using line items or a SKU, but not Checkout Sessions for subscriptions. Supported values are `auto`, `book`, `donate`, or `pay`.
+     * Describes the type of transaction being performed by Checkout in order to customize relevant
+     * text on the page, such as the submit button. `submit_type` can only be specified on Checkout
+     * Sessions using line items or a SKU, but not Checkout Sessions for subscriptions. Supported
+     * values are `auto`, `book`, `donate`, or `pay`.
      */
     public Builder setSubmitType(SubmitType submitType) {
       this.submitType = submitType;
       return this;
     }
 
-    /**
-     * A subset of parameters to be passed to subscription creation.
-     */
+    /** A subset of parameters to be passed to subscription creation. */
     public Builder setSubscriptionData(SubscriptionData subscriptionData) {
       this.subscriptionData = subscriptionData;
       return this;
     }
 
     /**
-     * The URL to which Stripe should send customers when payment or setup
-is complete.
-If you’d like access to the Checkout Session for the successful
-payment, read more about it in our guide on [fulfilling your payments
-with webhooks](/docs/payments/checkout/fulfillment#webhooks).
+     * The URL to which Stripe should send customers when payment or setup is complete. If you’d
+     * like access to the Checkout Session for the successful payment, read more about it in our
+     * guide on [fulfilling your payments with
+     * webhooks](/docs/payments/checkout/fulfillment#webhooks).
      */
     public Builder setSuccessUrl(String successUrl) {
       this.successUrl = successUrl;
       return this;
     }
   }
+
   public static class LineItem {
-    /**
-     * The amount to be collected per unit of the line item.
-     */
+    /** The amount to be collected per unit of the line item. */
     @SerializedName("amount")
     Long amount;
 
     /**
-     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
+     * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
      */
     @SerializedName("currency")
     String currency;
 
-    /**
-     * The description for the line item.
-     */
+    /** The description for the line item. */
     @SerializedName("description")
     String description;
 
     /**
-     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /**
-     * A list of images representing this line item.
-     */
+    /** A list of images representing this line item. */
     @SerializedName("images")
     List<String> images;
 
-    /**
-     * The name for the line item.
-     */
+    /** The name for the line item. */
     @SerializedName("name")
     String name;
 
-    /**
-     * The quantity of the line item being purchased.
-     */
+    /** The quantity of the line item being purchased. */
     @SerializedName("quantity")
     Long quantity;
 
@@ -477,9 +475,11 @@ with webhooks](/docs/payments/checkout/fulfillment#webhooks).
       this.name = name;
       this.quantity = quantity;
     }
+
     public static Builder builder() {
       return new Builder();
     }
+
     public static class Builder {
       private Long amount;
 
@@ -495,47 +495,43 @@ with webhooks](/docs/payments/checkout/fulfillment#webhooks).
 
       private Long quantity;
 
-      /**
-       * Finalize and obtain parameter instance from this builder.
-       */
+      /** Finalize and obtain parameter instance from this builder. */
       public LineItem build() {
         return new LineItem(
-          this.amount,
-          this.currency,
-          this.description,
-          this.extraParams,
-          this.images,
-          this.name,
-          this.quantity
-        );
+            this.amount,
+            this.currency,
+            this.description,
+            this.extraParams,
+            this.images,
+            this.name,
+            this.quantity);
       }
 
-      /**
-       * The amount to be collected per unit of the line item.
-       */
+      /** The amount to be collected per unit of the line item. */
       public Builder setAmount(Long amount) {
         this.amount = amount;
         return this;
       }
 
       /**
-       * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+       * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
+       * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
        */
       public Builder setCurrency(String currency) {
         this.currency = currency;
         return this;
       }
 
-      /**
-       * The description for the line item.
-       */
+      /** The description for the line item. */
       public Builder setDescription(String description) {
         this.description = description;
         return this;
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SessionCreateParams.LineItem#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.LineItem#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -546,7 +542,9 @@ with webhooks](/docs/payments/checkout/fulfillment#webhooks).
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SessionCreateParams.LineItem#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.LineItem#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -557,7 +555,9 @@ with webhooks](/docs/payments/checkout/fulfillment#webhooks).
       }
 
       /**
-       * Add an element to `images` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link SessionCreateParams.LineItem#images} for the field documentation.
+       * Add an element to `images` list. A list is initialized for the first `add/addAll` call, and
+       * subsequent calls adds additional elements to the original list. See {@link
+       * SessionCreateParams.LineItem#images} for the field documentation.
        */
       public Builder addImage(String element) {
         if (this.images == null) {
@@ -568,7 +568,9 @@ with webhooks](/docs/payments/checkout/fulfillment#webhooks).
       }
 
       /**
-       * Add all elements to `images` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link SessionCreateParams.LineItem#images} for the field documentation.
+       * Add all elements to `images` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * SessionCreateParams.LineItem#images} for the field documentation.
        */
       public Builder addAllImage(List<String> elements) {
         if (this.images == null) {
@@ -578,99 +580,105 @@ with webhooks](/docs/payments/checkout/fulfillment#webhooks).
         return this;
       }
 
-      /**
-       * The name for the line item.
-       */
+      /** The name for the line item. */
       public Builder setName(String name) {
         this.name = name;
         return this;
       }
 
-      /**
-       * The quantity of the line item being purchased.
-       */
+      /** The quantity of the line item being purchased. */
       public Builder setQuantity(Long quantity) {
         this.quantity = quantity;
         return this;
       }
     }
   }
+
   public static class PaymentIntentData {
     /**
-     * The amount of the application fee (if any) that will be applied to the payment and transferred to the
-application owner's Stripe account. To use an application fee, the request must be made on
-behalf of another account, using the `Stripe-Account` header or an OAuth key. For more
-information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
+     * The amount of the application fee (if any) that will be applied to the payment and
+     * transferred to the application owner's Stripe account. To use an application fee, the request
+     * must be made on behalf of another account, using the `Stripe-Account` header or an OAuth key.
+     * For more information, see the PaymentIntents [use case for connected
+     * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
      */
     @SerializedName("application_fee_amount")
     Long applicationFeeAmount;
 
-    /**
-     * Capture method of this PaymentIntent, one of `automatic` or `manual`.
-     */
+    /** Capture method of this PaymentIntent, one of `automatic` or `manual`. */
     @SerializedName("capture_method")
     CaptureMethod captureMethod;
 
-    /**
-     * An arbitrary string attached to the object. Often useful for displaying to users.
-     */
+    /** An arbitrary string attached to the object. Often useful for displaying to users. */
     @SerializedName("description")
     String description;
 
     /**
-     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
     /**
-     * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+     * Set of key-value pairs that you can attach to an object. This can be useful for storing
+     * additional information about the object in a structured format.
      */
     @SerializedName("metadata")
     Map<String, String> metadata;
 
     /**
-     * The Stripe account ID for which these funds are intended. For details,
-see the PaymentIntents [use case for connected
-accounts](/docs/payments/payment-intents/use-cases#connected-accounts).
+     * The Stripe account ID for which these funds are intended. For details, see the PaymentIntents
+     * [use case for connected
+     * accounts](/docs/payments/payment-intents/use-cases#connected-accounts).
      */
     @SerializedName("on_behalf_of")
     String onBehalfOf;
 
-    /**
-     * Email address that the receipt for the resulting payment will be sent to.
-     */
+    /** Email address that the receipt for the resulting payment will be sent to. */
     @SerializedName("receipt_email")
     String receiptEmail;
 
     /**
      * Indicates that you intend to make future payments with this PaymentIntent's payment method.
-
-If present, the payment method used with this PaymentIntent can be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer, even after the transaction completes.
-
-Use `on_session` if you intend to only reuse the payment method when your customer is present in your checkout flow. Use `off_session` if your customer may or may not be in your checkout flow. See [Saving card details after a payment](https://stripe.com/docs/payments/cards/saving-cards-after-payment) to learn more.
-
-Stripe uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules. For example, if your customer is impacted by [SCA](https://stripe.com/docs/strong-customer-authentication), using `off_session` will ensure that they are authenticated while processing this PaymentIntent. You will then be able to collect [off-session payments](https://stripe.com/docs/payments/cards/charging-saved-cards#off-session-payments-with-saved-cards) for this customer.
+     *
+     * <p>If present, the payment method used with this PaymentIntent can be
+     * [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer, even after the
+     * transaction completes.
+     *
+     * <p>Use `on_session` if you intend to only reuse the payment method when your customer is
+     * present in your checkout flow. Use `off_session` if your customer may or may not be in your
+     * checkout flow. See [Saving card details after a
+     * payment](https://stripe.com/docs/payments/cards/saving-cards-after-payment) to learn more.
+     *
+     * <p>Stripe uses `setup_future_usage` to dynamically optimize your payment flow and comply with
+     * regional legislation and network rules. For example, if your customer is impacted by
+     * [SCA](https://stripe.com/docs/strong-customer-authentication), using `off_session` will
+     * ensure that they are authenticated while processing this PaymentIntent. You will then be able
+     * to collect [off-session
+     * payments](https://stripe.com/docs/payments/cards/charging-saved-cards#off-session-payments-with-saved-cards)
+     * for this customer.
      */
     @SerializedName("setup_future_usage")
     SetupFutureUsage setupFutureUsage;
 
-    /**
-     * Shipping information for this payment.
-     */
+    /** Shipping information for this payment. */
     @SerializedName("shipping")
     Shipping shipping;
 
     /**
-     * Extra information about the payment. This will appear on your
-customer's statement when this payment succeeds in creating a charge.
+     * Extra information about the payment. This will appear on your customer's statement when this
+     * payment succeeds in creating a charge.
      */
     @SerializedName("statement_descriptor")
     String statementDescriptor;
 
     /**
-     * The parameters used to automatically create a Transfer when the payment succeeds.
-For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
+     * The parameters used to automatically create a Transfer when the payment succeeds. For more
+     * information, see the PaymentIntents [use case for connected
+     * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
      */
     @SerializedName("transfer_data")
     TransferData transferData;
@@ -699,9 +707,11 @@ For more information, see the PaymentIntents [use case for connected accounts](h
       this.statementDescriptor = statementDescriptor;
       this.transferData = transferData;
     }
+
     public static Builder builder() {
       return new Builder();
     }
+
     public static class Builder {
       private Long applicationFeeAmount;
 
@@ -725,54 +735,50 @@ For more information, see the PaymentIntents [use case for connected accounts](h
 
       private TransferData transferData;
 
-      /**
-       * Finalize and obtain parameter instance from this builder.
-       */
+      /** Finalize and obtain parameter instance from this builder. */
       public PaymentIntentData build() {
         return new PaymentIntentData(
-          this.applicationFeeAmount,
-          this.captureMethod,
-          this.description,
-          this.extraParams,
-          this.metadata,
-          this.onBehalfOf,
-          this.receiptEmail,
-          this.setupFutureUsage,
-          this.shipping,
-          this.statementDescriptor,
-          this.transferData
-        );
+            this.applicationFeeAmount,
+            this.captureMethod,
+            this.description,
+            this.extraParams,
+            this.metadata,
+            this.onBehalfOf,
+            this.receiptEmail,
+            this.setupFutureUsage,
+            this.shipping,
+            this.statementDescriptor,
+            this.transferData);
       }
 
       /**
-       * The amount of the application fee (if any) that will be applied to the payment and transferred to the
-application owner's Stripe account. To use an application fee, the request must be made on
-behalf of another account, using the `Stripe-Account` header or an OAuth key. For more
-information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
+       * The amount of the application fee (if any) that will be applied to the payment and
+       * transferred to the application owner's Stripe account. To use an application fee, the
+       * request must be made on behalf of another account, using the `Stripe-Account` header or an
+       * OAuth key. For more information, see the PaymentIntents [use case for connected
+       * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
        */
       public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
         this.applicationFeeAmount = applicationFeeAmount;
         return this;
       }
 
-      /**
-       * Capture method of this PaymentIntent, one of `automatic` or `manual`.
-       */
+      /** Capture method of this PaymentIntent, one of `automatic` or `manual`. */
       public Builder setCaptureMethod(CaptureMethod captureMethod) {
         this.captureMethod = captureMethod;
         return this;
       }
 
-      /**
-       * An arbitrary string attached to the object. Often useful for displaying to users.
-       */
+      /** An arbitrary string attached to the object. Often useful for displaying to users. */
       public Builder setDescription(String description) {
         this.description = description;
         return this;
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SessionCreateParams.PaymentIntentData#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.PaymentIntentData#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -783,7 +789,9 @@ information, see the PaymentIntents [use case for connected accounts](https://st
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SessionCreateParams.PaymentIntentData#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.PaymentIntentData#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -794,7 +802,9 @@ information, see the PaymentIntents [use case for connected accounts](https://st
       }
 
       /**
-       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SessionCreateParams.PaymentIntentData#metadata} for the field documentation.
+       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.PaymentIntentData#metadata} for the field documentation.
        */
       public Builder putMetadata(String key, String value) {
         if (this.metadata == null) {
@@ -805,7 +815,9 @@ information, see the PaymentIntents [use case for connected accounts](https://st
       }
 
       /**
-       * Add all map key/value pairs to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SessionCreateParams.PaymentIntentData#metadata} for the field documentation.
+       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.PaymentIntentData#metadata} for the field documentation.
        */
       public Builder putAllMetadata(Map<String, String> map) {
         if (this.metadata == null) {
@@ -816,18 +828,16 @@ information, see the PaymentIntents [use case for connected accounts](https://st
       }
 
       /**
-       * The Stripe account ID for which these funds are intended. For details,
-see the PaymentIntents [use case for connected
-accounts](/docs/payments/payment-intents/use-cases#connected-accounts).
+       * The Stripe account ID for which these funds are intended. For details, see the
+       * PaymentIntents [use case for connected
+       * accounts](/docs/payments/payment-intents/use-cases#connected-accounts).
        */
       public Builder setOnBehalfOf(String onBehalfOf) {
         this.onBehalfOf = onBehalfOf;
         return this;
       }
 
-      /**
-       * Email address that the receipt for the resulting payment will be sent to.
-       */
+      /** Email address that the receipt for the resulting payment will be sent to. */
       public Builder setReceiptEmail(String receiptEmail) {
         this.receiptEmail = receiptEmail;
         return this;
@@ -835,29 +845,38 @@ accounts](/docs/payments/payment-intents/use-cases#connected-accounts).
 
       /**
        * Indicates that you intend to make future payments with this PaymentIntent's payment method.
-
-If present, the payment method used with this PaymentIntent can be [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer, even after the transaction completes.
-
-Use `on_session` if you intend to only reuse the payment method when your customer is present in your checkout flow. Use `off_session` if your customer may or may not be in your checkout flow. See [Saving card details after a payment](https://stripe.com/docs/payments/cards/saving-cards-after-payment) to learn more.
-
-Stripe uses `setup_future_usage` to dynamically optimize your payment flow and comply with regional legislation and network rules. For example, if your customer is impacted by [SCA](https://stripe.com/docs/strong-customer-authentication), using `off_session` will ensure that they are authenticated while processing this PaymentIntent. You will then be able to collect [off-session payments](https://stripe.com/docs/payments/cards/charging-saved-cards#off-session-payments-with-saved-cards) for this customer.
+       *
+       * <p>If present, the payment method used with this PaymentIntent can be
+       * [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer, even after
+       * the transaction completes.
+       *
+       * <p>Use `on_session` if you intend to only reuse the payment method when your customer is
+       * present in your checkout flow. Use `off_session` if your customer may or may not be in your
+       * checkout flow. See [Saving card details after a
+       * payment](https://stripe.com/docs/payments/cards/saving-cards-after-payment) to learn more.
+       *
+       * <p>Stripe uses `setup_future_usage` to dynamically optimize your payment flow and comply
+       * with regional legislation and network rules. For example, if your customer is impacted by
+       * [SCA](https://stripe.com/docs/strong-customer-authentication), using `off_session` will
+       * ensure that they are authenticated while processing this PaymentIntent. You will then be
+       * able to collect [off-session
+       * payments](https://stripe.com/docs/payments/cards/charging-saved-cards#off-session-payments-with-saved-cards)
+       * for this customer.
        */
       public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
         this.setupFutureUsage = setupFutureUsage;
         return this;
       }
 
-      /**
-       * Shipping information for this payment.
-       */
+      /** Shipping information for this payment. */
       public Builder setShipping(Shipping shipping) {
         this.shipping = shipping;
         return this;
       }
 
       /**
-       * Extra information about the payment. This will appear on your
-customer's statement when this payment succeeds in creating a charge.
+       * Extra information about the payment. This will appear on your customer's statement when
+       * this payment succeeds in creating a charge.
        */
       public Builder setStatementDescriptor(String statementDescriptor) {
         this.statementDescriptor = statementDescriptor;
@@ -865,47 +884,45 @@ customer's statement when this payment succeeds in creating a charge.
       }
 
       /**
-       * The parameters used to automatically create a Transfer when the payment succeeds.
-For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
+       * The parameters used to automatically create a Transfer when the payment succeeds. For more
+       * information, see the PaymentIntents [use case for connected
+       * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
        */
       public Builder setTransferData(TransferData transferData) {
         this.transferData = transferData;
         return this;
       }
     }
+
     public static class Shipping {
-      /**
-       * Shipping address.
-       */
+      /** Shipping address. */
       @SerializedName("address")
       Address address;
 
-      /**
-       * The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc.
-       */
+      /** The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. */
       @SerializedName("carrier")
       String carrier;
 
       /**
-       * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
        */
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /**
-       * Recipient name.
-       */
+      /** Recipient name. */
       @SerializedName("name")
       String name;
 
-      /**
-       * Recipient phone (including extension).
-       */
+      /** Recipient phone (including extension). */
       @SerializedName("phone")
       String phone;
 
       /**
-       * The tracking number for a physical product, obtained from the delivery service. If multiple tracking numbers were generated for this purchase, please separate them with commas.
+       * The tracking number for a physical product, obtained from the delivery service. If multiple
+       * tracking numbers were generated for this purchase, please separate them with commas.
        */
       @SerializedName("tracking_number")
       String trackingNumber;
@@ -924,9 +941,11 @@ For more information, see the PaymentIntents [use case for connected accounts](h
         this.phone = phone;
         this.trackingNumber = trackingNumber;
       }
+
       public static Builder builder() {
         return new Builder();
       }
+
       public static class Builder {
         private Address address;
 
@@ -940,38 +959,34 @@ For more information, see the PaymentIntents [use case for connected accounts](h
 
         private String trackingNumber;
 
-        /**
-         * Finalize and obtain parameter instance from this builder.
-         */
+        /** Finalize and obtain parameter instance from this builder. */
         public Shipping build() {
           return new Shipping(
-            this.address,
-            this.carrier,
-            this.extraParams,
-            this.name,
-            this.phone,
-            this.trackingNumber
-          );
+              this.address,
+              this.carrier,
+              this.extraParams,
+              this.name,
+              this.phone,
+              this.trackingNumber);
         }
 
-        /**
-         * Shipping address.
-         */
+        /** Shipping address. */
         public Builder setAddress(Address address) {
           this.address = address;
           return this;
         }
 
-        /**
-         * The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc.
-         */
+        /** The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. */
         public Builder setCarrier(String carrier) {
           this.carrier = carrier;
           return this;
         }
 
         /**
-         * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SessionCreateParams.PaymentIntentData.Shipping#extraParams} for the field documentation.
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentIntentData.Shipping#extraParams} for the field
+         * documentation.
          */
         public Builder putExtraParam(String key, Object value) {
           if (this.extraParams == null) {
@@ -982,7 +997,10 @@ For more information, see the PaymentIntents [use case for connected accounts](h
         }
 
         /**
-         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SessionCreateParams.PaymentIntentData.Shipping#extraParams} for the field documentation.
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentIntentData.Shipping#extraParams} for the field
+         * documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -992,30 +1010,29 @@ For more information, see the PaymentIntents [use case for connected accounts](h
           return this;
         }
 
-        /**
-         * Recipient name.
-         */
+        /** Recipient name. */
         public Builder setName(String name) {
           this.name = name;
           return this;
         }
 
-        /**
-         * Recipient phone (including extension).
-         */
+        /** Recipient phone (including extension). */
         public Builder setPhone(String phone) {
           this.phone = phone;
           return this;
         }
 
         /**
-         * The tracking number for a physical product, obtained from the delivery service. If multiple tracking numbers were generated for this purchase, please separate them with commas.
+         * The tracking number for a physical product, obtained from the delivery service. If
+         * multiple tracking numbers were generated for this purchase, please separate them with
+         * commas.
          */
         public Builder setTrackingNumber(String trackingNumber) {
           this.trackingNumber = trackingNumber;
           return this;
         }
       }
+
       public static class Address {
         @SerializedName("city")
         String city;
@@ -1024,7 +1041,11 @@ For more information, see the PaymentIntents [use case for connected accounts](h
         String country;
 
         /**
-         * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
          */
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
@@ -1057,9 +1078,11 @@ For more information, see the PaymentIntents [use case for connected accounts](h
           this.postalCode = postalCode;
           this.state = state;
         }
+
         public static Builder builder() {
           return new Builder();
         }
+
         public static class Builder {
           private String city;
 
@@ -1075,19 +1098,16 @@ For more information, see the PaymentIntents [use case for connected accounts](h
 
           private String state;
 
-          /**
-           * Finalize and obtain parameter instance from this builder.
-           */
+          /** Finalize and obtain parameter instance from this builder. */
           public Address build() {
             return new Address(
-              this.city,
-              this.country,
-              this.extraParams,
-              this.line1,
-              this.line2,
-              this.postalCode,
-              this.state
-            );
+                this.city,
+                this.country,
+                this.extraParams,
+                this.line1,
+                this.line2,
+                this.postalCode,
+                this.state);
           }
 
           public Builder setCity(String city) {
@@ -1101,7 +1121,10 @@ For more information, see the PaymentIntents [use case for connected accounts](h
           }
 
           /**
-           * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SessionCreateParams.PaymentIntentData.Shipping.Address#extraParams} for the field documentation.
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SessionCreateParams.PaymentIntentData.Shipping.Address#extraParams} for
+           * the field documentation.
            */
           public Builder putExtraParam(String key, Object value) {
             if (this.extraParams == null) {
@@ -1112,7 +1135,10 @@ For more information, see the PaymentIntents [use case for connected accounts](h
           }
 
           /**
-           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SessionCreateParams.PaymentIntentData.Shipping.Address#extraParams} for the field documentation.
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link SessionCreateParams.PaymentIntentData.Shipping.Address#extraParams} for
+           * the field documentation.
            */
           public Builder putAllExtraParam(Map<String, Object> map) {
             if (this.extraParams == null) {
@@ -1144,18 +1170,21 @@ For more information, see the PaymentIntents [use case for connected accounts](h
         }
       }
     }
+
     public static class TransferData {
       /**
-       * If specified, successful charges will be attributed to the destination
-account for tax reporting, and the funds from charges will be transferred
-to the destination account. The ID of the resulting transfer will be
-returned on the successful charge's `transfer` field.
+       * If specified, successful charges will be attributed to the destination account for tax
+       * reporting, and the funds from charges will be transferred to the destination account. The
+       * ID of the resulting transfer will be returned on the successful charge's `transfer` field.
        */
       @SerializedName("destination")
       String destination;
 
       /**
-       * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
        */
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
@@ -1164,26 +1193,26 @@ returned on the successful charge's `transfer` field.
         this.destination = destination;
         this.extraParams = extraParams;
       }
+
       public static Builder builder() {
         return new Builder();
       }
+
       public static class Builder {
         private String destination;
 
         private Map<String, Object> extraParams;
 
-        /**
-         * Finalize and obtain parameter instance from this builder.
-         */
+        /** Finalize and obtain parameter instance from this builder. */
         public TransferData build() {
           return new TransferData(this.destination, this.extraParams);
         }
 
         /**
-         * If specified, successful charges will be attributed to the destination
-account for tax reporting, and the funds from charges will be transferred
-to the destination account. The ID of the resulting transfer will be
-returned on the successful charge's `transfer` field.
+         * If specified, successful charges will be attributed to the destination account for tax
+         * reporting, and the funds from charges will be transferred to the destination account. The
+         * ID of the resulting transfer will be returned on the successful charge's `transfer`
+         * field.
          */
         public Builder setDestination(String destination) {
           this.destination = destination;
@@ -1191,7 +1220,10 @@ returned on the successful charge's `transfer` field.
         }
 
         /**
-         * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SessionCreateParams.PaymentIntentData.TransferData#extraParams} for the field documentation.
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentIntentData.TransferData#extraParams} for the
+         * field documentation.
          */
         public Builder putExtraParam(String key, Object value) {
           if (this.extraParams == null) {
@@ -1202,7 +1234,10 @@ returned on the successful charge's `transfer` field.
         }
 
         /**
-         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SessionCreateParams.PaymentIntentData.TransferData#extraParams} for the field documentation.
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.PaymentIntentData.TransferData#extraParams} for the
+         * field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -1213,55 +1248,60 @@ returned on the successful charge's `transfer` field.
         }
       }
     }
+
     public enum CaptureMethod implements ApiRequestParams.EnumParam {
       @SerializedName("automatic")
       AUTOMATIC("automatic"),
 
       @SerializedName("manual")
       MANUAL("manual");
+
       @Getter(onMethod_ = {@Override})
       private final String value;
+
       CaptureMethod(String value) {
         this.value = value;
       }
-
     }
+
     public enum SetupFutureUsage implements ApiRequestParams.EnumParam {
       @SerializedName("off_session")
       OFF_SESSION("off_session"),
 
       @SerializedName("on_session")
       ON_SESSION("on_session");
+
       @Getter(onMethod_ = {@Override})
       private final String value;
+
       SetupFutureUsage(String value) {
         this.value = value;
       }
-
     }
   }
+
   public static class SetupIntentData {
-    /**
-     * An arbitrary string attached to the object. Often useful for displaying to users.
-     */
+    /** An arbitrary string attached to the object. Often useful for displaying to users. */
     @SerializedName("description")
     String description;
 
     /**
-     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
     /**
-     * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+     * Set of key-value pairs that you can attach to an object. This can be useful for storing
+     * additional information about the object in a structured format.
      */
     @SerializedName("metadata")
     Map<String, String> metadata;
 
-    /**
-     * The Stripe account for which the setup is intended.
-     */
+    /** The Stripe account for which the setup is intended. */
     @SerializedName("on_behalf_of")
     String onBehalfOf;
 
@@ -1275,9 +1315,11 @@ returned on the successful charge's `transfer` field.
       this.metadata = metadata;
       this.onBehalfOf = onBehalfOf;
     }
+
     public static Builder builder() {
       return new Builder();
     }
+
     public static class Builder {
       private String description;
 
@@ -1287,28 +1329,22 @@ returned on the successful charge's `transfer` field.
 
       private String onBehalfOf;
 
-      /**
-       * Finalize and obtain parameter instance from this builder.
-       */
+      /** Finalize and obtain parameter instance from this builder. */
       public SetupIntentData build() {
         return new SetupIntentData(
-          this.description,
-          this.extraParams,
-          this.metadata,
-          this.onBehalfOf
-        );
+            this.description, this.extraParams, this.metadata, this.onBehalfOf);
       }
 
-      /**
-       * An arbitrary string attached to the object. Often useful for displaying to users.
-       */
+      /** An arbitrary string attached to the object. Often useful for displaying to users. */
       public Builder setDescription(String description) {
         this.description = description;
         return this;
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SessionCreateParams.SetupIntentData#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.SetupIntentData#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -1319,7 +1355,9 @@ returned on the successful charge's `transfer` field.
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SessionCreateParams.SetupIntentData#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.SetupIntentData#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -1330,7 +1368,9 @@ returned on the successful charge's `transfer` field.
       }
 
       /**
-       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SessionCreateParams.SetupIntentData#metadata} for the field documentation.
+       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.SetupIntentData#metadata} for the field documentation.
        */
       public Builder putMetadata(String key, String value) {
         if (this.metadata == null) {
@@ -1341,7 +1381,9 @@ returned on the successful charge's `transfer` field.
       }
 
       /**
-       * Add all map key/value pairs to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SessionCreateParams.SetupIntentData#metadata} for the field documentation.
+       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.SetupIntentData#metadata} for the field documentation.
        */
       public Builder putAllMetadata(Map<String, String> map) {
         if (this.metadata == null) {
@@ -1351,53 +1393,59 @@ returned on the successful charge's `transfer` field.
         return this;
       }
 
-      /**
-       * The Stripe account for which the setup is intended.
-       */
+      /** The Stripe account for which the setup is intended. */
       public Builder setOnBehalfOf(String onBehalfOf) {
         this.onBehalfOf = onBehalfOf;
         return this;
       }
     }
   }
+
   public static class SubscriptionData {
     /**
-     * A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner's Stripe account. To use an application fee percent, the request must be made on behalf of another account, using the `Stripe-Account` header or an OAuth key. For more information, see the application fees [documentation](https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions).
+     * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
+     * the percentage of the subscription invoice subtotal that will be transferred to the
+     * application owner's Stripe account. To use an application fee percent, the request must be
+     * made on behalf of another account, using the `Stripe-Account` header or an OAuth key. For
+     * more information, see the application fees
+     * [documentation](https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions).
      */
     @SerializedName("application_fee_percent")
     BigDecimal applicationFeePercent;
 
     /**
-     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
     /**
-     * A list of items, each with an attached plan, that the customer is
-subscribing to. Use this parameter for subscriptions. To create one-time
-payments, use `line_items`.
+     * A list of items, each with an attached plan, that the customer is subscribing to. Use this
+     * parameter for subscriptions. To create one-time payments, use `line_items`.
      */
     @SerializedName("items")
     List<Item> items;
 
     /**
-     * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+     * Set of key-value pairs that you can attach to an object. This can be useful for storing
+     * additional information about the object in a structured format.
      */
     @SerializedName("metadata")
     Map<String, String> metadata;
 
     /**
-     * Unix timestamp representing the end of the trial period the customer
-will get before being charged for the first time. Has to be at least
-48 hours in the future.
+     * Unix timestamp representing the end of the trial period the customer will get before being
+     * charged for the first time. Has to be at least 48 hours in the future.
      */
     @SerializedName("trial_end")
     Long trialEnd;
 
     /**
-     * Integer representing the number of trial period days before the
-customer is charged for the first time. Has to be at least 1.
+     * Integer representing the number of trial period days before the customer is charged for the
+     * first time. Has to be at least 1.
      */
     @SerializedName("trial_period_days")
     Long trialPeriodDays;
@@ -1416,9 +1464,11 @@ customer is charged for the first time. Has to be at least 1.
       this.trialEnd = trialEnd;
       this.trialPeriodDays = trialPeriodDays;
     }
+
     public static Builder builder() {
       return new Builder();
     }
+
     public static class Builder {
       private BigDecimal applicationFeePercent;
 
@@ -1432,22 +1482,24 @@ customer is charged for the first time. Has to be at least 1.
 
       private Long trialPeriodDays;
 
-      /**
-       * Finalize and obtain parameter instance from this builder.
-       */
+      /** Finalize and obtain parameter instance from this builder. */
       public SubscriptionData build() {
         return new SubscriptionData(
-          this.applicationFeePercent,
-          this.extraParams,
-          this.items,
-          this.metadata,
-          this.trialEnd,
-          this.trialPeriodDays
-        );
+            this.applicationFeePercent,
+            this.extraParams,
+            this.items,
+            this.metadata,
+            this.trialEnd,
+            this.trialPeriodDays);
       }
 
       /**
-       * A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner's Stripe account. To use an application fee percent, the request must be made on behalf of another account, using the `Stripe-Account` header or an OAuth key. For more information, see the application fees [documentation](https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions).
+       * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
+       * the percentage of the subscription invoice subtotal that will be transferred to the
+       * application owner's Stripe account. To use an application fee percent, the request must be
+       * made on behalf of another account, using the `Stripe-Account` header or an OAuth key. For
+       * more information, see the application fees
+       * [documentation](https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions).
        */
       public Builder setApplicationFeePercent(BigDecimal applicationFeePercent) {
         this.applicationFeePercent = applicationFeePercent;
@@ -1455,7 +1507,9 @@ customer is charged for the first time. Has to be at least 1.
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SessionCreateParams.SubscriptionData#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.SubscriptionData#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -1466,7 +1520,9 @@ customer is charged for the first time. Has to be at least 1.
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SessionCreateParams.SubscriptionData#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.SubscriptionData#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -1477,7 +1533,9 @@ customer is charged for the first time. Has to be at least 1.
       }
 
       /**
-       * Add an element to `items` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link SessionCreateParams.SubscriptionData#items} for the field documentation.
+       * Add an element to `items` list. A list is initialized for the first `add/addAll` call, and
+       * subsequent calls adds additional elements to the original list. See {@link
+       * SessionCreateParams.SubscriptionData#items} for the field documentation.
        */
       public Builder addItem(Item element) {
         if (this.items == null) {
@@ -1488,7 +1546,9 @@ customer is charged for the first time. Has to be at least 1.
       }
 
       /**
-       * Add all elements to `items` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link SessionCreateParams.SubscriptionData#items} for the field documentation.
+       * Add all elements to `items` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * SessionCreateParams.SubscriptionData#items} for the field documentation.
        */
       public Builder addAllItem(List<Item> elements) {
         if (this.items == null) {
@@ -1499,7 +1559,9 @@ customer is charged for the first time. Has to be at least 1.
       }
 
       /**
-       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SessionCreateParams.SubscriptionData#metadata} for the field documentation.
+       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SessionCreateParams.SubscriptionData#metadata} for the field documentation.
        */
       public Builder putMetadata(String key, String value) {
         if (this.metadata == null) {
@@ -1510,7 +1572,9 @@ customer is charged for the first time. Has to be at least 1.
       }
 
       /**
-       * Add all map key/value pairs to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SessionCreateParams.SubscriptionData#metadata} for the field documentation.
+       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SessionCreateParams.SubscriptionData#metadata} for the field documentation.
        */
       public Builder putAllMetadata(Map<String, String> map) {
         if (this.metadata == null) {
@@ -1521,9 +1585,8 @@ customer is charged for the first time. Has to be at least 1.
       }
 
       /**
-       * Unix timestamp representing the end of the trial period the customer
-will get before being charged for the first time. Has to be at least
-48 hours in the future.
+       * Unix timestamp representing the end of the trial period the customer will get before being
+       * charged for the first time. Has to be at least 48 hours in the future.
        */
       public Builder setTrialEnd(Long trialEnd) {
         this.trialEnd = trialEnd;
@@ -1531,30 +1594,30 @@ will get before being charged for the first time. Has to be at least
       }
 
       /**
-       * Integer representing the number of trial period days before the
-customer is charged for the first time. Has to be at least 1.
+       * Integer representing the number of trial period days before the customer is charged for the
+       * first time. Has to be at least 1.
        */
       public Builder setTrialPeriodDays(Long trialPeriodDays) {
         this.trialPeriodDays = trialPeriodDays;
         return this;
       }
     }
+
     public static class Item {
       /**
-       * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
        */
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /**
-       * Plan ID for this item.
-       */
+      /** Plan ID for this item. */
       @SerializedName("plan")
       String plan;
 
-      /**
-       * Quantity for this item.
-       */
+      /** Quantity for this item. */
       @SerializedName("quantity")
       Long quantity;
 
@@ -1563,9 +1626,11 @@ customer is charged for the first time. Has to be at least 1.
         this.plan = plan;
         this.quantity = quantity;
       }
+
       public static Builder builder() {
         return new Builder();
       }
+
       public static class Builder {
         private Map<String, Object> extraParams;
 
@@ -1573,15 +1638,16 @@ customer is charged for the first time. Has to be at least 1.
 
         private Long quantity;
 
-        /**
-         * Finalize and obtain parameter instance from this builder.
-         */
+        /** Finalize and obtain parameter instance from this builder. */
         public Item build() {
           return new Item(this.extraParams, this.plan, this.quantity);
         }
 
         /**
-         * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SessionCreateParams.SubscriptionData.Item#extraParams} for the field documentation.
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.SubscriptionData.Item#extraParams} for the field
+         * documentation.
          */
         public Builder putExtraParam(String key, Object value) {
           if (this.extraParams == null) {
@@ -1592,7 +1658,10 @@ customer is charged for the first time. Has to be at least 1.
         }
 
         /**
-         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SessionCreateParams.SubscriptionData.Item#extraParams} for the field documentation.
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link SessionCreateParams.SubscriptionData.Item#extraParams} for the field
+         * documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -1602,17 +1671,13 @@ customer is charged for the first time. Has to be at least 1.
           return this;
         }
 
-        /**
-         * Plan ID for this item.
-         */
+        /** Plan ID for this item. */
         public Builder setPlan(String plan) {
           this.plan = plan;
           return this;
         }
 
-        /**
-         * Quantity for this item.
-         */
+        /** Quantity for this item. */
         public Builder setQuantity(Long quantity) {
           this.quantity = quantity;
           return this;
@@ -1620,19 +1685,22 @@ customer is charged for the first time. Has to be at least 1.
       }
     }
   }
+
   public enum BillingAddressCollection implements ApiRequestParams.EnumParam {
     @SerializedName("auto")
     AUTO("auto"),
 
     @SerializedName("required")
     REQUIRED("required");
+
     @Getter(onMethod_ = {@Override})
     private final String value;
+
     BillingAddressCollection(String value) {
       this.value = value;
     }
-
   }
+
   public enum Locale implements ApiRequestParams.EnumParam {
     @SerializedName("auto")
     AUTO("auto"),
@@ -1678,13 +1746,15 @@ customer is charged for the first time. Has to be at least 1.
 
     @SerializedName("zh")
     ZH("zh");
+
     @Getter(onMethod_ = {@Override})
     private final String value;
+
     Locale(String value) {
       this.value = value;
     }
-
   }
+
   public enum Mode implements ApiRequestParams.EnumParam {
     @SerializedName("payment")
     PAYMENT("payment"),
@@ -1694,23 +1764,27 @@ customer is charged for the first time. Has to be at least 1.
 
     @SerializedName("subscription")
     SUBSCRIPTION("subscription");
+
     @Getter(onMethod_ = {@Override})
     private final String value;
+
     Mode(String value) {
       this.value = value;
     }
-
   }
+
   public enum PaymentMethodType implements ApiRequestParams.EnumParam {
     @SerializedName("card")
     CARD("card");
+
     @Getter(onMethod_ = {@Override})
     private final String value;
+
     PaymentMethodType(String value) {
       this.value = value;
     }
-
   }
+
   public enum SubmitType implements ApiRequestParams.EnumParam {
     @SerializedName("auto")
     AUTO("auto"),
@@ -1723,11 +1797,12 @@ customer is charged for the first time. Has to be at least 1.
 
     @SerializedName("pay")
     PAY("pay");
+
     @Getter(onMethod_ = {@Override})
     private final String value;
+
     SubmitType(String value) {
       this.value = value;
     }
-
   }
 }

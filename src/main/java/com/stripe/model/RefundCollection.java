@@ -10,82 +10,78 @@ import java.util.Map;
 
 public class RefundCollection extends StripeCollection<Refund> {
   /**
-   * <p>You can see a list of the refunds belonging to a specific charge. Note that the 10 most recent refunds are always available by default on the charge object. If you need more than those 10, you can use this API method and the <code>limit</code> and <code>starting_after</code> parameters to page through additional refunds.</p>
+   * You can see a list of the refunds belonging to a specific charge. Note that the 10 most recent
+   * refunds are always available by default on the charge object. If you need more than those 10,
+   * you can use this API method and the <code>limit</code> and <code>starting_after</code>
+   * parameters to page through additional refunds.
    */
   public RefundCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * <p>You can see a list of the refunds belonging to a specific charge. Note that the 10 most recent refunds are always available by default on the charge object. If you need more than those 10, you can use this API method and the <code>limit</code> and <code>starting_after</code> parameters to page through additional refunds.</p>
+   * You can see a list of the refunds belonging to a specific charge. Note that the 10 most recent
+   * refunds are always available by default on the charge object. If you need more than those 10,
+   * you can use this API method and the <code>limit</code> and <code>starting_after</code>
+   * parameters to page through additional refunds.
    */
-  public RefundCollection list(
-      Map<String, Object> params,
-      RequestOptions options) throws StripeException {
+  public RefundCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
     return ApiResource.requestCollection(url, params, RefundCollection.class, options);
   }
 
   /**
-   * <p>You can see a list of the refunds belonging to a specific charge. Note that the 10 most recent refunds are always available by default on the charge object. If you need more than those 10, you can use this API method and the <code>limit</code> and <code>starting_after</code> parameters to page through additional refunds.</p>
+   * You can see a list of the refunds belonging to a specific charge. Note that the 10 most recent
+   * refunds are always available by default on the charge object. If you need more than those 10,
+   * you can use this API method and the <code>limit</code> and <code>starting_after</code>
+   * parameters to page through additional refunds.
    */
   public RefundCollection list(RefundCollectionListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * <p>You can see a list of the refunds belonging to a specific charge. Note that the 10 most recent refunds are always available by default on the charge object. If you need more than those 10, you can use this API method and the <code>limit</code> and <code>starting_after</code> parameters to page through additional refunds.</p>
+   * You can see a list of the refunds belonging to a specific charge. Note that the 10 most recent
+   * refunds are always available by default on the charge object. If you need more than those 10,
+   * you can use this API method and the <code>limit</code> and <code>starting_after</code>
+   * parameters to page through additional refunds.
    */
-  public RefundCollection list(
-      RefundCollectionListParams params,
-      RequestOptions options) throws StripeException {
+  public RefundCollection list(RefundCollectionListParams params, RequestOptions options)
+      throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), this.getUrl());
     return ApiResource.requestCollection(url, params, RefundCollection.class, options);
   }
 
-  /**
-   * <p>Retrieves the details of an existing refund.</p>
-   */
+  /** Retrieves the details of an existing refund. */
   public Refund retrieve(String id) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /**
-   * <p>Retrieves the details of an existing refund.</p>
-   */
+  /** Retrieves the details of an existing refund. */
   public Refund retrieve(String id, RequestOptions options) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, options);
   }
 
-  /**
-   * <p>Retrieves the details of an existing refund.</p>
-   */
-  public Refund retrieve(
-      String id,
-      Map<String, Object> params,
-      RequestOptions options) throws StripeException {
+  /** Retrieves the details of an existing refund. */
+  public Refund retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id))
-      );
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Refund.class, options);
   }
 
-  /**
-   * <p>Retrieves the details of an existing refund.</p>
-   */
-  public Refund retrieve(
-      String id,
-      RefundCollectionRetrieveParams params,
-      RequestOptions options) throws StripeException {
+  /** Retrieves the details of an existing refund. */
+  public Refund retrieve(String id, RefundCollectionRetrieveParams params, RequestOptions options)
+      throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id))
-      );
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("%s/%s", this.getUrl(), ApiResource.urlEncodeId(id)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Refund.class, options);
   }
 }

@@ -14,66 +14,53 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class FeeRefund
-  extends ApiResource
-  implements MetadataStore<FeeRefund>, BalanceTransactionSource {
-  /**
-   * Amount, in %s.
-   */
+public class FeeRefund extends ApiResource
+    implements MetadataStore<FeeRefund>, BalanceTransactionSource {
+  /** Amount, in %s. */
   @SerializedName("amount")
   Long amount;
 
-  /**
-   * Balance transaction that describes the impact on your account balance.
-   */
+  /** Balance transaction that describes the impact on your account balance. */
   @SerializedName("balance_transaction")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<BalanceTransaction> balanceTransaction;
 
-  /**
-   * Time at which the object was created. Measured in seconds since the Unix epoch.
-   */
+  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
+   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
    */
   @SerializedName("currency")
   String currency;
 
-  /**
-   * ID of the application fee that was refunded.
-   */
+  /** ID of the application fee that was refunded. */
   @SerializedName("fee")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<ApplicationFee> fee;
 
-  /**
-   * Unique identifier for the object.
-   */
+  /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
   /**
-   * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+   * Set of key-value pairs that you can attach to an object. This can be useful for storing
+   * additional information about the object in a structured format.
    */
   @Getter(onMethod_ = {@Override})
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /**
-   * String representing the object's type. Objects of the same type share the same value.
-   */
+  /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
   String object;
 
-  /**
-   * Get id of expandable `balanceTransaction` object.
-   */
+  /** Get id of expandable `balanceTransaction` object. */
   public String getBalanceTransaction() {
     return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
   }
@@ -82,21 +69,17 @@ public class FeeRefund
     this.balanceTransaction = ApiResource.setExpandableFieldId(id, this.balanceTransaction);
   }
 
-  /**
-   * Get expanded `balanceTransaction`.
-   */
+  /** Get expanded `balanceTransaction`. */
   public BalanceTransaction getBalanceTransactionObject() {
     return (this.balanceTransaction != null) ? this.balanceTransaction.getExpanded() : null;
   }
 
   public void setBalanceTransactionObject(BalanceTransaction expandableObject) {
     this.balanceTransaction =
-      new ExpandableField<BalanceTransaction>(expandableObject.getId(), expandableObject);
+        new ExpandableField<BalanceTransaction>(expandableObject.getId(), expandableObject);
   }
 
-  /**
-   * Get id of expandable `fee` object.
-   */
+  /** Get id of expandable `fee` object. */
   public String getFee() {
     return (this.fee != null) ? this.fee.getId() : null;
   }
@@ -105,9 +88,7 @@ public class FeeRefund
     this.fee = ApiResource.setExpandableFieldId(id, this.fee);
   }
 
-  /**
-   * Get expanded `fee`.
-   */
+  /** Get expanded `fee`. */
   public ApplicationFee getFeeObject() {
     return (this.fee != null) ? this.fee.getExpanded() : null;
   }
@@ -117,9 +98,10 @@ public class FeeRefund
   }
 
   /**
-   * <p>Updates the specified application fee refund by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
+   * Updates the specified application fee refund by setting the values of the parameters passed.
+   * Any parameters not provided will be left unchanged.
    *
-   * <p>This request only accepts metadata as an argument.</p>
+   * <p>This request only accepts metadata as an argument.
    */
   @Override
   public FeeRefund update(Map<String, Object> params) throws StripeException {
@@ -127,66 +109,51 @@ public class FeeRefund
   }
 
   /**
-   * <p>Updates the specified application fee refund by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
+   * Updates the specified application fee refund by setting the values of the parameters passed.
+   * Any parameters not provided will be left unchanged.
    *
-   * <p>This request only accepts metadata as an argument.</p>
+   * <p>This request only accepts metadata as an argument.
    */
   @Override
-  public FeeRefund update(
-      Map<String, Object> params,
-      RequestOptions options) throws StripeException {
+  public FeeRefund update(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
         String.format(
-          "/v1/application_fees/%s/refunds/%s",
-          ApiResource.urlEncodeId(this.getFee()),
-          ApiResource.urlEncodeId(this.getId())
-        )
-      );
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/application_fees/%s/refunds/%s",
+                ApiResource.urlEncodeId(this.getFee()), ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
-      ApiResource.RequestMethod.POST,
-      url,
-      params,
-      FeeRefund.class,
-      options
-    );
+        ApiResource.RequestMethod.POST, url, params, FeeRefund.class, options);
   }
 
   /**
-   * <p>Updates the specified application fee refund by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
+   * Updates the specified application fee refund by setting the values of the parameters passed.
+   * Any parameters not provided will be left unchanged.
    *
-   * <p>This request only accepts metadata as an argument.</p>
+   * <p>This request only accepts metadata as an argument.
    */
   public FeeRefund update(FeeRefundUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
   /**
-   * <p>Updates the specified application fee refund by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
+   * Updates the specified application fee refund by setting the values of the parameters passed.
+   * Any parameters not provided will be left unchanged.
    *
-   * <p>This request only accepts metadata as an argument.</p>
+   * <p>This request only accepts metadata as an argument.
    */
-  public FeeRefund update(
-      FeeRefundUpdateParams params,
-      RequestOptions options) throws StripeException {
+  public FeeRefund update(FeeRefundUpdateParams params, RequestOptions options)
+      throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
         String.format(
-          "/v1/application_fees/%s/refunds/%s",
-          ApiResource.urlEncodeId(this.getFee()),
-          ApiResource.urlEncodeId(this.getId())
-        )
-      );
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/application_fees/%s/refunds/%s",
+                ApiResource.urlEncodeId(this.getFee()), ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
-      ApiResource.RequestMethod.POST,
-      url,
-      params,
-      FeeRefund.class,
-      options
-    );
+        ApiResource.RequestMethod.POST, url, params, FeeRefund.class, options);
   }
 }

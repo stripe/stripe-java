@@ -20,15 +20,12 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Transaction
-  extends ApiResource
-  implements MetadataStore<Transaction>, BalanceTransactionSource {
+public class Transaction extends ApiResource
+    implements MetadataStore<Transaction>, BalanceTransactionSource {
   @SerializedName("amount")
   Long amount;
 
-  /**
-   * The `Authorization` object that led to this transaction.
-   */
+  /** The `Authorization` object that led to this transaction. */
   @SerializedName("authorization")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
@@ -39,30 +36,25 @@ public class Transaction
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<BalanceTransaction> balanceTransaction;
 
-  /**
-   * The card used to make this transaction.
-   */
+  /** The card used to make this transaction. */
   @SerializedName("card")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Card> card;
 
-  /**
-   * The cardholder to whom this transaction belongs.
-   */
+  /** The cardholder to whom this transaction belongs. */
   @SerializedName("cardholder")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Cardholder> cardholder;
 
-  /**
-   * Time at which the object was created. Measured in seconds since the Unix epoch.
-   */
+  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
+   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
    */
   @SerializedName("currency")
   String currency;
@@ -72,15 +64,14 @@ public class Transaction
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Dispute> dispute;
 
-  /**
-   * Unique identifier for the object.
-   */
+  /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+   * Has the value `true` if the object exists in live mode or the value `false` if the object
+   * exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -95,15 +86,14 @@ public class Transaction
   MerchantData merchantData;
 
   /**
-   * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+   * Set of key-value pairs that you can attach to an object. This can be useful for storing
+   * additional information about the object in a structured format.
    */
   @Getter(onMethod_ = {@Override})
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /**
-   * String representing the object's type. Objects of the same type share the same value.
-   */
+  /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
   String object;
 
@@ -113,9 +103,7 @@ public class Transaction
   @SerializedName("type")
   String type;
 
-  /**
-   * Get id of expandable `authorization` object.
-   */
+  /** Get id of expandable `authorization` object. */
   public String getAuthorization() {
     return (this.authorization != null) ? this.authorization.getId() : null;
   }
@@ -124,21 +112,17 @@ public class Transaction
     this.authorization = ApiResource.setExpandableFieldId(id, this.authorization);
   }
 
-  /**
-   * Get expanded `authorization`.
-   */
+  /** Get expanded `authorization`. */
   public Authorization getAuthorizationObject() {
     return (this.authorization != null) ? this.authorization.getExpanded() : null;
   }
 
   public void setAuthorizationObject(Authorization expandableObject) {
     this.authorization =
-      new ExpandableField<Authorization>(expandableObject.getId(), expandableObject);
+        new ExpandableField<Authorization>(expandableObject.getId(), expandableObject);
   }
 
-  /**
-   * Get id of expandable `balanceTransaction` object.
-   */
+  /** Get id of expandable `balanceTransaction` object. */
   public String getBalanceTransaction() {
     return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
   }
@@ -147,21 +131,17 @@ public class Transaction
     this.balanceTransaction = ApiResource.setExpandableFieldId(id, this.balanceTransaction);
   }
 
-  /**
-   * Get expanded `balanceTransaction`.
-   */
+  /** Get expanded `balanceTransaction`. */
   public BalanceTransaction getBalanceTransactionObject() {
     return (this.balanceTransaction != null) ? this.balanceTransaction.getExpanded() : null;
   }
 
   public void setBalanceTransactionObject(BalanceTransaction expandableObject) {
     this.balanceTransaction =
-      new ExpandableField<BalanceTransaction>(expandableObject.getId(), expandableObject);
+        new ExpandableField<BalanceTransaction>(expandableObject.getId(), expandableObject);
   }
 
-  /**
-   * Get id of expandable `card` object.
-   */
+  /** Get id of expandable `card` object. */
   public String getCard() {
     return (this.card != null) ? this.card.getId() : null;
   }
@@ -170,9 +150,7 @@ public class Transaction
     this.card = ApiResource.setExpandableFieldId(id, this.card);
   }
 
-  /**
-   * Get expanded `card`.
-   */
+  /** Get expanded `card`. */
   public Card getCardObject() {
     return (this.card != null) ? this.card.getExpanded() : null;
   }
@@ -181,9 +159,7 @@ public class Transaction
     this.card = new ExpandableField<Card>(expandableObject.getId(), expandableObject);
   }
 
-  /**
-   * Get id of expandable `cardholder` object.
-   */
+  /** Get id of expandable `cardholder` object. */
   public String getCardholder() {
     return (this.cardholder != null) ? this.cardholder.getId() : null;
   }
@@ -192,9 +168,7 @@ public class Transaction
     this.cardholder = ApiResource.setExpandableFieldId(id, this.cardholder);
   }
 
-  /**
-   * Get expanded `cardholder`.
-   */
+  /** Get expanded `cardholder`. */
   public Cardholder getCardholderObject() {
     return (this.cardholder != null) ? this.cardholder.getExpanded() : null;
   }
@@ -203,9 +177,7 @@ public class Transaction
     this.cardholder = new ExpandableField<Cardholder>(expandableObject.getId(), expandableObject);
   }
 
-  /**
-   * Get id of expandable `dispute` object.
-   */
+  /** Get id of expandable `dispute` object. */
   public String getDispute() {
     return (this.dispute != null) ? this.dispute.getId() : null;
   }
@@ -214,9 +186,7 @@ public class Transaction
     this.dispute = ApiResource.setExpandableFieldId(id, this.dispute);
   }
 
-  /**
-   * Get expanded `dispute`.
-   */
+  /** Get expanded `dispute`. */
   public Dispute getDisputeObject() {
     return (this.dispute != null) ? this.dispute.getExpanded() : null;
   }
@@ -226,101 +196,81 @@ public class Transaction
   }
 
   /**
-   * <p>Returns a list of Issuing <code>Transaction</code> objects. The objects are sorted in descending order by creation date, with the most recently created object appearing first.</p>
+   * Returns a list of Issuing <code>Transaction</code> objects. The objects are sorted in
+   * descending order by creation date, with the most recently created object appearing first.
    */
   public static TransactionCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * <p>Returns a list of Issuing <code>Transaction</code> objects. The objects are sorted in descending order by creation date, with the most recently created object appearing first.</p>
+   * Returns a list of Issuing <code>Transaction</code> objects. The objects are sorted in
+   * descending order by creation date, with the most recently created object appearing first.
    */
-  public static TransactionCollection list(
-      Map<String, Object> params,
-      RequestOptions options) throws StripeException {
+  public static TransactionCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/transactions");
     return ApiResource.requestCollection(url, params, TransactionCollection.class, options);
   }
 
   /**
-   * <p>Returns a list of Issuing <code>Transaction</code> objects. The objects are sorted in descending order by creation date, with the most recently created object appearing first.</p>
+   * Returns a list of Issuing <code>Transaction</code> objects. The objects are sorted in
+   * descending order by creation date, with the most recently created object appearing first.
    */
   public static TransactionCollection list(TransactionListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * <p>Returns a list of Issuing <code>Transaction</code> objects. The objects are sorted in descending order by creation date, with the most recently created object appearing first.</p>
+   * Returns a list of Issuing <code>Transaction</code> objects. The objects are sorted in
+   * descending order by creation date, with the most recently created object appearing first.
    */
-  public static TransactionCollection list(
-      TransactionListParams params,
-      RequestOptions options) throws StripeException {
+  public static TransactionCollection list(TransactionListParams params, RequestOptions options)
+      throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/issuing/transactions");
     return ApiResource.requestCollection(url, params, TransactionCollection.class, options);
   }
 
-  /**
-   * <p>Retrieves an Issuing <code>Transaction</code> object.</p>
-   */
+  /** Retrieves an Issuing <code>Transaction</code> object. */
   public static Transaction retrieve(String transaction) throws StripeException {
     return retrieve(transaction, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /**
-   * <p>Retrieves an Issuing <code>Transaction</code> object.</p>
-   */
-  public static Transaction retrieve(
-      String transaction,
-      RequestOptions options) throws StripeException {
+  /** Retrieves an Issuing <code>Transaction</code> object. */
+  public static Transaction retrieve(String transaction, RequestOptions options)
+      throws StripeException {
     return retrieve(transaction, (Map<String, Object>) null, options);
   }
 
-  /**
-   * <p>Retrieves an Issuing <code>Transaction</code> object.</p>
-   */
+  /** Retrieves an Issuing <code>Transaction</code> object. */
   public static Transaction retrieve(
-      String transaction,
-      Map<String, Object> params,
-      RequestOptions options) throws StripeException {
+      String transaction, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(transaction))
-      );
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(transaction)));
     return ApiResource.request(
-      ApiResource.RequestMethod.GET,
-      url,
-      params,
-      Transaction.class,
-      options
-    );
+        ApiResource.RequestMethod.GET, url, params, Transaction.class, options);
+  }
+
+  /** Retrieves an Issuing <code>Transaction</code> object. */
+  public static Transaction retrieve(
+      String transaction, TransactionRetrieveParams params, RequestOptions options)
+      throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(transaction)));
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, Transaction.class, options);
   }
 
   /**
-   * <p>Retrieves an Issuing <code>Transaction</code> object.</p>
-   */
-  public static Transaction retrieve(
-      String transaction,
-      TransactionRetrieveParams params,
-      RequestOptions options) throws StripeException {
-    String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(transaction))
-      );
-    return ApiResource.request(
-      ApiResource.RequestMethod.GET,
-      url,
-      params,
-      Transaction.class,
-      options
-    );
-  }
-
-  /**
-   * <p>Updates the specified Issuing <code>Transaction</code> object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
+   * Updates the specified Issuing <code>Transaction</code> object by setting the values of the
+   * parameters passed. Any parameters not provided will be left unchanged.
    */
   @Override
   public Transaction update(Map<String, Object> params) throws StripeException {
@@ -328,52 +278,41 @@ public class Transaction
   }
 
   /**
-   * <p>Updates the specified Issuing <code>Transaction</code> object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
+   * Updates the specified Issuing <code>Transaction</code> object by setting the values of the
+   * parameters passed. Any parameters not provided will be left unchanged.
    */
   @Override
-  public Transaction update(
-      Map<String, Object> params,
-      RequestOptions options) throws StripeException {
+  public Transaction update(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(this.getId()))
-      );
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
-      ApiResource.RequestMethod.POST,
-      url,
-      params,
-      Transaction.class,
-      options
-    );
+        ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
   }
 
   /**
-   * <p>Updates the specified Issuing <code>Transaction</code> object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
+   * Updates the specified Issuing <code>Transaction</code> object by setting the values of the
+   * parameters passed. Any parameters not provided will be left unchanged.
    */
   public Transaction update(TransactionUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
   /**
-   * <p>Updates the specified Issuing <code>Transaction</code> object by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
+   * Updates the specified Issuing <code>Transaction</code> object by setting the values of the
+   * parameters passed. Any parameters not provided will be left unchanged.
    */
-  public Transaction update(
-      TransactionUpdateParams params,
-      RequestOptions options) throws StripeException {
+  public Transaction update(TransactionUpdateParams params, RequestOptions options)
+      throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(this.getId()))
-      );
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/issuing/transactions/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
-      ApiResource.RequestMethod.POST,
-      url,
-      params,
-      Transaction.class,
-      options
-    );
+        ApiResource.RequestMethod.POST, url, params, Transaction.class, options);
   }
 }

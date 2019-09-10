@@ -2,7 +2,6 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
-import com.stripe.net.ApiRequestParams.EnumParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,62 +9,68 @@ import java.util.Map;
 import lombok.Getter;
 
 public class PayoutCreateParams extends ApiRequestParams {
-  /**
-   * A positive integer in cents representing how much to payout.
-   */
+  /** A positive integer in cents representing how much to payout. */
   @SerializedName("amount")
   Long amount;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
+   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
    */
   @SerializedName("currency")
   String currency;
 
-  /**
-   * An arbitrary string attached to the object. Often useful for displaying to users.
-   */
+  /** An arbitrary string attached to the object. Often useful for displaying to users. */
   @SerializedName("description")
   String description;
 
   /**
-   * The ID of a bank account or a card to send the payout to. If no destination is supplied, the default external account for the specified currency will be used.
+   * The ID of a bank account or a card to send the payout to. If no destination is supplied, the
+   * default external account for the specified currency will be used.
    */
   @SerializedName("destination")
   String destination;
 
-  /**
-   * Specifies which fields in the response should be expanded.
-   */
+  /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
 
   /**
-   * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
   /**
-   * A set of key-value pairs that you can attach to a payout object. It can be useful for storing additional information about the payout in a structured format.
+   * A set of key-value pairs that you can attach to a payout object. It can be useful for storing
+   * additional information about the payout in a structured format.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
   /**
-   * The method used to send this payout, which can be `standard` or `instant`. `instant` is only supported for payouts to debit cards. (See [Instant payouts for marketplaces for more information](https://stripe.com/blog/instant-payouts-for-marketplaces).)
+   * The method used to send this payout, which can be `standard` or `instant`. `instant` is only
+   * supported for payouts to debit cards. (See [Instant payouts for marketplaces for more
+   * information](https://stripe.com/blog/instant-payouts-for-marketplaces).)
    */
   @SerializedName("method")
   Method method;
 
   /**
-   * The source balance to draw this payout from. Balances for different payment sources are kept separately. You can find the amounts with the balances API. One of `bank_account` or `card`.
+   * The source balance to draw this payout from. Balances for different payment sources are kept
+   * separately. You can find the amounts with the balances API. One of `bank_account` or `card`.
    */
   @SerializedName("source_type")
   SourceType sourceType;
 
   /**
-   * A string to be displayed on the recipient's bank or card statement. This may be at most 22 characters. Attempting to use a `statement_descriptor` longer than 22 characters will return an error. Note: Most banks will truncate this information and/or display it inconsistently. Some may not display it at all.
+   * A string to be displayed on the recipient's bank or card statement. This may be at most 22
+   * characters. Attempting to use a `statement_descriptor` longer than 22 characters will return an
+   * error. Note: Most banks will truncate this information and/or display it inconsistently. Some
+   * may not display it at all.
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
@@ -92,9 +97,11 @@ public class PayoutCreateParams extends ApiRequestParams {
     this.sourceType = sourceType;
     this.statementDescriptor = statementDescriptor;
   }
+
   public static Builder builder() {
     return new Builder();
   }
+
   public static class Builder {
     private Long amount;
 
@@ -116,50 +123,45 @@ public class PayoutCreateParams extends ApiRequestParams {
 
     private String statementDescriptor;
 
-    /**
-     * Finalize and obtain parameter instance from this builder.
-     */
+    /** Finalize and obtain parameter instance from this builder. */
     public PayoutCreateParams build() {
       return new PayoutCreateParams(
-        this.amount,
-        this.currency,
-        this.description,
-        this.destination,
-        this.expand,
-        this.extraParams,
-        this.metadata,
-        this.method,
-        this.sourceType,
-        this.statementDescriptor
-      );
+          this.amount,
+          this.currency,
+          this.description,
+          this.destination,
+          this.expand,
+          this.extraParams,
+          this.metadata,
+          this.method,
+          this.sourceType,
+          this.statementDescriptor);
     }
 
-    /**
-     * A positive integer in cents representing how much to payout.
-     */
+    /** A positive integer in cents representing how much to payout. */
     public Builder setAmount(Long amount) {
       this.amount = amount;
       return this;
     }
 
     /**
-     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
+     * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
      */
     public Builder setCurrency(String currency) {
       this.currency = currency;
       return this;
     }
 
-    /**
-     * An arbitrary string attached to the object. Often useful for displaying to users.
-     */
+    /** An arbitrary string attached to the object. Often useful for displaying to users. */
     public Builder setDescription(String description) {
       this.description = description;
       return this;
     }
 
     /**
-     * The ID of a bank account or a card to send the payout to. If no destination is supplied, the default external account for the specified currency will be used.
+     * The ID of a bank account or a card to send the payout to. If no destination is supplied, the
+     * default external account for the specified currency will be used.
      */
     public Builder setDestination(String destination) {
       this.destination = destination;
@@ -167,7 +169,9 @@ public class PayoutCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link PayoutCreateParams#expand} for the field documentation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * PayoutCreateParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -178,7 +182,9 @@ public class PayoutCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link PayoutCreateParams#expand} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * PayoutCreateParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -189,7 +195,9 @@ public class PayoutCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link PayoutCreateParams#extraParams} for the field documentation.
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * PayoutCreateParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -200,7 +208,9 @@ public class PayoutCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link PayoutCreateParams#extraParams} for the field documentation.
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link PayoutCreateParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -211,7 +221,9 @@ public class PayoutCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link PayoutCreateParams#metadata} for the field documentation.
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
+     * PayoutCreateParams#metadata} for the field documentation.
      */
     public Builder putMetadata(String key, String value) {
       if (this.metadata == null) {
@@ -222,7 +234,9 @@ public class PayoutCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link PayoutCreateParams#metadata} for the field documentation.
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link PayoutCreateParams#metadata} for the field documentation.
      */
     public Builder putAllMetadata(Map<String, String> map) {
       if (this.metadata == null) {
@@ -233,7 +247,9 @@ public class PayoutCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The method used to send this payout, which can be `standard` or `instant`. `instant` is only supported for payouts to debit cards. (See [Instant payouts for marketplaces for more information](https://stripe.com/blog/instant-payouts-for-marketplaces).)
+     * The method used to send this payout, which can be `standard` or `instant`. `instant` is only
+     * supported for payouts to debit cards. (See [Instant payouts for marketplaces for more
+     * information](https://stripe.com/blog/instant-payouts-for-marketplaces).)
      */
     public Builder setMethod(Method method) {
       this.method = method;
@@ -241,7 +257,8 @@ public class PayoutCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The source balance to draw this payout from. Balances for different payment sources are kept separately. You can find the amounts with the balances API. One of `bank_account` or `card`.
+     * The source balance to draw this payout from. Balances for different payment sources are kept
+     * separately. You can find the amounts with the balances API. One of `bank_account` or `card`.
      */
     public Builder setSourceType(SourceType sourceType) {
       this.sourceType = sourceType;
@@ -249,37 +266,44 @@ public class PayoutCreateParams extends ApiRequestParams {
     }
 
     /**
-     * A string to be displayed on the recipient's bank or card statement. This may be at most 22 characters. Attempting to use a `statement_descriptor` longer than 22 characters will return an error. Note: Most banks will truncate this information and/or display it inconsistently. Some may not display it at all.
+     * A string to be displayed on the recipient's bank or card statement. This may be at most 22
+     * characters. Attempting to use a `statement_descriptor` longer than 22 characters will return
+     * an error. Note: Most banks will truncate this information and/or display it inconsistently.
+     * Some may not display it at all.
      */
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
       return this;
     }
   }
+
   public enum Method implements ApiRequestParams.EnumParam {
     @SerializedName("instant")
     INSTANT("instant"),
 
     @SerializedName("standard")
     STANDARD("standard");
+
     @Getter(onMethod_ = {@Override})
     private final String value;
+
     Method(String value) {
       this.value = value;
     }
-
   }
+
   public enum SourceType implements ApiRequestParams.EnumParam {
     @SerializedName("bank_account")
     BANK_ACCOUNT("bank_account"),
 
     @SerializedName("card")
     CARD("card");
+
     @Getter(onMethod_ = {@Override})
     private final String value;
+
     SourceType(String value) {
       this.value = value;
     }
-
   }
 }

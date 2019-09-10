@@ -8,68 +8,64 @@ import java.util.List;
 import java.util.Map;
 
 public class SubscriptionScheduleListParams extends ApiRequestParams {
-  /**
-   * Only return subscription schedules that were created canceled the given date interval.
-   */
+  /** Only return subscription schedules that were created canceled the given date interval. */
   @SerializedName("canceled_at")
   Object canceledAt;
 
-  /**
-   * Only return subscription schedules that completed during the given date interval.
-   */
+  /** Only return subscription schedules that completed during the given date interval. */
   @SerializedName("completed_at")
   Object completedAt;
 
-  /**
-   * Only return subscription schedules that were created during the given date interval.
-   */
+  /** Only return subscription schedules that were created during the given date interval. */
   @SerializedName("created")
   Object created;
 
-  /**
-   * Only return subscription schedules for the given customer.
-   */
+  /** Only return subscription schedules for the given customer. */
   @SerializedName("customer")
   String customer;
 
   /**
-   * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+   * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the
+   * list. For instance, if you make a list request and receive 100 objects, starting with
+   * `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the
+   * previous page of the list.
    */
   @SerializedName("ending_before")
   String endingBefore;
 
-  /**
-   * Specifies which fields in the response should be expanded.
-   */
+  /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
 
   /**
-   * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
   /**
-   * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+   * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+   * default is 10.
    */
   @SerializedName("limit")
   Long limit;
 
-  /**
-   * Only return subscription schedules that were released during the given date interval.
-   */
+  /** Only return subscription schedules that were released during the given date interval. */
   @SerializedName("released_at")
   Object releasedAt;
 
-  /**
-   * Only return subscription schedules that have not started yet.
-   */
+  /** Only return subscription schedules that have not started yet. */
   @SerializedName("scheduled")
   Boolean scheduled;
 
   /**
-   * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+   * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the
+   * list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`,
+   * your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of
+   * the list.
    */
   @SerializedName("starting_after")
   String startingAfter;
@@ -98,9 +94,11 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
     this.scheduled = scheduled;
     this.startingAfter = startingAfter;
   }
+
   public static Builder builder() {
     return new Builder();
   }
+
   public static class Builder {
     private Object canceledAt;
 
@@ -124,83 +122,69 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
 
     private String startingAfter;
 
-    /**
-     * Finalize and obtain parameter instance from this builder.
-     */
+    /** Finalize and obtain parameter instance from this builder. */
     public SubscriptionScheduleListParams build() {
       return new SubscriptionScheduleListParams(
-        this.canceledAt,
-        this.completedAt,
-        this.created,
-        this.customer,
-        this.endingBefore,
-        this.expand,
-        this.extraParams,
-        this.limit,
-        this.releasedAt,
-        this.scheduled,
-        this.startingAfter
-      );
+          this.canceledAt,
+          this.completedAt,
+          this.created,
+          this.customer,
+          this.endingBefore,
+          this.expand,
+          this.extraParams,
+          this.limit,
+          this.releasedAt,
+          this.scheduled,
+          this.startingAfter);
     }
 
-    /**
-     * Only return subscription schedules that were created canceled the given date interval.
-     */
+    /** Only return subscription schedules that were created canceled the given date interval. */
     public Builder setCanceledAt(CanceledAt canceledAt) {
       this.canceledAt = canceledAt;
       return this;
     }
 
-    /**
-     * Only return subscription schedules that were created canceled the given date interval.
-     */
+    /** Only return subscription schedules that were created canceled the given date interval. */
     public Builder setCanceledAt(Long canceledAt) {
       this.canceledAt = canceledAt;
       return this;
     }
 
-    /**
-     * Only return subscription schedules that completed during the given date interval.
-     */
+    /** Only return subscription schedules that completed during the given date interval. */
     public Builder setCompletedAt(CompletedAt completedAt) {
       this.completedAt = completedAt;
       return this;
     }
 
-    /**
-     * Only return subscription schedules that completed during the given date interval.
-     */
+    /** Only return subscription schedules that completed during the given date interval. */
     public Builder setCompletedAt(Long completedAt) {
       this.completedAt = completedAt;
       return this;
     }
 
-    /**
-     * Only return subscription schedules that were created during the given date interval.
-     */
+    /** Only return subscription schedules that were created during the given date interval. */
     public Builder setCreated(Created created) {
       this.created = created;
       return this;
     }
 
-    /**
-     * Only return subscription schedules that were created during the given date interval.
-     */
+    /** Only return subscription schedules that were created during the given date interval. */
     public Builder setCreated(Long created) {
       this.created = created;
       return this;
     }
 
-    /**
-     * Only return subscription schedules for the given customer.
-     */
+    /** Only return subscription schedules for the given customer. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;
     }
 
     /**
-     * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the previous page of the list.
+     * A cursor for use in pagination. `ending_before` is an object ID that defines your place in
+     * the list. For instance, if you make a list request and receive 100 objects, starting with
+     * `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the
+     * previous page of the list.
      */
     public Builder setEndingBefore(String endingBefore) {
       this.endingBefore = endingBefore;
@@ -208,7 +192,9 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link SubscriptionScheduleListParams#expand} for the field documentation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SubscriptionScheduleListParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -219,7 +205,9 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link SubscriptionScheduleListParams#expand} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SubscriptionScheduleListParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -230,7 +218,9 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SubscriptionScheduleListParams#extraParams} for the field documentation.
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * SubscriptionScheduleListParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -241,7 +231,9 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SubscriptionScheduleListParams#extraParams} for the field documentation.
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link SubscriptionScheduleListParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -252,73 +244,67 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
     }
 
     /**
-     * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 10.
+     * A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+     * default is 10.
      */
     public Builder setLimit(Long limit) {
       this.limit = limit;
       return this;
     }
 
-    /**
-     * Only return subscription schedules that were released during the given date interval.
-     */
+    /** Only return subscription schedules that were released during the given date interval. */
     public Builder setReleasedAt(ReleasedAt releasedAt) {
       this.releasedAt = releasedAt;
       return this;
     }
 
-    /**
-     * Only return subscription schedules that were released during the given date interval.
-     */
+    /** Only return subscription schedules that were released during the given date interval. */
     public Builder setReleasedAt(Long releasedAt) {
       this.releasedAt = releasedAt;
       return this;
     }
 
-    /**
-     * Only return subscription schedules that have not started yet.
-     */
+    /** Only return subscription schedules that have not started yet. */
     public Builder setScheduled(Boolean scheduled) {
       this.scheduled = scheduled;
       return this;
     }
 
     /**
-     * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of the list.
+     * A cursor for use in pagination. `starting_after` is an object ID that defines your place in
+     * the list. For instance, if you make a list request and receive 100 objects, ending with
+     * `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the
+     * next page of the list.
      */
     public Builder setStartingAfter(String startingAfter) {
       this.startingAfter = startingAfter;
       return this;
     }
   }
+
   public static class CanceledAt {
     /**
-     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /**
-     * Minimum value to filter by (exclusive).
-     */
+    /** Minimum value to filter by (exclusive). */
     @SerializedName("gt")
     Long gt;
 
-    /**
-     * Minimum value to filter by (inclusive).
-     */
+    /** Minimum value to filter by (inclusive). */
     @SerializedName("gte")
     Long gte;
 
-    /**
-     * Maximum value to filter by (exclusive).
-     */
+    /** Maximum value to filter by (exclusive). */
     @SerializedName("lt")
     Long lt;
 
-    /**
-     * Maximum value to filter by (inclusive).
-     */
+    /** Maximum value to filter by (inclusive). */
     @SerializedName("lte")
     Long lte;
 
@@ -329,9 +315,11 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
       this.lt = lt;
       this.lte = lte;
     }
+
     public static Builder builder() {
       return new Builder();
     }
+
     public static class Builder {
       private Map<String, Object> extraParams;
 
@@ -343,15 +331,15 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
 
       private Long lte;
 
-      /**
-       * Finalize and obtain parameter instance from this builder.
-       */
+      /** Finalize and obtain parameter instance from this builder. */
       public CanceledAt build() {
         return new CanceledAt(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SubscriptionScheduleListParams.CanceledAt#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SubscriptionScheduleListParams.CanceledAt#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -362,7 +350,10 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SubscriptionScheduleListParams.CanceledAt#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionScheduleListParams.CanceledAt#extraParams} for the field
+       * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -372,67 +363,55 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * Minimum value to filter by (exclusive).
-       */
+      /** Minimum value to filter by (exclusive). */
       public Builder setGt(Long gt) {
         this.gt = gt;
         return this;
       }
 
-      /**
-       * Minimum value to filter by (inclusive).
-       */
+      /** Minimum value to filter by (inclusive). */
       public Builder setGte(Long gte) {
         this.gte = gte;
         return this;
       }
 
-      /**
-       * Maximum value to filter by (exclusive).
-       */
+      /** Maximum value to filter by (exclusive). */
       public Builder setLt(Long lt) {
         this.lt = lt;
         return this;
       }
 
-      /**
-       * Maximum value to filter by (inclusive).
-       */
+      /** Maximum value to filter by (inclusive). */
       public Builder setLte(Long lte) {
         this.lte = lte;
         return this;
       }
     }
   }
+
   public static class CompletedAt {
     /**
-     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /**
-     * Minimum value to filter by (exclusive).
-     */
+    /** Minimum value to filter by (exclusive). */
     @SerializedName("gt")
     Long gt;
 
-    /**
-     * Minimum value to filter by (inclusive).
-     */
+    /** Minimum value to filter by (inclusive). */
     @SerializedName("gte")
     Long gte;
 
-    /**
-     * Maximum value to filter by (exclusive).
-     */
+    /** Maximum value to filter by (exclusive). */
     @SerializedName("lt")
     Long lt;
 
-    /**
-     * Maximum value to filter by (inclusive).
-     */
+    /** Maximum value to filter by (inclusive). */
     @SerializedName("lte")
     Long lte;
 
@@ -443,9 +422,11 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
       this.lt = lt;
       this.lte = lte;
     }
+
     public static Builder builder() {
       return new Builder();
     }
+
     public static class Builder {
       private Map<String, Object> extraParams;
 
@@ -457,15 +438,15 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
 
       private Long lte;
 
-      /**
-       * Finalize and obtain parameter instance from this builder.
-       */
+      /** Finalize and obtain parameter instance from this builder. */
       public CompletedAt build() {
         return new CompletedAt(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SubscriptionScheduleListParams.CompletedAt#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SubscriptionScheduleListParams.CompletedAt#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -476,7 +457,10 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SubscriptionScheduleListParams.CompletedAt#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionScheduleListParams.CompletedAt#extraParams} for the field
+       * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -486,67 +470,55 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * Minimum value to filter by (exclusive).
-       */
+      /** Minimum value to filter by (exclusive). */
       public Builder setGt(Long gt) {
         this.gt = gt;
         return this;
       }
 
-      /**
-       * Minimum value to filter by (inclusive).
-       */
+      /** Minimum value to filter by (inclusive). */
       public Builder setGte(Long gte) {
         this.gte = gte;
         return this;
       }
 
-      /**
-       * Maximum value to filter by (exclusive).
-       */
+      /** Maximum value to filter by (exclusive). */
       public Builder setLt(Long lt) {
         this.lt = lt;
         return this;
       }
 
-      /**
-       * Maximum value to filter by (inclusive).
-       */
+      /** Maximum value to filter by (inclusive). */
       public Builder setLte(Long lte) {
         this.lte = lte;
         return this;
       }
     }
   }
+
   public static class Created {
     /**
-     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /**
-     * Minimum value to filter by (exclusive).
-     */
+    /** Minimum value to filter by (exclusive). */
     @SerializedName("gt")
     Long gt;
 
-    /**
-     * Minimum value to filter by (inclusive).
-     */
+    /** Minimum value to filter by (inclusive). */
     @SerializedName("gte")
     Long gte;
 
-    /**
-     * Maximum value to filter by (exclusive).
-     */
+    /** Maximum value to filter by (exclusive). */
     @SerializedName("lt")
     Long lt;
 
-    /**
-     * Maximum value to filter by (inclusive).
-     */
+    /** Maximum value to filter by (inclusive). */
     @SerializedName("lte")
     Long lte;
 
@@ -557,9 +529,11 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
       this.lt = lt;
       this.lte = lte;
     }
+
     public static Builder builder() {
       return new Builder();
     }
+
     public static class Builder {
       private Map<String, Object> extraParams;
 
@@ -571,15 +545,15 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
 
       private Long lte;
 
-      /**
-       * Finalize and obtain parameter instance from this builder.
-       */
+      /** Finalize and obtain parameter instance from this builder. */
       public Created build() {
         return new Created(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SubscriptionScheduleListParams.Created#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SubscriptionScheduleListParams.Created#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -590,7 +564,9 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SubscriptionScheduleListParams.Created#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionScheduleListParams.Created#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -600,67 +576,55 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * Minimum value to filter by (exclusive).
-       */
+      /** Minimum value to filter by (exclusive). */
       public Builder setGt(Long gt) {
         this.gt = gt;
         return this;
       }
 
-      /**
-       * Minimum value to filter by (inclusive).
-       */
+      /** Minimum value to filter by (inclusive). */
       public Builder setGte(Long gte) {
         this.gte = gte;
         return this;
       }
 
-      /**
-       * Maximum value to filter by (exclusive).
-       */
+      /** Maximum value to filter by (exclusive). */
       public Builder setLt(Long lt) {
         this.lt = lt;
         return this;
       }
 
-      /**
-       * Maximum value to filter by (inclusive).
-       */
+      /** Maximum value to filter by (inclusive). */
       public Builder setLte(Long lte) {
         this.lte = lte;
         return this;
       }
     }
   }
+
   public static class ReleasedAt {
     /**
-     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /**
-     * Minimum value to filter by (exclusive).
-     */
+    /** Minimum value to filter by (exclusive). */
     @SerializedName("gt")
     Long gt;
 
-    /**
-     * Minimum value to filter by (inclusive).
-     */
+    /** Minimum value to filter by (inclusive). */
     @SerializedName("gte")
     Long gte;
 
-    /**
-     * Maximum value to filter by (exclusive).
-     */
+    /** Maximum value to filter by (exclusive). */
     @SerializedName("lt")
     Long lt;
 
-    /**
-     * Maximum value to filter by (inclusive).
-     */
+    /** Maximum value to filter by (inclusive). */
     @SerializedName("lte")
     Long lte;
 
@@ -671,9 +635,11 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
       this.lt = lt;
       this.lte = lte;
     }
+
     public static Builder builder() {
       return new Builder();
     }
+
     public static class Builder {
       private Map<String, Object> extraParams;
 
@@ -685,15 +651,15 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
 
       private Long lte;
 
-      /**
-       * Finalize and obtain parameter instance from this builder.
-       */
+      /** Finalize and obtain parameter instance from this builder. */
       public ReleasedAt build() {
         return new ReleasedAt(this.extraParams, this.gt, this.gte, this.lt, this.lte);
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SubscriptionScheduleListParams.ReleasedAt#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SubscriptionScheduleListParams.ReleasedAt#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -704,7 +670,10 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SubscriptionScheduleListParams.ReleasedAt#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionScheduleListParams.ReleasedAt#extraParams} for the field
+       * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -714,33 +683,25 @@ public class SubscriptionScheduleListParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * Minimum value to filter by (exclusive).
-       */
+      /** Minimum value to filter by (exclusive). */
       public Builder setGt(Long gt) {
         this.gt = gt;
         return this;
       }
 
-      /**
-       * Minimum value to filter by (inclusive).
-       */
+      /** Minimum value to filter by (inclusive). */
       public Builder setGte(Long gte) {
         this.gte = gte;
         return this;
       }
 
-      /**
-       * Maximum value to filter by (exclusive).
-       */
+      /** Maximum value to filter by (exclusive). */
       public Builder setLt(Long lt) {
         this.lt = lt;
         return this;
       }
 
-      /**
-       * Maximum value to filter by (inclusive).
-       */
+      /** Maximum value to filter by (inclusive). */
       public Builder setLte(Long lte) {
         this.lte = lte;
         return this;

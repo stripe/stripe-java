@@ -1,9 +1,9 @@
 package com.stripe.net;
 
+import com.google.gson.TypeAdapterFactory;
 import com.stripe.model.BalanceTransactionSourceTypeAdapterFactory;
 import com.stripe.model.ExternalAccountTypeAdapterFactory;
 import com.stripe.model.PaymentSourceTypeAdapterFactory;
-import com.google.gson.TypeAdapterFactory;
 import java.util.ArrayList;
 import java.util.List;
 

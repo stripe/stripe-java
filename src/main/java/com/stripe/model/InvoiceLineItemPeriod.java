@@ -9,15 +9,11 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class InvoiceLineItemPeriod extends StripeObject {
-  /**
-   * End of the line item's billing period.
-   */
+  /** End of the line item's billing period. */
   @SerializedName("end")
   Long end;
 
-  /**
-   * Start of the line item's billing period.
-   */
+  /** Start of the line item's billing period. */
   @SerializedName("start")
   Long start;
 }

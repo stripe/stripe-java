@@ -9,61 +9,72 @@ import java.util.Map;
 
 public class ChargeCaptureParams extends ApiRequestParams {
   /**
-   * The amount to capture, which must be less than or equal to the original amount. Any additional amount will be automatically refunded.
+   * The amount to capture, which must be less than or equal to the original amount. Any additional
+   * amount will be automatically refunded.
    */
   @SerializedName("amount")
   Long amount;
 
-  /**
-   * An application fee to add on to this charge. Can only be used with Stripe Connect.
-   */
+  /** An application fee to add on to this charge. Can only be used with Stripe Connect. */
   @SerializedName("application_fee")
   Long applicationFee;
 
   /**
-   * An application fee amount to add on to this charge, which must be less than or equal to the original amount. Can only be used with Stripe Connect.
+   * An application fee amount to add on to this charge, which must be less than or equal to the
+   * original amount. Can only be used with Stripe Connect.
    */
   @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
 
-  /**
-   * Specifies which fields in the response should be expanded.
-   */
+  /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
 
   /**
-   * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
   /**
-   * The email address to send this charge's receipt to. This will override the previously-specified email address for this charge, if one was set. Receipts will not be sent in test mode.
+   * The email address to send this charge's receipt to. This will override the previously-specified
+   * email address for this charge, if one was set. Receipts will not be sent in test mode.
    */
   @SerializedName("receipt_email")
   String receiptEmail;
 
   /**
-   * For card charges, use `statement_descriptor_suffix` instead. Otherwise, you can use this value as the complete description of a charge on your customers’ statements. Must contain at least one letter, maximum 22 characters.
+   * For card charges, use `statement_descriptor_suffix` instead. Otherwise, you can use this value
+   * as the complete description of a charge on your customers’ statements. Must contain at least
+   * one letter, maximum 22 characters.
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
 
   /**
-   * Provides information about the charge that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
+   * Provides information about the charge that customers see on their statements. Concatenated with
+   * the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the
+   * complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
    */
   @SerializedName("statement_descriptor_suffix")
   String statementDescriptorSuffix;
 
   /**
-   * An optional dictionary including the account to automatically transfer to as part of a destination charge. [See the Connect documentation](https://stripe.com/docs/connect/destination-charges) for details.
+   * An optional dictionary including the account to automatically transfer to as part of a
+   * destination charge. [See the Connect
+   * documentation](https://stripe.com/docs/connect/destination-charges) for details.
    */
   @SerializedName("transfer_data")
   TransferData transferData;
 
   /**
-   * A string that identifies this transaction as part of a group. `transfer_group` may only be provided if it has not been set. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#grouping-transactions) for details.
+   * A string that identifies this transaction as part of a group. `transfer_group` may only be
+   * provided if it has not been set. See the [Connect
+   * documentation](https://stripe.com/docs/connect/charges-transfers#grouping-transactions) for
+   * details.
    */
   @SerializedName("transfer_group")
   String transferGroup;
@@ -90,9 +101,11 @@ public class ChargeCaptureParams extends ApiRequestParams {
     this.transferData = transferData;
     this.transferGroup = transferGroup;
   }
+
   public static Builder builder() {
     return new Builder();
   }
+
   public static class Builder {
     private Long amount;
 
@@ -114,42 +127,39 @@ public class ChargeCaptureParams extends ApiRequestParams {
 
     private String transferGroup;
 
-    /**
-     * Finalize and obtain parameter instance from this builder.
-     */
+    /** Finalize and obtain parameter instance from this builder. */
     public ChargeCaptureParams build() {
       return new ChargeCaptureParams(
-        this.amount,
-        this.applicationFee,
-        this.applicationFeeAmount,
-        this.expand,
-        this.extraParams,
-        this.receiptEmail,
-        this.statementDescriptor,
-        this.statementDescriptorSuffix,
-        this.transferData,
-        this.transferGroup
-      );
+          this.amount,
+          this.applicationFee,
+          this.applicationFeeAmount,
+          this.expand,
+          this.extraParams,
+          this.receiptEmail,
+          this.statementDescriptor,
+          this.statementDescriptorSuffix,
+          this.transferData,
+          this.transferGroup);
     }
 
     /**
-     * The amount to capture, which must be less than or equal to the original amount. Any additional amount will be automatically refunded.
+     * The amount to capture, which must be less than or equal to the original amount. Any
+     * additional amount will be automatically refunded.
      */
     public Builder setAmount(Long amount) {
       this.amount = amount;
       return this;
     }
 
-    /**
-     * An application fee to add on to this charge. Can only be used with Stripe Connect.
-     */
+    /** An application fee to add on to this charge. Can only be used with Stripe Connect. */
     public Builder setApplicationFee(Long applicationFee) {
       this.applicationFee = applicationFee;
       return this;
     }
 
     /**
-     * An application fee amount to add on to this charge, which must be less than or equal to the original amount. Can only be used with Stripe Connect.
+     * An application fee amount to add on to this charge, which must be less than or equal to the
+     * original amount. Can only be used with Stripe Connect.
      */
     public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
       this.applicationFeeAmount = applicationFeeAmount;
@@ -157,7 +167,9 @@ public class ChargeCaptureParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link ChargeCaptureParams#expand} for the field documentation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * ChargeCaptureParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -168,7 +180,9 @@ public class ChargeCaptureParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link ChargeCaptureParams#expand} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * ChargeCaptureParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -179,7 +193,9 @@ public class ChargeCaptureParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link ChargeCaptureParams#extraParams} for the field documentation.
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * ChargeCaptureParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -190,7 +206,9 @@ public class ChargeCaptureParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link ChargeCaptureParams#extraParams} for the field documentation.
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link ChargeCaptureParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -201,7 +219,9 @@ public class ChargeCaptureParams extends ApiRequestParams {
     }
 
     /**
-     * The email address to send this charge's receipt to. This will override the previously-specified email address for this charge, if one was set. Receipts will not be sent in test mode.
+     * The email address to send this charge's receipt to. This will override the
+     * previously-specified email address for this charge, if one was set. Receipts will not be sent
+     * in test mode.
      */
     public Builder setReceiptEmail(String receiptEmail) {
       this.receiptEmail = receiptEmail;
@@ -209,7 +229,9 @@ public class ChargeCaptureParams extends ApiRequestParams {
     }
 
     /**
-     * For card charges, use `statement_descriptor_suffix` instead. Otherwise, you can use this value as the complete description of a charge on your customers’ statements. Must contain at least one letter, maximum 22 characters.
+     * For card charges, use `statement_descriptor_suffix` instead. Otherwise, you can use this
+     * value as the complete description of a charge on your customers’ statements. Must contain at
+     * least one letter, maximum 22 characters.
      */
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
@@ -217,7 +239,10 @@ public class ChargeCaptureParams extends ApiRequestParams {
     }
 
     /**
-     * Provides information about the charge that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
+     * Provides information about the charge that customers see on their statements. Concatenated
+     * with the prefix (shortened descriptor) or statement descriptor that’s set on the account to
+     * form the complete statement descriptor. Maximum 22 characters for the concatenated
+     * descriptor.
      */
     public Builder setStatementDescriptorSuffix(String statementDescriptorSuffix) {
       this.statementDescriptorSuffix = statementDescriptorSuffix;
@@ -225,7 +250,9 @@ public class ChargeCaptureParams extends ApiRequestParams {
     }
 
     /**
-     * An optional dictionary including the account to automatically transfer to as part of a destination charge. [See the Connect documentation](https://stripe.com/docs/connect/destination-charges) for details.
+     * An optional dictionary including the account to automatically transfer to as part of a
+     * destination charge. [See the Connect
+     * documentation](https://stripe.com/docs/connect/destination-charges) for details.
      */
     public Builder setTransferData(TransferData transferData) {
       this.transferData = transferData;
@@ -233,22 +260,30 @@ public class ChargeCaptureParams extends ApiRequestParams {
     }
 
     /**
-     * A string that identifies this transaction as part of a group. `transfer_group` may only be provided if it has not been set. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#grouping-transactions) for details.
+     * A string that identifies this transaction as part of a group. `transfer_group` may only be
+     * provided if it has not been set. See the [Connect
+     * documentation](https://stripe.com/docs/connect/charges-transfers#grouping-transactions) for
+     * details.
      */
     public Builder setTransferGroup(String transferGroup) {
       this.transferGroup = transferGroup;
       return this;
     }
   }
+
   public static class TransferData {
     /**
-     * The amount transferred to the destination account, if specified. By default, the entire charge amount is transferred to the destination account.
+     * The amount transferred to the destination account, if specified. By default, the entire
+     * charge amount is transferred to the destination account.
      */
     @SerializedName("amount")
     Long amount;
 
     /**
-     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
@@ -257,23 +292,24 @@ public class ChargeCaptureParams extends ApiRequestParams {
       this.amount = amount;
       this.extraParams = extraParams;
     }
+
     public static Builder builder() {
       return new Builder();
     }
+
     public static class Builder {
       private Long amount;
 
       private Map<String, Object> extraParams;
 
-      /**
-       * Finalize and obtain parameter instance from this builder.
-       */
+      /** Finalize and obtain parameter instance from this builder. */
       public TransferData build() {
         return new TransferData(this.amount, this.extraParams);
       }
 
       /**
-       * The amount transferred to the destination account, if specified. By default, the entire charge amount is transferred to the destination account.
+       * The amount transferred to the destination account, if specified. By default, the entire
+       * charge amount is transferred to the destination account.
        */
       public Builder setAmount(Long amount) {
         this.amount = amount;
@@ -281,7 +317,9 @@ public class ChargeCaptureParams extends ApiRequestParams {
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link ChargeCaptureParams.TransferData#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ChargeCaptureParams.TransferData#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -292,7 +330,9 @@ public class ChargeCaptureParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link ChargeCaptureParams.TransferData#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ChargeCaptureParams.TransferData#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {

@@ -11,80 +11,59 @@ import java.util.Map;
 import lombok.Getter;
 
 public class ExternalAccountUpdateParams extends ApiRequestParams {
-  /**
-   * The name of the person or business that owns the bank account.
-   */
+  /** The name of the person or business that owns the bank account. */
   @SerializedName("account_holder_name")
   String accountHolderName;
 
-  /**
-   * The type of entity that holds the account. This can be either `individual` or `company`.
-   */
+  /** The type of entity that holds the account. This can be either `individual` or `company`. */
   @SerializedName("account_holder_type")
   EnumParam accountHolderType;
 
-  /**
-   * City/District/Suburb/Town/Village.
-   */
+  /** City/District/Suburb/Town/Village. */
   @SerializedName("address_city")
   String addressCity;
 
-  /**
-   * Billing address country, if provided when creating card.
-   */
+  /** Billing address country, if provided when creating card. */
   @SerializedName("address_country")
   String addressCountry;
 
-  /**
-   * Address line 1 (Street address/PO Box/Company name).
-   */
+  /** Address line 1 (Street address/PO Box/Company name). */
   @SerializedName("address_line1")
   String addressLine1;
 
-  /**
-   * Address line 2 (Apartment/Suite/Unit/Building).
-   */
+  /** Address line 2 (Apartment/Suite/Unit/Building). */
   @SerializedName("address_line2")
   String addressLine2;
 
-  /**
-   * State/County/Province/Region.
-   */
+  /** State/County/Province/Region. */
   @SerializedName("address_state")
   String addressState;
 
-  /**
-   * ZIP or postal code.
-   */
+  /** ZIP or postal code. */
   @SerializedName("address_zip")
   String addressZip;
 
-  /**
-   * When set to true, this becomes the default external account for its currency.
-   */
+  /** When set to true, this becomes the default external account for its currency. */
   @SerializedName("default_for_currency")
   Boolean defaultForCurrency;
 
-  /**
-   * Two digit number representing the card’s expiration month.
-   */
+  /** Two digit number representing the card’s expiration month. */
   @SerializedName("exp_month")
   String expMonth;
 
-  /**
-   * Four digit number representing the card’s expiration year.
-   */
+  /** Four digit number representing the card’s expiration year. */
   @SerializedName("exp_year")
   String expYear;
 
-  /**
-   * Specifies which fields in the response should be expanded.
-   */
+  /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
 
   /**
-   * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
@@ -92,9 +71,7 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /**
-   * Cardholder name.
-   */
+  /** Cardholder name. */
   @SerializedName("name")
   String name;
 
@@ -130,9 +107,11 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
     this.metadata = metadata;
     this.name = name;
   }
+
   public static Builder builder() {
     return new Builder();
   }
+
   public static class Builder {
     private String accountHolderName;
 
@@ -164,127 +143,102 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
 
     private String name;
 
-    /**
-     * Finalize and obtain parameter instance from this builder.
-     */
+    /** Finalize and obtain parameter instance from this builder. */
     public ExternalAccountUpdateParams build() {
       return new ExternalAccountUpdateParams(
-        this.accountHolderName,
-        this.accountHolderType,
-        this.addressCity,
-        this.addressCountry,
-        this.addressLine1,
-        this.addressLine2,
-        this.addressState,
-        this.addressZip,
-        this.defaultForCurrency,
-        this.expMonth,
-        this.expYear,
-        this.expand,
-        this.extraParams,
-        this.metadata,
-        this.name
-      );
+          this.accountHolderName,
+          this.accountHolderType,
+          this.addressCity,
+          this.addressCountry,
+          this.addressLine1,
+          this.addressLine2,
+          this.addressState,
+          this.addressZip,
+          this.defaultForCurrency,
+          this.expMonth,
+          this.expYear,
+          this.expand,
+          this.extraParams,
+          this.metadata,
+          this.name);
     }
 
-    /**
-     * The name of the person or business that owns the bank account.
-     */
+    /** The name of the person or business that owns the bank account. */
     public Builder setAccountHolderName(String accountHolderName) {
       this.accountHolderName = accountHolderName;
       return this;
     }
 
-    /**
-     * The type of entity that holds the account. This can be either `individual` or `company`.
-     */
+    /** The type of entity that holds the account. This can be either `individual` or `company`. */
     public Builder setAccountHolderType(EmptyParam accountHolderType) {
       this.accountHolderType = accountHolderType;
       return this;
     }
 
-    /**
-     * The type of entity that holds the account. This can be either `individual` or `company`.
-     */
+    /** The type of entity that holds the account. This can be either `individual` or `company`. */
     public Builder setAccountHolderType(AccountHolderType accountHolderType) {
       this.accountHolderType = accountHolderType;
       return this;
     }
 
-    /**
-     * City/District/Suburb/Town/Village.
-     */
+    /** City/District/Suburb/Town/Village. */
     public Builder setAddressCity(String addressCity) {
       this.addressCity = addressCity;
       return this;
     }
 
-    /**
-     * Billing address country, if provided when creating card.
-     */
+    /** Billing address country, if provided when creating card. */
     public Builder setAddressCountry(String addressCountry) {
       this.addressCountry = addressCountry;
       return this;
     }
 
-    /**
-     * Address line 1 (Street address/PO Box/Company name).
-     */
+    /** Address line 1 (Street address/PO Box/Company name). */
     public Builder setAddressLine1(String addressLine1) {
       this.addressLine1 = addressLine1;
       return this;
     }
 
-    /**
-     * Address line 2 (Apartment/Suite/Unit/Building).
-     */
+    /** Address line 2 (Apartment/Suite/Unit/Building). */
     public Builder setAddressLine2(String addressLine2) {
       this.addressLine2 = addressLine2;
       return this;
     }
 
-    /**
-     * State/County/Province/Region.
-     */
+    /** State/County/Province/Region. */
     public Builder setAddressState(String addressState) {
       this.addressState = addressState;
       return this;
     }
 
-    /**
-     * ZIP or postal code.
-     */
+    /** ZIP or postal code. */
     public Builder setAddressZip(String addressZip) {
       this.addressZip = addressZip;
       return this;
     }
 
-    /**
-     * When set to true, this becomes the default external account for its currency.
-     */
+    /** When set to true, this becomes the default external account for its currency. */
     public Builder setDefaultForCurrency(Boolean defaultForCurrency) {
       this.defaultForCurrency = defaultForCurrency;
       return this;
     }
 
-    /**
-     * Two digit number representing the card’s expiration month.
-     */
+    /** Two digit number representing the card’s expiration month. */
     public Builder setExpMonth(String expMonth) {
       this.expMonth = expMonth;
       return this;
     }
 
-    /**
-     * Four digit number representing the card’s expiration year.
-     */
+    /** Four digit number representing the card’s expiration year. */
     public Builder setExpYear(String expYear) {
       this.expYear = expYear;
       return this;
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link ExternalAccountUpdateParams#expand} for the field documentation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * ExternalAccountUpdateParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -295,7 +249,9 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link ExternalAccountUpdateParams#expand} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * ExternalAccountUpdateParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -306,7 +262,9 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link ExternalAccountUpdateParams#extraParams} for the field documentation.
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * ExternalAccountUpdateParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -317,7 +275,9 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link ExternalAccountUpdateParams#extraParams} for the field documentation.
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link ExternalAccountUpdateParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -328,7 +288,9 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link ExternalAccountUpdateParams#metadata} for the field documentation.
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
+     * ExternalAccountUpdateParams#metadata} for the field documentation.
      */
     public Builder putMetadata(String key, String value) {
       if (this.metadata == null) {
@@ -339,7 +301,9 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link ExternalAccountUpdateParams#metadata} for the field documentation.
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link ExternalAccountUpdateParams#metadata} for the field documentation.
      */
     public Builder putAllMetadata(Map<String, String> map) {
       if (this.metadata == null) {
@@ -349,25 +313,25 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * Cardholder name.
-     */
+    /** Cardholder name. */
     public Builder setName(String name) {
       this.name = name;
       return this;
     }
   }
+
   public enum AccountHolderType implements ApiRequestParams.EnumParam {
     @SerializedName("company")
     COMPANY("company"),
 
     @SerializedName("individual")
     INDIVIDUAL("individual");
+
     @Getter(onMethod_ = {@Override})
     private final String value;
+
     AccountHolderType(String value) {
       this.value = value;
     }
-
   }
 }

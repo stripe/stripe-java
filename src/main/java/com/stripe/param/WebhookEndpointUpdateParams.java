@@ -2,7 +2,6 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
-import com.stripe.net.ApiRequestParams.EnumParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,9 +9,7 @@ import java.util.Map;
 import lombok.Getter;
 
 public class WebhookEndpointUpdateParams extends ApiRequestParams {
-  /**
-   * Disable the webhook endpoint if set to true.
-   */
+  /** Disable the webhook endpoint if set to true. */
   @SerializedName("disabled")
   Boolean disabled;
 
@@ -22,21 +19,20 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
   @SerializedName("enabled_events")
   List<EnabledEvent> enabledEvents;
 
-  /**
-   * Specifies which fields in the response should be expanded.
-   */
+  /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
 
   /**
-   * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /**
-   * The URL of the webhook endpoint.
-   */
+  /** The URL of the webhook endpoint. */
   @SerializedName("url")
   String url;
 
@@ -52,9 +48,11 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.url = url;
   }
+
   public static Builder builder() {
     return new Builder();
   }
+
   public static class Builder {
     private Boolean disabled;
 
@@ -66,29 +64,22 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
 
     private String url;
 
-    /**
-     * Finalize and obtain parameter instance from this builder.
-     */
+    /** Finalize and obtain parameter instance from this builder. */
     public WebhookEndpointUpdateParams build() {
       return new WebhookEndpointUpdateParams(
-        this.disabled,
-        this.enabledEvents,
-        this.expand,
-        this.extraParams,
-        this.url
-      );
+          this.disabled, this.enabledEvents, this.expand, this.extraParams, this.url);
     }
 
-    /**
-     * Disable the webhook endpoint if set to true.
-     */
+    /** Disable the webhook endpoint if set to true. */
     public Builder setDisabled(Boolean disabled) {
       this.disabled = disabled;
       return this;
     }
 
     /**
-     * Add an element to `enabledEvents` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link WebhookEndpointUpdateParams#enabledEvents} for the field documentation.
+     * Add an element to `enabledEvents` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * WebhookEndpointUpdateParams#enabledEvents} for the field documentation.
      */
     public Builder addEnabledEvent(EnabledEvent element) {
       if (this.enabledEvents == null) {
@@ -99,7 +90,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `enabledEvents` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link WebhookEndpointUpdateParams#enabledEvents} for the field documentation.
+     * Add all elements to `enabledEvents` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * WebhookEndpointUpdateParams#enabledEvents} for the field documentation.
      */
     public Builder addAllEnabledEvent(List<EnabledEvent> elements) {
       if (this.enabledEvents == null) {
@@ -110,7 +103,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link WebhookEndpointUpdateParams#expand} for the field documentation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * WebhookEndpointUpdateParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -121,7 +116,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link WebhookEndpointUpdateParams#expand} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * WebhookEndpointUpdateParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -132,7 +129,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link WebhookEndpointUpdateParams#extraParams} for the field documentation.
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * WebhookEndpointUpdateParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -143,7 +142,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link WebhookEndpointUpdateParams#extraParams} for the field documentation.
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link WebhookEndpointUpdateParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -153,14 +154,13 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * The URL of the webhook endpoint.
-     */
+    /** The URL of the webhook endpoint. */
     public Builder setUrl(String url) {
       this.url = url;
       return this;
     }
   }
+
   public enum EnabledEvent implements ApiRequestParams.EnumParam {
     @SerializedName("*")
     ALL("*"),
@@ -602,11 +602,12 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
 
     @SerializedName("transfer.updated")
     TRANSFER__UPDATED("transfer.updated");
+
     @Getter(onMethod_ = {@Override})
     private final String value;
+
     EnabledEvent(String value) {
       this.value = value;
     }
-
   }
 }

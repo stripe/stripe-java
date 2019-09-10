@@ -1,8 +1,5 @@
 package com.stripe.model.radar;
 
 import com.stripe.model.StripeCollection;
-import com.stripe.net.ApiResource;
 
-public class ValueListItemCollection extends StripeCollection<ValueListItem> {
-
-}
+public class ValueListItemCollection extends StripeCollection<ValueListItem> {}

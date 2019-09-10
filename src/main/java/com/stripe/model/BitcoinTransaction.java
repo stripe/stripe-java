@@ -9,46 +9,35 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class BitcoinTransaction extends StripeObject implements HasId {
-  /**
-   * The amount of `currency` that the transaction was converted to in real-time.
-   */
+  /** The amount of `currency` that the transaction was converted to in real-time. */
   @SerializedName("amount")
   Long amount;
 
-  /**
-   * The amount of bitcoin contained in the transaction.
-   */
+  /** The amount of bitcoin contained in the transaction. */
   @SerializedName("bitcoin_amount")
   Long bitcoinAmount;
 
-  /**
-   * Time at which the object was created. Measured in seconds since the Unix epoch.
-   */
+  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
 
   /**
-   * Three-letter [ISO code for the currency](https://stripe.com/docs/currencies) to which this transaction was converted.
+   * Three-letter [ISO code for the currency](https://stripe.com/docs/currencies) to which this
+   * transaction was converted.
    */
   @SerializedName("currency")
   String currency;
 
-  /**
-   * Unique identifier for the object.
-   */
+  /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
-  /**
-   * String representing the object's type. Objects of the same type share the same value.
-   */
+  /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
   String object;
 
-  /**
-   * The receiver to which this transaction was sent.
-   */
+  /** The receiver to which this transaction was sent. */
   @SerializedName("receiver")
   String receiver;
 }

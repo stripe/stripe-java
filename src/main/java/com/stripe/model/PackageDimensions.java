@@ -10,27 +10,19 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class PackageDimensions extends StripeObject {
-  /**
-   * Height, in inches.
-   */
+  /** Height, in inches. */
   @SerializedName("height")
   BigDecimal height;
 
-  /**
-   * Length, in inches.
-   */
+  /** Length, in inches. */
   @SerializedName("length")
   BigDecimal length;
 
-  /**
-   * Weight, in ounces.
-   */
+  /** Weight, in ounces. */
   @SerializedName("weight")
   BigDecimal weight;
 
-  /**
-   * Width, in inches.
-   */
+  /** Width, in inches. */
   @SerializedName("width")
   BigDecimal width;
 }

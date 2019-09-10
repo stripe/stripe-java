@@ -9,62 +9,74 @@ import java.util.Map;
 
 public class RecipientCreateParams extends ApiRequestParams {
   /**
-   * A bank account to attach to the recipient. You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a user's bank account details, with the options described below.
+   * A bank account to attach to the recipient. You can provide either a token, like the ones
+   * returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a user's
+   * bank account details, with the options described below.
    */
   @SerializedName("bank_account")
   String bankAccount;
 
   /**
-   * A U.S. Visa or MasterCard debit card (_not_ prepaid) to attach to the recipient. If the debit card is not valid, recipient creation will fail. You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a user's debit card details, with the options described below. Although not all information is required, the extra info helps prevent fraud.
+   * A U.S. Visa or MasterCard debit card (_not_ prepaid) to attach to the recipient. If the debit
+   * card is not valid, recipient creation will fail. You can provide either a token, like the ones
+   * returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a user's
+   * debit card details, with the options described below. Although not all information is required,
+   * the extra info helps prevent fraud.
    */
   @SerializedName("card")
   String card;
 
   /**
-   * An arbitrary string which you can attach to a `Recipient` object. It is displayed alongside the recipient in the web interface.
+   * An arbitrary string which you can attach to a `Recipient` object. It is displayed alongside the
+   * recipient in the web interface.
    */
   @SerializedName("description")
   String description;
 
   /**
-   * The recipient's email address. It is displayed alongside the recipient in the web interface, and can be useful for searching and tracking.
+   * The recipient's email address. It is displayed alongside the recipient in the web interface,
+   * and can be useful for searching and tracking.
    */
   @SerializedName("email")
   String email;
 
-  /**
-   * Specifies which fields in the response should be expanded.
-   */
+  /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
 
   /**
-   * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
   /**
-   * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * Set of key-value pairs that you can attach to an object. This can be useful for storing
+   * additional information about the object in a structured format. Individual keys can be unset by
+   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
   /**
-   * The recipient's full, legal name. For type `individual`, should be in the format `First Last`, `First Middle Last`, or `First M Last` (no prefixes or suffixes). For `corporation`, the full, incorporated name.
+   * The recipient's full, legal name. For type `individual`, should be in the format `First Last`,
+   * `First Middle Last`, or `First M Last` (no prefixes or suffixes). For `corporation`, the full,
+   * incorporated name.
    */
   @SerializedName("name")
   String name;
 
   /**
-   * The recipient's tax ID, as a string. For type `individual`, the full SSN; for type `corporation`, the full EIN.
+   * The recipient's tax ID, as a string. For type `individual`, the full SSN; for type
+   * `corporation`, the full EIN.
    */
   @SerializedName("tax_id")
   String taxId;
 
-  /**
-   * Type of the recipient: either `individual` or `corporation`.
-   */
+  /** Type of the recipient: either `individual` or `corporation`. */
   @SerializedName("type")
   String type;
 
@@ -90,9 +102,11 @@ public class RecipientCreateParams extends ApiRequestParams {
     this.taxId = taxId;
     this.type = type;
   }
+
   public static Builder builder() {
     return new Builder();
   }
+
   public static class Builder {
     private String bankAccount;
 
@@ -114,26 +128,25 @@ public class RecipientCreateParams extends ApiRequestParams {
 
     private String type;
 
-    /**
-     * Finalize and obtain parameter instance from this builder.
-     */
+    /** Finalize and obtain parameter instance from this builder. */
     public RecipientCreateParams build() {
       return new RecipientCreateParams(
-        this.bankAccount,
-        this.card,
-        this.description,
-        this.email,
-        this.expand,
-        this.extraParams,
-        this.metadata,
-        this.name,
-        this.taxId,
-        this.type
-      );
+          this.bankAccount,
+          this.card,
+          this.description,
+          this.email,
+          this.expand,
+          this.extraParams,
+          this.metadata,
+          this.name,
+          this.taxId,
+          this.type);
     }
 
     /**
-     * A bank account to attach to the recipient. You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a user's bank account details, with the options described below.
+     * A bank account to attach to the recipient. You can provide either a token, like the ones
+     * returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a
+     * user's bank account details, with the options described below.
      */
     public Builder setBankAccount(String bankAccount) {
       this.bankAccount = bankAccount;
@@ -141,7 +154,11 @@ public class RecipientCreateParams extends ApiRequestParams {
     }
 
     /**
-     * A U.S. Visa or MasterCard debit card (_not_ prepaid) to attach to the recipient. If the debit card is not valid, recipient creation will fail. You can provide either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a user's debit card details, with the options described below. Although not all information is required, the extra info helps prevent fraud.
+     * A U.S. Visa or MasterCard debit card (_not_ prepaid) to attach to the recipient. If the debit
+     * card is not valid, recipient creation will fail. You can provide either a token, like the
+     * ones returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a
+     * user's debit card details, with the options described below. Although not all information is
+     * required, the extra info helps prevent fraud.
      */
     public Builder setCard(String card) {
       this.card = card;
@@ -149,7 +166,8 @@ public class RecipientCreateParams extends ApiRequestParams {
     }
 
     /**
-     * An arbitrary string which you can attach to a `Recipient` object. It is displayed alongside the recipient in the web interface.
+     * An arbitrary string which you can attach to a `Recipient` object. It is displayed alongside
+     * the recipient in the web interface.
      */
     public Builder setDescription(String description) {
       this.description = description;
@@ -157,7 +175,8 @@ public class RecipientCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The recipient's email address. It is displayed alongside the recipient in the web interface, and can be useful for searching and tracking.
+     * The recipient's email address. It is displayed alongside the recipient in the web interface,
+     * and can be useful for searching and tracking.
      */
     public Builder setEmail(String email) {
       this.email = email;
@@ -165,7 +184,9 @@ public class RecipientCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link RecipientCreateParams#expand} for the field documentation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * RecipientCreateParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -176,7 +197,9 @@ public class RecipientCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link RecipientCreateParams#expand} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * RecipientCreateParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -187,7 +210,9 @@ public class RecipientCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link RecipientCreateParams#extraParams} for the field documentation.
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * RecipientCreateParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -198,7 +223,9 @@ public class RecipientCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link RecipientCreateParams#extraParams} for the field documentation.
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link RecipientCreateParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -209,7 +236,9 @@ public class RecipientCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link RecipientCreateParams#metadata} for the field documentation.
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
+     * RecipientCreateParams#metadata} for the field documentation.
      */
     public Builder putMetadata(String key, String value) {
       if (this.metadata == null) {
@@ -220,7 +249,9 @@ public class RecipientCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link RecipientCreateParams#metadata} for the field documentation.
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link RecipientCreateParams#metadata} for the field documentation.
      */
     public Builder putAllMetadata(Map<String, String> map) {
       if (this.metadata == null) {
@@ -231,7 +262,9 @@ public class RecipientCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The recipient's full, legal name. For type `individual`, should be in the format `First Last`, `First Middle Last`, or `First M Last` (no prefixes or suffixes). For `corporation`, the full, incorporated name.
+     * The recipient's full, legal name. For type `individual`, should be in the format `First
+     * Last`, `First Middle Last`, or `First M Last` (no prefixes or suffixes). For `corporation`,
+     * the full, incorporated name.
      */
     public Builder setName(String name) {
       this.name = name;
@@ -239,16 +272,15 @@ public class RecipientCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The recipient's tax ID, as a string. For type `individual`, the full SSN; for type `corporation`, the full EIN.
+     * The recipient's tax ID, as a string. For type `individual`, the full SSN; for type
+     * `corporation`, the full EIN.
      */
     public Builder setTaxId(String taxId) {
       this.taxId = taxId;
       return this;
     }
 
-    /**
-     * Type of the recipient: either `individual` or `corporation`.
-     */
+    /** Type of the recipient: either `individual` or `corporation`. */
     public Builder setType(String type) {
       this.type = type;
       return this;

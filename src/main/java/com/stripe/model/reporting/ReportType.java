@@ -19,144 +19,135 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class ReportType extends ApiResource implements HasId {
   /**
-   * Most recent time for which this Report Type is available. Measured in seconds since the Unix epoch.
+   * Most recent time for which this Report Type is available. Measured in seconds since the Unix
+   * epoch.
    */
   @SerializedName("data_available_end")
   Long dataAvailableEnd;
 
   /**
-   * Earliest time for which this Report Type is available. Measured in seconds since the Unix epoch.
+   * Earliest time for which this Report Type is available. Measured in seconds since the Unix
+   * epoch.
    */
   @SerializedName("data_available_start")
   Long dataAvailableStart;
 
   /**
-   * List of column names that are included by default when this Report Type gets run. (If the Report Type doesn't support the `columns` parameter, this will be null.)
+   * List of column names that are included by default when this Report Type gets run. (If the
+   * Report Type doesn't support the `columns` parameter, this will be null.)
    */
   @SerializedName("default_columns")
   List<String> defaultColumns;
 
   /**
-   * The [ID of the Report Type](https://stripe.com/docs/reporting/statements/api#available-report-types), such as `balance.summary.1`.
+   * The [ID of the Report
+   * Type](https://stripe.com/docs/reporting/statements/api#available-report-types), such as
+   * `balance.summary.1`.
    */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
-  /**
-   * Human-readable name of the Report Type.
-   */
+  /** Human-readable name of the Report Type. */
   @SerializedName("name")
   String name;
 
-  /**
-   * String representing the object's type. Objects of the same type share the same value.
-   */
+  /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
   String object;
 
-  /**
-   * When this Report Type was latest updated. Measured in seconds since the Unix epoch.
-   */
+  /** When this Report Type was latest updated. Measured in seconds since the Unix epoch. */
   @SerializedName("updated")
   Long updated;
 
   /**
-   * Version of the Report Type. Different versions report with the same ID will have the same purpose, but may take different run parameters or have different result schemas.
+   * Version of the Report Type. Different versions report with the same ID will have the same
+   * purpose, but may take different run parameters or have different result schemas.
    */
   @SerializedName("version")
   Long version;
 
   /**
-   * <p>Retrieves the details of a Report Type. (Requires a <a href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)</p>
+   * Retrieves the details of a Report Type. (Requires a <a
+   * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
    */
   public static ReportType retrieve(String reportType) throws StripeException {
     return retrieve(reportType, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * <p>Retrieves the details of a Report Type. (Requires a <a href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)</p>
+   * Retrieves the details of a Report Type. (Requires a <a
+   * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
    */
-  public static ReportType retrieve(
-      String reportType,
-      RequestOptions options) throws StripeException {
+  public static ReportType retrieve(String reportType, RequestOptions options)
+      throws StripeException {
     return retrieve(reportType, (Map<String, Object>) null, options);
   }
 
   /**
-   * <p>Retrieves the details of a Report Type. (Requires a <a href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)</p>
+   * Retrieves the details of a Report Type. (Requires a <a
+   * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
    */
   public static ReportType retrieve(
-      String reportType,
-      Map<String, Object> params,
-      RequestOptions options) throws StripeException {
+      String reportType, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("/v1/reporting/report_types/%s", ApiResource.urlEncodeId(reportType))
-      );
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/reporting/report_types/%s", ApiResource.urlEncodeId(reportType)));
     return ApiResource.request(
-      ApiResource.RequestMethod.GET,
-      url,
-      params,
-      ReportType.class,
-      options
-    );
+        ApiResource.RequestMethod.GET, url, params, ReportType.class, options);
   }
 
   /**
-   * <p>Retrieves the details of a Report Type. (Requires a <a href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)</p>
+   * Retrieves the details of a Report Type. (Requires a <a
+   * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
    */
   public static ReportType retrieve(
-      String reportType,
-      ReportTypeRetrieveParams params,
-      RequestOptions options) throws StripeException {
+      String reportType, ReportTypeRetrieveParams params, RequestOptions options)
+      throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("/v1/reporting/report_types/%s", ApiResource.urlEncodeId(reportType))
-      );
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/reporting/report_types/%s", ApiResource.urlEncodeId(reportType)));
     return ApiResource.request(
-      ApiResource.RequestMethod.GET,
-      url,
-      params,
-      ReportType.class,
-      options
-    );
+        ApiResource.RequestMethod.GET, url, params, ReportType.class, options);
   }
 
   /**
-   * <p>Returns a full list of Report Types. (Requires a <a href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)</p>
+   * Returns a full list of Report Types. (Requires a <a
+   * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
    */
   public static ReportTypeCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * <p>Returns a full list of Report Types. (Requires a <a href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)</p>
+   * Returns a full list of Report Types. (Requires a <a
+   * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
    */
-  public static ReportTypeCollection list(
-      Map<String, Object> params,
-      RequestOptions options) throws StripeException {
+  public static ReportTypeCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/reporting/report_types");
     return ApiResource.requestCollection(url, params, ReportTypeCollection.class, options);
   }
 
   /**
-   * <p>Returns a full list of Report Types. (Requires a <a href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)</p>
+   * Returns a full list of Report Types. (Requires a <a
+   * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
    */
   public static ReportTypeCollection list(ReportTypeListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * <p>Returns a full list of Report Types. (Requires a <a href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)</p>
+   * Returns a full list of Report Types. (Requires a <a
+   * href="https://stripe.com/docs/keys#test-live-modes">live-mode API key</a>.)
    */
-  public static ReportTypeCollection list(
-      ReportTypeListParams params,
-      RequestOptions options) throws StripeException {
+  public static ReportTypeCollection list(ReportTypeListParams params, RequestOptions options)
+      throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/reporting/report_types");
     return ApiResource.requestCollection(url, params, ReportTypeCollection.class, options);
   }

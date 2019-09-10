@@ -19,179 +19,126 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class ScheduledQueryRun extends ApiResource implements HasId {
-  /**
-   * Time at which the object was created. Measured in seconds since the Unix epoch.
-   */
+  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
 
-  /**
-   * When the query was run, Sigma contained a snapshot of your Stripe data at this time.
-   */
+  /** When the query was run, Sigma contained a snapshot of your Stripe data at this time. */
   @SerializedName("data_load_time")
   Long dataLoadTime;
 
   @SerializedName("error")
   RunError error;
 
-  /**
-   * The file object representing the results of the query.
-   */
+  /** The file object representing the results of the query. */
   @SerializedName("file")
   File file;
 
-  /**
-   * Unique identifier for the object.
-   */
+  /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+   * Has the value `true` if the object exists in live mode or the value `false` if the object
+   * exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
 
-  /**
-   * String representing the object's type. Objects of the same type share the same value.
-   */
+  /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
   String object;
 
-  /**
-   * Time at which the result expires and is no longer available for download.
-   */
+  /** Time at which the result expires and is no longer available for download. */
   @SerializedName("result_available_until")
   Long resultAvailableUntil;
 
-  /**
-   * SQL for the query.
-   */
+  /** SQL for the query. */
   @SerializedName("sql")
   String sql;
 
   /**
-   * The query's execution status, which will be `completed` for successful runs, and `canceled`, `failed`, or `timed_out` otherwise.
+   * The query's execution status, which will be `completed` for successful runs, and `canceled`,
+   * `failed`, or `timed_out` otherwise.
    */
   @SerializedName("status")
   String status;
 
-  /**
-   * Title of the query.
-   */
+  /** Title of the query. */
   @SerializedName("title")
   String title;
 
-  /**
-   * <p>Returns a list of scheduled query runs.</p>
-   */
-  public static ScheduledQueryRunCollection list(
-      Map<String, Object> params) throws StripeException {
+  /** Returns a list of scheduled query runs. */
+  public static ScheduledQueryRunCollection list(Map<String, Object> params)
+      throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /**
-   * <p>Returns a list of scheduled query runs.</p>
-   */
-  public static ScheduledQueryRunCollection list(
-      Map<String, Object> params,
-      RequestOptions options) throws StripeException {
+  /** Returns a list of scheduled query runs. */
+  public static ScheduledQueryRunCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/sigma/scheduled_query_runs");
     return ApiResource.requestCollection(url, params, ScheduledQueryRunCollection.class, options);
   }
 
-  /**
-   * <p>Returns a list of scheduled query runs.</p>
-   */
-  public static ScheduledQueryRunCollection list(
-      ScheduledQueryRunListParams params) throws StripeException {
+  /** Returns a list of scheduled query runs. */
+  public static ScheduledQueryRunCollection list(ScheduledQueryRunListParams params)
+      throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /**
-   * <p>Returns a list of scheduled query runs.</p>
-   */
+  /** Returns a list of scheduled query runs. */
   public static ScheduledQueryRunCollection list(
-      ScheduledQueryRunListParams params,
-      RequestOptions options) throws StripeException {
+      ScheduledQueryRunListParams params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/sigma/scheduled_query_runs");
     return ApiResource.requestCollection(url, params, ScheduledQueryRunCollection.class, options);
   }
 
-  /**
-   * <p>Retrieves the details of an scheduled query run.</p>
-   */
+  /** Retrieves the details of an scheduled query run. */
   public static ScheduledQueryRun retrieve(String scheduledQueryRun) throws StripeException {
     return retrieve(scheduledQueryRun, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /**
-   * <p>Retrieves the details of an scheduled query run.</p>
-   */
-  public static ScheduledQueryRun retrieve(
-      String scheduledQueryRun,
-      RequestOptions options) throws StripeException {
+  /** Retrieves the details of an scheduled query run. */
+  public static ScheduledQueryRun retrieve(String scheduledQueryRun, RequestOptions options)
+      throws StripeException {
     return retrieve(scheduledQueryRun, (Map<String, Object>) null, options);
   }
 
-  /**
-   * <p>Retrieves the details of an scheduled query run.</p>
-   */
+  /** Retrieves the details of an scheduled query run. */
   public static ScheduledQueryRun retrieve(
-      String scheduledQueryRun,
-      Map<String, Object> params,
-      RequestOptions options) throws StripeException {
+      String scheduledQueryRun, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
         String.format(
-          "/v1/sigma/scheduled_query_runs/%s",
-          ApiResource.urlEncodeId(scheduledQueryRun)
-        )
-      );
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/sigma/scheduled_query_runs/%s", ApiResource.urlEncodeId(scheduledQueryRun)));
     return ApiResource.request(
-      ApiResource.RequestMethod.GET,
-      url,
-      params,
-      ScheduledQueryRun.class,
-      options
-    );
+        ApiResource.RequestMethod.GET, url, params, ScheduledQueryRun.class, options);
   }
 
-  /**
-   * <p>Retrieves the details of an scheduled query run.</p>
-   */
+  /** Retrieves the details of an scheduled query run. */
   public static ScheduledQueryRun retrieve(
-      String scheduledQueryRun,
-      ScheduledQueryRunRetrieveParams params,
-      RequestOptions options) throws StripeException {
+      String scheduledQueryRun, ScheduledQueryRunRetrieveParams params, RequestOptions options)
+      throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
         String.format(
-          "/v1/sigma/scheduled_query_runs/%s",
-          ApiResource.urlEncodeId(scheduledQueryRun)
-        )
-      );
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/sigma/scheduled_query_runs/%s", ApiResource.urlEncodeId(scheduledQueryRun)));
     return ApiResource.request(
-      ApiResource.RequestMethod.GET,
-      url,
-      params,
-      ScheduledQueryRun.class,
-      options
-    );
+        ApiResource.RequestMethod.GET, url, params, ScheduledQueryRun.class, options);
   }
 
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class RunError extends StripeObject {
-    /**
-     * Information about the run failure.
-     */
+    /** Information about the run failure. */
     @SerializedName("message")
     String message;
   }

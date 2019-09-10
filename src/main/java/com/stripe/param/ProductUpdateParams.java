@@ -10,93 +10,94 @@ import java.util.List;
 import java.util.Map;
 
 public class ProductUpdateParams extends ApiRequestParams {
-  /**
-   * Whether the product is available for purchase.
-   */
+  /** Whether the product is available for purchase. */
   @SerializedName("active")
   Boolean active;
 
   /**
-   * A list of up to 5 alphanumeric attributes that each SKU can provide values for (e.g., `["color", "size"]`). If a value for `attributes` is specified, the list specified will replace the existing attributes list on this product. Any attributes not present after the update will be deleted from the SKUs for this product.
+   * A list of up to 5 alphanumeric attributes that each SKU can provide values for (e.g.,
+   * `["color", "size"]`). If a value for `attributes` is specified, the list specified will replace
+   * the existing attributes list on this product. Any attributes not present after the update will
+   * be deleted from the SKUs for this product.
    */
   @SerializedName("attributes")
   Object attributes;
 
-  /**
-   * A short one-line description of the product, meant to be displayable to the customer.
-   */
+  /** A short one-line description of the product, meant to be displayable to the customer. */
   @SerializedName("caption")
   String caption;
 
   /**
-   * An array of Connect application names or identifiers that should not be able to order the SKUs for this product.
+   * An array of Connect application names or identifiers that should not be able to order the SKUs
+   * for this product.
    */
   @SerializedName("deactivate_on")
   List<String> deactivateOn;
 
-  /**
-   * The product's description, meant to be displayable to the customer.
-   */
+  /** The product's description, meant to be displayable to the customer. */
   @SerializedName("description")
   String description;
 
-  /**
-   * Specifies which fields in the response should be expanded.
-   */
+  /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
 
   /**
-   * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /**
-   * A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
-   */
+  /** A list of up to 8 URLs of images for this product, meant to be displayable to the customer. */
   @SerializedName("images")
   Object images;
 
   /**
-   * A set of key-value pairs that you can attach to a product object. It can be useful for storing additional information about the product in a structured format.
+   * A set of key-value pairs that you can attach to a product object. It can be useful for storing
+   * additional information about the product in a structured format.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
   /**
-   * The product's name, meant to be displayable to the customer. Applicable to both `service` and `good` types.
+   * The product's name, meant to be displayable to the customer. Applicable to both `service` and
+   * `good` types.
    */
   @SerializedName("name")
   String name;
 
   /**
-   * The dimensions of this product for shipping purposes. A SKU associated with this product can override this value by having its own `package_dimensions`.
+   * The dimensions of this product for shipping purposes. A SKU associated with this product can
+   * override this value by having its own `package_dimensions`.
    */
   @SerializedName("package_dimensions")
   Object packageDimensions;
 
-  /**
-   * Whether this product is shipped (i.e., physical goods). Defaults to `true`.
-   */
+  /** Whether this product is shipped (i.e., physical goods). Defaults to `true`. */
   @SerializedName("shippable")
   Boolean shippable;
 
   /**
-   * An arbitrary string to be displayed on your customer's credit card statement. This may be up to 22 characters. The statement description may not include "' characters, and will appear on your customer's statement in capital letters. Non-ASCII characters are automatically stripped. While most banks display this information consistently, some may display it incorrectly or not at all. It must contain at least one letter. May only be set if type=`service`.
+   * An arbitrary string to be displayed on your customer's credit card statement. This may be up to
+   * 22 characters. The statement description may not include "' characters, and will appear on your
+   * customer's statement in capital letters. Non-ASCII characters are automatically stripped. While
+   * most banks display this information consistently, some may display it incorrectly or not at
+   * all. It must contain at least one letter. May only be set if type=`service`.
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
 
   /**
-   * A label that represents units of this product, such as seat(s), in Stripe and on customers’ receipts and invoices. Only available on products of type=`service`.
+   * A label that represents units of this product, such as seat(s), in Stripe and on customers’
+   * receipts and invoices. Only available on products of type=`service`.
    */
   @SerializedName("unit_label")
   String unitLabel;
 
-  /**
-   * A URL of a publicly-accessible webpage for this product.
-   */
+  /** A URL of a publicly-accessible webpage for this product. */
   @SerializedName("url")
   String url;
 
@@ -132,9 +133,11 @@ public class ProductUpdateParams extends ApiRequestParams {
     this.unitLabel = unitLabel;
     this.url = url;
   }
+
   public static Builder builder() {
     return new Builder();
   }
+
   public static class Builder {
     private Boolean active;
 
@@ -166,39 +169,37 @@ public class ProductUpdateParams extends ApiRequestParams {
 
     private String url;
 
-    /**
-     * Finalize and obtain parameter instance from this builder.
-     */
+    /** Finalize and obtain parameter instance from this builder. */
     public ProductUpdateParams build() {
       return new ProductUpdateParams(
-        this.active,
-        this.attributes,
-        this.caption,
-        this.deactivateOn,
-        this.description,
-        this.expand,
-        this.extraParams,
-        this.images,
-        this.metadata,
-        this.name,
-        this.packageDimensions,
-        this.shippable,
-        this.statementDescriptor,
-        this.unitLabel,
-        this.url
-      );
+          this.active,
+          this.attributes,
+          this.caption,
+          this.deactivateOn,
+          this.description,
+          this.expand,
+          this.extraParams,
+          this.images,
+          this.metadata,
+          this.name,
+          this.packageDimensions,
+          this.shippable,
+          this.statementDescriptor,
+          this.unitLabel,
+          this.url);
     }
 
-    /**
-     * Whether the product is available for purchase.
-     */
+    /** Whether the product is available for purchase. */
     public Builder setActive(Boolean active) {
       this.active = active;
       return this;
     }
 
     /**
-     * A list of up to 5 alphanumeric attributes that each SKU can provide values for (e.g., `["color", "size"]`). If a value for `attributes` is specified, the list specified will replace the existing attributes list on this product. Any attributes not present after the update will be deleted from the SKUs for this product.
+     * A list of up to 5 alphanumeric attributes that each SKU can provide values for (e.g.,
+     * `["color", "size"]`). If a value for `attributes` is specified, the list specified will
+     * replace the existing attributes list on this product. Any attributes not present after the
+     * update will be deleted from the SKUs for this product.
      */
     public Builder setAttributes(List<String> attributes) {
       this.attributes = attributes;
@@ -206,23 +207,26 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * A list of up to 5 alphanumeric attributes that each SKU can provide values for (e.g., `["color", "size"]`). If a value for `attributes` is specified, the list specified will replace the existing attributes list on this product. Any attributes not present after the update will be deleted from the SKUs for this product.
+     * A list of up to 5 alphanumeric attributes that each SKU can provide values for (e.g.,
+     * `["color", "size"]`). If a value for `attributes` is specified, the list specified will
+     * replace the existing attributes list on this product. Any attributes not present after the
+     * update will be deleted from the SKUs for this product.
      */
     public Builder setAttributes(EmptyParam attributes) {
       this.attributes = attributes;
       return this;
     }
 
-    /**
-     * A short one-line description of the product, meant to be displayable to the customer.
-     */
+    /** A short one-line description of the product, meant to be displayable to the customer. */
     public Builder setCaption(String caption) {
       this.caption = caption;
       return this;
     }
 
     /**
-     * Add an element to `deactivateOn` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link ProductUpdateParams#deactivateOn} for the field documentation.
+     * Add an element to `deactivateOn` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * ProductUpdateParams#deactivateOn} for the field documentation.
      */
     public Builder addDeactivateOn(String element) {
       if (this.deactivateOn == null) {
@@ -233,7 +237,9 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `deactivateOn` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link ProductUpdateParams#deactivateOn} for the field documentation.
+     * Add all elements to `deactivateOn` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * ProductUpdateParams#deactivateOn} for the field documentation.
      */
     public Builder addAllDeactivateOn(List<String> elements) {
       if (this.deactivateOn == null) {
@@ -243,16 +249,16 @@ public class ProductUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * The product's description, meant to be displayable to the customer.
-     */
+    /** The product's description, meant to be displayable to the customer. */
     public Builder setDescription(String description) {
       this.description = description;
       return this;
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link ProductUpdateParams#expand} for the field documentation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * ProductUpdateParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -263,7 +269,9 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link ProductUpdateParams#expand} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * ProductUpdateParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -274,7 +282,9 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link ProductUpdateParams#extraParams} for the field documentation.
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * ProductUpdateParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -285,7 +295,9 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link ProductUpdateParams#extraParams} for the field documentation.
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link ProductUpdateParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -312,7 +324,9 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link ProductUpdateParams#metadata} for the field documentation.
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
+     * ProductUpdateParams#metadata} for the field documentation.
      */
     public Builder putMetadata(String key, String value) {
       if (this.metadata == null) {
@@ -323,7 +337,9 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link ProductUpdateParams#metadata} for the field documentation.
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link ProductUpdateParams#metadata} for the field documentation.
      */
     public Builder putAllMetadata(Map<String, String> map) {
       if (this.metadata == null) {
@@ -334,7 +350,8 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The product's name, meant to be displayable to the customer. Applicable to both `service` and `good` types.
+     * The product's name, meant to be displayable to the customer. Applicable to both `service` and
+     * `good` types.
      */
     public Builder setName(String name) {
       this.name = name;
@@ -342,7 +359,8 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The dimensions of this product for shipping purposes. A SKU associated with this product can override this value by having its own `package_dimensions`.
+     * The dimensions of this product for shipping purposes. A SKU associated with this product can
+     * override this value by having its own `package_dimensions`.
      */
     public Builder setPackageDimensions(PackageDimensions packageDimensions) {
       this.packageDimensions = packageDimensions;
@@ -350,23 +368,27 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The dimensions of this product for shipping purposes. A SKU associated with this product can override this value by having its own `package_dimensions`.
+     * The dimensions of this product for shipping purposes. A SKU associated with this product can
+     * override this value by having its own `package_dimensions`.
      */
     public Builder setPackageDimensions(EmptyParam packageDimensions) {
       this.packageDimensions = packageDimensions;
       return this;
     }
 
-    /**
-     * Whether this product is shipped (i.e., physical goods). Defaults to `true`.
-     */
+    /** Whether this product is shipped (i.e., physical goods). Defaults to `true`. */
     public Builder setShippable(Boolean shippable) {
       this.shippable = shippable;
       return this;
     }
 
     /**
-     * An arbitrary string to be displayed on your customer's credit card statement. This may be up to 22 characters. The statement description may not include "' characters, and will appear on your customer's statement in capital letters. Non-ASCII characters are automatically stripped. While most banks display this information consistently, some may display it incorrectly or not at all. It must contain at least one letter. May only be set if type=`service`.
+     * An arbitrary string to be displayed on your customer's credit card statement. This may be up
+     * to 22 characters. The statement description may not include "' characters, and will appear on
+     * your customer's statement in capital letters. Non-ASCII characters are automatically
+     * stripped. While most banks display this information consistently, some may display it
+     * incorrectly or not at all. It must contain at least one letter. May only be set if
+     * type=`service`.
      */
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
@@ -374,49 +396,44 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * A label that represents units of this product, such as seat(s), in Stripe and on customers’ receipts and invoices. Only available on products of type=`service`.
+     * A label that represents units of this product, such as seat(s), in Stripe and on customers’
+     * receipts and invoices. Only available on products of type=`service`.
      */
     public Builder setUnitLabel(String unitLabel) {
       this.unitLabel = unitLabel;
       return this;
     }
 
-    /**
-     * A URL of a publicly-accessible webpage for this product.
-     */
+    /** A URL of a publicly-accessible webpage for this product. */
     public Builder setUrl(String url) {
       this.url = url;
       return this;
     }
   }
+
   public static class PackageDimensions {
     /**
-     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /**
-     * Height, in inches. Maximum precision is 2 decimal places.
-     */
+    /** Height, in inches. Maximum precision is 2 decimal places. */
     @SerializedName("height")
     BigDecimal height;
 
-    /**
-     * Length, in inches. Maximum precision is 2 decimal places.
-     */
+    /** Length, in inches. Maximum precision is 2 decimal places. */
     @SerializedName("length")
     BigDecimal length;
 
-    /**
-     * Weight, in ounces. Maximum precision is 2 decimal places.
-     */
+    /** Weight, in ounces. Maximum precision is 2 decimal places. */
     @SerializedName("weight")
     BigDecimal weight;
 
-    /**
-     * Width, in inches. Maximum precision is 2 decimal places.
-     */
+    /** Width, in inches. Maximum precision is 2 decimal places. */
     @SerializedName("width")
     BigDecimal width;
 
@@ -432,9 +449,11 @@ public class ProductUpdateParams extends ApiRequestParams {
       this.weight = weight;
       this.width = width;
     }
+
     public static Builder builder() {
       return new Builder();
     }
+
     public static class Builder {
       private Map<String, Object> extraParams;
 
@@ -446,21 +465,16 @@ public class ProductUpdateParams extends ApiRequestParams {
 
       private BigDecimal width;
 
-      /**
-       * Finalize and obtain parameter instance from this builder.
-       */
+      /** Finalize and obtain parameter instance from this builder. */
       public PackageDimensions build() {
         return new PackageDimensions(
-          this.extraParams,
-          this.height,
-          this.length,
-          this.weight,
-          this.width
-        );
+            this.extraParams, this.height, this.length, this.weight, this.width);
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link ProductUpdateParams.PackageDimensions#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ProductUpdateParams.PackageDimensions#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -471,7 +485,9 @@ public class ProductUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link ProductUpdateParams.PackageDimensions#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ProductUpdateParams.PackageDimensions#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -481,33 +497,25 @@ public class ProductUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * Height, in inches. Maximum precision is 2 decimal places.
-       */
+      /** Height, in inches. Maximum precision is 2 decimal places. */
       public Builder setHeight(BigDecimal height) {
         this.height = height;
         return this;
       }
 
-      /**
-       * Length, in inches. Maximum precision is 2 decimal places.
-       */
+      /** Length, in inches. Maximum precision is 2 decimal places. */
       public Builder setLength(BigDecimal length) {
         this.length = length;
         return this;
       }
 
-      /**
-       * Weight, in ounces. Maximum precision is 2 decimal places.
-       */
+      /** Weight, in ounces. Maximum precision is 2 decimal places. */
       public Builder setWeight(BigDecimal weight) {
         this.weight = weight;
         return this;
       }
 
-      /**
-       * Width, in inches. Maximum precision is 2 decimal places.
-       */
+      /** Width, in inches. Maximum precision is 2 decimal places. */
       public Builder setWidth(BigDecimal width) {
         this.width = width;
         return this;

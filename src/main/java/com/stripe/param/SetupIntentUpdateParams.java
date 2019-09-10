@@ -10,44 +10,47 @@ import java.util.Map;
 public class SetupIntentUpdateParams extends ApiRequestParams {
   /**
    * ID of the Customer this SetupIntent belongs to, if one exists.
-
-If present, payment methods used with this SetupIntent can only be attached to this Customer, and payment methods attached to other Customers cannot be used with this SetupIntent.
+   *
+   * <p>If present, payment methods used with this SetupIntent can only be attached to this
+   * Customer, and payment methods attached to other Customers cannot be used with this SetupIntent.
    */
   @SerializedName("customer")
   String customer;
 
-  /**
-   * An arbitrary string attached to the object. Often useful for displaying to users.
-   */
+  /** An arbitrary string attached to the object. Often useful for displaying to users. */
   @SerializedName("description")
   String description;
 
-  /**
-   * Specifies which fields in the response should be expanded.
-   */
+  /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
 
   /**
-   * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
   /**
-   * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+   * Set of key-value pairs that you can attach to an object. This can be useful for storing
+   * additional information about the object in a structured format.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
   /**
-   * ID of the payment method (a PaymentMethod, Card, BankAccount, or saved Source object) to attach to this SetupIntent.
+   * ID of the payment method (a PaymentMethod, Card, BankAccount, or saved Source object) to attach
+   * to this SetupIntent.
    */
   @SerializedName("payment_method")
   String paymentMethod;
 
   /**
-   * The list of payment method types (e.g. card) that this SetupIntent is allowed to set up. If this is not provided, defaults to ["card"].
+   * The list of payment method types (e.g. card) that this SetupIntent is allowed to set up. If
+   * this is not provided, defaults to ["card"].
    */
   @SerializedName("payment_method_types")
   List<String> paymentMethodTypes;
@@ -68,9 +71,11 @@ If present, payment methods used with this SetupIntent can only be attached to t
     this.paymentMethod = paymentMethod;
     this.paymentMethodTypes = paymentMethodTypes;
   }
+
   public static Builder builder() {
     return new Builder();
   }
+
   public static class Builder {
     private String customer;
 
@@ -86,41 +91,40 @@ If present, payment methods used with this SetupIntent can only be attached to t
 
     private List<String> paymentMethodTypes;
 
-    /**
-     * Finalize and obtain parameter instance from this builder.
-     */
+    /** Finalize and obtain parameter instance from this builder. */
     public SetupIntentUpdateParams build() {
       return new SetupIntentUpdateParams(
-        this.customer,
-        this.description,
-        this.expand,
-        this.extraParams,
-        this.metadata,
-        this.paymentMethod,
-        this.paymentMethodTypes
-      );
+          this.customer,
+          this.description,
+          this.expand,
+          this.extraParams,
+          this.metadata,
+          this.paymentMethod,
+          this.paymentMethodTypes);
     }
 
     /**
      * ID of the Customer this SetupIntent belongs to, if one exists.
-
-If present, payment methods used with this SetupIntent can only be attached to this Customer, and payment methods attached to other Customers cannot be used with this SetupIntent.
+     *
+     * <p>If present, payment methods used with this SetupIntent can only be attached to this
+     * Customer, and payment methods attached to other Customers cannot be used with this
+     * SetupIntent.
      */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;
     }
 
-    /**
-     * An arbitrary string attached to the object. Often useful for displaying to users.
-     */
+    /** An arbitrary string attached to the object. Often useful for displaying to users. */
     public Builder setDescription(String description) {
       this.description = description;
       return this;
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link SetupIntentUpdateParams#expand} for the field documentation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SetupIntentUpdateParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -131,7 +135,9 @@ If present, payment methods used with this SetupIntent can only be attached to t
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link SetupIntentUpdateParams#expand} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SetupIntentUpdateParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -142,7 +148,9 @@ If present, payment methods used with this SetupIntent can only be attached to t
     }
 
     /**
-     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SetupIntentUpdateParams#extraParams} for the field documentation.
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * SetupIntentUpdateParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -153,7 +161,9 @@ If present, payment methods used with this SetupIntent can only be attached to t
     }
 
     /**
-     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SetupIntentUpdateParams#extraParams} for the field documentation.
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link SetupIntentUpdateParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -164,7 +174,9 @@ If present, payment methods used with this SetupIntent can only be attached to t
     }
 
     /**
-     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SetupIntentUpdateParams#metadata} for the field documentation.
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
+     * SetupIntentUpdateParams#metadata} for the field documentation.
      */
     public Builder putMetadata(String key, String value) {
       if (this.metadata == null) {
@@ -175,7 +187,9 @@ If present, payment methods used with this SetupIntent can only be attached to t
     }
 
     /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SetupIntentUpdateParams#metadata} for the field documentation.
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link SetupIntentUpdateParams#metadata} for the field documentation.
      */
     public Builder putAllMetadata(Map<String, String> map) {
       if (this.metadata == null) {
@@ -186,7 +200,8 @@ If present, payment methods used with this SetupIntent can only be attached to t
     }
 
     /**
-     * ID of the payment method (a PaymentMethod, Card, BankAccount, or saved Source object) to attach to this SetupIntent.
+     * ID of the payment method (a PaymentMethod, Card, BankAccount, or saved Source object) to
+     * attach to this SetupIntent.
      */
     public Builder setPaymentMethod(String paymentMethod) {
       this.paymentMethod = paymentMethod;
@@ -194,7 +209,9 @@ If present, payment methods used with this SetupIntent can only be attached to t
     }
 
     /**
-     * Add an element to `paymentMethodTypes` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link SetupIntentUpdateParams#paymentMethodTypes} for the field documentation.
+     * Add an element to `paymentMethodTypes` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * SetupIntentUpdateParams#paymentMethodTypes} for the field documentation.
      */
     public Builder addPaymentMethodType(String element) {
       if (this.paymentMethodTypes == null) {
@@ -205,7 +222,9 @@ If present, payment methods used with this SetupIntent can only be attached to t
     }
 
     /**
-     * Add all elements to `paymentMethodTypes` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link SetupIntentUpdateParams#paymentMethodTypes} for the field documentation.
+     * Add all elements to `paymentMethodTypes` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link SetupIntentUpdateParams#paymentMethodTypes} for the field documentation.
      */
     public Builder addAllPaymentMethodType(List<String> elements) {
       if (this.paymentMethodTypes == null) {

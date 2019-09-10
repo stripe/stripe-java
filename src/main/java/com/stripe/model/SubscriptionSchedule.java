@@ -21,9 +21,8 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class SubscriptionSchedule
-  extends ApiResource
-  implements HasId, MetadataStore<SubscriptionSchedule> {
+public class SubscriptionSchedule extends ApiResource
+    implements HasId, MetadataStore<SubscriptionSchedule> {
   /**
    * This field has been renamed to `collection_method` and will be removed in a future API version.
    */
@@ -31,7 +30,8 @@ public class SubscriptionSchedule
   String billing;
 
   /**
-   * Define thresholds at which an invoice will be sent, and the subscription advanced to a new billing period.
+   * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
+   * billing period.
    */
   @SerializedName("billing_thresholds")
   Subscription.BillingThresholds billingThresholds;
@@ -43,39 +43,42 @@ public class SubscriptionSchedule
   Long canceledAt;
 
   /**
-   * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay the underlying subscription at the end of each billing cycle using the default source attached to the customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions.
+   * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
+   * attempt to pay the underlying subscription at the end of each billing cycle using the default
+   * source attached to the customer. When sending an invoice, Stripe will email your customer an
+   * invoice with payment instructions.
    */
   @SerializedName("collection_method")
   String collectionMethod;
 
   /**
-   * Time at which the subscription schedule was completed. Measured in seconds since the Unix epoch.
+   * Time at which the subscription schedule was completed. Measured in seconds since the Unix
+   * epoch.
    */
   @SerializedName("completed_at")
   Long completedAt;
 
-  /**
-   * Time at which the object was created. Measured in seconds since the Unix epoch.
-   */
+  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
 
   /**
-   * Object representing the start and end dates for the current phase of the subscription schedule, if it is `active`.
+   * Object representing the start and end dates for the current phase of the subscription schedule,
+   * if it is `active`.
    */
   @SerializedName("current_phase")
   CurrentPhase currentPhase;
 
-  /**
-   * ID of the customer who owns the subscription schedule.
-   */
+  /** ID of the customer who owns the subscription schedule. */
   @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
   /**
-   * ID of the default payment method for the subscription schedule. It must belong to the customer associated with the subscription schedule. If not set, invoices will use the default payment method in the customer's invoice settings.
+   * ID of the default payment method for the subscription schedule. It must belong to the customer
+   * associated with the subscription schedule. If not set, invoices will use the default payment
+   * method in the customer's invoice settings.
    */
   @SerializedName("default_payment_method")
   @Getter(lombok.AccessLevel.NONE)
@@ -83,54 +86,48 @@ public class SubscriptionSchedule
   ExpandableField<PaymentMethod> defaultPaymentMethod;
 
   /**
-   * ID of the default payment source for the subscription schedule. It must belong to the customer associated with the subscription schedule and be in a chargeable state. If not set, defaults to the customer's default source.
+   * ID of the default payment source for the subscription schedule. It must belong to the customer
+   * associated with the subscription schedule and be in a chargeable state. If not set, defaults to
+   * the customer's default source.
    */
   @SerializedName("default_source")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<PaymentSource> defaultSource;
 
-  /**
-   * Behavior of the subscription schedule and underlying subscription when it ends.
-   */
+  /** Behavior of the subscription schedule and underlying subscription when it ends. */
   @SerializedName("end_behavior")
   String endBehavior;
 
-  /**
-   * Unique identifier for the object.
-   */
+  /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
-  /**
-   * The subscription schedule's default invoice settings.
-   */
+  /** The subscription schedule's default invoice settings. */
   @SerializedName("invoice_settings")
   InvoiceSettings invoiceSettings;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+   * Has the value `true` if the object exists in live mode or the value `false` if the object
+   * exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
 
   /**
-   * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+   * Set of key-value pairs that you can attach to an object. This can be useful for storing
+   * additional information about the object in a structured format.
    */
   @Getter(onMethod_ = {@Override})
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /**
-   * String representing the object's type. Objects of the same type share the same value.
-   */
+  /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
   String object;
 
-  /**
-   * Configuration for the subscription schedule's phases.
-   */
+  /** Configuration for the subscription schedule's phases. */
   @SerializedName("phases")
   List<SubscriptionSchedule.Phase> phases;
 
@@ -140,41 +137,32 @@ public class SubscriptionSchedule
   @SerializedName("released_at")
   Long releasedAt;
 
-  /**
-   * ID of the subscription once managed by the subscription schedule (if it is released).
-   */
+  /** ID of the subscription once managed by the subscription schedule (if it is released). */
   @SerializedName("released_subscription")
   String releasedSubscription;
 
-  /**
-   * Behavior of the subscription schedule and underlying subscription when it ends.
-   */
+  /** Behavior of the subscription schedule and underlying subscription when it ends. */
   @SerializedName("renewal_behavior")
   String renewalBehavior;
 
   /**
-   * Interval and duration at which the subscription schedule renews for when it ends if `renewal_behavior` is `renew`.
+   * Interval and duration at which the subscription schedule renews for when it ends if
+   * `renewal_behavior` is `renew`.
    */
   @SerializedName("renewal_interval")
   RenewalInterval renewalInterval;
 
-  /**
-   * Possible values are `not_started`, `active`, `completed`, `released`, and `canceled`.
-   */
+  /** Possible values are `not_started`, `active`, `completed`, `released`, and `canceled`. */
   @SerializedName("status")
   String status;
 
-  /**
-   * ID of the subscription managed by the subscription schedule.
-   */
+  /** ID of the subscription managed by the subscription schedule. */
   @SerializedName("subscription")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Subscription> subscription;
 
-  /**
-   * Get id of expandable `customer` object.
-   */
+  /** Get id of expandable `customer` object. */
   public String getCustomer() {
     return (this.customer != null) ? this.customer.getId() : null;
   }
@@ -183,9 +171,7 @@ public class SubscriptionSchedule
     this.customer = ApiResource.setExpandableFieldId(id, this.customer);
   }
 
-  /**
-   * Get expanded `customer`.
-   */
+  /** Get expanded `customer`. */
   public Customer getCustomerObject() {
     return (this.customer != null) ? this.customer.getExpanded() : null;
   }
@@ -194,9 +180,7 @@ public class SubscriptionSchedule
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
   }
 
-  /**
-   * Get id of expandable `defaultPaymentMethod` object.
-   */
+  /** Get id of expandable `defaultPaymentMethod` object. */
   public String getDefaultPaymentMethod() {
     return (this.defaultPaymentMethod != null) ? this.defaultPaymentMethod.getId() : null;
   }
@@ -205,21 +189,17 @@ public class SubscriptionSchedule
     this.defaultPaymentMethod = ApiResource.setExpandableFieldId(id, this.defaultPaymentMethod);
   }
 
-  /**
-   * Get expanded `defaultPaymentMethod`.
-   */
+  /** Get expanded `defaultPaymentMethod`. */
   public PaymentMethod getDefaultPaymentMethodObject() {
     return (this.defaultPaymentMethod != null) ? this.defaultPaymentMethod.getExpanded() : null;
   }
 
   public void setDefaultPaymentMethodObject(PaymentMethod expandableObject) {
     this.defaultPaymentMethod =
-      new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
+        new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
   }
 
-  /**
-   * Get id of expandable `defaultSource` object.
-   */
+  /** Get id of expandable `defaultSource` object. */
   public String getDefaultSource() {
     return (this.defaultSource != null) ? this.defaultSource.getId() : null;
   }
@@ -228,21 +208,17 @@ public class SubscriptionSchedule
     this.defaultSource = ApiResource.setExpandableFieldId(id, this.defaultSource);
   }
 
-  /**
-   * Get expanded `defaultSource`.
-   */
+  /** Get expanded `defaultSource`. */
   public PaymentSource getDefaultSourceObject() {
     return (this.defaultSource != null) ? this.defaultSource.getExpanded() : null;
   }
 
   public void setDefaultSourceObject(PaymentSource expandableObject) {
     this.defaultSource =
-      new ExpandableField<PaymentSource>(expandableObject.getId(), expandableObject);
+        new ExpandableField<PaymentSource>(expandableObject.getId(), expandableObject);
   }
 
-  /**
-   * Get id of expandable `subscription` object.
-   */
+  /** Get id of expandable `subscription` object. */
   public String getSubscription() {
     return (this.subscription != null) ? this.subscription.getId() : null;
   }
@@ -251,376 +227,308 @@ public class SubscriptionSchedule
     this.subscription = ApiResource.setExpandableFieldId(id, this.subscription);
   }
 
-  /**
-   * Get expanded `subscription`.
-   */
+  /** Get expanded `subscription`. */
   public Subscription getSubscriptionObject() {
     return (this.subscription != null) ? this.subscription.getExpanded() : null;
   }
 
   public void setSubscriptionObject(Subscription expandableObject) {
     this.subscription =
-      new ExpandableField<Subscription>(expandableObject.getId(), expandableObject);
+        new ExpandableField<Subscription>(expandableObject.getId(), expandableObject);
   }
 
-  /**
-   * <p>Retrieves the list of your subscription schedules.</p>
-   */
-  public static SubscriptionScheduleCollection list(
-      Map<String, Object> params) throws StripeException {
+  /** Retrieves the list of your subscription schedules. */
+  public static SubscriptionScheduleCollection list(Map<String, Object> params)
+      throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /**
-   * <p>Retrieves the list of your subscription schedules.</p>
-   */
+  /** Retrieves the list of your subscription schedules. */
   public static SubscriptionScheduleCollection list(
-      Map<String, Object> params,
-      RequestOptions options) throws StripeException {
+      Map<String, Object> params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_schedules");
     return ApiResource.requestCollection(
-      url,
-      params,
-      SubscriptionScheduleCollection.class,
-      options
-    );
+        url, params, SubscriptionScheduleCollection.class, options);
   }
 
-  /**
-   * <p>Retrieves the list of your subscription schedules.</p>
-   */
-  public static SubscriptionScheduleCollection list(
-      SubscriptionScheduleListParams params) throws StripeException {
+  /** Retrieves the list of your subscription schedules. */
+  public static SubscriptionScheduleCollection list(SubscriptionScheduleListParams params)
+      throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /**
-   * <p>Retrieves the list of your subscription schedules.</p>
-   */
+  /** Retrieves the list of your subscription schedules. */
   public static SubscriptionScheduleCollection list(
-      SubscriptionScheduleListParams params,
-      RequestOptions options) throws StripeException {
+      SubscriptionScheduleListParams params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_schedules");
     return ApiResource.requestCollection(
-      url,
-      params,
-      SubscriptionScheduleCollection.class,
-      options
-    );
+        url, params, SubscriptionScheduleCollection.class, options);
   }
 
-  /**
-   * <p>Creates a new subscription schedule object.</p>
-   */
+  /** Creates a new subscription schedule object. */
   public static SubscriptionSchedule create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /**
-   * <p>Creates a new subscription schedule object.</p>
-   */
-  public static SubscriptionSchedule create(
-      Map<String, Object> params,
-      RequestOptions options) throws StripeException {
+  /** Creates a new subscription schedule object. */
+  public static SubscriptionSchedule create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_schedules");
     return ApiResource.request(
-      ApiResource.RequestMethod.POST,
-      url,
-      params,
-      SubscriptionSchedule.class,
-      options
-    );
+        ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
   }
 
-  /**
-   * <p>Creates a new subscription schedule object.</p>
-   */
-  public static SubscriptionSchedule create(
-      SubscriptionScheduleCreateParams params) throws StripeException {
+  /** Creates a new subscription schedule object. */
+  public static SubscriptionSchedule create(SubscriptionScheduleCreateParams params)
+      throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /**
-   * <p>Creates a new subscription schedule object.</p>
-   */
+  /** Creates a new subscription schedule object. */
   public static SubscriptionSchedule create(
-      SubscriptionScheduleCreateParams params,
-      RequestOptions options) throws StripeException {
+      SubscriptionScheduleCreateParams params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_schedules");
     return ApiResource.request(
-      ApiResource.RequestMethod.POST,
-      url,
-      params,
-      SubscriptionSchedule.class,
-      options
-    );
+        ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
   }
 
   /**
-   * <p>Retrieves the details of an existing subscription schedule. You only need to supply the unique subscription schedule identifier that was returned upon subscription schedule creation.</p>
+   * Retrieves the details of an existing subscription schedule. You only need to supply the unique
+   * subscription schedule identifier that was returned upon subscription schedule creation.
    */
   public static SubscriptionSchedule retrieve(String schedule) throws StripeException {
     return retrieve(schedule, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * <p>Retrieves the details of an existing subscription schedule. You only need to supply the unique subscription schedule identifier that was returned upon subscription schedule creation.</p>
+   * Retrieves the details of an existing subscription schedule. You only need to supply the unique
+   * subscription schedule identifier that was returned upon subscription schedule creation.
    */
-  public static SubscriptionSchedule retrieve(
-      String schedule,
-      RequestOptions options) throws StripeException {
+  public static SubscriptionSchedule retrieve(String schedule, RequestOptions options)
+      throws StripeException {
     return retrieve(schedule, (Map<String, Object>) null, options);
   }
 
   /**
-   * <p>Retrieves the details of an existing subscription schedule. You only need to supply the unique subscription schedule identifier that was returned upon subscription schedule creation.</p>
+   * Retrieves the details of an existing subscription schedule. You only need to supply the unique
+   * subscription schedule identifier that was returned upon subscription schedule creation.
    */
   public static SubscriptionSchedule retrieve(
-      String schedule,
-      Map<String, Object> params,
-      RequestOptions options) throws StripeException {
+      String schedule, Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(schedule))
-      );
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(schedule)));
     return ApiResource.request(
-      ApiResource.RequestMethod.GET,
-      url,
-      params,
-      SubscriptionSchedule.class,
-      options
-    );
+        ApiResource.RequestMethod.GET, url, params, SubscriptionSchedule.class, options);
   }
 
   /**
-   * <p>Retrieves the details of an existing subscription schedule. You only need to supply the unique subscription schedule identifier that was returned upon subscription schedule creation.</p>
+   * Retrieves the details of an existing subscription schedule. You only need to supply the unique
+   * subscription schedule identifier that was returned upon subscription schedule creation.
    */
   public static SubscriptionSchedule retrieve(
-      String schedule,
-      SubscriptionScheduleRetrieveParams params,
-      RequestOptions options) throws StripeException {
+      String schedule, SubscriptionScheduleRetrieveParams params, RequestOptions options)
+      throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(schedule))
-      );
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(schedule)));
     return ApiResource.request(
-      ApiResource.RequestMethod.GET,
-      url,
-      params,
-      SubscriptionSchedule.class,
-      options
-    );
+        ApiResource.RequestMethod.GET, url, params, SubscriptionSchedule.class, options);
   }
 
-  /**
-   * <p>Updates an existing subscription schedule.</p>
-   */
+  /** Updates an existing subscription schedule. */
   @Override
   public SubscriptionSchedule update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
-  /**
-   * <p>Updates an existing subscription schedule.</p>
-   */
+  /** Updates an existing subscription schedule. */
   @Override
-  public SubscriptionSchedule update(
-      Map<String, Object> params,
-      RequestOptions options) throws StripeException {
+  public SubscriptionSchedule update(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(this.getId()))
-      );
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
-      ApiResource.RequestMethod.POST,
-      url,
-      params,
-      SubscriptionSchedule.class,
-      options
-    );
+        ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
   }
 
-  /**
-   * <p>Updates an existing subscription schedule.</p>
-   */
-  public SubscriptionSchedule update(
-      SubscriptionScheduleUpdateParams params) throws StripeException {
+  /** Updates an existing subscription schedule. */
+  public SubscriptionSchedule update(SubscriptionScheduleUpdateParams params)
+      throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
-  /**
-   * <p>Updates an existing subscription schedule.</p>
-   */
+  /** Updates an existing subscription schedule. */
   public SubscriptionSchedule update(
-      SubscriptionScheduleUpdateParams params,
-      RequestOptions options) throws StripeException {
+      SubscriptionScheduleUpdateParams params, RequestOptions options) throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(this.getId()))
-      );
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/subscription_schedules/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
-      ApiResource.RequestMethod.POST,
-      url,
-      params,
-      SubscriptionSchedule.class,
-      options
-    );
+        ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
   }
 
   /**
-   * <p>Cancels a subscription schedule and its associated subscription immediately (if the subscription schedule has an active subscription). A subscription schedule can only be canceled if its status is <code>not_started</code> or <code>active</code>.</p>
+   * Cancels a subscription schedule and its associated subscription immediately (if the
+   * subscription schedule has an active subscription). A subscription schedule can only be canceled
+   * if its status is <code>not_started</code> or <code>active</code>.
    */
   public SubscriptionSchedule cancel() throws StripeException {
     return cancel((Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * <p>Cancels a subscription schedule and its associated subscription immediately (if the subscription schedule has an active subscription). A subscription schedule can only be canceled if its status is <code>not_started</code> or <code>active</code>.</p>
+   * Cancels a subscription schedule and its associated subscription immediately (if the
+   * subscription schedule has an active subscription). A subscription schedule can only be canceled
+   * if its status is <code>not_started</code> or <code>active</code>.
    */
   public SubscriptionSchedule cancel(RequestOptions options) throws StripeException {
     return cancel((Map<String, Object>) null, options);
   }
 
   /**
-   * <p>Cancels a subscription schedule and its associated subscription immediately (if the subscription schedule has an active subscription). A subscription schedule can only be canceled if its status is <code>not_started</code> or <code>active</code>.</p>
+   * Cancels a subscription schedule and its associated subscription immediately (if the
+   * subscription schedule has an active subscription). A subscription schedule can only be canceled
+   * if its status is <code>not_started</code> or <code>active</code>.
    */
   public SubscriptionSchedule cancel(Map<String, Object> params) throws StripeException {
     return cancel(params, (RequestOptions) null);
   }
 
   /**
-   * <p>Cancels a subscription schedule and its associated subscription immediately (if the subscription schedule has an active subscription). A subscription schedule can only be canceled if its status is <code>not_started</code> or <code>active</code>.</p>
+   * Cancels a subscription schedule and its associated subscription immediately (if the
+   * subscription schedule has an active subscription). A subscription schedule can only be canceled
+   * if its status is <code>not_started</code> or <code>active</code>.
    */
-  public SubscriptionSchedule cancel(
-      Map<String, Object> params,
-      RequestOptions options) throws StripeException {
+  public SubscriptionSchedule cancel(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("/v1/subscription_schedules/%s/cancel", ApiResource.urlEncodeId(this.getId()))
-      );
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/subscription_schedules/%s/cancel", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
-      ApiResource.RequestMethod.POST,
-      url,
-      params,
-      SubscriptionSchedule.class,
-      options
-    );
+        ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
   }
 
   /**
-   * <p>Cancels a subscription schedule and its associated subscription immediately (if the subscription schedule has an active subscription). A subscription schedule can only be canceled if its status is <code>not_started</code> or <code>active</code>.</p>
+   * Cancels a subscription schedule and its associated subscription immediately (if the
+   * subscription schedule has an active subscription). A subscription schedule can only be canceled
+   * if its status is <code>not_started</code> or <code>active</code>.
    */
-  public SubscriptionSchedule cancel(
-      SubscriptionScheduleCancelParams params) throws StripeException {
+  public SubscriptionSchedule cancel(SubscriptionScheduleCancelParams params)
+      throws StripeException {
     return cancel(params, (RequestOptions) null);
   }
 
   /**
-   * <p>Cancels a subscription schedule and its associated subscription immediately (if the subscription schedule has an active subscription). A subscription schedule can only be canceled if its status is <code>not_started</code> or <code>active</code>.</p>
+   * Cancels a subscription schedule and its associated subscription immediately (if the
+   * subscription schedule has an active subscription). A subscription schedule can only be canceled
+   * if its status is <code>not_started</code> or <code>active</code>.
    */
   public SubscriptionSchedule cancel(
-      SubscriptionScheduleCancelParams params,
-      RequestOptions options) throws StripeException {
+      SubscriptionScheduleCancelParams params, RequestOptions options) throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("/v1/subscription_schedules/%s/cancel", ApiResource.urlEncodeId(this.getId()))
-      );
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/subscription_schedules/%s/cancel", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
-      ApiResource.RequestMethod.POST,
-      url,
-      params,
-      SubscriptionSchedule.class,
-      options
-    );
+        ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
   }
 
   /**
-   * <p>Releases the subscription schedule immediately, which will stop scheduling of its phases, but leave any existing subscription in place. A schedule can only be released if its status is <code>not_started</code> or <code>active</code>. If the subscription schedule is currently associated with a subscription, releasing it will remove its <code>subscription</code> property and set the subscription’s ID to the <code>released_subscription</code> property.</p>
+   * Releases the subscription schedule immediately, which will stop scheduling of its phases, but
+   * leave any existing subscription in place. A schedule can only be released if its status is
+   * <code>not_started</code> or <code>active</code>. If the subscription schedule is currently
+   * associated with a subscription, releasing it will remove its <code>subscription</code> property
+   * and set the subscription’s ID to the <code>released_subscription</code> property.
    */
   public SubscriptionSchedule release() throws StripeException {
     return release((Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * <p>Releases the subscription schedule immediately, which will stop scheduling of its phases, but leave any existing subscription in place. A schedule can only be released if its status is <code>not_started</code> or <code>active</code>. If the subscription schedule is currently associated with a subscription, releasing it will remove its <code>subscription</code> property and set the subscription’s ID to the <code>released_subscription</code> property.</p>
+   * Releases the subscription schedule immediately, which will stop scheduling of its phases, but
+   * leave any existing subscription in place. A schedule can only be released if its status is
+   * <code>not_started</code> or <code>active</code>. If the subscription schedule is currently
+   * associated with a subscription, releasing it will remove its <code>subscription</code> property
+   * and set the subscription’s ID to the <code>released_subscription</code> property.
    */
   public SubscriptionSchedule release(RequestOptions options) throws StripeException {
     return release((Map<String, Object>) null, options);
   }
 
   /**
-   * <p>Releases the subscription schedule immediately, which will stop scheduling of its phases, but leave any existing subscription in place. A schedule can only be released if its status is <code>not_started</code> or <code>active</code>. If the subscription schedule is currently associated with a subscription, releasing it will remove its <code>subscription</code> property and set the subscription’s ID to the <code>released_subscription</code> property.</p>
+   * Releases the subscription schedule immediately, which will stop scheduling of its phases, but
+   * leave any existing subscription in place. A schedule can only be released if its status is
+   * <code>not_started</code> or <code>active</code>. If the subscription schedule is currently
+   * associated with a subscription, releasing it will remove its <code>subscription</code> property
+   * and set the subscription’s ID to the <code>released_subscription</code> property.
    */
   public SubscriptionSchedule release(Map<String, Object> params) throws StripeException {
     return release(params, (RequestOptions) null);
   }
 
   /**
-   * <p>Releases the subscription schedule immediately, which will stop scheduling of its phases, but leave any existing subscription in place. A schedule can only be released if its status is <code>not_started</code> or <code>active</code>. If the subscription schedule is currently associated with a subscription, releasing it will remove its <code>subscription</code> property and set the subscription’s ID to the <code>released_subscription</code> property.</p>
+   * Releases the subscription schedule immediately, which will stop scheduling of its phases, but
+   * leave any existing subscription in place. A schedule can only be released if its status is
+   * <code>not_started</code> or <code>active</code>. If the subscription schedule is currently
+   * associated with a subscription, releasing it will remove its <code>subscription</code> property
+   * and set the subscription’s ID to the <code>released_subscription</code> property.
    */
-  public SubscriptionSchedule release(
-      Map<String, Object> params,
-      RequestOptions options) throws StripeException {
+  public SubscriptionSchedule release(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
         String.format(
-          "/v1/subscription_schedules/%s/release",
-          ApiResource.urlEncodeId(this.getId())
-        )
-      );
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/subscription_schedules/%s/release", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
-      ApiResource.RequestMethod.POST,
-      url,
-      params,
-      SubscriptionSchedule.class,
-      options
-    );
+        ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
   }
 
   /**
-   * <p>Releases the subscription schedule immediately, which will stop scheduling of its phases, but leave any existing subscription in place. A schedule can only be released if its status is <code>not_started</code> or <code>active</code>. If the subscription schedule is currently associated with a subscription, releasing it will remove its <code>subscription</code> property and set the subscription’s ID to the <code>released_subscription</code> property.</p>
+   * Releases the subscription schedule immediately, which will stop scheduling of its phases, but
+   * leave any existing subscription in place. A schedule can only be released if its status is
+   * <code>not_started</code> or <code>active</code>. If the subscription schedule is currently
+   * associated with a subscription, releasing it will remove its <code>subscription</code> property
+   * and set the subscription’s ID to the <code>released_subscription</code> property.
    */
-  public SubscriptionSchedule release(
-      SubscriptionScheduleReleaseParams params) throws StripeException {
+  public SubscriptionSchedule release(SubscriptionScheduleReleaseParams params)
+      throws StripeException {
     return release(params, (RequestOptions) null);
   }
 
   /**
-   * <p>Releases the subscription schedule immediately, which will stop scheduling of its phases, but leave any existing subscription in place. A schedule can only be released if its status is <code>not_started</code> or <code>active</code>. If the subscription schedule is currently associated with a subscription, releasing it will remove its <code>subscription</code> property and set the subscription’s ID to the <code>released_subscription</code> property.</p>
+   * Releases the subscription schedule immediately, which will stop scheduling of its phases, but
+   * leave any existing subscription in place. A schedule can only be released if its status is
+   * <code>not_started</code> or <code>active</code>. If the subscription schedule is currently
+   * associated with a subscription, releasing it will remove its <code>subscription</code> property
+   * and set the subscription’s ID to the <code>released_subscription</code> property.
    */
   public SubscriptionSchedule release(
-      SubscriptionScheduleReleaseParams params,
-      RequestOptions options) throws StripeException {
+      SubscriptionScheduleReleaseParams params, RequestOptions options) throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
         String.format(
-          "/v1/subscription_schedules/%s/release",
-          ApiResource.urlEncodeId(this.getId())
-        )
-      );
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/subscription_schedules/%s/release", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
-      ApiResource.RequestMethod.POST,
-      url,
-      params,
-      SubscriptionSchedule.class,
-      options
-    );
+        ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
   }
 
   @Getter
@@ -639,7 +547,9 @@ public class SubscriptionSchedule
   @EqualsAndHashCode(callSuper = false)
   public static class InvoiceSettings extends StripeObject {
     /**
-     * Number of days within which a customer must pay invoices generated by this subscription schedule. This value will be `null` for subscription schedules where `billing=charge_automatically`.
+     * Number of days within which a customer must pay invoices generated by this subscription
+     * schedule. This value will be `null` for subscription schedules where
+     * `billing=charge_automatically`.
      */
     @SerializedName("days_until_due")
     Long daysUntilDue;
@@ -650,33 +560,39 @@ public class SubscriptionSchedule
   @EqualsAndHashCode(callSuper = false)
   public static class Phase extends StripeObject {
     /**
-     * A non-negative decimal between 0 and 100, with at most two decimal places. This represents the percentage of the subscription invoice subtotal that will be transferred to the application owner's Stripe account during this phase of the schedule.
+     * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
+     * the percentage of the subscription invoice subtotal that will be transferred to the
+     * application owner's Stripe account during this phase of the schedule.
      */
     @SerializedName("application_fee_percent")
     BigDecimal applicationFeePercent;
 
     /**
-     * Define thresholds at which an invoice will be sent, and the subscription advanced to a new billing period.
+     * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
+     * billing period.
      */
     @SerializedName("billing_thresholds")
     Subscription.BillingThresholds billingThresholds;
 
     /**
-     * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will attempt to pay the underlying subscription at the end of each billing cycle using the default source attached to the customer. When sending an invoice, Stripe will email your customer an invoice with payment instructions.
+     * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
+     * attempt to pay the underlying subscription at the end of each billing cycle using the default
+     * source attached to the customer. When sending an invoice, Stripe will email your customer an
+     * invoice with payment instructions.
      */
     @SerializedName("collection_method")
     String collectionMethod;
 
-    /**
-     * ID of the coupon to use during this phase of the subscription schedule.
-     */
+    /** ID of the coupon to use during this phase of the subscription schedule. */
     @SerializedName("coupon")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<Coupon> coupon;
 
     /**
-     * ID of the default payment method for the subscription schedule. It must belong to the customer associated with the subscription schedule. If not set, invoices will use the default payment method in the customer's invoice settings.
+     * ID of the default payment method for the subscription schedule. It must belong to the
+     * customer associated with the subscription schedule. If not set, invoices will use the default
+     * payment method in the customer's invoice settings.
      */
     @SerializedName("default_payment_method")
     @Getter(lombok.AccessLevel.NONE)
@@ -686,45 +602,34 @@ public class SubscriptionSchedule
     @SerializedName("default_tax_rates")
     List<TaxRate> defaultTaxRates;
 
-    /**
-     * The end of this phase of the subscription schedule.
-     */
+    /** The end of this phase of the subscription schedule. */
     @SerializedName("end_date")
     Long endDate;
 
-    /**
-     * The subscription schedule's default invoice settings.
-     */
+    /** The subscription schedule's default invoice settings. */
     @SerializedName("invoice_settings")
     InvoiceSettings invoiceSettings;
 
-    /**
-     * Plans to subscribe during this phase of the subscription schedule.
-     */
+    /** Plans to subscribe during this phase of the subscription schedule. */
     @SerializedName("plans")
     List<SubscriptionSchedule.PhaseItem> plans;
 
-    /**
-     * The start of this phase of the subscription schedule.
-     */
+    /** The start of this phase of the subscription schedule. */
     @SerializedName("start_date")
     Long startDate;
 
     /**
-     * If provided, each invoice created during this phase of the subscription schedule will apply the tax rate, increasing the amount billed to the customer.
+     * If provided, each invoice created during this phase of the subscription schedule will apply
+     * the tax rate, increasing the amount billed to the customer.
      */
     @SerializedName("tax_percent")
     BigDecimal taxPercent;
 
-    /**
-     * When the trial ends within the phase.
-     */
+    /** When the trial ends within the phase. */
     @SerializedName("trial_end")
     Long trialEnd;
 
-    /**
-     * Get id of expandable `coupon` object.
-     */
+    /** Get id of expandable `coupon` object. */
     public String getCoupon() {
       return (this.coupon != null) ? this.coupon.getId() : null;
     }
@@ -733,9 +638,7 @@ public class SubscriptionSchedule
       this.coupon = ApiResource.setExpandableFieldId(id, this.coupon);
     }
 
-    /**
-     * Get expanded `coupon`.
-     */
+    /** Get expanded `coupon`. */
     public Coupon getCouponObject() {
       return (this.coupon != null) ? this.coupon.getExpanded() : null;
     }
@@ -744,9 +647,7 @@ public class SubscriptionSchedule
       this.coupon = new ExpandableField<Coupon>(expandableObject.getId(), expandableObject);
     }
 
-    /**
-     * Get id of expandable `defaultPaymentMethod` object.
-     */
+    /** Get id of expandable `defaultPaymentMethod` object. */
     public String getDefaultPaymentMethod() {
       return (this.defaultPaymentMethod != null) ? this.defaultPaymentMethod.getId() : null;
     }
@@ -755,16 +656,14 @@ public class SubscriptionSchedule
       this.defaultPaymentMethod = ApiResource.setExpandableFieldId(id, this.defaultPaymentMethod);
     }
 
-    /**
-     * Get expanded `defaultPaymentMethod`.
-     */
+    /** Get expanded `defaultPaymentMethod`. */
     public PaymentMethod getDefaultPaymentMethodObject() {
       return (this.defaultPaymentMethod != null) ? this.defaultPaymentMethod.getExpanded() : null;
     }
 
     public void setDefaultPaymentMethodObject(PaymentMethod expandableObject) {
       this.defaultPaymentMethod =
-        new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
+          new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
     }
   }
 
@@ -773,34 +672,30 @@ public class SubscriptionSchedule
   @EqualsAndHashCode(callSuper = false)
   public static class PhaseItem extends StripeObject {
     /**
-     * Define thresholds at which an invoice will be sent, and the related subscription advanced to a new billing period.
+     * Define thresholds at which an invoice will be sent, and the related subscription advanced to
+     * a new billing period.
      */
     @SerializedName("billing_thresholds")
     SubscriptionItem.BillingThresholds billingThresholds;
 
-    /**
-     * ID of the plan to which the customer should be subscribed.
-     */
+    /** ID of the plan to which the customer should be subscribed. */
     @SerializedName("plan")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<Plan> plan;
 
-    /**
-     * Quantity of the plan to which the customer should be subscribed.
-     */
+    /** Quantity of the plan to which the customer should be subscribed. */
     @SerializedName("quantity")
     Long quantity;
 
     /**
-     * The tax rates which apply to this `phase_item`. When set, the `default_tax_rates` on the phase do not apply to this `phase_item`.
+     * The tax rates which apply to this `phase_item`. When set, the `default_tax_rates` on the
+     * phase do not apply to this `phase_item`.
      */
     @SerializedName("tax_rates")
     List<TaxRate> taxRates;
 
-    /**
-     * Get id of expandable `plan` object.
-     */
+    /** Get id of expandable `plan` object. */
     public String getPlan() {
       return (this.plan != null) ? this.plan.getId() : null;
     }
@@ -809,9 +704,7 @@ public class SubscriptionSchedule
       this.plan = ApiResource.setExpandableFieldId(id, this.plan);
     }
 
-    /**
-     * Get expanded `plan`.
-     */
+    /** Get expanded `plan`. */
     public Plan getPlanObject() {
       return (this.plan != null) ? this.plan.getExpanded() : null;
     }
@@ -825,15 +718,11 @@ public class SubscriptionSchedule
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class RenewalInterval extends StripeObject {
-    /**
-     * Interval at which to renew the subscription schedule for when it ends.
-     */
+    /** Interval at which to renew the subscription schedule for when it ends. */
     @SerializedName("interval")
     String interval;
 
-    /**
-     * Number of intervals to renew the subscription schedule for when it ends.
-     */
+    /** Number of intervals to renew the subscription schedule for when it ends. */
     @SerializedName("length")
     Long length;
   }

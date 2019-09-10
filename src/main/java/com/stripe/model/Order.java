@@ -22,7 +22,8 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   /**
-   * A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1, Japanese Yen being a zero-decimal currency) representing the total amount for the order.
+   * A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1,
+   * Japanese Yen being a zero-decimal currency) representing the total amount for the order.
    */
   @SerializedName("amount")
   Long amount;
@@ -30,9 +31,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   @SerializedName("amount_returned")
   Long amountReturned;
 
-  /**
-   * ID of the Connect Application that created the order.
-   */
+  /** ID of the Connect Application that created the order. */
   @SerializedName("application")
   String application;
 
@@ -40,71 +39,63 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   Long applicationFee;
 
   /**
-   * The ID of the payment used to pay for the order. Present if the order status is `paid`, `fulfilled`, or `refunded`.
+   * The ID of the payment used to pay for the order. Present if the order status is `paid`,
+   * `fulfilled`, or `refunded`.
    */
   @SerializedName("charge")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Charge> charge;
 
-  /**
-   * Time at which the object was created. Measured in seconds since the Unix epoch.
-   */
+  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
+   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
    */
   @SerializedName("currency")
   String currency;
 
-  /**
-   * The customer used for the order.
-   */
+  /** The customer used for the order. */
   @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
-  /**
-   * The email address of the customer placing the order.
-   */
+  /** The email address of the customer placing the order. */
   @SerializedName("email")
   String email;
 
   @SerializedName("external_coupon_code")
   String externalCouponCode;
 
-  /**
-   * Unique identifier for the object.
-   */
+  /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
-  /**
-   * List of items constituting the order. An order can have up to 25 items.
-   */
+  /** List of items constituting the order. An order can have up to 25 items. */
   @SerializedName("items")
   List<OrderItem> items;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
+   * Has the value `true` if the object exists in live mode or the value `false` if the object
+   * exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
 
   /**
-   * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
+   * Set of key-value pairs that you can attach to an object. This can be useful for storing
+   * additional information about the object in a structured format.
    */
   @Getter(onMethod_ = {@Override})
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /**
-   * String representing the object's type. Objects of the same type share the same value.
-   */
+  /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
   String object;
 
@@ -112,47 +103,45 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   OrderReturnCollection returns;
 
   /**
-   * The shipping method that is currently selected for this order, if any. If present, it is equal to one of the `id`s of shipping methods in the `shipping_methods` array. At order creation time, if there are multiple shipping methods, Stripe will automatically selected the first method.
+   * The shipping method that is currently selected for this order, if any. If present, it is equal
+   * to one of the `id`s of shipping methods in the `shipping_methods` array. At order creation
+   * time, if there are multiple shipping methods, Stripe will automatically selected the first
+   * method.
    */
   @SerializedName("selected_shipping_method")
   String selectedShippingMethod;
 
-  /**
-   * The shipping address for the order. Present if the order is for goods to be shipped.
-   */
+  /** The shipping address for the order. Present if the order is for goods to be shipped. */
   @SerializedName("shipping")
   ShippingDetails shipping;
 
   /**
-   * A list of supported shipping methods for this order. The desired shipping method can be specified either by updating the order, or when paying it.
+   * A list of supported shipping methods for this order. The desired shipping method can be
+   * specified either by updating the order, or when paying it.
    */
   @SerializedName("shipping_methods")
   List<Order.ShippingMethod> shippingMethods;
 
   /**
-   * Current order status. One of `created`, `paid`, `canceled`, `fulfilled`, or `returned`. More details in the [Orders Guide](https://stripe.com/docs/orders/guide#understanding-order-statuses).
+   * Current order status. One of `created`, `paid`, `canceled`, `fulfilled`, or `returned`. More
+   * details in the [Orders
+   * Guide](https://stripe.com/docs/orders/guide#understanding-order-statuses).
    */
   @SerializedName("status")
   String status;
 
-  /**
-   * The timestamps at which the order status was updated.
-   */
+  /** The timestamps at which the order status was updated. */
   @SerializedName("status_transitions")
   StatusTransitions statusTransitions;
 
   @SerializedName("updated")
   Long updated;
 
-  /**
-   * The user's order ID if it is different from the Stripe order ID.
-   */
+  /** The user's order ID if it is different from the Stripe order ID. */
   @SerializedName("upstream_id")
   String upstreamId;
 
-  /**
-   * Get id of expandable `charge` object.
-   */
+  /** Get id of expandable `charge` object. */
   public String getCharge() {
     return (this.charge != null) ? this.charge.getId() : null;
   }
@@ -161,9 +150,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
     this.charge = ApiResource.setExpandableFieldId(id, this.charge);
   }
 
-  /**
-   * Get expanded `charge`.
-   */
+  /** Get expanded `charge`. */
   public Charge getChargeObject() {
     return (this.charge != null) ? this.charge.getExpanded() : null;
   }
@@ -172,9 +159,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
     this.charge = new ExpandableField<Charge>(expandableObject.getId(), expandableObject);
   }
 
-  /**
-   * Get id of expandable `customer` object.
-   */
+  /** Get id of expandable `customer` object. */
   public String getCustomer() {
     return (this.customer != null) ? this.customer.getId() : null;
   }
@@ -183,9 +168,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
     this.customer = ApiResource.setExpandableFieldId(id, this.customer);
   }
 
-  /**
-   * Get expanded `customer`.
-   */
+  /** Get expanded `customer`. */
   public Customer getCustomerObject() {
     return (this.customer != null) ? this.customer.getExpanded() : null;
   }
@@ -194,122 +177,111 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
   }
 
-  /**
-   * <p>Creates a new order object.</p>
-   */
+  /** Creates a new order object. */
   public static Order create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /**
-   * <p>Creates a new order object.</p>
-   */
-  public static Order create(
-      Map<String, Object> params,
-      RequestOptions options) throws StripeException {
+  /** Creates a new order object. */
+  public static Order create(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/orders");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
   }
 
-  /**
-   * <p>Creates a new order object.</p>
-   */
+  /** Creates a new order object. */
   public static Order create(OrderCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /**
-   * <p>Creates a new order object.</p>
-   */
-  public static Order create(
-      OrderCreateParams params,
-      RequestOptions options) throws StripeException {
+  /** Creates a new order object. */
+  public static Order create(OrderCreateParams params, RequestOptions options)
+      throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/orders");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
   }
 
   /**
-   * <p>Returns a list of your orders. The orders are returned sorted by creation date, with the most recently created orders appearing first.</p>
+   * Returns a list of your orders. The orders are returned sorted by creation date, with the most
+   * recently created orders appearing first.
    */
   public static OrderCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * <p>Returns a list of your orders. The orders are returned sorted by creation date, with the most recently created orders appearing first.</p>
+   * Returns a list of your orders. The orders are returned sorted by creation date, with the most
+   * recently created orders appearing first.
    */
-  public static OrderCollection list(
-      Map<String, Object> params,
-      RequestOptions options) throws StripeException {
+  public static OrderCollection list(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/orders");
     return ApiResource.requestCollection(url, params, OrderCollection.class, options);
   }
 
   /**
-   * <p>Returns a list of your orders. The orders are returned sorted by creation date, with the most recently created orders appearing first.</p>
+   * Returns a list of your orders. The orders are returned sorted by creation date, with the most
+   * recently created orders appearing first.
    */
   public static OrderCollection list(OrderListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * <p>Returns a list of your orders. The orders are returned sorted by creation date, with the most recently created orders appearing first.</p>
+   * Returns a list of your orders. The orders are returned sorted by creation date, with the most
+   * recently created orders appearing first.
    */
-  public static OrderCollection list(
-      OrderListParams params,
-      RequestOptions options) throws StripeException {
+  public static OrderCollection list(OrderListParams params, RequestOptions options)
+      throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/orders");
     return ApiResource.requestCollection(url, params, OrderCollection.class, options);
   }
 
   /**
-   * <p>Retrieves the details of an existing order. Supply the unique order ID from either an order creation request or the order list, and Stripe will return the corresponding order information.</p>
+   * Retrieves the details of an existing order. Supply the unique order ID from either an order
+   * creation request or the order list, and Stripe will return the corresponding order information.
    */
   public static Order retrieve(String id) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * <p>Retrieves the details of an existing order. Supply the unique order ID from either an order creation request or the order list, and Stripe will return the corresponding order information.</p>
+   * Retrieves the details of an existing order. Supply the unique order ID from either an order
+   * creation request or the order list, and Stripe will return the corresponding order information.
    */
   public static Order retrieve(String id, RequestOptions options) throws StripeException {
     return retrieve(id, (Map<String, Object>) null, options);
   }
 
   /**
-   * <p>Retrieves the details of an existing order. Supply the unique order ID from either an order creation request or the order list, and Stripe will return the corresponding order information.</p>
+   * Retrieves the details of an existing order. Supply the unique order ID from either an order
+   * creation request or the order list, and Stripe will return the corresponding order information.
    */
-  public static Order retrieve(
-      String id,
-      Map<String, Object> params,
-      RequestOptions options) throws StripeException {
+  public static Order retrieve(String id, Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("/v1/orders/%s", ApiResource.urlEncodeId(id))
-      );
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/orders/%s", ApiResource.urlEncodeId(id)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Order.class, options);
   }
 
   /**
-   * <p>Retrieves the details of an existing order. Supply the unique order ID from either an order creation request or the order list, and Stripe will return the corresponding order information.</p>
+   * Retrieves the details of an existing order. Supply the unique order ID from either an order
+   * creation request or the order list, and Stripe will return the corresponding order information.
    */
-  public static Order retrieve(
-      String id,
-      OrderRetrieveParams params,
-      RequestOptions options) throws StripeException {
+  public static Order retrieve(String id, OrderRetrieveParams params, RequestOptions options)
+      throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("/v1/orders/%s", ApiResource.urlEncodeId(id))
-      );
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(), String.format("/v1/orders/%s", ApiResource.urlEncodeId(id)));
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Order.class, options);
   }
 
   /**
-   * <p>Updates the specific order by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
+   * Updates the specific order by setting the values of the parameters passed. Any parameters not
+   * provided will be left unchanged.
    */
   @Override
   public Order update(Map<String, Object> params) throws StripeException {
@@ -317,161 +289,152 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   }
 
   /**
-   * <p>Updates the specific order by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
+   * Updates the specific order by setting the values of the parameters passed. Any parameters not
+   * provided will be left unchanged.
    */
   @Override
   public Order update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("/v1/orders/%s", ApiResource.urlEncodeId(this.getId()))
-      );
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/orders/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
   }
 
   /**
-   * <p>Updates the specific order by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
+   * Updates the specific order by setting the values of the parameters passed. Any parameters not
+   * provided will be left unchanged.
    */
   public Order update(OrderUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
   /**
-   * <p>Updates the specific order by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
+   * Updates the specific order by setting the values of the parameters passed. Any parameters not
+   * provided will be left unchanged.
    */
   public Order update(OrderUpdateParams params, RequestOptions options) throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("/v1/orders/%s", ApiResource.urlEncodeId(this.getId()))
-      );
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/orders/%s", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
   }
 
-  /**
-   * <p>Pay an order by providing a <code>source</code> to create a payment.</p>
-   */
+  /** Pay an order by providing a <code>source</code> to create a payment. */
   public Order pay() throws StripeException {
     return pay((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /**
-   * <p>Pay an order by providing a <code>source</code> to create a payment.</p>
-   */
+  /** Pay an order by providing a <code>source</code> to create a payment. */
   public Order pay(RequestOptions options) throws StripeException {
     return pay((Map<String, Object>) null, options);
   }
 
-  /**
-   * <p>Pay an order by providing a <code>source</code> to create a payment.</p>
-   */
+  /** Pay an order by providing a <code>source</code> to create a payment. */
   public Order pay(Map<String, Object> params) throws StripeException {
     return pay(params, (RequestOptions) null);
   }
 
-  /**
-   * <p>Pay an order by providing a <code>source</code> to create a payment.</p>
-   */
+  /** Pay an order by providing a <code>source</code> to create a payment. */
   public Order pay(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("/v1/orders/%s/pay", ApiResource.urlEncodeId(this.getId()))
-      );
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/orders/%s/pay", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
   }
 
-  /**
-   * <p>Pay an order by providing a <code>source</code> to create a payment.</p>
-   */
+  /** Pay an order by providing a <code>source</code> to create a payment. */
   public Order pay(OrderPayParams params) throws StripeException {
     return pay(params, (RequestOptions) null);
   }
 
-  /**
-   * <p>Pay an order by providing a <code>source</code> to create a payment.</p>
-   */
+  /** Pay an order by providing a <code>source</code> to create a payment. */
   public Order pay(OrderPayParams params, RequestOptions options) throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("/v1/orders/%s/pay", ApiResource.urlEncodeId(this.getId()))
-      );
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/orders/%s/pay", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Order.class, options);
   }
 
   /**
-   * <p>Return all or part of an order. The order must have a status of <code>paid</code> or <code>fulfilled</code> before it can be returned. Once all items have been returned, the order will become <code>canceled</code> or <code>returned</code> depending on which status the order started in.</p>
+   * Return all or part of an order. The order must have a status of <code>paid</code> or <code>
+   * fulfilled</code> before it can be returned. Once all items have been returned, the order will
+   * become <code>canceled</code> or <code>returned</code> depending on which status the order
+   * started in.
    */
   public OrderReturn returnOrder() throws StripeException {
     return returnOrder((Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * <p>Return all or part of an order. The order must have a status of <code>paid</code> or <code>fulfilled</code> before it can be returned. Once all items have been returned, the order will become <code>canceled</code> or <code>returned</code> depending on which status the order started in.</p>
+   * Return all or part of an order. The order must have a status of <code>paid</code> or <code>
+   * fulfilled</code> before it can be returned. Once all items have been returned, the order will
+   * become <code>canceled</code> or <code>returned</code> depending on which status the order
+   * started in.
    */
   public OrderReturn returnOrder(RequestOptions options) throws StripeException {
     return returnOrder((Map<String, Object>) null, options);
   }
 
   /**
-   * <p>Return all or part of an order. The order must have a status of <code>paid</code> or <code>fulfilled</code> before it can be returned. Once all items have been returned, the order will become <code>canceled</code> or <code>returned</code> depending on which status the order started in.</p>
+   * Return all or part of an order. The order must have a status of <code>paid</code> or <code>
+   * fulfilled</code> before it can be returned. Once all items have been returned, the order will
+   * become <code>canceled</code> or <code>returned</code> depending on which status the order
+   * started in.
    */
   public OrderReturn returnOrder(Map<String, Object> params) throws StripeException {
     return returnOrder(params, (RequestOptions) null);
   }
 
   /**
-   * <p>Return all or part of an order. The order must have a status of <code>paid</code> or <code>fulfilled</code> before it can be returned. Once all items have been returned, the order will become <code>canceled</code> or <code>returned</code> depending on which status the order started in.</p>
+   * Return all or part of an order. The order must have a status of <code>paid</code> or <code>
+   * fulfilled</code> before it can be returned. Once all items have been returned, the order will
+   * become <code>canceled</code> or <code>returned</code> depending on which status the order
+   * started in.
    */
-  public OrderReturn returnOrder(
-      Map<String, Object> params,
-      RequestOptions options) throws StripeException {
+  public OrderReturn returnOrder(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("/v1/orders/%s/returns", ApiResource.urlEncodeId(this.getId()))
-      );
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/orders/%s/returns", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
-      ApiResource.RequestMethod.POST,
-      url,
-      params,
-      OrderReturn.class,
-      options
-    );
+        ApiResource.RequestMethod.POST, url, params, OrderReturn.class, options);
   }
 
   /**
-   * <p>Return all or part of an order. The order must have a status of <code>paid</code> or <code>fulfilled</code> before it can be returned. Once all items have been returned, the order will become <code>canceled</code> or <code>returned</code> depending on which status the order started in.</p>
+   * Return all or part of an order. The order must have a status of <code>paid</code> or <code>
+   * fulfilled</code> before it can be returned. Once all items have been returned, the order will
+   * become <code>canceled</code> or <code>returned</code> depending on which status the order
+   * started in.
    */
   public OrderReturn returnOrder(OrderReturnOrderParams params) throws StripeException {
     return returnOrder(params, (RequestOptions) null);
   }
 
   /**
-   * <p>Return all or part of an order. The order must have a status of <code>paid</code> or <code>fulfilled</code> before it can be returned. Once all items have been returned, the order will become <code>canceled</code> or <code>returned</code> depending on which status the order started in.</p>
+   * Return all or part of an order. The order must have a status of <code>paid</code> or <code>
+   * fulfilled</code> before it can be returned. Once all items have been returned, the order will
+   * become <code>canceled</code> or <code>returned</code> depending on which status the order
+   * started in.
    */
-  public OrderReturn returnOrder(
-      OrderReturnOrderParams params,
-      RequestOptions options) throws StripeException {
+  public OrderReturn returnOrder(OrderReturnOrderParams params, RequestOptions options)
+      throws StripeException {
     String url =
-      String.format(
-        "%s%s",
-        Stripe.getApiBase(),
-        String.format("/v1/orders/%s/returns", ApiResource.urlEncodeId(this.getId()))
-      );
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format("/v1/orders/%s/returns", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
-      ApiResource.RequestMethod.POST,
-      url,
-      params,
-      OrderReturn.class,
-      options
-    );
+        ApiResource.RequestMethod.POST, url, params, OrderReturn.class, options);
   }
 
   @Getter
@@ -479,32 +442,31 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   @EqualsAndHashCode(callSuper = false)
   public static class ShippingMethod extends StripeObject implements HasId {
     /**
-     * A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1, Japanese Yen being a zero-decimal currency) representing the total amount for the line item.
+     * A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1,
+     * Japanese Yen being a zero-decimal currency) representing the total amount for the line item.
      */
     @SerializedName("amount")
     Long amount;
 
     /**
-     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
+     * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
      */
     @SerializedName("currency")
     String currency;
 
     /**
-     * The estimated delivery date for the given shipping method. Can be either a specific date or a range.
+     * The estimated delivery date for the given shipping method. Can be either a specific date or a
+     * range.
      */
     @SerializedName("delivery_estimate")
     DeliveryEstimate deliveryEstimate;
 
-    /**
-     * An arbitrary string attached to the object. Often useful for displaying to users.
-     */
+    /** An arbitrary string attached to the object. Often useful for displaying to users. */
     @SerializedName("description")
     String description;
 
-    /**
-     * Unique identifier for the object.
-     */
+    /** Unique identifier for the object. */
     @Getter(onMethod_ = {@Override})
     @SerializedName("id")
     String id;
@@ -520,7 +482,8 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
       String date;
 
       /**
-       * If `type` is `"range"`, `earliest` will be be the earliest delivery date in the format YYYY-MM-DD.
+       * If `type` is `"range"`, `earliest` will be be the earliest delivery date in the format
+       * YYYY-MM-DD.
        */
       @SerializedName("earliest")
       String earliest;
@@ -531,9 +494,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
       @SerializedName("latest")
       String latest;
 
-      /**
-       * The type of estimate. Must be either `"range"` or `"exact"`.
-       */
+      /** The type of estimate. Must be either `"range"` or `"exact"`. */
       @SerializedName("type")
       String type;
     }

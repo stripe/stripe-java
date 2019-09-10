@@ -1,7 +1,3 @@
 package com.stripe.model;
 
-import com.stripe.net.ApiResource;
-
-public class PaymentMethodCollection extends StripeCollection<PaymentMethod> {
-
-}
+public class PaymentMethodCollection extends StripeCollection<PaymentMethod> {}

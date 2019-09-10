@@ -1,8 +1,5 @@
 package com.stripe.model.reporting;
 
 import com.stripe.model.StripeCollection;
-import com.stripe.net.ApiResource;
 
-public class ReportTypeCollection extends StripeCollection<ReportType> {
-
-}
+public class ReportTypeCollection extends StripeCollection<ReportType> {}

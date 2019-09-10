@@ -2,7 +2,6 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
-import com.stripe.net.ApiRequestParams.EnumParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,43 +9,39 @@ import java.util.Map;
 import lombok.Getter;
 
 public class TaxIdCollectionCreateParams extends ApiRequestParams {
-  /**
-   * Specifies which fields in the response should be expanded.
-   */
+  /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
 
   /**
-   * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /**
-   * Type of the tax ID, one of `au_abn`, `eu_vat`, `in_gst`, `no_vat`, or `nz_gst`.
-   */
+  /** Type of the tax ID, one of `au_abn`, `eu_vat`, `in_gst`, `no_vat`, or `nz_gst`. */
   @SerializedName("type")
   Type type;
 
-  /**
-   * Value of the tax ID.
-   */
+  /** Value of the tax ID. */
   @SerializedName("value")
   String value;
 
   private TaxIdCollectionCreateParams(
-      List<String> expand,
-      Map<String, Object> extraParams,
-      Type type,
-      String value) {
+      List<String> expand, Map<String, Object> extraParams, Type type, String value) {
     this.expand = expand;
     this.extraParams = extraParams;
     this.type = type;
     this.value = value;
   }
+
   public static Builder builder() {
     return new Builder();
   }
+
   public static class Builder {
     private List<String> expand;
 
@@ -56,15 +51,15 @@ public class TaxIdCollectionCreateParams extends ApiRequestParams {
 
     private String value;
 
-    /**
-     * Finalize and obtain parameter instance from this builder.
-     */
+    /** Finalize and obtain parameter instance from this builder. */
     public TaxIdCollectionCreateParams build() {
       return new TaxIdCollectionCreateParams(this.expand, this.extraParams, this.type, this.value);
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link TaxIdCollectionCreateParams#expand} for the field documentation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * TaxIdCollectionCreateParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -75,7 +70,9 @@ public class TaxIdCollectionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link TaxIdCollectionCreateParams#expand} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * TaxIdCollectionCreateParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -86,7 +83,9 @@ public class TaxIdCollectionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link TaxIdCollectionCreateParams#extraParams} for the field documentation.
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * TaxIdCollectionCreateParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -97,7 +96,9 @@ public class TaxIdCollectionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link TaxIdCollectionCreateParams#extraParams} for the field documentation.
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link TaxIdCollectionCreateParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -107,22 +108,19 @@ public class TaxIdCollectionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * Type of the tax ID, one of `au_abn`, `eu_vat`, `in_gst`, `no_vat`, or `nz_gst`.
-     */
+    /** Type of the tax ID, one of `au_abn`, `eu_vat`, `in_gst`, `no_vat`, or `nz_gst`. */
     public Builder setType(Type type) {
       this.type = type;
       return this;
     }
 
-    /**
-     * Value of the tax ID.
-     */
+    /** Value of the tax ID. */
     public Builder setValue(String value) {
       this.value = value;
       return this;
     }
   }
+
   public enum Type implements ApiRequestParams.EnumParam {
     @SerializedName("au_abn")
     AU_ABN("au_abn"),
@@ -138,11 +136,12 @@ public class TaxIdCollectionCreateParams extends ApiRequestParams {
 
     @SerializedName("nz_gst")
     NZ_GST("nz_gst");
+
     @Getter(onMethod_ = {@Override})
     private final String value;
+
     Type(String value) {
       this.value = value;
     }
-
   }
 }

@@ -9,31 +9,37 @@ import java.util.Map;
 
 public class DisputeUpdateParams extends ApiRequestParams {
   /**
-   * Evidence to upload, to respond to a dispute. Updating any field in the hash will submit all fields in the hash for review. The combined character count of all fields is limited to 150,000.
+   * Evidence to upload, to respond to a dispute. Updating any field in the hash will submit all
+   * fields in the hash for review. The combined character count of all fields is limited to
+   * 150,000.
    */
   @SerializedName("evidence")
   Evidence evidence;
 
-  /**
-   * Specifies which fields in the response should be expanded.
-   */
+  /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
 
   /**
-   * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
   /**
-   * A set of key-value pairs that you can attach to a dispute object. This can be useful for storing additional information about the dispute in a structured format.
+   * A set of key-value pairs that you can attach to a dispute object. This can be useful for
+   * storing additional information about the dispute in a structured format.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
   /**
-   * Whether to immediately submit evidence to the bank. If `false`, evidence is staged on the dispute. Staged evidence is visible in the API and Dashboard, and can be submitted to the bank by making another request with this attribute set to `true` (the default).
+   * Whether to immediately submit evidence to the bank. If `false`, evidence is staged on the
+   * dispute. Staged evidence is visible in the API and Dashboard, and can be submitted to the bank
+   * by making another request with this attribute set to `true` (the default).
    */
   @SerializedName("submit")
   Boolean submit;
@@ -50,9 +56,11 @@ public class DisputeUpdateParams extends ApiRequestParams {
     this.metadata = metadata;
     this.submit = submit;
   }
+
   public static Builder builder() {
     return new Builder();
   }
+
   public static class Builder {
     private Evidence evidence;
 
@@ -64,21 +72,16 @@ public class DisputeUpdateParams extends ApiRequestParams {
 
     private Boolean submit;
 
-    /**
-     * Finalize and obtain parameter instance from this builder.
-     */
+    /** Finalize and obtain parameter instance from this builder. */
     public DisputeUpdateParams build() {
       return new DisputeUpdateParams(
-        this.evidence,
-        this.expand,
-        this.extraParams,
-        this.metadata,
-        this.submit
-      );
+          this.evidence, this.expand, this.extraParams, this.metadata, this.submit);
     }
 
     /**
-     * Evidence to upload, to respond to a dispute. Updating any field in the hash will submit all fields in the hash for review. The combined character count of all fields is limited to 150,000.
+     * Evidence to upload, to respond to a dispute. Updating any field in the hash will submit all
+     * fields in the hash for review. The combined character count of all fields is limited to
+     * 150,000.
      */
     public Builder setEvidence(Evidence evidence) {
       this.evidence = evidence;
@@ -86,7 +89,9 @@ public class DisputeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link DisputeUpdateParams#expand} for the field documentation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * DisputeUpdateParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -97,7 +102,9 @@ public class DisputeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link DisputeUpdateParams#expand} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * DisputeUpdateParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -108,7 +115,9 @@ public class DisputeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link DisputeUpdateParams#extraParams} for the field documentation.
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * DisputeUpdateParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -119,7 +128,9 @@ public class DisputeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link DisputeUpdateParams#extraParams} for the field documentation.
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link DisputeUpdateParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -130,7 +141,9 @@ public class DisputeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link DisputeUpdateParams#metadata} for the field documentation.
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
+     * DisputeUpdateParams#metadata} for the field documentation.
      */
     public Builder putMetadata(String key, String value) {
       if (this.metadata == null) {
@@ -141,7 +154,9 @@ public class DisputeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link DisputeUpdateParams#metadata} for the field documentation.
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link DisputeUpdateParams#metadata} for the field documentation.
      */
     public Builder putAllMetadata(Map<String, String> map) {
       if (this.metadata == null) {
@@ -152,17 +167,18 @@ public class DisputeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Whether to immediately submit evidence to the bank. If `false`, evidence is staged on the dispute. Staged evidence is visible in the API and Dashboard, and can be submitted to the bank by making another request with this attribute set to `true` (the default).
+     * Whether to immediately submit evidence to the bank. If `false`, evidence is staged on the
+     * dispute. Staged evidence is visible in the API and Dashboard, and can be submitted to the
+     * bank by making another request with this attribute set to `true` (the default).
      */
     public Builder setSubmit(Boolean submit) {
       this.submit = submit;
       return this;
     }
   }
+
   public static class Evidence {
-    /**
-     * Has a maximum character count of 20,000.
-     */
+    /** Has a maximum character count of 20,000. */
     @SerializedName("access_activity_log")
     String accessActivityLog;
 
@@ -172,15 +188,11 @@ public class DisputeUpdateParams extends ApiRequestParams {
     @SerializedName("cancellation_policy")
     String cancellationPolicy;
 
-    /**
-     * Has a maximum character count of 20,000.
-     */
+    /** Has a maximum character count of 20,000. */
     @SerializedName("cancellation_policy_disclosure")
     String cancellationPolicyDisclosure;
 
-    /**
-     * Has a maximum character count of 20,000.
-     */
+    /** Has a maximum character count of 20,000. */
     @SerializedName("cancellation_rebuttal")
     String cancellationRebuttal;
 
@@ -202,9 +214,7 @@ public class DisputeUpdateParams extends ApiRequestParams {
     @SerializedName("duplicate_charge_documentation")
     String duplicateChargeDocumentation;
 
-    /**
-     * Has a maximum character count of 20,000.
-     */
+    /** Has a maximum character count of 20,000. */
     @SerializedName("duplicate_charge_explanation")
     String duplicateChargeExplanation;
 
@@ -212,14 +222,15 @@ public class DisputeUpdateParams extends ApiRequestParams {
     String duplicateChargeId;
 
     /**
-     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /**
-     * Has a maximum character count of 20,000.
-     */
+    /** Has a maximum character count of 20,000. */
     @SerializedName("product_description")
     String productDescription;
 
@@ -229,15 +240,11 @@ public class DisputeUpdateParams extends ApiRequestParams {
     @SerializedName("refund_policy")
     String refundPolicy;
 
-    /**
-     * Has a maximum character count of 20,000.
-     */
+    /** Has a maximum character count of 20,000. */
     @SerializedName("refund_policy_disclosure")
     String refundPolicyDisclosure;
 
-    /**
-     * Has a maximum character count of 20,000.
-     */
+    /** Has a maximum character count of 20,000. */
     @SerializedName("refund_refusal_explanation")
     String refundRefusalExplanation;
 
@@ -265,9 +272,7 @@ public class DisputeUpdateParams extends ApiRequestParams {
     @SerializedName("uncategorized_file")
     String uncategorizedFile;
 
-    /**
-     * Has a maximum character count of 20,000.
-     */
+    /** Has a maximum character count of 20,000. */
     @SerializedName("uncategorized_text")
     String uncategorizedText;
 
@@ -329,9 +334,11 @@ public class DisputeUpdateParams extends ApiRequestParams {
       this.uncategorizedFile = uncategorizedFile;
       this.uncategorizedText = uncategorizedText;
     }
+
     public static Builder builder() {
       return new Builder();
     }
+
     public static class Builder {
       private String accessActivityLog;
 
@@ -389,45 +396,40 @@ public class DisputeUpdateParams extends ApiRequestParams {
 
       private String uncategorizedText;
 
-      /**
-       * Finalize and obtain parameter instance from this builder.
-       */
+      /** Finalize and obtain parameter instance from this builder. */
       public Evidence build() {
         return new Evidence(
-          this.accessActivityLog,
-          this.billingAddress,
-          this.cancellationPolicy,
-          this.cancellationPolicyDisclosure,
-          this.cancellationRebuttal,
-          this.customerCommunication,
-          this.customerEmailAddress,
-          this.customerName,
-          this.customerPurchaseIp,
-          this.customerSignature,
-          this.duplicateChargeDocumentation,
-          this.duplicateChargeExplanation,
-          this.duplicateChargeId,
-          this.extraParams,
-          this.productDescription,
-          this.receipt,
-          this.refundPolicy,
-          this.refundPolicyDisclosure,
-          this.refundRefusalExplanation,
-          this.serviceDate,
-          this.serviceDocumentation,
-          this.shippingAddress,
-          this.shippingCarrier,
-          this.shippingDate,
-          this.shippingDocumentation,
-          this.shippingTrackingNumber,
-          this.uncategorizedFile,
-          this.uncategorizedText
-        );
+            this.accessActivityLog,
+            this.billingAddress,
+            this.cancellationPolicy,
+            this.cancellationPolicyDisclosure,
+            this.cancellationRebuttal,
+            this.customerCommunication,
+            this.customerEmailAddress,
+            this.customerName,
+            this.customerPurchaseIp,
+            this.customerSignature,
+            this.duplicateChargeDocumentation,
+            this.duplicateChargeExplanation,
+            this.duplicateChargeId,
+            this.extraParams,
+            this.productDescription,
+            this.receipt,
+            this.refundPolicy,
+            this.refundPolicyDisclosure,
+            this.refundRefusalExplanation,
+            this.serviceDate,
+            this.serviceDocumentation,
+            this.shippingAddress,
+            this.shippingCarrier,
+            this.shippingDate,
+            this.shippingDocumentation,
+            this.shippingTrackingNumber,
+            this.uncategorizedFile,
+            this.uncategorizedText);
       }
 
-      /**
-       * Has a maximum character count of 20,000.
-       */
+      /** Has a maximum character count of 20,000. */
       public Builder setAccessActivityLog(String accessActivityLog) {
         this.accessActivityLog = accessActivityLog;
         return this;
@@ -443,17 +445,13 @@ public class DisputeUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * Has a maximum character count of 20,000.
-       */
+      /** Has a maximum character count of 20,000. */
       public Builder setCancellationPolicyDisclosure(String cancellationPolicyDisclosure) {
         this.cancellationPolicyDisclosure = cancellationPolicyDisclosure;
         return this;
       }
 
-      /**
-       * Has a maximum character count of 20,000.
-       */
+      /** Has a maximum character count of 20,000. */
       public Builder setCancellationRebuttal(String cancellationRebuttal) {
         this.cancellationRebuttal = cancellationRebuttal;
         return this;
@@ -489,9 +487,7 @@ public class DisputeUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * Has a maximum character count of 20,000.
-       */
+      /** Has a maximum character count of 20,000. */
       public Builder setDuplicateChargeExplanation(String duplicateChargeExplanation) {
         this.duplicateChargeExplanation = duplicateChargeExplanation;
         return this;
@@ -503,7 +499,9 @@ public class DisputeUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link DisputeUpdateParams.Evidence#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * DisputeUpdateParams.Evidence#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -514,7 +512,9 @@ public class DisputeUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link DisputeUpdateParams.Evidence#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link DisputeUpdateParams.Evidence#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -524,9 +524,7 @@ public class DisputeUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * Has a maximum character count of 20,000.
-       */
+      /** Has a maximum character count of 20,000. */
       public Builder setProductDescription(String productDescription) {
         this.productDescription = productDescription;
         return this;
@@ -542,17 +540,13 @@ public class DisputeUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * Has a maximum character count of 20,000.
-       */
+      /** Has a maximum character count of 20,000. */
       public Builder setRefundPolicyDisclosure(String refundPolicyDisclosure) {
         this.refundPolicyDisclosure = refundPolicyDisclosure;
         return this;
       }
 
-      /**
-       * Has a maximum character count of 20,000.
-       */
+      /** Has a maximum character count of 20,000. */
       public Builder setRefundRefusalExplanation(String refundRefusalExplanation) {
         this.refundRefusalExplanation = refundRefusalExplanation;
         return this;
@@ -598,9 +592,7 @@ public class DisputeUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * Has a maximum character count of 20,000.
-       */
+      /** Has a maximum character count of 20,000. */
       public Builder setUncategorizedText(String uncategorizedText) {
         this.uncategorizedText = uncategorizedText;
         return this;

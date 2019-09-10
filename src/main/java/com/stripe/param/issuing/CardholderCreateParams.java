@@ -2,7 +2,6 @@ package com.stripe.param.issuing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
-import com.stripe.net.ApiRequestParams.EnumParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -11,65 +10,60 @@ import lombok.Getter;
 
 public class CardholderCreateParams extends ApiRequestParams {
   /**
-   * Spending rules that give you control over how your cardholders can make charges. Refer to our [authorizations](https://stripe.com/docs/issuing/authorizations) documentation for more details.
+   * Spending rules that give you control over how your cardholders can make charges. Refer to our
+   * [authorizations](https://stripe.com/docs/issuing/authorizations) documentation for more
+   * details.
    */
   @SerializedName("authorization_controls")
   AuthorizationControls authorizationControls;
 
-  /**
-   * The cardholder's billing address.
-   */
+  /** The cardholder's billing address. */
   @SerializedName("billing")
   Billing billing;
 
-  /**
-   * The cardholder's email address.
-   */
+  /** The cardholder's email address. */
   @SerializedName("email")
   String email;
 
-  /**
-   * Specifies which fields in the response should be expanded.
-   */
+  /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
 
   /**
-   * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /**
-   * Specifies whether to set this as the default cardholder.
-   */
+  /** Specifies whether to set this as the default cardholder. */
   @SerializedName("is_default")
   Boolean isDefault;
 
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /**
-   * The cardholder's name. This will be printed on cards issued to them.
-   */
+  /** The cardholder's name. This will be printed on cards issued to them. */
   @SerializedName("name")
   String name;
 
   /**
-   * The cardholder's phone number. This will be transformed to [E.164](https://en.wikipedia.org/wiki/E.164) if it is not provided in that format already.
+   * The cardholder's phone number. This will be transformed to
+   * [E.164](https://en.wikipedia.org/wiki/E.164) if it is not provided in that format already.
    */
   @SerializedName("phone_number")
   String phoneNumber;
 
   /**
-   * Specifies whether to permit authorizations on this cardholder's cards. Possible values are `active` or `inactive`.
+   * Specifies whether to permit authorizations on this cardholder's cards. Possible values are
+   * `active` or `inactive`.
    */
   @SerializedName("status")
   Status status;
 
-  /**
-   * The type of cardholder. Possible values are `individual` or `business_entity`.
-   */
+  /** The type of cardholder. Possible values are `individual` or `business_entity`. */
   @SerializedName("type")
   Type type;
 
@@ -97,9 +91,11 @@ public class CardholderCreateParams extends ApiRequestParams {
     this.status = status;
     this.type = type;
   }
+
   public static Builder builder() {
     return new Builder();
   }
+
   public static class Builder {
     private AuthorizationControls authorizationControls;
 
@@ -123,51 +119,48 @@ public class CardholderCreateParams extends ApiRequestParams {
 
     private Type type;
 
-    /**
-     * Finalize and obtain parameter instance from this builder.
-     */
+    /** Finalize and obtain parameter instance from this builder. */
     public CardholderCreateParams build() {
       return new CardholderCreateParams(
-        this.authorizationControls,
-        this.billing,
-        this.email,
-        this.expand,
-        this.extraParams,
-        this.isDefault,
-        this.metadata,
-        this.name,
-        this.phoneNumber,
-        this.status,
-        this.type
-      );
+          this.authorizationControls,
+          this.billing,
+          this.email,
+          this.expand,
+          this.extraParams,
+          this.isDefault,
+          this.metadata,
+          this.name,
+          this.phoneNumber,
+          this.status,
+          this.type);
     }
 
     /**
-     * Spending rules that give you control over how your cardholders can make charges. Refer to our [authorizations](https://stripe.com/docs/issuing/authorizations) documentation for more details.
+     * Spending rules that give you control over how your cardholders can make charges. Refer to our
+     * [authorizations](https://stripe.com/docs/issuing/authorizations) documentation for more
+     * details.
      */
     public Builder setAuthorizationControls(AuthorizationControls authorizationControls) {
       this.authorizationControls = authorizationControls;
       return this;
     }
 
-    /**
-     * The cardholder's billing address.
-     */
+    /** The cardholder's billing address. */
     public Builder setBilling(Billing billing) {
       this.billing = billing;
       return this;
     }
 
-    /**
-     * The cardholder's email address.
-     */
+    /** The cardholder's email address. */
     public Builder setEmail(String email) {
       this.email = email;
       return this;
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link CardholderCreateParams#expand} for the field documentation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * CardholderCreateParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -178,7 +171,9 @@ public class CardholderCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link CardholderCreateParams#expand} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * CardholderCreateParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -189,7 +184,9 @@ public class CardholderCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link CardholderCreateParams#extraParams} for the field documentation.
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * CardholderCreateParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -200,7 +197,9 @@ public class CardholderCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link CardholderCreateParams#extraParams} for the field documentation.
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link CardholderCreateParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -210,16 +209,16 @@ public class CardholderCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * Specifies whether to set this as the default cardholder.
-     */
+    /** Specifies whether to set this as the default cardholder. */
     public Builder setIsDefault(Boolean isDefault) {
       this.isDefault = isDefault;
       return this;
     }
 
     /**
-     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link CardholderCreateParams#metadata} for the field documentation.
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
+     * CardholderCreateParams#metadata} for the field documentation.
      */
     public Builder putMetadata(String key, String value) {
       if (this.metadata == null) {
@@ -230,7 +229,9 @@ public class CardholderCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link CardholderCreateParams#metadata} for the field documentation.
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link CardholderCreateParams#metadata} for the field documentation.
      */
     public Builder putAllMetadata(Map<String, String> map) {
       if (this.metadata == null) {
@@ -240,16 +241,15 @@ public class CardholderCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * The cardholder's name. This will be printed on cards issued to them.
-     */
+    /** The cardholder's name. This will be printed on cards issued to them. */
     public Builder setName(String name) {
       this.name = name;
       return this;
     }
 
     /**
-     * The cardholder's phone number. This will be transformed to [E.164](https://en.wikipedia.org/wiki/E.164) if it is not provided in that format already.
+     * The cardholder's phone number. This will be transformed to
+     * [E.164](https://en.wikipedia.org/wiki/E.164) if it is not provided in that format already.
      */
     public Builder setPhoneNumber(String phoneNumber) {
       this.phoneNumber = phoneNumber;
@@ -257,49 +257,52 @@ public class CardholderCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Specifies whether to permit authorizations on this cardholder's cards. Possible values are `active` or `inactive`.
+     * Specifies whether to permit authorizations on this cardholder's cards. Possible values are
+     * `active` or `inactive`.
      */
     public Builder setStatus(Status status) {
       this.status = status;
       return this;
     }
 
-    /**
-     * The type of cardholder. Possible values are `individual` or `business_entity`.
-     */
+    /** The type of cardholder. Possible values are `individual` or `business_entity`. */
     public Builder setType(Type type) {
       this.type = type;
       return this;
     }
   }
+
   public static class AuthorizationControls {
     /**
-     * Array of strings containing [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category) of authorizations permitted on this card.
+     * Array of strings containing
+     * [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category)
+     * of authorizations permitted on this card.
      */
     @SerializedName("allowed_categories")
     List<AllowedCategory> allowedCategories;
 
     /**
-     * Array of strings containing [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category) of authorizations to always decline on this card.
+     * Array of strings containing
+     * [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category)
+     * of authorizations to always decline on this card.
      */
     @SerializedName("blocked_categories")
     List<BlockedCategory> blockedCategories;
 
     /**
-     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /**
-     * Limit the spending with rules based on time intervals and categories.
-     */
+    /** Limit the spending with rules based on time intervals and categories. */
     @SerializedName("spending_limits")
     List<SpendingLimit> spendingLimits;
 
-    /**
-     * Currency for your spending limits. Defaults to your merchant country's currency.
-     */
+    /** Currency for your spending limits. Defaults to your merchant country's currency. */
     @SerializedName("spending_limits_currency")
     String spendingLimitsCurrency;
 
@@ -315,9 +318,11 @@ public class CardholderCreateParams extends ApiRequestParams {
       this.spendingLimits = spendingLimits;
       this.spendingLimitsCurrency = spendingLimitsCurrency;
     }
+
     public static Builder builder() {
       return new Builder();
     }
+
     public static class Builder {
       private List<AllowedCategory> allowedCategories;
 
@@ -329,21 +334,21 @@ public class CardholderCreateParams extends ApiRequestParams {
 
       private String spendingLimitsCurrency;
 
-      /**
-       * Finalize and obtain parameter instance from this builder.
-       */
+      /** Finalize and obtain parameter instance from this builder. */
       public AuthorizationControls build() {
         return new AuthorizationControls(
-          this.allowedCategories,
-          this.blockedCategories,
-          this.extraParams,
-          this.spendingLimits,
-          this.spendingLimitsCurrency
-        );
+            this.allowedCategories,
+            this.blockedCategories,
+            this.extraParams,
+            this.spendingLimits,
+            this.spendingLimitsCurrency);
       }
 
       /**
-       * Add an element to `allowedCategories` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link CardholderCreateParams.AuthorizationControls#allowedCategories} for the field documentation.
+       * Add an element to `allowedCategories` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link CardholderCreateParams.AuthorizationControls#allowedCategories} for the field
+       * documentation.
        */
       public Builder addAllowedCategory(AllowedCategory element) {
         if (this.allowedCategories == null) {
@@ -354,7 +359,10 @@ public class CardholderCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add all elements to `allowedCategories` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link CardholderCreateParams.AuthorizationControls#allowedCategories} for the field documentation.
+       * Add all elements to `allowedCategories` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link CardholderCreateParams.AuthorizationControls#allowedCategories} for the field
+       * documentation.
        */
       public Builder addAllAllowedCategory(List<AllowedCategory> elements) {
         if (this.allowedCategories == null) {
@@ -365,7 +373,10 @@ public class CardholderCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add an element to `blockedCategories` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link CardholderCreateParams.AuthorizationControls#blockedCategories} for the field documentation.
+       * Add an element to `blockedCategories` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link CardholderCreateParams.AuthorizationControls#blockedCategories} for the field
+       * documentation.
        */
       public Builder addBlockedCategory(BlockedCategory element) {
         if (this.blockedCategories == null) {
@@ -376,7 +387,10 @@ public class CardholderCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add all elements to `blockedCategories` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link CardholderCreateParams.AuthorizationControls#blockedCategories} for the field documentation.
+       * Add all elements to `blockedCategories` list. A list is initialized for the first
+       * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+       * {@link CardholderCreateParams.AuthorizationControls#blockedCategories} for the field
+       * documentation.
        */
       public Builder addAllBlockedCategory(List<BlockedCategory> elements) {
         if (this.blockedCategories == null) {
@@ -387,7 +401,9 @@ public class CardholderCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link CardholderCreateParams.AuthorizationControls#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * CardholderCreateParams.AuthorizationControls#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -398,7 +414,10 @@ public class CardholderCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link CardholderCreateParams.AuthorizationControls#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CardholderCreateParams.AuthorizationControls#extraParams} for the field
+       * documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -409,7 +428,9 @@ public class CardholderCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add an element to `spendingLimits` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link CardholderCreateParams.AuthorizationControls#spendingLimits} for the field documentation.
+       * Add an element to `spendingLimits` list. A list is initialized for the first `add/addAll`
+       * call, and subsequent calls adds additional elements to the original list. See {@link
+       * CardholderCreateParams.AuthorizationControls#spendingLimits} for the field documentation.
        */
       public Builder addSpendingLimit(SpendingLimit element) {
         if (this.spendingLimits == null) {
@@ -420,7 +441,9 @@ public class CardholderCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add all elements to `spendingLimits` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link CardholderCreateParams.AuthorizationControls#spendingLimits} for the field documentation.
+       * Add all elements to `spendingLimits` list. A list is initialized for the first `add/addAll`
+       * call, and subsequent calls adds additional elements to the original list. See {@link
+       * CardholderCreateParams.AuthorizationControls#spendingLimits} for the field documentation.
        */
       public Builder addAllSpendingLimit(List<SpendingLimit> elements) {
         if (this.spendingLimits == null) {
@@ -430,35 +453,38 @@ public class CardholderCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * Currency for your spending limits. Defaults to your merchant country's currency.
-       */
+      /** Currency for your spending limits. Defaults to your merchant country's currency. */
       public Builder setSpendingLimitsCurrency(String spendingLimitsCurrency) {
         this.spendingLimitsCurrency = spendingLimitsCurrency;
         return this;
       }
     }
+
     public static class SpendingLimit {
-      /**
-       * Maximum amount allowed to spend per time interval.
-       */
+      /** Maximum amount allowed to spend per time interval. */
       @SerializedName("amount")
       Long amount;
 
       /**
-       * Array of strings containing [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category) on which to apply the spending limit. Leave this blank to limit all charges.
+       * Array of strings containing
+       * [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category)
+       * on which to apply the spending limit. Leave this blank to limit all charges.
        */
       @SerializedName("categories")
       List<Category> categories;
 
       /**
-       * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
        */
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
       /**
-       * The time interval with which to apply this spending limit towards. Allowed values are 'per_authorization', 'daily', 'weekly', 'monthly', 'yearly', and 'all_time'.
+       * The time interval with which to apply this spending limit towards. Allowed values are
+       * 'per_authorization', 'daily', 'weekly', 'monthly', 'yearly', and 'all_time'.
        */
       @SerializedName("interval")
       Interval interval;
@@ -473,9 +499,11 @@ public class CardholderCreateParams extends ApiRequestParams {
         this.extraParams = extraParams;
         this.interval = interval;
       }
+
       public static Builder builder() {
         return new Builder();
       }
+
       public static class Builder {
         private Long amount;
 
@@ -485,23 +513,22 @@ public class CardholderCreateParams extends ApiRequestParams {
 
         private Interval interval;
 
-        /**
-         * Finalize and obtain parameter instance from this builder.
-         */
+        /** Finalize and obtain parameter instance from this builder. */
         public SpendingLimit build() {
           return new SpendingLimit(this.amount, this.categories, this.extraParams, this.interval);
         }
 
-        /**
-         * Maximum amount allowed to spend per time interval.
-         */
+        /** Maximum amount allowed to spend per time interval. */
         public Builder setAmount(Long amount) {
           this.amount = amount;
           return this;
         }
 
         /**
-         * Add an element to `categories` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link CardholderCreateParams.AuthorizationControls.SpendingLimit#categories} for the field documentation.
+         * Add an element to `categories` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * CardholderCreateParams.AuthorizationControls.SpendingLimit#categories} for the field
+         * documentation.
          */
         public Builder addCategory(Category element) {
           if (this.categories == null) {
@@ -512,7 +539,10 @@ public class CardholderCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Add all elements to `categories` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link CardholderCreateParams.AuthorizationControls.SpendingLimit#categories} for the field documentation.
+         * Add all elements to `categories` list. A list is initialized for the first `add/addAll`
+         * call, and subsequent calls adds additional elements to the original list. See {@link
+         * CardholderCreateParams.AuthorizationControls.SpendingLimit#categories} for the field
+         * documentation.
          */
         public Builder addAllCategory(List<Category> elements) {
           if (this.categories == null) {
@@ -523,7 +553,10 @@ public class CardholderCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link CardholderCreateParams.AuthorizationControls.SpendingLimit#extraParams} for the field documentation.
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CardholderCreateParams.AuthorizationControls.SpendingLimit#extraParams}
+         * for the field documentation.
          */
         public Builder putExtraParam(String key, Object value) {
           if (this.extraParams == null) {
@@ -534,7 +567,10 @@ public class CardholderCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link CardholderCreateParams.AuthorizationControls.SpendingLimit#extraParams} for the field documentation.
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CardholderCreateParams.AuthorizationControls.SpendingLimit#extraParams}
+         * for the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -545,13 +581,15 @@ public class CardholderCreateParams extends ApiRequestParams {
         }
 
         /**
-         * The time interval with which to apply this spending limit towards. Allowed values are 'per_authorization', 'daily', 'weekly', 'monthly', 'yearly', and 'all_time'.
+         * The time interval with which to apply this spending limit towards. Allowed values are
+         * 'per_authorization', 'daily', 'weekly', 'monthly', 'yearly', and 'all_time'.
          */
         public Builder setInterval(Interval interval) {
           this.interval = interval;
           return this;
         }
       }
+
       public enum Category implements ApiRequestParams.EnumParam {
         @SerializedName("ac_refrigeration_repair")
         AC_REFRIGERATION_REPAIR("ac_refrigeration_repair"),
@@ -668,7 +706,8 @@ public class CardholderCreateParams extends ApiRequestParams {
         BUYING_SHOPPING_SERVICES("buying_shopping_services"),
 
         @SerializedName("cable_satellite_and_other_pay_television_and_radio")
-        CABLE_SATELLITE_AND_OTHER_PAY_TELEVISION_AND_RADIO("cable_satellite_and_other_pay_television_and_radio"),
+        CABLE_SATELLITE_AND_OTHER_PAY_TELEVISION_AND_RADIO(
+            "cable_satellite_and_other_pay_television_and_radio"),
 
         @SerializedName("camera_and_photographic_supply_stores")
         CAMERA_AND_PHOTOGRAPHIC_SUPPLY_STORES("camera_and_photographic_supply_stores"),
@@ -698,7 +737,8 @@ public class CardholderCreateParams extends ApiRequestParams {
         CATERERS("caterers"),
 
         @SerializedName("charitable_and_social_service_organizations_fundraising")
-        CHARITABLE_AND_SOCIAL_SERVICE_ORGANIZATIONS_FUNDRAISING("charitable_and_social_service_organizations_fundraising"),
+        CHARITABLE_AND_SOCIAL_SERVICE_ORGANIZATIONS_FUNDRAISING(
+            "charitable_and_social_service_organizations_fundraising"),
 
         @SerializedName("chemicals_and_allied_products")
         CHEMICALS_AND_ALLIED_PRODUCTS("chemicals_and_allied_products"),
@@ -815,7 +855,8 @@ public class CardholderCreateParams extends ApiRequestParams {
         DIRECT_MARKETING_CATALOG_MERCHANT("direct_marketing_catalog_merchant"),
 
         @SerializedName("direct_marketing_combination_catalog_and_retail_merchant")
-        DIRECT_MARKETING_COMBINATION_CATALOG_AND_RETAIL_MERCHANT("direct_marketing_combination_catalog_and_retail_merchant"),
+        DIRECT_MARKETING_COMBINATION_CATALOG_AND_RETAIL_MERCHANT(
+            "direct_marketing_combination_catalog_and_retail_merchant"),
 
         @SerializedName("direct_marketing_inbound_telemarketing")
         DIRECT_MARKETING_INBOUND_TELEMARKETING("direct_marketing_inbound_telemarketing"),
@@ -845,7 +886,8 @@ public class CardholderCreateParams extends ApiRequestParams {
         DOOR_TO_DOOR_SALES("door_to_door_sales"),
 
         @SerializedName("drapery_window_covering_and_upholstery_stores")
-        DRAPERY_WINDOW_COVERING_AND_UPHOLSTERY_STORES("drapery_window_covering_and_upholstery_stores"),
+        DRAPERY_WINDOW_COVERING_AND_UPHOLSTERY_STORES(
+            "drapery_window_covering_and_upholstery_stores"),
 
         @SerializedName("drinking_places")
         DRINKING_PLACES("drinking_places"),
@@ -854,7 +896,8 @@ public class CardholderCreateParams extends ApiRequestParams {
         DRUG_STORES_AND_PHARMACIES("drug_stores_and_pharmacies"),
 
         @SerializedName("drugs_drug_proprietaries_and_druggist_sundries")
-        DRUGS_DRUG_PROPRIETARIES_AND_DRUGGIST_SUNDRIES("drugs_drug_proprietaries_and_druggist_sundries"),
+        DRUGS_DRUG_PROPRIETARIES_AND_DRUGGIST_SUNDRIES(
+            "drugs_drug_proprietaries_and_druggist_sundries"),
 
         @SerializedName("dry_cleaners")
         DRY_CLEANERS("dry_cleaners"),
@@ -911,7 +954,8 @@ public class CardholderCreateParams extends ApiRequestParams {
         FINES_GOVERNMENT_ADMINISTRATIVE_ENTITIES("fines_government_administrative_entities"),
 
         @SerializedName("fireplace_fireplace_screens_and_accessories_stores")
-        FIREPLACE_FIREPLACE_SCREENS_AND_ACCESSORIES_STORES("fireplace_fireplace_screens_and_accessories_stores"),
+        FIREPLACE_FIREPLACE_SCREENS_AND_ACCESSORIES_STORES(
+            "fireplace_fireplace_screens_and_accessories_stores"),
 
         @SerializedName("floor_covering_stores")
         FLOOR_COVERING_STORES("floor_covering_stores"),
@@ -932,7 +976,8 @@ public class CardholderCreateParams extends ApiRequestParams {
         FUNERAL_SERVICES_CREMATORIES("funeral_services_crematories"),
 
         @SerializedName("furniture_home_furnishings_and_equipment_stores_except_appliances")
-        FURNITURE_HOME_FURNISHINGS_AND_EQUIPMENT_STORES_EXCEPT_APPLIANCES("furniture_home_furnishings_and_equipment_stores_except_appliances"),
+        FURNITURE_HOME_FURNISHINGS_AND_EQUIPMENT_STORES_EXCEPT_APPLIANCES(
+            "furniture_home_furnishings_and_equipment_stores_except_appliances"),
 
         @SerializedName("furniture_repair_refinishing")
         FURNITURE_REPAIR_REFINISHING("furniture_repair_refinishing"),
@@ -1007,7 +1052,8 @@ public class CardholderCreateParams extends ApiRequestParams {
         INTRA_COMPANY_PURCHASES("intra_company_purchases"),
 
         @SerializedName("jewelry_stores_watches_clocks_and_silverware_stores")
-        JEWELRY_STORES_WATCHES_CLOCKS_AND_SILVERWARE_STORES("jewelry_stores_watches_clocks_and_silverware_stores"),
+        JEWELRY_STORES_WATCHES_CLOCKS_AND_SILVERWARE_STORES(
+            "jewelry_stores_watches_clocks_and_silverware_stores"),
 
         @SerializedName("landscaping_services")
         LANDSCAPING_SERVICES("landscaping_services"),
@@ -1043,7 +1089,8 @@ public class CardholderCreateParams extends ApiRequestParams {
         MEDICAL_AND_DENTAL_LABS("medical_and_dental_labs"),
 
         @SerializedName("medical_dental_ophthalmic_and_hospital_equipment_and_supplies")
-        MEDICAL_DENTAL_OPHTHALMIC_AND_HOSPITAL_EQUIPMENT_AND_SUPPLIES("medical_dental_ophthalmic_and_hospital_equipment_and_supplies"),
+        MEDICAL_DENTAL_OPHTHALMIC_AND_HOSPITAL_EQUIPMENT_AND_SUPPLIES(
+            "medical_dental_ophthalmic_and_hospital_equipment_and_supplies"),
 
         @SerializedName("medical_services")
         MEDICAL_SERVICES("medical_services"),
@@ -1052,7 +1099,8 @@ public class CardholderCreateParams extends ApiRequestParams {
         MEMBERSHIP_ORGANIZATIONS("membership_organizations"),
 
         @SerializedName("mens_and_boys_clothing_and_accessories_stores")
-        MENS_AND_BOYS_CLOTHING_AND_ACCESSORIES_STORES("mens_and_boys_clothing_and_accessories_stores"),
+        MENS_AND_BOYS_CLOTHING_AND_ACCESSORIES_STORES(
+            "mens_and_boys_clothing_and_accessories_stores"),
 
         @SerializedName("mens_womens_clothing_stores")
         MENS_WOMENS_CLOTHING_STORES("mens_womens_clothing_stores"),
@@ -1082,7 +1130,8 @@ public class CardholderCreateParams extends ApiRequestParams {
         MISCELLANEOUS_GENERAL_SERVICES("miscellaneous_general_services"),
 
         @SerializedName("miscellaneous_home_furnishing_specialty_stores")
-        MISCELLANEOUS_HOME_FURNISHING_SPECIALTY_STORES("miscellaneous_home_furnishing_specialty_stores"),
+        MISCELLANEOUS_HOME_FURNISHING_SPECIALTY_STORES(
+            "miscellaneous_home_furnishing_specialty_stores"),
 
         @SerializedName("miscellaneous_publishing_and_printing")
         MISCELLANEOUS_PUBLISHING_AND_PRINTING("miscellaneous_publishing_and_printing"),
@@ -1118,7 +1167,8 @@ public class CardholderCreateParams extends ApiRequestParams {
         MOTORCYCLE_SHOPS_DEALERS("motorcycle_shops_dealers"),
 
         @SerializedName("music_stores_musical_instruments_pianos_and_sheet_music")
-        MUSIC_STORES_MUSICAL_INSTRUMENTS_PIANOS_AND_SHEET_MUSIC("music_stores_musical_instruments_pianos_and_sheet_music"),
+        MUSIC_STORES_MUSICAL_INSTRUMENTS_PIANOS_AND_SHEET_MUSIC(
+            "music_stores_musical_instruments_pianos_and_sheet_music"),
 
         @SerializedName("news_dealers_and_newsstands")
         NEWS_DEALERS_AND_NEWSSTANDS("news_dealers_and_newsstands"),
@@ -1178,7 +1228,8 @@ public class CardholderCreateParams extends ApiRequestParams {
         PHOTO_DEVELOPING("photo_developing"),
 
         @SerializedName("photographic_photocopy_microfilm_equipment_and_supplies")
-        PHOTOGRAPHIC_PHOTOCOPY_MICROFILM_EQUIPMENT_AND_SUPPLIES("photographic_photocopy_microfilm_equipment_and_supplies"),
+        PHOTOGRAPHIC_PHOTOCOPY_MICROFILM_EQUIPMENT_AND_SUPPLIES(
+            "photographic_photocopy_microfilm_equipment_and_supplies"),
 
         @SerializedName("photographic_studios")
         PHOTOGRAPHIC_STUDIOS("photographic_studios"),
@@ -1199,7 +1250,8 @@ public class CardholderCreateParams extends ApiRequestParams {
         POSTAL_SERVICES_GOVERNMENT_ONLY("postal_services_government_only"),
 
         @SerializedName("precious_stones_and_metals_watches_and_jewelry")
-        PRECIOUS_STONES_AND_METALS_WATCHES_AND_JEWELRY("precious_stones_and_metals_watches_and_jewelry"),
+        PRECIOUS_STONES_AND_METALS_WATCHES_AND_JEWELRY(
+            "precious_stones_and_metals_watches_and_jewelry"),
 
         @SerializedName("professional_services")
         PROFESSIONAL_SERVICES("professional_services"),
@@ -1241,7 +1293,8 @@ public class CardholderCreateParams extends ApiRequestParams {
         SERVICE_STATIONS("service_stations"),
 
         @SerializedName("sewing_needlework_fabric_and_piece_goods_stores")
-        SEWING_NEEDLEWORK_FABRIC_AND_PIECE_GOODS_STORES("sewing_needlework_fabric_and_piece_goods_stores"),
+        SEWING_NEEDLEWORK_FABRIC_AND_PIECE_GOODS_STORES(
+            "sewing_needlework_fabric_and_piece_goods_stores"),
 
         @SerializedName("shoe_repair_hat_cleaning")
         SHOE_REPAIR_HAT_CLEANING("shoe_repair_hat_cleaning"),
@@ -1277,10 +1330,12 @@ public class CardholderCreateParams extends ApiRequestParams {
         STAMP_AND_COIN_STORES("stamp_and_coin_stores"),
 
         @SerializedName("stationary_office_supplies_printing_and_writing_paper")
-        STATIONARY_OFFICE_SUPPLIES_PRINTING_AND_WRITING_PAPER("stationary_office_supplies_printing_and_writing_paper"),
+        STATIONARY_OFFICE_SUPPLIES_PRINTING_AND_WRITING_PAPER(
+            "stationary_office_supplies_printing_and_writing_paper"),
 
         @SerializedName("stationery_stores_office_and_school_supply_stores")
-        STATIONERY_STORES_OFFICE_AND_SCHOOL_SUPPLY_STORES("stationery_stores_office_and_school_supply_stores"),
+        STATIONERY_STORES_OFFICE_AND_SCHOOL_SUPPLY_STORES(
+            "stationery_stores_office_and_school_supply_stores"),
 
         @SerializedName("swimming_pools_sales")
         SWIMMING_POOLS_SALES("swimming_pools_sales"),
@@ -1301,7 +1356,8 @@ public class CardholderCreateParams extends ApiRequestParams {
         TAXICABS_LIMOUSINES("taxicabs_limousines"),
 
         @SerializedName("telecommunication_equipment_and_telephone_sales")
-        TELECOMMUNICATION_EQUIPMENT_AND_TELEPHONE_SALES("telecommunication_equipment_and_telephone_sales"),
+        TELECOMMUNICATION_EQUIPMENT_AND_TELEPHONE_SALES(
+            "telecommunication_equipment_and_telephone_sales"),
 
         @SerializedName("telecommunication_services")
         TELECOMMUNICATION_SERVICES("telecommunication_services"),
@@ -1349,13 +1405,15 @@ public class CardholderCreateParams extends ApiRequestParams {
         TRUCK_UTILITY_TRAILER_RENTALS("truck_utility_trailer_rentals"),
 
         @SerializedName("typesetting_plate_making_and_related_services")
-        TYPESETTING_PLATE_MAKING_AND_RELATED_SERVICES("typesetting_plate_making_and_related_services"),
+        TYPESETTING_PLATE_MAKING_AND_RELATED_SERVICES(
+            "typesetting_plate_making_and_related_services"),
 
         @SerializedName("typewriter_stores")
         TYPEWRITER_STORES("typewriter_stores"),
 
         @SerializedName("u_s_federal_government_agencies_or_departments")
-        U_S_FEDERAL_GOVERNMENT_AGENCIES_OR_DEPARTMENTS("u_s_federal_government_agencies_or_departments"),
+        U_S_FEDERAL_GOVERNMENT_AGENCIES_OR_DEPARTMENTS(
+            "u_s_federal_government_agencies_or_departments"),
 
         @SerializedName("uniforms_commercial_clothing")
         UNIFORMS_COMMERCIAL_CLOTHING("uniforms_commercial_clothing"),
@@ -1407,13 +1465,15 @@ public class CardholderCreateParams extends ApiRequestParams {
 
         @SerializedName("wrecking_and_salvage_yards")
         WRECKING_AND_SALVAGE_YARDS("wrecking_and_salvage_yards");
+
         @Getter(onMethod_ = {@Override})
         private final String value;
+
         Category(String value) {
           this.value = value;
         }
-
       }
+
       public enum Interval implements ApiRequestParams.EnumParam {
         @SerializedName("all_time")
         ALL_TIME("all_time"),
@@ -1432,14 +1492,16 @@ public class CardholderCreateParams extends ApiRequestParams {
 
         @SerializedName("yearly")
         YEARLY("yearly");
+
         @Getter(onMethod_ = {@Override})
         private final String value;
+
         Interval(String value) {
           this.value = value;
         }
-
       }
     }
+
     public enum AllowedCategory implements ApiRequestParams.EnumParam {
       @SerializedName("ac_refrigeration_repair")
       AC_REFRIGERATION_REPAIR("ac_refrigeration_repair"),
@@ -1556,7 +1618,8 @@ public class CardholderCreateParams extends ApiRequestParams {
       BUYING_SHOPPING_SERVICES("buying_shopping_services"),
 
       @SerializedName("cable_satellite_and_other_pay_television_and_radio")
-      CABLE_SATELLITE_AND_OTHER_PAY_TELEVISION_AND_RADIO("cable_satellite_and_other_pay_television_and_radio"),
+      CABLE_SATELLITE_AND_OTHER_PAY_TELEVISION_AND_RADIO(
+          "cable_satellite_and_other_pay_television_and_radio"),
 
       @SerializedName("camera_and_photographic_supply_stores")
       CAMERA_AND_PHOTOGRAPHIC_SUPPLY_STORES("camera_and_photographic_supply_stores"),
@@ -1586,7 +1649,8 @@ public class CardholderCreateParams extends ApiRequestParams {
       CATERERS("caterers"),
 
       @SerializedName("charitable_and_social_service_organizations_fundraising")
-      CHARITABLE_AND_SOCIAL_SERVICE_ORGANIZATIONS_FUNDRAISING("charitable_and_social_service_organizations_fundraising"),
+      CHARITABLE_AND_SOCIAL_SERVICE_ORGANIZATIONS_FUNDRAISING(
+          "charitable_and_social_service_organizations_fundraising"),
 
       @SerializedName("chemicals_and_allied_products")
       CHEMICALS_AND_ALLIED_PRODUCTS("chemicals_and_allied_products"),
@@ -1703,7 +1767,8 @@ public class CardholderCreateParams extends ApiRequestParams {
       DIRECT_MARKETING_CATALOG_MERCHANT("direct_marketing_catalog_merchant"),
 
       @SerializedName("direct_marketing_combination_catalog_and_retail_merchant")
-      DIRECT_MARKETING_COMBINATION_CATALOG_AND_RETAIL_MERCHANT("direct_marketing_combination_catalog_and_retail_merchant"),
+      DIRECT_MARKETING_COMBINATION_CATALOG_AND_RETAIL_MERCHANT(
+          "direct_marketing_combination_catalog_and_retail_merchant"),
 
       @SerializedName("direct_marketing_inbound_telemarketing")
       DIRECT_MARKETING_INBOUND_TELEMARKETING("direct_marketing_inbound_telemarketing"),
@@ -1733,7 +1798,8 @@ public class CardholderCreateParams extends ApiRequestParams {
       DOOR_TO_DOOR_SALES("door_to_door_sales"),
 
       @SerializedName("drapery_window_covering_and_upholstery_stores")
-      DRAPERY_WINDOW_COVERING_AND_UPHOLSTERY_STORES("drapery_window_covering_and_upholstery_stores"),
+      DRAPERY_WINDOW_COVERING_AND_UPHOLSTERY_STORES(
+          "drapery_window_covering_and_upholstery_stores"),
 
       @SerializedName("drinking_places")
       DRINKING_PLACES("drinking_places"),
@@ -1742,7 +1808,8 @@ public class CardholderCreateParams extends ApiRequestParams {
       DRUG_STORES_AND_PHARMACIES("drug_stores_and_pharmacies"),
 
       @SerializedName("drugs_drug_proprietaries_and_druggist_sundries")
-      DRUGS_DRUG_PROPRIETARIES_AND_DRUGGIST_SUNDRIES("drugs_drug_proprietaries_and_druggist_sundries"),
+      DRUGS_DRUG_PROPRIETARIES_AND_DRUGGIST_SUNDRIES(
+          "drugs_drug_proprietaries_and_druggist_sundries"),
 
       @SerializedName("dry_cleaners")
       DRY_CLEANERS("dry_cleaners"),
@@ -1799,7 +1866,8 @@ public class CardholderCreateParams extends ApiRequestParams {
       FINES_GOVERNMENT_ADMINISTRATIVE_ENTITIES("fines_government_administrative_entities"),
 
       @SerializedName("fireplace_fireplace_screens_and_accessories_stores")
-      FIREPLACE_FIREPLACE_SCREENS_AND_ACCESSORIES_STORES("fireplace_fireplace_screens_and_accessories_stores"),
+      FIREPLACE_FIREPLACE_SCREENS_AND_ACCESSORIES_STORES(
+          "fireplace_fireplace_screens_and_accessories_stores"),
 
       @SerializedName("floor_covering_stores")
       FLOOR_COVERING_STORES("floor_covering_stores"),
@@ -1820,7 +1888,8 @@ public class CardholderCreateParams extends ApiRequestParams {
       FUNERAL_SERVICES_CREMATORIES("funeral_services_crematories"),
 
       @SerializedName("furniture_home_furnishings_and_equipment_stores_except_appliances")
-      FURNITURE_HOME_FURNISHINGS_AND_EQUIPMENT_STORES_EXCEPT_APPLIANCES("furniture_home_furnishings_and_equipment_stores_except_appliances"),
+      FURNITURE_HOME_FURNISHINGS_AND_EQUIPMENT_STORES_EXCEPT_APPLIANCES(
+          "furniture_home_furnishings_and_equipment_stores_except_appliances"),
 
       @SerializedName("furniture_repair_refinishing")
       FURNITURE_REPAIR_REFINISHING("furniture_repair_refinishing"),
@@ -1895,7 +1964,8 @@ public class CardholderCreateParams extends ApiRequestParams {
       INTRA_COMPANY_PURCHASES("intra_company_purchases"),
 
       @SerializedName("jewelry_stores_watches_clocks_and_silverware_stores")
-      JEWELRY_STORES_WATCHES_CLOCKS_AND_SILVERWARE_STORES("jewelry_stores_watches_clocks_and_silverware_stores"),
+      JEWELRY_STORES_WATCHES_CLOCKS_AND_SILVERWARE_STORES(
+          "jewelry_stores_watches_clocks_and_silverware_stores"),
 
       @SerializedName("landscaping_services")
       LANDSCAPING_SERVICES("landscaping_services"),
@@ -1931,7 +2001,8 @@ public class CardholderCreateParams extends ApiRequestParams {
       MEDICAL_AND_DENTAL_LABS("medical_and_dental_labs"),
 
       @SerializedName("medical_dental_ophthalmic_and_hospital_equipment_and_supplies")
-      MEDICAL_DENTAL_OPHTHALMIC_AND_HOSPITAL_EQUIPMENT_AND_SUPPLIES("medical_dental_ophthalmic_and_hospital_equipment_and_supplies"),
+      MEDICAL_DENTAL_OPHTHALMIC_AND_HOSPITAL_EQUIPMENT_AND_SUPPLIES(
+          "medical_dental_ophthalmic_and_hospital_equipment_and_supplies"),
 
       @SerializedName("medical_services")
       MEDICAL_SERVICES("medical_services"),
@@ -1940,7 +2011,8 @@ public class CardholderCreateParams extends ApiRequestParams {
       MEMBERSHIP_ORGANIZATIONS("membership_organizations"),
 
       @SerializedName("mens_and_boys_clothing_and_accessories_stores")
-      MENS_AND_BOYS_CLOTHING_AND_ACCESSORIES_STORES("mens_and_boys_clothing_and_accessories_stores"),
+      MENS_AND_BOYS_CLOTHING_AND_ACCESSORIES_STORES(
+          "mens_and_boys_clothing_and_accessories_stores"),
 
       @SerializedName("mens_womens_clothing_stores")
       MENS_WOMENS_CLOTHING_STORES("mens_womens_clothing_stores"),
@@ -1970,7 +2042,8 @@ public class CardholderCreateParams extends ApiRequestParams {
       MISCELLANEOUS_GENERAL_SERVICES("miscellaneous_general_services"),
 
       @SerializedName("miscellaneous_home_furnishing_specialty_stores")
-      MISCELLANEOUS_HOME_FURNISHING_SPECIALTY_STORES("miscellaneous_home_furnishing_specialty_stores"),
+      MISCELLANEOUS_HOME_FURNISHING_SPECIALTY_STORES(
+          "miscellaneous_home_furnishing_specialty_stores"),
 
       @SerializedName("miscellaneous_publishing_and_printing")
       MISCELLANEOUS_PUBLISHING_AND_PRINTING("miscellaneous_publishing_and_printing"),
@@ -2006,7 +2079,8 @@ public class CardholderCreateParams extends ApiRequestParams {
       MOTORCYCLE_SHOPS_DEALERS("motorcycle_shops_dealers"),
 
       @SerializedName("music_stores_musical_instruments_pianos_and_sheet_music")
-      MUSIC_STORES_MUSICAL_INSTRUMENTS_PIANOS_AND_SHEET_MUSIC("music_stores_musical_instruments_pianos_and_sheet_music"),
+      MUSIC_STORES_MUSICAL_INSTRUMENTS_PIANOS_AND_SHEET_MUSIC(
+          "music_stores_musical_instruments_pianos_and_sheet_music"),
 
       @SerializedName("news_dealers_and_newsstands")
       NEWS_DEALERS_AND_NEWSSTANDS("news_dealers_and_newsstands"),
@@ -2066,7 +2140,8 @@ public class CardholderCreateParams extends ApiRequestParams {
       PHOTO_DEVELOPING("photo_developing"),
 
       @SerializedName("photographic_photocopy_microfilm_equipment_and_supplies")
-      PHOTOGRAPHIC_PHOTOCOPY_MICROFILM_EQUIPMENT_AND_SUPPLIES("photographic_photocopy_microfilm_equipment_and_supplies"),
+      PHOTOGRAPHIC_PHOTOCOPY_MICROFILM_EQUIPMENT_AND_SUPPLIES(
+          "photographic_photocopy_microfilm_equipment_and_supplies"),
 
       @SerializedName("photographic_studios")
       PHOTOGRAPHIC_STUDIOS("photographic_studios"),
@@ -2087,7 +2162,8 @@ public class CardholderCreateParams extends ApiRequestParams {
       POSTAL_SERVICES_GOVERNMENT_ONLY("postal_services_government_only"),
 
       @SerializedName("precious_stones_and_metals_watches_and_jewelry")
-      PRECIOUS_STONES_AND_METALS_WATCHES_AND_JEWELRY("precious_stones_and_metals_watches_and_jewelry"),
+      PRECIOUS_STONES_AND_METALS_WATCHES_AND_JEWELRY(
+          "precious_stones_and_metals_watches_and_jewelry"),
 
       @SerializedName("professional_services")
       PROFESSIONAL_SERVICES("professional_services"),
@@ -2129,7 +2205,8 @@ public class CardholderCreateParams extends ApiRequestParams {
       SERVICE_STATIONS("service_stations"),
 
       @SerializedName("sewing_needlework_fabric_and_piece_goods_stores")
-      SEWING_NEEDLEWORK_FABRIC_AND_PIECE_GOODS_STORES("sewing_needlework_fabric_and_piece_goods_stores"),
+      SEWING_NEEDLEWORK_FABRIC_AND_PIECE_GOODS_STORES(
+          "sewing_needlework_fabric_and_piece_goods_stores"),
 
       @SerializedName("shoe_repair_hat_cleaning")
       SHOE_REPAIR_HAT_CLEANING("shoe_repair_hat_cleaning"),
@@ -2165,10 +2242,12 @@ public class CardholderCreateParams extends ApiRequestParams {
       STAMP_AND_COIN_STORES("stamp_and_coin_stores"),
 
       @SerializedName("stationary_office_supplies_printing_and_writing_paper")
-      STATIONARY_OFFICE_SUPPLIES_PRINTING_AND_WRITING_PAPER("stationary_office_supplies_printing_and_writing_paper"),
+      STATIONARY_OFFICE_SUPPLIES_PRINTING_AND_WRITING_PAPER(
+          "stationary_office_supplies_printing_and_writing_paper"),
 
       @SerializedName("stationery_stores_office_and_school_supply_stores")
-      STATIONERY_STORES_OFFICE_AND_SCHOOL_SUPPLY_STORES("stationery_stores_office_and_school_supply_stores"),
+      STATIONERY_STORES_OFFICE_AND_SCHOOL_SUPPLY_STORES(
+          "stationery_stores_office_and_school_supply_stores"),
 
       @SerializedName("swimming_pools_sales")
       SWIMMING_POOLS_SALES("swimming_pools_sales"),
@@ -2189,7 +2268,8 @@ public class CardholderCreateParams extends ApiRequestParams {
       TAXICABS_LIMOUSINES("taxicabs_limousines"),
 
       @SerializedName("telecommunication_equipment_and_telephone_sales")
-      TELECOMMUNICATION_EQUIPMENT_AND_TELEPHONE_SALES("telecommunication_equipment_and_telephone_sales"),
+      TELECOMMUNICATION_EQUIPMENT_AND_TELEPHONE_SALES(
+          "telecommunication_equipment_and_telephone_sales"),
 
       @SerializedName("telecommunication_services")
       TELECOMMUNICATION_SERVICES("telecommunication_services"),
@@ -2237,13 +2317,15 @@ public class CardholderCreateParams extends ApiRequestParams {
       TRUCK_UTILITY_TRAILER_RENTALS("truck_utility_trailer_rentals"),
 
       @SerializedName("typesetting_plate_making_and_related_services")
-      TYPESETTING_PLATE_MAKING_AND_RELATED_SERVICES("typesetting_plate_making_and_related_services"),
+      TYPESETTING_PLATE_MAKING_AND_RELATED_SERVICES(
+          "typesetting_plate_making_and_related_services"),
 
       @SerializedName("typewriter_stores")
       TYPEWRITER_STORES("typewriter_stores"),
 
       @SerializedName("u_s_federal_government_agencies_or_departments")
-      U_S_FEDERAL_GOVERNMENT_AGENCIES_OR_DEPARTMENTS("u_s_federal_government_agencies_or_departments"),
+      U_S_FEDERAL_GOVERNMENT_AGENCIES_OR_DEPARTMENTS(
+          "u_s_federal_government_agencies_or_departments"),
 
       @SerializedName("uniforms_commercial_clothing")
       UNIFORMS_COMMERCIAL_CLOTHING("uniforms_commercial_clothing"),
@@ -2295,13 +2377,15 @@ public class CardholderCreateParams extends ApiRequestParams {
 
       @SerializedName("wrecking_and_salvage_yards")
       WRECKING_AND_SALVAGE_YARDS("wrecking_and_salvage_yards");
+
       @Getter(onMethod_ = {@Override})
       private final String value;
+
       AllowedCategory(String value) {
         this.value = value;
       }
-
     }
+
     public enum BlockedCategory implements ApiRequestParams.EnumParam {
       @SerializedName("ac_refrigeration_repair")
       AC_REFRIGERATION_REPAIR("ac_refrigeration_repair"),
@@ -2418,7 +2502,8 @@ public class CardholderCreateParams extends ApiRequestParams {
       BUYING_SHOPPING_SERVICES("buying_shopping_services"),
 
       @SerializedName("cable_satellite_and_other_pay_television_and_radio")
-      CABLE_SATELLITE_AND_OTHER_PAY_TELEVISION_AND_RADIO("cable_satellite_and_other_pay_television_and_radio"),
+      CABLE_SATELLITE_AND_OTHER_PAY_TELEVISION_AND_RADIO(
+          "cable_satellite_and_other_pay_television_and_radio"),
 
       @SerializedName("camera_and_photographic_supply_stores")
       CAMERA_AND_PHOTOGRAPHIC_SUPPLY_STORES("camera_and_photographic_supply_stores"),
@@ -2448,7 +2533,8 @@ public class CardholderCreateParams extends ApiRequestParams {
       CATERERS("caterers"),
 
       @SerializedName("charitable_and_social_service_organizations_fundraising")
-      CHARITABLE_AND_SOCIAL_SERVICE_ORGANIZATIONS_FUNDRAISING("charitable_and_social_service_organizations_fundraising"),
+      CHARITABLE_AND_SOCIAL_SERVICE_ORGANIZATIONS_FUNDRAISING(
+          "charitable_and_social_service_organizations_fundraising"),
 
       @SerializedName("chemicals_and_allied_products")
       CHEMICALS_AND_ALLIED_PRODUCTS("chemicals_and_allied_products"),
@@ -2565,7 +2651,8 @@ public class CardholderCreateParams extends ApiRequestParams {
       DIRECT_MARKETING_CATALOG_MERCHANT("direct_marketing_catalog_merchant"),
 
       @SerializedName("direct_marketing_combination_catalog_and_retail_merchant")
-      DIRECT_MARKETING_COMBINATION_CATALOG_AND_RETAIL_MERCHANT("direct_marketing_combination_catalog_and_retail_merchant"),
+      DIRECT_MARKETING_COMBINATION_CATALOG_AND_RETAIL_MERCHANT(
+          "direct_marketing_combination_catalog_and_retail_merchant"),
 
       @SerializedName("direct_marketing_inbound_telemarketing")
       DIRECT_MARKETING_INBOUND_TELEMARKETING("direct_marketing_inbound_telemarketing"),
@@ -2595,7 +2682,8 @@ public class CardholderCreateParams extends ApiRequestParams {
       DOOR_TO_DOOR_SALES("door_to_door_sales"),
 
       @SerializedName("drapery_window_covering_and_upholstery_stores")
-      DRAPERY_WINDOW_COVERING_AND_UPHOLSTERY_STORES("drapery_window_covering_and_upholstery_stores"),
+      DRAPERY_WINDOW_COVERING_AND_UPHOLSTERY_STORES(
+          "drapery_window_covering_and_upholstery_stores"),
 
       @SerializedName("drinking_places")
       DRINKING_PLACES("drinking_places"),
@@ -2604,7 +2692,8 @@ public class CardholderCreateParams extends ApiRequestParams {
       DRUG_STORES_AND_PHARMACIES("drug_stores_and_pharmacies"),
 
       @SerializedName("drugs_drug_proprietaries_and_druggist_sundries")
-      DRUGS_DRUG_PROPRIETARIES_AND_DRUGGIST_SUNDRIES("drugs_drug_proprietaries_and_druggist_sundries"),
+      DRUGS_DRUG_PROPRIETARIES_AND_DRUGGIST_SUNDRIES(
+          "drugs_drug_proprietaries_and_druggist_sundries"),
 
       @SerializedName("dry_cleaners")
       DRY_CLEANERS("dry_cleaners"),
@@ -2661,7 +2750,8 @@ public class CardholderCreateParams extends ApiRequestParams {
       FINES_GOVERNMENT_ADMINISTRATIVE_ENTITIES("fines_government_administrative_entities"),
 
       @SerializedName("fireplace_fireplace_screens_and_accessories_stores")
-      FIREPLACE_FIREPLACE_SCREENS_AND_ACCESSORIES_STORES("fireplace_fireplace_screens_and_accessories_stores"),
+      FIREPLACE_FIREPLACE_SCREENS_AND_ACCESSORIES_STORES(
+          "fireplace_fireplace_screens_and_accessories_stores"),
 
       @SerializedName("floor_covering_stores")
       FLOOR_COVERING_STORES("floor_covering_stores"),
@@ -2682,7 +2772,8 @@ public class CardholderCreateParams extends ApiRequestParams {
       FUNERAL_SERVICES_CREMATORIES("funeral_services_crematories"),
 
       @SerializedName("furniture_home_furnishings_and_equipment_stores_except_appliances")
-      FURNITURE_HOME_FURNISHINGS_AND_EQUIPMENT_STORES_EXCEPT_APPLIANCES("furniture_home_furnishings_and_equipment_stores_except_appliances"),
+      FURNITURE_HOME_FURNISHINGS_AND_EQUIPMENT_STORES_EXCEPT_APPLIANCES(
+          "furniture_home_furnishings_and_equipment_stores_except_appliances"),
 
       @SerializedName("furniture_repair_refinishing")
       FURNITURE_REPAIR_REFINISHING("furniture_repair_refinishing"),
@@ -2757,7 +2848,8 @@ public class CardholderCreateParams extends ApiRequestParams {
       INTRA_COMPANY_PURCHASES("intra_company_purchases"),
 
       @SerializedName("jewelry_stores_watches_clocks_and_silverware_stores")
-      JEWELRY_STORES_WATCHES_CLOCKS_AND_SILVERWARE_STORES("jewelry_stores_watches_clocks_and_silverware_stores"),
+      JEWELRY_STORES_WATCHES_CLOCKS_AND_SILVERWARE_STORES(
+          "jewelry_stores_watches_clocks_and_silverware_stores"),
 
       @SerializedName("landscaping_services")
       LANDSCAPING_SERVICES("landscaping_services"),
@@ -2793,7 +2885,8 @@ public class CardholderCreateParams extends ApiRequestParams {
       MEDICAL_AND_DENTAL_LABS("medical_and_dental_labs"),
 
       @SerializedName("medical_dental_ophthalmic_and_hospital_equipment_and_supplies")
-      MEDICAL_DENTAL_OPHTHALMIC_AND_HOSPITAL_EQUIPMENT_AND_SUPPLIES("medical_dental_ophthalmic_and_hospital_equipment_and_supplies"),
+      MEDICAL_DENTAL_OPHTHALMIC_AND_HOSPITAL_EQUIPMENT_AND_SUPPLIES(
+          "medical_dental_ophthalmic_and_hospital_equipment_and_supplies"),
 
       @SerializedName("medical_services")
       MEDICAL_SERVICES("medical_services"),
@@ -2802,7 +2895,8 @@ public class CardholderCreateParams extends ApiRequestParams {
       MEMBERSHIP_ORGANIZATIONS("membership_organizations"),
 
       @SerializedName("mens_and_boys_clothing_and_accessories_stores")
-      MENS_AND_BOYS_CLOTHING_AND_ACCESSORIES_STORES("mens_and_boys_clothing_and_accessories_stores"),
+      MENS_AND_BOYS_CLOTHING_AND_ACCESSORIES_STORES(
+          "mens_and_boys_clothing_and_accessories_stores"),
 
       @SerializedName("mens_womens_clothing_stores")
       MENS_WOMENS_CLOTHING_STORES("mens_womens_clothing_stores"),
@@ -2832,7 +2926,8 @@ public class CardholderCreateParams extends ApiRequestParams {
       MISCELLANEOUS_GENERAL_SERVICES("miscellaneous_general_services"),
 
       @SerializedName("miscellaneous_home_furnishing_specialty_stores")
-      MISCELLANEOUS_HOME_FURNISHING_SPECIALTY_STORES("miscellaneous_home_furnishing_specialty_stores"),
+      MISCELLANEOUS_HOME_FURNISHING_SPECIALTY_STORES(
+          "miscellaneous_home_furnishing_specialty_stores"),
 
       @SerializedName("miscellaneous_publishing_and_printing")
       MISCELLANEOUS_PUBLISHING_AND_PRINTING("miscellaneous_publishing_and_printing"),
@@ -2868,7 +2963,8 @@ public class CardholderCreateParams extends ApiRequestParams {
       MOTORCYCLE_SHOPS_DEALERS("motorcycle_shops_dealers"),
 
       @SerializedName("music_stores_musical_instruments_pianos_and_sheet_music")
-      MUSIC_STORES_MUSICAL_INSTRUMENTS_PIANOS_AND_SHEET_MUSIC("music_stores_musical_instruments_pianos_and_sheet_music"),
+      MUSIC_STORES_MUSICAL_INSTRUMENTS_PIANOS_AND_SHEET_MUSIC(
+          "music_stores_musical_instruments_pianos_and_sheet_music"),
 
       @SerializedName("news_dealers_and_newsstands")
       NEWS_DEALERS_AND_NEWSSTANDS("news_dealers_and_newsstands"),
@@ -2928,7 +3024,8 @@ public class CardholderCreateParams extends ApiRequestParams {
       PHOTO_DEVELOPING("photo_developing"),
 
       @SerializedName("photographic_photocopy_microfilm_equipment_and_supplies")
-      PHOTOGRAPHIC_PHOTOCOPY_MICROFILM_EQUIPMENT_AND_SUPPLIES("photographic_photocopy_microfilm_equipment_and_supplies"),
+      PHOTOGRAPHIC_PHOTOCOPY_MICROFILM_EQUIPMENT_AND_SUPPLIES(
+          "photographic_photocopy_microfilm_equipment_and_supplies"),
 
       @SerializedName("photographic_studios")
       PHOTOGRAPHIC_STUDIOS("photographic_studios"),
@@ -2949,7 +3046,8 @@ public class CardholderCreateParams extends ApiRequestParams {
       POSTAL_SERVICES_GOVERNMENT_ONLY("postal_services_government_only"),
 
       @SerializedName("precious_stones_and_metals_watches_and_jewelry")
-      PRECIOUS_STONES_AND_METALS_WATCHES_AND_JEWELRY("precious_stones_and_metals_watches_and_jewelry"),
+      PRECIOUS_STONES_AND_METALS_WATCHES_AND_JEWELRY(
+          "precious_stones_and_metals_watches_and_jewelry"),
 
       @SerializedName("professional_services")
       PROFESSIONAL_SERVICES("professional_services"),
@@ -2991,7 +3089,8 @@ public class CardholderCreateParams extends ApiRequestParams {
       SERVICE_STATIONS("service_stations"),
 
       @SerializedName("sewing_needlework_fabric_and_piece_goods_stores")
-      SEWING_NEEDLEWORK_FABRIC_AND_PIECE_GOODS_STORES("sewing_needlework_fabric_and_piece_goods_stores"),
+      SEWING_NEEDLEWORK_FABRIC_AND_PIECE_GOODS_STORES(
+          "sewing_needlework_fabric_and_piece_goods_stores"),
 
       @SerializedName("shoe_repair_hat_cleaning")
       SHOE_REPAIR_HAT_CLEANING("shoe_repair_hat_cleaning"),
@@ -3027,10 +3126,12 @@ public class CardholderCreateParams extends ApiRequestParams {
       STAMP_AND_COIN_STORES("stamp_and_coin_stores"),
 
       @SerializedName("stationary_office_supplies_printing_and_writing_paper")
-      STATIONARY_OFFICE_SUPPLIES_PRINTING_AND_WRITING_PAPER("stationary_office_supplies_printing_and_writing_paper"),
+      STATIONARY_OFFICE_SUPPLIES_PRINTING_AND_WRITING_PAPER(
+          "stationary_office_supplies_printing_and_writing_paper"),
 
       @SerializedName("stationery_stores_office_and_school_supply_stores")
-      STATIONERY_STORES_OFFICE_AND_SCHOOL_SUPPLY_STORES("stationery_stores_office_and_school_supply_stores"),
+      STATIONERY_STORES_OFFICE_AND_SCHOOL_SUPPLY_STORES(
+          "stationery_stores_office_and_school_supply_stores"),
 
       @SerializedName("swimming_pools_sales")
       SWIMMING_POOLS_SALES("swimming_pools_sales"),
@@ -3051,7 +3152,8 @@ public class CardholderCreateParams extends ApiRequestParams {
       TAXICABS_LIMOUSINES("taxicabs_limousines"),
 
       @SerializedName("telecommunication_equipment_and_telephone_sales")
-      TELECOMMUNICATION_EQUIPMENT_AND_TELEPHONE_SALES("telecommunication_equipment_and_telephone_sales"),
+      TELECOMMUNICATION_EQUIPMENT_AND_TELEPHONE_SALES(
+          "telecommunication_equipment_and_telephone_sales"),
 
       @SerializedName("telecommunication_services")
       TELECOMMUNICATION_SERVICES("telecommunication_services"),
@@ -3099,13 +3201,15 @@ public class CardholderCreateParams extends ApiRequestParams {
       TRUCK_UTILITY_TRAILER_RENTALS("truck_utility_trailer_rentals"),
 
       @SerializedName("typesetting_plate_making_and_related_services")
-      TYPESETTING_PLATE_MAKING_AND_RELATED_SERVICES("typesetting_plate_making_and_related_services"),
+      TYPESETTING_PLATE_MAKING_AND_RELATED_SERVICES(
+          "typesetting_plate_making_and_related_services"),
 
       @SerializedName("typewriter_stores")
       TYPEWRITER_STORES("typewriter_stores"),
 
       @SerializedName("u_s_federal_government_agencies_or_departments")
-      U_S_FEDERAL_GOVERNMENT_AGENCIES_OR_DEPARTMENTS("u_s_federal_government_agencies_or_departments"),
+      U_S_FEDERAL_GOVERNMENT_AGENCIES_OR_DEPARTMENTS(
+          "u_s_federal_government_agencies_or_departments"),
 
       @SerializedName("uniforms_commercial_clothing")
       UNIFORMS_COMMERCIAL_CLOTHING("uniforms_commercial_clothing"),
@@ -3157,26 +3261,32 @@ public class CardholderCreateParams extends ApiRequestParams {
 
       @SerializedName("wrecking_and_salvage_yards")
       WRECKING_AND_SALVAGE_YARDS("wrecking_and_salvage_yards");
+
       @Getter(onMethod_ = {@Override})
       private final String value;
+
       BlockedCategory(String value) {
         this.value = value;
       }
-
     }
   }
+
   public static class Billing {
     @SerializedName("address")
     Address address;
 
     /**
-     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
     /**
-     * Deprecated param. Passing value for this param is simply discarded. It will be removed in the next client library major version
+     * Deprecated param. Passing value for this param is simply discarded. It will be removed in the
+     * next client library major version
      */
     @SerializedName("name")
     String name;
@@ -3186,9 +3296,11 @@ public class CardholderCreateParams extends ApiRequestParams {
       this.extraParams = extraParams;
       this.name = name;
     }
+
     public static Builder builder() {
       return new Builder();
     }
+
     public static class Builder {
       private Address address;
 
@@ -3196,9 +3308,7 @@ public class CardholderCreateParams extends ApiRequestParams {
 
       private String name;
 
-      /**
-       * Finalize and obtain parameter instance from this builder.
-       */
+      /** Finalize and obtain parameter instance from this builder. */
       public Billing build() {
         return new Billing(this.address, this.extraParams, this.name);
       }
@@ -3209,7 +3319,9 @@ public class CardholderCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link CardholderCreateParams.Billing#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * CardholderCreateParams.Billing#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -3220,7 +3332,9 @@ public class CardholderCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link CardholderCreateParams.Billing#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CardholderCreateParams.Billing#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -3231,13 +3345,15 @@ public class CardholderCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Deprecated param. Passing value for this param is simply discarded. It will be removed in the next client library major version
+       * Deprecated param. Passing value for this param is simply discarded. It will be removed in
+       * the next client library major version
        */
       public Builder setName(String name) {
         this.name = name;
         return this;
       }
     }
+
     public static class Address {
       @SerializedName("city")
       String city;
@@ -3246,7 +3362,10 @@ public class CardholderCreateParams extends ApiRequestParams {
       String country;
 
       /**
-       * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
        */
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
@@ -3279,9 +3398,11 @@ public class CardholderCreateParams extends ApiRequestParams {
         this.postalCode = postalCode;
         this.state = state;
       }
+
       public static Builder builder() {
         return new Builder();
       }
+
       public static class Builder {
         private String city;
 
@@ -3297,19 +3418,16 @@ public class CardholderCreateParams extends ApiRequestParams {
 
         private String state;
 
-        /**
-         * Finalize and obtain parameter instance from this builder.
-         */
+        /** Finalize and obtain parameter instance from this builder. */
         public Address build() {
           return new Address(
-            this.city,
-            this.country,
-            this.extraParams,
-            this.line1,
-            this.line2,
-            this.postalCode,
-            this.state
-          );
+              this.city,
+              this.country,
+              this.extraParams,
+              this.line1,
+              this.line2,
+              this.postalCode,
+              this.state);
         }
 
         public Builder setCity(String city) {
@@ -3323,7 +3441,10 @@ public class CardholderCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link CardholderCreateParams.Billing.Address#extraParams} for the field documentation.
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CardholderCreateParams.Billing.Address#extraParams} for the field
+         * documentation.
          */
         public Builder putExtraParam(String key, Object value) {
           if (this.extraParams == null) {
@@ -3334,7 +3455,10 @@ public class CardholderCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link CardholderCreateParams.Billing.Address#extraParams} for the field documentation.
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CardholderCreateParams.Billing.Address#extraParams} for the field
+         * documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -3366,30 +3490,34 @@ public class CardholderCreateParams extends ApiRequestParams {
       }
     }
   }
+
   public enum Status implements ApiRequestParams.EnumParam {
     @SerializedName("active")
     ACTIVE("active"),
 
     @SerializedName("inactive")
     INACTIVE("inactive");
+
     @Getter(onMethod_ = {@Override})
     private final String value;
+
     Status(String value) {
       this.value = value;
     }
-
   }
+
   public enum Type implements ApiRequestParams.EnumParam {
     @SerializedName("business_entity")
     BUSINESS_ENTITY("business_entity"),
 
     @SerializedName("individual")
     INDIVIDUAL("individual");
+
     @Getter(onMethod_ = {@Override})
     private final String value;
+
     Type(String value) {
       this.value = value;
     }
-
   }
 }

@@ -12,55 +12,67 @@ import lombok.Getter;
 
 public class ChargeUpdateParams extends ApiRequestParams {
   /**
-   * The ID of an existing customer that will be associated with this request. This field may only be updated if there is no existing associated customer with this charge.
+   * The ID of an existing customer that will be associated with this request. This field may only
+   * be updated if there is no existing associated customer with this charge.
    */
   @SerializedName("customer")
   String customer;
 
   /**
-   * An arbitrary string which you can attach to a charge object. It is displayed when in the web interface alongside the charge. Note that if you use Stripe to send automatic email receipts to your customers, your receipt emails will include the `description` of the charge(s) that they are describing.
+   * An arbitrary string which you can attach to a charge object. It is displayed when in the web
+   * interface alongside the charge. Note that if you use Stripe to send automatic email receipts to
+   * your customers, your receipt emails will include the `description` of the charge(s) that they
+   * are describing.
    */
   @SerializedName("description")
   String description;
 
-  /**
-   * Specifies which fields in the response should be expanded.
-   */
+  /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
 
   /**
-   * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+   * Map of extra parameters for custom features not available in this client library. The content
+   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+   * param object. Effectively, this map is flattened to its parent instance.
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
   /**
-   * A set of key-value pairs you can attach to a charge giving information about its riskiness. If you believe a charge is fraudulent, include a `user_report` key with a value of `fraudulent`. If you believe a charge is safe, include a `user_report` key with a value of `safe`. Stripe will use the information you send to improve our fraud detection algorithms.
+   * A set of key-value pairs you can attach to a charge giving information about its riskiness. If
+   * you believe a charge is fraudulent, include a `user_report` key with a value of `fraudulent`.
+   * If you believe a charge is safe, include a `user_report` key with a value of `safe`. Stripe
+   * will use the information you send to improve our fraud detection algorithms.
    */
   @SerializedName("fraud_details")
   FraudDetails fraudDetails;
 
   /**
-   * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format. Individual keys can be unset by posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * Set of key-value pairs that you can attach to an object. This can be useful for storing
+   * additional information about the object in a structured format. Individual keys can be unset by
+   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
   /**
-   * This is the email address that the receipt for this charge will be sent to. If this field is updated, then a new email receipt will be sent to the updated address.
+   * This is the email address that the receipt for this charge will be sent to. If this field is
+   * updated, then a new email receipt will be sent to the updated address.
    */
   @SerializedName("receipt_email")
   String receiptEmail;
 
-  /**
-   * Shipping information for the charge. Helps prevent fraud on charges for physical goods.
-   */
+  /** Shipping information for the charge. Helps prevent fraud on charges for physical goods. */
   @SerializedName("shipping")
   Shipping shipping;
 
   /**
-   * A string that identifies this transaction as part of a group. `transfer_group` may only be provided if it has not been set. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#grouping-transactions) for details.
+   * A string that identifies this transaction as part of a group. `transfer_group` may only be
+   * provided if it has not been set. See the [Connect
+   * documentation](https://stripe.com/docs/connect/charges-transfers#grouping-transactions) for
+   * details.
    */
   @SerializedName("transfer_group")
   String transferGroup;
@@ -85,9 +97,11 @@ public class ChargeUpdateParams extends ApiRequestParams {
     this.shipping = shipping;
     this.transferGroup = transferGroup;
   }
+
   public static Builder builder() {
     return new Builder();
   }
+
   public static class Builder {
     private String customer;
 
@@ -107,25 +121,23 @@ public class ChargeUpdateParams extends ApiRequestParams {
 
     private String transferGroup;
 
-    /**
-     * Finalize and obtain parameter instance from this builder.
-     */
+    /** Finalize and obtain parameter instance from this builder. */
     public ChargeUpdateParams build() {
       return new ChargeUpdateParams(
-        this.customer,
-        this.description,
-        this.expand,
-        this.extraParams,
-        this.fraudDetails,
-        this.metadata,
-        this.receiptEmail,
-        this.shipping,
-        this.transferGroup
-      );
+          this.customer,
+          this.description,
+          this.expand,
+          this.extraParams,
+          this.fraudDetails,
+          this.metadata,
+          this.receiptEmail,
+          this.shipping,
+          this.transferGroup);
     }
 
     /**
-     * The ID of an existing customer that will be associated with this request. This field may only be updated if there is no existing associated customer with this charge.
+     * The ID of an existing customer that will be associated with this request. This field may only
+     * be updated if there is no existing associated customer with this charge.
      */
     public Builder setCustomer(String customer) {
       this.customer = customer;
@@ -133,7 +145,10 @@ public class ChargeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * An arbitrary string which you can attach to a charge object. It is displayed when in the web interface alongside the charge. Note that if you use Stripe to send automatic email receipts to your customers, your receipt emails will include the `description` of the charge(s) that they are describing.
+     * An arbitrary string which you can attach to a charge object. It is displayed when in the web
+     * interface alongside the charge. Note that if you use Stripe to send automatic email receipts
+     * to your customers, your receipt emails will include the `description` of the charge(s) that
+     * they are describing.
      */
     public Builder setDescription(String description) {
       this.description = description;
@@ -141,7 +156,9 @@ public class ChargeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link ChargeUpdateParams#expand} for the field documentation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * ChargeUpdateParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -152,7 +169,9 @@ public class ChargeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link ChargeUpdateParams#expand} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * ChargeUpdateParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -163,7 +182,9 @@ public class ChargeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link ChargeUpdateParams#extraParams} for the field documentation.
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+     * ChargeUpdateParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -174,7 +195,9 @@ public class ChargeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link ChargeUpdateParams#extraParams} for the field documentation.
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link ChargeUpdateParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -185,7 +208,10 @@ public class ChargeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * A set of key-value pairs you can attach to a charge giving information about its riskiness. If you believe a charge is fraudulent, include a `user_report` key with a value of `fraudulent`. If you believe a charge is safe, include a `user_report` key with a value of `safe`. Stripe will use the information you send to improve our fraud detection algorithms.
+     * A set of key-value pairs you can attach to a charge giving information about its riskiness.
+     * If you believe a charge is fraudulent, include a `user_report` key with a value of
+     * `fraudulent`. If you believe a charge is safe, include a `user_report` key with a value of
+     * `safe`. Stripe will use the information you send to improve our fraud detection algorithms.
      */
     public Builder setFraudDetails(FraudDetails fraudDetails) {
       this.fraudDetails = fraudDetails;
@@ -193,7 +219,9 @@ public class ChargeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link ChargeUpdateParams#metadata} for the field documentation.
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
+     * ChargeUpdateParams#metadata} for the field documentation.
      */
     public Builder putMetadata(String key, String value) {
       if (this.metadata == null) {
@@ -204,7 +232,9 @@ public class ChargeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link ChargeUpdateParams#metadata} for the field documentation.
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link ChargeUpdateParams#metadata} for the field documentation.
      */
     public Builder putAllMetadata(Map<String, String> map) {
       if (this.metadata == null) {
@@ -215,32 +245,38 @@ public class ChargeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * This is the email address that the receipt for this charge will be sent to. If this field is updated, then a new email receipt will be sent to the updated address.
+     * This is the email address that the receipt for this charge will be sent to. If this field is
+     * updated, then a new email receipt will be sent to the updated address.
      */
     public Builder setReceiptEmail(String receiptEmail) {
       this.receiptEmail = receiptEmail;
       return this;
     }
 
-    /**
-     * Shipping information for the charge. Helps prevent fraud on charges for physical goods.
-     */
+    /** Shipping information for the charge. Helps prevent fraud on charges for physical goods. */
     public Builder setShipping(Shipping shipping) {
       this.shipping = shipping;
       return this;
     }
 
     /**
-     * A string that identifies this transaction as part of a group. `transfer_group` may only be provided if it has not been set. See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers#grouping-transactions) for details.
+     * A string that identifies this transaction as part of a group. `transfer_group` may only be
+     * provided if it has not been set. See the [Connect
+     * documentation](https://stripe.com/docs/connect/charges-transfers#grouping-transactions) for
+     * details.
      */
     public Builder setTransferGroup(String transferGroup) {
       this.transferGroup = transferGroup;
       return this;
     }
   }
+
   public static class FraudDetails {
     /**
-     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
@@ -252,23 +288,25 @@ public class ChargeUpdateParams extends ApiRequestParams {
       this.extraParams = extraParams;
       this.userReport = userReport;
     }
+
     public static Builder builder() {
       return new Builder();
     }
+
     public static class Builder {
       private Map<String, Object> extraParams;
 
       private EnumParam userReport;
 
-      /**
-       * Finalize and obtain parameter instance from this builder.
-       */
+      /** Finalize and obtain parameter instance from this builder. */
       public FraudDetails build() {
         return new FraudDetails(this.extraParams, this.userReport);
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link ChargeUpdateParams.FraudDetails#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ChargeUpdateParams.FraudDetails#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -279,7 +317,9 @@ public class ChargeUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link ChargeUpdateParams.FraudDetails#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ChargeUpdateParams.FraudDetails#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -299,53 +339,52 @@ public class ChargeUpdateParams extends ApiRequestParams {
         return this;
       }
     }
+
     public enum UserReport implements ApiRequestParams.EnumParam {
       @SerializedName("fraudulent")
       FRAUDULENT("fraudulent"),
 
       @SerializedName("safe")
       SAFE("safe");
+
       @Getter(onMethod_ = {@Override})
       private final String value;
+
       UserReport(String value) {
         this.value = value;
       }
-
     }
   }
+
   public static class Shipping {
-    /**
-     * Shipping address.
-     */
+    /** Shipping address. */
     @SerializedName("address")
     Address address;
 
-    /**
-     * The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc.
-     */
+    /** The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. */
     @SerializedName("carrier")
     String carrier;
 
     /**
-     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /**
-     * Recipient name.
-     */
+    /** Recipient name. */
     @SerializedName("name")
     String name;
 
-    /**
-     * Recipient phone (including extension).
-     */
+    /** Recipient phone (including extension). */
     @SerializedName("phone")
     String phone;
 
     /**
-     * The tracking number for a physical product, obtained from the delivery service. If multiple tracking numbers were generated for this purchase, please separate them with commas.
+     * The tracking number for a physical product, obtained from the delivery service. If multiple
+     * tracking numbers were generated for this purchase, please separate them with commas.
      */
     @SerializedName("tracking_number")
     String trackingNumber;
@@ -364,9 +403,11 @@ public class ChargeUpdateParams extends ApiRequestParams {
       this.phone = phone;
       this.trackingNumber = trackingNumber;
     }
+
     public static Builder builder() {
       return new Builder();
     }
+
     public static class Builder {
       private Address address;
 
@@ -380,38 +421,33 @@ public class ChargeUpdateParams extends ApiRequestParams {
 
       private String trackingNumber;
 
-      /**
-       * Finalize and obtain parameter instance from this builder.
-       */
+      /** Finalize and obtain parameter instance from this builder. */
       public Shipping build() {
         return new Shipping(
-          this.address,
-          this.carrier,
-          this.extraParams,
-          this.name,
-          this.phone,
-          this.trackingNumber
-        );
+            this.address,
+            this.carrier,
+            this.extraParams,
+            this.name,
+            this.phone,
+            this.trackingNumber);
       }
 
-      /**
-       * Shipping address.
-       */
+      /** Shipping address. */
       public Builder setAddress(Address address) {
         this.address = address;
         return this;
       }
 
-      /**
-       * The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc.
-       */
+      /** The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. */
       public Builder setCarrier(String carrier) {
         this.carrier = carrier;
         return this;
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link ChargeUpdateParams.Shipping#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * ChargeUpdateParams.Shipping#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -422,7 +458,9 @@ public class ChargeUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link ChargeUpdateParams.Shipping#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link ChargeUpdateParams.Shipping#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -432,30 +470,28 @@ public class ChargeUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * Recipient name.
-       */
+      /** Recipient name. */
       public Builder setName(String name) {
         this.name = name;
         return this;
       }
 
-      /**
-       * Recipient phone (including extension).
-       */
+      /** Recipient phone (including extension). */
       public Builder setPhone(String phone) {
         this.phone = phone;
         return this;
       }
 
       /**
-       * The tracking number for a physical product, obtained from the delivery service. If multiple tracking numbers were generated for this purchase, please separate them with commas.
+       * The tracking number for a physical product, obtained from the delivery service. If multiple
+       * tracking numbers were generated for this purchase, please separate them with commas.
        */
       public Builder setTrackingNumber(String trackingNumber) {
         this.trackingNumber = trackingNumber;
         return this;
       }
     }
+
     public static class Address {
       @SerializedName("city")
       String city;
@@ -464,7 +500,10 @@ public class ChargeUpdateParams extends ApiRequestParams {
       String country;
 
       /**
-       * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
        */
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
@@ -497,9 +536,11 @@ public class ChargeUpdateParams extends ApiRequestParams {
         this.postalCode = postalCode;
         this.state = state;
       }
+
       public static Builder builder() {
         return new Builder();
       }
+
       public static class Builder {
         private String city;
 
@@ -515,19 +556,16 @@ public class ChargeUpdateParams extends ApiRequestParams {
 
         private String state;
 
-        /**
-         * Finalize and obtain parameter instance from this builder.
-         */
+        /** Finalize and obtain parameter instance from this builder. */
         public Address build() {
           return new Address(
-            this.city,
-            this.country,
-            this.extraParams,
-            this.line1,
-            this.line2,
-            this.postalCode,
-            this.state
-          );
+              this.city,
+              this.country,
+              this.extraParams,
+              this.line1,
+              this.line2,
+              this.postalCode,
+              this.state);
         }
 
         public Builder setCity(String city) {
@@ -541,7 +579,10 @@ public class ChargeUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link ChargeUpdateParams.Shipping.Address#extraParams} for the field documentation.
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ChargeUpdateParams.Shipping.Address#extraParams} for the field
+         * documentation.
          */
         public Builder putExtraParam(String key, Object value) {
           if (this.extraParams == null) {
@@ -552,7 +593,10 @@ public class ChargeUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link ChargeUpdateParams.Shipping.Address#extraParams} for the field documentation.
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link ChargeUpdateParams.Shipping.Address#extraParams} for the field
+         * documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
