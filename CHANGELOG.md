@@ -1,5 +1,8 @@
 # Changelog
 
+## 12.0.0 - 2019-09-10
+* [#844](https://github.com/stripe/stripe-java/pull/844) Update to API version 2019-09-09
+
 ## 11.8.0 - 2019-09-09
 * [#842](https://github.com/stripe/stripe-java/pull/842)
   * Add support for `company[verification]` on `Account`
