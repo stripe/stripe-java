@@ -14,52 +14,69 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class TaxId extends ApiResource implements HasId {
-  /** Two-letter ISO code representing the country of the tax ID. */
+  /**
+   * Two-letter ISO code representing the country of the tax ID.
+   */
   @SerializedName("country")
   String country;
 
-  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  /**
+   * Time at which the object was created. Measured in seconds since the Unix epoch.
+   */
   @SerializedName("created")
   Long created;
 
-  /** ID of the customer. */
+  /**
+   * ID of the customer.
+   */
   @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
-  /** Always true for a deleted object. */
+  /**
+   * Always true for a deleted object.
+   */
   @SerializedName("deleted")
   Boolean deleted;
 
-  /** Unique identifier for the object. */
+  /**
+   * Unique identifier for the object.
+   */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
 
-  /** String representing the object's type. Objects of the same type share the same value. */
+  /**
+   * String representing the object's type. Objects of the same type share the same value.
+   */
   @SerializedName("object")
   String object;
 
-  /** Type of the tax ID, one of `au_abn`, `eu_vat`, `in_gst`, `no_vat`, `nz_gst`, or `unknown`. */
+  /**
+   * Type of the tax ID, one of `au_abn`, `eu_vat`, `in_gst`, `no_vat`, `nz_gst`, or `unknown`.
+   */
   @SerializedName("type")
   String type;
 
-  /** Value of the tax ID. */
+  /**
+   * Value of the tax ID.
+   */
   @SerializedName("value")
   String value;
 
   @SerializedName("verification")
   Verification verification;
 
-  /** Get id of expandable `customer` object. */
+  /**
+   * Get id of expandable `customer` object.
+   */
   public String getCustomer() {
     return (this.customer != null) ? this.customer.getId() : null;
   }
@@ -68,7 +85,9 @@ public class TaxId extends ApiResource implements HasId {
     this.customer = ApiResource.setExpandableFieldId(id, this.customer);
   }
 
-  /** Get expanded `customer`. */
+  /**
+   * Get expanded `customer`.
+   */
   public Customer getCustomerObject() {
     return (this.customer != null) ? this.customer.getExpanded() : null;
   }
@@ -77,31 +96,41 @@ public class TaxId extends ApiResource implements HasId {
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
   }
 
-  /** Deletes an existing <code>TaxID</code> object. */
+  /**
+   * <p>Deletes an existing <code>TaxID</code> object.</p>
+   */
   public TaxId delete() throws StripeException {
     return delete((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Deletes an existing <code>TaxID</code> object. */
+  /**
+   * <p>Deletes an existing <code>TaxID</code> object.</p>
+   */
   public TaxId delete(RequestOptions options) throws StripeException {
     return delete((Map<String, Object>) null, options);
   }
 
-  /** Deletes an existing <code>TaxID</code> object. */
+  /**
+   * <p>Deletes an existing <code>TaxID</code> object.</p>
+   */
   public TaxId delete(Map<String, Object> params) throws StripeException {
     return delete(params, (RequestOptions) null);
   }
 
-  /** Deletes an existing <code>TaxID</code> object. */
+  /**
+   * <p>Deletes an existing <code>TaxID</code> object.</p>
+   */
   public TaxId delete(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
         String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/customers/%s/tax_ids/%s",
-                ApiResource.urlEncodeId(this.getCustomer()),
-                ApiResource.urlEncodeId(this.getId())));
+          "/v1/customers/%s/tax_ids/%s",
+          ApiResource.urlEncodeId(this.getCustomer()),
+          ApiResource.urlEncodeId(this.getId())
+        )
+      );
     return ApiResource.request(ApiResource.RequestMethod.DELETE, url, params, TaxId.class, options);
   }
 
@@ -109,15 +138,21 @@ public class TaxId extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Verification extends StripeObject {
-    /** Verification status, one of `pending`, `unavailable`, `unverified`, or `verified`. */
+    /**
+     * Verification status, one of `pending`, `unavailable`, `unverified`, or `verified`.
+     */
     @SerializedName("status")
     String status;
 
-    /** Verified address. */
+    /**
+     * Verified address.
+     */
     @SerializedName("verified_address")
     String verifiedAddress;
 
-    /** Verified name. */
+    /**
+     * Verified name.
+     */
     @SerializedName("verified_name")
     String verifiedName;
   }

@@ -1,3 +1,7 @@
 package com.stripe.model;
 
-public class BitcoinReceiverCollection extends StripeCollection<BitcoinReceiver> {}
+import com.stripe.net.ApiResource;
+
+public class BitcoinReceiverCollection extends StripeCollection<BitcoinReceiver> {
+
+}

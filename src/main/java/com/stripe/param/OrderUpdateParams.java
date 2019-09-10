@@ -2,6 +2,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.net.ApiRequestParams.EnumParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,48 +11,43 @@ import lombok.Getter;
 
 public class OrderUpdateParams extends ApiRequestParams {
   /**
-   * A coupon code that represents a discount to be applied to this order. Must be one-time duration
-   * and in same currency as the order. An order can have multiple coupons.
+   * A coupon code that represents a discount to be applied to this order. Must be one-time duration and in same currency as the order. An order can have multiple coupons.
    */
   @SerializedName("coupon")
   String coupon;
 
-  /** Specifies which fields in the response should be expanded. */
+  /**
+   * Specifies which fields in the response should be expanded.
+   */
   @SerializedName("expand")
   List<String> expand;
 
   /**
-   * Map of extra parameters for custom features not available in this client library. The content
-   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-   * param object. Effectively, this map is flattened to its parent instance.
+   * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
   /**
-   * A set of key-value pairs that you can attach to a product object. It can be useful for storing
-   * additional information about the order in a structured format.
+   * A set of key-value pairs that you can attach to a product object. It can be useful for storing additional information about the order in a structured format.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
   /**
-   * The shipping method to select for fulfilling this order. If specified, must be one of the `id`s
-   * of a shipping method in the `shipping_methods` array. If specified, will overwrite the existing
-   * selected shipping method, updating `items` as necessary.
+   * The shipping method to select for fulfilling this order. If specified, must be one of the `id`s of a shipping method in the `shipping_methods` array. If specified, will overwrite the existing selected shipping method, updating `items` as necessary.
    */
   @SerializedName("selected_shipping_method")
   String selectedShippingMethod;
 
-  /** Tracking information once the order has been fulfilled. */
+  /**
+   * Tracking information once the order has been fulfilled.
+   */
   @SerializedName("shipping")
   Shipping shipping;
 
   /**
-   * Current order status. One of `created`, `paid`, `canceled`, `fulfilled`, or `returned`. More
-   * detail in the [Orders
-   * Guide](https://stripe.com/docs/orders/guide#understanding-order-statuses).
+   * Current order status. One of `created`, `paid`, `canceled`, `fulfilled`, or `returned`. More detail in the [Orders Guide](https://stripe.com/docs/orders/guide#understanding-order-statuses).
    */
   @SerializedName("status")
   Status status;
@@ -72,11 +68,9 @@ public class OrderUpdateParams extends ApiRequestParams {
     this.shipping = shipping;
     this.status = status;
   }
-
   public static Builder builder() {
     return new Builder();
   }
-
   public static class Builder {
     private String coupon;
 
@@ -92,21 +86,23 @@ public class OrderUpdateParams extends ApiRequestParams {
 
     private Status status;
 
-    /** Finalize and obtain parameter instance from this builder. */
+    /**
+     * Finalize and obtain parameter instance from this builder.
+     */
     public OrderUpdateParams build() {
       return new OrderUpdateParams(
-          this.coupon,
-          this.expand,
-          this.extraParams,
-          this.metadata,
-          this.selectedShippingMethod,
-          this.shipping,
-          this.status);
+        this.coupon,
+        this.expand,
+        this.extraParams,
+        this.metadata,
+        this.selectedShippingMethod,
+        this.shipping,
+        this.status
+      );
     }
 
     /**
-     * A coupon code that represents a discount to be applied to this order. Must be one-time
-     * duration and in same currency as the order. An order can have multiple coupons.
+     * A coupon code that represents a discount to be applied to this order. Must be one-time duration and in same currency as the order. An order can have multiple coupons.
      */
     public Builder setCoupon(String coupon) {
       this.coupon = coupon;
@@ -114,9 +110,7 @@ public class OrderUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * OrderUpdateParams#expand} for the field documentation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link OrderUpdateParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -127,9 +121,7 @@ public class OrderUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * OrderUpdateParams#expand} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link OrderUpdateParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -140,9 +132,7 @@ public class OrderUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * OrderUpdateParams#extraParams} for the field documentation.
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link OrderUpdateParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -153,9 +143,7 @@ public class OrderUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link OrderUpdateParams#extraParams} for the field documentation.
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link OrderUpdateParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -166,9 +154,7 @@ public class OrderUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
-     * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * OrderUpdateParams#metadata} for the field documentation.
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link OrderUpdateParams#metadata} for the field documentation.
      */
     public Builder putMetadata(String key, String value) {
       if (this.metadata == null) {
@@ -179,9 +165,7 @@ public class OrderUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link OrderUpdateParams#metadata} for the field documentation.
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link OrderUpdateParams#metadata} for the field documentation.
      */
     public Builder putAllMetadata(Map<String, String> map) {
       if (this.metadata == null) {
@@ -192,47 +176,45 @@ public class OrderUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The shipping method to select for fulfilling this order. If specified, must be one of the
-     * `id`s of a shipping method in the `shipping_methods` array. If specified, will overwrite the
-     * existing selected shipping method, updating `items` as necessary.
+     * The shipping method to select for fulfilling this order. If specified, must be one of the `id`s of a shipping method in the `shipping_methods` array. If specified, will overwrite the existing selected shipping method, updating `items` as necessary.
      */
     public Builder setSelectedShippingMethod(String selectedShippingMethod) {
       this.selectedShippingMethod = selectedShippingMethod;
       return this;
     }
 
-    /** Tracking information once the order has been fulfilled. */
+    /**
+     * Tracking information once the order has been fulfilled.
+     */
     public Builder setShipping(Shipping shipping) {
       this.shipping = shipping;
       return this;
     }
 
     /**
-     * Current order status. One of `created`, `paid`, `canceled`, `fulfilled`, or `returned`. More
-     * detail in the [Orders
-     * Guide](https://stripe.com/docs/orders/guide#understanding-order-statuses).
+     * Current order status. One of `created`, `paid`, `canceled`, `fulfilled`, or `returned`. More detail in the [Orders Guide](https://stripe.com/docs/orders/guide#understanding-order-statuses).
      */
     public Builder setStatus(Status status) {
       this.status = status;
       return this;
     }
   }
-
   public static class Shipping {
-    /** The name of the carrier like `USPS`, `UPS`, or `FedEx`. */
+    /**
+     * The name of the carrier like `USPS`, `UPS`, or `FedEx`.
+     */
     @SerializedName("carrier")
     String carrier;
 
     /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The tracking number provided by the carrier. */
+    /**
+     * The tracking number provided by the carrier.
+     */
     @SerializedName("tracking_number")
     String trackingNumber;
 
@@ -241,11 +223,9 @@ public class OrderUpdateParams extends ApiRequestParams {
       this.extraParams = extraParams;
       this.trackingNumber = trackingNumber;
     }
-
     public static Builder builder() {
       return new Builder();
     }
-
     public static class Builder {
       private String carrier;
 
@@ -253,21 +233,23 @@ public class OrderUpdateParams extends ApiRequestParams {
 
       private String trackingNumber;
 
-      /** Finalize and obtain parameter instance from this builder. */
+      /**
+       * Finalize and obtain parameter instance from this builder.
+       */
       public Shipping build() {
         return new Shipping(this.carrier, this.extraParams, this.trackingNumber);
       }
 
-      /** The name of the carrier like `USPS`, `UPS`, or `FedEx`. */
+      /**
+       * The name of the carrier like `USPS`, `UPS`, or `FedEx`.
+       */
       public Builder setCarrier(String carrier) {
         this.carrier = carrier;
         return this;
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * OrderUpdateParams.Shipping#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link OrderUpdateParams.Shipping#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -278,9 +260,7 @@ public class OrderUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link OrderUpdateParams.Shipping#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link OrderUpdateParams.Shipping#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -290,14 +270,15 @@ public class OrderUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The tracking number provided by the carrier. */
+      /**
+       * The tracking number provided by the carrier.
+       */
       public Builder setTrackingNumber(String trackingNumber) {
         this.trackingNumber = trackingNumber;
         return this;
       }
     }
   }
-
   public enum Status implements ApiRequestParams.EnumParam {
     @SerializedName("canceled")
     CANCELED("canceled"),
@@ -313,12 +294,11 @@ public class OrderUpdateParams extends ApiRequestParams {
 
     @SerializedName("returned")
     RETURNED("returned");
-
     @Getter(onMethod_ = {@Override})
     private final String value;
-
     Status(String value) {
       this.value = value;
     }
+
   }
 }

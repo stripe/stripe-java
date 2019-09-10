@@ -2,6 +2,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.net.ApiRequestParams.EnumParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,60 +11,55 @@ import lombok.Getter;
 
 public class OrderCreateParams extends ApiRequestParams {
   /**
-   * A coupon code that represents a discount to be applied to this order. Must be one-time duration
-   * and in same currency as the order. An order can have multiple coupons.
+   * A coupon code that represents a discount to be applied to this order. Must be one-time duration and in same currency as the order. An order can have multiple coupons.
    */
   @SerializedName("coupon")
   String coupon;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
    */
   @SerializedName("currency")
   String currency;
 
   /**
-   * The ID of an existing customer to use for this order. If provided, the customer email and
-   * shipping address will be used to create the order. Subsequently, the customer will also be
-   * charged to pay the order. If `email` or `shipping` are also provided, they will override the
-   * values retrieved from the customer object.
+   * The ID of an existing customer to use for this order. If provided, the customer email and shipping address will be used to create the order. Subsequently, the customer will also be charged to pay the order. If `email` or `shipping` are also provided, they will override the values retrieved from the customer object.
    */
   @SerializedName("customer")
   String customer;
 
-  /** The email address of the customer placing the order. */
+  /**
+   * The email address of the customer placing the order.
+   */
   @SerializedName("email")
   String email;
 
-  /** Specifies which fields in the response should be expanded. */
+  /**
+   * Specifies which fields in the response should be expanded.
+   */
   @SerializedName("expand")
   List<String> expand;
 
   /**
-   * Map of extra parameters for custom features not available in this client library. The content
-   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-   * param object. Effectively, this map is flattened to its parent instance.
+   * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** List of items constituting the order. An order can have up to 25 items. */
+  /**
+   * List of items constituting the order. An order can have up to 25 items.
+   */
   @SerializedName("items")
   List<Item> items;
 
   /**
-   * A set of key-value pairs that you can attach to an order object. Limited to 500 characters.
-   * Metadata can be useful for storing additional information about the order in a structured
-   * format.
+   * A set of key-value pairs that you can attach to an order object. Limited to 500 characters. Metadata can be useful for storing additional information about the order in a structured format.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
   /**
-   * Shipping address for the order. Required if any of the SKUs are for products that have
-   * `shippable` set to true.
+   * Shipping address for the order. Required if any of the SKUs are for products that have `shippable` set to true.
    */
   @SerializedName("shipping")
   Shipping shipping;
@@ -88,11 +84,9 @@ public class OrderCreateParams extends ApiRequestParams {
     this.metadata = metadata;
     this.shipping = shipping;
   }
-
   public static Builder builder() {
     return new Builder();
   }
-
   public static class Builder {
     private String coupon;
 
@@ -112,23 +106,25 @@ public class OrderCreateParams extends ApiRequestParams {
 
     private Shipping shipping;
 
-    /** Finalize and obtain parameter instance from this builder. */
+    /**
+     * Finalize and obtain parameter instance from this builder.
+     */
     public OrderCreateParams build() {
       return new OrderCreateParams(
-          this.coupon,
-          this.currency,
-          this.customer,
-          this.email,
-          this.expand,
-          this.extraParams,
-          this.items,
-          this.metadata,
-          this.shipping);
+        this.coupon,
+        this.currency,
+        this.customer,
+        this.email,
+        this.expand,
+        this.extraParams,
+        this.items,
+        this.metadata,
+        this.shipping
+      );
     }
 
     /**
-     * A coupon code that represents a discount to be applied to this order. Must be one-time
-     * duration and in same currency as the order. An order can have multiple coupons.
+     * A coupon code that represents a discount to be applied to this order. Must be one-time duration and in same currency as the order. An order can have multiple coupons.
      */
     public Builder setCoupon(String coupon) {
       this.coupon = coupon;
@@ -136,8 +132,7 @@ public class OrderCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-     * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
      */
     public Builder setCurrency(String currency) {
       this.currency = currency;
@@ -145,26 +140,23 @@ public class OrderCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The ID of an existing customer to use for this order. If provided, the customer email and
-     * shipping address will be used to create the order. Subsequently, the customer will also be
-     * charged to pay the order. If `email` or `shipping` are also provided, they will override the
-     * values retrieved from the customer object.
+     * The ID of an existing customer to use for this order. If provided, the customer email and shipping address will be used to create the order. Subsequently, the customer will also be charged to pay the order. If `email` or `shipping` are also provided, they will override the values retrieved from the customer object.
      */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;
     }
 
-    /** The email address of the customer placing the order. */
+    /**
+     * The email address of the customer placing the order.
+     */
     public Builder setEmail(String email) {
       this.email = email;
       return this;
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * OrderCreateParams#expand} for the field documentation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link OrderCreateParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -175,9 +167,7 @@ public class OrderCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * OrderCreateParams#expand} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link OrderCreateParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -188,9 +178,7 @@ public class OrderCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * OrderCreateParams#extraParams} for the field documentation.
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link OrderCreateParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -201,9 +189,7 @@ public class OrderCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link OrderCreateParams#extraParams} for the field documentation.
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link OrderCreateParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -214,9 +200,7 @@ public class OrderCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `items` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * OrderCreateParams#items} for the field documentation.
+     * Add an element to `items` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link OrderCreateParams#items} for the field documentation.
      */
     public Builder addItem(Item element) {
       if (this.items == null) {
@@ -227,9 +211,7 @@ public class OrderCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `items` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * OrderCreateParams#items} for the field documentation.
+     * Add all elements to `items` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link OrderCreateParams#items} for the field documentation.
      */
     public Builder addAllItem(List<Item> elements) {
       if (this.items == null) {
@@ -240,9 +222,7 @@ public class OrderCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
-     * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * OrderCreateParams#metadata} for the field documentation.
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link OrderCreateParams#metadata} for the field documentation.
      */
     public Builder putMetadata(String key, String value) {
       if (this.metadata == null) {
@@ -253,9 +233,7 @@ public class OrderCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link OrderCreateParams#metadata} for the field documentation.
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link OrderCreateParams#metadata} for the field documentation.
      */
     public Builder putAllMetadata(Map<String, String> map) {
       if (this.metadata == null) {
@@ -266,15 +244,13 @@ public class OrderCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Shipping address for the order. Required if any of the SKUs are for products that have
-     * `shippable` set to true.
+     * Shipping address for the order. Required if any of the SKUs are for products that have `shippable` set to true.
      */
     public Builder setShipping(Shipping shipping) {
       this.shipping = shipping;
       return this;
     }
   }
-
   public static class Item {
     @SerializedName("amount")
     Long amount;
@@ -286,21 +262,19 @@ public class OrderCreateParams extends ApiRequestParams {
     String description;
 
     /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The ID of the SKU being ordered. */
+    /**
+     * The ID of the SKU being ordered.
+     */
     @SerializedName("parent")
     String parent;
 
     /**
-     * The quantity of this order item. When type is `sku`, this is the number of instances of the
-     * SKU to be ordered.
+     * The quantity of this order item. When type is `sku`, this is the number of instances of the SKU to be ordered.
      */
     @SerializedName("quantity")
     Long quantity;
@@ -324,11 +298,9 @@ public class OrderCreateParams extends ApiRequestParams {
       this.quantity = quantity;
       this.type = type;
     }
-
     public static Builder builder() {
       return new Builder();
     }
-
     public static class Builder {
       private Long amount;
 
@@ -344,16 +316,19 @@ public class OrderCreateParams extends ApiRequestParams {
 
       private Type type;
 
-      /** Finalize and obtain parameter instance from this builder. */
+      /**
+       * Finalize and obtain parameter instance from this builder.
+       */
       public Item build() {
         return new Item(
-            this.amount,
-            this.currency,
-            this.description,
-            this.extraParams,
-            this.parent,
-            this.quantity,
-            this.type);
+          this.amount,
+          this.currency,
+          this.description,
+          this.extraParams,
+          this.parent,
+          this.quantity,
+          this.type
+        );
       }
 
       public Builder setAmount(Long amount) {
@@ -372,9 +347,7 @@ public class OrderCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * OrderCreateParams.Item#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link OrderCreateParams.Item#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -385,9 +358,7 @@ public class OrderCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link OrderCreateParams.Item#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link OrderCreateParams.Item#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -397,15 +368,16 @@ public class OrderCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The ID of the SKU being ordered. */
+      /**
+       * The ID of the SKU being ordered.
+       */
       public Builder setParent(String parent) {
         this.parent = parent;
         return this;
       }
 
       /**
-       * The quantity of this order item. When type is `sku`, this is the number of instances of the
-       * SKU to be ordered.
+       * The quantity of this order item. When type is `sku`, this is the number of instances of the SKU to be ordered.
        */
       public Builder setQuantity(Long quantity) {
         this.quantity = quantity;
@@ -417,7 +389,6 @@ public class OrderCreateParams extends ApiRequestParams {
         return this;
       }
     }
-
     public enum Type implements ApiRequestParams.EnumParam {
       @SerializedName("discount")
       DISCOUNT("discount"),
@@ -430,35 +401,36 @@ public class OrderCreateParams extends ApiRequestParams {
 
       @SerializedName("tax")
       TAX("tax");
-
       @Getter(onMethod_ = {@Override})
       private final String value;
-
       Type(String value) {
         this.value = value;
       }
+
     }
   }
-
   public static class Shipping {
-    /** Customer shipping address. */
+    /**
+     * Customer shipping address.
+     */
     @SerializedName("address")
     Address address;
 
     /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Customer name. */
+    /**
+     * Customer name.
+     */
     @SerializedName("name")
     String name;
 
-    /** Customer phone (including extension). */
+    /**
+     * Customer phone (including extension).
+     */
     @SerializedName("phone")
     String phone;
 
@@ -468,11 +440,9 @@ public class OrderCreateParams extends ApiRequestParams {
       this.name = name;
       this.phone = phone;
     }
-
     public static Builder builder() {
       return new Builder();
     }
-
     public static class Builder {
       private Address address;
 
@@ -482,21 +452,23 @@ public class OrderCreateParams extends ApiRequestParams {
 
       private String phone;
 
-      /** Finalize and obtain parameter instance from this builder. */
+      /**
+       * Finalize and obtain parameter instance from this builder.
+       */
       public Shipping build() {
         return new Shipping(this.address, this.extraParams, this.name, this.phone);
       }
 
-      /** Customer shipping address. */
+      /**
+       * Customer shipping address.
+       */
       public Builder setAddress(Address address) {
         this.address = address;
         return this;
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * OrderCreateParams.Shipping#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link OrderCreateParams.Shipping#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -507,9 +479,7 @@ public class OrderCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link OrderCreateParams.Shipping#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link OrderCreateParams.Shipping#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -519,19 +489,22 @@ public class OrderCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Customer name. */
+      /**
+       * Customer name.
+       */
       public Builder setName(String name) {
         this.name = name;
         return this;
       }
 
-      /** Customer phone (including extension). */
+      /**
+       * Customer phone (including extension).
+       */
       public Builder setPhone(String phone) {
         this.phone = phone;
         return this;
       }
     }
-
     public static class Address {
       @SerializedName("city")
       String city;
@@ -540,10 +513,7 @@ public class OrderCreateParams extends ApiRequestParams {
       String country;
 
       /**
-       * Map of extra parameters for custom features not available in this client library. The
-       * content in this map is not serialized under this field's {@code @SerializedName} value.
-       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
-       * name in this param object. Effectively, this map is flattened to its parent instance.
+       * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
        */
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
@@ -576,11 +546,9 @@ public class OrderCreateParams extends ApiRequestParams {
         this.postalCode = postalCode;
         this.state = state;
       }
-
       public static Builder builder() {
         return new Builder();
       }
-
       public static class Builder {
         private String city;
 
@@ -596,16 +564,19 @@ public class OrderCreateParams extends ApiRequestParams {
 
         private String state;
 
-        /** Finalize and obtain parameter instance from this builder. */
+        /**
+         * Finalize and obtain parameter instance from this builder.
+         */
         public Address build() {
           return new Address(
-              this.city,
-              this.country,
-              this.extraParams,
-              this.line1,
-              this.line2,
-              this.postalCode,
-              this.state);
+            this.city,
+            this.country,
+            this.extraParams,
+            this.line1,
+            this.line2,
+            this.postalCode,
+            this.state
+          );
         }
 
         public Builder setCity(String city) {
@@ -619,10 +590,7 @@ public class OrderCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Add a key/value pair to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link OrderCreateParams.Shipping.Address#extraParams} for the field
-         * documentation.
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link OrderCreateParams.Shipping.Address#extraParams} for the field documentation.
          */
         public Builder putExtraParam(String key, Object value) {
           if (this.extraParams == null) {
@@ -633,10 +601,7 @@ public class OrderCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link OrderCreateParams.Shipping.Address#extraParams} for the field
-         * documentation.
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link OrderCreateParams.Shipping.Address#extraParams} for the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {

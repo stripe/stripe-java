@@ -2,6 +2,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.net.ApiRequestParams.EnumParam;
 import com.stripe.param.common.EmptyParam;
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -12,65 +13,55 @@ import lombok.Getter;
 
 public class InvoiceUpcomingParams extends ApiRequestParams {
   /**
-   * The code of the coupon to apply. If `subscription` or `subscription_items` is provided, the
-   * invoice returned will preview updating or creating a subscription with that coupon. Otherwise,
-   * it will preview applying that coupon to the customer for the next upcoming invoice from among
-   * the customer's subscriptions. The invoice can be previewed without a coupon by passing this
-   * value as an empty string.
+   * The code of the coupon to apply. If `subscription` or `subscription_items` is provided, the invoice returned will preview updating or creating a subscription with that coupon. Otherwise, it will preview applying that coupon to the customer for the next upcoming invoice from among the customer's subscriptions. The invoice can be previewed without a coupon by passing this value as an empty string.
    */
   @SerializedName("coupon")
   String coupon;
 
-  /** The identifier of the customer whose upcoming invoice you'd like to retrieve. */
+  /**
+   * The identifier of the customer whose upcoming invoice you'd like to retrieve.
+   */
   @SerializedName("customer")
   String customer;
 
-  /** Specifies which fields in the response should be expanded. */
+  /**
+   * Specifies which fields in the response should be expanded.
+   */
   @SerializedName("expand")
   List<String> expand;
 
   /**
-   * Map of extra parameters for custom features not available in this client library. The content
-   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-   * param object. Effectively, this map is flattened to its parent instance.
+   * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** List of invoice items to add or update in the upcoming invoice preview. */
+  /**
+   * List of invoice items to add or update in the upcoming invoice preview.
+   */
   @SerializedName("invoice_items")
   List<InvoiceItem> invoiceItems;
 
   /**
-   * The identifier of the unstarted schedule whose upcoming invoice you'd like to retrieve. Cannot
-   * be used with subscription or subscription fields.
+   * The identifier of the unstarted schedule whose upcoming invoice you'd like to retrieve. Cannot be used with subscription or subscription fields.
    */
   @SerializedName("schedule")
   String schedule;
 
   /**
-   * The identifier of the subscription for which you'd like to retrieve the upcoming invoice. If
-   * not provided, but a `subscription_items` is provided, you will preview creating a subscription
-   * with those items. If neither `subscription` nor `subscription_items` is provided, you will
-   * retrieve the next upcoming invoice from among the customer's subscriptions.
+   * The identifier of the subscription for which you'd like to retrieve the upcoming invoice. If not provided, but a `subscription_items` is provided, you will preview creating a subscription with those items. If neither `subscription` nor `subscription_items` is provided, you will retrieve the next upcoming invoice from among the customer's subscriptions.
    */
   @SerializedName("subscription")
   String subscription;
 
   /**
-   * For new subscriptions, a future timestamp to anchor the subscription's [billing
-   * cycle](https://stripe.com/docs/subscriptions/billing-cycle). This is used to determine the date
-   * of the first full invoice, and, for plans with `month` or `year` intervals, the day of the
-   * month for subsequent invoices. For existing subscriptions, the value can only be set to `now`
-   * or `unchanged`.
+   * For new subscriptions, a future timestamp to anchor the subscription's [billing cycle](https://stripe.com/docs/subscriptions/billing-cycle). This is used to determine the date of the first full invoice, and, for plans with `month` or `year` intervals, the day of the month for subsequent invoices. For existing subscriptions, the value can only be set to `now` or `unchanged`.
    */
   @SerializedName("subscription_billing_cycle_anchor")
   Object subscriptionBillingCycleAnchor;
 
   /**
-   * Timestamp indicating when the subscription should be scheduled to cancel. Will prorate if
-   * within the current period if `prorate=true`
+   * Timestamp indicating when the subscription should be scheduled to cancel. Will prorate if within the current period if `prorate=true`
    */
   @SerializedName("subscription_cancel_at")
   Object subscriptionCancelAt;
@@ -81,65 +72,56 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   @SerializedName("subscription_cancel_at_period_end")
   Boolean subscriptionCancelAtPeriodEnd;
 
-  /** This simulates the subscription being canceled or expired immediately. */
+  /**
+   * This simulates the subscription being canceled or expired immediately.
+   */
   @SerializedName("subscription_cancel_now")
   Boolean subscriptionCancelNow;
 
   /**
-   * If provided, the invoice returned will preview updating or creating a subscription with these
-   * default tax rates. The default tax rates will apply to any line item that does not have
-   * `tax_rates` set.
+   * If provided, the invoice returned will preview updating or creating a subscription with these default tax rates. The default tax rates will apply to any line item that does not have `tax_rates` set.
    */
   @SerializedName("subscription_default_tax_rates")
   Object subscriptionDefaultTaxRates;
 
-  /** List of subscription items, each with an attached plan. */
+  /**
+   * List of subscription items, each with an attached plan.
+   */
   @SerializedName("subscription_items")
   List<SubscriptionItem> subscriptionItems;
 
   /**
-   * If previewing an update to a subscription, this decides whether the preview will show the
-   * result of applying prorations or not. If set, one of `subscription_items` or `subscription`,
-   * and one of `subscription_items` or `subscription_trial_end` are required.
+   * If previewing an update to a subscription, this decides whether the preview will show the result of applying prorations or not. If set, one of `subscription_items` or `subscription`, and one of `subscription_items` or `subscription_trial_end` are required.
    */
   @SerializedName("subscription_prorate")
   Boolean subscriptionProrate;
 
   /**
-   * If previewing an update to a subscription, and doing proration, `subscription_proration_date`
-   * forces the proration to be calculated as though the update was done at the specified time. The
-   * time given must be within the current subscription period, and cannot be before the
-   * subscription was on its current plan. If set, `subscription`, and one of `subscription_items`,
-   * or `subscription_trial_end` are required. Also, `subscription_proration` cannot be set to
-   * false.
+   * If previewing an update to a subscription, and doing proration, `subscription_proration_date` forces the proration to be calculated as though the update was done at the specified time. The time given must be within the current subscription period, and cannot be before the subscription was on its current plan. If set, `subscription`, and one of `subscription_items`, or `subscription_trial_end` are required. Also, `subscription_proration` cannot be set to false.
    */
   @SerializedName("subscription_proration_date")
   Long subscriptionProrationDate;
 
-  /** Date a subscription is intended to start (can be future or past). */
+  /**
+   * Date a subscription is intended to start (can be future or past).
+   */
   @SerializedName("subscription_start_date")
   Long subscriptionStartDate;
 
   /**
-   * If provided, the invoice returned will preview updating or creating a subscription with that
-   * tax percent. If set, one of `subscription_items` or `subscription` is required. This field has
-   * been deprecated and will be removed in a future API version, for further information view the
-   * [migration docs](https://stripe.com/docs/billing/migration/taxes) for `tax_rates`.
+   * If provided, the invoice returned will preview updating or creating a subscription with that tax percent. If set, one of `subscription_items` or `subscription` is required. This field has been deprecated and will be removed in a future API version, for further information view the [migration docs](https://stripe.com/docs/billing/migration/taxes) for `tax_rates`.
    */
   @SerializedName("subscription_tax_percent")
   BigDecimal subscriptionTaxPercent;
 
   /**
-   * If provided, the invoice returned will preview updating or creating a subscription with that
-   * trial end. If set, one of `subscription_items` or `subscription` is required.
+   * If provided, the invoice returned will preview updating or creating a subscription with that trial end. If set, one of `subscription_items` or `subscription` is required.
    */
   @SerializedName("subscription_trial_end")
   Object subscriptionTrialEnd;
 
   /**
-   * Indicates if a plan's `trial_period_days` should be applied to the subscription. Setting
-   * `subscription_trial_end` per subscription is preferred, and this defaults to `false`. Setting
-   * this flag to `true` together with `subscription_trial_end` is not allowed.
+   * Indicates if a plan's `trial_period_days` should be applied to the subscription. Setting `subscription_trial_end` per subscription is preferred, and this defaults to `false`. Setting this flag to `true` together with `subscription_trial_end` is not allowed.
    */
   @SerializedName("subscription_trial_from_plan")
   Boolean subscriptionTrialFromPlan;
@@ -184,11 +166,9 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     this.subscriptionTrialEnd = subscriptionTrialEnd;
     this.subscriptionTrialFromPlan = subscriptionTrialFromPlan;
   }
-
   public static Builder builder() {
     return new Builder();
   }
-
   public static class Builder {
     private String coupon;
 
@@ -228,52 +208,51 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     private Boolean subscriptionTrialFromPlan;
 
-    /** Finalize and obtain parameter instance from this builder. */
+    /**
+     * Finalize and obtain parameter instance from this builder.
+     */
     public InvoiceUpcomingParams build() {
       return new InvoiceUpcomingParams(
-          this.coupon,
-          this.customer,
-          this.expand,
-          this.extraParams,
-          this.invoiceItems,
-          this.schedule,
-          this.subscription,
-          this.subscriptionBillingCycleAnchor,
-          this.subscriptionCancelAt,
-          this.subscriptionCancelAtPeriodEnd,
-          this.subscriptionCancelNow,
-          this.subscriptionDefaultTaxRates,
-          this.subscriptionItems,
-          this.subscriptionProrate,
-          this.subscriptionProrationDate,
-          this.subscriptionStartDate,
-          this.subscriptionTaxPercent,
-          this.subscriptionTrialEnd,
-          this.subscriptionTrialFromPlan);
+        this.coupon,
+        this.customer,
+        this.expand,
+        this.extraParams,
+        this.invoiceItems,
+        this.schedule,
+        this.subscription,
+        this.subscriptionBillingCycleAnchor,
+        this.subscriptionCancelAt,
+        this.subscriptionCancelAtPeriodEnd,
+        this.subscriptionCancelNow,
+        this.subscriptionDefaultTaxRates,
+        this.subscriptionItems,
+        this.subscriptionProrate,
+        this.subscriptionProrationDate,
+        this.subscriptionStartDate,
+        this.subscriptionTaxPercent,
+        this.subscriptionTrialEnd,
+        this.subscriptionTrialFromPlan
+      );
     }
 
     /**
-     * The code of the coupon to apply. If `subscription` or `subscription_items` is provided, the
-     * invoice returned will preview updating or creating a subscription with that coupon.
-     * Otherwise, it will preview applying that coupon to the customer for the next upcoming invoice
-     * from among the customer's subscriptions. The invoice can be previewed without a coupon by
-     * passing this value as an empty string.
+     * The code of the coupon to apply. If `subscription` or `subscription_items` is provided, the invoice returned will preview updating or creating a subscription with that coupon. Otherwise, it will preview applying that coupon to the customer for the next upcoming invoice from among the customer's subscriptions. The invoice can be previewed without a coupon by passing this value as an empty string.
      */
     public Builder setCoupon(String coupon) {
       this.coupon = coupon;
       return this;
     }
 
-    /** The identifier of the customer whose upcoming invoice you'd like to retrieve. */
+    /**
+     * The identifier of the customer whose upcoming invoice you'd like to retrieve.
+     */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * InvoiceUpcomingParams#expand} for the field documentation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link InvoiceUpcomingParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -284,9 +263,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * InvoiceUpcomingParams#expand} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link InvoiceUpcomingParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -297,9 +274,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * InvoiceUpcomingParams#extraParams} for the field documentation.
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link InvoiceUpcomingParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -310,9 +285,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link InvoiceUpcomingParams#extraParams} for the field documentation.
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link InvoiceUpcomingParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -323,9 +296,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `invoiceItems` list. A list is initialized for the first `add/addAll` call,
-     * and subsequent calls adds additional elements to the original list. See {@link
-     * InvoiceUpcomingParams#invoiceItems} for the field documentation.
+     * Add an element to `invoiceItems` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link InvoiceUpcomingParams#invoiceItems} for the field documentation.
      */
     public Builder addInvoiceItem(InvoiceItem element) {
       if (this.invoiceItems == null) {
@@ -336,9 +307,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `invoiceItems` list. A list is initialized for the first `add/addAll`
-     * call, and subsequent calls adds additional elements to the original list. See {@link
-     * InvoiceUpcomingParams#invoiceItems} for the field documentation.
+     * Add all elements to `invoiceItems` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link InvoiceUpcomingParams#invoiceItems} for the field documentation.
      */
     public Builder addAllInvoiceItem(List<InvoiceItem> elements) {
       if (this.invoiceItems == null) {
@@ -349,8 +318,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * The identifier of the unstarted schedule whose upcoming invoice you'd like to retrieve.
-     * Cannot be used with subscription or subscription fields.
+     * The identifier of the unstarted schedule whose upcoming invoice you'd like to retrieve. Cannot be used with subscription or subscription fields.
      */
     public Builder setSchedule(String schedule) {
       this.schedule = schedule;
@@ -358,11 +326,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * The identifier of the subscription for which you'd like to retrieve the upcoming invoice. If
-     * not provided, but a `subscription_items` is provided, you will preview creating a
-     * subscription with those items. If neither `subscription` nor `subscription_items` is
-     * provided, you will retrieve the next upcoming invoice from among the customer's
-     * subscriptions.
+     * The identifier of the subscription for which you'd like to retrieve the upcoming invoice. If not provided, but a `subscription_items` is provided, you will preview creating a subscription with those items. If neither `subscription` nor `subscription_items` is provided, you will retrieve the next upcoming invoice from among the customer's subscriptions.
      */
     public Builder setSubscription(String subscription) {
       this.subscription = subscription;
@@ -370,11 +334,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * For new subscriptions, a future timestamp to anchor the subscription's [billing
-     * cycle](https://stripe.com/docs/subscriptions/billing-cycle). This is used to determine the
-     * date of the first full invoice, and, for plans with `month` or `year` intervals, the day of
-     * the month for subsequent invoices. For existing subscriptions, the value can only be set to
-     * `now` or `unchanged`.
+     * For new subscriptions, a future timestamp to anchor the subscription's [billing cycle](https://stripe.com/docs/subscriptions/billing-cycle). This is used to determine the date of the first full invoice, and, for plans with `month` or `year` intervals, the day of the month for subsequent invoices. For existing subscriptions, the value can only be set to `now` or `unchanged`.
      */
     public Builder setSubscriptionBillingCycleAnchor(
         SubscriptionBillingCycleAnchor subscriptionBillingCycleAnchor) {
@@ -383,11 +343,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * For new subscriptions, a future timestamp to anchor the subscription's [billing
-     * cycle](https://stripe.com/docs/subscriptions/billing-cycle). This is used to determine the
-     * date of the first full invoice, and, for plans with `month` or `year` intervals, the day of
-     * the month for subsequent invoices. For existing subscriptions, the value can only be set to
-     * `now` or `unchanged`.
+     * For new subscriptions, a future timestamp to anchor the subscription's [billing cycle](https://stripe.com/docs/subscriptions/billing-cycle). This is used to determine the date of the first full invoice, and, for plans with `month` or `year` intervals, the day of the month for subsequent invoices. For existing subscriptions, the value can only be set to `now` or `unchanged`.
      */
     public Builder setSubscriptionBillingCycleAnchor(Long subscriptionBillingCycleAnchor) {
       this.subscriptionBillingCycleAnchor = subscriptionBillingCycleAnchor;
@@ -395,8 +351,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * Timestamp indicating when the subscription should be scheduled to cancel. Will prorate if
-     * within the current period if `prorate=true`
+     * Timestamp indicating when the subscription should be scheduled to cancel. Will prorate if within the current period if `prorate=true`
      */
     public Builder setSubscriptionCancelAt(Long subscriptionCancelAt) {
       this.subscriptionCancelAt = subscriptionCancelAt;
@@ -404,8 +359,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * Timestamp indicating when the subscription should be scheduled to cancel. Will prorate if
-     * within the current period if `prorate=true`
+     * Timestamp indicating when the subscription should be scheduled to cancel. Will prorate if within the current period if `prorate=true`
      */
     public Builder setSubscriptionCancelAt(EmptyParam subscriptionCancelAt) {
       this.subscriptionCancelAt = subscriptionCancelAt;
@@ -420,16 +374,16 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       return this;
     }
 
-    /** This simulates the subscription being canceled or expired immediately. */
+    /**
+     * This simulates the subscription being canceled or expired immediately.
+     */
     public Builder setSubscriptionCancelNow(Boolean subscriptionCancelNow) {
       this.subscriptionCancelNow = subscriptionCancelNow;
       return this;
     }
 
     /**
-     * If provided, the invoice returned will preview updating or creating a subscription with these
-     * default tax rates. The default tax rates will apply to any line item that does not have
-     * `tax_rates` set.
+     * If provided, the invoice returned will preview updating or creating a subscription with these default tax rates. The default tax rates will apply to any line item that does not have `tax_rates` set.
      */
     public Builder setSubscriptionDefaultTaxRates(List<String> subscriptionDefaultTaxRates) {
       this.subscriptionDefaultTaxRates = subscriptionDefaultTaxRates;
@@ -437,9 +391,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * If provided, the invoice returned will preview updating or creating a subscription with these
-     * default tax rates. The default tax rates will apply to any line item that does not have
-     * `tax_rates` set.
+     * If provided, the invoice returned will preview updating or creating a subscription with these default tax rates. The default tax rates will apply to any line item that does not have `tax_rates` set.
      */
     public Builder setSubscriptionDefaultTaxRates(EmptyParam subscriptionDefaultTaxRates) {
       this.subscriptionDefaultTaxRates = subscriptionDefaultTaxRates;
@@ -447,9 +399,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `subscriptionItems` list. A list is initialized for the first `add/addAll`
-     * call, and subsequent calls adds additional elements to the original list. See {@link
-     * InvoiceUpcomingParams#subscriptionItems} for the field documentation.
+     * Add an element to `subscriptionItems` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link InvoiceUpcomingParams#subscriptionItems} for the field documentation.
      */
     public Builder addSubscriptionItem(SubscriptionItem element) {
       if (this.subscriptionItems == null) {
@@ -460,9 +410,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `subscriptionItems` list. A list is initialized for the first
-     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
-     * {@link InvoiceUpcomingParams#subscriptionItems} for the field documentation.
+     * Add all elements to `subscriptionItems` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link InvoiceUpcomingParams#subscriptionItems} for the field documentation.
      */
     public Builder addAllSubscriptionItem(List<SubscriptionItem> elements) {
       if (this.subscriptionItems == null) {
@@ -473,9 +421,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * If previewing an update to a subscription, this decides whether the preview will show the
-     * result of applying prorations or not. If set, one of `subscription_items` or `subscription`,
-     * and one of `subscription_items` or `subscription_trial_end` are required.
+     * If previewing an update to a subscription, this decides whether the preview will show the result of applying prorations or not. If set, one of `subscription_items` or `subscription`, and one of `subscription_items` or `subscription_trial_end` are required.
      */
     public Builder setSubscriptionProrate(Boolean subscriptionProrate) {
       this.subscriptionProrate = subscriptionProrate;
@@ -483,29 +429,23 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * If previewing an update to a subscription, and doing proration, `subscription_proration_date`
-     * forces the proration to be calculated as though the update was done at the specified time.
-     * The time given must be within the current subscription period, and cannot be before the
-     * subscription was on its current plan. If set, `subscription`, and one of
-     * `subscription_items`, or `subscription_trial_end` are required. Also,
-     * `subscription_proration` cannot be set to false.
+     * If previewing an update to a subscription, and doing proration, `subscription_proration_date` forces the proration to be calculated as though the update was done at the specified time. The time given must be within the current subscription period, and cannot be before the subscription was on its current plan. If set, `subscription`, and one of `subscription_items`, or `subscription_trial_end` are required. Also, `subscription_proration` cannot be set to false.
      */
     public Builder setSubscriptionProrationDate(Long subscriptionProrationDate) {
       this.subscriptionProrationDate = subscriptionProrationDate;
       return this;
     }
 
-    /** Date a subscription is intended to start (can be future or past). */
+    /**
+     * Date a subscription is intended to start (can be future or past).
+     */
     public Builder setSubscriptionStartDate(Long subscriptionStartDate) {
       this.subscriptionStartDate = subscriptionStartDate;
       return this;
     }
 
     /**
-     * If provided, the invoice returned will preview updating or creating a subscription with that
-     * tax percent. If set, one of `subscription_items` or `subscription` is required. This field
-     * has been deprecated and will be removed in a future API version, for further information view
-     * the [migration docs](https://stripe.com/docs/billing/migration/taxes) for `tax_rates`.
+     * If provided, the invoice returned will preview updating or creating a subscription with that tax percent. If set, one of `subscription_items` or `subscription` is required. This field has been deprecated and will be removed in a future API version, for further information view the [migration docs](https://stripe.com/docs/billing/migration/taxes) for `tax_rates`.
      */
     public Builder setSubscriptionTaxPercent(BigDecimal subscriptionTaxPercent) {
       this.subscriptionTaxPercent = subscriptionTaxPercent;
@@ -513,8 +453,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * If provided, the invoice returned will preview updating or creating a subscription with that
-     * trial end. If set, one of `subscription_items` or `subscription` is required.
+     * If provided, the invoice returned will preview updating or creating a subscription with that trial end. If set, one of `subscription_items` or `subscription` is required.
      */
     public Builder setSubscriptionTrialEnd(SubscriptionTrialEnd subscriptionTrialEnd) {
       this.subscriptionTrialEnd = subscriptionTrialEnd;
@@ -522,8 +461,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * If provided, the invoice returned will preview updating or creating a subscription with that
-     * trial end. If set, one of `subscription_items` or `subscription` is required.
+     * If provided, the invoice returned will preview updating or creating a subscription with that trial end. If set, one of `subscription_items` or `subscription` is required.
      */
     public Builder setSubscriptionTrialEnd(Long subscriptionTrialEnd) {
       this.subscriptionTrialEnd = subscriptionTrialEnd;
@@ -531,71 +469,65 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * Indicates if a plan's `trial_period_days` should be applied to the subscription. Setting
-     * `subscription_trial_end` per subscription is preferred, and this defaults to `false`. Setting
-     * this flag to `true` together with `subscription_trial_end` is not allowed.
+     * Indicates if a plan's `trial_period_days` should be applied to the subscription. Setting `subscription_trial_end` per subscription is preferred, and this defaults to `false`. Setting this flag to `true` together with `subscription_trial_end` is not allowed.
      */
     public Builder setSubscriptionTrialFromPlan(Boolean subscriptionTrialFromPlan) {
       this.subscriptionTrialFromPlan = subscriptionTrialFromPlan;
       return this;
     }
   }
-
   public static class InvoiceItem {
-    /** The integer amount in **%s** of previewed invoice item. */
+    /**
+     * The integer amount in **%s** of previewed invoice item.
+     */
     @SerializedName("amount")
     Long amount;
 
     /**
-     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-     * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies). Only
-     * applicable to new invoice items.
+     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies). Only applicable to new invoice items.
      */
     @SerializedName("currency")
     String currency;
 
     /**
-     * An arbitrary string which you can attach to the invoice item. The description is displayed in
-     * the invoice for easy tracking.
+     * An arbitrary string which you can attach to the invoice item. The description is displayed in the invoice for easy tracking.
      */
     @SerializedName("description")
     String description;
 
     /**
-     * Explicitly controls whether discounts apply to this invoice item. Defaults to true, except
-     * for negative invoice items.
+     * Explicitly controls whether discounts apply to this invoice item. Defaults to true, except for negative invoice items.
      */
     @SerializedName("discountable")
     Boolean discountable;
 
     /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
     /**
-     * The ID of the invoice item to update in preview. If not specified, a new invoice item will be
-     * added to the preview of the upcoming invoice.
+     * The ID of the invoice item to update in preview. If not specified, a new invoice item will be added to the preview of the upcoming invoice.
      */
     @SerializedName("invoiceitem")
     String invoiceitem;
 
     /**
-     * A set of key-value pairs that you can attach to an invoice item object. It can be useful for
-     * storing additional information about the invoice item in a structured format.
+     * A set of key-value pairs that you can attach to an invoice item object. It can be useful for storing additional information about the invoice item in a structured format.
      */
     @SerializedName("metadata")
     Map<String, String> metadata;
 
-    /** The period associated with this invoice item. */
+    /**
+     * The period associated with this invoice item.
+     */
     @SerializedName("period")
     Period period;
 
-    /** Non-negative integer. The quantity of units for the invoice item. */
+    /**
+     * Non-negative integer. The quantity of units for the invoice item.
+     */
     @SerializedName("quantity")
     Long quantity;
 
@@ -603,16 +535,13 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     Object taxRates;
 
     /**
-     * The integer unit amount in **%s** of the charge to be applied to the upcoming invoice. This
-     * unit_amount will be multiplied by the quantity to get the full amount. If you want to apply a
-     * credit to the customer's account, pass a negative unit_amount.
+     * The integer unit amount in **%s** of the charge to be applied to the upcoming invoice. This unit_amount will be multiplied by the quantity to get the full amount. If you want to apply a credit to the customer's account, pass a negative unit_amount.
      */
     @SerializedName("unit_amount")
     Long unitAmount;
 
     /**
-     * Same as `unit_amount`, but accepts a decimal string with at most 12 decimal places. Only one
-     * of `unit_amount` and `unit_amount_decimal` can be set.
+     * Same as `unit_amount`, but accepts a decimal string with at most 12 decimal places. Only one of `unit_amount` and `unit_amount_decimal` can be set.
      */
     @SerializedName("unit_amount_decimal")
     BigDecimal unitAmountDecimal;
@@ -643,11 +572,9 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       this.unitAmount = unitAmount;
       this.unitAmountDecimal = unitAmountDecimal;
     }
-
     public static Builder builder() {
       return new Builder();
     }
-
     public static class Builder {
       private Long amount;
 
@@ -673,33 +600,36 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
       private BigDecimal unitAmountDecimal;
 
-      /** Finalize and obtain parameter instance from this builder. */
+      /**
+       * Finalize and obtain parameter instance from this builder.
+       */
       public InvoiceItem build() {
         return new InvoiceItem(
-            this.amount,
-            this.currency,
-            this.description,
-            this.discountable,
-            this.extraParams,
-            this.invoiceitem,
-            this.metadata,
-            this.period,
-            this.quantity,
-            this.taxRates,
-            this.unitAmount,
-            this.unitAmountDecimal);
+          this.amount,
+          this.currency,
+          this.description,
+          this.discountable,
+          this.extraParams,
+          this.invoiceitem,
+          this.metadata,
+          this.period,
+          this.quantity,
+          this.taxRates,
+          this.unitAmount,
+          this.unitAmountDecimal
+        );
       }
 
-      /** The integer amount in **%s** of previewed invoice item. */
+      /**
+       * The integer amount in **%s** of previewed invoice item.
+       */
       public Builder setAmount(Long amount) {
         this.amount = amount;
         return this;
       }
 
       /**
-       * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-       * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies). Only
-       * applicable to new invoice items.
+       * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies). Only applicable to new invoice items.
        */
       public Builder setCurrency(String currency) {
         this.currency = currency;
@@ -707,8 +637,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
 
       /**
-       * An arbitrary string which you can attach to the invoice item. The description is displayed
-       * in the invoice for easy tracking.
+       * An arbitrary string which you can attach to the invoice item. The description is displayed in the invoice for easy tracking.
        */
       public Builder setDescription(String description) {
         this.description = description;
@@ -716,8 +645,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
 
       /**
-       * Explicitly controls whether discounts apply to this invoice item. Defaults to true, except
-       * for negative invoice items.
+       * Explicitly controls whether discounts apply to this invoice item. Defaults to true, except for negative invoice items.
        */
       public Builder setDiscountable(Boolean discountable) {
         this.discountable = discountable;
@@ -725,9 +653,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * InvoiceUpcomingParams.InvoiceItem#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link InvoiceUpcomingParams.InvoiceItem#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -738,9 +664,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link InvoiceUpcomingParams.InvoiceItem#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link InvoiceUpcomingParams.InvoiceItem#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -751,8 +675,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
 
       /**
-       * The ID of the invoice item to update in preview. If not specified, a new invoice item will
-       * be added to the preview of the upcoming invoice.
+       * The ID of the invoice item to update in preview. If not specified, a new invoice item will be added to the preview of the upcoming invoice.
        */
       public Builder setInvoiceitem(String invoiceitem) {
         this.invoiceitem = invoiceitem;
@@ -760,9 +683,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
 
       /**
-       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * InvoiceUpcomingParams.InvoiceItem#metadata} for the field documentation.
+       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link InvoiceUpcomingParams.InvoiceItem#metadata} for the field documentation.
        */
       public Builder putMetadata(String key, String value) {
         if (this.metadata == null) {
@@ -773,9 +694,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link InvoiceUpcomingParams.InvoiceItem#metadata} for the field documentation.
+       * Add all map key/value pairs to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link InvoiceUpcomingParams.InvoiceItem#metadata} for the field documentation.
        */
       public Builder putAllMetadata(Map<String, String> map) {
         if (this.metadata == null) {
@@ -785,13 +704,17 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         return this;
       }
 
-      /** The period associated with this invoice item. */
+      /**
+       * The period associated with this invoice item.
+       */
       public Builder setPeriod(Period period) {
         this.period = period;
         return this;
       }
 
-      /** Non-negative integer. The quantity of units for the invoice item. */
+      /**
+       * Non-negative integer. The quantity of units for the invoice item.
+       */
       public Builder setQuantity(Long quantity) {
         this.quantity = quantity;
         return this;
@@ -808,9 +731,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
 
       /**
-       * The integer unit amount in **%s** of the charge to be applied to the upcoming invoice. This
-       * unit_amount will be multiplied by the quantity to get the full amount. If you want to apply
-       * a credit to the customer's account, pass a negative unit_amount.
+       * The integer unit amount in **%s** of the charge to be applied to the upcoming invoice. This unit_amount will be multiplied by the quantity to get the full amount. If you want to apply a credit to the customer's account, pass a negative unit_amount.
        */
       public Builder setUnitAmount(Long unitAmount) {
         this.unitAmount = unitAmount;
@@ -818,30 +739,29 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
 
       /**
-       * Same as `unit_amount`, but accepts a decimal string with at most 12 decimal places. Only
-       * one of `unit_amount` and `unit_amount_decimal` can be set.
+       * Same as `unit_amount`, but accepts a decimal string with at most 12 decimal places. Only one of `unit_amount` and `unit_amount_decimal` can be set.
        */
       public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
         this.unitAmountDecimal = unitAmountDecimal;
         return this;
       }
     }
-
     public static class Period {
-      /** The end of the period, which must be greater than or equal to the start. */
+      /**
+       * The end of the period, which must be greater than or equal to the start.
+       */
       @SerializedName("end")
       Long end;
 
       /**
-       * Map of extra parameters for custom features not available in this client library. The
-       * content in this map is not serialized under this field's {@code @SerializedName} value.
-       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
-       * name in this param object. Effectively, this map is flattened to its parent instance.
+       * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
        */
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** The start of the period. */
+      /**
+       * The start of the period.
+       */
       @SerializedName("start")
       Long start;
 
@@ -850,11 +770,9 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         this.extraParams = extraParams;
         this.start = start;
       }
-
       public static Builder builder() {
         return new Builder();
       }
-
       public static class Builder {
         private Long end;
 
@@ -862,22 +780,23 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
         private Long start;
 
-        /** Finalize and obtain parameter instance from this builder. */
+        /**
+         * Finalize and obtain parameter instance from this builder.
+         */
         public Period build() {
           return new Period(this.end, this.extraParams, this.start);
         }
 
-        /** The end of the period, which must be greater than or equal to the start. */
+        /**
+         * The end of the period, which must be greater than or equal to the start.
+         */
         public Builder setEnd(Long end) {
           this.end = end;
           return this;
         }
 
         /**
-         * Add a key/value pair to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link InvoiceUpcomingParams.InvoiceItem.Period#extraParams} for the field
-         * documentation.
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link InvoiceUpcomingParams.InvoiceItem.Period#extraParams} for the field documentation.
          */
         public Builder putExtraParam(String key, Object value) {
           if (this.extraParams == null) {
@@ -888,10 +807,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         }
 
         /**
-         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link InvoiceUpcomingParams.InvoiceItem.Period#extraParams} for the field
-         * documentation.
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link InvoiceUpcomingParams.InvoiceItem.Period#extraParams} for the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -901,7 +817,9 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
           return this;
         }
 
-        /** The start of the period. */
+        /**
+         * The start of the period.
+         */
         public Builder setStart(Long start) {
           this.start = start;
           return this;
@@ -909,57 +827,57 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
     }
   }
-
   public static class SubscriptionItem {
     /**
-     * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
-     * billing period.
+     * Define thresholds at which an invoice will be sent, and the subscription advanced to a new billing period.
      */
     @SerializedName("billing_thresholds")
     Object billingThresholds;
 
     /**
-     * Delete all usage for a given subscription item. Allowed only when `deleted` is set to `true`
-     * and the current plan's `usage_type` is `metered`.
+     * Delete all usage for a given subscription item. Allowed only when `deleted` is set to `true` and the current plan's `usage_type` is `metered`.
      */
     @SerializedName("clear_usage")
     Boolean clearUsage;
 
-    /** A flag that, if set to `true`, will delete the specified item. */
+    /**
+     * A flag that, if set to `true`, will delete the specified item.
+     */
     @SerializedName("deleted")
     Boolean deleted;
 
     /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Subscription item to update. */
+    /**
+     * Subscription item to update.
+     */
     @SerializedName("id")
     String id;
 
     /**
-     * Set of key-value pairs that you can attach to an object. This can be useful for storing
-     * additional information about the object in a structured format.
+     * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
      */
     @SerializedName("metadata")
     Map<String, String> metadata;
 
-    /** Plan ID for this item, as a string. */
+    /**
+     * Plan ID for this item, as a string.
+     */
     @SerializedName("plan")
     String plan;
 
-    /** Quantity for this item. */
+    /**
+     * Quantity for this item.
+     */
     @SerializedName("quantity")
     Long quantity;
 
     /**
-     * The tax rates which apply to this `subscription_item`. When set, the `default_tax_rates` on
-     * the subscription do not apply to this `subscription_item`.
+     * The tax rates which apply to this `subscription_item`. When set, the `default_tax_rates` on the subscription do not apply to this `subscription_item`.
      */
     @SerializedName("tax_rates")
     Object taxRates;
@@ -984,11 +902,9 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       this.quantity = quantity;
       this.taxRates = taxRates;
     }
-
     public static Builder builder() {
       return new Builder();
     }
-
     public static class Builder {
       private Object billingThresholds;
 
@@ -1008,23 +924,25 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
       private Object taxRates;
 
-      /** Finalize and obtain parameter instance from this builder. */
+      /**
+       * Finalize and obtain parameter instance from this builder.
+       */
       public SubscriptionItem build() {
         return new SubscriptionItem(
-            this.billingThresholds,
-            this.clearUsage,
-            this.deleted,
-            this.extraParams,
-            this.id,
-            this.metadata,
-            this.plan,
-            this.quantity,
-            this.taxRates);
+          this.billingThresholds,
+          this.clearUsage,
+          this.deleted,
+          this.extraParams,
+          this.id,
+          this.metadata,
+          this.plan,
+          this.quantity,
+          this.taxRates
+        );
       }
 
       /**
-       * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
-       * billing period.
+       * Define thresholds at which an invoice will be sent, and the subscription advanced to a new billing period.
        */
       public Builder setBillingThresholds(BillingThresholds billingThresholds) {
         this.billingThresholds = billingThresholds;
@@ -1032,8 +950,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
 
       /**
-       * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
-       * billing period.
+       * Define thresholds at which an invoice will be sent, and the subscription advanced to a new billing period.
        */
       public Builder setBillingThresholds(EmptyParam billingThresholds) {
         this.billingThresholds = billingThresholds;
@@ -1041,24 +958,23 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
 
       /**
-       * Delete all usage for a given subscription item. Allowed only when `deleted` is set to
-       * `true` and the current plan's `usage_type` is `metered`.
+       * Delete all usage for a given subscription item. Allowed only when `deleted` is set to `true` and the current plan's `usage_type` is `metered`.
        */
       public Builder setClearUsage(Boolean clearUsage) {
         this.clearUsage = clearUsage;
         return this;
       }
 
-      /** A flag that, if set to `true`, will delete the specified item. */
+      /**
+       * A flag that, if set to `true`, will delete the specified item.
+       */
       public Builder setDeleted(Boolean deleted) {
         this.deleted = deleted;
         return this;
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * InvoiceUpcomingParams.SubscriptionItem#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link InvoiceUpcomingParams.SubscriptionItem#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -1069,9 +985,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link InvoiceUpcomingParams.SubscriptionItem#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link InvoiceUpcomingParams.SubscriptionItem#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -1081,16 +995,16 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         return this;
       }
 
-      /** Subscription item to update. */
+      /**
+       * Subscription item to update.
+       */
       public Builder setId(String id) {
         this.id = id;
         return this;
       }
 
       /**
-       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * InvoiceUpcomingParams.SubscriptionItem#metadata} for the field documentation.
+       * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link InvoiceUpcomingParams.SubscriptionItem#metadata} for the field documentation.
        */
       public Builder putMetadata(String key, String value) {
         if (this.metadata == null) {
@@ -1101,9 +1015,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link InvoiceUpcomingParams.SubscriptionItem#metadata} for the field documentation.
+       * Add all map key/value pairs to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link InvoiceUpcomingParams.SubscriptionItem#metadata} for the field documentation.
        */
       public Builder putAllMetadata(Map<String, String> map) {
         if (this.metadata == null) {
@@ -1113,21 +1025,24 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         return this;
       }
 
-      /** Plan ID for this item, as a string. */
+      /**
+       * Plan ID for this item, as a string.
+       */
       public Builder setPlan(String plan) {
         this.plan = plan;
         return this;
       }
 
-      /** Quantity for this item. */
+      /**
+       * Quantity for this item.
+       */
       public Builder setQuantity(Long quantity) {
         this.quantity = quantity;
         return this;
       }
 
       /**
-       * The tax rates which apply to this `subscription_item`. When set, the `default_tax_rates` on
-       * the subscription do not apply to this `subscription_item`.
+       * The tax rates which apply to this `subscription_item`. When set, the `default_tax_rates` on the subscription do not apply to this `subscription_item`.
        */
       public Builder setTaxRates(List<String> taxRates) {
         this.taxRates = taxRates;
@@ -1135,26 +1050,23 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
 
       /**
-       * The tax rates which apply to this `subscription_item`. When set, the `default_tax_rates` on
-       * the subscription do not apply to this `subscription_item`.
+       * The tax rates which apply to this `subscription_item`. When set, the `default_tax_rates` on the subscription do not apply to this `subscription_item`.
        */
       public Builder setTaxRates(EmptyParam taxRates) {
         this.taxRates = taxRates;
         return this;
       }
     }
-
     public static class BillingThresholds {
       /**
-       * Map of extra parameters for custom features not available in this client library. The
-       * content in this map is not serialized under this field's {@code @SerializedName} value.
-       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
-       * name in this param object. Effectively, this map is flattened to its parent instance.
+       * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
        */
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /** Usage threshold that triggers the subscription to advance to a new billing period. */
+      /**
+       * Usage threshold that triggers the subscription to advance to a new billing period.
+       */
       @SerializedName("usage_gte")
       Long usageGte;
 
@@ -1162,26 +1074,23 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         this.extraParams = extraParams;
         this.usageGte = usageGte;
       }
-
       public static Builder builder() {
         return new Builder();
       }
-
       public static class Builder {
         private Map<String, Object> extraParams;
 
         private Long usageGte;
 
-        /** Finalize and obtain parameter instance from this builder. */
+        /**
+         * Finalize and obtain parameter instance from this builder.
+         */
         public BillingThresholds build() {
           return new BillingThresholds(this.extraParams, this.usageGte);
         }
 
         /**
-         * Add a key/value pair to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link InvoiceUpcomingParams.SubscriptionItem.BillingThresholds#extraParams} for
-         * the field documentation.
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link InvoiceUpcomingParams.SubscriptionItem.BillingThresholds#extraParams} for the field documentation.
          */
         public Builder putExtraParam(String key, Object value) {
           if (this.extraParams == null) {
@@ -1192,10 +1101,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         }
 
         /**
-         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
-         * map. See {@link InvoiceUpcomingParams.SubscriptionItem.BillingThresholds#extraParams} for
-         * the field documentation.
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link InvoiceUpcomingParams.SubscriptionItem.BillingThresholds#extraParams} for the field documentation.
          */
         public Builder putAllExtraParam(Map<String, Object> map) {
           if (this.extraParams == null) {
@@ -1205,7 +1111,9 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
           return this;
         }
 
-        /** Usage threshold that triggers the subscription to advance to a new billing period. */
+        /**
+         * Usage threshold that triggers the subscription to advance to a new billing period.
+         */
         public Builder setUsageGte(Long usageGte) {
           this.usageGte = usageGte;
           return this;
@@ -1213,31 +1121,27 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
     }
   }
-
   public enum SubscriptionBillingCycleAnchor implements ApiRequestParams.EnumParam {
     @SerializedName("now")
     NOW("now"),
 
     @SerializedName("unchanged")
     UNCHANGED("unchanged");
-
     @Getter(onMethod_ = {@Override})
     private final String value;
-
     SubscriptionBillingCycleAnchor(String value) {
       this.value = value;
     }
-  }
 
+  }
   public enum SubscriptionTrialEnd implements ApiRequestParams.EnumParam {
     @SerializedName("now")
     NOW("now");
-
     @Getter(onMethod_ = {@Override})
     private final String value;
-
     SubscriptionTrialEnd(String value) {
       this.value = value;
     }
+
   }
 }

@@ -1,3 +1,7 @@
 package com.stripe.model;
 
-public class FileLinkCollection extends StripeCollection<FileLink> {}
+import com.stripe.net.ApiResource;
+
+public class FileLinkCollection extends StripeCollection<FileLink> {
+
+}

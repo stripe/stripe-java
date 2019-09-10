@@ -2,6 +2,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.net.ApiRequestParams.EnumParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -9,7 +10,9 @@ import java.util.Map;
 import lombok.Getter;
 
 public class TokenCreateParams extends ApiRequestParams {
-  /** The bank account this token will represent. */
+  /**
+   * The bank account this token will represent.
+   */
   @SerializedName("bank_account")
   BankAccount bankAccount;
 
@@ -17,29 +20,26 @@ public class TokenCreateParams extends ApiRequestParams {
   Object card;
 
   /**
-   * The customer (owned by the application's account) for which to create a token. For use only
-   * with [Stripe Connect](https://stripe.com/docs/connect). Also, this can be used only with an
-   * [OAuth access token](https://stripe.com/docs/connect/standard-accounts) or [Stripe-Account
-   * header](https://stripe.com/docs/connect/authentication). For more details, see [Shared
-   * Customers](https://stripe.com/docs/connect/shared-customers).
+   * The customer (owned by the application's account) for which to create a token. For use only with [Stripe Connect](https://stripe.com/docs/connect). Also, this can be used only with an [OAuth access token](https://stripe.com/docs/connect/standard-accounts) or [Stripe-Account header](https://stripe.com/docs/connect/authentication). For more details, see [Shared Customers](https://stripe.com/docs/connect/shared-customers).
    */
   @SerializedName("customer")
   String customer;
 
-  /** Specifies which fields in the response should be expanded. */
+  /**
+   * Specifies which fields in the response should be expanded.
+   */
   @SerializedName("expand")
   List<String> expand;
 
   /**
-   * Map of extra parameters for custom features not available in this client library. The content
-   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-   * param object. Effectively, this map is flattened to its parent instance.
+   * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** The PII this token will represent. */
+  /**
+   * The PII this token will represent.
+   */
   @SerializedName("pii")
   Pii pii;
 
@@ -57,11 +57,9 @@ public class TokenCreateParams extends ApiRequestParams {
     this.extraParams = extraParams;
     this.pii = pii;
   }
-
   public static Builder builder() {
     return new Builder();
   }
-
   public static class Builder {
     private BankAccount bankAccount;
 
@@ -75,13 +73,23 @@ public class TokenCreateParams extends ApiRequestParams {
 
     private Pii pii;
 
-    /** Finalize and obtain parameter instance from this builder. */
+    /**
+     * Finalize and obtain parameter instance from this builder.
+     */
     public TokenCreateParams build() {
       return new TokenCreateParams(
-          this.bankAccount, this.card, this.customer, this.expand, this.extraParams, this.pii);
+        this.bankAccount,
+        this.card,
+        this.customer,
+        this.expand,
+        this.extraParams,
+        this.pii
+      );
     }
 
-    /** The bank account this token will represent. */
+    /**
+     * The bank account this token will represent.
+     */
     public Builder setBankAccount(BankAccount bankAccount) {
       this.bankAccount = bankAccount;
       return this;
@@ -98,11 +106,7 @@ public class TokenCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The customer (owned by the application's account) for which to create a token. For use only
-     * with [Stripe Connect](https://stripe.com/docs/connect). Also, this can be used only with an
-     * [OAuth access token](https://stripe.com/docs/connect/standard-accounts) or [Stripe-Account
-     * header](https://stripe.com/docs/connect/authentication). For more details, see [Shared
-     * Customers](https://stripe.com/docs/connect/shared-customers).
+     * The customer (owned by the application's account) for which to create a token. For use only with [Stripe Connect](https://stripe.com/docs/connect). Also, this can be used only with an [OAuth access token](https://stripe.com/docs/connect/standard-accounts) or [Stripe-Account header](https://stripe.com/docs/connect/authentication). For more details, see [Shared Customers](https://stripe.com/docs/connect/shared-customers).
      */
     public Builder setCustomer(String customer) {
       this.customer = customer;
@@ -110,9 +114,7 @@ public class TokenCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * TokenCreateParams#expand} for the field documentation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link TokenCreateParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -123,9 +125,7 @@ public class TokenCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * TokenCreateParams#expand} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link TokenCreateParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -136,9 +136,7 @@ public class TokenCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * TokenCreateParams#extraParams} for the field documentation.
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link TokenCreateParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -149,9 +147,7 @@ public class TokenCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link TokenCreateParams#extraParams} for the field documentation.
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link TokenCreateParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -161,57 +157,53 @@ public class TokenCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The PII this token will represent. */
+    /**
+     * The PII this token will represent.
+     */
     public Builder setPii(Pii pii) {
       this.pii = pii;
       return this;
     }
   }
-
   public static class BankAccount {
     /**
-     * The name of the person or business that owns the bank account.This field is required when
-     * attaching the bank account to a `Customer` object.
+     * The name of the person or business that owns the bank account.This field is required when attaching the bank account to a `Customer` object.
      */
     @SerializedName("account_holder_name")
     String accountHolderName;
 
     /**
-     * The type of entity that holds the account. It can be `company` or `individual`. This field is
-     * required when attaching the bank account to a `Customer` object.
+     * The type of entity that holds the account. It can be `company` or `individual`. This field is required when attaching the bank account to a `Customer` object.
      */
     @SerializedName("account_holder_type")
     AccountHolderType accountHolderType;
 
-    /** The account number for the bank account, in string form. Must be a checking account. */
+    /**
+     * The account number for the bank account, in string form. Must be a checking account.
+     */
     @SerializedName("account_number")
     String accountNumber;
 
-    /** The country in which the bank account is located. */
+    /**
+     * The country in which the bank account is located.
+     */
     @SerializedName("country")
     String country;
 
     /**
-     * The currency the bank account is in. This must be a country/currency pairing that [Stripe
-     * supports.](docs/payouts)
+     * The currency the bank account is in. This must be a country/currency pairing that [Stripe supports.](docs/payouts)
      */
     @SerializedName("currency")
     String currency;
 
     /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
     /**
-     * The routing number, sort code, or other country-appropriateinstitution number for the bank
-     * account. For US bank accounts, this is required and should bethe ACH routing number, not the
-     * wire routing number. If you are providing an IBAN for`account_number`, this field is not
-     * required.
+     * The routing number, sort code, or other country-appropriateinstitution number for the bank account. For US bank accounts, this is required and should bethe ACH routing number, not the wire routing number. If you are providing an IBAN for`account_number`, this field is not required.
      */
     @SerializedName("routing_number")
     String routingNumber;
@@ -232,11 +224,9 @@ public class TokenCreateParams extends ApiRequestParams {
       this.extraParams = extraParams;
       this.routingNumber = routingNumber;
     }
-
     public static Builder builder() {
       return new Builder();
     }
-
     public static class Builder {
       private String accountHolderName;
 
@@ -252,21 +242,23 @@ public class TokenCreateParams extends ApiRequestParams {
 
       private String routingNumber;
 
-      /** Finalize and obtain parameter instance from this builder. */
+      /**
+       * Finalize and obtain parameter instance from this builder.
+       */
       public BankAccount build() {
         return new BankAccount(
-            this.accountHolderName,
-            this.accountHolderType,
-            this.accountNumber,
-            this.country,
-            this.currency,
-            this.extraParams,
-            this.routingNumber);
+          this.accountHolderName,
+          this.accountHolderType,
+          this.accountNumber,
+          this.country,
+          this.currency,
+          this.extraParams,
+          this.routingNumber
+        );
       }
 
       /**
-       * The name of the person or business that owns the bank account.This field is required when
-       * attaching the bank account to a `Customer` object.
+       * The name of the person or business that owns the bank account.This field is required when attaching the bank account to a `Customer` object.
        */
       public Builder setAccountHolderName(String accountHolderName) {
         this.accountHolderName = accountHolderName;
@@ -274,29 +266,31 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The type of entity that holds the account. It can be `company` or `individual`. This field
-       * is required when attaching the bank account to a `Customer` object.
+       * The type of entity that holds the account. It can be `company` or `individual`. This field is required when attaching the bank account to a `Customer` object.
        */
       public Builder setAccountHolderType(AccountHolderType accountHolderType) {
         this.accountHolderType = accountHolderType;
         return this;
       }
 
-      /** The account number for the bank account, in string form. Must be a checking account. */
+      /**
+       * The account number for the bank account, in string form. Must be a checking account.
+       */
       public Builder setAccountNumber(String accountNumber) {
         this.accountNumber = accountNumber;
         return this;
       }
 
-      /** The country in which the bank account is located. */
+      /**
+       * The country in which the bank account is located.
+       */
       public Builder setCountry(String country) {
         this.country = country;
         return this;
       }
 
       /**
-       * The currency the bank account is in. This must be a country/currency pairing that [Stripe
-       * supports.](docs/payouts)
+       * The currency the bank account is in. This must be a country/currency pairing that [Stripe supports.](docs/payouts)
        */
       public Builder setCurrency(String currency) {
         this.currency = currency;
@@ -304,9 +298,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * TokenCreateParams.BankAccount#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link TokenCreateParams.BankAccount#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -317,9 +309,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link TokenCreateParams.BankAccount#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link TokenCreateParams.BankAccount#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -330,33 +320,27 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The routing number, sort code, or other country-appropriateinstitution number for the bank
-       * account. For US bank accounts, this is required and should bethe ACH routing number, not
-       * the wire routing number. If you are providing an IBAN for`account_number`, this field is
-       * not required.
+       * The routing number, sort code, or other country-appropriateinstitution number for the bank account. For US bank accounts, this is required and should bethe ACH routing number, not the wire routing number. If you are providing an IBAN for`account_number`, this field is not required.
        */
       public Builder setRoutingNumber(String routingNumber) {
         this.routingNumber = routingNumber;
         return this;
       }
     }
-
     public enum AccountHolderType implements ApiRequestParams.EnumParam {
       @SerializedName("company")
       COMPANY("company"),
 
       @SerializedName("individual")
       INDIVIDUAL("individual");
-
       @Getter(onMethod_ = {@Override})
       private final String value;
-
       AccountHolderType(String value) {
         this.value = value;
       }
+
     }
   }
-
   public static class Card {
     @SerializedName("address_city")
     String addressCity;
@@ -389,10 +373,7 @@ public class TokenCreateParams extends ApiRequestParams {
     String expYear;
 
     /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
@@ -431,11 +412,9 @@ public class TokenCreateParams extends ApiRequestParams {
       this.name = name;
       this.number = number;
     }
-
     public static Builder builder() {
       return new Builder();
     }
-
     public static class Builder {
       private String addressCity;
 
@@ -463,22 +442,25 @@ public class TokenCreateParams extends ApiRequestParams {
 
       private String number;
 
-      /** Finalize and obtain parameter instance from this builder. */
+      /**
+       * Finalize and obtain parameter instance from this builder.
+       */
       public Card build() {
         return new Card(
-            this.addressCity,
-            this.addressCountry,
-            this.addressLine1,
-            this.addressLine2,
-            this.addressState,
-            this.addressZip,
-            this.currency,
-            this.cvc,
-            this.expMonth,
-            this.expYear,
-            this.extraParams,
-            this.name,
-            this.number);
+          this.addressCity,
+          this.addressCountry,
+          this.addressLine1,
+          this.addressLine2,
+          this.addressState,
+          this.addressZip,
+          this.currency,
+          this.cvc,
+          this.expMonth,
+          this.expYear,
+          this.extraParams,
+          this.name,
+          this.number
+        );
       }
 
       public Builder setAddressCity(String addressCity) {
@@ -532,9 +514,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * TokenCreateParams.Card#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link TokenCreateParams.Card#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -545,9 +525,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link TokenCreateParams.Card#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link TokenCreateParams.Card#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -568,18 +546,16 @@ public class TokenCreateParams extends ApiRequestParams {
       }
     }
   }
-
   public static class Pii {
     /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The `id_number` for the PII, in string form. */
+    /**
+     * The `id_number` for the PII, in string form.
+     */
     @SerializedName("id_number")
     String idNumber;
 
@@ -587,25 +563,23 @@ public class TokenCreateParams extends ApiRequestParams {
       this.extraParams = extraParams;
       this.idNumber = idNumber;
     }
-
     public static Builder builder() {
       return new Builder();
     }
-
     public static class Builder {
       private Map<String, Object> extraParams;
 
       private String idNumber;
 
-      /** Finalize and obtain parameter instance from this builder. */
+      /**
+       * Finalize and obtain parameter instance from this builder.
+       */
       public Pii build() {
         return new Pii(this.extraParams, this.idNumber);
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * TokenCreateParams.Pii#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link TokenCreateParams.Pii#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -616,9 +590,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link TokenCreateParams.Pii#extraParams} for the field documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link TokenCreateParams.Pii#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -628,7 +600,9 @@ public class TokenCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The `id_number` for the PII, in string form. */
+      /**
+       * The `id_number` for the PII, in string form.
+       */
       public Builder setIdNumber(String idNumber) {
         this.idNumber = idNumber;
         return this;

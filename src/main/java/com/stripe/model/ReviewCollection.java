@@ -1,3 +1,7 @@
 package com.stripe.model;
 
-public class ReviewCollection extends StripeCollection<Review> {}
+import com.stripe.net.ApiResource;
+
+public class ReviewCollection extends StripeCollection<Review> {
+
+}

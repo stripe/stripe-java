@@ -1,3 +1,7 @@
 package com.stripe.model;
 
-public class SourceTransactionCollection extends StripeCollection<SourceTransaction> {}
+import com.stripe.net.ApiResource;
+
+public class SourceTransactionCollection extends StripeCollection<SourceTransaction> {
+
+}

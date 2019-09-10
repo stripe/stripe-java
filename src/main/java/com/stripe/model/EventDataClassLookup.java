@@ -4,12 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * Event data class look up used in {@link EventDataDeserializer}. The key to look up is `object`
- * string of the model.
+ * Event data class look up used in {@link EventDataDeserializer}.
+ * The key to look up is `object` string of the model.
  */
 final class EventDataClassLookup {
   private static final Map<String, Class<? extends StripeObject>> classLookup = new HashMap<>();
-
   static {
     classLookup.put("account", Account.class);
     classLookup.put("account_link", AccountLink.class);
@@ -98,8 +97,8 @@ final class EventDataClassLookup {
     classLookup.put("terminal.connection_token", com.stripe.model.terminal.ConnectionToken.class);
     classLookup.put("terminal.location", com.stripe.model.terminal.Location.class);
     classLookup.put("terminal.reader", com.stripe.model.terminal.Reader.class);
-  }
 
+  }
   public static Class<? extends StripeObject> findClass(String objectType) {
     return classLookup.get(objectType);
   }

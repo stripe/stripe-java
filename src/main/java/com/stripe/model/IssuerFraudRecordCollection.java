@@ -1,3 +1,7 @@
 package com.stripe.model;
 
-public class IssuerFraudRecordCollection extends StripeCollection<IssuerFraudRecord> {}
+import com.stripe.net.ApiResource;
+
+public class IssuerFraudRecordCollection extends StripeCollection<IssuerFraudRecord> {
+
+}

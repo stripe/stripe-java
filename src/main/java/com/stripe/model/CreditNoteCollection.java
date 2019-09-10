@@ -1,3 +1,7 @@
 package com.stripe.model;
 
-public class CreditNoteCollection extends StripeCollection<CreditNote> {}
+import com.stripe.net.ApiResource;
+
+public class CreditNoteCollection extends StripeCollection<CreditNote> {
+
+}

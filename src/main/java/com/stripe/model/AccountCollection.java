@@ -1,3 +1,7 @@
 package com.stripe.model;
 
-public class AccountCollection extends StripeCollection<Account> {}
+import com.stripe.net.ApiResource;
+
+public class AccountCollection extends StripeCollection<Account> {
+
+}

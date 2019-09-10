@@ -11,37 +11,50 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class MerchantData extends StripeObject {
   /**
-   * A categorization of the seller's type of business. See our [merchant categories
-   * guide](https://stripe.com/docs/issuing/merchant-categories) for a list of possible values.
+   * A categorization of the seller's type of business. See our [merchant categories guide](https://stripe.com/docs/issuing/merchant-categories) for a list of possible values.
    */
   @SerializedName("category")
   String category;
 
-  /** City where the seller is located. */
+  /**
+   * City where the seller is located.
+   */
   @SerializedName("city")
   String city;
 
-  /** Country where the seller is located. */
+  /**
+   * Country where the seller is located.
+   */
   @SerializedName("country")
   String country;
 
-  /** Name of the seller. */
+  /**
+   * Name of the seller.
+   */
   @SerializedName("name")
   String name;
 
-  /** Identifier assigned to the seller by the card brand. */
+  /**
+   * Identifier assigned to the seller by the card brand.
+   */
   @SerializedName("network_id")
   String networkId;
 
-  /** Postal code where the seller is located. */
+  /**
+   * Postal code where the seller is located.
+   */
   @SerializedName("postal_code")
   String postalCode;
 
-  /** State where the seller is located. */
+  /**
+   * State where the seller is located.
+   */
   @SerializedName("state")
   String state;
 
-  /** The url an online purchase was made from. */
+  /**
+   * The url an online purchase was made from.
+   */
   @SerializedName("url")
   String url;
 }

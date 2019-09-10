@@ -9,54 +9,46 @@ import java.util.Map;
 
 public class PaymentIntentCaptureParams extends ApiRequestParams {
   /**
-   * The amount to capture from the PaymentIntent, which must be less than or equal to the original
-   * amount. Any additional amount will be automatically refunded. Defaults to the full
-   * `amount_capturable` if not provided.
+   * The amount to capture from the PaymentIntent, which must be less than or equal to the original amount. Any additional amount will be automatically refunded. Defaults to the full `amount_capturable` if not provided.
    */
   @SerializedName("amount_to_capture")
   Long amountToCapture;
 
   /**
-   * The amount of the application fee (if any) that will be applied to the payment and transferred
-   * to the application owner's Stripe account. For more information, see the PaymentIntents [use
-   * case for connected
-   * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
+   * The amount of the application fee (if any) that will be applied to the
+payment and transferred to the application owner's Stripe account. For
+more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
    */
   @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
 
-  /** Specifies which fields in the response should be expanded. */
+  /**
+   * Specifies which fields in the response should be expanded.
+   */
   @SerializedName("expand")
   List<String> expand;
 
   /**
-   * Map of extra parameters for custom features not available in this client library. The content
-   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-   * param object. Effectively, this map is flattened to its parent instance.
+   * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
   /**
-   * For non-card charges, you can use this value as the complete description that appears on your
-   * customers’ statements. Must contain at least one letter, maximum 22 characters.
+   * For non-card charges, you can use this value as the complete description that appears on your customers’ statements. Must contain at least one letter, maximum 22 characters.
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
 
   /**
-   * Provides information about a card payment that customers see on their statements. Concatenated
-   * with the prefix (shortened descriptor) or statement descriptor that’s set on the account to
-   * form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
+   * Provides information about a card payment that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
    */
   @SerializedName("statement_descriptor_suffix")
   String statementDescriptorSuffix;
 
   /**
-   * The parameters used to automatically create a Transfer when the payment is captured. For more
-   * information, see the PaymentIntents [use case for connected
-   * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
+   * The parameters used to automatically create a Transfer when the payment
+is captured. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
    */
   @SerializedName("transfer_data")
   TransferData transferData;
@@ -77,11 +69,9 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
     this.statementDescriptorSuffix = statementDescriptorSuffix;
     this.transferData = transferData;
   }
-
   public static Builder builder() {
     return new Builder();
   }
-
   public static class Builder {
     private Long amountToCapture;
 
@@ -97,22 +87,23 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
 
     private TransferData transferData;
 
-    /** Finalize and obtain parameter instance from this builder. */
+    /**
+     * Finalize and obtain parameter instance from this builder.
+     */
     public PaymentIntentCaptureParams build() {
       return new PaymentIntentCaptureParams(
-          this.amountToCapture,
-          this.applicationFeeAmount,
-          this.expand,
-          this.extraParams,
-          this.statementDescriptor,
-          this.statementDescriptorSuffix,
-          this.transferData);
+        this.amountToCapture,
+        this.applicationFeeAmount,
+        this.expand,
+        this.extraParams,
+        this.statementDescriptor,
+        this.statementDescriptorSuffix,
+        this.transferData
+      );
     }
 
     /**
-     * The amount to capture from the PaymentIntent, which must be less than or equal to the
-     * original amount. Any additional amount will be automatically refunded. Defaults to the full
-     * `amount_capturable` if not provided.
+     * The amount to capture from the PaymentIntent, which must be less than or equal to the original amount. Any additional amount will be automatically refunded. Defaults to the full `amount_capturable` if not provided.
      */
     public Builder setAmountToCapture(Long amountToCapture) {
       this.amountToCapture = amountToCapture;
@@ -120,10 +111,9 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
     }
 
     /**
-     * The amount of the application fee (if any) that will be applied to the payment and
-     * transferred to the application owner's Stripe account. For more information, see the
-     * PaymentIntents [use case for connected
-     * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
+     * The amount of the application fee (if any) that will be applied to the
+payment and transferred to the application owner's Stripe account. For
+more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
      */
     public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
       this.applicationFeeAmount = applicationFeeAmount;
@@ -131,9 +121,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentIntentCaptureParams#expand} for the field documentation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link PaymentIntentCaptureParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -144,9 +132,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * PaymentIntentCaptureParams#expand} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link PaymentIntentCaptureParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -157,9 +143,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * PaymentIntentCaptureParams#extraParams} for the field documentation.
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link PaymentIntentCaptureParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -170,9 +154,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link PaymentIntentCaptureParams#extraParams} for the field documentation.
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link PaymentIntentCaptureParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -183,8 +165,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
     }
 
     /**
-     * For non-card charges, you can use this value as the complete description that appears on your
-     * customers’ statements. Must contain at least one letter, maximum 22 characters.
+     * For non-card charges, you can use this value as the complete description that appears on your customers’ statements. Must contain at least one letter, maximum 22 characters.
      */
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
@@ -192,10 +173,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
     }
 
     /**
-     * Provides information about a card payment that customers see on their statements.
-     * Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the
-     * account to form the complete statement descriptor. Maximum 22 characters for the concatenated
-     * descriptor.
+     * Provides information about a card payment that customers see on their statements. Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the account to form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
      */
     public Builder setStatementDescriptorSuffix(String statementDescriptorSuffix) {
       this.statementDescriptorSuffix = statementDescriptorSuffix;
@@ -203,26 +181,23 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
     }
 
     /**
-     * The parameters used to automatically create a Transfer when the payment is captured. For more
-     * information, see the PaymentIntents [use case for connected
-     * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
+     * The parameters used to automatically create a Transfer when the payment
+is captured. For more information, see the PaymentIntents [use case for connected accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
      */
     public Builder setTransferData(TransferData transferData) {
       this.transferData = transferData;
       return this;
     }
   }
-
   public static class TransferData {
-    /** The amount that will be transferred automatically when a charge succeeds. */
+    /**
+     * The amount that will be transferred automatically when a charge succeeds.
+     */
     @SerializedName("amount")
     Long amount;
 
     /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
@@ -231,31 +206,31 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
       this.amount = amount;
       this.extraParams = extraParams;
     }
-
     public static Builder builder() {
       return new Builder();
     }
-
     public static class Builder {
       private Long amount;
 
       private Map<String, Object> extraParams;
 
-      /** Finalize and obtain parameter instance from this builder. */
+      /**
+       * Finalize and obtain parameter instance from this builder.
+       */
       public TransferData build() {
         return new TransferData(this.amount, this.extraParams);
       }
 
-      /** The amount that will be transferred automatically when a charge succeeds. */
+      /**
+       * The amount that will be transferred automatically when a charge succeeds.
+       */
       public Builder setAmount(Long amount) {
         this.amount = amount;
         return this;
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * PaymentIntentCaptureParams.TransferData#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link PaymentIntentCaptureParams.TransferData#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -266,10 +241,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link PaymentIntentCaptureParams.TransferData#extraParams} for the field
-       * documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link PaymentIntentCaptureParams.TransferData#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {

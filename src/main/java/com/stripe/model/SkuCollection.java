@@ -1,3 +1,7 @@
 package com.stripe.model;
 
-public class SkuCollection extends StripeCollection<Sku> {}
+import com.stripe.net.ApiResource;
+
+public class SkuCollection extends StripeCollection<Sku> {
+
+}

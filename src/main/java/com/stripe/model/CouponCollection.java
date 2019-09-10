@@ -1,3 +1,7 @@
 package com.stripe.model;
 
-public class CouponCollection extends StripeCollection<Coupon> {}
+import com.stripe.net.ApiResource;
+
+public class CouponCollection extends StripeCollection<Coupon> {
+
+}

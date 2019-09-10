@@ -1,3 +1,7 @@
 package com.stripe.model;
 
-public class TransferCollection extends StripeCollection<Transfer> {}
+import com.stripe.net.ApiResource;
+
+public class TransferCollection extends StripeCollection<Transfer> {
+
+}

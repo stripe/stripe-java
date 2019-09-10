@@ -1,3 +1,7 @@
 package com.stripe.model;
 
-public class OrderReturnCollection extends StripeCollection<OrderReturn> {}
+import com.stripe.net.ApiResource;
+
+public class OrderReturnCollection extends StripeCollection<OrderReturn> {
+
+}

@@ -1,3 +1,7 @@
 package com.stripe.model;
 
-public class SubscriptionItemCollection extends StripeCollection<SubscriptionItem> {}
+import com.stripe.net.ApiResource;
+
+public class SubscriptionItemCollection extends StripeCollection<SubscriptionItem> {
+
+}

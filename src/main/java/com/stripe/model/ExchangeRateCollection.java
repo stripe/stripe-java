@@ -1,3 +1,7 @@
 package com.stripe.model;
 
-public class ExchangeRateCollection extends StripeCollection<ExchangeRate> {}
+import com.stripe.net.ApiResource;
+
+public class ExchangeRateCollection extends StripeCollection<ExchangeRate> {
+
+}

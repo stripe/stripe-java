@@ -1,3 +1,7 @@
 package com.stripe.model;
 
-public class TaxRateCollection extends StripeCollection<TaxRate> {}
+import com.stripe.net.ApiResource;
+
+public class TaxRateCollection extends StripeCollection<TaxRate> {
+
+}

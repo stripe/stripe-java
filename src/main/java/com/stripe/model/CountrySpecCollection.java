@@ -1,3 +1,7 @@
 package com.stripe.model;
 
-public class CountrySpecCollection extends StripeCollection<CountrySpec> {}
+import com.stripe.net.ApiResource;
+
+public class CountrySpecCollection extends StripeCollection<CountrySpec> {
+
+}

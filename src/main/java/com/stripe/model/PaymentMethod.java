@@ -29,51 +29,55 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("card_present")
   CardPresent cardPresent;
 
-  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  /**
+   * Time at which the object was created. Measured in seconds since the Unix epoch.
+   */
   @SerializedName("created")
   Long created;
 
   /**
-   * The ID of the Customer to which this PaymentMethod is saved. This will not be set when the
-   * PaymentMethod has not been saved to a Customer.
+   * The ID of the Customer to which this PaymentMethod is saved. This will not be set when the PaymentMethod has not been saved to a Customer.
    */
   @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
-  /** Unique identifier for the object. */
+  /**
+   * Unique identifier for the object.
+   */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
 
   /**
-   * Set of key-value pairs that you can attach to an object. This can be useful for storing
-   * additional information about the object in a structured format.
+   * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
    */
   @Getter(onMethod_ = {@Override})
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** String representing the object's type. Objects of the same type share the same value. */
+  /**
+   * String representing the object's type. Objects of the same type share the same value.
+   */
   @SerializedName("object")
   String object;
 
   /**
-   * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name
-   * matching this value. It contains additional information specific to the PaymentMethod type.
+   * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name matching this value. It contains additional information specific to the PaymentMethod type.
    */
   @SerializedName("type")
   String type;
 
-  /** Get id of expandable `customer` object. */
+  /**
+   * Get id of expandable `customer` object.
+   */
   public String getCustomer() {
     return (this.customer != null) ? this.customer.getId() : null;
   }
@@ -82,7 +86,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     this.customer = ApiResource.setExpandableFieldId(id, this.customer);
   }
 
-  /** Get expanded `customer`. */
+  /**
+   * Get expanded `customer`.
+   */
   public Customer getCustomerObject() {
     return (this.customer != null) ? this.customer.getExpanded() : null;
   }
@@ -92,268 +98,371 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   }
 
   /**
-   * Creates a PaymentMethod object. Read the <a
-   * href="/docs/stripe-js/reference#stripe-create-payment-method">Stripe.js reference</a> to learn
-   * how to create PaymentMethods via Stripe.js.
+   * <p>Creates a PaymentMethod object. Read the <a href="/docs/stripe-js/reference#stripe-create-payment-method">Stripe.js reference</a> to learn how to create PaymentMethods via Stripe.js.</p>
    */
   public static PaymentMethod create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * Creates a PaymentMethod object. Read the <a
-   * href="/docs/stripe-js/reference#stripe-create-payment-method">Stripe.js reference</a> to learn
-   * how to create PaymentMethods via Stripe.js.
+   * <p>Creates a PaymentMethod object. Read the <a href="/docs/stripe-js/reference#stripe-create-payment-method">Stripe.js reference</a> to learn how to create PaymentMethods via Stripe.js.</p>
    */
-  public static PaymentMethod create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  public static PaymentMethod create(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_methods");
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      PaymentMethod.class,
+      options
+    );
   }
 
   /**
-   * Creates a PaymentMethod object. Read the <a
-   * href="/docs/stripe-js/reference#stripe-create-payment-method">Stripe.js reference</a> to learn
-   * how to create PaymentMethods via Stripe.js.
+   * <p>Creates a PaymentMethod object. Read the <a href="/docs/stripe-js/reference#stripe-create-payment-method">Stripe.js reference</a> to learn how to create PaymentMethods via Stripe.js.</p>
    */
   public static PaymentMethod create(PaymentMethodCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * Creates a PaymentMethod object. Read the <a
-   * href="/docs/stripe-js/reference#stripe-create-payment-method">Stripe.js reference</a> to learn
-   * how to create PaymentMethods via Stripe.js.
+   * <p>Creates a PaymentMethod object. Read the <a href="/docs/stripe-js/reference#stripe-create-payment-method">Stripe.js reference</a> to learn how to create PaymentMethods via Stripe.js.</p>
    */
-  public static PaymentMethod create(PaymentMethodCreateParams params, RequestOptions options)
-      throws StripeException {
+  public static PaymentMethod create(
+      PaymentMethodCreateParams params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_methods");
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      PaymentMethod.class,
+      options
+    );
   }
 
-  /** Retrieves a PaymentMethod object. */
+  /**
+   * <p>Retrieves a PaymentMethod object.</p>
+   */
   public static PaymentMethod retrieve(String paymentMethod) throws StripeException {
     return retrieve(paymentMethod, (Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Retrieves a PaymentMethod object. */
-  public static PaymentMethod retrieve(String paymentMethod, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Retrieves a PaymentMethod object.</p>
+   */
+  public static PaymentMethod retrieve(
+      String paymentMethod,
+      RequestOptions options) throws StripeException {
     return retrieve(paymentMethod, (Map<String, Object>) null, options);
   }
 
-  /** Retrieves a PaymentMethod object. */
+  /**
+   * <p>Retrieves a PaymentMethod object.</p>
+   */
   public static PaymentMethod retrieve(
-      String paymentMethod, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+      String paymentMethod,
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(paymentMethod)));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(paymentMethod))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, PaymentMethod.class, options);
+      ApiResource.RequestMethod.GET,
+      url,
+      params,
+      PaymentMethod.class,
+      options
+    );
   }
 
-  /** Retrieves a PaymentMethod object. */
+  /**
+   * <p>Retrieves a PaymentMethod object.</p>
+   */
   public static PaymentMethod retrieve(
-      String paymentMethod, PaymentMethodRetrieveParams params, RequestOptions options)
-      throws StripeException {
+      String paymentMethod,
+      PaymentMethodRetrieveParams params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(paymentMethod)));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(paymentMethod))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.GET, url, params, PaymentMethod.class, options);
+      ApiResource.RequestMethod.GET,
+      url,
+      params,
+      PaymentMethod.class,
+      options
+    );
   }
 
-  /** Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated. */
+  /**
+   * <p>Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated.</p>
+   */
   @Override
   public PaymentMethod update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
-  /** Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated. */
+  /**
+   * <p>Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated.</p>
+   */
   @Override
-  public PaymentMethod update(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  public PaymentMethod update(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(this.getId())));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(this.getId()))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      PaymentMethod.class,
+      options
+    );
   }
 
-  /** Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated. */
+  /**
+   * <p>Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated.</p>
+   */
   public PaymentMethod update(PaymentMethodUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
-  /** Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated. */
-  public PaymentMethod update(PaymentMethodUpdateParams params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Updates a PaymentMethod object. A PaymentMethod must be attached a customer to be updated.</p>
+   */
+  public PaymentMethod update(
+      PaymentMethodUpdateParams params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(this.getId())));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/payment_methods/%s", ApiResource.urlEncodeId(this.getId()))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      PaymentMethod.class,
+      options
+    );
   }
 
-  /** Returns a list of PaymentMethods for a given Customer. */
+  /**
+   * <p>Returns a list of PaymentMethods for a given Customer.</p>
+   */
   public static PaymentMethodCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
-  /** Returns a list of PaymentMethods for a given Customer. */
-  public static PaymentMethodCollection list(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_methods");
-    return ApiResource.requestCollection(url, params, PaymentMethodCollection.class, options);
-  }
-
-  /** Returns a list of PaymentMethods for a given Customer. */
-  public static PaymentMethodCollection list(PaymentMethodListParams params)
-      throws StripeException {
-    return list(params, (RequestOptions) null);
-  }
-
-  /** Returns a list of PaymentMethods for a given Customer. */
-  public static PaymentMethodCollection list(PaymentMethodListParams params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Returns a list of PaymentMethods for a given Customer.</p>
+   */
+  public static PaymentMethodCollection list(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_methods");
     return ApiResource.requestCollection(url, params, PaymentMethodCollection.class, options);
   }
 
   /**
-   * Attaches a PaymentMethod object to a Customer.
+   * <p>Returns a list of PaymentMethods for a given Customer.</p>
+   */
+  public static PaymentMethodCollection list(
+      PaymentMethodListParams params) throws StripeException {
+    return list(params, (RequestOptions) null);
+  }
+
+  /**
+   * <p>Returns a list of PaymentMethods for a given Customer.</p>
+   */
+  public static PaymentMethodCollection list(
+      PaymentMethodListParams params,
+      RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/payment_methods");
+    return ApiResource.requestCollection(url, params, PaymentMethodCollection.class, options);
+  }
+
+  /**
+   * <p>Attaches a PaymentMethod object to a Customer.</p>
    *
-   * <p>To use this PaymentMethod as the default for invoice or subscription payments, set <a
-   * href="/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">
-   * <code>invoice_settings.default_payment_method</code></a>, on the Customer to the
-   * PaymentMethod’s ID.
+   * <p>To use this PaymentMethod as the default for invoice or subscription payments,
+   * set <a href="/docs/api/customers/update#update_customer-invoice_settings-default_payment_method"><code>invoice_settings.default_payment_method</code></a>,
+   * on the Customer to the PaymentMethod’s ID.</p>
    */
   public PaymentMethod attach(Map<String, Object> params) throws StripeException {
     return attach(params, (RequestOptions) null);
   }
 
   /**
-   * Attaches a PaymentMethod object to a Customer.
+   * <p>Attaches a PaymentMethod object to a Customer.</p>
    *
-   * <p>To use this PaymentMethod as the default for invoice or subscription payments, set <a
-   * href="/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">
-   * <code>invoice_settings.default_payment_method</code></a>, on the Customer to the
-   * PaymentMethod’s ID.
+   * <p>To use this PaymentMethod as the default for invoice or subscription payments,
+   * set <a href="/docs/api/customers/update#update_customer-invoice_settings-default_payment_method"><code>invoice_settings.default_payment_method</code></a>,
+   * on the Customer to the PaymentMethod’s ID.</p>
    */
-  public PaymentMethod attach(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  public PaymentMethod attach(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/payment_methods/%s/attach", ApiResource.urlEncodeId(this.getId())));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/payment_methods/%s/attach", ApiResource.urlEncodeId(this.getId()))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      PaymentMethod.class,
+      options
+    );
   }
 
   /**
-   * Attaches a PaymentMethod object to a Customer.
+   * <p>Attaches a PaymentMethod object to a Customer.</p>
    *
-   * <p>To use this PaymentMethod as the default for invoice or subscription payments, set <a
-   * href="/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">
-   * <code>invoice_settings.default_payment_method</code></a>, on the Customer to the
-   * PaymentMethod’s ID.
+   * <p>To use this PaymentMethod as the default for invoice or subscription payments,
+   * set <a href="/docs/api/customers/update#update_customer-invoice_settings-default_payment_method"><code>invoice_settings.default_payment_method</code></a>,
+   * on the Customer to the PaymentMethod’s ID.</p>
    */
   public PaymentMethod attach(PaymentMethodAttachParams params) throws StripeException {
     return attach(params, (RequestOptions) null);
   }
 
   /**
-   * Attaches a PaymentMethod object to a Customer.
+   * <p>Attaches a PaymentMethod object to a Customer.</p>
    *
-   * <p>To use this PaymentMethod as the default for invoice or subscription payments, set <a
-   * href="/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">
-   * <code>invoice_settings.default_payment_method</code></a>, on the Customer to the
-   * PaymentMethod’s ID.
+   * <p>To use this PaymentMethod as the default for invoice or subscription payments,
+   * set <a href="/docs/api/customers/update#update_customer-invoice_settings-default_payment_method"><code>invoice_settings.default_payment_method</code></a>,
+   * on the Customer to the PaymentMethod’s ID.</p>
    */
-  public PaymentMethod attach(PaymentMethodAttachParams params, RequestOptions options)
-      throws StripeException {
+  public PaymentMethod attach(
+      PaymentMethodAttachParams params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/payment_methods/%s/attach", ApiResource.urlEncodeId(this.getId())));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/payment_methods/%s/attach", ApiResource.urlEncodeId(this.getId()))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      PaymentMethod.class,
+      options
+    );
   }
 
-  /** Detaches a PaymentMethod object from a Customer. */
+  /**
+   * <p>Detaches a PaymentMethod object from a Customer.</p>
+   */
   public PaymentMethod detach() throws StripeException {
     return detach((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Detaches a PaymentMethod object from a Customer. */
+  /**
+   * <p>Detaches a PaymentMethod object from a Customer.</p>
+   */
   public PaymentMethod detach(RequestOptions options) throws StripeException {
     return detach((Map<String, Object>) null, options);
   }
 
-  /** Detaches a PaymentMethod object from a Customer. */
+  /**
+   * <p>Detaches a PaymentMethod object from a Customer.</p>
+   */
   public PaymentMethod detach(Map<String, Object> params) throws StripeException {
     return detach(params, (RequestOptions) null);
   }
 
-  /** Detaches a PaymentMethod object from a Customer. */
-  public PaymentMethod detach(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Detaches a PaymentMethod object from a Customer.</p>
+   */
+  public PaymentMethod detach(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/payment_methods/%s/detach", ApiResource.urlEncodeId(this.getId())));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/payment_methods/%s/detach", ApiResource.urlEncodeId(this.getId()))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      PaymentMethod.class,
+      options
+    );
   }
 
-  /** Detaches a PaymentMethod object from a Customer. */
+  /**
+   * <p>Detaches a PaymentMethod object from a Customer.</p>
+   */
   public PaymentMethod detach(PaymentMethodDetachParams params) throws StripeException {
     return detach(params, (RequestOptions) null);
   }
 
-  /** Detaches a PaymentMethod object from a Customer. */
-  public PaymentMethod detach(PaymentMethodDetachParams params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Detaches a PaymentMethod object from a Customer.</p>
+   */
+  public PaymentMethod detach(
+      PaymentMethodDetachParams params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/payment_methods/%s/detach", ApiResource.urlEncodeId(this.getId())));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/payment_methods/%s/detach", ApiResource.urlEncodeId(this.getId()))
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
+      ApiResource.RequestMethod.POST,
+      url,
+      params,
+      PaymentMethod.class,
+      options
+    );
   }
 
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class BillingDetails extends StripeObject {
-    /** Billing address. */
+    /**
+     * Billing address.
+     */
     @SerializedName("address")
     Address address;
 
-    /** Email address. */
+    /**
+     * Email address.
+     */
     @SerializedName("email")
     String email;
 
-    /** Full name. */
+    /**
+     * Full name.
+     */
     @SerializedName("name")
     String name;
 
-    /** Billing phone number (including extension). */
+    /**
+     * Billing phone number (including extension).
+     */
     @SerializedName("phone")
     String phone;
   }
@@ -363,72 +472,80 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @EqualsAndHashCode(callSuper = false)
   public static class Card extends StripeObject {
     /**
-     * Card brand. Can be `amex`, `diners`, `discover`, `jcb`, `mastercard`, `unionpay`, `visa`, or
-     * `unknown`.
+     * Card brand. Can be `amex`, `diners`, `discover`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.
      */
     @SerializedName("brand")
     String brand;
 
-    /** Checks on Card address and CVC if provided. */
+    /**
+     * Checks on Card address and CVC if provided.
+     */
     @SerializedName("checks")
     Checks checks;
 
     /**
-     * Two-letter ISO code representing the country of the card. You could use this attribute to get
-     * a sense of the international breakdown of cards you've collected.
+     * Two-letter ISO code representing the country of the card. You could use this attribute to get a sense of the international breakdown of cards you've collected.
      */
     @SerializedName("country")
     String country;
 
     /**
-     * Card description. (Only for internal use only and not typically available in standard API
-     * requests.)
+     * Card description. (Only for internal use only and not typically available in standard API requests.)
      */
     @SerializedName("description")
     String description;
 
-    /** Two-digit number representing the card's expiration month. */
+    /**
+     * Two-digit number representing the card's expiration month.
+     */
     @SerializedName("exp_month")
     Long expMonth;
 
-    /** Four-digit number representing the card's expiration year. */
+    /**
+     * Four-digit number representing the card's expiration year.
+     */
     @SerializedName("exp_year")
     Long expYear;
 
     /**
-     * Uniquely identifies this particular card number. You can use this attribute to check whether
-     * two customers who've signed up with you are using the same card number, for example.
+     * Uniquely identifies this particular card number. You can use this attribute to check whether two customers who've signed up with you are using the same card number, for example.
      */
     @SerializedName("fingerprint")
     String fingerprint;
 
-    /** Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`. */
+    /**
+     * Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`.
+     */
     @SerializedName("funding")
     String funding;
 
     /**
-     * Issuer identification number of the card. (Only for internal use only and not typically
-     * available in standard API requests.)
+     * Issuer identification number of the card. (Only for internal use only and not typically available in standard API requests.)
      */
     @SerializedName("iin")
     String iin;
 
     /**
-     * Issuer bank name of the card. (Only for internal use only and not typically available in
-     * standard API requests.)
+     * Issuer bank name of the card. (Only for internal use only and not typically available in standard API requests.)
      */
     @SerializedName("issuer")
     String issuer;
 
-    /** The last four digits of the card. */
+    /**
+     * The last four digits of the card.
+     */
     @SerializedName("last4")
     String last4;
 
-    /** Contains details on how this Card maybe be used for 3D Secure authentication. */
+    /**
+     * Contains details on how this Card maybe be used for 3D Secure authentication.
+     */
     @SerializedName("three_d_secure_usage")
     ThreeDSecureUsage threeDSecureUsage;
 
-    /** If this Card is part of a card wallet, this contains the details of the card wallet. */
+    /**
+     * If this Card is part of a card wallet, this contains the details of the card wallet.
+     */
     @SerializedName("wallet")
     Wallet wallet;
 
@@ -437,22 +554,19 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @EqualsAndHashCode(callSuper = false)
     public static class Checks extends StripeObject {
       /**
-       * If a address line1 was provided, results of the check, one of 'pass', 'failed',
-       * 'unavailable' or 'unchecked'.
+       * If a address line1 was provided, results of the check, one of 'pass', 'failed', 'unavailable' or 'unchecked'.
        */
       @SerializedName("address_line1_check")
       String addressLine1Check;
 
       /**
-       * If a address postal code was provided, results of the check, one of 'pass', 'failed',
-       * 'unavailable' or 'unchecked'.
+       * If a address postal code was provided, results of the check, one of 'pass', 'failed', 'unavailable' or 'unchecked'.
        */
       @SerializedName("address_postal_code_check")
       String addressPostalCodeCheck;
 
       /**
-       * If a CVC was provided, results of the check, one of 'pass', 'failed', 'unavailable' or
-       * 'unchecked'.
+       * If a CVC was provided, results of the check, one of 'pass', 'failed', 'unavailable' or 'unchecked'.
        */
       @SerializedName("cvc_check")
       String cvcCheck;
@@ -462,7 +576,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class ThreeDSecureUsage extends StripeObject {
-      /** Whether 3D Secure is supported on this card. */
+      /**
+       * Whether 3D Secure is supported on this card.
+       */
       @SerializedName("supported")
       Boolean supported;
     }
@@ -477,7 +593,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       @SerializedName("apple_pay")
       ApplePay applePay;
 
-      /** (For tokenized numbers only.) The last four digits of the device account number. */
+      /**
+       * (For tokenized numbers only.) The last four digits of the device account number.
+       */
       @SerializedName("dynamic_last4")
       String dynamicLast4;
 
@@ -491,10 +609,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       SamsungPay samsungPay;
 
       /**
-       * The type of the card wallet, one of `amex_express_checkout`, `apple_pay`, `google_pay`,
-       * `masterpass`, `samsung_pay`, or `visa_checkout`. An additional hash is included on the
-       * Wallet subhash with a name matching this value. It contains additional information specific
-       * to the card wallet type.
+       * The type of the card wallet, one of `amex_express_checkout`, `apple_pay`, `google_pay`, `masterpass`, `samsung_pay`, or `visa_checkout`. An additional hash is included on the Wallet subhash with a name matching this value. It contains additional information specific to the card wallet type.
        */
       @SerializedName("type")
       String type;
@@ -505,46 +620,48 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class AmexExpressCheckout extends StripeObject {}
+      public static class AmexExpressCheckout extends StripeObject {
+
+      }
 
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class ApplePay extends StripeObject {}
+      public static class ApplePay extends StripeObject {
+
+      }
 
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class GooglePay extends StripeObject {}
+      public static class GooglePay extends StripeObject {
+
+      }
 
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class Masterpass extends StripeObject {
         /**
-         * Owner's verified billing address. Values are verified or provided by the wallet directly
-         * (if supported) at the time of authorization or settlement. They cannot be set or mutated.
+         * Owner's verified billing address. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
          */
         @SerializedName("billing_address")
         Address billingAddress;
 
         /**
-         * Owner's verified email. Values are verified or provided by the wallet directly (if
-         * supported) at the time of authorization or settlement. They cannot be set or mutated.
+         * Owner's verified email. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
          */
         @SerializedName("email")
         String email;
 
         /**
-         * Owner's verified full name. Values are verified or provided by the wallet directly (if
-         * supported) at the time of authorization or settlement. They cannot be set or mutated.
+         * Owner's verified full name. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
          */
         @SerializedName("name")
         String name;
 
         /**
-         * Owner's verified shipping address. Values are verified or provided by the wallet directly
-         * (if supported) at the time of authorization or settlement. They cannot be set or mutated.
+         * Owner's verified shipping address. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
          */
         @SerializedName("shipping_address")
         Address shippingAddress;
@@ -553,36 +670,34 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
-      public static class SamsungPay extends StripeObject {}
+      public static class SamsungPay extends StripeObject {
+
+      }
 
       @Getter
       @Setter
       @EqualsAndHashCode(callSuper = false)
       public static class VisaCheckout extends StripeObject {
         /**
-         * Owner's verified billing address. Values are verified or provided by the wallet directly
-         * (if supported) at the time of authorization or settlement. They cannot be set or mutated.
+         * Owner's verified billing address. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
          */
         @SerializedName("billing_address")
         Address billingAddress;
 
         /**
-         * Owner's verified email. Values are verified or provided by the wallet directly (if
-         * supported) at the time of authorization or settlement. They cannot be set or mutated.
+         * Owner's verified email. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
          */
         @SerializedName("email")
         String email;
 
         /**
-         * Owner's verified full name. Values are verified or provided by the wallet directly (if
-         * supported) at the time of authorization or settlement. They cannot be set or mutated.
+         * Owner's verified full name. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
          */
         @SerializedName("name")
         String name;
 
         /**
-         * Owner's verified shipping address. Values are verified or provided by the wallet directly
-         * (if supported) at the time of authorization or settlement. They cannot be set or mutated.
+         * Owner's verified shipping address. Values are verified or provided by the wallet directly (if supported) at the time of authorization or settlement. They cannot be set or mutated.
          */
         @SerializedName("shipping_address")
         Address shippingAddress;
@@ -593,5 +708,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
-  public static class CardPresent extends StripeObject {}
+  public static class CardPresent extends StripeObject {
+
+  }
 }

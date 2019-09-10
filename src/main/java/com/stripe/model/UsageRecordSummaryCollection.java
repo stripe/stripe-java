@@ -1,3 +1,7 @@
 package com.stripe.model;
 
-public class UsageRecordSummaryCollection extends StripeCollection<UsageRecordSummary> {}
+import com.stripe.net.ApiResource;
+
+public class UsageRecordSummaryCollection extends StripeCollection<UsageRecordSummary> {
+
+}

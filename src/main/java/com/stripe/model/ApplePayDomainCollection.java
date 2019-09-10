@@ -1,3 +1,7 @@
 package com.stripe.model;
 
-public class ApplePayDomainCollection extends StripeCollection<ApplePayDomain> {}
+import com.stripe.net.ApiResource;
+
+public class ApplePayDomainCollection extends StripeCollection<ApplePayDomain> {
+
+}

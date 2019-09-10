@@ -1,3 +1,7 @@
 package com.stripe.model;
 
-public class RecipientCollection extends StripeCollection<Recipient> {}
+import com.stripe.net.ApiResource;
+
+public class RecipientCollection extends StripeCollection<Recipient> {
+
+}

@@ -33,10 +33,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   Alipay alipay;
 
   /**
-   * A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1,
-   * Japanese Yen being a zero-decimal currency) representing the total amount associated with the
-   * source. This is the amount for which the source will be chargeable once ready. Required for
-   * `single_use` sources.
+   * A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1, Japanese Yen being a zero-decimal currency) representing the total amount associated with the source. This is the amount for which the source will be chargeable once ready. Required for `single_use` sources.
    */
   @SerializedName("amount")
   Long amount;
@@ -53,28 +50,29 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   @SerializedName("card_present")
   CardPresent cardPresent;
 
-  /** The client secret of the source. Used for client-side retrieval using a publishable key. */
+  /**
+   * The client secret of the source. Used for client-side retrieval using a publishable key.
+   */
   @SerializedName("client_secret")
   String clientSecret;
 
   @SerializedName("code_verification")
   CodeVerificationFlow codeVerification;
 
-  /** Time at which the object was created. Measured in seconds since the Unix epoch. */
+  /**
+   * Time at which the object was created. Measured in seconds since the Unix epoch.
+   */
   @SerializedName("created")
   Long created;
 
   /**
-   * Three-letter [ISO code for the currency](https://stripe.com/docs/currencies) associated with
-   * the source. This is the currency for which the source will be chargeable once ready. Required
-   * for `single_use` sources.
+   * Three-letter [ISO code for the currency](https://stripe.com/docs/currencies) associated with the source. This is the currency for which the source will be chargeable once ready. Required for `single_use` sources.
    */
   @SerializedName("currency")
   String currency;
 
   /**
-   * The ID of the customer to which this source is attached. This will not be present when the
-   * source has not been attached to a customer.
+   * The ID of the customer to which this source is attached. This will not be present when the source has not been attached to a customer.
    */
   @SerializedName("customer")
   String customer;
@@ -83,8 +81,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   Eps eps;
 
   /**
-   * The authentication `flow` of the source. `flow` is one of `redirect`, `receiver`,
-   * `code_verification`, `none`.
+   * The authentication `flow` of the source. `flow` is one of `redirect`, `receiver`, `code_verification`, `none`.
    */
   @SerializedName("flow")
   String flow;
@@ -92,7 +89,9 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   @SerializedName("giropay")
   Giropay giropay;
 
-  /** Unique identifier for the object. */
+  /**
+   * Unique identifier for the object.
+   */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
@@ -104,15 +103,13 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   Klarna klarna;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value `true` if the object exists in live mode or the value `false` if the object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
 
   /**
-   * Set of key-value pairs that you can attach to an object. This can be useful for storing
-   * additional information about the object in a structured format.
+   * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
    */
   @Getter(onMethod_ = {@Override})
   @SerializedName("metadata")
@@ -121,13 +118,14 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   @SerializedName("multibanco")
   Multibanco multibanco;
 
-  /** String representing the object's type. Objects of the same type share the same value. */
+  /**
+   * String representing the object's type. Objects of the same type share the same value.
+   */
   @SerializedName("object")
   String object;
 
   /**
-   * Information about the owner of the payment instrument that may be used or required by
-   * particular source types.
+   * Information about the owner of the payment instrument that may be used or required by particular source types.
    */
   @SerializedName("owner")
   Owner owner;
@@ -154,15 +152,13 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   Order sourceOrder;
 
   /**
-   * Extra information about a source. This will appear on your customer's statement every time you
-   * charge the source.
+   * Extra information about a source. This will appear on your customer's statement every time you charge the source.
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
 
   /**
-   * The status of the source, one of `canceled`, `chargeable`, `consumed`, `failed`, or `pending`.
-   * Only `chargeable` sources can be used to create a charge.
+   * The status of the source, one of `canceled`, `chargeable`, `consumed`, `failed`, or `pending`. Only `chargeable` sources can be used to create a charge.
    */
   @SerializedName("status")
   String status;
@@ -171,19 +167,13 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   ThreeDSecure threeDSecure;
 
   /**
-   * The `type` of the source. The `type` is a payment method, one of `ach_credit_transfer`,
-   * `ach_debit`, `alipay`, `bancontact`, `card`, `card_present`, `eps`, `giropay`, `ideal`,
-   * `multibanco`, `klarna`, `p24`, `sepa_debit`, `sofort`, `three_d_secure`, or `wechat`. An
-   * additional hash is included on the source with a name matching this value. It contains
-   * additional information specific to the [payment method](https://stripe.com/docs/sources) used.
+   * The `type` of the source. The `type` is a payment method, one of `ach_credit_transfer`, `ach_debit`, `alipay`, `bancontact`, `card`, `card_present`, `eps`, `giropay`, `ideal`, `multibanco`, `klarna`, `p24`, `sepa_debit`, `sofort`, `three_d_secure`, or `wechat`. An additional hash is included on the source with a name matching this value. It contains additional information specific to the [payment method](https://stripe.com/docs/sources) used.
    */
   @SerializedName("type")
   String type;
 
   /**
-   * Either `reusable` or `single_use`. Whether this source should be reusable or not. Some source
-   * types may or may not be reusable by construction, while others may leave the option at
-   * creation. If an incompatible value is passed, an error will be returned.
+   * Either `reusable` or `single_use`. Whether this source should be reusable or not. Some source types may or may not be reusable by construction, while others may leave the option at creation. If an incompatible value is passed, an error will be returned.
    */
   @SerializedName("usage")
   String usage;
@@ -191,103 +181,127 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   @SerializedName("wechat")
   Wechat wechat;
 
-  /** Delete a specified source for a given customer. */
+  /**
+   * <p>Delete a specified source for a given customer.</p>
+   */
   public Source detach() throws StripeException {
     return detach((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** Delete a specified source for a given customer. */
+  /**
+   * <p>Delete a specified source for a given customer.</p>
+   */
   public Source detach(Map<String, Object> params) throws StripeException {
     return detach(params, (RequestOptions) null);
   }
 
-  /** Delete a specified source for a given customer. */
+  /**
+   * <p>Delete a specified source for a given customer.</p>
+   */
   public Source detach(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
         String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/customers/%s/sources/%s",
-                ApiResource.urlEncodeId(this.getCustomer()),
-                ApiResource.urlEncodeId(this.getId())));
+          "/v1/customers/%s/sources/%s",
+          ApiResource.urlEncodeId(this.getCustomer()),
+          ApiResource.urlEncodeId(this.getId())
+        )
+      );
     return ApiResource.request(
-        ApiResource.RequestMethod.DELETE, url, params, Source.class, options);
+      ApiResource.RequestMethod.DELETE,
+      url,
+      params,
+      Source.class,
+      options
+    );
   }
 
   /**
-   * Retrieves an existing source object. Supply the unique source ID from a source creation request
-   * and Stripe will return the corresponding up-to-date source object information.
+   * <p>Retrieves an existing source object. Supply the unique source ID from a source creation request and Stripe will return the corresponding up-to-date source object information.</p>
    */
   public static Source retrieve(String source) throws StripeException {
     return retrieve(source, (Map<String, Object>) null, (RequestOptions) null);
   }
 
   /**
-   * Retrieves an existing source object. Supply the unique source ID from a source creation request
-   * and Stripe will return the corresponding up-to-date source object information.
+   * <p>Retrieves an existing source object. Supply the unique source ID from a source creation request and Stripe will return the corresponding up-to-date source object information.</p>
    */
   public static Source retrieve(String source, RequestOptions options) throws StripeException {
     return retrieve(source, (Map<String, Object>) null, options);
   }
 
   /**
-   * Retrieves an existing source object. Supply the unique source ID from a source creation request
-   * and Stripe will return the corresponding up-to-date source object information.
+   * <p>Retrieves an existing source object. Supply the unique source ID from a source creation request and Stripe will return the corresponding up-to-date source object information.</p>
    */
-  public static Source retrieve(String source, Map<String, Object> params, RequestOptions options)
-      throws StripeException {
+  public static Source retrieve(
+      String source,
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(), String.format("/v1/sources/%s", ApiResource.urlEncodeId(source)));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/sources/%s", ApiResource.urlEncodeId(source))
+      );
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Source.class, options);
   }
 
   /**
-   * Retrieves an existing source object. Supply the unique source ID from a source creation request
-   * and Stripe will return the corresponding up-to-date source object information.
+   * <p>Retrieves an existing source object. Supply the unique source ID from a source creation request and Stripe will return the corresponding up-to-date source object information.</p>
    */
-  public static Source retrieve(String source, SourceRetrieveParams params, RequestOptions options)
-      throws StripeException {
+  public static Source retrieve(
+      String source,
+      SourceRetrieveParams params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(), String.format("/v1/sources/%s", ApiResource.urlEncodeId(source)));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/sources/%s", ApiResource.urlEncodeId(source))
+      );
     return ApiResource.request(ApiResource.RequestMethod.GET, url, params, Source.class, options);
   }
 
-  /** Creates a new source object. */
+  /**
+   * <p>Creates a new source object.</p>
+   */
   public static Source create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a new source object. */
-  public static Source create(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/sources");
-    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Source.class, options);
-  }
-
-  /** Creates a new source object. */
-  public static Source create(SourceCreateParams params) throws StripeException {
-    return create(params, (RequestOptions) null);
-  }
-
-  /** Creates a new source object. */
-  public static Source create(SourceCreateParams params, RequestOptions options)
-      throws StripeException {
+  /**
+   * <p>Creates a new source object.</p>
+   */
+  public static Source create(
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/sources");
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Source.class, options);
   }
 
   /**
-   * Updates the specified source by setting the values of the parameters passed. Any parameters not
-   * provided will be left unchanged.
+   * <p>Creates a new source object.</p>
+   */
+  public static Source create(SourceCreateParams params) throws StripeException {
+    return create(params, (RequestOptions) null);
+  }
+
+  /**
+   * <p>Creates a new source object.</p>
+   */
+  public static Source create(
+      SourceCreateParams params,
+      RequestOptions options) throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/sources");
+    return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Source.class, options);
+  }
+
+  /**
+   * <p>Updates the specified source by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
    *
-   * <p>This request accepts the <code>metadata</code> and <code>owner</code> as arguments. It is
-   * also possible to update type specific information for selected payment methods. Please refer to
-   * our <a href="/docs/sources">payment method guides</a> for more detail.
+   * <p>This request accepts the <code>metadata</code> and <code>owner</code> as arguments. It is also possible to update type specific information for selected payment methods. Please refer to our <a href="/docs/sources">payment method guides</a> for more detail.</p>
    */
   @Override
   public Source update(Map<String, Object> params) throws StripeException {
@@ -295,120 +309,135 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   }
 
   /**
-   * Updates the specified source by setting the values of the parameters passed. Any parameters not
-   * provided will be left unchanged.
+   * <p>Updates the specified source by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
    *
-   * <p>This request accepts the <code>metadata</code> and <code>owner</code> as arguments. It is
-   * also possible to update type specific information for selected payment methods. Please refer to
-   * our <a href="/docs/sources">payment method guides</a> for more detail.
+   * <p>This request accepts the <code>metadata</code> and <code>owner</code> as arguments. It is also possible to update type specific information for selected payment methods. Please refer to our <a href="/docs/sources">payment method guides</a> for more detail.</p>
    */
   @Override
   public Source update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/sources/%s", ApiResource.urlEncodeId(this.getId())));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/sources/%s", ApiResource.urlEncodeId(this.getId()))
+      );
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Source.class, options);
   }
 
   /**
-   * Updates the specified source by setting the values of the parameters passed. Any parameters not
-   * provided will be left unchanged.
+   * <p>Updates the specified source by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
    *
-   * <p>This request accepts the <code>metadata</code> and <code>owner</code> as arguments. It is
-   * also possible to update type specific information for selected payment methods. Please refer to
-   * our <a href="/docs/sources">payment method guides</a> for more detail.
+   * <p>This request accepts the <code>metadata</code> and <code>owner</code> as arguments. It is also possible to update type specific information for selected payment methods. Please refer to our <a href="/docs/sources">payment method guides</a> for more detail.</p>
    */
   public Source update(SourceUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
   /**
-   * Updates the specified source by setting the values of the parameters passed. Any parameters not
-   * provided will be left unchanged.
+   * <p>Updates the specified source by setting the values of the parameters passed. Any parameters not provided will be left unchanged.</p>
    *
-   * <p>This request accepts the <code>metadata</code> and <code>owner</code> as arguments. It is
-   * also possible to update type specific information for selected payment methods. Please refer to
-   * our <a href="/docs/sources">payment method guides</a> for more detail.
+   * <p>This request accepts the <code>metadata</code> and <code>owner</code> as arguments. It is also possible to update type specific information for selected payment methods. Please refer to our <a href="/docs/sources">payment method guides</a> for more detail.</p>
    */
   public Source update(SourceUpdateParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/sources/%s", ApiResource.urlEncodeId(this.getId())));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/sources/%s", ApiResource.urlEncodeId(this.getId()))
+      );
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Source.class, options);
   }
 
-  /** Verify a given source. */
+  /**
+   * <p>Verify a given source.</p>
+   */
   public Source verify(Map<String, Object> params) throws StripeException {
     return verify(params, (RequestOptions) null);
   }
 
-  /** Verify a given source. */
+  /**
+   * <p>Verify a given source.</p>
+   */
   public Source verify(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/sources/%s/verify", ApiResource.urlEncodeId(this.getId())));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/sources/%s/verify", ApiResource.urlEncodeId(this.getId()))
+      );
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Source.class, options);
   }
 
-  /** Verify a given source. */
+  /**
+   * <p>Verify a given source.</p>
+   */
   public Source verify(SourceVerifyParams params) throws StripeException {
     return verify(params, (RequestOptions) null);
   }
 
-  /** Verify a given source. */
+  /**
+   * <p>Verify a given source.</p>
+   */
   public Source verify(SourceVerifyParams params, RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/sources/%s/verify", ApiResource.urlEncodeId(this.getId())));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/sources/%s/verify", ApiResource.urlEncodeId(this.getId()))
+      );
     return ApiResource.request(ApiResource.RequestMethod.POST, url, params, Source.class, options);
   }
 
-  /** List source transactions for a given source. */
+  /**
+   * <p>List source transactions for a given source.</p>
+   */
   public SourceTransactionCollection sourceTransactions() throws StripeException {
     return sourceTransactions((Map<String, Object>) null, (RequestOptions) null);
   }
 
-  /** List source transactions for a given source. */
-  public SourceTransactionCollection sourceTransactions(Map<String, Object> params)
-      throws StripeException {
+  /**
+   * <p>List source transactions for a given source.</p>
+   */
+  public SourceTransactionCollection sourceTransactions(
+      Map<String, Object> params) throws StripeException {
     return sourceTransactions(params, (RequestOptions) null);
   }
 
-  /** List source transactions for a given source. */
+  /**
+   * <p>List source transactions for a given source.</p>
+   */
   public SourceTransactionCollection sourceTransactions(
-      Map<String, Object> params, RequestOptions options) throws StripeException {
+      Map<String, Object> params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/sources/%s/source_transactions", ApiResource.urlEncodeId(this.getId())));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/sources/%s/source_transactions", ApiResource.urlEncodeId(this.getId()))
+      );
     return ApiResource.requestCollection(url, params, SourceTransactionCollection.class, options);
   }
 
-  /** List source transactions for a given source. */
-  public SourceTransactionCollection sourceTransactions(SourceSourceTransactionsParams params)
-      throws StripeException {
+  /**
+   * <p>List source transactions for a given source.</p>
+   */
+  public SourceTransactionCollection sourceTransactions(
+      SourceSourceTransactionsParams params) throws StripeException {
     return sourceTransactions(params, (RequestOptions) null);
   }
 
-  /** List source transactions for a given source. */
+  /**
+   * <p>List source transactions for a given source.</p>
+   */
   public SourceTransactionCollection sourceTransactions(
-      SourceSourceTransactionsParams params, RequestOptions options) throws StripeException {
+      SourceSourceTransactionsParams params,
+      RequestOptions options) throws StripeException {
     String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format(
-                "/v1/sources/%s/source_transactions", ApiResource.urlEncodeId(this.getId())));
+      String.format(
+        "%s%s",
+        Stripe.getApiBase(),
+        String.format("/v1/sources/%s/source_transactions", ApiResource.urlEncodeId(this.getId()))
+      );
     return ApiResource.requestCollection(url, params, SourceTransactionCollection.class, options);
   }
 
@@ -682,10 +711,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     Long attemptsRemaining;
 
     /**
-     * The status of the code verification, either `pending` (awaiting verification,
-     * `attempts_remaining` should be greater than 0), `succeeded` (successful verification) or
-     * `failed` (failed verification, cannot be verified anymore as `attempts_remaining` should be
-     * 0).
+     * The status of the code verification, either `pending` (awaiting verification, `attempts_remaining` should be greater than 0), `succeeded` (successful verification) or `failed` (failed verification, cannot be verified anymore as `attempts_remaining` should be 0).
      */
     @SerializedName("status")
     String status;
@@ -856,24 +882,26 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   @EqualsAndHashCode(callSuper = false)
   public static class Order extends StripeObject {
     /**
-     * A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1,
-     * Japanese Yen being a zero-decimal currency) representing the total amount for the order.
+     * A positive integer in the smallest currency unit (that is, 100 cents for $1.00, or 1 for ¥1, Japanese Yen being a zero-decimal currency) representing the total amount for the order.
      */
     @SerializedName("amount")
     Long amount;
 
     /**
-     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-     * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
      */
     @SerializedName("currency")
     String currency;
 
-    /** The email address of the customer placing the order. */
+    /**
+     * The email address of the customer placing the order.
+     */
     @SerializedName("email")
     String email;
 
-    /** List of items constituting the order. */
+    /**
+     * List of items constituting the order.
+     */
     @SerializedName("items")
     List<Source.OrderItem> items;
 
@@ -885,26 +913,33 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class OrderItem extends StripeObject {
-    /** The amount (price) for this order item. */
+    /**
+     * The amount (price) for this order item.
+     */
     @SerializedName("amount")
     Long amount;
 
-    /** This currency of this order item. Required when `amount` is present. */
+    /**
+     * This currency of this order item. Required when `amount` is present.
+     */
     @SerializedName("currency")
     String currency;
 
-    /** Human-readable description for this order item. */
+    /**
+     * Human-readable description for this order item.
+     */
     @SerializedName("description")
     String description;
 
     /**
-     * The quantity of this order item. When type is `sku`, this is the number of instances of the
-     * SKU to be ordered.
+     * The quantity of this order item. When type is `sku`, this is the number of instances of the SKU to be ordered.
      */
     @SerializedName("quantity")
     Long quantity;
 
-    /** The type of this order item. Must be `sku`, `tax`, or `shipping`. */
+    /**
+     * The type of this order item. Must be `sku`, `tax`, or `shipping`.
+     */
     @SerializedName("type")
     String type;
   }
@@ -913,50 +948,50 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Owner extends StripeObject {
-    /** Owner's address. */
+    /**
+     * Owner's address.
+     */
     @SerializedName("address")
     Address address;
 
-    /** Owner's email address. */
+    /**
+     * Owner's email address.
+     */
     @SerializedName("email")
     String email;
 
-    /** Owner's full name. */
+    /**
+     * Owner's full name.
+     */
     @SerializedName("name")
     String name;
 
-    /** Owner's phone number (including extension). */
+    /**
+     * Owner's phone number (including extension).
+     */
     @SerializedName("phone")
     String phone;
 
     /**
-     * Verified owner's address. Verified values are verified or provided by the payment method
-     * directly (and if supported) at the time of authorization or settlement. They cannot be set or
-     * mutated.
+     * Verified owner's address. Verified values are verified or provided by the payment method directly (and if supported) at the time of authorization or settlement. They cannot be set or mutated.
      */
     @SerializedName("verified_address")
     Address verifiedAddress;
 
     /**
-     * Verified owner's email address. Verified values are verified or provided by the payment
-     * method directly (and if supported) at the time of authorization or settlement. They cannot be
-     * set or mutated.
+     * Verified owner's email address. Verified values are verified or provided by the payment method directly (and if supported) at the time of authorization or settlement. They cannot be set or mutated.
      */
     @SerializedName("verified_email")
     String verifiedEmail;
 
     /**
-     * Verified owner's full name. Verified values are verified or provided by the payment method
-     * directly (and if supported) at the time of authorization or settlement. They cannot be set or
-     * mutated.
+     * Verified owner's full name. Verified values are verified or provided by the payment method directly (and if supported) at the time of authorization or settlement. They cannot be set or mutated.
      */
     @SerializedName("verified_name")
     String verifiedName;
 
     /**
-     * Verified owner's phone number (including extension). Verified values are verified or provided
-     * by the payment method directly (and if supported) at the time of authorization or settlement.
-     * They cannot be set or mutated.
+     * Verified owner's phone number (including extension). Verified values are verified or provided by the payment method directly (and if supported) at the time of authorization or settlement. They cannot be set or mutated.
      */
     @SerializedName("verified_phone")
     String verifiedPhone;
@@ -975,39 +1010,38 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   @EqualsAndHashCode(callSuper = false)
   public static class ReceiverFlow extends StripeObject {
     /**
-     * The address of the receiver source. This is the value that should be communicated to the
-     * customer to send their funds to.
+     * The address of the receiver source. This is the value that should be communicated to the customer to send their funds to.
      */
     @SerializedName("address")
     String address;
 
     /**
-     * The total amount that was charged by you. The amount charged is expressed in the source's
-     * currency.
+     * The total amount that was charged by you. The amount charged is expressed in the source's currency.
      */
     @SerializedName("amount_charged")
     Long amountCharged;
 
     /**
-     * The total amount received by the receiver source. `amount_received = amount_returned +
-     * amount_charged` is true at all time. The amount received is expressed in the source's
-     * currency.
+     * The total amount received by the receiver source. `amount_received = amount_returned + amount_charged` is true at all time. The amount received is expressed in the source's currency.
      */
     @SerializedName("amount_received")
     Long amountReceived;
 
     /**
-     * The total amount that was returned to the customer. The amount returned is expressed in the
-     * source's currency.
+     * The total amount that was returned to the customer. The amount returned is expressed in the source's currency.
      */
     @SerializedName("amount_returned")
     Long amountReturned;
 
-    /** Type of refund attribute method, one of `email`, `manual`, or `none`. */
+    /**
+     * Type of refund attribute method, one of `email`, `manual`, or `none`.
+     */
     @SerializedName("refund_attributes_method")
     String refundAttributesMethod;
 
-    /** Type of refund attribute status, one of `missing`, `requested`, or `available`. */
+    /**
+     * Type of refund attribute status, one of `missing`, `requested`, or `available`.
+     */
     @SerializedName("refund_attributes_status")
     String refundAttributesStatus;
   }
@@ -1017,30 +1051,25 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   @EqualsAndHashCode(callSuper = false)
   public static class RedirectFlow extends StripeObject {
     /**
-     * The failure reason for the redirect, either `user_abort` (the customer aborted or dropped out
-     * of the redirect flow), `declined` (the authentication failed or the transaction was
-     * declined), or `processing_error` (the redirect failed due to a technical error). Present only
-     * if the redirect status is `failed`.
+     * The failure reason for the redirect, either `user_abort` (the customer aborted or dropped out of the redirect flow), `declined` (the authentication failed or the transaction was declined), or `processing_error` (the redirect failed due to a technical error). Present only if the redirect status is `failed`.
      */
     @SerializedName("failure_reason")
     String failureReason;
 
-    /** The URL you provide to redirect the customer to after they authenticated their payment. */
+    /**
+     * The URL you provide to redirect the customer to after they authenticated their payment.
+     */
     @SerializedName("return_url")
     String returnUrl;
 
     /**
-     * The status of the redirect, either `pending` (ready to be used by your customer to
-     * authenticate the transaction), `succeeded` (succesful authentication, cannot be reused) or
-     * `not_required` (redirect should not be used) or `failed` (failed authentication, cannot be
-     * reused).
+     * The status of the redirect, either `pending` (ready to be used by your customer to authenticate the transaction), `succeeded` (succesful authentication, cannot be reused) or `not_required` (redirect should not be used) or `failed` (failed authentication, cannot be reused).
      */
     @SerializedName("status")
     String status;
 
     /**
-     * The URL provided to you to redirect a customer to as part of a `redirect` authentication
-     * flow.
+     * The URL provided to you to redirect a customer to as part of a `redirect` authentication flow.
      */
     @SerializedName("url")
     String url;

@@ -1,3 +1,7 @@
 package com.stripe.model;
 
-public class ProductCollection extends StripeCollection<Product> {}
+import com.stripe.net.ApiResource;
+
+public class ProductCollection extends StripeCollection<Product> {
+
+}

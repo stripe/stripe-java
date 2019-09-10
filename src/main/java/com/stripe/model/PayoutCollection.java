@@ -1,3 +1,7 @@
 package com.stripe.model;
 
-public class PayoutCollection extends StripeCollection<Payout> {}
+import com.stripe.net.ApiResource;
+
+public class PayoutCollection extends StripeCollection<Payout> {
+
+}

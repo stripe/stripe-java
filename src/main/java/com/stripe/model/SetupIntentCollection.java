@@ -1,3 +1,7 @@
 package com.stripe.model;
 
-public class SetupIntentCollection extends StripeCollection<SetupIntent> {}
+import com.stripe.net.ApiResource;
+
+public class SetupIntentCollection extends StripeCollection<SetupIntent> {
+
+}

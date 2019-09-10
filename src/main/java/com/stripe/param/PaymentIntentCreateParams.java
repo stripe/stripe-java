@@ -64,7 +64,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
    * confirmation.
    *
    * <p>Learn more about the different [confirmation
-   * flows](https://stripe.com/docs/payments/payment-intents#one-time-payments).
+   * flows](https://stripe.com/docs/payments/payment-intents/use-cases#one-time-payments).
    */
   @SerializedName("confirmation_method")
   ConfirmationMethod confirmationMethod;
@@ -444,7 +444,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      * confirmation.
      *
      * <p>Learn more about the different [confirmation
-     * flows](https://stripe.com/docs/payments/payment-intents#one-time-payments).
+     * flows](https://stripe.com/docs/payments/payment-intents/use-cases#one-time-payments).
      */
     public Builder setConfirmationMethod(ConfirmationMethod confirmationMethod) {
       this.confirmationMethod = confirmationMethod;

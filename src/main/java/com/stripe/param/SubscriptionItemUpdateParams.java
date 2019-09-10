@@ -2,6 +2,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.net.ApiRequestParams.EnumParam;
 import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -11,28 +12,25 @@ import lombok.Getter;
 
 public class SubscriptionItemUpdateParams extends ApiRequestParams {
   /**
-   * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
-   * billing period.
+   * Define thresholds at which an invoice will be sent, and the subscription advanced to a new billing period.
    */
   @SerializedName("billing_thresholds")
   Object billingThresholds;
 
-  /** Specifies which fields in the response should be expanded. */
+  /**
+   * Specifies which fields in the response should be expanded.
+   */
   @SerializedName("expand")
   List<String> expand;
 
   /**
-   * Map of extra parameters for custom features not available in this client library. The content
-   * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-   * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-   * param object. Effectively, this map is flattened to its parent instance.
+   * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
   /**
-   * Set of key-value pairs that you can attach to an object. This can be useful for storing
-   * additional information about the object in a structured format.
+   * Set of key-value pairs that you can attach to an object. This can be useful for storing additional information about the object in a structured format.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -43,32 +41,32 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
   @SerializedName("payment_behavior")
   PaymentBehavior paymentBehavior;
 
-  /** The identifier of the new plan for this subscription item. */
+  /**
+   * The identifier of the new plan for this subscription item.
+   */
   @SerializedName("plan")
   String plan;
 
   /**
-   * Flag indicating whether to [prorate](https://stripe.com/docs/billing/subscriptions/prorations)
-   * switching plans during a billing cycle.
+   * Flag indicating whether to [prorate](https://stripe.com/docs/billing/subscriptions/prorations) switching plans during a billing cycle.
    */
   @SerializedName("prorate")
   Boolean prorate;
 
   /**
-   * If set, the proration will be calculated as though the subscription was updated at the given
-   * time. This can be used to apply the same proration that was previewed with the [upcoming
-   * invoice](#retrieve_customer_invoice) endpoint.
+   * If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply the same proration that was previewed with the [upcoming invoice](#retrieve_customer_invoice) endpoint.
    */
   @SerializedName("proration_date")
   Long prorationDate;
 
-  /** The quantity you'd like to apply to the subscription item you're creating. */
+  /**
+   * The quantity you'd like to apply to the subscription item you're creating.
+   */
   @SerializedName("quantity")
   Long quantity;
 
   /**
-   * The tax rates which apply to this `subscription_item`. When set, the `default_tax_rates` on the
-   * subscription do not apply to this `subscription_item`.
+   * The tax rates which apply to this `subscription_item`. When set, the `default_tax_rates` on the subscription do not apply to this `subscription_item`.
    */
   @SerializedName("tax_rates")
   Object taxRates;
@@ -97,11 +95,9 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
     this.quantity = quantity;
     this.taxRates = taxRates;
   }
-
   public static Builder builder() {
     return new Builder();
   }
-
   public static class Builder {
     private Object billingThresholds;
 
@@ -125,25 +121,27 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
 
     private Object taxRates;
 
-    /** Finalize and obtain parameter instance from this builder. */
+    /**
+     * Finalize and obtain parameter instance from this builder.
+     */
     public SubscriptionItemUpdateParams build() {
       return new SubscriptionItemUpdateParams(
-          this.billingThresholds,
-          this.expand,
-          this.extraParams,
-          this.metadata,
-          this.offSession,
-          this.paymentBehavior,
-          this.plan,
-          this.prorate,
-          this.prorationDate,
-          this.quantity,
-          this.taxRates);
+        this.billingThresholds,
+        this.expand,
+        this.extraParams,
+        this.metadata,
+        this.offSession,
+        this.paymentBehavior,
+        this.plan,
+        this.prorate,
+        this.prorationDate,
+        this.quantity,
+        this.taxRates
+      );
     }
 
     /**
-     * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
-     * billing period.
+     * Define thresholds at which an invoice will be sent, and the subscription advanced to a new billing period.
      */
     public Builder setBillingThresholds(BillingThresholds billingThresholds) {
       this.billingThresholds = billingThresholds;
@@ -151,8 +149,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
-     * billing period.
+     * Define thresholds at which an invoice will be sent, and the subscription advanced to a new billing period.
      */
     public Builder setBillingThresholds(EmptyParam billingThresholds) {
       this.billingThresholds = billingThresholds;
@@ -160,9 +157,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * SubscriptionItemUpdateParams#expand} for the field documentation.
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link SubscriptionItemUpdateParams#expand} for the field documentation.
      */
     public Builder addExpand(String element) {
       if (this.expand == null) {
@@ -173,9 +168,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
-     * subsequent calls adds additional elements to the original list. See {@link
-     * SubscriptionItemUpdateParams#expand} for the field documentation.
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and subsequent calls adds additional elements to the original list. See {@link SubscriptionItemUpdateParams#expand} for the field documentation.
      */
     public Builder addAllExpand(List<String> elements) {
       if (this.expand == null) {
@@ -186,9 +179,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-     * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-     * SubscriptionItemUpdateParams#extraParams} for the field documentation.
+     * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SubscriptionItemUpdateParams#extraParams} for the field documentation.
      */
     public Builder putExtraParam(String key, Object value) {
       if (this.extraParams == null) {
@@ -199,9 +190,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link SubscriptionItemUpdateParams#extraParams} for the field documentation.
+     * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SubscriptionItemUpdateParams#extraParams} for the field documentation.
      */
     public Builder putAllExtraParam(Map<String, Object> map) {
       if (this.extraParams == null) {
@@ -212,9 +201,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
-     * and subsequent calls add additional key/value pairs to the original map. See {@link
-     * SubscriptionItemUpdateParams#metadata} for the field documentation.
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SubscriptionItemUpdateParams#metadata} for the field documentation.
      */
     public Builder putMetadata(String key, String value) {
       if (this.metadata == null) {
@@ -225,9 +212,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
-     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-     * See {@link SubscriptionItemUpdateParams#metadata} for the field documentation.
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SubscriptionItemUpdateParams#metadata} for the field documentation.
      */
     public Builder putAllMetadata(Map<String, String> map) {
       if (this.metadata == null) {
@@ -247,16 +232,16 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The identifier of the new plan for this subscription item. */
+    /**
+     * The identifier of the new plan for this subscription item.
+     */
     public Builder setPlan(String plan) {
       this.plan = plan;
       return this;
     }
 
     /**
-     * Flag indicating whether to
-     * [prorate](https://stripe.com/docs/billing/subscriptions/prorations) switching plans during a
-     * billing cycle.
+     * Flag indicating whether to [prorate](https://stripe.com/docs/billing/subscriptions/prorations) switching plans during a billing cycle.
      */
     public Builder setProrate(Boolean prorate) {
       this.prorate = prorate;
@@ -264,24 +249,23 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * If set, the proration will be calculated as though the subscription was updated at the given
-     * time. This can be used to apply the same proration that was previewed with the [upcoming
-     * invoice](#retrieve_customer_invoice) endpoint.
+     * If set, the proration will be calculated as though the subscription was updated at the given time. This can be used to apply the same proration that was previewed with the [upcoming invoice](#retrieve_customer_invoice) endpoint.
      */
     public Builder setProrationDate(Long prorationDate) {
       this.prorationDate = prorationDate;
       return this;
     }
 
-    /** The quantity you'd like to apply to the subscription item you're creating. */
+    /**
+     * The quantity you'd like to apply to the subscription item you're creating.
+     */
     public Builder setQuantity(Long quantity) {
       this.quantity = quantity;
       return this;
     }
 
     /**
-     * The tax rates which apply to this `subscription_item`. When set, the `default_tax_rates` on
-     * the subscription do not apply to this `subscription_item`.
+     * The tax rates which apply to this `subscription_item`. When set, the `default_tax_rates` on the subscription do not apply to this `subscription_item`.
      */
     public Builder setTaxRates(List<String> taxRates) {
       this.taxRates = taxRates;
@@ -289,26 +273,23 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The tax rates which apply to this `subscription_item`. When set, the `default_tax_rates` on
-     * the subscription do not apply to this `subscription_item`.
+     * The tax rates which apply to this `subscription_item`. When set, the `default_tax_rates` on the subscription do not apply to this `subscription_item`.
      */
     public Builder setTaxRates(EmptyParam taxRates) {
       this.taxRates = taxRates;
       return this;
     }
   }
-
   public static class BillingThresholds {
     /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
+     * Map of extra parameters for custom features not available in this client library. The content in this map is not serialized under this field's {@code @SerializedName} value. Instead, each key/value pair is serialized as if the key is a root-level field (serialized) name in this param object. Effectively, this map is flattened to its parent instance.
      */
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Usage threshold that triggers the subscription to advance to a new billing period. */
+    /**
+     * Usage threshold that triggers the subscription to advance to a new billing period.
+     */
     @SerializedName("usage_gte")
     Long usageGte;
 
@@ -316,25 +297,23 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
       this.extraParams = extraParams;
       this.usageGte = usageGte;
     }
-
     public static Builder builder() {
       return new Builder();
     }
-
     public static class Builder {
       private Map<String, Object> extraParams;
 
       private Long usageGte;
 
-      /** Finalize and obtain parameter instance from this builder. */
+      /**
+       * Finalize and obtain parameter instance from this builder.
+       */
       public BillingThresholds build() {
         return new BillingThresholds(this.extraParams, this.usageGte);
       }
 
       /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * SubscriptionItemUpdateParams.BillingThresholds#extraParams} for the field documentation.
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SubscriptionItemUpdateParams.BillingThresholds#extraParams} for the field documentation.
        */
       public Builder putExtraParam(String key, Object value) {
         if (this.extraParams == null) {
@@ -345,10 +324,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link SubscriptionItemUpdateParams.BillingThresholds#extraParams} for the field
-       * documentation.
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first `put/putAll` call, and subsequent calls add additional key/value pairs to the original map. See {@link SubscriptionItemUpdateParams.BillingThresholds#extraParams} for the field documentation.
        */
       public Builder putAllExtraParam(Map<String, Object> map) {
         if (this.extraParams == null) {
@@ -358,26 +334,26 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Usage threshold that triggers the subscription to advance to a new billing period. */
+      /**
+       * Usage threshold that triggers the subscription to advance to a new billing period.
+       */
       public Builder setUsageGte(Long usageGte) {
         this.usageGte = usageGte;
         return this;
       }
     }
   }
-
   public enum PaymentBehavior implements ApiRequestParams.EnumParam {
     @SerializedName("allow_incomplete")
     ALLOW_INCOMPLETE("allow_incomplete"),
 
     @SerializedName("error_if_incomplete")
     ERROR_IF_INCOMPLETE("error_if_incomplete");
-
     @Getter(onMethod_ = {@Override})
     private final String value;
-
     PaymentBehavior(String value) {
       this.value = value;
     }
+
   }
 }

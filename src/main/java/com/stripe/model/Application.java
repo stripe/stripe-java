@@ -9,16 +9,22 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Application extends StripeObject implements HasId {
-  /** Unique identifier for the object. */
+  /**
+   * Unique identifier for the object.
+   */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
 
-  /** The name of the application. */
+  /**
+   * The name of the application.
+   */
   @SerializedName("name")
   String name;
 
-  /** String representing the object's type. Objects of the same type share the same value. */
+  /**
+   * String representing the object's type. Objects of the same type share the same value.
+   */
   @SerializedName("object")
   String object;
 }

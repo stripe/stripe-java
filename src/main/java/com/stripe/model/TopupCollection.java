@@ -1,3 +1,7 @@
 package com.stripe.model;
 
-public class TopupCollection extends StripeCollection<Topup> {}
+import com.stripe.net.ApiResource;
+
+public class TopupCollection extends StripeCollection<Topup> {
+
+}

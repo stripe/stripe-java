@@ -1,3 +1,7 @@
 package com.stripe.model;
 
-public class DisputeCollection extends StripeCollection<Dispute> {}
+import com.stripe.net.ApiResource;
+
+public class DisputeCollection extends StripeCollection<Dispute> {
+
+}
