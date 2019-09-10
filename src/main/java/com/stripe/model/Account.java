@@ -706,11 +706,12 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
         String details;
 
         /**
-         * One of `document_corrupt`, `document_failed_copy`, `document_not_readable`,
-         * `document_not_uploaded`, `document_failed_other`, `document_fraudulent`,
-         * `document_invalid`, `document_manipulated`, `document_too_large`, or
-         * `document_failed_test_mode`. A machine-readable code specifying the verification state
-         * for this document.
+         * One of `document_corrupt`, `document_expired`, `document_failed_copy`,
+         * `document_failed_greyscale`, `document_failed_other`, `document_failed_test_mode`,
+         * `document_fraudulent`, `document_incomplete`, `document_invalid`, `document_manipulated`,
+         * `document_not_readable`, `document_not_uploaded`, `document_type_not_supported`, or
+         * `document_too_large`. A machine-readable code specifying the verification state for this
+         * document.
          */
         @SerializedName("details_code")
         String detailsCode;
