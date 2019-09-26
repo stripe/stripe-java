@@ -256,12 +256,30 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * A list of up to 4 custom fields to be displayed on the invoice. If a value for
-     * `custom_fields` is specified, the list specified will replace the existing custom field list
-     * on this invoice.
+     * Add an element to `customFields` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * InvoiceUpdateParams#customFields} for the field documentation.
      */
-    public Builder setCustomFields(List<CustomField> customFields) {
-      this.customFields = customFields;
+    @SuppressWarnings("unchecked")
+    public Builder addCustomField(CustomField element) {
+      if (this.customFields == null || this.customFields instanceof EmptyParam) {
+        this.customFields = new ArrayList<InvoiceUpdateParams.CustomField>();
+      }
+      ((List<InvoiceUpdateParams.CustomField>) this.customFields).add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `customFields` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * InvoiceUpdateParams#customFields} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder addAllCustomField(List<CustomField> elements) {
+      if (this.customFields == null || this.customFields instanceof EmptyParam) {
+        this.customFields = new ArrayList<InvoiceUpdateParams.CustomField>();
+      }
+      ((List<InvoiceUpdateParams.CustomField>) this.customFields).addAll(elements);
       return this;
     }
 
@@ -271,6 +289,16 @@ public class InvoiceUpdateParams extends ApiRequestParams {
      * on this invoice.
      */
     public Builder setCustomFields(EmptyParam customFields) {
+      this.customFields = customFields;
+      return this;
+    }
+
+    /**
+     * A list of up to 4 custom fields to be displayed on the invoice. If a value for
+     * `custom_fields` is specified, the list specified will replace the existing custom field list
+     * on this invoice.
+     */
+    public Builder setCustomFields(List<CustomField> customFields) {
       this.customFields = customFields;
       return this;
     }
@@ -305,11 +333,30 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The tax rates that will apply to any line item that does not have `tax_rates` set. Pass an
-     * empty string to remove previously-set default tax rates.
+     * Add an element to `defaultTaxRates` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * InvoiceUpdateParams#defaultTaxRates} for the field documentation.
      */
-    public Builder setDefaultTaxRates(List<String> defaultTaxRates) {
-      this.defaultTaxRates = defaultTaxRates;
+    @SuppressWarnings("unchecked")
+    public Builder addDefaultTaxRate(String element) {
+      if (this.defaultTaxRates == null || this.defaultTaxRates instanceof EmptyParam) {
+        this.defaultTaxRates = new ArrayList<String>();
+      }
+      ((List<String>) this.defaultTaxRates).add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `defaultTaxRates` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * InvoiceUpdateParams#defaultTaxRates} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder addAllDefaultTaxRate(List<String> elements) {
+      if (this.defaultTaxRates == null || this.defaultTaxRates instanceof EmptyParam) {
+        this.defaultTaxRates = new ArrayList<String>();
+      }
+      ((List<String>) this.defaultTaxRates).addAll(elements);
       return this;
     }
 
@@ -318,6 +365,15 @@ public class InvoiceUpdateParams extends ApiRequestParams {
      * empty string to remove previously-set default tax rates.
      */
     public Builder setDefaultTaxRates(EmptyParam defaultTaxRates) {
+      this.defaultTaxRates = defaultTaxRates;
+      return this;
+    }
+
+    /**
+     * The tax rates that will apply to any line item that does not have `tax_rates` set. Pass an
+     * empty string to remove previously-set default tax rates.
+     */
+    public Builder setDefaultTaxRates(List<String> defaultTaxRates) {
       this.defaultTaxRates = defaultTaxRates;
       return this;
     }

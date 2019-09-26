@@ -170,13 +170,13 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
     }
 
     /** The type of entity that holds the account. This can be either `individual` or `company`. */
-    public Builder setAccountHolderType(EmptyParam accountHolderType) {
+    public Builder setAccountHolderType(AccountHolderType accountHolderType) {
       this.accountHolderType = accountHolderType;
       return this;
     }
 
     /** The type of entity that holds the account. This can be either `individual` or `company`. */
-    public Builder setAccountHolderType(AccountHolderType accountHolderType) {
+    public Builder setAccountHolderType(EmptyParam accountHolderType) {
       this.accountHolderType = accountHolderType;
       return this;
     }

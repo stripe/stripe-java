@@ -449,13 +449,13 @@ public class CustomerUpdateParams extends ApiRequestParams {
     }
 
     /** The customer's tax exemption. One of `none`, `exempt`, or `reverse`. */
-    public Builder setTaxExempt(EmptyParam taxExempt) {
+    public Builder setTaxExempt(TaxExempt taxExempt) {
       this.taxExempt = taxExempt;
       return this;
     }
 
     /** The customer's tax exemption. One of `none`, `exempt`, or `reverse`. */
-    public Builder setTaxExempt(TaxExempt taxExempt) {
+    public Builder setTaxExempt(EmptyParam taxExempt) {
       this.taxExempt = taxExempt;
       return this;
     }
@@ -682,14 +682,43 @@ public class CustomerUpdateParams extends ApiRequestParams {
             this.customFields, this.defaultPaymentMethod, this.extraParams, this.footer);
       }
 
-      /** Default custom fields to be displayed on invoices for this customer. */
-      public Builder setCustomFields(List<CustomField> customFields) {
-        this.customFields = customFields;
+      /**
+       * Add an element to `customFields` list. A list is initialized for the first `add/addAll`
+       * call, and subsequent calls adds additional elements to the original list. See {@link
+       * CustomerUpdateParams.InvoiceSettings#customFields} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder addCustomField(CustomField element) {
+        if (this.customFields == null || this.customFields instanceof EmptyParam) {
+          this.customFields = new ArrayList<CustomerUpdateParams.InvoiceSettings.CustomField>();
+        }
+        ((List<CustomerUpdateParams.InvoiceSettings.CustomField>) this.customFields).add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `customFields` list. A list is initialized for the first `add/addAll`
+       * call, and subsequent calls adds additional elements to the original list. See {@link
+       * CustomerUpdateParams.InvoiceSettings#customFields} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder addAllCustomField(List<CustomField> elements) {
+        if (this.customFields == null || this.customFields instanceof EmptyParam) {
+          this.customFields = new ArrayList<CustomerUpdateParams.InvoiceSettings.CustomField>();
+        }
+        ((List<CustomerUpdateParams.InvoiceSettings.CustomField>) this.customFields)
+            .addAll(elements);
         return this;
       }
 
       /** Default custom fields to be displayed on invoices for this customer. */
       public Builder setCustomFields(EmptyParam customFields) {
+        this.customFields = customFields;
+        return this;
+      }
+
+      /** Default custom fields to be displayed on invoices for this customer. */
+      public Builder setCustomFields(List<CustomField> customFields) {
         this.customFields = customFields;
         return this;
       }

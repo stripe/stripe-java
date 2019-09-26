@@ -196,13 +196,30 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * A list of up to 5 alphanumeric attributes that each SKU can provide values for (e.g.,
-     * `["color", "size"]`). If a value for `attributes` is specified, the list specified will
-     * replace the existing attributes list on this product. Any attributes not present after the
-     * update will be deleted from the SKUs for this product.
+     * Add an element to `attributes` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * ProductUpdateParams#attributes} for the field documentation.
      */
-    public Builder setAttributes(List<String> attributes) {
-      this.attributes = attributes;
+    @SuppressWarnings("unchecked")
+    public Builder addAttribute(String element) {
+      if (this.attributes == null || this.attributes instanceof EmptyParam) {
+        this.attributes = new ArrayList<String>();
+      }
+      ((List<String>) this.attributes).add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `attributes` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * ProductUpdateParams#attributes} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder addAllAttribute(List<String> elements) {
+      if (this.attributes == null || this.attributes instanceof EmptyParam) {
+        this.attributes = new ArrayList<String>();
+      }
+      ((List<String>) this.attributes).addAll(elements);
       return this;
     }
 
@@ -213,6 +230,17 @@ public class ProductUpdateParams extends ApiRequestParams {
      * update will be deleted from the SKUs for this product.
      */
     public Builder setAttributes(EmptyParam attributes) {
+      this.attributes = attributes;
+      return this;
+    }
+
+    /**
+     * A list of up to 5 alphanumeric attributes that each SKU can provide values for (e.g.,
+     * `["color", "size"]`). If a value for `attributes` is specified, the list specified will
+     * replace the existing attributes list on this product. Any attributes not present after the
+     * update will be deleted from the SKUs for this product.
+     */
+    public Builder setAttributes(List<String> attributes) {
       this.attributes = attributes;
       return this;
     }
@@ -308,10 +336,30 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
+     * Add an element to `images` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * ProductUpdateParams#images} for the field documentation.
      */
-    public Builder setImages(List<String> images) {
-      this.images = images;
+    @SuppressWarnings("unchecked")
+    public Builder addImage(String element) {
+      if (this.images == null || this.images instanceof EmptyParam) {
+        this.images = new ArrayList<String>();
+      }
+      ((List<String>) this.images).add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `images` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * ProductUpdateParams#images} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder addAllImage(List<String> elements) {
+      if (this.images == null || this.images instanceof EmptyParam) {
+        this.images = new ArrayList<String>();
+      }
+      ((List<String>) this.images).addAll(elements);
       return this;
     }
 
@@ -319,6 +367,14 @@ public class ProductUpdateParams extends ApiRequestParams {
      * A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
      */
     public Builder setImages(EmptyParam images) {
+      this.images = images;
+      return this;
+    }
+
+    /**
+     * A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
+     */
+    public Builder setImages(List<String> images) {
       this.images = images;
       return this;
     }

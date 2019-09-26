@@ -410,7 +410,7 @@ public class SkuCreateParams extends ApiRequestParams {
        * An indicator of the inventory available. Possible values are `in_stock`, `limited`, and
        * `out_of_stock`. Will be present if and only if `type` is `bucket`.
        */
-      public Builder setValue(EmptyParam value) {
+      public Builder setValue(Value value) {
         this.value = value;
         return this;
       }
@@ -419,7 +419,7 @@ public class SkuCreateParams extends ApiRequestParams {
        * An indicator of the inventory available. Possible values are `in_stock`, `limited`, and
        * `out_of_stock`. Will be present if and only if `type` is `bucket`.
        */
-      public Builder setValue(Value value) {
+      public Builder setValue(EmptyParam value) {
         this.value = value;
         return this;
       }
