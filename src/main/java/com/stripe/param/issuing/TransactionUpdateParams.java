@@ -2,6 +2,7 @@ package com.stripe.param.issuing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -22,10 +23,10 @@ public class TransactionUpdateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   @SerializedName("metadata")
-  Map<String, String> metadata;
+  Object metadata;
 
   private TransactionUpdateParams(
-      List<String> expand, Map<String, Object> extraParams, Map<String, String> metadata) {
+      List<String> expand, Map<String, Object> extraParams, Object metadata) {
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
@@ -40,7 +41,7 @@ public class TransactionUpdateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private Map<String, String> metadata;
+    private Object metadata;
 
     /** Finalize and obtain parameter instance from this builder. */
     public TransactionUpdateParams build() {
@@ -104,11 +105,12 @@ public class TransactionUpdateParams extends ApiRequestParams {
      * and subsequent calls add additional key/value pairs to the original map. See {@link
      * TransactionUpdateParams#metadata} for the field documentation.
      */
+    @SuppressWarnings("unchecked")
     public Builder putMetadata(String key, String value) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
+      if (this.metadata == null || this.metadata instanceof EmptyParam) {
+        this.metadata = new HashMap<String, String>();
       }
-      this.metadata.put(key, value);
+      ((Map<String, String>) this.metadata).put(key, value);
       return this;
     }
 
@@ -117,11 +119,22 @@ public class TransactionUpdateParams extends ApiRequestParams {
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
      * See {@link TransactionUpdateParams#metadata} for the field documentation.
      */
+    @SuppressWarnings("unchecked")
     public Builder putAllMetadata(Map<String, String> map) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
+      if (this.metadata == null || this.metadata instanceof EmptyParam) {
+        this.metadata = new HashMap<String, String>();
       }
-      this.metadata.putAll(map);
+      ((Map<String, String>) this.metadata).putAll(map);
+      return this;
+    }
+
+    public Builder setMetadata(EmptyParam metadata) {
+      this.metadata = metadata;
+      return this;
+    }
+
+    public Builder setMetadata(Map<String, String> metadata) {
+      this.metadata = metadata;
       return this;
     }
   }
