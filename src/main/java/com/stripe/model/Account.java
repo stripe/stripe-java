@@ -337,12 +337,12 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * With <a href="/docs/connect">Connect</a>, you may delete Custom accounts you manage.
+   * With <a href="/docs/connect">Connect</a>, you can delete Custom or Express accounts you manage.
    *
-   * <p>Custom accounts created using test-mode keys can be deleted at any time. Custom accounts
-   * created using live-mode keys may only be deleted once all balances are zero.
+   * <p>Accounts created using test-mode keys can be deleted at any time. Accounts created using
+   * live-mode keys can only be deleted once all balances are zero.
    *
-   * <p>If you are looking to close your own account, use the <a
+   * <p>If you want to delete your own account, use the <a
    * href="https://dashboard.stripe.com/account/data">data tab in your account settings</a> instead.
    */
   public Account delete() throws StripeException {
@@ -350,12 +350,12 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * With <a href="/docs/connect">Connect</a>, you may delete Custom accounts you manage.
+   * With <a href="/docs/connect">Connect</a>, you can delete Custom or Express accounts you manage.
    *
-   * <p>Custom accounts created using test-mode keys can be deleted at any time. Custom accounts
-   * created using live-mode keys may only be deleted once all balances are zero.
+   * <p>Accounts created using test-mode keys can be deleted at any time. Accounts created using
+   * live-mode keys can only be deleted once all balances are zero.
    *
-   * <p>If you are looking to close your own account, use the <a
+   * <p>If you want to delete your own account, use the <a
    * href="https://dashboard.stripe.com/account/data">data tab in your account settings</a> instead.
    */
   public Account delete(RequestOptions options) throws StripeException {
@@ -363,12 +363,12 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * With <a href="/docs/connect">Connect</a>, you may delete Custom accounts you manage.
+   * With <a href="/docs/connect">Connect</a>, you can delete Custom or Express accounts you manage.
    *
-   * <p>Custom accounts created using test-mode keys can be deleted at any time. Custom accounts
-   * created using live-mode keys may only be deleted once all balances are zero.
+   * <p>Accounts created using test-mode keys can be deleted at any time. Accounts created using
+   * live-mode keys can only be deleted once all balances are zero.
    *
-   * <p>If you are looking to close your own account, use the <a
+   * <p>If you want to delete your own account, use the <a
    * href="https://dashboard.stripe.com/account/data">data tab in your account settings</a> instead.
    */
   public Account delete(Map<String, Object> params) throws StripeException {
@@ -376,12 +376,12 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * With <a href="/docs/connect">Connect</a>, you may delete Custom accounts you manage.
+   * With <a href="/docs/connect">Connect</a>, you can delete Custom or Express accounts you manage.
    *
-   * <p>Custom accounts created using test-mode keys can be deleted at any time. Custom accounts
-   * created using live-mode keys may only be deleted once all balances are zero.
+   * <p>Accounts created using test-mode keys can be deleted at any time. Accounts created using
+   * live-mode keys can only be deleted once all balances are zero.
    *
-   * <p>If you are looking to close your own account, use the <a
+   * <p>If you want to delete your own account, use the <a
    * href="https://dashboard.stripe.com/account/data">data tab in your account settings</a> instead.
    */
   public Account delete(Map<String, Object> params, RequestOptions options) throws StripeException {
@@ -857,9 +857,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     List<String> pastDue;
 
     /**
-     * Additional fields that may be required depending on the results of verification or review for
-     * provided requirements. If any of these fields become required, they appear in `currently_due`
-     * or `past_due`.
+     * Fields that may become required depending on the results of verification or review. An empty
+     * array unless an asynchronous verification is pending. If verification fails, the fields in
+     * this array become required and move to `currently_due` or `past_due`.
      */
     @SerializedName("pending_verification")
     List<String> pendingVerification;

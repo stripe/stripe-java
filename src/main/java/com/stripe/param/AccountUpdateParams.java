@@ -1399,7 +1399,8 @@ public class AccountUpdateParams extends ApiRequestParams {
       public static class Document {
         /**
          * The back of a document returned by a [file upload](#create_file) with a `purpose` value
-         * of `additional_verification`.
+         * of `additional_verification`. The uploaded file needs to be a color image (smaller than
+         * 8,000px by 8,000px), in JPG or PNG format, and less than 10 MB in size.
          */
         @SerializedName("back")
         String back;
@@ -1416,7 +1417,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         /**
          * The front of a document returned by a [file upload](#create_file) with a `purpose` value
-         * of `additional_verification`.
+         * of `additional_verification`. The uploaded file needs to be a color image (smaller than
+         * 8,000px by 8,000px), in JPG or PNG format, and less than 10 MB in size.
          */
         @SerializedName("front")
         String front;
@@ -1445,7 +1447,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
           /**
            * The back of a document returned by a [file upload](#create_file) with a `purpose` value
-           * of `additional_verification`.
+           * of `additional_verification`. The uploaded file needs to be a color image (smaller than
+           * 8,000px by 8,000px), in JPG or PNG format, and less than 10 MB in size.
            */
           public Builder setBack(String back) {
             this.back = back;
@@ -1482,7 +1485,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
           /**
            * The front of a document returned by a [file upload](#create_file) with a `purpose`
-           * value of `additional_verification`.
+           * value of `additional_verification`. The uploaded file needs to be a color image
+           * (smaller than 8,000px by 8,000px), in JPG or PNG format, and less than 10 MB in size.
            */
           public Builder setFront(String front) {
             this.front = front;
@@ -2537,7 +2541,8 @@ public class AccountUpdateParams extends ApiRequestParams {
       public static class AdditionalDocument {
         /**
          * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
-         * `identity_document`.
+         * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px by
+         * 8,000px), in JPG or PNG format, and less than 10 MB in size.
          */
         @SerializedName("back")
         String back;
@@ -2554,7 +2559,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         /**
          * The front of an ID returned by a [file upload](#create_file) with a `purpose` value of
-         * `identity_document`.
+         * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px by
+         * 8,000px), in JPG or PNG format, and less than 10 MB in size.
          */
         @SerializedName("front")
         String front;
@@ -2583,7 +2589,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
           /**
            * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
-           * `identity_document`.
+           * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px
+           * by 8,000px), in JPG or PNG format, and less than 10 MB in size.
            */
           public Builder setBack(String back) {
             this.back = back;
@@ -2622,7 +2629,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
           /**
            * The front of an ID returned by a [file upload](#create_file) with a `purpose` value of
-           * `identity_document`.
+           * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px
+           * by 8,000px), in JPG or PNG format, and less than 10 MB in size.
            */
           public Builder setFront(String front) {
             this.front = front;
@@ -2634,7 +2642,8 @@ public class AccountUpdateParams extends ApiRequestParams {
       public static class Document {
         /**
          * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
-         * `identity_document`.
+         * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px by
+         * 8,000px), in JPG or PNG format, and less than 10 MB in size.
          */
         @SerializedName("back")
         String back;
@@ -2651,7 +2660,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         /**
          * The front of an ID returned by a [file upload](#create_file) with a `purpose` value of
-         * `identity_document`.
+         * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px by
+         * 8,000px), in JPG or PNG format, and less than 10 MB in size.
          */
         @SerializedName("front")
         String front;
@@ -2680,7 +2690,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
           /**
            * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
-           * `identity_document`.
+           * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px
+           * by 8,000px), in JPG or PNG format, and less than 10 MB in size.
            */
           public Builder setBack(String back) {
             this.back = back;
@@ -2717,7 +2728,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
           /**
            * The front of an ID returned by a [file upload](#create_file) with a `purpose` value of
-           * `identity_document`.
+           * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px
+           * by 8,000px), in JPG or PNG format, and less than 10 MB in size.
            */
           public Builder setFront(String front) {
             this.front = front;

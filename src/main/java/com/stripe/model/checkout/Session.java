@@ -47,8 +47,9 @@ public class Session extends ApiResource implements HasId {
   String clientReferenceId;
 
   /**
-   * The ID of the customer for this session. A new customer will be created unless an existing
-   * customer was provided in when the session was created.
+   * The ID of the customer for this session. For Checkout Sessions in `payment` or `subscription`
+   * mode, Checkout will create a new customer object based on information provided during the
+   * session unless an existing customer was provided when the session was created.
    */
   @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
@@ -95,7 +96,7 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
-  /** The ID of the PaymentIntent for `payment` mode. */
+  /** The ID of the PaymentIntent for Checkout Sessions in `payment` mode. */
   @SerializedName("payment_intent")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
@@ -107,7 +108,7 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("payment_method_types")
   List<String> paymentMethodTypes;
 
-  /** The ID of the SetupIntent if mode was set to `setup`. */
+  /** The ID of the SetupIntent for Checkout Sessions in `setup` mode. */
   @SerializedName("setup_intent")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
@@ -116,13 +117,13 @@ public class Session extends ApiResource implements HasId {
   /**
    * Describes the type of transaction being performed by Checkout in order to customize relevant
    * text on the page, such as the submit button. `submit_type` can only be specified on Checkout
-   * Sessions using line items or a SKU, but not Checkout Sessions for subscriptions. Supported
-   * values are `auto`, `book`, `donate`, or `pay`.
+   * Sessions in `payment` mode, but not Checkout Sessions in `subscription` or `setup` mode.
+   * Supported values are `auto`, `book`, `donate`, or `pay`.
    */
   @SerializedName("submit_type")
   String submitType;
 
-  /** The ID of the subscription created if one or more plans were provided. */
+  /** The ID of the subscription for Checkout Sessions in `subscription` mode. */
   @SerializedName("subscription")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)

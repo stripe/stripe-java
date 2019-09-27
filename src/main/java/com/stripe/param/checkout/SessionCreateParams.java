@@ -12,7 +12,7 @@ import lombok.Getter;
 public class SessionCreateParams extends ApiRequestParams {
   /**
    * Specify whether Checkout should collect the customer's billing address. If set to `required`,
-   * Checkout will always collect the customer's billing address. If left blank or set to `auto`
+   * Checkout will always collect the customer's billing address. If not set or set to `auto`
    * Checkout will only collect the billing address when necessary.
    */
   @SerializedName("billing_address_collection")
@@ -33,10 +33,12 @@ public class SessionCreateParams extends ApiRequestParams {
   String clientReferenceId;
 
   /**
-   * ID of an existing customer, if one exists. If blank, Checkout will create a new customer object
-   * based on information provided during the session. The email stored on the customer will be used
-   * to prefill the email field on the Checkout page. If the customer changes their email on the
-   * Checkout page, the Customer object will be updated with the new email.
+   * ID of an existing customer, if one exists. Only supported for Checkout Sessions in `payment` or
+   * `subscription` mode, but not Checkout Sessions in `setup` mode. The email stored on the
+   * customer will be used to prefill the email field on the Checkout page. If the customer changes
+   * their email on the Checkout page, the Customer object will be updated with the new email. If
+   * blank for Checkout Sessions in `payment` or `subscription` mode, Checkout will create a new
+   * customer object based on information provided during the session.
    */
   @SerializedName("customer")
   String customer;
@@ -82,7 +84,10 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("mode")
   Mode mode;
 
-  /** A subset of parameters to be passed to PaymentIntent creation. */
+  /**
+   * A subset of parameters to be passed to PaymentIntent creation for Checkout Sessions in
+   * `payment` mode.
+   */
   @SerializedName("payment_intent_data")
   PaymentIntentData paymentIntentData;
 
@@ -93,20 +98,26 @@ public class SessionCreateParams extends ApiRequestParams {
   @SerializedName("payment_method_types")
   List<PaymentMethodType> paymentMethodTypes;
 
-  /** A subset of parameters to be passed to SetupIntent creation. */
+  /**
+   * A subset of parameters to be passed to SetupIntent creation for Checkout Sessions in `setup`
+   * mode.
+   */
   @SerializedName("setup_intent_data")
   SetupIntentData setupIntentData;
 
   /**
    * Describes the type of transaction being performed by Checkout in order to customize relevant
    * text on the page, such as the submit button. `submit_type` can only be specified on Checkout
-   * Sessions using line items or a SKU, but not Checkout Sessions for subscriptions. Supported
-   * values are `auto`, `book`, `donate`, or `pay`.
+   * Sessions in `payment` mode, but not Checkout Sessions in `subscription` or `setup` mode.
+   * Supported values are `auto`, `book`, `donate`, or `pay`.
    */
   @SerializedName("submit_type")
   SubmitType submitType;
 
-  /** A subset of parameters to be passed to subscription creation. */
+  /**
+   * A subset of parameters to be passed to subscription creation for Checkout Sessions in
+   * `subscription` mode.
+   */
   @SerializedName("subscription_data")
   SubscriptionData subscriptionData;
 
@@ -213,7 +224,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * Specify whether Checkout should collect the customer's billing address. If set to `required`,
-     * Checkout will always collect the customer's billing address. If left blank or set to `auto`
+     * Checkout will always collect the customer's billing address. If not set or set to `auto`
      * Checkout will only collect the billing address when necessary.
      */
     public Builder setBillingAddressCollection(BillingAddressCollection billingAddressCollection) {
@@ -240,10 +251,12 @@ public class SessionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * ID of an existing customer, if one exists. If blank, Checkout will create a new customer
-     * object based on information provided during the session. The email stored on the customer
-     * will be used to prefill the email field on the Checkout page. If the customer changes their
-     * email on the Checkout page, the Customer object will be updated with the new email.
+     * ID of an existing customer, if one exists. Only supported for Checkout Sessions in `payment`
+     * or `subscription` mode, but not Checkout Sessions in `setup` mode. The email stored on the
+     * customer will be used to prefill the email field on the Checkout page. If the customer
+     * changes their email on the Checkout page, the Customer object will be updated with the new
+     * email. If blank for Checkout Sessions in `payment` or `subscription` mode, Checkout will
+     * create a new customer object based on information provided during the session.
      */
     public Builder setCustomer(String customer) {
       this.customer = customer;
@@ -355,7 +368,10 @@ public class SessionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** A subset of parameters to be passed to PaymentIntent creation. */
+    /**
+     * A subset of parameters to be passed to PaymentIntent creation for Checkout Sessions in
+     * `payment` mode.
+     */
     public Builder setPaymentIntentData(PaymentIntentData paymentIntentData) {
       this.paymentIntentData = paymentIntentData;
       return this;
@@ -387,7 +403,10 @@ public class SessionCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** A subset of parameters to be passed to SetupIntent creation. */
+    /**
+     * A subset of parameters to be passed to SetupIntent creation for Checkout Sessions in `setup`
+     * mode.
+     */
     public Builder setSetupIntentData(SetupIntentData setupIntentData) {
       this.setupIntentData = setupIntentData;
       return this;
@@ -396,15 +415,18 @@ public class SessionCreateParams extends ApiRequestParams {
     /**
      * Describes the type of transaction being performed by Checkout in order to customize relevant
      * text on the page, such as the submit button. `submit_type` can only be specified on Checkout
-     * Sessions using line items or a SKU, but not Checkout Sessions for subscriptions. Supported
-     * values are `auto`, `book`, `donate`, or `pay`.
+     * Sessions in `payment` mode, but not Checkout Sessions in `subscription` or `setup` mode.
+     * Supported values are `auto`, `book`, `donate`, or `pay`.
      */
     public Builder setSubmitType(SubmitType submitType) {
       this.submitType = submitType;
       return this;
     }
 
-    /** A subset of parameters to be passed to subscription creation. */
+    /**
+     * A subset of parameters to be passed to subscription creation for Checkout Sessions in
+     * `subscription` mode.
+     */
     public Builder setSubscriptionData(SubscriptionData subscriptionData) {
       this.subscriptionData = subscriptionData;
       return this;
