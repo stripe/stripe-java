@@ -1,5 +1,23 @@
 # Changelog
 
+## 12.1.0 - 2019-09-27
+* [#850](https://github.com/stripe/stripe-java/pull/850) Codegen for openapi 4d4a107
+  * Add support for `mandate` on `Charge`.
+  * Add support for `reference` on `SourceTransaction`.
+  * Add support for `person` on `TokenCreateParams`.
+  * Add support for new event types `payment_intent.canceled` and `setup_intent.canceled`
+  * Add support for `metadata` on `AuthorizationApproveParams` and `AuthorizationDeclineParams`
+  * Add `setMetadata` method on `AuthorizationUpdateParams`
+  * Rename `chidrens_and_infants_wear_stores` to `childrens_and_infants_wear_stores`. This is technically a breaking change, but we've chosen to release this as a minor version as the previous name was virtually unused.
+* [#849](https://github.com/stripe/stripe-java/pull/849) Add add/addAll support for "emptyable" params
+  * Add `addAttribute` and `addAllAttribute` methods to `ProductUpdateParams`
+  * Add `addCustomField` and `addAllCustomField` methods to `CustomerCreateParams`, `CustomerUpdateParams`, `InvoiceCreateParams` and `InvoiceUpdateParams`
+  * Add `addDefaultTaxRate` and `addAllDefaultTaxRate` methods to `InvoiceUpdateParams`, `SubscriptionCreateParams`, `SubscriptionScheduleCreateParams`, `SubscriptionScheduleUpdateParams` and `SubscriptionUpdateParams`
+  * Add `addImage` and `addAllImage` methods to `ProductUpdateParams`
+  * Add `addItem` and `addAllItem` methods to `OrderReturnOrderParams`
+  * Add `addSubscriptionDefaultTaxRate` and `addAllSubscriptionDefaultTaxRate` methods to `InvoiceUpcomingParams`
+  * Add `addTaxRate` and `addAllTaxRate` methods to `InvoiceItemUpdateParams`, `InvoiceUpcomingParams`, `SubscriptionCreateParams`, `SubscriptionItemCreateParams`, `SubscriptionItemUpdateParams`, `SubscriptionScheduleCreateParams`, `SubscriptionScheduleUpdateParams` and `SubscriptionUpdateParams`
+
 ## 12.0.0 - 2019-09-10
 * [#844](https://github.com/stripe/stripe-java/pull/844) Update to API version 2019-09-09
 
