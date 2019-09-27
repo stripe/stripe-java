@@ -483,7 +483,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
      * <p>If `setup_future_usage` is already set and you are performing a request using a
      * publishable key, you may only update the value from `on_session` to `off_session`.
      */
-    public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
+    public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
       this.setupFutureUsage = setupFutureUsage;
       return this;
     }
@@ -510,7 +510,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
      * <p>If `setup_future_usage` is already set and you are performing a request using a
      * publishable key, you may only update the value from `on_session` to `off_session`.
      */
-    public Builder setSetupFutureUsage(SetupFutureUsage setupFutureUsage) {
+    public Builder setSetupFutureUsage(EmptyParam setupFutureUsage) {
       this.setupFutureUsage = setupFutureUsage;
       return this;
     }

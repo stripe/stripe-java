@@ -329,12 +329,12 @@ public class ChargeUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      public Builder setUserReport(EmptyParam userReport) {
+      public Builder setUserReport(UserReport userReport) {
         this.userReport = userReport;
         return this;
       }
 
-      public Builder setUserReport(UserReport userReport) {
+      public Builder setUserReport(EmptyParam userReport) {
         this.userReport = userReport;
         return this;
       }

@@ -427,12 +427,32 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
 
     /**
-     * If provided, the invoice returned will preview updating or creating a subscription with these
-     * default tax rates. The default tax rates will apply to any line item that does not have
-     * `tax_rates` set.
+     * Add an element to `subscriptionDefaultTaxRates` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link InvoiceUpcomingParams#subscriptionDefaultTaxRates} for the field documentation.
      */
-    public Builder setSubscriptionDefaultTaxRates(List<String> subscriptionDefaultTaxRates) {
-      this.subscriptionDefaultTaxRates = subscriptionDefaultTaxRates;
+    @SuppressWarnings("unchecked")
+    public Builder addSubscriptionDefaultTaxRate(String element) {
+      if (this.subscriptionDefaultTaxRates == null
+          || this.subscriptionDefaultTaxRates instanceof EmptyParam) {
+        this.subscriptionDefaultTaxRates = new ArrayList<String>();
+      }
+      ((List<String>) this.subscriptionDefaultTaxRates).add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `subscriptionDefaultTaxRates` list. A list is initialized for the first
+     * `add/addAll` call, and subsequent calls adds additional elements to the original list. See
+     * {@link InvoiceUpcomingParams#subscriptionDefaultTaxRates} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder addAllSubscriptionDefaultTaxRate(List<String> elements) {
+      if (this.subscriptionDefaultTaxRates == null
+          || this.subscriptionDefaultTaxRates instanceof EmptyParam) {
+        this.subscriptionDefaultTaxRates = new ArrayList<String>();
+      }
+      ((List<String>) this.subscriptionDefaultTaxRates).addAll(elements);
       return this;
     }
 
@@ -442,6 +462,16 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
      * `tax_rates` set.
      */
     public Builder setSubscriptionDefaultTaxRates(EmptyParam subscriptionDefaultTaxRates) {
+      this.subscriptionDefaultTaxRates = subscriptionDefaultTaxRates;
+      return this;
+    }
+
+    /**
+     * If provided, the invoice returned will preview updating or creating a subscription with these
+     * default tax rates. The default tax rates will apply to any line item that does not have
+     * `tax_rates` set.
+     */
+    public Builder setSubscriptionDefaultTaxRates(List<String> subscriptionDefaultTaxRates) {
       this.subscriptionDefaultTaxRates = subscriptionDefaultTaxRates;
       return this;
     }
@@ -797,12 +827,40 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
         return this;
       }
 
-      public Builder setTaxRates(List<String> taxRates) {
-        this.taxRates = taxRates;
+      /**
+       * Add an element to `taxRates` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * InvoiceUpcomingParams.InvoiceItem#taxRates} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder addTaxRate(String element) {
+        if (this.taxRates == null || this.taxRates instanceof EmptyParam) {
+          this.taxRates = new ArrayList<String>();
+        }
+        ((List<String>) this.taxRates).add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `taxRates` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * InvoiceUpcomingParams.InvoiceItem#taxRates} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder addAllTaxRate(List<String> elements) {
+        if (this.taxRates == null || this.taxRates instanceof EmptyParam) {
+          this.taxRates = new ArrayList<String>();
+        }
+        ((List<String>) this.taxRates).addAll(elements);
         return this;
       }
 
       public Builder setTaxRates(EmptyParam taxRates) {
+        this.taxRates = taxRates;
+        return this;
+      }
+
+      public Builder setTaxRates(List<String> taxRates) {
         this.taxRates = taxRates;
         return this;
       }
@@ -1126,11 +1184,30 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
 
       /**
-       * The tax rates which apply to this `subscription_item`. When set, the `default_tax_rates` on
-       * the subscription do not apply to this `subscription_item`.
+       * Add an element to `taxRates` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * InvoiceUpcomingParams.SubscriptionItem#taxRates} for the field documentation.
        */
-      public Builder setTaxRates(List<String> taxRates) {
-        this.taxRates = taxRates;
+      @SuppressWarnings("unchecked")
+      public Builder addTaxRate(String element) {
+        if (this.taxRates == null || this.taxRates instanceof EmptyParam) {
+          this.taxRates = new ArrayList<String>();
+        }
+        ((List<String>) this.taxRates).add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `taxRates` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * InvoiceUpcomingParams.SubscriptionItem#taxRates} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder addAllTaxRate(List<String> elements) {
+        if (this.taxRates == null || this.taxRates instanceof EmptyParam) {
+          this.taxRates = new ArrayList<String>();
+        }
+        ((List<String>) this.taxRates).addAll(elements);
         return this;
       }
 
@@ -1139,6 +1216,15 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
        * the subscription do not apply to this `subscription_item`.
        */
       public Builder setTaxRates(EmptyParam taxRates) {
+        this.taxRates = taxRates;
+        return this;
+      }
+
+      /**
+       * The tax rates which apply to this `subscription_item`. When set, the `default_tax_rates` on
+       * the subscription do not apply to this `subscription_item`.
+       */
+      public Builder setTaxRates(List<String> taxRates) {
         this.taxRates = taxRates;
         return this;
       }

@@ -3396,7 +3396,7 @@ public class CardCreateParams extends ApiRequestParams {
        * One of `bulk` or `individual`. Bulk shipments will be grouped and mailed together, while
        * individual ones will not.
        */
-      public Builder setType(EmptyParam type) {
+      public Builder setType(Type type) {
         this.type = type;
         return this;
       }
@@ -3405,7 +3405,7 @@ public class CardCreateParams extends ApiRequestParams {
        * One of `bulk` or `individual`. Bulk shipments will be grouped and mailed together, while
        * individual ones will not.
        */
-      public Builder setType(Type type) {
+      public Builder setType(EmptyParam type) {
         this.type = type;
         return this;
       }

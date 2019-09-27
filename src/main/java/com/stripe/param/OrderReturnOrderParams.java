@@ -102,14 +102,42 @@ public class OrderReturnOrderParams extends ApiRequestParams {
       return this;
     }
 
-    /** List of items to return. */
-    public Builder setItems(List<Item> items) {
-      this.items = items;
+    /**
+     * Add an element to `items` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * OrderReturnOrderParams#items} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder addItem(Item element) {
+      if (this.items == null || this.items instanceof EmptyParam) {
+        this.items = new ArrayList<OrderReturnOrderParams.Item>();
+      }
+      ((List<OrderReturnOrderParams.Item>) this.items).add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `items` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * OrderReturnOrderParams#items} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder addAllItem(List<Item> elements) {
+      if (this.items == null || this.items instanceof EmptyParam) {
+        this.items = new ArrayList<OrderReturnOrderParams.Item>();
+      }
+      ((List<OrderReturnOrderParams.Item>) this.items).addAll(elements);
       return this;
     }
 
     /** List of items to return. */
     public Builder setItems(EmptyParam items) {
+      this.items = items;
+      return this;
+    }
+
+    /** List of items to return. */
+    public Builder setItems(List<Item> items) {
       this.items = items;
       return this;
     }

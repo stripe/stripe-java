@@ -268,11 +268,30 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The tax rates which apply to this `subscription_item`. When set, the `default_tax_rates` on
-     * the subscription do not apply to this `subscription_item`.
+     * Add an element to `taxRates` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SubscriptionItemCreateParams#taxRates} for the field documentation.
      */
-    public Builder setTaxRates(List<String> taxRates) {
-      this.taxRates = taxRates;
+    @SuppressWarnings("unchecked")
+    public Builder addTaxRate(String element) {
+      if (this.taxRates == null || this.taxRates instanceof EmptyParam) {
+        this.taxRates = new ArrayList<String>();
+      }
+      ((List<String>) this.taxRates).add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `taxRates` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * SubscriptionItemCreateParams#taxRates} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder addAllTaxRate(List<String> elements) {
+      if (this.taxRates == null || this.taxRates instanceof EmptyParam) {
+        this.taxRates = new ArrayList<String>();
+      }
+      ((List<String>) this.taxRates).addAll(elements);
       return this;
     }
 
@@ -281,6 +300,15 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
      * the subscription do not apply to this `subscription_item`.
      */
     public Builder setTaxRates(EmptyParam taxRates) {
+      this.taxRates = taxRates;
+      return this;
+    }
+
+    /**
+     * The tax rates which apply to this `subscription_item`. When set, the `default_tax_rates` on
+     * the subscription do not apply to this `subscription_item`.
+     */
+    public Builder setTaxRates(List<String> taxRates) {
       this.taxRates = taxRates;
       return this;
     }

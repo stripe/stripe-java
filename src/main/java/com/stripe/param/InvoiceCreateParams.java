@@ -296,14 +296,42 @@ public class InvoiceCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** A list of up to 4 custom fields to be displayed on the invoice. */
-    public Builder setCustomFields(List<CustomField> customFields) {
-      this.customFields = customFields;
+    /**
+     * Add an element to `customFields` list. A list is initialized for the first `add/addAll` call,
+     * and subsequent calls adds additional elements to the original list. See {@link
+     * InvoiceCreateParams#customFields} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder addCustomField(CustomField element) {
+      if (this.customFields == null || this.customFields instanceof EmptyParam) {
+        this.customFields = new ArrayList<InvoiceCreateParams.CustomField>();
+      }
+      ((List<InvoiceCreateParams.CustomField>) this.customFields).add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `customFields` list. A list is initialized for the first `add/addAll`
+     * call, and subsequent calls adds additional elements to the original list. See {@link
+     * InvoiceCreateParams#customFields} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder addAllCustomField(List<CustomField> elements) {
+      if (this.customFields == null || this.customFields instanceof EmptyParam) {
+        this.customFields = new ArrayList<InvoiceCreateParams.CustomField>();
+      }
+      ((List<InvoiceCreateParams.CustomField>) this.customFields).addAll(elements);
       return this;
     }
 
     /** A list of up to 4 custom fields to be displayed on the invoice. */
     public Builder setCustomFields(EmptyParam customFields) {
+      this.customFields = customFields;
+      return this;
+    }
+
+    /** A list of up to 4 custom fields to be displayed on the invoice. */
+    public Builder setCustomFields(List<CustomField> customFields) {
       this.customFields = customFields;
       return this;
     }
