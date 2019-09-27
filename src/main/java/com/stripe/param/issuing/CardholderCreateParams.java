@@ -743,11 +743,11 @@ public class CardholderCreateParams extends ApiRequestParams {
         @SerializedName("chemicals_and_allied_products")
         CHEMICALS_AND_ALLIED_PRODUCTS("chemicals_and_allied_products"),
 
-        @SerializedName("chidrens_and_infants_wear_stores")
-        CHIDRENS_AND_INFANTS_WEAR_STORES("chidrens_and_infants_wear_stores"),
-
         @SerializedName("child_care_services")
         CHILD_CARE_SERVICES("child_care_services"),
+
+        @SerializedName("childrens_and_infants_wear_stores")
+        CHILDRENS_AND_INFANTS_WEAR_STORES("childrens_and_infants_wear_stores"),
 
         @SerializedName("chiropodists_podiatrists")
         CHIROPODISTS_PODIATRISTS("chiropodists_podiatrists"),
@@ -1655,11 +1655,11 @@ public class CardholderCreateParams extends ApiRequestParams {
       @SerializedName("chemicals_and_allied_products")
       CHEMICALS_AND_ALLIED_PRODUCTS("chemicals_and_allied_products"),
 
-      @SerializedName("chidrens_and_infants_wear_stores")
-      CHIDRENS_AND_INFANTS_WEAR_STORES("chidrens_and_infants_wear_stores"),
-
       @SerializedName("child_care_services")
       CHILD_CARE_SERVICES("child_care_services"),
+
+      @SerializedName("childrens_and_infants_wear_stores")
+      CHILDRENS_AND_INFANTS_WEAR_STORES("childrens_and_infants_wear_stores"),
 
       @SerializedName("chiropodists_podiatrists")
       CHIROPODISTS_PODIATRISTS("chiropodists_podiatrists"),
@@ -2539,11 +2539,11 @@ public class CardholderCreateParams extends ApiRequestParams {
       @SerializedName("chemicals_and_allied_products")
       CHEMICALS_AND_ALLIED_PRODUCTS("chemicals_and_allied_products"),
 
-      @SerializedName("chidrens_and_infants_wear_stores")
-      CHIDRENS_AND_INFANTS_WEAR_STORES("chidrens_and_infants_wear_stores"),
-
       @SerializedName("child_care_services")
       CHILD_CARE_SERVICES("child_care_services"),
+
+      @SerializedName("childrens_and_infants_wear_stores")
+      CHILDRENS_AND_INFANTS_WEAR_STORES("childrens_and_infants_wear_stores"),
 
       @SerializedName("chiropodists_podiatrists")
       CHIROPODISTS_PODIATRISTS("chiropodists_podiatrists"),

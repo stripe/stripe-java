@@ -129,6 +129,10 @@ public class SourceTransaction extends StripeObject implements HasId {
     @SerializedName("last4")
     String last4;
 
+    /** Sender entered arbitrary information about the transfer. */
+    @SerializedName("reference")
+    String reference;
+
     /** Sender name associated with the transfer. */
     @SerializedName("sender_name")
     String senderName;

@@ -2,6 +2,7 @@ package com.stripe.param.issuing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -30,11 +31,19 @@ public class AuthorizationApproveParams extends ApiRequestParams {
   @SerializedName("held_amount")
   Long heldAmount;
 
+  /**
+   * Set of key-value pairs that you can attach to an object. This can be useful for storing
+   * additional information about the object in a structured format.
+   */
+  @SerializedName("metadata")
+  Object metadata;
+
   private AuthorizationApproveParams(
-      List<String> expand, Map<String, Object> extraParams, Long heldAmount) {
+      List<String> expand, Map<String, Object> extraParams, Long heldAmount, Object metadata) {
     this.expand = expand;
     this.extraParams = extraParams;
     this.heldAmount = heldAmount;
+    this.metadata = metadata;
   }
 
   public static Builder builder() {
@@ -48,9 +57,12 @@ public class AuthorizationApproveParams extends ApiRequestParams {
 
     private Long heldAmount;
 
+    private Object metadata;
+
     /** Finalize and obtain parameter instance from this builder. */
     public AuthorizationApproveParams build() {
-      return new AuthorizationApproveParams(this.expand, this.extraParams, this.heldAmount);
+      return new AuthorizationApproveParams(
+          this.expand, this.extraParams, this.heldAmount, this.metadata);
     }
 
     /**
@@ -113,6 +125,52 @@ public class AuthorizationApproveParams extends ApiRequestParams {
      */
     public Builder setHeldAmount(Long heldAmount) {
       this.heldAmount = heldAmount;
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
+     * AuthorizationApproveParams#metadata} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder putMetadata(String key, String value) {
+      if (this.metadata == null || this.metadata instanceof EmptyParam) {
+        this.metadata = new HashMap<String, String>();
+      }
+      ((Map<String, String>) this.metadata).put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link AuthorizationApproveParams#metadata} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null || this.metadata instanceof EmptyParam) {
+        this.metadata = new HashMap<String, String>();
+      }
+      ((Map<String, String>) this.metadata).putAll(map);
+      return this;
+    }
+
+    /**
+     * Set of key-value pairs that you can attach to an object. This can be useful for storing
+     * additional information about the object in a structured format.
+     */
+    public Builder setMetadata(EmptyParam metadata) {
+      this.metadata = metadata;
+      return this;
+    }
+
+    /**
+     * Set of key-value pairs that you can attach to an object. This can be useful for storing
+     * additional information about the object in a structured format.
+     */
+    public Builder setMetadata(Map<String, String> metadata) {
+      this.metadata = metadata;
       return this;
     }
   }

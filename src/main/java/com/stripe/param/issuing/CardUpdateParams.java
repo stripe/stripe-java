@@ -2,6 +2,7 @@ package com.stripe.param.issuing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -38,7 +39,7 @@ public class CardUpdateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   @SerializedName("metadata")
-  Map<String, String> metadata;
+  Object metadata;
 
   /**
    * Specifies whether to permit authorizations on this card. Possible values are `active`,
@@ -52,7 +53,7 @@ public class CardUpdateParams extends ApiRequestParams {
       String cardholder,
       List<String> expand,
       Map<String, Object> extraParams,
-      Map<String, String> metadata,
+      Object metadata,
       Status status) {
     this.authorizationControls = authorizationControls;
     this.cardholder = cardholder;
@@ -75,7 +76,7 @@ public class CardUpdateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private Map<String, String> metadata;
+    private Object metadata;
 
     private Status status;
 
@@ -166,11 +167,12 @@ public class CardUpdateParams extends ApiRequestParams {
      * and subsequent calls add additional key/value pairs to the original map. See {@link
      * CardUpdateParams#metadata} for the field documentation.
      */
+    @SuppressWarnings("unchecked")
     public Builder putMetadata(String key, String value) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
+      if (this.metadata == null || this.metadata instanceof EmptyParam) {
+        this.metadata = new HashMap<String, String>();
       }
-      this.metadata.put(key, value);
+      ((Map<String, String>) this.metadata).put(key, value);
       return this;
     }
 
@@ -179,11 +181,22 @@ public class CardUpdateParams extends ApiRequestParams {
      * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
      * See {@link CardUpdateParams#metadata} for the field documentation.
      */
+    @SuppressWarnings("unchecked")
     public Builder putAllMetadata(Map<String, String> map) {
-      if (this.metadata == null) {
-        this.metadata = new HashMap<>();
+      if (this.metadata == null || this.metadata instanceof EmptyParam) {
+        this.metadata = new HashMap<String, String>();
       }
-      this.metadata.putAll(map);
+      ((Map<String, String>) this.metadata).putAll(map);
+      return this;
+    }
+
+    public Builder setMetadata(EmptyParam metadata) {
+      this.metadata = metadata;
+      return this;
+    }
+
+    public Builder setMetadata(Map<String, String> metadata) {
+      this.metadata = metadata;
       return this;
     }
 
@@ -696,11 +709,11 @@ public class CardUpdateParams extends ApiRequestParams {
         @SerializedName("chemicals_and_allied_products")
         CHEMICALS_AND_ALLIED_PRODUCTS("chemicals_and_allied_products"),
 
-        @SerializedName("chidrens_and_infants_wear_stores")
-        CHIDRENS_AND_INFANTS_WEAR_STORES("chidrens_and_infants_wear_stores"),
-
         @SerializedName("child_care_services")
         CHILD_CARE_SERVICES("child_care_services"),
+
+        @SerializedName("childrens_and_infants_wear_stores")
+        CHILDRENS_AND_INFANTS_WEAR_STORES("childrens_and_infants_wear_stores"),
 
         @SerializedName("chiropodists_podiatrists")
         CHIROPODISTS_PODIATRISTS("chiropodists_podiatrists"),
@@ -1608,11 +1621,11 @@ public class CardUpdateParams extends ApiRequestParams {
       @SerializedName("chemicals_and_allied_products")
       CHEMICALS_AND_ALLIED_PRODUCTS("chemicals_and_allied_products"),
 
-      @SerializedName("chidrens_and_infants_wear_stores")
-      CHIDRENS_AND_INFANTS_WEAR_STORES("chidrens_and_infants_wear_stores"),
-
       @SerializedName("child_care_services")
       CHILD_CARE_SERVICES("child_care_services"),
+
+      @SerializedName("childrens_and_infants_wear_stores")
+      CHILDRENS_AND_INFANTS_WEAR_STORES("childrens_and_infants_wear_stores"),
 
       @SerializedName("chiropodists_podiatrists")
       CHIROPODISTS_PODIATRISTS("chiropodists_podiatrists"),
@@ -2492,11 +2505,11 @@ public class CardUpdateParams extends ApiRequestParams {
       @SerializedName("chemicals_and_allied_products")
       CHEMICALS_AND_ALLIED_PRODUCTS("chemicals_and_allied_products"),
 
-      @SerializedName("chidrens_and_infants_wear_stores")
-      CHIDRENS_AND_INFANTS_WEAR_STORES("chidrens_and_infants_wear_stores"),
-
       @SerializedName("child_care_services")
       CHILD_CARE_SERVICES("child_care_services"),
+
+      @SerializedName("childrens_and_infants_wear_stores")
+      CHILDRENS_AND_INFANTS_WEAR_STORES("childrens_and_infants_wear_stores"),
 
       @SerializedName("chiropodists_podiatrists")
       CHIROPODISTS_PODIATRISTS("chiropodists_podiatrists"),

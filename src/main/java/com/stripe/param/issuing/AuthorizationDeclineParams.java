@@ -2,6 +2,7 @@ package com.stripe.param.issuing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -21,9 +22,18 @@ public class AuthorizationDeclineParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  private AuthorizationDeclineParams(List<String> expand, Map<String, Object> extraParams) {
+  /**
+   * Set of key-value pairs that you can attach to an object. This can be useful for storing
+   * additional information about the object in a structured format.
+   */
+  @SerializedName("metadata")
+  Object metadata;
+
+  private AuthorizationDeclineParams(
+      List<String> expand, Map<String, Object> extraParams, Object metadata) {
     this.expand = expand;
     this.extraParams = extraParams;
+    this.metadata = metadata;
   }
 
   public static Builder builder() {
@@ -35,9 +45,11 @@ public class AuthorizationDeclineParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private Object metadata;
+
     /** Finalize and obtain parameter instance from this builder. */
     public AuthorizationDeclineParams build() {
-      return new AuthorizationDeclineParams(this.expand, this.extraParams);
+      return new AuthorizationDeclineParams(this.expand, this.extraParams, this.metadata);
     }
 
     /**
@@ -89,6 +101,52 @@ public class AuthorizationDeclineParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
+     * AuthorizationDeclineParams#metadata} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder putMetadata(String key, String value) {
+      if (this.metadata == null || this.metadata instanceof EmptyParam) {
+        this.metadata = new HashMap<String, String>();
+      }
+      ((Map<String, String>) this.metadata).put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link AuthorizationDeclineParams#metadata} for the field documentation.
+     */
+    @SuppressWarnings("unchecked")
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null || this.metadata instanceof EmptyParam) {
+        this.metadata = new HashMap<String, String>();
+      }
+      ((Map<String, String>) this.metadata).putAll(map);
+      return this;
+    }
+
+    /**
+     * Set of key-value pairs that you can attach to an object. This can be useful for storing
+     * additional information about the object in a structured format.
+     */
+    public Builder setMetadata(EmptyParam metadata) {
+      this.metadata = metadata;
+      return this;
+    }
+
+    /**
+     * Set of key-value pairs that you can attach to an object. This can be useful for storing
+     * additional information about the object in a structured format.
+     */
+    public Builder setMetadata(Map<String, String> metadata) {
+      this.metadata = metadata;
       return this;
     }
   }

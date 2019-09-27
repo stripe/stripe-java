@@ -324,9 +324,9 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     List<String> pastDue;
 
     /**
-     * Additional fields that may be required depending on the results of verification or review for
-     * provided requirements. If any of these fields become required, they appear in `currently_due`
-     * or `past_due`.
+     * Fields that may become required depending on the results of verification or review. An empty
+     * array unless an asynchronous verification is pending. If verification fails, the fields in
+     * this array become required and move to `currently_due` or `past_due`.
      */
     @SerializedName("pending_verification")
     List<String> pendingVerification;
@@ -351,8 +351,9 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     String details;
 
     /**
-     * One of `scan_name_mismatch`, `failed_keyed_identity`, or `failed_other`. A machine-readable
-     * code specifying the verification state for the person.
+     * One of `document_address_mismatch`, `document_dob_mismatch`, `document_duplicate_type`,
+     * `document_id_number_mismatch`, `document_name_mismatch`, `failed_keyed_identity`, or
+     * `failed_other`. A machine-readable code specifying the verification state for the person.
      */
     @SerializedName("details_code")
     String detailsCode;
@@ -390,13 +391,13 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     String details;
 
     /**
-     * One of `document_corrupt`, `document_failed_copy`, `document_not_readable`,
-     * `document_failed_greyscale`, `document_not_uploaded`, `document_id_type_not_supported`,
-     * `document_id_country_not_supported`, `document_failed_other`, `document_fraudulent`,
+     * One of `document_corrupt`, `document_country_not_supported`, `document_expired`,
+     * `document_failed_copy`, `document_failed_other`, `document_failed_test_mode`,
+     * `document_fraudulent`, `document_failed_greyscale`, `document_incomplete`,
      * `document_invalid`, `document_manipulated`, `document_missing_back`,
-     * `document_missing_front`, `document_photo_mismatch`, `document_too_large`, or
-     * `document_failed_test_mode`. A machine-readable code specifying the verification state for
-     * this document.
+     * `document_missing_front`, `document_not_readable`, `document_not_uploaded`,
+     * `document_photo_mismatch`, `document_too_large`, or `document_type_not_supported`. A
+     * machine-readable code specifying the verification state for this document.
      */
     @SerializedName("details_code")
     String detailsCode;

@@ -411,6 +411,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("payment_intent.amount_capturable_updated")
     PAYMENT_INTENT__AMOUNT_CAPTURABLE_UPDATED("payment_intent.amount_capturable_updated"),
 
+    @SerializedName("payment_intent.canceled")
+    PAYMENT_INTENT__CANCELED("payment_intent.canceled"),
+
     @SerializedName("payment_intent.created")
     PAYMENT_INTENT__CREATED("payment_intent.created"),
 
@@ -503,6 +506,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
 
     @SerializedName("review.opened")
     REVIEW__OPENED("review.opened"),
+
+    @SerializedName("setup_intent.canceled")
+    SETUP_INTENT__CANCELED("setup_intent.canceled"),
 
     @SerializedName("setup_intent.created")
     SETUP_INTENT__CREATED("setup_intent.created"),

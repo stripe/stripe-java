@@ -274,7 +274,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   }
 
   /**
-   * For virtual cards only. Retrieves an Issuing <code>Card_details</code> object that contains <a
+   * For virtual cards only. Retrieves an Issuing <code>card_details</code> object that contains <a
    * href="/docs/issuing/cards/management#virtual-card-info">the sensitive details</a> of a virtual
    * card.
    */
@@ -283,7 +283,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   }
 
   /**
-   * For virtual cards only. Retrieves an Issuing <code>Card_details</code> object that contains <a
+   * For virtual cards only. Retrieves an Issuing <code>card_details</code> object that contains <a
    * href="/docs/issuing/cards/management#virtual-card-info">the sensitive details</a> of a virtual
    * card.
    */
@@ -292,7 +292,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   }
 
   /**
-   * For virtual cards only. Retrieves an Issuing <code>Card_details</code> object that contains <a
+   * For virtual cards only. Retrieves an Issuing <code>card_details</code> object that contains <a
    * href="/docs/issuing/cards/management#virtual-card-info">the sensitive details</a> of a virtual
    * card.
    */
@@ -308,7 +308,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   }
 
   /**
-   * For virtual cards only. Retrieves an Issuing <code>Card_details</code> object that contains <a
+   * For virtual cards only. Retrieves an Issuing <code>card_details</code> object that contains <a
    * href="/docs/issuing/cards/management#virtual-card-info">the sensitive details</a> of a virtual
    * card.
    */
@@ -317,7 +317,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   }
 
   /**
-   * For virtual cards only. Retrieves an Issuing <code>Card_details</code> object that contains <a
+   * For virtual cards only. Retrieves an Issuing <code>card_details</code> object that contains <a
    * href="/docs/issuing/cards/management#virtual-card-info">the sensitive details</a> of a virtual
    * card.
    */
