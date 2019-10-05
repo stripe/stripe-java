@@ -25,7 +25,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-compile "com.stripe:stripe-java:12.1.0"
+implementation "com.stripe:stripe-java:12.1.0"
 ```
 
 ### Others
