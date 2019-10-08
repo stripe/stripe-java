@@ -597,6 +597,13 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @EqualsAndHashCode(callSuper = false)
   public static class Capabilities extends StripeObject {
     /**
+     * The status of the card issuing capability of the account, or whether you can use Issuing to
+     * distribute funds on cards.
+     */
+    @SerializedName("card_issuing")
+    String cardIssuing;
+
+    /**
      * The status of the card payments capability of the account, or whether the account can
      * directly process credit and debit card charges.
      */

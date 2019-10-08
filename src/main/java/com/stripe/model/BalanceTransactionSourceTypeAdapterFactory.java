@@ -50,6 +50,8 @@ public class BalanceTransactionSourceTypeAdapterFactory implements TypeAdapterFa
         gson.getDelegateAdapter(this, TypeToken.get(Refund.class));
     final TypeAdapter<ReserveTransaction> reserveTransactionAdapter =
         gson.getDelegateAdapter(this, TypeToken.get(ReserveTransaction.class));
+    final TypeAdapter<TaxDeductedAtSource> taxDeductedAtSourceAdapter =
+        gson.getDelegateAdapter(this, TypeToken.get(TaxDeductedAtSource.class));
     final TypeAdapter<Topup> topupAdapter =
         gson.getDelegateAdapter(this, TypeToken.get(Topup.class));
     final TypeAdapter<Transfer> transferAdapter =
@@ -91,6 +93,8 @@ public class BalanceTransactionSourceTypeAdapterFactory implements TypeAdapterFa
               objectResult = refundAdapter.fromJsonTree(object);
             } else if ("reserve_transaction".equals(objectType)) {
               objectResult = reserveTransactionAdapter.fromJsonTree(object);
+            } else if ("tax_deducted_at_source".equals(objectType)) {
+              objectResult = taxDeductedAtSourceAdapter.fromJsonTree(object);
             } else if ("topup".equals(objectType)) {
               objectResult = topupAdapter.fromJsonTree(object);
             } else if ("transfer".equals(objectType)) {

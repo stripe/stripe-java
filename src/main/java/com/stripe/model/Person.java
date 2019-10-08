@@ -263,13 +263,6 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @EqualsAndHashCode(callSuper = false)
   public static class Relationship extends StripeObject {
     /**
-     * Whether the person opened the account. This person provides information about themselves, and
-     * general information about the account.
-     */
-    @SerializedName("account_opener")
-    Boolean accountOpener;
-
-    /**
      * Whether the person is a director of the account's legal entity. Currently only required for
      * accounts in the EU. Directors are typically members of the governing board of the company, or
      * responsible for ensuring the company meets its regulatory obligations.
@@ -291,6 +284,16 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     /** The percent owned by the person of the account's legal entity. */
     @SerializedName("percent_ownership")
     BigDecimal percentOwnership;
+
+    /**
+     * Whether the person is authorized as the primary representative of the account. This is the
+     * person nominated by the business to provide information about themselves, and general
+     * information about the account. There can only be one representative at any given time. At the
+     * time the account is created, this person should be set to the person responsible for opening
+     * the account.
+     */
+    @SerializedName("representative")
+    Boolean representative;
 
     /** The person's title (e.g., CEO, Support Engineer). */
     @SerializedName("title")

@@ -1241,13 +1241,6 @@ public class PersonUpdateParams extends ApiRequestParams {
 
   public static class Relationship {
     /**
-     * Whether the person opened the account. This person provides information about themselves, and
-     * general information about the account.
-     */
-    @SerializedName("account_opener")
-    Boolean accountOpener;
-
-    /**
      * Whether the person is a director of the account's legal entity. Currently only required for
      * accounts in the EU. Directors are typically members of the governing board of the company, or
      * responsible for ensuring the company meets its regulatory obligations.
@@ -1279,24 +1272,34 @@ public class PersonUpdateParams extends ApiRequestParams {
     @SerializedName("percent_ownership")
     Object percentOwnership;
 
+    /**
+     * Whether the person is authorized as the primary representative of the account. This is the
+     * person nominated by the business to provide information about themselves, and general
+     * information about the account. There can only be one representative at any given time. At the
+     * time the account is created, this person should be set to the person responsible for opening
+     * the account.
+     */
+    @SerializedName("representative")
+    Boolean representative;
+
     /** The person's title (e.g., CEO, Support Engineer). */
     @SerializedName("title")
     Object title;
 
     private Relationship(
-        Boolean accountOpener,
         Boolean director,
         Boolean executive,
         Map<String, Object> extraParams,
         Boolean owner,
         Object percentOwnership,
+        Boolean representative,
         Object title) {
-      this.accountOpener = accountOpener;
       this.director = director;
       this.executive = executive;
       this.extraParams = extraParams;
       this.owner = owner;
       this.percentOwnership = percentOwnership;
+      this.representative = representative;
       this.title = title;
     }
 
@@ -1305,8 +1308,6 @@ public class PersonUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private Boolean accountOpener;
-
       private Boolean director;
 
       private Boolean executive;
@@ -1317,27 +1318,20 @@ public class PersonUpdateParams extends ApiRequestParams {
 
       private Object percentOwnership;
 
+      private Boolean representative;
+
       private Object title;
 
       /** Finalize and obtain parameter instance from this builder. */
       public Relationship build() {
         return new Relationship(
-            this.accountOpener,
             this.director,
             this.executive,
             this.extraParams,
             this.owner,
             this.percentOwnership,
+            this.representative,
             this.title);
-      }
-
-      /**
-       * Whether the person opened the account. This person provides information about themselves,
-       * and general information about the account.
-       */
-      public Builder setAccountOpener(Boolean accountOpener) {
-        this.accountOpener = accountOpener;
-        return this;
       }
 
       /**
@@ -1400,6 +1394,18 @@ public class PersonUpdateParams extends ApiRequestParams {
       /** The percent owned by the person of the account's legal entity. */
       public Builder setPercentOwnership(EmptyParam percentOwnership) {
         this.percentOwnership = percentOwnership;
+        return this;
+      }
+
+      /**
+       * Whether the person is authorized as the primary representative of the account. This is the
+       * person nominated by the business to provide information about themselves, and general
+       * information about the account. There can only be one representative at any given time. At
+       * the time the account is created, this person should be set to the person responsible for
+       * opening the account.
+       */
+      public Builder setRepresentative(Boolean representative) {
+        this.representative = representative;
         return this;
       }
 
