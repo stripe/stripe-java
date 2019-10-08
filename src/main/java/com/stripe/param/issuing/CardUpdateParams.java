@@ -23,7 +23,7 @@ public class CardUpdateParams extends ApiRequestParams {
    * with.
    */
   @SerializedName("cardholder")
-  String cardholder;
+  Object cardholder;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -50,7 +50,7 @@ public class CardUpdateParams extends ApiRequestParams {
 
   private CardUpdateParams(
       AuthorizationControls authorizationControls,
-      String cardholder,
+      Object cardholder,
       List<String> expand,
       Map<String, Object> extraParams,
       Object metadata,
@@ -70,7 +70,7 @@ public class CardUpdateParams extends ApiRequestParams {
   public static class Builder {
     private AuthorizationControls authorizationControls;
 
-    private String cardholder;
+    private Object cardholder;
 
     private List<String> expand;
 
@@ -106,6 +106,15 @@ public class CardUpdateParams extends ApiRequestParams {
      * with.
      */
     public Builder setCardholder(String cardholder) {
+      this.cardholder = cardholder;
+      return this;
+    }
+
+    /**
+     * The [Cardholder](https://stripe.com/docs/api#issuing_cardholder_object) to associate the card
+     * with.
+     */
+    public Builder setCardholder(EmptyParam cardholder) {
       this.cardholder = cardholder;
       return this;
     }

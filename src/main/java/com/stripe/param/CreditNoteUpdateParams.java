@@ -2,6 +2,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +24,7 @@ public class CreditNoteUpdateParams extends ApiRequestParams {
 
   /** Credit note memo. */
   @SerializedName("memo")
-  String memo;
+  Object memo;
 
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
@@ -36,7 +37,7 @@ public class CreditNoteUpdateParams extends ApiRequestParams {
   private CreditNoteUpdateParams(
       List<String> expand,
       Map<String, Object> extraParams,
-      String memo,
+      Object memo,
       Map<String, String> metadata) {
     this.expand = expand;
     this.extraParams = extraParams;
@@ -53,7 +54,7 @@ public class CreditNoteUpdateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private String memo;
+    private Object memo;
 
     private Map<String, String> metadata;
 
@@ -116,6 +117,12 @@ public class CreditNoteUpdateParams extends ApiRequestParams {
 
     /** Credit note memo. */
     public Builder setMemo(String memo) {
+      this.memo = memo;
+      return this;
+    }
+
+    /** Credit note memo. */
+    public Builder setMemo(EmptyParam memo) {
       this.memo = memo;
       return this;
     }

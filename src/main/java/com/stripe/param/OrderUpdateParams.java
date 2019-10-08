@@ -2,6 +2,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +15,7 @@ public class OrderUpdateParams extends ApiRequestParams {
    * and in same currency as the order. An order can have multiple coupons.
    */
   @SerializedName("coupon")
-  String coupon;
+  Object coupon;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -42,7 +43,7 @@ public class OrderUpdateParams extends ApiRequestParams {
    * selected shipping method, updating `items` as necessary.
    */
   @SerializedName("selected_shipping_method")
-  String selectedShippingMethod;
+  Object selectedShippingMethod;
 
   /** Tracking information once the order has been fulfilled. */
   @SerializedName("shipping")
@@ -57,11 +58,11 @@ public class OrderUpdateParams extends ApiRequestParams {
   Status status;
 
   private OrderUpdateParams(
-      String coupon,
+      Object coupon,
       List<String> expand,
       Map<String, Object> extraParams,
       Map<String, String> metadata,
-      String selectedShippingMethod,
+      Object selectedShippingMethod,
       Shipping shipping,
       Status status) {
     this.coupon = coupon;
@@ -78,7 +79,7 @@ public class OrderUpdateParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String coupon;
+    private Object coupon;
 
     private List<String> expand;
 
@@ -86,7 +87,7 @@ public class OrderUpdateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
-    private String selectedShippingMethod;
+    private Object selectedShippingMethod;
 
     private Shipping shipping;
 
@@ -109,6 +110,15 @@ public class OrderUpdateParams extends ApiRequestParams {
      * duration and in same currency as the order. An order can have multiple coupons.
      */
     public Builder setCoupon(String coupon) {
+      this.coupon = coupon;
+      return this;
+    }
+
+    /**
+     * A coupon code that represents a discount to be applied to this order. Must be one-time
+     * duration and in same currency as the order. An order can have multiple coupons.
+     */
+    public Builder setCoupon(EmptyParam coupon) {
       this.coupon = coupon;
       return this;
     }
@@ -201,6 +211,16 @@ public class OrderUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * The shipping method to select for fulfilling this order. If specified, must be one of the
+     * `id`s of a shipping method in the `shipping_methods` array. If specified, will overwrite the
+     * existing selected shipping method, updating `items` as necessary.
+     */
+    public Builder setSelectedShippingMethod(EmptyParam selectedShippingMethod) {
+      this.selectedShippingMethod = selectedShippingMethod;
+      return this;
+    }
+
     /** Tracking information once the order has been fulfilled. */
     public Builder setShipping(Shipping shipping) {
       this.shipping = shipping;
@@ -221,7 +241,7 @@ public class OrderUpdateParams extends ApiRequestParams {
   public static class Shipping {
     /** The name of the carrier like `USPS`, `UPS`, or `FedEx`. */
     @SerializedName("carrier")
-    String carrier;
+    Object carrier;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -234,9 +254,9 @@ public class OrderUpdateParams extends ApiRequestParams {
 
     /** The tracking number provided by the carrier. */
     @SerializedName("tracking_number")
-    String trackingNumber;
+    Object trackingNumber;
 
-    private Shipping(String carrier, Map<String, Object> extraParams, String trackingNumber) {
+    private Shipping(Object carrier, Map<String, Object> extraParams, Object trackingNumber) {
       this.carrier = carrier;
       this.extraParams = extraParams;
       this.trackingNumber = trackingNumber;
@@ -247,11 +267,11 @@ public class OrderUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private String carrier;
+      private Object carrier;
 
       private Map<String, Object> extraParams;
 
-      private String trackingNumber;
+      private Object trackingNumber;
 
       /** Finalize and obtain parameter instance from this builder. */
       public Shipping build() {
@@ -260,6 +280,12 @@ public class OrderUpdateParams extends ApiRequestParams {
 
       /** The name of the carrier like `USPS`, `UPS`, or `FedEx`. */
       public Builder setCarrier(String carrier) {
+        this.carrier = carrier;
+        return this;
+      }
+
+      /** The name of the carrier like `USPS`, `UPS`, or `FedEx`. */
+      public Builder setCarrier(EmptyParam carrier) {
         this.carrier = carrier;
         return this;
       }
@@ -292,6 +318,12 @@ public class OrderUpdateParams extends ApiRequestParams {
 
       /** The tracking number provided by the carrier. */
       public Builder setTrackingNumber(String trackingNumber) {
+        this.trackingNumber = trackingNumber;
+        return this;
+      }
+
+      /** The tracking number provided by the carrier. */
+      public Builder setTrackingNumber(EmptyParam trackingNumber) {
         this.trackingNumber = trackingNumber;
         return this;
       }

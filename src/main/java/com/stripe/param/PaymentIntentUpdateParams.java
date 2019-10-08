@@ -29,7 +29,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
    * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
    */
   @SerializedName("currency")
-  String currency;
+  Object currency;
 
   /**
    * ID of the Customer this PaymentIntent belongs to, if one exists.
@@ -39,11 +39,11 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
    * PaymentIntent.
    */
   @SerializedName("customer")
-  String customer;
+  Object customer;
 
   /** An arbitrary string attached to the object. Often useful for displaying to users. */
   @SerializedName("description")
-  String description;
+  Object description;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -70,7 +70,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
    * to this PaymentIntent.
    */
   @SerializedName("payment_method")
-  String paymentMethod;
+  Object paymentMethod;
 
   /** The list of payment method types (e.g. card) that this PaymentIntent is allowed to use. */
   @SerializedName("payment_method_types")
@@ -126,14 +126,14 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
    * supports Source, Card, and BankAccount objects.
    */
   @SerializedName("source")
-  String source;
+  Object source;
 
   /**
    * For non-card charges, you can use this value as the complete description that appears on your
    * customers’ statements. Must contain at least one letter, maximum 22 characters.
    */
   @SerializedName("statement_descriptor")
-  String statementDescriptor;
+  Object statementDescriptor;
 
   /**
    * Provides information about a card payment that customers see on their statements. Concatenated
@@ -141,7 +141,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
    * form the complete statement descriptor. Maximum 22 characters for the concatenated descriptor.
    */
   @SerializedName("statement_descriptor_suffix")
-  String statementDescriptorSuffix;
+  Object statementDescriptorSuffix;
 
   /**
    * The parameters used to automatically create a Transfer when the payment succeeds. For more
@@ -158,28 +158,28 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
    * details.
    */
   @SerializedName("transfer_group")
-  String transferGroup;
+  Object transferGroup;
 
   private PaymentIntentUpdateParams(
       Long amount,
       Object applicationFeeAmount,
-      String currency,
-      String customer,
-      String description,
+      Object currency,
+      Object customer,
+      Object description,
       List<String> expand,
       Map<String, Object> extraParams,
       Map<String, String> metadata,
-      String paymentMethod,
+      Object paymentMethod,
       List<String> paymentMethodTypes,
       Object receiptEmail,
       Boolean savePaymentMethod,
       EnumParam setupFutureUsage,
       Object shipping,
-      String source,
-      String statementDescriptor,
-      String statementDescriptorSuffix,
+      Object source,
+      Object statementDescriptor,
+      Object statementDescriptorSuffix,
       TransferData transferData,
-      String transferGroup) {
+      Object transferGroup) {
     this.amount = amount;
     this.applicationFeeAmount = applicationFeeAmount;
     this.currency = currency;
@@ -210,11 +210,11 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     private Object applicationFeeAmount;
 
-    private String currency;
+    private Object currency;
 
-    private String customer;
+    private Object customer;
 
-    private String description;
+    private Object description;
 
     private List<String> expand;
 
@@ -222,7 +222,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
-    private String paymentMethod;
+    private Object paymentMethod;
 
     private List<String> paymentMethodTypes;
 
@@ -234,15 +234,15 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     private Object shipping;
 
-    private String source;
+    private Object source;
 
-    private String statementDescriptor;
+    private Object statementDescriptor;
 
-    private String statementDescriptorSuffix;
+    private Object statementDescriptorSuffix;
 
     private TransferData transferData;
 
-    private String transferGroup;
+    private Object transferGroup;
 
     /** Finalize and obtain parameter instance from this builder. */
     public PaymentIntentUpdateParams build() {
@@ -306,6 +306,15 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     }
 
     /**
+     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
+     * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+     */
+    public Builder setCurrency(EmptyParam currency) {
+      this.currency = currency;
+      return this;
+    }
+
+    /**
      * ID of the Customer this PaymentIntent belongs to, if one exists.
      *
      * <p>If present, payment methods used with this PaymentIntent can only be attached to this
@@ -317,8 +326,26 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * ID of the Customer this PaymentIntent belongs to, if one exists.
+     *
+     * <p>If present, payment methods used with this PaymentIntent can only be attached to this
+     * Customer, and payment methods attached to other Customers cannot be used with this
+     * PaymentIntent.
+     */
+    public Builder setCustomer(EmptyParam customer) {
+      this.customer = customer;
+      return this;
+    }
+
     /** An arbitrary string attached to the object. Often useful for displaying to users. */
     public Builder setDescription(String description) {
+      this.description = description;
+      return this;
+    }
+
+    /** An arbitrary string attached to the object. Often useful for displaying to users. */
+    public Builder setDescription(EmptyParam description) {
       this.description = description;
       return this;
     }
@@ -406,6 +433,15 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
      * attach to this PaymentIntent.
      */
     public Builder setPaymentMethod(String paymentMethod) {
+      this.paymentMethod = paymentMethod;
+      return this;
+    }
+
+    /**
+     * ID of the payment method (a PaymentMethod, Card, BankAccount, or saved Source object) to
+     * attach to this PaymentIntent.
+     */
+    public Builder setPaymentMethod(EmptyParam paymentMethod) {
       this.paymentMethod = paymentMethod;
       return this;
     }
@@ -538,10 +574,29 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     }
 
     /**
+     * This is a legacy field that will be removed in the future. It is the ID of the Source object
+     * to attach to this PaymentIntent. Please use the `payment_method` field instead, which also
+     * supports Source, Card, and BankAccount objects.
+     */
+    public Builder setSource(EmptyParam source) {
+      this.source = source;
+      return this;
+    }
+
+    /**
      * For non-card charges, you can use this value as the complete description that appears on your
      * customers’ statements. Must contain at least one letter, maximum 22 characters.
      */
     public Builder setStatementDescriptor(String statementDescriptor) {
+      this.statementDescriptor = statementDescriptor;
+      return this;
+    }
+
+    /**
+     * For non-card charges, you can use this value as the complete description that appears on your
+     * customers’ statements. Must contain at least one letter, maximum 22 characters.
+     */
+    public Builder setStatementDescriptor(EmptyParam statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
       return this;
     }
@@ -553,6 +608,17 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
      * descriptor.
      */
     public Builder setStatementDescriptorSuffix(String statementDescriptorSuffix) {
+      this.statementDescriptorSuffix = statementDescriptorSuffix;
+      return this;
+    }
+
+    /**
+     * Provides information about a card payment that customers see on their statements.
+     * Concatenated with the prefix (shortened descriptor) or statement descriptor that’s set on the
+     * account to form the complete statement descriptor. Maximum 22 characters for the concatenated
+     * descriptor.
+     */
+    public Builder setStatementDescriptorSuffix(EmptyParam statementDescriptorSuffix) {
       this.statementDescriptorSuffix = statementDescriptorSuffix;
       return this;
     }
@@ -577,6 +643,17 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       this.transferGroup = transferGroup;
       return this;
     }
+
+    /**
+     * A string that identifies the resulting payment as part of a group. `transfer_group` may only
+     * be provided if it has not been set. See the PaymentIntents [use case for connected
+     * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts) for
+     * details.
+     */
+    public Builder setTransferGroup(EmptyParam transferGroup) {
+      this.transferGroup = transferGroup;
+      return this;
+    }
   }
 
   public static class Shipping {
@@ -586,7 +663,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     /** The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. */
     @SerializedName("carrier")
-    String carrier;
+    Object carrier;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -599,26 +676,26 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     /** Recipient name. */
     @SerializedName("name")
-    String name;
+    Object name;
 
     /** Recipient phone (including extension). */
     @SerializedName("phone")
-    String phone;
+    Object phone;
 
     /**
      * The tracking number for a physical product, obtained from the delivery service. If multiple
      * tracking numbers were generated for this purchase, please separate them with commas.
      */
     @SerializedName("tracking_number")
-    String trackingNumber;
+    Object trackingNumber;
 
     private Shipping(
         Address address,
-        String carrier,
+        Object carrier,
         Map<String, Object> extraParams,
-        String name,
-        String phone,
-        String trackingNumber) {
+        Object name,
+        Object phone,
+        Object trackingNumber) {
       this.address = address;
       this.carrier = carrier;
       this.extraParams = extraParams;
@@ -634,15 +711,15 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     public static class Builder {
       private Address address;
 
-      private String carrier;
+      private Object carrier;
 
       private Map<String, Object> extraParams;
 
-      private String name;
+      private Object name;
 
-      private String phone;
+      private Object phone;
 
-      private String trackingNumber;
+      private Object trackingNumber;
 
       /** Finalize and obtain parameter instance from this builder. */
       public Shipping build() {
@@ -663,6 +740,12 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
       /** The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. */
       public Builder setCarrier(String carrier) {
+        this.carrier = carrier;
+        return this;
+      }
+
+      /** The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. */
+      public Builder setCarrier(EmptyParam carrier) {
         this.carrier = carrier;
         return this;
       }
@@ -699,8 +782,20 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** Recipient name. */
+      public Builder setName(EmptyParam name) {
+        this.name = name;
+        return this;
+      }
+
       /** Recipient phone (including extension). */
       public Builder setPhone(String phone) {
+        this.phone = phone;
+        return this;
+      }
+
+      /** Recipient phone (including extension). */
+      public Builder setPhone(EmptyParam phone) {
         this.phone = phone;
         return this;
       }
@@ -713,14 +808,23 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
         this.trackingNumber = trackingNumber;
         return this;
       }
+
+      /**
+       * The tracking number for a physical product, obtained from the delivery service. If multiple
+       * tracking numbers were generated for this purchase, please separate them with commas.
+       */
+      public Builder setTrackingNumber(EmptyParam trackingNumber) {
+        this.trackingNumber = trackingNumber;
+        return this;
+      }
     }
 
     public static class Address {
       @SerializedName("city")
-      String city;
+      Object city;
 
       @SerializedName("country")
-      String country;
+      Object country;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -732,25 +836,25 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       @SerializedName("line1")
-      String line1;
+      Object line1;
 
       @SerializedName("line2")
-      String line2;
+      Object line2;
 
       @SerializedName("postal_code")
-      String postalCode;
+      Object postalCode;
 
       @SerializedName("state")
-      String state;
+      Object state;
 
       private Address(
-          String city,
-          String country,
+          Object city,
+          Object country,
           Map<String, Object> extraParams,
-          String line1,
-          String line2,
-          String postalCode,
-          String state) {
+          Object line1,
+          Object line2,
+          Object postalCode,
+          Object state) {
         this.city = city;
         this.country = country;
         this.extraParams = extraParams;
@@ -765,19 +869,19 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private String city;
+        private Object city;
 
-        private String country;
+        private Object country;
 
         private Map<String, Object> extraParams;
 
-        private String line1;
+        private Object line1;
 
-        private String line2;
+        private Object line2;
 
-        private String postalCode;
+        private Object postalCode;
 
-        private String state;
+        private Object state;
 
         /** Finalize and obtain parameter instance from this builder. */
         public Address build() {
@@ -796,7 +900,17 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        public Builder setCity(EmptyParam city) {
+          this.city = city;
+          return this;
+        }
+
         public Builder setCountry(String country) {
+          this.country = country;
+          return this;
+        }
+
+        public Builder setCountry(EmptyParam country) {
           this.country = country;
           return this;
         }
@@ -834,7 +948,17 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        public Builder setLine1(EmptyParam line1) {
+          this.line1 = line1;
+          return this;
+        }
+
         public Builder setLine2(String line2) {
+          this.line2 = line2;
+          return this;
+        }
+
+        public Builder setLine2(EmptyParam line2) {
           this.line2 = line2;
           return this;
         }
@@ -844,7 +968,17 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        public Builder setPostalCode(EmptyParam postalCode) {
+          this.postalCode = postalCode;
+          return this;
+        }
+
         public Builder setState(String state) {
+          this.state = state;
+          return this;
+        }
+
+        public Builder setState(EmptyParam state) {
           this.state = state;
           return this;
         }

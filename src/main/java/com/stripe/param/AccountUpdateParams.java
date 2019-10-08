@@ -15,7 +15,7 @@ public class AccountUpdateParams extends ApiRequestParams {
    * details to the account.
    */
   @SerializedName("account_token")
-  String accountToken;
+  Object accountToken;
 
   /** Non-essential business information about the account. */
   @SerializedName("business_profile")
@@ -23,7 +23,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
   /** The business type. Can be `individual` or `company`. */
   @SerializedName("business_type")
-  String businessType;
+  Object businessType;
 
   /**
    * Information about the company or business. This field is null unless `business_type` is set to
@@ -37,7 +37,7 @@ public class AccountUpdateParams extends ApiRequestParams {
    * a currency that [Stripe supports in the account's country](https://stripe.com/docs/payouts).
    */
   @SerializedName("default_currency")
-  String defaultCurrency;
+  Object defaultCurrency;
 
   /**
    * Email address of the account representative. For Standard accounts, this is used to ask them to
@@ -45,7 +45,7 @@ public class AccountUpdateParams extends ApiRequestParams {
    * to platforms; Stripe does not email the account representative.
    */
   @SerializedName("email")
-  String email;
+  Object email;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -63,7 +63,7 @@ public class AccountUpdateParams extends ApiRequestParams {
    * API.
    */
   @SerializedName("external_account")
-  String externalAccount;
+  Object externalAccount;
 
   /**
    * Map of extra parameters for custom features not available in this client library. The content
@@ -108,14 +108,14 @@ public class AccountUpdateParams extends ApiRequestParams {
   TosAcceptance tosAcceptance;
 
   private AccountUpdateParams(
-      String accountToken,
+      Object accountToken,
       BusinessProfile businessProfile,
-      String businessType,
+      Object businessType,
       Company company,
-      String defaultCurrency,
-      String email,
+      Object defaultCurrency,
+      Object email,
       List<String> expand,
-      String externalAccount,
+      Object externalAccount,
       Map<String, Object> extraParams,
       Individual individual,
       Map<String, String> metadata,
@@ -143,21 +143,21 @@ public class AccountUpdateParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String accountToken;
+    private Object accountToken;
 
     private BusinessProfile businessProfile;
 
-    private String businessType;
+    private Object businessType;
 
     private Company company;
 
-    private String defaultCurrency;
+    private Object defaultCurrency;
 
-    private String email;
+    private Object email;
 
     private List<String> expand;
 
-    private String externalAccount;
+    private Object externalAccount;
 
     private Map<String, Object> extraParams;
 
@@ -199,6 +199,15 @@ public class AccountUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * An [account token](https://stripe.com/docs/api#create_account_token), used to securely
+     * provide details to the account.
+     */
+    public Builder setAccountToken(EmptyParam accountToken) {
+      this.accountToken = accountToken;
+      return this;
+    }
+
     /** Non-essential business information about the account. */
     public Builder setBusinessProfile(BusinessProfile businessProfile) {
       this.businessProfile = businessProfile;
@@ -207,6 +216,12 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     /** The business type. Can be `individual` or `company`. */
     public Builder setBusinessType(String businessType) {
+      this.businessType = businessType;
+      return this;
+    }
+
+    /** The business type. Can be `individual` or `company`. */
+    public Builder setBusinessType(EmptyParam businessType) {
       this.businessType = businessType;
       return this;
     }
@@ -231,11 +246,31 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
 
     /**
+     * Three-letter ISO currency code representing the default currency for the account. This must
+     * be a currency that [Stripe supports in the account's
+     * country](https://stripe.com/docs/payouts).
+     */
+    public Builder setDefaultCurrency(EmptyParam defaultCurrency) {
+      this.defaultCurrency = defaultCurrency;
+      return this;
+    }
+
+    /**
      * Email address of the account representative. For Standard accounts, this is used to ask them
      * to claim their Stripe account. For Custom accounts, this only makes the account easier to
      * identify to platforms; Stripe does not email the account representative.
      */
     public Builder setEmail(String email) {
+      this.email = email;
+      return this;
+    }
+
+    /**
+     * Email address of the account representative. For Standard accounts, this is used to ask them
+     * to claim their Stripe account. For Custom accounts, this only makes the account easier to
+     * identify to platforms; Stripe does not email the account representative.
+     */
+    public Builder setEmail(EmptyParam email) {
       this.email = email;
       return this;
     }
@@ -278,6 +313,22 @@ public class AccountUpdateParams extends ApiRequestParams {
      * creation API.
      */
     public Builder setExternalAccount(String externalAccount) {
+      this.externalAccount = externalAccount;
+      return this;
+    }
+
+    /**
+     * A card or bank account to attach to the account. You can provide either a token, like the
+     * ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary, as
+     * documented in the `external_account` parameter for [bank
+     * account](https://stripe.com/docs/api#account_create_bank_account) creation. <br>
+     * <br>
+     * By default, providing an external account sets it as the new default external account for its
+     * currency, and deletes the old default if one exists. To add additional external accounts
+     * without replacing the existing default for the currency, use the bank account or card
+     * creation API.
+     */
+    public Builder setExternalAccount(EmptyParam externalAccount) {
       this.externalAccount = externalAccount;
       return this;
     }
@@ -400,44 +451,44 @@ public class AccountUpdateParams extends ApiRequestParams {
      * goods or services they provide.
      */
     @SerializedName("mcc")
-    String mcc;
+    Object mcc;
 
     /** The customer-facing business name. */
     @SerializedName("name")
-    String name;
+    Object name;
 
     /**
      * Internal-only description of the product sold by, or service provided by, the business. Used
      * by Stripe for risk and underwriting purposes.
      */
     @SerializedName("product_description")
-    String productDescription;
+    Object productDescription;
 
     /** A publicly available email address for sending support issues to. */
     @SerializedName("support_email")
-    String supportEmail;
+    Object supportEmail;
 
     /** A publicly available phone number to call with support issues. */
     @SerializedName("support_phone")
-    String supportPhone;
+    Object supportPhone;
 
     /** A publicly available website for handling support issues. */
     @SerializedName("support_url")
-    String supportUrl;
+    Object supportUrl;
 
     /** The business's publicly available website. */
     @SerializedName("url")
-    String url;
+    Object url;
 
     private BusinessProfile(
         Map<String, Object> extraParams,
-        String mcc,
-        String name,
-        String productDescription,
-        String supportEmail,
-        String supportPhone,
-        String supportUrl,
-        String url) {
+        Object mcc,
+        Object name,
+        Object productDescription,
+        Object supportEmail,
+        Object supportPhone,
+        Object supportUrl,
+        Object url) {
       this.extraParams = extraParams;
       this.mcc = mcc;
       this.name = name;
@@ -455,19 +506,19 @@ public class AccountUpdateParams extends ApiRequestParams {
     public static class Builder {
       private Map<String, Object> extraParams;
 
-      private String mcc;
+      private Object mcc;
 
-      private String name;
+      private Object name;
 
-      private String productDescription;
+      private Object productDescription;
 
-      private String supportEmail;
+      private Object supportEmail;
 
-      private String supportPhone;
+      private Object supportPhone;
 
-      private String supportUrl;
+      private Object supportUrl;
 
-      private String url;
+      private Object url;
 
       /** Finalize and obtain parameter instance from this builder. */
       public BusinessProfile build() {
@@ -517,8 +568,23 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /**
+       * The merchant category code for the account. MCCs are used to classify businesses based on
+       * the goods or services they provide.
+       */
+      public Builder setMcc(EmptyParam mcc) {
+        this.mcc = mcc;
+        return this;
+      }
+
       /** The customer-facing business name. */
       public Builder setName(String name) {
+        this.name = name;
+        return this;
+      }
+
+      /** The customer-facing business name. */
+      public Builder setName(EmptyParam name) {
         this.name = name;
         return this;
       }
@@ -532,8 +598,23 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /**
+       * Internal-only description of the product sold by, or service provided by, the business.
+       * Used by Stripe for risk and underwriting purposes.
+       */
+      public Builder setProductDescription(EmptyParam productDescription) {
+        this.productDescription = productDescription;
+        return this;
+      }
+
       /** A publicly available email address for sending support issues to. */
       public Builder setSupportEmail(String supportEmail) {
+        this.supportEmail = supportEmail;
+        return this;
+      }
+
+      /** A publicly available email address for sending support issues to. */
+      public Builder setSupportEmail(EmptyParam supportEmail) {
         this.supportEmail = supportEmail;
         return this;
       }
@@ -544,14 +625,32 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** A publicly available phone number to call with support issues. */
+      public Builder setSupportPhone(EmptyParam supportPhone) {
+        this.supportPhone = supportPhone;
+        return this;
+      }
+
       /** A publicly available website for handling support issues. */
       public Builder setSupportUrl(String supportUrl) {
         this.supportUrl = supportUrl;
         return this;
       }
 
+      /** A publicly available website for handling support issues. */
+      public Builder setSupportUrl(EmptyParam supportUrl) {
+        this.supportUrl = supportUrl;
+        return this;
+      }
+
       /** The business's publicly available website. */
       public Builder setUrl(String url) {
+        this.url = url;
+        return this;
+      }
+
+      /** The business's publicly available website. */
+      public Builder setUrl(EmptyParam url) {
         this.url = url;
         return this;
       }
@@ -592,15 +691,15 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     /** The company's legal name. */
     @SerializedName("name")
-    String name;
+    Object name;
 
     /** The Kana variation of the company's legal name (Japan only). */
     @SerializedName("name_kana")
-    String nameKana;
+    Object nameKana;
 
     /** The Kanji variation of the company's legal name (Japan only). */
     @SerializedName("name_kanji")
-    String nameKanji;
+    Object nameKanji;
 
     /**
      * Whether the company's owners have been provided. Set this Boolean to `true` after creating
@@ -612,7 +711,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     /** The company's phone number (used for verification). */
     @SerializedName("phone")
-    String phone;
+    Object phone;
 
     /**
      * The business ID number of the company, as appropriate for the company’s country. (Examples
@@ -620,15 +719,15 @@ public class AccountUpdateParams extends ApiRequestParams {
      * the UK.)
      */
     @SerializedName("tax_id")
-    String taxId;
+    Object taxId;
 
     /** The jurisdiction in which the `tax_id` is registered (Germany-based companies only). */
     @SerializedName("tax_id_registrar")
-    String taxIdRegistrar;
+    Object taxIdRegistrar;
 
     /** The VAT number of the company. */
     @SerializedName("vat_id")
-    String vatId;
+    Object vatId;
 
     /** Information on the verification state of the company. */
     @SerializedName("verification")
@@ -640,14 +739,14 @@ public class AccountUpdateParams extends ApiRequestParams {
         AddressKanji addressKanji,
         Boolean directorsProvided,
         Map<String, Object> extraParams,
-        String name,
-        String nameKana,
-        String nameKanji,
+        Object name,
+        Object nameKana,
+        Object nameKanji,
         Boolean ownersProvided,
-        String phone,
-        String taxId,
-        String taxIdRegistrar,
-        String vatId,
+        Object phone,
+        Object taxId,
+        Object taxIdRegistrar,
+        Object vatId,
         Verification verification) {
       this.address = address;
       this.addressKana = addressKana;
@@ -680,21 +779,21 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
-      private String name;
+      private Object name;
 
-      private String nameKana;
+      private Object nameKana;
 
-      private String nameKanji;
+      private Object nameKanji;
 
       private Boolean ownersProvided;
 
-      private String phone;
+      private Object phone;
 
-      private String taxId;
+      private Object taxId;
 
-      private String taxIdRegistrar;
+      private Object taxIdRegistrar;
 
-      private String vatId;
+      private Object vatId;
 
       private Verification verification;
 
@@ -779,14 +878,32 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** The company's legal name. */
+      public Builder setName(EmptyParam name) {
+        this.name = name;
+        return this;
+      }
+
       /** The Kana variation of the company's legal name (Japan only). */
       public Builder setNameKana(String nameKana) {
         this.nameKana = nameKana;
         return this;
       }
 
+      /** The Kana variation of the company's legal name (Japan only). */
+      public Builder setNameKana(EmptyParam nameKana) {
+        this.nameKana = nameKana;
+        return this;
+      }
+
       /** The Kanji variation of the company's legal name (Japan only). */
       public Builder setNameKanji(String nameKanji) {
+        this.nameKanji = nameKanji;
+        return this;
+      }
+
+      /** The Kanji variation of the company's legal name (Japan only). */
+      public Builder setNameKanji(EmptyParam nameKanji) {
         this.nameKanji = nameKanji;
         return this;
       }
@@ -807,6 +924,12 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** The company's phone number (used for verification). */
+      public Builder setPhone(EmptyParam phone) {
+        this.phone = phone;
+        return this;
+      }
+
       /**
        * The business ID number of the company, as appropriate for the company’s country. (Examples
        * are an Employer ID Number in the U.S., a Business Number in Canada, or a Company Number in
@@ -817,14 +940,36 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /**
+       * The business ID number of the company, as appropriate for the company’s country. (Examples
+       * are an Employer ID Number in the U.S., a Business Number in Canada, or a Company Number in
+       * the UK.)
+       */
+      public Builder setTaxId(EmptyParam taxId) {
+        this.taxId = taxId;
+        return this;
+      }
+
       /** The jurisdiction in which the `tax_id` is registered (Germany-based companies only). */
       public Builder setTaxIdRegistrar(String taxIdRegistrar) {
         this.taxIdRegistrar = taxIdRegistrar;
         return this;
       }
 
+      /** The jurisdiction in which the `tax_id` is registered (Germany-based companies only). */
+      public Builder setTaxIdRegistrar(EmptyParam taxIdRegistrar) {
+        this.taxIdRegistrar = taxIdRegistrar;
+        return this;
+      }
+
       /** The VAT number of the company. */
       public Builder setVatId(String vatId) {
+        this.vatId = vatId;
+        return this;
+      }
+
+      /** The VAT number of the company. */
+      public Builder setVatId(EmptyParam vatId) {
         this.vatId = vatId;
         return this;
       }
@@ -839,14 +984,14 @@ public class AccountUpdateParams extends ApiRequestParams {
     public static class Address {
       /** City, district, suburb, town, or village. */
       @SerializedName("city")
-      String city;
+      Object city;
 
       /**
        * Two-letter country code ([ISO 3166-1
        * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
        */
       @SerializedName("country")
-      String country;
+      Object country;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -859,28 +1004,28 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       /** Address line 1 (e.g., street, PO Box, or company name). */
       @SerializedName("line1")
-      String line1;
+      Object line1;
 
       /** Address line 2 (e.g., apartment, suite, unit, or building). */
       @SerializedName("line2")
-      String line2;
+      Object line2;
 
       /** ZIP or postal code. */
       @SerializedName("postal_code")
-      String postalCode;
+      Object postalCode;
 
       /** State, county, province, or region. */
       @SerializedName("state")
-      String state;
+      Object state;
 
       private Address(
-          String city,
-          String country,
+          Object city,
+          Object country,
           Map<String, Object> extraParams,
-          String line1,
-          String line2,
-          String postalCode,
-          String state) {
+          Object line1,
+          Object line2,
+          Object postalCode,
+          Object state) {
         this.city = city;
         this.country = country;
         this.extraParams = extraParams;
@@ -895,19 +1040,19 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private String city;
+        private Object city;
 
-        private String country;
+        private Object country;
 
         private Map<String, Object> extraParams;
 
-        private String line1;
+        private Object line1;
 
-        private String line2;
+        private Object line2;
 
-        private String postalCode;
+        private Object postalCode;
 
-        private String state;
+        private Object state;
 
         /** Finalize and obtain parameter instance from this builder. */
         public Address build() {
@@ -927,11 +1072,26 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /** City, district, suburb, town, or village. */
+        public Builder setCity(EmptyParam city) {
+          this.city = city;
+          return this;
+        }
+
         /**
          * Two-letter country code ([ISO 3166-1
          * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
          */
         public Builder setCountry(String country) {
+          this.country = country;
+          return this;
+        }
+
+        /**
+         * Two-letter country code ([ISO 3166-1
+         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         */
+        public Builder setCountry(EmptyParam country) {
           this.country = country;
           return this;
         }
@@ -970,8 +1130,20 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Address line 1 (e.g., street, PO Box, or company name). */
+        public Builder setLine1(EmptyParam line1) {
+          this.line1 = line1;
+          return this;
+        }
+
         /** Address line 2 (e.g., apartment, suite, unit, or building). */
         public Builder setLine2(String line2) {
+          this.line2 = line2;
+          return this;
+        }
+
+        /** Address line 2 (e.g., apartment, suite, unit, or building). */
+        public Builder setLine2(EmptyParam line2) {
           this.line2 = line2;
           return this;
         }
@@ -982,8 +1154,20 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /** ZIP or postal code. */
+        public Builder setPostalCode(EmptyParam postalCode) {
+          this.postalCode = postalCode;
+          return this;
+        }
+
         /** State, county, province, or region. */
         public Builder setState(String state) {
+          this.state = state;
+          return this;
+        }
+
+        /** State, county, province, or region. */
+        public Builder setState(EmptyParam state) {
           this.state = state;
           return this;
         }
@@ -993,14 +1177,14 @@ public class AccountUpdateParams extends ApiRequestParams {
     public static class AddressKana {
       /** City or ward. */
       @SerializedName("city")
-      String city;
+      Object city;
 
       /**
        * Two-letter country code ([ISO 3166-1
        * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
        */
       @SerializedName("country")
-      String country;
+      Object country;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1013,33 +1197,33 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       /** Block or building number. */
       @SerializedName("line1")
-      String line1;
+      Object line1;
 
       /** Building details. */
       @SerializedName("line2")
-      String line2;
+      Object line2;
 
       /** Postal code. */
       @SerializedName("postal_code")
-      String postalCode;
+      Object postalCode;
 
       /** Prefecture. */
       @SerializedName("state")
-      String state;
+      Object state;
 
       /** Town or cho-me. */
       @SerializedName("town")
-      String town;
+      Object town;
 
       private AddressKana(
-          String city,
-          String country,
+          Object city,
+          Object country,
           Map<String, Object> extraParams,
-          String line1,
-          String line2,
-          String postalCode,
-          String state,
-          String town) {
+          Object line1,
+          Object line2,
+          Object postalCode,
+          Object state,
+          Object town) {
         this.city = city;
         this.country = country;
         this.extraParams = extraParams;
@@ -1055,21 +1239,21 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private String city;
+        private Object city;
 
-        private String country;
+        private Object country;
 
         private Map<String, Object> extraParams;
 
-        private String line1;
+        private Object line1;
 
-        private String line2;
+        private Object line2;
 
-        private String postalCode;
+        private Object postalCode;
 
-        private String state;
+        private Object state;
 
-        private String town;
+        private Object town;
 
         /** Finalize and obtain parameter instance from this builder. */
         public AddressKana build() {
@@ -1090,11 +1274,26 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /** City or ward. */
+        public Builder setCity(EmptyParam city) {
+          this.city = city;
+          return this;
+        }
+
         /**
          * Two-letter country code ([ISO 3166-1
          * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
          */
         public Builder setCountry(String country) {
+          this.country = country;
+          return this;
+        }
+
+        /**
+         * Two-letter country code ([ISO 3166-1
+         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         */
+        public Builder setCountry(EmptyParam country) {
           this.country = country;
           return this;
         }
@@ -1133,8 +1332,20 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Block or building number. */
+        public Builder setLine1(EmptyParam line1) {
+          this.line1 = line1;
+          return this;
+        }
+
         /** Building details. */
         public Builder setLine2(String line2) {
+          this.line2 = line2;
+          return this;
+        }
+
+        /** Building details. */
+        public Builder setLine2(EmptyParam line2) {
           this.line2 = line2;
           return this;
         }
@@ -1145,8 +1356,20 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Postal code. */
+        public Builder setPostalCode(EmptyParam postalCode) {
+          this.postalCode = postalCode;
+          return this;
+        }
+
         /** Prefecture. */
         public Builder setState(String state) {
+          this.state = state;
+          return this;
+        }
+
+        /** Prefecture. */
+        public Builder setState(EmptyParam state) {
           this.state = state;
           return this;
         }
@@ -1156,20 +1379,26 @@ public class AccountUpdateParams extends ApiRequestParams {
           this.town = town;
           return this;
         }
+
+        /** Town or cho-me. */
+        public Builder setTown(EmptyParam town) {
+          this.town = town;
+          return this;
+        }
       }
     }
 
     public static class AddressKanji {
       /** City or ward. */
       @SerializedName("city")
-      String city;
+      Object city;
 
       /**
        * Two-letter country code ([ISO 3166-1
        * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
        */
       @SerializedName("country")
-      String country;
+      Object country;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1182,33 +1411,33 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       /** Block or building number. */
       @SerializedName("line1")
-      String line1;
+      Object line1;
 
       /** Building details. */
       @SerializedName("line2")
-      String line2;
+      Object line2;
 
       /** Postal code. */
       @SerializedName("postal_code")
-      String postalCode;
+      Object postalCode;
 
       /** Prefecture. */
       @SerializedName("state")
-      String state;
+      Object state;
 
       /** Town or cho-me. */
       @SerializedName("town")
-      String town;
+      Object town;
 
       private AddressKanji(
-          String city,
-          String country,
+          Object city,
+          Object country,
           Map<String, Object> extraParams,
-          String line1,
-          String line2,
-          String postalCode,
-          String state,
-          String town) {
+          Object line1,
+          Object line2,
+          Object postalCode,
+          Object state,
+          Object town) {
         this.city = city;
         this.country = country;
         this.extraParams = extraParams;
@@ -1224,21 +1453,21 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private String city;
+        private Object city;
 
-        private String country;
+        private Object country;
 
         private Map<String, Object> extraParams;
 
-        private String line1;
+        private Object line1;
 
-        private String line2;
+        private Object line2;
 
-        private String postalCode;
+        private Object postalCode;
 
-        private String state;
+        private Object state;
 
-        private String town;
+        private Object town;
 
         /** Finalize and obtain parameter instance from this builder. */
         public AddressKanji build() {
@@ -1259,11 +1488,26 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /** City or ward. */
+        public Builder setCity(EmptyParam city) {
+          this.city = city;
+          return this;
+        }
+
         /**
          * Two-letter country code ([ISO 3166-1
          * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
          */
         public Builder setCountry(String country) {
+          this.country = country;
+          return this;
+        }
+
+        /**
+         * Two-letter country code ([ISO 3166-1
+         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         */
+        public Builder setCountry(EmptyParam country) {
           this.country = country;
           return this;
         }
@@ -1302,8 +1546,20 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Block or building number. */
+        public Builder setLine1(EmptyParam line1) {
+          this.line1 = line1;
+          return this;
+        }
+
         /** Building details. */
         public Builder setLine2(String line2) {
+          this.line2 = line2;
+          return this;
+        }
+
+        /** Building details. */
+        public Builder setLine2(EmptyParam line2) {
           this.line2 = line2;
           return this;
         }
@@ -1314,14 +1570,32 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Postal code. */
+        public Builder setPostalCode(EmptyParam postalCode) {
+          this.postalCode = postalCode;
+          return this;
+        }
+
         /** Prefecture. */
         public Builder setState(String state) {
           this.state = state;
           return this;
         }
 
+        /** Prefecture. */
+        public Builder setState(EmptyParam state) {
+          this.state = state;
+          return this;
+        }
+
         /** Town or cho-me. */
         public Builder setTown(String town) {
+          this.town = town;
+          return this;
+        }
+
+        /** Town or cho-me. */
+        public Builder setTown(EmptyParam town) {
           this.town = town;
           return this;
         }
@@ -1403,7 +1677,7 @@ public class AccountUpdateParams extends ApiRequestParams {
          * 8,000px by 8,000px), in JPG or PNG format, and less than 10 MB in size.
          */
         @SerializedName("back")
-        String back;
+        Object back;
 
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -1421,9 +1695,9 @@ public class AccountUpdateParams extends ApiRequestParams {
          * 8,000px by 8,000px), in JPG or PNG format, and less than 10 MB in size.
          */
         @SerializedName("front")
-        String front;
+        Object front;
 
-        private Document(String back, Map<String, Object> extraParams, String front) {
+        private Document(Object back, Map<String, Object> extraParams, Object front) {
           this.back = back;
           this.extraParams = extraParams;
           this.front = front;
@@ -1434,11 +1708,11 @@ public class AccountUpdateParams extends ApiRequestParams {
         }
 
         public static class Builder {
-          private String back;
+          private Object back;
 
           private Map<String, Object> extraParams;
 
-          private String front;
+          private Object front;
 
           /** Finalize and obtain parameter instance from this builder. */
           public Document build() {
@@ -1451,6 +1725,16 @@ public class AccountUpdateParams extends ApiRequestParams {
            * 8,000px by 8,000px), in JPG or PNG format, and less than 10 MB in size.
            */
           public Builder setBack(String back) {
+            this.back = back;
+            return this;
+          }
+
+          /**
+           * The back of a document returned by a [file upload](#create_file) with a `purpose` value
+           * of `additional_verification`. The uploaded file needs to be a color image (smaller than
+           * 8,000px by 8,000px), in JPG or PNG format, and less than 10 MB in size.
+           */
+          public Builder setBack(EmptyParam back) {
             this.back = back;
             return this;
           }
@@ -1492,6 +1776,16 @@ public class AccountUpdateParams extends ApiRequestParams {
             this.front = front;
             return this;
           }
+
+          /**
+           * The front of a document returned by a [file upload](#create_file) with a `purpose`
+           * value of `additional_verification`. The uploaded file needs to be a color image
+           * (smaller than 8,000px by 8,000px), in JPG or PNG format, and less than 10 MB in size.
+           */
+          public Builder setFront(EmptyParam front) {
+            this.front = front;
+            return this;
+          }
         }
       }
     }
@@ -1515,7 +1809,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     Object dob;
 
     @SerializedName("email")
-    String email;
+    Object email;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1528,19 +1822,19 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     /** The individual's first name. */
     @SerializedName("first_name")
-    String firstName;
+    Object firstName;
 
     /** The Kana variation of the the individual's first name (Japan only). */
     @SerializedName("first_name_kana")
-    String firstNameKana;
+    Object firstNameKana;
 
     /** The Kanji variation of the individual's first name (Japan only). */
     @SerializedName("first_name_kanji")
-    String firstNameKanji;
+    Object firstNameKanji;
 
     /** The individual's gender (International regulations require either "male" or "female"). */
     @SerializedName("gender")
-    String gender;
+    Object gender;
 
     /**
      * The government-issued ID number of the individual, as appropriate for the representative’s
@@ -1549,23 +1843,23 @@ public class AccountUpdateParams extends ApiRequestParams {
      * Stripe.js](https://stripe.com/docs/stripe.js#collecting-pii-data).
      */
     @SerializedName("id_number")
-    String idNumber;
+    Object idNumber;
 
     /** The individual's last name. */
     @SerializedName("last_name")
-    String lastName;
+    Object lastName;
 
     /** The Kana varation of the individual's last name (Japan only). */
     @SerializedName("last_name_kana")
-    String lastNameKana;
+    Object lastNameKana;
 
     /** The Kanji varation of the individual's last name (Japan only). */
     @SerializedName("last_name_kanji")
-    String lastNameKanji;
+    Object lastNameKanji;
 
     /** The individual's maiden name. */
     @SerializedName("maiden_name")
-    String maidenName;
+    Object maidenName;
 
     /**
      * Set of key-value pairs that you can attach to an object. This can be useful for storing
@@ -1578,11 +1872,11 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     /** The individual's phone number. */
     @SerializedName("phone")
-    String phone;
+    Object phone;
 
     /** The last four digits of the individual's Social Security Number (U.S. only). */
     @SerializedName("ssn_last_4")
-    String ssnLast4;
+    Object ssnLast4;
 
     /** The individual's verification document information. */
     @SerializedName("verification")
@@ -1593,20 +1887,20 @@ public class AccountUpdateParams extends ApiRequestParams {
         AddressKana addressKana,
         AddressKanji addressKanji,
         Object dob,
-        String email,
+        Object email,
         Map<String, Object> extraParams,
-        String firstName,
-        String firstNameKana,
-        String firstNameKanji,
-        String gender,
-        String idNumber,
-        String lastName,
-        String lastNameKana,
-        String lastNameKanji,
-        String maidenName,
+        Object firstName,
+        Object firstNameKana,
+        Object firstNameKanji,
+        Object gender,
+        Object idNumber,
+        Object lastName,
+        Object lastNameKana,
+        Object lastNameKanji,
+        Object maidenName,
         Map<String, String> metadata,
-        String phone,
-        String ssnLast4,
+        Object phone,
+        Object ssnLast4,
         Verification verification) {
       this.address = address;
       this.addressKana = addressKana;
@@ -1642,33 +1936,33 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       private Object dob;
 
-      private String email;
+      private Object email;
 
       private Map<String, Object> extraParams;
 
-      private String firstName;
+      private Object firstName;
 
-      private String firstNameKana;
+      private Object firstNameKana;
 
-      private String firstNameKanji;
+      private Object firstNameKanji;
 
-      private String gender;
+      private Object gender;
 
-      private String idNumber;
+      private Object idNumber;
 
-      private String lastName;
+      private Object lastName;
 
-      private String lastNameKana;
+      private Object lastNameKana;
 
-      private String lastNameKanji;
+      private Object lastNameKanji;
 
-      private String maidenName;
+      private Object maidenName;
 
       private Map<String, String> metadata;
 
-      private String phone;
+      private Object phone;
 
-      private String ssnLast4;
+      private Object ssnLast4;
 
       private Verification verification;
 
@@ -1731,6 +2025,11 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      public Builder setEmail(EmptyParam email) {
+        this.email = email;
+        return this;
+      }
+
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
@@ -1763,8 +2062,20 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** The individual's first name. */
+      public Builder setFirstName(EmptyParam firstName) {
+        this.firstName = firstName;
+        return this;
+      }
+
       /** The Kana variation of the the individual's first name (Japan only). */
       public Builder setFirstNameKana(String firstNameKana) {
+        this.firstNameKana = firstNameKana;
+        return this;
+      }
+
+      /** The Kana variation of the the individual's first name (Japan only). */
+      public Builder setFirstNameKana(EmptyParam firstNameKana) {
         this.firstNameKana = firstNameKana;
         return this;
       }
@@ -1775,8 +2086,20 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** The Kanji variation of the individual's first name (Japan only). */
+      public Builder setFirstNameKanji(EmptyParam firstNameKanji) {
+        this.firstNameKanji = firstNameKanji;
+        return this;
+      }
+
       /** The individual's gender (International regulations require either "male" or "female"). */
       public Builder setGender(String gender) {
+        this.gender = gender;
+        return this;
+      }
+
+      /** The individual's gender (International regulations require either "male" or "female"). */
+      public Builder setGender(EmptyParam gender) {
         this.gender = gender;
         return this;
       }
@@ -1792,8 +2115,25 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /**
+       * The government-issued ID number of the individual, as appropriate for the representative’s
+       * country. (Examples are a Social Security Number in the U.S., or a Social Insurance Number
+       * in Canada). Instead of the number itself, you can also provide a [PII token created with
+       * Stripe.js](https://stripe.com/docs/stripe.js#collecting-pii-data).
+       */
+      public Builder setIdNumber(EmptyParam idNumber) {
+        this.idNumber = idNumber;
+        return this;
+      }
+
       /** The individual's last name. */
       public Builder setLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+      }
+
+      /** The individual's last name. */
+      public Builder setLastName(EmptyParam lastName) {
         this.lastName = lastName;
         return this;
       }
@@ -1804,14 +2144,32 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** The Kana varation of the individual's last name (Japan only). */
+      public Builder setLastNameKana(EmptyParam lastNameKana) {
+        this.lastNameKana = lastNameKana;
+        return this;
+      }
+
       /** The Kanji varation of the individual's last name (Japan only). */
       public Builder setLastNameKanji(String lastNameKanji) {
         this.lastNameKanji = lastNameKanji;
         return this;
       }
 
+      /** The Kanji varation of the individual's last name (Japan only). */
+      public Builder setLastNameKanji(EmptyParam lastNameKanji) {
+        this.lastNameKanji = lastNameKanji;
+        return this;
+      }
+
       /** The individual's maiden name. */
       public Builder setMaidenName(String maidenName) {
+        this.maidenName = maidenName;
+        return this;
+      }
+
+      /** The individual's maiden name. */
+      public Builder setMaidenName(EmptyParam maidenName) {
         this.maidenName = maidenName;
         return this;
       }
@@ -1848,8 +2206,20 @@ public class AccountUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** The individual's phone number. */
+      public Builder setPhone(EmptyParam phone) {
+        this.phone = phone;
+        return this;
+      }
+
       /** The last four digits of the individual's Social Security Number (U.S. only). */
       public Builder setSsnLast4(String ssnLast4) {
+        this.ssnLast4 = ssnLast4;
+        return this;
+      }
+
+      /** The last four digits of the individual's Social Security Number (U.S. only). */
+      public Builder setSsnLast4(EmptyParam ssnLast4) {
         this.ssnLast4 = ssnLast4;
         return this;
       }
@@ -1864,14 +2234,14 @@ public class AccountUpdateParams extends ApiRequestParams {
     public static class Address {
       /** City, district, suburb, town, or village. */
       @SerializedName("city")
-      String city;
+      Object city;
 
       /**
        * Two-letter country code ([ISO 3166-1
        * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
        */
       @SerializedName("country")
-      String country;
+      Object country;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1884,28 +2254,28 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       /** Address line 1 (e.g., street, PO Box, or company name). */
       @SerializedName("line1")
-      String line1;
+      Object line1;
 
       /** Address line 2 (e.g., apartment, suite, unit, or building). */
       @SerializedName("line2")
-      String line2;
+      Object line2;
 
       /** ZIP or postal code. */
       @SerializedName("postal_code")
-      String postalCode;
+      Object postalCode;
 
       /** State, county, province, or region. */
       @SerializedName("state")
-      String state;
+      Object state;
 
       private Address(
-          String city,
-          String country,
+          Object city,
+          Object country,
           Map<String, Object> extraParams,
-          String line1,
-          String line2,
-          String postalCode,
-          String state) {
+          Object line1,
+          Object line2,
+          Object postalCode,
+          Object state) {
         this.city = city;
         this.country = country;
         this.extraParams = extraParams;
@@ -1920,19 +2290,19 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private String city;
+        private Object city;
 
-        private String country;
+        private Object country;
 
         private Map<String, Object> extraParams;
 
-        private String line1;
+        private Object line1;
 
-        private String line2;
+        private Object line2;
 
-        private String postalCode;
+        private Object postalCode;
 
-        private String state;
+        private Object state;
 
         /** Finalize and obtain parameter instance from this builder. */
         public Address build() {
@@ -1952,11 +2322,26 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /** City, district, suburb, town, or village. */
+        public Builder setCity(EmptyParam city) {
+          this.city = city;
+          return this;
+        }
+
         /**
          * Two-letter country code ([ISO 3166-1
          * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
          */
         public Builder setCountry(String country) {
+          this.country = country;
+          return this;
+        }
+
+        /**
+         * Two-letter country code ([ISO 3166-1
+         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         */
+        public Builder setCountry(EmptyParam country) {
           this.country = country;
           return this;
         }
@@ -1995,8 +2380,20 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Address line 1 (e.g., street, PO Box, or company name). */
+        public Builder setLine1(EmptyParam line1) {
+          this.line1 = line1;
+          return this;
+        }
+
         /** Address line 2 (e.g., apartment, suite, unit, or building). */
         public Builder setLine2(String line2) {
+          this.line2 = line2;
+          return this;
+        }
+
+        /** Address line 2 (e.g., apartment, suite, unit, or building). */
+        public Builder setLine2(EmptyParam line2) {
           this.line2 = line2;
           return this;
         }
@@ -2007,8 +2404,20 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /** ZIP or postal code. */
+        public Builder setPostalCode(EmptyParam postalCode) {
+          this.postalCode = postalCode;
+          return this;
+        }
+
         /** State, county, province, or region. */
         public Builder setState(String state) {
+          this.state = state;
+          return this;
+        }
+
+        /** State, county, province, or region. */
+        public Builder setState(EmptyParam state) {
           this.state = state;
           return this;
         }
@@ -2018,14 +2427,14 @@ public class AccountUpdateParams extends ApiRequestParams {
     public static class AddressKana {
       /** City or ward. */
       @SerializedName("city")
-      String city;
+      Object city;
 
       /**
        * Two-letter country code ([ISO 3166-1
        * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
        */
       @SerializedName("country")
-      String country;
+      Object country;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2038,33 +2447,33 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       /** Block or building number. */
       @SerializedName("line1")
-      String line1;
+      Object line1;
 
       /** Building details. */
       @SerializedName("line2")
-      String line2;
+      Object line2;
 
       /** Postal code. */
       @SerializedName("postal_code")
-      String postalCode;
+      Object postalCode;
 
       /** Prefecture. */
       @SerializedName("state")
-      String state;
+      Object state;
 
       /** Town or cho-me. */
       @SerializedName("town")
-      String town;
+      Object town;
 
       private AddressKana(
-          String city,
-          String country,
+          Object city,
+          Object country,
           Map<String, Object> extraParams,
-          String line1,
-          String line2,
-          String postalCode,
-          String state,
-          String town) {
+          Object line1,
+          Object line2,
+          Object postalCode,
+          Object state,
+          Object town) {
         this.city = city;
         this.country = country;
         this.extraParams = extraParams;
@@ -2080,21 +2489,21 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private String city;
+        private Object city;
 
-        private String country;
+        private Object country;
 
         private Map<String, Object> extraParams;
 
-        private String line1;
+        private Object line1;
 
-        private String line2;
+        private Object line2;
 
-        private String postalCode;
+        private Object postalCode;
 
-        private String state;
+        private Object state;
 
-        private String town;
+        private Object town;
 
         /** Finalize and obtain parameter instance from this builder. */
         public AddressKana build() {
@@ -2115,11 +2524,26 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /** City or ward. */
+        public Builder setCity(EmptyParam city) {
+          this.city = city;
+          return this;
+        }
+
         /**
          * Two-letter country code ([ISO 3166-1
          * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
          */
         public Builder setCountry(String country) {
+          this.country = country;
+          return this;
+        }
+
+        /**
+         * Two-letter country code ([ISO 3166-1
+         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         */
+        public Builder setCountry(EmptyParam country) {
           this.country = country;
           return this;
         }
@@ -2158,8 +2582,20 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Block or building number. */
+        public Builder setLine1(EmptyParam line1) {
+          this.line1 = line1;
+          return this;
+        }
+
         /** Building details. */
         public Builder setLine2(String line2) {
+          this.line2 = line2;
+          return this;
+        }
+
+        /** Building details. */
+        public Builder setLine2(EmptyParam line2) {
           this.line2 = line2;
           return this;
         }
@@ -2170,8 +2606,20 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Postal code. */
+        public Builder setPostalCode(EmptyParam postalCode) {
+          this.postalCode = postalCode;
+          return this;
+        }
+
         /** Prefecture. */
         public Builder setState(String state) {
+          this.state = state;
+          return this;
+        }
+
+        /** Prefecture. */
+        public Builder setState(EmptyParam state) {
           this.state = state;
           return this;
         }
@@ -2181,20 +2629,26 @@ public class AccountUpdateParams extends ApiRequestParams {
           this.town = town;
           return this;
         }
+
+        /** Town or cho-me. */
+        public Builder setTown(EmptyParam town) {
+          this.town = town;
+          return this;
+        }
       }
     }
 
     public static class AddressKanji {
       /** City or ward. */
       @SerializedName("city")
-      String city;
+      Object city;
 
       /**
        * Two-letter country code ([ISO 3166-1
        * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
        */
       @SerializedName("country")
-      String country;
+      Object country;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -2207,33 +2661,33 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       /** Block or building number. */
       @SerializedName("line1")
-      String line1;
+      Object line1;
 
       /** Building details. */
       @SerializedName("line2")
-      String line2;
+      Object line2;
 
       /** Postal code. */
       @SerializedName("postal_code")
-      String postalCode;
+      Object postalCode;
 
       /** Prefecture. */
       @SerializedName("state")
-      String state;
+      Object state;
 
       /** Town or cho-me. */
       @SerializedName("town")
-      String town;
+      Object town;
 
       private AddressKanji(
-          String city,
-          String country,
+          Object city,
+          Object country,
           Map<String, Object> extraParams,
-          String line1,
-          String line2,
-          String postalCode,
-          String state,
-          String town) {
+          Object line1,
+          Object line2,
+          Object postalCode,
+          Object state,
+          Object town) {
         this.city = city;
         this.country = country;
         this.extraParams = extraParams;
@@ -2249,21 +2703,21 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private String city;
+        private Object city;
 
-        private String country;
+        private Object country;
 
         private Map<String, Object> extraParams;
 
-        private String line1;
+        private Object line1;
 
-        private String line2;
+        private Object line2;
 
-        private String postalCode;
+        private Object postalCode;
 
-        private String state;
+        private Object state;
 
-        private String town;
+        private Object town;
 
         /** Finalize and obtain parameter instance from this builder. */
         public AddressKanji build() {
@@ -2284,11 +2738,26 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /** City or ward. */
+        public Builder setCity(EmptyParam city) {
+          this.city = city;
+          return this;
+        }
+
         /**
          * Two-letter country code ([ISO 3166-1
          * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
          */
         public Builder setCountry(String country) {
+          this.country = country;
+          return this;
+        }
+
+        /**
+         * Two-letter country code ([ISO 3166-1
+         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         */
+        public Builder setCountry(EmptyParam country) {
           this.country = country;
           return this;
         }
@@ -2327,8 +2796,20 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Block or building number. */
+        public Builder setLine1(EmptyParam line1) {
+          this.line1 = line1;
+          return this;
+        }
+
         /** Building details. */
         public Builder setLine2(String line2) {
+          this.line2 = line2;
+          return this;
+        }
+
+        /** Building details. */
+        public Builder setLine2(EmptyParam line2) {
           this.line2 = line2;
           return this;
         }
@@ -2339,14 +2820,32 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Postal code. */
+        public Builder setPostalCode(EmptyParam postalCode) {
+          this.postalCode = postalCode;
+          return this;
+        }
+
         /** Prefecture. */
         public Builder setState(String state) {
           this.state = state;
           return this;
         }
 
+        /** Prefecture. */
+        public Builder setState(EmptyParam state) {
+          this.state = state;
+          return this;
+        }
+
         /** Town or cho-me. */
         public Builder setTown(String town) {
+          this.town = town;
+          return this;
+        }
+
+        /** Town or cho-me. */
+        public Builder setTown(EmptyParam town) {
           this.town = town;
           return this;
         }
@@ -2545,7 +3044,7 @@ public class AccountUpdateParams extends ApiRequestParams {
          * 8,000px), in JPG or PNG format, and less than 10 MB in size.
          */
         @SerializedName("back")
-        String back;
+        Object back;
 
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -2563,9 +3062,9 @@ public class AccountUpdateParams extends ApiRequestParams {
          * 8,000px), in JPG or PNG format, and less than 10 MB in size.
          */
         @SerializedName("front")
-        String front;
+        Object front;
 
-        private AdditionalDocument(String back, Map<String, Object> extraParams, String front) {
+        private AdditionalDocument(Object back, Map<String, Object> extraParams, Object front) {
           this.back = back;
           this.extraParams = extraParams;
           this.front = front;
@@ -2576,11 +3075,11 @@ public class AccountUpdateParams extends ApiRequestParams {
         }
 
         public static class Builder {
-          private String back;
+          private Object back;
 
           private Map<String, Object> extraParams;
 
-          private String front;
+          private Object front;
 
           /** Finalize and obtain parameter instance from this builder. */
           public AdditionalDocument build() {
@@ -2593,6 +3092,16 @@ public class AccountUpdateParams extends ApiRequestParams {
            * by 8,000px), in JPG or PNG format, and less than 10 MB in size.
            */
           public Builder setBack(String back) {
+            this.back = back;
+            return this;
+          }
+
+          /**
+           * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
+           * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px
+           * by 8,000px), in JPG or PNG format, and less than 10 MB in size.
+           */
+          public Builder setBack(EmptyParam back) {
             this.back = back;
             return this;
           }
@@ -2636,6 +3145,16 @@ public class AccountUpdateParams extends ApiRequestParams {
             this.front = front;
             return this;
           }
+
+          /**
+           * The front of an ID returned by a [file upload](#create_file) with a `purpose` value of
+           * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px
+           * by 8,000px), in JPG or PNG format, and less than 10 MB in size.
+           */
+          public Builder setFront(EmptyParam front) {
+            this.front = front;
+            return this;
+          }
         }
       }
 
@@ -2646,7 +3165,7 @@ public class AccountUpdateParams extends ApiRequestParams {
          * 8,000px), in JPG or PNG format, and less than 10 MB in size.
          */
         @SerializedName("back")
-        String back;
+        Object back;
 
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -2664,9 +3183,9 @@ public class AccountUpdateParams extends ApiRequestParams {
          * 8,000px), in JPG or PNG format, and less than 10 MB in size.
          */
         @SerializedName("front")
-        String front;
+        Object front;
 
-        private Document(String back, Map<String, Object> extraParams, String front) {
+        private Document(Object back, Map<String, Object> extraParams, Object front) {
           this.back = back;
           this.extraParams = extraParams;
           this.front = front;
@@ -2677,11 +3196,11 @@ public class AccountUpdateParams extends ApiRequestParams {
         }
 
         public static class Builder {
-          private String back;
+          private Object back;
 
           private Map<String, Object> extraParams;
 
-          private String front;
+          private Object front;
 
           /** Finalize and obtain parameter instance from this builder. */
           public Document build() {
@@ -2694,6 +3213,16 @@ public class AccountUpdateParams extends ApiRequestParams {
            * by 8,000px), in JPG or PNG format, and less than 10 MB in size.
            */
           public Builder setBack(String back) {
+            this.back = back;
+            return this;
+          }
+
+          /**
+           * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
+           * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px
+           * by 8,000px), in JPG or PNG format, and less than 10 MB in size.
+           */
+          public Builder setBack(EmptyParam back) {
             this.back = back;
             return this;
           }
@@ -2732,6 +3261,16 @@ public class AccountUpdateParams extends ApiRequestParams {
            * by 8,000px), in JPG or PNG format, and less than 10 MB in size.
            */
           public Builder setFront(String front) {
+            this.front = front;
+            return this;
+          }
+
+          /**
+           * The front of an ID returned by a [file upload](#create_file) with a `purpose` value of
+           * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px
+           * by 8,000px), in JPG or PNG format, and less than 10 MB in size.
+           */
+          public Builder setFront(EmptyParam front) {
             this.front = front;
             return this;
           }
@@ -2872,7 +3411,7 @@ public class AccountUpdateParams extends ApiRequestParams {
        * account. Must be square and at least 128px x 128px.
        */
       @SerializedName("icon")
-      String icon;
+      Object icon;
 
       /**
        * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A logo for the account
@@ -2880,14 +3419,14 @@ public class AccountUpdateParams extends ApiRequestParams {
        * if provided. Must be at least 128px x 128px.
        */
       @SerializedName("logo")
-      String logo;
+      Object logo;
 
       /** A CSS hex color value representing the primary branding color for this account. */
       @SerializedName("primary_color")
-      String primaryColor;
+      Object primaryColor;
 
       private Branding(
-          Map<String, Object> extraParams, String icon, String logo, String primaryColor) {
+          Map<String, Object> extraParams, Object icon, Object logo, Object primaryColor) {
         this.extraParams = extraParams;
         this.icon = icon;
         this.logo = logo;
@@ -2901,11 +3440,11 @@ public class AccountUpdateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
-        private String icon;
+        private Object icon;
 
-        private String logo;
+        private Object logo;
 
-        private String primaryColor;
+        private Object primaryColor;
 
         /** Finalize and obtain parameter instance from this builder. */
         public Branding build() {
@@ -2950,6 +3489,15 @@ public class AccountUpdateParams extends ApiRequestParams {
         }
 
         /**
+         * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) An icon for the
+         * account. Must be square and at least 128px x 128px.
+         */
+        public Builder setIcon(EmptyParam icon) {
+          this.icon = icon;
+          return this;
+        }
+
+        /**
          * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A logo for the
          * account that will be used in Checkout instead of the icon and without the account's name
          * next to it if provided. Must be at least 128px x 128px.
@@ -2959,8 +3507,24 @@ public class AccountUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /**
+         * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A logo for the
+         * account that will be used in Checkout instead of the icon and without the account's name
+         * next to it if provided. Must be at least 128px x 128px.
+         */
+        public Builder setLogo(EmptyParam logo) {
+          this.logo = logo;
+          return this;
+        }
+
         /** A CSS hex color value representing the primary branding color for this account. */
         public Builder setPrimaryColor(String primaryColor) {
+          this.primaryColor = primaryColor;
+          return this;
+        }
+
+        /** A CSS hex color value representing the primary branding color for this account. */
+        public Builder setPrimaryColor(EmptyParam primaryColor) {
           this.primaryColor = primaryColor;
           return this;
         }
@@ -2991,10 +3555,10 @@ public class AccountUpdateParams extends ApiRequestParams {
        * portion.
        */
       @SerializedName("statement_descriptor_prefix")
-      String statementDescriptorPrefix;
+      Object statementDescriptorPrefix;
 
       private CardPayments(
-          DeclineOn declineOn, Map<String, Object> extraParams, String statementDescriptorPrefix) {
+          DeclineOn declineOn, Map<String, Object> extraParams, Object statementDescriptorPrefix) {
         this.declineOn = declineOn;
         this.extraParams = extraParams;
         this.statementDescriptorPrefix = statementDescriptorPrefix;
@@ -3009,7 +3573,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
-        private String statementDescriptorPrefix;
+        private Object statementDescriptorPrefix;
 
         /** Finalize and obtain parameter instance from this builder. */
         public CardPayments build() {
@@ -3060,6 +3624,17 @@ public class AccountUpdateParams extends ApiRequestParams {
          * portion.
          */
         public Builder setStatementDescriptorPrefix(String statementDescriptorPrefix) {
+          this.statementDescriptorPrefix = statementDescriptorPrefix;
+          return this;
+        }
+
+        /**
+         * The default text that appears on credit card statements when a charge is made. This field
+         * prefixes any dynamic `statement_descriptor` specified on the charge.
+         * `statement_descriptor_prefix` is useful for maximizing descriptor space for the dynamic
+         * portion.
+         */
+        public Builder setStatementDescriptorPrefix(EmptyParam statementDescriptorPrefix) {
           this.statementDescriptorPrefix = statementDescriptorPrefix;
           return this;
         }
@@ -3178,27 +3753,27 @@ public class AccountUpdateParams extends ApiRequestParams {
        * prefixes any dynamic `statement_descriptor` specified on the charge.
        */
       @SerializedName("statement_descriptor")
-      String statementDescriptor;
+      Object statementDescriptor;
 
       /**
        * The Kana variation of the default text that appears on credit card statements when a charge
        * is made (Japan only).
        */
       @SerializedName("statement_descriptor_kana")
-      String statementDescriptorKana;
+      Object statementDescriptorKana;
 
       /**
        * The Kanji variation of the default text that appears on credit card statements when a
        * charge is made (Japan only).
        */
       @SerializedName("statement_descriptor_kanji")
-      String statementDescriptorKanji;
+      Object statementDescriptorKanji;
 
       private Payments(
           Map<String, Object> extraParams,
-          String statementDescriptor,
-          String statementDescriptorKana,
-          String statementDescriptorKanji) {
+          Object statementDescriptor,
+          Object statementDescriptorKana,
+          Object statementDescriptorKanji) {
         this.extraParams = extraParams;
         this.statementDescriptor = statementDescriptor;
         this.statementDescriptorKana = statementDescriptorKana;
@@ -3212,11 +3787,11 @@ public class AccountUpdateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
-        private String statementDescriptor;
+        private Object statementDescriptor;
 
-        private String statementDescriptorKana;
+        private Object statementDescriptorKana;
 
-        private String statementDescriptorKanji;
+        private Object statementDescriptorKanji;
 
         /** Finalize and obtain parameter instance from this builder. */
         public Payments build() {
@@ -3265,6 +3840,15 @@ public class AccountUpdateParams extends ApiRequestParams {
         }
 
         /**
+         * The default text that appears on credit card statements when a charge is made. This field
+         * prefixes any dynamic `statement_descriptor` specified on the charge.
+         */
+        public Builder setStatementDescriptor(EmptyParam statementDescriptor) {
+          this.statementDescriptor = statementDescriptor;
+          return this;
+        }
+
+        /**
          * The Kana variation of the default text that appears on credit card statements when a
          * charge is made (Japan only).
          */
@@ -3274,10 +3858,28 @@ public class AccountUpdateParams extends ApiRequestParams {
         }
 
         /**
+         * The Kana variation of the default text that appears on credit card statements when a
+         * charge is made (Japan only).
+         */
+        public Builder setStatementDescriptorKana(EmptyParam statementDescriptorKana) {
+          this.statementDescriptorKana = statementDescriptorKana;
+          return this;
+        }
+
+        /**
          * The Kanji variation of the default text that appears on credit card statements when a
          * charge is made (Japan only).
          */
         public Builder setStatementDescriptorKanji(String statementDescriptorKanji) {
+          this.statementDescriptorKanji = statementDescriptorKanji;
+          return this;
+        }
+
+        /**
+         * The Kanji variation of the default text that appears on credit card statements when a
+         * charge is made (Japan only).
+         */
+        public Builder setStatementDescriptorKanji(EmptyParam statementDescriptorKanji) {
           this.statementDescriptorKanji = statementDescriptorKanji;
           return this;
         }
@@ -3315,13 +3917,13 @@ public class AccountUpdateParams extends ApiRequestParams {
        * to the platform's bank descriptor as set in the Dashboard.
        */
       @SerializedName("statement_descriptor")
-      String statementDescriptor;
+      Object statementDescriptor;
 
       private Payouts(
           Boolean debitNegativeBalances,
           Map<String, Object> extraParams,
           Schedule schedule,
-          String statementDescriptor) {
+          Object statementDescriptor) {
         this.debitNegativeBalances = debitNegativeBalances;
         this.extraParams = extraParams;
         this.schedule = schedule;
@@ -3339,7 +3941,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
         private Schedule schedule;
 
-        private String statementDescriptor;
+        private Object statementDescriptor;
 
         /** Finalize and obtain parameter instance from this builder. */
         public Payouts build() {
@@ -3404,6 +4006,15 @@ public class AccountUpdateParams extends ApiRequestParams {
          * defaults to the platform's bank descriptor as set in the Dashboard.
          */
         public Builder setStatementDescriptor(String statementDescriptor) {
+          this.statementDescriptor = statementDescriptor;
+          return this;
+        }
+
+        /**
+         * The text that appears on the bank account statement for payouts. If not set, this
+         * defaults to the platform's bank descriptor as set in the Dashboard.
+         */
+        public Builder setStatementDescriptor(EmptyParam statementDescriptor) {
           this.statementDescriptor = statementDescriptor;
           return this;
         }
@@ -3650,16 +4261,16 @@ public class AccountUpdateParams extends ApiRequestParams {
      * The IP address from which the account representative accepted the Stripe Services Agreement.
      */
     @SerializedName("ip")
-    String ip;
+    Object ip;
 
     /**
      * The user agent of the browser from which the account representative accepted the Stripe
      * Services Agreement.
      */
     @SerializedName("user_agent")
-    String userAgent;
+    Object userAgent;
 
-    private TosAcceptance(Long date, Map<String, Object> extraParams, String ip, String userAgent) {
+    private TosAcceptance(Long date, Map<String, Object> extraParams, Object ip, Object userAgent) {
       this.date = date;
       this.extraParams = extraParams;
       this.ip = ip;
@@ -3675,9 +4286,9 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
-      private String ip;
+      private Object ip;
 
-      private String userAgent;
+      private Object userAgent;
 
       /** Finalize and obtain parameter instance from this builder. */
       public TosAcceptance build() {
@@ -3729,10 +4340,28 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
 
       /**
+       * The IP address from which the account representative accepted the Stripe Services
+       * Agreement.
+       */
+      public Builder setIp(EmptyParam ip) {
+        this.ip = ip;
+        return this;
+      }
+
+      /**
        * The user agent of the browser from which the account representative accepted the Stripe
        * Services Agreement.
        */
       public Builder setUserAgent(String userAgent) {
+        this.userAgent = userAgent;
+        return this;
+      }
+
+      /**
+       * The user agent of the browser from which the account representative accepted the Stripe
+       * Services Agreement.
+       */
+      public Builder setUserAgent(EmptyParam userAgent) {
         this.userAgent = userAgent;
         return this;
       }

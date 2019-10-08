@@ -228,7 +228,7 @@ public class SourceUpdateParams extends ApiRequestParams {
 
     /** The currency specified by the mandate. (Must match `currency` of the source) */
     @SerializedName("currency")
-    String currency;
+    Object currency;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -260,7 +260,7 @@ public class SourceUpdateParams extends ApiRequestParams {
     private Mandate(
         Acceptance acceptance,
         Object amount,
-        String currency,
+        Object currency,
         Map<String, Object> extraParams,
         Interval interval,
         NotificationMethod notificationMethod) {
@@ -281,7 +281,7 @@ public class SourceUpdateParams extends ApiRequestParams {
 
       private Object amount;
 
-      private String currency;
+      private Object currency;
 
       private Map<String, Object> extraParams;
 
@@ -323,6 +323,12 @@ public class SourceUpdateParams extends ApiRequestParams {
 
       /** The currency specified by the mandate. (Must match `currency` of the source) */
       public Builder setCurrency(String currency) {
+        this.currency = currency;
+        return this;
+      }
+
+      /** The currency specified by the mandate. (Must match `currency` of the source) */
+      public Builder setCurrency(EmptyParam currency) {
         this.currency = currency;
         return this;
       }
@@ -392,7 +398,7 @@ public class SourceUpdateParams extends ApiRequestParams {
 
       /** The IP address from which the mandate was accepted or refused by the customer. */
       @SerializedName("ip")
-      String ip;
+      Object ip;
 
       /**
        * The parameters required to store a mandate accepted offline. Should only be set if
@@ -426,17 +432,17 @@ public class SourceUpdateParams extends ApiRequestParams {
        * customer.
        */
       @SerializedName("user_agent")
-      String userAgent;
+      Object userAgent;
 
       private Acceptance(
           Long date,
           Map<String, Object> extraParams,
-          String ip,
+          Object ip,
           Offline offline,
           Online online,
           Status status,
           Type type,
-          String userAgent) {
+          Object userAgent) {
         this.date = date;
         this.extraParams = extraParams;
         this.ip = ip;
@@ -456,7 +462,7 @@ public class SourceUpdateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
-        private String ip;
+        private Object ip;
 
         private Offline offline;
 
@@ -466,7 +472,7 @@ public class SourceUpdateParams extends ApiRequestParams {
 
         private Type type;
 
-        private String userAgent;
+        private Object userAgent;
 
         /** Finalize and obtain parameter instance from this builder. */
         public Acceptance build() {
@@ -521,6 +527,12 @@ public class SourceUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /** The IP address from which the mandate was accepted or refused by the customer. */
+        public Builder setIp(EmptyParam ip) {
+          this.ip = ip;
+          return this;
+        }
+
         /**
          * The parameters required to store a mandate accepted offline. Should only be set if
          * `mandate[type]` is `offline`
@@ -565,6 +577,15 @@ public class SourceUpdateParams extends ApiRequestParams {
           this.userAgent = userAgent;
           return this;
         }
+
+        /**
+         * The user agent of the browser from which the mandate was accepted or refused by the
+         * customer.
+         */
+        public Builder setUserAgent(EmptyParam userAgent) {
+          this.userAgent = userAgent;
+          return this;
+        }
       }
 
       public static class Offline {
@@ -573,7 +594,7 @@ public class SourceUpdateParams extends ApiRequestParams {
          * `offline`.
          */
         @SerializedName("contact_email")
-        String contactEmail;
+        Object contactEmail;
 
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -585,7 +606,7 @@ public class SourceUpdateParams extends ApiRequestParams {
         @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
         Map<String, Object> extraParams;
 
-        private Offline(String contactEmail, Map<String, Object> extraParams) {
+        private Offline(Object contactEmail, Map<String, Object> extraParams) {
           this.contactEmail = contactEmail;
           this.extraParams = extraParams;
         }
@@ -595,7 +616,7 @@ public class SourceUpdateParams extends ApiRequestParams {
         }
 
         public static class Builder {
-          private String contactEmail;
+          private Object contactEmail;
 
           private Map<String, Object> extraParams;
 
@@ -609,6 +630,15 @@ public class SourceUpdateParams extends ApiRequestParams {
            * is `offline`.
            */
           public Builder setContactEmail(String contactEmail) {
+            this.contactEmail = contactEmail;
+            return this;
+          }
+
+          /**
+           * An email to contact you with if a copy of the mandate is requested, required if `type`
+           * is `offline`.
+           */
+          public Builder setContactEmail(EmptyParam contactEmail) {
             this.contactEmail = contactEmail;
             return this;
           }
@@ -660,16 +690,16 @@ public class SourceUpdateParams extends ApiRequestParams {
 
         /** The IP address from which the mandate was accepted or refused by the customer. */
         @SerializedName("ip")
-        String ip;
+        Object ip;
 
         /**
          * The user agent of the browser from which the mandate was accepted or refused by the
          * customer.
          */
         @SerializedName("user_agent")
-        String userAgent;
+        Object userAgent;
 
-        private Online(Long date, Map<String, Object> extraParams, String ip, String userAgent) {
+        private Online(Long date, Map<String, Object> extraParams, Object ip, Object userAgent) {
           this.date = date;
           this.extraParams = extraParams;
           this.ip = ip;
@@ -685,9 +715,9 @@ public class SourceUpdateParams extends ApiRequestParams {
 
           private Map<String, Object> extraParams;
 
-          private String ip;
+          private Object ip;
 
-          private String userAgent;
+          private Object userAgent;
 
           /** Finalize and obtain parameter instance from this builder. */
           public Online build() {
@@ -734,11 +764,26 @@ public class SourceUpdateParams extends ApiRequestParams {
             return this;
           }
 
+          /** The IP address from which the mandate was accepted or refused by the customer. */
+          public Builder setIp(EmptyParam ip) {
+            this.ip = ip;
+            return this;
+          }
+
           /**
            * The user agent of the browser from which the mandate was accepted or refused by the
            * customer.
            */
           public Builder setUserAgent(String userAgent) {
+            this.userAgent = userAgent;
+            return this;
+          }
+
+          /**
+           * The user agent of the browser from which the mandate was accepted or refused by the
+           * customer.
+           */
+          public Builder setUserAgent(EmptyParam userAgent) {
             this.userAgent = userAgent;
             return this;
           }
@@ -832,7 +877,7 @@ public class SourceUpdateParams extends ApiRequestParams {
 
     /** Owner's email address. */
     @SerializedName("email")
-    String email;
+    Object email;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -845,14 +890,14 @@ public class SourceUpdateParams extends ApiRequestParams {
 
     /** Owner's full name. */
     @SerializedName("name")
-    String name;
+    Object name;
 
     /** Owner's phone number. */
     @SerializedName("phone")
-    String phone;
+    Object phone;
 
     private Owner(
-        Address address, String email, Map<String, Object> extraParams, String name, String phone) {
+        Address address, Object email, Map<String, Object> extraParams, Object name, Object phone) {
       this.address = address;
       this.email = email;
       this.extraParams = extraParams;
@@ -867,13 +912,13 @@ public class SourceUpdateParams extends ApiRequestParams {
     public static class Builder {
       private Address address;
 
-      private String email;
+      private Object email;
 
       private Map<String, Object> extraParams;
 
-      private String name;
+      private Object name;
 
-      private String phone;
+      private Object phone;
 
       /** Finalize and obtain parameter instance from this builder. */
       public Owner build() {
@@ -888,6 +933,12 @@ public class SourceUpdateParams extends ApiRequestParams {
 
       /** Owner's email address. */
       public Builder setEmail(String email) {
+        this.email = email;
+        return this;
+      }
+
+      /** Owner's email address. */
+      public Builder setEmail(EmptyParam email) {
         this.email = email;
         return this;
       }
@@ -924,8 +975,20 @@ public class SourceUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** Owner's full name. */
+      public Builder setName(EmptyParam name) {
+        this.name = name;
+        return this;
+      }
+
       /** Owner's phone number. */
       public Builder setPhone(String phone) {
+        this.phone = phone;
+        return this;
+      }
+
+      /** Owner's phone number. */
+      public Builder setPhone(EmptyParam phone) {
         this.phone = phone;
         return this;
       }
@@ -933,10 +996,10 @@ public class SourceUpdateParams extends ApiRequestParams {
 
     public static class Address {
       @SerializedName("city")
-      String city;
+      Object city;
 
       @SerializedName("country")
-      String country;
+      Object country;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -948,25 +1011,25 @@ public class SourceUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       @SerializedName("line1")
-      String line1;
+      Object line1;
 
       @SerializedName("line2")
-      String line2;
+      Object line2;
 
       @SerializedName("postal_code")
-      String postalCode;
+      Object postalCode;
 
       @SerializedName("state")
-      String state;
+      Object state;
 
       private Address(
-          String city,
-          String country,
+          Object city,
+          Object country,
           Map<String, Object> extraParams,
-          String line1,
-          String line2,
-          String postalCode,
-          String state) {
+          Object line1,
+          Object line2,
+          Object postalCode,
+          Object state) {
         this.city = city;
         this.country = country;
         this.extraParams = extraParams;
@@ -981,19 +1044,19 @@ public class SourceUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private String city;
+        private Object city;
 
-        private String country;
+        private Object country;
 
         private Map<String, Object> extraParams;
 
-        private String line1;
+        private Object line1;
 
-        private String line2;
+        private Object line2;
 
-        private String postalCode;
+        private Object postalCode;
 
-        private String state;
+        private Object state;
 
         /** Finalize and obtain parameter instance from this builder. */
         public Address build() {
@@ -1012,7 +1075,17 @@ public class SourceUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        public Builder setCity(EmptyParam city) {
+          this.city = city;
+          return this;
+        }
+
         public Builder setCountry(String country) {
+          this.country = country;
+          return this;
+        }
+
+        public Builder setCountry(EmptyParam country) {
           this.country = country;
           return this;
         }
@@ -1050,7 +1123,17 @@ public class SourceUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        public Builder setLine1(EmptyParam line1) {
+          this.line1 = line1;
+          return this;
+        }
+
         public Builder setLine2(String line2) {
+          this.line2 = line2;
+          return this;
+        }
+
+        public Builder setLine2(EmptyParam line2) {
           this.line2 = line2;
           return this;
         }
@@ -1060,7 +1143,17 @@ public class SourceUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        public Builder setPostalCode(EmptyParam postalCode) {
+          this.postalCode = postalCode;
+          return this;
+        }
+
         public Builder setState(String state) {
+          this.state = state;
+          return this;
+        }
+
+        public Builder setState(EmptyParam state) {
           this.state = state;
           return this;
         }
@@ -1178,10 +1271,10 @@ public class SourceUpdateParams extends ApiRequestParams {
       Long amount;
 
       @SerializedName("currency")
-      String currency;
+      Object currency;
 
       @SerializedName("description")
-      String description;
+      Object description;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1194,7 +1287,7 @@ public class SourceUpdateParams extends ApiRequestParams {
 
       /** The ID of the SKU being ordered. */
       @SerializedName("parent")
-      String parent;
+      Object parent;
 
       /**
        * The quantity of this order item. When type is `sku`, this is the number of instances of the
@@ -1208,10 +1301,10 @@ public class SourceUpdateParams extends ApiRequestParams {
 
       private Item(
           Long amount,
-          String currency,
-          String description,
+          Object currency,
+          Object description,
           Map<String, Object> extraParams,
-          String parent,
+          Object parent,
           Long quantity,
           Type type) {
         this.amount = amount;
@@ -1230,13 +1323,13 @@ public class SourceUpdateParams extends ApiRequestParams {
       public static class Builder {
         private Long amount;
 
-        private String currency;
+        private Object currency;
 
-        private String description;
+        private Object description;
 
         private Map<String, Object> extraParams;
 
-        private String parent;
+        private Object parent;
 
         private Long quantity;
 
@@ -1264,7 +1357,17 @@ public class SourceUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        public Builder setCurrency(EmptyParam currency) {
+          this.currency = currency;
+          return this;
+        }
+
         public Builder setDescription(String description) {
+          this.description = description;
+          return this;
+        }
+
+        public Builder setDescription(EmptyParam description) {
           this.description = description;
           return this;
         }
@@ -1299,6 +1402,12 @@ public class SourceUpdateParams extends ApiRequestParams {
 
         /** The ID of the SKU being ordered. */
         public Builder setParent(String parent) {
+          this.parent = parent;
+          return this;
+        }
+
+        /** The ID of the SKU being ordered. */
+        public Builder setParent(EmptyParam parent) {
           this.parent = parent;
           return this;
         }
@@ -1347,7 +1456,7 @@ public class SourceUpdateParams extends ApiRequestParams {
 
       /** The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. */
       @SerializedName("carrier")
-      String carrier;
+      Object carrier;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1360,26 +1469,26 @@ public class SourceUpdateParams extends ApiRequestParams {
 
       /** Recipient name. */
       @SerializedName("name")
-      String name;
+      Object name;
 
       /** Recipient phone (including extension). */
       @SerializedName("phone")
-      String phone;
+      Object phone;
 
       /**
        * The tracking number for a physical product, obtained from the delivery service. If multiple
        * tracking numbers were generated for this purchase, please separate them with commas.
        */
       @SerializedName("tracking_number")
-      String trackingNumber;
+      Object trackingNumber;
 
       private Shipping(
           Address address,
-          String carrier,
+          Object carrier,
           Map<String, Object> extraParams,
-          String name,
-          String phone,
-          String trackingNumber) {
+          Object name,
+          Object phone,
+          Object trackingNumber) {
         this.address = address;
         this.carrier = carrier;
         this.extraParams = extraParams;
@@ -1395,15 +1504,15 @@ public class SourceUpdateParams extends ApiRequestParams {
       public static class Builder {
         private Address address;
 
-        private String carrier;
+        private Object carrier;
 
         private Map<String, Object> extraParams;
 
-        private String name;
+        private Object name;
 
-        private String phone;
+        private Object phone;
 
-        private String trackingNumber;
+        private Object trackingNumber;
 
         /** Finalize and obtain parameter instance from this builder. */
         public Shipping build() {
@@ -1424,6 +1533,12 @@ public class SourceUpdateParams extends ApiRequestParams {
 
         /** The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. */
         public Builder setCarrier(String carrier) {
+          this.carrier = carrier;
+          return this;
+        }
+
+        /** The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. */
+        public Builder setCarrier(EmptyParam carrier) {
           this.carrier = carrier;
           return this;
         }
@@ -1462,8 +1577,20 @@ public class SourceUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Recipient name. */
+        public Builder setName(EmptyParam name) {
+          this.name = name;
+          return this;
+        }
+
         /** Recipient phone (including extension). */
         public Builder setPhone(String phone) {
+          this.phone = phone;
+          return this;
+        }
+
+        /** Recipient phone (including extension). */
+        public Builder setPhone(EmptyParam phone) {
           this.phone = phone;
           return this;
         }
@@ -1477,14 +1604,24 @@ public class SourceUpdateParams extends ApiRequestParams {
           this.trackingNumber = trackingNumber;
           return this;
         }
+
+        /**
+         * The tracking number for a physical product, obtained from the delivery service. If
+         * multiple tracking numbers were generated for this purchase, please separate them with
+         * commas.
+         */
+        public Builder setTrackingNumber(EmptyParam trackingNumber) {
+          this.trackingNumber = trackingNumber;
+          return this;
+        }
       }
 
       public static class Address {
         @SerializedName("city")
-        String city;
+        Object city;
 
         @SerializedName("country")
-        String country;
+        Object country;
 
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -1497,25 +1634,25 @@ public class SourceUpdateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         @SerializedName("line1")
-        String line1;
+        Object line1;
 
         @SerializedName("line2")
-        String line2;
+        Object line2;
 
         @SerializedName("postal_code")
-        String postalCode;
+        Object postalCode;
 
         @SerializedName("state")
-        String state;
+        Object state;
 
         private Address(
-            String city,
-            String country,
+            Object city,
+            Object country,
             Map<String, Object> extraParams,
-            String line1,
-            String line2,
-            String postalCode,
-            String state) {
+            Object line1,
+            Object line2,
+            Object postalCode,
+            Object state) {
           this.city = city;
           this.country = country;
           this.extraParams = extraParams;
@@ -1530,19 +1667,19 @@ public class SourceUpdateParams extends ApiRequestParams {
         }
 
         public static class Builder {
-          private String city;
+          private Object city;
 
-          private String country;
+          private Object country;
 
           private Map<String, Object> extraParams;
 
-          private String line1;
+          private Object line1;
 
-          private String line2;
+          private Object line2;
 
-          private String postalCode;
+          private Object postalCode;
 
-          private String state;
+          private Object state;
 
           /** Finalize and obtain parameter instance from this builder. */
           public Address build() {
@@ -1561,7 +1698,17 @@ public class SourceUpdateParams extends ApiRequestParams {
             return this;
           }
 
+          public Builder setCity(EmptyParam city) {
+            this.city = city;
+            return this;
+          }
+
           public Builder setCountry(String country) {
+            this.country = country;
+            return this;
+          }
+
+          public Builder setCountry(EmptyParam country) {
             this.country = country;
             return this;
           }
@@ -1599,7 +1746,17 @@ public class SourceUpdateParams extends ApiRequestParams {
             return this;
           }
 
+          public Builder setLine1(EmptyParam line1) {
+            this.line1 = line1;
+            return this;
+          }
+
           public Builder setLine2(String line2) {
+            this.line2 = line2;
+            return this;
+          }
+
+          public Builder setLine2(EmptyParam line2) {
             this.line2 = line2;
             return this;
           }
@@ -1609,7 +1766,17 @@ public class SourceUpdateParams extends ApiRequestParams {
             return this;
           }
 
+          public Builder setPostalCode(EmptyParam postalCode) {
+            this.postalCode = postalCode;
+            return this;
+          }
+
           public Builder setState(String state) {
+            this.state = state;
+            return this;
+          }
+
+          public Builder setState(EmptyParam state) {
             this.state = state;
             return this;
           }

@@ -2,6 +2,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -15,11 +16,11 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
    * Customer, and payment methods attached to other Customers cannot be used with this SetupIntent.
    */
   @SerializedName("customer")
-  String customer;
+  Object customer;
 
   /** An arbitrary string attached to the object. Often useful for displaying to users. */
   @SerializedName("description")
-  String description;
+  Object description;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -46,7 +47,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
    * to this SetupIntent.
    */
   @SerializedName("payment_method")
-  String paymentMethod;
+  Object paymentMethod;
 
   /**
    * The list of payment method types (e.g. card) that this SetupIntent is allowed to set up. If
@@ -56,12 +57,12 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
   List<String> paymentMethodTypes;
 
   private SetupIntentUpdateParams(
-      String customer,
-      String description,
+      Object customer,
+      Object description,
       List<String> expand,
       Map<String, Object> extraParams,
       Map<String, String> metadata,
-      String paymentMethod,
+      Object paymentMethod,
       List<String> paymentMethodTypes) {
     this.customer = customer;
     this.description = description;
@@ -77,9 +78,9 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String customer;
+    private Object customer;
 
-    private String description;
+    private Object description;
 
     private List<String> expand;
 
@@ -87,7 +88,7 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
-    private String paymentMethod;
+    private Object paymentMethod;
 
     private List<String> paymentMethodTypes;
 
@@ -115,8 +116,26 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * ID of the Customer this SetupIntent belongs to, if one exists.
+     *
+     * <p>If present, payment methods used with this SetupIntent can only be attached to this
+     * Customer, and payment methods attached to other Customers cannot be used with this
+     * SetupIntent.
+     */
+    public Builder setCustomer(EmptyParam customer) {
+      this.customer = customer;
+      return this;
+    }
+
     /** An arbitrary string attached to the object. Often useful for displaying to users. */
     public Builder setDescription(String description) {
+      this.description = description;
+      return this;
+    }
+
+    /** An arbitrary string attached to the object. Often useful for displaying to users. */
+    public Builder setDescription(EmptyParam description) {
       this.description = description;
       return this;
     }
@@ -204,6 +223,15 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
      * attach to this SetupIntent.
      */
     public Builder setPaymentMethod(String paymentMethod) {
+      this.paymentMethod = paymentMethod;
+      return this;
+    }
+
+    /**
+     * ID of the payment method (a PaymentMethod, Card, BankAccount, or saved Source object) to
+     * attach to this SetupIntent.
+     */
+    public Builder setPaymentMethod(EmptyParam paymentMethod) {
       this.paymentMethod = paymentMethod;
       return this;
     }

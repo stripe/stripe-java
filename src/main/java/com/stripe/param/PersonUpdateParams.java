@@ -28,7 +28,7 @@ public class PersonUpdateParams extends ApiRequestParams {
 
   /** The person's email address. */
   @SerializedName("email")
-  String email;
+  Object email;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -45,19 +45,19 @@ public class PersonUpdateParams extends ApiRequestParams {
 
   /** The person's first name. */
   @SerializedName("first_name")
-  String firstName;
+  Object firstName;
 
   /** The Kana variation of the person's first name (Japan only). */
   @SerializedName("first_name_kana")
-  String firstNameKana;
+  Object firstNameKana;
 
   /** The Kanji variation of the person's first name (Japan only). */
   @SerializedName("first_name_kanji")
-  String firstNameKanji;
+  Object firstNameKanji;
 
   /** The person's gender (International regulations require either "male" or "female"). */
   @SerializedName("gender")
-  String gender;
+  Object gender;
 
   /**
    * The person's ID number, as appropriate for their country. For example, a social security number
@@ -66,23 +66,23 @@ public class PersonUpdateParams extends ApiRequestParams {
    * Stripe.js](https://stripe.com/docs/stripe.js#collecting-pii-data).
    */
   @SerializedName("id_number")
-  String idNumber;
+  Object idNumber;
 
   /** The person's last name. */
   @SerializedName("last_name")
-  String lastName;
+  Object lastName;
 
   /** The Kana variation of the person's last name (Japan only). */
   @SerializedName("last_name_kana")
-  String lastNameKana;
+  Object lastNameKana;
 
   /** The Kanji variation of the person's last name (Japan only). */
   @SerializedName("last_name_kanji")
-  String lastNameKanji;
+  Object lastNameKanji;
 
   /** The person's maiden name. */
   @SerializedName("maiden_name")
-  String maidenName;
+  Object maidenName;
 
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
@@ -97,11 +97,11 @@ public class PersonUpdateParams extends ApiRequestParams {
    * details to the person.
    */
   @SerializedName("person_token")
-  String personToken;
+  Object personToken;
 
   /** The person's phone number. */
   @SerializedName("phone")
-  String phone;
+  Object phone;
 
   /** The relationship that this person has with the account's legal entity. */
   @SerializedName("relationship")
@@ -109,7 +109,7 @@ public class PersonUpdateParams extends ApiRequestParams {
 
   /** The last 4 digits of the person's social security number. */
   @SerializedName("ssn_last_4")
-  String ssnLast4;
+  Object ssnLast4;
 
   /** The person's verification status. */
   @SerializedName("verification")
@@ -120,23 +120,23 @@ public class PersonUpdateParams extends ApiRequestParams {
       AddressKana addressKana,
       AddressKanji addressKanji,
       Object dob,
-      String email,
+      Object email,
       List<String> expand,
       Map<String, Object> extraParams,
-      String firstName,
-      String firstNameKana,
-      String firstNameKanji,
-      String gender,
-      String idNumber,
-      String lastName,
-      String lastNameKana,
-      String lastNameKanji,
-      String maidenName,
+      Object firstName,
+      Object firstNameKana,
+      Object firstNameKanji,
+      Object gender,
+      Object idNumber,
+      Object lastName,
+      Object lastNameKana,
+      Object lastNameKanji,
+      Object maidenName,
       Map<String, String> metadata,
-      String personToken,
-      String phone,
+      Object personToken,
+      Object phone,
       Relationship relationship,
-      String ssnLast4,
+      Object ssnLast4,
       Verification verification) {
     this.address = address;
     this.addressKana = addressKana;
@@ -175,39 +175,39 @@ public class PersonUpdateParams extends ApiRequestParams {
 
     private Object dob;
 
-    private String email;
+    private Object email;
 
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
-    private String firstName;
+    private Object firstName;
 
-    private String firstNameKana;
+    private Object firstNameKana;
 
-    private String firstNameKanji;
+    private Object firstNameKanji;
 
-    private String gender;
+    private Object gender;
 
-    private String idNumber;
+    private Object idNumber;
 
-    private String lastName;
+    private Object lastName;
 
-    private String lastNameKana;
+    private Object lastNameKana;
 
-    private String lastNameKanji;
+    private Object lastNameKanji;
 
-    private String maidenName;
+    private Object maidenName;
 
     private Map<String, String> metadata;
 
-    private String personToken;
+    private Object personToken;
 
-    private String phone;
+    private Object phone;
 
     private Relationship relationship;
 
-    private String ssnLast4;
+    private Object ssnLast4;
 
     private Verification verification;
 
@@ -274,6 +274,12 @@ public class PersonUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /** The person's email address. */
+    public Builder setEmail(EmptyParam email) {
+      this.email = email;
+      return this;
+    }
+
     /**
      * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
      * subsequent calls adds additional elements to the original list. See {@link
@@ -332,8 +338,20 @@ public class PersonUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /** The person's first name. */
+    public Builder setFirstName(EmptyParam firstName) {
+      this.firstName = firstName;
+      return this;
+    }
+
     /** The Kana variation of the person's first name (Japan only). */
     public Builder setFirstNameKana(String firstNameKana) {
+      this.firstNameKana = firstNameKana;
+      return this;
+    }
+
+    /** The Kana variation of the person's first name (Japan only). */
+    public Builder setFirstNameKana(EmptyParam firstNameKana) {
       this.firstNameKana = firstNameKana;
       return this;
     }
@@ -344,8 +362,20 @@ public class PersonUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /** The Kanji variation of the person's first name (Japan only). */
+    public Builder setFirstNameKanji(EmptyParam firstNameKanji) {
+      this.firstNameKanji = firstNameKanji;
+      return this;
+    }
+
     /** The person's gender (International regulations require either "male" or "female"). */
     public Builder setGender(String gender) {
+      this.gender = gender;
+      return this;
+    }
+
+    /** The person's gender (International regulations require either "male" or "female"). */
+    public Builder setGender(EmptyParam gender) {
       this.gender = gender;
       return this;
     }
@@ -361,8 +391,25 @@ public class PersonUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * The person's ID number, as appropriate for their country. For example, a social security
+     * number in the U.S., social insurance number in Canada, etc. Instead of the number itself, you
+     * can also provide a [PII token provided by
+     * Stripe.js](https://stripe.com/docs/stripe.js#collecting-pii-data).
+     */
+    public Builder setIdNumber(EmptyParam idNumber) {
+      this.idNumber = idNumber;
+      return this;
+    }
+
     /** The person's last name. */
     public Builder setLastName(String lastName) {
+      this.lastName = lastName;
+      return this;
+    }
+
+    /** The person's last name. */
+    public Builder setLastName(EmptyParam lastName) {
       this.lastName = lastName;
       return this;
     }
@@ -373,14 +420,32 @@ public class PersonUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /** The Kana variation of the person's last name (Japan only). */
+    public Builder setLastNameKana(EmptyParam lastNameKana) {
+      this.lastNameKana = lastNameKana;
+      return this;
+    }
+
     /** The Kanji variation of the person's last name (Japan only). */
     public Builder setLastNameKanji(String lastNameKanji) {
       this.lastNameKanji = lastNameKanji;
       return this;
     }
 
+    /** The Kanji variation of the person's last name (Japan only). */
+    public Builder setLastNameKanji(EmptyParam lastNameKanji) {
+      this.lastNameKanji = lastNameKanji;
+      return this;
+    }
+
     /** The person's maiden name. */
     public Builder setMaidenName(String maidenName) {
+      this.maidenName = maidenName;
+      return this;
+    }
+
+    /** The person's maiden name. */
+    public Builder setMaidenName(EmptyParam maidenName) {
       this.maidenName = maidenName;
       return this;
     }
@@ -420,8 +485,23 @@ public class PersonUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * A [person token](https://stripe.com/docs/connect/account-tokens), used to securely provide
+     * details to the person.
+     */
+    public Builder setPersonToken(EmptyParam personToken) {
+      this.personToken = personToken;
+      return this;
+    }
+
     /** The person's phone number. */
     public Builder setPhone(String phone) {
+      this.phone = phone;
+      return this;
+    }
+
+    /** The person's phone number. */
+    public Builder setPhone(EmptyParam phone) {
       this.phone = phone;
       return this;
     }
@@ -438,6 +518,12 @@ public class PersonUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /** The last 4 digits of the person's social security number. */
+    public Builder setSsnLast4(EmptyParam ssnLast4) {
+      this.ssnLast4 = ssnLast4;
+      return this;
+    }
+
     /** The person's verification status. */
     public Builder setVerification(Verification verification) {
       this.verification = verification;
@@ -448,14 +534,14 @@ public class PersonUpdateParams extends ApiRequestParams {
   public static class Address {
     /** City, district, suburb, town, or village. */
     @SerializedName("city")
-    String city;
+    Object city;
 
     /**
      * Two-letter country code ([ISO 3166-1
      * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
      */
     @SerializedName("country")
-    String country;
+    Object country;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -468,28 +554,28 @@ public class PersonUpdateParams extends ApiRequestParams {
 
     /** Address line 1 (e.g., street, PO Box, or company name). */
     @SerializedName("line1")
-    String line1;
+    Object line1;
 
     /** Address line 2 (e.g., apartment, suite, unit, or building). */
     @SerializedName("line2")
-    String line2;
+    Object line2;
 
     /** ZIP or postal code. */
     @SerializedName("postal_code")
-    String postalCode;
+    Object postalCode;
 
     /** State, county, province, or region. */
     @SerializedName("state")
-    String state;
+    Object state;
 
     private Address(
-        String city,
-        String country,
+        Object city,
+        Object country,
         Map<String, Object> extraParams,
-        String line1,
-        String line2,
-        String postalCode,
-        String state) {
+        Object line1,
+        Object line2,
+        Object postalCode,
+        Object state) {
       this.city = city;
       this.country = country;
       this.extraParams = extraParams;
@@ -504,19 +590,19 @@ public class PersonUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private String city;
+      private Object city;
 
-      private String country;
+      private Object country;
 
       private Map<String, Object> extraParams;
 
-      private String line1;
+      private Object line1;
 
-      private String line2;
+      private Object line2;
 
-      private String postalCode;
+      private Object postalCode;
 
-      private String state;
+      private Object state;
 
       /** Finalize and obtain parameter instance from this builder. */
       public Address build() {
@@ -536,11 +622,26 @@ public class PersonUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** City, district, suburb, town, or village. */
+      public Builder setCity(EmptyParam city) {
+        this.city = city;
+        return this;
+      }
+
       /**
        * Two-letter country code ([ISO 3166-1
        * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
        */
       public Builder setCountry(String country) {
+        this.country = country;
+        return this;
+      }
+
+      /**
+       * Two-letter country code ([ISO 3166-1
+       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       */
+      public Builder setCountry(EmptyParam country) {
         this.country = country;
         return this;
       }
@@ -577,8 +678,20 @@ public class PersonUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** Address line 1 (e.g., street, PO Box, or company name). */
+      public Builder setLine1(EmptyParam line1) {
+        this.line1 = line1;
+        return this;
+      }
+
       /** Address line 2 (e.g., apartment, suite, unit, or building). */
       public Builder setLine2(String line2) {
+        this.line2 = line2;
+        return this;
+      }
+
+      /** Address line 2 (e.g., apartment, suite, unit, or building). */
+      public Builder setLine2(EmptyParam line2) {
         this.line2 = line2;
         return this;
       }
@@ -589,8 +702,20 @@ public class PersonUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** ZIP or postal code. */
+      public Builder setPostalCode(EmptyParam postalCode) {
+        this.postalCode = postalCode;
+        return this;
+      }
+
       /** State, county, province, or region. */
       public Builder setState(String state) {
+        this.state = state;
+        return this;
+      }
+
+      /** State, county, province, or region. */
+      public Builder setState(EmptyParam state) {
         this.state = state;
         return this;
       }
@@ -600,14 +725,14 @@ public class PersonUpdateParams extends ApiRequestParams {
   public static class AddressKana {
     /** City or ward. */
     @SerializedName("city")
-    String city;
+    Object city;
 
     /**
      * Two-letter country code ([ISO 3166-1
      * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
      */
     @SerializedName("country")
-    String country;
+    Object country;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -620,33 +745,33 @@ public class PersonUpdateParams extends ApiRequestParams {
 
     /** Block or building number. */
     @SerializedName("line1")
-    String line1;
+    Object line1;
 
     /** Building details. */
     @SerializedName("line2")
-    String line2;
+    Object line2;
 
     /** Postal code. */
     @SerializedName("postal_code")
-    String postalCode;
+    Object postalCode;
 
     /** Prefecture. */
     @SerializedName("state")
-    String state;
+    Object state;
 
     /** Town or cho-me. */
     @SerializedName("town")
-    String town;
+    Object town;
 
     private AddressKana(
-        String city,
-        String country,
+        Object city,
+        Object country,
         Map<String, Object> extraParams,
-        String line1,
-        String line2,
-        String postalCode,
-        String state,
-        String town) {
+        Object line1,
+        Object line2,
+        Object postalCode,
+        Object state,
+        Object town) {
       this.city = city;
       this.country = country;
       this.extraParams = extraParams;
@@ -662,21 +787,21 @@ public class PersonUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private String city;
+      private Object city;
 
-      private String country;
+      private Object country;
 
       private Map<String, Object> extraParams;
 
-      private String line1;
+      private Object line1;
 
-      private String line2;
+      private Object line2;
 
-      private String postalCode;
+      private Object postalCode;
 
-      private String state;
+      private Object state;
 
-      private String town;
+      private Object town;
 
       /** Finalize and obtain parameter instance from this builder. */
       public AddressKana build() {
@@ -697,11 +822,26 @@ public class PersonUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** City or ward. */
+      public Builder setCity(EmptyParam city) {
+        this.city = city;
+        return this;
+      }
+
       /**
        * Two-letter country code ([ISO 3166-1
        * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
        */
       public Builder setCountry(String country) {
+        this.country = country;
+        return this;
+      }
+
+      /**
+       * Two-letter country code ([ISO 3166-1
+       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       */
+      public Builder setCountry(EmptyParam country) {
         this.country = country;
         return this;
       }
@@ -738,8 +878,20 @@ public class PersonUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** Block or building number. */
+      public Builder setLine1(EmptyParam line1) {
+        this.line1 = line1;
+        return this;
+      }
+
       /** Building details. */
       public Builder setLine2(String line2) {
+        this.line2 = line2;
+        return this;
+      }
+
+      /** Building details. */
+      public Builder setLine2(EmptyParam line2) {
         this.line2 = line2;
         return this;
       }
@@ -750,8 +902,20 @@ public class PersonUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** Postal code. */
+      public Builder setPostalCode(EmptyParam postalCode) {
+        this.postalCode = postalCode;
+        return this;
+      }
+
       /** Prefecture. */
       public Builder setState(String state) {
+        this.state = state;
+        return this;
+      }
+
+      /** Prefecture. */
+      public Builder setState(EmptyParam state) {
         this.state = state;
         return this;
       }
@@ -761,20 +925,26 @@ public class PersonUpdateParams extends ApiRequestParams {
         this.town = town;
         return this;
       }
+
+      /** Town or cho-me. */
+      public Builder setTown(EmptyParam town) {
+        this.town = town;
+        return this;
+      }
     }
   }
 
   public static class AddressKanji {
     /** City or ward. */
     @SerializedName("city")
-    String city;
+    Object city;
 
     /**
      * Two-letter country code ([ISO 3166-1
      * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
      */
     @SerializedName("country")
-    String country;
+    Object country;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -787,33 +957,33 @@ public class PersonUpdateParams extends ApiRequestParams {
 
     /** Block or building number. */
     @SerializedName("line1")
-    String line1;
+    Object line1;
 
     /** Building details. */
     @SerializedName("line2")
-    String line2;
+    Object line2;
 
     /** Postal code. */
     @SerializedName("postal_code")
-    String postalCode;
+    Object postalCode;
 
     /** Prefecture. */
     @SerializedName("state")
-    String state;
+    Object state;
 
     /** Town or cho-me. */
     @SerializedName("town")
-    String town;
+    Object town;
 
     private AddressKanji(
-        String city,
-        String country,
+        Object city,
+        Object country,
         Map<String, Object> extraParams,
-        String line1,
-        String line2,
-        String postalCode,
-        String state,
-        String town) {
+        Object line1,
+        Object line2,
+        Object postalCode,
+        Object state,
+        Object town) {
       this.city = city;
       this.country = country;
       this.extraParams = extraParams;
@@ -829,21 +999,21 @@ public class PersonUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private String city;
+      private Object city;
 
-      private String country;
+      private Object country;
 
       private Map<String, Object> extraParams;
 
-      private String line1;
+      private Object line1;
 
-      private String line2;
+      private Object line2;
 
-      private String postalCode;
+      private Object postalCode;
 
-      private String state;
+      private Object state;
 
-      private String town;
+      private Object town;
 
       /** Finalize and obtain parameter instance from this builder. */
       public AddressKanji build() {
@@ -864,11 +1034,26 @@ public class PersonUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** City or ward. */
+      public Builder setCity(EmptyParam city) {
+        this.city = city;
+        return this;
+      }
+
       /**
        * Two-letter country code ([ISO 3166-1
        * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
        */
       public Builder setCountry(String country) {
+        this.country = country;
+        return this;
+      }
+
+      /**
+       * Two-letter country code ([ISO 3166-1
+       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       */
+      public Builder setCountry(EmptyParam country) {
         this.country = country;
         return this;
       }
@@ -905,8 +1090,20 @@ public class PersonUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** Block or building number. */
+      public Builder setLine1(EmptyParam line1) {
+        this.line1 = line1;
+        return this;
+      }
+
       /** Building details. */
       public Builder setLine2(String line2) {
+        this.line2 = line2;
+        return this;
+      }
+
+      /** Building details. */
+      public Builder setLine2(EmptyParam line2) {
         this.line2 = line2;
         return this;
       }
@@ -917,14 +1114,32 @@ public class PersonUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** Postal code. */
+      public Builder setPostalCode(EmptyParam postalCode) {
+        this.postalCode = postalCode;
+        return this;
+      }
+
       /** Prefecture. */
       public Builder setState(String state) {
         this.state = state;
         return this;
       }
 
+      /** Prefecture. */
+      public Builder setState(EmptyParam state) {
+        this.state = state;
+        return this;
+      }
+
       /** Town or cho-me. */
       public Builder setTown(String town) {
+        this.town = town;
+        return this;
+      }
+
+      /** Town or cho-me. */
+      public Builder setTown(EmptyParam town) {
         this.town = town;
         return this;
       }
@@ -1066,7 +1281,7 @@ public class PersonUpdateParams extends ApiRequestParams {
 
     /** The person's title (e.g., CEO, Support Engineer). */
     @SerializedName("title")
-    String title;
+    Object title;
 
     private Relationship(
         Boolean accountOpener,
@@ -1075,7 +1290,7 @@ public class PersonUpdateParams extends ApiRequestParams {
         Map<String, Object> extraParams,
         Boolean owner,
         Object percentOwnership,
-        String title) {
+        Object title) {
       this.accountOpener = accountOpener;
       this.director = director;
       this.executive = executive;
@@ -1102,7 +1317,7 @@ public class PersonUpdateParams extends ApiRequestParams {
 
       private Object percentOwnership;
 
-      private String title;
+      private Object title;
 
       /** Finalize and obtain parameter instance from this builder. */
       public Relationship build() {
@@ -1190,6 +1405,12 @@ public class PersonUpdateParams extends ApiRequestParams {
 
       /** The person's title (e.g., CEO, Support Engineer). */
       public Builder setTitle(String title) {
+        this.title = title;
+        return this;
+      }
+
+      /** The person's title (e.g., CEO, Support Engineer). */
+      public Builder setTitle(EmptyParam title) {
         this.title = title;
         return this;
       }
@@ -1289,7 +1510,7 @@ public class PersonUpdateParams extends ApiRequestParams {
        * 8,000px), in JPG or PNG format, and less than 10 MB in size.
        */
       @SerializedName("back")
-      String back;
+      Object back;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1306,9 +1527,9 @@ public class PersonUpdateParams extends ApiRequestParams {
        * 8,000px), in JPG or PNG format, and less than 10 MB in size.
        */
       @SerializedName("front")
-      String front;
+      Object front;
 
-      private AdditionalDocument(String back, Map<String, Object> extraParams, String front) {
+      private AdditionalDocument(Object back, Map<String, Object> extraParams, Object front) {
         this.back = back;
         this.extraParams = extraParams;
         this.front = front;
@@ -1319,11 +1540,11 @@ public class PersonUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private String back;
+        private Object back;
 
         private Map<String, Object> extraParams;
 
-        private String front;
+        private Object front;
 
         /** Finalize and obtain parameter instance from this builder. */
         public AdditionalDocument build() {
@@ -1336,6 +1557,16 @@ public class PersonUpdateParams extends ApiRequestParams {
          * 8,000px), in JPG or PNG format, and less than 10 MB in size.
          */
         public Builder setBack(String back) {
+          this.back = back;
+          return this;
+        }
+
+        /**
+         * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
+         * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px by
+         * 8,000px), in JPG or PNG format, and less than 10 MB in size.
+         */
+        public Builder setBack(EmptyParam back) {
           this.back = back;
           return this;
         }
@@ -1377,6 +1608,16 @@ public class PersonUpdateParams extends ApiRequestParams {
           this.front = front;
           return this;
         }
+
+        /**
+         * The front of an ID returned by a [file upload](#create_file) with a `purpose` value of
+         * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px by
+         * 8,000px), in JPG or PNG format, and less than 10 MB in size.
+         */
+        public Builder setFront(EmptyParam front) {
+          this.front = front;
+          return this;
+        }
       }
     }
 
@@ -1387,7 +1628,7 @@ public class PersonUpdateParams extends ApiRequestParams {
        * 8,000px), in JPG or PNG format, and less than 10 MB in size.
        */
       @SerializedName("back")
-      String back;
+      Object back;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1404,9 +1645,9 @@ public class PersonUpdateParams extends ApiRequestParams {
        * 8,000px), in JPG or PNG format, and less than 10 MB in size.
        */
       @SerializedName("front")
-      String front;
+      Object front;
 
-      private Document(String back, Map<String, Object> extraParams, String front) {
+      private Document(Object back, Map<String, Object> extraParams, Object front) {
         this.back = back;
         this.extraParams = extraParams;
         this.front = front;
@@ -1417,11 +1658,11 @@ public class PersonUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private String back;
+        private Object back;
 
         private Map<String, Object> extraParams;
 
-        private String front;
+        private Object front;
 
         /** Finalize and obtain parameter instance from this builder. */
         public Document build() {
@@ -1434,6 +1675,16 @@ public class PersonUpdateParams extends ApiRequestParams {
          * 8,000px), in JPG or PNG format, and less than 10 MB in size.
          */
         public Builder setBack(String back) {
+          this.back = back;
+          return this;
+        }
+
+        /**
+         * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
+         * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px by
+         * 8,000px), in JPG or PNG format, and less than 10 MB in size.
+         */
+        public Builder setBack(EmptyParam back) {
           this.back = back;
           return this;
         }
@@ -1472,6 +1723,16 @@ public class PersonUpdateParams extends ApiRequestParams {
          * 8,000px), in JPG or PNG format, and less than 10 MB in size.
          */
         public Builder setFront(String front) {
+          this.front = front;
+          return this;
+        }
+
+        /**
+         * The front of an ID returned by a [file upload](#create_file) with a `purpose` value of
+         * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px by
+         * 8,000px), in JPG or PNG format, and less than 10 MB in size.
+         */
+        public Builder setFront(EmptyParam front) {
           this.front = front;
           return this;
         }

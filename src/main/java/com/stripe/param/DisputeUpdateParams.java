@@ -2,6 +2,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -180,46 +181,46 @@ public class DisputeUpdateParams extends ApiRequestParams {
   public static class Evidence {
     /** Has a maximum character count of 20,000. */
     @SerializedName("access_activity_log")
-    String accessActivityLog;
+    Object accessActivityLog;
 
     @SerializedName("billing_address")
-    String billingAddress;
+    Object billingAddress;
 
     @SerializedName("cancellation_policy")
-    String cancellationPolicy;
+    Object cancellationPolicy;
 
     /** Has a maximum character count of 20,000. */
     @SerializedName("cancellation_policy_disclosure")
-    String cancellationPolicyDisclosure;
+    Object cancellationPolicyDisclosure;
 
     /** Has a maximum character count of 20,000. */
     @SerializedName("cancellation_rebuttal")
-    String cancellationRebuttal;
+    Object cancellationRebuttal;
 
     @SerializedName("customer_communication")
-    String customerCommunication;
+    Object customerCommunication;
 
     @SerializedName("customer_email_address")
-    String customerEmailAddress;
+    Object customerEmailAddress;
 
     @SerializedName("customer_name")
-    String customerName;
+    Object customerName;
 
     @SerializedName("customer_purchase_ip")
-    String customerPurchaseIp;
+    Object customerPurchaseIp;
 
     @SerializedName("customer_signature")
-    String customerSignature;
+    Object customerSignature;
 
     @SerializedName("duplicate_charge_documentation")
-    String duplicateChargeDocumentation;
+    Object duplicateChargeDocumentation;
 
     /** Has a maximum character count of 20,000. */
     @SerializedName("duplicate_charge_explanation")
-    String duplicateChargeExplanation;
+    Object duplicateChargeExplanation;
 
     @SerializedName("duplicate_charge_id")
-    String duplicateChargeId;
+    Object duplicateChargeId;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -232,79 +233,79 @@ public class DisputeUpdateParams extends ApiRequestParams {
 
     /** Has a maximum character count of 20,000. */
     @SerializedName("product_description")
-    String productDescription;
+    Object productDescription;
 
     @SerializedName("receipt")
-    String receipt;
+    Object receipt;
 
     @SerializedName("refund_policy")
-    String refundPolicy;
+    Object refundPolicy;
 
     /** Has a maximum character count of 20,000. */
     @SerializedName("refund_policy_disclosure")
-    String refundPolicyDisclosure;
+    Object refundPolicyDisclosure;
 
     /** Has a maximum character count of 20,000. */
     @SerializedName("refund_refusal_explanation")
-    String refundRefusalExplanation;
+    Object refundRefusalExplanation;
 
     @SerializedName("service_date")
-    String serviceDate;
+    Object serviceDate;
 
     @SerializedName("service_documentation")
-    String serviceDocumentation;
+    Object serviceDocumentation;
 
     @SerializedName("shipping_address")
-    String shippingAddress;
+    Object shippingAddress;
 
     @SerializedName("shipping_carrier")
-    String shippingCarrier;
+    Object shippingCarrier;
 
     @SerializedName("shipping_date")
-    String shippingDate;
+    Object shippingDate;
 
     @SerializedName("shipping_documentation")
-    String shippingDocumentation;
+    Object shippingDocumentation;
 
     @SerializedName("shipping_tracking_number")
-    String shippingTrackingNumber;
+    Object shippingTrackingNumber;
 
     @SerializedName("uncategorized_file")
-    String uncategorizedFile;
+    Object uncategorizedFile;
 
     /** Has a maximum character count of 20,000. */
     @SerializedName("uncategorized_text")
-    String uncategorizedText;
+    Object uncategorizedText;
 
     private Evidence(
-        String accessActivityLog,
-        String billingAddress,
-        String cancellationPolicy,
-        String cancellationPolicyDisclosure,
-        String cancellationRebuttal,
-        String customerCommunication,
-        String customerEmailAddress,
-        String customerName,
-        String customerPurchaseIp,
-        String customerSignature,
-        String duplicateChargeDocumentation,
-        String duplicateChargeExplanation,
-        String duplicateChargeId,
+        Object accessActivityLog,
+        Object billingAddress,
+        Object cancellationPolicy,
+        Object cancellationPolicyDisclosure,
+        Object cancellationRebuttal,
+        Object customerCommunication,
+        Object customerEmailAddress,
+        Object customerName,
+        Object customerPurchaseIp,
+        Object customerSignature,
+        Object duplicateChargeDocumentation,
+        Object duplicateChargeExplanation,
+        Object duplicateChargeId,
         Map<String, Object> extraParams,
-        String productDescription,
-        String receipt,
-        String refundPolicy,
-        String refundPolicyDisclosure,
-        String refundRefusalExplanation,
-        String serviceDate,
-        String serviceDocumentation,
-        String shippingAddress,
-        String shippingCarrier,
-        String shippingDate,
-        String shippingDocumentation,
-        String shippingTrackingNumber,
-        String uncategorizedFile,
-        String uncategorizedText) {
+        Object productDescription,
+        Object receipt,
+        Object refundPolicy,
+        Object refundPolicyDisclosure,
+        Object refundRefusalExplanation,
+        Object serviceDate,
+        Object serviceDocumentation,
+        Object shippingAddress,
+        Object shippingCarrier,
+        Object shippingDate,
+        Object shippingDocumentation,
+        Object shippingTrackingNumber,
+        Object uncategorizedFile,
+        Object uncategorizedText) {
       this.accessActivityLog = accessActivityLog;
       this.billingAddress = billingAddress;
       this.cancellationPolicy = cancellationPolicy;
@@ -340,61 +341,61 @@ public class DisputeUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private String accessActivityLog;
+      private Object accessActivityLog;
 
-      private String billingAddress;
+      private Object billingAddress;
 
-      private String cancellationPolicy;
+      private Object cancellationPolicy;
 
-      private String cancellationPolicyDisclosure;
+      private Object cancellationPolicyDisclosure;
 
-      private String cancellationRebuttal;
+      private Object cancellationRebuttal;
 
-      private String customerCommunication;
+      private Object customerCommunication;
 
-      private String customerEmailAddress;
+      private Object customerEmailAddress;
 
-      private String customerName;
+      private Object customerName;
 
-      private String customerPurchaseIp;
+      private Object customerPurchaseIp;
 
-      private String customerSignature;
+      private Object customerSignature;
 
-      private String duplicateChargeDocumentation;
+      private Object duplicateChargeDocumentation;
 
-      private String duplicateChargeExplanation;
+      private Object duplicateChargeExplanation;
 
-      private String duplicateChargeId;
+      private Object duplicateChargeId;
 
       private Map<String, Object> extraParams;
 
-      private String productDescription;
+      private Object productDescription;
 
-      private String receipt;
+      private Object receipt;
 
-      private String refundPolicy;
+      private Object refundPolicy;
 
-      private String refundPolicyDisclosure;
+      private Object refundPolicyDisclosure;
 
-      private String refundRefusalExplanation;
+      private Object refundRefusalExplanation;
 
-      private String serviceDate;
+      private Object serviceDate;
 
-      private String serviceDocumentation;
+      private Object serviceDocumentation;
 
-      private String shippingAddress;
+      private Object shippingAddress;
 
-      private String shippingCarrier;
+      private Object shippingCarrier;
 
-      private String shippingDate;
+      private Object shippingDate;
 
-      private String shippingDocumentation;
+      private Object shippingDocumentation;
 
-      private String shippingTrackingNumber;
+      private Object shippingTrackingNumber;
 
-      private String uncategorizedFile;
+      private Object uncategorizedFile;
 
-      private String uncategorizedText;
+      private Object uncategorizedText;
 
       /** Finalize and obtain parameter instance from this builder. */
       public Evidence build() {
@@ -435,12 +436,28 @@ public class DisputeUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** Has a maximum character count of 20,000. */
+      public Builder setAccessActivityLog(EmptyParam accessActivityLog) {
+        this.accessActivityLog = accessActivityLog;
+        return this;
+      }
+
       public Builder setBillingAddress(String billingAddress) {
         this.billingAddress = billingAddress;
         return this;
       }
 
+      public Builder setBillingAddress(EmptyParam billingAddress) {
+        this.billingAddress = billingAddress;
+        return this;
+      }
+
       public Builder setCancellationPolicy(String cancellationPolicy) {
+        this.cancellationPolicy = cancellationPolicy;
+        return this;
+      }
+
+      public Builder setCancellationPolicy(EmptyParam cancellationPolicy) {
         this.cancellationPolicy = cancellationPolicy;
         return this;
       }
@@ -452,7 +469,19 @@ public class DisputeUpdateParams extends ApiRequestParams {
       }
 
       /** Has a maximum character count of 20,000. */
+      public Builder setCancellationPolicyDisclosure(EmptyParam cancellationPolicyDisclosure) {
+        this.cancellationPolicyDisclosure = cancellationPolicyDisclosure;
+        return this;
+      }
+
+      /** Has a maximum character count of 20,000. */
       public Builder setCancellationRebuttal(String cancellationRebuttal) {
+        this.cancellationRebuttal = cancellationRebuttal;
+        return this;
+      }
+
+      /** Has a maximum character count of 20,000. */
+      public Builder setCancellationRebuttal(EmptyParam cancellationRebuttal) {
         this.cancellationRebuttal = cancellationRebuttal;
         return this;
       }
@@ -462,7 +491,17 @@ public class DisputeUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      public Builder setCustomerCommunication(EmptyParam customerCommunication) {
+        this.customerCommunication = customerCommunication;
+        return this;
+      }
+
       public Builder setCustomerEmailAddress(String customerEmailAddress) {
+        this.customerEmailAddress = customerEmailAddress;
+        return this;
+      }
+
+      public Builder setCustomerEmailAddress(EmptyParam customerEmailAddress) {
         this.customerEmailAddress = customerEmailAddress;
         return this;
       }
@@ -472,7 +511,17 @@ public class DisputeUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      public Builder setCustomerName(EmptyParam customerName) {
+        this.customerName = customerName;
+        return this;
+      }
+
       public Builder setCustomerPurchaseIp(String customerPurchaseIp) {
+        this.customerPurchaseIp = customerPurchaseIp;
+        return this;
+      }
+
+      public Builder setCustomerPurchaseIp(EmptyParam customerPurchaseIp) {
         this.customerPurchaseIp = customerPurchaseIp;
         return this;
       }
@@ -482,7 +531,17 @@ public class DisputeUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      public Builder setCustomerSignature(EmptyParam customerSignature) {
+        this.customerSignature = customerSignature;
+        return this;
+      }
+
       public Builder setDuplicateChargeDocumentation(String duplicateChargeDocumentation) {
+        this.duplicateChargeDocumentation = duplicateChargeDocumentation;
+        return this;
+      }
+
+      public Builder setDuplicateChargeDocumentation(EmptyParam duplicateChargeDocumentation) {
         this.duplicateChargeDocumentation = duplicateChargeDocumentation;
         return this;
       }
@@ -493,7 +552,18 @@ public class DisputeUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** Has a maximum character count of 20,000. */
+      public Builder setDuplicateChargeExplanation(EmptyParam duplicateChargeExplanation) {
+        this.duplicateChargeExplanation = duplicateChargeExplanation;
+        return this;
+      }
+
       public Builder setDuplicateChargeId(String duplicateChargeId) {
+        this.duplicateChargeId = duplicateChargeId;
+        return this;
+      }
+
+      public Builder setDuplicateChargeId(EmptyParam duplicateChargeId) {
         this.duplicateChargeId = duplicateChargeId;
         return this;
       }
@@ -530,12 +600,28 @@ public class DisputeUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** Has a maximum character count of 20,000. */
+      public Builder setProductDescription(EmptyParam productDescription) {
+        this.productDescription = productDescription;
+        return this;
+      }
+
       public Builder setReceipt(String receipt) {
         this.receipt = receipt;
         return this;
       }
 
+      public Builder setReceipt(EmptyParam receipt) {
+        this.receipt = receipt;
+        return this;
+      }
+
       public Builder setRefundPolicy(String refundPolicy) {
+        this.refundPolicy = refundPolicy;
+        return this;
+      }
+
+      public Builder setRefundPolicy(EmptyParam refundPolicy) {
         this.refundPolicy = refundPolicy;
         return this;
       }
@@ -547,7 +633,19 @@ public class DisputeUpdateParams extends ApiRequestParams {
       }
 
       /** Has a maximum character count of 20,000. */
+      public Builder setRefundPolicyDisclosure(EmptyParam refundPolicyDisclosure) {
+        this.refundPolicyDisclosure = refundPolicyDisclosure;
+        return this;
+      }
+
+      /** Has a maximum character count of 20,000. */
       public Builder setRefundRefusalExplanation(String refundRefusalExplanation) {
+        this.refundRefusalExplanation = refundRefusalExplanation;
+        return this;
+      }
+
+      /** Has a maximum character count of 20,000. */
+      public Builder setRefundRefusalExplanation(EmptyParam refundRefusalExplanation) {
         this.refundRefusalExplanation = refundRefusalExplanation;
         return this;
       }
@@ -557,7 +655,17 @@ public class DisputeUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      public Builder setServiceDate(EmptyParam serviceDate) {
+        this.serviceDate = serviceDate;
+        return this;
+      }
+
       public Builder setServiceDocumentation(String serviceDocumentation) {
+        this.serviceDocumentation = serviceDocumentation;
+        return this;
+      }
+
+      public Builder setServiceDocumentation(EmptyParam serviceDocumentation) {
         this.serviceDocumentation = serviceDocumentation;
         return this;
       }
@@ -567,7 +675,17 @@ public class DisputeUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      public Builder setShippingAddress(EmptyParam shippingAddress) {
+        this.shippingAddress = shippingAddress;
+        return this;
+      }
+
       public Builder setShippingCarrier(String shippingCarrier) {
+        this.shippingCarrier = shippingCarrier;
+        return this;
+      }
+
+      public Builder setShippingCarrier(EmptyParam shippingCarrier) {
         this.shippingCarrier = shippingCarrier;
         return this;
       }
@@ -577,7 +695,17 @@ public class DisputeUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      public Builder setShippingDate(EmptyParam shippingDate) {
+        this.shippingDate = shippingDate;
+        return this;
+      }
+
       public Builder setShippingDocumentation(String shippingDocumentation) {
+        this.shippingDocumentation = shippingDocumentation;
+        return this;
+      }
+
+      public Builder setShippingDocumentation(EmptyParam shippingDocumentation) {
         this.shippingDocumentation = shippingDocumentation;
         return this;
       }
@@ -587,13 +715,29 @@ public class DisputeUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      public Builder setShippingTrackingNumber(EmptyParam shippingTrackingNumber) {
+        this.shippingTrackingNumber = shippingTrackingNumber;
+        return this;
+      }
+
       public Builder setUncategorizedFile(String uncategorizedFile) {
+        this.uncategorizedFile = uncategorizedFile;
+        return this;
+      }
+
+      public Builder setUncategorizedFile(EmptyParam uncategorizedFile) {
         this.uncategorizedFile = uncategorizedFile;
         return this;
       }
 
       /** Has a maximum character count of 20,000. */
       public Builder setUncategorizedText(String uncategorizedText) {
+        this.uncategorizedText = uncategorizedText;
+        return this;
+      }
+
+      /** Has a maximum character count of 20,000. */
+      public Builder setUncategorizedText(EmptyParam uncategorizedText) {
         this.uncategorizedText = uncategorizedText;
         return this;
       }

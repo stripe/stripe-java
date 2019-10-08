@@ -22,7 +22,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
    * the invoice for easy tracking.
    */
   @SerializedName("description")
-  String description;
+  Object description;
 
   /**
    * Controls whether discounts apply to this invoice item. Defaults to false for prorations or
@@ -80,11 +80,11 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
    * `unit_amount` and `unit_amount_decimal` can be set.
    */
   @SerializedName("unit_amount_decimal")
-  BigDecimal unitAmountDecimal;
+  Object unitAmountDecimal;
 
   private InvoiceItemUpdateParams(
       Long amount,
-      String description,
+      Object description,
       Boolean discountable,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -93,7 +93,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
       Long quantity,
       Object taxRates,
       Long unitAmount,
-      BigDecimal unitAmountDecimal) {
+      Object unitAmountDecimal) {
     this.amount = amount;
     this.description = description;
     this.discountable = discountable;
@@ -114,7 +114,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
   public static class Builder {
     private Long amount;
 
-    private String description;
+    private Object description;
 
     private Boolean discountable;
 
@@ -132,7 +132,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
 
     private Long unitAmount;
 
-    private BigDecimal unitAmountDecimal;
+    private Object unitAmountDecimal;
 
     /** Finalize and obtain parameter instance from this builder. */
     public InvoiceItemUpdateParams build() {
@@ -164,6 +164,15 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
      * the invoice for easy tracking.
      */
     public Builder setDescription(String description) {
+      this.description = description;
+      return this;
+    }
+
+    /**
+     * An arbitrary string which you can attach to the invoice item. The description is displayed in
+     * the invoice for easy tracking.
+     */
+    public Builder setDescription(EmptyParam description) {
       this.description = description;
       return this;
     }
@@ -329,6 +338,15 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
      * of `unit_amount` and `unit_amount_decimal` can be set.
      */
     public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
+      this.unitAmountDecimal = unitAmountDecimal;
+      return this;
+    }
+
+    /**
+     * Same as `unit_amount`, but accepts a decimal value with at most 12 decimal places. Only one
+     * of `unit_amount` and `unit_amount_decimal` can be set.
+     */
+    public Builder setUnitAmountDecimal(EmptyParam unitAmountDecimal) {
       this.unitAmountDecimal = unitAmountDecimal;
       return this;
     }

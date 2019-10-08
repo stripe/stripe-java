@@ -28,7 +28,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
   Long balance;
 
   @SerializedName("coupon")
-  String coupon;
+  Object coupon;
 
   /**
    * Provide the ID of a payment source already attached to this customer to make it this customer's
@@ -36,21 +36,21 @@ public class CustomerUpdateParams extends ApiRequestParams {
    * the [source](https://stripe.com/docs/api/customers/update#update_customer-source) property.
    */
   @SerializedName("default_source")
-  String defaultSource;
+  Object defaultSource;
 
   /**
    * An arbitrary string that you can attach to a customer object. It is displayed alongside the
    * customer in the dashboard.
    */
   @SerializedName("description")
-  String description;
+  Object description;
 
   /**
    * Customer's email address. It's displayed alongside the customer in your dashboard and can be
    * useful for searching and tracking. This may be up to *512 characters*.
    */
   @SerializedName("email")
-  String email;
+  Object email;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -70,7 +70,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
    * letters or numbers.
    */
   @SerializedName("invoice_prefix")
-  String invoicePrefix;
+  Object invoicePrefix;
 
   /** Default invoice settings for this customer. */
   @SerializedName("invoice_settings")
@@ -85,11 +85,11 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
   /** The customer's full name or business name. */
   @SerializedName("name")
-  String name;
+  Object name;
 
   /** The customer's phone number. */
   @SerializedName("phone")
-  String phone;
+  Object phone;
 
   /** Customer's preferred languages, ordered by preference. */
   @SerializedName("preferred_locales")
@@ -100,7 +100,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
   Object shipping;
 
   @SerializedName("source")
-  String source;
+  Object source;
 
   /** The customer's tax exemption. One of `none`, `exempt`, or `reverse`. */
   @SerializedName("tax_exempt")
@@ -129,20 +129,20 @@ public class CustomerUpdateParams extends ApiRequestParams {
       Long accountBalance,
       Object address,
       Long balance,
-      String coupon,
-      String defaultSource,
-      String description,
-      String email,
+      Object coupon,
+      Object defaultSource,
+      Object description,
+      Object email,
       List<String> expand,
       Map<String, Object> extraParams,
-      String invoicePrefix,
+      Object invoicePrefix,
       InvoiceSettings invoiceSettings,
       Map<String, String> metadata,
-      String name,
-      String phone,
+      Object name,
+      Object phone,
       List<String> preferredLocales,
       Object shipping,
-      String source,
+      Object source,
       EnumParam taxExempt,
       TaxInfo taxInfo,
       Object trialEnd) {
@@ -179,33 +179,33 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
     private Long balance;
 
-    private String coupon;
+    private Object coupon;
 
-    private String defaultSource;
+    private Object defaultSource;
 
-    private String description;
+    private Object description;
 
-    private String email;
+    private Object email;
 
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
-    private String invoicePrefix;
+    private Object invoicePrefix;
 
     private InvoiceSettings invoiceSettings;
 
     private Map<String, String> metadata;
 
-    private String name;
+    private Object name;
 
-    private String phone;
+    private Object phone;
 
     private List<String> preferredLocales;
 
     private Object shipping;
 
-    private String source;
+    private Object source;
 
     private EnumParam taxExempt;
 
@@ -271,6 +271,11 @@ public class CustomerUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    public Builder setCoupon(EmptyParam coupon) {
+      this.coupon = coupon;
+      return this;
+    }
+
     /**
      * Provide the ID of a payment source already attached to this customer to make it this
      * customer's default payment source. If you want to add a new payment source and make it the
@@ -278,6 +283,17 @@ public class CustomerUpdateParams extends ApiRequestParams {
      * [source](https://stripe.com/docs/api/customers/update#update_customer-source) property.
      */
     public Builder setDefaultSource(String defaultSource) {
+      this.defaultSource = defaultSource;
+      return this;
+    }
+
+    /**
+     * Provide the ID of a payment source already attached to this customer to make it this
+     * customer's default payment source. If you want to add a new payment source and make it the
+     * default, see the
+     * [source](https://stripe.com/docs/api/customers/update#update_customer-source) property.
+     */
+    public Builder setDefaultSource(EmptyParam defaultSource) {
       this.defaultSource = defaultSource;
       return this;
     }
@@ -292,10 +308,28 @@ public class CustomerUpdateParams extends ApiRequestParams {
     }
 
     /**
+     * An arbitrary string that you can attach to a customer object. It is displayed alongside the
+     * customer in the dashboard.
+     */
+    public Builder setDescription(EmptyParam description) {
+      this.description = description;
+      return this;
+    }
+
+    /**
      * Customer's email address. It's displayed alongside the customer in your dashboard and can be
      * useful for searching and tracking. This may be up to *512 characters*.
      */
     public Builder setEmail(String email) {
+      this.email = email;
+      return this;
+    }
+
+    /**
+     * Customer's email address. It's displayed alongside the customer in your dashboard and can be
+     * useful for searching and tracking. This may be up to *512 characters*.
+     */
+    public Builder setEmail(EmptyParam email) {
       this.email = email;
       return this;
     }
@@ -361,6 +395,15 @@ public class CustomerUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * The prefix for the customer used to generate unique invoice numbers. Must be 3–12 uppercase
+     * letters or numbers.
+     */
+    public Builder setInvoicePrefix(EmptyParam invoicePrefix) {
+      this.invoicePrefix = invoicePrefix;
+      return this;
+    }
+
     /** Default invoice settings for this customer. */
     public Builder setInvoiceSettings(InvoiceSettings invoiceSettings) {
       this.invoiceSettings = invoiceSettings;
@@ -399,8 +442,20 @@ public class CustomerUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /** The customer's full name or business name. */
+    public Builder setName(EmptyParam name) {
+      this.name = name;
+      return this;
+    }
+
     /** The customer's phone number. */
     public Builder setPhone(String phone) {
+      this.phone = phone;
+      return this;
+    }
+
+    /** The customer's phone number. */
+    public Builder setPhone(EmptyParam phone) {
       this.phone = phone;
       return this;
     }
@@ -444,6 +499,11 @@ public class CustomerUpdateParams extends ApiRequestParams {
     }
 
     public Builder setSource(String source) {
+      this.source = source;
+      return this;
+    }
+
+    public Builder setSource(EmptyParam source) {
       this.source = source;
       return this;
     }
@@ -498,10 +558,10 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
   public static class Address {
     @SerializedName("city")
-    String city;
+    Object city;
 
     @SerializedName("country")
-    String country;
+    Object country;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -513,25 +573,25 @@ public class CustomerUpdateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     @SerializedName("line1")
-    String line1;
+    Object line1;
 
     @SerializedName("line2")
-    String line2;
+    Object line2;
 
     @SerializedName("postal_code")
-    String postalCode;
+    Object postalCode;
 
     @SerializedName("state")
-    String state;
+    Object state;
 
     private Address(
-        String city,
-        String country,
+        Object city,
+        Object country,
         Map<String, Object> extraParams,
-        String line1,
-        String line2,
-        String postalCode,
-        String state) {
+        Object line1,
+        Object line2,
+        Object postalCode,
+        Object state) {
       this.city = city;
       this.country = country;
       this.extraParams = extraParams;
@@ -546,19 +606,19 @@ public class CustomerUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private String city;
+      private Object city;
 
-      private String country;
+      private Object country;
 
       private Map<String, Object> extraParams;
 
-      private String line1;
+      private Object line1;
 
-      private String line2;
+      private Object line2;
 
-      private String postalCode;
+      private Object postalCode;
 
-      private String state;
+      private Object state;
 
       /** Finalize and obtain parameter instance from this builder. */
       public Address build() {
@@ -577,7 +637,17 @@ public class CustomerUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      public Builder setCity(EmptyParam city) {
+        this.city = city;
+        return this;
+      }
+
       public Builder setCountry(String country) {
+        this.country = country;
+        return this;
+      }
+
+      public Builder setCountry(EmptyParam country) {
         this.country = country;
         return this;
       }
@@ -613,7 +683,17 @@ public class CustomerUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      public Builder setLine1(EmptyParam line1) {
+        this.line1 = line1;
+        return this;
+      }
+
       public Builder setLine2(String line2) {
+        this.line2 = line2;
+        return this;
+      }
+
+      public Builder setLine2(EmptyParam line2) {
         this.line2 = line2;
         return this;
       }
@@ -623,7 +703,17 @@ public class CustomerUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      public Builder setPostalCode(EmptyParam postalCode) {
+        this.postalCode = postalCode;
+        return this;
+      }
+
       public Builder setState(String state) {
+        this.state = state;
+        return this;
+      }
+
+      public Builder setState(EmptyParam state) {
         this.state = state;
         return this;
       }
@@ -637,7 +727,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
     /** ID of the default payment method used for subscriptions and invoices for the customer. */
     @SerializedName("default_payment_method")
-    String defaultPaymentMethod;
+    Object defaultPaymentMethod;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -650,13 +740,13 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
     /** Default footer to be displayed on invoices for this customer. */
     @SerializedName("footer")
-    String footer;
+    Object footer;
 
     private InvoiceSettings(
         Object customFields,
-        String defaultPaymentMethod,
+        Object defaultPaymentMethod,
         Map<String, Object> extraParams,
-        String footer) {
+        Object footer) {
       this.customFields = customFields;
       this.defaultPaymentMethod = defaultPaymentMethod;
       this.extraParams = extraParams;
@@ -670,11 +760,11 @@ public class CustomerUpdateParams extends ApiRequestParams {
     public static class Builder {
       private Object customFields;
 
-      private String defaultPaymentMethod;
+      private Object defaultPaymentMethod;
 
       private Map<String, Object> extraParams;
 
-      private String footer;
+      private Object footer;
 
       /** Finalize and obtain parameter instance from this builder. */
       public InvoiceSettings build() {
@@ -729,6 +819,12 @@ public class CustomerUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** ID of the default payment method used for subscriptions and invoices for the customer. */
+      public Builder setDefaultPaymentMethod(EmptyParam defaultPaymentMethod) {
+        this.defaultPaymentMethod = defaultPaymentMethod;
+        return this;
+      }
+
       /**
        * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
        * call, and subsequent calls add additional key/value pairs to the original map. See {@link
@@ -760,6 +856,12 @@ public class CustomerUpdateParams extends ApiRequestParams {
         this.footer = footer;
         return this;
       }
+
+      /** Default footer to be displayed on invoices for this customer. */
+      public Builder setFooter(EmptyParam footer) {
+        this.footer = footer;
+        return this;
+      }
     }
 
     public static class CustomField {
@@ -774,13 +876,13 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
       /** The name of the custom field. This may be up to 30 characters. */
       @SerializedName("name")
-      String name;
+      Object name;
 
       /** The value of the custom field. This may be up to 30 characters. */
       @SerializedName("value")
-      String value;
+      Object value;
 
-      private CustomField(Map<String, Object> extraParams, String name, String value) {
+      private CustomField(Map<String, Object> extraParams, Object name, Object value) {
         this.extraParams = extraParams;
         this.name = name;
         this.value = value;
@@ -793,9 +895,9 @@ public class CustomerUpdateParams extends ApiRequestParams {
       public static class Builder {
         private Map<String, Object> extraParams;
 
-        private String name;
+        private Object name;
 
-        private String value;
+        private Object value;
 
         /** Finalize and obtain parameter instance from this builder. */
         public CustomField build() {
@@ -836,8 +938,20 @@ public class CustomerUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /** The name of the custom field. This may be up to 30 characters. */
+        public Builder setName(EmptyParam name) {
+          this.name = name;
+          return this;
+        }
+
         /** The value of the custom field. This may be up to 30 characters. */
         public Builder setValue(String value) {
+          this.value = value;
+          return this;
+        }
+
+        /** The value of the custom field. This may be up to 30 characters. */
+        public Builder setValue(EmptyParam value) {
           this.value = value;
           return this;
         }
@@ -861,13 +975,13 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
     /** Customer name. */
     @SerializedName("name")
-    String name;
+    Object name;
 
     /** Customer phone (including extension). */
     @SerializedName("phone")
-    String phone;
+    Object phone;
 
-    private Shipping(Address address, Map<String, Object> extraParams, String name, String phone) {
+    private Shipping(Address address, Map<String, Object> extraParams, Object name, Object phone) {
       this.address = address;
       this.extraParams = extraParams;
       this.name = name;
@@ -883,9 +997,9 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
-      private String name;
+      private Object name;
 
-      private String phone;
+      private Object phone;
 
       /** Finalize and obtain parameter instance from this builder. */
       public Shipping build() {
@@ -930,8 +1044,20 @@ public class CustomerUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** Customer name. */
+      public Builder setName(EmptyParam name) {
+        this.name = name;
+        return this;
+      }
+
       /** Customer phone (including extension). */
       public Builder setPhone(String phone) {
+        this.phone = phone;
+        return this;
+      }
+
+      /** Customer phone (including extension). */
+      public Builder setPhone(EmptyParam phone) {
         this.phone = phone;
         return this;
       }
@@ -939,10 +1065,10 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
     public static class Address {
       @SerializedName("city")
-      String city;
+      Object city;
 
       @SerializedName("country")
-      String country;
+      Object country;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -954,25 +1080,25 @@ public class CustomerUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       @SerializedName("line1")
-      String line1;
+      Object line1;
 
       @SerializedName("line2")
-      String line2;
+      Object line2;
 
       @SerializedName("postal_code")
-      String postalCode;
+      Object postalCode;
 
       @SerializedName("state")
-      String state;
+      Object state;
 
       private Address(
-          String city,
-          String country,
+          Object city,
+          Object country,
           Map<String, Object> extraParams,
-          String line1,
-          String line2,
-          String postalCode,
-          String state) {
+          Object line1,
+          Object line2,
+          Object postalCode,
+          Object state) {
         this.city = city;
         this.country = country;
         this.extraParams = extraParams;
@@ -987,19 +1113,19 @@ public class CustomerUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private String city;
+        private Object city;
 
-        private String country;
+        private Object country;
 
         private Map<String, Object> extraParams;
 
-        private String line1;
+        private Object line1;
 
-        private String line2;
+        private Object line2;
 
-        private String postalCode;
+        private Object postalCode;
 
-        private String state;
+        private Object state;
 
         /** Finalize and obtain parameter instance from this builder. */
         public Address build() {
@@ -1018,7 +1144,17 @@ public class CustomerUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        public Builder setCity(EmptyParam city) {
+          this.city = city;
+          return this;
+        }
+
         public Builder setCountry(String country) {
+          this.country = country;
+          return this;
+        }
+
+        public Builder setCountry(EmptyParam country) {
           this.country = country;
           return this;
         }
@@ -1056,7 +1192,17 @@ public class CustomerUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        public Builder setLine1(EmptyParam line1) {
+          this.line1 = line1;
+          return this;
+        }
+
         public Builder setLine2(String line2) {
+          this.line2 = line2;
+          return this;
+        }
+
+        public Builder setLine2(EmptyParam line2) {
           this.line2 = line2;
           return this;
         }
@@ -1066,7 +1212,17 @@ public class CustomerUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        public Builder setPostalCode(EmptyParam postalCode) {
+          this.postalCode = postalCode;
+          return this;
+        }
+
         public Builder setState(String state) {
+          this.state = state;
+          return this;
+        }
+
+        public Builder setState(EmptyParam state) {
           this.state = state;
           return this;
         }
@@ -1086,13 +1242,13 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
     /** The customer's tax ID number. */
     @SerializedName("tax_id")
-    String taxId;
+    Object taxId;
 
     /** The type of ID number. The only possible value is `vat` */
     @SerializedName("type")
     Type type;
 
-    private TaxInfo(Map<String, Object> extraParams, String taxId, Type type) {
+    private TaxInfo(Map<String, Object> extraParams, Object taxId, Type type) {
       this.extraParams = extraParams;
       this.taxId = taxId;
       this.type = type;
@@ -1105,7 +1261,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
     public static class Builder {
       private Map<String, Object> extraParams;
 
-      private String taxId;
+      private Object taxId;
 
       private Type type;
 
@@ -1142,6 +1298,12 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
       /** The customer's tax ID number. */
       public Builder setTaxId(String taxId) {
+        this.taxId = taxId;
+        return this;
+      }
+
+      /** The customer's tax ID number. */
+      public Builder setTaxId(EmptyParam taxId) {
         this.taxId = taxId;
         return this;
       }

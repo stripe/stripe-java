@@ -2,6 +2,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -33,13 +34,13 @@ public class CouponUpdateParams extends ApiRequestParams {
    * the `id` is shown if `name` is not set.
    */
   @SerializedName("name")
-  String name;
+  Object name;
 
   private CouponUpdateParams(
       List<String> expand,
       Map<String, Object> extraParams,
       Map<String, String> metadata,
-      String name) {
+      Object name) {
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
@@ -57,7 +58,7 @@ public class CouponUpdateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
-    private String name;
+    private Object name;
 
     /** Finalize and obtain parameter instance from this builder. */
     public CouponUpdateParams build() {
@@ -147,6 +148,15 @@ public class CouponUpdateParams extends ApiRequestParams {
      * the `id` is shown if `name` is not set.
      */
     public Builder setName(String name) {
+      this.name = name;
+      return this;
+    }
+
+    /**
+     * Name of the coupon displayed to customers on, for instance invoices, or receipts. By default
+     * the `id` is shown if `name` is not set.
+     */
+    public Builder setName(EmptyParam name) {
       this.name = name;
       return this;
     }

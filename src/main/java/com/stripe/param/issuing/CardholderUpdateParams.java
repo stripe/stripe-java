@@ -2,6 +2,7 @@ package com.stripe.param.issuing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +24,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
 
   /** The cardholder's email address. */
   @SerializedName("email")
-  String email;
+  Object email;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -52,7 +53,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
 
   /** The cardholder's phone number. */
   @SerializedName("phone_number")
-  String phoneNumber;
+  Object phoneNumber;
 
   /**
    * Specifies whether to permit authorizations on this cardholder's cards. Possible values are
@@ -64,12 +65,12 @@ public class CardholderUpdateParams extends ApiRequestParams {
   private CardholderUpdateParams(
       AuthorizationControls authorizationControls,
       Billing billing,
-      String email,
+      Object email,
       List<String> expand,
       Map<String, Object> extraParams,
       Boolean isDefault,
       Map<String, String> metadata,
-      String phoneNumber,
+      Object phoneNumber,
       Status status) {
     this.authorizationControls = authorizationControls;
     this.billing = billing;
@@ -91,7 +92,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
 
     private Billing billing;
 
-    private String email;
+    private Object email;
 
     private List<String> expand;
 
@@ -101,7 +102,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
-    private String phoneNumber;
+    private Object phoneNumber;
 
     private Status status;
 
@@ -137,6 +138,12 @@ public class CardholderUpdateParams extends ApiRequestParams {
 
     /** The cardholder's email address. */
     public Builder setEmail(String email) {
+      this.email = email;
+      return this;
+    }
+
+    /** The cardholder's email address. */
+    public Builder setEmail(EmptyParam email) {
       this.email = email;
       return this;
     }
@@ -231,6 +238,12 @@ public class CardholderUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /** The cardholder's phone number. */
+    public Builder setPhoneNumber(EmptyParam phoneNumber) {
+      this.phoneNumber = phoneNumber;
+      return this;
+    }
+
     /**
      * Specifies whether to permit authorizations on this cardholder's cards. Possible values are
      * `active` or `inactive`.
@@ -273,14 +286,14 @@ public class CardholderUpdateParams extends ApiRequestParams {
 
     /** Currency for your spending limits. Defaults to your merchant country's currency. */
     @SerializedName("spending_limits_currency")
-    String spendingLimitsCurrency;
+    Object spendingLimitsCurrency;
 
     private AuthorizationControls(
         List<AllowedCategory> allowedCategories,
         List<BlockedCategory> blockedCategories,
         Map<String, Object> extraParams,
         List<SpendingLimit> spendingLimits,
-        String spendingLimitsCurrency) {
+        Object spendingLimitsCurrency) {
       this.allowedCategories = allowedCategories;
       this.blockedCategories = blockedCategories;
       this.extraParams = extraParams;
@@ -301,7 +314,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
 
       private List<SpendingLimit> spendingLimits;
 
-      private String spendingLimitsCurrency;
+      private Object spendingLimitsCurrency;
 
       /** Finalize and obtain parameter instance from this builder. */
       public AuthorizationControls build() {
@@ -424,6 +437,12 @@ public class CardholderUpdateParams extends ApiRequestParams {
 
       /** Currency for your spending limits. Defaults to your merchant country's currency. */
       public Builder setSpendingLimitsCurrency(String spendingLimitsCurrency) {
+        this.spendingLimitsCurrency = spendingLimitsCurrency;
+        return this;
+      }
+
+      /** Currency for your spending limits. Defaults to your merchant country's currency. */
+      public Builder setSpendingLimitsCurrency(EmptyParam spendingLimitsCurrency) {
         this.spendingLimitsCurrency = spendingLimitsCurrency;
         return this;
       }
@@ -3258,9 +3277,9 @@ public class CardholderUpdateParams extends ApiRequestParams {
      * next client library major version
      */
     @SerializedName("name")
-    String name;
+    Object name;
 
-    private Billing(Address address, Map<String, Object> extraParams, String name) {
+    private Billing(Address address, Map<String, Object> extraParams, Object name) {
       this.address = address;
       this.extraParams = extraParams;
       this.name = name;
@@ -3275,7 +3294,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
-      private String name;
+      private Object name;
 
       /** Finalize and obtain parameter instance from this builder. */
       public Billing build() {
@@ -3321,14 +3340,23 @@ public class CardholderUpdateParams extends ApiRequestParams {
         this.name = name;
         return this;
       }
+
+      /**
+       * Deprecated param. Passing value for this param is simply discarded. It will be removed in
+       * the next client library major version
+       */
+      public Builder setName(EmptyParam name) {
+        this.name = name;
+        return this;
+      }
     }
 
     public static class Address {
       @SerializedName("city")
-      String city;
+      Object city;
 
       @SerializedName("country")
-      String country;
+      Object country;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3340,25 +3368,25 @@ public class CardholderUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       @SerializedName("line1")
-      String line1;
+      Object line1;
 
       @SerializedName("line2")
-      String line2;
+      Object line2;
 
       @SerializedName("postal_code")
-      String postalCode;
+      Object postalCode;
 
       @SerializedName("state")
-      String state;
+      Object state;
 
       private Address(
-          String city,
-          String country,
+          Object city,
+          Object country,
           Map<String, Object> extraParams,
-          String line1,
-          String line2,
-          String postalCode,
-          String state) {
+          Object line1,
+          Object line2,
+          Object postalCode,
+          Object state) {
         this.city = city;
         this.country = country;
         this.extraParams = extraParams;
@@ -3373,19 +3401,19 @@ public class CardholderUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private String city;
+        private Object city;
 
-        private String country;
+        private Object country;
 
         private Map<String, Object> extraParams;
 
-        private String line1;
+        private Object line1;
 
-        private String line2;
+        private Object line2;
 
-        private String postalCode;
+        private Object postalCode;
 
-        private String state;
+        private Object state;
 
         /** Finalize and obtain parameter instance from this builder. */
         public Address build() {
@@ -3404,7 +3432,17 @@ public class CardholderUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        public Builder setCity(EmptyParam city) {
+          this.city = city;
+          return this;
+        }
+
         public Builder setCountry(String country) {
+          this.country = country;
+          return this;
+        }
+
+        public Builder setCountry(EmptyParam country) {
           this.country = country;
           return this;
         }
@@ -3442,7 +3480,17 @@ public class CardholderUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        public Builder setLine1(EmptyParam line1) {
+          this.line1 = line1;
+          return this;
+        }
+
         public Builder setLine2(String line2) {
+          this.line2 = line2;
+          return this;
+        }
+
+        public Builder setLine2(EmptyParam line2) {
           this.line2 = line2;
           return this;
         }
@@ -3452,7 +3500,17 @@ public class CardholderUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        public Builder setPostalCode(EmptyParam postalCode) {
+          this.postalCode = postalCode;
+          return this;
+        }
+
         public Builder setState(String state) {
+          this.state = state;
+          return this;
+        }
+
+        public Builder setState(EmptyParam state) {
           this.state = state;
           return this;
         }

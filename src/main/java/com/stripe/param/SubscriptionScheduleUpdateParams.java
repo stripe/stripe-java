@@ -39,7 +39,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
    * method in the customer's invoice settings.
    */
   @SerializedName("default_payment_method")
-  String defaultPaymentMethod;
+  Object defaultPaymentMethod;
 
   /**
    * ID of the default payment source for the subscription schedule. It must belong to the customer
@@ -47,7 +47,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
    * the customer's default source.
    */
   @SerializedName("default_source")
-  String defaultSource;
+  Object defaultSource;
 
   @SerializedName("end_behavior")
   EndBehavior endBehavior;
@@ -114,8 +114,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       Billing billing,
       Object billingThresholds,
       CollectionMethod collectionMethod,
-      String defaultPaymentMethod,
-      String defaultSource,
+      Object defaultPaymentMethod,
+      Object defaultSource,
       EndBehavior endBehavior,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -152,9 +152,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
     private CollectionMethod collectionMethod;
 
-    private String defaultPaymentMethod;
+    private Object defaultPaymentMethod;
 
-    private String defaultSource;
+    private Object defaultSource;
 
     private EndBehavior endBehavior;
 
@@ -242,11 +242,31 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
 
     /**
+     * ID of the default payment method for the subscription schedule. It must belong to the
+     * customer associated with the subscription schedule. If not set, invoices will use the default
+     * payment method in the customer's invoice settings.
+     */
+    public Builder setDefaultPaymentMethod(EmptyParam defaultPaymentMethod) {
+      this.defaultPaymentMethod = defaultPaymentMethod;
+      return this;
+    }
+
+    /**
      * ID of the default payment source for the subscription schedule. It must belong to the
      * customer associated with the subscription schedule and be in a chargeable state. If not set,
      * defaults to the customer's default source.
      */
     public Builder setDefaultSource(String defaultSource) {
+      this.defaultSource = defaultSource;
+      return this;
+    }
+
+    /**
+     * ID of the default payment source for the subscription schedule. It must belong to the
+     * customer associated with the subscription schedule and be in a chargeable state. If not set,
+     * defaults to the customer's default source.
+     */
+    public Builder setDefaultSource(EmptyParam defaultSource) {
       this.defaultSource = defaultSource;
       return this;
     }
@@ -585,7 +605,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
     /** The identifier of the coupon to apply to this phase of the subscription schedule. */
     @SerializedName("coupon")
-    String coupon;
+    Object coupon;
 
     /**
      * ID of the default payment method for the subscription schedule. It must belong to the
@@ -593,7 +613,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
      * payment method in the customer's invoice settings.
      */
     @SerializedName("default_payment_method")
-    String defaultPaymentMethod;
+    Object defaultPaymentMethod;
 
     /**
      * The tax rates that will apply to any phase that does not have `tax_rates` set. Invoices
@@ -671,8 +691,8 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         BigDecimal applicationFeePercent,
         Object billingThresholds,
         CollectionMethod collectionMethod,
-        String coupon,
-        String defaultPaymentMethod,
+        Object coupon,
+        Object defaultPaymentMethod,
         Object defaultTaxRates,
         Object endDate,
         Map<String, Object> extraParams,
@@ -711,9 +731,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
       private CollectionMethod collectionMethod;
 
-      private String coupon;
+      private Object coupon;
 
-      private String defaultPaymentMethod;
+      private Object defaultPaymentMethod;
 
       private Object defaultTaxRates;
 
@@ -803,12 +823,28 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** The identifier of the coupon to apply to this phase of the subscription schedule. */
+      public Builder setCoupon(EmptyParam coupon) {
+        this.coupon = coupon;
+        return this;
+      }
+
       /**
        * ID of the default payment method for the subscription schedule. It must belong to the
        * customer associated with the subscription schedule. If not set, invoices will use the
        * default payment method in the customer's invoice settings.
        */
       public Builder setDefaultPaymentMethod(String defaultPaymentMethod) {
+        this.defaultPaymentMethod = defaultPaymentMethod;
+        return this;
+      }
+
+      /**
+       * ID of the default payment method for the subscription schedule. It must belong to the
+       * customer associated with the subscription schedule. If not set, invoices will use the
+       * default payment method in the customer's invoice settings.
+       */
+      public Builder setDefaultPaymentMethod(EmptyParam defaultPaymentMethod) {
         this.defaultPaymentMethod = defaultPaymentMethod;
         return this;
       }
@@ -1177,7 +1213,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
       /** The plan ID to subscribe to. */
       @SerializedName("plan")
-      String plan;
+      Object plan;
 
       /**
        * Quantity for the given plan. Can be set only if the plan's `usage_type` is `licensed` and
@@ -1196,7 +1232,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       private Plan(
           Object billingThresholds,
           Map<String, Object> extraParams,
-          String plan,
+          Object plan,
           Long quantity,
           Object taxRates) {
         this.billingThresholds = billingThresholds;
@@ -1215,7 +1251,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
         private Map<String, Object> extraParams;
 
-        private String plan;
+        private Object plan;
 
         private Long quantity;
 
@@ -1275,6 +1311,12 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
 
         /** The plan ID to subscribe to. */
         public Builder setPlan(String plan) {
+          this.plan = plan;
+          return this;
+        }
+
+        /** The plan ID to subscribe to. */
+        public Builder setPlan(EmptyParam plan) {
           this.plan = plan;
           return this;
         }

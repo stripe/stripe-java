@@ -54,7 +54,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
    * to the default payment method in the customer's invoice settings.
    */
   @SerializedName("default_payment_method")
-  String defaultPaymentMethod;
+  Object defaultPaymentMethod;
 
   /**
    * ID of the default payment source for the invoice. It must belong to the customer associated
@@ -62,7 +62,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
    * default source, if any, or to the customer's default source.
    */
   @SerializedName("default_source")
-  String defaultSource;
+  Object defaultSource;
 
   /**
    * The tax rates that will apply to any line item that does not have `tax_rates` set. Pass an
@@ -72,7 +72,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   Object defaultTaxRates;
 
   @SerializedName("description")
-  String description;
+  Object description;
 
   /**
    * The date on which payment for this invoice is due. Only valid for invoices where
@@ -96,7 +96,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
   /** Footer to be displayed on the invoice. */
   @SerializedName("footer")
-  String footer;
+  Object footer;
 
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -108,7 +108,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
    * `statement_descriptor`.
    */
   @SerializedName("statement_descriptor")
-  String statementDescriptor;
+  Object statementDescriptor;
 
   /**
    * The percent tax rate applied to the invoice, represented as a non-negative decimal number (with
@@ -134,16 +134,16 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       CollectionMethod collectionMethod,
       Object customFields,
       Long daysUntilDue,
-      String defaultPaymentMethod,
-      String defaultSource,
+      Object defaultPaymentMethod,
+      Object defaultSource,
       Object defaultTaxRates,
-      String description,
+      Object description,
       Long dueDate,
       List<String> expand,
       Map<String, Object> extraParams,
-      String footer,
+      Object footer,
       Map<String, String> metadata,
-      String statementDescriptor,
+      Object statementDescriptor,
       Object taxPercent,
       Object transferData) {
     this.applicationFeeAmount = applicationFeeAmount;
@@ -180,13 +180,13 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
     private Long daysUntilDue;
 
-    private String defaultPaymentMethod;
+    private Object defaultPaymentMethod;
 
-    private String defaultSource;
+    private Object defaultSource;
 
     private Object defaultTaxRates;
 
-    private String description;
+    private Object description;
 
     private Long dueDate;
 
@@ -194,11 +194,11 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private String footer;
+    private Object footer;
 
     private Map<String, String> metadata;
 
-    private String statementDescriptor;
+    private Object statementDescriptor;
 
     private Object taxPercent;
 
@@ -323,11 +323,31 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     }
 
     /**
+     * ID of the default payment method for the invoice. It must belong to the customer associated
+     * with the invoice. If not set, defaults to the subscription's default payment method, if any,
+     * or to the default payment method in the customer's invoice settings.
+     */
+    public Builder setDefaultPaymentMethod(EmptyParam defaultPaymentMethod) {
+      this.defaultPaymentMethod = defaultPaymentMethod;
+      return this;
+    }
+
+    /**
      * ID of the default payment source for the invoice. It must belong to the customer associated
      * with the invoice and be in a chargeable state. If not set, defaults to the subscription's
      * default source, if any, or to the customer's default source.
      */
     public Builder setDefaultSource(String defaultSource) {
+      this.defaultSource = defaultSource;
+      return this;
+    }
+
+    /**
+     * ID of the default payment source for the invoice. It must belong to the customer associated
+     * with the invoice and be in a chargeable state. If not set, defaults to the subscription's
+     * default source, if any, or to the customer's default source.
+     */
+    public Builder setDefaultSource(EmptyParam defaultSource) {
       this.defaultSource = defaultSource;
       return this;
     }
@@ -379,6 +399,11 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     }
 
     public Builder setDescription(String description) {
+      this.description = description;
+      return this;
+    }
+
+    public Builder setDescription(EmptyParam description) {
       this.description = description;
       return this;
     }
@@ -450,6 +475,12 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /** Footer to be displayed on the invoice. */
+    public Builder setFooter(EmptyParam footer) {
+      this.footer = footer;
+      return this;
+    }
+
     /**
      * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
      * and subsequent calls add additional key/value pairs to the original map. See {@link
@@ -483,6 +514,17 @@ public class InvoiceUpdateParams extends ApiRequestParams {
      * `statement_descriptor`.
      */
     public Builder setStatementDescriptor(String statementDescriptor) {
+      this.statementDescriptor = statementDescriptor;
+      return this;
+    }
+
+    /**
+     * Extra information about a charge for the customer's credit card statement. It must contain at
+     * least one letter. If not specified and this invoice is part of a subscription, the default
+     * `statement_descriptor` will be set to the first subscription item's product's
+     * `statement_descriptor`.
+     */
+    public Builder setStatementDescriptor(EmptyParam statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
       return this;
     }
@@ -544,13 +586,13 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
     /** The name of the custom field. This may be up to 30 characters. */
     @SerializedName("name")
-    String name;
+    Object name;
 
     /** The value of the custom field. This may be up to 30 characters. */
     @SerializedName("value")
-    String value;
+    Object value;
 
-    private CustomField(Map<String, Object> extraParams, String name, String value) {
+    private CustomField(Map<String, Object> extraParams, Object name, Object value) {
       this.extraParams = extraParams;
       this.name = name;
       this.value = value;
@@ -563,9 +605,9 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     public static class Builder {
       private Map<String, Object> extraParams;
 
-      private String name;
+      private Object name;
 
-      private String value;
+      private Object value;
 
       /** Finalize and obtain parameter instance from this builder. */
       public CustomField build() {
@@ -604,8 +646,20 @@ public class InvoiceUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** The name of the custom field. This may be up to 30 characters. */
+      public Builder setName(EmptyParam name) {
+        this.name = name;
+        return this;
+      }
+
       /** The value of the custom field. This may be up to 30 characters. */
       public Builder setValue(String value) {
+        this.value = value;
+        return this;
+      }
+
+      /** The value of the custom field. This may be up to 30 characters. */
+      public Builder setValue(EmptyParam value) {
         this.value = value;
         return this;
       }
@@ -615,7 +669,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   public static class TransferData {
     /** ID of an existing, connected Stripe account. */
     @SerializedName("destination")
-    String destination;
+    Object destination;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -626,7 +680,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    private TransferData(String destination, Map<String, Object> extraParams) {
+    private TransferData(Object destination, Map<String, Object> extraParams) {
       this.destination = destination;
       this.extraParams = extraParams;
     }
@@ -636,7 +690,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private String destination;
+      private Object destination;
 
       private Map<String, Object> extraParams;
 
@@ -647,6 +701,12 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
       /** ID of an existing, connected Stripe account. */
       public Builder setDestination(String destination) {
+        this.destination = destination;
+        return this;
+      }
+
+      /** ID of an existing, connected Stripe account. */
+      public Builder setDestination(EmptyParam destination) {
         this.destination = destination;
         return this;
       }

@@ -2,6 +2,7 @@ package com.stripe.param.radar;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.Map;
 public class ValueListUpdateParams extends ApiRequestParams {
   /** The name of the value list for use in rules. */
   @SerializedName("alias")
-  String alias;
+  Object alias;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -35,14 +36,14 @@ public class ValueListUpdateParams extends ApiRequestParams {
 
   /** The human-readable name of the value list. */
   @SerializedName("name")
-  String name;
+  Object name;
 
   private ValueListUpdateParams(
-      String alias,
+      Object alias,
       List<String> expand,
       Map<String, Object> extraParams,
       Map<String, String> metadata,
-      String name) {
+      Object name) {
     this.alias = alias;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -55,7 +56,7 @@ public class ValueListUpdateParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String alias;
+    private Object alias;
 
     private List<String> expand;
 
@@ -63,7 +64,7 @@ public class ValueListUpdateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
-    private String name;
+    private Object name;
 
     /** Finalize and obtain parameter instance from this builder. */
     public ValueListUpdateParams build() {
@@ -73,6 +74,12 @@ public class ValueListUpdateParams extends ApiRequestParams {
 
     /** The name of the value list for use in rules. */
     public Builder setAlias(String alias) {
+      this.alias = alias;
+      return this;
+    }
+
+    /** The name of the value list for use in rules. */
+    public Builder setAlias(EmptyParam alias) {
       this.alias = alias;
       return this;
     }
@@ -157,6 +164,12 @@ public class ValueListUpdateParams extends ApiRequestParams {
 
     /** The human-readable name of the value list. */
     public Builder setName(String name) {
+      this.name = name;
+      return this;
+    }
+
+    /** The human-readable name of the value list. */
+    public Builder setName(EmptyParam name) {
       this.name = name;
       return this;
     }
