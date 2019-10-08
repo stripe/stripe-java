@@ -1,5 +1,10 @@
 # Changelog
 
+## 12.2.0 - 2019-10-08
+* [#852](https://github.com/stripe/stripe-java/pull/852) Setters for string properties in update params now all accept `EmptyParam`
+* [#835](https://github.com/stripe/stripe-java/pull/835) Bump dependencies
+* [#851](https://github.com/stripe/stripe-java/pull/851) Update `README.md`
+
 ## 12.1.0 - 2019-09-27
 * [#850](https://github.com/stripe/stripe-java/pull/850) Codegen for openapi 4d4a107
   * Add support for `mandate` on `Charge`.
