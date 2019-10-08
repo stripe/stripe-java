@@ -2,6 +2,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,14 +35,14 @@ public class PlanUpdateParams extends ApiRequestParams {
 
   /** A brief description of the plan, hidden from customers. */
   @SerializedName("nickname")
-  String nickname;
+  Object nickname;
 
   /**
    * The product the plan belongs to. Note that after updating, statement descriptors and line items
    * of the plan in active subscriptions will be affected.
    */
   @SerializedName("product")
-  String product;
+  Object product;
 
   /**
    * Default number of trial days when subscribing a customer to this plan using
@@ -55,8 +56,8 @@ public class PlanUpdateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Map<String, String> metadata,
-      String nickname,
-      String product,
+      Object nickname,
+      Object product,
       Long trialPeriodDays) {
     this.active = active;
     this.expand = expand;
@@ -80,9 +81,9 @@ public class PlanUpdateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
-    private String nickname;
+    private Object nickname;
 
-    private String product;
+    private Object product;
 
     private Long trialPeriodDays;
 
@@ -188,11 +189,26 @@ public class PlanUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /** A brief description of the plan, hidden from customers. */
+    public Builder setNickname(EmptyParam nickname) {
+      this.nickname = nickname;
+      return this;
+    }
+
     /**
      * The product the plan belongs to. Note that after updating, statement descriptors and line
      * items of the plan in active subscriptions will be affected.
      */
     public Builder setProduct(String product) {
+      this.product = product;
+      return this;
+    }
+
+    /**
+     * The product the plan belongs to. Note that after updating, statement descriptors and line
+     * items of the plan in active subscriptions will be affected.
+     */
+    public Builder setProduct(EmptyParam product) {
       this.product = product;
       return this;
     }

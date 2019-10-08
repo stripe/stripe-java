@@ -2,6 +2,7 @@ package com.stripe.param.terminal;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +15,7 @@ public class LocationUpdateParams extends ApiRequestParams {
 
   /** A name for the location. */
   @SerializedName("display_name")
-  String displayName;
+  Object displayName;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -35,14 +36,14 @@ public class LocationUpdateParams extends ApiRequestParams {
    * on your platform account by connected account, set this parameter to the connected account ID.
    */
   @SerializedName("operator_account")
-  String operatorAccount;
+  Object operatorAccount;
 
   private LocationUpdateParams(
       Address address,
-      String displayName,
+      Object displayName,
       List<String> expand,
       Map<String, Object> extraParams,
-      String operatorAccount) {
+      Object operatorAccount) {
     this.address = address;
     this.displayName = displayName;
     this.expand = expand;
@@ -57,13 +58,13 @@ public class LocationUpdateParams extends ApiRequestParams {
   public static class Builder {
     private Address address;
 
-    private String displayName;
+    private Object displayName;
 
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
-    private String operatorAccount;
+    private Object operatorAccount;
 
     /** Finalize and obtain parameter instance from this builder. */
     public LocationUpdateParams build() {
@@ -79,6 +80,12 @@ public class LocationUpdateParams extends ApiRequestParams {
 
     /** A name for the location. */
     public Builder setDisplayName(String displayName) {
+      this.displayName = displayName;
+      return this;
+    }
+
+    /** A name for the location. */
+    public Builder setDisplayName(EmptyParam displayName) {
       this.displayName = displayName;
       return this;
     }
@@ -145,14 +152,25 @@ public class LocationUpdateParams extends ApiRequestParams {
       this.operatorAccount = operatorAccount;
       return this;
     }
+
+    /**
+     * To [group
+     * objects](https://stripe.com/docs/terminal/payments/connect#grouping-objects-by-connected-account)
+     * on your platform account by connected account, set this parameter to the connected account
+     * ID.
+     */
+    public Builder setOperatorAccount(EmptyParam operatorAccount) {
+      this.operatorAccount = operatorAccount;
+      return this;
+    }
   }
 
   public static class Address {
     @SerializedName("city")
-    String city;
+    Object city;
 
     @SerializedName("country")
-    String country;
+    Object country;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -164,25 +182,25 @@ public class LocationUpdateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     @SerializedName("line1")
-    String line1;
+    Object line1;
 
     @SerializedName("line2")
-    String line2;
+    Object line2;
 
     @SerializedName("postal_code")
-    String postalCode;
+    Object postalCode;
 
     @SerializedName("state")
-    String state;
+    Object state;
 
     private Address(
-        String city,
-        String country,
+        Object city,
+        Object country,
         Map<String, Object> extraParams,
-        String line1,
-        String line2,
-        String postalCode,
-        String state) {
+        Object line1,
+        Object line2,
+        Object postalCode,
+        Object state) {
       this.city = city;
       this.country = country;
       this.extraParams = extraParams;
@@ -197,19 +215,19 @@ public class LocationUpdateParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private String city;
+      private Object city;
 
-      private String country;
+      private Object country;
 
       private Map<String, Object> extraParams;
 
-      private String line1;
+      private Object line1;
 
-      private String line2;
+      private Object line2;
 
-      private String postalCode;
+      private Object postalCode;
 
-      private String state;
+      private Object state;
 
       /** Finalize and obtain parameter instance from this builder. */
       public Address build() {
@@ -228,7 +246,17 @@ public class LocationUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      public Builder setCity(EmptyParam city) {
+        this.city = city;
+        return this;
+      }
+
       public Builder setCountry(String country) {
+        this.country = country;
+        return this;
+      }
+
+      public Builder setCountry(EmptyParam country) {
         this.country = country;
         return this;
       }
@@ -264,7 +292,17 @@ public class LocationUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      public Builder setLine1(EmptyParam line1) {
+        this.line1 = line1;
+        return this;
+      }
+
       public Builder setLine2(String line2) {
+        this.line2 = line2;
+        return this;
+      }
+
+      public Builder setLine2(EmptyParam line2) {
         this.line2 = line2;
         return this;
       }
@@ -274,7 +312,17 @@ public class LocationUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      public Builder setPostalCode(EmptyParam postalCode) {
+        this.postalCode = postalCode;
+        return this;
+      }
+
       public Builder setState(String state) {
+        this.state = state;
+        return this;
+      }
+
+      public Builder setState(EmptyParam state) {
         this.state = state;
         return this;
       }

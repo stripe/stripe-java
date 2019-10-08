@@ -2,6 +2,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -34,14 +35,14 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
 
   /** The URL of the webhook endpoint. */
   @SerializedName("url")
-  String url;
+  Object url;
 
   private WebhookEndpointUpdateParams(
       Boolean disabled,
       List<EnabledEvent> enabledEvents,
       List<String> expand,
       Map<String, Object> extraParams,
-      String url) {
+      Object url) {
     this.disabled = disabled;
     this.enabledEvents = enabledEvents;
     this.expand = expand;
@@ -62,7 +63,7 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private String url;
+    private Object url;
 
     /** Finalize and obtain parameter instance from this builder. */
     public WebhookEndpointUpdateParams build() {
@@ -156,6 +157,12 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
 
     /** The URL of the webhook endpoint. */
     public Builder setUrl(String url) {
+      this.url = url;
+      return this;
+    }
+
+    /** The URL of the webhook endpoint. */
+    public Builder setUrl(EmptyParam url) {
       this.url = url;
       return this;
     }

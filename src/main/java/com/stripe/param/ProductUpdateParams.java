@@ -25,7 +25,7 @@ public class ProductUpdateParams extends ApiRequestParams {
 
   /** A short one-line description of the product, meant to be displayable to the customer. */
   @SerializedName("caption")
-  String caption;
+  Object caption;
 
   /**
    * An array of Connect application names or identifiers that should not be able to order the SKUs
@@ -36,7 +36,7 @@ public class ProductUpdateParams extends ApiRequestParams {
 
   /** The product's description, meant to be displayable to the customer. */
   @SerializedName("description")
-  String description;
+  Object description;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -67,7 +67,7 @@ public class ProductUpdateParams extends ApiRequestParams {
    * `good` types.
    */
   @SerializedName("name")
-  String name;
+  Object name;
 
   /**
    * The dimensions of this product for shipping purposes. A SKU associated with this product can
@@ -88,35 +88,35 @@ public class ProductUpdateParams extends ApiRequestParams {
    * all. It must contain at least one letter. May only be set if type=`service`.
    */
   @SerializedName("statement_descriptor")
-  String statementDescriptor;
+  Object statementDescriptor;
 
   /**
    * A label that represents units of this product, such as seat(s), in Stripe and on customers’
    * receipts and invoices. Only available on products of type=`service`.
    */
   @SerializedName("unit_label")
-  String unitLabel;
+  Object unitLabel;
 
   /** A URL of a publicly-accessible webpage for this product. */
   @SerializedName("url")
-  String url;
+  Object url;
 
   private ProductUpdateParams(
       Boolean active,
       Object attributes,
-      String caption,
+      Object caption,
       List<String> deactivateOn,
-      String description,
+      Object description,
       List<String> expand,
       Map<String, Object> extraParams,
       Object images,
       Map<String, String> metadata,
-      String name,
+      Object name,
       Object packageDimensions,
       Boolean shippable,
-      String statementDescriptor,
-      String unitLabel,
-      String url) {
+      Object statementDescriptor,
+      Object unitLabel,
+      Object url) {
     this.active = active;
     this.attributes = attributes;
     this.caption = caption;
@@ -143,11 +143,11 @@ public class ProductUpdateParams extends ApiRequestParams {
 
     private Object attributes;
 
-    private String caption;
+    private Object caption;
 
     private List<String> deactivateOn;
 
-    private String description;
+    private Object description;
 
     private List<String> expand;
 
@@ -157,17 +157,17 @@ public class ProductUpdateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
-    private String name;
+    private Object name;
 
     private Object packageDimensions;
 
     private Boolean shippable;
 
-    private String statementDescriptor;
+    private Object statementDescriptor;
 
-    private String unitLabel;
+    private Object unitLabel;
 
-    private String url;
+    private Object url;
 
     /** Finalize and obtain parameter instance from this builder. */
     public ProductUpdateParams build() {
@@ -251,6 +251,12 @@ public class ProductUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /** A short one-line description of the product, meant to be displayable to the customer. */
+    public Builder setCaption(EmptyParam caption) {
+      this.caption = caption;
+      return this;
+    }
+
     /**
      * Add an element to `deactivateOn` list. A list is initialized for the first `add/addAll` call,
      * and subsequent calls adds additional elements to the original list. See {@link
@@ -279,6 +285,12 @@ public class ProductUpdateParams extends ApiRequestParams {
 
     /** The product's description, meant to be displayable to the customer. */
     public Builder setDescription(String description) {
+      this.description = description;
+      return this;
+    }
+
+    /** The product's description, meant to be displayable to the customer. */
+    public Builder setDescription(EmptyParam description) {
       this.description = description;
       return this;
     }
@@ -415,6 +427,15 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /**
+     * The product's name, meant to be displayable to the customer. Applicable to both `service` and
+     * `good` types.
+     */
+    public Builder setName(EmptyParam name) {
+      this.name = name;
+      return this;
+    }
+
+    /**
      * The dimensions of this product for shipping purposes. A SKU associated with this product can
      * override this value by having its own `package_dimensions`.
      */
@@ -452,6 +473,19 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /**
+     * An arbitrary string to be displayed on your customer's credit card statement. This may be up
+     * to 22 characters. The statement description may not include "' characters, and will appear on
+     * your customer's statement in capital letters. Non-ASCII characters are automatically
+     * stripped. While most banks display this information consistently, some may display it
+     * incorrectly or not at all. It must contain at least one letter. May only be set if
+     * type=`service`.
+     */
+    public Builder setStatementDescriptor(EmptyParam statementDescriptor) {
+      this.statementDescriptor = statementDescriptor;
+      return this;
+    }
+
+    /**
      * A label that represents units of this product, such as seat(s), in Stripe and on customers’
      * receipts and invoices. Only available on products of type=`service`.
      */
@@ -460,8 +494,23 @@ public class ProductUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * A label that represents units of this product, such as seat(s), in Stripe and on customers’
+     * receipts and invoices. Only available on products of type=`service`.
+     */
+    public Builder setUnitLabel(EmptyParam unitLabel) {
+      this.unitLabel = unitLabel;
+      return this;
+    }
+
     /** A URL of a publicly-accessible webpage for this product. */
     public Builder setUrl(String url) {
+      this.url = url;
+      return this;
+    }
+
+    /** A URL of a publicly-accessible webpage for this product. */
+    public Builder setUrl(EmptyParam url) {
       this.url = url;
       return this;
     }

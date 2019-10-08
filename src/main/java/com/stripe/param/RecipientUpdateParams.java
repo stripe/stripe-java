@@ -2,6 +2,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -14,7 +15,7 @@ public class RecipientUpdateParams extends ApiRequestParams {
    * bank account details, with the options described below.
    */
   @SerializedName("bank_account")
-  String bankAccount;
+  Object bankAccount;
 
   /**
    * A U.S. Visa or MasterCard debit card (not prepaid) to attach to the recipient. You can provide
@@ -26,25 +27,25 @@ public class RecipientUpdateParams extends ApiRequestParams {
    * a card to a recipient, Stripe will automatically validate the debit card.
    */
   @SerializedName("card")
-  String card;
+  Object card;
 
   /** ID of the card to set as the recipient's new default for payouts. */
   @SerializedName("default_card")
-  String defaultCard;
+  Object defaultCard;
 
   /**
    * An arbitrary string which you can attach to a `Recipient` object. It is displayed alongside the
    * recipient in the web interface.
    */
   @SerializedName("description")
-  String description;
+  Object description;
 
   /**
    * The recipient's email address. It is displayed alongside the recipient in the web interface,
    * and can be useful for searching and tracking.
    */
   @SerializedName("email")
-  String email;
+  Object email;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -73,26 +74,26 @@ public class RecipientUpdateParams extends ApiRequestParams {
    * incorporated name.
    */
   @SerializedName("name")
-  String name;
+  Object name;
 
   /**
    * The recipient's tax ID, as a string. For type `individual`, the full SSN; for type
    * `corporation`, the full EIN.
    */
   @SerializedName("tax_id")
-  String taxId;
+  Object taxId;
 
   private RecipientUpdateParams(
-      String bankAccount,
-      String card,
-      String defaultCard,
-      String description,
-      String email,
+      Object bankAccount,
+      Object card,
+      Object defaultCard,
+      Object description,
+      Object email,
       List<String> expand,
       Map<String, Object> extraParams,
       Map<String, String> metadata,
-      String name,
-      String taxId) {
+      Object name,
+      Object taxId) {
     this.bankAccount = bankAccount;
     this.card = card;
     this.defaultCard = defaultCard;
@@ -110,15 +111,15 @@ public class RecipientUpdateParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String bankAccount;
+    private Object bankAccount;
 
-    private String card;
+    private Object card;
 
-    private String defaultCard;
+    private Object defaultCard;
 
-    private String description;
+    private Object description;
 
-    private String email;
+    private Object email;
 
     private List<String> expand;
 
@@ -126,9 +127,9 @@ public class RecipientUpdateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
-    private String name;
+    private Object name;
 
-    private String taxId;
+    private Object taxId;
 
     /** Finalize and obtain parameter instance from this builder. */
     public RecipientUpdateParams build() {
@@ -156,6 +157,16 @@ public class RecipientUpdateParams extends ApiRequestParams {
     }
 
     /**
+     * A bank account to attach to the recipient. You can provide either a token, like the ones
+     * returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a
+     * user's bank account details, with the options described below.
+     */
+    public Builder setBankAccount(EmptyParam bankAccount) {
+      this.bankAccount = bankAccount;
+      return this;
+    }
+
+    /**
      * A U.S. Visa or MasterCard debit card (not prepaid) to attach to the recipient. You can
      * provide either a token, like the ones returned by
      * [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a user's debit
@@ -170,8 +181,29 @@ public class RecipientUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * A U.S. Visa or MasterCard debit card (not prepaid) to attach to the recipient. You can
+     * provide either a token, like the ones returned by
+     * [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a user's debit
+     * card details, with the options described below. Passing `card` will create a new card, make
+     * it the new recipient default card, and delete the old recipient default (if one exists). If
+     * you want to add additional debit cards instead of replacing the existing default, use the
+     * [card creation API](#create_card). Whenever you attach a card to a recipient, Stripe will
+     * automatically validate the debit card.
+     */
+    public Builder setCard(EmptyParam card) {
+      this.card = card;
+      return this;
+    }
+
     /** ID of the card to set as the recipient's new default for payouts. */
     public Builder setDefaultCard(String defaultCard) {
+      this.defaultCard = defaultCard;
+      return this;
+    }
+
+    /** ID of the card to set as the recipient's new default for payouts. */
+    public Builder setDefaultCard(EmptyParam defaultCard) {
       this.defaultCard = defaultCard;
       return this;
     }
@@ -186,10 +218,28 @@ public class RecipientUpdateParams extends ApiRequestParams {
     }
 
     /**
+     * An arbitrary string which you can attach to a `Recipient` object. It is displayed alongside
+     * the recipient in the web interface.
+     */
+    public Builder setDescription(EmptyParam description) {
+      this.description = description;
+      return this;
+    }
+
+    /**
      * The recipient's email address. It is displayed alongside the recipient in the web interface,
      * and can be useful for searching and tracking.
      */
     public Builder setEmail(String email) {
+      this.email = email;
+      return this;
+    }
+
+    /**
+     * The recipient's email address. It is displayed alongside the recipient in the web interface,
+     * and can be useful for searching and tracking.
+     */
+    public Builder setEmail(EmptyParam email) {
       this.email = email;
       return this;
     }
@@ -283,10 +333,29 @@ public class RecipientUpdateParams extends ApiRequestParams {
     }
 
     /**
+     * The recipient's full, legal name. For type `individual`, should be in the format `First
+     * Last`, `First Middle Last`, or `First M Last` (no prefixes or suffixes). For `corporation`,
+     * the full, incorporated name.
+     */
+    public Builder setName(EmptyParam name) {
+      this.name = name;
+      return this;
+    }
+
+    /**
      * The recipient's tax ID, as a string. For type `individual`, the full SSN; for type
      * `corporation`, the full EIN.
      */
     public Builder setTaxId(String taxId) {
+      this.taxId = taxId;
+      return this;
+    }
+
+    /**
+     * The recipient's tax ID, as a string. For type `individual`, the full SSN; for type
+     * `corporation`, the full EIN.
+     */
+    public Builder setTaxId(EmptyParam taxId) {
       this.taxId = taxId;
       return this;
     }

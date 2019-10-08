@@ -30,7 +30,7 @@ public class SkuUpdateParams extends ApiRequestParams {
    * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
    */
   @SerializedName("currency")
-  String currency;
+  Object currency;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -47,7 +47,7 @@ public class SkuUpdateParams extends ApiRequestParams {
 
   /** The URL of an image for this SKU, meant to be displayable to the customer. */
   @SerializedName("image")
-  String image;
+  Object image;
 
   /** Description of the SKU's inventory. */
   @SerializedName("inventory")
@@ -76,20 +76,20 @@ public class SkuUpdateParams extends ApiRequestParams {
    * of attribute names as the SKU's current product, and be of type `good`.
    */
   @SerializedName("product")
-  String product;
+  Object product;
 
   private SkuUpdateParams(
       Boolean active,
       Map<String, String> attributes,
-      String currency,
+      Object currency,
       List<String> expand,
       Map<String, Object> extraParams,
-      String image,
+      Object image,
       Inventory inventory,
       Map<String, String> metadata,
       Object packageDimensions,
       Long price,
-      String product) {
+      Object product) {
     this.active = active;
     this.attributes = attributes;
     this.currency = currency;
@@ -112,13 +112,13 @@ public class SkuUpdateParams extends ApiRequestParams {
 
     private Map<String, String> attributes;
 
-    private String currency;
+    private Object currency;
 
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
-    private String image;
+    private Object image;
 
     private Inventory inventory;
 
@@ -128,7 +128,7 @@ public class SkuUpdateParams extends ApiRequestParams {
 
     private Long price;
 
-    private String product;
+    private Object product;
 
     /** Finalize and obtain parameter instance from this builder. */
     public SkuUpdateParams build() {
@@ -183,6 +183,15 @@ public class SkuUpdateParams extends ApiRequestParams {
      * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
      */
     public Builder setCurrency(String currency) {
+      this.currency = currency;
+      return this;
+    }
+
+    /**
+     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
+     * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+     */
+    public Builder setCurrency(EmptyParam currency) {
       this.currency = currency;
       return this;
     }
@@ -245,6 +254,12 @@ public class SkuUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /** The URL of an image for this SKU, meant to be displayable to the customer. */
+    public Builder setImage(EmptyParam image) {
+      this.image = image;
+      return this;
+    }
+
     /** Description of the SKU's inventory. */
     public Builder setInventory(Inventory inventory) {
       this.inventory = inventory;
@@ -303,6 +318,15 @@ public class SkuUpdateParams extends ApiRequestParams {
      * set of attribute names as the SKU's current product, and be of type `good`.
      */
     public Builder setProduct(String product) {
+      this.product = product;
+      return this;
+    }
+
+    /**
+     * The ID of the product that this SKU should belong to. The product must exist, have the same
+     * set of attribute names as the SKU's current product, and be of type `good`.
+     */
+    public Builder setProduct(EmptyParam product) {
       this.product = product;
       return this;
     }

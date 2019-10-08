@@ -2,6 +2,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,7 +11,7 @@ import java.util.Map;
 public class TransferUpdateParams extends ApiRequestParams {
   /** An arbitrary string attached to the object. Often useful for displaying to users. */
   @SerializedName("description")
-  String description;
+  Object description;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -34,7 +35,7 @@ public class TransferUpdateParams extends ApiRequestParams {
   Map<String, String> metadata;
 
   private TransferUpdateParams(
-      String description,
+      Object description,
       List<String> expand,
       Map<String, Object> extraParams,
       Map<String, String> metadata) {
@@ -49,7 +50,7 @@ public class TransferUpdateParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String description;
+    private Object description;
 
     private List<String> expand;
 
@@ -65,6 +66,12 @@ public class TransferUpdateParams extends ApiRequestParams {
 
     /** An arbitrary string attached to the object. Often useful for displaying to users. */
     public Builder setDescription(String description) {
+      this.description = description;
+      return this;
+    }
+
+    /** An arbitrary string attached to the object. Often useful for displaying to users. */
+    public Builder setDescription(EmptyParam description) {
       this.description = description;
       return this;
     }

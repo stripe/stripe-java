@@ -45,7 +45,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
 
   /** The identifier of the new plan for this subscription item. */
   @SerializedName("plan")
-  String plan;
+  Object plan;
 
   /**
    * Flag indicating whether to [prorate](https://stripe.com/docs/billing/subscriptions/prorations)
@@ -80,7 +80,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
       Map<String, String> metadata,
       Boolean offSession,
       PaymentBehavior paymentBehavior,
-      String plan,
+      Object plan,
       Boolean prorate,
       Long prorationDate,
       Long quantity,
@@ -115,7 +115,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
 
     private PaymentBehavior paymentBehavior;
 
-    private String plan;
+    private Object plan;
 
     private Boolean prorate;
 
@@ -249,6 +249,12 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
 
     /** The identifier of the new plan for this subscription item. */
     public Builder setPlan(String plan) {
+      this.plan = plan;
+      return this;
+    }
+
+    /** The identifier of the new plan for this subscription item. */
+    public Builder setPlan(EmptyParam plan) {
       this.plan = plan;
       return this;
     }

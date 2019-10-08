@@ -35,9 +35,8 @@ public class ApiRequestParamsTest {
     @SerializedName("bar_enum")
     private ApiRequestParams.EnumParam bar;
 
-    @Setter
     @SerializedName("baz_string")
-    private String bazString;
+    private Object bazString;
 
     @Setter
     @SerializedName("boo_code")
@@ -58,6 +57,14 @@ public class ApiRequestParamsTest {
 
     public void setBar(EmptyParam bar) {
       this.bar = bar;
+    }
+
+    public void setBazString(String baz) {
+      this.bazString = baz;
+    }
+
+    public void setBazString(EmptyParam baz) {
+      this.bazString = baz;
     }
   }
 
@@ -126,6 +133,19 @@ public class ApiRequestParamsTest {
 
     assertTrue(paramMap.containsKey("baz_string"));
     assertEquals("", paramMap.get("baz_string"));
+  }
+
+  @Test
+  public void testToMapWithEmptyParamForStringIsNull() {
+    ConcreteApiRequestParams paramRequest = new ConcreteApiRequestParams();
+    paramRequest.setBazString(EmptyParam.EMPTY);
+    Map<String, Object> paramMap = paramRequest.toMap();
+
+    assertEquals(1, paramMap.size());
+
+    // present key but null value
+    assertTrue(paramMap.containsKey("baz_string"));
+    assertNull(paramMap.get("baz_string"));
   }
 
   @Test

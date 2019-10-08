@@ -16,7 +16,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
    * be updated if there is no existing associated customer with this charge.
    */
   @SerializedName("customer")
-  String customer;
+  Object customer;
 
   /**
    * An arbitrary string which you can attach to a charge object. It is displayed when in the web
@@ -25,7 +25,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
    * are describing.
    */
   @SerializedName("description")
-  String description;
+  Object description;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -62,7 +62,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
    * updated, then a new email receipt will be sent to the updated address.
    */
   @SerializedName("receipt_email")
-  String receiptEmail;
+  Object receiptEmail;
 
   /** Shipping information for the charge. Helps prevent fraud on charges for physical goods. */
   @SerializedName("shipping")
@@ -75,18 +75,18 @@ public class ChargeUpdateParams extends ApiRequestParams {
    * details.
    */
   @SerializedName("transfer_group")
-  String transferGroup;
+  Object transferGroup;
 
   private ChargeUpdateParams(
-      String customer,
-      String description,
+      Object customer,
+      Object description,
       List<String> expand,
       Map<String, Object> extraParams,
       FraudDetails fraudDetails,
       Map<String, String> metadata,
-      String receiptEmail,
+      Object receiptEmail,
       Shipping shipping,
-      String transferGroup) {
+      Object transferGroup) {
     this.customer = customer;
     this.description = description;
     this.expand = expand;
@@ -103,9 +103,9 @@ public class ChargeUpdateParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String customer;
+    private Object customer;
 
-    private String description;
+    private Object description;
 
     private List<String> expand;
 
@@ -115,11 +115,11 @@ public class ChargeUpdateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
-    private String receiptEmail;
+    private Object receiptEmail;
 
     private Shipping shipping;
 
-    private String transferGroup;
+    private Object transferGroup;
 
     /** Finalize and obtain parameter instance from this builder. */
     public ChargeUpdateParams build() {
@@ -145,12 +145,32 @@ public class ChargeUpdateParams extends ApiRequestParams {
     }
 
     /**
+     * The ID of an existing customer that will be associated with this request. This field may only
+     * be updated if there is no existing associated customer with this charge.
+     */
+    public Builder setCustomer(EmptyParam customer) {
+      this.customer = customer;
+      return this;
+    }
+
+    /**
      * An arbitrary string which you can attach to a charge object. It is displayed when in the web
      * interface alongside the charge. Note that if you use Stripe to send automatic email receipts
      * to your customers, your receipt emails will include the `description` of the charge(s) that
      * they are describing.
      */
     public Builder setDescription(String description) {
+      this.description = description;
+      return this;
+    }
+
+    /**
+     * An arbitrary string which you can attach to a charge object. It is displayed when in the web
+     * interface alongside the charge. Note that if you use Stripe to send automatic email receipts
+     * to your customers, your receipt emails will include the `description` of the charge(s) that
+     * they are describing.
+     */
+    public Builder setDescription(EmptyParam description) {
       this.description = description;
       return this;
     }
@@ -253,6 +273,15 @@ public class ChargeUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * This is the email address that the receipt for this charge will be sent to. If this field is
+     * updated, then a new email receipt will be sent to the updated address.
+     */
+    public Builder setReceiptEmail(EmptyParam receiptEmail) {
+      this.receiptEmail = receiptEmail;
+      return this;
+    }
+
     /** Shipping information for the charge. Helps prevent fraud on charges for physical goods. */
     public Builder setShipping(Shipping shipping) {
       this.shipping = shipping;
@@ -266,6 +295,17 @@ public class ChargeUpdateParams extends ApiRequestParams {
      * details.
      */
     public Builder setTransferGroup(String transferGroup) {
+      this.transferGroup = transferGroup;
+      return this;
+    }
+
+    /**
+     * A string that identifies this transaction as part of a group. `transfer_group` may only be
+     * provided if it has not been set. See the [Connect
+     * documentation](https://stripe.com/docs/connect/charges-transfers#grouping-transactions) for
+     * details.
+     */
+    public Builder setTransferGroup(EmptyParam transferGroup) {
       this.transferGroup = transferGroup;
       return this;
     }
@@ -363,7 +403,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
 
     /** The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. */
     @SerializedName("carrier")
-    String carrier;
+    Object carrier;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -376,26 +416,26 @@ public class ChargeUpdateParams extends ApiRequestParams {
 
     /** Recipient name. */
     @SerializedName("name")
-    String name;
+    Object name;
 
     /** Recipient phone (including extension). */
     @SerializedName("phone")
-    String phone;
+    Object phone;
 
     /**
      * The tracking number for a physical product, obtained from the delivery service. If multiple
      * tracking numbers were generated for this purchase, please separate them with commas.
      */
     @SerializedName("tracking_number")
-    String trackingNumber;
+    Object trackingNumber;
 
     private Shipping(
         Address address,
-        String carrier,
+        Object carrier,
         Map<String, Object> extraParams,
-        String name,
-        String phone,
-        String trackingNumber) {
+        Object name,
+        Object phone,
+        Object trackingNumber) {
       this.address = address;
       this.carrier = carrier;
       this.extraParams = extraParams;
@@ -411,15 +451,15 @@ public class ChargeUpdateParams extends ApiRequestParams {
     public static class Builder {
       private Address address;
 
-      private String carrier;
+      private Object carrier;
 
       private Map<String, Object> extraParams;
 
-      private String name;
+      private Object name;
 
-      private String phone;
+      private Object phone;
 
-      private String trackingNumber;
+      private Object trackingNumber;
 
       /** Finalize and obtain parameter instance from this builder. */
       public Shipping build() {
@@ -440,6 +480,12 @@ public class ChargeUpdateParams extends ApiRequestParams {
 
       /** The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. */
       public Builder setCarrier(String carrier) {
+        this.carrier = carrier;
+        return this;
+      }
+
+      /** The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. */
+      public Builder setCarrier(EmptyParam carrier) {
         this.carrier = carrier;
         return this;
       }
@@ -476,8 +522,20 @@ public class ChargeUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** Recipient name. */
+      public Builder setName(EmptyParam name) {
+        this.name = name;
+        return this;
+      }
+
       /** Recipient phone (including extension). */
       public Builder setPhone(String phone) {
+        this.phone = phone;
+        return this;
+      }
+
+      /** Recipient phone (including extension). */
+      public Builder setPhone(EmptyParam phone) {
         this.phone = phone;
         return this;
       }
@@ -490,14 +548,23 @@ public class ChargeUpdateParams extends ApiRequestParams {
         this.trackingNumber = trackingNumber;
         return this;
       }
+
+      /**
+       * The tracking number for a physical product, obtained from the delivery service. If multiple
+       * tracking numbers were generated for this purchase, please separate them with commas.
+       */
+      public Builder setTrackingNumber(EmptyParam trackingNumber) {
+        this.trackingNumber = trackingNumber;
+        return this;
+      }
     }
 
     public static class Address {
       @SerializedName("city")
-      String city;
+      Object city;
 
       @SerializedName("country")
-      String country;
+      Object country;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -509,25 +576,25 @@ public class ChargeUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       @SerializedName("line1")
-      String line1;
+      Object line1;
 
       @SerializedName("line2")
-      String line2;
+      Object line2;
 
       @SerializedName("postal_code")
-      String postalCode;
+      Object postalCode;
 
       @SerializedName("state")
-      String state;
+      Object state;
 
       private Address(
-          String city,
-          String country,
+          Object city,
+          Object country,
           Map<String, Object> extraParams,
-          String line1,
-          String line2,
-          String postalCode,
-          String state) {
+          Object line1,
+          Object line2,
+          Object postalCode,
+          Object state) {
         this.city = city;
         this.country = country;
         this.extraParams = extraParams;
@@ -542,19 +609,19 @@ public class ChargeUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private String city;
+        private Object city;
 
-        private String country;
+        private Object country;
 
         private Map<String, Object> extraParams;
 
-        private String line1;
+        private Object line1;
 
-        private String line2;
+        private Object line2;
 
-        private String postalCode;
+        private Object postalCode;
 
-        private String state;
+        private Object state;
 
         /** Finalize and obtain parameter instance from this builder. */
         public Address build() {
@@ -573,7 +640,17 @@ public class ChargeUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        public Builder setCity(EmptyParam city) {
+          this.city = city;
+          return this;
+        }
+
         public Builder setCountry(String country) {
+          this.country = country;
+          return this;
+        }
+
+        public Builder setCountry(EmptyParam country) {
           this.country = country;
           return this;
         }
@@ -611,7 +688,17 @@ public class ChargeUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        public Builder setLine1(EmptyParam line1) {
+          this.line1 = line1;
+          return this;
+        }
+
         public Builder setLine2(String line2) {
+          this.line2 = line2;
+          return this;
+        }
+
+        public Builder setLine2(EmptyParam line2) {
           this.line2 = line2;
           return this;
         }
@@ -621,7 +708,17 @@ public class ChargeUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        public Builder setPostalCode(EmptyParam postalCode) {
+          this.postalCode = postalCode;
+          return this;
+        }
+
         public Builder setState(String state) {
+          this.state = state;
+          return this;
+        }
+
+        public Builder setState(EmptyParam state) {
           this.state = state;
           return this;
         }

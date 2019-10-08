@@ -13,7 +13,7 @@ import lombok.Getter;
 public class ExternalAccountUpdateParams extends ApiRequestParams {
   /** The name of the person or business that owns the bank account. */
   @SerializedName("account_holder_name")
-  String accountHolderName;
+  Object accountHolderName;
 
   /** The type of entity that holds the account. This can be either `individual` or `company`. */
   @SerializedName("account_holder_type")
@@ -21,27 +21,27 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
 
   /** City/District/Suburb/Town/Village. */
   @SerializedName("address_city")
-  String addressCity;
+  Object addressCity;
 
   /** Billing address country, if provided when creating card. */
   @SerializedName("address_country")
-  String addressCountry;
+  Object addressCountry;
 
   /** Address line 1 (Street address/PO Box/Company name). */
   @SerializedName("address_line1")
-  String addressLine1;
+  Object addressLine1;
 
   /** Address line 2 (Apartment/Suite/Unit/Building). */
   @SerializedName("address_line2")
-  String addressLine2;
+  Object addressLine2;
 
   /** State/County/Province/Region. */
   @SerializedName("address_state")
-  String addressState;
+  Object addressState;
 
   /** ZIP or postal code. */
   @SerializedName("address_zip")
-  String addressZip;
+  Object addressZip;
 
   /** When set to true, this becomes the default external account for its currency. */
   @SerializedName("default_for_currency")
@@ -49,11 +49,11 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
 
   /** Two digit number representing the card’s expiration month. */
   @SerializedName("exp_month")
-  String expMonth;
+  Object expMonth;
 
   /** Four digit number representing the card’s expiration year. */
   @SerializedName("exp_year")
-  String expYear;
+  Object expYear;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -73,24 +73,24 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
 
   /** Cardholder name. */
   @SerializedName("name")
-  String name;
+  Object name;
 
   private ExternalAccountUpdateParams(
-      String accountHolderName,
+      Object accountHolderName,
       EnumParam accountHolderType,
-      String addressCity,
-      String addressCountry,
-      String addressLine1,
-      String addressLine2,
-      String addressState,
-      String addressZip,
+      Object addressCity,
+      Object addressCountry,
+      Object addressLine1,
+      Object addressLine2,
+      Object addressState,
+      Object addressZip,
       Boolean defaultForCurrency,
-      String expMonth,
-      String expYear,
+      Object expMonth,
+      Object expYear,
       List<String> expand,
       Map<String, Object> extraParams,
       Map<String, String> metadata,
-      String name) {
+      Object name) {
     this.accountHolderName = accountHolderName;
     this.accountHolderType = accountHolderType;
     this.addressCity = addressCity;
@@ -113,27 +113,27 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private String accountHolderName;
+    private Object accountHolderName;
 
     private EnumParam accountHolderType;
 
-    private String addressCity;
+    private Object addressCity;
 
-    private String addressCountry;
+    private Object addressCountry;
 
-    private String addressLine1;
+    private Object addressLine1;
 
-    private String addressLine2;
+    private Object addressLine2;
 
-    private String addressState;
+    private Object addressState;
 
-    private String addressZip;
+    private Object addressZip;
 
     private Boolean defaultForCurrency;
 
-    private String expMonth;
+    private Object expMonth;
 
-    private String expYear;
+    private Object expYear;
 
     private List<String> expand;
 
@@ -141,7 +141,7 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
-    private String name;
+    private Object name;
 
     /** Finalize and obtain parameter instance from this builder. */
     public ExternalAccountUpdateParams build() {
@@ -169,6 +169,12 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /** The name of the person or business that owns the bank account. */
+    public Builder setAccountHolderName(EmptyParam accountHolderName) {
+      this.accountHolderName = accountHolderName;
+      return this;
+    }
+
     /** The type of entity that holds the account. This can be either `individual` or `company`. */
     public Builder setAccountHolderType(AccountHolderType accountHolderType) {
       this.accountHolderType = accountHolderType;
@@ -187,8 +193,20 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /** City/District/Suburb/Town/Village. */
+    public Builder setAddressCity(EmptyParam addressCity) {
+      this.addressCity = addressCity;
+      return this;
+    }
+
     /** Billing address country, if provided when creating card. */
     public Builder setAddressCountry(String addressCountry) {
+      this.addressCountry = addressCountry;
+      return this;
+    }
+
+    /** Billing address country, if provided when creating card. */
+    public Builder setAddressCountry(EmptyParam addressCountry) {
       this.addressCountry = addressCountry;
       return this;
     }
@@ -199,8 +217,20 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /** Address line 1 (Street address/PO Box/Company name). */
+    public Builder setAddressLine1(EmptyParam addressLine1) {
+      this.addressLine1 = addressLine1;
+      return this;
+    }
+
     /** Address line 2 (Apartment/Suite/Unit/Building). */
     public Builder setAddressLine2(String addressLine2) {
+      this.addressLine2 = addressLine2;
+      return this;
+    }
+
+    /** Address line 2 (Apartment/Suite/Unit/Building). */
+    public Builder setAddressLine2(EmptyParam addressLine2) {
       this.addressLine2 = addressLine2;
       return this;
     }
@@ -211,8 +241,20 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /** State/County/Province/Region. */
+    public Builder setAddressState(EmptyParam addressState) {
+      this.addressState = addressState;
+      return this;
+    }
+
     /** ZIP or postal code. */
     public Builder setAddressZip(String addressZip) {
+      this.addressZip = addressZip;
+      return this;
+    }
+
+    /** ZIP or postal code. */
+    public Builder setAddressZip(EmptyParam addressZip) {
       this.addressZip = addressZip;
       return this;
     }
@@ -229,8 +271,20 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /** Two digit number representing the card’s expiration month. */
+    public Builder setExpMonth(EmptyParam expMonth) {
+      this.expMonth = expMonth;
+      return this;
+    }
+
     /** Four digit number representing the card’s expiration year. */
     public Builder setExpYear(String expYear) {
+      this.expYear = expYear;
+      return this;
+    }
+
+    /** Four digit number representing the card’s expiration year. */
+    public Builder setExpYear(EmptyParam expYear) {
       this.expYear = expYear;
       return this;
     }
@@ -315,6 +369,12 @@ public class ExternalAccountUpdateParams extends ApiRequestParams {
 
     /** Cardholder name. */
     public Builder setName(String name) {
+      this.name = name;
+      return this;
+    }
+
+    /** Cardholder name. */
+    public Builder setName(EmptyParam name) {
       this.name = name;
       return this;
     }

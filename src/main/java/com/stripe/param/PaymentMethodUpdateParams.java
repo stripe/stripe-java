@@ -2,6 +2,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -172,7 +173,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
 
     /** Email address. */
     @SerializedName("email")
-    String email;
+    Object email;
 
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -185,14 +186,14 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
 
     /** Full name. */
     @SerializedName("name")
-    String name;
+    Object name;
 
     /** Billing phone number (including extension). */
     @SerializedName("phone")
-    String phone;
+    Object phone;
 
     private BillingDetails(
-        Address address, String email, Map<String, Object> extraParams, String name, String phone) {
+        Address address, Object email, Map<String, Object> extraParams, Object name, Object phone) {
       this.address = address;
       this.email = email;
       this.extraParams = extraParams;
@@ -207,13 +208,13 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
     public static class Builder {
       private Address address;
 
-      private String email;
+      private Object email;
 
       private Map<String, Object> extraParams;
 
-      private String name;
+      private Object name;
 
-      private String phone;
+      private Object phone;
 
       /** Finalize and obtain parameter instance from this builder. */
       public BillingDetails build() {
@@ -229,6 +230,12 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
 
       /** Email address. */
       public Builder setEmail(String email) {
+        this.email = email;
+        return this;
+      }
+
+      /** Email address. */
+      public Builder setEmail(EmptyParam email) {
         this.email = email;
         return this;
       }
@@ -266,8 +273,20 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
         return this;
       }
 
+      /** Full name. */
+      public Builder setName(EmptyParam name) {
+        this.name = name;
+        return this;
+      }
+
       /** Billing phone number (including extension). */
       public Builder setPhone(String phone) {
+        this.phone = phone;
+        return this;
+      }
+
+      /** Billing phone number (including extension). */
+      public Builder setPhone(EmptyParam phone) {
         this.phone = phone;
         return this;
       }
@@ -275,10 +294,10 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
 
     public static class Address {
       @SerializedName("city")
-      String city;
+      Object city;
 
       @SerializedName("country")
-      String country;
+      Object country;
 
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -290,25 +309,25 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       @SerializedName("line1")
-      String line1;
+      Object line1;
 
       @SerializedName("line2")
-      String line2;
+      Object line2;
 
       @SerializedName("postal_code")
-      String postalCode;
+      Object postalCode;
 
       @SerializedName("state")
-      String state;
+      Object state;
 
       private Address(
-          String city,
-          String country,
+          Object city,
+          Object country,
           Map<String, Object> extraParams,
-          String line1,
-          String line2,
-          String postalCode,
-          String state) {
+          Object line1,
+          Object line2,
+          Object postalCode,
+          Object state) {
         this.city = city;
         this.country = country;
         this.extraParams = extraParams;
@@ -323,19 +342,19 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
       }
 
       public static class Builder {
-        private String city;
+        private Object city;
 
-        private String country;
+        private Object country;
 
         private Map<String, Object> extraParams;
 
-        private String line1;
+        private Object line1;
 
-        private String line2;
+        private Object line2;
 
-        private String postalCode;
+        private Object postalCode;
 
-        private String state;
+        private Object state;
 
         /** Finalize and obtain parameter instance from this builder. */
         public Address build() {
@@ -354,7 +373,17 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        public Builder setCity(EmptyParam city) {
+          this.city = city;
+          return this;
+        }
+
         public Builder setCountry(String country) {
+          this.country = country;
+          return this;
+        }
+
+        public Builder setCountry(EmptyParam country) {
           this.country = country;
           return this;
         }
@@ -392,7 +421,17 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        public Builder setLine1(EmptyParam line1) {
+          this.line1 = line1;
+          return this;
+        }
+
         public Builder setLine2(String line2) {
+          this.line2 = line2;
+          return this;
+        }
+
+        public Builder setLine2(EmptyParam line2) {
           this.line2 = line2;
           return this;
         }
@@ -402,7 +441,17 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        public Builder setPostalCode(EmptyParam postalCode) {
+          this.postalCode = postalCode;
+          return this;
+        }
+
         public Builder setState(String state) {
+          this.state = state;
+          return this;
+        }
+
+        public Builder setState(EmptyParam state) {
           this.state = state;
           return this;
         }

@@ -2,6 +2,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -20,11 +21,11 @@ public class TaxRateUpdateParams extends ApiRequestParams {
    * to your customers.
    */
   @SerializedName("description")
-  String description;
+  Object description;
 
   /** The display name of the tax rate, which will be shown to users. */
   @SerializedName("display_name")
-  String displayName;
+  Object displayName;
 
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -41,7 +42,7 @@ public class TaxRateUpdateParams extends ApiRequestParams {
 
   /** The jurisdiction for the tax rate. */
   @SerializedName("jurisdiction")
-  String jurisdiction;
+  Object jurisdiction;
 
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
@@ -53,11 +54,11 @@ public class TaxRateUpdateParams extends ApiRequestParams {
 
   private TaxRateUpdateParams(
       Boolean active,
-      String description,
-      String displayName,
+      Object description,
+      Object displayName,
       List<String> expand,
       Map<String, Object> extraParams,
-      String jurisdiction,
+      Object jurisdiction,
       Map<String, String> metadata) {
     this.active = active;
     this.description = description;
@@ -75,15 +76,15 @@ public class TaxRateUpdateParams extends ApiRequestParams {
   public static class Builder {
     private Boolean active;
 
-    private String description;
+    private Object description;
 
-    private String displayName;
+    private Object displayName;
 
     private List<String> expand;
 
     private Map<String, Object> extraParams;
 
-    private String jurisdiction;
+    private Object jurisdiction;
 
     private Map<String, String> metadata;
 
@@ -117,8 +118,23 @@ public class TaxRateUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * An arbitrary string attached to the tax rate for your internal use only. It will not be
+     * visible to your customers.
+     */
+    public Builder setDescription(EmptyParam description) {
+      this.description = description;
+      return this;
+    }
+
     /** The display name of the tax rate, which will be shown to users. */
     public Builder setDisplayName(String displayName) {
+      this.displayName = displayName;
+      return this;
+    }
+
+    /** The display name of the tax rate, which will be shown to users. */
+    public Builder setDisplayName(EmptyParam displayName) {
       this.displayName = displayName;
       return this;
     }
@@ -177,6 +193,12 @@ public class TaxRateUpdateParams extends ApiRequestParams {
 
     /** The jurisdiction for the tax rate. */
     public Builder setJurisdiction(String jurisdiction) {
+      this.jurisdiction = jurisdiction;
+      return this;
+    }
+
+    /** The jurisdiction for the tax rate. */
+    public Builder setJurisdiction(EmptyParam jurisdiction) {
       this.jurisdiction = jurisdiction;
       return this;
     }

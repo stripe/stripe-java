@@ -2,6 +2,7 @@ package com.stripe.param.terminal;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -23,7 +24,7 @@ public class ReaderUpdateParams extends ApiRequestParams {
 
   /** The new label of the reader. */
   @SerializedName("label")
-  String label;
+  Object label;
 
   /**
    * To [group
@@ -31,10 +32,10 @@ public class ReaderUpdateParams extends ApiRequestParams {
    * on your platform account by connected account, set this parameter to the connected account ID.
    */
   @SerializedName("operator_account")
-  String operatorAccount;
+  Object operatorAccount;
 
   private ReaderUpdateParams(
-      List<String> expand, Map<String, Object> extraParams, String label, String operatorAccount) {
+      List<String> expand, Map<String, Object> extraParams, Object label, Object operatorAccount) {
     this.expand = expand;
     this.extraParams = extraParams;
     this.label = label;
@@ -50,9 +51,9 @@ public class ReaderUpdateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private String label;
+    private Object label;
 
-    private String operatorAccount;
+    private Object operatorAccount;
 
     /** Finalize and obtain parameter instance from this builder. */
     public ReaderUpdateParams build() {
@@ -118,6 +119,12 @@ public class ReaderUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /** The new label of the reader. */
+    public Builder setLabel(EmptyParam label) {
+      this.label = label;
+      return this;
+    }
+
     /**
      * To [group
      * objects](https://stripe.com/docs/terminal/payments/connect#grouping-objects-by-connected-account)
@@ -125,6 +132,17 @@ public class ReaderUpdateParams extends ApiRequestParams {
      * ID.
      */
     public Builder setOperatorAccount(String operatorAccount) {
+      this.operatorAccount = operatorAccount;
+      return this;
+    }
+
+    /**
+     * To [group
+     * objects](https://stripe.com/docs/terminal/payments/connect#grouping-objects-by-connected-account)
+     * on your platform account by connected account, set this parameter to the connected account
+     * ID.
+     */
+    public Builder setOperatorAccount(EmptyParam operatorAccount) {
       this.operatorAccount = operatorAccount;
       return this;
     }
