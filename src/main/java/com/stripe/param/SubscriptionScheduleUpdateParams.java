@@ -580,8 +580,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     /**
      * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
      * the percentage of the subscription invoice subtotal that will be transferred to the
-     * application owner's Stripe account. The request must be made with an OAuth key in order to
-     * set an application fee percentage. For more information, see the application fees
+     * application owner's Stripe account. The request must be made by a platform account on a
+     * connected account in order to set an application fee percentage. For more information, see
+     * the application fees
      * [documentation](https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions).
      */
     @SerializedName("application_fee_percent")
@@ -778,8 +779,9 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       /**
        * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
        * the percentage of the subscription invoice subtotal that will be transferred to the
-       * application owner's Stripe account. The request must be made with an OAuth key in order to
-       * set an application fee percentage. For more information, see the application fees
+       * application owner's Stripe account. The request must be made by a platform account on a
+       * connected account in order to set an application fee percentage. For more information, see
+       * the application fees
        * [documentation](https://stripe.com/docs/connect/subscriptions#collecting-fees-on-subscriptions).
        */
       public Builder setApplicationFeePercent(BigDecimal applicationFeePercent) {

@@ -9,7 +9,7 @@ public abstract class Stripe {
   public static final int DEFAULT_CONNECT_TIMEOUT = 30 * 1000;
   public static final int DEFAULT_READ_TIMEOUT = 80 * 1000;
 
-  public static final String API_VERSION = "2019-09-09";
+  public static final String API_VERSION = "2019-10-08";
   public static final String CONNECT_API_BASE = "https://connect.stripe.com";
   public static final String LIVE_API_BASE = "https://api.stripe.com";
   public static final String UPLOAD_API_BASE = "https://files.stripe.com";

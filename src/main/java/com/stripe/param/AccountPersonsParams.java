@@ -191,13 +191,6 @@ public class AccountPersonsParams extends ApiRequestParams {
 
   public static class Relationship {
     /**
-     * A filter on the list of people returned based on whether these people are the account opener
-     * of the account's company.
-     */
-    @SerializedName("account_opener")
-    Boolean accountOpener;
-
-    /**
      * A filter on the list of people returned based on whether these people are directors of the
      * account's company.
      */
@@ -227,17 +220,24 @@ public class AccountPersonsParams extends ApiRequestParams {
     @SerializedName("owner")
     Boolean owner;
 
+    /**
+     * A filter on the list of people returned based on whether these people are the representative
+     * of the account's company.
+     */
+    @SerializedName("representative")
+    Boolean representative;
+
     private Relationship(
-        Boolean accountOpener,
         Boolean director,
         Boolean executive,
         Map<String, Object> extraParams,
-        Boolean owner) {
-      this.accountOpener = accountOpener;
+        Boolean owner,
+        Boolean representative) {
       this.director = director;
       this.executive = executive;
       this.extraParams = extraParams;
       this.owner = owner;
+      this.representative = representative;
     }
 
     public static Builder builder() {
@@ -245,8 +245,6 @@ public class AccountPersonsParams extends ApiRequestParams {
     }
 
     public static class Builder {
-      private Boolean accountOpener;
-
       private Boolean director;
 
       private Boolean executive;
@@ -255,19 +253,12 @@ public class AccountPersonsParams extends ApiRequestParams {
 
       private Boolean owner;
 
+      private Boolean representative;
+
       /** Finalize and obtain parameter instance from this builder. */
       public Relationship build() {
         return new Relationship(
-            this.accountOpener, this.director, this.executive, this.extraParams, this.owner);
-      }
-
-      /**
-       * A filter on the list of people returned based on whether these people are the account
-       * opener of the account's company.
-       */
-      public Builder setAccountOpener(Boolean accountOpener) {
-        this.accountOpener = accountOpener;
-        return this;
+            this.director, this.executive, this.extraParams, this.owner, this.representative);
       }
 
       /**
@@ -320,6 +311,15 @@ public class AccountPersonsParams extends ApiRequestParams {
        */
       public Builder setOwner(Boolean owner) {
         this.owner = owner;
+        return this;
+      }
+
+      /**
+       * A filter on the list of people returned based on whether these people are the
+       * representative of the account's company.
+       */
+      public Builder setRepresentative(Boolean representative) {
+        this.representative = representative;
         return this;
       }
     }
