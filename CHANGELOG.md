@@ -1,5 +1,8 @@
 # Changelog
 
+## 13.0.0 - 2019-10-08
+* [#853](https://github.com/stripe/stripe-java/pull/853) Upgrade to new API version [`2019-10-08`](https://stripe.com/docs/upgrades#2019-10-08)
+
 ## 12.2.0 - 2019-10-08
 * [#852](https://github.com/stripe/stripe-java/pull/852) Setters for string properties in update params now all accept `EmptyParam`
 * [#835](https://github.com/stripe/stripe-java/pull/835) Bump dependencies
