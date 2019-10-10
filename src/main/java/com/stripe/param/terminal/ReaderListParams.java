@@ -9,6 +9,10 @@ import java.util.Map;
 import lombok.Getter;
 
 public class ReaderListParams extends ApiRequestParams {
+  /** Filters readers by device type. */
+  @SerializedName("device_type")
+  Object deviceType;
+
   /**
    * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the
    * list. For instance, if you make a list request and receive 100 objects, starting with
@@ -64,6 +68,7 @@ public class ReaderListParams extends ApiRequestParams {
   Object status;
 
   private ReaderListParams(
+      Object deviceType,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
@@ -72,6 +77,7 @@ public class ReaderListParams extends ApiRequestParams {
       String operatorAccount,
       String startingAfter,
       Object status) {
+    this.deviceType = deviceType;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
@@ -87,6 +93,8 @@ public class ReaderListParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private Object deviceType;
+
     private String endingBefore;
 
     private List<String> expand;
@@ -106,6 +114,7 @@ public class ReaderListParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public ReaderListParams build() {
       return new ReaderListParams(
+          this.deviceType,
           this.endingBefore,
           this.expand,
           this.extraParams,
@@ -114,6 +123,18 @@ public class ReaderListParams extends ApiRequestParams {
           this.operatorAccount,
           this.startingAfter,
           this.status);
+    }
+
+    /** Filters readers by device type. */
+    public Builder setDeviceType(DeviceType deviceType) {
+      this.deviceType = deviceType;
+      return this;
+    }
+
+    /** Filters readers by device type. */
+    public Builder setDeviceType(String deviceType) {
+      this.deviceType = deviceType;
+      return this;
     }
 
     /**
@@ -226,6 +247,21 @@ public class ReaderListParams extends ApiRequestParams {
     public Builder setStatus(String status) {
       this.status = status;
       return this;
+    }
+  }
+
+  public enum DeviceType implements ApiRequestParams.EnumParam {
+    @SerializedName("bbpos_chipper2x")
+    BBPOS_CHIPPER2X("bbpos_chipper2x"),
+
+    @SerializedName("verifone_P400")
+    VERIFONE_P400("verifone_P400");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    DeviceType(String value) {
+      this.value = value;
     }
   }
 
