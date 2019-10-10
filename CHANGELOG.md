@@ -1,5 +1,10 @@
 # Changelog
 
+## 13.1.0 - 2019-10-09
+* [#854](https://github.com/stripe/stripe-java/pull/854)
+  * Add support for `description`, `iin` and `issuer` on `Source.Card`, `Source.CardPresent` and `Source.ThreeDSecure`
+  * Add support for `deviceType` on `ReaderListParams`
+
 ## 13.0.0 - 2019-10-08
 * [#853](https://github.com/stripe/stripe-java/pull/853) Upgrade to new API version [`2019-10-08`](https://stripe.com/docs/upgrades#2019-10-08)
 
