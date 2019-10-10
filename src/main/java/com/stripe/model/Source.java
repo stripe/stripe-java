@@ -569,6 +569,9 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     @SerializedName("cvc_check")
     String cvcCheck;
 
+    @SerializedName("description")
+    String description;
+
     @SerializedName("dynamic_last4")
     String dynamicLast4;
 
@@ -583,6 +586,12 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
 
     @SerializedName("funding")
     String funding;
+
+    @SerializedName("iin")
+    String iin;
+
+    @SerializedName("issuer")
+    String issuer;
 
     @SerializedName("last4")
     String last4;
@@ -628,6 +637,9 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     @SerializedName("dedicated_file_name")
     String dedicatedFileName;
 
+    @SerializedName("description")
+    String description;
+
     @SerializedName("emv_auth_data")
     String emvAuthData;
 
@@ -648,6 +660,12 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
 
     @SerializedName("funding")
     String funding;
+
+    @SerializedName("iin")
+    String iin;
+
+    @SerializedName("issuer")
+    String issuer;
 
     @SerializedName("last4")
     String last4;
@@ -1164,6 +1182,9 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
     @SerializedName("cvc_check")
     String cvcCheck;
 
+    @SerializedName("description")
+    String description;
+
     @SerializedName("dynamic_last4")
     String dynamicLast4;
 
@@ -1178,6 +1199,12 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
 
     @SerializedName("funding")
     String funding;
+
+    @SerializedName("iin")
+    String iin;
+
+    @SerializedName("issuer")
+    String issuer;
 
     @SerializedName("last4")
     String last4;

@@ -53,6 +53,12 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
   @SerializedName("default_source")
   String defaultSource;
 
+  /**
+   * Configures how the subscription schedule behaves when it ends. Possible values are `release` or
+   * `cancel` with the default being `release`. `release` will end the subscription schedule and
+   * keep the underlying subscription running.`cancel` will end the subscription schedule and cancel
+   * the underlying subscription.
+   */
   @SerializedName("end_behavior")
   EndBehavior endBehavior;
 
@@ -98,10 +104,11 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
   List<Phase> phases;
 
   /**
-   * Configures how the subscription schedule behaves when it ends. Possible values are `none`,
-   * `cancel`, `renew`, or `release`. `renew` will create a new subscription schedule revision by
-   * adding a new phase using the most recent phase's `plans` applied to a duration set by
-   * `renewal_interval`. `none` will stop the subscription schedule and cancel the underlying
+   * This parameter has been replaced with `end_behavior` and will be removed in future API
+   * versions. Configures how the subscription schedule behaves when it ends. Possible values are
+   * `none`, `cancel`, `renew`, or `release`. `renew` will create a new subscription schedule
+   * revision by adding a new phase using the most recent phase's `plans` applied to a duration set
+   * by `renewal_interval`. `none` will stop the subscription schedule and cancel the underlying
    * subscription. `cancel` is semantically the same as `none`. `release` will stop the subscription
    * schedule, but keep the underlying subscription running.
    */
@@ -109,8 +116,9 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
   RenewalBehavior renewalBehavior;
 
   /**
-   * Configuration for renewing the subscription schedule when it ends. Must be set if
-   * `renewal_behavior` is `renew`. Otherwise, must not be set.
+   * This parameter has been deprecated and will be removed in future API versions. Configuration
+   * for renewing the subscription schedule when it ends. Must be set if `renewal_behavior` is
+   * `renew`. Otherwise, must not be set.
    */
   @SerializedName("renewal_interval")
   RenewalInterval renewalInterval;
@@ -276,6 +284,12 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * Configures how the subscription schedule behaves when it ends. Possible values are `release`
+     * or `cancel` with the default being `release`. `release` will end the subscription schedule
+     * and keep the underlying subscription running.`cancel` will end the subscription schedule and
+     * cancel the underlying subscription.
+     */
     public Builder setEndBehavior(EndBehavior endBehavior) {
       this.endBehavior = endBehavior;
       return this;
@@ -403,11 +417,12 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Configures how the subscription schedule behaves when it ends. Possible values are `none`,
-     * `cancel`, `renew`, or `release`. `renew` will create a new subscription schedule revision by
-     * adding a new phase using the most recent phase's `plans` applied to a duration set by
-     * `renewal_interval`. `none` will stop the subscription schedule and cancel the underlying
-     * subscription. `cancel` is semantically the same as `none`. `release` will stop the
+     * This parameter has been replaced with `end_behavior` and will be removed in future API
+     * versions. Configures how the subscription schedule behaves when it ends. Possible values are
+     * `none`, `cancel`, `renew`, or `release`. `renew` will create a new subscription schedule
+     * revision by adding a new phase using the most recent phase's `plans` applied to a duration
+     * set by `renewal_interval`. `none` will stop the subscription schedule and cancel the
+     * underlying subscription. `cancel` is semantically the same as `none`. `release` will stop the
      * subscription schedule, but keep the underlying subscription running.
      */
     public Builder setRenewalBehavior(RenewalBehavior renewalBehavior) {
@@ -416,8 +431,9 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Configuration for renewing the subscription schedule when it ends. Must be set if
-     * `renewal_behavior` is `renew`. Otherwise, must not be set.
+     * This parameter has been deprecated and will be removed in future API versions. Configuration
+     * for renewing the subscription schedule when it ends. Must be set if `renewal_behavior` is
+     * `renew`. Otherwise, must not be set.
      */
     public Builder setRenewalInterval(RenewalInterval renewalInterval) {
       this.renewalInterval = renewalInterval;
