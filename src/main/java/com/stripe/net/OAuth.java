@@ -30,7 +30,7 @@ public final class OAuth {
     if (params.get("response_type") == null) {
       params.put("response_type", "code");
     }
-    String query = LiveStripeResponseGetter.createQuery(params);
+    String query = FormEncoder.createQueryString(params);
     String url = base + "/oauth/authorize?" + query;
     return url;
   }
