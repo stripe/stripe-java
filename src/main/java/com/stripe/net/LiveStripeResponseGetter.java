@@ -21,8 +21,6 @@ import com.stripe.exception.oauth.UnsupportedResponseTypeException;
 import com.stripe.model.StripeError;
 import com.stripe.model.StripeObject;
 import com.stripe.model.oauth.OAuthError;
-import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -33,10 +31,7 @@ import java.net.HttpURLConnection;
 import java.net.PasswordAuthentication;
 import java.net.URL;
 import java.net.URLStreamHandler;
-import java.util.ArrayList;
-import java.util.Collection;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
@@ -46,16 +41,6 @@ import lombok.Cleanup;
 public class LiveStripeResponseGetter implements StripeResponseGetter {
   private static final String DNS_CACHE_TTL_PROPERTY_NAME = "networkaddress.cache.ttl";
   private static final int MAX_REQUEST_METRICS_BUFFER_SIZE = 100;
-
-  private static final class Parameter {
-    public final String key;
-    public final String value;
-
-    public Parameter(String key, String value) {
-      this.key = key;
-      this.value = value;
-    }
-  }
 
   /*
    * Set this property to override your environment's default
@@ -87,10 +72,6 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       RequestOptions options)
       throws StripeException {
     return staticOAuthRequest(method, url, params, clazz, type, options);
-  }
-
-  private static String urlEncodePair(String k, String v) {
-    return String.format("%s=%s", ApiResource.urlEncode(k), ApiResource.urlEncode(v));
   }
 
   static String formatAppInfo(Map<String, String> info) {
@@ -263,140 +244,6 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     conn.setRequestMethod("DELETE");
 
     return conn;
-  }
-
-  static String createQuery(Map<String, Object> params) throws InvalidRequestException {
-    StringBuilder queryStringBuffer = new StringBuilder();
-    List<Parameter> flatParams = flattenParams(params);
-    Iterator<Parameter> it = flatParams.iterator();
-
-    while (it.hasNext()) {
-      if (queryStringBuffer.length() > 0) {
-        queryStringBuffer.append("&");
-      }
-      Parameter param = it.next();
-      queryStringBuffer.append(urlEncodePair(param.key, param.value));
-    }
-
-    return queryStringBuffer.toString();
-  }
-
-  private static List<Parameter> flattenParams(Map<String, Object> params)
-      throws InvalidRequestException {
-    return flattenParamsMap(params, null);
-  }
-
-  private static List<Parameter> flattenParamsCollection(
-      Collection<Object> params, String keyPrefix) throws InvalidRequestException {
-    List<Parameter> flatParams = new ArrayList<>();
-    // Rely on the collection specific implementation for iterator to provide the order and the
-    // indices of elements in the array encoding
-    Iterator<?> it = params.iterator();
-    // Because application/x-www-form-urlencoded cannot represent an empty
-    // list, convention is to take the list parameter and just set it to an
-    // empty string. (e.g. A regular list might look like `a[0]=1&b[1]=2`.
-    // Emptying it would look like `a=`.)
-    if (params.isEmpty()) {
-      flatParams.add(new Parameter(keyPrefix, ""));
-    } else {
-      int index = 0;
-      while (it.hasNext()) {
-        String newPrefix = String.format("%s[%d]", keyPrefix, index++);
-        flatParams.addAll(flattenParamsValue(it.next(), newPrefix));
-      }
-    }
-
-    return flatParams;
-  }
-
-  private static List<Parameter> flattenParamsArray(Object[] params, String keyPrefix)
-      throws InvalidRequestException {
-    List<Parameter> flatParams = new ArrayList<>();
-
-    // Because application/x-www-form-urlencoded cannot represent an empty
-    // list, convention is to take the list parameter and just set it to an
-    // empty string. (e.g. A regular list might look like `a[0]=1&b[1]=2`.
-    // Emptying it would look like `a=`.)
-    if (params.length == 0) {
-      flatParams.add(new Parameter(keyPrefix, ""));
-    } else {
-      for (int i = 0; i < params.length; i++) {
-        String newPrefix = String.format("%s[%d]", keyPrefix, i);
-        flatParams.addAll(flattenParamsValue(params[i], newPrefix));
-      }
-    }
-
-    return flatParams;
-  }
-
-  private static List<Parameter> flattenParamsMap(Map<String, Object> params, String keyPrefix)
-      throws InvalidRequestException {
-    List<Parameter> flatParams = new ArrayList<>();
-    if (params == null) {
-      return flatParams;
-    }
-
-    for (Map.Entry<String, Object> entry : params.entrySet()) {
-      String key = entry.getKey();
-      Object value = entry.getValue();
-
-      String newPrefix = key;
-      if (keyPrefix != null) {
-        newPrefix = String.format("%s[%s]", keyPrefix, key);
-      }
-
-      flatParams.addAll(flattenParamsValue(value, newPrefix));
-    }
-
-    return flatParams;
-  }
-
-  @SuppressWarnings("unchecked")
-  private static List<Parameter> flattenParamsValue(Object value, String keyPrefix)
-      throws InvalidRequestException {
-    List<Parameter> flatParams;
-
-    if (value instanceof Map<?, ?>) {
-      flatParams = flattenParamsMap((Map<String, Object>) value, keyPrefix);
-    } else if (value instanceof Collection<?>) {
-      flatParams = flattenParamsCollection((Collection<Object>) value, keyPrefix);
-    } else if (value instanceof Object[]) {
-      flatParams = flattenParamsArray((Object[]) value, keyPrefix);
-    } else if ("".equals(value)) {
-      throw new InvalidRequestException(
-          "You cannot set '"
-              + keyPrefix
-              + "' to an empty string. "
-              + "We interpret empty strings as null in requests. "
-              + "You may set '"
-              + keyPrefix
-              + "' to null to delete the property.",
-          keyPrefix,
-          null,
-          null,
-          0,
-          null);
-    } else if (value == null) {
-      flatParams = new ArrayList<>();
-      flatParams.add(new Parameter(keyPrefix, ""));
-    } else if ((value instanceof File) || (value instanceof InputStream)) {
-      throw new InvalidRequestException(
-          String.format(
-              "java.io.File or java.io.InputStream %s is not supported at '%s' parameter. "
-                  + "Please check our API reference for the parameter type, "
-                  + "or use the provided parameter class instead.",
-              value, keyPrefix),
-          keyPrefix,
-          null,
-          null,
-          0,
-          null);
-    } else {
-      flatParams = new ArrayList<>();
-      flatParams.add(new Parameter(keyPrefix, value.toString()));
-    }
-
-    return flatParams;
   }
 
   private static ConcurrentLinkedQueue<RequestMetrics> prevRequestMetrics =
@@ -604,7 +451,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       Map<String, Object> params,
       RequestOptions options)
       throws InvalidRequestException, ApiConnectionException, ApiException {
-    String query = createQuery(params);
+    String query = FormEncoder.createQueryString(params);
     return makeUrlConnectionRequest(method, url, query, options);
   }
 
@@ -638,7 +485,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       MultipartProcessor multipartProcessor = null;
       try {
         multipartProcessor = new MultipartProcessor(conn, boundary, ApiResource.CHARSET);
-        encodeMultipartParams(multipartProcessor, params);
+        FormEncoder.encodeMultipartParams(multipartProcessor, params);
       } finally {
         if (multipartProcessor != null) {
           multipartProcessor.finish();
@@ -670,62 +517,6 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     } finally {
       if (conn != null) {
         conn.disconnect();
-      }
-    }
-  }
-
-  /**
-   * Encode multipart params as a counter-part method to {@link this#createQuery(Map)} for encoding
-   * params for non-multipart request.
-   *
-   * @param multipartProcessor multi-part processor handling encoding of input stream and basic
-   *     key-value forms.
-   * @param params parameter map that can contain file or input stream.
-   */
-  static void encodeMultipartParams(
-      MultipartProcessor multipartProcessor, Map<String, Object> params)
-      throws InvalidRequestException, IOException {
-
-    for (Map.Entry<String, Object> entry : params.entrySet()) {
-      String key = entry.getKey();
-      Object value = entry.getValue();
-
-      if (value instanceof File) {
-        File currentFile = (File) value;
-        if (!currentFile.exists()) {
-          throw new InvalidRequestException(
-              "File for key " + key + " must exist.", null, null, null, 0, null);
-        } else if (!currentFile.isFile()) {
-          throw new InvalidRequestException(
-              "File for key " + key + " must be a file and not a directory.",
-              null,
-              null,
-              null,
-              0,
-              null);
-        } else if (!currentFile.canRead()) {
-          throw new InvalidRequestException(
-              "Must have read permissions on file for key " + key + ".", null, null, null, 0, null);
-        }
-        multipartProcessor.addFileField(
-            key, currentFile.getName(), new FileInputStream(currentFile));
-      } else if (value instanceof InputStream) {
-        @Cleanup InputStream inputStream = (InputStream) value;
-        if (inputStream.available() == 0) {
-          throw new InvalidRequestException(
-              "Must have available bytes to read on InputStream for key " + key + ".",
-              null,
-              null,
-              null,
-              0,
-              null);
-        }
-        multipartProcessor.addFileField(key, "blob", inputStream);
-      } else {
-        List<Parameter> parameters = flattenParamsValue(value, key);
-        for (Parameter parameter : parameters) {
-          multipartProcessor.addFormField(parameter.key, parameter.value);
-        }
       }
     }
   }
