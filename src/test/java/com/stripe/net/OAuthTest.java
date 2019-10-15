@@ -13,27 +13,33 @@ import java.io.UnsupportedEncodingException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLDecoder;
+import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import org.junit.jupiter.api.Test;
 
 public class OAuthTest extends BaseStripeTest {
-  private static Map<String, String> splitQuery(String query) throws UnsupportedEncodingException {
+  private static String urlDecode(String s) {
+    try {
+      return URLDecoder.decode(s, StandardCharsets.UTF_8.name());
+    } catch (UnsupportedEncodingException e) {
+      throw new AssertionError("UTF-8 is unknown");
+    }
+  }
+
+  private static Map<String, String> splitQuery(String query) {
     final Map<String, String> queryPairs = new HashMap<>();
     final String[] pairs = query.split("&", -1);
     for (final String pair : pairs) {
       final int idx = pair.indexOf("=");
-      queryPairs.put(
-          URLDecoder.decode(pair.substring(0, idx), "UTF8"),
-          URLDecoder.decode(pair.substring(idx + 1), "UTF8"));
+      queryPairs.put(urlDecode(pair.substring(0, idx)), urlDecode(pair.substring(idx + 1)));
     }
     return queryPairs;
   }
 
   @Test
   public void testAuthorizeUrl()
-      throws AuthenticationException, InvalidRequestException, MalformedURLException,
-          UnsupportedEncodingException {
+      throws AuthenticationException, InvalidRequestException, MalformedURLException {
     final Map<String, Object> urlParams = new HashMap<>();
     urlParams.put("scope", "read_write");
     urlParams.put("state", "csrf_token");

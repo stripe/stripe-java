@@ -6,7 +6,6 @@ import com.stripe.exception.InvalidRequestException;
 import com.stripe.exception.StripeException;
 import com.stripe.model.oauth.DeauthorizedAccount;
 import com.stripe.model.oauth.TokenResponse;
-import java.io.UnsupportedEncodingException;
 import java.util.Map;
 
 public final class OAuth {
@@ -31,21 +30,7 @@ public final class OAuth {
     if (params.get("response_type") == null) {
       params.put("response_type", "code");
     }
-    String query;
-    try {
-      query = LiveStripeResponseGetter.createQuery(params);
-    } catch (UnsupportedEncodingException e) {
-      throw new InvalidRequestException(
-          "Unable to encode parameters to "
-              + ApiResource.CHARSET
-              + ". Please contact support@stripe.com for assistance.",
-          null,
-          null,
-          null,
-          0,
-          e);
-    }
-
+    String query = LiveStripeResponseGetter.createQuery(params);
     String url = base + "/oauth/authorize?" + query;
     return url;
   }

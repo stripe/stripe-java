@@ -16,7 +16,6 @@ import com.stripe.net.RequestOptions.RequestOptionsBuilder;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -44,15 +43,14 @@ public class LiveStripeResponseGetterTest {
   }
 
   @Test
-  public void testCreateQuery() throws StripeException, UnsupportedEncodingException {
+  public void testCreateQuery() throws StripeException {
     Map<String, Object> params = new HashMap<>();
     params.put("a", "b");
     assertEquals("a=b", LiveStripeResponseGetter.createQuery(params));
   }
 
   @Test
-  public void testCreateQueryWithNestedParams()
-      throws StripeException, UnsupportedEncodingException {
+  public void testCreateQueryWithNestedParams() throws StripeException {
     /* Use LinkedHashMap because it preserves iteration order */
     final Map<String, Object> params = new LinkedHashMap<>();
     final Map<String, Object> nested = new LinkedHashMap<>();
@@ -65,7 +63,7 @@ public class LiveStripeResponseGetterTest {
   }
 
   @Test
-  public void testCreateQueryWithListParams() throws StripeException, UnsupportedEncodingException {
+  public void testCreateQueryWithListParams() throws StripeException {
     final List<String> nested = new ArrayList<>();
     nested.add("A");
     nested.add("B");
@@ -83,8 +81,7 @@ public class LiveStripeResponseGetterTest {
   }
 
   @Test
-  public void testCreateQueryWithArrayParams()
-      throws StripeException, UnsupportedEncodingException {
+  public void testCreateQueryWithArrayParams() throws StripeException {
 
     final String[] nested = {"A", "B", "C"};
 
@@ -100,8 +97,7 @@ public class LiveStripeResponseGetterTest {
   }
 
   @Test
-  public void testCreateQueryWithListOfHashes()
-      throws StripeException, UnsupportedEncodingException {
+  public void testCreateQueryWithListOfHashes() throws StripeException {
     final Map<String, String> deepNestedMap1 = new LinkedHashMap<>();
     deepNestedMap1.put("A", "A-1");
     deepNestedMap1.put("B", "B-1");
@@ -124,8 +120,7 @@ public class LiveStripeResponseGetterTest {
   }
 
   @Test
-  public void testCreateQueryWithFormEncodedKeys()
-      throws StripeException, UnsupportedEncodingException {
+  public void testCreateQueryWithFormEncodedKeys() throws StripeException {
     /* Use LinkedHashMap because it preserves iteration order */
     final Map<String, Object> params = new LinkedHashMap<>();
 
@@ -147,8 +142,7 @@ public class LiveStripeResponseGetterTest {
 
   @SuppressWarnings("ModifiedButNotUsed")
   @Test
-  public void testCreateQueryWithCollection()
-      throws UnsupportedEncodingException, InvalidRequestException {
+  public void testCreateQueryWithCollection() throws InvalidRequestException {
     // test collections with its own implementation to return iterator giving "A", "B", "C" in order
     final Set<String> nestedTreeSet = new TreeSet<>(String::compareTo);
     nestedTreeSet.add("B");
@@ -185,8 +179,7 @@ public class LiveStripeResponseGetterTest {
   }
 
   @Test
-  public void testCreateQueryWithEmptyCollection()
-      throws StripeException, UnsupportedEncodingException {
+  public void testCreateQueryWithEmptyCollection() throws StripeException {
     final Map<String, Object> params = new HashMap<>();
     params.put("a", new ArrayList<String>());
     assertEquals("a=", LiveStripeResponseGetter.createQuery(params));
@@ -199,7 +192,7 @@ public class LiveStripeResponseGetterTest {
   }
 
   @Test
-  public void testCreateQueryWithEmptyArray() throws StripeException, UnsupportedEncodingException {
+  public void testCreateQueryWithEmptyArray() throws StripeException {
     final String[] array = {};
     final Map<String, Object> params = new HashMap<>();
     params.put("a", array);
@@ -207,15 +200,14 @@ public class LiveStripeResponseGetterTest {
   }
 
   @Test
-  public void testCreateQueryUrlEncodeSpecialCharacters()
-      throws StripeException, UnsupportedEncodingException {
+  public void testCreateQueryUrlEncodeSpecialCharacters() throws StripeException {
     final Map<String, Object> params = new HashMap<>();
     params.put("a", "+foo?");
     assertEquals("a=%2Bfoo%3F", LiveStripeResponseGetter.createQuery(params));
   }
 
   @Test
-  public void testIncorrectAdditionalOwners() throws StripeException, UnsupportedEncodingException {
+  public void testIncorrectAdditionalOwners() throws StripeException {
     final Map<String, String> ownerParams = new HashMap<>();
     ownerParams.put("first_name", "Stripe");
 
@@ -234,7 +226,7 @@ public class LiveStripeResponseGetterTest {
   }
 
   @Test
-  public void testCorrectAdditionalOwners() throws StripeException, UnsupportedEncodingException {
+  public void testCorrectAdditionalOwners() throws StripeException {
     final Map<String, String> ownerParams = new HashMap<>();
     ownerParams.put("first_name", "Stripe");
 

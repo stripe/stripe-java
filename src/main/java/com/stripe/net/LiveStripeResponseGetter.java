@@ -26,7 +26,6 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
-import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.InvocationTargetException;
 import java.net.Authenticator;
@@ -90,7 +89,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     return staticOAuthRequest(method, url, params, clazz, type, options);
   }
 
-  private static String urlEncodePair(String k, String v) throws UnsupportedEncodingException {
+  private static String urlEncodePair(String k, String v) {
     return String.format("%s=%s", ApiResource.urlEncode(k), ApiResource.urlEncode(v));
   }
 
@@ -266,8 +265,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     return conn;
   }
 
-  static String createQuery(Map<String, Object> params)
-      throws UnsupportedEncodingException, InvalidRequestException {
+  static String createQuery(Map<String, Object> params) throws InvalidRequestException {
     StringBuilder queryStringBuffer = new StringBuilder();
     List<Parameter> flatParams = flattenParams(params);
     Iterator<Parameter> it = flatParams.iterator();
@@ -606,21 +604,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       Map<String, Object> params,
       RequestOptions options)
       throws InvalidRequestException, ApiConnectionException, ApiException {
-    String query;
-    try {
-      query = createQuery(params);
-    } catch (UnsupportedEncodingException e) {
-      throw new InvalidRequestException(
-          "Unable to encode parameters to "
-              + ApiResource.CHARSET
-              + ". Please contact support@stripe.com for assistance.",
-          null,
-          null,
-          null,
-          0,
-          e);
-    }
-
+    String query = createQuery(params);
     return makeUrlConnectionRequest(method, url, query, options);
   }
 
