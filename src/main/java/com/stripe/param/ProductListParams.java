@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class ProductListParams extends ApiRequestParams {
   /**
    * Only return products that are active or inactive (e.g., pass `false` to list all inactive
@@ -291,6 +292,7 @@ public class ProductListParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Created {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class InvoiceUpcomingParams extends ApiRequestParams {
   /**
    * The code of the coupon to apply. If `subscription` or `subscription_items` is provided, the
@@ -571,6 +572,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class InvoiceItem {
     /** The integer amount in **%s** of previewed invoice item. */
     @SerializedName("amount")
@@ -885,6 +887,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Period {
       /** The end of the period, which must be greater than or equal to the start. */
       @SerializedName("end")
@@ -968,6 +971,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class SubscriptionItem {
     /**
      * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
@@ -1230,6 +1234,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class BillingThresholds {
       /**
        * Map of extra parameters for custom features not available in this client library. The

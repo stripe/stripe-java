@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class TokenCreateParams extends ApiRequestParams {
   /** The bank account this token will represent. */
   @SerializedName("bank_account")
@@ -190,6 +191,7 @@ public class TokenCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class BankAccount {
     /**
      * The name of the person or business that owns the bank account.This field is required when
@@ -379,6 +381,7 @@ public class TokenCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Card {
     @SerializedName("address_city")
     String addressCity;
@@ -591,6 +594,7 @@ public class TokenCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Person {
     /** The person's address. */
     @SerializedName("address")
@@ -972,6 +976,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Address {
       /** City, district, suburb, town, or village. */
       @SerializedName("city")
@@ -1126,6 +1131,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class AddressKana {
       /** City or ward. */
       @SerializedName("city")
@@ -1295,6 +1301,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class AddressKanji {
       /** City or ward. */
       @SerializedName("city")
@@ -1464,6 +1471,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Dob {
       /** The day of birth, between 1 and 31. */
       @SerializedName("day")
@@ -1557,6 +1565,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Relationship {
       /**
        * Whether the person is a director of the account's legal entity. Currently only required for
@@ -1737,6 +1746,7 @@ public class TokenCreateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Verification {
       /**
        * A document showing address, either a passport, local ID card, or utility bill from a
@@ -1827,6 +1837,7 @@ public class TokenCreateParams extends ApiRequestParams {
         }
       }
 
+      @Getter
       public static class AdditionalDocument {
         /**
          * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
@@ -1926,6 +1937,7 @@ public class TokenCreateParams extends ApiRequestParams {
         }
       }
 
+      @Getter
       public static class Document {
         /**
          * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
@@ -2027,6 +2039,7 @@ public class TokenCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Pii {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

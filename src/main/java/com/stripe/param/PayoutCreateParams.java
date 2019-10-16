@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class PayoutCreateParams extends ApiRequestParams {
   /** A positive integer in cents representing how much to payout. */
   @SerializedName("amount")

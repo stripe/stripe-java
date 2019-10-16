@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class ValueListCreateParams extends ApiRequestParams {
   /** The name of the value list for use in rules. */
   @SerializedName("alias")

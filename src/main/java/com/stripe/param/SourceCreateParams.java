@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class SourceCreateParams extends ApiRequestParams {
   /**
    * Amount associated with the source. This is the amount for which the source will be chargeable
@@ -423,6 +424,7 @@ public class SourceCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Mandate {
     /**
      * The parameters required to notify Stripe of a mandate acceptance or refusal by the customer.
@@ -584,6 +586,7 @@ public class SourceCreateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Acceptance {
       /** The unix timestamp the mandate was accepted or refused at by the customer. */
       @SerializedName("date")
@@ -775,6 +778,7 @@ public class SourceCreateParams extends ApiRequestParams {
         }
       }
 
+      @Getter
       public static class Offline {
         /**
          * An email to contact you with if a copy of the mandate is requested, required if `type` is
@@ -851,6 +855,7 @@ public class SourceCreateParams extends ApiRequestParams {
         }
       }
 
+      @Getter
       public static class Online {
         /** The unix timestamp the mandate was accepted or refused at by the customer. */
         @SerializedName("date")
@@ -1033,6 +1038,7 @@ public class SourceCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Owner {
     /** Owner's address. */
     @SerializedName("address")
@@ -1139,6 +1145,7 @@ public class SourceCreateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Address {
       @SerializedName("city")
       String city;
@@ -1276,6 +1283,7 @@ public class SourceCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Receiver {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1372,6 +1380,7 @@ public class SourceCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Redirect {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1445,6 +1454,7 @@ public class SourceCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class SourceOrder {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1550,6 +1560,7 @@ public class SourceCreateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Item {
       @SerializedName("amount")
       Long amount;
@@ -1717,6 +1728,7 @@ public class SourceCreateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Shipping {
       /** Shipping address. */
       @SerializedName("address")
@@ -1856,6 +1868,7 @@ public class SourceCreateParams extends ApiRequestParams {
         }
       }
 
+      @Getter
       public static class Address {
         @SerializedName("city")
         String city;

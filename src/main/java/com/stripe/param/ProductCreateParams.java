@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class ProductCreateParams extends ApiRequestParams {
   /** Whether the product is currently available for purchase. Defaults to `true`. */
   @SerializedName("active")
@@ -477,6 +478,7 @@ public class ProductCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class PackageDimensions {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

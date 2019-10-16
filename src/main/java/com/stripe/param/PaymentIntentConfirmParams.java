@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class PaymentIntentConfirmParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -375,6 +376,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class PaymentMethodOptions {
     /** Configuration for any card payments attempted on this PaymentIntent. */
     @SerializedName("card")
@@ -442,6 +444,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Card {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -567,6 +570,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Shipping {
     /** Shipping address. */
     @SerializedName("address")
@@ -703,6 +707,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Address {
       @SerializedName("city")
       String city;

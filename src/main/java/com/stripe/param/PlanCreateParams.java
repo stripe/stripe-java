@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class PlanCreateParams extends ApiRequestParams {
   /** Whether the plan is currently available for new subscriptions. Defaults to `true`. */
   @SerializedName("active")
@@ -491,6 +492,7 @@ public class PlanCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Product {
     /** Whether the product is currently available for purchase. Defaults to `true`. */
     @SerializedName("active")
@@ -692,6 +694,7 @@ public class PlanCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Tier {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -866,6 +869,7 @@ public class PlanCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class TransformUsage {
     /** Divide usage by this number. */
     @SerializedName("divide_by")

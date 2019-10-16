@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class UsageRecordCreateOnSubscriptionItemParams extends ApiRequestParams {
   /**
    * Valid values are `increment` (default) or `set`. When using `increment` the specified

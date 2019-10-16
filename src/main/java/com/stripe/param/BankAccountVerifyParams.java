@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
+@Getter
 public class BankAccountVerifyParams extends ApiRequestParams {
   /**
    * Two positive integers, in *cents*, equal to the values of the microdeposits sent to the bank

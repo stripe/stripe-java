@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
+@Getter
 public class TransferReversalCollectionCreateParams extends ApiRequestParams {
   /**
    * A positive integer in %s representing how much of this transfer to reverse. Can only reverse up

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class AccountLinkCreateParams extends ApiRequestParams {
   /** The identifier of the account to create an account link for. */
   @SerializedName("account")

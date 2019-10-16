@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
+@Getter
 public class ThreeDSecureCreateParams extends ApiRequestParams {
   /** Amount of the charge that you will create when authentication completes. */
   @SerializedName("amount")

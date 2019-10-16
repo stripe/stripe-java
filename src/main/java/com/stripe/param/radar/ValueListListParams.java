@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
+@Getter
 public class ValueListListParams extends ApiRequestParams {
   /** The alias used to reference the value list when writing rules. */
   @SerializedName("alias")
@@ -216,6 +218,7 @@ public class ValueListListParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Created {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

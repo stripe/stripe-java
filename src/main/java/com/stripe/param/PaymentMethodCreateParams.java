@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class PaymentMethodCreateParams extends ApiRequestParams {
   /**
    * Billing information associated with the PaymentMethod that may be used or required by
@@ -256,6 +257,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class BillingDetails {
     /** Billing address. */
     @SerializedName("address")
@@ -364,6 +366,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Address {
       @SerializedName("city")
       String city;
@@ -501,6 +504,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class CardDetails {
     /** The card's CVC. It is highly recommended to always include this value. */
     @SerializedName("cvc")
@@ -609,6 +613,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Token {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

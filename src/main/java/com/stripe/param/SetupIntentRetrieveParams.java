@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
+@Getter
 public class SetupIntentRetrieveParams extends ApiRequestParams {
   /**
    * The client secret of the SetupIntent. Required if a publishable key is used to retrieve the

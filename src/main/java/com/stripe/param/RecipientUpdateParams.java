@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
+@Getter
 public class RecipientUpdateParams extends ApiRequestParams {
   /**
    * A bank account to attach to the recipient. You can provide either a token, like the ones

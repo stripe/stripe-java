@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
+@Getter
 public class PaymentMethodUpdateParams extends ApiRequestParams {
   /**
    * Billing information associated with the PaymentMethod that may be used or required by
@@ -166,6 +168,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class BillingDetails {
     /** Billing address. */
     @SerializedName("address")
@@ -292,6 +295,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Address {
       @SerializedName("city")
       Object city;
@@ -459,6 +463,7 @@ public class PaymentMethodUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Card {
     /** Two-digit number representing the card's expiration month. */
     @SerializedName("exp_month")

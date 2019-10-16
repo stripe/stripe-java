@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class PaymentIntentUpdateParams extends ApiRequestParams {
   /** Amount intended to be collected by this PaymentIntent. */
   @SerializedName("amount")
@@ -656,6 +657,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Shipping {
     /** Shipping address. */
     @SerializedName("address")
@@ -819,6 +821,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Address {
       @SerializedName("city")
       Object city;
@@ -986,6 +989,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class TransferData {
     /** The amount that will be transferred automatically when a charge succeeds. */
     @SerializedName("amount")

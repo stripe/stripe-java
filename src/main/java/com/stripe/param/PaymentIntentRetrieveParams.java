@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
+@Getter
 public class PaymentIntentRetrieveParams extends ApiRequestParams {
   /**
    * The client secret of the PaymentIntent. Required if a publishable key is used to retrieve the

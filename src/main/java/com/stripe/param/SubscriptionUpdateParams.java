@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class SubscriptionUpdateParams extends ApiRequestParams {
   /**
    * A non-negative decimal between 0 and 100, with at most two decimal places. This represents the
@@ -775,6 +776,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class BillingThresholds {
     /** Monetary threshold that triggers the subscription to advance to a new billing period. */
     @SerializedName("amount_gte")
@@ -866,6 +868,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Item {
     /**
      * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
@@ -1140,6 +1143,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class BillingThresholds {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -1210,6 +1214,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class TransferData {
     /** ID of an existing, connected Stripe account. */
     @SerializedName("destination")

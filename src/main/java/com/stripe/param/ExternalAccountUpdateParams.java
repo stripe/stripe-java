@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class ExternalAccountUpdateParams extends ApiRequestParams {
   /** The name of the person or business that owns the bank account. */
   @SerializedName("account_holder_name")

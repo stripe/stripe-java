@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class CreditNoteCreateParams extends ApiRequestParams {
   /** The integer amount in **%s** representing the total amount of the credit note. */
   @SerializedName("amount")

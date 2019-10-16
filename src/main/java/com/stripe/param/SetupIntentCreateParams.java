@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class SetupIntentCreateParams extends ApiRequestParams {
   /**
    * Set to `true` to attempt to confirm this SetupIntent immediately. This parameter defaults to
@@ -344,6 +345,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class PaymentMethodOptions {
     /** Configuration for any card setup attempted on this SetupIntent. */
     @SerializedName("card")
@@ -411,6 +413,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Card {
       /**
        * Map of extra parameters for custom features not available in this client library. The

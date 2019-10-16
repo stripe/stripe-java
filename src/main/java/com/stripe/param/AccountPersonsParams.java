@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
+@Getter
 public class AccountPersonsParams extends ApiRequestParams {
   /**
    * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the
@@ -189,6 +191,7 @@ public class AccountPersonsParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Relationship {
     /**
      * A filter on the list of people returned based on whether these people are directors of the

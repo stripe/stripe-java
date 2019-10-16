@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
   /**
    * This field has been renamed to `collection_method` and will be removed in a future API version.
@@ -434,6 +435,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class BillingThresholds {
     /** Monetary threshold that triggers the subscription to advance to a new billing period. */
     @SerializedName("amount_gte")
@@ -526,6 +528,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class InvoiceSettings {
     @SerializedName("days_until_due")
     Long daysUntilDue;
@@ -592,6 +595,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Phase {
     /**
      * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
@@ -1053,6 +1057,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class BillingThresholds {
       /** Monetary threshold that triggers the subscription to advance to a new billing period. */
       @SerializedName("amount_gte")
@@ -1145,6 +1150,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class InvoiceSettings {
       @SerializedName("days_until_due")
       Long daysUntilDue;
@@ -1212,6 +1218,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Plan {
       /**
        * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
@@ -1395,6 +1402,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         }
       }
 
+      @Getter
       public static class BillingThresholds {
         /**
          * Map of extra parameters for custom features not available in this client library. The
@@ -1520,6 +1528,7 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class RenewalInterval {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

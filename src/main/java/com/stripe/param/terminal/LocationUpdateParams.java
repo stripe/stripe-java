@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
+@Getter
 public class LocationUpdateParams extends ApiRequestParams {
   /** The full address of the location. */
   @SerializedName("address")
@@ -165,6 +167,7 @@ public class LocationUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Address {
     @SerializedName("city")
     Object city;

@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
+@Getter
 public class TaxRateListParams extends ApiRequestParams {
   /** Optional flag to filter by tax rates that are either active or not active (archived). */
   @SerializedName("active")
@@ -242,6 +244,7 @@ public class TaxRateListParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Created {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -348,6 +351,7 @@ public class TaxRateListParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Percentage {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

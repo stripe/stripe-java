@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class SubscriptionListParams extends ApiRequestParams {
   /**
    * This field has been renamed to `collection_method` and will be removed in a future API version.
@@ -319,6 +320,7 @@ public class SubscriptionListParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Created {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -425,6 +427,7 @@ public class SubscriptionListParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class CurrentPeriodEnd {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -533,6 +536,7 @@ public class SubscriptionListParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class CurrentPeriodStart {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

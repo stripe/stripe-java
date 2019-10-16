@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class DisputeCreateParams extends ApiRequestParams {
   /**
    * Amount to dispute, defaults to full value, given in the currency the transaction was made in.
@@ -207,6 +208,7 @@ public class DisputeCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Evidence {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -298,6 +300,7 @@ public class DisputeCreateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Fraudulent {
       /** Brief freeform text explaining why you are disputing this transaction. */
       @SerializedName("dispute_explanation")
@@ -387,6 +390,7 @@ public class DisputeCreateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Other {
       /** Brief freeform text explaining why you are disputing this transaction. */
       @SerializedName("dispute_explanation")

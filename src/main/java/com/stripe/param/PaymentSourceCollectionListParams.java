@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
+@Getter
 public class PaymentSourceCollectionListParams extends ApiRequestParams {
   /**
    * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class SubscriptionItemUpdateParams extends ApiRequestParams {
   /**
    * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
@@ -332,6 +333,7 @@ public class SubscriptionItemUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class BillingThresholds {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

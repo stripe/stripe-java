@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class WebhookEndpointCreateParams extends ApiRequestParams {
   /**
    * Events sent to this endpoint will be generated with this Stripe Version instead of your
