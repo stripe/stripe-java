@@ -1,5 +1,8 @@
 # Changelog
 
+## 13.2.0 - 2019-10-16
+* [#861](https://github.com/stripe/stripe-java/pull/861) Add getters to parameters classes
+
 ## 13.1.0 - 2019-10-09
 * [#854](https://github.com/stripe/stripe-java/pull/854)
   * Add support for `description`, `iin` and `issuer` on `Source.Card`, `Source.CardPresent` and `Source.ThreeDSecure`
