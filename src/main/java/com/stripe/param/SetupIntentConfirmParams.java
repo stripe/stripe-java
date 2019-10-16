@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class SetupIntentConfirmParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -159,6 +160,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class PaymentMethodOptions {
     /** Configuration for any card setup attempted on this SetupIntent. */
     @SerializedName("card")
@@ -226,6 +228,7 @@ public class SetupIntentConfirmParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Card {
       /**
        * Map of extra parameters for custom features not available in this client library. The

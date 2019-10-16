@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class SessionCreateParams extends ApiRequestParams {
   /**
    * Specify whether Checkout should collect the customer's billing address. If set to `required`,
@@ -444,6 +445,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class LineItem {
     /** The amount to be collected per unit of the line item. */
     @SerializedName("amount")
@@ -616,6 +618,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class PaymentIntentData {
     /**
      * The amount of the application fee (if any) that will be applied to the payment and
@@ -916,6 +919,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Shipping {
       /** Shipping address. */
       @SerializedName("address")
@@ -1055,6 +1059,7 @@ public class SessionCreateParams extends ApiRequestParams {
         }
       }
 
+      @Getter
       public static class Address {
         @SerializedName("city")
         String city;
@@ -1193,6 +1198,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class TransferData {
       /**
        * If specified, successful charges will be attributed to the destination account for tax
@@ -1302,6 +1308,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class SetupIntentData {
     /** An arbitrary string attached to the object. Often useful for displaying to users. */
     @SerializedName("description")
@@ -1423,6 +1430,7 @@ public class SessionCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class SubscriptionData {
     /**
      * A non-negative decimal between 0 and 100, with at most two decimal places. This represents
@@ -1625,6 +1633,7 @@ public class SessionCreateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Item {
       /**
        * Map of extra parameters for custom features not available in this client library. The

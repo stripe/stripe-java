@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
+@Getter
 public class IssuerFraudRecordListParams extends ApiRequestParams {
   /** Only return issuer fraud records for the charge specified by this charge ID. */
   @SerializedName("charge")

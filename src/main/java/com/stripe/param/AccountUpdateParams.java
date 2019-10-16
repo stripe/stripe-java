@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class AccountUpdateParams extends ApiRequestParams {
   /**
    * An [account token](https://stripe.com/docs/api#create_account_token), used to securely provide
@@ -436,6 +437,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class BusinessProfile {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -657,6 +659,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Company {
     /** The company's primary address. */
     @SerializedName("address")
@@ -981,6 +984,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Address {
       /** City, district, suburb, town, or village. */
       @SerializedName("city")
@@ -1174,6 +1178,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class AddressKana {
       /** City or ward. */
       @SerializedName("city")
@@ -1388,6 +1393,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class AddressKanji {
       /** City or ward. */
       @SerializedName("city")
@@ -1602,6 +1608,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Verification {
       /** A document verifying the business. */
       @SerializedName("document")
@@ -1670,6 +1677,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         }
       }
 
+      @Getter
       public static class Document {
         /**
          * The back of a document returned by a [file upload](#create_file) with a `purpose` value
@@ -1791,6 +1799,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Individual {
     /** The individual's primary address. */
     @SerializedName("address")
@@ -2231,6 +2240,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Address {
       /** City, district, suburb, town, or village. */
       @SerializedName("city")
@@ -2424,6 +2434,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class AddressKana {
       /** City or ward. */
       @SerializedName("city")
@@ -2638,6 +2649,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class AddressKanji {
       /** City or ward. */
       @SerializedName("city")
@@ -2852,6 +2864,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Dob {
       /** The day of birth, between 1 and 31. */
       @SerializedName("day")
@@ -2947,6 +2960,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Verification {
       /**
        * A document showing address, either a passport, local ID card, or utility bill from a
@@ -3037,6 +3051,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         }
       }
 
+      @Getter
       public static class AdditionalDocument {
         /**
          * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
@@ -3158,6 +3173,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         }
       }
 
+      @Getter
       public static class Document {
         /**
          * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
@@ -3279,6 +3295,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Settings {
     /**
      * Settings used to apply the account's branding to email receipts, invoices, Checkout, and
@@ -3396,6 +3413,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Branding {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3531,6 +3549,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class CardPayments {
       /**
        * Automatically declines certain charge types regardless of whether the card issuer accepted
@@ -3640,6 +3659,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         }
       }
 
+      @Getter
       public static class DeclineOn {
         /**
          * Whether Stripe automatically declines charges with an incorrect ZIP or postal code. This
@@ -3738,6 +3758,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Payments {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -3886,6 +3907,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Payouts {
       /**
        * A Boolean indicating whether Stripe should try to reclaim negative balances from an
@@ -4020,6 +4042,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         }
       }
 
+      @Getter
       public static class Schedule {
         /**
          * The number of days charge funds are held before being paid out. May also be set to
@@ -4240,6 +4263,7 @@ public class AccountUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class TosAcceptance {
     /**
      * The Unix timestamp marking when the account representative accepted the Stripe Services

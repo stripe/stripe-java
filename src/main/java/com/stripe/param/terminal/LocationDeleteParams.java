@@ -4,7 +4,9 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
 import java.util.HashMap;
 import java.util.Map;
+import lombok.Getter;
 
+@Getter
 public class LocationDeleteParams extends ApiRequestParams {
   /**
    * Map of extra parameters for custom features not available in this client library. The content

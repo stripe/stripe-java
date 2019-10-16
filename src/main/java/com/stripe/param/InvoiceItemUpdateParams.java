@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
+@Getter
 public class InvoiceItemUpdateParams extends ApiRequestParams {
   /**
    * The integer amount in **%s** of the charge to be applied to the upcoming invoice. If you want
@@ -352,6 +354,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Period {
     /** The end of the period, which must be greater than or equal to the start. */
     @SerializedName("end")

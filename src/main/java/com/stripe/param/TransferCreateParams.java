@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class TransferCreateParams extends ApiRequestParams {
   /** A positive integer in %s representing how much to transfer. */
   @SerializedName("amount")

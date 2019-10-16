@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
+@Getter
 public class ChargeCreateParams extends ApiRequestParams {
   /**
    * A positive integer representing how much to charge in the [smallest currency
@@ -499,6 +501,7 @@ public class ChargeCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Destination {
     /** ID of an existing, connected Stripe account. */
     @SerializedName("account")
@@ -587,6 +590,7 @@ public class ChargeCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Shipping {
     /** Shipping address. */
     @SerializedName("address")
@@ -723,6 +727,7 @@ public class ChargeCreateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Address {
       @SerializedName("city")
       String city;
@@ -860,6 +865,7 @@ public class ChargeCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class TransferData {
     /**
      * The amount transferred to the destination account, if specified. By default, the entire

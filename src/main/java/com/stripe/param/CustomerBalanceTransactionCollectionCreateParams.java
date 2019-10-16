@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
+@Getter
 public class CustomerBalanceTransactionCollectionCreateParams extends ApiRequestParams {
   /**
    * The integer amount in **%s** to apply to the customer's balance. Pass a negative amount to

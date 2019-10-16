@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class SetupIntentCancelParams extends ApiRequestParams {
   /**
    * Reason for canceling this SetupIntent. Possible values are `abandoned`,

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class CardholderCreateParams extends ApiRequestParams {
   /**
    * Spending rules that give you control over how your cardholders can make charges. Refer to our
@@ -272,6 +273,7 @@ public class CardholderCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class AuthorizationControls {
     /**
      * Array of strings containing
@@ -460,6 +462,7 @@ public class CardholderCreateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class SpendingLimit {
       /** Maximum amount allowed to spend per time interval. */
       @SerializedName("amount")
@@ -3271,6 +3274,7 @@ public class CardholderCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Billing {
     @SerializedName("address")
     Address address;
@@ -3354,6 +3358,7 @@ public class CardholderCreateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Address {
       @SerializedName("city")
       String city;

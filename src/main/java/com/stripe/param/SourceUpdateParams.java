@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class SourceUpdateParams extends ApiRequestParams {
   /** Amount associated with the source. */
   @SerializedName("amount")
@@ -215,6 +216,7 @@ public class SourceUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Mandate {
     /**
      * The parameters required to notify Stripe of a mandate acceptance or refusal by the customer.
@@ -382,6 +384,7 @@ public class SourceUpdateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Acceptance {
       /** The unix timestamp the mandate was accepted or refused at by the customer. */
       @SerializedName("date")
@@ -588,6 +591,7 @@ public class SourceUpdateParams extends ApiRequestParams {
         }
       }
 
+      @Getter
       public static class Offline {
         /**
          * An email to contact you with if a copy of the mandate is requested, required if `type` is
@@ -673,6 +677,7 @@ public class SourceUpdateParams extends ApiRequestParams {
         }
       }
 
+      @Getter
       public static class Online {
         /** The unix timestamp the mandate was accepted or refused at by the customer. */
         @SerializedName("date")
@@ -870,6 +875,7 @@ public class SourceUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Owner {
     /** Owner's address. */
     @SerializedName("address")
@@ -994,6 +1000,7 @@ public class SourceUpdateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Address {
       @SerializedName("city")
       Object city;
@@ -1161,6 +1168,7 @@ public class SourceUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class SourceOrder {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1266,6 +1274,7 @@ public class SourceUpdateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Item {
       @SerializedName("amount")
       Long amount;
@@ -1449,6 +1458,7 @@ public class SourceUpdateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Shipping {
       /** Shipping address. */
       @SerializedName("address")
@@ -1616,6 +1626,7 @@ public class SourceUpdateParams extends ApiRequestParams {
         }
       }
 
+      @Getter
       public static class Address {
         @SerializedName("city")
         Object city;

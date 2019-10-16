@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class ReportRunCreateParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -139,6 +140,7 @@ public class ReportRunCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Parameters {
     /**
      * The set of report columns to include in the report output. If omitted, the Report Type is run

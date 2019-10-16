@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class PaymentIntentCreateParams extends ApiRequestParams {
   /**
    * A positive integer representing how much to charge in the [smallest currency
@@ -746,6 +747,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class PaymentMethodOptions {
     /** Configuration for any card payments attempted on this PaymentIntent. */
     @SerializedName("card")
@@ -813,6 +815,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Card {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -938,6 +941,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Shipping {
     /** Shipping address. */
     @SerializedName("address")
@@ -1074,6 +1078,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Address {
       @SerializedName("city")
       String city;
@@ -1211,6 +1216,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class TransferData {
     /**
      * The amount that will be transferred automatically when a charge succeeds. The amount is

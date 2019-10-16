@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class TopupListParams extends ApiRequestParams {
   /** A positive integer representing how much to transfer. */
   @SerializedName("amount")
@@ -241,6 +242,7 @@ public class TopupListParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Amount {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -347,6 +349,7 @@ public class TopupListParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Created {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

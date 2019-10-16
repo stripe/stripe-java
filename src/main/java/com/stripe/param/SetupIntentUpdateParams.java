@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
+@Getter
 public class SetupIntentUpdateParams extends ApiRequestParams {
   /**
    * ID of the Customer this SetupIntent belongs to, if one exists.

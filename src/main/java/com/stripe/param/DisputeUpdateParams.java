@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
+@Getter
 public class DisputeUpdateParams extends ApiRequestParams {
   /**
    * Evidence to upload, to respond to a dispute. Updating any field in the hash will submit all
@@ -178,6 +180,7 @@ public class DisputeUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Evidence {
     /** Has a maximum character count of 20,000. */
     @SerializedName("access_activity_log")

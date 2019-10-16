@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class ReaderListParams extends ApiRequestParams {
   /** Filters readers by device type. */
   @SerializedName("device_type")

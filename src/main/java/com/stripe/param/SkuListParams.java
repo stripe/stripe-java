@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
+@Getter
 public class SkuListParams extends ApiRequestParams {
   /**
    * Only return SKUs that are active or inactive (e.g., pass `false` to list all inactive

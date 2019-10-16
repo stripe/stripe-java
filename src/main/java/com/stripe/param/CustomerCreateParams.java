@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class CustomerCreateParams extends ApiRequestParams {
   /** This field has been renamed to `balance` and will be removed in a future API version. */
   @SerializedName("account_balance")
@@ -481,6 +482,7 @@ public class CustomerCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Address {
     @SerializedName("city")
     String city;
@@ -615,6 +617,7 @@ public class CustomerCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class InvoiceSettings {
     /** Default custom fields to be displayed on invoices for this customer. */
     @SerializedName("custom_fields")
@@ -747,6 +750,7 @@ public class CustomerCreateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class CustomField {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -830,6 +834,7 @@ public class CustomerCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Shipping {
     /** Customer shipping address. */
     @SerializedName("address")
@@ -922,6 +927,7 @@ public class CustomerCreateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Address {
       @SerializedName("city")
       String city;
@@ -1059,6 +1065,7 @@ public class CustomerCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class TaxIdData {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -1163,6 +1170,7 @@ public class CustomerCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class TaxInfo {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

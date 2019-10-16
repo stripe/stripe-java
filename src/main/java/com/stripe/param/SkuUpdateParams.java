@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class SkuUpdateParams extends ApiRequestParams {
   /** Whether this SKU is available for purchase. */
   @SerializedName("active")
@@ -332,6 +333,7 @@ public class SkuUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Inventory {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -478,6 +480,7 @@ public class SkuUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class PackageDimensions {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class OrderReturnOrderParams extends ApiRequestParams {
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
@@ -143,6 +144,7 @@ public class OrderReturnOrderParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Item {
     /** The amount (price) for this order item to return. */
     @SerializedName("amount")

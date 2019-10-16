@@ -8,7 +8,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
+@Getter
 public class PersonUpdateParams extends ApiRequestParams {
   /** The person's address. */
   @SerializedName("address")
@@ -531,6 +533,7 @@ public class PersonUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Address {
     /** City, district, suburb, town, or village. */
     @SerializedName("city")
@@ -722,6 +725,7 @@ public class PersonUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class AddressKana {
     /** City or ward. */
     @SerializedName("city")
@@ -934,6 +938,7 @@ public class PersonUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class AddressKanji {
     /** City or ward. */
     @SerializedName("city")
@@ -1146,6 +1151,7 @@ public class PersonUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Dob {
     /** The day of birth, between 1 and 31. */
     @SerializedName("day")
@@ -1239,6 +1245,7 @@ public class PersonUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Relationship {
     /**
      * Whether the person is a director of the account's legal entity. Currently only required for
@@ -1423,6 +1430,7 @@ public class PersonUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Verification {
     /**
      * A document showing address, either a passport, local ID card, or utility bill from a
@@ -1509,6 +1517,7 @@ public class PersonUpdateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class AdditionalDocument {
       /**
        * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
@@ -1627,6 +1636,7 @@ public class PersonUpdateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Document {
       /**
        * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of

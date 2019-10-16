@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class OrderUpdateParams extends ApiRequestParams {
   /**
    * A coupon code that represents a discount to be applied to this order. Must be one-time duration
@@ -238,6 +239,7 @@ public class OrderUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Shipping {
     /** The name of the carrier like `USPS`, `UPS`, or `FedEx`. */
     @SerializedName("carrier")

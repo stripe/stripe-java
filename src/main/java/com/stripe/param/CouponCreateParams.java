@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class CouponCreateParams extends ApiRequestParams {
   /**
    * A positive integer representing the amount to subtract from an invoice total (required if

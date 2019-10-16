@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
+@Getter
 public class InvoiceFinalizeInvoiceParams extends ApiRequestParams {
   /**
    * Controls whether Stripe will perform [automatic

@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class CardholderListParams extends ApiRequestParams {
   /** Only return cardholders that were created during the given date interval. */
   @SerializedName("created")
@@ -272,6 +273,7 @@ public class CardholderListParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Created {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

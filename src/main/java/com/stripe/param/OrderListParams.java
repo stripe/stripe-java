@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
+@Getter
 public class OrderListParams extends ApiRequestParams {
   /** Date this order was created. */
   @SerializedName("created")
@@ -310,6 +312,7 @@ public class OrderListParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Created {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -416,6 +419,7 @@ public class OrderListParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class StatusTransitions {
     /** Date this order was canceled. */
     @SerializedName("canceled")
@@ -551,6 +555,7 @@ public class OrderListParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Canceled {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -659,6 +664,7 @@ public class OrderListParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Fulfilled {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -767,6 +773,7 @@ public class OrderListParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Paid {
       /**
        * Map of extra parameters for custom features not available in this client library. The
@@ -875,6 +882,7 @@ public class OrderListParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Returned {
       /**
        * Map of extra parameters for custom features not available in this client library. The

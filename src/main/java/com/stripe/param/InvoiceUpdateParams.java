@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class InvoiceUpdateParams extends ApiRequestParams {
   /**
    * A fee in %s that will be applied to the invoice and transferred to the application owner's
@@ -574,6 +575,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class CustomField {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -666,6 +668,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class TransferData {
     /** ID of an existing, connected Stripe account. */
     @SerializedName("destination")

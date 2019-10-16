@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
+@Getter
 public class BalanceTransactionListParams extends ApiRequestParams {
   @SerializedName("available_on")
   Object availableOn;
@@ -276,6 +278,7 @@ public class BalanceTransactionListParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class AvailableOn {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -383,6 +386,7 @@ public class BalanceTransactionListParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Created {
     /**
      * Map of extra parameters for custom features not available in this client library. The content

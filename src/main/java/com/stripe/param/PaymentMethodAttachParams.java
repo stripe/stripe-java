@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
+@Getter
 public class PaymentMethodAttachParams extends ApiRequestParams {
   /** The ID of the customer to which to attach the PaymentMethod. */
   @SerializedName("customer")

@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class ChargeUpdateParams extends ApiRequestParams {
   /**
    * The ID of an existing customer that will be associated with this request. This field may only
@@ -311,6 +312,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class FraudDetails {
     /**
      * Map of extra parameters for custom features not available in this client library. The content
@@ -396,6 +398,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Shipping {
     /** Shipping address. */
     @SerializedName("address")
@@ -559,6 +562,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Address {
       @SerializedName("city")
       Object city;

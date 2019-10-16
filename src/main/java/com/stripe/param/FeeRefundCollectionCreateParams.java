@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
+@Getter
 public class FeeRefundCollectionCreateParams extends ApiRequestParams {
   /**
    * A positive integer, in _%s_, representing how much of this fee to refund. Can refund only up to

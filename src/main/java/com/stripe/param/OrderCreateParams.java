@@ -8,6 +8,7 @@ import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
+@Getter
 public class OrderCreateParams extends ApiRequestParams {
   /**
    * A coupon code that represents a discount to be applied to this order. Must be one-time duration
@@ -275,6 +276,7 @@ public class OrderCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Item {
     @SerializedName("amount")
     Long amount;
@@ -440,6 +442,7 @@ public class OrderCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
   public static class Shipping {
     /** Customer shipping address. */
     @SerializedName("address")
@@ -532,6 +535,7 @@ public class OrderCreateParams extends ApiRequestParams {
       }
     }
 
+    @Getter
     public static class Address {
       @SerializedName("city")
       String city;

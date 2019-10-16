@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
+@Getter
 public class TopupUpdateParams extends ApiRequestParams {
   /** An arbitrary string attached to the object. Often useful for displaying to users. */
   @SerializedName("description")

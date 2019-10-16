@@ -6,7 +6,9 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import lombok.Getter;
 
+@Getter
 public class ExchangeRateListParams extends ApiRequestParams {
   /**
    * A cursor for use in pagination. `ending_before` is the currency that defines your place in the
