@@ -22,6 +22,7 @@ import com.stripe.model.StripeRawJsonObject;
 import com.stripe.model.StripeRawJsonObjectDeserializer;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Objects;
 
@@ -101,19 +102,7 @@ public abstract class ApiResource extends StripeObject {
 
   protected static String instanceUrl(Class<?> clazz, String id, String apiBase)
       throws InvalidRequestException {
-    try {
-      return String.format("%s/%s", classUrl(clazz, apiBase), urlEncode(id));
-    } catch (UnsupportedEncodingException e) {
-      throw new InvalidRequestException(
-          "Unable to encode parameters to "
-              + CHARSET
-              + ". Please contact support@stripe.com for assistance.",
-          null,
-          null,
-          null,
-          0,
-          e);
-    }
+    return String.format("%s/%s", classUrl(clazz, apiBase), urlEncode(id));
   }
 
   protected static String subresourceUrl(Class<?> clazz, String id, Class<?> subClazz)
@@ -123,23 +112,10 @@ public abstract class ApiResource extends StripeObject {
 
   private static String subresourceUrl(Class<?> clazz, String id, Class<?> subClazz, String apiBase)
       throws InvalidRequestException {
-    try {
-      return String.format(
-          "%s/%s/%ss", classUrl(clazz, apiBase), urlEncode(id), className(subClazz));
-    } catch (UnsupportedEncodingException e) {
-      throw new InvalidRequestException(
-          "Unable to encode parameters to "
-              + CHARSET
-              + ". Please contact support@stripe.com for assistance.",
-          null,
-          null,
-          null,
-          0,
-          e);
-    }
+    return String.format("%s/%s/%ss", classUrl(clazz, apiBase), urlEncode(id), className(subClazz));
   }
 
-  public static final String CHARSET = "UTF-8";
+  public static final String CHARSET = StandardCharsets.UTF_8.name();
 
   public enum RequestMethod {
     GET,
@@ -153,16 +129,22 @@ public abstract class ApiResource extends StripeObject {
   }
 
   /** URL-encodes a string. */
-  public static String urlEncode(String str) throws UnsupportedEncodingException {
+  public static String urlEncode(String str) {
     // Preserve original behavior that passing null for an object id will lead
     // to us actually making a request to /v1/foo/null
     if (str == null) {
       return null;
-    } else {
+    }
+
+    try {
       // Don't use strict form encoding by changing the square bracket control
       // characters back to their literals. This is fine by the server, and
       // makes these parameter strings easier to read.
       return URLEncoder.encode(str, CHARSET).replaceAll("%5B", "[").replaceAll("%5D", "]");
+    } catch (UnsupportedEncodingException e) {
+      // This can literally never happen, and lets us avoid having to catch
+      // UnsupportedEncodingException in callers.
+      throw new AssertionError("UTF-8 is unknown");
     }
   }
 
@@ -180,20 +162,7 @@ public abstract class ApiResource extends StripeObject {
           null);
     }
 
-    try {
-      return urlEncode(id);
-    } catch (UnsupportedEncodingException e) {
-      throw new InvalidRequestException(
-          String.format(
-              "Unable to encode `%s` in the url to %s. "
-                  + "Please contact support@stripe.com for assistance.",
-              id, CHARSET),
-          null,
-          null,
-          null,
-          0,
-          e);
-    }
+    return urlEncode(id);
   }
 
   public static <T> T multipartRequest(
