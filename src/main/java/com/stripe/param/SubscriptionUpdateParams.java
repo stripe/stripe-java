@@ -1338,7 +1338,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     ALLOW_INCOMPLETE("allow_incomplete"),
 
     @SerializedName("error_if_incomplete")
-    ERROR_IF_INCOMPLETE("error_if_incomplete");
+    ERROR_IF_INCOMPLETE("error_if_incomplete"),
+
+    @SerializedName("pending_if_incomplete")
+    PENDING_IF_INCOMPLETE("pending_if_incomplete");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

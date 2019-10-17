@@ -73,7 +73,10 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   @SerializedName("phone_number")
   String phoneNumber;
 
-  /** One of `active`, `inactive`, `blocked`, or `pending`. */
+  @SerializedName("requirements")
+  Requirements requirements;
+
+  /** One of `active`, `inactive`, or `blocked`. */
   @SerializedName("status")
   String status;
 
@@ -266,6 +269,25 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
 
     @SerializedName("name")
     String name;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Requirements extends StripeObject {
+    /**
+     * If the cardholder is disabled, this string describes why. Can be one of `listed`,
+     * `rejected.listed`, or `under_review`.
+     */
+    @SerializedName("disabled_reason")
+    String disabledReason;
+
+    /**
+     * If not empty, this field contains the list of fields that need to be collected in order to
+     * verify and re-enabled the cardholder.
+     */
+    @SerializedName("past_due")
+    List<String> pastDue;
   }
 
   @Getter

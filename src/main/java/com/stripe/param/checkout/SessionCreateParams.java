@@ -1474,6 +1474,13 @@ public class SessionCreateParams extends ApiRequestParams {
     Long trialEnd;
 
     /**
+     * Indicates if a plan’s `trial_period_days` should be applied to the subscription. Setting
+     * `trial_end` on `subscription_data` is preferred. Defaults to `false`.
+     */
+    @SerializedName("trial_from_plan")
+    Boolean trialFromPlan;
+
+    /**
      * Integer representing the number of trial period days before the customer is charged for the
      * first time. Has to be at least 1.
      */
@@ -1486,12 +1493,14 @@ public class SessionCreateParams extends ApiRequestParams {
         List<Item> items,
         Map<String, String> metadata,
         Long trialEnd,
+        Boolean trialFromPlan,
         Long trialPeriodDays) {
       this.applicationFeePercent = applicationFeePercent;
       this.extraParams = extraParams;
       this.items = items;
       this.metadata = metadata;
       this.trialEnd = trialEnd;
+      this.trialFromPlan = trialFromPlan;
       this.trialPeriodDays = trialPeriodDays;
     }
 
@@ -1510,6 +1519,8 @@ public class SessionCreateParams extends ApiRequestParams {
 
       private Long trialEnd;
 
+      private Boolean trialFromPlan;
+
       private Long trialPeriodDays;
 
       /** Finalize and obtain parameter instance from this builder. */
@@ -1520,6 +1531,7 @@ public class SessionCreateParams extends ApiRequestParams {
             this.items,
             this.metadata,
             this.trialEnd,
+            this.trialFromPlan,
             this.trialPeriodDays);
       }
 
@@ -1620,6 +1632,15 @@ public class SessionCreateParams extends ApiRequestParams {
        */
       public Builder setTrialEnd(Long trialEnd) {
         this.trialEnd = trialEnd;
+        return this;
+      }
+
+      /**
+       * Indicates if a plan’s `trial_period_days` should be applied to the subscription. Setting
+       * `trial_end` on `subscription_data` is preferred. Defaults to `false`.
+       */
+      public Builder setTrialFromPlan(Boolean trialFromPlan) {
+        this.trialFromPlan = trialFromPlan;
         return this;
       }
 
