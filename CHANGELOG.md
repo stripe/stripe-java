@@ -1,5 +1,15 @@
 # Changelog
 
+## 13.3.0 - 2019-10-17
+* [#862](https://github.com/stripe/stripe-java/pull/862) [codegen] Update API Resources
+  * `requirements` on Issuing `Cardholder`
+  * `payment_method_details[au_becs_debit][mandate]` on `Charge`
+  * new types of tax id for Customer `TaxId`.
+  * `payment_behavior` on `Subscription` creation can now take the value `pending_if_incomplete`.
+  * `payment_behavior` on `SubscriptionItem` creation and update is now supported.
+  * `subscription_data[trial_from_plan]` is now supported on Checkout `Session` creation.
+* [#858](https://github.com/stripe/stripe-java/pull/858) Stop propagating UnsupportedEncodingException
+
 ## 13.2.0 - 2019-10-16
 * [#861](https://github.com/stripe/stripe-java/pull/861) Add getters to parameters classes
 
