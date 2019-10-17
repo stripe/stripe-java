@@ -111,7 +111,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @SerializedName("shipping")
   Shipping shipping;
 
-  /** One of `active`, `inactive`, `canceled`, `lost`, `stolen`, or `pending`. */
+  /** One of `active`, `inactive`, `canceled`, `lost`, or `stolen`. */
   @SerializedName("status")
   String status;
 

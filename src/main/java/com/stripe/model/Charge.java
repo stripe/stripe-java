@@ -1115,6 +1115,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /** Last four digits of the bank account number. */
       @SerializedName("last4")
       String last4;
+
+      /** ID of the mandate used to make this payment. */
+      @SerializedName("mandate")
+      String mandate;
     }
 
     @Getter

@@ -386,7 +386,9 @@ public class SourceUpdateParams extends ApiRequestParams {
 
     @Getter
     public static class Acceptance {
-      /** The unix timestamp the mandate was accepted or refused at by the customer. */
+      /**
+       * The Unix timestamp (in seconds) when the mandate was accepted or refused by the customer.
+       */
       @SerializedName("date")
       Long date;
 
@@ -490,7 +492,9 @@ public class SourceUpdateParams extends ApiRequestParams {
               this.userAgent);
         }
 
-        /** The unix timestamp the mandate was accepted or refused at by the customer. */
+        /**
+         * The Unix timestamp (in seconds) when the mandate was accepted or refused by the customer.
+         */
         public Builder setDate(Long date) {
           this.date = date;
           return this;
@@ -679,7 +683,9 @@ public class SourceUpdateParams extends ApiRequestParams {
 
       @Getter
       public static class Online {
-        /** The unix timestamp the mandate was accepted or refused at by the customer. */
+        /**
+         * The Unix timestamp (in seconds) when the mandate was accepted or refused by the customer.
+         */
         @SerializedName("date")
         Long date;
 
@@ -729,7 +735,10 @@ public class SourceUpdateParams extends ApiRequestParams {
             return new Online(this.date, this.extraParams, this.ip, this.userAgent);
           }
 
-          /** The unix timestamp the mandate was accepted or refused at by the customer. */
+          /**
+           * The Unix timestamp (in seconds) when the mandate was accepted or refused by the
+           * customer.
+           */
           public Builder setDate(Long date) {
             this.date = date;
             return this;

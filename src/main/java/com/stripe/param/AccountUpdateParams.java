@@ -4070,8 +4070,10 @@ public class AccountUpdateParams extends ApiRequestParams {
         Interval interval;
 
         /**
-         * The day of the month when available funds are paid out. Required and applicable only if
-         * `interval` is `monthly`.
+         * The day of the month when available funds are paid out, specified as a number between
+         * 1--31. Payouts nominally scheduled between the 29th and 31st of the month are instead
+         * sent on the last day of a shorter month. Required and applicable only if `interval` is
+         * `monthly`.
          */
         @SerializedName("monthly_anchor")
         Long monthlyAnchor;
@@ -4179,8 +4181,10 @@ public class AccountUpdateParams extends ApiRequestParams {
           }
 
           /**
-           * The day of the month when available funds are paid out. Required and applicable only if
-           * `interval` is `monthly`.
+           * The day of the month when available funds are paid out, specified as a number between
+           * 1--31. Payouts nominally scheduled between the 29th and 31st of the month are instead
+           * sent on the last day of a shorter month. Required and applicable only if `interval` is
+           * `monthly`.
            */
           public Builder setMonthlyAnchor(Long monthlyAnchor) {
             this.monthlyAnchor = monthlyAnchor;
