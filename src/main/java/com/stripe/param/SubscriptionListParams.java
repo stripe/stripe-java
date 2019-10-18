@@ -11,12 +11,6 @@ import lombok.Getter;
 @Getter
 public class SubscriptionListParams extends ApiRequestParams {
   /**
-   * This field has been renamed to `collection_method` and will be removed in a future API version.
-   */
-  @SerializedName("billing")
-  Billing billing;
-
-  /**
    * The collection method of the subscriptions to retrieve. Either `charge_automatically` or
    * `send_invoice`.
    */
@@ -88,7 +82,6 @@ public class SubscriptionListParams extends ApiRequestParams {
   Status status;
 
   private SubscriptionListParams(
-      Billing billing,
       CollectionMethod collectionMethod,
       Object created,
       Object currentPeriodEnd,
@@ -101,7 +94,6 @@ public class SubscriptionListParams extends ApiRequestParams {
       String plan,
       String startingAfter,
       Status status) {
-    this.billing = billing;
     this.collectionMethod = collectionMethod;
     this.created = created;
     this.currentPeriodEnd = currentPeriodEnd;
@@ -121,8 +113,6 @@ public class SubscriptionListParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private Billing billing;
-
     private CollectionMethod collectionMethod;
 
     private Object created;
@@ -150,7 +140,6 @@ public class SubscriptionListParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public SubscriptionListParams build() {
       return new SubscriptionListParams(
-          this.billing,
           this.collectionMethod,
           this.created,
           this.currentPeriodEnd,
@@ -163,15 +152,6 @@ public class SubscriptionListParams extends ApiRequestParams {
           this.plan,
           this.startingAfter,
           this.status);
-    }
-
-    /**
-     * This field has been renamed to `collection_method` and will be removed in a future API
-     * version.
-     */
-    public Builder setBilling(Billing billing) {
-      this.billing = billing;
-      return this;
     }
 
     /**
@@ -642,21 +622,6 @@ public class SubscriptionListParams extends ApiRequestParams {
         this.lte = lte;
         return this;
       }
-    }
-  }
-
-  public enum Billing implements ApiRequestParams.EnumParam {
-    @SerializedName("charge_automatically")
-    CHARGE_AUTOMATICALLY("charge_automatically"),
-
-    @SerializedName("send_invoice")
-    SEND_INVOICE("send_invoice");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    Billing(String value) {
-      this.value = value;
     }
   }
 

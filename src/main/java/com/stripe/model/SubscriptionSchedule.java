@@ -24,12 +24,6 @@ import lombok.Setter;
 public class SubscriptionSchedule extends ApiResource
     implements HasId, MetadataStore<SubscriptionSchedule> {
   /**
-   * This field has been renamed to `collection_method` and will be removed in a future API version.
-   */
-  @SerializedName("billing")
-  String billing;
-
-  /**
    * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
    * billing period.
    */

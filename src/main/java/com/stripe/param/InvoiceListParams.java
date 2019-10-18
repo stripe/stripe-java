@@ -11,12 +11,6 @@ import lombok.Getter;
 @Getter
 public class InvoiceListParams extends ApiRequestParams {
   /**
-   * This field has been renamed to `collection_method` and will be removed in a future API version.
-   */
-  @SerializedName("billing")
-  Billing billing;
-
-  /**
    * The collection method of the invoice to retrieve. Either `charge_automatically` or
    * `send_invoice`.
    */
@@ -83,7 +77,6 @@ public class InvoiceListParams extends ApiRequestParams {
   String subscription;
 
   private InvoiceListParams(
-      Billing billing,
       CollectionMethod collectionMethod,
       Object created,
       String customer,
@@ -95,7 +88,6 @@ public class InvoiceListParams extends ApiRequestParams {
       String startingAfter,
       Status status,
       String subscription) {
-    this.billing = billing;
     this.collectionMethod = collectionMethod;
     this.created = created;
     this.customer = customer;
@@ -114,8 +106,6 @@ public class InvoiceListParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private Billing billing;
-
     private CollectionMethod collectionMethod;
 
     private Object created;
@@ -141,7 +131,6 @@ public class InvoiceListParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public InvoiceListParams build() {
       return new InvoiceListParams(
-          this.billing,
           this.collectionMethod,
           this.created,
           this.customer,
@@ -153,15 +142,6 @@ public class InvoiceListParams extends ApiRequestParams {
           this.startingAfter,
           this.status,
           this.subscription);
-    }
-
-    /**
-     * This field has been renamed to `collection_method` and will be removed in a future API
-     * version.
-     */
-    public Builder setBilling(Billing billing) {
-      this.billing = billing;
-      return this;
     }
 
     /**
@@ -509,21 +489,6 @@ public class InvoiceListParams extends ApiRequestParams {
         this.lte = lte;
         return this;
       }
-    }
-  }
-
-  public enum Billing implements ApiRequestParams.EnumParam {
-    @SerializedName("charge_automatically")
-    CHARGE_AUTOMATICALLY("charge_automatically"),
-
-    @SerializedName("send_invoice")
-    SEND_INVOICE("send_invoice");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    Billing(String value) {
-      this.value = value;
     }
   }
 

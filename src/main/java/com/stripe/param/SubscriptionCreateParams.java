@@ -31,12 +31,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   Long backdateStartDate;
 
   /**
-   * This field has been renamed to `collection_method` and will be removed in a future API version.
-   */
-  @SerializedName("billing")
-  Billing billing;
-
-  /**
    * A future timestamp to anchor the subscription's [billing
    * cycle](https://stripe.com/docs/subscriptions/billing-cycle). This is used to determine the date
    * of the first full invoice, and, for plans with `month` or `year` intervals, the day of the
@@ -219,7 +213,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   private SubscriptionCreateParams(
       BigDecimal applicationFeePercent,
       Long backdateStartDate,
-      Billing billing,
       Long billingCycleAnchor,
       Object billingThresholds,
       Long cancelAt,
@@ -245,7 +238,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       Long trialPeriodDays) {
     this.applicationFeePercent = applicationFeePercent;
     this.backdateStartDate = backdateStartDate;
-    this.billing = billing;
     this.billingCycleAnchor = billingCycleAnchor;
     this.billingThresholds = billingThresholds;
     this.cancelAt = cancelAt;
@@ -279,8 +271,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     private BigDecimal applicationFeePercent;
 
     private Long backdateStartDate;
-
-    private Billing billing;
 
     private Long billingCycleAnchor;
 
@@ -333,7 +323,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       return new SubscriptionCreateParams(
           this.applicationFeePercent,
           this.backdateStartDate,
-          this.billing,
           this.billingCycleAnchor,
           this.billingThresholds,
           this.cancelAt,
@@ -379,15 +368,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      */
     public Builder setBackdateStartDate(Long backdateStartDate) {
       this.backdateStartDate = backdateStartDate;
-      return this;
-    }
-
-    /**
-     * This field has been renamed to `collection_method` and will be removed in a future API
-     * version.
-     */
-    public Builder setBilling(Billing billing) {
-      this.billing = billing;
       return this;
     }
 
@@ -1202,21 +1182,6 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         this.extraParams.putAll(map);
         return this;
       }
-    }
-  }
-
-  public enum Billing implements ApiRequestParams.EnumParam {
-    @SerializedName("charge_automatically")
-    CHARGE_AUTOMATICALLY("charge_automatically"),
-
-    @SerializedName("send_invoice")
-    SEND_INVOICE("send_invoice");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    Billing(String value) {
-      this.value = value;
     }
   }
 

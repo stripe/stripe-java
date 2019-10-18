@@ -12,10 +12,6 @@ import lombok.Getter;
 
 @Getter
 public class CustomerUpdateParams extends ApiRequestParams {
-  /** This field has been renamed to `balance` and will be removed in a future API version. */
-  @SerializedName("account_balance")
-  Long accountBalance;
-
   /** The customer's address. */
   @SerializedName("address")
   Object address;
@@ -127,7 +123,6 @@ public class CustomerUpdateParams extends ApiRequestParams {
   Object trialEnd;
 
   private CustomerUpdateParams(
-      Long accountBalance,
       Object address,
       Long balance,
       Object coupon,
@@ -147,7 +142,6 @@ public class CustomerUpdateParams extends ApiRequestParams {
       EnumParam taxExempt,
       TaxInfo taxInfo,
       Object trialEnd) {
-    this.accountBalance = accountBalance;
     this.address = address;
     this.balance = balance;
     this.coupon = coupon;
@@ -174,8 +168,6 @@ public class CustomerUpdateParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private Long accountBalance;
-
     private Object address;
 
     private Long balance;
@@ -217,7 +209,6 @@ public class CustomerUpdateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public CustomerUpdateParams build() {
       return new CustomerUpdateParams(
-          this.accountBalance,
           this.address,
           this.balance,
           this.coupon,
@@ -237,12 +228,6 @@ public class CustomerUpdateParams extends ApiRequestParams {
           this.taxExempt,
           this.taxInfo,
           this.trialEnd);
-    }
-
-    /** This field has been renamed to `balance` and will be removed in a future API version. */
-    public Builder setAccountBalance(Long accountBalance) {
-      this.accountBalance = accountBalance;
-      return this;
     }
 
     /** The customer's address. */
