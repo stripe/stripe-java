@@ -1,5 +1,13 @@
 # Changelog
 
+## 14.0.0 - 2019-10-18
+* [#863](https://github.com/stripe/stripe-java/pull/863) Upgrade to new API version [`2019-10-17`](https://stripe.com/docs/upgrades#2019-10-17)
+  * Pin to API version `2019-10-17`
+  * Remove `account_balance` from Customer model and parameter classes
+  * Remove `billing` from Invoice, Subscription and Subscription Schedule model and parameter classes
+  * Remove `start` from Subscription model
+  * Remove `renewal_behavior` from Subscription Schedule parameter classes
+
 ## 13.3.0 - 2019-10-17
 * [#862](https://github.com/stripe/stripe-java/pull/862) [codegen] Update API Resources
   * `requirements` on Issuing `Cardholder`
