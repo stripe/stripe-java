@@ -30,12 +30,6 @@ public class InvoiceCreateParams extends ApiRequestParams {
   Boolean autoAdvance;
 
   /**
-   * This field has been renamed to `collection_method` and will be removed in a future API version.
-   */
-  @SerializedName("billing")
-  Billing billing;
-
-  /**
    * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
    * attempt to pay this invoice using the default source attached to the customer. When sending an
    * invoice, Stripe will email this invoice to the customer with payment instructions. Defaults to
@@ -146,7 +140,6 @@ public class InvoiceCreateParams extends ApiRequestParams {
   private InvoiceCreateParams(
       Long applicationFeeAmount,
       Boolean autoAdvance,
-      Billing billing,
       CollectionMethod collectionMethod,
       Object customFields,
       String customer,
@@ -166,7 +159,6 @@ public class InvoiceCreateParams extends ApiRequestParams {
       TransferData transferData) {
     this.applicationFeeAmount = applicationFeeAmount;
     this.autoAdvance = autoAdvance;
-    this.billing = billing;
     this.collectionMethod = collectionMethod;
     this.customFields = customFields;
     this.customer = customer;
@@ -194,8 +186,6 @@ public class InvoiceCreateParams extends ApiRequestParams {
     private Long applicationFeeAmount;
 
     private Boolean autoAdvance;
-
-    private Billing billing;
 
     private CollectionMethod collectionMethod;
 
@@ -236,7 +226,6 @@ public class InvoiceCreateParams extends ApiRequestParams {
       return new InvoiceCreateParams(
           this.applicationFeeAmount,
           this.autoAdvance,
-          this.billing,
           this.collectionMethod,
           this.customFields,
           this.customer,
@@ -274,15 +263,6 @@ public class InvoiceCreateParams extends ApiRequestParams {
      */
     public Builder setAutoAdvance(Boolean autoAdvance) {
       this.autoAdvance = autoAdvance;
-      return this;
-    }
-
-    /**
-     * This field has been renamed to `collection_method` and will be removed in a future API
-     * version.
-     */
-    public Builder setBilling(Billing billing) {
-      this.billing = billing;
       return this;
     }
 
@@ -685,21 +665,6 @@ public class InvoiceCreateParams extends ApiRequestParams {
         this.extraParams.putAll(map);
         return this;
       }
-    }
-  }
-
-  public enum Billing implements ApiRequestParams.EnumParam {
-    @SerializedName("charge_automatically")
-    CHARGE_AUTOMATICALLY("charge_automatically"),
-
-    @SerializedName("send_invoice")
-    SEND_INVOICE("send_invoice");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    Billing(String value) {
-      this.value = value;
     }
   }
 

@@ -20,10 +20,6 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Customer extends ApiResource implements HasId, MetadataStore<Customer> {
-  /** This field has been renamed to `balance` and will be removed in a future API version. */
-  @SerializedName("account_balance")
-  Long accountBalance;
-
   /** The customer's address. */
   @SerializedName("address")
   Address address;

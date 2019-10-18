@@ -30,12 +30,6 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   BigDecimal applicationFeePercent;
 
   /**
-   * This field has been renamed to `collection_method` and will be removed in a future API version.
-   */
-  @SerializedName("billing")
-  String billing;
-
-  /**
    * Determines the date of the first full invoice, and, for plans with `month` or `year` intervals,
    * the day of the month for subsequent invoices.
    */
@@ -212,13 +206,6 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<SubscriptionSchedule> schedule;
-
-  /**
-   * Date of the last substantial change to this subscription. For example, a change to the items
-   * array, or a change of status, will reset this timestamp.
-   */
-  @SerializedName("start")
-  Long start;
 
   /**
    * Date when the subscription was first created. The date might differ from the `created` date due

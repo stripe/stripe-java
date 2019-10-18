@@ -13,12 +13,6 @@ import lombok.Getter;
 @Getter
 public class SubscriptionScheduleCreateParams extends ApiRequestParams {
   /**
-   * This field has been renamed to `collection_method` and will be removed in a future API version.
-   */
-  @SerializedName("billing")
-  Billing billing;
-
-  /**
    * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
    * billing period. Pass an empty string to remove previously-defined thresholds.
    */
@@ -105,18 +99,6 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
   List<Phase> phases;
 
   /**
-   * This parameter has been replaced with `end_behavior` and will be removed in future API
-   * versions. Configures how the subscription schedule behaves when it ends. Possible values are
-   * `none`, `cancel`, `renew`, or `release`. `renew` will create a new subscription schedule
-   * revision by adding a new phase using the most recent phase's `plans` applied to a duration set
-   * by `renewal_interval`. `none` will stop the subscription schedule and cancel the underlying
-   * subscription. `cancel` is semantically the same as `none`. `release` will stop the subscription
-   * schedule, but keep the underlying subscription running.
-   */
-  @SerializedName("renewal_behavior")
-  RenewalBehavior renewalBehavior;
-
-  /**
    * This parameter has been deprecated and will be removed in future API versions. Configuration
    * for renewing the subscription schedule when it ends. Must be set if `renewal_behavior` is
    * `renew`. Otherwise, must not be set.
@@ -129,7 +111,6 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
   Object startDate;
 
   private SubscriptionScheduleCreateParams(
-      Billing billing,
       Object billingThresholds,
       CollectionMethod collectionMethod,
       String customer,
@@ -142,10 +123,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       InvoiceSettings invoiceSettings,
       Map<String, String> metadata,
       List<Phase> phases,
-      RenewalBehavior renewalBehavior,
       RenewalInterval renewalInterval,
       Object startDate) {
-    this.billing = billing;
     this.billingThresholds = billingThresholds;
     this.collectionMethod = collectionMethod;
     this.customer = customer;
@@ -158,7 +137,6 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     this.invoiceSettings = invoiceSettings;
     this.metadata = metadata;
     this.phases = phases;
-    this.renewalBehavior = renewalBehavior;
     this.renewalInterval = renewalInterval;
     this.startDate = startDate;
   }
@@ -168,8 +146,6 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private Billing billing;
-
     private Object billingThresholds;
 
     private CollectionMethod collectionMethod;
@@ -194,8 +170,6 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
     private List<Phase> phases;
 
-    private RenewalBehavior renewalBehavior;
-
     private RenewalInterval renewalInterval;
 
     private Object startDate;
@@ -203,7 +177,6 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public SubscriptionScheduleCreateParams build() {
       return new SubscriptionScheduleCreateParams(
-          this.billing,
           this.billingThresholds,
           this.collectionMethod,
           this.customer,
@@ -216,18 +189,8 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
           this.invoiceSettings,
           this.metadata,
           this.phases,
-          this.renewalBehavior,
           this.renewalInterval,
           this.startDate);
-    }
-
-    /**
-     * This field has been renamed to `collection_method` and will be removed in a future API
-     * version.
-     */
-    public Builder setBilling(Billing billing) {
-      this.billing = billing;
-      return this;
     }
 
     /**
@@ -414,20 +377,6 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         this.phases = new ArrayList<>();
       }
       this.phases.addAll(elements);
-      return this;
-    }
-
-    /**
-     * This parameter has been replaced with `end_behavior` and will be removed in future API
-     * versions. Configures how the subscription schedule behaves when it ends. Possible values are
-     * `none`, `cancel`, `renew`, or `release`. `renew` will create a new subscription schedule
-     * revision by adding a new phase using the most recent phase's `plans` applied to a duration
-     * set by `renewal_interval`. `none` will stop the subscription schedule and cancel the
-     * underlying subscription. `cancel` is semantically the same as `none`. `release` will stop the
-     * subscription schedule, but keep the underlying subscription running.
-     */
-    public Builder setRenewalBehavior(RenewalBehavior renewalBehavior) {
-      this.renewalBehavior = renewalBehavior;
       return this;
     }
 
@@ -1559,21 +1508,6 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     }
   }
 
-  public enum Billing implements ApiRequestParams.EnumParam {
-    @SerializedName("charge_automatically")
-    CHARGE_AUTOMATICALLY("charge_automatically"),
-
-    @SerializedName("send_invoice")
-    SEND_INVOICE("send_invoice");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    Billing(String value) {
-      this.value = value;
-    }
-  }
-
   public enum CollectionMethod implements ApiRequestParams.EnumParam {
     @SerializedName("charge_automatically")
     CHARGE_AUTOMATICALLY("charge_automatically"),
@@ -1606,27 +1540,6 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     private final String value;
 
     EndBehavior(String value) {
-      this.value = value;
-    }
-  }
-
-  public enum RenewalBehavior implements ApiRequestParams.EnumParam {
-    @SerializedName("cancel")
-    CANCEL("cancel"),
-
-    @SerializedName("none")
-    NONE("none"),
-
-    @SerializedName("release")
-    RELEASE("release"),
-
-    @SerializedName("renew")
-    RENEW("renew");
-
-    @Getter(onMethod_ = {@Override})
-    private final String value;
-
-    RenewalBehavior(String value) {
       this.value = value;
     }
   }

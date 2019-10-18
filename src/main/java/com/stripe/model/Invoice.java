@@ -91,12 +91,6 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   Boolean autoAdvance;
 
   /**
-   * This field has been renamed to `collection_method` and will be removed in a future API version.
-   */
-  @SerializedName("billing")
-  String billing;
-
-  /**
    * Indicates the reason why the invoice was created. `subscription_cycle` indicates an invoice
    * created by a subscription advancing into a new period. `subscription_create` indicates an
    * invoice created due to creating a subscription. `subscription_update` indicates an invoice
