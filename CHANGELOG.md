@@ -1,5 +1,11 @@
 # Changelog
 
+## 14.0.1 - 2019-10-18
+* [#864](https://github.com/stripe/stripe-java/pull/864)
+  * Remove `renewal_behavior` on Subscription Schedule model class
+  * Remove `renewal_interval` on Subscription Schedule parameter classes
+  * The above are technically breaking changes and should have been released with 14.0.0.
+
 ## 14.0.0 - 2019-10-18
 * [#863](https://github.com/stripe/stripe-java/pull/863) Upgrade to new API version [`2019-10-17`](https://stripe.com/docs/upgrades#2019-10-17)
   * Pin to API version `2019-10-17`
@@ -7,6 +13,7 @@
   * Remove `billing` from Invoice, Subscription and Subscription Schedule model and parameter classes
   * Remove `start` from Subscription model
   * Remove `renewal_behavior` from Subscription Schedule parameter classes
+  * **Note:** This release was missing some breaking changes. Please use 14.0.1 instead.
 
 ## 13.3.0 - 2019-10-17
 * [#862](https://github.com/stripe/stripe-java/pull/862) [codegen] Update API Resources
