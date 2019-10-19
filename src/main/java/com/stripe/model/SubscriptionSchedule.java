@@ -136,13 +136,6 @@ public class SubscriptionSchedule extends ApiResource
   String releasedSubscription;
 
   /**
-   * This field has been deprecated and will be replaced with `end_behavior` in future API versions.
-   * Behavior of the subscription schedule and underlying subscription when it ends.
-   */
-  @SerializedName("renewal_behavior")
-  String renewalBehavior;
-
-  /**
    * This field has been deprecated. Interval and duration at which the subscription schedule renews
    * for when it ends if `renewal_behavior` is `renew`.
    */
