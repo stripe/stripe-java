@@ -98,14 +98,6 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
   @SerializedName("phases")
   List<Phase> phases;
 
-  /**
-   * This parameter has been deprecated and will be removed in future API versions. Configuration
-   * for renewing the subscription schedule when it ends. Must be set if `renewal_behavior` is
-   * `renew`. Otherwise, must not be set.
-   */
-  @SerializedName("renewal_interval")
-  RenewalInterval renewalInterval;
-
   /** The date at which the subscription schedule starts. */
   @SerializedName("start_date")
   Object startDate;
@@ -123,7 +115,6 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       InvoiceSettings invoiceSettings,
       Map<String, String> metadata,
       List<Phase> phases,
-      RenewalInterval renewalInterval,
       Object startDate) {
     this.billingThresholds = billingThresholds;
     this.collectionMethod = collectionMethod;
@@ -137,7 +128,6 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
     this.invoiceSettings = invoiceSettings;
     this.metadata = metadata;
     this.phases = phases;
-    this.renewalInterval = renewalInterval;
     this.startDate = startDate;
   }
 
@@ -170,8 +160,6 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
 
     private List<Phase> phases;
 
-    private RenewalInterval renewalInterval;
-
     private Object startDate;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -189,7 +177,6 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
           this.invoiceSettings,
           this.metadata,
           this.phases,
-          this.renewalInterval,
           this.startDate);
     }
 
@@ -377,16 +364,6 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
         this.phases = new ArrayList<>();
       }
       this.phases.addAll(elements);
-      return this;
-    }
-
-    /**
-     * This parameter has been deprecated and will be removed in future API versions. Configuration
-     * for renewing the subscription schedule when it ends. Must be set if `renewal_behavior` is
-     * `renew`. Otherwise, must not be set.
-     */
-    public Builder setRenewalInterval(RenewalInterval renewalInterval) {
-      this.renewalInterval = renewalInterval;
       return this;
     }
 
@@ -1394,115 +1371,6 @@ public class SubscriptionScheduleCreateParams extends ApiRequestParams {
       private final String value;
 
       CollectionMethod(String value) {
-        this.value = value;
-      }
-    }
-  }
-
-  @Getter
-  public static class RenewalInterval {
-    /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
-     */
-    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-    Map<String, Object> extraParams;
-
-    /**
-     * Interval at which to renew the subscription schedule for when it ends. Possible values are
-     * `day`, `week`, `month`, or `year`.
-     */
-    @SerializedName("interval")
-    Interval interval;
-
-    /** Number of intervals to renew the subscription schedule for when it ends. */
-    @SerializedName("length")
-    Long length;
-
-    private RenewalInterval(Map<String, Object> extraParams, Interval interval, Long length) {
-      this.extraParams = extraParams;
-      this.interval = interval;
-      this.length = length;
-    }
-
-    public static Builder builder() {
-      return new Builder();
-    }
-
-    public static class Builder {
-      private Map<String, Object> extraParams;
-
-      private Interval interval;
-
-      private Long length;
-
-      /** Finalize and obtain parameter instance from this builder. */
-      public RenewalInterval build() {
-        return new RenewalInterval(this.extraParams, this.interval, this.length);
-      }
-
-      /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * SubscriptionScheduleCreateParams.RenewalInterval#extraParams} for the field documentation.
-       */
-      public Builder putExtraParam(String key, Object value) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.put(key, value);
-        return this;
-      }
-
-      /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link SubscriptionScheduleCreateParams.RenewalInterval#extraParams} for the field
-       * documentation.
-       */
-      public Builder putAllExtraParam(Map<String, Object> map) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.putAll(map);
-        return this;
-      }
-
-      /**
-       * Interval at which to renew the subscription schedule for when it ends. Possible values are
-       * `day`, `week`, `month`, or `year`.
-       */
-      public Builder setInterval(Interval interval) {
-        this.interval = interval;
-        return this;
-      }
-
-      /** Number of intervals to renew the subscription schedule for when it ends. */
-      public Builder setLength(Long length) {
-        this.length = length;
-        return this;
-      }
-    }
-
-    public enum Interval implements ApiRequestParams.EnumParam {
-      @SerializedName("day")
-      DAY("day"),
-
-      @SerializedName("month")
-      MONTH("month"),
-
-      @SerializedName("week")
-      WEEK("week"),
-
-      @SerializedName("year")
-      YEAR("year");
-
-      @Getter(onMethod_ = {@Override})
-      private final String value;
-
-      Interval(String value) {
         this.value = value;
       }
     }
