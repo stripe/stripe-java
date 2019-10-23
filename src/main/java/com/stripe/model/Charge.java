@@ -1236,6 +1236,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String iin;
 
       /**
+       * Installment details for this payment (Mexico only).
+       *
+       * <p>For more information, see the [installments integration
+       * guide](https://stripe.com/docs/payments/installments).
+       */
+      @SerializedName("installments")
+      Installments installments;
+
+      /**
        * Issuer bank name of the card. (Only for internal use only and not typically available in
        * standard API requests.)
        */
@@ -1282,6 +1291,38 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
          */
         @SerializedName("cvc_check")
         String cvcCheck;
+      }
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Installments extends StripeObject {
+        /** Installment plan selected for the payment. */
+        @SerializedName("plan")
+        Plan plan;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Plan extends StripeObject {
+          /**
+           * For `fixed_count` installment plans, this is the number of installment payments your
+           * customer will make to their credit card.
+           */
+          @SerializedName("count")
+          Long count;
+
+          /**
+           * For `fixed_count` installment plans, this is the interval between installment payments
+           * your customer will make to their credit card.
+           */
+          @SerializedName("interval")
+          String interval;
+
+          /** Type of installment plan, one of `fixed_count`. */
+          @SerializedName("type")
+          String type;
+        }
       }
 
       @Getter

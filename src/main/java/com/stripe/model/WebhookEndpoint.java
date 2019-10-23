@@ -36,7 +36,8 @@ public class WebhookEndpoint extends ApiResource implements HasId {
   Boolean deleted;
 
   /**
-   * The list of events to enable for this endpoint. You may specify `['*']` to enable all events.
+   * The list of events to enable for this endpoint. `['*']` indicates that all events are enabled,
+   * except those that require explicit selection.
    */
   @SerializedName("enabled_events")
   List<String> enabledEvents;

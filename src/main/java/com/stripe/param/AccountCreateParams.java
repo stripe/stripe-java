@@ -3812,6 +3812,9 @@ public class AccountCreateParams extends ApiRequestParams {
   }
 
   public enum RequestedCapability implements ApiRequestParams.EnumParam {
+    @SerializedName("beneficiary_transfers")
+    BENEFICIARY_TRANSFERS("beneficiary_transfers"),
+
     @SerializedName("card_issuing")
     CARD_ISSUING("card_issuing"),
 

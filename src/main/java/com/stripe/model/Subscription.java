@@ -170,9 +170,24 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  /**
+   * Specifies the approximate timestamp on which any pending invoice items will be billed according
+   * to the schedule provided at `pending_invoice_item_interval`.
+   */
+  @SerializedName("next_pending_invoice_item_invoice")
+  Long nextPendingInvoiceItemInvoice;
+
   /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
   String object;
+
+  /**
+   * Specifies an interval for how often to bill for any pending invoice items. It is analogous to
+   * calling [Create an invoice](https://stripe.com/docs/api#create_invoice) for the given
+   * subscription at the specified interval.
+   */
+  @SerializedName("pending_invoice_item_interval")
+  PendingInvoiceItemInterval pendingInvoiceItemInterval;
 
   /**
    * You can use this [SetupIntent](https://stripe.com/docs/api/setup_intents) to collect user
@@ -683,5 +698,22 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
      */
     @SerializedName("reset_billing_cycle_anchor")
     Boolean resetBillingCycleAnchor;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PendingInvoiceItemInterval extends StripeObject {
+    /** Specifies invoicing frequency. Either `day`, `week`, `month` or `year`. */
+    @SerializedName("interval")
+    String interval;
+
+    /**
+     * The number of intervals between invoices. For example, `interval=month` and
+     * `interval_count=3` bills every 3 months. Maximum of one year interval allowed (1 year, 12
+     * months, or 52 weeks).
+     */
+    @SerializedName("interval_count")
+    Long intervalCount;
   }
 }
