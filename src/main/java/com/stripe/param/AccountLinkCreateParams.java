@@ -38,7 +38,10 @@ public class AccountLinkCreateParams extends ApiRequestParams {
   @SerializedName("failure_url")
   String failureUrl;
 
-  /** The URL that the user will be redirected to upon completing the linked flow successfully. */
+  /**
+   * The URL that the user will be redirected to upon leaving or completing the linked flow
+   * successfully.
+   */
   @SerializedName("success_url")
   String successUrl;
 
@@ -170,7 +173,10 @@ public class AccountLinkCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The URL that the user will be redirected to upon completing the linked flow successfully. */
+    /**
+     * The URL that the user will be redirected to upon leaving or completing the linked flow
+     * successfully.
+     */
     public Builder setSuccessUrl(String successUrl) {
       this.successUrl = successUrl;
       return this;

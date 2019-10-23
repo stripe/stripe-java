@@ -1086,6 +1086,15 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
     @EqualsAndHashCode(callSuper = false)
     public static class Card extends StripeObject {
       /**
+       * Installment details for this payment (Mexico only).
+       *
+       * <p>For more information, see the [installments integration
+       * guide](https://stripe.com/docs/payments/installments).
+       */
+      @SerializedName("installments")
+      Installments installments;
+
+      /**
        * We strongly recommend that you rely on our SCA Engine to automatically prompt your
        * customers for authentication based on risk level and [other
        * requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish
@@ -1097,6 +1106,46 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
        */
       @SerializedName("request_three_d_secure")
       String requestThreeDSecure;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Installments extends StripeObject {
+        /** Installment plans that may be selected for this PaymentIntent. */
+        @SerializedName("available_plans")
+        List<PaymentIntent.PaymentMethodOptions.Card.Installments.Plan> availablePlans;
+
+        /** Whether Installments are enabled for this PaymentIntent. */
+        @SerializedName("enabled")
+        Boolean enabled;
+
+        /** Installment plan selected for this PaymentIntent. */
+        @SerializedName("plan")
+        Plan plan;
+
+        @Getter
+        @Setter
+        @EqualsAndHashCode(callSuper = false)
+        public static class Plan extends StripeObject {
+          /**
+           * For `fixed_count` installment plans, this is the number of installment payments your
+           * customer will make to their credit card.
+           */
+          @SerializedName("count")
+          Long count;
+
+          /**
+           * For `fixed_count` installment plans, this is the interval between installment payments
+           * your customer will make to their credit card. One of `month`.
+           */
+          @SerializedName("interval")
+          String interval;
+
+          /** Type of installment plan, one of `fixed_count`. */
+          @SerializedName("type")
+          String type;
+        }
+      }
     }
   }
 
