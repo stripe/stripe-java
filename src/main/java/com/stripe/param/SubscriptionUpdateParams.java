@@ -143,6 +143,14 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   PaymentBehavior paymentBehavior;
 
   /**
+   * Specifies an interval for how often to bill for any pending invoice items. It is analogous to
+   * calling [Create an invoice](https://stripe.com/docs/api#create_invoice) for the given
+   * subscription at the specified interval.
+   */
+  @SerializedName("pending_invoice_item_interval")
+  Object pendingInvoiceItemInterval;
+
+  /**
    * Boolean (defaults to `true`) telling us whether to [credit for unused
    * time](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle
    * changes (e.g. when switching plans, resetting `billing_cycle_anchor=now`, or starting a trial),
@@ -218,6 +226,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       Map<String, String> metadata,
       Boolean offSession,
       PaymentBehavior paymentBehavior,
+      Object pendingInvoiceItemInterval,
       Boolean prorate,
       Long prorationDate,
       Object taxPercent,
@@ -241,6 +250,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     this.metadata = metadata;
     this.offSession = offSession;
     this.paymentBehavior = paymentBehavior;
+    this.pendingInvoiceItemInterval = pendingInvoiceItemInterval;
     this.prorate = prorate;
     this.prorationDate = prorationDate;
     this.taxPercent = taxPercent;
@@ -288,6 +298,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
     private PaymentBehavior paymentBehavior;
 
+    private Object pendingInvoiceItemInterval;
+
     private Boolean prorate;
 
     private Long prorationDate;
@@ -320,6 +332,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           this.metadata,
           this.offSession,
           this.paymentBehavior,
+          this.pendingInvoiceItemInterval,
           this.prorate,
           this.prorationDate,
           this.taxPercent,
@@ -646,6 +659,27 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      */
     public Builder setPaymentBehavior(PaymentBehavior paymentBehavior) {
       this.paymentBehavior = paymentBehavior;
+      return this;
+    }
+
+    /**
+     * Specifies an interval for how often to bill for any pending invoice items. It is analogous to
+     * calling [Create an invoice](https://stripe.com/docs/api#create_invoice) for the given
+     * subscription at the specified interval.
+     */
+    public Builder setPendingInvoiceItemInterval(
+        PendingInvoiceItemInterval pendingInvoiceItemInterval) {
+      this.pendingInvoiceItemInterval = pendingInvoiceItemInterval;
+      return this;
+    }
+
+    /**
+     * Specifies an interval for how often to bill for any pending invoice items. It is analogous to
+     * calling [Create an invoice](https://stripe.com/docs/api#create_invoice) for the given
+     * subscription at the specified interval.
+     */
+    public Builder setPendingInvoiceItemInterval(EmptyParam pendingInvoiceItemInterval) {
+      this.pendingInvoiceItemInterval = pendingInvoiceItemInterval;
       return this;
     }
 
@@ -1190,6 +1224,119 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           this.usageGte = usageGte;
           return this;
         }
+      }
+    }
+  }
+
+  @Getter
+  public static class PendingInvoiceItemInterval {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** Specifies invoicing frequency. Either `day`, `week`, `month` or `year`. */
+    @SerializedName("interval")
+    Interval interval;
+
+    /**
+     * The number of intervals between invoices. For example, `interval=month` and
+     * `interval_count=3` bills every 3 months. Maximum of one year interval allowed (1 year, 12
+     * months, or 52 weeks).
+     */
+    @SerializedName("interval_count")
+    Long intervalCount;
+
+    private PendingInvoiceItemInterval(
+        Map<String, Object> extraParams, Interval interval, Long intervalCount) {
+      this.extraParams = extraParams;
+      this.interval = interval;
+      this.intervalCount = intervalCount;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Interval interval;
+
+      private Long intervalCount;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public PendingInvoiceItemInterval build() {
+        return new PendingInvoiceItemInterval(this.extraParams, this.interval, this.intervalCount);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SubscriptionUpdateParams.PendingInvoiceItemInterval#extraParams} for the field
+       * documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionUpdateParams.PendingInvoiceItemInterval#extraParams} for the field
+       * documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** Specifies invoicing frequency. Either `day`, `week`, `month` or `year`. */
+      public Builder setInterval(Interval interval) {
+        this.interval = interval;
+        return this;
+      }
+
+      /**
+       * The number of intervals between invoices. For example, `interval=month` and
+       * `interval_count=3` bills every 3 months. Maximum of one year interval allowed (1 year, 12
+       * months, or 52 weeks).
+       */
+      public Builder setIntervalCount(Long intervalCount) {
+        this.intervalCount = intervalCount;
+        return this;
+      }
+    }
+
+    public enum Interval implements ApiRequestParams.EnumParam {
+      @SerializedName("day")
+      DAY("day"),
+
+      @SerializedName("month")
+      MONTH("month"),
+
+      @SerializedName("week")
+      WEEK("week"),
+
+      @SerializedName("year")
+      YEAR("year");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Interval(String value) {
+        this.value = value;
       }
     }
   }
