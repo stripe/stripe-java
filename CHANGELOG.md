@@ -1,5 +1,10 @@
 # Changelog
 
+## 14.2.0 - 2019-10-24
+* [#868](https://github.com/stripe/stripe-java/pull/868)
+  * Add support for typed parameters in `Event.retrieve` method
+* [#867](https://github.com/stripe/stripe-java/pull/867) Contributor Convenant
+
 ## 14.1.0 - 2019-10-23
 * [#866](https://github.com/stripe/stripe-java/pull/866) Various API changes
   * Add support for `mx_rfc` on `TaxId`
