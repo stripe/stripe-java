@@ -1,5 +1,13 @@
 # Changelog
 
+## 14.1.0 - 2019-10-23
+* [#866](https://github.com/stripe/stripe-java/pull/866) Various API changes
+  * Add support for `mx_rfc` on `TaxId`
+  * Add support for `pending_invoice_item_interval` on  `Subscription` creation and update
+  * Add support for `next_pending_invoice_item_invoice` on `Subscription
+  * Add support for `installments` which is a feature on `PaymentIntent` and `PaymentMethod` available on MX Stripe accounts. It's also added inside `payment_method_details[card]` on `Charge`
+  * Add support for `next_pending_invoice_item_invoice` as a new `Capability`
+
 ## 14.0.1 - 2019-10-18
 * [#864](https://github.com/stripe/stripe-java/pull/864)
   * Remove `renewal_behavior` on Subscription Schedule model class
