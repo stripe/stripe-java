@@ -70,9 +70,8 @@ public class SubscriptionSchedule extends ApiResource
   ExpandableField<Customer> customer;
 
   /**
-   * ID of the default payment method for the subscription schedule. It must belong to the customer
-   * associated with the subscription schedule. If not set, invoices will use the default payment
-   * method in the customer's invoice settings.
+   * ID of the default payment method for the subscription schedule. If not set, invoices will use
+   * the default payment method in the customer's invoice settings.
    */
   @SerializedName("default_payment_method")
   @Getter(lombok.AccessLevel.NONE)
@@ -80,9 +79,8 @@ public class SubscriptionSchedule extends ApiResource
   ExpandableField<PaymentMethod> defaultPaymentMethod;
 
   /**
-   * ID of the default payment source for the subscription schedule. It must belong to the customer
-   * associated with the subscription schedule and be in a chargeable state. If not set, defaults to
-   * the customer's default source.
+   * ID of the default payment source for the subscription schedule. If not set, defaults to the
+   * customer's default source.
    */
   @SerializedName("default_source")
   @Getter(lombok.AccessLevel.NONE)
