@@ -1,6 +1,7 @@
 package com.stripe.functional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
@@ -54,6 +55,7 @@ public class TelemetryTest extends BaseStripeTest {
     Balance.retrieve();
     RecordedRequest request2 = server.takeRequest();
     String telemetry1 = request2.getHeader("X-Stripe-Client-Telemetry");
+    assertNotNull(telemetry1);
     JsonObject requestMetrics1 =
         jsonParser
             .parse(telemetry1)
@@ -68,6 +70,7 @@ public class TelemetryTest extends BaseStripeTest {
     Balance.retrieve();
     RecordedRequest request3 = server.takeRequest();
     String telemetry2 = request3.getHeader("X-Stripe-Client-Telemetry");
+    assertNotNull(telemetry2);
     JsonObject requestMetrics2 =
         jsonParser
             .parse(telemetry2)
@@ -168,6 +171,7 @@ public class TelemetryTest extends BaseStripeTest {
     for (int i = 0; i < 10; i++) {
       RecordedRequest request = server.takeRequest();
       String telemetry = request.getHeader("X-Stripe-Client-Telemetry");
+      assertNotNull(telemetry);
       JsonObject requestMetrics =
           jsonParser
               .parse(telemetry)
