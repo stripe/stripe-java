@@ -8,17 +8,9 @@ import com.google.gson.reflect.TypeToken;
 import com.stripe.Stripe;
 import com.stripe.net.RequestOptions.RequestOptionsBuilder;
 import java.util.Map;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-public class LiveStripeResponseGetterTest {
-  LiveStripeResponseGetter srg;
-
-  @BeforeEach
-  public void before() {
-    srg = new LiveStripeResponseGetter();
-  }
-
+public class HttpClientTest {
   @Test
   public void testAppInfo() {
     final RequestOptions options = new RequestOptionsBuilder().setApiKey("sk_foobar").build();
@@ -26,7 +18,7 @@ public class LiveStripeResponseGetterTest {
     Stripe.setAppInfo(
         "MyAwesomePlugin", "1.2.34", "https://myawesomeplugin.info", "pp_partner_1234");
 
-    final Map<String, String> headers = LiveStripeResponseGetter.getHeaders(options);
+    final Map<String, String> headers = HttpClient.getHeaders(options);
 
     final String expectedUserAgent =
         String.format(
@@ -54,12 +46,9 @@ public class LiveStripeResponseGetterTest {
   public void testStripeVersion() {
     final RequestOptions versionOverrideOpts =
         new RequestOptionsBuilder().setStripeVersionOverride("2015-05-05").build();
-    assertEquals(
-        "2015-05-05",
-        LiveStripeResponseGetter.getHeaders(versionOverrideOpts).get("Stripe-Version"));
+    assertEquals("2015-05-05", HttpClient.getHeaders(versionOverrideOpts).get("Stripe-Version"));
 
     final RequestOptions options = new RequestOptionsBuilder().build();
-    assertEquals(
-        Stripe.API_VERSION, LiveStripeResponseGetter.getHeaders(options).get("Stripe-Version"));
+    assertEquals(Stripe.API_VERSION, HttpClient.getHeaders(options).get("Stripe-Version"));
   }
 }
