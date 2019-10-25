@@ -31,16 +31,15 @@ import java.net.HttpURLConnection;
 import java.net.PasswordAuthentication;
 import java.net.URL;
 import java.net.URLStreamHandler;
+import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
-import java.util.concurrent.ConcurrentLinkedQueue;
 import lombok.Cleanup;
 
 public class LiveStripeResponseGetter implements StripeResponseGetter {
   private static final String DNS_CACHE_TTL_PROPERTY_NAME = "networkaddress.cache.ttl";
-  private static final int MAX_REQUEST_METRICS_BUFFER_SIZE = 100;
 
   /*
    * Set this property to override your environment's default
@@ -49,6 +48,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
    */
   private static final String CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME =
       "com.stripe.net.customURLStreamHandler";
+
+  private static final RequestTelemetry requestTelemetry = new RequestTelemetry();
 
   @Override
   public <T> T request(
@@ -138,11 +139,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       headers.put("Stripe-Account", options.getStripeAccount());
     }
 
-    RequestMetrics lastRequestMetrics = prevRequestMetrics.poll();
-    if (Stripe.enableTelemetry && lastRequestMetrics != null) {
-      headers.put(
-          "X-Stripe-Client-Telemetry", ApiResource.GSON.toJson(lastRequestMetrics.payload()));
-    }
+    requestTelemetry.MaybeAddTelemetryHeader(headers);
 
     return headers;
   }
@@ -245,9 +242,6 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
 
     return conn;
   }
-
-  private static ConcurrentLinkedQueue<RequestMetrics> prevRequestMetrics =
-      new ConcurrentLinkedQueue<RequestMetrics>();
 
   private static String getResponseBody(InputStream responseStream) throws IOException {
     try (final Scanner scanner = new Scanner(responseStream, ApiResource.CHARSET)) {
@@ -384,11 +378,11 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       ApiResource.RequestType type,
       RequestOptions options)
       throws StripeException {
-    long requestStartMs = System.currentTimeMillis();
+    long requestStartNanos = System.nanoTime();
 
     StripeResponse response = rawRequest(method, url, params, type, options);
 
-    long requestDurationMs = System.currentTimeMillis() - requestStartMs;
+    Duration requestDuration = Duration.ofNanos(System.nanoTime() - requestStartNanos);
 
     int responseCode = response.code();
     String responseBody = response.body();
@@ -410,9 +404,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       obj.setLastResponse(response);
     }
 
-    if (Stripe.enableTelemetry && prevRequestMetrics.size() < MAX_REQUEST_METRICS_BUFFER_SIZE) {
-      prevRequestMetrics.add(new RequestMetrics(requestId, requestDurationMs));
-    }
+    requestTelemetry.MaybeEnqueueMetrics(response, requestDuration);
 
     return resource;
   }
