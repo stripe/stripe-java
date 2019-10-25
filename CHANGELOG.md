@@ -1,5 +1,9 @@
 # Changelog
 
+## 14.3.0 - 2019-10-25
+* [#871](https://github.com/stripe/stripe-java/pull/871) Codegen for openapi d8f9ddf
+  * Remove `max_amount` from Issuing `Card`. This is technically a breaking change but only one integration was using this feature which changed a while ago
+
 ## 14.2.0 - 2019-10-24
 * [#868](https://github.com/stripe/stripe-java/pull/868)
   * Add support for typed parameters in `Event.retrieve` method
