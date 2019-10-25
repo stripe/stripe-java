@@ -355,8 +355,9 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
 
     /**
      * One of `document_address_mismatch`, `document_dob_mismatch`, `document_duplicate_type`,
-     * `document_id_number_mismatch`, `document_name_mismatch`, `failed_keyed_identity`, or
-     * `failed_other`. A machine-readable code specifying the verification state for the person.
+     * `document_id_number_mismatch`, `document_name_mismatch`, `document_nationality_mismatch`,
+     * `failed_keyed_identity`, or `failed_other`. A machine-readable code specifying the
+     * verification state for the person.
      */
     @SerializedName("details_code")
     String detailsCode;

@@ -132,7 +132,7 @@ public class Authorization extends ApiResource
   @SerializedName("request_history")
   List<Authorization.RequestHistory> requestHistory;
 
-  /** One of `pending`, `reversed`, or `closed`. */
+  /** One of `closed`, `pending`, or `reversed`. */
   @SerializedName("status")
   String status;
 
@@ -440,7 +440,7 @@ public class Authorization extends ApiResource
     @SerializedName("address_zip_check")
     String addressZipCheck;
 
-    /** One of `success`, `failure`, `exempt`, or `none`. */
+    /** One of `exempt`, `failure`, `none`, or `success`. */
     @SerializedName("authentication")
     String authentication;
 
