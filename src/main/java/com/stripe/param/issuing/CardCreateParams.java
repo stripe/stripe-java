@@ -309,14 +309,6 @@ public class CardCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * Maximum amount allowed per authorization on this card, in the currency of the card.
-     * Authorization amounts in a different currency will be converted to the card's currency when
-     * evaluating this control.
-     */
-    @SerializedName("max_amount")
-    Long maxAmount;
-
-    /**
      * Maximum count of approved authorizations on this card. Counts all authorizations
      * retroactively.
      */
@@ -331,13 +323,11 @@ public class CardCreateParams extends ApiRequestParams {
         List<AllowedCategory> allowedCategories,
         List<BlockedCategory> blockedCategories,
         Map<String, Object> extraParams,
-        Long maxAmount,
         Long maxApprovals,
         List<SpendingLimit> spendingLimits) {
       this.allowedCategories = allowedCategories;
       this.blockedCategories = blockedCategories;
       this.extraParams = extraParams;
-      this.maxAmount = maxAmount;
       this.maxApprovals = maxApprovals;
       this.spendingLimits = spendingLimits;
     }
@@ -353,8 +343,6 @@ public class CardCreateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
-      private Long maxAmount;
-
       private Long maxApprovals;
 
       private List<SpendingLimit> spendingLimits;
@@ -365,7 +353,6 @@ public class CardCreateParams extends ApiRequestParams {
             this.allowedCategories,
             this.blockedCategories,
             this.extraParams,
-            this.maxAmount,
             this.maxApprovals,
             this.spendingLimits);
       }
@@ -449,16 +436,6 @@ public class CardCreateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
-        return this;
-      }
-
-      /**
-       * Maximum amount allowed per authorization on this card, in the currency of the card.
-       * Authorization amounts in a different currency will be converted to the card's currency when
-       * evaluating this control.
-       */
-      public Builder setMaxAmount(Long maxAmount) {
-        this.maxAmount = maxAmount;
         return this;
       }
 

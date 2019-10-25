@@ -360,14 +360,6 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     String currency;
 
     /**
-     * Maximum amount allowed per authorization on this card, in the currency of the card.
-     * Authorization amounts in a different currency will be converted to the card's currency when
-     * evaluating this control.
-     */
-    @SerializedName("max_amount")
-    Long maxAmount;
-
-    /**
      * Maximum count of approved authorizations on this card. Counts all authorizations
      * retroactively.
      */
