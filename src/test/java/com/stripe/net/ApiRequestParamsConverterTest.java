@@ -227,6 +227,7 @@ public class ApiRequestParamsConverterTest {
   }
 
   @Test
+  @SuppressWarnings("unchecked")
   public void testMetadataWithNullValue() {
     HasMetadataParams params = new HasMetadataParams();
     params.metadata = new HashMap<>();
