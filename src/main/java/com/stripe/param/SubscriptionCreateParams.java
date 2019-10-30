@@ -122,6 +122,13 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /**
+   * All voided invoices now return the customer balance, independent of
+   * `consume_applied_balance_on_void`.
+   */
+  @SerializedName("invoice_customer_balance_settings")
+  InvoiceCustomerBalanceSettings invoiceCustomerBalanceSettings;
+
   /** List of subscription items, each with an attached plan. */
   @SerializedName("items")
   List<Item> items;
@@ -234,6 +241,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
       Object defaultTaxRates,
       List<String> expand,
       Map<String, Object> extraParams,
+      InvoiceCustomerBalanceSettings invoiceCustomerBalanceSettings,
       List<Item> items,
       Map<String, String> metadata,
       Boolean offSession,
@@ -260,6 +268,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     this.defaultTaxRates = defaultTaxRates;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.invoiceCustomerBalanceSettings = invoiceCustomerBalanceSettings;
     this.items = items;
     this.metadata = metadata;
     this.offSession = offSession;
@@ -308,6 +317,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private InvoiceCustomerBalanceSettings invoiceCustomerBalanceSettings;
+
     private List<Item> items;
 
     private Map<String, String> metadata;
@@ -348,6 +359,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
           this.defaultTaxRates,
           this.expand,
           this.extraParams,
+          this.invoiceCustomerBalanceSettings,
           this.items,
           this.metadata,
           this.offSession,
@@ -580,6 +592,16 @@ public class SubscriptionCreateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * All voided invoices now return the customer balance, independent of
+     * `consume_applied_balance_on_void`.
+     */
+    public Builder setInvoiceCustomerBalanceSettings(
+        InvoiceCustomerBalanceSettings invoiceCustomerBalanceSettings) {
+      this.invoiceCustomerBalanceSettings = invoiceCustomerBalanceSettings;
       return this;
     }
 
@@ -863,6 +885,63 @@ public class SubscriptionCreateParams extends ApiRequestParams {
        */
       public Builder setResetBillingCycleAnchor(Boolean resetBillingCycleAnchor) {
         this.resetBillingCycleAnchor = resetBillingCycleAnchor;
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class InvoiceCustomerBalanceSettings {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private InvoiceCustomerBalanceSettings(Map<String, Object> extraParams) {
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public InvoiceCustomerBalanceSettings build() {
+        return new InvoiceCustomerBalanceSettings(this.extraParams);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * SubscriptionCreateParams.InvoiceCustomerBalanceSettings#extraParams} for the field
+       * documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link SubscriptionCreateParams.InvoiceCustomerBalanceSettings#extraParams} for the
+       * field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
         return this;
       }
     }
