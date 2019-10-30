@@ -1,5 +1,9 @@
 # Changelog
 
+## 14.4.0 - 2019-10-30
+* [#876](https://github.com/stripe/stripe-java/pull/876) Add support for `invoice_customer_balance_settings` on `Invoice`
+* [#873](https://github.com/stripe/stripe-java/pull/873) Suppress unchecked cast warnings in test
+
 ## 14.3.0 - 2019-10-25
 * [#871](https://github.com/stripe/stripe-java/pull/871) Codegen for openapi d8f9ddf
   * Remove `max_amount` from Issuing `Card`. This is technically a breaking change but only one integration was using this feature which changed a while ago
