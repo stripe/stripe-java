@@ -123,8 +123,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * All voided invoices now return the customer balance, independent of
-   * `consume_applied_balance_on_void`.
+   * Controls whether a customer balance applied to an invoice should be consumed and not credited
+   * or debited back to the customer if voided by this subscription.
    */
   @SerializedName("invoice_customer_balance_settings")
   InvoiceCustomerBalanceSettings invoiceCustomerBalanceSettings;
@@ -596,8 +596,8 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * All voided invoices now return the customer balance, independent of
-     * `consume_applied_balance_on_void`.
+     * Controls whether a customer balance applied to an invoice should be consumed and not credited
+     * or debited back to the customer if voided by this subscription.
      */
     public Builder setInvoiceCustomerBalanceSettings(
         InvoiceCustomerBalanceSettings invoiceCustomerBalanceSettings) {
