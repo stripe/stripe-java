@@ -145,6 +145,9 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @SerializedName("id")
   String id;
 
+  @SerializedName("invoice_customer_balance_settings")
+  InvoiceCustomerBalanceSettings invoiceCustomerBalanceSettings;
+
   /** List of subscription items, each with an attached plan. */
   @SerializedName("items")
   SubscriptionItemCollection items;
@@ -698,6 +701,18 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
      */
     @SerializedName("reset_billing_cycle_anchor")
     Boolean resetBillingCycleAnchor;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class InvoiceCustomerBalanceSettings extends StripeObject {
+    /**
+     * Controls whether a customer balance applied to this invoice should be consumed and not
+     * credited or debited back to the customer if voided.
+     */
+    @SerializedName("consume_applied_balance_on_void")
+    Boolean consumeAppliedBalanceOnVoid;
   }
 
   @Getter
