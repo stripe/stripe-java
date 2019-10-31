@@ -1,5 +1,8 @@
 # Changelog
 
+## 14.4.1 - 2019-10-30
+* [#877](https://github.com/stripe/stripe-java/pull/877) Fix docstring for a parameter to reflect the correct behaviour
+
 ## 14.4.0 - 2019-10-30
 * [#876](https://github.com/stripe/stripe-java/pull/876) Add support for `invoice_customer_balance_settings` on `Invoice`
 * [#873](https://github.com/stripe/stripe-java/pull/873) Suppress unchecked cast warnings in test
