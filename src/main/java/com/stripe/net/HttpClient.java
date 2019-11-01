@@ -35,17 +35,9 @@ public class HttpClient {
 
   private static final RequestTelemetry requestTelemetry = new RequestTelemetry();
 
-  public StripeResponse request(
-      ApiResource.RequestMethod method,
-      String url,
-      Map<String, Object> params,
-      ApiResource.RequestType type,
-      RequestOptions options)
+  public StripeResponse request(StripeRequest request)
       throws AuthenticationException, InvalidRequestException, ApiConnectionException,
           ApiException {
-    if (options == null) {
-      options = RequestOptions.getDefault();
-    }
     String originalDnsCacheTtl = null;
     Boolean allowedToSetTtl = true;
 
@@ -66,7 +58,7 @@ public class HttpClient {
       allowedToSetTtl = false;
     }
 
-    String apiKey = options.getApiKey();
+    String apiKey = request.options().getApiKey();
     if (apiKey == null || apiKey.trim().isEmpty()) {
       throw new AuthenticationException(
           "No API key provided. (HINT: set your API key using 'Stripe.apiKey = <API-KEY>'. "
@@ -83,12 +75,16 @@ public class HttpClient {
 
       long requestStartNanos = System.nanoTime();
 
-      switch (type) {
+      switch (request.type()) {
         case NORMAL:
-          response = getStripeResponse(method, url, params, options);
+          response =
+              getStripeResponse(
+                  request.method(), request.url(), request.params(), request.options());
           break;
         case MULTIPART:
-          response = getMultipartStripeResponse(method, url, params, options);
+          response =
+              getMultipartStripeResponse(
+                  request.method(), request.url(), request.params(), request.options());
           break;
         default:
           throw new RuntimeException(
