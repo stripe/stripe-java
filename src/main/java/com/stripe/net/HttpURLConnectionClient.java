@@ -22,8 +22,6 @@ import java.util.Scanner;
 import lombok.Cleanup;
 
 public class HttpURLConnectionClient extends HttpClient {
-  private static final String DNS_CACHE_TTL_PROPERTY_NAME = "networkaddress.cache.ttl";
-
   /*
    * Set this property to override your environment's default
    * URLStreamHandler; Settings the property should not be needed in most
@@ -46,26 +44,6 @@ public class HttpURLConnectionClient extends HttpClient {
   @Override
   public StripeResponse request(StripeRequest request)
       throws AuthenticationException, InvalidRequestException, ApiConnectionException {
-    String originalDnsCacheTtl = null;
-    Boolean allowedToSetTtl = true;
-
-    try {
-      originalDnsCacheTtl = java.security.Security.getProperty(DNS_CACHE_TTL_PROPERTY_NAME);
-      // Disable the DNS cache.
-      //
-      // Unfortunately the original author of this change didn't leave a
-      // comment explaining why it was required, but presumably the worry
-      // was that cache times were being expanded to a point that was
-      // problematic for proper resolution. Various JVM's have pretty
-      // good defaults though, so if the user hasn't touched this value,
-      // don't touch it either.
-      if (originalDnsCacheTtl != null) {
-        java.security.Security.setProperty(DNS_CACHE_TTL_PROPERTY_NAME, "0");
-      }
-    } catch (SecurityException se) {
-      allowedToSetTtl = false;
-    }
-
     String apiKey = request.options().getApiKey();
     if (apiKey == null || apiKey.trim().isEmpty()) {
       throw new AuthenticationException(
@@ -78,39 +56,32 @@ public class HttpURLConnectionClient extends HttpClient {
           0);
     }
 
-    try {
-      StripeResponse response;
+    StripeResponse response;
 
-      long requestStartNanos = System.nanoTime();
+    long requestStartNanos = System.nanoTime();
 
-      switch (request.type()) {
-        case NORMAL:
-          response =
-              getStripeResponse(
-                  request.method(), request.url(), request.params(), request.options());
-          break;
-        case MULTIPART:
-          response =
-              getMultipartStripeResponse(
-                  request.method(), request.url(), request.params(), request.options());
-          break;
-        default:
-          throw new RuntimeException(
-              "Invalid APIResource request type. "
-                  + "This indicates a bug in the Stripe bindings. Please contact "
-                  + "support@stripe.com for assistance.");
-      }
-
-      Duration requestDuration = Duration.ofNanos(System.nanoTime() - requestStartNanos);
-
-      requestTelemetry.MaybeEnqueueMetrics(response, requestDuration);
-
-      return response;
-    } finally {
-      if (allowedToSetTtl && originalDnsCacheTtl != null) {
-        java.security.Security.setProperty(DNS_CACHE_TTL_PROPERTY_NAME, originalDnsCacheTtl);
-      }
+    switch (request.type()) {
+      case NORMAL:
+        response =
+            getStripeResponse(request.method(), request.url(), request.params(), request.options());
+        break;
+      case MULTIPART:
+        response =
+            getMultipartStripeResponse(
+                request.method(), request.url(), request.params(), request.options());
+        break;
+      default:
+        throw new RuntimeException(
+            "Invalid APIResource request type. "
+                + "This indicates a bug in the Stripe bindings. Please contact "
+                + "support@stripe.com for assistance.");
     }
+
+    Duration requestDuration = Duration.ofNanos(System.nanoTime() - requestStartNanos);
+
+    requestTelemetry.MaybeEnqueueMetrics(response, requestDuration);
+
+    return response;
   }
 
   private static StripeResponse getStripeResponse(
