@@ -22,7 +22,7 @@ import com.stripe.model.oauth.OAuthError;
 import java.util.Map;
 
 public class LiveStripeResponseGetter implements StripeResponseGetter {
-  private final HttpClient httpClient = new HttpClient();
+  private final HttpClient httpClient = new HttpURLConnectionClient();
 
   @Override
   public <T> T request(
