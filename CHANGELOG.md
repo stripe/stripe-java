@@ -1,5 +1,8 @@
 # Changelog
 
+## 14.5.0 - 2019-11-04
+* [#881](https://github.com/stripe/stripe-java/pull/881) Add support for `use_stripe_sdk` on `PaymentIntent` creation and confirmation
+
 ## 14.4.1 - 2019-10-30
 * [#877](https://github.com/stripe/stripe-java/pull/877) Fix docstring for a parameter to reflect the correct behaviour
 
