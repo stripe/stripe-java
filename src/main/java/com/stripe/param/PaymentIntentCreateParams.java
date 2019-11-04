@@ -240,6 +240,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   @SerializedName("transfer_group")
   String transferGroup;
 
+  /**
+   * Set to `true` only when using manual confirmation and the iOS or Android SDKs to handle
+   * additional authentication steps.
+   */
+  @SerializedName("use_stripe_sdk")
+  Boolean useStripeSdk;
+
   private PaymentIntentCreateParams(
       Long amount,
       Long applicationFeeAmount,
@@ -266,7 +273,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       String statementDescriptor,
       String statementDescriptorSuffix,
       TransferData transferData,
-      String transferGroup) {
+      String transferGroup,
+      Boolean useStripeSdk) {
     this.amount = amount;
     this.applicationFeeAmount = applicationFeeAmount;
     this.captureMethod = captureMethod;
@@ -293,6 +301,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     this.statementDescriptorSuffix = statementDescriptorSuffix;
     this.transferData = transferData;
     this.transferGroup = transferGroup;
+    this.useStripeSdk = useStripeSdk;
   }
 
   public static Builder builder() {
@@ -352,6 +361,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     private String transferGroup;
 
+    private Boolean useStripeSdk;
+
     /** Finalize and obtain parameter instance from this builder. */
     public PaymentIntentCreateParams build() {
       return new PaymentIntentCreateParams(
@@ -380,7 +391,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           this.statementDescriptor,
           this.statementDescriptorSuffix,
           this.transferData,
-          this.transferGroup);
+          this.transferGroup,
+          this.useStripeSdk);
     }
 
     /**
@@ -744,6 +756,15 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      */
     public Builder setTransferGroup(String transferGroup) {
       this.transferGroup = transferGroup;
+      return this;
+    }
+
+    /**
+     * Set to `true` only when using manual confirmation and the iOS or Android SDKs to handle
+     * additional authentication steps.
+     */
+    public Builder setUseStripeSdk(Boolean useStripeSdk) {
+      this.useStripeSdk = useStripeSdk;
       return this;
     }
   }

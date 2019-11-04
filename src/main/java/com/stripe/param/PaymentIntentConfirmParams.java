@@ -106,6 +106,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   @SerializedName("source")
   String source;
 
+  /**
+   * Set to `true` only when using manual confirmation and the iOS or Android SDKs to handle
+   * additional authentication steps.
+   */
+  @SerializedName("use_stripe_sdk")
+  Boolean useStripeSdk;
+
   private PaymentIntentConfirmParams(
       List<String> expand,
       Map<String, Object> extraParams,
@@ -117,7 +124,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       Boolean savePaymentMethod,
       EnumParam setupFutureUsage,
       Object shipping,
-      String source) {
+      String source,
+      Boolean useStripeSdk) {
     this.expand = expand;
     this.extraParams = extraParams;
     this.offSession = offSession;
@@ -129,6 +137,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     this.setupFutureUsage = setupFutureUsage;
     this.shipping = shipping;
     this.source = source;
+    this.useStripeSdk = useStripeSdk;
   }
 
   public static Builder builder() {
@@ -158,6 +167,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
 
     private String source;
 
+    private Boolean useStripeSdk;
+
     /** Finalize and obtain parameter instance from this builder. */
     public PaymentIntentConfirmParams build() {
       return new PaymentIntentConfirmParams(
@@ -171,7 +182,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           this.savePaymentMethod,
           this.setupFutureUsage,
           this.shipping,
-          this.source);
+          this.source,
+          this.useStripeSdk);
     }
 
     /**
@@ -372,6 +384,15 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
      */
     public Builder setSource(String source) {
       this.source = source;
+      return this;
+    }
+
+    /**
+     * Set to `true` only when using manual confirmation and the iOS or Android SDKs to handle
+     * additional authentication steps.
+     */
+    public Builder setUseStripeSdk(Boolean useStripeSdk) {
+      this.useStripeSdk = useStripeSdk;
       return this;
     }
   }
