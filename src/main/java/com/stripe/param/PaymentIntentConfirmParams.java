@@ -25,6 +25,14 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** ID of the mandate to be used for this payment. */
+  @SerializedName("mandate")
+  String mandate;
+
+  /** This hash contains details about the Mandate to create. */
+  @SerializedName("mandate_data")
+  Object mandateData;
+
   /**
    * Set to `true` to indicate that the customer is not in your checkout flow during this payment
    * attempt, and therefore is unable to authenticate. This parameter is intended for scenarios
@@ -116,6 +124,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   private PaymentIntentConfirmParams(
       List<String> expand,
       Map<String, Object> extraParams,
+      String mandate,
+      Object mandateData,
       Object offSession,
       String paymentMethod,
       PaymentMethodOptions paymentMethodOptions,
@@ -128,6 +138,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       Boolean useStripeSdk) {
     this.expand = expand;
     this.extraParams = extraParams;
+    this.mandate = mandate;
+    this.mandateData = mandateData;
     this.offSession = offSession;
     this.paymentMethod = paymentMethod;
     this.paymentMethodOptions = paymentMethodOptions;
@@ -148,6 +160,10 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     private List<String> expand;
 
     private Map<String, Object> extraParams;
+
+    private String mandate;
+
+    private Object mandateData;
 
     private Object offSession;
 
@@ -174,6 +190,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       return new PaymentIntentConfirmParams(
           this.expand,
           this.extraParams,
+          this.mandate,
+          this.mandateData,
           this.offSession,
           this.paymentMethod,
           this.paymentMethodOptions,
@@ -235,6 +253,18 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /** ID of the mandate to be used for this payment. */
+    public Builder setMandate(String mandate) {
+      this.mandate = mandate;
+      return this;
+    }
+
+    /** This hash contains details about the Mandate to create. */
+    public Builder setMandateData(MandateData mandateData) {
+      this.mandateData = mandateData;
       return this;
     }
 
@@ -394,6 +424,368 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     public Builder setUseStripeSdk(Boolean useStripeSdk) {
       this.useStripeSdk = useStripeSdk;
       return this;
+    }
+  }
+
+  @Getter
+  public static class MandateData {
+    /** This hash contains details about the customer acceptance of the Mandate. */
+    @SerializedName("customer_acceptance")
+    CustomerAcceptance customerAcceptance;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private MandateData(CustomerAcceptance customerAcceptance, Map<String, Object> extraParams) {
+      this.customerAcceptance = customerAcceptance;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private CustomerAcceptance customerAcceptance;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public MandateData build() {
+        return new MandateData(this.customerAcceptance, this.extraParams);
+      }
+
+      /** This hash contains details about the customer acceptance of the Mandate. */
+      public Builder setCustomerAcceptance(CustomerAcceptance customerAcceptance) {
+        this.customerAcceptance = customerAcceptance;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentIntentConfirmParams.MandateData#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentIntentConfirmParams.MandateData#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    @Getter
+    public static class CustomerAcceptance {
+      /** The time at which the customer accepted the Mandate. */
+      @SerializedName("accepted_at")
+      Long acceptedAt;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /**
+       * If this is a Mandate accepted offline, this hash contains details about the offline
+       * acceptance.
+       */
+      @SerializedName("offline")
+      Offline offline;
+
+      /**
+       * If this is a Mandate accepted online, this hash contains details about the online
+       * acceptance.
+       */
+      @SerializedName("online")
+      Online online;
+
+      /**
+       * The type of customer acceptance information included with the Mandate. One of `online` or
+       * `offline`.
+       */
+      @SerializedName("type")
+      Type type;
+
+      private CustomerAcceptance(
+          Long acceptedAt,
+          Map<String, Object> extraParams,
+          Offline offline,
+          Online online,
+          Type type) {
+        this.acceptedAt = acceptedAt;
+        this.extraParams = extraParams;
+        this.offline = offline;
+        this.online = online;
+        this.type = type;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Long acceptedAt;
+
+        private Map<String, Object> extraParams;
+
+        private Offline offline;
+
+        private Online online;
+
+        private Type type;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public CustomerAcceptance build() {
+          return new CustomerAcceptance(
+              this.acceptedAt, this.extraParams, this.offline, this.online, this.type);
+        }
+
+        /** The time at which the customer accepted the Mandate. */
+        public Builder setAcceptedAt(Long acceptedAt) {
+          this.acceptedAt = acceptedAt;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.MandateData.CustomerAcceptance#extraParams}
+         * for the field documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link PaymentIntentConfirmParams.MandateData.CustomerAcceptance#extraParams}
+         * for the field documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /**
+         * If this is a Mandate accepted offline, this hash contains details about the offline
+         * acceptance.
+         */
+        public Builder setOffline(Offline offline) {
+          this.offline = offline;
+          return this;
+        }
+
+        /**
+         * If this is a Mandate accepted online, this hash contains details about the online
+         * acceptance.
+         */
+        public Builder setOnline(Online online) {
+          this.online = online;
+          return this;
+        }
+
+        /**
+         * The type of customer acceptance information included with the Mandate. One of `online` or
+         * `offline`.
+         */
+        public Builder setType(Type type) {
+          this.type = type;
+          return this;
+        }
+      }
+
+      @Getter
+      public static class Offline {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        private Offline(Map<String, Object> extraParams) {
+          this.extraParams = extraParams;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public Offline build() {
+            return new Offline(this.extraParams);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentConfirmParams.MandateData.CustomerAcceptance.Offline#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentConfirmParams.MandateData.CustomerAcceptance.Offline#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+        }
+      }
+
+      @Getter
+      public static class Online {
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /** The IP address from which the Mandate was accepted by the customer. */
+        @SerializedName("ip_address")
+        String ipAddress;
+
+        /** The user agent of the browser from which the Mandate was accepted by the customer. */
+        @SerializedName("user_agent")
+        String userAgent;
+
+        private Online(Map<String, Object> extraParams, String ipAddress, String userAgent) {
+          this.extraParams = extraParams;
+          this.ipAddress = ipAddress;
+          this.userAgent = userAgent;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Map<String, Object> extraParams;
+
+          private String ipAddress;
+
+          private String userAgent;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public Online build() {
+            return new Online(this.extraParams, this.ipAddress, this.userAgent);
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentConfirmParams.MandateData.CustomerAcceptance.Online#extraParams} for the
+           * field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link
+           * PaymentIntentConfirmParams.MandateData.CustomerAcceptance.Online#extraParams} for the
+           * field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /** The IP address from which the Mandate was accepted by the customer. */
+          public Builder setIpAddress(String ipAddress) {
+            this.ipAddress = ipAddress;
+            return this;
+          }
+
+          /** The user agent of the browser from which the Mandate was accepted by the customer. */
+          public Builder setUserAgent(String userAgent) {
+            this.userAgent = userAgent;
+            return this;
+          }
+        }
+      }
+
+      public enum Type implements ApiRequestParams.EnumParam {
+        @SerializedName("offline")
+        OFFLINE("offline"),
+
+        @SerializedName("online")
+        ONLINE("online");
+
+        @Getter(onMethod_ = {@Override})
+        private final String value;
+
+        Type(String value) {
+          this.value = value;
+        }
+      }
     }
   }
 

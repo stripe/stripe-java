@@ -47,6 +47,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("id")
   String id;
 
+  @SerializedName("ideal")
+  Ideal ideal;
+
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
    * exists in test mode.
@@ -65,6 +68,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
   String object;
+
+  @SerializedName("sepa_debit")
+  SepaDebit sepaDebit;
 
   /**
    * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name
@@ -594,4 +600,49 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class CardPresent extends StripeObject {}
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Ideal extends StripeObject {
+    /**
+     * The customer's bank, if provided. Can be one of `abn_amro`, `asn_bank`, `bunq`,
+     * `handelsbanken`, `ing`, `knab`, `moneyou`, `rabobank`, `regiobank`, `sns_bank`,
+     * `triodos_bank`, or `van_lanschot`.
+     */
+    @SerializedName("bank")
+    String bank;
+
+    /** The Bank Identifier Code of the customer's bank, if the bank was provided. */
+    @SerializedName("bic")
+    String bic;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class SepaDebit extends StripeObject {
+    /** Bank code of bank associated with the bank account. */
+    @SerializedName("bank_code")
+    String bankCode;
+
+    /** Branch code of bank associated with the bank account. */
+    @SerializedName("branch_code")
+    String branchCode;
+
+    /** Two-letter ISO code representing the country the bank account is located in. */
+    @SerializedName("country")
+    String country;
+
+    /**
+     * Uniquely identifies this particular bank account. You can use this attribute to check whether
+     * two bank accounts are the same.
+     */
+    @SerializedName("fingerprint")
+    String fingerprint;
+
+    /** Last four characters of the IBAN. */
+    @SerializedName("last4")
+    String last4;
+  }
 }

@@ -46,6 +46,12 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
+   * If this is an `ideal` PaymentMethod, this hash contains details about the iDEAL payment method.
+   */
+  @SerializedName("ideal")
+  Ideal ideal;
+
+  /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format.
    */
@@ -55,6 +61,13 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   /** The PaymentMethod to share. */
   @SerializedName("payment_method")
   String paymentMethod;
+
+  /**
+   * If this is a `sepa_debit` PaymentMethod, this hash contains details about the SEPA debit bank
+   * account.
+   */
+  @SerializedName("sepa_debit")
+  SepaDebit sepaDebit;
 
   /**
    * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name
@@ -72,16 +85,20 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       String customer,
       List<String> expand,
       Map<String, Object> extraParams,
+      Ideal ideal,
       Map<String, String> metadata,
       String paymentMethod,
+      SepaDebit sepaDebit,
       Type type) {
     this.billingDetails = billingDetails;
     this.card = card;
     this.customer = customer;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.ideal = ideal;
     this.metadata = metadata;
     this.paymentMethod = paymentMethod;
+    this.sepaDebit = sepaDebit;
     this.type = type;
   }
 
@@ -100,9 +117,13 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private Ideal ideal;
+
     private Map<String, String> metadata;
 
     private String paymentMethod;
+
+    private SepaDebit sepaDebit;
 
     private Type type;
 
@@ -114,8 +135,10 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
           this.customer,
           this.expand,
           this.extraParams,
+          this.ideal,
           this.metadata,
           this.paymentMethod,
+          this.sepaDebit,
           this.type);
     }
 
@@ -213,6 +236,15 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     }
 
     /**
+     * If this is an `ideal` PaymentMethod, this hash contains details about the iDEAL payment
+     * method.
+     */
+    public Builder setIdeal(Ideal ideal) {
+      this.ideal = ideal;
+      return this;
+    }
+
+    /**
      * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
      * and subsequent calls add additional key/value pairs to the original map. See {@link
      * PaymentMethodCreateParams#metadata} for the field documentation.
@@ -241,6 +273,15 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     /** The PaymentMethod to share. */
     public Builder setPaymentMethod(String paymentMethod) {
       this.paymentMethod = paymentMethod;
+      return this;
+    }
+
+    /**
+     * If this is a `sepa_debit` PaymentMethod, this hash contains details about the SEPA debit bank
+     * account.
+     */
+    public Builder setSepaDebit(SepaDebit sepaDebit) {
+      this.sepaDebit = sepaDebit;
       return this;
     }
 
@@ -679,12 +720,197 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     }
   }
 
+  @Getter
+  public static class Ideal {
+    /** The customer's bank. */
+    @SerializedName("bank")
+    Bank bank;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Ideal(Bank bank, Map<String, Object> extraParams) {
+      this.bank = bank;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Bank bank;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public Ideal build() {
+        return new Ideal(this.bank, this.extraParams);
+      }
+
+      /** The customer's bank. */
+      public Builder setBank(Bank bank) {
+        this.bank = bank;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodCreateParams.Ideal#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodCreateParams.Ideal#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    public enum Bank implements ApiRequestParams.EnumParam {
+      @SerializedName("abn_amro")
+      ABN_AMRO("abn_amro"),
+
+      @SerializedName("asn_bank")
+      ASN_BANK("asn_bank"),
+
+      @SerializedName("bunq")
+      BUNQ("bunq"),
+
+      @SerializedName("handelsbanken")
+      HANDELSBANKEN("handelsbanken"),
+
+      @SerializedName("ing")
+      ING("ing"),
+
+      @SerializedName("knab")
+      KNAB("knab"),
+
+      @SerializedName("moneyou")
+      MONEYOU("moneyou"),
+
+      @SerializedName("rabobank")
+      RABOBANK("rabobank"),
+
+      @SerializedName("regiobank")
+      REGIOBANK("regiobank"),
+
+      @SerializedName("sns_bank")
+      SNS_BANK("sns_bank"),
+
+      @SerializedName("triodos_bank")
+      TRIODOS_BANK("triodos_bank"),
+
+      @SerializedName("van_lanschot")
+      VAN_LANSCHOT("van_lanschot");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Bank(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  @Getter
+  public static class SepaDebit {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    @SerializedName("iban")
+    String iban;
+
+    private SepaDebit(Map<String, Object> extraParams, String iban) {
+      this.extraParams = extraParams;
+      this.iban = iban;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private String iban;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public SepaDebit build() {
+        return new SepaDebit(this.extraParams, this.iban);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodCreateParams.SepaDebit#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodCreateParams.SepaDebit#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      public Builder setIban(String iban) {
+        this.iban = iban;
+        return this;
+      }
+    }
+  }
+
   public enum Type implements ApiRequestParams.EnumParam {
     @SerializedName("card")
     CARD("card"),
 
     @SerializedName("card_present")
-    CARD_PRESENT("card_present");
+    CARD_PRESENT("card_present"),
+
+    @SerializedName("ideal")
+    IDEAL("ideal"),
+
+    @SerializedName("sepa_debit")
+    SEPA_DEBIT("sepa_debit");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

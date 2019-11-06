@@ -402,6 +402,9 @@ public class WebhookEndpointUpdateParams extends ApiRequestParams {
     @SerializedName("issuing_transaction.updated")
     ISSUING_TRANSACTION__UPDATED("issuing_transaction.updated"),
 
+    @SerializedName("mandate.updated")
+    MANDATE__UPDATED("mandate.updated"),
+
     @SerializedName("order.created")
     ORDER__CREATED("order.created"),
 
