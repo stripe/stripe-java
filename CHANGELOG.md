@@ -1,5 +1,8 @@
 # Changelog
 
+## 15.1.0 - 2019-11-06
+* [#888](https://github.com/stripe/stripe-java/pull/888) Add support for SEPA and iDEAL on `PaymentMethod` and `Mandate`
+
 ## 15.0.0 - 2019-11-05
 * [#886](https://github.com/stripe/stripe-java/pull/886) Move to the latest API version and add new changes
   * Move to API version `2019-11-05`
