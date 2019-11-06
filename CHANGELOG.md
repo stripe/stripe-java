@@ -1,5 +1,12 @@
 # Changelog
 
+## 15.0.0 - 2019-11-05
+* [#886](https://github.com/stripe/stripe-java/pull/886) Move to the latest API version and add new changes
+  * Move to API version `2019-11-05`
+  * Add `default_settings` on `SubscritionSchedule`
+  * Remove `billing_thresholds`, `collection_method`, `default_payment_method`, `default_source` and `invoice_settings` from `SubscriptionSchedule
+  * Add `charge` filter when listing `Dispute`
+
 ## 14.5.0 - 2019-11-04
 * [#881](https://github.com/stripe/stripe-java/pull/881) Add support for `use_stripe_sdk` on `PaymentIntent` creation and confirmation
 
