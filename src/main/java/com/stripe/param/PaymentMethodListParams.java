@@ -205,7 +205,13 @@ public class PaymentMethodListParams extends ApiRequestParams {
     CARD("card"),
 
     @SerializedName("card_present")
-    CARD_PRESENT("card_present");
+    CARD_PRESENT("card_present"),
+
+    @SerializedName("ideal")
+    IDEAL("ideal"),
+
+    @SerializedName("sepa_debit")
+    SEPA_DEBIT("sepa_debit");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
