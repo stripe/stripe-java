@@ -32,6 +32,9 @@ public class RefundCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  @SerializedName("payment_intent")
+  String paymentIntent;
+
   @SerializedName("reason")
   Reason reason;
 
@@ -47,6 +50,7 @@ public class RefundCreateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Map<String, String> metadata,
+      String paymentIntent,
       Reason reason,
       Boolean refundApplicationFee,
       Boolean reverseTransfer) {
@@ -55,6 +59,7 @@ public class RefundCreateParams extends ApiRequestParams {
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
+    this.paymentIntent = paymentIntent;
     this.reason = reason;
     this.refundApplicationFee = refundApplicationFee;
     this.reverseTransfer = reverseTransfer;
@@ -75,6 +80,8 @@ public class RefundCreateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
+    private String paymentIntent;
+
     private Reason reason;
 
     private Boolean refundApplicationFee;
@@ -89,6 +96,7 @@ public class RefundCreateParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.metadata,
+          this.paymentIntent,
           this.reason,
           this.refundApplicationFee,
           this.reverseTransfer);
@@ -179,6 +187,11 @@ public class RefundCreateParams extends ApiRequestParams {
         this.metadata = new HashMap<>();
       }
       this.metadata.putAll(map);
+      return this;
+    }
+
+    public Builder setPaymentIntent(String paymentIntent) {
+      this.paymentIntent = paymentIntent;
       return this;
     }
 

@@ -93,6 +93,12 @@ public class Dispute extends ApiResource
   @SerializedName("object")
   String object;
 
+  /** ID of the PaymentIntent that was disputed. */
+  @SerializedName("payment_intent")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<PaymentIntent> paymentIntent;
+
   /**
    * Reason given by cardholder for dispute. Possible values are `bank_cannot_process`,
    * `check_returned`, `credit_not_processed`, `customer_initiated`, `debit_not_authorized`,
@@ -127,6 +133,25 @@ public class Dispute extends ApiResource
 
   public void setChargeObject(Charge expandableObject) {
     this.charge = new ExpandableField<Charge>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get id of expandable `paymentIntent` object. */
+  public String getPaymentIntent() {
+    return (this.paymentIntent != null) ? this.paymentIntent.getId() : null;
+  }
+
+  public void setPaymentIntent(String id) {
+    this.paymentIntent = ApiResource.setExpandableFieldId(id, this.paymentIntent);
+  }
+
+  /** Get expanded `paymentIntent`. */
+  public PaymentIntent getPaymentIntentObject() {
+    return (this.paymentIntent != null) ? this.paymentIntent.getExpanded() : null;
+  }
+
+  public void setPaymentIntentObject(PaymentIntent expandableObject) {
+    this.paymentIntent =
+        new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
   }
 
   /** Returns a list of your disputes. */
