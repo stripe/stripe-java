@@ -24,26 +24,10 @@ import lombok.Setter;
 public class SubscriptionSchedule extends ApiResource
     implements HasId, MetadataStore<SubscriptionSchedule> {
   /**
-   * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
-   * billing period.
-   */
-  @SerializedName("billing_thresholds")
-  Subscription.BillingThresholds billingThresholds;
-
-  /**
    * Time at which the subscription schedule was canceled. Measured in seconds since the Unix epoch.
    */
   @SerializedName("canceled_at")
   Long canceledAt;
-
-  /**
-   * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
-   * attempt to pay the underlying subscription at the end of each billing cycle using the default
-   * source attached to the customer. When sending an invoice, Stripe will email your customer an
-   * invoice with payment instructions.
-   */
-  @SerializedName("collection_method")
-  String collectionMethod;
 
   /**
    * Time at which the subscription schedule was completed. Measured in seconds since the Unix
@@ -69,23 +53,8 @@ public class SubscriptionSchedule extends ApiResource
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
-  /**
-   * ID of the default payment method for the subscription schedule. If not set, invoices will use
-   * the default payment method in the customer's invoice settings.
-   */
-  @SerializedName("default_payment_method")
-  @Getter(lombok.AccessLevel.NONE)
-  @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<PaymentMethod> defaultPaymentMethod;
-
-  /**
-   * ID of the default payment source for the subscription schedule. If not set, defaults to the
-   * customer's default source.
-   */
-  @SerializedName("default_source")
-  @Getter(lombok.AccessLevel.NONE)
-  @Setter(lombok.AccessLevel.NONE)
-  ExpandableField<PaymentSource> defaultSource;
+  @SerializedName("default_settings")
+  DefaultSettings defaultSettings;
 
   /** Behavior of the subscription schedule and underlying subscription when it ends. */
   @SerializedName("end_behavior")
@@ -95,10 +64,6 @@ public class SubscriptionSchedule extends ApiResource
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
-
-  /** The subscription schedule's default invoice settings. */
-  @SerializedName("invoice_settings")
-  InvoiceSettings invoiceSettings;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
@@ -166,44 +131,6 @@ public class SubscriptionSchedule extends ApiResource
 
   public void setCustomerObject(Customer expandableObject) {
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
-  }
-
-  /** Get id of expandable `defaultPaymentMethod` object. */
-  public String getDefaultPaymentMethod() {
-    return (this.defaultPaymentMethod != null) ? this.defaultPaymentMethod.getId() : null;
-  }
-
-  public void setDefaultPaymentMethod(String id) {
-    this.defaultPaymentMethod = ApiResource.setExpandableFieldId(id, this.defaultPaymentMethod);
-  }
-
-  /** Get expanded `defaultPaymentMethod`. */
-  public PaymentMethod getDefaultPaymentMethodObject() {
-    return (this.defaultPaymentMethod != null) ? this.defaultPaymentMethod.getExpanded() : null;
-  }
-
-  public void setDefaultPaymentMethodObject(PaymentMethod expandableObject) {
-    this.defaultPaymentMethod =
-        new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
-  }
-
-  /** Get id of expandable `defaultSource` object. */
-  public String getDefaultSource() {
-    return (this.defaultSource != null) ? this.defaultSource.getId() : null;
-  }
-
-  public void setDefaultSource(String id) {
-    this.defaultSource = ApiResource.setExpandableFieldId(id, this.defaultSource);
-  }
-
-  /** Get expanded `defaultSource`. */
-  public PaymentSource getDefaultSourceObject() {
-    return (this.defaultSource != null) ? this.defaultSource.getExpanded() : null;
-  }
-
-  public void setDefaultSourceObject(PaymentSource expandableObject) {
-    this.defaultSource =
-        new ExpandableField<PaymentSource>(expandableObject.getId(), expandableObject);
   }
 
   /** Get id of expandable `subscription` object. */
@@ -528,6 +455,59 @@ public class SubscriptionSchedule extends ApiResource
 
     @SerializedName("start_date")
     Long startDate;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class DefaultSettings extends StripeObject {
+    /**
+     * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
+     * billing period.
+     */
+    @SerializedName("billing_thresholds")
+    Subscription.BillingThresholds billingThresholds;
+
+    /**
+     * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
+     * attempt to pay the underlying subscription at the end of each billing cycle using the default
+     * source attached to the customer. When sending an invoice, Stripe will email your customer an
+     * invoice with payment instructions.
+     */
+    @SerializedName("collection_method")
+    String collectionMethod;
+
+    /**
+     * ID of the default payment method for the subscription schedule. If not set, invoices will use
+     * the default payment method in the customer's invoice settings.
+     */
+    @SerializedName("default_payment_method")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<PaymentMethod> defaultPaymentMethod;
+
+    /** The subscription schedule's default invoice settings. */
+    @SerializedName("invoice_settings")
+    InvoiceSettings invoiceSettings;
+
+    /** Get id of expandable `defaultPaymentMethod` object. */
+    public String getDefaultPaymentMethod() {
+      return (this.defaultPaymentMethod != null) ? this.defaultPaymentMethod.getId() : null;
+    }
+
+    public void setDefaultPaymentMethod(String id) {
+      this.defaultPaymentMethod = ApiResource.setExpandableFieldId(id, this.defaultPaymentMethod);
+    }
+
+    /** Get expanded `defaultPaymentMethod`. */
+    public PaymentMethod getDefaultPaymentMethodObject() {
+      return (this.defaultPaymentMethod != null) ? this.defaultPaymentMethod.getExpanded() : null;
+    }
+
+    public void setDefaultPaymentMethodObject(PaymentMethod expandableObject) {
+      this.defaultPaymentMethod =
+          new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
+    }
   }
 
   @Getter

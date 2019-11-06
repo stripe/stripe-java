@@ -10,6 +10,10 @@ import lombok.Getter;
 
 @Getter
 public class DisputeListParams extends ApiRequestParams {
+  /** Only return disputes that are associated by the Charge specified by this Charge ID. */
+  @SerializedName("charge")
+  String charge;
+
   @SerializedName("created")
   Object created;
 
@@ -52,12 +56,14 @@ public class DisputeListParams extends ApiRequestParams {
   String startingAfter;
 
   private DisputeListParams(
+      String charge,
       Object created,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
       Long limit,
       String startingAfter) {
+    this.charge = charge;
     this.created = created;
     this.endingBefore = endingBefore;
     this.expand = expand;
@@ -71,6 +77,8 @@ public class DisputeListParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private String charge;
+
     private Object created;
 
     private String endingBefore;
@@ -86,12 +94,19 @@ public class DisputeListParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public DisputeListParams build() {
       return new DisputeListParams(
+          this.charge,
           this.created,
           this.endingBefore,
           this.expand,
           this.extraParams,
           this.limit,
           this.startingAfter);
+    }
+
+    /** Only return disputes that are associated by the Charge specified by this Charge ID. */
+    public Builder setCharge(String charge) {
+      this.charge = charge;
+      return this;
     }
 
     public Builder setCreated(Created created) {

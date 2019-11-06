@@ -98,9 +98,9 @@ public class AccountCreateParams extends ApiRequestParams {
   Map<String, String> metadata;
 
   /**
-   * The set of capabilities you want to unlock for this account (US only). Each capability will be
-   * inactive until you have provided its specific requirements and Stripe has verified them. An
-   * account may have some of its requested capabilities be active and some be inactive.
+   * The set of capabilities you want to unlock for this account. Each capability will be inactive
+   * until you have provided its specific requirements and Stripe has verified them. An account may
+   * have some of its requested capabilities be active and some be inactive.
    */
   @SerializedName("requested_capabilities")
   List<RequestedCapability> requestedCapabilities;
