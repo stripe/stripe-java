@@ -4,6 +4,8 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Address;
+import com.stripe.model.ExpandableField;
+import com.stripe.model.File;
 import com.stripe.model.HasId;
 import com.stripe.model.MetadataStore;
 import com.stripe.model.StripeObject;
@@ -29,6 +31,10 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   @SerializedName("billing")
   Billing billing;
 
+  /** Additional information about a `business_entity` cardholder. */
+  @SerializedName("company")
+  Company company;
+
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
@@ -41,6 +47,10 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
   String id;
+
+  /** Additional information about an `individual` cardholder. */
+  @SerializedName("individual")
+  Individual individual;
 
   /** Whether or not this cardholder is the default cardholder. */
   @SerializedName("is_default")
@@ -269,6 +279,121 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
 
     @SerializedName("name")
     String name;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Company extends StripeObject {
+    /** Whether the company's business ID number was provided. */
+    @SerializedName("tax_id_provided")
+    Boolean taxIdProvided;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Individual extends StripeObject {
+    /** The date of birth of this cardholder. */
+    @SerializedName("dob")
+    DateOfBirth dob;
+
+    /** The first name of this cardholder. */
+    @SerializedName("first_name")
+    String firstName;
+
+    /** The last name of this cardholder. */
+    @SerializedName("last_name")
+    String lastName;
+
+    /** Government-issued ID document for this cardholder. */
+    @SerializedName("verification")
+    Verification verification;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class DateOfBirth extends StripeObject {
+      /** The day of birth, between 1 and 31. */
+      @SerializedName("day")
+      Long day;
+
+      /** The month of birth, between 1 and 12. */
+      @SerializedName("month")
+      Long month;
+
+      /** The four-digit year of birth. */
+      @SerializedName("year")
+      Long year;
+    }
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class Verification extends StripeObject {
+      /** An identifying document, either a passport or local ID card. */
+      @SerializedName("document")
+      Document document;
+
+      @Getter
+      @Setter
+      @EqualsAndHashCode(callSuper = false)
+      public static class Document extends StripeObject {
+        /**
+         * The back of a document returned by a [file upload](#create_file) with a `purpose` value
+         * of `identity_document`.
+         */
+        @SerializedName("back")
+        @Getter(lombok.AccessLevel.NONE)
+        @Setter(lombok.AccessLevel.NONE)
+        ExpandableField<File> back;
+
+        /**
+         * The front of a document returned by a [file upload](#create_file) with a `purpose` value
+         * of `identity_document`.
+         */
+        @SerializedName("front")
+        @Getter(lombok.AccessLevel.NONE)
+        @Setter(lombok.AccessLevel.NONE)
+        ExpandableField<File> front;
+
+        /** Get id of expandable `back` object. */
+        public String getBack() {
+          return (this.back != null) ? this.back.getId() : null;
+        }
+
+        public void setBack(String id) {
+          this.back = ApiResource.setExpandableFieldId(id, this.back);
+        }
+
+        /** Get expanded `back`. */
+        public File getBackObject() {
+          return (this.back != null) ? this.back.getExpanded() : null;
+        }
+
+        public void setBackObject(File expandableObject) {
+          this.back = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+        }
+
+        /** Get id of expandable `front` object. */
+        public String getFront() {
+          return (this.front != null) ? this.front.getId() : null;
+        }
+
+        public void setFront(String id) {
+          this.front = ApiResource.setExpandableFieldId(id, this.front);
+        }
+
+        /** Get expanded `front`. */
+        public File getFrontObject() {
+          return (this.front != null) ? this.front.getExpanded() : null;
+        }
+
+        public void setFrontObject(File expandableObject) {
+          this.front = new ExpandableField<File>(expandableObject.getId(), expandableObject);
+        }
+      }
+    }
   }
 
   @Getter
