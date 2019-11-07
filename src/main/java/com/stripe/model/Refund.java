@@ -85,6 +85,12 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   @SerializedName("object")
   String object;
 
+  /** ID of the PaymentIntent that was refunded. */
+  @SerializedName("payment_intent")
+  @Getter(lombok.AccessLevel.NONE)
+  @Setter(lombok.AccessLevel.NONE)
+  ExpandableField<PaymentIntent> paymentIntent;
+
   /**
    * Reason for the refund. If set, possible values are `duplicate`, `fraudulent`, and
    * `requested_by_customer`.
@@ -179,6 +185,25 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   public void setFailureBalanceTransactionObject(BalanceTransaction expandableObject) {
     this.failureBalanceTransaction =
         new ExpandableField<BalanceTransaction>(expandableObject.getId(), expandableObject);
+  }
+
+  /** Get id of expandable `paymentIntent` object. */
+  public String getPaymentIntent() {
+    return (this.paymentIntent != null) ? this.paymentIntent.getId() : null;
+  }
+
+  public void setPaymentIntent(String id) {
+    this.paymentIntent = ApiResource.setExpandableFieldId(id, this.paymentIntent);
+  }
+
+  /** Get expanded `paymentIntent`. */
+  public PaymentIntent getPaymentIntentObject() {
+    return (this.paymentIntent != null) ? this.paymentIntent.getExpanded() : null;
+  }
+
+  public void setPaymentIntentObject(PaymentIntent expandableObject) {
+    this.paymentIntent =
+        new ExpandableField<PaymentIntent>(expandableObject.getId(), expandableObject);
   }
 
   /** Get id of expandable `sourceTransferReversal` object. */

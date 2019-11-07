@@ -53,8 +53,9 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   Boolean deleted;
 
   /**
-   * The product's description, meant to be displayable to the customer. Only applicable to products
-   * of `type=good`.
+   * The product's description, meant to be displayable to the customer. Use this field to
+   * optionally store a long form explanation of the product being sold for your own rendering
+   * purposes.
    */
   @SerializedName("description")
   String description;
@@ -87,8 +88,8 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   Map<String, String> metadata;
 
   /**
-   * The product's name, meant to be displayable to the customer. Applicable to both `service` and
-   * `good` types.
+   * The product's name, meant to be displayable to the customer. Whenever this product is sold via
+   * a subscription, name will show up on associated invoice line item descriptions.
    */
   @SerializedName("name")
   String name;
@@ -112,7 +113,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   /**
    * Extra information about a product which will appear on your customer's credit card statement.
    * In the case that multiple products are billed at once, the first statement descriptor will be
-   * used. Only available on products of type=`service`.
+   * used.
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
@@ -125,8 +126,8 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   String type;
 
   /**
-   * A label that represents units of this product, such as seat(s), in Stripe and on customers’
-   * receipts and invoices. Only available on products of type=`service`.
+   * A label that represents units of this product in Stripe and on customers’ receipts and
+   * invoices. When set, this will be included in associated invoice line item descriptions.
    */
   @SerializedName("unit_label")
   String unitLabel;
@@ -142,16 +143,16 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   String url;
 
   /**
-   * Creates a new product object. To create a product for use with subscriptions, see <a
-   * href="#create_service_product">Subscriptions Products</a>.
+   * Creates a new product object. To create a product for use with orders, see <a
+   * href="#create_product">Products</a>.
    */
   public static Product create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * Creates a new product object. To create a product for use with subscriptions, see <a
-   * href="#create_service_product">Subscriptions Products</a>.
+   * Creates a new product object. To create a product for use with orders, see <a
+   * href="#create_product">Products</a>.
    */
   public static Product create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -160,16 +161,16 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   }
 
   /**
-   * Creates a new product object. To create a product for use with subscriptions, see <a
-   * href="#create_service_product">Subscriptions Products</a>.
+   * Creates a new product object. To create a product for use with orders, see <a
+   * href="#create_product">Products</a>.
    */
   public static Product create(ProductCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
   /**
-   * Creates a new product object. To create a product for use with subscriptions, see <a
-   * href="#create_service_product">Subscriptions Products</a>.
+   * Creates a new product object. To create a product for use with orders, see <a
+   * href="#create_product">Products</a>.
    */
   public static Product create(ProductCreateParams params, RequestOptions options)
       throws StripeException {

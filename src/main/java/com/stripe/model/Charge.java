@@ -123,6 +123,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Dispute> dispute;
 
+  /** Whether the charge has been disputed. */
+  @SerializedName("disputed")
+  Boolean disputed;
+
   /**
    * Error code explaining reason for charge failure if available (see [the errors
    * section](https://stripe.com/docs/api#errors) for a list of codes).

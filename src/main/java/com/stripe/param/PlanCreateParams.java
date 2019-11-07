@@ -524,8 +524,8 @@ public class PlanCreateParams extends ApiRequestParams {
     Map<String, String> metadata;
 
     /**
-     * The product's name, meant to be displayable to the customer. Applicable to both `service` and
-     * `good` types.
+     * The product's name, meant to be displayable to the customer. Whenever this product is sold
+     * via a subscription, name will show up on associated invoice line item descriptions.
      */
     @SerializedName("name")
     String name;
@@ -541,8 +541,8 @@ public class PlanCreateParams extends ApiRequestParams {
     String statementDescriptor;
 
     /**
-     * A label that represents units of this product, such as seat(s), in Stripe and on customers’
-     * receipts and invoices. Only available on products of type=`service`.
+     * A label that represents units of this product in Stripe and on customers’ receipts and
+     * invoices. When set, this will be included in associated invoice line item descriptions.
      */
     @SerializedName("unit_label")
     String unitLabel;
@@ -663,8 +663,8 @@ public class PlanCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The product's name, meant to be displayable to the customer. Applicable to both `service`
-       * and `good` types.
+       * The product's name, meant to be displayable to the customer. Whenever this product is sold
+       * via a subscription, name will show up on associated invoice line item descriptions.
        */
       public Builder setName(String name) {
         this.name = name;
@@ -684,8 +684,8 @@ public class PlanCreateParams extends ApiRequestParams {
       }
 
       /**
-       * A label that represents units of this product, such as seat(s), in Stripe and on customers’
-       * receipts and invoices. Only available on products of type=`service`.
+       * A label that represents units of this product in Stripe and on customers’ receipts and
+       * invoices. When set, this will be included in associated invoice line item descriptions.
        */
       public Builder setUnitLabel(String unitLabel) {
         this.unitLabel = unitLabel;

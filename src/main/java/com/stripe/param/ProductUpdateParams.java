@@ -18,25 +18,32 @@ public class ProductUpdateParams extends ApiRequestParams {
 
   /**
    * A list of up to 5 alphanumeric attributes that each SKU can provide values for (e.g.,
-   * `["color", "size"]`). If a value for `attributes` is specified, the list specified will replace
-   * the existing attributes list on this product. Any attributes not present after the update will
-   * be deleted from the SKUs for this product.
+   * `["color", "size"]`). ' 'If a value for `attributes` is specified, the list specified will
+   * replace the existing attributes list on this product. Any attributes not present after the
+   * update will be deleted from the SKUs for this product. May only be set if type=`good`.
    */
   @SerializedName("attributes")
   Object attributes;
 
-  /** A short one-line description of the product, meant to be displayable to the customer. */
+  /**
+   * A short one-line description of the product, meant to be displayable to the customer. May only
+   * be set if type=`good`.
+   */
   @SerializedName("caption")
   Object caption;
 
   /**
    * An array of Connect application names or identifiers that should not be able to order the SKUs
-   * for this product.
+   * for this product. May only be set if type=`good`.
    */
   @SerializedName("deactivate_on")
   List<String> deactivateOn;
 
-  /** The product's description, meant to be displayable to the customer. */
+  /**
+   * The product's description, meant to be displayable to the customer. Use this field to
+   * optionally store a long form explanation of the product being sold for your own rendering
+   * purposes.
+   */
   @SerializedName("description")
   Object description;
 
@@ -53,7 +60,10 @@ public class ProductUpdateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** A list of up to 8 URLs of images for this product, meant to be displayable to the customer. */
+  /**
+   * A list of up to 8 URLs of images for this product, meant to be displayable to the customer. May
+   * only be set if type=`good`.
+   */
   @SerializedName("images")
   Object images;
 
@@ -65,20 +75,23 @@ public class ProductUpdateParams extends ApiRequestParams {
   Map<String, String> metadata;
 
   /**
-   * The product's name, meant to be displayable to the customer. Applicable to both `service` and
-   * `good` types.
+   * The product's name, meant to be displayable to the customer. Whenever this product is sold via
+   * a subscription, name will show up on associated invoice line item descriptions.
    */
   @SerializedName("name")
   Object name;
 
   /**
    * The dimensions of this product for shipping purposes. A SKU associated with this product can
-   * override this value by having its own `package_dimensions`.
+   * override this value by having its own `package_dimensions`. May only be set if type=`good`.
    */
   @SerializedName("package_dimensions")
   Object packageDimensions;
 
-  /** Whether this product is shipped (i.e., physical goods). Defaults to `true`. */
+  /**
+   * Whether this product is shipped (i.e., physical goods). Defaults to `true`. May only be set if
+   * type=`good`.
+   */
   @SerializedName("shippable")
   Boolean shippable;
 
@@ -87,19 +100,18 @@ public class ProductUpdateParams extends ApiRequestParams {
    * 22 characters. The statement description may not include "' characters, and will appear on your
    * customer's statement in capital letters. Non-ASCII characters are automatically stripped. While
    * most banks display this information consistently, some may display it incorrectly or not at
-   * all. It must contain at least one letter. May only be set if type=`service`.
+   * all. It must contain at least one letter.
    */
   @SerializedName("statement_descriptor")
   Object statementDescriptor;
 
   /**
-   * A label that represents units of this product, such as seat(s), in Stripe and on customers’
-   * receipts and invoices. Only available on products of type=`service`.
+   * A label that represents units of this product in Stripe and on customers’ receipts and
+   * invoices. When set, this will be included in associated invoice line item descriptions.
    */
   @SerializedName("unit_label")
   Object unitLabel;
 
-  /** A URL of a publicly-accessible webpage for this product. */
   @SerializedName("url")
   Object url;
 
@@ -227,9 +239,9 @@ public class ProductUpdateParams extends ApiRequestParams {
 
     /**
      * A list of up to 5 alphanumeric attributes that each SKU can provide values for (e.g.,
-     * `["color", "size"]`). If a value for `attributes` is specified, the list specified will
+     * `["color", "size"]`). ' 'If a value for `attributes` is specified, the list specified will
      * replace the existing attributes list on this product. Any attributes not present after the
-     * update will be deleted from the SKUs for this product.
+     * update will be deleted from the SKUs for this product. May only be set if type=`good`.
      */
     public Builder setAttributes(EmptyParam attributes) {
       this.attributes = attributes;
@@ -238,22 +250,28 @@ public class ProductUpdateParams extends ApiRequestParams {
 
     /**
      * A list of up to 5 alphanumeric attributes that each SKU can provide values for (e.g.,
-     * `["color", "size"]`). If a value for `attributes` is specified, the list specified will
+     * `["color", "size"]`). ' 'If a value for `attributes` is specified, the list specified will
      * replace the existing attributes list on this product. Any attributes not present after the
-     * update will be deleted from the SKUs for this product.
+     * update will be deleted from the SKUs for this product. May only be set if type=`good`.
      */
     public Builder setAttributes(List<String> attributes) {
       this.attributes = attributes;
       return this;
     }
 
-    /** A short one-line description of the product, meant to be displayable to the customer. */
+    /**
+     * A short one-line description of the product, meant to be displayable to the customer. May
+     * only be set if type=`good`.
+     */
     public Builder setCaption(String caption) {
       this.caption = caption;
       return this;
     }
 
-    /** A short one-line description of the product, meant to be displayable to the customer. */
+    /**
+     * A short one-line description of the product, meant to be displayable to the customer. May
+     * only be set if type=`good`.
+     */
     public Builder setCaption(EmptyParam caption) {
       this.caption = caption;
       return this;
@@ -285,13 +303,21 @@ public class ProductUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The product's description, meant to be displayable to the customer. */
+    /**
+     * The product's description, meant to be displayable to the customer. Use this field to
+     * optionally store a long form explanation of the product being sold for your own rendering
+     * purposes.
+     */
     public Builder setDescription(String description) {
       this.description = description;
       return this;
     }
 
-    /** The product's description, meant to be displayable to the customer. */
+    /**
+     * The product's description, meant to be displayable to the customer. Use this field to
+     * optionally store a long form explanation of the product being sold for your own rendering
+     * purposes.
+     */
     public Builder setDescription(EmptyParam description) {
       this.description = description;
       return this;
@@ -379,6 +405,7 @@ public class ProductUpdateParams extends ApiRequestParams {
 
     /**
      * A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
+     * May only be set if type=`good`.
      */
     public Builder setImages(EmptyParam images) {
       this.images = images;
@@ -387,6 +414,7 @@ public class ProductUpdateParams extends ApiRequestParams {
 
     /**
      * A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
+     * May only be set if type=`good`.
      */
     public Builder setImages(List<String> images) {
       this.images = images;
@@ -420,8 +448,8 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The product's name, meant to be displayable to the customer. Applicable to both `service` and
-     * `good` types.
+     * The product's name, meant to be displayable to the customer. Whenever this product is sold
+     * via a subscription, name will show up on associated invoice line item descriptions.
      */
     public Builder setName(String name) {
       this.name = name;
@@ -429,8 +457,8 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The product's name, meant to be displayable to the customer. Applicable to both `service` and
-     * `good` types.
+     * The product's name, meant to be displayable to the customer. Whenever this product is sold
+     * via a subscription, name will show up on associated invoice line item descriptions.
      */
     public Builder setName(EmptyParam name) {
       this.name = name;
@@ -439,7 +467,7 @@ public class ProductUpdateParams extends ApiRequestParams {
 
     /**
      * The dimensions of this product for shipping purposes. A SKU associated with this product can
-     * override this value by having its own `package_dimensions`.
+     * override this value by having its own `package_dimensions`. May only be set if type=`good`.
      */
     public Builder setPackageDimensions(PackageDimensions packageDimensions) {
       this.packageDimensions = packageDimensions;
@@ -448,14 +476,17 @@ public class ProductUpdateParams extends ApiRequestParams {
 
     /**
      * The dimensions of this product for shipping purposes. A SKU associated with this product can
-     * override this value by having its own `package_dimensions`.
+     * override this value by having its own `package_dimensions`. May only be set if type=`good`.
      */
     public Builder setPackageDimensions(EmptyParam packageDimensions) {
       this.packageDimensions = packageDimensions;
       return this;
     }
 
-    /** Whether this product is shipped (i.e., physical goods). Defaults to `true`. */
+    /**
+     * Whether this product is shipped (i.e., physical goods). Defaults to `true`. May only be set
+     * if type=`good`.
+     */
     public Builder setShippable(Boolean shippable) {
       this.shippable = shippable;
       return this;
@@ -466,8 +497,7 @@ public class ProductUpdateParams extends ApiRequestParams {
      * to 22 characters. The statement description may not include "' characters, and will appear on
      * your customer's statement in capital letters. Non-ASCII characters are automatically
      * stripped. While most banks display this information consistently, some may display it
-     * incorrectly or not at all. It must contain at least one letter. May only be set if
-     * type=`service`.
+     * incorrectly or not at all. It must contain at least one letter.
      */
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
@@ -479,8 +509,7 @@ public class ProductUpdateParams extends ApiRequestParams {
      * to 22 characters. The statement description may not include "' characters, and will appear on
      * your customer's statement in capital letters. Non-ASCII characters are automatically
      * stripped. While most banks display this information consistently, some may display it
-     * incorrectly or not at all. It must contain at least one letter. May only be set if
-     * type=`service`.
+     * incorrectly or not at all. It must contain at least one letter.
      */
     public Builder setStatementDescriptor(EmptyParam statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
@@ -488,8 +517,8 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * A label that represents units of this product, such as seat(s), in Stripe and on customers’
-     * receipts and invoices. Only available on products of type=`service`.
+     * A label that represents units of this product in Stripe and on customers’ receipts and
+     * invoices. When set, this will be included in associated invoice line item descriptions.
      */
     public Builder setUnitLabel(String unitLabel) {
       this.unitLabel = unitLabel;
@@ -497,21 +526,19 @@ public class ProductUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * A label that represents units of this product, such as seat(s), in Stripe and on customers’
-     * receipts and invoices. Only available on products of type=`service`.
+     * A label that represents units of this product in Stripe and on customers’ receipts and
+     * invoices. When set, this will be included in associated invoice line item descriptions.
      */
     public Builder setUnitLabel(EmptyParam unitLabel) {
       this.unitLabel = unitLabel;
       return this;
     }
 
-    /** A URL of a publicly-accessible webpage for this product. */
     public Builder setUrl(String url) {
       this.url = url;
       return this;
     }
 
-    /** A URL of a publicly-accessible webpage for this product. */
     public Builder setUrl(EmptyParam url) {
       this.url = url;
       return this;
