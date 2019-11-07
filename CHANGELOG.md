@@ -1,5 +1,12 @@
 # Changelog
 
+## 15.2.0 - 2019-11-06
+* [#889](https://github.com/stripe/stripe-java/pull/889) Multiple API changes:
+  * Add `disputed` on `Charge`.
+  * Add `payment_intent` on ` Dispute` and `Refund`.
+  * Add `payment_intent` when creating a `Refund`.
+  * Add `payment_intent` filter when listing `Refund` and `Dispute`.
+
 ## 15.1.0 - 2019-11-06
 * [#888](https://github.com/stripe/stripe-java/pull/888) Add support for SEPA and iDEAL on `PaymentMethod` and `Mandate`
 
