@@ -1,5 +1,11 @@
 # Changelog
 
+## 15.3.0 - 2019-11-07
+* [#890](https://github.com/stripe/stripe-java/pull/890) Multiple API changes
+  * Add `company` and `individual` to Issuing `Cardholder`
+  * Add `sepa_debit` to `PaymentMethodUpdateParams`
+* [#891](https://github.com/stripe/stripe-java/pull/891) Replace Cobertura with JaCoCo
+
 ## 15.2.0 - 2019-11-06
 * [#889](https://github.com/stripe/stripe-java/pull/889) Multiple API changes:
   * Add `disputed` on `Charge`.
