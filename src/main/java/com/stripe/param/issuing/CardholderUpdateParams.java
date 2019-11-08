@@ -23,6 +23,10 @@ public class CardholderUpdateParams extends ApiRequestParams {
   @SerializedName("billing")
   Billing billing;
 
+  /** Additional information about a `business_entity` cardholder. */
+  @SerializedName("company")
+  Company company;
+
   /** The cardholder's email address. */
   @SerializedName("email")
   Object email;
@@ -39,6 +43,10 @@ public class CardholderUpdateParams extends ApiRequestParams {
    */
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
+
+  /** Additional information about an `individual` cardholder. */
+  @SerializedName("individual")
+  Individual individual;
 
   /** Specifies whether to set this as the default cardholder. */
   @SerializedName("is_default")
@@ -66,18 +74,22 @@ public class CardholderUpdateParams extends ApiRequestParams {
   private CardholderUpdateParams(
       AuthorizationControls authorizationControls,
       Billing billing,
+      Company company,
       Object email,
       List<String> expand,
       Map<String, Object> extraParams,
+      Individual individual,
       Boolean isDefault,
       Map<String, String> metadata,
       Object phoneNumber,
       Status status) {
     this.authorizationControls = authorizationControls;
     this.billing = billing;
+    this.company = company;
     this.email = email;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.individual = individual;
     this.isDefault = isDefault;
     this.metadata = metadata;
     this.phoneNumber = phoneNumber;
@@ -93,11 +105,15 @@ public class CardholderUpdateParams extends ApiRequestParams {
 
     private Billing billing;
 
+    private Company company;
+
     private Object email;
 
     private List<String> expand;
 
     private Map<String, Object> extraParams;
+
+    private Individual individual;
 
     private Boolean isDefault;
 
@@ -112,9 +128,11 @@ public class CardholderUpdateParams extends ApiRequestParams {
       return new CardholderUpdateParams(
           this.authorizationControls,
           this.billing,
+          this.company,
           this.email,
           this.expand,
           this.extraParams,
+          this.individual,
           this.isDefault,
           this.metadata,
           this.phoneNumber,
@@ -134,6 +152,12 @@ public class CardholderUpdateParams extends ApiRequestParams {
     /** The cardholder's billing address. */
     public Builder setBilling(Billing billing) {
       this.billing = billing;
+      return this;
+    }
+
+    /** Additional information about a `business_entity` cardholder. */
+    public Builder setCompany(Company company) {
+      this.company = company;
       return this;
     }
 
@@ -198,6 +222,12 @@ public class CardholderUpdateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /** Additional information about an `individual` cardholder. */
+    public Builder setIndividual(Individual individual) {
+      this.individual = individual;
       return this;
     }
 
@@ -3518,6 +3548,485 @@ public class CardholderUpdateParams extends ApiRequestParams {
         public Builder setState(EmptyParam state) {
           this.state = state;
           return this;
+        }
+      }
+    }
+  }
+
+  @Getter
+  public static class Company {
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** The entity's business ID number. */
+    @SerializedName("tax_id")
+    Object taxId;
+
+    private Company(Map<String, Object> extraParams, Object taxId) {
+      this.extraParams = extraParams;
+      this.taxId = taxId;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Map<String, Object> extraParams;
+
+      private Object taxId;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public Company build() {
+        return new Company(this.extraParams, this.taxId);
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * CardholderUpdateParams.Company#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CardholderUpdateParams.Company#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** The entity's business ID number. */
+      public Builder setTaxId(String taxId) {
+        this.taxId = taxId;
+        return this;
+      }
+
+      /** The entity's business ID number. */
+      public Builder setTaxId(EmptyParam taxId) {
+        this.taxId = taxId;
+        return this;
+      }
+    }
+  }
+
+  @Getter
+  public static class Individual {
+    /** The date of birth of this cardholder. */
+    @SerializedName("dob")
+    Dob dob;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** The first name of this cardholder. */
+    @SerializedName("first_name")
+    Object firstName;
+
+    /** The last name of this cardholder. */
+    @SerializedName("last_name")
+    Object lastName;
+
+    /** Government-issued ID document for this cardholder. */
+    @SerializedName("verification")
+    Verification verification;
+
+    private Individual(
+        Dob dob,
+        Map<String, Object> extraParams,
+        Object firstName,
+        Object lastName,
+        Verification verification) {
+      this.dob = dob;
+      this.extraParams = extraParams;
+      this.firstName = firstName;
+      this.lastName = lastName;
+      this.verification = verification;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Dob dob;
+
+      private Map<String, Object> extraParams;
+
+      private Object firstName;
+
+      private Object lastName;
+
+      private Verification verification;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public Individual build() {
+        return new Individual(
+            this.dob, this.extraParams, this.firstName, this.lastName, this.verification);
+      }
+
+      /** The date of birth of this cardholder. */
+      public Builder setDob(Dob dob) {
+        this.dob = dob;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * CardholderUpdateParams.Individual#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CardholderUpdateParams.Individual#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** The first name of this cardholder. */
+      public Builder setFirstName(String firstName) {
+        this.firstName = firstName;
+        return this;
+      }
+
+      /** The first name of this cardholder. */
+      public Builder setFirstName(EmptyParam firstName) {
+        this.firstName = firstName;
+        return this;
+      }
+
+      /** The last name of this cardholder. */
+      public Builder setLastName(String lastName) {
+        this.lastName = lastName;
+        return this;
+      }
+
+      /** The last name of this cardholder. */
+      public Builder setLastName(EmptyParam lastName) {
+        this.lastName = lastName;
+        return this;
+      }
+
+      /** Government-issued ID document for this cardholder. */
+      public Builder setVerification(Verification verification) {
+        this.verification = verification;
+        return this;
+      }
+    }
+
+    @Getter
+    public static class Dob {
+      /** The day of birth, between 1 and 31. */
+      @SerializedName("day")
+      Long day;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      /** The month of birth, between 1 and 12. */
+      @SerializedName("month")
+      Long month;
+
+      /** The four-digit year of birth. */
+      @SerializedName("year")
+      Long year;
+
+      private Dob(Long day, Map<String, Object> extraParams, Long month, Long year) {
+        this.day = day;
+        this.extraParams = extraParams;
+        this.month = month;
+        this.year = year;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Long day;
+
+        private Map<String, Object> extraParams;
+
+        private Long month;
+
+        private Long year;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Dob build() {
+          return new Dob(this.day, this.extraParams, this.month, this.year);
+        }
+
+        /** The day of birth, between 1 and 31. */
+        public Builder setDay(Long day) {
+          this.day = day;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CardholderUpdateParams.Individual.Dob#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CardholderUpdateParams.Individual.Dob#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+
+        /** The month of birth, between 1 and 12. */
+        public Builder setMonth(Long month) {
+          this.month = month;
+          return this;
+        }
+
+        /** The four-digit year of birth. */
+        public Builder setYear(Long year) {
+          this.year = year;
+          return this;
+        }
+      }
+    }
+
+    @Getter
+    public static class Verification {
+      /** An identifying document, either a passport or local ID card. */
+      @SerializedName("document")
+      Document document;
+
+      /**
+       * Map of extra parameters for custom features not available in this client library. The
+       * content in this map is not serialized under this field's {@code @SerializedName} value.
+       * Instead, each key/value pair is serialized as if the key is a root-level field (serialized)
+       * name in this param object. Effectively, this map is flattened to its parent instance.
+       */
+      @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+      Map<String, Object> extraParams;
+
+      private Verification(Document document, Map<String, Object> extraParams) {
+        this.document = document;
+        this.extraParams = extraParams;
+      }
+
+      public static Builder builder() {
+        return new Builder();
+      }
+
+      public static class Builder {
+        private Document document;
+
+        private Map<String, Object> extraParams;
+
+        /** Finalize and obtain parameter instance from this builder. */
+        public Verification build() {
+          return new Verification(this.document, this.extraParams);
+        }
+
+        /** An identifying document, either a passport or local ID card. */
+        public Builder setDocument(Document document) {
+          this.document = document;
+          return this;
+        }
+
+        /**
+         * Add a key/value pair to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CardholderUpdateParams.Individual.Verification#extraParams} for the field
+         * documentation.
+         */
+        public Builder putExtraParam(String key, Object value) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.put(key, value);
+          return this;
+        }
+
+        /**
+         * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+         * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+         * map. See {@link CardholderUpdateParams.Individual.Verification#extraParams} for the field
+         * documentation.
+         */
+        public Builder putAllExtraParam(Map<String, Object> map) {
+          if (this.extraParams == null) {
+            this.extraParams = new HashMap<>();
+          }
+          this.extraParams.putAll(map);
+          return this;
+        }
+      }
+
+      @Getter
+      public static class Document {
+        /**
+         * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
+         * `identity_document`.
+         */
+        @SerializedName("back")
+        Object back;
+
+        /**
+         * Map of extra parameters for custom features not available in this client library. The
+         * content in this map is not serialized under this field's {@code @SerializedName} value.
+         * Instead, each key/value pair is serialized as if the key is a root-level field
+         * (serialized) name in this param object. Effectively, this map is flattened to its parent
+         * instance.
+         */
+        @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+        Map<String, Object> extraParams;
+
+        /**
+         * The front of an ID returned by a [file upload](#create_file) with a `purpose` value of
+         * `identity_document`.
+         */
+        @SerializedName("front")
+        Object front;
+
+        private Document(Object back, Map<String, Object> extraParams, Object front) {
+          this.back = back;
+          this.extraParams = extraParams;
+          this.front = front;
+        }
+
+        public static Builder builder() {
+          return new Builder();
+        }
+
+        public static class Builder {
+          private Object back;
+
+          private Map<String, Object> extraParams;
+
+          private Object front;
+
+          /** Finalize and obtain parameter instance from this builder. */
+          public Document build() {
+            return new Document(this.back, this.extraParams, this.front);
+          }
+
+          /**
+           * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
+           * `identity_document`.
+           */
+          public Builder setBack(String back) {
+            this.back = back;
+            return this;
+          }
+
+          /**
+           * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
+           * `identity_document`.
+           */
+          public Builder setBack(EmptyParam back) {
+            this.back = back;
+            return this;
+          }
+
+          /**
+           * Add a key/value pair to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link CardholderUpdateParams.Individual.Verification.Document#extraParams}
+           * for the field documentation.
+           */
+          public Builder putExtraParam(String key, Object value) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.put(key, value);
+            return this;
+          }
+
+          /**
+           * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+           * `put/putAll` call, and subsequent calls add additional key/value pairs to the original
+           * map. See {@link CardholderUpdateParams.Individual.Verification.Document#extraParams}
+           * for the field documentation.
+           */
+          public Builder putAllExtraParam(Map<String, Object> map) {
+            if (this.extraParams == null) {
+              this.extraParams = new HashMap<>();
+            }
+            this.extraParams.putAll(map);
+            return this;
+          }
+
+          /**
+           * The front of an ID returned by a [file upload](#create_file) with a `purpose` value of
+           * `identity_document`.
+           */
+          public Builder setFront(String front) {
+            this.front = front;
+            return this;
+          }
+
+          /**
+           * The front of an ID returned by a [file upload](#create_file) with a `purpose` value of
+           * `identity_document`.
+           */
+          public Builder setFront(EmptyParam front) {
+            this.front = front;
+            return this;
+          }
         }
       }
     }

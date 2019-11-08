@@ -1827,7 +1827,10 @@ public class SessionCreateParams extends ApiRequestParams {
 
   public enum PaymentMethodType implements ApiRequestParams.EnumParam {
     @SerializedName("card")
-    CARD("card");
+    CARD("card"),
+
+    @SerializedName("ideal")
+    IDEAL("ideal");
 
     @Getter(onMethod_ = {@Override})
     private final String value;
