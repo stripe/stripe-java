@@ -39,7 +39,7 @@ script:
   - ./gradlew --version
   - ./gradlew clean
   - if [ "$TRAVIS_JDK_VERSION" == "openjdk8" ]; then ./gradlew check; fi
-  - ./gradlew -Djdk.tls.client.protocols="TLSv1.2" cobertura coveralls
+  - ./gradlew -Djdk.tls.client.protocols="TLSv1.2" jacocoTestReport coveralls
 
 before_cache:
   - rm -f  $HOME/.gradle/caches/modules-2/modules-2.lock
