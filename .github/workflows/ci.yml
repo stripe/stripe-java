@@ -1,0 +1,53 @@
+name: CI
+
+on: [push, pull_request]
+
+jobs:
+  spotless:
+    name: Spotless
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Spotless
+        run: ./gradlew spotlessCheck
+
+  tests:
+    name: Tests
+
+    runs-on: ubuntu-latest
+
+    strategy:
+      fail-fast: false
+      matrix:
+        java-version:
+          - "1.8"
+          - "9.0"
+          - "10.0"
+          - "11.0"
+          - "12.0"
+
+    steps:
+      - uses: actions/checkout@master
+
+      - name: Setup Java
+        uses: actions/setup-java@master
+        with:
+          java-version: ${{ matrix.java-version }}
+          architecture: x64
+
+      - name: Start stripe-mock
+        run: docker run -d -p 12111-12112:12111-12112 stripemock/stripe-mock && sleep 5
+
+      - name: Run test suite
+        run: |
+          ./gradlew --version
+          ./gradlew check
+
+      - name: Send code coverage report to coveralls.io
+        run: ./gradlew jacocoTestReport coveralls
+        env:
+          CI_NAME: github-actions
+          COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
