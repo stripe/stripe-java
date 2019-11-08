@@ -12,10 +12,10 @@ buildscript {
 plugins {
     id 'java'
     id 'maven'
+    id 'jacoco'
     id 'io.franzbecker.gradle-lombok' version '3.2.0'
     id "com.diffplug.gradle.spotless" version "3.24.3"
     id "net.ltgt.errorprone" version "0.8.1"
-    id 'net.saliman.cobertura' version '2.6.1'
     id 'com.github.kt3k.coveralls' version '2.8.4'
     id 'biz.aQute.bnd.builder' version '4.2.0'
 }
@@ -132,8 +132,13 @@ spotless {
   }
 }
 
-cobertura {
-    coverageFormats = ['html', 'xml'] // coveralls plugin depends on xml format report
-    coverageIgnoreTrivial = true // ignore getters/setters in coverage report
-    coverageIgnoreMethodAnnotations = ["java.lang.Deprecated", "lombok.Generated"]
+jacocoTestReport {
+    reports {
+        xml.enabled = true // coveralls plugin depends on xml format report
+        html.enabled = true
+    }
+}
+
+coveralls {
+    jacocoReportPath 'build/reports/jacoco/test/jacocoTestReport.xml'
 }
