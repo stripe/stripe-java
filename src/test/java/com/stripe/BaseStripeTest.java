@@ -201,10 +201,10 @@ public class BaseStripeTest {
 
   /** Verifies that no request was made. */
   public static <T> void verifyNoRequest() {
-    Mockito.verifyZeroInteractions(networkSpy);
+    Mockito.verifyNoInteractions(networkSpy);
   }
 
-  /** Verifies that no additionalrequests were made since the last verification. */
+  /** Verifies that no additional requests were made since the last verification. */
   public static <T> void verifyNoMoreRequests() {
     Mockito.verifyNoMoreInteractions(networkSpy);
   }

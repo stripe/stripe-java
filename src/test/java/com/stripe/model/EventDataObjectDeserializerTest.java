@@ -109,8 +109,7 @@ public class EventDataObjectDeserializerTest extends BaseStripeTest {
       fail("Expect event data deserialization failure.");
     } catch (EventDataObjectDeserializationException e) {
       JsonElement originalEventData =
-          new JsonParser()
-              .parse(data)
+          JsonParser.parseString(data)
               .getAsJsonObject()
               .get("data")
               .getAsJsonObject()
