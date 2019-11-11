@@ -6,9 +6,9 @@
  * https://raw.github.com/chrisbanes/gradle-mvn-push/master/gradle-mvn-push.gradle
  */
 
-apply plugin: 'maven'
-apply plugin: 'signing'
-apply plugin: 'io.codearte.nexus-staging'
+apply plugin: "maven"
+apply plugin: "signing"
+apply plugin: "io.codearte.nexus-staging"
 
 nexusStaging {
     packageGroup = GROUP
@@ -19,21 +19,21 @@ def isReleaseBuild() {
 }
 
 def getReleaseRepositoryUrl() {
-    return hasProperty('RELEASE_REPOSITORY_URL') ? RELEASE_REPOSITORY_URL
+    return hasProperty("RELEASE_REPOSITORY_URL") ? RELEASE_REPOSITORY_URL
             : "https://oss.sonatype.org/service/local/staging/deploy/maven2/"
 }
 
 def getSnapshotRepositoryUrl() {
-    return hasProperty('SNAPSHOT_REPOSITORY_URL') ? SNAPSHOT_REPOSITORY_URL
+    return hasProperty("SNAPSHOT_REPOSITORY_URL") ? SNAPSHOT_REPOSITORY_URL
             : "https://oss.sonatype.org/content/repositories/snapshots/"
 }
 
 def getRepositoryUsername() {
-    return hasProperty('NEXUS_USERNAME') ? NEXUS_USERNAME : ""
+    return hasProperty("NEXUS_USERNAME") ? NEXUS_USERNAME : ""
 }
 
 def getRepositoryPassword() {
-    return hasProperty('NEXUS_PASSWORD') ? NEXUS_PASSWORD : ""
+    return hasProperty("NEXUS_PASSWORD") ? NEXUS_PASSWORD : ""
 }
 
 afterEvaluate { project ->
@@ -99,22 +99,22 @@ afterEvaluate { project ->
     }
 
     tasks.withType(Sign) {
-        onlyIf { isReleaseBuild() && project.hasProperty('signing.gnupg.keyName') }
+        onlyIf { isReleaseBuild() && project.hasProperty("signing.gnupg.keyName") }
     }
 
     task makeJavadocs(type: Javadoc, dependsOn: delombok) {
         source = delombok.outputDir
-        classpath = configurations.compile + configurations.annotationProcessor
+        classpath = configurations.compileClasspath + configurations.annotationProcessor
         failOnError = true
     }
 
     task makeJavadocsJar(type: Jar, dependsOn: makeJavadocs) {
-        classifier = 'javadoc'
+        classifier = "javadoc"
         from makeJavadocs.destinationDir
     }
 
     task sourcesJar(type: Jar, dependsOn: delombok) {
-        classifier = 'sources'
+        classifier = "sources"
         from delombok.outputDir
     }
 

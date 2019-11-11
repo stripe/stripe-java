@@ -11,12 +11,6 @@ import org.junit.jupiter.api.Test;
 public class MandateTest extends BaseStripeTest {
   public static final String MANDATE_ID = "mandate_123";
 
-  private Mandate getMandateFixture() throws StripeException {
-    final Mandate schedule = Mandate.retrieve(MANDATE_ID);
-    resetNetworkSpy();
-    return schedule;
-  }
-
   @Test
   public void testRetrieve() throws StripeException {
     final Mandate schedule = Mandate.retrieve(MANDATE_ID);

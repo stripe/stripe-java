@@ -10,14 +10,14 @@ buildscript {
 }
 
 plugins {
-    id 'java'
-    id 'maven'
-    id 'jacoco'
-    id 'io.franzbecker.gradle-lombok' version '3.2.0'
-    id "com.diffplug.gradle.spotless" version "3.24.3"
-    id "net.ltgt.errorprone" version "0.8.1"
-    id 'com.github.kt3k.coveralls' version '2.8.4'
-    id 'biz.aQute.bnd.builder' version '4.2.0'
+    id "java"
+    id "maven"
+    id "jacoco"
+    id "io.franzbecker.gradle-lombok" version "3.2.0"
+    id "com.diffplug.gradle.spotless" version "3.25.0"
+    id "net.ltgt.errorprone" version "1.1.1"
+    id "com.github.kt3k.coveralls" version "2.8.4"
+    id "biz.aQute.bnd.builder" version "4.2.0"
 }
 
 sourceCompatibility = 1.8
@@ -28,12 +28,16 @@ version = VERSION_NAME
 
 tasks.withType(JavaCompile) {
     options.compilerArgs << "-Xlint:all" << "-Xlint:-options" << "-Xlint:-processing"
-    options.encoding = 'UTF-8'
+    options.encoding = "UTF-8"
 
     options.errorprone {
       // This check is broken in Java 12.  See https://github.com/google/error-prone/issues/1257
       if ((JavaVersion.current().majorVersion as Integer) > 11) {
-        check('Finally', net.ltgt.gradle.errorprone.CheckSeverity.OFF)
+        check("Finally", net.ltgt.gradle.errorprone.CheckSeverity.OFF)
+      }
+      // This check is broken in Java 13.  See https://github.com/google/error-prone/issues/1106
+      if ((JavaVersion.current().majorVersion as Integer) > 12) {
+        check("TypeParameterUnusedInFormals", net.ltgt.gradle.errorprone.CheckSeverity.OFF)
       }
     }
 }
@@ -50,15 +54,15 @@ repositories {
 }
 
 dependencies {
-    compile group: 'com.google.code.gson', name: 'gson', version:'2.8.5'
-    errorprone group: 'com.google.errorprone', name: 'error_prone_core', version: '2.3.3'
-    errorproneJavac group: 'com.google.errorprone', name: 'javac', version:'9+181-r4173-1'
-    testCompile group: 'com.google.guava', name: 'guava', version:'28.1-jre'
-    testCompile group: 'org.mockito', name: 'mockito-core', version:'3.0.0'
-    testRuntime group: 'org.slf4j', name: 'slf4j-api', version: '1.7.28'
-    testImplementation group: 'com.squareup.okhttp3', name: 'mockwebserver', version: '4.2.0'
-    testImplementation group: 'org.junit.jupiter', name: 'junit-jupiter-api', version: '5.5.2'
-    testRuntimeOnly group: 'org.junit.jupiter', name: 'junit-jupiter-engine', version: '5.5.2'
+    errorprone group: "com.google.errorprone", name: "error_prone_core", version: "2.3.3"
+    errorproneJavac group: "com.google.errorprone", name: "javac", version:"9+181-r4173-1"
+    implementation group: "com.google.code.gson", name: "gson", version:"2.8.6"
+    testImplementation group: "com.google.guava", name: "guava", version:"28.1-jre"
+    testImplementation group: "com.squareup.okhttp3", name: "mockwebserver", version: "4.2.2"
+    testImplementation group: "org.mockito", name: "mockito-core", version:"3.1.0"
+    testImplementation group: "org.junit.jupiter", name: "junit-jupiter-api", version: "5.5.2"
+    testRuntimeOnly group: "org.junit.jupiter", name: "junit-jupiter-engine", version: "5.5.2"
+    testRuntimeOnly group: "org.slf4j", name: "slf4j-api", version: "1.7.29"
 }
 
 jar {
@@ -67,9 +71,9 @@ jar {
                    "Implementation-Version": VERSION_NAME,
                    "Implementation-Vendor": VENDOR_NAME,
                    "Bundle-SymbolicName": POM_ARTIFACT_ID,
-                   "Export-Package": 'com.stripe.*')
+                   "Export-Package": "com.stripe.*")
 
-        version = VERSION_NAME
+        archiveVersion = VERSION_NAME
     }
 }
 
@@ -108,14 +112,13 @@ task delombokHelp(type: DelombokTask) {
     args "--help"
 }
 
-
 javadoc {
     dependsOn delombok
     source = delombok.outputDir
     failOnError = true
 }
 
-apply from: 'deploy.gradle'
+apply from: "deploy.gradle"
 
 test {
     useJUnitPlatform()
@@ -127,7 +130,7 @@ test {
 
 spotless {
   java {
-    googleJavaFormat('1.7')
+    googleJavaFormat("1.7")
     removeUnusedImports()
   }
 }
@@ -140,5 +143,5 @@ jacocoTestReport {
 }
 
 coveralls {
-    jacocoReportPath 'build/reports/jacoco/test/jacocoTestReport.xml'
+    jacocoReportPath "build/reports/jacoco/test/jacocoTestReport.xml"
 }

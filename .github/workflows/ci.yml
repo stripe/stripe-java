@@ -28,6 +28,7 @@ jobs:
           - "10.0"
           - "11.0"
           - "12.0"
+          - "13.0"
 
     steps:
       - uses: actions/checkout@master
@@ -38,13 +39,17 @@ jobs:
           java-version: ${{ matrix.java-version }}
           architecture: x64
 
+      - name: Display version
+        run: ./gradlew --version
+
+      - name: Build artifacts
+        run: ./gradlew assemble
+
       - name: Start stripe-mock
         run: docker run -d -p 12111-12112:12111-12112 stripemock/stripe-mock && sleep 5
 
       - name: Run test suite
-        run: |
-          ./gradlew --version
-          ./gradlew check
+        run: ./gradlew check
 
       - name: Send code coverage report to coveralls.io
         run: ./gradlew jacocoTestReport coveralls
