@@ -21,9 +21,9 @@ class RequestTelemetry {
    * If telemetry is enabled and there is at least one metrics item in the queue, then add a {@code
    * X-Stripe-Client-Telemetry} header with the item; otherwise, do nothing.
    *
-   * @param headers The request headers.
+   * @param headers the request headers
    */
-  public void MaybeAddTelemetryHeader(Map<String, String> headers) {
+  public void maybeAddTelemetryHeader(Map<String, String> headers) {
     if (headers.containsKey("X-Stripe-Telemetry")) {
       return;
     }
@@ -45,10 +45,10 @@ class RequestTelemetry {
    * If telemetry is enabled and the queue is not full, then enqueue a new metrics item; otherwise,
    * do nothing.
    *
-   * @param response The Stripe response.
-   * @param duration The request duration.
+   * @param response the Stripe response
+   * @param duration the request duration
    */
-  public void MaybeEnqueueMetrics(StripeResponse response, Duration duration) {
+  public void maybeEnqueueMetrics(StripeResponse response, Duration duration) {
     if (!Stripe.enableTelemetry) {
       return;
     }
