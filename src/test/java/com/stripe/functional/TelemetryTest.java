@@ -25,8 +25,6 @@ import org.junit.jupiter.api.Test;
 public class TelemetryTest extends BaseStripeTest {
   @Test
   public void testTelemetryEnabled() throws StripeException, IOException, InterruptedException {
-    final JsonParser jsonParser = new JsonParser();
-
     @Cleanup MockWebServer server = new MockWebServer();
     server.enqueue(
         new MockResponse()
@@ -57,8 +55,7 @@ public class TelemetryTest extends BaseStripeTest {
     String telemetry1 = request2.getHeader("X-Stripe-Client-Telemetry");
     assertNotNull(telemetry1);
     JsonObject requestMetrics1 =
-        jsonParser
-            .parse(telemetry1)
+        JsonParser.parseString(telemetry1)
             .getAsJsonObject()
             .get("last_request_metrics")
             .getAsJsonObject();
@@ -72,8 +69,7 @@ public class TelemetryTest extends BaseStripeTest {
     String telemetry2 = request3.getHeader("X-Stripe-Client-Telemetry");
     assertNotNull(telemetry2);
     JsonObject requestMetrics2 =
-        jsonParser
-            .parse(telemetry2)
+        JsonParser.parseString(telemetry2)
             .getAsJsonObject()
             .get("last_request_metrics")
             .getAsJsonObject();
@@ -109,8 +105,6 @@ public class TelemetryTest extends BaseStripeTest {
 
   @Test
   public void testTelemetryWorksWithConcurrentRequests() throws IOException, InterruptedException {
-    final JsonParser jsonParser = new JsonParser();
-
     @Cleanup MockWebServer server = new MockWebServer();
 
     for (int i = 0; i < 20; i++) {
@@ -173,8 +167,7 @@ public class TelemetryTest extends BaseStripeTest {
       String telemetry = request.getHeader("X-Stripe-Client-Telemetry");
       assertNotNull(telemetry);
       JsonObject requestMetrics =
-          jsonParser
-              .parse(telemetry)
+          JsonParser.parseString(telemetry)
               .getAsJsonObject()
               .get("last_request_metrics")
               .getAsJsonObject();
