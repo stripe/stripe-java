@@ -1,14 +1,12 @@
 package com.stripe.net;
 
 import java.io.File;
-import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.lang.reflect.Array;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
-import java.util.AbstractMap;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
@@ -18,6 +16,30 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 final class FormEncoder {
+  public static HttpContent createHttpContent(Map<String, Object> params) throws IOException {
+    // If params is null, we create an empty HttpContent because we still want to send the
+    // Content-Type header.
+    if (params == null) {
+      return HttpContent.buildFormURLEncodedContent(new ArrayList<KeyValuePair<String, String>>());
+    }
+
+    Collection<KeyValuePair<String, Object>> flatParams = flattenParamsValue(params, null);
+
+    // If all parameters have been encoded as strings, then the content can be represented
+    // with application/x-www-form-url-encoded encoding. Otherwise, use
+    // multipart/form-data encoding.
+    if (flatParams.stream().allMatch(kvp -> kvp.getValue() instanceof String)) {
+      Collection<KeyValuePair<String, String>> flatParamsString =
+          flatParams.stream()
+              .filter(kvp -> kvp.getValue() instanceof String)
+              .map(kvp -> new KeyValuePair<String, String>(kvp.getKey(), (String) kvp.getValue()))
+              .collect(Collectors.toList());
+      return HttpContent.buildFormURLEncodedContent(flatParamsString);
+    } else {
+      return HttpContent.buildMultipartFormDataContent(flatParams);
+    }
+  }
+
   /**
    * Creates the HTTP query string for a given map of parameters.
    *
@@ -38,39 +60,12 @@ final class FormEncoder {
   }
 
   /**
-   * Encode multipart params as a counter-part method to {@link this#createQueryString(Map)} for
-   * encoding params for non-multipart requests.
-   *
-   * @param multipartProcessor multi-part processor handling encoding of input stream and basic
-   *     key-value forms.
-   * @param params parameter map that can contain file or input stream.
-   */
-  public static void encodeMultipartParams(
-      MultipartProcessor multipartProcessor, Map<String, Object> params) throws IOException {
-    Collection<KeyValuePair<String, Object>> flatParams = flattenParamsValue(params, null);
-
-    for (KeyValuePair<String, Object> entry : flatParams) {
-      String key = entry.getKey();
-      Object value = entry.getValue();
-
-      if (value instanceof File) {
-        File file = (File) value;
-        multipartProcessor.addFileField(key, file.getName(), new FileInputStream(file));
-      } else if (value instanceof InputStream) {
-        multipartProcessor.addFileField(key, "blob", (InputStream) value);
-      } else {
-        multipartProcessor.addFormField(key, (String) value);
-      }
-    }
-  }
-
-  /**
    * Creates the HTTP query string for a collection of name/value tuples.
    *
    * @param params The collection of name/value tuples.
    * @return The query string.
    */
-  private static String createQueryString(
+  public static String createQueryString(
       Collection<KeyValuePair<String, String>> nameValueCollection) {
     if (nameValueCollection == null) {
       return "";
@@ -288,13 +283,5 @@ final class FormEncoder {
     }
 
     return newArray;
-  }
-
-  private static class KeyValuePair<K, V> extends AbstractMap.SimpleEntry<K, V> {
-    private static final long serialVersionUID = 1L;
-
-    public KeyValuePair(K key, V value) {
-      super(key, value);
-    }
   }
 }
