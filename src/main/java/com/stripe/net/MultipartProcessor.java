@@ -6,7 +6,6 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.URLConnection;
-import java.util.Random;
 
 public class MultipartProcessor {
   private final String boundary;
@@ -14,24 +13,12 @@ public class MultipartProcessor {
   private OutputStream outputStream;
   private PrintWriter writer;
 
-  /**
-   * Generates a random MIME multipart boundary.
-   *
-   * @return boundary value
-   */
-  public static String getBoundary() {
-    Random random = new Random();
-    Long positiveRandomLong = random.nextLong();
-    positiveRandomLong = (positiveRandomLong == Long.MIN_VALUE) ? 0 : Math.abs(positiveRandomLong);
-    return String.valueOf(positiveRandomLong);
-  }
-
   /** Constructs a new multipart body builder. */
-  public MultipartProcessor(java.net.HttpURLConnection conn, String boundary, String charset)
+  public MultipartProcessor(OutputStream outputStream, String boundary, String charset)
       throws IOException {
     this.boundary = boundary;
 
-    this.outputStream = conn.getOutputStream();
+    this.outputStream = outputStream;
     this.writer = new PrintWriter(new OutputStreamWriter(outputStream, charset), true);
   }
 
