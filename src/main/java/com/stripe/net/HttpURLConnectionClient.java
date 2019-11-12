@@ -4,6 +4,7 @@ import com.stripe.Stripe;
 import com.stripe.exception.ApiConnectionException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.InvalidRequestException;
+import com.stripe.util.Stopwatch;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -14,7 +15,6 @@ import java.net.HttpURLConnection;
 import java.net.PasswordAuthentication;
 import java.net.URL;
 import java.net.URLStreamHandler;
-import java.time.Duration;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -58,7 +58,7 @@ public class HttpURLConnectionClient extends HttpClient {
 
     StripeResponse response;
 
-    long requestStartNanos = System.nanoTime();
+    Stopwatch stopwatch = Stopwatch.startNew();
 
     switch (request.type()) {
       case NORMAL:
@@ -77,9 +77,9 @@ public class HttpURLConnectionClient extends HttpClient {
                 + "support@stripe.com for assistance.");
     }
 
-    Duration requestDuration = Duration.ofNanos(System.nanoTime() - requestStartNanos);
+    stopwatch.stop();
 
-    requestTelemetry.MaybeEnqueueMetrics(response, requestDuration);
+    requestTelemetry.MaybeEnqueueMetrics(response, stopwatch.getElapsed());
 
     return response;
   }
