@@ -90,8 +90,7 @@ public class HttpURLConnectionClient extends HttpClient {
       Map<String, Object> params,
       RequestOptions options)
       throws ApiConnectionException {
-    String query = FormEncoder.createQueryString(params);
-    return makeUrlConnectionRequest(method, url, query, options);
+    return makeUrlConnectionRequest(method, url, params, options);
   }
 
   private static StripeResponse getMultipartStripeResponse(
@@ -115,21 +114,14 @@ public class HttpURLConnectionClient extends HttpClient {
     try {
       conn = createStripeConnection(url, options);
 
-      String boundary = MultipartProcessor.getBoundary();
+      HttpContent httpContent = FormEncoder.createHttpContent(params);
+
       conn.setDoOutput(true);
       conn.setRequestMethod("POST");
-      conn.setRequestProperty(
-          "Content-Type", String.format("multipart/form-data; boundary=%s", boundary));
+      conn.setRequestProperty("Content-Type", httpContent.contentType());
 
-      MultipartProcessor multipartProcessor = null;
-      try {
-        multipartProcessor = new MultipartProcessor(conn, boundary, ApiResource.CHARSET);
-        FormEncoder.encodeMultipartParams(multipartProcessor, params);
-      } finally {
-        if (multipartProcessor != null) {
-          multipartProcessor.finish();
-        }
-      }
+      @Cleanup OutputStream output = conn.getOutputStream();
+      output.write(httpContent.byteArrayContent());
 
       // trigger the request
       int responseCode = conn.getResponseCode();
@@ -296,8 +288,8 @@ public class HttpURLConnectionClient extends HttpClient {
   }
 
   private static HttpURLConnection createGetConnection(
-      String url, String query, RequestOptions options) throws IOException {
-    String getUrl = formatUrl(url, query);
+      String url, Map<String, Object> params, RequestOptions options) throws IOException {
+    String getUrl = formatUrl(url, FormEncoder.createQueryString(params));
     HttpURLConnection conn = createStripeConnection(getUrl, options);
     conn.setRequestMethod("GET");
 
@@ -305,24 +297,24 @@ public class HttpURLConnectionClient extends HttpClient {
   }
 
   private static HttpURLConnection createPostConnection(
-      String url, String query, RequestOptions options) throws IOException {
+      String url, Map<String, Object> params, RequestOptions options) throws IOException {
     HttpURLConnection conn = createStripeConnection(url, options);
+
+    HttpContent httpContent = FormEncoder.createHttpContent(params);
 
     conn.setDoOutput(true);
     conn.setRequestMethod("POST");
-    conn.setRequestProperty(
-        "Content-Type",
-        String.format("application/x-www-form-urlencoded;charset=%s", ApiResource.CHARSET));
+    conn.setRequestProperty("Content-Type", httpContent.contentType());
 
     @Cleanup OutputStream output = conn.getOutputStream();
-    output.write(query.getBytes(ApiResource.CHARSET));
+    output.write(httpContent.byteArrayContent());
 
     return conn;
   }
 
   private static HttpURLConnection createDeleteConnection(
-      String url, String query, RequestOptions options) throws IOException {
-    String deleteUrl = formatUrl(url, query);
+      String url, Map<String, Object> params, RequestOptions options) throws IOException {
+    String deleteUrl = formatUrl(url, FormEncoder.createQueryString(params));
     HttpURLConnection conn = createStripeConnection(deleteUrl, options);
     conn.setRequestMethod("DELETE");
 
@@ -339,19 +331,22 @@ public class HttpURLConnectionClient extends HttpClient {
   }
 
   private static StripeResponse makeUrlConnectionRequest(
-      ApiResource.RequestMethod method, String url, String query, RequestOptions options)
+      ApiResource.RequestMethod method,
+      String url,
+      Map<String, Object> params,
+      RequestOptions options)
       throws ApiConnectionException {
     HttpURLConnection conn = null;
     try {
       switch (method) {
         case GET:
-          conn = createGetConnection(url, query, options);
+          conn = createGetConnection(url, params, options);
           break;
         case POST:
-          conn = createPostConnection(url, query, options);
+          conn = createPostConnection(url, params, options);
           break;
         case DELETE:
-          conn = createDeleteConnection(url, query, options);
+          conn = createDeleteConnection(url, params, options);
           break;
         default:
           throw new ApiConnectionException(

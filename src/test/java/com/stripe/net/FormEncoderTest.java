@@ -2,19 +2,16 @@ package com.stripe.net;
 
 import static org.junit.Assert.assertThat;
 import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.when;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.BaseStripeTest;
-import com.stripe.exception.InvalidRequestException;
-import java.io.ByteArrayOutputStream;
-import java.io.File;
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.net.HttpURLConnection;
+import java.nio.charset.StandardCharsets;
 import java.time.Instant;
 import java.util.ArrayDeque;
 import java.util.ArrayList;
@@ -42,6 +39,87 @@ public class FormEncoderTest extends BaseStripeTest {
 
     @SerializedName("bar")
     BAR,
+  }
+
+  @Test
+  public void testCreateHttpContentNull() throws IOException {
+    HttpContent content = FormEncoder.createHttpContent(null);
+
+    assertNotNull(content);
+    assertEquals("application/x-www-form-urlencoded;charset=UTF-8", content.contentType());
+    assertEquals(0, content.byteArrayContent().length);
+  }
+
+  @Test
+  public void testCreateHttpContentNoStream() throws IOException {
+    final List<Object> nested = new ArrayList<>();
+    nested.add(1);
+    nested.add(2);
+    nested.add(3);
+
+    final Map<String, Object> params = new LinkedHashMap<>();
+    params.put("list", nested);
+    params.put("string", "String!");
+
+    HttpContent content = FormEncoder.createHttpContent(params);
+
+    assertNotNull(content);
+    assertEquals("application/x-www-form-urlencoded;charset=UTF-8", content.contentType());
+    assertEquals(46, content.byteArrayContent().length);
+    assertEquals(
+        "list[0]=1&list[1]=2&list[2]=3&string=String%21",
+        new String(content.byteArrayContent(), StandardCharsets.UTF_8));
+  }
+
+  @Test
+  public void testCreateHttpContentStream() throws IOException {
+    final List<Object> nested = new ArrayList<>();
+    nested.add(1);
+    nested.add(2);
+    nested.add(3);
+
+    final Map<String, Object> params = new LinkedHashMap<>();
+    params.put("list", nested);
+    params.put("stream", new ByteArrayInputStream("Hello world!".getBytes(StandardCharsets.UTF_8)));
+    params.put("string", "String!");
+
+    HttpContent content = FormEncoder.createHttpContent(params);
+
+    assertNotNull(content);
+    assertThat(content.contentType(), CoreMatchers.startsWith("multipart/form-data"));
+    assertEquals(594, content.byteArrayContent().length);
+
+    // The boundary will be a random GUID, so we just check for substrings.
+    // HttpContentTest has more exhaustive tests with a non-random boundary.
+    String result = new String(content.byteArrayContent(), StandardCharsets.UTF_8);
+    assertThat(
+        result,
+        CoreMatchers.containsString(
+            "Content-Disposition: form-data; name=\"list[0]\"\r\n\r\n1\r\n"));
+    assertThat(
+        result,
+        CoreMatchers.containsString(
+            "Content-Disposition: form-data; name=\"list[1]\"\r\n\r\n2\r\n"));
+    assertThat(
+        result,
+        CoreMatchers.containsString(
+            "Content-Disposition: form-data; name=\"list[2]\"\r\n\r\n3\r\n"));
+    assertThat(
+        result,
+        CoreMatchers.containsString(
+            "Content-Disposition: form-data; name=\"list[0]\"\r\n\r\n1\r\n"));
+    assertThat(
+        result,
+        CoreMatchers.containsString(
+            "Content-Disposition: form-data; name=\"list[0]\"\r\n\r\n1\r\n"));
+    assertThat(
+        result,
+        CoreMatchers.containsString(
+            "Content-Disposition: form-data; name=\"stream\"; filename=\"blob\"\r\nContent-Type: null\r\nContent-Transfer-Encoding: binary\r\n\r\nHello world!"));
+    assertThat(
+        result,
+        CoreMatchers.containsString(
+            "Content-Disposition: form-data; name=\"string\"\r\n\r\nString!\r\n"));
   }
 
   @Test
@@ -541,39 +619,5 @@ public class FormEncoderTest extends BaseStripeTest {
     assertEquals(
         "legal_entity[additional_owners][0][first_name]=Stripe",
         FormEncoder.createQueryString(params));
-  }
-
-  @Test
-  public void testEncodeMultipartParams() throws IOException, InvalidRequestException {
-    final HttpURLConnection mockConn = mock(HttpURLConnection.class);
-    final ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
-    when(mockConn.getOutputStream()).thenReturn(outputStream);
-    final MultipartProcessor multipartProcessor =
-        new MultipartProcessor(mockConn, "abc", ApiResource.CHARSET);
-
-    final Map<String, Object> params = new HashMap<>();
-    params.put("file", new File(getClass().getResource("/test.png").getFile()));
-
-    final Map<String, Object> nestedParams = new HashMap<>();
-    nestedParams.put("create", true);
-    nestedParams.put("expires_at", 123L);
-    params.put("file_link_data", nestedParams);
-
-    FormEncoder.encodeMultipartParams(multipartProcessor, params);
-
-    String encoded = outputStream.toString();
-
-    assertThat(
-        encoded,
-        CoreMatchers.containsString(
-            "Content-Disposition: form-data; name=\"file\"; filename=\"test.png\""));
-    assertThat(
-        encoded,
-        CoreMatchers.containsString(
-            "Content-Disposition: form-data; name=\"file_link_data[create]\""));
-    assertThat(
-        encoded,
-        CoreMatchers.containsString(
-            "Content-Disposition: form-data; name=\"file_link_data[expires_at]\""));
   }
 }
