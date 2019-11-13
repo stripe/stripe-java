@@ -33,8 +33,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       ApiResource.RequestType type,
       RequestOptions options)
       throws StripeException {
-    StripeRequest request = new StripeRequest(type, method, url, params, options);
-    StripeResponse response = httpClient.request(request);
+    StripeRequest request = new StripeRequest(method, url, params, options);
+    StripeResponse response = httpClient.requestWithTelemetry(request);
 
     int responseCode = response.code();
     String responseBody = response.body();
@@ -68,8 +68,8 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       ApiResource.RequestType type,
       RequestOptions options)
       throws StripeException {
-    StripeRequest request = new StripeRequest(type, method, url, params, options);
-    StripeResponse response = this.httpClient.request(request);
+    StripeRequest request = new StripeRequest(method, url, params, options);
+    StripeResponse response = this.httpClient.requestWithTelemetry(request);
 
     int responseCode = response.code();
     String responseBody = response.body();
