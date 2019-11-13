@@ -33,7 +33,7 @@ public class EphemeralKeyTest extends BaseStripeTest {
     final EphemeralKey key = EphemeralKey.create(params, options);
 
     assertNotNull(key);
-    verifyRequest(ApiResource.RequestMethod.POST, "/v1/ephemeral_keys", params, null, options);
+    verifyRequest(ApiResource.RequestMethod.POST, "/v1/ephemeral_keys", params, options);
   }
 
   @Test
@@ -67,7 +67,6 @@ public class EphemeralKeyTest extends BaseStripeTest {
         ImmutableMap.of(
             "customer", "cust_123",
             "issuing_card", "card_123"),
-        null,
         options);
   }
 
