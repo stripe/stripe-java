@@ -71,7 +71,6 @@ public class PagingIteratorTest extends BaseStripeTest {
             Mockito.anyString(),
             Mockito.<Map<String, Object>>any(),
             Mockito.<Class<PageableModelCollection>>any(),
-            Mockito.any(ApiResource.RequestType.class),
             Mockito.<RequestOptions>any());
   }
 
@@ -144,9 +143,9 @@ public class PagingIteratorTest extends BaseStripeTest {
     assertEquals("pm_126", models.get(3).getId());
     assertEquals("pm_127", models.get(4).getId());
 
-    verifyRequest(ApiResource.RequestMethod.GET, "/v1/pageable_models", page0Params, null, options);
-    verifyRequest(ApiResource.RequestMethod.GET, "/v1/pageable_models", page1Params, null, options);
-    verifyRequest(ApiResource.RequestMethod.GET, "/v1/pageable_models", page2Params, null, options);
+    verifyRequest(ApiResource.RequestMethod.GET, "/v1/pageable_models", page0Params, options);
+    verifyRequest(ApiResource.RequestMethod.GET, "/v1/pageable_models", page1Params, options);
+    verifyRequest(ApiResource.RequestMethod.GET, "/v1/pageable_models", page2Params, options);
     verifyNoMoreInteractions(networkSpy);
   }
 }

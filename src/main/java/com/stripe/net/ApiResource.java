@@ -123,11 +123,6 @@ public abstract class ApiResource extends StripeObject {
     DELETE
   }
 
-  public enum RequestType {
-    NORMAL,
-    MULTIPART
-  }
-
   /** URL-encodes a string. */
   public static String urlEncode(String str) {
     // Preserve original behavior that passing null for an object id will lead
@@ -165,17 +160,6 @@ public abstract class ApiResource extends StripeObject {
     return urlEncode(id);
   }
 
-  public static <T> T multipartRequest(
-      ApiResource.RequestMethod method,
-      String url,
-      Map<String, Object> params,
-      Class<T> clazz,
-      RequestOptions options)
-      throws StripeException {
-    return ApiResource.stripeResponseGetter.request(
-        method, url, params, clazz, ApiResource.RequestType.MULTIPART, options);
-  }
-
   public static <T> T request(
       ApiResource.RequestMethod method,
       String url,
@@ -194,8 +178,7 @@ public abstract class ApiResource extends StripeObject {
       Class<T> clazz,
       RequestOptions options)
       throws StripeException {
-    return ApiResource.stripeResponseGetter.request(
-        method, url, params, clazz, ApiResource.RequestType.NORMAL, options);
+    return ApiResource.stripeResponseGetter.request(method, url, params, clazz, options);
   }
 
   public static <T extends StripeCollectionInterface<?>> T requestCollection(
