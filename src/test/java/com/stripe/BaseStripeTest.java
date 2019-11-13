@@ -137,26 +137,24 @@ public class BaseStripeTest {
   }
 
   /**
-   * {@code params}, {@code requestType} and {@code options} defaults to {@code null}.
+   * {@code params} and {@code options} defaults to {@code null}.
    *
-   * @see BaseStripeTest#verifyRequest(ApiResource.RequestMethod, String, Map,
-   *     ApiResource.RequestType, RequestOptions)
+   * @see BaseStripeTest#verifyRequest(ApiResource.RequestMethod, String, Map, RequestOptions)
    */
   public static <T> void verifyRequest(ApiResource.RequestMethod method, String path)
       throws StripeException {
-    verifyRequest(method, path, null, null, null);
+    verifyRequest(method, path, null, null);
   }
 
   /**
-   * {@code requestType} and {@code options} defaults to {@code null}.
+   * {@code options} defaults to {@code null}.
    *
-   * @see BaseStripeTest#verifyRequest(ApiResource.RequestMethod, String, Map,
-   *     ApiResource.RequestType, RequestOptions)
+   * @see BaseStripeTest#verifyRequest(ApiResource.RequestMethod, String, Map, RequestOptions)
    */
   public static <T> void verifyRequest(
       ApiResource.RequestMethod method, String path, Map<String, Object> params)
       throws StripeException {
-    verifyRequest(method, path, params, null, null);
+    verifyRequest(method, path, params, null);
   }
 
   /**
@@ -165,15 +163,12 @@ public class BaseStripeTest {
    * @param method HTTP method (GET, POST or DELETE)
    * @param path request path (e.g. "/v1/charges"). Can also be an abolute URL.
    * @param params map containing the parameters. If null, the parameters are not checked.
-   * @param requestType request type (NORMAL or MULTIPART). If null, the request type is not
-   *     checked.
    * @param options request options. If null, the options are not checked.
    */
   public static <T> void verifyRequest(
       ApiResource.RequestMethod method,
       String path,
       Map<String, Object> params,
-      ApiResource.RequestType requestType,
       RequestOptions options)
       throws StripeException {
     String url;
@@ -191,9 +186,6 @@ public class BaseStripeTest {
                 ? Mockito.argThat(new ParamMapMatcher(params))
                 : Mockito.<Map<String, Object>>any(),
             Mockito.<Class<T>>any(),
-            (requestType != null)
-                ? Mockito.eq(requestType)
-                : Mockito.any(ApiResource.RequestType.class),
             (options != null)
                 ? Mockito.argThat(new RequestOptionsMatcher(options))
                 : Mockito.<RequestOptions>any());
@@ -210,22 +202,22 @@ public class BaseStripeTest {
   }
 
   /**
-   * {@code params}, {@code requestType} and {@code options} defaults to {@code null}.
+   * {@code params} and {@code options} defaults to {@code null}.
    *
-   * @see BaseStripeTest#stubRequest(ApiResource.RequestMethod, String, Map,
-   *     ApiResource.RequestType, RequestOptions, Class, String)
+   * @see BaseStripeTest#stubRequest(ApiResource.RequestMethod, String, Map, RequestOptions, Class,
+   *     String)
    */
   public static <T> void stubRequest(
       ApiResource.RequestMethod method, String path, Class<T> clazz, String response)
       throws StripeException {
-    stubRequest(method, path, null, null, null, clazz, response);
+    stubRequest(method, path, null, null, clazz, response);
   }
 
   /**
-   * {@code requestType} and {@code options} defaults to {@code null}.
+   * {@code options} defaults to {@code null}.
    *
-   * @see BaseStripeTest#stubRequest(ApiResource.RequestMethod, String, Map,
-   *     ApiResource.RequestType, RequestOptions, Class, String)
+   * @see BaseStripeTest#stubRequest(ApiResource.RequestMethod, String, Map, RequestOptions, Class,
+   *     String)
    */
   public static <T> void stubRequest(
       ApiResource.RequestMethod method,
@@ -234,7 +226,7 @@ public class BaseStripeTest {
       Class<T> clazz,
       String response)
       throws StripeException {
-    stubRequest(method, path, params, null, null, clazz, response);
+    stubRequest(method, path, params, null, clazz, response);
   }
 
   /**
@@ -244,8 +236,6 @@ public class BaseStripeTest {
    * @param method HTTP method (GET, POST or DELETE)
    * @param path request path (e.g. "/v1/charges"). Can also be an abolute URL.
    * @param params map containing the parameters. If null, the parameters are not checked.
-   * @param requestType request type (NORMAL or MULTIPART). If null, the request type is not
-   *     checked.
    * @param options request options. If null, the options are not checked.
    * @param clazz Class of the API resource that will be returned for the stubbed request.
    * @param response JSON payload of the API resource that will be returned for the stubbed request.
@@ -254,7 +244,6 @@ public class BaseStripeTest {
       ApiResource.RequestMethod method,
       String path,
       Map<String, Object> params,
-      ApiResource.RequestType requestType,
       RequestOptions options,
       Class<T> clazz,
       String response)
@@ -275,9 +264,6 @@ public class BaseStripeTest {
                 ? Mockito.argThat(new ParamMapMatcher(params))
                 : Mockito.<Map<String, Object>>any(),
             Mockito.<Class<T>>any(),
-            (requestType != null)
-                ? Mockito.eq(requestType)
-                : Mockito.any(ApiResource.RequestType.class),
             (options != null)
                 ? Mockito.argThat(new RequestOptionsMatcher(options))
                 : Mockito.<RequestOptions>any());
@@ -292,7 +278,6 @@ public class BaseStripeTest {
             Mockito.anyString(),
             Mockito.<Map<String, Object>>any(),
             Mockito.<Class<T>>any(),
-            Mockito.any(ApiResource.RequestType.class),
             Mockito.<RequestOptions>any());
   }
 

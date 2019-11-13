@@ -30,7 +30,6 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       String url,
       Map<String, Object> params,
       Class<T> clazz,
-      ApiResource.RequestType type,
       RequestOptions options)
       throws StripeException {
     StripeRequest request = new StripeRequest(method, url, params, options);
@@ -65,7 +64,6 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       String url,
       Map<String, Object> params,
       Class<T> clazz,
-      ApiResource.RequestType type,
       RequestOptions options)
       throws StripeException {
     StripeRequest request = new StripeRequest(method, url, params, options);
