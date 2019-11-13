@@ -31,12 +31,7 @@ public class FileTest extends BaseStripeTest {
     final com.stripe.model.File file = com.stripe.model.File.create(params);
 
     assertNotNull(file);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        "/v1/files",
-        params,
-        ApiResource.RequestType.MULTIPART,
-        null);
+    verifyRequest(ApiResource.RequestMethod.POST, "/v1/files", params, null);
   }
 
   @Test
@@ -63,7 +58,6 @@ public class FileTest extends BaseStripeTest {
             fileObject,
             "file_link_data",
             ImmutableMap.of("create", true, "expires_at", 123)),
-        ApiResource.RequestType.MULTIPART,
         null);
   }
 
@@ -88,12 +82,7 @@ public class FileTest extends BaseStripeTest {
     final com.stripe.model.File file = com.stripe.model.File.create(params);
 
     assertNotNull(file);
-    verifyRequest(
-        ApiResource.RequestMethod.POST,
-        "/v1/files",
-        params,
-        ApiResource.RequestType.MULTIPART,
-        null);
+    verifyRequest(ApiResource.RequestMethod.POST, "/v1/files", params, null);
   }
 
   @Test
