@@ -22,7 +22,24 @@ import com.stripe.model.oauth.OAuthError;
 import java.util.Map;
 
 public class LiveStripeResponseGetter implements StripeResponseGetter {
-  private final HttpClient httpClient = new HttpURLConnectionClient();
+  private final HttpClient httpClient;
+
+  /**
+   * Initializes a new instance of the {@link LiveStripeResponseGetter} class with default
+   * parameters.
+   */
+  public LiveStripeResponseGetter() {
+    this(null);
+  }
+
+  /**
+   * Initializes a new instance of the {@link LiveStripeResponseGetter} class.
+   *
+   * @param httpClient the HTTP client to use
+   */
+  public LiveStripeResponseGetter(HttpClient httpClient) {
+    this.httpClient = (httpClient != null) ? httpClient : buildDefaultHttpClient();
+  }
 
   @Override
   public <T> T request(
@@ -33,7 +50,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       RequestOptions options)
       throws StripeException {
     StripeRequest request = new StripeRequest(method, url, params, options);
-    StripeResponse response = httpClient.requestWithTelemetry(request);
+    StripeResponse response = httpClient.requestWithRetries(request);
 
     int responseCode = response.code();
     String responseBody = response.body();
@@ -67,7 +84,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       RequestOptions options)
       throws StripeException {
     StripeRequest request = new StripeRequest(method, url, params, options);
-    StripeResponse response = this.httpClient.requestWithTelemetry(request);
+    StripeResponse response = this.httpClient.requestWithRetries(request);
 
     int responseCode = response.code();
     String responseBody = response.body();
@@ -90,6 +107,10 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
     }
 
     return resource;
+  }
+
+  private static HttpClient buildDefaultHttpClient() {
+    return new HttpURLConnectionClient();
   }
 
   private static void raiseMalformedJsonError(
