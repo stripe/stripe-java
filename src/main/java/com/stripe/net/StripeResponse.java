@@ -8,6 +8,7 @@ public class StripeResponse {
   int code;
   String body;
   StripeHeaders headers;
+  int numRetries;
 
   /** Constructs a Stripe response with the specified status code and body. */
   public StripeResponse(int code, String body) {
@@ -41,5 +42,13 @@ public class StripeResponse {
 
   public String requestId() {
     return (headers != null) ? headers.get("Request-Id") : null;
+  }
+
+  public int numRetries() {
+    return this.numRetries;
+  }
+
+  void setNumRetries(int numRetries) {
+    this.numRetries = numRetries;
   }
 }
