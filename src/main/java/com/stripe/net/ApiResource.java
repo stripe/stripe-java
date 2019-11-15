@@ -27,13 +27,15 @@ import java.util.Map;
 import java.util.Objects;
 
 public abstract class ApiResource extends StripeObject {
+  public static final String CHARSET = StandardCharsets.UTF_8.name();
+
   private static StripeResponseGetter stripeResponseGetter = new LiveStripeResponseGetter();
+
+  public static final Gson GSON = createGson();
 
   public static void setStripeResponseGetter(StripeResponseGetter srg) {
     ApiResource.stripeResponseGetter = srg;
   }
-
-  public static final Gson GSON = createGson();
 
   private static Gson createGson() {
     GsonBuilder builder =
@@ -114,8 +116,6 @@ public abstract class ApiResource extends StripeObject {
       throws InvalidRequestException {
     return String.format("%s/%s/%ss", classUrl(clazz, apiBase), urlEncode(id), className(subClazz));
   }
-
-  public static final String CHARSET = StandardCharsets.UTF_8.name();
 
   public enum RequestMethod {
     GET,

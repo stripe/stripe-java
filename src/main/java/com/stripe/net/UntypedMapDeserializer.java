@@ -16,6 +16,9 @@ import java.util.Map;
  * representation (using GSON) to a generic {@code Map<String, Object>}.
  */
 public class UntypedMapDeserializer {
+  /** Strategy for this deserializer. */
+  private Strategy strategy;
+
   /**
    * Strategy to deserialize a JSON element, allowing for custom interactions between the
    * deserialized element and its outer map. For example, for a full JSON: { "foo": 1, "foo_inner":
@@ -42,9 +45,6 @@ public class UntypedMapDeserializer {
         Map.Entry<String, JsonElement> jsonEntry,
         UntypedMapDeserializer untypedMapDeserializer);
   }
-
-  /** Strategy for this deserializer. */
-  private Strategy strategy;
 
   /**
    * Default deserializer for the untyped map. The result untyped map has same object graph
