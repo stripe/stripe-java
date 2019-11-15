@@ -1,5 +1,7 @@
 package com.stripe.net;
 
+import static java.util.Objects.requireNonNull;
+
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
@@ -39,9 +41,7 @@ public class HttpContent {
    */
   public static HttpContent buildFormURLEncodedContent(
       Collection<KeyValuePair<String, String>> nameValueCollection) throws IOException {
-    if (nameValueCollection == null) {
-      throw new IllegalArgumentException("nameValueCollection may not be null");
-    }
+    requireNonNull(nameValueCollection);
 
     return new HttpContent(
         FormEncoder.createQueryString(nameValueCollection).getBytes(ApiResource.CHARSET),
@@ -74,9 +74,7 @@ public class HttpContent {
   public static HttpContent buildMultipartFormDataContent(
       Collection<KeyValuePair<String, Object>> nameValueCollection, String boundary)
       throws IOException {
-    if (nameValueCollection == null) {
-      throw new IllegalArgumentException("nameValueCollection may not be null");
-    }
+    requireNonNull(nameValueCollection);
 
     ByteArrayOutputStream baos = new ByteArrayOutputStream();
     MultipartProcessor multipartProcessor = null;

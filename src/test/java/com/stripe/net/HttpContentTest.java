@@ -2,7 +2,6 @@ package com.stripe.net;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
-import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.stripe.BaseStripeTest;
 import java.io.ByteArrayInputStream;
@@ -14,32 +13,30 @@ import org.junit.jupiter.api.Test;
 
 public class HttpContentTest extends BaseStripeTest {
   @Test
-  public void TestBuildFormURLEncodedContentNull() throws IOException {
-    Throwable exception =
-        assertThrows(
-            IllegalArgumentException.class,
-            () -> {
-              HttpContent.buildFormURLEncodedContent(null);
-            });
-    assertTrue(exception.getMessage().contains("nameValueCollection may not be null"));
+  public void testBuildFormURLEncodedContentNull() throws IOException {
+    assertThrows(
+        NullPointerException.class,
+        () -> {
+          HttpContent.buildFormURLEncodedContent(null);
+        });
   }
 
   @Test
-  public void TestBuildFormURLEncodedContentEmptySourceSuccess() throws IOException {
+  public void testBuildFormURLEncodedContentEmptySourceSuccess() throws IOException {
     HttpContent content =
         HttpContent.buildFormURLEncodedContent(new ArrayList<KeyValuePair<String, String>>());
     assertEquals(0, content.byteArrayContent().length);
   }
 
   @Test
-  public void TestBuildFormURLEncodedContentEmptySourceCorrectContentType() throws IOException {
+  public void testBuildFormURLEncodedContentEmptySourceCorrectContentType() throws IOException {
     HttpContent content =
         HttpContent.buildFormURLEncodedContent(new ArrayList<KeyValuePair<String, String>>());
     assertEquals("application/x-www-form-urlencoded;charset=UTF-8", content.contentType());
   }
 
   @Test
-  public void TestBuildFormURLEncodedContentOneEntrySeparatedByEquals() throws IOException {
+  public void testBuildFormURLEncodedContentOneEntrySeparatedByEquals() throws IOException {
     List<KeyValuePair<String, String>> data = new ArrayList<KeyValuePair<String, String>>();
     data.add(new KeyValuePair<String, String>("key", "value"));
 
@@ -49,7 +46,7 @@ public class HttpContentTest extends BaseStripeTest {
   }
 
   @Test
-  public void TestBuildFormURLEncodedContentOneUnicodeEntryEncoded() throws IOException {
+  public void testBuildFormURLEncodedContentOneUnicodeEntryEncoded() throws IOException {
     List<KeyValuePair<String, String>> data = new ArrayList<KeyValuePair<String, String>>();
     data.add(new KeyValuePair<String, String>("key", "valueク"));
 
@@ -60,7 +57,7 @@ public class HttpContentTest extends BaseStripeTest {
   }
 
   @Test
-  public void TestBuildFormURLEncodedContentTwoEntriesSeparatedByAnd() throws IOException {
+  public void testBuildFormURLEncodedContentTwoEntriesSeparatedByAnd() throws IOException {
     List<KeyValuePair<String, String>> data = new ArrayList<KeyValuePair<String, String>>();
     data.add(new KeyValuePair<String, String>("key1", "value1"));
     data.add(new KeyValuePair<String, String>("key2", "value2"));
@@ -72,7 +69,7 @@ public class HttpContentTest extends BaseStripeTest {
   }
 
   @Test
-  public void TestBuildFormURLEncodedContentWithSpacesEncodedAsPlus() throws IOException {
+  public void testBuildFormURLEncodedContentWithSpacesEncodedAsPlus() throws IOException {
     List<KeyValuePair<String, String>> data = new ArrayList<KeyValuePair<String, String>>();
     data.add(new KeyValuePair<String, String>("key 1", "val%20ue 1"));
     data.add(new KeyValuePair<String, String>("key 2", "val%ue 2"));
@@ -85,7 +82,7 @@ public class HttpContentTest extends BaseStripeTest {
   }
 
   @Test
-  public void TestBuildFormURLEncodedContentWithSquareBracketsUnencoded() throws IOException {
+  public void testBuildFormURLEncodedContentWithSquareBracketsUnencoded() throws IOException {
     List<KeyValuePair<String, String>> data = new ArrayList<KeyValuePair<String, String>>();
     data.add(new KeyValuePair<String, String>("key[subkey]", "[#value]"));
 
@@ -96,18 +93,16 @@ public class HttpContentTest extends BaseStripeTest {
   }
 
   @Test
-  public void TestBuildMultipartFormDataContentNull() throws IOException {
-    Throwable exception =
-        assertThrows(
-            IllegalArgumentException.class,
-            () -> {
-              HttpContent.buildMultipartFormDataContent(null);
-            });
-    assertTrue(exception.getMessage().contains("nameValueCollection may not be null"));
+  public void testBuildMultipartFormDataContentNull() throws IOException {
+    assertThrows(
+        NullPointerException.class,
+        () -> {
+          HttpContent.buildMultipartFormDataContent(null);
+        });
   }
 
   @Test
-  public void TestBuildMultipartFormDataContentNullEmptySourceCorrectContentType()
+  public void testBuildMultipartFormDataContentNullEmptySourceCorrectContentType()
       throws IOException {
     HttpContent content =
         HttpContent.buildMultipartFormDataContent(
@@ -116,7 +111,7 @@ public class HttpContentTest extends BaseStripeTest {
   }
 
   @Test
-  public void TestBuildMultipartFormDataContentNullEmptySourceSuccess() throws IOException {
+  public void testBuildMultipartFormDataContentNullEmptySourceSuccess() throws IOException {
     List<KeyValuePair<String, Object>> data = new ArrayList<KeyValuePair<String, Object>>();
 
     HttpContent content = HttpContent.buildMultipartFormDataContent(data, "test-boundary");
@@ -126,7 +121,7 @@ public class HttpContentTest extends BaseStripeTest {
   }
 
   @Test
-  public void TestBuildMultipartFormDataContentNullOneStringEntrySuccess() throws IOException {
+  public void testBuildMultipartFormDataContentNullOneStringEntrySuccess() throws IOException {
     List<KeyValuePair<String, Object>> data = new ArrayList<KeyValuePair<String, Object>>();
     data.add(new KeyValuePair<String, Object>("key", "valueク"));
 
@@ -139,7 +134,7 @@ public class HttpContentTest extends BaseStripeTest {
   }
 
   @Test
-  public void TestBuildMultipartFormDataContentNullOneStreamEntrySuccess() throws IOException {
+  public void testBuildMultipartFormDataContentNullOneStreamEntrySuccess() throws IOException {
     List<KeyValuePair<String, Object>> data = new ArrayList<KeyValuePair<String, Object>>();
     data.add(
         new KeyValuePair<String, Object>(
@@ -155,7 +150,7 @@ public class HttpContentTest extends BaseStripeTest {
   }
 
   @Test
-  public void TestBuildMultipartFormDataContentNullTwoEntriesSuccess() throws IOException {
+  public void testBuildMultipartFormDataContentNullTwoEntriesSuccess() throws IOException {
     List<KeyValuePair<String, Object>> data = new ArrayList<KeyValuePair<String, Object>>();
     data.add(
         new KeyValuePair<String, Object>(
