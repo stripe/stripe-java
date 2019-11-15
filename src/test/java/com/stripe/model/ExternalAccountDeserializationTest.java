@@ -69,12 +69,12 @@ public class ExternalAccountDeserializationTest extends BaseStripeTest {
     assertNotNull(externalAccounts);
 
     for (ExternalAccount externalAccount : externalAccounts) {
-      String btId = externalAccount.getId();
+      String eaId = externalAccount.getId();
 
-      if (btId.equals("card_123")) {
+      if ("card_123".equals(eaId)) {
         Card card = (Card) externalAccount;
         assertEquals("card", card.getObject());
-      } else if (btId.equals("ba_123")) {
+      } else if ("ba_123".equals(eaId)) {
         BankAccount bankAccount = (BankAccount) externalAccount;
         assertEquals("bank_account", bankAccount.getObject());
       } else {

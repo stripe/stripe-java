@@ -9,7 +9,6 @@ import com.stripe.net.StripeResponse;
 import java.lang.reflect.Field;
 
 public abstract class StripeObject {
-
   public static final Gson PRETTY_PRINT_GSON =
       new GsonBuilder()
           .setPrettyPrinting()
@@ -17,6 +16,10 @@ public abstract class StripeObject {
           .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
           .registerTypeAdapter(ExpandableField.class, new ExpandableFieldSerializer())
           .create();
+
+  private transient StripeResponse lastResponse;
+
+  private transient JsonObject rawJsonObject;
 
   @Override
   public String toString() {
@@ -60,10 +63,6 @@ public abstract class StripeObject {
   public String toJson() {
     return PRETTY_PRINT_GSON.toJson(this);
   }
-
-  private transient StripeResponse lastResponse;
-
-  private transient JsonObject rawJsonObject;
 
   private Object getIdString() {
     try {

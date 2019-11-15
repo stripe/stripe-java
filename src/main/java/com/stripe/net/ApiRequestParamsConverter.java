@@ -24,6 +24,17 @@ import java.util.Map;
  * converting from JSON.
  */
 class ApiRequestParamsConverter {
+  private static final Gson GSON =
+      new GsonBuilder()
+          .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
+          .registerTypeAdapterFactory(
+              new ApiRequestParamsConverter.HasEmptyEnumTypeAdapterFactory())
+          .registerTypeAdapterFactory(new HasNullMetadataTypeAdapterFactory())
+          .create();
+
+  private static final UntypedMapDeserializer FLATTENING_EXTRA_PARAMS_DESERIALIZER =
+      new UntypedMapDeserializer(new ExtraParamsFlatteningStrategy());
+
   /** Strategy to flatten extra params in the API request parameters. */
   private static class ExtraParamsFlatteningStrategy implements UntypedMapDeserializer.Strategy {
     @Override
@@ -174,17 +185,6 @@ class ApiRequestParamsConverter {
       return (TypeAdapter<T>) paramEnum.nullSafe();
     }
   }
-
-  private static final Gson GSON =
-      new GsonBuilder()
-          .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-          .registerTypeAdapterFactory(
-              new ApiRequestParamsConverter.HasEmptyEnumTypeAdapterFactory())
-          .registerTypeAdapterFactory(new HasNullMetadataTypeAdapterFactory())
-          .create();
-
-  private static final UntypedMapDeserializer FLATTENING_EXTRA_PARAMS_DESERIALIZER =
-      new UntypedMapDeserializer(new ExtraParamsFlatteningStrategy());
 
   /**
    * Convert the given request params into an untyped map. This map is composed of {@code

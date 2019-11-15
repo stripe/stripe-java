@@ -6,17 +6,6 @@ import lombok.EqualsAndHashCode;
 
 @EqualsAndHashCode(callSuper = false)
 public class RequestOptions {
-  public static RequestOptions getDefault() {
-    return new RequestOptions(
-        Stripe.apiKey,
-        Stripe.clientId,
-        null,
-        null,
-        null,
-        Stripe.getConnectTimeout(),
-        Stripe.getReadTimeout());
-  }
-
   private final String apiKey;
   private final String clientId;
   private final String idempotencyKey;
@@ -31,6 +20,17 @@ public class RequestOptions {
 
   private final int connectTimeout;
   private final int readTimeout;
+
+  public static RequestOptions getDefault() {
+    return new RequestOptions(
+        Stripe.apiKey,
+        Stripe.clientId,
+        null,
+        null,
+        null,
+        Stripe.getConnectTimeout(),
+        Stripe.getReadTimeout());
+  }
 
   private RequestOptions(
       String apiKey,

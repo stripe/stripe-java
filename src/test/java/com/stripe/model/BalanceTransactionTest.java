@@ -43,49 +43,49 @@ public class BalanceTransactionTest extends BaseStripeTest {
     for (BalanceTransaction bt : bts) {
       String btId = bt.getId();
 
-      if (btId.equals("txn_100")) {
+      if ("txn_100".equals(btId)) {
         ApplicationFee btSource = (ApplicationFee) bt.getSourceObject();
         assertNotNull(btSource);
         assertEquals("application_fee", btSource.getObject());
-      } else if (btId.equals("txn_101")) {
+      } else if ("txn_101".equals(btId)) {
         Charge btSource = (Charge) bt.getSourceObject();
         assertNotNull(btSource);
         assertEquals("charge", btSource.getObject());
-      } else if (btId.equals("txn_102")) {
+      } else if ("txn_102".equals(btId)) {
         Dispute btSource = (Dispute) bt.getSourceObject();
         assertNotNull(btSource);
         assertEquals("dispute", btSource.getObject());
-      } else if (btId.equals("txn_103")) {
+      } else if ("txn_103".equals(btId)) {
         Payout btSource = (Payout) bt.getSourceObject();
         assertNotNull(btSource);
         assertEquals("payout", btSource.getObject());
-      } else if (btId.equals("txn_104")) {
+      } else if ("txn_104".equals(btId)) {
         Refund btSource = (Refund) bt.getSourceObject();
         assertNotNull(btSource);
         assertEquals("refund", btSource.getObject());
-      } else if (btId.equals("txn_105")) {
+      } else if ("txn_105".equals(btId)) {
         Transfer btSource = (Transfer) bt.getSourceObject();
         assertNotNull(btSource);
         assertEquals("transfer", btSource.getObject());
-      } else if (btId.equals("txn_106")) {
+      } else if ("txn_106".equals(btId)) {
         TransferReversal btSource = (TransferReversal) bt.getSourceObject();
         assertNotNull(btSource);
         assertEquals("transfer_reversal", btSource.getObject());
-      } else if (btId.equals("txn_107")) {
+      } else if ("txn_107".equals(btId)) {
         Topup btSource = (Topup) bt.getSourceObject();
         assertNotNull(btSource);
         assertEquals("topup", btSource.getObject());
-      } else if (btId.equals("txn_108")) {
+      } else if ("txn_108".equals(btId)) {
         com.stripe.model.issuing.Authorization btSource =
             (com.stripe.model.issuing.Authorization) bt.getSourceObject();
         assertNotNull(btSource);
         assertEquals("issuing.authorization", btSource.getObject());
-      } else if (btId.equals("txn_109")) {
+      } else if ("txn_109".equals(btId)) {
         com.stripe.model.issuing.Transaction btSource =
             (com.stripe.model.issuing.Transaction) bt.getSourceObject();
         assertNotNull(btSource);
         assertEquals("issuing.transaction", btSource.getObject());
-      } else if (btId.equals("txn_110")) {
+      } else if ("txn_110".equals(btId)) {
         BalanceTransactionSourceTypeAdapterFactory.UnknownSubType btSource =
             (BalanceTransactionSourceTypeAdapterFactory.UnknownSubType) bt.getSourceObject();
         assertNotNull(btSource);
