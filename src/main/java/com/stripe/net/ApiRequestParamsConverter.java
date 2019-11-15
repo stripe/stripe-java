@@ -5,7 +5,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import com.google.gson.JsonParseException;
 import com.google.gson.TypeAdapter;
 import com.google.gson.TypeAdapterFactory;
 import com.google.gson.reflect.TypeToken;
@@ -14,8 +13,6 @@ import com.google.gson.stream.JsonWriter;
 import com.stripe.Stripe;
 import com.stripe.param.common.EmptyParam;
 import java.io.IOException;
-import java.lang.reflect.ParameterizedType;
-import java.lang.reflect.Type;
 import java.util.Map;
 
 /**
@@ -27,9 +24,8 @@ class ApiRequestParamsConverter {
   private static final Gson GSON =
       new GsonBuilder()
           .setFieldNamingPolicy(FieldNamingPolicy.LOWER_CASE_WITH_UNDERSCORES)
-          .registerTypeAdapterFactory(
-              new ApiRequestParamsConverter.HasEmptyEnumTypeAdapterFactory())
-          .registerTypeAdapterFactory(new HasNullMetadataTypeAdapterFactory())
+          .registerTypeAdapterFactory(new HasEmptyEnumTypeAdapterFactory())
+          .registerTypeAdapterFactory(new NullValuesInMapsTypeAdapterFactory())
           .create();
 
   private static final UntypedMapDeserializer FLATTENING_EXTRA_PARAMS_DESERIALIZER =
@@ -89,62 +85,35 @@ class ApiRequestParamsConverter {
     }
   }
 
-  private static class HasNullMetadataTypeAdapterFactory implements TypeAdapterFactory {
-    @SuppressWarnings("unchecked")
+  private static class NullValuesInMapsTypeAdapterFactory implements TypeAdapterFactory {
     @Override
     public <T> TypeAdapter<T> create(Gson gson, TypeToken<T> type) {
-      if (!Map.class.equals(type.getRawType())) {
+      if (!Map.class.isAssignableFrom(type.getRawType())) {
         return null;
       }
 
-      // If non-parameterized `Map` alone is given it cannot be metadata with string key/value
-      if (!(type.getType() instanceof ParameterizedType)) {
-        return null;
-      }
-      ParameterizedType parameterizedMap = (ParameterizedType) type.getType();
-      Type keyType = parameterizedMap.getActualTypeArguments()[0];
-      Type valueType = parameterizedMap.getActualTypeArguments()[1];
-
-      // Reject of other types that can't be metadata
-      if (!String.class.equals(keyType) || !String.class.equals(valueType)) {
-        return null;
-      }
-
-      TypeAdapter<Map<String, String>> paramEnum =
-          new TypeAdapter<Map<String, String>>() {
+      final TypeAdapter<T> delegate = gson.getDelegateAdapter(this, type);
+      final TypeAdapter<T> typeAdapter =
+          new TypeAdapter<T>() {
             @Override
-            public void write(JsonWriter out, Map<String, String> value) throws IOException {
-              if (value != null) {
-                boolean previousSetting = out.getSerializeNulls();
+            public void write(JsonWriter out, T value) throws IOException {
+              final boolean previousSetting = out.getSerializeNulls();
+
+              try {
                 out.setSerializeNulls(true);
-
-                out.beginObject();
-                value.entrySet().stream()
-                    .forEach(
-                        entry -> {
-                          try {
-                            out.name(entry.getKey());
-                            out.value(entry.getValue());
-                          } catch (IOException e) {
-                            throw new JsonParseException(
-                                String.format(
-                                    "Unable to serialize metadata with key=%ss, value=%s}",
-                                    entry.getKey(), entry.getValue()));
-                          }
-                        });
-
-                out.endObject();
+                delegate.write(out, value);
+              } finally {
                 out.setSerializeNulls(previousSetting);
               }
             }
 
             @Override
-            public Map<String, String> read(JsonReader in) {
-              throw new UnsupportedOperationException(
-                  "No deserialization is expected from this private type adapter.");
+            public T read(JsonReader in) throws IOException {
+              return delegate.read(in);
             }
           };
-      return (TypeAdapter<T>) paramEnum.nullSafe();
+
+      return typeAdapter.nullSafe();
     }
   }
 
