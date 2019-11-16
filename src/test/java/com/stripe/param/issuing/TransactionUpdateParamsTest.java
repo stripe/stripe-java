@@ -1,6 +1,7 @@
 package com.stripe.param.issuing;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import com.google.common.collect.ImmutableMap;
@@ -39,12 +40,14 @@ class TransactionUpdateParamsTest {
         TransactionUpdateParams.builder()
             .putMetadata("key_1", "value_1")
             .putMetadata("key_2", "value_2")
+            .putMetadata("key_null", null)
             .build();
 
     Map<String, Object> untypedParams = transactionUpdateParams.toMap();
     assertTrue(untypedParams.get("metadata") instanceof Map<?, ?>);
     assertEquals("value_1", ((Map<String, String>) untypedParams.get("metadata")).get("key_1"));
     assertEquals("value_2", ((Map<String, String>) untypedParams.get("metadata")).get("key_2"));
+    assertNull(((Map<String, String>) untypedParams.get("metadata")).get("key_null"));
   }
 
   @Test

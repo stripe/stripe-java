@@ -228,7 +228,7 @@ public class ApiRequestParamsConverterTest {
 
   @Test
   @SuppressWarnings("unchecked")
-  public void testMetadataWithNullValue() {
+  public void testMapsWithNullValue() {
     HasMetadataParams params = new HasMetadataParams();
     params.metadata = new HashMap<>();
     params.metadata.put("foo", "123");
@@ -236,7 +236,6 @@ public class ApiRequestParamsConverterTest {
 
     params.featureMap = new HashMap<>();
     params.featureMap.put("fooLong", 123L);
-    // should disappear
     params.featureMap.put("barLong", null);
 
     Map<String, Object> untypedParams = toMap(params);
@@ -249,8 +248,9 @@ public class ApiRequestParamsConverterTest {
 
     Map<String, String> featureMap = (Map<String, String>) untypedParams.get("feature_map");
 
-    assertEquals(featureMap.size(), 1);
+    assertEquals(featureMap.size(), 2);
     assertEquals(featureMap.get("fooLong"), 123L);
+    assertEquals(featureMap.get("barLong"), null);
   }
 
   private Map<String, Object> toMap(ApiRequestParams params) {
