@@ -146,8 +146,8 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
 
   /**
    * Configures how the quantity per period should be determined, can be either `metered` or
-   * `licensed`. `licensed` will automatically bill the `quantity` set for a plan when adding it to
-   * a subscription, `metered` will aggregate the total usage based on usage records. Defaults to
+   * `licensed`. `licensed` will automatically bill the `quantity` set when adding it to a
+   * subscription, `metered` will aggregate the total usage based on usage records. Defaults to
    * `licensed`.
    */
   @SerializedName("usage_type")

@@ -21,8 +21,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
   /**
    * The amount of the application fee (if any) that will be applied to the payment and transferred
    * to the application owner's Stripe account. For more information, see the PaymentIntents [use
-   * case for connected
-   * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
+   * case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
    */
   @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
@@ -58,7 +57,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
   /**
    * The parameters used to automatically create a Transfer when the payment is captured. For more
    * information, see the PaymentIntents [use case for connected
-   * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
+   * accounts](https://stripe.com/docs/payments/connected-accounts).
    */
   @SerializedName("transfer_data")
   TransferData transferData;
@@ -125,7 +124,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
      * The amount of the application fee (if any) that will be applied to the payment and
      * transferred to the application owner's Stripe account. For more information, see the
      * PaymentIntents [use case for connected
-     * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
+     * accounts](https://stripe.com/docs/payments/connected-accounts).
      */
     public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
       this.applicationFeeAmount = applicationFeeAmount;
@@ -207,7 +206,7 @@ public class PaymentIntentCaptureParams extends ApiRequestParams {
     /**
      * The parameters used to automatically create a Transfer when the payment is captured. For more
      * information, see the PaymentIntents [use case for connected
-     * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
+     * accounts](https://stripe.com/docs/payments/connected-accounts).
      */
     public Builder setTransferData(TransferData transferData) {
       this.transferData = transferData;

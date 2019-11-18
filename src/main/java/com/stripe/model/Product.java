@@ -25,7 +25,6 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
 
   /**
    * A list of up to 5 attributes that each SKU can provide values for (e.g., `["color", "size"]`).
-   * Only applicable to products of `type=good`.
    */
   @SerializedName("attributes")
   List<String> attributes;
@@ -227,9 +226,6 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   /**
    * Updates the specific product by setting the values of the parameters passed. Any parameters not
    * provided will be left unchanged.
-   *
-   * <p>Note that a product’s <code>attributes</code> are not editable. Instead, you would need to
-   * deactivate the existing product and create a new one with the new attribute values.
    */
   @Override
   public Product update(Map<String, Object> params) throws StripeException {
@@ -239,9 +235,6 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   /**
    * Updates the specific product by setting the values of the parameters passed. Any parameters not
    * provided will be left unchanged.
-   *
-   * <p>Note that a product’s <code>attributes</code> are not editable. Instead, you would need to
-   * deactivate the existing product and create a new one with the new attribute values.
    */
   @Override
   public Product update(Map<String, Object> params, RequestOptions options) throws StripeException {
@@ -256,9 +249,6 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   /**
    * Updates the specific product by setting the values of the parameters passed. Any parameters not
    * provided will be left unchanged.
-   *
-   * <p>Note that a product’s <code>attributes</code> are not editable. Instead, you would need to
-   * deactivate the existing product and create a new one with the new attribute values.
    */
   public Product update(ProductUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
@@ -267,9 +257,6 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   /**
    * Updates the specific product by setting the values of the parameters passed. Any parameters not
    * provided will be left unchanged.
-   *
-   * <p>Note that a product’s <code>attributes</code> are not editable. Instead, you would need to
-   * deactivate the existing product and create a new one with the new attribute values.
    */
   public Product update(ProductUpdateParams params, RequestOptions options) throws StripeException {
     String url =

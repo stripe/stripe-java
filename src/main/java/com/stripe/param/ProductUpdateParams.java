@@ -18,23 +18,23 @@ public class ProductUpdateParams extends ApiRequestParams {
 
   /**
    * A list of up to 5 alphanumeric attributes that each SKU can provide values for (e.g.,
-   * `["color", "size"]`). ' 'If a value for `attributes` is specified, the list specified will
-   * replace the existing attributes list on this product. Any attributes not present after the
-   * update will be deleted from the SKUs for this product. May only be set if type=`good`.
+   * `["color", "size"]`). If a value for `attributes` is specified, the list specified will replace
+   * the existing attributes list on this product. Any attributes not present after the update will
+   * be deleted from the SKUs for this product.
    */
   @SerializedName("attributes")
   Object attributes;
 
   /**
    * A short one-line description of the product, meant to be displayable to the customer. May only
-   * be set if type=`good`.
+   * be set if `type=good`.
    */
   @SerializedName("caption")
   Object caption;
 
   /**
    * An array of Connect application names or identifiers that should not be able to order the SKUs
-   * for this product. May only be set if type=`good`.
+   * for this product. May only be set if `type=good`.
    */
   @SerializedName("deactivate_on")
   List<String> deactivateOn;
@@ -62,7 +62,7 @@ public class ProductUpdateParams extends ApiRequestParams {
 
   /**
    * A list of up to 8 URLs of images for this product, meant to be displayable to the customer. May
-   * only be set if type=`good`.
+   * only be set if `type=good`.
    */
   @SerializedName("images")
   Object images;
@@ -83,14 +83,14 @@ public class ProductUpdateParams extends ApiRequestParams {
 
   /**
    * The dimensions of this product for shipping purposes. A SKU associated with this product can
-   * override this value by having its own `package_dimensions`. May only be set if type=`good`.
+   * override this value by having its own `package_dimensions`. May only be set if `type=good`.
    */
   @SerializedName("package_dimensions")
   Object packageDimensions;
 
   /**
    * Whether this product is shipped (i.e., physical goods). Defaults to `true`. May only be set if
-   * type=`good`.
+   * `type=good`.
    */
   @SerializedName("shippable")
   Boolean shippable;
@@ -100,18 +100,20 @@ public class ProductUpdateParams extends ApiRequestParams {
    * 22 characters. The statement description may not include "' characters, and will appear on your
    * customer's statement in capital letters. Non-ASCII characters are automatically stripped. While
    * most banks display this information consistently, some may display it incorrectly or not at
-   * all. It must contain at least one letter.
+   * all. It must contain at least one letter. May only be set if `type=service`.
    */
   @SerializedName("statement_descriptor")
   Object statementDescriptor;
 
   /**
    * A label that represents units of this product in Stripe and on customers’ receipts and
-   * invoices. When set, this will be included in associated invoice line item descriptions.
+   * invoices. When set, this will be included in associated invoice line item descriptions. May
+   * only be set if `type=service`.
    */
   @SerializedName("unit_label")
   Object unitLabel;
 
+  /** A URL of a publicly-accessible webpage for this product. May only be set if `type=good`. */
   @SerializedName("url")
   Object url;
 
@@ -239,9 +241,9 @@ public class ProductUpdateParams extends ApiRequestParams {
 
     /**
      * A list of up to 5 alphanumeric attributes that each SKU can provide values for (e.g.,
-     * `["color", "size"]`). ' 'If a value for `attributes` is specified, the list specified will
+     * `["color", "size"]`). If a value for `attributes` is specified, the list specified will
      * replace the existing attributes list on this product. Any attributes not present after the
-     * update will be deleted from the SKUs for this product. May only be set if type=`good`.
+     * update will be deleted from the SKUs for this product.
      */
     public Builder setAttributes(EmptyParam attributes) {
       this.attributes = attributes;
@@ -250,9 +252,9 @@ public class ProductUpdateParams extends ApiRequestParams {
 
     /**
      * A list of up to 5 alphanumeric attributes that each SKU can provide values for (e.g.,
-     * `["color", "size"]`). ' 'If a value for `attributes` is specified, the list specified will
+     * `["color", "size"]`). If a value for `attributes` is specified, the list specified will
      * replace the existing attributes list on this product. Any attributes not present after the
-     * update will be deleted from the SKUs for this product. May only be set if type=`good`.
+     * update will be deleted from the SKUs for this product.
      */
     public Builder setAttributes(List<String> attributes) {
       this.attributes = attributes;
@@ -261,7 +263,7 @@ public class ProductUpdateParams extends ApiRequestParams {
 
     /**
      * A short one-line description of the product, meant to be displayable to the customer. May
-     * only be set if type=`good`.
+     * only be set if `type=good`.
      */
     public Builder setCaption(String caption) {
       this.caption = caption;
@@ -270,7 +272,7 @@ public class ProductUpdateParams extends ApiRequestParams {
 
     /**
      * A short one-line description of the product, meant to be displayable to the customer. May
-     * only be set if type=`good`.
+     * only be set if `type=good`.
      */
     public Builder setCaption(EmptyParam caption) {
       this.caption = caption;
@@ -405,7 +407,7 @@ public class ProductUpdateParams extends ApiRequestParams {
 
     /**
      * A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
-     * May only be set if type=`good`.
+     * May only be set if `type=good`.
      */
     public Builder setImages(EmptyParam images) {
       this.images = images;
@@ -414,7 +416,7 @@ public class ProductUpdateParams extends ApiRequestParams {
 
     /**
      * A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
-     * May only be set if type=`good`.
+     * May only be set if `type=good`.
      */
     public Builder setImages(List<String> images) {
       this.images = images;
@@ -467,7 +469,7 @@ public class ProductUpdateParams extends ApiRequestParams {
 
     /**
      * The dimensions of this product for shipping purposes. A SKU associated with this product can
-     * override this value by having its own `package_dimensions`. May only be set if type=`good`.
+     * override this value by having its own `package_dimensions`. May only be set if `type=good`.
      */
     public Builder setPackageDimensions(PackageDimensions packageDimensions) {
       this.packageDimensions = packageDimensions;
@@ -476,7 +478,7 @@ public class ProductUpdateParams extends ApiRequestParams {
 
     /**
      * The dimensions of this product for shipping purposes. A SKU associated with this product can
-     * override this value by having its own `package_dimensions`. May only be set if type=`good`.
+     * override this value by having its own `package_dimensions`. May only be set if `type=good`.
      */
     public Builder setPackageDimensions(EmptyParam packageDimensions) {
       this.packageDimensions = packageDimensions;
@@ -485,7 +487,7 @@ public class ProductUpdateParams extends ApiRequestParams {
 
     /**
      * Whether this product is shipped (i.e., physical goods). Defaults to `true`. May only be set
-     * if type=`good`.
+     * if `type=good`.
      */
     public Builder setShippable(Boolean shippable) {
       this.shippable = shippable;
@@ -497,7 +499,8 @@ public class ProductUpdateParams extends ApiRequestParams {
      * to 22 characters. The statement description may not include "' characters, and will appear on
      * your customer's statement in capital letters. Non-ASCII characters are automatically
      * stripped. While most banks display this information consistently, some may display it
-     * incorrectly or not at all. It must contain at least one letter.
+     * incorrectly or not at all. It must contain at least one letter. May only be set if
+     * `type=service`.
      */
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
@@ -509,7 +512,8 @@ public class ProductUpdateParams extends ApiRequestParams {
      * to 22 characters. The statement description may not include "' characters, and will appear on
      * your customer's statement in capital letters. Non-ASCII characters are automatically
      * stripped. While most banks display this information consistently, some may display it
-     * incorrectly or not at all. It must contain at least one letter.
+     * incorrectly or not at all. It must contain at least one letter. May only be set if
+     * `type=service`.
      */
     public Builder setStatementDescriptor(EmptyParam statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
@@ -518,7 +522,8 @@ public class ProductUpdateParams extends ApiRequestParams {
 
     /**
      * A label that represents units of this product in Stripe and on customers’ receipts and
-     * invoices. When set, this will be included in associated invoice line item descriptions.
+     * invoices. When set, this will be included in associated invoice line item descriptions. May
+     * only be set if `type=service`.
      */
     public Builder setUnitLabel(String unitLabel) {
       this.unitLabel = unitLabel;
@@ -527,18 +532,21 @@ public class ProductUpdateParams extends ApiRequestParams {
 
     /**
      * A label that represents units of this product in Stripe and on customers’ receipts and
-     * invoices. When set, this will be included in associated invoice line item descriptions.
+     * invoices. When set, this will be included in associated invoice line item descriptions. May
+     * only be set if `type=service`.
      */
     public Builder setUnitLabel(EmptyParam unitLabel) {
       this.unitLabel = unitLabel;
       return this;
     }
 
+    /** A URL of a publicly-accessible webpage for this product. May only be set if `type=good`. */
     public Builder setUrl(String url) {
       this.url = url;
       return this;
     }
 
+    /** A URL of a publicly-accessible webpage for this product. May only be set if `type=good`. */
     public Builder setUrl(EmptyParam url) {
       this.url = url;
       return this;

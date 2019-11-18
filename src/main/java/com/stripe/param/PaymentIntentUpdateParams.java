@@ -18,8 +18,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
   /**
    * The amount of the application fee (if any) for the resulting payment. See the PaymentIntents
-   * [use case for connected
-   * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts) for
+   * [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for
    * details.
    */
   @SerializedName("application_fee_amount")
@@ -67,8 +66,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
   Map<String, String> metadata;
 
   /**
-   * ID of the payment method (a PaymentMethod, Card, BankAccount, or saved Source object) to attach
-   * to this PaymentIntent.
+   * ID of the payment method (a PaymentMethod, Card, or [compatible
+   * Source](https://stripe.com/docs/payments/payment-methods#compatibility) object) to attach to
+   * this PaymentIntent.
    */
   @SerializedName("payment_method")
   Object paymentMethod;
@@ -88,6 +88,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
    *
    * <p>If the payment method is already saved to a customer, this does nothing. If this type of
    * payment method cannot be saved to a customer, the request will error.
+   *
+   * <p>_Note that saving a payment method using this parameter does not guarantee that the payment
+   * method can be charged._ To ensure that only payment methods which can be charged are saved to a
+   * customer, you can [manually
+   * save](https://stripe.com/docs/api/customers/create#create_customer-source) the payment method
+   * in response to the [`payment_intent.succeeded`
+   * webhook](https://stripe.com/docs/api/events/types#event_types-payment_intent.succeeded).
    */
   @SerializedName("save_payment_method")
   Boolean savePaymentMethod;
@@ -147,7 +154,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
   /**
    * The parameters used to automatically create a Transfer when the payment succeeds. For more
    * information, see the PaymentIntents [use case for connected
-   * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
+   * accounts](https://stripe.com/docs/payments/connected-accounts).
    */
   @SerializedName("transfer_data")
   TransferData transferData;
@@ -155,8 +162,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
   /**
    * A string that identifies the resulting payment as part of a group. `transfer_group` may only be
    * provided if it has not been set. See the PaymentIntents [use case for connected
-   * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts) for
-   * details.
+   * accounts](https://stripe.com/docs/payments/connected-accounts) for details.
    */
   @SerializedName("transfer_group")
   Object transferGroup;
@@ -277,8 +283,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     /**
      * The amount of the application fee (if any) for the resulting payment. See the PaymentIntents
-     * [use case for connected
-     * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts) for
+     * [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for
      * details.
      */
     public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
@@ -288,8 +293,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
 
     /**
      * The amount of the application fee (if any) for the resulting payment. See the PaymentIntents
-     * [use case for connected
-     * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts) for
+     * [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for
      * details.
      */
     public Builder setApplicationFeeAmount(EmptyParam applicationFeeAmount) {
@@ -430,8 +434,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * ID of the payment method (a PaymentMethod, Card, BankAccount, or saved Source object) to
-     * attach to this PaymentIntent.
+     * ID of the payment method (a PaymentMethod, Card, or [compatible
+     * Source](https://stripe.com/docs/payments/payment-methods#compatibility) object) to attach to
+     * this PaymentIntent.
      */
     public Builder setPaymentMethod(String paymentMethod) {
       this.paymentMethod = paymentMethod;
@@ -439,8 +444,9 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * ID of the payment method (a PaymentMethod, Card, BankAccount, or saved Source object) to
-     * attach to this PaymentIntent.
+     * ID of the payment method (a PaymentMethod, Card, or [compatible
+     * Source](https://stripe.com/docs/payments/payment-methods#compatibility) object) to attach to
+     * this PaymentIntent.
      */
     public Builder setPaymentMethod(EmptyParam paymentMethod) {
       this.paymentMethod = paymentMethod;
@@ -492,6 +498,13 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
      *
      * <p>If the payment method is already saved to a customer, this does nothing. If this type of
      * payment method cannot be saved to a customer, the request will error.
+     *
+     * <p>_Note that saving a payment method using this parameter does not guarantee that the
+     * payment method can be charged._ To ensure that only payment methods which can be charged are
+     * saved to a customer, you can [manually
+     * save](https://stripe.com/docs/api/customers/create#create_customer-source) the payment method
+     * in response to the [`payment_intent.succeeded`
+     * webhook](https://stripe.com/docs/api/events/types#event_types-payment_intent.succeeded).
      */
     public Builder setSavePaymentMethod(Boolean savePaymentMethod) {
       this.savePaymentMethod = savePaymentMethod;
@@ -627,7 +640,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     /**
      * The parameters used to automatically create a Transfer when the payment succeeds. For more
      * information, see the PaymentIntents [use case for connected
-     * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
+     * accounts](https://stripe.com/docs/payments/connected-accounts).
      */
     public Builder setTransferData(TransferData transferData) {
       this.transferData = transferData;
@@ -637,8 +650,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     /**
      * A string that identifies the resulting payment as part of a group. `transfer_group` may only
      * be provided if it has not been set. See the PaymentIntents [use case for connected
-     * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts) for
-     * details.
+     * accounts](https://stripe.com/docs/payments/connected-accounts) for details.
      */
     public Builder setTransferGroup(String transferGroup) {
       this.transferGroup = transferGroup;
@@ -648,8 +660,7 @@ public class PaymentIntentUpdateParams extends ApiRequestParams {
     /**
      * A string that identifies the resulting payment as part of a group. `transfer_group` may only
      * be provided if it has not been set. See the PaymentIntents [use case for connected
-     * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts) for
-     * details.
+     * accounts](https://stripe.com/docs/payments/connected-accounts) for details.
      */
     public Builder setTransferGroup(EmptyParam transferGroup) {
       this.transferGroup = transferGroup;
