@@ -1,5 +1,10 @@
 # Changelog
 
+## 15.3.1 - 2019-11-18
+* [#903](https://github.com/stripe/stripe-java/pull/903) Serialize null values in all maps
+* [#901](https://github.com/stripe/stripe-java/pull/901) Minor code quality fixes
+* [#894](https://github.com/stripe/stripe-java/pull/894) Upgrade Gradle and other dependencies
+
 ## 15.3.0 - 2019-11-07
 * [#890](https://github.com/stripe/stripe-java/pull/890) Multiple API changes
   * Add `company` and `individual` to Issuing `Cardholder`
