@@ -16,7 +16,7 @@ Add this dependency to your project's POM:
 <dependency>
   <groupId>com.stripe</groupId>
   <artifactId>stripe-java</artifactId>
-  <version>15.3.1</version>
+  <version>15.4.0</version>
 </dependency>
 ```
 
@@ -25,7 +25,7 @@ Add this dependency to your project's POM:
 Add this dependency to your project's build file:
 
 ```groovy
-implementation "com.stripe:stripe-java:15.3.1"
+implementation "com.stripe:stripe-java:15.4.0"
 ```
 
 ### Others

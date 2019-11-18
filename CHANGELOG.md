@@ -1,5 +1,8 @@
 # Changelog
 
+## 15.4.0 - 2019-11-18
+* [#904](https://github.com/stripe/stripe-java/pull/904) Add support for `violated_authorization_controls` on Issuing `Authorization`
+
 ## 15.3.1 - 2019-11-18
 * [#903](https://github.com/stripe/stripe-java/pull/903) Serialize null values in all maps
 * [#901](https://github.com/stripe/stripe-java/pull/901) Minor code quality fixes
