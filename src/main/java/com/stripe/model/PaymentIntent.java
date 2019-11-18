@@ -42,8 +42,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
 
   /**
    * The amount of the application fee (if any) for the resulting payment. See the PaymentIntents
-   * [use case for connected
-   * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts) for
+   * [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for
    * details.
    */
   @SerializedName("application_fee_amount")
@@ -70,9 +69,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * <p>When the capture method is `automatic`, Stripe automatically captures funds when the
    * customer authorizes the payment.
    *
-   * <p>Change `capture_method` to manual if you wish to [separate authorization and
-   * capture](https://stripe.com/docs/payments/payment-intents/creating-payment-intents#separate-authorization-and-capture)
-   * for payment methods that support this.
+   * <p>Change `capture_method` to manual if you wish to use [separate authorization and
+   * capture](https://stripe.com/docs/payments/capture-later) for payment methods that support this.
    */
   @SerializedName("capture_method")
   String captureMethod;
@@ -89,8 +87,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * stored, logged, embedded in URLs, or exposed to anyone other than the customer. Make sure that
    * you have TLS enabled on any page that includes the client secret.
    *
-   * <p>Please refer to our [quickstart guide](https://stripe.com/docs/payments/payment-intents/web)
-   * to learn about how `client_secret` should be handled.
+   * <p>Refer to our docs to [accept a payment](https://stripe.com/docs/payments/accept-a-payment)
+   * and learn about how `client_secret` should be handled.
    */
   @SerializedName("client_secret")
   String clientSecret;
@@ -106,9 +104,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * key. The PaymentIntent returns to the `requires_confirmation` state after handling
    * `next_action`s, and requires your server to initiate each payment attempt with an explicit
    * confirmation.
-   *
-   * <p>Learn more about the different [confirmation
-   * flows](https://stripe.com/docs/payments/payment-intents/use-cases#one-time-payments).
    */
   @SerializedName("confirmation_method")
   String confirmationMethod;
@@ -151,7 +146,10 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Invoice> invoice;
 
-  /** The payment error encountered in the previous PaymentIntent confirmation. */
+  /**
+   * The payment error encountered in the previous PaymentIntent confirmation. It will be cleared if
+   * the PaymentIntent is later updated for any reason.
+   */
   @SerializedName("last_payment_error")
   StripeError lastPaymentError;
 
@@ -185,8 +183,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   /**
    * The account (if any) for which the funds of the PaymentIntent are intended. See the
    * PaymentIntents [use case for connected
-   * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts) for
-   * details.
+   * accounts](https://stripe.com/docs/payments/connected-accounts) for details.
    */
   @SerializedName("on_behalf_of")
   @Getter(lombok.AccessLevel.NONE)
@@ -226,8 +223,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    *
    * <p>Use `on_session` if you intend to only reuse the payment method when your customer is
    * present in your checkout flow. Use `off_session` if your customer may or may not be in your
-   * checkout flow. See [Saving card details after a
-   * payment](https://stripe.com/docs/payments/cards/saving-cards-after-payment) to learn more.
+   * checkout flow. For more, learn to [save card details after a
+   * payment](https://stripe.com/docs/payments/save-after-payment).
    *
    * <p>Stripe uses `setup_future_usage` to dynamically optimize your payment flow and comply with
    * regional legislation and network rules. For example, if your customer is impacted by
@@ -279,17 +276,14 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   /**
    * The data with which to automatically create a Transfer when the payment is finalized. See the
    * PaymentIntents [use case for connected
-   * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts) for
-   * details.
+   * accounts](https://stripe.com/docs/payments/connected-accounts) for details.
    */
   @SerializedName("transfer_data")
   TransferData transferData;
 
   /**
    * A string that identifies the resulting payment as part of a group. See the PaymentIntents [use
-   * case for connected
-   * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts) for
-   * details.
+   * case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.
    */
   @SerializedName("transfer_group")
   String transferGroup;
@@ -946,9 +940,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    *
    * <p>Uncaptured PaymentIntents will be canceled exactly seven days after they are created.
    *
-   * <p>Read the <a
-   * href="/docs/payments/payment-intents/creating-payment-intents#separate-auth-capture">expanded
-   * documentation</a> to learn more about separate authorization and capture.
+   * <p>Learn more about <a href="/docs/payments/capture-later">separate authorization and
+   * capture</a>.
    */
   public PaymentIntent capture() throws StripeException {
     return capture((Map<String, Object>) null, (RequestOptions) null);
@@ -960,9 +953,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    *
    * <p>Uncaptured PaymentIntents will be canceled exactly seven days after they are created.
    *
-   * <p>Read the <a
-   * href="/docs/payments/payment-intents/creating-payment-intents#separate-auth-capture">expanded
-   * documentation</a> to learn more about separate authorization and capture.
+   * <p>Learn more about <a href="/docs/payments/capture-later">separate authorization and
+   * capture</a>.
    */
   public PaymentIntent capture(RequestOptions options) throws StripeException {
     return capture((Map<String, Object>) null, options);
@@ -974,9 +966,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    *
    * <p>Uncaptured PaymentIntents will be canceled exactly seven days after they are created.
    *
-   * <p>Read the <a
-   * href="/docs/payments/payment-intents/creating-payment-intents#separate-auth-capture">expanded
-   * documentation</a> to learn more about separate authorization and capture.
+   * <p>Learn more about <a href="/docs/payments/capture-later">separate authorization and
+   * capture</a>.
    */
   public PaymentIntent capture(Map<String, Object> params) throws StripeException {
     return capture(params, (RequestOptions) null);
@@ -988,9 +979,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    *
    * <p>Uncaptured PaymentIntents will be canceled exactly seven days after they are created.
    *
-   * <p>Read the <a
-   * href="/docs/payments/payment-intents/creating-payment-intents#separate-auth-capture">expanded
-   * documentation</a> to learn more about separate authorization and capture.
+   * <p>Learn more about <a href="/docs/payments/capture-later">separate authorization and
+   * capture</a>.
    */
   public PaymentIntent capture(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -1009,9 +999,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    *
    * <p>Uncaptured PaymentIntents will be canceled exactly seven days after they are created.
    *
-   * <p>Read the <a
-   * href="/docs/payments/payment-intents/creating-payment-intents#separate-auth-capture">expanded
-   * documentation</a> to learn more about separate authorization and capture.
+   * <p>Learn more about <a href="/docs/payments/capture-later">separate authorization and
+   * capture</a>.
    */
   public PaymentIntent capture(PaymentIntentCaptureParams params) throws StripeException {
     return capture(params, (RequestOptions) null);
@@ -1023,9 +1012,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    *
    * <p>Uncaptured PaymentIntents will be canceled exactly seven days after they are created.
    *
-   * <p>Read the <a
-   * href="/docs/payments/payment-intents/creating-payment-intents#separate-auth-capture">expanded
-   * documentation</a> to learn more about separate authorization and capture.
+   * <p>Learn more about <a href="/docs/payments/capture-later">separate authorization and
+   * capture</a>.
    */
   public PaymentIntent capture(PaymentIntentCaptureParams params, RequestOptions options)
       throws StripeException {

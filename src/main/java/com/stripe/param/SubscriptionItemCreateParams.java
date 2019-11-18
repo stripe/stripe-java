@@ -69,8 +69,10 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
   String subscription;
 
   /**
-   * The tax rates which apply to this `subscription_item`. When set, the `default_tax_rates` on the
-   * subscription do not apply to this `subscription_item`.
+   * A list of [Tax Rate](https://stripe.com/docs/api/tax_rates) ids. These Tax Rates will override
+   * the
+   * [`default_tax_rates`](https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates)
+   * on the Subscription.
    */
   @SerializedName("tax_rates")
   Object taxRates;
@@ -311,8 +313,10 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The tax rates which apply to this `subscription_item`. When set, the `default_tax_rates` on
-     * the subscription do not apply to this `subscription_item`.
+     * A list of [Tax Rate](https://stripe.com/docs/api/tax_rates) ids. These Tax Rates will
+     * override the
+     * [`default_tax_rates`](https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates)
+     * on the Subscription.
      */
     public Builder setTaxRates(EmptyParam taxRates) {
       this.taxRates = taxRates;
@@ -320,8 +324,10 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The tax rates which apply to this `subscription_item`. When set, the `default_tax_rates` on
-     * the subscription do not apply to this `subscription_item`.
+     * A list of [Tax Rate](https://stripe.com/docs/api/tax_rates) ids. These Tax Rates will
+     * override the
+     * [`default_tax_rates`](https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates)
+     * on the Subscription.
      */
     public Builder setTaxRates(List<String> taxRates) {
       this.taxRates = taxRates;

@@ -25,8 +25,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   /**
    * The amount of the application fee (if any) that will be applied to the payment and transferred
    * to the application owner's Stripe account. For more information, see the PaymentIntents [use
-   * case for connected
-   * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
+   * case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
    */
   @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
@@ -37,9 +36,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
    * <p>When the capture method is `automatic`, Stripe automatically captures funds when the
    * customer authorizes the payment.
    *
-   * <p>Change `capture_method` to manual if you wish to [separate authorization and
-   * capture](https://stripe.com/docs/payments/payment-intents/creating-payment-intents#separate-authorization-and-capture)
-   * for payment methods that support this.
+   * <p>Change `capture_method` to manual if you wish to use [separate authorization and
+   * capture](https://stripe.com/docs/payments/capture-later) for payment methods that support this.
    */
   @SerializedName("capture_method")
   CaptureMethod captureMethod;
@@ -64,9 +62,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
    * key. The PaymentIntent returns to the `requires_confirmation` state after handling
    * `next_action`s, and requires your server to initiate each payment attempt with an explicit
    * confirmation.
-   *
-   * <p>Learn more about the different [confirmation
-   * flows](https://stripe.com/docs/payments/payment-intents/use-cases#one-time-payments).
    */
   @SerializedName("confirmation_method")
   ConfirmationMethod confirmationMethod;
@@ -139,15 +134,15 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
   /**
    * The Stripe account ID for which these funds are intended. For details, see the PaymentIntents
-   * [use case for connected
-   * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
+   * [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
    */
   @SerializedName("on_behalf_of")
   String onBehalfOf;
 
   /**
-   * ID of the payment method (a PaymentMethod, Card, BankAccount, or saved Source object) to attach
-   * to this PaymentIntent.
+   * ID of the payment method (a PaymentMethod, Card, or [compatible
+   * Source](https://stripe.com/docs/payments/payment-methods#compatibility) object) to attach to
+   * this PaymentIntent.
    */
   @SerializedName("payment_method")
   String paymentMethod;
@@ -183,6 +178,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
    *
    * <p>If the payment method is already saved to a customer, this does nothing. If this type of
    * payment method cannot be saved to a customer, the request will error.
+   *
+   * <p>_Note that saving a payment method using this parameter does not guarantee that the payment
+   * method can be charged._ To ensure that only payment methods which can be charged are saved to a
+   * customer, you can [manually
+   * save](https://stripe.com/docs/api/customers/create#create_customer-source) the payment method
+   * in response to the [`payment_intent.succeeded`
+   * webhook](https://stripe.com/docs/api/events/types#event_types-payment_intent.succeeded).
    */
   @SerializedName("save_payment_method")
   Boolean savePaymentMethod;
@@ -196,8 +198,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
    *
    * <p>Use `on_session` if you intend to only reuse the payment method when your customer is
    * present in your checkout flow. Use `off_session` if your customer may or may not be in your
-   * checkout flow. See [Saving card details after a
-   * payment](https://stripe.com/docs/payments/cards/saving-cards-after-payment) to learn more.
+   * checkout flow. For more, learn to [save card details after a
+   * payment](https://stripe.com/docs/payments/save-after-payment).
    *
    * <p>Stripe uses `setup_future_usage` to dynamically optimize your payment flow and comply with
    * regional legislation and network rules. For example, if your customer is impacted by
@@ -240,16 +242,14 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   /**
    * The parameters used to automatically create a Transfer when the payment succeeds. For more
    * information, see the PaymentIntents [use case for connected
-   * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
+   * accounts](https://stripe.com/docs/payments/connected-accounts).
    */
   @SerializedName("transfer_data")
   TransferData transferData;
 
   /**
    * A string that identifies the resulting payment as part of a group. See the PaymentIntents [use
-   * case for connected
-   * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts) for
-   * details.
+   * case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for details.
    */
   @SerializedName("transfer_group")
   String transferGroup;
@@ -436,7 +436,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      * The amount of the application fee (if any) that will be applied to the payment and
      * transferred to the application owner's Stripe account. For more information, see the
      * PaymentIntents [use case for connected
-     * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
+     * accounts](https://stripe.com/docs/payments/connected-accounts).
      */
     public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
       this.applicationFeeAmount = applicationFeeAmount;
@@ -449,9 +449,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      * <p>When the capture method is `automatic`, Stripe automatically captures funds when the
      * customer authorizes the payment.
      *
-     * <p>Change `capture_method` to manual if you wish to [separate authorization and
-     * capture](https://stripe.com/docs/payments/payment-intents/creating-payment-intents#separate-authorization-and-capture)
-     * for payment methods that support this.
+     * <p>Change `capture_method` to manual if you wish to use [separate authorization and
+     * capture](https://stripe.com/docs/payments/capture-later) for payment methods that support
+     * this.
      */
     public Builder setCaptureMethod(CaptureMethod captureMethod) {
       this.captureMethod = captureMethod;
@@ -480,9 +480,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      * key. The PaymentIntent returns to the `requires_confirmation` state after handling
      * `next_action`s, and requires your server to initiate each payment attempt with an explicit
      * confirmation.
-     *
-     * <p>Learn more about the different [confirmation
-     * flows](https://stripe.com/docs/payments/payment-intents/use-cases#one-time-payments).
      */
     public Builder setConfirmationMethod(ConfirmationMethod confirmationMethod) {
       this.confirmationMethod = confirmationMethod;
@@ -640,8 +637,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     /**
      * The Stripe account ID for which these funds are intended. For details, see the PaymentIntents
-     * [use case for connected
-     * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
+     * [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts).
      */
     public Builder setOnBehalfOf(String onBehalfOf) {
       this.onBehalfOf = onBehalfOf;
@@ -649,8 +645,9 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * ID of the payment method (a PaymentMethod, Card, BankAccount, or saved Source object) to
-     * attach to this PaymentIntent.
+     * ID of the payment method (a PaymentMethod, Card, or [compatible
+     * Source](https://stripe.com/docs/payments/payment-methods#compatibility) object) to attach to
+     * this PaymentIntent.
      */
     public Builder setPaymentMethod(String paymentMethod) {
       this.paymentMethod = paymentMethod;
@@ -713,6 +710,13 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      *
      * <p>If the payment method is already saved to a customer, this does nothing. If this type of
      * payment method cannot be saved to a customer, the request will error.
+     *
+     * <p>_Note that saving a payment method using this parameter does not guarantee that the
+     * payment method can be charged._ To ensure that only payment methods which can be charged are
+     * saved to a customer, you can [manually
+     * save](https://stripe.com/docs/api/customers/create#create_customer-source) the payment method
+     * in response to the [`payment_intent.succeeded`
+     * webhook](https://stripe.com/docs/api/events/types#event_types-payment_intent.succeeded).
      */
     public Builder setSavePaymentMethod(Boolean savePaymentMethod) {
       this.savePaymentMethod = savePaymentMethod;
@@ -728,8 +732,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      *
      * <p>Use `on_session` if you intend to only reuse the payment method when your customer is
      * present in your checkout flow. Use `off_session` if your customer may or may not be in your
-     * checkout flow. See [Saving card details after a
-     * payment](https://stripe.com/docs/payments/cards/saving-cards-after-payment) to learn more.
+     * checkout flow. For more, learn to [save card details after a
+     * payment](https://stripe.com/docs/payments/save-after-payment).
      *
      * <p>Stripe uses `setup_future_usage` to dynamically optimize your payment flow and comply with
      * regional legislation and network rules. For example, if your customer is impacted by
@@ -783,7 +787,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     /**
      * The parameters used to automatically create a Transfer when the payment succeeds. For more
      * information, see the PaymentIntents [use case for connected
-     * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
+     * accounts](https://stripe.com/docs/payments/connected-accounts).
      */
     public Builder setTransferData(TransferData transferData) {
       this.transferData = transferData;
@@ -792,8 +796,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
 
     /**
      * A string that identifies the resulting payment as part of a group. See the PaymentIntents
-     * [use case for connected
-     * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts) for
+     * [use case for connected accounts](https://stripe.com/docs/payments/connected-accounts) for
      * details.
      */
     public Builder setTransferGroup(String transferGroup) {

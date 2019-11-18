@@ -21,7 +21,7 @@ public class CardUpdateParams extends ApiRequestParams {
 
   /**
    * The [Cardholder](https://stripe.com/docs/api#issuing_cardholder_object) to associate the card
-   * with.
+   * with. (This field is deprecated and will be removed from future versions of the API.)
    */
   @SerializedName("cardholder")
   Object cardholder;
@@ -104,7 +104,7 @@ public class CardUpdateParams extends ApiRequestParams {
 
     /**
      * The [Cardholder](https://stripe.com/docs/api#issuing_cardholder_object) to associate the card
-     * with.
+     * with. (This field is deprecated and will be removed from future versions of the API.)
      */
     public Builder setCardholder(String cardholder) {
       this.cardholder = cardholder;
@@ -113,7 +113,7 @@ public class CardUpdateParams extends ApiRequestParams {
 
     /**
      * The [Cardholder](https://stripe.com/docs/api#issuing_cardholder_object) to associate the card
-     * with.
+     * with. (This field is deprecated and will be removed from future versions of the API.)
      */
     public Builder setCardholder(EmptyParam cardholder) {
       this.cardholder = cardholder;

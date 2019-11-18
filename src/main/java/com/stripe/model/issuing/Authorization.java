@@ -419,13 +419,34 @@ public class Authorization extends ApiResource
     @SerializedName("held_currency")
     String heldCurrency;
 
-    /**
-     * One of `authentication_failed`, `authorization_controls`, `card_active`, `card_inactive`,
-     * `insufficient_funds`, `account_compliance_disabled`, `account_inactive`, `suspected_fraud`,
-     * `webhook_approved`, `webhook_declined`, or `webhook_timeout`.
-     */
+    /** The reason for the approval or decline. */
     @SerializedName("reason")
     String reason;
+
+    /**
+     * When an authorization is declined due to `authorization_controls`, this array contains
+     * details about the authorization controls that were violated. Otherwise, it is empty.
+     */
+    @SerializedName("violated_authorization_controls")
+    List<Authorization.RequestHistory.ViolatedAuthorizationControl> violatedAuthorizationControls;
+
+    @Getter
+    @Setter
+    @EqualsAndHashCode(callSuper = false)
+    public static class ViolatedAuthorizationControl extends StripeObject {
+      /**
+       * Entity which the authorization control acts on. One of `account`, `card`, or `cardholder`.
+       */
+      @SerializedName("entity")
+      String entity;
+
+      /**
+       * Name of the authorization control. One of `allowed_categories`, `blocked_categories`,
+       * `max_amount`, `max_approvals`, or `spending_limits`.
+       */
+      @SerializedName("name")
+      String name;
+    }
   }
 
   @Getter

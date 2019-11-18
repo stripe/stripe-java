@@ -11,8 +11,7 @@ import lombok.Getter;
 @Getter
 public class PlanListParams extends ApiRequestParams {
   /**
-   * Only return plans that are active or inactive (e.g., pass `false` to list all inactive
-   * products).
+   * Only return plans that are active or inactive (e.g., pass `false` to list all inactive plans).
    */
   @SerializedName("active")
   Boolean active;
@@ -121,7 +120,7 @@ public class PlanListParams extends ApiRequestParams {
 
     /**
      * Only return plans that are active or inactive (e.g., pass `false` to list all inactive
-     * products).
+     * plans).
      */
     public Builder setActive(Boolean active) {
       this.active = active;

@@ -43,8 +43,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   Object offSession;
 
   /**
-   * ID of the payment method (a PaymentMethod, Card, BankAccount, or saved Source object) to attach
-   * to this PaymentIntent.
+   * ID of the payment method (a PaymentMethod, Card, or [compatible
+   * Source](https://stripe.com/docs/payments/payment-methods#compatibility) object) to attach to
+   * this PaymentIntent.
    */
   @SerializedName("payment_method")
   String paymentMethod;
@@ -73,6 +74,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
    *
    * <p>If the payment method is already saved to a customer, this does nothing. If this type of
    * payment method cannot be saved to a customer, the request will error.
+   *
+   * <p>_Note that saving a payment method using this parameter does not guarantee that the payment
+   * method can be charged._ To ensure that only payment methods which can be charged are saved to a
+   * customer, you can [manually
+   * save](https://stripe.com/docs/api/customers/create#create_customer-source) the payment method
+   * in response to the [`payment_intent.succeeded`
+   * webhook](https://stripe.com/docs/api/events/types#event_types-payment_intent.succeeded).
    */
   @SerializedName("save_payment_method")
   Boolean savePaymentMethod;
@@ -291,8 +299,9 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     }
 
     /**
-     * ID of the payment method (a PaymentMethod, Card, BankAccount, or saved Source object) to
-     * attach to this PaymentIntent.
+     * ID of the payment method (a PaymentMethod, Card, or [compatible
+     * Source](https://stripe.com/docs/payments/payment-methods#compatibility) object) to attach to
+     * this PaymentIntent.
      */
     public Builder setPaymentMethod(String paymentMethod) {
       this.paymentMethod = paymentMethod;
@@ -335,6 +344,13 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
      *
      * <p>If the payment method is already saved to a customer, this does nothing. If this type of
      * payment method cannot be saved to a customer, the request will error.
+     *
+     * <p>_Note that saving a payment method using this parameter does not guarantee that the
+     * payment method can be charged._ To ensure that only payment methods which can be charged are
+     * saved to a customer, you can [manually
+     * save](https://stripe.com/docs/api/customers/create#create_customer-source) the payment method
+     * in response to the [`payment_intent.succeeded`
+     * webhook](https://stripe.com/docs/api/events/types#event_types-payment_intent.succeeded).
      */
     public Builder setSavePaymentMethod(Boolean savePaymentMethod) {
       this.savePaymentMethod = savePaymentMethod;

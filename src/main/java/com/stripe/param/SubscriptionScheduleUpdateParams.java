@@ -624,8 +624,12 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     Object defaultPaymentMethod;
 
     /**
-     * The tax rates that will apply to any phase that does not have `tax_rates` set. Invoices
-     * created will have their `default_tax_rates` populated from the phase.
+     * A list of [Tax Rate](https://stripe.com/docs/api/tax_rates) ids. These Tax Rates will set the
+     * Subscription's
+     * [`default_tax_rates`](https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates),
+     * which means they will be the Invoice's
+     * [`default_tax_rates`](https://stripe.com/docs/api/invoices/create#create_invoice-default_tax_rates)
+     * for any Invoices issued by the Subscription during this Phase.
      */
     @SerializedName("default_tax_rates")
     Object defaultTaxRates;
@@ -665,7 +669,10 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
     @SerializedName("plans")
     List<Plan> plans;
 
-    /** The date at which this phase of the subscription schedule starts. */
+    /**
+     * The date at which this phase of the subscription schedule starts or `now`. Must be set on the
+     * first phase.
+     */
     @SerializedName("start_date")
     Object startDate;
 
@@ -887,8 +894,12 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * The tax rates that will apply to any phase that does not have `tax_rates` set. Invoices
-       * created will have their `default_tax_rates` populated from the phase.
+       * A list of [Tax Rate](https://stripe.com/docs/api/tax_rates) ids. These Tax Rates will set
+       * the Subscription's
+       * [`default_tax_rates`](https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates),
+       * which means they will be the Invoice's
+       * [`default_tax_rates`](https://stripe.com/docs/api/invoices/create#create_invoice-default_tax_rates)
+       * for any Invoices issued by the Subscription during this Phase.
        */
       public Builder setDefaultTaxRates(EmptyParam defaultTaxRates) {
         this.defaultTaxRates = defaultTaxRates;
@@ -896,8 +907,12 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * The tax rates that will apply to any phase that does not have `tax_rates` set. Invoices
-       * created will have their `default_tax_rates` populated from the phase.
+       * A list of [Tax Rate](https://stripe.com/docs/api/tax_rates) ids. These Tax Rates will set
+       * the Subscription's
+       * [`default_tax_rates`](https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates),
+       * which means they will be the Invoice's
+       * [`default_tax_rates`](https://stripe.com/docs/api/invoices/create#create_invoice-default_tax_rates)
+       * for any Invoices issued by the Subscription during this Phase.
        */
       public Builder setDefaultTaxRates(List<String> defaultTaxRates) {
         this.defaultTaxRates = defaultTaxRates;
@@ -990,13 +1005,19 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The date at which this phase of the subscription schedule starts. */
+      /**
+       * The date at which this phase of the subscription schedule starts or `now`. Must be set on
+       * the first phase.
+       */
       public Builder setStartDate(Long startDate) {
         this.startDate = startDate;
         return this;
       }
 
-      /** The date at which this phase of the subscription schedule starts. */
+      /**
+       * The date at which this phase of the subscription schedule starts or `now`. Must be set on
+       * the first phase.
+       */
       public Builder setStartDate(StartDate startDate) {
         this.startDate = startDate;
         return this;
@@ -1235,8 +1256,10 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
       Long quantity;
 
       /**
-       * The tax rates which apply to this `subscription_item`. When set, the `default_tax_rates` on
-       * the subscription do not apply to this `subscription_item`.
+       * A list of [Tax Rate](https://stripe.com/docs/api/tax_rates) ids. These Tax Rates will
+       * override the
+       * [`default_tax_rates`](https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates)
+       * on the Subscription.
        */
       @SerializedName("tax_rates")
       Object taxRates;
@@ -1371,8 +1394,10 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The tax rates which apply to this `subscription_item`. When set, the `default_tax_rates`
-         * on the subscription do not apply to this `subscription_item`.
+         * A list of [Tax Rate](https://stripe.com/docs/api/tax_rates) ids. These Tax Rates will
+         * override the
+         * [`default_tax_rates`](https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates)
+         * on the Subscription.
          */
         public Builder setTaxRates(EmptyParam taxRates) {
           this.taxRates = taxRates;
@@ -1380,8 +1405,10 @@ public class SubscriptionScheduleUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * The tax rates which apply to this `subscription_item`. When set, the `default_tax_rates`
-         * on the subscription do not apply to this `subscription_item`.
+         * A list of [Tax Rate](https://stripe.com/docs/api/tax_rates) ids. These Tax Rates will
+         * override the
+         * [`default_tax_rates`](https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates)
+         * on the Subscription.
          */
         public Builder setTaxRates(List<String> taxRates) {
           this.taxRates = taxRates;

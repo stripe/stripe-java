@@ -37,7 +37,7 @@ public class ChargeCreateParams extends ApiRequestParams {
    * Whether to immediately capture the charge. Defaults to `true`. When `false`, the charge issues
    * an authorization (or pre-authorization), and will need to be [captured](#capture_charge) later.
    * Uncaptured charges expire in _seven days_. For more information, see the [authorizing charges
-   * and settling later](https://stripe.com/docs/charges#auth-and-capture) documentation.
+   * and settling later](https://stripe.com/docs/charges/placing-a-hold) documentation.
    */
   @SerializedName("capture")
   Boolean capture;
@@ -297,7 +297,7 @@ public class ChargeCreateParams extends ApiRequestParams {
      * issues an authorization (or pre-authorization), and will need to be
      * [captured](#capture_charge) later. Uncaptured charges expire in _seven days_. For more
      * information, see the [authorizing charges and settling
-     * later](https://stripe.com/docs/charges#auth-and-capture) documentation.
+     * later](https://stripe.com/docs/charges/placing-a-hold) documentation.
      */
     public Builder setCapture(Boolean capture) {
       this.capture = capture;

@@ -45,8 +45,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
   Map<String, String> metadata;
 
   /**
-   * ID of the payment method (a PaymentMethod, Card, BankAccount, or saved Source object) to attach
-   * to this SetupIntent.
+   * ID of the payment method (a PaymentMethod, Card, or saved Source object) to attach to this
+   * SetupIntent.
    */
   @SerializedName("payment_method")
   Object paymentMethod;
@@ -221,8 +221,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * ID of the payment method (a PaymentMethod, Card, BankAccount, or saved Source object) to
-     * attach to this SetupIntent.
+     * ID of the payment method (a PaymentMethod, Card, or saved Source object) to attach to this
+     * SetupIntent.
      */
     public Builder setPaymentMethod(String paymentMethod) {
       this.paymentMethod = paymentMethod;
@@ -230,8 +230,8 @@ public class SetupIntentUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * ID of the payment method (a PaymentMethod, Card, BankAccount, or saved Source object) to
-     * attach to this SetupIntent.
+     * ID of the payment method (a PaymentMethod, Card, or saved Source object) to attach to this
+     * SetupIntent.
      */
     public Builder setPaymentMethod(EmptyParam paymentMethod) {
       this.paymentMethod = paymentMethod;

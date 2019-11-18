@@ -94,7 +94,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
   /**
    * A list of the types of payment methods (e.g. card) this Checkout Session is allowed to accept.
-   * The only supported value today is `card`.
+   * The only supported values today are `card` and `ideal`.
    */
   @SerializedName("payment_method_types")
   List<PaymentMethodType> paymentMethodTypes;
@@ -625,7 +625,7 @@ public class SessionCreateParams extends ApiRequestParams {
      * transferred to the application owner's Stripe account. To use an application fee, the request
      * must be made on behalf of another account, using the `Stripe-Account` header or an OAuth key.
      * For more information, see the PaymentIntents [use case for connected
-     * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
+     * accounts](https://stripe.com/docs/payments/connected-accounts).
      */
     @SerializedName("application_fee_amount")
     Long applicationFeeAmount;
@@ -656,8 +656,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * The Stripe account ID for which these funds are intended. For details, see the PaymentIntents
-     * [use case for connected
-     * accounts](/docs/payments/payment-intents/use-cases#connected-accounts).
+     * [use case for connected accounts](/docs/payments/connected-accounts).
      */
     @SerializedName("on_behalf_of")
     String onBehalfOf;
@@ -675,8 +674,8 @@ public class SessionCreateParams extends ApiRequestParams {
      *
      * <p>Use `on_session` if you intend to only reuse the payment method when your customer is
      * present in your checkout flow. Use `off_session` if your customer may or may not be in your
-     * checkout flow. See [Saving card details after a
-     * payment](https://stripe.com/docs/payments/cards/saving-cards-after-payment) to learn more.
+     * checkout flow. For more, learn to [save card details after a
+     * payment](https://stripe.com/docs/payments/save-after-payment).
      *
      * <p>Stripe uses `setup_future_usage` to dynamically optimize your payment flow and comply with
      * regional legislation and network rules. For example, if your customer is impacted by
@@ -703,7 +702,7 @@ public class SessionCreateParams extends ApiRequestParams {
     /**
      * The parameters used to automatically create a Transfer when the payment succeeds. For more
      * information, see the PaymentIntents [use case for connected
-     * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
+     * accounts](https://stripe.com/docs/payments/connected-accounts).
      */
     @SerializedName("transfer_data")
     TransferData transferData;
@@ -781,7 +780,7 @@ public class SessionCreateParams extends ApiRequestParams {
        * transferred to the application owner's Stripe account. To use an application fee, the
        * request must be made on behalf of another account, using the `Stripe-Account` header or an
        * OAuth key. For more information, see the PaymentIntents [use case for connected
-       * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
+       * accounts](https://stripe.com/docs/payments/connected-accounts).
        */
       public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
         this.applicationFeeAmount = applicationFeeAmount;
@@ -854,8 +853,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
       /**
        * The Stripe account ID for which these funds are intended. For details, see the
-       * PaymentIntents [use case for connected
-       * accounts](/docs/payments/payment-intents/use-cases#connected-accounts).
+       * PaymentIntents [use case for connected accounts](/docs/payments/connected-accounts).
        */
       public Builder setOnBehalfOf(String onBehalfOf) {
         this.onBehalfOf = onBehalfOf;
@@ -877,8 +875,8 @@ public class SessionCreateParams extends ApiRequestParams {
        *
        * <p>Use `on_session` if you intend to only reuse the payment method when your customer is
        * present in your checkout flow. Use `off_session` if your customer may or may not be in your
-       * checkout flow. See [Saving card details after a
-       * payment](https://stripe.com/docs/payments/cards/saving-cards-after-payment) to learn more.
+       * checkout flow. For more, learn to [save card details after a
+       * payment](https://stripe.com/docs/payments/save-after-payment).
        *
        * <p>Stripe uses `setup_future_usage` to dynamically optimize your payment flow and comply
        * with regional legislation and network rules. For example, if your customer is impacted by
@@ -911,7 +909,7 @@ public class SessionCreateParams extends ApiRequestParams {
       /**
        * The parameters used to automatically create a Transfer when the payment succeeds. For more
        * information, see the PaymentIntents [use case for connected
-       * accounts](https://stripe.com/docs/payments/payment-intents/use-cases#connected-accounts).
+       * accounts](https://stripe.com/docs/payments/connected-accounts).
        */
       public Builder setTransferData(TransferData transferData) {
         this.transferData = transferData;
