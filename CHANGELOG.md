@@ -1,5 +1,8 @@
 # Changelog
 
+## 15.5.0 - 2019-11-21
+* [#905](https://github.com/stripe/stripe-java/pull/905) Add support for `payment_intent` filter when listing `Dispute`s.
+
 ## 15.4.0 - 2019-11-18
 * [#904](https://github.com/stripe/stripe-java/pull/904) Add support for `violated_authorization_controls` on Issuing `Authorization`
 
