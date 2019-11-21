@@ -18,8 +18,8 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
   ApiVersion apiVersion;
 
   /**
-   * Whether this endpoint should receive events from connected accounts (`true`), or your account
-   * (`false`).
+   * Whether this endpoint should receive events from connected accounts (`true`), or from your
+   * account (`false`). Defaults to `false`.
    */
   @SerializedName("connect")
   Boolean connect;
@@ -101,8 +101,8 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Whether this endpoint should receive events from connected accounts (`true`), or your account
-     * (`false`).
+     * Whether this endpoint should receive events from connected accounts (`true`), or from your
+     * account (`false`). Defaults to `false`.
      */
     public Builder setConnect(Boolean connect) {
       this.connect = connect;

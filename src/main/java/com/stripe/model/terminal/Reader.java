@@ -28,7 +28,7 @@ public class Reader extends ApiResource implements HasId {
   @SerializedName("device_sw_version")
   String deviceSwVersion;
 
-  /** Type of reader, one of ["bbpos_chipper2x", "verifone_P400"]. */
+  /** Type of reader, one of `bbpos_chipper2x` or `verifone_P400`. */
   @SerializedName("device_type")
   String deviceType;
 

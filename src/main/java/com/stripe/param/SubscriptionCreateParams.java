@@ -145,7 +145,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   Boolean offSession;
 
   /**
-   * Use `allow_incomplete` to create subscriptions with `status=incomplete` if its first invoice
+   * Use `allow_incomplete` to create subscriptions with `status=incomplete` if the first invoice
    * cannot be paid. Creating subscriptions with this status allows you to manage scenarios where
    * additional user actions are needed to pay a subscription's invoice. For example, SCA regulation
    * may require 3DS authentication to complete payment. See the [SCA Migration
@@ -664,7 +664,7 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Use `allow_incomplete` to create subscriptions with `status=incomplete` if its first invoice
+     * Use `allow_incomplete` to create subscriptions with `status=incomplete` if the first invoice
      * cannot be paid. Creating subscriptions with this status allows you to manage scenarios where
      * additional user actions are needed to pay a subscription's invoice. For example, SCA
      * regulation may require 3DS authentication to complete payment. See the [SCA Migration
