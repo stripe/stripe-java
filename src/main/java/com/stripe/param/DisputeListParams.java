@@ -10,7 +10,7 @@ import lombok.Getter;
 
 @Getter
 public class DisputeListParams extends ApiRequestParams {
-  /** Only return disputes that are associated by the Charge specified by this Charge ID. */
+  /** Only return disputes associated to the charge specified by this charge ID. */
   @SerializedName("charge")
   String charge;
 
@@ -46,6 +46,10 @@ public class DisputeListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
+  /** Only return disputes associated to the PaymentIntent specified by this PaymentIntent ID. */
+  @SerializedName("payment_intent")
+  String paymentIntent;
+
   /**
    * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the
    * list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`,
@@ -62,6 +66,7 @@ public class DisputeListParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Long limit,
+      String paymentIntent,
       String startingAfter) {
     this.charge = charge;
     this.created = created;
@@ -69,6 +74,7 @@ public class DisputeListParams extends ApiRequestParams {
     this.expand = expand;
     this.extraParams = extraParams;
     this.limit = limit;
+    this.paymentIntent = paymentIntent;
     this.startingAfter = startingAfter;
   }
 
@@ -89,6 +95,8 @@ public class DisputeListParams extends ApiRequestParams {
 
     private Long limit;
 
+    private String paymentIntent;
+
     private String startingAfter;
 
     /** Finalize and obtain parameter instance from this builder. */
@@ -100,10 +108,11 @@ public class DisputeListParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.limit,
+          this.paymentIntent,
           this.startingAfter);
     }
 
-    /** Only return disputes that are associated by the Charge specified by this Charge ID. */
+    /** Only return disputes associated to the charge specified by this charge ID. */
     public Builder setCharge(String charge) {
       this.charge = charge;
       return this;
@@ -188,6 +197,12 @@ public class DisputeListParams extends ApiRequestParams {
      */
     public Builder setLimit(Long limit) {
       this.limit = limit;
+      return this;
+    }
+
+    /** Only return disputes associated to the PaymentIntent specified by this PaymentIntent ID. */
+    public Builder setPaymentIntent(String paymentIntent) {
+      this.paymentIntent = paymentIntent;
       return this;
     }
 

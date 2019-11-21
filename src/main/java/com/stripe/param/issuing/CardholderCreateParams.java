@@ -66,13 +66,12 @@ public class CardholderCreateParams extends ApiRequestParams {
   String phoneNumber;
 
   /**
-   * Specifies whether to permit authorizations on this cardholder's cards. Possible values are
-   * `active` or `inactive`.
+   * Specifies whether to permit authorizations on this cardholder's cards. Defaults to `inactive`.
    */
   @SerializedName("status")
   Status status;
 
-  /** The type of cardholder. Possible values are `individual` or `business_entity`. */
+  /** One of `individual` or `business_entity`. */
   @SerializedName("type")
   Type type;
 
@@ -288,15 +287,15 @@ public class CardholderCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Specifies whether to permit authorizations on this cardholder's cards. Possible values are
-     * `active` or `inactive`.
+     * Specifies whether to permit authorizations on this cardholder's cards. Defaults to
+     * `inactive`.
      */
     public Builder setStatus(Status status) {
       this.status = status;
       return this;
     }
 
-    /** The type of cardholder. Possible values are `individual` or `business_entity`. */
+    /** One of `individual` or `business_entity`. */
     public Builder setType(Type type) {
       this.type = type;
       return this;
@@ -883,6 +882,15 @@ public class CardholderCreateParams extends ApiRequestParams {
 
         @SerializedName("digital_goods_applications")
         DIGITAL_GOODS_APPLICATIONS("digital_goods_applications"),
+
+        @SerializedName("digital_goods_games")
+        DIGITAL_GOODS_GAMES("digital_goods_games"),
+
+        @SerializedName("digital_goods_large_volume")
+        DIGITAL_GOODS_LARGE_VOLUME("digital_goods_large_volume"),
+
+        @SerializedName("digital_goods_media")
+        DIGITAL_GOODS_MEDIA("digital_goods_media"),
 
         @SerializedName("direct_marketing_catalog_merchant")
         DIRECT_MARKETING_CATALOG_MERCHANT("direct_marketing_catalog_merchant"),
@@ -1796,6 +1804,15 @@ public class CardholderCreateParams extends ApiRequestParams {
       @SerializedName("digital_goods_applications")
       DIGITAL_GOODS_APPLICATIONS("digital_goods_applications"),
 
+      @SerializedName("digital_goods_games")
+      DIGITAL_GOODS_GAMES("digital_goods_games"),
+
+      @SerializedName("digital_goods_large_volume")
+      DIGITAL_GOODS_LARGE_VOLUME("digital_goods_large_volume"),
+
+      @SerializedName("digital_goods_media")
+      DIGITAL_GOODS_MEDIA("digital_goods_media"),
+
       @SerializedName("direct_marketing_catalog_merchant")
       DIRECT_MARKETING_CATALOG_MERCHANT("direct_marketing_catalog_merchant"),
 
@@ -2679,6 +2696,15 @@ public class CardholderCreateParams extends ApiRequestParams {
 
       @SerializedName("digital_goods_applications")
       DIGITAL_GOODS_APPLICATIONS("digital_goods_applications"),
+
+      @SerializedName("digital_goods_games")
+      DIGITAL_GOODS_GAMES("digital_goods_games"),
+
+      @SerializedName("digital_goods_large_volume")
+      DIGITAL_GOODS_LARGE_VOLUME("digital_goods_large_volume"),
+
+      @SerializedName("digital_goods_media")
+      DIGITAL_GOODS_MEDIA("digital_goods_media"),
 
       @SerializedName("direct_marketing_catalog_merchant")
       DIRECT_MARKETING_CATALOG_MERCHANT("direct_marketing_catalog_merchant"),

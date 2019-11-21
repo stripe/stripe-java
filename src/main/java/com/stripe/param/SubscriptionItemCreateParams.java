@@ -38,6 +38,21 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  /**
+   * Use `allow_incomplete` to create subscriptions with `status=incomplete` if the first invoice
+   * cannot be paid. Creating subscriptions with this status allows you to manage scenarios where
+   * additional user actions are needed to pay a subscription's invoice. For example, SCA regulation
+   * may require 3DS authentication to complete payment. See the [SCA Migration
+   * Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication) for Billing to
+   * learn more. This is the default behavior.
+   *
+   * <p>Use `error_if_incomplete` if you want Stripe to return an HTTP 402 status code if a
+   * subscription's first invoice cannot be paid. For example, if a payment method requires 3DS
+   * authentication due to SCA regulation and further user action is needed, this parameter does not
+   * create a subscription and returns an error instead. This was the default behavior for API
+   * versions prior to 2019-03-14. See the [changelog](https://stripe.com/docs/upgrades#2019-03-14)
+   * to learn more.
+   */
   @SerializedName("payment_behavior")
   PaymentBehavior paymentBehavior;
 
@@ -241,6 +256,21 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * Use `allow_incomplete` to create subscriptions with `status=incomplete` if the first invoice
+     * cannot be paid. Creating subscriptions with this status allows you to manage scenarios where
+     * additional user actions are needed to pay a subscription's invoice. For example, SCA
+     * regulation may require 3DS authentication to complete payment. See the [SCA Migration
+     * Guide](https://stripe.com/docs/billing/migration/strong-customer-authentication) for Billing
+     * to learn more. This is the default behavior.
+     *
+     * <p>Use `error_if_incomplete` if you want Stripe to return an HTTP 402 status code if a
+     * subscription's first invoice cannot be paid. For example, if a payment method requires 3DS
+     * authentication due to SCA regulation and further user action is needed, this parameter does
+     * not create a subscription and returns an error instead. This was the default behavior for API
+     * versions prior to 2019-03-14. See the
+     * [changelog](https://stripe.com/docs/upgrades#2019-03-14) to learn more.
+     */
     public Builder setPaymentBehavior(PaymentBehavior paymentBehavior) {
       this.paymentBehavior = paymentBehavior;
       return this;

@@ -806,6 +806,15 @@ public class CardUpdateParams extends ApiRequestParams {
         @SerializedName("digital_goods_applications")
         DIGITAL_GOODS_APPLICATIONS("digital_goods_applications"),
 
+        @SerializedName("digital_goods_games")
+        DIGITAL_GOODS_GAMES("digital_goods_games"),
+
+        @SerializedName("digital_goods_large_volume")
+        DIGITAL_GOODS_LARGE_VOLUME("digital_goods_large_volume"),
+
+        @SerializedName("digital_goods_media")
+        DIGITAL_GOODS_MEDIA("digital_goods_media"),
+
         @SerializedName("direct_marketing_catalog_merchant")
         DIRECT_MARKETING_CATALOG_MERCHANT("direct_marketing_catalog_merchant"),
 
@@ -1718,6 +1727,15 @@ public class CardUpdateParams extends ApiRequestParams {
       @SerializedName("digital_goods_applications")
       DIGITAL_GOODS_APPLICATIONS("digital_goods_applications"),
 
+      @SerializedName("digital_goods_games")
+      DIGITAL_GOODS_GAMES("digital_goods_games"),
+
+      @SerializedName("digital_goods_large_volume")
+      DIGITAL_GOODS_LARGE_VOLUME("digital_goods_large_volume"),
+
+      @SerializedName("digital_goods_media")
+      DIGITAL_GOODS_MEDIA("digital_goods_media"),
+
       @SerializedName("direct_marketing_catalog_merchant")
       DIRECT_MARKETING_CATALOG_MERCHANT("direct_marketing_catalog_merchant"),
 
@@ -2601,6 +2619,15 @@ public class CardUpdateParams extends ApiRequestParams {
 
       @SerializedName("digital_goods_applications")
       DIGITAL_GOODS_APPLICATIONS("digital_goods_applications"),
+
+      @SerializedName("digital_goods_games")
+      DIGITAL_GOODS_GAMES("digital_goods_games"),
+
+      @SerializedName("digital_goods_large_volume")
+      DIGITAL_GOODS_LARGE_VOLUME("digital_goods_large_volume"),
+
+      @SerializedName("digital_goods_media")
+      DIGITAL_GOODS_MEDIA("digital_goods_media"),
 
       @SerializedName("direct_marketing_catalog_merchant")
       DIRECT_MARKETING_CATALOG_MERCHANT("direct_marketing_catalog_merchant"),

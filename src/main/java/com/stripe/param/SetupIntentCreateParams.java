@@ -942,7 +942,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
   @Getter
   public static class SingleUse {
     /**
-     * A positive integer representing how much to charge in the [smallest currency
+     * Amount intended to be collected by this PaymentIntent. A positive integer representing how
+     * much to charge in the [smallest currency
      * unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or
      * 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent
      * in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts).
@@ -991,7 +992,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       }
 
       /**
-       * A positive integer representing how much to charge in the [smallest currency
+       * Amount intended to be collected by this PaymentIntent. A positive integer representing how
+       * much to charge in the [smallest currency
        * unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or
        * 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent
        * in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts).

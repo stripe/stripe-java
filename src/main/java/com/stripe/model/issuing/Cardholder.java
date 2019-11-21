@@ -86,7 +86,7 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   @SerializedName("requirements")
   Requirements requirements;
 
-  /** One of `active`, `inactive`, or `blocked`. */
+  /** Specifies whether to permit authorizations on this cardholder's cards. */
   @SerializedName("status")
   String status;
 
