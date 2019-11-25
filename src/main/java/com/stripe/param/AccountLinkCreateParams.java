@@ -15,8 +15,8 @@ public class AccountLinkCreateParams extends ApiRequestParams {
   String account;
 
   /**
-   * The information the platform wants to collect from users up-front. Possible values are
-   * `currently_due` and `eventually_due`.
+   * Which information the platform needs to collect from the user. One of `currently_due` or
+   * `eventually_due`. Default is `currently_due`.
    */
   @SerializedName("collect")
   Collect collect;
@@ -107,8 +107,8 @@ public class AccountLinkCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The information the platform wants to collect from users up-front. Possible values are
-     * `currently_due` and `eventually_due`.
+     * Which information the platform needs to collect from the user. One of `currently_due` or
+     * `eventually_due`. Default is `currently_due`.
      */
     public Builder setCollect(Collect collect) {
       this.collect = collect;

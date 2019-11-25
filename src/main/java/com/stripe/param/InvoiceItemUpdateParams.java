@@ -64,7 +64,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
 
   /**
    * The tax rates which apply to the invoice item. When set, the `default_tax_rates` on the invoice
-   * do not apply to this invoice item.
+   * do not apply to this invoice item. Pass an empty string to remove previously-defined tax rates.
    */
   @SerializedName("tax_rates")
   Object taxRates;
@@ -309,7 +309,8 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
 
     /**
      * The tax rates which apply to the invoice item. When set, the `default_tax_rates` on the
-     * invoice do not apply to this invoice item.
+     * invoice do not apply to this invoice item. Pass an empty string to remove previously-defined
+     * tax rates.
      */
     public Builder setTaxRates(EmptyParam taxRates) {
       this.taxRates = taxRates;
@@ -318,7 +319,8 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
 
     /**
      * The tax rates which apply to the invoice item. When set, the `default_tax_rates` on the
-     * invoice do not apply to this invoice item.
+     * invoice do not apply to this invoice item. Pass an empty string to remove previously-defined
+     * tax rates.
      */
     public Builder setTaxRates(List<String> taxRates) {
       this.taxRates = taxRates;

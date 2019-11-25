@@ -38,6 +38,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   /**
    * A list of up to 4 custom fields to be displayed on the invoice. If a value for `custom_fields`
    * is specified, the list specified will replace the existing custom field list on this invoice.
+   * Pass an empty string to remove previously-defined fields.
    */
   @SerializedName("custom_fields")
   Object customFields;
@@ -67,7 +68,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
   /**
    * The tax rates that will apply to any line item that does not have `tax_rates` set. Pass an
-   * empty string to remove previously-set default tax rates.
+   * empty string to remove previously-defined tax rates.
    */
   @SerializedName("default_tax_rates")
   Object defaultTaxRates;
@@ -287,7 +288,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     /**
      * A list of up to 4 custom fields to be displayed on the invoice. If a value for
      * `custom_fields` is specified, the list specified will replace the existing custom field list
-     * on this invoice.
+     * on this invoice. Pass an empty string to remove previously-defined fields.
      */
     public Builder setCustomFields(EmptyParam customFields) {
       this.customFields = customFields;
@@ -297,7 +298,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
     /**
      * A list of up to 4 custom fields to be displayed on the invoice. If a value for
      * `custom_fields` is specified, the list specified will replace the existing custom field list
-     * on this invoice.
+     * on this invoice. Pass an empty string to remove previously-defined fields.
      */
     public Builder setCustomFields(List<CustomField> customFields) {
       this.customFields = customFields;
@@ -383,7 +384,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
     /**
      * The tax rates that will apply to any line item that does not have `tax_rates` set. Pass an
-     * empty string to remove previously-set default tax rates.
+     * empty string to remove previously-defined tax rates.
      */
     public Builder setDefaultTaxRates(EmptyParam defaultTaxRates) {
       this.defaultTaxRates = defaultTaxRates;
@@ -392,7 +393,7 @@ public class InvoiceUpdateParams extends ApiRequestParams {
 
     /**
      * The tax rates that will apply to any line item that does not have `tax_rates` set. Pass an
-     * empty string to remove previously-set default tax rates.
+     * empty string to remove previously-defined tax rates.
      */
     public Builder setDefaultTaxRates(List<String> defaultTaxRates) {
       this.defaultTaxRates = defaultTaxRates;

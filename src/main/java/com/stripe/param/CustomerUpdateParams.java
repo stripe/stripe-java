@@ -709,7 +709,10 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
   @Getter
   public static class InvoiceSettings {
-    /** Default custom fields to be displayed on invoices for this customer. */
+    /**
+     * Default custom fields to be displayed on invoices for this customer. When updating, pass an
+     * empty string to remove previously-defined fields.
+     */
     @SerializedName("custom_fields")
     Object customFields;
 
@@ -789,13 +792,19 @@ public class CustomerUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Default custom fields to be displayed on invoices for this customer. */
+      /**
+       * Default custom fields to be displayed on invoices for this customer. When updating, pass an
+       * empty string to remove previously-defined fields.
+       */
       public Builder setCustomFields(EmptyParam customFields) {
         this.customFields = customFields;
         return this;
       }
 
-      /** Default custom fields to be displayed on invoices for this customer. */
+      /**
+       * Default custom fields to be displayed on invoices for this customer. When updating, pass an
+       * empty string to remove previously-defined fields.
+       */
       public Builder setCustomFields(List<CustomField> customFields) {
         this.customFields = customFields;
         return this;
