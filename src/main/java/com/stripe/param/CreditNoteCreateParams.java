@@ -50,6 +50,10 @@ public class CreditNoteCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
+  /** The integer amount in **%s** representing the amount that is credited outside of Stripe. */
+  @SerializedName("out_of_band_amount")
+  Long outOfBandAmount;
+
   /**
    * Reason for issuing this credit note, one of `duplicate`, `fraudulent`, `order_change`, or
    * `product_unsatisfactory`.
@@ -76,6 +80,7 @@ public class CreditNoteCreateParams extends ApiRequestParams {
       String invoice,
       String memo,
       Map<String, String> metadata,
+      Long outOfBandAmount,
       Reason reason,
       String refund,
       Long refundAmount) {
@@ -86,6 +91,7 @@ public class CreditNoteCreateParams extends ApiRequestParams {
     this.invoice = invoice;
     this.memo = memo;
     this.metadata = metadata;
+    this.outOfBandAmount = outOfBandAmount;
     this.reason = reason;
     this.refund = refund;
     this.refundAmount = refundAmount;
@@ -110,6 +116,8 @@ public class CreditNoteCreateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
+    private Long outOfBandAmount;
+
     private Reason reason;
 
     private String refund;
@@ -126,6 +134,7 @@ public class CreditNoteCreateParams extends ApiRequestParams {
           this.invoice,
           this.memo,
           this.metadata,
+          this.outOfBandAmount,
           this.reason,
           this.refund,
           this.refundAmount);
@@ -233,6 +242,12 @@ public class CreditNoteCreateParams extends ApiRequestParams {
         this.metadata = new HashMap<>();
       }
       this.metadata.putAll(map);
+      return this;
+    }
+
+    /** The integer amount in **%s** representing the amount that is credited outside of Stripe. */
+    public Builder setOutOfBandAmount(Long outOfBandAmount) {
+      this.outOfBandAmount = outOfBandAmount;
       return this;
     }
 

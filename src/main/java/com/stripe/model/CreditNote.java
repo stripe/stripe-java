@@ -214,10 +214,12 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
    *       (using <code>refund</code>).
    *   <li>Customer balance credit: credit the customer’s balance (using <code>credit_amount</code>)
    *       which will be automatically applied to their next invoice when it’s finalized.
-   *   <li>Outside of Stripe credit: any positive value from the result of <code>
-   *       amount - refund_amount - credit_amount</code> is represented as an “outside of Stripe”
-   *       credit.
+   *   <li>Outside of Stripe credit: record the amount that is or will be credited outside of Stripe
+   *       (using <code>out_of_band_amount</code>).
    * </ul>
+   *
+   * <p>For post-payment credit notes the sum of the refund, credit and outside of Stripe amounts
+   * must equal the credit note total.
    *
    * <p>You may issue multiple credit notes for an invoice. Each credit note will increment the
    * invoice’s <code>pre_payment_credit_notes_amount</code> or <code>
@@ -239,10 +241,12 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
    *       (using <code>refund</code>).
    *   <li>Customer balance credit: credit the customer’s balance (using <code>credit_amount</code>)
    *       which will be automatically applied to their next invoice when it’s finalized.
-   *   <li>Outside of Stripe credit: any positive value from the result of <code>
-   *       amount - refund_amount - credit_amount</code> is represented as an “outside of Stripe”
-   *       credit.
+   *   <li>Outside of Stripe credit: record the amount that is or will be credited outside of Stripe
+   *       (using <code>out_of_band_amount</code>).
    * </ul>
+   *
+   * <p>For post-payment credit notes the sum of the refund, credit and outside of Stripe amounts
+   * must equal the credit note total.
    *
    * <p>You may issue multiple credit notes for an invoice. Each credit note will increment the
    * invoice’s <code>pre_payment_credit_notes_amount</code> or <code>
@@ -267,10 +271,12 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
    *       (using <code>refund</code>).
    *   <li>Customer balance credit: credit the customer’s balance (using <code>credit_amount</code>)
    *       which will be automatically applied to their next invoice when it’s finalized.
-   *   <li>Outside of Stripe credit: any positive value from the result of <code>
-   *       amount - refund_amount - credit_amount</code> is represented as an “outside of Stripe”
-   *       credit.
+   *   <li>Outside of Stripe credit: record the amount that is or will be credited outside of Stripe
+   *       (using <code>out_of_band_amount</code>).
    * </ul>
+   *
+   * <p>For post-payment credit notes the sum of the refund, credit and outside of Stripe amounts
+   * must equal the credit note total.
    *
    * <p>You may issue multiple credit notes for an invoice. Each credit note will increment the
    * invoice’s <code>pre_payment_credit_notes_amount</code> or <code>
@@ -292,10 +298,12 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
    *       (using <code>refund</code>).
    *   <li>Customer balance credit: credit the customer’s balance (using <code>credit_amount</code>)
    *       which will be automatically applied to their next invoice when it’s finalized.
-   *   <li>Outside of Stripe credit: any positive value from the result of <code>
-   *       amount - refund_amount - credit_amount</code> is represented as an “outside of Stripe”
-   *       credit.
+   *   <li>Outside of Stripe credit: record the amount that is or will be credited outside of Stripe
+   *       (using <code>out_of_band_amount</code>).
    * </ul>
+   *
+   * <p>For post-payment credit notes the sum of the refund, credit and outside of Stripe amounts
+   * must equal the credit note total.
    *
    * <p>You may issue multiple credit notes for an invoice. Each credit note will increment the
    * invoice’s <code>pre_payment_credit_notes_amount</code> or <code>

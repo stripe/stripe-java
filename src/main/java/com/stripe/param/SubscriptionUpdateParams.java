@@ -91,7 +91,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
   /**
    * The tax rates that will apply to any subscription item that does not have `tax_rates` set.
-   * Invoices created will have their `default_tax_rates` populated from the subscription.
+   * Invoices created will have their `default_tax_rates` populated from the subscription. Pass an
+   * empty string to remove previously-defined tax rates.
    */
   @SerializedName("default_tax_rates")
   Object defaultTaxRates;
@@ -528,7 +529,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
     /**
      * The tax rates that will apply to any subscription item that does not have `tax_rates` set.
-     * Invoices created will have their `default_tax_rates` populated from the subscription.
+     * Invoices created will have their `default_tax_rates` populated from the subscription. Pass an
+     * empty string to remove previously-defined tax rates.
      */
     public Builder setDefaultTaxRates(EmptyParam defaultTaxRates) {
       this.defaultTaxRates = defaultTaxRates;
@@ -537,7 +539,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
     /**
      * The tax rates that will apply to any subscription item that does not have `tax_rates` set.
-     * Invoices created will have their `default_tax_rates` populated from the subscription.
+     * Invoices created will have their `default_tax_rates` populated from the subscription. Pass an
+     * empty string to remove previously-defined tax rates.
      */
     public Builder setDefaultTaxRates(List<String> defaultTaxRates) {
       this.defaultTaxRates = defaultTaxRates;
@@ -965,7 +968,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   public static class Item {
     /**
      * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
-     * billing period.
+     * billing period. When updating, pass an empty string to remove previously-defined thresholds.
      */
     @SerializedName("billing_thresholds")
     Object billingThresholds;
@@ -1013,7 +1016,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * A list of [Tax Rate](https://stripe.com/docs/api/tax_rates) ids. These Tax Rates will
      * override the
      * [`default_tax_rates`](https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates)
-     * on the Subscription.
+     * on the Subscription. When updating, pass an empty string to remove previously-defined tax
+     * rates.
      */
     @SerializedName("tax_rates")
     Object taxRates;
@@ -1078,7 +1082,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
       /**
        * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
-       * billing period.
+       * billing period. When updating, pass an empty string to remove previously-defined
+       * thresholds.
        */
       public Builder setBillingThresholds(BillingThresholds billingThresholds) {
         this.billingThresholds = billingThresholds;
@@ -1087,7 +1092,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
       /**
        * Define thresholds at which an invoice will be sent, and the subscription advanced to a new
-       * billing period.
+       * billing period. When updating, pass an empty string to remove previously-defined
+       * thresholds.
        */
       public Builder setBillingThresholds(EmptyParam billingThresholds) {
         this.billingThresholds = billingThresholds;
@@ -1223,7 +1229,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
        * A list of [Tax Rate](https://stripe.com/docs/api/tax_rates) ids. These Tax Rates will
        * override the
        * [`default_tax_rates`](https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates)
-       * on the Subscription.
+       * on the Subscription. When updating, pass an empty string to remove previously-defined tax
+       * rates.
        */
       public Builder setTaxRates(EmptyParam taxRates) {
         this.taxRates = taxRates;
@@ -1234,7 +1241,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
        * A list of [Tax Rate](https://stripe.com/docs/api/tax_rates) ids. These Tax Rates will
        * override the
        * [`default_tax_rates`](https://stripe.com/docs/api/subscriptions/create#create_subscription-default_tax_rates)
-       * on the Subscription.
+       * on the Subscription. When updating, pass an empty string to remove previously-defined tax
+       * rates.
        */
       public Builder setTaxRates(List<String> taxRates) {
         this.taxRates = taxRates;

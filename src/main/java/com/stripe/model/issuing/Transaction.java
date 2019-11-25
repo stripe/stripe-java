@@ -22,6 +22,10 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class Transaction extends ApiResource
     implements MetadataStore<Transaction>, BalanceTransactionSource {
+  /**
+   * The amount of this transaction in your currency. This is the amount that your balance will be
+   * updated by.
+   */
   @SerializedName("amount")
   Long amount;
 
@@ -76,9 +80,14 @@ public class Transaction extends ApiResource
   @SerializedName("livemode")
   Boolean livemode;
 
+  /**
+   * The amount that the merchant will receive, denominated in `merchant_currency`. It will be
+   * different from `amount` if the merchant is taking payment in a different currency.
+   */
   @SerializedName("merchant_amount")
   Long merchantAmount;
 
+  /** The currency with which the merchant is taking payment. */
   @SerializedName("merchant_currency")
   String merchantCurrency;
 
