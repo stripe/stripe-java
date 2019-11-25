@@ -1,5 +1,8 @@
 # Changelog
 
+## 15.6.0 - 2019-11-25
+* [#907](https://github.com/stripe/stripe-java/pull/907) Add support for `out_of_band_amount` on `CreditNote` creation
+
 ## 15.5.0 - 2019-11-21
 * [#905](https://github.com/stripe/stripe-java/pull/905) Add support for `payment_intent` filter when listing `Dispute`s.
 
