@@ -100,10 +100,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Card> replacementFor;
 
-  /**
-   * Why the card that this card replaces (if any) needed to be replaced. One of `damage`,
-   * `expiration`, `loss`, or `theft`.
-   */
+  /** The reason why the previous card needed to be replaced. */
   @SerializedName("replacement_reason")
   String replacementReason;
 
@@ -379,7 +376,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Pin extends StripeObject {
-    /** The status of the pin. One of `blocked` or `active`. */
+    /** Wether the PIN will be accepted or not. */
     @SerializedName("status")
     String status;
   }
