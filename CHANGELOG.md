@@ -1,5 +1,8 @@
 # Changelog
 
+## 15.7.0 - 2019-11-26
+* [#908](https://github.com/stripe/stripe-java/pull/908) Add support for Preview endpoint on CreditNote
+
 ## 15.6.0 - 2019-11-25
 * [#907](https://github.com/stripe/stripe-java/pull/907) Add support for `out_of_band_amount` on `CreditNote` creation
 
