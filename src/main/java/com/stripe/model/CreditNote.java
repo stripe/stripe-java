@@ -7,6 +7,7 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.CreditNoteCreateParams;
 import com.stripe.param.CreditNoteListParams;
+import com.stripe.param.CreditNotePreviewParams;
 import com.stripe.param.CreditNoteRetrieveParams;
 import com.stripe.param.CreditNoteUpdateParams;
 import com.stripe.param.CreditNoteVoidCreditNoteParams;
@@ -315,6 +316,32 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/credit_notes");
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, CreditNote.class, options);
+  }
+
+  /** Get a preview of a credit note without creating it. */
+  public static CreditNote preview(Map<String, Object> params) throws StripeException {
+    return preview(params, (RequestOptions) null);
+  }
+
+  /** Get a preview of a credit note without creating it. */
+  public static CreditNote preview(Map<String, Object> params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/credit_notes/preview");
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, CreditNote.class, options);
+  }
+
+  /** Get a preview of a credit note without creating it. */
+  public static CreditNote preview(CreditNotePreviewParams params) throws StripeException {
+    return preview(params, (RequestOptions) null);
+  }
+
+  /** Get a preview of a credit note without creating it. */
+  public static CreditNote preview(CreditNotePreviewParams params, RequestOptions options)
+      throws StripeException {
+    String url = String.format("%s%s", Stripe.getApiBase(), "/v1/credit_notes/preview");
+    return ApiResource.request(
+        ApiResource.RequestMethod.GET, url, params, CreditNote.class, options);
   }
 
   /** Retrieves the credit note object with the given identifier. */

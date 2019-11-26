@@ -51,10 +51,7 @@ public class CardCreateParams extends ApiRequestParams {
   @SerializedName("replacement_for")
   String replacementFor;
 
-  /**
-   * If `replacement_for` is specified, this should indicate why that card is being replaced. One of
-   * `damage`, `expiration`, `loss`, or `theft`.
-   */
+  /** If `replacement_for` is specified, this should indicate why that card is being replaced. */
   @SerializedName("replacement_reason")
   ReplacementReason replacementReason;
 
@@ -250,10 +247,7 @@ public class CardCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * If `replacement_for` is specified, this should indicate why that card is being replaced. One
-     * of `damage`, `expiration`, `loss`, or `theft`.
-     */
+    /** If `replacement_for` is specified, this should indicate why that card is being replaced. */
     public Builder setReplacementReason(ReplacementReason replacementReason) {
       this.replacementReason = replacementReason;
       return this;
