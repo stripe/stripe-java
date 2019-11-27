@@ -22,6 +22,10 @@ public class Settlement extends ApiResource implements HasId, MetadataStore<Sett
   @SerializedName("bin")
   String bin;
 
+  /** The date that the transactions are cleared and posted to user’s accounts. */
+  @SerializedName("clearing_date")
+  Long clearingDate;
+
   /** Time at which the object was created. Measured in seconds since the Unix epoch. */
   @SerializedName("created")
   Long created;
@@ -72,10 +76,6 @@ public class Settlement extends ApiResource implements HasId, MetadataStore<Sett
   /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
   String object;
-
-  /** The date of the settlement event. */
-  @SerializedName("settlement_date")
-  Long settlementDate;
 
   /** One of `international` or `uk_national_net`. */
   @SerializedName("settlement_service")
