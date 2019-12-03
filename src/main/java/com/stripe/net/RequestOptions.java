@@ -110,8 +110,8 @@ public class RequestOptions {
     public RequestOptionsBuilder() {
       this.apiKey = Stripe.apiKey;
       this.clientId = Stripe.clientId;
-      this.connectTimeout = Stripe.DEFAULT_CONNECT_TIMEOUT;
-      this.readTimeout = Stripe.DEFAULT_READ_TIMEOUT;
+      this.connectTimeout = Stripe.getConnectTimeout();
+      this.readTimeout = Stripe.getReadTimeout();
     }
 
     public String getApiKey() {

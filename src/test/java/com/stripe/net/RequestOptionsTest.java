@@ -78,9 +78,20 @@ public class RequestOptionsTest {
 
   @Test
   public void testTimeoutDefaultValues() {
-    RequestOptions opts = RequestOptions.builder().build();
+    int origConnectTimeout = Stripe.getConnectTimeout();
+    int origReadTimeout = Stripe.getReadTimeout();
 
-    assertEquals(Stripe.DEFAULT_CONNECT_TIMEOUT, opts.getConnectTimeout());
-    assertEquals(Stripe.DEFAULT_READ_TIMEOUT, opts.getReadTimeout());
+    try {
+      Stripe.setConnectTimeout(123);
+      Stripe.setReadTimeout(234);
+
+      RequestOptions opts = RequestOptions.builder().build();
+
+      assertEquals(123, opts.getConnectTimeout());
+      assertEquals(234, opts.getReadTimeout());
+    } finally {
+      Stripe.setConnectTimeout(origConnectTimeout);
+      Stripe.setReadTimeout(origReadTimeout);
+    }
   }
 }
