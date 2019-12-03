@@ -3325,10 +3325,7 @@ public class CardCreateParams extends ApiRequestParams {
     @SerializedName("name")
     String name;
 
-    /**
-     * One of `bulk` or `individual`. Bulk shipments will be grouped and mailed together, while
-     * individual ones will not.
-     */
+    /** Packaging options. */
     @SerializedName("type")
     EnumParam type;
 
@@ -3394,19 +3391,13 @@ public class CardCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /**
-       * One of `bulk` or `individual`. Bulk shipments will be grouped and mailed together, while
-       * individual ones will not.
-       */
+      /** Packaging options. */
       public Builder setType(Type type) {
         this.type = type;
         return this;
       }
 
-      /**
-       * One of `bulk` or `individual`. Bulk shipments will be grouped and mailed together, while
-       * individual ones will not.
-       */
+      /** Packaging options. */
       public Builder setType(EmptyParam type) {
         this.type = type;
         return this;

@@ -661,7 +661,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      * Whether the company's owners have been provided. This Boolean will be `true` if you've
      * manually indicated that all owners are provided via [the `owners_provided`
      * parameter](https://stripe.com/docs/api/accounts/update#update_account-company-owners_provided),
-     * or if Stripe determined that all owners were provided. Stripe determines ownership
+     * or if Stripe determined that sufficient owners were provided. Stripe determines ownership
      * requirements using both the number of owners provided and their total percent ownership
      * (calculated by adding the `percent_ownership` of each owner together).
      */

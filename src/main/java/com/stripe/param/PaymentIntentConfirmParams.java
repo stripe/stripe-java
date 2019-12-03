@@ -117,7 +117,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   /**
    * This is a legacy field that will be removed in the future. It is the ID of the Source object to
    * attach to this PaymentIntent. Please use the `payment_method` field instead, which also
-   * supports Source, Card, and BankAccount objects.
+   * supports Cards and [compatible
+   * Source](https://stripe.com/docs/payments/payment-methods#compatibility) objects.
    */
   @SerializedName("source")
   String source;
@@ -426,7 +427,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     /**
      * This is a legacy field that will be removed in the future. It is the ID of the Source object
      * to attach to this PaymentIntent. Please use the `payment_method` field instead, which also
-     * supports Source, Card, and BankAccount objects.
+     * supports Cards and [compatible
+     * Source](https://stripe.com/docs/payments/payment-methods#compatibility) objects.
      */
     public Builder setSource(String source) {
       this.source = source;

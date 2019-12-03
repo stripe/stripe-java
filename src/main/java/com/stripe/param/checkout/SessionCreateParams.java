@@ -75,8 +75,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
   /**
    * The IETF language tag of the locale Checkout is displayed in. If blank or `auto`, the browser's
-   * locale is used. Supported values are `auto`, `da`, `de`, `en`, `es`, `fi`, `fr`, `it`, `ja`,
-   * `nb`, `nl`, `pl`, `pt`, `sv`, or `zh`.
+   * locale is used.
    */
   @SerializedName("locale")
   Locale locale;
@@ -355,8 +354,7 @@ public class SessionCreateParams extends ApiRequestParams {
 
     /**
      * The IETF language tag of the locale Checkout is displayed in. If blank or `auto`, the
-     * browser's locale is used. Supported values are `auto`, `da`, `de`, `en`, `es`, `fi`, `fr`,
-     * `it`, `ja`, `nb`, `nl`, `pl`, `pt`, `sv`, or `zh`.
+     * browser's locale is used.
      */
     public Builder setLocale(Locale locale) {
       this.locale = locale;

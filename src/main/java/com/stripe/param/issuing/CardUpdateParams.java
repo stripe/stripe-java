@@ -19,13 +19,6 @@ public class CardUpdateParams extends ApiRequestParams {
   @SerializedName("authorization_controls")
   AuthorizationControls authorizationControls;
 
-  /**
-   * The [Cardholder](https://stripe.com/docs/api#issuing_cardholder_object) to associate the card
-   * with. (This field is deprecated and will be removed from future versions of the API.)
-   */
-  @SerializedName("cardholder")
-  Object cardholder;
-
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -51,13 +44,11 @@ public class CardUpdateParams extends ApiRequestParams {
 
   private CardUpdateParams(
       AuthorizationControls authorizationControls,
-      Object cardholder,
       List<String> expand,
       Map<String, Object> extraParams,
       Object metadata,
       Status status) {
     this.authorizationControls = authorizationControls;
-    this.cardholder = cardholder;
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
@@ -71,8 +62,6 @@ public class CardUpdateParams extends ApiRequestParams {
   public static class Builder {
     private AuthorizationControls authorizationControls;
 
-    private Object cardholder;
-
     private List<String> expand;
 
     private Map<String, Object> extraParams;
@@ -84,12 +73,7 @@ public class CardUpdateParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public CardUpdateParams build() {
       return new CardUpdateParams(
-          this.authorizationControls,
-          this.cardholder,
-          this.expand,
-          this.extraParams,
-          this.metadata,
-          this.status);
+          this.authorizationControls, this.expand, this.extraParams, this.metadata, this.status);
     }
 
     /**
@@ -99,24 +83,6 @@ public class CardUpdateParams extends ApiRequestParams {
      */
     public Builder setAuthorizationControls(AuthorizationControls authorizationControls) {
       this.authorizationControls = authorizationControls;
-      return this;
-    }
-
-    /**
-     * The [Cardholder](https://stripe.com/docs/api#issuing_cardholder_object) to associate the card
-     * with. (This field is deprecated and will be removed from future versions of the API.)
-     */
-    public Builder setCardholder(String cardholder) {
-      this.cardholder = cardholder;
-      return this;
-    }
-
-    /**
-     * The [Cardholder](https://stripe.com/docs/api#issuing_cardholder_object) to associate the card
-     * with. (This field is deprecated and will be removed from future versions of the API.)
-     */
-    public Builder setCardholder(EmptyParam cardholder) {
-      this.cardholder = cardholder;
       return this;
     }
 

@@ -1276,22 +1276,22 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @EqualsAndHashCode(callSuper = false)
       public static class Checks extends StripeObject {
         /**
-         * If a address line1 was provided, results of the check, one of 'pass', 'failed',
-         * 'unavailable' or 'unchecked'.
+         * If a address line1 was provided, results of the check, one of `pass`, `fail`,
+         * `unavailable`, or `unchecked`.
          */
         @SerializedName("address_line1_check")
         String addressLine1Check;
 
         /**
-         * If a address postal code was provided, results of the check, one of 'pass', 'failed',
-         * 'unavailable' or 'unchecked'.
+         * If a address postal code was provided, results of the check, one of `pass`, `fail`,
+         * `unavailable`, or `unchecked`.
          */
         @SerializedName("address_postal_code_check")
         String addressPostalCodeCheck;
 
         /**
-         * If a CVC was provided, results of the check, one of 'pass', 'failed', 'unavailable' or
-         * 'unchecked'.
+         * If a CVC was provided, results of the check, one of `pass`, `fail`, `unavailable`, or
+         * `unchecked`.
          */
         @SerializedName("cvc_check")
         String cvcCheck;
