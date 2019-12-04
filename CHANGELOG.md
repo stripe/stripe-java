@@ -1,5 +1,13 @@
 # Changelog
 
+## 16.0.0 - 2019-12-03
+* [#910](https://github.com/stripe/stripe-java/pull/910) Use global timeouts in RequestOptions
+* [#911](https://github.com/stripe/stripe-java/pull/911) Multiple API changes
+  * Pin to API version `2019-12-03`
+  * Remove `tax_info` and `tax_info_verification` on `Customer`
+  * Remove `cardholder` on Issuing `Card` update
+  * Remove `invoice_customer_balance_settings` from `Subscription`
+
 ## 15.7.0 - 2019-11-26
 * [#908](https://github.com/stripe/stripe-java/pull/908) Add support for Preview endpoint on CreditNote
 
