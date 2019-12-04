@@ -125,6 +125,13 @@ public class SourceTransaction extends StripeObject implements HasId {
     @SerializedName("fingerprint")
     String fingerprint;
 
+    /**
+     * The credit transfer rails the sender used to push money. The three rails are: Faster
+     * Payments, BACS, and CHAPS.
+     */
+    @SerializedName("funding_method")
+    String fundingMethod;
+
     /** Last 4 digits of account number associated with the transfer. */
     @SerializedName("last4")
     String last4;
