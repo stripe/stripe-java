@@ -1263,6 +1263,13 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("moto")
       Boolean moto;
 
+      /**
+       * Identifies which network this charge was processed on. Can be `amex`, `diners`, `discover`,
+       * `interac`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.
+       */
+      @SerializedName("network")
+      String network;
+
       /** Populated if this transaction used 3D Secure authentication. */
       @SerializedName("three_d_secure")
       ThreeDSecure threeDSecure;
@@ -1506,6 +1513,13 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /** The last four digits of the card. */
       @SerializedName("last4")
       String last4;
+
+      /**
+       * Identifies which network this charge was processed on. Can be `amex`, `diners`, `discover`,
+       * `interac`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.
+       */
+      @SerializedName("network")
+      String network;
 
       /**
        * How were card details read in this transaction. Can be contact_emv, contactless_emv,
