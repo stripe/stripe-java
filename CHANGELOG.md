@@ -1,5 +1,8 @@
 # Changelog
 
+## 16.1.0 - 2019-12-04
+* [#912](https://github.com/stripe/stripe-java/pull/912) Add support for `network` on `Charge` and `funding_method` on `SourceTransaction`
+
 ## 16.0.0 - 2019-12-03
 * [#910](https://github.com/stripe/stripe-java/pull/910) Use global timeouts in RequestOptions
 * [#911](https://github.com/stripe/stripe-java/pull/911) Multiple API changes
