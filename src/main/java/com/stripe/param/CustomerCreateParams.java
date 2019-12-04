@@ -102,15 +102,6 @@ public class CustomerCreateParams extends ApiRequestParams {
   @SerializedName("tax_id_data")
   List<TaxIdData> taxIdData;
 
-  /**
-   * The customer's tax information. Appears on invoices emailed to this customer. This parameter
-   * has been deprecated and will be removed in a future API version, for further information view
-   * the [migration
-   * guide](https://stripe.com/docs/billing/migration/taxes#moving-from-taxinfo-to-customer-tax-ids).
-   */
-  @SerializedName("tax_info")
-  TaxInfo taxInfo;
-
   private CustomerCreateParams(
       Object address,
       Long balance,
@@ -129,8 +120,7 @@ public class CustomerCreateParams extends ApiRequestParams {
       Object shipping,
       String source,
       EnumParam taxExempt,
-      List<TaxIdData> taxIdData,
-      TaxInfo taxInfo) {
+      List<TaxIdData> taxIdData) {
     this.address = address;
     this.balance = balance;
     this.coupon = coupon;
@@ -149,7 +139,6 @@ public class CustomerCreateParams extends ApiRequestParams {
     this.source = source;
     this.taxExempt = taxExempt;
     this.taxIdData = taxIdData;
-    this.taxInfo = taxInfo;
   }
 
   public static Builder builder() {
@@ -193,8 +182,6 @@ public class CustomerCreateParams extends ApiRequestParams {
 
     private List<TaxIdData> taxIdData;
 
-    private TaxInfo taxInfo;
-
     /** Finalize and obtain parameter instance from this builder. */
     public CustomerCreateParams build() {
       return new CustomerCreateParams(
@@ -215,8 +202,7 @@ public class CustomerCreateParams extends ApiRequestParams {
           this.shipping,
           this.source,
           this.taxExempt,
-          this.taxIdData,
-          this.taxInfo);
+          this.taxIdData);
     }
 
     /** The customer's address. */
@@ -452,17 +438,6 @@ public class CustomerCreateParams extends ApiRequestParams {
         this.taxIdData = new ArrayList<>();
       }
       this.taxIdData.addAll(elements);
-      return this;
-    }
-
-    /**
-     * The customer's tax information. Appears on invoices emailed to this customer. This parameter
-     * has been deprecated and will be removed in a future API version, for further information view
-     * the [migration
-     * guide](https://stripe.com/docs/billing/migration/taxes#moving-from-taxinfo-to-customer-tax-ids).
-     */
-    public Builder setTaxInfo(TaxInfo taxInfo) {
-      this.taxInfo = taxInfo;
       return this;
     }
   }
@@ -1169,99 +1144,6 @@ public class CustomerCreateParams extends ApiRequestParams {
 
       @SerializedName("za_vat")
       ZA_VAT("za_vat");
-
-      @Getter(onMethod_ = {@Override})
-      private final String value;
-
-      Type(String value) {
-        this.value = value;
-      }
-    }
-  }
-
-  @Getter
-  public static class TaxInfo {
-    /**
-     * Map of extra parameters for custom features not available in this client library. The content
-     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
-     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
-     * param object. Effectively, this map is flattened to its parent instance.
-     */
-    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
-    Map<String, Object> extraParams;
-
-    /** The customer's tax ID number. */
-    @SerializedName("tax_id")
-    String taxId;
-
-    /** The type of ID number. The only possible value is `vat` */
-    @SerializedName("type")
-    Type type;
-
-    private TaxInfo(Map<String, Object> extraParams, String taxId, Type type) {
-      this.extraParams = extraParams;
-      this.taxId = taxId;
-      this.type = type;
-    }
-
-    public static Builder builder() {
-      return new Builder();
-    }
-
-    public static class Builder {
-      private Map<String, Object> extraParams;
-
-      private String taxId;
-
-      private Type type;
-
-      /** Finalize and obtain parameter instance from this builder. */
-      public TaxInfo build() {
-        return new TaxInfo(this.extraParams, this.taxId, this.type);
-      }
-
-      /**
-       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
-       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
-       * CustomerCreateParams.TaxInfo#extraParams} for the field documentation.
-       */
-      public Builder putExtraParam(String key, Object value) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.put(key, value);
-        return this;
-      }
-
-      /**
-       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
-       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
-       * See {@link CustomerCreateParams.TaxInfo#extraParams} for the field documentation.
-       */
-      public Builder putAllExtraParam(Map<String, Object> map) {
-        if (this.extraParams == null) {
-          this.extraParams = new HashMap<>();
-        }
-        this.extraParams.putAll(map);
-        return this;
-      }
-
-      /** The customer's tax ID number. */
-      public Builder setTaxId(String taxId) {
-        this.taxId = taxId;
-        return this;
-      }
-
-      /** The type of ID number. The only possible value is `vat` */
-      public Builder setType(Type type) {
-        this.type = type;
-        return this;
-      }
-    }
-
-    public enum Type implements ApiRequestParams.EnumParam {
-      @SerializedName("vat")
-      VAT("vat");
 
       @Getter(onMethod_ = {@Override})
       private final String value;

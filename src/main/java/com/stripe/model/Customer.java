@@ -143,24 +143,6 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   @SerializedName("tax_ids")
   TaxIdCollection taxIds;
 
-  /**
-   * The customer's tax information. Appears on invoices emailed to this customer. This field has
-   * been deprecated and will be removed in a future API version, for further information view the
-   * [migration
-   * guide](https://stripe.com/docs/billing/migration/taxes#moving-from-taxinfo-to-customer-tax-ids).
-   */
-  @SerializedName("tax_info")
-  TaxInfo taxInfo;
-
-  /**
-   * Describes the status of looking up the tax ID provided in `tax_info`. This field has been
-   * deprecated and will be removed in a future API version, for further information view the
-   * [migration
-   * guide](https://stripe.com/docs/billing/migration/taxes#moving-from-taxinfo-to-customer-tax-ids).
-   */
-  @SerializedName("tax_info_verification")
-  TaxInfoVerification taxInfoVerification;
-
   /** Get id of expandable `defaultSource` object. */
   public String getDefaultSource() {
     return (this.defaultSource != null) ? this.defaultSource.getId() : null;
@@ -530,34 +512,5 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
       this.defaultPaymentMethod =
           new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
     }
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class TaxInfo extends StripeObject {
-    /** The customer's tax ID number. */
-    @SerializedName("tax_id")
-    String taxId;
-
-    /** The type of ID number. */
-    @SerializedName("type")
-    String type;
-  }
-
-  @Getter
-  @Setter
-  @EqualsAndHashCode(callSuper = false)
-  public static class TaxInfoVerification extends StripeObject {
-    /**
-     * The state of verification for this customer. Possible values are `unverified`, `pending`, or
-     * `verified`.
-     */
-    @SerializedName("status")
-    String status;
-
-    /** The official name associated with the tax ID returned from the external provider. */
-    @SerializedName("verified_name")
-    String verifiedName;
   }
 }

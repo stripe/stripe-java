@@ -388,7 +388,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     @SerializedName("address")
     Address address;
 
-    /** The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. */
+    /** The delivery service that shipped a card. One of `fedex` or `usps`. */
     @SerializedName("carrier")
     String carrier;
 
@@ -407,10 +407,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     @SerializedName("phone")
     String phone;
 
-    /**
-     * The delivery status of the card. One of `pending`, `shipped`, `delivered`, `returned`,
-     * `failure`, or `canceled`.
-     */
+    /** The delivery status of the card. */
     @SerializedName("status")
     String status;
 
@@ -425,10 +422,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     @SerializedName("tracking_url")
     String trackingUrl;
 
-    /**
-     * One of `bulk` or `individual`. Bulk shipments will be grouped and mailed together, while
-     * individual ones will not.
-     */
+    /** Packaging options. */
     @SerializedName("type")
     String type;
   }

@@ -143,6 +143,11 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
    * ID of the payment method (a PaymentMethod, Card, or [compatible
    * Source](https://stripe.com/docs/payments/payment-methods#compatibility) object) to attach to
    * this PaymentIntent.
+   *
+   * <p>If neither the `payment_method` parameter nor the `source` parameter are provided with
+   * `confirm=true`, `source` will be automatically populated with `customer.default_source` to
+   * improve the migration experience for users of the Charges API. We recommend that you explicitly
+   * provide the `payment_method` going forward.
    */
   @SerializedName("payment_method")
   String paymentMethod;
@@ -219,7 +224,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   /**
    * This is a legacy field that will be removed in the future. It is the ID of the Source object to
    * attach to this PaymentIntent. Please use the `payment_method` field instead, which also
-   * supports Source, Card, and BankAccount objects.
+   * supports Cards and [compatible
+   * Source](https://stripe.com/docs/payments/payment-methods#compatibility) objects.If neither the
+   * `payment_method` parameter nor the `source` parameter are provided with `confirm=true`, this
+   * field will be automatically populated with `customer.default_source` to improve the migration
+   * experience for users of the Charges API. We recommend that you explicitly provide the `source`
+   * or `payment_method` parameter going forward.
    */
   @SerializedName("source")
   String source;
@@ -649,6 +659,11 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      * ID of the payment method (a PaymentMethod, Card, or [compatible
      * Source](https://stripe.com/docs/payments/payment-methods#compatibility) object) to attach to
      * this PaymentIntent.
+     *
+     * <p>If neither the `payment_method` parameter nor the `source` parameter are provided with
+     * `confirm=true`, `source` will be automatically populated with `customer.default_source` to
+     * improve the migration experience for users of the Charges API. We recommend that you
+     * explicitly provide the `payment_method` going forward.
      */
     public Builder setPaymentMethod(String paymentMethod) {
       this.paymentMethod = paymentMethod;
@@ -758,7 +773,12 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     /**
      * This is a legacy field that will be removed in the future. It is the ID of the Source object
      * to attach to this PaymentIntent. Please use the `payment_method` field instead, which also
-     * supports Source, Card, and BankAccount objects.
+     * supports Cards and [compatible
+     * Source](https://stripe.com/docs/payments/payment-methods#compatibility) objects.If neither
+     * the `payment_method` parameter nor the `source` parameter are provided with `confirm=true`,
+     * this field will be automatically populated with `customer.default_source` to improve the
+     * migration experience for users of the Charges API. We recommend that you explicitly provide
+     * the `source` or `payment_method` parameter going forward.
      */
     public Builder setSource(String source) {
       this.source = source;
