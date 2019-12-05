@@ -30,11 +30,7 @@ public class OrderItem extends StripeObject {
   @SerializedName("description")
   String description;
 
-  /**
-   * String representing the object's type. Objects of the same type share the same value.
-   *
-   * <p>Equal to `order_item`.
-   */
+  /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
   String object;
 

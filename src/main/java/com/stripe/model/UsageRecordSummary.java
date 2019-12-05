@@ -25,11 +25,7 @@ public class UsageRecordSummary extends StripeObject implements HasId {
   @SerializedName("livemode")
   Boolean livemode;
 
-  /**
-   * String representing the object's type. Objects of the same type share the same value.
-   *
-   * <p>Equal to `usage_record_summary`.
-   */
+  /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
   String object;
 

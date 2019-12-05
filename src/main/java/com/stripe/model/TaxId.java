@@ -44,11 +44,7 @@ public class TaxId extends ApiResource implements HasId {
   @SerializedName("livemode")
   Boolean livemode;
 
-  /**
-   * String representing the object's type. Objects of the same type share the same value.
-   *
-   * <p>Equal to `tax_id`.
-   */
+  /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
   String object;
 

@@ -56,11 +56,7 @@ public class FeeRefund extends ApiResource
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /**
-   * String representing the object's type. Objects of the same type share the same value.
-   *
-   * <p>Equal to `fee_refund`.
-   */
+  /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
   String object;
 

@@ -23,11 +23,7 @@ public class AccountLink extends ApiResource {
   @SerializedName("expires_at")
   Long expiresAt;
 
-  /**
-   * String representing the object's type. Objects of the same type share the same value.
-   *
-   * <p>Equal to `account_link`.
-   */
+  /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
   String object;
 

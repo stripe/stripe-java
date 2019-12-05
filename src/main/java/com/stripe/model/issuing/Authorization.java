@@ -111,11 +111,7 @@ public class Authorization extends ApiResource
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /**
-   * String representing the object's type. Objects of the same type share the same value.
-   *
-   * <p>Equal to `issuing.authorization`.
-   */
+  /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
   String object;
 
@@ -423,14 +419,7 @@ public class Authorization extends ApiResource
     @SerializedName("held_currency")
     String heldCurrency;
 
-    /**
-     * The reason for the approval or decline.
-     *
-     * <p>One of `account_compliance_disabled`, `account_inactive`, `authentication_failed`,
-     * `authorization_controls`, `card_active`, `card_inactive`, `cardholder_inactive`,
-     * `cardholder_verification_required`, `insufficient_funds`, `not_allowed`, `suspected_fraud`,
-     * `webhook_approved`, `webhook_declined`, or `webhook_timeout`.
-     */
+    /** The reason for the approval or decline. */
     @SerializedName("reason")
     String reason;
 

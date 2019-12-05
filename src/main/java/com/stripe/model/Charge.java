@@ -171,11 +171,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /**
-   * String representing the object's type. Objects of the same type share the same value.
-   *
-   * <p>Equal to `charge`.
-   */
+  /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
   String object;
 
@@ -1048,11 +1044,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class AchDebit extends StripeObject {
-      /**
-       * Type of entity that holds the account. This can be either `individual` or `company`.
-       *
-       * <p>One of `company`, or `individual`.
-       */
+      /** Type of entity that holds the account. This can be either `individual` or `company`. */
       @SerializedName("account_holder_type")
       String accountHolderType;
 
@@ -1630,12 +1622,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("bank")
       String bank;
 
-      /**
-       * The Bank Identifier Code of the customer's bank.
-       *
-       * <p>One of `ABNANL2A`, `ASNBNL21`, `BUNQNL2A`, `FVLBNL22`, `HANDNL2A`, `INGBNL2A`,
-       * `KNABNL2H`, `MOYONL21`, `RABONL2U`, `RBRBNL21`, `SNSBNL2A`, or `TRIONL2U`.
-       */
+      /** The Bank Identifier Code of the customer's bank. */
       @SerializedName("bic")
       String bic;
 

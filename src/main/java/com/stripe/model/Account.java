@@ -90,11 +90,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /**
-   * String representing the object's type. Objects of the same type share the same value.
-   *
-   * <p>Equal to `account`.
-   */
+  /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
   String object;
 
@@ -602,9 +598,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   public static class Capabilities extends StripeObject {
     /**
      * The status of the card issuing capability of the account, or whether you can use Issuing to
-     * distribute funds on cards
-     *
-     * <p>One of `active`, `inactive`, or `pending`.
+     * distribute funds on cards.
      */
     @SerializedName("card_issuing")
     String cardIssuing;
@@ -612,25 +606,17 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     /**
      * The status of the card payments capability of the account, or whether the account can
      * directly process credit and debit card charges.
-     *
-     * <p>One of `active`, `inactive`, or `pending`.
      */
     @SerializedName("card_payments")
     String cardPayments;
 
-    /**
-     * The status of the legacy payments capability of the account.
-     *
-     * <p>One of `active`, `inactive`, or `pending`.
-     */
+    /** The status of the legacy payments capability of the account. */
     @SerializedName("legacy_payments")
     String legacyPayments;
 
     /**
      * The status of the transfers capability of the account, or whether your platform can transfer
      * funds to the account.
-     *
-     * <p>One of `active`, `inactive`, or `pending`.
      */
     @SerializedName("transfers")
     String transfers;

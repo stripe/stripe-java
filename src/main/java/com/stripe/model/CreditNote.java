@@ -86,11 +86,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   @SerializedName("number")
   String number;
 
-  /**
-   * String representing the object's type. Objects of the same type share the same value.
-   *
-   * <p>Equal to `credit_note`.
-   */
+  /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
   String object;
 

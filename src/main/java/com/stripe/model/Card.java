@@ -181,11 +181,7 @@ public class Card extends ApiResource
   @SerializedName("name")
   String name;
 
-  /**
-   * String representing the object's type. Objects of the same type share the same value.
-   *
-   * <p>Equal to `card`.
-   */
+  /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
   String object;
 

@@ -86,11 +86,7 @@ public class Transfer extends ApiResource
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /**
-   * String representing the object's type. Objects of the same type share the same value.
-   *
-   * <p>Equal to `transfer`.
-   */
+  /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
   String object;
 

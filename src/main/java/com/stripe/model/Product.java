@@ -93,11 +93,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   @SerializedName("name")
   String name;
 
-  /**
-   * String representing the object's type. Objects of the same type share the same value.
-   *
-   * <p>Equal to `product`.
-   */
+  /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
   String object;
 
@@ -124,8 +120,6 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   /**
    * The type of the product. The product is either of type `good`, which is eligible for use with
    * Orders and SKUs, or `service`, which is eligible for use with Subscriptions and Plans.
-   *
-   * <p>One of `good`, or `service`.
    */
   @SerializedName("type")
   String type;

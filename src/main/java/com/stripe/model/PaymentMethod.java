@@ -65,11 +65,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /**
-   * String representing the object's type. Objects of the same type share the same value.
-   *
-   * <p>Equal to `payment_method`.
-   */
+  /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
   String object;
 
@@ -79,8 +75,6 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   /**
    * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name
    * matching this value. It contains additional information specific to the PaymentMethod type.
-   *
-   * <p>One of `card`, `card_present`, `ideal`, or `sepa_debit`.
    */
   @SerializedName("type")
   String type;
@@ -619,12 +613,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("bank")
     String bank;
 
-    /**
-     * The Bank Identifier Code of the customer's bank, if the bank was provided.
-     *
-     * <p>One of `ABNANL2A`, `ASNBNL21`, `BUNQNL2A`, `FVLBNL22`, `HANDNL2A`, `INGBNL2A`, `KNABNL2H`,
-     * `MOYONL21`, `RABONL2U`, `RBRBNL21`, `SNSBNL2A`, or `TRIONL2U`.
-     */
+    /** The Bank Identifier Code of the customer's bank, if the bank was provided. */
     @SerializedName("bic")
     String bic;
   }

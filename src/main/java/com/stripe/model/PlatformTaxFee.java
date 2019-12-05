@@ -18,11 +18,7 @@ public class PlatformTaxFee extends StripeObject implements BalanceTransactionSo
   @SerializedName("id")
   String id;
 
-  /**
-   * String representing the object's type. Objects of the same type share the same value.
-   *
-   * <p>Equal to `platform_tax_fee`.
-   */
+  /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
   String object;
 

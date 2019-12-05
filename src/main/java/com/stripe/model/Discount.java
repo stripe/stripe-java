@@ -29,11 +29,7 @@ public class Discount extends StripeObject {
   @SerializedName("end")
   Long end;
 
-  /**
-   * String representing the object's type. Objects of the same type share the same value.
-   *
-   * <p>Equal to `discount`.
-   */
+  /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
   String object;
 

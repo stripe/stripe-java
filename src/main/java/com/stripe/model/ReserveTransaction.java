@@ -28,11 +28,7 @@ public class ReserveTransaction extends StripeObject implements BalanceTransacti
   @SerializedName("id")
   String id;
 
-  /**
-   * String representing the object's type. Objects of the same type share the same value.
-   *
-   * <p>Equal to `reserve_transaction`.
-   */
+  /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
   String object;
 }

@@ -19,11 +19,7 @@ public class ConnectionToken extends ApiResource {
   @SerializedName("location")
   String location;
 
-  /**
-   * String representing the object's type. Objects of the same type share the same value.
-   *
-   * <p>Equal to `terminal.connection_token`.
-   */
+  /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
   String object;
 

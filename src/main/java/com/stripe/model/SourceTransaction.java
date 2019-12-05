@@ -49,11 +49,7 @@ public class SourceTransaction extends StripeObject implements HasId {
   @SerializedName("livemode")
   Boolean livemode;
 
-  /**
-   * String representing the object's type. Objects of the same type share the same value.
-   *
-   * <p>Equal to `source_transaction`.
-   */
+  /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
   String object;
 
@@ -71,13 +67,7 @@ public class SourceTransaction extends StripeObject implements HasId {
   @SerializedName("status")
   String status;
 
-  /**
-   * The type of source this transaction is attached to.
-   *
-   * <p>One of `ach_credit_transfer`, `ach_debit`, `alipay`, `bancontact`, `card`, `card_present`,
-   * `eps`, `giropay`, `ideal`, `klarna`, `multibanco`, `p24`, `sepa_debit`, `sofort`,
-   * `three_d_secure`, or `wechat`.
-   */
+  /** The type of source this transaction is attached to. */
   @SerializedName("type")
   String type;
 

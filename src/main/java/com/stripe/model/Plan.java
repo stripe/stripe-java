@@ -30,8 +30,6 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
    * record reported within a period, `last_ever` for picking the last usage record ever (across
    * period bounds) or `max` which picks the usage record with the maximum reported usage during a
    * period. Defaults to `sum`.
-   *
-   * <p>One of `last_during_period`, `last_ever`, `max`, or `sum`.
    */
   @SerializedName("aggregate_usage")
   String aggregateUsage;
@@ -50,8 +48,6 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
    * (for plans with `usage_type=licensed`), or per unit of total usage (for plans with
    * `usage_type=metered`). `tiered` indicates that the unit pricing will be computed using a
    * tiering strategy as defined using the `tiers` and `tiers_mode` attributes.
-   *
-   * <p>One of `per_unit`, or `tiered`.
    */
   @SerializedName("billing_scheme")
   String billingScheme;
@@ -109,11 +105,7 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
   @SerializedName("nickname")
   String nickname;
 
-  /**
-   * String representing the object's type. Objects of the same type share the same value.
-   *
-   * <p>Equal to `plan`.
-   */
+  /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
   String object;
 
@@ -134,8 +126,6 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
    * Defines if the tiering price should be `graduated` or `volume` based. In `volume`-based
    * tiering, the maximum quantity within a period determines the per unit price, in `graduated`
    * tiering pricing can successively change as the quantity grows.
-   *
-   * <p>One of `graduated`, or `volume`.
    */
   @SerializedName("tiers_mode")
   String tiersMode;
@@ -159,8 +149,6 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
    * `licensed`. `licensed` will automatically bill the `quantity` set when adding it to a
    * subscription, `metered` will aggregate the total usage based on usage records. Defaults to
    * `licensed`.
-   *
-   * <p>One of `licensed`, or `metered`.
    */
   @SerializedName("usage_type")
   String usageType;
@@ -379,11 +367,7 @@ public class Plan extends ApiResource implements HasId, MetadataStore<Plan> {
     @SerializedName("divide_by")
     Long divideBy;
 
-    /**
-     * After division, either round the result `up` or `down`.
-     *
-     * <p>One of `down`, or `up`.
-     */
+    /** After division, either round the result `up` or `down`. */
     @SerializedName("round")
     String round;
   }

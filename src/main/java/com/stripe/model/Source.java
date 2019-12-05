@@ -121,11 +121,7 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
   @SerializedName("multibanco")
   Multibanco multibanco;
 
-  /**
-   * String representing the object's type. Objects of the same type share the same value.
-   *
-   * <p>Equal to `source`.
-   */
+  /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
   String object;
 

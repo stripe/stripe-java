@@ -86,11 +86,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @SerializedName("name")
   String name;
 
-  /**
-   * String representing the object's type. Objects of the same type share the same value.
-   *
-   * <p>Equal to `issuing.card`.
-   */
+  /** String representing the object's type. Objects of the same type share the same value. */
   @SerializedName("object")
   String object;
 
@@ -104,11 +100,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Card> replacementFor;
 
-  /**
-   * The reason why the previous card needed to be replaced.
-   *
-   * <p>One of `damage`, `expiration`, `loss`, or `theft`.
-   */
+  /** The reason why the previous card needed to be replaced. */
   @SerializedName("replacement_reason")
   String replacementReason;
 
@@ -384,11 +376,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Pin extends StripeObject {
-    /**
-     * Wether the PIN will be accepted or not.
-     *
-     * <p>One of `active`, or `blocked`.
-     */
+    /** Wether the PIN will be accepted or not. */
     @SerializedName("status")
     String status;
   }
@@ -419,11 +407,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     @SerializedName("phone")
     String phone;
 
-    /**
-     * The delivery status of the card.
-     *
-     * <p>One of `canceled`, `delivered`, `failure`, `pending`, `returned`, or `shipped`.
-     */
+    /** The delivery status of the card. */
     @SerializedName("status")
     String status;
 
@@ -438,11 +422,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     @SerializedName("tracking_url")
     String trackingUrl;
 
-    /**
-     * Packaging options.
-     *
-     * <p>One of `bulk`, or `individual`.
-     */
+    /** Packaging options. */
     @SerializedName("type")
     String type;
   }
@@ -466,8 +446,6 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     /**
      * The time interval with which to apply this spending limit towards. Allowed values are
      * `per_authorization`, `daily`, `weekly`, `monthly`, `yearly`, or `all_time`.
-     *
-     * <p>One of `all_time`, `daily`, `monthly`, `per_authorization`, `weekly`, or `yearly`.
      */
     @SerializedName("interval")
     String interval;
