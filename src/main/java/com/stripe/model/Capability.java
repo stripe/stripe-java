@@ -27,7 +27,11 @@ public class Capability extends ApiResource implements HasId {
   @SerializedName("id")
   String id;
 
-  /** String representing the object's type. Objects of the same type share the same value. */
+  /**
+   * String representing the object's type. Objects of the same type share the same value.
+   *
+   * <p>Equal to `capability`.
+   */
   @SerializedName("object")
   String object;
 

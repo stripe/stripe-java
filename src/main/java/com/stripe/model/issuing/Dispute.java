@@ -68,7 +68,11 @@ public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** String representing the object's type. Objects of the same type share the same value. */
+  /**
+   * String representing the object's type. Objects of the same type share the same value.
+   *
+   * <p>Equal to `issuing.dispute`.
+   */
   @SerializedName("object")
   String object;
 

@@ -49,7 +49,11 @@ public class Reader extends ApiResource implements HasId {
   @SerializedName("location")
   String location;
 
-  /** String representing the object's type. Objects of the same type share the same value. */
+  /**
+   * String representing the object's type. Objects of the same type share the same value.
+   *
+   * <p>Equal to `terminal.reader`.
+   */
   @SerializedName("object")
   String object;
 

@@ -39,7 +39,11 @@ public class ConnectCollectionTransfer extends StripeObject implements BalanceTr
   @SerializedName("livemode")
   Boolean livemode;
 
-  /** String representing the object's type. Objects of the same type share the same value. */
+  /**
+   * String representing the object's type. Objects of the same type share the same value.
+   *
+   * <p>Equal to `connect_collection_transfer`.
+   */
   @SerializedName("object")
   String object;
 

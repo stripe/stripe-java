@@ -37,7 +37,11 @@ public class SourceMandateNotification extends StripeObject implements HasId {
   @SerializedName("livemode")
   Boolean livemode;
 
-  /** String representing the object's type. Objects of the same type share the same value. */
+  /**
+   * String representing the object's type. Objects of the same type share the same value.
+   *
+   * <p>Equal to `source_mandate_notification`.
+   */
   @SerializedName("object")
   String object;
 

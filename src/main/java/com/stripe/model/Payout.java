@@ -116,7 +116,11 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   @SerializedName("method")
   String method;
 
-  /** String representing the object's type. Objects of the same type share the same value. */
+  /**
+   * String representing the object's type. Objects of the same type share the same value.
+   *
+   * <p>Equal to `payout`.
+   */
   @SerializedName("object")
   String object;
 

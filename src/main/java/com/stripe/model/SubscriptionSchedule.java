@@ -56,7 +56,11 @@ public class SubscriptionSchedule extends ApiResource
   @SerializedName("default_settings")
   DefaultSettings defaultSettings;
 
-  /** Behavior of the subscription schedule and underlying subscription when it ends. */
+  /**
+   * Behavior of the subscription schedule and underlying subscription when it ends.
+   *
+   * <p>One of `cancel`, `none`, `release`, or `renew`.
+   */
   @SerializedName("end_behavior")
   String endBehavior;
 
@@ -80,7 +84,11 @@ public class SubscriptionSchedule extends ApiResource
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** String representing the object's type. Objects of the same type share the same value. */
+  /**
+   * String representing the object's type. Objects of the same type share the same value.
+   *
+   * <p>Equal to `subscription_schedule`.
+   */
   @SerializedName("object")
   String object;
 
@@ -109,6 +117,8 @@ public class SubscriptionSchedule extends ApiResource
    * The present status of the subscription schedule. Possible values are `not_started`, `active`,
    * `completed`, `released`, and `canceled`. You can read more about the different states in our
    * [behavior guide](https://stripe.com/docs/billing/subscriptions/subscription-schedules).
+   *
+   * <p>One of `active`, `canceled`, `completed`, `not_started`, or `released`.
    */
   @SerializedName("status")
   String status;
@@ -477,6 +487,8 @@ public class SubscriptionSchedule extends ApiResource
      * attempt to pay the underlying subscription at the end of each billing cycle using the default
      * source attached to the customer. When sending an invoice, Stripe will email your customer an
      * invoice with payment instructions.
+     *
+     * <p>One of `charge_automatically`, or `send_invoice`.
      */
     @SerializedName("collection_method")
     String collectionMethod;
@@ -551,6 +563,8 @@ public class SubscriptionSchedule extends ApiResource
      * attempt to pay the underlying subscription at the end of each billing cycle using the default
      * source attached to the customer. When sending an invoice, Stripe will email your customer an
      * invoice with payment instructions.
+     *
+     * <p>One of `charge_automatically`, or `send_invoice`.
      */
     @SerializedName("collection_method")
     String collectionMethod;
@@ -690,7 +704,11 @@ public class SubscriptionSchedule extends ApiResource
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class RenewalInterval extends StripeObject {
-    /** Interval at which to renew the subscription schedule for when it ends. */
+    /**
+     * Interval at which to renew the subscription schedule for when it ends.
+     *
+     * <p>One of `day`, `month`, `week`, or `year`.
+     */
     @SerializedName("interval")
     String interval;
 

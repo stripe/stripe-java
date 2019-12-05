@@ -19,7 +19,11 @@ public class LoginLink extends ApiResource {
   @SerializedName("created")
   Long created;
 
-  /** String representing the object's type. Objects of the same type share the same value. */
+  /**
+   * String representing the object's type. Objects of the same type share the same value.
+   *
+   * <p>Equal to `login_link`.
+   */
   @SerializedName("object")
   String object;
 

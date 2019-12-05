@@ -37,7 +37,11 @@ public class Location extends ApiResource implements HasId {
   @SerializedName("id")
   String id;
 
-  /** String representing the object's type. Objects of the same type share the same value. */
+  /**
+   * String representing the object's type. Objects of the same type share the same value.
+   *
+   * <p>Equal to `terminal.location`.
+   */
   @SerializedName("object")
   String object;
 
