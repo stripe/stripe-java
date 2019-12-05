@@ -33,7 +33,11 @@ public class BitcoinTransaction extends StripeObject implements HasId {
   @SerializedName("id")
   String id;
 
-  /** String representing the object's type. Objects of the same type share the same value. */
+  /**
+   * String representing the object's type. Objects of the same type share the same value.
+   *
+   * <p>Equal to `bitcoin_transaction`.
+   */
   @SerializedName("object")
   String object;
 

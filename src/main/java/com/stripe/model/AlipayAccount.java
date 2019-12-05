@@ -50,7 +50,11 @@ public class AlipayAccount extends StripeObject implements PaymentSource {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** String representing the object's type. Objects of the same type share the same value. */
+  /**
+   * String representing the object's type. Objects of the same type share the same value.
+   *
+   * <p>Equal to `alipay_account`.
+   */
   @SerializedName("object")
   String object;
 

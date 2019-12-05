@@ -51,7 +51,11 @@ public class InvoiceLineItem extends StripeObject implements HasId {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** String representing the object's type. Objects of the same type share the same value. */
+  /**
+   * String representing the object's type. Objects of the same type share the same value.
+   *
+   * <p>Equal to `line_item`.
+   */
   @SerializedName("object")
   String object;
 
@@ -92,6 +96,8 @@ public class InvoiceLineItem extends StripeObject implements HasId {
   /**
    * A string identifying the type of the source of this line item, either an `invoiceitem` or a
    * `subscription`.
+   *
+   * <p>One of `invoiceitem`, or `subscription`.
    */
   @SerializedName("type")
   String type;

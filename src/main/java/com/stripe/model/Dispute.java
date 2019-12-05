@@ -89,7 +89,11 @@ public class Dispute extends ApiResource
   @SerializedName("network_reason_code")
   String networkReasonCode;
 
-  /** String representing the object's type. Objects of the same type share the same value. */
+  /**
+   * String representing the object's type. Objects of the same type share the same value.
+   *
+   * <p>Equal to `dispute`.
+   */
   @SerializedName("object")
   String object;
 
@@ -113,6 +117,9 @@ public class Dispute extends ApiResource
    * Current status of dispute. Possible values are `warning_needs_response`,
    * `warning_under_review`, `warning_closed`, `needs_response`, `under_review`, `charge_refunded`,
    * `won`, or `lost`.
+   *
+   * <p>One of `charge_refunded`, `lost`, `needs_response`, `under_review`, `warning_closed`,
+   * `warning_needs_response`, `warning_under_review`, or `won`.
    */
   @SerializedName("status")
   String status;

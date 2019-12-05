@@ -70,6 +70,8 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * attempt to pay this subscription at the end of the cycle using the default source attached to
    * the customer. When sending an invoice, Stripe will email your customer an invoice with payment
    * instructions.
+   *
+   * <p>One of `charge_automatically`, or `send_invoice`.
    */
   @SerializedName("collection_method")
   String collectionMethod;
@@ -177,7 +179,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @SerializedName("next_pending_invoice_item_invoice")
   Long nextPendingInvoiceItemInvoice;
 
-  /** String representing the object's type. Objects of the same type share the same value. */
+  /**
+   * String representing the object's type. Objects of the same type share the same value.
+   *
+   * <p>Equal to `subscription`.
+   */
   @SerializedName("object")
   String object;
 
@@ -253,6 +259,9 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
    * invoices will be attempted (invoices will be created, but then immediately automatically
    * closed). After receiving updated payment information from a customer, you may choose to reopen
    * and pay their closed invoices.
+   *
+   * <p>One of `active`, `canceled`, `incomplete`, `incomplete_expired`, `past_due`, `trialing`, or
+   * `unpaid`.
    */
   @SerializedName("status")
   String status;
@@ -704,7 +713,11 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class PendingInvoiceItemInterval extends StripeObject {
-    /** Specifies invoicing frequency. Either `day`, `week`, `month` or `year`. */
+    /**
+     * Specifies invoicing frequency. Either `day`, `week`, `month` or `year`.
+     *
+     * <p>One of `day`, `month`, `week`, or `year`.
+     */
     @SerializedName("interval")
     String interval;
 

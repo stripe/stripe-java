@@ -99,6 +99,10 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * unrelated to a subscription (for example: created via the invoice editor). The `upcoming` value
    * is reserved for simulated invoices per the upcoming invoice endpoint. `subscription_threshold`
    * indicates an invoice created due to a billing threshold being reached.
+   *
+   * <p>One of `automatic_pending_invoice_item_invoice`, `manual`, `subscription`,
+   * `subscription_create`, `subscription_cycle`, `subscription_threshold`, `subscription_update`,
+   * or `upcoming`.
    */
   @SerializedName("billing_reason")
   String billingReason;
@@ -113,6 +117,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
    * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
    * attempt to pay this invoice using the default source attached to the customer. When sending an
    * invoice, Stripe will email this invoice to the customer with payment instructions.
+   *
+   * <p>One of `charge_automatically`, or `send_invoice`.
    */
   @SerializedName("collection_method")
   String collectionMethod;
@@ -175,6 +181,8 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   /**
    * The customer's tax exempt status. Until the invoice is finalized, this field will equal
    * `customer.tax_exempt`. Once the invoice is finalized, this field will no longer be updated.
+   *
+   * <p>One of `exempt`, `none`, or `reverse`.
    */
   @SerializedName("customer_tax_exempt")
   String customerTaxExempt;
@@ -298,7 +306,11 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("number")
   String number;
 
-  /** String representing the object's type. Objects of the same type share the same value. */
+  /**
+   * String representing the object's type. Objects of the same type share the same value.
+   *
+   * <p>Equal to `invoice`.
+   */
   @SerializedName("object")
   String object;
 

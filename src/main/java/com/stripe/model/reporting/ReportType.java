@@ -52,7 +52,11 @@ public class ReportType extends ApiResource implements HasId {
   @SerializedName("name")
   String name;
 
-  /** String representing the object's type. Objects of the same type share the same value. */
+  /**
+   * String representing the object's type. Objects of the same type share the same value.
+   *
+   * <p>Equal to `reporting.report_type`.
+   */
   @SerializedName("object")
   String object;
 
