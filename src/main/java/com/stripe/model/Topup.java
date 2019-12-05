@@ -85,7 +85,11 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, BalanceT
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** String representing the object's type. Objects of the same type share the same value. */
+  /**
+   * String representing the object's type. Objects of the same type share the same value.
+   *
+   * <p>Equal to `topup`.
+   */
   @SerializedName("object")
   String object;
 
@@ -101,6 +105,8 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, BalanceT
 
   /**
    * The status of the top-up is either `canceled`, `failed`, `pending`, `reversed`, or `succeeded`.
+   *
+   * <p>One of `canceled`, `failed`, `pending`, `reversed`, or `succeeded`.
    */
   @SerializedName("status")
   String status;

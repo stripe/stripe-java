@@ -72,7 +72,11 @@ public class TaxRate extends ApiResource implements HasId, MetadataStore<TaxRate
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** String representing the object's type. Objects of the same type share the same value. */
+  /**
+   * String representing the object's type. Objects of the same type share the same value.
+   *
+   * <p>Equal to `tax_rate`.
+   */
   @SerializedName("object")
   String object;
 

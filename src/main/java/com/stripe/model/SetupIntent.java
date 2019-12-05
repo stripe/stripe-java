@@ -100,7 +100,11 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   @SerializedName("next_action")
   NextAction nextAction;
 
-  /** String representing the object's type. Objects of the same type share the same value. */
+  /**
+   * String representing the object's type. Objects of the same type share the same value.
+   *
+   * <p>Equal to `setup_intent`.
+   */
   @SerializedName("object")
   String object;
 
@@ -687,6 +691,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
        * Read our guide on [manually requesting 3D
        * Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on
        * how this configuration interacts with Radar and our SCA Engine.
+       *
+       * <p>One of `any`, `automatic`, or `challenge_only`.
        */
       @SerializedName("request_three_d_secure")
       String requestThreeDSecure;

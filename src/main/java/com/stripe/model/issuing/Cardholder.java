@@ -75,7 +75,11 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   @SerializedName("name")
   String name;
 
-  /** String representing the object's type. Objects of the same type share the same value. */
+  /**
+   * String representing the object's type. Objects of the same type share the same value.
+   *
+   * <p>Equal to `issuing.cardholder`.
+   */
   @SerializedName("object")
   String object;
 
@@ -86,7 +90,11 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   @SerializedName("requirements")
   Requirements requirements;
 
-  /** Specifies whether to permit authorizations on this cardholder's cards. */
+  /**
+   * Specifies whether to permit authorizations on this cardholder's cards.
+   *
+   * <p>One of `active`, `blocked`, or `inactive`.
+   */
   @SerializedName("status")
   String status;
 
@@ -434,6 +442,8 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
     /**
      * The time interval with which to apply this spending limit towards. Allowed values are
      * `per_authorization`, `daily`, `weekly`, `monthly`, `yearly`, or `all_time`.
+     *
+     * <p>One of `all_time`, `daily`, `monthly`, `per_authorization`, `weekly`, or `yearly`.
      */
     @SerializedName("interval")
     String interval;

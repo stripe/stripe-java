@@ -33,7 +33,11 @@ public class Mandate extends ApiResource implements HasId {
   @SerializedName("multi_use")
   MultiUse multiUse;
 
-  /** String representing the object's type. Objects of the same type share the same value. */
+  /**
+   * String representing the object's type. Objects of the same type share the same value.
+   *
+   * <p>Equal to `mandate`.
+   */
   @SerializedName("object")
   String object;
 

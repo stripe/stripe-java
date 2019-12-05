@@ -77,7 +77,11 @@ public class ApplicationFee extends ApiResource implements BalanceTransactionSou
   @SerializedName("livemode")
   Boolean livemode;
 
-  /** String representing the object's type. Objects of the same type share the same value. */
+  /**
+   * String representing the object's type. Objects of the same type share the same value.
+   *
+   * <p>Equal to `application_fee`.
+   */
   @SerializedName("object")
   String object;
 

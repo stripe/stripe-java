@@ -54,7 +54,11 @@ public class WebhookEndpoint extends ApiResource implements HasId {
   @SerializedName("livemode")
   Boolean livemode;
 
-  /** String representing the object's type. Objects of the same type share the same value. */
+  /**
+   * String representing the object's type. Objects of the same type share the same value.
+   *
+   * <p>Equal to `webhook_endpoint`.
+   */
   @SerializedName("object")
   String object;
 

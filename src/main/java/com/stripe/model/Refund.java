@@ -81,7 +81,11 @@ public class Refund extends ApiResource implements MetadataStore<Refund>, Balanc
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** String representing the object's type. Objects of the same type share the same value. */
+  /**
+   * String representing the object's type. Objects of the same type share the same value.
+   *
+   * <p>Equal to `refund`.
+   */
   @SerializedName("object")
   String object;
 

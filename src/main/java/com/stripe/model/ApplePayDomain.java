@@ -40,7 +40,11 @@ public class ApplePayDomain extends ApiResource implements HasId {
   @SerializedName("livemode")
   Boolean livemode;
 
-  /** String representing the object's type. Objects of the same type share the same value. */
+  /**
+   * String representing the object's type. Objects of the same type share the same value.
+   *
+   * <p>Equal to `apple_pay_domain`.
+   */
   @SerializedName("object")
   String object;
 
