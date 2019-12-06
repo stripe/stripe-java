@@ -118,6 +118,14 @@ public class Mandate extends ApiResource implements HasId {
   @Getter
   @Setter
   @EqualsAndHashCode(callSuper = false)
+  public static class AuBecsDebit extends StripeObject {
+    @SerializedName("url")
+    String url;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
   public static class CustomerAcceptance extends StripeObject {
     /** The time at which the customer accepted the Mandate. */
     @SerializedName("accepted_at")
@@ -164,6 +172,9 @@ public class Mandate extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class PaymentMethodDetails extends StripeObject {
+    @SerializedName("au_becs_debit")
+    AuBecsDebit auBecsDebit;
+
     @SerializedName("card")
     Card card;
 
