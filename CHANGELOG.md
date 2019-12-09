@@ -1,5 +1,9 @@
 # Changelog
 
+## 16.2.0 - 2019-12-09
+* [#914](https://github.com/stripe/stripe-java/pull/914) Add support for AU BECS Debit on `PaymentMethod`
+* [#906](https://github.com/stripe/stripe-java/pull/906) Add documentation for enum values
+
 ## 16.1.0 - 2019-12-04
 * [#912](https://github.com/stripe/stripe-java/pull/912) Add support for `network` on `Charge` and `funding_method` on `SourceTransaction`
 
