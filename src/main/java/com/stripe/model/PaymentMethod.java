@@ -20,6 +20,9 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class PaymentMethod extends ApiResource implements HasId, MetadataStore<PaymentMethod> {
+  @SerializedName("au_becs_debit")
+  AuBecsDebit auBecsDebit;
+
   @SerializedName("billing_details")
   BillingDetails billingDetails;
 
@@ -80,7 +83,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name
    * matching this value. It contains additional information specific to the PaymentMethod type.
    *
-   * <p>One of `card`, `card_present`, `ideal`, or `sepa_debit`.
+   * <p>One of `au_becs_debit`, `card`, `card_present`, `ideal`, or `sepa_debit`.
    */
   @SerializedName("type")
   String type;
@@ -347,6 +350,20 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
             String.format("/v1/payment_methods/%s/detach", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, PaymentMethod.class, options);
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class AuBecsDebit extends StripeObject {
+    @SerializedName("bsb_number")
+    String bsbNumber;
+
+    @SerializedName("fingerprint")
+    String fingerprint;
+
+    @SerializedName("last4")
+    String last4;
   }
 
   @Getter

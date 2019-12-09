@@ -409,8 +409,10 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   @EqualsAndHashCode(callSuper = false)
   public static class Requirements extends StripeObject {
     /**
-     * If the cardholder is disabled, this string describes why. Can be one of `listed`,
-     * `rejected.listed`, or `under_review`.
+     * If `disabled_reason` is present, all cards will decline authorizations with
+     * `cardholder_verification_required` reason.
+     *
+     * <p>One of `listed`, `rejected.listed`, or `under_review`.
      */
     @SerializedName("disabled_reason")
     String disabledReason;
@@ -440,8 +442,7 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
     List<String> categories;
 
     /**
-     * The time interval with which to apply this spending limit towards. Allowed values are
-     * `per_authorization`, `daily`, `weekly`, `monthly`, `yearly`, or `all_time`.
+     * The time interval or event with which to apply this spending limit towards.
      *
      * <p>One of `all_time`, `daily`, `monthly`, `per_authorization`, `weekly`, or `yearly`.
      */

@@ -31,8 +31,9 @@ public class Authorization extends ApiResource
   Boolean approved;
 
   /**
-   * How the card details were provided. One of `chip`, `contactless`, `keyed_in`, `online`, or
-   * `swipe`.
+   * How the card details were provided.
+   *
+   * <p>One of `chip`, `contactless`, `keyed_in`, `online`, or `swipe`.
    */
   @SerializedName("authorization_method")
   String authorizationMethod;
@@ -136,7 +137,11 @@ public class Authorization extends ApiResource
   @SerializedName("request_history")
   List<Authorization.RequestHistory> requestHistory;
 
-  /** One of `closed`, `pending`, or `reversed`. */
+  /**
+   * The current status of the authorization in its lifecycle.
+   *
+   * <p>One of `closed`, `pending`, or `reversed`.
+   */
   @SerializedName("status")
   String status;
 
@@ -464,11 +469,17 @@ public class Authorization extends ApiResource
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class VerificationData extends StripeObject {
-    /** One of `match`, `mismatch`, or `not_provided`. */
+    /**
+     * Wether the cardholder provided an address first line and if it matched the cardholder’s
+     * `billing.address.line1`. One of `match`, `mismatch`, or `not_provided`.
+     */
     @SerializedName("address_line1_check")
     String addressLine1Check;
 
-    /** One of `match`, `mismatch`, or `not_provided`. */
+    /**
+     * Wether the cardholder provided a zip (or postal code) and if it matched the cardholder’s
+     * `billing.address.postal_code`. One of `match`, `mismatch`, or `not_provided`.
+     */
     @SerializedName("address_zip_check")
     String addressZipCheck;
 
@@ -476,7 +487,10 @@ public class Authorization extends ApiResource
     @SerializedName("authentication")
     String authentication;
 
-    /** One of `match`, `mismatch`, or `not_provided`. */
+    /**
+     * Wether the cardholder provided a CVC and if it matched Stripe’s record. One of `match`,
+     * `mismatch`, or `not_provided`.
+     */
     @SerializedName("cvc_check")
     String cvcCheck;
   }

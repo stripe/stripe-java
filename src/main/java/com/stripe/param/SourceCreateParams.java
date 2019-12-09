@@ -13,7 +13,8 @@ import lombok.Getter;
 public class SourceCreateParams extends ApiRequestParams {
   /**
    * Amount associated with the source. This is the amount for which the source will be chargeable
-   * once ready. Required for `single_use` sources.
+   * once ready. Required for `single_use` sources. Not supported for `receiver` type sources, where
+   * charge amount may not be specified until funds land.
    */
   @SerializedName("amount")
   Long amount;
@@ -225,7 +226,8 @@ public class SourceCreateParams extends ApiRequestParams {
 
     /**
      * Amount associated with the source. This is the amount for which the source will be chargeable
-     * once ready. Required for `single_use` sources.
+     * once ready. Required for `single_use` sources. Not supported for `receiver` type sources,
+     * where charge amount may not be specified until funds land.
      */
     public Builder setAmount(Long amount) {
       this.amount = amount;
