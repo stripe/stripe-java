@@ -497,10 +497,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /**
-       * The time interval with which to apply this spending limit towards. Allowed values are
-       * 'per_authorization', 'daily', 'weekly', 'monthly', 'yearly', and 'all_time'.
-       */
+      /** The time interval with which to apply this spending limit towards. */
       @SerializedName("interval")
       Interval interval;
 
@@ -595,10 +592,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /**
-         * The time interval with which to apply this spending limit towards. Allowed values are
-         * 'per_authorization', 'daily', 'weekly', 'monthly', 'yearly', and 'all_time'.
-         */
+        /** The time interval with which to apply this spending limit towards. */
         public Builder setInterval(Interval interval) {
           this.interval = interval;
           return this;

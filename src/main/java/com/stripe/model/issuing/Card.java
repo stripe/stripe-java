@@ -116,11 +116,19 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
   @SerializedName("shipping")
   Shipping shipping;
 
-  /** One of `active`, `inactive`, `canceled`, `lost`, or `stolen`. */
+  /**
+   * Whether authorizations can be approved on this card.
+   *
+   * <p>One of `active`, `canceled`, `inactive`, `lost`, or `stolen`.
+   */
   @SerializedName("status")
   String status;
 
-  /** One of `virtual` or `physical`. */
+  /**
+   * The type of the card.
+   *
+   * <p>One of `physical`, or `virtual`.
+   */
   @SerializedName("type")
   String type;
 
@@ -464,8 +472,7 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     List<String> categories;
 
     /**
-     * The time interval with which to apply this spending limit towards. Allowed values are
-     * `per_authorization`, `daily`, `weekly`, `monthly`, `yearly`, or `all_time`.
+     * The time interval or event with which to apply this spending limit towards.
      *
      * <p>One of `all_time`, `daily`, `monthly`, `per_authorization`, `weekly`, or `yearly`.
      */

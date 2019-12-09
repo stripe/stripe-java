@@ -35,10 +35,7 @@ public class CardUpdateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Object metadata;
 
-  /**
-   * Specifies whether to permit authorizations on this card. Possible values are `active`,
-   * `inactive`, or the terminal states: `canceled`, `lost`, `stolen`.
-   */
+  /** Whether authorizations can be approved on this card. */
   @SerializedName("status")
   Status status;
 
@@ -176,10 +173,7 @@ public class CardUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * Specifies whether to permit authorizations on this card. Possible values are `active`,
-     * `inactive`, or the terminal states: `canceled`, `lost`, `stolen`.
-     */
+    /** Whether authorizations can be approved on this card. */
     public Builder setStatus(Status status) {
       this.status = status;
       return this;
@@ -403,10 +397,7 @@ public class CardUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /**
-       * The time interval with which to apply this spending limit towards. Allowed values are
-       * 'per_authorization', 'daily', 'weekly', 'monthly', 'yearly', and 'all_time'.
-       */
+      /** The time interval with which to apply this spending limit towards. */
       @SerializedName("interval")
       Interval interval;
 
@@ -501,10 +492,7 @@ public class CardUpdateParams extends ApiRequestParams {
           return this;
         }
 
-        /**
-         * The time interval with which to apply this spending limit towards. Allowed values are
-         * 'per_authorization', 'daily', 'weekly', 'monthly', 'yearly', and 'all_time'.
-         */
+        /** The time interval with which to apply this spending limit towards. */
         public Builder setInterval(Interval interval) {
           this.interval = interval;
           return this;

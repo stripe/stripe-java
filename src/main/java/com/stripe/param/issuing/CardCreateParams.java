@@ -59,16 +59,13 @@ public class CardCreateParams extends ApiRequestParams {
   @SerializedName("shipping")
   Shipping shipping;
 
-  /**
-   * Specifies whether to permit authorizations on this card. Possible values are `active` or
-   * `inactive`.
-   */
+  /** Whether authorizations can be approved on this card. */
   @SerializedName("status")
   Status status;
 
   /** The type of card to issue. Possible values are `physical` or `virtual`. */
   @SerializedName("type")
-  Type type;
+  Object type;
 
   private CardCreateParams(
       AuthorizationControls authorizationControls,
@@ -81,7 +78,7 @@ public class CardCreateParams extends ApiRequestParams {
       ReplacementReason replacementReason,
       Shipping shipping,
       Status status,
-      Type type) {
+      Object type) {
     this.authorizationControls = authorizationControls;
     this.cardholder = cardholder;
     this.currency = currency;
@@ -120,7 +117,7 @@ public class CardCreateParams extends ApiRequestParams {
 
     private Status status;
 
-    private Type type;
+    private Object type;
 
     /** Finalize and obtain parameter instance from this builder. */
     public CardCreateParams build() {
@@ -259,10 +256,7 @@ public class CardCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * Specifies whether to permit authorizations on this card. Possible values are `active` or
-     * `inactive`.
-     */
+    /** Whether authorizations can be approved on this card. */
     public Builder setStatus(Status status) {
       this.status = status;
       return this;
@@ -270,6 +264,12 @@ public class CardCreateParams extends ApiRequestParams {
 
     /** The type of card to issue. Possible values are `physical` or `virtual`. */
     public Builder setType(Type type) {
+      this.type = type;
+      return this;
+    }
+
+    /** The type of card to issue. Possible values are `physical` or `virtual`. */
+    public Builder setType(String type) {
       this.type = type;
       return this;
     }
@@ -492,10 +492,7 @@ public class CardCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
-      /**
-       * The time interval with which to apply this spending limit towards. Allowed values are
-       * 'per_authorization', 'daily', 'weekly', 'monthly', 'yearly', and 'all_time'.
-       */
+      /** The time interval with which to apply this spending limit towards. */
       @SerializedName("interval")
       Interval interval;
 
@@ -590,10 +587,7 @@ public class CardCreateParams extends ApiRequestParams {
           return this;
         }
 
-        /**
-         * The time interval with which to apply this spending limit towards. Allowed values are
-         * 'per_authorization', 'daily', 'weekly', 'monthly', 'yearly', and 'all_time'.
-         */
+        /** The time interval with which to apply this spending limit towards. */
         public Builder setInterval(Interval interval) {
           this.interval = interval;
           return this;
