@@ -29,6 +29,14 @@ public class ReaderUpdateParams extends ApiRequestParams {
   Object label;
 
   /**
+   * Set of key-value pairs that you can attach to an object. This can be useful for storing
+   * additional information about the object in a structured format. Individual keys can be unset by
+   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   */
+  @SerializedName("metadata")
+  Map<String, String> metadata;
+
+  /**
    * To [group
    * objects](https://stripe.com/docs/terminal/payments/connect#grouping-objects-by-connected-account)
    * on your platform account by connected account, set this parameter to the connected account ID.
@@ -37,10 +45,15 @@ public class ReaderUpdateParams extends ApiRequestParams {
   Object operatorAccount;
 
   private ReaderUpdateParams(
-      List<String> expand, Map<String, Object> extraParams, Object label, Object operatorAccount) {
+      List<String> expand,
+      Map<String, Object> extraParams,
+      Object label,
+      Map<String, String> metadata,
+      Object operatorAccount) {
     this.expand = expand;
     this.extraParams = extraParams;
     this.label = label;
+    this.metadata = metadata;
     this.operatorAccount = operatorAccount;
   }
 
@@ -55,12 +68,14 @@ public class ReaderUpdateParams extends ApiRequestParams {
 
     private Object label;
 
+    private Map<String, String> metadata;
+
     private Object operatorAccount;
 
     /** Finalize and obtain parameter instance from this builder. */
     public ReaderUpdateParams build() {
       return new ReaderUpdateParams(
-          this.expand, this.extraParams, this.label, this.operatorAccount);
+          this.expand, this.extraParams, this.label, this.metadata, this.operatorAccount);
     }
 
     /**
@@ -124,6 +139,32 @@ public class ReaderUpdateParams extends ApiRequestParams {
     /** The new label of the reader. */
     public Builder setLabel(EmptyParam label) {
       this.label = label;
+      return this;
+    }
+
+    /**
+     * Add a key/value pair to `metadata` map. A map is initialized for the first `put/putAll` call,
+     * and subsequent calls add additional key/value pairs to the original map. See {@link
+     * ReaderUpdateParams#metadata} for the field documentation.
+     */
+    public Builder putMetadata(String key, String value) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.put(key, value);
+      return this;
+    }
+
+    /**
+     * Add all map key/value pairs to `metadata` map. A map is initialized for the first
+     * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+     * See {@link ReaderUpdateParams#metadata} for the field documentation.
+     */
+    public Builder putAllMetadata(Map<String, String> map) {
+      if (this.metadata == null) {
+        this.metadata = new HashMap<>();
+      }
+      this.metadata.putAll(map);
       return this;
     }
 

@@ -30,15 +30,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
 
-  /**
-   * One of `automatic` (default) or `manual`.
-   *
-   * <p>When the capture method is `automatic`, Stripe automatically captures funds when the
-   * customer authorizes the payment.
-   *
-   * <p>Change `capture_method` to manual if you wish to use [separate authorization and
-   * capture](https://stripe.com/docs/payments/capture-later) for payment methods that support this.
-   */
+  /** Controls when the funds will be captured from the customer's account. */
   @SerializedName("capture_method")
   CaptureMethod captureMethod;
 
@@ -51,18 +43,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   @SerializedName("confirm")
   Boolean confirm;
 
-  /**
-   * One of `automatic` (default) or `manual`.
-   *
-   * <p>When the confirmation method is `automatic`, a PaymentIntent can be confirmed using a
-   * publishable key. After `next_action`s are handled, no additional confirmation is required to
-   * complete the payment.
-   *
-   * <p>When the confirmation method is `manual`, all payment attempts must be made using a secret
-   * key. The PaymentIntent returns to the `requires_confirmation` state after handling
-   * `next_action`s, and requires your server to initiate each payment attempt with an explicit
-   * confirmation.
-   */
   @SerializedName("confirmation_method")
   ConfirmationMethod confirmationMethod;
 
@@ -201,9 +181,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
    * [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer, even after the
    * transaction completes.
    *
-   * <p>Use `on_session` if you intend to only reuse the payment method when your customer is
-   * present in your checkout flow. Use `off_session` if your customer may or may not be in your
-   * checkout flow. For more, learn to [save card details after a
+   * <p>For more, learn to [save card details after a
    * payment](https://stripe.com/docs/payments/save-after-payment).
    *
    * <p>Stripe uses `setup_future_usage` to dynamically optimize your payment flow and comply with
@@ -454,16 +432,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * One of `automatic` (default) or `manual`.
-     *
-     * <p>When the capture method is `automatic`, Stripe automatically captures funds when the
-     * customer authorizes the payment.
-     *
-     * <p>Change `capture_method` to manual if you wish to use [separate authorization and
-     * capture](https://stripe.com/docs/payments/capture-later) for payment methods that support
-     * this.
-     */
+    /** Controls when the funds will be captured from the customer's account. */
     public Builder setCaptureMethod(CaptureMethod captureMethod) {
       this.captureMethod = captureMethod;
       return this;
@@ -480,18 +449,6 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /**
-     * One of `automatic` (default) or `manual`.
-     *
-     * <p>When the confirmation method is `automatic`, a PaymentIntent can be confirmed using a
-     * publishable key. After `next_action`s are handled, no additional confirmation is required to
-     * complete the payment.
-     *
-     * <p>When the confirmation method is `manual`, all payment attempts must be made using a secret
-     * key. The PaymentIntent returns to the `requires_confirmation` state after handling
-     * `next_action`s, and requires your server to initiate each payment attempt with an explicit
-     * confirmation.
-     */
     public Builder setConfirmationMethod(ConfirmationMethod confirmationMethod) {
       this.confirmationMethod = confirmationMethod;
       return this;
@@ -746,9 +703,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
      * [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer, even after the
      * transaction completes.
      *
-     * <p>Use `on_session` if you intend to only reuse the payment method when your customer is
-     * present in your checkout flow. Use `off_session` if your customer may or may not be in your
-     * checkout flow. For more, learn to [save card details after a
+     * <p>For more, learn to [save card details after a
      * payment](https://stripe.com/docs/payments/save-after-payment).
      *
      * <p>Stripe uses `setup_future_usage` to dynamically optimize your payment flow and comply with

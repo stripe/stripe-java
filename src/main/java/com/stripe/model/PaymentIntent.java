@@ -74,13 +74,9 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   String cancellationReason;
 
   /**
-   * One of `automatic` (default) or `manual`.
+   * Controls when the funds will be captured from the customer's account.
    *
-   * <p>When the capture method is `automatic`, Stripe automatically captures funds when the
-   * customer authorizes the payment.
-   *
-   * <p>Change `capture_method` to manual if you wish to use [separate authorization and
-   * capture](https://stripe.com/docs/payments/capture-later) for payment methods that support this.
+   * <p>One of `automatic`, or `manual`.
    */
   @SerializedName("capture_method")
   String captureMethod;
@@ -103,18 +99,6 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
   @SerializedName("client_secret")
   String clientSecret;
 
-  /**
-   * One of `automatic` (default) or `manual`.
-   *
-   * <p>When the confirmation method is `automatic`, a PaymentIntent can be confirmed using a
-   * publishable key. After `next_action`s are handled, no additional confirmation is required to
-   * complete the payment.
-   *
-   * <p>When the confirmation method is `manual`, all payment attempts must be made using a secret
-   * key. The PaymentIntent returns to the `requires_confirmation` state after handling
-   * `next_action`s, and requires your server to initiate each payment attempt with an explicit
-   * confirmation.
-   */
   @SerializedName("confirmation_method")
   String confirmationMethod;
 
@@ -235,9 +219,7 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * [attached](https://stripe.com/docs/api/payment_methods/attach) to a Customer, even after the
    * transaction completes.
    *
-   * <p>Use `on_session` if you intend to only reuse the payment method when your customer is
-   * present in your checkout flow. Use `off_session` if your customer may or may not be in your
-   * checkout flow. For more, learn to [save card details after a
+   * <p>For more, learn to [save card details after a
    * payment](https://stripe.com/docs/payments/save-after-payment).
    *
    * <p>Stripe uses `setup_future_usage` to dynamically optimize your payment flow and comply with
@@ -247,6 +229,8 @@ public class PaymentIntent extends ApiResource implements HasId, MetadataStore<P
    * collect [off-session
    * payments](https://stripe.com/docs/payments/cards/charging-saved-cards#off-session-payments-with-saved-cards)
    * for this customer.
+   *
+   * <p>One of `off_session`, or `on_session`.
    */
   @SerializedName("setup_future_usage")
   String setupFutureUsage;

@@ -4,6 +4,7 @@ import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.HasId;
+import com.stripe.model.MetadataStore;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.terminal.ReaderCreateParams;
@@ -19,7 +20,7 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public class Reader extends ApiResource implements HasId {
+public class Reader extends ApiResource implements HasId, MetadataStore<Reader> {
   /** Always true for a deleted object. */
   @SerializedName("deleted")
   Boolean deleted;
@@ -45,9 +46,24 @@ public class Reader extends ApiResource implements HasId {
   @SerializedName("label")
   String label;
 
+  /**
+   * Has the value `true` if the object exists in live mode or the value `false` if the object
+   * exists in test mode.
+   */
+  @SerializedName("livemode")
+  Boolean livemode;
+
   /** The location identifier of the reader. */
   @SerializedName("location")
   String location;
+
+  /**
+   * Set of key-value pairs that you can attach to an object. This can be useful for storing
+   * additional information about the object in a structured format.
+   */
+  @Getter(onMethod_ = {@Override})
+  @SerializedName("metadata")
+  Map<String, String> metadata;
 
   /**
    * String representing the object's type. Objects of the same type share the same value.
@@ -69,6 +85,7 @@ public class Reader extends ApiResource implements HasId {
    * Updates a <code>Reader</code> object by setting the values of the parameters passed. Any
    * parameters not provided will be left unchanged.
    */
+  @Override
   public Reader update(Map<String, Object> params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
@@ -77,6 +94,7 @@ public class Reader extends ApiResource implements HasId {
    * Updates a <code>Reader</code> object by setting the values of the parameters passed. Any
    * parameters not provided will be left unchanged.
    */
+  @Override
   public Reader update(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
         String.format(

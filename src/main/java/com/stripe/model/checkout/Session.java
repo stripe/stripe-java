@@ -85,8 +85,8 @@ public class Session extends ApiResource implements HasId {
    * The IETF language tag of the locale Checkout is displayed in. If blank or `auto`, the browser's
    * locale is used.
    *
-   * <p>One of `auto`, `da`, `de`, `en`, `es`, `fi`, `fr`, `it`, `ja`, `nb`, `nl`, `pl`, `pt`, `sv`,
-   * or `zh`.
+   * <p>One of `auto`, `da`, `de`, `en`, `es`, `fi`, `fr`, `it`, `ja`, `ms`, `nb`, `nl`, `pl`, `pt`,
+   * `sv`, or `zh`.
    */
   @SerializedName("locale")
   String locale;
@@ -125,7 +125,6 @@ public class Session extends ApiResource implements HasId {
    * Describes the type of transaction being performed by Checkout in order to customize relevant
    * text on the page, such as the submit button. `submit_type` can only be specified on Checkout
    * Sessions in `payment` mode, but not Checkout Sessions in `subscription` or `setup` mode.
-   * Supported values are `auto`, `book`, `donate`, or `pay`.
    *
    * <p>One of `auto`, `book`, `donate`, or `pay`.
    */

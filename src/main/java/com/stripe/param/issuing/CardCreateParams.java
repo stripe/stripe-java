@@ -2,8 +2,6 @@ package com.stripe.param.issuing;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
-import com.stripe.net.ApiRequestParams.EnumParam;
-import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -59,7 +57,7 @@ public class CardCreateParams extends ApiRequestParams {
   @SerializedName("shipping")
   Shipping shipping;
 
-  /** Whether authorizations can be approved on this card. */
+  /** Whether authorizations can be approved on this card. Defaults to `inactive`. */
   @SerializedName("status")
   Status status;
 
@@ -256,7 +254,7 @@ public class CardCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Whether authorizations can be approved on this card. */
+    /** Whether authorizations can be approved on this card. Defaults to `inactive`. */
     public Builder setStatus(Status status) {
       this.status = status;
       return this;
@@ -3321,10 +3319,9 @@ public class CardCreateParams extends ApiRequestParams {
 
     /** Packaging options. */
     @SerializedName("type")
-    EnumParam type;
+    Object type;
 
-    private Shipping(
-        Address address, Map<String, Object> extraParams, String name, EnumParam type) {
+    private Shipping(Address address, Map<String, Object> extraParams, String name, Object type) {
       this.address = address;
       this.extraParams = extraParams;
       this.name = name;
@@ -3342,7 +3339,7 @@ public class CardCreateParams extends ApiRequestParams {
 
       private String name;
 
-      private EnumParam type;
+      private Object type;
 
       /** Finalize and obtain parameter instance from this builder. */
       public Shipping build() {
@@ -3392,7 +3389,7 @@ public class CardCreateParams extends ApiRequestParams {
       }
 
       /** Packaging options. */
-      public Builder setType(EmptyParam type) {
+      public Builder setType(String type) {
         this.type = type;
         return this;
       }

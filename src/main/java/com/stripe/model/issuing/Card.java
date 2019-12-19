@@ -408,7 +408,11 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     @SerializedName("address")
     Address address;
 
-    /** The delivery service that shipped a card. One of `fedex` or `usps`. */
+    /**
+     * The delivery company that shipped a card.
+     *
+     * <p>One of `fedex`, or `usps`.
+     */
     @SerializedName("carrier")
     String carrier;
 
