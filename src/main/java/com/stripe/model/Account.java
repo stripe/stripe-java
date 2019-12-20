@@ -659,6 +659,15 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("directors_provided")
     Boolean directorsProvided;
 
+    /**
+     * Whether the company's executives have been provided. This Boolean will be `true` if you've
+     * manually indicated that all executives are provided via [the `executives_provided`
+     * parameter](https://stripe.com/docs/api/accounts/update#update_account-company-executives_provided),
+     * or if Stripe determined that sufficient executives were provided.
+     */
+    @SerializedName("executives_provided")
+    Boolean executivesProvided;
+
     /** The company's legal name. */
     @SerializedName("name")
     String name;

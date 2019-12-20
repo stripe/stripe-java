@@ -629,6 +629,15 @@ public class AccountCreateParams extends ApiRequestParams {
     Boolean directorsProvided;
 
     /**
+     * Whether the company's executives have been provided. Set this Boolean to `true` after
+     * creating all the company's executives with [the Persons
+     * API](https://stripe.com/docs/api/persons) for accounts with a `relationship.executive`
+     * requirement.
+     */
+    @SerializedName("executives_provided")
+    Boolean executivesProvided;
+
+    /**
      * Map of extra parameters for custom features not available in this client library. The content
      * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
      * key/value pair is serialized as if the key is a root-level field (serialized) name in this
@@ -686,6 +695,7 @@ public class AccountCreateParams extends ApiRequestParams {
         AddressKana addressKana,
         AddressKanji addressKanji,
         Boolean directorsProvided,
+        Boolean executivesProvided,
         Map<String, Object> extraParams,
         String name,
         String nameKana,
@@ -700,6 +710,7 @@ public class AccountCreateParams extends ApiRequestParams {
       this.addressKana = addressKana;
       this.addressKanji = addressKanji;
       this.directorsProvided = directorsProvided;
+      this.executivesProvided = executivesProvided;
       this.extraParams = extraParams;
       this.name = name;
       this.nameKana = nameKana;
@@ -724,6 +735,8 @@ public class AccountCreateParams extends ApiRequestParams {
       private AddressKanji addressKanji;
 
       private Boolean directorsProvided;
+
+      private Boolean executivesProvided;
 
       private Map<String, Object> extraParams;
 
@@ -752,6 +765,7 @@ public class AccountCreateParams extends ApiRequestParams {
             this.addressKana,
             this.addressKanji,
             this.directorsProvided,
+            this.executivesProvided,
             this.extraParams,
             this.name,
             this.nameKana,
@@ -791,6 +805,17 @@ public class AccountCreateParams extends ApiRequestParams {
        */
       public Builder setDirectorsProvided(Boolean directorsProvided) {
         this.directorsProvided = directorsProvided;
+        return this;
+      }
+
+      /**
+       * Whether the company's executives have been provided. Set this Boolean to `true` after
+       * creating all the company's executives with [the Persons
+       * API](https://stripe.com/docs/api/persons) for accounts with a `relationship.executive`
+       * requirement.
+       */
+      public Builder setExecutivesProvided(Boolean executivesProvided) {
+        this.executivesProvided = executivesProvided;
         return this;
       }
 

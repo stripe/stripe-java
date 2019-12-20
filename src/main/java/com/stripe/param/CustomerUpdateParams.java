@@ -28,9 +28,15 @@ public class CustomerUpdateParams extends ApiRequestParams {
   Object coupon;
 
   /**
-   * Provide the ID of a payment source already attached to this customer to make it this customer's
-   * default payment source. If you want to add a new payment source and make it the default, see
-   * the [source](https://stripe.com/docs/api/customers/update#update_customer-source) property.
+   * If you are using payment methods created via the PaymentMethods API, see the
+   * [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method)
+   * parameter.
+   *
+   * <p>Provide the ID of a payment source already attached to this customer to make it this
+   * customer's default payment source.
+   *
+   * <p>If you want to add a new payment source and make it the default, see the
+   * [source](https://stripe.com/docs/api/customers/update#update_customer-source) property.
    */
   @SerializedName("default_source")
   Object defaultSource;
@@ -249,9 +255,14 @@ public class CustomerUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Provide the ID of a payment source already attached to this customer to make it this
-     * customer's default payment source. If you want to add a new payment source and make it the
-     * default, see the
+     * If you are using payment methods created via the PaymentMethods API, see the
+     * [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method)
+     * parameter.
+     *
+     * <p>Provide the ID of a payment source already attached to this customer to make it this
+     * customer's default payment source.
+     *
+     * <p>If you want to add a new payment source and make it the default, see the
      * [source](https://stripe.com/docs/api/customers/update#update_customer-source) property.
      */
     public Builder setDefaultSource(String defaultSource) {
@@ -260,9 +271,14 @@ public class CustomerUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Provide the ID of a payment source already attached to this customer to make it this
-     * customer's default payment source. If you want to add a new payment source and make it the
-     * default, see the
+     * If you are using payment methods created via the PaymentMethods API, see the
+     * [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method)
+     * parameter.
+     *
+     * <p>Provide the ID of a payment source already attached to this customer to make it this
+     * customer's default payment source.
+     *
+     * <p>If you want to add a new payment source and make it the default, see the
      * [source](https://stripe.com/docs/api/customers/update#update_customer-source) property.
      */
     public Builder setDefaultSource(EmptyParam defaultSource) {
@@ -691,7 +707,10 @@ public class CustomerUpdateParams extends ApiRequestParams {
     @SerializedName("custom_fields")
     Object customFields;
 
-    /** ID of the default payment method used for subscriptions and invoices for the customer. */
+    /**
+     * ID of a payment method that's attached to the customer, to be used as the customer's default
+     * payment method for subscriptions and invoices.
+     */
     @SerializedName("default_payment_method")
     Object defaultPaymentMethod;
 
@@ -785,13 +804,19 @@ public class CustomerUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** ID of the default payment method used for subscriptions and invoices for the customer. */
+      /**
+       * ID of a payment method that's attached to the customer, to be used as the customer's
+       * default payment method for subscriptions and invoices.
+       */
       public Builder setDefaultPaymentMethod(String defaultPaymentMethod) {
         this.defaultPaymentMethod = defaultPaymentMethod;
         return this;
       }
 
-      /** ID of the default payment method used for subscriptions and invoices for the customer. */
+      /**
+       * ID of a payment method that's attached to the customer, to be used as the customer's
+       * default payment method for subscriptions and invoices.
+       */
       public Builder setDefaultPaymentMethod(EmptyParam defaultPaymentMethod) {
         this.defaultPaymentMethod = defaultPaymentMethod;
         return this;
