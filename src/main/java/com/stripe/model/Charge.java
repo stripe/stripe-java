@@ -925,7 +925,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     /**
      * Possible values are `authorized`, `manual_review`, `issuer_declined`, `blocked`, and
      * `invalid`. See [understanding declines](https://stripe.com/docs/declines) and [Radar
-     * reviews](radar/review) for details.
+     * reviews](https://stripe.com/docs/radar/reviews) for details.
      */
     @SerializedName("type")
     String type;

@@ -66,7 +66,7 @@ public class CardholderCreateParams extends ApiRequestParams {
   String phoneNumber;
 
   /**
-   * Specifies whether to permit authorizations on this cardholder's cards. Defaults to `inactive`.
+   * Specifies whether to permit authorizations on this cardholder's cards. Defaults to `active`.
    */
   @SerializedName("status")
   Status status;
@@ -287,8 +287,7 @@ public class CardholderCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Specifies whether to permit authorizations on this cardholder's cards. Defaults to
-     * `inactive`.
+     * Specifies whether to permit authorizations on this cardholder's cards. Defaults to `active`.
      */
     public Builder setStatus(Status status) {
       this.status = status;

@@ -470,14 +470,14 @@ public class Authorization extends ApiResource
   @EqualsAndHashCode(callSuper = false)
   public static class VerificationData extends StripeObject {
     /**
-     * Wether the cardholder provided an address first line and if it matched the cardholder’s
+     * Whether the cardholder provided an address first line and if it matched the cardholder’s
      * `billing.address.line1`. One of `match`, `mismatch`, or `not_provided`.
      */
     @SerializedName("address_line1_check")
     String addressLine1Check;
 
     /**
-     * Wether the cardholder provided a zip (or postal code) and if it matched the cardholder’s
+     * Whether the cardholder provided a zip (or postal code) and if it matched the cardholder’s
      * `billing.address.postal_code`. One of `match`, `mismatch`, or `not_provided`.
      */
     @SerializedName("address_zip_check")
@@ -488,7 +488,7 @@ public class Authorization extends ApiResource
     String authentication;
 
     /**
-     * Wether the cardholder provided a CVC and if it matched Stripe’s record. One of `match`,
+     * Whether the cardholder provided a CVC and if it matched Stripe’s record. One of `match`,
      * `mismatch`, or `not_provided`.
      */
     @SerializedName("cvc_check")

@@ -111,7 +111,10 @@ public class Transaction extends ApiResource
   String object;
 
   /**
-   * One of `capture`, `refund`, `cash_withdrawal`, `refund_reversal`, `dispute`, or `dispute_loss`.
+   * The nature of the transaction.
+   *
+   * <p>One of `capture`, `cash_withdrawal`, `dispute`, `dispute_loss`, `refund`, or
+   * `refund_reversal`.
    */
   @SerializedName("type")
   String type;

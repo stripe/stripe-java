@@ -25,6 +25,11 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Cardholder extends ApiResource implements HasId, MetadataStore<Cardholder> {
+  /**
+   * Spending rules that give you some control over how this cardholder's cards can be used. Refer
+   * to our [authorizations](https://stripe.com/docs/issuing/authorizations) documentation for more
+   * details.
+   */
   @SerializedName("authorization_controls")
   AuthorizationControls authorizationControls;
 
@@ -256,7 +261,7 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
     /**
      * Array of strings containing
      * [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category)
-     * of authorizations permitted on this card.
+     * of authorizations permitted on this cardholder's cards.
      */
     @SerializedName("allowed_categories")
     List<String> allowedCategories;
@@ -264,7 +269,7 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
     /**
      * Array of strings containing
      * [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category)
-     * of authorizations to always decline on this card.
+     * of authorizations to always decline on this cardholder's cards.
      */
     @SerializedName("blocked_categories")
     List<String> blockedCategories;
