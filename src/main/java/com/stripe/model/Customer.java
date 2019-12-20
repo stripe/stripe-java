@@ -45,7 +45,13 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   @SerializedName("currency")
   String currency;
 
-  /** ID of the default payment source for the customer. */
+  /**
+   * ID of the default payment source for the customer.
+   *
+   * <p>If you are using payment methods created via the PaymentMethods API, see the
+   * [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method)
+   * field instead.
+   */
   @SerializedName("default_source")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
@@ -488,7 +494,10 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
     @SerializedName("custom_fields")
     List<Invoice.CustomField> customFields;
 
-    /** ID of the default payment method used for subscriptions and invoices for the customer. */
+    /**
+     * ID of a payment method that's attached to the customer, to be used as the customer's default
+     * payment method for subscriptions and invoices.
+     */
     @SerializedName("default_payment_method")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
