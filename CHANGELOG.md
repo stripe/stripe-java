@@ -1,5 +1,10 @@
 # Changelog
 
+## 16.3.0 - 2019-12-20
+* [#918](https://github.com/stripe/stripe-java/pull/918) Multiple API changes
+  * Adds `livemode` and `metadata` to Terminal `Reader` and `Location`
+  * Adds `ms` as a valid locale on Checkout `Session`
+
 ## 16.2.0 - 2019-12-09
 * [#914](https://github.com/stripe/stripe-java/pull/914) Add support for AU BECS Debit on `PaymentMethod`
 * [#906](https://github.com/stripe/stripe-java/pull/906) Add documentation for enum values
