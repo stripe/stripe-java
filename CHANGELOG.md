@@ -1,5 +1,8 @@
 # Changelog
 
+## 16.4.0 - 2019-12-20
+* [#921](https://github.com/stripe/stripe-java/pull/921) Add `executives_provided` on `Account`
+
 ## 16.3.0 - 2019-12-20
 * [#918](https://github.com/stripe/stripe-java/pull/918) Multiple API changes
   * Adds `livemode` and `metadata` to Terminal `Reader` and `Location`
