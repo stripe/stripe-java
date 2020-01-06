@@ -26,7 +26,11 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @SerializedName("business_profile")
   BusinessProfile businessProfile;
 
-  /** The business type. Can be `individual` or `company`. */
+  /**
+   * The business type.
+   *
+   * <p>One of `company`, or `individual`.
+   */
   @SerializedName("business_type")
   String businessType;
 
