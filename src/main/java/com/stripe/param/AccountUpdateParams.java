@@ -227,6 +227,12 @@ public class AccountUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /** The business type. */
+    public Builder setBusinessType(EmptyParam businessType) {
+      this.businessType = businessType;
+      return this;
+    }
+
     /**
      * Information about the company or business. This field is null unless `business_type` is set
      * to `company`.
