@@ -10,11 +10,11 @@ import lombok.Getter;
 
 @Getter
 public class TransactionListParams extends ApiRequestParams {
-  /** Only return issuing transactions that belong to the given card. */
+  /** Only return transactions that belong to the given card. */
   @SerializedName("card")
   String card;
 
-  /** Only return authorizations belonging to the given cardholder. */
+  /** Only return transactions that belong to the given cardholder. */
   @SerializedName("cardholder")
   String cardholder;
 
@@ -122,13 +122,13 @@ public class TransactionListParams extends ApiRequestParams {
           this.startingAfter);
     }
 
-    /** Only return issuing transactions that belong to the given card. */
+    /** Only return transactions that belong to the given card. */
     public Builder setCard(String card) {
       this.card = card;
       return this;
     }
 
-    /** Only return authorizations belonging to the given cardholder. */
+    /** Only return transactions that belong to the given cardholder. */
     public Builder setCardholder(String cardholder) {
       this.cardholder = cardholder;
       return this;

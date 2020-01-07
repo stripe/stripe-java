@@ -25,7 +25,7 @@ public class TaxIdCollectionCreateParams extends ApiRequestParams {
 
   /**
    * Type of the tax ID, one of `au_abn`, `ch_vat`, `eu_vat`, `in_gst`, `mx_rfc`, `no_vat`,
-   * `nz_gst`, or `za_vat`.
+   * `nz_gst`, `sg_uen`, or `za_vat`.
    */
   @SerializedName("type")
   Type type;
@@ -114,7 +114,7 @@ public class TaxIdCollectionCreateParams extends ApiRequestParams {
 
     /**
      * Type of the tax ID, one of `au_abn`, `ch_vat`, `eu_vat`, `in_gst`, `mx_rfc`, `no_vat`,
-     * `nz_gst`, or `za_vat`.
+     * `nz_gst`, `sg_uen`, or `za_vat`.
      */
     public Builder setType(Type type) {
       this.type = type;
@@ -149,6 +149,9 @@ public class TaxIdCollectionCreateParams extends ApiRequestParams {
 
     @SerializedName("nz_gst")
     NZ_GST("nz_gst"),
+
+    @SerializedName("sg_uen")
+    SG_UEN("sg_uen"),
 
     @SerializedName("za_vat")
     ZA_VAT("za_vat");

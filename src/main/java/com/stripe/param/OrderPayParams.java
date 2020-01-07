@@ -10,6 +10,12 @@ import lombok.Getter;
 
 @Getter
 public class OrderPayParams extends ApiRequestParams {
+  /**
+   * A fee in %s that will be applied to the order and transferred to the application owner's Stripe
+   * account. The request must be made with an OAuth key or the `Stripe-Account` header in order to
+   * take an application fee. For more information, see the application fees
+   * [documentation](https://stripe.com/docs/connect/direct-charges#collecting-fees).
+   */
   @SerializedName("application_fee")
   Long applicationFee;
 
@@ -53,7 +59,7 @@ public class OrderPayParams extends ApiRequestParams {
    * A [Token](https://stripe.com/docs/api#tokens)'s or a
    * [Source](https://stripe.com/docs/api#sources)'s ID, as returned by
    * [Elements](https://stripe.com/docs/elements). If no customer was attached to the order at
-   * creation, either `source` or `customer is required. Otherwise, the specified source will be
+   * creation, either `source` or `customer` is required. Otherwise, the specified source will be
    * charged intead of the customer attached to the order.
    */
   @SerializedName("source")
@@ -107,6 +113,12 @@ public class OrderPayParams extends ApiRequestParams {
           this.source);
     }
 
+    /**
+     * A fee in %s that will be applied to the order and transferred to the application owner's
+     * Stripe account. The request must be made with an OAuth key or the `Stripe-Account` header in
+     * order to take an application fee. For more information, see the application fees
+     * [documentation](https://stripe.com/docs/connect/direct-charges#collecting-fees).
+     */
     public Builder setApplicationFee(Long applicationFee) {
       this.applicationFee = applicationFee;
       return this;
@@ -213,7 +225,7 @@ public class OrderPayParams extends ApiRequestParams {
      * A [Token](https://stripe.com/docs/api#tokens)'s or a
      * [Source](https://stripe.com/docs/api#sources)'s ID, as returned by
      * [Elements](https://stripe.com/docs/elements). If no customer was attached to the order at
-     * creation, either `source` or `customer is required. Otherwise, the specified source will be
+     * creation, either `source` or `customer` is required. Otherwise, the specified source will be
      * charged intead of the customer attached to the order.
      */
     public Builder setSource(String source) {
