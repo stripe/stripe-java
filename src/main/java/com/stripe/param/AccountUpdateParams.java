@@ -22,7 +22,7 @@ public class AccountUpdateParams extends ApiRequestParams {
   @SerializedName("business_profile")
   BusinessProfile businessProfile;
 
-  /** The business type. Can be `individual` or `company`. */
+  /** The business type. */
   @SerializedName("business_type")
   Object businessType;
 
@@ -215,13 +215,19 @@ public class AccountUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The business type. Can be `individual` or `company`. */
+    /** The business type. */
+    public Builder setBusinessType(BusinessType businessType) {
+      this.businessType = businessType;
+      return this;
+    }
+
+    /** The business type. */
     public Builder setBusinessType(String businessType) {
       this.businessType = businessType;
       return this;
     }
 
-    /** The business type. Can be `individual` or `company`. */
+    /** The business type. */
     public Builder setBusinessType(EmptyParam businessType) {
       this.businessType = businessType;
       return this;
@@ -4418,6 +4424,21 @@ public class AccountUpdateParams extends ApiRequestParams {
         this.userAgent = userAgent;
         return this;
       }
+    }
+  }
+
+  public enum BusinessType implements ApiRequestParams.EnumParam {
+    @SerializedName("company")
+    COMPANY("company"),
+
+    @SerializedName("individual")
+    INDIVIDUAL("individual");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    BusinessType(String value) {
+      this.value = value;
     }
   }
 

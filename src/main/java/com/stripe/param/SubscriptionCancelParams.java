@@ -2,12 +2,18 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import lombok.Getter;
 
 @Getter
 public class SubscriptionCancelParams extends ApiRequestParams {
+  /** Specifies which fields in the response should be expanded. */
+  @SerializedName("expand")
+  List<String> expand;
+
   /**
    * Map of extra parameters for custom features not available in this client library. The content
    * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
@@ -32,7 +38,8 @@ public class SubscriptionCancelParams extends ApiRequestParams {
   Boolean prorate;
 
   private SubscriptionCancelParams(
-      Map<String, Object> extraParams, Boolean invoiceNow, Boolean prorate) {
+      List<String> expand, Map<String, Object> extraParams, Boolean invoiceNow, Boolean prorate) {
+    this.expand = expand;
     this.extraParams = extraParams;
     this.invoiceNow = invoiceNow;
     this.prorate = prorate;
@@ -43,6 +50,8 @@ public class SubscriptionCancelParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private List<String> expand;
+
     private Map<String, Object> extraParams;
 
     private Boolean invoiceNow;
@@ -51,7 +60,34 @@ public class SubscriptionCancelParams extends ApiRequestParams {
 
     /** Finalize and obtain parameter instance from this builder. */
     public SubscriptionCancelParams build() {
-      return new SubscriptionCancelParams(this.extraParams, this.invoiceNow, this.prorate);
+      return new SubscriptionCancelParams(
+          this.expand, this.extraParams, this.invoiceNow, this.prorate);
+    }
+
+    /**
+     * Add an element to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SubscriptionCancelParams#expand} for the field documentation.
+     */
+    public Builder addExpand(String element) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `expand` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * SubscriptionCancelParams#expand} for the field documentation.
+     */
+    public Builder addAllExpand(List<String> elements) {
+      if (this.expand == null) {
+        this.expand = new ArrayList<>();
+      }
+      this.expand.addAll(elements);
+      return this;
     }
 
     /**

@@ -6,6 +6,7 @@ import com.stripe.exception.StripeException;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.SourceCreateParams;
+import com.stripe.param.SourceDetachParams;
 import com.stripe.param.SourceRetrieveParams;
 import com.stripe.param.SourceSourceTransactionsParams;
 import com.stripe.param.SourceUpdateParams;
@@ -207,6 +208,25 @@ public class Source extends ApiResource implements MetadataStore<Source>, Paymen
 
   /** Delete a specified source for a given customer. */
   public Source detach(Map<String, Object> params, RequestOptions options) throws StripeException {
+    String url =
+        String.format(
+            "%s%s",
+            Stripe.getApiBase(),
+            String.format(
+                "/v1/customers/%s/sources/%s",
+                ApiResource.urlEncodeId(this.getCustomer()),
+                ApiResource.urlEncodeId(this.getId())));
+    return ApiResource.request(
+        ApiResource.RequestMethod.DELETE, url, params, Source.class, options);
+  }
+
+  /** Delete a specified source for a given customer. */
+  public Source detach(SourceDetachParams params) throws StripeException {
+    return detach(params, (RequestOptions) null);
+  }
+
+  /** Delete a specified source for a given customer. */
+  public Source detach(SourceDetachParams params, RequestOptions options) throws StripeException {
     String url =
         String.format(
             "%s%s",

@@ -69,6 +69,13 @@ public class BalanceTransaction extends ApiResource implements HasId {
   @SerializedName("object")
   String object;
 
+  /**
+   * [Learn more](https://stripe.com/docs/reports/reporting-categories) about how reporting
+   * categories can help you understand balance transactions from an accounting perspective.
+   */
+  @SerializedName("reporting_category")
+  String reportingCategory;
+
   /** The Stripe object to which this transaction is related. */
   @SerializedName("source")
   @Getter(lombok.AccessLevel.NONE)
@@ -91,7 +98,8 @@ public class BalanceTransaction extends ApiResource implements HasId {
    * `stripe_fee`, `stripe_fx_fee`, `tax_fee`, `topup`, `topup_reversal`, `transfer`,
    * `transfer_cancel`, `transfer_failure`, or `transfer_refund`. [Learn
    * more](https://stripe.com/docs/reports/balance-transaction-types) about balance transaction
-   * types and what they represent.
+   * types and what they represent. If you are looking to classify transactions for accounting
+   * purposes, you might want to consider `reporting_category` instead.
    *
    * <p>One of `adjustment`, `advance`, `advance_funding`, `application_fee`,
    * `application_fee_refund`, `charge`, `connect_collection_transfer`,

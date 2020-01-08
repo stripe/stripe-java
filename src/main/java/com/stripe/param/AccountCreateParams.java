@@ -22,9 +22,9 @@ public class AccountCreateParams extends ApiRequestParams {
   @SerializedName("business_profile")
   BusinessProfile businessProfile;
 
-  /** The business type. Can be `individual` or `company`. */
+  /** The business type. */
   @SerializedName("business_type")
-  String businessType;
+  Object businessType;
 
   /**
    * Information about the company or business. This field is null unless `business_type` is set to
@@ -126,7 +126,7 @@ public class AccountCreateParams extends ApiRequestParams {
   private AccountCreateParams(
       String accountToken,
       BusinessProfile businessProfile,
-      String businessType,
+      Object businessType,
       Company company,
       String country,
       String defaultCurrency,
@@ -167,7 +167,7 @@ public class AccountCreateParams extends ApiRequestParams {
 
     private BusinessProfile businessProfile;
 
-    private String businessType;
+    private Object businessType;
 
     private Company company;
 
@@ -231,7 +231,13 @@ public class AccountCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The business type. Can be `individual` or `company`. */
+    /** The business type. */
+    public Builder setBusinessType(BusinessType businessType) {
+      this.businessType = businessType;
+      return this;
+    }
+
+    /** The business type. */
     public Builder setBusinessType(String businessType) {
       this.businessType = businessType;
       return this;
@@ -3833,6 +3839,21 @@ public class AccountCreateParams extends ApiRequestParams {
         this.userAgent = userAgent;
         return this;
       }
+    }
+  }
+
+  public enum BusinessType implements ApiRequestParams.EnumParam {
+    @SerializedName("company")
+    COMPANY("company"),
+
+    @SerializedName("individual")
+    INDIVIDUAL("individual");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    BusinessType(String value) {
+      this.value = value;
     }
   }
 
