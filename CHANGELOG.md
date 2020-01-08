@@ -1,5 +1,11 @@
 # Changelog
 
+## 16.5.0 - 2020-01-07
+* [#922](https://github.com/stripe/stripe-java/pull/922) Codegen for openapi c896d1f
+  * Add support for custom properties on `Source.detach` method
+  * Add support for property expansion in `Subscription.cancel` method.
+  * Add support for `sg_uen` on `TaxId`
+
 ## 16.4.0 - 2019-12-20
 * [#921](https://github.com/stripe/stripe-java/pull/921) Add `executives_provided` on `Account`
 
