@@ -107,6 +107,17 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
   Boolean subscriptionProrate;
 
   /**
+   * Determines how to handle
+   * [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing
+   * cycle changes (e.g., when switching plans, resetting `billing_cycle_anchor=now`, or starting a
+   * trial), or if an item's `quantity` changes. The value defaults to `create_prorations`,
+   * indicating that proration invoice items should be created. Prorations can be disabled by
+   * setting the value to `none`.
+   */
+  @SerializedName("subscription_proration_behavior")
+  SubscriptionProrationBehavior subscriptionProrationBehavior;
+
+  /**
    * If previewing an update to a subscription, and doing proration, `subscription_proration_date`
    * forces the proration to be calculated as though the update was done at the specified time. The
    * time given must be within the current subscription period, and cannot be before the
@@ -160,6 +171,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
       Object subscriptionDefaultTaxRates,
       List<SubscriptionItem> subscriptionItems,
       Boolean subscriptionProrate,
+      SubscriptionProrationBehavior subscriptionProrationBehavior,
       Long subscriptionProrationDate,
       Long subscriptionStartDate,
       BigDecimal subscriptionTaxPercent,
@@ -179,6 +191,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     this.subscriptionDefaultTaxRates = subscriptionDefaultTaxRates;
     this.subscriptionItems = subscriptionItems;
     this.subscriptionProrate = subscriptionProrate;
+    this.subscriptionProrationBehavior = subscriptionProrationBehavior;
     this.subscriptionProrationDate = subscriptionProrationDate;
     this.subscriptionStartDate = subscriptionStartDate;
     this.subscriptionTaxPercent = subscriptionTaxPercent;
@@ -219,6 +232,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     private Boolean subscriptionProrate;
 
+    private SubscriptionProrationBehavior subscriptionProrationBehavior;
+
     private Long subscriptionProrationDate;
 
     private Long subscriptionStartDate;
@@ -246,6 +261,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
           this.subscriptionDefaultTaxRates,
           this.subscriptionItems,
           this.subscriptionProrate,
+          this.subscriptionProrationBehavior,
           this.subscriptionProrationDate,
           this.subscriptionStartDate,
           this.subscriptionTaxPercent,
@@ -510,6 +526,20 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
      */
     public Builder setSubscriptionProrate(Boolean subscriptionProrate) {
       this.subscriptionProrate = subscriptionProrate;
+      return this;
+    }
+
+    /**
+     * Determines how to handle
+     * [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing
+     * cycle changes (e.g., when switching plans, resetting `billing_cycle_anchor=now`, or starting
+     * a trial), or if an item's `quantity` changes. The value defaults to `create_prorations`,
+     * indicating that proration invoice items should be created. Prorations can be disabled by
+     * setting the value to `none`.
+     */
+    public Builder setSubscriptionProrationBehavior(
+        SubscriptionProrationBehavior subscriptionProrationBehavior) {
+      this.subscriptionProrationBehavior = subscriptionProrationBehavior;
       return this;
     }
 
@@ -1331,6 +1361,24 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
     private final String value;
 
     SubscriptionBillingCycleAnchor(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum SubscriptionProrationBehavior implements ApiRequestParams.EnumParam {
+    @SerializedName("always_invoice")
+    ALWAYS_INVOICE("always_invoice"),
+
+    @SerializedName("create_prorations")
+    CREATE_PRORATIONS("create_prorations"),
+
+    @SerializedName("none")
+    NONE("none");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    SubscriptionProrationBehavior(String value) {
       this.value = value;
     }
   }

@@ -208,6 +208,14 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   ExpandableField<SetupIntent> pendingSetupIntent;
 
   /**
+   * If specified, [deferred
+   * upgrade](https://stripe.com/docs/billing/subscriptions/upgrading-downgrading#deferred) changes
+   * that will be applied to the subscription once the `latest_invoice` has been paid.
+   */
+  @SerializedName("pending_update")
+  PendingUpdate pendingUpdate;
+
+  /**
    * Hash describing the plan the customer is subscribed to. Only set if the subscription contains a
    * single plan.
    */
@@ -728,5 +736,46 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
      */
     @SerializedName("interval_count")
     Long intervalCount;
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class PendingUpdate extends StripeObject {
+    /**
+     * If the update is applied, determines the date of the first full invoice, and, for plans with
+     * `month` or `year` intervals, the day of the month for subsequent invoices.
+     */
+    @SerializedName("billing_cycle_anchor")
+    Long billingCycleAnchor;
+
+    /**
+     * The point after which the changes reflected by this update will be discarded and no longer
+     * applied.
+     */
+    @SerializedName("expires_at")
+    Long expiresAt;
+
+    /**
+     * List of subscription items, each with an attached plan, that will be set if the update is
+     * applied.
+     */
+    @SerializedName("subscription_items")
+    List<SubscriptionItem> subscriptionItems;
+
+    /**
+     * Unix timestamp representing the end of the trial period the customer will get before being
+     * charged for the first time, if the update is applied.
+     */
+    @SerializedName("trial_end")
+    Long trialEnd;
+
+    /**
+     * Indicates if a plan's `trial_period_days` should be applied to the subscription. Setting
+     * `trial_end` per subscription is preferred, and this defaults to `false`. Setting this flag to
+     * `true` together with `trial_end` is not allowed.
+     */
+    @SerializedName("trial_from_plan")
+    Boolean trialFromPlan;
   }
 }
