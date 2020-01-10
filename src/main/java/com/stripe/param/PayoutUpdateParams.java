@@ -24,8 +24,9 @@ public class PayoutUpdateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * A set of key-value pairs that you can attach to a payout object. It can be useful for storing
-   * additional information about the payout in a structured format.
+   * Set of key-value pairs that you can attach to an object. This can be useful for storing
+   * additional information about the object in a structured format. Individual keys can be unset by
+   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;

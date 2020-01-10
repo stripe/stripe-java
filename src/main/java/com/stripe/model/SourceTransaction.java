@@ -163,11 +163,14 @@ public class SourceTransaction extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class PaperCheckData extends StripeObject {
-    /** String unix time for the available date. */
+    /**
+     * Time at which the deposited funds will be available for use. Measured in seconds since the
+     * Unix epoch.
+     */
     @SerializedName("available_at")
     String availableAt;
 
-    /** Invoice ID associated with the paper check. */
+    /** Comma-separated list of invoice IDs associated with the paper check. */
     @SerializedName("invoices")
     String invoices;
   }
