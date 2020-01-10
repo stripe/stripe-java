@@ -1,5 +1,8 @@
 # Changelog
 
+## 16.5.1 - 2020-01-09
+* [#924](https://github.com/stripe/stripe-java/pull/924) Doc changes for core properties or parameters such as `metadata` or `livemode`
+
 ## 16.5.0 - 2020-01-07
 * [#922](https://github.com/stripe/stripe-java/pull/922) Codegen for openapi c896d1f
   * Add support for custom properties on `Source.detach` method
