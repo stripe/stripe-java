@@ -38,7 +38,10 @@ public class InvoiceLineItem extends StripeObject implements HasId {
   @SerializedName("invoice_item")
   String invoiceItem;
 
-  /** Whether this is a test line item. */
+  /**
+   * Has the value `true` if the object exists in live mode or the value `false` if the object
+   * exists in test mode.
+   */
   @SerializedName("livemode")
   Boolean livemode;
 

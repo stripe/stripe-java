@@ -60,10 +60,6 @@ public class SourceCreateParams extends ApiRequestParams {
   @SerializedName("mandate")
   Mandate mandate;
 
-  /**
-   * A set of key-value pairs that you can attach to a source object. It can be useful for storing
-   * additional information about the source in a structured format.
-   */
   @SerializedName("metadata")
   Map<String, String> metadata;
 

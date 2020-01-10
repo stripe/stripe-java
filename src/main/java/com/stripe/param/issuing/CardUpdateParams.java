@@ -32,6 +32,11 @@ public class CardUpdateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /**
+   * Set of key-value pairs that you can attach to an object. This can be useful for storing
+   * additional information about the object in a structured format. Individual keys can be unset by
+   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   */
   @SerializedName("metadata")
   Object metadata;
 
@@ -163,11 +168,23 @@ public class CardUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * Set of key-value pairs that you can attach to an object. This can be useful for storing
+     * additional information about the object in a structured format. Individual keys can be unset
+     * by posting an empty value to them. All keys can be unset by posting an empty value to
+     * `metadata`.
+     */
     public Builder setMetadata(EmptyParam metadata) {
       this.metadata = metadata;
       return this;
     }
 
+    /**
+     * Set of key-value pairs that you can attach to an object. This can be useful for storing
+     * additional information about the object in a structured format. Individual keys can be unset
+     * by posting an empty value to them. All keys can be unset by posting an empty value to
+     * `metadata`.
+     */
     public Builder setMetadata(Map<String, String> metadata) {
       this.metadata = metadata;
       return this;

@@ -79,8 +79,8 @@ public class Transfer extends ApiResource
   Boolean livemode;
 
   /**
-   * A set of key-value pairs that you can attach to a transfer object. It can be useful for storing
-   * additional information about the transfer in a structured format.
+   * Set of key-value pairs that you can attach to an object. This can be useful for storing
+   * additional information about the object in a structured format.
    */
   @Getter(onMethod_ = {@Override})
   @SerializedName("metadata")
