@@ -2,6 +2,8 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.param.common.EmptyParam;
+import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -37,6 +39,10 @@ public class CreditNoteCreateParams extends ApiRequestParams {
   /** ID of the invoice. */
   @SerializedName("invoice")
   String invoice;
+
+  /** Line items that make up the credit note. */
+  @SerializedName("lines")
+  List<Line> lines;
 
   /** The credit note's memo appears on the credit note PDF. */
   @SerializedName("memo")
@@ -78,6 +84,7 @@ public class CreditNoteCreateParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       String invoice,
+      List<Line> lines,
       String memo,
       Map<String, String> metadata,
       Long outOfBandAmount,
@@ -89,6 +96,7 @@ public class CreditNoteCreateParams extends ApiRequestParams {
     this.expand = expand;
     this.extraParams = extraParams;
     this.invoice = invoice;
+    this.lines = lines;
     this.memo = memo;
     this.metadata = metadata;
     this.outOfBandAmount = outOfBandAmount;
@@ -112,6 +120,8 @@ public class CreditNoteCreateParams extends ApiRequestParams {
 
     private String invoice;
 
+    private List<Line> lines;
+
     private String memo;
 
     private Map<String, String> metadata;
@@ -132,6 +142,7 @@ public class CreditNoteCreateParams extends ApiRequestParams {
           this.expand,
           this.extraParams,
           this.invoice,
+          this.lines,
           this.memo,
           this.metadata,
           this.outOfBandAmount,
@@ -213,6 +224,32 @@ public class CreditNoteCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * Add an element to `lines` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * CreditNoteCreateParams#lines} for the field documentation.
+     */
+    public Builder addLine(Line element) {
+      if (this.lines == null) {
+        this.lines = new ArrayList<>();
+      }
+      this.lines.add(element);
+      return this;
+    }
+
+    /**
+     * Add all elements to `lines` list. A list is initialized for the first `add/addAll` call, and
+     * subsequent calls adds additional elements to the original list. See {@link
+     * CreditNoteCreateParams#lines} for the field documentation.
+     */
+    public Builder addAllLine(List<Line> elements) {
+      if (this.lines == null) {
+        this.lines = new ArrayList<>();
+      }
+      this.lines.addAll(elements);
+      return this;
+    }
+
     /** The credit note's memo appears on the credit note PDF. */
     public Builder setMemo(String memo) {
       this.memo = memo;
@@ -273,6 +310,267 @@ public class CreditNoteCreateParams extends ApiRequestParams {
     public Builder setRefundAmount(Long refundAmount) {
       this.refundAmount = refundAmount;
       return this;
+    }
+  }
+
+  @Getter
+  public static class Line {
+    /**
+     * The line item amount to credit. Only valid when `type` is `invoice_line_item` and the
+     * referenced invoice line item does not have a quantity, only an amount.
+     */
+    @SerializedName("amount")
+    Long amount;
+
+    /**
+     * The description of the credit note line item. Only valid when the `type` is
+     * `custom_line_item`.
+     */
+    @SerializedName("description")
+    String description;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    /** The invoice line item to credit. Only valid when the `type` is `invoice_line_item`. */
+    @SerializedName("invoice_line_item")
+    String invoiceLineItem;
+
+    /** The line item quantity to credit. */
+    @SerializedName("quantity")
+    Long quantity;
+
+    /**
+     * The tax rates which apply to the credit note line item. Only valid when the `type` is
+     * `custom_line_item`.
+     */
+    @SerializedName("tax_rates")
+    Object taxRates;
+
+    /** Type of the credit note line item, one of `custom_line_item` or `invoice_line_item`. */
+    @SerializedName("type")
+    Type type;
+
+    /**
+     * The integer unit amount in **%s** of the credit note line item. This `unit_amount` will be
+     * multiplied by the quantity to get the full amount to credit for this line item. Only valid
+     * when `type` is `custom_line_item`.
+     */
+    @SerializedName("unit_amount")
+    Long unitAmount;
+
+    /**
+     * Same as `unit_amount`, but accepts a decimal value with at most 12 decimal places. Only one
+     * of `unit_amount` and `unit_amount_decimal` can be set.
+     */
+    @SerializedName("unit_amount_decimal")
+    BigDecimal unitAmountDecimal;
+
+    private Line(
+        Long amount,
+        String description,
+        Map<String, Object> extraParams,
+        String invoiceLineItem,
+        Long quantity,
+        Object taxRates,
+        Type type,
+        Long unitAmount,
+        BigDecimal unitAmountDecimal) {
+      this.amount = amount;
+      this.description = description;
+      this.extraParams = extraParams;
+      this.invoiceLineItem = invoiceLineItem;
+      this.quantity = quantity;
+      this.taxRates = taxRates;
+      this.type = type;
+      this.unitAmount = unitAmount;
+      this.unitAmountDecimal = unitAmountDecimal;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private Long amount;
+
+      private String description;
+
+      private Map<String, Object> extraParams;
+
+      private String invoiceLineItem;
+
+      private Long quantity;
+
+      private Object taxRates;
+
+      private Type type;
+
+      private Long unitAmount;
+
+      private BigDecimal unitAmountDecimal;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public Line build() {
+        return new Line(
+            this.amount,
+            this.description,
+            this.extraParams,
+            this.invoiceLineItem,
+            this.quantity,
+            this.taxRates,
+            this.type,
+            this.unitAmount,
+            this.unitAmountDecimal);
+      }
+
+      /**
+       * The line item amount to credit. Only valid when `type` is `invoice_line_item` and the
+       * referenced invoice line item does not have a quantity, only an amount.
+       */
+      public Builder setAmount(Long amount) {
+        this.amount = amount;
+        return this;
+      }
+
+      /**
+       * The description of the credit note line item. Only valid when the `type` is
+       * `custom_line_item`.
+       */
+      public Builder setDescription(String description) {
+        this.description = description;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * CreditNoteCreateParams.Line#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link CreditNoteCreateParams.Line#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+
+      /** The invoice line item to credit. Only valid when the `type` is `invoice_line_item`. */
+      public Builder setInvoiceLineItem(String invoiceLineItem) {
+        this.invoiceLineItem = invoiceLineItem;
+        return this;
+      }
+
+      /** The line item quantity to credit. */
+      public Builder setQuantity(Long quantity) {
+        this.quantity = quantity;
+        return this;
+      }
+
+      /**
+       * Add an element to `taxRates` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * CreditNoteCreateParams.Line#taxRates} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder addTaxRate(String element) {
+        if (this.taxRates == null || this.taxRates instanceof EmptyParam) {
+          this.taxRates = new ArrayList<String>();
+        }
+        ((List<String>) this.taxRates).add(element);
+        return this;
+      }
+
+      /**
+       * Add all elements to `taxRates` list. A list is initialized for the first `add/addAll` call,
+       * and subsequent calls adds additional elements to the original list. See {@link
+       * CreditNoteCreateParams.Line#taxRates} for the field documentation.
+       */
+      @SuppressWarnings("unchecked")
+      public Builder addAllTaxRate(List<String> elements) {
+        if (this.taxRates == null || this.taxRates instanceof EmptyParam) {
+          this.taxRates = new ArrayList<String>();
+        }
+        ((List<String>) this.taxRates).addAll(elements);
+        return this;
+      }
+
+      /**
+       * The tax rates which apply to the credit note line item. Only valid when the `type` is
+       * `custom_line_item`.
+       */
+      public Builder setTaxRates(EmptyParam taxRates) {
+        this.taxRates = taxRates;
+        return this;
+      }
+
+      /**
+       * The tax rates which apply to the credit note line item. Only valid when the `type` is
+       * `custom_line_item`.
+       */
+      public Builder setTaxRates(List<String> taxRates) {
+        this.taxRates = taxRates;
+        return this;
+      }
+
+      /** Type of the credit note line item, one of `custom_line_item` or `invoice_line_item`. */
+      public Builder setType(Type type) {
+        this.type = type;
+        return this;
+      }
+
+      /**
+       * The integer unit amount in **%s** of the credit note line item. This `unit_amount` will be
+       * multiplied by the quantity to get the full amount to credit for this line item. Only valid
+       * when `type` is `custom_line_item`.
+       */
+      public Builder setUnitAmount(Long unitAmount) {
+        this.unitAmount = unitAmount;
+        return this;
+      }
+
+      /**
+       * Same as `unit_amount`, but accepts a decimal value with at most 12 decimal places. Only one
+       * of `unit_amount` and `unit_amount_decimal` can be set.
+       */
+      public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
+        this.unitAmountDecimal = unitAmountDecimal;
+        return this;
+      }
+    }
+
+    public enum Type implements ApiRequestParams.EnumParam {
+      @SerializedName("custom_line_item")
+      CUSTOM_LINE_ITEM("custom_line_item"),
+
+      @SerializedName("invoice_line_item")
+      INVOICE_LINE_ITEM("invoice_line_item");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Type(String value) {
+        this.value = value;
+      }
     }
   }
 
