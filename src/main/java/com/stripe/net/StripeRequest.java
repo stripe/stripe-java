@@ -5,6 +5,7 @@ import com.stripe.exception.ApiConnectionException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.StripeException;
 import com.stripe.util.ReflectionUtils;
+import com.stripe.util.StringUtils;
 import java.io.IOException;
 import java.net.URL;
 import java.net.URLStreamHandler;
@@ -129,12 +130,30 @@ public class StripeRequest {
 
     // Authorization
     String apiKey = options.getApiKey();
-    if (apiKey == null || apiKey.trim().isEmpty()) {
+    if (apiKey == null) {
       throw new AuthenticationException(
-          "No API key provided. (HINT: set your API key using 'Stripe.apiKey = <API-KEY>'. "
-              + "You can generate API keys from the Stripe web interface. "
-              + "See https://stripe.com/api for details or email support@stripe.com if you have "
-              + "questions.",
+          "No API key provided. Set your API key using `Stripe.apiKey = \"<API-KEY>\"`. You can "
+              + "generate API keys from the Stripe Dashboard. See "
+              + "https://stripe.com/docs/api/authentication for details or contact support at "
+              + "https://support.stripe.com/email if you have any questions.",
+          null,
+          null,
+          0);
+    } else if (apiKey.isEmpty()) {
+      throw new AuthenticationException(
+          "Your API key is invalid, as it is an empty string. You can double-check your API key "
+              + "from the Stripe Dashboard. See "
+              + "https://stripe.com/docs/api/authentication for details or contact support at "
+              + "https://support.stripe.com/email if you have any questions.",
+          null,
+          null,
+          0);
+    } else if (StringUtils.containsWhitespace(apiKey)) {
+      throw new AuthenticationException(
+          "Your API key is invalid, as it contains whitespace. You can double-check your API key "
+              + "from the Stripe Dashboard. See "
+              + "https://stripe.com/docs/api/authentication for details or contact support at "
+              + "https://support.stripe.com/email if you have any questions.",
           null,
           null,
           0);
@@ -148,7 +167,7 @@ public class StripeRequest {
       headers.put("Stripe-Version", options.getStripeVersion());
     } else {
       throw new IllegalStateException(
-          "Either `stripeVersion`, or `stripeVersionOverride` " + "value must be set.");
+          "Either `stripeVersion` or `stripeVersionOverride` value must be set.");
     }
 
     // Stripe-Account
