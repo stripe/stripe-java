@@ -2,9 +2,9 @@ package com.stripe.net;
 
 import com.stripe.exception.SignatureVerificationException;
 import com.stripe.model.Event;
+import com.stripe.util.StringUtils;
 import java.nio.charset.StandardCharsets;
 import java.security.InvalidKeyException;
-import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
@@ -93,7 +93,7 @@ public final class Webhook {
       // Check if expected signature is found in list of header's signatures
       boolean signatureFound = false;
       for (String signature : signatures) {
-        if (Util.secureCompare(expectedSignature, signature)) {
+        if (StringUtils.secureCompare(expectedSignature, signature)) {
           signatureFound = true;
           break;
         }
@@ -184,21 +184,6 @@ public final class Webhook {
         result += Integer.toString((b & 0xff) + 0x100, 16).substring(1);
       }
       return result;
-    }
-
-    /**
-     * Compares two strings for equality. The time taken is independent of the number of characters
-     * that match.
-     *
-     * @param a one of the strings to compare.
-     * @param b the other string to compare.
-     * @return true if the strings are equal, false otherwise.
-     */
-    public static boolean secureCompare(String a, String b) {
-      byte[] digesta = a.getBytes(StandardCharsets.UTF_8);
-      byte[] digestb = b.getBytes(StandardCharsets.UTF_8);
-
-      return MessageDigest.isEqual(digesta, digestb);
     }
 
     /**
