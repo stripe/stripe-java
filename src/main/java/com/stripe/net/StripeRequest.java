@@ -4,11 +4,9 @@ import com.stripe.Stripe;
 import com.stripe.exception.ApiConnectionException;
 import com.stripe.exception.AuthenticationException;
 import com.stripe.exception.StripeException;
-import com.stripe.util.ReflectionUtils;
 import com.stripe.util.StringUtils;
 import java.io.IOException;
 import java.net.URL;
-import java.net.URLStreamHandler;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.UUID;
@@ -18,14 +16,6 @@ import lombok.experimental.Accessors;
 @Value
 @Accessors(fluent = true)
 public class StripeRequest {
-  /*
-   * Set this property to override your environment's default
-   * URLStreamHandler; Settings the property should not be needed in most
-   * environments.
-   */
-  private static final String CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME =
-      "com.stripe.net.customURLStreamHandler";
-
   /** The HTTP method for the request (GET, POST or DELETE). */
   ApiResource.RequestMethod method;
 
@@ -100,19 +90,7 @@ public class StripeRequest {
       }
     }
 
-    URL url;
-    String customUrlStreamHandlerClassName =
-        System.getProperty(CUSTOM_URL_STREAM_HANDLER_PROPERTY_NAME, null);
-    if (customUrlStreamHandlerClassName != null) {
-      // instantiate the custom handler provided
-      Class<URLStreamHandler> clazz =
-          (Class<URLStreamHandler>) ReflectionUtils.getClassByName(customUrlStreamHandlerClassName);
-      URLStreamHandler customHandler = ReflectionUtils.newInstance(clazz);
-      url = new URL(null, sb.toString(), customHandler);
-    } else {
-      url = new URL(sb.toString());
-    }
-    return url;
+    return new URL(sb.toString());
   }
 
   private static HttpContent buildContent(
