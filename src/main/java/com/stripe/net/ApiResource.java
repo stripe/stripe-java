@@ -20,6 +20,7 @@ import com.stripe.model.StripeCollectionInterface;
 import com.stripe.model.StripeObject;
 import com.stripe.model.StripeRawJsonObject;
 import com.stripe.model.StripeRawJsonObjectDeserializer;
+import com.stripe.util.StringUtils;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
@@ -55,12 +56,7 @@ public abstract class ApiResource extends StripeObject {
 
   private static String className(Class<?> clazz) {
     // Convert CamelCase to snake_case
-    String className =
-        clazz
-            .getSimpleName()
-            .replaceAll("(.)([A-Z][a-z]+)", "$1_$2")
-            .replaceAll("([a-z0-9])([A-Z])", "$1_$2")
-            .toLowerCase();
+    String className = StringUtils.toSnakeCase(clazz.getSimpleName());
 
     // Handle namespaced resources by checking if the class is in a sub-package, and if so prepend
     // it to the class name
