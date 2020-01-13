@@ -101,7 +101,7 @@ public class StripeRequestTest extends BaseStripeTest {
   }
 
   @Test
-  public void testCtorThrowsOnEmptyApiKey() throws StripeException {
+  public void testCtorThrowsOnNullApiKey() throws StripeException {
     String origApiKey = Stripe.apiKey;
 
     try {
@@ -115,6 +115,46 @@ public class StripeRequestTest extends BaseStripeTest {
                     ApiResource.RequestMethod.GET, "http://example.com/get", null, null);
               });
       assertTrue(e.getMessage().contains("No API key provided."));
+    } finally {
+      Stripe.apiKey = origApiKey;
+    }
+  }
+
+  @Test
+  public void testCtorThrowsOnEmptyApiKey() throws StripeException {
+    String origApiKey = Stripe.apiKey;
+
+    try {
+      Stripe.apiKey = "";
+
+      AuthenticationException e =
+          assertThrows(
+              AuthenticationException.class,
+              () -> {
+                new StripeRequest(
+                    ApiResource.RequestMethod.GET, "http://example.com/get", null, null);
+              });
+      assertTrue(e.getMessage().contains("Your API key is invalid, as it is an empty string."));
+    } finally {
+      Stripe.apiKey = origApiKey;
+    }
+  }
+
+  @Test
+  public void testCtorThrowsOnApiKeyContainingWhitespace() throws StripeException {
+    String origApiKey = Stripe.apiKey;
+
+    try {
+      Stripe.apiKey = "sk_test_123\n";
+
+      AuthenticationException e =
+          assertThrows(
+              AuthenticationException.class,
+              () -> {
+                new StripeRequest(
+                    ApiResource.RequestMethod.GET, "http://example.com/get", null, null);
+              });
+      assertTrue(e.getMessage().contains("Your API key is invalid, as it contains whitespace."));
     } finally {
       Stripe.apiKey = origApiKey;
     }
