@@ -80,12 +80,13 @@ public class HttpURLConnectionClient extends HttpClient {
   }
 
   static HttpHeaders getHeaders(StripeRequest request) {
-    Map<String, List<String>> headerMap = new HashMap<>(request.headers().map());
+    Map<String, List<String>> userAgentHeadersMap = new HashMap<>();
 
-    headerMap.put("User-Agent", Arrays.asList(buildUserAgentString()));
-    headerMap.put("X-Stripe-Client-User-Agent", Arrays.asList(buildXStripeClientUserAgentString()));
+    userAgentHeadersMap.put("User-Agent", Arrays.asList(buildUserAgentString()));
+    userAgentHeadersMap.put(
+        "X-Stripe-Client-User-Agent", Arrays.asList(buildXStripeClientUserAgentString()));
 
-    return HttpHeaders.of(headerMap);
+    return request.headers().withAdditionalHeaders(userAgentHeadersMap);
   }
 
   private static HttpURLConnection createStripeConnection(StripeRequest request)

@@ -34,6 +34,49 @@ public class HttpHeadersTest extends BaseStripeTest {
   }
 
   @Test
+  public void testWithAdditionalHeaderSingleValue() {
+    HttpHeaders headers = HttpHeaders.of(this.headerMap);
+    HttpHeaders newHeaders = headers.withAdditionalHeader("New-Header", "New value");
+    assertEquals(
+        ImmutableList.of("First value", "Second value"), newHeaders.allValues("Some-Header"));
+    assertEquals(
+        ImmutableList.of("First value", "Second value"), newHeaders.allValues("some-header"));
+    assertEquals(ImmutableList.of("New value"), newHeaders.allValues("New-Header"));
+    assertEquals(ImmutableList.of("New value"), newHeaders.allValues("new-header"));
+  }
+
+  @Test
+  public void testWithAdditionalHeaderMultipleValues() {
+    HttpHeaders headers = HttpHeaders.of(this.headerMap);
+    HttpHeaders newHeaders =
+        headers.withAdditionalHeader("New-Header", ImmutableList.of("New value", "Another value"));
+    assertEquals(
+        ImmutableList.of("First value", "Second value"), newHeaders.allValues("Some-Header"));
+    assertEquals(
+        ImmutableList.of("First value", "Second value"), newHeaders.allValues("some-header"));
+    assertEquals(
+        ImmutableList.of("New value", "Another value"), newHeaders.allValues("New-Header"));
+    assertEquals(
+        ImmutableList.of("New value", "Another value"), newHeaders.allValues("new-header"));
+  }
+
+  @Test
+  public void testWithAdditionalHeaders() {
+    HttpHeaders headers = HttpHeaders.of(this.headerMap);
+    HttpHeaders newHeaders =
+        headers.withAdditionalHeaders(
+            ImmutableMap.of("New-Header", ImmutableList.of("New value", "Another value")));
+    assertEquals(
+        ImmutableList.of("First value", "Second value"), newHeaders.allValues("Some-Header"));
+    assertEquals(
+        ImmutableList.of("First value", "Second value"), newHeaders.allValues("some-header"));
+    assertEquals(
+        ImmutableList.of("New value", "Another value"), newHeaders.allValues("New-Header"));
+    assertEquals(
+        ImmutableList.of("New value", "Another value"), newHeaders.allValues("new-header"));
+  }
+
+  @Test
   public void testAllValues() {
     HttpHeaders headers = HttpHeaders.of(this.headerMap);
     assertEquals(ImmutableList.of("First value", "Second value"), headers.allValues("Some-Header"));

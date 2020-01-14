@@ -3,7 +3,9 @@ package com.stripe.net;
 import static java.util.Objects.requireNonNull;
 
 import com.stripe.util.CaseInsensitiveMap;
+import java.util.Arrays;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Optional;
@@ -23,15 +25,62 @@ public class HttpHeaders {
   }
 
   /**
-   * Returns an HTTP headers from the given map.
+   * Returns an {@link HttpHeaders} instance initialized from the given map.
    *
    * @param headerMap the map containing the header names and values
-   * @return an HTTP headers instance containing the given headers
+   * @return an {@link HttpHeaders} instance containing the given headers
    * @throws NullPointerException if {@code headerMap} is {@code null}
    */
   public static HttpHeaders of(Map<String, List<String>> headerMap) {
     requireNonNull(headerMap);
     return new HttpHeaders(CaseInsensitiveMap.of(headerMap));
+  }
+
+  /**
+   * Returns a new {@link HttpHeaders} instance containing the headers of the current instance plus
+   * the provided header.
+   *
+   * @param name the name of the header to add
+   * @param value the value of the header to add
+   * @return the new {@link HttpHeaders} instance
+   * @throws NullPointerException if {@code name} or {@code value} is {@code null}
+   */
+  public HttpHeaders withAdditionalHeader(String name, String value) {
+    requireNonNull(name);
+    requireNonNull(value);
+    return this.withAdditionalHeader(name, Arrays.asList(value));
+  }
+
+  /**
+   * Returns a new {@link HttpHeaders} instance containing the headers of the current instance plus
+   * the provided header.
+   *
+   * @param name the name of the header to add
+   * @param values the values of the header to add
+   * @return the new {@link HttpHeaders} instance
+   * @throws NullPointerException if {@code name} or {@code values} is {@code null}
+   */
+  public HttpHeaders withAdditionalHeader(String name, List<String> values) {
+    requireNonNull(name);
+    requireNonNull(values);
+    Map<String, List<String>> headerMap = new HashMap<>();
+    headerMap.put(name, values);
+    return this.withAdditionalHeaders(headerMap);
+  }
+
+  /**
+   * Returns a new {@link HttpHeaders} instance containing the headers of the current instance plus
+   * the provided headers.
+   *
+   * @param headerMap the map containing the headers to add
+   * @return the new {@link HttpHeaders} instance
+   * @throws NullPointerException if {@code headerMap} is {@code null}
+   */
+  public HttpHeaders withAdditionalHeaders(Map<String, List<String>> headerMap) {
+    requireNonNull(headerMap);
+    Map<String, List<String>> newHeaderMap = new HashMap<>(this.map());
+    newHeaderMap.putAll(headerMap);
+    return HttpHeaders.of(newHeaderMap);
   }
 
   /**
@@ -76,5 +125,20 @@ public class HttpHeaders {
    */
   public Map<String, List<String>> map() {
     return Collections.unmodifiableMap(this.headerMap);
+  }
+
+  /**
+   * Returns this {@link HttpHeaders} as a string.
+   *
+   * @return a string describing the HTTP headers
+   */
+  @Override
+  public String toString() {
+    StringBuilder sb = new StringBuilder();
+    sb.append(super.toString());
+    sb.append(" { ");
+    sb.append(map());
+    sb.append(" }");
+    return sb.toString();
   }
 }

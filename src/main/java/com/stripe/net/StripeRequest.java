@@ -15,7 +15,6 @@ import java.util.UUID;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
 import lombok.Value;
-import lombok.With;
 import lombok.experimental.Accessors;
 
 /** A request to Stripe's API. */
@@ -43,7 +42,6 @@ public class StripeRequest {
    * The HTTP headers of the request ({@code Authorization}, {@code Stripe-Version}, {@code
    * Stripe-Account}, {@code Idempotency-Key}...).
    */
-  @With(onMethod = @__({@SuppressWarnings("ReferenceEquality")}))
   HttpHeaders headers;
 
   /** The special modifiers of the request. */
@@ -80,6 +78,22 @@ public class StripeRequest {
               Stripe.getApiBase(), e.getMessage()),
           e);
     }
+  }
+
+  /**
+   * Returns a new {@link StripeRequest} instance with an additional header.
+   *
+   * @param name the additional header's name
+   * @param value the additional header's value
+   * @return the new {@link StripeRequest} instance
+   */
+  public StripeRequest withAdditionalHeader(String name, String value) {
+    return new StripeRequest(
+        this.method,
+        this.url,
+        this.content,
+        this.headers.withAdditionalHeader(name, value),
+        this.options);
   }
 
   private static URL buildURL(

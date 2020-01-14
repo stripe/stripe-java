@@ -159,4 +159,17 @@ public class StripeRequestTest extends BaseStripeTest {
       Stripe.apiKey = origApiKey;
     }
   }
+
+  @Test
+  public void testWithAdditionalHeader() throws StripeException {
+    StripeRequest request =
+        new StripeRequest(
+            ApiResource.RequestMethod.GET,
+            "http://example.com/get",
+            ImmutableMap.of("string", "String!"),
+            null);
+    StripeRequest updatedRequest = request.withAdditionalHeader("New-Header", "bar");
+    assertTrue(updatedRequest.headers().firstValue("New-Header").isPresent());
+    assertEquals("bar", updatedRequest.headers().firstValue("New-Header").get());
+  }
 }
