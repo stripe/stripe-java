@@ -114,7 +114,7 @@ public abstract class HttpClient {
       throw requestException;
     }
 
-    response.setNumRetries(retry);
+    response.numRetries(retry);
 
     return response;
   }
