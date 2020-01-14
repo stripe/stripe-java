@@ -50,8 +50,8 @@ public class HttpURLConnectionClient extends HttpClient {
 
       // trigger the request
       int responseCode = conn.getResponseCode();
+      HttpHeaders headers = HttpHeaders.of(conn.getHeaderFields());
       String responseBody;
-      Map<String, List<String>> headers;
 
       if (responseCode >= 200 && responseCode < 300) {
         responseBody = getResponseBody(conn.getInputStream());
@@ -59,9 +59,7 @@ public class HttpURLConnectionClient extends HttpClient {
         responseBody = getResponseBody(conn.getErrorStream());
       }
 
-      headers = conn.getHeaderFields();
-
-      return new StripeResponse(responseCode, responseBody, headers);
+      return new StripeResponse(responseCode, headers, responseBody);
 
     } catch (IOException e) {
       throw new ApiConnectionException(
