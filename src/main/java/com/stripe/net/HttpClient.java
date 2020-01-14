@@ -6,8 +6,11 @@ import com.stripe.exception.StripeException;
 import com.stripe.util.Stopwatch;
 import java.net.ConnectException;
 import java.time.Duration;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ThreadLocalRandom;
 
 /** Base abstract class for HTTP clients used to send requests to Stripe's API. */
@@ -57,7 +60,12 @@ public abstract class HttpClient {
    * @throws StripeException If the request fails for any reason
    */
   public StripeResponse requestWithTelemetry(StripeRequest request) throws StripeException {
-    requestTelemetry.maybeAddTelemetryHeader(request.headers());
+    Optional<String> telemetryHeaderValue = requestTelemetry.getHeaderValue(request.headers());
+    if (telemetryHeaderValue.isPresent()) {
+      Map<String, List<String>> headerMap = new HashMap<>(request.headers().map());
+      headerMap.put(RequestTelemetry.HEADER_NAME, Arrays.asList(telemetryHeaderValue.get()));
+      request = request.withHeaders(HttpHeaders.of(headerMap));
+    }
 
     Stopwatch stopwatch = Stopwatch.startNew();
 

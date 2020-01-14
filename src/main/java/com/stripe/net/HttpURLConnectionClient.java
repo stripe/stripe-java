@@ -8,6 +8,7 @@ import java.io.OutputStream;
 import java.net.Authenticator;
 import java.net.HttpURLConnection;
 import java.net.PasswordAuthentication;
+import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -78,18 +79,13 @@ public class HttpURLConnectionClient extends HttpClient {
     }
   }
 
-  static Map<String, String> getHeaders(StripeRequest request) {
-    Map<String, String> headers = new HashMap<>();
+  static HttpHeaders getHeaders(StripeRequest request) {
+    Map<String, List<String>> headerMap = new HashMap<>(request.headers().map());
 
-    headers.putAll(request.headers());
+    headerMap.put("User-Agent", Arrays.asList(buildUserAgentString()));
+    headerMap.put("X-Stripe-Client-User-Agent", Arrays.asList(buildXStripeClientUserAgentString()));
 
-    headers.put("Accept-Charset", ApiResource.CHARSET);
-    headers.put("Accept", "application/json");
-
-    headers.put("User-Agent", buildUserAgentString());
-    headers.put("X-Stripe-Client-User-Agent", buildXStripeClientUserAgentString());
-
-    return headers;
+    return HttpHeaders.of(headerMap);
   }
 
   private static HttpURLConnection createStripeConnection(StripeRequest request)
@@ -112,8 +108,8 @@ public class HttpURLConnectionClient extends HttpClient {
     conn.setConnectTimeout(request.options().getConnectTimeout());
     conn.setReadTimeout(request.options().getReadTimeout());
     conn.setUseCaches(false);
-    for (Map.Entry<String, String> header : getHeaders(request).entrySet()) {
-      conn.setRequestProperty(header.getKey(), header.getValue());
+    for (Map.Entry<String, List<String>> entry : getHeaders(request).map().entrySet()) {
+      conn.setRequestProperty(entry.getKey(), String.join(",", entry.getValue()));
     }
 
     conn.setRequestMethod(request.method().name());

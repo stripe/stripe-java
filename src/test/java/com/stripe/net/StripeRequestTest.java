@@ -27,11 +27,11 @@ public class StripeRequestTest extends BaseStripeTest {
 
     assertEquals(ApiResource.RequestMethod.GET, request.method());
     assertEquals("http://example.com/get?string=String%21", request.url().toString());
-    assertEquals("Bearer sk_test_123", request.headers().get("Authorization"));
-    assertTrue(request.headers().containsKey("Stripe-Version"));
-    assertEquals(Stripe.API_VERSION, request.headers().get("Stripe-Version"));
-    assertFalse(request.headers().containsKey("Idempotency-Key"));
-    assertFalse(request.headers().containsKey("Stripe-Account"));
+    assertEquals("Bearer sk_test_123", request.headers().firstValue("Authorization").orElse(null));
+    assertTrue(request.headers().firstValue("Stripe-Version").isPresent());
+    assertEquals(Stripe.API_VERSION, request.headers().firstValue("Stripe-Version").get());
+    assertFalse(request.headers().firstValue("Idempotency-Key").isPresent());
+    assertFalse(request.headers().firstValue("Stripe-Account").isPresent());
     assertNull(request.content());
   }
 
@@ -46,11 +46,11 @@ public class StripeRequestTest extends BaseStripeTest {
 
     assertEquals(ApiResource.RequestMethod.POST, request.method());
     assertEquals("http://example.com/post", request.url().toString());
-    assertEquals("Bearer sk_test_123", request.headers().get("Authorization"));
-    assertTrue(request.headers().containsKey("Stripe-Version"));
-    assertEquals(Stripe.API_VERSION, request.headers().get("Stripe-Version"));
-    assertTrue(request.headers().containsKey("Idempotency-Key"));
-    assertFalse(request.headers().containsKey("Stripe-Account"));
+    assertEquals("Bearer sk_test_123", request.headers().firstValue("Authorization").orElse(null));
+    assertTrue(request.headers().firstValue("Stripe-Version").isPresent());
+    assertEquals(Stripe.API_VERSION, request.headers().firstValue("Stripe-Version").get());
+    assertTrue(request.headers().firstValue("Idempotency-Key").isPresent());
+    assertFalse(request.headers().firstValue("Stripe-Account").isPresent());
     assertNotNull(request.content());
     assertEquals(
         "string=String%21",
@@ -68,11 +68,11 @@ public class StripeRequestTest extends BaseStripeTest {
 
     assertEquals(ApiResource.RequestMethod.DELETE, request.method());
     assertEquals("http://example.com/get?string=String%21", request.url().toString());
-    assertEquals("Bearer sk_test_123", request.headers().get("Authorization"));
-    assertTrue(request.headers().containsKey("Stripe-Version"));
-    assertEquals(Stripe.API_VERSION, request.headers().get("Stripe-Version"));
-    assertFalse(request.headers().containsKey("Idempotency-Key"));
-    assertFalse(request.headers().containsKey("Stripe-Account"));
+    assertEquals("Bearer sk_test_123", request.headers().firstValue("Authorization").orElse(null));
+    assertTrue(request.headers().firstValue("Stripe-Version").isPresent());
+    assertEquals(Stripe.API_VERSION, request.headers().firstValue("Stripe-Version").get());
+    assertFalse(request.headers().firstValue("Idempotency-Key").isPresent());
+    assertFalse(request.headers().firstValue("Stripe-Account").isPresent());
     assertNull(request.content());
   }
 
@@ -90,13 +90,13 @@ public class StripeRequestTest extends BaseStripeTest {
 
     assertEquals(ApiResource.RequestMethod.GET, request.method());
     assertEquals("http://example.com/get", request.url().toString());
-    assertEquals("Bearer sk_override", request.headers().get("Authorization"));
-    assertTrue(request.headers().containsKey("Stripe-Version"));
-    assertEquals("2012-12-21", request.headers().get("Stripe-Version"));
-    assertTrue(request.headers().containsKey("Idempotency-Key"));
-    assertEquals("idempotency_key", request.headers().get("Idempotency-Key"));
-    assertTrue(request.headers().containsKey("Stripe-Account"));
-    assertEquals("acct_456", request.headers().get("Stripe-Account"));
+    assertEquals("Bearer sk_override", request.headers().firstValue("Authorization").orElse(null));
+    assertTrue(request.headers().firstValue("Stripe-Version").isPresent());
+    assertEquals("2012-12-21", request.headers().firstValue("Stripe-Version").get());
+    assertTrue(request.headers().firstValue("Idempotency-Key").isPresent());
+    assertEquals("idempotency_key", request.headers().firstValue("Idempotency-Key").get());
+    assertTrue(request.headers().firstValue("Stripe-Account").isPresent());
+    assertEquals("acct_456", request.headers().firstValue("Stripe-Account").get());
     assertNull(request.content());
   }
 

@@ -4,12 +4,15 @@ import com.google.gson.Gson;
 import com.google.gson.annotations.SerializedName;
 import com.stripe.Stripe;
 import java.time.Duration;
-import java.util.Map;
+import java.util.Optional;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import lombok.Data;
 
 /** Helper class used by {@link LiveStripeResponseGetter} to manage request telemetry. */
 class RequestTelemetry {
+  /** The name of the header used to send request telemetry in requests. */
+  public static final String HEADER_NAME = "X-Stripe-Client-Telemetry";
+
   private static final int MAX_REQUEST_METRICS_QUEUE_SIZE = 100;
 
   private static final Gson gson = new Gson();
@@ -18,27 +21,28 @@ class RequestTelemetry {
       new ConcurrentLinkedQueue<RequestMetrics>();
 
   /**
-   * If telemetry is enabled and there is at least one metrics item in the queue, then add a {@code
-   * X-Stripe-Client-Telemetry} header with the item; otherwise, do nothing.
+   * Returns an {@link Optional} containing the value of the {@code X-Stripe-Telemetry} header to
+   * add to the request. If the header is already present in the request, or if there is available
+   * metrics, or if telemetry is disabled, then the returned {@code Optional} is empty.
    *
    * @param headers the request headers
    */
-  public void maybeAddTelemetryHeader(Map<String, String> headers) {
-    if (headers.containsKey("X-Stripe-Telemetry")) {
-      return;
+  public Optional<String> getHeaderValue(HttpHeaders headers) {
+    if (headers.firstValue(HEADER_NAME).isPresent()) {
+      return Optional.empty();
     }
 
     RequestMetrics requestMetrics = prevRequestMetrics.poll();
     if (requestMetrics == null) {
-      return;
+      return Optional.empty();
     }
 
     if (!Stripe.enableTelemetry) {
-      return;
+      return Optional.empty();
     }
 
     ClientTelemetryPayload payload = new ClientTelemetryPayload(requestMetrics);
-    headers.put("X-Stripe-Client-Telemetry", gson.toJson(payload));
+    return Optional.of(gson.toJson(payload));
   }
 
   /**
