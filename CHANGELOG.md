@@ -1,5 +1,8 @@
 # Changelog
 
+## 16.6.0 - 2020-01-14
+* [#929](https://github.com/stripe/stripe-java/pull/929) Add support for `CreditNoteLineItem`
+
 ## 16.5.1 - 2020-01-09
 * [#924](https://github.com/stripe/stripe-java/pull/924) Doc changes for core properties or parameters such as `metadata` or `livemode`
 
