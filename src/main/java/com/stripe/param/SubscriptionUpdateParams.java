@@ -163,6 +163,17 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   Boolean prorate;
 
   /**
+   * Determines how to handle
+   * [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing
+   * cycle changes (e.g., when switching plans, resetting `billing_cycle_anchor=now`, or starting a
+   * trial), or if an item's `quantity` changes. The value defaults to `create_prorations`,
+   * indicating that proration invoice items should be created. Prorations can be disabled by
+   * setting the value to `none`.
+   */
+  @SerializedName("proration_behavior")
+  ProrationBehavior prorationBehavior;
+
+  /**
    * If set, the proration will be calculated as though the subscription was updated at the given
    * time. This can be used to apply exactly the same proration that was previewed with [upcoming
    * invoice](#retrieve_customer_invoice) endpoint. It can also be used to implement custom
@@ -230,6 +241,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
       PaymentBehavior paymentBehavior,
       Object pendingInvoiceItemInterval,
       Boolean prorate,
+      ProrationBehavior prorationBehavior,
       Long prorationDate,
       Object taxPercent,
       Object transferData,
@@ -254,6 +266,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     this.paymentBehavior = paymentBehavior;
     this.pendingInvoiceItemInterval = pendingInvoiceItemInterval;
     this.prorate = prorate;
+    this.prorationBehavior = prorationBehavior;
     this.prorationDate = prorationDate;
     this.taxPercent = taxPercent;
     this.transferData = transferData;
@@ -304,6 +317,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
     private Boolean prorate;
 
+    private ProrationBehavior prorationBehavior;
+
     private Long prorationDate;
 
     private Object taxPercent;
@@ -336,6 +351,7 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
           this.paymentBehavior,
           this.pendingInvoiceItemInterval,
           this.prorate,
+          this.prorationBehavior,
           this.prorationDate,
           this.taxPercent,
           this.transferData,
@@ -696,6 +712,19 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      */
     public Builder setProrate(Boolean prorate) {
       this.prorate = prorate;
+      return this;
+    }
+
+    /**
+     * Determines how to handle
+     * [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing
+     * cycle changes (e.g., when switching plans, resetting `billing_cycle_anchor=now`, or starting
+     * a trial), or if an item's `quantity` changes. The value defaults to `create_prorations`,
+     * indicating that proration invoice items should be created. Prorations can be disabled by
+     * setting the value to `none`.
+     */
+    public Builder setProrationBehavior(ProrationBehavior prorationBehavior) {
+      this.prorationBehavior = prorationBehavior;
       return this;
     }
 
@@ -1476,6 +1505,24 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     private final String value;
 
     PaymentBehavior(String value) {
+      this.value = value;
+    }
+  }
+
+  public enum ProrationBehavior implements ApiRequestParams.EnumParam {
+    @SerializedName("always_invoice")
+    ALWAYS_INVOICE("always_invoice"),
+
+    @SerializedName("create_prorations")
+    CREATE_PRORATIONS("create_prorations"),
+
+    @SerializedName("none")
+    NONE("none");
+
+    @Getter(onMethod_ = {@Override})
+    private final String value;
+
+    ProrationBehavior(String value) {
       this.value = value;
     }
   }
