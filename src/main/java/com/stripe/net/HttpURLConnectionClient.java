@@ -16,22 +16,9 @@ import java.util.Scanner;
 import lombok.Cleanup;
 
 public class HttpURLConnectionClient extends HttpClient {
-  /**
-   * Initializes a new instance of the {@link HttpURLConnectionClient} class with default
-   * parameters.
-   */
+  /** Initializes a new instance of the {@link HttpURLConnectionClient}. */
   public HttpURLConnectionClient() {
     super();
-  }
-
-  /**
-   * Initializes a new instance of the {@link HttpURLConnectionClient} class.
-   *
-   * @param maxNetworkRetries the maximum number of times the client will retry requests that fail
-   *     due to an intermittent problem.
-   */
-  public HttpURLConnectionClient(int maxNetworkRetries) {
-    super(maxNetworkRetries);
   }
 
   /**

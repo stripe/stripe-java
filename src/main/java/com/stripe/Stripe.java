@@ -26,6 +26,8 @@ public abstract class Stripe {
   private static volatile int connectTimeout = -1;
   private static volatile int readTimeout = -1;
 
+  private static volatile int maxNetworkRetries = 0;
+
   private static volatile String apiBase = LIVE_API_BASE;
   private static volatile String connectBase = CONNECT_API_BASE;
   private static volatile String uploadBase = UPLOAD_API_BASE;
@@ -128,6 +130,24 @@ public abstract class Stripe {
    */
   public static void setReadTimeout(final int timeout) {
     readTimeout = timeout;
+  }
+
+  /**
+   * Returns the maximum number of times requests will be retried.
+   *
+   * @return the maximum number of times requests will be retried
+   */
+  public static int getMaxNetworkRetries() {
+    return maxNetworkRetries;
+  }
+
+  /**
+   * Sets the maximum number of times requests will be retried.
+   *
+   * @param numRetries the maximum number of times requests will be retried
+   */
+  public static void setMaxNetworkRetries(final int numRetries) {
+    maxNetworkRetries = numRetries;
   }
 
   /**

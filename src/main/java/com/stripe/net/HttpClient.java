@@ -19,27 +19,13 @@ public abstract class HttpClient {
   /** Minimum sleep time between tries to send HTTP requests after network failure. */
   public static final Duration minNetworkRetriesDelay = Duration.ofMillis(500);
 
-  private final int maxNetworkRetries;
-
   private final RequestTelemetry requestTelemetry = new RequestTelemetry();
 
   /** A value indicating whether the client should sleep between automatic request retries. */
   boolean networkRetriesSleep = true;
 
-  /** Initializes a new instance of the {@link HttpClient} class with default parameters. */
-  public HttpClient() {
-    this(0);
-  }
-
-  /**
-   * Initializes a new instance of the {@link HttpClient} class.
-   *
-   * @param maxNetworkRetries the maximum number of times the client will retry requests that fail
-   *     due to an intermittent problem.
-   */
-  public HttpClient(int maxNetworkRetries) {
-    this.maxNetworkRetries = maxNetworkRetries;
-  }
+  /** Initializes a new instance of the {@link HttpClient} class. */
+  public HttpClient() {}
 
   /**
    * Sends the given request to Stripe's API.
@@ -97,7 +83,7 @@ public abstract class HttpClient {
         requestException = e;
       }
 
-      if (!this.shouldRetry(retry, requestException, response)) {
+      if (!this.shouldRetry(retry, requestException, request, response)) {
         break;
       }
 
@@ -178,9 +164,10 @@ public abstract class HttpClient {
     return str;
   }
 
-  private boolean shouldRetry(int numRetries, StripeException exception, StripeResponse response) {
+  private boolean shouldRetry(
+      int numRetries, StripeException exception, StripeRequest request, StripeResponse response) {
     // Do not retry if we are out of retries.
-    if (numRetries >= this.maxNetworkRetries) {
+    if (numRetries >= request.options().getMaxNetworkRetries()) {
       return false;
     }
 
