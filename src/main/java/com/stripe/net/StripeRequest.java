@@ -7,13 +7,19 @@ import com.stripe.exception.StripeException;
 import com.stripe.util.StringUtils;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.UUID;
+import lombok.AccessLevel;
+import lombok.AllArgsConstructor;
 import lombok.Value;
 import lombok.experimental.Accessors;
 
+/** A request to Stripe's API. */
 @Value
+@AllArgsConstructor(access = AccessLevel.PROTECTED)
 @Accessors(fluent = true)
 public class StripeRequest {
   /** The HTTP method for the request (GET, POST or DELETE). */
@@ -33,10 +39,10 @@ public class StripeRequest {
   HttpContent content;
 
   /**
-   * Map containing the headers of the request ({@code Authorization}, {@code Stripe-Version},
-   * {@code Stripe-Account}, {@code Idempotency-Key}...).
+   * The HTTP headers of the request ({@code Authorization}, {@code Stripe-Version}, {@code
+   * Stripe-Account}, {@code Idempotency-Key}...).
    */
-  Map<String, String> headers;
+  HttpHeaders headers;
 
   /** The special modifiers of the request. */
   RequestOptions options;
@@ -74,7 +80,22 @@ public class StripeRequest {
     }
   }
 
-  @SuppressWarnings("unchecked")
+  /**
+   * Returns a new {@link StripeRequest} instance with an additional header.
+   *
+   * @param name the additional header's name
+   * @param value the additional header's value
+   * @return the new {@link StripeRequest} instance
+   */
+  public StripeRequest withAdditionalHeader(String name, String value) {
+    return new StripeRequest(
+        this.method,
+        this.url,
+        this.content,
+        this.headers.withAdditionalHeader(name, value),
+        this.options);
+  }
+
   private static URL buildURL(
       ApiResource.RequestMethod method, String spec, Map<String, Object> params)
       throws IOException {
@@ -102,9 +123,15 @@ public class StripeRequest {
     return FormEncoder.createHttpContent(params);
   }
 
-  private static Map<String, String> buildHeaders(
-      ApiResource.RequestMethod method, RequestOptions options) throws AuthenticationException {
-    Map<String, String> headers = new HashMap<String, String>();
+  private static HttpHeaders buildHeaders(ApiResource.RequestMethod method, RequestOptions options)
+      throws AuthenticationException {
+    Map<String, List<String>> headerMap = new HashMap<String, List<String>>();
+
+    // Accept
+    headerMap.put("Accept", Arrays.asList("application/json"));
+
+    // Accept-Charset
+    headerMap.put("Accept-Charset", Arrays.asList(ApiResource.CHARSET));
 
     // Authorization
     String apiKey = options.getApiKey();
@@ -136,13 +163,13 @@ public class StripeRequest {
           null,
           0);
     }
-    headers.put("Authorization", String.format("Bearer %s", apiKey));
+    headerMap.put("Authorization", Arrays.asList(String.format("Bearer %s", apiKey)));
 
     // Stripe-Version
     if (options.getStripeVersionOverride() != null) {
-      headers.put("Stripe-Version", options.getStripeVersionOverride());
+      headerMap.put("Stripe-Version", Arrays.asList(options.getStripeVersionOverride()));
     } else if (options.getStripeVersion() != null) {
-      headers.put("Stripe-Version", options.getStripeVersion());
+      headerMap.put("Stripe-Version", Arrays.asList(options.getStripeVersion()));
     } else {
       throw new IllegalStateException(
           "Either `stripeVersion` or `stripeVersionOverride` value must be set.");
@@ -150,16 +177,16 @@ public class StripeRequest {
 
     // Stripe-Account
     if (options.getStripeAccount() != null) {
-      headers.put("Stripe-Account", options.getStripeAccount());
+      headerMap.put("Stripe-Account", Arrays.asList(options.getStripeAccount()));
     }
 
     // Idempotency-Key
     if (options.getIdempotencyKey() != null) {
-      headers.put("Idempotency-Key", options.getIdempotencyKey());
+      headerMap.put("Idempotency-Key", Arrays.asList(options.getIdempotencyKey()));
     } else if (method == ApiResource.RequestMethod.POST) {
-      headers.put("Idempotency-Key", UUID.randomUUID().toString());
+      headerMap.put("Idempotency-Key", Arrays.asList(UUID.randomUUID().toString()));
     }
 
-    return headers;
+    return HttpHeaders.of(headerMap);
   }
 }

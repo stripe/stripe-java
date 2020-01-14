@@ -7,7 +7,7 @@ public class StripeResponse {
 
   int code;
   String body;
-  StripeHeaders headers;
+  HttpHeaders headers;
   int numRetries;
 
   /** Constructs a Stripe response with the specified status code and body. */
@@ -21,7 +21,7 @@ public class StripeResponse {
   public StripeResponse(int code, String body, Map<String, List<String>> headers) {
     this.code = code;
     this.body = body;
-    this.headers = new StripeHeaders(headers);
+    this.headers = HttpHeaders.of(headers);
   }
 
   public int code() {
@@ -32,16 +32,16 @@ public class StripeResponse {
     return this.body;
   }
 
-  public StripeHeaders headers() {
+  public HttpHeaders headers() {
     return headers;
   }
 
   public String idempotencyKey() {
-    return (headers != null) ? headers.get("Idempotency-Key") : null;
+    return (headers != null) ? headers.firstValue("Idempotency-Key").orElse(null) : null;
   }
 
   public String requestId() {
-    return (headers != null) ? headers.get("Request-Id") : null;
+    return (headers != null) ? headers.firstValue("Request-Id").orElse(null) : null;
   }
 
   public int numRetries() {
