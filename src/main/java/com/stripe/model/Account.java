@@ -351,7 +351,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * live-mode keys can only be deleted once all balances are zero.
    *
    * <p>If you want to delete your own account, use the <a
-   * href="https://dashboard.stripe.com/account/data">data tab in your account settings</a> instead.
+   * href="https://dashboard.stripe.com/account">account information tab in your account
+   * settings</a> instead.
    */
   public Account delete() throws StripeException {
     return delete((Map<String, Object>) null, (RequestOptions) null);
@@ -364,7 +365,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * live-mode keys can only be deleted once all balances are zero.
    *
    * <p>If you want to delete your own account, use the <a
-   * href="https://dashboard.stripe.com/account/data">data tab in your account settings</a> instead.
+   * href="https://dashboard.stripe.com/account">account information tab in your account
+   * settings</a> instead.
    */
   public Account delete(RequestOptions options) throws StripeException {
     return delete((Map<String, Object>) null, options);
@@ -377,7 +379,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * live-mode keys can only be deleted once all balances are zero.
    *
    * <p>If you want to delete your own account, use the <a
-   * href="https://dashboard.stripe.com/account/data">data tab in your account settings</a> instead.
+   * href="https://dashboard.stripe.com/account">account information tab in your account
+   * settings</a> instead.
    */
   public Account delete(Map<String, Object> params) throws StripeException {
     return delete(params, (RequestOptions) null);
@@ -390,7 +393,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
    * live-mode keys can only be deleted once all balances are zero.
    *
    * <p>If you want to delete your own account, use the <a
-   * href="https://dashboard.stripe.com/account/data">data tab in your account settings</a> instead.
+   * href="https://dashboard.stripe.com/account">account information tab in your account
+   * settings</a> instead.
    */
   public Account delete(Map<String, Object> params, RequestOptions options) throws StripeException {
     String url =
