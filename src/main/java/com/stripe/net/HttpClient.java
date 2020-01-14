@@ -197,7 +197,7 @@ public abstract class HttpClient {
     // The API may ask us not to retry (eg; if doing so would be a no-op)
     // or advise us to retry (eg; in cases of lock timeouts); we defer to that.
     if ((response != null) && (response.headers() != null)) {
-      String value = response.headers().get("Stripe-Should-Retry");
+      String value = response.headers().firstValue("Stripe-Should-Retry").orElse(null);
 
       if ("true".equals(value)) {
         return true;
