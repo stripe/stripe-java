@@ -12,6 +12,7 @@ import com.stripe.BaseStripeTest;
 import com.stripe.exception.ApiConnectionException;
 import com.stripe.exception.StripeException;
 import java.net.ConnectException;
+import java.util.Collections;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.Mockito;
@@ -20,6 +21,8 @@ public class HttpClientTest extends BaseStripeTest {
   private HttpClient client;
 
   private StripeRequest request;
+
+  private HttpHeaders emptyHeaders = HttpHeaders.of(Collections.emptyMap());
 
   @BeforeEach
   public void setUpFixtures() throws StripeException {
@@ -37,7 +40,7 @@ public class HttpClientTest extends BaseStripeTest {
   public void testRequestWithRetriesConnectException() throws StripeException {
     Mockito.when(this.client.request(this.request))
         .thenThrow(new ApiConnectionException("foo", new ConnectException("timeout or something")))
-        .thenReturn(new StripeResponse(200, "{}"));
+        .thenReturn(new StripeResponse(200, emptyHeaders, "{}"));
 
     StripeResponse response = this.client.requestWithRetries(this.request);
 
@@ -71,8 +74,10 @@ public class HttpClientTest extends BaseStripeTest {
     Mockito.when(this.client.request(this.request))
         .thenReturn(
             new StripeResponse(
-                400, "{}", ImmutableMap.of("Stripe-Should-Retry", ImmutableList.of("true"))))
-        .thenReturn(new StripeResponse(200, "{}"));
+                400,
+                HttpHeaders.of(ImmutableMap.of("Stripe-Should-Retry", ImmutableList.of("true"))),
+                "{}"))
+        .thenReturn(new StripeResponse(200, emptyHeaders, "{}"));
 
     StripeResponse response = this.client.requestWithRetries(this.request);
 
@@ -86,7 +91,9 @@ public class HttpClientTest extends BaseStripeTest {
     Mockito.when(this.client.request(this.request))
         .thenReturn(
             new StripeResponse(
-                400, "{}", ImmutableMap.of("Stripe-Should-Retry", ImmutableList.of("false"))));
+                400,
+                HttpHeaders.of(ImmutableMap.of("Stripe-Should-Retry", ImmutableList.of("false"))),
+                "{}"));
 
     StripeResponse response = this.client.requestWithRetries(this.request);
 
@@ -98,8 +105,8 @@ public class HttpClientTest extends BaseStripeTest {
   @Test
   public void testRequestWithRetriesConflict() throws StripeException {
     Mockito.when(this.client.request(this.request))
-        .thenReturn(new StripeResponse(409, "{}"))
-        .thenReturn(new StripeResponse(200, "{}"));
+        .thenReturn(new StripeResponse(409, emptyHeaders, "{}"))
+        .thenReturn(new StripeResponse(200, emptyHeaders, "{}"));
 
     StripeResponse response = this.client.requestWithRetries(this.request);
 
@@ -111,8 +118,8 @@ public class HttpClientTest extends BaseStripeTest {
   @Test
   public void testRequestWithRetriesConflictServiceUnavailable() throws StripeException {
     Mockito.when(this.client.request(this.request))
-        .thenReturn(new StripeResponse(503, "{}"))
-        .thenReturn(new StripeResponse(200, "{}"));
+        .thenReturn(new StripeResponse(503, emptyHeaders, "{}"))
+        .thenReturn(new StripeResponse(200, emptyHeaders, "{}"));
 
     StripeResponse response = this.client.requestWithRetries(this.request);
 
@@ -124,8 +131,8 @@ public class HttpClientTest extends BaseStripeTest {
   @Test
   public void testRequestWithRetriesConflictInternalServerError() throws StripeException {
     Mockito.when(this.client.request(this.request))
-        .thenReturn(new StripeResponse(500, "{}"))
-        .thenReturn(new StripeResponse(200, "{}"));
+        .thenReturn(new StripeResponse(500, emptyHeaders, "{}"))
+        .thenReturn(new StripeResponse(200, emptyHeaders, "{}"));
 
     StripeResponse response = this.client.requestWithRetries(this.request);
 
