@@ -11,6 +11,7 @@ import com.stripe.param.CreditNotePreviewParams;
 import com.stripe.param.CreditNoteRetrieveParams;
 import com.stripe.param.CreditNoteUpdateParams;
 import com.stripe.param.CreditNoteVoidCreditNoteParams;
+import java.util.List;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
 import lombok.Getter;
@@ -49,6 +50,10 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<CustomerBalanceTransaction> customerBalanceTransaction;
 
+  /** The integer amount in **%s** representing the amount of the discount that was credited. */
+  @SerializedName("discount_amount")
+  Long discountAmount;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -59,6 +64,10 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Invoice> invoice;
+
+  /** Line items that make up the credit note. */
+  @SerializedName("lines")
+  CreditNoteLineItemCollection lines;
 
   /**
    * Has the value `true` if the object exists in live mode or the value `false` if the object
@@ -94,6 +103,10 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   @SerializedName("object")
   String object;
 
+  /** Amount that was credited outside of Stripe. */
+  @SerializedName("out_of_band_amount")
+  Long outOfBandAmount;
+
   /** The link to download the PDF of the credit note. */
   @SerializedName("pdf")
   String pdf;
@@ -117,6 +130,24 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
    */
   @SerializedName("status")
   String status;
+
+  /**
+   * The integer amount in **%s** representing the amount of the credit note, excluding tax and
+   * discount.
+   */
+  @SerializedName("subtotal")
+  Long subtotal;
+
+  /** The aggregate amounts calculated per tax rate for all line items. */
+  @SerializedName("tax_amounts")
+  List<CreditNote.TaxAmount> taxAmounts;
+
+  /**
+   * The integer amount in **%s** representing the total amount of the credit note, including tax
+   * and discount.
+   */
+  @SerializedName("total")
+  Long total;
 
   /**
    * Type of this credit note, one of `post_payment` or `pre_payment`. A `pre_payment` credit note
@@ -500,5 +531,42 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
             String.format("/v1/credit_notes/%s/void", ApiResource.urlEncodeId(this.getId())));
     return ApiResource.request(
         ApiResource.RequestMethod.POST, url, params, CreditNote.class, options);
+  }
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class TaxAmount extends StripeObject {
+    /** The amount, in %s, of the tax. */
+    @SerializedName("amount")
+    Long amount;
+
+    /** Whether this tax amount is inclusive or exclusive. */
+    @SerializedName("inclusive")
+    Boolean inclusive;
+
+    /** The tax rate that was applied to get this tax amount. */
+    @SerializedName("tax_rate")
+    @Getter(lombok.AccessLevel.NONE)
+    @Setter(lombok.AccessLevel.NONE)
+    ExpandableField<TaxRate> taxRate;
+
+    /** Get id of expandable `taxRate` object. */
+    public String getTaxRate() {
+      return (this.taxRate != null) ? this.taxRate.getId() : null;
+    }
+
+    public void setTaxRate(String id) {
+      this.taxRate = ApiResource.setExpandableFieldId(id, this.taxRate);
+    }
+
+    /** Get expanded `taxRate`. */
+    public TaxRate getTaxRateObject() {
+      return (this.taxRate != null) ? this.taxRate.getExpanded() : null;
+    }
+
+    public void setTaxRateObject(TaxRate expandableObject) {
+      this.taxRate = new ExpandableField<TaxRate>(expandableObject.getId(), expandableObject);
+    }
   }
 }

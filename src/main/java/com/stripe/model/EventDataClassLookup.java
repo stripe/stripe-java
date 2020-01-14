@@ -29,6 +29,7 @@ final class EventDataClassLookup {
     classLookup.put("country_spec", CountrySpec.class);
     classLookup.put("coupon", Coupon.class);
     classLookup.put("credit_note", CreditNote.class);
+    classLookup.put("credit_note_line_item", CreditNoteLineItem.class);
     classLookup.put("customer", Customer.class);
     classLookup.put("customer_balance_transaction", CustomerBalanceTransaction.class);
     classLookup.put("discount", Discount.class);
