@@ -38,6 +38,6 @@ public class RequestOptionsTest extends BaseStripeTest {
     final StripeResponse response = balance.getLastResponse();
 
     assertNotNull(response);
-    assertEquals(idempotencyKey, response.headers().get("Idempotency-Key"));
+    assertEquals(idempotencyKey, response.idempotencyKey());
   }
 }

@@ -20,14 +20,16 @@ import com.stripe.model.StripeCollectionInterface;
 import com.stripe.model.StripeObject;
 import com.stripe.model.StripeRawJsonObject;
 import com.stripe.model.StripeRawJsonObjectDeserializer;
+import com.stripe.util.StringUtils;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Objects;
 
 public abstract class ApiResource extends StripeObject {
-  public static final String CHARSET = StandardCharsets.UTF_8.name();
+  public static final Charset CHARSET = StandardCharsets.UTF_8;
 
   private static StripeResponseGetter stripeResponseGetter = new LiveStripeResponseGetter();
 
@@ -55,12 +57,7 @@ public abstract class ApiResource extends StripeObject {
 
   private static String className(Class<?> clazz) {
     // Convert CamelCase to snake_case
-    String className =
-        clazz
-            .getSimpleName()
-            .replaceAll("(.)([A-Z][a-z]+)", "$1_$2")
-            .replaceAll("([a-z0-9])([A-Z])", "$1_$2")
-            .toLowerCase();
+    String className = StringUtils.toSnakeCase(clazz.getSimpleName());
 
     // Handle namespaced resources by checking if the class is in a sub-package, and if so prepend
     // it to the class name
@@ -123,11 +120,6 @@ public abstract class ApiResource extends StripeObject {
     DELETE
   }
 
-  public enum RequestType {
-    NORMAL,
-    MULTIPART
-  }
-
   /** URL-encodes a string. */
   public static String urlEncode(String str) {
     // Preserve original behavior that passing null for an object id will lead
@@ -140,7 +132,7 @@ public abstract class ApiResource extends StripeObject {
       // Don't use strict form encoding by changing the square bracket control
       // characters back to their literals. This is fine by the server, and
       // makes these parameter strings easier to read.
-      return URLEncoder.encode(str, CHARSET).replaceAll("%5B", "[").replaceAll("%5D", "]");
+      return URLEncoder.encode(str, CHARSET.name()).replaceAll("%5B", "[").replaceAll("%5D", "]");
     } catch (UnsupportedEncodingException e) {
       // This can literally never happen, and lets us avoid having to catch
       // UnsupportedEncodingException in callers.
@@ -165,17 +157,6 @@ public abstract class ApiResource extends StripeObject {
     return urlEncode(id);
   }
 
-  public static <T> T multipartRequest(
-      ApiResource.RequestMethod method,
-      String url,
-      Map<String, Object> params,
-      Class<T> clazz,
-      RequestOptions options)
-      throws StripeException {
-    return ApiResource.stripeResponseGetter.request(
-        method, url, params, clazz, ApiResource.RequestType.MULTIPART, options);
-  }
-
   public static <T> T request(
       ApiResource.RequestMethod method,
       String url,
@@ -194,8 +175,7 @@ public abstract class ApiResource extends StripeObject {
       Class<T> clazz,
       RequestOptions options)
       throws StripeException {
-    return ApiResource.stripeResponseGetter.request(
-        method, url, params, clazz, ApiResource.RequestType.NORMAL, options);
+    return ApiResource.stripeResponseGetter.request(method, url, params, clazz, options);
   }
 
   public static <T extends StripeCollectionInterface<?>> T requestCollection(

@@ -99,7 +99,7 @@ public class File extends ApiResource implements HasId {
    */
   public static File create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
-    return multipartRequest(
+    return request(
         RequestMethod.POST,
         classUrl(File.class, Stripe.getUploadBase()),
         params,

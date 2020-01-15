@@ -31,23 +31,11 @@ public class ConnectionTokenCreateParams extends ApiRequestParams {
   @SerializedName("location")
   String location;
 
-  /**
-   * To [group
-   * objects](https://stripe.com/docs/terminal/payments/connect#grouping-objects-by-connected-account)
-   * on your platform account by connected account, set this parameter to the connected account ID.
-   */
-  @SerializedName("operator_account")
-  String operatorAccount;
-
   private ConnectionTokenCreateParams(
-      List<String> expand,
-      Map<String, Object> extraParams,
-      String location,
-      String operatorAccount) {
+      List<String> expand, Map<String, Object> extraParams, String location) {
     this.expand = expand;
     this.extraParams = extraParams;
     this.location = location;
-    this.operatorAccount = operatorAccount;
   }
 
   public static Builder builder() {
@@ -61,12 +49,9 @@ public class ConnectionTokenCreateParams extends ApiRequestParams {
 
     private String location;
 
-    private String operatorAccount;
-
     /** Finalize and obtain parameter instance from this builder. */
     public ConnectionTokenCreateParams build() {
-      return new ConnectionTokenCreateParams(
-          this.expand, this.extraParams, this.location, this.operatorAccount);
+      return new ConnectionTokenCreateParams(this.expand, this.extraParams, this.location);
     }
 
     /**
@@ -128,17 +113,6 @@ public class ConnectionTokenCreateParams extends ApiRequestParams {
      */
     public Builder setLocation(String location) {
       this.location = location;
-      return this;
-    }
-
-    /**
-     * To [group
-     * objects](https://stripe.com/docs/terminal/payments/connect#grouping-objects-by-connected-account)
-     * on your platform account by connected account, set this parameter to the connected account
-     * ID.
-     */
-    public Builder setOperatorAccount(String operatorAccount) {
-      this.operatorAccount = operatorAccount;
       return this;
     }
   }

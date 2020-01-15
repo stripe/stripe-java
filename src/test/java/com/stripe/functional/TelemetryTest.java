@@ -1,15 +1,16 @@
 package com.stripe.functional;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
 import com.stripe.BaseStripeTest;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Balance;
-import com.stripe.net.ApiResource;
-import com.stripe.net.ClientTelemetryPayload;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -52,18 +53,30 @@ public class TelemetryTest extends BaseStripeTest {
     Balance.retrieve();
     RecordedRequest request2 = server.takeRequest();
     String telemetry1 = request2.getHeader("X-Stripe-Client-Telemetry");
-    ClientTelemetryPayload payload1 =
-        ApiResource.GSON.fromJson(telemetry1, ClientTelemetryPayload.class);
-    assertEquals(payload1.lastRequestMetrics.requestId, "req_1");
-    assertTrue(payload1.lastRequestMetrics.requestDurationMs > 30);
+    assertNotNull(telemetry1);
+    JsonObject requestMetrics1 =
+        JsonParser.parseString(telemetry1)
+            .getAsJsonObject()
+            .get("last_request_metrics")
+            .getAsJsonObject();
+    String requestId1 = requestMetrics1.get("request_id").getAsString();
+    Long requestDurationMs1 = requestMetrics1.get("request_duration_ms").getAsLong();
+    assertEquals("req_1", requestId1);
+    assertTrue(requestDurationMs1 > 30);
 
     Balance.retrieve();
     RecordedRequest request3 = server.takeRequest();
     String telemetry2 = request3.getHeader("X-Stripe-Client-Telemetry");
-    ClientTelemetryPayload payload2 =
-        ApiResource.GSON.fromJson(telemetry2, ClientTelemetryPayload.class);
-    assertEquals(payload2.lastRequestMetrics.requestId, "req_2");
-    assertTrue(payload2.lastRequestMetrics.requestDurationMs > 120);
+    assertNotNull(telemetry2);
+    JsonObject requestMetrics2 =
+        JsonParser.parseString(telemetry2)
+            .getAsJsonObject()
+            .get("last_request_metrics")
+            .getAsJsonObject();
+    String requestId2 = requestMetrics2.get("request_id").getAsString();
+    Long requestDurationMs2 = requestMetrics2.get("request_duration_ms").getAsLong();
+    assertEquals("req_2", requestId2);
+    assertTrue(requestDurationMs2 > 30);
 
     server.shutdown();
   }
@@ -99,7 +112,7 @@ public class TelemetryTest extends BaseStripeTest {
           new MockResponse()
               .setBody("{}")
               .addHeader("Request-Id", "req_" + i)
-              .setBodyDelay(50, TimeUnit.MILLISECONDS));
+              .setBodyDelay(100, TimeUnit.MILLISECONDS));
     }
     server.start();
 
@@ -144,15 +157,22 @@ public class TelemetryTest extends BaseStripeTest {
 
     for (int i = 0; i < 10; i++) {
       RecordedRequest request = server.takeRequest();
-      assertNull(request.getHeader("X-Stripe-Client-Telemetry"));
+      assertNull(
+          request.getHeader("X-Stripe-Client-Telemetry"),
+          String.format("Expected telemetry header to be absent for request #%d", i));
     }
 
     for (int i = 0; i < 10; i++) {
       RecordedRequest request = server.takeRequest();
       String telemetry = request.getHeader("X-Stripe-Client-Telemetry");
-      ClientTelemetryPayload payload =
-          ApiResource.GSON.fromJson(telemetry, ClientTelemetryPayload.class);
-      seenRequestIds.add(payload.lastRequestMetrics.requestId);
+      assertNotNull(telemetry);
+      JsonObject requestMetrics =
+          JsonParser.parseString(telemetry)
+              .getAsJsonObject()
+              .get("last_request_metrics")
+              .getAsJsonObject();
+      String requestId = requestMetrics.get("request_id").getAsString();
+      seenRequestIds.add(requestId);
     }
 
     // check that each telemetry payload corresponds to a unique request id

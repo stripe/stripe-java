@@ -425,13 +425,6 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     String name;
 
     /**
-     * Deprecated field. It always return null and will be removed in the next client library major
-     * version
-     */
-    @SerializedName("phone")
-    String phone;
-
-    /**
      * The delivery status of the card.
      *
      * <p>One of `canceled`, `delivered`, `failure`, `pending`, `returned`, or `shipped`.

@@ -68,7 +68,7 @@ public class StripeExample {
         Map<String, Object> chargeMap = new HashMap<String, Object>();
         chargeMap.put("amount", 100);
         chargeMap.put("currency", "usd");
-        chargeMap.put("source", "tok_1234"); // obtained via Stripe.js
+        chargeMap.put("source", "tok_visa"); // obtained via Stripe.js
 
         try {
             Charge charge = Charge.create(chargeMap);
@@ -84,20 +84,44 @@ See the project's [functional tests](https://github.com/stripe/stripe-java/blob/
 
 ### Per-request Configuration
 
-For apps that need to use multiple keys during the lifetime of a process, like
-one that uses [Stripe Connect][connect], it's also possible to set a
-per-request key and/or account:
+All of the request methods accept an optional `RequestOptions` object. This is
+used if you want to set an [idempotency key][idempotency-keys], if you are
+using [Stripe Connect][connect-auth], or if you want to pass the secret API
+key on each method.
 
 ```java
 RequestOptions requestOptions = new RequestOptionsBuilder()
     .setApiKey("sk_test_...")
+    .setIdempotencyKey("a1b2c3...")
     .setStripeAccount("acct_...")
     .build();
 
 Charge.list(null, requestOptions);
 
-Charge.retrieve("ch_18atAXCdGbJFKhCuBAa4532Z", requestOptions);
+Charge.retrieve("ch_123", requestOptions);
 ```
+
+### Configuring automatic retries
+
+The library can be configured to automatically retry requests that fail due to
+an intermittent network problem or other knowingly non-deterministic errors.
+This can be enabled globally:
+
+```java
+Stripe.setMaxNetworkRetries(2);
+```
+
+Or on a finer grain level using `RequestOptions`:
+
+```java
+RequestOptions options = RequestOptions.builder()
+    .setMaxNetworkRetries(2)
+    .build();
+Charge.create(params, options);
+```
+
+[Idempotency keys][idempotency-keys] are added to requests to guarantee that
+retries are safe.
 
 ### Configuring Timeouts
 
@@ -181,8 +205,9 @@ with:
 
 The library uses [Project Lombok][lombok]. While it is not a requirement, you might want to install a [plugin][lombok-plugins] for your favorite IDE to facilitate development.
 
-[connect]: https://stripe.com/connect
+[connect-auth]: https://stripe.com/docs/connect/authentication#stripe-account-header
 [google-java-format]: https://github.com/google/google-java-format
+[idempotency-keys]: https://stripe.com/docs/api/idempotent_requests?lang=java
 [lombok]: https://projectlombok.org
 [lombok-plugins]: https://projectlombok.org/setup/overview
 [spotless]: https://github.com/diffplug/spotless

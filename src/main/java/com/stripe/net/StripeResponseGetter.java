@@ -9,7 +9,6 @@ public interface StripeResponseGetter {
       String url,
       Map<String, Object> params,
       Class<T> clazz,
-      ApiResource.RequestType type,
       RequestOptions options)
       throws StripeException;
 
@@ -18,7 +17,6 @@ public interface StripeResponseGetter {
       String url,
       Map<String, Object> params,
       Class<T> clazz,
-      ApiResource.RequestType type,
       RequestOptions options)
       throws StripeException;
 }

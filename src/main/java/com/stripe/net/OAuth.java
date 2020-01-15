@@ -30,7 +30,7 @@ public final class OAuth {
     if (params.get("response_type") == null) {
       params.put("response_type", "code");
     }
-    String query = LiveStripeResponseGetter.createQuery(params);
+    String query = FormEncoder.createQueryString(params);
     String url = base + "/oauth/authorize?" + query;
     return url;
   }
@@ -47,12 +47,7 @@ public final class OAuth {
       throws StripeException {
     String url = Stripe.getConnectBase() + "/oauth/token";
     return OAuth.stripeResponseGetter.oauthRequest(
-        ApiResource.RequestMethod.POST,
-        url,
-        params,
-        TokenResponse.class,
-        ApiResource.RequestType.NORMAL,
-        options);
+        ApiResource.RequestMethod.POST, url, params, TokenResponse.class, options);
   }
 
   /**
@@ -67,12 +62,7 @@ public final class OAuth {
     String url = Stripe.getConnectBase() + "/oauth/deauthorize";
     params.put("client_id", getClientId(params, options));
     return OAuth.stripeResponseGetter.oauthRequest(
-        ApiResource.RequestMethod.POST,
-        url,
-        params,
-        DeauthorizedAccount.class,
-        ApiResource.RequestType.NORMAL,
-        options);
+        ApiResource.RequestMethod.POST, url, params, DeauthorizedAccount.class, options);
   }
 
   /**
