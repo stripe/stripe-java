@@ -29,11 +29,15 @@ public class HttpClientTest extends BaseStripeTest {
     this.client =
         Mockito.mock(
             HttpClient.class,
-            withSettings().useConstructor(2).defaultAnswer(Mockito.CALLS_REAL_METHODS));
+            withSettings().useConstructor().defaultAnswer(Mockito.CALLS_REAL_METHODS));
     this.client.networkRetriesSleep = false;
 
     this.request =
-        new StripeRequest(ApiResource.RequestMethod.GET, "http://example.com/get", null, null);
+        new StripeRequest(
+            ApiResource.RequestMethod.GET,
+            "http://example.com/get",
+            null,
+            RequestOptions.builder().setMaxNetworkRetries(2).build());
   }
 
   @Test
