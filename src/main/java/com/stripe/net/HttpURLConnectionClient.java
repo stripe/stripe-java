@@ -2,8 +2,8 @@ package com.stripe.net;
 
 import com.stripe.Stripe;
 import com.stripe.exception.ApiConnectionException;
+import com.stripe.util.StreamUtils;
 import java.io.IOException;
-import java.io.InputStream;
 import java.io.OutputStream;
 import java.net.Authenticator;
 import java.net.HttpURLConnection;
@@ -12,7 +12,6 @@ import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Scanner;
 import lombok.Cleanup;
 
 public class HttpURLConnectionClient extends HttpClient {
@@ -41,9 +40,9 @@ public class HttpURLConnectionClient extends HttpClient {
       String responseBody;
 
       if (responseCode >= 200 && responseCode < 300) {
-        responseBody = getResponseBody(conn.getInputStream());
+        responseBody = StreamUtils.readToEnd(conn.getInputStream(), ApiResource.CHARSET);
       } else {
-        responseBody = getResponseBody(conn.getErrorStream());
+        responseBody = StreamUtils.readToEnd(conn.getErrorStream(), ApiResource.CHARSET);
       }
 
       return new StripeResponse(responseCode, headers, responseBody);
@@ -109,14 +108,5 @@ public class HttpURLConnectionClient extends HttpClient {
     }
 
     return conn;
-  }
-
-  private static String getResponseBody(InputStream responseStream) throws IOException {
-    try (final Scanner scanner = new Scanner(responseStream, ApiResource.CHARSET)) {
-      // \A is the beginning of the stream boundary
-      final String responseBody = scanner.useDelimiter("\\A").next();
-      responseStream.close();
-      return responseBody;
-    }
   }
 }

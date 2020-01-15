@@ -23,12 +23,13 @@ import com.stripe.model.StripeRawJsonObjectDeserializer;
 import com.stripe.util.StringUtils;
 import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
+import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.util.Map;
 import java.util.Objects;
 
 public abstract class ApiResource extends StripeObject {
-  public static final String CHARSET = StandardCharsets.UTF_8.name();
+  public static final Charset CHARSET = StandardCharsets.UTF_8;
 
   private static StripeResponseGetter stripeResponseGetter = new LiveStripeResponseGetter();
 
@@ -131,7 +132,7 @@ public abstract class ApiResource extends StripeObject {
       // Don't use strict form encoding by changing the square bracket control
       // characters back to their literals. This is fine by the server, and
       // makes these parameter strings easier to read.
-      return URLEncoder.encode(str, CHARSET).replaceAll("%5B", "[").replaceAll("%5D", "]");
+      return URLEncoder.encode(str, CHARSET.name()).replaceAll("%5B", "[").replaceAll("%5D", "]");
     } catch (UnsupportedEncodingException e) {
       // This can literally never happen, and lets us avoid having to catch
       // UnsupportedEncodingException in callers.

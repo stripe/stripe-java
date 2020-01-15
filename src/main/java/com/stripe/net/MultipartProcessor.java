@@ -6,6 +6,7 @@ import java.io.OutputStream;
 import java.io.OutputStreamWriter;
 import java.io.PrintWriter;
 import java.net.URLConnection;
+import java.nio.charset.Charset;
 
 public class MultipartProcessor {
   private final String boundary;
@@ -14,7 +15,7 @@ public class MultipartProcessor {
   private PrintWriter writer;
 
   /** Constructs a new multipart body builder. */
-  public MultipartProcessor(OutputStream outputStream, String boundary, String charset)
+  public MultipartProcessor(OutputStream outputStream, String boundary, Charset charset)
       throws IOException {
     this.boundary = boundary;
 

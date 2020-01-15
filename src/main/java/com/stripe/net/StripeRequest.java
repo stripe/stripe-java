@@ -131,7 +131,7 @@ public class StripeRequest {
     headerMap.put("Accept", Arrays.asList("application/json"));
 
     // Accept-Charset
-    headerMap.put("Accept-Charset", Arrays.asList(ApiResource.CHARSET));
+    headerMap.put("Accept-Charset", Arrays.asList(ApiResource.CHARSET.name()));
 
     // Authorization
     String apiKey = options.getApiKey();
