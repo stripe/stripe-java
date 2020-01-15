@@ -99,7 +99,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
    * value defaults to `off_session`.
    */
   @SerializedName("usage")
-  Object usage;
+  Usage usage;
 
   private SetupIntentCreateParams(
       Boolean confirm,
@@ -115,7 +115,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       List<String> paymentMethodTypes,
       String returnUrl,
       SingleUse singleUse,
-      Object usage) {
+      Usage usage) {
     this.confirm = confirm;
     this.customer = customer;
     this.description = description;
@@ -163,7 +163,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
     private SingleUse singleUse;
 
-    private Object usage;
+    private Usage usage;
 
     /** Finalize and obtain parameter instance from this builder. */
     public SetupIntentCreateParams build() {
@@ -370,15 +370,6 @@ public class SetupIntentCreateParams extends ApiRequestParams {
      * value defaults to `off_session`.
      */
     public Builder setUsage(Usage usage) {
-      this.usage = usage;
-      return this;
-    }
-
-    /**
-     * Indicates how the payment method is intended to be used in the future. If not provided, this
-     * value defaults to `off_session`.
-     */
-    public Builder setUsage(String usage) {
       this.usage = usage;
       return this;
     }

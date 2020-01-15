@@ -9,7 +9,6 @@ import com.stripe.model.MetadataStore;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.terminal.LocationCreateParams;
-import com.stripe.param.terminal.LocationDeleteParams;
 import com.stripe.param.terminal.LocationListParams;
 import com.stripe.param.terminal.LocationRetrieveParams;
 import com.stripe.param.terminal.LocationUpdateParams;
@@ -209,23 +208,6 @@ public class Location extends ApiResource implements HasId, MetadataStore<Locati
 
   /** Deletes a <code>Location</code> object. */
   public Location delete(Map<String, Object> params, RequestOptions options)
-      throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/terminal/locations/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.DELETE, url, params, Location.class, options);
-  }
-
-  /** Deletes a <code>Location</code> object. */
-  public Location delete(LocationDeleteParams params) throws StripeException {
-    return delete(params, (RequestOptions) null);
-  }
-
-  /** Deletes a <code>Location</code> object. */
-  public Location delete(LocationDeleteParams params, RequestOptions options)
       throws StripeException {
     String url =
         String.format(

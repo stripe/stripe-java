@@ -69,11 +69,6 @@ public class Event extends ApiResource implements HasId {
   @SerializedName("type")
   String type;
 
-  /** @deprecated Use {@link #account} instead (https://stripe.com/docs/upgrades#2017-05-25). */
-  @Deprecated
-  @SerializedName("user_id")
-  String userId;
-
   /**
    * List events, going back up to 30 days. Each event data is rendered according to Stripe API
    * version at its creation time, specified in <a href="/docs/api/events/object">event object</a>

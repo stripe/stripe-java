@@ -23,19 +23,9 @@ public class LocationRetrieveParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /**
-   * To [group
-   * objects](https://stripe.com/docs/terminal/payments/connect#grouping-objects-by-connected-account)
-   * on your platform account by connected account, set this parameter to the connected account ID.
-   */
-  @SerializedName("operator_account")
-  String operatorAccount;
-
-  private LocationRetrieveParams(
-      List<String> expand, Map<String, Object> extraParams, String operatorAccount) {
+  private LocationRetrieveParams(List<String> expand, Map<String, Object> extraParams) {
     this.expand = expand;
     this.extraParams = extraParams;
-    this.operatorAccount = operatorAccount;
   }
 
   public static Builder builder() {
@@ -47,11 +37,9 @@ public class LocationRetrieveParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
-    private String operatorAccount;
-
     /** Finalize and obtain parameter instance from this builder. */
     public LocationRetrieveParams build() {
-      return new LocationRetrieveParams(this.expand, this.extraParams, this.operatorAccount);
+      return new LocationRetrieveParams(this.expand, this.extraParams);
     }
 
     /**
@@ -103,17 +91,6 @@ public class LocationRetrieveParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
-      return this;
-    }
-
-    /**
-     * To [group
-     * objects](https://stripe.com/docs/terminal/payments/connect#grouping-objects-by-connected-account)
-     * on your platform account by connected account, set this parameter to the connected account
-     * ID.
-     */
-    public Builder setOperatorAccount(String operatorAccount) {
-      this.operatorAccount = operatorAccount;
       return this;
     }
   }

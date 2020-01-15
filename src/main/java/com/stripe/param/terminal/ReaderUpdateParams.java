@@ -36,25 +36,15 @@ public class ReaderUpdateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /**
-   * To [group
-   * objects](https://stripe.com/docs/terminal/payments/connect#grouping-objects-by-connected-account)
-   * on your platform account by connected account, set this parameter to the connected account ID.
-   */
-  @SerializedName("operator_account")
-  Object operatorAccount;
-
   private ReaderUpdateParams(
       List<String> expand,
       Map<String, Object> extraParams,
       Object label,
-      Map<String, String> metadata,
-      Object operatorAccount) {
+      Map<String, String> metadata) {
     this.expand = expand;
     this.extraParams = extraParams;
     this.label = label;
     this.metadata = metadata;
-    this.operatorAccount = operatorAccount;
   }
 
   public static Builder builder() {
@@ -70,12 +60,9 @@ public class ReaderUpdateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
-    private Object operatorAccount;
-
     /** Finalize and obtain parameter instance from this builder. */
     public ReaderUpdateParams build() {
-      return new ReaderUpdateParams(
-          this.expand, this.extraParams, this.label, this.metadata, this.operatorAccount);
+      return new ReaderUpdateParams(this.expand, this.extraParams, this.label, this.metadata);
     }
 
     /**
@@ -165,28 +152,6 @@ public class ReaderUpdateParams extends ApiRequestParams {
         this.metadata = new HashMap<>();
       }
       this.metadata.putAll(map);
-      return this;
-    }
-
-    /**
-     * To [group
-     * objects](https://stripe.com/docs/terminal/payments/connect#grouping-objects-by-connected-account)
-     * on your platform account by connected account, set this parameter to the connected account
-     * ID.
-     */
-    public Builder setOperatorAccount(String operatorAccount) {
-      this.operatorAccount = operatorAccount;
-      return this;
-    }
-
-    /**
-     * To [group
-     * objects](https://stripe.com/docs/terminal/payments/connect#grouping-objects-by-connected-account)
-     * on your platform account by connected account, set this parameter to the connected account
-     * ID.
-     */
-    public Builder setOperatorAccount(EmptyParam operatorAccount) {
-      this.operatorAccount = operatorAccount;
       return this;
     }
   }
