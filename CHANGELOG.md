@@ -1,5 +1,9 @@
 # Changelog
 
+## 16.7.0 - 2020-01-15
+* [#933](https://github.com/stripe/stripe-java/pull/933) Add support for `pending_update` on `Subscription`
+* [#930](https://github.com/stripe/stripe-java/pull/930) Bump stripe-mock to 0.79.0
+
 ## 16.6.0 - 2020-01-14
 * [#929](https://github.com/stripe/stripe-java/pull/929) Add support for `CreditNoteLineItem`
 
