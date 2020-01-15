@@ -40,14 +40,6 @@ public class LocationListParams extends ApiRequestParams {
   Long limit;
 
   /**
-   * To [group
-   * objects](https://stripe.com/docs/terminal/payments/connect#grouping-objects-by-connected-account)
-   * on your platform account by connected account, set this parameter to the connected account ID.
-   */
-  @SerializedName("operator_account")
-  String operatorAccount;
-
-  /**
    * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the
    * list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`,
    * your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of
@@ -61,13 +53,11 @@ public class LocationListParams extends ApiRequestParams {
       List<String> expand,
       Map<String, Object> extraParams,
       Long limit,
-      String operatorAccount,
       String startingAfter) {
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
     this.limit = limit;
-    this.operatorAccount = operatorAccount;
     this.startingAfter = startingAfter;
   }
 
@@ -84,19 +74,12 @@ public class LocationListParams extends ApiRequestParams {
 
     private Long limit;
 
-    private String operatorAccount;
-
     private String startingAfter;
 
     /** Finalize and obtain parameter instance from this builder. */
     public LocationListParams build() {
       return new LocationListParams(
-          this.endingBefore,
-          this.expand,
-          this.extraParams,
-          this.limit,
-          this.operatorAccount,
-          this.startingAfter);
+          this.endingBefore, this.expand, this.extraParams, this.limit, this.startingAfter);
     }
 
     /**
@@ -168,17 +151,6 @@ public class LocationListParams extends ApiRequestParams {
      */
     public Builder setLimit(Long limit) {
       this.limit = limit;
-      return this;
-    }
-
-    /**
-     * To [group
-     * objects](https://stripe.com/docs/terminal/payments/connect#grouping-objects-by-connected-account)
-     * on your platform account by connected account, set this parameter to the connected account
-     * ID.
-     */
-    public Builder setOperatorAccount(String operatorAccount) {
-      this.operatorAccount = operatorAccount;
       return this;
     }
 

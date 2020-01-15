@@ -39,27 +39,17 @@ public class LocationCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /**
-   * To [group
-   * objects](https://stripe.com/docs/terminal/payments/connect#grouping-objects-by-connected-account)
-   * on your platform account by connected account, set this parameter to the connected account ID.
-   */
-  @SerializedName("operator_account")
-  String operatorAccount;
-
   private LocationCreateParams(
       Address address,
       String displayName,
       List<String> expand,
       Map<String, Object> extraParams,
-      Map<String, String> metadata,
-      String operatorAccount) {
+      Map<String, String> metadata) {
     this.address = address;
     this.displayName = displayName;
     this.expand = expand;
     this.extraParams = extraParams;
     this.metadata = metadata;
-    this.operatorAccount = operatorAccount;
   }
 
   public static Builder builder() {
@@ -77,17 +67,10 @@ public class LocationCreateParams extends ApiRequestParams {
 
     private Map<String, String> metadata;
 
-    private String operatorAccount;
-
     /** Finalize and obtain parameter instance from this builder. */
     public LocationCreateParams build() {
       return new LocationCreateParams(
-          this.address,
-          this.displayName,
-          this.expand,
-          this.extraParams,
-          this.metadata,
-          this.operatorAccount);
+          this.address, this.displayName, this.expand, this.extraParams, this.metadata);
     }
 
     /** The full address of the location. */
@@ -177,17 +160,6 @@ public class LocationCreateParams extends ApiRequestParams {
         this.metadata = new HashMap<>();
       }
       this.metadata.putAll(map);
-      return this;
-    }
-
-    /**
-     * To [group
-     * objects](https://stripe.com/docs/terminal/payments/connect#grouping-objects-by-connected-account)
-     * on your platform account by connected account, set this parameter to the connected account
-     * ID.
-     */
-    public Builder setOperatorAccount(String operatorAccount) {
-      this.operatorAccount = operatorAccount;
       return this;
     }
   }

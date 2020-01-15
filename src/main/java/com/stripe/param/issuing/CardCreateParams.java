@@ -68,7 +68,7 @@ public class CardCreateParams extends ApiRequestParams {
 
   /** The type of card to issue. Possible values are `physical` or `virtual`. */
   @SerializedName("type")
-  Object type;
+  Type type;
 
   private CardCreateParams(
       AuthorizationControls authorizationControls,
@@ -81,7 +81,7 @@ public class CardCreateParams extends ApiRequestParams {
       ReplacementReason replacementReason,
       Shipping shipping,
       Status status,
-      Object type) {
+      Type type) {
     this.authorizationControls = authorizationControls;
     this.cardholder = cardholder;
     this.currency = currency;
@@ -120,7 +120,7 @@ public class CardCreateParams extends ApiRequestParams {
 
     private Status status;
 
-    private Object type;
+    private Type type;
 
     /** Finalize and obtain parameter instance from this builder. */
     public CardCreateParams build() {
@@ -267,12 +267,6 @@ public class CardCreateParams extends ApiRequestParams {
 
     /** The type of card to issue. Possible values are `physical` or `virtual`. */
     public Builder setType(Type type) {
-      this.type = type;
-      return this;
-    }
-
-    /** The type of card to issue. Possible values are `physical` or `virtual`. */
-    public Builder setType(String type) {
       this.type = type;
       return this;
     }
@@ -3324,9 +3318,9 @@ public class CardCreateParams extends ApiRequestParams {
 
     /** Packaging options. */
     @SerializedName("type")
-    Object type;
+    Type type;
 
-    private Shipping(Address address, Map<String, Object> extraParams, String name, Object type) {
+    private Shipping(Address address, Map<String, Object> extraParams, String name, Type type) {
       this.address = address;
       this.extraParams = extraParams;
       this.name = name;
@@ -3344,7 +3338,7 @@ public class CardCreateParams extends ApiRequestParams {
 
       private String name;
 
-      private Object type;
+      private Type type;
 
       /** Finalize and obtain parameter instance from this builder. */
       public Shipping build() {
@@ -3389,12 +3383,6 @@ public class CardCreateParams extends ApiRequestParams {
 
       /** Packaging options. */
       public Builder setType(Type type) {
-        this.type = type;
-        return this;
-      }
-
-      /** Packaging options. */
-      public Builder setType(String type) {
         this.type = type;
         return this;
       }

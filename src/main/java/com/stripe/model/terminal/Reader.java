@@ -8,7 +8,6 @@ import com.stripe.model.MetadataStore;
 import com.stripe.net.ApiResource;
 import com.stripe.net.RequestOptions;
 import com.stripe.param.terminal.ReaderCreateParams;
-import com.stripe.param.terminal.ReaderDeleteParams;
 import com.stripe.param.terminal.ReaderListParams;
 import com.stripe.param.terminal.ReaderRetrieveParams;
 import com.stripe.param.terminal.ReaderUpdateParams;
@@ -222,22 +221,6 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
 
   /** Deletes a <code>Reader</code> object. */
   public Reader delete(Map<String, Object> params, RequestOptions options) throws StripeException {
-    String url =
-        String.format(
-            "%s%s",
-            Stripe.getApiBase(),
-            String.format("/v1/terminal/readers/%s", ApiResource.urlEncodeId(this.getId())));
-    return ApiResource.request(
-        ApiResource.RequestMethod.DELETE, url, params, Reader.class, options);
-  }
-
-  /** Deletes a <code>Reader</code> object. */
-  public Reader delete(ReaderDeleteParams params) throws StripeException {
-    return delete(params, (RequestOptions) null);
-  }
-
-  /** Deletes a <code>Reader</code> object. */
-  public Reader delete(ReaderDeleteParams params, RequestOptions options) throws StripeException {
     String url =
         String.format(
             "%s%s",

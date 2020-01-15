@@ -3321,17 +3321,9 @@ public class CardholderUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /**
-     * Deprecated param. Passing value for this param is simply discarded. It will be removed in the
-     * next client library major version
-     */
-    @SerializedName("name")
-    Object name;
-
-    private Billing(Address address, Map<String, Object> extraParams, Object name) {
+    private Billing(Address address, Map<String, Object> extraParams) {
       this.address = address;
       this.extraParams = extraParams;
-      this.name = name;
     }
 
     public static Builder builder() {
@@ -3343,11 +3335,9 @@ public class CardholderUpdateParams extends ApiRequestParams {
 
       private Map<String, Object> extraParams;
 
-      private Object name;
-
       /** Finalize and obtain parameter instance from this builder. */
       public Billing build() {
-        return new Billing(this.address, this.extraParams, this.name);
+        return new Billing(this.address, this.extraParams);
       }
 
       public Builder setAddress(Address address) {
@@ -3378,24 +3368,6 @@ public class CardholderUpdateParams extends ApiRequestParams {
           this.extraParams = new HashMap<>();
         }
         this.extraParams.putAll(map);
-        return this;
-      }
-
-      /**
-       * Deprecated param. Passing value for this param is simply discarded. It will be removed in
-       * the next client library major version
-       */
-      public Builder setName(String name) {
-        this.name = name;
-        return this;
-      }
-
-      /**
-       * Deprecated param. Passing value for this param is simply discarded. It will be removed in
-       * the next client library major version
-       */
-      public Builder setName(EmptyParam name) {
-        this.name = name;
         return this;
       }
     }

@@ -12,7 +12,7 @@ import lombok.Getter;
 public class ReaderListParams extends ApiRequestParams {
   /** Filters readers by device type. */
   @SerializedName("device_type")
-  Object deviceType;
+  DeviceType deviceType;
 
   /**
    * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the
@@ -48,14 +48,6 @@ public class ReaderListParams extends ApiRequestParams {
   String location;
 
   /**
-   * To [group
-   * objects](https://stripe.com/docs/terminal/payments/connect#grouping-objects-by-connected-account)
-   * on your platform account by connected account, set this parameter to the connected account ID.
-   */
-  @SerializedName("operator_account")
-  String operatorAccount;
-
-  /**
    * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the
    * list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`,
    * your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of
@@ -66,25 +58,23 @@ public class ReaderListParams extends ApiRequestParams {
 
   /** A status filter to filter readers to only offline or online readers. */
   @SerializedName("status")
-  Object status;
+  Status status;
 
   private ReaderListParams(
-      Object deviceType,
+      DeviceType deviceType,
       String endingBefore,
       List<String> expand,
       Map<String, Object> extraParams,
       Long limit,
       String location,
-      String operatorAccount,
       String startingAfter,
-      Object status) {
+      Status status) {
     this.deviceType = deviceType;
     this.endingBefore = endingBefore;
     this.expand = expand;
     this.extraParams = extraParams;
     this.limit = limit;
     this.location = location;
-    this.operatorAccount = operatorAccount;
     this.startingAfter = startingAfter;
     this.status = status;
   }
@@ -94,7 +84,7 @@ public class ReaderListParams extends ApiRequestParams {
   }
 
   public static class Builder {
-    private Object deviceType;
+    private DeviceType deviceType;
 
     private String endingBefore;
 
@@ -106,11 +96,9 @@ public class ReaderListParams extends ApiRequestParams {
 
     private String location;
 
-    private String operatorAccount;
-
     private String startingAfter;
 
-    private Object status;
+    private Status status;
 
     /** Finalize and obtain parameter instance from this builder. */
     public ReaderListParams build() {
@@ -121,19 +109,12 @@ public class ReaderListParams extends ApiRequestParams {
           this.extraParams,
           this.limit,
           this.location,
-          this.operatorAccount,
           this.startingAfter,
           this.status);
     }
 
     /** Filters readers by device type. */
     public Builder setDeviceType(DeviceType deviceType) {
-      this.deviceType = deviceType;
-      return this;
-    }
-
-    /** Filters readers by device type. */
-    public Builder setDeviceType(String deviceType) {
       this.deviceType = deviceType;
       return this;
     }
@@ -217,17 +198,6 @@ public class ReaderListParams extends ApiRequestParams {
     }
 
     /**
-     * To [group
-     * objects](https://stripe.com/docs/terminal/payments/connect#grouping-objects-by-connected-account)
-     * on your platform account by connected account, set this parameter to the connected account
-     * ID.
-     */
-    public Builder setOperatorAccount(String operatorAccount) {
-      this.operatorAccount = operatorAccount;
-      return this;
-    }
-
-    /**
      * A cursor for use in pagination. `starting_after` is an object ID that defines your place in
      * the list. For instance, if you make a list request and receive 100 objects, ending with
      * `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the
@@ -240,12 +210,6 @@ public class ReaderListParams extends ApiRequestParams {
 
     /** A status filter to filter readers to only offline or online readers. */
     public Builder setStatus(Status status) {
-      this.status = status;
-      return this;
-    }
-
-    /** A status filter to filter readers to only offline or online readers. */
-    public Builder setStatus(String status) {
       this.status = status;
       return this;
     }
