@@ -1,5 +1,33 @@
 # Changelog
 
+## 17.0.0 - 2020-01-15
+* [#869](https://github.com/stripe/stripe-java/pull/869)
+Major version release. Refer to our [migration guide for v17](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v17) for a list of new features and backwards incompatible changes to watch out for.
+
+Pull requests included in this release (cf. [#869](https://github.com/stripe/stripe-java/pull/869)) (⚠️ = breaking changes):
+* [#857](https://github.com/stripe/stripe-java/pull/857) Refactor form encoding
+* [#870](https://github.com/stripe/stripe-java/pull/870) ⚠️ Refactor request telemetry
+* [#872](https://github.com/stripe/stripe-java/pull/872) Move HTTP request methods into new `HttpClient` class
+* [#878](https://github.com/stripe/stripe-java/pull/878) Add `StripeRequest` object
+* [#879](https://github.com/stripe/stripe-java/pull/879) Add `HttpClient` abstract class
+* [#880](https://github.com/stripe/stripe-java/pull/880) ⚠️ Stop disabling the DNS cache
+* [#895](https://github.com/stripe/stripe-java/pull/895) Fix deprecation warnings
+* [#896](https://github.com/stripe/stripe-java/pull/896) Add `HttpContent` class
+* [#897](https://github.com/stripe/stripe-java/pull/897) Add `Stopwatch` class
+* [#898](https://github.com/stripe/stripe-java/pull/898) Move all request properties in `StripeRequest`
+* [#899](https://github.com/stripe/stripe-java/pull/899) ⚠️ Remove `ApiResource.RequestType`
+* [#900](https://github.com/stripe/stripe-java/pull/900) Add support for automatic request retries
+* [#902](https://github.com/stripe/stripe-java/pull/902) Minor fixes
+* [#928](https://github.com/stripe/stripe-java/pull/928) `StringUtils` class & better API key validation
+* [#927](https://github.com/stripe/stripe-java/pull/927) ⚠️ Remove support for custom `URLStreamHandler`
+* [#931](https://github.com/stripe/stripe-java/pull/931) ⚠️ Refactor HTTP headers handling
+* [#932](https://github.com/stripe/stripe-java/pull/932) ⚠️ Modernize `StripeResponse`
+* [#934](https://github.com/stripe/stripe-java/pull/934) Add `maxNetworkRetries` as a global and per-request setting
+* [#935](https://github.com/stripe/stripe-java/pull/935) ⚠️ Add `StreamUtils` class
+* [#936](https://github.com/stripe/stripe-java/pull/936) ⚠️ Remove support for `count` and `total_count` in list objects
+* [#938](https://github.com/stripe/stripe-java/pull/938) ⚠️ Remove deprecated properties and parameters
+* [#939](https://github.com/stripe/stripe-java/pull/939) Update README
+
 ## 16.8.0 - 2020-01-15
 * [#937](https://github.com/stripe/stripe-java/pull/937) Adding missing events for pending updates on `Subscription`
 
