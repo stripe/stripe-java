@@ -615,6 +615,12 @@ public class WebhookEndpointCreateParams extends ApiRequestParams {
     @SerializedName("customer.subscription.deleted")
     CUSTOMER__SUBSCRIPTION__DELETED("customer.subscription.deleted"),
 
+    @SerializedName("customer.subscription.pending_update_applied")
+    CUSTOMER__SUBSCRIPTION__PENDING_UPDATE_APPLIED("customer.subscription.pending_update_applied"),
+
+    @SerializedName("customer.subscription.pending_update_expired")
+    CUSTOMER__SUBSCRIPTION__PENDING_UPDATE_EXPIRED("customer.subscription.pending_update_expired"),
+
     @SerializedName("customer.subscription.trial_will_end")
     CUSTOMER__SUBSCRIPTION__TRIAL_WILL_END("customer.subscription.trial_will_end"),
 

@@ -208,8 +208,7 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
   ExpandableField<SetupIntent> pendingSetupIntent;
 
   /**
-   * If specified, [deferred
-   * upgrade](https://stripe.com/docs/billing/subscriptions/upgrading-downgrading#deferred) changes
+   * If specified, [pending updates](https://stripe.com/docs/billing/subscriptions/pending-updates)
    * that will be applied to the subscription once the `latest_invoice` has been paid.
    */
   @SerializedName("pending_update")
