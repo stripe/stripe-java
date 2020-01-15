@@ -70,11 +70,10 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
 
   /**
    * Determines how to handle
-   * [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing
-   * cycle changes (e.g., when switching plans, resetting `billing_cycle_anchor=now`, or starting a
-   * trial), or if an item's `quantity` changes. The value defaults to `create_prorations`,
-   * indicating that proration invoice items should be created. Prorations can be disabled by
-   * setting the value to `none`.
+   * [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) resulting from the
+   * `billing_cycle_anchor`. The value defaults to `create_prorations`, indicating that proration
+   * invoice items should be created. Prorations can be disabled by setting the value to `none`.
+   * `always_invoice` cannot be passed.
    */
   @SerializedName("proration_behavior")
   ProrationBehavior prorationBehavior;
@@ -312,11 +311,10 @@ public class SubscriptionItemCreateParams extends ApiRequestParams {
 
     /**
      * Determines how to handle
-     * [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing
-     * cycle changes (e.g., when switching plans, resetting `billing_cycle_anchor=now`, or starting
-     * a trial), or if an item's `quantity` changes. The value defaults to `create_prorations`,
-     * indicating that proration invoice items should be created. Prorations can be disabled by
-     * setting the value to `none`.
+     * [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) resulting from
+     * the `billing_cycle_anchor`. The value defaults to `create_prorations`, indicating that
+     * proration invoice items should be created. Prorations can be disabled by setting the value to
+     * `none`. `always_invoice` cannot be passed.
      */
     public Builder setProrationBehavior(ProrationBehavior prorationBehavior) {
       this.prorationBehavior = prorationBehavior;

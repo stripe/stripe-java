@@ -112,7 +112,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
    * cycle changes (e.g., when switching plans, resetting `billing_cycle_anchor=now`, or starting a
    * trial), or if an item's `quantity` changes. The value defaults to `create_prorations`,
    * indicating that proration invoice items should be created. Prorations can be disabled by
-   * setting the value to `none`.
+   * setting the value to `none`. Passing `always_invoice` will cause an invoice to immediately be
+   * created for any prorations.
    */
   @SerializedName("subscription_proration_behavior")
   SubscriptionProrationBehavior subscriptionProrationBehavior;
@@ -535,7 +536,8 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
      * cycle changes (e.g., when switching plans, resetting `billing_cycle_anchor=now`, or starting
      * a trial), or if an item's `quantity` changes. The value defaults to `create_prorations`,
      * indicating that proration invoice items should be created. Prorations can be disabled by
-     * setting the value to `none`.
+     * setting the value to `none`. Passing `always_invoice` will cause an invoice to immediately be
+     * created for any prorations.
      */
     public Builder setSubscriptionProrationBehavior(
         SubscriptionProrationBehavior subscriptionProrationBehavior) {
