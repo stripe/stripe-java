@@ -21,6 +21,8 @@ public class RequestOptions {
   private final int connectTimeout;
   private final int readTimeout;
 
+  private final int maxNetworkRetries;
+
   public static RequestOptions getDefault() {
     return new RequestOptions(
         Stripe.apiKey,
@@ -29,7 +31,8 @@ public class RequestOptions {
         null,
         null,
         Stripe.getConnectTimeout(),
-        Stripe.getReadTimeout());
+        Stripe.getReadTimeout(),
+        Stripe.getMaxNetworkRetries());
   }
 
   private RequestOptions(
@@ -39,7 +42,8 @@ public class RequestOptions {
       String stripeAccount,
       String stripeVersionOverride,
       int connectTimeout,
-      int readTimeout) {
+      int readTimeout,
+      int maxNetworkRetries) {
     this.apiKey = apiKey;
     this.clientId = clientId;
     this.idempotencyKey = idempotencyKey;
@@ -47,6 +51,7 @@ public class RequestOptions {
     this.stripeVersionOverride = stripeVersionOverride;
     this.connectTimeout = connectTimeout;
     this.readTimeout = readTimeout;
+    this.maxNetworkRetries = maxNetworkRetries;
   }
 
   public String getApiKey() {
@@ -81,6 +86,10 @@ public class RequestOptions {
     return connectTimeout;
   }
 
+  public int getMaxNetworkRetries() {
+    return maxNetworkRetries;
+  }
+
   public static RequestOptionsBuilder builder() {
     return new RequestOptionsBuilder();
   }
@@ -102,6 +111,7 @@ public class RequestOptions {
     private String stripeVersionOverride;
     private int connectTimeout;
     private int readTimeout;
+    private int maxNetworkRetries;
 
     /**
      * Constructs a request options builder with the global parameters (API key and client ID) as
@@ -112,6 +122,7 @@ public class RequestOptions {
       this.clientId = Stripe.clientId;
       this.connectTimeout = Stripe.getConnectTimeout();
       this.readTimeout = Stripe.getReadTimeout();
+      this.maxNetworkRetries = Stripe.getMaxNetworkRetries();
     }
 
     public String getApiKey() {
@@ -180,6 +191,20 @@ public class RequestOptions {
       return this;
     }
 
+    public int getMaxNetworkRetries() {
+      return maxNetworkRetries;
+    }
+
+    /**
+     * Sets the maximum number of times the request will be retried in the event of a failure.
+     *
+     * @param maxNetworkRetries the number of times to retry the request
+     */
+    public RequestOptionsBuilder setMaxNetworkRetries(int maxNetworkRetries) {
+      this.maxNetworkRetries = maxNetworkRetries;
+      return this;
+    }
+
     public RequestOptionsBuilder clearIdempotencyKey() {
       this.idempotencyKey = null;
       return this;
@@ -236,7 +261,8 @@ public class RequestOptions {
           normalizeStripeAccount(this.stripeAccount),
           normalizeStripeVersion(this.stripeVersionOverride),
           connectTimeout,
-          readTimeout);
+          readTimeout,
+          maxNetworkRetries);
     }
   }
 
