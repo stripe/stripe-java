@@ -1,5 +1,6 @@
 package com.stripe.model;
 
+import com.google.gson.annotations.SerializedName;
 import com.stripe.net.RequestOptions;
 import java.util.List;
 import java.util.Map;
@@ -35,25 +36,29 @@ import lombok.Setter;
 @Getter
 @Setter
 @EqualsAndHashCode(callSuper = false)
-public abstract class StripeCollection<T extends HasId> extends StripeObject
+public class StripeCollection<T extends HasId> extends StripeObject
     implements StripeCollectionInterface<T> {
+  @SerializedName("object")
   String object;
 
   @Getter(onMethod_ = {@Override})
+  @SerializedName("data")
   List<T> data;
 
   @Getter(onMethod_ = {@Override})
+  @SerializedName("has_more")
   Boolean hasMore;
 
   @Getter(onMethod_ = {@Override})
+  @SerializedName("url")
   String url;
 
   @Getter(onMethod_ = {@Override})
-  @Setter(onMethod = @__({@Override}))
+  @Setter(onMethod_ = {@Override})
   private RequestOptions requestOptions;
 
   @Getter(onMethod_ = {@Override})
-  @Setter(onMethod = @__({@Override}))
+  @Setter(onMethod_ = {@Override})
   private Map<String, Object> requestParams;
 
   public Iterable<T> autoPagingIterable() {

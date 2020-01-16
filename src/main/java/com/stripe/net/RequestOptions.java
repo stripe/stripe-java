@@ -3,6 +3,7 @@ package com.stripe.net;
 import com.stripe.Stripe;
 import java.util.Map;
 import lombok.EqualsAndHashCode;
+import lombok.With;
 
 @EqualsAndHashCode(callSuper = false)
 public class RequestOptions {
@@ -23,6 +24,9 @@ public class RequestOptions {
 
   private final int maxNetworkRetries;
 
+  @With(onMethod = @__({@SuppressWarnings("ReferenceEquality")}))
+  private final String baseUrl;
+
   public static RequestOptions getDefault() {
     return new RequestOptions(
         Stripe.apiKey,
@@ -32,7 +36,8 @@ public class RequestOptions {
         null,
         Stripe.getConnectTimeout(),
         Stripe.getReadTimeout(),
-        Stripe.getMaxNetworkRetries());
+        Stripe.getMaxNetworkRetries(),
+        null);
   }
 
   private RequestOptions(
@@ -43,7 +48,8 @@ public class RequestOptions {
       String stripeVersionOverride,
       int connectTimeout,
       int readTimeout,
-      int maxNetworkRetries) {
+      int maxNetworkRetries,
+      String baseUrl) {
     this.apiKey = apiKey;
     this.clientId = clientId;
     this.idempotencyKey = idempotencyKey;
@@ -52,6 +58,7 @@ public class RequestOptions {
     this.connectTimeout = connectTimeout;
     this.readTimeout = readTimeout;
     this.maxNetworkRetries = maxNetworkRetries;
+    this.baseUrl = baseUrl;
   }
 
   public String getApiKey() {
@@ -90,6 +97,10 @@ public class RequestOptions {
     return maxNetworkRetries;
   }
 
+  public String getBaseUrl() {
+    return baseUrl;
+  }
+
   public static RequestOptionsBuilder builder() {
     return new RequestOptionsBuilder();
   }
@@ -112,6 +123,7 @@ public class RequestOptions {
     private int connectTimeout;
     private int readTimeout;
     private int maxNetworkRetries;
+    private String baseUrl;
 
     /**
      * Constructs a request options builder with the global parameters (API key and client ID) as
@@ -123,6 +135,7 @@ public class RequestOptions {
       this.connectTimeout = Stripe.getConnectTimeout();
       this.readTimeout = Stripe.getReadTimeout();
       this.maxNetworkRetries = Stripe.getMaxNetworkRetries();
+      this.baseUrl = null;
     }
 
     public String getApiKey() {
@@ -252,6 +265,14 @@ public class RequestOptions {
       return setStripeVersionOverride(null);
     }
 
+    public String getBaseUrl() {
+      return this.baseUrl;
+    }
+
+    public void setBaseUrl(String baseUrl) {
+      this.baseUrl = baseUrl;
+    }
+
     /** Constructs a {@link RequestOptions} with the specified values. */
     public RequestOptions build() {
       return new RequestOptions(
@@ -262,7 +283,8 @@ public class RequestOptions {
           normalizeStripeVersion(this.stripeVersionOverride),
           connectTimeout,
           readTimeout,
-          maxNetworkRetries);
+          maxNetworkRetries,
+          baseUrl);
     }
   }
 
