@@ -5,6 +5,7 @@ import static org.mockito.Mockito.reset;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.stripe.exception.StripeException;
+import com.stripe.model.StripeObjectInterface;
 import com.stripe.net.ApiResource;
 import com.stripe.net.LiveStripeResponseGetter;
 import com.stripe.net.OAuth;
@@ -165,7 +166,7 @@ public class BaseStripeTest {
    * @param params map containing the parameters. If null, the parameters are not checked.
    * @param options request options. If null, the options are not checked.
    */
-  public static <T> void verifyRequest(
+  public static <T extends StripeObjectInterface> void verifyRequest(
       ApiResource.RequestMethod method,
       String path,
       Map<String, Object> params,
@@ -207,7 +208,7 @@ public class BaseStripeTest {
    * @see BaseStripeTest#stubRequest(ApiResource.RequestMethod, String, Map, RequestOptions, Class,
    *     String)
    */
-  public static <T> void stubRequest(
+  public static <T extends StripeObjectInterface> void stubRequest(
       ApiResource.RequestMethod method, String path, Class<T> clazz, String response)
       throws StripeException {
     stubRequest(method, path, null, null, clazz, response);
@@ -219,7 +220,7 @@ public class BaseStripeTest {
    * @see BaseStripeTest#stubRequest(ApiResource.RequestMethod, String, Map, RequestOptions, Class,
    *     String)
    */
-  public static <T> void stubRequest(
+  public static <T extends StripeObjectInterface> void stubRequest(
       ApiResource.RequestMethod method,
       String path,
       Map<String, Object> params,
@@ -240,7 +241,7 @@ public class BaseStripeTest {
    * @param clazz Class of the API resource that will be returned for the stubbed request.
    * @param response JSON payload of the API resource that will be returned for the stubbed request.
    */
-  public static <T> void stubRequest(
+  public static <T extends StripeObjectInterface> void stubRequest(
       ApiResource.RequestMethod method,
       String path,
       Map<String, Object> params,
@@ -270,7 +271,8 @@ public class BaseStripeTest {
   }
 
   /** Stubs an OAuth API request. stripe-mock does not supported OAuth endpoints at this time. */
-  public static <T> void stubOAuthRequest(Class<T> clazz, String response) throws StripeException {
+  public static <T extends StripeObjectInterface> void stubOAuthRequest(
+      Class<T> clazz, String response) throws StripeException {
     Mockito.doReturn(ApiResource.GSON.fromJson(response, clazz))
         .when(networkSpy)
         .oauthRequest(

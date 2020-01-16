@@ -18,6 +18,7 @@ import com.stripe.exception.oauth.UnsupportedGrantTypeException;
 import com.stripe.exception.oauth.UnsupportedResponseTypeException;
 import com.stripe.model.StripeError;
 import com.stripe.model.StripeObject;
+import com.stripe.model.StripeObjectInterface;
 import com.stripe.model.oauth.OAuthError;
 import java.util.Map;
 
@@ -42,7 +43,7 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
   }
 
   @Override
-  public <T> T request(
+  public <T extends StripeObjectInterface> T request(
       ApiResource.RequestMethod method,
       String url,
       Map<String, Object> params,
@@ -67,16 +68,13 @@ public class LiveStripeResponseGetter implements StripeResponseGetter {
       raiseMalformedJsonError(responseBody, responseCode, requestId);
     }
 
-    if (resource instanceof StripeObject) {
-      StripeObject obj = (StripeObject) resource;
-      obj.setLastResponse(response);
-    }
+    resource.setLastResponse(response);
 
     return resource;
   }
 
   @Override
-  public <T> T oauthRequest(
+  public <T extends StripeObjectInterface> T oauthRequest(
       ApiResource.RequestMethod method,
       String url,
       Map<String, Object> params,
