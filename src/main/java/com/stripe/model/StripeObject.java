@@ -8,7 +8,7 @@ import com.stripe.net.ApiResource;
 import com.stripe.net.StripeResponse;
 import java.lang.reflect.Field;
 
-public abstract class StripeObject {
+public abstract class StripeObject implements StripeObjectInterface {
   public static final Gson PRETTY_PRINT_GSON =
       new GsonBuilder()
           .setPrettyPrinting()
@@ -31,10 +31,12 @@ public abstract class StripeObject {
         PRETTY_PRINT_GSON.toJson(this));
   }
 
+  @Override
   public StripeResponse getLastResponse() {
     return lastResponse;
   }
 
+  @Override
   public void setLastResponse(StripeResponse response) {
     this.lastResponse = response;
   }

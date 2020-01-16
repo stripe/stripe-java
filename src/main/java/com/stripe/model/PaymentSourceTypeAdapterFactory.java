@@ -77,7 +77,7 @@ public class PaymentSourceTypeAdapterFactory implements TypeAdapterFactory {
    * deserialization, please contact support@stripe.com for assistance and provide the id and object
    * value. Do not integrate with this object, but raise an exception and log its content instead.
    */
-  public static class UnknownSubType implements PaymentSource {
+  public static class UnknownSubType extends StripeObject implements PaymentSource {
     String id;
     @Getter String object;
     @Getter String rawJson;

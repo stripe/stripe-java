@@ -18,6 +18,7 @@ import com.stripe.model.ExpandableFieldDeserializer;
 import com.stripe.model.HasId;
 import com.stripe.model.StripeCollectionInterface;
 import com.stripe.model.StripeObject;
+import com.stripe.model.StripeObjectInterface;
 import com.stripe.model.StripeRawJsonObject;
 import com.stripe.model.StripeRawJsonObjectDeserializer;
 import com.stripe.util.StringUtils;
@@ -157,7 +158,7 @@ public abstract class ApiResource extends StripeObject {
     return urlEncode(id);
   }
 
-  public static <T> T request(
+  public static <T extends StripeObjectInterface> T request(
       ApiResource.RequestMethod method,
       String url,
       ApiRequestParams params,
@@ -168,7 +169,7 @@ public abstract class ApiResource extends StripeObject {
     return request(method, url, params.toMap(), clazz, options);
   }
 
-  public static <T> T request(
+  public static <T extends StripeObjectInterface> T request(
       ApiResource.RequestMethod method,
       String url,
       Map<String, Object> params,

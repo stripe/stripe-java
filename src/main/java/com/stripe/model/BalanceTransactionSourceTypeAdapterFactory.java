@@ -117,7 +117,7 @@ public class BalanceTransactionSourceTypeAdapterFactory implements TypeAdapterFa
    * and object value. Do not integrate with this object, but raise an exception and log its content
    * instead.
    */
-  public static class UnknownSubType implements BalanceTransactionSource {
+  public static class UnknownSubType extends StripeObject implements BalanceTransactionSource {
     String id;
     @Getter String object;
     @Getter String rawJson;
