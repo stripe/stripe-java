@@ -1,5 +1,9 @@
 # Changelog
 
+## 17.1.0 - 2020-01-17
+* [#943](https://github.com/stripe/stripe-java/pull/943) Add support for `metadata` on Checkout `Session`
+* [#940](https://github.com/stripe/stripe-java/pull/940) Add `StripeObjectInterface` interface
+
 ## 17.0.0 - 2020-01-15
 * [#869](https://github.com/stripe/stripe-java/pull/869)
 Major version release. Refer to our [migration guide for v17](https://github.com/stripe/stripe-java/wiki/Migration-guide-for-v17) for a list of new features and backwards incompatible changes to watch out for.
