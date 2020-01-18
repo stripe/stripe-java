@@ -91,6 +91,13 @@ public class Session extends ApiResource implements HasId {
   @SerializedName("locale")
   String locale;
 
+  /**
+   * Set of key-value pairs that you can attach to an object. This can be useful for storing
+   * additional information about the object in a structured format.
+   */
+  @SerializedName("metadata")
+  Map<String, String> metadata;
+
   /** The mode of the Checkout Session, one of `payment`, `setup`, or `subscription`. */
   @SerializedName("mode")
   String mode;
