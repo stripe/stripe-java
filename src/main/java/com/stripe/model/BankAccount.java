@@ -19,6 +19,7 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class BankAccount extends ApiResource
     implements MetadataStore<BankAccount>, ExternalAccount, PaymentSource {
+  /** The ID of the account that the bank account is associated with. */
   @SerializedName("account")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
@@ -47,6 +48,7 @@ public class BankAccount extends ApiResource
   @SerializedName("currency")
   String currency;
 
+  /** The ID of the customer that the bank account is associated with. */
   @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
@@ -72,6 +74,7 @@ public class BankAccount extends ApiResource
   @SerializedName("id")
   String id;
 
+  /** The last four digits of the bank account number. */
   @SerializedName("last4")
   String last4;
 

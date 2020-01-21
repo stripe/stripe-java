@@ -35,6 +35,10 @@ public class Transaction extends ApiResource
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Authorization> authorization;
 
+  /**
+   * ID of the [balance transaction](https://stripe.com/docs/api/balance_transactions) associated
+   * with this transaction.
+   */
   @SerializedName("balance_transaction")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
@@ -63,6 +67,10 @@ public class Transaction extends ApiResource
   @SerializedName("currency")
   String currency;
 
+  /**
+   * If you've disputed the transaction, the ID of the [dispute
+   * object](https://stripe.com/docs/api/issuing/disputes/object).
+   */
   @SerializedName("dispute")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)

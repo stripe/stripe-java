@@ -537,9 +537,14 @@ public class OrderCreateParams extends ApiRequestParams {
 
     @Getter
     public static class Address {
+      /** City, district, suburb, town, or village. */
       @SerializedName("city")
       String city;
 
+      /**
+       * Two-letter country code ([ISO 3166-1
+       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       */
       @SerializedName("country")
       String country;
 
@@ -552,15 +557,19 @@ public class OrderCreateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Address line 1 (e.g., street, PO Box, or company name). */
       @SerializedName("line1")
       String line1;
 
+      /** Address line 2 (e.g., apartment, suite, unit, or building). */
       @SerializedName("line2")
       String line2;
 
+      /** ZIP or postal code. */
       @SerializedName("postal_code")
       String postalCode;
 
+      /** State, county, province, or region. */
       @SerializedName("state")
       String state;
 
@@ -612,11 +621,16 @@ public class OrderCreateParams extends ApiRequestParams {
               this.state);
         }
 
+        /** City, district, suburb, town, or village. */
         public Builder setCity(String city) {
           this.city = city;
           return this;
         }
 
+        /**
+         * Two-letter country code ([ISO 3166-1
+         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         */
         public Builder setCountry(String country) {
           this.country = country;
           return this;
@@ -650,21 +664,25 @@ public class OrderCreateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Address line 1 (e.g., street, PO Box, or company name). */
         public Builder setLine1(String line1) {
           this.line1 = line1;
           return this;
         }
 
+        /** Address line 2 (e.g., apartment, suite, unit, or building). */
         public Builder setLine2(String line2) {
           this.line2 = line2;
           return this;
         }
 
+        /** ZIP or postal code. */
         public Builder setPostalCode(String postalCode) {
           this.postalCode = postalCode;
           return this;
         }
 
+        /** State, county, province, or region. */
         public Builder setState(String state) {
           this.state = state;
           return this;

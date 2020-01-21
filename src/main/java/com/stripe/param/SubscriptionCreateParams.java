@@ -169,7 +169,9 @@ public class SubscriptionCreateParams extends ApiRequestParams {
    * time](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle
    * changes (e.g. when switching plans, resetting `billing_cycle_anchor=now`, or starting a trial),
    * or if an item's `quantity` changes. If `false`, the anchor period will be free (similar to a
-   * trial) and no proration adjustments will be created.
+   * trial) and no proration adjustments will be created. This field has been deprecated and will be
+   * removed in a future API version. Use `proration_behavior=create_prorations` as a replacement
+   * for `prorate=true` and `proration_behavior=none` for `prorate=false`.
    */
   @SerializedName("prorate")
   Boolean prorate;
@@ -177,9 +179,11 @@ public class SubscriptionCreateParams extends ApiRequestParams {
   /**
    * Determines how to handle
    * [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) resulting from the
-   * `billing_cycle_anchor`. The value defaults to `create_prorations`, indicating that proration
-   * invoice items should be created. Prorations can be disabled by setting the value to `none`.
-   * `always_invoice` cannot be passed.
+   * `billing_cycle_anchor`. Valid values are `create_prorations` or `none`.
+   *
+   * <p>Passing `create_prorations` will cause proration invoice items to be created when
+   * applicable. Prorations can be disabled by passing `none`. If no value is passed, the default is
+   * `create_prorations`.
    */
   @SerializedName("proration_behavior")
   ProrationBehavior prorationBehavior;
@@ -703,7 +707,10 @@ public class SubscriptionCreateParams extends ApiRequestParams {
      * time](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle
      * changes (e.g. when switching plans, resetting `billing_cycle_anchor=now`, or starting a
      * trial), or if an item's `quantity` changes. If `false`, the anchor period will be free
-     * (similar to a trial) and no proration adjustments will be created.
+     * (similar to a trial) and no proration adjustments will be created. This field has been
+     * deprecated and will be removed in a future API version. Use
+     * `proration_behavior=create_prorations` as a replacement for `prorate=true` and
+     * `proration_behavior=none` for `prorate=false`.
      */
     public Builder setProrate(Boolean prorate) {
       this.prorate = prorate;
@@ -713,9 +720,11 @@ public class SubscriptionCreateParams extends ApiRequestParams {
     /**
      * Determines how to handle
      * [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) resulting from
-     * the `billing_cycle_anchor`. The value defaults to `create_prorations`, indicating that
-     * proration invoice items should be created. Prorations can be disabled by setting the value to
-     * `none`. `always_invoice` cannot be passed.
+     * the `billing_cycle_anchor`. Valid values are `create_prorations` or `none`.
+     *
+     * <p>Passing `create_prorations` will cause proration invoice items to be created when
+     * applicable. Prorations can be disabled by passing `none`. If no value is passed, the default
+     * is `create_prorations`.
      */
     public Builder setProrationBehavior(ProrationBehavior prorationBehavior) {
       this.prorationBehavior = prorationBehavior;

@@ -16,6 +16,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class ThreeDSecure extends ApiResource implements HasId {
+  /** Amount of the charge that you will create when authentication completes. */
   @SerializedName("amount")
   Long amount;
 

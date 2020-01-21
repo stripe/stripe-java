@@ -183,46 +183,86 @@ public class DisputeUpdateParams extends ApiRequestParams {
 
   @Getter
   public static class Evidence {
-    /** Has a maximum character count of 20,000. */
+    /**
+     * Any server or activity logs showing proof that the customer accessed or downloaded the
+     * purchased digital product. This information should include IP addresses, corresponding
+     * timestamps, and any detailed recorded activity. Has a maximum character count of 20,000.
+     */
     @SerializedName("access_activity_log")
     Object accessActivityLog;
 
+    /** The billing address provided by the customer. */
     @SerializedName("billing_address")
     Object billingAddress;
 
+    /**
+     * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Your subscription
+     * cancellation policy, as shown to the customer.
+     */
     @SerializedName("cancellation_policy")
     Object cancellationPolicy;
 
-    /** Has a maximum character count of 20,000. */
+    /**
+     * An explanation of how and when the customer was shown your refund policy prior to purchase.
+     * Has a maximum character count of 20,000.
+     */
     @SerializedName("cancellation_policy_disclosure")
     Object cancellationPolicyDisclosure;
 
-    /** Has a maximum character count of 20,000. */
+    /**
+     * A justification for why the customer's subscription was not canceled. Has a maximum character
+     * count of 20,000.
+     */
     @SerializedName("cancellation_rebuttal")
     Object cancellationRebuttal;
 
+    /**
+     * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any communication with
+     * the customer that you feel is relevant to your case. Examples include emails proving that the
+     * customer received the product or service, or demonstrating their use of or satisfaction with
+     * the product or service.
+     */
     @SerializedName("customer_communication")
     Object customerCommunication;
 
+    /** The email address of the customer. */
     @SerializedName("customer_email_address")
     Object customerEmailAddress;
 
+    /** The name of the customer. */
     @SerializedName("customer_name")
     Object customerName;
 
+    /** The IP address that the customer used when making the purchase. */
     @SerializedName("customer_purchase_ip")
     Object customerPurchaseIp;
 
+    /**
+     * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A relevant document or
+     * contract showing the customer's signature.
+     */
     @SerializedName("customer_signature")
     Object customerSignature;
 
+    /**
+     * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation for the
+     * prior charge that can uniquely identify the charge, such as a receipt, shipping label, work
+     * order, etc. This document should be paired with a similar document from the disputed payment
+     * that proves the two payments are separate.
+     */
     @SerializedName("duplicate_charge_documentation")
     Object duplicateChargeDocumentation;
 
-    /** Has a maximum character count of 20,000. */
+    /**
+     * An explanation of the difference between the disputed charge versus the prior charge that
+     * appears to be a duplicate. Has a maximum character count of 20,000.
+     */
     @SerializedName("duplicate_charge_explanation")
     Object duplicateChargeExplanation;
 
+    /**
+     * The Stripe ID for the prior charge which appears to be a duplicate of the disputed charge.
+     */
     @SerializedName("duplicate_charge_id")
     Object duplicateChargeId;
 
@@ -235,49 +275,101 @@ public class DisputeUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Has a maximum character count of 20,000. */
+    /**
+     * A description of the product or service that was sold. Has a maximum character count of
+     * 20,000.
+     */
     @SerializedName("product_description")
     Object productDescription;
 
+    /**
+     * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any receipt or message
+     * sent to the customer notifying them of the charge.
+     */
     @SerializedName("receipt")
     Object receipt;
 
+    /**
+     * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Your refund policy, as
+     * shown to the customer.
+     */
     @SerializedName("refund_policy")
     Object refundPolicy;
 
-    /** Has a maximum character count of 20,000. */
+    /**
+     * Documentation demonstrating that the customer was shown your refund policy prior to purchase.
+     * Has a maximum character count of 20,000.
+     */
     @SerializedName("refund_policy_disclosure")
     Object refundPolicyDisclosure;
 
-    /** Has a maximum character count of 20,000. */
+    /**
+     * A justification for why the customer is not entitled to a refund. Has a maximum character
+     * count of 20,000.
+     */
     @SerializedName("refund_refusal_explanation")
     Object refundRefusalExplanation;
 
+    /**
+     * The date on which the customer received or began receiving the purchased service, in a clear
+     * human-readable format.
+     */
     @SerializedName("service_date")
     Object serviceDate;
 
+    /**
+     * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation showing
+     * proof that a service was provided to the customer. This could include a copy of a signed
+     * contract, work order, or other form of written agreement.
+     */
     @SerializedName("service_documentation")
     Object serviceDocumentation;
 
+    /**
+     * The address to which a physical product was shipped. You should try to include as complete
+     * address information as possible.
+     */
     @SerializedName("shipping_address")
     Object shippingAddress;
 
+    /**
+     * The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. If
+     * multiple carriers were used for this purchase, please separate them with commas.
+     */
     @SerializedName("shipping_carrier")
     Object shippingCarrier;
 
+    /**
+     * The date on which a physical product began its route to the shipping address, in a clear
+     * human-readable format.
+     */
     @SerializedName("shipping_date")
     Object shippingDate;
 
+    /**
+     * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation showing
+     * proof that a product was shipped to the customer at the same address the customer provided to
+     * you. This could include a copy of the shipment receipt, shipping label, etc. It should show
+     * the customer's full shipping address, if possible.
+     */
     @SerializedName("shipping_documentation")
     Object shippingDocumentation;
 
+    /**
+     * The tracking number for a physical product, obtained from the delivery service. If multiple
+     * tracking numbers were generated for this purchase, please separate them with commas.
+     */
     @SerializedName("shipping_tracking_number")
     Object shippingTrackingNumber;
 
+    /**
+     * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any additional evidence
+     * or statements.
+     */
     @SerializedName("uncategorized_file")
     Object uncategorizedFile;
 
-    /** Has a maximum character count of 20,000. */
+    /** Any additional evidence or statements. Has a maximum character count of 20,000. */
     @SerializedName("uncategorized_text")
     Object uncategorizedText;
 
@@ -434,139 +526,219 @@ public class DisputeUpdateParams extends ApiRequestParams {
             this.uncategorizedText);
       }
 
-      /** Has a maximum character count of 20,000. */
+      /**
+       * Any server or activity logs showing proof that the customer accessed or downloaded the
+       * purchased digital product. This information should include IP addresses, corresponding
+       * timestamps, and any detailed recorded activity. Has a maximum character count of 20,000.
+       */
       public Builder setAccessActivityLog(String accessActivityLog) {
         this.accessActivityLog = accessActivityLog;
         return this;
       }
 
-      /** Has a maximum character count of 20,000. */
+      /**
+       * Any server or activity logs showing proof that the customer accessed or downloaded the
+       * purchased digital product. This information should include IP addresses, corresponding
+       * timestamps, and any detailed recorded activity. Has a maximum character count of 20,000.
+       */
       public Builder setAccessActivityLog(EmptyParam accessActivityLog) {
         this.accessActivityLog = accessActivityLog;
         return this;
       }
 
+      /** The billing address provided by the customer. */
       public Builder setBillingAddress(String billingAddress) {
         this.billingAddress = billingAddress;
         return this;
       }
 
+      /** The billing address provided by the customer. */
       public Builder setBillingAddress(EmptyParam billingAddress) {
         this.billingAddress = billingAddress;
         return this;
       }
 
+      /**
+       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Your subscription
+       * cancellation policy, as shown to the customer.
+       */
       public Builder setCancellationPolicy(String cancellationPolicy) {
         this.cancellationPolicy = cancellationPolicy;
         return this;
       }
 
+      /**
+       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Your subscription
+       * cancellation policy, as shown to the customer.
+       */
       public Builder setCancellationPolicy(EmptyParam cancellationPolicy) {
         this.cancellationPolicy = cancellationPolicy;
         return this;
       }
 
-      /** Has a maximum character count of 20,000. */
+      /**
+       * An explanation of how and when the customer was shown your refund policy prior to purchase.
+       * Has a maximum character count of 20,000.
+       */
       public Builder setCancellationPolicyDisclosure(String cancellationPolicyDisclosure) {
         this.cancellationPolicyDisclosure = cancellationPolicyDisclosure;
         return this;
       }
 
-      /** Has a maximum character count of 20,000. */
+      /**
+       * An explanation of how and when the customer was shown your refund policy prior to purchase.
+       * Has a maximum character count of 20,000.
+       */
       public Builder setCancellationPolicyDisclosure(EmptyParam cancellationPolicyDisclosure) {
         this.cancellationPolicyDisclosure = cancellationPolicyDisclosure;
         return this;
       }
 
-      /** Has a maximum character count of 20,000. */
+      /**
+       * A justification for why the customer's subscription was not canceled. Has a maximum
+       * character count of 20,000.
+       */
       public Builder setCancellationRebuttal(String cancellationRebuttal) {
         this.cancellationRebuttal = cancellationRebuttal;
         return this;
       }
 
-      /** Has a maximum character count of 20,000. */
+      /**
+       * A justification for why the customer's subscription was not canceled. Has a maximum
+       * character count of 20,000.
+       */
       public Builder setCancellationRebuttal(EmptyParam cancellationRebuttal) {
         this.cancellationRebuttal = cancellationRebuttal;
         return this;
       }
 
+      /**
+       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any communication with
+       * the customer that you feel is relevant to your case. Examples include emails proving that
+       * the customer received the product or service, or demonstrating their use of or satisfaction
+       * with the product or service.
+       */
       public Builder setCustomerCommunication(String customerCommunication) {
         this.customerCommunication = customerCommunication;
         return this;
       }
 
+      /**
+       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any communication with
+       * the customer that you feel is relevant to your case. Examples include emails proving that
+       * the customer received the product or service, or demonstrating their use of or satisfaction
+       * with the product or service.
+       */
       public Builder setCustomerCommunication(EmptyParam customerCommunication) {
         this.customerCommunication = customerCommunication;
         return this;
       }
 
+      /** The email address of the customer. */
       public Builder setCustomerEmailAddress(String customerEmailAddress) {
         this.customerEmailAddress = customerEmailAddress;
         return this;
       }
 
+      /** The email address of the customer. */
       public Builder setCustomerEmailAddress(EmptyParam customerEmailAddress) {
         this.customerEmailAddress = customerEmailAddress;
         return this;
       }
 
+      /** The name of the customer. */
       public Builder setCustomerName(String customerName) {
         this.customerName = customerName;
         return this;
       }
 
+      /** The name of the customer. */
       public Builder setCustomerName(EmptyParam customerName) {
         this.customerName = customerName;
         return this;
       }
 
+      /** The IP address that the customer used when making the purchase. */
       public Builder setCustomerPurchaseIp(String customerPurchaseIp) {
         this.customerPurchaseIp = customerPurchaseIp;
         return this;
       }
 
+      /** The IP address that the customer used when making the purchase. */
       public Builder setCustomerPurchaseIp(EmptyParam customerPurchaseIp) {
         this.customerPurchaseIp = customerPurchaseIp;
         return this;
       }
 
+      /**
+       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A relevant document or
+       * contract showing the customer's signature.
+       */
       public Builder setCustomerSignature(String customerSignature) {
         this.customerSignature = customerSignature;
         return this;
       }
 
+      /**
+       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A relevant document or
+       * contract showing the customer's signature.
+       */
       public Builder setCustomerSignature(EmptyParam customerSignature) {
         this.customerSignature = customerSignature;
         return this;
       }
 
+      /**
+       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation for the
+       * prior charge that can uniquely identify the charge, such as a receipt, shipping label, work
+       * order, etc. This document should be paired with a similar document from the disputed
+       * payment that proves the two payments are separate.
+       */
       public Builder setDuplicateChargeDocumentation(String duplicateChargeDocumentation) {
         this.duplicateChargeDocumentation = duplicateChargeDocumentation;
         return this;
       }
 
+      /**
+       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation for the
+       * prior charge that can uniquely identify the charge, such as a receipt, shipping label, work
+       * order, etc. This document should be paired with a similar document from the disputed
+       * payment that proves the two payments are separate.
+       */
       public Builder setDuplicateChargeDocumentation(EmptyParam duplicateChargeDocumentation) {
         this.duplicateChargeDocumentation = duplicateChargeDocumentation;
         return this;
       }
 
-      /** Has a maximum character count of 20,000. */
+      /**
+       * An explanation of the difference between the disputed charge versus the prior charge that
+       * appears to be a duplicate. Has a maximum character count of 20,000.
+       */
       public Builder setDuplicateChargeExplanation(String duplicateChargeExplanation) {
         this.duplicateChargeExplanation = duplicateChargeExplanation;
         return this;
       }
 
-      /** Has a maximum character count of 20,000. */
+      /**
+       * An explanation of the difference between the disputed charge versus the prior charge that
+       * appears to be a duplicate. Has a maximum character count of 20,000.
+       */
       public Builder setDuplicateChargeExplanation(EmptyParam duplicateChargeExplanation) {
         this.duplicateChargeExplanation = duplicateChargeExplanation;
         return this;
       }
 
+      /**
+       * The Stripe ID for the prior charge which appears to be a duplicate of the disputed charge.
+       */
       public Builder setDuplicateChargeId(String duplicateChargeId) {
         this.duplicateChargeId = duplicateChargeId;
         return this;
       }
 
+      /**
+       * The Stripe ID for the prior charge which appears to be a duplicate of the disputed charge.
+       */
       public Builder setDuplicateChargeId(EmptyParam duplicateChargeId) {
         this.duplicateChargeId = duplicateChargeId;
         return this;
@@ -598,149 +770,253 @@ public class DisputeUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Has a maximum character count of 20,000. */
+      /**
+       * A description of the product or service that was sold. Has a maximum character count of
+       * 20,000.
+       */
       public Builder setProductDescription(String productDescription) {
         this.productDescription = productDescription;
         return this;
       }
 
-      /** Has a maximum character count of 20,000. */
+      /**
+       * A description of the product or service that was sold. Has a maximum character count of
+       * 20,000.
+       */
       public Builder setProductDescription(EmptyParam productDescription) {
         this.productDescription = productDescription;
         return this;
       }
 
+      /**
+       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any receipt or message
+       * sent to the customer notifying them of the charge.
+       */
       public Builder setReceipt(String receipt) {
         this.receipt = receipt;
         return this;
       }
 
+      /**
+       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any receipt or message
+       * sent to the customer notifying them of the charge.
+       */
       public Builder setReceipt(EmptyParam receipt) {
         this.receipt = receipt;
         return this;
       }
 
+      /**
+       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Your refund policy, as
+       * shown to the customer.
+       */
       public Builder setRefundPolicy(String refundPolicy) {
         this.refundPolicy = refundPolicy;
         return this;
       }
 
+      /**
+       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Your refund policy, as
+       * shown to the customer.
+       */
       public Builder setRefundPolicy(EmptyParam refundPolicy) {
         this.refundPolicy = refundPolicy;
         return this;
       }
 
-      /** Has a maximum character count of 20,000. */
+      /**
+       * Documentation demonstrating that the customer was shown your refund policy prior to
+       * purchase. Has a maximum character count of 20,000.
+       */
       public Builder setRefundPolicyDisclosure(String refundPolicyDisclosure) {
         this.refundPolicyDisclosure = refundPolicyDisclosure;
         return this;
       }
 
-      /** Has a maximum character count of 20,000. */
+      /**
+       * Documentation demonstrating that the customer was shown your refund policy prior to
+       * purchase. Has a maximum character count of 20,000.
+       */
       public Builder setRefundPolicyDisclosure(EmptyParam refundPolicyDisclosure) {
         this.refundPolicyDisclosure = refundPolicyDisclosure;
         return this;
       }
 
-      /** Has a maximum character count of 20,000. */
+      /**
+       * A justification for why the customer is not entitled to a refund. Has a maximum character
+       * count of 20,000.
+       */
       public Builder setRefundRefusalExplanation(String refundRefusalExplanation) {
         this.refundRefusalExplanation = refundRefusalExplanation;
         return this;
       }
 
-      /** Has a maximum character count of 20,000. */
+      /**
+       * A justification for why the customer is not entitled to a refund. Has a maximum character
+       * count of 20,000.
+       */
       public Builder setRefundRefusalExplanation(EmptyParam refundRefusalExplanation) {
         this.refundRefusalExplanation = refundRefusalExplanation;
         return this;
       }
 
+      /**
+       * The date on which the customer received or began receiving the purchased service, in a
+       * clear human-readable format.
+       */
       public Builder setServiceDate(String serviceDate) {
         this.serviceDate = serviceDate;
         return this;
       }
 
+      /**
+       * The date on which the customer received or began receiving the purchased service, in a
+       * clear human-readable format.
+       */
       public Builder setServiceDate(EmptyParam serviceDate) {
         this.serviceDate = serviceDate;
         return this;
       }
 
+      /**
+       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation showing
+       * proof that a service was provided to the customer. This could include a copy of a signed
+       * contract, work order, or other form of written agreement.
+       */
       public Builder setServiceDocumentation(String serviceDocumentation) {
         this.serviceDocumentation = serviceDocumentation;
         return this;
       }
 
+      /**
+       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation showing
+       * proof that a service was provided to the customer. This could include a copy of a signed
+       * contract, work order, or other form of written agreement.
+       */
       public Builder setServiceDocumentation(EmptyParam serviceDocumentation) {
         this.serviceDocumentation = serviceDocumentation;
         return this;
       }
 
+      /**
+       * The address to which a physical product was shipped. You should try to include as complete
+       * address information as possible.
+       */
       public Builder setShippingAddress(String shippingAddress) {
         this.shippingAddress = shippingAddress;
         return this;
       }
 
+      /**
+       * The address to which a physical product was shipped. You should try to include as complete
+       * address information as possible.
+       */
       public Builder setShippingAddress(EmptyParam shippingAddress) {
         this.shippingAddress = shippingAddress;
         return this;
       }
 
+      /**
+       * The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. If
+       * multiple carriers were used for this purchase, please separate them with commas.
+       */
       public Builder setShippingCarrier(String shippingCarrier) {
         this.shippingCarrier = shippingCarrier;
         return this;
       }
 
+      /**
+       * The delivery service that shipped a physical product, such as Fedex, UPS, USPS, etc. If
+       * multiple carriers were used for this purchase, please separate them with commas.
+       */
       public Builder setShippingCarrier(EmptyParam shippingCarrier) {
         this.shippingCarrier = shippingCarrier;
         return this;
       }
 
+      /**
+       * The date on which a physical product began its route to the shipping address, in a clear
+       * human-readable format.
+       */
       public Builder setShippingDate(String shippingDate) {
         this.shippingDate = shippingDate;
         return this;
       }
 
+      /**
+       * The date on which a physical product began its route to the shipping address, in a clear
+       * human-readable format.
+       */
       public Builder setShippingDate(EmptyParam shippingDate) {
         this.shippingDate = shippingDate;
         return this;
       }
 
+      /**
+       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation showing
+       * proof that a product was shipped to the customer at the same address the customer provided
+       * to you. This could include a copy of the shipment receipt, shipping label, etc. It should
+       * show the customer's full shipping address, if possible.
+       */
       public Builder setShippingDocumentation(String shippingDocumentation) {
         this.shippingDocumentation = shippingDocumentation;
         return this;
       }
 
+      /**
+       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Documentation showing
+       * proof that a product was shipped to the customer at the same address the customer provided
+       * to you. This could include a copy of the shipment receipt, shipping label, etc. It should
+       * show the customer's full shipping address, if possible.
+       */
       public Builder setShippingDocumentation(EmptyParam shippingDocumentation) {
         this.shippingDocumentation = shippingDocumentation;
         return this;
       }
 
+      /**
+       * The tracking number for a physical product, obtained from the delivery service. If multiple
+       * tracking numbers were generated for this purchase, please separate them with commas.
+       */
       public Builder setShippingTrackingNumber(String shippingTrackingNumber) {
         this.shippingTrackingNumber = shippingTrackingNumber;
         return this;
       }
 
+      /**
+       * The tracking number for a physical product, obtained from the delivery service. If multiple
+       * tracking numbers were generated for this purchase, please separate them with commas.
+       */
       public Builder setShippingTrackingNumber(EmptyParam shippingTrackingNumber) {
         this.shippingTrackingNumber = shippingTrackingNumber;
         return this;
       }
 
+      /**
+       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any additional evidence
+       * or statements.
+       */
       public Builder setUncategorizedFile(String uncategorizedFile) {
         this.uncategorizedFile = uncategorizedFile;
         return this;
       }
 
+      /**
+       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Any additional evidence
+       * or statements.
+       */
       public Builder setUncategorizedFile(EmptyParam uncategorizedFile) {
         this.uncategorizedFile = uncategorizedFile;
         return this;
       }
 
-      /** Has a maximum character count of 20,000. */
+      /** Any additional evidence or statements. Has a maximum character count of 20,000. */
       public Builder setUncategorizedText(String uncategorizedText) {
         this.uncategorizedText = uncategorizedText;
         return this;
       }
 
-      /** Has a maximum character count of 20,000. */
+      /** Any additional evidence or statements. Has a maximum character count of 20,000. */
       public Builder setUncategorizedText(EmptyParam uncategorizedText) {
         this.uncategorizedText = uncategorizedText;
         return this;

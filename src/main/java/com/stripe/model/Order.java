@@ -28,6 +28,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   @SerializedName("amount")
   Long amount;
 
+  /** The total amount that was returned to the customer. */
   @SerializedName("amount_returned")
   Long amountReturned;
 
@@ -35,6 +36,11 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   @SerializedName("application")
   String application;
 
+  /**
+   * A fee in cents that will be applied to the order and transferred to the application owner’s
+   * Stripe account. The request must be made with an OAuth key or the Stripe-Account header in
+   * order to take an application fee. For more information, see the application fees documentation.
+   */
   @SerializedName("application_fee")
   Long applicationFee;
 
@@ -68,6 +74,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   @SerializedName("email")
   String email;
 
+  /** External coupon code to load for this order. */
   @SerializedName("external_coupon_code")
   String externalCouponCode;
 
@@ -103,6 +110,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   @SerializedName("object")
   String object;
 
+  /** A list of returns that have taken place for this order. */
   @SerializedName("returns")
   OrderReturnCollection returns;
 
@@ -138,6 +146,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   @SerializedName("status_transitions")
   StatusTransitions statusTransitions;
 
+  /** Time at which the object was last updated. Measured in seconds since the Unix epoch. */
   @SerializedName("updated")
   Long updated;
 
@@ -508,15 +517,19 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class StatusTransitions extends StripeObject {
+    /** The time that the order was canceled. */
     @SerializedName("canceled")
     Long canceled;
 
+    /** The time that the order was fulfilled. */
     @SerializedName("fulfiled")
     Long fulfiled;
 
+    /** The time that the order was paid. */
     @SerializedName("paid")
     Long paid;
 
+    /** The time that the order was returned. */
     @SerializedName("returned")
     Long returned;
   }

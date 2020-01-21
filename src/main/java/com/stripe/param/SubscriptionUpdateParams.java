@@ -157,7 +157,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
    * time](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle
    * changes (e.g. when switching plans, resetting `billing_cycle_anchor=now`, or starting a trial),
    * or if an item's `quantity` changes. If `false`, the anchor period will be free (similar to a
-   * trial) and no proration adjustments will be created.
+   * trial) and no proration adjustments will be created. This field has been deprecated and will be
+   * removed in a future API version. Use `proration_behavior=create_prorations` as a replacement
+   * for `prorate=true` and `proration_behavior=none` for `prorate=false`.
    */
   @SerializedName("prorate")
   Boolean prorate;
@@ -166,10 +168,15 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
    * Determines how to handle
    * [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing
    * cycle changes (e.g., when switching plans, resetting `billing_cycle_anchor=now`, or starting a
-   * trial), or if an item's `quantity` changes. The value defaults to `create_prorations`,
-   * indicating that proration invoice items should be created. Prorations can be disabled by
-   * setting the value to `none`. Passing `always_invoice` will cause an invoice to immediately be
-   * created for any prorations.
+   * trial), or if an item's `quantity` changes. Valid values are `create_prorations`, `none`, or
+   * `always_invoice`.
+   *
+   * <p>Passing `create_prorations` will cause proration invoice items to be created when
+   * applicable. These proration items will only be invoiced immediately under [certain
+   * conditions](https://stripe.com/docs/subscriptions/upgrading-downgrading#immediate-payment). In
+   * order to always invoice immediately for prorations, pass `always_invoice`.
+   *
+   * <p>Prorations can be disabled by passing `none`.
    */
   @SerializedName("proration_behavior")
   ProrationBehavior prorationBehavior;
@@ -709,7 +716,10 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * time](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle
      * changes (e.g. when switching plans, resetting `billing_cycle_anchor=now`, or starting a
      * trial), or if an item's `quantity` changes. If `false`, the anchor period will be free
-     * (similar to a trial) and no proration adjustments will be created.
+     * (similar to a trial) and no proration adjustments will be created. This field has been
+     * deprecated and will be removed in a future API version. Use
+     * `proration_behavior=create_prorations` as a replacement for `prorate=true` and
+     * `proration_behavior=none` for `prorate=false`.
      */
     public Builder setProrate(Boolean prorate) {
       this.prorate = prorate;
@@ -720,10 +730,15 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
      * Determines how to handle
      * [prorations](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing
      * cycle changes (e.g., when switching plans, resetting `billing_cycle_anchor=now`, or starting
-     * a trial), or if an item's `quantity` changes. The value defaults to `create_prorations`,
-     * indicating that proration invoice items should be created. Prorations can be disabled by
-     * setting the value to `none`. Passing `always_invoice` will cause an invoice to immediately be
-     * created for any prorations.
+     * a trial), or if an item's `quantity` changes. Valid values are `create_prorations`, `none`,
+     * or `always_invoice`.
+     *
+     * <p>Passing `create_prorations` will cause proration invoice items to be created when
+     * applicable. These proration items will only be invoiced immediately under [certain
+     * conditions](https://stripe.com/docs/subscriptions/upgrading-downgrading#immediate-payment).
+     * In order to always invoice immediately for prorations, pass `always_invoice`.
+     *
+     * <p>Prorations can be disabled by passing `none`.
      */
     public Builder setProrationBehavior(ProrationBehavior prorationBehavior) {
       this.prorationBehavior = prorationBehavior;

@@ -16,6 +16,11 @@ public class BalanceTransactionListParams extends ApiRequestParams {
   @SerializedName("created")
   Object created;
 
+  /**
+   * Only return transactions in a certain currency. Three-letter [ISO currency
+   * code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported
+   * currency](https://stripe.com/docs/currencies).
+   */
   @SerializedName("currency")
   String currency;
 
@@ -164,6 +169,11 @@ public class BalanceTransactionListParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * Only return transactions in a certain currency. Three-letter [ISO currency
+     * code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported
+     * currency](https://stripe.com/docs/currencies).
+     */
     public Builder setCurrency(String currency) {
       this.currency = currency;
       return this;

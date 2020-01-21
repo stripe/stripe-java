@@ -249,7 +249,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     @SerializedName("line2")
     String line2;
 
-    /** Zip/Postal Code. */
+    /** ZIP or postal code. */
     @SerializedName("postal_code")
     String postalCode;
 
