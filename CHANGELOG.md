@@ -1,5 +1,8 @@
 # Changelog
 
+## 17.1.1 - 2020-01-22
+* [#944](https://github.com/stripe/stripe-java/pull/944) Improve docstrings for many properties and parameters
+
 ## 17.1.0 - 2020-01-17
 * [#943](https://github.com/stripe/stripe-java/pull/943) Add support for `metadata` on Checkout `Session`
 * [#940](https://github.com/stripe/stripe-java/pull/940) Add `StripeObjectInterface` interface
