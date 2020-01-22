@@ -73,6 +73,10 @@ public class InvoiceUpdateParams extends ApiRequestParams {
   @SerializedName("default_tax_rates")
   Object defaultTaxRates;
 
+  /**
+   * An arbitrary string attached to the object. Often useful for displaying to users. Referenced as
+   * 'memo' in the Dashboard.
+   */
   @SerializedName("description")
   Object description;
 
@@ -405,11 +409,19 @@ public class InvoiceUpdateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * An arbitrary string attached to the object. Often useful for displaying to users. Referenced
+     * as 'memo' in the Dashboard.
+     */
     public Builder setDescription(String description) {
       this.description = description;
       return this;
     }
 
+    /**
+     * An arbitrary string attached to the object. Often useful for displaying to users. Referenced
+     * as 'memo' in the Dashboard.
+     */
     public Builder setDescription(EmptyParam description) {
       this.description = description;
       return this;

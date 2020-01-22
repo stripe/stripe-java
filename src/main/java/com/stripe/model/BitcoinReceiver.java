@@ -57,6 +57,7 @@ public class BitcoinReceiver extends ApiResource implements PaymentSource {
   @SerializedName("currency")
   String currency;
 
+  /** The customer ID of the bitcoin receiver. */
   @SerializedName("customer")
   String customer;
 
@@ -120,6 +121,7 @@ public class BitcoinReceiver extends ApiResource implements PaymentSource {
   @SerializedName("payment")
   String payment;
 
+  /** The refund address of this bitcoin receiver. */
   @SerializedName("refund_address")
   String refundAddress;
 
@@ -134,6 +136,7 @@ public class BitcoinReceiver extends ApiResource implements PaymentSource {
   @SerializedName("uncaptured_funds")
   Boolean uncapturedFunds;
 
+  /** Indicate if this source is used for payment. */
   @SerializedName("used_for_payment")
   Boolean usedForPayment;
 

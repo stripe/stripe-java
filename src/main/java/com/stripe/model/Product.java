@@ -137,6 +137,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   @SerializedName("unit_label")
   String unitLabel;
 
+  /** Time at which the object was last updated. Measured in seconds since the Unix epoch. */
   @SerializedName("updated")
   Long updated;
 

@@ -42,6 +42,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
   @SerializedName("custom_fields")
   Object customFields;
 
+  /** The ID of the customer who will be billed. */
   @SerializedName("customer")
   String customer;
 
@@ -72,6 +73,10 @@ public class InvoiceCreateParams extends ApiRequestParams {
   @SerializedName("default_tax_rates")
   List<String> defaultTaxRates;
 
+  /**
+   * An arbitrary string attached to the object. Often useful for displaying to users. Referenced as
+   * 'memo' in the Dashboard.
+   */
   @SerializedName("description")
   String description;
 
@@ -322,6 +327,7 @@ public class InvoiceCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /** The ID of the customer who will be billed. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;
@@ -382,6 +388,10 @@ public class InvoiceCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /**
+     * An arbitrary string attached to the object. Often useful for displaying to users. Referenced
+     * as 'memo' in the Dashboard.
+     */
     public Builder setDescription(String description) {
       this.description = description;
       return this;

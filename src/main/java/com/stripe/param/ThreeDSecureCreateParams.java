@@ -25,6 +25,7 @@ public class ThreeDSecureCreateParams extends ApiRequestParams {
   @SerializedName("currency")
   String currency;
 
+  /** The customer associated with this 3D secure authentication. */
   @SerializedName("customer")
   String customer;
 
@@ -114,6 +115,7 @@ public class ThreeDSecureCreateParams extends ApiRequestParams {
       return this;
     }
 
+    /** The customer associated with this 3D secure authentication. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;

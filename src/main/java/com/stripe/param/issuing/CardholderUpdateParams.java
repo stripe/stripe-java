@@ -3309,6 +3309,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
 
   @Getter
   public static class Billing {
+    /** The cardholder’s billing address. */
     @SerializedName("address")
     Address address;
 
@@ -3340,6 +3341,7 @@ public class CardholderUpdateParams extends ApiRequestParams {
         return new Billing(this.address, this.extraParams);
       }
 
+      /** The cardholder’s billing address. */
       public Builder setAddress(Address address) {
         this.address = address;
         return this;
@@ -3374,9 +3376,14 @@ public class CardholderUpdateParams extends ApiRequestParams {
 
     @Getter
     public static class Address {
+      /** City, district, suburb, town, or village. */
       @SerializedName("city")
       Object city;
 
+      /**
+       * Two-letter country code ([ISO 3166-1
+       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       */
       @SerializedName("country")
       Object country;
 
@@ -3389,15 +3396,19 @@ public class CardholderUpdateParams extends ApiRequestParams {
       @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
       Map<String, Object> extraParams;
 
+      /** Address line 1 (e.g., street, PO Box, or company name). */
       @SerializedName("line1")
       Object line1;
 
+      /** Address line 2 (e.g., apartment, suite, unit, or building). */
       @SerializedName("line2")
       Object line2;
 
+      /** ZIP or postal code. */
       @SerializedName("postal_code")
       Object postalCode;
 
+      /** State, county, province, or region. */
       @SerializedName("state")
       Object state;
 
@@ -3449,21 +3460,31 @@ public class CardholderUpdateParams extends ApiRequestParams {
               this.state);
         }
 
+        /** City, district, suburb, town, or village. */
         public Builder setCity(String city) {
           this.city = city;
           return this;
         }
 
+        /** City, district, suburb, town, or village. */
         public Builder setCity(EmptyParam city) {
           this.city = city;
           return this;
         }
 
+        /**
+         * Two-letter country code ([ISO 3166-1
+         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         */
         public Builder setCountry(String country) {
           this.country = country;
           return this;
         }
 
+        /**
+         * Two-letter country code ([ISO 3166-1
+         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         */
         public Builder setCountry(EmptyParam country) {
           this.country = country;
           return this;
@@ -3497,41 +3518,49 @@ public class CardholderUpdateParams extends ApiRequestParams {
           return this;
         }
 
+        /** Address line 1 (e.g., street, PO Box, or company name). */
         public Builder setLine1(String line1) {
           this.line1 = line1;
           return this;
         }
 
+        /** Address line 1 (e.g., street, PO Box, or company name). */
         public Builder setLine1(EmptyParam line1) {
           this.line1 = line1;
           return this;
         }
 
+        /** Address line 2 (e.g., apartment, suite, unit, or building). */
         public Builder setLine2(String line2) {
           this.line2 = line2;
           return this;
         }
 
+        /** Address line 2 (e.g., apartment, suite, unit, or building). */
         public Builder setLine2(EmptyParam line2) {
           this.line2 = line2;
           return this;
         }
 
+        /** ZIP or postal code. */
         public Builder setPostalCode(String postalCode) {
           this.postalCode = postalCode;
           return this;
         }
 
+        /** ZIP or postal code. */
         public Builder setPostalCode(EmptyParam postalCode) {
           this.postalCode = postalCode;
           return this;
         }
 
+        /** State, county, province, or region. */
         public Builder setState(String state) {
           this.state = state;
           return this;
         }
 
+        /** State, county, province, or region. */
         public Builder setState(EmptyParam state) {
           this.state = state;
           return this;

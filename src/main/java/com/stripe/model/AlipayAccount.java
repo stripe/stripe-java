@@ -15,6 +15,7 @@ public class AlipayAccount extends StripeObject implements PaymentSource {
   @SerializedName("created")
   Long created;
 
+  /** The ID of the customer associated with this Alipay Account. */
   @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)

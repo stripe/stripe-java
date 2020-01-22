@@ -464,9 +464,11 @@ public class SubscriptionSchedule extends ApiResource
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class CurrentPhase extends StripeObject {
+    /** The end of this phase of the subscription schedule. */
     @SerializedName("end_date")
     Long endDate;
 
+    /** The start of this phase of the subscription schedule. */
     @SerializedName("start_date")
     Long startDate;
   }
@@ -585,6 +587,10 @@ public class SubscriptionSchedule extends ApiResource
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<PaymentMethod> defaultPaymentMethod;
 
+    /**
+     * The default tax rates to apply to the subscription during this phase of the subscription
+     * schedule.
+     */
     @SerializedName("default_tax_rates")
     List<TaxRate> defaultTaxRates;
 

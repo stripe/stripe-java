@@ -41,6 +41,15 @@ public class BalanceTransaction extends ApiResource implements HasId {
   @SerializedName("description")
   String description;
 
+  /**
+   * The exchange rate used, if applicable, for this transaction. Specifically, if money was
+   * converted from currency A to currency B, then the `amount` in currency A, times
+   * `exchange_rate`, would be the `amount` in currency B. For example, suppose you charged a
+   * customer 10.00 EUR. Then the PaymentIntent's `amount` would be `1000` and `currency` would be
+   * `eur`. Suppose this was converted into 12.34 USD in your Stripe account. Then the
+   * BalanceTransaction's `amount` would be `1234`, `currency` would be `usd`, and `exchange_rate`
+   * would be `1.234`.
+   */
   @SerializedName("exchange_rate")
   BigDecimal exchangeRate;
 
@@ -245,6 +254,7 @@ public class BalanceTransaction extends ApiResource implements HasId {
     @SerializedName("amount")
     Long amount;
 
+    /** ID of the Connect application that earned the fee. */
     @SerializedName("application")
     String application;
 

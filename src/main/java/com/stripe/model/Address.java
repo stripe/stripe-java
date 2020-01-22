@@ -9,19 +9,22 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Address extends StripeObject {
-  /** City/District/Suburb/Town/Village. */
+  /** City, district, suburb, town, or village. */
   @SerializedName("city")
   String city;
 
-  /** 2-letter country code. */
+  /**
+   * Two-letter country code ([ISO 3166-1
+   * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+   */
   @SerializedName("country")
   String country;
 
-  /** Address line 1 (Street address/PO Box/Company name). */
+  /** Address line 1 (e.g., street, PO Box, or company name). */
   @SerializedName("line1")
   String line1;
 
-  /** Address line 2 (Apartment/Suite/Unit/Building). */
+  /** Address line 2 (e.g., apartment, suite, unit, or building). */
   @SerializedName("line2")
   String line2;
 
@@ -29,7 +32,7 @@ public class Address extends StripeObject {
   @SerializedName("postal_code")
   String postalCode;
 
-  /** State/County/Province/Region. */
+  /** State, county, province, or region. */
   @SerializedName("state")
   String state;
 }

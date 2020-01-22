@@ -53,6 +53,7 @@ public class Authorization extends ApiResource
   @SerializedName("authorized_currency")
   String authorizedCurrency;
 
+  /** List of balance transactions associated with this authorization. */
   @SerializedName("balance_transactions")
   List<BalanceTransaction> balanceTransactions;
 
@@ -91,6 +92,11 @@ public class Authorization extends ApiResource
   @SerializedName("id")
   String id;
 
+  /**
+   * If set `true`, you may provide
+   * [held_amount](https://stripe.com/docs/api/issuing/authorizations/approve#approve_issuing_authorization-held_amount)
+   * to control how much to hold for the authorization.
+   */
   @SerializedName("is_held_amount_controllable")
   Boolean isHeldAmountControllable;
 
@@ -134,6 +140,13 @@ public class Authorization extends ApiResource
   @SerializedName("pending_held_amount")
   Long pendingHeldAmount;
 
+  /**
+   * History of every time the authorization was approved/denied (whether approved/denied by you
+   * directly, or by Stripe based on your authorization_controls). If the merchant changes the
+   * authorization by performing an [incremental authorization or partial
+   * capture](https://stripe.com/docs/issuing/authorizations/special_scenarios#incremental-authorizations),
+   * you can look at request_history to see the previous states of the authorization.
+   */
   @SerializedName("request_history")
   List<Authorization.RequestHistory> requestHistory;
 
@@ -145,6 +158,10 @@ public class Authorization extends ApiResource
   @SerializedName("status")
   String status;
 
+  /**
+   * List of [transactions](https://stripe.com/docs/api/issuing/transactions) associated with this
+   * authorization.
+   */
   @SerializedName("transactions")
   List<Transaction> transactions;
 

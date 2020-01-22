@@ -13,6 +13,7 @@ public class Discount extends StripeObject {
   @SerializedName("coupon")
   Coupon coupon;
 
+  /** The ID of the customer associated with this discount. */
   @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)

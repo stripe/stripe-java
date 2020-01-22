@@ -138,6 +138,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("custom_fields")
   List<Invoice.CustomField> customFields;
 
+  /** The ID of the customer who will be billed. */
   @SerializedName("customer")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
@@ -229,6 +230,7 @@ public class Invoice extends ApiResource implements HasId, MetadataStore<Invoice
   @SerializedName("description")
   String description;
 
+  /** Describes the current discount applied to this invoice, if there is one. */
   @SerializedName("discount")
   Discount discount;
 

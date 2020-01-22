@@ -11,10 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class AccountCreateParams extends ApiRequestParams {
-  /**
-   * An [account token](https://stripe.com/docs/api#create_account_token), used to securely provide
-   * details to the account.
-   */
+  /** An [account token](#create_account_token), used to securely provide details to the account. */
   @SerializedName("account_token")
   String accountToken;
 
@@ -218,8 +215,7 @@ public class AccountCreateParams extends ApiRequestParams {
     }
 
     /**
-     * An [account token](https://stripe.com/docs/api#create_account_token), used to securely
-     * provide details to the account.
+     * An [account token](#create_account_token), used to securely provide details to the account.
      */
     public Builder setAccountToken(String accountToken) {
       this.accountToken = accountToken;
@@ -1599,6 +1595,7 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("dob")
     Object dob;
 
+    /** The individual's email address. */
     @SerializedName("email")
     String email;
 
@@ -1811,6 +1808,7 @@ public class AccountCreateParams extends ApiRequestParams {
         return this;
       }
 
+      /** The individual's email address. */
       public Builder setEmail(String email) {
         this.email = email;
         return this;

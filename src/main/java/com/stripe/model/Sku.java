@@ -97,6 +97,7 @@ public class Sku extends ApiResource implements HasId, MetadataStore<Sku> {
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Product> product;
 
+  /** Time at which the object was last updated. Measured in seconds since the Unix epoch. */
   @SerializedName("updated")
   Long updated;
 

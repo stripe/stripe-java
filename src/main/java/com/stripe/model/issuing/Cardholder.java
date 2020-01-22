@@ -290,6 +290,7 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
     @SerializedName("address")
     Address address;
 
+    /** The cardholder’s billing name. */
     @SerializedName("name")
     String name;
   }
