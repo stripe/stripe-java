@@ -8,6 +8,7 @@ import com.stripe.util.StringUtils;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -44,6 +45,9 @@ public class StripeRequest {
    */
   HttpHeaders headers;
 
+  /** The parameters of the request (as an unmodifiable map). */
+  Map<String, Object> params;
+
   /** The special modifiers of the request. */
   RequestOptions options;
 
@@ -63,6 +67,7 @@ public class StripeRequest {
       RequestOptions options)
       throws StripeException {
     try {
+      this.params = (params != null) ? Collections.unmodifiableMap(params) : null;
       this.options = (options != null) ? options : RequestOptions.getDefault();
       this.method = method;
       this.url = buildURL(method, url, params);
@@ -93,6 +98,7 @@ public class StripeRequest {
         this.url,
         this.content,
         this.headers.withAdditionalHeader(name, value),
+        this.params,
         this.options);
   }
 

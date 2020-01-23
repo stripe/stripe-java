@@ -15,7 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-final class FormEncoder {
+public final class FormEncoder {
   public static HttpContent createHttpContent(Map<String, Object> params) throws IOException {
     // If params is null, we create an empty HttpContent because we still want to send the
     // Content-Type header.
@@ -23,7 +23,7 @@ final class FormEncoder {
       return HttpContent.buildFormURLEncodedContent(new ArrayList<KeyValuePair<String, String>>());
     }
 
-    Collection<KeyValuePair<String, Object>> flatParams = flattenParamsValue(params, null);
+    Collection<KeyValuePair<String, Object>> flatParams = flattenParams(params);
 
     // If all parameters have been encoded as strings, then the content can be represented
     // with application/x-www-form-url-encoded encoding. Otherwise, use
@@ -52,7 +52,7 @@ final class FormEncoder {
     }
 
     Collection<KeyValuePair<String, String>> flatParams =
-        flattenParamsValue(params, null).stream()
+        flattenParams(params).stream()
             .filter(kvp -> kvp.getValue() instanceof String)
             .map(kvp -> new KeyValuePair<String, String>(kvp.getKey(), (String) kvp.getValue()))
             .collect(Collectors.toList());
@@ -62,7 +62,7 @@ final class FormEncoder {
   /**
    * Creates the HTTP query string for a collection of name/value tuples.
    *
-   * @param params The collection of name/value tuples.
+   * @param nameValueCollection The collection of name/value tuples.
    * @return The query string.
    */
   public static String createQueryString(
@@ -76,6 +76,40 @@ final class FormEncoder {
         nameValueCollection.stream()
             .map(kvp -> String.format("%s=%s", urlEncode(kvp.getKey()), urlEncode(kvp.getValue())))
             .collect(Collectors.toList()));
+  }
+
+  /**
+   * Returns a list of flattened parameters for the given map of parameters.
+   *
+   * <p>This is a "pre-encoding" step necessary to send requests to Stripe's API. Form encoding can
+   * be ambiguous when it comes to nested parameters (lists or maps). Stripe's API relies heavily on
+   * such parameters and expects them to be encoded in a certain way. This method takes a map of
+   * parameters that can contain deeply nested parameters and return a flat list of key/value pairs.
+   *
+   * <p>Values are always encoded as {@link String}s, except for {@link File} and {@link
+   * InputStream} values that are left as-is. When there is at least one {@link File} or {@link
+   * InputStream} value, the request should be encoded using {@code multipart/form-data} MIME type;
+   * otherwise (i.e. if all values are {@link String}s), the request should be encoded using {@code
+   * application/x-www-form-urlencoded} MIME type.
+   *
+   * <pre>{@code
+   * Map<String, Object> item1 = new HashMap<>() { put("plan", "gold"); };
+   * Map<String, Object> item2 = new HashMap<>() { put("plan", "silver"); };
+   * List<Map<String, Object>> items = new ArrayList<>() { add(item1); add(item2); };
+   * Map<String, Object> params = new HashMap<>() { put("amount", 234); put("items", items); };
+   *
+   * List<KeyValuePair<String, Object>> flattenedParams = FormEncoder.flattenParams(params);
+   * // flattenedParams is a list of KeyValuePair<String, Object> with 3 elements:
+   * // 1. key="amount" value="234"
+   * // 2. key="items[0][plan]" value="gold"
+   * // 2. key="items[1][plan]" value="silver"
+   * }</pre>
+   *
+   * @param params The map of parameters.
+   * @return The flattened list of parameters.
+   */
+  public static List<KeyValuePair<String, Object>> flattenParams(Map<String, Object> params) {
+    return flattenParamsValue(params, null);
   }
 
   /**

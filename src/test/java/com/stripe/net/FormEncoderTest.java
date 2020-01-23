@@ -423,6 +423,56 @@ public class FormEncoderTest extends BaseStripeTest {
   }
 
   @Test
+  public void testFlattenParams() {
+    @Data
+    class TestCase {
+      private final Map<String, Object> data;
+      private final List<KeyValuePair<String, Object>> want;
+    }
+
+    List<TestCase> testCases =
+        new ArrayList<TestCase>() {
+          private static final long serialVersionUID = 1L;
+
+          {
+            // No data
+            add(new TestCase(Collections.emptyMap(), Collections.emptyList()));
+
+            // Already flat parameters
+            add(
+                new TestCase(
+                    ImmutableMap.of("key", "value"),
+                    ImmutableList.of(new KeyValuePair<String, Object>("key", "value"))));
+            add(
+                new TestCase(
+                    ImmutableMap.of("key1", "value1", "key2", "value2"),
+                    ImmutableList.of(
+                        new KeyValuePair<String, Object>("key1", "value1"),
+                        new KeyValuePair<String, Object>("key2", "value2"))));
+
+            // Nested parameters
+            add(
+                new TestCase(
+                    Collections.singletonMap("collection", ImmutableList.of("1", "2", "3")),
+                    ImmutableList.of(
+                        new KeyValuePair<String, Object>("collection[0]", "1"),
+                        new KeyValuePair<String, Object>("collection[1]", "2"),
+                        new KeyValuePair<String, Object>("collection[2]", "3"))));
+            add(
+                new TestCase(
+                    Collections.singletonMap("map", ImmutableMap.of("one", 1, "two", 2)),
+                    ImmutableList.of(
+                        new KeyValuePair<String, Object>("map[one]", "1"),
+                        new KeyValuePair<String, Object>("map[two]", "2"))));
+          }
+        };
+
+    for (TestCase testCase : testCases) {
+      assertEquals(testCase.getWant(), FormEncoder.flattenParams(testCase.getData()));
+    }
+  }
+
+  @Test
   public void testCreateQueryString_old() {
     Map<String, Object> params = new HashMap<>();
     params.put("a", "b");

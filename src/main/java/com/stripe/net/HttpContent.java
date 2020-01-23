@@ -48,6 +48,11 @@ public class HttpContent {
         String.format("application/x-www-form-urlencoded;charset=%s", ApiResource.CHARSET));
   }
 
+  /** The request's content, as a string. */
+  public String stringContent() {
+    return new String(this.byteArrayContent, ApiResource.CHARSET);
+  }
+
   /**
    * Builds a new HttpContent for name/value tuples encoded using {@code multipart/form-data} MIME
    * type.
