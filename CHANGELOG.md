@@ -1,5 +1,8 @@
 # Changelog
 
+## 17.2.0 - 2020-01-24
+* [#947](https://github.com/stripe/stripe-java/pull/947) Changes for custom HTTP clients
+
 ## 17.1.1 - 2020-01-22
 * [#944](https://github.com/stripe/stripe-java/pull/944) Improve docstrings for many properties and parameters
 
