@@ -1,5 +1,8 @@
 # Changelog
 
+## 17.3.0 - 2020-01-24
+* [#948](https://github.com/stripe/stripe-java/pull/948) Add support for `shipping.speed` on Issuing `Card` and new `TaxID` types
+
 ## 17.2.0 - 2020-01-24
 * [#947](https://github.com/stripe/stripe-java/pull/947) Changes for custom HTTP clients
 
