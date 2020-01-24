@@ -39,7 +39,8 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
   /**
    * A timestamp at which the subscription should cancel. If set to a date before the current period
-   * ends this will cause a proration if `prorate=true`.
+   * ends, this will cause a proration if prorations have been enabled using `proration_behavior`.
+   * If set during a future period, this will always cause a proration for that period.
    */
   @SerializedName("cancel_at")
   Object cancelAt;
@@ -153,13 +154,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
   Object pendingInvoiceItemInterval;
 
   /**
-   * Boolean (defaults to `true`) telling us whether to [credit for unused
-   * time](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle
-   * changes (e.g. when switching plans, resetting `billing_cycle_anchor=now`, or starting a trial),
-   * or if an item's `quantity` changes. If `false`, the anchor period will be free (similar to a
-   * trial) and no proration adjustments will be created. This field has been deprecated and will be
-   * removed in a future API version. Use `proration_behavior=create_prorations` as a replacement
-   * for `prorate=true` and `proration_behavior=none` for `prorate=false`.
+   * This field has been renamed to `proration_behavior`. `prorate=true` can be replaced with
+   * `proration_behavior=create_prorations` and `prorate=false` can be replaced with
+   * `proration_behavior=none`.
    */
   @SerializedName("prorate")
   Boolean prorate;
@@ -410,7 +407,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
     /**
      * A timestamp at which the subscription should cancel. If set to a date before the current
-     * period ends this will cause a proration if `prorate=true`.
+     * period ends, this will cause a proration if prorations have been enabled using
+     * `proration_behavior`. If set during a future period, this will always cause a proration for
+     * that period.
      */
     public Builder setCancelAt(Long cancelAt) {
       this.cancelAt = cancelAt;
@@ -419,7 +418,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
 
     /**
      * A timestamp at which the subscription should cancel. If set to a date before the current
-     * period ends this will cause a proration if `prorate=true`.
+     * period ends, this will cause a proration if prorations have been enabled using
+     * `proration_behavior`. If set during a future period, this will always cause a proration for
+     * that period.
      */
     public Builder setCancelAt(EmptyParam cancelAt) {
       this.cancelAt = cancelAt;
@@ -712,14 +713,9 @@ public class SubscriptionUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Boolean (defaults to `true`) telling us whether to [credit for unused
-     * time](https://stripe.com/docs/subscriptions/billing-cycle#prorations) when the billing cycle
-     * changes (e.g. when switching plans, resetting `billing_cycle_anchor=now`, or starting a
-     * trial), or if an item's `quantity` changes. If `false`, the anchor period will be free
-     * (similar to a trial) and no proration adjustments will be created. This field has been
-     * deprecated and will be removed in a future API version. Use
-     * `proration_behavior=create_prorations` as a replacement for `prorate=true` and
-     * `proration_behavior=none` for `prorate=false`.
+     * This field has been renamed to `proration_behavior`. `prorate=true` can be replaced with
+     * `proration_behavior=create_prorations` and `prorate=false` can be replaced with
+     * `proration_behavior=none`.
      */
     public Builder setProrate(Boolean prorate) {
       this.prorate = prorate;

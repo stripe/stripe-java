@@ -3318,14 +3318,20 @@ public class CardCreateParams extends ApiRequestParams {
     @SerializedName("name")
     String name;
 
+    /** Shipment speed. */
+    @SerializedName("speed")
+    Speed speed;
+
     /** Packaging options. */
     @SerializedName("type")
     Type type;
 
-    private Shipping(Address address, Map<String, Object> extraParams, String name, Type type) {
+    private Shipping(
+        Address address, Map<String, Object> extraParams, String name, Speed speed, Type type) {
       this.address = address;
       this.extraParams = extraParams;
       this.name = name;
+      this.speed = speed;
       this.type = type;
     }
 
@@ -3340,11 +3346,13 @@ public class CardCreateParams extends ApiRequestParams {
 
       private String name;
 
+      private Speed speed;
+
       private Type type;
 
       /** Finalize and obtain parameter instance from this builder. */
       public Shipping build() {
-        return new Shipping(this.address, this.extraParams, this.name, this.type);
+        return new Shipping(this.address, this.extraParams, this.name, this.speed, this.type);
       }
 
       /** The address that the card is shipped to. */
@@ -3382,6 +3390,12 @@ public class CardCreateParams extends ApiRequestParams {
       /** The name printed on the shipping label when shipping the card. */
       public Builder setName(String name) {
         this.name = name;
+        return this;
+      }
+
+      /** Shipment speed. */
+      public Builder setSpeed(Speed speed) {
+        this.speed = speed;
         return this;
       }
 
@@ -3544,6 +3558,24 @@ public class CardCreateParams extends ApiRequestParams {
           this.state = state;
           return this;
         }
+      }
+    }
+
+    public enum Speed implements ApiRequestParams.EnumParam {
+      @SerializedName("express")
+      EXPRESS("express"),
+
+      @SerializedName("overnight")
+      OVERNIGHT("overnight"),
+
+      @SerializedName("standard")
+      STANDARD("standard");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Speed(String value) {
+        this.value = value;
       }
     }
 
