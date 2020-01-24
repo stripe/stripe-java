@@ -425,6 +425,14 @@ public class Card extends ApiResource implements HasId, MetadataStore<Card> {
     String name;
 
     /**
+     * Shipment speed.
+     *
+     * <p>One of `express`, `overnight`, or `standard`.
+     */
+    @SerializedName("speed")
+    String speed;
+
+    /**
      * The delivery status of the card.
      *
      * <p>One of `canceled`, `delivered`, `failure`, `pending`, `returned`, or `shipped`.

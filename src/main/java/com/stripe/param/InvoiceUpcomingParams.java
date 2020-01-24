@@ -71,7 +71,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
   /**
    * Timestamp indicating when the subscription should be scheduled to cancel. Will prorate if
-   * within the current period if `prorate=true`
+   * within the current period and prorations have been enabled using `proration_behavior`.`
    */
   @SerializedName("subscription_cancel_at")
   Object subscriptionCancelAt;
@@ -419,7 +419,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     /**
      * Timestamp indicating when the subscription should be scheduled to cancel. Will prorate if
-     * within the current period if `prorate=true`
+     * within the current period and prorations have been enabled using `proration_behavior`.`
      */
     public Builder setSubscriptionCancelAt(Long subscriptionCancelAt) {
       this.subscriptionCancelAt = subscriptionCancelAt;
@@ -428,7 +428,7 @@ public class InvoiceUpcomingParams extends ApiRequestParams {
 
     /**
      * Timestamp indicating when the subscription should be scheduled to cancel. Will prorate if
-     * within the current period if `prorate=true`
+     * within the current period and prorations have been enabled using `proration_behavior`.`
      */
     public Builder setSubscriptionCancelAt(EmptyParam subscriptionCancelAt) {
       this.subscriptionCancelAt = subscriptionCancelAt;

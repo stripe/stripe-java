@@ -1089,8 +1089,8 @@ public class CustomerCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * Type of the tax ID, one of `au_abn`, `ch_vat`, `eu_vat`, `in_gst`, `mx_rfc`, `no_vat`,
-     * `nz_gst`, `sg_uen`, or `za_vat`.
+     * Type of the tax ID, one of `au_abn`, `ca_bn`, `ch_vat`, `eu_vat`, `hk_br`, `in_gst`,
+     * `mx_rfc`, `no_vat`, `nz_gst`, `ru_inn`, `sg_uen`, or `za_vat`.
      */
     @SerializedName("type")
     Type type;
@@ -1148,8 +1148,8 @@ public class CustomerCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Type of the tax ID, one of `au_abn`, `ch_vat`, `eu_vat`, `in_gst`, `mx_rfc`, `no_vat`,
-       * `nz_gst`, `sg_uen`, or `za_vat`.
+       * Type of the tax ID, one of `au_abn`, `ca_bn`, `ch_vat`, `eu_vat`, `hk_br`, `in_gst`,
+       * `mx_rfc`, `no_vat`, `nz_gst`, `ru_inn`, `sg_uen`, or `za_vat`.
        */
       public Builder setType(Type type) {
         this.type = type;
@@ -1167,11 +1167,17 @@ public class CustomerCreateParams extends ApiRequestParams {
       @SerializedName("au_abn")
       AU_ABN("au_abn"),
 
+      @SerializedName("ca_bn")
+      CA_BN("ca_bn"),
+
       @SerializedName("ch_vat")
       CH_VAT("ch_vat"),
 
       @SerializedName("eu_vat")
       EU_VAT("eu_vat"),
+
+      @SerializedName("hk_br")
+      HK_BR("hk_br"),
 
       @SerializedName("in_gst")
       IN_GST("in_gst"),
@@ -1184,6 +1190,9 @@ public class CustomerCreateParams extends ApiRequestParams {
 
       @SerializedName("nz_gst")
       NZ_GST("nz_gst"),
+
+      @SerializedName("ru_inn")
+      RU_INN("ru_inn"),
 
       @SerializedName("sg_uen")
       SG_UEN("sg_uen"),
