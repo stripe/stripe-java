@@ -9,7 +9,7 @@ import java.util.AbstractMap;
  * @param <K> the type of the key
  * @param <V> the type of the value
  */
-class KeyValuePair<K, V> extends AbstractMap.SimpleEntry<K, V> {
+public class KeyValuePair<K, V> extends AbstractMap.SimpleEntry<K, V> {
   private static final long serialVersionUID = 1L;
 
   /**

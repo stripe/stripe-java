@@ -166,4 +166,15 @@ public class HttpContentTest extends BaseStripeTest {
             + "--test-boundary--\r\n",
         new String(content.byteArrayContent(), StandardCharsets.UTF_8));
   }
+
+  @Test
+  public void testStringContent() throws IOException {
+    List<KeyValuePair<String, String>> data = new ArrayList<KeyValuePair<String, String>>();
+    data.add(new KeyValuePair<String, String>("key", "value"));
+
+    HttpContent content = HttpContent.buildFormURLEncodedContent(data);
+    String stringContent = content.stringContent();
+    assertEquals(9, stringContent.length());
+    assertEquals("key=value", stringContent);
+  }
 }
