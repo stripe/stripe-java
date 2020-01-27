@@ -57,7 +57,7 @@ import java.util.Map;
 
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
-import com.stripe.model.Charge;
+import com.stripe.model.Customer;
 import com.stripe.net.RequestOptions;
 
 public class StripeExample {
@@ -65,14 +65,14 @@ public class StripeExample {
     public static void main(String[] args) {
         Stripe.apiKey = "sk_test_...";
 
-        Map<String, Object> chargeMap = new HashMap<String, Object>();
-        chargeMap.put("amount", 100);
-        chargeMap.put("currency", "usd");
-        chargeMap.put("source", "tok_visa"); // obtained via Stripe.js
+        Map<String, Object> customerMap = new HashMap<String, Object>();
+        customerMap.put("description", "Example descriptipn");
+        customerMap.put("email", "test@example.com");
+        customerMap.put("payment_method", "pm_card_visa"); // obtained via Stripe.js
 
         try {
-            Charge charge = Charge.create(chargeMap);
-            System.out.println(charge);
+            Customer customer = Customer.create(customerMap);
+            System.out.println(customer);
         } catch (StripeException e) {
             e.printStackTrace();
         }
@@ -96,9 +96,9 @@ RequestOptions requestOptions = new RequestOptionsBuilder()
     .setStripeAccount("acct_...")
     .build();
 
-Charge.list(null, requestOptions);
+Customer.list(null, requestOptions);
 
-Charge.retrieve("ch_123", requestOptions);
+Customer.retrieve("cus_123456789", requestOptions);
 ```
 
 ### Configuring automatic retries
@@ -117,7 +117,7 @@ Or on a finer grain level using `RequestOptions`:
 RequestOptions options = RequestOptions.builder()
     .setMaxNetworkRetries(2)
     .build();
-Charge.create(params, options);
+Customer.create(params, options);
 ```
 
 [Idempotency keys][idempotency-keys] are added to requests to guarantee that
@@ -139,7 +139,7 @@ RequestOptions options = RequestOptions.builder()
     .setConnectTimeout(30 * 1000) // in milliseconds
     .setReadTimeout(80 * 1000)
     .build();
-Charge.create(params, options);
+Customer.create(params, options);
 ```
 
 Please take care to set conservative read timeouts. Some API requests can take
@@ -190,8 +190,8 @@ You can run particular tests by passing `--tests Class#method`. Make sure you us
 
 ```sh
 ./gradlew test --tests com.stripe.model.AccountTest
-./gradlew test --tests com.stripe.functional.ChargeTest
-./gradlew test --tests com.stripe.functional.ChargeTest.testChargeCreate
+./gradlew test --tests com.stripe.functional.CustomerTest
+./gradlew test --tests com.stripe.functional.CustomerTest.testCustomerCreate
 ```
 
 The library uses [Spotless][spotless] along with
