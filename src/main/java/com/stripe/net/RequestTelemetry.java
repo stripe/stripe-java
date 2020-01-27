@@ -8,8 +8,8 @@ import java.util.Optional;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import lombok.Data;
 
-/** Helper class used by {@link LiveStripeResponseGetter} to manage request telemetry. */
-class RequestTelemetry {
+/** Helper class used by {@link HttpClient} to manage request telemetry. */
+public class RequestTelemetry {
   /** The name of the header used to send request telemetry in requests. */
   public static final String HEADER_NAME = "X-Stripe-Client-Telemetry";
 
@@ -21,23 +21,32 @@ class RequestTelemetry {
       new ConcurrentLinkedQueue<RequestMetrics>();
 
   /**
+   * Clears the queue of latency metrics for past requests.
+   *
+   * <p>This method is mostly useful for tests.
+   */
+  public static void resetMetrics() {
+    prevRequestMetrics.clear();
+  }
+
+  /**
    * Returns an {@link Optional} containing the value of the {@code X-Stripe-Telemetry} header to
-   * add to the request. If the header is already present in the request, or if there is available
-   * metrics, or if telemetry is disabled, then the returned {@code Optional} is empty.
+   * add to the request. If telemetry is disabled, or if the header is already present in the
+   * request, or if there is available metrics, then the returned {@code Optional} is empty.
    *
    * @param headers the request headers
    */
   public Optional<String> getHeaderValue(HttpHeaders headers) {
+    if (!Stripe.enableTelemetry) {
+      return Optional.empty();
+    }
+
     if (headers.firstValue(HEADER_NAME).isPresent()) {
       return Optional.empty();
     }
 
     RequestMetrics requestMetrics = prevRequestMetrics.poll();
     if (requestMetrics == null) {
-      return Optional.empty();
-    }
-
-    if (!Stripe.enableTelemetry) {
       return Optional.empty();
     }
 
