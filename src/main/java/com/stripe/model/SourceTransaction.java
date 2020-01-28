@@ -131,18 +131,22 @@ public class SourceTransaction extends StripeObject implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class GbpCreditTransferData extends StripeObject {
-    /** Bank account fingerprint associated with the transfer. */
+    /**
+     * Bank account fingerprint associated with the Stripe owned bank account receiving the
+     * transfer.
+     */
     @SerializedName("fingerprint")
     String fingerprint;
 
     /**
-     * The credit transfer rails the sender used to push money. The three rails are: Faster
-     * Payments, BACS, and CHAPS.
+     * The credit transfer rails the sender used to push this transfer. The possible rails are:
+     * Faster Payments, BACS, CHAPS, and wire transfers. Currently only Faster Payments is
+     * supported.
      */
     @SerializedName("funding_method")
     String fundingMethod;
 
-    /** Last 4 digits of account number associated with the transfer. */
+    /** Last 4 digits of sender account number associated with the transfer. */
     @SerializedName("last4")
     String last4;
 
@@ -150,11 +154,15 @@ public class SourceTransaction extends StripeObject implements HasId {
     @SerializedName("reference")
     String reference;
 
+    /** Sender account number associated with the transfer. */
+    @SerializedName("sender_account_number")
+    String senderAccountNumber;
+
     /** Sender name associated with the transfer. */
     @SerializedName("sender_name")
     String senderName;
 
-    /** Sort code associated with the transfer. */
+    /** Sender sort code associated with the transfer. */
     @SerializedName("sort_code")
     String sortCode;
   }

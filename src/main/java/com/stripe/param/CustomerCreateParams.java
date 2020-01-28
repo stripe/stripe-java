@@ -1089,8 +1089,8 @@ public class CustomerCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * Type of the tax ID, one of `au_abn`, `ca_bn`, `ch_vat`, `eu_vat`, `hk_br`, `in_gst`,
-     * `mx_rfc`, `no_vat`, `nz_gst`, `ru_inn`, `sg_uen`, or `za_vat`.
+     * Type of the tax ID, one of `au_abn`, `ca_bn`, `ch_vat`, `es_cif`, `eu_vat`, `hk_br`,
+     * `in_gst`, `mx_rfc`, `no_vat`, `nz_gst`, `ru_inn`, `sg_uen`, or `za_vat`.
      */
     @SerializedName("type")
     Type type;
@@ -1148,8 +1148,8 @@ public class CustomerCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Type of the tax ID, one of `au_abn`, `ca_bn`, `ch_vat`, `eu_vat`, `hk_br`, `in_gst`,
-       * `mx_rfc`, `no_vat`, `nz_gst`, `ru_inn`, `sg_uen`, or `za_vat`.
+       * Type of the tax ID, one of `au_abn`, `ca_bn`, `ch_vat`, `es_cif`, `eu_vat`, `hk_br`,
+       * `in_gst`, `mx_rfc`, `no_vat`, `nz_gst`, `ru_inn`, `sg_uen`, or `za_vat`.
        */
       public Builder setType(Type type) {
         this.type = type;
@@ -1172,6 +1172,9 @@ public class CustomerCreateParams extends ApiRequestParams {
 
       @SerializedName("ch_vat")
       CH_VAT("ch_vat"),
+
+      @SerializedName("es_cif")
+      ES_CIF("es_cif"),
 
       @SerializedName("eu_vat")
       EU_VAT("eu_vat"),
