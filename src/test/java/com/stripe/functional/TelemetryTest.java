@@ -11,6 +11,7 @@ import com.stripe.BaseStripeTest;
 import com.stripe.Stripe;
 import com.stripe.exception.StripeException;
 import com.stripe.model.Balance;
+import com.stripe.net.RequestTelemetry;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -41,14 +42,11 @@ public class TelemetryTest extends BaseStripeTest {
 
     Stripe.overrideApiBase(server.url("").toString());
     Stripe.enableTelemetry = true;
+    RequestTelemetry.resetMetrics();
 
     Balance.retrieve();
-    server.takeRequest();
-    // The first request may or may not include a `X-Stripe-Client-Telemetry` header depending on
-    // whether this test is the first to run or not. So we don't test the presence or absence of
-    // the header for the first request.
-    // Ideally we'd have a way of emptying the request metrics queue, but it's private and I don't
-    // want to make it public just for tests.
+    RecordedRequest request1 = server.takeRequest();
+    assertNull(request1.getHeader("X-Stripe-Client-Telemetry"));
 
     Balance.retrieve();
     RecordedRequest request2 = server.takeRequest();
@@ -91,6 +89,7 @@ public class TelemetryTest extends BaseStripeTest {
 
     Stripe.overrideApiBase(server.url("").toString());
     Stripe.enableTelemetry = false;
+    RequestTelemetry.resetMetrics();
 
     Balance.retrieve();
     RecordedRequest request1 = server.takeRequest();
@@ -118,6 +117,7 @@ public class TelemetryTest extends BaseStripeTest {
 
     Stripe.overrideApiBase(server.url("").toString());
     Stripe.enableTelemetry = true;
+    RequestTelemetry.resetMetrics();
 
     Runnable work =
         new Runnable() {
