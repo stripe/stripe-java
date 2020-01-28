@@ -12,6 +12,7 @@ apply plugin: "io.codearte.nexus-staging"
 
 nexusStaging {
     packageGroup = GROUP
+    numberOfRetries = 40
 }
 
 def isReleaseBuild() {
