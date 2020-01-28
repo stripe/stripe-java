@@ -1,5 +1,9 @@
 # Changelog
 
+## 17.4.0 - 2020-01-28
+* [#953](https://github.com/stripe/stripe-java/pull/953) Add new type for `TaxId` and `sender_account_name` on `SourceTransaction`
+* [#949](https://github.com/stripe/stripe-java/pull/949) Move examples to Customer instead of Charge
+
 ## 17.3.0 - 2020-01-24
 * [#948](https://github.com/stripe/stripe-java/pull/948) Add support for `shipping.speed` on Issuing `Card` and new `TaxID` types
 
