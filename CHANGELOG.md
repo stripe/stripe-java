@@ -1,5 +1,8 @@
 # Changelog
 
+## 17.5.0 - 2020-01-30
+* [#955](https://github.com/stripe/stripe-java/pull/955) Add support for FPX as a `PaymentMethod`
+
 ## 17.4.0 - 2020-01-28
 * [#953](https://github.com/stripe/stripe-java/pull/953) Add new type for `TaxId` and `sender_account_name` on `SourceTransaction`
 * [#949](https://github.com/stripe/stripe-java/pull/949) Move examples to Customer instead of Charge
