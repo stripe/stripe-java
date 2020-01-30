@@ -45,6 +45,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Customer> customer;
 
+  @SerializedName("fpx")
+  Fpx fpx;
+
   /** Unique identifier for the object. */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -83,7 +86,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name
    * matching this value. It contains additional information specific to the PaymentMethod type.
    *
-   * <p>One of `au_becs_debit`, `card`, `card_present`, `ideal`, or `sepa_debit`.
+   * <p>One of `au_becs_debit`, `card`, `card_present`, `fpx`, `ideal`, or `sepa_debit`.
    */
   @SerializedName("type")
   String type;
@@ -623,6 +626,24 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class CardPresent extends StripeObject {}
+
+  @Getter
+  @Setter
+  @EqualsAndHashCode(callSuper = false)
+  public static class Fpx extends StripeObject {
+    /** Account holder type, if provided. Can be one of `individual` or `company`. */
+    @SerializedName("account_holder_type")
+    String accountHolderType;
+
+    /**
+     * The customer's bank, if provided. Can be one of `affin_bank`, `alliance_bank`, `ambank`,
+     * `cimb`, `bank_islam`, `bank_rakyat`, `bank_muamalat`, `bsn`, `deutsche_bank`,
+     * `hong_leong_bank`, `hsbc`, `kfh`, `maybank2u`, `maybank2e`, `ocbc`, `public_bank`,
+     * `pb_enterprise`, `rhb`, `standard_chartered`, `uob`, or `uob_regional`.
+     */
+    @SerializedName("bank")
+    String bank;
+  }
 
   @Getter
   @Setter

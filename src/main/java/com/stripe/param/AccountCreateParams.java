@@ -15,7 +15,7 @@ public class AccountCreateParams extends ApiRequestParams {
   @SerializedName("account_token")
   String accountToken;
 
-  /** Non-essential business information about the account. */
+  /** Business information about the account. */
   @SerializedName("business_profile")
   BusinessProfile businessProfile;
 
@@ -222,7 +222,7 @@ public class AccountCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** Non-essential business information about the account. */
+    /** Business information about the account. */
     public Builder setBusinessProfile(BusinessProfile businessProfile) {
       this.businessProfile = businessProfile;
       return this;
@@ -445,8 +445,8 @@ public class AccountCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * The merchant category code for the account. MCCs are used to classify businesses based on the
-     * goods or services they provide.
+     * [The merchant category code for the account](https://stripe.com/docs/connect/setting-mcc).
+     * MCCs are used to classify businesses based on the goods or services they provide.
      */
     @SerializedName("mcc")
     String mcc;
@@ -558,8 +558,8 @@ public class AccountCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The merchant category code for the account. MCCs are used to classify businesses based on
-       * the goods or services they provide.
+       * [The merchant category code for the account](https://stripe.com/docs/connect/setting-mcc).
+       * MCCs are used to classify businesses based on the goods or services they provide.
        */
       public Builder setMcc(String mcc) {
         this.mcc = mcc;

@@ -22,7 +22,7 @@ import lombok.Setter;
 @Setter
 @EqualsAndHashCode(callSuper = false)
 public class Account extends ApiResource implements MetadataStore<Account>, PaymentSource {
-  /** Optional information related to the business. */
+  /** Business information about the account. */
   @SerializedName("business_profile")
   BusinessProfile businessProfile;
 
@@ -566,8 +566,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @EqualsAndHashCode(callSuper = false)
   public static class BusinessProfile extends StripeObject {
     /**
-     * The merchant category code for the account. MCCs are used to classify businesses based on the
-     * goods or services they provide.
+     * [The merchant category code for the account](https://stripe.com/docs/connect/setting-mcc).
+     * MCCs are used to classify businesses based on the goods or services they provide.
      */
     @SerializedName("mcc")
     String mcc;
