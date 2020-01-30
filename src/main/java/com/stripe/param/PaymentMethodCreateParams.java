@@ -51,6 +51,10 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
+  /** If this is an `fpx` PaymentMethod, this hash contains details about the FPX payment method. */
+  @SerializedName("fpx")
+  Fpx fpx;
+
   /**
    * If this is an `ideal` PaymentMethod, this hash contains details about the iDEAL payment method.
    */
@@ -93,6 +97,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       String customer,
       List<String> expand,
       Map<String, Object> extraParams,
+      Fpx fpx,
       Ideal ideal,
       Map<String, String> metadata,
       String paymentMethod,
@@ -104,6 +109,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     this.customer = customer;
     this.expand = expand;
     this.extraParams = extraParams;
+    this.fpx = fpx;
     this.ideal = ideal;
     this.metadata = metadata;
     this.paymentMethod = paymentMethod;
@@ -128,6 +134,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
     private Map<String, Object> extraParams;
 
+    private Fpx fpx;
+
     private Ideal ideal;
 
     private Map<String, String> metadata;
@@ -147,6 +155,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
           this.customer,
           this.expand,
           this.extraParams,
+          this.fpx,
           this.ideal,
           this.metadata,
           this.paymentMethod,
@@ -253,6 +262,14 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
         this.extraParams = new HashMap<>();
       }
       this.extraParams.putAll(map);
+      return this;
+    }
+
+    /**
+     * If this is an `fpx` PaymentMethod, this hash contains details about the FPX payment method.
+     */
+    public Builder setFpx(Fpx fpx) {
+      this.fpx = fpx;
       return this;
     }
 
@@ -837,6 +854,174 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   }
 
   @Getter
+  public static class Fpx {
+    /** Account holder type for FPX transaction. */
+    @SerializedName("account_holder_type")
+    AccountHolderType accountHolderType;
+
+    /** The customer's bank. */
+    @SerializedName("bank")
+    Bank bank;
+
+    /**
+     * Map of extra parameters for custom features not available in this client library. The content
+     * in this map is not serialized under this field's {@code @SerializedName} value. Instead, each
+     * key/value pair is serialized as if the key is a root-level field (serialized) name in this
+     * param object. Effectively, this map is flattened to its parent instance.
+     */
+    @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
+    Map<String, Object> extraParams;
+
+    private Fpx(AccountHolderType accountHolderType, Bank bank, Map<String, Object> extraParams) {
+      this.accountHolderType = accountHolderType;
+      this.bank = bank;
+      this.extraParams = extraParams;
+    }
+
+    public static Builder builder() {
+      return new Builder();
+    }
+
+    public static class Builder {
+      private AccountHolderType accountHolderType;
+
+      private Bank bank;
+
+      private Map<String, Object> extraParams;
+
+      /** Finalize and obtain parameter instance from this builder. */
+      public Fpx build() {
+        return new Fpx(this.accountHolderType, this.bank, this.extraParams);
+      }
+
+      /** Account holder type for FPX transaction. */
+      public Builder setAccountHolderType(AccountHolderType accountHolderType) {
+        this.accountHolderType = accountHolderType;
+        return this;
+      }
+
+      /** The customer's bank. */
+      public Builder setBank(Bank bank) {
+        this.bank = bank;
+        return this;
+      }
+
+      /**
+       * Add a key/value pair to `extraParams` map. A map is initialized for the first `put/putAll`
+       * call, and subsequent calls add additional key/value pairs to the original map. See {@link
+       * PaymentMethodCreateParams.Fpx#extraParams} for the field documentation.
+       */
+      public Builder putExtraParam(String key, Object value) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.put(key, value);
+        return this;
+      }
+
+      /**
+       * Add all map key/value pairs to `extraParams` map. A map is initialized for the first
+       * `put/putAll` call, and subsequent calls add additional key/value pairs to the original map.
+       * See {@link PaymentMethodCreateParams.Fpx#extraParams} for the field documentation.
+       */
+      public Builder putAllExtraParam(Map<String, Object> map) {
+        if (this.extraParams == null) {
+          this.extraParams = new HashMap<>();
+        }
+        this.extraParams.putAll(map);
+        return this;
+      }
+    }
+
+    public enum AccountHolderType implements ApiRequestParams.EnumParam {
+      @SerializedName("company")
+      COMPANY("company"),
+
+      @SerializedName("individual")
+      INDIVIDUAL("individual");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      AccountHolderType(String value) {
+        this.value = value;
+      }
+    }
+
+    public enum Bank implements ApiRequestParams.EnumParam {
+      @SerializedName("affin_bank")
+      AFFIN_BANK("affin_bank"),
+
+      @SerializedName("alliance_bank")
+      ALLIANCE_BANK("alliance_bank"),
+
+      @SerializedName("ambank")
+      AMBANK("ambank"),
+
+      @SerializedName("bank_islam")
+      BANK_ISLAM("bank_islam"),
+
+      @SerializedName("bank_muamalat")
+      BANK_MUAMALAT("bank_muamalat"),
+
+      @SerializedName("bank_rakyat")
+      BANK_RAKYAT("bank_rakyat"),
+
+      @SerializedName("bsn")
+      BSN("bsn"),
+
+      @SerializedName("cimb")
+      CIMB("cimb"),
+
+      @SerializedName("deutsche_bank")
+      DEUTSCHE_BANK("deutsche_bank"),
+
+      @SerializedName("hong_leong_bank")
+      HONG_LEONG_BANK("hong_leong_bank"),
+
+      @SerializedName("hsbc")
+      HSBC("hsbc"),
+
+      @SerializedName("kfh")
+      KFH("kfh"),
+
+      @SerializedName("maybank2e")
+      MAYBANK2E("maybank2e"),
+
+      @SerializedName("maybank2u")
+      MAYBANK2U("maybank2u"),
+
+      @SerializedName("ocbc")
+      OCBC("ocbc"),
+
+      @SerializedName("pb_enterprise")
+      PB_ENTERPRISE("pb_enterprise"),
+
+      @SerializedName("public_bank")
+      PUBLIC_BANK("public_bank"),
+
+      @SerializedName("rhb")
+      RHB("rhb"),
+
+      @SerializedName("standard_chartered")
+      STANDARD_CHARTERED("standard_chartered"),
+
+      @SerializedName("uob")
+      UOB("uob"),
+
+      @SerializedName("uob_regional")
+      UOB_REGIONAL("uob_regional");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Bank(String value) {
+        this.value = value;
+      }
+    }
+  }
+
+  @Getter
   public static class Ideal {
     /** The customer's bank. */
     @SerializedName("bank")
@@ -1026,6 +1211,9 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
 
     @SerializedName("card_present")
     CARD_PRESENT("card_present"),
+
+    @SerializedName("fpx")
+    FPX("fpx"),
 
     @SerializedName("ideal")
     IDEAL("ideal"),
