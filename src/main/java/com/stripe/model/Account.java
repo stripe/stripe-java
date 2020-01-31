@@ -29,7 +29,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   /**
    * The business type.
    *
-   * <p>One of `company`, or `individual`.
+   * <p>One of `company`, `government_entity`, `individual`, or `non_profit`.
    */
   @SerializedName("business_type")
   String businessType;
@@ -702,6 +702,17 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     /** The company's phone number (used for verification). */
     @SerializedName("phone")
     String phone;
+
+    /**
+     * The category identifying the legal structure of the company or legal entity.
+     *
+     * <p>One of `government_instrumentality`, `governmental_unit`, `incorporated_non_profit`,
+     * `multi_member_llc`, `private_corporation`, `private_partnership`, `public_corporation`,
+     * `public_partnership`, `tax_exempt_government_instrumentality`, `unincorporated_association`,
+     * or `unincorporated_non_profit`.
+     */
+    @SerializedName("structure")
+    String structure;
 
     /** Whether the company's business ID number was provided. */
     @SerializedName("tax_id_provided")
