@@ -1,5 +1,8 @@
 # Changelog
 
+## 17.6.0 - 2020-01-31
+* [#959](https://github.com/stripe/stripe-java/pull/959) Add support for `company.structure` on `Account` and new types of `TaxId`
+
 ## 17.5.0 - 2020-01-30
 * [#955](https://github.com/stripe/stripe-java/pull/955) Add support for FPX as a `PaymentMethod`
 
