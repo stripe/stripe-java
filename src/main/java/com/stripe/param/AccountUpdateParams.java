@@ -2,6 +2,7 @@ package com.stripe.param;
 
 import com.google.gson.annotations.SerializedName;
 import com.stripe.net.ApiRequestParams;
+import com.stripe.net.ApiRequestParams.EnumParam;
 import com.stripe.param.common.EmptyParam;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -25,7 +26,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
   /**
    * Information about the company or business. This field is null unless `business_type` is set to
-   * `company`.
+   * `company`, `government_entity`, or `non_profit`.
    */
   @SerializedName("company")
   Company company;
@@ -231,7 +232,7 @@ public class AccountUpdateParams extends ApiRequestParams {
 
     /**
      * Information about the company or business. This field is null unless `business_type` is set
-     * to `company`.
+     * to `company`, `government_entity`, or `non_profit`.
      */
     public Builder setCompany(Company company) {
       this.company = company;
@@ -727,6 +728,10 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("phone")
     Object phone;
 
+    /** The category identifying the legal structure of the company or legal entity. */
+    @SerializedName("structure")
+    EnumParam structure;
+
     /**
      * The business ID number of the company, as appropriate for the company’s country. (Examples
      * are an Employer ID Number in the U.S., a Business Number in Canada, or a Company Number in
@@ -759,6 +764,7 @@ public class AccountUpdateParams extends ApiRequestParams {
         Object nameKanji,
         Boolean ownersProvided,
         Object phone,
+        EnumParam structure,
         Object taxId,
         Object taxIdRegistrar,
         Object vatId,
@@ -774,6 +780,7 @@ public class AccountUpdateParams extends ApiRequestParams {
       this.nameKanji = nameKanji;
       this.ownersProvided = ownersProvided;
       this.phone = phone;
+      this.structure = structure;
       this.taxId = taxId;
       this.taxIdRegistrar = taxIdRegistrar;
       this.vatId = vatId;
@@ -807,6 +814,8 @@ public class AccountUpdateParams extends ApiRequestParams {
 
       private Object phone;
 
+      private EnumParam structure;
+
       private Object taxId;
 
       private Object taxIdRegistrar;
@@ -829,6 +838,7 @@ public class AccountUpdateParams extends ApiRequestParams {
             this.nameKanji,
             this.ownersProvided,
             this.phone,
+            this.structure,
             this.taxId,
             this.taxIdRegistrar,
             this.vatId,
@@ -957,6 +967,18 @@ public class AccountUpdateParams extends ApiRequestParams {
       /** The company's phone number (used for verification). */
       public Builder setPhone(EmptyParam phone) {
         this.phone = phone;
+        return this;
+      }
+
+      /** The category identifying the legal structure of the company or legal entity. */
+      public Builder setStructure(Structure structure) {
+        this.structure = structure;
+        return this;
+      }
+
+      /** The category identifying the legal structure of the company or legal entity. */
+      public Builder setStructure(EmptyParam structure) {
+        this.structure = structure;
         return this;
       }
 
@@ -1822,6 +1844,48 @@ public class AccountUpdateParams extends ApiRequestParams {
             return this;
           }
         }
+      }
+    }
+
+    public enum Structure implements ApiRequestParams.EnumParam {
+      @SerializedName("government_instrumentality")
+      GOVERNMENT_INSTRUMENTALITY("government_instrumentality"),
+
+      @SerializedName("governmental_unit")
+      GOVERNMENTAL_UNIT("governmental_unit"),
+
+      @SerializedName("incorporated_non_profit")
+      INCORPORATED_NON_PROFIT("incorporated_non_profit"),
+
+      @SerializedName("multi_member_llc")
+      MULTI_MEMBER_LLC("multi_member_llc"),
+
+      @SerializedName("private_corporation")
+      PRIVATE_CORPORATION("private_corporation"),
+
+      @SerializedName("private_partnership")
+      PRIVATE_PARTNERSHIP("private_partnership"),
+
+      @SerializedName("public_corporation")
+      PUBLIC_CORPORATION("public_corporation"),
+
+      @SerializedName("public_partnership")
+      PUBLIC_PARTNERSHIP("public_partnership"),
+
+      @SerializedName("tax_exempt_government_instrumentality")
+      TAX_EXEMPT_GOVERNMENT_INSTRUMENTALITY("tax_exempt_government_instrumentality"),
+
+      @SerializedName("unincorporated_association")
+      UNINCORPORATED_ASSOCIATION("unincorporated_association"),
+
+      @SerializedName("unincorporated_non_profit")
+      UNINCORPORATED_NON_PROFIT("unincorporated_non_profit");
+
+      @Getter(onMethod_ = {@Override})
+      private final String value;
+
+      Structure(String value) {
+        this.value = value;
       }
     }
   }
@@ -4430,8 +4494,14 @@ public class AccountUpdateParams extends ApiRequestParams {
     @SerializedName("company")
     COMPANY("company"),
 
+    @SerializedName("government_entity")
+    GOVERNMENT_ENTITY("government_entity"),
+
     @SerializedName("individual")
-    INDIVIDUAL("individual");
+    INDIVIDUAL("individual"),
+
+    @SerializedName("non_profit")
+    NON_PROFIT("non_profit");
 
     @Getter(onMethod_ = {@Override})
     private final String value;

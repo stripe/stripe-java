@@ -532,11 +532,13 @@ public class PlanCreateParams extends ApiRequestParams {
     String name;
 
     /**
-     * An arbitrary string to be displayed on your customer's credit card statement. This may be up
-     * to 22 characters. The statement description may not include "' characters, and will appear on
-     * your customer's statement in capital letters. Non-ASCII characters are automatically
-     * stripped. While most banks display this information consistently, some may display it
-     * incorrectly or not at all.
+     * An arbitrary string to be displayed on your customer's credit card or bank statement. While
+     * most banks display this information consistently, some may display it incorrectly or not at
+     * all.
+     *
+     * <p>This may be up to 22 characters. The statement description may not include `<`, `>`, `\`,
+     * `"`, `'` characters, and will appear on your customer's statement in capital letters.
+     * Non-ASCII characters are automatically stripped.
      */
     @SerializedName("statement_descriptor")
     String statementDescriptor;
@@ -673,11 +675,13 @@ public class PlanCreateParams extends ApiRequestParams {
       }
 
       /**
-       * An arbitrary string to be displayed on your customer's credit card statement. This may be
-       * up to 22 characters. The statement description may not include "' characters, and will
-       * appear on your customer's statement in capital letters. Non-ASCII characters are
-       * automatically stripped. While most banks display this information consistently, some may
-       * display it incorrectly or not at all.
+       * An arbitrary string to be displayed on your customer's credit card or bank statement. While
+       * most banks display this information consistently, some may display it incorrectly or not at
+       * all.
+       *
+       * <p>This may be up to 22 characters. The statement description may not include `<`, `>`,
+       * `\`, `"`, `'` characters, and will appear on your customer's statement in capital letters.
+       * Non-ASCII characters are automatically stripped.
        */
       public Builder setStatementDescriptor(String statementDescriptor) {
         this.statementDescriptor = statementDescriptor;
