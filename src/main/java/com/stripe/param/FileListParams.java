@@ -235,6 +235,9 @@ public class FileListParams extends ApiRequestParams {
   }
 
   public enum Purpose implements ApiRequestParams.EnumParam {
+    @SerializedName("additional_verification")
+    ADDITIONAL_VERIFICATION("additional_verification"),
+
     @SerializedName("business_icon")
     BUSINESS_ICON("business_icon"),
 
