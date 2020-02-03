@@ -12,6 +12,14 @@ import lombok.Getter;
 
 @Getter
 public class PaymentIntentConfirmParams extends ApiRequestParams {
+  /**
+   * Set to `true` to fail the payment attempt if the PaymentIntent transitions into
+   * `requires_action`. This parameter is intended for simpler integrations that do not handle
+   * customer actions.
+   */
+  @SerializedName("error_on_requires_action")
+  Boolean errorOnRequiresAction;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -131,6 +139,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   Boolean useStripeSdk;
 
   private PaymentIntentConfirmParams(
+      Boolean errorOnRequiresAction,
       List<String> expand,
       Map<String, Object> extraParams,
       String mandate,
@@ -145,6 +154,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
       Object shipping,
       String source,
       Boolean useStripeSdk) {
+    this.errorOnRequiresAction = errorOnRequiresAction;
     this.expand = expand;
     this.extraParams = extraParams;
     this.mandate = mandate;
@@ -166,6 +176,8 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
   }
 
   public static class Builder {
+    private Boolean errorOnRequiresAction;
+
     private List<String> expand;
 
     private Map<String, Object> extraParams;
@@ -197,6 +209,7 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
     /** Finalize and obtain parameter instance from this builder. */
     public PaymentIntentConfirmParams build() {
       return new PaymentIntentConfirmParams(
+          this.errorOnRequiresAction,
           this.expand,
           this.extraParams,
           this.mandate,
@@ -211,6 +224,16 @@ public class PaymentIntentConfirmParams extends ApiRequestParams {
           this.shipping,
           this.source,
           this.useStripeSdk);
+    }
+
+    /**
+     * Set to `true` to fail the payment attempt if the PaymentIntent transitions into
+     * `requires_action`. This parameter is intended for simpler integrations that do not handle
+     * customer actions.
+     */
+    public Builder setErrorOnRequiresAction(Boolean errorOnRequiresAction) {
+      this.errorOnRequiresAction = errorOnRequiresAction;
+      return this;
     }
 
     /**
