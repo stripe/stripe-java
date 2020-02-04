@@ -1,5 +1,8 @@
 # Changelog
 
+## 17.8.0 - 2020-02-04
+* [#961](https://github.com/stripe/stripe-java/pull/961) Rename `sort_code` to `sender_sort_code` on `SourceTransaction` for BACS debit. (This is technically a breaking change.)
+
 ## 17.7.0 - 2020-02-03
 * [#960](https://github.com/stripe/stripe-java/pull/960) Add support for `error_on_requires_action` on `PaymentIntent`
 * [#957](https://github.com/stripe/stripe-java/pull/957) Add additional verification file purpose
