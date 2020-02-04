@@ -67,6 +67,14 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
   @SerializedName("description")
   String description;
 
+  /**
+   * Set to `true` to fail the payment attempt if the PaymentIntent transitions into
+   * `requires_action`. This parameter is intended for simpler integrations that do not handle
+   * customer actions. This can only be set when `confirm=true` is supplied.
+   */
+  @SerializedName("error_on_requires_action")
+  Boolean errorOnRequiresAction;
+
   /** Specifies which fields in the response should be expanded. */
   @SerializedName("expand")
   List<String> expand;
@@ -259,6 +267,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
       String currency,
       String customer,
       String description,
+      Boolean errorOnRequiresAction,
       List<String> expand,
       Map<String, Object> extraParams,
       String mandate,
@@ -288,6 +297,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     this.currency = currency;
     this.customer = customer;
     this.description = description;
+    this.errorOnRequiresAction = errorOnRequiresAction;
     this.expand = expand;
     this.extraParams = extraParams;
     this.mandate = mandate;
@@ -331,6 +341,8 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     private String customer;
 
     private String description;
+
+    private Boolean errorOnRequiresAction;
 
     private List<String> expand;
 
@@ -385,6 +397,7 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
           this.currency,
           this.customer,
           this.description,
+          this.errorOnRequiresAction,
           this.expand,
           this.extraParams,
           this.mandate,
@@ -479,6 +492,16 @@ public class PaymentIntentCreateParams extends ApiRequestParams {
     /** An arbitrary string attached to the object. Often useful for displaying to users. */
     public Builder setDescription(String description) {
       this.description = description;
+      return this;
+    }
+
+    /**
+     * Set to `true` to fail the payment attempt if the PaymentIntent transitions into
+     * `requires_action`. This parameter is intended for simpler integrations that do not handle
+     * customer actions. This can only be set when `confirm=true` is supplied.
+     */
+    public Builder setErrorOnRequiresAction(Boolean errorOnRequiresAction) {
+      this.errorOnRequiresAction = errorOnRequiresAction;
       return this;
     }
 
