@@ -194,12 +194,18 @@ public class SubscriptionSchedule extends ApiResource
         url, params, SubscriptionScheduleCollection.class, options);
   }
 
-  /** Creates a new subscription schedule object. */
+  /**
+   * Creates a new subscription schedule object. Each customer can have up to 25 active or scheduled
+   * subscriptions.
+   */
   public static SubscriptionSchedule create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a new subscription schedule object. */
+  /**
+   * Creates a new subscription schedule object. Each customer can have up to 25 active or scheduled
+   * subscriptions.
+   */
   public static SubscriptionSchedule create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_schedules");
@@ -207,13 +213,19 @@ public class SubscriptionSchedule extends ApiResource
         ApiResource.RequestMethod.POST, url, params, SubscriptionSchedule.class, options);
   }
 
-  /** Creates a new subscription schedule object. */
+  /**
+   * Creates a new subscription schedule object. Each customer can have up to 25 active or scheduled
+   * subscriptions.
+   */
   public static SubscriptionSchedule create(SubscriptionScheduleCreateParams params)
       throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a new subscription schedule object. */
+  /**
+   * Creates a new subscription schedule object. Each customer can have up to 25 active or scheduled
+   * subscriptions.
+   */
   public static SubscriptionSchedule create(
       SubscriptionScheduleCreateParams params, RequestOptions options) throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscription_schedules");
