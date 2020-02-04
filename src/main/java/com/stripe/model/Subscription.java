@@ -443,12 +443,18 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
     return ApiResource.requestCollection(url, params, SubscriptionCollection.class, options);
   }
 
-  /** Creates a new subscription on an existing customer. */
+  /**
+   * Creates a new subscription on an existing customer. Each customer can have up to 25 active or
+   * scheduled subscriptions.
+   */
   public static Subscription create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a new subscription on an existing customer. */
+  /**
+   * Creates a new subscription on an existing customer. Each customer can have up to 25 active or
+   * scheduled subscriptions.
+   */
   public static Subscription create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscriptions");
@@ -456,12 +462,18 @@ public class Subscription extends ApiResource implements HasId, MetadataStore<Su
         ApiResource.RequestMethod.POST, url, params, Subscription.class, options);
   }
 
-  /** Creates a new subscription on an existing customer. */
+  /**
+   * Creates a new subscription on an existing customer. Each customer can have up to 25 active or
+   * scheduled subscriptions.
+   */
   public static Subscription create(SubscriptionCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
   }
 
-  /** Creates a new subscription on an existing customer. */
+  /**
+   * Creates a new subscription on an existing customer. Each customer can have up to 25 active or
+   * scheduled subscriptions.
+   */
   public static Subscription create(SubscriptionCreateParams params, RequestOptions options)
       throws StripeException {
     String url = String.format("%s%s", Stripe.getApiBase(), "/v1/subscriptions");

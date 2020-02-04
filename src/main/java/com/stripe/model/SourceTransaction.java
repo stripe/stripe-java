@@ -163,8 +163,8 @@ public class SourceTransaction extends StripeObject implements HasId {
     String senderName;
 
     /** Sender sort code associated with the transfer. */
-    @SerializedName("sort_code")
-    String sortCode;
+    @SerializedName("sender_sort_code")
+    String senderSortCode;
   }
 
   @Getter
