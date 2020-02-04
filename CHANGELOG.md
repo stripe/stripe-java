@@ -1,5 +1,9 @@
 # Changelog
 
+## 17.7.0 - 2020-02-03
+* [#960](https://github.com/stripe/stripe-java/pull/960) Add support for `error_on_requires_action` on `PaymentIntent`
+* [#957](https://github.com/stripe/stripe-java/pull/957) Add additional verification file purpose
+
 ## 17.6.0 - 2020-01-31
 * [#959](https://github.com/stripe/stripe-java/pull/959) Add support for `company.structure` on `Account` and new types of `TaxId`
 
