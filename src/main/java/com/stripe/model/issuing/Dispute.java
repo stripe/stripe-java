@@ -75,11 +75,11 @@ public class Dispute extends ApiResource implements HasId, MetadataStore<Dispute
   @SerializedName("object")
   String object;
 
-  /** Reason for this dispute. One of `other` or `fraudulent`. */
+  /** Reason for this dispute. One of `fraudulent` or `other`. */
   @SerializedName("reason")
   String reason;
 
-  /** Current status of dispute. One of `lost`, `under_review`, `unsubmitted`, or `won`. */
+  /** Current status of dispute. One of `unsubmitted`, `under_review`, `won`, or `lost`. */
   @SerializedName("status")
   String status;
 

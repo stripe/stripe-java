@@ -17,13 +17,13 @@ public class ChargeCaptureParams extends ApiRequestParams {
   @SerializedName("amount")
   Long amount;
 
-  /** An application fee to add on to this charge. Can only be used with Stripe Connect. */
+  /** An application fee to add on to this charge. */
   @SerializedName("application_fee")
   Long applicationFee;
 
   /**
    * An application fee amount to add on to this charge, which must be less than or equal to the
-   * original amount. Can only be used with Stripe Connect.
+   * original amount.
    */
   @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
@@ -153,7 +153,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
       return this;
     }
 
-    /** An application fee to add on to this charge. Can only be used with Stripe Connect. */
+    /** An application fee to add on to this charge. */
     public Builder setApplicationFee(Long applicationFee) {
       this.applicationFee = applicationFee;
       return this;
@@ -161,7 +161,7 @@ public class ChargeCaptureParams extends ApiRequestParams {
 
     /**
      * An application fee amount to add on to this charge, which must be less than or equal to the
-     * original amount. Can only be used with Stripe Connect.
+     * original amount.
      */
     public Builder setApplicationFeeAmount(Long applicationFeeAmount) {
       this.applicationFeeAmount = applicationFeeAmount;

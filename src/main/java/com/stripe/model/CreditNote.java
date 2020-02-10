@@ -150,7 +150,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   Long total;
 
   /**
-   * Type of this credit note, one of `post_payment` or `pre_payment`. A `pre_payment` credit note
+   * Type of this credit note, one of `pre_payment` or `post_payment`. A `pre_payment` credit note
    * means it was issued when the invoice was open. A `post_payment` credit note means it was issued
    * when the invoice was paid.
    */

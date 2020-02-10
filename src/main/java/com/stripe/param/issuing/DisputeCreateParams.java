@@ -48,7 +48,7 @@ public class DisputeCreateParams extends ApiRequestParams {
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** The reason for the dispute. One of `other` or `fraudulent`. */
+  /** The reason for the dispute. */
   @SerializedName("reason")
   Reason reason;
 
@@ -201,7 +201,7 @@ public class DisputeCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The reason for the dispute. One of `other` or `fraudulent`. */
+    /** The reason for the dispute. */
     public Builder setReason(Reason reason) {
       this.reason = reason;
       return this;

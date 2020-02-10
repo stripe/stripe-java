@@ -94,8 +94,8 @@ public class CustomerBalanceTransaction extends ApiResource
 
   /**
    * Transaction type: `adjustment`, `applied_to_invoice`, `credit_note`, `initial`,
-   * `invoice_too_large`, `invoice_too_small`, `unapplied_from_invoice`, or
-   * `unspent_receiver_credit`. See the [Customer Balance
+   * `invoice_too_large`, `invoice_too_small`, `unspent_receiver_credit`, or
+   * `unapplied_from_invoice`. See the [Customer Balance
    * page](https://stripe.com/docs/billing/customer/balance#types) to learn more about transaction
    * types.
    *
