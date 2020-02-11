@@ -1,12 +1,24 @@
-# Stripe Java Bindings [![Build Status](https://travis-ci.org/stripe/stripe-java.svg?branch=master)](https://travis-ci.org/stripe/stripe-java)
+# Stripe Java client library
 
-You can sign up for a Stripe account at https://stripe.com.
+[![Maven Central](https://img.shields.io/maven-central/v/com.stripe/stripe-java)](https://mvnrepository.com/artifact/com.stripe/stripe-java)
+[![JavaDoc](http://img.shields.io/badge/javadoc-reference-blue.svg)](https://stripe.dev/stripe-java)
+[![Build Status](https://travis-ci.org/stripe/stripe-java.svg?branch=master)](https://travis-ci.org/stripe/stripe-java)
 
-## Requirements
-
-Java 1.8 or later.
+The official [Stripe][stripe] Java client library.
 
 ## Installation
+
+### Requirements
+
+- Java 1.8 or later
+
+### Gradle users
+
+Add this dependency to your project's build file:
+
+```groovy
+implementation "com.stripe:stripe-java:17.9.1"
+```
 
 ### Maven users
 
@@ -20,24 +32,18 @@ Add this dependency to your project's POM:
 </dependency>
 ```
 
-### Gradle users
-
-Add this dependency to your project's build file:
-
-```groovy
-implementation "com.stripe:stripe-java:17.9.1"
-```
-
 ### Others
 
 You'll need to manually install the following JARs:
 
-* The Stripe JAR from https://github.com/stripe/stripe-java/releases/latest
-* [Google Gson](https://github.com/google/gson) from <https://repo1.maven.org/maven2/com/google/code/gson/gson/2.8.5/gson-2.8.5.jar>.
+- The Stripe JAR from <https://github.com/stripe/stripe-java/releases/latest>
+- [Google Gson][gson] from <https://repo1.maven.org/maven2/com/google/code/gson/gson/2.8.5/gson-2.8.5.jar>.
 
-### [ProGuard](https://www.guardsquare.com/en/products/proguard)
+### [ProGuard][proguard]
 
-If you're planning on using ProGuard, make sure that you exclude the Stripe bindings. You can do this by adding the following to your `proguard.cfg` file:
+If you're planning on using ProGuard, make sure that you exclude the Stripe
+client library. You can do this by adding the following to your `proguard.cfg`
+file:
 
 ```
 -keep class com.stripe.** { *; }
@@ -45,7 +51,10 @@ If you're planning on using ProGuard, make sure that you exclude the Stripe bind
 
 ## Documentation
 
-Please see the [Java API docs](https://stripe.com/docs/api/java) for the most up-to-date documentation.
+Please see the [Java API docs][api-docs] for the most
+up-to-date documentation.
+
+You can also refer to the [online Javadoc][javadoc].
 
 ## Usage
 
@@ -80,7 +89,7 @@ public class StripeExample {
 }
 ```
 
-See the project's [functional tests](https://github.com/stripe/stripe-java/blob/master/src/test/java/com/stripe/functional/) for more examples.
+See the project's [functional tests][functional-tests] for more examples.
 
 ### Per-request Configuration
 
@@ -180,13 +189,20 @@ go get -u github.com/stripe/stripe-mock
 stripe-mock
 ```
 
-You must have Gradle installed. To run the tests:
+To run all checks (tests and code formatting):
+
+```sh
+./gradlew check
+```
+
+To run the tests:
 
 ```sh
 ./gradlew test
 ```
 
-You can run particular tests by passing `--tests Class#method`. Make sure you use the fully qualified class name. For example:
+You can run particular tests by passing `--tests Class#method`. Make sure you
+use the fully qualified class name. For example:
 
 ```sh
 ./gradlew test --tests com.stripe.model.AccountTest
@@ -203,14 +219,22 @@ with:
 ./gradlew spotlessApply
 ```
 
-The library uses [Project Lombok][lombok]. While it is not a requirement, you might want to install a [plugin][lombok-plugins] for your favorite IDE to facilitate development.
+The library uses [Project Lombok][lombok]. While it is not a requirement, you
+might want to install a [plugin][lombok-plugins] for your favorite IDE to
+facilitate development.
 
+[api-docs]: https://stripe.com/docs/api/go
 [connect-auth]: https://stripe.com/docs/connect/authentication#stripe-account-header
+[functional-tests]: https://github.com/stripe/stripe-java/blob/master/src/test/java/com/stripe/functional/
 [google-java-format]: https://github.com/google/google-java-format
+[gson]: https://github.com/google/gson
 [idempotency-keys]: https://stripe.com/docs/api/idempotent_requests?lang=java
+[javadoc]: https://stripe.dev/stripe-java
 [lombok]: https://projectlombok.org
 [lombok-plugins]: https://projectlombok.org/setup/overview
+[proguard]: https://www.guardsquare.com/en/products/proguard
 [spotless]: https://github.com/diffplug/spotless
+[stripe]: https://stripe.com
 [stripe-mock]: https://github.com/stripe/stripe-mock
 
 <!--
