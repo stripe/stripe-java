@@ -1,5 +1,9 @@
 # Changelog
 
+## 17.9.1 - 2020-02-11
+* [#964](https://github.com/stripe/stripe-java/pull/964) Convert Markdown to HTML in Javadoc
+* [#965](https://github.com/stripe/stripe-java/pull/965) Add Gradle plugin for publishing JavaDoc to GitHub Pages
+
 ## 17.9.0 - 2020-02-10
 * [#963](https://github.com/stripe/stripe-java/pull/963) Multiple API changes
   * Add support for new `type` values for `TaxId`.
