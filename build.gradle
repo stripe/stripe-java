@@ -18,6 +18,7 @@ plugins {
     id "net.ltgt.errorprone" version "1.1.1"
     id "com.github.kt3k.coveralls" version "2.8.4"
     id "biz.aQute.bnd.builder" version "4.2.0"
+    id "org.ajoberstar.git-publish" version "3.0.0-rc.1"
 }
 
 sourceCompatibility = 1.8
@@ -144,4 +145,16 @@ jacocoTestReport {
 
 coveralls {
     jacocoReportPath "build/reports/jacoco/test/jacocoTestReport.xml"
+}
+
+gitPublish {
+    repoUri = 'git@github.com:stripe/stripe-java.git'
+    branch = 'gh-pages'
+    sign = false // disable commit signing
+
+    contents {
+        from(javadoc) {
+            into '.'
+        }
+    }
 }
