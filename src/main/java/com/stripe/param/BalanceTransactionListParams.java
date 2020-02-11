@@ -17,18 +17,18 @@ public class BalanceTransactionListParams extends ApiRequestParams {
   Object created;
 
   /**
-   * Only return transactions in a certain currency. Three-letter [ISO currency
-   * code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported
-   * currency](https://stripe.com/docs/currencies).
+   * Only return transactions in a certain currency. Three-letter <a
+   * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+   * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
 
   /**
-   * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the
-   * list. For instance, if you make a list request and receive 100 objects, starting with
-   * `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the
-   * previous page of the list.
+   * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
+   * in the list. For instance, if you make a list request and receive 100 objects, starting with
+   * {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to
+   * fetch the previous page of the list.
    */
   @SerializedName("ending_before")
   String endingBefore;
@@ -65,18 +65,18 @@ public class BalanceTransactionListParams extends ApiRequestParams {
   String source;
 
   /**
-   * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the
-   * list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`,
-   * your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of
-   * the list.
+   * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
+   * in the list. For instance, if you make a list request and receive 100 objects, ending with
+   * {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in order to
+   * fetch the next page of the list.
    */
   @SerializedName("starting_after")
   String startingAfter;
 
   /**
-   * Only returns transactions of the given type. One of: `charge`, `refund`, `adjustment`,
-   * `application_fee`, `application_fee_refund`, `transfer`, `payment`, `payout`, `payout_failure`,
-   * `stripe_fee`, or `network_cost`.
+   * Only returns transactions of the given type. One of: {@code charge}, {@code refund}, {@code
+   * adjustment}, {@code application_fee}, {@code application_fee_refund}, {@code transfer}, {@code
+   * payment}, {@code payout}, {@code payout_failure}, {@code stripe_fee}, or {@code network_cost}.
    */
   @SerializedName("type")
   String type;
@@ -170,9 +170,9 @@ public class BalanceTransactionListParams extends ApiRequestParams {
     }
 
     /**
-     * Only return transactions in a certain currency. Three-letter [ISO currency
-     * code](https://www.iso.org/iso-4217-currency-codes.html), in lowercase. Must be a [supported
-     * currency](https://stripe.com/docs/currencies).
+     * Only return transactions in a certain currency. Three-letter <a
+     * href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>, in lowercase.
+     * Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
      */
     public Builder setCurrency(String currency) {
       this.currency = currency;
@@ -180,10 +180,10 @@ public class BalanceTransactionListParams extends ApiRequestParams {
     }
 
     /**
-     * A cursor for use in pagination. `ending_before` is an object ID that defines your place in
-     * the list. For instance, if you make a list request and receive 100 objects, starting with
-     * `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the
-     * previous page of the list.
+     * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
+     * in the list. For instance, if you make a list request and receive 100 objects, starting with
+     * {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to
+     * fetch the previous page of the list.
      */
     public Builder setEndingBefore(String endingBefore) {
       this.endingBefore = endingBefore;
@@ -267,10 +267,10 @@ public class BalanceTransactionListParams extends ApiRequestParams {
     }
 
     /**
-     * A cursor for use in pagination. `starting_after` is an object ID that defines your place in
-     * the list. For instance, if you make a list request and receive 100 objects, ending with
-     * `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the
-     * next page of the list.
+     * A cursor for use in pagination. {@code starting_after} is an object ID that defines your
+     * place in the list. For instance, if you make a list request and receive 100 objects, ending
+     * with {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in
+     * order to fetch the next page of the list.
      */
     public Builder setStartingAfter(String startingAfter) {
       this.startingAfter = startingAfter;
@@ -278,9 +278,10 @@ public class BalanceTransactionListParams extends ApiRequestParams {
     }
 
     /**
-     * Only returns transactions of the given type. One of: `charge`, `refund`, `adjustment`,
-     * `application_fee`, `application_fee_refund`, `transfer`, `payment`, `payout`,
-     * `payout_failure`, `stripe_fee`, or `network_cost`.
+     * Only returns transactions of the given type. One of: {@code charge}, {@code refund}, {@code
+     * adjustment}, {@code application_fee}, {@code application_fee_refund}, {@code transfer},
+     * {@code payment}, {@code payout}, {@code payout_failure}, {@code stripe_fee}, or {@code
+     * network_cost}.
      */
     public Builder setType(String type) {
       this.type = type;

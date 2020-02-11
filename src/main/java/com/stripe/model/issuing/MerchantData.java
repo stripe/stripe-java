@@ -11,8 +11,9 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class MerchantData extends StripeObject {
   /**
-   * A categorization of the seller's type of business. See our [merchant categories
-   * guide](https://stripe.com/docs/issuing/merchant-categories) for a list of possible values.
+   * A categorization of the seller's type of business. See our <a
+   * href="https://stripe.com/docs/issuing/merchant-categories">merchant categories guide</a> for a
+   * list of possible values.
    */
   @SerializedName("category")
   String category;

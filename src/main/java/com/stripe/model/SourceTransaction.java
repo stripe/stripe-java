@@ -28,8 +28,8 @@ public class SourceTransaction extends StripeObject implements HasId {
   Long created;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -43,8 +43,8 @@ public class SourceTransaction extends StripeObject implements HasId {
   String id;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -52,7 +52,7 @@ public class SourceTransaction extends StripeObject implements HasId {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `source_transaction`.
+   * <p>Equal to {@code source_transaction}.
    */
   @SerializedName("object")
   String object;
@@ -67,16 +67,19 @@ public class SourceTransaction extends StripeObject implements HasId {
   @SerializedName("source")
   String source;
 
-  /** The status of the transaction, one of `succeeded`, `pending`, or `failed`. */
+  /**
+   * The status of the transaction, one of {@code succeeded}, {@code pending}, or {@code failed}.
+   */
   @SerializedName("status")
   String status;
 
   /**
    * The type of source this transaction is attached to.
    *
-   * <p>One of `ach_credit_transfer`, `ach_debit`, `alipay`, `bancontact`, `card`, `card_present`,
-   * `eps`, `giropay`, `ideal`, `klarna`, `multibanco`, `p24`, `sepa_debit`, `sofort`,
-   * `three_d_secure`, or `wechat`.
+   * <p>One of {@code ach_credit_transfer}, {@code ach_debit}, {@code alipay}, {@code bancontact},
+   * {@code card}, {@code card_present}, {@code eps}, {@code giropay}, {@code ideal}, {@code
+   * klarna}, {@code multibanco}, {@code p24}, {@code sepa_debit}, {@code sofort}, {@code
+   * three_d_secure}, or {@code wechat}.
    */
   @SerializedName("type")
   String type;

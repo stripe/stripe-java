@@ -28,15 +28,15 @@ public class CustomerUpdateParams extends ApiRequestParams {
   Object coupon;
 
   /**
-   * If you are using payment methods created via the PaymentMethods API, see the
-   * [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method)
+   * If you are using payment methods created via the PaymentMethods API, see the <a
+   * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
    * parameter.
    *
    * <p>Provide the ID of a payment source already attached to this customer to make it this
    * customer's default payment source.
    *
-   * <p>If you want to add a new payment source and make it the default, see the
-   * [source](https://stripe.com/docs/api/customers/update#update_customer-source) property.
+   * <p>If you want to add a new payment source and make it the default, see the <a
+   * href="https://stripe.com/docs/api/customers/update#update_customer-source">source</a> property.
    */
   @SerializedName("default_source")
   Object defaultSource;
@@ -50,7 +50,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
   /**
    * Customer's email address. It's displayed alongside the customer in your dashboard and can be
-   * useful for searching and tracking. This may be up to *512 characters*.
+   * useful for searching and tracking. This may be up to <em>512 characters</em>.
    */
   @SerializedName("email")
   Object email;
@@ -82,7 +82,8 @@ public class CustomerUpdateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -106,7 +107,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
   @SerializedName("source")
   Object source;
 
-  /** The customer's tax exemption. One of `none`, `exempt`, or `reverse`. */
+  /** The customer's tax exemption. One of {@code none}, {@code exempt}, or {@code reverse}. */
   @SerializedName("tax_exempt")
   EnumParam taxExempt;
 
@@ -114,8 +115,8 @@ public class CustomerUpdateParams extends ApiRequestParams {
    * Unix timestamp representing the end of the trial period the customer will get before being
    * charged for the first time. This will always overwrite any trials that might apply via a
    * subscribed plan. If set, trial_end will override the default trial period of the plan the
-   * customer is being subscribed to. The special value `now` can be provided to end the customer's
-   * trial immediately. Can be at most two years from `billing_cycle_anchor`.
+   * customer is being subscribed to. The special value {@code now} can be provided to end the
+   * customer's trial immediately. Can be at most two years from {@code billing_cycle_anchor}.
    */
   @SerializedName("trial_end")
   Object trialEnd;
@@ -256,15 +257,16 @@ public class CustomerUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * If you are using payment methods created via the PaymentMethods API, see the
-     * [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method)
+     * If you are using payment methods created via the PaymentMethods API, see the <a
+     * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
      * parameter.
      *
      * <p>Provide the ID of a payment source already attached to this customer to make it this
      * customer's default payment source.
      *
-     * <p>If you want to add a new payment source and make it the default, see the
-     * [source](https://stripe.com/docs/api/customers/update#update_customer-source) property.
+     * <p>If you want to add a new payment source and make it the default, see the <a
+     * href="https://stripe.com/docs/api/customers/update#update_customer-source">source</a>
+     * property.
      */
     public Builder setDefaultSource(String defaultSource) {
       this.defaultSource = defaultSource;
@@ -272,15 +274,16 @@ public class CustomerUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * If you are using payment methods created via the PaymentMethods API, see the
-     * [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method)
+     * If you are using payment methods created via the PaymentMethods API, see the <a
+     * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
      * parameter.
      *
      * <p>Provide the ID of a payment source already attached to this customer to make it this
      * customer's default payment source.
      *
-     * <p>If you want to add a new payment source and make it the default, see the
-     * [source](https://stripe.com/docs/api/customers/update#update_customer-source) property.
+     * <p>If you want to add a new payment source and make it the default, see the <a
+     * href="https://stripe.com/docs/api/customers/update#update_customer-source">source</a>
+     * property.
      */
     public Builder setDefaultSource(EmptyParam defaultSource) {
       this.defaultSource = defaultSource;
@@ -307,7 +310,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
     /**
      * Customer's email address. It's displayed alongside the customer in your dashboard and can be
-     * useful for searching and tracking. This may be up to *512 characters*.
+     * useful for searching and tracking. This may be up to <em>512 characters</em>.
      */
     public Builder setEmail(String email) {
       this.email = email;
@@ -316,7 +319,7 @@ public class CustomerUpdateParams extends ApiRequestParams {
 
     /**
      * Customer's email address. It's displayed alongside the customer in your dashboard and can be
-     * useful for searching and tracking. This may be up to *512 characters*.
+     * useful for searching and tracking. This may be up to <em>512 characters</em>.
      */
     public Builder setEmail(EmptyParam email) {
       this.email = email;
@@ -497,13 +500,13 @@ public class CustomerUpdateParams extends ApiRequestParams {
       return this;
     }
 
-    /** The customer's tax exemption. One of `none`, `exempt`, or `reverse`. */
+    /** The customer's tax exemption. One of {@code none}, {@code exempt}, or {@code reverse}. */
     public Builder setTaxExempt(TaxExempt taxExempt) {
       this.taxExempt = taxExempt;
       return this;
     }
 
-    /** The customer's tax exemption. One of `none`, `exempt`, or `reverse`. */
+    /** The customer's tax exemption. One of {@code none}, {@code exempt}, or {@code reverse}. */
     public Builder setTaxExempt(EmptyParam taxExempt) {
       this.taxExempt = taxExempt;
       return this;
@@ -513,8 +516,8 @@ public class CustomerUpdateParams extends ApiRequestParams {
      * Unix timestamp representing the end of the trial period the customer will get before being
      * charged for the first time. This will always overwrite any trials that might apply via a
      * subscribed plan. If set, trial_end will override the default trial period of the plan the
-     * customer is being subscribed to. The special value `now` can be provided to end the
-     * customer's trial immediately. Can be at most two years from `billing_cycle_anchor`.
+     * customer is being subscribed to. The special value {@code now} can be provided to end the
+     * customer's trial immediately. Can be at most two years from {@code billing_cycle_anchor}.
      */
     public Builder setTrialEnd(TrialEnd trialEnd) {
       this.trialEnd = trialEnd;
@@ -525,8 +528,8 @@ public class CustomerUpdateParams extends ApiRequestParams {
      * Unix timestamp representing the end of the trial period the customer will get before being
      * charged for the first time. This will always overwrite any trials that might apply via a
      * subscribed plan. If set, trial_end will override the default trial period of the plan the
-     * customer is being subscribed to. The special value `now` can be provided to end the
-     * customer's trial immediately. Can be at most two years from `billing_cycle_anchor`.
+     * customer is being subscribed to. The special value {@code now} can be provided to end the
+     * customer's trial immediately. Can be at most two years from {@code billing_cycle_anchor}.
      */
     public Builder setTrialEnd(Long trialEnd) {
       this.trialEnd = trialEnd;
@@ -541,8 +544,8 @@ public class CustomerUpdateParams extends ApiRequestParams {
     Object city;
 
     /**
-     * Two-letter country code ([ISO 3166-1
-     * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+     * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+     * 3166-1 alpha-2</a>).
      */
     @SerializedName("country")
     Object country;
@@ -633,8 +636,8 @@ public class CustomerUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Two-letter country code ([ISO 3166-1
-       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
        */
       public Builder setCountry(String country) {
         this.country = country;
@@ -642,8 +645,8 @@ public class CustomerUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * Two-letter country code ([ISO 3166-1
-       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
        */
       public Builder setCountry(EmptyParam country) {
         this.country = country;
@@ -1097,8 +1100,8 @@ public class CustomerUpdateParams extends ApiRequestParams {
       Object city;
 
       /**
-       * Two-letter country code ([ISO 3166-1
-       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
        */
       @SerializedName("country")
       Object country;
@@ -1189,8 +1192,8 @@ public class CustomerUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * Two-letter country code ([ISO 3166-1
-         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
          */
         public Builder setCountry(String country) {
           this.country = country;
@@ -1198,8 +1201,8 @@ public class CustomerUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * Two-letter country code ([ISO 3166-1
-         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
          */
         public Builder setCountry(EmptyParam country) {
           this.country = country;

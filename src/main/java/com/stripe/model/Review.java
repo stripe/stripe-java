@@ -29,8 +29,8 @@ public class Review extends ApiResource implements HasId {
   ExpandableField<Charge> charge;
 
   /**
-   * The reason the review was closed, or null if it has not yet been closed. One of `approved`,
-   * `refunded`, `refunded_as_fraud`, or `disputed`.
+   * The reason the review was closed, or null if it has not yet been closed. One of {@code
+   * approved}, {@code refunded}, {@code refunded_as_fraud}, or {@code disputed}.
    */
   @SerializedName("closed_reason")
   String closedReason;
@@ -57,8 +57,8 @@ public class Review extends ApiResource implements HasId {
   Location ipAddressLocation;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -66,16 +66,16 @@ public class Review extends ApiResource implements HasId {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `review`.
+   * <p>Equal to {@code review}.
    */
   @SerializedName("object")
   String object;
 
-  /** If `true`, the review needs action. */
+  /** If {@code true}, the review needs action. */
   @SerializedName("open")
   Boolean open;
 
-  /** The reason the review was opened. One of `rule` or `manual`. */
+  /** The reason the review was opened. One of {@code rule} or {@code manual}. */
   @SerializedName("opened_reason")
   String openedReason;
 
@@ -86,8 +86,8 @@ public class Review extends ApiResource implements HasId {
   ExpandableField<PaymentIntent> paymentIntent;
 
   /**
-   * The reason the review is currently open or closed. One of `rule`, `manual`, `approved`,
-   * `refunded`, `refunded_as_fraud`, or `disputed`.
+   * The reason the review is currently open or closed. One of {@code rule}, {@code manual}, {@code
+   * approved}, {@code refunded}, {@code refunded_as_fraud}, or {@code disputed}.
    */
   @SerializedName("reason")
   String reason;
@@ -96,7 +96,7 @@ public class Review extends ApiResource implements HasId {
   @SerializedName("session")
   Session session;
 
-  /** Get id of expandable `charge` object. */
+  /** Get ID of expandable {@code charge} object. */
   public String getCharge() {
     return (this.charge != null) ? this.charge.getId() : null;
   }
@@ -105,7 +105,7 @@ public class Review extends ApiResource implements HasId {
     this.charge = ApiResource.setExpandableFieldId(id, this.charge);
   }
 
-  /** Get expanded `charge`. */
+  /** Get expanded {@code charge}. */
   public Charge getChargeObject() {
     return (this.charge != null) ? this.charge.getExpanded() : null;
   }
@@ -114,7 +114,7 @@ public class Review extends ApiResource implements HasId {
     this.charge = new ExpandableField<Charge>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `paymentIntent` object. */
+  /** Get ID of expandable {@code paymentIntent} object. */
   public String getPaymentIntent() {
     return (this.paymentIntent != null) ? this.paymentIntent.getId() : null;
   }
@@ -123,7 +123,7 @@ public class Review extends ApiResource implements HasId {
     this.paymentIntent = ApiResource.setExpandableFieldId(id, this.paymentIntent);
   }
 
-  /** Get expanded `paymentIntent`. */
+  /** Get expanded {@code paymentIntent}. */
   public PaymentIntent getPaymentIntentObject() {
     return (this.paymentIntent != null) ? this.paymentIntent.getExpanded() : null;
   }
@@ -272,19 +272,21 @@ public class Review extends ApiResource implements HasId {
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Session extends StripeObject {
-    /** The browser used in this browser session (e.g., `Chrome`). */
+    /** The browser used in this browser session (e.g., {@code Chrome}). */
     @SerializedName("browser")
     String browser;
 
-    /** Information about the device used for the browser session (e.g., `Samsung SM-G930T`). */
+    /**
+     * Information about the device used for the browser session (e.g., {@code Samsung SM-G930T}).
+     */
     @SerializedName("device")
     String device;
 
-    /** The platform for the browser session (e.g., `Macintosh`). */
+    /** The platform for the browser session (e.g., {@code Macintosh}). */
     @SerializedName("platform")
     String platform;
 
-    /** The version for the browser session (e.g., `61.0.3163.100`). */
+    /** The version for the browser session (e.g., {@code 61.0.3163.100}). */
     @SerializedName("version")
     String version;
   }

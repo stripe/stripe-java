@@ -15,8 +15,8 @@ public class AccountLinkCreateParams extends ApiRequestParams {
   String account;
 
   /**
-   * Which information the platform needs to collect from the user. One of `currently_due` or
-   * `eventually_due`. Default is `currently_due`.
+   * Which information the platform needs to collect from the user. One of {@code currently_due} or
+   * {@code eventually_due}. Default is {@code currently_due}.
    */
   @SerializedName("collect")
   Collect collect;
@@ -46,8 +46,8 @@ public class AccountLinkCreateParams extends ApiRequestParams {
   String successUrl;
 
   /**
-   * The type of account link the user is requesting. Possible values are
-   * `custom_account_verification` or `custom_account_update`.
+   * The type of account link the user is requesting. Possible values are {@code
+   * custom_account_verification} or {@code custom_account_update}.
    */
   @SerializedName("type")
   String type;
@@ -107,8 +107,8 @@ public class AccountLinkCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Which information the platform needs to collect from the user. One of `currently_due` or
-     * `eventually_due`. Default is `currently_due`.
+     * Which information the platform needs to collect from the user. One of {@code currently_due}
+     * or {@code eventually_due}. Default is {@code currently_due}.
      */
     public Builder setCollect(Collect collect) {
       this.collect = collect;
@@ -183,8 +183,8 @@ public class AccountLinkCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The type of account link the user is requesting. Possible values are
-     * `custom_account_verification` or `custom_account_update`.
+     * The type of account link the user is requesting. Possible values are {@code
+     * custom_account_verification} or {@code custom_account_update}.
      */
     public Builder setType(String type) {
       this.type = type;

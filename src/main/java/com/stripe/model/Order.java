@@ -45,8 +45,8 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   Long applicationFee;
 
   /**
-   * The ID of the payment used to pay for the order. Present if the order status is `paid`,
-   * `fulfilled`, or `refunded`.
+   * The ID of the payment used to pay for the order. Present if the order status is {@code paid},
+   * {@code fulfilled}, or {@code refunded}.
    */
   @SerializedName("charge")
   @Getter(lombok.AccessLevel.NONE)
@@ -58,8 +58,8 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   Long created;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -88,8 +88,8 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   List<OrderItem> items;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -105,7 +105,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `order`.
+   * <p>Equal to {@code order}.
    */
   @SerializedName("object")
   String object;
@@ -116,9 +116,9 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
 
   /**
    * The shipping method that is currently selected for this order, if any. If present, it is equal
-   * to one of the `id`s of shipping methods in the `shipping_methods` array. At order creation
-   * time, if there are multiple shipping methods, Stripe will automatically selected the first
-   * method.
+   * to one of the {@code id}s of shipping methods in the {@code shipping_methods} array. At order
+   * creation time, if there are multiple shipping methods, Stripe will automatically selected the
+   * first method.
    */
   @SerializedName("selected_shipping_method")
   String selectedShippingMethod;
@@ -135,9 +135,9 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   List<Order.ShippingMethod> shippingMethods;
 
   /**
-   * Current order status. One of `created`, `paid`, `canceled`, `fulfilled`, or `returned`. More
-   * details in the [Orders
-   * Guide](https://stripe.com/docs/orders/guide#understanding-order-statuses).
+   * Current order status. One of {@code created}, {@code paid}, {@code canceled}, {@code
+   * fulfilled}, or {@code returned}. More details in the <a
+   * href="https://stripe.com/docs/orders/guide#understanding-order-statuses">Orders Guide</a>.
    */
   @SerializedName("status")
   String status;
@@ -154,7 +154,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
   @SerializedName("upstream_id")
   String upstreamId;
 
-  /** Get id of expandable `charge` object. */
+  /** Get ID of expandable {@code charge} object. */
   public String getCharge() {
     return (this.charge != null) ? this.charge.getId() : null;
   }
@@ -163,7 +163,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
     this.charge = ApiResource.setExpandableFieldId(id, this.charge);
   }
 
-  /** Get expanded `charge`. */
+  /** Get expanded {@code charge}. */
   public Charge getChargeObject() {
     return (this.charge != null) ? this.charge.getExpanded() : null;
   }
@@ -172,7 +172,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
     this.charge = new ExpandableField<Charge>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `customer` object. */
+  /** Get ID of expandable {@code customer} object. */
   public String getCustomer() {
     return (this.customer != null) ? this.customer.getId() : null;
   }
@@ -181,7 +181,7 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
     this.customer = ApiResource.setExpandableFieldId(id, this.customer);
   }
 
-  /** Get expanded `customer`. */
+  /** Get expanded {@code customer}. */
   public Customer getCustomerObject() {
     return (this.customer != null) ? this.customer.getExpanded() : null;
   }
@@ -462,8 +462,9 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
     Long amount;
 
     /**
-     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-     * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
      */
     @SerializedName("currency")
     String currency;
@@ -489,25 +490,27 @@ public class Order extends ApiResource implements HasId, MetadataStore<Order> {
     @EqualsAndHashCode(callSuper = false)
     public static class DeliveryEstimate extends StripeObject {
       /**
-       * If `type` is `"exact"`, `date` will be the expected delivery date in the format YYYY-MM-DD.
+       * If {@code type} is {@code "exact"}, {@code date} will be the expected delivery date in the
+       * format YYYY-MM-DD.
        */
       @SerializedName("date")
       String date;
 
       /**
-       * If `type` is `"range"`, `earliest` will be be the earliest delivery date in the format
-       * YYYY-MM-DD.
+       * If {@code type} is {@code "range"}, {@code earliest} will be be the earliest delivery date
+       * in the format YYYY-MM-DD.
        */
       @SerializedName("earliest")
       String earliest;
 
       /**
-       * If `type` is `"range"`, `latest` will be the latest delivery date in the format YYYY-MM-DD.
+       * If {@code type} is {@code "range"}, {@code latest} will be the latest delivery date in the
+       * format YYYY-MM-DD.
        */
       @SerializedName("latest")
       String latest;
 
-      /** The type of estimate. Must be either `"range"` or `"exact"`. */
+      /** The type of estimate. Must be either {@code "range"} or {@code "exact"}. */
       @SerializedName("type")
       String type;
     }

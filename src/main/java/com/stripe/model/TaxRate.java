@@ -20,8 +20,8 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class TaxRate extends ApiResource implements HasId, MetadataStore<TaxRate> {
   /**
-   * Defaults to `true`. When set to `false`, this tax rate cannot be applied to objects in the API,
-   * but will still be applied to subscriptions and invoices that already have it set.
+   * Defaults to {@code true}. When set to {@code false}, this tax rate cannot be applied to objects
+   * in the API, but will still be applied to subscriptions and invoices that already have it set.
    */
   @SerializedName("active")
   Boolean active;
@@ -58,8 +58,8 @@ public class TaxRate extends ApiResource implements HasId, MetadataStore<TaxRate
   String jurisdiction;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -75,7 +75,7 @@ public class TaxRate extends ApiResource implements HasId, MetadataStore<TaxRate
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `tax_rate`.
+   * <p>Equal to {@code tax_rate}.
    */
   @SerializedName("object")
   String object;

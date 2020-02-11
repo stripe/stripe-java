@@ -11,9 +11,9 @@ import lombok.Getter;
 @Getter
 public class SetupIntentCreateParams extends ApiRequestParams {
   /**
-   * Set to `true` to attempt to confirm this SetupIntent immediately. This parameter defaults to
-   * `false`. If the payment method attached is a card, a return_url may be provided in case
-   * additional authentication is required.
+   * Set to {@code true} to attempt to confirm this SetupIntent immediately. This parameter defaults
+   * to {@code false}. If the payment method attached is a card, a return_url may be provided in
+   * case additional authentication is required.
    */
   @SerializedName("confirm")
   Boolean confirm;
@@ -45,8 +45,9 @@ public class SetupIntentCreateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * This hash contains details about the Mandate to create. This parameter can only be used with
-   * [`confirm=true`](https://stripe.com/docs/api/setup_intents/create#create_setup_intent-confirm).
+   * This hash contains details about the Mandate to create. This parameter can only be used with <a
+   * href="https://stripe.com/docs/api/setup_intents/create#create_setup_intent-confirm">{@code
+   * confirm=true}</a>.
    */
   @SerializedName("mandate_data")
   MandateData mandateData;
@@ -54,7 +55,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -76,7 +78,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
   /**
    * The list of payment method types (e.g. card) that this SetupIntent is allowed to use. If this
-   * is not provided, defaults to ["card"].
+   * is not provided, defaults to [&quot;card&quot;].
    */
   @SerializedName("payment_method_types")
   List<String> paymentMethodTypes;
@@ -84,8 +86,9 @@ public class SetupIntentCreateParams extends ApiRequestParams {
   /**
    * The URL to redirect your customer back to after they authenticate or cancel their payment on
    * the payment method's app or site. If you'd prefer to redirect to a mobile application, you can
-   * alternatively supply an application URI scheme. This parameter can only be used with
-   * [`confirm=true`](https://stripe.com/docs/api/setup_intents/create#create_setup_intent-confirm).
+   * alternatively supply an application URI scheme. This parameter can only be used with <a
+   * href="https://stripe.com/docs/api/setup_intents/create#create_setup_intent-confirm">{@code
+   * confirm=true}</a>.
    */
   @SerializedName("return_url")
   String returnUrl;
@@ -96,7 +99,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
   /**
    * Indicates how the payment method is intended to be used in the future. If not provided, this
-   * value defaults to `off_session`.
+   * value defaults to {@code off_session}.
    */
   @SerializedName("usage")
   Usage usage;
@@ -185,9 +188,9 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Set to `true` to attempt to confirm this SetupIntent immediately. This parameter defaults to
-     * `false`. If the payment method attached is a card, a return_url may be provided in case
-     * additional authentication is required.
+     * Set to {@code true} to attempt to confirm this SetupIntent immediately. This parameter
+     * defaults to {@code false}. If the payment method attached is a card, a return_url may be
+     * provided in case additional authentication is required.
      */
     public Builder setConfirm(Boolean confirm) {
       this.confirm = confirm;
@@ -266,7 +269,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
     /**
      * This hash contains details about the Mandate to create. This parameter can only be used with
-     * [`confirm=true`](https://stripe.com/docs/api/setup_intents/create#create_setup_intent-confirm).
+     * <a href="https://stripe.com/docs/api/setup_intents/create#create_setup_intent-confirm">{@code
+     * confirm=true}</a>.
      */
     public Builder setMandateData(MandateData mandateData) {
       this.mandateData = mandateData;
@@ -349,8 +353,9 @@ public class SetupIntentCreateParams extends ApiRequestParams {
     /**
      * The URL to redirect your customer back to after they authenticate or cancel their payment on
      * the payment method's app or site. If you'd prefer to redirect to a mobile application, you
-     * can alternatively supply an application URI scheme. This parameter can only be used with
-     * [`confirm=true`](https://stripe.com/docs/api/setup_intents/create#create_setup_intent-confirm).
+     * can alternatively supply an application URI scheme. This parameter can only be used with <a
+     * href="https://stripe.com/docs/api/setup_intents/create#create_setup_intent-confirm">{@code
+     * confirm=true}</a>.
      */
     public Builder setReturnUrl(String returnUrl) {
       this.returnUrl = returnUrl;
@@ -367,7 +372,7 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
     /**
      * Indicates how the payment method is intended to be used in the future. If not provided, this
-     * value defaults to `off_session`.
+     * value defaults to {@code off_session}.
      */
     public Builder setUsage(Usage usage) {
       this.usage = usage;
@@ -472,8 +477,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       Online online;
 
       /**
-       * The type of customer acceptance information included with the Mandate. One of `online` or
-       * `offline`.
+       * The type of customer acceptance information included with the Mandate. One of {@code
+       * online} or {@code offline}.
        */
       @SerializedName("type")
       Type type;
@@ -565,8 +570,8 @@ public class SetupIntentCreateParams extends ApiRequestParams {
         }
 
         /**
-         * The type of customer acceptance information included with the Mandate. One of `online` or
-         * `offline`.
+         * The type of customer acceptance information included with the Mandate. One of {@code
+         * online} or {@code offline}.
          */
         public Builder setType(Type type) {
           this.type = type;
@@ -826,13 +831,14 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
       /**
        * We strongly recommend that you rely on our SCA Engine to automatically prompt your
-       * customers for authentication based on risk level and [other
-       * requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish
-       * to request 3D Secure based on logic from your own fraud engine, provide this option.
-       * Permitted values include: `automatic` or `any`. If not provided, defaults to `automatic`.
-       * Read our guide on [manually requesting 3D
-       * Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on
-       * how this configuration interacts with Radar and our SCA Engine.
+       * customers for authentication based on risk level and <a
+       * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
+       * However, if you wish to request 3D Secure based on logic from your own fraud engine,
+       * provide this option. Permitted values include: {@code automatic} or {@code any}. If not
+       * provided, defaults to {@code automatic}. Read our guide on <a
+       * href="https://stripe.com/docs/payments/3d-secure#manual-three-ds">manually requesting 3D
+       * Secure</a> for more information on how this configuration interacts with Radar and our SCA
+       * Engine.
        */
       @SerializedName("request_three_d_secure")
       RequestThreeDSecure requestThreeDSecure;
@@ -900,13 +906,14 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
         /**
          * We strongly recommend that you rely on our SCA Engine to automatically prompt your
-         * customers for authentication based on risk level and [other
-         * requirements](https://stripe.com/docs/strong-customer-authentication). However, if you
-         * wish to request 3D Secure based on logic from your own fraud engine, provide this option.
-         * Permitted values include: `automatic` or `any`. If not provided, defaults to `automatic`.
-         * Read our guide on [manually requesting 3D
-         * Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information
-         * on how this configuration interacts with Radar and our SCA Engine.
+         * customers for authentication based on risk level and <a
+         * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
+         * However, if you wish to request 3D Secure based on logic from your own fraud engine,
+         * provide this option. Permitted values include: {@code automatic} or {@code any}. If not
+         * provided, defaults to {@code automatic}. Read our guide on <a
+         * href="https://stripe.com/docs/payments/3d-secure#manual-three-ds">manually requesting 3D
+         * Secure</a> for more information on how this configuration interacts with Radar and our
+         * SCA Engine.
          */
         public Builder setRequestThreeDSecure(RequestThreeDSecure requestThreeDSecure) {
           this.requestThreeDSecure = requestThreeDSecure;
@@ -935,19 +942,20 @@ public class SetupIntentCreateParams extends ApiRequestParams {
   public static class SingleUse {
     /**
      * Amount intended to be collected by this PaymentIntent. A positive integer representing how
-     * much to charge in the [smallest currency
-     * unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or
-     * 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent
-     * in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts).
-     * The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of
-     * $999,999.99).
+     * much to charge in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest
+     * currency unit</a> (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal
+     * currency). The minimum amount is $0.50 US or <a
+     * href="https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts">equivalent in
+     * charge currency</a>. The amount value supports up to eight digits (e.g., a value of 99999999
+     * for a USD charge of $999,999.99).
      */
     @SerializedName("amount")
     Long amount;
 
     /**
-     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-     * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
      */
     @SerializedName("currency")
     String currency;
@@ -985,12 +993,12 @@ public class SetupIntentCreateParams extends ApiRequestParams {
 
       /**
        * Amount intended to be collected by this PaymentIntent. A positive integer representing how
-       * much to charge in the [smallest currency
-       * unit](https://stripe.com/docs/currencies#zero-decimal) (e.g., 100 cents to charge $1.00 or
-       * 100 to charge ¥100, a zero-decimal currency). The minimum amount is $0.50 US or [equivalent
-       * in charge currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts).
-       * The amount value supports up to eight digits (e.g., a value of 99999999 for a USD charge of
-       * $999,999.99).
+       * much to charge in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest
+       * currency unit</a> (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal
+       * currency). The minimum amount is $0.50 US or <a
+       * href="https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts">equivalent in
+       * charge currency</a>. The amount value supports up to eight digits (e.g., a value of
+       * 99999999 for a USD charge of $999,999.99).
        */
       public Builder setAmount(Long amount) {
         this.amount = amount;
@@ -998,8 +1006,9 @@ public class SetupIntentCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-       * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+       * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+       * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+       * currency</a>.
        */
       public Builder setCurrency(String currency) {
         this.currency = currency;

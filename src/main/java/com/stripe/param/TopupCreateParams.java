@@ -15,8 +15,8 @@ public class TopupCreateParams extends ApiRequestParams {
   Long amount;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -41,7 +41,8 @@ public class TopupCreateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -49,8 +50,8 @@ public class TopupCreateParams extends ApiRequestParams {
   /**
    * The ID of a source to transfer funds from. For most users, this should be left unspecified
    * which will use the bank account that was set up in the dashboard for the specified currency. In
-   * test mode, this can be a test bank token (see [Testing
-   * Top-ups](https://stripe.com/docs/connect/testing#testing-top-ups)).
+   * test mode, this can be a test bank token (see <a
+   * href="https://stripe.com/docs/connect/testing#testing-top-ups">Testing Top-ups</a>).
    */
   @SerializedName("source")
   String source;
@@ -131,8 +132,9 @@ public class TopupCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-     * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
      */
     public Builder setCurrency(String currency) {
       this.currency = currency;
@@ -226,8 +228,8 @@ public class TopupCreateParams extends ApiRequestParams {
     /**
      * The ID of a source to transfer funds from. For most users, this should be left unspecified
      * which will use the bank account that was set up in the dashboard for the specified currency.
-     * In test mode, this can be a test bank token (see [Testing
-     * Top-ups](https://stripe.com/docs/connect/testing#testing-top-ups)).
+     * In test mode, this can be a test bank token (see <a
+     * href="https://stripe.com/docs/connect/testing#testing-top-ups">Testing Top-ups</a>).
      */
     public Builder setSource(String source) {
       this.source = source;

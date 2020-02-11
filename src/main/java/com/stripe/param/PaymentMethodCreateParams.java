@@ -11,7 +11,8 @@ import lombok.Getter;
 @Getter
 public class PaymentMethodCreateParams extends ApiRequestParams {
   /**
-   * If this is a `au_becs_debit` PaymentMethod, this hash contains details about the bank account.
+   * If this is a {@code au_becs_debit} PaymentMethod, this hash contains details about the bank
+   * account.
    */
   @SerializedName("au_becs_debit")
   AuBecsDebit auBecsDebit;
@@ -24,17 +25,17 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   BillingDetails billingDetails;
 
   /**
-   * If this is a `card` PaymentMethod, this hash contains the user's card details. For backwards
-   * compatibility, you can alternatively provide a Stripe token (e.g., for Apple Pay, Amex Express
-   * Checkout, or legacy Checkout) into the card hash with format `card: {token: "tok_visa"}`. When
-   * creating with a card number, you must meet the requirements for [PCI
-   * compliance](https://stripe.com/docs/security#validating-pci-compliance). We strongly recommend
-   * using Stripe.js instead of interacting with this API directly.
+   * If this is a {@code card} PaymentMethod, this hash contains the user's card details. For
+   * backwards compatibility, you can alternatively provide a Stripe token (e.g., for Apple Pay,
+   * Amex Express Checkout, or legacy Checkout) into the card hash with format {@code card: {token:
+   * "tok_visa"}}. When creating with a card number, you must meet the requirements for <a
+   * href="https://stripe.com/docs/security#validating-pci-compliance">PCI compliance</a>. We
+   * strongly recommend using Stripe.js instead of interacting with this API directly.
    */
   @SerializedName("card")
   Object card;
 
-  /** The `Customer` to whom the original PaymentMethod is attached. */
+  /** The {@code Customer} to whom the original PaymentMethod is attached. */
   @SerializedName("customer")
   String customer;
 
@@ -51,12 +52,16 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
   Map<String, Object> extraParams;
 
-  /** If this is an `fpx` PaymentMethod, this hash contains details about the FPX payment method. */
+  /**
+   * If this is an {@code fpx} PaymentMethod, this hash contains details about the FPX payment
+   * method.
+   */
   @SerializedName("fpx")
   Fpx fpx;
 
   /**
-   * If this is an `ideal` PaymentMethod, this hash contains details about the iDEAL payment method.
+   * If this is an {@code ideal} PaymentMethod, this hash contains details about the iDEAL payment
+   * method.
    */
   @SerializedName("ideal")
   Ideal ideal;
@@ -64,7 +69,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -74,8 +80,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   String paymentMethod;
 
   /**
-   * If this is a `sepa_debit` PaymentMethod, this hash contains details about the SEPA debit bank
-   * account.
+   * If this is a {@code sepa_debit} PaymentMethod, this hash contains details about the SEPA debit
+   * bank account.
    */
   @SerializedName("sepa_debit")
   SepaDebit sepaDebit;
@@ -83,9 +89,9 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
   /**
    * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name
    * matching this value. It contains additional information specific to the PaymentMethod type.
-   * Required unless `payment_method` is specified (see the [Cloning
-   * PaymentMethods](https://stripe.com/docs/payments/payment-methods/connect#cloning-payment-methods)
-   * guide)
+   * Required unless {@code payment_method} is specified (see the <a
+   * href="https://stripe.com/docs/payments/payment-methods/connect#cloning-payment-methods">Cloning
+   * PaymentMethods</a> guide)
    */
   @SerializedName("type")
   Type type;
@@ -164,7 +170,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     }
 
     /**
-     * If this is a `au_becs_debit` PaymentMethod, this hash contains details about the bank
+     * If this is a {@code au_becs_debit} PaymentMethod, this hash contains details about the bank
      * account.
      */
     public Builder setAuBecsDebit(AuBecsDebit auBecsDebit) {
@@ -182,12 +188,12 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     }
 
     /**
-     * If this is a `card` PaymentMethod, this hash contains the user's card details. For backwards
-     * compatibility, you can alternatively provide a Stripe token (e.g., for Apple Pay, Amex
-     * Express Checkout, or legacy Checkout) into the card hash with format `card: {token:
-     * "tok_visa"}`. When creating with a card number, you must meet the requirements for [PCI
-     * compliance](https://stripe.com/docs/security#validating-pci-compliance). We strongly
-     * recommend using Stripe.js instead of interacting with this API directly.
+     * If this is a {@code card} PaymentMethod, this hash contains the user's card details. For
+     * backwards compatibility, you can alternatively provide a Stripe token (e.g., for Apple Pay,
+     * Amex Express Checkout, or legacy Checkout) into the card hash with format {@code card:
+     * {token: "tok_visa"}}. When creating with a card number, you must meet the requirements for <a
+     * href="https://stripe.com/docs/security#validating-pci-compliance">PCI compliance</a>. We
+     * strongly recommend using Stripe.js instead of interacting with this API directly.
      */
     public Builder setCard(CardDetails card) {
       this.card = card;
@@ -195,19 +201,19 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     }
 
     /**
-     * If this is a `card` PaymentMethod, this hash contains the user's card details. For backwards
-     * compatibility, you can alternatively provide a Stripe token (e.g., for Apple Pay, Amex
-     * Express Checkout, or legacy Checkout) into the card hash with format `card: {token:
-     * "tok_visa"}`. When creating with a card number, you must meet the requirements for [PCI
-     * compliance](https://stripe.com/docs/security#validating-pci-compliance). We strongly
-     * recommend using Stripe.js instead of interacting with this API directly.
+     * If this is a {@code card} PaymentMethod, this hash contains the user's card details. For
+     * backwards compatibility, you can alternatively provide a Stripe token (e.g., for Apple Pay,
+     * Amex Express Checkout, or legacy Checkout) into the card hash with format {@code card:
+     * {token: "tok_visa"}}. When creating with a card number, you must meet the requirements for <a
+     * href="https://stripe.com/docs/security#validating-pci-compliance">PCI compliance</a>. We
+     * strongly recommend using Stripe.js instead of interacting with this API directly.
      */
     public Builder setCard(Token card) {
       this.card = card;
       return this;
     }
 
-    /** The `Customer` to whom the original PaymentMethod is attached. */
+    /** The {@code Customer} to whom the original PaymentMethod is attached. */
     public Builder setCustomer(String customer) {
       this.customer = customer;
       return this;
@@ -266,7 +272,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     }
 
     /**
-     * If this is an `fpx` PaymentMethod, this hash contains details about the FPX payment method.
+     * If this is an {@code fpx} PaymentMethod, this hash contains details about the FPX payment
+     * method.
      */
     public Builder setFpx(Fpx fpx) {
       this.fpx = fpx;
@@ -274,7 +281,7 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     }
 
     /**
-     * If this is an `ideal` PaymentMethod, this hash contains details about the iDEAL payment
+     * If this is an {@code ideal} PaymentMethod, this hash contains details about the iDEAL payment
      * method.
      */
     public Builder setIdeal(Ideal ideal) {
@@ -315,8 +322,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     }
 
     /**
-     * If this is a `sepa_debit` PaymentMethod, this hash contains details about the SEPA debit bank
-     * account.
+     * If this is a {@code sepa_debit} PaymentMethod, this hash contains details about the SEPA
+     * debit bank account.
      */
     public Builder setSepaDebit(SepaDebit sepaDebit) {
       this.sepaDebit = sepaDebit;
@@ -326,9 +333,9 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
     /**
      * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a
      * name matching this value. It contains additional information specific to the PaymentMethod
-     * type. Required unless `payment_method` is specified (see the [Cloning
-     * PaymentMethods](https://stripe.com/docs/payments/payment-methods/connect#cloning-payment-methods)
-     * guide)
+     * type. Required unless {@code payment_method} is specified (see the <a
+     * href="https://stripe.com/docs/payments/payment-methods/connect#cloning-payment-methods">Cloning
+     * PaymentMethods</a> guide)
      */
     public Builder setType(Type type) {
       this.type = type;
@@ -529,8 +536,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
       String city;
 
       /**
-       * Two-letter country code ([ISO 3166-1
-       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
        */
       @SerializedName("country")
       String country;
@@ -615,8 +622,8 @@ public class PaymentMethodCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Two-letter country code ([ISO 3166-1
-         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
          */
         public Builder setCountry(String country) {
           this.country = country;

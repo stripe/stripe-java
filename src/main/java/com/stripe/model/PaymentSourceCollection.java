@@ -76,8 +76,8 @@ public class PaymentSourceCollection extends StripeCollection<PaymentSource> {
    *
    * <p>If the card’s owner has no default card, then the new card will become the default. However,
    * if the owner already has a default, then it will not change. To change the default, you should
-   * <a href="/docs/api#update_customer">update the customer</a> to have a new <code>default_source
-   * </code>.
+   * <a href="https://stripe.com/docs/api#update_customer">update the customer</a> to have a new
+   * <code>default_source</code>.
    */
   public PaymentSource create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -89,8 +89,8 @@ public class PaymentSourceCollection extends StripeCollection<PaymentSource> {
    *
    * <p>If the card’s owner has no default card, then the new card will become the default. However,
    * if the owner already has a default, then it will not change. To change the default, you should
-   * <a href="/docs/api#update_customer">update the customer</a> to have a new <code>default_source
-   * </code>.
+   * <a href="https://stripe.com/docs/api#update_customer">update the customer</a> to have a new
+   * <code>default_source</code>.
    */
   public PaymentSource create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -105,8 +105,8 @@ public class PaymentSourceCollection extends StripeCollection<PaymentSource> {
    *
    * <p>If the card’s owner has no default card, then the new card will become the default. However,
    * if the owner already has a default, then it will not change. To change the default, you should
-   * <a href="/docs/api#update_customer">update the customer</a> to have a new <code>default_source
-   * </code>.
+   * <a href="https://stripe.com/docs/api#update_customer">update the customer</a> to have a new
+   * <code>default_source</code>.
    */
   public PaymentSource create(PaymentSourceCollectionCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -118,8 +118,8 @@ public class PaymentSourceCollection extends StripeCollection<PaymentSource> {
    *
    * <p>If the card’s owner has no default card, then the new card will become the default. However,
    * if the owner already has a default, then it will not change. To change the default, you should
-   * <a href="/docs/api#update_customer">update the customer</a> to have a new <code>default_source
-   * </code>.
+   * <a href="https://stripe.com/docs/api#update_customer">update the customer</a> to have a new
+   * <code>default_source</code>.
    */
   public PaymentSource create(PaymentSourceCollectionCreateParams params, RequestOptions options)
       throws StripeException {

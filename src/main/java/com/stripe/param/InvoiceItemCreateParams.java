@@ -12,15 +12,15 @@ import lombok.Getter;
 @Getter
 public class InvoiceItemCreateParams extends ApiRequestParams {
   /**
-   * The integer amount in **%s** of the charge to be applied to the upcoming invoice. Passing in a
-   * negative `amount` will reduce the `amount_due` on the invoice.
+   * The integer amount in <strong>%s</strong> of the charge to be applied to the upcoming invoice.
+   * Passing in a negative {@code amount} will reduce the {@code amount_due} on the invoice.
    */
   @SerializedName("amount")
   Long amount;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -67,7 +67,8 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -90,23 +91,23 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
   String subscription;
 
   /**
-   * The tax rates which apply to the invoice item. When set, the `default_tax_rates` on the invoice
-   * do not apply to this invoice item.
+   * The tax rates which apply to the invoice item. When set, the {@code default_tax_rates} on the
+   * invoice do not apply to this invoice item.
    */
   @SerializedName("tax_rates")
   List<String> taxRates;
 
   /**
-   * The integer unit amount in **%s** of the charge to be applied to the upcoming invoice. This
-   * `unit_amount` will be multiplied by the quantity to get the full amount. Passing in a negative
-   * `unit_amount` will reduce the `amount_due` on the invoice.
+   * The integer unit amount in <strong>%s</strong> of the charge to be applied to the upcoming
+   * invoice. This {@code unit_amount} will be multiplied by the quantity to get the full amount.
+   * Passing in a negative {@code unit_amount} will reduce the {@code amount_due} on the invoice.
    */
   @SerializedName("unit_amount")
   Long unitAmount;
 
   /**
-   * Same as `unit_amount`, but accepts a decimal value with at most 12 decimal places. Only one of
-   * `unit_amount` and `unit_amount_decimal` can be set.
+   * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal places. Only
+   * one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
    */
   @SerializedName("unit_amount_decimal")
   BigDecimal unitAmountDecimal;
@@ -200,8 +201,9 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The integer amount in **%s** of the charge to be applied to the upcoming invoice. Passing in
-     * a negative `amount` will reduce the `amount_due` on the invoice.
+     * The integer amount in <strong>%s</strong> of the charge to be applied to the upcoming
+     * invoice. Passing in a negative {@code amount} will reduce the {@code amount_due} on the
+     * invoice.
      */
     public Builder setAmount(Long amount) {
       this.amount = amount;
@@ -209,8 +211,9 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-     * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
      */
     public Builder setCurrency(String currency) {
       this.currency = currency;
@@ -381,9 +384,9 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The integer unit amount in **%s** of the charge to be applied to the upcoming invoice. This
-     * `unit_amount` will be multiplied by the quantity to get the full amount. Passing in a
-     * negative `unit_amount` will reduce the `amount_due` on the invoice.
+     * The integer unit amount in <strong>%s</strong> of the charge to be applied to the upcoming
+     * invoice. This {@code unit_amount} will be multiplied by the quantity to get the full amount.
+     * Passing in a negative {@code unit_amount} will reduce the {@code amount_due} on the invoice.
      */
     public Builder setUnitAmount(Long unitAmount) {
       this.unitAmount = unitAmount;
@@ -391,8 +394,8 @@ public class InvoiceItemCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Same as `unit_amount`, but accepts a decimal value with at most 12 decimal places. Only one
-     * of `unit_amount` and `unit_amount_decimal` can be set.
+     * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal places. Only
+     * one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
      */
     public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
       this.unitAmountDecimal = unitAmountDecimal;

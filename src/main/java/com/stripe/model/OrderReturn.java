@@ -30,8 +30,8 @@ public class OrderReturn extends ApiResource implements HasId {
   Long created;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -46,8 +46,8 @@ public class OrderReturn extends ApiResource implements HasId {
   List<OrderItem> items;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -55,7 +55,7 @@ public class OrderReturn extends ApiResource implements HasId {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `order_return`.
+   * <p>Equal to {@code order_return}.
    */
   @SerializedName("object")
   String object;
@@ -72,7 +72,7 @@ public class OrderReturn extends ApiResource implements HasId {
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Refund> refund;
 
-  /** Get id of expandable `order` object. */
+  /** Get ID of expandable {@code order} object. */
   public String getOrder() {
     return (this.order != null) ? this.order.getId() : null;
   }
@@ -81,7 +81,7 @@ public class OrderReturn extends ApiResource implements HasId {
     this.order = ApiResource.setExpandableFieldId(id, this.order);
   }
 
-  /** Get expanded `order`. */
+  /** Get expanded {@code order}. */
   public Order getOrderObject() {
     return (this.order != null) ? this.order.getExpanded() : null;
   }
@@ -90,7 +90,7 @@ public class OrderReturn extends ApiResource implements HasId {
     this.order = new ExpandableField<Order>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `refund` object. */
+  /** Get ID of expandable {@code refund} object. */
   public String getRefund() {
     return (this.refund != null) ? this.refund.getId() : null;
   }
@@ -99,7 +99,7 @@ public class OrderReturn extends ApiResource implements HasId {
     this.refund = ApiResource.setExpandableFieldId(id, this.refund);
   }
 
-  /** Get expanded `refund`. */
+  /** Get expanded {@code refund}. */
   public Refund getRefundObject() {
     return (this.refund != null) ? this.refund.getExpanded() : null;
   }

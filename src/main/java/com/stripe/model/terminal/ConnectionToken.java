@@ -22,7 +22,7 @@ public class ConnectionToken extends ApiResource {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `terminal.connection_token`.
+   * <p>Equal to {@code terminal.connection_token}.
    */
   @SerializedName("object")
   String object;

@@ -21,15 +21,15 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class InvoiceItem extends ApiResource implements HasId, MetadataStore<InvoiceItem> {
   /**
-   * Amount (in the `currency` specified) of the invoice item. This should always be equal to
-   * `unit_amount * quantity`.
+   * Amount (in the {@code currency} specified) of the invoice item. This should always be equal to
+   * {@code unit_amount * quantity}.
    */
   @SerializedName("amount")
   Long amount;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -68,8 +68,8 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   ExpandableField<Invoice> invoice;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -85,7 +85,7 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `invoiceitem`.
+   * <p>Equal to {@code invoiceitem}.
    */
   @SerializedName("object")
   String object;
@@ -125,8 +125,8 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   String subscriptionItem;
 
   /**
-   * The tax rates which apply to the invoice item. When set, the `default_tax_rates` on the invoice
-   * do not apply to this invoice item.
+   * The tax rates which apply to the invoice item. When set, the {@code default_tax_rates} on the
+   * invoice do not apply to this invoice item.
    */
   @SerializedName("tax_rates")
   List<TaxRate> taxRates;
@@ -138,15 +138,15 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
   @SerializedName("unified_proration")
   Boolean unifiedProration;
 
-  /** Unit Amount (in the `currency` specified) of the invoice item. */
+  /** Unit Amount (in the {@code currency} specified) of the invoice item. */
   @SerializedName("unit_amount")
   Long unitAmount;
 
-  /** Same as `unit_amount`, but contains a decimal value with at most 12 decimal places. */
+  /** Same as {@code unit_amount}, but contains a decimal value with at most 12 decimal places. */
   @SerializedName("unit_amount_decimal")
   BigDecimal unitAmountDecimal;
 
-  /** Get id of expandable `customer` object. */
+  /** Get ID of expandable {@code customer} object. */
   public String getCustomer() {
     return (this.customer != null) ? this.customer.getId() : null;
   }
@@ -155,7 +155,7 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
     this.customer = ApiResource.setExpandableFieldId(id, this.customer);
   }
 
-  /** Get expanded `customer`. */
+  /** Get expanded {@code customer}. */
   public Customer getCustomerObject() {
     return (this.customer != null) ? this.customer.getExpanded() : null;
   }
@@ -164,7 +164,7 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `invoice` object. */
+  /** Get ID of expandable {@code invoice} object. */
   public String getInvoice() {
     return (this.invoice != null) ? this.invoice.getId() : null;
   }
@@ -173,7 +173,7 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
     this.invoice = ApiResource.setExpandableFieldId(id, this.invoice);
   }
 
-  /** Get expanded `invoice`. */
+  /** Get expanded {@code invoice}. */
   public Invoice getInvoiceObject() {
     return (this.invoice != null) ? this.invoice.getExpanded() : null;
   }
@@ -182,7 +182,7 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
     this.invoice = new ExpandableField<Invoice>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `subscription` object. */
+  /** Get ID of expandable {@code subscription} object. */
   public String getSubscription() {
     return (this.subscription != null) ? this.subscription.getId() : null;
   }
@@ -191,7 +191,7 @@ public class InvoiceItem extends ApiResource implements HasId, MetadataStore<Inv
     this.subscription = ApiResource.setExpandableFieldId(id, this.subscription);
   }
 
-  /** Get expanded `subscription`. */
+  /** Get expanded {@code subscription}. */
   public Subscription getSubscriptionObject() {
     return (this.subscription != null) ? this.subscription.getExpanded() : null;
   }

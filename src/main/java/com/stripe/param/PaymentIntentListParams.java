@@ -11,8 +11,8 @@ import lombok.Getter;
 @Getter
 public class PaymentIntentListParams extends ApiRequestParams {
   /**
-   * A filter on the list, based on the object `created` field. The value can be a string with an
-   * integer Unix timestamp, or it can be a dictionary with a number of different query options.
+   * A filter on the list, based on the object {@code created} field. The value can be a string with
+   * an integer Unix timestamp, or it can be a dictionary with a number of different query options.
    */
   @SerializedName("created")
   Object created;
@@ -22,10 +22,10 @@ public class PaymentIntentListParams extends ApiRequestParams {
   String customer;
 
   /**
-   * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the
-   * list. For instance, if you make a list request and receive 100 objects, starting with
-   * `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the
-   * previous page of the list.
+   * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
+   * in the list. For instance, if you make a list request and receive 100 objects, starting with
+   * {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to
+   * fetch the previous page of the list.
    */
   @SerializedName("ending_before")
   String endingBefore;
@@ -51,10 +51,10 @@ public class PaymentIntentListParams extends ApiRequestParams {
   Long limit;
 
   /**
-   * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the
-   * list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`,
-   * your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of
-   * the list.
+   * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
+   * in the list. For instance, if you make a list request and receive 100 objects, ending with
+   * {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in order to
+   * fetch the next page of the list.
    */
   @SerializedName("starting_after")
   String startingAfter;
@@ -108,8 +108,9 @@ public class PaymentIntentListParams extends ApiRequestParams {
     }
 
     /**
-     * A filter on the list, based on the object `created` field. The value can be a string with an
-     * integer Unix timestamp, or it can be a dictionary with a number of different query options.
+     * A filter on the list, based on the object {@code created} field. The value can be a string
+     * with an integer Unix timestamp, or it can be a dictionary with a number of different query
+     * options.
      */
     public Builder setCreated(Created created) {
       this.created = created;
@@ -117,8 +118,9 @@ public class PaymentIntentListParams extends ApiRequestParams {
     }
 
     /**
-     * A filter on the list, based on the object `created` field. The value can be a string with an
-     * integer Unix timestamp, or it can be a dictionary with a number of different query options.
+     * A filter on the list, based on the object {@code created} field. The value can be a string
+     * with an integer Unix timestamp, or it can be a dictionary with a number of different query
+     * options.
      */
     public Builder setCreated(Long created) {
       this.created = created;
@@ -132,10 +134,10 @@ public class PaymentIntentListParams extends ApiRequestParams {
     }
 
     /**
-     * A cursor for use in pagination. `ending_before` is an object ID that defines your place in
-     * the list. For instance, if you make a list request and receive 100 objects, starting with
-     * `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the
-     * previous page of the list.
+     * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
+     * in the list. For instance, if you make a list request and receive 100 objects, starting with
+     * {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to
+     * fetch the previous page of the list.
      */
     public Builder setEndingBefore(String endingBefore) {
       this.endingBefore = endingBefore;
@@ -204,10 +206,10 @@ public class PaymentIntentListParams extends ApiRequestParams {
     }
 
     /**
-     * A cursor for use in pagination. `starting_after` is an object ID that defines your place in
-     * the list. For instance, if you make a list request and receive 100 objects, ending with
-     * `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the
-     * next page of the list.
+     * A cursor for use in pagination. {@code starting_after} is an object ID that defines your
+     * place in the list. For instance, if you make a list request and receive 100 objects, ending
+     * with {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in
+     * order to fetch the next page of the list.
      */
     public Builder setStartingAfter(String startingAfter) {
       this.startingAfter = startingAfter;

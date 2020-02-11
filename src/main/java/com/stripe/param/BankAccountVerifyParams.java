@@ -11,8 +11,8 @@ import lombok.Getter;
 @Getter
 public class BankAccountVerifyParams extends ApiRequestParams {
   /**
-   * Two positive integers, in *cents*, equal to the values of the microdeposits sent to the bank
-   * account.
+   * Two positive integers, in <em>cents</em>, equal to the values of the microdeposits sent to the
+   * bank account.
    */
   @SerializedName("amounts")
   List<Long> amounts;

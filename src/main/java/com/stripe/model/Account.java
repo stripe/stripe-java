@@ -29,7 +29,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   /**
    * The business type.
    *
-   * <p>One of `company`, `government_entity`, `individual`, or `non_profit`.
+   * <p>One of {@code company}, {@code government_entity}, {@code individual}, or {@code
+   * non_profit}.
    */
   @SerializedName("business_type")
   String businessType;
@@ -54,7 +55,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
 
   /**
    * Three-letter ISO currency code representing the default currency for the account. This must be
-   * a currency that [Stripe supports in the account's country](https://stripe.com/docs/payouts).
+   * a currency that <a href="https://stripe.com/docs/payouts">Stripe supports in the account's
+   * country</a>.
    */
   @SerializedName("default_currency")
   String defaultCurrency;
@@ -97,7 +99,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `account`.
+   * <p>Equal to {@code account}.
    */
   @SerializedName("object")
   String object;
@@ -116,7 +118,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @SerializedName("tos_acceptance")
   TosAcceptance tosAcceptance;
 
-  /** The Stripe account type. Can be `standard`, `express`, or `custom`. */
+  /** The Stripe account type. Can be {@code standard}, {@code express}, or {@code custom}. */
   @SerializedName("type")
   String type;
 
@@ -177,16 +179,16 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * Updates a connected <a href="/docs/connect/accounts">Express or Custom account</a> by setting
-   * the values of the parameters passed. Any parameters not provided are left unchanged. Most
-   * parameters can be changed only for Custom accounts. (These are marked <strong>Custom
-   * Only</strong> below.) Parameters marked <strong>Custom and Express</strong> are supported by
-   * both account types.
+   * Updates a connected <a href="https://stripe.com/docs/connect/accounts">Express or Custom
+   * account</a> by setting the values of the parameters passed. Any parameters not provided are
+   * left unchanged. Most parameters can be changed only for Custom accounts. (These are marked
+   * <strong>Custom Only</strong> below.) Parameters marked <strong>Custom and Express</strong> are
+   * supported by both account types.
    *
    * <p>To update your own account, use the <a
    * href="https://dashboard.stripe.com/account">Dashboard</a>. Refer to our <a
-   * href="/docs/connect/updating-accounts">Connect</a> documentation to learn more about updating
-   * accounts.
+   * href="https://stripe.com/docs/connect/updating-accounts">Connect</a> documentation to learn
+   * more about updating accounts.
    */
   @Override
   public Account update(Map<String, Object> params) throws StripeException {
@@ -194,16 +196,16 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * Updates a connected <a href="/docs/connect/accounts">Express or Custom account</a> by setting
-   * the values of the parameters passed. Any parameters not provided are left unchanged. Most
-   * parameters can be changed only for Custom accounts. (These are marked <strong>Custom
-   * Only</strong> below.) Parameters marked <strong>Custom and Express</strong> are supported by
-   * both account types.
+   * Updates a connected <a href="https://stripe.com/docs/connect/accounts">Express or Custom
+   * account</a> by setting the values of the parameters passed. Any parameters not provided are
+   * left unchanged. Most parameters can be changed only for Custom accounts. (These are marked
+   * <strong>Custom Only</strong> below.) Parameters marked <strong>Custom and Express</strong> are
+   * supported by both account types.
    *
    * <p>To update your own account, use the <a
    * href="https://dashboard.stripe.com/account">Dashboard</a>. Refer to our <a
-   * href="/docs/connect/updating-accounts">Connect</a> documentation to learn more about updating
-   * accounts.
+   * href="https://stripe.com/docs/connect/updating-accounts">Connect</a> documentation to learn
+   * more about updating accounts.
    */
   @Override
   public Account update(Map<String, Object> params, RequestOptions options) throws StripeException {
@@ -216,32 +218,32 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * Updates a connected <a href="/docs/connect/accounts">Express or Custom account</a> by setting
-   * the values of the parameters passed. Any parameters not provided are left unchanged. Most
-   * parameters can be changed only for Custom accounts. (These are marked <strong>Custom
-   * Only</strong> below.) Parameters marked <strong>Custom and Express</strong> are supported by
-   * both account types.
+   * Updates a connected <a href="https://stripe.com/docs/connect/accounts">Express or Custom
+   * account</a> by setting the values of the parameters passed. Any parameters not provided are
+   * left unchanged. Most parameters can be changed only for Custom accounts. (These are marked
+   * <strong>Custom Only</strong> below.) Parameters marked <strong>Custom and Express</strong> are
+   * supported by both account types.
    *
    * <p>To update your own account, use the <a
    * href="https://dashboard.stripe.com/account">Dashboard</a>. Refer to our <a
-   * href="/docs/connect/updating-accounts">Connect</a> documentation to learn more about updating
-   * accounts.
+   * href="https://stripe.com/docs/connect/updating-accounts">Connect</a> documentation to learn
+   * more about updating accounts.
    */
   public Account update(AccountUpdateParams params) throws StripeException {
     return update(params, (RequestOptions) null);
   }
 
   /**
-   * Updates a connected <a href="/docs/connect/accounts">Express or Custom account</a> by setting
-   * the values of the parameters passed. Any parameters not provided are left unchanged. Most
-   * parameters can be changed only for Custom accounts. (These are marked <strong>Custom
-   * Only</strong> below.) Parameters marked <strong>Custom and Express</strong> are supported by
-   * both account types.
+   * Updates a connected <a href="https://stripe.com/docs/connect/accounts">Express or Custom
+   * account</a> by setting the values of the parameters passed. Any parameters not provided are
+   * left unchanged. Most parameters can be changed only for Custom accounts. (These are marked
+   * <strong>Custom Only</strong> below.) Parameters marked <strong>Custom and Express</strong> are
+   * supported by both account types.
    *
    * <p>To update your own account, use the <a
    * href="https://dashboard.stripe.com/account">Dashboard</a>. Refer to our <a
-   * href="/docs/connect/updating-accounts">Connect</a> documentation to learn more about updating
-   * accounts.
+   * href="https://stripe.com/docs/connect/updating-accounts">Connect</a> documentation to learn
+   * more about updating accounts.
    */
   public Account update(AccountUpdateParams params, RequestOptions options) throws StripeException {
     String url =
@@ -253,16 +255,18 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * Returns a list of accounts connected to your platform via <a href="/docs/connect">Connect</a>.
-   * If you’re not a platform, the list is empty.
+   * Returns a list of accounts connected to your platform via <a
+   * href="https://stripe.com/docs/connect">Connect</a>. If you’re not a platform, the list is
+   * empty.
    */
   public static AccountCollection list(Map<String, Object> params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * Returns a list of accounts connected to your platform via <a href="/docs/connect">Connect</a>.
-   * If you’re not a platform, the list is empty.
+   * Returns a list of accounts connected to your platform via <a
+   * href="https://stripe.com/docs/connect">Connect</a>. If you’re not a platform, the list is
+   * empty.
    */
   public static AccountCollection list(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -271,16 +275,18 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * Returns a list of accounts connected to your platform via <a href="/docs/connect">Connect</a>.
-   * If you’re not a platform, the list is empty.
+   * Returns a list of accounts connected to your platform via <a
+   * href="https://stripe.com/docs/connect">Connect</a>. If you’re not a platform, the list is
+   * empty.
    */
   public static AccountCollection list(AccountListParams params) throws StripeException {
     return list(params, (RequestOptions) null);
   }
 
   /**
-   * Returns a list of accounts connected to your platform via <a href="/docs/connect">Connect</a>.
-   * If you’re not a platform, the list is empty.
+   * Returns a list of accounts connected to your platform via <a
+   * href="https://stripe.com/docs/connect">Connect</a>. If you’re not a platform, the list is
+   * empty.
    */
   public static AccountCollection list(AccountListParams params, RequestOptions options)
       throws StripeException {
@@ -289,8 +295,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * With <a href="/docs/connect">Connect</a>, you can create Stripe accounts for your users. To do
-   * this, you’ll first need to <a
+   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can create Stripe accounts for
+   * your users. To do this, you’ll first need to <a
    * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
    *
    * <p>For Standard accounts, parameters other than <code>country</code>, <code>email</code>, and
@@ -302,8 +308,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * With <a href="/docs/connect">Connect</a>, you can create Stripe accounts for your users. To do
-   * this, you’ll first need to <a
+   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can create Stripe accounts for
+   * your users. To do this, you’ll first need to <a
    * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
    *
    * <p>For Standard accounts, parameters other than <code>country</code>, <code>email</code>, and
@@ -317,8 +323,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * With <a href="/docs/connect">Connect</a>, you can create Stripe accounts for your users. To do
-   * this, you’ll first need to <a
+   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can create Stripe accounts for
+   * your users. To do this, you’ll first need to <a
    * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
    *
    * <p>For Standard accounts, parameters other than <code>country</code>, <code>email</code>, and
@@ -330,8 +336,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * With <a href="/docs/connect">Connect</a>, you can create Stripe accounts for your users. To do
-   * this, you’ll first need to <a
+   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can create Stripe accounts for
+   * your users. To do this, you’ll first need to <a
    * href="https://dashboard.stripe.com/account/applications/settings">register your platform</a>.
    *
    * <p>For Standard accounts, parameters other than <code>country</code>, <code>email</code>, and
@@ -345,7 +351,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * With <a href="/docs/connect">Connect</a>, you can delete Custom or Express accounts you manage.
+   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can delete Custom or Express
+   * accounts you manage.
    *
    * <p>Accounts created using test-mode keys can be deleted at any time. Accounts created using
    * live-mode keys can only be deleted once all balances are zero.
@@ -359,7 +366,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * With <a href="/docs/connect">Connect</a>, you can delete Custom or Express accounts you manage.
+   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can delete Custom or Express
+   * accounts you manage.
    *
    * <p>Accounts created using test-mode keys can be deleted at any time. Accounts created using
    * live-mode keys can only be deleted once all balances are zero.
@@ -373,7 +381,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * With <a href="/docs/connect">Connect</a>, you can delete Custom or Express accounts you manage.
+   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can delete Custom or Express
+   * accounts you manage.
    *
    * <p>Accounts created using test-mode keys can be deleted at any time. Accounts created using
    * live-mode keys can only be deleted once all balances are zero.
@@ -387,7 +396,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * With <a href="/docs/connect">Connect</a>, you can delete Custom or Express accounts you manage.
+   * With <a href="https://stripe.com/docs/connect">Connect</a>, you can delete Custom or Express
+   * accounts you manage.
    *
    * <p>Accounts created using test-mode keys can be deleted at any time. Accounts created using
    * live-mode keys can only be deleted once all balances are zero.
@@ -407,7 +417,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * With <a href="/docs/connect">Connect</a>, you may flag accounts as suspicious.
+   * With <a href="https://stripe.com/docs/connect">Connect</a>, you may flag accounts as
+   * suspicious.
    *
    * <p>Test-mode Custom and Express accounts can be rejected at any time. Accounts created using
    * live-mode keys may only be rejected once all balances are zero.
@@ -417,7 +428,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * With <a href="/docs/connect">Connect</a>, you may flag accounts as suspicious.
+   * With <a href="https://stripe.com/docs/connect">Connect</a>, you may flag accounts as
+   * suspicious.
    *
    * <p>Test-mode Custom and Express accounts can be rejected at any time. Accounts created using
    * live-mode keys may only be rejected once all balances are zero.
@@ -432,7 +444,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * With <a href="/docs/connect">Connect</a>, you may flag accounts as suspicious.
+   * With <a href="https://stripe.com/docs/connect">Connect</a>, you may flag accounts as
+   * suspicious.
    *
    * <p>Test-mode Custom and Express accounts can be rejected at any time. Accounts created using
    * live-mode keys may only be rejected once all balances are zero.
@@ -442,7 +455,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   }
 
   /**
-   * With <a href="/docs/connect">Connect</a>, you may flag accounts as suspicious.
+   * With <a href="https://stripe.com/docs/connect">Connect</a>, you may flag accounts as
+   * suspicious.
    *
    * <p>Test-mode Custom and Express accounts can be rejected at any time. Accounts created using
    * live-mode keys may only be rejected once all balances are zero.
@@ -566,8 +580,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @EqualsAndHashCode(callSuper = false)
   public static class BusinessProfile extends StripeObject {
     /**
-     * [The merchant category code for the account](https://stripe.com/docs/connect/setting-mcc).
-     * MCCs are used to classify businesses based on the goods or services they provide.
+     * <a href="https://stripe.com/docs/connect/setting-mcc">The merchant category code for the
+     * account</a>. MCCs are used to classify businesses based on the goods or services they
+     * provide.
      */
     @SerializedName("mcc")
     String mcc;
@@ -612,7 +627,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      * The status of the card issuing capability of the account, or whether you can use Issuing to
      * distribute funds on cards
      *
-     * <p>One of `active`, `inactive`, or `pending`.
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
      */
     @SerializedName("card_issuing")
     String cardIssuing;
@@ -621,7 +636,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      * The status of the card payments capability of the account, or whether the account can
      * directly process credit and debit card charges.
      *
-     * <p>One of `active`, `inactive`, or `pending`.
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
      */
     @SerializedName("card_payments")
     String cardPayments;
@@ -629,7 +644,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     /**
      * The status of the legacy payments capability of the account.
      *
-     * <p>One of `active`, `inactive`, or `pending`.
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
      */
     @SerializedName("legacy_payments")
     String legacyPayments;
@@ -638,7 +653,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
      * The status of the transfers capability of the account, or whether your platform can transfer
      * funds to the account.
      *
-     * <p>One of `active`, `inactive`, or `pending`.
+     * <p>One of {@code active}, {@code inactive}, or {@code pending}.
      */
     @SerializedName("transfers")
     String transfers;
@@ -660,18 +675,20 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     Person.JapanAddress addressKanji;
 
     /**
-     * Whether the company's directors have been provided. This Boolean will be `true` if you've
-     * manually indicated that all directors are provided via [the `directors_provided`
-     * parameter](https://stripe.com/docs/api/accounts/update#update_account-company-directors_provided).
+     * Whether the company's directors have been provided. This Boolean will be {@code true} if
+     * you've manually indicated that all directors are provided via <a
+     * href="https://stripe.com/docs/api/accounts/update#update_account-company-directors_provided">the
+     * {@code directors_provided} parameter</a>.
      */
     @SerializedName("directors_provided")
     Boolean directorsProvided;
 
     /**
-     * Whether the company's executives have been provided. This Boolean will be `true` if you've
-     * manually indicated that all executives are provided via [the `executives_provided`
-     * parameter](https://stripe.com/docs/api/accounts/update#update_account-company-executives_provided),
-     * or if Stripe determined that sufficient executives were provided.
+     * Whether the company's executives have been provided. This Boolean will be {@code true} if
+     * you've manually indicated that all executives are provided via <a
+     * href="https://stripe.com/docs/api/accounts/update#update_account-company-executives_provided">the
+     * {@code executives_provided} parameter</a>, or if Stripe determined that sufficient executives
+     * were provided.
      */
     @SerializedName("executives_provided")
     Boolean executivesProvided;
@@ -689,12 +706,13 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     String nameKanji;
 
     /**
-     * Whether the company's owners have been provided. This Boolean will be `true` if you've
-     * manually indicated that all owners are provided via [the `owners_provided`
-     * parameter](https://stripe.com/docs/api/accounts/update#update_account-company-owners_provided),
-     * or if Stripe determined that sufficient owners were provided. Stripe determines ownership
-     * requirements using both the number of owners provided and their total percent ownership
-     * (calculated by adding the `percent_ownership` of each owner together).
+     * Whether the company's owners have been provided. This Boolean will be {@code true} if you've
+     * manually indicated that all owners are provided via <a
+     * href="https://stripe.com/docs/api/accounts/update#update_account-company-owners_provided">the
+     * {@code owners_provided} parameter</a>, or if Stripe determined that sufficient owners were
+     * provided. Stripe determines ownership requirements using both the number of owners provided
+     * and their total percent ownership (calculated by adding the {@code percent_ownership} of each
+     * owner together).
      */
     @SerializedName("owners_provided")
     Boolean ownersProvided;
@@ -706,10 +724,11 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     /**
      * The category identifying the legal structure of the company or legal entity.
      *
-     * <p>One of `government_instrumentality`, `governmental_unit`, `incorporated_non_profit`,
-     * `multi_member_llc`, `private_corporation`, `private_partnership`, `public_corporation`,
-     * `public_partnership`, `tax_exempt_government_instrumentality`, `unincorporated_association`,
-     * or `unincorporated_non_profit`.
+     * <p>One of {@code government_instrumentality}, {@code governmental_unit}, {@code
+     * incorporated_non_profit}, {@code multi_member_llc}, {@code private_corporation}, {@code
+     * private_partnership}, {@code public_corporation}, {@code public_partnership}, {@code
+     * tax_exempt_government_instrumentality}, {@code unincorporated_association}, or {@code
+     * unincorporated_non_profit}.
      */
     @SerializedName("structure")
     String structure;
@@ -718,7 +737,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("tax_id_provided")
     Boolean taxIdProvided;
 
-    /** The jurisdiction in which the `tax_id` is registered (Germany-based companies only). */
+    /**
+     * The jurisdiction in which the {@code tax_id} is registered (Germany-based companies only).
+     */
     @SerializedName("tax_id_registrar")
     String taxIdRegistrar;
 
@@ -742,8 +763,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       @EqualsAndHashCode(callSuper = false)
       public static class VerificationDocument extends StripeObject {
         /**
-         * The back of a document returned by a [file upload](#create_file) with a `purpose` value
-         * of `additional_verification`.
+         * The back of a document returned by a <a
+         * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
+         * value of {@code additional_verification}.
          */
         @SerializedName("back")
         @Getter(lombok.AccessLevel.NONE)
@@ -755,26 +777,28 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
         String details;
 
         /**
-         * One of `document_corrupt`, `document_expired`, `document_failed_copy`,
-         * `document_failed_greyscale`, `document_failed_other`, `document_failed_test_mode`,
-         * `document_fraudulent`, `document_incomplete`, `document_invalid`, `document_manipulated`,
-         * `document_not_readable`, `document_not_uploaded`, `document_type_not_supported`, or
-         * `document_too_large`. A machine-readable code specifying the verification state for this
+         * One of {@code document_corrupt}, {@code document_expired}, {@code document_failed_copy},
+         * {@code document_failed_greyscale}, {@code document_failed_other}, {@code
+         * document_failed_test_mode}, {@code document_fraudulent}, {@code document_incomplete},
+         * {@code document_invalid}, {@code document_manipulated}, {@code document_not_readable},
+         * {@code document_not_uploaded}, {@code document_type_not_supported}, or {@code
+         * document_too_large}. A machine-readable code specifying the verification state for this
          * document.
          */
         @SerializedName("details_code")
         String detailsCode;
 
         /**
-         * The front of a document returned by a [file upload](#create_file) with a `purpose` value
-         * of `additional_verification`.
+         * The front of a document returned by a <a
+         * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
+         * value of {@code additional_verification}.
          */
         @SerializedName("front")
         @Getter(lombok.AccessLevel.NONE)
         @Setter(lombok.AccessLevel.NONE)
         ExpandableField<File> front;
 
-        /** Get id of expandable `back` object. */
+        /** Get ID of expandable {@code back} object. */
         public String getBack() {
           return (this.back != null) ? this.back.getId() : null;
         }
@@ -783,7 +807,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
           this.back = ApiResource.setExpandableFieldId(id, this.back);
         }
 
-        /** Get expanded `back`. */
+        /** Get expanded {@code back}. */
         public File getBackObject() {
           return (this.back != null) ? this.back.getExpanded() : null;
         }
@@ -792,7 +816,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
           this.back = new ExpandableField<File>(expandableObject.getId(), expandableObject);
         }
 
-        /** Get id of expandable `front` object. */
+        /** Get ID of expandable {@code front} object. */
         public String getFront() {
           return (this.front != null) ? this.front.getId() : null;
         }
@@ -801,7 +825,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
           this.front = ApiResource.setExpandableFieldId(id, this.front);
         }
 
-        /** Get expanded `front`. */
+        /** Get expanded {@code front}. */
         public File getFrontObject() {
           return (this.front != null) ? this.front.getExpanded() : null;
         }
@@ -841,22 +865,23 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     Long delayDays;
 
     /**
-     * How frequently funds will be paid out. One of `manual` (payouts only created via API call),
-     * `daily`, `weekly`, or `monthly`.
+     * How frequently funds will be paid out. One of {@code manual} (payouts only created via API
+     * call), {@code daily}, {@code weekly}, or {@code monthly}.
      */
     @SerializedName("interval")
     String interval;
 
     /**
-     * The day of the month funds will be paid out. Only shown if `interval` is monthly. Payouts
-     * scheduled between the 29th and 31st of the month are sent on the last day of shorter months.
+     * The day of the month funds will be paid out. Only shown if {@code interval} is monthly.
+     * Payouts scheduled between the 29th and 31st of the month are sent on the last day of shorter
+     * months.
      */
     @SerializedName("monthly_anchor")
     Long monthlyAnchor;
 
     /**
      * The day of the week funds will be paid out, of the style 'monday', 'tuesday', etc. Only shown
-     * if `interval` is weekly.
+     * if {@code interval} is weekly.
      */
     @SerializedName("weekly_anchor")
     String weeklyAnchor;
@@ -867,8 +892,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @EqualsAndHashCode(callSuper = false)
   public static class Requirements extends StripeObject {
     /**
-     * The date the fields in `currently_due` must be collected by to keep payouts enabled for the
-     * account. These fields might block payouts sooner if the next threshold is reached before
+     * The date the fields in {@code currently_due} must be collected by to keep payouts enabled for
+     * the account. These fields might block payouts sooner if the next threshold is reached before
      * these fields are collected.
      */
     @SerializedName("current_deadline")
@@ -876,30 +901,32 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
 
     /**
      * The fields that need to be collected to keep the account enabled. If not collected by the
-     * `current_deadline`, these fields appear in `past_due` as well, and the account is disabled.
+     * {@code current_deadline}, these fields appear in {@code past_due} as well, and the account is
+     * disabled.
      */
     @SerializedName("currently_due")
     List<String> currentlyDue;
 
     /**
      * If the account is disabled, this string describes why the account can’t create charges or
-     * receive payouts. Can be `requirements.past_due`, `requirements.pending_verification`,
-     * `rejected.fraud`, `rejected.terms_of_service`, `rejected.listed`, `rejected.other`, `listed`,
-     * `under_review`, or `other`.
+     * receive payouts. Can be {@code requirements.past_due}, {@code
+     * requirements.pending_verification}, {@code rejected.fraud}, {@code
+     * rejected.terms_of_service}, {@code rejected.listed}, {@code rejected.other}, {@code listed},
+     * {@code under_review}, or {@code other}.
      */
     @SerializedName("disabled_reason")
     String disabledReason;
 
     /**
      * The fields that need to be collected assuming all volume thresholds are reached. As they
-     * become required, these fields appear in `currently_due` as well, and the `current_deadline`
-     * is set.
+     * become required, these fields appear in {@code currently_due} as well, and the {@code
+     * current_deadline} is set.
      */
     @SerializedName("eventually_due")
     List<String> eventuallyDue;
 
     /**
-     * The fields that weren't collected by the `current_deadline`. These fields need to be
+     * The fields that weren't collected by the {@code current_deadline}. These fields need to be
      * collected to re-enable the account.
      */
     @SerializedName("past_due")
@@ -908,7 +935,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     /**
      * Fields that may become required depending on the results of verification or review. An empty
      * array unless an asynchronous verification is pending. If verification fails, the fields in
-     * this array become required and move to `currently_due` or `past_due`.
+     * this array become required and move to {@code currently_due} or {@code past_due}.
      */
     @SerializedName("pending_verification")
     List<String> pendingVerification;
@@ -939,8 +966,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   @EqualsAndHashCode(callSuper = false)
   public static class SettingsBranding extends StripeObject {
     /**
-     * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) An icon for the account.
-     * Must be square and at least 128px x 128px.
+     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) An icon for
+     * the account. Must be square and at least 128px x 128px.
      */
     @SerializedName("icon")
     @Getter(lombok.AccessLevel.NONE)
@@ -948,9 +975,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     ExpandableField<File> icon;
 
     /**
-     * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A logo for the account
-     * that will be used in Checkout instead of the icon and without the account's name next to it
-     * if provided. Must be at least 128px x 128px.
+     * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) A logo for the
+     * account that will be used in Checkout instead of the icon and without the account's name next
+     * to it if provided. Must be at least 128px x 128px.
      */
     @SerializedName("logo")
     @Getter(lombok.AccessLevel.NONE)
@@ -961,7 +988,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
     @SerializedName("primary_color")
     String primaryColor;
 
-    /** Get id of expandable `icon` object. */
+    /** Get ID of expandable {@code icon} object. */
     public String getIcon() {
       return (this.icon != null) ? this.icon.getId() : null;
     }
@@ -970,7 +997,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       this.icon = ApiResource.setExpandableFieldId(id, this.icon);
     }
 
-    /** Get expanded `icon`. */
+    /** Get expanded {@code icon}. */
     public File getIconObject() {
       return (this.icon != null) ? this.icon.getExpanded() : null;
     }
@@ -979,7 +1006,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       this.icon = new ExpandableField<File>(expandableObject.getId(), expandableObject);
     }
 
-    /** Get id of expandable `logo` object. */
+    /** Get ID of expandable {@code logo} object. */
     public String getLogo() {
       return (this.logo != null) ? this.logo.getId() : null;
     }
@@ -988,7 +1015,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
       this.logo = ApiResource.setExpandableFieldId(id, this.logo);
     }
 
-    /** Get expanded `logo`. */
+    /** Get expanded {@code logo}. */
     public File getLogoObject() {
       return (this.logo != null) ? this.logo.getExpanded() : null;
     }
@@ -1007,8 +1034,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
 
     /**
      * The default text that appears on credit card statements when a charge is made. This field
-     * prefixes any dynamic `statement_descriptor` specified on the charge.
-     * `statement_descriptor_prefix` is useful for maximizing descriptor space for the dynamic
+     * prefixes any dynamic {@code statement_descriptor} specified on the charge. {@code
+     * statement_descriptor_prefix} is useful for maximizing descriptor space for the dynamic
      * portion.
      */
     @SerializedName("statement_descriptor_prefix")
@@ -1028,7 +1055,8 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
 
     /**
      * The timezone used in the Stripe Dashboard for this account. A list of possible time zone
-     * values is maintained at the [IANA Time Zone Database](http://www.iana.org/time-zones).
+     * values is maintained at the <a href="http://www.iana.org/time-zones">IANA Time Zone
+     * Database</a>.
      */
     @SerializedName("timezone")
     String timezone;
@@ -1040,7 +1068,7 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   public static class SettingsPayments extends StripeObject {
     /**
      * The default text that appears on credit card statements when a charge is made. This field
-     * prefixes any dynamic `statement_descriptor` specified on the charge.
+     * prefixes any dynamic {@code statement_descriptor} specified on the charge.
      */
     @SerializedName("statement_descriptor")
     String statementDescriptor;
@@ -1066,9 +1094,9 @@ public class Account extends ApiResource implements MetadataStore<Account>, Paym
   public static class SettingsPayouts extends StripeObject {
     /**
      * A Boolean indicating if Stripe should try to reclaim negative balances from an attached bank
-     * account. See our [Understanding Connect Account
-     * Balances](https://stripe.com/docs/connect/account-balances) documentation for details.
-     * Default value is `true` for Express accounts and `false` for Custom accounts.
+     * account. See our <a href="https://stripe.com/docs/connect/account-balances">Understanding
+     * Connect Account Balances</a> documentation for details. Default value is {@code true} for
+     * Express accounts and {@code false} for Custom accounts.
      */
     @SerializedName("debit_negative_balances")
     Boolean debitNegativeBalances;

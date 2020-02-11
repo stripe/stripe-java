@@ -12,17 +12,17 @@ import lombok.Getter;
 public class OrderPayParams extends ApiRequestParams {
   /**
    * A fee in %s that will be applied to the order and transferred to the application owner's Stripe
-   * account. The request must be made with an OAuth key or the `Stripe-Account` header in order to
-   * take an application fee. For more information, see the application fees
-   * [documentation](https://stripe.com/docs/connect/direct-charges#collecting-fees).
+   * account. The request must be made with an OAuth key or the {@code Stripe-Account} header in
+   * order to take an application fee. For more information, see the application fees <a
+   * href="https://stripe.com/docs/connect/direct-charges#collecting-fees">documentation</a>.
    */
   @SerializedName("application_fee")
   Long applicationFee;
 
   /**
    * The ID of an existing customer that will be charged for this order. If no customer was attached
-   * to the order at creation, either `source` or `customer` is required. Otherwise, the specified
-   * customer will be charged instead of the one attached to the order.
+   * to the order at creation, either {@code source} or {@code customer} is required. Otherwise, the
+   * specified customer will be charged instead of the one attached to the order.
    */
   @SerializedName("customer")
   String customer;
@@ -50,17 +50,18 @@ public class OrderPayParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
   /**
-   * A [Token](https://stripe.com/docs/api#tokens)'s or a
-   * [Source](https://stripe.com/docs/api#sources)'s ID, as returned by
-   * [Elements](https://stripe.com/docs/elements). If no customer was attached to the order at
-   * creation, either `source` or `customer` is required. Otherwise, the specified source will be
-   * charged intead of the customer attached to the order.
+   * A <a href="https://stripe.com/docs/api#tokens">Token</a>'s or a <a
+   * href="https://stripe.com/docs/api#sources">Source</a>'s ID, as returned by <a
+   * href="https://stripe.com/docs/elements">Elements</a>. If no customer was attached to the order
+   * at creation, either {@code source} or {@code customer} is required. Otherwise, the specified
+   * source will be charged intead of the customer attached to the order.
    */
   @SerializedName("source")
   String source;
@@ -115,9 +116,9 @@ public class OrderPayParams extends ApiRequestParams {
 
     /**
      * A fee in %s that will be applied to the order and transferred to the application owner's
-     * Stripe account. The request must be made with an OAuth key or the `Stripe-Account` header in
-     * order to take an application fee. For more information, see the application fees
-     * [documentation](https://stripe.com/docs/connect/direct-charges#collecting-fees).
+     * Stripe account. The request must be made with an OAuth key or the {@code Stripe-Account}
+     * header in order to take an application fee. For more information, see the application fees <a
+     * href="https://stripe.com/docs/connect/direct-charges#collecting-fees">documentation</a>.
      */
     public Builder setApplicationFee(Long applicationFee) {
       this.applicationFee = applicationFee;
@@ -126,8 +127,8 @@ public class OrderPayParams extends ApiRequestParams {
 
     /**
      * The ID of an existing customer that will be charged for this order. If no customer was
-     * attached to the order at creation, either `source` or `customer` is required. Otherwise, the
-     * specified customer will be charged instead of the one attached to the order.
+     * attached to the order at creation, either {@code source} or {@code customer} is required.
+     * Otherwise, the specified customer will be charged instead of the one attached to the order.
      */
     public Builder setCustomer(String customer) {
       this.customer = customer;
@@ -222,11 +223,11 @@ public class OrderPayParams extends ApiRequestParams {
     }
 
     /**
-     * A [Token](https://stripe.com/docs/api#tokens)'s or a
-     * [Source](https://stripe.com/docs/api#sources)'s ID, as returned by
-     * [Elements](https://stripe.com/docs/elements). If no customer was attached to the order at
-     * creation, either `source` or `customer` is required. Otherwise, the specified source will be
-     * charged intead of the customer attached to the order.
+     * A <a href="https://stripe.com/docs/api#tokens">Token</a>'s or a <a
+     * href="https://stripe.com/docs/api#sources">Source</a>'s ID, as returned by <a
+     * href="https://stripe.com/docs/elements">Elements</a>. If no customer was attached to the
+     * order at creation, either {@code source} or {@code customer} is required. Otherwise, the
+     * specified source will be charged intead of the customer attached to the order.
      */
     public Builder setSource(String source) {
       this.source = source;

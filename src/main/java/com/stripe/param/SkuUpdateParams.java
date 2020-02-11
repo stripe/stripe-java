@@ -19,7 +19,7 @@ public class SkuUpdateParams extends ApiRequestParams {
 
   /**
    * A dictionary of attributes and values for the attributes defined by the product. When
-   * specified, `attributes` will partially update the existing attributes dictionary on the
+   * specified, {@code attributes} will partially update the existing attributes dictionary on the
    * product, with the postcondition that a value must be present for each attribute key on the
    * product.
    */
@@ -27,8 +27,8 @@ public class SkuUpdateParams extends ApiRequestParams {
   Map<String, String> attributes;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   Object currency;
@@ -57,7 +57,8 @@ public class SkuUpdateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -75,7 +76,7 @@ public class SkuUpdateParams extends ApiRequestParams {
 
   /**
    * The ID of the product that this SKU should belong to. The product must exist, have the same set
-   * of attribute names as the SKU's current product, and be of type `good`.
+   * of attribute names as the SKU's current product, and be of type {@code good}.
    */
   @SerializedName("product")
   Object product;
@@ -181,8 +182,9 @@ public class SkuUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-     * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
      */
     public Builder setCurrency(String currency) {
       this.currency = currency;
@@ -190,8 +192,9 @@ public class SkuUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-     * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>.
      */
     public Builder setCurrency(EmptyParam currency) {
       this.currency = currency;
@@ -317,7 +320,7 @@ public class SkuUpdateParams extends ApiRequestParams {
 
     /**
      * The ID of the product that this SKU should belong to. The product must exist, have the same
-     * set of attribute names as the SKU's current product, and be of type `good`.
+     * set of attribute names as the SKU's current product, and be of type {@code good}.
      */
     public Builder setProduct(String product) {
       this.product = product;
@@ -326,7 +329,7 @@ public class SkuUpdateParams extends ApiRequestParams {
 
     /**
      * The ID of the product that this SKU should belong to. The product must exist, have the same
-     * set of attribute names as the SKU's current product, and be of type `good`.
+     * set of attribute names as the SKU's current product, and be of type {@code good}.
      */
     public Builder setProduct(EmptyParam product) {
       this.product = product;
@@ -345,17 +348,21 @@ public class SkuUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The count of inventory available. Required if `type` is `finite`. */
+    /** The count of inventory available. Required if {@code type} is {@code finite}. */
     @SerializedName("quantity")
     Long quantity;
 
-    /** Inventory type. Possible values are `finite`, `bucket` (not quantified), and `infinite`. */
+    /**
+     * Inventory type. Possible values are {@code finite}, {@code bucket} (not quantified), and
+     * {@code infinite}.
+     */
     @SerializedName("type")
     Type type;
 
     /**
-     * An indicator of the inventory available. Possible values are `in_stock`, `limited`, and
-     * `out_of_stock`. Will be present if and only if `type` is `bucket`.
+     * An indicator of the inventory available. Possible values are {@code in_stock}, {@code
+     * limited}, and {@code out_of_stock}. Will be present if and only if {@code type} is {@code
+     * bucket}.
      */
     @SerializedName("value")
     EnumParam value;
@@ -411,14 +418,15 @@ public class SkuUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The count of inventory available. Required if `type` is `finite`. */
+      /** The count of inventory available. Required if {@code type} is {@code finite}. */
       public Builder setQuantity(Long quantity) {
         this.quantity = quantity;
         return this;
       }
 
       /**
-       * Inventory type. Possible values are `finite`, `bucket` (not quantified), and `infinite`.
+       * Inventory type. Possible values are {@code finite}, {@code bucket} (not quantified), and
+       * {@code infinite}.
        */
       public Builder setType(Type type) {
         this.type = type;
@@ -426,8 +434,9 @@ public class SkuUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * An indicator of the inventory available. Possible values are `in_stock`, `limited`, and
-       * `out_of_stock`. Will be present if and only if `type` is `bucket`.
+       * An indicator of the inventory available. Possible values are {@code in_stock}, {@code
+       * limited}, and {@code out_of_stock}. Will be present if and only if {@code type} is {@code
+       * bucket}.
        */
       public Builder setValue(Value value) {
         this.value = value;
@@ -435,8 +444,9 @@ public class SkuUpdateParams extends ApiRequestParams {
       }
 
       /**
-       * An indicator of the inventory available. Possible values are `in_stock`, `limited`, and
-       * `out_of_stock`. Will be present if and only if `type` is `bucket`.
+       * An indicator of the inventory available. Possible values are {@code in_stock}, {@code
+       * limited}, and {@code out_of_stock}. Will be present if and only if {@code type} is {@code
+       * bucket}.
        */
       public Builder setValue(EmptyParam value) {
         this.value = value;

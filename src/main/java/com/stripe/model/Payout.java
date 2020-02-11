@@ -31,9 +31,10 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   Long arrivalDate;
 
   /**
-   * Returns `true` if the payout was created by an [automated payout
-   * schedule](https://stripe.com/docs/payouts#payout-schedule), and `false` if it was [requested
-   * manually](https://stripe.com/docs/payouts#manual-payouts).
+   * Returns {@code true} if the payout was created by an <a
+   * href="https://stripe.com/docs/payouts#payout-schedule">automated payout schedule</a>, and
+   * {@code false} if it was <a href="https://stripe.com/docs/payouts#manual-payouts">requested
+   * manually</a>.
    */
   @SerializedName("automatic")
   Boolean automatic;
@@ -51,8 +52,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   Long created;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -78,8 +79,9 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   ExpandableField<BalanceTransaction> failureBalanceTransaction;
 
   /**
-   * Error code explaining reason for payout failure if available. See [Types of payout
-   * failures](https://stripe.com/docs/api#payout_failures) for a list of failure codes.
+   * Error code explaining reason for payout failure if available. See <a
+   * href="https://stripe.com/docs/api#payout_failures">Types of payout failures</a> for a list of
+   * failure codes.
    */
   @SerializedName("failure_code")
   String failureCode;
@@ -94,8 +96,8 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   String id;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -109,9 +111,10 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   Map<String, String> metadata;
 
   /**
-   * The method used to send this payout, which can be `standard` or `instant`. `instant` is only
-   * supported for payouts to debit cards. (See [Instant payouts for
-   * marketplaces](https://stripe.com/blog/instant-payouts-for-marketplaces) for more information.)
+   * The method used to send this payout, which can be {@code standard} or {@code instant}. {@code
+   * instant} is only supported for payouts to debit cards. (See <a
+   * href="https://stripe.com/blog/instant-payouts-for-marketplaces">Instant payouts for
+   * marketplaces</a> for more information.)
    */
   @SerializedName("method")
   String method;
@@ -119,12 +122,12 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `payout`.
+   * <p>Equal to {@code payout}.
    */
   @SerializedName("object")
   String object;
 
-  /** The source balance this payout came from. One of `card` or `bank_account`. */
+  /** The source balance this payout came from. One of {@code card} or {@code bank_account}. */
   @SerializedName("source_type")
   String sourceType;
 
@@ -133,19 +136,20 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
   String statementDescriptor;
 
   /**
-   * Current status of the payout (`paid`, `pending`, `in_transit`, `canceled` or `failed`). A
-   * payout will be `pending` until it is submitted to the bank, at which point it becomes
-   * `in_transit`. It will then change to `paid` if the transaction goes through. If it does not go
-   * through successfully, its status will change to `failed` or `canceled`.
+   * Current status of the payout ({@code paid}, {@code pending}, {@code in_transit}, {@code
+   * canceled} or {@code failed}). A payout will be {@code pending} until it is submitted to the
+   * bank, at which point it becomes {@code in_transit}. It will then change to {@code paid} if the
+   * transaction goes through. If it does not go through successfully, its status will change to
+   * {@code failed} or {@code canceled}.
    */
   @SerializedName("status")
   String status;
 
-  /** Can be `bank_account` or `card`. */
+  /** Can be {@code bank_account} or {@code card}. */
   @SerializedName("type")
   String type;
 
-  /** Get id of expandable `balanceTransaction` object. */
+  /** Get ID of expandable {@code balanceTransaction} object. */
   public String getBalanceTransaction() {
     return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
   }
@@ -154,7 +158,7 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
     this.balanceTransaction = ApiResource.setExpandableFieldId(id, this.balanceTransaction);
   }
 
-  /** Get expanded `balanceTransaction`. */
+  /** Get expanded {@code balanceTransaction}. */
   public BalanceTransaction getBalanceTransactionObject() {
     return (this.balanceTransaction != null) ? this.balanceTransaction.getExpanded() : null;
   }
@@ -164,7 +168,7 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
         new ExpandableField<BalanceTransaction>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `destination` object. */
+  /** Get ID of expandable {@code destination} object. */
   public String getDestination() {
     return (this.destination != null) ? this.destination.getId() : null;
   }
@@ -173,7 +177,7 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
     this.destination = ApiResource.setExpandableFieldId(id, this.destination);
   }
 
-  /** Get expanded `destination`. */
+  /** Get expanded {@code destination}. */
   public ExternalAccount getDestinationObject() {
     return (this.destination != null) ? this.destination.getExpanded() : null;
   }
@@ -183,7 +187,7 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
         new ExpandableField<ExternalAccount>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `failureBalanceTransaction` object. */
+  /** Get ID of expandable {@code failureBalanceTransaction} object. */
   public String getFailureBalanceTransaction() {
     return (this.failureBalanceTransaction != null) ? this.failureBalanceTransaction.getId() : null;
   }
@@ -193,7 +197,7 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
         ApiResource.setExpandableFieldId(id, this.failureBalanceTransaction);
   }
 
-  /** Get expanded `failureBalanceTransaction`. */
+  /** Get expanded {@code failureBalanceTransaction}. */
   public BalanceTransaction getFailureBalanceTransactionObject() {
     return (this.failureBalanceTransaction != null)
         ? this.failureBalanceTransaction.getExpanded()
@@ -293,15 +297,16 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
 
   /**
    * To send funds to your own bank account, you create a new payout object. Your <a
-   * href="#balance">Stripe balance</a> must be able to cover the payout amount, or you’ll receive
-   * an “Insufficient Funds” error.
+   * href="https://stripe.com/docs/api#balance">Stripe balance</a> must be able to cover the payout
+   * amount, or you’ll receive an “Insufficient Funds” error.
    *
    * <p>If your API key is in test mode, money won’t actually be sent, though everything else will
    * occur as if in live mode.
    *
    * <p>If you are creating a manual payout on a Stripe account that uses multiple payment source
    * types, you’ll need to specify the source type balance that the payout should draw from. The <a
-   * href="#balance_object">balance object</a> details available and pending amounts by source type.
+   * href="https://stripe.com/docs/api#balance_object">balance object</a> details available and
+   * pending amounts by source type.
    */
   public static Payout create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -309,15 +314,16 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
 
   /**
    * To send funds to your own bank account, you create a new payout object. Your <a
-   * href="#balance">Stripe balance</a> must be able to cover the payout amount, or you’ll receive
-   * an “Insufficient Funds” error.
+   * href="https://stripe.com/docs/api#balance">Stripe balance</a> must be able to cover the payout
+   * amount, or you’ll receive an “Insufficient Funds” error.
    *
    * <p>If your API key is in test mode, money won’t actually be sent, though everything else will
    * occur as if in live mode.
    *
    * <p>If you are creating a manual payout on a Stripe account that uses multiple payment source
    * types, you’ll need to specify the source type balance that the payout should draw from. The <a
-   * href="#balance_object">balance object</a> details available and pending amounts by source type.
+   * href="https://stripe.com/docs/api#balance_object">balance object</a> details available and
+   * pending amounts by source type.
    */
   public static Payout create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -327,15 +333,16 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
 
   /**
    * To send funds to your own bank account, you create a new payout object. Your <a
-   * href="#balance">Stripe balance</a> must be able to cover the payout amount, or you’ll receive
-   * an “Insufficient Funds” error.
+   * href="https://stripe.com/docs/api#balance">Stripe balance</a> must be able to cover the payout
+   * amount, or you’ll receive an “Insufficient Funds” error.
    *
    * <p>If your API key is in test mode, money won’t actually be sent, though everything else will
    * occur as if in live mode.
    *
    * <p>If you are creating a manual payout on a Stripe account that uses multiple payment source
    * types, you’ll need to specify the source type balance that the payout should draw from. The <a
-   * href="#balance_object">balance object</a> details available and pending amounts by source type.
+   * href="https://stripe.com/docs/api#balance_object">balance object</a> details available and
+   * pending amounts by source type.
    */
   public static Payout create(PayoutCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -343,15 +350,16 @@ public class Payout extends ApiResource implements MetadataStore<Payout>, Balanc
 
   /**
    * To send funds to your own bank account, you create a new payout object. Your <a
-   * href="#balance">Stripe balance</a> must be able to cover the payout amount, or you’ll receive
-   * an “Insufficient Funds” error.
+   * href="https://stripe.com/docs/api#balance">Stripe balance</a> must be able to cover the payout
+   * amount, or you’ll receive an “Insufficient Funds” error.
    *
    * <p>If your API key is in test mode, money won’t actually be sent, though everything else will
    * occur as if in live mode.
    *
    * <p>If you are creating a manual payout on a Stripe account that uses multiple payment source
    * types, you’ll need to specify the source type balance that the payout should draw from. The <a
-   * href="#balance_object">balance object</a> details available and pending amounts by source type.
+   * href="https://stripe.com/docs/api#balance_object">balance object</a> details available and
+   * pending amounts by source type.
    */
   public static Payout create(PayoutCreateParams params, RequestOptions options)
       throws StripeException {

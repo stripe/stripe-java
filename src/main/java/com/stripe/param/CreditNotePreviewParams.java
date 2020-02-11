@@ -12,13 +12,13 @@ import lombok.Getter;
 
 @Getter
 public class CreditNotePreviewParams extends ApiRequestParams {
-  /** The integer amount in **%s** representing the total amount of the credit note. */
+  /** The integer amount in <strong>%s</strong> representing the total amount of the credit note. */
   @SerializedName("amount")
   Long amount;
 
   /**
-   * The integer amount in **%s** representing the amount to credit the customer's balance, which
-   * will be automatically applied to their next invoice.
+   * The integer amount in <strong>%s</strong> representing the amount to credit the customer's
+   * balance, which will be automatically applied to their next invoice.
    */
   @SerializedName("credit_amount")
   Long creditAmount;
@@ -51,18 +51,22 @@ public class CreditNotePreviewParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
-  /** The integer amount in **%s** representing the amount that is credited outside of Stripe. */
+  /**
+   * The integer amount in <strong>%s</strong> representing the amount that is credited outside of
+   * Stripe.
+   */
   @SerializedName("out_of_band_amount")
   Long outOfBandAmount;
 
   /**
-   * Reason for issuing this credit note, one of `duplicate`, `fraudulent`, `order_change`, or
-   * `product_unsatisfactory`.
+   * Reason for issuing this credit note, one of {@code duplicate}, {@code fraudulent}, {@code
+   * order_change}, or {@code product_unsatisfactory}.
    */
   @SerializedName("reason")
   Reason reason;
@@ -72,8 +76,8 @@ public class CreditNotePreviewParams extends ApiRequestParams {
   String refund;
 
   /**
-   * The integer amount in **%s** representing the amount to refund. If set, a refund will be
-   * created for the charge associated with the invoice.
+   * The integer amount in <strong>%s</strong> representing the amount to refund. If set, a refund
+   * will be created for the charge associated with the invoice.
    */
   @SerializedName("refund_amount")
   Long refundAmount;
@@ -151,15 +155,17 @@ public class CreditNotePreviewParams extends ApiRequestParams {
           this.refundAmount);
     }
 
-    /** The integer amount in **%s** representing the total amount of the credit note. */
+    /**
+     * The integer amount in <strong>%s</strong> representing the total amount of the credit note.
+     */
     public Builder setAmount(Long amount) {
       this.amount = amount;
       return this;
     }
 
     /**
-     * The integer amount in **%s** representing the amount to credit the customer's balance, which
-     * will be automatically applied to their next invoice.
+     * The integer amount in <strong>%s</strong> representing the amount to credit the customer's
+     * balance, which will be automatically applied to their next invoice.
      */
     public Builder setCreditAmount(Long creditAmount) {
       this.creditAmount = creditAmount;
@@ -282,15 +288,18 @@ public class CreditNotePreviewParams extends ApiRequestParams {
       return this;
     }
 
-    /** The integer amount in **%s** representing the amount that is credited outside of Stripe. */
+    /**
+     * The integer amount in <strong>%s</strong> representing the amount that is credited outside of
+     * Stripe.
+     */
     public Builder setOutOfBandAmount(Long outOfBandAmount) {
       this.outOfBandAmount = outOfBandAmount;
       return this;
     }
 
     /**
-     * Reason for issuing this credit note, one of `duplicate`, `fraudulent`, `order_change`, or
-     * `product_unsatisfactory`.
+     * Reason for issuing this credit note, one of {@code duplicate}, {@code fraudulent}, {@code
+     * order_change}, or {@code product_unsatisfactory}.
      */
     public Builder setReason(Reason reason) {
       this.reason = reason;
@@ -304,8 +313,8 @@ public class CreditNotePreviewParams extends ApiRequestParams {
     }
 
     /**
-     * The integer amount in **%s** representing the amount to refund. If set, a refund will be
-     * created for the charge associated with the invoice.
+     * The integer amount in <strong>%s</strong> representing the amount to refund. If set, a refund
+     * will be created for the charge associated with the invoice.
      */
     public Builder setRefundAmount(Long refundAmount) {
       this.refundAmount = refundAmount;
@@ -316,15 +325,15 @@ public class CreditNotePreviewParams extends ApiRequestParams {
   @Getter
   public static class Line {
     /**
-     * The line item amount to credit. Only valid when `type` is `invoice_line_item` and the
-     * referenced invoice line item does not have a quantity, only an amount.
+     * The line item amount to credit. Only valid when {@code type} is {@code invoice_line_item} and
+     * the referenced invoice line item does not have a quantity, only an amount.
      */
     @SerializedName("amount")
     Long amount;
 
     /**
-     * The description of the credit note line item. Only valid when the `type` is
-     * `custom_line_item`.
+     * The description of the credit note line item. Only valid when the {@code type} is {@code
+     * custom_line_item}.
      */
     @SerializedName("description")
     String description;
@@ -338,7 +347,10 @@ public class CreditNotePreviewParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** The invoice line item to credit. Only valid when the `type` is `invoice_line_item`. */
+    /**
+     * The invoice line item to credit. Only valid when the {@code type} is {@code
+     * invoice_line_item}.
+     */
     @SerializedName("invoice_line_item")
     String invoiceLineItem;
 
@@ -347,27 +359,30 @@ public class CreditNotePreviewParams extends ApiRequestParams {
     Long quantity;
 
     /**
-     * The tax rates which apply to the credit note line item. Only valid when the `type` is
-     * `custom_line_item`.
+     * The tax rates which apply to the credit note line item. Only valid when the {@code type} is
+     * {@code custom_line_item}.
      */
     @SerializedName("tax_rates")
     Object taxRates;
 
-    /** Type of the credit note line item, one of `invoice_line_item` or `custom_line_item`. */
+    /**
+     * Type of the credit note line item, one of {@code invoice_line_item} or {@code
+     * custom_line_item}.
+     */
     @SerializedName("type")
     Type type;
 
     /**
-     * The integer unit amount in **%s** of the credit note line item. This `unit_amount` will be
-     * multiplied by the quantity to get the full amount to credit for this line item. Only valid
-     * when `type` is `custom_line_item`.
+     * The integer unit amount in <strong>%s</strong> of the credit note line item. This {@code
+     * unit_amount} will be multiplied by the quantity to get the full amount to credit for this
+     * line item. Only valid when {@code type} is {@code custom_line_item}.
      */
     @SerializedName("unit_amount")
     Long unitAmount;
 
     /**
-     * Same as `unit_amount`, but accepts a decimal value with at most 12 decimal places. Only one
-     * of `unit_amount` and `unit_amount_decimal` can be set.
+     * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal places. Only
+     * one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
      */
     @SerializedName("unit_amount_decimal")
     BigDecimal unitAmountDecimal;
@@ -431,8 +446,8 @@ public class CreditNotePreviewParams extends ApiRequestParams {
       }
 
       /**
-       * The line item amount to credit. Only valid when `type` is `invoice_line_item` and the
-       * referenced invoice line item does not have a quantity, only an amount.
+       * The line item amount to credit. Only valid when {@code type} is {@code invoice_line_item}
+       * and the referenced invoice line item does not have a quantity, only an amount.
        */
       public Builder setAmount(Long amount) {
         this.amount = amount;
@@ -440,8 +455,8 @@ public class CreditNotePreviewParams extends ApiRequestParams {
       }
 
       /**
-       * The description of the credit note line item. Only valid when the `type` is
-       * `custom_line_item`.
+       * The description of the credit note line item. Only valid when the {@code type} is {@code
+       * custom_line_item}.
        */
       public Builder setDescription(String description) {
         this.description = description;
@@ -474,7 +489,10 @@ public class CreditNotePreviewParams extends ApiRequestParams {
         return this;
       }
 
-      /** The invoice line item to credit. Only valid when the `type` is `invoice_line_item`. */
+      /**
+       * The invoice line item to credit. Only valid when the {@code type} is {@code
+       * invoice_line_item}.
+       */
       public Builder setInvoiceLineItem(String invoiceLineItem) {
         this.invoiceLineItem = invoiceLineItem;
         return this;
@@ -515,8 +533,8 @@ public class CreditNotePreviewParams extends ApiRequestParams {
       }
 
       /**
-       * The tax rates which apply to the credit note line item. Only valid when the `type` is
-       * `custom_line_item`.
+       * The tax rates which apply to the credit note line item. Only valid when the {@code type} is
+       * {@code custom_line_item}.
        */
       public Builder setTaxRates(EmptyParam taxRates) {
         this.taxRates = taxRates;
@@ -524,24 +542,27 @@ public class CreditNotePreviewParams extends ApiRequestParams {
       }
 
       /**
-       * The tax rates which apply to the credit note line item. Only valid when the `type` is
-       * `custom_line_item`.
+       * The tax rates which apply to the credit note line item. Only valid when the {@code type} is
+       * {@code custom_line_item}.
        */
       public Builder setTaxRates(List<String> taxRates) {
         this.taxRates = taxRates;
         return this;
       }
 
-      /** Type of the credit note line item, one of `invoice_line_item` or `custom_line_item`. */
+      /**
+       * Type of the credit note line item, one of {@code invoice_line_item} or {@code
+       * custom_line_item}.
+       */
       public Builder setType(Type type) {
         this.type = type;
         return this;
       }
 
       /**
-       * The integer unit amount in **%s** of the credit note line item. This `unit_amount` will be
-       * multiplied by the quantity to get the full amount to credit for this line item. Only valid
-       * when `type` is `custom_line_item`.
+       * The integer unit amount in <strong>%s</strong> of the credit note line item. This {@code
+       * unit_amount} will be multiplied by the quantity to get the full amount to credit for this
+       * line item. Only valid when {@code type} is {@code custom_line_item}.
        */
       public Builder setUnitAmount(Long unitAmount) {
         this.unitAmount = unitAmount;
@@ -549,8 +570,8 @@ public class CreditNotePreviewParams extends ApiRequestParams {
       }
 
       /**
-       * Same as `unit_amount`, but accepts a decimal value with at most 12 decimal places. Only one
-       * of `unit_amount` and `unit_amount_decimal` can be set.
+       * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal places.
+       * Only one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
        */
       public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
         this.unitAmountDecimal = unitAmountDecimal;

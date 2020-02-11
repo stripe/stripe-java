@@ -42,7 +42,7 @@ public class SubscriptionSchedule extends ApiResource
 
   /**
    * Object representing the start and end dates for the current phase of the subscription schedule,
-   * if it is `active`.
+   * if it is {@code active}.
    */
   @SerializedName("current_phase")
   CurrentPhase currentPhase;
@@ -59,7 +59,7 @@ public class SubscriptionSchedule extends ApiResource
   /**
    * Behavior of the subscription schedule and underlying subscription when it ends.
    *
-   * <p>One of `cancel`, `none`, `release`, or `renew`.
+   * <p>One of {@code cancel}, {@code none}, {@code release}, or {@code renew}.
    */
   @SerializedName("end_behavior")
   String endBehavior;
@@ -70,8 +70,8 @@ public class SubscriptionSchedule extends ApiResource
   String id;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -87,7 +87,7 @@ public class SubscriptionSchedule extends ApiResource
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `subscription_schedule`.
+   * <p>Equal to {@code subscription_schedule}.
    */
   @SerializedName("object")
   String object;
@@ -108,17 +108,19 @@ public class SubscriptionSchedule extends ApiResource
 
   /**
    * This field has been deprecated. Interval and duration at which the subscription schedule renews
-   * for when it ends if `renewal_behavior` is `renew`.
+   * for when it ends if {@code renewal_behavior} is {@code renew}.
    */
   @SerializedName("renewal_interval")
   RenewalInterval renewalInterval;
 
   /**
-   * The present status of the subscription schedule. Possible values are `not_started`, `active`,
-   * `completed`, `released`, and `canceled`. You can read more about the different states in our
-   * [behavior guide](https://stripe.com/docs/billing/subscriptions/subscription-schedules).
+   * The present status of the subscription schedule. Possible values are {@code not_started},
+   * {@code active}, {@code completed}, {@code released}, and {@code canceled}. You can read more
+   * about the different states in our <a
+   * href="https://stripe.com/docs/billing/subscriptions/subscription-schedules">behavior guide</a>.
    *
-   * <p>One of `active`, `canceled`, `completed`, `not_started`, or `released`.
+   * <p>One of {@code active}, {@code canceled}, {@code completed}, {@code not_started}, or {@code
+   * released}.
    */
   @SerializedName("status")
   String status;
@@ -129,7 +131,7 @@ public class SubscriptionSchedule extends ApiResource
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Subscription> subscription;
 
-  /** Get id of expandable `customer` object. */
+  /** Get ID of expandable {@code customer} object. */
   public String getCustomer() {
     return (this.customer != null) ? this.customer.getId() : null;
   }
@@ -138,7 +140,7 @@ public class SubscriptionSchedule extends ApiResource
     this.customer = ApiResource.setExpandableFieldId(id, this.customer);
   }
 
-  /** Get expanded `customer`. */
+  /** Get expanded {@code customer}. */
   public Customer getCustomerObject() {
     return (this.customer != null) ? this.customer.getExpanded() : null;
   }
@@ -147,7 +149,7 @@ public class SubscriptionSchedule extends ApiResource
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `subscription` object. */
+  /** Get ID of expandable {@code subscription} object. */
   public String getSubscription() {
     return (this.subscription != null) ? this.subscription.getId() : null;
   }
@@ -156,7 +158,7 @@ public class SubscriptionSchedule extends ApiResource
     this.subscription = ApiResource.setExpandableFieldId(id, this.subscription);
   }
 
-  /** Get expanded `subscription`. */
+  /** Get expanded {@code subscription}. */
   public Subscription getSubscriptionObject() {
     return (this.subscription != null) ? this.subscription.getExpanded() : null;
   }
@@ -497,12 +499,12 @@ public class SubscriptionSchedule extends ApiResource
     Subscription.BillingThresholds billingThresholds;
 
     /**
-     * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
-     * attempt to pay the underlying subscription at the end of each billing cycle using the default
-     * source attached to the customer. When sending an invoice, Stripe will email your customer an
-     * invoice with payment instructions.
+     * Either {@code charge_automatically}, or {@code send_invoice}. When charging automatically,
+     * Stripe will attempt to pay the underlying subscription at the end of each billing cycle using
+     * the default source attached to the customer. When sending an invoice, Stripe will email your
+     * customer an invoice with payment instructions.
      *
-     * <p>One of `charge_automatically`, or `send_invoice`.
+     * <p>One of {@code charge_automatically}, or {@code send_invoice}.
      */
     @SerializedName("collection_method")
     String collectionMethod;
@@ -520,7 +522,7 @@ public class SubscriptionSchedule extends ApiResource
     @SerializedName("invoice_settings")
     InvoiceSettings invoiceSettings;
 
-    /** Get id of expandable `defaultPaymentMethod` object. */
+    /** Get ID of expandable {@code defaultPaymentMethod} object. */
     public String getDefaultPaymentMethod() {
       return (this.defaultPaymentMethod != null) ? this.defaultPaymentMethod.getId() : null;
     }
@@ -529,7 +531,7 @@ public class SubscriptionSchedule extends ApiResource
       this.defaultPaymentMethod = ApiResource.setExpandableFieldId(id, this.defaultPaymentMethod);
     }
 
-    /** Get expanded `defaultPaymentMethod`. */
+    /** Get expanded {@code defaultPaymentMethod}. */
     public PaymentMethod getDefaultPaymentMethodObject() {
       return (this.defaultPaymentMethod != null) ? this.defaultPaymentMethod.getExpanded() : null;
     }
@@ -546,8 +548,8 @@ public class SubscriptionSchedule extends ApiResource
   public static class InvoiceSettings extends StripeObject {
     /**
      * Number of days within which a customer must pay invoices generated by this subscription
-     * schedule. This value will be `null` for subscription schedules where
-     * `billing=charge_automatically`.
+     * schedule. This value will be {@code null} for subscription schedules where {@code
+     * billing=charge_automatically}.
      */
     @SerializedName("days_until_due")
     Long daysUntilDue;
@@ -573,12 +575,12 @@ public class SubscriptionSchedule extends ApiResource
     Subscription.BillingThresholds billingThresholds;
 
     /**
-     * Either `charge_automatically`, or `send_invoice`. When charging automatically, Stripe will
-     * attempt to pay the underlying subscription at the end of each billing cycle using the default
-     * source attached to the customer. When sending an invoice, Stripe will email your customer an
-     * invoice with payment instructions.
+     * Either {@code charge_automatically}, or {@code send_invoice}. When charging automatically,
+     * Stripe will attempt to pay the underlying subscription at the end of each billing cycle using
+     * the default source attached to the customer. When sending an invoice, Stripe will email your
+     * customer an invoice with payment instructions.
      *
-     * <p>One of `charge_automatically`, or `send_invoice`.
+     * <p>One of {@code charge_automatically}, or {@code send_invoice}.
      */
     @SerializedName("collection_method")
     String collectionMethod;
@@ -633,7 +635,7 @@ public class SubscriptionSchedule extends ApiResource
     @SerializedName("trial_end")
     Long trialEnd;
 
-    /** Get id of expandable `coupon` object. */
+    /** Get ID of expandable {@code coupon} object. */
     public String getCoupon() {
       return (this.coupon != null) ? this.coupon.getId() : null;
     }
@@ -642,7 +644,7 @@ public class SubscriptionSchedule extends ApiResource
       this.coupon = ApiResource.setExpandableFieldId(id, this.coupon);
     }
 
-    /** Get expanded `coupon`. */
+    /** Get expanded {@code coupon}. */
     public Coupon getCouponObject() {
       return (this.coupon != null) ? this.coupon.getExpanded() : null;
     }
@@ -651,7 +653,7 @@ public class SubscriptionSchedule extends ApiResource
       this.coupon = new ExpandableField<Coupon>(expandableObject.getId(), expandableObject);
     }
 
-    /** Get id of expandable `defaultPaymentMethod` object. */
+    /** Get ID of expandable {@code defaultPaymentMethod} object. */
     public String getDefaultPaymentMethod() {
       return (this.defaultPaymentMethod != null) ? this.defaultPaymentMethod.getId() : null;
     }
@@ -660,7 +662,7 @@ public class SubscriptionSchedule extends ApiResource
       this.defaultPaymentMethod = ApiResource.setExpandableFieldId(id, this.defaultPaymentMethod);
     }
 
-    /** Get expanded `defaultPaymentMethod`. */
+    /** Get expanded {@code defaultPaymentMethod}. */
     public PaymentMethod getDefaultPaymentMethodObject() {
       return (this.defaultPaymentMethod != null) ? this.defaultPaymentMethod.getExpanded() : null;
     }
@@ -693,13 +695,13 @@ public class SubscriptionSchedule extends ApiResource
     Long quantity;
 
     /**
-     * The tax rates which apply to this `phase_item`. When set, the `default_tax_rates` on the
-     * phase do not apply to this `phase_item`.
+     * The tax rates which apply to this {@code phase_item}. When set, the {@code default_tax_rates}
+     * on the phase do not apply to this {@code phase_item}.
      */
     @SerializedName("tax_rates")
     List<TaxRate> taxRates;
 
-    /** Get id of expandable `plan` object. */
+    /** Get ID of expandable {@code plan} object. */
     public String getPlan() {
       return (this.plan != null) ? this.plan.getId() : null;
     }
@@ -708,7 +710,7 @@ public class SubscriptionSchedule extends ApiResource
       this.plan = ApiResource.setExpandableFieldId(id, this.plan);
     }
 
-    /** Get expanded `plan`. */
+    /** Get expanded {@code plan}. */
     public Plan getPlanObject() {
       return (this.plan != null) ? this.plan.getExpanded() : null;
     }
@@ -725,7 +727,7 @@ public class SubscriptionSchedule extends ApiResource
     /**
      * Interval at which to renew the subscription schedule for when it ends.
      *
-     * <p>One of `day`, `month`, `week`, or `year`.
+     * <p>One of {@code day}, {@code month}, {@code week}, or {@code year}.
      */
     @SerializedName("interval")
     String interval;

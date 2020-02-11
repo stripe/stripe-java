@@ -22,8 +22,8 @@ public class ChargeUpdateParams extends ApiRequestParams {
   /**
    * An arbitrary string which you can attach to a charge object. It is displayed when in the web
    * interface alongside the charge. Note that if you use Stripe to send automatic email receipts to
-   * your customers, your receipt emails will include the `description` of the charge(s) that they
-   * are describing.
+   * your customers, your receipt emails will include the {@code description} of the charge(s) that
+   * they are describing.
    */
   @SerializedName("description")
   Object description;
@@ -43,9 +43,10 @@ public class ChargeUpdateParams extends ApiRequestParams {
 
   /**
    * A set of key-value pairs you can attach to a charge giving information about its riskiness. If
-   * you believe a charge is fraudulent, include a `user_report` key with a value of `fraudulent`.
-   * If you believe a charge is safe, include a `user_report` key with a value of `safe`. Stripe
-   * will use the information you send to improve our fraud detection algorithms.
+   * you believe a charge is fraudulent, include a {@code user_report} key with a value of {@code
+   * fraudulent}. If you believe a charge is safe, include a {@code user_report} key with a value of
+   * {@code safe}. Stripe will use the information you send to improve our fraud detection
+   * algorithms.
    */
   @SerializedName("fraud_details")
   FraudDetails fraudDetails;
@@ -53,7 +54,8 @@ public class ChargeUpdateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -70,10 +72,10 @@ public class ChargeUpdateParams extends ApiRequestParams {
   Shipping shipping;
 
   /**
-   * A string that identifies this transaction as part of a group. `transfer_group` may only be
-   * provided if it has not been set. See the [Connect
-   * documentation](https://stripe.com/docs/connect/charges-transfers#grouping-transactions) for
-   * details.
+   * A string that identifies this transaction as part of a group. {@code transfer_group} may only
+   * be provided if it has not been set. See the <a
+   * href="https://stripe.com/docs/connect/charges-transfers#grouping-transactions">Connect
+   * documentation</a> for details.
    */
   @SerializedName("transfer_group")
   Object transferGroup;
@@ -157,8 +159,8 @@ public class ChargeUpdateParams extends ApiRequestParams {
     /**
      * An arbitrary string which you can attach to a charge object. It is displayed when in the web
      * interface alongside the charge. Note that if you use Stripe to send automatic email receipts
-     * to your customers, your receipt emails will include the `description` of the charge(s) that
-     * they are describing.
+     * to your customers, your receipt emails will include the {@code description} of the charge(s)
+     * that they are describing.
      */
     public Builder setDescription(String description) {
       this.description = description;
@@ -168,8 +170,8 @@ public class ChargeUpdateParams extends ApiRequestParams {
     /**
      * An arbitrary string which you can attach to a charge object. It is displayed when in the web
      * interface alongside the charge. Note that if you use Stripe to send automatic email receipts
-     * to your customers, your receipt emails will include the `description` of the charge(s) that
-     * they are describing.
+     * to your customers, your receipt emails will include the {@code description} of the charge(s)
+     * that they are describing.
      */
     public Builder setDescription(EmptyParam description) {
       this.description = description;
@@ -230,9 +232,10 @@ public class ChargeUpdateParams extends ApiRequestParams {
 
     /**
      * A set of key-value pairs you can attach to a charge giving information about its riskiness.
-     * If you believe a charge is fraudulent, include a `user_report` key with a value of
-     * `fraudulent`. If you believe a charge is safe, include a `user_report` key with a value of
-     * `safe`. Stripe will use the information you send to improve our fraud detection algorithms.
+     * If you believe a charge is fraudulent, include a {@code user_report} key with a value of
+     * {@code fraudulent}. If you believe a charge is safe, include a {@code user_report} key with a
+     * value of {@code safe}. Stripe will use the information you send to improve our fraud
+     * detection algorithms.
      */
     public Builder setFraudDetails(FraudDetails fraudDetails) {
       this.fraudDetails = fraudDetails;
@@ -290,10 +293,10 @@ public class ChargeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * A string that identifies this transaction as part of a group. `transfer_group` may only be
-     * provided if it has not been set. See the [Connect
-     * documentation](https://stripe.com/docs/connect/charges-transfers#grouping-transactions) for
-     * details.
+     * A string that identifies this transaction as part of a group. {@code transfer_group} may only
+     * be provided if it has not been set. See the <a
+     * href="https://stripe.com/docs/connect/charges-transfers#grouping-transactions">Connect
+     * documentation</a> for details.
      */
     public Builder setTransferGroup(String transferGroup) {
       this.transferGroup = transferGroup;
@@ -301,10 +304,10 @@ public class ChargeUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * A string that identifies this transaction as part of a group. `transfer_group` may only be
-     * provided if it has not been set. See the [Connect
-     * documentation](https://stripe.com/docs/connect/charges-transfers#grouping-transactions) for
-     * details.
+     * A string that identifies this transaction as part of a group. {@code transfer_group} may only
+     * be provided if it has not been set. See the <a
+     * href="https://stripe.com/docs/connect/charges-transfers#grouping-transactions">Connect
+     * documentation</a> for details.
      */
     public Builder setTransferGroup(EmptyParam transferGroup) {
       this.transferGroup = transferGroup;
@@ -323,7 +326,7 @@ public class ChargeUpdateParams extends ApiRequestParams {
     @SerializedName(ApiRequestParams.EXTRA_PARAMS_KEY)
     Map<String, Object> extraParams;
 
-    /** Either `safe` or `fraudulent`. */
+    /** Either {@code safe} or {@code fraudulent}. */
     @SerializedName("user_report")
     EnumParam userReport;
 
@@ -372,13 +375,13 @@ public class ChargeUpdateParams extends ApiRequestParams {
         return this;
       }
 
-      /** Either `safe` or `fraudulent`. */
+      /** Either {@code safe} or {@code fraudulent}. */
       public Builder setUserReport(UserReport userReport) {
         this.userReport = userReport;
         return this;
       }
 
-      /** Either `safe` or `fraudulent`. */
+      /** Either {@code safe} or {@code fraudulent}. */
       public Builder setUserReport(EmptyParam userReport) {
         this.userReport = userReport;
         return this;
@@ -572,8 +575,8 @@ public class ChargeUpdateParams extends ApiRequestParams {
       Object city;
 
       /**
-       * Two-letter country code ([ISO 3166-1
-       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
        */
       @SerializedName("country")
       Object country;
@@ -664,8 +667,8 @@ public class ChargeUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * Two-letter country code ([ISO 3166-1
-         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
          */
         public Builder setCountry(String country) {
           this.country = country;
@@ -673,8 +676,8 @@ public class ChargeUpdateParams extends ApiRequestParams {
         }
 
         /**
-         * Two-letter country code ([ISO 3166-1
-         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
          */
         public Builder setCountry(EmptyParam country) {
           this.country = country;

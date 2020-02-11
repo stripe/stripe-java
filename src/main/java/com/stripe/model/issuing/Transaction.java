@@ -29,15 +29,15 @@ public class Transaction extends ApiResource
   @SerializedName("amount")
   Long amount;
 
-  /** The `Authorization` object that led to this transaction. */
+  /** The {@code Authorization} object that led to this transaction. */
   @SerializedName("authorization")
   @Getter(lombok.AccessLevel.NONE)
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Authorization> authorization;
 
   /**
-   * ID of the [balance transaction](https://stripe.com/docs/api/balance_transactions) associated
-   * with this transaction.
+   * ID of the <a href="https://stripe.com/docs/api/balance_transactions">balance transaction</a>
+   * associated with this transaction.
    */
   @SerializedName("balance_transaction")
   @Getter(lombok.AccessLevel.NONE)
@@ -61,15 +61,15 @@ public class Transaction extends ApiResource
   Long created;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
 
   /**
-   * If you've disputed the transaction, the ID of the [dispute
-   * object](https://stripe.com/docs/api/issuing/disputes/object).
+   * If you've disputed the transaction, the ID of the <a
+   * href="https://stripe.com/docs/api/issuing/disputes/object">dispute object</a>.
    */
   @SerializedName("dispute")
   @Getter(lombok.AccessLevel.NONE)
@@ -82,15 +82,15 @@ public class Transaction extends ApiResource
   String id;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
 
   /**
-   * The amount that the merchant will receive, denominated in `merchant_currency`. It will be
-   * different from `amount` if the merchant is taking payment in a different currency.
+   * The amount that the merchant will receive, denominated in {@code merchant_currency}. It will be
+   * different from {@code amount} if the merchant is taking payment in a different currency.
    */
   @SerializedName("merchant_amount")
   Long merchantAmount;
@@ -113,7 +113,7 @@ public class Transaction extends ApiResource
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `issuing.transaction`.
+   * <p>Equal to {@code issuing.transaction}.
    */
   @SerializedName("object")
   String object;
@@ -121,13 +121,13 @@ public class Transaction extends ApiResource
   /**
    * The nature of the transaction.
    *
-   * <p>One of `capture`, `cash_withdrawal`, `dispute`, `dispute_loss`, `refund`, or
-   * `refund_reversal`.
+   * <p>One of {@code capture}, {@code cash_withdrawal}, {@code dispute}, {@code dispute_loss},
+   * {@code refund}, or {@code refund_reversal}.
    */
   @SerializedName("type")
   String type;
 
-  /** Get id of expandable `authorization` object. */
+  /** Get ID of expandable {@code authorization} object. */
   public String getAuthorization() {
     return (this.authorization != null) ? this.authorization.getId() : null;
   }
@@ -136,7 +136,7 @@ public class Transaction extends ApiResource
     this.authorization = ApiResource.setExpandableFieldId(id, this.authorization);
   }
 
-  /** Get expanded `authorization`. */
+  /** Get expanded {@code authorization}. */
   public Authorization getAuthorizationObject() {
     return (this.authorization != null) ? this.authorization.getExpanded() : null;
   }
@@ -146,7 +146,7 @@ public class Transaction extends ApiResource
         new ExpandableField<Authorization>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `balanceTransaction` object. */
+  /** Get ID of expandable {@code balanceTransaction} object. */
   public String getBalanceTransaction() {
     return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
   }
@@ -155,7 +155,7 @@ public class Transaction extends ApiResource
     this.balanceTransaction = ApiResource.setExpandableFieldId(id, this.balanceTransaction);
   }
 
-  /** Get expanded `balanceTransaction`. */
+  /** Get expanded {@code balanceTransaction}. */
   public BalanceTransaction getBalanceTransactionObject() {
     return (this.balanceTransaction != null) ? this.balanceTransaction.getExpanded() : null;
   }
@@ -165,7 +165,7 @@ public class Transaction extends ApiResource
         new ExpandableField<BalanceTransaction>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `card` object. */
+  /** Get ID of expandable {@code card} object. */
   public String getCard() {
     return (this.card != null) ? this.card.getId() : null;
   }
@@ -174,7 +174,7 @@ public class Transaction extends ApiResource
     this.card = ApiResource.setExpandableFieldId(id, this.card);
   }
 
-  /** Get expanded `card`. */
+  /** Get expanded {@code card}. */
   public Card getCardObject() {
     return (this.card != null) ? this.card.getExpanded() : null;
   }
@@ -183,7 +183,7 @@ public class Transaction extends ApiResource
     this.card = new ExpandableField<Card>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `cardholder` object. */
+  /** Get ID of expandable {@code cardholder} object. */
   public String getCardholder() {
     return (this.cardholder != null) ? this.cardholder.getId() : null;
   }
@@ -192,7 +192,7 @@ public class Transaction extends ApiResource
     this.cardholder = ApiResource.setExpandableFieldId(id, this.cardholder);
   }
 
-  /** Get expanded `cardholder`. */
+  /** Get expanded {@code cardholder}. */
   public Cardholder getCardholderObject() {
     return (this.cardholder != null) ? this.cardholder.getExpanded() : null;
   }
@@ -201,7 +201,7 @@ public class Transaction extends ApiResource
     this.cardholder = new ExpandableField<Cardholder>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `dispute` object. */
+  /** Get ID of expandable {@code dispute} object. */
   public String getDispute() {
     return (this.dispute != null) ? this.dispute.getId() : null;
   }
@@ -210,7 +210,7 @@ public class Transaction extends ApiResource
     this.dispute = ApiResource.setExpandableFieldId(id, this.dispute);
   }
 
-  /** Get expanded `dispute`. */
+  /** Get expanded {@code dispute}. */
   public Dispute getDisputeObject() {
     return (this.dispute != null) ? this.dispute.getExpanded() : null;
   }

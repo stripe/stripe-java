@@ -59,7 +59,10 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @SerializedName("first_name_kanji")
   String firstNameKanji;
 
-  /** The person's gender (International regulations require either "male" or "female"). */
+  /**
+   * The person's gender (International regulations require either &quot;male&quot; or
+   * &quot;female&quot;).
+   */
   @SerializedName("gender")
   String gender;
 
@@ -68,7 +71,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @SerializedName("id")
   String id;
 
-  /** Whether the person's `id_number` was provided. */
+  /** Whether the person's {@code id_number} was provided. */
   @SerializedName("id_number_provided")
   Boolean idNumberProvided;
 
@@ -99,7 +102,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `person`.
+   * <p>Equal to {@code person}.
    */
   @SerializedName("object")
   String object;
@@ -235,8 +238,8 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     String city;
 
     /**
-     * Two-letter country code ([ISO 3166-1
-     * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+     * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+     * 3166-1 alpha-2</a>).
      */
     @SerializedName("country")
     String country;
@@ -310,22 +313,23 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   public static class Requirements extends StripeObject {
     /**
      * Fields that need to be collected to keep the person's account enabled. If not collected by
-     * the account's `current_deadline`, these fields appear in `past_due` as well, and the account
-     * is disabled.
+     * the account's {@code current_deadline}, these fields appear in {@code past_due} as well, and
+     * the account is disabled.
      */
     @SerializedName("currently_due")
     List<String> currentlyDue;
 
     /**
      * Fields that need to be collected assuming all volume thresholds are reached. As fields are
-     * needed, they are moved to `currently_due` and the account's `current_deadline` is set.
+     * needed, they are moved to {@code currently_due} and the account's {@code current_deadline} is
+     * set.
      */
     @SerializedName("eventually_due")
     List<String> eventuallyDue;
 
     /**
-     * Fields that weren't collected by the account's `current_deadline`. These fields need to be
-     * collected to enable payouts for the person's account.
+     * Fields that weren't collected by the account's {@code current_deadline}. These fields need to
+     * be collected to enable payouts for the person's account.
      */
     @SerializedName("past_due")
     List<String> pastDue;
@@ -333,7 +337,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     /**
      * Fields that may become required depending on the results of verification or review. An empty
      * array unless an asynchronous verification is pending. If verification fails, the fields in
-     * this array become required and move to `currently_due` or `past_due`.
+     * this array become required and move to {@code currently_due} or {@code past_due}.
      */
     @SerializedName("pending_verification")
     List<String> pendingVerification;
@@ -352,15 +356,16 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
 
     /**
      * A user-displayable string describing the verification state for the person. For example, this
-     * may say "Provided identity information could not be verified".
+     * may say &quot;Provided identity information could not be verified&quot;.
      */
     @SerializedName("details")
     String details;
 
     /**
-     * One of `document_address_mismatch`, `document_dob_mismatch`, `document_duplicate_type`,
-     * `document_id_number_mismatch`, `document_name_mismatch`, `document_nationality_mismatch`,
-     * `failed_keyed_identity`, or `failed_other`. A machine-readable code specifying the
+     * One of {@code document_address_mismatch}, {@code document_dob_mismatch}, {@code
+     * document_duplicate_type}, {@code document_id_number_mismatch}, {@code
+     * document_name_mismatch}, {@code document_nationality_mismatch}, {@code
+     * failed_keyed_identity}, or {@code failed_other}. A machine-readable code specifying the
      * verification state for the person.
      */
     @SerializedName("details_code")
@@ -370,8 +375,8 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
     VerificationDocument document;
 
     /**
-     * The state of verification for the person. Possible values are `unverified`, `pending`, or
-     * `verified`.
+     * The state of verification for the person. Possible values are {@code unverified}, {@code
+     * pending}, or {@code verified}.
      */
     @SerializedName("status")
     String status;
@@ -382,8 +387,8 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
   @EqualsAndHashCode(callSuper = false)
   public static class VerificationDocument extends StripeObject {
     /**
-     * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
-     * `identity_document`.
+     * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+     * upload</a> with a {@code purpose} value of {@code identity_document}.
      */
     @SerializedName("back")
     @Getter(lombok.AccessLevel.NONE)
@@ -392,34 +397,35 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
 
     /**
      * A user-displayable string describing the verification state of this document. For example, if
-     * a document is uploaded and the picture is too fuzzy, this may say "Identity document is too
-     * unclear to read".
+     * a document is uploaded and the picture is too fuzzy, this may say &quot;Identity document is
+     * too unclear to read&quot;.
      */
     @SerializedName("details")
     String details;
 
     /**
-     * One of `document_corrupt`, `document_country_not_supported`, `document_expired`,
-     * `document_failed_copy`, `document_failed_other`, `document_failed_test_mode`,
-     * `document_fraudulent`, `document_failed_greyscale`, `document_incomplete`,
-     * `document_invalid`, `document_manipulated`, `document_missing_back`,
-     * `document_missing_front`, `document_not_readable`, `document_not_uploaded`,
-     * `document_photo_mismatch`, `document_too_large`, or `document_type_not_supported`. A
-     * machine-readable code specifying the verification state for this document.
+     * One of {@code document_corrupt}, {@code document_country_not_supported}, {@code
+     * document_expired}, {@code document_failed_copy}, {@code document_failed_other}, {@code
+     * document_failed_test_mode}, {@code document_fraudulent}, {@code document_failed_greyscale},
+     * {@code document_incomplete}, {@code document_invalid}, {@code document_manipulated}, {@code
+     * document_missing_back}, {@code document_missing_front}, {@code document_not_readable}, {@code
+     * document_not_uploaded}, {@code document_photo_mismatch}, {@code document_too_large}, or
+     * {@code document_type_not_supported}. A machine-readable code specifying the verification
+     * state for this document.
      */
     @SerializedName("details_code")
     String detailsCode;
 
     /**
-     * The front of an ID returned by a [file upload](#create_file) with a `purpose` value of
-     * `identity_document`.
+     * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+     * upload</a> with a {@code purpose} value of {@code identity_document}.
      */
     @SerializedName("front")
     @Getter(lombok.AccessLevel.NONE)
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<File> front;
 
-    /** Get id of expandable `back` object. */
+    /** Get ID of expandable {@code back} object. */
     public String getBack() {
       return (this.back != null) ? this.back.getId() : null;
     }
@@ -428,7 +434,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
       this.back = ApiResource.setExpandableFieldId(id, this.back);
     }
 
-    /** Get expanded `back`. */
+    /** Get expanded {@code back}. */
     public File getBackObject() {
       return (this.back != null) ? this.back.getExpanded() : null;
     }
@@ -437,7 +443,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
       this.back = new ExpandableField<File>(expandableObject.getId(), expandableObject);
     }
 
-    /** Get id of expandable `front` object. */
+    /** Get ID of expandable {@code front} object. */
     public String getFront() {
       return (this.front != null) ? this.front.getId() : null;
     }
@@ -446,7 +452,7 @@ public class Person extends ApiResource implements HasId, MetadataStore<Person> 
       this.front = ApiResource.setExpandableFieldId(id, this.front);
     }
 
-    /** Get expanded `front`. */
+    /** Get expanded {@code front}. */
     public File getFrontObject() {
       return (this.front != null) ? this.front.getExpanded() : null;
     }

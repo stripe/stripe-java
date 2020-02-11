@@ -32,7 +32,7 @@ public class CardDetails extends StripeObject {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `issuing.card_details`.
+   * <p>Equal to {@code issuing.card_details}.
    */
   @SerializedName("object")
   String object;

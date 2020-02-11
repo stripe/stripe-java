@@ -37,8 +37,8 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, BalanceT
   Long created;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -55,8 +55,8 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, BalanceT
   Long expectedAvailabilityDate;
 
   /**
-   * Error code explaining reason for top-up failure if available (see [the errors
-   * section](https://stripe.com/docs/api#errors) for a list of codes).
+   * Error code explaining reason for top-up failure if available (see <a
+   * href="https://stripe.com/docs/api#errors">the errors section</a> for a list of codes).
    */
   @SerializedName("failure_code")
   String failureCode;
@@ -71,8 +71,8 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, BalanceT
   String id;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -88,7 +88,7 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, BalanceT
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `topup`.
+   * <p>Equal to {@code topup}.
    */
   @SerializedName("object")
   String object;
@@ -104,9 +104,11 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, BalanceT
   String statementDescriptor;
 
   /**
-   * The status of the top-up is either `canceled`, `failed`, `pending`, `reversed`, or `succeeded`.
+   * The status of the top-up is either {@code canceled}, {@code failed}, {@code pending}, {@code
+   * reversed}, or {@code succeeded}.
    *
-   * <p>One of `canceled`, `failed`, `pending`, `reversed`, or `succeeded`.
+   * <p>One of {@code canceled}, {@code failed}, {@code pending}, {@code reversed}, or {@code
+   * succeeded}.
    */
   @SerializedName("status")
   String status;
@@ -115,7 +117,7 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, BalanceT
   @SerializedName("transfer_group")
   String transferGroup;
 
-  /** Get id of expandable `balanceTransaction` object. */
+  /** Get ID of expandable {@code balanceTransaction} object. */
   public String getBalanceTransaction() {
     return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
   }
@@ -124,7 +126,7 @@ public class Topup extends ApiResource implements MetadataStore<Topup>, BalanceT
     this.balanceTransaction = ApiResource.setExpandableFieldId(id, this.balanceTransaction);
   }
 
-  /** Get expanded `balanceTransaction`. */
+  /** Get expanded {@code balanceTransaction}. */
   public BalanceTransaction getBalanceTransactionObject() {
     return (this.balanceTransaction != null) ? this.balanceTransaction.getExpanded() : null;
   }

@@ -17,7 +17,7 @@ public class TaxDeductedAtSource extends StripeObject implements BalanceTransact
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `tax_deducted_at_source`.
+   * <p>Equal to {@code tax_deducted_at_source}.
    */
   @SerializedName("object")
   String object;

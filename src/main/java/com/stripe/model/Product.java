@@ -24,14 +24,15 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   Boolean active;
 
   /**
-   * A list of up to 5 attributes that each SKU can provide values for (e.g., `["color", "size"]`).
+   * A list of up to 5 attributes that each SKU can provide values for (e.g., {@code ["color",
+   * "size"]}).
    */
   @SerializedName("attributes")
   List<String> attributes;
 
   /**
    * A short one-line description of the product, meant to be displayable to the customer. Only
-   * applicable to products of `type=good`.
+   * applicable to products of {@code type=good}.
    */
   @SerializedName("caption")
   String caption;
@@ -42,7 +43,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
 
   /**
    * An array of connect application identifiers that cannot purchase this product. Only applicable
-   * to products of `type=good`.
+   * to products of {@code type=good}.
    */
   @SerializedName("deactivate_on")
   List<String> deactivateOn;
@@ -66,14 +67,14 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
 
   /**
    * A list of up to 8 URLs of images for this product, meant to be displayable to the customer.
-   * Only applicable to products of `type=good`.
+   * Only applicable to products of {@code type=good}.
    */
   @SerializedName("images")
   List<String> images;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -96,20 +97,20 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `product`.
+   * <p>Equal to {@code product}.
    */
   @SerializedName("object")
   String object;
 
   /**
    * The dimensions of this product for shipping purposes. A SKU associated with this product can
-   * override this value by having its own `package_dimensions`. Only applicable to products of
-   * `type=good`.
+   * override this value by having its own {@code package_dimensions}. Only applicable to products
+   * of {@code type=good}.
    */
   @SerializedName("package_dimensions")
   PackageDimensions packageDimensions;
 
-  /** Whether this product is a shipped good. Only applicable to products of `type=good`. */
+  /** Whether this product is a shipped good. Only applicable to products of {@code type=good}. */
   @SerializedName("shippable")
   Boolean shippable;
 
@@ -122,10 +123,11 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   String statementDescriptor;
 
   /**
-   * The type of the product. The product is either of type `good`, which is eligible for use with
-   * Orders and SKUs, or `service`, which is eligible for use with Subscriptions and Plans.
+   * The type of the product. The product is either of type {@code good}, which is eligible for use
+   * with Orders and SKUs, or {@code service}, which is eligible for use with Subscriptions and
+   * Plans.
    *
-   * <p>One of `good`, or `service`.
+   * <p>One of {@code good}, or {@code service}.
    */
   @SerializedName("type")
   String type;
@@ -142,15 +144,15 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
   Long updated;
 
   /**
-   * A URL of a publicly-accessible webpage for this product. Only applicable to products of
-   * `type=good`.
+   * A URL of a publicly-accessible webpage for this product. Only applicable to products of {@code
+   * type=good}.
    */
   @SerializedName("url")
   String url;
 
   /**
    * Creates a new product object. To create a product for use with orders, see <a
-   * href="#create_product">Products</a>.
+   * href="https://stripe.com/docs/api#create_product">Products</a>.
    */
   public static Product create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -158,7 +160,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
 
   /**
    * Creates a new product object. To create a product for use with orders, see <a
-   * href="#create_product">Products</a>.
+   * href="https://stripe.com/docs/api#create_product">Products</a>.
    */
   public static Product create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -168,7 +170,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
 
   /**
    * Creates a new product object. To create a product for use with orders, see <a
-   * href="#create_product">Products</a>.
+   * href="https://stripe.com/docs/api#create_product">Products</a>.
    */
   public static Product create(ProductCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -176,7 +178,7 @@ public class Product extends ApiResource implements HasId, MetadataStore<Product
 
   /**
    * Creates a new product object. To create a product for use with orders, see <a
-   * href="#create_product">Products</a>.
+   * href="https://stripe.com/docs/api#create_product">Products</a>.
    */
   public static Product create(ProductCreateParams params, RequestOptions options)
       throws StripeException {

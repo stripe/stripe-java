@@ -22,7 +22,8 @@ import lombok.Setter;
 @EqualsAndHashCode(callSuper = false)
 public class CreditNote extends ApiResource implements HasId, MetadataStore<CreditNote> {
   /**
-   * The integer amount in **%s** representing the total amount of the credit note, including tax.
+   * The integer amount in <strong>%s</strong> representing the total amount of the credit note,
+   * including tax.
    */
   @SerializedName("amount")
   Long amount;
@@ -32,8 +33,8 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   Long created;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -50,7 +51,10 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<CustomerBalanceTransaction> customerBalanceTransaction;
 
-  /** The integer amount in **%s** representing the amount of the discount that was credited. */
+  /**
+   * The integer amount in <strong>%s</strong> representing the amount of the discount that was
+   * credited.
+   */
   @SerializedName("discount_amount")
   Long discountAmount;
 
@@ -70,8 +74,8 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   CreditNoteLineItemCollection lines;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -98,7 +102,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `credit_note`.
+   * <p>Equal to {@code credit_note}.
    */
   @SerializedName("object")
   String object;
@@ -112,8 +116,8 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   String pdf;
 
   /**
-   * Reason for issuing this credit note, one of `duplicate`, `fraudulent`, `order_change`, or
-   * `product_unsatisfactory`.
+   * Reason for issuing this credit note, one of {@code duplicate}, {@code fraudulent}, {@code
+   * order_change}, or {@code product_unsatisfactory}.
    */
   @SerializedName("reason")
   String reason;
@@ -125,15 +129,15 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   ExpandableField<Refund> refund;
 
   /**
-   * Status of this credit note, one of `issued` or `void`. Learn more about [voiding credit
-   * notes](https://stripe.com/docs/billing/invoices/credit-notes#voiding).
+   * Status of this credit note, one of {@code issued} or {@code void}. Learn more about <a
+   * href="https://stripe.com/docs/billing/invoices/credit-notes#voiding">voiding credit notes</a>.
    */
   @SerializedName("status")
   String status;
 
   /**
-   * The integer amount in **%s** representing the amount of the credit note, excluding tax and
-   * discount.
+   * The integer amount in <strong>%s</strong> representing the amount of the credit note, excluding
+   * tax and discount.
    */
   @SerializedName("subtotal")
   Long subtotal;
@@ -143,16 +147,16 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   List<CreditNote.TaxAmount> taxAmounts;
 
   /**
-   * The integer amount in **%s** representing the total amount of the credit note, including tax
-   * and discount.
+   * The integer amount in <strong>%s</strong> representing the total amount of the credit note,
+   * including tax and discount.
    */
   @SerializedName("total")
   Long total;
 
   /**
-   * Type of this credit note, one of `pre_payment` or `post_payment`. A `pre_payment` credit note
-   * means it was issued when the invoice was open. A `post_payment` credit note means it was issued
-   * when the invoice was paid.
+   * Type of this credit note, one of {@code pre_payment} or {@code post_payment}. A {@code
+   * pre_payment} credit note means it was issued when the invoice was open. A {@code post_payment}
+   * credit note means it was issued when the invoice was paid.
    */
   @SerializedName("type")
   String type;
@@ -161,7 +165,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
   @SerializedName("voided_at")
   Long voidedAt;
 
-  /** Get id of expandable `customer` object. */
+  /** Get ID of expandable {@code customer} object. */
   public String getCustomer() {
     return (this.customer != null) ? this.customer.getId() : null;
   }
@@ -170,7 +174,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
     this.customer = ApiResource.setExpandableFieldId(id, this.customer);
   }
 
-  /** Get expanded `customer`. */
+  /** Get expanded {@code customer}. */
   public Customer getCustomerObject() {
     return (this.customer != null) ? this.customer.getExpanded() : null;
   }
@@ -179,7 +183,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `customerBalanceTransaction` object. */
+  /** Get ID of expandable {@code customerBalanceTransaction} object. */
   public String getCustomerBalanceTransaction() {
     return (this.customerBalanceTransaction != null)
         ? this.customerBalanceTransaction.getId()
@@ -191,7 +195,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
         ApiResource.setExpandableFieldId(id, this.customerBalanceTransaction);
   }
 
-  /** Get expanded `customerBalanceTransaction`. */
+  /** Get expanded {@code customerBalanceTransaction}. */
   public CustomerBalanceTransaction getCustomerBalanceTransactionObject() {
     return (this.customerBalanceTransaction != null)
         ? this.customerBalanceTransaction.getExpanded()
@@ -203,7 +207,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
         new ExpandableField<CustomerBalanceTransaction>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `invoice` object. */
+  /** Get ID of expandable {@code invoice} object. */
   public String getInvoice() {
     return (this.invoice != null) ? this.invoice.getId() : null;
   }
@@ -212,7 +216,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
     this.invoice = ApiResource.setExpandableFieldId(id, this.invoice);
   }
 
-  /** Get expanded `invoice`. */
+  /** Get expanded {@code invoice}. */
   public Invoice getInvoiceObject() {
     return (this.invoice != null) ? this.invoice.getExpanded() : null;
   }
@@ -221,7 +225,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
     this.invoice = new ExpandableField<Invoice>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `refund` object. */
+  /** Get ID of expandable {@code refund} object. */
   public String getRefund() {
     return (this.refund != null) ? this.refund.getId() : null;
   }
@@ -230,7 +234,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
     this.refund = ApiResource.setExpandableFieldId(id, this.refund);
   }
 
-  /** Get expanded `refund`. */
+  /** Get expanded {@code refund}. */
   public Refund getRefundObject() {
     return (this.refund != null) ? this.refund.getExpanded() : null;
   }
@@ -473,7 +477,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
 
   /**
    * Marks a credit note as void. Learn more about <a
-   * href="/docs/billing/invoices/credit-notes#voiding">voiding credit notes</a>.
+   * href="https://stripe.com/docs/billing/invoices/credit-notes#voiding">voiding credit notes</a>.
    */
   public CreditNote voidCreditNote() throws StripeException {
     return voidCreditNote((Map<String, Object>) null, (RequestOptions) null);
@@ -481,7 +485,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
 
   /**
    * Marks a credit note as void. Learn more about <a
-   * href="/docs/billing/invoices/credit-notes#voiding">voiding credit notes</a>.
+   * href="https://stripe.com/docs/billing/invoices/credit-notes#voiding">voiding credit notes</a>.
    */
   public CreditNote voidCreditNote(RequestOptions options) throws StripeException {
     return voidCreditNote((Map<String, Object>) null, options);
@@ -489,7 +493,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
 
   /**
    * Marks a credit note as void. Learn more about <a
-   * href="/docs/billing/invoices/credit-notes#voiding">voiding credit notes</a>.
+   * href="https://stripe.com/docs/billing/invoices/credit-notes#voiding">voiding credit notes</a>.
    */
   public CreditNote voidCreditNote(Map<String, Object> params) throws StripeException {
     return voidCreditNote(params, (RequestOptions) null);
@@ -497,7 +501,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
 
   /**
    * Marks a credit note as void. Learn more about <a
-   * href="/docs/billing/invoices/credit-notes#voiding">voiding credit notes</a>.
+   * href="https://stripe.com/docs/billing/invoices/credit-notes#voiding">voiding credit notes</a>.
    */
   public CreditNote voidCreditNote(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -512,7 +516,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
 
   /**
    * Marks a credit note as void. Learn more about <a
-   * href="/docs/billing/invoices/credit-notes#voiding">voiding credit notes</a>.
+   * href="https://stripe.com/docs/billing/invoices/credit-notes#voiding">voiding credit notes</a>.
    */
   public CreditNote voidCreditNote(CreditNoteVoidCreditNoteParams params) throws StripeException {
     return voidCreditNote(params, (RequestOptions) null);
@@ -520,7 +524,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
 
   /**
    * Marks a credit note as void. Learn more about <a
-   * href="/docs/billing/invoices/credit-notes#voiding">voiding credit notes</a>.
+   * href="https://stripe.com/docs/billing/invoices/credit-notes#voiding">voiding credit notes</a>.
    */
   public CreditNote voidCreditNote(CreditNoteVoidCreditNoteParams params, RequestOptions options)
       throws StripeException {
@@ -551,7 +555,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<TaxRate> taxRate;
 
-    /** Get id of expandable `taxRate` object. */
+    /** Get ID of expandable {@code taxRate} object. */
     public String getTaxRate() {
       return (this.taxRate != null) ? this.taxRate.getId() : null;
     }
@@ -560,7 +564,7 @@ public class CreditNote extends ApiResource implements HasId, MetadataStore<Cred
       this.taxRate = ApiResource.setExpandableFieldId(id, this.taxRate);
     }
 
-    /** Get expanded `taxRate`. */
+    /** Get expanded {@code taxRate}. */
     public TaxRate getTaxRateObject() {
       return (this.taxRate != null) ? this.taxRate.getExpanded() : null;
     }

@@ -31,8 +31,8 @@ public class FeeRefund extends ApiResource
   Long created;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -59,12 +59,12 @@ public class FeeRefund extends ApiResource
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `fee_refund`.
+   * <p>Equal to {@code fee_refund}.
    */
   @SerializedName("object")
   String object;
 
-  /** Get id of expandable `balanceTransaction` object. */
+  /** Get ID of expandable {@code balanceTransaction} object. */
   public String getBalanceTransaction() {
     return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
   }
@@ -73,7 +73,7 @@ public class FeeRefund extends ApiResource
     this.balanceTransaction = ApiResource.setExpandableFieldId(id, this.balanceTransaction);
   }
 
-  /** Get expanded `balanceTransaction`. */
+  /** Get expanded {@code balanceTransaction}. */
   public BalanceTransaction getBalanceTransactionObject() {
     return (this.balanceTransaction != null) ? this.balanceTransaction.getExpanded() : null;
   }
@@ -83,7 +83,7 @@ public class FeeRefund extends ApiResource
         new ExpandableField<BalanceTransaction>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `fee` object. */
+  /** Get ID of expandable {@code fee} object. */
   public String getFee() {
     return (this.fee != null) ? this.fee.getId() : null;
   }
@@ -92,7 +92,7 @@ public class FeeRefund extends ApiResource
     this.fee = ApiResource.setExpandableFieldId(id, this.fee);
   }
 
-  /** Get expanded `fee`. */
+  /** Get expanded {@code fee}. */
   public ApplicationFee getFeeObject() {
     return (this.fee != null) ? this.fee.getExpanded() : null;
   }

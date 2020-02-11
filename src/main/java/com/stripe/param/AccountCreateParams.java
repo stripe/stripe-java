@@ -12,7 +12,10 @@ import lombok.Getter;
 
 @Getter
 public class AccountCreateParams extends ApiRequestParams {
-  /** An [account token](#create_account_token), used to securely provide details to the account. */
+  /**
+   * An <a href="https://stripe.com/docs/api#create_account_token">account token</a>, used to
+   * securely provide details to the account.
+   */
   @SerializedName("account_token")
   String accountToken;
 
@@ -25,8 +28,8 @@ public class AccountCreateParams extends ApiRequestParams {
   Object businessType;
 
   /**
-   * Information about the company or business. This field is null unless `business_type` is set to
-   * `company`, `government_entity`, or `non_profit`.
+   * Information about the company or business. This field is null unless {@code business_type} is
+   * set to {@code company}, {@code government_entity}, or {@code non_profit}.
    */
   @SerializedName("company")
   Company company;
@@ -35,14 +38,15 @@ public class AccountCreateParams extends ApiRequestParams {
    * The country in which the account holder resides, or in which the business is legally
    * established. This should be an ISO 3166-1 alpha-2 country code. For example, if you are in the
    * United States and the business for which you're creating an account is legally represented in
-   * Canada, you would use `CA` as the country for the account being created.
+   * Canada, you would use {@code CA} as the country for the account being created.
    */
   @SerializedName("country")
   String country;
 
   /**
    * Three-letter ISO currency code representing the default currency for the account. This must be
-   * a currency that [Stripe supports in the account's country](https://stripe.com/docs/payouts).
+   * a currency that <a href="https://stripe.com/docs/payouts">Stripe supports in the account's
+   * country</a>.
    */
   @SerializedName("default_currency")
   String defaultCurrency;
@@ -60,14 +64,13 @@ public class AccountCreateParams extends ApiRequestParams {
 
   /**
    * A card or bank account to attach to the account. You can provide either a token, like the ones
-   * returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary, as documented in
-   * the `external_account` parameter for [bank
-   * account](https://stripe.com/docs/api#account_create_bank_account) creation. <br>
-   * <br>
-   * By default, providing an external account sets it as the new default external account for its
-   * currency, and deletes the old default if one exists. To add additional external accounts
-   * without replacing the existing default for the currency, use the bank account or card creation
-   * API.
+   * returned by <a href="https://stripe.com/docs/stripe.js">Stripe.js</a>, or a dictionary, as
+   * documented in the {@code external_account} parameter for <a
+   * href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> creation.
+   * &lt;br&gt;&lt;br&gt;By default, providing an external account sets it as the new default
+   * external account for its currency, and deletes the old default if one exists. To add additional
+   * external accounts without replacing the existing default for the currency, use the bank account
+   * or card creation API.
    */
   @SerializedName("external_account")
   String externalAccount;
@@ -82,8 +85,8 @@ public class AccountCreateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * Information about the person represented by the account. This field is null unless
-   * `business_type` is set to `individual`.
+   * Information about the person represented by the account. This field is null unless {@code
+   * business_type} is set to {@code individual}.
    */
   @SerializedName("individual")
   Individual individual;
@@ -91,7 +94,8 @@ public class AccountCreateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -109,15 +113,17 @@ public class AccountCreateParams extends ApiRequestParams {
   Settings settings;
 
   /**
-   * Details on the account's acceptance of the [Stripe Services
-   * Agreement](https://stripe.com/docs/connect/updating-accounts#tos-acceptance).
+   * Details on the account's acceptance of the <a
+   * href="https://stripe.com/docs/connect/updating-accounts#tos-acceptance">Stripe Services
+   * Agreement</a>.
    */
   @SerializedName("tos_acceptance")
   TosAcceptance tosAcceptance;
 
   /**
-   * The type of Stripe account to create. Currently must be `custom`, as only [Custom
-   * accounts](https://stripe.com/docs/connect/custom-accounts) may be created via the API.
+   * The type of Stripe account to create. Currently must be {@code custom}, as only <a
+   * href="https://stripe.com/docs/connect/custom-accounts">Custom accounts</a> may be created via
+   * the API.
    */
   @SerializedName("type")
   Type type;
@@ -216,7 +222,8 @@ public class AccountCreateParams extends ApiRequestParams {
     }
 
     /**
-     * An [account token](#create_account_token), used to securely provide details to the account.
+     * An <a href="https://stripe.com/docs/api#create_account_token">account token</a>, used to
+     * securely provide details to the account.
      */
     public Builder setAccountToken(String accountToken) {
       this.accountToken = accountToken;
@@ -242,8 +249,8 @@ public class AccountCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Information about the company or business. This field is null unless `business_type` is set
-     * to `company`, `government_entity`, or `non_profit`.
+     * Information about the company or business. This field is null unless {@code business_type} is
+     * set to {@code company}, {@code government_entity}, or {@code non_profit}.
      */
     public Builder setCompany(Company company) {
       this.company = company;
@@ -254,7 +261,7 @@ public class AccountCreateParams extends ApiRequestParams {
      * The country in which the account holder resides, or in which the business is legally
      * established. This should be an ISO 3166-1 alpha-2 country code. For example, if you are in
      * the United States and the business for which you're creating an account is legally
-     * represented in Canada, you would use `CA` as the country for the account being created.
+     * represented in Canada, you would use {@code CA} as the country for the account being created.
      */
     public Builder setCountry(String country) {
       this.country = country;
@@ -263,8 +270,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
     /**
      * Three-letter ISO currency code representing the default currency for the account. This must
-     * be a currency that [Stripe supports in the account's
-     * country](https://stripe.com/docs/payouts).
+     * be a currency that <a href="https://stripe.com/docs/payouts">Stripe supports in the account's
+     * country</a>.
      */
     public Builder setDefaultCurrency(String defaultCurrency) {
       this.defaultCurrency = defaultCurrency;
@@ -308,14 +315,13 @@ public class AccountCreateParams extends ApiRequestParams {
 
     /**
      * A card or bank account to attach to the account. You can provide either a token, like the
-     * ones returned by [Stripe.js](https://stripe.com/docs/stripe.js), or a dictionary, as
-     * documented in the `external_account` parameter for [bank
-     * account](https://stripe.com/docs/api#account_create_bank_account) creation. <br>
-     * <br>
-     * By default, providing an external account sets it as the new default external account for its
-     * currency, and deletes the old default if one exists. To add additional external accounts
-     * without replacing the existing default for the currency, use the bank account or card
-     * creation API.
+     * ones returned by <a href="https://stripe.com/docs/stripe.js">Stripe.js</a>, or a dictionary,
+     * as documented in the {@code external_account} parameter for <a
+     * href="https://stripe.com/docs/api#account_create_bank_account">bank account</a> creation.
+     * &lt;br&gt;&lt;br&gt;By default, providing an external account sets it as the new default
+     * external account for its currency, and deletes the old default if one exists. To add
+     * additional external accounts without replacing the existing default for the currency, use the
+     * bank account or card creation API.
      */
     public Builder setExternalAccount(String externalAccount) {
       this.externalAccount = externalAccount;
@@ -349,8 +355,8 @@ public class AccountCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Information about the person represented by the account. This field is null unless
-     * `business_type` is set to `individual`.
+     * Information about the person represented by the account. This field is null unless {@code
+     * business_type} is set to {@code individual}.
      */
     public Builder setIndividual(Individual individual) {
       this.individual = individual;
@@ -416,8 +422,9 @@ public class AccountCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Details on the account's acceptance of the [Stripe Services
-     * Agreement](https://stripe.com/docs/connect/updating-accounts#tos-acceptance).
+     * Details on the account's acceptance of the <a
+     * href="https://stripe.com/docs/connect/updating-accounts#tos-acceptance">Stripe Services
+     * Agreement</a>.
      */
     public Builder setTosAcceptance(TosAcceptance tosAcceptance) {
       this.tosAcceptance = tosAcceptance;
@@ -425,8 +432,9 @@ public class AccountCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The type of Stripe account to create. Currently must be `custom`, as only [Custom
-     * accounts](https://stripe.com/docs/connect/custom-accounts) may be created via the API.
+     * The type of Stripe account to create. Currently must be {@code custom}, as only <a
+     * href="https://stripe.com/docs/connect/custom-accounts">Custom accounts</a> may be created via
+     * the API.
      */
     public Builder setType(Type type) {
       this.type = type;
@@ -446,8 +454,9 @@ public class AccountCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * [The merchant category code for the account](https://stripe.com/docs/connect/setting-mcc).
-     * MCCs are used to classify businesses based on the goods or services they provide.
+     * <a href="https://stripe.com/docs/connect/setting-mcc">The merchant category code for the
+     * account</a>. MCCs are used to classify businesses based on the goods or services they
+     * provide.
      */
     @SerializedName("mcc")
     String mcc;
@@ -559,8 +568,9 @@ public class AccountCreateParams extends ApiRequestParams {
       }
 
       /**
-       * [The merchant category code for the account](https://stripe.com/docs/connect/setting-mcc).
-       * MCCs are used to classify businesses based on the goods or services they provide.
+       * <a href="https://stripe.com/docs/connect/setting-mcc">The merchant category code for the
+       * account</a>. MCCs are used to classify businesses based on the goods or services they
+       * provide.
        */
       public Builder setMcc(String mcc) {
         this.mcc = mcc;
@@ -623,20 +633,19 @@ public class AccountCreateParams extends ApiRequestParams {
     AddressKanji addressKanji;
 
     /**
-     * Whether the company's directors have been provided. Set this Boolean to `true` after creating
-     * all the company's directors with [the Persons API](https://stripe.com/docs/api/persons) for
-     * accounts with a `relationship.director` requirement. This value is not automatically set to
-     * `true` after creating directors, so it needs to be updated to indicate all directors have
-     * been provided.
+     * Whether the company's directors have been provided. Set this Boolean to {@code true} after
+     * creating all the company's directors with <a href="https://stripe.com/docs/api/persons">the
+     * Persons API</a> for accounts with a {@code relationship.director} requirement. This value is
+     * not automatically set to {@code true} after creating directors, so it needs to be updated to
+     * indicate all directors have been provided.
      */
     @SerializedName("directors_provided")
     Boolean directorsProvided;
 
     /**
-     * Whether the company's executives have been provided. Set this Boolean to `true` after
-     * creating all the company's executives with [the Persons
-     * API](https://stripe.com/docs/api/persons) for accounts with a `relationship.executive`
-     * requirement.
+     * Whether the company's executives have been provided. Set this Boolean to {@code true} after
+     * creating all the company's executives with <a href="https://stripe.com/docs/api/persons">the
+     * Persons API</a> for accounts with a {@code relationship.executive} requirement.
      */
     @SerializedName("executives_provided")
     Boolean executivesProvided;
@@ -663,9 +672,9 @@ public class AccountCreateParams extends ApiRequestParams {
     String nameKanji;
 
     /**
-     * Whether the company's owners have been provided. Set this Boolean to `true` after creating
-     * all the company's owners with [the Persons API](https://stripe.com/docs/api/persons) for
-     * accounts with a `relationship.owner` requirement.
+     * Whether the company's owners have been provided. Set this Boolean to {@code true} after
+     * creating all the company's owners with <a href="https://stripe.com/docs/api/persons">the
+     * Persons API</a> for accounts with a {@code relationship.owner} requirement.
      */
     @SerializedName("owners_provided")
     Boolean ownersProvided;
@@ -686,7 +695,9 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("tax_id")
     String taxId;
 
-    /** The jurisdiction in which the `tax_id` is registered (Germany-based companies only). */
+    /**
+     * The jurisdiction in which the {@code tax_id} is registered (Germany-based companies only).
+     */
     @SerializedName("tax_id_registrar")
     String taxIdRegistrar;
 
@@ -810,11 +821,11 @@ public class AccountCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Whether the company's directors have been provided. Set this Boolean to `true` after
-       * creating all the company's directors with [the Persons
-       * API](https://stripe.com/docs/api/persons) for accounts with a `relationship.director`
-       * requirement. This value is not automatically set to `true` after creating directors, so it
-       * needs to be updated to indicate all directors have been provided.
+       * Whether the company's directors have been provided. Set this Boolean to {@code true} after
+       * creating all the company's directors with <a href="https://stripe.com/docs/api/persons">the
+       * Persons API</a> for accounts with a {@code relationship.director} requirement. This value
+       * is not automatically set to {@code true} after creating directors, so it needs to be
+       * updated to indicate all directors have been provided.
        */
       public Builder setDirectorsProvided(Boolean directorsProvided) {
         this.directorsProvided = directorsProvided;
@@ -822,10 +833,10 @@ public class AccountCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Whether the company's executives have been provided. Set this Boolean to `true` after
-       * creating all the company's executives with [the Persons
-       * API](https://stripe.com/docs/api/persons) for accounts with a `relationship.executive`
-       * requirement.
+       * Whether the company's executives have been provided. Set this Boolean to {@code true} after
+       * creating all the company's executives with <a
+       * href="https://stripe.com/docs/api/persons">the Persons API</a> for accounts with a {@code
+       * relationship.executive} requirement.
        */
       public Builder setExecutivesProvided(Boolean executivesProvided) {
         this.executivesProvided = executivesProvided;
@@ -877,9 +888,9 @@ public class AccountCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Whether the company's owners have been provided. Set this Boolean to `true` after creating
-       * all the company's owners with [the Persons API](https://stripe.com/docs/api/persons) for
-       * accounts with a `relationship.owner` requirement.
+       * Whether the company's owners have been provided. Set this Boolean to {@code true} after
+       * creating all the company's owners with <a href="https://stripe.com/docs/api/persons">the
+       * Persons API</a> for accounts with a {@code relationship.owner} requirement.
        */
       public Builder setOwnersProvided(Boolean ownersProvided) {
         this.ownersProvided = ownersProvided;
@@ -914,7 +925,9 @@ public class AccountCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The jurisdiction in which the `tax_id` is registered (Germany-based companies only). */
+      /**
+       * The jurisdiction in which the {@code tax_id} is registered (Germany-based companies only).
+       */
       public Builder setTaxIdRegistrar(String taxIdRegistrar) {
         this.taxIdRegistrar = taxIdRegistrar;
         return this;
@@ -940,8 +953,8 @@ public class AccountCreateParams extends ApiRequestParams {
       String city;
 
       /**
-       * Two-letter country code ([ISO 3166-1
-       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
        */
       @SerializedName("country")
       String country;
@@ -1026,8 +1039,8 @@ public class AccountCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Two-letter country code ([ISO 3166-1
-         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
          */
         public Builder setCountry(String country) {
           this.country = country;
@@ -1095,8 +1108,8 @@ public class AccountCreateParams extends ApiRequestParams {
       String city;
 
       /**
-       * Two-letter country code ([ISO 3166-1
-       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
        */
       @SerializedName("country")
       String country;
@@ -1190,8 +1203,8 @@ public class AccountCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Two-letter country code ([ISO 3166-1
-         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
          */
         public Builder setCountry(String country) {
           this.country = country;
@@ -1265,8 +1278,8 @@ public class AccountCreateParams extends ApiRequestParams {
       String city;
 
       /**
-       * Two-letter country code ([ISO 3166-1
-       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
        */
       @SerializedName("country")
       String country;
@@ -1360,8 +1373,8 @@ public class AccountCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Two-letter country code ([ISO 3166-1
-         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
          */
         public Builder setCountry(String country) {
           this.country = country;
@@ -1500,9 +1513,10 @@ public class AccountCreateParams extends ApiRequestParams {
       @Getter
       public static class Document {
         /**
-         * The back of a document returned by a [file upload](#create_file) with a `purpose` value
-         * of `additional_verification`. The uploaded file needs to be a color image (smaller than
-         * 8,000px by 8,000px), in JPG or PNG format, and less than 10 MB in size.
+         * The back of a document returned by a <a
+         * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
+         * value of {@code additional_verification}. The uploaded file needs to be a color image
+         * (smaller than 8,000px by 8,000px), in JPG or PNG format, and less than 10 MB in size.
          */
         @SerializedName("back")
         String back;
@@ -1518,9 +1532,10 @@ public class AccountCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * The front of a document returned by a [file upload](#create_file) with a `purpose` value
-         * of `additional_verification`. The uploaded file needs to be a color image (smaller than
-         * 8,000px by 8,000px), in JPG or PNG format, and less than 10 MB in size.
+         * The front of a document returned by a <a
+         * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
+         * value of {@code additional_verification}. The uploaded file needs to be a color image
+         * (smaller than 8,000px by 8,000px), in JPG or PNG format, and less than 10 MB in size.
          */
         @SerializedName("front")
         String front;
@@ -1548,9 +1563,10 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The back of a document returned by a [file upload](#create_file) with a `purpose` value
-           * of `additional_verification`. The uploaded file needs to be a color image (smaller than
-           * 8,000px by 8,000px), in JPG or PNG format, and less than 10 MB in size.
+           * The back of a document returned by a <a
+           * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
+           * value of {@code additional_verification}. The uploaded file needs to be a color image
+           * (smaller than 8,000px by 8,000px), in JPG or PNG format, and less than 10 MB in size.
            */
           public Builder setBack(String back) {
             this.back = back;
@@ -1586,8 +1602,9 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The front of a document returned by a [file upload](#create_file) with a `purpose`
-           * value of `additional_verification`. The uploaded file needs to be a color image
+           * The front of a document returned by a <a
+           * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
+           * value of {@code additional_verification}. The uploaded file needs to be a color image
            * (smaller than 8,000px by 8,000px), in JPG or PNG format, and less than 10 MB in size.
            */
           public Builder setFront(String front) {
@@ -1684,15 +1701,19 @@ public class AccountCreateParams extends ApiRequestParams {
     @SerializedName("first_name_kanji")
     String firstNameKanji;
 
-    /** The individual's gender (International regulations require either "male" or "female"). */
+    /**
+     * The individual's gender (International regulations require either &quot;male&quot; or
+     * &quot;female&quot;).
+     */
     @SerializedName("gender")
     String gender;
 
     /**
      * The government-issued ID number of the individual, as appropriate for the representative’s
      * country. (Examples are a Social Security Number in the U.S., or a Social Insurance Number in
-     * Canada). Instead of the number itself, you can also provide a [PII token created with
-     * Stripe.js](https://stripe.com/docs/stripe.js#collecting-pii-data).
+     * Canada). Instead of the number itself, you can also provide a <a
+     * href="https://stripe.com/docs/stripe.js#collecting-pii-data">PII token created with
+     * Stripe.js</a>.
      */
     @SerializedName("id_number")
     String idNumber;
@@ -1716,8 +1737,8 @@ public class AccountCreateParams extends ApiRequestParams {
     /**
      * Set of key-value pairs that you can attach to an object. This can be useful for storing
      * additional information about the object in a structured format. Individual keys can be unset
-     * by posting an empty value to them. All keys can be unset by posting an empty value to
-     * `metadata`.
+     * by posting an empty value to them. All keys can be unset by posting an empty value to {@code
+     * metadata}.
      */
     @SerializedName("metadata")
     Map<String, String> metadata;
@@ -1922,7 +1943,10 @@ public class AccountCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The individual's gender (International regulations require either "male" or "female"). */
+      /**
+       * The individual's gender (International regulations require either &quot;male&quot; or
+       * &quot;female&quot;).
+       */
       public Builder setGender(String gender) {
         this.gender = gender;
         return this;
@@ -1931,8 +1955,9 @@ public class AccountCreateParams extends ApiRequestParams {
       /**
        * The government-issued ID number of the individual, as appropriate for the representative’s
        * country. (Examples are a Social Security Number in the U.S., or a Social Insurance Number
-       * in Canada). Instead of the number itself, you can also provide a [PII token created with
-       * Stripe.js](https://stripe.com/docs/stripe.js#collecting-pii-data).
+       * in Canada). Instead of the number itself, you can also provide a <a
+       * href="https://stripe.com/docs/stripe.js#collecting-pii-data">PII token created with
+       * Stripe.js</a>.
        */
       public Builder setIdNumber(String idNumber) {
         this.idNumber = idNumber;
@@ -2015,8 +2040,8 @@ public class AccountCreateParams extends ApiRequestParams {
       String city;
 
       /**
-       * Two-letter country code ([ISO 3166-1
-       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
        */
       @SerializedName("country")
       String country;
@@ -2101,8 +2126,8 @@ public class AccountCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Two-letter country code ([ISO 3166-1
-         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
          */
         public Builder setCountry(String country) {
           this.country = country;
@@ -2170,8 +2195,8 @@ public class AccountCreateParams extends ApiRequestParams {
       String city;
 
       /**
-       * Two-letter country code ([ISO 3166-1
-       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
        */
       @SerializedName("country")
       String country;
@@ -2265,8 +2290,8 @@ public class AccountCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Two-letter country code ([ISO 3166-1
-         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
          */
         public Builder setCountry(String country) {
           this.country = country;
@@ -2340,8 +2365,8 @@ public class AccountCreateParams extends ApiRequestParams {
       String city;
 
       /**
-       * Two-letter country code ([ISO 3166-1
-       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
        */
       @SerializedName("country")
       String country;
@@ -2435,8 +2460,8 @@ public class AccountCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Two-letter country code ([ISO 3166-1
-         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
          */
         public Builder setCountry(String country) {
           this.country = country;
@@ -2693,9 +2718,10 @@ public class AccountCreateParams extends ApiRequestParams {
       @Getter
       public static class AdditionalDocument {
         /**
-         * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
-         * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px by
-         * 8,000px), in JPG or PNG format, and less than 10 MB in size.
+         * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+         * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
+         * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and
+         * less than 10 MB in size.
          */
         @SerializedName("back")
         String back;
@@ -2711,9 +2737,10 @@ public class AccountCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * The front of an ID returned by a [file upload](#create_file) with a `purpose` value of
-         * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px by
-         * 8,000px), in JPG or PNG format, and less than 10 MB in size.
+         * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+         * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
+         * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and
+         * less than 10 MB in size.
          */
         @SerializedName("front")
         String front;
@@ -2741,9 +2768,10 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
-           * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px
-           * by 8,000px), in JPG or PNG format, and less than 10 MB in size.
+           * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+           * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
+           * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and
+           * less than 10 MB in size.
            */
           public Builder setBack(String back) {
             this.back = back;
@@ -2781,9 +2809,10 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The front of an ID returned by a [file upload](#create_file) with a `purpose` value of
-           * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px
-           * by 8,000px), in JPG or PNG format, and less than 10 MB in size.
+           * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+           * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
+           * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and
+           * less than 10 MB in size.
            */
           public Builder setFront(String front) {
             this.front = front;
@@ -2795,9 +2824,10 @@ public class AccountCreateParams extends ApiRequestParams {
       @Getter
       public static class Document {
         /**
-         * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
-         * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px by
-         * 8,000px), in JPG or PNG format, and less than 10 MB in size.
+         * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+         * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
+         * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and
+         * less than 10 MB in size.
          */
         @SerializedName("back")
         String back;
@@ -2813,9 +2843,10 @@ public class AccountCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * The front of an ID returned by a [file upload](#create_file) with a `purpose` value of
-         * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px by
-         * 8,000px), in JPG or PNG format, and less than 10 MB in size.
+         * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+         * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
+         * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and
+         * less than 10 MB in size.
          */
         @SerializedName("front")
         String front;
@@ -2843,9 +2874,10 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The back of an ID returned by a [file upload](#create_file) with a `purpose` value of
-           * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px
-           * by 8,000px), in JPG or PNG format, and less than 10 MB in size.
+           * The back of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+           * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
+           * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and
+           * less than 10 MB in size.
            */
           public Builder setBack(String back) {
             this.back = back;
@@ -2881,9 +2913,10 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The front of an ID returned by a [file upload](#create_file) with a `purpose` value of
-           * `identity_document`. The uploaded file needs to be a color image (smaller than 8,000px
-           * by 8,000px), in JPG or PNG format, and less than 10 MB in size.
+           * The front of an ID returned by a <a href="https://stripe.com/docs/api#create_file">file
+           * upload</a> with a {@code purpose} value of {@code identity_document}. The uploaded file
+           * needs to be a color image (smaller than 8,000px by 8,000px), in JPG or PNG format, and
+           * less than 10 MB in size.
            */
           public Builder setFront(String front) {
             this.front = front;
@@ -3024,16 +3057,16 @@ public class AccountCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) An icon for the
-       * account. Must be square and at least 128px x 128px.
+       * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) An icon for
+       * the account. Must be square and at least 128px x 128px.
        */
       @SerializedName("icon")
       String icon;
 
       /**
-       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A logo for the account
-       * that will be used in Checkout instead of the icon and without the account's name next to it
-       * if provided. Must be at least 128px x 128px.
+       * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) A logo for
+       * the account that will be used in Checkout instead of the icon and without the account's
+       * name next to it if provided. Must be at least 128px x 128px.
        */
       @SerializedName("logo")
       String logo;
@@ -3097,8 +3130,8 @@ public class AccountCreateParams extends ApiRequestParams {
         }
 
         /**
-         * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) An icon for the
-         * account. Must be square and at least 128px x 128px.
+         * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) An icon
+         * for the account. Must be square and at least 128px x 128px.
          */
         public Builder setIcon(String icon) {
           this.icon = icon;
@@ -3106,9 +3139,9 @@ public class AccountCreateParams extends ApiRequestParams {
         }
 
         /**
-         * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) A logo for the
-         * account that will be used in Checkout instead of the icon and without the account's name
-         * next to it if provided. Must be at least 128px x 128px.
+         * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) A logo for
+         * the account that will be used in Checkout instead of the icon and without the account's
+         * name next to it if provided. Must be at least 128px x 128px.
          */
         public Builder setLogo(String logo) {
           this.logo = logo;
@@ -3143,8 +3176,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
       /**
        * The default text that appears on credit card statements when a charge is made. This field
-       * prefixes any dynamic `statement_descriptor` specified on the charge.
-       * `statement_descriptor_prefix` is useful for maximizing descriptor space for the dynamic
+       * prefixes any dynamic {@code statement_descriptor} specified on the charge. {@code
+       * statement_descriptor_prefix} is useful for maximizing descriptor space for the dynamic
        * portion.
        */
       @SerializedName("statement_descriptor_prefix")
@@ -3212,8 +3245,8 @@ public class AccountCreateParams extends ApiRequestParams {
 
         /**
          * The default text that appears on credit card statements when a charge is made. This field
-         * prefixes any dynamic `statement_descriptor` specified on the charge.
-         * `statement_descriptor_prefix` is useful for maximizing descriptor space for the dynamic
+         * prefixes any dynamic {@code statement_descriptor} specified on the charge. {@code
+         * statement_descriptor_prefix} is useful for maximizing descriptor space for the dynamic
          * portion.
          */
         public Builder setStatementDescriptorPrefix(String statementDescriptorPrefix) {
@@ -3334,7 +3367,7 @@ public class AccountCreateParams extends ApiRequestParams {
 
       /**
        * The default text that appears on credit card statements when a charge is made. This field
-       * prefixes any dynamic `statement_descriptor` specified on the charge.
+       * prefixes any dynamic {@code statement_descriptor} specified on the charge.
        */
       @SerializedName("statement_descriptor")
       String statementDescriptor;
@@ -3416,7 +3449,7 @@ public class AccountCreateParams extends ApiRequestParams {
 
         /**
          * The default text that appears on credit card statements when a charge is made. This field
-         * prefixes any dynamic `statement_descriptor` specified on the charge.
+         * prefixes any dynamic {@code statement_descriptor} specified on the charge.
          */
         public Builder setStatementDescriptor(String statementDescriptor) {
           this.statementDescriptor = statementDescriptor;
@@ -3447,8 +3480,9 @@ public class AccountCreateParams extends ApiRequestParams {
     public static class Payouts {
       /**
        * A Boolean indicating whether Stripe should try to reclaim negative balances from an
-       * attached bank account. For details, see [Understanding Connect Account
-       * Balances](https://stripe.com/docs/connect/account-balances).
+       * attached bank account. For details, see <a
+       * href="https://stripe.com/docs/connect/account-balances">Understanding Connect Account
+       * Balances</a>.
        */
       @SerializedName("debit_negative_balances")
       Boolean debitNegativeBalances;
@@ -3464,8 +3498,9 @@ public class AccountCreateParams extends ApiRequestParams {
 
       /**
        * Details on when funds from charges are available, and when they are paid out to an external
-       * account. For details, see our [Setting Bank and Debit Card
-       * Payouts](https://stripe.com/docs/connect/bank-transfers#payout-information) documentation.
+       * account. For details, see our <a
+       * href="https://stripe.com/docs/connect/bank-transfers#payout-information">Setting Bank and
+       * Debit Card Payouts</a> documentation.
        */
       @SerializedName("schedule")
       Schedule schedule;
@@ -3512,8 +3547,9 @@ public class AccountCreateParams extends ApiRequestParams {
 
         /**
          * A Boolean indicating whether Stripe should try to reclaim negative balances from an
-         * attached bank account. For details, see [Understanding Connect Account
-         * Balances](https://stripe.com/docs/connect/account-balances).
+         * attached bank account. For details, see <a
+         * href="https://stripe.com/docs/connect/account-balances">Understanding Connect Account
+         * Balances</a>.
          */
         public Builder setDebitNegativeBalances(Boolean debitNegativeBalances) {
           this.debitNegativeBalances = debitNegativeBalances;
@@ -3550,9 +3586,9 @@ public class AccountCreateParams extends ApiRequestParams {
 
         /**
          * Details on when funds from charges are available, and when they are paid out to an
-         * external account. For details, see our [Setting Bank and Debit Card
-         * Payouts](https://stripe.com/docs/connect/bank-transfers#payout-information)
-         * documentation.
+         * external account. For details, see our <a
+         * href="https://stripe.com/docs/connect/bank-transfers#payout-information">Setting Bank and
+         * Debit Card Payouts</a> documentation.
          */
         public Builder setSchedule(Schedule schedule) {
           this.schedule = schedule;
@@ -3572,9 +3608,10 @@ public class AccountCreateParams extends ApiRequestParams {
       @Getter
       public static class Schedule {
         /**
-         * The number of days charge funds are held before being paid out. May also be set to
-         * `minimum`, representing the lowest available value for the account country. Default is
-         * `minimum`. The `delay_days` parameter does not apply when the `interval` is `manual`.
+         * The number of days charge funds are held before being paid out. May also be set to {@code
+         * minimum}, representing the lowest available value for the account country. Default is
+         * {@code minimum}. The {@code delay_days} parameter does not apply when the {@code
+         * interval} is {@code manual}.
          */
         @SerializedName("delay_days")
         Object delayDays;
@@ -3590,8 +3627,8 @@ public class AccountCreateParams extends ApiRequestParams {
         Map<String, Object> extraParams;
 
         /**
-         * How frequently available funds are paid out. One of: `daily`, `manual`, `weekly`, or
-         * `monthly`. Default is `daily`.
+         * How frequently available funds are paid out. One of: {@code daily}, {@code manual},
+         * {@code weekly}, or {@code monthly}. Default is {@code daily}.
          */
         @SerializedName("interval")
         Interval interval;
@@ -3599,15 +3636,16 @@ public class AccountCreateParams extends ApiRequestParams {
         /**
          * The day of the month when available funds are paid out, specified as a number between
          * 1--31. Payouts nominally scheduled between the 29th and 31st of the month are instead
-         * sent on the last day of a shorter month. Required and applicable only if `interval` is
-         * `monthly`.
+         * sent on the last day of a shorter month. Required and applicable only if {@code interval}
+         * is {@code monthly}.
          */
         @SerializedName("monthly_anchor")
         Long monthlyAnchor;
 
         /**
-         * The day of the week when available funds are paid out, specified as `monday`, `tuesday`,
-         * etc. (required and applicable only if `interval` is `weekly`.)
+         * The day of the week when available funds are paid out, specified as {@code monday},
+         * {@code tuesday}, etc. (required and applicable only if {@code interval} is {@code
+         * weekly}.)
          */
         @SerializedName("weekly_anchor")
         WeeklyAnchor weeklyAnchor;
@@ -3652,8 +3690,9 @@ public class AccountCreateParams extends ApiRequestParams {
 
           /**
            * The number of days charge funds are held before being paid out. May also be set to
-           * `minimum`, representing the lowest available value for the account country. Default is
-           * `minimum`. The `delay_days` parameter does not apply when the `interval` is `manual`.
+           * {@code minimum}, representing the lowest available value for the account country.
+           * Default is {@code minimum}. The {@code delay_days} parameter does not apply when the
+           * {@code interval} is {@code manual}.
            */
           public Builder setDelayDays(DelayDays delayDays) {
             this.delayDays = delayDays;
@@ -3662,8 +3701,9 @@ public class AccountCreateParams extends ApiRequestParams {
 
           /**
            * The number of days charge funds are held before being paid out. May also be set to
-           * `minimum`, representing the lowest available value for the account country. Default is
-           * `minimum`. The `delay_days` parameter does not apply when the `interval` is `manual`.
+           * {@code minimum}, representing the lowest available value for the account country.
+           * Default is {@code minimum}. The {@code delay_days} parameter does not apply when the
+           * {@code interval} is {@code manual}.
            */
           public Builder setDelayDays(Long delayDays) {
             this.delayDays = delayDays;
@@ -3699,8 +3739,8 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           /**
-           * How frequently available funds are paid out. One of: `daily`, `manual`, `weekly`, or
-           * `monthly`. Default is `daily`.
+           * How frequently available funds are paid out. One of: {@code daily}, {@code manual},
+           * {@code weekly}, or {@code monthly}. Default is {@code daily}.
            */
           public Builder setInterval(Interval interval) {
             this.interval = interval;
@@ -3710,8 +3750,8 @@ public class AccountCreateParams extends ApiRequestParams {
           /**
            * The day of the month when available funds are paid out, specified as a number between
            * 1--31. Payouts nominally scheduled between the 29th and 31st of the month are instead
-           * sent on the last day of a shorter month. Required and applicable only if `interval` is
-           * `monthly`.
+           * sent on the last day of a shorter month. Required and applicable only if {@code
+           * interval} is {@code monthly}.
            */
           public Builder setMonthlyAnchor(Long monthlyAnchor) {
             this.monthlyAnchor = monthlyAnchor;
@@ -3719,8 +3759,9 @@ public class AccountCreateParams extends ApiRequestParams {
           }
 
           /**
-           * The day of the week when available funds are paid out, specified as `monday`,
-           * `tuesday`, etc. (required and applicable only if `interval` is `weekly`.)
+           * The day of the week when available funds are paid out, specified as {@code monday},
+           * {@code tuesday}, etc. (required and applicable only if {@code interval} is {@code
+           * weekly}.)
            */
           public Builder setWeeklyAnchor(WeeklyAnchor weeklyAnchor) {
             this.weeklyAnchor = weeklyAnchor;

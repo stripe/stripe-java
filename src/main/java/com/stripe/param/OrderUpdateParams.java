@@ -34,15 +34,16 @@ public class OrderUpdateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
   /**
-   * The shipping method to select for fulfilling this order. If specified, must be one of the `id`s
-   * of a shipping method in the `shipping_methods` array. If specified, will overwrite the existing
-   * selected shipping method, updating `items` as necessary.
+   * The shipping method to select for fulfilling this order. If specified, must be one of the
+   * {@code id}s of a shipping method in the {@code shipping_methods} array. If specified, will
+   * overwrite the existing selected shipping method, updating {@code items} as necessary.
    */
   @SerializedName("selected_shipping_method")
   Object selectedShippingMethod;
@@ -52,9 +53,9 @@ public class OrderUpdateParams extends ApiRequestParams {
   Shipping shipping;
 
   /**
-   * Current order status. One of `created`, `paid`, `canceled`, `fulfilled`, or `returned`. More
-   * detail in the [Orders
-   * Guide](https://stripe.com/docs/orders/guide#understanding-order-statuses).
+   * Current order status. One of {@code created}, {@code paid}, {@code canceled}, {@code
+   * fulfilled}, or {@code returned}. More detail in the <a
+   * href="https://stripe.com/docs/orders/guide#understanding-order-statuses">Orders Guide</a>.
    */
   @SerializedName("status")
   Status status;
@@ -205,8 +206,8 @@ public class OrderUpdateParams extends ApiRequestParams {
 
     /**
      * The shipping method to select for fulfilling this order. If specified, must be one of the
-     * `id`s of a shipping method in the `shipping_methods` array. If specified, will overwrite the
-     * existing selected shipping method, updating `items` as necessary.
+     * {@code id}s of a shipping method in the {@code shipping_methods} array. If specified, will
+     * overwrite the existing selected shipping method, updating {@code items} as necessary.
      */
     public Builder setSelectedShippingMethod(String selectedShippingMethod) {
       this.selectedShippingMethod = selectedShippingMethod;
@@ -215,8 +216,8 @@ public class OrderUpdateParams extends ApiRequestParams {
 
     /**
      * The shipping method to select for fulfilling this order. If specified, must be one of the
-     * `id`s of a shipping method in the `shipping_methods` array. If specified, will overwrite the
-     * existing selected shipping method, updating `items` as necessary.
+     * {@code id}s of a shipping method in the {@code shipping_methods} array. If specified, will
+     * overwrite the existing selected shipping method, updating {@code items} as necessary.
      */
     public Builder setSelectedShippingMethod(EmptyParam selectedShippingMethod) {
       this.selectedShippingMethod = selectedShippingMethod;
@@ -230,9 +231,9 @@ public class OrderUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Current order status. One of `created`, `paid`, `canceled`, `fulfilled`, or `returned`. More
-     * detail in the [Orders
-     * Guide](https://stripe.com/docs/orders/guide#understanding-order-statuses).
+     * Current order status. One of {@code created}, {@code paid}, {@code canceled}, {@code
+     * fulfilled}, or {@code returned}. More detail in the <a
+     * href="https://stripe.com/docs/orders/guide#understanding-order-statuses">Orders Guide</a>.
      */
     public Builder setStatus(Status status) {
       this.status = status;
@@ -242,7 +243,7 @@ public class OrderUpdateParams extends ApiRequestParams {
 
   @Getter
   public static class Shipping {
-    /** The name of the carrier like `USPS`, `UPS`, or `FedEx`. */
+    /** The name of the carrier like {@code USPS}, {@code UPS}, or {@code FedEx}. */
     @SerializedName("carrier")
     Object carrier;
 
@@ -281,13 +282,13 @@ public class OrderUpdateParams extends ApiRequestParams {
         return new Shipping(this.carrier, this.extraParams, this.trackingNumber);
       }
 
-      /** The name of the carrier like `USPS`, `UPS`, or `FedEx`. */
+      /** The name of the carrier like {@code USPS}, {@code UPS}, or {@code FedEx}. */
       public Builder setCarrier(String carrier) {
         this.carrier = carrier;
         return this;
       }
 
-      /** The name of the carrier like `USPS`, `UPS`, or `FedEx`. */
+      /** The name of the carrier like {@code USPS}, {@code UPS}, or {@code FedEx}. */
       public Builder setCarrier(EmptyParam carrier) {
         this.carrier = carrier;
         return this;

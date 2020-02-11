@@ -11,18 +11,20 @@ import lombok.Getter;
 @Getter
 public class CustomerBalanceTransactionCollectionCreateParams extends ApiRequestParams {
   /**
-   * The integer amount in **%s** to apply to the customer's balance. Pass a negative amount to
-   * credit the customer's balance, and pass in a positive amount to debit the customer's balance.
+   * The integer amount in <strong>%s</strong> to apply to the customer's balance. Pass a negative
+   * amount to credit the customer's balance, and pass in a positive amount to debit the customer's
+   * balance.
    */
   @SerializedName("amount")
   Long amount;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies). If the
-   * customer's [`currency`](https://stripe.com/docs/api/customers/object#customer_object-currency)
-   * is set, this value must match it. If the customer's `currency` is not set, it will be updated
-   * to this value.
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>. If
+   * the customer's <a
+   * href="https://stripe.com/docs/api/customers/object#customer_object-currency">{@code
+   * currency}</a> is set, this value must match it. If the customer's {@code currency} is not set,
+   * it will be updated to this value.
    */
   @SerializedName("currency")
   String currency;
@@ -47,7 +49,8 @@ public class CustomerBalanceTransactionCollectionCreateParams extends ApiRequest
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -96,8 +99,9 @@ public class CustomerBalanceTransactionCollectionCreateParams extends ApiRequest
     }
 
     /**
-     * The integer amount in **%s** to apply to the customer's balance. Pass a negative amount to
-     * credit the customer's balance, and pass in a positive amount to debit the customer's balance.
+     * The integer amount in <strong>%s</strong> to apply to the customer's balance. Pass a negative
+     * amount to credit the customer's balance, and pass in a positive amount to debit the
+     * customer's balance.
      */
     public Builder setAmount(Long amount) {
       this.amount = amount;
@@ -105,12 +109,12 @@ public class CustomerBalanceTransactionCollectionCreateParams extends ApiRequest
     }
 
     /**
-     * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-     * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies). If the
-     * customer's
-     * [`currency`](https://stripe.com/docs/api/customers/object#customer_object-currency) is set,
-     * this value must match it. If the customer's `currency` is not set, it will be updated to this
-     * value.
+     * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency
+     * code</a>, in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported
+     * currency</a>. If the customer's <a
+     * href="https://stripe.com/docs/api/customers/object#customer_object-currency">{@code
+     * currency}</a> is set, this value must match it. If the customer's {@code currency} is not
+     * set, it will be updated to this value.
      */
     public Builder setCurrency(String currency) {
       this.currency = currency;

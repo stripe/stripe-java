@@ -13,22 +13,23 @@ import lombok.Getter;
 public class SourceCreateParams extends ApiRequestParams {
   /**
    * Amount associated with the source. This is the amount for which the source will be chargeable
-   * once ready. Required for `single_use` sources. Not supported for `receiver` type sources, where
-   * charge amount may not be specified until funds land.
+   * once ready. Required for {@code single_use} sources. Not supported for {@code receiver} type
+   * sources, where charge amount may not be specified until funds land.
    */
   @SerializedName("amount")
   Long amount;
 
   /**
-   * Three-letter [ISO code for the currency](https://stripe.com/docs/currencies) associated with
-   * the source. This is the currency for which the source will be chargeable once ready.
+   * Three-letter <a href="https://stripe.com/docs/currencies">ISO code for the currency</a>
+   * associated with the source. This is the currency for which the source will be chargeable once
+   * ready.
    */
   @SerializedName("currency")
   String currency;
 
   /**
-   * The `Customer` to whom the original source is attached to. Must be set when the original source
-   * is not a `Source` (e.g., `Card`).
+   * The {@code Customer} to whom the original source is attached to. Must be set when the original
+   * source is not a {@code Source} (e.g., {@code Card}).
    */
   @SerializedName("customer")
   String customer;
@@ -47,8 +48,9 @@ public class SourceCreateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * The authentication `flow` of the source to create. `flow` is one of `redirect`, `receiver`,
-   * `code_verification`, `none`. It is generally inferred unless a type supports multiple flows.
+   * The authentication {@code flow} of the source to create. {@code flow} is one of {@code
+   * redirect}, {@code receiver}, {@code code_verification}, {@code none}. It is generally inferred
+   * unless a type supports multiple flows.
    */
   @SerializedName("flow")
   Flow flow;
@@ -75,15 +77,15 @@ public class SourceCreateParams extends ApiRequestParams {
   Owner owner;
 
   /**
-   * Optional parameters for the receiver flow. Can be set only if the source is a receiver (`flow`
-   * is `receiver`).
+   * Optional parameters for the receiver flow. Can be set only if the source is a receiver ({@code
+   * flow} is {@code receiver}).
    */
   @SerializedName("receiver")
   Receiver receiver;
 
   /**
    * Parameters required for the redirect flow. Required if the source is authenticated by a
-   * redirect (`flow` is `redirect`).
+   * redirect ({@code flow} is {@code redirect}).
    */
   @SerializedName("redirect")
   Redirect redirect;
@@ -97,9 +99,9 @@ public class SourceCreateParams extends ApiRequestParams {
 
   /**
    * An arbitrary string to be displayed on your customer's statement. As an example, if your
-   * website is `RunClub` and the item you're charging for is a race ticket, you may want to specify
-   * a `statement_descriptor` of `RunClub 5K race ticket.` While many payment types will display
-   * this information, some may not display it at all.
+   * website is {@code RunClub} and the item you're charging for is a race ticket, you may want to
+   * specify a {@code statement_descriptor} of {@code RunClub 5K race ticket.} While many payment
+   * types will display this information, some may not display it at all.
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
@@ -112,9 +114,10 @@ public class SourceCreateParams extends ApiRequestParams {
   String token;
 
   /**
-   * The `type` of the source to create. Required unless `customer` and `original_source` are
-   * specified (see the [Cloning card
-   * Sources](https://stripe.com/docs/sources/connect#cloning-card-sources) guide)
+   * The {@code type} of the source to create. Required unless {@code customer} and {@code
+   * original_source} are specified (see the <a
+   * href="https://stripe.com/docs/sources/connect#cloning-card-sources">Cloning card Sources</a>
+   * guide)
    */
   @SerializedName("type")
   String type;
@@ -222,8 +225,8 @@ public class SourceCreateParams extends ApiRequestParams {
 
     /**
      * Amount associated with the source. This is the amount for which the source will be chargeable
-     * once ready. Required for `single_use` sources. Not supported for `receiver` type sources,
-     * where charge amount may not be specified until funds land.
+     * once ready. Required for {@code single_use} sources. Not supported for {@code receiver} type
+     * sources, where charge amount may not be specified until funds land.
      */
     public Builder setAmount(Long amount) {
       this.amount = amount;
@@ -231,8 +234,9 @@ public class SourceCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Three-letter [ISO code for the currency](https://stripe.com/docs/currencies) associated with
-     * the source. This is the currency for which the source will be chargeable once ready.
+     * Three-letter <a href="https://stripe.com/docs/currencies">ISO code for the currency</a>
+     * associated with the source. This is the currency for which the source will be chargeable once
+     * ready.
      */
     public Builder setCurrency(String currency) {
       this.currency = currency;
@@ -240,8 +244,8 @@ public class SourceCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The `Customer` to whom the original source is attached to. Must be set when the original
-     * source is not a `Source` (e.g., `Card`).
+     * The {@code Customer} to whom the original source is attached to. Must be set when the
+     * original source is not a {@code Source} (e.g., {@code Card}).
      */
     public Builder setCustomer(String customer) {
       this.customer = customer;
@@ -301,8 +305,9 @@ public class SourceCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The authentication `flow` of the source to create. `flow` is one of `redirect`, `receiver`,
-     * `code_verification`, `none`. It is generally inferred unless a type supports multiple flows.
+     * The authentication {@code flow} of the source to create. {@code flow} is one of {@code
+     * redirect}, {@code receiver}, {@code code_verification}, {@code none}. It is generally
+     * inferred unless a type supports multiple flows.
      */
     public Builder setFlow(Flow flow) {
       this.flow = flow;
@@ -361,7 +366,7 @@ public class SourceCreateParams extends ApiRequestParams {
 
     /**
      * Optional parameters for the receiver flow. Can be set only if the source is a receiver
-     * (`flow` is `receiver`).
+     * ({@code flow} is {@code receiver}).
      */
     public Builder setReceiver(Receiver receiver) {
       this.receiver = receiver;
@@ -370,7 +375,7 @@ public class SourceCreateParams extends ApiRequestParams {
 
     /**
      * Parameters required for the redirect flow. Required if the source is authenticated by a
-     * redirect (`flow` is `redirect`).
+     * redirect ({@code flow} is {@code redirect}).
      */
     public Builder setRedirect(Redirect redirect) {
       this.redirect = redirect;
@@ -388,9 +393,9 @@ public class SourceCreateParams extends ApiRequestParams {
 
     /**
      * An arbitrary string to be displayed on your customer's statement. As an example, if your
-     * website is `RunClub` and the item you're charging for is a race ticket, you may want to
-     * specify a `statement_descriptor` of `RunClub 5K race ticket.` While many payment types will
-     * display this information, some may not display it at all.
+     * website is {@code RunClub} and the item you're charging for is a race ticket, you may want to
+     * specify a {@code statement_descriptor} of {@code RunClub 5K race ticket.} While many payment
+     * types will display this information, some may not display it at all.
      */
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
@@ -407,9 +412,10 @@ public class SourceCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The `type` of the source to create. Required unless `customer` and `original_source` are
-     * specified (see the [Cloning card
-     * Sources](https://stripe.com/docs/sources/connect#cloning-card-sources) guide)
+     * The {@code type} of the source to create. Required unless {@code customer} and {@code
+     * original_source} are specified (see the <a
+     * href="https://stripe.com/docs/sources/connect#cloning-card-sources">Cloning card Sources</a>
+     * guide)
      */
     public Builder setType(String type) {
       this.type = type;
@@ -434,7 +440,7 @@ public class SourceCreateParams extends ApiRequestParams {
     @SerializedName("amount")
     Object amount;
 
-    /** The currency specified by the mandate. (Must match `currency` of the source) */
+    /** The currency specified by the mandate. (Must match {@code currency} of the source) */
     @SerializedName("currency")
     String currency;
 
@@ -448,19 +454,20 @@ public class SourceCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * The interval of debits permitted by the mandate. Either `one_time` (just permitting a single
-     * debit), `scheduled` (with debits on an agreed schedule or for clearly-defined events), or
-     * `variable`(for debits with any frequency)
+     * The interval of debits permitted by the mandate. Either {@code one_time} (just permitting a
+     * single debit), {@code scheduled} (with debits on an agreed schedule or for clearly-defined
+     * events), or {@code variable}(for debits with any frequency)
      */
     @SerializedName("interval")
     Interval interval;
 
     /**
      * The method Stripe should use to notify the customer of upcoming debit instructions and/or
-     * mandate confirmation as required by the underlying debit network. Either `email` (an email is
-     * sent directly to the customer), `manual` (a `source.mandate_notification` event is sent to
-     * your webhooks endpoint and you should handle the notification) or `none` (the underlying
-     * debit network does not require any notification).
+     * mandate confirmation as required by the underlying debit network. Either {@code email} (an
+     * email is sent directly to the customer), {@code manual} (a {@code
+     * source.mandate_notification} event is sent to your webhooks endpoint and you should handle
+     * the notification) or {@code none} (the underlying debit network does not require any
+     * notification).
      */
     @SerializedName("notification_method")
     NotificationMethod notificationMethod;
@@ -529,7 +536,7 @@ public class SourceCreateParams extends ApiRequestParams {
         return this;
       }
 
-      /** The currency specified by the mandate. (Must match `currency` of the source) */
+      /** The currency specified by the mandate. (Must match {@code currency} of the source) */
       public Builder setCurrency(String currency) {
         this.currency = currency;
         return this;
@@ -562,9 +569,9 @@ public class SourceCreateParams extends ApiRequestParams {
       }
 
       /**
-       * The interval of debits permitted by the mandate. Either `one_time` (just permitting a
-       * single debit), `scheduled` (with debits on an agreed schedule or for clearly-defined
-       * events), or `variable`(for debits with any frequency)
+       * The interval of debits permitted by the mandate. Either {@code one_time} (just permitting a
+       * single debit), {@code scheduled} (with debits on an agreed schedule or for clearly-defined
+       * events), or {@code variable}(for debits with any frequency)
        */
       public Builder setInterval(Interval interval) {
         this.interval = interval;
@@ -573,10 +580,11 @@ public class SourceCreateParams extends ApiRequestParams {
 
       /**
        * The method Stripe should use to notify the customer of upcoming debit instructions and/or
-       * mandate confirmation as required by the underlying debit network. Either `email` (an email
-       * is sent directly to the customer), `manual` (a `source.mandate_notification` event is sent
-       * to your webhooks endpoint and you should handle the notification) or `none` (the underlying
-       * debit network does not require any notification).
+       * mandate confirmation as required by the underlying debit network. Either {@code email} (an
+       * email is sent directly to the customer), {@code manual} (a {@code
+       * source.mandate_notification} event is sent to your webhooks endpoint and you should handle
+       * the notification) or {@code none} (the underlying debit network does not require any
+       * notification).
        */
       public Builder setNotificationMethod(NotificationMethod notificationMethod) {
         this.notificationMethod = notificationMethod;
@@ -606,28 +614,29 @@ public class SourceCreateParams extends ApiRequestParams {
       String ip;
 
       /**
-       * The parameters required to store a mandate accepted offline. Should only be set if
-       * `mandate[type]` is `offline`
+       * The parameters required to store a mandate accepted offline. Should only be set if {@code
+       * mandate[type]} is {@code offline}
        */
       @SerializedName("offline")
       Offline offline;
 
       /**
-       * The parameters required to store a mandate accepted online. Should only be set if
-       * `mandate[type]` is `online`
+       * The parameters required to store a mandate accepted online. Should only be set if {@code
+       * mandate[type]} is {@code online}
        */
       @SerializedName("online")
       Online online;
 
       /**
-       * The status of the mandate acceptance. Either `accepted` (the mandate was accepted) or
-       * `refused` (the mandate was refused).
+       * The status of the mandate acceptance. Either {@code accepted} (the mandate was accepted) or
+       * {@code refused} (the mandate was refused).
        */
       @SerializedName("status")
       Status status;
 
       /**
-       * The type of acceptance information included with the mandate. Either `online` or `offline`
+       * The type of acceptance information included with the mandate. Either {@code online} or
+       * {@code offline}
        */
       @SerializedName("type")
       Type type;
@@ -735,8 +744,8 @@ public class SourceCreateParams extends ApiRequestParams {
         }
 
         /**
-         * The parameters required to store a mandate accepted offline. Should only be set if
-         * `mandate[type]` is `offline`
+         * The parameters required to store a mandate accepted offline. Should only be set if {@code
+         * mandate[type]} is {@code offline}
          */
         public Builder setOffline(Offline offline) {
           this.offline = offline;
@@ -744,8 +753,8 @@ public class SourceCreateParams extends ApiRequestParams {
         }
 
         /**
-         * The parameters required to store a mandate accepted online. Should only be set if
-         * `mandate[type]` is `online`
+         * The parameters required to store a mandate accepted online. Should only be set if {@code
+         * mandate[type]} is {@code online}
          */
         public Builder setOnline(Online online) {
           this.online = online;
@@ -753,8 +762,8 @@ public class SourceCreateParams extends ApiRequestParams {
         }
 
         /**
-         * The status of the mandate acceptance. Either `accepted` (the mandate was accepted) or
-         * `refused` (the mandate was refused).
+         * The status of the mandate acceptance. Either {@code accepted} (the mandate was accepted)
+         * or {@code refused} (the mandate was refused).
          */
         public Builder setStatus(Status status) {
           this.status = status;
@@ -762,8 +771,8 @@ public class SourceCreateParams extends ApiRequestParams {
         }
 
         /**
-         * The type of acceptance information included with the mandate. Either `online` or
-         * `offline`
+         * The type of acceptance information included with the mandate. Either {@code online} or
+         * {@code offline}
          */
         public Builder setType(Type type) {
           this.type = type;
@@ -783,8 +792,8 @@ public class SourceCreateParams extends ApiRequestParams {
       @Getter
       public static class Offline {
         /**
-         * An email to contact you with if a copy of the mandate is requested, required if `type` is
-         * `offline`.
+         * An email to contact you with if a copy of the mandate is requested, required if {@code
+         * type} is {@code offline}.
          */
         @SerializedName("contact_email")
         String contactEmail;
@@ -819,8 +828,8 @@ public class SourceCreateParams extends ApiRequestParams {
           }
 
           /**
-           * An email to contact you with if a copy of the mandate is requested, required if `type`
-           * is `offline`.
+           * An email to contact you with if a copy of the mandate is requested, required if {@code
+           * type} is {@code offline}.
            */
           public Builder setContactEmail(String contactEmail) {
             this.contactEmail = contactEmail;
@@ -1159,8 +1168,8 @@ public class SourceCreateParams extends ApiRequestParams {
       String city;
 
       /**
-       * Two-letter country code ([ISO 3166-1
-       * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+       * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+       * 3166-1 alpha-2</a>).
        */
       @SerializedName("country")
       String country;
@@ -1245,8 +1254,8 @@ public class SourceCreateParams extends ApiRequestParams {
         }
 
         /**
-         * Two-letter country code ([ISO 3166-1
-         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
          */
         public Builder setCountry(String country) {
           this.country = country;
@@ -1321,8 +1330,8 @@ public class SourceCreateParams extends ApiRequestParams {
 
     /**
      * The method Stripe should use to request information needed to process a refund or mispayment.
-     * Either `email` (an email is sent directly to the customer) or `manual` (a
-     * `source.refund_attributes_required` event is sent to your webhooks endpoint). Refer to each
+     * Either {@code email} (an email is sent directly to the customer) or {@code manual} (a {@code
+     * source.refund_attributes_required} event is sent to your webhooks endpoint). Refer to each
      * payment method's documentation to learn which refund attributes may be required.
      */
     @SerializedName("refund_attributes_method")
@@ -1376,9 +1385,10 @@ public class SourceCreateParams extends ApiRequestParams {
 
       /**
        * The method Stripe should use to request information needed to process a refund or
-       * mispayment. Either `email` (an email is sent directly to the customer) or `manual` (a
-       * `source.refund_attributes_required` event is sent to your webhooks endpoint). Refer to each
-       * payment method's documentation to learn which refund attributes may be required.
+       * mispayment. Either {@code email} (an email is sent directly to the customer) or {@code
+       * manual} (a {@code source.refund_attributes_required} event is sent to your webhooks
+       * endpoint). Refer to each payment method's documentation to learn which refund attributes
+       * may be required.
        */
       public Builder setRefundAttributesMethod(RefundAttributesMethod refundAttributesMethod) {
         this.refundAttributesMethod = refundAttributesMethod;
@@ -1495,8 +1505,8 @@ public class SourceCreateParams extends ApiRequestParams {
     List<Item> items;
 
     /**
-     * Shipping address for the order. Required if any of the SKUs are for products that have
-     * `shippable` set to true.
+     * Shipping address for the order. Required if any of the SKUs are for products that have {@code
+     * shippable} set to true.
      */
     @SerializedName("shipping")
     Shipping shipping;
@@ -1577,7 +1587,7 @@ public class SourceCreateParams extends ApiRequestParams {
 
       /**
        * Shipping address for the order. Required if any of the SKUs are for products that have
-       * `shippable` set to true.
+       * {@code shippable} set to true.
        */
       public Builder setShipping(Shipping shipping) {
         this.shipping = shipping;
@@ -1610,8 +1620,8 @@ public class SourceCreateParams extends ApiRequestParams {
       String parent;
 
       /**
-       * The quantity of this order item. When type is `sku`, this is the number of instances of the
-       * SKU to be ordered.
+       * The quantity of this order item. When type is {@code sku}, this is the number of instances
+       * of the SKU to be ordered.
        */
       @SerializedName("quantity")
       Long quantity;
@@ -1717,8 +1727,8 @@ public class SourceCreateParams extends ApiRequestParams {
         }
 
         /**
-         * The quantity of this order item. When type is `sku`, this is the number of instances of
-         * the SKU to be ordered.
+         * The quantity of this order item. When type is {@code sku}, this is the number of
+         * instances of the SKU to be ordered.
          */
         public Builder setQuantity(Long quantity) {
           this.quantity = quantity;
@@ -1900,8 +1910,8 @@ public class SourceCreateParams extends ApiRequestParams {
         String city;
 
         /**
-         * Two-letter country code ([ISO 3166-1
-         * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+         * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+         * 3166-1 alpha-2</a>).
          */
         @SerializedName("country")
         String country;
@@ -1987,8 +1997,8 @@ public class SourceCreateParams extends ApiRequestParams {
           }
 
           /**
-           * Two-letter country code ([ISO 3166-1
-           * alpha-2](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2)).
+           * Two-letter country code (<a href="https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2">ISO
+           * 3166-1 alpha-2</a>).
            */
           public Builder setCountry(String country) {
             this.country = country;

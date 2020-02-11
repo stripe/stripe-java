@@ -27,8 +27,8 @@ import lombok.Setter;
 public class Cardholder extends ApiResource implements HasId, MetadataStore<Cardholder> {
   /**
    * Spending rules that give you some control over how this cardholder's cards can be used. Refer
-   * to our [authorizations](https://stripe.com/docs/issuing/authorizations) documentation for more
-   * details.
+   * to our <a href="https://stripe.com/docs/issuing/authorizations">authorizations</a>
+   * documentation for more details.
    */
   @SerializedName("authorization_controls")
   AuthorizationControls authorizationControls;
@@ -36,7 +36,7 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   @SerializedName("billing")
   Billing billing;
 
-  /** Additional information about a `business_entity` cardholder. */
+  /** Additional information about a {@code business_entity} cardholder. */
   @SerializedName("company")
   Company company;
 
@@ -53,7 +53,7 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   @SerializedName("id")
   String id;
 
-  /** Additional information about an `individual` cardholder. */
+  /** Additional information about an {@code individual} cardholder. */
   @SerializedName("individual")
   Individual individual;
 
@@ -62,8 +62,8 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   Boolean isDefault;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -83,7 +83,7 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `issuing.cardholder`.
+   * <p>Equal to {@code issuing.cardholder}.
    */
   @SerializedName("object")
   String object;
@@ -98,12 +98,12 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   /**
    * Specifies whether to permit authorizations on this cardholder's cards.
    *
-   * <p>One of `active`, `blocked`, or `inactive`.
+   * <p>One of {@code active}, {@code blocked}, or {@code inactive}.
    */
   @SerializedName("status")
   String status;
 
-  /** One of `individual` or `business_entity`. */
+  /** One of {@code individual} or {@code business_entity}. */
   @SerializedName("type")
   String type;
 
@@ -259,16 +259,16 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   @EqualsAndHashCode(callSuper = false)
   public static class AuthorizationControls extends StripeObject {
     /**
-     * Array of strings containing
-     * [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category)
+     * Array of strings containing <a
+     * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
      * of authorizations permitted on this cardholder's cards.
      */
     @SerializedName("allowed_categories")
     List<String> allowedCategories;
 
     /**
-     * Array of strings containing
-     * [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category)
+     * Array of strings containing <a
+     * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
      * of authorizations to always decline on this cardholder's cards.
      */
     @SerializedName("blocked_categories")
@@ -354,8 +354,9 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
       @EqualsAndHashCode(callSuper = false)
       public static class Document extends StripeObject {
         /**
-         * The back of a document returned by a [file upload](#create_file) with a `purpose` value
-         * of `identity_document`.
+         * The back of a document returned by a <a
+         * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
+         * value of {@code identity_document}.
          */
         @SerializedName("back")
         @Getter(lombok.AccessLevel.NONE)
@@ -363,15 +364,16 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
         ExpandableField<File> back;
 
         /**
-         * The front of a document returned by a [file upload](#create_file) with a `purpose` value
-         * of `identity_document`.
+         * The front of a document returned by a <a
+         * href="https://stripe.com/docs/api#create_file">file upload</a> with a {@code purpose}
+         * value of {@code identity_document}.
          */
         @SerializedName("front")
         @Getter(lombok.AccessLevel.NONE)
         @Setter(lombok.AccessLevel.NONE)
         ExpandableField<File> front;
 
-        /** Get id of expandable `back` object. */
+        /** Get ID of expandable {@code back} object. */
         public String getBack() {
           return (this.back != null) ? this.back.getId() : null;
         }
@@ -380,7 +382,7 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
           this.back = ApiResource.setExpandableFieldId(id, this.back);
         }
 
-        /** Get expanded `back`. */
+        /** Get expanded {@code back}. */
         public File getBackObject() {
           return (this.back != null) ? this.back.getExpanded() : null;
         }
@@ -389,7 +391,7 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
           this.back = new ExpandableField<File>(expandableObject.getId(), expandableObject);
         }
 
-        /** Get id of expandable `front` object. */
+        /** Get ID of expandable {@code front} object. */
         public String getFront() {
           return (this.front != null) ? this.front.getId() : null;
         }
@@ -398,7 +400,7 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
           this.front = ApiResource.setExpandableFieldId(id, this.front);
         }
 
-        /** Get expanded `front`. */
+        /** Get expanded {@code front}. */
         public File getFrontObject() {
           return (this.front != null) ? this.front.getExpanded() : null;
         }
@@ -415,10 +417,10 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
   @EqualsAndHashCode(callSuper = false)
   public static class Requirements extends StripeObject {
     /**
-     * If `disabled_reason` is present, all cards will decline authorizations with
-     * `cardholder_verification_required` reason.
+     * If {@code disabled_reason} is present, all cards will decline authorizations with {@code
+     * cardholder_verification_required} reason.
      *
-     * <p>One of `listed`, `rejected.listed`, or `under_review`.
+     * <p>One of {@code listed}, {@code rejected.listed}, or {@code under_review}.
      */
     @SerializedName("disabled_reason")
     String disabledReason;
@@ -440,8 +442,8 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
     Long amount;
 
     /**
-     * Array of strings containing
-     * [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category)
+     * Array of strings containing <a
+     * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
      * on which to apply the spending limit. Leave this blank to limit all charges.
      */
     @SerializedName("categories")
@@ -450,7 +452,8 @@ public class Cardholder extends ApiResource implements HasId, MetadataStore<Card
     /**
      * The time interval or event with which to apply this spending limit towards.
      *
-     * <p>One of `all_time`, `daily`, `monthly`, `per_authorization`, `weekly`, or `yearly`.
+     * <p>One of {@code all_time}, {@code daily}, {@code monthly}, {@code per_authorization}, {@code
+     * weekly}, or {@code yearly}.
      */
     @SerializedName("interval")
     String interval;

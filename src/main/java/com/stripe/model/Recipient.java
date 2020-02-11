@@ -52,8 +52,8 @@ public class Recipient extends ApiResource implements HasId, MetadataStore<Recip
   String id;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -67,9 +67,9 @@ public class Recipient extends ApiResource implements HasId, MetadataStore<Recip
   Map<String, String> metadata;
 
   /**
-   * The ID of the [Custom account](https://stripe.com/docs/connect/custom-accounts) this recipient
-   * was migrated to. If set, the recipient can no longer be updated, nor can transfers be made to
-   * it: use the Custom account instead.
+   * The ID of the <a href="https://stripe.com/docs/connect/custom-accounts">Custom account</a> this
+   * recipient was migrated to. If set, the recipient can no longer be updated, nor can transfers be
+   * made to it: use the Custom account instead.
    */
   @SerializedName("migrated_to")
   @Getter(lombok.AccessLevel.NONE)
@@ -83,7 +83,7 @@ public class Recipient extends ApiResource implements HasId, MetadataStore<Recip
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `recipient`.
+   * <p>Equal to {@code recipient}.
    */
   @SerializedName("object")
   String object;
@@ -93,7 +93,7 @@ public class Recipient extends ApiResource implements HasId, MetadataStore<Recip
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Account> rolledBackFrom;
 
-  /** Type of the recipient, one of `individual` or `corporation`. */
+  /** Type of the recipient, one of {@code individual} or {@code corporation}. */
   @SerializedName("type")
   String type;
 
@@ -104,7 +104,7 @@ public class Recipient extends ApiResource implements HasId, MetadataStore<Recip
   @SerializedName("verified")
   Boolean verified;
 
-  /** Get id of expandable `defaultCard` object. */
+  /** Get ID of expandable {@code defaultCard} object. */
   public String getDefaultCard() {
     return (this.defaultCard != null) ? this.defaultCard.getId() : null;
   }
@@ -113,7 +113,7 @@ public class Recipient extends ApiResource implements HasId, MetadataStore<Recip
     this.defaultCard = ApiResource.setExpandableFieldId(id, this.defaultCard);
   }
 
-  /** Get expanded `defaultCard`. */
+  /** Get expanded {@code defaultCard}. */
   public Card getDefaultCardObject() {
     return (this.defaultCard != null) ? this.defaultCard.getExpanded() : null;
   }
@@ -122,7 +122,7 @@ public class Recipient extends ApiResource implements HasId, MetadataStore<Recip
     this.defaultCard = new ExpandableField<Card>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `migratedTo` object. */
+  /** Get ID of expandable {@code migratedTo} object. */
   public String getMigratedTo() {
     return (this.migratedTo != null) ? this.migratedTo.getId() : null;
   }
@@ -131,7 +131,7 @@ public class Recipient extends ApiResource implements HasId, MetadataStore<Recip
     this.migratedTo = ApiResource.setExpandableFieldId(id, this.migratedTo);
   }
 
-  /** Get expanded `migratedTo`. */
+  /** Get expanded {@code migratedTo}. */
   public Account getMigratedToObject() {
     return (this.migratedTo != null) ? this.migratedTo.getExpanded() : null;
   }
@@ -140,7 +140,7 @@ public class Recipient extends ApiResource implements HasId, MetadataStore<Recip
     this.migratedTo = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `rolledBackFrom` object. */
+  /** Get ID of expandable {@code rolledBackFrom} object. */
   public String getRolledBackFrom() {
     return (this.rolledBackFrom != null) ? this.rolledBackFrom.getId() : null;
   }
@@ -149,7 +149,7 @@ public class Recipient extends ApiResource implements HasId, MetadataStore<Recip
     this.rolledBackFrom = ApiResource.setExpandableFieldId(id, this.rolledBackFrom);
   }
 
-  /** Get expanded `rolledBackFrom`. */
+  /** Get expanded {@code rolledBackFrom}. */
   public Account getRolledBackFromObject() {
     return (this.rolledBackFrom != null) ? this.rolledBackFrom.getExpanded() : null;
   }

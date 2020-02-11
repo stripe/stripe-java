@@ -34,15 +34,14 @@ public class ReportType extends ApiResource implements HasId {
 
   /**
    * List of column names that are included by default when this Report Type gets run. (If the
-   * Report Type doesn't support the `columns` parameter, this will be null.)
+   * Report Type doesn't support the {@code columns} parameter, this will be null.)
    */
   @SerializedName("default_columns")
   List<String> defaultColumns;
 
   /**
-   * The [ID of the Report
-   * Type](https://stripe.com/docs/reporting/statements/api#available-report-types), such as
-   * `balance.summary.1`.
+   * The <a href="https://stripe.com/docs/reporting/statements/api#available-report-types">ID of the
+   * Report Type</a>, such as {@code balance.summary.1}.
    */
   @Getter(onMethod_ = {@Override})
   @SerializedName("id")
@@ -55,7 +54,7 @@ public class ReportType extends ApiResource implements HasId {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `reporting.report_type`.
+   * <p>Equal to {@code reporting.report_type}.
    */
   @SerializedName("object")
   String object;

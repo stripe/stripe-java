@@ -35,8 +35,8 @@ public class ThreeDSecure extends ApiResource implements HasId {
   Long created;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -47,8 +47,8 @@ public class ThreeDSecure extends ApiResource implements HasId {
   String id;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -56,7 +56,7 @@ public class ThreeDSecure extends ApiResource implements HasId {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `three_d_secure`.
+   * <p>Equal to {@code three_d_secure}.
    */
   @SerializedName("object")
   String object;
@@ -64,17 +64,18 @@ public class ThreeDSecure extends ApiResource implements HasId {
   /**
    * If present, this is the URL that you should send the cardholder to for authentication. If you
    * are going to use Stripe.js to display the authentication page in an iframe, you should use the
-   * value "_callback".
+   * value &quot;_callback&quot;.
    */
   @SerializedName("redirect_url")
   String redirectUrl;
 
   /**
-   * Possible values are `redirect_pending`, `succeeded`, or `failed`. When the cardholder can be
-   * authenticated, the object starts with status `redirect_pending`. When liability will be shifted
-   * to the cardholder's bank (either because the cardholder was successfully authenticated, or
-   * because the bank has not implemented 3D Secure, the object wlil be in status `succeeded`.
-   * `failed` indicates that authentication was attempted unsuccessfully.
+   * Possible values are {@code redirect_pending}, {@code succeeded}, or {@code failed}. When the
+   * cardholder can be authenticated, the object starts with status {@code redirect_pending}. When
+   * liability will be shifted to the cardholder's bank (either because the cardholder was
+   * successfully authenticated, or because the bank has not implemented 3D Secure, the object wlil
+   * be in status {@code succeeded}. {@code failed} indicates that authentication was attempted
+   * unsuccessfully.
    */
   @SerializedName("status")
   String status;

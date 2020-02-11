@@ -11,7 +11,7 @@ import lombok.Getter;
 
 @Getter
 public class ProductCreateParams extends ApiRequestParams {
-  /** Whether the product is currently available for purchase. Defaults to `true`. */
+  /** Whether the product is currently available for purchase. Defaults to {@code true}. */
   @SerializedName("active")
   Boolean active;
 
@@ -21,14 +21,14 @@ public class ProductCreateParams extends ApiRequestParams {
 
   /**
    * A short one-line description of the product, meant to be displayable to the customer. May only
-   * be set if type=`good`.
+   * be set if type={@code good}.
    */
   @SerializedName("caption")
   String caption;
 
   /**
    * An array of Connect application names or identifiers that should not be able to order the SKUs
-   * for this product. May only be set if type=`good`.
+   * for this product. May only be set if type={@code good}.
    */
   @SerializedName("deactivate_on")
   List<String> deactivateOn;
@@ -63,7 +63,7 @@ public class ProductCreateParams extends ApiRequestParams {
 
   /**
    * A list of up to 8 URLs of images for this product, meant to be displayable to the customer. May
-   * only be set if type=`good`.
+   * only be set if type={@code good}.
    */
   @SerializedName("images")
   List<String> images;
@@ -71,7 +71,8 @@ public class ProductCreateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -85,14 +86,15 @@ public class ProductCreateParams extends ApiRequestParams {
 
   /**
    * The dimensions of this product for shipping purposes. A SKU associated with this product can
-   * override this value by having its own `package_dimensions`. May only be set if type=`good`.
+   * override this value by having its own {@code package_dimensions}. May only be set if
+   * type={@code good}.
    */
   @SerializedName("package_dimensions")
   PackageDimensions packageDimensions;
 
   /**
-   * Whether this product is shipped (i.e., physical goods). Defaults to `true`. May only be set if
-   * type=`good`.
+   * Whether this product is shipped (i.e., physical goods). Defaults to {@code true}. May only be
+   * set if type={@code good}.
    */
   @SerializedName("shippable")
   Boolean shippable;
@@ -102,18 +104,19 @@ public class ProductCreateParams extends ApiRequestParams {
    * most banks display this information consistently, some may display it incorrectly or not at
    * all.
    *
-   * <p>This may be up to 22 characters. The statement description may not include `&lt;`, `&gt;`,
-   * `\`, `"`, `'` characters, and will appear on your customer's statement in capital letters.
-   * Non-ASCII characters are automatically stripped. It must contain at least one letter.
+   * <p>This may be up to 22 characters. The statement description may not include {@code <}, {@code
+   * >}, {@code \}, {@code "}, {@code '} characters, and will appear on your customer's statement in
+   * capital letters. Non-ASCII characters are automatically stripped. It must contain at least one
+   * letter.
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
 
   /**
-   * The type of the product. Defaults to `service` if not explicitly specified, enabling use of
-   * this product with Subscriptions and Plans. Set this parameter to `good` to use this product
-   * with Orders and SKUs. On API versions before `2018-02-05`, this field defaults to `good` for
-   * compatibility reasons.
+   * The type of the product. Defaults to {@code service} if not explicitly specified, enabling use
+   * of this product with Subscriptions and Plans. Set this parameter to {@code good} to use this
+   * product with Orders and SKUs. On API versions before {@code 2018-02-05}, this field defaults to
+   * {@code good} for compatibility reasons.
    */
   @SerializedName("type")
   Type type;
@@ -125,7 +128,9 @@ public class ProductCreateParams extends ApiRequestParams {
   @SerializedName("unit_label")
   String unitLabel;
 
-  /** A URL of a publicly-accessible webpage for this product. May only be set if type=`good`. */
+  /**
+   * A URL of a publicly-accessible webpage for this product. May only be set if type={@code good}.
+   */
   @SerializedName("url")
   String url;
 
@@ -227,7 +232,7 @@ public class ProductCreateParams extends ApiRequestParams {
           this.url);
     }
 
-    /** Whether the product is currently available for purchase. Defaults to `true`. */
+    /** Whether the product is currently available for purchase. Defaults to {@code true}. */
     public Builder setActive(Boolean active) {
       this.active = active;
       return this;
@@ -261,7 +266,7 @@ public class ProductCreateParams extends ApiRequestParams {
 
     /**
      * A short one-line description of the product, meant to be displayable to the customer. May
-     * only be set if type=`good`.
+     * only be set if type={@code good}.
      */
     public Builder setCaption(String caption) {
       this.caption = caption;
@@ -428,7 +433,8 @@ public class ProductCreateParams extends ApiRequestParams {
 
     /**
      * The dimensions of this product for shipping purposes. A SKU associated with this product can
-     * override this value by having its own `package_dimensions`. May only be set if type=`good`.
+     * override this value by having its own {@code package_dimensions}. May only be set if
+     * type={@code good}.
      */
     public Builder setPackageDimensions(PackageDimensions packageDimensions) {
       this.packageDimensions = packageDimensions;
@@ -436,8 +442,8 @@ public class ProductCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Whether this product is shipped (i.e., physical goods). Defaults to `true`. May only be set
-     * if type=`good`.
+     * Whether this product is shipped (i.e., physical goods). Defaults to {@code true}. May only be
+     * set if type={@code good}.
      */
     public Builder setShippable(Boolean shippable) {
       this.shippable = shippable;
@@ -449,9 +455,10 @@ public class ProductCreateParams extends ApiRequestParams {
      * most banks display this information consistently, some may display it incorrectly or not at
      * all.
      *
-     * <p>This may be up to 22 characters. The statement description may not include `&lt;`, `&gt;`,
-     * `\`, `"`, `'` characters, and will appear on your customer's statement in capital letters.
-     * Non-ASCII characters are automatically stripped. It must contain at least one letter.
+     * <p>This may be up to 22 characters. The statement description may not include {@code <},
+     * {@code >}, {@code \}, {@code "}, {@code '} characters, and will appear on your customer's
+     * statement in capital letters. Non-ASCII characters are automatically stripped. It must
+     * contain at least one letter.
      */
     public Builder setStatementDescriptor(String statementDescriptor) {
       this.statementDescriptor = statementDescriptor;
@@ -459,10 +466,10 @@ public class ProductCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The type of the product. Defaults to `service` if not explicitly specified, enabling use of
-     * this product with Subscriptions and Plans. Set this parameter to `good` to use this product
-     * with Orders and SKUs. On API versions before `2018-02-05`, this field defaults to `good` for
-     * compatibility reasons.
+     * The type of the product. Defaults to {@code service} if not explicitly specified, enabling
+     * use of this product with Subscriptions and Plans. Set this parameter to {@code good} to use
+     * this product with Orders and SKUs. On API versions before {@code 2018-02-05}, this field
+     * defaults to {@code good} for compatibility reasons.
      */
     public Builder setType(Type type) {
       this.type = type;
@@ -478,7 +485,10 @@ public class ProductCreateParams extends ApiRequestParams {
       return this;
     }
 
-    /** A URL of a publicly-accessible webpage for this product. May only be set if type=`good`. */
+    /**
+     * A URL of a publicly-accessible webpage for this product. May only be set if type={@code
+     * good}.
+     */
     public Builder setUrl(String url) {
       this.url = url;
       return this;

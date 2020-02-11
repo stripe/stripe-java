@@ -38,8 +38,8 @@ public class AlipayAccount extends StripeObject implements PaymentSource {
   String id;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -54,7 +54,7 @@ public class AlipayAccount extends StripeObject implements PaymentSource {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `alipay_account`.
+   * <p>Equal to {@code alipay_account}.
    */
   @SerializedName("object")
   String object;
@@ -88,7 +88,7 @@ public class AlipayAccount extends StripeObject implements PaymentSource {
   @SerializedName("username")
   String username;
 
-  /** Get id of expandable `customer` object. */
+  /** Get ID of expandable {@code customer} object. */
   public String getCustomer() {
     return (this.customer != null) ? this.customer.getId() : null;
   }
@@ -97,7 +97,7 @@ public class AlipayAccount extends StripeObject implements PaymentSource {
     this.customer = ApiResource.setExpandableFieldId(id, this.customer);
   }
 
-  /** Get expanded `customer`. */
+  /** Get expanded {@code customer}. */
   public Customer getCustomerObject() {
     return (this.customer != null) ? this.customer.getExpanded() : null;
   }

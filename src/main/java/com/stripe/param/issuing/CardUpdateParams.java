@@ -12,8 +12,8 @@ import lombok.Getter;
 @Getter
 public class CardUpdateParams extends ApiRequestParams {
   /**
-   * Spending rules that give you some control over how your cards can be used. Refer to our
-   * [authorizations](https://stripe.com/docs/issuing/authorizations) documentation for more
+   * Spending rules that give you some control over how your cards can be used. Refer to our <a
+   * href="https://stripe.com/docs/issuing/authorizations">authorizations</a> documentation for more
    * details.
    */
   @SerializedName("authorization_controls")
@@ -35,7 +35,8 @@ public class CardUpdateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Object metadata;
@@ -79,9 +80,9 @@ public class CardUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Spending rules that give you some control over how your cards can be used. Refer to our
-     * [authorizations](https://stripe.com/docs/issuing/authorizations) documentation for more
-     * details.
+     * Spending rules that give you some control over how your cards can be used. Refer to our <a
+     * href="https://stripe.com/docs/issuing/authorizations">authorizations</a> documentation for
+     * more details.
      */
     public Builder setAuthorizationControls(AuthorizationControls authorizationControls) {
       this.authorizationControls = authorizationControls;
@@ -171,8 +172,8 @@ public class CardUpdateParams extends ApiRequestParams {
     /**
      * Set of key-value pairs that you can attach to an object. This can be useful for storing
      * additional information about the object in a structured format. Individual keys can be unset
-     * by posting an empty value to them. All keys can be unset by posting an empty value to
-     * `metadata`.
+     * by posting an empty value to them. All keys can be unset by posting an empty value to {@code
+     * metadata}.
      */
     public Builder setMetadata(EmptyParam metadata) {
       this.metadata = metadata;
@@ -182,8 +183,8 @@ public class CardUpdateParams extends ApiRequestParams {
     /**
      * Set of key-value pairs that you can attach to an object. This can be useful for storing
      * additional information about the object in a structured format. Individual keys can be unset
-     * by posting an empty value to them. All keys can be unset by posting an empty value to
-     * `metadata`.
+     * by posting an empty value to them. All keys can be unset by posting an empty value to {@code
+     * metadata}.
      */
     public Builder setMetadata(Map<String, String> metadata) {
       this.metadata = metadata;
@@ -200,16 +201,16 @@ public class CardUpdateParams extends ApiRequestParams {
   @Getter
   public static class AuthorizationControls {
     /**
-     * Array of strings containing
-     * [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category)
+     * Array of strings containing <a
+     * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
      * of authorizations permitted on this card.
      */
     @SerializedName("allowed_categories")
     List<AllowedCategory> allowedCategories;
 
     /**
-     * Array of strings containing
-     * [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category)
+     * Array of strings containing <a
+     * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
      * of authorizations to always decline on this card.
      */
     @SerializedName("blocked_categories")
@@ -398,8 +399,8 @@ public class CardUpdateParams extends ApiRequestParams {
       Long amount;
 
       /**
-       * Array of strings containing
-       * [categories](https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category)
+       * Array of strings containing <a
+       * href="https://stripe.com/docs/api#issuing_authorization_object-merchant_data-category">categories</a>
        * on which to apply the spending limit. Leave this blank to limit all charges.
        */
       @SerializedName("categories")

@@ -28,7 +28,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   @SerializedName("device_sw_version")
   String deviceSwVersion;
 
-  /** Type of reader, one of `bbpos_chipper2x` or `verifone_P400`. */
+  /** Type of reader, one of {@code bbpos_chipper2x} or {@code verifone_P400}. */
   @SerializedName("device_type")
   String deviceType;
 
@@ -46,8 +46,8 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   String label;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -67,7 +67,7 @@ public class Reader extends ApiResource implements HasId, MetadataStore<Reader> 
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `terminal.reader`.
+   * <p>Equal to {@code terminal.reader}.
    */
   @SerializedName("object")
   String object;

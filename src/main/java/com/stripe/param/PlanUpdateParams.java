@@ -31,7 +31,8 @@ public class PlanUpdateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -48,8 +49,9 @@ public class PlanUpdateParams extends ApiRequestParams {
   Object product;
 
   /**
-   * Default number of trial days when subscribing a customer to this plan using
-   * [`trial_from_plan=true`](https://stripe.com/docs/api#create_subscription-trial_from_plan).
+   * Default number of trial days when subscribing a customer to this plan using <a
+   * href="https://stripe.com/docs/api#create_subscription-trial_from_plan">{@code
+   * trial_from_plan=true}</a>.
    */
   @SerializedName("trial_period_days")
   Long trialPeriodDays;
@@ -217,8 +219,9 @@ public class PlanUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Default number of trial days when subscribing a customer to this plan using
-     * [`trial_from_plan=true`](https://stripe.com/docs/api#create_subscription-trial_from_plan).
+     * Default number of trial days when subscribing a customer to this plan using <a
+     * href="https://stripe.com/docs/api#create_subscription-trial_from_plan">{@code
+     * trial_from_plan=true}</a>.
      */
     public Builder setTrialPeriodDays(Long trialPeriodDays) {
       this.trialPeriodDays = trialPeriodDays;

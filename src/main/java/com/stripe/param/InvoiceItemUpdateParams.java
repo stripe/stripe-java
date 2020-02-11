@@ -13,8 +13,8 @@ import lombok.Getter;
 @Getter
 public class InvoiceItemUpdateParams extends ApiRequestParams {
   /**
-   * The integer amount in **%s** of the charge to be applied to the upcoming invoice. If you want
-   * to apply a credit to the customer's account, pass a negative amount.
+   * The integer amount in <strong>%s</strong> of the charge to be applied to the upcoming invoice.
+   * If you want to apply a credit to the customer's account, pass a negative amount.
    */
   @SerializedName("amount")
   Long amount;
@@ -50,7 +50,8 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -64,23 +65,24 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
   Long quantity;
 
   /**
-   * The tax rates which apply to the invoice item. When set, the `default_tax_rates` on the invoice
-   * do not apply to this invoice item. Pass an empty string to remove previously-defined tax rates.
+   * The tax rates which apply to the invoice item. When set, the {@code default_tax_rates} on the
+   * invoice do not apply to this invoice item. Pass an empty string to remove previously-defined
+   * tax rates.
    */
   @SerializedName("tax_rates")
   Object taxRates;
 
   /**
-   * The integer unit amount in **%s** of the charge to be applied to the upcoming invoice. This
-   * unit_amount will be multiplied by the quantity to get the full amount. If you want to apply a
-   * credit to the customer's account, pass a negative unit_amount.
+   * The integer unit amount in <strong>%s</strong> of the charge to be applied to the upcoming
+   * invoice. This unit_amount will be multiplied by the quantity to get the full amount. If you
+   * want to apply a credit to the customer's account, pass a negative unit_amount.
    */
   @SerializedName("unit_amount")
   Long unitAmount;
 
   /**
-   * Same as `unit_amount`, but accepts a decimal value with at most 12 decimal places. Only one of
-   * `unit_amount` and `unit_amount_decimal` can be set.
+   * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal places. Only
+   * one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
    */
   @SerializedName("unit_amount_decimal")
   Object unitAmountDecimal;
@@ -154,8 +156,8 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The integer amount in **%s** of the charge to be applied to the upcoming invoice. If you want
-     * to apply a credit to the customer's account, pass a negative amount.
+     * The integer amount in <strong>%s</strong> of the charge to be applied to the upcoming
+     * invoice. If you want to apply a credit to the customer's account, pass a negative amount.
      */
     public Builder setAmount(Long amount) {
       this.amount = amount;
@@ -309,7 +311,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The tax rates which apply to the invoice item. When set, the `default_tax_rates` on the
+     * The tax rates which apply to the invoice item. When set, the {@code default_tax_rates} on the
      * invoice do not apply to this invoice item. Pass an empty string to remove previously-defined
      * tax rates.
      */
@@ -319,7 +321,7 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The tax rates which apply to the invoice item. When set, the `default_tax_rates` on the
+     * The tax rates which apply to the invoice item. When set, the {@code default_tax_rates} on the
      * invoice do not apply to this invoice item. Pass an empty string to remove previously-defined
      * tax rates.
      */
@@ -329,9 +331,9 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The integer unit amount in **%s** of the charge to be applied to the upcoming invoice. This
-     * unit_amount will be multiplied by the quantity to get the full amount. If you want to apply a
-     * credit to the customer's account, pass a negative unit_amount.
+     * The integer unit amount in <strong>%s</strong> of the charge to be applied to the upcoming
+     * invoice. This unit_amount will be multiplied by the quantity to get the full amount. If you
+     * want to apply a credit to the customer's account, pass a negative unit_amount.
      */
     public Builder setUnitAmount(Long unitAmount) {
       this.unitAmount = unitAmount;
@@ -339,8 +341,8 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Same as `unit_amount`, but accepts a decimal value with at most 12 decimal places. Only one
-     * of `unit_amount` and `unit_amount_decimal` can be set.
+     * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal places. Only
+     * one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
      */
     public Builder setUnitAmountDecimal(BigDecimal unitAmountDecimal) {
       this.unitAmountDecimal = unitAmountDecimal;
@@ -348,8 +350,8 @@ public class InvoiceItemUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * Same as `unit_amount`, but accepts a decimal value with at most 12 decimal places. Only one
-     * of `unit_amount` and `unit_amount_decimal` can be set.
+     * Same as {@code unit_amount}, but accepts a decimal value with at most 12 decimal places. Only
+     * one of {@code unit_amount} and {@code unit_amount_decimal} can be set.
      */
     public Builder setUnitAmountDecimal(EmptyParam unitAmountDecimal) {
       this.unitAmountDecimal = unitAmountDecimal;

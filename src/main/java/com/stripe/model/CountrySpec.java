@@ -31,7 +31,7 @@ public class CountrySpec extends ApiResource implements HasId {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `country_spec`.
+   * <p>Equal to {@code country_spec}.
    */
   @SerializedName("object")
   String object;
@@ -46,9 +46,9 @@ public class CountrySpec extends ApiResource implements HasId {
 
   /**
    * Payment methods available in the specified country. You may need to enable some payment methods
-   * (e.g., [ACH](https://stripe.com/docs/ach)) on your account before they appear in this list. The
-   * `stripe` payment method refers to [charging through your
-   * platform](https://stripe.com/docs/connect/destination-charges).
+   * (e.g., <a href="https://stripe.com/docs/ach">ACH</a>) on your account before they appear in
+   * this list. The {@code stripe} payment method refers to <a
+   * href="https://stripe.com/docs/connect/destination-charges">charging through your platform</a>.
    */
   @SerializedName("supported_payment_methods")
   List<String> supportedPaymentMethods;

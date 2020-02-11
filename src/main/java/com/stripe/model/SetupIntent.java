@@ -28,8 +28,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   ExpandableField<Application> application;
 
   /**
-   * Reason for cancellation of this SetupIntent, one of `abandoned`, `requested_by_customer`, or
-   * `duplicate`.
+   * Reason for cancellation of this SetupIntent, one of {@code abandoned}, {@code
+   * requested_by_customer}, or {@code duplicate}.
    */
   @SerializedName("cancellation_reason")
   String cancellationReason;
@@ -73,8 +73,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   StripeError lastSetupError;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -103,7 +103,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `setup_intent`.
+   * <p>Equal to {@code setup_intent}.
    */
   @SerializedName("object")
   String object;
@@ -135,9 +135,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   ExpandableField<Mandate> singleUseMandate;
 
   /**
-   * [Status](https://stripe.com/docs/payments/intents#intent-statuses) of this SetupIntent, one of
-   * `requires_payment_method`, `requires_confirmation`, `requires_action`, `processing`,
-   * `canceled`, or `succeeded`.
+   * <a href="https://stripe.com/docs/payments/intents#intent-statuses">Status</a> of this
+   * SetupIntent, one of {@code requires_payment_method}, {@code requires_confirmation}, {@code
+   * requires_action}, {@code processing}, {@code canceled}, or {@code succeeded}.
    */
   @SerializedName("status")
   String status;
@@ -145,14 +145,14 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
   /**
    * Indicates how the payment method is intended to be used in the future.
    *
-   * <p>Use `on_session` if you intend to only reuse the payment method when the customer is in your
-   * checkout flow. Use `off_session` if your customer may or may not be in your checkout flow. If
-   * not provided, this value defaults to `off_session`.
+   * <p>Use {@code on_session} if you intend to only reuse the payment method when the customer is
+   * in your checkout flow. Use {@code off_session} if your customer may or may not be in your
+   * checkout flow. If not provided, this value defaults to {@code off_session}.
    */
   @SerializedName("usage")
   String usage;
 
-  /** Get id of expandable `application` object. */
+  /** Get ID of expandable {@code application} object. */
   public String getApplication() {
     return (this.application != null) ? this.application.getId() : null;
   }
@@ -161,7 +161,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     this.application = ApiResource.setExpandableFieldId(id, this.application);
   }
 
-  /** Get expanded `application`. */
+  /** Get expanded {@code application}. */
   public Application getApplicationObject() {
     return (this.application != null) ? this.application.getExpanded() : null;
   }
@@ -170,7 +170,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     this.application = new ExpandableField<Application>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `customer` object. */
+  /** Get ID of expandable {@code customer} object. */
   public String getCustomer() {
     return (this.customer != null) ? this.customer.getId() : null;
   }
@@ -179,7 +179,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     this.customer = ApiResource.setExpandableFieldId(id, this.customer);
   }
 
-  /** Get expanded `customer`. */
+  /** Get expanded {@code customer}. */
   public Customer getCustomerObject() {
     return (this.customer != null) ? this.customer.getExpanded() : null;
   }
@@ -188,7 +188,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `mandate` object. */
+  /** Get ID of expandable {@code mandate} object. */
   public String getMandate() {
     return (this.mandate != null) ? this.mandate.getId() : null;
   }
@@ -197,7 +197,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     this.mandate = ApiResource.setExpandableFieldId(id, this.mandate);
   }
 
-  /** Get expanded `mandate`. */
+  /** Get expanded {@code mandate}. */
   public Mandate getMandateObject() {
     return (this.mandate != null) ? this.mandate.getExpanded() : null;
   }
@@ -206,7 +206,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     this.mandate = new ExpandableField<Mandate>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `onBehalfOf` object. */
+  /** Get ID of expandable {@code onBehalfOf} object. */
   public String getOnBehalfOf() {
     return (this.onBehalfOf != null) ? this.onBehalfOf.getId() : null;
   }
@@ -215,7 +215,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     this.onBehalfOf = ApiResource.setExpandableFieldId(id, this.onBehalfOf);
   }
 
-  /** Get expanded `onBehalfOf`. */
+  /** Get expanded {@code onBehalfOf}. */
   public Account getOnBehalfOfObject() {
     return (this.onBehalfOf != null) ? this.onBehalfOf.getExpanded() : null;
   }
@@ -224,7 +224,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     this.onBehalfOf = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `paymentMethod` object. */
+  /** Get ID of expandable {@code paymentMethod} object. */
   public String getPaymentMethod() {
     return (this.paymentMethod != null) ? this.paymentMethod.getId() : null;
   }
@@ -233,7 +233,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     this.paymentMethod = ApiResource.setExpandableFieldId(id, this.paymentMethod);
   }
 
-  /** Get expanded `paymentMethod`. */
+  /** Get expanded {@code paymentMethod}. */
   public PaymentMethod getPaymentMethodObject() {
     return (this.paymentMethod != null) ? this.paymentMethod.getExpanded() : null;
   }
@@ -243,7 +243,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
         new ExpandableField<PaymentMethod>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `singleUseMandate` object. */
+  /** Get ID of expandable {@code singleUseMandate} object. */
   public String getSingleUseMandate() {
     return (this.singleUseMandate != null) ? this.singleUseMandate.getId() : null;
   }
@@ -252,7 +252,7 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     this.singleUseMandate = ApiResource.setExpandableFieldId(id, this.singleUseMandate);
   }
 
-  /** Get expanded `singleUseMandate`. */
+  /** Get expanded {@code singleUseMandate}. */
   public Mandate getSingleUseMandateObject() {
     return (this.singleUseMandate != null) ? this.singleUseMandate.getExpanded() : null;
   }
@@ -266,8 +266,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    * Creates a SetupIntent object.
    *
    * <p>After the SetupIntent is created, attach a payment method and <a
-   * href="/docs/api/setup_intents/confirm">confirm</a> to collect any required permissions to
-   * charge the payment method later.
+   * href="https://stripe.com/docs/api/setup_intents/confirm">confirm</a> to collect any required
+   * permissions to charge the payment method later.
    */
   public static SetupIntent create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -277,8 +277,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    * Creates a SetupIntent object.
    *
    * <p>After the SetupIntent is created, attach a payment method and <a
-   * href="/docs/api/setup_intents/confirm">confirm</a> to collect any required permissions to
-   * charge the payment method later.
+   * href="https://stripe.com/docs/api/setup_intents/confirm">confirm</a> to collect any required
+   * permissions to charge the payment method later.
    */
   public static SetupIntent create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -291,8 +291,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    * Creates a SetupIntent object.
    *
    * <p>After the SetupIntent is created, attach a payment method and <a
-   * href="/docs/api/setup_intents/confirm">confirm</a> to collect any required permissions to
-   * charge the payment method later.
+   * href="https://stripe.com/docs/api/setup_intents/confirm">confirm</a> to collect any required
+   * permissions to charge the payment method later.
    */
   public static SetupIntent create(SetupIntentCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -302,8 +302,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    * Creates a SetupIntent object.
    *
    * <p>After the SetupIntent is created, attach a payment method and <a
-   * href="/docs/api/setup_intents/confirm">confirm</a> to collect any required permissions to
-   * charge the payment method later.
+   * href="https://stripe.com/docs/api/setup_intents/confirm">confirm</a> to collect any required
+   * permissions to charge the payment method later.
    */
   public static SetupIntent create(SetupIntentCreateParams params, RequestOptions options)
       throws StripeException {
@@ -343,7 +343,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    * is provided in the query string.
    *
    * <p>When retrieved with a publishable key, only a subset of properties will be returned. Please
-   * refer to the <a href="#setup_intent_object">SetupIntent</a> object reference for more details.
+   * refer to the <a href="https://stripe.com/docs/api#setup_intent_object">SetupIntent</a> object
+   * reference for more details.
    */
   public static SetupIntent retrieve(String intent) throws StripeException {
     return retrieve(intent, (Map<String, Object>) null, (RequestOptions) null);
@@ -356,7 +357,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    * is provided in the query string.
    *
    * <p>When retrieved with a publishable key, only a subset of properties will be returned. Please
-   * refer to the <a href="#setup_intent_object">SetupIntent</a> object reference for more details.
+   * refer to the <a href="https://stripe.com/docs/api#setup_intent_object">SetupIntent</a> object
+   * reference for more details.
    */
   public static SetupIntent retrieve(String intent, RequestOptions options) throws StripeException {
     return retrieve(intent, (Map<String, Object>) null, options);
@@ -369,7 +371,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    * is provided in the query string.
    *
    * <p>When retrieved with a publishable key, only a subset of properties will be returned. Please
-   * refer to the <a href="#setup_intent_object">SetupIntent</a> object reference for more details.
+   * refer to the <a href="https://stripe.com/docs/api#setup_intent_object">SetupIntent</a> object
+   * reference for more details.
    */
   public static SetupIntent retrieve(
       String intent, Map<String, Object> params, RequestOptions options) throws StripeException {
@@ -389,7 +392,8 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
    * is provided in the query string.
    *
    * <p>When retrieved with a publishable key, only a subset of properties will be returned. Please
-   * refer to the <a href="#setup_intent_object">SetupIntent</a> object reference for more details.
+   * refer to the <a href="https://stripe.com/docs/api#setup_intent_object">SetupIntent</a> object
+   * reference for more details.
    */
   public static SetupIntent retrieve(
       String intent, SetupIntentRetrieveParams params, RequestOptions options)
@@ -642,7 +646,9 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     @SerializedName("redirect_to_url")
     NextActionRedirectToUrl redirectToUrl;
 
-    /** Type of the next action to perform, one of `redirect_to_url` or `use_stripe_sdk`. */
+    /**
+     * Type of the next action to perform, one of {@code redirect_to_url} or {@code use_stripe_sdk}.
+     */
     @SerializedName("type")
     String type;
 
@@ -684,15 +690,16 @@ public class SetupIntent extends ApiResource implements HasId, MetadataStore<Set
     public static class Card extends StripeObject {
       /**
        * We strongly recommend that you rely on our SCA Engine to automatically prompt your
-       * customers for authentication based on risk level and [other
-       * requirements](https://stripe.com/docs/strong-customer-authentication). However, if you wish
-       * to request 3D Secure based on logic from your own fraud engine, provide this option.
-       * Permitted values include: `automatic` or `any`. If not provided, defaults to `automatic`.
-       * Read our guide on [manually requesting 3D
-       * Secure](https://stripe.com/docs/payments/3d-secure#manual-three-ds) for more information on
-       * how this configuration interacts with Radar and our SCA Engine.
+       * customers for authentication based on risk level and <a
+       * href="https://stripe.com/docs/strong-customer-authentication">other requirements</a>.
+       * However, if you wish to request 3D Secure based on logic from your own fraud engine,
+       * provide this option. Permitted values include: {@code automatic} or {@code any}. If not
+       * provided, defaults to {@code automatic}. Read our guide on <a
+       * href="https://stripe.com/docs/payments/3d-secure#manual-three-ds">manually requesting 3D
+       * Secure</a> for more information on how this configuration interacts with Radar and our SCA
+       * Engine.
        *
-       * <p>One of `any`, `automatic`, or `challenge_only`.
+       * <p>One of {@code any}, {@code automatic}, or {@code challenge_only}.
        */
       @SerializedName("request_three_d_secure")
       String requestThreeDSecure;

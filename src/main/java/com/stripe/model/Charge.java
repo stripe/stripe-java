@@ -26,11 +26,12 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
   /**
    * Amount intended to be collected by this PaymentIntent. A positive integer representing how much
-   * to charge in the [smallest currency unit](https://stripe.com/docs/currencies#zero-decimal)
-   * (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The minimum
-   * amount is $0.50 US or [equivalent in charge
-   * currency](https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts). The amount
-   * value supports up to eight digits (e.g., a value of 99999999 for a USD charge of $999,999.99).
+   * to charge in the <a href="https://stripe.com/docs/currencies#zero-decimal">smallest currency
+   * unit</a> (e.g., 100 cents to charge $1.00 or 100 to charge ¥100, a zero-decimal currency). The
+   * minimum amount is $0.50 US or <a
+   * href="https://stripe.com/docs/currencies#minimum-and-maximum-charge-amounts">equivalent in
+   * charge currency</a>. The amount value supports up to eight digits (e.g., a value of 99999999
+   * for a USD charge of $999,999.99).
    */
   @SerializedName("amount")
   Long amount;
@@ -49,8 +50,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   ExpandableField<Application> application;
 
   /**
-   * The application fee (if any) for the charge. [See the Connect
-   * documentation](https://stripe.com/docs/connect/direct-charges#collecting-fees) for details.
+   * The application fee (if any) for the charge. <a
+   * href="https://stripe.com/docs/connect/direct-charges#collecting-fees">See the Connect
+   * documentation</a> for details.
    */
   @SerializedName("application_fee")
   @Getter(lombok.AccessLevel.NONE)
@@ -58,8 +60,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   ExpandableField<ApplicationFee> applicationFee;
 
   /**
-   * The amount of the application fee (if any) for the charge. [See the Connect
-   * documentation](https://stripe.com/docs/connect/direct-charges#collecting-fees) for details.
+   * The amount of the application fee (if any) for the charge. <a
+   * href="https://stripe.com/docs/connect/direct-charges#collecting-fees">See the Connect
+   * documentation</a> for details.
    */
   @SerializedName("application_fee_amount")
   Long applicationFeeAmount;
@@ -92,8 +95,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   Long created;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -109,7 +112,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   String description;
 
   /**
-   * ID of an existing, connected Stripe account to transfer funds to if `transfer_data` was
+   * ID of an existing, connected Stripe account to transfer funds to if {@code transfer_data} was
    * specified in the charge request.
    */
   @SerializedName("destination")
@@ -128,8 +131,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   Boolean disputed;
 
   /**
-   * Error code explaining reason for charge failure if available (see [the errors
-   * section](https://stripe.com/docs/api#errors) for a list of codes).
+   * Error code explaining reason for charge failure if available (see <a
+   * href="https://stripe.com/docs/api#errors">the errors section</a> for a list of codes).
    */
   @SerializedName("failure_code")
   String failureCode;
@@ -157,8 +160,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   Level3 level3;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -174,14 +177,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `charge`.
+   * <p>Equal to {@code charge}.
    */
   @SerializedName("object")
   String object;
 
   /**
    * The account (if any) the charge was made on behalf of without triggering an automatic transfer.
-   * See the [Connect documentation](https://stripe.com/docs/connect/charges-transfers) for details.
+   * See the <a href="https://stripe.com/docs/connect/charges-transfers">Connect documentation</a>
+   * for details.
    */
   @SerializedName("on_behalf_of")
   @Getter(lombok.AccessLevel.NONE)
@@ -195,13 +199,13 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   ExpandableField<Order> order;
 
   /**
-   * Details about whether the payment was accepted, and why. See [understanding
-   * declines](https://stripe.com/docs/declines) for details.
+   * Details about whether the payment was accepted, and why. See <a
+   * href="https://stripe.com/docs/declines">understanding declines</a> for details.
    */
   @SerializedName("outcome")
   Outcome outcome;
 
-  /** `true` if the charge succeeded, or was successfully authorized for later capture. */
+  /** {@code true} if the charge succeeded, or was successfully authorized for later capture. */
   @SerializedName("paid")
   Boolean paid;
 
@@ -223,7 +227,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
   /**
    * This is the transaction number that appears on email receipts sent for this charge. This
-   * attribute will be `null` until a receipt has been sent.
+   * attribute will be {@code null} until a receipt has been sent.
    */
   @SerializedName("receipt_number")
   String receiptNumber;
@@ -260,15 +264,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   /**
    * This is a legacy field that will be removed in the future. It contains the Source, Card, or
    * BankAccount object used for the charge. For details about the payment method used for this
-   * charge, refer to `payment_method` or `payment_method_details` instead.
+   * charge, refer to {@code payment_method} or {@code payment_method_details} instead.
    */
   @SerializedName("source")
   PaymentSource source;
 
   /**
    * The transfer ID which created this charge. Only present if the charge came from another Stripe
-   * account. [See the Connect documentation](https://stripe.com/docs/connect/destination-charges)
-   * for details.
+   * account. <a href="https://stripe.com/docs/connect/destination-charges">See the Connect
+   * documentation</a> for details.
    */
   @SerializedName("source_transfer")
   @Getter(lombok.AccessLevel.NONE)
@@ -276,9 +280,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   ExpandableField<Transfer> sourceTransfer;
 
   /**
-   * For card charges, use `statement_descriptor_suffix` instead. Otherwise, you can use this value
-   * as the complete description of a charge on your customers’ statements. Must contain at least
-   * one letter, maximum 22 characters.
+   * For card charges, use {@code statement_descriptor_suffix} instead. Otherwise, you can use this
+   * value as the complete description of a charge on your customers’ statements. Must contain at
+   * least one letter, maximum 22 characters.
    */
   @SerializedName("statement_descriptor")
   String statementDescriptor;
@@ -291,13 +295,13 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   @SerializedName("statement_descriptor_suffix")
   String statementDescriptorSuffix;
 
-  /** The status of the payment is either `succeeded`, `pending`, or `failed`. */
+  /** The status of the payment is either {@code succeeded}, {@code pending}, or {@code failed}. */
   @SerializedName("status")
   String status;
 
   /**
-   * ID of the transfer to the `destination` account (only applicable if the charge was created
-   * using the `destination` parameter).
+   * ID of the transfer to the {@code destination} account (only applicable if the charge was
+   * created using the {@code destination} parameter).
    */
   @SerializedName("transfer")
   @Getter(lombok.AccessLevel.NONE)
@@ -306,21 +310,21 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
   /**
    * An optional dictionary including the account to automatically transfer to as part of a
-   * destination charge. [See the Connect
-   * documentation](https://stripe.com/docs/connect/destination-charges) for details.
+   * destination charge. <a href="https://stripe.com/docs/connect/destination-charges">See the
+   * Connect documentation</a> for details.
    */
   @SerializedName("transfer_data")
   TransferData transferData;
 
   /**
-   * A string that identifies this transaction as part of a group. See the [Connect
-   * documentation](https://stripe.com/docs/connect/charges-transfers#grouping-transactions) for
-   * details.
+   * A string that identifies this transaction as part of a group. See the <a
+   * href="https://stripe.com/docs/connect/charges-transfers#grouping-transactions">Connect
+   * documentation</a> for details.
    */
   @SerializedName("transfer_group")
   String transferGroup;
 
-  /** Get id of expandable `application` object. */
+  /** Get ID of expandable {@code application} object. */
   public String getApplication() {
     return (this.application != null) ? this.application.getId() : null;
   }
@@ -329,7 +333,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     this.application = ApiResource.setExpandableFieldId(id, this.application);
   }
 
-  /** Get expanded `application`. */
+  /** Get expanded {@code application}. */
   public Application getApplicationObject() {
     return (this.application != null) ? this.application.getExpanded() : null;
   }
@@ -338,7 +342,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     this.application = new ExpandableField<Application>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `applicationFee` object. */
+  /** Get ID of expandable {@code applicationFee} object. */
   public String getApplicationFee() {
     return (this.applicationFee != null) ? this.applicationFee.getId() : null;
   }
@@ -347,7 +351,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     this.applicationFee = ApiResource.setExpandableFieldId(id, this.applicationFee);
   }
 
-  /** Get expanded `applicationFee`. */
+  /** Get expanded {@code applicationFee}. */
   public ApplicationFee getApplicationFeeObject() {
     return (this.applicationFee != null) ? this.applicationFee.getExpanded() : null;
   }
@@ -357,7 +361,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         new ExpandableField<ApplicationFee>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `balanceTransaction` object. */
+  /** Get ID of expandable {@code balanceTransaction} object. */
   public String getBalanceTransaction() {
     return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
   }
@@ -366,7 +370,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     this.balanceTransaction = ApiResource.setExpandableFieldId(id, this.balanceTransaction);
   }
 
-  /** Get expanded `balanceTransaction`. */
+  /** Get expanded {@code balanceTransaction}. */
   public BalanceTransaction getBalanceTransactionObject() {
     return (this.balanceTransaction != null) ? this.balanceTransaction.getExpanded() : null;
   }
@@ -376,7 +380,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         new ExpandableField<BalanceTransaction>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `customer` object. */
+  /** Get ID of expandable {@code customer} object. */
   public String getCustomer() {
     return (this.customer != null) ? this.customer.getId() : null;
   }
@@ -385,7 +389,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     this.customer = ApiResource.setExpandableFieldId(id, this.customer);
   }
 
-  /** Get expanded `customer`. */
+  /** Get expanded {@code customer}. */
   public Customer getCustomerObject() {
     return (this.customer != null) ? this.customer.getExpanded() : null;
   }
@@ -394,7 +398,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     this.customer = new ExpandableField<Customer>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `destination` object. */
+  /** Get ID of expandable {@code destination} object. */
   public String getDestination() {
     return (this.destination != null) ? this.destination.getId() : null;
   }
@@ -403,7 +407,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     this.destination = ApiResource.setExpandableFieldId(id, this.destination);
   }
 
-  /** Get expanded `destination`. */
+  /** Get expanded {@code destination}. */
   public Account getDestinationObject() {
     return (this.destination != null) ? this.destination.getExpanded() : null;
   }
@@ -412,7 +416,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     this.destination = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `dispute` object. */
+  /** Get ID of expandable {@code dispute} object. */
   public String getDispute() {
     return (this.dispute != null) ? this.dispute.getId() : null;
   }
@@ -421,7 +425,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     this.dispute = ApiResource.setExpandableFieldId(id, this.dispute);
   }
 
-  /** Get expanded `dispute`. */
+  /** Get expanded {@code dispute}. */
   public Dispute getDisputeObject() {
     return (this.dispute != null) ? this.dispute.getExpanded() : null;
   }
@@ -430,7 +434,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     this.dispute = new ExpandableField<Dispute>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `invoice` object. */
+  /** Get ID of expandable {@code invoice} object. */
   public String getInvoice() {
     return (this.invoice != null) ? this.invoice.getId() : null;
   }
@@ -439,7 +443,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     this.invoice = ApiResource.setExpandableFieldId(id, this.invoice);
   }
 
-  /** Get expanded `invoice`. */
+  /** Get expanded {@code invoice}. */
   public Invoice getInvoiceObject() {
     return (this.invoice != null) ? this.invoice.getExpanded() : null;
   }
@@ -448,7 +452,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     this.invoice = new ExpandableField<Invoice>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `onBehalfOf` object. */
+  /** Get ID of expandable {@code onBehalfOf} object. */
   public String getOnBehalfOf() {
     return (this.onBehalfOf != null) ? this.onBehalfOf.getId() : null;
   }
@@ -457,7 +461,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     this.onBehalfOf = ApiResource.setExpandableFieldId(id, this.onBehalfOf);
   }
 
-  /** Get expanded `onBehalfOf`. */
+  /** Get expanded {@code onBehalfOf}. */
   public Account getOnBehalfOfObject() {
     return (this.onBehalfOf != null) ? this.onBehalfOf.getExpanded() : null;
   }
@@ -466,7 +470,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     this.onBehalfOf = new ExpandableField<Account>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `order` object. */
+  /** Get ID of expandable {@code order} object. */
   public String getOrder() {
     return (this.order != null) ? this.order.getId() : null;
   }
@@ -475,7 +479,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     this.order = ApiResource.setExpandableFieldId(id, this.order);
   }
 
-  /** Get expanded `order`. */
+  /** Get expanded {@code order}. */
   public Order getOrderObject() {
     return (this.order != null) ? this.order.getExpanded() : null;
   }
@@ -484,7 +488,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     this.order = new ExpandableField<Order>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `review` object. */
+  /** Get ID of expandable {@code review} object. */
   public String getReview() {
     return (this.review != null) ? this.review.getId() : null;
   }
@@ -493,7 +497,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     this.review = ApiResource.setExpandableFieldId(id, this.review);
   }
 
-  /** Get expanded `review`. */
+  /** Get expanded {@code review}. */
   public Review getReviewObject() {
     return (this.review != null) ? this.review.getExpanded() : null;
   }
@@ -502,7 +506,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     this.review = new ExpandableField<Review>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `sourceTransfer` object. */
+  /** Get ID of expandable {@code sourceTransfer} object. */
   public String getSourceTransfer() {
     return (this.sourceTransfer != null) ? this.sourceTransfer.getId() : null;
   }
@@ -511,7 +515,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     this.sourceTransfer = ApiResource.setExpandableFieldId(id, this.sourceTransfer);
   }
 
-  /** Get expanded `sourceTransfer`. */
+  /** Get expanded {@code sourceTransfer}. */
   public Transfer getSourceTransferObject() {
     return (this.sourceTransfer != null) ? this.sourceTransfer.getExpanded() : null;
   }
@@ -520,7 +524,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     this.sourceTransfer = new ExpandableField<Transfer>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `transfer` object. */
+  /** Get ID of expandable {@code transfer} object. */
   public String getTransfer() {
     return (this.transfer != null) ? this.transfer.getId() : null;
   }
@@ -529,7 +533,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     this.transfer = ApiResource.setExpandableFieldId(id, this.transfer);
   }
 
-  /** Get expanded `transfer`. */
+  /** Get expanded {@code transfer}. */
   public Transfer getTransferObject() {
     return (this.transfer != null) ? this.transfer.getExpanded() : null;
   }
@@ -710,8 +714,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
   /**
    * Capture the payment of an existing, uncaptured, charge. This is the second half of the two-step
-   * payment flow, where first you <a href="#create_charge">created a charge</a> with the capture
-   * option set to false.
+   * payment flow, where first you <a href="https://stripe.com/docs/api#create_charge">created a
+   * charge</a> with the capture option set to false.
    *
    * <p>Uncaptured payments expire exactly seven days after they are created. If they are not
    * captured by that point in time, they will be marked as refunded and will no longer be
@@ -723,8 +727,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
   /**
    * Capture the payment of an existing, uncaptured, charge. This is the second half of the two-step
-   * payment flow, where first you <a href="#create_charge">created a charge</a> with the capture
-   * option set to false.
+   * payment flow, where first you <a href="https://stripe.com/docs/api#create_charge">created a
+   * charge</a> with the capture option set to false.
    *
    * <p>Uncaptured payments expire exactly seven days after they are created. If they are not
    * captured by that point in time, they will be marked as refunded and will no longer be
@@ -736,8 +740,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
   /**
    * Capture the payment of an existing, uncaptured, charge. This is the second half of the two-step
-   * payment flow, where first you <a href="#create_charge">created a charge</a> with the capture
-   * option set to false.
+   * payment flow, where first you <a href="https://stripe.com/docs/api#create_charge">created a
+   * charge</a> with the capture option set to false.
    *
    * <p>Uncaptured payments expire exactly seven days after they are created. If they are not
    * captured by that point in time, they will be marked as refunded and will no longer be
@@ -749,8 +753,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
   /**
    * Capture the payment of an existing, uncaptured, charge. This is the second half of the two-step
-   * payment flow, where first you <a href="#create_charge">created a charge</a> with the capture
-   * option set to false.
+   * payment flow, where first you <a href="https://stripe.com/docs/api#create_charge">created a
+   * charge</a> with the capture option set to false.
    *
    * <p>Uncaptured payments expire exactly seven days after they are created. If they are not
    * captured by that point in time, they will be marked as refunded and will no longer be
@@ -767,8 +771,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
   /**
    * Capture the payment of an existing, uncaptured, charge. This is the second half of the two-step
-   * payment flow, where first you <a href="#create_charge">created a charge</a> with the capture
-   * option set to false.
+   * payment flow, where first you <a href="https://stripe.com/docs/api#create_charge">created a
+   * charge</a> with the capture option set to false.
    *
    * <p>Uncaptured payments expire exactly seven days after they are created. If they are not
    * captured by that point in time, they will be marked as refunded and will no longer be
@@ -780,8 +784,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
   /**
    * Capture the payment of an existing, uncaptured, charge. This is the second half of the two-step
-   * payment flow, where first you <a href="#create_charge">created a charge</a> with the capture
-   * option set to false.
+   * payment flow, where first you <a href="https://stripe.com/docs/api#create_charge">created a
+   * charge</a> with the capture option set to false.
    *
    * <p>Uncaptured payments expire exactly seven days after they are created. If they are not
    * captured by that point in time, they will be marked as refunded and will no longer be
@@ -813,11 +817,14 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class FraudDetails extends StripeObject {
-    /** Assessments from Stripe. If set, the value is `fraudulent`. */
+    /** Assessments from Stripe. If set, the value is {@code fraudulent}. */
     @SerializedName("stripe_report")
     String stripeReport;
 
-    /** Assessments reported by you. If set, possible values of are `safe` and `fraudulent`. */
+    /**
+     * Assessments reported by you. If set, possible values of are {@code safe} and {@code
+     * fraudulent}.
+     */
     @SerializedName("user_report")
     String userReport;
   }
@@ -873,29 +880,32 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
   @EqualsAndHashCode(callSuper = false)
   public static class Outcome extends StripeObject {
     /**
-     * Possible values are `approved_by_network`, `declined_by_network`, `not_sent_to_network`, and
-     * `reversed_after_approval`. The value `reversed_after_approval` indicates the payment was
-     * [blocked by Stripe](https://stripe.com/docs/declines#blocked-payments) after bank
-     * authorization, and may temporarily appear as "pending" on a cardholder's statement.
+     * Possible values are {@code approved_by_network}, {@code declined_by_network}, {@code
+     * not_sent_to_network}, and {@code reversed_after_approval}. The value {@code
+     * reversed_after_approval} indicates the payment was <a
+     * href="https://stripe.com/docs/declines#blocked-payments">blocked by Stripe</a> after bank
+     * authorization, and may temporarily appear as &quot;pending&quot; on a cardholder's statement.
      */
     @SerializedName("network_status")
     String networkStatus;
 
     /**
-     * An enumerated value providing a more detailed explanation of the outcome's `type`. Charges
-     * blocked by Radar's default block rule have the value `highest_risk_level`. Charges placed in
-     * review by Radar's default review rule have the value `elevated_risk_level`. Charges
-     * authorized, blocked, or placed in review by custom rules have the value `rule`. See
-     * [understanding declines](https://stripe.com/docs/declines) for more details.
+     * An enumerated value providing a more detailed explanation of the outcome's {@code type}.
+     * Charges blocked by Radar's default block rule have the value {@code highest_risk_level}.
+     * Charges placed in review by Radar's default review rule have the value {@code
+     * elevated_risk_level}. Charges authorized, blocked, or placed in review by custom rules have
+     * the value {@code rule}. See <a href="https://stripe.com/docs/declines">understanding
+     * declines</a> for more details.
      */
     @SerializedName("reason")
     String reason;
 
     /**
      * Stripe's evaluation of the riskiness of the payment. Possible values for evaluated payments
-     * are `normal`, `elevated`, `highest`. For non-card payments, and card-based payments predating
-     * the public assignment of risk levels, this field will have the value `not_assessed`. In the
-     * event of an error in the evaluation, this field will have the value `unknown`.
+     * are {@code normal}, {@code elevated}, {@code highest}. For non-card payments, and card-based
+     * payments predating the public assignment of risk levels, this field will have the value
+     * {@code not_assessed}. In the event of an error in the evaluation, this field will have the
+     * value {@code unknown}.
      */
     @SerializedName("risk_level")
     String riskLevel;
@@ -923,14 +933,15 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     String sellerMessage;
 
     /**
-     * Possible values are `authorized`, `manual_review`, `issuer_declined`, `blocked`, and
-     * `invalid`. See [understanding declines](https://stripe.com/docs/declines) and [Radar
-     * reviews](https://stripe.com/docs/radar/reviews) for details.
+     * Possible values are {@code authorized}, {@code manual_review}, {@code issuer_declined},
+     * {@code blocked}, and {@code invalid}. See <a
+     * href="https://stripe.com/docs/declines">understanding declines</a> and <a
+     * href="https://stripe.com/docs/radar/reviews">Radar reviews</a> for details.
      */
     @SerializedName("type")
     String type;
 
-    /** Get id of expandable `rule` object. */
+    /** Get ID of expandable {@code rule} object. */
     public String getRule() {
       return (this.rule != null) ? this.rule.getId() : null;
     }
@@ -939,7 +950,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       this.rule = ApiResource.setExpandableFieldId(id, this.rule);
     }
 
-    /** Get expanded `rule`. */
+    /** Get expanded {@code rule}. */
     public Rule getRuleObject() {
       return (this.rule != null) ? this.rule.getExpanded() : null;
     }
@@ -1015,10 +1026,11 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
     /**
      * The type of transaction-specific details of the payment method used in the payment, one of
-     * `ach_credit_transfer`, `ach_debit`, `alipay`, `bancontact`, `card`, `card_present`, `eps`,
-     * `giropay`, `ideal`, `klarna`, `multibanco`, `p24`, `sepa_debit`, `sofort`, `stripe_account`,
-     * or `wechat`. An additional hash is included on `payment_method_details` with a name matching
-     * this value. It contains information specific to the payment method.
+     * {@code ach_credit_transfer}, {@code ach_debit}, {@code alipay}, {@code bancontact}, {@code
+     * card}, {@code card_present}, {@code eps}, {@code giropay}, {@code ideal}, {@code klarna},
+     * {@code multibanco}, {@code p24}, {@code sepa_debit}, {@code sofort}, {@code stripe_account},
+     * or {@code wechat}. An additional hash is included on {@code payment_method_details} with a
+     * name matching this value. It contains information specific to the payment method.
      */
     @SerializedName("type")
     String type;
@@ -1052,9 +1064,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @EqualsAndHashCode(callSuper = false)
     public static class AchDebit extends StripeObject {
       /**
-       * Type of entity that holds the account. This can be either `individual` or `company`.
+       * Type of entity that holds the account. This can be either {@code individual} or {@code
+       * company}.
        *
-       * <p>One of `company`, or `individual`.
+       * <p>One of {@code company}, or {@code individual}.
        */
       @SerializedName("account_holder_type")
       String accountHolderType;
@@ -1158,7 +1171,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
 
       /**
        * Preferred language of the Bancontact authorization page that the customer is redirected to.
-       * Can be one of `en`, `de`, `fr`, or `nl`
+       * Can be one of {@code en}, {@code de}, {@code fr}, or {@code nl}
        */
       @SerializedName("preferred_language")
       String preferredLanguage;
@@ -1199,8 +1212,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @EqualsAndHashCode(callSuper = false)
     public static class Card extends StripeObject {
       /**
-       * Card brand. Can be `amex`, `diners`, `discover`, `jcb`, `mastercard`, `unionpay`, `visa`,
-       * or `unknown`.
+       * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code jcb}, {@code
+       * mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
        */
       @SerializedName("brand")
       String brand;
@@ -1239,7 +1252,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("fingerprint")
       String fingerprint;
 
-      /** Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`. */
+      /**
+       * Card funding type. Can be {@code credit}, {@code debit}, {@code prepaid}, or {@code
+       * unknown}.
+       */
       @SerializedName("funding")
       String funding;
 
@@ -1253,8 +1269,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /**
        * Installment details for this payment (Mexico only).
        *
-       * <p>For more information, see the [installments integration
-       * guide](https://stripe.com/docs/payments/installments).
+       * <p>For more information, see the <a
+       * href="https://stripe.com/docs/payments/installments">installments integration guide</a>.
        */
       @SerializedName("installments")
       Installments installments;
@@ -1275,8 +1291,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       Boolean moto;
 
       /**
-       * Identifies which network this charge was processed on. Can be `amex`, `diners`, `discover`,
-       * `interac`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.
+       * Identifies which network this charge was processed on. Can be {@code amex}, {@code diners},
+       * {@code discover}, {@code interac}, {@code jcb}, {@code mastercard}, {@code unionpay},
+       * {@code visa}, or {@code unknown}.
        */
       @SerializedName("network")
       String network;
@@ -1294,22 +1311,22 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @EqualsAndHashCode(callSuper = false)
       public static class Checks extends StripeObject {
         /**
-         * If a address line1 was provided, results of the check, one of `pass`, `fail`,
-         * `unavailable`, or `unchecked`.
+         * If a address line1 was provided, results of the check, one of {@code pass}, {@code fail},
+         * {@code unavailable}, or {@code unchecked}.
          */
         @SerializedName("address_line1_check")
         String addressLine1Check;
 
         /**
-         * If a address postal code was provided, results of the check, one of `pass`, `fail`,
-         * `unavailable`, or `unchecked`.
+         * If a address postal code was provided, results of the check, one of {@code pass}, {@code
+         * fail}, {@code unavailable}, or {@code unchecked}.
          */
         @SerializedName("address_postal_code_check")
         String addressPostalCodeCheck;
 
         /**
-         * If a CVC was provided, results of the check, one of `pass`, `fail`, `unavailable`, or
-         * `unchecked`.
+         * If a CVC was provided, results of the check, one of {@code pass}, {@code fail}, {@code
+         * unavailable}, or {@code unchecked}.
          */
         @SerializedName("cvc_check")
         String cvcCheck;
@@ -1368,10 +1385,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
         SamsungPay samsungPay;
 
         /**
-         * The type of the card wallet, one of `amex_express_checkout`, `apple_pay`, `google_pay`,
-         * `masterpass`, `samsung_pay`, or `visa_checkout`. An additional hash is included on the
-         * Wallet subhash with a name matching this value. It contains additional information
-         * specific to the card wallet type.
+         * The type of the card wallet, one of {@code amex_express_checkout}, {@code apple_pay},
+         * {@code google_pay}, {@code masterpass}, {@code samsung_pay}, or {@code visa_checkout}. An
+         * additional hash is included on the Wallet subhash with a name matching this value. It
+         * contains additional information specific to the card wallet type.
          */
         @SerializedName("type")
         String type;
@@ -1476,8 +1493,8 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @EqualsAndHashCode(callSuper = false)
     public static class CardPresent extends StripeObject {
       /**
-       * Card brand. Can be `amex`, `diners`, `discover`, `jcb`, `mastercard`, `unionpay`, `visa`,
-       * or `unknown`.
+       * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code jcb}, {@code
+       * mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
        */
       @SerializedName("brand")
       String brand;
@@ -1509,7 +1526,10 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       @SerializedName("fingerprint")
       String fingerprint;
 
-      /** Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`. */
+      /**
+       * Card funding type. Can be {@code credit}, {@code debit}, {@code prepaid}, or {@code
+       * unknown}.
+       */
       @SerializedName("funding")
       String funding;
 
@@ -1526,8 +1546,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       String last4;
 
       /**
-       * Identifies which network this charge was processed on. Can be `amex`, `diners`, `discover`,
-       * `interac`, `jcb`, `mastercard`, `unionpay`, `visa`, or `unknown`.
+       * Identifies which network this charge was processed on. Can be {@code amex}, {@code diners},
+       * {@code discover}, {@code interac}, {@code jcb}, {@code mastercard}, {@code unionpay},
+       * {@code visa}, or {@code unknown}.
        */
       @SerializedName("network")
       String network;
@@ -1602,15 +1623,16 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter
     @EqualsAndHashCode(callSuper = false)
     public static class Fpx extends StripeObject {
-      /** Account holder type, if provided. Can be one of `individual` or `company`. */
+      /** Account holder type, if provided. Can be one of {@code individual} or {@code company}. */
       @SerializedName("account_holder_type")
       String accountHolderType;
 
       /**
-       * The customer's bank. Can be one of `affin_bank`, `alliance_bank`, `ambank`, `bank_islam`,
-       * `bank_muamalat`, `bank_rakyat`, `bsn`, `cimb`, `hong_leong_bank`, `hsbc`, `kfh`,
-       * `maybank2u`, `ocbc`, `public_bank`, `rhb`, `standard_chartered`, `uob`, `deutsche_bank`,
-       * `maybank2e`, `pb_enterprise`, or `uob_regional`.
+       * The customer's bank. Can be one of {@code affin_bank}, {@code alliance_bank}, {@code
+       * ambank}, {@code bank_islam}, {@code bank_muamalat}, {@code bank_rakyat}, {@code bsn},
+       * {@code cimb}, {@code hong_leong_bank}, {@code hsbc}, {@code kfh}, {@code maybank2u}, {@code
+       * ocbc}, {@code public_bank}, {@code rhb}, {@code standard_chartered}, {@code uob}, {@code
+       * deutsche_bank}, {@code maybank2e}, {@code pb_enterprise}, or {@code uob_regional}.
        */
       @SerializedName("bank")
       String bank;
@@ -1649,8 +1671,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @EqualsAndHashCode(callSuper = false)
     public static class Ideal extends StripeObject {
       /**
-       * The customer's bank. Can be one of `abn_amro`, `asn_bank`, `bunq`, `handelsbanken`, `ing`,
-       * `knab`, `moneyou`, `rabobank`, `regiobank`, `sns_bank`, `triodos_bank`, or `van_lanschot`.
+       * The customer's bank. Can be one of {@code abn_amro}, {@code asn_bank}, {@code bunq}, {@code
+       * handelsbanken}, {@code ing}, {@code knab}, {@code moneyou}, {@code rabobank}, {@code
+       * regiobank}, {@code sns_bank}, {@code triodos_bank}, or {@code van_lanschot}.
        */
       @SerializedName("bank")
       String bank;
@@ -1658,8 +1681,9 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       /**
        * The Bank Identifier Code of the customer's bank.
        *
-       * <p>One of `ABNANL2A`, `ASNBNL21`, `BUNQNL2A`, `FVLBNL22`, `HANDNL2A`, `INGBNL2A`,
-       * `KNABNL2H`, `MOYONL21`, `RABONL2U`, `RBRBNL21`, `SNSBNL2A`, or `TRIONL2U`.
+       * <p>One of {@code ABNANL2A}, {@code ASNBNL21}, {@code BUNQNL2A}, {@code FVLBNL22}, {@code
+       * HANDNL2A}, {@code INGBNL2A}, {@code KNABNL2H}, {@code MOYONL21}, {@code RABONL2U}, {@code
+       * RBRBNL21}, {@code SNSBNL2A}, or {@code TRIONL2U}.
        */
       @SerializedName("bic")
       String bic;
@@ -1814,7 +1838,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     Long amount;
 
     /**
-     * ID of an existing, connected Stripe account to transfer funds to if `transfer_data` was
+     * ID of an existing, connected Stripe account to transfer funds to if {@code transfer_data} was
      * specified in the charge request.
      */
     @SerializedName("destination")
@@ -1822,7 +1846,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
     @Setter(lombok.AccessLevel.NONE)
     ExpandableField<Account> destination;
 
-    /** Get id of expandable `destination` object. */
+    /** Get ID of expandable {@code destination} object. */
     public String getDestination() {
       return (this.destination != null) ? this.destination.getId() : null;
     }
@@ -1831,7 +1855,7 @@ public class Charge extends ApiResource implements MetadataStore<Charge>, Balanc
       this.destination = ApiResource.setExpandableFieldId(id, this.destination);
     }
 
-    /** Get expanded `destination`. */
+    /** Get expanded {@code destination}. */
     public Account getDestinationObject() {
       return (this.destination != null) ? this.destination.getExpanded() : null;
     }

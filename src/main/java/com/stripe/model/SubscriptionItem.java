@@ -53,7 +53,7 @@ public class SubscriptionItem extends ApiResource
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `subscription_item`.
+   * <p>Equal to {@code subscription_item}.
    */
   @SerializedName("object")
   String object;
@@ -62,19 +62,19 @@ public class SubscriptionItem extends ApiResource
   Plan plan;
 
   /**
-   * The [quantity](https://stripe.com/docs/subscriptions/quantities) of the plan to which the
-   * customer should be subscribed.
+   * The <a href="https://stripe.com/docs/subscriptions/quantities">quantity</a> of the plan to
+   * which the customer should be subscribed.
    */
   @SerializedName("quantity")
   Long quantity;
 
-  /** The `subscription` this `subscription_item` belongs to. */
+  /** The {@code subscription} this {@code subscription_item} belongs to. */
   @SerializedName("subscription")
   String subscription;
 
   /**
-   * The tax rates which apply to this `subscription_item`. When set, the `default_tax_rates` on the
-   * subscription do not apply to this `subscription_item`.
+   * The tax rates which apply to this {@code subscription_item}. When set, the {@code
+   * default_tax_rates} on the subscription do not apply to this {@code subscription_item}.
    */
   @SerializedName("tax_rates")
   List<TaxRate> taxRates;

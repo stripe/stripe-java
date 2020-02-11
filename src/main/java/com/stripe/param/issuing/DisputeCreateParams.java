@@ -22,7 +22,7 @@ public class DisputeCreateParams extends ApiRequestParams {
 
   /**
    * A hash containing all the evidence related to the dispute. This should have a single key, equal
-   * to the provided `reason`, mapping to an appropriate evidence object.
+   * to the provided {@code reason}, mapping to an appropriate evidence object.
    */
   @SerializedName("evidence")
   Evidence evidence;
@@ -43,7 +43,8 @@ public class DisputeCreateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -116,7 +117,7 @@ public class DisputeCreateParams extends ApiRequestParams {
 
     /**
      * A hash containing all the evidence related to the dispute. This should have a single key,
-     * equal to the provided `reason`, mapping to an appropriate evidence object.
+     * equal to the provided {@code reason}, mapping to an appropriate evidence object.
      */
     public Builder setEvidence(Evidence evidence) {
       this.evidence = evidence;
@@ -220,15 +221,15 @@ public class DisputeCreateParams extends ApiRequestParams {
     Map<String, Object> extraParams;
 
     /**
-     * Evidence to support a fraudulent dispute. Only provide this if your dispute's `reason` is
-     * `fraudulent`.
+     * Evidence to support a fraudulent dispute. Only provide this if your dispute's {@code reason}
+     * is {@code fraudulent}.
      */
     @SerializedName("fraudulent")
     Fraudulent fraudulent;
 
     /**
-     * Evidence to support an uncategorized dispute. Only provide this if your dispute's `reason` is
-     * `other`.
+     * Evidence to support an uncategorized dispute. Only provide this if your dispute's {@code
+     * reason} is {@code other}.
      */
     @SerializedName("other")
     Other other;
@@ -282,8 +283,8 @@ public class DisputeCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Evidence to support a fraudulent dispute. Only provide this if your dispute's `reason` is
-       * `fraudulent`.
+       * Evidence to support a fraudulent dispute. Only provide this if your dispute's {@code
+       * reason} is {@code fraudulent}.
        */
       public Builder setFraudulent(Fraudulent fraudulent) {
         this.fraudulent = fraudulent;
@@ -291,8 +292,8 @@ public class DisputeCreateParams extends ApiRequestParams {
       }
 
       /**
-       * Evidence to support an uncategorized dispute. Only provide this if your dispute's `reason`
-       * is `other`.
+       * Evidence to support an uncategorized dispute. Only provide this if your dispute's {@code
+       * reason} is {@code other}.
        */
       public Builder setOther(Other other) {
         this.other = other;
@@ -316,8 +317,8 @@ public class DisputeCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional file
-       * evidence supporting your dispute.
+       * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Additional
+       * file evidence supporting your dispute.
        */
       @SerializedName("uncategorized_file")
       String uncategorizedFile;
@@ -380,8 +381,8 @@ public class DisputeCreateParams extends ApiRequestParams {
         }
 
         /**
-         * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional file
-         * evidence supporting your dispute.
+         * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Additional
+         * file evidence supporting your dispute.
          */
         public Builder setUncategorizedFile(String uncategorizedFile) {
           this.uncategorizedFile = uncategorizedFile;
@@ -406,8 +407,8 @@ public class DisputeCreateParams extends ApiRequestParams {
       Map<String, Object> extraParams;
 
       /**
-       * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional file
-       * evidence supporting your dispute.
+       * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Additional
+       * file evidence supporting your dispute.
        */
       @SerializedName("uncategorized_file")
       String uncategorizedFile;
@@ -470,8 +471,8 @@ public class DisputeCreateParams extends ApiRequestParams {
         }
 
         /**
-         * (ID of a [file upload](https://stripe.com/docs/guides/file-upload)) Additional file
-         * evidence supporting your dispute.
+         * (ID of a <a href="https://stripe.com/docs/guides/file-upload">file upload</a>) Additional
+         * file evidence supporting your dispute.
          */
         public Builder setUncategorizedFile(String uncategorizedFile) {
           this.uncategorizedFile = uncategorizedFile;

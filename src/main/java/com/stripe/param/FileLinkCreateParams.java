@@ -28,9 +28,10 @@ public class FileLinkCreateParams extends ApiRequestParams {
   Map<String, Object> extraParams;
 
   /**
-   * The ID of the file. The file's `purpose` must be one of the following: `business_icon`,
-   * `business_logo`, `customer_signature`, `dispute_evidence`, `finance_report_run`,
-   * `pci_document`, `sigma_scheduled_query`, or `tax_document_user_upload`.
+   * The ID of the file. The file's {@code purpose} must be one of the following: {@code
+   * business_icon}, {@code business_logo}, {@code customer_signature}, {@code dispute_evidence},
+   * {@code finance_report_run}, {@code pci_document}, {@code sigma_scheduled_query}, or {@code
+   * tax_document_user_upload}.
    */
   @SerializedName("file")
   String file;
@@ -38,7 +39,8 @@ public class FileLinkCreateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -136,9 +138,10 @@ public class FileLinkCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The ID of the file. The file's `purpose` must be one of the following: `business_icon`,
-     * `business_logo`, `customer_signature`, `dispute_evidence`, `finance_report_run`,
-     * `pci_document`, `sigma_scheduled_query`, or `tax_document_user_upload`.
+     * The ID of the file. The file's {@code purpose} must be one of the following: {@code
+     * business_icon}, {@code business_logo}, {@code customer_signature}, {@code dispute_evidence},
+     * {@code finance_report_run}, {@code pci_document}, {@code sigma_scheduled_query}, or {@code
+     * tax_document_user_upload}.
      */
     public Builder setFile(String file) {
       this.file = file;

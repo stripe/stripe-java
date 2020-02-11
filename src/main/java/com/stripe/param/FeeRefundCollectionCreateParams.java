@@ -11,8 +11,8 @@ import lombok.Getter;
 @Getter
 public class FeeRefundCollectionCreateParams extends ApiRequestParams {
   /**
-   * A positive integer, in _%s_, representing how much of this fee to refund. Can refund only up to
-   * the remaining unrefunded amount of the fee.
+   * A positive integer, in <em>%s</em>, representing how much of this fee to refund. Can refund
+   * only up to the remaining unrefunded amount of the fee.
    */
   @SerializedName("amount")
   Long amount;
@@ -33,7 +33,8 @@ public class FeeRefundCollectionCreateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
@@ -69,8 +70,8 @@ public class FeeRefundCollectionCreateParams extends ApiRequestParams {
     }
 
     /**
-     * A positive integer, in _%s_, representing how much of this fee to refund. Can refund only up
-     * to the remaining unrefunded amount of the fee.
+     * A positive integer, in <em>%s</em>, representing how much of this fee to refund. Can refund
+     * only up to the remaining unrefunded amount of the fee.
      */
     public Builder setAmount(Long amount) {
       this.amount = amount;

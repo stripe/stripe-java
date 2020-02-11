@@ -11,7 +11,7 @@ import lombok.Getter;
 @Getter
 public class SkuListParams extends ApiRequestParams {
   /**
-   * Only return SKUs that are active or inactive (e.g., pass `false` to list all inactive
+   * Only return SKUs that are active or inactive (e.g., pass {@code false} to list all inactive
    * products).
    */
   @SerializedName("active")
@@ -19,18 +19,19 @@ public class SkuListParams extends ApiRequestParams {
 
   /**
    * Only return SKUs that have the specified key-value pairs in this partially constructed
-   * dictionary. Can be specified only if `product` is also supplied. For instance, if the
-   * associated product has attributes `["color", "size"]`, passing in `attributes[color]=red`
-   * returns all the SKUs for this product that have `color` set to `red`.
+   * dictionary. Can be specified only if {@code product} is also supplied. For instance, if the
+   * associated product has attributes {@code ["color", "size"]}, passing in {@code
+   * attributes[color]=red} returns all the SKUs for this product that have {@code color} set to
+   * {@code red}.
    */
   @SerializedName("attributes")
   Map<String, String> attributes;
 
   /**
-   * A cursor for use in pagination. `ending_before` is an object ID that defines your place in the
-   * list. For instance, if you make a list request and receive 100 objects, starting with
-   * `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the
-   * previous page of the list.
+   * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
+   * in the list. For instance, if you make a list request and receive 100 objects, starting with
+   * {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to
+   * fetch the previous page of the list.
    */
   @SerializedName("ending_before")
   String endingBefore;
@@ -53,8 +54,8 @@ public class SkuListParams extends ApiRequestParams {
   List<String> ids;
 
   /**
-   * Only return SKUs that are either in stock or out of stock (e.g., pass `false` to list all SKUs
-   * that are out of stock). If no value is provided, all SKUs are returned.
+   * Only return SKUs that are either in stock or out of stock (e.g., pass {@code false} to list all
+   * SKUs that are out of stock). If no value is provided, all SKUs are returned.
    */
   @SerializedName("in_stock")
   Boolean inStock;
@@ -66,15 +67,17 @@ public class SkuListParams extends ApiRequestParams {
   @SerializedName("limit")
   Long limit;
 
-  /** The ID of the product whose SKUs will be retrieved. Must be a product with type `good`. */
+  /**
+   * The ID of the product whose SKUs will be retrieved. Must be a product with type {@code good}.
+   */
   @SerializedName("product")
   String product;
 
   /**
-   * A cursor for use in pagination. `starting_after` is an object ID that defines your place in the
-   * list. For instance, if you make a list request and receive 100 objects, ending with `obj_foo`,
-   * your subsequent call can include `starting_after=obj_foo` in order to fetch the next page of
-   * the list.
+   * A cursor for use in pagination. {@code starting_after} is an object ID that defines your place
+   * in the list. For instance, if you make a list request and receive 100 objects, ending with
+   * {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in order to
+   * fetch the next page of the list.
    */
   @SerializedName("starting_after")
   String startingAfter;
@@ -143,7 +146,7 @@ public class SkuListParams extends ApiRequestParams {
     }
 
     /**
-     * Only return SKUs that are active or inactive (e.g., pass `false` to list all inactive
+     * Only return SKUs that are active or inactive (e.g., pass {@code false} to list all inactive
      * products).
      */
     public Builder setActive(Boolean active) {
@@ -178,10 +181,10 @@ public class SkuListParams extends ApiRequestParams {
     }
 
     /**
-     * A cursor for use in pagination. `ending_before` is an object ID that defines your place in
-     * the list. For instance, if you make a list request and receive 100 objects, starting with
-     * `obj_bar`, your subsequent call can include `ending_before=obj_bar` in order to fetch the
-     * previous page of the list.
+     * A cursor for use in pagination. {@code ending_before} is an object ID that defines your place
+     * in the list. For instance, if you make a list request and receive 100 objects, starting with
+     * {@code obj_bar}, your subsequent call can include {@code ending_before=obj_bar} in order to
+     * fetch the previous page of the list.
      */
     public Builder setEndingBefore(String endingBefore) {
       this.endingBefore = endingBefore;
@@ -267,8 +270,8 @@ public class SkuListParams extends ApiRequestParams {
     }
 
     /**
-     * Only return SKUs that are either in stock or out of stock (e.g., pass `false` to list all
-     * SKUs that are out of stock). If no value is provided, all SKUs are returned.
+     * Only return SKUs that are either in stock or out of stock (e.g., pass {@code false} to list
+     * all SKUs that are out of stock). If no value is provided, all SKUs are returned.
      */
     public Builder setInStock(Boolean inStock) {
       this.inStock = inStock;
@@ -284,17 +287,19 @@ public class SkuListParams extends ApiRequestParams {
       return this;
     }
 
-    /** The ID of the product whose SKUs will be retrieved. Must be a product with type `good`. */
+    /**
+     * The ID of the product whose SKUs will be retrieved. Must be a product with type {@code good}.
+     */
     public Builder setProduct(String product) {
       this.product = product;
       return this;
     }
 
     /**
-     * A cursor for use in pagination. `starting_after` is an object ID that defines your place in
-     * the list. For instance, if you make a list request and receive 100 objects, ending with
-     * `obj_foo`, your subsequent call can include `starting_after=obj_foo` in order to fetch the
-     * next page of the list.
+     * A cursor for use in pagination. {@code starting_after} is an object ID that defines your
+     * place in the list. For instance, if you make a list request and receive 100 objects, ending
+     * with {@code obj_foo}, your subsequent call can include {@code starting_after=obj_foo} in
+     * order to fetch the next page of the list.
      */
     public Builder setStartingAfter(String startingAfter) {
       this.startingAfter = startingAfter;

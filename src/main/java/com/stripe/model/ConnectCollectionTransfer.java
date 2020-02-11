@@ -15,8 +15,8 @@ public class ConnectCollectionTransfer extends StripeObject implements BalanceTr
   Long amount;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -33,8 +33,8 @@ public class ConnectCollectionTransfer extends StripeObject implements BalanceTr
   String id;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -42,12 +42,12 @@ public class ConnectCollectionTransfer extends StripeObject implements BalanceTr
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `connect_collection_transfer`.
+   * <p>Equal to {@code connect_collection_transfer}.
    */
   @SerializedName("object")
   String object;
 
-  /** Get id of expandable `destination` object. */
+  /** Get ID of expandable {@code destination} object. */
   public String getDestination() {
     return (this.destination != null) ? this.destination.getId() : null;
   }
@@ -56,7 +56,7 @@ public class ConnectCollectionTransfer extends StripeObject implements BalanceTr
     this.destination = ApiResource.setExpandableFieldId(id, this.destination);
   }
 
-  /** Get expanded `destination`. */
+  /** Get expanded {@code destination}. */
   public Account getDestinationObject() {
     return (this.destination != null) ? this.destination.getExpanded() : null;
   }

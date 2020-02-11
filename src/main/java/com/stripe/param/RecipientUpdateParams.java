@@ -13,20 +13,21 @@ import lombok.Getter;
 public class RecipientUpdateParams extends ApiRequestParams {
   /**
    * A bank account to attach to the recipient. You can provide either a token, like the ones
-   * returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a user's
-   * bank account details, with the options described below.
+   * returned by <a href="https://stripe.com/docs/stripe-js">Stripe.js</a>, or a dictionary
+   * containing a user's bank account details, with the options described below.
    */
   @SerializedName("bank_account")
   Object bankAccount;
 
   /**
    * A U.S. Visa or MasterCard debit card (not prepaid) to attach to the recipient. You can provide
-   * either a token, like the ones returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a
-   * dictionary containing a user's debit card details, with the options described below. Passing
-   * `card` will create a new card, make it the new recipient default card, and delete the old
-   * recipient default (if one exists). If you want to add additional debit cards instead of
-   * replacing the existing default, use the [card creation API](#create_card). Whenever you attach
-   * a card to a recipient, Stripe will automatically validate the debit card.
+   * either a token, like the ones returned by <a
+   * href="https://stripe.com/docs/stripe-js">Stripe.js</a>, or a dictionary containing a user's
+   * debit card details, with the options described below. Passing {@code card} will create a new
+   * card, make it the new recipient default card, and delete the old recipient default (if one
+   * exists). If you want to add additional debit cards instead of replacing the existing default,
+   * use the <a href="https://stripe.com/docs/api#create_card">card creation API</a>. Whenever you
+   * attach a card to a recipient, Stripe will automatically validate the debit card.
    */
   @SerializedName("card")
   Object card;
@@ -36,8 +37,8 @@ public class RecipientUpdateParams extends ApiRequestParams {
   Object defaultCard;
 
   /**
-   * An arbitrary string which you can attach to a `Recipient` object. It is displayed alongside the
-   * recipient in the web interface.
+   * An arbitrary string which you can attach to a {@code Recipient} object. It is displayed
+   * alongside the recipient in the web interface.
    */
   @SerializedName("description")
   Object description;
@@ -65,22 +66,23 @@ public class RecipientUpdateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
   /**
-   * The recipient's full, legal name. For type `individual`, should be in the format `First Last`,
-   * `First Middle Last`, or `First M Last` (no prefixes or suffixes). For `corporation`, the full,
-   * incorporated name.
+   * The recipient's full, legal name. For type {@code individual}, should be in the format {@code
+   * First Last}, {@code First Middle Last}, or {@code First M Last} (no prefixes or suffixes). For
+   * {@code corporation}, the full, incorporated name.
    */
   @SerializedName("name")
   Object name;
 
   /**
-   * The recipient's tax ID, as a string. For type `individual`, the full SSN; for type
-   * `corporation`, the full EIN.
+   * The recipient's tax ID, as a string. For type {@code individual}, the full SSN; for type {@code
+   * corporation}, the full EIN.
    */
   @SerializedName("tax_id")
   Object taxId;
@@ -150,8 +152,8 @@ public class RecipientUpdateParams extends ApiRequestParams {
 
     /**
      * A bank account to attach to the recipient. You can provide either a token, like the ones
-     * returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a
-     * user's bank account details, with the options described below.
+     * returned by <a href="https://stripe.com/docs/stripe-js">Stripe.js</a>, or a dictionary
+     * containing a user's bank account details, with the options described below.
      */
     public Builder setBankAccount(String bankAccount) {
       this.bankAccount = bankAccount;
@@ -160,8 +162,8 @@ public class RecipientUpdateParams extends ApiRequestParams {
 
     /**
      * A bank account to attach to the recipient. You can provide either a token, like the ones
-     * returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a
-     * user's bank account details, with the options described below.
+     * returned by <a href="https://stripe.com/docs/stripe-js">Stripe.js</a>, or a dictionary
+     * containing a user's bank account details, with the options described below.
      */
     public Builder setBankAccount(EmptyParam bankAccount) {
       this.bankAccount = bankAccount;
@@ -170,13 +172,13 @@ public class RecipientUpdateParams extends ApiRequestParams {
 
     /**
      * A U.S. Visa or MasterCard debit card (not prepaid) to attach to the recipient. You can
-     * provide either a token, like the ones returned by
-     * [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a user's debit
-     * card details, with the options described below. Passing `card` will create a new card, make
-     * it the new recipient default card, and delete the old recipient default (if one exists). If
-     * you want to add additional debit cards instead of replacing the existing default, use the
-     * [card creation API](#create_card). Whenever you attach a card to a recipient, Stripe will
-     * automatically validate the debit card.
+     * provide either a token, like the ones returned by <a
+     * href="https://stripe.com/docs/stripe-js">Stripe.js</a>, or a dictionary containing a user's
+     * debit card details, with the options described below. Passing {@code card} will create a new
+     * card, make it the new recipient default card, and delete the old recipient default (if one
+     * exists). If you want to add additional debit cards instead of replacing the existing default,
+     * use the <a href="https://stripe.com/docs/api#create_card">card creation API</a>. Whenever you
+     * attach a card to a recipient, Stripe will automatically validate the debit card.
      */
     public Builder setCard(String card) {
       this.card = card;
@@ -185,13 +187,13 @@ public class RecipientUpdateParams extends ApiRequestParams {
 
     /**
      * A U.S. Visa or MasterCard debit card (not prepaid) to attach to the recipient. You can
-     * provide either a token, like the ones returned by
-     * [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a user's debit
-     * card details, with the options described below. Passing `card` will create a new card, make
-     * it the new recipient default card, and delete the old recipient default (if one exists). If
-     * you want to add additional debit cards instead of replacing the existing default, use the
-     * [card creation API](#create_card). Whenever you attach a card to a recipient, Stripe will
-     * automatically validate the debit card.
+     * provide either a token, like the ones returned by <a
+     * href="https://stripe.com/docs/stripe-js">Stripe.js</a>, or a dictionary containing a user's
+     * debit card details, with the options described below. Passing {@code card} will create a new
+     * card, make it the new recipient default card, and delete the old recipient default (if one
+     * exists). If you want to add additional debit cards instead of replacing the existing default,
+     * use the <a href="https://stripe.com/docs/api#create_card">card creation API</a>. Whenever you
+     * attach a card to a recipient, Stripe will automatically validate the debit card.
      */
     public Builder setCard(EmptyParam card) {
       this.card = card;
@@ -211,8 +213,8 @@ public class RecipientUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * An arbitrary string which you can attach to a `Recipient` object. It is displayed alongside
-     * the recipient in the web interface.
+     * An arbitrary string which you can attach to a {@code Recipient} object. It is displayed
+     * alongside the recipient in the web interface.
      */
     public Builder setDescription(String description) {
       this.description = description;
@@ -220,8 +222,8 @@ public class RecipientUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * An arbitrary string which you can attach to a `Recipient` object. It is displayed alongside
-     * the recipient in the web interface.
+     * An arbitrary string which you can attach to a {@code Recipient} object. It is displayed
+     * alongside the recipient in the web interface.
      */
     public Builder setDescription(EmptyParam description) {
       this.description = description;
@@ -325,9 +327,9 @@ public class RecipientUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The recipient's full, legal name. For type `individual`, should be in the format `First
-     * Last`, `First Middle Last`, or `First M Last` (no prefixes or suffixes). For `corporation`,
-     * the full, incorporated name.
+     * The recipient's full, legal name. For type {@code individual}, should be in the format {@code
+     * First Last}, {@code First Middle Last}, or {@code First M Last} (no prefixes or suffixes).
+     * For {@code corporation}, the full, incorporated name.
      */
     public Builder setName(String name) {
       this.name = name;
@@ -335,9 +337,9 @@ public class RecipientUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The recipient's full, legal name. For type `individual`, should be in the format `First
-     * Last`, `First Middle Last`, or `First M Last` (no prefixes or suffixes). For `corporation`,
-     * the full, incorporated name.
+     * The recipient's full, legal name. For type {@code individual}, should be in the format {@code
+     * First Last}, {@code First Middle Last}, or {@code First M Last} (no prefixes or suffixes).
+     * For {@code corporation}, the full, incorporated name.
      */
     public Builder setName(EmptyParam name) {
       this.name = name;
@@ -345,8 +347,8 @@ public class RecipientUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The recipient's tax ID, as a string. For type `individual`, the full SSN; for type
-     * `corporation`, the full EIN.
+     * The recipient's tax ID, as a string. For type {@code individual}, the full SSN; for type
+     * {@code corporation}, the full EIN.
      */
     public Builder setTaxId(String taxId) {
       this.taxId = taxId;
@@ -354,8 +356,8 @@ public class RecipientUpdateParams extends ApiRequestParams {
     }
 
     /**
-     * The recipient's tax ID, as a string. For type `individual`, the full SSN; for type
-     * `corporation`, the full EIN.
+     * The recipient's tax ID, as a string. For type {@code individual}, the full SSN; for type
+     * {@code corporation}, the full EIN.
      */
     public Builder setTaxId(EmptyParam taxId) {
       this.taxId = taxId;

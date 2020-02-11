@@ -13,27 +13,28 @@ import lombok.Getter;
 public class CouponCreateParams extends ApiRequestParams {
   /**
    * A positive integer representing the amount to subtract from an invoice total (required if
-   * `percent_off` is not passed).
+   * {@code percent_off} is not passed).
    */
   @SerializedName("amount_off")
   Long amountOff;
 
   /**
-   * Three-letter [ISO code for the currency](https://stripe.com/docs/currencies) of the
-   * `amount_off` parameter (required if `amount_off` is passed).
+   * Three-letter <a href="https://stripe.com/docs/currencies">ISO code for the currency</a> of the
+   * {@code amount_off} parameter (required if {@code amount_off} is passed).
    */
   @SerializedName("currency")
   String currency;
 
   /**
-   * Specifies how long the discount will be in effect. Can be `forever`, `once`, or `repeating`.
+   * Specifies how long the discount will be in effect. Can be {@code forever}, {@code once}, or
+   * {@code repeating}.
    */
   @SerializedName("duration")
   Duration duration;
 
   /**
-   * Required only if `duration` is `repeating`, in which case it must be a positive integer that
-   * specifies the number of months the discount will be in effect.
+   * Required only if {@code duration} is {@code repeating}, in which case it must be a positive
+   * integer that specifies the number of months the discount will be in effect.
    */
   @SerializedName("duration_in_months")
   Long durationInMonths;
@@ -54,8 +55,8 @@ public class CouponCreateParams extends ApiRequestParams {
   /**
    * Unique string of your choice that will be used to identify this coupon when applying it to a
    * customer. This is often a specific code you'll give to your customer to use when signing up
-   * (e.g., `FALL25OFF`). If you don't want to specify a particular code, you can leave the ID blank
-   * and we'll generate a random code for you.
+   * (e.g., {@code FALL25OFF}). If you don't want to specify a particular code, you can leave the ID
+   * blank and we'll generate a random code for you.
    */
   @SerializedName("id")
   String id;
@@ -71,21 +72,22 @@ public class CouponCreateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
   /**
    * Name of the coupon displayed to customers on, for instance invoices, or receipts. By default
-   * the `id` is shown if `name` is not set.
+   * the {@code id} is shown if {@code name} is not set.
    */
   @SerializedName("name")
   String name;
 
   /**
    * A positive float larger than 0, and smaller or equal to 100, that represents the discount the
-   * coupon will apply (required if `amount_off` is not passed).
+   * coupon will apply (required if {@code amount_off} is not passed).
    */
   @SerializedName("percent_off")
   BigDecimal percentOff;
@@ -172,7 +174,7 @@ public class CouponCreateParams extends ApiRequestParams {
 
     /**
      * A positive integer representing the amount to subtract from an invoice total (required if
-     * `percent_off` is not passed).
+     * {@code percent_off} is not passed).
      */
     public Builder setAmountOff(Long amountOff) {
       this.amountOff = amountOff;
@@ -180,8 +182,8 @@ public class CouponCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Three-letter [ISO code for the currency](https://stripe.com/docs/currencies) of the
-     * `amount_off` parameter (required if `amount_off` is passed).
+     * Three-letter <a href="https://stripe.com/docs/currencies">ISO code for the currency</a> of
+     * the {@code amount_off} parameter (required if {@code amount_off} is passed).
      */
     public Builder setCurrency(String currency) {
       this.currency = currency;
@@ -189,7 +191,8 @@ public class CouponCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Specifies how long the discount will be in effect. Can be `forever`, `once`, or `repeating`.
+     * Specifies how long the discount will be in effect. Can be {@code forever}, {@code once}, or
+     * {@code repeating}.
      */
     public Builder setDuration(Duration duration) {
       this.duration = duration;
@@ -197,8 +200,8 @@ public class CouponCreateParams extends ApiRequestParams {
     }
 
     /**
-     * Required only if `duration` is `repeating`, in which case it must be a positive integer that
-     * specifies the number of months the discount will be in effect.
+     * Required only if {@code duration} is {@code repeating}, in which case it must be a positive
+     * integer that specifies the number of months the discount will be in effect.
      */
     public Builder setDurationInMonths(Long durationInMonths) {
       this.durationInMonths = durationInMonths;
@@ -260,8 +263,8 @@ public class CouponCreateParams extends ApiRequestParams {
     /**
      * Unique string of your choice that will be used to identify this coupon when applying it to a
      * customer. This is often a specific code you'll give to your customer to use when signing up
-     * (e.g., `FALL25OFF`). If you don't want to specify a particular code, you can leave the ID
-     * blank and we'll generate a random code for you.
+     * (e.g., {@code FALL25OFF}). If you don't want to specify a particular code, you can leave the
+     * ID blank and we'll generate a random code for you.
      */
     public Builder setId(String id) {
       this.id = id;
@@ -306,7 +309,7 @@ public class CouponCreateParams extends ApiRequestParams {
 
     /**
      * Name of the coupon displayed to customers on, for instance invoices, or receipts. By default
-     * the `id` is shown if `name` is not set.
+     * the {@code id} is shown if {@code name} is not set.
      */
     public Builder setName(String name) {
       this.name = name;
@@ -315,7 +318,7 @@ public class CouponCreateParams extends ApiRequestParams {
 
     /**
      * A positive float larger than 0, and smaller or equal to 100, that represents the discount the
-     * coupon will apply (required if `amount_off` is not passed).
+     * coupon will apply (required if {@code amount_off} is not passed).
      */
     public Builder setPercentOff(BigDecimal percentOff) {
       this.percentOff = percentOff;

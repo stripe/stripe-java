@@ -31,8 +31,8 @@ public class TransferReversal extends ApiResource
   Long created;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
@@ -59,7 +59,7 @@ public class TransferReversal extends ApiResource
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `transfer_reversal`.
+   * <p>Equal to {@code transfer_reversal}.
    */
   @SerializedName("object")
   String object;
@@ -76,7 +76,7 @@ public class TransferReversal extends ApiResource
   @Setter(lombok.AccessLevel.NONE)
   ExpandableField<Transfer> transfer;
 
-  /** Get id of expandable `balanceTransaction` object. */
+  /** Get ID of expandable {@code balanceTransaction} object. */
   public String getBalanceTransaction() {
     return (this.balanceTransaction != null) ? this.balanceTransaction.getId() : null;
   }
@@ -85,7 +85,7 @@ public class TransferReversal extends ApiResource
     this.balanceTransaction = ApiResource.setExpandableFieldId(id, this.balanceTransaction);
   }
 
-  /** Get expanded `balanceTransaction`. */
+  /** Get expanded {@code balanceTransaction}. */
   public BalanceTransaction getBalanceTransactionObject() {
     return (this.balanceTransaction != null) ? this.balanceTransaction.getExpanded() : null;
   }
@@ -95,7 +95,7 @@ public class TransferReversal extends ApiResource
         new ExpandableField<BalanceTransaction>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `destinationPaymentRefund` object. */
+  /** Get ID of expandable {@code destinationPaymentRefund} object. */
   public String getDestinationPaymentRefund() {
     return (this.destinationPaymentRefund != null) ? this.destinationPaymentRefund.getId() : null;
   }
@@ -105,7 +105,7 @@ public class TransferReversal extends ApiResource
         ApiResource.setExpandableFieldId(id, this.destinationPaymentRefund);
   }
 
-  /** Get expanded `destinationPaymentRefund`. */
+  /** Get expanded {@code destinationPaymentRefund}. */
   public Refund getDestinationPaymentRefundObject() {
     return (this.destinationPaymentRefund != null)
         ? this.destinationPaymentRefund.getExpanded()
@@ -117,7 +117,7 @@ public class TransferReversal extends ApiResource
         new ExpandableField<Refund>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `sourceRefund` object. */
+  /** Get ID of expandable {@code sourceRefund} object. */
   public String getSourceRefund() {
     return (this.sourceRefund != null) ? this.sourceRefund.getId() : null;
   }
@@ -126,7 +126,7 @@ public class TransferReversal extends ApiResource
     this.sourceRefund = ApiResource.setExpandableFieldId(id, this.sourceRefund);
   }
 
-  /** Get expanded `sourceRefund`. */
+  /** Get expanded {@code sourceRefund}. */
   public Refund getSourceRefundObject() {
     return (this.sourceRefund != null) ? this.sourceRefund.getExpanded() : null;
   }
@@ -135,7 +135,7 @@ public class TransferReversal extends ApiResource
     this.sourceRefund = new ExpandableField<Refund>(expandableObject.getId(), expandableObject);
   }
 
-  /** Get id of expandable `transfer` object. */
+  /** Get ID of expandable {@code transfer} object. */
   public String getTransfer() {
     return (this.transfer != null) ? this.transfer.getId() : null;
   }
@@ -144,7 +144,7 @@ public class TransferReversal extends ApiResource
     this.transfer = ApiResource.setExpandableFieldId(id, this.transfer);
   }
 
-  /** Get expanded `transfer`. */
+  /** Get expanded {@code transfer}. */
   public Transfer getTransferObject() {
     return (this.transfer != null) ? this.transfer.getExpanded() : null;
   }

@@ -12,25 +12,25 @@ import lombok.Getter;
 public class RecipientCreateParams extends ApiRequestParams {
   /**
    * A bank account to attach to the recipient. You can provide either a token, like the ones
-   * returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a user's
-   * bank account details, with the options described below.
+   * returned by <a href="https://stripe.com/docs/stripe-js">Stripe.js</a>, or a dictionary
+   * containing a user's bank account details, with the options described below.
    */
   @SerializedName("bank_account")
   String bankAccount;
 
   /**
-   * A U.S. Visa or MasterCard debit card (_not_ prepaid) to attach to the recipient. If the debit
-   * card is not valid, recipient creation will fail. You can provide either a token, like the ones
-   * returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a user's
-   * debit card details, with the options described below. Although not all information is required,
-   * the extra info helps prevent fraud.
+   * A U.S. Visa or MasterCard debit card (<em>not</em> prepaid) to attach to the recipient. If the
+   * debit card is not valid, recipient creation will fail. You can provide either a token, like the
+   * ones returned by <a href="https://stripe.com/docs/stripe-js">Stripe.js</a>, or a dictionary
+   * containing a user's debit card details, with the options described below. Although not all
+   * information is required, the extra info helps prevent fraud.
    */
   @SerializedName("card")
   String card;
 
   /**
-   * An arbitrary string which you can attach to a `Recipient` object. It is displayed alongside the
-   * recipient in the web interface.
+   * An arbitrary string which you can attach to a {@code Recipient} object. It is displayed
+   * alongside the recipient in the web interface.
    */
   @SerializedName("description")
   String description;
@@ -58,27 +58,28 @@ public class RecipientCreateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
   /**
-   * The recipient's full, legal name. For type `individual`, should be in the format `First Last`,
-   * `First Middle Last`, or `First M Last` (no prefixes or suffixes). For `corporation`, the full,
-   * incorporated name.
+   * The recipient's full, legal name. For type {@code individual}, should be in the format {@code
+   * First Last}, {@code First Middle Last}, or {@code First M Last} (no prefixes or suffixes). For
+   * {@code corporation}, the full, incorporated name.
    */
   @SerializedName("name")
   String name;
 
   /**
-   * The recipient's tax ID, as a string. For type `individual`, the full SSN; for type
-   * `corporation`, the full EIN.
+   * The recipient's tax ID, as a string. For type {@code individual}, the full SSN; for type {@code
+   * corporation}, the full EIN.
    */
   @SerializedName("tax_id")
   String taxId;
 
-  /** Type of the recipient: either `individual` or `corporation`. */
+  /** Type of the recipient: either {@code individual} or {@code corporation}. */
   @SerializedName("type")
   String type;
 
@@ -147,8 +148,8 @@ public class RecipientCreateParams extends ApiRequestParams {
 
     /**
      * A bank account to attach to the recipient. You can provide either a token, like the ones
-     * returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a
-     * user's bank account details, with the options described below.
+     * returned by <a href="https://stripe.com/docs/stripe-js">Stripe.js</a>, or a dictionary
+     * containing a user's bank account details, with the options described below.
      */
     public Builder setBankAccount(String bankAccount) {
       this.bankAccount = bankAccount;
@@ -156,11 +157,11 @@ public class RecipientCreateParams extends ApiRequestParams {
     }
 
     /**
-     * A U.S. Visa or MasterCard debit card (_not_ prepaid) to attach to the recipient. If the debit
-     * card is not valid, recipient creation will fail. You can provide either a token, like the
-     * ones returned by [Stripe.js](https://stripe.com/docs/stripe-js), or a dictionary containing a
-     * user's debit card details, with the options described below. Although not all information is
-     * required, the extra info helps prevent fraud.
+     * A U.S. Visa or MasterCard debit card (<em>not</em> prepaid) to attach to the recipient. If
+     * the debit card is not valid, recipient creation will fail. You can provide either a token,
+     * like the ones returned by <a href="https://stripe.com/docs/stripe-js">Stripe.js</a>, or a
+     * dictionary containing a user's debit card details, with the options described below. Although
+     * not all information is required, the extra info helps prevent fraud.
      */
     public Builder setCard(String card) {
       this.card = card;
@@ -168,8 +169,8 @@ public class RecipientCreateParams extends ApiRequestParams {
     }
 
     /**
-     * An arbitrary string which you can attach to a `Recipient` object. It is displayed alongside
-     * the recipient in the web interface.
+     * An arbitrary string which you can attach to a {@code Recipient} object. It is displayed
+     * alongside the recipient in the web interface.
      */
     public Builder setDescription(String description) {
       this.description = description;
@@ -264,9 +265,9 @@ public class RecipientCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The recipient's full, legal name. For type `individual`, should be in the format `First
-     * Last`, `First Middle Last`, or `First M Last` (no prefixes or suffixes). For `corporation`,
-     * the full, incorporated name.
+     * The recipient's full, legal name. For type {@code individual}, should be in the format {@code
+     * First Last}, {@code First Middle Last}, or {@code First M Last} (no prefixes or suffixes).
+     * For {@code corporation}, the full, incorporated name.
      */
     public Builder setName(String name) {
       this.name = name;
@@ -274,15 +275,15 @@ public class RecipientCreateParams extends ApiRequestParams {
     }
 
     /**
-     * The recipient's tax ID, as a string. For type `individual`, the full SSN; for type
-     * `corporation`, the full EIN.
+     * The recipient's tax ID, as a string. For type {@code individual}, the full SSN; for type
+     * {@code corporation}, the full EIN.
      */
     public Builder setTaxId(String taxId) {
       this.taxId = taxId;
       return this;
     }
 
-    /** Type of the recipient: either `individual` or `corporation`. */
+    /** Type of the recipient: either {@code individual} or {@code corporation}. */
     public Builder setType(String type) {
       this.type = type;
       return this;

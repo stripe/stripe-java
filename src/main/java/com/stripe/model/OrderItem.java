@@ -18,14 +18,15 @@ public class OrderItem extends StripeObject {
   Long amount;
 
   /**
-   * Three-letter [ISO currency code](https://www.iso.org/iso-4217-currency-codes.html), in
-   * lowercase. Must be a [supported currency](https://stripe.com/docs/currencies).
+   * Three-letter <a href="https://www.iso.org/iso-4217-currency-codes.html">ISO currency code</a>,
+   * in lowercase. Must be a <a href="https://stripe.com/docs/currencies">supported currency</a>.
    */
   @SerializedName("currency")
   String currency;
 
   /**
-   * Description of the line item, meant to be displayable to the user (e.g., `"Express shipping"`).
+   * Description of the line item, meant to be displayable to the user (e.g., {@code "Express
+   * shipping"}).
    */
   @SerializedName("description")
   String description;
@@ -33,7 +34,7 @@ public class OrderItem extends StripeObject {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `order_item`.
+   * <p>Equal to {@code order_item}.
    */
   @SerializedName("object")
   String object;
@@ -48,17 +49,19 @@ public class OrderItem extends StripeObject {
   ExpandableField<Sku> parent;
 
   /**
-   * A positive integer representing the number of instances of `parent` that are included in this
-   * order item. Applicable/present only if `type` is `sku`.
+   * A positive integer representing the number of instances of {@code parent} that are included in
+   * this order item. Applicable/present only if {@code type} is {@code sku}.
    */
   @SerializedName("quantity")
   Long quantity;
 
-  /** The type of line item. One of `sku`, `tax`, `shipping`, or `discount`. */
+  /**
+   * The type of line item. One of {@code sku}, {@code tax}, {@code shipping}, or {@code discount}.
+   */
   @SerializedName("type")
   String type;
 
-  /** Get id of expandable `parent` object. */
+  /** Get ID of expandable {@code parent} object. */
   public String getParent() {
     return (this.parent != null) ? this.parent.getId() : null;
   }
@@ -67,7 +70,7 @@ public class OrderItem extends StripeObject {
     this.parent = ApiResource.setExpandableFieldId(id, this.parent);
   }
 
-  /** Get expanded `parent`. */
+  /** Get expanded {@code parent}. */
   public Sku getParentObject() {
     return (this.parent != null) ? this.parent.getExpanded() : null;
   }

@@ -39,8 +39,8 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   Long created;
 
   /**
-   * Three-letter [ISO code for the currency](https://stripe.com/docs/currencies) the customer can
-   * be charged in for recurring billing purposes.
+   * Three-letter <a href="https://stripe.com/docs/currencies">ISO code for the currency</a> the
+   * customer can be charged in for recurring billing purposes.
    */
   @SerializedName("currency")
   String currency;
@@ -48,8 +48,8 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   /**
    * ID of the default payment source for the customer.
    *
-   * <p>If you are using payment methods created via the PaymentMethods API, see the
-   * [invoice_settings.default_payment_method](https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method)
+   * <p>If you are using payment methods created via the PaymentMethods API, see the <a
+   * href="https://stripe.com/docs/api/customers/object#customer_object-invoice_settings-default_payment_method">invoice_settings.default_payment_method</a>
    * field instead.
    */
   @SerializedName("default_source")
@@ -94,8 +94,8 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   InvoiceSettings invoiceSettings;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -115,7 +115,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `customer`.
+   * <p>Equal to {@code customer}.
    */
   @SerializedName("object")
   String object;
@@ -143,8 +143,9 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   SubscriptionCollection subscriptions;
 
   /**
-   * Describes the customer's tax exemption status. One of `none`, `exempt`, or `reverse`. When set
-   * to `reverse`, invoice and receipt PDFs include the text **"Reverse charge"**.
+   * Describes the customer's tax exemption status. One of {@code none}, {@code exempt}, or {@code
+   * reverse}. When set to {@code reverse}, invoice and receipt PDFs include the text
+   * <strong>&quot;Reverse charge&quot;</strong>.
    */
   @SerializedName("tax_exempt")
   String taxExempt;
@@ -153,7 +154,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
   @SerializedName("tax_ids")
   TaxIdCollection taxIds;
 
-  /** Get id of expandable `defaultSource` object. */
+  /** Get ID of expandable {@code defaultSource} object. */
   public String getDefaultSource() {
     return (this.defaultSource != null) ? this.defaultSource.getId() : null;
   }
@@ -162,7 +163,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
     this.defaultSource = ApiResource.setExpandableFieldId(id, this.defaultSource);
   }
 
-  /** Get expanded `defaultSource`. */
+  /** Get expanded {@code defaultSource}. */
   public PaymentSource getDefaultSourceObject() {
     return (this.defaultSource != null) ? this.defaultSource.getExpanded() : null;
   }
@@ -408,7 +409,8 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
 
   /**
    * Returns a list of transactions that updated the customer’s <a
-   * href="/docs/api/customers/object#customer_object-balance"><code>balance</code></a>.
+   * href="https://stripe.com/docs/api/customers/object#customer_object-balance"><code>balance
+   * </code></a>.
    */
   public CustomerBalanceTransactionCollection balanceTransactions() throws StripeException {
     return balanceTransactions((Map<String, Object>) null, (RequestOptions) null);
@@ -416,7 +418,8 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
 
   /**
    * Returns a list of transactions that updated the customer’s <a
-   * href="/docs/api/customers/object#customer_object-balance"><code>balance</code></a>.
+   * href="https://stripe.com/docs/api/customers/object#customer_object-balance"><code>balance
+   * </code></a>.
    */
   public CustomerBalanceTransactionCollection balanceTransactions(Map<String, Object> params)
       throws StripeException {
@@ -425,7 +428,8 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
 
   /**
    * Returns a list of transactions that updated the customer’s <a
-   * href="/docs/api/customers/object#customer_object-balance"><code>balance</code></a>.
+   * href="https://stripe.com/docs/api/customers/object#customer_object-balance"><code>balance
+   * </code></a>.
    */
   public CustomerBalanceTransactionCollection balanceTransactions(
       Map<String, Object> params, RequestOptions options) throws StripeException {
@@ -441,7 +445,8 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
 
   /**
    * Returns a list of transactions that updated the customer’s <a
-   * href="/docs/api/customers/object#customer_object-balance"><code>balance</code></a>.
+   * href="https://stripe.com/docs/api/customers/object#customer_object-balance"><code>balance
+   * </code></a>.
    */
   public CustomerBalanceTransactionCollection balanceTransactions(
       CustomerBalanceTransactionsParams params) throws StripeException {
@@ -450,7 +455,8 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
 
   /**
    * Returns a list of transactions that updated the customer’s <a
-   * href="/docs/api/customers/object#customer_object-balance"><code>balance</code></a>.
+   * href="https://stripe.com/docs/api/customers/object#customer_object-balance"><code>balance
+   * </code></a>.
    */
   public CustomerBalanceTransactionCollection balanceTransactions(
       CustomerBalanceTransactionsParams params, RequestOptions options) throws StripeException {
@@ -507,7 +513,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
     @SerializedName("footer")
     String footer;
 
-    /** Get id of expandable `defaultPaymentMethod` object. */
+    /** Get ID of expandable {@code defaultPaymentMethod} object. */
     public String getDefaultPaymentMethod() {
       return (this.defaultPaymentMethod != null) ? this.defaultPaymentMethod.getId() : null;
     }
@@ -516,7 +522,7 @@ public class Customer extends ApiResource implements HasId, MetadataStore<Custom
       this.defaultPaymentMethod = ApiResource.setExpandableFieldId(id, this.defaultPaymentMethod);
     }
 
-    /** Get expanded `defaultPaymentMethod`. */
+    /** Get expanded {@code defaultPaymentMethod}. */
     public PaymentMethod getDefaultPaymentMethodObject() {
       return (this.defaultPaymentMethod != null) ? this.defaultPaymentMethod.getExpanded() : null;
     }

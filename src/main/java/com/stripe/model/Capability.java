@@ -30,7 +30,7 @@ public class Capability extends ApiResource implements HasId {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `capability`.
+   * <p>Equal to {@code capability}.
    */
   @SerializedName("object")
   String object;
@@ -46,11 +46,14 @@ public class Capability extends ApiResource implements HasId {
   @SerializedName("requirements")
   Requirements requirements;
 
-  /** The status of the capability. Can be `active`, `inactive`, `pending`, or `unrequested`. */
+  /**
+   * The status of the capability. Can be {@code active}, {@code inactive}, {@code pending}, or
+   * {@code unrequested}.
+   */
   @SerializedName("status")
   String status;
 
-  /** Get id of expandable `account` object. */
+  /** Get ID of expandable {@code account} object. */
   public String getAccount() {
     return (this.account != null) ? this.account.getId() : null;
   }
@@ -59,7 +62,7 @@ public class Capability extends ApiResource implements HasId {
     this.account = ApiResource.setExpandableFieldId(id, this.account);
   }
 
-  /** Get expanded `account`. */
+  /** Get expanded {@code account}. */
   public Account getAccountObject() {
     return (this.account != null) ? this.account.getExpanded() : null;
   }
@@ -111,38 +114,38 @@ public class Capability extends ApiResource implements HasId {
   @EqualsAndHashCode(callSuper = false)
   public static class Requirements extends StripeObject {
     /**
-     * The date the fields in `currently_due` must be collected by to keep the capability enabled
-     * for the account.
+     * The date the fields in {@code currently_due} must be collected by to keep the capability
+     * enabled for the account.
      */
     @SerializedName("current_deadline")
     Long currentDeadline;
 
     /**
      * The fields that need to be collected to keep the capability enabled. If not collected by the
-     * `current_deadline`, these fields appear in `past_due` as well, and the capability is
-     * disabled.
+     * {@code current_deadline}, these fields appear in {@code past_due} as well, and the capability
+     * is disabled.
      */
     @SerializedName("currently_due")
     List<String> currentlyDue;
 
     /**
-     * If the capability is disabled, this string describes why. Possible values are
-     * `requirement.fields_needed`, `pending.onboarding`, `pending.review`, `rejected_fraud`, or
-     * `rejected.other`.
+     * If the capability is disabled, this string describes why. Possible values are {@code
+     * requirement.fields_needed}, {@code pending.onboarding}, {@code pending.review}, {@code
+     * rejected_fraud}, or {@code rejected.other}.
      */
     @SerializedName("disabled_reason")
     String disabledReason;
 
     /**
      * The fields that need to be collected assuming all volume thresholds are reached. As they
-     * become required, these fields appear in `currently_due` as well, and the `current_deadline`
-     * is set.
+     * become required, these fields appear in {@code currently_due} as well, and the {@code
+     * current_deadline} is set.
      */
     @SerializedName("eventually_due")
     List<String> eventuallyDue;
 
     /**
-     * The fields that weren't collected by the `current_deadline`. These fields need to be
+     * The fields that weren't collected by the {@code current_deadline}. These fields need to be
      * collected to enable the capability for the account.
      */
     @SerializedName("past_due")
@@ -151,7 +154,7 @@ public class Capability extends ApiResource implements HasId {
     /**
      * Fields that may become required depending on the results of verification or review. An empty
      * array unless an asynchronous verification is pending. If verification fails, the fields in
-     * this array become required and move to `currently_due` or `past_due`.
+     * this array become required and move to {@code currently_due} or {@code past_due}.
      */
     @SerializedName("pending_verification")
     List<String> pendingVerification;

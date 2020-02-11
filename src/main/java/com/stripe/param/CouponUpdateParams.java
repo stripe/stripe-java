@@ -27,14 +27,15 @@ public class CouponUpdateParams extends ApiRequestParams {
   /**
    * Set of key-value pairs that you can attach to an object. This can be useful for storing
    * additional information about the object in a structured format. Individual keys can be unset by
-   * posting an empty value to them. All keys can be unset by posting an empty value to `metadata`.
+   * posting an empty value to them. All keys can be unset by posting an empty value to {@code
+   * metadata}.
    */
   @SerializedName("metadata")
   Map<String, String> metadata;
 
   /**
    * Name of the coupon displayed to customers on, for instance invoices, or receipts. By default
-   * the `id` is shown if `name` is not set.
+   * the {@code id} is shown if {@code name} is not set.
    */
   @SerializedName("name")
   Object name;
@@ -148,7 +149,7 @@ public class CouponUpdateParams extends ApiRequestParams {
 
     /**
      * Name of the coupon displayed to customers on, for instance invoices, or receipts. By default
-     * the `id` is shown if `name` is not set.
+     * the {@code id} is shown if {@code name} is not set.
      */
     public Builder setName(String name) {
       this.name = name;
@@ -157,7 +158,7 @@ public class CouponUpdateParams extends ApiRequestParams {
 
     /**
      * Name of the coupon displayed to customers on, for instance invoices, or receipts. By default
-     * the `id` is shown if `name` is not set.
+     * the {@code id} is shown if {@code name} is not set.
      */
     public Builder setName(EmptyParam name) {
       this.name = name;

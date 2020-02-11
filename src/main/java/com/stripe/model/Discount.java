@@ -24,8 +24,8 @@ public class Discount extends StripeObject {
   Boolean deleted;
 
   /**
-   * If the coupon has a duration of `repeating`, the date that this discount will end. If the
-   * coupon has a duration of `once` or `forever`, this attribute will be null.
+   * If the coupon has a duration of {@code repeating}, the date that this discount will end. If the
+   * coupon has a duration of {@code once} or {@code forever}, this attribute will be null.
    */
   @SerializedName("end")
   Long end;
@@ -33,7 +33,7 @@ public class Discount extends StripeObject {
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `discount`.
+   * <p>Equal to {@code discount}.
    */
   @SerializedName("object")
   String object;
@@ -48,7 +48,7 @@ public class Discount extends StripeObject {
   @SerializedName("subscription")
   String subscription;
 
-  /** Get id of expandable `customer` object. */
+  /** Get ID of expandable {@code customer} object. */
   public String getCustomer() {
     return (this.customer != null) ? this.customer.getId() : null;
   }
@@ -57,7 +57,7 @@ public class Discount extends StripeObject {
     this.customer = ApiResource.setExpandableFieldId(id, this.customer);
   }
 
-  /** Get expanded `customer`. */
+  /** Get expanded {@code customer}. */
   public Customer getCustomerObject() {
     return (this.customer != null) ? this.customer.getExpanded() : null;
   }

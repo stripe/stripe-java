@@ -57,8 +57,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   Ideal ideal;
 
   /**
-   * Has the value `true` if the object exists in live mode or the value `false` if the object
-   * exists in test mode.
+   * Has the value {@code true} if the object exists in live mode or the value {@code false} if the
+   * object exists in test mode.
    */
   @SerializedName("livemode")
   Boolean livemode;
@@ -74,7 +74,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   /**
    * String representing the object's type. Objects of the same type share the same value.
    *
-   * <p>Equal to `payment_method`.
+   * <p>Equal to {@code payment_method}.
    */
   @SerializedName("object")
   String object;
@@ -86,12 +86,13 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * The type of the PaymentMethod. An additional hash is included on the PaymentMethod with a name
    * matching this value. It contains additional information specific to the PaymentMethod type.
    *
-   * <p>One of `au_becs_debit`, `card`, `card_present`, `fpx`, `ideal`, or `sepa_debit`.
+   * <p>One of {@code au_becs_debit}, {@code card}, {@code card_present}, {@code fpx}, {@code
+   * ideal}, or {@code sepa_debit}.
    */
   @SerializedName("type")
   String type;
 
-  /** Get id of expandable `customer` object. */
+  /** Get ID of expandable {@code customer} object. */
   public String getCustomer() {
     return (this.customer != null) ? this.customer.getId() : null;
   }
@@ -100,7 +101,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     this.customer = ApiResource.setExpandableFieldId(id, this.customer);
   }
 
-  /** Get expanded `customer`. */
+  /** Get expanded {@code customer}. */
   public Customer getCustomerObject() {
     return (this.customer != null) ? this.customer.getExpanded() : null;
   }
@@ -111,8 +112,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
 
   /**
    * Creates a PaymentMethod object. Read the <a
-   * href="/docs/stripe-js/reference#stripe-create-payment-method">Stripe.js reference</a> to learn
-   * how to create PaymentMethods via Stripe.js.
+   * href="https://stripe.com/docs/stripe-js/reference#stripe-create-payment-method">Stripe.js
+   * reference</a> to learn how to create PaymentMethods via Stripe.js.
    */
   public static PaymentMethod create(Map<String, Object> params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -120,8 +121,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
 
   /**
    * Creates a PaymentMethod object. Read the <a
-   * href="/docs/stripe-js/reference#stripe-create-payment-method">Stripe.js reference</a> to learn
-   * how to create PaymentMethods via Stripe.js.
+   * href="https://stripe.com/docs/stripe-js/reference#stripe-create-payment-method">Stripe.js
+   * reference</a> to learn how to create PaymentMethods via Stripe.js.
    */
   public static PaymentMethod create(Map<String, Object> params, RequestOptions options)
       throws StripeException {
@@ -132,8 +133,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
 
   /**
    * Creates a PaymentMethod object. Read the <a
-   * href="/docs/stripe-js/reference#stripe-create-payment-method">Stripe.js reference</a> to learn
-   * how to create PaymentMethods via Stripe.js.
+   * href="https://stripe.com/docs/stripe-js/reference#stripe-create-payment-method">Stripe.js
+   * reference</a> to learn how to create PaymentMethods via Stripe.js.
    */
   public static PaymentMethod create(PaymentMethodCreateParams params) throws StripeException {
     return create(params, (RequestOptions) null);
@@ -141,8 +142,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
 
   /**
    * Creates a PaymentMethod object. Read the <a
-   * href="/docs/stripe-js/reference#stripe-create-payment-method">Stripe.js reference</a> to learn
-   * how to create PaymentMethods via Stripe.js.
+   * href="https://stripe.com/docs/stripe-js/reference#stripe-create-payment-method">Stripe.js
+   * reference</a> to learn how to create PaymentMethods via Stripe.js.
    */
   public static PaymentMethod create(PaymentMethodCreateParams params, RequestOptions options)
       throws StripeException {
@@ -253,7 +254,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * Attaches a PaymentMethod object to a Customer.
    *
    * <p>To use this PaymentMethod as the default for invoice or subscription payments, set <a
-   * href="/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">
+   * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">
    * <code>invoice_settings.default_payment_method</code></a>, on the Customer to the
    * PaymentMethod’s ID.
    */
@@ -265,7 +266,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * Attaches a PaymentMethod object to a Customer.
    *
    * <p>To use this PaymentMethod as the default for invoice or subscription payments, set <a
-   * href="/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">
+   * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">
    * <code>invoice_settings.default_payment_method</code></a>, on the Customer to the
    * PaymentMethod’s ID.
    */
@@ -284,7 +285,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * Attaches a PaymentMethod object to a Customer.
    *
    * <p>To use this PaymentMethod as the default for invoice or subscription payments, set <a
-   * href="/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">
+   * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">
    * <code>invoice_settings.default_payment_method</code></a>, on the Customer to the
    * PaymentMethod’s ID.
    */
@@ -296,7 +297,7 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
    * Attaches a PaymentMethod object to a Customer.
    *
    * <p>To use this PaymentMethod as the default for invoice or subscription payments, set <a
-   * href="/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">
+   * href="https://stripe.com/docs/api/customers/update#update_customer-invoice_settings-default_payment_method">
    * <code>invoice_settings.default_payment_method</code></a>, on the Customer to the
    * PaymentMethod’s ID.
    */
@@ -395,8 +396,8 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @EqualsAndHashCode(callSuper = false)
   public static class Card extends StripeObject {
     /**
-     * Card brand. Can be `amex`, `diners`, `discover`, `jcb`, `mastercard`, `unionpay`, `visa`, or
-     * `unknown`.
+     * Card brand. Can be {@code amex}, {@code diners}, {@code discover}, {@code jcb}, {@code
+     * mastercard}, {@code unionpay}, {@code visa}, or {@code unknown}.
      */
     @SerializedName("brand")
     String brand;
@@ -434,7 +435,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @SerializedName("fingerprint")
     String fingerprint;
 
-    /** Card funding type. Can be `credit`, `debit`, `prepaid`, or `unknown`. */
+    /**
+     * Card funding type. Can be {@code credit}, {@code debit}, {@code prepaid}, or {@code unknown}.
+     */
     @SerializedName("funding")
     String funding;
 
@@ -469,22 +472,22 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     @EqualsAndHashCode(callSuper = false)
     public static class Checks extends StripeObject {
       /**
-       * If a address line1 was provided, results of the check, one of `pass`, `fail`,
-       * `unavailable`, or `unchecked`.
+       * If a address line1 was provided, results of the check, one of {@code pass}, {@code fail},
+       * {@code unavailable}, or {@code unchecked}.
        */
       @SerializedName("address_line1_check")
       String addressLine1Check;
 
       /**
-       * If a address postal code was provided, results of the check, one of `pass`, `fail`,
-       * `unavailable`, or `unchecked`.
+       * If a address postal code was provided, results of the check, one of {@code pass}, {@code
+       * fail}, {@code unavailable}, or {@code unchecked}.
        */
       @SerializedName("address_postal_code_check")
       String addressPostalCodeCheck;
 
       /**
-       * If a CVC was provided, results of the check, one of `pass`, `fail`, `unavailable`, or
-       * `unchecked`.
+       * If a CVC was provided, results of the check, one of {@code pass}, {@code fail}, {@code
+       * unavailable}, or {@code unchecked}.
        */
       @SerializedName("cvc_check")
       String cvcCheck;
@@ -523,10 +526,10 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
       SamsungPay samsungPay;
 
       /**
-       * The type of the card wallet, one of `amex_express_checkout`, `apple_pay`, `google_pay`,
-       * `masterpass`, `samsung_pay`, or `visa_checkout`. An additional hash is included on the
-       * Wallet subhash with a name matching this value. It contains additional information specific
-       * to the card wallet type.
+       * The type of the card wallet, one of {@code amex_express_checkout}, {@code apple_pay},
+       * {@code google_pay}, {@code masterpass}, {@code samsung_pay}, or {@code visa_checkout}. An
+       * additional hash is included on the Wallet subhash with a name matching this value. It
+       * contains additional information specific to the card wallet type.
        */
       @SerializedName("type")
       String type;
@@ -631,15 +634,16 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @Setter
   @EqualsAndHashCode(callSuper = false)
   public static class Fpx extends StripeObject {
-    /** Account holder type, if provided. Can be one of `individual` or `company`. */
+    /** Account holder type, if provided. Can be one of {@code individual} or {@code company}. */
     @SerializedName("account_holder_type")
     String accountHolderType;
 
     /**
-     * The customer's bank, if provided. Can be one of `affin_bank`, `alliance_bank`, `ambank`,
-     * `bank_islam`, `bank_muamalat`, `bank_rakyat`, `bsn`, `cimb`, `hong_leong_bank`, `hsbc`,
-     * `kfh`, `maybank2u`, `ocbc`, `public_bank`, `rhb`, `standard_chartered`, `uob`,
-     * `deutsche_bank`, `maybank2e`, `pb_enterprise`, or `uob_regional`.
+     * The customer's bank, if provided. Can be one of {@code affin_bank}, {@code alliance_bank},
+     * {@code ambank}, {@code bank_islam}, {@code bank_muamalat}, {@code bank_rakyat}, {@code bsn},
+     * {@code cimb}, {@code hong_leong_bank}, {@code hsbc}, {@code kfh}, {@code maybank2u}, {@code
+     * ocbc}, {@code public_bank}, {@code rhb}, {@code standard_chartered}, {@code uob}, {@code
+     * deutsche_bank}, {@code maybank2e}, {@code pb_enterprise}, or {@code uob_regional}.
      */
     @SerializedName("bank")
     String bank;
@@ -650,9 +654,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
   @EqualsAndHashCode(callSuper = false)
   public static class Ideal extends StripeObject {
     /**
-     * The customer's bank, if provided. Can be one of `abn_amro`, `asn_bank`, `bunq`,
-     * `handelsbanken`, `ing`, `knab`, `moneyou`, `rabobank`, `regiobank`, `sns_bank`,
-     * `triodos_bank`, or `van_lanschot`.
+     * The customer's bank, if provided. Can be one of {@code abn_amro}, {@code asn_bank}, {@code
+     * bunq}, {@code handelsbanken}, {@code ing}, {@code knab}, {@code moneyou}, {@code rabobank},
+     * {@code regiobank}, {@code sns_bank}, {@code triodos_bank}, or {@code van_lanschot}.
      */
     @SerializedName("bank")
     String bank;
@@ -660,8 +664,9 @@ public class PaymentMethod extends ApiResource implements HasId, MetadataStore<P
     /**
      * The Bank Identifier Code of the customer's bank, if the bank was provided.
      *
-     * <p>One of `ABNANL2A`, `ASNBNL21`, `BUNQNL2A`, `FVLBNL22`, `HANDNL2A`, `INGBNL2A`, `KNABNL2H`,
-     * `MOYONL21`, `RABONL2U`, `RBRBNL21`, `SNSBNL2A`, or `TRIONL2U`.
+     * <p>One of {@code ABNANL2A}, {@code ASNBNL21}, {@code BUNQNL2A}, {@code FVLBNL22}, {@code
+     * HANDNL2A}, {@code INGBNL2A}, {@code KNABNL2H}, {@code MOYONL21}, {@code RABONL2U}, {@code
+     * RBRBNL21}, {@code SNSBNL2A}, or {@code TRIONL2U}.
      */
     @SerializedName("bic")
     String bic;
