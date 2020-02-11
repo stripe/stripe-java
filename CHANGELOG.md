@@ -1,5 +1,10 @@
 # Changelog
 
+## 17.9.0 - 2020-02-10
+* [#963](https://github.com/stripe/stripe-java/pull/963) Multiple API changes
+  * Add support for new `type` values for `TaxId`.
+  * Add support for `payment_intent_data[statement_descriptor_suffix]` on Checkout `Session`.
+
 ## 17.8.0 - 2020-02-04
 * [#961](https://github.com/stripe/stripe-java/pull/961) Rename `sort_code` to `sender_sort_code` on `SourceTransaction` for BACS debit. (This is technically a breaking change.)
 
